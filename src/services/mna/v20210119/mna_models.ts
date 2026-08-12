@@ -804,6 +804,26 @@ export interface GatewayInfo {
    * <p>网关实例数</p>
    */
   InstanceSize?: number
+  /**
+   * <p>网关内网IP。</p>
+   */
+  GatewayIp?: string
+  /**
+   * <p>用户名。</p>
+   */
+  Username?: string
+  /**
+   * <p>网关接入token。</p>
+   */
+  Token?: string
+  /**
+   * <p>网关注册URL。</p>
+   */
+  RegisterCenterUrl?: string
+  /**
+   * <p>网关上报URL。</p>
+   */
+  TelemetryUrl?: string
 }
 
 /**

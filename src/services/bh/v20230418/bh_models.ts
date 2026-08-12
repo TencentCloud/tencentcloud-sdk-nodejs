@@ -3095,65 +3095,85 @@ export interface DescribeUsersRequest {
  */
 export interface DeployResourceRequest {
   /**
-   * 需要开通服务的资源ID
+   * <p>需要开通服务的资源ID</p>
    */
   ResourceId: string
   /**
-   * 需要开通服务的地域
+   * <p>需要开通服务的地域</p>
    */
   ApCode: string
   /**
-   * 子网所在可用区
+   * <p>子网所在可用区</p>
    */
   Zone: string
   /**
-   * 需要开通服务的VPC
+   * <p>需要开通服务的VPC</p>
    */
   VpcId: string
   /**
-   * 需要开通服务的子网ID
+   * <p>需要开通服务的子网ID</p>
    */
   SubnetId: string
   /**
-   * 需要开通服务的子网网段
+   * <p>需要开通服务的子网网段</p>
    */
   CidrBlock: string
   /**
-   * 需要开通服务的VPC名称
+   * <p>需要开通服务的VPC名称</p>
    */
   VpcName?: string
   /**
-   * 需要开通服务的VPC对应的网段
+   * <p>需要开通服务的VPC对应的网段</p>
    */
   VpcCidrBlock?: string
   /**
-   * 需要开通服务的子网名称
+   * <p>需要开通服务的子网名称</p>
    */
   SubnetName?: string
   /**
-   * 需要开通实例所属的CDC集群ID
+   * <p>需要开通实例所属的CDC集群ID</p>
    */
   CdcClusterId?: string
   /**
-   * 开通堡垒机指定共享的clbId
+   * <p>开通堡垒机指定共享的clbId</p>
    */
   ShareClbId?: string
   /**
-   * 0-关闭web访问堡垒机，1-开启web访问堡垒机
+   * <p>0-关闭web访问堡垒机，1-开启web访问堡垒机</p>
    */
   WebAccess?: number
   /**
-   * 0-关闭客户端访问堡垒机，1-开启客户端访问堡垒机
+   * <p>0-关闭客户端访问堡垒机，1-开启客户端访问堡垒机</p>
    */
   ClientAccess?: number
   /**
-   * 0-关闭内网访问堡垒机，1-开启内网访问堡垒机
+   * <p>0-关闭内网访问堡垒机，1-开启内网访问堡垒机</p>
    */
   IntranetAccess?: number
   /**
-   * 0-关闭公网访问堡垒机，1-开启公网访问堡垒机
+   * <p>0-关闭公网访问堡垒机，1-开启公网访问堡垒机</p>
    */
   ExternalAccess?: number
+  /**
+   * <p>开通堡垒机的子网信息</p>
+   */
+  DeploySubnets?: Array<ParamInitResourceSubnet>
+  /**
+   * <p>开通内网访问的VPC ID</p>
+   */
+  IntranetVpcId?: string
+  /**
+   * <p>开通内网访问的VPC 网段</p>
+   */
+  IntranetVpcCidrBlock?: string
+  /**
+   * <p>开通内网访问的VPC名称</p>
+   */
+  IntranetVpcName?: string
+  /**
+   * <p>开通内网访问的子网信息</p>
+   */
+  IntranetSubnets?: Array<ParamInitResourceSubnet>
 }
 
 /**
@@ -3780,6 +3800,73 @@ export interface UserDirectory {
    * <p>下次同步时间</p><p>参数格式：2026-06-05T11:30:00+08:00</p>
    */
   NextSyncTime?: string
+}
+
+/**
+ * 运维子任务执行结果
+ */
+export interface SubtaskResult {
+  /**
+   * 执行日志ID
+   */
+  Id?: string
+  /**
+   * 执行主机实例ID
+   */
+  InstanceId?: string
+  /**
+   * 执行主机名称
+   * @deprecated
+   */
+  Name?: string
+  /**
+   * 执行主机地域
+   */
+  ApCode?: string
+  /**
+   * 执行主机外网IP
+   */
+  PublicIp?: string
+  /**
+   * 执行主机内网IP
+   */
+  PrivateIp?: string
+  /**
+   * 运维任务状态 1 - 执行中，2 - 成功， 3 - 失败，4 - 超时
+   */
+  Status?: number
+  /**
+   * 运维任务失败原因
+   */
+  Reason?: string
+  /**
+   * 运维任务命令退出码
+   */
+  ExitCode?: number
+  /**
+   * 运维任务开始时间
+   */
+  StartTime?: string
+  /**
+   * 运维任务结束时间
+   */
+  EndTime?: string
+  /**
+   * 运维任务执行结果输出。默认超出16384字节的内容会被自动截断
+   */
+  StdOut?: string
+  /**
+   * 运维任务执行结果错误
+   */
+  StdErr?: string
+  /**
+   * 资产名
+   */
+  DeviceName?: string
+  /**
+   * 资产账号
+   */
+  Account?: string
 }
 
 /**
@@ -4551,21 +4638,45 @@ export interface DescribeChangePwdTaskRequest {
 }
 
 /**
- * SearchFileBySid返回参数结构体
+ * 堡垒机实例部署的可用区
  */
-export interface SearchFileBySidResponse {
+export interface ResourceDeployZone {
   /**
-   * 记录数
+   * <p>部署堡垒机的VpcId</p>
    */
-  TotalCount?: number
+  VpcId?: string
   /**
-   * 某会话的文件操作列表
+   * <p>部署堡垒机vpc的名称</p>
    */
-  SearchFileBySidResult?: Array<SearchFileBySidResult>
+  VpcName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>部署堡垒机vpc的cidr</p>
    */
-  RequestId?: string
+  VpcCidrBlock?: string
+  /**
+   * <p>部署堡垒机的子网Id</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>部署堡垒机的子网名称</p>
+   */
+  SubnetName?: string
+  /**
+   * <p>子网cidr</p>
+   */
+  SubnetCidrBlock?: string
+  /**
+   * <p>部署堡垒机的地域</p>
+   */
+  Region?: string
+  /**
+   * <p>部署堡垒机的可用区</p>
+   */
+  Zone?: string
+  /**
+   * <p>子网的作用场景</p><p>枚举值：</p><ul><li>DEPLOY： 部署堡垒机的子网</li><li>INTERNAL： 开通内网访问的子网</li></ul>
+   */
+  SubnetUsageType?: string
 }
 
 /**
@@ -5025,6 +5136,28 @@ export interface ReplayInformation {
    * 回放类型 ，默认0， 1-rfb 2-mp4 3-ssh
    */
   ReplayType?: number
+}
+
+/**
+ * 开通堡垒机的子网
+ */
+export interface ParamInitResourceSubnet {
+  /**
+   * <p>xa0子网id</p>
+   */
+  SubnetId: string
+  /**
+   * <p>子网名称</p>
+   */
+  SubnetName: string
+  /**
+   * <p>子网可用区</p>
+   */
+  Zone: string
+  /**
+   * <p>子网cidr</p>
+   */
+  SubnetCidrBlock: string
 }
 
 /**
@@ -5569,25 +5702,38 @@ export interface DescribeCmdTemplatesRequest {
  */
 export interface EnableIntranetAccessRequest {
   /**
-   * 堡垒机实例id
+   * <p>堡垒机实例id</p>
    */
   ResourceId?: string
   /**
-   * 开通内网访问的vpc id
+   * <p>开通内网访问的vpc id</p>
    */
   VpcId?: string
   /**
-   * vpc的网段
+   * <p>vpc名称</p>
+   */
+  VpcName?: string
+  /**
+   * <p>vpc地域</p>
+   */
+  VpcRegion?: string
+  /**
+   * <p>vpc的网段</p>
    */
   VpcCidrBlock?: string
   /**
-   * 开通内网访问的subnet id
+   * <p>开通内网访问的subnet id</p>
+   * @deprecated
    */
   SubnetId?: string
   /**
-   * 内网ip的自定义域名，可为空
+   * <p>内网ip的自定义域名，可为空</p>
    */
   DomainName?: string
+  /**
+   * <p>开通内网的子网信息</p>
+   */
+  IntranetSubnets?: Array<ParamInitResourceSubnet>
 }
 
 /**
@@ -5842,245 +5988,262 @@ export interface SessionResult {
  */
 export interface Resource {
   /**
-   * 服务实例ID，如bh-saas-s3ed4r5e
+   * <p>服务实例ID，如bh-saas-s3ed4r5e</p>
    */
   ResourceId?: string
   /**
-   * 地域编码
+   * <p>地域编码</p>
    */
   ApCode?: string
   /**
-   * 服务实例规格信息
+   * <p>服务实例规格信息</p>
    */
   SvArgs?: string
   /**
-   * VPC ID
+   * <p>VPC ID</p>
    */
   VpcId?: string
   /**
-   * 服务规格对应的资产数
+   * <p>服务规格对应的资产数</p>
    */
   Nodes?: number
   /**
-   * 自动续费标记，0 - 表示默认状态，1 - 表示自动续费，2 - 表示明确不自动续费
+   * <p>自动续费标记，0 - 表示默认状态，1 - 表示自动续费，2 - 表示明确不自动续费</p>
    */
   RenewFlag?: number
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpireTime?: string
   /**
-   * 资源状态，0 - 未初始化，1 - 正常，2 - 隔离，3 - 销毁，4 - 初始化失败，5 - 初始化中
+   * <p>资源状态，0 - 未初始化，1 - 正常，2 - 隔离，3 - 销毁，4 - 初始化失败，5 - 初始化中</p>
    */
   Status?: number
   /**
-   * 服务实例名，如T-Sec-堡垒机（SaaS型）
+   * <p>服务实例名，如T-Sec-堡垒机（SaaS型）</p>
    */
   ResourceName?: string
   /**
-   * 定价模型ID
+   * <p>定价模型ID</p>
    */
   Pid?: number
   /**
-   * 资源创建时间
+   * <p>资源创建时间</p>
    */
   CreateTime?: string
   /**
-   * 商品码, p_cds_dasb
+   * <p>商品码, p_cds_dasb</p>
    */
   ProductCode?: string
   /**
-   * 子商品码, sp_cds_dasb_bh_saas
+   * <p>子商品码, sp_cds_dasb_bh_saas</p>
    */
   SubProductCode?: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 是否过期，true-过期，false-未过期
+   * <p>是否过期，true-过期，false-未过期</p>
    */
   Expired?: boolean
   /**
-   * 是否开通，true-开通，false-未开通
+   * <p>是否开通，true-开通，false-未开通</p>
    */
   Deployed?: boolean
   /**
-   * 开通服务的 VPC 名称
+   * <p>开通服务的 VPC 名称</p>
    */
   VpcName?: string
   /**
-   * 开通服务的 VPC 对应的网段
+   * <p>开通服务的 VPC 对应的网段</p>
    */
   VpcCidrBlock?: string
   /**
-   * 开通服务的子网ID
+   * <p>开通服务的子网ID</p>
    */
   SubnetId?: string
   /**
-   * 开通服务的子网名称
+   * <p>开通服务的子网名称</p>
    */
   SubnetName?: string
   /**
-   * 开通服务的子网网段
+   * <p>开通服务的子网网段</p>
    */
   CidrBlock?: string
   /**
-   * 外部IP
+   * <p>外部IP</p>
    */
   PublicIpSet?: Array<string>
   /**
-   * 内部IP
+   * <p>内部IP</p>
    */
   PrivateIpSet?: Array<string>
   /**
-   * 服务开通的高级功能列表，如:[DB]
+   * <p>服务开通的高级功能列表，如:[DB]</p>
    */
   ModuleSet?: Array<string>
   /**
-   * 已使用的授权点数
+   * <p>已使用的授权点数</p>
    */
   UsedNodes?: number
   /**
-   * 扩展点数
+   * <p>扩展点数</p>
    */
   ExtendPoints?: number
   /**
-   * 带宽扩展包个数(4M)
+   * <p>带宽扩展包个数(4M)</p>
    */
   PackageBandwidth?: number
   /**
-   * 授权点数扩展包个数(50点)
+   * <p>授权点数扩展包个数(50点)</p>
    */
   PackageNode?: number
   /**
-   * 日志投递规格信息
+   * <p>日志投递规格信息</p>
    */
   LogDeliveryArgs?: string
   /**
-   * 堡垒机资源LB
+   * <p>堡垒机资源LB</p>
    */
   ClbSet?: Array<Clb>
   /**
-   * 网络域个数
+   * <p>网络域个数</p>
    */
   DomainCount?: number
   /**
-   * 已经使用的网络域个数
+   * <p>已经使用的网络域个数</p>
    */
   UsedDomainCount?: number
   /**
-   * 0 非试用版，1 试用版
+   * <p>开启的网络域个数（不包含默认网络域）</p>
+   */
+  EnabledDomainCount?: number
+  /**
+   * <p>0 非试用版，1 试用版</p>
    */
   Trial?: number
   /**
-   * 日志投递规格信息
+   * <p>日志投递规格信息</p>
    */
   LogDelivery?: string
   /**
-   * cdc集群id
+   * <p>cdc集群id</p>
    */
   CdcClusterId?: string
   /**
-   * 部署模式 默认0 0-cvm 1-tke
+   * <p>部署模式 默认0 0-cvm 1-tke</p>
    */
   DeployModel?: number
   /**
-   * 0 默认值，非内网访问，1 内网访问，2 内网访问开通中，3 内网访问关闭中
+   * <p>0 默认值，非内网访问，1 内网访问，2 内网访问开通中，3 内网访问关闭中</p>
    */
   IntranetAccess?: number
   /**
-   * 内网访问的ip
+   * <p>内网访问的ip</p>
    */
   IntranetPrivateIpSet?: Array<string>
   /**
-   * 开通内网访问的vpc
+   * <p>开通内网访问的vpc</p>
    */
   IntranetVpcId?: string
   /**
-   * 开通内网访问的subnetId
+   * <p>开通内网访问的subnetId</p>
+   * @deprecated
    */
   IntranetSubnetId?: string
   /**
-   * 开通内网访问vpc的网段
+   * <p>开通内网访问的子网集合</p>
+   */
+  IntranetSubnetIdSet?: Array<string>
+  /**
+   * <p>开通内网访问vpc的网段</p>
    */
   IntranetVpcCidr?: string
   /**
-   * 堡垒机内网ip自定义域名
+   * <p>堡垒机内网ip自定义域名</p>
    */
   DomainName?: string
   /**
-   * 是否共享clb，true-共享clb，false-独享clb
+   * <p>是否共享clb，true-共享clb，false-独享clb</p>
    */
   ShareClb?: boolean
   /**
-   * 共享clb id
+   * <p>共享clb id</p>
    */
   OpenClbId?: string
   /**
-   * 运营商信息
+   * <p>运营商信息</p>
    */
   LbVipIsp?: string
   /**
-   * linux资产命令行运维端口
+   * <p>linux资产命令行运维端口</p>
    */
   TUICmdPort?: number
   /**
-   * linux资产直连端口
+   * <p>linux资产直连端口</p>
    */
   TUIDirectPort?: number
   /**
-   * 1 默认值，web访问开启，0 web访问关闭，2 web访问开通中，3 web访问关闭中
+   * <p>1 默认值，web访问开启，0 web访问关闭，2 web访问开通中，3 web访问关闭中</p>
    */
   WebAccess?: number
   /**
-   * 1 默认值，客户单访问开启，0 客户端访问关闭，2 客户端访问开通中，3 客户端访问关闭中
+   * <p>1 默认值，客户单访问开启，0 客户端访问关闭，2 客户端访问开通中，3 客户端访问关闭中</p>
    */
   ClientAccess?: number
   /**
-   * 1 默认值，外网访问开启，0 外网访问关闭，2 外网访问开通中，3 外网访问关闭中
+   * <p>1 默认值，外网访问开启，0 外网访问关闭，2 外网访问开通中，3 外网访问关闭中</p>
    */
   ExternalAccess?: number
   /**
-   * 0默认值。0-免费版（试用版）ioa，1-付费版ioa
+   * <p>0默认值。0-免费版（试用版）ioa，1-付费版ioa</p>
    */
   IOAResource?: number
   /**
-   * 零信任堡垒机用户扩展包个数。1个扩展包对应20个用户数
+   * <p>零信任堡垒机用户扩展包个数。1个扩展包对应20个用户数</p>
    */
   PackageIOAUserCount?: number
   /**
-   *  零信任堡垒机带宽扩展包个数。一个扩展包表示4M带宽
+   * <p>零信任堡垒机带宽扩展包个数。一个扩展包表示4M带宽</p>
    */
   PackageIOABandwidth?: number
   /**
-   * 堡垒机实例对应的零信任实例id
+   * <p>堡垒机实例对应的零信任实例id</p>
    */
   IOAResourceId?: string
   /**
-   * 资源类型 免费版/标准版/专业版 /国密版 free/standard/pro/gm
+   * <p>资源类型 免费版/标准版/专业版 /国密版 free/standard/pro/gm</p>
    */
   ResourceEdition?: string
   /**
-   * 计费周期 年：y，月：m，日：d，时：h，分：M，秒：s，一次性购买：p
+   * <p>计费周期 年：y，月：m，日：d，时：h，分：M，秒：s，一次性购买：p</p>
    */
   TimeUnit?: string
   /**
-   * 计费时长
+   * <p>计费时长</p>
    */
   TimeSpan?: number
   /**
-   * 计费模式 0后付费，1预付费
+   * <p>计费模式 0后付费，1预付费</p>
    */
   PayMode?: number
   /**
-   * 计费侧地域
+   * <p>计费侧地域</p>
    */
   BillingRegion?: string
   /**
-   * 计费侧可用区
+   * <p>计费侧可用区</p>
    */
   BillingZone?: string
+  /**
+   * <p>部署的cvm个数</p>
+   */
+  DeployCvmCount?: number
+  /**
+   * <p>堡垒机实例的可用区信息</p>
+   */
+  ResourceZoneSet?: Array<ResourceDeployZone>
 }
 
 /**
@@ -6170,70 +6333,21 @@ export interface RunOperationTaskRequest {
 }
 
 /**
- * 运维子任务执行结果
+ * SearchFileBySid返回参数结构体
  */
-export interface SubtaskResult {
+export interface SearchFileBySidResponse {
   /**
-   * 执行日志ID
+   * 记录数
    */
-  Id?: string
+  TotalCount?: number
   /**
-   * 执行主机实例ID
+   * 某会话的文件操作列表
    */
-  InstanceId?: string
+  SearchFileBySidResult?: Array<SearchFileBySidResult>
   /**
-   * 执行主机名称
-   * @deprecated
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 执行主机地域
-   */
-  ApCode?: string
-  /**
-   * 执行主机外网IP
-   */
-  PublicIp?: string
-  /**
-   * 执行主机内网IP
-   */
-  PrivateIp?: string
-  /**
-   * 运维任务状态 1 - 执行中，2 - 成功， 3 - 失败，4 - 超时
-   */
-  Status?: number
-  /**
-   * 运维任务失败原因
-   */
-  Reason?: string
-  /**
-   * 运维任务命令退出码
-   */
-  ExitCode?: number
-  /**
-   * 运维任务开始时间
-   */
-  StartTime?: string
-  /**
-   * 运维任务结束时间
-   */
-  EndTime?: string
-  /**
-   * 运维任务执行结果输出。默认超出16384字节的内容会被自动截断
-   */
-  StdOut?: string
-  /**
-   * 运维任务执行结果错误
-   */
-  StdErr?: string
-  /**
-   * 资产名
-   */
-  DeviceName?: string
-  /**
-   * 资产账号
-   */
-  Account?: string
+  RequestId?: string
 }
 
 /**

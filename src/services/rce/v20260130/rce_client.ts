@@ -18,22 +18,73 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  RiskLabel,
+  TaskEvent,
+  DigitalOrder,
+  Billing,
+  Decision,
+  Person,
   Environment,
+  Wallet,
+  Score,
+  ClaimRedPacketEvent,
+  PromotionCode,
+  ChargeBackEvent,
+  ReportEventRequest,
+  WithdrawEvent,
+  Merchant,
+  Delivery,
+  Cust,
   AssessEnvironmentRiskRsp,
+  AssessEnvironmentRiskResponse,
+  PaymentMethod,
+  LuckyDrawEvent,
+  AssessDeviceRiskPremiumProRequest,
+  Order,
+  AssessDeviceRiskProResponse,
+  User,
+  Address,
+  Device,
+  DataAuthorization,
+  CreateOrderEvent,
+  Card,
+  Result,
+  ReportEventResponse,
+  RiskLabel,
+  CustEvent,
   IPLocation,
   DataScore,
-  AssessDeviceRiskRsp,
-  AssessEnvironmentRiskResponse,
+  BrowseEvent,
   AssessDeviceRiskPremiumProResponse,
   AssessDeviceRiskProRequest,
-  AssessDeviceRiskPremiumProRequest,
-  AssessDeviceRiskProResponse,
-  IPNetwork,
-  AssessDeviceRiskPremiumRsp,
+  CreditPoint,
+  Item,
+  Amount,
+  SMSEvent,
+  AssessRiskResponse,
   AssessEnvironmentRiskRequest,
-  Device,
-  Decision,
+  AddPromotionEvent,
+  Promotion,
+  ModifyAccountEvent,
+  Inviter,
+  LogoutEvent,
+  Browser,
+  PaymentResult,
+  TransactionEvent,
+  AssessRiskRsp,
+  ModifyPasswordEvent,
+  AssessDeviceRiskRsp,
+  Coupon,
+  RegisterEvent,
+  App,
+  LoginEvent,
+  EventDetail,
+  IPNetwork,
+  SecurityVerificationEvent,
+  AssessDeviceRiskPremiumRsp,
+  RedeemEvent,
+  InvitationEvent,
+  AssessRiskRequest,
+  ScanCodeEvent,
 } from "./rce_models"
 
 /**
@@ -66,6 +117,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 事件信息上报
+   */
+  async ReportEvent(
+    req: ReportEventRequest,
+    cb?: (error: string, rep: ReportEventResponse) => void
+  ): Promise<ReportEventResponse> {
+    return this.request("ReportEvent", req, cb)
+  }
+
+  /**
    * 环境风险评估
    */
   async AssessEnvironmentRisk(
@@ -73,5 +134,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssessEnvironmentRiskResponse) => void
   ): Promise<AssessEnvironmentRiskResponse> {
     return this.request("AssessEnvironmentRisk", req, cb)
+  }
+
+  /**
+   * 事件风险评估
+   */
+  async AssessRisk(
+    req: AssessRiskRequest,
+    cb?: (error: string, rep: AssessRiskResponse) => void
+  ): Promise<AssessRiskResponse> {
+    return this.request("AssessRisk", req, cb)
   }
 }

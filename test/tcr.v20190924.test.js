@@ -1018,6 +1018,16 @@ it("tcr.v20190924.DeleteRepository", async function () {
     }
 })
 
+it("tcr.v20190924.ModifyReplication", async function () {
+    try {
+       const data = await client.ModifyReplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeRepositoryOwnerPersonal", async function () {
     try {
        const data = await client.DescribeRepositoryOwnerPersonal({})

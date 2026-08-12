@@ -4768,7 +4768,16 @@ export interface ModifyAccountPrivilegesResponse {
 /**
  * DeleteDatabase请求参数结构体
  */
-export type DeleteDatabaseRequest = null
+export interface DeleteDatabaseRequest {
+  /**
+   * <p>实例ID。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>数据库名称</p>
+   */
+  DatabaseName: string
+}
 
 /**
  * 描述数据库详细信息，包括所有者、字符编码等

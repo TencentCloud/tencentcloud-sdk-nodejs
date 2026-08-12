@@ -300,6 +300,7 @@ import {
   DropDMSPartitionsResponse,
   DeleteMetaDatabaseResponse,
   DescribeUsersRequest,
+  TCHousePInfo,
   CreateExportTaskResponse,
   AddUsersToWorkGroupRequest,
   CreateDataMaskStrategyRequest,

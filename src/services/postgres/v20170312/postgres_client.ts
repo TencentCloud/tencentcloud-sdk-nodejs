@@ -566,7 +566,7 @@ export class Client extends AbstractClient {
 - 不可逆操作：数据库一经删除，数据将无法恢复。执行前请确认已做好必要的数据备份。
      */
   async DeleteDatabase(
-    req?: DeleteDatabaseRequest,
+    req: DeleteDatabaseRequest,
     cb?: (error: string, rep: DeleteDatabaseResponse) => void
   ): Promise<DeleteDatabaseResponse> {
     return this.request("DeleteDatabase", req, cb)

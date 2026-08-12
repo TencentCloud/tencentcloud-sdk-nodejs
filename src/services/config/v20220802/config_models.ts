@@ -138,24 +138,6 @@ export interface AddCompliancePackRequest {
 }
 
 /**
- * 合规包规则信息
- */
-export interface CompliancePackRules {
-  /**
-   * <p>规则标识</p>
-   */
-  Identifier: string
-  /**
-   * <p>规则编号信息</p>
-   */
-  Control?: Array<Control>
-  /**
-   * <p>资源类型</p>
-   */
-  ResourceTypes?: Array<string>
-}
-
-/**
  * ListRemediations请求参数结构体
  */
 export interface ListRemediationsRequest {
@@ -187,6 +169,16 @@ export interface DescribeAggregatorRequest {
  * PutEvaluations返回参数结构体
  */
 export interface PutEvaluationsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateAggregator返回参数结构体
+ */
+export interface UpdateAggregatorResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -591,6 +583,32 @@ export interface AggregatorAccount {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MemberName: string
+}
+
+/**
+ * 规则入参
+ */
+export interface InputParameterForManage {
+  /**
+   * 值类型。数值：Integer， 字符串：String
+   */
+  ValueType?: string
+  /**
+   * 参数Key
+   */
+  ParameterKey?: string
+  /**
+   * 参数类型。必填类型：Require，可选类型：Optional。
+   */
+  Type?: string
+  /**
+   * 默认值
+   */
+  DefaultValue?: string
+  /**
+   * 描述
+   */
+  Description?: string
 }
 
 /**
@@ -1085,29 +1103,21 @@ export interface DescribeSystemCompliancePackResponse {
 }
 
 /**
- * 规则入参
+ * 合规包规则信息
  */
-export interface InputParameterForManage {
+export interface CompliancePackRules {
   /**
-   * 值类型。数值：Integer， 字符串：String
+   * <p>规则标识</p>
    */
-  ValueType?: string
+  Identifier: string
   /**
-   * 参数Key
+   * <p>规则编号信息</p>
    */
-  ParameterKey?: string
+  Control?: Array<Control>
   /**
-   * 参数类型。必填类型：Require，可选类型：Optional。
+   * <p>资源类型</p>
    */
-  Type?: string
-  /**
-   * 默认值
-   */
-  DefaultValue?: string
-  /**
-   * 描述
-   */
-  Description?: string
+  ResourceTypes?: Array<string>
 }
 
 /**
@@ -2270,6 +2280,32 @@ export interface DeleteRemediationsResponse {
 }
 
 /**
+ * UpdateAggregator请求参数结构体
+ */
+export interface UpdateAggregatorRequest {
+  /**
+   * <p>账号组名称</p>
+   */
+  Name: string
+  /**
+   * <p>账号组描述</p>
+   */
+  Description: string
+  /**
+   * <p>账号组类型</p><p>枚举值：</p><ul><li>RD： 全局账号组</li><li>CUSTOM： 自定义账号组</li></ul>
+   */
+  AccountGroupId: string
+  /**
+   * <p>账号组创建者ID</p>
+   */
+  OwnerUin: number
+  /**
+   * <p>账号组成员信息列表，最多100个</p>
+   */
+  AggregatorAccounts?: Array<AggregatorAccount>
+}
+
+/**
  * DeleteConfigRule请求参数结构体
  */
 export interface DeleteConfigRuleRequest {
@@ -2778,6 +2814,16 @@ export interface ListRemediationExecutionsRequest {
    * 修正状态 1：运行中 2：成功 3：失败
    */
   ExecutionStatus?: number
+}
+
+/**
+ * DeleteAggregators返回参数结构体
+ */
+export interface DeleteAggregatorsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3609,6 +3655,20 @@ export interface ListRemediationsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteAggregators请求参数结构体
+ */
+export interface DeleteAggregatorsRequest {
+  /**
+   * 账号组ID
+   */
+  AccountGroupId: string
+  /**
+   * 账号组创建者ID
+   */
+  OwnerUin: number
 }
 
 /**

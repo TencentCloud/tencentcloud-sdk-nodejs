@@ -12827,31 +12827,27 @@ export interface DeleteRoutePolicyAssociationsRequest {
  */
 export interface CcnInstance {
   /**
-   * 关联实例ID。
+   * <p>关联实例ID。</p>
    */
   InstanceId: string
   /**
-   * 关联实例ID所属大区，例如：ap-guangzhou。
+   * <p>关联实例ID所属大区，例如：ap-guangzhou。</p>
    */
   InstanceRegion: string
   /**
-   * 关联实例类型，可选值：
-<li>`VPC`：私有网络</li>
-<li>`DIRECTCONNECT`：专线网关</li>
-<li>`BMVPC`：黑石私有网络</li>
-<li>`VPNGW`：VPNGW类型</li>
+   * <p>关联实例类型，可选值：</p><li><code>VPC</code>：私有网络</li><li><code>DIRECTCONNECT</code>：专线网关</li><li><code>BMVPC</code>：黑石私有网络</li><li><code>VPNGW</code>：VPNGW类型</li>
    */
   InstanceType: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Description?: string
   /**
-   * 实例关联的路由表ID。
+   * <p>实例关联的路由表ID。</p>
    */
   RouteTableId?: string
   /**
-   * 实例付费方式
+   * <p>实例付费方式</p><p>枚举值：</p><ul><li>PayByCcnOwner： CCN所在账号付费</li><li>PayByInstanceOwner： 关联实例所在账号付费</li></ul>
    */
   OrderType?: string
 }

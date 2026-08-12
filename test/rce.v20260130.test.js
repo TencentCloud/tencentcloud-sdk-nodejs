@@ -38,9 +38,29 @@ it("rce.v20260130.AssessDeviceRiskPremiumPro", async function () {
     }
 })
 
+it("rce.v20260130.ReportEvent", async function () {
+    try {
+       const data = await client.ReportEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rce.v20260130.AssessEnvironmentRisk", async function () {
     try {
        const data = await client.AssessEnvironmentRisk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rce.v20260130.AssessRisk", async function () {
+    try {
+       const data = await client.AssessRisk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

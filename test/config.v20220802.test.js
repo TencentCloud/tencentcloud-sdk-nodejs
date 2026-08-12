@@ -218,6 +218,16 @@ it("config.v20220802.UpdateRemediation", async function () {
     }
 })
 
+it("config.v20220802.UpdateAggregator", async function () {
+    try {
+       const data = await client.UpdateAggregator({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("config.v20220802.UpdateCompliancePack", async function () {
     try {
        const data = await client.UpdateCompliancePack({})
@@ -621,6 +631,16 @@ it("config.v20220802.DescribeAggregateDiscoveredResource", async function () {
 it("config.v20220802.UpdateAggregateCompliancePackStatus", async function () {
     try {
        const data = await client.UpdateAggregateCompliancePackStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("config.v20220802.DeleteAggregators", async function () {
+    try {
+       const data = await client.DeleteAggregators({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

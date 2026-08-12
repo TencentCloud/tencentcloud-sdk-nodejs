@@ -1100,6 +1100,10 @@ export interface CreateInferenceServiceRequest {
    */
   ResourceConfig: InferenceResourceConfig
   /**
+   * <p>推理服务亲和性配置。</p>
+   */
+  AffinityConfig?: InferenceAffinityConfig
+  /**
    * <p>推理服务的请求路径列表。最多支持 20 个路径。</p>
    */
   RequestPaths?: Array<string>
@@ -6987,6 +6991,10 @@ export interface ModifyInferenceServiceRequest {
    */
   ResourceConfig?: InferenceResourceConfigForModify
   /**
+   * <p>推理服务亲和性配置</p>
+   */
+  AffinityConfig?: InferenceAffinityConfig
+  /**
    * <p>描述信息。长度限制不超过 60 个字符。</p>
    */
   Description?: string
@@ -7920,21 +7928,25 @@ export interface DescribeInferenceHardwareSpecificationsResponse {
  */
 export interface InferenceServiceConfig {
   /**
-   * 模型服务需要监听的端口。
+   * <p>模型服务需要监听的端口。</p>
    */
   ListenPort?: number
   /**
-   * 推理服务的请求路径列表。
+   * <p>推理服务的请求路径列表。</p>
    */
   RequestPaths?: Array<string>
   /**
-   * 推理服务的容器配置。
+   * <p>推理服务的容器配置。</p>
    */
   Containers?: Array<InferenceContainerConfig>
   /**
-   * 推理服务的资源配置。
+   * <p>推理服务的资源配置。</p>
    */
   ResourceConfig?: InferenceResourceConfig
+  /**
+   * <p>推理服务亲和性配置。</p>
+   */
+  AffinityConfig?: InferenceAffinityConfig
 }
 
 /**
@@ -9940,19 +9952,19 @@ export interface VerifyOwnershipRequest {
  */
 export interface InferenceContainerConfigForModify {
   /**
-   * 镜像类型。取值有：<li>TCR：腾讯云容器镜像服务的镜像。</li>
+   * <p>镜像类型。取值有：<li>TCR：腾讯云容器镜像服务的镜像。</li></p>
    */
   ImageType?: string
   /**
-   * TCR 镜像仓库信息。当 ImageType 为 TCR 时必填。
+   * <p>TCR 镜像仓库信息。当 ImageType 为 TCR 时必填。</p>
    */
   TcrRepositoryConfig?: InferenceTCRRepositoryConfig
   /**
-   * 容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。
+   * <p>容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。</p>
    */
   StartupCommand?: string
   /**
-   * 容器运行时的环境变量。最多支持 10 个变量。
+   * <p>容器运行时的环境变量。最多支持 10 个变量。</p>
    */
   EnvironmentVariables?: Array<InferenceEnvironmentVariable>
 }
@@ -11359,6 +11371,20 @@ export interface CreateRealtimeLogDeliveryTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 基于会话ID的亲和配置。
+ */
+export interface SessionIdAffinityConfig {
+  /**
+   * <p>会话 ID 参数的传递位置。不填写时默认为 Header。</p><p>枚举值：</p><ul><li>Header： 在请求头中传递参数。</li></ul><p>默认值：Header。</p>
+   */
+  Source?: string
+  /**
+   * <p>传递会话 ID 的请求头名称。当 Source 为 Header 时必填。<br>不填写时默认为 EO-Infer-Session-Id。</p><p>入参限制：长度为 1-64 个字符，仅支持字母、数字、中划线。</p><p>默认值：EO-Infer-Session-Id。</p>
+   */
+  HeaderName?: string
 }
 
 /**
@@ -16324,6 +16350,24 @@ export interface HTTP2Parameters {
 }
 
 /**
+ * 推理服务的亲和配置
+ */
+export interface InferenceAffinityConfig {
+  /**
+   * <p>推理服务亲和总开关。</p><p>枚举值：</p><ul><li>On： 开启推理服务亲和；</li><li>Off： 关闭推理服务亲和。</li></ul>
+   */
+  Switch: string
+  /**
+   * <p>推理服务亲和方式。</p><p>枚举值：</p><ul><li>SessionId： 根据会话 ID 实现亲和。</li></ul><p>默认值：SessionId。</p>
+   */
+  AffinityMode?: string
+  /**
+   * <p>推理服务亲和性配置。当 AffinityMode 为 SessionId 时必填。</p>
+   */
+  SessionIdAffinityConfig?: SessionIdAffinityConfig
+}
+
+/**
  * DescribeOverviewL7Data请求参数结构体
  */
 export interface DescribeOverviewL7DataRequest {
@@ -16665,20 +16709,20 @@ export interface DnsRecord {
  */
 export interface InferenceContainerConfig {
   /**
-   * 镜像类型。取值有：<li>TCR：腾讯云容器镜像服务的镜像。</li>
+   * <p>镜像类型。取值有：<li>TCR：腾讯云容器镜像服务的镜像。</li></p>
    */
   ImageType: string
   /**
-   * TCR 镜像仓库信息。当 ImageType 为 TCR 时必填。
+   * <p>TCR 镜像仓库信息。当 ImageType 为 TCR 时必填。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TcrRepositoryConfig?: InferenceTCRRepositoryConfig
   /**
-   * 容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。
+   * <p>容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。</p>
    */
   StartupCommand?: string
   /**
-   * 容器运行时的环境变量。最多支持 10 个变量。
+   * <p>容器运行时的环境变量。最多支持 10 个变量。</p>
    */
   EnvironmentVariables?: Array<InferenceEnvironmentVariable>
 }

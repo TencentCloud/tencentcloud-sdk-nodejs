@@ -23,10 +23,10 @@ import {
   AddAggregateCompliancePackResponse,
   CloseAggregateConfigRuleResponse,
   AddCompliancePackRequest,
-  CompliancePackRules,
   ListRemediationsRequest,
   DescribeAggregatorRequest,
   PutEvaluationsResponse,
+  UpdateAggregatorResponse,
   OpenAggregateConfigRuleResponse,
   AddAggregateCompliancePackRequest,
   DescribeAggregateCompliancePackResponse,
@@ -48,6 +48,7 @@ import {
   CloseAggregateConfigRuleRequest,
   DescribeAggregateDiscoveredResourceResponse,
   AggregatorAccount,
+  InputParameterForManage,
   ListConfigRulesRequest,
   DescribeAggregateConfigRuleRequest,
   Control,
@@ -71,7 +72,7 @@ import {
   UpdateConfigRecorderResponse,
   ListAlarmPolicyRequest,
   DescribeSystemCompliancePackResponse,
-  InputParameterForManage,
+  CompliancePackRules,
   ComplianceConfigRule,
   OpenAggregateConfigRuleRequest,
   ListSystemCompliancePacksRequest,
@@ -118,6 +119,7 @@ import {
   ListAggregateCompliancePacksRequest,
   ListResourceTypesResponse,
   DeleteRemediationsResponse,
+  UpdateAggregatorRequest,
   DeleteConfigRuleRequest,
   Filter,
   ListAggregateConfigRuleEvaluationResultsRequest,
@@ -139,6 +141,7 @@ import {
   DescribeAggregateConfigRuleResponse,
   StartAggregateConfigRuleEvaluationRequest,
   ListRemediationExecutionsRequest,
+  DeleteAggregatorsResponse,
   CompliancePackRule,
   DescribeDiscoveredResourceRequest,
   ListRemediationExecutionsResponse,
@@ -175,6 +178,7 @@ import {
   UpdateAggregateConfigRuleResponse,
   InputParameter,
   ListRemediationsResponse,
+  DeleteAggregatorsRequest,
   ListAggregateConfigRuleResourceEvaluationResultsRequest,
   DeleteRemediationsRequest,
 } from "./config_models"
@@ -386,6 +390,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateRemediationResponse) => void
   ): Promise<UpdateRemediationResponse> {
     return this.request("UpdateRemediation", req, cb)
+  }
+
+  /**
+   * 编辑账号组
+   */
+  async UpdateAggregator(
+    req: UpdateAggregatorRequest,
+    cb?: (error: string, rep: UpdateAggregatorResponse) => void
+  ): Promise<UpdateAggregatorResponse> {
+    return this.request("UpdateAggregator", req, cb)
   }
 
   /**
@@ -796,6 +810,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAggregateCompliancePackStatusResponse) => void
   ): Promise<UpdateAggregateCompliancePackStatusResponse> {
     return this.request("UpdateAggregateCompliancePackStatus", req, cb)
+  }
+
+  /**
+   * 删除账号组
+   */
+  async DeleteAggregators(
+    req: DeleteAggregatorsRequest,
+    cb?: (error: string, rep: DeleteAggregatorsResponse) => void
+  ): Promise<DeleteAggregatorsResponse> {
+    return this.request("DeleteAggregators", req, cb)
   }
 
   /**

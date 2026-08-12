@@ -8126,6 +8126,52 @@ export interface DescribeUsersRequest {
 }
 
 /**
+ * TCHouseP 结构
+ */
+export interface TCHousePInfo {
+  /**
+   * <p>实例id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * <p>JdbcUrl</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JdbcUrl?: string
+  /**
+   * <p>用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * <p>密码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * <p>地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * <p>数据库名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * <p>地址信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessInfo?: string
+}
+
+/**
  * CreateExportTask返回参数结构体
  */
 export interface CreateExportTaskResponse {
@@ -11643,63 +11689,67 @@ export interface CopyJobSpecRequest {
  */
 export interface DatasourceConnectionConfig {
   /**
-   * Mysql数据源连接的属性
+   * <p>Mysql数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Mysql?: MysqlInfo
   /**
-   * Hive数据源连接的属性
+   * <p>Hive数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Hive?: HiveInfo
   /**
-   * Kafka数据源连接的属性
+   * <p>Kafka数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Kafka?: KafkaInfo
   /**
-   * 其他数据源连接的属性
+   * <p>其他数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OtherDatasourceConnection?: OtherDatasourceConnection
   /**
-   * PostgreSQL数据源连接的属性
+   * <p>PostgreSQL数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PostgreSql?: DataSourceInfo
   /**
-   * SQLServer数据源连接的属性
+   * <p>SQLServer数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SqlServer?: DataSourceInfo
   /**
-   * ClickHouse数据源连接的属性
+   * <p>ClickHouse数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClickHouse?: DataSourceInfo
   /**
-   * Elasticsearch数据源连接的属性
+   * <p>Elasticsearch数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Elasticsearch?: ElasticsearchInfo
   /**
-   * TDSQL-PostgreSQL数据源连接的属性
+   * <p>TDSQL-PostgreSQL数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TDSQLPostgreSql?: DataSourceInfo
   /**
-   * Doris数据源连接的属性
+   * <p>Doris数据源连接的属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TCHouseD?: TCHouseD
   /**
-   * TccHive数据目录连接信息
+   * <p>TccHive数据目录连接信息</p>
    */
   TccHive?: TccHive
   /**
-   * MongoDB 数据源
+   * <p>MongoDB 数据源</p>
    */
   MongoDB?: DataSourceInfo
+  /**
+   * <p>TCHouseP数据源</p>
+   */
+  TCHouseP?: TCHousePInfo
 }
 
 /**

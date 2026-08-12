@@ -34,6 +34,28 @@ export interface DescribeCloudRunServersResponse {
 }
 
 /**
+ * SubmitServerConfigChangeDiff请求参数结构体
+ */
+export interface SubmitServerConfigChangeDiffRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 配置信息 deprecated
+   */
+  Conf?: ServerBaseConfigDiff
+  /**
+   * 配置信息
+   */
+  Items?: Array<DiffConfigItem>
+}
+
+/**
  * 服务基础配置信息
  */
 export interface ServerBaseConfig {
@@ -640,6 +662,16 @@ export interface VersionFlowInfo {
 }
 
 /**
+ * 差异化更新配置信息
+ */
+export interface ServerBaseConfigDiff {
+  /**
+   * 字符串参数 Key：EnvParam
+   */
+  StrParams?: Array<ObjectKV>
+}
+
+/**
  * StopVersionInstance请求参数结构体
  */
 export interface StopVersionInstanceRequest {
@@ -746,20 +778,6 @@ export interface DiffConfigItem {
 }
 
 /**
- * SubmitServerRollback返回参数结构体
- */
-export interface SubmitServerRollbackResponse {
-  /**
-   * 任务Id
-   */
-  TaskId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 存储配置
  */
 export interface VolumeConf {
@@ -799,6 +817,34 @@ export interface VolumeConf {
    * <p>CFS 实例 ID</p>
    */
   InstanceId?: string
+}
+
+/**
+ * SubmitServerRollback返回参数结构体
+ */
+export interface SubmitServerRollbackResponse {
+  /**
+   * 任务Id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitServerConfigChangeDiff返回参数结构体
+ */
+export interface SubmitServerConfigChangeDiffResponse {
+  /**
+   * 任务Id 大于 0 需要请求 DescribeServerManageTask 接口获取任务进度，等于 0 则表示同步
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

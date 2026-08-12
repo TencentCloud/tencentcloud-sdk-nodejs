@@ -1647,23 +1647,27 @@ export interface DefaultNginxGatewayCallInfo {
  */
 export interface CFSConfig {
   /**
-   * cfs的实例的ID
+   * <p>cfs的实例的ID</p>
    */
   Id: string
   /**
-   * 存储的路径
+   * <p>存储的路径</p>
    */
   Path: string
   /**
-   * cfs的挂载类型，可选值为：STORAGE、SOURCE 分别表示存储拓展模式和数据源模式，默认为 STORAGE
+   * <p>cfs的挂载类型，可选值为：STORAGE、SOURCE 分别表示存储拓展模式和数据源模式，默认为 STORAGE</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MountType?: string
   /**
-   * 协议 1: NFS, 2: TURBO
+   * <p>协议 1: NFS, 2: TURBO</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
+  /**
+   * <p>是否平台预置存储</p>
+   */
+  IsPresetStorage?: boolean
 }
 
 /**
@@ -4797,6 +4801,10 @@ export interface CreateTrainingTaskRequest {
    * <p>资源供应属性</p>
    */
   ResourceSupplyAttribute?: ResourceSupplyAttribute
+  /**
+   * <p>队列ID</p>
+   */
+  Queues?: Array<string>
 }
 
 /**
@@ -7101,6 +7109,10 @@ export interface ResourceSupplyAttribute {
    * <p>资源供应类型。TIDE:潮汐;SPOT:竞价;空:常规按量后付费</p>
    */
   SupplyType?: string
+  /**
+   * <p>集群类型</p><p>枚举值：</p><ul><li>DEFAULT： 默认集群</li><li>THIRD： 第三方集群</li></ul><p>默认值：DEFAULT</p>
+   */
+  ClusterType?: string
 }
 
 /**

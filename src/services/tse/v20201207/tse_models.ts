@@ -9084,94 +9084,76 @@ export interface CreateGovernanceNamespacesRequest {
  */
 export interface ModifyCloudNativeAPIGatewayRouteRequest {
   /**
-   * 网关ID
+   * <p>网关ID</p>
    */
   GatewayId: string
   /**
-   * 所属服务的ID
+   * <p>所属服务的ID</p>
    */
   ServiceID: string
   /**
-   * 路由的ID，实例级别唯一
+   * <p>路由的ID，实例级别唯一</p>
    */
   RouteID: string
   /**
-   * 路由的名字，实例级别唯一，可以不提供
+   * <p>路由的名字，实例级别唯一，可以不提供</p>
    */
   RouteName?: string
   /**
-   * 路由的方法，其中方法可选值：
-- GET
-- POST
-- DELETE
-- PUT
-- OPTIONS
-- PATCH
-- HEAD
-- ANY
-- TRACE
-- COPY
-- MOVE
-- PROPFIND
-- PROPPATCH
-- MKCOL
-- LOCK
-- UNLOCK
+   * <p>路由的方法，其中方法可选值：</p><ul><li>GET</li><li>POST</li><li>DELETE</li><li>PUT</li><li>OPTIONS</li><li>PATCH</li><li>HEAD</li><li>ANY</li><li>TRACE</li><li>COPY</li><li>MOVE</li><li>PROPFIND</li><li>PROPPATCH</li><li>MKCOL</li><li>LOCK</li><li>UNLOCK</li></ul>
    */
   Methods?: Array<string>
   /**
-   * 路由的域名
+   * <p>路由的域名</p>
    */
   Hosts?: Array<string>
   /**
-   * 路由的路径
+   * <p>路由的路径</p>
    */
   Paths?: Array<string>
   /**
-   * 路由的协议，可选
-- https
-- http
+   * <p>路由的协议，可选</p><ul><li>https</li><li>http</li></ul>
    */
   Protocols?: Array<string>
   /**
-   * 转发到后端时是否保留Host
+   * <p>转发到后端时是否保留Host</p>
    */
   PreserveHost?: boolean
   /**
-   * https重定向状态码
+   * <p>https重定向状态码</p>
    */
   HttpsRedirectStatusCode?: number
   /**
-   * 转发到后端时是否StripPath
+   * <p>转发到后端时是否StripPath</p>
    */
   StripPath?: boolean
   /**
-   * 是否开启强制HTTPS
+   * <p>是否开启强制HTTPS</p>
    * @deprecated
    */
   ForceHttps?: boolean
   /**
-   * 四层匹配的目的端口
+   * <p>四层匹配的目的端口</p>
    */
   DestinationPorts?: Array<number | bigint>
   /**
-   * 路由的Headers
+   * <p>路由的Headers</p>
    */
   Headers?: Array<KVMapping>
   /**
-   * 是否缓存请求body，默认true
+   * <p>是否缓存请求body，默认true</p>
    */
   RequestBuffering?: boolean
   /**
-   * 是否缓存响应body，默认true
+   * <p>是否缓存响应body，默认true</p>
    */
   ResponseBuffering?: boolean
   /**
-   * 增加优先级
+   * <p>增加优先级</p>
    */
   RegexPriority?: number
   /**
-   * querysring参数
+   * <p>querysring参数</p>
    */
   QueryStringParameters?: Array<KVMapping>
 }

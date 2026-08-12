@@ -2611,85 +2611,37 @@ export interface DescribeDspmIdentifyComplianceGroupListResponse {
 }
 
 /**
- * 子账号详情
+ * 安全中心标签
  */
-export interface SubUserInfo {
+export interface EDRRuleTagItem {
   /**
-   * <p>主键ID，无业务意义仅作为唯一键</p>
+   * <p>安全中心标签ID</p>
    */
   ID?: number
   /**
-   * <p>子账号Appid</p>
+   * <p>标签中文Key</p>
    */
-  AppID?: string
+  TagKey?: string
   /**
-   * <p>子账号UIn</p>
+   * <p>标签英文key</p>
    */
-  Uin?: string
+  TagKeyEn?: string
   /**
-   * <p>子账号名称</p>
+   * <p>标签中文值</p>
    */
-  NickName?: string
+  TagValue?: string
   /**
-   * <p>主账号Appid</p>
+   * <p>标签英文值</p>
    */
-  OwnerAppID?: string
+  TagValueEn?: string
   /**
-   * <p>主账号Uin</p>
+   * <p>标签描述</p>
    */
-  OwnerUin?: string
+  Description?: string
   /**
-   * <p>主账号名称</p>
+   * <p>标签颜色</p>
    */
-  OwnerNickName?: string
-  /**
-   * <p>所属主账号memberId信息</p>
-   */
-  OwnerMemberID?: string
-  /**
-   * <p>账户类型，0为腾讯云账户，1为AWS账户</p>
-   */
-  CloudType?: number
-  /**
-   * <p>可访问服务数量</p>
-   */
-  ServiceCount?: number
-  /**
-   * <p>可访问接口数量</p>
-   */
-  InterfaceCount?: number
-  /**
-   * <p>可访问资源数量</p>
-   */
-  AssetCount?: number
-  /**
-   * <p>访问/行为日志数量</p>
-   */
-  LogCount?: number
-  /**
-   * <p>权限配置风险</p>
-   */
-  ConfigRiskCount?: number
-  /**
-   * <p>危险行为告警</p>
-   */
-  ActionRiskCount?: number
-  /**
-   * <p>是否接入操作审计日志</p>
-   */
-  IsAccessCloudAudit?: boolean
-  /**
-   * <p>是否配置风险的安全体检</p>
-   */
-  IsAccessCheck?: boolean
-  /**
-   * <p>是否配置用户行为管理策略</p>
-   */
-  IsAccessUeba?: boolean
-  /**
-   * <p>创建时间（Unix时间戳）</p>
-   */
-  CreateTime?: number
+  Color?: string
 }
 
 /**
@@ -8159,6 +8111,20 @@ export interface DescribeCosIpInvokeRecordFileResponse {
 }
 
 /**
+ * ModifyEdrAlertPermanentIgnore返回参数结构体
+ */
+export interface ModifyEdrAlertPermanentIgnoreResponse {
+  /**
+   * <p>成功忽略的告警数</p>
+   */
+  IgnoredCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCosAccessPermission返回参数结构体
  */
 export interface DescribeCosAccessPermissionResponse {
@@ -8759,6 +8725,46 @@ export interface EdrAlertDetail {
    * <p>服务进程信息（base64 编码后的 JSON 字符串）</p>
    */
   NetSvcPs?: string
+  /**
+   * <p>容器名称</p>
+   */
+  ContainerName?: string
+  /**
+   * <p>容器镜像名称</p>
+   */
+  ImageName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * <p>容器运行状态（原始枚举 RUNNING/PAUSED/STOPPED…，前端自行映射）</p><p>枚举值：</p><ul><li>RUNNING： 运行</li><li>PAUSED： 暂停</li><li>STOPPED： 停止</li><li>CREATED： 已经创建</li><li>DESTROYED： 已销毁</li><li>RESTARTING： 重启中</li><li>REMOVING： 迁移中</li><li>DEAD： DEAD</li><li>UNKNOWN： 未知</li></ul>
+   */
+  RunStatus?: string
+  /**
+   * <p>POD 名称</p>
+   */
+  PodName?: string
+  /**
+   * <p>POD IP</p>
+   */
+  PodIp?: string
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>POD 负载类型</p>
+   */
+  PodWorkloadType?: string
+  /**
+   * <p>集群 ca 证书 md5</p>
+   */
+  ClusterCaMD5?: string
+  /**
+   * <p>POD 唯一 id</p>
+   */
+  PodUniqueId?: string
 }
 
 /**
@@ -10197,6 +10203,26 @@ export interface ModifyEDRRuleRequest {
    * <p>全选资产排除的实例ID和APPID</p>
    */
   ExcludeInstanceIDsWithAppId?: Array<InstanceIDWithAppIdItem>
+  /**
+   * <p>安全中心标签ID列表（主机资产范围「按标签选择」，仅对主机生效）；上限 100（超限截断）。标签来源接口 DescribeAssetTagTree</p>
+   */
+  TagIDs?: Array<string>
+  /**
+   * <p>指定生效集群列表（每项含 AppId + ClusterID，TCSSScope=0 时使用）。入参数组上限 3000（超限截断保留前 3000 项）</p>
+   */
+  ClusterIDsWithAppId?: Array<ClusterIDWithAppIdItem>
+  /**
+   * <p>排除集群列表（每项含 AppId + ClusterID）；入参数组上限 3000（超限截断保留前 3000 项）</p>
+   */
+  ExcludeClusterIDsWithAppId?: Array<ClusterIDWithAppIdItem>
+  /**
+   * <p>直接选择镜像（每项含 AppId + ImageID，在集群基础上进一步过滤）。多账号场景下各账号只存属于自己的镜像；入参数组上限 3000（超限截断保留前 3000 项）</p>
+   */
+  ImageIDsWithAppId?: Array<ImageIDWithAppIdItem>
+  /**
+   * <p>容器条件匹配</p>
+   */
+  ConditionMatches?: Array<ConditionMatch>
 }
 
 /**
@@ -11500,70 +11526,33 @@ export interface DescribeCosAuditDictionaryListResponse {
 }
 
 /**
- * 用户行为分析策略
+ * DescribeVulFixedList请求参数结构体
  */
-export interface UebaRule {
+export interface DescribeVulFixedListRequest {
   /**
-   * 策略id
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
    */
-  RuleID?: string
+  Offset?: number
   /**
-   * 规则名称
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
    */
-  RuleName?: string
+  Limit?: number
   /**
-   * 策略类型
-0:系统策略
-1:自定义策略
+   * <p>过滤条件<br>支持的Filter.Name：<br>Keyword - 模糊匹配，按关键字搜索（漏洞名称/CVE编号/主机名称/实例ID）<br>VulName - 模糊匹配，按漏洞名称搜索<br>Level - 精确匹配，按漏洞等级筛选：LOW-低危 MEDIUM-中危 HIGH-高危 CRITICAL-严重<br>VprLevel - 精确匹配，按VPR评级筛选：1-Low 2-Medium 3-High 4-Critical<br>VulCategory - 精确匹配，按漏洞类型筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞<br>MachineName - 模糊匹配，按主机名称搜索<br>InstanceId - 模糊匹配，按实例ID搜索<br>FixTime - 范围匹配，修复时间范围，传入两个值表示起止时间</p>
    */
-  RuleType?: number
+  Filters?: Array<Filters>
   /**
-   * 策略等级
-0:提示
-1:低危
-2:中危
-3:高危
-4:严重
+   * <p>排序字段<br>枚举值：<br>FixTime：按修复时间排序<br>VulName：按漏洞名称排序</p>
    */
-  RuleLevel?: number
+  Order?: string
   /**
-   * 策略内容
+   * <p>排序方式<br>枚举值：<br>asc：升序<br>desc：降序<br>默认值：desc</p>
    */
-  RuleContent?: string
+  By?: string
   /**
-   * 策略开关
+   * 集团账号的成员id
    */
-  RuleStatus?: boolean
-  /**
-   * 命中次数
-   */
-  HitCount?: number
-  /**
-   * 所属账号Appid
-   */
-  AppID?: string
-  /**
-   * 多账号，成员ID
-   */
-  MemberID?: string
-  /**
-   * Uin
-   */
-  Uin?: string
-  /**
-   * 昵称
-   */
-  Nickname?: string
-  /**
-   * 自定义规则具体内容
-   */
-  CustomRuleDetail?: UebaCustomRule
-  /**
-   * 云类型
-腾讯云：0
-aws：1
-   */
-  CloudType?: number
+  MemberId?: Array<string>
 }
 
 /**
@@ -13045,6 +13034,22 @@ export interface EDRRule {
    * <p>排除实例ID</p>
    */
   ExcludeInstanceIDs?: Array<string>
+  /**
+   * <p>生效集群ID列表（TCSSScope=0 时有值；空返回 []）</p>
+   */
+  ClusterIDs?: Array<string>
+  /**
+   * <p>排除集群ID列表（空返回 []）</p>
+   */
+  ExcludeClusterIDs?: Array<string>
+  /**
+   * <p>容器条件匹配</p>
+   */
+  ConditionMatches?: Array<ConditionMatch>
+  /**
+   * <p>安全中心标签</p>
+   */
+  TagItems?: Array<EDRRuleTagItem>
 }
 
 /**
@@ -15442,6 +15447,10 @@ export interface EdrAlertItem {
    */
   AlertSource?: string
   /**
+   * <p>机器类型（列表接口专有；不限于容器告警，主机告警同样返回）。按 Quuid 富化自 machines.machine_type，原始枚举值原样透传、不做 i18n 翻译，前端自行映射展示。取值如 CVM / LH / Other / EKS-NATIVE 等；查不到对应机器信息时降级为空串 ""（与 InstanceName / PublicIp / PrivateIp 等资产富化字段降级行为一致）。告警详情接口（DescribeEdrAlertInfo）不返回此字段</p>
+   */
+  MachineType?: string
+  /**
    * <p>镜像ID</p>
    */
   ImageId?: string
@@ -15489,6 +15498,18 @@ export interface EdrAlertItem {
    * <p>该机器是否开启应用防护</p>
    */
   RaspOpen?: boolean
+  /**
+   * <p>容器名称</p>
+   */
+  ContainerName?: string
+  /**
+   * <p>容器镜像名称</p>
+   */
+  ImageName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
 }
 
 /**
@@ -16614,21 +16635,17 @@ export interface VULViewVULRisk {
 }
 
 /**
- * DescribeDspmAssetAccountIdentify返回参数结构体
+ * DescribeDspmAccessTopologyIps请求参数结构体
  */
-export interface DescribeDspmAssetAccountIdentifyResponse {
+export interface DescribeDspmAccessTopologyIpsRequest {
   /**
-   * 资产账号身份总数
+   * 集团账号的成员id
    */
-  TotalCount?: number
+  MemberId?: Array<string>
   /**
-   * 资产账号身份信息
+   * 过滤器。 支持的FilterName: AssetId/Account
    */
-  IdentifySet?: Array<DspmAssetAccountIdentify>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Filter?: Filter
 }
 
 /**
@@ -17640,17 +17657,21 @@ export interface DescribeClusterPodAssetsRequest {
 }
 
 /**
- * DescribeDspmAccessTopologyIps请求参数结构体
+ * DescribeDspmAssetAccountIdentify返回参数结构体
  */
-export interface DescribeDspmAccessTopologyIpsRequest {
+export interface DescribeDspmAssetAccountIdentifyResponse {
   /**
-   * 集团账号的成员id
+   * 资产账号身份总数
    */
-  MemberId?: Array<string>
+  TotalCount?: number
   /**
-   * 过滤器。 支持的FilterName: AssetId/Account
+   * 资产账号身份信息
    */
-  Filter?: Filter
+  IdentifySet?: Array<DspmAssetAccountIdentify>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17769,6 +17790,27 @@ export interface DescribeAssetRiskListRequest {
    * 排序字段
    */
   By?: string
+}
+
+/**
+ * 过滤条件
+ */
+export interface WhereFilter {
+  /**
+   * 过滤的项
+   */
+  Name: string
+  /**
+   * 过滤的值
+   */
+  Values: Array<string>
+  /**
+   * 中台定义：
+1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与
+精确匹配填 7 模糊匹配填9 
+
+   */
+  OperatorType?: number
 }
 
 /**
@@ -18662,6 +18704,73 @@ export interface DeleteDspmIdentifyComplianceRuleRelationResponse {
 }
 
 /**
+ * 用户行为分析策略
+ */
+export interface UebaRule {
+  /**
+   * 策略id
+   */
+  RuleID?: string
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+  /**
+   * 策略类型
+0:系统策略
+1:自定义策略
+   */
+  RuleType?: number
+  /**
+   * 策略等级
+0:提示
+1:低危
+2:中危
+3:高危
+4:严重
+   */
+  RuleLevel?: number
+  /**
+   * 策略内容
+   */
+  RuleContent?: string
+  /**
+   * 策略开关
+   */
+  RuleStatus?: boolean
+  /**
+   * 命中次数
+   */
+  HitCount?: number
+  /**
+   * 所属账号Appid
+   */
+  AppID?: string
+  /**
+   * 多账号，成员ID
+   */
+  MemberID?: string
+  /**
+   * Uin
+   */
+  Uin?: string
+  /**
+   * 昵称
+   */
+  Nickname?: string
+  /**
+   * 自定义规则具体内容
+   */
+  CustomRuleDetail?: UebaCustomRule
+  /**
+   * 云类型
+腾讯云：0
+aws：1
+   */
+  CloudType?: number
+}
+
+/**
  * DescribeEdrAlertList返回参数结构体
  */
 export interface DescribeEdrAlertListResponse {
@@ -18868,24 +18977,25 @@ export interface AKInfo {
 }
 
 /**
- * 过滤条件
+ * 高级镜像条件匹配（三个匹配串有且仅有一个非空）
  */
-export interface WhereFilter {
+export interface ConditionMatch {
   /**
-   * 过滤的项
+   * <p>镜像ID匹配串（三选一，有且仅有一个非空）</p>
    */
-  Name: string
+  ImageIDMatchString?: string
   /**
-   * 过滤的值
+   * <p>镜像名匹配串（三选一，有且仅有一个非空）</p>
    */
-  Values: Array<string>
+  ImageNameMatchString?: string
   /**
-   * 中台定义：
-1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与
-精确匹配填 7 模糊匹配填9 
-
+   * <p>镜像地址匹配串（三选一，有且仅有一个非空）</p>
    */
-  OperatorType?: number
+  ImageAddressMatchString?: string
+  /**
+   * <p>匹配条件，取值：EQUALS-等于/NOT_EQUALS-不等于/STARTS_WITH-以…开头/NOT_STARTS_WITH-不以…开头/ENDS_WITH-以…结尾/NOT_ENDS_WITH-不以…结尾/CONTAINS-包含/NOT_CONTAINS-不包含</p>
+   */
+  MatchType?: string
 }
 
 /**
@@ -19039,6 +19149,88 @@ export interface DescribeCosActionListRequest {
    * 过滤器
    */
   Filter?: Filter
+}
+
+/**
+ * 子账号详情
+ */
+export interface SubUserInfo {
+  /**
+   * <p>主键ID，无业务意义仅作为唯一键</p>
+   */
+  ID?: number
+  /**
+   * <p>子账号Appid</p>
+   */
+  AppID?: string
+  /**
+   * <p>子账号UIn</p>
+   */
+  Uin?: string
+  /**
+   * <p>子账号名称</p>
+   */
+  NickName?: string
+  /**
+   * <p>主账号Appid</p>
+   */
+  OwnerAppID?: string
+  /**
+   * <p>主账号Uin</p>
+   */
+  OwnerUin?: string
+  /**
+   * <p>主账号名称</p>
+   */
+  OwnerNickName?: string
+  /**
+   * <p>所属主账号memberId信息</p>
+   */
+  OwnerMemberID?: string
+  /**
+   * <p>账户类型，0为腾讯云账户，1为AWS账户</p>
+   */
+  CloudType?: number
+  /**
+   * <p>可访问服务数量</p>
+   */
+  ServiceCount?: number
+  /**
+   * <p>可访问接口数量</p>
+   */
+  InterfaceCount?: number
+  /**
+   * <p>可访问资源数量</p>
+   */
+  AssetCount?: number
+  /**
+   * <p>访问/行为日志数量</p>
+   */
+  LogCount?: number
+  /**
+   * <p>权限配置风险</p>
+   */
+  ConfigRiskCount?: number
+  /**
+   * <p>危险行为告警</p>
+   */
+  ActionRiskCount?: number
+  /**
+   * <p>是否接入操作审计日志</p>
+   */
+  IsAccessCloudAudit?: boolean
+  /**
+   * <p>是否配置风险的安全体检</p>
+   */
+  IsAccessCheck?: boolean
+  /**
+   * <p>是否配置用户行为管理策略</p>
+   */
+  IsAccessUeba?: boolean
+  /**
+   * <p>创建时间（Unix时间戳）</p>
+   */
+  CreateTime?: number
 }
 
 /**
@@ -19910,16 +20102,42 @@ export interface DescribeAILinkSettingResponse {
   Scope?: number
   /**
    * <p>自选主机Quuid列表</p>
+   * @deprecated
    */
   Quuids?: Array<string>
   /**
    * <p>排除主机Quuid列表</p>
+   * @deprecated
    */
   ExcludeQuuids?: Array<string>
   /**
    * <p>新增资产自动包含 0 不包含 1包含</p>
    */
   AutoInclude?: number
+  /**
+   * <p>标签</p>
+   */
+  TagIDs?: Array<string>
+  /**
+   * <p>0，1</p><p>枚举值：</p><ul><li>0： 部分</li><li>1： 全部</li></ul>
+   */
+  TCSSScope?: number
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterIDs?: Array<string>
+  /**
+   * <p>排除集群ID</p>
+   */
+  ExcludeClusterIDs?: Array<string>
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceIds?: Array<string>
+  /**
+   * <p>排除实例ID</p>
+   */
+  ExcludeInstanceIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20049,17 +20267,17 @@ export interface ModifyDspmAssetAccountRequest {
 }
 
 /**
- * ModifyEdrAlertPermanentIgnore返回参数结构体
+ * 镜像ID和对应的appid账号信息
  */
-export interface ModifyEdrAlertPermanentIgnoreResponse {
+export interface ImageIDWithAppIdItem {
   /**
-   * <p>成功忽略的告警数</p>
+   * <p>账号ID</p>
    */
-  IgnoredCount?: number
+  AppId?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>容器镜像ID</p>
    */
-  RequestId?: string
+  ImageID?: string
 }
 
 /**
@@ -20900,16 +21118,42 @@ export interface ModifyAILinkSettingRequest {
   Scope?: number
   /**
    * <p>自选主机Quuid列表（Scope=0时必填）</p>
+   * @deprecated
    */
   Quuids?: Array<string>
   /**
    * <p>排除主机Quuid列表（Scope=1时生效）</p>
+   * @deprecated
    */
   ExcludeQuuids?: Array<string>
   /**
    * <p>新增资产自动包含 0 不包含 1包含</p>
    */
   AutoInclude?: number
+  /**
+   * <p>标签ID</p>
+   */
+  TagIDs?: Array<string>
+  /**
+   * <p>0,1</p><p>枚举值：</p><ul><li>0： 部分</li><li>1： 全部</li></ul>
+   */
+  TCSSScope?: number
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterIDs?: Array<string>
+  /**
+   * <p>排除集群ID</p>
+   */
+  ExcludeClusterIDs?: Array<string>
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceIds?: Array<string>
+  /**
+   * <p>排除实例ID</p>
+   */
+  ExcludeInstanceIds?: Array<string>
 }
 
 /**
@@ -23452,33 +23696,17 @@ export interface ModifyPolicyStatusResponse {
 }
 
 /**
- * DescribeVulFixedList请求参数结构体
+ * 集群定位信息
  */
-export interface DescribeVulFixedListRequest {
+export interface ClusterIDWithAppIdItem {
   /**
-   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   * 集群ID
    */
-  Offset?: number
+  ClusterID: string
   /**
-   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   * 集群所属AppId
    */
-  Limit?: number
-  /**
-   * <p>过滤条件<br>支持的Filter.Name：<br>Keyword - 模糊匹配，按关键字搜索（漏洞名称/CVE编号/主机名称/实例ID）<br>VulName - 模糊匹配，按漏洞名称搜索<br>Level - 精确匹配，按漏洞等级筛选：LOW-低危 MEDIUM-中危 HIGH-高危 CRITICAL-严重<br>VprLevel - 精确匹配，按VPR评级筛选：1-Low 2-Medium 3-High 4-Critical<br>VulCategory - 精确匹配，按漏洞类型筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞<br>MachineName - 模糊匹配，按主机名称搜索<br>InstanceId - 模糊匹配，按实例ID搜索<br>FixTime - 范围匹配，修复时间范围，传入两个值表示起止时间</p>
-   */
-  Filters?: Array<Filters>
-  /**
-   * <p>排序字段<br>枚举值：<br>FixTime：按修复时间排序<br>VulName：按漏洞名称排序</p>
-   */
-  Order?: string
-  /**
-   * <p>排序方式<br>枚举值：<br>asc：升序<br>desc：降序<br>默认值：desc</p>
-   */
-  By?: string
-  /**
-   * 集团账号的成员id
-   */
-  MemberId?: Array<string>
+  AppId: number
 }
 
 /**
@@ -24296,15 +24524,15 @@ export interface ModifyMachineRemarkRequest {
 }
 
 /**
- * instance_id和对应的appid账号信息
+ * 主机实例定位信息
  */
 export interface InstanceIDWithAppIdItem {
   /**
-   * <p>APPID</p>
+   * 机器所属AppId
    */
   AppId: number
   /**
-   * <p>实例ID</p>
+   * 机器实例ID
    */
   InstanceID: string
 }
@@ -25753,27 +25981,27 @@ export interface DescribeDomainAssetsResponse {
 }
 
 /**
- * 地域信息
+ * 云资产所在地域信息。
  */
 export interface RegionInfo {
   /**
-   * <p>地域</p>
+   * 地域标志，如 ap-guangzhou、ap-shanghai、ap-beijing。
    */
   Region?: string
   /**
-   * <p>地域编码</p>
-   */
-  RegionCode?: string
-  /**
-   * <p>地域ID</p>
-   */
-  RegionId?: number
-  /**
-   * <p>地域名称</p>
+   * 地域中文名，如华南地区（广州）、华东地区（上海）、华北地区（北京）。
    */
   RegionName?: string
   /**
-   * <p>地域英文名称</p>
+   * 地域数字 ID。
+   */
+  RegionId?: number
+  /**
+   * 地域简码，如 gz、sh、bj。
+   */
+  RegionCode?: string
+  /**
+   * 地域英文名。
    */
   RegionNameEn?: string
 }
@@ -26031,11 +26259,11 @@ export interface DescribeVulScanPeriodicResponse {
 }
 
 /**
- * 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系。支持的 Name：ResultStatus（通过状态）、AssetName（资产名称/ID模糊）、IP（IP地址模糊）、Tag（资产标签模糊）
+ * 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系。支持的 Name：Status（执行结果，Values: SUCCESS/FAILED/USER_CANCELED/CHECKING）
  */
 export interface Filters {
   /**
-   * 过滤条件名称。取值：ResultStatus（通过状态，Values: PASS/NOT_PASS）、AssetName（资产名称/ID，模糊匹配）、IP（IP地址，模糊匹配）、Tag（资产标签，模糊匹配）
+   * 过滤条件名称。取值：Status（执行结果，Values: SUCCESS/FAILED/USER_CANCELED/CHECKING）
    */
   Name?: string
   /**
@@ -26558,27 +26786,27 @@ export interface DescribeDspmLogListResponse {
 }
 
 /**
- * EDR告警定位信息，用于永久忽略
+ * EDR告警定位信息，用于永久忽略/取消忽略
  */
 export interface EdrAlertTargetForIgnore {
   /**
-   * <p>告警主键ID</p>
+   * 告警主键ID
    */
   Id: number
   /**
-   * <p>告警所属账号ID（跨账号，前端必传）</p>
+   * 告警所属账号ID（跨账号，前端必传）
    */
   AppId: number
   /**
-   * <p>告警唯一标识</p>
+   * 告警唯一标识
    */
   AlertId?: string
   /**
-   * <p>主机UUID（可选）</p>
+   * 主机UUID（可选）
    */
   Quuid?: string
   /**
-   * <p>实例ID（可选，用于白名单写入）</p>
+   * 实例ID（可选，用于白名单删除）
    */
   InstanceId?: string
 }

@@ -585,21 +585,13 @@ export interface ModifyRepositoryRequest {
 }
 
 /**
- * 实例创建过程
+ * ModifyReplication返回参数结构体
  */
-export interface RegistryCondition {
+export interface ModifyReplicationResponse {
   /**
-   * 实例创建过程类型
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type?: string
-  /**
-   * 实例创建过程状态
-   */
-  Status?: string
-  /**
-   * 转换到该过程的简明原因
-   */
-  Reason?: string
+  RequestId?: string
 }
 
 /**
@@ -2740,29 +2732,25 @@ export interface DescribeTagRetentionExecutionTaskRequest {
 }
 
 /**
- * 同步规则
+ * ModifyReplication请求参数结构体
  */
-export interface ReplicationRule {
+export interface ModifyReplicationRequest {
   /**
-   * 同步规则名称
+   * <p>复制源实例ID</p>
    */
-  Name: string
+  SourceRegistryId: string
   /**
-   * 目标命名空间
+   * <p>实例同步规则名称</p>
    */
-  DestNamespace: string
+  RuleName: string
   /**
-   * 是否覆盖
+   * <p>同步规则</p>
    */
-  Override: boolean
+  Rule: ModifyReplicationRule
   /**
-   * 同步过滤条件
+   * <p>规则描述</p>
    */
-  Filters: Array<ReplicationFilter>
-  /**
-   * 是否同步删除事件
-   */
-  Deletion?: boolean
+  Description?: string
 }
 
 /**
@@ -3659,6 +3647,32 @@ export interface CreateInstanceRequest {
 }
 
 /**
+ * 同步规则
+ */
+export interface ReplicationRule {
+  /**
+   * 同步规则名称
+   */
+  Name: string
+  /**
+   * 目标命名空间
+   */
+  DestNamespace: string
+  /**
+   * 是否覆盖
+   */
+  Override: boolean
+  /**
+   * 同步过滤条件
+   */
+  Filters: Array<ReplicationFilter>
+  /**
+   * 是否同步删除事件
+   */
+  Deletion?: boolean
+}
+
+/**
  * DescribeReplicationPolicies返回参数结构体
  */
 export interface DescribeReplicationPoliciesResponse {
@@ -4280,6 +4294,24 @@ export interface DescribeUserQuotaPersonalResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例创建过程
+ */
+export interface RegistryCondition {
+  /**
+   * 实例创建过程类型
+   */
+  Type?: string
+  /**
+   * 实例创建过程状态
+   */
+  Status?: string
+  /**
+   * 转换到该过程的简明原因
+   */
+  Reason?: string
 }
 
 /**
@@ -5378,6 +5410,32 @@ export interface DescribeImagesRequest {
    * 指定是否为精准匹配，true为精准匹配，不填为模糊匹配
    */
   ExactMatch?: boolean
+}
+
+/**
+ * 修改同步规则参数，用于 ModifyReplication 接口更新已有的实例同步规则配置。
+ */
+export interface ModifyReplicationRule {
+  /**
+   * <p>目标命名空间</p>
+   */
+  DestNamespace?: string
+  /**
+   * <p>是否覆盖</p>
+   */
+  Override?: boolean
+  /**
+   * <p>是否同步删除事件</p>
+   */
+  Deletion?: boolean
+  /**
+   * <p>过滤同步条件</p>
+   */
+  Filters?: Array<ReplicationFilter>
+  /**
+   * <p>是否开启规则</p>
+   */
+  Enabled?: boolean
 }
 
 /**

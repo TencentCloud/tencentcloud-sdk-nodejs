@@ -48,7 +48,7 @@ import {
   DeleteInstanceTokenRequest,
   TaskDetail,
   ModifyRepositoryRequest,
-  RegistryCondition,
+  ModifyReplicationResponse,
   ListAIModelsRequest,
   DescribeInternalEndpointDnsStatusRequest,
   CreateApplicationTriggerPersonalRequest,
@@ -163,7 +163,7 @@ import {
   DescribeImageFilterPersonalRequest,
   TerminateGCJobRequest,
   DescribeTagRetentionExecutionTaskRequest,
-  ReplicationRule,
+  ModifyReplicationRequest,
   RepoInfoResp,
   DeleteRepositoryTagsResponse,
   DeleteMultipleSecurityPolicyRequest,
@@ -211,6 +211,7 @@ import {
   DeleteSecurityPolicyRequest,
   ListSkillsRequest,
   CreateInstanceRequest,
+  ReplicationRule,
   DescribeReplicationPoliciesResponse,
   DescribeInstanceTokenRequest,
   BatchDeleteRepositoryPersonalResponse,
@@ -238,6 +239,7 @@ import {
   RepoInfo,
   ManageImageLifecycleGlobalPersonalRequest,
   DescribeUserQuotaPersonalResponse,
+  RegistryCondition,
   DescribeImagePersonalRequest,
   CreateServiceAccountRequest,
   PolicyFilter,
@@ -300,6 +302,7 @@ import {
   DeleteNamespaceRequest,
   BatchDeleteImagePersonalRequest,
   DescribeImagesRequest,
+  ModifyReplicationRule,
   DescribeGCJobsRequest,
   Tag,
   DescribeTagRetentionExecutionRequest,
@@ -1353,6 +1356,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRepositoryResponse) => void
   ): Promise<DeleteRepositoryResponse> {
     return this.request("DeleteRepository", req, cb)
+  }
+
+  /**
+   * 修改实例同步规则
+   */
+  async ModifyReplication(
+    req: ModifyReplicationRequest,
+    cb?: (error: string, rep: ModifyReplicationResponse) => void
+  ): Promise<ModifyReplicationResponse> {
+    return this.request("ModifyReplication", req, cb)
   }
 
   /**

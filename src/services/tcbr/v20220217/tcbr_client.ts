@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeCloudRunServersResponse,
+  SubmitServerConfigChangeDiffRequest,
   ServerBaseConfig,
   DescribeCloudRunProcessLogRequest,
   RepositoryInfo,
@@ -41,11 +42,13 @@ import {
   ReleaseGrayResponse,
   DescribeCloudRunProcessLogResponse,
   VersionFlowInfo,
+  ServerBaseConfigDiff,
   StopVersionInstanceRequest,
   DeployParam,
   DiffConfigItem,
-  SubmitServerRollbackResponse,
   VolumeConf,
+  SubmitServerRollbackResponse,
+  SubmitServerConfigChangeDiffResponse,
   Tag,
   StartVersionInstanceResponse,
   OnlineVersionInfo,
@@ -118,13 +121,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云托管服务接口
+   * 查询云托管服务列表接口
    */
-  async CreateCloudRunServer(
-    req: CreateCloudRunServerRequest,
-    cb?: (error: string, rep: CreateCloudRunServerResponse) => void
-  ): Promise<CreateCloudRunServerResponse> {
-    return this.request("CreateCloudRunServer", req, cb)
+  async DescribeCloudRunServers(
+    req: DescribeCloudRunServersRequest,
+    cb?: (error: string, rep: DescribeCloudRunServersResponse) => void
+  ): Promise<DescribeCloudRunServersResponse> {
+    return this.request("DescribeCloudRunServers", req, cb)
+  }
+
+  /**
+   * 删除云托管服务：包括服务下的版本，镜像，流水线
+   */
+  async DeleteCloudRunServer(
+    req: DeleteCloudRunServerRequest,
+    cb?: (error: string, rep: DeleteCloudRunServerResponse) => void
+  ): Promise<DeleteCloudRunServerResponse> {
+    return this.request("DeleteCloudRunServer", req, cb)
+  }
+
+  /**
+   * 查询发布单
+   */
+  async DescribeReleaseOrder(
+    req: DescribeReleaseOrderRequest,
+    cb?: (error: string, rep: DescribeReleaseOrderResponse) => void
+  ): Promise<DescribeReleaseOrderResponse> {
+    return this.request("DescribeReleaseOrder", req, cb)
   }
 
   /**
@@ -138,13 +161,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云托管Pod实例列表
+   * 更新配置并使用最新镜像发布
    */
-  async DescribeCloudRunPodList(
-    req: DescribeCloudRunPodListRequest,
-    cb?: (error: string, rep: DescribeCloudRunPodListResponse) => void
-  ): Promise<DescribeCloudRunPodListResponse> {
-    return this.request("DescribeCloudRunPodList", req, cb)
+  async SubmitServerConfigChangeDiff(
+    req: SubmitServerConfigChangeDiffRequest,
+    cb?: (error: string, rep: SubmitServerConfigChangeDiffResponse) => void
+  ): Promise<SubmitServerConfigChangeDiffResponse> {
+    return this.request("SubmitServerConfigChangeDiff", req, cb)
+  }
+
+  /**
+   * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+   */
+  async DescribeCloudRunEnvs(
+    req: DescribeCloudRunEnvsRequest,
+    cb?: (error: string, rep: DescribeCloudRunEnvsResponse) => void
+  ): Promise<DescribeCloudRunEnvsResponse> {
+    return this.request("DescribeCloudRunEnvs", req, cb)
+  }
+
+  /**
+   * 查询环境基础信息
+   */
+  async DescribeEnvBaseInfo(
+    req: DescribeEnvBaseInfoRequest,
+    cb?: (error: string, rep: DescribeEnvBaseInfoResponse) => void
+  ): Promise<DescribeEnvBaseInfoResponse> {
+    return this.request("DescribeEnvBaseInfo", req, cb)
   }
 
   /**
@@ -155,16 +198,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopVersionInstanceResponse) => void
   ): Promise<StopVersionInstanceResponse> {
     return this.request("StopVersionInstance", req, cb)
-  }
-
-  /**
-   * 查询云托管服务列表接口
-   */
-  async DescribeCloudRunServers(
-    req: DescribeCloudRunServersRequest,
-    cb?: (error: string, rep: DescribeCloudRunServersResponse) => void
-  ): Promise<DescribeCloudRunServersResponse> {
-    return this.request("DescribeCloudRunServers", req, cb)
   }
 
   /**
@@ -188,26 +221,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询发布单
-   */
-  async DescribeReleaseOrder(
-    req: DescribeReleaseOrderRequest,
-    cb?: (error: string, rep: DescribeReleaseOrderResponse) => void
-  ): Promise<DescribeReleaseOrderResponse> {
-    return this.request("DescribeReleaseOrder", req, cb)
-  }
-
-  /**
-   * 操作发布单
-   */
-  async OperateServerManage(
-    req: OperateServerManageRequest,
-    cb?: (error: string, rep: OperateServerManageResponse) => void
-  ): Promise<OperateServerManageResponse> {
-    return this.request("OperateServerManage", req, cb)
-  }
-
-  /**
    * 灰度发布
    */
   async ReleaseGray(
@@ -215,16 +228,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReleaseGrayResponse) => void
   ): Promise<ReleaseGrayResponse> {
     return this.request("ReleaseGray", req, cb)
-  }
-
-  /**
-   * 删除云托管服务：包括服务下的版本，镜像，流水线
-   */
-  async DeleteCloudRunServer(
-    req: DeleteCloudRunServerRequest,
-    cb?: (error: string, rep: DeleteCloudRunServerResponse) => void
-  ): Promise<DeleteCloudRunServerResponse> {
-    return this.request("DeleteCloudRunServer", req, cb)
   }
 
   /**
@@ -248,23 +251,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启动版本实例
+   * 更新云托管服务
    */
-  async StartVersionInstance(
-    req: StartVersionInstanceRequest,
-    cb?: (error: string, rep: StartVersionInstanceResponse) => void
-  ): Promise<StartVersionInstanceResponse> {
-    return this.request("StartVersionInstance", req, cb)
-  }
-
-  /**
-   * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-   */
-  async DescribeCloudRunEnvs(
-    req: DescribeCloudRunEnvsRequest,
-    cb?: (error: string, rep: DescribeCloudRunEnvsResponse) => void
-  ): Promise<DescribeCloudRunEnvsResponse> {
-    return this.request("DescribeCloudRunEnvs", req, cb)
+  async UpdateCloudRunServer(
+    req: UpdateCloudRunServerRequest,
+    cb?: (error: string, rep: UpdateCloudRunServerResponse) => void
+  ): Promise<UpdateCloudRunServerResponse> {
+    return this.request("UpdateCloudRunServer", req, cb)
   }
 
   /**
@@ -278,6 +271,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 操作发布单
+   */
+  async OperateServerManage(
+    req: OperateServerManageRequest,
+    cb?: (error: string, rep: OperateServerManageResponse) => void
+  ): Promise<OperateServerManageResponse> {
+    return this.request("OperateServerManage", req, cb)
+  }
+
+  /**
+   * 创建云托管服务接口
+   */
+  async CreateCloudRunServer(
+    req: CreateCloudRunServerRequest,
+    cb?: (error: string, rep: CreateCloudRunServerResponse) => void
+  ): Promise<CreateCloudRunServerResponse> {
+    return this.request("CreateCloudRunServer", req, cb)
+  }
+
+  /**
+   * 查询云托管Pod实例列表
+   */
+  async DescribeCloudRunPodList(
+    req: DescribeCloudRunPodListRequest,
+    cb?: (error: string, rep: DescribeCloudRunPodListResponse) => void
+  ): Promise<DescribeCloudRunPodListResponse> {
+    return this.request("DescribeCloudRunPodList", req, cb)
+  }
+
+  /**
+   * 启动版本实例
+   */
+  async StartVersionInstance(
+    req: StartVersionInstanceRequest,
+    cb?: (error: string, rep: StartVersionInstanceResponse) => void
+  ): Promise<StartVersionInstanceResponse> {
+    return this.request("StartVersionInstance", req, cb)
+  }
+
+  /**
    * 查询云托管部署记录
    */
   async DescribeCloudRunDeployRecord(
@@ -285,26 +318,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudRunDeployRecordResponse) => void
   ): Promise<DescribeCloudRunDeployRecordResponse> {
     return this.request("DescribeCloudRunDeployRecord", req, cb)
-  }
-
-  /**
-   * 查询环境基础信息
-   */
-  async DescribeEnvBaseInfo(
-    req: DescribeEnvBaseInfoRequest,
-    cb?: (error: string, rep: DescribeEnvBaseInfoResponse) => void
-  ): Promise<DescribeEnvBaseInfoResponse> {
-    return this.request("DescribeEnvBaseInfo", req, cb)
-  }
-
-  /**
-   * 更新云托管服务
-   */
-  async UpdateCloudRunServer(
-    req: UpdateCloudRunServerRequest,
-    cb?: (error: string, rep: UpdateCloudRunServerResponse) => void
-  ): Promise<UpdateCloudRunServerResponse> {
-    return this.request("UpdateCloudRunServer", req, cb)
   }
 
   /**

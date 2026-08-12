@@ -21900,7 +21900,7 @@ export interface DescribeCloneViralTaskRequest {
   /**
    * <p>创建爆款复刻任务返回的任务ID</p>
    */
-  TaskId?: string
+  TaskId: string
 }
 
 /**

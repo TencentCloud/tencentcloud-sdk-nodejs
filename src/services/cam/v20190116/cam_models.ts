@@ -311,33 +311,37 @@ export interface TagRoleResponse {
  */
 export interface LoginActionFlagIntl {
   /**
-   * 手机
+   * <p>手机</p>
    */
   Phone?: number
   /**
-   * 硬token
+   * <p>硬token</p>
    */
   Token?: number
   /**
-   * 软token
+   * <p>软token</p>
    */
   Stoken?: number
   /**
-   * 微信
+   * <p>微信</p>
    */
   Wechat?: number
   /**
-   * 自定义
+   * <p>自定义</p>
    */
   Custom?: number
   /**
-   * 邮件
+   * <p>邮件</p>
    */
   Mail?: number
   /**
-   * u2f硬件token
+   * <p>u2f硬件token</p>
    */
   U2FToken?: number
+  /**
+   * <p>passkey通行密钥</p>
+   */
+  Passkey?: number
 }
 
 /**
