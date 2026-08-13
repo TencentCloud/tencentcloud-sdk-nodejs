@@ -4483,12 +4483,12 @@ export interface CosAsset {
  */
 export interface DescribeDSPAAssessmentRiskSideListResponse {
   /**
-   * 风险面列表
+   * <p>风险面列表</p>
    * @deprecated
    */
   RiskSideItmeList?: Array<Note>
   /**
-   * 风险面列表
+   * <p>风险面列表</p>
    */
   RiskSideItemList?: Array<Note>
   /**
@@ -5618,11 +5618,11 @@ export interface CreateDSPACosMetaResourcesRequest {
  */
 export interface DescribeDSPAAssessmentRiskSideListRequest {
   /**
-   * DSPA实例ID
+   * <p>DSPA实例ID</p>
    */
   DspaId: string
   /**
-   * 评估模板id
+   * <p>评估模板id</p>
    */
   TemplateId: number
 }

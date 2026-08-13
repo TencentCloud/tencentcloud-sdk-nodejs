@@ -2814,23 +2814,23 @@ export interface IaCFile {
  */
 export interface ModifyDspmBackupSettingRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
-   * 备份日志保留时长
+   * <p>备份日志保留时长</p>
    */
   BackupLogSaveTime?: number
   /**
-   * 恢复日志保留时长
+   * <p>恢复日志保留时长</p>
    */
   RestoreLogSaveTime?: number
   /**
-   * 日志最大生命周期限制
+   * <p>日志最大生命周期限制</p>
    */
   LogMaxSaveTime?: number
   /**
-   * 在线日志最大天数限制
+   * <p>在线日志最大天数限制</p>
    */
   OnlineLogMaxSaveTime?: number
 }
@@ -4979,11 +4979,11 @@ export interface DspmScheduleConfig {
  */
 export interface DeleteDspmRestoreLogListRequest {
   /**
-   * 日志Id
+   * <p>日志Id</p>
    */
   Id: number
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
 }
@@ -6891,23 +6891,23 @@ export interface VerifyDspmAssetLoginCodeRequest {
  */
 export interface DescribeDspmBackupSettingResponse {
   /**
-   * 备份日志保留时长
+   * <p>备份日志保留时长</p>
    */
   BackupLogSaveTime?: number
   /**
-   * 恢复日志保留时长
+   * <p>恢复日志保留时长</p>
    */
   RestoreLogSaveTime?: number
   /**
-   * 日志最大生命周期限制
+   * <p>日志最大生命周期限制</p>
    */
   LogMaxSaveTime?: number
   /**
-   * 在线日志最大天数限制
+   * <p>在线日志最大天数限制</p>
    */
   OnlineLogMaxSaveTime?: number
   /**
-   * 最大在线日志条数，单位是：个
+   * <p>最大在线日志条数，单位是：个</p>
    */
   MaxOnlineLogCount?: number
   /**
@@ -8178,139 +8178,139 @@ export interface DescribeDspmLogListRequest {
    */
   MemberId?: Array<string>
   /**
-   * 限制数目
+   * <p>限制数目</p>
    */
   Limit?: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 排序方式(desc=倒叙,asc=升序)
+   * <p>排序方式(desc=倒叙,asc=升序)</p>
    */
   Sort?: string
   /**
-   * 排序字段(opTime=时间,dangerLvl=风险等级)
+   * <p>排序字段(opTime=时间,dangerLvl=风险等级)</p>
    */
   Field?: string
   /**
-   * 风险等级(0-安全,1-低风险,2-中风险,3-高风险,不传全部)
+   * <p>风险等级(0-安全,1-低风险,2-中风险,3-高风险,不传全部)</p>
    */
   DangerLevel?: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName?: string
   /**
-   * 数据库端口
+   * <p>数据库端口</p>
    */
   DbPort?: number
   /**
-   * 数据库 IP
+   * <p>数据库 IP</p>
    */
   DbIp?: string
   /**
-   * 资产 ID
+   * <p>资产 ID</p>
    */
   AssetsId?: number
   /**
-   * 会话 ID
+   * <p>会话 ID</p>
    */
   SessionId?: string
   /**
-   * 客户端 IP
+   * <p>客户端 IP</p>
    */
   ClientSideIp?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: number
   /**
-   * 命中规则
+   * <p>命中规则</p>
    */
   HitRule?: number
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: number
   /**
-   * 模糊查询
+   * <p>模糊查询</p>
    */
   FuzzySearch?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 恢复日志id
+   * <p>恢复日志id</p>
    */
   RestoreLogId?: number
   /**
-   * 客户端
+   * <p>客户端</p>
    */
   ClientName?: string
   /**
-   * 流量来源，取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两者都传或不传则返回所有
+   * <p>流量来源，取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两者都传或不传则返回所有</p>
    */
   SourceTypes?: Array<string>
   /**
-   * 表名，长度限制64，多个表名查询的话可以用空格连接
+   * <p>表名，长度限制64，多个表名查询的话可以用空格连接</p>
    */
   TableName?: string
   /**
-   * 字段名，长度限制64，多个字段名查询的话可以用空格连接
+   * <p>字段名，长度限制64，多个字段名查询的话可以用空格连接</p>
    */
   FieldName?: string
   /**
-   * SQL 主要类型，DDL, DML, DCL, TCL
+   * <p>SQL 主要类型，DDL, DML, DCL, TCL</p>
    */
   SqlMainTypes?: Array<string>
   /**
-   * 操作类型
+   * <p>操作类型</p>
    */
   SqlType?: string
   /**
-   * 影响行数最小值
+   * <p>影响行数最小值</p>
    */
   RowNumMin?: number
   /**
-   * 影响行数最大值
+   * <p>影响行数最大值</p>
    */
   RowNumMax?: number
   /**
-   * 数据库类型, 支持的值：cdb，mariadb
+   * <p>数据库类型, 支持的值：cdb，mariadb</p>
    */
   DbTypes?: Array<string>
   /**
-   * 返回码
+   * <p>返回码</p>
    */
   RetNo?: number
   /**
-   * 客户端工具
+   * <p>客户端工具</p>
    */
   ClientDriverName?: string
   /**
-   * 客户端端口
+   * <p>客户端端口</p>
    */
   ClientPort?: number
   /**
-   * 审计日志 ID
+   * <p>审计日志 ID</p>
    */
   LogId?: string
   /**
-   * 风险等级数组(0-安全,1-低风险,2-中风险,3-高风险)
+   * <p>风险等级数组(0-安全,1-低风险,2-中风险,3-高风险)</p>
    */
   DangerLevels?: Array<number | bigint>
   /**
-   * 字段分类
+   * <p>字段分类</p>
    */
   SensitiveCategoryRule?: string
   /**
-   * 字段分级
+   * <p>字段分级</p>
    */
   SensitiveLevelRisk?: string
   /**
-   * 客户端MAC
+   * <p>客户端MAC</p>
    */
   ClientMac?: string
 }
@@ -9025,11 +9025,11 @@ export interface DescribeCosAlarmTrendDataRequest {
  */
 export interface RetryDspmExportLogRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: number
 }
@@ -11864,151 +11864,155 @@ export interface DescribeAbnormalCallRecordResponse {
  */
 export interface DspmDbAsset {
   /**
-   * 资产实例Id
+   * <p>资产实例Id</p>
    */
   AssetId?: string
   /**
-   * 资产类型
+   * <p>资产类型</p>
    */
   AssetType?: string
   /**
-   *  资产名
+   * <p>资产名</p>
    */
   Name?: string
   /**
-   * 账号数
+   * <p>账号数</p>
    */
   AccountCount?: number
   /**
-   * 公网访问地址，如果有多个，使用';'分割
+   * <p>公网访问地址，如果有多个，使用&#39;;&#39;分割</p>
    */
   PublicIp?: string
   /**
-   * 内网访问地址，如果有多个，使用';'分割
+   * <p>内网访问地址，如果有多个，使用&#39;;&#39;分割</p>
    */
   PrivateIp?: string
   /**
-   * 广域网域名地址，如果有多个，使用';'分割
+   * <p>广域网域名地址，如果有多个，使用&#39;;&#39;分割</p>
    */
   WanDomain?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 资产所在vpc的vpcid
+   * <p>资产所在vpc的vpcid</p>
    */
   VpcId?: string
   /**
-   * 资产所在vpc的vpc名
+   * <p>资产所在vpc的vpc名</p>
    */
   VpcName?: string
   /**
-   * 资产所在vpc子网的subnetid
+   * <p>资产所在vpc子网的subnetid</p>
    */
   SubnetId?: string
   /**
-   * 资产所在vpc子网名
+   * <p>资产所在vpc子网名</p>
    */
   SubnetName?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   Status?: number
   /**
-   * 创建时间。
+   * <p>创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 管理者信息。
+   * <p>管理者信息。</p>
    */
   Manager?: Array<DspmUinUser>
   /**
-   * 是否绑定身份。0-未绑定 1-已绑定
+   * <p>是否绑定身份。0-未绑定 1-已绑定</p>
    */
   BindIdentify?: number
   /**
-   * 是否管理员
+   * <p>是否管理员</p>
    */
   IsManager?: number
   /**
-   * 风险统计信息
+   * <p>风险统计信息</p>
    */
   RiskCount?: DspmRiskCount
   /**
-   * 安全建议。
-Resolve 立即解决
-Reinforcement 加固
-None 暂无异常
-
+   * <p>安全建议。<br>Resolve 立即解决<br>Reinforcement 加固<br>None 暂无异常</p>
    */
   SafetyAdvice?: string
   /**
-   * 日志投递状态。
-0-投递关闭 1-投递打开 2-投递开通中 3-投递关闭中
+   * <p>日志投递状态。<br>0-投递关闭 1-投递打开 2-投递开通中 3-投递关闭中</p>
    */
   LogDeliveryStatus?: number
   /**
-   * 是否支持日志投递。0-不支持 1-支持
+   * <p>是否支持日志投递。0-不支持 1-支持</p>
    */
   LogDeliverySupported?: number
   /**
-   * 数据扫描信息
+   * <p>数据扫描信息</p>
    */
   DataScanInfo?: DspmAssetDataScanDetail
   /**
-   * 资产所属账号app id
+   * <p>资产所属账号app id</p>
    */
   AppId?: number
   /**
-   * 账号昵称
+   * <p>账号昵称</p>
    */
   NickName?: string
   /**
-   * 资产所属账号uin
+   * <p>资产所属账号uin</p>
    */
   Uin?: string
   /**
-   * 安全分析状态（0-关闭 1-打开 2-开通中 3-关闭中）
-
+   * <p>安全分析状态（0-关闭 1-打开 2-开通中 3-关闭中）</p>
    */
   SecurityAnalyseStatus?: number
   /**
-   * 当前实例的总日志数
+   * <p>当前实例的总日志数</p>
    */
   TotalAuditLogs?: number
   /**
-   * 日志审计禁止开通的原因，可选值：VersionNotSupportLogSubscription, InstanceIsUpgrading, CdbRuleAuditEnabled, AssetNotExists
+   * <p>日志审计禁止开通的原因，可选值：VersionNotSupportLogSubscription, InstanceIsUpgrading, CdbRuleAuditEnabled, AssetNotExists</p>
    */
   LogDeliveryDisableReason?: string
   /**
-   * 在线日志的起始时间戳，精确到秒
+   * <p>在线日志的起始时间戳，精确到秒</p>
    */
   OldestOnlineLogTimestamp?: number
   /**
-   * 在线日志的最新时间戳，精确到秒
+   * <p>在线日志的最新时间戳，精确到秒</p>
    */
   NewestOnlineLogTimestamp?: number
   /**
-   * 操作错误信息
+   * <p>操作错误信息</p>
    */
   OperationErrorMsg?: string
   /**
-   * 是否支持账号操作。0 不支持；1 支持
+   * <p>是否支持账号操作。0 不支持；1 支持</p>
    */
   AccountOptSupported?: number
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   InstanceType?: number
   /**
-   * 集群类型（MongoDB），与云接口 DescribeDBInstances 的 ClusterType 一致：0-副本集 1-分片；非 MongoDB 资产固定 0
+   * <p>集群类型（MongoDB），与云接口 DescribeDBInstances 的 ClusterType 一致：0-副本集 1-分片；非 MongoDB 资产固定 0</p>
    */
   ClusterType?: number
   /**
-   * 是否支持敏感数据识别。0 不支持；1 支持
+   * <p>是否支持敏感数据识别。0 不支持；1 支持</p>
    */
   IdentifyScanSupported?: number
+  /**
+   * <p>集群ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>集群名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName?: string
 }
 
 /**
@@ -15208,11 +15212,11 @@ export interface DeleteIaCAccessTokenResponse {
  */
 export interface ModifyDspmRestoreLogTaskRequest {
   /**
-   * 备份日志Id
+   * <p>备份日志Id</p>
    */
   Id: number
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
 }
@@ -16837,7 +16841,7 @@ export interface DescribePublicIpAssetsRequest {
  */
 export interface DescribeDspmBackupSettingRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
 }
@@ -19772,11 +19776,11 @@ export interface DescribeTaskLogListResponse {
  */
 export interface DeleteDspmBackupLogListRequest {
   /**
-   * 备份日志Id
+   * <p>备份日志Id</p>
    */
   Id: number
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
 }
@@ -20795,7 +20799,7 @@ export interface CosInvokeLog {
  */
 export interface DownloadDspmExportLogResponse {
   /**
-   * 下载URL
+   * <p>下载URL</p>
    */
   Url?: string
   /**
@@ -20983,109 +20987,123 @@ export interface DescribeHostVulOverviewResponse {
  */
 export interface DspmRisk {
   /**
-   * 风险id
+   * <p>风险id</p>
    */
   RiskId?: string
   /**
-   * 风险名称
+   * <p>风险名称</p>
    */
   RiskName?: string
   /**
-   * 风险英文名称
+   * <p>风险英文名称</p>
    */
   RiskNameEn?: string
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   StrategyType?: string
   /**
-   * 策略类别
+   * <p>策略类别</p>
    */
   StrategyCategory?: string
   /**
-   * 风险等级
+   * <p>风险等级</p>
    */
   RiskLevel?: string
   /**
-   * 资产实例Id
+   * <p>资产实例Id</p>
    */
   AssetId?: string
   /**
-   * 资产类型
+   * <p>资产类型</p>
    */
   AssetType?: string
   /**
-   * 资产名
+   * <p>资产名</p>
    */
   AssetName?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   AssetRegion?: string
   /**
-   * 资产账号
+   * <p>资产账号</p>
    */
   Account?: string
   /**
-   * 主机地址
+   * <p>主机地址</p>
    */
   Host?: string
   /**
-   * 账号类型
+   * <p>账号类型</p>
    */
   AccountType?: number
   /**
-   * 风险检出时间
+   * <p>风险检出时间</p>
    */
   DetectTime?: string
   /**
-   * 处理状态 0-未处理 1-已处置 2-已忽略
+   * <p>处理状态 0-未处理 1-已处置 2-已忽略</p>
    */
   Status?: number
   /**
-   * 身份id
+   * <p>身份id</p>
    */
   IdentifyId?: string
   /**
-   * 所属云账号uin用户
+   * <p>所属云账号uin用户</p>
    */
   OwnerUin?: DspmUinUser
   /**
-   * 所属个人用户信息
+   * <p>所属个人用户信息</p>
    */
   Person?: DspmPersonUser
   /**
-   * 风险数据。
+   * <p>风险数据。</p>
    */
   RiskData?: string
   /**
-   * 是否资产管理员
+   * <p>是否资产管理员</p>
    */
   IsAssetManager?: number
   /**
-   * 数据起始时间
+   * <p>数据起始时间</p>
    */
   DataBeginTime?: string
   /**
-   * 数据结束时间
+   * <p>数据结束时间</p>
    */
   DataEndTime?: string
   /**
-   * 风险类型。risk-风险；alarm-告警。
+   * <p>风险类型。risk-风险；alarm-告警。</p>
    */
   RiskType?: string
   /**
-   * 资产所属账号app id
+   * <p>资产所属账号app id</p>
    */
   AppId?: number
   /**
-   * 账号昵称
+   * <p>账号昵称</p>
    */
   NickName?: string
   /**
-   * 资产所属账号uin
+   * <p>资产所属账号uin</p>
    */
   Uin?: string
+  /**
+   * <p>MongoDb的集群类型，非 MongoDB 资产固定 0</p><p>枚举值：</p><ul><li>0： 副本集</li><li>1： 分片</li></ul><p>默认值：0</p>
+   */
+  ClusterType?: number
+  /**
+   * <p>集群ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>集群名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName?: string
 }
 
 /**
@@ -25847,11 +25865,11 @@ export interface DescribeClusterAssetsResponse {
  */
 export interface DownloadDspmExportLogRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
-   * 要下载的导出任务ID
+   * <p>要下载的导出任务ID</p>
    */
   TaskId?: number
 }
@@ -26772,11 +26790,11 @@ export interface ExposeAssetTypeItem {
  */
 export interface DescribeDspmLogListResponse {
   /**
-   * 总数目
+   * <p>总数目</p>
    */
   TotalCount?: number
   /**
-   * 日志信息列表
+   * <p>日志信息列表</p>
    */
   List?: Array<AuditLogInfo>
   /**

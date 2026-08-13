@@ -1639,7 +1639,7 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
 如果是其他类型可以配合<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务</a>接口转换成PDF文件
 
 注: 
-1. 图片类型(png/jpg/jpeg)限制大小为5M以下, PDF/word/excel等其他格式限制大小为60M以下
+1. 图片类型(png/jpg/jpeg)限制大小为8M以下, PDF/word/excel等其他格式限制大小为60M以下
 2. <font color='red'>此接口调用时需要单独设置Domain请求域名 </font>,  联调开发环境为 <font color='red'>file.test.ess.tencent.cn</font>，正式环境需要设置为<font color='red'>file.ess.tencent.cn</font>，代码示例
 ```
 HttpProfile httpProfile = new HttpProfile();

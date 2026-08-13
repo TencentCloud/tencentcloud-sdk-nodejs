@@ -315,6 +315,7 @@ import {
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
+  DescribeAigcTaskListResponse,
   DescribeStreamPackageSSAIChannelRequest,
   Rules,
   AiRecognitionTaskOcrWordsResult,
@@ -352,7 +353,7 @@ import {
   DeleteVoiceRequest,
   CreateStreamLinkOutputInfoResponse,
   S3InputInfo,
-  DescribeStreamPackageLinearAssemblyProgramsRequest,
+  AigcTaskListItem,
   DescribeAsrHotwordsListRequest,
   AiAnalysisTaskDescriptionOutput,
   CloneVoiceResponse,
@@ -546,7 +547,7 @@ import {
   BlindWatermarkTemplate,
   DetectVideoSubtitleAreaRequest,
   DescribePersonSamplesRequest,
-  EnableScheduleResponse,
+  DescribeStreamPackageLinearAssemblyProgramsRequest,
   DescribeSubtitleEmbedTemplatesRequest,
   Project,
   OutputSRTSourceAddressResp,
@@ -850,6 +851,7 @@ import {
   AigcVideoReferenceAudioInfo,
   DeleteProcessImageTemplateResponse,
   DescribeStreamLinkSecurityGroupsRequest,
+  QueryTaskFilter,
   OcrFullTextConfigureInfoForUpdate,
   SubtitleLayoutConfig,
   RawWatermarkParameter,
@@ -1042,6 +1044,7 @@ import {
   AiAnalysisTaskDelLogoResult,
   SampleSnapshotTaskInput,
   LiveStreamAiReviewResultInfo,
+  EnableScheduleResponse,
   ProgramScheduleInfo,
   TrackInfo,
   QualityControlTemplate,
@@ -1081,6 +1084,7 @@ import {
   EditMediaTaskOutput,
   ProcessImageTemplate,
   HighlightSegmentItem,
+  DescribeAigcTaskListRequest,
   AiAnalysisTaskCutoutResult,
   SmartEraseTemplateItem,
   CreateStreamPackageSourceLocationRequest,
@@ -3348,6 +3352,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchStopStreamLinkFlowResponse) => void
   ): Promise<BatchStopStreamLinkFlowResponse> {
     return this.request("BatchStopStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 查询AIGC任务列表详细信息
+   */
+  async DescribeAigcTaskList(
+    req: DescribeAigcTaskListRequest,
+    cb?: (error: string, rep: DescribeAigcTaskListResponse) => void
+  ): Promise<DescribeAigcTaskListResponse> {
+    return this.request("DescribeAigcTaskList", req, cb)
   }
 
   /**

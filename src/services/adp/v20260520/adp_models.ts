@@ -1063,59 +1063,13 @@ export interface SearchResourceStatusInfo {
 }
 
 /**
- * 插件详情
+ * 对话端自定义配置(所有模式共用,允许对话中动态修改配置)
  */
-export interface Plugin {
+export interface DialogCustomConfig {
   /**
-   * 插件配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>是否开启对话端动态修改配置</p>
    */
-  Config?: PluginConfig
-  /**
-   * 创建时间，unix时间戳
-   */
-  CreateTime?: string
-  /**
-   * 插件运营管理信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Operation?: PluginOperation
-  /**
-   * 插件id
-   */
-  PluginId?: string
-  /**
-   * 插件版本号
-   */
-  PluginVersion?: number
-  /**
-   * 插件基础信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Profile?: PluginProfile
-  /**
-   * 插件统计信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Statistics?: PluginStatistics
-  /**
-   * <p>插件状态，1:可用，2:不可用 </p><p>枚举值：</p><ul><li>1： 可用</li><li>2： 不可用</li></ul>
-   */
-  Status?: number
-  /**
-   * 工具列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ToolList?: Array<Tool>
-  /**
-   * 更新时间，Unix时间戳
-   */
-  UpdateTime?: string
-  /**
-   * 用户维度的插件状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserState?: PluginUserState
+  Enabled?: boolean
 }
 
 /**
@@ -2919,7 +2873,7 @@ export interface ModifyAppRequest {
    */
   SharedKbIdList?: Array<string>
   /**
-   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility</p>
+   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig, Config.Mode.ClawAgentConfig<br>【Mode.ClawAgentConfig】Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility, Config.Experience.Advanced.DialogCustomConfig</p>
    */
   UpdateMask?: FieldMask
 }
@@ -5835,6 +5789,62 @@ export interface ModelBadge {
 }
 
 /**
+ * 插件详情
+ */
+export interface Plugin {
+  /**
+   * 插件配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config?: PluginConfig
+  /**
+   * 创建时间，unix时间戳
+   */
+  CreateTime?: string
+  /**
+   * 插件运营管理信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operation?: PluginOperation
+  /**
+   * 插件id
+   */
+  PluginId?: string
+  /**
+   * 插件版本号
+   */
+  PluginVersion?: number
+  /**
+   * 插件基础信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Profile?: PluginProfile
+  /**
+   * 插件统计信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Statistics?: PluginStatistics
+  /**
+   * <p>插件状态，1:可用，2:不可用 </p><p>枚举值：</p><ul><li>1： 可用</li><li>2： 不可用</li></ul>
+   */
+  Status?: number
+  /**
+   * 工具列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToolList?: Array<Tool>
+  /**
+   * 更新时间，Unix时间戳
+   */
+  UpdateTime?: string
+  /**
+   * 用户维度的插件状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserState?: PluginUserState
+}
+
+/**
  * DescribeAppTriggerRunLogList返回参数结构体
  */
 export interface DescribeAppTriggerRunLogListResponse {
@@ -6804,19 +6814,24 @@ export interface PluginUserState {
  */
 export interface AppAdvancedConf {
   /**
-   * 是否开启上下文改写
+   * <p>是否开启上下文改写</p>
    */
   EnableContextRewrite: boolean
   /**
-   * 是否开启图文检索
+   * <p>是否开启图文检索</p>
    */
   EnableImageTextRetrieval: boolean
   /**
-   * 回复灵活度
+   * <p>回复灵活度</p>
    */
   ReplyFlexibility: number
   /**
-   * 意图达成优先级
+   * <p>对话端自定义配置(所有模式共用,允许对话中动态修改配置)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DialogCustomConfig?: DialogCustomConfig
+  /**
+   * <p>意图达成优先级</p>
    */
   IntentAchievement?: Array<IntentAchievementInfo>
 }

@@ -321,75 +321,75 @@ export interface SystemDisk {
  */
 export interface ServiceDetail {
   /**
-   * 服务id
+   * <p>服务id</p>
    */
   ServiceId?: string
   /**
-   * 服务名称
+   * <p>服务名称</p>
    */
   ServiceName?: string
   /**
-   * 服务状态
+   * <p>服务状态</p>
    */
   ServiceState?: string
   /**
-   * 运行中的副本数
+   * <p>运行中的副本数</p>
    */
   RunningReplicas?: number
   /**
-   * 期望的副本总数
+   * <p>期望的副本总数</p>
    */
   TotalReplicas?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 算力套餐详情
+   * <p>算力套餐详情</p>
    */
   ComputeSet?: Array<ComputeDetail>
   /**
-   * 模型名称
+   * <p>模型名称</p>
    */
   ModelName?: string
   /**
-   * 服务部署信息
+   * <p>服务部署信息</p>
    */
   DeploymentConfigs?: Array<DeploymentConfig>
   /**
-   * 服务超参数配置
+   * <p>服务超参数配置</p>
    */
   HyperParam?: HyperParam
   /**
-   *
+   * <p>安全类型</p>
    */
   SecurityType?: string
   /**
-   *
+   * <p>角色算力配置列表</p>
    */
   RoleComputeSet?: Array<ComputeDetail>
   /**
-   *
+   * <p>目标副本数</p>
    */
   TargetReplicas?: number
   /**
-   * 计费类型：POSTPAID_BY_HOUR(按量)/PREPAID_BY_MONTH(包月)
+   * <p>计费类型：POSTPAID_BY_HOUR(按量)/PREPAID_BY_MONTH(包月)</p>
    */
   ChargeType?: string
   /**
-   * 到期时间(包月)，按量为空
+   * <p>到期时间(包月)，按量为空</p>
    */
   ExpireTime?: string
   /**
-   * 自动续费标识(包月)
+   * <p>自动续费标识(包月)</p>
    */
   RenewFlag?: string
   /**
-   * 受限状态(如欠费隔离)
+   * <p>受限状态(如欠费隔离)</p>
    */
   RestrictState?: string
   /**
-   * 是否自定义部署：1是 0否
+   * <p>是否自定义部署：1是 0否</p>
    */
   IsCustomDeploy?: number
 }

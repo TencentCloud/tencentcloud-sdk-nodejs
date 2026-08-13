@@ -322,6 +322,10 @@ export interface NoticeContentTmplItem {
    * <p>Slack</p>
    */
   SlackRobot?: Array<SlackRobotNoticeTmplMatcher>
+  /**
+   * <p>Teams 工作流渠道</p>
+   */
+  TeamsWorkflowRobot?: Array<TeamsWorkflowRobotNoticeTmplMatcher>
 }
 
 /**
@@ -350,6 +354,24 @@ export interface CreateNoticeContentTmplResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Microsoft Teams 工作流内容模板配置
+ */
+export interface TeamsWorkflowRobotNoticeTmpl {
+  /**
+   * <p>内容模板</p>
+   */
+  ContentTmpl: string
+  /**
+   * <p>区分 TeamsWorkflow 是自定义内容还是自定义 POST BODY</p><p>枚举值：</p><ul><li>WorkflowText： 自定义内容</li><li>WorkflowJson： 自定义 POST BODY</li></ul>
+   */
+  Version: string
+  /**
+   * <p>标题模版</p>
+   */
+  TitleTmpl?: string
 }
 
 /**
@@ -476,6 +498,20 @@ export interface TriggerDigitalTwinTaskResp {
    * 数字分身任务ID
    */
   TaskID?: number
+}
+
+/**
+ * Microsoft Teams 工作流通知模板的匹配器
+ */
+export interface TeamsWorkflowRobotNoticeTmplMatcher {
+  /**
+   * <p>匹配状态 Invalid; Trigger 告警触发; Recovery 告警恢复</p><p>枚举值：</p><ul><li>Trigger： 告警触发</li><li>Recovery： 告警恢复</li></ul>
+   */
+  MatchingStatus: Array<string>
+  /**
+   * <p>模板配置</p>
+   */
+  Template: TeamsWorkflowRobotNoticeTmpl
 }
 
 /**

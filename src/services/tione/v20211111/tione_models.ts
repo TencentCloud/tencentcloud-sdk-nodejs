@@ -2111,7 +2111,7 @@ export interface TrainingTaskSetItem {
    */
   TrainingMode?: string
   /**
-   * <p>任务状态，eg：SUBMITTING提交中、PENDING排队中、<br>STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成</p>
+   * <p>任务状态</p><p>枚举值：</p><ul><li>SUBMITTING： 提交中</li><li>PENDING： 排队中</li><li>STARTING： 启动中</li><li>RUNNING： 运行中</li><li>STOPPING： 停止中</li><li>STOPPED： 已停止</li><li>FAILED： 异常</li><li>SUCCEED： 已完成</li><li>SUBMIT_FAILED： 提交失败</li></ul>
    */
   Status?: string
   /**
@@ -3447,41 +3447,43 @@ export interface MountInstanceInfo {
  */
 export interface DescribeDatasetsRequest {
   /**
-   * 数据集id列表
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>数据集id列表</p>
    */
   DatasetIds?: Array<string>
   /**
-   * 数据集查询过滤条件，多个Filter之间的关系为逻辑与（AND）关系，过滤字段Filter.Name，类型为String
-DatasetName，数据集名称
-DatasetScope，数据集范围，SCOPE_DATASET_PRIVATE或SCOPE_DATASET_PUBLIC
+   * <p>数据集查询过滤条件，多个Filter之间的关系为逻辑与（AND）关系，过滤字段Filter.Name，类型为String<br>DatasetName，数据集名称<br>DatasetScope，数据集范围，SCOPE_DATASET_PRIVATE或SCOPE_DATASET_PUBLIC</p>
    */
   Filters?: Array<Filter>
   /**
-   * 标签过滤条件
+   * <p>标签过滤条件</p>
    */
   TagFilters?: Array<TagFilter>
   /**
-   * 排序值，支持Asc或Desc，默认Desc
+   * <p>排序值，支持Asc或Desc，默认Desc</p>
    */
   Order?: string
   /**
-   * 排序字段，支持CreateTime或UpdateTime，默认CreateTime
+   * <p>排序字段，支持CreateTime或UpdateTime，默认CreateTime</p>
    */
   OrderField?: string
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset?: number
   /**
-   * 返回数据个数，默认20，最大支持200
+   * <p>返回数据个数，默认20，最大支持200</p>
    */
   Limit?: number
   /**
-   * 是否检查CFS。若开启，则在CFS挂载好之前，不会返回数据集列表。
+   * <p>是否检查CFS。若开启，则在CFS挂载好之前，不会返回数据集列表。</p>
    */
   CFSChecking?: boolean
   /**
-   * 是否返回CFS详情。
+   * <p>是否返回CFS详情。</p>
    */
   CFSDetail?: boolean
 }
@@ -4913,22 +4915,22 @@ export interface Workspace {
  */
 export interface DescribeDatasetsResponse {
   /**
-   * 数据集总量（名称维度）
+   * <p>数据集总量（名称维度）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * 数据集按照数据集名称聚合的分组
+   * <p>数据集按照数据集名称聚合的分组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasetGroups?: Array<DatasetGroup>
   /**
-   * 数据集ID总量
+   * <p>数据集ID总量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasetIdNums?: number
   /**
-   * 若开启了CFSChecking，则检查CFS是否准备完毕。若CFS未准备完毕，则返回true，并且TotalCount为0，DatasetGroups为空。
+   * <p>若开启了CFSChecking，则检查CFS是否准备完毕。若CFS未准备完毕，则返回true，并且TotalCount为0，DatasetGroups为空。</p>
    */
   CFSNotReady?: boolean
   /**
@@ -7314,7 +7316,7 @@ export interface TrainingTaskDetail {
    */
   Message?: string
   /**
-   * <p>任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成</p>
+   * <p>任务状态</p><p>枚举值：</p><ul><li>SUBMITTING： 排队中</li><li>STARTING： 启动中</li><li>RUNNING： 运行中</li><li>STOPPING： 停止中</li><li>STOPPED： 已停止</li><li>FAILED： 异常</li><li>SUCCEED： 已完成</li><li>SUBMIT_FAILED： 提交失败</li></ul>
    */
   Status?: string
   /**

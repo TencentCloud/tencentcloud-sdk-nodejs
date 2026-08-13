@@ -17944,12 +17944,12 @@ export interface WorkflowFolderPage {
  */
 export interface TaskCodeResult {
   /**
-   * 代码内容
+   * <p>base64编码的代码内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeInfo?: string
   /**
-   * 代码文件大小，单位KB
+   * <p>代码文件大小，单位KB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeFileSize?: string

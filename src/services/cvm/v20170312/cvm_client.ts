@@ -190,6 +190,7 @@ import {
   ConfigureChcAssistVpcRequest,
   DescribeImportImageOsRequest,
   CreateLaunchTemplateResponse,
+  NetworkInterfaces,
   CreateKeyPairRequest,
   InstanceStatus,
   SharePermission,

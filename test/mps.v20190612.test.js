@@ -2178,6 +2178,16 @@ it("mps.v20190612.BatchStopStreamLinkFlow", async function () {
     }
 })
 
+it("mps.v20190612.DescribeAigcTaskList", async function () {
+    try {
+       const data = await client.DescribeAigcTaskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteSchedule", async function () {
     try {
        const data = await client.DeleteSchedule({})

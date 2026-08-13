@@ -1752,19 +1752,19 @@ export interface SqlGatewayItem {
  */
 export interface DeleteTableConfigRequest {
   /**
-   * 作业ID
+   * <p>作业ID</p>
    */
   JobId: string
   /**
-   * 调试作业ID
+   * <p>调试作业ID</p>
    */
   DebugId: number
   /**
-   * 表名
+   * <p>表名</p>
    */
   TableName: string
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
    */
   WorkSpaceId?: string
 }

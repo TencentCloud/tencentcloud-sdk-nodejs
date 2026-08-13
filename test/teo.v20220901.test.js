@@ -2298,6 +2298,16 @@ it("teo.v20220901.DescribeInferenceServiceDeploymentLogs", async function () {
     }
 })
 
+it("teo.v20220901.DummyParseZoneFullConfig", async function () {
+    try {
+       const data = await client.DummyParseZoneFullConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeOriginGroupHealthStatus", async function () {
     try {
        const data = await client.DescribeOriginGroupHealthStatus({})

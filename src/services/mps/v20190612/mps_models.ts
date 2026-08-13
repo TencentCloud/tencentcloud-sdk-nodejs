@@ -4083,7 +4083,7 @@ export interface DescribeImageSpriteTemplatesRequest {
  */
 export interface FissionTaskInfo {
   /**
-   * <p>视频输出时长</p><p>取值范围：[1, 15]</p><p>单位：秒</p><p>默认值：15</p>
+   * <p>视频输出时长</p><p>取值范围：[4, 15]</p><p>单位：秒</p><p>默认值：15</p>
    */
   Duration?: number
   /**
@@ -4103,7 +4103,7 @@ export interface FissionTaskInfo {
    */
   Market?: string
   /**
-   * <p>口播/字幕语言</p><p>枚举值：</p><ul><li>english： 英文</li><li>chinese： 中文</li><li>japanese： 日语</li><li>korean： 汉语</li><li>spanish： 西班牙语</li><li>portuguese： 葡萄牙语</li><li>music_only： 纯音乐无口播</li></ul>
+   * <p>口播/字幕语言</p><p>枚举值：</p><ul><li>english： 英文</li><li>chinese： 中文</li><li>japanese： 日语</li><li>korean： 韩语</li><li>spanish： 西班牙语</li><li>portuguese： 葡萄牙语</li><li>music_only： 纯音乐无口播</li></ul>
    */
   Language?: string
   /**
@@ -7392,6 +7392,32 @@ export interface AiReviewTaskTerrorismOcrResult {
 }
 
 /**
+ * DescribeAigcTaskList返回参数结构体
+ */
+export interface DescribeAigcTaskListResponse {
+  /**
+   * <p>当前任务待返回总数</p>
+   */
+  Total?: number
+  /**
+   * <p>开始查询页</p>
+   */
+  PageNum?: number
+  /**
+   * <p>当前页要获取数据条目数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>任务详情数据</p>
+   */
+  Tasks?: Array<AigcTaskListItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStreamPackageSSAIChannel请求参数结构体
  */
 export interface DescribeStreamPackageSSAIChannelRequest {
@@ -8136,25 +8162,60 @@ eu-west-3
 }
 
 /**
- * DescribeStreamPackageLinearAssemblyPrograms请求参数结构体
+ * Aigc任务详细信息
  */
-export interface DescribeStreamPackageLinearAssemblyProgramsRequest {
+export interface AigcTaskListItem {
   /**
-   * 页数，取值范围为[1, 1000]。
+   * <p>任务ID</p>
    */
-  PageNum?: number
+  TaskId?: string
   /**
-   * 每页大小，取值范围为[1, 10000]。
+   * <p>任务类型</p><p>枚举值：</p><ul><li>VideoRedraw： 转绘任务</li><li>AIDrama： AI漫剧任务</li></ul>
    */
-  PageSize?: number
+  TaskType?: string
   /**
-   * 查询某个Channel下面的所有Program。
+   * <p>任务状态</p><p>枚举值：</p><ul><li>PENDING： 任务等待调度</li><li>RUNNING： 任务运行中</li><li>FINISHED： 任务执行成功</li><li>STOP： 任务被中止</li><li>FAILED： 任务失败</li><li>TIMEOUT： 任务超时</li></ul>
    */
-  ChannelId?: string
+  TaskStatus?: string
   /**
-   * 按Name过滤，模糊匹配
+   * <p>任务创建时间</p>
    */
-  Name?: string
+  CreateTime?: string
+  /**
+   * <p>任务开始调度时间</p>
+   */
+  ScheduledTime?: string
+  /**
+   * <p>任务结束时间</p>
+   */
+  FinishedTime?: string
+  /**
+   * <p>任务结果Url</p>
+   */
+  Urls?: Array<string>
+  /**
+   * <p>任务执行错误码</p>
+   */
+  TaskResultCode?: number
+  /**
+   * <p>任务执行错误信息</p>
+   */
+  TaskResultMsg?: string
+  /**
+   * <p>输出视频的分辨率</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resolution?: string
+  /**
+   * <p>输出视频的宽高比</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ratio?: string
+  /**
+   * <p>任务请求包</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestBody?: string
 }
 
 /**
@@ -13411,13 +13472,25 @@ export interface DescribePersonSamplesRequest {
 }
 
 /**
- * EnableSchedule返回参数结构体
+ * DescribeStreamPackageLinearAssemblyPrograms请求参数结构体
  */
-export interface EnableScheduleResponse {
+export interface DescribeStreamPackageLinearAssemblyProgramsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 页数，取值范围为[1, 1000]。
    */
-  RequestId?: string
+  PageNum?: number
+  /**
+   * 每页大小，取值范围为[1, 10000]。
+   */
+  PageSize?: number
+  /**
+   * 查询某个Channel下面的所有Program。
+   */
+  ChannelId?: string
+  /**
+   * 按Name过滤，模糊匹配
+   */
+  Name?: string
 }
 
 /**
@@ -20914,6 +20987,32 @@ export interface DeleteProcessImageTemplateResponse {
 export type DescribeStreamLinkSecurityGroupsRequest = null
 
 /**
+ * 查询AIGC任务列表过滤条件
+ */
+export interface QueryTaskFilter {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务类型</p>
+   */
+  TaskType?: string
+  /**
+   * <p>任务状态</p>
+   */
+  TaskStatus?: string
+  /**
+   * <p>分辨率</p>
+   */
+  Resolution?: string
+  /**
+   * <p>宽高比</p>
+   */
+  Ratio?: string
+}
+
+/**
  * 文本全文本识别任务控制参数
  */
 export interface OcrFullTextConfigureInfoForUpdate {
@@ -26127,6 +26226,16 @@ export interface LiveStreamAiReviewResultInfo {
 }
 
 /**
+ * EnableSchedule返回参数结构体
+ */
+export interface EnableScheduleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 该channel下面Program的调度信息。
  */
 export interface ProgramScheduleInfo {
@@ -27216,6 +27325,24 @@ export interface HighlightSegmentItem {
    * 集锦概要。
    */
   Summary?: string
+}
+
+/**
+ * DescribeAigcTaskList请求参数结构体
+ */
+export interface DescribeAigcTaskListRequest {
+  /**
+   * <p>开始查询页</p>
+   */
+  PageNum?: number
+  /**
+   * <p>当前页要获取多少数据</p>
+   */
+  PageSize?: number
+  /**
+   * <p>查询过滤条件</p>
+   */
+  QueryTaskFilter?: QueryTaskFilter
 }
 
 /**

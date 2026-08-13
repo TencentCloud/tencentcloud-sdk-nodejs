@@ -6855,9 +6855,13 @@ export type DescribeLiveSnapshotRulesRequest = null
  */
 export interface SwitchCasterToEmergencyRequest {
   /**
-   * 导播台ID。
+   * <p>导播台ID。</p>
    */
   CasterId: number
+  /**
+   * <p>是否启用从头开始播放功能，仅对单点播输入源生效</p><p>默认值：false</p>
+   */
+  FromBeginning?: boolean
 }
 
 /**
@@ -13391,10 +13395,7 @@ export interface DeleteCasterLayoutInfoResponse {
  */
 export interface SwitchCasterToEmergencyResponse {
   /**
-   * 备播状态，范围[0,1,2]
-0. 正常直播状态
-1. 备播状态
-2. 备播切换正常直播中，在配置了延播时长时出现
+   * <p>备播状态，范围[0,1,2]</p><ol start="0"><li>正常直播状态</li><li>备播状态</li><li>备播切换正常直播中，在配置了延播时长时出现</li></ol>
    */
   EmergencyStatus?: number
   /**
