@@ -1264,7 +1264,7 @@ export interface SearchClusterTablesResponse {
  */
 export interface DescribeClusterDetailRequest {
   /**
-   * 集群Id
+   * <p>集群Id</p>
    */
   ClusterId: string
 }
@@ -1611,7 +1611,7 @@ export interface CynosdbInstance {
    */
   Region?: string
   /**
-   * <p>可用区</p>
+   * <p>集群主可用区</p>
    */
   Zone?: string
   /**
@@ -1772,7 +1772,7 @@ export interface CynosdbInstance {
    */
   ResourceTags?: Array<Tag>
   /**
-   * <p>主可用区</p>
+   * <p>读写实例当前所在可用区</p>
    */
   MasterZone?: string
   /**
@@ -1817,6 +1817,10 @@ export interface CynosdbInstance {
    * <p>全球数据库唯一标识</p>
    */
   GdnId?: string
+  /**
+   * <p>实例当前所在可用区</p>
+   */
+  RealZone?: string
 }
 
 /**
@@ -12446,7 +12450,7 @@ export interface CynosdbClusterDetail {
    */
   Region?: string
   /**
-   * <p>可用区</p>
+   * <p>集群主可用区</p>
    */
   Zone?: string
   /**
@@ -12566,7 +12570,7 @@ export interface CynosdbClusterDetail {
    */
   Tasks?: Array<ObjectTask>
   /**
-   * <p>主可用区</p>
+   * <p>读写实例当前所在可用区</p>
    */
   MasterZone?: string
   /**
@@ -12665,6 +12669,10 @@ export interface CynosdbClusterDetail {
    * <p>是否开启透明加密</p>
    */
   IsOpenTDE?: boolean
+  /**
+   * <p>实例当前所在可用区</p>
+   */
+  RealZone?: string
 }
 
 /**
@@ -12963,7 +12971,7 @@ export interface ModifyAuditServiceResponse {
  */
 export interface DescribeClusterDetailResponse {
   /**
-   * 集群详细信息
+   * <p>集群详细信息</p>
    */
   Detail?: CynosdbClusterDetail
   /**

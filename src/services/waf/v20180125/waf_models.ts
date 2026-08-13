@@ -8125,6 +8125,10 @@ export interface ClbObject {
    */
   ApiStatus?: number
   /**
+   * <p>LLMWAF开关</p>
+   */
+  LLMStatus?: number
+  /**
    * <p>对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式</p>
    */
   ObjectFlowMode?: number

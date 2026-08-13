@@ -457,33 +457,41 @@ export interface StopChatAIRequest {
  */
 export interface SearchConfig {
   /**
-   * 检索类型：0:混合搜索 1：向量搜索 2：全文搜索
+   * <p>检索类型：0:混合搜索 1：向量搜索 2：全文搜索</p>
    */
   Type?: number
   /**
-   * 召回数量最大值
+   * <p>召回数量最大值</p>
    */
   Num?: number
   /**
-   * 权重配置
+   * <p>权重配置</p>
    */
   EmbeddingWeight?: number
   /**
-   * 0:关闭 1:开启，默认1
+   * <p>0:关闭 1:开启，默认1</p>
    */
   Rerank?: number
   /**
-   * 0:关闭 1:开启，默认0
+   * <p>0:关闭 1:开启，默认0</p>
    */
   AutoRag?: number
   /**
-   * AutoRag关联的知识库ID列表
+   * <p>AutoRag关联的知识库ID列表</p>
    */
   KnowledgeBaseIds?: Array<string>
   /**
-   * AutoRag搜索状态：0-未完成，1-已完成。仅当AutoRag=1时，该字段有效
+   * <p>AutoRag搜索状态：0-未完成，1-已完成。仅当AutoRag=1时，该字段有效</p>
    */
   SearchStatus?: number
+  /**
+   * <p>0:关闭 1:开启图谱检索，默认0</p>
+   */
+  EnableGraphSearch?: number
+  /**
+   * <p>0:关闭 1:开启树检索，默认0</p>
+   */
+  EnableTreeSearch?: number
 }
 
 /**
@@ -1058,6 +1066,22 @@ export interface FileInfo {
    * <p>文件能力标识列表</p>
    */
   Capabilities?: Array<string>
+  /**
+   * <p>0:关闭 1:开启图谱构建（入库时构建图谱），默认0</p>
+   */
+  EnableGraphBuild?: number
+  /**
+   * <p>0:关闭 1:开启树构建（入库时构建树），默认0</p>
+   */
+  EnableTreeBuild?: number
+  /**
+   * <p>图谱构建状态：null=未启用图谱; 0=待入库; 1=入库中; 2=入库成功; -1=入库失败（仅 EnableGraphBuild=1 时有意义）</p>
+   */
+  GraphBuildStatus?: number
+  /**
+   * <p>图谱构建状态：null=未启用图谱; 0=待入库; 1=入库中; 2=入库成功; -1=入库失败（仅 EnableGraphBuild=1 时有意义）</p>
+   */
+  TreeBuildStatus?: number
 }
 
 /**
@@ -1389,6 +1413,14 @@ export interface KnowledgeTaskConfig {
    * <p>是否开启表格结构化提取</p><p>枚举值：</p><ul><li>0： 不开启表格提取</li><li>1： 开启表格提取</li></ul><p>默认值：1</p>
    */
   EnableExtractDb?: number
+  /**
+   * <p>0:关闭 1:开启图谱构建（入库时），默认0</p>
+   */
+  EnableGraphBuild?: number
+  /**
+   * <p>0:关闭 1:开启树构建（入库时），默认0</p>
+   */
+  EnableTreeBuild?: number
 }
 
 /**

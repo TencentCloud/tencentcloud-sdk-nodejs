@@ -138,7 +138,7 @@ export interface DetailResults {
    */
   Score?: number
   /**
-   * <p>该字段用于返回自定义关键词对应的词库类型，取值为<strong>1</strong>（黑白库）和<strong>2</strong>（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。</p>
+   * <p>该字段用于返回自定义关键词对应的词库类型，取值为<strong>1</strong>（黑白库）和<strong>2</strong>（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。</p><p>枚举值：</p><ul><li>1： 黑白库</li><li>2： 自定义关键词库</li></ul>
    */
   LibType?: number
   /**
@@ -162,6 +162,11 @@ export interface DetailResults {
    * <p>该字段用于返回违规文本命中信息</p>
    */
   HitInfos?: Array<HitInfo>
+  /**
+   * <p>该字段用于标记导致本次审核命中标签的原文内容位置信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HitSnippetInfos?: Array<HitSnippetInfo>
 }
 
 /**
@@ -200,6 +205,10 @@ export interface TextModerationRequest {
    * <p>适用于上下文关联审核场景，若多条文本内容需要联合审核，通过该字段关联会话。</p>
    */
   SessionId?: string
+  /**
+   * <p>该参数是送审客户的自定义参数，可用于标记客户的一些内部信息方便做审核明细取数筛选，没有特殊需求客户可不填写</p>
+   */
+  BizTag?: string
 }
 
 /**

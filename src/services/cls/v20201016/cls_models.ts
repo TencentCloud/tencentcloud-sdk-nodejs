@@ -3605,61 +3605,51 @@ export interface DescribeCloudProductLogTasksRequest {
  */
 export interface CreateAlarmNoticeRequest {
   /**
-   * 通知渠道组名称。最大支持255个字节。 不支持 '|'。
+   * <p>通知渠道组名称。最大支持255个字节。 不支持 &#39;|&#39;。</p>
    */
   Name: string
   /**
-   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持50个标签键值对，并且不能有重复的键值对。
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持50个标签键值对，并且不能有重复的键值对。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）
-需要发送通知的告警类型。可选值：
-- Trigger - 告警触发
-- Recovery - 告警恢复
-- All - 告警触发和告警恢复
+   * <p>【简易模式】（简易模式/告警模式二选一，分别配置相应参数）<br>需要发送通知的告警类型。可选值：</p><ul><li>Trigger - 告警触发</li><li>Recovery - 告警恢复</li><li>All - 告警触发和告警恢复</li></ul>
    */
   Type?: string
   /**
-   * 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）
-通知接收对象。
+   * <p>【简易模式】（简易模式/告警模式二选一，分别配置相应参数）<br>通知接收对象。</p>
    */
   NoticeReceivers?: Array<NoticeReceiver>
   /**
-   * 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）
-接口回调信息（包括企业微信、钉钉、飞书）。
+   * <p>【简易模式】（简易模式/告警模式二选一，分别配置相应参数）<br>接口回调信息（包括企业微信、钉钉、飞书）。</p>
    */
   WebCallbacks?: Array<WebCallback>
   /**
-   * 【高级模式】（简易模式/告警模式二选一，分别配置相应参数）
-通知规则。
+   * <p>【高级模式】（简易模式/告警模式二选一，分别配置相应参数）<br>通知规则。</p>
    */
   NoticeRules?: Array<NoticeRule>
   /**
-   * 查询数据链接。http:// 或者 https:// 开头，不能/结尾
+   * <p>查询数据链接。http:// 或者 https:// 开头，不能/结尾</p>
    */
   JumpDomain?: string
   /**
-   * 投递日志开关。可取值如下：
-1：关闭（默认值）；
-2：开启 
-投递日志开关开启时， DeliverConfig参数必填。
+   * <p>投递日志开关。可取值如下：<br>1：关闭（默认值）；<br>2：开启<br>投递日志开关开启时， DeliverConfig参数必填。</p>
    */
   DeliverStatus?: number
   /**
-   * 投递日志配置参数。当DeliverStatus开启时，必填。
+   * <p>投递日志配置参数。当DeliverStatus开启时，必填。</p>
    */
   DeliverConfig?: DeliverConfig
   /**
-   * 免登录操作告警开关。可取值如下：
--      1：关闭
--      2：开启（默认值）
+   * <p>免登录操作告警开关。可取值如下：</p><ul><li>1：关闭</li><li>2：开启（默认值）</li></ul>
    */
   AlarmShieldStatus?: number
   /**
-   * 统一设定自定义回调参数。
--  true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。
--  false:优先使用告警策略中单独配置的请求头及请求内容。
+   * <p>告警详情安全认证跳转开关，未传时默认&quot;关闭&quot;</p><p>枚举值：</p><ul><li>1： 关闭（默认值）</li><li>2： 开启</li></ul>
+   */
+  SecureDetailStatus?: number
+  /**
+   * <p>统一设定自定义回调参数。</p><ul><li>true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。</li><li>false:优先使用告警策略中单独配置的请求头及请求内容。</li></ul>
    */
   CallbackPrioritize?: boolean
 }
@@ -5297,71 +5287,55 @@ export interface DescribeConsumerOffsetsRequest {
  */
 export interface ModifyAlarmNoticeRequest {
   /**
-   * 通知渠道组ID。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/api/614/56462)获取通知渠道组ID
+   * <p>通知渠道组ID。-通过<a href="https://cloud.tencent.com/document/api/614/56462">获取通知渠道组列表</a>获取通知渠道组ID</p>
    */
   AlarmNoticeId: string
   /**
-   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持10个标签键值对，并且不能有重复的键值对。
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持10个标签键值对，并且不能有重复的键值对。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 通知渠道组名称。
+   * <p>通知渠道组名称。</p>
    */
   Name?: string
   /**
-   * 通知类型。可选值：
-<li> Trigger - 告警触发</li>
-<li> Recovery - 告警恢复</li>
-<li> All - 告警触发和告警恢复</li>
+   * <p>通知类型。可选值：</p><li> Trigger - 告警触发</li><li> Recovery - 告警恢复</li><li> All - 告警触发和告警恢复</li>
    */
   Type?: string
   /**
-   * 通知接收对象。
+   * <p>通知接收对象。</p>
    */
   NoticeReceivers?: Array<NoticeReceiver>
   /**
-   * 接口回调信息（包括企业微信等）。
+   * <p>接口回调信息（包括企业微信等）。</p>
    */
   WebCallbacks?: Array<WebCallback>
   /**
-   * 通知规则。
-
-注意: 
-
-- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。
-- 传其中一组数据，则另一组数据置空。
+   * <p>通知规则。</p><p>注意: </p><ul><li>Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。</li><li>传其中一组数据，则另一组数据置空。</li></ul>
    */
   NoticeRules?: Array<NoticeRule>
   /**
-   * 调用链接域名。http:// 或者 https:// 开头，不能/结尾
+   * <p>调用链接域名。http:// 或者 https:// 开头，不能/结尾</p>
    */
   JumpDomain?: string
   /**
-   * 投递日志开关。
-
-参数值：
-1：关闭；
-
-2：开启 
-
+   * <p>投递日志开关。</p><p>参数值：<br>1：关闭；</p><p>2：开启</p>
    */
   DeliverStatus?: number
   /**
-   * 投递日志配置。
+   * <p>投递日志配置。</p>
    */
   DeliverConfig?: DeliverConfig
   /**
-   * 免登录操作告警开关。
-
-参数值： 
-        1：关闭
-        2：开启（默认开启）
+   * <p>免登录操作告警开关。</p><p>参数值：<br>        1：关闭<br>        2：开启（默认开启）</p>
    */
   AlarmShieldStatus?: number
   /**
-   * 统一设定自定义回调参数。
--  true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。
--  false:优先使用告警策略中单独配置的请求头及请求内容。
+   * <p>告警详情安全认证跳转开关，未传时默认&quot;关闭&quot;</p><p>枚举值：</p><ul><li>1： 关闭（默认值）</li><li>2： 开启</li></ul>
+   */
+  SecureDetailStatus?: number
+  /**
+   * <p>统一设定自定义回调参数。</p><ul><li>true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。</li><li>false:优先使用告警策略中单独配置的请求头及请求内容。</li></ul>
    */
   CallbackPrioritize?: boolean
 }
@@ -10587,7 +10561,7 @@ export interface WebCallback {
  */
 export interface CreateAlarmNoticeResponse {
   /**
-   * 告警模板ID
+   * <p>告警模板ID</p>
    */
   AlarmNoticeId?: string
   /**
@@ -14874,90 +14848,73 @@ export interface MultiTopicSearchInformation {
  */
 export interface AlarmNotice {
   /**
-   * 告警通知渠道组名称。
+   * <p>告警通知渠道组名称。</p>
    */
   Name?: string
   /**
-   * 告警通知渠道组绑定的标签信息。
+   * <p>告警通知渠道组绑定的标签信息。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 告警模板的类型。可选值：
-<br><li> Trigger - 告警触发</li>
-<br><li> Recovery - 告警恢复</li>
-<br><li> All - 告警触发和告警恢复</li>
+   * <p>告警模板的类型。可选值：<br><br><li> Trigger - 告警触发</li><br><br><li> Recovery - 告警恢复</li><br><br><li> All - 告警触发和告警恢复</li></p>
    */
   Type?: string
   /**
-   * 告警通知模板接收者信息。
+   * <p>告警通知模板接收者信息。</p>
    */
   NoticeReceivers?: Array<NoticeReceiver>
   /**
-   * 告警通知模板回调信息。
+   * <p>告警通知模板回调信息。</p>
    */
   WebCallbacks?: Array<WebCallback>
   /**
-   * 告警通知模板ID。
+   * <p>告警通知模板ID。</p>
    */
   AlarmNoticeId?: string
   /**
-   * 通知规则。
+   * <p>通知规则。</p>
    */
   NoticeRules?: Array<NoticeRule>
   /**
-   * 免登录操作告警开关。
-参数值： 1：关闭 2：开启（默认开启）
+   * <p>免登录操作告警开关。<br>参数值： 1：关闭 2：开启（默认开启）</p>
    */
   AlarmShieldStatus?: number
   /**
-   * 调用链接域名。http:// 或者 https:// 开头，不能/结尾
+   * <p>告警详情需要安全认证登录开关，未传时默认&quot;关闭&quot;</p><p>枚举值：</p><ul><li>1： 关闭（默认值）</li><li>2： 开启</li></ul>
+   */
+  SecureDetailStatus?: number
+  /**
+   * <p>调用链接域名。http:// 或者 https:// 开头，不能/结尾</p>
    */
   JumpDomain?: string
   /**
-   * 投递相关信息。
+   * <p>投递相关信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmNoticeDeliverConfig?: AlarmNoticeDeliverConfig
   /**
-   * 创建时间。格式： YYYY-MM-DD HH:MM:SS
+   * <p>创建时间。格式： YYYY-MM-DD HH:MM:SS</p>
    */
   CreateTime?: string
   /**
-   * 最近更新时间。格式： YYYY-MM-DD HH:MM:SS
+   * <p>最近更新时间。格式： YYYY-MM-DD HH:MM:SS</p>
    */
   UpdateTime?: string
   /**
-   * 投递日志开关。
-
-参数值：
-
-1：关闭
-
-2：开启 
-
+   * <p>投递日志开关。</p><p>参数值：</p><p>1：关闭</p><p>2：开启</p>
    */
   DeliverStatus?: number
   /**
-   * 投递日志标识。
-
-参数值：
-
-1：未启用
-
-2：已启用
-
-3：投递异常
+   * <p>投递日志标识。</p><p>参数值：</p><p>1：未启用</p><p>2：已启用</p><p>3：投递异常</p>
    */
   DeliverFlag?: number
   /**
-   * 通知渠道组配置的告警屏蔽统计状态数量信息。
+   * <p>通知渠道组配置的告警屏蔽统计状态数量信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmShieldCount?: AlarmShieldCount
   /**
-   * 统一设定自定义回调参数。
--  true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。
--  false:优先使用告警策略中单独配置的请求头及请求内容。
+   * <p>统一设定自定义回调参数。</p><ul><li>true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。</li><li>false:优先使用告警策略中单独配置的请求头及请求内容。</li></ul>
    */
   CallbackPrioritize?: boolean
 }

@@ -31,7 +31,6 @@ import {
   DescribeReportMissionListResponse,
   CdsAuditInstance,
   DescribeDbauditUsedRegionsResponse,
-  AuditCapability,
   CreateTimerReportResponse,
   RegionInfo,
   DescribeDbauditInstancesRequest,

@@ -444,169 +444,165 @@ export interface ResetInstancesTypeRequest {
  */
 export interface ChcHost {
   /**
-   * CHC物理服务器ID。
+   * <p>CHC物理服务器ID。</p>
    */
   ChcId?: string
   /**
-   * 实例名称。
+   * <p>实例名称。</p>
    */
   InstanceName?: string
   /**
-   * 服务器序列号。
+   * <p>服务器序列号。</p>
    */
   SerialNumber?: string
   /**
-   * CHC的状态<br/>
-<ul>
-<li>INIT: 设备已录入。还未配置带外和部署网络</li>
-<li>READY: 已配置带外和部署网络</li>
-<li>PREPARED: 可分配云主机</li>
-<li>ONLINE: 已分配云主机</li>
-<li>OPERATING: 设备操作中，如正在配置带外网络等。</li>
-<li>CLEAR_NETWORK_FAILED: 清理带外和部署网络失败</li>
-</ul>
+   * <p>CHC的状态<br></p><ul><li>INIT: 设备已录入。还未配置带外和部署网络</li><li>READY: 已配置带外和部署网络</li><li>PREPARED: 可分配云主机</li><li>ONLINE: 已分配云主机</li><li>OPERATING: 设备操作中，如正在配置带外网络等。</li><li>CLEAR_NETWORK_FAILED: 清理带外和部署网络失败</li></ul>
    */
   InstanceState?: string
   /**
-   * 设备类型。
+   * <p>设备类型。</p>
    */
   DeviceType?: string
   /**
-   * 所属可用区
+   * <p>所属可用区。</p>
    */
   Placement?: Placement
   /**
-   * 带外网络。
+   * <p>带外网络。</p>
    */
   BmcVirtualPrivateCloud?: VirtualPrivateCloud
   /**
-   * 带外网络Ip。
+   * <p>带外网络IP。</p>
    */
   BmcIp?: string
   /**
-   * 带外网络安全组Id。
+   * <p>带外网络安全组ID。</p>
    */
   BmcSecurityGroupIds?: Array<string>
   /**
-   * 部署网络。
+   * <p>部署网络。</p>
    */
   DeployVirtualPrivateCloud?: VirtualPrivateCloud
   /**
-   * 部署网络Ip。
+   * <p>部署网络IP。</p>
    */
   DeployIp?: string
   /**
-   * 部署网络安全组Id。
+   * <p>部署网络安全组ID。</p>
    */
   DeploySecurityGroupIds?: Array<string>
   /**
-   * 关联的云主机Id。
+   * <p>关联的云主机ID。</p>
    */
   CvmInstanceId?: string
   /**
-   * 服务器导入的时间。
+   * <p>服务器导入的时间。</p>
    */
   CreatedTime?: string
   /**
-   * 机型的硬件描述，分别为CPU核数，内存容量和磁盘容量
+   * <p>机型的硬件描述，分别为CPU核数，内存容量和磁盘容量。</p>
    */
   HardwareDescription?: string
   /**
-   * CHC物理服务器的CPU核数
+   * <p>CHC物理服务器的CPU核数。</p>
    */
   CPU?: number
   /**
-   * CHC物理服务器的内存大小，单位为GB
+   * <p>CHC物理服务器的内存大小，单位为GB。</p>
    */
   Memory?: number
   /**
-   * CHC物理服务器的磁盘信息
+   * <p>CHC物理服务器的磁盘信息。</p>
    */
   Disk?: string
   /**
-   * 带外网络下分配的MAC地址
+   * <p>带外网络下分配的MAC地址。</p>
    */
   BmcMAC?: string
   /**
-   * 部署网络下分配的MAC地址
+   * <p>部署网络下分配的MAC地址。</p>
    */
   DeployMAC?: string
   /**
-   * 设备托管类型。
-HOSTING: 托管
-TENANT: 租赁
+   * <p>设备托管类型。</p><p>枚举值：</p><ul><li>HOSTING： 托管类型。</li><li>TENANT： 租赁类型。</li></ul>
    */
   TenantType?: string
   /**
-   * chc dhcp选项，用于minios调试。
+   * <p>CHC DHCP选项，用于客户自建PXE环境。</p>
    */
   DeployExtraConfig?: ChcDeployExtraConfig
   /**
-   * GPU型号。
+   * <p>GPU型号。</p>
    */
   Gpu?: string
   /**
-   * 网卡型号。主要指RDMA网卡。
+   * <p>网卡型号。主要指RDMA网卡。</p>
    */
   NetworkCard?: string
   /**
-   * 是否是预定义机型。
+   * <p>是否是预定义机型。</p>
    */
   IsPredefinedType?: boolean
   /**
-   * CHC云主机机型。
+   * <p>CHC云主机机型。</p>
    */
   ChcInstanceType?: string
   /**
-   * CHC云主机机型簇。
+   * <p>CHC云主机机型簇。</p>
    */
   ChcInstanceFamily?: string
   /**
-   * CHC云主机机型簇名称。
+   * <p>CHC云主机机型簇名称。</p>
    */
   ChcInstanceFamilyName?: string
   /**
-   * 转售客户的AppId。
+   * <p>转售客户的AppID。</p>
    */
   ResaleAppId?: string
   /**
-   * 转售客户的账号ID。
+   * <p>转售客户的账号ID。</p>
    */
   ResaleAccountId?: string
   /**
-   * 售卖状态。<br/>
-<ul>
-<li>NOT_FOR_SALE:不可售卖</li>
-<li>AVAILABLE: 可售卖</li>
-<li>SOLD: 已售卖</li>
-</ul>
-
+   * <p>售卖状态。<br></p><ul><li>NOT_FOR_SALE:不可售卖</li><li>AVAILABLE: 可售卖</li><li>SOLD: 已售卖</li></ul>
    */
   SaleStatus?: string
   /**
-   * CHC物理服务器关联的标签列表。
+   * <p>CHC物理服务器关联的标签列表。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 最近操作
+   * <p>最近操作。</p>
    */
   LatestOperation?: string
   /**
-   * 最近操作错误码
+   * <p>最近操作错误码。</p>
    */
   LatestOperationErrorCode?: string
   /**
-   * 最近操作错误详情和建议项
+   * <p>最近操作错误详情和建议项。</p>
    */
   LatestOperationErrorMsg?: string
   /**
-   * 最近操作名称
+   * <p>最近操作名称。</p>
    */
   LatestOperationName?: string
   /**
-   * 最近操作状态
+   * <p>最近操作状态。</p><p>枚举值：</p><ul><li>SUCCESS： 成功。</li><li>FAILED： 失败。</li></ul>
    */
   LatestOperationState?: string
+  /**
+   * <p>所在的CHC网关的ID，只有专属网关才会返回。</p>
+   */
+  ChcGatewayId?: string
+  /**
+   * <p>所属的CDC集群ID。</p>
+   */
+  DedicatedClusterId?: string
+  /**
+   * <p>业务网卡网络模式。</p><p>枚举值：</p><ul><li>DEPLOY： 部署网络模式</li><li>BUSINESS： 业务网络模式</li></ul>
+   */
+  NetworkMode?: string
 }
 
 /**

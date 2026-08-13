@@ -7999,11 +7999,11 @@ export interface ItemCoord {
    */
   Y: number
   /**
-   * <p>宽width。</p>
+   * <p>宽width。</p><p>单位：px</p>
    */
   Width: number
   /**
-   * <p>高height。</p>
+   * <p>高height。</p><p>单位：px</p>
    */
   Height: number
 }

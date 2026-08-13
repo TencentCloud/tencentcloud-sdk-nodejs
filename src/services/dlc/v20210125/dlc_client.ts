@@ -494,6 +494,7 @@ import {
   GetLabDetailRequest,
   DescribeUpdatableDataEnginesRequest,
   ModifySparkAppBatchRequest,
+  ImageDto,
   DeleteTableRequest,
   DescribeStoreLocationRequest,
   AddUsersToWorkGroupResponse,
@@ -725,6 +726,7 @@ import {
   DescribeStandardEngineResourceGroupConfigInfoRequest,
   ListExampleCategoriesResponse,
   StreamingStatistics,
+  ListImagesResponse,
   TaskResponseInfo,
   OperateEngineResourceGroupFailMessage,
   GetRayJobHistoryRequest,
@@ -765,6 +767,7 @@ import {
   CancelTasksResponse,
   EventLogItem,
   InitializeTCLakeResponse,
+  ListImagesRequest,
   DescribeDataEnginesRequest,
   JobLogResult,
   DropDMSDatabaseResponse,
@@ -955,6 +958,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskMonitorInfosResponse) => void
   ): Promise<DescribeTaskMonitorInfosResponse> {
     return this.request("DescribeTaskMonitorInfos", req, cb)
+  }
+
+  /**
+   * 更新spark作业
+   */
+  async ModifySparkApp(
+    req: ModifySparkAppRequest,
+    cb?: (error: string, rep: ModifySparkAppResponse) => void
+  ): Promise<ModifySparkAppResponse> {
+    return this.request("ModifySparkApp", req, cb)
   }
 
   /**
@@ -2188,7 +2201,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询当前地域可售卖的资源规格和最大配额
+   * 查询当前地域可售卖的资源规格、最大配额，以及库存情况。StatusCategory 与 DescribePartitionAvailableQuota 数据同源，将实时可新增数量映射为库存分级；当请求 Region 与资源池实际部署地域不一致，或服务 cold-start 快照尚未就绪时，StatusCategory 为 null。
    */
   async DescribeSaleResourceInfo(
     req?: DescribeSaleResourceInfoRequest,
@@ -3420,13 +3433,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新spark作业
+   * 列出所有镜像
    */
-  async ModifySparkApp(
-    req: ModifySparkAppRequest,
-    cb?: (error: string, rep: ModifySparkAppResponse) => void
-  ): Promise<ModifySparkAppResponse> {
-    return this.request("ModifySparkApp", req, cb)
+  async ListImages(
+    req: ListImagesRequest,
+    cb?: (error: string, rep: ListImagesResponse) => void
+  ): Promise<ListImagesResponse> {
+    return this.request("ListImages", req, cb)
   }
 
   /**

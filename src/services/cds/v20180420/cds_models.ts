@@ -20,7 +20,7 @@
  */
 export interface CreateReportPdfRequest {
   /**
-   * 报表 Id
+   * <p>报表 Id</p>
    */
   Id: number
 }
@@ -226,7 +226,7 @@ export interface InquiryPriceDbauditInstanceRequest {
  */
 export interface CreateReportPdfResponse {
   /**
-   * 下载地址
+   * <p>下载地址</p>
    */
   Url?: string
   /**
@@ -418,10 +418,6 @@ export interface AssetsInfo {
    */
   IsNewCloudAudit?: boolean
   /**
-   * <p>审计功能支持说明</p>
-   */
-  AuditCapability?: Array<AuditCapability>
-  /**
    * <p>1</p><p>取值范围：[0, 1]</p>
    */
   TrafficMirrorOn?: number
@@ -433,6 +429,10 @@ export interface AssetsInfo {
    * <p>实例集群ID</p>
    */
   InstanceGroupId?: string
+  /**
+   * <p>该资产所在的资产组</p>
+   */
+  AssetGroups?: Array<IdWithName>
 }
 
 /**
@@ -538,11 +538,6 @@ export interface DescribeDbauditUsedRegionsResponse {
 }
 
 /**
- * 资产支持的审计能力
- */
-export type AuditCapability = null
-
-/**
  * CreateTimerReport返回参数结构体
  */
 export interface CreateTimerReportResponse {
@@ -635,82 +630,66 @@ export interface ReportMission {
   Id?: number
   /**
    * 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TplName?: string
   /**
    * 报表类型 1:单次报表 2:周期报表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportType?: number
   /**
    * 报告说明
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * 报表模板 1:综合分析报告 2:等保合规报告
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateId?: number
   /**
    * 包含资产
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssetsList?: Array<AssetsInfo>
   /**
    * 下次启动时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NextStartTime?: number
   /**
    * 任务状态 1:生成中 2:待生成3:已生成4:生成失败5:已暂停
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MissionStatus?: number
   /**
    * 任务状态说明 仅生成中和生成失败有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MissionStatusMessage?: string
   /**
    * 已生成报表数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportCount?: number
   /**
    * 任务起停 1:关闭 2:开启 仅周期报表有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MissionStart?: number
   /**
    * 统计周期 1:24小时 7:近一周 30:近30天 90:近90天 180:
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CntDay?: number
   /**
    * 重复周期 1:每天 2:每周 3:每月
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CntCycle?: number
   /**
    * 执行日期 重复周期为天：无意义 周：星期几 1-7  月每月
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CntTime?: number
   /**
    * 执行时间 格式15:04 到分钟
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CntDate?: string
   /**
    * 创建者 0:内置 其余存放用户(uin)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Receivers?: string
   /**
    * Notification  int  1关闭 2开启 不变更为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Notification?: number
 }
@@ -736,78 +715,75 @@ export interface Reports {
   /**
    * 生成时间
    */
-  AddTime: number
+  AddTime?: number
   /**
    * 结束时间
    */
-  EndTime: number
+  EndTime?: number
   /**
    * 报告 ID
    */
-  Id: number
+  Id?: number
   /**
    * 审计 ID
    */
-  InstanceId: number
+  InstanceId?: number
   /**
    * 是否已删除
    */
-  IsDelete: number
+  IsDelete?: number
   /**
    * 发送目标
    */
-  Receivers: string
+  Receivers?: string
   /**
    * 报告说明
    */
-  Remark: string
+  Remark?: string
   /**
    * 报告文件
    */
-  ReportFile: string
+  ReportFile?: string
   /**
    * 状态
    */
-  ReportStatus: number
+  ReportStatus?: number
   /**
    * 状态
    */
-  ReportTmpStatus: number
+  ReportTmpStatus?: number
   /**
    * 报告类型
    */
-  ReportType: number
+  ReportType?: number
   /**
    * 发送结果
    */
-  SendResult: string
+  SendResult?: string
   /**
    * 发送类型
    */
-  SendType: string
+  SendType?: string
   /**
    * 开始时间
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 报告名称
    */
-  Title: string
+  Title?: string
   /**
    * 报表模板
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TemplateId: number
+  TemplateId?: number
   /**
    * 包含资产
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssetsList: Array<AssetsInfo>
+  AssetsList?: Array<AssetsInfo>
   /**
    * 时间范围 1:24小时 7:近一周 30:近30天 90:近90天 180:近180天 不变更为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CntDay: number
+  CntDay?: number
 }
 
 /**

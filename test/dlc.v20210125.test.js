@@ -148,6 +148,16 @@ it("dlc.v20210125.DescribeTaskMonitorInfos", async function () {
     }
 })
 
+it("dlc.v20210125.ModifySparkApp", async function () {
+    try {
+       const data = await client.ModifySparkApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSession", async function () {
     try {
        const data = await client.DescribeNotebookSession({})
@@ -2608,9 +2618,9 @@ it("dlc.v20210125.QueryMonitorOverview", async function () {
     }
 })
 
-it("dlc.v20210125.ModifySparkApp", async function () {
+it("dlc.v20210125.ListImages", async function () {
     try {
-       const data = await client.ModifySparkApp({})
+       const data = await client.ListImages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

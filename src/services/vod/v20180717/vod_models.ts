@@ -131,15 +131,15 @@ export interface AigcVideoOutputConfig {
    */
   ExpireTime?: string
   /**
-   * <p>生成视频的时长，单位：秒。</p><li>当 ModelName 是 Kling，可选值为3-15，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li><li>当 ModelName 是 PixVerse，可指定1-15，默认为5；</li>
+   * <p>生成视频的时长，单位：秒。</p><li>当 ModelName 是 Kling，可选值为3-15，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当版本是H3时，可选值为4-15秒（整数）</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li><li>当 ModelName 是 PixVerse，可指定1-15，默认为5；</li>
    */
   Duration?: number
   /**
-   * <p>生成视频的分辨率。</p><li>当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；</li><li>当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 OS，可选值为 720P；</li><li>当 ModelName 是 PixVerse，可选值为 540p、720p、1080p、2k、4k，默认为720p；</li>
+   * <p>生成视频的分辨率。</p><li>当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；当版本是H3时，可选值为768P、1080P、2K、4K;</li><li>当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 OS，可选值为 720P；</li><li>当 ModelName 是 PixVerse，可选值为 540p、720p、1080p、2k、4k，默认为720p；</li>
    */
   Resolution?: string
   /**
-   * <p>指定所生成视频的宽高比。</p><li>当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；</li><li>当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4</li><li>当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；</li><li>当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；</li><li>当 ModelName 是 Hailuo，则暂不支持;</li><li>当 ModelName 是PixVerse，则可选值为 16:9，4:3，1:1，3:4，9:16，2:3，3:2，21:9;</li>
+   * <p>指定所生成视频的宽高比。</p><li>当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；</li><li>当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4</li><li>当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；</li><li>当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；</li><li>当 ModelName 是 Hailuo，版本是H3，文生视频、参考生可选值21:9, 16:9, 4:3, 1:1, 3:4, 9:16，图生视频（即首尾帧视频）分辨率和图片一致。</li><li>当 ModelName 是PixVerse，则可选值为 16:9，4:3，1:1，3:4，9:16，2:3，3:2，21:9;</li>
    */
   AspectRatio?: string
   /**
@@ -4235,7 +4235,7 @@ export interface DeleteAigcQuotaRequest {
    */
   QuotaType: string
   /**
-   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   * <p>仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken</p>
    */
   ApiToken?: string
 }
@@ -10314,7 +10314,7 @@ export interface DescribeAigcQuotasRequest {
    */
   QuotaType: string
   /**
-   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   * <p>仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken</p>
    */
   ApiToken?: string
   /**
@@ -12005,11 +12005,11 @@ export interface CreateAigcQuotaRequest {
    */
   QuotaType: string
   /**
-   * <p>任务的配额数</p><p>单位：</p><ul><li>当QuotaLimit=Image时，单位为张</li><li>当QuotaLimit=Video时，单位为秒</li><li>当QuotaLimit=Text时，单位为token</li></ul>
+   * <p>任务的配额数</p><p>单位：- 当QuotaType=Image时，单位为张- 当QuotaType=Video时，单位为秒- 当QuotaType=Text时，单位为token</p>
    */
   QuotaLimit: number
   /**
-   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   * <p>仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken</p>
    */
   ApiToken?: string
 }
@@ -25056,11 +25056,11 @@ export interface ModifyAigcQuotaRequest {
    */
   QuotaType: string
   /**
-   * <p>任务的配额数</p><p>单位：</p><ul><li>当QuotaLimit=Image时，单位为张</li><li>当QuotaLimit=Video时，单位为秒</li><li>当QuotaLimit=Text时，单位为token</li></ul>
+   * <p>任务的配额数</p><p>单位：- 当QuotaType=Image时，单位为张- 当QuotaType=Video时，单位为秒- 当QuotaType=Text时，单位为token</p>
    */
   QuotaLimit: number
   /**
-   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   * <p>仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken</p>
    */
   ApiToken?: string
 }

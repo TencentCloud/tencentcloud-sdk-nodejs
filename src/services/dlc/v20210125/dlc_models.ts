@@ -6637,7 +6637,7 @@ export interface DataEngineConfigInstanceInfo {
  */
 export interface DescribeSaleResourceInfoResponse {
   /**
-   * 可售卖资源规格列表
+   * 可售卖资源规格列表，包含规格、步长、单账户上限、以及库存情况
    */
   SaleResourceInfoList?: Array<ResourceSaleInfo>
   /**
@@ -14077,6 +14077,44 @@ export interface ModifySparkAppBatchRequest {
 }
 
 /**
+ * 镜像响应类
+ */
+export interface ImageDto {
+  /**
+   * <p>镜像ID</p>
+   */
+  Id?: number
+  /**
+   * <p>镜像名称</p>
+   */
+  Name?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Url?: string
+  /**
+   * <p>镜像描述</p>
+   */
+  Description?: string
+  /**
+   * <p>镜像类型（Ray/Workspace）</p>
+   */
+  Type?: string
+  /**
+   * <p>镜像内置的 Ray 版本号</p>
+   */
+  RayVersion?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+}
+
+/**
  * DeleteTable请求参数结构体
  */
 export interface DeleteTableRequest {
@@ -16328,6 +16366,11 @@ export interface ResourceSaleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxSpec?: number
+  /**
+   * <p>库存情况，对当前地域该计费项实时可新增数量的分级预估。取值复用 BcpConstants 库存状态常量：</p><ul><li>EnoughStock：余量充足（&gt;100）</li><li>NormalStock：余量正常（50~100）</li><li>UnderStock：余量紧张（1~49）</li><li>WithoutStock：无库存（0）</li></ul><p>该值为底层提供的预估值，不代表保证可发货量，仅用于展示库存概况。当请求 Region 与资源池地域不一致、cold-start 缓存未 ready、或该计费项在快照中缺失时返回 null。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusCategory?: string
 }
 
 /**
@@ -21450,6 +21493,36 @@ export interface StreamingStatistics {
 }
 
 /**
+ * ListImages返回参数结构体
+ */
+export interface ListImagesResponse {
+  /**
+   * 总记录数
+   */
+  Total?: number
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * 镜像列表
+   */
+  Items?: Array<ImageDto>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 任务实例。
  */
 export interface TaskResponseInfo {
@@ -22574,6 +22647,28 @@ export interface InitializeTCLakeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListImages请求参数结构体
+ */
+export interface ListImagesRequest {
+  /**
+   * 关键词搜索（模糊匹配名称或描述）
+   */
+  Keyword?: string
+  /**
+   * 镜像类型过滤（Ray/Workspace）
+   */
+  Type?: string
+  /**
+   * 页数
+   */
+  Page?: number
+  /**
+   * 数量
+   */
+  PageSize?: number
 }
 
 /**

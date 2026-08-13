@@ -376,27 +376,27 @@ export interface ServiceEIP {
  */
 export interface DescribeExportResponse {
   /**
-   * 日志下载任务的ID
+   * <p>日志下载任务的ID</p>
    */
   ExportId?: string
   /**
-   * 日志下载文件名
+   * <p>日志下载文件名</p>
    */
   FileName?: string
   /**
-   * 日志导出路径,有效期一个小时，请尽快使用该路径下载。
+   * <p>日志导出路径,有效期一个小时，请尽快使用该路径下载。</p>
    */
   CosPath?: string
   /**
-   * 下载任务创建时间
+   * <p>下载任务创建时间</p>
    */
   CreateTime?: string
   /**
-   * 日志文件大小
+   * <p>日志文件大小</p>
    */
   FileSize?: string
   /**
-   * 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中
+   * <p>日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中</p>
    */
   Status?: string
   /**
@@ -7343,9 +7343,13 @@ export interface TrainingTaskDetail {
  */
 export interface DescribeExportRequest {
   /**
-   * 日志下载任务的ID
+   * <p>日志下载任务的ID</p>
    */
   ExportId: string
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
 }
 
 /**

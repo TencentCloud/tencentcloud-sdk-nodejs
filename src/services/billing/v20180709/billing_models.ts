@@ -871,25 +871,25 @@ export interface BillDetailComponentConfig {
  */
 export interface DescribeCostSummaryByResourceResponse {
   /**
-   * 数据是否准备好，0未准备好，1准备好
+   * <p>数据是否准备好，0未准备好，1准备好</p>
    */
   Ready?: number
   /**
-   * 消耗详情
+   * <p>消耗详情</p>
    */
   Total?: ConsumptionSummaryTotal
   /**
-   * 过滤条件
+   * <p>过滤条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionValue?: ConsumptionResourceSummaryConditionValue
   /**
-   * 记录数量
+   * <p>记录数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordNum?: number
   /**
-   * 资源消耗详情
+   * <p>资源消耗详情</p>
    */
   Data?: Array<ConsumptionResourceSummaryDataItem>
   /**
@@ -2478,11 +2478,11 @@ export interface DescribeAllocationSummaryByResourceRequest {
  */
 export interface DescribeCostDetailResponse {
   /**
-   * 消耗明细
+   * <p>消耗明细</p>
    */
   DetailSet?: Array<CostDetail>
   /**
-   * 记录数
+   * <p>记录数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
@@ -6600,42 +6600,53 @@ export interface DescribeCostSummaryByRegionResponse {
  */
 export interface DescribeCostDetailRequest {
   /**
-   * 数量，最大值为100
+   * <p>数量，最大值为100</p>
    */
   Limit: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 周期开始时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。
+   * <p>周期开始时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&amp;EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。</p>
    */
   BeginTime?: string
   /**
-   * 周期结束时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。
+   * <p>周期结束时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&amp;EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。</p>
    */
   EndTime?: string
   /**
-   * 是否需要访问列表的总记录数，用于前端分页
-1-表示需要， 0-表示不需要
+   * <p>是否需要访问列表的总记录数，用于前端分页<br>1-表示需要， 0-表示不需要</p>
    */
   NeedRecordNum?: number
   /**
-   * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通消耗账单的月份，最多可拉取18个月内的数据。
+   * <p>月份，格式为yyyy-mm，Month和BeginTime&amp;EndTime必传一个，如果有传BeginTime&amp;EndTime则Month字段无效。不能早于开通消耗账单的月份，最多可拉取18个月内的数据。</p>
    */
   Month?: string
   /**
-   * 查询指定产品信息
+   * <p>查询指定产品信息</p>
    */
   ProductCode?: string
   /**
-   * 付费模式 prePay/postPay
+   * <p>付费模式 prePay/postPay</p>
    */
   PayMode?: string
   /**
-   * 查询指定资源信息
+   * <p>查询指定资源信息</p>
    */
   ResourceId?: string
+  /**
+   * <p>产品名称代码</p>
+   */
+  BusinessCode?: string
+  /**
+   * <p>项目ID:资源所属项目ID</p>
+   */
+  ProjectId?: string
+  /**
+   * <p>地域ID</p>
+   */
+  RegionId?: string
 }
 
 /**
@@ -6822,37 +6833,45 @@ export interface DescribeAllocationTreeRequest {
  */
 export interface DescribeCostSummaryByResourceRequest {
   /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。</p>
    */
   BeginTime: string
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。</p>
    */
   EndTime: string
   /**
-   * 每次获取数据量，最大值为100
+   * <p>每次获取数据量，最大值为100</p>
    */
   Limit: number
   /**
-   * 偏移量,默认从0开始
+   * <p>偏移量,默认从0开始</p>
    */
   Offset: number
   /**
-   * 查询账单数据的用户UIN
+   * <p>查询账单数据的用户UIN</p>
    */
   PayerUin?: string
   /**
-   * 是否需要返回记录数量，0不需要，1需要，默认不需要
+   * <p>是否需要返回记录数量，0不需要，1需要，默认不需要</p>
    */
   NeedRecordNum?: number
   /**
-   * 是否需要返回过滤条件，0不需要，1需要，默认不需要
+   * <p>是否需要返回过滤条件，0不需要，1需要，默认不需要</p>
    */
   NeedConditionValue?: number
   /**
-   * 过滤条件，只支持ResourceKeyword(资源关键字，支持资源id及资源名称模糊查询)，ProjectIds（项目id），RegionIds(地域id)，PayModes(付费模式，可选prePay和postPay)，HideFreeCost（是否隐藏0元流水，可选0和1），OrderByCost（按费用排序规则，可选desc和asc）
+   * <p>过滤条件，只支持ResourceKeyword(资源关键字，支持资源id及资源名称模糊查询)，ProjectIds（项目id），RegionIds(地域id)，PayModes(付费模式，可选prePay和postPay)，HideFreeCost（是否隐藏0元流水，可选0和1），OrderByCost（按费用排序规则，可选desc和asc）</p>
    */
   Conditions?: Conditions
+  /**
+   * <p>分账标签键，用户自定义</p>
+   */
+  TagKey?: string
+  /**
+   * <p>分账标签值，该参数为空表示该标签键下未设置标签值的记录</p>
+   */
+  TagValue?: string
 }
 
 /**
