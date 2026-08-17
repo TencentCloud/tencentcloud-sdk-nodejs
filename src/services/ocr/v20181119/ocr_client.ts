@@ -40,6 +40,7 @@ import {
   EstateCertOCRResponse,
   GeneralHandwritingOCRResponse,
   WordItem,
+  VerifyGeneralCardWarnRequest,
   MLIDPassportOCRRequest,
   OverseasInvoice,
   ItemInfo,
@@ -146,6 +147,7 @@ import {
   VatInvoiceInfo,
   OnlineTaxiItineraryInfo,
   ExtractDocMultiResponse,
+  VerifyGeneralCardWarnResponse,
   MachinePrintedInvoice,
   FinancialBillItem,
   ShoppingReceipt,
@@ -879,6 +881,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口支持OFD格式的增值税电子普通发票、增值税电子专用发票、电子发票（普通发票）、电子发票（增值税专用发票）、电子发票（铁路电子客票）、电子发票（航空运输电子客票行程单）识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
+   */
+  async VerifyOfdVatInvoiceOCR(
+    req: VerifyOfdVatInvoiceOCRRequest,
+    cb?: (error: string, rep: VerifyOfdVatInvoiceOCRResponse) => void
+  ): Promise<VerifyOfdVatInvoiceOCRResponse> {
+    return this.request("VerifyOfdVatInvoiceOCR", req, cb)
+  }
+
+  /**
      * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段。
 
 默认接口请求频率限制：10次/秒。
@@ -1441,13 +1453,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口支持OFD格式的增值税电子普通发票、增值税电子专用发票、电子发票（普通发票）、电子发票（增值税专用发票）、电子发票（铁路电子客票）、电子发票（航空运输电子客票行程单）识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
+   * 提供针对卡证（如身份证、营业执照等）图片的PS篡改、AIGC合成、图片质量检测能力，可应用于业务流程中对卡证图片真实性、有效性校验的场景。
    */
-  async VerifyOfdVatInvoiceOCR(
-    req: VerifyOfdVatInvoiceOCRRequest,
-    cb?: (error: string, rep: VerifyOfdVatInvoiceOCRResponse) => void
-  ): Promise<VerifyOfdVatInvoiceOCRResponse> {
-    return this.request("VerifyOfdVatInvoiceOCR", req, cb)
+  async VerifyGeneralCardWarn(
+    req: VerifyGeneralCardWarnRequest,
+    cb?: (error: string, rep: VerifyGeneralCardWarnResponse) => void
+  ): Promise<VerifyGeneralCardWarnResponse> {
+    return this.request("VerifyGeneralCardWarn", req, cb)
   }
 
   /**

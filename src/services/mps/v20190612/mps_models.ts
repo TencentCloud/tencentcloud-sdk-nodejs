@@ -6924,7 +6924,7 @@ export interface MediaProcessTaskAnimatedGraphicResult {
  */
 export interface ProcessMediaResponse {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
@@ -8295,6 +8295,10 @@ export interface CloneVoiceResponse {
    * <p>合成音频Url，有效期24小时</p>
    */
   AudioUrl?: string
+  /**
+   * <p>扩展信息，json字符串</p>
+   */
+  ExtInfo?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10649,89 +10653,79 @@ export interface DescribeProcessImageTemplatesResponse {
  */
 export interface ProcessMediaRequest {
   /**
-   * 媒体处理的文件输入信息。
+   * <p>媒体处理的文件输入信息。</p>
    */
   InputInfo: MediaInputInfo
   /**
-   * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
-注意：当InputInfo.Type为URL时，该参数是必填项
+   * <p>媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。<br>注意：当InputInfo.Type为URL时，该参数是必填项</p>
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
-如果不填，表示与 InputInfo 中文件所在的目录一致。
+   * <p>媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如<code>/movie/201907/</code>。<br>如果不填，表示与 InputInfo 中文件所在的目录一致。</p>
    */
   OutputDir?: string
   /**
-   * 编排ID。
-注意1：对于OutputStorage、OutputDir参数：
-<li>当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。</li>
-<li>当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有指定输出，将覆盖原有编排的默认输出。</li>
-<li>即输出设置的优先级：编排子任务节点 > 任务接口指定 > 对应编排内的配置 </li>
-注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。
-
-注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。
+   * <p>编排ID。<br>注意1：对于OutputStorage、OutputDir参数：</p><li>当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。</li><li>当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有指定输出，将覆盖原有编排的默认输出。</li><li>即输出设置的优先级：编排子任务节点 &gt; 任务接口指定 &gt; 对应编排内的配置 </li>注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。<p>注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。</p>
    */
   ScheduleId?: number
   /**
-   * 媒体处理类型任务参数。
+   * <p>媒体处理类型任务参数。</p>
    */
   MediaProcessTask?: MediaProcessTaskInput
   /**
-   * 视频内容审核类型任务参数。
+   * <p>视频内容审核类型任务参数。</p>
    */
   AiContentReviewTask?: AiContentReviewTaskInput
   /**
-   * 视频内容分析类型任务参数。
+   * <p>视频内容分析类型任务参数。</p>
    */
   AiAnalysisTask?: AiAnalysisTaskInput
   /**
-   * 视频内容识别类型任务参数。
+   * <p>视频内容识别类型任务参数。</p>
    */
   AiRecognitionTask?: AiRecognitionTaskInput
   /**
-   * 媒体质检类型任务参数。
+   * <p>媒体质检类型任务参数。</p>
    */
   AiQualityControlTask?: AiQualityControlTaskInput
   /**
-   * 智能字幕
+   * <p>智能字幕</p>
    */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput
   /**
-   * 智能擦除类型任务参数
+   * <p>智能擦除类型任务参数</p>
    */
   SmartEraseTask?: SmartEraseTaskInput
   /**
-   * 任务的事件通知信息，不填代表不获取事件通知。
+   * <p>任务的事件通知信息，不填代表不获取事件通知。</p>
    */
   TaskNotifyConfig?: TaskNotifyConfig
   /**
-   * 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
+   * <p>任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。</p>
    */
   TasksPriority?: number
   /**
-   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不传该参数或者参数为空字符串则本次请求不做去重操作。
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不传该参数或者参数为空字符串则本次请求不做去重操作。</p>
    */
   SessionId?: string
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
   /**
-   * 任务类型，默认Online
-<li> Online：实时任务</li>
-<li> Offline：闲时任务，不保证实效性，默认3天内处理完</li>
+   * <p>任务类型，默认Online</p><li> Online：实时任务</li><li> Offline：闲时任务，不保证实效性，默认3天内处理完</li>
    */
   TaskType?: string
   /**
-   * 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。
+   * <p>资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。</p>
    */
   ResourceId?: string
   /**
-   * 是否跳过元信息获取，可选值： 
-0：表示不跳过 
-1：表示跳过 
-默认值：0	
+   * <p>媒体编排任务组<br>注意：填写此参数ScheduleId字段将失效，Activities优先级大于ScheduleId</p>
+   */
+  Activities?: Array<Activity>
+  /**
+   * <p>是否跳过元信息获取，可选值：<br>0：表示不跳过<br>1：表示跳过<br>默认值：0</p>
    */
   SkipMateData?: number
 }
@@ -12375,29 +12369,23 @@ export interface DescribeContentReviewTemplatesResponse {
  */
 export interface EraseArea {
   /**
-   * 区域左上角X坐标。
-如当Unit取1即使用百分比单位时，0.05表示区域左上角离整个画面左上角的横向距离为画面宽度的5%。
+   * <p>区域左上角X坐标。<br>如当Unit取1即使用百分比单位时，0.05表示区域左上角离整个画面左上角的横向距离为画面宽度的5%。</p>
    */
   LeftTopX: number
   /**
-   * 区域左上角Y坐标。
-如当Unit取1即使用百分比单位时，0.1表示区域左上角离整个画面左上角的纵向距离为画面高度的10%。
+   * <p>区域左上角Y坐标。<br>如当Unit取1即使用百分比单位时，0.1表示区域左上角离整个画面左上角的纵向距离为画面高度的10%。</p>
    */
   LeftTopY: number
   /**
-   * 区域右下角X坐标。
-如当Unit取1即使用百分比单位时，0.75表示区域右下角离整个画面左上角的横向距离为画面宽度的75%。
+   * <p>区域右下角X坐标。<br>如当Unit取1即使用百分比单位时，0.75表示区域右下角离整个画面左上角的横向距离为画面宽度的75%。</p>
    */
   RightBottomX: number
   /**
-   * 区域右下角Y坐标。
-如当Unit取1即使用百分比单位时，0.9表示区域右下角离整个画面左上角的纵向距离为画面高度的90%。
+   * <p>区域右下角Y坐标。<br>如当Unit取1即使用百分比单位时，0.9表示区域右下角离整个画面左上角的纵向距离为画面高度的90%。</p>
    */
   RightBottomY: number
   /**
-   * 坐标单位
-- 1 百分比
-- 2 像素值
+   * <p>坐标单位</p><ul><li>1 百分比</li><li>2 像素值</li></ul>
    */
   Unit: number
 }
@@ -19761,33 +19749,15 @@ export interface UpdateVoiceResponse {
  */
 export interface Activity {
   /**
-   * 原子任务类型：
-<li>input: 起始节点</li>
-<li>output：终止节点</li>
-<li>action-trans：转码</li>
-<li>action-samplesnapshot：采样截图</li>
-<li>action-AIAnalysis: 分析</li>
-<li>action-AIRecognition：识别</li>
-<li>action-aiReview：审核</li>
-<li>action-animated-graphics：转动图</li>
-<li>action-image-sprite：雪碧图</li>
-<li>action-snapshotByTimeOffset: 时间点截图</li>
-<li>action-adaptive-substream：自适应码流</li>
-<li>action-AIQualityControl：媒体质检</li>
-<li>action-SmartSubtitles：智能字幕</li>
-<li>action-exec-rules：判断规则</li>
-<li>action-SmartErase：智能擦除</li>
-
-
-
+   * <p>原子任务类型：</p><li>input: 起始节点</li><li>output：终止节点</li><li>action-trans：转码</li><li>action-samplesnapshot：采样截图</li><li>action-AIAnalysis: 分析</li><li>action-AIRecognition：识别</li><li>action-aiReview：审核</li><li>action-animated-graphics：转动图</li><li>action-image-sprite：雪碧图</li><li>action-snapshotByTimeOffset: 时间点截图</li><li>action-adaptive-substream：自适应码流</li><li>action-AIQualityControl：媒体质检</li><li>action-SmartSubtitles：智能字幕</li><li>action-exec-rules：判断规则</li><li>action-SmartErase：智能擦除</li>
    */
   ActivityType: string
   /**
-   * 后驱节点索引数组
+   * <p>后驱节点索引数组</p>
    */
   ReardriveIndex?: Array<number | bigint>
   /**
-   * 原子任务参数
+   * <p>原子任务参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivityPara?: ActivityPara

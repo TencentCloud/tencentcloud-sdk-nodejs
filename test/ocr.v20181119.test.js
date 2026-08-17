@@ -348,6 +348,16 @@ it("ocr.v20181119.RecognizeGeneralCardWarn", async function () {
     }
 })
 
+it("ocr.v20181119.VerifyOfdVatInvoiceOCR", async function () {
+    try {
+       const data = await client.VerifyOfdVatInvoiceOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.WaybillOCR", async function () {
     try {
        const data = await client.WaybillOCR({})
@@ -708,9 +718,9 @@ it("ocr.v20181119.GetOCRToken", async function () {
     }
 })
 
-it("ocr.v20181119.VerifyOfdVatInvoiceOCR", async function () {
+it("ocr.v20181119.VerifyGeneralCardWarn", async function () {
     try {
-       const data = await client.VerifyOfdVatInvoiceOCR({})
+       const data = await client.VerifyGeneralCardWarn({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
