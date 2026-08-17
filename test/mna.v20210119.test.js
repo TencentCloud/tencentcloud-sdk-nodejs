@@ -18,6 +18,16 @@ const client = new tencentcloud.mna.v20210119.Client({
 })
 describe("mna.v20210119.test.js", function () {
 
+it("mna.v20210119.UpdateL3Cidr", async function () {
+    try {
+       const data = await client.UpdateL3Cidr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.SetNotifyUrl", async function () {
     try {
        const data = await client.SetNotifyUrl({})
@@ -158,6 +168,16 @@ it("mna.v20210119.ModifyDeviceAccessRegions", async function () {
     }
 })
 
+it("mna.v20210119.ModifyDeviceAccessScope", async function () {
+    try {
+       const data = await client.ModifyDeviceAccessScope({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.ActivateHardware", async function () {
     try {
        const data = await client.ActivateHardware({})
@@ -248,6 +268,16 @@ it("mna.v20210119.AddApplication", async function () {
     }
 })
 
+it("mna.v20210119.ReportOrder", async function () {
+    try {
+       const data = await client.ReportOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetActiveDeviceCount", async function () {
     try {
        const data = await client.GetActiveDeviceCount({})
@@ -261,6 +291,16 @@ it("mna.v20210119.GetActiveDeviceCount", async function () {
 it("mna.v20210119.UpdateApplicationKey", async function () {
     try {
        const data = await client.UpdateApplicationKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetFlowAlarmInfo", async function () {
+    try {
+       const data = await client.GetFlowAlarmInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +328,9 @@ it("mna.v20210119.UpdateDevice", async function () {
     }
 })
 
-it("mna.v20210119.OrderPerLicense", async function () {
+it("mna.v20210119.GetFlowStatisticByName", async function () {
     try {
-       const data = await client.OrderPerLicense({})
+       const data = await client.GetFlowStatisticByName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +368,9 @@ it("mna.v20210119.GetGroupDetail", async function () {
     }
 })
 
-it("mna.v20210119.UpdateL3Cidr", async function () {
+it("mna.v20210119.GetL3ConnList", async function () {
     try {
-       const data = await client.UpdateL3Cidr({})
+       const data = await client.GetL3ConnList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +378,19 @@ it("mna.v20210119.UpdateL3Cidr", async function () {
     }
 })
 
-it("mna.v20210119.GetFlowStatisticByName", async function () {
+it("mna.v20210119.UpdateCustomerGatewayCluster", async function () {
     try {
-       const data = await client.GetFlowStatisticByName({})
+       const data = await client.UpdateCustomerGatewayCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.DescribeAccessPointList", async function () {
+    try {
+       const data = await client.DescribeAccessPointList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +418,9 @@ it("mna.v20210119.GetNetMonitorByName", async function () {
     }
 })
 
-it("mna.v20210119.AddL3Conn", async function () {
+it("mna.v20210119.DeleteCustomerGatewayCluster", async function () {
     try {
-       const data = await client.AddL3Conn({})
+       const data = await client.DeleteCustomerGatewayCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +448,9 @@ it("mna.v20210119.CreateEncryptedKey", async function () {
     }
 })
 
-it("mna.v20210119.GetFlowAlarmInfo", async function () {
+it("mna.v20210119.AddGateway", async function () {
     try {
-       const data = await client.GetFlowAlarmInfo({})
+       const data = await client.AddGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +458,9 @@ it("mna.v20210119.GetFlowAlarmInfo", async function () {
     }
 })
 
-it("mna.v20210119.ReportOrder", async function () {
+it("mna.v20210119.OrderPerLicense", async function () {
     try {
-       const data = await client.ReportOrder({})
+       const data = await client.OrderPerLicense({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,6 +528,26 @@ it("mna.v20210119.UpdateL3Switch", async function () {
     }
 })
 
+it("mna.v20210119.AddL3Conn", async function () {
+    try {
+       const data = await client.AddL3Conn({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetCustomerGatewayClusterList", async function () {
+    try {
+       const data = await client.GetCustomerGatewayClusterList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.AddDevice", async function () {
     try {
        const data = await client.AddDevice({})
@@ -538,6 +608,16 @@ it("mna.v20210119.UpdateGroup", async function () {
     }
 })
 
+it("mna.v20210119.DeleteGateway", async function () {
+    try {
+       const data = await client.DeleteGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.AddGroup", async function () {
     try {
        const data = await client.AddGroup({})
@@ -548,9 +628,9 @@ it("mna.v20210119.AddGroup", async function () {
     }
 })
 
-it("mna.v20210119.GetL3ConnList", async function () {
+it("mna.v20210119.AddCustomerGatewayCluster", async function () {
     try {
-       const data = await client.GetL3ConnList({})
+       const data = await client.AddCustomerGatewayCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

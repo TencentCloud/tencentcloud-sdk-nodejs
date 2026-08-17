@@ -182,6 +182,36 @@ export interface UpdateL3SwitchRequest {
 }
 
 /**
+ * 接入点信息
+ */
+export interface AccessPointInfo {
+  /**
+   * <p>接入点运营商。</p>
+   */
+  Vendor?: string
+  /**
+   * <p>接入点地址。</p>
+   */
+  PublicAddr?: string
+  /**
+   * <p>接入点地域。</p>
+   */
+  Region?: string
+  /**
+   * <p>接入点大区。</p>
+   */
+  BigArea?: string
+  /**
+   * <p>接入点是否可用。</p><p>枚举值：</p><ul><li>true： 接入点可用</li><li>false： 接入点不可用</li></ul>
+   */
+  Available?: boolean
+  /**
+   * <p>集群ID</p>
+   */
+  GwGroupId?: string
+}
+
+/**
  * AddL3Conn请求参数结构体
  */
 export interface AddL3ConnRequest {
@@ -222,6 +252,20 @@ export interface OrderPerLicenseResponse {
 }
 
 /**
+ * GroupDeleteDevice请求参数结构体
+ */
+export interface GroupDeleteDeviceRequest {
+  /**
+   * 分组ID
+   */
+  GroupId: string
+  /**
+   * 待删除的设备列表
+   */
+  DeviceList: Array<string>
+}
+
+/**
  * GetFlowPackages请求参数结构体
  */
 export interface GetFlowPackagesRequest {
@@ -252,6 +296,24 @@ export interface GetFlowPackagesRequest {
  * SetNotifyUrl返回参数结构体
  */
 export interface SetNotifyUrlResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetCustomerGatewayClusterList返回参数结构体
+ */
+export interface GetCustomerGatewayClusterListResponse {
+  /**
+   * <p>集群列表。</p>
+   */
+  ClusterList?: Array<GatewayClusterInfo>
+  /**
+   * <p>集群总数。</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -305,17 +367,37 @@ export interface AddApplicationRequest {
 }
 
 /**
- * ModifyPackageRenewFlag请求参数结构体
+ * 三层互通规则信息
  */
-export interface ModifyPackageRenewFlagRequest {
+export interface L3ConnInfo {
   /**
-   * <p>流量包的唯一资源ID</p>
+   * 互通规则ID
    */
-  ResourceId: string
+  L3ConnId?: string
   /**
-   * <p>自动续费标识。true代表自动续费，false代表不自动续费</p>
+   * 互通设备ID
    */
-  RenewFlag: boolean
+  DeviceId1?: string
+  /**
+   * 互通规则CIDR
+   */
+  Cidr1?: string
+  /**
+   * 互通设备ID
+   */
+  DeviceId2?: string
+  /**
+   * 互通规则CIDR
+   */
+  Cidr2?: string
+  /**
+   * 互通规则启用状态
+   */
+  Enable?: boolean
+  /**
+   * 互通规则描述
+   */
+  Description?: string
 }
 
 /**
@@ -561,6 +643,20 @@ export interface DeviceBaseInfo {
 }
 
 /**
+ * ModifyPackageRenewFlag请求参数结构体
+ */
+export interface ModifyPackageRenewFlagRequest {
+  /**
+   * <p>流量包的唯一资源ID</p>
+   */
+  ResourceId: string
+  /**
+   * <p>自动续费标识。true代表自动续费，false代表不自动续费</p>
+   */
+  RenewFlag: boolean
+}
+
+/**
  * AddGroup请求参数结构体
  */
 export interface AddGroupRequest {
@@ -572,6 +668,20 @@ export interface AddGroupRequest {
    * 分组的描述
    */
   Description?: string
+}
+
+/**
+ * ModifyDeviceAccessScope请求参数结构体
+ */
+export interface ModifyDeviceAccessScopeRequest {
+  /**
+   * <p>设备ID</p>
+   */
+  DeviceIds: Array<string>
+  /**
+   * <p>接入网关类型</p><p>枚举值：</p><ul><li>0： 公有云网关</li><li>1： 客户私有网关</li></ul><p>默认值：0</p><p>如果不传，则默认修改为接入公有云网关。</p>
+   */
+  AccessScope?: number
 }
 
 /**
@@ -762,9 +872,38 @@ export interface UpdateApplicationInfoRequest {
 }
 
 /**
- * GetPublicKey请求参数结构体
+ * DescribeAccessPointList请求参数结构体
  */
-export type GetPublicKeyRequest = null
+export interface DescribeAccessPointListRequest {
+  /**
+   * <p>地域列表</p>
+   */
+  Regions?: Array<string>
+}
+
+/**
+ * UpdateCustomerGatewayCluster返回参数结构体
+ */
+export interface UpdateCustomerGatewayClusterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddL3Conn返回参数结构体
+ */
+export interface AddL3ConnResponse {
+  /**
+   * 互通规则ID
+   */
+  L3ConnId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * GetHardwareInfo请求参数结构体
@@ -853,6 +992,32 @@ export interface GetFlowStatisticByGroupResponse {
 }
 
 /**
+ * AddGateway请求参数结构体
+ */
+export interface AddGatewayRequest {
+  /**
+   * <p>集群 ID。可通过 GetCustomerGatewayClusterList 接口获取。</p>
+   */
+  ClusterId: string
+  /**
+   * <p>网关登录用户名。最大 64 字符。</p>
+   */
+  Username: string
+  /**
+   * <p>网关登录密码。最大 128 字符。</p>
+   */
+  Password: string
+  /**
+   * <p>网关内网IP。</p>
+   */
+  GatewayIp: string
+  /**
+   * <p>地域标识。最大 32 字符。例如 ap-guangzhou。可通过 DescribeAccessPointList 接口获取。</p>
+   */
+  RegionId?: string
+}
+
+/**
  * GetNetMonitor返回参数结构体
  */
 export interface GetNetMonitorResponse {
@@ -864,6 +1029,42 @@ export interface GetNetMonitorResponse {
    * <p>接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;]<br>MC=中国大陆<br>AP=亚太<br>EU=欧洲<br>AM=美洲</p>
    */
   AccessRegion?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetNetMonitor请求参数结构体
+ */
+export interface GetNetMonitorRequest {
+  /**
+   * <p>设备id</p>
+   */
+  DeviceId: string
+  /**
+   * <p>开始时间</p>
+   */
+  BeginTime: number
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime: number
+  /**
+   * <p>统计指标（上行速率：&quot;TxRate&quot;:bit/s，下行速率：&quot;RxRate&quot;:bit/s，丢包：&quot;Loss&quot;:%，时延：&quot;RTT&quot;:ms）</p>
+   */
+  Metrics: string
+  /**
+   * <p>网关类型。0：公有云网关；1：自有网关。不传默认为0。</p>
+   */
+  GatewayType?: number
+}
+
+/**
+ * ModifyDeviceAccessScope返回参数结构体
+ */
+export interface ModifyDeviceAccessScopeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -946,6 +1147,24 @@ export interface GetVendorHardwareRequest {
 export type CreateEncryptedKeyRequest = null
 
 /**
+ * AddCustomerGatewayCluster请求参数结构体
+ */
+export interface AddCustomerGatewayClusterRequest {
+  /**
+   * <p>集群名称。最大 64 字符，支持字母、数字、中划线、下划线、点及中文。</p>
+   */
+  ClusterName: string
+  /**
+   * <p>部署大区标识。最大 32 字符。例如 CN 表示中国大陆。</p>
+   */
+  BigArea: string
+  /**
+   * <p>地域标识。最大 32 字符。例如 ap-guangzhou。</p>
+   */
+  RegionId?: string
+}
+
+/**
  * DeleteDevice请求参数结构体
  */
 export interface DeleteDeviceRequest {
@@ -1022,6 +1241,20 @@ export interface DescribeAccessRegionsResponse {
 }
 
 /**
+ * UpdateCustomerGatewayCluster请求参数结构体
+ */
+export interface UpdateCustomerGatewayClusterRequest {
+  /**
+   * <p>集群 ID。可通过 GetCustomerGatewayClusterList 接口获取。</p>
+   */
+  ClusterId: string
+  /**
+   * <p>公网访问 IP。最大 64 字符，需为合法的 IPv4 或 IPv6 地址。</p>
+   */
+  PublicIp: string
+}
+
+/**
  * GetL3ConnList返回参数结构体
  */
 export interface GetL3ConnListResponse {
@@ -1041,6 +1274,16 @@ export interface GetL3ConnListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteCustomerGatewayCluster请求参数结构体
+ */
+export interface DeleteCustomerGatewayClusterRequest {
+  /**
+   * <p>集群 ID。可通过 GetCustomerGatewayClusterList 接口获取。</p>
+   */
+  ClusterId: string
 }
 
 /**
@@ -1140,59 +1383,21 @@ export interface GetDestIPByNameResponse {
 export type DescribeAccessRegionsRequest = null
 
 /**
- * 厂商硬件详细信息
+ * DeleteGateway请求参数结构体
  */
-export interface VendorHardware {
+export interface DeleteGatewayRequest {
   /**
-   * 硬件id
+   * <p>集群 ID。可通过 GetCustomerGatewayClusterList 接口获取。</p>
    */
-  HardwareId?: string
+  ClusterId: string
   /**
-   * 硬件序列号
+   * <p>网关ID。</p>
    */
-  SN?: string
+  GatewayId: string
   /**
-   * 创建时间
+   * <p>网关内网IP。</p>
    */
-  CreateTime?: string
-  /**
-   * 激活状态， 空：全部； 1:待激活； 2:已激活
-   */
-  Status?: number
-  /**
-   * 激活时间
-   */
-  ActiveTime?: string
-  /**
-   * 厂商备注
-   */
-  Description?: string
-  /**
-   * 设备id
-   */
-  DeviceId?: string
-  /**
-   * license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权
-注：设备为租户付费且未激活（未选择月付还是永久付费）时，此参数返回1，仅代表租户付费。后续将废弃此参数，新接入请使用LicensePayMode和Payer
-   */
-  LicenseChargingMode?: number
-  /**
-   * 最后在线时间
-   */
-  LastOnlineTime?: string
-  /**
-   * license授权有效期
-0：月度授权
-1：永久授权
--1：未知
-   */
-  LicensePayMode?: number
-  /**
-   * 付费方
-0：客户付费
-1：厂商付费
-   */
-  Payer?: number
+  GatewayIp: string
 }
 
 /**
@@ -1217,6 +1422,36 @@ export interface ActivateHardwareResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 客户自有网关集群信息
+ */
+export interface GatewayClusterInfo {
+  /**
+   * <p>集群 ID。</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群名称。</p>
+   */
+  ClusterName?: string
+  /**
+   * <p>创建时间。</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>公网访问 IP。</p>
+   */
+  PublicIp?: string
+  /**
+   * <p>集群下网关实例数量。</p>
+   */
+  InstanceCount?: number
+  /**
+   * <p>网关列表。</p>
+   */
+  GatewayList?: Array<GatewayInfo>
 }
 
 /**
@@ -1280,18 +1515,9 @@ export interface GetDevicesResponse {
 }
 
 /**
- * AddL3Conn返回参数结构体
+ * GetPublicKey请求参数结构体
  */
-export interface AddL3ConnResponse {
-  /**
-   * 互通规则ID
-   */
-  L3ConnId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type GetPublicKeyRequest = null
 
 /**
  * GetDestIPByName请求参数结构体
@@ -1450,6 +1676,62 @@ export interface SlotNetInfo {
    * 指标数据（bps/ms/%）
    */
   Current?: number
+}
+
+/**
+ * 厂商硬件详细信息
+ */
+export interface VendorHardware {
+  /**
+   * 硬件id
+   */
+  HardwareId?: string
+  /**
+   * 硬件序列号
+   */
+  SN?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 激活状态， 空：全部； 1:待激活； 2:已激活
+   */
+  Status?: number
+  /**
+   * 激活时间
+   */
+  ActiveTime?: string
+  /**
+   * 厂商备注
+   */
+  Description?: string
+  /**
+   * 设备id
+   */
+  DeviceId?: string
+  /**
+   * license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权
+注：设备为租户付费且未激活（未选择月付还是永久付费）时，此参数返回1，仅代表租户付费。后续将废弃此参数，新接入请使用LicensePayMode和Payer
+   */
+  LicenseChargingMode?: number
+  /**
+   * 最后在线时间
+   */
+  LastOnlineTime?: string
+  /**
+   * license授权有效期
+0：月度授权
+1：永久授权
+-1：未知
+   */
+  LicensePayMode?: number
+  /**
+   * 付费方
+0：客户付费
+1：厂商付费
+   */
+  Payer?: number
 }
 
 /**
@@ -1668,6 +1950,34 @@ export interface GetFlowStatisticByNameRequest {
 }
 
 /**
+ * DescribeAccessPointList返回参数结构体
+ */
+export interface DescribeAccessPointListResponse {
+  /**
+   * <p>接入点列表</p>
+   */
+  AccessPointList?: Array<AccessPointInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddCustomerGatewayCluster返回参数结构体
+ */
+export interface AddCustomerGatewayClusterResponse {
+  /**
+   * <p>集群 ID。</p>
+   */
+  ClusterId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 设备详细信息
  */
 export interface DeviceDetails {
@@ -1691,20 +2001,6 @@ export interface DeviceDetails {
    * 业务上行速率
    */
   BusinessUpRate?: number
-}
-
-/**
- * GroupDeleteDevice请求参数结构体
- */
-export interface GroupDeleteDeviceRequest {
-  /**
-   * 分组ID
-   */
-  GroupId: string
-  /**
-   * 待删除的设备列表
-   */
-  DeviceList: Array<string>
 }
 
 /**
@@ -1763,17 +2059,13 @@ export interface GetFlowStatisticByRegionResponse {
 }
 
 /**
- * 激活设备数统计
+ * ActivateHardware请求参数结构体
  */
-export interface ActiveDeviceList {
+export interface ActivateHardwareRequest {
   /**
-   * 数量
+   * 待激活的设备列表
    */
-  Count?: number
-  /**
-   * 时间
-   */
-  Time?: string
+  Hardware: Array<ActivateHardware>
 }
 
 /**
@@ -2242,29 +2534,17 @@ export interface UpdateHardwareRequest {
 }
 
 /**
- * GetNetMonitor请求参数结构体
+ * 激活设备数统计
  */
-export interface GetNetMonitorRequest {
+export interface ActiveDeviceList {
   /**
-   * <p>设备id</p>
+   * 数量
    */
-  DeviceId: string
+  Count?: number
   /**
-   * <p>开始时间</p>
+   * 时间
    */
-  BeginTime: number
-  /**
-   * <p>结束时间</p>
-   */
-  EndTime: number
-  /**
-   * <p>统计指标（上行速率：&quot;TxRate&quot;:bit/s，下行速率：&quot;RxRate&quot;:bit/s，丢包：&quot;Loss&quot;:%，时延：&quot;RTT&quot;:ms）</p>
-   */
-  Metrics: string
-  /**
-   * <p>网关类型。0：公有云网关；1：自有网关。不传默认为0。</p>
-   */
-  GatewayType?: number
+  Time?: string
 }
 
 /**
@@ -2386,47 +2666,31 @@ export interface RegionInfo {
 }
 
 /**
- * 三层互通规则信息
+ * GetCustomerGatewayClusterList请求参数结构体
  */
-export interface L3ConnInfo {
+export interface GetCustomerGatewayClusterListRequest {
   /**
-   * 互通规则ID
+   * <p>按集群名称模糊匹配的关键字。最大 64 字符。</p>
    */
-  L3ConnId?: string
+  Keyword?: string
   /**
-   * 互通设备ID
+   * <p>当前查看页码。</p>
    */
-  DeviceId1?: string
+  PageNumber?: number
   /**
-   * 互通规则CIDR
+   * <p>每页显示记录数。</p>
    */
-  Cidr1?: string
-  /**
-   * 互通设备ID
-   */
-  DeviceId2?: string
-  /**
-   * 互通规则CIDR
-   */
-  Cidr2?: string
-  /**
-   * 互通规则启用状态
-   */
-  Enable?: boolean
-  /**
-   * 互通规则描述
-   */
-  Description?: string
+  PageSize?: number
 }
 
 /**
- * ActivateHardware请求参数结构体
+ * DeleteCustomerGatewayCluster返回参数结构体
  */
-export interface ActivateHardwareRequest {
+export interface DeleteCustomerGatewayClusterResponse {
   /**
-   * 待激活的设备列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Hardware: Array<ActivateHardware>
+  RequestId?: string
 }
 
 /**
@@ -2451,6 +2715,16 @@ export interface GroupAddDeviceResponse {
    * 分组中的设备数量
    */
   DeviceNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteGateway返回参数结构体
+ */
+export interface DeleteGatewayResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2765,6 +3039,32 @@ export interface MonitorData {
  * DeleteDevice返回参数结构体
  */
 export interface DeleteDeviceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddGateway返回参数结构体
+ */
+export interface AddGatewayResponse {
+  /**
+   * <p>网关ID。</p>
+   */
+  GatewayId?: string
+  /**
+   * <p>网关鉴权 Token。</p>
+   */
+  Token?: string
+  /**
+   * <p>网关注册地址。</p>
+   */
+  RegisterCenterUrl?: string
+  /**
+   * <p>网关上报地址。</p>
+   */
+  TelemetryUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

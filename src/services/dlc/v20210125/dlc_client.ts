@@ -344,6 +344,7 @@ import {
   DescribeWorkGroupInfoRequest,
   DescribeOtherCHDFSBindingListRequest,
   CancelTaskResponse,
+  GooseFSConfig,
   TableInfo,
   DescribeFlowListResponse,
   DescribeSparkSessionBatchSQLResponse,

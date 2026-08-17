@@ -384,21 +384,15 @@ export interface NetInfo {
  */
 export interface CreateLogsetRequest {
   /**
-   * 日志集名字。
-
-- 最大支持255个字符。不支持`|`字符。
+   * <p>日志集名字。</p><ul><li>最大支持255个字符。不支持<code>|</code>字符。</li></ul>
    */
   LogsetName: string
   /**
-   * 标签描述列表。最大支持10个标签键值对，并且不能有重复的键值对
+   * <p>标签描述列表。最大支持10个标签键值对，并且不能有重复的键值对</p>
    */
   Tags?: Array<Tag>
   /**
-   * 日志集ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。
-
-- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符。
-- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。
-- 如果指定该字段，需保证全地域唯一
+   * <p>日志集ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。</p><ul><li>用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符。</li><li>尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。</li><li>如果指定该字段，需保证全地域唯一</li></ul>
    */
   LogsetId?: string
 }
@@ -9103,7 +9097,7 @@ export interface DescribeConsoleSharingListResponse {
  */
 export interface CreateLogsetResponse {
   /**
-   * 日志集ID
+   * <p>日志集ID</p>
    */
   LogsetId?: string
   /**
@@ -12503,7 +12497,7 @@ StartTime必须小于EndTime
  */
 export interface ModifyLogRequest {
   /**
-   * <p>日志主题id</p>
+   * <p>日志主题id</p><p>仅在创建日志主题时，开启了日志修改/删除开关的主题，支持日志修改/删除。该功能暂时仅面向白名单内客户使用。</p>
    */
   TopicId: string
   /**
@@ -13272,7 +13266,7 @@ export interface ViewSearchTopic {
  */
 export interface DeleteLogRequest {
   /**
-   * <p>日志主题id</p>
+   * <p>日志主题id</p><p>仅在创建日志主题时，开启了日志修改/删除开关的主题，支持日志修改/删除。该功能暂时仅面向白名单内客户使用。</p>
    */
   TopicId: string
   /**

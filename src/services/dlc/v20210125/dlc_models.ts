@@ -1387,6 +1387,22 @@ export interface CreateInferenceServiceRequest {
    * <p>ApiKeyIds</p>
    */
   ApiKeyIds?: Array<string>
+  /**
+   * <p>AdvancedOptions 高级参数 JSON 字符串（可选），扁平 KV 结构，作用于 K8s RayService CR YAML 字段级</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * <p>自定义RayServe提交</p>
+   */
+  IsCustom?: boolean
+  /**
+   * <p>python runtime env</p>
+   */
+  RuntimeEnv?: string
 }
 
 /**
@@ -1604,6 +1620,14 @@ export interface CreateModelVersionRequest {
    * <p>是否使用用户自带存储桶（默认 false 表示平台托管）</p>
    */
   UseCustomStorage?: boolean
+  /**
+   * <p>创建模型时，模型从goosfe里面选取，则需要传递该参数</p>
+   */
+  GooseFSConfig?: GooseFSConfig
+  /**
+   * <p>模型上传路径类型</p><p>枚举值：</p><ul><li>LOCAL： 本地上传</li><li>CFS： CFS上传</li><li>COS： COS上传</li><li>CFSTurbo： CFSTurbo上传</li><li>GooseFS： GooseFS上传</li></ul><p>选择cos、cfs、cfstrubo则必须要传storageuri，选择local时不能传递goosefsconfig</p>
+   */
+  StorageType?: string
 }
 
 /**
@@ -3187,6 +3211,11 @@ export interface InferenceModelInfo {
    * <p>云账户的 Sub UIN</p>
    */
   SubAccountUin?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceTags?: Array<Tag>
 }
 
 /**
@@ -4821,6 +4850,18 @@ export interface CreateInferenceModelRequest {
    * <p>模型 UID（可选，前端预先生成的 UID，不传则后端自动生成）</p>
    */
   ModelUid?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * <p>模型文件来源于goosefs</p>
+   */
+  GooseFSConfig?: GooseFSConfig
+  /**
+   * <p>模型上传来源类型</p><p>枚举值：</p><ul><li>Local： 本地上传</li><li>COS： COS上传</li><li>CFS： CFS上传</li><li>CFSTurbo： CFSTurbo上传</li><li>GooseFS： GooseFS上传</li></ul>
+   */
+  StorageType?: string
 }
 
 /**
@@ -5383,6 +5424,10 @@ export interface UpdateInferenceModelRequest {
    * <p>模型标签列表（可选）</p>
    */
   Tags?: Array<string>
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+   */
+  ResourceTags?: Array<Tag>
 }
 
 /**
@@ -8926,7 +8971,23 @@ export interface AlterDMSTableRequest {
 /**
  * 运行中部署的 GPU 资源汇总
  */
-export type GpuSummaryItem = null
+export interface GpuSummaryItem {
+  /**
+   * <p>GPU 型号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuType?: string
+  /**
+   * <p>GPU 总数（gpuNum × replicas）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuCount?: number
+  /**
+   * <p>运行中的副本数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Replicas?: number
+}
 
 /**
  * worker组规格
@@ -9318,6 +9379,24 @@ export interface CancelTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 推理模型接入goosefs参数
+ */
+export interface GooseFSConfig {
+  /**
+   * <p>goosefs集群id</p>
+   */
+  ClusterId: string
+  /**
+   * <p>goosefs命名空间名称</p>
+   */
+  GooseFSPath: string
+  /**
+   * <p>主从节点信息</p>
+   */
+  MasterAddresses: Array<string>
 }
 
 /**
@@ -9879,6 +9958,19 @@ export interface StopInferenceServiceResponse {
    * <p>资源配置（JSON 字符串，取自第一个部署）</p>
    */
   ResourceConfig?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * <p>部署模式</p>
+   */
+  DeploymentMode?: string
+  /**
+   * <p>是否为自定义代码部署</p>
+   */
+  IsCustom?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14761,6 +14853,11 @@ export interface RestartInferenceServiceResponse {
    */
   ResourceConfig?: string
   /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceTags?: Array<Tag>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -16367,7 +16464,7 @@ export interface ResourceSaleInfo {
    */
   MaxSpec?: number
   /**
-   * <p>库存情况，对当前地域该计费项实时可新增数量的分级预估。取值复用 BcpConstants 库存状态常量：</p><ul><li>EnoughStock：余量充足（&gt;100）</li><li>NormalStock：余量正常（50~100）</li><li>UnderStock：余量紧张（1~49）</li><li>WithoutStock：无库存（0）</li></ul><p>该值为底层提供的预估值，不代表保证可发货量，仅用于展示库存概况。当请求 Region 与资源池地域不一致、cold-start 缓存未 ready、或该计费项在快照中缺失时返回 null。</p>
+   * <p>库存情况，对当前地域该计费项实时可新增数量的分级预估。取值复用 BcpConstants 库存状态常量：</p><ul><li>EnoughStock：余量充足</li><li>NormalStock：余量正常</li><li>UnderStock：余量紧张</li><li>WithoutStock：无库存</li></ul><p>该值为底层提供的预估值，不代表保证可发货量，仅用于展示库存概况。当请求 Region 与资源池地域不一致、cold-start 缓存未 ready、或该计费项在快照中缺失时返回 null。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusCategory?: string
@@ -16728,6 +16825,11 @@ export interface GetInferenceModelResponse {
    * <p>Sub UIN</p>
    */
   SubAccountUin?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceTags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18015,6 +18117,18 @@ export interface GetInferenceServiceResponse {
    * <p>资源配置（JSON 字符串，取自第一个部署）</p>
    */
   ResourceConfig?: string
+  /**
+   * <p>部署模式</p>
+   */
+  DeploymentMode?: string
+  /**
+   * <p>是否为自定义代码部署</p>
+   */
+  IsCustom?: boolean
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+   */
+  ResourceTags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19641,6 +19755,10 @@ export interface CreateInferenceModelResponse {
    * <p>Sub UIN</p>
    */
   SubAccountUin?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+   */
+  ResourceTags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21897,6 +22015,22 @@ export interface CreateInferenceServiceResponse {
    */
   ResourceConfig?: string
   /**
+   * <p>AdvancedOptions 高级参数 JSON 字符串（扁平 KV 结构，取自第一个部署）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * <p>部署模式</p>
+   */
+  DeploymentMode?: string
+  /**
+   * <p>是否是自定义 RayServe 创建</p>
+   */
+  IsCustom?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -22004,6 +22138,11 @@ export interface UpdateInferenceModelResponse {
    * <p>SUB UIN</p>
    */
   SubAccountUin?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceTags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23455,6 +23594,10 @@ export interface DescribeMCPTaskResultRequest {
    * <p>任务ID</p>
    */
   TaskId: string
+  /**
+   * <p>下一次请求数据</p>
+   */
+  NextToken?: string
 }
 
 /**

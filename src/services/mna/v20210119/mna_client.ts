@@ -28,14 +28,17 @@ import {
   UpdateHardwareResponse,
   UpdateNetInfo,
   UpdateL3SwitchRequest,
+  AccessPointInfo,
   AddL3ConnRequest,
   OrderPerLicenseResponse,
+  GroupDeleteDeviceRequest,
   GetFlowPackagesRequest,
   SetNotifyUrlResponse,
+  GetCustomerGatewayClusterListResponse,
   UpdateL3CidrResponse,
   UpdateApplicationKeyRequest,
   AddApplicationRequest,
-  ModifyPackageRenewFlagRequest,
+  L3ConnInfo,
   GetFlowPackagesResponse,
   ReportOrderRequest,
   DeleteL3ConnRequest,
@@ -45,7 +48,9 @@ import {
   GetActiveDeviceCountResponse,
   DestIpInfo,
   DeviceBaseInfo,
+  ModifyPackageRenewFlagRequest,
   AddGroupRequest,
+  ModifyDeviceAccessScopeRequest,
   GetGroupListRequest,
   HardwareInfo,
   DeleteApplicationResponse,
@@ -54,35 +59,44 @@ import {
   GroupAddDeviceRequest,
   GetStatisticDataResponse,
   UpdateApplicationInfoRequest,
-  GetPublicKeyRequest,
+  DescribeAccessPointListRequest,
+  UpdateCustomerGatewayClusterResponse,
+  AddL3ConnResponse,
   GetHardwareInfoRequest,
   GatewayInfo,
   GetFlowStatisticByGroupResponse,
+  AddGatewayRequest,
   GetNetMonitorResponse,
+  GetNetMonitorRequest,
+  ModifyDeviceAccessScopeResponse,
   GetFlowStatisticByNameResponse,
   ReportOrderResponse,
   GetFlowAlarmInfoRequest,
   GetVendorHardwareRequest,
   CreateEncryptedKeyRequest,
+  AddCustomerGatewayClusterRequest,
   DeleteDeviceRequest,
   GetGatewayListRequest,
   DeleteGroupRequest,
   CreateEncryptedKeyResponse,
   UpdateL3SwitchResponse,
   DescribeAccessRegionsResponse,
+  UpdateCustomerGatewayClusterRequest,
   GetL3ConnListResponse,
+  DeleteCustomerGatewayClusterRequest,
   GroupInfo,
   AddApplicationResponse,
   ModifyPackageRenewFlagResponse,
   ModifyDeviceAccessRegionsResponse,
   GetDestIPByNameResponse,
   DescribeAccessRegionsRequest,
-  VendorHardware,
+  DeleteGatewayRequest,
   GetDeviceRequest,
   ActivateHardwareResponse,
+  GatewayClusterInfo,
   GetFlowStatisticByGroupRequest,
   GetDevicesResponse,
-  AddL3ConnResponse,
+  GetPublicKeyRequest,
   GetDestIPByNameRequest,
   GetDevicesRequest,
   GetStatisticDataByNameRequest,
@@ -91,17 +105,19 @@ import {
   DeleteApplicationRequest,
   ModifyDeviceAccessRegionsRequest,
   SlotNetInfo,
+  VendorHardware,
   DeviceNetInfo,
   NetDetails,
   ActivateHardware,
   DownloadActiveDeviceCountResponse,
   GetHardwareListRequest,
   GetFlowStatisticByNameRequest,
+  DescribeAccessPointListResponse,
+  AddCustomerGatewayClusterResponse,
   DeviceDetails,
-  GroupDeleteDeviceRequest,
   GetHardwareInfoResponse,
   GetFlowStatisticByRegionResponse,
-  ActiveDeviceList,
+  ActivateHardwareRequest,
   GetMultiFlowStatisticRequest,
   GetFlowAlarmInfoResponse,
   GetFlowStatisticByRegionRequest,
@@ -118,7 +134,7 @@ import {
   UpdateGroupRequest,
   GetFlowStatisticResponse,
   UpdateHardwareRequest,
-  GetNetMonitorRequest,
+  ActiveDeviceList,
   GetNetMonitorByNameRequest,
   GetGroupListResponse,
   GetGatewayListResponse,
@@ -126,10 +142,11 @@ import {
   OrderFlowPackageResponse,
   UpdateDeviceResponse,
   RegionInfo,
-  L3ConnInfo,
-  ActivateHardwareRequest,
+  GetCustomerGatewayClusterListRequest,
+  DeleteCustomerGatewayClusterResponse,
   GetMonitorDataByNameResponse,
   GroupAddDeviceResponse,
+  DeleteGatewayResponse,
   GetStatisticDataRequest,
   GetApplicationRequest,
   UpdateDeviceRequest,
@@ -146,6 +163,7 @@ import {
   DevicePayModeInfo,
   MonitorData,
   DeleteDeviceResponse,
+  AddGatewayResponse,
   AddHardwareRequest,
   Hardware,
   UpdateL3CidrRequest,
@@ -159,6 +177,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("mna.tencentcloudapi.com", "2021-01-19", clientConfig)
+  }
+
+  /**
+   * 更新互通规则CIDR
+   */
+  async UpdateL3Cidr(
+    req: UpdateL3CidrRequest,
+    cb?: (error: string, rep: UpdateL3CidrResponse) => void
+  ): Promise<UpdateL3CidrResponse> {
+    return this.request("UpdateL3Cidr", req, cb)
   }
 
   /**
@@ -302,6 +330,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改设备接入网关类型。
+   */
+  async ModifyDeviceAccessScope(
+    req: ModifyDeviceAccessScopeRequest,
+    cb?: (error: string, rep: ModifyDeviceAccessScopeResponse) => void
+  ): Promise<ModifyDeviceAccessScopeResponse> {
+    return this.request("ModifyDeviceAccessScope", req, cb)
+  }
+
+  /**
    * 激活硬件设备
    */
   async ActivateHardware(
@@ -392,6 +430,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用户上报自定义的订单信息，多网聚合加速（腾讯云聚通）服务将相关信息进行保存
+   */
+  async ReportOrder(
+    req: ReportOrderRequest,
+    cb?: (error: string, rep: ReportOrderResponse) => void
+  ): Promise<ReportOrderResponse> {
+    return this.request("ReportOrder", req, cb)
+  }
+
+  /**
    * 活跃设备数量统计
    */
   async GetActiveDeviceCount(
@@ -409,6 +457,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateApplicationKeyResponse) => void
   ): Promise<UpdateApplicationKeyResponse> {
     return this.request("UpdateApplicationKey", req, cb)
+  }
+
+  /**
+   * 根据AppId查询用户设置的流量告警信息，包括阈值，回调url和key
+   */
+  async GetFlowAlarmInfo(
+    req?: GetFlowAlarmInfoRequest,
+    cb?: (error: string, rep: GetFlowAlarmInfoResponse) => void
+  ): Promise<GetFlowAlarmInfoResponse> {
+    return this.request("GetFlowAlarmInfo", req, cb)
   }
 
   /**
@@ -432,13 +490,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 购买一次性授权License
+   * 获取指定设备Id，指定时间点数据流量使用情况
    */
-  async OrderPerLicense(
-    req: OrderPerLicenseRequest,
-    cb?: (error: string, rep: OrderPerLicenseResponse) => void
-  ): Promise<OrderPerLicenseResponse> {
-    return this.request("OrderPerLicense", req, cb)
+  async GetFlowStatisticByName(
+    req: GetFlowStatisticByNameRequest,
+    cb?: (error: string, rep: GetFlowStatisticByNameResponse) => void
+  ): Promise<GetFlowStatisticByNameResponse> {
+    return this.request("GetFlowStatisticByName", req, cb)
   }
 
   /**
@@ -472,23 +530,35 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新互通规则CIDR
+   * 获取互通规则列表
    */
-  async UpdateL3Cidr(
-    req: UpdateL3CidrRequest,
-    cb?: (error: string, rep: UpdateL3CidrResponse) => void
-  ): Promise<UpdateL3CidrResponse> {
-    return this.request("UpdateL3Cidr", req, cb)
+  async GetL3ConnList(
+    req: GetL3ConnListRequest,
+    cb?: (error: string, rep: GetL3ConnListResponse) => void
+  ): Promise<GetL3ConnListResponse> {
+    return this.request("GetL3ConnList", req, cb)
   }
 
   /**
-   * 获取指定设备Id，指定时间点数据流量使用情况
+     * 更新客户自有网关集群配置。
+
+目前仅支持修改集群的公网访问 IP。
+     */
+  async UpdateCustomerGatewayCluster(
+    req: UpdateCustomerGatewayClusterRequest,
+    cb?: (error: string, rep: UpdateCustomerGatewayClusterResponse) => void
+  ): Promise<UpdateCustomerGatewayClusterResponse> {
+    return this.request("UpdateCustomerGatewayCluster", req, cb)
+  }
+
+  /**
+   * 此接口用来查询接入点列表。
    */
-  async GetFlowStatisticByName(
-    req: GetFlowStatisticByNameRequest,
-    cb?: (error: string, rep: GetFlowStatisticByNameResponse) => void
-  ): Promise<GetFlowStatisticByNameResponse> {
-    return this.request("GetFlowStatisticByName", req, cb)
+  async DescribeAccessPointList(
+    req: DescribeAccessPointListRequest,
+    cb?: (error: string, rep: DescribeAccessPointListResponse) => void
+  ): Promise<DescribeAccessPointListResponse> {
+    return this.request("DescribeAccessPointList", req, cb)
   }
 
   /**
@@ -512,13 +582,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建互通规则
-   */
-  async AddL3Conn(
-    req: AddL3ConnRequest,
-    cb?: (error: string, rep: AddL3ConnResponse) => void
-  ): Promise<AddL3ConnResponse> {
-    return this.request("AddL3Conn", req, cb)
+     * 删除客户自有网关集群。
+
+删除指定的客户自有网关集群，操作不可逆。调用接口后，若通过 GetCustomerGatewayClusterList 接口查询不到对应集群，则表示删除成功。
+     */
+  async DeleteCustomerGatewayCluster(
+    req: DeleteCustomerGatewayClusterRequest,
+    cb?: (error: string, rep: DeleteCustomerGatewayClusterResponse) => void
+  ): Promise<DeleteCustomerGatewayClusterResponse> {
+    return this.request("DeleteCustomerGatewayCluster", req, cb)
   }
 
   /**
@@ -542,23 +614,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据AppId查询用户设置的流量告警信息，包括阈值，回调url和key
-   */
-  async GetFlowAlarmInfo(
-    req?: GetFlowAlarmInfoRequest,
-    cb?: (error: string, rep: GetFlowAlarmInfoResponse) => void
-  ): Promise<GetFlowAlarmInfoResponse> {
-    return this.request("GetFlowAlarmInfo", req, cb)
+     * 向指定的客户自有网关集群注册一个网关实例。
+
+注册成功后返回网关实例 ID、鉴权 Token 及 Agent 相关地址信息，用于后续网关 Agent 上报。
+     */
+  async AddGateway(
+    req: AddGatewayRequest,
+    cb?: (error: string, rep: AddGatewayResponse) => void
+  ): Promise<AddGatewayResponse> {
+    return this.request("AddGateway", req, cb)
   }
 
   /**
-   * 用户上报自定义的订单信息，多网聚合加速（腾讯云聚通）服务将相关信息进行保存
+   * 购买一次性授权License
    */
-  async ReportOrder(
-    req: ReportOrderRequest,
-    cb?: (error: string, rep: ReportOrderResponse) => void
-  ): Promise<ReportOrderResponse> {
-    return this.request("ReportOrder", req, cb)
+  async OrderPerLicense(
+    req: OrderPerLicenseRequest,
+    cb?: (error: string, rep: OrderPerLicenseResponse) => void
+  ): Promise<OrderPerLicenseResponse> {
+    return this.request("OrderPerLicense", req, cb)
   }
 
   /**
@@ -622,6 +696,28 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新建互通规则
+   */
+  async AddL3Conn(
+    req: AddL3ConnRequest,
+    cb?: (error: string, rep: AddL3ConnResponse) => void
+  ): Promise<AddL3ConnResponse> {
+    return this.request("AddL3Conn", req, cb)
+  }
+
+  /**
+     * 查询客户自有网关集群列表。
+
+支持按集群名称关键字过滤，使用 Offset/Limit 分页返回集群及其下网关实例信息。
+     */
+  async GetCustomerGatewayClusterList(
+    req: GetCustomerGatewayClusterListRequest,
+    cb?: (error: string, rep: GetCustomerGatewayClusterListResponse) => void
+  ): Promise<GetCustomerGatewayClusterListResponse> {
+    return this.request("GetCustomerGatewayClusterList", req, cb)
+  }
+
+  /**
    * 新建设备记录
    */
   async AddDevice(
@@ -682,6 +778,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 从指定集群下删除一个客户自有网关实例。
+
+删除后，通过 GetCustomerGatewayClusterList 查询不到对应实例，则表示删除成功。
+     */
+  async DeleteGateway(
+    req: DeleteGatewayRequest,
+    cb?: (error: string, rep: DeleteGatewayResponse) => void
+  ): Promise<DeleteGatewayResponse> {
+    return this.request("DeleteGateway", req, cb)
+  }
+
+  /**
    * 新建分组
    */
   async AddGroup(
@@ -692,13 +800,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取互通规则列表
-   */
-  async GetL3ConnList(
-    req: GetL3ConnListRequest,
-    cb?: (error: string, rep: GetL3ConnListResponse) => void
-  ): Promise<GetL3ConnListResponse> {
-    return this.request("GetL3ConnList", req, cb)
+     * 创建客户自有网关集群。
+
+用于承载客户侧的自有网关实例，创建成功后返回集群 ID。
+     */
+  async AddCustomerGatewayCluster(
+    req: AddCustomerGatewayClusterRequest,
+    cb?: (error: string, rep: AddCustomerGatewayClusterResponse) => void
+  ): Promise<AddCustomerGatewayClusterResponse> {
+    return this.request("AddCustomerGatewayCluster", req, cb)
   }
 
   /**

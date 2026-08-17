@@ -364,6 +364,7 @@ import {
   BatchProductionInfo,
   DeleteDeviceRequest,
   CreateDeviceSDPAnswerRequest,
+  VisionRecognitionTaskFilter,
   ControlDeviceDataRequest,
   TalkSTTConfigInfo,
   ListFirmwaresResponse,

@@ -1271,6 +1271,14 @@ export interface ApmAppConfig {
    * <p>采样阈值，100等于关闭采样，0表示全采样</p>
    */
   HeadSamplerArg?: number
+  /**
+   * <p>是否为跨账号</p><p>枚举值：</p><ul><li>0： 否</li><li>1： 是</li></ul>
+   */
+  CrossAccountStatus?: number
+  /**
+   * <p>跨账号关联ID</p>
+   */
+  CrossAccountPeerId?: string
 }
 
 /**
@@ -1823,6 +1831,14 @@ export interface ModifyApmInstanceRequest {
    * <p>是否禁用 AI 能力</p><p>单位：无</p>
    */
   DisableAiAbility?: number
+  /**
+   * <p>是否为跨账号</p><p>枚举值：</p><ul><li>0： 否</li><li>1： 是</li></ul>
+   */
+  CrossAccountStatus?: number
+  /**
+   * <p>跨账号关联ID</p>
+   */
+  CrossAccountPeerId?: string
 }
 
 /**
@@ -2709,6 +2725,14 @@ export interface ApmInstanceDetail {
    * <p>是否禁用 AI 能力</p><p>单位：无</p>
    */
   DisableAiAbility?: number
+  /**
+   * <p>是否为跨账号</p><p>枚举值：</p><ul><li>0： 否</li><li>1： 是</li></ul>
+   */
+  CrossAccountStatus?: number
+  /**
+   * <p>跨账号关联ID</p>
+   */
+  CrossAccountPeerId?: string
 }
 
 /**
@@ -3596,17 +3620,25 @@ export interface ModifyApmApplicationConfigRequest {
    */
   UseDefaultFuseConfig?: boolean
   /**
-   * <p>是否开启探针头采样</p>
+   * <p>是否开启探针头采样</p><p>（受限）</p>
    */
   EnableHeadSampler?: boolean
   /**
-   * <p>头采样类型</p><p>枚举值：</p><ul><li>parentbased_traceidratio： 跟随parent</li></ul>
+   * <p>头采样类型</p><p>枚举值：</p><ul><li>parentbased_traceidratio： 跟随parent</li></ul><p>（受限）</p>
    */
   HeadSamplerType?: string
   /**
-   * <p>采样率</p><p>取值范围：[0, 100]</p><p>默认值：100</p>
+   * <p>采样率</p><p>取值范围：[0, 100]</p><p>默认值：100</p><p>（受限）</p>
    */
   HeadSamplerArg?: number
+  /**
+   * <p>是否为跨账号</p><p>枚举值：</p><ul><li>0： 否</li><li>1： 是</li></ul>
+   */
+  CrossAccountStatus?: number
+  /**
+   * <p>跨账号关联ID</p>
+   */
+  CrossAccountPeerId?: string
 }
 
 /**

@@ -1547,11 +1547,11 @@ export interface ActivateTWeTalkRequest {
  */
 export interface ListTWeSeeTasksResponse {
   /**
-   * 任务列表
+   * <p>任务列表</p>
    */
   Tasks?: Array<SeeTaskInfo>
   /**
-   * 任务数量
+   * <p>任务数量</p>
    */
   Total?: number
   /**
@@ -2113,6 +2113,10 @@ export interface CreateTWeSeeDirectUploadCredentialRequest {
    * <p>上传方式</p><p>枚举值：</p><ul><li>single： 单文件上传</li><li>manifest： 上传源文件与 Manifest（先上传多个源文件，然后上传 Manifest JSON 触发分析）</li></ul><p>默认值：single</p>
    */
   UploadMethod?: string
+  /**
+   * <p>上传目标</p><p>枚举值：</p><ul><li>session： 一次性上传会话（默认，通过入参传递 ComprehensionConfig 等上传参数）</li><li>stream： 上传到指定设备（加载对应设备的 ComprehensionConfig 等配置）</li></ul><p>默认值：session</p>
+   */
+  UploadTarget?: string
 }
 
 /**
@@ -3583,63 +3587,53 @@ export interface CheckFirmwareUpdateResponse {
  */
 export interface ListTWeSeeTasksRequest {
   /**
-   * 产品 ID
+   * <p>产品 ID</p>
    */
   ProductId: string
   /**
-   * 设备名称
+   * <p>设备名称</p>
    */
   DeviceName: string
   /**
-   * 算法类目。可选值：
-- `COMPREHENSION`：视觉理解
-- `HIGHLIGHT`：视频浓缩
+   * <p>算法类目。可选值：</p><ul><li><code>COMPREHENSION</code>：视觉理解</li><li><code>HIGHLIGHT</code>：视频浓缩</li></ul>
    */
   ServiceCategory: string
   /**
-   * 分页拉取数量
+   * <p>分页拉取数量</p>
    */
   Limit: number
   /**
-   * 分页拉取偏移
+   * <p>分页拉取偏移</p>
    */
   Offset?: number
   /**
-   * 算法类型。
-
-当 ServiceCategory 为 `COMPREHENSION` 时，可选值包括：
-- `VID_COMP`：视频理解
-- `IMG_COMP`：图片理解
-- `CONT_PERSON_MOTIONLESS`：静姿检测
-
-当 ServiceCategory 为 `HIGHLIGHT` 时，可选值包括：
-- `COMP_HIGHLIGHT`：视频浓缩
+   * <p>算法类型。</p><p>当 ServiceCategory 为 <code>COMPREHENSION</code> 时，可选值包括：</p><ul><li><code>VID_COMP</code>：视频理解</li><li><code>IMG_COMP</code>：图片理解</li><li><code>CONT_PERSON_MOTIONLESS</code>：静姿检测</li></ul><p>当 ServiceCategory 为 <code>HIGHLIGHT</code> 时，可选值包括：</p><ul><li><code>COMP_HIGHLIGHT</code>：视频浓缩</li></ul>
    */
   ServiceTypes?: Array<string>
   /**
-   * 通道 ID
+   * <p>通道 ID</p>
    */
   ChannelId?: number
   /**
-   * 查询任务时间范围的起始时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。
+   * <p>查询任务时间范围的起始时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。</p>
    */
   StartTimeMs?: number
   /**
-   * 查询任务时间范围的结束时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。
+   * <p>查询任务时间范围的结束时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。</p>
    */
   EndTimeMs?: number
   /**
-   * 要查询的任务的状态条件。不传则不按照状态过滤，可选值：
-
-- `1`：失败
-- `2`：空结果
-- `3`：有效结果
+   * <p>要查询的任务的状态条件。不传则不按照状态过滤，可选值：</p><ul><li><code>1</code>：失败</li><li><code>2</code>：空结果</li><li><code>3</code>：有效结果</li></ul>
    */
   Status?: number
   /**
-   * 下载 URL 的过期时间（秒级 UNIX 时间戳）。若传入该参数，则响应中将包含所有文件的下载 URL
+   * <p>下载 URL 的过期时间（秒级 UNIX 时间戳）。若传入该参数，则响应中将包含所有文件的下载 URL</p>
    */
   FileURLExpireTime?: number
+  /**
+   * <p>任务结果过滤条件</p>
+   */
+  Filters?: Array<VisionRecognitionTaskFilter>
 }
 
 /**
@@ -7635,6 +7629,20 @@ export interface CreateDeviceSDPAnswerRequest {
    * <p>默认值：0，如果需要webrtc推流拉流在同一个SDP中，需要值为1，常用于单PC模式</p><p>枚举值：</p><ul><li>0： 默认值，传统多pc推流模式</li><li>1： 单pc模式，如果需要webrtc单pc推拉流，采用此模式，此模式下注意SDP需要包含推拉流全部信息</li></ul><p>默认值：0</p>
    */
   EnableSubPub?: number
+}
+
+/**
+ * TWeSee 语义理解任务过滤条件
+ */
+export interface VisionRecognitionTaskFilter {
+  /**
+   * 需要过滤的字段
+   */
+  Key: string
+  /**
+   * 需要过滤的值
+   */
+  Values: Array<string>
 }
 
 /**
@@ -13359,80 +13367,69 @@ export interface CreatePositionFenceRequest {
  */
 export interface SeeTaskInfo {
   /**
-   * 任务 ID
+   * <p>任务 ID</p>
    */
   TaskId?: string
   /**
-   * 任务状态。可能取值：
-
-- `1`：失败
-- `2`：空结果
-- `3`：有效结果
-- `4`：处理中
+   * <p>任务状态。可能取值：</p><ul><li><code>1</code>：失败</li><li><code>2</code>：空结果</li><li><code>3</code>：有效结果</li><li><code>4</code>：处理中</li></ul>
    */
   Status?: number
   /**
-   * 任务元数据
+   * <p>任务元数据</p>
    */
   Metadata?: SeeTaskMetadata
   /**
-   * 算法类目。可能取值：
-
-- `COMPREHENSION`：视觉理解
-- `HIGHLIGHT`：视频浓缩
+   * <p>算法类目。可能取值：</p><ul><li><code>COMPREHENSION</code>：视觉理解</li><li><code>HIGHLIGHT</code>：视频浓缩</li></ul>
    */
   ServiceCategory?: string
   /**
-   * 算法类型。可能取值：
-
-- `VID_COMP`：视频理解
-- `IMG_COMP`：图片理解
-- `COMP_HIGHLIGHT`：视频浓缩
+   * <p>算法类型。可能取值：</p><ul><li><code>VID_COMP</code>：视频理解</li><li><code>IMG_COMP</code>：图片理解</li><li><code>COMP_HIGHLIGHT</code>：视频浓缩</li></ul>
    */
   ServiceType?: string
   /**
-   * 套餐规格。可能取值：
-
-- `POSTPAID`：后付费（适用于视频理解、图片理解）
-- `BASIC`：包年包月基础版（适用于视频理解）
+   * <p>套餐规格。可能取值：</p><ul><li><code>POSTPAID</code>：后付费（适用于视频理解、图片理解）</li><li><code>BASIC</code>：包年包月基础版（适用于视频理解）</li></ul>
    */
   ServiceTier?: string
   /**
-   * 视觉理解结果（适用于视频理解、图片理解）
+   * <p>视觉理解结果（适用于视频理解、图片理解）</p>
    */
   ComprehensionResult?: SeeComprehensionResult
   /**
-   * 视频语义浓缩结果（适用于视频语义浓缩）
+   * <p>视频语义浓缩结果（适用于视频语义浓缩）</p>
    */
   CompHighlightResult?: SeeCompHighlightResult
   /**
-   * 标签持续检测结果
+   * <p>标签持续检测结果</p>
    */
   DetectContinuousResult?: SeeDetectContinuousResult
   /**
-   * 完成该任务所消耗的基础能力额度
+   * <p>完成该任务所消耗的基础能力额度</p>
    */
   CostBasic?: number
   /**
-   * 完成该任务所消耗的高级能力额度
+   * <p>完成该任务所消耗的高级能力额度</p>
    */
   CostAdvanced?: number
   /**
-   * 输出文件名列表
+   * <p>输出文件名列表</p>
    */
   Files?: Array<string>
   /**
-   * 输出文件详情列表
+   * <p>输出文件详情列表</p>
    */
   FilesInfo?: Array<CloudStorageAIServiceTaskFileInfo>
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: number
   /**
-   * 最后更新时间
+   * <p>最后更新时间</p>
    */
   UpdateTime?: number
+  /**
+   * <p>直传 COS 的对象 URI</p>
+   */
+  COSURI?: string
 }
 
 /**
