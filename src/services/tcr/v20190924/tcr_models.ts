@@ -3861,7 +3861,7 @@ export interface Registry {
    */
   EnableAnonymous?: boolean
   /**
-   * <p>Token有效时间</p>
+   * <p>Token有效时间，单位：小时</p>
    */
   TokenValidTime?: number
   /**
@@ -5235,63 +5235,63 @@ export interface DescribeApplicationTriggerPersonalResp {
  */
 export interface TagInfo {
   /**
-   * Tag名称
+   * <p>Tag名称</p>
    */
   TagName?: string
   /**
-   * 制品的 ID
+   * <p>制品的 ID</p>
    */
   TagId?: string
   /**
-   * docker image 可以看到的id
+   * <p>docker image 可以看到的id</p>
    */
   ImageId?: string
   /**
-   * 大小
+   * <p>大小</p>
    */
   Size?: string
   /**
-   * 制品的创建时间
+   * <p>制品的创建时间</p>
    */
   CreationTime?: string
   /**
-   * 制品创建至今时间长度
+   * <p>制品创建至今时间长度</p>
    */
   DurationDays?: string
   /**
-   * 标注的制品作者
+   * <p>标注的制品作者</p>
    */
   Author?: string
   /**
-   * 标注的制品平台
+   * <p>标注的制品平台</p>
    */
   Architecture?: string
   /**
-   * 创建制品的 Docker 版本
+   * <p>创建制品的 Docker 版本</p>
    */
   DockerVersion?: string
   /**
-   * 标注的制品操作系统
+   * <p>标注的制品操作系统</p>
    */
   OS?: string
   /**
-   * 制品大小
+   * <p>制品大小，单位：Byte</p>
    */
   SizeByte?: number
   /**
-   * 序号
+   * <p>序号</p>
    */
   Id?: number
   /**
-   * 数据更新时间
+   * <p>数据更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 制品更新时间
+   * <p>制品更新时间</p>
    */
   PushTime?: string
   /**
-   * 制品类型
+   * <p>制品类型</p>
    */
   Kind?: string
 }

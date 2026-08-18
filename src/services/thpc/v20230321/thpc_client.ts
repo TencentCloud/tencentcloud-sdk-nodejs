@@ -19,8 +19,9 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ClusterOverview,
-  ModifyNodeAttributeResponse,
+  InquirePriceModifyWorkspacesChargeTypeRequest,
   NodeOverview,
+  SpacePlacement,
   DescribeInitNodeScriptsRequest,
   AddNodesResponse,
   ExpansionNodeConfig,
@@ -28,6 +29,8 @@ import {
   ModifyClusterDeletionProtectionResponse,
   CreateWorkspacesResponse,
   SpaceVirtualPrivateCloud,
+  ModifyWorkspacesRenewFlagRequest,
+  ModifyNodeAttributeResponse,
   ManagerNodeOverview,
   DeleteClusterRequest,
   SystemDisk,
@@ -52,6 +55,7 @@ import {
   ModifyNodeAttributeRequest,
   AddQueueRequest,
   QueueConfigOverview,
+  DeleteNodesRequest,
   DescribeQueuesResponse,
   SubmitJobRequest,
   Job,
@@ -59,7 +63,6 @@ import {
   Placement,
   DescribeNodesResponse,
   GooseFSOptionOverview,
-  CFSOption,
   CosOption,
   DeleteClusterStorageOptionRequest,
   RunMonitorServiceEnabled,
@@ -100,11 +103,12 @@ import {
   ModifyWorkspacesAttributeRequest,
   Filter,
   Docker,
+  ModifyWorkspacesChargeTypeRequest,
   Application,
   SpaceInfo,
   TerminateWorkspacesRequest,
   ComputeNode,
-  DeleteNodesRequest,
+  ItemPrice,
   DeleteClusterStorageOptionResponse,
   TerminateJobResponse,
   SpaceInternetAccessible,
@@ -118,7 +122,8 @@ import {
   AttachNodesResponse,
   LoginNode,
   DescribeJobsOverviewResponse,
-  ModifyWorkspacesRenewFlagRequest,
+  CFSOption,
+  Price,
   CreateWorkspacesRequest,
   SpaceSystemDisk,
   ComputeNodeOverview,
@@ -131,12 +136,13 @@ import {
   DeleteQueueRequest,
   AddClusterStorageOptionRequest,
   GooseFSxOption,
-  SpacePlacement,
+  ModifyWorkspacesChargeTypeResponse,
   VirtualPrivateCloud,
   DescribeAutoScalingConfigurationRequest,
   StorageMount,
   InternetAccessible,
   JobView,
+  InquirePriceModifyWorkspacesChargeTypeResponse,
   EnvVar,
   InstanceChargePrepaid,
 } from "./thpc_models"
@@ -253,6 +259,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (ModifyWorkspacesAttribute) 用于修改工作空间的属性（目前只支持修改工作空间的名称）。
+   */
+  async ModifyWorkspacesRenewFlag(
+    req: ModifyWorkspacesRenewFlagRequest,
+    cb?: (error: string, rep: ModifyWorkspacesRenewFlagResponse) => void
+  ): Promise<ModifyWorkspacesRenewFlagResponse> {
+    return this.request("ModifyWorkspacesRenewFlag", req, cb)
+  }
+
+  /**
    * 本接口 (DetachNodes) 用于将一个或者多个计算节点从集群中移除，但是不销毁指定计算资源。
    */
   async DetachNodes(
@@ -300,6 +316,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNodesResponse) => void
   ): Promise<DescribeNodesResponse> {
     return this.request("DescribeNodes", req, cb)
+  }
+
+  /**
+   * 正式提交按量计费工作空间转包年包月订单。仅支持 ONLINE 且计费模式为 POSTPAID_BY_HOUR 的工作空间。
+   */
+  async ModifyWorkspacesChargeType(
+    req: ModifyWorkspacesChargeTypeRequest,
+    cb?: (error: string, rep: ModifyWorkspacesChargeTypeResponse) => void
+  ): Promise<ModifyWorkspacesChargeTypeResponse> {
+    return this.request("ModifyWorkspacesChargeType", req, cb)
   }
 
   /**
@@ -455,13 +481,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (ModifyWorkspacesAttribute) 用于修改工作空间的属性（目前只支持修改工作空间的名称）。
+   * 查询按量计费工作空间转换为包年包月的价格。不会创建订单或变更资源。
    */
-  async ModifyWorkspacesRenewFlag(
-    req: ModifyWorkspacesRenewFlagRequest,
-    cb?: (error: string, rep: ModifyWorkspacesRenewFlagResponse) => void
-  ): Promise<ModifyWorkspacesRenewFlagResponse> {
-    return this.request("ModifyWorkspacesRenewFlag", req, cb)
+  async InquirePriceModifyWorkspacesChargeType(
+    req: InquirePriceModifyWorkspacesChargeTypeRequest,
+    cb?: (error: string, rep: InquirePriceModifyWorkspacesChargeTypeResponse) => void
+  ): Promise<InquirePriceModifyWorkspacesChargeTypeResponse> {
+    return this.request("InquirePriceModifyWorkspacesChargeType", req, cb)
   }
 
   /**

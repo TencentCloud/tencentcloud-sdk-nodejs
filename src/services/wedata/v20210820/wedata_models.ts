@@ -12087,47 +12087,47 @@ export interface DescribeTaskParamDsResponse {
  */
 export interface ModifyProjectRequest {
   /**
-   * 目标修改的项目ID
+   * <p>目标修改的项目ID</p>
    */
   ProjectId: string
   /**
-   * 项目显示名称，可以为中文名,需要租户范围内唯一
+   * <p>项目显示名称，可以为中文名,需要租户范围内唯一</p>
    */
   DisplayName?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Description?: string
   /**
-   * true/false则修改，不带该参数不修改。
+   * <p>true/false则修改，不带该参数不修改。</p>
    */
   TaskSubmitApproval?: boolean
   /**
-   * 资源池信息
+   * <p>资源池信息</p>
    */
   ResourcePoolInfo?: ResourcePoolInfo
   /**
-   * 项目管理员
+   * <p>项目管理员</p>
    */
   ProjectManagers?: Array<string>
   /**
-   * 调度任务严格模式
+   * <p>调度任务严格模式</p>
    */
   TaskStrictMode?: boolean
   /**
-   * 以后新增选项可以直接通过前端的json格式写入去实现
+   * <p>以后新增选项可以直接通过前端的json格式写入去实现</p>
    */
   ExtraOptions?: string
   /**
-   * 项目类型，SIMPLE：简单模式 STANDARD：标准模式
+   * <p>项目类型，SIMPLE：简单模式 STANDARD：标准模式</p>
    */
   Model?: string
   /**
-   * 项目负责人
+   * <p>项目负责人</p>
    */
   ProjectOwner?: Array<string>
   /**
-   * 更新类型
+   * <p>更新类型</p>
    */
   ModifyType?: string
 }
@@ -35259,98 +35259,105 @@ export interface DescribeExecutorGroupMetricResponse {
  */
 export interface WorkflowDsDTO {
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 责任人
+   * <p>责任人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Owner?: string
   /**
-   * 责任人ID
+   * <p>责任人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerId?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 项目标识
+   * <p>项目标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectIdent?: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
   /**
-   * 工作流描述
+   * <p>工作流描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowDesc?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 文件夹ID
+   * <p>文件夹ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId?: string
   /**
-   * SparkSQL参数
+   * <p>SparkSQL参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkParams?: string
   /**
-   * 任务列表
+   * <p>任务列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tasks?: Array<TaskDsDTO>
   /**
-   * 任务链接列表
+   * <p>任务链接列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Links?: Array<TaskLinkDsDTO>
   /**
-   * 参数列表
+   * <p>参数列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Params?: Array<ParameterTaskDsDto>
   /**
-   * 工作流类型, 取值示例
-
-- cycle 周期工作流
-- manual 手动工作流
+   * <p>工作流类型, 取值示例</p><ul><li>cycle 周期工作流</li><li>manual 手动工作流</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowType?: string
   /**
-   * 最近更新人名称
+   * <p>最近更新人名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUser?: string
   /**
-   * 最近更新人id
+   * <p>最近更新人id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUserId?: string
   /**
-   * BundleId CI/CD工程生成的bundle唯一标识	
+   * <p>BundleId CI/CD工程生成的bundle唯一标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleId?: string
   /**
-   * BundleId信息
+   * <p>BundleId信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleInfo?: string
+  /**
+   * <p>运行账号ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteUserUin?: string
+  /**
+   * <p>运行账号名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteUserName?: string
 }
 
 /**

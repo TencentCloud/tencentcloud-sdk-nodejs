@@ -1551,7 +1551,7 @@ export interface DescribeAssetImageRegistryRegistryDetailResponse {
    */
   ConnDetectDetail?: Array<RegistryConnDetectResult>
   /**
-   * <p>tcr情况下instance_id</p>
+   * <p>TCR实例ID</p>
    */
   InstanceID?: string
   /**

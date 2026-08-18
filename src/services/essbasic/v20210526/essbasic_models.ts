@@ -1080,185 +1080,97 @@ export interface FlowFileInfo {
  */
 export interface CreateFlowOption {
   /**
-   * 是否允许修改合同信息，
-   **true**：可以
-   **false**：（默认）不可以
+   * <p>是否允许修改合同信息，<br><strong>true</strong>：可以<br><strong>false</strong>：（默认）不可以</p>
    */
   CanEditFlow?: boolean
   /**
-   * 是否允许发起合同弹窗隐藏合同名称
-   **true**：允许
-   **false**：（默认）不允许
+   * <p>是否允许发起合同弹窗隐藏合同名称<br><strong>true</strong>：允许<br><strong>false</strong>：（默认）不允许</p>
    */
   HideShowFlowName?: boolean
   /**
-   * 是否允许发起合同弹窗隐藏合同类型，
-   **true**：允许
-   **false**：（默认）不允许
+   * <p>是否允许发起合同弹窗隐藏合同类型，<br><strong>true</strong>：允许<br><strong>false</strong>：（默认）不允许</p>
    */
   HideShowFlowType?: boolean
   /**
-   * 是否允许发起合同弹窗隐藏合同到期时间
-   **true**：允许
-   **false**：（默认）不允许
+   * <p>是否允许发起合同弹窗隐藏合同到期时间<br><strong>true</strong>：允许<br><strong>false</strong>：（默认）不允许</p>
    */
   HideShowDeadline?: boolean
   /**
-   * 是否允许发起合同步骤跳过指定签署方步骤
-   **true**：允许
-   **false**：（默认）不允许
+   * <p>是否允许发起合同步骤跳过指定签署方步骤<br><strong>true</strong>：允许<br><strong>false</strong>：（默认）不允许</p>
    */
   CanSkipAddApprover?: boolean
   /**
-   * 是否可以编辑签署人包括新增，修改，删除 
-<ul><li>（默认） false -可以编辑签署人</li> <li> true - 禁止编辑签署人</li></ul>
-
-
-
-注意：
-* 如果设置参数为 true， 则 参数签署人 [FlowApproverList](https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow) 不能为空
-* 此参数对子客和自动签无效，不允许进行修改。
+   * <p>是否可以编辑签署人包括新增，修改，删除 </p><ul><li>（默认） false -可以编辑签署人</li> <li> true - 禁止编辑签署人</li></ul><p>注意：</p><ul><li>如果设置参数为 true， 则 参数签署人 <a href="https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow">FlowApproverList</a> 不能为空</li><li>此参数对子客和自动签无效，不允许进行修改。</li></ul>
    */
   ForbidEditApprover?: boolean
   /**
-   * 定制化发起合同弹窗的描述信息，长度不能超过500，只能由中文、字母、数字和标点组成。
+   * <p>定制化发起合同弹窗的描述信息，长度不能超过500，只能由中文、字母、数字和标点组成。</p>
    */
   CustomCreateFlowDescription?: string
   /**
-   * 禁止编辑填写控件
-
-**true**：禁止编辑填写控件
-**false**：（默认）允许编辑填写控件
+   * <p>禁止编辑填写控件</p><p><strong>true</strong>：禁止编辑填写控件<br><strong>false</strong>：（默认）允许编辑填写控件</p>
    */
   ForbidEditFillComponent?: boolean
   /**
-   * 跳过上传文件步骤
-
-**true**：跳过
-**false**：（默认）不跳过，需要传ResourceId
+   * <p>跳过上传文件步骤</p><p><strong>true</strong>：跳过<br><strong>false</strong>：（默认）不跳过，需要传ResourceId</p>
    */
   SkipUploadFile?: boolean
   /**
-   * 签署控件的配置信息，用在嵌入式发起的页面配置，包括 
- - 签署控件 是否默认展示日期.
+   * <p>签署控件的配置信息，用在嵌入式发起的页面配置，包括 </p><ul><li>签署控件 是否默认展示日期.</li></ul>
    */
   SignComponentConfig?: SignComponentConfig
   /**
-   * 是否禁止编辑（展示）水印控件属性
-<ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
+   * <p>是否禁止编辑（展示）水印控件属性</p><ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
    */
   ForbidEditWatermark?: boolean
   /**
-   * 发起成功后是否预览合同
-<ul><li>（默认） false -否</li> <li> true - 展示预览按钮</li></ul>
+   * <p>发起成功后是否预览合同</p><ul><li>（默认） false -否</li> <li> true - 展示预览按钮</li></ul>
    */
   PreviewAfterStart?: boolean
   /**
-   * 发起成功之后是否签署合同，仅当前经办人作为签署人时生效
-<ul><li>（默认） false -否</li> <li> true - 展示签署按钮</li></ul>
+   * <p>发起成功之后是否签署合同，仅当前经办人作为签署人时生效</p><ul><li>（默认） false -否</li> <li> true - 展示签署按钮</li></ul>
    */
   SignAfterStart?: boolean
   /**
-   * 隐藏操作步骤: 具体的控件类型如下
-
-<ul><li>1 : 选择文件及签署方</li>
-<li>2 : 补充文件内容</li>
-<li>4 : 发起前合同信息与设置确认</li>
-</ul>
-注：仅对新版页面生效
+   * <p>隐藏操作步骤: 具体的控件类型如下</p><ul><li>1 : 选择文件及签署方</li><li>2 : 补充文件内容</li><li>4 : 发起前合同信息与设置确认</li></ul>注：仅对新版页面生效
    */
   HideOperationSteps?: Array<number | bigint>
   /**
-   * 本企业简称，注：仅对新版页面生效
+   * <p>本企业简称，注：仅对新版页面生效</p>
    */
   SelfName?: string
   /**
-   * 发起后签署码隐藏，默认false，注：仅对新版页面生效
+   * <p>发起后签署码隐藏，默认false，注：仅对新版页面生效</p>
    */
   HideSignCodeAfterStart?: boolean
   /**
-   * 发起过程中是否保存草稿
+   * <p>发起过程中是否保存草稿</p>
    */
   NeedFlowDraft?: boolean
   /**
-   * 在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用（注: 
-<font color='red'>空数组代表未指定</font>），具体的控件类型如下
-
-<ul><li>SIGN_SIGNATURE : 个人签名/印章</li>
-<li>SIGN_SEAL : 企业印章</li>
-<li>SIGN_PAGING_SEAL : 骑缝章</li>
-<li>SIGN_LEGAL_PERSON_SEAL : 法定代表人章</li>
-<li>SIGN_APPROVE : 签批</li>
-<li>SIGN_OPINION : 签署意见</li>
-<li>SIGN_PAGING_SIGNATURE : 手写签名骑缝控件</li>
-<li>BUSI-FULL-NAME  : 企业全称</li>
-<li>BUSI-CREDIT-CODE : 统一社会信用代码</li>
-<li>BUSI-LEGAL-NAME : 法人/经营者姓名</li>
-<li>PERSONAL-NAME : 签署人姓名</li>
-<li>PERSONAL-MOBILE : 签署人手机号</li>
-<li>PERSONAL-IDCARD-TYPE : 签署人证件类型</li>
-<li>PERSONAL-IDCARD : 签署人证件号</li>
-<li>TEXT : 单行文本</li>
-<li>MULTI_LINE_TEXT : 多行文本</li>
-<li>CHECK_BOX : 勾选框</li>
-<li>SELECTOR : 选择器</li>
-<li>DIGIT : 数字</li>
-<li>DATE : 日期</li>
-<li>FILL_IMAGE : 图片</li>
-<li>ATTACHMENT : 附件</li>
-<li>EMAIL : 邮箱</li>
-<li>LOCATION : 地址</li>
-<li>EDUCATION : 学历</li>
-<li>GENDER : 性别</li>
-<li>DISTRICT : 省市区</li></ul>
+   * <p>在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用（注:<br><font color="red">空数组代表未指定</font>），具体的控件类型如下</p><ul><li>SIGN_SIGNATURE : 个人签名/印章</li><li>SIGN_SEAL : 企业印章</li><li>SIGN_PAGING_SEAL : 骑缝章</li><li>SIGN_LEGAL_PERSON_SEAL : 法定代表人章</li><li>SIGN_APPROVE : 签批</li><li>SIGN_OPINION : 签署意见</li><li>SIGN_PAGING_SIGNATURE : 手写签名骑缝控件</li><li>BUSI-FULL-NAME  : 企业全称</li><li>BUSI-CREDIT-CODE : 统一社会信用代码</li><li>BUSI-LEGAL-NAME : 法人/经营者姓名</li><li>PERSONAL-NAME : 签署人姓名</li><li>PERSONAL-MOBILE : 签署人手机号</li><li>PERSONAL-IDCARD-TYPE : 签署人证件类型</li><li>PERSONAL-IDCARD : 签署人证件号</li><li>TEXT : 单行文本</li><li>MULTI_LINE_TEXT : 多行文本</li><li>CHECK_BOX : 勾选框</li><li>SELECTOR : 选择器</li><li>DIGIT : 数字</li><li>DATE : 日期</li><li>FILL_IMAGE : 图片</li><li>ATTACHMENT : 附件</li><li>EMAIL : 邮箱</li><li>LOCATION : 地址</li><li>EDUCATION : 学历</li><li>GENDER : 性别</li><li>DISTRICT : 省市区</li></ul>
    */
   HideComponentTypes?: Array<string>
   /**
-   * 在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用（注: 
-<font color='red'>空数组代表未指定</font>），具体的控件类型如下
-<ul><li>SIGN_SIGNATURE : 个人签名/印章</li>
-<li>SIGN_SEAL : 企业印章</li>
-<li>SIGN_PAGING_SEAL : 骑缝章</li>
-<li>SIGN_LEGAL_PERSON_SEAL : 法定代表人章</li>
-<li>SIGN_APPROVE : 签批</li>
-<li>SIGN_OPINION : 签署意见</li>
-<li>SIGN_PAGING_SIGNATURE : 手写签名骑缝控件</li>
-<li>BUSI-FULL-NAME  : 企业全称</li>
-<li>BUSI-CREDIT-CODE : 统一社会信用代码</li>
-<li>BUSI-LEGAL-NAME : 法人/经营者姓名</li>
-<li>PERSONAL-NAME : 签署人姓名</li>
-<li>PERSONAL-MOBILE : 签署人手机号</li>
-<li>PERSONAL-IDCARD-TYPE : 签署人证件类型</li>
-<li>PERSONAL-IDCARD : 签署人证件号</li>
-<li>TEXT : 单行文本</li>
-<li>MULTI_LINE_TEXT : 多行文本</li>
-<li>CHECK_BOX : 勾选框</li>
-<li>SELECTOR : 选择器</li>
-<li>DIGIT : 数字</li>
-<li>DATE : 日期</li>
-<li>FILL_IMAGE : 图片</li>
-<li>ATTACHMENT : 附件</li>
-<li>EMAIL : 邮箱</li>
-<li>LOCATION : 地址</li>
-<li>EDUCATION : 学历</li>
-<li>GENDER : 性别</li>
-<li>DISTRICT : 省市区</li></ul>
+   * <p>在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用（注:<br><font color="red">空数组代表未指定</font>），具体的控件类型如下</p><ul><li>SIGN_SIGNATURE : 个人签名/印章</li><li>SIGN_SEAL : 企业印章</li><li>SIGN_PAGING_SEAL : 骑缝章</li><li>SIGN_LEGAL_PERSON_SEAL : 法定代表人章</li><li>SIGN_APPROVE : 签批</li><li>SIGN_OPINION : 签署意见</li><li>SIGN_PAGING_SIGNATURE : 手写签名骑缝控件</li><li>BUSI-FULL-NAME  : 企业全称</li><li>BUSI-CREDIT-CODE : 统一社会信用代码</li><li>BUSI-LEGAL-NAME : 法人/经营者姓名</li><li>PERSONAL-NAME : 签署人姓名</li><li>PERSONAL-MOBILE : 签署人手机号</li><li>PERSONAL-IDCARD-TYPE : 签署人证件类型</li><li>PERSONAL-IDCARD : 签署人证件号</li><li>TEXT : 单行文本</li><li>MULTI_LINE_TEXT : 多行文本</li><li>CHECK_BOX : 勾选框</li><li>SELECTOR : 选择器</li><li>DIGIT : 数字</li><li>DATE : 日期</li><li>FILL_IMAGE : 图片</li><li>ATTACHMENT : 附件</li><li>EMAIL : 邮箱</li><li>LOCATION : 地址</li><li>EDUCATION : 学历</li><li>GENDER : 性别</li><li>DISTRICT : 省市区</li></ul>
    */
   ShowComponentTypes?: Array<string>
   /**
-   *  禁止添加签署方，若为true则在发起流程的可嵌入页面隐藏“添加签署人按钮”
-
+   * <p>禁止添加签署方，若为true则在发起流程的可嵌入页面隐藏“添加签署人按钮”</p>
    */
   ForbidAddApprover?: boolean
   /**
-   *   禁止设置签署流程属性 (顺序、合同签署认证方式等)，若为true则在发起流程的可嵌入页面隐藏签署流程设置面板
-
+   * <p>禁止设置签署流程属性 (顺序、合同签署认证方式等)，若为true则在发起流程的可嵌入页面隐藏签署流程设置面板</p>
    */
   ForbidEditFlowProperties?: boolean
   /**
-   * 发起流程的可嵌入页面结果页配置
+   * <p>发起流程的可嵌入页面结果页配置</p>
    */
   ResultPageConfig?: CreateResultPageConfig
+  /**
+   * <p>若指定了合同抄送人，此参数用来控制操作人能否在嵌入式页面看见或编辑（修改、增加、删除）抄送人信息。</p><p>枚举值：</p><ul><li>0： 不可见不可编辑</li><li>1： 可见不可编辑</li><li>2： 可见可编辑</li></ul><p>默认值：0</p>
+   */
+  CcInfoVisibility?: number
 }
 
 /**
@@ -6885,76 +6797,61 @@ export interface FlowApproverItem {
  */
 export interface ChannelOrganizationInfo {
   /**
-   * 电子签平台给企业分配的ID（在不同应用下同一个企业会分配通用的ID）
+   * <p>电子签平台给企业分配的ID（在不同应用下同一个企业会分配通用的ID）</p>
    */
   OrganizationId?: string
   /**
-   * 第三方平台子客企业的唯一标识
+   * <p>第三方平台子客企业的唯一标识</p>
    */
   OrganizationOpenId?: string
   /**
-   * 第三方平台子客企业名称
+   * <p>第三方平台子客企业名称</p>
    */
   OrganizationName?: string
   /**
-   * 企业的统一社会信用代码
+   * <p>企业的统一社会信用代码</p>
    */
   UnifiedSocialCreditCode?: string
   /**
-   * 企业法定代表人的姓名
+   * <p>企业法定代表人的姓名</p>
    */
   LegalName?: string
   /**
-   * 企业法定代表人作为第三方平台子客企业员工的唯一标识
+   * <p>企业法定代表人作为第三方平台子客企业员工的唯一标识</p>
    */
   LegalOpenId?: string
   /**
-   * 企业超级管理员的姓名
+   * <p>企业超级管理员的姓名</p>
    */
   AdminName?: string
   /**
-   * 企业超级管理员作为第三方平台子客企业员工的唯一标识
+   * <p>企业超级管理员作为第三方平台子客企业员工的唯一标识</p>
    */
   AdminOpenId?: string
   /**
-   * 企业超级管理员的手机号码
-   **注**：`手机号码脱敏（隐藏部分用*替代）`
+   * <p>企业超级管理员的手机号码<br><strong>注</strong>：<code>手机号码脱敏（隐藏部分用*替代）</code></p>
    */
   AdminMobile?: string
   /**
-   * 企业认证状态字段。值如下：
-<ul>
-  <li>**"UNVERIFIED"**： 未认证的企业</li>
-  <li>**"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业</li>
-  <li>**"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业</li>
-  <li>**"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业</li>
-  <li>**"VERIFYING"**： 认证中的企业</li>
-  <li>**"VERIFIED"**： 已认证的企业</li>
-</ul>
+   * <p>企业认证状态枚举值及说明如下：</p><table>  <thead>    <tr>      <th>枚举值</th>      <th>说明</th>    </tr>  </thead>  <tbody>    <tr>      <td><code>UNVERIFIED</code></td>      <td>企业未认证</td>    </tr>    <tr>      <td><code>VERIFYING</code></td>      <td>企业认证中，还未选择授权方式</td>    </tr>    <tr>      <td><code>VERIFYINGLEGALPENDINGAUTHORIZATION</code></td>      <td>企业认证中，待法人授权或法人认证</td>    </tr>    <tr>      <td><code>VERIFYINGAUTHORIZATIONFILEPENDING</code></td>      <td>企业认证中，已上传授权书，授权书待审核</td>    </tr>    <tr>      <td><code>VERIFYINGAUTHORIZATIONFILEREJECT</code></td>      <td>企业认证中，授权书审核被驳回</td>    </tr>    <tr>      <td><code>VERIFIED</code></td>      <td>企业已认证成功</td>    </tr>  </tbody></table><p>企业认证流程的典型流转路径如下：</p><pre><code>UNVERIFIED → VERIFYING（提交企业信息，选择授权方式）                ├─ 法人授权 → VERIFYINGLEGALPENDINGAUTHORIZATION → VERIFIED                ├─ 法人认证 → VERIFYINGLEGALPENDINGAUTHORIZATION → VERIFIED                └─ 授权书 → VERIFYINGAUTHORIZATIONFILEPENDING                              ├─ 审核通过 → VERIFIED                              └─ 审核驳回 → VERIFYINGAUTHORIZATIONFILEREJECT</code></pre><p>枚举值：</p><ul><li>UNVERIFIED： 企业未认证</li><li>VERIFYING： 企业认证中，还未选择授权方式</li><li>VERIFYINGLEGALPENDINGAUTHORIZATION： 企业认证中，待法人授权或法人认证</li><li>VERIFYINGAUTHORIZATIONFILEPENDING： 企业认证中，已上传授权书，授权书待审核</li><li>VERIFYINGAUTHORIZATIONFILEREJECT： 企业认证中，授权书审核被驳回</li><li>VERIFIED： 企业已认证成功</li></ul>
    */
   AuthorizationStatus?: string
   /**
-   * 企业认证方式字段。值如下：
-<ul>
-  <li>**"AuthorizationInit"**： 暂未选择授权方式</li>
-  <li>**"AuthorizationFile"**： 授权书</li>
-  <li>**"AuthorizationLegalPerson"**： 法人授权超管</li>
-  <li>**"AuthorizationLegalIdentity"**： 法人直接认证</li>
-</ul>
+   * <p>企业认证方式字段。值如下：</p><ul>  <li>**"AuthorizationInit"**： 暂未选择授权方式</li>  <li>**"AuthorizationFile"**： 授权书</li>  <li>**"AuthorizationLegalPerson"**： 法人授权超管</li>  <li>**"AuthorizationLegalIdentity"**： 法人直接认证</li></ul>
    */
   AuthorizationType?: string
   /**
-   * 子企业激活状态。值如下：
-<ul>
-  <li>**0**： 未激活</li>
-  <li>**1**： 已激活</li>
-</ul>
+   * <p>子企业激活状态。值如下：</p><ul>  <li>**0**： 未激活</li>  <li>**1**： 已激活</li></ul>
    */
   ActiveStatus?: number
   /**
-   * 账号到期时间，时间戳
+   * <p>账号到期时间，时间戳</p>
    */
   LicenseExpireTime?: number
+  /**
+   * <p>是否已提交企业认证信息</p><p>默认值：false</p><p>此参数表示客户是否已提交企业信息。如图所示，在点击提交按钮之前，该字段为 <code>false</code>；点击提交按钮之后，该字段变为 <code>true</code>。</p><img src="https://qcloudimg.tencent-cloud.cn/raw/548d838430b60e797dbfba80cb4a3ef7.png" alt="企业信息提交状态示意图"><p><strong>注意：</strong>该字段并非在变为 <code>true</code> 后就不再变化。任何导致当前认证记录失效的操作都会将其重置为 <code>false</code>，包括但不限于：重新提交企业信息、审核被拒绝后重新上传企业信息等操作。</p>
+   */
+  HasSubmittedAuthInfo?: boolean
 }
 
 /**

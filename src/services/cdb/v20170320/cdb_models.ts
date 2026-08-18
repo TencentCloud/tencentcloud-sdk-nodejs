@@ -9610,6 +9610,10 @@ export interface CreateDBInstanceHourRequest {
    */
   DiskType?: string
   /**
+   * <p>CDC集群ID，非CDC场景无需指定该入参</p>
+   */
+  CdcId?: string
+  /**
    * <p>集群类型:cage——金融围拢，cdc——CDB ON CDC；dedicate——独享集群</p>
    */
   ClusterType?: string

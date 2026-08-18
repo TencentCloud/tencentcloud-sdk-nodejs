@@ -425,7 +425,7 @@ export interface DescribeAllClassRequest {
  */
 export interface AigcImageTaskOutput {
   /**
-   * AIGC 生图任务的输出文件信息。
+   * <p>AIGC 生图任务的输出文件信息。</p>
    */
   FileInfos?: Array<AigcImageTaskOutputFileInfo>
 }

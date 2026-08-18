@@ -93,13 +93,25 @@ export interface ClusterOverview {
 }
 
 /**
- * ModifyNodeAttribute返回参数结构体
+ * InquirePriceModifyWorkspacesChargeType请求参数结构体
  */
-export interface ModifyNodeAttributeResponse {
+export interface InquirePriceModifyWorkspacesChargeTypeRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>工作空间 ID 列表。每次请求的工作空间计费模式必须一致。</p>
    */
-  RequestId?: string
+  SpaceIds: Array<string>
+  /**
+   * <p>转换的目标计费模式。当前仅支持 PREPAID（按量计费转包年包月）。</p>
+   */
+  SpaceChargeType: string
+  /**
+   * <p>是否只进行参数和资源预检。true：不发起询价、组单或正式下单；false：执行对应操作。默认为 false。</p>
+   */
+  DryRun?: boolean
+  /**
+   * <p>预付费参数。Period 和 RenewFlag 均为可选字段；未传入时后端使用默认值 Period=1、RenewFlag=NOTIFY_AND_MANUAL_RENEW。</p>
+   */
+  SpaceChargePrepaid?: SpaceChargePrepaid
 }
 
 /**
@@ -162,6 +174,20 @@ export interface NodeOverview {
    * 节点的创建时间
    */
   CreateTime?: string
+}
+
+/**
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目
+ */
+export interface SpacePlacement {
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * 项目，默认是0
+   */
+  ProjectId?: number
 }
 
 /**
@@ -288,6 +314,30 @@ export interface SpaceVirtualPrivateCloud {
    * 为弹性网卡指定随机生成
    */
   Ipv6AddressCount?: number
+}
+
+/**
+ * ModifyWorkspacesRenewFlag请求参数结构体
+ */
+export interface ModifyWorkspacesRenewFlagRequest {
+  /**
+   * 工作空间列表
+   */
+  SpaceIds: Array<string>
+  /**
+   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   */
+  RenewFlag: string
+}
+
+/**
+ * ModifyNodeAttribute返回参数结构体
+ */
+export interface ModifyNodeAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -751,6 +801,20 @@ export interface QueueConfigOverview {
 }
 
 /**
+ * DeleteNodes请求参数结构体
+ */
+export interface DeleteNodesRequest {
+  /**
+   * 集群ID。
+   */
+  ClusterId: string
+  /**
+   * 节点ID。
+   */
+  NodeIds: Array<string>
+}
+
+/**
  * DescribeQueues返回参数结构体
  */
 export interface DescribeQueuesResponse {
@@ -869,42 +933,6 @@ export interface GooseFSOptionOverview {
    * 文件系统master的ip和端口。
    */
   Masters?: Array<string>
-}
-
-/**
- * 描述CFS文件系统版本和挂载信息
- */
-export interface CFSOption {
-  /**
-   * 文件系统本地挂载路径。
-   */
-  LocalPath: string
-  /**
-   * 文件系统远程挂载ip及路径。
-   */
-  RemotePath?: string
-  /**
-   * 文件系统协议类型。
-<li>NFS 3.0</li>
-<li>NFS 4.0</li>
-<li>TURBO</li>
-   */
-  Protocol?: string
-  /**
-   * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
-   */
-  StorageType?: string
-  /**
-   * 文件系统挂载挂载命令参数选项。
-- NFS 3.0默认值：vers=3,nolock,proto=tcp,noresvport
-- NFS 4.0默认值：vers=4.0,noresvport
-- TURBO默认值：user_xattr
-   */
-  MountOption?: string
-  /**
-   * 文件系统ID    文件系统ID通过调用接口[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)获取。
-   */
-  FileSystemId?: string
 }
 
 /**
@@ -1784,6 +1812,28 @@ export interface Docker {
 }
 
 /**
+ * ModifyWorkspacesChargeType请求参数结构体
+ */
+export interface ModifyWorkspacesChargeTypeRequest {
+  /**
+   * <p>工作空间 ID 列表。每次请求的工作空间计费模式必须一致。</p>
+   */
+  SpaceIds: Array<string>
+  /**
+   * <p>转换的目标计费模式。当前仅支持 PREPAID（按量计费转包年包月）。</p>
+   */
+  SpaceChargeType: string
+  /**
+   * <p>是否只进行参数和资源预检。true：不发起询价、组单或正式下单；false：执行对应操作。默认为 false。</p>
+   */
+  DryRun?: boolean
+  /**
+   * <p>预付费参数。Period 和 RenewFlag 均为可选字段；未传入时后端使用默认值 Period=1、RenewFlag=NOTIFY_AND_MANUAL_RENEW。</p>
+   */
+  SpaceChargePrepaid?: SpaceChargePrepaid
+}
+
+/**
  * 任务的应用环境配置信息。
  */
 export interface Application {
@@ -1958,17 +2008,53 @@ export interface ComputeNode {
 }
 
 /**
- * DeleteNodes请求参数结构体
+ * 描述了单项的价格信息。
  */
-export interface DeleteNodesRequest {
+export interface ItemPrice {
   /**
-   * 集群ID。
+   * 预支合计费用的原价，预付费模式使用，单位：元。	
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  OriginalPrice?: number
   /**
-   * 节点ID。
+   * 预支合计费用的折扣价，预付费模式使用，单位：元。	
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeIds: Array<string>
+  DiscountPrice?: number
+  /**
+   * 折扣，如20.0代表2折。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Discount?: number
+  /**
+   * 后续合计费用的原价，后付费模式使用，单位：元。
+
+如返回了其他时间区间项，如UnitPriceSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnitPrice?: number
+  /**
+   * 后续合计费用的折扣价，后付费模式使用，单位：元
+
+如返回了其他时间区间项，如DiscountUnitPriceSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiscountUnitPrice?: number
+  /**
+   * 后续计价单元，后付费模式使用，可取值范围：
+
+HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：
+GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeUnit?: string
+  /**
+   * 后续合计费用的折扣价，后付费模式使用，单位：元
+
+如返回了其他时间区间项，如UnitPriceDiscount
+float，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时
+   */
+  UnitPriceDiscount?: number
 }
 
 /**
@@ -2221,17 +2307,53 @@ export interface DescribeJobsOverviewResponse {
 }
 
 /**
- * ModifyWorkspacesRenewFlag请求参数结构体
+ * 描述CFS文件系统版本和挂载信息
  */
-export interface ModifyWorkspacesRenewFlagRequest {
+export interface CFSOption {
   /**
-   * 工作空间列表
+   * 文件系统本地挂载路径。
    */
-  SpaceIds: Array<string>
+  LocalPath: string
   /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   * 文件系统远程挂载ip及路径。
    */
-  RenewFlag: string
+  RemotePath?: string
+  /**
+   * 文件系统协议类型。
+<li>NFS 3.0</li>
+<li>NFS 4.0</li>
+<li>TURBO</li>
+   */
+  Protocol?: string
+  /**
+   * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
+   */
+  StorageType?: string
+  /**
+   * 文件系统挂载挂载命令参数选项。
+- NFS 3.0默认值：vers=3,nolock,proto=tcp,noresvport
+- NFS 4.0默认值：vers=4.0,noresvport
+- TURBO默认值：user_xattr
+   */
+  MountOption?: string
+  /**
+   * 文件系统ID    文件系统ID通过调用接口[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)获取。
+   */
+  FileSystemId?: string
+}
+
+/**
+ * 价格
+ */
+export interface Price {
+  /**
+   * 工作空间价格
+   */
+  SpacePrice?: ItemPrice
+  /**
+   * 网络价格
+   */
+  BandwidthPrice?: ItemPrice
 }
 
 /**
@@ -2573,17 +2695,13 @@ export interface GooseFSxOption {
 }
 
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目
+ * ModifyWorkspacesChargeType返回参数结构体
  */
-export interface SpacePlacement {
+export interface ModifyWorkspacesChargeTypeResponse {
   /**
-   * 可用区
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Zone: string
-  /**
-   * 项目，默认是0
-   */
-  ProjectId?: number
+  RequestId?: string
 }
 
 /**
@@ -2703,6 +2821,20 @@ export interface JobView {
    * <p>作业任务结束时间</p>
    */
   EndTime?: string
+}
+
+/**
+ * InquirePriceModifyWorkspacesChargeType返回参数结构体
+ */
+export interface InquirePriceModifyWorkspacesChargeTypeResponse {
+  /**
+   * <p>该参数表示对应规格工作空间的价格</p>
+   */
+  Price?: Price
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -118,6 +118,16 @@ it("thpc.v20230321.DeleteCluster", async function () {
     }
 })
 
+it("thpc.v20230321.ModifyWorkspacesRenewFlag", async function () {
+    try {
+       const data = await client.ModifyWorkspacesRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20230321.DetachNodes", async function () {
     try {
        const data = await client.DetachNodes({})
@@ -161,6 +171,16 @@ it("thpc.v20230321.TerminateJob", async function () {
 it("thpc.v20230321.DescribeNodes", async function () {
     try {
        const data = await client.DescribeNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20230321.ModifyWorkspacesChargeType", async function () {
+    try {
+       const data = await client.ModifyWorkspacesChargeType({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +338,9 @@ it("thpc.v20230321.DeleteJob", async function () {
     }
 })
 
-it("thpc.v20230321.ModifyWorkspacesRenewFlag", async function () {
+it("thpc.v20230321.InquirePriceModifyWorkspacesChargeType", async function () {
     try {
-       const data = await client.ModifyWorkspacesRenewFlag({})
+       const data = await client.InquirePriceModifyWorkspacesChargeType({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

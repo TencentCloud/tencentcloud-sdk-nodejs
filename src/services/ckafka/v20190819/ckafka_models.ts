@@ -220,9 +220,17 @@ export interface DescribeConnectResourceResp {
    */
   MqttConnectParam?: MqttConnectParam
   /**
+   * <p>Iceberg配置，Type为ICEBERG时返回</p>
+   */
+  IcebergConnectParam?: IcebergConnectParam
+  /**
    * <p>标签列表</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>iceberg数据库和表信息</p>
+   */
+  IcebergDatabases?: Array<IcebergDatabaseInfo>
 }
 
 /**
@@ -240,89 +248,143 @@ export interface AuthorizeTokenResponse {
 }
 
 /**
+ * Iceberg连接源参数
+ */
+export interface IcebergConnectParam {
+  /**
+   * <p>EMR实例的HiveMetaStore节点IP</p><p>参数格式：多个使用英文分号;分隔</p><p>创建连接时必选，编辑连接时不接收该参数</p>
+   */
+  ServiceVip?: string
+  /**
+   * <p>EMR实例ID</p><p>创建连接时必选，编辑连接时不接收该参数</p>
+   */
+  Resource?: string
+  /**
+   * <p>EMR实例的集群网络vpcId</p><p>创建连接时必选，编辑连接时不接收该参数</p>
+   */
+  UniqVpcId?: string
+  /**
+   * <p>认证类型</p><p>枚举值：</p><ul><li>NONE： 无认证</li><li>KERBEROS： Kerberos认证</li></ul><p>开启Kerberos认证的EMR实例，此处需传入KERBEROS，创建连接时必选，编辑连接时非必选</p>
+   */
+  AuthType?: string
+  /**
+   * <p>EMR实例的HiveMetaStore节点IP绑定的弹性网卡Id列表</p><p>数量和顺序必须与ServiceVip字段中的多个IP对应，创建连接时必选，编辑连接时不接收该参数</p>
+   */
+  EniIdList?: Array<string>
+  /**
+   * <p>Catalog数据目录类型</p><p>枚举值：</p><ul><li>HIVE： Hive Catalog</li></ul><p>默认值：HIVE</p><p>仅支持Hive Catalog</p>
+   */
+  CatalogType?: string
+  /**
+   * <p>用于Kerberos认证的user.keytab文件的内容</p><p>入参限制：文件内容需使用Base64编码</p><p>AuthType为KERBEROS时必传</p>
+   */
+  KeyTabContent?: string
+  /**
+   * <p>用于Kerberos认证的krb5.conf文件的内容</p><p>入参限制：文件内容需使用Base64编码</p><p>AuthType为KERBEROS时必传</p>
+   */
+  KRB5ConfContent?: string
+  /**
+   * <p>用户的Kerberos身份凭证</p>
+   */
+  KerberosUserPrincipal?: string
+  /**
+   * <p>HiveMetastore服务端配置的Kerberos Principal</p><p>hive-site.xml中hive.metastore.kerberos.principal的值</p>
+   */
+  KerberosPrincipal?: string
+  /**
+   * <p>是否更新并重启所有关联的连接器任务</p><p>编辑连接时使用，如果不传，则根据认证类型及认证参数是否发生变化，来判断是否更新并重启所有关联的连接器任务</p>
+   */
+  IsUpdate?: boolean
+}
+
+/**
  * Es类型入参
  */
 export interface EsParam {
   /**
-   * Es实例资源Id
+   * <p>Es实例资源Id</p>
    */
   Resource: string
   /**
-   * Es的连接port
+   * <p>Es的连接port</p>
    */
   Port?: number
   /**
-   * Es用户名
+   * <p>Es用户名</p>
    */
   UserName?: string
   /**
-   * Es密码
+   * <p>Es密码</p>
    */
   Password?: string
   /**
-   * 是否为自建集群
+   * <p>是否为自建集群</p>
    */
   SelfBuilt?: boolean
   /**
-   * 实例vip
+   * <p>实例vip</p>
    */
   ServiceVip?: string
   /**
-   * 实例的vpcId
+   * <p>实例的vpcId</p>
    */
   UniqVpcId?: string
   /**
-   * Es是否抛弃解析失败的消息
+   * <p>Es是否抛弃解析失败的消息</p>
    */
   DropInvalidMessage?: boolean
   /**
-   * Es自定义index名称
+   * <p>Es自定义index名称</p>
    */
   Index?: string
   /**
-   * Es自定义日期后缀
+   * <p>Es自定义日期后缀</p>
    */
   DateFormat?: string
   /**
-   * 非json格式数据的自定义key
+   * <p>非json格式数据的自定义key</p>
    */
   ContentKey?: string
   /**
-   * Es是否抛弃非json格式的消息
+   * <p>Es是否抛弃非json格式的消息</p>
    */
   DropInvalidJsonMessage?: boolean
   /**
-   * 转储到Es中的文档ID取值字段名
+   * <p>转储到Es中的文档ID取值字段名</p>
    */
   DocumentIdField?: string
   /**
-   * Es自定义index名称的类型，STRING，JSONPATH，默认为STRING
+   * <p>Es自定义index名称的类型，STRING，JSONPATH，默认为STRING</p>
    */
   IndexType?: string
   /**
-   * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
+   * <p>当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效</p>
    */
   DropCls?: DropCls
   /**
-   * 转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键
+   * <p>转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键</p>
    */
   DatabasePrimaryKey?: string
   /**
-   * 死信队列
+   * <p>死信队列</p>
    */
   DropDlq?: FailureParam
   /**
-   * 使用数据订阅格式导入 es 时，消息与 es 索引字段映射关系。不填默认为默认字段匹配
+   * <p>使用数据订阅格式导入 es 时，消息与 es 索引字段映射关系。不填默认为默认字段匹配</p>
    */
   RecordMappingList?: Array<EsRecordMapping>
   /**
-   * 消息要映射为 es 索引中 @timestamp 的字段，如果当前配置为空，则使用消息的时间戳进行映射
+   * <p>消息要映射为 es 索引中 @timestamp 的字段，如果当前配置为空，则使用消息的时间戳进行映射</p>
    */
   DateField?: string
   /**
-   * 用来区分当前索引映射，属于新建索引还是存量索引。"EXIST_MAPPING"：从存量索引中选择；"NEW_MAPPING"：新建索引
+   * <p>用来区分当前索引映射，属于新建索引还是存量索引。&quot;EXIST_MAPPING&quot;：从存量索引中选择；&quot;NEW_MAPPING&quot;：新建索引</p>
    */
   RecordMappingMode?: string
+  /**
+   * <p>集群版 ES 连接协议，默认http协议</p><p>枚举值：</p><ul><li>http： http协议</li><li>https： https协议</li></ul>
+   */
+  Protocol?: string
 }
 
 /**
@@ -2332,33 +2394,33 @@ export interface DescribeDatahubTopicsResponse {
  */
 export interface TopicParam {
   /**
-   * 单独售卖Topic的Topic名称
+   * <p>单独售卖Topic的Topic名称</p>
    */
   Resource: string
   /**
-   * Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp
+   * <p>Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OffsetType?: string
   /**
-   * Offset类型为timestamp时必传，传时间戳，精确到秒
+   * <p>Offset类型为timestamp时必传，传时间戳，精确到秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
-   * Topic的TopicId【出参】
+   * <p>Topic的TopicId【出参】</p>
    */
   TopicId?: string
   /**
-   * 写入Topic时是否进行压缩，不开启填"none"，开启的话，可选择"gzip", "snappy", "lz4"中的一个进行填写。
+   * <p>写入Topic时是否进行压缩，不开启填&quot;none&quot;，开启的话，可选择&quot;gzip&quot;, &quot;snappy&quot;, &quot;lz4&quot;中的一个进行填写。</p>
    */
   CompressionType?: string
   /**
-   * 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务）
+   * <p>使用的Topic是否需要自动创建（目前只支持SOURCE流入任务）</p>
    */
   UseAutoCreateTopic?: boolean
   /**
-   * 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用)
+   * <p>源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用)</p>
    */
   MsgMultiple?: number
 }
@@ -2586,17 +2648,21 @@ export interface MongoDBConnectParam {
 }
 
 /**
- * BatchModifyTopicAttributes返回参数结构体
+ * 数据处理ROW输出格式配置
  */
-export interface BatchModifyTopicAttributesResponse {
+export interface RowParam {
   /**
-   * 返回结果
+   * 行内容，KEY_VALUE，VALUE
    */
-  Result?: Array<BatchModifyTopicResultDTO>
+  RowContent: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * key和value间的分隔符
    */
-  RequestId?: string
+  KeyValueDelimiter?: string
+  /**
+   * 元素建的分隔符
+   */
+  EntryDelimiter?: string
 }
 
 /**
@@ -3580,6 +3646,40 @@ export interface SaleInfo {
 }
 
 /**
+ * Iceberg接入参数
+ */
+export interface IcebergParam {
+  /**
+   * <p>Iceberg 连接资源 (EMR 实例)</p>
+   */
+  Resource?: string
+  /**
+   * <p>目标数据库名（Hive catalog 下的 namespace），必填</p>
+   */
+  Database?: string
+  /**
+   * <p>目标表名</p>
+   */
+  TableName?: string
+  /**
+   * <p>消息解析格式，当前仅支持 JSON</p><p>枚举值：</p><ul><li>JSON： JSON解析格式</li></ul>
+   */
+  SchemeType?: string
+  /**
+   * <p>表字段扩展开关</p><p>枚举值：</p><ul><li>true： 开</li><li>false： 关</li></ul>
+   */
+  EnableFieldExtension?: boolean
+  /**
+   * <p>Upset/CDC 模式，默认off</p><p>枚举值：</p><ul><li>Off： Off</li><li>UPSERT： UPSERT</li><li>CDC： CDC</li></ul>
+   */
+  UpsertMode?: string
+  /**
+   * <p>主键字段：UPSERT / CDC 模式必填（多个字段以英文逗号分隔）</p>
+   */
+  PrimaryKeys?: string
+}
+
+/**
  * DescribeGroup的返回
  */
 export interface GroupResponse {
@@ -3819,6 +3919,10 @@ export interface CreateConnectResourceRequest {
    * <p>MQTT配置，Type为 MQTT 时必填</p>
    */
   MqttConnectParam?: MqttConnectParam
+  /**
+   * <p>Iceberg配置，Type为ICEBERG时必填</p>
+   */
+  IcebergConnectParam?: IcebergConnectParam
   /**
    * <p>标签列表</p>
    */
@@ -4969,37 +5073,53 @@ export interface Price {
  */
 export interface EsModifyConnectParam {
   /**
-   * Es连接源的实例资源【不支持修改】
+   * <p>Es连接源的实例资源【不支持修改】</p>
    */
   Resource: string
   /**
-   * Es的连接port【不支持修改】
+   * <p>Es的连接port【不支持修改】</p>
    */
   Port?: number
   /**
-   * Es连接源的实例vip【不支持修改】
+   * <p>Es连接源的实例vip【不支持修改】</p>
    */
   ServiceVip?: string
   /**
-   * Es连接源的vpcId【不支持修改】
+   * <p>Es连接源的vpcId【不支持修改】</p>
    */
   UniqVpcId?: string
   /**
-   * Es连接源的用户名
+   * <p>Es连接源的用户名</p>
    */
   UserName?: string
   /**
-   * Es连接源的密码
+   * <p>Es连接源的密码</p>
    */
   Password?: string
   /**
-   * Es连接源是否为自建集群【不支持修改】
+   * <p>Es连接源是否为自建集群【不支持修改】</p>
    */
   SelfBuilt?: boolean
   /**
-   * 是否更新到关联的Datahub任务
+   * <p>是否更新到关联的Datahub任务</p>
    */
   IsUpdate?: boolean
+  /**
+   * <p>es类型</p><p>枚举值：</p><ul><li>CLUSTER： 普通集群es</li><li>SERVERLESS： serverless形态es</li></ul>
+   */
+  EsType?: string
+  /**
+   * <p>es版本，默认7.14.2</p><p>默认值：7.14.2</p>
+   */
+  EsVersion?: string
+  /**
+   * <p>endpointUrl，es的serverless版本的访问入口地址</p>
+   */
+  EndpointUrl?: string
+  /**
+   * <p>集群版 ES 连接协议，默认http协议</p><p>枚举值：</p><ul><li>http： http协议</li><li>https： https协议</li></ul>
+   */
+  Protocol?: string
 }
 
 /**
@@ -5584,21 +5704,17 @@ export interface DescribeInstancesResponse {
 }
 
 /**
- * 数据处理ROW输出格式配置
+ * BatchModifyTopicAttributes返回参数结构体
  */
-export interface RowParam {
+export interface BatchModifyTopicAttributesResponse {
   /**
-   * 行内容，KEY_VALUE，VALUE
+   * 返回结果
    */
-  RowContent: string
+  Result?: Array<BatchModifyTopicResultDTO>
   /**
-   * key和value间的分隔符
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  KeyValueDelimiter?: string
-  /**
-   * 元素建的分隔符
-   */
-  EntryDelimiter?: string
+  RequestId?: string
 }
 
 /**
@@ -5752,38 +5868,54 @@ export interface CreateInstancePreData {
  */
 export interface EsConnectParam {
   /**
-   * Es的连接port
+   * <p>Es的连接port</p>
    */
   Port: number
   /**
-   * Es连接源的用户名
+   * <p>Es连接源的用户名</p>
    */
   UserName: string
   /**
-   * Es连接源的密码
+   * <p>Es连接源的密码</p>
    */
   Password: string
   /**
-   * Es连接源的实例资源
+   * <p>Es连接源的实例资源</p>
    */
   Resource: string
   /**
-   * Es连接源是否为自建集群
+   * <p>Es连接源是否为自建集群</p>
    */
   SelfBuilt: boolean
   /**
-   * Es连接源的实例vip，当为腾讯云实例时，必填
+   * <p>Es连接源的实例vip，当为腾讯云实例时，必填</p>
    */
   ServiceVip?: string
   /**
-   * Es连接源的vpcId，当为腾讯云实例时，必填
+   * <p>Es连接源的vpcId，当为腾讯云实例时，必填</p>
    */
   UniqVpcId?: string
   /**
-   * 是否更新到关联的Datahub任务
+   * <p>是否更新到关联的Datahub任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUpdate?: boolean
+  /**
+   * <p>es类型</p><p>枚举值：</p><ul><li>CLUSTER： 普通集群es</li><li>SERVERLESS： serverless形态es</li></ul>
+   */
+  EsType?: string
+  /**
+   * <p>es版本</p><p>默认值：7.14.2</p>
+   */
+  EsVersion?: string
+  /**
+   * <p>endpointUrl，es的serverless版本的访问入口地址</p>
+   */
+  EndpointUrl?: string
+  /**
+   * <p>集群版 ES 连接协议，默认http协议</p><p>枚举值：</p><ul><li>http： http协议</li><li>https： https协议</li></ul>
+   */
+  Protocol?: string
 }
 
 /**
@@ -6041,6 +6173,10 @@ export interface ModifyConnectResourceRequest {
    * <p>MQTT配置，Type为 MQTT 时必填</p>
    */
   MqttConnectParam?: MqttConnectParam
+  /**
+   * <p>Iceberg配置，Type为ICEBERG时必填</p>
+   */
+  IcebergConnectParam?: IcebergConnectParam
 }
 
 /**
@@ -7100,9 +7236,14 @@ export interface DescribeAccessPolicyResponse {
  */
 export interface DatahubTaskIdRes {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId?: string
+  /**
+   * <p>DatahubId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatahubId?: string
 }
 
 /**
@@ -7725,6 +7866,20 @@ export interface Assignment {
 }
 
 /**
+ * iceberg数据
+ */
+export interface IcebergDatabaseInfo {
+  /**
+   * <p>数据库名</p>
+   */
+  Name?: string
+  /**
+   * <p>表名称</p>
+   */
+  Tables?: Array<string>
+}
+
+/**
  * Url解析
  */
 export interface UrlDecodeParam {
@@ -7884,123 +8039,98 @@ export interface SQLServerModifyConnectParam {
  */
 export interface DatahubResource {
   /**
-   * 资源类型  type类型如下: 
-KAFKA,
-EB_ES,
-EB_COS,
-EB_CLS,
-EB_,
-MONGODB,
-HTTP,
-TDW,
-ES,
-CLICKHOUSE,
-DTS,
-CLS,
-COS,
-TOPIC,
-MYSQL,
-MQTT,
-MYSQL_DATA,
-DORIS,
-POSTGRESQL,
-TDSQL_C_POSTGRESQL,
-TDSQL_POSTGRESQL,
-WAREHOUSE_POSTGRESQL,
-TDSQL_C_MYSQL,
-MARIADB,
-SQLSERVER,
-CTSDB,
-SCF
-
-
+   * <p>资源类型  type类型如下:<br>KAFKA,<br>EB_ES,<br>EB_COS,<br>EB_CLS,<br>EB_,<br>MONGODB,<br>HTTP,<br>TDW,<br>ES,<br>CLICKHOUSE,<br>DTS,<br>CLS,<br>COS,<br>TOPIC,<br>MYSQL,<br>MQTT,<br>MYSQL_DATA,<br>DORIS,<br>POSTGRESQL,<br>TDSQL_C_POSTGRESQL,<br>TDSQL_POSTGRESQL,<br>WAREHOUSE_POSTGRESQL,<br>TDSQL_C_MYSQL,<br>MARIADB,<br>SQLSERVER,<br>CTSDB,<br>SCF</p>
    */
   Type: string
   /**
-   * ckafka配置，Type为KAFKA时必填
+   * <p>ckafka配置，Type为KAFKA时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaParam?: KafkaParam
   /**
-   * EB配置，Type为EB时必填
+   * <p>EB配置，Type为EB时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventBusParam?: EventBusParam
   /**
-   * MongoDB配置，Type为MONGODB时必填
+   * <p>MongoDB配置，Type为MONGODB时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MongoDBParam?: MongoDBParam
   /**
-   * Es配置，Type为ES时必填
+   * <p>Es配置，Type为ES时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsParam?: EsParam
   /**
-   * Tdw配置，Type为TDW时必填
+   * <p>Tdw配置，Type为TDW时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TdwParam?: TdwParam
   /**
-   * Dts配置，Type为DTS时必填
+   * <p>Dts配置，Type为DTS时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DtsParam?: DtsParam
   /**
-   * ClickHouse配置，Type为CLICKHOUSE时必填
+   * <p>ClickHouse配置，Type为CLICKHOUSE时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClickHouseParam?: ClickHouseParam
   /**
-   * Cls配置，Type为CLS时必填
+   * <p>Cls配置，Type为CLS时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClsParam?: ClsParam
   /**
-   * Cos配置，Type为COS时必填
+   * <p>Cos配置，Type为COS时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CosParam?: CosParam
   /**
-   * MySQL配置，Type为MYSQL时必填
+   * <p>MySQL配置，Type为MYSQL时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MySQLParam?: MySQLParam
   /**
-   * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+   * <p>PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PostgreSQLParam?: PostgreSQLParam
   /**
-   * Topic配置，Type为Topic时必填
+   * <p>Topic配置，Type为Topic时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicParam?: TopicParam
   /**
-   * MariaDB配置，Type为MARIADB时必填
+   * <p>MariaDB配置，Type为MARIADB时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MariaDBParam?: MariaDBParam
   /**
-   * SQLServer配置，Type为SQLSERVER时必填
+   * <p>SQLServer配置，Type为SQLSERVER时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SQLServerParam?: SQLServerParam
   /**
-   * Ctsdb配置，Type为CTSDB时必填
+   * <p>Ctsdb配置，Type为CTSDB时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CtsdbParam?: CtsdbParam
   /**
-   * Scf配置，Type为SCF时必填
+   * <p>Scf配置，Type为SCF时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfParam?: ScfParam
   /**
-   * MQTT配置，Type为 MQTT 时必填
+   * <p>MQTT配置，Type为 MQTT 时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MqttParam?: MqttParam
+  /**
+   * <p>IceBerg配置</p>
+   */
+  IcebergParam?: IcebergParam
 }
 
 /**
@@ -8919,6 +9049,10 @@ export interface DescribeConnectResource {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MqttConnectParam?: MqttConnectParam
+  /**
+   * <p>Iceberg配置，Type为ICEBERG时返回</p>
+   */
+  IcebergConnectParam?: IcebergConnectParam
   /**
    * <p>标签列表</p>
    */

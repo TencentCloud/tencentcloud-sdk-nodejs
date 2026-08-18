@@ -1446,61 +1446,53 @@ export interface LogRuleKeyValueInfo {
  */
 export interface VulFixedItem {
   /**
-   * 漏洞ID
+   * <p>漏洞ID</p>
    */
   VulId?: number
   /**
-   * 漏洞名称
+   * <p>漏洞名称</p>
    */
   VulName?: string
   /**
-   * 漏洞等级
-枚举值：
-LOW：低危
-MEDIUM：中危
-HIGH：高危
-CRITICAL：严重
+   * <p>漏洞等级<br>枚举值：<br>LOW：低危<br>MEDIUM：中危<br>HIGH：高危<br>CRITICAL：严重</p>
    */
   Level?: string
   /**
-   * VPR 评级信息（包含评级结果、说明和分阶段评分），与 DescribeHostVulRiskList 一致
+   * <p>VPR 评级信息（包含评级结果、说明和分阶段评分），与 DescribeHostVulRiskList 一致</p>
    */
   VRPRatingInfo?: VPRRatingInfo
   /**
-   * 漏洞类型
-枚举值：
-LINUX：Linux软件漏洞
-WINDOWS：Windows系统补丁漏洞
-WEB_CMS：Web-CMS漏洞
-APPLICATION：应用漏洞
-EMERGENCY：应急漏洞
+   * <p>漏洞类型<br>枚举值：<br>LINUX：Linux软件漏洞<br>WINDOWS：Windows系统补丁漏洞<br>WEB_CMS：Web-CMS漏洞<br>APPLICATION：应用漏洞<br>EMERGENCY：应急漏洞</p>
    */
   VulCategory?: string
   /**
-   * CVE编号
+   * <p>CVE编号</p>
    */
   CveId?: string
   /**
-   * 修复主机名称
+   * <p>修复主机名称</p>
    */
   MachineName?: string
   /**
-   * 修复主机实例ID
+   * <p>修复主机实例ID</p>
    */
   InstanceId?: string
   /**
-   * 关联组件&路径数量
+   * <p>关联组件&amp;路径数量</p>
    */
   ComponentCount?: number
   /**
-   * 关联组件&路径列表
+   * <p>关联组件&amp;路径列表</p>
    */
   Components?: Array<string>
   /**
-   * 最近一次修复时间
-参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   * <p>最近一次修复时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
    */
   LatestFixTime?: string
+  /**
+   * <p>VPR评级依据</p>
+   */
+  VPRExplainInfo?: VPRExplainInfo
 }
 
 /**
@@ -2662,6 +2654,24 @@ export interface ExportCSIPMalwareScanTaskDetailRequest {
 }
 
 /**
+ * VPR解释卡片中的单个维度
+ */
+export interface VPRExplainDimension {
+  /**
+   * <p>标签key</p>
+   */
+  Key?: string
+  /**
+   * <p>标签名称</p>
+   */
+  Name?: string
+  /**
+   * <p>标签子项</p>
+   */
+  Items?: Array<VPRExplainDimensionItem>
+}
+
+/**
  * 产品日志条数
  */
 export interface TagCount {
@@ -3045,6 +3055,20 @@ export interface DiskPartitionInfo {
 }
 
 /**
+ * VPR评级解释卡片
+ */
+export interface VPRExplainInfo {
+  /**
+   * <p>漏洞情报</p>
+   */
+  VulIntel?: Array<VPRExplainDimension>
+  /**
+   * <p>资产上下文</p>
+   */
+  AssetContext?: Array<VPRExplainDimension>
+}
+
+/**
  * 可更新补丁主机信息
  */
 export interface KBUpdateMachineItem {
@@ -3333,6 +3357,24 @@ export interface DspmPersonIdentifyItem {
    * 创建时间。
    */
   CreateTime?: string
+}
+
+/**
+ * VPR解释卡片中的单个标签项
+ */
+export interface VPRExplainDimensionItem {
+  /**
+   * <p>标签</p>
+   */
+  Key?: string
+  /**
+   * <p>标签名称</p>
+   */
+  Name?: string
+  /**
+   * <p>标签描述</p>
+   */
+  Remark?: string
 }
 
 /**

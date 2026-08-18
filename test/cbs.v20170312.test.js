@@ -218,6 +218,16 @@ it("cbs.v20170312.InquirePriceCreateRemoteDisks", async function () {
     }
 })
 
+it("cbs.v20170312.DescribeDedicatedClusterDiskStatistics", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusterDiskStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.ModifyAutoSnapshotPolicyAttribute", async function () {
     try {
        const data = await client.ModifyAutoSnapshotPolicyAttribute({})

@@ -811,51 +811,51 @@ export interface BuildStep {
  */
 export interface HTTPServiceRoute {
   /**
-   * 路径
+   * <p>路径</p>
    */
   Path?: string
   /**
-   * 路径重写
+   * <p>路径重写规则</p>
    */
   PathRewrite?: HTTPServicePathRewrite
   /**
-   * 上游服务类型。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse
+   * <p>上游服务类型。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse</p>
    */
   UpstreamResourceType?: string
   /**
-   * 上游服务名
+   * <p>上游服务名</p>
    */
   UpstreamResourceName?: string
   /**
-   * 是否开启安全域名
+   * <p>是否开启安全域名</p>
    */
   EnableSafeDomain?: boolean
   /**
-   * 是否开启身份认证
+   * <p>是否开启身份认证</p>
    */
   EnableAuth?: boolean
   /**
-   * 是否开启路径透传
+   * <p>是否开启路径透传</p>
    */
   EnablePathTransmission?: boolean
   /**
-   * QPS限频策略
+   * <p>QPS限频策略</p>
    */
   QPSPolicy?: HTTPServiceRouteQPSPolicy
   /**
-   * 是否开启路由
+   * <p>是否开启路由</p>
    */
   Enable?: boolean
   /**
-   * 扩展字段，内部包含headers处理等
+   * <p>扩展字段，内部包含headers处理等</p>
    */
   Extension?: HTTPServiceExtension
   /**
-   * 路由创建时间
+   * <p>路由创建时间，格式  YYYY-MM-DDTHH:mm:ss±HH:mm，时区为 UTC+8</p>
    */
   CreateTime?: string
   /**
-   * 路由更新时间
+   * <p>路由更新时间，格式  YYYY-MM-DDTHH:mm:ss±HH:mm，时区为 UTC+8</p>
    */
   UpdateTime?: string
 }
@@ -4881,6 +4881,10 @@ export interface HTTPServiceDomain {
    */
   DNSStatus?: string
   /**
+   * <p>是否CNAME到平台任一网关入口，默认接入/CDN/EO，不含CustomCname</p><p>枚举值：</p><ul><li>EMPTY： 解析为空</li><li>OK： 命中</li><li>INVALID：  解析到其他非目标地址</li></ul>
+   */
+  PlatformCnameDNSStatus?: string
+  /**
    * <p>HTTP访问服务路由信息</p>
    */
   Routes?: Array<HTTPServiceRoute>
@@ -4889,11 +4893,11 @@ export interface HTTPServiceDomain {
    */
   Extension?: HTTPServiceExtension
   /**
-   * <p>域名创建时间</p>
+   * <p>域名创建时间，格式  YYYY-MM-DDTHH:mm:ss±HH:mm，时区为 UTC+8</p>
    */
   CreateTime?: string
   /**
-   * <p>域名更新时间</p>
+   * <p>域名更新时间，格式  YYYY-MM-DDTHH:mm:ss±HH:mm，时区为 UTC+8</p>
    */
   UpdateTime?: string
 }

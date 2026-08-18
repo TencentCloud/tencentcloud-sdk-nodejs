@@ -888,43 +888,47 @@ export interface TriggerTaskRunBrief {
  */
 export interface ListTriggerWorkflowsRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 请求的数据页数。默认值为1，取值大于等于1
+   * <p>请求的数据页数。默认值为1，取值大于等于1</p>
    */
   PageNumber?: number
   /**
-   * 每页显示的数据条数。默认值为10 ，最小值为10，最大值为200
+   * <p>每页显示的数据条数。默认值为10 ，最小值为10，最大值为200</p>
    */
   PageSize?: number
   /**
-   * 搜索关键词
+   * <p>搜索关键词</p>
    */
   Keyword?: string
   /**
-   * 工作流所属文件夹
+   * <p>工作流所属文件夹</p>
    */
   ParentFolderPath?: string
   /**
-   * bundleId项
+   * <p>bundleId项</p>
    */
   BundleId?: string
   /**
-   * 负责人ID
+   * <p>负责人ID</p>
    */
   OwnerUin?: string
   /**
-   * 创建人ID
+   * <p>创建人ID</p>
    */
   CreateUserUin?: string
   /**
-   * 修改时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间
+   * <p>运行账号ID</p>
+   */
+  ExecuteUserUin?: string
+  /**
+   * <p>修改时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间</p>
    */
   ModifyTime?: Array<string>
   /**
-   * 创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间
+   * <p>创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间</p>
    */
   CreateTime?: Array<string>
 }
@@ -4405,6 +4409,11 @@ export interface TriggerWorkflowDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerMode?: string
+  /**
+   * <p>运行账号ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteUserUin?: string
 }
 
 /**
@@ -6954,165 +6963,185 @@ export interface CreateResourceGroupResponse {
  */
 export interface TriggerWorkflowRunBrief {
   /**
-   * 用户AppId
+   * <p>用户AppId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流运行ID
+   * <p>工作流运行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionId?: string
   /**
-   * 触发器ID
+   * <p>触发器ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerId?: string
   /**
-   * 触发方式:调度触发Scheduler、手动触发ManualTrigger、事件触发Event
+   * <p>触发方式:调度触发Scheduler、手动触发ManualTrigger、事件触发Event</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerType?: string
   /**
-   * 工作流触发时间
+   * <p>工作流触发时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 计划调度时间
+   * <p>计划调度时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTime?: string
   /**
-   * 执行开始时间戳
+   * <p>执行开始时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStartTime?: string
   /**
-   * 执行结束时间戳
+   * <p>执行结束时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionEndTime?: string
   /**
-   * 运行时长，单位秒
+   * <p>运行时长，单位秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionCostTime?: string
   /**
-   * 并发排队花费时间，单位秒
+   * <p>并发排队花费时间，单位秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueCostTime?: string
   /**
-   * 等待资源花费时间，单位秒
+   * <p>等待资源花费时间，单位秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingCostTime?: string
   /**
-   * 执行状态，运行失败:FAILED、运行成功:SUCCESS、等待中:PENDING、跳过运行:SKIPED、运行中:RUNNING
+   * <p>执行状态，运行失败:FAILED、运行成功:SUCCESS、等待中:PENDING、跳过运行:SKIPED、运行中:RUNNING</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionState?: string
   /**
-   * 运行用户UIN
+   * <p>运行用户UIN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteUserUin?: string
   /**
-   * 运行用户名称
+   * <p>运行用户名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteUserName?: string
   /**
-   * 错误码
+   * <p>错误码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorCodeStr?: string
   /**
-   * 运行参数
+   * <p>运行参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowParams?: string
   /**
-   * 工作流版本信息ID
+   * <p>工作流版本信息ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowVersionId?: string
   /**
-   * 是否支持重跑
+   * <p>是否支持重跑</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportRerun?: boolean
   /**
-   * 重跑次数
+   * <p>重跑次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RerunTimes?: number
   /**
-   * 运行的任务范围,逗号分隔的任务ID列表
+   * <p>运行的任务范围,逗号分隔的任务ID列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelectedTaskIds?: Array<string>
   /**
-   * 等待并发开始时间
+   * <p>等待并发开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingStartTime?: string
   /**
-   * 排队等待开始时间
+   * <p>排队等待开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueStartTime?: string
   /**
-   * 运行结束时间
+   * <p>运行结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 文件夹ID
+   * <p>文件夹ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId?: string
   /**
-   * 文件夹名称
+   * <p>文件夹名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderName?: string
   /**
-   * 计划调度时间
+   * <p>计划调度时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PlannedSchedulingTime?: string
   /**
-   * 周期类型
+   * <p>周期类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * 责任人名称
+   * <p>责任人名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserNameInCharge?: string
   /**
-   * 责任人ID
+   * <p>责任人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserUinInCharge?: string
+  /**
+   * <p>关联实体是否存在</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssociatedEntityExist?: boolean
+  /**
+   * <p>父工作流运行ID 【由嵌套工作流触发独有】</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentWorkflowExecutionId?: string
+  /**
+   * <p>父任务运行ID 【由嵌套工作流触发独有】</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentTaskExecutionId?: string
+  /**
+   * <p>父任务运行名称 【由嵌套工作流触发独有】</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentTaskExecutionName?: string
 }
 
 /**
@@ -7360,7 +7389,7 @@ export interface DataSourceFileUpload {
  */
 export interface ListTriggerWorkflowsResponse {
   /**
-   * 查询工作流分页信息
+   * <p>查询工作流分页信息</p>
    */
   Data?: ListTriggerWorkflowInfo
   /**
@@ -9933,7 +9962,7 @@ export interface ListSchemaRequest {
  */
 export interface UpdateTriggerWorkflowPartiallyResponse {
   /**
-   * true代表成功，false代表失败
+   * <p>true代表成功，false代表失败</p>
    */
   Data?: UpdateTriggerWorkflowResult
   /**
@@ -10378,7 +10407,7 @@ export interface ListTriggerWorkflowRunsRequest {
    */
   ProjectId: string
   /**
-   * 过滤参数, 工作流名称或ID查询名称: Keyword, 工作流ID查询名称: WorkflowId,文件夹查询名称: FolderId, 负责人查询名称: InChargeUin, 工作流执行id: ExecutionId, 计划调度时间区间: ScheduleTimeGreaterEqual, ScheduleTimeLessEqual
+   * 过滤参数, 工作流名称或ID查询名称: Keyword, 工作流ID查询名称: WorkflowId,文件夹查询名称: FolderId, 负责人查询名称: InChargeUin, 运行账号ID查询名称: ExecuteUserUin, 工作流执行id: ExecutionId, 计划调度时间区间: ScheduleTimeGreaterEqual, ScheduleTimeLessEqual
    */
   Filters?: Array<Filter>
   /**
@@ -11302,45 +11331,50 @@ export interface DeleteCodeFolderResponse {
  */
 export interface TriggerWorkflowInfo {
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 负责人ID
+   * <p>负责人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 最新修改时间
+   * <p>最新修改时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
-   * 最后更新人ID
+   * <p>最后更新人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUserUin?: string
   /**
-   * 工作流描述
+   * <p>工作流描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowDesc?: string
   /**
-   * 创建人ID
+   * <p>创建人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserUin?: string
+  /**
+   * <p>运行账号ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteUserUin?: string
 }
 
 /**
@@ -11656,80 +11690,85 @@ export interface OpsAsyncResponse {
  */
 export interface TriggerTaskBrief {
   /**
-   * 项目id
+   * <p>项目id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
   /**
-   * 工作流id
+   * <p>工作流id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
-   * 任务类型
+   * <p>任务类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: string
   /**
-   * 责任人user UIN
+   * <p>责任人user UIN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserUinInCharge?: string
   /**
-   * 责任人名称
+   * <p>责任人名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserNameInCharge?: string
   /**
-   * 文件夹ID
+   * <p>文件夹ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId?: string
   /**
-   * 文件夹名称
+   * <p>文件夹名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderName?: string
   /**
-   * 任务类型ID
+   * <p>任务类型ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeId?: number
   /**
-   * 任务状态
+   * <p>任务状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionState?: string
   /**
-   * 运行开始时间
+   * <p>运行开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStartTime?: string
   /**
-   * 依赖策略
+   * <p>依赖策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyTriggerPolicy?: string
+  /**
+   * <p>运行账号ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteUserUin?: string
 }
 
 /**
@@ -12103,9 +12142,13 @@ export interface UpdateTriggerWorkflowRequest {
    */
   SchedulerStatus?: string
   /**
-   * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
+   * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li><li>FILE_ARRIVAL： 文件到达</li></ul>
    */
   TriggerMode?: string
+  /**
+   * <p>运行账号ID</p>
+   */
+  ExecuteUserUin?: string
 }
 
 /**
@@ -13056,23 +13099,19 @@ export interface TriggerTaskVersion {
  */
 export interface UpdateTriggerWorkflowPartiallyRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
    */
   WorkflowId: string
   /**
-   * 责任人ID
+   * <p>责任人ID</p>
    */
   NewSetting?: UpdateTriggerWorkflowPartially
   /**
-   * 删除字段内容，采用属性路径的形式标识，删除的值以":"分割，多个值以","分割
- // 删除调度参数中 ParamKey 为 aa,bb 的属性 "WorkflowParams:aa,bb"
- // 删除配置的 TriggerId 为 da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0 的调度配置"TriggerWorkflowSchedulerConfigurations :da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0" 
-// 删除spark sql通用参数 "GeneralTaskParams: SPARK_SQL" 
-
+   * <p>删除字段内容，采用属性路径的形式标识，删除的值以&quot;:&quot;分割，多个值以&quot;,&quot;分割<br> // 删除调度参数中 ParamKey 为 aa,bb 的属性 &quot;WorkflowParams:aa,bb&quot;<br> // 删除配置的 TriggerId 为 da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0 的调度配置&quot;TriggerWorkflowSchedulerConfigurations :da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0&quot;<br>// 删除spark sql通用参数 &quot;GeneralTaskParams: SPARK_SQL&quot;</p>
    */
   FieldToRemoveList?: Array<string>
 }
@@ -14130,6 +14169,10 @@ export interface CreateTriggerWorkflowRequest {
    * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
    */
   TriggerMode?: string
+  /**
+   * <p>运行账号ID,未传时默认使用当前登录用户ID</p>
+   */
+  ExecuteUserUin?: string
 }
 
 /**
@@ -14393,54 +14436,59 @@ export interface UpdateProjectResponse {
  */
 export interface TriggerWorkflowBrief {
   /**
-   * 项目ID
+   * <p>项目ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 工作ID
+   * <p>工作ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 任务数量
+   * <p>任务数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskCount?: number
   /**
-   * 文件夹ID
+   * <p>文件夹ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId?: string
   /**
-   * 文件夹名称
+   * <p>文件夹名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderName?: string
   /**
-   * 调度配置
+   * <p>调度配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowTriggerConfig?: WorkflowTriggerConfig
   /**
-   * 责任人
+   * <p>责任人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserNameInCharge?: string
   /**
-   * 责任人ID
+   * <p>责任人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserUinInCharge?: string
   /**
-   * 工作流参数
+   * <p>工作流参数</p>
    */
   WorkflowParams?: string
+  /**
+   * <p>运行账号ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteUserUin?: string
 }
 
 /**
@@ -17136,11 +17184,11 @@ export interface UpdateTriggerTaskPartiallyResponse {
  */
 export interface Filter {
   /**
-   * 过滤字段名称
+   * <p>过滤字段名称</p>
    */
   Name?: string
   /**
-   * 过滤值列表
+   * <p>过滤值列表</p>
    */
   Values?: Array<string>
 }
@@ -17754,7 +17802,7 @@ export interface DatabaseInfo {
  */
 export interface WorkflowTriggerConfig {
   /**
-   * <p>触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高</p><ul><li>定时触发：TIME_TRIGGER</li><li>持续运行：CONTINUE_RUN（暂不支持）</li><li>文件到达：FILE_ARRIVAL（暂不支持）</li></ul><p>注意：</p><ul><li>TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；</li><li>FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；</li></ul><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
+   * <p>触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高</p><ul><li>定时触发：TIME_TRIGGER</li><li>文件到达：FILE_ARRIVAL</li><li>持续运行：CONTINUE_RUN（暂不支持）</li></ul><p>注意：</p><ul><li>TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；</li><li>FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；</li></ul><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li><li>FILE_ARRIVAL： 文件到达</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerMode?: string
@@ -17804,20 +17852,30 @@ export interface WorkflowTriggerConfig {
    */
   FileArrivalPath?: string
   /**
-   * <p>文件到达模式下    触发最短间隔时间（单位：秒）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TriggerMinimumIntervalSecond?: number
-  /**
-   * <p>文件到达模式下    触发等待时间（单位：秒）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TriggerWaitTimeSecond?: number
-  /**
    * <p>Trigger 状态 启动ACTIVE，暂停PAUSED。外部的TriggerStatus优先级大于当前值</p><p>枚举值：</p><ul><li>ACTIVE： 启动</li><li>PAUSED： 暂停</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerStatus?: string
+  /**
+   * <p>文件到达模式下 文件匹配规则</p><p>入参限制：文件名匹配仅支持文件名和 *，不能包含路径分隔符 /</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileNamePattern?: string
+  /**
+   * <p>文件到达模式下 是否递归检测子目录</p><p>取值范围：[0, 1]</p><p>默认值：1</p><p>默认 1（开启） 0 （关闭）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Recursive?: number
+  /**
+   * <p>文件到达模式下    触发最短间隔时间</p><p>单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerMinimumIntervalSecond?: number
+  /**
+   * <p>文件到达模式下    触发等待时间</p><p>单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerWaitTimeSecond?: number
 }
 
 /**
@@ -18397,9 +18455,13 @@ export interface UpdateTriggerWorkflowPartially {
    */
   SchedulerStatus?: string
   /**
-   * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
+   * <p>触发方式：定时触发：TIME_TRIGGER ，文件到达：FILE_ARRIVAL。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li><li>FILE_ARRIVAL： 文件到达</li></ul>
    */
   TriggerMode?: string
+  /**
+   * <p>运行账号ID</p>
+   */
+  ExecuteUserUin?: string
 }
 
 /**
@@ -18528,11 +18590,11 @@ export interface GetMyWorkflowMaxPermissionResponse {
  */
 export interface OrderField {
   /**
-   * 排序字段名称
+   * <p>排序字段名称</p>
    */
   Name: string
   /**
-   * 排序方向：ASC|DESC
+   * <p>排序方向：ASC|DESC</p>
    */
   Direction: string
 }
