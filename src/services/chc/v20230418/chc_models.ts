@@ -1125,7 +1125,7 @@ export interface CreateRackOffWorkOrderRequest {
  */
 export interface ExportCustomerWorkOrderDetailResponse {
   /**
-   * 返回下载地址
+   * <p>返回下载地址</p>
    */
   DownloadUrl?: string
   /**
@@ -1669,17 +1669,17 @@ export interface ContactCollectInfo {
  */
 export interface ExportCustomerWorkOrderDetailRequest {
   /**
-   * 服务工单类型
-   */
-  WorkOrderType: Array<string>
-  /**
-   * 要导出的工单的起始时间
+   * <p>要导出的工单的起始时间</p>
    */
   BeginDateTime: string
   /**
-   * 要导出的工单的结束时间
+   * <p>要导出的工单的结束时间</p>
    */
   EndDateTime: string
+  /**
+   * <p>服务工单类型</p>
+   */
+  WorkOrderType?: Array<string>
 }
 
 /**

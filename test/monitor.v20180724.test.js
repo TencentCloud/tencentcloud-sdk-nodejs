@@ -878,6 +878,16 @@ it("monitor.v20180724.DeleteGrafanaInstance", async function () {
     }
 })
 
+it("monitor.v20180724.ModifyPrometheusInstanceAccessPoints", async function () {
+    try {
+       const data = await client.ModifyPrometheusInstanceAccessPoints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DeletePrometheusConfig", async function () {
     try {
        const data = await client.DeletePrometheusConfig({})

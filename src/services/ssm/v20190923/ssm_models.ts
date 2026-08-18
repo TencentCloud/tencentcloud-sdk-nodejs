@@ -154,6 +154,10 @@ export interface DescribeSecretResponse {
    */
   AccountInfoList?: Array<SecretAccountInfo>
   /**
+   *
+   */
+  NextRotationTime?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -177,6 +181,14 @@ export interface GetSecretValueRequest {
 对于云产品凭据如Mysql凭据，通过指定凭据名称和历史版本号来获取历史轮转凭据的明文信息，如果要获取当前正在使用的凭据版本的明文，需要将版本号指定为：SSM_Current。
    */
   VersionId: string
+  /**
+   *
+   */
+  EncryptionPublicKey?: string
+  /**
+   *
+   */
+  EncryptionAlgorithm?: string
 }
 
 /**
@@ -685,6 +697,10 @@ export interface ListSecretsRequest {
    * <p>凭据加密类型</p><p>枚举值：</p><ul><li>0： KMS 密钥加密</li><li>1： 软密钥加密</li></ul><p>默认值：0</p>
    */
   EncryptType?: number
+  /**
+   * <p>云产品实例 ID</p>
+   */
+  InstanceID?: string
 }
 
 /**

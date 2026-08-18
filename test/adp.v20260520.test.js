@@ -268,6 +268,16 @@ it("adp.v20260520.RunAppTriggerNow", async function () {
     }
 })
 
+it("adp.v20260520.DescribeConsumptionDetailList", async function () {
+    try {
+       const data = await client.DescribeConsumptionDetailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.ModifySpace", async function () {
     try {
        const data = await client.ModifySpace({})
@@ -498,9 +508,9 @@ it("adp.v20260520.DescribeAppTrigger", async function () {
     }
 })
 
-it("adp.v20260520.ModifyVariable", async function () {
+it("adp.v20260520.DescribeMetricOverviewList", async function () {
     try {
-       const data = await client.ModifyVariable({})
+       const data = await client.DescribeMetricOverviewList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +558,29 @@ it("adp.v20260520.DescribeSkillSummaryList", async function () {
     }
 })
 
+it("adp.v20260520.DescribeUsageDetailList", async function () {
+    try {
+       const data = await client.DescribeUsageDetailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.UnfavoritePlugin", async function () {
     try {
        const data = await client.UnfavoritePlugin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeConcurrencyLimitDetailList", async function () {
+    try {
+       const data = await client.DescribeConcurrencyLimitDetailList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +601,16 @@ it("adp.v20260520.FavoriteSkill", async function () {
 it("adp.v20260520.DescribeAuditLogMeta", async function () {
     try {
        const data = await client.DescribeAuditLogMeta({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ModifyVariable", async function () {
+    try {
+       const data = await client.ModifyVariable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +651,16 @@ it("adp.v20260520.ModifySkill", async function () {
 it("adp.v20260520.RollbackRelease", async function () {
     try {
        const data = await client.RollbackRelease({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeUsageSummaryList", async function () {
+    try {
+       const data = await client.DescribeUsageSummaryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

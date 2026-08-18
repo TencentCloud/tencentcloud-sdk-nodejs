@@ -148,29 +148,9 @@ it("dataagent.v20250513.CreateDataAgentSession", async function () {
     }
 })
 
-it("dataagent.v20250513.UpdateScene", async function () {
-    try {
-       const data = await client.UpdateScene({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dataagent.v20250513.DeleteDataAgentSession", async function () {
     try {
        const data = await client.DeleteDataAgentSession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.AddScene", async function () {
-    try {
-       const data = await client.AddScene({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,26 +201,6 @@ it("dataagent.v20250513.ModifyChunk", async function () {
 it("dataagent.v20250513.DeleteChunk", async function () {
     try {
        const data = await client.DeleteChunk({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.DeleteScene", async function () {
-    try {
-       const data = await client.DeleteScene({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.QuerySceneList", async function () {
-    try {
-       const data = await client.QuerySceneList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

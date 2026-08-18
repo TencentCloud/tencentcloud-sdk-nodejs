@@ -597,290 +597,300 @@ export interface DeleteTriggerWorkflowResponse {
  */
 export interface TriggerTaskRunBrief {
   /**
-   * 任务运行ID
+   * <p>任务运行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionId?: string
   /**
-   * 执行状态，运行失败:FAILED、运行成功:SUCCESS、等待中:PENDING、跳过运行:SKIP、运行中:RUNNING
+   * <p>执行状态，运行失败:FAILED、运行成功:SUCCESS、等待中:PENDING、跳过运行:SKIP、运行中:RUNNING</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionState?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流运行ID
+   * <p>工作流运行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowExecutionId?: string
   /**
-   * 任务 ID
+   * <p>任务 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 任务类型
+   * <p>任务类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: string
   /**
-   * 任务版本
+   * <p>任务版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskVersionId?: string
   /**
-   * 触发类型
+   * <p>触发类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerType?: string
   /**
-   * 等待时长，单位秒
+   * <p>等待时长，单位秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WaitTime?: string
   /**
-   * 所属资源组
+   * <p>所属资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroup?: string
   /**
-   * 错误码
+   * <p>错误码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorCode?: string
   /**
-   * 运行账号
+   * <p>运行账号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteUserUin?: string
   /**
-   * 创建人 ID
+   * <p>创建人 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreaterUin?: string
   /**
-   * 执行平台执行 ID
+   * <p>执行平台执行 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: string
   /**
-   * 创建时间戳
+   * <p>创建时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 计划调度时间
+   * <p>计划调度时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTime?: string
   /**
-   * 更新时间戳
+   * <p>更新时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 依赖任务完成时间
+   * <p>依赖任务完成时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependenceFinishedTime?: string
   /**
-   * 任务下发执行平台时间
+   * <p>任务下发执行平台时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueStartTime?: string
   /**
-   * 开始等待资源时间
+   * <p>开始等待资源时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingStartTime?: string
   /**
-   * 运行开始时间
+   * <p>运行开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStartTime?: string
   /**
-   * 运行结束时间
+   * <p>运行结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionEndTime?: string
   /**
-   * 排队时间
+   * <p>排队时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueCostTime?: string
   /**
-   * 运行时间
+   * <p>运行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionTime?: string
   /**
-   * 总花费时间
+   * <p>总花费时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllCostTime?: string
   /**
-   * 时区
+   * <p>时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeZone?: string
   /**
-   * 依赖上游任务 ID 列表
+   * <p>依赖上游任务 ID 列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependOnList?: Array<string>
   /**
-   * 运行参数
+   * <p>运行参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunParams?: string
   /**
-   * 任务扩展信息，包含脚本路径
+   * <p>任务扩展信息，包含脚本路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeExtensions?: string
   /**
-   * 重试次数，为 0 则表示首次运行
+   * <p>重试次数，为 0 则表示首次运行</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryTimes?: number
   /**
-   * 左侧坐标
+   * <p>左侧坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LeftCoordinate?: number
   /**
-   * 顶部坐标
+   * <p>顶部坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopCoordinate?: number
   /**
-   * 资源组 ID
+   * <p>资源组 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 错误码描述
+   * <p>错误码描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorCodeStr?: string
   /**
-   * 创建人 UIN
+   * <p>创建人 UIN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUin?: string
   /**
-   * 下发执行平台时间
+   * <p>下发执行平台时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IssueTime?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 运行人名称
+   * <p>运行人名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteUserName?: string
   /**
-   * 重跑次数
+   * <p>重跑次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RerunTimes?: number
   /**
-   * 是否是最新一次运行
+   * <p>是否是最新一次运行</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLatestExecution?: boolean
   /**
-   * 任务运行状态
+   * <p>任务运行状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskExecutionState?: string
   /**
-   * 周期类型
+   * <p>周期类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * 责任人名称
+   * <p>责任人名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserNameInCharge?: string
   /**
-   * 责任人id
+   * <p>责任人id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserUinInCharge?: string
   /**
-   * 资源组名称
+   * <p>资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 时区
+   * <p>时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timezone?: string
   /**
-   * 文件夹id
+   * <p>文件夹id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId?: string
   /**
-   * 文件夹名称
+   * <p>文件夹名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderName?: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
   /**
-   * 任务类型id
+   * <p>任务类型id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeId?: number
   /**
-   * 工作流运行参数
+   * <p>工作流运行参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowParams?: string
   /**
-   * 是否支持重跑
+   * <p>是否支持重跑</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportRerun?: boolean
   /**
-   * 工作流运行状态
+   * <p>工作流运行状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowExecutionState?: string
   /**
-   * 任务执行结果
+   * <p>任务执行结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionResult?: string
   /**
-   * 依赖策略
+   * <p>依赖策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyTriggerPolicy?: string
+  /**
+   * <p>关联实体是否存在，true表示任务/工作流等实体存在，false表示实体已被删除</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssociatedEntityExist?: boolean
+  /**
+   * <p>调度执行类型</p><p>枚举值：</p><ul><li>0： 正常调度</li><li>1： 空跑调度</li><li>2： 用户驱动，手动触发</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleRunType?: string
 }
 
 /**

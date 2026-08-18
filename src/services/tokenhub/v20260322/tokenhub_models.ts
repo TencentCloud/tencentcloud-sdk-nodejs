@@ -1350,81 +1350,9 @@ export interface DescribeUsageRankListResponse {
 }
 
 /**
- * DescribeApiKey返回参数结构体
+ * DescribeModelQuota返回参数结构体
  */
-export interface DescribeApiKeyResponse {
-  /**
-   * API 密钥 ID。
-   */
-  ApiKeyId?: string
-  /**
-   * 名称。
-   */
-  Name?: string
-  /**
-   * API 密钥值（明文）。
-   */
-  ApiKey?: string
-  /**
-   * 备注。
-   */
-  Remark?: string
-  /**
-   * 平台类型。枚举：maas
-   */
-  Platform?: string
-  /**
-   * 主账号。
-   */
-  Uin?: string
-  /**
-   * 子账号。
-   */
-  SubUin?: string
-  /**
-   * 状态。取值：enable（启用）、disable（禁用）。
-   */
-  Status?: string
-  /**
-   * 绑定类型。取值：all（全部模型和接入点）、model_all_endpoint_custom（全部模型+自定义接入点）、model_custom_endpoint_all（自定义模型+全部接入点）、model_custom_endpoint_custom（自定义模型+自定义接入点）。
-   */
-  BindType?: string
-  /**
-   * 创建时间。格式：YYYY-MM-DD HH:mm:ss。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间。格式：YYYY-MM-DD HH:mm:ss。
-   */
-  UpdateTime?: string
-  /**
-   * 应用 ID。
-   */
-  AppId?: string
-  /**
-   * 是否可编辑。true 表示可编辑，false 表示不可编辑。
-   */
-  Editable?: boolean
-  /**
-   * 绑定资源列表，区分 endpoint 和 model 类型。
-   */
-  BindingItems?: Array<BindingItem>
-  /**
-   * IP 白名单列表。支持 IPv4和 CIDR 格式。空数组表示不限制 IP。
-   */
-  IpWhitelist?: Array<string>
-  /**
-   * 当Platform为maas时该字段为空
-   */
-  Creator?: string
-  /**
-   * Token 限额多维度信息。未配置限额时不返回该字段。
-   */
-  QuotaSet?: Array<QuotaInfo>
-  /**
-   * Token 限额状态。空字符串表示未配置任何限额包；active 表示已配置且当前可用；inactive 表示已配置但额度耗尽
-   */
-  QuotaStatus?: string
+export interface DescribeModelQuotaResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1440,6 +1368,11 @@ export interface DescribeTokenPlanApiKeySecretRequest {
    */
   ApiKeyId: string
 }
+
+/**
+ * DescribeModelQuota请求参数结构体
+ */
+export type DescribeModelQuotaRequest = null
 
 /**
  * 模型计费信息
@@ -2498,6 +2431,88 @@ export interface ModelSiteRegion {
    * 该站点下可用的地域列表，遵循腾讯云标准地域编码（如 ap-guangzhou、ap-beijing、ap-singapore、na-siliconvalley 等）。为空数组时表示该站点无可用地域。
    */
   Regions?: Array<string>
+}
+
+/**
+ * DescribeApiKey返回参数结构体
+ */
+export interface DescribeApiKeyResponse {
+  /**
+   * API 密钥 ID。
+   */
+  ApiKeyId?: string
+  /**
+   * 名称。
+   */
+  Name?: string
+  /**
+   * API 密钥值（明文）。
+   */
+  ApiKey?: string
+  /**
+   * 备注。
+   */
+  Remark?: string
+  /**
+   * 平台类型。枚举：maas
+   */
+  Platform?: string
+  /**
+   * 主账号。
+   */
+  Uin?: string
+  /**
+   * 子账号。
+   */
+  SubUin?: string
+  /**
+   * 状态。取值：enable（启用）、disable（禁用）。
+   */
+  Status?: string
+  /**
+   * 绑定类型。取值：all（全部模型和接入点）、model_all_endpoint_custom（全部模型+自定义接入点）、model_custom_endpoint_all（自定义模型+全部接入点）、model_custom_endpoint_custom（自定义模型+自定义接入点）。
+   */
+  BindType?: string
+  /**
+   * 创建时间。格式：YYYY-MM-DD HH:mm:ss。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。格式：YYYY-MM-DD HH:mm:ss。
+   */
+  UpdateTime?: string
+  /**
+   * 应用 ID。
+   */
+  AppId?: string
+  /**
+   * 是否可编辑。true 表示可编辑，false 表示不可编辑。
+   */
+  Editable?: boolean
+  /**
+   * 绑定资源列表，区分 endpoint 和 model 类型。
+   */
+  BindingItems?: Array<BindingItem>
+  /**
+   * IP 白名单列表。支持 IPv4和 CIDR 格式。空数组表示不限制 IP。
+   */
+  IpWhitelist?: Array<string>
+  /**
+   * 当Platform为maas时该字段为空
+   */
+  Creator?: string
+  /**
+   * Token 限额多维度信息。未配置限额时不返回该字段。
+   */
+  QuotaSet?: Array<QuotaInfo>
+  /**
+   * Token 限额状态。空字符串表示未配置任何限额包；active 表示已配置且当前可用；inactive 表示已配置但额度耗尽
+   */
+  QuotaStatus?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

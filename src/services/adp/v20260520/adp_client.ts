@@ -25,6 +25,8 @@ import {
   FavoriteSkillRequest,
   DescribeSkillReferenceListResponse,
   ConversationRecordErrorInfo,
+  DescribeUsageSummaryListRequest,
+  ModelUsageSummary,
   AgentRelease,
   AgentToolInputParameter,
   UnfavoritePluginResponse,
@@ -37,7 +39,7 @@ import {
   GenerateModel,
   DescribeSkillDetailResponse,
   AgentAdvancedConfig,
-  SkillShare,
+  ResourceConsumption,
   DeleteAppTriggerRequest,
   AppShareWhitelistItem,
   ModifyVariableRequest,
@@ -46,12 +48,15 @@ import {
   ResetConversationResponse,
   IntentAchievementInfo,
   OnceSchedule,
+  UnfavoriteSkillResponse,
   DeleteSkillResponse,
   ModelProperty,
   ModifyConversationRequest,
+  MultiModalUnderstandingModel,
   DescribeAgentReleasePreviewListRequest,
   DescribeReleaseSummaryResponse,
   DescribeModelListResponse,
+  ResponseParam,
   DescribeAppTriggerInstanceRequest,
   AppModelConfig,
   MultiModalQAModel,
@@ -59,6 +64,7 @@ import {
   CreateSpaceRequest,
   AgentModelConfig,
   ReleaseRecord,
+  Identity,
   SearchResourceStatusInfo,
   DialogCustomConfig,
   ApiKeyAuthConfig,
@@ -69,6 +75,7 @@ import {
   AppTriggerWebhookParamSchemaConfig,
   Conversation,
   AuthConfig,
+  ReleaseSkillResponse,
   AppShareAccessControl,
   PluginOperation,
   AppSharedKbInfo,
@@ -87,16 +94,17 @@ import {
   CreateConversationRequest,
   DescribeReleaseListRequest,
   CreateWebSocketTokenResponse,
-  ExecuteConfig,
+  DescribeConsumptionDetailListRequest,
   AuditLogMetaField,
+  SkillShare,
   DescribeAgentDetailRequest,
-  DescribePluginSummaryListRequest,
+  DescribeMetricOverviewListResponse,
   SkillReferenceSummary,
   ModelDeveloperBasic,
   DescribeConversationMessageListResponse,
   ReleaseSkillRequest,
   AppExperienceConfig,
-  RollbackReleaseResponse,
+  PluginUsageDetail,
   DescribeSkillCategoryListResponse,
   TriggerConfig,
   DescribeReleaseSummaryRequest,
@@ -124,11 +132,12 @@ import {
   DuplexBilling,
   ConversationResetInfo,
   ModelParameter,
-  UnfavoriteSkillResponse,
+  ExecuteConfig,
   ModifySpaceResponse,
   SkillDetail,
   DescribePluginSummaryListResponse,
-  MultiModalUnderstandingModel,
+  AppTriggerParamBindingConfig,
+  UsageSummary,
   DescribeAppTriggerRequest,
   ResumeAppTriggerResponse,
   AgentPlugin,
@@ -140,11 +149,14 @@ import {
   ConversationWorkspace,
   BillingAttribute,
   SkillReferenceGroup,
+  DescribeConcurrencyLimitDetailListResponse,
   AgentPluginConfig,
-  PluginSummary,
+  VoiceConfig,
+  CallSource,
   AgentSpec,
   ModifyAppRequest,
   ClawAgentConfig,
+  ConsumptionUsage,
   ModelLimit,
   AppTriggerPromptExecuteConfig,
   ConversationQuoteInfo,
@@ -177,8 +189,9 @@ import {
   ResetConversationRequest,
   ModifyAgentResponse,
   DescribeLatestReleaseResponse,
+  RollbackReleaseResponse,
   SkillNotice,
-  ResponseParam,
+  DescribeUsageDetailListResponse,
   AppTriggerParamSchema,
   DescribeAppTriggerResponse,
   ToolBilling,
@@ -189,6 +202,7 @@ import {
   DescribePluginRequest,
   AgentToolConfig,
   PauseAppTriggerResponse,
+  UsageDetail,
   CreatePluginResponse,
   ModifyVariableResponse,
   AgentSkillConfig,
@@ -204,7 +218,9 @@ import {
   OAuthConfig,
   CopyAgentFromAppResponse,
   CreateWorkspaceCredentialResponse,
+  WeeklySchedule,
   ModelParams,
+  ViewScope,
   RetryReleaseResponse,
   AgentInput,
   AICallConfig,
@@ -214,26 +230,29 @@ import {
   DeleteVariableResponse,
   DescribeAccountListResponse,
   CreateSkillShareResponse,
+  TimeRange,
   RunAppTriggerNowRequest,
   AppTriggerWebhookConfig,
   AgentSummary,
   AgentUserInputValue,
   DeleteAppTriggerResponse,
+  MetricOverview,
   CreateAppTriggerResponse,
   CreateVariableResponse,
-  Filter,
+  DescribeMetricOverviewListRequest,
   ApiToolConfig,
   WeeklyTime,
   ModifySkillResponse,
   ToolConfig,
   ConversationReference,
   AppShareURLInfo,
-  ReleaseSkillResponse,
+  DescribeConsumptionDetailListResponse,
   ModelBasic,
   UnfavoriteSkillRequest,
   SkillAnalysisInfo,
   ModifyPluginResponse,
   CreateReleaseResponse,
+  PluginSummary,
   DescribeAppTriggerInstanceResponse,
   UnfavoritePluginRequest,
   ModifySkillRequest,
@@ -244,10 +263,11 @@ import {
   CreateSkillShareRequest,
   DeletePluginResponse,
   CreateVariableRequest,
-  AppTriggerParamBindingConfig,
+  ConsumptionDetail,
+  ConsumptionClassification,
   CreateSkillResponse,
   DescribeAuditLogListRequest,
-  VoiceConfig,
+  DescribePluginSummaryListRequest,
   MCPPluginConfig,
   DescribeAppTriggerSummaryListResponse,
   DescribeSystemVariableListRequest,
@@ -259,7 +279,7 @@ import {
   ModelStatus,
   SpecialStatusInfo,
   Space,
-  WeeklySchedule,
+  PluginUsageSummary,
   AppMetadata,
   SkillSummary,
   AgentCollaborationConfig,
@@ -272,17 +292,17 @@ import {
   AppTriggerScheduleConfig,
   CreateSkillRequest,
   AppMemoryConfig,
-  FavoritePluginResponse,
   AgentToolBasicConfig,
   SupportedFileType,
   TriggerStatus,
   RoleConfig,
   CreateAgentResponse,
-  ClawAgentCustomConfig,
+  DescribeAgentSummaryListRequest,
   AppTriggerParamBinding,
   AgentSkill,
   DeleteConversationRequest,
   PluginConfig,
+  DescribeConcurrencyLimitDetailListRequest,
   ModelBadge,
   Plugin,
   DescribeAppTriggerRunLogListResponse,
@@ -293,16 +313,19 @@ import {
   DescribeAppSummaryListResponse,
   ClawAgentLongMemoryConfig,
   FavoritePluginRequest,
+  PlatformUsageSummary,
+  ConcurrencyLimitDetail,
   FileParseModel,
   CopyAppResponse,
   AgentPluginParameter,
+  ModelUsageDetail,
   CopyAppRequest,
   RollbackReleaseRequest,
   AgentSystemVariable,
   AppOperation,
   PluginProfile,
   DeleteSpaceRequest,
-  DescribeAgentSummaryListRequest,
+  FavoritePluginResponse,
   SkillCategory,
   DescribePluginResponse,
   DescribeReleaseListResponse,
@@ -312,10 +335,12 @@ import {
   DescribeSkillDetailRequest,
   DescribeSkillCategoryListRequest,
   AppTriggerWorkflowExecuteConfig,
+  DescribeUsageDetailListRequest,
   Model,
   AuditLog,
   DescribeSkillSummaryListResponse,
   DescribeConversationMessageListRequest,
+  Filter,
   DigitalHumanConfig,
   ModelProviderBasic,
   MCPToolConfig,
@@ -328,8 +353,9 @@ import {
   PluginUserState,
   AppAdvancedConf,
   DescribeSpaceListRequest,
-  SkillVersion,
+  DescribeUsageSummaryListResponse,
   AgentTool,
+  SkillVersion,
   AppModeConfig,
   Tool,
   DeleteSpaceResponse,
@@ -596,6 +622,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询资源消耗明细，包含计费相关字段（消耗类型、消耗目标、消耗场景、套餐包及PU消耗等）
+   */
+  async DescribeConsumptionDetailList(
+    req: DescribeConsumptionDetailListRequest,
+    cb?: (error: string, rep: DescribeConsumptionDetailListResponse) => void
+  ): Promise<DescribeConsumptionDetailListResponse> {
+    return this.request("DescribeConsumptionDetailList", req, cb)
+  }
+
+  /**
    * 编辑空间
    */
   async ModifySpace(
@@ -826,13 +862,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新参数变量
+   * 查询看板总览KPI卡片数据，通过resource_type区分资源看板与业务看板域，返回各域KPI指标列表
    */
-  async ModifyVariable(
-    req: ModifyVariableRequest,
-    cb?: (error: string, rep: ModifyVariableResponse) => void
-  ): Promise<ModifyVariableResponse> {
-    return this.request("ModifyVariable", req, cb)
+  async DescribeMetricOverviewList(
+    req: DescribeMetricOverviewListRequest,
+    cb?: (error: string, rep: DescribeMetricOverviewListResponse) => void
+  ): Promise<DescribeMetricOverviewListResponse> {
+    return this.request("DescribeMetricOverviewList", req, cb)
   }
 
   /**
@@ -876,6 +912,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询资源调用时序明细，支持模型和插件两类资源，按时间顺序返回每条调用记录的详细信息
+   */
+  async DescribeUsageDetailList(
+    req: DescribeUsageDetailListRequest,
+    cb?: (error: string, rep: DescribeUsageDetailListResponse) => void
+  ): Promise<DescribeUsageDetailListResponse> {
+    return this.request("DescribeUsageDetailList", req, cb)
+  }
+
+  /**
    * 取消收藏插件
    */
   async UnfavoritePlugin(
@@ -883,6 +929,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnfavoritePluginResponse) => void
   ): Promise<UnfavoritePluginResponse> {
     return this.request("UnfavoritePlugin", req, cb)
+  }
+
+  /**
+   * 查询并发超限明细，包含QPM/TPM超限与专属并发超限记录，返回超限发生时间、空间、应用、模型及请求内容
+   */
+  async DescribeConcurrencyLimitDetailList(
+    req: DescribeConcurrencyLimitDetailListRequest,
+    cb?: (error: string, rep: DescribeConcurrencyLimitDetailListResponse) => void
+  ): Promise<DescribeConcurrencyLimitDetailListResponse> {
+    return this.request("DescribeConcurrencyLimitDetailList", req, cb)
   }
 
   /**
@@ -903,6 +959,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuditLogMetaResponse) => void
   ): Promise<DescribeAuditLogMetaResponse> {
     return this.request("DescribeAuditLogMeta", req, cb)
+  }
+
+  /**
+   * 更新参数变量
+   */
+  async ModifyVariable(
+    req: ModifyVariableRequest,
+    cb?: (error: string, rep: ModifyVariableResponse) => void
+  ): Promise<ModifyVariableResponse> {
+    return this.request("ModifyVariable", req, cb)
   }
 
   /**
@@ -943,6 +1009,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RollbackReleaseResponse) => void
   ): Promise<RollbackReleaseResponse> {
     return this.request("RollbackRelease", req, cb)
+  }
+
+  /**
+   * 查询资源用量聚合明细，支持模型、插件、平台三类资源，按空间/应用维度聚合展示调用次数、Token消耗等指标
+   */
+  async DescribeUsageSummaryList(
+    req: DescribeUsageSummaryListRequest,
+    cb?: (error: string, rep: DescribeUsageSummaryListResponse) => void
+  ): Promise<DescribeUsageSummaryListResponse> {
+    return this.request("DescribeUsageSummaryList", req, cb)
   }
 
   /**

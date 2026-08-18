@@ -24,6 +24,7 @@ import {
   UpdateFilesetGeneralConfigResponse,
   CreateDataRepositoryTaskResponse,
   DeleteFileSystemRequest,
+  MountPointEntry,
   DeleteFilesetResponse,
   ListLoadTasksResponse,
   UpdateLoadTaskPriorityResponse,

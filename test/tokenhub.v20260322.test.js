@@ -58,19 +58,9 @@ it("tokenhub.v20260322.DescribeApiKeyList", async function () {
     }
 })
 
-it("tokenhub.v20260322.DescribeModelList", async function () {
+it("tokenhub.v20260322.DescribeGlossaries", async function () {
     try {
-       const data = await client.DescribeModelList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tokenhub.v20260322.DescribeTokenPlanApiKey", async function () {
-    try {
-       const data = await client.DescribeTokenPlanApiKey({})
+       const data = await client.DescribeGlossaries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +108,19 @@ it("tokenhub.v20260322.DescribeTokenPlanApiKeyUsageDetail", async function () {
     }
 })
 
-it("tokenhub.v20260322.DescribeGlossaries", async function () {
+it("tokenhub.v20260322.DescribeModelList", async function () {
     try {
-       const data = await client.DescribeGlossaries({})
+       const data = await client.DescribeModelList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DescribeModelQuota", async function () {
+    try {
+       const data = await client.DescribeModelQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +261,16 @@ it("tokenhub.v20260322.DeleteEndpoint", async function () {
 it("tokenhub.v20260322.DescribeTokenPlan", async function () {
     try {
        const data = await client.DescribeTokenPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DescribeTokenPlanApiKey", async function () {
+    try {
+       const data = await client.DescribeTokenPlanApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

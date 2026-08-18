@@ -13136,7 +13136,7 @@ export interface RollBackClusterRequest {
    * 备份文件ID。
 回档策略为按备份文件回档时必填。
    */
-  RollbackId: number
+  RollbackId?: number
   /**
    * 期望回档时间。
 回档策略为timeRollback按时间点回档时必填。

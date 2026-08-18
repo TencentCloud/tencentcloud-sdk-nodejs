@@ -2093,6 +2093,10 @@ export interface DatahubTaskInfo {
    * <p>任务是否自动扩容标识</p><p>枚举值：</p><ul><li>true： 自动扩容</li><li>false： 手动扩容</li></ul><p>默认值：true</p>
    */
   AutoExpandFlag?: boolean
+  /**
+   * <p>不影响任务执行的警告信息</p>
+   */
+  WarnMessage?: string
 }
 
 /**
@@ -2808,6 +2812,10 @@ export interface DescribeTopicDetailRequest {
    * <p>目前支持 ReplicaNum （副本数）筛选</p>
    */
   Filters?: Array<Filter>
+  /**
+   * <p>搜索topic时是否忽略大小写敏感</p>
+   */
+  SearchWordIgnoreCaseFlag?: boolean
 }
 
 /**
@@ -3628,19 +3636,19 @@ export interface DescribeCkafkaZoneRequest {
  */
 export interface SaleInfo {
   /**
-   * 手动设置的flag标志，true表示售罄，false表示可售。
+   * <p>手动设置的flag标志，true表示售罄，false表示可售。</p>
    */
   Flag?: boolean
   /**
-   * ckafka版本号(1.1.1/2.4.2/0.10.2)
+   * <p>ckafka版本号(1.1.1/2.4.2/0.10.2)</p>
    */
   Version?: string
   /**
-   * 专业版、标准版标志
+   * <p>专业版、标准版标志</p>
    */
   Platform?: string
   /**
-   * 售罄标志：true售罄
+   * <p>售罄标志：true售罄</p>
    */
   SoldOut?: boolean
 }
@@ -4279,7 +4287,7 @@ export interface ModifyInstanceAttributesRequest {
    */
   DeleteProtectionEnable?: number
   /**
-   * <p>实例级别消息保留大小</p>单位：byte<br>默认值：-1<br><p>实例级别消息保留大小</p>
+   * <p>实例级别消息保留大小</p><p>单位：byte</p><p>默认值：-1</p><p>实例级别消息保留大小</p>
    */
   RetentionBytes?: number
   /**
@@ -4287,7 +4295,7 @@ export interface ModifyInstanceAttributesRequest {
    */
   AdminSecurity?: boolean
   /**
-   * <p>事务ID最大空闲时间，超时未提交的事务将被标记为过期</p>取值范围：[3600000, 604800000]<br>单位：ms
+   * <p>事务ID最大空闲时间，超时未提交的事务将被标记为过期</p><p>取值范围：[3600000, 604800000]</p><p>单位：ms</p>
    */
   TransactionalIdExpirationMs?: number
 }
@@ -5298,6 +5306,10 @@ export interface DescribeDatahubTaskRes {
    * <p>自动扩容 true:自动扩容 false:手动扩容</p><p>默认值：true</p>
    */
   AutoExpandFlag?: boolean
+  /**
+   * <p>不影响任务执行的警告信息</p>
+   */
+  WarnMessage?: string
 }
 
 /**
@@ -5820,7 +5832,7 @@ export interface UpgradeBrokerVersionRequest {
    */
   InstanceId: string
   /**
-   * <p>版本升级类型</p><p>枚举值：</p><ul><li>1： 小版本迁移升级(推荐)</li></ul>
+   * <p>版本升级类型</p><p>枚举值：</p><ul><li>1： 小版本迁移升级(推荐)</li><li>5： 小版原地升级</li></ul>
    */
   Type: number
   /**
@@ -6496,15 +6508,15 @@ export interface DescribeTopicSubscribeGroupRequest {
  */
 export interface DeleteGroupSubscribeTopicRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p>
    */
   InstanceId: string
   /**
-   * 消费分组名称
+   * <p>消费分组名称</p>
    */
   Group: string
   /**
-   * 主题名
+   * <p>主题名</p>
    */
   Topic: string
 }
@@ -9397,7 +9409,7 @@ export interface ModifyPasswordResponse {
  */
 export interface DeleteGroupSubscribeTopicResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: JgwOperateResponse
   /**
@@ -9671,7 +9683,7 @@ export interface ModifyGroupOffsetsRequest {
  */
 export interface Route {
   /**
-   * <p>实例接入方式0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）</p>
+   * <p>实例接入方式<br>0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)<br>1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）<br>2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）<br>3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）</p>
    */
   AccessType?: number
   /**

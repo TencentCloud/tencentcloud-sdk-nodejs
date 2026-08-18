@@ -801,11 +801,11 @@ export interface McpToolAnnotation {
  */
 export interface DeleteServiceRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID?: string
   /**
-   * 业务ID
+   * <p>业务ID</p>
    */
   ID?: string
 }
@@ -1635,11 +1635,11 @@ export interface ModifyAgentAppResponse {
  */
 export interface DescribeServiceRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID?: string
   /**
-   * 业务ID
+   * <p>业务ID</p>
    */
   ID?: string
 }

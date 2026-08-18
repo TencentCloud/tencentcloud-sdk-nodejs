@@ -567,7 +567,7 @@ export interface StorageOptionOverview {
  */
 export interface DescribeJobsOverviewRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
 }
@@ -2224,11 +2224,11 @@ export interface DescribeNodesRequest {
  */
 export interface DetachNodesRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId: string
   /**
-   * 集群中的节点id
+   * <p>集群中的节点id</p>
    */
   NodeIds: Array<string>
 }
@@ -2289,15 +2289,15 @@ export interface LoginNode {
  */
 export interface DescribeJobsOverviewResponse {
   /**
-   * 作业任务数量
+   * <p>作业任务数量</p>
    */
   JobTotal?: number
   /**
-   * 排队中的作业任务数量
+   * <p>排队中的作业任务数量</p>
    */
   QueuingJobTotal?: number
   /**
-   * 运行中的作业数量
+   * <p>运行中的作业数量</p>
    */
   RunningJobTotal?: number
   /**

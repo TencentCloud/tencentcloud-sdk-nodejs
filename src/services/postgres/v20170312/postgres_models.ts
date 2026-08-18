@@ -4146,17 +4146,29 @@ export interface ModifyDBInstanceNameRequest {
  */
 export interface DescribeDBInstanceSSLConfigResponse {
   /**
-   * true 代表开通 ，false 代表未开通
+   * <p>true 代表开通 ，false 代表未开通</p>
    */
   SSLEnabled?: boolean
   /**
-   * 云端根证书下载链接
+   * <p>云端根证书下载链接</p>
    */
   CAUrl?: string
   /**
-   * 服务器证书中配置的内网或外网连接地址
+   * <p>服务器证书中配置的内网或外网连接地址</p>
    */
   ConnectAddress?: string
+  /**
+   * <p>CA证书公钥，仅云盘版</p>
+   */
+  CACert?: string
+  /**
+   * <p>JKS公钥，仅云盘版</p>
+   */
+  CAJKS?: string
+  /**
+   * <p>CAP7B公钥，仅云盘版</p>
+   */
+  CAP7B?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5940,7 +5952,7 @@ export interface CreateParameterTemplateRequest {
  */
 export interface DescribeDBInstanceSSLConfigRequest {
   /**
-   * 实例ID，形如postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID，形如postgres-6bwgamo3。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
 }

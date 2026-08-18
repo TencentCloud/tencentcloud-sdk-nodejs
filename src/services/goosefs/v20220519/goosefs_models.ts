@@ -156,6 +156,20 @@ export interface DeleteFileSystemRequest {
 }
 
 /**
+ * 客户端挂载点
+ */
+export interface MountPointEntry {
+  /**
+   *
+   */
+  StorageFileSystemId?: string
+  /**
+   *
+   */
+  MountDir?: string
+}
+
+/**
  * DeleteFileset返回参数结构体
  */
 export interface DeleteFilesetResponse {
@@ -647,6 +661,10 @@ export interface ClientNodeAttribute {
    * <p>客户端集群id</p>
    */
   ClusterId?: string
+  /**
+   *
+   */
+  MountPoints?: Array<MountPointEntry>
 }
 
 /**
@@ -1715,6 +1733,18 @@ export interface CustomerClusterAttr {
    * 客户端集群挂载存储集合
    */
   ClusterMountSet?: Array<ClusterMountAttr>
+  /**
+   *
+   */
+  Zone?: string
+  /**
+   *
+   */
+  MountStorageNum?: number
+  /**
+   *
+   */
+  StorageFileSystemId?: string
 }
 
 /**

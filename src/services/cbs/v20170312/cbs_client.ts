@@ -31,6 +31,7 @@ import {
   ModifySnapshotsSharePermissionRequest,
   AttachRemoteDisksRequest,
   CopySnapshotCrossRegionsResponse,
+  RemoteDiskDetail,
   DescribeSnapshotGroupsRequest,
   ModifyDiskBackupQuotaRequest,
   InquiryPriceCreateDisksResponse,
@@ -133,6 +134,7 @@ import {
   DiskBackup,
   DescribeDisksRequest,
   DetachDisksResponse,
+  DedicatedClusterDiskStatistic,
   ModifyRemoteDiskAttributesResponse,
   CreateRemoteDisksResponse,
   InquiryPriceRenewDisksResponse,
@@ -400,10 +402,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 CVM CDC 独享集群云硬盘统计信息。
+   * 查询云服务器独享集群云硬盘统计信息。
    */
   async DescribeDedicatedClusterDiskStatistics(
-    req?: DescribeDedicatedClusterDiskStatisticsRequest,
+    req: DescribeDedicatedClusterDiskStatisticsRequest,
     cb?: (error: string, rep: DescribeDedicatedClusterDiskStatisticsResponse) => void
   ): Promise<DescribeDedicatedClusterDiskStatisticsResponse> {
     return this.request("DescribeDedicatedClusterDiskStatistics", req, cb)

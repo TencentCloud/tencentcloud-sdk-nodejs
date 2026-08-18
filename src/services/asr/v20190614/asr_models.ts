@@ -107,16 +107,11 @@ export interface DeleteAsrKeyWordLibResponse {
  */
 export interface CreateAsrKeyWordLibRequest {
   /**
-   * 词表名称，长度在1-20之间
-仅限中英文数字-_
+   * <p>词表名称，长度在1-20之间<br>仅限中英文数字-_</p>
    */
   Name: string
   /**
-   * 词文件（纯文本文件）的二进制base64编码，以行分隔
-格式要求：TXT
-每行只有一个词，不满足格式则报错无法上传
-每个词限制**5个汉字，15个字符**，单个词库最多不超过100个词
-注意不要有空行，尤其是最后一行
+   * <p>词文件（纯文本文件）的二进制base64编码，以行分隔<br>格式要求：TXT<br>每行只有一个词，不满足格式则报错无法上传<br>每个词限制<strong>5个汉字，15个字符</strong>，单个词库最多不超过100个词<br>注意不要有空行，尤其是最后一行</p>
    */
   KeyWordFile: string
 }
@@ -530,7 +525,7 @@ export interface VoicePrintEnrollResponse {
  */
 export interface CreateAsrKeyWordLibResponse {
   /**
-   * 词表ID数据
+   * <p>词表ID数据</p>
    */
   Data?: KeyWordLibIdData
   /**
@@ -980,19 +975,15 @@ export interface HotWord {
  */
 export interface UpdateAsrKeyWordLibRequest {
   /**
-   * 关键词表ID
+   * <p>关键词表ID</p>
    */
   KeyWordLibId: string
   /**
-   * 词表名称，长度在1-20之间
-仅限中英文数字-_
+   * <p>词表名称，长度在1-20之间<br>仅限中英文数字-_</p>
    */
   Name: string
   /**
-   * - 词文件（纯文本文件）以行分隔 ，进行二进制base64编码
-- 格式要求：TXT 每行只有一个词，不满足格式则报错无法上传 
-- 每个词最多5个汉字或15个字符，单个词库最多不超过100个词
-- 此参数为空则只更新词表名称
+   * <ul><li>词文件（纯文本文件）以行分隔 ，进行二进制base64编码</li><li>格式要求：TXT 每行只有一个词，不满足格式则报错无法上传 </li><li>每个词最多5个汉字或15个字符，单个词库最多不超过100个词</li><li>此参数为空则只更新词表名称</li></ul>
    */
   KeyWordFile: string
 }
@@ -1531,7 +1522,7 @@ export interface UsageByDateInfo {
  */
 export interface UpdateAsrKeyWordLibResponse {
   /**
-   * 关键词表ID数据
+   * <p>关键词表ID数据</p>
    */
   Data?: KeyWordLibIdData
   /**

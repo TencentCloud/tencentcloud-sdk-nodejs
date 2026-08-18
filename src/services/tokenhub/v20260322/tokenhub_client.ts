@@ -71,8 +71,9 @@ import {
   TokenPlanPackageInfo,
   UsageStats,
   DescribeUsageRankListResponse,
-  DescribeApiKeyResponse,
+  DescribeModelQuotaResponse,
   DescribeTokenPlanApiKeySecretRequest,
+  DescribeModelQuotaRequest,
   ModelChargingInfo,
   ModifyApiKeyStatusRequest,
   DescribeTokenPlanRequest,
@@ -114,6 +115,7 @@ import {
   DeleteEndpointRequest,
   RenewTokenPlanTeamOrderRequest,
   ModelSiteRegion,
+  DescribeApiKeyResponse,
   ModifyApiKeyStatusResponse,
   CreateTokenPlanTeamOrderAndBuyResponse,
   RequestFilter,
@@ -180,27 +182,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询模型列表。
+     * 查询术语库列表。
 
-支持按模型 ID、模型名称、模型能力等条件筛选，支持分页和排序。
+查询当前应用下的术语库列表。支持分页、过滤和排序。
      */
-  async DescribeModelList(
-    req: DescribeModelListRequest,
-    cb?: (error: string, rep: DescribeModelListResponse) => void
-  ): Promise<DescribeModelListResponse> {
-    return this.request("DescribeModelList", req, cb)
-  }
-
-  /**
-     * 查询 TokenPlan APIKey 详情。
-
-返回 APIKey 完整信息（含明文密钥）及子额度包余量。
-     */
-  async DescribeTokenPlanApiKey(
-    req: DescribeTokenPlanApiKeyRequest,
-    cb?: (error: string, rep: DescribeTokenPlanApiKeyResponse) => void
-  ): Promise<DescribeTokenPlanApiKeyResponse> {
-    return this.request("DescribeTokenPlanApiKey", req, cb)
+  async DescribeGlossaries(
+    req: DescribeGlossariesRequest,
+    cb?: (error: string, rep: DescribeGlossariesResponse) => void
+  ): Promise<DescribeGlossariesResponse> {
+    return this.request("DescribeGlossaries", req, cb)
   }
 
   /**
@@ -253,15 +243,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询术语库列表。
+     * 查询模型列表。
 
-查询当前应用下的术语库列表。支持分页、过滤和排序。
+支持按模型 ID、模型名称、模型能力等条件筛选，支持分页和排序。
      */
-  async DescribeGlossaries(
-    req: DescribeGlossariesRequest,
-    cb?: (error: string, rep: DescribeGlossariesResponse) => void
-  ): Promise<DescribeGlossariesResponse> {
-    return this.request("DescribeGlossaries", req, cb)
+  async DescribeModelList(
+    req: DescribeModelListRequest,
+    cb?: (error: string, rep: DescribeModelListResponse) => void
+  ): Promise<DescribeModelListResponse> {
+    return this.request("DescribeModelList", req, cb)
+  }
+
+  /**
+   * 查询指定模型的 TPM 和 QPM 配额上限。
+   */
+  async DescribeModelQuota(
+    req?: DescribeModelQuotaRequest,
+    cb?: (error: string, rep: DescribeModelQuotaResponse) => void
+  ): Promise<DescribeModelQuotaResponse> {
+    return this.request("DescribeModelQuota", req, cb)
   }
 
   /**
@@ -438,6 +438,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTokenPlanResponse) => void
   ): Promise<DescribeTokenPlanResponse> {
     return this.request("DescribeTokenPlan", req, cb)
+  }
+
+  /**
+     * 查询 TokenPlan APIKey 详情。
+
+返回 APIKey 完整信息（含明文密钥）及子额度包余量。
+     */
+  async DescribeTokenPlanApiKey(
+    req: DescribeTokenPlanApiKeyRequest,
+    cb?: (error: string, rep: DescribeTokenPlanApiKeyResponse) => void
+  ): Promise<DescribeTokenPlanApiKeyResponse> {
+    return this.request("DescribeTokenPlanApiKey", req, cb)
   }
 
   /**

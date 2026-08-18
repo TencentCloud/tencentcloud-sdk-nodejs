@@ -44,7 +44,7 @@ export interface CreateMigrationTaskRequest {
    */
   FileSystemId: string
   /**
-   * <p>文件系统路径</p>
+   * <p>文件系统内目录路径，不涉及实际挂载子目录/根目录，无需以/cfs/作为前缀</p>
    */
   FsPath: string
   /**
@@ -150,7 +150,7 @@ export interface CreateLifecycleDataTaskRequest {
    */
   IsOverwrite?: boolean
   /**
-   * <p>【新增】数据清单文件路径，清单文件内每行一条待处理文件的完整路径。与 TaskPath 二选一。路径必须以 /cfs 开头，且必须为 CFS 文件系统内已存在的文件。示例值：/cfs/lists/archive_list.txt</p>
+   * <p>数据清单文件路径，清单文件内每行为待处理文件的完整路径。所有路径（包括清单文件路径、清单文件内每行表示的待处理文件的路径）必须以 /cfs 开头，指向CFS文件系统内已存在的文件，与 TaskPath 参数二选一填写。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，清单文件位于挂载路径下的 lists/archive_list.txt，则入参值为 /cfs/lists/archive_list.txt</li><li>若挂载的是CFS子目录 /subdir，清单文件位于挂载路径下的 lists/archive_list.txt，则入参值为 /cfs/subdir/lists/archive_list.txt</li></ul>
    */
   ListPath?: string
 }
@@ -278,7 +278,7 @@ export interface MigrationTaskInfo {
    */
   FileSystemId?: string
   /**
-   * <p>文件系统路径</p>
+   * <p>文件系统内目录路径，不涉及实际挂载子目录/根目录，无需以/cfs/作为前缀</p>
    */
   FsPath?: string
   /**
@@ -424,11 +424,11 @@ export interface CreateLifecycleDataTaskResponse {
  */
 export interface ApplyPathLifecyclePolicyRequest {
   /**
-   * 生命周期管理策略ID
+   * <p>生命周期管理策略ID</p>
    */
   LifecyclePolicyID: string
   /**
-   * 生命周期管理策略关联目录的绝对路径列表
+   * <p>生命周期管理策略所关联的目录路径列表，每个路径必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。</p><p>示例：</p><ul><li>若挂载的是CFS根目录 /，需关联挂载路径下的 test1/test2，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需关联挂载路径下的 test1/test2，则入参值为 /cfs/subdir/test1/test2</li></ul>
    */
   Paths?: Array<PathInfo>
 }
@@ -613,7 +613,7 @@ export interface CreateDataRetrievalResponse {
  */
 export interface CreateDataFlowResponse {
   /**
-   * 数据流动管理 ID
+   * <p>数据流动管理 ID</p>
    */
   DataFlowId?: string
   /**
@@ -1023,19 +1023,19 @@ export interface StopLifecycleDataTaskResponse {
  */
 export interface DeleteUserQuotaRequest {
   /**
-   * 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
+   * <p>文件系统ID，通过查询文件系统列表获取；<a href="https://cloud.tencent.com/document/product/582/38170">DescribeCfsFileSystems</a></p>
    */
   FileSystemId: string
   /**
-   * 指定配额类型，包括Uid（按用户ID限制）、Gid（按用户组ID限制）、Dir（按目录限制）
+   * <p>指定配额类型，包括Uid（按用户ID限制）、Gid（按用户组ID限制）、Dir（按目录限制）</p>
    */
   UserType: string
   /**
-   * UID/GID信息，和DirectoryPath参数，两者必须填写一个
+   * <p>UID/GID信息，和DirectoryPath参数，两者必须填写一个</p>
    */
   UserId?: string
   /**
-   * 设置目录配额的目录的绝对路径，和UserId参数，两者必须填写一个
+   * <p>需删除配额的目录路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。该参数与 UserId 参数至少填写一个。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，需删除挂载路径下 test1/test2 的配额，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需删除挂载路径下 test1/test2 的配额，则入参值为 /cfs/subdir/test1/test2</li></ul>
    */
   DirectoryPath?: string
 }
@@ -1091,7 +1091,7 @@ export interface DescribeCfsFileSystemClientsResponse {
  */
 export interface DoDirectoryOperationResponse {
   /**
-   * 1:成功 0:失败。创建目录的操作，1表示创建成功，0表示创建失败。  确认目录是否存在的操作，1表示目录存在，0表示目录不存在。此外，创建目录操作若目录已存在，也会返回创建成功。
+   * <p>1:成功 0:失败。创建目录的操作，1表示创建成功，0表示创建失败。  确认目录是否存在的操作，1表示目录存在，0表示目录不存在。此外，创建目录操作若目录已存在，也会返回创建成功。</p>
    */
   Result?: number
   /**
@@ -1165,7 +1165,7 @@ export interface DeleteCfsRuleRequest {
  */
 export interface ApplyPathLifecyclePolicyResponse {
   /**
-   * 有规则冲突时返回的已有冲突规则信息
+   * <p>有规则冲突时返回的已有冲突规则信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckResults?: Array<CheckResult>
@@ -1495,27 +1495,27 @@ export interface PGroup {
  */
 export interface SetUserQuotaRequest {
   /**
-   * 文件系统 ID,通过[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)获取
+   * <p>文件系统 ID,通过<a href="https://cloud.tencent.com/document/api/582/38170">查询文件系统列表</a>获取</p>
    */
   FileSystemId: string
   /**
-   * 指定配额类型，包括Uid、Gid，Dir，分别代表用户配额，用户组配额，目录配额
+   * <p>指定配额类型，包括Uid、Gid，Dir，分别代表用户配额，用户组配额，目录配额</p>
    */
   UserType: string
   /**
-   * UID/GID信息
+   * <p>UID/GID信息</p>
    */
   UserId?: string
   /**
-   * 容量硬限制，单位GiB。设置范围10-10000000。
+   * <p>容量硬限制，单位GiB。设置范围10-10000000。</p>
    */
   CapacityHardLimit?: number
   /**
-   * 文件硬限制，单位个。设置范围1000-100000000
+   * <p>文件硬限制，单位个。设置范围1000-100000000</p>
    */
   FileHardLimit?: number
   /**
-   * 需设置目录配额的目录绝对路径，不同目录不可存在包含关系
+   * <p>需设置配额的目录路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。不同目录之间不可存在包含关系。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/subdir/test1/test2</li></ul>
    */
   DirectoryPath?: string
 }
@@ -1565,70 +1565,63 @@ export interface ModifyFileSystemAutoScaleUpRuleResponse {
  */
 export interface DataFlowInfo {
   /**
-   * 数据流动管理 ID
+   * <p>数据流动管理 ID</p>
    */
   DataFlowId?: string
   /**
-   * 数据流动名称
+   * <p>数据流动名称</p>
    */
   DataFlowName?: string
   /**
-   * 源端数据类型
+   * <p>源端数据类型</p>
    */
   SourceStorageType?: string
   /**
-   * 源端存储地址
+   * <p>源端存储地址</p>
    */
   SourceStorageAddress?: string
   /**
-   * 源端路径
+   * <p>源端路径</p>
    */
   SourcePath?: string
   /**
-   * 目录路径
+   * <p>设置数据流动时指定的文件系统内目标路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，需将对象存储上的源端目录与挂载路径下的 test1/test2 建立映射关系，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需将对象存储上的源端目录与挂载路径下的 test1/test2 建立映射关系，则入参值为 /cfs/subdir/test1/test2</li></ul>
    */
   TargetPath?: string
   /**
-   * available：已生效
-pending：配置中
-unavailable：失效
-deleting：删除中
+   * <p>available：已生效<br>pending：配置中<br>unavailable：失效<br>deleting：删除中</p>
    */
   Status?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreationTime?: string
   /**
-   * 文件系统 ID
+   * <p>文件系统 ID</p>
    */
   FileSystemId?: string
   /**
-   * 0：不开启自动更新
-
-1：开启自动更新
+   * <p>0：不开启自动更新</p><p>1：开启自动更新</p>
    */
   AutoRefresh?: number
   /**
-   * KafkaConsumer 消费时使用的Topic参数
+   * <p>KafkaConsumer 消费时使用的Topic参数</p>
    */
   UserKafkaTopic?: string
   /**
-   * 服务地址
+   * <p>服务地址</p>
    */
   ServerAddr?: string
   /**
-   * Kafka消费用户名
+   * <p>Kafka消费用户名</p>
    */
   UserName?: string
   /**
-   * 自动刷新的状态，available：已生效
-pending：配置中
-unavailable：失效
+   * <p>自动刷新的状态，available：已生效<br>pending：配置中<br>unavailable：失效</p>
    */
   AutoRefreshStatus?: string
   /**
-   * 自动刷新开启时间
+   * <p>自动刷新开启时间</p>
    */
   AutoRefreshTime?: string
 }
@@ -1778,40 +1771,40 @@ export interface LifecycleRule {
  */
 export interface UserQuota {
   /**
-   * 指定配额类型，包括Uid、Gid、Dir
+   * <p>指定配额类型，包括Uid、Gid、Dir</p>
    */
   UserType: string
   /**
-   * UID/GID信息
+   * <p>UID/GID信息</p>
    */
   UserId: string
   /**
-   * 容量硬限制，单位GiB
+   * <p>容量硬限制，单位GiB</p>
    */
   CapacityHardLimit: number
   /**
-   * 文件硬限制，单位个
+   * <p>文件硬限制，单位个</p>
    */
   FileHardLimit: number
   /**
-   * 文件系统ID
+   * <p>文件系统ID</p>
    */
   FileSystemId: string
   /**
-   * 容量使用，单位GiB
+   * <p>容量使用，单位GiB</p>
    */
   CapacityUsed?: number
   /**
-   * 文件使用个数，单位个
+   * <p>文件使用个数，单位个</p>
    */
   FileUsed?: number
   /**
-   * 目录配额的目录绝对路径
+   * <p>需设置配额的目录路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。不同目录之间不可存在包含关系。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/subdir/test1/test2</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DirectoryPath?: string
   /**
-   * 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败
+   * <p>配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败</p>
    */
   Status?: string
 }
@@ -2015,7 +2008,7 @@ export interface LifecycleDataTaskInfo {
    */
   IsOverwrite?: boolean
   /**
-   * <p>【新增】数据清单文件路径，清单文件内每行一条待处理文件的完整路径。与 TaskPath 二选一。路径必须以 /cfs 开头，且必须为 CFS 文件系统内已存在的文件。示例值：/cfs/lists/archive_list.txt</p>
+   * <p>数据清单文件路径，清单文件内每行为待处理文件的完整路径。所有路径（包括清单文件路径、清单文件内每行表示的待处理文件的路径）必须以 /cfs 开头，指向CFS文件系统内已存在的文件，与 TaskPath 参数二选一填写。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，清单文件位于挂载路径下的 lists/archive_list.txt，则入参值为 /cfs/lists/archive_list.txt</li><li>若挂载的是CFS子目录 /subdir，清单文件位于挂载路径下的 lists/archive_list.txt，则入参值为 /cfs/subdir/lists/archive_list.txt</li></ul>
    */
   ListPath?: string
 }
@@ -3224,7 +3217,7 @@ export interface ModifyLifecyclePolicyResponse {
  */
 export interface SetUserQuotaResponse {
   /**
-   * UID/GID信息
+   * <p>UID/GID信息</p>
    */
   UserId?: string
   /**
@@ -3604,55 +3597,55 @@ export interface CreateAutoSnapshotPolicyRequest {
  */
 export interface CreateDataFlowRequest {
   /**
-   * 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取
+   * <p>文件系统 ID ，通过查询文件系统 <a href="https://cloud.tencent.com/document/product/582/38170">DescribeCfsFileSystems</a> 获取</p>
    */
   FileSystemId: string
   /**
-   * 源端数据类型；包含S3_COS，S3_L5
+   * <p>源端数据类型；包含S3_COS，S3_L5</p>
    */
   SourceStorageType: string
   /**
-   * 源端存储地址
+   * <p>源端存储地址</p>
    */
   SourceStorageAddress: string
   /**
-   * 源端路径
+   * <p>源端路径</p>
    */
   SourcePath: string
   /**
-   * 文件系统内目标路径
+   * <p>设置数据流动时指定的文件系统内目标路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，需将对象存储上的源端目录与挂载路径下的 test1/test2 建立映射关系，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需将对象存储上的源端目录与挂载路径下的 test1/test2 建立映射关系，则入参值为 /cfs/subdir/test1/test2</li></ul>
    */
   TargetPath: string
   /**
-   * 密钥 ID
+   * <p>密钥 ID</p>
    */
   SecretId: string
   /**
-   * 密钥 key
+   * <p>密钥 key</p>
    */
   SecretKey: string
   /**
-   * 数据流动名称；支持不超过64字符长度，支持中文、数字、_、-
+   * <p>数据流动名称；支持不超过64字符长度，支持中文、数字、_、-</p>
    */
   DataFlowName?: string
   /**
-   *  0：不开启自动更新  1：开启自动更新
+   * <p>0：不开启自动更新  1：开启自动更新</p>
    */
   AutoRefresh?: number
   /**
-   * KafkaConsumer 消费时使用的Topic参数
+   * <p>KafkaConsumer 消费时使用的Topic参数</p>
    */
   UserKafkaTopic?: string
   /**
-   * 	服务地址 示例值：kafkaconsumer-ap-beijing.cls.tencentyun.com:9095
+   * <p>服务地址 示例值：kafkaconsumer-ap-beijing.cls.tencentyun.com:9095</p>
    */
   ServerAddr?: string
   /**
-   * Kafka消费用户名.示例值：name
+   * <p>Kafka消费用户名.示例值：name</p>
    */
   UserName?: string
   /**
-   * Kafka消费用户密码。默认${SecretId}#${SecretKey}。
+   * <p>Kafka消费用户密码。默认${SecretId}#${SecretKey}。</p>
    */
   Password?: string
 }
@@ -3680,25 +3673,23 @@ export interface DescribeDataFlowResponse {
  */
 export interface DoDirectoryOperationRequest {
   /**
-   * 文件系统 ID。当前仅 Turbo 系列文件系统支持调用此接口，通用系列文件系统（含增强型）不支持调用。
+   * <p>文件系统 ID。当前仅 Turbo 系列文件系统支持调用此接口，通用系列文件系统（含增强型）不支持调用。</p>
    */
   FileSystemId: string
   /**
-   * create：创建目录，等同于mkdir。
-check：确认目录是否存在，等同于stat。
-move：对文件/目录进行重命名，等同于mv。
+   * <p>create：创建目录，等同于mkdir。<br>check：确认目录是否存在，等同于stat。<br>move：对文件/目录进行重命名，等同于mv。</p>
    */
   OpetationType: string
   /**
-   * 目录的绝对路径  默认递归创建（即如果目录中有子目录不存在，则先创建出对应子目录）
+   * <p>系统会默认递归创建路径中的所有父级目录。路径必须从 /cfs/ 开始，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。<br>示例：</p><ul><li><p>若操作为 create/check</p><ul><li>若挂载的是CFS根目录 /，需在挂载路径下创建/检查是否存在 test1/test2，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需在挂载路径下创建/检查是否存在 test1/test2，则入参值为 /cfs/subdir/test1/test2</li></ul></li><li><p>若操作为 move</p><ul><li>若挂载的是CFS根目录 /，需在挂载路径下移动 test1/test2 下的文件到 DestPath，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需在挂载路径下挂载路径下移动 test1/test2 下的文件到 DestPath，则入参值为 /cfs/subdir/test1/test2</li></ul></li></ul>
    */
   DirectoryPath: string
   /**
-   * 创建目录的权限，若不传，默认为0755。若OperationType为 check，此值无实际意义。
+   * <p>创建目录的权限，若不传，默认为0755。若OperationType为 check，此值无实际意义。</p>
    */
   Mode?: string
   /**
-   * mv 操作的目标目录名称。路径必须以/cfs/开头
+   * <p>mv 操作的目标目录路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，需将 DirectoryPath 下的文件移动到挂载路径下的 test3/test4，则入参值为 /cfs/test3/test4</li><li>若挂载的是CFS子目录 /subdir，需将 DirectoryPath 下的文件移动到挂载路径下的 test3/test4，则入参值为 /cfs/subdir/ test3/test4</li></ul>
    */
   DestPath?: string
 }

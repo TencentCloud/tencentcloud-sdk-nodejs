@@ -257,6 +257,62 @@ export interface ConversationRecordErrorInfo {
 }
 
 /**
+ * DescribeUsageSummaryList请求参数结构体
+ */
+export interface DescribeUsageSummaryListRequest {
+  /**
+   * <p>资源类型，限定为 MODEL / PLUGIN / PLATFORM</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>平台功能用量</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）</td></tr></tbody></table>
+   */
+  ResourceType: number
+  /**
+   * <p>查询时间范围（Unix 秒）</p>
+   */
+  TimeRange: TimeRange
+  /**
+   * <p>视图范围：企业视图 / 空间视图 / 应用视图</p>
+   */
+  ViewScope: ViewScope
+  /**
+   * <p>扩展过滤（resource_type=MODEL）。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：model_name（模型名）、user_id（用户ID）、space_id（空间ID）、resource_id/source_id（来源ID）、metric_source_type（METRIC_SOURCE_TYPE_* 枚举名或整数）</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，最大 100</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * 模型资源用量聚合明细（MODEL 域专属）
+ */
+export interface ModelUsageSummary {
+  /**
+   * <p>调用次数（业务调用维度的顶层计数）</p>
+   */
+  CallCount?: number
+  /**
+   * <p>是否默认知识库</p>
+   */
+  IsDefaultKB?: boolean
+  /**
+   * <p>模型名称，标识使用的 AI 模型</p>
+   */
+  ModelName?: string
+  /**
+   * <p>MODEL 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_* /cache_*），label 为空表示 total_tokens；unit=PAGE_COUNT 表示模型消耗页数</p>
+   */
+  ResourceConsumptionList?: Array<ResourceConsumption>
+  /**
+   * <p>模型消耗 PU 总量（聚合维度内的 PU 消耗之和）</p>
+   */
+  ConsumptionPU?: number
+}
+
+/**
  * Agent发布项目详情
  */
 export interface AgentRelease {
@@ -543,40 +599,21 @@ export interface AgentAdvancedConfig {
 }
 
 /**
- * SkillShare Skill 企业共享信息。
+ * 单项消耗计量
  */
-export interface SkillShare {
+export interface ResourceConsumption {
   /**
-   * 审批ID
+   * <p>功能标签，PLATFORM 场景取 PlatformBizType 枚举名称；MODEL/PLUGIN 场景为空</p>
    */
-  ApprovalId: string
+  Label?: string
   /**
-   * 共享后关联的新 skill_id
+   * <p>消耗计量单位</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DOSAGE_UNIT_TOKEN</td><td>0</td><td>token（默认）</td></tr><tr><td>DOSAGE_UNIT_PAGE_COUNT</td><td>1</td><td>page_count（页数）</td></tr><tr><td>DOSAGE_UNIT_TIMES</td><td>2</td><td>times（次数）</td></tr><tr><td>DOSAGE_UNIT_SECOND</td><td>3</td><td>second（秒）</td></tr><tr><td>DOSAGE_UNIT_ITEM</td><td>4</td><td>item（条）</td></tr><tr><td>DOSAGE_UNIT_SHEET</td><td>5</td><td>sheet（张）</td></tr><tr><td>DOSAGE_UNIT_CHARACTER</td><td>6</td><td>character（字符）</td></tr><tr><td>DOSAGE_UNIT_GB</td><td>7</td><td>GB</td></tr><tr><td>DOSAGE_UNIT_NUMBER</td><td>8</td><td>number（个数）</td></tr><tr><td>DOSAGE_UNIT_MILL_SECOND</td><td>9</td><td>mill_second（毫秒）</td></tr></tbody></table>
    */
-  ShareSkillId: string
+  Unit?: number
   /**
-   * 共享版本，如 1.0.0
+   * <p>消耗数值</p>
    */
-  ShareVersion: string
-  /**
-   * 共享版本ID
-   */
-  ShareVersionId: string
-  /**
-   * 原 skill_id
-   */
-  SkillId: string
-  /**
-   * 共享状态
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 未共享 |
-| 1 | 已共享 |
-| 2 | 审批中 |
-   */
-  Status: number
+  Value?: number
 }
 
 /**
@@ -738,6 +775,16 @@ export interface OnceSchedule {
 }
 
 /**
+ * UnfavoriteSkill返回参数结构体
+ */
+export interface UnfavoriteSkillResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteSkill返回参数结构体
  */
 export interface DeleteSkillResponse {
@@ -804,6 +851,17 @@ export interface ModifyConversationRequest {
 }
 
 /**
+ * 多模态理解模型配置
+ */
+export interface MultiModalUnderstandingModel {
+  /**
+   * 模型配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Model: ModelDetailInfo
+}
+
+/**
  * DescribeAgentReleasePreviewList请求参数结构体
  */
 export interface DescribeAgentReleasePreviewListRequest {
@@ -859,6 +917,32 @@ export interface DescribeModelListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ResponseParam
+ */
+export interface ResponseParam {
+  /**
+   * <p>变量描述</p>
+   */
+  Description?: string
+  /**
+   * <p>参数名称</p>
+   */
+  Name?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>OUTPUT_RENDER_REPLACE</td><td>0</td><td>覆盖（全量替换）</td></tr><tr><td>OUTPUT_RENDER_APPEND</td><td>1</td><td>增量追加</td></tr></tbody></table>
+   */
+  RenderMode?: number
+  /**
+   * <p>只对 OBJECT 或 ARRAY_OBJECT 类型有用</p>
+   */
+  SubParams?: Array<ResponseParam>
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
+   */
+  Type?: number
 }
 
 /**
@@ -1050,6 +1134,28 @@ export interface ReleaseRecord {
    * 发布人
    */
   Updater: string
+}
+
+/**
+ * 通用身份信息（支持数字 ID 与字符串 ID 两种形态）
+ */
+export interface Identity {
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>数字 ID</p>
+   */
+  Id?: string
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>字符串 ID</p>
+   */
+  StrId?: string
 }
 
 /**
@@ -1271,6 +1377,16 @@ export interface AuthConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OAuthConfig?: OAuthConfig
+}
+
+/**
+ * ReleaseSkill返回参数结构体
+ */
+export interface ReleaseSkillResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1591,17 +1707,29 @@ export interface CreateWebSocketTokenResponse {
 }
 
 /**
- * ExecuteConfig
+ * DescribeConsumptionDetailList请求参数结构体
  */
-export interface ExecuteConfig {
+export interface DescribeConsumptionDetailListRequest {
   /**
-   * <p>Prompt配置</p>
+   * <p>查询时间范围（Unix 秒）</p>
    */
-  PromptConfig?: AppTriggerPromptExecuteConfig
+  TimeRange: TimeRange
   /**
-   * <p>工作流配置</p>
+   * <p>视图范围：企业视图 / 空间视图</p>
    */
-  WorkflowConfig?: AppTriggerWorkflowExecuteConfig
+  ViewScope: ViewScope
+  /**
+   * <p>扩展过滤。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：metric_source_type（METRIC_SOURCE_TYPE_* 或整数）、source_ids（多选来源ID）、resource_id/source_id（单选来源ID，source_ids 未传时生效）、space_id、user_id</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，最大 100</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -1619,6 +1747,43 @@ export interface AuditLogMetaField {
 }
 
 /**
+ * SkillShare Skill 企业共享信息。
+ */
+export interface SkillShare {
+  /**
+   * 审批ID
+   */
+  ApprovalId: string
+  /**
+   * 共享后关联的新 skill_id
+   */
+  ShareSkillId: string
+  /**
+   * 共享版本，如 1.0.0
+   */
+  ShareVersion: string
+  /**
+   * 共享版本ID
+   */
+  ShareVersionId: string
+  /**
+   * 原 skill_id
+   */
+  SkillId: string
+  /**
+   * 共享状态
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | 未共享 |
+| 1 | 已共享 |
+| 2 | 审批中 |
+   */
+  Status: number
+}
+
+/**
  * DescribeAgentDetail请求参数结构体
  */
 export interface DescribeAgentDetailRequest {
@@ -1633,41 +1798,21 @@ export interface DescribeAgentDetailRequest {
 }
 
 /**
- * DescribePluginSummaryList请求参数结构体
+ * DescribeMetricOverviewList返回参数结构体
  */
-export interface DescribePluginSummaryListRequest {
+export interface DescribeMetricOverviewListResponse {
   /**
-   * 空间ID，查询空间内的插件列表时使用
+   * <p>所有域 Overview 统一出参：KPI 卡片列表，key 字符串标识指标，客户端按 resource_type 解析；key 白名单参考 platform.common.v2.MetricOverview 注释</p>
    */
-  SpaceId: string
+  MetricList?: Array<MetricOverview>
   /**
-   * 过滤条件列表 支持：PluginKind、CategoryKey、PluginSource、PluginId、PluginClass、BillingType
+   * <p>总记录数，等于 MetricList 长度，仅为列表接口一致性预留</p>
    */
-  FilterList?: Array<Filter>
+  TotalCount?: string
   /**
-   * <p>是否只返回已收藏插件。取 true 时，仅返回当前用户已收藏的插件；取 false 或不传时不按收藏状态过滤。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IsFavoriteOnly?: boolean
-  /**
-   * <p>插件展示场景。不传或取 0 时不限定场景。</p><p>枚举值：</p><ul><li>0：不限定场景</li><li>1：Agent 模式</li><li>2：工作流</li><li>3：智能工作台</li></ul>
-   */
-  Module?: number
-  /**
-   * 页码 从0开始
-   */
-  PageNumber?: number
-  /**
-   * 每页大小
-   */
-  PageSize?: number
-  /**
-   * 查询内容 模糊匹配：插件名称/插件描述/工具名称/工具描述
-   */
-  Query?: string
-  /**
-   * <p>排序方式。</p><p>枚举值：</p><ul><li>0：未指定，默认排序</li><li>1：按相关性排序</li><li>2：按更新时间排序</li><li>3：默认排序</li><li>4：按热度排序</li></ul>
-   */
-  SortType?: number
+  RequestId?: string
 }
 
 /**
@@ -1799,13 +1944,21 @@ export interface AppExperienceConfig {
 }
 
 /**
- * RollbackRelease返回参数结构体
+ * 插件调用明细
  */
-export interface RollbackReleaseResponse {
+export interface PluginUsageDetail {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>插件名称</p>
    */
-  RequestId?: string
+  PluginName?: string
+  /**
+   * <p>PLUGIN 域单次调用的消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_*），label 为空表示 total_tokens</p>
+   */
+  ResourceConsumptionList?: Array<ResourceConsumption>
+  /**
+   * <p>插件工具名（tool_name）</p>
+   */
+  ToolName?: string
 }
 
 /**
@@ -2394,13 +2547,17 @@ export interface ModelParameter {
 }
 
 /**
- * UnfavoriteSkill返回参数结构体
+ * ExecuteConfig
  */
-export interface UnfavoriteSkillResponse {
+export interface ExecuteConfig {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>Prompt配置</p>
    */
-  RequestId?: string
+  PromptConfig?: AppTriggerPromptExecuteConfig
+  /**
+   * <p>工作流配置</p>
+   */
+  WorkflowConfig?: AppTriggerWorkflowExecuteConfig
 }
 
 /**
@@ -2450,14 +2607,43 @@ export interface DescribePluginSummaryListResponse {
 }
 
 /**
- * 多模态理解模型配置
+ * AppTriggerParamBindingConfig
  */
-export interface MultiModalUnderstandingModel {
+export interface AppTriggerParamBindingConfig {
   /**
-   * 模型配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>绑定参数列表</p>
    */
-  Model: ModelDetailInfo
+  ParamList?: Array<AppTriggerParamBinding>
+}
+
+/**
+ * 资源用量聚合明细
+ */
+export interface UsageSummary {
+  /**
+   * <p>MODEL 域专属</p>
+   */
+  Model?: ModelUsageSummary
+  /**
+   * <p>PLATFORM 域专属</p>
+   */
+  Platform?: PlatformUsageSummary
+  /**
+   * <p>PLUGIN 域专属</p>
+   */
+  Plugin?: PluginUsageSummary
+  /**
+   * <p>来源 ID；CORP 视图=space_id（企业视图按 space 分组），SPACE 视图=app_id（uint64 字符串），APP 视图=app_id</p>
+   */
+  SourceId?: string
+  /**
+   * <p>来源名称；CORP 视图=space_name，SPACE 视图=app_name，APP 视图=app_name</p>
+   */
+  SourceName?: string
+  /**
+   * <p>视图类型，决定 SourceId/SourceName 的业务含义</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>VIEW_TYPE_UNSPECIFIED</td><td>0</td><td>未指定（无效值，请求勿传）</td></tr><tr><td>VIEW_TYPE_CORP</td><td>1</td><td>企业视图</td></tr><tr><td>VIEW_TYPE_SPACE</td><td>2</td><td>空间视图</td></tr><tr><td>VIEW_TYPE_APP</td><td>3</td><td>应用视图</td></tr></tbody></table>
+   */
+  ViewType?: number
 }
 
 /**
@@ -2549,13 +2735,17 @@ export interface CorpShareConfig {
    */
   Enabled?: boolean
   /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SHARE_SCOPE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>SHARE_SCOPE_TYPE_ALL</td><td>1</td><td></td></tr><tr><td>SHARE_SCOPE_TYPE_ACCOUNT</td><td>2</td><td></td></tr></tbody></table>
+   * <p>共享范围类型，1：企业全员，2：指定账户，3：指定空间</p>
    */
   ShareScope?: number
   /**
    * <p>企业共享应用标签</p>
    */
   TagIdList?: Array<string>
+  /**
+   * <p>共享范围信息(用户时StrId为uin,Name为用户名称;空间时StrId为空间ID,Name为空间名称)</p>
+   */
+  ShareScopeList?: Array<Identity>
 }
 
 /**
@@ -2739,6 +2929,24 @@ export interface SkillReferenceGroup {
 }
 
 /**
+ * DescribeConcurrencyLimitDetailList返回参数结构体
+ */
+export interface DescribeConcurrencyLimitDetailListResponse {
+  /**
+   * <p>并发超限明细列表</p>
+   */
+  ConcurrencyLimitDetailList?: Array<ConcurrencyLimitDetail>
+  /**
+   * <p>总记录数，用于前端分页</p>
+   */
+  TotalCount?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Agent 的插件基本配置
  */
 export interface AgentPluginConfig {
@@ -2769,41 +2977,39 @@ export interface AgentPluginConfig {
 }
 
 /**
- * 插件概要信息（用于插件列表）
+ * VoiceConfig
  */
-export interface PluginSummary {
+export interface VoiceConfig {
   /**
-   * <p>插件运营管理信息</p>
+   * 数智人音色key,需要和公有云音色id对齐
    */
-  Operation?: PluginOperation
+  TimbreKey: string
   /**
-   * <p>插件id</p>
+   * 音色名称
    */
-  PluginId?: string
+  VoiceName: string
   /**
-   * <p>插件基础信息</p>
+   * 公有云音色id
    */
-  Profile?: PluginProfile
+  VoiceType: number
+}
+
+/**
+ * 调用来源
+ */
+export interface CallSource {
   /**
-   * <p>插件统计信息</p>
+   * <p>调用主体 ID，含义由 subject_type 决定（如 app_id、kb_id 等）</p>
    */
-  Statistics?: PluginStatistics
+  SubjectId?: string
   /**
-   * <p>插件状态，1:可用，2:不可用 </p><p>枚举值：</p><ul><li>1： 可用</li><li>2： 不可用</li></ul>
+   * <p>调用主体名称</p>
    */
-  Status?: number
+  SubjectName?: string
   /**
-   * <p>用户维度的插件状态信息</p>
+   * <p>调用主体类型：APP/KB/WIDGET/OPEN_CLAW/KB_RECALL_TEST/WORKBENCH/MODEL_API</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>METRIC_SOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>METRIC_SOURCE_TYPE_APP</td><td>1</td><td>应用开发</td></tr><tr><td>METRIC_SOURCE_TYPE_KB</td><td>2</td><td>知识库</td></tr><tr><td>METRIC_SOURCE_TYPE_WIDGET</td><td>3</td><td>Widget</td></tr><tr><td>METRIC_SOURCE_TYPE_OPEN_CLAW</td><td>4</td><td>ClawPro</td></tr><tr><td>METRIC_SOURCE_TYPE_KB_RECALL_TEST</td><td>5</td><td>知识库召回测试</td></tr><tr><td>METRIC_SOURCE_TYPE_WORKBENCH</td><td>6</td><td>智能工作台</td></tr><tr><td>METRIC_SOURCE_TYPE_MODEL_API</td><td>7</td><td>模型 API 调用</td></tr></tbody></table>
    */
-  UserState?: PluginUserState
-  /**
-   * <p>插件配置信息</p>
-   */
-  Config?: PluginConfig
-  /**
-   * <p>工具信息</p>
-   */
-  ToolList?: Array<ToolSummary>
+  SubjectType?: number
 }
 
 /**
@@ -2883,11 +3089,6 @@ export interface ModifyAppRequest {
  */
 export interface ClawAgentConfig {
   /**
-   * 调用方自定义配置(控制C端用户在对话时可动态传入哪些自定义配置)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CustomConfig: ClawAgentCustomConfig
-  /**
    * Agent团队协作配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2897,6 +3098,24 @@ export interface ClawAgentConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LongMemoryConfig?: ClawAgentLongMemoryConfig
+}
+
+/**
+ * 消耗用量
+ */
+export interface ConsumptionUsage {
+  /**
+   * <p>消耗PU</p>
+   */
+  ConsumptionPU?: number
+  /**
+   * <p>用量数值</p>
+   */
+  Usage?: number
+  /**
+   * <p>用量单位，枚举值 DosageUnit</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DOSAGE_UNIT_TOKEN</td><td>0</td><td>token（默认）</td></tr><tr><td>DOSAGE_UNIT_PAGE_COUNT</td><td>1</td><td>page_count（页数）</td></tr><tr><td>DOSAGE_UNIT_TIMES</td><td>2</td><td>times（次数）</td></tr><tr><td>DOSAGE_UNIT_SECOND</td><td>3</td><td>second（秒）</td></tr><tr><td>DOSAGE_UNIT_ITEM</td><td>4</td><td>item（条）</td></tr><tr><td>DOSAGE_UNIT_SHEET</td><td>5</td><td>sheet（张）</td></tr><tr><td>DOSAGE_UNIT_CHARACTER</td><td>6</td><td>character（字符）</td></tr><tr><td>DOSAGE_UNIT_GB</td><td>7</td><td>GB</td></tr><tr><td>DOSAGE_UNIT_NUMBER</td><td>8</td><td>number（个数）</td></tr><tr><td>DOSAGE_UNIT_MILL_SECOND</td><td>9</td><td>mill_second（毫秒）</td></tr></tbody></table>
+   */
+  UsageUnit?: number
 }
 
 /**
@@ -3512,6 +3731,16 @@ export interface DescribeLatestReleaseResponse {
 }
 
 /**
+ * RollbackRelease返回参数结构体
+ */
+export interface RollbackReleaseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Skill 异常通知。
  */
 export interface SkillNotice {
@@ -3549,29 +3778,21 @@ export interface SkillNotice {
 }
 
 /**
- * ResponseParam
+ * DescribeUsageDetailList返回参数结构体
  */
-export interface ResponseParam {
+export interface DescribeUsageDetailListResponse {
   /**
-   * <p>变量描述</p>
+   * <p>总记录数，用于前端分页</p>
    */
-  Description?: string
+  TotalCount?: string
   /**
-   * <p>参数名称</p>
+   * <p>资源调用时序明细列表</p>
    */
-  Name?: string
+  UsageDetailList?: Array<UsageDetail>
   /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>OUTPUT_RENDER_REPLACE</td><td>0</td><td>覆盖（全量替换）</td></tr><tr><td>OUTPUT_RENDER_APPEND</td><td>1</td><td>增量追加</td></tr></tbody></table>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RenderMode?: number
-  /**
-   * <p>只对 OBJECT 或 ARRAY_OBJECT 类型有用</p>
-   */
-  SubParams?: Array<ResponseParam>
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
-   */
-  Type?: number
+  RequestId?: string
 }
 
 /**
@@ -3756,6 +3977,40 @@ export interface PauseAppTriggerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源调用时序明细
+ */
+export interface UsageDetail {
+  /**
+   * <p>调用来源</p>
+   */
+  CallSource?: CallSource
+  /**
+   * <p>计量 ID，用于对账/回溯</p>
+   */
+  DosageId?: string
+  /**
+   * <p>调用时间戳（Unix 秒）</p>
+   */
+  EventTime?: string
+  /**
+   * <p>MODEL 域专属</p>
+   */
+  Model?: ModelUsageDetail
+  /**
+   * <p>PLUGIN 域专属</p>
+   */
+  Plugin?: PluginUsageDetail
+  /**
+   * <p>调用链路追踪 ID</p>
+   */
+  TraceId?: string
+  /**
+   * <p>用户 ID</p>
+   */
+  UserId?: string
 }
 
 /**
@@ -4050,6 +4305,16 @@ export interface CreateWorkspaceCredentialResponse {
 }
 
 /**
+ * WeeklySchedule
+ */
+export interface WeeklySchedule {
+  /**
+   * 定时配置（星期）
+   */
+  Times?: Array<WeeklyTime>
+}
+
+/**
  * 模型参数
  */
 export interface ModelParams {
@@ -4104,6 +4369,20 @@ export interface ModelParams {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopP?: number
+}
+
+/**
+ * 视图范围
+ */
+export interface ViewScope {
+  /**
+   * <p>视图类型；枚举值：VIEW_TYPE_CORP(1) 企业视图、VIEW_TYPE_SPACE(2) 空间视图、VIEW_TYPE_APP(3) 应用视图</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>VIEW_TYPE_UNSPECIFIED</td><td>0</td><td>未指定（无效值，请求勿传）</td></tr><tr><td>VIEW_TYPE_CORP</td><td>1</td><td>企业视图</td></tr><tr><td>VIEW_TYPE_SPACE</td><td>2</td><td>空间视图</td></tr><tr><td>VIEW_TYPE_APP</td><td>3</td><td>应用视图</td></tr></tbody></table>
+   */
+  ViewType: number
+  /**
+   * <p>视图范围 ID；VIEW_TYPE_CORP 留空；VIEW_TYPE_SPACE 填 space_id；VIEW_TYPE_APP 填 app_id（uint64 雪花 ID 的十进制字符串）</p>
+   */
+  ScopeId?: string
 }
 
 /**
@@ -4293,6 +4572,20 @@ export interface CreateSkillShareResponse {
 }
 
 /**
+ * 查询时间范围（Unix 秒）
+ */
+export interface TimeRange {
+  /**
+   * <p>结束时间，Unix 秒</p>
+   */
+  EndTime: string
+  /**
+   * <p>开始时间，Unix 秒</p>
+   */
+  StartTime: string
+}
+
+/**
  * RunAppTriggerNow请求参数结构体
  */
 export interface RunAppTriggerNowRequest {
@@ -4375,6 +4668,28 @@ export interface DeleteAppTriggerResponse {
 }
 
 /**
+ * 总览 KPI 卡片指标项
+ */
+export interface MetricOverview {
+  /**
+   * <p>指标键，取值参考 MetricOverview 注释中的 key 白名单</p>
+   */
+  Key?: string
+  /**
+   * <p>环比百分比，无环比时填 0</p>
+   */
+  Mom?: number
+  /**
+   * <p>指标单位，枚举值 DosageUnit；key 与 unit 的对应关系参考 MetricOverview 注释白名单</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DOSAGE_UNIT_TOKEN</td><td>0</td><td>token（默认）</td></tr><tr><td>DOSAGE_UNIT_PAGE_COUNT</td><td>1</td><td>page_count（页数）</td></tr><tr><td>DOSAGE_UNIT_TIMES</td><td>2</td><td>times（次数）</td></tr><tr><td>DOSAGE_UNIT_SECOND</td><td>3</td><td>second（秒）</td></tr><tr><td>DOSAGE_UNIT_ITEM</td><td>4</td><td>item（条）</td></tr><tr><td>DOSAGE_UNIT_SHEET</td><td>5</td><td>sheet（张）</td></tr><tr><td>DOSAGE_UNIT_CHARACTER</td><td>6</td><td>character（字符）</td></tr><tr><td>DOSAGE_UNIT_GB</td><td>7</td><td>GB</td></tr><tr><td>DOSAGE_UNIT_NUMBER</td><td>8</td><td>number（个数）</td></tr><tr><td>DOSAGE_UNIT_MILL_SECOND</td><td>9</td><td>mill_second（毫秒）</td></tr></tbody></table>
+   */
+  Unit?: number
+  /**
+   * <p>指标数值</p>
+   */
+  Value?: number
+}
+
+/**
  * CreateAppTrigger返回参数结构体
  */
 export interface CreateAppTriggerResponse {
@@ -4403,21 +4718,25 @@ export interface CreateVariableResponse {
 }
 
 /**
- * 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系）
+ * DescribeMetricOverviewList请求参数结构体
  */
-export interface Filter {
+export interface DescribeMetricOverviewListRequest {
   /**
-   * 过滤字段名
+   * <p>看板域，必填，决定返回哪个域的 KPI 数据</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>平台功能用量</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）</td></tr></tbody></table>
    */
-  Name?: string
+  ResourceType: number
   /**
-   * 操作符，默认 IN（向后兼容）<table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>FILTER_OPERATOR_IN</td><td>0</td><td>属于 value_list（默认值，向后兼容；value_list 不可为空）</td></tr><tr><td>FILTER_OPERATOR_NOT_IN</td><td>1</td><td>不属于 value_list（value_list 不可为空）</td></tr></table>
+   * <p>查询时间范围（Unix 秒）</p>
    */
-  Operator?: number
+  TimeRange: TimeRange
   /**
-   * 过滤值数组
+   * <p>视图范围：企业视图 / 空间视图</p>
    */
-  ValueList?: Array<string>
+  ViewScope: ViewScope
+  /**
+   * <p>扩展过滤（resource_type=MODEL）。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：model_name（模型名）、user_id（用户ID）、space_id（空间ID）、resource_id/source_id（来源ID）、metric_source_type（METRIC_SOURCE_TYPE_* 枚举名或整数）</p>
+   */
+  FilterList?: Array<Filter>
 }
 
 /**
@@ -4542,9 +4861,17 @@ export interface AppShareURLInfo {
 }
 
 /**
- * ReleaseSkill返回参数结构体
+ * DescribeConsumptionDetailList返回参数结构体
  */
-export interface ReleaseSkillResponse {
+export interface DescribeConsumptionDetailListResponse {
+  /**
+   * <p>资源消耗明细列表</p>
+   */
+  ConsumptionDetailList?: Array<ConsumptionDetail>
+  /**
+   * <p>总记录数，用于前端分页</p>
+   */
+  TotalCount?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4656,6 +4983,44 @@ export interface CreateReleaseResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 插件概要信息（用于插件列表）
+ */
+export interface PluginSummary {
+  /**
+   * <p>插件运营管理信息</p>
+   */
+  Operation?: PluginOperation
+  /**
+   * <p>插件id</p>
+   */
+  PluginId?: string
+  /**
+   * <p>插件基础信息</p>
+   */
+  Profile?: PluginProfile
+  /**
+   * <p>插件统计信息</p>
+   */
+  Statistics?: PluginStatistics
+  /**
+   * <p>插件状态，1:可用，2:不可用 </p><p>枚举值：</p><ul><li>1： 可用</li><li>2： 不可用</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>用户维度的插件状态信息</p>
+   */
+  UserState?: PluginUserState
+  /**
+   * <p>插件配置信息</p>
+   */
+  Config?: PluginConfig
+  /**
+   * <p>工具信息</p>
+   */
+  ToolList?: Array<ToolSummary>
 }
 
 /**
@@ -4835,13 +5200,59 @@ export interface CreateVariableRequest {
 }
 
 /**
- * AppTriggerParamBindingConfig
+ * 资源消耗明细
  */
-export interface AppTriggerParamBindingConfig {
+export interface ConsumptionDetail {
   /**
-   * <p>绑定参数列表</p>
+   * <p>消耗分类（类型/目标/场景/套餐包）</p>
    */
-  ParamList?: Array<AppTriggerParamBinding>
+  Classification?: ConsumptionClassification
+  /**
+   * <p>消耗发生时间，Unix 秒</p>
+   */
+  EventTime?: string
+  /**
+   * <p>用量来源类型</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>METRIC_SOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>METRIC_SOURCE_TYPE_APP</td><td>1</td><td>应用开发</td></tr><tr><td>METRIC_SOURCE_TYPE_KB</td><td>2</td><td>知识库</td></tr><tr><td>METRIC_SOURCE_TYPE_WIDGET</td><td>3</td><td>Widget</td></tr><tr><td>METRIC_SOURCE_TYPE_OPEN_CLAW</td><td>4</td><td>ClawPro</td></tr><tr><td>METRIC_SOURCE_TYPE_KB_RECALL_TEST</td><td>5</td><td>知识库召回测试</td></tr><tr><td>METRIC_SOURCE_TYPE_WORKBENCH</td><td>6</td><td>智能工作台</td></tr><tr><td>METRIC_SOURCE_TYPE_MODEL_API</td><td>7</td><td>模型 API 调用</td></tr></tbody></table>
+   */
+  MetricSourceType?: number
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>空间名称</p>
+   */
+  SpaceName?: string
+  /**
+   * <p>消耗用量（数值/单位/PU 消耗）</p>
+   */
+  Usage?: ConsumptionUsage
+  /**
+   * <p>用户名称</p>
+   */
+  UserName?: string
+}
+
+/**
+ * 消耗分类
+ */
+export interface ConsumptionClassification {
+  /**
+   * <p>消耗场景（如推理/训练/评测等）</p>
+   */
+  ConsumptionScene?: string
+  /**
+   * <p>消耗目标（如具体模型名/插件名/平台功能名）</p>
+   */
+  ConsumptionTarget?: string
+  /**
+   * <p>消耗类型，取值集合由业务方定义（如 model/plugin/platform 等）</p>
+   */
+  ConsumptionType?: string
+  /**
+   * <p>套餐包名称</p>
+   */
+  PackageName?: string
 }
 
 /**
@@ -4885,21 +5296,41 @@ export interface DescribeAuditLogListRequest {
 }
 
 /**
- * VoiceConfig
+ * DescribePluginSummaryList请求参数结构体
  */
-export interface VoiceConfig {
+export interface DescribePluginSummaryListRequest {
   /**
-   * 数智人音色key,需要和公有云音色id对齐
+   * 空间ID，查询空间内的插件列表时使用
    */
-  TimbreKey: string
+  SpaceId: string
   /**
-   * 音色名称
+   * 过滤条件列表 支持：PluginKind、CategoryKey、PluginSource、PluginId、PluginClass、BillingType
    */
-  VoiceName: string
+  FilterList?: Array<Filter>
   /**
-   * 公有云音色id
+   * <p>是否只返回已收藏插件。取 true 时，仅返回当前用户已收藏的插件；取 false 或不传时不按收藏状态过滤。</p>
    */
-  VoiceType: number
+  IsFavoriteOnly?: boolean
+  /**
+   * <p>插件展示场景。不传或取 0 时不限定场景。</p><p>枚举值：</p><ul><li>0：不限定场景</li><li>1：Agent 模式</li><li>2：工作流</li><li>3：智能工作台</li></ul>
+   */
+  Module?: number
+  /**
+   * 页码 从0开始
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+   */
+  PageSize?: number
+  /**
+   * 查询内容 模糊匹配：插件名称/插件描述/工具名称/工具描述
+   */
+  Query?: string
+  /**
+   * <p>排序方式。</p><p>枚举值：</p><ul><li>0：未指定，默认排序</li><li>1：按相关性排序</li><li>2：按更新时间排序</li><li>3：默认排序</li><li>4：按热度排序</li></ul>
+   */
+  SortType?: number
 }
 
 /**
@@ -5160,13 +5591,17 @@ export interface Space {
 }
 
 /**
- * WeeklySchedule
+ * 插件资源用量聚合明细（PLUGIN 域专属）
  */
-export interface WeeklySchedule {
+export interface PluginUsageSummary {
   /**
-   * 定时配置（星期）
+   * <p>调用次数（业务调用维度的顶层计数）</p>
    */
-  Times?: Array<WeeklyTime>
+  CallCount?: number
+  /**
+   * <p>PLUGIN 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_*），label 为空表示 total_tokens</p>
+   */
+  ResourceConsumptionList?: Array<ResourceConsumption>
 }
 
 /**
@@ -5530,16 +5965,6 @@ export interface AppMemoryConfig {
 }
 
 /**
- * FavoritePlugin返回参数结构体
- */
-export interface FavoritePluginResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * Agent的工具基础配置
  */
 export interface AgentToolBasicConfig {
@@ -5650,13 +6075,29 @@ export interface CreateAgentResponse {
 }
 
 /**
- * ClawAgent调用方自定义配置开关集合
+ * DescribeAgentSummaryList请求参数结构体
  */
-export interface ClawAgentCustomConfig {
+export interface DescribeAgentSummaryListRequest {
   /**
-   * <p>是否允许C端用户在对话时动态传入自定义Agent配置</p>
+   * <p>查询范围；0-单应用查询；1-跨应用查询</p>
    */
-  Enabled?: boolean
+  Scope?: number
+  /**
+   * <p>应用Id，Scope=0 时为目标应用ID（必填）；scope=1 时无需填写</p>
+   */
+  AppId?: string
+  /**
+   * <p>过滤条件（name: "SearchWord", "SpaceId", "AgentSource", "AppId"）</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>每页数目</p>
+   */
+  PageSize?: number
+  /**
+   * <p>页码</p>
+   */
+  PageNumber?: number
 }
 
 /**
@@ -5764,6 +6205,32 @@ export interface PluginConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MCPPluginConfig?: MCPPluginConfig
+}
+
+/**
+ * DescribeConcurrencyLimitDetailList请求参数结构体
+ */
+export interface DescribeConcurrencyLimitDetailListRequest {
+  /**
+   * <p>查询时间范围（Unix 秒）</p>
+   */
+  TimeRange: TimeRange
+  /**
+   * <p>视图范围：企业视图 / 空间视图/ 应用视图</p>
+   */
+  ViewScope: ViewScope
+  /**
+   * <p>扩展过滤。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：concurrency_type（qpm_tpm/dedicated，默认 qpm_tpm）、model_name（必填）、space_id、app_id/resource_id/source_id（应用ID，多选）、metric_source_type（METRIC_SOURCE_TYPE_* 枚举名或整数）</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，最大 100</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -5985,6 +6452,42 @@ export interface FavoritePluginRequest {
 }
 
 /**
+ * 平台资源用量聚合明细（PLATFORM 域专属）
+ */
+export interface PlatformUsageSummary {
+  /**
+   * <p>PLATFORM 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量，label 取 PlatformBizType 枚举名称字符串；典型如 unit=TIMES + label=PLATFORM_BIZ_TYPE_SECURITY_AUDIT/WEB_SEARCH/OPEN_CLAW/APP_INVOKE，unit=ITEM + label=PLATFORM_BIZ_TYPE_LONG_TERM_MEMORY</p>
+   */
+  ResourceConsumptionList?: Array<ResourceConsumption>
+}
+
+/**
+ * 并发超限明细
+ */
+export interface ConcurrencyLimitDetail {
+  /**
+   * <p>调用来源（subject_type 决定 subject_id/subject_name 的含义，如 APP 时 subject_id=app_id、subject_name=app_name）</p>
+   */
+  CallSource?: CallSource
+  /**
+   * <p>超限发生时间（Unix秒）</p>
+   */
+  EventTime?: string
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+  /**
+   * <p>请求内容（用户请求的原始查询文本）</p>
+   */
+  RequestQuery?: string
+  /**
+   * <p>空间 ID</p>
+   */
+  SpaceId?: string
+}
+
+/**
  * 文档解析模型参数
  */
 export interface FileParseModel {
@@ -6059,6 +6562,32 @@ export interface AgentPluginParameter {
    * <p>输入的值</p>
    */
   Input?: AgentInput
+}
+
+/**
+ * 模型调用明细
+ */
+export interface ModelUsageDetail {
+  /**
+   * <p>调用类型，来源于计费 scene_billing（与 filter.call_type 对应）</p>
+   */
+  CallType?: string
+  /**
+   * <p>是否默认知识库</p>
+   */
+  IsDefaultKB?: boolean
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+  /**
+   * <p>MODEL 域单次调用的消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_* /cache_*），label 为空表示 total_tokens；unit=PAGE_COUNT 表示模型消耗页数</p>
+   */
+  ResourceConsumptionList?: Array<ResourceConsumption>
+  /**
+   * <p>本次调用消耗 PU 量</p>
+   */
+  ConsumptionPU?: number
 }
 
 /**
@@ -6178,29 +6707,13 @@ export interface DeleteSpaceRequest {
 }
 
 /**
- * DescribeAgentSummaryList请求参数结构体
+ * FavoritePlugin返回参数结构体
  */
-export interface DescribeAgentSummaryListRequest {
+export interface FavoritePluginResponse {
   /**
-   * <p>查询范围；0-单应用查询；1-跨应用查询</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Scope?: number
-  /**
-   * <p>应用Id，Scope=0 时为目标应用ID（必填）；scope=1 时无需填写</p>
-   */
-  AppId?: string
-  /**
-   * <p>过滤条件（name: "SearchWord", "SpaceId", "AgentSource", "AppId"）</p>
-   */
-  FilterList?: Array<Filter>
-  /**
-   * <p>每页数目</p>
-   */
-  PageSize?: number
-  /**
-   * <p>页码</p>
-   */
-  PageNumber?: number
+  RequestId?: string
 }
 
 /**
@@ -6361,6 +6874,36 @@ export interface AppTriggerWorkflowExecuteConfig {
 }
 
 /**
+ * DescribeUsageDetailList请求参数结构体
+ */
+export interface DescribeUsageDetailListRequest {
+  /**
+   * <p>资源类型，限定为 RESOURCE_TYPE_MODEL / RESOURCE_TYPE_PLUGIN</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>平台功能用量</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）</td></tr></tbody></table>
+   */
+  ResourceType: number
+  /**
+   * <p>查询时间范围（Unix 秒）</p>
+   */
+  TimeRange: TimeRange
+  /**
+   * <p>视图范围：企业视图 / 空间视图 / 应用视图</p>
+   */
+  ViewScope: ViewScope
+  /**
+   * <p>扩展过滤（resource_type=MODEL）。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：model_name、user_id、space_id、resource_id/source_id、metric_source_type（METRIC_SOURCE_TYPE_* 或整数）、call_type（调用类型）</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，最大 100</p>
+   */
+  PageSize?: number
+}
+
+/**
  * 模型完整信息
  */
 export interface Model {
@@ -6506,6 +7049,24 @@ export interface DescribeConversationMessageListRequest {
    * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
    */
   UserId?: string
+}
+
+/**
+ * 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系）
+ */
+export interface Filter {
+  /**
+   * 过滤字段名
+   */
+  Name?: string
+  /**
+   * 操作符，默认 IN（向后兼容）<table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>FILTER_OPERATOR_IN</td><td>0</td><td>属于 value_list（默认值，向后兼容；value_list 不可为空）</td></tr><tr><td>FILTER_OPERATOR_NOT_IN</td><td>1</td><td>不属于 value_list（value_list 不可为空）</td></tr></table>
+   */
+  Operator?: number
+  /**
+   * 过滤值数组
+   */
+  ValueList?: Array<string>
 }
 
 /**
@@ -6847,6 +7408,50 @@ export interface DescribeSpaceListRequest {
 }
 
 /**
+ * DescribeUsageSummaryList返回参数结构体
+ */
+export interface DescribeUsageSummaryListResponse {
+  /**
+   * <p>总记录数，用于前端分页</p>
+   */
+  TotalCount?: string
+  /**
+   * <p>资源用量聚合明细列表</p>
+   */
+  UsageSummaryList?: Array<UsageSummary>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Agent 工具详情
+ */
+export interface AgentTool {
+  /**
+   * <p>工具配置字段</p>
+   */
+  Config?: AgentToolBasicConfig
+  /**
+   * <p>工具名称</p>
+   */
+  Name?: string
+  /**
+   * <p>工具状态</p><p>枚举值：</p><ul><li>1： 可用</li><li>2： 不可用</li><li>3： 已失效</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>调用方式</p><p>枚举值：</p><ul><li>0： 非流式</li><li>1： 流式</li></ul>
+   */
+  StreamMode?: number
+  /**
+   * <p>工具访问模式</p><p>枚举值：</p><ul><li>0： 未指定</li><li>1： 只读</li><li>2： 写/删除</li></ul>
+   */
+  ToolAccessMode?: number
+}
+
+/**
  * SkillVersion Skill 版本信息。
  */
 export interface SkillVersion {
@@ -6893,32 +7498,6 @@ export interface SkillVersion {
    * 版本变更说明
    */
   UpdateDesc?: string
-}
-
-/**
- * Agent 工具详情
- */
-export interface AgentTool {
-  /**
-   * <p>工具配置字段</p>
-   */
-  Config?: AgentToolBasicConfig
-  /**
-   * <p>工具名称</p>
-   */
-  Name?: string
-  /**
-   * <p>工具状态</p><p>枚举值：</p><ul><li>1： 可用</li><li>2： 不可用</li><li>3： 已失效</li></ul>
-   */
-  Status?: number
-  /**
-   * <p>调用方式</p><p>枚举值：</p><ul><li>0： 非流式</li><li>1： 流式</li></ul>
-   */
-  StreamMode?: number
-  /**
-   * <p>工具访问模式</p><p>枚举值：</p><ul><li>0： 未指定</li><li>1： 只读</li><li>2： 写/删除</li></ul>
-   */
-  ToolAccessMode?: number
 }
 
 /**

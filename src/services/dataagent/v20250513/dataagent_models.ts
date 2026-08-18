@@ -97,24 +97,6 @@ export interface AddChunkRequest {
 export type GetUserInstanceListRequest = null
 
 /**
- * QuerySceneList返回参数结构体
- */
-export interface QuerySceneListResponse {
-  /**
-   * 场景列表
-   */
-  Datas?: Array<Scene>
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 模型详情
  */
 export interface ModelList {
@@ -269,43 +251,25 @@ export interface ModelUserAuthority {
 }
 
 /**
- * 问答数据
+ * 追加文件
  */
-export interface ExampleQA {
+export interface AppendDocument {
   /**
-   * 示例记录的唯一业务 ID
+   * <p>文件名称</p>
    */
-  ExampleId?: string
+  FileName: string
   /**
-   * 问题列表
+   * <p>文件id</p>
    */
-  Questions?: Array<string>
+  FileId: string
   /**
-   * 对应的标准答案或回复
+   * <p>文件url</p>
    */
-  Answer?: string
+  FileUrl: string
   /**
-   * 内容类型，类型包含 'text', 'sql', 'code'
+   * <p>文件大小</p>
    */
-  Type?: string
-  /**
-   * 记录的创建时间
-   */
-  CreateTime?: string
-  /**
-   * 记录的最后更新时间
-   */
-  UpdateTime?: string
-}
-
-/**
- * GetUserInstanceList返回参数结构体
- */
-export interface GetUserInstanceListResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  FileSize: number
 }
 
 /**
@@ -335,25 +299,13 @@ export interface QueryChunkListResponse {
 }
 
 /**
- * AddScene请求参数结构体
+ * GetUserInstanceList返回参数结构体
  */
-export interface AddSceneRequest {
+export interface GetUserInstanceListResponse {
   /**
-   * 实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId?: string
-  /**
-   * 场景
-   */
-  Scene?: Scene
-  /**
-   * 1仅自己使用，2指定用户，0全员
-   */
-  UseScope?: number
-  /**
-   * 可使用用户列表
-   */
-  AuthorityUins?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -450,48 +402,6 @@ export interface StopChatAIRequest {
    * 实例ID
    */
   InstanceId?: string
-}
-
-/**
- * 检索配置
- */
-export interface SearchConfig {
-  /**
-   * <p>检索类型：0:混合搜索 1：向量搜索 2：全文搜索</p>
-   */
-  Type?: number
-  /**
-   * <p>召回数量最大值</p>
-   */
-  Num?: number
-  /**
-   * <p>权重配置</p>
-   */
-  EmbeddingWeight?: number
-  /**
-   * <p>0:关闭 1:开启，默认1</p>
-   */
-  Rerank?: number
-  /**
-   * <p>0:关闭 1:开启，默认0</p>
-   */
-  AutoRag?: number
-  /**
-   * <p>AutoRag关联的知识库ID列表</p>
-   */
-  KnowledgeBaseIds?: Array<string>
-  /**
-   * <p>AutoRag搜索状态：0-未完成，1-已完成。仅当AutoRag=1时，该字段有效</p>
-   */
-  SearchStatus?: number
-  /**
-   * <p>0:关闭 1:开启图谱检索，默认0</p>
-   */
-  EnableGraphSearch?: number
-  /**
-   * <p>0:关闭 1:开启树检索，默认0</p>
-   */
-  EnableTreeSearch?: number
 }
 
 /**
@@ -695,32 +605,6 @@ export interface GetJobsByKnowledgeBaseIdResponse {
 }
 
 /**
- * QuerySceneList请求参数结构体
- */
-export interface QuerySceneListRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 场景id
-   */
-  SceneId?: string
-  /**
-   * 场景名称
-   */
-  SceneName?: string
-  /**
-   * 页数
-   */
-  Page?: number
-  /**
-   * 页的大小
-   */
-  PageSize?: number
-}
-
-/**
  * QueryKnowledgeTask请求参数结构体
  */
 export interface QueryKnowledgeTaskRequest {
@@ -746,20 +630,6 @@ export interface GetUploadJobDetailsResponse {
    * 任务详情
    */
   Job?: UploadJob
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UploadAndCommitFile返回参数结构体
- */
-export interface UploadAndCommitFileResponse {
-  /**
-   * 上传任务
-   */
-  JobId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -820,20 +690,6 @@ export interface DeleteDataAgentSessionResponse {
    * 删除的会话ID列表
    */
   SessionIds?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * AddScene返回参数结构体
- */
-export interface AddSceneResponse {
-  /**
-   * 场景id
-   */
-  SceneId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -975,13 +831,37 @@ export interface ChatAIRequest {
 }
 
 /**
- * DeleteScene返回参数结构体
+ * 任务步骤
  */
-export interface DeleteSceneResponse {
+export interface StepInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 步骤id
    */
-  RequestId?: string
+  Id: number
+  /**
+   * 步骤名称
+   */
+  Name: string
+  /**
+   * 步骤状态
+   */
+  Status: string
+  /**
+   * 类型(text/expand)
+   */
+  Type: string
+  /**
+   * 总结
+   */
+  Summary?: string
+  /**
+   * 步骤扩展结构
+   */
+  Expand?: StepExpand
+  /**
+   * 描述
+   */
+  Desc?: string
 }
 
 /**
@@ -1153,40 +1033,6 @@ export interface GetUploadJobDetailsRequest {
 }
 
 /**
- * 任务步骤
- */
-export interface StepInfo {
-  /**
-   * 步骤id
-   */
-  Id: number
-  /**
-   * 步骤名称
-   */
-  Name: string
-  /**
-   * 步骤状态
-   */
-  Status: string
-  /**
-   * 类型(text/expand)
-   */
-  Type: string
-  /**
-   * 总结
-   */
-  Summary?: string
-  /**
-   * 步骤扩展结构
-   */
-  Expand?: StepExpand
-  /**
-   * 描述
-   */
-  Desc?: string
-}
-
-/**
  * 文件任务状态
  */
 export interface FileTaskStatus {
@@ -1287,63 +1133,17 @@ export interface Chunk {
 }
 
 /**
- * UpdateScene返回参数结构体
+ * UploadAndCommitFile返回参数结构体
  */
-export interface UpdateSceneResponse {
+export interface UploadAndCommitFileResponse {
+  /**
+   * 上传任务
+   */
+  JobId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 场景
- */
-export interface Scene {
-  /**
-   * <p>场景ID</p>
-   */
-  SceneId?: string
-  /**
-   * <p>场景名称</p>
-   */
-  SceneName?: string
-  /**
-   * <p>技能列表，包含：rag（知识检索）、data_analytics（数据分析）、data_prediction（数据预测）</p>
-   */
-  Skills?: Array<string>
-  /**
-   * <p>提示词文本</p>
-   */
-  Prompt?: string
-  /**
-   * <p>描述</p>
-   */
-  Description?: string
-  /**
-   * <p>检索配置</p>
-   */
-  SearchConfig?: SearchConfig
-  /**
-   * <p>示例问答列表</p>
-   */
-  ExampleQAList?: Array<ExampleQA>
-  /**
-   * <p>记录的创建时间</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>记录的最后更新时间</p>
-   */
-  UpdateTime?: string
-  /**
-   * <p>创建者Uin</p>
-   */
-  CreatorUin?: string
-  /**
-   * <p>知识</p>
-   */
-  Knowledge?: string
 }
 
 /**
@@ -1424,20 +1224,6 @@ export interface KnowledgeTaskConfig {
 }
 
 /**
- * UpdateScene请求参数结构体
- */
-export interface UpdateSceneRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 场景
-   */
-  Scene?: Scene
-}
-
-/**
  * CreateDataAgentSession请求参数结构体
  */
 export interface CreateDataAgentSessionRequest {
@@ -1459,20 +1245,6 @@ export interface ModifyKnowledgeBaseResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DeleteScene请求参数结构体
- */
-export interface DeleteSceneRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 场景id
-   */
-  SceneId?: string
 }
 
 /**
@@ -1563,26 +1335,4 @@ export interface GetKnowledgeBaseListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 追加文件
- */
-export interface AppendDocument {
-  /**
-   * <p>文件名称</p>
-   */
-  FileName: string
-  /**
-   * <p>文件id</p>
-   */
-  FileId: string
-  /**
-   * <p>文件url</p>
-   */
-  FileUrl: string
-  /**
-   * <p>文件大小</p>
-   */
-  FileSize: number
 }

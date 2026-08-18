@@ -86,6 +86,10 @@ export interface ModifyDiskAttributesResponse {
  */
 export interface DescribeDedicatedClusterDiskStatisticsResponse {
   /**
+   * <p>云服务器独享集群云硬盘统计信息。</p>
+   */
+  DedicatedClusterDiskStatisticSet?: Array<DedicatedClusterDiskStatistic>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -327,6 +331,16 @@ export interface CopySnapshotCrossRegionsResponse {
 }
 
 /**
+ * 单副本SSD硬盘详情。
+ */
+export interface RemoteDiskDetail {
+  /**
+   * <p>单副本SSD硬盘所在的位置。</p>
+   */
+  Placement?: Placement
+}
+
+/**
  * DescribeSnapshotGroups请求参数结构体
  */
 export interface DescribeSnapshotGroupsRequest {
@@ -482,6 +496,14 @@ export interface ModifySnapshotsSharePermissionResponse {
  * DescribeRemoteDisks返回参数结构体
  */
 export interface DescribeRemoteDisksResponse {
+  /**
+   * <p>单副本SSD硬盘的详细信息列表。</p>
+   */
+  RemoteDiskSet?: Array<RemoteDiskDetail>
+  /**
+   * <p>符合条件的单副本SSD硬盘数量。</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1344,7 +1366,12 @@ export interface CopyAutoSnapshotPolicyCrossAccountResponse {
 /**
  * DescribeDedicatedClusterDiskStatistics请求参数结构体
  */
-export type DescribeDedicatedClusterDiskStatisticsRequest = null
+export interface DescribeDedicatedClusterDiskStatisticsRequest {
+  /**
+   * <p>云服务器独享集群ID。</p>
+   */
+  DedicatedClusterId: string
+}
 
 /**
  * DeleteAutoSnapshotPolicies返回参数结构体
@@ -2373,6 +2400,28 @@ export interface DetachDisksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CDC 独享集群云硬盘统计信息。
+ */
+export interface DedicatedClusterDiskStatistic {
+  /**
+   * <p>硬盘介质类型。取值范围：<br>&lt;li&gt;CLOUD_BASIC：表示普通云硬盘<br>&lt;li&gt;CLOUD_PREMIUM：表示高性能云硬盘<br>&lt;li&gt;CLOUD_SSD：表示SSD云硬盘<br>&lt;li&gt;CLOUD_HSSD：表示增强型SSD云硬盘<br>&lt;li&gt;CLOUD_TSSD：表示极速型SSD云硬盘。</p>
+   */
+  DiskType?: string
+  /**
+   * <p>云硬盘总容量。</p><p>单位：GiB</p>
+   */
+  TotalDiskSize?: number
+  /**
+   * <p>已使用的云硬盘容量。</p><p>单位：GiB</p>
+   */
+  UsedDiskSize?: number
+  /**
+   * <p>可用的云硬盘容量。</p><p>单位：GiB</p>
+   */
+  AvailableDiskSize?: number
 }
 
 /**

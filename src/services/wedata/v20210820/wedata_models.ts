@@ -308,6 +308,10 @@ export interface DescribeStreamTaskLogListRequest {
    * <p>任务类型，不传时按 <code>INTEGRATION</code> 处理 </p><p>枚举值：</p><ul><li>INTEGRATION： 集成任务</li><li>VALIDATE： 对账任务</li></ul>
    */
   JobType?: string
+  /**
+   * <p>滚动查询游标</p>
+   */
+  Context?: string
 }
 
 /**
@@ -2917,6 +2921,20 @@ export interface ExtensionInfoVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+}
+
+/**
+ * 历史实例信息
+ */
+export interface RealtimeTaskInstanceVO {
+  /**
+   * <p>实例生成时间</p>
+   */
+  InstanceDate?: string
+  /**
+   * <p>实例id</p>
+   */
+  RunningOrderId?: number
 }
 
 /**
@@ -18819,6 +18837,10 @@ export interface DescribeStreamTaskLogListResponse {
    */
   LogContentList?: Array<LogContentInfo>
   /**
+   * <p>滚动查询游标</p>
+   */
+  Context?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -19158,22 +19180,22 @@ export interface ModifyIntegrationNodeResponse {
  */
 export interface DescribeTableContentPreviewResponse {
   /**
-   * 表的列名列表
+   * <p>表的列名列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColumnNames?: Array<string>
   /**
-   * 表的行数据列表
+   * <p>表的行数据列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableRecordSet?: Array<TableRecord>
   /**
-   * 异步预览任务ID
+   * <p>异步预览任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 异步预览结果状态: 0 初始化， 1 执行中， 2 执行成功
+   * <p>异步预览结果状态: 0 初始化， 1 执行中， 2 执行成功</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncState?: number
@@ -20362,23 +20384,23 @@ export interface SchedulerTaskInstanceInfo {
  */
 export interface DescribeIntegrationTaskRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId: string
   /**
-   * 任务类型，201: 实时集成任务,   202：离线集成任务，不传默认值为201 实时任务类型
+   * <p>任务类型，201: 实时集成任务,   202：离线集成任务，不传默认值为201 实时任务类型</p>
    */
   TaskType?: number
   /**
-   * 提交版本号
+   * <p>提交版本号</p>
    */
   InstanceVersion?: number
   /**
-   * 额外参数
+   * <p>额外参数</p>
    */
   ExtConfig?: Array<RecordField>
 }
@@ -32978,20 +33000,24 @@ export interface DescribeRuleExecLogRequest {
  */
 export interface DescribeIntegrationTaskResponse {
   /**
-   * 任务信息
+   * <p>任务信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskInfo?: IntegrationTaskInfo
   /**
-   * 采集器统计信息
+   * <p>采集器统计信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentStatus?: AgentStatus
   /**
-   * 任务版本信息
+   * <p>任务版本信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskVersion?: TaskVersionInstance
+  /**
+   * <p>历史实例信息</p>
+   */
+  TaskVersionList?: Array<RealtimeTaskInstanceVO>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -33291,45 +33317,57 @@ export interface DescribeDsTaskVersionInfoRequest {
  */
 export interface DescribeTableContentPreviewRequest {
   /**
-   * 表ID
+   * <p>表ID</p>
    */
   TableId: string
   /**
-   * 组件类型枚举值，支持的值有 HDFS/HBASE/HIVE/KAFKA
+   * <p>组件类型枚举值，支持的值有 HDFS/HBASE/HIVE/KAFKA</p>
    */
   TechnologyType: string
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId: string
   /**
-   * 资源类型枚举值，支持的值有TOPIC/PATH/TABLE/DATABASE
+   * <p>资源类型枚举值，支持的值有TOPIC/PATH/TABLE/DATABASE</p>
    */
   ResourceType: string
   /**
-   * 表名
+   * <p>表名</p>
    */
   TableName: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId: string
   /**
-   * 预览的行数，默认10行
+   * <p>预览的行数，默认10行</p>
    */
   RowNum?: number
   /**
-   * 数据库名，kafka或其他无数据库概念的不填
+   * <p>数据库名，kafka或其他无数据库概念的不填</p>
    */
   DatabaseName?: string
   /**
-   * 异步查询预览结果时填写
+   * <p>异步查询预览结果时填写</p>
    */
   TaskId?: string
   /**
-   * 分区信息
+   * <p>分区信息</p>
    */
   PartitionName?: string
+  /**
+   * <p>资源组ID</p>
+   */
+  ResourceGroupId?: string
+  /**
+   * <p>执行SQL</p>
+   */
+  Sql?: string
+  /**
+   * <p>引擎名</p>
+   */
+  EngineId?: string
 }
 
 /**

@@ -24,6 +24,7 @@ import {
   AlarmPolicyTriggerTask,
   GetTopNMonitorDataRequest,
   DescribePrometheusRegionsResponse,
+  ModifyPrometheusInstanceAccessPointsRequest,
   DescribeOnCallFormRequest,
   DescribePrometheusInstancesOverviewRequest,
   ModifyGrafanaInstanceResponse,
@@ -290,6 +291,7 @@ import {
   BindingPolicyTagResponse,
   DeleteServiceDiscoveryResponse,
   CreateExporterIntegrationRequest,
+  ModifyPrometheusInstanceAccessPointsResponse,
   ModifyPrometheusConfigResponse,
   PrometheusAgent,
   CreatePrometheusAlertPolicyResponse,
@@ -1457,6 +1459,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteGrafanaInstanceResponse) => void
   ): Promise<DeleteGrafanaInstanceResponse> {
     return this.request("DeleteGrafanaInstance", req, cb)
+  }
+
+  /**
+   * ModifyPrometheusInstanceAccessPoints 用于管理 Prometheus 实例的访问入口，当前支持 HTTP 与 HTTPS 两种协议：默认启用 HTTP，HTTPS（mTLS）为可选项，但至少需启用一种协议。现阶段对 Prometheus 的读写均通过私有网络入口完成；由于 HTTPS 依赖 mTLS，配置与运维复杂度更高，且在绝大多数场景下并无必要，因此通常不建议启用。
+   */
+  async ModifyPrometheusInstanceAccessPoints(
+    req?: ModifyPrometheusInstanceAccessPointsRequest,
+    cb?: (error: string, rep: ModifyPrometheusInstanceAccessPointsResponse) => void
+  ): Promise<ModifyPrometheusInstanceAccessPointsResponse> {
+    return this.request("ModifyPrometheusInstanceAccessPoints", req, cb)
   }
 
   /**

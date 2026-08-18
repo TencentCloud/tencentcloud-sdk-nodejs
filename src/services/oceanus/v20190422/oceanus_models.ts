@@ -4649,6 +4649,10 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogCOSBucket?: string
+  /**
+   * <p>是否支持滚动删除，0，手动删除，1，自动滚动删除</p>
+   */
+  IsLocked?: number
 }
 
 /**

@@ -88,6 +88,7 @@ import {
   TableMeta,
   AlarmEventInfo,
   ExtensionInfoVO,
+  RealtimeTaskInstanceVO,
   TriggerManualTasksResponse,
   DescribeTaskLineageRequest,
   BytesSpeed,

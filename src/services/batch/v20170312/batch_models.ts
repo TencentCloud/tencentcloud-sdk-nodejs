@@ -451,11 +451,11 @@ export interface CommandLine {
  */
 export interface DescribeJobMonitorDataResponse {
   /**
-   * 监控数据粒度，单位:秒；时间粒度随着查询的时间范围变化，查询时间范围越小，时间粒度越小。
+   * <p>监控数据粒度，单位:秒；时间粒度随着查询的时间范围变化，查询时间范围越小，时间粒度越小。</p>
    */
   Period?: number
   /**
-   * 监控采集的数据。时间戳和对应的值一一对应；如果查询的任务重试，采集时间段涉及多个实例的话，某些时间段内的值为null, 表示对应时间点没有实例存在，也不存在对应的监控数据；相邻监控时间段之间的空值数量最多为10。
+   * <p>监控采集的数据。时间戳和对应的值一一对应；如果查询的任务重试，采集时间段涉及多个实例的话，某些时间段内的值为null, 表示对应时间点没有实例存在，也不存在对应的监控数据；相邻监控时间段之间的空值数量最多为10。</p>
    */
   DataPoints?: DataPointView
   /**
@@ -1593,42 +1593,31 @@ export interface OutputMapping {
  */
 export interface DescribeJobMonitorDataRequest {
   /**
-   * 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909)
+   * <p>作业ID；JobId详见<a href="https://cloud.tencent.com/document/product/599/15909">作业列表</a></p>
    */
   JobId: string
   /**
-   * 作业的Task名称，详见[作业详情](https://cloud.tencent.com/document/product/599/15904)。
+   * <p>作业的Task名称，详见<a href="https://cloud.tencent.com/document/product/599/15904">作业详情</a>。</p>
    */
   TaskName: string
   /**
-   * 作业任务实例的序号，详见[任务详情](https://cloud.tencent.com/document/product/599/15905)
+   * <p>作业任务实例的序号，详见<a href="https://cloud.tencent.com/document/product/599/15905">任务详情</a></p>
    */
   TaskInstanceIndex: number
   /**
-   * 支持查询的指标；当前支持查询的任务指标；
-
-- CpuUsage：cpu利用率，单位：%
-- MemUsage：内存利用率，单位：%
-- LanOuttraffic：内网出带宽，单位：Bytes/s
-- LanIntraffic：内网入带宽，单位：Bytes/s
-- MaxDiskUsage：所有磁盘中的使用率最高的磁盘使用率，单位：%
-- TargetDiskUsage：指定磁盘的使用率，单位：%；配合Dimensions参数使用
+   * <p>支持查询的指标；当前支持查询的任务指标；</p><ul><li>CpuUsage：cpu利用率，单位：%</li><li>MemUsage：内存利用率，单位：%</li><li>LanOuttraffic：内网出带宽，单位：Bytes/s</li><li>LanIntraffic：内网入带宽，单位：Bytes/s</li><li>MaxDiskUsage：所有磁盘中的使用率最高的磁盘使用率，单位：%</li><li>TargetDiskUsage：指定磁盘的使用率，单位：%；配合Dimensions参数使用</li></ul>
    */
   MetricName: string
   /**
-   * 查询任务实例的起始时间；如果未传入查询起始时间或传入的时间小于任务实例的创建时间（任务实例创建时间详见[任务详情](https://cloud.tencent.com/document/product/599/15905)），会自动将查询时间调整到任务实例的创建时间。传入时间格式只支持零时区格式。
+   * <p>查询任务实例的起始时间；如果未传入查询起始时间或传入的时间小于任务实例的创建时间（任务实例创建时间详见<a href="https://cloud.tencent.com/document/product/599/15905">任务详情</a>），会自动将查询时间调整到任务实例的创建时间。传入时间格式只支持零时区格式。</p>
    */
   StartTime?: string
   /**
-   * 查询任务实例的终止时间；如果未传入查询终止时间或传入的时间大于任务实例的终止时间（任务实例终止时间详见[任务详情](https://cloud.tencent.com/document/product/599/15905)），并且任务实例已经结束，会自动将查询终止时间调整到任务实例的终止时间；如果任务实例未结束，会自动将查询终止时间调整到当前时间。传入时间格式只支持零时区格式。
+   * <p>查询任务实例的终止时间；如果未传入查询终止时间或传入的时间大于任务实例的终止时间（任务实例终止时间详见<a href="https://cloud.tencent.com/document/product/599/15905">任务详情</a>），并且任务实例已经结束，会自动将查询终止时间调整到任务实例的终止时间；如果任务实例未结束，会自动将查询终止时间调整到当前时间。传入时间格式只支持零时区格式。</p>
    */
   EndTime?: string
   /**
-   * 查询指标的扩展参数；当前只支持TargetDiskUsage;
-
-- TargetDiskUsage
-    -支持的查询维度diskname, 维度值为磁盘挂载名，例如vdb；如果不传此参数，默认查询vdb磁盘的使用率。
-    样例：[{"Name":"diskname", "Value":"vdb"}]
+   * <p>查询指标的扩展参数；当前只支持TargetDiskUsage;</p><ul><li>TargetDiskUsage<br>  -支持的查询维度diskname, 维度值为磁盘挂载名，例如vdb；如果不传此参数，默认查询vdb磁盘的使用率。<br>  样例：[{&quot;Name&quot;:&quot;diskname&quot;, &quot;Value&quot;:&quot;vdb&quot;}]</li></ul>
    */
   Dimensions?: Array<Dimension>
 }

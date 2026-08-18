@@ -195,6 +195,7 @@ import {
   AuditLogFile,
   EnableTransparentDataEncryptionResponse,
   IncreaseDBInstanceConnectionLimitRequest,
+  ModifyShardSpecInfo,
   DescribeAuditLogFilesRequest,
   SetBackupRulesRequest,
   AssignProjectRequest,
