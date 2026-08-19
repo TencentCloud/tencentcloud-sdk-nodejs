@@ -371,6 +371,10 @@ export interface CreateAgentInstanceRequest {
    * <p>无</p>
    */
   Description?: string
+  /**
+   * <p>企业版是否使用平台大账号模式发货</p>
+   */
+  UsePlatformAccount?: boolean
 }
 
 /**
@@ -1689,6 +1693,18 @@ export interface AgentInstance {
    * <p>发货进度详情</p>
    */
   CreatingProgress?: CreatingProgress
+  /**
+   * <p>实例关联的角色名称</p>
+   */
+  RoleName?: string
+  /**
+   * <p>实例下线时间</p><p>参数格式：2026-08-12 17:02:43</p>
+   */
+  OfflineTime?: string
+  /**
+   * <p>商业化资源归属</p>
+   */
+  ProductName?: string
 }
 
 /**

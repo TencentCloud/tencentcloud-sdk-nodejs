@@ -10462,11 +10462,11 @@ export interface DescribeAssetEnvListRequest {
  */
 export interface DescribeReverseShellRulesAggregationResponse {
   /**
-   * 列表内容
+   * <p>列表内容</p>
    */
   List?: Array<ReverseShellRuleAggregation>
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   TotalCount?: number
   /**
@@ -31324,24 +31324,23 @@ export interface DescribeJavaMemShellInfoResponse {
  */
 export interface DescribeReverseShellRulesAggregationRequest {
   /**
-   * 返回数量，默认为10，最大值为100。
+   * <p>返回数量，默认为10，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
+   * <p>过滤条件。</p><li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
    */
   Filters?: Array<Filter>
   /**
-   * 排序字段，目前有：CreateTime、ModifyTime，默认按照ModifyTime排序
+   * <p>排序字段，目前有：CreateTime、ModifyTime，默认按照ModifyTime排序</p>
    */
   By?: string
   /**
-   * 排序升序还是倒序，DESC有ASC、
+   * <p>排序升序还是倒序，DESC有ASC、</p>
    */
   Order?: string
 }

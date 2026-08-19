@@ -156,11 +156,11 @@ export interface ModifyVirusAutoIsolateExampleSwitchResponse {
  */
 export interface DescribeEventEscapeImageListResponse {
   /**
-   * 风险容器镜像列表
+   * <p>风险容器镜像列表</p>
    */
   List?: Array<EventEscapeImageInfo>
   /**
-   * 事件总数量
+   * <p>事件总数量</p>
    */
   TotalCount?: number
   /**
@@ -323,27 +323,23 @@ export interface CreateVulDefenceHostExportJobResponse {
  */
 export interface DescribeEventEscapeImageListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * <p>需要返回的数量，默认为10，最大值为100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 过滤参数:
-EventType: 事件类型(MOUNT_SENSITIVE_PTAH:敏感路径挂载 PRIVILEGE_CONTAINER_START:特权容器)
-Status: 事件状态(EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略)
-ImageID: 镜像id
-ImageName:镜像名称
+   * <p>过滤参数:<br>EventType: 事件类型(MOUNT_SENSITIVE_PTAH:敏感路径挂载 PRIVILEGE_CONTAINER_START:特权容器)<br>Status: 事件状态(EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略)<br>ImageID: 镜像id<br>ImageName:镜像名称</p>
    */
   Filters?: Array<RunTimeFilters>
   /**
-   * 升序降序,asc desc
+   * <p>升序降序,asc desc</p>
    */
   Order?: string
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   By?: string
 }

@@ -4664,6 +4664,10 @@ export interface ImageTaskInput {
    * <p>图片理解配置</p>
    */
   UnderstandImageConfig?: UnderstandImageConfig
+  /**
+   * <p>图片质量评估配置</p>
+   */
+  ImageQualityConfig?: ImageQualityConfig
 }
 
 /**
@@ -7778,38 +7782,13 @@ export interface ModifyPersonSampleResponse {
 }
 
 /**
- * 媒体质检任务结果类型
+ * 图片质量评估任务。
  */
-export interface ScheduleQualityControlTaskResult {
+export interface ImageQualityConfig {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * <p>图片质量评估维度</p><p>枚举值：</p><ul><li>Brightness： 亮度评估</li><li>Contrast： 对比度评估</li><li>Sharpness： 清晰度评估</li><li>IQA： 综合质量评估</li></ul>
    */
-  Status?: string
-  /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-   */
-  ErrCodeExt?: string
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 媒体质检任务的输入。
-   */
-  Input?: AiQualityControlTaskInput
-  /**
-   * 媒体质检任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: QualityControlData
-  /**
-   * 任务执行进度。
-   */
-  Progress?: number
+  Attributes: Array<string>
 }
 
 /**
@@ -9616,21 +9595,38 @@ export interface DeleteStreamPackageLinearAssemblyChannelRequest {
 }
 
 /**
- * 用户自定义审核任务控制参数
+ * 媒体质检任务结果类型
  */
-export interface UserDefineConfigureInfo {
+export interface ScheduleQualityControlTaskResult {
   /**
-   * 用户自定义人物审核控制参数。
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  FaceReviewInfo?: UserDefineFaceReviewTemplateInfo
+  Status?: string
   /**
-   * 用户自定义语音审核控制参数。
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  AsrReviewInfo?: UserDefineAsrTextReviewTemplateInfo
+  ErrCodeExt?: string
   /**
-   * 用户自定义文本审核控制参数。
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  OcrReviewInfo?: UserDefineOcrTextReviewTemplateInfo
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 媒体质检任务的输入。
+   */
+  Input?: AiQualityControlTaskInput
+  /**
+   * 媒体质检任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: QualityControlData
+  /**
+   * 任务执行进度。
+   */
+  Progress?: number
 }
 
 /**
@@ -14833,7 +14829,7 @@ export interface DescribeAigcTaskStatusRequest {
  */
 export interface DescribeDesignTaskResponse {
   /**
-   * <p>错误码，成功时返回0</p>
+   * <p>错误码，成功时返回0，处理中返回100</p>
    */
   ErrorCode?: number
   /**
@@ -25251,6 +25247,24 @@ export interface DescribeStreamLinkFlowRequest {
    * 流Id。
    */
   FlowId: string
+}
+
+/**
+ * 用户自定义审核任务控制参数
+ */
+export interface UserDefineConfigureInfo {
+  /**
+   * 用户自定义人物审核控制参数。
+   */
+  FaceReviewInfo?: UserDefineFaceReviewTemplateInfo
+  /**
+   * 用户自定义语音审核控制参数。
+   */
+  AsrReviewInfo?: UserDefineAsrTextReviewTemplateInfo
+  /**
+   * 用户自定义文本审核控制参数。
+   */
+  OcrReviewInfo?: UserDefineOcrTextReviewTemplateInfo
 }
 
 /**

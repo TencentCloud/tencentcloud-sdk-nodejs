@@ -158,9 +158,9 @@ it("ckafka.v20190819.DescribeTopicFlowRanking", async function () {
     }
 })
 
-it("ckafka.v20190819.DescribeThrottleRules", async function () {
+it("ckafka.v20190819.ModifyAclRule", async function () {
     try {
-       const data = await client.DescribeThrottleRules({})
+       const data = await client.ModifyAclRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,9 @@ it("ckafka.v20190819.ModifyPassword", async function () {
     }
 })
 
-it("ckafka.v20190819.RenewCkafkaInstance", async function () {
+it("ckafka.v20190819.ModifyRouteSecurityGroups", async function () {
     try {
-       const data = await client.RenewCkafkaInstance({})
+       const data = await client.ModifyRouteSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +361,16 @@ it("ckafka.v20190819.UpgradeBrokerVersion", async function () {
 it("ckafka.v20190819.DescribeDatahubTasks", async function () {
     try {
        const data = await client.DescribeDatahubTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.AssociateRoutesSecurityGroup", async function () {
+    try {
+       const data = await client.AssociateRoutesSecurityGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,6 +498,16 @@ it("ckafka.v20190819.AuthorizeToken", async function () {
     }
 })
 
+it("ckafka.v20190819.DisassociateRoutesSecurityGroup", async function () {
+    try {
+       const data = await client.DisassociateRoutesSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeDatahubTopic", async function () {
     try {
        const data = await client.DescribeDatahubTopic({})
@@ -551,6 +571,16 @@ it("ckafka.v20190819.ModifyDatahubTask", async function () {
 it("ckafka.v20190819.DescribeConnectResource", async function () {
     try {
        const data = await client.DescribeConnectResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.RenewCkafkaInstance", async function () {
+    try {
+       const data = await client.RenewCkafkaInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +748,9 @@ it("ckafka.v20190819.DeleteAclRule", async function () {
     }
 })
 
-it("ckafka.v20190819.ModifyAclRule", async function () {
+it("ckafka.v20190819.DescribeThrottleRules", async function () {
     try {
-       const data = await client.ModifyAclRule({})
+       const data = await client.DescribeThrottleRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -743,6 +743,10 @@ export interface Device {
    * <p>token生成时间戳，毫秒级。</p>
    */
   TokenTime?: string
+  /**
+   * <p>隐私浏览器类型，当检测到隐私浏览器时返回，仅H5。</p>
+   */
+  PrivacyBrowser?: string
 }
 
 /**

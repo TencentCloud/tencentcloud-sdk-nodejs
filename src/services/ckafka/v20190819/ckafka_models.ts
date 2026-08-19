@@ -1947,17 +1947,17 @@ export interface MariaDBModifyConnectParam {
 }
 
 /**
- * DescribeRegion返回参数结构体
+ * DisassociateRoutesSecurityGroup请求参数结构体
  */
-export interface DescribeRegionResponse {
+export interface DisassociateRoutesSecurityGroupRequest {
   /**
-   * <p>返回地域枚举结果列表</p>
+   * 解绑路由的列表
    */
-  Result?: Array<Region>
+  InstanceRoutes: Array<InstanceRoute>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 安全组id
    */
-  RequestId?: string
+  SecurityGroupId: string
 }
 
 /**
@@ -2767,13 +2767,19 @@ export interface DescribeGroup {
 }
 
 /**
- * 值支持一拆多，即将一个值拆为一个数组
+ * 安全组路由操作结果返回值
  */
-export interface SplitParam {
+export interface SecurityGroupRouteOperateResp {
   /**
-   * 分隔符
+   * 操作返回的code，0为正常，非0为错误
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Regex: string
+  ReturnCode?: string
+  /**
+   * 操作返回的信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReturnMessage?: string
 }
 
 /**
@@ -3326,6 +3332,16 @@ export interface SubscribedInfo {
    * 订阅的主题ID
    */
   TopicId?: string
+}
+
+/**
+ * 值支持一拆多，即将一个值拆为一个数组
+ */
+export interface SplitParam {
+  /**
+   * 分隔符
+   */
+  Regex: string
 }
 
 /**
@@ -3938,6 +3954,20 @@ export interface CreateConnectResourceRequest {
 }
 
 /**
+ * ModifyRouteSecurityGroups返回参数结构体
+ */
+export interface ModifyRouteSecurityGroupsResponse {
+  /**
+   * 	返回结果
+   */
+  Result?: SecurityGroupRouteOperateResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 创建数据转储返回值
  */
 export interface CreateDatahubTaskRes {
@@ -4107,6 +4137,21 @@ export interface CreateThrottleRuleRequest {
    * <p>topic名称</p>
    */
   TopicNameList?: Array<string>
+}
+
+/**
+ * ModifyRouteSecurityGroups请求参数结构体
+ */
+export interface ModifyRouteSecurityGroupsRequest {
+  /**
+   * 实例路由
+   */
+  InstanceRoute: InstanceRoute
+  /**
+   * 修改后的安全组有序列表。
+注意:不指定此参数或传空列表则代表解绑所有关联的安全组。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -4865,6 +4910,20 @@ export interface BatchModifyGroupOffsetsRequest {
    * <p>指定topic，默认所有topic</p>
    */
   TopicName?: Array<string>
+}
+
+/**
+ * AssociateRoutesSecurityGroup请求参数结构体
+ */
+export interface AssociateRoutesSecurityGroupRequest {
+  /**
+   * 绑定路由的列表
+   */
+  InstanceRoutes: Array<InstanceRoute>
+  /**
+   * 安全组id
+   */
+  SecurityGroupId: string
 }
 
 /**
@@ -8832,6 +8891,20 @@ export interface TransformParam {
 }
 
 /**
+ * DisassociateRoutesSecurityGroup返回参数结构体
+ */
+export interface DisassociateRoutesSecurityGroupResponse {
+  /**
+   * 返回结果
+   */
+  Result?: SecurityGroupRouteOperateResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyThrottleRule请求参数结构体
  */
 export interface ModifyThrottleRuleRequest {
@@ -8864,6 +8937,20 @@ export interface DeleteInstancePreResponse {
 }
 
 /**
+ * AssociateRoutesSecurityGroup返回参数结构体
+ */
+export interface AssociateRoutesSecurityGroupResponse {
+  /**
+   * 返回结果
+   */
+  Result?: SecurityGroupRouteOperateResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Datahub Topic 响应
  */
 export interface DatahubTopicResp {
@@ -8885,6 +8972,20 @@ export interface DescribeCvmInfoResponse {
    * 返回结果
    */
   Result?: ListCvmAndIpInfoRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRegion返回参数结构体
+ */
+export interface DescribeRegionResponse {
+  /**
+   * <p>返回地域枚举结果列表</p>
+   */
+  Result?: Array<Region>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

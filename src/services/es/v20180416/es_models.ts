@@ -1854,23 +1854,23 @@ export interface DiDataSourceCvm {
  */
 export interface UpdateIpTraceStatusRequest {
   /**
-   * 集群ID
+   * <p>集群ID。该字段为必填字段。</p>
    */
   InstanceId?: string
   /**
-   * IP溯源配置开关
+   * <p>IP溯源配置开关。该字段为必填字段。</p>
    */
   OpenIpTrace?: boolean
   /**
-   * IP溯源开启持续时间，单位：秒
+   * <p>IP溯源开启持续时间，单位：秒。该字段为必填字段。</p>
    */
   DurationTime?: number
   /**
-   * IP溯源配置
+   * <p>IP溯源配置。该字段为必填字段。</p>
    */
   IpTraceConfig?: IpTraceConfig
   /**
-   * 是否过滤kibana节点IP
+   * <p>是否过滤kibana节点IP。</p>
    */
   FilterKibanaIp?: boolean
 }
@@ -2421,11 +2421,11 @@ export interface DescribeForceMergeTaskRequest {
  */
 export interface QueryIpTraceLogResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
-   * IP溯源日志列表
+   * <p>IP溯源日志列表</p>
    */
   IpTraceLogList?: Array<IpTraceLogEntry>
   /**
@@ -3019,7 +3019,7 @@ export interface DescribeServerlessSpaceUserRequest {
  */
 export interface GetIpTraceStatusRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   InstanceId?: string
 }
@@ -3379,51 +3379,51 @@ export interface DescribeLogstashInstanceOperationsRequest {
  */
 export interface QueryIpTraceLogRequest {
   /**
-   * ES集群ID
+   * <p>ES集群ID</p>
    */
   InstanceId: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
   /**
-   * 起始偏移量
+   * <p>起始偏移量</p>
    */
   Offset?: number
   /**
-   * 数据条数
+   * <p>数据条数</p>
    */
   Limit?: number
   /**
-   * 访问IP
+   * <p>访问IP</p>
    */
   RemoteIp?: Array<string>
   /**
-   * Request/Response 请求/返回, 非必填
+   * <p>Request/Response 请求/返回, 非必填</p>
    */
   TraceType?: Array<string>
   /**
-   * Public/Private 公网访问/内网访问, 非必填
+   * <p>Public/Private 公网访问/内网访问, 非必填</p>
    */
   NetType?: Array<string>
   /**
-   * POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填
+   * <p>POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填</p>
    */
   ReqTypeOrRspStatus?: Array<string>
   /**
-   * 关键字模糊查询，支持Lucene Query String
+   * <p>关键字模糊查询，支持Lucene Query String</p>
    */
   SearchKey?: string
   /**
-   * Uri搜索
+   * <p>Uri搜索</p>
    */
   Uri?: string
   /**
-   * 集群节点IP
+   * <p>集群节点IP</p>
    */
   NodeIp?: Array<string>
 }
@@ -5819,27 +5819,27 @@ export interface IpTraceLogEntry {
  */
 export interface GetIpTraceStatusResponse {
   /**
-   * 是否开启IP溯源
+   * <p>是否开启IP溯源</p>
    */
   OpenIpTrace?: boolean
   /**
-   * IP溯源开启持续时间，单位：秒
+   * <p>IP溯源开启持续时间，单位：秒</p>
    */
   DurationTime?: number
   /**
-   * IP溯源配置
+   * <p>IP溯源配置</p>
    */
   IpTraceConfig?: IpTraceConfig
   /**
-   * 上次执行时间
+   * <p>上次执行时间</p>
    */
   LastStartTime?: string
   /**
-   * 上次关闭时间
+   * <p>上次关闭时间</p>
    */
   LastEndTime?: string
   /**
-   * 是否过滤Kibana节点IP
+   * <p>是否过滤Kibana节点IP</p>
    */
   FilterKibanaIp?: boolean
   /**
@@ -6314,7 +6314,7 @@ export interface RestartNodesResponse {
  */
 export interface ExportIpTraceLogResponse {
   /**
-   * IP时间列表
+   * <p>IP时间列表</p>
    */
   IpTraceList?: Array<IpTimePair>
   /**
@@ -7918,51 +7918,51 @@ export interface DescribeServerlessMetricsResponse {
  */
 export interface ExportIpTraceLogRequest {
   /**
-   * ES集群ID
+   * <p>ES集群ID</p>
    */
   InstanceId: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
   /**
-   * 起始偏移量
+   * <p>起始偏移量</p>
    */
   Offset?: number
   /**
-   * 数据条数
+   * <p>数据条数</p>
    */
   Limit?: number
   /**
-   * 访问IP
+   * <p>访问IP</p>
    */
   RemoteIp?: Array<string>
   /**
-   * Request/Response 请求/返回, 非必填
+   * <p>Request/Response 请求/返回, 非必填</p>
    */
   TraceType?: Array<string>
   /**
-   * Public/Private 公网访问/内网访问, 非必填
+   * <p>Public/Private 公网访问/内网访问, 非必填</p>
    */
   NetType?: Array<string>
   /**
-   * POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填
+   * <p>POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填</p>
    */
   ReqTypeOrRspStatus?: Array<string>
   /**
-   * 关键字模糊查询，支持Lucene Query String
+   * <p>关键字模糊查询，支持Lucene Query String</p>
    */
   SearchKey?: string
   /**
-   * uri搜索
+   * <p>uri搜索</p>
    */
   Uri?: string
   /**
-   * 集群节点IP
+   * <p>集群节点IP</p>
    */
   NodeIp?: Array<string>
 }

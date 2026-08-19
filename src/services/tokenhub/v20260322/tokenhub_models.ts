@@ -1354,6 +1354,34 @@ export interface DescribeUsageRankListResponse {
  */
 export interface DescribeModelQuotaResponse {
   /**
+   * <p>模型 ID。</p>
+   */
+  ModelId?: string
+  /**
+   * <p>TPM 限制（Tokens Per Minute）。模型无配额配置时不返回此字段。</p>
+   */
+  TPMLimit?: number
+  /**
+   * <p>RPM 限制（Request Per Minute）。模型无配额配置时不返回此字段。</p>
+   */
+  RPMLimit?: number
+  /**
+   * <p>TPM 保障包 input 配额</p>
+   */
+  TPMInputQuotaLimit?: number
+  /**
+   * <p>TPM 保障包 output 配额</p>
+   */
+  TPMOutputQuotaLimit?: number
+  /**
+   * <p>TPM 预留 input 配额</p>
+   */
+  TPMInputReserveLimit?: number
+  /**
+   * <p>TPM 预留 output 配额</p>
+   */
+  TPMOutputReserveLimit?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1372,7 +1400,12 @@ export interface DescribeTokenPlanApiKeySecretRequest {
 /**
  * DescribeModelQuota请求参数结构体
  */
-export type DescribeModelQuotaRequest = null
+export interface DescribeModelQuotaRequest {
+  /**
+   * <p>模型 ID。可通过 DescribeModelList 获取。</p>
+   */
+  ModelId: string
+}
 
 /**
  * 模型计费信息

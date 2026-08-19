@@ -12673,6 +12673,14 @@ export interface CynosdbClusterDetail {
    * <p>实例当前所在可用区</p>
    */
   RealZone?: string
+  /**
+   * <p>超限开启状态</p><p>枚举值：</p><ul><li>yes： 超限开启</li><li>no： 超限关闭</li></ul><p>默认值：no</p>
+   */
+  StorageOverUse?: string
+  /**
+   * <p>自动扩容开启状态</p><p>枚举值：</p><ul><li>yes： 已开启</li><li>no： 关闭</li></ul><p>默认值：no</p>
+   */
+  StorageAutoExpand?: string
 }
 
 /**

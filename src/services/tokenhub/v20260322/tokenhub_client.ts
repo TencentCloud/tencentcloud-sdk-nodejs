@@ -258,7 +258,7 @@ export class Client extends AbstractClient {
    * 查询指定模型的 TPM 和 QPM 配额上限。
    */
   async DescribeModelQuota(
-    req?: DescribeModelQuotaRequest,
+    req: DescribeModelQuotaRequest,
     cb?: (error: string, rep: DescribeModelQuotaResponse) => void
   ): Promise<DescribeModelQuotaResponse> {
     return this.request("DescribeModelQuota", req, cb)

@@ -85,7 +85,7 @@ import {
   DescribeInstanceAttributesResponse,
   TopicDetailResponse,
   MariaDBModifyConnectParam,
-  DescribeRegionResponse,
+  DisassociateRoutesSecurityGroupRequest,
   CreateTopicResponse,
   KafkaConnectParam,
   DatahubTaskInfo,
@@ -112,7 +112,7 @@ import {
   CreateTopicResp,
   TaskStatusResponse,
   DescribeGroup,
-  SplitParam,
+  SecurityGroupRouteOperateResp,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
   ConsumerRecord,
@@ -134,6 +134,7 @@ import {
   PauseDatahubTaskResponse,
   CreateConnectResourceResponse,
   SubscribedInfo,
+  SplitParam,
   DescribeAccessPolicyRequest,
   InquiryDetailPrice,
   InquireCkafkaPriceResp,
@@ -160,6 +161,7 @@ import {
   DeleteUserResponse,
   CreateAclRequest,
   CreateConnectResourceRequest,
+  ModifyRouteSecurityGroupsResponse,
   CreateDatahubTaskRes,
   ModifyInstanceAttributesResponse,
   DescribeConnectInfoResultDTO,
@@ -167,6 +169,7 @@ import {
   TopicInSyncReplicaInfo,
   DescribeRegionRequest,
   CreateThrottleRuleRequest,
+  ModifyRouteSecurityGroupsRequest,
   DtsConnectParam,
   ModifyAccessPolicyRequest,
   GroupOffsetResponse,
@@ -196,6 +199,7 @@ import {
   InquiryBasePrice,
   GroupInfoResponse,
   BatchModifyGroupOffsetsRequest,
+  AssociateRoutesSecurityGroupRequest,
   InstanceResponse,
   DatahubTopicDTO,
   ModifyInstancePreRequest,
@@ -359,10 +363,13 @@ import {
   Partition,
   CreateAclResponse,
   TransformParam,
+  DisassociateRoutesSecurityGroupResponse,
   ModifyThrottleRuleRequest,
   DeleteInstancePreResponse,
+  AssociateRoutesSecurityGroupResponse,
   DatahubTopicResp,
   DescribeCvmInfoResponse,
+  DescribeRegionResponse,
   DeleteRouteTriggerTimeResponse,
   DealInstanceDTO,
   ThrottleRuleDetail,
@@ -561,13 +568,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例限流规则列表
+   * 修改ACL策略，目前只支持预设规则的是否应用到新增topic这一项的修改
    */
-  async DescribeThrottleRules(
-    req: DescribeThrottleRulesRequest,
-    cb?: (error: string, rep: DescribeThrottleRulesResponse) => void
-  ): Promise<DescribeThrottleRulesResponse> {
-    return this.request("DescribeThrottleRules", req, cb)
+  async ModifyAclRule(
+    req: ModifyAclRuleRequest,
+    cb?: (error: string, rep: ModifyAclRuleResponse) => void
+  ): Promise<ModifyAclRuleResponse> {
+    return this.request("ModifyAclRule", req, cb)
   }
 
   /**
@@ -711,13 +718,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 续费Ckafka实例, 目前只支持国内站包年包月实例续费
+   * 修改路由安全组关联
    */
-  async RenewCkafkaInstance(
-    req: RenewCkafkaInstanceRequest,
-    cb?: (error: string, rep: RenewCkafkaInstanceResponse) => void
-  ): Promise<RenewCkafkaInstanceResponse> {
-    return this.request("RenewCkafkaInstance", req, cb)
+  async ModifyRouteSecurityGroups(
+    req: ModifyRouteSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyRouteSecurityGroupsResponse) => void
+  ): Promise<ModifyRouteSecurityGroupsResponse> {
+    return this.request("ModifyRouteSecurityGroups", req, cb)
   }
 
   /**
@@ -768,6 +775,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatahubTasksResponse) => void
   ): Promise<DescribeDatahubTasksResponse> {
     return this.request("DescribeDatahubTasks", req, cb)
+  }
+
+  /**
+   * 绑定路由安全组
+   */
+  async AssociateRoutesSecurityGroup(
+    req: AssociateRoutesSecurityGroupRequest,
+    cb?: (error: string, rep: AssociateRoutesSecurityGroupResponse) => void
+  ): Promise<AssociateRoutesSecurityGroupResponse> {
+    return this.request("AssociateRoutesSecurityGroup", req, cb)
   }
 
   /**
@@ -891,6 +908,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解绑路由安全组
+   */
+  async DisassociateRoutesSecurityGroup(
+    req: DisassociateRoutesSecurityGroupRequest,
+    cb?: (error: string, rep: DisassociateRoutesSecurityGroupResponse) => void
+  ): Promise<DisassociateRoutesSecurityGroupResponse> {
+    return this.request("DisassociateRoutesSecurityGroup", req, cb)
+  }
+
+  /**
    * 获取DIP主题属性
    */
   async DescribeDatahubTopic(
@@ -958,6 +985,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConnectResourceResponse) => void
   ): Promise<DescribeConnectResourceResponse> {
     return this.request("DescribeConnectResource", req, cb)
+  }
+
+  /**
+   * 续费Ckafka实例, 目前只支持国内站包年包月实例续费
+   */
+  async RenewCkafkaInstance(
+    req: RenewCkafkaInstanceRequest,
+    cb?: (error: string, rep: RenewCkafkaInstanceResponse) => void
+  ): Promise<RenewCkafkaInstanceResponse> {
+    return this.request("RenewCkafkaInstance", req, cb)
   }
 
   /**
@@ -1121,13 +1158,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改ACL策略，目前只支持预设规则的是否应用到新增topic这一项的修改
+   * 获取实例限流规则列表
    */
-  async ModifyAclRule(
-    req: ModifyAclRuleRequest,
-    cb?: (error: string, rep: ModifyAclRuleResponse) => void
-  ): Promise<ModifyAclRuleResponse> {
-    return this.request("ModifyAclRule", req, cb)
+  async DescribeThrottleRules(
+    req: DescribeThrottleRulesRequest,
+    cb?: (error: string, rep: DescribeThrottleRulesResponse) => void
+  ): Promise<DescribeThrottleRulesResponse> {
+    return this.request("DescribeThrottleRules", req, cb)
   }
 
   /**
