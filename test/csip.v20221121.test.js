@@ -118,6 +118,16 @@ it("csip.v20221121.DescribeAccessKeyUserList", async function () {
     }
 })
 
+it("csip.v20221121.ModifyNFSScanHost", async function () {
+    try {
+       const data = await client.ModifyNFSScanHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeHostVulOverview", async function () {
     try {
        const data = await client.DescribeHostVulOverview({})
@@ -131,6 +141,16 @@ it("csip.v20221121.DescribeHostVulOverview", async function () {
 it("csip.v20221121.DescribeDspmApproveHistory", async function () {
     try {
        const data = await client.DescribeDspmApproveHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyCSIPLicenseUnBinds", async function () {
+    try {
+       const data = await client.ModifyCSIPLicenseUnBinds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +198,9 @@ it("csip.v20221121.DeleteEdrLogCollectPaths", async function () {
     }
 })
 
-it("csip.v20221121.DescribeRiskCenterWebsiteRiskList", async function () {
+it("csip.v20221121.DescribeMultiCloudAssetCount", async function () {
     try {
-       const data = await client.DescribeRiskCenterWebsiteRiskList({})
+       const data = await client.DescribeMultiCloudAssetCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +221,26 @@ it("csip.v20221121.CreateCosObjectScanTask", async function () {
 it("csip.v20221121.DescribeRiskItemList", async function () {
     try {
        const data = await client.DescribeRiskItemList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeNotifyAgentOfflineDuration", async function () {
+    try {
+       const data = await client.DescribeNotifyAgentOfflineDuration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DeleteWebhookPolicies", async function () {
+    try {
+       const data = await client.DeleteWebhookPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +308,29 @@ it("csip.v20221121.ModifyDspmAssetAccountPrivileges", async function () {
     }
 })
 
+it("csip.v20221121.DescribeSecurityScoreOverview", async function () {
+    try {
+       const data = await client.DescribeSecurityScoreOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeScanTaskList", async function () {
     try {
        const data = await client.DescribeScanTaskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyWebhookPolicyStatus", async function () {
+    try {
+       const data = await client.ModifyWebhookPolicyStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +411,16 @@ it("csip.v20221121.DescribeCspmShardConfig", async function () {
 it("csip.v20221121.DescribeDspmAssetDatabaseList", async function () {
     try {
        const data = await client.DescribeDspmAssetDatabaseList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeSCFNamespaceList", async function () {
+    try {
+       const data = await client.DescribeSCFNamespaceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,6 +608,16 @@ it("csip.v20221121.ModifyReverseShellSystemPolicyConfig", async function () {
     }
 })
 
+it("csip.v20221121.DescribePublicCloudAssets", async function () {
+    try {
+       const data = await client.DescribePublicCloudAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeDspmAssetLoginCredential", async function () {
     try {
        const data = await client.DescribeDspmAssetLoginCredential({})
@@ -658,9 +738,29 @@ it("csip.v20221121.CreateSkillScan", async function () {
     }
 })
 
+it("csip.v20221121.DescribeBaselineSubTaskList", async function () {
+    try {
+       const data = await client.DescribeBaselineSubTaskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.CreateExposuresExportJob", async function () {
     try {
        const data = await client.CreateExposuresExportJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyBaselineSyncConf", async function () {
+    try {
+       const data = await client.ModifyBaselineSyncConf({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,6 +928,16 @@ it("csip.v20221121.DescribeClusterContainerList", async function () {
     }
 })
 
+it("csip.v20221121.ModifyCSIPRaspLicenseBinds", async function () {
+    try {
+       const data = await client.ModifyCSIPRaspLicenseBinds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeCloudAssets", async function () {
     try {
        const data = await client.DescribeCloudAssets({})
@@ -901,6 +1011,16 @@ it("csip.v20221121.DescribeVulScanTaskDetail", async function () {
 it("csip.v20221121.ModifyNetAttackSetting", async function () {
     try {
        const data = await client.ModifyNetAttackSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeBaselinePolicyNameExistAppidList", async function () {
+    try {
+       const data = await client.DescribeBaselinePolicyNameExistAppidList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1051,6 +1171,16 @@ it("csip.v20221121.DescribeCFGRiskReportStatistics", async function () {
 it("csip.v20221121.DescribeDynamicAssets", async function () {
     try {
        const data = await client.DescribeDynamicAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyWebhookPolicy", async function () {
+    try {
+       const data = await client.ModifyWebhookPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1288,6 +1418,16 @@ it("csip.v20221121.ModifyAISchedule", async function () {
     }
 })
 
+it("csip.v20221121.DescribeSecurityScoreRule", async function () {
+    try {
+       const data = await client.DescribeSecurityScoreRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DeleteDomainAndIp", async function () {
     try {
        const data = await client.DeleteDomainAndIp({})
@@ -1468,6 +1608,16 @@ it("csip.v20221121.DescribeClusterAssetSyncTaskStatus", async function () {
     }
 })
 
+it("csip.v20221121.ModifyBaselinePolicyEnable", async function () {
+    try {
+       const data = await client.ModifyBaselinePolicyEnable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.ModifyNotifySettingAlert", async function () {
     try {
        const data = await client.ModifyNotifySettingAlert({})
@@ -1568,9 +1718,9 @@ it("csip.v20221121.DescribeNotifyAssetConfig", async function () {
     }
 })
 
-it("csip.v20221121.ModifyDspmApplyingIdentifyComplianceGroup", async function () {
+it("csip.v20221121.DescribeBaselinePolicyItemList", async function () {
     try {
-       const data = await client.ModifyDspmApplyingIdentifyComplianceGroup({})
+       const data = await client.DescribeBaselinePolicyItemList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1741,6 +1891,16 @@ it("csip.v20221121.DescribeEdrAlertMultiAttackStages", async function () {
 it("csip.v20221121.CreateDspmAssetsExportJob", async function () {
     try {
        const data = await client.CreateDspmAssetsExportJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeWebhookReceiverList", async function () {
+    try {
+       const data = await client.DescribeWebhookReceiverList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2118,6 +2278,16 @@ it("csip.v20221121.ModifyDspmRiskStrategy", async function () {
     }
 })
 
+it("csip.v20221121.DescribeBaselineFixRecordList", async function () {
+    try {
+       const data = await client.DescribeBaselineFixRecordList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.CreateAssetTag", async function () {
     try {
        const data = await client.CreateAssetTag({})
@@ -2278,6 +2448,16 @@ it("csip.v20221121.DescribeExposureAutoTagAttribute", async function () {
     }
 })
 
+it("csip.v20221121.DescribeCSIPLicenseBindSchedule", async function () {
+    try {
+       const data = await client.DescribeCSIPLicenseBindSchedule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeLoginWhiteCombinedList", async function () {
     try {
        const data = await client.DescribeLoginWhiteCombinedList({})
@@ -2378,9 +2558,9 @@ it("csip.v20221121.StartOrModifyProcessDaemon", async function () {
     }
 })
 
-it("csip.v20221121.ModifyEdrAlertIsolation", async function () {
+it("csip.v20221121.DeleteWebhookReceivers", async function () {
     try {
-       const data = await client.ModifyEdrAlertIsolation({})
+       const data = await client.DeleteWebhookReceivers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2501,6 +2681,16 @@ it("csip.v20221121.CreateDspmIdentifyComplianceRuleRelation", async function () 
 it("csip.v20221121.DescribeRaspLicenseList", async function () {
     try {
        const data = await client.DescribeRaspLicenseList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeSecurityRiskTrend", async function () {
+    try {
+       const data = await client.DescribeSecurityRiskTrend({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2688,6 +2878,16 @@ it("csip.v20221121.DescribeClusterContainerComponentList", async function () {
     }
 })
 
+it("csip.v20221121.DescribeRiskCenterWebsiteRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterWebsiteRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeVulHostRelateComponent", async function () {
     try {
        const data = await client.DescribeVulHostRelateComponent({})
@@ -2791,6 +2991,16 @@ it("csip.v20221121.ModifyEDRRule", async function () {
 it("csip.v20221121.DeleteVulWhitelist", async function () {
     try {
        const data = await client.DeleteVulWhitelist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeKeySandboxCredentialList", async function () {
+    try {
+       const data = await client.DescribeKeySandboxCredentialList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2918,9 +3128,9 @@ it("csip.v20221121.DeleteDspmIdentifyLevelGroup", async function () {
     }
 })
 
-it("csip.v20221121.ModifyNFSScanHost", async function () {
+it("csip.v20221121.ModifyBaselineUserWeakPasswordConf", async function () {
     try {
-       const data = await client.ModifyNFSScanHost({})
+       const data = await client.ModifyBaselineUserWeakPasswordConf({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3021,6 +3231,16 @@ it("csip.v20221121.DescribeVpcAssets", async function () {
 it("csip.v20221121.DescribeEDRScanTaskDetail", async function () {
     try {
        const data = await client.DescribeEDRScanTaskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyEdrAlertIsolation", async function () {
+    try {
+       const data = await client.ModifyEdrAlertIsolation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3268,6 +3488,16 @@ it("csip.v20221121.ExportClientSettingHostList", async function () {
     }
 })
 
+it("csip.v20221121.DescribeDefaultSecurityScoreRule", async function () {
+    try {
+       const data = await client.DescribeDefaultSecurityScoreRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeNetAttackSetting", async function () {
     try {
        const data = await client.DescribeNetAttackSetting({})
@@ -3308,9 +3538,29 @@ it("csip.v20221121.ModifyExposureAutoTagRule", async function () {
     }
 })
 
-it("csip.v20221121.DescribeKeySandboxCredentialList", async function () {
+it("csip.v20221121.ModifyCSIPRaspLicenseUnBinds", async function () {
     try {
-       const data = await client.DescribeKeySandboxCredentialList({})
+       const data = await client.ModifyCSIPRaspLicenseUnBinds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ScanEDRTaskAgain", async function () {
+    try {
+       const data = await client.ScanEDRTaskAgain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.CopyBaselinePolicy", async function () {
+    try {
+       const data = await client.CopyBaselinePolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3321,6 +3571,16 @@ it("csip.v20221121.DescribeKeySandboxCredentialList", async function () {
 it("csip.v20221121.DescribeDspmSyncAssetsStatus", async function () {
     try {
        const data = await client.DescribeDspmSyncAssetsStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ScanBaselineRiskList", async function () {
+    try {
+       const data = await client.ScanBaselineRiskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3341,6 +3601,16 @@ it("csip.v20221121.DescribeAbTestUser", async function () {
 it("csip.v20221121.DescribeUserCallRecord", async function () {
     try {
        const data = await client.DescribeUserCallRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeBaselinePolicyCategoryList", async function () {
+    try {
+       const data = await client.DescribeBaselinePolicyCategoryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3558,6 +3828,16 @@ it("csip.v20221121.CreateScanTask", async function () {
     }
 })
 
+it("csip.v20221121.TestWebhookReceiver", async function () {
+    try {
+       const data = await client.TestWebhookReceiver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeCFGRiskStatistics", async function () {
     try {
        const data = await client.DescribeCFGRiskStatistics({})
@@ -3611,6 +3891,16 @@ it("csip.v20221121.DescribeListenerList", async function () {
 it("csip.v20221121.DescribeLoginTypeGlobalConf", async function () {
     try {
        const data = await client.DescribeLoginTypeGlobalConf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeWebhookPolicyList", async function () {
+    try {
+       const data = await client.DescribeWebhookPolicyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3938,6 +4228,16 @@ it("csip.v20221121.DescribeTopAttackInfo", async function () {
     }
 })
 
+it("csip.v20221121.ModifyAssetTags", async function () {
+    try {
+       const data = await client.ModifyAssetTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeClusterContainerPortList", async function () {
     try {
        const data = await client.DescribeClusterContainerPortList({})
@@ -4001,6 +4301,16 @@ it("csip.v20221121.DescribeNatRules", async function () {
 it("csip.v20221121.ModifyProtectionSetting", async function () {
     try {
        const data = await client.ModifyProtectionSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyPayConfig", async function () {
+    try {
+       const data = await client.ModifyPayConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -4148,6 +4458,16 @@ it("csip.v20221121.DescribeCosActionList", async function () {
     }
 })
 
+it("csip.v20221121.ModifyNotifyAgentOfflineDuration", async function () {
+    try {
+       const data = await client.ModifyNotifyAgentOfflineDuration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeBaselineUserOtherConf", async function () {
     try {
        const data = await client.DescribeBaselineUserOtherConf({})
@@ -4268,6 +4588,16 @@ it("csip.v20221121.DescribeSourceIPAsset", async function () {
     }
 })
 
+it("csip.v20221121.ModifyBaselineUserOtherConf", async function () {
+    try {
+       const data = await client.ModifyBaselineUserOtherConf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.CreateIaCFileExportJob", async function () {
     try {
        const data = await client.CreateIaCFileExportJob({})
@@ -4378,6 +4708,16 @@ it("csip.v20221121.DescribeClbTargets", async function () {
     }
 })
 
+it("csip.v20221121.ScanBaselinePolicyList", async function () {
+    try {
+       const data = await client.ScanBaselinePolicyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.CreateCosAssetSyncTask", async function () {
     try {
        const data = await client.CreateCosAssetSyncTask({})
@@ -4438,9 +4778,9 @@ it("csip.v20221121.DeleteCSIPMalwareScanTask", async function () {
     }
 })
 
-it("csip.v20221121.ScanEDRTaskAgain", async function () {
+it("csip.v20221121.ModifyWebhookReceiver", async function () {
     try {
-       const data = await client.ScanEDRTaskAgain({})
+       const data = await client.ModifyWebhookReceiver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -4498,6 +4838,16 @@ it("csip.v20221121.DescribeDspmRiskDetail", async function () {
     }
 })
 
+it("csip.v20221121.DescribeSCFFunctionVersionList", async function () {
+    try {
+       const data = await client.DescribeSCFFunctionVersionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeClusterNamespaceList", async function () {
     try {
        const data = await client.DescribeClusterNamespaceList({})
@@ -4541,6 +4891,16 @@ it("csip.v20221121.ModifyExposureAutoTagRuleStatus", async function () {
 it("csip.v20221121.DescribeBaselinePolicyList", async function () {
     try {
        const data = await client.DescribeBaselinePolicyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyDspmApplyingIdentifyComplianceGroup", async function () {
+    try {
+       const data = await client.ModifyDspmApplyingIdentifyComplianceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -4988,9 +5348,9 @@ it("csip.v20221121.DescribeCosAuditAppIdList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeBaselineMainTaskList", async function () {
+it("csip.v20221121.DescribeBaselineCalculatingStatisticsPolicyIDList", async function () {
     try {
-       const data = await client.DescribeBaselineMainTaskList({})
+       const data = await client.DescribeBaselineCalculatingStatisticsPolicyIDList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -5001,6 +5361,16 @@ it("csip.v20221121.DescribeBaselineMainTaskList", async function () {
 it("csip.v20221121.CreateDspmApproveHistoryExportJob", async function () {
     try {
        const data = await client.CreateDspmApproveHistoryExportJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeBaselineMainTaskList", async function () {
+    try {
+       const data = await client.DescribeBaselineMainTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -5031,6 +5401,26 @@ it("csip.v20221121.DescribeRiskScanCronConfig", async function () {
 it("csip.v20221121.CreateDspmIdentifyCategory", async function () {
     try {
        const data = await client.CreateDspmIdentifyCategory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeLicenseStatus", async function () {
+    try {
+       const data = await client.DescribeLicenseStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DeleteBaselineSelfDefinedPolicyList", async function () {
+    try {
+       const data = await client.DeleteBaselineSelfDefinedPolicyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -5418,6 +5808,16 @@ it("csip.v20221121.ExportEDRRules", async function () {
     }
 })
 
+it("csip.v20221121.ModifySecurityScoreRule", async function () {
+    try {
+       const data = await client.ModifySecurityScoreRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.ModifyBruteAttackRules", async function () {
     try {
        const data = await client.ModifyBruteAttackRules({})
@@ -5451,6 +5851,26 @@ it("csip.v20221121.ResetDspmAssetAccountPassword", async function () {
 it("csip.v20221121.DescribeDspmIdentifyInfo", async function () {
     try {
        const data = await client.DescribeDspmIdentifyInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyCSIPLicenseBinds", async function () {
+    try {
+       const data = await client.ModifyCSIPLicenseBinds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeSCFAliasList", async function () {
+    try {
+       const data = await client.DescribeSCFAliasList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -5568,9 +5988,9 @@ it("csip.v20221121.DescribeBaselineCategoryItemList", async function () {
     }
 })
 
-it("csip.v20221121.ModifyAssetTags", async function () {
+it("csip.v20221121.DescribeSCFFunctionList", async function () {
     try {
-       const data = await client.ModifyAssetTags({})
+       const data = await client.DescribeSCFFunctionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

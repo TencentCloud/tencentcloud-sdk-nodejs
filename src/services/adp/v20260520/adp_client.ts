@@ -18,347 +18,363 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  AppTriggerRunLog,
-  DeleteAgentRequest,
-  ConversationContent,
-  CamAuthConfig,
-  FavoriteSkillRequest,
-  DescribeSkillReferenceListResponse,
-  ConversationRecordErrorInfo,
-  DescribeUsageSummaryListRequest,
-  ModelUsageSummary,
-  AgentRelease,
-  AgentToolInputParameter,
-  UnfavoritePluginResponse,
-  DescribeVariableListResponse,
-  SkillClassification,
-  ModifySpaceRequest,
   DeleteSkillShareRequest,
-  RunAppTriggerNowResponse,
-  DescribeAppTriggerRunLogListRequest,
-  GenerateModel,
-  DescribeSkillDetailResponse,
+  ToolConfig,
+  SkillClassification,
   AgentAdvancedConfig,
-  ResourceConsumption,
-  DeleteAppTriggerRequest,
-  AppShareWhitelistItem,
-  ModifyVariableRequest,
-  ReleaseSummary,
-  CreateWebSocketTokenRequest,
-  ResetConversationResponse,
+  PluginStatistics,
   IntentAchievementInfo,
-  OnceSchedule,
-  UnfavoriteSkillResponse,
-  DeleteSkillResponse,
-  ModelProperty,
-  ModifyConversationRequest,
-  MultiModalUnderstandingModel,
-  DescribeAgentReleasePreviewListRequest,
-  DescribeReleaseSummaryResponse,
+  RollbackReleaseRequest,
   DescribeModelListResponse,
-  ResponseParam,
-  DescribeAppTriggerInstanceRequest,
   AppModelConfig,
-  MultiModalQAModel,
-  PauseAppTriggerRequest,
-  CreateSpaceRequest,
-  AgentModelConfig,
-  ReleaseRecord,
-  Identity,
-  SearchResourceStatusInfo,
-  DialogCustomConfig,
+  Plugin,
   ApiKeyAuthConfig,
-  CreateConversationResponse,
-  CopyAgentFromAppRequest,
   DescribeConversationRequest,
-  Variable,
-  AppTriggerWebhookParamSchemaConfig,
   Conversation,
   AuthConfig,
-  ReleaseSkillResponse,
   AppShareAccessControl,
-  PluginOperation,
-  AppSharedKbInfo,
-  ModifyAppResponse,
-  FavoriteSkillResponse,
-  DailySchedule,
-  ToolExample,
-  DescribeAccountListRequest,
-  PromptRewriteModel,
-  ManualOnlySchedule,
-  DescribeAppRequest,
-  DeleteAppResponse,
-  DescribeConversationListResponse,
-  CreateAppResponse,
-  DescribeAppSummaryListRequest,
-  CreateConversationRequest,
-  DescribeReleaseListRequest,
-  CreateWebSocketTokenResponse,
-  DescribeConsumptionDetailListRequest,
-  AuditLogMetaField,
-  SkillShare,
-  DescribeAgentDetailRequest,
+  DialogCustomConfig,
   DescribeMetricOverviewListResponse,
-  SkillReferenceSummary,
-  ModelDeveloperBasic,
-  DescribeConversationMessageListResponse,
-  ReleaseSkillRequest,
-  AppExperienceConfig,
-  PluginUsageDetail,
-  DescribeSkillCategoryListResponse,
+  DescribeAppSummaryListRequest,
+  ExecuteConfig,
   TriggerConfig,
-  DescribeReleaseSummaryRequest,
-  AppWorkflowConfig,
-  ConversationAgentTask,
-  ModifyPluginRequest,
-  AppTriggerScheduleStatus,
-  PluginParam,
-  CreateReleaseRequest,
-  CreateWorkspaceCredentialRequest,
-  DeleteSkillRequest,
-  ModifyAppTriggerRequest,
+  DescribeModelListRequest,
+  DescribeMsgRecordCategoryListResponse,
+  DeleteVariableResponse,
   ApiPluginConfig,
-  DescribeConversationListRequest,
+  AppealingStatus,
   DescribeVariableResponse,
   CodeToolConfig,
-  ModelDetailInfo,
-  CreateAgentRequest,
-  MultiAgentConfig,
-  ConversationExperience,
-  ClawAgentAgentTeamConfig,
-  DescribeSkillReferenceListRequest,
-  DeletePluginRequest,
-  AIOptimizeModel,
-  DuplexBilling,
-  ConversationResetInfo,
-  ModelParameter,
-  ExecuteConfig,
-  ModifySpaceResponse,
-  SkillDetail,
-  DescribePluginSummaryListResponse,
-  AppTriggerParamBindingConfig,
+  DescribeMsgRecordListRequest,
+  WeeklyTime,
   UsageSummary,
-  DescribeAppTriggerRequest,
-  ResumeAppTriggerResponse,
-  AgentPlugin,
-  AppSubStatusInfo,
-  CorpShareConfig,
-  AppSummary,
-  DescribeVariableListRequest,
-  AppTriggerSummary,
-  ConversationWorkspace,
-  BillingAttribute,
-  SkillReferenceGroup,
+  SkillReferenceSummary,
+  ModifyAppTriggerRequest,
   DescribeConcurrencyLimitDetailListResponse,
-  AgentPluginConfig,
-  VoiceConfig,
-  CallSource,
   AgentSpec,
-  ModifyAppRequest,
   ClawAgentConfig,
-  ConsumptionUsage,
-  ModelLimit,
-  AppTriggerPromptExecuteConfig,
-  ConversationQuoteInfo,
-  ModifyAppTriggerResponse,
-  AppSecretInfo,
-  AgentDetail,
+  CreatePluginRequest,
   ThinkModel,
   DeleteAgentResponse,
-  ModifyConversationResponse,
-  DescribeSpaceListResponse,
-  ConversationRecordSummary,
-  CreateAppRequest,
-  ConversationRecordTimeUsage,
-  App,
+  RetryReleaseRequest,
+  AppConfig,
   AppAuxiliaryInfo,
-  ConversationRecordTokenUsage,
-  AppTriggerWebhookStatus,
-  PluginStatistics,
-  AppStatusInfo,
-  ComplexBilling,
-  FieldMask,
-  AppAppeal,
+  ModifyConversationRequest,
   DescribeAgentReleasePreviewListResponse,
-  DeleteConversationResponse,
-  DescribeAuditLogMetaResponse,
-  TimerScheduleConfig,
-  DescribeVariableRequest,
-  IntervalSchedule,
-  AppToolConfig,
-  ResetConversationRequest,
-  ModifyAgentResponse,
-  DescribeLatestReleaseResponse,
-  RollbackReleaseResponse,
-  SkillNotice,
   DescribeUsageDetailListResponse,
-  AppTriggerParamSchema,
   DescribeAppTriggerResponse,
-  ToolBilling,
-  SingleWorkflowConfig,
-  TimerPushConfig,
-  BasicBilling,
-  DeleteSkillShareResponse,
-  DescribePluginRequest,
-  AgentToolConfig,
-  PauseAppTriggerResponse,
-  UsageDetail,
-  CreatePluginResponse,
   ModifyVariableResponse,
   AgentSkillConfig,
   ModifyAgentRequest,
-  DescribeModelListRequest,
-  DescribeLatestReleaseRequest,
+  PluginOperation,
   AppWebSearchConfig,
-  DescribeSystemVariableListResponse,
-  CreatePluginRequest,
-  ResumeAppTriggerRequest,
-  AppTriggerParamBindingValue,
   AgentProfile,
-  OAuthConfig,
-  CopyAgentFromAppResponse,
-  CreateWorkspaceCredentialResponse,
-  WeeklySchedule,
-  ModelParams,
-  ViewScope,
-  RetryReleaseResponse,
-  AgentInput,
-  AICallConfig,
-  AgentReleasePreview,
-  DescribeAgentDetailResponse,
-  AgentToolOutputParameter,
-  DeleteVariableResponse,
-  DescribeAccountListResponse,
-  CreateSkillShareResponse,
-  TimeRange,
+  ModelLimit,
   RunAppTriggerNowRequest,
   AppTriggerWebhookConfig,
-  AgentSummary,
-  AgentUserInputValue,
-  DeleteAppTriggerResponse,
-  MetricOverview,
-  CreateAppTriggerResponse,
+  MsgRecordSource,
+  MsgRecordResult,
   CreateVariableResponse,
+  AppShareURLInfo,
+  ModelProperty,
+  CreateReleaseResponse,
+  DescribeConversationListRequest,
+  ModelDetailInfo,
+  CreateAppRequest,
+  DescribeConcurrencyLimitDetailListRequest,
+  MCPPluginConfig,
+  CreateMsgRecordCategoryResponse,
+  DeleteVariableRequest,
+  ReleaseSkillResponse,
+  AppTriggerInstance,
+  DeleteConversationRequest,
+  DescribeSkillSummaryListRequest,
+  CopyAppResponse,
+  ComplexBillingItem,
+  BackgroundImage,
+  DescribeSkillCategoryListRequest,
+  Model,
+  ModifySkillResponse,
+  DescribeSpaceListRequest,
+  AppTriggerRunLog,
+  ConversationContent,
+  CamAuthConfig,
+  DescribeSkillReferenceListResponse,
+  UnfavoritePluginResponse,
+  ModifySpaceRequest,
+  DeleteMsgRecordCategoryResponse,
+  GenerateModel,
+  FavoriteSkillResponse,
+  SkillShare,
+  AppShareWhitelistItem,
+  CreateWebSocketTokenRequest,
+  DeleteSkillResponse,
+  DescribeAgentReleasePreviewListRequest,
+  PauseAppTriggerRequest,
+  CopyAgentFromAppRequest,
+  ModelParameter,
+  ModifyAppResponse,
+  DescribeAccountListRequest,
+  DescribeConversationListResponse,
+  MultiAgentConfig,
+  CreateWebSocketTokenResponse,
+  DescribeSkillCategoryListResponse,
+  TimeRange,
+  DescribeConsumptionDetailListResponse,
+  CreatePluginResponse,
+  ClawAgentAgentTeamConfig,
+  DescribeSystemVariableListResponse,
+  AgentPlugin,
+  ConversationResetInfo,
+  ModifyConversationResponse,
+  ConversationQuoteInfo,
+  DescribeSpaceListResponse,
+  ConversationRecordSummary,
+  ConversationRecordTimeUsage,
+  App,
+  CronSchedule,
+  DescribeAppTriggerRunLogListResponse,
+  FileParseModel,
+  AppAppeal,
+  TimerScheduleConfig,
+  DigitalHumanConfig,
+  DescribeLatestReleaseResponse,
+  SkillNotice,
+  ResponseParam,
+  SingleWorkflowConfig,
+  AgentPluginConfig,
+  PluginSummary,
+  CreateWorkspaceCredentialResponse,
+  ModifyPluginRequest,
+  DescribeAccountListResponse,
+  AgentUserInputValue,
+  SkillProfile,
   DescribeMetricOverviewListRequest,
   ApiToolConfig,
-  WeeklyTime,
-  ModifySkillResponse,
-  ToolConfig,
-  ConversationReference,
-  AppShareURLInfo,
-  DescribeConsumptionDetailListResponse,
+  ToolExample,
+  DescribeAppTriggerRunLogListRequest,
+  ResourceConsumption,
   ModelBasic,
-  UnfavoriteSkillRequest,
-  SkillAnalysisInfo,
-  ModifyPluginResponse,
-  CreateReleaseResponse,
-  PluginSummary,
-  DescribeAppTriggerInstanceResponse,
-  UnfavoritePluginRequest,
+  ModifyAppRequest,
   ModifySkillRequest,
-  RetryReleaseRequest,
   CreateSpaceResponse,
-  AppealingStatus,
-  InputBoxConfig,
-  CreateSkillShareRequest,
-  DeletePluginResponse,
   CreateVariableRequest,
-  ConsumptionDetail,
   ConsumptionClassification,
-  CreateSkillResponse,
-  DescribeAuditLogListRequest,
-  DescribePluginSummaryListRequest,
-  MCPPluginConfig,
-  DescribeAppTriggerSummaryListResponse,
   DescribeSystemVariableListRequest,
-  SkillProfile,
-  AppConfig,
-  SystemVariable,
-  AppGreetingConfig,
-  DescribeAppTriggerSummaryListRequest,
-  ModelStatus,
-  SpecialStatusInfo,
-  Space,
-  PluginUsageSummary,
-  AppMetadata,
+  DescribeReleaseSummaryResponse,
+  MCPToolConfig,
   SkillSummary,
   AgentCollaborationConfig,
-  DeleteVariableRequest,
-  CreateAppTriggerRequest,
-  CronSchedule,
-  AccountInfo,
-  AppTriggerInstance,
-  AppPluginConfig,
-  AppTriggerScheduleConfig,
-  CreateSkillRequest,
-  AppMemoryConfig,
-  AgentToolBasicConfig,
-  SupportedFileType,
-  TriggerStatus,
+  ModifyAppTriggerResponse,
   RoleConfig,
-  CreateAgentResponse,
-  DescribeAgentSummaryListRequest,
-  AppTriggerParamBinding,
-  AgentSkill,
-  DeleteConversationRequest,
-  PluginConfig,
-  DescribeConcurrencyLimitDetailListRequest,
-  ModelBadge,
-  Plugin,
-  DescribeAppTriggerRunLogListResponse,
+  DescribeAuditLogListResponse,
+  DescribeUsageDetailListRequest,
+  DescribeUsageSummaryListResponse,
   DescribeAppResponse,
   DescribeAuditLogMetaRequest,
   DeleteAppRequest,
-  DescribeSkillSummaryListRequest,
   DescribeAppSummaryListResponse,
   ClawAgentLongMemoryConfig,
   FavoritePluginRequest,
-  PlatformUsageSummary,
-  ConcurrencyLimitDetail,
-  FileParseModel,
-  CopyAppResponse,
-  AgentPluginParameter,
+  SupportedFileType,
+  SkillCategory,
+  AgentTool,
+  ReleaseSkillRequest,
+  DescribeVariableRequest,
+  UsageDetail,
+  AuditLog,
+  UnfavoriteSkillRequest,
+  InputBoxConfig,
+  AppTrigger,
+  DescribeAgentSummaryListResponse,
+  SkillVersion,
+  ModifyAgentResponse,
+  DescribeMsgRecordListResponse,
+  ModelUsageSummary,
+  DescribeVariableListResponse,
+  DescribeReleaseListRequest,
+  ConversationReference,
+  MsgRecord,
+  DeleteMsgRecordCategoryRequest,
+  ModifyMsgRecordCategoryResponse,
+  UnfavoritePluginRequest,
+  AgentModelConfig,
   ModelUsageDetail,
-  CopyAppRequest,
-  RollbackReleaseRequest,
+  CreateConversationResponse,
+  DescribeSkillDetailRequest,
+  Variable,
+  FavoriteSkillRequest,
+  AppSharedKbInfo,
+  ModifyMsgRecordCategoryRequest,
+  ResetConversationResponse,
+  DailySchedule,
+  AppSubStatusInfo,
+  ManualOnlySchedule,
+  DescribePluginSummaryListRequest,
+  CreateAppResponse,
+  AuditLogMetaField,
+  ModelDeveloperBasic,
+  AppExperienceConfig,
+  ResumeAppTriggerRequest,
+  PluginParam,
+  CreateReleaseRequest,
+  CreateWorkspaceCredentialRequest,
+  BillingAttribute,
+  DescribeAppTriggerSummaryListResponse,
+  CreateAgentRequest,
+  ConversationExperience,
+  DeletePluginResponse,
+  DeletePluginRequest,
+  AIOptimizeModel,
+  Tool,
+  ModifySpaceResponse,
+  SkillDetail,
+  DescribePluginSummaryListResponse,
+  PromptRewriteModel,
+  ViewScope,
+  CreateConversationRequest,
+  DescribeMsgRecordCategoryListRequest,
+  CallSource,
+  ConsumptionUsage,
+  AppTriggerPromptExecuteConfig,
+  DeleteSkillShareResponse,
+  AgentToolBasicConfig,
+  AppStatusInfo,
+  ComplexBilling,
+  DeleteConversationResponse,
+  DescribeAuditLogMetaResponse,
+  MultiModalQAModel,
+  TimerPushConfig,
+  AgentToolConfig,
+  OAuthConfig,
+  WeeklySchedule,
+  ModelParams,
+  AgentInput,
+  AgentReleasePreview,
+  AgentToolOutputParameter,
+  Identity,
+  DescribeAgentDetailResponse,
+  CreateAppTriggerResponse,
+  SystemVariable,
+  ModifyPluginResponse,
+  DescribeAppTriggerInstanceResponse,
+  CreateSkillShareRequest,
+  ConsumptionDetail,
+  AppGreetingConfig,
+  DescribeAppTriggerSummaryListRequest,
+  AppTriggerScheduleConfig,
+  AccountInfo,
+  CreateSkillRequest,
+  Sort,
+  CreateAgentResponse,
+  FavoritePluginResponse,
+  MetricOverview,
+  AgentSkill,
+  ModelBadge,
+  PlatformUsageSummary,
   AgentSystemVariable,
   AppOperation,
   PluginProfile,
-  DeleteSpaceRequest,
-  FavoritePluginResponse,
-  SkillCategory,
   DescribePluginResponse,
-  DescribeReleaseListResponse,
-  ComplexBillingItem,
-  DescribeAuditLogListResponse,
-  BackgroundImage,
-  DescribeSkillDetailRequest,
-  DescribeSkillCategoryListRequest,
-  AppTriggerWorkflowExecuteConfig,
-  DescribeUsageDetailListRequest,
-  Model,
-  AuditLog,
   DescribeSkillSummaryListResponse,
   DescribeConversationMessageListRequest,
-  Filter,
-  DigitalHumanConfig,
-  ModelProviderBasic,
-  MCPToolConfig,
-  ConversationMessage,
+  DescribeReleaseListResponse,
+  DeleteAgentRequest,
   RequestParam,
-  DescribeConversationResponse,
-  AppTrigger,
-  ToolSummary,
-  DescribeAgentSummaryListResponse,
+  ConversationRecordErrorInfo,
+  DescribeUsageSummaryListRequest,
+  AgentRelease,
+  AgentToolInputParameter,
+  RunAppTriggerNowResponse,
+  DescribeSkillDetailResponse,
+  DeleteAppTriggerRequest,
+  ReleaseSummary,
+  OnceSchedule,
+  UnfavoriteSkillResponse,
+  AppTriggerParamSchema,
+  CreateSpaceRequest,
+  SearchResourceStatusInfo,
+  FieldMask,
+  AppTriggerWebhookParamSchemaConfig,
+  ConversationMessage,
+  DescribeConsumptionDetailListRequest,
+  DescribeVariableListRequest,
+  DescribeConversationMessageListResponse,
+  AppToolConfig,
+  RollbackReleaseResponse,
+  DescribeReleaseSummaryRequest,
+  AppWorkflowConfig,
+  ConversationAgentTask,
+  AppTriggerScheduleStatus,
+  DeleteSkillRequest,
+  DescribePluginRequest,
   PluginUserState,
-  AppAdvancedConf,
-  DescribeSpaceListRequest,
-  DescribeUsageSummaryListResponse,
-  AgentTool,
-  SkillVersion,
-  AppModeConfig,
-  Tool,
+  DuplexBilling,
+  MultiModalUnderstandingModel,
+  DescribeAppTriggerRequest,
+  CorpShareConfig,
+  AppSummary,
+  AppTriggerSummary,
+  ConversationWorkspace,
+  SkillReferenceGroup,
   DeleteSpaceResponse,
+  DescribeAppTriggerInstanceRequest,
+  AppSecretInfo,
+  AgentDetail,
+  ModifyVariableRequest,
+  DeleteAppResponse,
+  CreateAppTriggerRequest,
+  AppTriggerWebhookStatus,
+  ResumeAppTriggerResponse,
+  CategoryPermission,
+  ResetConversationRequest,
+  ToolBilling,
+  BasicBilling,
+  DescribeAppRequest,
+  IntervalSchedule,
+  DescribeLatestReleaseRequest,
+  AppTriggerParamBindingValue,
+  CopyAgentFromAppResponse,
+  RetryReleaseResponse,
+  AICallConfig,
+  CreateSkillShareResponse,
+  AgentSummary,
+  DeleteAppTriggerResponse,
+  Filter,
+  ToolSummary,
+  MsgRecordCategory,
+  DescribeSkillReferenceListRequest,
+  AppTriggerParamBindingConfig,
+  CreateSkillResponse,
+  DescribeAuditLogListRequest,
+  VoiceConfig,
+  DescribeConversationResponse,
+  Space,
+  PluginUsageSummary,
+  AppMetadata,
+  AppPluginConfig,
+  ModelStatus,
+  AppMemoryConfig,
+  TriggerStatus,
+  DescribeAgentSummaryListRequest,
+  AppTriggerParamBinding,
+  PluginConfig,
+  ConcurrencyLimitDetail,
+  CreateMsgRecordCategoryRequest,
+  DescribeAgentDetailRequest,
+  AgentPluginParameter,
+  PluginUsageDetail,
+  CopyAppRequest,
+  DeleteSpaceRequest,
+  ReleaseRecord,
+  ConversationRecordTokenUsage,
+  SkillAnalysisInfo,
+  AppTriggerWorkflowExecuteConfig,
+  AppModeConfig,
+  ModelProviderBasic,
+  AppAdvancedConf,
+  PauseAppTriggerResponse,
+  SpecialStatusInfo,
 } from "./adp_models"
 
 /**
@@ -381,13 +397,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * ModifyAppTrigger
+   * 查询应用的消息记录分类树，返回分类及子分类、各分类下记录数量与操作权限
    */
-  async ModifyAppTrigger(
-    req: ModifyAppTriggerRequest,
-    cb?: (error: string, rep: ModifyAppTriggerResponse) => void
-  ): Promise<ModifyAppTriggerResponse> {
-    return this.request("ModifyAppTrigger", req, cb)
+  async DescribeMsgRecordCategoryList(
+    req: DescribeMsgRecordCategoryListRequest,
+    cb?: (error: string, rep: DescribeMsgRecordCategoryListResponse) => void
+  ): Promise<DescribeMsgRecordCategoryListResponse> {
+    return this.request("DescribeMsgRecordCategoryList", req, cb)
   }
 
   /**
@@ -421,14 +437,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 重置会话
-注意：当前Claw模式应用会话不支持重置
-     */
-  async ResetConversation(
-    req: ResetConversationRequest,
-    cb?: (error: string, rep: ResetConversationResponse) => void
-  ): Promise<ResetConversationResponse> {
-    return this.request("ResetConversation", req, cb)
+   * ModifyAppTrigger
+   */
+  async ModifyAppTrigger(
+    req: ModifyAppTriggerRequest,
+    cb?: (error: string, rep: ModifyAppTriggerResponse) => void
+  ): Promise<ModifyAppTriggerResponse> {
+    return this.request("ModifyAppTrigger", req, cb)
   }
 
   /**
@@ -439,6 +454,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSystemVariableListResponse) => void
   ): Promise<DescribeSystemVariableListResponse> {
     return this.request("DescribeSystemVariableList", req, cb)
+  }
+
+  /**
+   * 获取参数变量列表
+   */
+  async DescribeVariableList(
+    req: DescribeVariableListRequest,
+    cb?: (error: string, rep: DescribeVariableListResponse) => void
+  ): Promise<DescribeVariableListResponse> {
+    return this.request("DescribeVariableList", req, cb)
   }
 
   /**
@@ -492,13 +517,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除参数变量
+   * 创建一条消息记录分类，支持指定分类名称与父分类（ParentId 为 0 时表示一级分类）
    */
-  async DeleteVariable(
-    req: DeleteVariableRequest,
-    cb?: (error: string, rep: DeleteVariableResponse) => void
-  ): Promise<DeleteVariableResponse> {
-    return this.request("DeleteVariable", req, cb)
+  async CreateMsgRecordCategory(
+    req: CreateMsgRecordCategoryRequest,
+    cb?: (error: string, rep: CreateMsgRecordCategoryResponse) => void
+  ): Promise<CreateMsgRecordCategoryResponse> {
+    return this.request("CreateMsgRecordCategory", req, cb)
   }
 
   /**
@@ -602,6 +627,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询应用的对话消息记录列表，支持按渠道类型、反馈类型、意图、调用结果等条件过滤，并支持游标分页与按创建时间排序
+   */
+  async DescribeMsgRecordList(
+    req: DescribeMsgRecordListRequest,
+    cb?: (error: string, rep: DescribeMsgRecordListResponse) => void
+  ): Promise<DescribeMsgRecordListResponse> {
+    return this.request("DescribeMsgRecordList", req, cb)
+  }
+
+  /**
    * 查询 Agent 摘要信息列表
    */
   async DescribeAgentSummaryList(
@@ -622,13 +657,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资源消耗明细，包含计费相关字段（消耗类型、消耗目标、消耗场景、套餐包及PU消耗等）
+   * 删除参数变量
    */
-  async DescribeConsumptionDetailList(
-    req: DescribeConsumptionDetailListRequest,
-    cb?: (error: string, rep: DescribeConsumptionDetailListResponse) => void
-  ): Promise<DescribeConsumptionDetailListResponse> {
-    return this.request("DescribeConsumptionDetailList", req, cb)
+  async DeleteVariable(
+    req: DeleteVariableRequest,
+    cb?: (error: string, rep: DeleteVariableResponse) => void
+  ): Promise<DeleteVariableResponse> {
+    return this.request("DeleteVariable", req, cb)
   }
 
   /**
@@ -762,6 +797,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除指定的消息记录分类
+   */
+  async DeleteMsgRecordCategory(
+    req: DeleteMsgRecordCategoryRequest,
+    cb?: (error: string, rep: DeleteMsgRecordCategoryResponse) => void
+  ): Promise<DeleteMsgRecordCategoryResponse> {
+    return this.request("DeleteMsgRecordCategory", req, cb)
+  }
+
+  /**
    * 提交共享 Skill 下架审批（v2，两段式：提交→审批→回调下架共享 Skill） 鉴权：删除权 拒绝场景：未共享 / 上架审批中 / 下架审批中
    */
   async DeleteSkillShare(
@@ -769,6 +814,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSkillShareResponse) => void
   ): Promise<DeleteSkillShareResponse> {
     return this.request("DeleteSkillShare", req, cb)
+  }
+
+  /**
+     * 重置会话
+注意：当前Claw模式应用会话不支持重置
+     */
+  async ResetConversation(
+    req: ResetConversationRequest,
+    cb?: (error: string, rep: ResetConversationResponse) => void
+  ): Promise<ResetConversationResponse> {
+    return this.request("ResetConversation", req, cb)
   }
 
   /**
@@ -799,6 +855,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSpaceResponse) => void
   ): Promise<CreateSpaceResponse> {
     return this.request("CreateSpace", req, cb)
+  }
+
+  /**
+   * 修改指定消息记录分类的名称
+   */
+  async ModifyMsgRecordCategory(
+    req: ModifyMsgRecordCategoryRequest,
+    cb?: (error: string, rep: ModifyMsgRecordCategoryResponse) => void
+  ): Promise<ModifyMsgRecordCategoryResponse> {
+    return this.request("ModifyMsgRecordCategory", req, cb)
   }
 
   /**
@@ -1032,13 +1098,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取参数变量列表
+   * 获取参数变量
    */
-  async DescribeVariableList(
-    req: DescribeVariableListRequest,
-    cb?: (error: string, rep: DescribeVariableListResponse) => void
-  ): Promise<DescribeVariableListResponse> {
-    return this.request("DescribeVariableList", req, cb)
+  async DescribeVariable(
+    req: DescribeVariableRequest,
+    cb?: (error: string, rep: DescribeVariableResponse) => void
+  ): Promise<DescribeVariableResponse> {
+    return this.request("DescribeVariable", req, cb)
   }
 
   /**
@@ -1112,13 +1178,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取参数变量
+   * 查询资源消耗明细，包含计费相关字段（消耗类型、消耗目标、消耗场景、套餐包及PU消耗等）
    */
-  async DescribeVariable(
-    req: DescribeVariableRequest,
-    cb?: (error: string, rep: DescribeVariableResponse) => void
-  ): Promise<DescribeVariableResponse> {
-    return this.request("DescribeVariable", req, cb)
+  async DescribeConsumptionDetailList(
+    req: DescribeConsumptionDetailListRequest,
+    cb?: (error: string, rep: DescribeConsumptionDetailListResponse) => void
+  ): Promise<DescribeConsumptionDetailListResponse> {
+    return this.request("DescribeConsumptionDetailList", req, cb)
   }
 
   /**

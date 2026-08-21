@@ -32,6 +32,7 @@ import {
   ModifyGrafanaInstanceRequest,
   AlarmHistoryMetric,
   DescribeExternalClusterRegisterCommandResponse,
+  DescribeGrafanaVersionsRequest,
   DescribePolicyGroupInfoResponse,
   NotificationContentTemplateSupport,
   PolicyTag,
@@ -238,7 +239,7 @@ import {
   OneOnCallForm,
   CreatePrometheusAgentResponse,
   DescribePrometheusAlertPolicyRequest,
-  DescribeAlarmMetricsResponse,
+  DescribePolicyConditionListConfigManualCalcType,
   DescribeGrafanaWhiteListRequest,
   DescribePrometheusConfigRequest,
   CreateGrafanaInstanceResponse,
@@ -247,7 +248,7 @@ import {
   DeleteAlarmNoticesRequest,
   DescribeGrafanaNotificationChannelsResponse,
   WriteDestination,
-  DescribePolicyConditionListConfigManualCalcType,
+  DescribeAlarmMetricsResponse,
   ResumeGrafanaInstanceResponse,
   DescribeAccidentEventListResponse,
   DescribePrometheusTempSyncResponse,
@@ -450,6 +451,7 @@ import {
   MonitorTypeInfo,
   DimensionNew,
   CreateExternalClusterResponse,
+  DescribeGrafanaVersionsResponse,
   DeleteAlertRulesResponse,
   DescribePrometheusScrapeStatisticsRequest,
   DeletePrometheusScrapeJobsRequest,
@@ -525,6 +527,7 @@ import {
   UpdateGrafanaIntegrationRequest,
   CreatePrometheusAlertGroupResponse,
   DeletePrometheusRecordRuleYamlRequest,
+  GrafanaVersion,
   DescribeAlarmNoticeCallbacksRequest,
   DescribeStatisticDataRequest,
   DescribeExternalClusterUninstallCommandResponse,
@@ -963,13 +966,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除告警通知模板
+   * 列出 Grafana 版本
    */
-  async DeleteAlarmNotices(
-    req: DeleteAlarmNoticesRequest,
-    cb?: (error: string, rep: DeleteAlarmNoticesResponse) => void
-  ): Promise<DeleteAlarmNoticesResponse> {
-    return this.request("DeleteAlarmNotices", req, cb)
+  async DescribeGrafanaVersions(
+    req?: DescribeGrafanaVersionsRequest,
+    cb?: (error: string, rep: DescribeGrafanaVersionsResponse) => void
+  ): Promise<DescribeGrafanaVersionsResponse> {
+    return this.request("DescribeGrafanaVersions", req, cb)
   }
 
   /**
@@ -1178,6 +1181,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdatePrometheusScrapeJobResponse) => void
   ): Promise<UpdatePrometheusScrapeJobResponse> {
     return this.request("UpdatePrometheusScrapeJob", req, cb)
+  }
+
+  /**
+   * 删除告警通知模板
+   */
+  async DeleteAlarmNotices(
+    req: DeleteAlarmNoticesRequest,
+    cb?: (error: string, rep: DeleteAlarmNoticesResponse) => void
+  ): Promise<DeleteAlarmNoticesResponse> {
+    return this.request("DeleteAlarmNotices", req, cb)
   }
 
   /**

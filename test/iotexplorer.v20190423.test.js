@@ -2018,6 +2018,16 @@ it("iotexplorer.v20190423.DescribeDeviceDataHistory", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DeleteTWeSeeTasksByCondition", async function () {
+    try {
+       const data = await client.DeleteTWeSeeTasksByCondition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyPositionFence", async function () {
     try {
        const data = await client.ModifyPositionFence({})

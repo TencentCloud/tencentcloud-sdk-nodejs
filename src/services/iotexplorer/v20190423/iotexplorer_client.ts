@@ -257,7 +257,7 @@ import {
   InquireTWeSeeSubscriptionCreatePriceResponse,
   CreateTWeTalkProductConfigV2Request,
   DescribeInstanceResponse,
-  GetLoRaGatewayListRequest,
+  DeleteTWeSeeTasksByConditionRequest,
   DescribeProjectRequest,
   SeeEventIdFilterConfig,
   GetTWeTalkAIBotListResponse,
@@ -292,7 +292,6 @@ import {
   BatchCreateTWeSeeRecognitionTaskRequest,
   ProjectEntryEx,
   PublishMessageResponse,
-  DescribeCloudStorageEventsResponse,
   SearchKeyword,
   DescribeModelDefinitionRequest,
   DisableTopicRuleRequest,
@@ -302,6 +301,7 @@ import {
   DescribePositionFenceListRequest,
   DescribeUnbindedDevicesResponse,
   InvokeCloudStorageAIServiceTaskRequest,
+  SeeDeleteTaskCondition,
   GetTWeTalkProductConfigListResponse,
   CreateDevicePublishSDPAnswerRequest,
   DescribeSubscribedTopicPolicyResponse,
@@ -329,6 +329,7 @@ import {
   UnbindTWeTalkAIBotResponse,
   CallDeviceActionSyncRequest,
   ProductDevicesPositionItem,
+  GetLoRaGatewayListRequest,
   ResetCloudStorageAIServiceResponse,
   DeleteTWeSeeCallbackRequest,
   CreateTWeSeeRecognitionTaskRequest,
@@ -467,9 +468,11 @@ import {
   TerminateTWeSeeSubscriptionResponse,
   TargetInfo,
   CreateTWeTalkProductConfigRequest,
+  ModifyPositionFenceRequest,
   BindDevicesResponse,
   InvokeExternalSourceAIServiceTaskResponse,
   DescribeCloudStorageAIServiceRequest,
+  DeleteTWeSeeTasksByConditionResponse,
   DescribeCloudStorageOrderResponse,
   DescribeActivateLicenseServiceRequest,
   CreateTRTCSignaturesWithRoomIdResponse,
@@ -523,7 +526,7 @@ import {
   CloudStorageAIServiceTask,
   DescribeLicenseOverviewResponse,
   ListTopicPolicyRequest,
-  GenerateSignedVideoURLResponse,
+  DeleteLoRaFrequencyRequest,
   ActivateDeviceInfo,
   InvokeVideosKeywordsAnalyzerRequest,
   DescribeFirmwareTaskDevicesRequest,
@@ -572,13 +575,13 @@ import {
   PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
   PositionSpaceInfo,
-  ModifyPositionFenceRequest,
+  GenerateSignedVideoURLRequest,
   CreateDeviceChannelResponse,
   CreateTopicRuleRequest,
   CreateTopicPolicyRequest,
   DescribeTWeSeeRecognitionTaskRequest,
   DirectBindDeviceInFamilyRequest,
-  GenerateSignedVideoURLRequest,
+  DescribeCloudStorageEventsResponse,
   Filter,
   DescribeBindedProductsRequest,
   CreateFreeCloudStorageRequest,
@@ -612,7 +615,7 @@ import {
   GetDeviceSumStatisticsRequest,
   DescribeCloudStorageAIServiceCallbackRequest,
   DescribeCloudStorageRequest,
-  DeleteLoRaFrequencyRequest,
+  GenerateSignedVideoURLResponse,
   CreateTWeSeePostPaidServiceRequest,
   CreatePositionFenceRequest,
   SeeTaskInfo,
@@ -2694,6 +2697,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceDataHistoryResponse) => void
   ): Promise<DescribeDeviceDataHistoryResponse> {
     return this.request("DescribeDeviceDataHistory", req, cb)
+  }
+
+  /**
+   * 按条件删除指定设备和算法类目下的 TWeSee 任务及其关联数据。
+   */
+  async DeleteTWeSeeTasksByCondition(
+    req: DeleteTWeSeeTasksByConditionRequest,
+    cb?: (error: string, rep: DeleteTWeSeeTasksByConditionResponse) => void
+  ): Promise<DeleteTWeSeeTasksByConditionResponse> {
+    return this.request("DeleteTWeSeeTasksByCondition", req, cb)
   }
 
   /**

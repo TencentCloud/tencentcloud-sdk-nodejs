@@ -118,6 +118,16 @@ it("tcb.v20180608.DescribeBaasPackageList", async function () {
     }
 })
 
+it("tcb.v20180608.RenewEnv", async function () {
+    try {
+       const data = await client.RenewEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.UnbindStorageSource", async function () {
     try {
        const data = await client.UnbindStorageSource({})
@@ -858,9 +868,9 @@ it("tcb.v20180608.DeleteCloudAppVersion", async function () {
     }
 })
 
-it("tcb.v20180608.RenewEnv", async function () {
+it("tcb.v20180608.BindCls", async function () {
     try {
-       const data = await client.RenewEnv({})
+       const data = await client.BindCls({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

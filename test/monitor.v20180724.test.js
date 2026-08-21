@@ -408,9 +408,9 @@ it("monitor.v20180724.DescribePhoneAlarmFlowTotalCount", async function () {
     }
 })
 
-it("monitor.v20180724.DeleteAlarmNotices", async function () {
+it("monitor.v20180724.DescribeGrafanaVersions", async function () {
     try {
-       const data = await client.DeleteAlarmNotices({})
+       const data = await client.DescribeGrafanaVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -601,6 +601,16 @@ it("monitor.v20180724.GetPrometheusAgentManagementCommand", async function () {
 it("monitor.v20180724.UpdatePrometheusScrapeJob", async function () {
     try {
        const data = await client.UpdatePrometheusScrapeJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteAlarmNotices", async function () {
+    try {
+       const data = await client.DeleteAlarmNotices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

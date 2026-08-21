@@ -2007,7 +2007,7 @@ export interface VmGroup {
    */
   ApplicationType?: string
   /**
-   * <p>部署组资源类型</p>
+   * <p>部署组资源类型</p><p>枚举值：</p><ul><li>GW： 网关</li><li>DEF： 普通业务部署组</li><li>SVL： Serverless</li></ul>
    */
   GroupResourceType?: string
   /**
@@ -2113,6 +2113,122 @@ export interface VmGroup {
    * <p>是否自动重启</p>
    */
   LivenessAutoRestart?: boolean
+  /**
+   * <p>Mesh Sidecar 数据面版本通道</p><p>枚举值：</p><ul><li>stable： 稳定版</li><li>release： 最新版</li></ul>
+   */
+  MeshSidecarVersion?: string
+  /**
+   * <p>业务日志配置 ID 列表</p>
+   */
+  BusinessLogConfigIdList?: string
+  /**
+   * <p>业务系统 ID</p>
+   */
+  BusinessLogDeliveryConfigIdList?: string
+  /**
+   * <p>String型普通说明场景</p>
+   */
+  BusinessSystemId?: string
+  /**
+   * <p>业务系统名称</p>
+   */
+  BusinessSystemName?: string
+  /**
+   * <p>CLS 机器组 ID</p>
+   */
+  ClsMachineGroupId?: string
+  /**
+   * <p>是否开启服务治理</p>
+   */
+  EnableGovernance?: boolean
+  /**
+   * <p>是否开启可观测</p>
+   */
+  EnableTelemetry?: boolean
+  /**
+   * <p>是否开启 OT Agent</p>
+   */
+  EnableTelemetryAgent?: boolean
+  /**
+   * <p>是否开启单元化</p>
+   */
+  EnabledUnit?: boolean
+  /**
+   * <p>独享注册中心/配置中心实例列表</p>
+   */
+  ExclusiveInstances?: Array<ExclusiveInstance>
+  /**
+   * <p>框架接入类型</p>
+   */
+  FrameworkType?: string
+  /**
+   * <p>服务治理实例模式</p>
+   */
+  GovernanceType?: string
+  /**
+   * <p>部署组关联实例 ID 列表</p>
+   */
+  InstanceIdList?: Array<string>
+  /**
+   * <p>部署组是否处于停止状态</p>
+   */
+  IsStop?: string
+  /**
+   * <p>K8s 命名空间名称</p>
+   */
+  K8sNamespaceName?: string
+  /**
+   * <p>请求语言</p>
+   */
+  Language?: string
+  /**
+   * <p>微服务子类型</p>
+   */
+  MicroserviceSubType?: string
+  /**
+   * <p>非侵入接入子类型</p>
+   */
+  NonInvasiveType?: string
+  /**
+   * <p>预停止脚本内容</p>
+   */
+  PreStopScript?: string
+  /**
+   * <p>实际使用的 K8s 命名空间名称</p>
+   */
+  RealNamespaceName?: string
+  /**
+   * <p>Mesh 服务端口与健康检查配置列表</p>
+   */
+  ServiceConfigList?: Array<ServiceConfig>
+  /**
+   * <p>服务治理配置聚合对象</p>
+   */
+  ServiceGovernanceConfig?: ServiceGovernanceConfig
+  /**
+   * <p>部署组标签列表</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>Tapm OT Agent 版本</p>
+   */
+  TapmOtAgentVersion?: string
+  /**
+   * <p>单元环境类型</p>
+   */
+  UnitEnvType?: string
+  /**
+   * <p>单元 ID</p>
+   */
+  UnitId?: string
+  /**
+   * <p>单元类型</p>
+   */
+  UnitName?: string
+  /**
+   * <p>部署组资源类型</p>
+   */
+  UnitType?: string
 }
 
 /**

@@ -2538,7 +2538,12 @@ export interface DisableControlPlaneLogsRequest {
 /**
  * DescribeOSImages请求参数结构体
  */
-export type DescribeOSImagesRequest = null
+export interface DescribeOSImagesRequest {
+  /**
+   * <p>镜像拉取接口增加过滤字段</p>
+   */
+  Filters?: Array<Filter>
+}
 
 /**
  * CreateEksLogConfig请求参数结构体
@@ -5601,11 +5606,11 @@ export interface OIDCConfigAuthenticationOptions {
  */
 export interface DescribeOSImagesResponse {
   /**
-   * 镜像信息列表
+   * <p>镜像信息列表</p>
    */
   OSImageSeriesSet?: Array<OSImage>
   /**
-   * 镜像数量
+   * <p>镜像数量</p>
    */
   TotalCount?: number
   /**
@@ -9967,29 +9972,33 @@ export interface EdgeClusterPublicLB {
  */
 export interface OSImage {
   /**
-   * os聚合名称
+   * <p>os聚合名称</p>
    */
   SeriesName?: string
   /**
-   * os别名
+   * <p>os别名</p>
    */
   Alias?: string
   /**
-   * os名称
+   * <p>os名称</p>
    */
   OsName?: string
   /**
-   * 操作系统类型(分为定制和非定制，取值分别为:DOCKER_CUSTOMIZE、GENERAL)
+   * <p>操作系统类型(分为定制和非定制，取值分别为:DOCKER_CUSTOMIZE、GENERAL)</p>
    */
   OsCustomizeType?: string
   /**
-   * os是否下线(online表示在线,offline表示下线)
+   * <p>os是否下线(online表示在线,offline表示下线)</p>
    */
   Status?: string
   /**
-   * 镜像id
+   * <p>镜像id</p>
    */
   ImageId?: string
+  /**
+   * <p>架构</p>
+   */
+  Arch?: string
 }
 
 /**

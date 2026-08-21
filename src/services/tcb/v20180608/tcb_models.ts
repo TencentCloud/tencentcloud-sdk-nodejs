@@ -937,6 +937,16 @@ export interface DescribeMySQLTaskStatusRequest {
 }
 
 /**
+ * UnbindStorageSource请求参数结构体
+ */
+export interface UnbindStorageSourceRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+}
+
+/**
  * 构建命令
  */
 export interface BuildCommands {
@@ -1768,9 +1778,14 @@ export interface DescribeCloudBaseRunServerVersionResponse {
 }
 
 /**
- * DeleteVmInstance返回参数结构体
+ * DescribeAIModels返回参数结构体
  */
-export interface DeleteVmInstanceResponse {
+export interface DescribeAIModelsResponse {
+  /**
+   * 模型列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AIModels?: Array<AIModelGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3205,13 +3220,13 @@ export interface DescribeVmInstancesRequest {
 }
 
 /**
- * UnbindStorageSource请求参数结构体
+ * BindCls返回参数结构体
  */
-export interface UnbindStorageSourceRequest {
+export interface BindClsResponse {
   /**
-   * 环境ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
+  RequestId?: string
 }
 
 /**
@@ -5193,6 +5208,48 @@ export interface AssumeRoleForAllocatedEnvRequest {
 }
 
 /**
+ * 用户信息
+ */
+export interface User {
+  /**
+   * 用户ID
+   */
+  Uid?: string
+  /**
+   * 用户名
+   */
+  Name?: string
+  /**
+   * 用户类型：internalUser-内部用户、externalUser-外部用户
+   */
+  Type?: string
+  /**
+   * 用户状态：ACTIVE（激活）、BLOCKED（冻结）
+   */
+  UserStatus?: string
+  /**
+   * 用户昵称
+   */
+  NickName?: string
+  /**
+   * 手机号
+   */
+  Phone?: string
+  /**
+   * 邮箱
+   */
+  Email?: string
+  /**
+   * 头像链接
+   */
+  AvatarUrl?: string
+  /**
+   * 用户描述
+   */
+  Description?: string
+}
+
+/**
  * CreateAIModel请求参数结构体
  */
 export interface CreateAIModelRequest {
@@ -5429,45 +5486,25 @@ export interface DescribeCurveDataRequest {
 }
 
 /**
- * 用户信息
+ * BindCls请求参数结构体
  */
-export interface User {
+export interface BindClsRequest {
   /**
-   * 用户ID
+   * 环境ID
    */
-  Uid?: string
+  EnvId: string
   /**
-   * 用户名
+   * CLS地域
    */
-  Name?: string
+  ClsRegion: string
   /**
-   * 用户类型：internalUser-内部用户、externalUser-外部用户
+   * CLS 日志集id
    */
-  Type?: string
+  ClsLogsetId: string
   /**
-   * 用户状态：ACTIVE（激活）、BLOCKED（冻结）
+   * CLS 日志主题ID
    */
-  UserStatus?: string
-  /**
-   * 用户昵称
-   */
-  NickName?: string
-  /**
-   * 手机号
-   */
-  Phone?: string
-  /**
-   * 邮箱
-   */
-  Email?: string
-  /**
-   * 头像链接
-   */
-  AvatarUrl?: string
-  /**
-   * 用户描述
-   */
-  Description?: string
+  ClsTopicId: string
 }
 
 /**
@@ -6509,14 +6546,9 @@ export interface DescribeManagedAIModelListResponse {
 }
 
 /**
- * DescribeAIModels返回参数结构体
+ * DeleteVmInstance返回参数结构体
  */
-export interface DescribeAIModelsResponse {
-  /**
-   * 模型列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AIModels?: Array<AIModelGroup>
+export interface DeleteVmInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

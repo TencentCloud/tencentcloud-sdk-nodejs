@@ -52,7 +52,7 @@ export interface ExecuteCommandOnAndroidInstancesResponse {
  */
 export interface ResetAndroidInstancesResponse {
   /**
-   * 任务集合
+   * <p>任务集合</p>
    */
   TaskSet?: Array<AndroidInstanceTask>
   /**
@@ -211,7 +211,7 @@ export interface SetAndroidInstancesBGAppKeepAliveResponse {
  */
 export interface UninstallAndroidInstancesAppResponse {
   /**
-   * 任务集合
+   * <p>任务集合</p>
    */
   TaskSet?: Array<AndroidInstanceTask>
   /**
@@ -320,39 +320,39 @@ export interface DescribeAndroidInstanceLabelsResponse {
  */
 export interface AndroidApp {
   /**
-   * 安卓应用 Id
+   * <p>安卓应用 Id</p>
    */
   AndroidAppId?: string
   /**
-   * 安卓应用名称
+   * <p>安卓应用名称</p>
    */
   Name?: string
   /**
-   * 安卓应用状态（上架、下架）
+   * <p>安卓应用状态（上架、下架）</p>
    */
   State?: string
   /**
-   * 安卓应用版本列表
+   * <p>安卓应用版本列表</p>
    */
   AndroidAppVersionInfo?: Array<AndroidAppVersionInfo>
   /**
-   * 安卓应用创建时间
+   * <p>安卓应用创建时间</p>
    */
   CreateTime?: string
   /**
-   * 用户 Id
+   * <p>用户 Id</p>
    */
   UserId?: string
   /**
-   * 应用模式（NORMAL : 普通模式；ADVANCED : 高级模式）
+   * <p>应用模式（NORMAL : 普通模式；ADVANCED : 高级模式）</p>
    */
   AppMode?: string
   /**
-   * 应用更新状态，取值：UPLOADING 上传中、CREATING 创建中、CREATE_FAIL 创建失败、CREATE_SUCCESS 创建成功、PACKAGE_NAME_MISMATCH 包名不匹配、VERSION_ALREADY_EXISTS 版本已存在、APP_PARSE_FAIL app 解析失败、APP_EXISTS_SECURITY_RISK app 存在安全风险、NORMAL 默认状态
+   * <p>应用更新状态，取值：UPLOADING 上传中、CREATING 创建中、CREATE_FAIL 创建失败、CREATE_SUCCESS 创建成功、PACKAGE_NAME_MISMATCH 包名不匹配、VERSION_ALREADY_EXISTS 版本已存在、APP_PARSE_FAIL app 解析失败、APP_EXISTS_SECURITY_RISK app 存在安全风险、NORMAL 默认状态</p>
    */
   UpdateState?: string
   /**
-   * 安卓应用包名
+   * <p>安卓应用包名</p>
    */
   PackageName?: string
 }
@@ -405,11 +405,11 @@ export interface DeleteAndroidInstanceBackupsResponse {
  */
 export interface DescribeAndroidAppsResponse {
   /**
-   * 安卓应用列表
+   * <p>安卓应用列表</p>
    */
   Apps?: Array<AndroidApp>
   /**
-   * 安卓应用列表长度
+   * <p>安卓应用列表长度</p>
    */
   TotalCount?: number
   /**
@@ -767,7 +767,7 @@ export interface ModifyAndroidInstanceResolutionResponse {
  */
 export interface DeleteAndroidInstanceImagesRequest {
   /**
-   * 镜像 ID 列表
+   * <p>镜像 ID 列表</p>
    */
   AndroidInstanceImageIds: Array<string>
 }
@@ -801,20 +801,15 @@ export interface CreateAndroidInstanceWebShellRequest {
  */
 export interface ResetAndroidInstancesRequest {
   /**
-   * 实例ID列表
+   * <p>实例ID列表</p>
    */
   AndroidInstanceIds: Array<string>
   /**
-   * 指定有效的镜像 ID。
-默认取值：默认使用当前镜像。
+   * <p>指定有效的镜像 ID。<br>默认取值：默认使用当前镜像。</p>
    */
   AndroidInstanceImageId?: string
   /**
-   * 重置模式。在 AndroidInstanceImageId 不为空时才生效。
-
-CleanData：默认选项，清理系统属性和用户数据
-KeepSystemProperties：只保留系统属性
-KeepData: 保留系统属性和用户数据
+   * <p>重置模式。在 AndroidInstanceImageId 不为空时才生效。</p><p>CleanData：默认选项，清理系统属性和用户数据<br>KeepSystemProperties：只保留系统属性<br>KeepData: 保留系统属性和用户数据</p>
    */
   Mode?: string
 }
@@ -1346,7 +1341,7 @@ export interface SyncAndroidInstanceImageResponse {
  */
 export interface DestroyAndroidInstancesRequest {
   /**
-   * 安卓实例 ID 列表
+   * <p>安卓实例 ID 列表</p>
    */
   AndroidInstanceIds: Array<string>
 }
@@ -1949,51 +1944,51 @@ PHYSICAL：修改物理分辨率
  */
 export interface AndroidAppVersionInfo {
   /**
-   * 安卓应用版本
+   * <p>安卓应用版本</p>
    */
   AndroidAppVersion?: string
   /**
-   * 安卓应用版本创建状态，取值：NORMAL：无（默认）、UPLOADING：上传中、CREATING： 创建中、CREATE_FAIL：创建失败、PACKAGE_NAME_MISMATCH：包名不匹配、VERSION_ALREADY_EXISTS：版本已存在、APP_PARSE_FAIL： app 解析失败、APP_EXISTS_SECURITY_RISK：app 存在安全风险、CREATE_SUCCESS：创建成功
+   * <p>安卓应用版本创建状态，取值：NORMAL：无（默认）、UPLOADING：上传中、CREATING： 创建中、CREATE_FAIL：创建失败、PACKAGE_NAME_MISMATCH：包名不匹配、VERSION_ALREADY_EXISTS：版本已存在、APP_PARSE_FAIL： app 解析失败、APP_EXISTS_SECURITY_RISK：app 存在安全风险、CREATE_SUCCESS：创建成功</p>
    */
   State?: string
   /**
-   * 安卓应用版本创建时间
+   * <p>安卓应用版本创建时间</p>
    */
   CreateTime?: string
   /**
-   * shell 安装命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   * <p>shell 安装命令（支持多条命令执行，通过 &amp;&amp; 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）</p>
    */
   Command?: string
   /**
-   * shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   * <p>shell 卸载命令（支持多条命令执行，通过 &amp;&amp; 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）</p>
    */
   UninstallCommand?: string
   /**
-   * 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。
+   * <p>应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。</p>
    */
   CleanupMode?: string
   /**
-   * 安卓应用版本名称（版本描述、备注）
+   * <p>安卓应用版本名称（版本描述、备注）</p>
    */
   AndroidAppVersionName?: string
   /**
-   * 安卓应用启动页
+   * <p>安卓应用启动页</p>
    */
   Activity?: string
   /**
-   * 应用版本号（Version Name）
+   * <p>应用版本号（Version Name）</p>
    */
   VersionName?: string
   /**
-   * 应用包 MD5
+   * <p>应用包 MD5</p>
    */
   MD5?: string
   /**
-   * 应用包文件大小（字节）
+   * <p>应用包文件大小（字节）</p>
    */
   FileSize?: number
   /**
-   * 安卓应用包名
+   * <p>安卓应用包名</p>
    */
   PackageName?: string
 }
@@ -2257,19 +2252,19 @@ PHYSICAL：修改物理分辨率
  */
 export interface DescribeAndroidAppsRequest {
   /**
-   * 分页偏移
+   * <p>分页偏移</p>
    */
   Offset?: number
   /**
-   * 每页数量
+   * <p>每页数量</p>
    */
   Limit?: number
   /**
-   * 应用ID数组
+   * <p>应用ID数组</p>
    */
   AndroidAppIds?: Array<string>
   /**
-   * 过滤条件，支持过滤的字段有：UserId、State、UpdateState、Name、AppMode 。其中 Name 为模糊匹配，其他参数为精确匹配。
+   * <p>过滤条件，支持过滤的字段有：UserId、State、UpdateState、Name、AppMode 。其中 Name 为模糊匹配，其他参数为精确匹配。</p>
    */
   Filters?: Array<Filter>
 }
@@ -2612,15 +2607,15 @@ ANDROID14：安卓14
  */
 export interface UninstallAndroidInstancesAppRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   AndroidInstanceIds: Array<string>
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   AndroidAppId?: string
   /**
-   * 包名
+   * <p>包名</p>
    */
   PackageName?: string
 }

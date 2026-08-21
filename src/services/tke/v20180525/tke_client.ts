@@ -1322,7 +1322,7 @@ export class Client extends AbstractClient {
    * 获取OS聚合信息
    */
   async DescribeOSImages(
-    req?: DescribeOSImagesRequest,
+    req: DescribeOSImagesRequest,
     cb?: (error: string, rep: DescribeOSImagesResponse) => void
   ): Promise<DescribeOSImagesResponse> {
     return this.request("DescribeOSImages", req, cb)

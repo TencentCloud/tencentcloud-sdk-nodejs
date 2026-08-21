@@ -10924,6 +10924,10 @@ export interface ExportInfo {
    * <p>导出字段</p>
    */
   DerivedFields?: Array<string>
+  /**
+   * <p>日志导出创建时间，毫秒时间戳</p><p>单位：ms</p>
+   */
+  CreateTimestamp?: number
 }
 
 /**

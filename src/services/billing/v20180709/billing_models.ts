@@ -834,16 +834,16 @@ export interface AllocationTree {
  */
 export interface DescribeBillDetailForOrganizationResponse {
   /**
-   * 详情列表
+   * <p>详情列表</p>
    */
   DetailSet?: Array<DistributionBillDetail>
   /**
-   * 总记录数，24小时缓存一次，可能比实际总记录数少
+   * <p>总记录数，24小时缓存一次，可能比实际总记录数少</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度
+   * <p>本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度</p>
    */
   Context?: string
   /**
@@ -3282,79 +3282,48 @@ export interface CreateGatherRuleRequest {
  */
 export interface DescribeBillResourceSummaryForOrganizationRequest {
   /**
-   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+   * <p>分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推</p>
    */
   Offset: number
   /**
-   * 数量，最大值为1000
+   * <p>数量，最大值为1000</p>
    */
   Limit: number
   /**
-   * 月份，格式为yyyy-mm。不能早于开通账单2.0的月份
+   * <p>月份，格式为yyyy-mm。不能早于开通账单2.0的月份</p>
    */
   Month: string
   /**
-   * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
+   * <p>周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往<a href="https://console.cloud.tencent.com/expense/bill/overview">账单概览</a>页面顶部查看确认您的账单统计周期类型。</p>
    * @deprecated
    */
   PeriodType?: string
   /**
-   * 是否需要访问列表的总记录数，用于前端分页
-1-表示需要， 0-表示不需要
+   * <p>是否需要访问列表的总记录数，用于前端分页<br>1-表示需要， 0-表示不需要</p>
    */
   NeedRecordNum?: number
   /**
-   * 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：
-包年包月新购
-包年包月续费
-包年包月配置变更
-包年包月退款 
-按量计费扣费 
-线下项目扣费 
-线下产品扣费 
-调账扣费 
-调账补偿 
-按量计费小时结 
-按量计费日结 
-按量计费月结 
-竞价实例小时结 
-线下项目调账补偿 
-线下产品调账补偿 
-优惠扣费 
-优惠补偿 
-按量计费迁入资源 
-按量计费迁出资源 
-包年包月迁入资源 
-包年包月迁出资源 
-预付费用 
-小时费用 
-预留实例退款 
-按量计费冲正 
-包年包月转按量 
-保底扣款 
-节省计划小时费用
+   * <p>查询交易类型（请使用交易类型名称入参），入参示例枚举如下：<br>包年包月新购<br>包年包月续费<br>包年包月配置变更<br>包年包月退款<br>按量计费扣费<br>线下项目扣费<br>线下产品扣费<br>调账扣费<br>调账补偿<br>按量计费小时结<br>按量计费日结<br>按量计费月结<br>竞价实例小时结<br>线下项目调账补偿<br>线下产品调账补偿<br>优惠扣费<br>优惠补偿<br>按量计费迁入资源<br>按量计费迁出资源<br>包年包月迁入资源<br>包年包月迁出资源<br>预付费用<br>小时费用<br>预留实例退款<br>按量计费冲正<br>包年包月转按量<br>保底扣款<br>节省计划小时费用</p>
    */
   ActionType?: string
   /**
-   * 查询指定资源信息
+   * <p>查询指定资源信息</p>
    */
   ResourceId?: string
   /**
-   * 付费模式 prePay/postPay
+   * <p>付费模式 prePay/postPay</p>
    */
   PayMode?: string
   /**
-   * 产品名称代码
-备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+   * <p>产品名称代码<br>备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a></p>
    */
   BusinessCode?: string
   /**
-   * 分账标签键，用户自定义（支持2021-01以后账单查询）
+   * <p>分账标签键，用户自定义（支持2021-01以后账单查询）</p>
    */
   TagKey?: string
   /**
-   * 分账标签值，该参数为空表示该标签键下未设置标签值的记录
-（支持2021-01以后账单查询）
+   * <p>分账标签值，该参数为空表示该标签键下未设置标签值的记录<br>（支持2021-01以后账单查询）</p>
    */
   TagValue?: string
 }
@@ -5813,15 +5782,15 @@ export interface DescribeAllocationUnitDetailRequest {
  */
 export interface DescribeBillSummaryForOrganizationRequest {
   /**
-   * 账单月份，格式为2023-04
+   * <p>账单月份，格式为2023-04</p>
    */
   Month: string
   /**
-   * 账单维度类型，枚举值如下：business、project、region、payMode、tag
+   * <p>账单维度类型，枚举值如下：business、project、region、payMode、tag</p>
    */
   GroupType: string
   /**
-   * 标签键，GroupType=tag获取标签维度账单时传
+   * <p>标签键，GroupType=tag获取标签维度账单时传</p>
    */
   TagKey?: Array<string>
 }
@@ -6175,86 +6144,56 @@ export interface ActionSummaryOverviewItem {
  */
 export interface DescribeBillDetailForOrganizationRequest {
   /**
-   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+   * <p>分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推</p>
    */
   Offset: number
   /**
-   * 数量，最大值为100
+   * <p>数量，最大值为100</p>
    */
   Limit: number
   /**
-   * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
+   * <p>周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往<a href="https://console.cloud.tencent.com/expense/bill/overview">账单概览</a>页面顶部查看确认您的账单统计周期类型。</p>
    * @deprecated
    */
   PeriodType?: string
   /**
-   * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。最多可拉取近18个月内的数据。
+   * <p>月份，格式为yyyy-mm，Month和BeginTime&amp;EndTime必传一个，如果有传BeginTime&amp;EndTime则Month字段无效。最多可拉取近18个月内的数据。</p>
    */
   Month?: string
   /**
-   * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。最多可拉取18个月内的数据。
+   * <p>周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&amp;EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。最多可拉取18个月内的数据。</p>
    */
   BeginTime?: string
   /**
-   * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。最多可拉取近18个月内的数据。
+   * <p>周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&amp;EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。最多可拉取近18个月内的数据。</p>
    */
   EndTime?: string
   /**
-   * 是否需要访问列表的总记录数，用于前端分页
-1-表示需要， 0-表示不需要
+   * <p>是否需要访问列表的总记录数，用于前端分页<br>1-表示需要， 0-表示不需要</p>
    */
   NeedRecordNum?: number
   /**
-   * 付费模式 prePay(表示包年包月)/postPay(表示按时按量)
+   * <p>付费模式 prePay(表示包年包月)/postPay(表示按时按量)</p>
    */
   PayMode?: string
   /**
-   * 查询指定资源信息
+   * <p>查询指定资源信息</p>
    */
   ResourceId?: string
   /**
-   * 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：
-包年包月新购
-包年包月续费
-包年包月配置变更
-包年包月退款 
-按量计费扣费 
-线下项目扣费 
-线下产品扣费 
-调账扣费 
-调账补偿 
-按量计费小时结 
-按量计费日结 
-按量计费月结 
-竞价实例小时结 
-线下项目调账补偿 
-线下产品调账补偿 
-优惠扣费 
-优惠补偿 
-按量计费迁入资源 
-按量计费迁出资源 
-包年包月迁入资源 
-包年包月迁出资源 
-预付费用 
-小时费用 
-预留实例退款 
-按量计费冲正 
-包年包月转按量 
-保底扣款 
-节省计划小时费用
+   * <p>查询交易类型（请使用交易类型名称入参），入参示例枚举如下：<br>包年包月新购<br>包年包月续费<br>包年包月配置变更<br>包年包月退款<br>按量计费扣费<br>线下项目扣费<br>线下产品扣费<br>调账扣费<br>调账补偿<br>按量计费小时结<br>按量计费日结<br>按量计费月结<br>竞价实例小时结<br>线下项目调账补偿<br>线下产品调账补偿<br>优惠扣费<br>优惠补偿<br>按量计费迁入资源<br>按量计费迁出资源<br>包年包月迁入资源<br>包年包月迁出资源<br>预付费用<br>小时费用<br>预留实例退款<br>按量计费冲正<br>包年包月转按量<br>保底扣款<br>节省计划小时费用</p>
    */
   ActionType?: string
   /**
-   * 项目ID:资源所属项目ID
+   * <p>项目ID:资源所属项目ID</p>
    */
   ProjectId?: number
   /**
-   * 产品名称代码
-备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+   * <p>产品名称代码<br>备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a></p>
    */
   BusinessCode?: string
   /**
-   * 上一次请求返回的上下文信息，翻页查询Month>=2023-05的月份的数据可加快查询速度，数据量10万级别以上的用户建议使用，查询速度可提升2~10倍
+   * <p>上一次请求返回的上下文信息，翻页查询Month&gt;=2023-05的月份的数据可加快查询速度，数据量10万级别以上的用户建议使用，查询速度可提升2~10倍</p>
    */
   Context?: string
 }
@@ -6750,11 +6689,11 @@ export interface RenewInstanceRequest {
  */
 export interface DescribeBillSummaryForOrganizationResponse {
   /**
-   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   * <p>数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）</p>
    */
   Ready?: number
   /**
-   * 账单多维度汇总消费详情
+   * <p>账单多维度汇总消费详情</p>
    */
   SummaryDetail?: Array<SummaryDetail>
   /**
@@ -6804,11 +6743,11 @@ export interface DescribeTagListRequest {
  */
 export interface DescribeBillResourceSummaryForOrganizationResponse {
   /**
-   * 资源汇总列表
+   * <p>资源汇总列表</p>
    */
   ResourceSummarySet?: Array<BillDistributionResourceSummary>
   /**
-   * 资源汇总列表总数，入参NeedRecordNum为0时不返回
+   * <p>资源汇总列表总数，入参NeedRecordNum为0时不返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number

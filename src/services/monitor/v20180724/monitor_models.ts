@@ -251,6 +251,11 @@ export interface DescribeExternalClusterRegisterCommandResponse {
 }
 
 /**
+ * DescribeGrafanaVersions请求参数结构体
+ */
+export type DescribeGrafanaVersionsRequest = null
+
+/**
  * DescribePolicyGroupInfo返回参数结构体
  */
 export interface DescribePolicyGroupInfoResponse {
@@ -5111,32 +5116,35 @@ export interface PrometheusAlertManagerConfig {
  */
 export interface CreateGrafanaInstanceRequest {
   /**
-   * 实例名
+   * <p>实例名</p>
    */
   InstanceName: string
   /**
-   * VPC ID (私有网络 ID)
+   * <p>VPC ID (私有网络 ID)</p>
    */
   VpcId: string
   /**
-   * 子网 ID 数组(VPC ID下的子网 ID，只取第一个)。
-注意：并不是所有可用区都可用（可通过 monitor:DescribePrometheusZones 接口获取可用区状态，选择 ZoneState 和ZoneResourceState 都为1的可用区）
+   * <p>子网 ID 数组(VPC ID下的子网 ID，只取第一个)。<br>注意：并不是所有可用区都可用（可通过 monitor:DescribePrometheusZones 接口获取可用区状态，选择 ZoneState 和ZoneResourceState 都为1的可用区）</p>
    */
   SubnetIds: Array<string>
   /**
-   * 是否启用外网
+   * <p>是否启用外网</p>
    */
   EnableInternet: boolean
   /**
-   * Grafana 初始密码(国际站用户必填，国内站用户可不填，不填时会生成随机密码并给主账号发送通知)
+   * <p>Grafana 初始密码(国际站用户必填，国内站用户可不填，不填时会生成随机密码并给主账号发送通知)</p>
    */
   GrafanaInitPassword?: string
   /**
-   * 标签
+   * <p>标签</p>
    */
   TagSpecification?: Array<PrometheusTag>
   /**
-   * 是否自动选择代金券，默认为 false
+   * <p>自定义版本，可用版本从 DescribeGrafanaVersions 接口获取</p>
+   */
+  DockerImage?: string
+  /**
+   * <p>是否自动选择代金券，默认为 false</p>
    */
   AutoVoucher?: boolean
 }
@@ -5339,17 +5347,18 @@ export interface DescribePrometheusAlertPolicyRequest {
 }
 
 /**
- * DescribeAlarmMetrics返回参数结构体
+ * DescribePolicyConditionList.ConfigManual.CalcType
  */
-export interface DescribeAlarmMetricsResponse {
+export interface DescribePolicyConditionListConfigManualCalcType {
   /**
-   * 告警指标列表
+   * <p>CalcType 取值</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Metrics?: Array<Metric>
+  Keys: Array<number | bigint>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>是否必须</p>
    */
-  RequestId?: string
+  Need: boolean
 }
 
 /**
@@ -5385,7 +5394,7 @@ export interface DescribePrometheusConfigRequest {
  */
 export interface CreateGrafanaInstanceResponse {
   /**
-   * 实例名
+   * <p>实例名</p>
    */
   InstanceId?: string
   /**
@@ -5500,18 +5509,17 @@ export interface WriteDestination {
 }
 
 /**
- * DescribePolicyConditionList.ConfigManual.CalcType
+ * DescribeAlarmMetrics返回参数结构体
  */
-export interface DescribePolicyConditionListConfigManualCalcType {
+export interface DescribeAlarmMetricsResponse {
   /**
-   * <p>CalcType 取值</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 告警指标列表
    */
-  Keys: Array<number | bigint>
+  Metrics?: Array<Metric>
   /**
-   * <p>是否必须</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Need: boolean
+  RequestId?: string
 }
 
 /**
@@ -10365,6 +10373,20 @@ export interface CreateExternalClusterResponse {
 }
 
 /**
+ * DescribeGrafanaVersions返回参数结构体
+ */
+export interface DescribeGrafanaVersionsResponse {
+  /**
+   * 可选版本
+   */
+  Versions?: Array<GrafanaVersion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAlertRules返回参数结构体
  */
 export interface DeleteAlertRulesResponse {
@@ -12262,6 +12284,20 @@ export interface DeletePrometheusRecordRuleYamlRequest {
    * 聚合规则列表
    */
   Names: Array<string>
+}
+
+/**
+ * Grafana 版本
+ */
+export interface GrafanaVersion {
+  /**
+   * 版本别名
+   */
+  Alias: string
+  /**
+   * 版本
+   */
+  Version: string
 }
 
 /**

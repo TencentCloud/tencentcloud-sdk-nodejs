@@ -28,6 +28,7 @@ import {
   StopEDRScanTaskRequest,
   AuditLogInfo,
   CreateAccessKeySyncTaskRequest,
+  DescribeLicenseStatusResponse,
   DescribeCosBucketBillingInfoResponse,
   DescribeExposeRulesRequest,
   OrganizationUserInfo,
@@ -46,33 +47,38 @@ import {
   NotifySetting,
   DescribeCosBucketBillingInfoRequest,
   ExportTasksRequest,
+  ModifyCSIPRaspLicenseUnBindsRequest,
   DescribeDspmRiskTendencyRequest,
   AddNewBindRoleUserRequest,
+  ModifyDspmAssetLogDeliverySwitchResponse,
   ExportEDRRulesResponse,
   ModifyAgentRunPolicyRequest,
   DescribeDspmAssetsRequest,
   ComplianceStandardRuleCount,
+  ModifyWebhookPolicyResponse,
   WhereFilter,
   ModifyCosAuditObjectIdentifyStatusResponse,
   VPRExplainInfo,
   DescribeVulItemListResponse,
   ClusterCustomParameters,
-  CreateAIScheduleRequest,
+  DeleteWebhookPoliciesRequest,
   VPRExplainDimensionItem,
   ComplianceCheckItemsOverview,
   DspmIdentifyAssetStatistic,
   DescribeCosActionListRequest,
   DescribeCustomRiskRuleDetailRequest,
+  ModifyBaselinePolicyEnableRequest,
   DescribeSkillScanPayInfoResponse,
   DescribeBaselineOverviewRequest,
   DspmIdentifyRuleItem,
-  DescribeRiskRulesRequest,
+  DescribeSCFAliasListResponse,
   DescribeCWPExposuresResponse,
   ModifyOrganizationAccountStatusResponse,
   DescribeBucketInvokeIpListResponse,
   CreateVulFixRetryTaskRequest,
   DescribeDbAssetInfoRequest,
   DescribeCosIpInvokeLogRequest,
+  ModifyCSIPLicenseBindsRequest,
   DescribeIpInvokeRecordDetailRequest,
   DescribeAccessKeyAlarmResponse,
   CreateCosObjectScanTaskResponse,
@@ -85,8 +91,10 @@ import {
   RuleContentProcessInfo,
   DeleteDspmIdentifyLevelGroupResponse,
   AccessAIAnalysisSMTPRequest,
+  SCFAliasInfo,
   DescribeExposeAssetCategoryResponse,
   DescribeAssetRiskDetailRequest,
+  ModifyCSIPLicenseBindsResponse,
   BehaviorSummary,
   IpAssetListVO,
   DescribeDspmRiskStrategyGroupRequest,
@@ -110,7 +118,7 @@ import {
   ModifyRiskScanCronConfigResponse,
   ModifyDspmAssetLogDeliverySwitchRequest,
   DescribePortScanTaskCountResponse,
-  DescribePreventUninstallGlobalConfResponse,
+  ModifyEDRRuleStatusResponse,
   DescribeBanStatusResponse,
   DescribeDynamicAssetsResponse,
   VulDetailInfo,
@@ -126,12 +134,14 @@ import {
   CreatePublicAssetsExportJobRequest,
   DescribeAssetInfoRequest,
   DescribeVulScanTaskListResponse,
+  DescribeSecurityScoreRuleResponse,
   PortDetectInfo,
   DescribeModifyMachinesLoginTypeTasksRequest,
   ModifyDspmAssetAccountPrivilegesResponse,
   DeleteDspmIdentifyComplianceCategoryRelationRequest,
   CICDToken,
   CreateDspmAssetsExportJobResponse,
+  ModifyBaselineSyncConfRequest,
   EdrAlertCategoryCount,
   DescribeEdrAlertThreatTagsResponse,
   DeleteDspmAssetAccountResponse,
@@ -139,8 +149,9 @@ import {
   CreateCFGRiskPDFReportExportJobResponse,
   DescribeAssetLastSyncTimeResponse,
   CreateAssetViewRisksExportJobResponse,
+  DescribePublicCloudAssetsRequest,
   DescribeAccessKeyAssetResponse,
-  ModifyDspmWhitelistStrategyResponse,
+  DescribeSubnetAssetsResponse,
   DescribeRiskCenterAssetViewPortRiskListRequest,
   AssetViewFilter,
   DescribeCWPLicenseBindScheduleRequest,
@@ -169,6 +180,7 @@ import {
   SourceIPVpcInfo,
   DspmRiskStrategy,
   DescribeClusterInstallCommandResponse,
+  DescribeSCFAliasListRequest,
   UserCSPMInfo,
   DescribeAssetTagsResponse,
   DescribeVulScanTaskDetailResponse,
@@ -193,7 +205,6 @@ import {
   CosInvokeDetailInfo,
   DescribeDspmAccessTopologyAssetsResponse,
   DeleteEDRRulesResponse,
-  DspmArea,
   DescribeUebaRuleRequest,
   AssetProcessItem,
   AssetItem,
@@ -203,6 +214,7 @@ import {
   ModifyDspmIdentifyLevelGroupRequest,
   DescribeNatRulesRequest,
   DescribeLighthouseFirewallRulesRequest,
+  SCFNamespaceInfo,
   ClusterServiceListItem,
   ModifyAIScheduleRequest,
   UserConfSyncStatus,
@@ -213,6 +225,7 @@ import {
   StopVulScanTaskRequest,
   DspmUinUser,
   AssetFilters,
+  ModifyDspmRiskStrategyResponse,
   DescribeRiskTrendDataResponse,
   ModifyEdrAlertIsolationRequest,
   FieldConfig,
@@ -227,6 +240,7 @@ import {
   ExportClientSettingHostListRequest,
   CreateBaselineAggregatedItemExportJobRequest,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
+  DeleteWebhookPoliciesResponse,
   AiScheduleInfo,
   TaskInfo,
   KeySandboxCredential,
@@ -266,6 +280,7 @@ import {
   CreateDspmIdentifyComplianceRuleRelationResponse,
   CreateCSIPManualMalwareScanResponse,
   DescribeAssetRiskListRequest,
+  DescribeSCFFunctionVersionListRequest,
   DescribeModifyMachinesLoginTypeTasksResponse,
   BaselineSyncConf,
   DescribeDspmAssetAccountsRequest,
@@ -273,6 +288,7 @@ import {
   DescribeRiskRuleDetailResponse,
   ModifyCosMarkInfoRequest,
   DescribeAIAnalysisSMTPResponse,
+  DeleteWebhookReceiversResponse,
   CreateDspmIdentifyRuleRequest,
   DeleteDspmIdentifyCategoryResponse,
   LoginWhiteCombinedInfo,
@@ -283,6 +299,7 @@ import {
   ModifyDspmAssetSecurityAnalysisSwitchResponse,
   BaselineAggregatedItem,
   DescribeEdrAlertListResponse,
+  RiskTrendItem,
   ModifyDspmAssetAccountResponse,
   DescribeCosAuditDictionaryListRequest,
   CreateAllAssetsExportJobRequest,
@@ -294,9 +311,11 @@ import {
   CreateHostVulExportJobResponse,
   CosAlarmTrendInfo,
   RevertDspmAssetAccountResponse,
-  EdrAlertTagItem,
+  ModifyDspmPersonalIdentifyResponse,
+  ModifySecurityScoreRuleRequest,
   DescribeDspmRiskTendencyResponse,
   DescribeRiskCenterRiskTrendAnalysisResponse,
+  ModifyBaselineUserOtherConfRequest,
   DescribeAccessKeyAlarmDetailResponse,
   RuleContentProcessNetwork,
   ModifyDspmApproveStatusResponse,
@@ -363,6 +382,7 @@ import {
   DescribeCWPMachinesResponse,
   ModifyAssetTagsByAssetInfoResponse,
   CreateIaCFileExportJobRequest,
+  LicenseBindFilter,
   SensitiveDetail,
   CreateDspmIdentifyComplianceGroupCopyResponse,
   DescribeClbListenerRulesResponse,
@@ -372,10 +392,11 @@ import {
   BaselineItemRiskRecord,
   DescribeAssetTagTreeRequest,
   CreateVulReScanResponse,
+  ScanBaselineRiskListResponse,
   CreateDspmApplyOrderRequest,
   DescribeDspmAssetDatabaseListResponse,
   DspmAccessRecordId,
-  InstanceIDWithAppIdItem,
+  DescribeAssetTagTreeResponse,
   DescribeVulViewVulRiskListRequest,
   DescribeVulRiskListRequest,
   DescribeVULListResponse,
@@ -383,7 +404,7 @@ import {
   DeleteDspmExportTaskRequest,
   AIAgentAsset,
   DspmSecurityAnalyseStatusCount,
-  DescribeSubnetAssetsRequest,
+  DescribeRiskRulesRequest,
   OperateRiskRequest,
   DescribeDspmRiskStrategyRequest,
   UninstallClusterAgentRequest,
@@ -402,7 +423,9 @@ import {
   CosRiskViewInfo,
   ModifyRiskCenterScanTaskRequest,
   DescribeCosAssetRequest,
+  WebhookPolicy,
   DescribeCSIPMalwareScanTaskProgressRequest,
+  DescribeBaselinePolicyCategoryListRequest,
   DescribeVulViewVulRiskListResponse,
   EdrAlertTargetForIgnore,
   DescribeTaskLogListRequest,
@@ -411,8 +434,10 @@ import {
   DescribeDspmIdentifyCategoryListRequest,
   ExposeRuleItem,
   ClusterWithAppIdItem,
+  ModifyPayConfigResponse,
   ModifyPolicyStatusRequest,
   DescribeDspmSupportedAssetTypeRequest,
+  DescribeBaselineFixRecordListResponse,
   ClusterContainerListItem,
   TaskAdvanceCFG,
   KBUpdateMachineItem,
@@ -444,12 +469,15 @@ import {
   DescribeBucketInvokeIpListRequest,
   OrganizationInfo,
   CreateClusterNodeListExportJobResponse,
+  ScanBaselinePolicyListRequest,
   CreateDspmAssetIdentifyInfoExportJobRequest,
-  ServerRisk,
+  ModifyCSIPLicenseUnBindsResponse,
   ScanCSIPTaskAgainResponse,
   DescribeVulIgnoreRuleListResponse,
+  CreateAIScheduleRequest,
   DescribeUserInfoResponse,
   DescribeAIScheduleListRequest,
+  VulImpactComponentInfo,
   VulVendorProduct,
   VulFixTaskInfo,
   EDRRuleTagItem,
@@ -458,7 +486,6 @@ import {
   ModifyDspmIdentifyComplianceGroupResponse,
   DescribeExposureAutoTagRulesRequest,
   DescribeClusterNamespaceListResponse,
-  CreateIaCFileReScanTaskRequest,
   DescribeBaselineOverviewResponse,
   DescribeDspmApproveHistoryResponse,
   DescribeNetAttackSettingRequest,
@@ -479,6 +506,7 @@ import {
   SkillScanRuleHit,
   CreateCloudFunctionExportJobResponse,
   VerifyDspmAssetLoginCodeResponse,
+  ExpiringProduct,
   DescribeAccessKeyAlarmRequest,
   CosAssetInfo,
   DescribeCosRiskEvidenceRequest,
@@ -516,6 +544,7 @@ import {
   ModifyEDRRuleResponse,
   ModifyAgentConfigSettingResponse,
   DescribeRiskBucketListRequest,
+  HostAutoScaleConfig,
   CreateBaselineFixRecordExportJobRequest,
   ExportClientSettingHostListResponse,
   DescribeBaselineAggregatedItemListRequest,
@@ -523,6 +552,7 @@ import {
   DescribeDspmExportTaskResponse,
   DescribeRepositoryImageAssetsResponse,
   DeleteClusterRequest,
+  DescribeBaselineSubTaskListResponse,
   CreateDspmIdentifyComplianceGroupResponse,
   HitRules,
   DescribeVULRiskAdvanceCFGListRequest,
@@ -577,10 +607,11 @@ import {
   DescribeCallRecordRequest,
   DescribeClusterPodAssetsResponse,
   HostVulComponent,
+  DescribeSecurityScoreRuleRequest,
   DescribeRiskScanCronConfigRequest,
   CreateExposureAutoTagRuleResponse,
   EDRScanRecordItem,
-  DescribeAssetTagTreeResponse,
+  InstanceIDWithAppIdItem,
   AddNewBindRoleUserResponse,
   CosBucketAccessWay,
   DescribeDspmIdentifyLevelGroupListResponse,
@@ -589,12 +620,15 @@ import {
   DescribeDspmPayInfoResponse,
   DeleteDspmIdentifyComplianceCategoryRelationResponse,
   ModifyDspmIpInfoRequest,
+  DescribeLicenseStatusRequest,
   VulFixTaskItem,
+  ModifyNotifyAgentOfflineDurationRequest,
   DescribePreventUninstallGlobalConfRequest,
   DescribeBaselineUserWeakPasswordConfResponse,
   DspmTablePrivilege,
   DescribeSearchBugInfoResponse,
-  ModifyDspmPersonalIdentifyResponse,
+  EdrAlertTagItem,
+  DescribeSecurityScoreOverviewResponse,
   DescribeExposeAssetCategoryRequest,
   BaselinePolicy,
   AssetDetailItem,
@@ -609,6 +643,7 @@ import {
   ModifyBruteAttackRulesRequest,
   DspmIdentifyLevelItem,
   DescribeVulFixTaskListRequest,
+  ModifyCSIPRaspLicenseUnBindsResponse,
   ModifyNotifySettingAlertRequest,
   AssetCluster,
   ExportTask,
@@ -620,11 +655,13 @@ import {
   DescribeVulFixableMachineListResponse,
   DescribeAssetLastSyncTimeRequest,
   UpdateAccessKeyAlarmStatusResponse,
+  CategoryItem,
   ScanTaskRecordItem,
   DescribeOrganizationUserInfoResponse,
-  CreateBaselineFixRecordExportJobResponse,
+  DescribeSubnetAssetsRequest,
   DspmIdentifyComplianceCategoryRelation,
   KeyValueInt,
+  SCFFunctionVersionInfo,
   DescribeIaCFileOverviewResponse,
   KBFixSummaryItem,
   ModifyReverseShellSystemPolicyConfigRequest,
@@ -632,6 +669,7 @@ import {
   VulFixableMachineItem,
   DescribeClusterAssetsRequest,
   DescribeAIScheduleListResponse,
+  DescribeCSIPLicenseBindScheduleRequest,
   DescribeProcessDaemonHostResponse,
   ModifyDspmIdentifyComplianceGroupStatusResponse,
   DescribeAssetProcessListRequest,
@@ -645,6 +683,7 @@ import {
   ModifyVulWhitelistSwitchRequest,
   DescribeDspmSyncUsersStatusResponse,
   DescribeSearchBugInfoRequest,
+  DescribeBaselinePolicyNameExistAppidListResponse,
   DspmAddIdentifyLevelItem,
   DspmIdentifyRuleDetail,
   CreateBaselineAggregatedItemExportJobResponse,
@@ -653,6 +692,7 @@ import {
   AssetFilterConfig,
   DescribeHostVulOverviewRequest,
   DescribeSecurityGroupPolicyRequest,
+  CopyBaselinePolicyRequest,
   ScanEDRTaskAgainRequest,
   CosRiskBucketInfo,
   LogValueInfo,
@@ -663,6 +703,7 @@ import {
   DescribeDspmIdentifyRuleListRequest,
   DescribeExposeRiskStatisticsResponse,
   StartOrModifyProcessDaemonResponse,
+  BaselineFixRecord,
   DescribeCosSourceIpRequest,
   DescribeEdrExcludeNetworkSegmentsResponse,
   DescribeCVMAssetInfoRequest,
@@ -672,6 +713,7 @@ import {
   ModifyBaselinePolicyResponse,
   CreateAssetFilterViewRequest,
   DescribeClusterPodAssetsRequest,
+  ModifyBaselineUserWeakPasswordConfRequest,
   ModifyShareUserCSPMRequest,
   VPRExplainDimension,
   VPRLabel,
@@ -686,6 +728,7 @@ import {
   SyncDspmUsersResponse,
   DescribeCLSLogIndexV3Response,
   PortRiskAdvanceCFGParamItem,
+  DescribeBaselineSubTaskListRequest,
   AssetBaseInfoResponse,
   BaselineCustomItemConf,
   DescribeRiskCallRecordResponse,
@@ -727,13 +770,15 @@ import {
   MachineLoginType,
   DescribeBanModeResponse,
   AccessKeyAlarmInfo,
+  ModifyBaselineUserOtherConfResponse,
+  ModifyWebhookPolicyStatusRequest,
   DownloadDspmExportLogResponse,
   DescribeBaselineAggregatedPolicyListRequest,
   DescribeCheckViewRisksRequest,
   DescribeDspmAssetFieldListRequest,
   BaselineSubCategory,
   DescribeVULRiskDetailRequest,
-  DspmIdentifyRuleStructuredTestItem,
+  DescribeNotifyAgentOfflineDurationRequest,
   CreateVulRisksExportJobRequest,
   CreateAssetProcessExportJobResponse,
   DescribeClusterContainerDetailRequest,
@@ -742,7 +787,7 @@ import {
   DescribeCWPTaskDurationRequest,
   RiskRuleItem,
   EDRExportJobItem,
-  ComponentDetailItem,
+  DescribeEdrExportJobListResponse,
   DspmAssetIdentifyInfo,
   ModifyBanModeResponse,
   DescribeDspmAssetAccountIdentifyRequest,
@@ -768,19 +813,23 @@ import {
   AssetClusterPod,
   StopEDRScanTaskResponse,
   DescribeRiskScanCronConfigResponse,
+  DescribeSecurityScoreOverviewRequest,
   AssetViewWeakPassRisk,
   ModifyPolicyStatusResponse,
   ClusterIDWithAppIdItem,
   ModifyBanModeRequest,
-  ModifyDspmRiskStrategyResponse,
+  CreateIaCFileReScanTaskRequest,
   CosBucketInfo,
   DescribeRiskCenterPortViewPortRiskListResponse,
   DescribeDspmPersonApplyHistoryRequest,
   AssetTypeStatisticsInfo,
+  DescribeAIScheduleTaskDetailResponse,
   DescribeNotifySettingAlertResponse,
   DescribeRiskCenterVULViewVULRiskListRequest,
   DisableAIScheduleResponse,
   DescribeExposeRisksResponse,
+  DimensionTrendData,
+  DescribeDefaultSecurityScoreRuleResponse,
   DescribeBaselineItemRiskListResponse,
   ModifyMachinesLoginTypeResponse,
   DescribeClusterContainerPortListResponse,
@@ -788,6 +837,7 @@ import {
   ModifyNotifySettingRequest,
   CreateAssetProcessExportJobRequest,
   CreateSkillScanRequest,
+  SCFFunctionInfo,
   DescribeVulScanTaskDetailRequest,
   ModifyIaCTokenPeriodRequest,
   DescribeCspmShardConfigRequest,
@@ -821,6 +871,8 @@ import {
   Element,
   ProductSupport,
   ScanBaselineItemListResponse,
+  DescribeSCFFunctionListResponse,
+  WebhookCustomField,
   CreateCosPolicyResponse,
   ExposeAssetTypeItem,
   DescribeDbAssetsResponse,
@@ -831,6 +883,7 @@ import {
   DeleteClusterResponse,
   ModifyBruteAttackBanStatusResponse,
   ScanBaselineAssetItemListResponse,
+  ModifyNotifyAgentOfflineDurationResponse,
   DeleteExposureAutoTagRuleResponse,
   CustomRiskRuleDetailItem,
   ReportItemKey,
@@ -863,7 +916,7 @@ import {
   UserCallRecord,
   DeleteLoginWhiteListRequest,
   LogItems,
-  DescribeSubnetAssetsResponse,
+  ModifyDspmWhitelistStrategyResponse,
   DescribeKeySandboxCredentialRequest,
   DspmApproverStep,
   DescribeDspmIdentifyComplianceGroupDetailRequest,
@@ -884,12 +937,14 @@ import {
   CosRiskActionInfo,
   ClusterPodListItem,
   DescribeDspmIdentifyRuleListResponse,
+  ScoreRuleItem,
   ModifyDspmIdentifyComplianceRuleLevelInfoResponse,
   RegionConfig,
   DescribeUserDspmInfoListRequest,
   DescribeCosAlarmListRequest,
   DescribeVulItemListRequest,
   DescribeClusterNamespaceListRequest,
+  DescribeBaselineCalculatingStatisticsPolicyIDListRequest,
   CosBucketTaskInfo,
   StopProcessDaemonRequest,
   AssetTypeNode,
@@ -902,6 +957,7 @@ import {
   DspmDictionary,
   CosDictionary,
   DescribeMandatoryVulSetResponse,
+  DescribeBaselinePolicyItemListRequest,
   VulHostBriefInfo,
   DescribeCosAlarmListResponse,
   ModifyCosAuditObjectSampleRateResponse,
@@ -922,6 +978,7 @@ import {
   ModifyNetAttackSettingResponse,
   AttackStageCount,
   BaselinePolicySubCategoryConf,
+  DescribeBaselinePolicyCategoryListResponse,
   DescribeClusterContainerComponentListResponse,
   StartOrModifyPreventUninstallResponse,
   DescribeProcessDaemonGlobalConfResponse,
@@ -947,8 +1004,9 @@ import {
   DescribeAgentRunPolicyRequest,
   DescribeIaCFileListResponse,
   DescribeBaselineAggregatedPolicyListResponse,
+  DescribeSecurityRiskTrendResponse,
   DescribeLoginTypeGlobalConfRequest,
-  DescribeEdrExportJobListResponse,
+  ComponentDetailItem,
   DescribeCLSLogIndexV3Request,
   DescribeUserInfoRequest,
   EDRScanTaskContainerItem,
@@ -962,6 +1020,7 @@ import {
   ModifyMachineRemarkRequest,
   DescribeTagRuleAssetsResponse,
   DescribeSourceIPAssetResponse,
+  ModifyWebhookReceiverRequest,
   CreateIaCFileExportJobResponse,
   AccountBriefInfo,
   DescribeDspmApplyOrderListResponse,
@@ -974,10 +1033,12 @@ import {
   DescribeAIAnalysisFileDownloadURLRequest,
   DspmIdentifyComplianceItem,
   DescribeOrganizationInfoResponse,
+  DescribeMultiCloudAssetCountResponse,
   DescribeAISchedulePlanListResponse,
   BruteAttackRule,
   DeleteEdrLogCollectPathsRequest,
   UserDspmInfo,
+  WebhookReceiver,
   RuleContentCmdLine,
   DescribeKBDetailResponse,
   DspmColumnPrivilege,
@@ -997,14 +1058,18 @@ import {
   DspmIdentifyComplianceRuleRelation,
   LogSearchInfos,
   CreateAssetViewRisksExportJobRequest,
+  DescribeWebhookReceiverListResponse,
   DescribeDspmAssetAccessTopologyRequest,
+  ModifyBaselinePolicyEnableResponse,
   ContainerProcessItem,
   AssetViewPortRisk,
-  ModifyDspmAssetLogDeliverySwitchResponse,
+  DspmArea,
   DescribeDspmRiskStrategyGroupResponse,
   DspmIdentifyRefComplianceInfo,
   DescribeCosAkInvokeIpListResponse,
+  DescribeSCFFunctionVersionListResponse,
   ReportTaskIdList,
+  DescribeRepositoryImageAssetsRequest,
   DescribeAssetRiskDetailResponse,
   ModifyDspmIdentifyComplianceRuleLevelInfoRequest,
   HostKBRisk,
@@ -1018,7 +1083,7 @@ import {
   DescribeCosIpInvokeLogResponse,
   ModifyExposureTagRequest,
   CreatePodServiceListExportJobRequest,
-  ModifyEdrAlertIsolationResponse,
+  CreatePodServiceListExportJobResponse,
   BaselinePolicySystemCategoryConf,
   ModifyDspmIdentifyRuleStatusRequest,
   CreateComplianceRiskExportJobRequest,
@@ -1028,17 +1093,18 @@ import {
   ComplianceCheckTypeItem,
   StandardModeConfig,
   AddDspmAssetManagerResponse,
-  DescribeClusterContainerProcessListResponse,
+  LicenseBindScheduleItem,
   DescribeNFSScanHostRequest,
   DeleteAIScheduleResponse,
   DescribeCosOverviewResponse,
   DescribeVULRiskAdvanceCFGListResponse,
-  DescribeRepositoryImageAssetsRequest,
+  DescribeWebhookPolicyListResponse,
   ModifyAgentConfigSettingRequest,
   CreateDspmAssetAccessTopologyExportJobRequest,
   EDRFilter,
   DescribeCosObjectScanTaskResponse,
   DescribeCSIPMalwareScanTaskProgressResponse,
+  PublicAssetInfo,
   DescribeDspmIdentifyComplianceGroupListResponse,
   DescribeExposureTrendRequest,
   AssetViewCFGRisk,
@@ -1056,8 +1122,10 @@ import {
   DescribeDomainAssetsRequest,
   DescribeNICAssetsRequest,
   DescribeDspmAssetFieldListResponse,
+  ModifyWebhookPolicyRequest,
   DescribeAccessKeyUserListRequest,
   UpdateAlertStatusListResponse,
+  TrendDataPoint,
   DescribeIpInvokeRecordDetailResponse,
   CosAccessInfo,
   DescribeRiskRuleDetailRequest,
@@ -1072,12 +1140,13 @@ import {
   TaskLogURL,
   DescribeVulLabelListResponse,
   DeleteDspmIdentifyComplianceRuleRelationRequest,
-  ModifyEDRRulesActionRequest,
+  LogItem,
   ModifyAgentRunPolicyResponse,
   DescribeExportJobDownloadURLRequest,
   DescribeDspmAssetDatabaseListRequest,
   DescribeIaCTokenListRequest,
   ModifyProtectionSettingRequest,
+  ServerRisk,
   CheckRiskResponse,
   DescribeDspmAssetAccountIdentifyResponse,
   CreateVulFixedExportJobResponse,
@@ -1097,6 +1166,7 @@ import {
   ModifyVulWhitelistSwitchResponse,
   Tags,
   DescribeAbTestUserRequest,
+  ProtectionConfigItem,
   DescribeCosRiskActionListResponse,
   DescribeAccessKeyRiskResponse,
   LogDynamicIndex,
@@ -1106,6 +1176,7 @@ import {
   ExportCSIPMalwareScanTaskDetailResponse,
   ClusterNamespaceListItem,
   DescribeVulFixedListResponse,
+  TestWebhookReceiverRequest,
   DescribeExposureAutoTagRulesResponse,
   DynamicTab,
   ModifyDspmRestoreLogTaskResponse,
@@ -1121,9 +1192,10 @@ import {
   DescribeComplianceOverviewRequest,
   AssetTagPreviewAssetItem,
   DescribeExposureAutoTagAttributeResponse,
+  DspmIdentifyRuleStructuredTestItem,
   DeleteAssetFilterViewRequest,
   DescribeScanTaskRecordListRequest,
-  ModifyEDRRuleStatusResponse,
+  DescribePreventUninstallGlobalConfResponse,
   DescribeRiskCenterServerRiskListRequest,
   DescribeKBDetailRequest,
   ModifyNotifyAssetConfigResponse,
@@ -1163,6 +1235,7 @@ import {
   AgentRunModePolicy,
   RoleInfo,
   DescribeBaselineCategoryItemListRequest,
+  ModifyWebhookReceiverResponse,
   DescribeDspmWhitelistStrategyResponse,
   CreatedTaskItem,
   DescribeDspmSupportedAssetTypeResponse,
@@ -1178,7 +1251,8 @@ import {
   DescribeBaselineMainTaskListRequest,
   DeleteAIAnalysisSMTPAccessResponse,
   DescribeVdbAndPocInfoRequest,
-  CreatePodServiceListExportJobResponse,
+  DescribePublicCloudAssetsResponse,
+  ModifyEdrAlertIsolationResponse,
   DspmIdentifyCategoryDetail,
   AccessKeyAlarm,
   CreateVulScanManualRequest,
@@ -1213,6 +1287,7 @@ import {
   DescribeDspmAccessTopologyAccountsRequest,
   DescribeClusterSuperNodeInfoRequest,
   DescribeDspmIdentifyComplianceGroupListRequest,
+  CloudAssetInfo,
   TaskCenterCFGRiskInputParam,
   DescribeDspmAssetSecurityAnalyseStatusRequest,
   CreateAssetFilterViewResponse,
@@ -1226,13 +1301,15 @@ import {
   ContainerComponentItem,
   ModifyDspmIdentifyRuleStatusResponse,
   DescribeListenerListRequest,
-  DescribeAIScheduleTaskDetailResponse,
+  DescribeClusterContainerProcessListResponse,
   DeleteIaCAccessTokenRequest,
   DeleteRiskScanTaskResponse,
   DescribeClusterAssetListRequest,
   TagItem,
+  DescribeCSIPLicenseBindScheduleResponse,
   BaselineRiskLevelStatistic,
   DescribeRiskBucketListResponse,
+  DescribeBaselineFixRecordListRequest,
   DeleteRiskScanTaskRequest,
   DescribeHostVulRiskListResponse,
   CreatePodContainerListExportJobResponse,
@@ -1244,8 +1321,11 @@ import {
   DescribeCosAssetResponse,
   CreateCosAssetSyncTaskResponse,
   BaselineClusterAsset,
+  DescribeDspmAssetAccessTopologyResponse,
+  ModifyRuleItem,
   AssetStatisticsInfo,
   StopCSIPManualMalwareScanResponse,
+  ModifyWebhookPolicyStatusResponse,
   CWPOrderList,
   DspmSupportedAssetType,
   DescribeExposureStatisticsItem,
@@ -1260,6 +1340,7 @@ import {
   DescribeCosActionListResponse,
   DescribeBaselineUserOtherConfRequest,
   DescribeIaCTokenListResponse,
+  DescribeWebhookReceiverListRequest,
   ClusterListItem,
   DescribeNFSScanConfResponse,
   MachineTag,
@@ -1299,6 +1380,7 @@ import {
   DeleteCosAkAssetResponse,
   DescribeDspmApproveOrderListResponse,
   CreateDomainAndIpRequest,
+  LicenseBindFailedItem,
   CustomRiskRuleItem,
   DescribeDspmAssetSupportedPrivilegesRequest,
   DescribeEdrAlertCountForAssetResponse,
@@ -1308,14 +1390,16 @@ import {
   DescribeGatewayAssetsRequest,
   DeleteAssetFilterViewResponse,
   DescribeRiskCallRecordRequest,
+  SeverityItem,
   ModifyRiskCenterRiskStatusResponse,
+  DescribeBaselinePolicyNameExistAppidListRequest,
   DescribeEdrAlertInfoResponse,
   ModifyRaspLicenseBindsRequest,
   CreateDspmApproveHistoryExportJobRequest,
   VPRRatingInfo,
   ModifyEdrExcludeNetworkSegmentsRequest,
   AssetProviderDistributeInfo,
-  ModifyDspmAssetSecurityAnalysisSwitchRequest,
+  DescribeCosRoleAccessPermissionsResponse,
   DescribeEDRScanRecordListRequest,
   DescribeOrganizationUserInfoRequest,
   ModifyDspmAssetAccountPrivilegesRequest,
@@ -1326,10 +1410,12 @@ import {
   DescribeRiskCenterRiskTrendAnalysisRequest,
   DescribeCosRoleAccessPermissionResponse,
   ResetDspmAssetAccountPasswordResponse,
+  WebhookReceiverBrief,
   DescribeClusterInstallCommandRequest,
   DescribeVpcAssetsResponse,
   DescribeClusterContainerWebServiceListResponse,
   DescribeDspmAssetAccountPresetPrivilegesResponse,
+  ModifyCSIPRaspLicenseBindsRequest,
   LogAppCollectPath,
   RiskCronConfig,
   UebaCustomRule,
@@ -1338,6 +1424,7 @@ import {
   DescribeMandatoryVulSetRequest,
   CreateIaCAccessTokenResponse,
   DspmAssetTypeCount,
+  DeleteWebhookReceiversRequest,
   DescribeLoginTypeHostRequest,
   DescribeDspmApproveHistoryRequest,
   DescribeClusterAssetListResponse,
@@ -1348,21 +1435,27 @@ import {
   DeleteAssetTagResponse,
   DescribeAIScheduleTaskListResponse,
   ModifyVulWhitelistConfigRequest,
+  LicenseStatusItem,
+  TestWebhookReceiverResponse,
   ModifyDspmAssetDataScanTaskResponse,
   DescribeMachineGeneralResponse,
   DescribeClusterSummaryResponse,
+  WebhookNotifyItem,
   DescribeVdbAndPocInfoResponse,
   DescribeBaselineMainTaskItemListRequest,
   DescribeNotifySettingAlertRequest,
   DescribeDspmLogListRequest,
   DescribeDspmAccessRecordResponse,
+  DescribeBaselineCalculatingStatisticsPolicyIDListResponse,
   DescribeCosAuditAppIdListRequest,
   ModifyDspmIdentifyLevelItemResponse,
   CreateRiskCenterScanTaskRequest,
   OrderDetail,
   ModifyEDRRulesActionResponse,
   CreateCosObjectScanTaskRequest,
+  ScanBaselinePolicyListResponse,
   DescribeScanTaskListResponse,
+  LicenseUnbindFailedItem,
   DeleteDspmApplyOrderResponse,
   RevertDspmAssetAccountRequest,
   DescribeDspmAssetIdentifyInfoListRequest,
@@ -1370,7 +1463,7 @@ import {
   DescribeAILinkSettingRequest,
   ModifyDspmBackupSettingResponse,
   DescribeAIAgentAssetListResponse,
-  CreateClusterNodeListExportJobRequest,
+  ModifyDspmIdentifyComplianceGroupStatusRequest,
   ModifyDspmAssetDataScanTaskRequest,
   ModifyDspmAssetDataScanTaskStatusRequest,
   CancelEdrAlertIgnoreResponse,
@@ -1380,6 +1473,7 @@ import {
   DescribeRiskCenterWebsiteRiskListRequest,
   DescribeDspmStatisticsRequest,
   DescribeCFWAssetStatisticsResponse,
+  DescribeSCFFunctionListRequest,
   DescribeKBUpdatableMachineListRequest,
   DescribeCosIdentifyFileListResponse,
   DspmIdentifyCategoryRuleRelateItem,
@@ -1397,6 +1491,7 @@ import {
   DescribeComplianceStandardTermTreeRequest,
   CreateClusterNamespaceListExportJobResponse,
   EdrAlertDetail,
+  DescribeSCFNamespaceListRequest,
   NotPassItemStatistic,
   DescribeNFSScanConfRequest,
   DspmDbAsset,
@@ -1410,6 +1505,7 @@ import {
   DescribeScanStatisticRequest,
   DescribeCFGRiskReportStatisticsRequest,
   ModifyNotifySettingAlertResponse,
+  BaselineSubTask,
   DescribeClbTargetsRequest,
   DescribeClbListenerListRequest,
   SkillCapabilityTag,
@@ -1422,26 +1518,29 @@ import {
   DescribeAssetViewVulRiskListResponse,
   CosAuditPayInfo,
   AssetRiskInfo,
-  VulImpactComponentInfo,
+  CreateBaselineFixRecordExportJobResponse,
   CVMAssetVO,
   VULBaseInfo,
-  LogItem,
+  ModifyEDRRulesActionRequest,
   NatSnatRuleItem,
   RelatedEvent,
   CommandPluginState,
   EnableAIScheduleResponse,
   DescribeBaselineSystemCategoryListResponse,
+  ProtectionDetail,
   CreateIaCFileReScanTaskResponse,
-  DescribeCosRoleAccessPermissionsResponse,
+  ModifyDspmAssetSecurityAnalysisSwitchRequest,
   DeleteCosAkAssetRequest,
   DescribeNotifyAssetConfigResponse,
   VerifyDspmAssetLoginCodeRequest,
   DescribeIaCFileReportResponse,
   CreateComplianceRiskExportJobResponse,
+  DescribeDefaultSecurityScoreRuleRequest,
   DescribeDspmPersonApplyHistoryResponse,
   DescribeAssetProcessListResponse,
   CreateDspmWhitelistStrategyRequest,
   DescribeVulHostRelateComponentRequest,
+  DimensionItem,
   ComplianceStandardOverview,
   StopVulScanTaskResponse,
   MiniTagItem,
@@ -1451,6 +1550,7 @@ import {
   DescribeEdrAlertMultiAttackStagesRequest,
   DeleteCosPolicyResponse,
   SkillScanEngineResult,
+  DescribeMultiCloudAssetCountRequest,
   WebsiteRisk,
   DescribeClusterServiceListResponse,
   RiskCenterOverviewTrendAnalysis,
@@ -1477,10 +1577,12 @@ import {
   DescribePortDetectListRequest,
   DeleteExposureAutoTagRuleRequest,
   DescribeEdrAlertMultiAttackStagesResponse,
+  CopyBaselinePolicyResponse,
   ModifyReverseShellSystemPolicyConfigResponse,
   DescribeClusterAssetSyncTaskStatusRequest,
   DescribeRiskCenterPortViewPortRiskListRequest,
   DescribeAccessKeyUserDetailRequest,
+  DescribeAlertListRequest,
   ExposesItem,
   CreateDynamicAssetsExportJobResponse,
   DescribeBruteAttackRulesRequest,
@@ -1489,21 +1591,26 @@ import {
   DspmPersonIdentifyItem,
   DescribeClusterPodListResponse,
   ScanTaskInfoList,
-  AssetFilterOptions,
+  ModifyDspmAssetDataScanTaskStatusResponse,
+  ScanBaselineRiskListRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
   DspmScheduleConfig,
   DescribeCWPExposePathRequest,
   DeleteDspmBackupLogListRequest,
+  ModifyPayConfigRequest,
   DescribeCVMAssetsRequest,
   BaselineMainTask,
   DescribeOtherCloudAssetsRequest,
   DescribeAILinkSettingResponse,
+  DescribeSecurityRiskTrendRequest,
   CosAlarmRiskIdInfo,
   BatchModifyBaselinePolicyRequest,
   DescribeDspmWhitelistStrategyRequest,
+  DescribeWebhookPolicyListRequest,
   DescribeClusterNodeListResponse,
   DescribeBaselineUserWeakPasswordConfRequest,
   DescribeCosRiskEvidenceResponse,
+  DescribeNotifyAgentOfflineDurationResponse,
   DescribeExposeRisksRequest,
   ExportTasksResponse,
   DescribeDbAssetInfoResponse,
@@ -1514,6 +1621,7 @@ import {
   ClbListenerItem,
   VulFixTaskDetailItem,
   ModifyVulWhitelistConfigResponse,
+  WebhookAssetScope,
   DescribeAKAnalysisDetailResponse,
   DeleteDspmIdentifyRuleRequest,
   DescribeCloudAssetsResponse,
@@ -1542,13 +1650,14 @@ import {
   DescribeClusterPodListRequest,
   SyncDspmAssetsRequest,
   DescribeScanReportListResponse,
-  DescribeDspmAssetAccessTopologyResponse,
+  ModifyBaselineUserWeakPasswordConfResponse,
   DescribeLoginWhiteCombinedListResponse,
   DescribeCosInvokeUaResponse,
   StartOrModifyPreventUninstallRequest,
   DescribeListenerListResponse,
   HostBriefInfo,
   VulFixedItem,
+  ModifyCSIPLicenseUnBindsRequest,
   DescribeCosAuditPayInfoResponse,
   VULViewVULRiskData,
   CreateAssetSyncTaskRequest,
@@ -1574,9 +1683,11 @@ import {
   DescribeCosAssetSyncTaskRequest,
   AIScheduleUserIdentity,
   DescribeCosAlarmTrendDataResponse,
-  ModifyDspmIdentifyComplianceGroupStatusRequest,
+  CreateClusterNodeListExportJobRequest,
+  DeleteBaselineSelfDefinedPolicyListResponse,
   DeleteEDRScanTaskResponse,
   DescribeCosBucketListRequest,
+  DeleteBaselineSelfDefinedPolicyListRequest,
   DspmIdentifyLevelGroupItem,
   DeleteCSIPMalwareScanTaskResponse,
   ServerRiskSuggestion,
@@ -1591,8 +1702,8 @@ import {
   BaselineUserOtherConf,
   DescribeVulFixedHostDetailResponse,
   DescribeHostKBRiskListRequest,
-  DescribeAlertListRequest,
-  ModifyDspmAssetDataScanTaskStatusResponse,
+  DescribeBaselinePolicyItemListResponse,
+  AssetFilterOptions,
   DescribeClusterContainerPortListRequest,
   DeleteDspmIdentifyRuleResponse,
   ModifyDspmRiskInfoResponse,
@@ -1605,15 +1716,19 @@ import {
   DescribeCSIPRiskStatisticsRequest,
   ModifyAssetFilterViewResponse,
   DescribeReverseShellSystemPolicyConfigRequest,
+  ModifySecurityScoreRuleResponse,
   DescribeIaCFileOverviewRequest,
   DescribeCFWAssetStatisticsRequest,
   DescribeAccessKeyUserListResponse,
+  ModifyCSIPRaspLicenseBindsResponse,
   CosAlarmInfo,
   DescribeDspmLogListResponse,
+  DescribeSCFNamespaceListResponse,
   DeleteDspmWhitelistStrategyRequest,
   DescribeRiskCenterAssetViewPortRiskListResponse,
   BatchModifyBaselinePolicyResponse,
   DescribeAssumeRoleResponse,
+  ModifyBaselineSyncConfResponse,
 } from "./csip_models"
 
 /**
@@ -1726,6 +1841,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关闭进程守护功能
+   */
+  async ModifyNFSScanHost(
+    req: ModifyNFSScanHostRequest,
+    cb?: (error: string, rep: ModifyNFSScanHostResponse) => void
+  ): Promise<ModifyNFSScanHostResponse> {
+    return this.request("ModifyNFSScanHost", req, cb)
+  }
+
+  /**
    * 获取主机漏洞概览
    */
   async DescribeHostVulOverview(
@@ -1743,6 +1868,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmApproveHistoryResponse) => void
   ): Promise<DescribeDspmApproveHistoryResponse> {
     return this.request("DescribeDspmApproveHistory", req, cb)
+  }
+
+  /**
+   * 手动解绑主机授权。同步执行，直接返回结果。仅解绑主机授权（category=0，含专业版/旗舰版）。单订单模式下appid即可定位订单，无需传ResourceId。RASP解绑请用ModifyCSIPRaspLicenseUnBinds。
+   */
+  async ModifyCSIPLicenseUnBinds(
+    req: ModifyCSIPLicenseUnBindsRequest,
+    cb?: (error: string, rep: ModifyCSIPLicenseUnBindsResponse) => void
+  ): Promise<ModifyCSIPLicenseUnBindsResponse> {
+    return this.request("ModifyCSIPLicenseUnBinds", req, cb)
   }
 
   /**
@@ -1786,13 +1921,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取内容风险列表
+   * 获取多云（腾讯云、阿里云、AWS、华为云、Azure 等）接入的资产总数及各云厂商资产数量明细
    */
-  async DescribeRiskCenterWebsiteRiskList(
-    req: DescribeRiskCenterWebsiteRiskListRequest,
-    cb?: (error: string, rep: DescribeRiskCenterWebsiteRiskListResponse) => void
-  ): Promise<DescribeRiskCenterWebsiteRiskListResponse> {
-    return this.request("DescribeRiskCenterWebsiteRiskList", req, cb)
+  async DescribeMultiCloudAssetCount(
+    req: DescribeMultiCloudAssetCountRequest,
+    cb?: (error: string, rep: DescribeMultiCloudAssetCountResponse) => void
+  ): Promise<DescribeMultiCloudAssetCountResponse> {
+    return this.request("DescribeMultiCloudAssetCount", req, cb)
   }
 
   /**
@@ -1813,6 +1948,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskItemListResponse) => void
   ): Promise<DescribeRiskItemListResponse> {
     return this.request("DescribeRiskItemList", req, cb)
+  }
+
+  /**
+   * 查询客户端离线时长
+   */
+  async DescribeNotifyAgentOfflineDuration(
+    req?: DescribeNotifyAgentOfflineDurationRequest,
+    cb?: (error: string, rep: DescribeNotifyAgentOfflineDurationResponse) => void
+  ): Promise<DescribeNotifyAgentOfflineDurationResponse> {
+    return this.request("DescribeNotifyAgentOfflineDuration", req, cb)
+  }
+
+  /**
+   * 批量删除通知策略。
+   */
+  async DeleteWebhookPolicies(
+    req: DeleteWebhookPoliciesRequest,
+    cb?: (error: string, rep: DeleteWebhookPoliciesResponse) => void
+  ): Promise<DeleteWebhookPoliciesResponse> {
+    return this.request("DeleteWebhookPolicies", req, cb)
   }
 
   /**
@@ -1876,6 +2031,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取安全评分概览，实时计算各维度和子项扣分情况
+   */
+  async DescribeSecurityScoreOverview(
+    req: DescribeSecurityScoreOverviewRequest,
+    cb?: (error: string, rep: DescribeSecurityScoreOverviewResponse) => void
+  ): Promise<DescribeSecurityScoreOverviewResponse> {
+    return this.request("DescribeSecurityScoreOverview", req, cb)
+  }
+
+  /**
    * 获取扫描任务列表
    */
   async DescribeScanTaskList(
@@ -1883,6 +2048,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanTaskListResponse) => void
   ): Promise<DescribeScanTaskListResponse> {
     return this.request("DescribeScanTaskList", req, cb)
+  }
+
+  /**
+   * 切换通知策略的启用状态。
+   */
+  async ModifyWebhookPolicyStatus(
+    req: ModifyWebhookPolicyStatusRequest,
+    cb?: (error: string, rep: ModifyWebhookPolicyStatusResponse) => void
+  ): Promise<ModifyWebhookPolicyStatusResponse> {
+    return this.request("ModifyWebhookPolicyStatus", req, cb)
   }
 
   /**
@@ -1963,6 +2138,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmAssetDatabaseListResponse) => void
   ): Promise<DescribeDspmAssetDatabaseListResponse> {
     return this.request("DescribeDspmAssetDatabaseList", req, cb)
+  }
+
+  /**
+   * 查询当前用户在指定地域下的 SCF（云函数）命名空间列表。
+   */
+  async DescribeSCFNamespaceList(
+    req: DescribeSCFNamespaceListRequest,
+    cb?: (error: string, rep: DescribeSCFNamespaceListResponse) => void
+  ): Promise<DescribeSCFNamespaceListResponse> {
+    return this.request("DescribeSCFNamespaceList", req, cb)
   }
 
   /**
@@ -2146,6 +2331,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 公网资产
+   */
+  async DescribePublicCloudAssets(
+    req: DescribePublicCloudAssetsRequest,
+    cb?: (error: string, rep: DescribePublicCloudAssetsResponse) => void
+  ): Promise<DescribePublicCloudAssetsResponse> {
+    return this.request("DescribePublicCloudAssets", req, cb)
+  }
+
+  /**
    * 查询Dspm资产登录凭据
    */
   async DescribeDspmAssetLoginCredential(
@@ -2268,6 +2463,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取扫描子任务列表，用于任务详情页“资产维度”展示每台主机/每个集群的扫描状态与失败原因。
+   */
+  async DescribeBaselineSubTaskList(
+    req: DescribeBaselineSubTaskListRequest,
+    cb?: (error: string, rep: DescribeBaselineSubTaskListResponse) => void
+  ): Promise<DescribeBaselineSubTaskListResponse> {
+    return this.request("DescribeBaselineSubTaskList", req, cb)
+  }
+
+  /**
    * 暴露资产导出任务
    */
   async CreateExposuresExportJob(
@@ -2275,6 +2480,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateExposuresExportJobResponse) => void
   ): Promise<CreateExposuresExportJobResponse> {
     return this.request("CreateExposuresExportJob", req, cb)
+  }
+
+  /**
+   * 更新当前账号（管理员）的基线同步配置。AutoSync=true 时 TargetAppidList 不可为空，且元素不可为 0。
+   */
+  async ModifyBaselineSyncConf(
+    req: ModifyBaselineSyncConfRequest,
+    cb?: (error: string, rep: ModifyBaselineSyncConfResponse) => void
+  ): Promise<ModifyBaselineSyncConfResponse> {
+    return this.request("ModifyBaselineSyncConf", req, cb)
   }
 
   /**
@@ -2438,6 +2653,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 绑定 RASP / 旗舰版授权到指定订单。异步执行，返回TaskId供查询进度。LicenseType=rasp 绑 RASP，LicenseType=enterprise_hp 绑旗舰版主机授权；AssetType 区分主机/容器节点/EKS。
+   */
+  async ModifyCSIPRaspLicenseBinds(
+    req: ModifyCSIPRaspLicenseBindsRequest,
+    cb?: (error: string, rep: ModifyCSIPRaspLicenseBindsResponse) => void
+  ): Promise<ModifyCSIPRaspLicenseBindsResponse> {
+    return this.request("ModifyCSIPRaspLicenseBinds", req, cb)
+  }
+
+  /**
    * 全部资产
    */
   async DescribeCloudAssets(
@@ -2517,6 +2742,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNetAttackSettingResponse) => void
   ): Promise<ModifyNetAttackSettingResponse> {
     return this.request("ModifyNetAttackSetting", req, cb)
+  }
+
+  /**
+   * 获取基线策略名字存在的用户列表
+   */
+  async DescribeBaselinePolicyNameExistAppidList(
+    req: DescribeBaselinePolicyNameExistAppidListRequest,
+    cb?: (error: string, rep: DescribeBaselinePolicyNameExistAppidListResponse) => void
+  ): Promise<DescribeBaselinePolicyNameExistAppidListResponse> {
+    return this.request("DescribeBaselinePolicyNameExistAppidList", req, cb)
   }
 
   /**
@@ -2667,6 +2902,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDynamicAssetsResponse) => void
   ): Promise<DescribeDynamicAssetsResponse> {
     return this.request("DescribeDynamicAssets", req, cb)
+  }
+
+  /**
+   * 新增或修改一条通知策略。ID > 0 表示修改；ID = 0 或不传表示新增。MemberAppIds 配置为空时，策略仅作用于当前主账号事件；非空时同时作用于自身账号 + 所列成员账号。
+   */
+  async ModifyWebhookPolicy(
+    req: ModifyWebhookPolicyRequest,
+    cb?: (error: string, rep: ModifyWebhookPolicyResponse) => void
+  ): Promise<ModifyWebhookPolicyResponse> {
+    return this.request("ModifyWebhookPolicy", req, cb)
   }
 
   /**
@@ -2902,6 +3147,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取当前账号的安全评分规则，无自定义则返回内置默认规则
+   */
+  async DescribeSecurityScoreRule(
+    req: DescribeSecurityScoreRuleRequest,
+    cb?: (error: string, rep: DescribeSecurityScoreRuleResponse) => void
+  ): Promise<DescribeSecurityScoreRuleResponse> {
+    return this.request("DescribeSecurityScoreRule", req, cb)
+  }
+
+  /**
    * 删除域名和ip请求
    */
   async DeleteDomainAndIp(
@@ -3084,6 +3339,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量启用或停用基线策略。停用后的策略将不再参与扫描与统计。
+   */
+  async ModifyBaselinePolicyEnable(
+    req: ModifyBaselinePolicyEnableRequest,
+    cb?: (error: string, rep: ModifyBaselinePolicyEnableResponse) => void
+  ): Promise<ModifyBaselinePolicyEnableResponse> {
+    return this.request("ModifyBaselinePolicyEnable", req, cb)
+  }
+
+  /**
    * 修改告警中心通知高级配置
    */
   async ModifyNotifySettingAlert(
@@ -3184,13 +3449,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改dspm当前应用的数据识别模板
+   * 获取策略配置的检测项列表
    */
-  async ModifyDspmApplyingIdentifyComplianceGroup(
-    req: ModifyDspmApplyingIdentifyComplianceGroupRequest,
-    cb?: (error: string, rep: ModifyDspmApplyingIdentifyComplianceGroupResponse) => void
-  ): Promise<ModifyDspmApplyingIdentifyComplianceGroupResponse> {
-    return this.request("ModifyDspmApplyingIdentifyComplianceGroup", req, cb)
+  async DescribeBaselinePolicyItemList(
+    req: DescribeBaselinePolicyItemListRequest,
+    cb?: (error: string, rep: DescribeBaselinePolicyItemListResponse) => void
+  ): Promise<DescribeBaselinePolicyItemListResponse> {
+    return this.request("DescribeBaselinePolicyItemList", req, cb)
   }
 
   /**
@@ -3361,6 +3626,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDspmAssetsExportJobResponse) => void
   ): Promise<CreateDspmAssetsExportJobResponse> {
     return this.request("CreateDspmAssetsExportJob", req, cb)
+  }
+
+  /**
+   * 分页查询当前租户下的接收机器人列表，对应「通知中心 - 机器人通知 - 接收机器人管理」Tab 的表格。每租户最多 50 个机器人
+   */
+  async DescribeWebhookReceiverList(
+    req: DescribeWebhookReceiverListRequest,
+    cb?: (error: string, rep: DescribeWebhookReceiverListResponse) => void
+  ): Promise<DescribeWebhookReceiverListResponse> {
+    return this.request("DescribeWebhookReceiverList", req, cb)
   }
 
   /**
@@ -3734,6 +4009,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取基线风险修复历史记录列表，用于“修复记录”页展示已修复的检测项与对应资产。
+   */
+  async DescribeBaselineFixRecordList(
+    req: DescribeBaselineFixRecordListRequest,
+    cb?: (error: string, rep: DescribeBaselineFixRecordListResponse) => void
+  ): Promise<DescribeBaselineFixRecordListResponse> {
+    return this.request("DescribeBaselineFixRecordList", req, cb)
+  }
+
+  /**
    * 创建资产标签
    */
   async CreateAssetTag(
@@ -3900,6 +4185,16 @@ capi 层处理流程：
   }
 
   /**
+   * 查询ModifyCSIPLicenseBinds返回的异步绑定任务进度。
+   */
+  async DescribeCSIPLicenseBindSchedule(
+    req: DescribeCSIPLicenseBindScheduleRequest,
+    cb?: (error: string, rep: DescribeCSIPLicenseBindScheduleResponse) => void
+  ): Promise<DescribeCSIPLicenseBindScheduleResponse> {
+    return this.request("DescribeCSIPLicenseBindSchedule", req, cb)
+  }
+
+  /**
    * 获取异地登录白名单合并后列表
    */
   async DescribeLoginWhiteCombinedList(
@@ -4002,13 +4297,13 @@ capi 层处理流程：
   }
 
   /**
-   * EDR告警隔离和恢复
+   * 批量删除接收机器人。删除前会自动从所有引用了这些机器人的策略中移除引用关系。
    */
-  async ModifyEdrAlertIsolation(
-    req: ModifyEdrAlertIsolationRequest,
-    cb?: (error: string, rep: ModifyEdrAlertIsolationResponse) => void
-  ): Promise<ModifyEdrAlertIsolationResponse> {
-    return this.request("ModifyEdrAlertIsolation", req, cb)
+  async DeleteWebhookReceivers(
+    req: DeleteWebhookReceiversRequest,
+    cb?: (error: string, rep: DeleteWebhookReceiversResponse) => void
+  ): Promise<DeleteWebhookReceiversResponse> {
+    return this.request("DeleteWebhookReceivers", req, cb)
   }
 
   /**
@@ -4129,6 +4424,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeRaspLicenseListResponse) => void
   ): Promise<DescribeRaspLicenseListResponse> {
     return this.request("DescribeRaspLicenseList", req, cb)
+  }
+
+  /**
+   * 获取安全风险趋势，返回按维度分组的每日风险数量
+   */
+  async DescribeSecurityRiskTrend(
+    req: DescribeSecurityRiskTrendRequest,
+    cb?: (error: string, rep: DescribeSecurityRiskTrendResponse) => void
+  ): Promise<DescribeSecurityRiskTrendResponse> {
+    return this.request("DescribeSecurityRiskTrend", req, cb)
   }
 
   /**
@@ -4312,6 +4617,16 @@ capi 层处理流程：
   }
 
   /**
+   * 获取内容风险列表
+   */
+  async DescribeRiskCenterWebsiteRiskList(
+    req: DescribeRiskCenterWebsiteRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterWebsiteRiskListResponse) => void
+  ): Promise<DescribeRiskCenterWebsiteRiskListResponse> {
+    return this.request("DescribeRiskCenterWebsiteRiskList", req, cb)
+  }
+
+  /**
    * 获取漏洞主机关联组件
    */
   async DescribeVulHostRelateComponent(
@@ -4419,6 +4734,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DeleteVulWhitelistResponse) => void
   ): Promise<DeleteVulWhitelistResponse> {
     return this.request("DeleteVulWhitelist", req, cb)
+  }
+
+  /**
+   * 查询凭证列表
+   */
+  async DescribeKeySandboxCredentialList(
+    req: DescribeKeySandboxCredentialListRequest,
+    cb?: (error: string, rep: DescribeKeySandboxCredentialListResponse) => void
+  ): Promise<DescribeKeySandboxCredentialListResponse> {
+    return this.request("DescribeKeySandboxCredentialList", req, cb)
   }
 
   /**
@@ -4542,13 +4867,13 @@ capi 层处理流程：
   }
 
   /**
-   * 关闭进程守护功能
+   * 更新当前账号的“用户弱口令”自定义字典。字典原文经服务端加密后存储；传空字符串视为清空。
    */
-  async ModifyNFSScanHost(
-    req: ModifyNFSScanHostRequest,
-    cb?: (error: string, rep: ModifyNFSScanHostResponse) => void
-  ): Promise<ModifyNFSScanHostResponse> {
-    return this.request("ModifyNFSScanHost", req, cb)
+  async ModifyBaselineUserWeakPasswordConf(
+    req: ModifyBaselineUserWeakPasswordConfRequest,
+    cb?: (error: string, rep: ModifyBaselineUserWeakPasswordConfResponse) => void
+  ): Promise<ModifyBaselineUserWeakPasswordConfResponse> {
+    return this.request("ModifyBaselineUserWeakPasswordConf", req, cb)
   }
 
   /**
@@ -4649,6 +4974,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeEDRScanTaskDetailResponse) => void
   ): Promise<DescribeEDRScanTaskDetailResponse> {
     return this.request("DescribeEDRScanTaskDetail", req, cb)
+  }
+
+  /**
+   * EDR告警隔离和恢复
+   */
+  async ModifyEdrAlertIsolation(
+    req: ModifyEdrAlertIsolationRequest,
+    cb?: (error: string, rep: ModifyEdrAlertIsolationResponse) => void
+  ): Promise<ModifyEdrAlertIsolationResponse> {
+    return this.request("ModifyEdrAlertIsolation", req, cb)
   }
 
   /**
@@ -4894,6 +5229,16 @@ capi 层处理流程：
   }
 
   /**
+   * 获取内置默认安全评分规则，用于重置自定义规则
+   */
+  async DescribeDefaultSecurityScoreRule(
+    req: DescribeDefaultSecurityScoreRuleRequest,
+    cb?: (error: string, rep: DescribeDefaultSecurityScoreRuleResponse) => void
+  ): Promise<DescribeDefaultSecurityScoreRuleResponse> {
+    return this.request("DescribeDefaultSecurityScoreRule", req, cb)
+  }
+
+  /**
    * 查询网络攻击检测开关及资产范围配置
    */
   async DescribeNetAttackSetting(
@@ -4934,13 +5279,33 @@ capi 层处理流程：
   }
 
   /**
-   * 查询凭证列表
+   * 手动解绑RASP授权。同步执行，直接返回结果。仅解绑RASP授权（category=1），无解绑次数限制。单订单模式下appid即可定位订单，无需传ResourceId。
    */
-  async DescribeKeySandboxCredentialList(
-    req: DescribeKeySandboxCredentialListRequest,
-    cb?: (error: string, rep: DescribeKeySandboxCredentialListResponse) => void
-  ): Promise<DescribeKeySandboxCredentialListResponse> {
-    return this.request("DescribeKeySandboxCredentialList", req, cb)
+  async ModifyCSIPRaspLicenseUnBinds(
+    req: ModifyCSIPRaspLicenseUnBindsRequest,
+    cb?: (error: string, rep: ModifyCSIPRaspLicenseUnBindsResponse) => void
+  ): Promise<ModifyCSIPRaspLicenseUnBindsResponse> {
+    return this.request("ModifyCSIPRaspLicenseUnBinds", req, cb)
+  }
+
+  /**
+   * 基于原任务配置新建扫描任务。AssetId为空时从TaskId获取全部资产信息；AssetId非空时仅含该单资产。
+   */
+  async ScanEDRTaskAgain(
+    req: ScanEDRTaskAgainRequest,
+    cb?: (error: string, rep: ScanEDRTaskAgainResponse) => void
+  ): Promise<ScanEDRTaskAgainResponse> {
+    return this.request("ScanEDRTaskAgain", req, cb)
+  }
+
+  /**
+   * 复制自定义基线策略
+   */
+  async CopyBaselinePolicy(
+    req: CopyBaselinePolicyRequest,
+    cb?: (error: string, rep: CopyBaselinePolicyResponse) => void
+  ): Promise<CopyBaselinePolicyResponse> {
+    return this.request("CopyBaselinePolicy", req, cb)
   }
 
   /**
@@ -4951,6 +5316,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeDspmSyncAssetsStatusResponse) => void
   ): Promise<DescribeDspmSyncAssetsStatusResponse> {
     return this.request("DescribeDspmSyncAssetsStatus", req, cb)
+  }
+
+  /**
+   * 对一批风险记录发起重新扫描，常用于“风险列表”页批量勾选风险后的复扫场景。
+   */
+  async ScanBaselineRiskList(
+    req: ScanBaselineRiskListRequest,
+    cb?: (error: string, rep: ScanBaselineRiskListResponse) => void
+  ): Promise<ScanBaselineRiskListResponse> {
+    return this.request("ScanBaselineRiskList", req, cb)
   }
 
   /**
@@ -4971,6 +5346,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeUserCallRecordResponse) => void
   ): Promise<DescribeUserCallRecordResponse> {
     return this.request("DescribeUserCallRecord", req, cb)
+  }
+
+  /**
+   * 获取系统内置基线分类树（父分类 → 子分类 → 内置检测项 ID 列表），用于策略详情展示。
+   */
+  async DescribeBaselinePolicyCategoryList(
+    req: DescribeBaselinePolicyCategoryListRequest,
+    cb?: (error: string, rep: DescribeBaselinePolicyCategoryListResponse) => void
+  ): Promise<DescribeBaselinePolicyCategoryListResponse> {
+    return this.request("DescribeBaselinePolicyCategoryList", req, cb)
   }
 
   /**
@@ -5184,6 +5569,16 @@ capi 层处理流程：
   }
 
   /**
+   * 向指定的接收机器人发送一条测试消息，验证可达性与配置正确性。对应表格行内的「测试」按钮。
+   */
+  async TestWebhookReceiver(
+    req: TestWebhookReceiverRequest,
+    cb?: (error: string, rep: TestWebhookReceiverResponse) => void
+  ): Promise<TestWebhookReceiverResponse> {
+    return this.request("TestWebhookReceiver", req, cb)
+  }
+
+  /**
    * 获取扫描结果统计信息
    */
   async DescribeCFGRiskStatistics(
@@ -5241,6 +5636,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeLoginTypeGlobalConfResponse) => void
   ): Promise<DescribeLoginTypeGlobalConfResponse> {
     return this.request("DescribeLoginTypeGlobalConf", req, cb)
+  }
+
+  /**
+   * 分页查询当前租户下的通知策略列表，对应「通知中心 - 机器人通知 - 通知策略配置」Tab 的表格。返回的字段为「行展示」所需的精简信息。完整配置在编辑场景下使用 DescribeWebhookPolicy。每租户最多 100 个通知策略
+   */
+  async DescribeWebhookPolicyList(
+    req: DescribeWebhookPolicyListRequest,
+    cb?: (error: string, rep: DescribeWebhookPolicyListResponse) => void
+  ): Promise<DescribeWebhookPolicyListResponse> {
+    return this.request("DescribeWebhookPolicyList", req, cb)
   }
 
   /**
@@ -5568,6 +5973,16 @@ capi 层处理流程：
   }
 
   /**
+   * 操作资产编辑标签
+   */
+  async ModifyAssetTags(
+    req: ModifyAssetTagsRequest,
+    cb?: (error: string, rep: ModifyAssetTagsResponse) => void
+  ): Promise<ModifyAssetTagsResponse> {
+    return this.request("ModifyAssetTags", req, cb)
+  }
+
+  /**
    * 查询容器关联端口列表。通过容器ID获取关联的端口信息，支持分页。
    */
   async DescribeClusterContainerPortList(
@@ -5635,6 +6050,25 @@ capi 层处理流程：
     cb?: (error: string, rep: ModifyProtectionSettingResponse) => void
   ): Promise<ModifyProtectionSettingResponse> {
     return this.request("ModifyProtectionSetting", req, cb)
+  }
+
+  /**
+     * 修改自动扩容配置（多模块可扩展，本期仅主机安全模块）。
+
+「自动扩容」为面向用户的对外概念，等价于底层自动加购(auto_repurchase)：当账号有新增资产时，自动加购所需授权。
+
+补充说明：
+1. 本期仅实现主机安全模块 HostConfig；后续可扩展容器安全、AI-Agent 安全等命名模块字段，各模块配置字段可异构；
+2. 部分更新语义：模块对象为空表示该模块不修改，模块内字段为空表示该字段不修改；
+3. HostConfig.Switch 联动映射 auto_repurchase_switch；auto_bind_switch（自动绑定）恒开，不由本接口改动；
+4. 自动续费(renew_flag) 不由本接口改动；额度/用量请调用 DescribeLicenseStatus；
+5. 顶部「自动扩容」总开关状态由前端按各模块开关聚合，后端不存储、不返回全局开关。
+     */
+  async ModifyPayConfig(
+    req: ModifyPayConfigRequest,
+    cb?: (error: string, rep: ModifyPayConfigResponse) => void
+  ): Promise<ModifyPayConfigResponse> {
+    return this.request("ModifyPayConfig", req, cb)
   }
 
   /**
@@ -5778,6 +6212,16 @@ capi 层处理流程：
   }
 
   /**
+   * 修改客户端离线时长
+   */
+  async ModifyNotifyAgentOfflineDuration(
+    req: ModifyNotifyAgentOfflineDurationRequest,
+    cb?: (error: string, rep: ModifyNotifyAgentOfflineDurationResponse) => void
+  ): Promise<ModifyNotifyAgentOfflineDurationResponse> {
+    return this.request("ModifyNotifyAgentOfflineDuration", req, cb)
+  }
+
+  /**
    * 获取当前账号的用户级基线配置。
    */
   async DescribeBaselineUserOtherConf(
@@ -5898,6 +6342,16 @@ capi 层处理流程：
   }
 
   /**
+   * 更新当前账号的用户级基线配置（允许同步、离线清风险、Agent 扫描超时等）。
+   */
+  async ModifyBaselineUserOtherConf(
+    req: ModifyBaselineUserOtherConfRequest,
+    cb?: (error: string, rep: ModifyBaselineUserOtherConfResponse) => void
+  ): Promise<ModifyBaselineUserOtherConfResponse> {
+    return this.request("ModifyBaselineUserOtherConf", req, cb)
+  }
+
+  /**
    * 创建IaC检测文件导出任务
    */
   async CreateIaCFileExportJob(
@@ -6008,6 +6462,16 @@ capi 层处理流程：
   }
 
   /**
+   * 对一批基线策略发起整体重新扫描（策略列表页“一键扫描”入口），按策略命中的资产范围全量重扫。
+   */
+  async ScanBaselinePolicyList(
+    req: ScanBaselinePolicyListRequest,
+    cb?: (error: string, rep: ScanBaselinePolicyListResponse) => void
+  ): Promise<ScanBaselinePolicyListResponse> {
+    return this.request("ScanBaselinePolicyList", req, cb)
+  }
+
+  /**
    * 创建资产同步任务
    */
   async CreateCosAssetSyncTask(
@@ -6068,13 +6532,13 @@ capi 层处理流程：
   }
 
   /**
-   * 基于原任务配置新建扫描任务。AssetId为空时从TaskId获取全部资产信息；AssetId非空时仅含该单资产。
+   * 新增或修改一个接收机器人。ID > 0 表示修改已有记录；ID = 0 或不传表示新增。机器人类型由 Type 字段决定，Type=WEBHOOK 时 WebhookAddr 必填，Type=SCF 时 SCFRegion/Namespace/FunctionName/FunctionVersion/Alias/MaxWaitSeconds 全部必填。修改时不允许变更 Type
    */
-  async ScanEDRTaskAgain(
-    req: ScanEDRTaskAgainRequest,
-    cb?: (error: string, rep: ScanEDRTaskAgainResponse) => void
-  ): Promise<ScanEDRTaskAgainResponse> {
-    return this.request("ScanEDRTaskAgain", req, cb)
+  async ModifyWebhookReceiver(
+    req: ModifyWebhookReceiverRequest,
+    cb?: (error: string, rep: ModifyWebhookReceiverResponse) => void
+  ): Promise<ModifyWebhookReceiverResponse> {
+    return this.request("ModifyWebhookReceiver", req, cb)
   }
 
   /**
@@ -6128,6 +6592,16 @@ capi 层处理流程：
   }
 
   /**
+   * 查询指定 SCF 函数下的版本列表。
+   */
+  async DescribeSCFFunctionVersionList(
+    req: DescribeSCFFunctionVersionListRequest,
+    cb?: (error: string, rep: DescribeSCFFunctionVersionListResponse) => void
+  ): Promise<DescribeSCFFunctionVersionListResponse> {
+    return this.request("DescribeSCFFunctionVersionList", req, cb)
+  }
+
+  /**
    * 查询集群命名空间列表
    */
   async DescribeClusterNamespaceList(
@@ -6175,6 +6649,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeBaselinePolicyListResponse) => void
   ): Promise<DescribeBaselinePolicyListResponse> {
     return this.request("DescribeBaselinePolicyList", req, cb)
+  }
+
+  /**
+   * 修改dspm当前应用的数据识别模板
+   */
+  async ModifyDspmApplyingIdentifyComplianceGroup(
+    req: ModifyDspmApplyingIdentifyComplianceGroupRequest,
+    cb?: (error: string, rep: ModifyDspmApplyingIdentifyComplianceGroupResponse) => void
+  ): Promise<ModifyDspmApplyingIdentifyComplianceGroupResponse> {
+    return this.request("ModifyDspmApplyingIdentifyComplianceGroup", req, cb)
   }
 
   /**
@@ -6620,13 +7104,13 @@ capi 层处理流程：
   }
 
   /**
-   * 获取扫描主任务列表，用于“任务记录”页展示一键扫描 / 周期扫描 / 分散扫描的历史记录及结果。
+   * 查询当前处于“统计计算中”状态的策略 ID 列表，用于前端轮询判断扫描结果统计是否就绪。
    */
-  async DescribeBaselineMainTaskList(
-    req: DescribeBaselineMainTaskListRequest,
-    cb?: (error: string, rep: DescribeBaselineMainTaskListResponse) => void
-  ): Promise<DescribeBaselineMainTaskListResponse> {
-    return this.request("DescribeBaselineMainTaskList", req, cb)
+  async DescribeBaselineCalculatingStatisticsPolicyIDList(
+    req: DescribeBaselineCalculatingStatisticsPolicyIDListRequest,
+    cb?: (error: string, rep: DescribeBaselineCalculatingStatisticsPolicyIDListResponse) => void
+  ): Promise<DescribeBaselineCalculatingStatisticsPolicyIDListResponse> {
+    return this.request("DescribeBaselineCalculatingStatisticsPolicyIDList", req, cb)
   }
 
   /**
@@ -6637,6 +7121,16 @@ capi 层处理流程：
     cb?: (error: string, rep: CreateDspmApproveHistoryExportJobResponse) => void
   ): Promise<CreateDspmApproveHistoryExportJobResponse> {
     return this.request("CreateDspmApproveHistoryExportJob", req, cb)
+  }
+
+  /**
+   * 获取扫描主任务列表，用于“任务记录”页展示一键扫描 / 周期扫描 / 分散扫描的历史记录及结果。
+   */
+  async DescribeBaselineMainTaskList(
+    req: DescribeBaselineMainTaskListRequest,
+    cb?: (error: string, rep: DescribeBaselineMainTaskListResponse) => void
+  ): Promise<DescribeBaselineMainTaskListResponse> {
+    return this.request("DescribeBaselineMainTaskList", req, cb)
   }
 
   /**
@@ -6667,6 +7161,26 @@ capi 层处理流程：
     cb?: (error: string, rep: CreateDspmIdentifyCategoryResponse) => void
   ): Promise<CreateDspmIdentifyCategoryResponse> {
     return this.request("CreateDspmIdentifyCategory", req, cb)
+  }
+
+  /**
+   * 查询当前账号下所有有效授权的汇总状态，按计费项分组返回总数、已用、剩余及到期时间，同时返回自动加购开关状态和合并剩余解绑次数。输出顺序固定为：旗舰版 → 专业版 → RASP → 其他。
+   */
+  async DescribeLicenseStatus(
+    req?: DescribeLicenseStatusRequest,
+    cb?: (error: string, rep: DescribeLicenseStatusResponse) => void
+  ): Promise<DescribeLicenseStatusResponse> {
+    return this.request("DescribeLicenseStatus", req, cb)
+  }
+
+  /**
+   * 批量删除自定义基线策略。仅支持删除 PolicyType=SELF 的策略；删除后历史风险记录保留，但不再产生新结果。
+   */
+  async DeleteBaselineSelfDefinedPolicyList(
+    req: DeleteBaselineSelfDefinedPolicyListRequest,
+    cb?: (error: string, rep: DeleteBaselineSelfDefinedPolicyListResponse) => void
+  ): Promise<DeleteBaselineSelfDefinedPolicyListResponse> {
+    return this.request("DeleteBaselineSelfDefinedPolicyList", req, cb)
   }
 
   /**
@@ -7052,6 +7566,16 @@ capi 层处理流程：
   }
 
   /**
+   * 修改安全评分规则，必须传入完整规则集
+   */
+  async ModifySecurityScoreRule(
+    req: ModifySecurityScoreRuleRequest,
+    cb?: (error: string, rep: ModifySecurityScoreRuleResponse) => void
+  ): Promise<ModifySecurityScoreRuleResponse> {
+    return this.request("ModifySecurityScoreRule", req, cb)
+  }
+
+  /**
    * 修改暴力破解规则
    */
   async ModifyBruteAttackRules(
@@ -7089,6 +7613,26 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeDspmIdentifyInfoResponse) => void
   ): Promise<DescribeDspmIdentifyInfoResponse> {
     return this.request("DescribeDspmIdentifyInfo", req, cb)
+  }
+
+  /**
+   * 绑定主机授权或RASP授权到指定订单。异步执行，返回TaskId供查询进度。通过LicenseType指定授权版本（旗舰版/专业版/RASP）。
+   */
+  async ModifyCSIPLicenseBinds(
+    req: ModifyCSIPLicenseBindsRequest,
+    cb?: (error: string, rep: ModifyCSIPLicenseBindsResponse) => void
+  ): Promise<ModifyCSIPLicenseBindsResponse> {
+    return this.request("ModifyCSIPLicenseBinds", req, cb)
+  }
+
+  /**
+   * 查询指定 SCF 函数下的别名列表。
+   */
+  async DescribeSCFAliasList(
+    req: DescribeSCFAliasListRequest,
+    cb?: (error: string, rep: DescribeSCFAliasListResponse) => void
+  ): Promise<DescribeSCFAliasListResponse> {
+    return this.request("DescribeSCFAliasList", req, cb)
   }
 
   /**
@@ -7202,13 +7746,13 @@ capi 层处理流程：
   }
 
   /**
-   * 操作资产编辑标签
+   * 查询指定命名空间下的 SCF 函数列表，仅返回 Event 触发器类型的函数。
    */
-  async ModifyAssetTags(
-    req: ModifyAssetTagsRequest,
-    cb?: (error: string, rep: ModifyAssetTagsResponse) => void
-  ): Promise<ModifyAssetTagsResponse> {
-    return this.request("ModifyAssetTags", req, cb)
+  async DescribeSCFFunctionList(
+    req: DescribeSCFFunctionListRequest,
+    cb?: (error: string, rep: DescribeSCFFunctionListResponse) => void
+  ): Promise<DescribeSCFFunctionListResponse> {
+    return this.request("DescribeSCFFunctionList", req, cb)
   }
 
   /**

@@ -5301,21 +5301,29 @@ export interface DescribeInstanceResponse {
 }
 
 /**
- * GetLoRaGatewayList请求参数结构体
+ * DeleteTWeSeeTasksByCondition请求参数结构体
  */
-export interface GetLoRaGatewayListRequest {
+export interface DeleteTWeSeeTasksByConditionRequest {
   /**
-   * 是否是社区网关
+   * <p>产品 ID</p>
    */
-  IsCommunity: boolean
+  ProductId: string
   /**
-   * 偏移量
+   * <p>设备名称</p>
    */
-  Offset?: number
+  DeviceName: string
   /**
-   * 限制个数
+   * <p>算法类目。</p><p>枚举值：</p><ul><li>COMPREHENSION： 视觉理解</li><li>HIGHLIGHT： 视频浓缩</li></ul>
    */
-  Limit?: number
+  ServiceCategory: string
+  /**
+   * <p>任务删除条件，至少传入一个条件。不同条件之间为 AND 关系，同一条件的 Values 之间为 OR 关系。</p>
+   */
+  Conditions: Array<SeeDeleteTaskCondition>
+  /**
+   * <p>通道 ID</p><p>默认值：0</p>
+   */
+  ChannelId?: number
 }
 
 /**
@@ -6045,36 +6053,6 @@ export interface PublishMessageResponse {
 }
 
 /**
- * DescribeCloudStorageEvents返回参数结构体
- */
-export interface DescribeCloudStorageEventsResponse {
-  /**
-   * 云存事件列表
-   */
-  Events?: Array<CloudStorageEvent>
-  /**
-   * 请求上下文, 用作查询游标
-   */
-  Context?: string
-  /**
-   * 拉取结果是否已经结束
-   */
-  Listover?: boolean
-  /**
-   * 内部结果数量，并不等同于事件总数。
-   */
-  Total?: number
-  /**
-   * 视频播放URL
-   */
-  VideoURL?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 搜索关键词
  */
 export interface SearchKeyword {
@@ -6237,6 +6215,20 @@ export interface InvokeCloudStorageAIServiceTaskRequest {
    * 自定义任务 ID
    */
   CustomId?: string
+}
+
+/**
+ * TWeSee 任务删除条件
+ */
+export interface SeeDeleteTaskCondition {
+  /**
+   * <p>条件类型。</p><p>枚举值：</p><ul><li>TaskId： 精确匹配任务 ID</li><li>TimeRange： 匹配任务时间范围与指定范围有重合的任务。值的格式为 <code>UnixTimestampStart,UnixTimestampEnd</code>，其中起止时间均为秒级 UNIX 时间戳，且结束时间不早于起始时间</li><li>CreateTimeBefore： 匹配在指定时间前创建的任务。值为秒级 UNIX 时间戳</li><li>COSURI： 精确匹配任务来源 COS URI，值必须以 <code>cos://</code> 开头</li><li>COSURIPrefix： 按前缀匹配任务来源 COS URI，值必须以 <code>cos://</code> 开头</li></ul>
+   */
+  Type: string
+  /**
+   * <p>条件值列表。同一条件内的多个值之间为 OR 关系，至少传入一个非空值。</p>
+   */
+  Values: Array<string>
 }
 
 /**
@@ -6823,6 +6815,24 @@ export interface ProductDevicesPositionItem {
    * 设备位置数量
    */
   Total?: number
+}
+
+/**
+ * GetLoRaGatewayList请求参数结构体
+ */
+export interface GetLoRaGatewayListRequest {
+  /**
+   * 是否是社区网关
+   */
+  IsCommunity: boolean
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 限制个数
+   */
+  Limit?: number
 }
 
 /**
@@ -9898,6 +9908,11 @@ export interface CreateTWeTalkProductConfigRequest {
 }
 
 /**
+ * ModifyPositionFence请求参数结构体
+ */
+export type ModifyPositionFenceRequest = null
+
+/**
  * BindDevices返回参数结构体
  */
 export interface BindDevicesResponse {
@@ -9954,6 +9969,16 @@ export interface DescribeCloudStorageAIServiceRequest {
    * 用户 ID
    */
   UserId?: string
+}
+
+/**
+ * DeleteTWeSeeTasksByCondition返回参数结构体
+ */
+export interface DeleteTWeSeeTasksByConditionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11213,17 +11238,13 @@ export interface ListTopicPolicyRequest {
 }
 
 /**
- * GenerateSignedVideoURL返回参数结构体
+ * DeleteLoRaFrequency请求参数结构体
  */
-export interface GenerateSignedVideoURLResponse {
+export interface DeleteLoRaFrequencyRequest {
   /**
-   * 视频防盗链播放URL
+   * 频点唯一ID
    */
-  SignedVideoURL?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  FreqId?: string
 }
 
 /**
@@ -12443,9 +12464,22 @@ export interface PositionSpaceInfo {
 }
 
 /**
- * ModifyPositionFence请求参数结构体
+ * GenerateSignedVideoURL请求参数结构体
  */
-export type ModifyPositionFenceRequest = null
+export interface GenerateSignedVideoURLRequest {
+  /**
+   * 视频播放原始URL地址
+   */
+  VideoURL: string
+  /**
+   * 播放链接过期时间（时间戳，单位秒）
+   */
+  ExpireTime: number
+  /**
+   * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+   */
+  ChannelId?: number
+}
 
 /**
  * CreateDeviceChannel返回参数结构体
@@ -12536,21 +12570,33 @@ export interface DirectBindDeviceInFamilyRequest {
 }
 
 /**
- * GenerateSignedVideoURL请求参数结构体
+ * DescribeCloudStorageEvents返回参数结构体
  */
-export interface GenerateSignedVideoURLRequest {
+export interface DescribeCloudStorageEventsResponse {
   /**
-   * 视频播放原始URL地址
+   * 云存事件列表
    */
-  VideoURL: string
+  Events?: Array<CloudStorageEvent>
   /**
-   * 播放链接过期时间（时间戳，单位秒）
+   * 请求上下文, 用作查询游标
    */
-  ExpireTime: number
+  Context?: string
   /**
-   * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+   * 拉取结果是否已经结束
    */
-  ChannelId?: number
+  Listover?: boolean
+  /**
+   * 内部结果数量，并不等同于事件总数。
+   */
+  Total?: number
+  /**
+   * 视频播放URL
+   */
+  VideoURL?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13318,13 +13364,17 @@ export interface DescribeCloudStorageRequest {
 }
 
 /**
- * DeleteLoRaFrequency请求参数结构体
+ * GenerateSignedVideoURL返回参数结构体
  */
-export interface DeleteLoRaFrequencyRequest {
+export interface GenerateSignedVideoURLResponse {
   /**
-   * 频点唯一ID
+   * 视频防盗链播放URL
    */
-  FreqId?: string
+  SignedVideoURL?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

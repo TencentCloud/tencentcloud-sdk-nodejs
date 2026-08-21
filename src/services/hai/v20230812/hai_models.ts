@@ -20,39 +20,39 @@
  */
 export interface ComputeDetail {
   /**
-   * 算力套餐ID
+   * <p>算力套餐ID</p>
    */
   BundleType?: string
   /**
-   * 节点数量
+   * <p>节点数量</p>
    */
   Count?: number
   /**
-   * 显卡数量
+   * <p>显卡数量</p>
    */
   GPUCount?: string
   /**
-   * 显存
+   * <p>显存</p>
    */
   GPUMemory?: string
   /**
-   * 算力
+   * <p>算力</p>
    */
   GPUPerformance?: string
   /**
-   * CPU核数
+   * <p>CPU核数</p>
    */
   CPU?: string
   /**
-   * 内存
+   * <p>内存</p>
    */
   Memory?: string
   /**
-   * 该套餐是否支持包年包月
+   * <p>该套餐是否支持包年包月</p>
    */
   PrepaidEnable?: boolean
   /**
-   * 该套餐是否支持按量计费
+   * <p>该套餐是否支持按量计费</p>
    */
   PostpaidEnable?: boolean
 }
@@ -926,6 +926,10 @@ export interface DescribeServicesRequest {
    * <p>偏移量</p>
    */
   Offset?: number
+  /**
+   * <p>实例状态</p><p>枚举值：</p><ul><li>RUNNING： 运行中</li><li>CREATING： 创建中</li><li>CREATE_FAILED： 部署失败</li><li>DELETING： 删除中</li><li>UPDATING： 更新中</li><li>RESTARTING： 重启中</li><li>ISOLATING： 隔离中</li><li>ARREARS： 欠费中</li><li>RESTORING： 冲正恢复中</li></ul>
+   */
+  States?: Array<string>
 }
 
 /**

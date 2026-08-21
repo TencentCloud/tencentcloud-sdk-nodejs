@@ -2061,89 +2061,97 @@ export interface MainlandPermitOCRRequest {
  */
 export interface VatElectronicItemInfo {
   /**
-   * 项目名称
+   * <p>项目名称</p>
    */
   Name?: string
   /**
-   * 数量
+   * <p>数量</p>
    */
   Quantity?: string
   /**
-   * 规格型号
+   * <p>规格型号</p>
    */
   Specification?: string
   /**
-   * 单价
+   * <p>单价</p>
    */
   Price?: string
   /**
-   * 金额
+   * <p>金额</p>
    */
   Total?: string
   /**
-   * 税率
+   * <p>税率</p>
    */
   TaxRate?: string
   /**
-   * 税额
+   * <p>税额</p>
    */
   Tax?: string
   /**
-   * 单位
+   * <p>单位</p>
    */
   Unit?: string
   /**
-   * 运输工具类型
+   * <p>运输工具类型</p>
    */
   VehicleType?: string
   /**
-   * 运输工具牌号
+   * <p>运输工具牌号</p>
    */
   VehicleBrand?: string
   /**
-   * 起始地
+   * <p>起始地</p>
    */
   DeparturePlace?: string
   /**
-   * 到达地
+   * <p>到达地</p>
    */
   ArrivalPlace?: string
   /**
-   * 运输货物名称，仅货物运输服务发票返回
+   * <p>运输货物名称，仅货物运输服务发票返回</p>
    */
   TransportItemsName?: string
   /**
-   * 建筑服务发生地，仅建筑发票返回
+   * <p>建筑服务发生地，仅建筑发票返回</p>
    */
   PlaceOfBuildingService?: string
   /**
-   * 建筑项目名称，仅建筑发票返回
+   * <p>建筑项目名称，仅建筑发票返回</p>
    */
   BuildingName?: string
   /**
-   * 产权证书/不动产权证号，仅不动产经营租赁服务发票返回
+   * <p>产权证书/不动产权证号，仅不动产经营租赁服务发票返回</p>
    */
   EstateNumber?: string
   /**
-   * 面积单位，仅不动产经营租赁服务发票返回
+   * <p>面积单位，仅不动产经营租赁服务发票返回</p>
    */
   AreaUnit?: string
   /**
-   * 出行人，仅旅客运输服务发票返回
+   * <p>出行人，仅旅客运输服务发票返回</p>
    */
   Traveler?: string
   /**
-   * 有效身份证件号，仅旅客运输服务发票返回
+   * <p>有效身份证件号，仅旅客运输服务发票返回</p>
    */
   TravelerID?: string
   /**
-   * 出行日期，仅旅客运输服务发票返回
+   * <p>出行日期，仅旅客运输服务发票返回</p>
    */
   TravelDate?: string
   /**
-   * 等级，仅旅客运输服务发票返回
+   * <p>等级，仅旅客运输服务发票返回</p>
    */
   TravelLevel?: string
+  /**
+   * <p>通行日期起</p>
+   */
+  DateStart?: string
+  /**
+   * <p>通行日期止</p>
+   */
+  DateEnd?: string
 }
 
 /**
@@ -7997,7 +8005,7 @@ export interface ConfigAdvanced {
  */
 export interface VerifyScenePhotoRequest {
   /**
-   * <p>场景类型参数，如果场景无法细分请选用该大类的第一个子类，目前支持以下类型：<br><strong>经营场所照</strong><br>0101 门头照<br>0102 店内照<br>0103 流动经营照</p>
+   * <p>场景类型参数，如果场景无法细分请选用该大类的第一个子类，目前支持以下类型：<br><strong>经营场所照</strong><br>0101 门头照<br>0102 店内照<br>0103 流动经营照    </p><p><strong>车牌业务照</strong><br>0201 车牌</p>
    */
   Scene: string
   /**

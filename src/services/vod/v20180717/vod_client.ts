@@ -2277,7 +2277,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建AIGC调用API的Token。创建后数据同步有延时，约30秒后可查询或删除。
+   * 创建 AIGC 调用 API 的 Token。创建后数据同步有延时，约30秒后可查询或删除。
    */
   async CreateAigcApiToken(
     req: CreateAigcApiTokenRequest,
@@ -3133,7 +3133,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 调用该接口，用于创建AI生音频任务。
+   * 调用该接口，用于创建 AI 生音频任务。
    */
   async CreateAigcAudioTask(
     req: CreateAigcAudioTaskRequest,
@@ -3143,7 +3143,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除 AIGC API Token
+   * 删除 AIGC API Token。与该 Token 关联的 AIGC 配额也会被删除。
    */
   async DeleteAigcApiToken(
     req: DeleteAigcApiTokenRequest,

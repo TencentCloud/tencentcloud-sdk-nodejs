@@ -7950,6 +7950,10 @@ export interface UnderstandImageConfig {
    * <p>图片理解指令</p>
    */
   Prompt: string
+  /**
+   * <p>图片理解模型参数，类型为 JSON 字符串。</p>
+   */
+  Parameters?: string
 }
 
 /**

@@ -53,6 +53,7 @@ import {
   HTTPServiceRoute,
   ProviderRequestParametersMap,
   DescribeMySQLTaskStatusRequest,
+  UnbindStorageSourceRequest,
   BuildCommands,
   BanConfig,
   RepairPGUserMigrationHistoryResponse,
@@ -85,7 +86,7 @@ import {
   DeleteCloudAppResponse,
   DescribePGUserMigrationResponse,
   DescribeCloudBaseRunServerVersionResponse,
-  DeleteVmInstanceResponse,
+  DescribeAIModelsResponse,
   DescribeGatewayVersionsResponse,
   DescribeGatewayVersionsRequest,
   CreateEnvResourceRequest,
@@ -153,7 +154,7 @@ import {
   DescribeBillingInfoRequest,
   HpaPolicy,
   DescribeVmInstancesRequest,
-  UnbindStorageSourceRequest,
+  BindClsResponse,
   LogObject,
   StaticCmd,
   DestroyStaticStoreResponse,
@@ -237,6 +238,7 @@ import {
   DescribeMySQLTaskStatusResponse,
   TableInfo,
   AssumeRoleForAllocatedEnvRequest,
+  User,
   CreateAIModelRequest,
   DescribeLoginConfigResponse,
   DeleteAIModelRequest,
@@ -246,7 +248,7 @@ import {
   ExecutePGSqlRequest,
   DescribeUserListRequest,
   DescribeCurveDataRequest,
-  User,
+  BindClsRequest,
   DescribeStaticStoreResponse,
   ValueDetail,
   DescribeResourcePermissionRequest,
@@ -293,7 +295,7 @@ import {
   HTTPServiceDomainParam,
   PermissionInfo,
   DescribeManagedAIModelListResponse,
-  DescribeAIModelsResponse,
+  DeleteVmInstanceResponse,
   PlanInfo,
   StaticEnvironment,
   Tag,
@@ -489,6 +491,18 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeBaasPackageListResponse) => void
   ): Promise<DescribeBaasPackageListResponse> {
     return this.request("DescribeBaasPackageList", req, cb)
+  }
+
+  /**
+     * 本接口用于云开发环境套餐续费。
+该接口会自动下单并支付，会在腾讯云账户中扣除余额（余额不足会下单失败）。
+该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
+     */
+  async RenewEnv(
+    req: RenewEnvRequest,
+    cb?: (error: string, rep: RenewEnvResponse) => void
+  ): Promise<RenewEnvResponse> {
+    return this.request("RenewEnv", req, cb)
   }
 
   /**
@@ -1333,15 +1347,15 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 本接口用于云开发环境套餐续费。
-该接口会自动下单并支付，会在腾讯云账户中扣除余额（余额不足会下单失败）。
-该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
+     * 绑定自定义CLS日志主题
+
+**绑定自定义 CLS 日志主题需调用腾讯云 CLS「[DescribeTopics](https://cloud.tencent.com/document/api/614/56454)」接口，按传入的 `Region` 拉取用户日志主题列表，仅筛选 `AssumerName` 为空的自有主题，并将其 `LogsetId`、`TopicId` 分别回填为绑定参数 `ClsLogsetId`、`ClsTopicId`（地域取请求参数 `Region` 作为 `ClsRegion`）。**
      */
-  async RenewEnv(
-    req: RenewEnvRequest,
-    cb?: (error: string, rep: RenewEnvResponse) => void
-  ): Promise<RenewEnvResponse> {
-    return this.request("RenewEnv", req, cb)
+  async BindCls(
+    req: BindClsRequest,
+    cb?: (error: string, rep: BindClsResponse) => void
+  ): Promise<BindClsResponse> {
+    return this.request("BindCls", req, cb)
   }
 
   /**
