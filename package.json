@@ -41,7 +41,7 @@
     "json-bigint": "^1.0.0",
     "node-fetch": "^2.2.0",
     "tslib": "1.13.0",
-    "uuid": "^9.0.1"
+    "uuid": "^14.0.0"
   },
   "directories": {
     "example": "examples",
