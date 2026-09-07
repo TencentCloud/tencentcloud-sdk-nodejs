@@ -287,6 +287,22 @@ export interface StartLiveAvatarRoomRequest {
    * <p>房间类型。AIGC：AIGC形象房间；PRESET：预设形象房间</p><p>枚举值：</p><ul><li>AIGC： AIGC形象房间</li><li>PRESET： 预设形象房间</li></ul>
    */
   RoomType?: string
+  /**
+   * <p>交互模式下的协议，支持rtmp和trtc，默认是rtmp</p>
+   */
+  SessionProtocol?: string
+  /**
+   * <p>使用trtc协议时，在trtc的appid</p>
+   */
+  TrtcSdkAppId?: string
+  /**
+   * <p>进入房间时需要用UserSign来校验权限</p>
+   */
+  TrtcUserSig?: string
+  /**
+   * <p>要进入的房间</p>
+   */
+  TrtcRoomId?: string
 }
 
 /**
@@ -343,17 +359,37 @@ export interface CasterMarkPicInfo {
 }
 
 /**
- * ModifyPullStreamStatus请求参数结构体
+ * CreateLiveAvatarCloneFigure请求参数结构体
  */
-export interface ModifyPullStreamStatusRequest {
+export interface CreateLiveAvatarCloneFigureRequest {
   /**
-   * 配置 ID 列表。
+   * <p>形象克隆场景类型</p><p>枚举值：</p><ul><li>PHOTO： 图生数字人</li><li>GREEN_SCREEN： 绿幕数字人</li><li>REAL_SHOT： 实景数字人</li></ul>
    */
-  ConfigIds: Array<string>
+  SceneType: string
   /**
-   * 目标状态。0无效，2正在运行，4暂停。
+   * <p>克隆的形象的名字</p>
    */
-  Status: string
+  FigureName: string
+  /**
+   * <p>克隆的形象的url</p>
+   */
+  MaterialUrl: string
+  /**
+   * <p>克隆的形象的性别</p><p>枚举值：</p><ul><li>MALE： 男</li><li>FEMALE： 女</li><li>UNHNOWN： 不知道</li></ul>
+   */
+  Gender?: string
+  /**
+   * <p>授权pdf</p>
+   */
+  IdentityWrittenUrl?: string
+  /**
+   * <p>授权视频</p>
+   */
+  IdentityVideoUrl?: string
+  /**
+   * <p>图生视频时，动作训练幅度大小</p><p>枚举值：</p><ul><li>0： 只有头部轻微动</li><li>1： 头部跟身体均动</li></ul>
+   */
+  PhotoVersion?: number
 }
 
 /**
@@ -411,6 +447,24 @@ export interface DescribeLiveSnapshotTemplateRequest {
 调用 [CreateLiveSnapshotTemplate](/document/product/267/32624) 时返回的模板 ID。
    */
   TemplateId: number
+}
+
+/**
+ * DescribeLiveAvatarCloneFigureList返回参数结构体
+ */
+export interface DescribeLiveAvatarCloneFigureListResponse {
+  /**
+   * <p>克隆形象列表</p>
+   */
+  CloneFigureList?: Array<LiveAvatarCloneFigureInfo>
+  /**
+   * <p>克隆形象总个数</p><p>单位：个</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -547,41 +601,21 @@ export interface DescribeCasterOutputInfosResponse {
 }
 
 /**
- * DescribeLiveStreamPublishedList请求参数结构体
+ * CreateLiveAvatarCloneFigure返回参数结构体
  */
-export interface DescribeLiveStreamPublishedListRequest {
+export interface CreateLiveAvatarCloneFigureResponse {
   /**
-   * 您的推流域名。
+   * <p>该图克隆形象生成的任务id</p>
    */
-  DomainName: string
+  TaskId?: string
   /**
-   * 结束时间。UTC 格式，例如：2016-06-30T19:00:00Z。不超过当前时间。注意：EndTime和StartTime相差不可超过1个月。
+   * <p>该克隆形象返回的状态</p><p>枚举值：</p><ul><li>SUBMITTING： 已受理</li><li>CHECKING： 检查中</li><li>QUEUE： 排队中</li><li>MAKING： 训练中</li><li>CONFIRMING： 效果确认</li><li>SUCCESS： 成功</li><li>FAIL： 失败</li></ul>
    */
-  EndTime: string
+  Status?: string
   /**
-   * 起始时间。 UTC 格式，例如：2016-06-29T19:00:00Z。最长支持查询2个月内数据。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime: string
-  /**
-   * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。不支持模糊匹配。
-   */
-  AppName?: string
-  /**
-   * 取得第几页。
-默认值：1。
-   */
-  PageNum?: number
-  /**
-   * 分页大小。
-最大值：100。
-取值范围：10~100 之前的任意整数。
-默认值：10。
-   */
-  PageSize?: number
-  /**
-   * 流名称，支持模糊匹配。
-   */
-  StreamName?: string
+  RequestId?: string
 }
 
 /**
@@ -1392,6 +1426,20 @@ export interface ModifyLiveTranscodeTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyPullStreamStatus请求参数结构体
+ */
+export interface ModifyPullStreamStatusRequest {
+  /**
+   * 配置 ID 列表。
+   */
+  ConfigIds: Array<string>
+  /**
+   * 目标状态。0无效，2正在运行，4暂停。
+   */
+  Status: string
 }
 
 /**
@@ -2977,6 +3025,28 @@ export interface DeleteLiveCallbackTemplateRequest {
 }
 
 /**
+ * DescribeLiveAvatarCloneFigureList请求参数结构体
+ */
+export interface DescribeLiveAvatarCloneFigureListRequest {
+  /**
+   * <p>待查询的克隆形象的TaskId</p>
+   */
+  TaskId?: string
+  /**
+   * <p>根据状态查询克隆形象</p><p>枚举值：</p><ul><li>SUBMITTING： 已受理</li><li>CHECKING： 检查中</li><li>QUEUE： 排队中</li><li>MAKING： 训练中</li><li>CONFIRMING： 效果确认</li><li>SUCCESS： 成功</li><li>FAIL： 失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>期望返回克隆形象的个数（最多20个）</p>
+   */
+  Limit?: string
+  /**
+   * <p>期望返回克隆形象的起始偏移位置（默认为0）</p>
+   */
+  Offset?: string
+}
+
+/**
  * ModifyCasterInputInfo请求参数结构体
  */
 export interface ModifyCasterInputInfoRequest {
@@ -3673,33 +3743,41 @@ export interface DeleteLiveCallbackRuleResponse {
 }
 
 /**
- * DescribeStreamPlayInfoList请求参数结构体
+ * DescribeLiveStreamPublishedList请求参数结构体
  */
-export interface DescribeStreamPlayInfoListRequest {
+export interface DescribeLiveStreamPublishedListRequest {
   /**
-   * <p>起始时间点，接口查询支持两种时间格式：<br>1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I<br>2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。<br>开始时间和结束时间的格式需要保持一致。</p>
+   * 您的推流域名。
    */
-  StartTime: string
+  DomainName: string
   /**
-   * <p>结束时间点，接口查询支持两种时间格式：<br>1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I<br>2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。<br>开始时间和结束时间的格式需要保持一致。结束时间和开始时间跨度不支持超过24小时，支持距当前时间一个月内的数据查询。</p>
+   * 结束时间。UTC 格式，例如：2016-06-30T19:00:00Z。不超过当前时间。注意：EndTime和StartTime相差不可超过1个月。
    */
   EndTime: string
   /**
-   * <p>播放域名，<br>若不填，则为查询所有播放域名的在线流数据。</p>
+   * 起始时间。 UTC 格式，例如：2016-06-29T19:00:00Z。最长支持查询2个月内数据。
    */
-  PlayDomain?: string
+  StartTime: string
   /**
-   * <p>流名称，精确匹配。<br>若不填，则为查询总体播放数据。</p>
-   */
-  StreamName?: string
-  /**
-   * <p>该参数暂不可用。</p>
+   * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。不支持模糊匹配。
    */
   AppName?: string
   /**
-   * <p>服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。</p>
+   * 取得第几页。
+默认值：1。
    */
-  ServiceName?: string
+  PageNum?: number
+  /**
+   * 分页大小。
+最大值：100。
+取值范围：10~100 之前的任意整数。
+默认值：10。
+   */
+  PageSize?: number
+  /**
+   * 流名称，支持模糊匹配。
+   */
+  StreamName?: string
 }
 
 /**
@@ -8191,6 +8269,36 @@ export interface CommonMixInputParam {
 }
 
 /**
+ * DescribeStreamPlayInfoList请求参数结构体
+ */
+export interface DescribeStreamPlayInfoListRequest {
+  /**
+   * <p>起始时间点，接口查询支持两种时间格式：<br>1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I<br>2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。<br>开始时间和结束时间的格式需要保持一致。</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间点，接口查询支持两种时间格式：<br>1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I<br>2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。<br>开始时间和结束时间的格式需要保持一致。结束时间和开始时间跨度不支持超过24小时，支持距当前时间一个月内的数据查询。</p>
+   */
+  EndTime: string
+  /**
+   * <p>播放域名，<br>若不填，则为查询所有播放域名的在线流数据。</p>
+   */
+  PlayDomain?: string
+  /**
+   * <p>流名称，精确匹配。<br>若不填，则为查询总体播放数据。</p>
+   */
+  StreamName?: string
+  /**
+   * <p>该参数暂不可用。</p>
+   */
+  AppName?: string
+  /**
+   * <p>服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。</p>
+   */
+  ServiceName?: string
+}
+
+/**
  * CreateLiveCallbackTemplate请求参数结构体
  */
 export interface CreateLiveCallbackTemplateRequest {
@@ -8489,6 +8597,16 @@ export interface DeleteCasterMarkPicInfoRequest {
    * 需要删除的水印Index。
    */
   MarkPicIndex: number
+}
+
+/**
+ * DeleteLiveAvatarCloneFigure请求参数结构体
+ */
+export interface DeleteLiveAvatarCloneFigureRequest {
+  /**
+   * <p>待查的克隆形象的TaskId</p>
+   */
+  TaskId: string
 }
 
 /**
@@ -9616,13 +9734,25 @@ export interface DescribeLiveTimeShiftRulesResponse {
  */
 export interface CreateLiveAvatarRoomRequest {
   /**
-   * 直播间名称。
+   * <p>直播间名称。</p>
    */
   Name: string
   /**
-   * 操作者。
+   * <p>操作者。</p>
    */
   Operator?: string
+  /**
+   * <p>形象ID</p>
+   */
+  AvatarKey?: string
+  /**
+   * <p>音色ID</p>
+   */
+  TimbreKey?: string
+  /**
+   * <p>房间模式</p><p>枚举值：</p><ul><li>INTERACT： 交互模式</li><li>FREE： 自由模式</li><li>NORMAL： 普通模式</li></ul>
+   */
+  LiveMode?: string
 }
 
 /**
@@ -10162,6 +10292,88 @@ PullVodPushLive -点播。
    * 点播垫片文件地址。注意：用于在主源拉不到时自动兜底到垫片文件，切到垫片文件后，每次播完垫片会尝试拉主源，如果主源恢复则自动切回主源。可根据需要的轮询检查时长来传入对应时长的垫片文件。
    */
   BackupVodUrl?: string
+}
+
+/**
+ * 数字人直播间克隆形象信息
+ */
+export interface LiveAvatarCloneFigureInfo {
+  /**
+   * <p>克隆形象任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>场景模式</p><p>枚举值：</p><ul><li>PHOTO： 图生形象</li><li>GREEN_SCREEN： 绿幕形象</li><li>REAL_SHOT： 实景形象</li></ul>
+   */
+  SceneType?: string
+  /**
+   * <p>形象名称</p>
+   */
+  FigureName?: string
+  /**
+   * <p>性别：男或者女</p>
+   */
+  Gender?: string
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>SUCCESS： 成功</li><li>FAILED： 失败</li><li>PROCESSING： 生成中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>进度条</p>
+   */
+  Progress?: number
+  /**
+   * <p>克隆好的形象在系统的key</p>
+   */
+  AvatarKey?: string
+  /**
+   * <p>形象的图像</p>
+   */
+  FigureImg?: string
+  /**
+   * <p>失败原因，成功时，该字段没值</p>
+   */
+  FailReason?: string
+  /**
+   * <p>训练视频</p>
+   */
+  MaterialUrl?: string
+  /**
+   * <p>该克隆音色创建的时间</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：YYYY-MM</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>是否有续期</p>
+   */
+  RenewStatus?: string
+  /**
+   * <p>是否过期</p>
+   */
+  IsExpired?: boolean
+  /**
+   * <p>有效期时间</p><p>参数格式：YYYY-MM</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>是否循环播放(实景克隆形象能使用)</p>
+   */
+  NeedPlayback?: number
+  /**
+   * <p>训练幅度，0：表示只有有头部动；1表示头部和手势都有训练</p><p>单位：1</p>
+   */
+  PhotoVersion?: number
+  /**
+   * <p>待确认视频</p>
+   */
+  ConfirmDemoUrls?: string
+  /**
+   * <p>形象克隆完成时间</p><p>参数格式：YYYY-MM</p>
+   */
+  EstimatedCompleteTime?: string
 }
 
 /**
@@ -12689,7 +12901,7 @@ export interface DescribeRecordTaskResponse {
  */
 export interface CreateLiveAvatarRoomResponse {
   /**
-   * 数字人直播间 ID。
+   * <p>数字人直播间 ID。</p>
    */
   RoomId?: string
   /**
@@ -12975,6 +13187,16 @@ export interface StartLivePadStreamRequest {
    * 操作人备注信息。
    */
   Operator?: string
+}
+
+/**
+ * DeleteLiveAvatarCloneFigure返回参数结构体
+ */
+export interface DeleteLiveAvatarCloneFigureResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

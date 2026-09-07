@@ -14667,6 +14667,20 @@ export interface DeleteAliasDomainResponse {
 }
 
 /**
+ * 因政府法律法规、用户协议等规定，对资源进行地区访问限制信息。
+ */
+export interface ComplianceRestriction {
+  /**
+   * <p>下发访问限制的原因。</p><p>枚举值：</p><ul><li>ICP_RECORD_REQUIRED： 未备案；</li><li>GOVERNMENT_ORDER： 政府指令。</li></ul>
+   */
+  Reason?: string
+  /**
+   * <p>限制访问地区的具体国家/地区码，使用“ISO 3166 国家/地区代码标准”。</p><p>参数格式：查看链接：https://www.iso.org/iso-3166-country-codes.html。</p>
+   */
+  Region?: string
+}
+
+/**
  * DeleteSecurityJSInjectionRule请求参数结构体
  */
 export interface DeleteSecurityJSInjectionRuleRequest {
@@ -16436,6 +16450,10 @@ export interface AccelerationDomain {
    * <p>修改时间。</p>
    */
   ModifiedOn?: string
+  /**
+   * <p>域名因合规问题产生的地区访问限制列表。</p>
+   */
+  ComplianceRestrictions?: Array<ComplianceRestriction>
 }
 
 /**
@@ -18451,35 +18469,39 @@ export interface AiRule {
  */
 export interface Function {
   /**
-   * 函数 ID。
+   * <p>函数 ID。</p>
    */
   FunctionId?: string
   /**
-   * 站点 ID。
+   * <p>站点 ID。</p>
    */
   ZoneId?: string
   /**
-   * 函数名字。
+   * <p>函数名字。</p>
    */
   Name?: string
   /**
-   * 函数描述。
+   * <p>函数描述。</p>
    */
   Remark?: string
   /**
-   * 函数内容。
+   * <p>函数内容。</p>
    */
   Content?: string
   /**
-   * 函数默认域名。
+   * <p>函数默认域名。</p>
    */
   Domain?: string
   /**
-   * 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   * <p>边缘函数默认域名因合规问题产生的地区访问限制列表。</p>
+   */
+  DomainComplianceRestrictions?: Array<ComplianceRestriction>
+  /**
+   * <p>创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。</p>
    */
   CreateTime?: string
   /**
-   * 修改时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   * <p>修改时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。</p>
    */
   UpdateTime?: string
 }

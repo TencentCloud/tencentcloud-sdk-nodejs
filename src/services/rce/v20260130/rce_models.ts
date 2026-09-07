@@ -1605,6 +1605,14 @@ export interface LoginEvent {
    */
   LoginResult?: Result
   /**
+   * <p>用户注册时间。</p><p>参数格式：要求符合ISO 8601标准的带时区的毫秒级时间，格式&quot;YYYY-MM-DDTHH:mm:ss.sssZ&quot; ，例如&quot;2025-10-19T09:11:10.145+08:00&quot;</p>
+   */
+  RegisterTime?: string
+  /**
+   * <p>是否付费用户。</p><p>枚举值：</p><ul><li>true： 付费用户</li><li>false： 非付费用户</li></ul>
+   */
+  IsPaidUser?: boolean
+  /**
    * <p>与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
    */
   Cust?: Array<Cust>

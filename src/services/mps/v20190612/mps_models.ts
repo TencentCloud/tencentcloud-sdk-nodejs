@@ -9152,6 +9152,20 @@ export interface EnableScheduleRequest {
 }
 
 /**
+ * ModifyDocToVideoTaskStatus返回参数结构体
+ */
+export interface ModifyDocToVideoTaskStatusResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EnableWorkflow请求参数结构体
  */
 export interface EnableWorkflowRequest {
@@ -13430,6 +13444,24 @@ export interface CreateWatermarkTemplateRequest {
 }
 
 /**
+ * AIGC 文档生视频任务重新生成的输入信息
+ */
+export interface DocToVideoRegenerateInput {
+  /**
+   * <p>重新生成的范围。</p><p>枚举值：</p><ul><li>full： 该阶段全量重新生成（例如：修改整体的场景数量）</li><li>scenes： 按场景局部重新生成（例如：修改某场景的具体内容）</li></ul>
+   */
+  Scope: string
+  /**
+   * <p>重新生成时的提示词。</p>
+   */
+  Prompt: string
+  /**
+   * <p>按页局部重新生成时的目标页 ID 数组。仅 Scope=scenes 时必填。不可重复，单次重新生成最多 5 页。</p>
+   */
+  SceneIds?: Array<string>
+}
+
+/**
  * 线性组装output信息。
  */
 export interface OutputReq {
@@ -16578,6 +16610,28 @@ export interface AiAnalysisTaskHighlightInput {
    * <p>扩展参数。</p>
    */
   ExtendedParameter?: string
+}
+
+/**
+ * 修改 AIGC 文档生视频任务状态输入
+ */
+export interface ModifyDocToVideoTaskStatusInput {
+  /**
+   * <p>修改动作类型。</p><p>枚举值：</p><ul><li>confirm： 确认已完成阶段并推进下一阶段</li><li>regenerate： 重新生成指定阶段</li></ul>
+   */
+  Action: string
+  /**
+   * <p>修改目标阶段。</p><p>枚举值：</p><ul><li>STAGE_1：<br>Action=confirm 时：确认大纲、继续生成后续配音、动画效果、字幕；<br>Action=regenerate 时：重新生成大纲。</li></ul><ul><li>STAGE_2：<br>Action=confirm 时：确认生成的配音、动画效果、字幕，生成最终成片；<br>Action=regenerate 时：重新生成配音、动画效果、字幕。</li></ul>
+   */
+  Stage: string
+  /**
+   * <p>需要进行修改的目标任务 ID。</p>
+   */
+  SourceTaskId: string
+  /**
+   * <p>重新生成参数。</p><p>仅 Action=regenerate 时必填。</p>
+   */
+  Regenerate?: DocToVideoRegenerateInput
 }
 
 /**
@@ -26800,6 +26854,16 @@ export interface CreateStreamPackageLinearAssemblyProgramResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDocToVideoTaskStatus请求参数结构体
+ */
+export interface ModifyDocToVideoTaskStatusRequest {
+  /**
+   * <p>修改AIGC文档生视频任务状态的输入</p>
+   */
+  Input: ModifyDocToVideoTaskStatusInput
 }
 
 /**

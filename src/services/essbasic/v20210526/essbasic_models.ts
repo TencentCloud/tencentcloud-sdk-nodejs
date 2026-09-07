@@ -36,13 +36,25 @@ export interface FlowBatchUrlInfo {
 }
 
 /**
- * ChannelCreateConvertTaskApi返回参数结构体
+ * DescribeCancelFlowsTask返回参数结构体
  */
-export interface ChannelCreateConvertTaskApiResponse {
+export interface DescribeCancelFlowsTaskResponse {
   /**
-   * 接口返回的文件转换任务Id，可以调用接口<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelGetTaskResultApi" target="_blank">查询转换任务状态</a>获取转换任务的状态和转换后的文件资源Id。
+   * <p>批量撤销任务编号，为32位字符串。</p>
    */
   TaskId?: string
+  /**
+   * <p>任务状态，需要关注的状态<ul><li><strong>PROCESSING</strong>  - 任务执行中</li><li><strong>END</strong> - 任务处理完成</li><li><strong>TIMEOUT</strong> 任务超时未处理完成，用户未在批量撤销链接有效期内操作</li></ul></p>
+   */
+  TaskStatus?: string
+  /**
+   * <p>批量撤销成功的签署流程编号</p>
+   */
+  SuccessFlowIds?: Array<string>
+  /**
+   * <p>批量撤销失败的签署流程信息</p>
+   */
+  FailureFlows?: Array<CancelFailureFlow>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -407,32 +419,6 @@ export interface CommonApproverOption {
 }
 
 /**
- * DescribeCancelFlowsTask返回参数结构体
- */
-export interface DescribeCancelFlowsTaskResponse {
-  /**
-   * <p>批量撤销任务编号，为32位字符串。</p>
-   */
-  TaskId?: string
-  /**
-   * <p>任务状态，需要关注的状态<ul><li><strong>PROCESSING</strong>  - 任务执行中</li><li><strong>END</strong> - 任务处理完成</li><li><strong>TIMEOUT</strong> 任务超时未处理完成，用户未在批量撤销链接有效期内操作</li></ul></p>
-   */
-  TaskStatus?: string
-  /**
-   * <p>批量撤销成功的签署流程编号</p>
-   */
-  SuccessFlowIds?: Array<string>
-  /**
-   * <p>批量撤销失败的签署流程信息</p>
-   */
-  FailureFlows?: Array<CancelFailureFlow>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateEmployeeQualificationSealQrCode返回参数结构体
  */
 export interface CreateEmployeeQualificationSealQrCodeResponse {
@@ -451,24 +437,19 @@ export interface CreateEmployeeQualificationSealQrCodeResponse {
  */
 export interface ChannelCreateFlowGroupByTemplatesResponse {
   /**
-   * 合同组ID，为32位字符串。
-建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。
+   * <p>合同组ID，为32位字符串。<br>建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。</p>
    */
   FlowGroupId?: string
   /**
-   * 合同组中每个合同流程ID，每个ID均为32位字符串。
-
-注:
-`此数组的顺序和入参中的FlowInfos顺序一致`
+   * <p>合同组中每个合同流程ID，每个ID均为32位字符串。</p><p>注:<br><code>此数组的顺序和入参中的FlowInfos顺序一致</code></p>
    */
   FlowIds?: Array<string>
   /**
-   * 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；
-如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情；
+   * <p>复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；<br>如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过<a href="https://qian.tencent.com/developers/partnerApis/files/DescribeFileConvertTask">查询转换任务状态</a>接口查询任务详情；</p>
    */
   TaskInfos?: Array<TaskInfo>
   /**
-   * 合同组签署方信息
+   * <p>合同组签署方信息</p>
    */
   Approvers?: Array<FlowGroupApprovers>
   /**
@@ -1826,61 +1807,6 @@ export interface CreateFlowGroupSignReviewResponse {
 }
 
 /**
- * ChannelCreateConvertTaskApi请求参数结构体
- */
-export interface ChannelCreateConvertTaskApiRequest {
-  /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
-   */
-  Agent: Agent
-  /**
-   * 需要进行转换的资源文件类型
-支持的文件类型如下：
-<ul><li>doc</li>
-<li>docx</li>
-<li>xls</li>
-<li>xlsx</li>
-<li>jpg</li>
-<li>jpeg</li>
-<li>png</li>
-<li>bmp</li>
-<li>html</li>
-<li>txt</li></ul>
-   */
-  ResourceType: string
-  /**
-   * 需要进行转换操作的文件资源名称，带资源后缀名。
-
-注:  `资源名称长度限制为256个字符`
-   */
-  ResourceName: string
-  /**
-   * 需要进行转换操作的文件资源Id，通过<a href="https://qian.tencent.com/developers/partnerApis/files/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源Id。
-
-注:  `目前，此接口仅支持单个文件进行转换。`
-   */
-  ResourceId: string
-  /**
-   * 调用方用户信息，不用传
-   * @deprecated
-   */
-  Operator?: UserInfo
-  /**
-   * 暂未开放
-   * @deprecated
-   */
-  Organization?: OrganizationInfo
-}
-
-/**
  * ChannelCreateFlowByFiles请求参数结构体
  */
 export interface ChannelCreateFlowByFilesRequest {
@@ -2779,13 +2705,13 @@ export interface DynamicFlowApproverResult {
  */
 export interface SignComponentConfig {
   /**
-   * 签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。
-
-- false 展示签署日期（默认）
-- true 不展示签署日期 
-![image](https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png)。
+   * <p>签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。</p><ul><li>false 展示签署日期（默认）</li><li>true 不展示签署日期<br><img src="https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png" alt="image">。</li></ul>
    */
   HideDate?: boolean
+  /**
+   * <p>【仅 SignBeanTag=1 时有效】 签署方自行添加签署印章类控件（SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL）时，「盖章区适配签署方印章尺寸」开关的控制策略</p><p>枚举值：</p><ul><li>0： 默认关闭，可开启。与现网一致</li><li>1： 关闭且置灰——按控件默认的4.2cm尺寸盖章，签署方无法开启开关</li><li>2： 默认开启且可修改——默认按印章实际尺寸盖章，签署方可手动关闭</li><li>3： 开启且置灰——强制按印章实际尺寸盖章，签署方不可修改</li></ul><p>默认值：0</p>
+   */
+  AddSignComponentUseSealSize?: number
 }
 
 /**
@@ -5596,38 +5522,6 @@ export interface ChannelCreateUserAutoSignEnableUrlResponse {
 }
 
 /**
- * ChannelGetTaskResultApi请求参数结构体
- */
-export interface ChannelGetTaskResultApiRequest {
-  /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
-   */
-  Agent: Agent
-  /**
-   * 转换任务Id，通过接口<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>得到的转换任务id
-   */
-  TaskId: string
-  /**
-   * 操作者的信息，不用传
-   * @deprecated
-   */
-  Operator?: UserInfo
-  /**
-   * 暂未开放
-   * @deprecated
-   */
-  Organization?: OrganizationInfo
-}
-
-/**
  * DescribeChannelOrganizations请求参数结构体
  */
 export interface DescribeChannelOrganizationsRequest {
@@ -5980,11 +5874,11 @@ export interface CreateFlowsByTemplatesResponse {
    */
   ErrorMessages?: Array<string>
   /**
-   * <p>合同预览链接URL数组。</p><p>注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL<br>如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过<a href="https://qian.tencent.com/developers/partner/callback_types_contracts_sign#%E5%8D%81%E4%B8%80-%E5%90%88%E5%90%8C%E6%96%87%E6%A1%A3%E5%90%88%E6%88%90%E5%AE%8C%E6%88%90%E5%9B%9E%E8%B0%83">合同文档合成完成回调</a>获取或使用返回的TaskInfo中的TaskId通过<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelGetTaskResultApi">查询转换任务状态</a>接口查询得到</p>
+   * <p>合同预览链接URL数组。</p><p>注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL<br>如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过<a href="https://qian.tencent.com/developers/partner/callback_types_contracts_sign#%E5%8D%81%E4%B8%80-%E5%90%88%E5%90%8C%E6%96%87%E6%A1%A3%E5%90%88%E6%88%90%E5%AE%8C%E6%88%90%E5%9B%9E%E8%B0%83">合同文档合成完成回调</a>获取或使用返回的TaskInfo中的TaskId通过<a href="https://qian.tencent.com/developers/partnerApis/files/DescribeFileConvertTask">查询转换任务状态</a>接口查询得到</p>
    */
   PreviewUrls?: Array<string>
   /**
-   * <p>复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；<br>如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情；</p>
+   * <p>复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；<br>如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过<a href="https://qian.tencent.com/developers/partnerApis/files/DescribeFileConvertTask">查询转换任务状态</a>接口查询任务详情；</p>
    */
   TaskInfos?: Array<TaskInfo>
   /**
@@ -7838,50 +7732,6 @@ export interface ChannelCreateUserRolesRequest {
 }
 
 /**
- * ChannelGetTaskResultApi返回参数结构体
- */
-export interface ChannelGetTaskResultApiResponse {
-  /**
-   * 任务Id
-   */
-  TaskId?: string
-  /**
-   * 任务状态，需要关注的状态
-<ul><li>**0**  :NeedTranform   - 任务已提交</li>
-<li>**4**  :Processing     - 文档转换中</li>
-<li>**8**  :TaskEnd        - 任务处理完成</li>
-<li>**-2** :DownloadFailed - 下载失败</li>
-<li>**-6** :ProcessFailed  - 转换失败</li>
-<li>**-13**:ProcessTimeout - 转换文件超时</li></ul>
-   */
-  TaskStatus?: number
-  /**
-   * 状态描述，需要关注的状态
-<ul><li> **NeedTranform** : 任务已提交</li>
-<li> **Processing** : 文档转换中</li>
-<li> **TaskEnd** : 任务处理完成</li>
-<li> **DownloadFailed** : 下载失败</li>
-<li> **ProcessFailed** : 转换失败</li>
-<li> **ProcessTimeout** : 转换文件超时</li></ul>
-   */
-  TaskMessage?: string
-  /**
-   * 资源Id（即FileId），用于[用PDF文件创建签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles)
-   */
-  ResourceId?: string
-  /**
-   * 预览文件Url，有效期30分钟 
-当前字段返回为空，发起的时候，将ResourceId 放入发起即可
-   * @deprecated
-   */
-  PreviewUrl?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 权限树中的权限组
  */
 export interface PermissionGroup {
@@ -8269,24 +8119,15 @@ export interface ChannelUpdateSealStatusRequest {
  */
 export interface ChannelCreateFlowGroupByTemplatesRequest {
   /**
-   * 合同的发起企业和发起人信息，<a href="https://qcloudimg.tencent-cloud.cn/raw/b69f8aad306c40b7b78d096e39b2edbb.png" target="_blank">点击查看合同发起企业和人展示的位置</a>
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  <a href="https://qcloudimg.tencent-cloud.cn/raw/a71872de3d540d55451e3e73a2ad1a6e.png" target="_blank">Agent.AppId</a></li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（合同的发起企业）</li>
-<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （合同的发起人）</li>
-</ul>
-
-合同的发起企业和发起人必需已经完成实名，并加入企业
+   * <p>合同的发起企业和发起人信息，<a href="https://qcloudimg.tencent-cloud.cn/raw/b69f8aad306c40b7b78d096e39b2edbb.png" target="_blank">点击查看合同发起企业和人展示的位置</a></p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  <a href="https://qcloudimg.tencent-cloud.cn/raw/a71872de3d540d55451e3e73a2ad1a6e.png" target="_blank">Agent.AppId</a></li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（合同的发起企业）</li><li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （合同的发起人）</li></ul><p>合同的发起企业和发起人必需已经完成实名，并加入企业</p>
    */
   Agent: Agent
   /**
-   * 合同组中每个合同签署流程的信息，合同组中最少包含2个合同，不能超过50个合同。
+   * <p>合同组中每个合同签署流程的信息，合同组中最少包含2个合同，不能超过50个合同。</p>
    */
   FlowInfos: Array<FlowInfo>
   /**
-   * 合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+   * <p>合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。</p>
    */
   FlowGroupName: string
 }
@@ -8699,7 +8540,7 @@ export interface CreateFlowsByTemplatesRequest {
    */
   FlowInfos: Array<FlowInfo>
   /**
-   * <p>是否为预览模式，取值如下：</p><ul><li> **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。</li><li> **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 <font color="red">注意： 以预览模式创建的合同仅供查看，因此参与方无法进行签署操作</font></li></ul><p><strong>注1</strong>: 如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询得到</p><p><strong>注2</strong>: 预览服务按照合同份额 1:2的比例赠送预览次数。例如：购买 100 份合同，将赠送 200 次合同预览额度。当赠送的预览额度使用完后，如需继续使用预览服务，则需要单独购买预览服务额度。</p>
+   * <p>是否为预览模式，取值如下：</p><ul><li> **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。</li><li> **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 <font color="red">注意： 以预览模式创建的合同仅供查看，因此参与方无法进行签署操作</font></li></ul><p><strong>注1</strong>: 如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过<a href="https://qian.tencent.com/developers/partnerApis/files/DescribeFileConvertTask">查询转换任务状态</a>接口查询得到</p><p><strong>注2</strong>: 预览服务按照合同份额 1:2的比例赠送预览次数。例如：购买 100 份合同，将赠送 200 次合同预览额度。当赠送的预览额度使用完后，如需继续使用预览服务，则需要单独购买预览服务额度。</p>
    */
   NeedPreview?: boolean
   /**
@@ -8736,7 +8577,7 @@ export interface UploadFilesRequest {
    */
   Agent: Agent
   /**
-   * <p>文件对应业务类型,可以选择的类型如下</p><p>枚举值：</p><ul><li>TEMPLATE： 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务</a>转换后才能使用</li><li>DOCUMENT： 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务</a>转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可</li><li>SEAL：  此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png</li><li>ARCHIVE： 此文件用于归档文件夹，文件类型支持.pdf/.zip格式</li><li>BUSINESSLICENSE： 此文件用于上传营业执照，用于后续<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>认证子客的时候提供营业执照，文件类型支持.jpg/.jpeg/.png，限制8M以内</li></ul>
+   * <p>文件对应业务类型,可以选择的类型如下</p><p>枚举值：</p><ul><li>TEMPLATE： 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务</a>转换后才能使用</li><li>DOCUMENT： 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过<a href="https://qian.tencent.com/developers/partnerApis/files/CreateFileConvertTask" target="_blank">创建文件转换任务</a>转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可</li><li>SEAL：  此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png</li><li>ARCHIVE： 此文件用于归档文件夹，文件类型支持.pdf/.zip格式</li><li>BUSINESSLICENSE： 此文件用于上传营业执照，用于后续<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>认证子客的时候提供营业执照，文件类型支持.jpg/.jpeg/.png，限制8M以内</li></ul>
    */
   BusinessType: string
   /**
@@ -9522,7 +9363,7 @@ export interface ChannelCreateEmbedWebUrlRequest {
    */
   EmbedType: string
   /**
-   * <p>WEB嵌入的业务资源ID</p><p>当EmbedType取值</p><ul><li>为MODIFY_TEMPLATE，PREVIEW_TEMPLATE必填，取值为模板id</li><li>为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/partnerApis/files/UploadFiles)*</li><li>为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL必填，取值为合同id</li><li>为PREVIEW_SEAL_DETAIL必填，取值为印章id</li></ul><p>注意：</p><ol><li>CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi">创建文件转换任务</a> 和<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelGetTaskResultApi">查询转换任务状态</a> 来进行转换成PDF资源。</li></ol>
+   * <p>WEB嵌入的业务资源ID</p><p>当EmbedType取值</p><ul><li>为MODIFY_TEMPLATE，PREVIEW_TEMPLATE必填，取值为模板id</li><li>为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/partnerApis/files/UploadFiles)*</li><li>为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL必填，取值为合同id</li><li>为PREVIEW_SEAL_DETAIL必填，取值为印章id</li></ul><p>注意：</p><ol><li>CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口<a href="https://qian.tencent.com/developers/partnerApis/files/CreateFileConvertTask">创建文件转换任务</a> 和<a href="https://qian.tencent.com/developers/partnerApis/files/DescribeFileConvertTask">查询转换任务状态</a> 来进行转换成PDF资源。</li></ol>
    */
   BusinessId?: string
   /**

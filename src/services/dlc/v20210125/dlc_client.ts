@@ -452,7 +452,6 @@ import {
   CheckModelIdentifierRequest,
   MessageItem,
   MetaDatabaseInfo,
-  GetRayJobEventLogRequest,
   GetRayJobEventRequest,
   DescribePartitionQueuesResponse,
   AlterDMSDatabaseResponse,
@@ -499,7 +498,6 @@ import {
   CosPermission,
   GetResourceConfigResponse,
   LockComponentInfo,
-  StartMlflowServerResponse,
   GetRayJobResponse,
   QueryMonitorOverviewResponse,
   RerunBenchmarkTaskResponse,
@@ -882,7 +880,7 @@ import {
   Execution,
   CreateNotebookSessionStatementSupportBatchSQLResponse,
   BindWorkGroupsToUserRequest,
-  ModifyClusterPriorityRequest,
+  StartMlflowServerResponse,
   Column,
   Users,
   DescribeUDFPolicyRequest,
@@ -891,7 +889,7 @@ import {
   DescribeLakeFsDirSummaryResponse,
   GetRayJobYamlRequest,
   DescribeModelTaskOptionsRequest,
-  GetRayJobEventLogResponse,
+  ModifyClusterPriorityRequest,
   DescribeUserVpcConnectionResponse,
   GetModelFilesRequest,
   FileNode,
@@ -914,7 +912,6 @@ import {
   DatabaseInfo,
   ListBenchmarkTasksResponse,
   CancelTasksResponse,
-  EventLogItem,
   InitializeTCLakeResponse,
   ListImagesRequest,
   DescribeDataEnginesRequest,
@@ -3265,13 +3262,13 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
-   * 获取作业事件日志
+   * 本接口（CreateMetaDatabase）用于创建元数据库
    */
-  async GetRayJobEventLog(
-    req: GetRayJobEventLogRequest,
-    cb?: (error: string, rep: GetRayJobEventLogResponse) => void
-  ): Promise<GetRayJobEventLogResponse> {
-    return this.request("GetRayJobEventLog", req, cb)
+  async CreateMetaDatabase(
+    req: CreateMetaDatabaseRequest,
+    cb?: (error: string, rep: CreateMetaDatabaseResponse) => void
+  ): Promise<CreateMetaDatabaseResponse> {
+    return this.request("CreateMetaDatabase", req, cb)
   }
 
   /**
@@ -4082,16 +4079,6 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: ListDeploymentsResponse) => void
   ): Promise<ListDeploymentsResponse> {
     return this.request("ListDeployments", req, cb)
-  }
-
-  /**
-   * 本接口（CreateMetaDatabase）用于创建元数据库
-   */
-  async CreateMetaDatabase(
-    req: CreateMetaDatabaseRequest,
-    cb?: (error: string, rep: CreateMetaDatabaseResponse) => void
-  ): Promise<CreateMetaDatabaseResponse> {
-    return this.request("CreateMetaDatabase", req, cb)
   }
 
   /**

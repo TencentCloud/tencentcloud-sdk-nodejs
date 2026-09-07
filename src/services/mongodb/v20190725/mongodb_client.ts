@@ -28,6 +28,7 @@ import {
   DescribeAuditLogsRequest,
   DBInstancePrice,
   DescribePasswordRotationResponse,
+  ScaleUpDBInstanceCpuRequest,
   KillOpsRequest,
   EnablePasswordRotationRequest,
   DropDBInstanceParamTplResponse,
@@ -118,6 +119,7 @@ import {
   DescribeBackupDownloadTaskRequest,
   ModifyDBInstanceLogToCLSRequest,
   ModifySRVConnectionUrlRequest,
+  ScaleUpDBInstanceCpuResponse,
   DescribeClientConnectionsResponse,
   DeleteDBBackupsRequest,
   ModifyDBInstanceParamTplResponse,
@@ -147,6 +149,7 @@ import {
   CreateBackupDownloadTaskRequest,
   TerminateDBInstancesRequest,
   ParamTpl,
+  ScaleDownDBInstanceCpuResponse,
   InquirePriceModifyDBInstanceSpecResponse,
   CreateDBInstanceHourRequest,
   DeleteDBBackupsResponse,
@@ -181,6 +184,7 @@ import {
   DropDBInstanceParamTplRequest,
   DisableSRVConnectionUrlRequest,
   DescribeTransparentDataEncryptionStatusResponse,
+  ScaleDownDBInstanceCpuRequest,
   DescribeDBInstanceLogToCLSRequest,
   CreateBackupDBInstanceRequest,
   RestoreDatabases,
@@ -518,6 +522,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DropDBInstanceParamTplResponse) => void
   ): Promise<DropDBInstanceParamTplResponse> {
     return this.request("DropDBInstanceParamTpl", req, cb)
+  }
+
+  /**
+   * 手动开启cpu弹性扩容
+   */
+  async ScaleUpDBInstanceCpu(
+    req: ScaleUpDBInstanceCpuRequest,
+    cb?: (error: string, rep: ScaleUpDBInstanceCpuResponse) => void
+  ): Promise<ScaleUpDBInstanceCpuResponse> {
+    return this.request("ScaleUpDBInstanceCpu", req, cb)
   }
 
   /**
@@ -1020,6 +1034,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSRVConnectionDomainResponse) => void
   ): Promise<DescribeSRVConnectionDomainResponse> {
     return this.request("DescribeSRVConnectionDomain", req, cb)
+  }
+
+  /**
+   * ScaleDownDBInstanceCpu
+   */
+  async ScaleDownDBInstanceCpu(
+    req: ScaleDownDBInstanceCpuRequest,
+    cb?: (error: string, rep: ScaleDownDBInstanceCpuResponse) => void
+  ): Promise<ScaleDownDBInstanceCpuResponse> {
+    return this.request("ScaleDownDBInstanceCpu", req, cb)
   }
 
   /**

@@ -264,7 +264,7 @@ export interface DisableUserAutoSignRequest {
  */
 export interface UploadFilesRequest {
   /**
-   * <p>文件对应业务类型,可以选择的类型如下</p><p>枚举值：</p><ul><li>TEMPLATE： 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务</a>转换后才能使用</li><li>DOCUMENT： 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务</a>转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可</li><li>SEAL： 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png</li><li>ARCHIVE： 此文件用于归档文件夹，文件类型支持.pdf/.zip格式</li><li>BUSINESSLICENSE： 此文件用于上传营业执照，用于后续<a href="https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthUrl" target="_blank">创建企业认证链接</a>认证企业的时候提供营业执照，文件类型支持.jpg/.jpeg/.png，限制8M以内</li></ul>
+   * <p>文件对应业务类型,可以选择的类型如下</p><p>枚举值：</p><ul><li>TEMPLATE： 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务</a>转换后才能使用</li><li>DOCUMENT： 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateFileConvertTask" target="_blank">创建文件转换任务</a>转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可</li><li>SEAL： 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png</li><li>ARCHIVE： 此文件用于归档文件夹，文件类型支持.pdf/.zip格式</li><li>BUSINESSLICENSE： 此文件用于上传营业执照，用于后续<a href="https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthUrl" target="_blank">创建企业认证链接</a>认证企业的时候提供营业执照，文件类型支持.jpg/.jpeg/.png，限制8M以内</li></ul>
    */
   BusinessType: string
   /**
@@ -11182,13 +11182,13 @@ export interface DescribeRiskIdentificationTaskFeedbackResponse {
  */
 export interface SignComponentConfig {
   /**
-   * 签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。
-
-- false 展示签署日期（默认）
-- true 不展示签署日期 
-![image](https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png)。
+   * <p>签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。</p><ul><li>false 展示签署日期（默认）</li><li>true 不展示签署日期<br><img src="https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png" alt="image">。</li></ul>
    */
   HideDate?: boolean
+  /**
+   * <p>【仅 SignBeanTag=1 时有效】 签署方自行添加签署印章类控件（SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL）时，「盖章区适配签署方印章尺寸」开关的控制策略</p><p>枚举值：</p><ul><li>0： 默认关闭，可开启。与现网一致</li><li>1： 关闭且置灰——按控件默认的4.2cm尺寸盖章，签署方无法开启开关</li><li>2： 默认开启且可修改——默认按印章实际尺寸盖章，签署方可手动关闭</li><li>3： 开启且置灰——强制按印章实际尺寸盖章，签署方不可修改</li></ul>
+   */
+  AddSignComponentUseSealSize?: number
 }
 
 /**
@@ -12748,7 +12748,7 @@ export interface CreateEmbedWebUrlRequest {
    */
   EmbedType: string
   /**
-   * <p>WEB嵌入的业务资源ID</p><p>当EmbedType取值</p><ul><li>为PREVIEW_SEAL_DETAIL，必填，取值为印章id。</li><li>为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*</li><li>为MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id。</li><li>为CREATE_CONTRACT_DRAFT_COOPEDIT，非必填，取值为资源 id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*</li><li>为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id。</li></ul><p>注意：</p><ol><li>CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi">创建文件转换任务</a> 和<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/GetTaskResultApi">查询转换任务状态</a> 来进行转换成PDF资源。</li><li>CREATE_CONTRACT_DRAFT_COOPEDIT中的BusinessId仅支持DOC 和 DOCX 的文件，并且大小不能超过 10M。</li></ol>
+   * <p>WEB嵌入的业务资源ID</p><p>当EmbedType取值</p><ul><li>为PREVIEW_SEAL_DETAIL，必填，取值为印章id。</li><li>为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*</li><li>为MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id。</li><li>为CREATE_CONTRACT_DRAFT_COOPEDIT，非必填，取值为资源 id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*</li><li>为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id。</li></ul><p>注意：</p><ol><li>CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateFileConvertTask">创建文件转换任务</a> 和<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/DescribeFileConvertTask">查询转换任务状态</a> 来进行转换成PDF资源。</li><li>CREATE_CONTRACT_DRAFT_COOPEDIT中的BusinessId仅支持DOC 和 DOCX 的文件，并且大小不能超过 10M。</li></ol>
    */
   BusinessId?: string
   /**

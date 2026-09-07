@@ -898,6 +898,16 @@ it("mps.v20190612.SubmitHunyuan3DTask", async function () {
     }
 })
 
+it("mps.v20190612.ModifyDocToVideoTaskStatus", async function () {
+    try {
+       const data = await client.ModifyDocToVideoTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteWorkflow", async function () {
     try {
        const data = await client.DeleteWorkflow({})

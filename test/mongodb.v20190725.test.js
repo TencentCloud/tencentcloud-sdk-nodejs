@@ -278,6 +278,16 @@ it("mongodb.v20190725.DropDBInstanceParamTpl", async function () {
     }
 })
 
+it("mongodb.v20190725.ScaleUpDBInstanceCpu", async function () {
+    try {
+       const data = await client.ScaleUpDBInstanceCpu({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeSlowLogPatterns", async function () {
     try {
        const data = await client.DescribeSlowLogPatterns({})
@@ -771,6 +781,16 @@ it("mongodb.v20190725.SetBackupRules", async function () {
 it("mongodb.v20190725.DescribeSRVConnectionDomain", async function () {
     try {
        const data = await client.DescribeSRVConnectionDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.ScaleDownDBInstanceCpu", async function () {
+    try {
+       const data = await client.ScaleDownDBInstanceCpu({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

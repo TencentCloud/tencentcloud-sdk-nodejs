@@ -322,6 +322,20 @@ export interface DescribePasswordRotationResponse {
 }
 
 /**
+ * ScaleUpDBInstanceCpu请求参数结构体
+ */
+export interface ScaleUpDBInstanceCpuRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>要扩容的CPU核数（增量），每个节点都会增加这么多核数</p>
+   */
+  ExtraCpu?: number
+}
+
+/**
  * KillOps请求参数结构体
  */
 export interface KillOpsRequest {
@@ -2580,6 +2594,20 @@ export interface ModifySRVConnectionUrlRequest {
 }
 
 /**
+ * ScaleUpDBInstanceCpu返回参数结构体
+ */
+export interface ScaleUpDBInstanceCpuResponse {
+  /**
+   * <p>任务流ID</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClientConnections返回参数结构体
  */
 export interface DescribeClientConnectionsResponse {
@@ -3036,6 +3064,20 @@ export interface ParamTpl {
 - CUSTOMIZE：自定义模板。
    */
   TplType?: string
+}
+
+/**
+ * ScaleDownDBInstanceCpu返回参数结构体
+ */
+export interface ScaleDownDBInstanceCpuResponse {
+  /**
+   * <p>任务流ID</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3960,6 +4002,16 @@ export interface DescribeTransparentDataEncryptionStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ScaleDownDBInstanceCpu请求参数结构体
+ */
+export interface ScaleDownDBInstanceCpuRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
 }
 
 /**

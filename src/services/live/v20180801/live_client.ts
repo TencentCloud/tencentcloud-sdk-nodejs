@@ -25,18 +25,19 @@ import {
   DescribeLiveWatermarkRulesResponse,
   StartLiveAvatarRoomRequest,
   CasterMarkPicInfo,
-  ModifyPullStreamStatusRequest,
+  CreateLiveAvatarCloneFigureRequest,
   DeleteLiveRecordTemplateRequest,
   ModifyLiveTimeShiftTemplateResponse,
   DescribeLiveTranscodeTemplatesRequest,
   DescribeBackupStreamListResponse,
   DescribeLiveSnapshotTemplateRequest,
+  DescribeLiveAvatarCloneFigureListResponse,
   DescribePlayErrorCodeDetailInfoListRequest,
   PublishTime,
   CommonMixOutputParams,
   DescribeAuditKeywordsResponse,
   DescribeCasterOutputInfosResponse,
-  DescribeLiveStreamPublishedListRequest,
+  CreateLiveAvatarCloneFigureResponse,
   DescribeGroupProIspPlayInfoListResponse,
   DescribeDeliverBandwidthListResponse,
   DescribeLiveTranscodeDetailInfoRequest,
@@ -74,6 +75,7 @@ import {
   AddCasterMarkWordInfoResponse,
   ProIspPlaySumInfo,
   ModifyLiveTranscodeTemplateResponse,
+  ModifyPullStreamStatusRequest,
   DescribeStreamDayPlayInfoListRequest,
   DeleteLiveTimeShiftRuleResponse,
   DescribeSceneVideoTaskResponse,
@@ -136,6 +138,7 @@ import {
   DescribeLivePullStreamTasksRequest,
   DeleteLiveStreamMonitorResponse,
   DeleteLiveCallbackTemplateRequest,
+  DescribeLiveAvatarCloneFigureListRequest,
   ModifyCasterInputInfoRequest,
   DescribeCasterOutputInfosRequest,
   CreateLiveCallbackTemplateResponse,
@@ -169,7 +172,7 @@ import {
   StartLiveStreamMonitorResponse,
   CreateScreenshotTaskResponse,
   DeleteLiveCallbackRuleResponse,
-  DescribeStreamPlayInfoListRequest,
+  DescribeLiveStreamPublishedListRequest,
   DescribeCasterDisplayInfoRequest,
   ModifyOriginStreamInfoRequest,
   PushAuthKeyInfo,
@@ -368,6 +371,7 @@ import {
   DeleteLiveTimeShiftRuleRequest,
   SceneVideoOutputInfo,
   CommonMixInputParam,
+  DescribeStreamPlayInfoListRequest,
   CreateLiveCallbackTemplateRequest,
   CreateAuditKeywordLibResponse,
   StreamEventInfo,
@@ -379,6 +383,7 @@ import {
   HttpStatusData,
   CreateCommonMixStreamRequest,
   DeleteCasterMarkPicInfoRequest,
+  DeleteLiveAvatarCloneFigureRequest,
   CreateCasterResponse,
   PushDataInfo,
   AuditKeywordDeleteDetail,
@@ -445,6 +450,7 @@ import {
   PlayStatInfo,
   DescribeCasterUserStatusResponse,
   ModifyLivePullStreamTaskRequest,
+  LiveAvatarCloneFigureInfo,
   DescribeLogDownloadListRequest,
   DeleteLiveWatermarkResponse,
   DropLiveStreamResponse,
@@ -567,6 +573,7 @@ import {
   RecordParam,
   ModifyLiveRecordTemplateRequest,
   StartLivePadStreamRequest,
+  DeleteLiveAvatarCloneFigureResponse,
   DescribeLiveDomainRefererRequest,
   DescribeLiveAvatarTimbreListResponse,
   HttpCodeInfo,
@@ -873,6 +880,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTimeShiftStreamListResponse) => void
   ): Promise<DescribeTimeShiftStreamListResponse> {
     return this.request("DescribeTimeShiftStreamList", req, cb)
+  }
+
+  /**
+   * 调用该接口，用于删除已有的数字人直播间里面的话术。
+   */
+  async DeleteLiveAvatarCloneFigure(
+    req: DeleteLiveAvatarCloneFigureRequest,
+    cb?: (error: string, rep: DeleteLiveAvatarCloneFigureResponse) => void
+  ): Promise<DeleteLiveAvatarCloneFigureResponse> {
+    return this.request("DeleteLiveAvatarCloneFigure", req, cb)
   }
 
   /**
@@ -2157,6 +2174,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 调用该接口，用于创建数字人直播间/AIGC直播间话术。
+   */
+  async CreateLiveAvatarCloneFigure(
+    req: CreateLiveAvatarCloneFigureRequest,
+    cb?: (error: string, rep: CreateLiveAvatarCloneFigureResponse) => void
+  ): Promise<CreateLiveAvatarCloneFigureResponse> {
+    return this.request("CreateLiveAvatarCloneFigure", req, cb)
+  }
+
+  /**
    * 获取回调规则列表
    */
   async DescribeLiveCallbackRules(
@@ -2934,6 +2961,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveCertsResponse) => void
   ): Promise<DescribeLiveCertsResponse> {
     return this.request("DescribeLiveCerts", req, cb)
+  }
+
+  /**
+   * 调用该接口，查询数字人直播间信息列表。
+   */
+  async DescribeLiveAvatarCloneFigureList(
+    req: DescribeLiveAvatarCloneFigureListRequest,
+    cb?: (error: string, rep: DescribeLiveAvatarCloneFigureListResponse) => void
+  ): Promise<DescribeLiveAvatarCloneFigureListResponse> {
+    return this.request("DescribeLiveAvatarCloneFigureList", req, cb)
   }
 
   /**

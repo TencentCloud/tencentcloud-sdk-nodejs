@@ -399,6 +399,7 @@ import {
   SRTSourceAddressReq,
   DescribeLiveRecordTemplatesResponse,
   EnableScheduleRequest,
+  ModifyDocToVideoTaskStatusResponse,
   EnableWorkflowRequest,
   NameServer,
   RawTranscodeParameter,
@@ -550,6 +551,7 @@ import {
   MediaContentReviewAsrTextSegmentItem,
   CreateInputRISTSettings,
   CreateWatermarkTemplateRequest,
+  DocToVideoRegenerateInput,
   OutputReq,
   ManifestInfo,
   ComposeMediaItem,
@@ -675,6 +677,7 @@ import {
   AiReviewPornOcrTaskOutput,
   CreateAsrHotwordsRequest,
   AiAnalysisTaskHighlightInput,
+  ModifyDocToVideoTaskStatusInput,
   ProhibitedAsrReviewTemplateInfo,
   WithdrawsWatermarkResponse,
   SegmentRecognitionItem,
@@ -1073,6 +1076,7 @@ import {
   AssemblyUsageInfo,
   TerrorismConfigureInfo,
   CreateStreamPackageLinearAssemblyProgramResponse,
+  ModifyDocToVideoTaskStatusRequest,
   PoliticalAsrReviewTemplateInfo,
   SubmitHunyuan3DTaskResponse,
   DeleteProcessImageTemplateRequest,
@@ -2049,6 +2053,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitHunyuan3DTaskResponse) => void
   ): Promise<SubmitHunyuan3DTaskResponse> {
     return this.request("SubmitHunyuan3DTask", req, cb)
+  }
+
+  /**
+     * 修改 AIGC 文档生视频任务状态。
+
+包含 confirm（确认当前阶段）和 regenerate（重新生成当前阶段）两种动作含义。
+     */
+  async ModifyDocToVideoTaskStatus(
+    req: ModifyDocToVideoTaskStatusRequest,
+    cb?: (error: string, rep: ModifyDocToVideoTaskStatusResponse) => void
+  ): Promise<ModifyDocToVideoTaskStatusResponse> {
+    return this.request("ModifyDocToVideoTaskStatus", req, cb)
   }
 
   /**

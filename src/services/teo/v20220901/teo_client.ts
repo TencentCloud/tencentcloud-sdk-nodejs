@@ -664,6 +664,7 @@ import {
   UpstreamHttp2,
   EnableOriginACLResponse,
   DeleteAliasDomainResponse,
+  ComplianceRestriction,
   DeleteSecurityJSInjectionRuleRequest,
   BotConfig,
   ModifyFunctionComponentBindingsRequest,

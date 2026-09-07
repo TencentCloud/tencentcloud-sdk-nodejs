@@ -268,16 +268,6 @@ it("essbasic.v20210526.DescribeUsage", async function () {
     }
 })
 
-it("essbasic.v20210526.ChannelCreateConvertTaskApi", async function () {
-    try {
-       const data = await client.ChannelCreateConvertTaskApi({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("essbasic.v20210526.ChannelCancelFlow", async function () {
     try {
        const data = await client.ChannelCancelFlow({})
@@ -591,16 +581,6 @@ it("essbasic.v20210526.CreateBatchOrganizationRegistrationTasks", async function
 it("essbasic.v20210526.CreateEmployeeQualificationSealQrCode", async function () {
     try {
        const data = await client.CreateEmployeeQualificationSealQrCode({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.ChannelGetTaskResultApi", async function () {
-    try {
-       const data = await client.ChannelGetTaskResultApi({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

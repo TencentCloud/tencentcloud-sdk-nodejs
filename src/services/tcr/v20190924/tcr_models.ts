@@ -2290,15 +2290,15 @@ export interface DescribeInstanceStatusRequest {
  */
 export interface ModifyWebhookTriggerRequest {
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   RegistryId: string
   /**
-   * 触发器参数
+   * <p>触发器参数</p>
    */
   Trigger: WebhookTrigger
   /**
-   * 命名空间
+   * <p>命名空间</p>
    */
   Namespace: string
 }
@@ -2846,39 +2846,40 @@ export interface DescribeInternalEndpointDnsStatusResponse {
  */
 export interface WebhookTrigger {
   /**
-   * 触发器名称
+   * <p>触发器名称</p>
    */
   Name: string
   /**
-   * 触发器目标
+   * <p>触发器目标</p>
    */
   Targets: Array<WebhookTarget>
   /**
-   * 触发动作
+   * <p>触发动作</p>
    */
   EventTypes: Array<string>
   /**
-   * 触发规则
+   * <p>触发规则</p>
    */
   Condition: string
   /**
-   * 启用触发器
+   * <p>启用触发器</p>
    */
   Enabled: boolean
   /**
-   * 触发器Id
+   * <p>触发器Id</p>
    */
   Id?: number
   /**
-   * 触发器描述
+   * <p>触发器描述</p>
    */
   Description?: string
   /**
-   * 触发器所属命名空间 Id
+   * <p>触发器所属命名空间 Id</p>
    */
   NamespaceId?: number
   /**
-   * 触发器所属命名空间名称
+   * <p>触发器所属命名空间名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceName?: string
 }

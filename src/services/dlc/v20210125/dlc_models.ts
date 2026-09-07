@@ -12701,36 +12701,6 @@ export interface MetaDatabaseInfo {
 }
 
 /**
- * GetRayJobEventLog请求参数结构体
- */
-export interface GetRayJobEventLogRequest {
-  /**
-   * ray-jobID
-   */
-  Id: string
-  /**
-   * 开始时间
-   */
-  StartTime?: number
-  /**
-   * 结束时间
-   */
-  EndTime?: number
-  /**
-   * 当前页码（从1开始）
-   */
-  Page?: number
-  /**
-   * 页数
-   */
-  PageSize?: number
-  /**
-   * 排序字段列表（列表字段）
-   */
-  SortFields?: Array<SortField>
-}
-
-/**
  * GetRayJobEvent请求参数结构体
  */
 export interface GetRayJobEventRequest {
@@ -14388,20 +14358,6 @@ export interface LockComponentInfo {
    * 是否动态分区写
    */
   IsDynamicPartitionWrite?: boolean
-}
-
-/**
- * StartMlflowServer返回参数结构体
- */
-export interface StartMlflowServerResponse {
-  /**
-   * <p>MlFlowServer的详情</p>
-   */
-  MlFlowServer?: MlFlowServerInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -26997,17 +26953,17 @@ export interface BindWorkGroupsToUserRequest {
 }
 
 /**
- * ModifyClusterPriority请求参数结构体
+ * StartMlflowServer返回参数结构体
  */
-export interface ModifyClusterPriorityRequest {
+export interface StartMlflowServerResponse {
   /**
-   * <p>集群ID</p>
+   * <p>MlFlowServer的详情</p>
    */
-  Id: string
+  MlFlowServer?: MlFlowServerInfo
   /**
-   * <p>优先级（1-9，数字越大优先级越高）</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Priority: number
+  RequestId?: string
 }
 
 /**
@@ -27178,33 +27134,17 @@ export interface DescribeModelTaskOptionsRequest {
 }
 
 /**
- * GetRayJobEventLog返回参数结构体
+ * ModifyClusterPriority请求参数结构体
  */
-export interface GetRayJobEventLogResponse {
+export interface ModifyClusterPriorityRequest {
   /**
-   * 事件总数
+   * <p>集群ID</p>
    */
-  TotalCount?: number
+  Id: string
   /**
-   * 事件列表
+   * <p>优先级（1-9，数字越大优先级越高）</p>
    */
-  Events?: Array<EventLogItem>
-  /**
-   * 当前页码（从1开始）
-   */
-  Page?: number
-  /**
-   * 页数
-   */
-  PageSize?: number
-  /**
-   * 总页数
-   */
-  TotalPages?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Priority: number
 }
 
 /**
@@ -27742,28 +27682,6 @@ export interface CancelTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 事件日志项
- */
-export interface EventLogItem {
-  /**
-   * 事件时间（Unix 时间戳，秒级）
-   */
-  EventTime?: number
-  /**
-   * 组件名称
-   */
-  Component?: string
-  /**
-   * 日志级别（INFO/WARN/ERROR）
-   */
-  Level?: string
-  /**
-   * 事件内容
-   */
-  Message?: string
 }
 
 /**

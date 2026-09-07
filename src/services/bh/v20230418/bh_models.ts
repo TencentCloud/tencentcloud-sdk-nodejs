@@ -1966,6 +1966,10 @@ export interface AppAsset {
    */
   ClientAppKind?: string
   /**
+   * <p>客户端工具启动参数</p>
+   */
+  ClientAppArgs?: Array<string>
+  /**
    * <p>应用资产url</p>
    */
   Url?: string
@@ -4091,9 +4095,13 @@ export interface User {
  */
 export interface ResetUserRequest {
   /**
-   * 用户ID集合
+   * <p>用户ID集合</p>
    */
   IdSet: Array<number | bigint>
+  /**
+   * <p>重置类型</p><p>枚举值：</p><ul><li>0： 同时重置本地认证密码、OTP验证码</li><li>1： 仅重置本地认证密码</li><li>2： 仅重置OTP验证码</li></ul><p>默认值：0</p>
+   */
+  ResetType?: number
 }
 
 /**

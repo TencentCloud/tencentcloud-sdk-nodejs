@@ -215,7 +215,7 @@ export interface RedisBackupSet {
    */
   BackupId?: string
   /**
-   * <p>备份类型。</p><ul><li>1：凌晨系统发起的自动备份。</li><li>0：用户发起的手动备份。</li></ul>
+   * <p>备份类型。</p><p>枚举值：</p><ul><li>0： 用户发起的手动备份</li><li>1： 凌晨系统发起的自动备份</li><li>2： 变配触发的备份</li></ul>
    */
   BackupType?: string
   /**
@@ -6904,7 +6904,7 @@ export interface DescribeInstanceBackupsRequest {
    */
   EndTime?: string
   /**
-   * <p>备份任务的状态：<br>1：备份在流程中。<br>2：备份正常。<br>3：备份转RDB文件处理中。<br>4：已完成RDB转换。<br>-1：备份已过期。<br>-2：备份已删除。</p>
+   * <p>备份的状态：</p><p>枚举值：</p><ul><li>1： 备份在流程中。</li><li>2： 备份正常。</li></ul><p>默认值：2</p>
    */
   Status?: Array<number | bigint>
   /**

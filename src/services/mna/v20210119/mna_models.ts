@@ -270,26 +270,33 @@ export interface GroupDeleteDeviceRequest {
  */
 export interface GetFlowPackagesRequest {
   /**
-   * 页码，从1开始
+   * <p>页码，从1开始</p>
    */
   PageNumber: number
   /**
-   * 每页个数
+   * <p>每页个数</p>
    */
   PageSize: number
   /**
-   * 流量包的唯一资源ID
+   * <p>流量包的唯一资源ID</p>
    */
   ResourceId?: string
   /**
-   * 流量包绑定的设备ID
+   * <p>流量包绑定的设备ID</p>
    */
   DeviceId?: string
   /**
-   * 流量包状态，0：未生效，1：有效期内，2：已过期
-
+   * <p>流量包状态，0：未生效，1：有效期内，2：已过期</p>
    */
   Status?: number
+  /**
+   * <p>生效时间在此时间之后</p>
+   */
+  ActiveTimeStart?: string
+  /**
+   * <p>生效时间在此时间之前</p>
+   */
+  ActiveTimeEnd?: string
 }
 
 /**
@@ -405,11 +412,11 @@ export interface L3ConnInfo {
  */
 export interface GetFlowPackagesResponse {
   /**
-   * 流量包列表
+   * <p>流量包列表</p>
    */
   PackageList?: Array<FlowPackageInfo>
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**

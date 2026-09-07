@@ -2288,9 +2288,9 @@ it("dlc.v20210125.CreateInferenceService", async function () {
     }
 })
 
-it("dlc.v20210125.GetRayJobEventLog", async function () {
+it("dlc.v20210125.CreateMetaDatabase", async function () {
     try {
-       const data = await client.GetRayJobEventLog({})
+       const data = await client.CreateMetaDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3101,16 +3101,6 @@ it("dlc.v20210125.ListBenchmarkTasks", async function () {
 it("dlc.v20210125.ListDeployments", async function () {
     try {
        const data = await client.ListDeployments({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dlc.v20210125.CreateMetaDatabase", async function () {
-    try {
-       const data = await client.CreateMetaDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

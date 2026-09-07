@@ -248,6 +248,16 @@ it("live.v20180801.DescribeTimeShiftStreamList", async function () {
     }
 })
 
+it("live.v20180801.DeleteLiveAvatarCloneFigure", async function () {
+    try {
+       const data = await client.DeleteLiveAvatarCloneFigure({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.AddCasterInputInfo", async function () {
     try {
        const data = await client.AddCasterInputInfo({})
@@ -1488,6 +1498,16 @@ it("live.v20180801.CreateLiveAvatarScript", async function () {
     }
 })
 
+it("live.v20180801.CreateLiveAvatarCloneFigure", async function () {
+    try {
+       const data = await client.CreateLiveAvatarCloneFigure({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveCallbackRules", async function () {
     try {
        const data = await client.DescribeLiveCallbackRules({})
@@ -2201,6 +2221,16 @@ it("live.v20180801.CreateLiveTranscodeTemplate", async function () {
 it("live.v20180801.DescribeLiveCerts", async function () {
     try {
        const data = await client.DescribeLiveCerts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeLiveAvatarCloneFigureList", async function () {
+    try {
+       const data = await client.DescribeLiveAvatarCloneFigureList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

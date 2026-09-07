@@ -8281,65 +8281,69 @@ export interface KibanaPublicAcl {
  */
 export interface CollectorOutputInstance {
   /**
-   * 采集器输出的实例类型（支持elasticsearch、logstash）
+   * <p>采集器输出的实例类型（支持elasticsearch、logstash）</p>
    */
   Type: string
   /**
-   * 采集器输出的实例ID
+   * <p>采集器输出的实例ID</p>
    */
   InstanceId: string
   /**
-   * 采集器输出到的ES实例的用户名
+   * <p>采集器输出到的ES实例的用户名</p>
    */
   ESUserName?: string
   /**
-   * 采集器输出到的ES实例的密码
+   * <p>采集器输出到的ES实例的密码</p>
    */
   ESUserPasswd?: string
   /**
-   * 采集器输出到ES实例时，是否开启监控（1为开启，0为不开启，默认为0）
+   * <p>采集器输出到ES实例时，是否开启监控（1为开启，0为不开启，默认为0）</p>
    */
   EnableMonitoring?: number
   /**
-   * 采集器输出到ES实例时，是否开启自动在kibana中生成Dashboard（1为开启，0为不开启，默认为0）
+   * <p>采集器输出到ES实例时，是否开启自动在kibana中生成Dashboard（1为开启，0为不开启，默认为0）</p>
    */
   EnableDashboard?: number
   /**
-   * Ckafka实例的vip
+   * <p>Ckafka实例的vip</p>
    */
   KafkaEndpoint?: string
   /**
-   * Ckafka实例中的Topic
+   * <p>Ckafka实例中的Topic</p>
    */
   KafkaTopic?: string
   /**
-   * Ckafka实例的版本号
+   * <p>Ckafka实例的版本号</p>
    */
   KafkaVersion?: string
   /**
-   * topic id
+   * <p>topic id</p>
    */
   SesTopicId?: string
   /**
-   * topic name
+   * <p>topic name</p>
    */
   SesTopicName?: string
   /**
-   * topic address
+   * <p>topic address</p>
    */
   SesTopicAddress?: string
   /**
-   * /
+   * <p>/</p>
    */
   SesTopicUserName?: string
   /**
-   * /
+   * <p>/</p>
    */
   SesTopicPasswd?: string
   /**
-   * /
+   * <p>/</p>
    */
   LogstashListenPort?: number
+  /**
+   * <p>serverless 的 spaceid</p>
+   */
+  SesSpaceId?: string
 }
 
 /**

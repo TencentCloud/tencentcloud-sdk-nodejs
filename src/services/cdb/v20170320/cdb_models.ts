@@ -5434,6 +5434,10 @@ export interface CreateDBInstanceRequest {
    * <p>备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。</p>
    */
   FourthZone?: string
+  /**
+   * <p>弹性扩容参数（如果不传，则不开启）</p>
+   */
+  AutoStrategy?: AutoStrategy
 }
 
 /**
@@ -9622,6 +9626,10 @@ export interface CreateDBInstanceHourRequest {
    * <p>备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。</p>
    */
   FourthZone?: string
+  /**
+   * <p>弹性扩容参数（如果不传，则不开启）</p>
+   */
+  AutoStrategy?: AutoStrategy
 }
 
 /**
