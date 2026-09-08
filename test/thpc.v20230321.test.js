@@ -18,6 +18,16 @@ const client = new tencentcloud.thpc.v20230321.Client({
 })
 describe("thpc.v20230321.test.js", function () {
 
+it("thpc.v20230321.ModifyWorkspacesRenewFlag", async function () {
+    try {
+       const data = await client.ModifyWorkspacesRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20230321.DeleteNodes", async function () {
     try {
        const data = await client.DeleteNodes({})
@@ -58,6 +68,16 @@ it("thpc.v20230321.CreateCluster", async function () {
     }
 })
 
+it("thpc.v20230321.DisableClusterMonitor", async function () {
+    try {
+       const data = await client.DisableClusterMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20230321.CreateWorkspaces", async function () {
     try {
        const data = await client.CreateWorkspaces({})
@@ -88,9 +108,9 @@ it("thpc.v20230321.GenerateRegisterCommand", async function () {
     }
 })
 
-it("thpc.v20230321.DescribeAutoScalingConfiguration", async function () {
+it("thpc.v20230321.DescribeJobSubmitInfo", async function () {
     try {
-       const data = await client.DescribeAutoScalingConfiguration({})
+       const data = await client.DescribeJobSubmitInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +288,9 @@ it("thpc.v20230321.DescribeClusters", async function () {
     }
 })
 
-it("thpc.v20230321.ModifyNodeAttribute", async function () {
+it("thpc.v20230321.EnableClusterMonitor", async function () {
     try {
-       const data = await client.ModifyNodeAttribute({})
+       const data = await client.EnableClusterMonitor({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +358,19 @@ it("thpc.v20230321.AddQueue", async function () {
     }
 })
 
-it("thpc.v20230321.DescribeJobSubmitInfo", async function () {
+it("thpc.v20230321.DescribeAutoScalingConfiguration", async function () {
     try {
-       const data = await client.DescribeJobSubmitInfo({})
+       const data = await client.DescribeAutoScalingConfiguration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20230321.ModifyNodeAttribute", async function () {
+    try {
+       const data = await client.ModifyNodeAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +498,9 @@ it("thpc.v20230321.InquirePriceModifyWorkspacesChargeType", async function () {
     }
 })
 
-it("thpc.v20230321.ModifyWorkspacesRenewFlag", async function () {
+it("thpc.v20230321.DescribeClusterMonitorStatus", async function () {
     try {
-       const data = await client.ModifyWorkspacesRenewFlag({})
+       const data = await client.DescribeClusterMonitorStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

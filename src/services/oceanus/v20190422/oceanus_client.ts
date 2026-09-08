@@ -86,12 +86,12 @@ import {
   Tag,
   GetMetaTableResponse,
   FetchSqlGatewayStatementResultResponse,
-  DescribeJobSavepointResponse,
+  DescribeVariablesResponse,
   JobGraphNode,
   ModifyMetaTableRequest,
   CreateWorkSpaceRequest,
   DeleteResourceConfigsRequest,
-  DescribeVariablesResponse,
+  DescribeJobSavepointResponse,
   DeleteFoldersRequest,
   DeleteWorkSpaceRequest,
   DescribeJobRuntimeInfoRequest,
@@ -124,6 +124,7 @@ import {
   DeleteWorkSpaceResponse,
   HadoopYarnItem,
   TriggerJobSavepointResponse,
+  TreeResourceItem,
   HiveMetastoreInfo,
   DeleteJobsResponse,
   Property,
@@ -136,7 +137,8 @@ import {
   RoleAuth,
   DescribeTreeResourcesRsp,
   ResourceRefDetail,
-  TreeResourceItem,
+  JobInstanceForSubmissionLog,
+  DescribeJobDetailResponse,
   DescribeTreeResourcesResponse,
   CreateVariableResponse,
   Filter,
@@ -163,7 +165,7 @@ import {
   ResourceLocParam,
   CreateJobRequest,
   ScaleOceanusClusterResponse,
-  JobInstanceForSubmissionLog,
+  DescribeJobDetailRequest,
   DescribeFolderRequest,
   DescribeWorkSpaceUsersRequest,
   Warehouse,
@@ -293,6 +295,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTableConfigResponse) => void
   ): Promise<DeleteTableConfigResponse> {
     return this.request("DeleteTableConfig", req, cb)
+  }
+
+  /**
+   * 显示flink作业的Dag图，以及算子、subtask等信息
+   */
+  async DescribeJobDetail(
+    req: DescribeJobDetailRequest,
+    cb?: (error: string, rep: DescribeJobDetailResponse) => void
+  ): Promise<DescribeJobDetailResponse> {
+    return this.request("DescribeJobDetail", req, cb)
   }
 
   /**

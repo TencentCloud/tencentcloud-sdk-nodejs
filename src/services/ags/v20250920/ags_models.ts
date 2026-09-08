@@ -123,6 +123,16 @@ export interface StartSandboxInstanceRequest {
 }
 
 /**
+ * UpdateSandboxInstance返回参数结构体
+ */
+export interface UpdateSandboxInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDeployment请求参数结构体
  */
 export interface CreateDeploymentRequest {
@@ -230,6 +240,10 @@ export interface ComputerConfiguration {
    * <p>waa沙箱工具配置</p>
    */
   WAAConfiguration?: WAAConfiguration
+  /**
+   * <p>配置内置 OSWorld</p>
+   */
+  OSWorldConfiguration?: OSWorldConfiguration
 }
 
 /**
@@ -493,13 +507,13 @@ export interface APIKeyInfo {
 }
 
 /**
- * UpdateSandboxInstance返回参数结构体
+ * OSWorld 内置版本配置
  */
-export interface UpdateSandboxInstanceResponse {
+export interface OSWorldConfiguration {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>指定内置 OSWorld 版本</p><p>枚举值：</p><ul><li>osworld1： osworld v1</li><li>osworld2： osworld v2</li></ul><p>默认值：osworld1</p>
    */
-  RequestId?: string
+  Version?: string
 }
 
 /**

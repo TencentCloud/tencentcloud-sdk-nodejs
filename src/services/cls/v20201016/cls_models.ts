@@ -581,6 +581,16 @@ export interface CheckFunctionResponse {
 }
 
 /**
+ * DeleteResourceGraphProductIngestTask返回参数结构体
+ */
+export interface DeleteResourceGraphProductIngestTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAlarm返回参数结构体
  */
 export interface ModifyAlarmResponse {
@@ -788,43 +798,17 @@ export interface AdvancedConsumerConfiguration {
 }
 
 /**
- * ScheduledSql的资源信息
+ * DescribeResourceGraphEntities返回参数结构体
  */
-export interface ScheduledSqlResouceInfo {
+export interface DescribeResourceGraphEntitiesResponse {
   /**
-   * 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
+   * <p>分页的游标，有值则下次分页请求原样带上，无值则表示无下一页</p>
    */
-  TopicId: string
+  NextCursor?: string
   /**
-   * 主题的地域信息，当前不支持跨地域，支持地域参考 [地域列表](https://cloud.tencent.com/document/api/614/56474#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) 文档。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Region?: string
-  /**
-   * 主题类型：0为日志主题，1为指标主题
-   */
-  BizType?: number
-  /**
-   * 指标名称。当BizType为1时，MetricName需要填写
-   */
-  MetricName?: string
-  /**
-   * 指标名称
-BizType为1时，优先使用MetricNames字段多指标只能填充到MetricNames字段，单指标建议填充到MetricName字段
-   */
-  MetricNames?: Array<string>
-  /**
-   * 指标维度，不接受时间类型。
-   */
-  MetricLabels?: Array<string>
-  /**
-   * 指标时间戳，默认值为SQL查询时间范围的左侧时间点，您也可以指定其他字段（类型为uinx时间、TimeStamp，精度毫秒）为指标时间戳。
-   */
-  CustomTime?: string
-  /**
-   * 除了MetricLabels，您还可以使用该参数，为指标补充静态的维度。
-维度名以字母或下划线开头，后面可以跟字母、数字或下划线，长度小于等于1024 字节
-   */
-  CustomMetricLabels?: Array<MetricLabel>
+  RequestId?: string
 }
 
 /**
@@ -1003,6 +987,24 @@ export interface ScheduledSqlTaskInfo {
 }
 
 /**
+ * DescribeResourceGraphProductIngestTaskList返回参数结构体
+ */
+export interface DescribeResourceGraphProductIngestTaskListResponse {
+  /**
+   * <p>接入任务列表</p>
+   */
+  ProductIngestTaskItems?: Array<ProductIngestTaskItem>
+  /**
+   * <p>筛选后总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDlcDeliver返回参数结构体
  */
 export interface CreateDlcDeliverResponse {
@@ -1037,6 +1039,16 @@ export interface CreateConsumerGroupRequest {
    * 日志集Id（日志主题所属的日志集）
    */
   LogsetId: string
+}
+
+/**
+ * ModifyResourceGraphEntityTopicsRelation返回参数结构体
+ */
+export interface ModifyResourceGraphEntityTopicsRelationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1285,6 +1297,28 @@ export interface OpenClsServiceResponse {
 }
 
 /**
+ * DescribeResourceGraphProductIngestTaskList请求参数结构体
+ */
+export interface DescribeResourceGraphProductIngestTaskListRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>过滤条件</p><ul><li>taskId 按照【接入任务id】进行过滤，默认为模糊匹配。类型：String。必选：否 </li><li>product 按照【接入产品】进行过滤，默认为模糊匹配。类型：String。必选：否 </li><li>name 按照【接入任务名称】进行过滤，默认为模糊匹配。类型：String。必选：否 </li><li>status 按照【接入任务状态】进行过滤。类型：int。必选：否 ；0：初始化中；1：已接入；2：接入失败；3：删除中；5：删除失败<br>注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。</li></ul>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>分页偏移量，默认 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页单页数量，默认 20，最大 100</p>
+   */
+  Limit?: number
+}
+
+/**
  * ModifyAlarm请求参数结构体
  */
 export interface ModifyAlarmRequest {
@@ -1488,27 +1522,31 @@ export interface RetryShipperTaskResponse {
 }
 
 /**
- * SplitPartition请求参数结构体
+ * RetryResourceGraph请求参数结构体
  */
-export interface SplitPartitionRequest {
+export interface RetryResourceGraphRequest {
   /**
-   * 日志主题Id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>资源图谱id</p>
    */
-  TopicId: string
+  ResourceGraphId: string
+}
+
+/**
+ * CreateResourceGraph请求参数结构体
+ */
+export interface CreateResourceGraphRequest {
   /**
-   * 待分裂分区Id
-- 通过[获取分区列表](https://cloud.tencent.com/document/product/614/56470)获取待分裂分区Id。
+   * <p>资源图谱名称</p>
    */
-  PartitionId: number
+  Name: string
   /**
-   * 分区切分的哈希key的位置，只在Number=2时有意义
+   * <p>资源图谱描述</p>
    */
-  SplitKey?: string
+  Description?: string
   /**
-   * 分区分裂个数(可选)，默认等于2
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。</p>
    */
-  Number?: number
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1764,6 +1802,16 @@ export interface CreateTopicRequest {
    * <p>计费模式</p><p>枚举值：</p><ul><li>0： 按使用功能计费</li><li>1： 按原始日志量计费（目前仅面向少部分客户支持）</li></ul><p>默认值：0</p>
    */
   BillingMode?: number
+}
+
+/**
+ * ModifyResourceGraph返回参数结构体
+ */
+export interface ModifyResourceGraphResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2026,6 +2074,28 @@ export interface ModifyDashboardResponse {
 }
 
 /**
+ * ModifyResourceGraph请求参数结构体
+ */
+export interface ModifyResourceGraphRequest {
+  /**
+   * <p>待修改的资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>修改后的资源图谱名称</p>
+   */
+  Name?: string
+  /**
+   * <p>修改后的资源图谱描述</p>
+   */
+  Description?: string
+  /**
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。</p>
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * DescribeMetricSubscribes返回参数结构体
  */
 export interface DescribeMetricSubscribesResponse {
@@ -2071,6 +2141,36 @@ WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调。
    * 秘钥。最大支持1024个字节
    */
   Key?: string
+}
+
+/**
+ * DescribeResourceGraphEntities请求参数结构体
+ */
+export interface DescribeResourceGraphEntitiesRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <ul><li>Product 按【产品分组】精确匹配，可用参数：all / business_service / tke / cdb / redis / mongodb 。类型：String。必选：否</li><li>EntityClassName 按【实体类型】精确匹配，可用参数：all / app.service.application / tc.tke.cluster / tc.tkex.project / tc.cdb.instance / tc.redis.instance / tc.mongodb.instance / k8s.cluster / k8s.namespace / k8s.node / k8s.pod / k8s.ip / k8s.service / k8s.deployment / k8s.statefulset / k8s.statefulsetplus / k8s.daemonset / k8s.storageclass / k8s.persistentvolume / k8s.persistentvolumeclaim / k8s.secret。类型：String。必选：否</li><li>Name 按【实体名称】模糊匹配。类型：String。必选：否</li><li>ResourceId 按 【实体资源id】精确匹配。类型：String。必选：否</li></ul><p>注意：每次请求的 Filters 上限 10。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>查询偏移</p>
+   */
+  NextCursor?: string
+  /**
+   * <p>分页单页数量，默认 20，最大 100</p>
+   */
+  Limit?: number
+  /**
+   * <p>查询开始时间</p><p>单位：毫秒</p>
+   */
+  FromTime?: number
+  /**
+   * <p>查询结束时间</p><p>单位：毫秒</p>
+   */
+  ToTime?: number
 }
 
 /**
@@ -2195,24 +2295,17 @@ export interface DashboardTopicInfo {
 }
 
 /**
- * QueryMetric请求参数结构体
+ * DeleteResourceGraphProductIngestTask请求参数结构体
  */
-export interface QueryMetricRequest {
+export interface DeleteResourceGraphProductIngestTaskRequest {
   /**
-   * 查询语句，使用PromQL语法	
-- 参考 [语法规则](https://cloud.tencent.com/document/product/614/90334) 文档
+   * <p>资源图谱id</p>
    */
-  Query: string
+  ResourceGraphId: string
   /**
-   * 指标主题ID
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>接入任务id</p>
    */
-  TopicId: string
-  /**
-   * 查询时间，秒级Unix时间戳。为空时代表当前时间戳。
-
-   */
-  Time?: number
+  TaskId: string
 }
 
 /**
@@ -2534,6 +2627,20 @@ export interface ModifyIndexRequest {
    * 自定义日志解析异常存储字段。
    */
   CoverageField?: string
+}
+
+/**
+ * eBPF 进程名过滤器
+ */
+export interface EBPFProcessNameFilter {
+  /**
+   * <p>过滤模式</p><p>枚举值：</p><ul><li>0： 不过滤</li><li>1： 白名单</li><li>2： 黑名单</li></ul>
+   */
+  Mode: number
+  /**
+   * <p>进程名列表</p>
+   */
+  ProcessNames?: Array<string>
 }
 
 /**
@@ -2986,6 +3093,24 @@ export interface MonitorNoticeRule {
 }
 
 /**
+ * 多日志主题检索topic信息
+ */
+export interface SearchLogInfos {
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志存储生命周期
+   */
+  Period?: number
+  /**
+   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时
+   */
+  Context?: string
+}
+
+/**
  * DescribeKafkaConsumerPreview请求参数结构体
  */
 export type DescribeKafkaConsumerPreviewRequest = null
@@ -3054,6 +3179,20 @@ export interface ModifyRemoteWriteTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeResourceGraphProductIngestTaskDetail请求参数结构体
+ */
+export interface DescribeResourceGraphProductIngestTaskDetailRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>接入任务id</p>
+   */
+  TaskId: string
 }
 
 /**
@@ -3869,6 +4008,10 @@ export interface ConsumerContent {
    * <p>投递Json格式。</p><p>枚举值：</p><ul><li>0： 转义。示例：<br>日志原文：<code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code><br>投递到Ckafka：<code>{&quot;a&quot;:&quot;aa&quot;,&quot;b&quot;:&quot;{\&quot;b1\&quot;:\&quot;b1b1\&quot;, \&quot;c1\&quot;:\&quot;c1c1\&quot;}&quot;}</code></li><li>1： 和原始日志一致，不转义。示例：<br>日志原文：<code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code><br>投递到Ckafka：<code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code></li></ul>
    */
   JsonType?: number
+  /**
+   * <p>数值类型自动转换开关</p><p>枚举值：</p><ul><li>true： JSON 结构中第一层级的 value 中的数字字符串（如 &quot;123&quot; ）会被自动转换为数值类型（int / float）。</li><li>false： JSON 结构中第一层级的 value 中的数字字符串（如 &quot;123&quot; ）为字符串。</li></ul><p>默认值：false</p>
+   */
+  AutoConvertNumber?: boolean
 }
 
 /**
@@ -3961,6 +4104,20 @@ export interface DeleteSplunkDeliverResponse {
 }
 
 /**
+ * DescribeResourceGraphProductIngestTaskDetail返回参数结构体
+ */
+export interface DescribeResourceGraphProductIngestTaskDetailResponse {
+  /**
+   * <p>接入任务详情</p>
+   */
+  ProductIngestTaskDetail?: ProductIngestTaskDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTopicMetricConfigs返回参数结构体
  */
 export interface DescribeTopicMetricConfigsResponse {
@@ -3990,57 +4147,43 @@ export interface DeleteDashboardSubscribeRequest {
 }
 
 /**
- * 日志结果信息
+ * DescribeResourceGraphTkeClusterStatus请求参数结构体
  */
-export interface LogInfo {
+export interface DescribeResourceGraphTkeClusterStatusRequest {
   /**
-   * 日志时间，单位ms
+   * <p>待检测的tke集群id</p>
    */
-  Time?: number
+  ClusterIds: Array<string>
+}
+
+/**
+ * kafka协议消费内容
+ */
+export interface KafkaConsumerContent {
   /**
-   * 日志主题ID
+   * <p>消费数据格式。 0：原始内容；1：JSON。</p>
    */
-  TopicId?: string
+  Format: number
   /**
-   * 日志主题名称
+   * <p>是否投递 TAG 信息<br>Format为0时，此字段不需要赋值</p>
    */
-  TopicName?: string
+  EnableTag: boolean
   /**
-   * 日志来源IP
+   * <p>元数据信息列表, 可选值为：__SOURCE__、__FILENAME__<br>、__TIMESTAMP__、__HOSTNAME__、__PKGID__<br>Format为0时，此字段不需要赋值</p>
    */
-  Source?: string
+  MetaFields: Array<string>
   /**
-   * 日志文件名称
+   * <p>tag数据处理方式：1:不平铺（默认值）；2:平铺。</p><p>不平铺示例：<br>TAG信息：<code>{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}</code><br>不平铺：<code>{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}</code></p><p>平铺示例：<br>TAG信息：<code>{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}</code><br>平铺：<code>{&quot;__TAG__.fieldA&quot;:200,&quot;__TAG__.fieldB&quot;:&quot;text&quot;}</code></p>
    */
-  FileName?: string
+  TagTransaction?: number
   /**
-   * 日志上报请求包的ID
+   * <p>消费数据Json格式：<br>1：不转义（默认格式）<br>2：转义</p><p>投递Json格式。<br>JsonType为1：和原始日志一致，不转义。示例：<br>日志原文：<code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code><br>投递到Ckafka：<code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code></p><p>JsonType为2：转义。示例：<br>日志原文：<code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code><br>投递到Ckafka：<code>{&quot;a&quot;:&quot;aa&quot;,&quot;b&quot;:&quot;{\&quot;b1\&quot;:\&quot;b1b1\&quot;, \&quot;c1\&quot;:\&quot;c1c1\&quot;}&quot;}</code></p>
    */
-  PkgId?: string
+  JsonType?: number
   /**
-   * 请求包内日志的ID
+   * <p>数值类型自动转换开关</p><p>枚举值：</p><ul><li>true： JSON 结构中第一层级的 value 中的数字字符串（如 &quot;123&quot; ）会被自动转换为数值类型（int / float）。</li><li>false： JSON 结构中第一层级的 value 中的数字字符串（如 &quot;123&quot; ）为字符串。</li></ul><p>默认值：false</p>
    */
-  PkgLogId?: string
-  /**
-   * 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
-   */
-  HighLights?: Array<HighLightItem>
-  /**
-   * 日志内容的Json序列化字符串
-   */
-  LogJson?: string
-  /**
-   * 日志来源主机名称
-   */
-  HostName?: string
-  /**
-   * 原始日志(仅在日志创建索引异常时有值)
-   */
-  RawLog?: string
-  /**
-   * 日志创建索引异常原因(仅在日志创建索引异常时有值)
-   */
-  IndexStatus?: string
+  AutoConvertNumber?: boolean
 }
 
 /**
@@ -4275,6 +4418,16 @@ export interface UploadLogRequest {
 }
 
 /**
+ * DescribeResourceGraphEntityDependency返回参数结构体
+ */
+export interface DescribeResourceGraphEntityDependencyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyConsoleSharing请求参数结构体
  */
 export interface ModifyConsoleSharingRequest {
@@ -4372,59 +4525,93 @@ export interface ModifyConsoleResponse {
  */
 export interface ConsumerInfo {
   /**
-   * 投递规则ID
+   * <p>投递规则ID</p>
    */
   ConsumerId?: string
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   TopicId?: string
   /**
-   * 投递任务是否生效
+   * <p>投递任务是否生效</p>
    */
   Effective?: boolean
   /**
-   * CKafka的描述
+   * <p>CKafka的描述</p>
    */
   Ckafka?: Ckafka
   /**
-   * 是否投递日志的元数据信息
+   * <p>是否投递日志的元数据信息</p>
    */
   NeedContent?: boolean
   /**
-   * 如果需要投递元数据信息，元数据信息的描述
+   * <p>如果需要投递元数据信息，元数据信息的描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: ConsumerContent
   /**
-   * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+   * <p>压缩方式[0:NONE；2:SNAPPY；3:LZ4]</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Compression?: number
   /**
-   * 投递任务创建毫秒时间戳
+   * <p>投递任务创建毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
-   * 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381)	
+   * <p>角色访问描述名 <a href="https://cloud.tencent.com/document/product/598/19381">创建角色</a></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleArn?: string
   /**
-   * 外部ID
+   * <p>外部ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExternalId?: string
   /**
-   * 任务运行状态。支持`0`,`1`,`2` - `0`: 停止 - `1`: 运行中 - `2`: 异常	
+   * <p>任务运行状态。支持<code>0</code>,<code>1</code>,<code>2</code> - <code>0</code>: 停止 - <code>1</code>: 运行中 - <code>2</code>: 异常</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskStatus?: number
   /**
-   * 高级配置
+   * <p>高级配置</p>
    */
   AdvancedConfig?: AdvancedConsumerConfiguration
+  /**
+   * <p>日志预过滤-数据写入 ckafka 的原始数据进行预过滤处理</p>
+   */
+  DSLFilter?: string
+}
+
+/**
+ * DescribeResourceGraphFailureDetail返回参数结构体
+ */
+export interface DescribeResourceGraphFailureDetailResponse {
+  /**
+   * <p>失败详情信息</p>
+   */
+  ErrorMessage?: string
+  /**
+   * <p>最近一次失败时间</p><p>单位：秒</p>
+   */
+  LastFailedTime?: number
+  /**
+   * <p>重试次数</p>
+   */
+  RetryCount?: number
+  /**
+   * <p>首次失败时间</p><p>单位：秒</p>
+   */
+  FirstFailedAt?: number
+  /**
+   * <p>引起失败的操作</p>
+   */
+  Operation?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4758,13 +4945,18 @@ tag:tagKey
 }
 
 /**
- * ModifySearchView返回参数结构体
+ * eBPF 目的端点（IP + 可选端口）
  */
-export interface ModifySearchViewResponse {
+export interface EBPFEndpoint {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 目标 IP，支持 IPv4/IPv6
    */
-  RequestId?: string
+  IP: string
+  /**
+   * 目标端口（1-65535），为空表示仅按 IP 过滤
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
 }
 
 /**
@@ -5216,25 +5408,13 @@ export interface DescribeSplunkDeliversResponse {
 }
 
 /**
- * SearchDashboardSubscribe请求参数结构体
+ * DeleteResourceGraph请求参数结构体
  */
-export interface SearchDashboardSubscribeRequest {
+export interface DeleteResourceGraphRequest {
   /**
-   * 仪表盘id。通过 [获取仪表盘](https://cloud.tencent.com/document/api/614/95636)接口获取DashboardId。
+   * <p>待删除的资源图谱id</p>
    */
-  DashboardId: string
-  /**
-   * 仪表盘订阅数据。
-   */
-  SubscribeData: DashboardSubscribeData
-  /**
-   * 仪表盘订阅Id。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Id。
-   */
-  Id?: number
-  /**
-   * 仪表盘订阅名称。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Name。
-   */
-  Name?: string
+  ResourceGraphId: string
 }
 
 /**
@@ -5262,29 +5442,13 @@ export interface ModifyHostMetricConfigResponse {
 }
 
 /**
- * DescribeConsumerOffsets请求参数结构体
+ * DescribeMetricCorrectDimension返回参数结构体
  */
-export interface DescribeConsumerOffsetsRequest {
+export interface DescribeMetricCorrectDimensionResponse {
   /**
-   * 日志主题对应的消费组标识
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ConsumerGroup: string
-  /**
-   * 时间戳(秒级时间戳)
-   */
-  From: string
-  /**
-   * 日志集id(日志主题对应的id)
-   */
-  LogsetId: string
-  /**
-   * 日志主题id
-   */
-  TopicId?: string
-  /**
-   * 分区id
-   */
-  PartitionId?: string
+  RequestId?: string
 }
 
 /**
@@ -5357,6 +5521,46 @@ export interface ToolCallFunction {
    * <p>Function参数，一般为json字符串</p>
    */
   Arguments?: string
+}
+
+/**
+ * ScheduledSql的资源信息
+ */
+export interface ScheduledSqlResouceInfo {
+  /**
+   * 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 主题的地域信息，当前不支持跨地域，支持地域参考 [地域列表](https://cloud.tencent.com/document/api/614/56474#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) 文档。
+   */
+  Region?: string
+  /**
+   * 主题类型：0为日志主题，1为指标主题
+   */
+  BizType?: number
+  /**
+   * 指标名称。当BizType为1时，MetricName需要填写
+   */
+  MetricName?: string
+  /**
+   * 指标名称
+BizType为1时，优先使用MetricNames字段多指标只能填充到MetricNames字段，单指标建议填充到MetricName字段
+   */
+  MetricNames?: Array<string>
+  /**
+   * 指标维度，不接受时间类型。
+   */
+  MetricLabels?: Array<string>
+  /**
+   * 指标时间戳，默认值为SQL查询时间范围的左侧时间点，您也可以指定其他字段（类型为uinx时间、TimeStamp，精度毫秒）为指标时间戳。
+   */
+  CustomTime?: string
+  /**
+   * 除了MetricLabels，您还可以使用该参数，为指标补充静态的维度。
+维度名以字母或下划线开头，后面可以跟字母、数字或下划线，长度小于等于1024 字节
+   */
+  CustomMetricLabels?: Array<MetricLabel>
 }
 
 /**
@@ -5831,6 +6035,16 @@ export interface CreateConsumerGroupResponse {
 }
 
 /**
+ * DescribeResourceGraphFailureDetail请求参数结构体
+ */
+export interface DescribeResourceGraphFailureDetailRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+}
+
+/**
  * Splunk投递任务信息
  */
 export interface SplunkDeliverInfo {
@@ -5995,26 +6209,50 @@ export interface SearchS3RechargeInfoRequest {
  */
 export interface DescribeConsumerResponse {
   /**
-   * 投递任务是否生效
+   * <p>投递任务是否生效</p>
    */
   Effective?: boolean
   /**
-   * 是否投递日志的元数据信息
+   * <p>是否投递日志的元数据信息</p>
    */
   NeedContent?: boolean
   /**
-   * 如果需要投递元数据信息，元数据信息的描述
+   * <p>如果需要投递元数据信息，元数据信息的描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: ConsumerContent
   /**
-   * CKafka的描述
+   * <p>CKafka的描述</p>
    */
   Ckafka?: Ckafka
   /**
-   * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+   * <p>压缩方式[0:NONE；2:SNAPPY；3:LZ4]</p>
    */
   Compression?: number
+  /**
+   * <p>任务创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>角色访问描述名 <a href="https://cloud.tencent.com/document/product/598/19381">创建角色</a></p>
+   */
+  RoleArn?: string
+  /**
+   * <p>外部ID</p>
+   */
+  ExternalId?: string
+  /**
+   * <p>任务运行状态。支持<code>0</code>,<code>1</code>,<code>2</code>  - <code>0</code>: 停止 - <code>1</code>: 运行中 - <code>2</code>: 异常</p>
+   */
+  TaskStatus?: number
+  /**
+   * <p>高级配置</p>
+   */
+  AdvancedConfig?: AdvancedConsumerConfiguration
+  /**
+   * <p>日志预过滤-数据写入 ckafka 的原始数据进行预过滤处理</p>
+   */
+  DSLFilter?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6865,41 +7103,41 @@ export interface CreateConfigExtraRequest {
  */
 export interface CreateConsumerRequest {
   /**
-   * 投递任务绑定的日志主题Id。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
+   * <p>投递任务绑定的日志主题Id。</p><ul><li>通过 <a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a> 获取日志主题Id。</li><li>通过 <a href="https://cloud.tencent.com/document/product/614/56456">创建日志主题</a> 获取日志主题Id。</li></ul>
    */
   TopicId: string
   /**
-   * 是否投递日志的元数据信息，默认为 true。
-当NeedContent为true时：字段Content有效。
-当NeedContent为false时：字段Content无效。
+   * <p>是否投递日志的元数据信息，默认为 true。<br>当NeedContent为true时：字段Content有效。<br>当NeedContent为false时：字段Content无效。</p>
    */
   NeedContent?: boolean
   /**
-   * 如果需要投递元数据信息，元数据信息的描述
+   * <p>如果需要投递元数据信息，元数据信息的描述</p>
    */
   Content?: ConsumerContent
   /**
-   * CKafka的描述
+   * <p>CKafka的描述</p>
    */
   Ckafka?: Ckafka
   /**
-   * 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4]
+   * <p>投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4]</p>
    */
   Compression?: number
   /**
-   * 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381)
+   * <p>角色访问描述名 <a href="https://cloud.tencent.com/document/product/598/19381">创建角色</a></p>
    */
   RoleArn?: string
   /**
-   * 外部ID
+   * <p>外部ID</p>
    */
   ExternalId?: string
   /**
-   * 高级配置项
+   * <p>高级配置项</p>
    */
   AdvancedConfig?: AdvancedConsumerConfiguration
+  /**
+   * <p>日志预过滤-数据写入 ckafka 的原始数据进行预过滤处理</p>
+   */
+  DSLFilter?: string
 }
 
 /**
@@ -8344,6 +8582,16 @@ export interface Choice {
 }
 
 /**
+ * RetryResourceGraph返回参数结构体
+ */
+export interface RetryResourceGraphResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteMetricConfig请求参数结构体
  */
 export interface DeleteMetricConfigRequest {
@@ -8909,6 +9157,36 @@ export interface ContainerWorkLoadInfo {
 }
 
 /**
+ * ModifyResourceGraphProductIngestTask请求参数结构体
+ */
+export interface ModifyResourceGraphProductIngestTaskRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>待修改的任务id</p>
+   */
+  TaskId: string
+  /**
+   * <p>实例选择方案</p><p>枚举值：</p><ul><li>0： 所有示例</li><li>1： 按标签选择</li><li>2： 手动选择</li></ul>
+   */
+  SelectionMode?: number
+  /**
+   * <p>实例id。当选择方式使用“指定实例”时，需要填写</p>
+   */
+  InstanceIds?: Array<string>
+  /**
+   * <p>eBPF 采集规则（仅 EBPF 产品）</p>
+   */
+  EBPFCollectRule?: EBPFCollectRule
+  /**
+   * <p>标签。当实例选择方案使用“按标签选择”时，需要填写</p>
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * DeleteDlcDeliver请求参数结构体
  */
 export interface DeleteDlcDeliverRequest {
@@ -9068,6 +9346,30 @@ WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调;
    * 更新时间。秒(s)级时间戳
    */
   UpdateTime?: number
+}
+
+/**
+ * SplitPartition请求参数结构体
+ */
+export interface SplitPartitionRequest {
+  /**
+   * 日志主题Id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 待分裂分区Id
+- 通过[获取分区列表](https://cloud.tencent.com/document/product/614/56470)获取待分裂分区Id。
+   */
+  PartitionId: number
+  /**
+   * 分区切分的哈希key的位置，只在Number=2时有意义
+   */
+  SplitKey?: string
+  /**
+   * 分区分裂个数(可选)，默认等于2
+   */
+  Number?: number
 }
 
 /**
@@ -9357,11 +9659,19 @@ export interface CreateAlarmShieldResponse {
  */
 export interface DescribeConsumerRequest {
   /**
-   * 投递任务绑定的日志主题Id。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
+   * <p>投递任务绑定的日志主题Id。</p><ul><li>通过 <a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a> 获取日志主题Id。</li><li>通过 <a href="https://cloud.tencent.com/document/product/614/56456">创建日志主题</a> 获取日志主题Id。</li></ul>
    */
   TopicId: string
+}
+
+/**
+ * CreateResourceGraph返回参数结构体
+ */
+export interface CreateResourceGraphResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9379,45 +9689,45 @@ export interface DeleteConfigExtraResponse {
  */
 export interface ModifyConsumerRequest {
   /**
-   * 投递任务绑定的日志主题Id。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
+   * <p>投递任务绑定的日志主题Id。</p><ul><li>通过 <a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a> 获取日志主题Id。</li><li>通过 <a href="https://cloud.tencent.com/document/product/614/56456">创建日志主题</a> 获取日志主题Id。</li></ul>
    */
   TopicId: string
   /**
-   * 投递任务是否生效，默认不生效
+   * <p>投递任务是否生效，默认不生效</p>
    */
   Effective?: boolean
   /**
-   * 是否投递日志的元数据信息，默认为 true。
-当NeedContent为true时：字段Content有效。
-当NeedContent为false时：字段Content无效。
+   * <p>是否投递日志的元数据信息，默认为 true。<br>当NeedContent为true时：字段Content有效。<br>当NeedContent为false时：字段Content无效。</p>
    */
   NeedContent?: boolean
   /**
-   * 如果需要投递元数据信息，元数据信息的描述
+   * <p>如果需要投递元数据信息，元数据信息的描述</p>
    */
   Content?: ConsumerContent
   /**
-   * CKafka的描述
+   * <p>CKafka的描述</p>
    */
   Ckafka?: Ckafka
   /**
-   * 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4]
+   * <p>投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4]</p>
    */
   Compression?: number
   /**
-   * 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381)
+   * <p>角色访问描述名 <a href="https://cloud.tencent.com/document/product/598/19381">创建角色</a></p>
    */
   RoleArn?: string
   /**
-   * 外部ID
+   * <p>外部ID</p>
    */
   ExternalId?: string
   /**
-   * 高级配置
+   * <p>高级配置</p>
    */
   AdvancedConfig?: AdvancedConsumerConfiguration
+  /**
+   * <p>日志预过滤-数据写入 ckafka 的原始数据进行预过滤处理</p>
+   */
+  DSLFilter?: string
 }
 
 /**
@@ -9553,6 +9863,38 @@ export interface RebuildIndexTaskInfo {
    * 附加状态描述信息（目前仅描述失败时失败原因）
    */
   StatusMessage: string
+}
+
+/**
+ * DescribeResourceGraphEntityDetail请求参数结构体
+ */
+export interface DescribeResourceGraphEntityDetailRequest {
+  /**
+   * <p>实体 ID</p>
+   */
+  EntityId: string
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>查询范围-开始时间</p><p>单位：毫秒</p>
+   */
+  FromTime?: number
+  /**
+   * <p>查询范围-结束时间</p><p>单位：毫秒</p>
+   */
+  ToTime?: number
+}
+
+/**
+ * DescribeResourceGraphDetail请求参数结构体
+ */
+export interface DescribeResourceGraphDetailRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
 }
 
 /**
@@ -10452,6 +10794,40 @@ export interface NetworkApplicationInfo {
 }
 
 /**
+ * CreateResourceGraphProductIngestTask请求参数结构体
+ */
+export interface CreateResourceGraphProductIngestTaskRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>接入任务名称</p>
+   */
+  Name: string
+  /**
+   * <p>待接入的云产品；支持tke、cdb、mongodb、redis</p>
+   */
+  CloudProduct: string
+  /**
+   * <p>实例选择方案</p><p>枚举值：</p><ul><li>0： 所有示例</li><li>1： 按标签选择</li><li>2： 手动选择</li></ul>
+   */
+  SelectionMode: number
+  /**
+   * <p>实例id。当选择方式使用“指定实例”时，需要填写</p>
+   */
+  InstanceIds?: Array<string>
+  /**
+   * <p>eBPF 采集规则</p>
+   */
+  EBPFCollectRule?: EBPFCollectRule
+  /**
+   * <p>标签。当实例选择方案使用“按标签选择”时，需要填写</p>
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * ModifySearchView请求参数结构体
  */
 export interface ModifySearchViewRequest {
@@ -10618,6 +10994,20 @@ export interface DeleteEsRechargeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * eBPF 目的 IP/端口过滤器
+ */
+export interface EBPFDestEndpointFilter {
+  /**
+   * <p>过滤模式</p><p>枚举值：</p><ul><li>0： 不过滤</li><li>1： 白名单</li><li>2： 黑名单</li></ul>
+   */
+  Mode: number
+  /**
+   * <p>端点列表</p>
+   */
+  Endpoints?: Array<EBPFEndpoint>
 }
 
 /**
@@ -11340,21 +11730,23 @@ export interface DescribeConsumerOffsetsResponse {
 }
 
 /**
- * 多日志主题检索topic信息
+ * ModifyResourceGraphProductIngestTask返回参数结构体
  */
-export interface SearchLogInfos {
+export interface ModifyResourceGraphProductIngestTaskResponse {
   /**
-   * 日志主题ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicId?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeResourceGraphEntityDetail返回参数结构体
+ */
+export interface DescribeResourceGraphEntityDetailResponse {
   /**
-   * 日志存储生命周期
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Period?: number
-  /**
-   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时
-   */
-  Context?: string
+  RequestId?: string
 }
 
 /**
@@ -11661,6 +12053,66 @@ export interface MergePartitionRequest {
 }
 
 /**
+ * DescribeResourceGraphEntityDependency请求参数结构体
+ */
+export interface DescribeResourceGraphEntityDependencyRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>实体id</p>
+   */
+  EntityId: string
+  /**
+   * <p>距离Entity的深度</p>
+   */
+  Depth?: number
+  /**
+   * <p>返回数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>查询范围-开始时间</p><p>单位：毫秒</p>
+   */
+  FromTime?: number
+  /**
+   * <p>查询范围-结束时间</p><p>单位：毫秒</p>
+   */
+  ToTime?: number
+}
+
+/**
+ * 数据接入列表行
+ */
+export interface ProductIngestTaskItem {
+  /**
+   * <p>接入任务id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>接入任务名称</p>
+   */
+  Name?: string
+  /**
+   * <p>产品分组</p>
+   */
+  Product?: string
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>0： 接入中</li><li>1： 已接入</li><li>2： 接入失败</li><li>3： 删除中</li><li>4： 已删除</li><li>5： 删除失败</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>接入任务创建时间</p><p>单位：ms</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>接入任务修改时间</p><p>单位：ms</p>
+   */
+  UpdateTime?: number
+}
+
+/**
  * DescribeRecordingRuleTask请求参数结构体
  */
 export interface DescribeRecordingRuleTaskRequest {
@@ -11856,6 +12308,46 @@ export interface DeleteTopicResponse {
 }
 
 /**
+ * ModifyResourceGraphEntityTopicsRelation请求参数结构体
+ */
+export interface ModifyResourceGraphEntityTopicsRelationRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>实体id</p><p>仅支持手动关联tke以下实体：node、pod、deployment、statefulset、daemonset</p>
+   */
+  EntityId: string
+  /**
+   * <p>资源图谱实体关联的topic</p>
+   */
+  TopicInfos?: Array<ResourceGraphEntityRelatedTopic>
+}
+
+/**
+ * 资源图谱实体关联的日志主题信息
+ */
+export interface ResourceGraphEntityRelatedTopic {
+  /**
+   * <p>日志主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>日志主题所在地域</p>
+   */
+  Region: string
+  /**
+   * <p>日志类型</p><p>枚举值：</p><ul><li>bussinesslog： 业务日志</li></ul>
+   */
+  LogType: string
+  /**
+   * <p>日志类型</p><p>枚举值：</p><ul><li>0： 日志主题</li><li>1： 指标主题</li></ul>
+   */
+  BizType?: number
+}
+
+/**
  * CreateExport返回参数结构体
  */
 export interface CreateExportResponse {
@@ -11863,6 +12355,52 @@ export interface CreateExportResponse {
    * <p>日志导出ID。</p>
    */
   ExportId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * eBPF 采集规则
+ */
+export interface EBPFCollectRule {
+  /**
+   * <p>采集规则名称</p>
+   */
+  RuleName: string
+  /**
+   * <p>采集对象</p><p>枚举值：</p><ul><li>1： 所有进程</li></ul>
+   */
+  TrackTarget: number
+  /**
+   * <p>三维过滤器</p>
+   */
+  Filters: EBPFCollectFilters
+}
+
+/**
+ * RetryResourceGraphProductIngestTask返回参数结构体
+ */
+export interface RetryResourceGraphProductIngestTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateResourceGraphProductIngestTask返回参数结构体
+ */
+export interface CreateResourceGraphProductIngestTaskResponse {
+  /**
+   * <p>接入任务id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>接入任务状态</p><p>枚举值：</p><ul><li>0： 初始化中</li><li>1： 正常</li><li>2： 接入失败</li><li>3： 删除中</li><li>4： 已删除</li><li>5： 删除失败</li><li>6： 修改中</li><li>7： 修改失败</li></ul>
+   */
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12311,6 +12849,20 @@ export interface CreateAgentApplicationRequest {
 }
 
 /**
+ * 工作区关联的日志集
+ */
+export interface RelationLogset {
+  /**
+   * <p>日志集id</p>
+   */
+  LogsetId?: string
+  /**
+   * <p>日志集名称</p>
+   */
+  LogsetName?: string
+}
+
+/**
  * SearchCosRechargeInfo请求参数结构体
  */
 export interface SearchCosRechargeInfoRequest {
@@ -12375,6 +12927,27 @@ export interface DescribeNoticeContentsRequest {
    * 分页单页限制数目，默认值为20，最大值100。
    */
   Limit?: number
+}
+
+/**
+ * QueryMetric请求参数结构体
+ */
+export interface QueryMetricRequest {
+  /**
+   * 查询语句，使用PromQL语法	
+- 参考 [语法规则](https://cloud.tencent.com/document/product/614/90334) 文档
+   */
+  Query: string
+  /**
+   * 指标主题ID
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 查询时间，秒级Unix时间戳。为空时代表当前时间戳。
+
+   */
+  Time?: number
 }
 
 /**
@@ -12624,6 +13197,11 @@ export interface S3RechargeInfo {
 }
 
 /**
+ * DescribeResourceGraphs请求参数结构体
+ */
+export type DescribeResourceGraphsRequest = null
+
+/**
  * DescribeIndex请求参数结构体
  */
 export interface DescribeIndexRequest {
@@ -12631,6 +13209,37 @@ export interface DescribeIndexRequest {
    * <p>日志主题Id。</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</li></ul>
    */
   TopicId: string
+}
+
+/**
+ * 产品接入任务详情
+ */
+export interface ProductIngestTaskDetail {
+  /**
+   * <p>接入任务id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>接入任务信息</p>
+   */
+  ProductIngestTaskItem?: ProductIngestTaskItem
+  /**
+   * <p>接入实例选择方式</p><p>枚举值：</p><ul><li>0： 全部实例</li><li>1： 按标签筛选</li><li>2： 手动选择</li></ul>
+   */
+  SelectionMode?: number
+  /**
+   * <p>所选实例id列表</p>
+   */
+  InstanceIds?: Array<string>
+  /**
+   * <p>所选接入实例所处范围标签</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>eBPF 采集规则</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EBPFCollectRule?: EBPFCollectRule
 }
 
 /**
@@ -12752,6 +13361,104 @@ export interface ModifyNoticeContentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeResourceGraphIngestTaskFailureDetail返回参数结构体
+ */
+export interface DescribeResourceGraphIngestTaskFailureDetailResponse {
+  /**
+   * <p>接入任务报错信息详情</p>
+   */
+  ErrorMessage?: string
+  /**
+   * <p>最近一次失败时间</p><p>单位：秒</p>
+   */
+  LastFailedTime?: number
+  /**
+   * <p>重试次数</p>
+   */
+  RetryCount?: number
+  /**
+   * <p>第一次失败时间</p><p>单位：秒</p>
+   */
+  FirstFailedAt?: number
+  /**
+   * <p>引起失败的操作</p>
+   */
+  Operation?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SearchLog请求参数结构体
+ */
+export interface SearchLogRequest {
+  /**
+   * <p>要检索分析的日志的起始时间，<strong>Unix时间戳（毫秒）</strong></p><p>时间范围为左闭右开区间 [From, To)，包含 From 时刻</p>
+   */
+  From: number
+  /**
+   * <p>要检索分析的日志的结束时间，<strong>Unix时间戳（毫秒）</strong></p><p>时间范围为左闭右开区间 [From, To)，不包含 To 时刻</p>
+   */
+  To: number
+  /**
+   * <p>检索分析语句，最大长度为12KB<br>语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句<br>使用*或空字符串可查询所有日志</p><p>默认值：空字符串</p>
+   */
+  QueryString?: string
+  /**
+   * <p>检索语法规则，默认值为1，推荐使用1 。</p><ul><li>0：Lucene语法</li><li>1：CQL语法（CLS Query Language，日志服务专用检索语法）</li></ul><p>详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>。</p><p>默认值：1</p>
+   */
+  QuerySyntax?: number
+  /**
+   * <ul><li>要检索分析的日志主题ID，仅能指定一个日志主题。</li><li>如需同时检索多个日志主题，请使用Topics参数。</li><li>TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。</li></ul>
+   */
+  TopicId?: string
+  /**
+   * <ul><li>要检索分析的日志主题列表，最大支持50个日志主题。</li><li>检索单个日志主题时请使用TopicId。</li><li>TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。</li></ul>
+   */
+  Topics?: Array<MultiTopicSearchInformation>
+  /**
+   * <p>原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>SQL结果排序方式参考<a href="https://cloud.tencent.com/document/product/614/58978" target="_blank">SQL ORDER BY语法</a></li></ul>
+   */
+  Sort?: string
+  /**
+   * <p>表示单次查询返回的原始日志条数，默认为100，最大值为1000。<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a></li></ul><p>可通过两种方式获取后续更多日志：</p><ul><li>Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志</li><li>Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制</li></ul>
+   */
+  Limit?: number
+  /**
+   * <p>查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>不能与Context参数同时使用</li><li>仅适用于单日志主题检索</li></ul>
+   */
+  Offset?: number
+  /**
+   * <p>透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。<br>注意：</p><ul><li>透传该参数时，请勿修改除该参数外的其它参数</li><li>仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context</li><li>仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a></li></ul>
+   */
+  Context?: string
+  /**
+   * <p>执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。<br>0：自动采样;<br>0～1：按指定采样率采样，例如0.02;<br>1：不采样，即精确分析<br>默认值为1</p>
+   */
+  SamplingRate?: number
+  /**
+   * <p>为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效<br>为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效<br>两种返回方式在编码格式上有少量区别，建议使用true</p>
+   */
+  UseNewAnalysis?: boolean
+  /**
+   * <p>是否高亮符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索</p>
+   */
+  HighLight?: boolean
+  /**
+   * <p><strong>Query字段已废弃，请使用QueryString字段</strong><br>字段差异：未指定语法规则时，Query默认使用Lucene语法，QueryString默认使用CQL语法，语法差异详见 <a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules">语法规则</a></p>
+   * @deprecated
+   */
+  Query?: string
+  /**
+   * <p><strong>SyntaxRule字段已废弃，请使用QuerySyntax字段</strong></p><p>字段差异：</p><ul><li>SyntaxRule与Query字段搭配使用，默认使用Lucene语法</li><li>QuerySyntax与QueryString字段搭配使用，默认使用CQL语法</li></ul><p>SyntaxRule参数说明：</p><ul><li>0：Lucene语法</li><li>1：CQL语法（CLS Query Language，日志服务专用检索语法）</li></ul>
+   * @deprecated
+   */
+  SyntaxRule?: number
 }
 
 /**
@@ -12898,38 +13605,21 @@ export interface DescribeTopicsResponse {
 }
 
 /**
- * Windows事件日志采集配置
+ * eBPF 三维过滤器集合
  */
-export interface EventLog {
+export interface EBPFCollectFilters {
   /**
-   * 事件通道，支持
-- Application 应用日志
-- Security 安全日志
-- Setup 启动日志
-- System 系统日志
-- ALL 所有日志
-
+   * 进程名过滤
    */
-  EventChannel: string
+  ProcessName: EBPFProcessNameFilter
   /**
-   * 时间字段（Timestamp）支持的类型
-- 1（用户自定义时间）
-- 2（当前时间）
+   * 目的端点过滤
    */
-  TimeType: number
+  DestEndpoint: EBPFDestEndpointFilter
   /**
-   * 时间，用户选择自定义时间类型时，需要指定时间，单位秒
-格式：时间戳，1754897446
+   * DNS 过滤
    */
-  Timestamp?: number
-  /**
-   * 事件ID过滤列表
-	
-选填，为空表示不做过滤
-支持正向过滤单个值（例：20）或范围（例：0-20），也支持反向过滤单个值(例：-20)
-多个过滤项之间可由逗号隔开，例：1-200,-100表示采集1-200范围内除了100以外的事件日志
-   */
-  EventIDs?: Array<string>
+  DNS: EBPFDNSFilter
 }
 
 /**
@@ -13420,6 +14110,20 @@ export interface AlarmTarget {
 }
 
 /**
+ * DescribeResourceGraphDetail返回参数结构体
+ */
+export interface DescribeResourceGraphDetailResponse {
+  /**
+   * <p>资源图谱详情信息</p>
+   */
+  ResourceGraphDetailInfo?: ResourceGraphDetailInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateKafkaRecharge返回参数结构体
  */
 export interface CreateKafkaRechargeResponse {
@@ -13470,9 +14174,29 @@ export interface DashboardSubscribeData {
 }
 
 /**
+ * DescribeResourceGraphs返回参数结构体
+ */
+export interface DescribeResourceGraphsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyIndex返回参数结构体
  */
 export interface ModifyIndexResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySearchView返回参数结构体
+ */
+export interface ModifySearchViewResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13533,6 +14257,20 @@ export interface BaseMetricCollectConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Configs?: Array<MetricCollectConfig>
+}
+
+/**
+ * eBPF DNS 过滤器
+ */
+export interface EBPFDNSFilter {
+  /**
+   * <p>过滤模式</p><p>枚举值：</p><ul><li>0： 不过滤</li><li>1： 白名单</li><li>2： 黑名单</li></ul>
+   */
+  Mode: number
+  /**
+   * <p>域名列表，支持 *.example.com 通配</p>
+   */
+  Domains?: Array<string>
 }
 
 /**
@@ -13688,51 +14426,13 @@ export interface PartitionOffsetInfo {
 }
 
 /**
- * kafka协议消费内容
+ * DeleteResourceGraph返回参数结构体
  */
-export interface KafkaConsumerContent {
+export interface DeleteResourceGraphResponse {
   /**
-   * 消费数据格式。 0：原始内容；1：JSON。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Format: number
-  /**
-   * 是否投递 TAG 信息
-Format为0时，此字段不需要赋值
-   */
-  EnableTag: boolean
-  /**
-   * 元数据信息列表, 可选值为：\_\_SOURCE\_\_、\_\_FILENAME\_\_
-、\_\_TIMESTAMP\_\_、\_\_HOSTNAME\_\_、\_\_PKGID\_\_
-Format为0时，此字段不需要赋值
-   */
-  MetaFields: Array<string>
-  /**
-   * tag数据处理方式：1:不平铺（默认值）；2:平铺。
-
-不平铺示例：
-TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
-不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
-
-平铺示例：
-TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
-平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}`
-   */
-  TagTransaction?: number
-  /**
-   * 消费数据Json格式：
-1：不转义（默认格式）
-2：转义
-
-投递Json格式。
-JsonType为1：和原始日志一致，不转义。示例：
-日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
-投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
-
-JsonType为2：转义。示例：
-日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
-投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}`
-   */
-  JsonType?: number
+  RequestId?: string
 }
 
 /**
@@ -14101,6 +14801,56 @@ export interface CreateShipperRequest {
    * <p>预过滤处理-对写入COS原始数据进行预过滤处理</p>
    */
   DSLFilter?: string
+}
+
+/**
+ * 资源图谱基本信息
+ */
+export interface ResourceGraphDetailInfo {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId?: string
+  /**
+   * <p>工作区名称</p>
+   */
+  Name?: string
+  /**
+   * <p>工作区描述</p>
+   */
+  Description?: string
+  /**
+   * <p>工作区状态</p><p>枚举值：</p><ul><li>0： 初始化中</li><li>1： 成功</li><li>2： 失败</li><li>3： 删除中</li><li>4： 已删除</li><li>5： 删除失败</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>已接入产品数量</p>
+   */
+  AccessCount?: number
+  /**
+   * <p>接入的产品列表</p>
+   */
+  Products?: Array<string>
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>关联的日志集</p>
+   */
+  RelationLogset?: RelationLogset
+  /**
+   * <p>关联的topic</p>
+   */
+  RelationTopics?: Array<RelationTopic>
+  /**
+   * <p>工作区绑定的标签信息</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -14998,6 +15748,20 @@ export interface DescribeMachinesResponse {
 }
 
 /**
+ * RetryResourceGraphProductIngestTask请求参数结构体
+ */
+export interface RetryResourceGraphProductIngestTaskRequest {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId: string
+  /**
+   * <p>接入任务id</p>
+   */
+  TaskId: string
+}
+
+/**
  * DeleteEsRecharge请求参数结构体
  */
 export interface DeleteEsRechargeRequest {
@@ -15076,6 +15840,24 @@ export interface LogContextInfo {
    * 日志内容的高亮描述信息
    */
   HighLights?: Array<HighLightItem>
+}
+
+/**
+ * 工作区关联的Topic
+ */
+export interface RelationTopic {
+  /**
+   * <p>日志主题id</p>
+   */
+  TopicId?: string
+  /**
+   * <p>日志主题名称</p>
+   */
+  TopicName?: string
+  /**
+   * <p>日志主题类型</p><p>枚举值：</p><ul><li>entity： 实体主题</li><li>relation： 关系主题</li><li>ebpf： ebpf采集主题</li></ul>
+   */
+  Type?: string
 }
 
 /**
@@ -15165,6 +15947,60 @@ export interface DescribeRecordingRuleTaskResponse {
 }
 
 /**
+ * 日志结果信息
+ */
+export interface LogInfo {
+  /**
+   * 日志时间，单位ms
+   */
+  Time?: number
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志主题名称
+   */
+  TopicName?: string
+  /**
+   * 日志来源IP
+   */
+  Source?: string
+  /**
+   * 日志文件名称
+   */
+  FileName?: string
+  /**
+   * 日志上报请求包的ID
+   */
+  PkgId?: string
+  /**
+   * 请求包内日志的ID
+   */
+  PkgLogId?: string
+  /**
+   * 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
+   */
+  HighLights?: Array<HighLightItem>
+  /**
+   * 日志内容的Json序列化字符串
+   */
+  LogJson?: string
+  /**
+   * 日志来源主机名称
+   */
+  HostName?: string
+  /**
+   * 原始日志(仅在日志创建索引异常时有值)
+   */
+  RawLog?: string
+  /**
+   * 日志创建索引异常原因(仅在日志创建索引异常时有值)
+   */
+  IndexStatus?: string
+}
+
+/**
  * AddMachineGroupInfo返回参数结构体
  */
 export interface AddMachineGroupInfoResponse {
@@ -15172,6 +16008,28 @@ export interface AddMachineGroupInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SearchDashboardSubscribe请求参数结构体
+ */
+export interface SearchDashboardSubscribeRequest {
+  /**
+   * 仪表盘id。通过 [获取仪表盘](https://cloud.tencent.com/document/api/614/95636)接口获取DashboardId。
+   */
+  DashboardId: string
+  /**
+   * 仪表盘订阅数据。
+   */
+  SubscribeData: DashboardSubscribeData
+  /**
+   * 仪表盘订阅Id。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Id。
+   */
+  Id?: number
+  /**
+   * 仪表盘订阅名称。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Name。
+   */
+  Name?: string
 }
 
 /**
@@ -15361,71 +16219,35 @@ export interface DeleteConsumerGroupResponse {
 }
 
 /**
- * SearchLog请求参数结构体
+ * DescribeResourceGraphIngestTaskFailureDetail请求参数结构体
  */
-export interface SearchLogRequest {
+export interface DescribeResourceGraphIngestTaskFailureDetailRequest {
   /**
-   * <p>要检索分析的日志的起始时间，<strong>Unix时间戳（毫秒）</strong></p><p>时间范围为左闭右开区间 [From, To)，包含 From 时刻</p>
+   * <p>资源图谱id</p>
    */
-  From: number
+  ResourceGraphId: string
   /**
-   * <p>要检索分析的日志的结束时间，<strong>Unix时间戳（毫秒）</strong></p><p>时间范围为左闭右开区间 [From, To)，不包含 To 时刻</p>
+   * <p>接入任务id</p>
    */
-  To: number
+  TaskId: string
+}
+
+/**
+ * DescribeResourceGraphTkeClusterStatus返回参数结构体
+ */
+export interface DescribeResourceGraphTkeClusterStatusResponse {
   /**
-   * <p>检索分析语句，最大长度为12KB<br>语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句<br>使用*或空字符串可查询所有日志</p><p>默认值：空字符串</p>
+   * <p>已接入的tke集群信息</p>
    */
-  QueryString?: string
+  ConnectedClusterInfos?: Array<ResourceGraphTkeClusterInfo>
   /**
-   * <p>检索语法规则，默认值为1，推荐使用1 。</p><ul><li>0：Lucene语法</li><li>1：CQL语法（CLS Query Language，日志服务专用检索语法）</li></ul><p>详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>。</p><p>默认值：1</p>
+   * <p>未接入的tke集群id</p>
    */
-  QuerySyntax?: number
+  UnconnectedClusterIds?: Array<string>
   /**
-   * <ul><li>要检索分析的日志主题ID，仅能指定一个日志主题。</li><li>如需同时检索多个日志主题，请使用Topics参数。</li><li>TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。</li></ul>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicId?: string
-  /**
-   * <ul><li>要检索分析的日志主题列表，最大支持50个日志主题。</li><li>检索单个日志主题时请使用TopicId。</li><li>TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。</li></ul>
-   */
-  Topics?: Array<MultiTopicSearchInformation>
-  /**
-   * <p>原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>SQL结果排序方式参考<a href="https://cloud.tencent.com/document/product/614/58978" target="_blank">SQL ORDER BY语法</a></li></ul>
-   */
-  Sort?: string
-  /**
-   * <p>表示单次查询返回的原始日志条数，默认为100，最大值为1000。<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a></li></ul><p>可通过两种方式获取后续更多日志：</p><ul><li>Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志</li><li>Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制</li></ul>
-   */
-  Limit?: number
-  /**
-   * <p>查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>不能与Context参数同时使用</li><li>仅适用于单日志主题检索</li></ul>
-   */
-  Offset?: number
-  /**
-   * <p>透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。<br>注意：</p><ul><li>透传该参数时，请勿修改除该参数外的其它参数</li><li>仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context</li><li>仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a></li></ul>
-   */
-  Context?: string
-  /**
-   * <p>执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。<br>0：自动采样;<br>0～1：按指定采样率采样，例如0.02;<br>1：不采样，即精确分析<br>默认值为1</p>
-   */
-  SamplingRate?: number
-  /**
-   * <p>为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效<br>为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效<br>两种返回方式在编码格式上有少量区别，建议使用true</p>
-   */
-  UseNewAnalysis?: boolean
-  /**
-   * <p>是否高亮符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索</p>
-   */
-  HighLight?: boolean
-  /**
-   * <p><strong>Query字段已废弃，请使用QueryString字段</strong><br>字段差异：未指定语法规则时，Query默认使用Lucene语法，QueryString默认使用CQL语法，语法差异详见 <a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules">语法规则</a></p>
-   * @deprecated
-   */
-  Query?: string
-  /**
-   * <p><strong>SyntaxRule字段已废弃，请使用QuerySyntax字段</strong></p><p>字段差异：</p><ul><li>SyntaxRule与Query字段搭配使用，默认使用Lucene语法</li><li>QuerySyntax与QueryString字段搭配使用，默认使用CQL语法</li></ul><p>SyntaxRule参数说明：</p><ul><li>0：Lucene语法</li><li>1：CQL语法（CLS Query Language，日志服务专用检索语法）</li></ul>
-   * @deprecated
-   */
-  SyntaxRule?: number
+  RequestId?: string
 }
 
 /**
@@ -15444,13 +16266,33 @@ export interface DescribeKafkaConsumerGroupDetailRequest {
 }
 
 /**
- * DescribeMetricCorrectDimension返回参数结构体
+ * DescribeConsumerOffsets请求参数结构体
  */
-export interface DescribeMetricCorrectDimensionResponse {
+export interface DescribeConsumerOffsetsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 日志主题对应的消费组标识
    */
-  RequestId?: string
+  ConsumerGroup: string
+  /**
+   * 时间戳(秒级时间戳)
+   */
+  From: string
+  /**
+   * 日志集id(日志主题对应的id)
+   */
+  LogsetId: string
+  /**
+   * 日志主题id
+   */
+  TopicId?: string
+  /**
+   * 分区id
+   */
+  PartitionId?: string
+  /**
+   * 获取offset方式。 0 表示 fetch_offset，1 表示 list_offset
+   */
+  OffsetType?: number
 }
 
 /**
@@ -15693,6 +16535,32 @@ export interface DescribeMachineGroupsResponse {
 }
 
 /**
+ * 资源图谱tke集群接入信息
+ */
+export interface ResourceGraphTkeClusterInfo {
+  /**
+   * <p>tke集群id</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId?: string
+  /**
+   * <p>资源图谱名称</p>
+   */
+  ResourceGraphName?: string
+  /**
+   * <p>资源图谱接入任务id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>资源图谱接入任务名称</p>
+   */
+  TaskName?: string
+}
+
+/**
  * DescribeLogsets请求参数结构体
  */
 export interface DescribeLogsetsRequest {
@@ -15799,6 +16667,41 @@ export interface DescribeConsolesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Windows事件日志采集配置
+ */
+export interface EventLog {
+  /**
+   * 事件通道，支持
+- Application 应用日志
+- Security 安全日志
+- Setup 启动日志
+- System 系统日志
+- ALL 所有日志
+
+   */
+  EventChannel: string
+  /**
+   * 时间字段（Timestamp）支持的类型
+- 1（用户自定义时间）
+- 2（当前时间）
+   */
+  TimeType: number
+  /**
+   * 时间，用户选择自定义时间类型时，需要指定时间，单位秒
+格式：时间戳，1754897446
+   */
+  Timestamp?: number
+  /**
+   * 事件ID过滤列表
+	
+选填，为空表示不做过滤
+支持正向过滤单个值（例：20）或范围（例：0-20），也支持反向过滤单个值(例：-20)
+多个过滤项之间可由逗号隔开，例：1-200,-100表示采集1-200范围内除了100以外的事件日志
+   */
+  EventIDs?: Array<string>
 }
 
 /**

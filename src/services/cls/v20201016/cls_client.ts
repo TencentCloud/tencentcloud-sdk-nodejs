@@ -40,6 +40,7 @@ import {
   DeleteMetricSubscribeResponse,
   DescribePartitionsRequest,
   CheckFunctionResponse,
+  DeleteResourceGraphProductIngestTaskResponse,
   ModifyAlarmResponse,
   PreviewKafkaRechargeRequest,
   CollectInfo,
@@ -49,14 +50,16 @@ import {
   DescribeConfigExtrasResponse,
   DeleteMetricSubscribeRequest,
   AdvancedConsumerConfiguration,
-  ScheduledSqlResouceInfo,
+  DescribeResourceGraphEntitiesResponse,
   ConditionInfo,
   EsInfo,
   DeleteMachineGroupResponse,
   Tag,
   ScheduledSqlTaskInfo,
+  DescribeResourceGraphProductIngestTaskListResponse,
   CreateDlcDeliverResponse,
   CreateConsumerGroupRequest,
+  ModifyResourceGraphEntityTopicsRelationResponse,
   AgentTopicInfo,
   Label,
   ModifyMachineGroupResponse,
@@ -73,10 +76,12 @@ import {
   PartitionInfo,
   CreateNoticeContentResponse,
   OpenClsServiceResponse,
+  DescribeResourceGraphProductIngestTaskListRequest,
   ModifyAlarmRequest,
   ConfigExtraInfo,
   RetryShipperTaskResponse,
-  SplitPartitionRequest,
+  RetryResourceGraphRequest,
+  CreateResourceGraphRequest,
   CreateAlarmShieldRequest,
   MachineGroupInfo,
   DeleteAlarmShieldResponse,
@@ -84,6 +89,7 @@ import {
   CreateIndexRequest,
   EsImportInfo,
   CreateTopicRequest,
+  ModifyResourceGraphResponse,
   ModifyDataTransformRequest,
   CreateDlcDeliverRequest,
   Dimension,
@@ -92,14 +98,16 @@ import {
   CreateDeliverCloudFunctionRequest,
   ModifyDlcDeliverResponse,
   ModifyDashboardResponse,
+  ModifyResourceGraphRequest,
   DescribeMetricSubscribesResponse,
   CreateWebCallbackRequest,
+  DescribeResourceGraphEntitiesRequest,
   DescribeClusterMetricConfigsRequest,
   DescribeConfigsRequest,
   DlcPartitionExtra,
   DescribeKafkaConsumerTopicsResponse,
   DashboardTopicInfo,
-  QueryMetricRequest,
+  DeleteResourceGraphProductIngestTaskRequest,
   CloudProductLogTaskInfo,
   Instance,
   DescribeAlarmNoticesResponse,
@@ -116,6 +124,7 @@ import {
   PreviewLogStatistic,
   DescribeDlcDeliversResponse,
   ModifyIndexRequest,
+  EBPFProcessNameFilter,
   MachineInfo,
   ValueInfo,
   GetAlarmLogRequest,
@@ -128,12 +137,14 @@ import {
   DeleteTopicRequest,
   ModifyShipperRequest,
   MonitorNoticeRule,
+  SearchLogInfos,
   DescribeKafkaConsumerPreviewRequest,
   DescribeAgentApplicationsRequest,
   CreateDeliverCloudFunctionResponse,
   DescribeDashboardsResponse,
   CompressInfo,
   ModifyRemoteWriteTaskResponse,
+  DescribeResourceGraphProductIngestTaskDetailRequest,
   CreateConfigResponse,
   CreateCloudProductLogCollectionResponse,
   SearchCosRechargeInfoResponse,
@@ -169,9 +180,11 @@ import {
   DescribeMachinesRequest,
   KeyRegexInfo,
   DeleteSplunkDeliverResponse,
+  DescribeResourceGraphProductIngestTaskDetailResponse,
   DescribeTopicMetricConfigsResponse,
   DeleteDashboardSubscribeRequest,
-  LogInfo,
+  DescribeResourceGraphTkeClusterStatusRequest,
+  KafkaConsumerContent,
   DeleteAlarmNoticeResponse,
   DeleteAlarmShieldRequest,
   ModifyEsRechargeRequest,
@@ -186,12 +199,14 @@ import {
   ModifyConfigExtraResponse,
   DeleteConsoleSharingRequest,
   UploadLogRequest,
+  DescribeResourceGraphEntityDependencyResponse,
   ModifyConsoleSharingRequest,
   ChatUsage,
   AppointLabel,
   CommitConsumerOffsetsRequest,
   ModifyConsoleResponse,
   ConsumerInfo,
+  DescribeResourceGraphFailureDetailResponse,
   DescribeAlarmsRequest,
   DescribeShippersResponse,
   ModifyShipperResponse,
@@ -207,7 +222,7 @@ import {
   QueryRangeMetricRequest,
   MetaTagInfo,
   DescribeMachineGroupsRequest,
-  ModifySearchViewResponse,
+  EBPFEndpoint,
   DescribeConfigsResponse,
   ExtractRuleInfo,
   TopicInfo,
@@ -219,12 +234,13 @@ import {
   DeleteMachineGroupRequest,
   NetworkApplicationDetail,
   DescribeSplunkDeliversResponse,
-  SearchDashboardSubscribeRequest,
+  DeleteResourceGraphRequest,
   DescribePartitionsResponse,
   ModifyHostMetricConfigResponse,
-  DescribeConsumerOffsetsRequest,
+  DescribeMetricCorrectDimensionResponse,
   ModifyAlarmNoticeRequest,
   ToolCallFunction,
+  ScheduledSqlResouceInfo,
   CreateAlarmRequest,
   DlcFiledInfo,
   DeleteScheduledSqlResponse,
@@ -244,6 +260,7 @@ import {
   DeleteConsumerGroupRequest,
   OpenKafkaConsumerRequest,
   CreateConsumerGroupResponse,
+  DescribeResourceGraphFailureDetailRequest,
   SplunkDeliverInfo,
   NoticeContentInfo,
   ModifyMetricConfigResponse,
@@ -335,6 +352,7 @@ import {
   GetClsServiceResponse,
   DescribeAgentApplicationsResponse,
   Choice,
+  RetryResourceGraphResponse,
   DeleteMetricConfigRequest,
   CreateEsRechargeRequest,
   ConsumerGroup,
@@ -351,6 +369,7 @@ import {
   JsonInfo,
   DeleteKafkaRechargeResponse,
   ContainerWorkLoadInfo,
+  ModifyResourceGraphProductIngestTaskRequest,
   DeleteDlcDeliverRequest,
   CallBackInfo,
   ModifyNetworkApplicationRequest,
@@ -358,6 +377,7 @@ import {
   SplitPartitionResponse,
   AlarmClassification,
   WebCallbackInfo,
+  SplitPartitionRequest,
   DescribeConsoleSharingListResponse,
   CreateLogsetResponse,
   ModifyHostMetricConfigRequest,
@@ -369,11 +389,14 @@ import {
   DescribeNoticeContentsResponse,
   CreateAlarmShieldResponse,
   DescribeConsumerRequest,
+  CreateResourceGraphResponse,
   DeleteConfigExtraResponse,
   ModifyConsumerRequest,
   ModifyMetricConfigRequest,
   ModifyDashboardSubscribeRequest,
   RebuildIndexTaskInfo,
+  DescribeResourceGraphEntityDetailRequest,
+  DescribeResourceGraphDetailRequest,
   CreateDashboardSubscribeRequest,
   FullTextInfo,
   DescribeConfigMachineGroupsResponse,
@@ -413,12 +436,14 @@ import {
   DescribeKafkaConsumerPreviewResponse,
   RemoteWriteAuthInfo,
   NetworkApplicationInfo,
+  CreateResourceGraphProductIngestTaskRequest,
   ModifySearchViewRequest,
   WebCallback,
   CreateAlarmNoticeResponse,
   ModifyTopicResponse,
   CreateConfigRequest,
   DeleteEsRechargeResponse,
+  EBPFDestEndpointFilter,
   DescribeNetworkApplicationsRequest,
   DescribeKafkaRechargesResponse,
   ModifyDlcDeliverRequest,
@@ -443,7 +468,8 @@ import {
   DescribeRebuildIndexTasksResponse,
   ModifyAlarmNoticeResponse,
   DescribeConsumerOffsetsResponse,
-  SearchLogInfos,
+  ModifyResourceGraphProductIngestTaskResponse,
+  DescribeResourceGraphEntityDetailResponse,
   CreateConsoleSharingResponse,
   EnvInfo,
   ModifyKafkaConsumerResponse,
@@ -455,6 +481,8 @@ import {
   DescribeEsRechargePreviewResponse,
   DeleteS3RechargeResponse,
   MergePartitionRequest,
+  DescribeResourceGraphEntityDependencyRequest,
+  ProductIngestTaskItem,
   DescribeRecordingRuleTaskRequest,
   MonitorTime,
   ModifyAgentApplicationResponse,
@@ -465,7 +493,12 @@ import {
   DescribeSearchViewsRequest,
   ModifyWebCallbackRequest,
   DeleteTopicResponse,
+  ModifyResourceGraphEntityTopicsRelationRequest,
+  ResourceGraphEntityRelatedTopic,
   CreateExportResponse,
+  EBPFCollectRule,
+  RetryResourceGraphProductIngestTaskResponse,
+  CreateResourceGraphProductIngestTaskResponse,
   CancelRebuildIndexTaskResponse,
   DescribeRecordingRuleYamlTaskRequest,
   UploadLogResponse,
@@ -484,8 +517,10 @@ import {
   RuleTagInfo,
   OpenClawServiceRequest,
   CreateAgentApplicationRequest,
+  RelationLogset,
   SearchCosRechargeInfoRequest,
   DescribeNoticeContentsRequest,
+  QueryMetricRequest,
   DescribeDlcDeliversRequest,
   DescribeNetworkApplicationDetailResponse,
   GetClsServiceRequest,
@@ -493,11 +528,15 @@ import {
   ModifyLogRequest,
   CreateCloudProductLogCollectionRequest,
   S3RechargeInfo,
+  DescribeResourceGraphsRequest,
   DescribeIndexRequest,
+  ProductIngestTaskDetail,
   DescribeKafkaConsumerGroupListRequest,
   CreateConsoleRequest,
   DeleteMachineGroupInfoRequest,
   ModifyNoticeContentResponse,
+  DescribeResourceGraphIngestTaskFailureDetailResponse,
+  SearchLogRequest,
   ServiceLogConfigInfo,
   DeleteWebCallbackResponse,
   DescribeSearchViewsResponse,
@@ -505,7 +544,7 @@ import {
   DescribeAlarmShieldsRequest,
   CreateRecordingRuleYamlTaskResponse,
   DescribeTopicsResponse,
-  EventLog,
+  EBPFCollectFilters,
   ConsumerGroupInfo,
   CreateRemoteWriteTaskResponse,
   DescribeRebuildIndexTasksRequest,
@@ -524,19 +563,23 @@ import {
   CreateDashboardSubscribeResponse,
   DescribeExportsRequest,
   AlarmTarget,
+  DescribeResourceGraphDetailResponse,
   CreateKafkaRechargeResponse,
   DashboardSubscribeData,
+  DescribeResourceGraphsResponse,
   ModifyIndexResponse,
+  ModifySearchViewResponse,
   QueryRangeMetricResponse,
   DescribeDashboardSubscribesResponse,
   BaseMetricCollectConfig,
+  EBPFDNSFilter,
   SearchLogTopics,
   CreateMetricConfigRequest,
   Message,
   ModifyConsumerResponse,
   CreateSearchViewResponse,
   PartitionOffsetInfo,
-  KafkaConsumerContent,
+  DeleteResourceGraphResponse,
   DeleteSearchViewResponse,
   DeleteConfigRequest,
   AnalysisDimensional,
@@ -550,6 +593,7 @@ import {
   DeleteRemoteWriteTaskRequest,
   ModifyKafkaConsumerGroupOffsetResponse,
   CreateShipperRequest,
+  ResourceGraphDetailInfo,
   InstanceData,
   HostMetricConfig,
   CreateShipperResponse,
@@ -581,33 +625,40 @@ import {
   DescribeAgentConfigsRequest,
   MetricSpec,
   DescribeMachinesResponse,
+  RetryResourceGraphProductIngestTaskRequest,
   DeleteEsRechargeRequest,
   AuthRoleInfo,
   LogContextInfo,
+  RelationTopic,
   ModifyMetricSubscribeRequest,
   DeleteRecordingRuleYamlTaskRequest,
   DeleteConfigFromMachineGroupRequest,
   DescribeRecordingRuleTaskResponse,
+  LogInfo,
   AddMachineGroupInfoResponse,
+  SearchDashboardSubscribeRequest,
   UserKafkaMeta,
   AgentApplicationInfo,
   ModifyRecordingRuleTaskRequest,
   DescribeMetricSubscribePreviewResponse,
   DescribeScheduledSqlInfoRequest,
   DeleteConsumerGroupResponse,
-  SearchLogRequest,
+  DescribeResourceGraphIngestTaskFailureDetailRequest,
+  DescribeResourceGraphTkeClusterStatusResponse,
   DescribeKafkaConsumerGroupDetailRequest,
-  DescribeMetricCorrectDimensionResponse,
+  DescribeConsumerOffsetsRequest,
   DeleteConsoleRequest,
   ModifyConfigExtraRequest,
   CreateDataTransformRequest,
   DescribeMachineGroupsResponse,
+  ResourceGraphTkeClusterInfo,
   DescribeLogsetsRequest,
   MetadataItem,
   ParquetInfo,
   ModifyRecordingRuleTaskResponse,
   ModifyAgentApplicationRequest,
   DescribeConsolesResponse,
+  EventLog,
   ConsoleSharingParam,
   SendConsumerHeartbeatRequest,
   CommitConsumerOffsetsResponse,
@@ -625,13 +676,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Kafka协议消费信息
+   * 获取指标订阅配置
    */
-  async ModifyKafkaConsumer(
-    req: ModifyKafkaConsumerRequest,
-    cb?: (error: string, rep: ModifyKafkaConsumerResponse) => void
-  ): Promise<ModifyKafkaConsumerResponse> {
-    return this.request("ModifyKafkaConsumer", req, cb)
+  async DescribeTopicMetricConfigs(
+    req: DescribeTopicMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeTopicMetricConfigsResponse) => void
+  ): Promise<DescribeTopicMetricConfigsResponse> {
+    return this.request("DescribeTopicMetricConfigs", req, cb)
   }
 
   /**
@@ -642,6 +693,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateKafkaRechargeResponse) => void
   ): Promise<CreateKafkaRechargeResponse> {
     return this.request("CreateKafkaRecharge", req, cb)
+  }
+
+  /**
+   * 删除产品接入任务
+   */
+  async DeleteResourceGraphProductIngestTask(
+    req: DeleteResourceGraphProductIngestTaskRequest,
+    cb?: (error: string, rep: DeleteResourceGraphProductIngestTaskResponse) => void
+  ): Promise<DeleteResourceGraphProductIngestTaskResponse> {
+    return this.request("DeleteResourceGraphProductIngestTask", req, cb)
   }
 
   /**
@@ -723,6 +784,16 @@ API 中 Region 填写任意一个地域均可，建议使用广州(ap-guangzhou)
     cb?: (error: string, rep: GetClsServiceResponse) => void
   ): Promise<GetClsServiceResponse> {
     return this.request("GetClsService", req, cb)
+  }
+
+  /**
+   * 分页查询资源图谱实体列表。Filters 支持  Product / EntityClassName / Keyword 过滤；TagFilter 由于结构特殊（key 单选 + values 多选）独立成字段。
+   */
+  async DescribeResourceGraphEntities(
+    req: DescribeResourceGraphEntitiesRequest,
+    cb?: (error: string, rep: DescribeResourceGraphEntitiesResponse) => void
+  ): Promise<DescribeResourceGraphEntitiesResponse> {
+    return this.request("DescribeResourceGraphEntities", req, cb)
   }
 
   /**
@@ -837,13 +908,13 @@ API 中 Region 填写任意一个地域均可，建议使用广州(ap-guangzhou)
   }
 
   /**
-   * 获取网络应用列表
+   * 删除工作区。删除前需确认是否级联清理已接入的云产品（待产品确认）。
    */
-  async DescribeNetworkApplications(
-    req: DescribeNetworkApplicationsRequest,
-    cb?: (error: string, rep: DescribeNetworkApplicationsResponse) => void
-  ): Promise<DescribeNetworkApplicationsResponse> {
-    return this.request("DescribeNetworkApplications", req, cb)
+  async DeleteResourceGraph(
+    req: DeleteResourceGraphRequest,
+    cb?: (error: string, rep: DeleteResourceGraphResponse) => void
+  ): Promise<DeleteResourceGraphResponse> {
+    return this.request("DeleteResourceGraph", req, cb)
   }
 
   /**
@@ -945,6 +1016,26 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: CreateSearchViewResponse) => void
   ): Promise<CreateSearchViewResponse> {
     return this.request("CreateSearchView", req, cb)
+  }
+
+  /**
+   * 重试资源图谱
+   */
+  async RetryResourceGraph(
+    req: RetryResourceGraphRequest,
+    cb?: (error: string, rep: RetryResourceGraphResponse) => void
+  ): Promise<RetryResourceGraphResponse> {
+    return this.request("RetryResourceGraph", req, cb)
+  }
+
+  /**
+   * 查询单个云产品接入的详情，包含基本信息、实例选择、eBPF 采集规则和关联的日志主题。
+   */
+  async DescribeResourceGraphDetail(
+    req: DescribeResourceGraphDetailRequest,
+    cb?: (error: string, rep: DescribeResourceGraphDetailResponse) => void
+  ): Promise<DescribeResourceGraphDetailResponse> {
+    return this.request("DescribeResourceGraphDetail", req, cb)
   }
 
   /**
@@ -1068,6 +1159,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 查询资源图谱失败详情
+   */
+  async DescribeResourceGraphIngestTaskFailureDetail(
+    req: DescribeResourceGraphIngestTaskFailureDetailRequest,
+    cb?: (error: string, rep: DescribeResourceGraphIngestTaskFailureDetailResponse) => void
+  ): Promise<DescribeResourceGraphIngestTaskFailureDetailResponse> {
+    return this.request("DescribeResourceGraphIngestTaskFailureDetail", req, cb)
+  }
+
+  /**
    * 删除主机指标采集配置
    */
   async DeleteHostMetricConfig(
@@ -1098,13 +1199,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 删除Splunk投递任务
+   * 关闭Kafka协议消费
    */
-  async DeleteSplunkDeliver(
-    req: DeleteSplunkDeliverRequest,
-    cb?: (error: string, rep: DeleteSplunkDeliverResponse) => void
-  ): Promise<DeleteSplunkDeliverResponse> {
-    return this.request("DeleteSplunkDeliver", req, cb)
+  async CloseKafkaConsumer(
+    req: CloseKafkaConsumerRequest,
+    cb?: (error: string, rep: CloseKafkaConsumerResponse) => void
+  ): Promise<CloseKafkaConsumerResponse> {
+    return this.request("CloseKafkaConsumer", req, cb)
   }
 
   /**
@@ -1138,13 +1239,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 获取指标订阅配置
+   * 分页查询云产品接入列表，返回顶部 4 张卡片汇总 + 列表行。支持按 Status / CollectMethod / Product / Name 过滤。
    */
-  async DescribeTopicMetricConfigs(
-    req: DescribeTopicMetricConfigsRequest,
-    cb?: (error: string, rep: DescribeTopicMetricConfigsResponse) => void
-  ): Promise<DescribeTopicMetricConfigsResponse> {
-    return this.request("DescribeTopicMetricConfigs", req, cb)
+  async DescribeResourceGraphProductIngestTaskList(
+    req: DescribeResourceGraphProductIngestTaskListRequest,
+    cb?: (error: string, rep: DescribeResourceGraphProductIngestTaskListResponse) => void
+  ): Promise<DescribeResourceGraphProductIngestTaskListResponse> {
+    return this.request("DescribeResourceGraphProductIngestTaskList", req, cb)
   }
 
   /**
@@ -1155,6 +1256,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: ModifyMetricSubscribeResponse) => void
   ): Promise<ModifyMetricSubscribeResponse> {
     return this.request("ModifyMetricSubscribe", req, cb)
+  }
+
+  /**
+   * 编辑已接入云产品的实例选择、eBPF 规则、日志主题配置。
+   */
+  async ModifyResourceGraphProductIngestTask(
+    req: ModifyResourceGraphProductIngestTaskRequest,
+    cb?: (error: string, rep: ModifyResourceGraphProductIngestTaskResponse) => void
+  ): Promise<ModifyResourceGraphProductIngestTaskResponse> {
+    return this.request("ModifyResourceGraphProductIngestTask", req, cb)
   }
 
   /**
@@ -1228,13 +1339,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 创建es导入配置
+   * 创建工作区。
    */
-  async CreateEsRecharge(
-    req: CreateEsRechargeRequest,
-    cb?: (error: string, rep: CreateEsRechargeResponse) => void
-  ): Promise<CreateEsRechargeResponse> {
-    return this.request("CreateEsRecharge", req, cb)
+  async CreateResourceGraph(
+    req: CreateResourceGraphRequest,
+    cb?: (error: string, rep: CreateResourceGraphResponse) => void
+  ): Promise<CreateResourceGraphResponse> {
+    return this.request("CreateResourceGraph", req, cb)
   }
 
   /**
@@ -1308,6 +1419,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 查询单个实体的完整详情，包含基本信息、动态属性、标签、关联主题。
+   */
+  async DescribeResourceGraphEntityDetail(
+    req: DescribeResourceGraphEntityDetailRequest,
+    cb?: (error: string, rep: DescribeResourceGraphEntityDetailResponse) => void
+  ): Promise<DescribeResourceGraphEntityDetailResponse> {
+    return this.request("DescribeResourceGraphEntityDetail", req, cb)
+  }
+
+  /**
    * 删除投递Ckafka任务
    */
   async DeleteConsumer(
@@ -1345,6 +1466,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DeleteEsRechargeResponse) => void
   ): Promise<DeleteEsRechargeResponse> {
     return this.request("DeleteEsRecharge", req, cb)
+  }
+
+  /**
+   * 查询单个云产品接入的详情，包含基本信息、实例选择、eBPF 采集规则和关联的日志主题。
+   */
+  async DescribeResourceGraphProductIngestTaskDetail(
+    req: DescribeResourceGraphProductIngestTaskDetailRequest,
+    cb?: (error: string, rep: DescribeResourceGraphProductIngestTaskDetailResponse) => void
+  ): Promise<DescribeResourceGraphProductIngestTaskDetailResponse> {
+    return this.request("DescribeResourceGraphProductIngestTaskDetail", req, cb)
   }
 
   /**
@@ -1415,6 +1546,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DescribeAlarmsResponse) => void
   ): Promise<DescribeAlarmsResponse> {
     return this.request("DescribeAlarms", req, cb)
+  }
+
+  /**
+   * 分页查询工作区列表，支持按 WorkAreaId / Name / Region 过滤。
+   */
+  async DescribeResourceGraphs(
+    req?: DescribeResourceGraphsRequest,
+    cb?: (error: string, rep: DescribeResourceGraphsResponse) => void
+  ): Promise<DescribeResourceGraphsResponse> {
+    return this.request("DescribeResourceGraphs", req, cb)
   }
 
   /**
@@ -1518,13 +1659,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   * 编辑工作区基本信息。支持改名（仍需保持租户内唯一）和修改描述，主题地域 Region 不可修改。
    */
-  async ModifyShipper(
-    req: ModifyShipperRequest,
-    cb?: (error: string, rep: ModifyShipperResponse) => void
-  ): Promise<ModifyShipperResponse> {
-    return this.request("ModifyShipper", req, cb)
+  async ModifyResourceGraph(
+    req: ModifyResourceGraphRequest,
+    cb?: (error: string, rep: ModifyResourceGraphResponse) => void
+  ): Promise<ModifyResourceGraphResponse> {
+    return this.request("ModifyResourceGraph", req, cb)
   }
 
   /**
@@ -1578,13 +1719,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 关闭Kafka协议消费
+   * 删除Splunk投递任务
    */
-  async CloseKafkaConsumer(
-    req: CloseKafkaConsumerRequest,
-    cb?: (error: string, rep: CloseKafkaConsumerResponse) => void
-  ): Promise<CloseKafkaConsumerResponse> {
-    return this.request("CloseKafkaConsumer", req, cb)
+  async DeleteSplunkDeliver(
+    req: DeleteSplunkDeliverRequest,
+    cb?: (error: string, rep: DeleteSplunkDeliverResponse) => void
+  ): Promise<DeleteSplunkDeliverResponse> {
+    return this.request("DeleteSplunkDeliver", req, cb)
   }
 
   /**
@@ -1638,6 +1779,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 修改Kafka协议消费信息
+   */
+  async ModifyKafkaConsumer(
+    req: ModifyKafkaConsumerRequest,
+    cb?: (error: string, rep: ModifyKafkaConsumerResponse) => void
+  ): Promise<ModifyKafkaConsumerResponse> {
+    return this.request("ModifyKafkaConsumer", req, cb)
+  }
+
+  /**
    * 获取重建索引任务列表
    */
   async DescribeRebuildIndexTasks(
@@ -1665,6 +1816,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DescribeAlarmShieldsResponse) => void
   ): Promise<DescribeAlarmShieldsResponse> {
     return this.request("DescribeAlarmShields", req, cb)
+  }
+
+  /**
+   * 接入指定云产品。EBPF 类产品需提供 EBPFCollectRule，API 类产品仅需 Product。
+   */
+  async CreateResourceGraphProductIngestTask(
+    req: CreateResourceGraphProductIngestTaskRequest,
+    cb?: (error: string, rep: CreateResourceGraphProductIngestTaskResponse) => void
+  ): Promise<CreateResourceGraphProductIngestTaskResponse> {
+    return this.request("CreateResourceGraphProductIngestTask", req, cb)
   }
 
   /**
@@ -1725,6 +1886,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: CommitConsumerOffsetsResponse) => void
   ): Promise<CommitConsumerOffsetsResponse> {
     return this.request("CommitConsumerOffsets", req, cb)
+  }
+
+  /**
+   * 查询资源图谱失败详情
+   */
+  async DescribeResourceGraphFailureDetail(
+    req: DescribeResourceGraphFailureDetailRequest,
+    cb?: (error: string, rep: DescribeResourceGraphFailureDetailResponse) => void
+  ): Promise<DescribeResourceGraphFailureDetailResponse> {
+    return this.request("DescribeResourceGraphFailureDetail", req, cb)
   }
 
   /**
@@ -1838,6 +2009,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 修改资源图谱实体与日志主题关系
+   */
+  async ModifyResourceGraphEntityTopicsRelation(
+    req: ModifyResourceGraphEntityTopicsRelationRequest,
+    cb?: (error: string, rep: ModifyResourceGraphEntityTopicsRelationResponse) => void
+  ): Promise<ModifyResourceGraphEntityTopicsRelationResponse> {
+    return this.request("ModifyResourceGraphEntityTopicsRelation", req, cb)
+  }
+
+  /**
    * 获取Splunk投递任务列表
    */
   async DescribeSplunkDelivers(
@@ -1882,6 +2063,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DeleteDashboardSubscribeResponse) => void
   ): Promise<DeleteDashboardSubscribeResponse> {
     return this.request("DeleteDashboardSubscribe", req, cb)
+  }
+
+  /**
+   * 以指定实体为中心，按 Direction（上/下游/全部）+ Hop（跳数）查询依赖拓扑，同时返回拓扑图（节点+边）、4 张卡片汇总、列表区数据、产品 tag 汇总。
+   */
+  async DescribeResourceGraphEntityDependency(
+    req: DescribeResourceGraphEntityDependencyRequest,
+    cb?: (error: string, rep: DescribeResourceGraphEntityDependencyResponse) => void
+  ): Promise<DescribeResourceGraphEntityDependencyResponse> {
+    return this.request("DescribeResourceGraphEntityDependency", req, cb)
   }
 
   /**
@@ -1940,6 +2131,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: CreateSplunkDeliverResponse) => void
   ): Promise<CreateSplunkDeliverResponse> {
     return this.request("CreateSplunkDeliver", req, cb)
+  }
+
+  /**
+   * 资源图谱tke集群接入状态
+   */
+  async DescribeResourceGraphTkeClusterStatus(
+    req: DescribeResourceGraphTkeClusterStatusRequest,
+    cb?: (error: string, rep: DescribeResourceGraphTkeClusterStatusResponse) => void
+  ): Promise<DescribeResourceGraphTkeClusterStatusResponse> {
+    return this.request("DescribeResourceGraphTkeClusterStatus", req, cb)
   }
 
   /**
@@ -2053,6 +2254,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 获取网络应用列表
+   */
+  async DescribeNetworkApplications(
+    req: DescribeNetworkApplicationsRequest,
+    cb?: (error: string, rep: DescribeNetworkApplicationsResponse) => void
+  ): Promise<DescribeNetworkApplicationsResponse> {
+    return this.request("DescribeNetworkApplications", req, cb)
+  }
+
+  /**
    * 本接口用于修改定时预聚合任务
    */
   async ModifyRecordingRuleTask(
@@ -2090,6 +2301,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: ModifyWebCallbackResponse) => void
   ): Promise<ModifyWebCallbackResponse> {
     return this.request("ModifyWebCallback", req, cb)
+  }
+
+  /**
+   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   */
+  async ModifyShipper(
+    req: ModifyShipperRequest,
+    cb?: (error: string, rep: ModifyShipperResponse) => void
+  ): Promise<ModifyShipperResponse> {
+    return this.request("ModifyShipper", req, cb)
   }
 
   /**
@@ -2245,6 +2466,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 创建es导入配置
+   */
+  async CreateEsRecharge(
+    req: CreateEsRechargeRequest,
+    cb?: (error: string, rep: CreateEsRechargeResponse) => void
+  ): Promise<CreateEsRechargeResponse> {
+    return this.request("CreateEsRecharge", req, cb)
+  }
+
+  /**
    * 获取投递任务列表
    */
   async DescribeShipperTasks(
@@ -2353,6 +2584,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: CheckRechargeKafkaServerResponse) => void
   ): Promise<CheckRechargeKafkaServerResponse> {
     return this.request("CheckRechargeKafkaServer", req, cb)
+  }
+
+  /**
+   * 重试初始化资源图谱工作区
+   */
+  async RetryResourceGraphProductIngestTask(
+    req: RetryResourceGraphProductIngestTaskRequest,
+    cb?: (error: string, rep: RetryResourceGraphProductIngestTaskResponse) => void
+  ): Promise<RetryResourceGraphProductIngestTaskResponse> {
+    return this.request("RetryResourceGraphProductIngestTask", req, cb)
   }
 
   /**
@@ -2678,13 +2919,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建定时SQL分析任务
+   * 本接口用于删除日志或指标主题。
    */
-  async CreateScheduledSql(
-    req: CreateScheduledSqlRequest,
-    cb?: (error: string, rep: CreateScheduledSqlResponse) => void
-  ): Promise<CreateScheduledSqlResponse> {
-    return this.request("CreateScheduledSql", req, cb)
+  async DeleteTopic(
+    req: DeleteTopicRequest,
+    cb?: (error: string, rep: DeleteTopicResponse) => void
+  ): Promise<DeleteTopicResponse> {
+    return this.request("DeleteTopic", req, cb)
   }
 
   /**
@@ -2849,13 +3090,13 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
-   * 本接口用于删除日志或指标主题。
+   * 本接口用于创建定时SQL分析任务
    */
-  async DeleteTopic(
-    req: DeleteTopicRequest,
-    cb?: (error: string, rep: DeleteTopicResponse) => void
-  ): Promise<DeleteTopicResponse> {
-    return this.request("DeleteTopic", req, cb)
+  async CreateScheduledSql(
+    req: CreateScheduledSqlRequest,
+    cb?: (error: string, rep: CreateScheduledSqlResponse) => void
+  ): Promise<CreateScheduledSqlResponse> {
+    return this.request("CreateScheduledSql", req, cb)
   }
 
   /**

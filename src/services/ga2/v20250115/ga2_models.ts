@@ -706,11 +706,11 @@ export interface ModifyGlobalAcceleratorAccessLogRequest {
  */
 export interface DescribeListenersResponse {
   /**
-   * 符合条件的监听器实例。
+   * <p>符合条件的监听器实例。</p>
    */
   ListenerSet?: Array<ListenerSet>
   /**
-   * 符合条件的实例个数。
+   * <p>符合条件的实例个数。</p>
    */
   TotalCount?: number
   /**
@@ -2428,19 +2428,19 @@ export interface CreateGlobalAcceleratorResponse {
  */
 export interface DescribeListenersRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量。</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
    */
   Limit?: number
   /**
-   * 过滤条件。  listener-id- String -（过滤条件）监听器实例ID。
+   * <p>过滤条件。  listener-id- String -（过滤条件）监听器实例ID。</p>
    */
   Filters?: Array<Filter>
 }

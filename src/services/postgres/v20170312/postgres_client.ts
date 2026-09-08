@@ -53,7 +53,7 @@ import {
   DeleteLogBackupResponse,
   ModifyReadOnlyGroupConfigRequest,
   BackupSummary,
-  AddDBInstanceToReadOnlyGroupRequest,
+  ClosePostgRESTServiceResponse,
   DescribeProductConfigRequest,
   RemoveDBInstanceFromReadOnlyGroupRequest,
   CreateAccountRequest,
@@ -63,7 +63,7 @@ import {
   DescribeDedicatedClustersResponse,
   RenewInstanceRequest,
   DescribeBackupOverviewRequest,
-  DescribeRegionsResponse,
+  DescribeMem0ServiceRequest,
   DescribeAuditInstanceListResponse,
   UpgradeDBInstanceMajorVersionResponse,
   ModifyBackupDownloadRestrictionRequest,
@@ -85,7 +85,7 @@ import {
   CreateBaseBackupResponse,
   LockAccountResponse,
   CloneDBInstanceResponse,
-  ModifyDBInstanceReadOnlyGroupRequest,
+  ClosePostgRESTServiceRequest,
   AddDBInstanceToReadOnlyGroupResponse,
   EncryptionKey,
   BaseBackup,
@@ -93,6 +93,7 @@ import {
   DescribeAvailableRecoveryTimeRequest,
   CloseAccountCAMRequest,
   DescribeDBProxySpecsResponse,
+  DescribePostgRESTServiceRequest,
   CreateDBProxyAddressRequest,
   DescribeDBInstanceParametersRequest,
   ProxyGroupInfo,
@@ -100,6 +101,7 @@ import {
   DescribeBackupDownloadURLResponse,
   ModifyBaseBackupExpireTimeResponse,
   ModifyMaintainTimeWindowResponse,
+  CloseMem0ServiceResponse,
   InquiryPriceCreateDBInstancesResponse,
   DeleteAuditLogFileResponse,
   ResetAccountPasswordRequest,
@@ -125,6 +127,7 @@ import {
   ModifyDBInstanceParametersRequest,
   CreateAuditLogFileResponse,
   ModifyPrivilege,
+  OpenMem0ServiceResponse,
   DeleteDatabaseResponse,
   DestroyDBProxyRequest,
   DescribeDBInstanceAttributeRequest,
@@ -146,6 +149,7 @@ import {
   DescribeAuditLogFilesResponse,
   DescribeTasksRequest,
   DeleteReadOnlyGroupNetworkAccessResponse,
+  OpenPostgRESTServiceResponse,
   DescribeBackupSummariesResponse,
   DescribeDBErrlogsRequest,
   UnlockAccountResponse,
@@ -154,12 +158,13 @@ import {
   CloneDBInstanceRequest,
   DeleteParameterTemplateRequest,
   DescribeClassesRequest,
-  ReloadBalanceDBProxyNodeRequest,
+  ModifyDBInstanceReadOnlyGroupRequest,
   DescribeParamsEventRequest,
   EventInfo,
   CreateInstancesResponse,
   AnalysisItems,
   Xlog,
+  ModifyDBProxyResponse,
   DescribeDBBackupsResponse,
   DescribeRegionsRequest,
   DescribeSlowQueryListResponse,
@@ -221,11 +226,13 @@ import {
   DescribeReadOnlyGroupsRequest,
   DescribeBackupDownloadURLRequest,
   ModifyParameterTemplateRequest,
+  DescribePostgRESTServiceResponse,
   DescribeDBVersionsResponse,
   ModifyAuditServiceRequest,
   DatabasePrivilege,
   ProxySpecItem,
   ModifyDBInstanceSecurityGroupsResponse,
+  CloseMem0ServiceRequest,
   DBNode,
   ModifyDBInstanceNameResponse,
   UpgradeDBInstanceMajorVersionRequest,
@@ -234,6 +241,7 @@ import {
   CreateReadOnlyDBInstanceRequest,
   DescribeCloneDBInstanceSpecResponse,
   DescribeZonesResponse,
+  ReloadBalanceDBProxyNodeRequest,
   DescribeDatabasesResponse,
   DescribeProductConfigResponse,
   DescribeOrdersRequest,
@@ -258,11 +266,12 @@ import {
   ModifyAccountRemarkRequest,
   DescribeParameterTemplateAttributesRequest,
   DescribeDBErrlogsResponse,
-  ModifyDBProxyResponse,
+  AddDBInstanceToReadOnlyGroupRequest,
   ModifyBackupPlanRequest,
   DeleteBaseBackupRequest,
   ModifyDBProxyAddressResponse,
   ParamEntry,
+  OpenPostgRESTServiceRequest,
   InquiryPriceUpgradeDBInstanceResponse,
   DisIsolateDBInstancesResponse,
   ModifyDatabaseOwnerResponse,
@@ -270,6 +279,7 @@ import {
   DescribeDBInstanceSSLConfigRequest,
   CreateAuditLogFileRequest,
   DeleteAuditLogFileRequest,
+  OpenMem0ServiceRequest,
   ModifySwitchTimePeriodRequest,
   CreateAccountResponse,
   DescribeSlowQueryListRequest,
@@ -286,6 +296,7 @@ import {
   ModifyDBInstanceHAConfigResponse,
   CreateDatabaseResponse,
   RebalanceReadOnlyGroupResponse,
+  DescribeMem0ServiceResponse,
   DescribeTasksResponse,
   DescribeSlowQueryAnalysisResponse,
   ModifyDBInstanceDeletionProtectionResponse,
@@ -321,6 +332,7 @@ import {
   DescribeBaseBackupsRequest,
   DescribeEncryptionKeysResponse,
   CreateReadOnlyGroupNetworkAccessResponse,
+  DescribeRegionsResponse,
   DeleteAccountResponse,
   DescribeAuditLogsResponse,
 } from "./postgres_models"
@@ -372,6 +384,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBProxySSLConfigResponse) => void
   ): Promise<DescribeDBProxySSLConfigResponse> {
     return this.request("DescribeDBProxySSLConfig", req, cb)
+  }
+
+  /**
+   * 本接口（DescribePostgRestService）用于查询某个实例的PostgREST服务信息
+   */
+  async DescribePostgRESTService(
+    req: DescribePostgRESTServiceRequest,
+    cb?: (error: string, rep: DescribePostgRESTServiceResponse) => void
+  ): Promise<DescribePostgRESTServiceResponse> {
+    return this.request("DescribePostgRESTService", req, cb)
   }
 
   /**
@@ -589,6 +611,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（OpenMem0Service）用于开启实例Mem0服务
+   */
+  async OpenMem0Service(
+    req: OpenMem0ServiceRequest,
+    cb?: (error: string, rep: OpenMem0ServiceResponse) => void
+  ): Promise<OpenMem0ServiceResponse> {
+    return this.request("OpenMem0Service", req, cb)
+  }
+
+  /**
    * 接口（DescribeDatabases）用来查询实例的数据库列表。
    */
   async DescribeDatabases(
@@ -746,6 +778,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestoreDBInstanceObjectsResponse) => void
   ): Promise<RestoreDBInstanceObjectsResponse> {
     return this.request("RestoreDBInstanceObjects", req, cb)
+  }
+
+  /**
+   * 本接口（OpenPostgRestService）用于开启实例PostgREST服务
+   */
+  async OpenPostgRESTService(
+    req: OpenPostgRESTServiceRequest,
+    cb?: (error: string, rep: OpenPostgRESTServiceResponse) => void
+  ): Promise<OpenPostgRESTServiceResponse> {
+    return this.request("OpenPostgRESTService", req, cb)
   }
 
   /**
@@ -918,6 +960,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateReadOnlyDBInstanceResponse) => void
   ): Promise<CreateReadOnlyDBInstanceResponse> {
     return this.request("CreateReadOnlyDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeMem0Service）用于查询某个实例的Mem0服务信息
+   */
+  async DescribeMem0Service(
+    req: DescribeMem0ServiceRequest,
+    cb?: (error: string, rep: DescribeMem0ServiceResponse) => void
+  ): Promise<DescribeMem0ServiceResponse> {
+    return this.request("DescribeMem0Service", req, cb)
   }
 
   /**
@@ -1143,13 +1195,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改某账号对某数据库对象的权限、修改账号类型。
+   * 本接口（CreateReadOnlyGroup）用于创建只读组
    */
-  async ModifyAccountPrivileges(
-    req: ModifyAccountPrivilegesRequest,
-    cb?: (error: string, rep: ModifyAccountPrivilegesResponse) => void
-  ): Promise<ModifyAccountPrivilegesResponse> {
-    return this.request("ModifyAccountPrivileges", req, cb)
+  async CreateReadOnlyGroup(
+    req: CreateReadOnlyGroupRequest,
+    cb?: (error: string, rep: CreateReadOnlyGroupResponse) => void
+  ): Promise<CreateReadOnlyGroupResponse> {
+    return this.request("CreateReadOnlyGroup", req, cb)
   }
 
   /**
@@ -1170,6 +1222,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogBackupsResponse) => void
   ): Promise<DescribeLogBackupsResponse> {
     return this.request("DescribeLogBackups", req, cb)
+  }
+
+  /**
+   * 本接口（ClosePostgRestService）用于关闭实例的PostgREST服务
+   */
+  async ClosePostgRESTService(
+    req: ClosePostgRESTServiceRequest,
+    cb?: (error: string, rep: ClosePostgRESTServiceResponse) => void
+  ): Promise<ClosePostgRESTServiceResponse> {
+    return this.request("ClosePostgRESTService", req, cb)
   }
 
   /**
@@ -1476,13 +1538,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateReadOnlyGroup）用于创建只读组
+   * 修改某账号对某数据库对象的权限、修改账号类型。
    */
-  async CreateReadOnlyGroup(
-    req: CreateReadOnlyGroupRequest,
-    cb?: (error: string, rep: CreateReadOnlyGroupResponse) => void
-  ): Promise<CreateReadOnlyGroupResponse> {
-    return this.request("CreateReadOnlyGroup", req, cb)
+  async ModifyAccountPrivileges(
+    req: ModifyAccountPrivilegesRequest,
+    cb?: (error: string, rep: ModifyAccountPrivilegesResponse) => void
+  ): Promise<ModifyAccountPrivilegesResponse> {
+    return this.request("ModifyAccountPrivileges", req, cb)
   }
 
   /**
@@ -1585,6 +1647,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstancesResponse) => void
   ): Promise<CreateInstancesResponse> {
     return this.request("CreateInstances", req, cb)
+  }
+
+  /**
+   * 本接口（CloseMem0Service）用于关闭实例的Mem0服务
+   */
+  async CloseMem0Service(
+    req: CloseMem0ServiceRequest,
+    cb?: (error: string, rep: CloseMem0ServiceResponse) => void
+  ): Promise<CloseMem0ServiceResponse> {
+    return this.request("CloseMem0Service", req, cb)
   }
 
   /**

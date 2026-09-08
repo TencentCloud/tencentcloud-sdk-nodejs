@@ -40,6 +40,7 @@ import {
   LabelResult,
   ImageResultsResultDetail,
   VideoSegment,
+  Rect,
   InputInfo,
   OcrHitInfo,
   CreateVideoModerationTaskRequest,
@@ -48,6 +49,7 @@ import {
   TaskFilter,
   RecognitionResult,
   VideoLLMDetail,
+  Position,
   CancelTaskResponse,
   AudioResultDetailTextResult,
   SegmentCosUrlList,
@@ -57,7 +59,9 @@ import {
   TaskData,
   MediaInfo,
   Tag,
+  HitSnippetInfo,
   AudioSegments,
+  Duration,
   ImageResultsResultDetailLocation,
   ImageResult,
 } from "./vm_models"
@@ -94,7 +98,7 @@ export class Client extends AbstractClient {
     - 默认并发路数：10
     - 队列处理机制：
         - 当并发任务达到上限时，新任务进入队列等待处理;
-        - 支持通过`Priority`字段配置任务优先级（数值越大优先级越高），默认情况下，系统将优先处理较早推送的审核任务，新提交的任务将按时间顺序依次排列处理;
+        - 支持通过`Priority`字段配置任务优先级（数值越大优先级越高），默认情况下，系统优先处理较早推送的审核任务，新提交的任务将按时间顺序依次排列处理;
 - **直播视频（异步审核）**
     - 默认并发路数：100
     - 队列处理机制：

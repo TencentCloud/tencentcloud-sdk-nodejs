@@ -5115,6 +5115,10 @@ export interface InstanceInfo {
    * <p>集群待迁移的TCP地址</p>
    */
   OldEsPrivateTcpUrl?: string
+  /**
+   * <p>是否需要从VIP下线旧节点</p>
+   */
+  NeedOfflineOldNodesNotify?: boolean
 }
 
 /**

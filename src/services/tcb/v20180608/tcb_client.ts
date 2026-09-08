@@ -30,7 +30,7 @@ import {
   LocalizedMessage,
   GetProvidersRequest,
   DescribeCloudBaseRunServerVersionRequest,
-  CreateVmInstanceResponse,
+  DescribeCloudBaseRunServerVersionResponse,
   ModifyEnvPlanRequest,
   AddProviderRequest,
   ModifyClsTopicResponse,
@@ -44,7 +44,7 @@ import {
   SMSProviderTemplateConfig,
   CloudAppVersionItem,
   HTTPServiceCacheKeyParams,
-  CreateVmInstanceRequest,
+  DescribeCloudAppListResponse,
   DescribeEnvsRequest,
   ModifyUserResponse,
   ModifyProviderResponse,
@@ -69,14 +69,13 @@ import {
   EmailSmtpConfig,
   DescribeCloudBaseRunBuildLogRequest,
   DescribeHTTPServiceRouteRequest,
-  MongoConnector,
+  Pager,
   DescribeCurveDataResponse,
   DescribeBaasPackageListRequest,
   ClsInfo,
   HTTPServiceHeaderToAdd,
   GatewayVersionItem,
   DescribeAuthDomainsResponse,
-  VmInstance,
   ModifyClsTopicRequest,
   DescribeLoginConfigRequest,
   CreateHTTPServiceRouteRequest,
@@ -89,8 +88,7 @@ import {
   ModifyLoginConfigRequest,
   DeleteCloudAppResponse,
   DescribePGUserMigrationResponse,
-  DescribeCloudBaseRunServerVersionResponse,
-  DescribeAIModelsResponse,
+  DestroyStaticStoreRequest,
   DescribeGatewayVersionsResponse,
   DescribeGatewayVersionsRequest,
   CreateEnvResourceRequest,
@@ -115,7 +113,6 @@ import {
   CreateEnvResponse,
   RunCommandsResponse,
   DescribeTablesRequest,
-  StaticStoreInfo,
   DescribeApiKeyListResponse,
   DeleteAIModelResponse,
   ExecutePGSqlResponse,
@@ -133,11 +130,11 @@ import {
   DescribeBillingInfoResponse,
   CreateAuthDomainResponse,
   ModifyDatabaseACLRequest,
+  LogServiceInfo,
   DeleteApiKeyResponse,
-  DestroyStaticStoreRequest,
+  Tag,
   MigrationInput,
   UpdateAIModelRequest,
-  VMLoginConfiguration,
   CloudAppServiceItem,
   RenewEnvRequest,
   DescribeClientResponse,
@@ -157,18 +154,18 @@ import {
   ListPGUserMigrationsResponse,
   DescribeBillingInfoRequest,
   HpaPolicy,
-  DescribeVmInstancesRequest,
+  EmailTemplateConfig,
   BindClsResponse,
   LogObject,
   StaticCmd,
   DestroyStaticStoreResponse,
-  DeleteVmInstanceRequest,
+  DescribeAIModelsRequest,
   ManagedAIModel,
   DescribeUserListResponse,
   CreateTableRequest,
   ManagedAIModelSpec,
   CreateMySQLResponse,
-  DescribeCloudAppListResponse,
+  ModifyResourcePermissionRequest,
   DeleteAuthDomainResponse,
   DeleteApiKeyRequest,
   ModifyProviderRequest,
@@ -187,9 +184,11 @@ import {
   ListTablesRequest,
   CreateAuthDomainRequest,
   CreateHostingDomainResponse,
-  ModifyPGInstanceSpecResponse,
+  DescribeQuotaDataRequest,
+  StaticStorageInfo,
   DescribeEnvPlansRequest,
   DescribeCreateMySQLResult,
+  PurgeHTTPServiceCacheResponse,
   DeleteCloudAppRequest,
   ModifyResourcePermissionResponse,
   BuildStepStatus,
@@ -200,12 +199,12 @@ import {
   DescribeBaasPackageListResponse,
   PushPGUserMigrationsRequest,
   TkeClusterInfo,
-  VerifyHTTPServiceRouteRequest,
   Provider,
+  ModifyPGInstanceSpecResponse,
   DescribeSafeRuleResponse,
   CustomLogConfig,
   DescribeApiKeyListRequest,
-  Pager,
+  WxGatewayCustomConfig,
   ModifyEnvExtraResponse,
   MgoIndexKeys,
   DescribeStaticStoreRequest,
@@ -217,9 +216,10 @@ import {
   DescribeEnvAccountCircleResponse,
   MFALoginConfig,
   MgoCommandParam,
-  VMSpec,
+  PurgeHTTPServiceCacheRequest,
+  Variable,
   ModifyDatabaseACLResponse,
-  StaticStorageInfo,
+  HTTPServiceCachePurgeTask,
   DescribeHTTPServiceRouteResponse,
   CreateTableResponse,
   OwnershipVerificationFileInfo,
@@ -238,8 +238,7 @@ import {
   PostgreSQLInfo,
   CreateUserRequest,
   CreateApiKeyResponse,
-  VMSpecLightHouse,
-  ModifyResourcePermissionRequest,
+  VerifyHTTPServiceRouteRequest,
   DescribeMySQLTaskStatusResponse,
   TableInfo,
   AssumeRoleForAllocatedEnvRequest,
@@ -259,15 +258,12 @@ import {
   DescribeResourcePermissionRequest,
   HTTPServiceCacheAction,
   ResourcePermission,
-  Variable,
   ModifyHTTPServiceRouteResponse,
-  EmailTemplateConfig,
   GetProvidersResponse,
-  DescribeQuotaDataRequest,
+  DescribeHTTPServiceCachePurgeTaskResponse,
   CreateStaticStoreResponse,
   ModifyPGInstanceSpecRequest,
   DescribePGUserMigrationRequest,
-  DescribeVmInstancesResponse,
   ApiKeyToken,
   StorageInfo,
   ModifyUserResp,
@@ -281,7 +277,7 @@ import {
   DescribeCreditsUsageDetailRequest,
   AuthDomain,
   RunSqlResponse,
-  LogServiceInfo,
+  DescribeHTTPServiceCachePurgeTaskRequest,
   DescribeClientRequest,
   DescribeCloudAppInfoResponse,
   ExternalStorage,
@@ -292,22 +288,20 @@ import {
   CreateCustomLoginKeyResponse,
   ListTablesResponse,
   ModifyClientRequest,
-  WxGatewayCustomConfig,
   ProviderResponseParametersMap,
   DeleteUsersResponse,
   DescribeCloudBaseBuildServiceRequest,
   SearchClsLogRequest,
-  InquireVmPriceRequest,
+  MongoConnector,
   CheckTcbServiceRequest,
   HTTPServiceCacheRule,
   PermissionInfo,
   DescribeManagedAIModelListResponse,
   SearchClsLogResponse,
-  DeleteVmInstanceResponse,
+  DescribeAIModelsResponse,
   PlanInfo,
   StaticEnvironment,
   LocalizedTemplate,
-  Tag,
   CreateEnvRequest,
   DeleteHTTPServiceRouteRequest,
   RunCommandsRequest,
@@ -316,9 +310,8 @@ import {
   MySQLTaskStatus,
   BuildSource,
   DescribeAuthDomainsRequest,
-  DescribeVmSpecResponse,
+  StaticStoreInfo,
   ModifyStorageSourceRequest,
-  DescribeAIModelsRequest,
   VerifyHTTPServiceRouteCheckItem,
   RunSqlRequest,
   DescribeEnvPlansResponse,
@@ -333,9 +326,7 @@ import {
   DescribeDatabaseACLRequest,
   DescribeCreditsUsageResponse,
   DescribeDatabaseACLResponse,
-  VMPrice,
   DeleteProviderRequest,
-  DescribeVmSpecRequest,
   PushPGUserMigrationsResponse,
   BindStorageSourceResponse,
   EnvPkgCreditsUsage,
@@ -344,7 +335,6 @@ import {
   AIModelSecret,
   HTTPServiceRouteParam,
   IndexInfo,
-  InquireVmPriceResponse,
   CreateUserResp,
   AIModelGroup,
   ModifyLoginConfigResponse,
@@ -531,6 +521,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 本接口PurgeHTTPServiceCache为异步操作，清除指定环境下 HTTPService 域名的缓存，操作不可逆，仅影响指定 Domain 的缓存命中，不影响源站数据。用于清除HTTP访问服务域名缓存。支持刷新CDN和EO两种类型。清除缓存后会生成任务id，通过DescribeHTTPServiceCachePurgeTask传入任务id可查询任务进度和详细信息。
+   */
+  async PurgeHTTPServiceCache(
+    req: PurgeHTTPServiceCacheRequest,
+    cb?: (error: string, rep: PurgeHTTPServiceCacheResponse) => void
+  ): Promise<PurgeHTTPServiceCacheResponse> {
+    return this.request("PurgeHTTPServiceCache", req, cb)
+  }
+
+  /**
    * 删除tcb用户
    */
   async DeleteUsers(
@@ -600,16 +600,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeCloudAppInfoResponse) => void
   ): Promise<DescribeCloudAppInfoResponse> {
     return this.request("DescribeCloudAppInfo", req, cb)
-  }
-
-  /**
-   * 销毁云服务器实例
-   */
-  async DeleteVmInstance(
-    req: DeleteVmInstanceRequest,
-    cb?: (error: string, rep: DeleteVmInstanceResponse) => void
-  ): Promise<DeleteVmInstanceResponse> {
-    return this.request("DeleteVmInstance", req, cb)
   }
 
   /**
@@ -728,16 +718,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: RunCommandsResponse) => void
   ): Promise<RunCommandsResponse> {
     return this.request("RunCommands", req, cb)
-  }
-
-  /**
-   * 查询环境下的云服务器列表
-   */
-  async DescribeVmInstances(
-    req: DescribeVmInstancesRequest,
-    cb?: (error: string, rep: DescribeVmInstancesResponse) => void
-  ): Promise<DescribeVmInstancesResponse> {
-    return this.request("DescribeVmInstances", req, cb)
   }
 
   /**
@@ -1049,17 +1029,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 创建虚拟服务器
-创建流程为先调用[DescribeVmSpec](https://cloud.tencent.com/document/product/876/129360)获取可购买的规格，同时调用[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)拉取镜像列表，选中一个规格和一个镜像后，调用[InquireVmPrice](https://cloud.tencent.com/document/product/876/129759)询价，如果价格可接受，调用此接口创建实例
-     */
-  async CreateVmInstance(
-    req: CreateVmInstanceRequest,
-    cb?: (error: string, rep: CreateVmInstanceResponse) => void
-  ): Promise<CreateVmInstanceResponse> {
-    return this.request("CreateVmInstance", req, cb)
-  }
-
-  /**
    * 本接口DeleteHTTPServiceRoute用于删除HTTP访问服务域名或者路由。可批量删除多条path路由、删除域名及所有path路由，如果Paths字段为空则删除域名及所有path路由，如果Paths不为空则仅删除path路由。
    */
   async DeleteHTTPServiceRoute(
@@ -1113,13 +1082,14 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 查询云应用服务版本列表信息
-   */
-  async DescribeCloudAppVersionList(
-    req: DescribeCloudAppVersionListRequest,
-    cb?: (error: string, rep: DescribeCloudAppVersionListResponse) => void
-  ): Promise<DescribeCloudAppVersionListResponse> {
-    return this.request("DescribeCloudAppVersionList", req, cb)
+     * 修改指定云开发环境的登录策略配置。支持开启或关闭手机号短信登录、邮箱登录、用户名密码登录和匿名登录，同时可配置短信验证码发送通道、MFA 多因子认证和密码更新策略。
+修改后立即生效，影响该环境下所有终端用户的登录行为。
+     */
+  async ModifyLoginConfig(
+    req: ModifyLoginConfigRequest,
+    cb?: (error: string, rep: ModifyLoginConfigResponse) => void
+  ): Promise<ModifyLoginConfigResponse> {
+    return this.request("ModifyLoginConfig", req, cb)
   }
 
   /**
@@ -1322,16 +1292,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 查询服务器价格
-   */
-  async InquireVmPrice(
-    req: InquireVmPriceRequest,
-    cb?: (error: string, rep: InquireVmPriceResponse) => void
-  ): Promise<InquireVmPriceResponse> {
-    return this.request("InquireVmPrice", req, cb)
-  }
-
-  /**
      * 本接口用于获取当前环境的安全域名列表。
 云开发会校验网页应用请求的来源域名，您需要将来源域名加入到WEB安全域名列表中。
 可以通过接口 [CreateAuthDomain](https://cloud.tencent.com/document/product/876/42764) 增加安全域名。
@@ -1341,17 +1301,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeAuthDomainsResponse) => void
   ): Promise<DescribeAuthDomainsResponse> {
     return this.request("DescribeAuthDomains", req, cb)
-  }
-
-  /**
-     * 修改指定云开发环境的登录策略配置。支持开启或关闭手机号短信登录、邮箱登录、用户名密码登录和匿名登录，同时可配置短信验证码发送通道、MFA 多因子认证和密码更新策略。
-修改后立即生效，影响该环境下所有终端用户的登录行为。
-     */
-  async ModifyLoginConfig(
-    req: ModifyLoginConfigRequest,
-    cb?: (error: string, rep: ModifyLoginConfigResponse) => void
-  ): Promise<ModifyLoginConfigResponse> {
-    return this.request("ModifyLoginConfig", req, cb)
   }
 
   /**
@@ -1417,6 +1366,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeDatabaseACLResponse) => void
   ): Promise<DescribeDatabaseACLResponse> {
     return this.request("DescribeDatabaseACL", req, cb)
+  }
+
+  /**
+   * 在Postgres数据库上执行SQL
+   */
+  async ExecutePGSql(
+    req: ExecutePGSqlRequest,
+    cb?: (error: string, rep: ExecutePGSqlResponse) => void
+  ): Promise<ExecutePGSqlResponse> {
+    return this.request("ExecutePGSql", req, cb)
   }
 
   /**
@@ -1507,18 +1466,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 修改身份认证源。更新指定云开发环境下已有身份认证源的配置信息，支持修改基本信息（名称、图标、描述）、协议连接配置（ClientId、ClientSecret、端点地址等）、登录行为控制（透传模式、自动注册、邮箱/手机号自动关联）以及启用状态。
-对于 OIDC 类型身份源，修改 Issuer 后将自动通过 OpenID Connect Discovery 重新获取端点配置。
-若自定义登录（CUSTOM）或邮箱登录（EMAIL）身份源尚不存在，调用该接口时将自动创建。
-     */
-  async ModifyProvider(
-    req: ModifyProviderRequest,
-    cb?: (error: string, rep: ModifyProviderResponse) => void
-  ): Promise<ModifyProviderResponse> {
-    return this.request("ModifyProvider", req, cb)
-  }
-
-  /**
    * 修改tcb用户
    */
   async ModifyUser(
@@ -1559,22 +1506,34 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 云服务器规格list
-   */
-  async DescribeVmSpec(
-    req: DescribeVmSpecRequest,
-    cb?: (error: string, rep: DescribeVmSpecResponse) => void
-  ): Promise<DescribeVmSpecResponse> {
-    return this.request("DescribeVmSpec", req, cb)
+     * 修改身份认证源。更新指定云开发环境下已有身份认证源的配置信息，支持修改基本信息（名称、图标、描述）、协议连接配置（ClientId、ClientSecret、端点地址等）、登录行为控制（透传模式、自动注册、邮箱/手机号自动关联）以及启用状态。
+对于 OIDC 类型身份源，修改 Issuer 后将自动通过 OpenID Connect Discovery 重新获取端点配置。
+若自定义登录（CUSTOM）或邮箱登录（EMAIL）身份源尚不存在，调用该接口时将自动创建。
+     */
+  async ModifyProvider(
+    req: ModifyProviderRequest,
+    cb?: (error: string, rep: ModifyProviderResponse) => void
+  ): Promise<ModifyProviderResponse> {
+    return this.request("ModifyProvider", req, cb)
   }
 
   /**
-   * 在Postgres数据库上执行SQL
+   * 查询云应用服务版本列表信息
    */
-  async ExecutePGSql(
-    req: ExecutePGSqlRequest,
-    cb?: (error: string, rep: ExecutePGSqlResponse) => void
-  ): Promise<ExecutePGSqlResponse> {
-    return this.request("ExecutePGSql", req, cb)
+  async DescribeCloudAppVersionList(
+    req: DescribeCloudAppVersionListRequest,
+    cb?: (error: string, rep: DescribeCloudAppVersionListResponse) => void
+  ): Promise<DescribeCloudAppVersionListResponse> {
+    return this.request("DescribeCloudAppVersionList", req, cb)
+  }
+
+  /**
+   * 本接口DescribeHTTPServiceCachePurgeTask为只读查询，不修改任何缓存或环境资源，仅返回指定环境下域名缓存刷新任务的状态与时间等信息。通过PurgeHTTPServiceCache清除域名缓存后，可通过此接口传入任务id可查询清除任务状态、时间、缓存类型等信息。也可通过此接口查询历史任务记录。
+   */
+  async DescribeHTTPServiceCachePurgeTask(
+    req: DescribeHTTPServiceCachePurgeTaskRequest,
+    cb?: (error: string, rep: DescribeHTTPServiceCachePurgeTaskResponse) => void
+  ): Promise<DescribeHTTPServiceCachePurgeTaskResponse> {
+    return this.request("DescribeHTTPServiceCachePurgeTask", req, cb)
   }
 }

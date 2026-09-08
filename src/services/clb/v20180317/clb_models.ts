@@ -3687,6 +3687,10 @@ export interface TestServiceProviderConnectionRequest {
    * <p>对应模型的能力</p><p>枚举值：</p><ul><li>chat： 生文能力</li><li>embedding： 向量能力</li></ul>
    */
   Capability?: string
+  /**
+   * <p>端点路径</p>
+   */
+  EndpointPath?: string
 }
 
 /**

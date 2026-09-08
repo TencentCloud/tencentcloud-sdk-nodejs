@@ -81,7 +81,6 @@ import {
   PhoneVerificationCUCCRequest,
   PhoneVerificationCMCCRequest,
   DetectInfoText,
-  ImageRecognitionResponse,
   GetDetectInfoResponse,
   IdCardOCRVerificationResponse,
   IdCardVerificationResponse,
@@ -103,7 +102,6 @@ import {
   ChargeDetail,
   ParseNfcDataRequest,
   PhoneVerificationCTCCRequest,
-  ImageRecognitionRequest,
   BankCard4EVerificationRequest,
   GetNFCTokenResponse,
   GetActionSequenceResponse,
@@ -307,13 +305,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 传入照片和身份信息，判断该照片与权威库的证件照是否属于同一个人（该接口已停止接入，新客户请使用<a href="https://cloud.tencent.com/document/product/1007/102203">照片人脸核身（V2.0）</a>接口）。
+   * 解析SDK获取到的证件NFC数据，接口传入SDK返回的ReqId，返回证件信息（个别字段为特定证件类型特有）。SDK生成的ReqId五分钟内有效，重复查询仅收一次费。支持身份证类证件（二代身份证、港澳居住证、台湾居住证、外国人永居证）以及旅行类证件（港澳通行证、台湾通行证、台胞证、回乡证）的NFC识别及核验。
    */
-  async ImageRecognition(
-    req: ImageRecognitionRequest,
-    cb?: (error: string, rep: ImageRecognitionResponse) => void
-  ): Promise<ImageRecognitionResponse> {
-    return this.request("ImageRecognition", req, cb)
+  async ParseNfcData(
+    req: ParseNfcDataRequest,
+    cb?: (error: string, rep: ParseNfcDataResponse) => void
+  ): Promise<ParseNfcDataResponse> {
+    return this.request("ParseNfcData", req, cb)
   }
 
   /**
@@ -414,16 +412,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LivenessRecognitionResponse) => void
   ): Promise<LivenessRecognitionResponse> {
     return this.request("LivenessRecognition", req, cb)
-  }
-
-  /**
-   * 解析SDK获取到的证件NFC数据，接口传入SDK返回的ReqId，返回证件信息（个别字段为特定证件类型特有）。SDK生成的ReqId五分钟内有效，重复查询仅收一次费。支持身份证类证件（二代身份证、港澳居住证、台湾居住证、外国人永居证）以及旅行类证件（港澳通行证、台湾通行证、台胞证、回乡证）的NFC识别及核验。
-   */
-  async ParseNfcData(
-    req: ParseNfcDataRequest,
-    cb?: (error: string, rep: ParseNfcDataResponse) => void
-  ): Promise<ParseNfcDataResponse> {
-    return this.request("ParseNfcData", req, cb)
   }
 
   /**

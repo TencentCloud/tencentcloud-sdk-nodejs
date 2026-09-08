@@ -2876,6 +2876,14 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    */
   RealTimeMonitoring: number
   /**
+   * <p>自定义路径列表，仅CheckPattern=2/3时生效：2表示仅检测这些路径，3表示检测时排除这些路径。最少1条，最多200条</p>
+   */
+  CustomPaths?: Array<string>
+  /**
+   * <p>监控自定义路径列表，仅MonitoringPattern=2/3时生效：2表示仅监控这些路径，3表示监控时排除这些路径。最少1条，最多200条</p>
+   */
+  MonitorCustomPaths?: Array<string>
+  /**
    * <p>自选服务器时必须 主机quuid的string数组</p>
    */
   QuuidList?: Array<string>
@@ -14687,7 +14695,7 @@ export interface ExportVulDefenceListRequest {
  */
 export interface CreateScanMalwareSettingResponse {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId?: number
   /**
@@ -23005,27 +23013,31 @@ export type DescribeBaselineDefaultStrategyListRequest = null
  */
 export interface CreateScanMalwareSettingRequest {
   /**
-   * 扫描模式 0 全盘扫描, 1 快速扫描
+   * <p>扫描模式 0 全盘扫描, 1 快速扫描</p>
    */
   ScanPattern: number
   /**
-   * 服务器分类：1:专业版服务器；2:自选服务器
+   * <p>服务器分类：1:专业版服务器；2:自选服务器</p>
    */
   HostType: number
   /**
-   * 自选服务器时生效，主机quuid的string数组
+   * <p>自定义路径列表，仅ScanPattern=2/3时生效：2表示仅扫描这些路径，3表示扫描时排除这些路径。最少1条，最多200条</p>
+   */
+  CustomPaths?: Array<string>
+  /**
+   * <p>自选服务器时生效，主机quuid的string数组</p>
    */
   QuuidList?: Array<string>
   /**
-   * 超时时间单位 秒 默认3600 秒
+   * <p>超时时间单位 秒 默认3600 秒</p>
    */
   TimeoutPeriod?: number
   /**
-   * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
+   * <p>1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）</p>
    */
   EngineType?: number
   /**
-   * 是否开启恶意进程查杀[0:未开启,1:开启]
+   * <p>是否开启恶意进程查杀[0:未开启,1:开启]</p>
    */
   EnableMemShellScan?: number
 }
@@ -23060,6 +23072,10 @@ export interface DescribeMalwareTimingScanSettingResponse {
    */
   CheckPattern?: number
   /**
+   * <p>自定义路径列表，CheckPattern=2/3时生效</p>
+   */
+  CustomPaths?: Array<string>
+  /**
    * <p>检测周期 开始时间</p>
    */
   StartTime?: string
@@ -23079,6 +23095,10 @@ export interface DescribeMalwareTimingScanSettingResponse {
    * <p>监控模式 0 标准 1深度</p>
    */
   MonitoringPattern?: number
+  /**
+   * <p>监控自定义路径列表，MonitoringPattern=2/3时生效</p>
+   */
+  MonitorCustomPaths?: Array<string>
   /**
    * <p>周期 1每天</p>
    */

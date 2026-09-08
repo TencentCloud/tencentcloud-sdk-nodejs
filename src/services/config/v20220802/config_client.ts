@@ -286,7 +286,7 @@ export class Client extends AbstractClient {
    * 资源监控管理-开启监控
    */
   async OpenConfigRecorder(
-    req?: OpenConfigRecorderRequest,
+    req: OpenConfigRecorderRequest,
     cb?: (error: string, rep: OpenConfigRecorderResponse) => void
   ): Promise<OpenConfigRecorderResponse> {
     return this.request("OpenConfigRecorder", req, cb)

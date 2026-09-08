@@ -27,6 +27,7 @@ import {
   AddNodesResponse,
   ExpansionNodeConfig,
   NodeActivity,
+  EnableClusterMonitorResponse,
   ModifyClusterDeletionProtectionResponse,
   DescribeClusterDedicatedProxyResponse,
   CreateWorkspacesResponse,
@@ -43,7 +44,7 @@ import {
   GenerateRegisterCodeRequest,
   ModifyScheduledActionResponse,
   ModifyInitNodeScriptsRequest,
-  AttachNodesRequest,
+  DisableClusterMonitorRequest,
   SpaceChargePrepaid,
   DescribeWorkspacesResponse,
   Tag,
@@ -61,12 +62,14 @@ import {
   DescribeWorkspacesRequest,
   ModifyNodeAttributeRequest,
   AddQueueRequest,
+  AttachNodesRequest,
   ExpansionPolicy,
   DeleteScheduledActionRequest,
   QueueConfigOverview,
   DescribeInstanceFamiliesResponse,
   ScalingPolicy,
   DescribeQueuesResponse,
+  EnableClusterMonitorRequest,
   SubmitJobRequest,
   Job,
   DescribeScheduledActionsResponse,
@@ -127,6 +130,7 @@ import {
   DeleteQueueRequest,
   Filter,
   ModifyInitNodeScriptsResponse,
+  DescribeClusterMonitorStatusResponse,
   Docker,
   InquirePriceCreateWorkspacesResponse,
   ModifyWorkspacesChargeTypeRequest,
@@ -153,6 +157,7 @@ import {
   CFSOption,
   Price,
   CreateWorkspacesRequest,
+  DisableClusterMonitorResponse,
   TemplateOverrides,
   DescribeQueueAutoScalingOverviewResponse,
   SpaceSystemDisk,
@@ -163,7 +168,7 @@ import {
   DescribeJobsResponse,
   AddNodesRequest,
   CFSOptionOverview,
-  ModifyWorkspacesAttributeRequest,
+  DescribeClusterMonitorStatusRequest,
   AddClusterStorageOptionRequest,
   GooseFSxOption,
   ModifyWorkspacesChargeTypeResponse,
@@ -174,6 +179,7 @@ import {
   StorageMount,
   InternetAccessible,
   SetQueueAutoScalingRequest,
+  ModifyWorkspacesAttributeRequest,
   JobView,
   InquirePriceModifyWorkspacesChargeTypeResponse,
   EnvVar,
@@ -188,6 +194,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("thpc.tencentcloudapi.com", "2023-03-21", clientConfig)
+  }
+
+  /**
+   * 本接口 (ModifyWorkspacesAttribute) 用于修改工作空间的属性（目前只支持修改工作空间的名称）。
+   */
+  async ModifyWorkspacesRenewFlag(
+    req: ModifyWorkspacesRenewFlagRequest,
+    cb?: (error: string, rep: ModifyWorkspacesRenewFlagResponse) => void
+  ): Promise<ModifyWorkspacesRenewFlagResponse> {
+    return this.request("ModifyWorkspacesRenewFlag", req, cb)
   }
 
   /**
@@ -233,6 +249,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (ModifyInitNodeScripts) 用于修改节点初始化脚本。
+   */
+  async DisableClusterMonitor(
+    req: DisableClusterMonitorRequest,
+    cb?: (error: string, rep: DisableClusterMonitorResponse) => void
+  ): Promise<DisableClusterMonitorResponse> {
+    return this.request("DisableClusterMonitor", req, cb)
+  }
+
+  /**
    * 本接口 (CreateWorkspaces) 用于创建工作空间。
    */
   async CreateWorkspaces(
@@ -273,13 +299,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAutoScalingConfiguration)用于查询集群弹性伸缩配置信息。本接口仅适用于弹性伸缩类型为THPC_AS的集群。
+   * 本接口用于查询作业的提交信息。
    */
-  async DescribeAutoScalingConfiguration(
-    req: DescribeAutoScalingConfigurationRequest,
-    cb?: (error: string, rep: DescribeAutoScalingConfigurationResponse) => void
-  ): Promise<DescribeAutoScalingConfigurationResponse> {
-    return this.request("DescribeAutoScalingConfiguration", req, cb)
+  async DescribeJobSubmitInfo(
+    req: DescribeJobSubmitInfoRequest,
+    cb?: (error: string, rep: DescribeJobSubmitInfoResponse) => void
+  ): Promise<DescribeJobSubmitInfoResponse> {
+    return this.request("DescribeJobSubmitInfo", req, cb)
   }
 
   /**
@@ -457,13 +483,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改节点属性
+   * 本接口 (ModifyInitNodeScripts) 用于修改节点初始化脚本。
    */
-  async ModifyNodeAttribute(
-    req: ModifyNodeAttributeRequest,
-    cb?: (error: string, rep: ModifyNodeAttributeResponse) => void
-  ): Promise<ModifyNodeAttributeResponse> {
-    return this.request("ModifyNodeAttribute", req, cb)
+  async EnableClusterMonitor(
+    req: EnableClusterMonitorRequest,
+    cb?: (error: string, rep: EnableClusterMonitorResponse) => void
+  ): Promise<EnableClusterMonitorResponse> {
+    return this.request("EnableClusterMonitor", req, cb)
   }
 
   /**
@@ -533,13 +559,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于查询作业的提交信息。
+   * 本接口(DescribeAutoScalingConfiguration)用于查询集群弹性伸缩配置信息。本接口仅适用于弹性伸缩类型为THPC_AS的集群。
    */
-  async DescribeJobSubmitInfo(
-    req: DescribeJobSubmitInfoRequest,
-    cb?: (error: string, rep: DescribeJobSubmitInfoResponse) => void
-  ): Promise<DescribeJobSubmitInfoResponse> {
-    return this.request("DescribeJobSubmitInfo", req, cb)
+  async DescribeAutoScalingConfiguration(
+    req: DescribeAutoScalingConfigurationRequest,
+    cb?: (error: string, rep: DescribeAutoScalingConfigurationResponse) => void
+  ): Promise<DescribeAutoScalingConfigurationResponse> {
+    return this.request("DescribeAutoScalingConfiguration", req, cb)
+  }
+
+  /**
+   * 本接口用于修改节点属性
+   */
+  async ModifyNodeAttribute(
+    req: ModifyNodeAttributeRequest,
+    cb?: (error: string, rep: ModifyNodeAttributeResponse) => void
+  ): Promise<ModifyNodeAttributeResponse> {
+    return this.request("ModifyNodeAttribute", req, cb)
   }
 
   /**
@@ -667,13 +703,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (ModifyWorkspacesAttribute) 用于修改工作空间的属性（目前只支持修改工作空间的名称）。
+   * 本接口 (ModifyInitNodeScripts) 用于修改节点初始化脚本。
    */
-  async ModifyWorkspacesRenewFlag(
-    req: ModifyWorkspacesRenewFlagRequest,
-    cb?: (error: string, rep: ModifyWorkspacesRenewFlagResponse) => void
-  ): Promise<ModifyWorkspacesRenewFlagResponse> {
-    return this.request("ModifyWorkspacesRenewFlag", req, cb)
+  async DescribeClusterMonitorStatus(
+    req: DescribeClusterMonitorStatusRequest,
+    cb?: (error: string, rep: DescribeClusterMonitorStatusResponse) => void
+  ): Promise<DescribeClusterMonitorStatusResponse> {
+    return this.request("DescribeClusterMonitorStatus", req, cb)
   }
 
   /**

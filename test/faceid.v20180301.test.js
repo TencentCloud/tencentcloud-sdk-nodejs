@@ -198,9 +198,9 @@ it("faceid.v20180301.GetFaceIdResult", async function () {
     }
 })
 
-it("faceid.v20180301.ImageRecognition", async function () {
+it("faceid.v20180301.ParseNfcData", async function () {
     try {
-       const data = await client.ImageRecognition({})
+       const data = await client.ParseNfcData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,16 +301,6 @@ it("faceid.v20180301.PhoneVerificationCUCC", async function () {
 it("faceid.v20180301.LivenessRecognition", async function () {
     try {
        const data = await client.LivenessRecognition({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("faceid.v20180301.ParseNfcData", async function () {
-    try {
-       const data = await client.ParseNfcData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

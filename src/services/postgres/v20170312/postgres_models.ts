@@ -959,17 +959,17 @@ export interface BackupSummary {
 }
 
 /**
- * AddDBInstanceToReadOnlyGroup请求参数结构体
+ * ClosePostgRESTService返回参数结构体
  */
-export interface AddDBInstanceToReadOnlyGroupRequest {
+export interface ClosePostgRESTServiceResponse {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>关闭PostgREST服务任务ID</p>
    */
-  DBInstanceId: string
+  TaskId?: number
   /**
-   * 只读组ID。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ReadOnlyGroupId: string
+  RequestId?: string
 }
 
 /**
@@ -1167,21 +1167,13 @@ export interface RenewInstanceRequest {
 export type DescribeBackupOverviewRequest = null
 
 /**
- * DescribeRegions返回参数结构体
+ * DescribeMem0Service请求参数结构体
  */
-export interface DescribeRegionsResponse {
+export interface DescribeMem0ServiceRequest {
   /**
-   * 返回的结果数量。
+   * <p>实例ID</p>
    */
-  TotalCount?: number
-  /**
-   * 地域信息集合。
-   */
-  RegionSet?: Array<RegionInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DBInstanceId: string
 }
 
 /**
@@ -1716,21 +1708,13 @@ export interface CloneDBInstanceResponse {
 }
 
 /**
- * ModifyDBInstanceReadOnlyGroup请求参数结构体
+ * ClosePostgRESTService请求参数结构体
  */
-export interface ModifyDBInstanceReadOnlyGroupRequest {
+export interface ClosePostgRESTServiceRequest {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID</p><p>参数格式：postgres-0uwjmh8t</p>
    */
   DBInstanceId: string
-  /**
-   * 当前实例所在只读组ID
-   */
-  ReadOnlyGroupId: string
-  /**
-   * 实例修改的目标只读组ID
-   */
-  NewReadOnlyGroupId: string
 }
 
 /**
@@ -1912,6 +1896,16 @@ export interface DescribeDBProxySpecsResponse {
 }
 
 /**
+ * DescribePostgRESTService请求参数结构体
+ */
+export interface DescribePostgRESTServiceRequest {
+  /**
+   * <p>实例ID</p><p>参数格式：postgres-19nmz2xb</p>
+   */
+  DBInstanceId: string
+}
+
+/**
  * CreateDBProxyAddress请求参数结构体
  */
 export interface CreateDBProxyAddressRequest {
@@ -2075,6 +2069,20 @@ export interface ModifyBaseBackupExpireTimeResponse {
  * ModifyMaintainTimeWindow返回参数结构体
  */
 export interface ModifyMaintainTimeWindowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CloseMem0Service返回参数结构体
+ */
+export interface CloseMem0ServiceResponse {
+  /**
+   * <p>关闭mem0服务任务ID</p>
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2677,17 +2685,31 @@ export interface CreateAuditLogFileResponse {
  */
 export interface ModifyPrivilege {
   /**
-   * 要修改的数据库对象及权限列表
+   * <p>要修改的数据库对象及权限列表</p>
    */
   DatabasePrivilege?: DatabasePrivilege
   /**
-   * 修改的方式，当前仅支持grantObject、revokeObject、alterRole。grantObject代表授权、revokeObject代表收回权、alterRole代表修改账号类型。
+   * <p>修改的方式，当前仅支持grantObject、revokeObject、alterRole、grantRole、revoke，当前仅支持grantObject、revokeObject、alterRole、grantRole、revokeRole。gRole。grantObject代表授权、revokeObject代表收回权、alterRole代表修改账号类型、grantRole代表加入对应角色、revokeRole 代表移出对应角色。</p>
    */
   ModifyType?: string
   /**
-   * 当ModifyType为revokeObject才需要此参数，参数为true时，撤销权限会级联撤销。默认为false。
+   * <p>当ModifyType为revokeObject才需要此参数，参数为true时，撤销权限会级联撤销。默认为false。</p>
    */
   IsCascade?: boolean
+}
+
+/**
+ * OpenMem0Service返回参数结构体
+ */
+export interface OpenMem0ServiceResponse {
+  /**
+   * <p>开启Mem0服务任务ID</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2953,23 +2975,23 @@ export interface ParamSpecRelation {
  */
 export interface DatabaseObject {
   /**
-   * 支持使用的数据库对象类型有：account,database,schema,sequence,procedure,type,function,table,view,matview,column。
+   * <p>支持使用的数据库对象类型有：account,database,schema,sequence,procedure,type,function,table,view,matview,column。</p>
    */
   ObjectType: string
   /**
-   * 所描述的数据库对象名称
+   * <p>所描述的数据库对象名称，或者当ModifyType为grantRole / revokeRole时，必须等于顶层UserName</p>
    */
   ObjectName: string
   /**
-   * 所要描述的数据库对象，所属的数据库名称。当描述对象类型不为database时，此参数必选。
+   * <p>所要描述的数据库对象，所属的数据库名称。当描述对象类型不为database时，此参数必选。</p>
    */
   DatabaseName?: string
   /**
-   * 所要描述的数据库对象，所属的模式名称。当描述对象不为database、schema时，此参数必选。
+   * <p>所要描述的数据库对象，所属的模式名称。当描述对象不为database、schema时，此参数必选。</p>
    */
   SchemaName?: string
   /**
-   * 所要描述的数据库对象，所属的表名称。当描述的对象类型为column时，此参数必填。
+   * <p>所要描述的数据库对象，所属的表名称。当描述的对象类型为column时，此参数必填。</p>
    */
   TableName?: string
 }
@@ -3219,6 +3241,20 @@ export interface DeleteReadOnlyGroupNetworkAccessResponse {
   FlowId?: number
   /**
    * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenPostgRESTService返回参数结构体
+ */
+export interface OpenPostgRESTServiceResponse {
+  /**
+   * <p>开启PostgREST服务任务ID</p>
    */
   TaskId?: number
   /**
@@ -3506,21 +3542,21 @@ export interface DescribeClassesRequest {
 }
 
 /**
- * ReloadBalanceDBProxyNode请求参数结构体
+ * ModifyDBInstanceReadOnlyGroup请求参数结构体
  */
-export interface ReloadBalanceDBProxyNodeRequest {
+export interface ModifyDBInstanceReadOnlyGroupRequest {
   /**
-   * <p>实例ID</p>
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * <p>Proxy代理组ID（不传则默认操作该实例下唯一的代理）</p>
+   * 当前实例所在只读组ID
    */
-  ProxyGroupId?: string
+  ReadOnlyGroupId: string
   /**
-   * <p>Proxy地址ID。传入时校验归属，实际重平衡为代理组维度</p>
+   * 实例修改的目标只读组ID
    */
-  AddressId?: string
+  NewReadOnlyGroupId: string
 }
 
 /**
@@ -3679,6 +3715,20 @@ export interface Xlog {
    * 备份文件大小
    */
   Size?: number
+}
+
+/**
+ * ModifyDBProxy返回参数结构体
+ */
+export interface ModifyDBProxyResponse {
+  /**
+   * <p>订单号，仅变配（节点规格/数量变更）下单成功时返回；仅修改 Description 时不下单，本字段为空。</p>
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5171,6 +5221,34 @@ export interface ModifyParameterTemplateRequest {
 }
 
 /**
+ * DescribePostgRESTService返回参数结构体
+ */
+export interface DescribePostgRESTServiceResponse {
+  /**
+   * <p>PostgREST服务运行状态</p><p>枚举值：</p><ul><li>closed： 已关闭</li><li>creating： 创建中</li><li>running： 运行中</li></ul><p>默认值：closed</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p><p>参数格式：2026-05-10 10:00:00</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>PostgREST服务网络连接信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkAccessList?: Array<DBInstanceNetInfo>
+  /**
+   * <p>PostgREST服务JWT值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JWTSecret?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBVersions返回参数结构体
  */
 export interface DescribeDBVersionsResponse {
@@ -5215,12 +5293,12 @@ export interface ModifyAuditServiceRequest {
  */
 export interface DatabasePrivilege {
   /**
-   * 数据库对象，当ObjectType为database时，DatabaseName/SchemaName/TableName可为空；当ObjectType为schema时，SchemaName/TableName可为空；当ObjectType为column时，TableName不可为空，其余情况均可为空。
+   * <p>数据库对象，当ObjectType为database时，DatabaseName/SchemaName/TableName可为空；当ObjectType为schema时，SchemaName/TableName可为空；当ObjectType为column时，TableName不可为空，其余情况均可为空。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Object?: DatabaseObject
   /**
-   * 指定账号对数据库对象拥有的权限列表
+   * <p>指定账号对数据库对象拥有的权限列表，或者角色权限修改</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivilegeSet?: Array<string>
@@ -5256,6 +5334,16 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CloseMem0Service请求参数结构体
+ */
+export interface CloseMem0ServiceRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  DBInstanceId: string
 }
 
 /**
@@ -5525,6 +5613,24 @@ export interface DescribeZonesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReloadBalanceDBProxyNode请求参数结构体
+ */
+export interface ReloadBalanceDBProxyNodeRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>Proxy代理组ID（不传则默认操作该实例下唯一的代理）</p>
+   */
+  ProxyGroupId?: string
+  /**
+   * <p>Proxy地址ID。传入时校验归属，实际重平衡为代理组维度</p>
+   */
+  AddressId?: string
 }
 
 /**
@@ -5889,44 +5995,45 @@ export interface ModifyDBProxySSLConfigResponse {
  */
 export interface AccountInfo {
   /**
-   * 实例ID，形如postgres-lnp6j617
+   * <p>实例ID，形如postgres-lnp6j617</p>
    */
   DBInstanceId?: string
   /**
-   * 账号
+   * <p>账号</p>
    */
   UserName?: string
   /**
-   * 账号备注
+   * <p>账号备注</p>
    */
   Remark?: string
   /**
-   * 账号状态。 1-创建中，2-正常，3-修改中，4-密码重置中，5-锁定中，-1-删除中
+   * <p>账号状态。 1-创建中，2-正常，3-修改中，4-密码重置中，5-锁定中，-1-删除中</p>
    */
   Status?: number
   /**
-   * 账号创建时间
+   * <p>账号创建时间</p>
    */
   CreateTime?: string
   /**
-   * 账号最后一次更新时间
+   * <p>账号最后一次更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 账号密码最近一次修改时间。
-
-此字段只在2025-10-31后才生效，之前无论是否修改密码，该值统一为默认值：0000-00-00 00:00:00
-同时仅通过云API或者管控控制台修改密码，才会更新该字段。
+   * <p>账号密码最近一次修改时间。</p><p>此字段只在2025-10-31后才生效，之前无论是否修改密码，该值统一为默认值：0000-00-00 00:00:00<br>同时仅通过云API或者管控控制台修改密码，才会更新该字段。</p>
    */
   PasswordUpdateTime?: string
   /**
-   * 账号类型。支持normal、tencentDBSuper。normal指代普通用户，tencentDBSuper为拥有pg_tencentdb_superuser角色的账号。
+   * <p>账号类型。支持normal、tencentDBSuper。normal指代普通用户，tencentDBSuper为拥有pg_tencentdb_superuser角色的账号。</p>
    */
   UserType?: string
   /**
-   * 用户账号是否启用CAM验证
+   * <p>用户账号是否启用CAM验证</p>
    */
   OpenCam?: boolean
+  /**
+   * <p>该账号实际加入了哪些预设角色</p>
+   */
+  PGRoles?: Array<string>
 }
 
 /**
@@ -5976,17 +6083,17 @@ export interface DescribeDBErrlogsResponse {
 }
 
 /**
- * ModifyDBProxy返回参数结构体
+ * AddDBInstanceToReadOnlyGroup请求参数结构体
  */
-export interface ModifyDBProxyResponse {
+export interface AddDBInstanceToReadOnlyGroupRequest {
   /**
-   * <p>订单号，仅变配（节点规格/数量变更）下单成功时返回；仅修改 Description 时不下单，本字段为空。</p>
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
-  DealName?: string
+  DBInstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 只读组ID。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取
    */
-  RequestId?: string
+  ReadOnlyGroupId: string
 }
 
 /**
@@ -6071,6 +6178,32 @@ export interface ParamEntry {
    * 修改参数值。入参均以字符串形式传递，例如：小数”0.1“、整数”1000“、枚举”replica“
    */
   ExpectedValue: string
+}
+
+/**
+ * OpenPostgRESTService请求参数结构体
+ */
+export interface OpenPostgRESTServiceRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>是否开启外网</p>
+   */
+  EnableWanNet?: boolean
+  /**
+   * <p>PostgREST服务参数</p>
+   */
+  RestConfig?: Array<ParamEntry>
+  /**
+   * <p>VPC</p><p>参数格式：私有网络ID，形如vpc-e6w23k31。非必选，不传默认使用实例的vpc</p>
+   */
+  VpcId?: string
+  /**
+   * <p>私有网络子网ID，形如subnet-51lcif9y。非必选，不传则使用实例的子网</p>
+   */
+  SubnetId?: string
 }
 
 /**
@@ -6189,6 +6322,28 @@ export interface DeleteAuditLogFileRequest {
    * <p>审计日志文件名称</p>
    */
   FileName: string
+}
+
+/**
+ * OpenMem0Service请求参数结构体
+ */
+export interface OpenMem0ServiceRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>AgenticBaseID，开启Mem0服务前请先开通AgenticBase套餐</p>
+   */
+  AgenticBaseId: string
+  /**
+   * <p>Mem0服务使用的LLM模型</p><p>枚举值：</p><ul><li>auto： 自动选择合适的模型</li><li>deepseek-v4-flash： deepseek-v4-flash</li><li>deepseek-v4-pro： deepseek-v4-pro</li><li>glm-5： glm-5</li><li>glm-5-turbo： glm-5-turbo</li><li>glm-5.1： glm-5.1</li><li>kimi-k2.5： kimi-k2.5</li><li>kimi-k2.6： kimi-k2.6</li><li>minimax-m2.5： minimax-m2.5</li><li>minimax-m2.7： minimax-m2.7</li></ul>
+   */
+  LLMModel: string
+  /**
+   * <p>请前往腾讯云Tokenhub开通服务将ApiKey填入</p>
+   */
+  EmbeddingApiKey: string
 }
 
 /**
@@ -6460,6 +6615,64 @@ export interface CreateDatabaseResponse {
  * RebalanceReadOnlyGroup返回参数结构体
  */
 export interface RebalanceReadOnlyGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMem0Service返回参数结构体
+ */
+export interface DescribeMem0ServiceResponse {
+  /**
+   * <p>mem0服务运行状态</p><p>枚举值：</p><ul><li>running： mem0服务正常运行</li><li>none： 未开通</li><li>creating： 正在开通</li><li>deleting： mem0服务关闭中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>Mem0服务创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>Mem0服务最后更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>Mem0服务访问地址</p>
+   */
+  InnerAddress?: string
+  /**
+   * <p>Mem0服务使用的AgenticBase</p>
+   */
+  AgenticBaseId?: string
+  /**
+   * <p>Mem0服务使用的LLM提供方</p><p>枚举值：</p><ul><li>tokenhub： 腾讯云大模型服务平台TokenHub</li></ul>
+   */
+  LLMMode?: string
+  /**
+   * <p>Mem0服务使用的LLM模型</p>
+   */
+  LLMModel?: string
+  /**
+   * <p>Mem0服务当前使用的Embedding 模型</p>
+   */
+  EmbeddingModel?: string
+  /**
+   * <p>Embedding 向量维度，目前固定1024</p>
+   */
+  EmbeddingDims?: number
+  /**
+   * <p>Mem0服务使用的PG数据库</p>
+   */
+  PGDatabaseName?: string
+  /**
+   * <p>Mem0服务使用的PG用户名</p>
+   */
+  PGUserName?: string
+  /**
+   * <p>Mem0的网络状态</p>
+   */
+  NetworkAccessList?: Array<DBInstanceNetInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7230,6 +7443,24 @@ export interface CreateReadOnlyGroupNetworkAccessResponse {
    * 任务ID
    */
   TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRegions返回参数结构体
+ */
+export interface DescribeRegionsResponse {
+  /**
+   * 返回的结果数量。
+   */
+  TotalCount?: number
+  /**
+   * 地域信息集合。
+   */
+  RegionSet?: Array<RegionInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -24,6 +24,7 @@ import {
   CreateAudioModerationSyncTaskRequest,
   HitInfo,
   CreateAudioModerationTaskResponse,
+  HitSnippetInfos,
   TaskResult,
   CancelTaskRequest,
   DescribeTaskDetailResponse,
@@ -55,6 +56,7 @@ import {
   MediaInfo,
   Tag,
   AudioSegments,
+  Duration,
 } from "./ams_models"
 
 /**
@@ -78,7 +80,7 @@ export class Client extends AbstractClient {
     - 默认并发路数：10
     - 队列处理机制：
         - 当并发任务达到上限时，新任务进入队列等待处理;
-        -  新送审任务优先处理，旧任务往后排;
+        -  旧任务优先处理，新任务往后排队等待;
 - **直播音频（异步审核）**
     - 默认并发路数：100
     - 队列处理机制：

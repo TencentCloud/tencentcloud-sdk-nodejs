@@ -485,7 +485,7 @@ export interface CalleeAttribute {
  */
 export interface CreateUserSigResponse {
   /**
-   * 签名结果
+   * <p>签名结果</p>
    */
   UserSig?: string
   /**
@@ -2213,19 +2213,19 @@ export interface CreateExtensionResponse {
  */
 export interface CreateUserSigRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 用户 ID，该值必须与 ClientData 字段中 Uid 的值一致
+   * <p>用户 ID</p>
    */
   Uid: string
   /**
-   * 用户签名数据，必填字段，为标准 JSON 格式
+   * <p>用户签名数据</p>
    */
   ClientData: string
   /**
-   * 有效期，单位秒，不超过 1 小时
+   * <p>有效期，单位秒，不超过 1 小时</p>
    */
   ExpiredTime: number
 }

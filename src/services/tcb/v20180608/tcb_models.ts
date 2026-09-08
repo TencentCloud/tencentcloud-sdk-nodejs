@@ -335,9 +335,168 @@ export interface DescribeCloudBaseRunServerVersionRequest {
 }
 
 /**
- * CreateVmInstance返回参数结构体
+ * DescribeCloudBaseRunServerVersion返回参数结构体
  */
-export interface CreateVmInstanceResponse {
+export interface DescribeCloudBaseRunServerVersionResponse {
+  /**
+   * 版本名称
+   */
+  VersionName?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * Dockerfile的路径
+   */
+  DockerfilePath?: string
+  /**
+   * DockerBuild的目录
+   */
+  BuildDir?: string
+  /**
+   * 请使用CPUSize
+   */
+  Cpu?: number
+  /**
+   * 请使用MemSize
+   */
+  Mem?: number
+  /**
+   * 副本最小值
+   */
+  MinNum?: number
+  /**
+   * 副本最大值
+   */
+  MaxNum?: number
+  /**
+   * 策略类型
+   */
+  PolicyType?: string
+  /**
+   * 策略阈值
+   */
+  PolicyThreshold?: number
+  /**
+   * 环境变量
+   */
+  EnvParams?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 版本的IP
+   */
+  VersionIP?: string
+  /**
+   * 版本的端口号
+   */
+  VersionPort?: number
+  /**
+   * 版本状态
+   */
+  Status?: string
+  /**
+   * 代码包的名字
+   */
+  PackageName?: string
+  /**
+   * 代码版本的名字
+   */
+  PackageVersion?: string
+  /**
+   * 枚举（package/repository/image)
+   */
+  UploadType?: string
+  /**
+   * Repo的类型(gitlab/github/coding)
+   */
+  RepoType?: string
+  /**
+   * 地址
+   */
+  Repo?: string
+  /**
+   * 分支
+   */
+  Branch?: string
+  /**
+   * 服务名字
+   */
+  ServerName?: string
+  /**
+   * 是否对于外网开放
+   */
+  IsPublic?: boolean
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * 子网实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetIds?: Array<string>
+  /**
+   * 日志采集路径
+   */
+  CustomLogs?: string
+  /**
+   * 监听端口
+   */
+  ContainerPort?: number
+  /**
+   * 延迟多长时间开始健康检查（单位s）
+   */
+  InitialDelaySeconds?: number
+  /**
+   * 镜像地址
+   */
+  ImageUrl?: string
+  /**
+   * CPU 大小
+   */
+  CpuSize?: number
+  /**
+   * MEM 大小
+   */
+  MemSize?: number
+  /**
+   * 是否有Dockerfile：0-default has, 1-has, 2-has not
+   */
+  HasDockerfile?: number
+  /**
+   * 基础镜像
+   */
+  BaseImage?: string
+  /**
+   * 容器启动入口命令
+   */
+  EntryPoint?: string
+  /**
+   * 仓库语言
+   */
+  RepoLanguage?: string
+  /**
+   * 自动扩缩容策略组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyDetail?: Array<HpaPolicy>
+  /**
+   * Tke集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TkeClusterInfo?: TkeClusterInfo
+  /**
+   * 版本工作负载类型；deployment/deamonset
+   */
+  TkeWorkloadType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -707,35 +866,21 @@ export interface HTTPServiceCacheKeyParams {
 }
 
 /**
- * CreateVmInstance请求参数结构体
+ * DescribeCloudAppList返回参数结构体
  */
-export interface CreateVmInstanceRequest {
+export interface DescribeCloudAppListResponse {
   /**
-   * 环境ID
+   * <p>服务列表</p>
    */
-  EnvId: string
+  ServiceList?: Array<CloudAppServiceItem>
   /**
-   * 服务器类型：
-LightHouse = 轻量云服务器
-CVM = 云服务器
+   * <p>总数</p>
    */
-  Type: string
+  Total?: number
   /**
-   * 轻量云服务器套餐ID。 当Type=LightHouse时必传
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LightHouseBundleId?: string
-  /**
-   * 轻量云服务器镜像ID。当Type=LightHouse时必传
-   */
-  LightHouseBlueprintId?: string
-  /**
-   * 服务器别名
-   */
-  InstanceName?: string
-  /**
-   * 登录方式
-   */
-  LoginConfiguration?: VMLoginConfiguration
+  RequestId?: string
 }
 
 /**
@@ -1256,17 +1401,24 @@ export interface DescribeHTTPServiceRouteRequest {
 }
 
 /**
- * MongoDB连接器配置
+ * 分页信息
  */
-export interface MongoConnector {
+export interface Pager {
   /**
-   * 连接器实例ID
+   * 分页偏移量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId?: string
+  Offset?: number
   /**
-   * MongoDB数据库名
+   * 每页返回记录数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatabaseName?: string
+  Limit?: number
+  /**
+   * 文档集合总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
 }
 
 /**
@@ -1453,24 +1605,6 @@ export interface DescribeAuthDomainsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 云主机实例
- */
-export interface VmInstance {
-  /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 实例状态
-   */
-  Status?: string
-  /**
-   * 实例地域
-   */
-  Region?: string
 }
 
 /**
@@ -1727,187 +1861,17 @@ export interface DescribePGUserMigrationResponse {
 }
 
 /**
- * DescribeCloudBaseRunServerVersion返回参数结构体
+ * DestroyStaticStore请求参数结构体
  */
-export interface DescribeCloudBaseRunServerVersionResponse {
+export interface DestroyStaticStoreRequest {
   /**
-   * 版本名称
+   * 环境ID
    */
-  VersionName?: string
+  EnvId: string
   /**
-   * 备注
+   * cdn域名
    */
-  Remark?: string
-  /**
-   * Dockerfile的路径
-   */
-  DockerfilePath?: string
-  /**
-   * DockerBuild的目录
-   */
-  BuildDir?: string
-  /**
-   * 请使用CPUSize
-   */
-  Cpu?: number
-  /**
-   * 请使用MemSize
-   */
-  Mem?: number
-  /**
-   * 副本最小值
-   */
-  MinNum?: number
-  /**
-   * 副本最大值
-   */
-  MaxNum?: number
-  /**
-   * 策略类型
-   */
-  PolicyType?: string
-  /**
-   * 策略阈值
-   */
-  PolicyThreshold?: number
-  /**
-   * 环境变量
-   */
-  EnvParams?: string
-  /**
-   * 创建时间
-   */
-  CreatedTime?: string
-  /**
-   * 更新时间
-   */
-  UpdatedTime?: string
-  /**
-   * 版本的IP
-   */
-  VersionIP?: string
-  /**
-   * 版本的端口号
-   */
-  VersionPort?: number
-  /**
-   * 版本状态
-   */
-  Status?: string
-  /**
-   * 代码包的名字
-   */
-  PackageName?: string
-  /**
-   * 代码版本的名字
-   */
-  PackageVersion?: string
-  /**
-   * 枚举（package/repository/image)
-   */
-  UploadType?: string
-  /**
-   * Repo的类型(gitlab/github/coding)
-   */
-  RepoType?: string
-  /**
-   * 地址
-   */
-  Repo?: string
-  /**
-   * 分支
-   */
-  Branch?: string
-  /**
-   * 服务名字
-   */
-  ServerName?: string
-  /**
-   * 是否对于外网开放
-   */
-  IsPublic?: boolean
-  /**
-   * vpc id
-   */
-  VpcId?: string
-  /**
-   * 子网实例id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetIds?: Array<string>
-  /**
-   * 日志采集路径
-   */
-  CustomLogs?: string
-  /**
-   * 监听端口
-   */
-  ContainerPort?: number
-  /**
-   * 延迟多长时间开始健康检查（单位s）
-   */
-  InitialDelaySeconds?: number
-  /**
-   * 镜像地址
-   */
-  ImageUrl?: string
-  /**
-   * CPU 大小
-   */
-  CpuSize?: number
-  /**
-   * MEM 大小
-   */
-  MemSize?: number
-  /**
-   * 是否有Dockerfile：0-default has, 1-has, 2-has not
-   */
-  HasDockerfile?: number
-  /**
-   * 基础镜像
-   */
-  BaseImage?: string
-  /**
-   * 容器启动入口命令
-   */
-  EntryPoint?: string
-  /**
-   * 仓库语言
-   */
-  RepoLanguage?: string
-  /**
-   * 自动扩缩容策略组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PolicyDetail?: Array<HpaPolicy>
-  /**
-   * Tke集群信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TkeClusterInfo?: TkeClusterInfo
-  /**
-   * 版本工作负载类型；deployment/deamonset
-   */
-  TkeWorkloadType?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAIModels返回参数结构体
- */
-export interface DescribeAIModelsResponse {
-  /**
-   * 模型列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AIModels?: Array<AIModelGroup>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CdnDomain?: string
 }
 
 /**
@@ -2502,43 +2466,6 @@ export interface DescribeTablesRequest {
 }
 
 /**
- * 静态托管资源信息
- */
-export interface StaticStoreInfo {
-  /**
-   * 环境ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnvId?: string
-  /**
-   * 静态域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CdnDomain?: string
-  /**
-   * COS桶
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Bucket?: string
-  /**
-   * cos区域
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  Regoin?: string
-  /**
-   * 资源状态:init(初始化)/process(处理中)/online(上线)/destroying(销毁中)/offline(下线))
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-}
-
-/**
  * DescribeApiKeyList返回参数结构体
  */
 export interface DescribeApiKeyListResponse {
@@ -2881,6 +2808,36 @@ export interface ModifyDatabaseACLRequest {
 }
 
 /**
+ * 云日志服务相关信息
+ */
+export interface LogServiceInfo {
+  /**
+   * log名
+   */
+  LogsetName?: string
+  /**
+   * log-id
+   */
+  LogsetId?: string
+  /**
+   * topic名
+   */
+  TopicName?: string
+  /**
+   * topic-id
+   */
+  TopicId?: string
+  /**
+   * cls日志所属地域
+   */
+  Region?: string
+  /**
+   * topic保存时长 默认7天
+   */
+  Period?: number
+}
+
+/**
  * DeleteApiKey返回参数结构体
  */
 export interface DeleteApiKeyResponse {
@@ -2891,17 +2848,17 @@ export interface DeleteApiKeyResponse {
 }
 
 /**
- * DestroyStaticStore请求参数结构体
+ * 标签键值对
  */
-export interface DestroyStaticStoreRequest {
+export interface Tag {
   /**
-   * 环境ID
+   * 标签键
    */
-  EnvId: string
+  Key: string
   /**
-   * cdn域名
+   * 标签值
    */
-  CdnDomain?: string
+  Value: string
 }
 
 /**
@@ -2958,28 +2915,6 @@ export interface UpdateAIModelRequest {
    * <p>模型密钥</p>
    */
   Secret?: AIModelSecret
-}
-
-/**
- * 云服务器登录方式
- */
-export interface VMLoginConfiguration {
-  /**
-   * 登录方式。扫码登录时指定为 SCAN_LOGIN
-   */
-  LoginType?: string
-  /**
-   * 是否自动生成密码
-   */
-  AutoGeneratePassword?: string
-  /**
-   * 指定密码登录
-   */
-  Password?: string
-  /**
-   * 绑定密钥ID
-   */
-  KeyIds?: Array<string>
 }
 
 /**
@@ -3335,17 +3270,19 @@ export interface HpaPolicy {
 }
 
 /**
- * DescribeVmInstances请求参数结构体
+ * 邮件模板配置
  */
-export interface DescribeVmInstancesRequest {
+export interface EmailTemplateConfig {
   /**
-   * 环境ID
+   * <p>注册登录模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvId: string
+  RegisterSignIn?: LocalizedTemplate
   /**
-   * 服务器类型： LightHouse = 轻量云服务器 CVM = 云服务器
+   * <p>默认模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  DefaultTpl?: LocalizedTemplate
 }
 
 /**
@@ -3421,13 +3358,9 @@ export interface DestroyStaticStoreResponse {
 }
 
 /**
- * DeleteVmInstance请求参数结构体
+ * DescribeAIModels请求参数结构体
  */
-export interface DeleteVmInstanceRequest {
-  /**
-   * 服务器实例id
-   */
-  InstanceId: string
+export interface DescribeAIModelsRequest {
   /**
    * 环境id
    */
@@ -3529,21 +3462,29 @@ export interface CreateMySQLResponse {
 }
 
 /**
- * DescribeCloudAppList返回参数结构体
+ * ModifyResourcePermission请求参数结构体
  */
-export interface DescribeCloudAppListResponse {
+export interface ModifyResourcePermissionRequest {
   /**
-   * <p>服务列表</p>
+   * 环境 ID
    */
-  ServiceList?: Array<CloudAppServiceItem>
+  EnvId: string
   /**
-   * <p>总数</p>
+   * 资源类型：`function`-云函数、`storage`-云存储、`table`-SQL型数据库表、`collection`-文档型数据库表。
    */
-  Total?: number
+  ResourceType: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 权限级别。可选值：- SQL型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限 。- 文档型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限；`CUSTOM`-自定义安全规则 。- 云函数：`CUSTOM`-自定义安全规则 。- 云存储（权限标签）：`READONLY`-所有用户可读，仅创建者和管理员可写；`PRIVATE`-仅创建者及管理员可读写；`ADMINWRITE`-所有用户可读，仅管理员可写；`ADMINONLY`-仅管理员可读写；`CUSTOM`-自定义安全规则。
    */
-  RequestId?: string
+  Permission: string
+  /**
+   * 资源标识。云函数可不传、云存储传存储桶名、数据库表传表名。
+   */
+  Resource?: string
+  /**
+   * 自定义安全规则配置，当Permission为 `CUSTOM`时必传。JSON字符串格式的规则表达式。配置参考：[云函数安全规则](https://docs.cloudbase.net/cloud-function/security-rules)、[云存储安全规则](https://docs.cloudbase.net/storage/security-rules)、[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)。
+   */
+  SecurityRule?: string
 }
 
 /**
@@ -4092,21 +4033,86 @@ export interface CreateHostingDomainResponse {
 }
 
 /**
- * ModifyPGInstanceSpec返回参数结构体
+ * DescribeQuotaData请求参数结构体
  */
-export interface ModifyPGInstanceSpecResponse {
+export interface DescribeQuotaDataRequest {
   /**
-   * <p>账单名</p>
+   * 环境ID
    */
-  DealName?: string
+  EnvId: string
   /**
-   * <p>账单标识</p>
+   * <li> 指标名: </li>
+<li> StorageSizepkg: 当月存储空间容量, 单位MB </li>
+<li> StorageReadpkg: 当月存储读请求次数 </li>
+<li> StorageWritepkg: 当月存储写请求次数 </li>
+<li> StorageCdnOriginFluxpkg: 当月CDN回源流量, 单位字节 </li>
+<li> StorageCdnOriginFluxpkgDay: 当日CDN回源流量, 单位字节 </li>
+<li> StorageReadpkgDay: 当日存储读请求次数 </li>
+<li> StorageWritepkgDay: 当日写请求次数 </li>
+<li> CDNFluxpkg: 当月CDN流量, 单位为字节 </li>
+<li> CDNFluxpkgDay: 当日CDN流量, 单位为字节 </li>
+<li> FunctionInvocationpkg: 当月云函数调用次数 </li>
+<li> FunctionGBspkg: 当月云函数资源使用量, 单位Mb*Ms </li>
+<li> FunctionFluxpkg: 当月云函数流量, 单位千字节(KB) </li>
+<li> FunctionInvocationpkgDay: 当日云函数调用次数 </li>
+<li> FunctionGBspkgDay: 当日云函数资源使用量, 单位Mb*Ms </li>
+<li> FunctionFluxpkgDay: 当日云函数流量, 单位千字节(KB) </li>
+<li> DbSizepkg: 当月数据库容量大小, 单位MB </li>
+<li> DbReadpkg: 当日数据库读请求数 </li>
+<li> DbWritepkg: 当日数据库写请求数 </li>
+<li> StaticFsFluxPkgDay: 当日静态托管流量 </li>
+<li> StaticFsFluxPkg: 当月静态托管流量</li>
+<li> StaticFsSizePkg: 当月静态托管容量 </li>
+<li> TkeCpuUsedPkg: 当月容器托管CPU使用量，单位核*秒 </li>
+<li> TkeCpuUsedPkgDay: 当天容器托管CPU使用量，单位核*秒 </li>
+<li> TkeMemUsedPkg: 当月容器托管内存使用量，单位MB*秒 </li>
+<li> TkeMemUsedPkgDay: 当天容器托管内存使用量，单位MB*秒 </li>
+<li> CodingBuildTimePkgDay: 当天容器托管构建时间使用量，单位毫秒 </li>
+<li> TkeHttpServiceNatPkgDay: 当天容器托管流量使用量，单位B </li>
+<li> CynosdbCcupkg: 当月微信云托管MySQL CCU使用量，单位个  （需要除以1000）</li>
+<li> CynosdbStoragepkg: 当月微信云托管MySQL 存储使用量，单位MB  （需要除以1000）</li>
+<li> CynosdbCcupkgDay: 当天微信云托管MySQL 存储使用量，单位个 （需要除以1000） </li>
+<li> CynosdbStoragepkgDay: 当天微信云托管MySQL 存储使用量，单位MB （需要除以1000） </li>
    */
-  BillId?: string
+  MetricName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 资源ID, 目前仅对云函数、容器托管相关的指标有意义。云函数(FunctionInvocationpkg, FunctionGBspkg, FunctionFluxpkg)、容器托管（服务名称）。如果想查询某个云函数的指标则在ResourceId中传入函数名; 如果只想查询整个namespace的指标, 则留空或不传。
    */
-  RequestId?: string
+  ResourceID?: string
+}
+
+/**
+ * 静态CDN资源信息
+ */
+export interface StaticStorageInfo {
+  /**
+   * <p>静态CDN域名</p>
+   */
+  StaticDomain?: string
+  /**
+   * <p>静态CDN默认文件夹，当前为根目录</p>
+   */
+  DefaultDirName?: string
+  /**
+   * <p>资源状态(process/online/offline/init)</p>
+   */
+  Status?: string
+  /**
+   * <p>cos所属区域</p>
+   */
+  Region?: string
+  /**
+   * <p>bucket信息</p>
+   */
+  Bucket?: string
+  /**
+   * <p>到期时间（秒级时间戳）</p>
+   */
+  AccessExpire?: number
+  /**
+   * <p>外部存储。</p>
+   */
+  ExternalStorage?: ExternalStorage
 }
 
 /**
@@ -4136,6 +4142,24 @@ export interface DescribeCreateMySQLResult {
    * 是否已被冻结（只在 Status=success时有效）
    */
   FreezeStatus?: boolean
+}
+
+/**
+ * PurgeHTTPServiceCache返回参数结构体
+ */
+export interface PurgeHTTPServiceCacheResponse {
+  /**
+   * <p>需要刷新的缓存类型：TCBCDN 或 EO</p><p>枚举值：</p><ul><li>EO： EO缓存</li><li>CDN： CDN缓存</li></ul>
+   */
+  CacheType?: string
+  /**
+   * <p>刷新任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4347,20 +4371,6 @@ export interface TkeClusterInfo {
 }
 
 /**
- * VerifyHTTPServiceRoute请求参数结构体
- */
-export interface VerifyHTTPServiceRouteRequest {
-  /**
-   * <p>环境ID</p>
-   */
-  EnvId: string
-  /**
-   * <p>域名路由信息</p>
-   */
-  Domain: HTTPServiceDomainParam
-}
-
-/**
  * 身份源配置信息。描述云开发环境下用户登录身份源的完整配置，定义了用户通过何种方式进入系统并完成身份认证。支持多种类型：包括标准协议身份源（OAuth 2.0、OIDC、SAML 2.0）、内置身份源（邮箱登录、自定义登录）以及通过插件机制扩展的身份源（如 CAS）。每个身份源包含认证配置、启用状态、用户自动注册策略、信息透传模式等核心属性，是登录认证流程的核心数据结构。
  */
 export interface Provider {
@@ -4431,6 +4441,24 @@ export interface Provider {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoSignInWhenPhoneNumberMatch?: string
+}
+
+/**
+ * ModifyPGInstanceSpec返回参数结构体
+ */
+export interface ModifyPGInstanceSpecResponse {
+  /**
+   * <p>账单名</p>
+   */
+  DealName?: string
+  /**
+   * <p>账单标识</p>
+   */
+  BillId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4510,24 +4538,29 @@ export interface DescribeApiKeyListRequest {
 }
 
 /**
- * 分页信息
+ * 安全网关自定义配置
  */
-export interface Pager {
+export interface WxGatewayCustomConfig {
   /**
-   * 分页偏移量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启x-real-ip
    */
-  Offset?: number
+  IsOpenXRealIp?: boolean
   /**
-   * 每页返回记录数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 封禁配置
    */
-  Limit?: number
+  BanConfig?: BanConfig
   /**
-   * 文档集合总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 获取源ip方式，PPV1(Proxy Protocol V1)、PPV2(Proxy Protocol V2)、TOA(tcp option address)
    */
-  Total?: number
+  SourceIpType?: string
+  /**
+   * 日志信息
+   */
+  LogConfig?: CustomLogConfig
+  /**
+   * 是否开启http1.0
+   */
+  IsAcceptHttpOne?: boolean
 }
 
 /**
@@ -4769,23 +4802,43 @@ export interface MgoCommandParam {
 }
 
 /**
- * VM规格
+ * PurgeHTTPServiceCache请求参数结构体
  */
-export interface VMSpec {
+export interface PurgeHTTPServiceCacheRequest {
   /**
-   * LightHouse=轻量云服务器
-CVM=云服务器
+   * <p>环境ID</p>
    */
-  Type?: string
+  EnvId: string
   /**
-   * 轻量云服务器规格。
-当Type=LightHouse时有效
+   * <p>HTTPService域名</p>
    */
-  LightHouseSpec?: VMSpecLightHouse
+  Domain: string
   /**
-   * 价格信息
+   * <p>Targets</p><p>参数格式：Targets 刷新目标列表，语义随 PurgeType 变化</p><p>入参限制：单次请求最多传 20 个 Target，单条 URL/prefix/host 最长 2048</p>
    */
-  Price?: VMPrice
+  Targets: Array<string>
+  /**
+   * <p>需要刷新的缓存类型：CDN 或 EO</p><p>枚举值：</p><ul><li>EO： EO缓存</li><li>CDN： CDN缓存</li></ul><p>默认值：EO</p>
+   */
+  CacheType?: string
+  /**
+   * <p>PurgeType 刷新方式（purge 粒度），TCBCDN仅支持purge_url</p><p>枚举值：</p><ul><li>PURGE_URL： URL 列表（需含协议，如 https://a.com/b.jpg）</li><li>PURGE_PREFIX： URL 前缀列表（需含协议，如 https://a.com/dir/），仅EO支持</li><li>PURGE_HOST： Hostname 列表（可为 host 或 http(s)://host），仅EO支持</li></ul><p>默认值：PURGE_URL</p>
+   */
+  PurgeType?: string
+}
+
+/**
+ * 对象变量
+ */
+export interface Variable {
+  /**
+   * <p>变量的名称</p>
+   */
+  Key?: string
+  /**
+   * <p>变量的值</p>
+   */
+  Value?: string
 }
 
 /**
@@ -4799,37 +4852,45 @@ export interface ModifyDatabaseACLResponse {
 }
 
 /**
- * 静态CDN资源信息
+ * 清除任务详情
  */
-export interface StaticStorageInfo {
+export interface HTTPServiceCachePurgeTask {
   /**
-   * <p>静态CDN域名</p>
+   * <p>缓存类型</p><p>枚举值：</p><ul><li>EO： EO</li><li>TCBCDN： 云开发cdn</li></ul><p>默认值：EO</p>
    */
-  StaticDomain?: string
+  CacheType?: string
   /**
-   * <p>静态CDN默认文件夹，当前为根目录</p>
+   * <p>任务id</p>
    */
-  DefaultDirName?: string
+  TaskId?: string
   /**
-   * <p>资源状态(process/online/offline/init)</p>
+   * <p>状态</p><p>枚举值：</p><ul><li>PROCESSING： 处理中</li><li>SUCCESS： 成功</li><li>FAILED： 失败</li><li>TIMEOUT： 超时</li><li>CANCELED： 取消</li></ul>
    */
   Status?: string
   /**
-   * <p>cos所属区域</p>
+   * <p>刷新类型</p><p>枚举值：</p><ul><li>PURGE_URL： URL 刷新</li><li>PURGE_PREFIX： 目录刷新</li><li>PURGE_HOST： Hostname 刷新</li></ul>
    */
-  Region?: string
+  PurgeType?: string
   /**
-   * <p>bucket信息</p>
+   * <p>清除缓存分为直接删除和标记过期两种方式。URL 类型默认为“直接删除”，其它清除类型默认为“标记过期”</p><p>枚举值：</p><ul><li>INVALIDATE： 标记过期：节点缓存标记为过期，用户请求时回源校验，源站 304 则复用，200 则更新</li><li>DELETE： 直接删除：从节点直接删除缓存，用户下次请求强制回源拉新</li></ul>
    */
-  Bucket?: string
+  Method?: string
   /**
-   * <p>到期时间（秒级时间戳）</p>
+   * <p>刷新目标列表（URL / 前缀 / host）</p>
    */
-  AccessExpire?: number
+  Targets?: Array<string>
   /**
-   * <p>外部存储。</p>
+   * <p>失败原因</p>
    */
-  ExternalStorage?: ExternalStorage
+  FailReason?: string
+  /**
+   * <p>任务创建时间</p><p>参数格式：格式 YYYY-MM-DDTHH:mm:ss±HH:mmZ，时区为 UTC+0</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>任务更新时间</p><p>参数格式：格式 YYYY-MM-DDTHH:mm:ss±HH:mmZ，时区为 UTC+0</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -5100,11 +5161,11 @@ export interface BuildSecret {
  */
 export interface Filter {
   /**
-   * 需要过滤的字段。过滤条件数量限制为10。
+   * <p>需要过滤的字段。过滤条件数量限制为10。</p>
    */
   Name?: string
   /**
-   * 字段的过滤值。
+   * <p>字段的过滤值。</p>
    */
   Values?: Array<string>
 }
@@ -5277,43 +5338,17 @@ export interface CreateApiKeyResponse {
 }
 
 /**
- * vm规格
+ * VerifyHTTPServiceRoute请求参数结构体
  */
-export interface VMSpecLightHouse {
+export interface VerifyHTTPServiceRouteRequest {
   /**
-   * LH主机的BundleId
-   */
-  BundleId?: string
-  /**
-   * 主机配置详情json
-   */
-  BundleConfig?: string
-}
-
-/**
- * ModifyResourcePermission请求参数结构体
- */
-export interface ModifyResourcePermissionRequest {
-  /**
-   * 环境 ID
+   * <p>环境ID</p>
    */
   EnvId: string
   /**
-   * 资源类型：`function`-云函数、`storage`-云存储、`table`-SQL型数据库表、`collection`-文档型数据库表。
+   * <p>域名路由信息</p>
    */
-  ResourceType: string
-  /**
-   * 权限级别。可选值：- SQL型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限 。- 文档型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限；`CUSTOM`-自定义安全规则 。- 云函数：`CUSTOM`-自定义安全规则 。- 云存储（权限标签）：`READONLY`-所有用户可读，仅创建者和管理员可写；`PRIVATE`-仅创建者及管理员可读写；`ADMINWRITE`-所有用户可读，仅管理员可写；`ADMINONLY`-仅管理员可读写；`CUSTOM`-自定义安全规则。
-   */
-  Permission: string
-  /**
-   * 资源标识。云函数可不传、云存储传存储桶名、数据库表传表名。
-   */
-  Resource?: string
-  /**
-   * 自定义安全规则配置，当Permission为 `CUSTOM`时必传。JSON字符串格式的规则表达式。配置参考：[云函数安全规则](https://docs.cloudbase.net/cloud-function/security-rules)、[云存储安全规则](https://docs.cloudbase.net/storage/security-rules)、[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)。
-   */
-  SecurityRule?: string
+  Domain: HTTPServiceDomainParam
 }
 
 /**
@@ -5775,20 +5810,6 @@ export interface ResourcePermission {
 }
 
 /**
- * 对象变量
- */
-export interface Variable {
-  /**
-   * 变量的名称
-   */
-  Key?: string
-  /**
-   * 变量的值
-   */
-  Value?: string
-}
-
-/**
  * ModifyHTTPServiceRoute返回参数结构体
  */
 export interface ModifyHTTPServiceRouteResponse {
@@ -5796,22 +5817,6 @@ export interface ModifyHTTPServiceRouteResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 邮件模板配置
- */
-export interface EmailTemplateConfig {
-  /**
-   * <p>注册登录模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegisterSignIn?: LocalizedTemplate
-  /**
-   * <p>默认模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DefaultTpl?: LocalizedTemplate
 }
 
 /**
@@ -5835,52 +5840,21 @@ export interface GetProvidersResponse {
 }
 
 /**
- * DescribeQuotaData请求参数结构体
+ * DescribeHTTPServiceCachePurgeTask返回参数结构体
  */
-export interface DescribeQuotaDataRequest {
+export interface DescribeHTTPServiceCachePurgeTaskResponse {
   /**
-   * 环境ID
+   * <p>任务列表</p>
    */
-  EnvId: string
+  Tasks?: Array<HTTPServiceCachePurgeTask>
   /**
-   * <li> 指标名: </li>
-<li> StorageSizepkg: 当月存储空间容量, 单位MB </li>
-<li> StorageReadpkg: 当月存储读请求次数 </li>
-<li> StorageWritepkg: 当月存储写请求次数 </li>
-<li> StorageCdnOriginFluxpkg: 当月CDN回源流量, 单位字节 </li>
-<li> StorageCdnOriginFluxpkgDay: 当日CDN回源流量, 单位字节 </li>
-<li> StorageReadpkgDay: 当日存储读请求次数 </li>
-<li> StorageWritepkgDay: 当日写请求次数 </li>
-<li> CDNFluxpkg: 当月CDN流量, 单位为字节 </li>
-<li> CDNFluxpkgDay: 当日CDN流量, 单位为字节 </li>
-<li> FunctionInvocationpkg: 当月云函数调用次数 </li>
-<li> FunctionGBspkg: 当月云函数资源使用量, 单位Mb*Ms </li>
-<li> FunctionFluxpkg: 当月云函数流量, 单位千字节(KB) </li>
-<li> FunctionInvocationpkgDay: 当日云函数调用次数 </li>
-<li> FunctionGBspkgDay: 当日云函数资源使用量, 单位Mb*Ms </li>
-<li> FunctionFluxpkgDay: 当日云函数流量, 单位千字节(KB) </li>
-<li> DbSizepkg: 当月数据库容量大小, 单位MB </li>
-<li> DbReadpkg: 当日数据库读请求数 </li>
-<li> DbWritepkg: 当日数据库写请求数 </li>
-<li> StaticFsFluxPkgDay: 当日静态托管流量 </li>
-<li> StaticFsFluxPkg: 当月静态托管流量</li>
-<li> StaticFsSizePkg: 当月静态托管容量 </li>
-<li> TkeCpuUsedPkg: 当月容器托管CPU使用量，单位核*秒 </li>
-<li> TkeCpuUsedPkgDay: 当天容器托管CPU使用量，单位核*秒 </li>
-<li> TkeMemUsedPkg: 当月容器托管内存使用量，单位MB*秒 </li>
-<li> TkeMemUsedPkgDay: 当天容器托管内存使用量，单位MB*秒 </li>
-<li> CodingBuildTimePkgDay: 当天容器托管构建时间使用量，单位毫秒 </li>
-<li> TkeHttpServiceNatPkgDay: 当天容器托管流量使用量，单位B </li>
-<li> CynosdbCcupkg: 当月微信云托管MySQL CCU使用量，单位个  （需要除以1000）</li>
-<li> CynosdbStoragepkg: 当月微信云托管MySQL 存储使用量，单位MB  （需要除以1000）</li>
-<li> CynosdbCcupkgDay: 当天微信云托管MySQL 存储使用量，单位个 （需要除以1000） </li>
-<li> CynosdbStoragepkgDay: 当天微信云托管MySQL 存储使用量，单位MB （需要除以1000） </li>
+   * <p>域名总数，分页查询使用总数判断是否已经拉取到所有数据</p>
    */
-  MetricName: string
+  TotalCount?: number
   /**
-   * 资源ID, 目前仅对云函数、容器托管相关的指标有意义。云函数(FunctionInvocationpkg, FunctionGBspkg, FunctionFluxpkg)、容器托管（服务名称）。如果想查询某个云函数的指标则在ResourceId中传入函数名; 如果只想查询整个namespace的指标, 则留空或不传。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceID?: string
+  RequestId?: string
 }
 
 /**
@@ -5947,20 +5921,6 @@ export interface DescribePGUserMigrationRequest {
    * <p>版本号</p><p>参数格式：14位时间格式</p><p>入参限制：纯数字</p>
    */
   MigrationVersion: string
-}
-
-/**
- * DescribeVmInstances返回参数结构体
- */
-export interface DescribeVmInstancesResponse {
-  /**
-   * 主机实例列表
-   */
-  InstanceList?: Array<VmInstance>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6265,33 +6225,45 @@ export interface RunSqlResponse {
 }
 
 /**
- * 云日志服务相关信息
+ * DescribeHTTPServiceCachePurgeTask请求参数结构体
  */
-export interface LogServiceInfo {
+export interface DescribeHTTPServiceCachePurgeTaskRequest {
   /**
-   * log名
+   * <p>环境ID</p>
    */
-  LogsetName?: string
+  EnvId: string
   /**
-   * log-id
+   * <p>HTTPService域名</p>
    */
-  LogsetId?: string
+  Domain: string
   /**
-   * topic名
+   * <p>缓存类型</p><p>枚举值：</p><ul><li>EO： EO缓存</li><li>CDN： CDN缓存</li></ul><p>默认值：EO</p>
    */
-  TopicName?: string
+  CacheType?: string
   /**
-   * topic-id
+   * <p>任务id，PurgeHTTPServiceCache返回的TaskId，可选</p>
    */
-  TopicId?: string
+  TaskId?: string
   /**
-   * cls日志所属地域
+   * <p>按刷新类型过滤</p><p>枚举值：</p><ul><li>PURGE_URL： URL 刷新</li><li>PURGE_PREFIX： 目录刷新</li><li>PURGE_HOST： Hostname 刷新</li></ul>
    */
-  Region?: string
+  PurgeType?: string
   /**
-   * topic保存时长 默认7天
+   * <p>查询开始时间，TaskId为空时，默认开始时间是7天前</p><p>参数格式：格式 YYYY-MM-DDTHH:mm:ss±HH:mmZ，时区为 UTC+0</p>
    */
-  Period?: number
+  StartTime?: string
+  /**
+   * <p>查询结束时间，TaskId为空时，默认结束时间是当前</p><p>参数格式：格式 YYYY-MM-DDTHH:mm:ss±HH:mmZ，时区为 UTC+0</p>
+   */
+  EndTime?: string
+  /**
+   * <p>分页偏移量。默认 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页限制。默认20，最大值1000</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -6504,32 +6476,6 @@ export interface ModifyClientRequest {
 }
 
 /**
- * 安全网关自定义配置
- */
-export interface WxGatewayCustomConfig {
-  /**
-   * 是否开启x-real-ip
-   */
-  IsOpenXRealIp?: boolean
-  /**
-   * 封禁配置
-   */
-  BanConfig?: BanConfig
-  /**
-   * 获取源ip方式，PPV1(Proxy Protocol V1)、PPV2(Proxy Protocol V2)、TOA(tcp option address)
-   */
-  SourceIpType?: string
-  /**
-   * 日志信息
-   */
-  LogConfig?: CustomLogConfig
-  /**
-   * 是否开启http1.0
-   */
-  IsAcceptHttpOne?: boolean
-}
-
-/**
  * 三方认证出参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：microsoft, github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。
  */
 export interface ProviderResponseParametersMap {
@@ -6649,24 +6595,17 @@ export interface SearchClsLogRequest {
 }
 
 /**
- * InquireVmPrice请求参数结构体
+ * MongoDB连接器配置
  */
-export interface InquireVmPriceRequest {
+export interface MongoConnector {
   /**
-   * 服务器类型：
-LightHouse = 轻量云服务器
-CVM = 云服务器
+   * 连接器实例ID
    */
-  Type: string
+  InstanceId?: string
   /**
-   * 轻量云服务器套餐ID。
-当Type=LightHouse时必传
+   * MongoDB数据库名
    */
-  LightHouseBundleId?: string
-  /**
-   * 轻量云服务器镜像ID。当Type=LightHouse时必传
-   */
-  LightHouseBlueprintId?: string
+  DatabaseName?: string
 }
 
 /**
@@ -6748,9 +6687,14 @@ export interface SearchClsLogResponse {
 }
 
 /**
- * DeleteVmInstance返回参数结构体
+ * DescribeAIModels返回参数结构体
  */
-export interface DeleteVmInstanceResponse {
+export interface DescribeAIModelsResponse {
+  /**
+   * 模型列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AIModels?: Array<AIModelGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6812,20 +6756,6 @@ export interface LocalizedTemplate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnUS?: string
-}
-
-/**
- * 标签键值对
- */
-export interface Tag {
-  /**
-   * 标签键
-   */
-  Key: string
-  /**
-   * 标签值
-   */
-  Value: string
 }
 
 /**
@@ -7007,17 +6937,40 @@ export interface DescribeAuthDomainsRequest {
 }
 
 /**
- * DescribeVmSpec返回参数结构体
+ * 静态托管资源信息
  */
-export interface DescribeVmSpecResponse {
+export interface StaticStoreInfo {
   /**
-   * 规格列表
+   * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecList?: Array<VMSpec>
+  EnvId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 静态域名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  CdnDomain?: string
+  /**
+   * COS桶
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bucket?: string
+  /**
+   * cos区域
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Regoin?: string
+  /**
+   * 资源状态:init(初始化)/process(处理中)/online(上线)/destroying(销毁中)/offline(下线))
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
 }
 
 /**
@@ -7032,16 +6985,6 @@ export interface ModifyStorageSourceRequest {
    * 存储源
    */
   StorageConfig: ExternalStorage
-}
-
-/**
- * DescribeAIModels请求参数结构体
- */
-export interface DescribeAIModelsRequest {
-  /**
-   * 环境id
-   */
-  EnvId: string
 }
 
 /**
@@ -7359,36 +7302,6 @@ export interface DescribeDatabaseACLResponse {
 }
 
 /**
- * 虚拟主机价格
- */
-export interface VMPrice {
-  /**
-   * 价格货币单位。取值范围CNY:人民币。USD:美元。
-   */
-  Currency?: string
-  /**
-   * 原始价格
-   */
-  OriginalPrice?: number
-  /**
-   * 折扣率
-   */
-  Discount?: number
-  /**
-   * 折扣后的价格
-   */
-  DiscountPrice?: number
-  /**
-   * 折扣前每天资源点
-   */
-  OriginalCredits?: number
-  /**
-   * 折扣后每天所需资源点
-   */
-  DiscountCredits?: number
-}
-
-/**
  * DeleteProvider请求参数结构体
  */
 export interface DeleteProviderRequest {
@@ -7400,18 +7313,6 @@ export interface DeleteProviderRequest {
    * 认证源ID，比如：github, 格式必须为：2-32位小写英文字符串或数字
    */
   Id: string
-}
-
-/**
- * DescribeVmSpec请求参数结构体
- */
-export interface DescribeVmSpecRequest {
-  /**
-   * 类型：
-LightHouse = 轻量云服务器
-CVM = 云服务器
-   */
-  Type?: string
 }
 
 /**
@@ -7597,40 +7498,6 @@ export interface IndexInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Unique?: boolean
-}
-
-/**
- * InquireVmPrice返回参数结构体
- */
-export interface InquireVmPriceResponse {
-  /**
-   * 价格货币单位。取值范围CNY:人民币。USD:美元。
-   */
-  Currency?: string
-  /**
-   * 原价（主机原始每月价格）
-   */
-  OriginalPrice?: number
-  /**
-   * 折扣率
-   */
-  Discount?: number
-  /**
-   * 折扣后每月价格
-   */
-  DiscountPrice?: number
-  /**
-   * 折扣前每天资源点
-   */
-  OriginalCredits?: number
-  /**
-   * 折扣后每天资源点
-   */
-  DiscountCredits?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

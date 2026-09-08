@@ -2577,7 +2577,7 @@ export interface TranscodeTask2017 {
  */
 export interface DescribeCurrentPlaylistResponse {
   /**
-   * 当前播放列表信息。
+   * <p>当前播放列表信息。</p>
    */
   CurrentPlaylist?: Array<RoundPlayFilePlayInfo>
   /**
@@ -25453,15 +25453,15 @@ export interface ReviewTemplate {
  */
 export interface DescribeCurrentPlaylistRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。</b></p>
    */
   SubAppId: number
   /**
-   * 轮播播单唯一标识。
+   * <p>轮播播单唯一标识。</p>
    */
   RoundPlayId: string
   /**
-   * 返回的播放列表的长度。最大10，默认值为5。
+   * <p>返回的播放列表的长度。最大10，默认值为5。</p>
    */
   Limit?: number
 }

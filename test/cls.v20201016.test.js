@@ -18,9 +18,9 @@ const client = new tencentcloud.cls.v20201016.Client({
 })
 describe("cls.v20201016.test.js", function () {
 
-it("cls.v20201016.ModifyKafkaConsumer", async function () {
+it("cls.v20201016.DescribeTopicMetricConfigs", async function () {
     try {
-       const data = await client.ModifyKafkaConsumer({})
+       const data = await client.DescribeTopicMetricConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -31,6 +31,16 @@ it("cls.v20201016.ModifyKafkaConsumer", async function () {
 it("cls.v20201016.CreateKafkaRecharge", async function () {
     try {
        const data = await client.CreateKafkaRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteResourceGraphProductIngestTask", async function () {
+    try {
+       const data = await client.DeleteResourceGraphProductIngestTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +121,16 @@ it("cls.v20201016.CreateIndex", async function () {
 it("cls.v20201016.GetClsService", async function () {
     try {
        const data = await client.GetClsService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeResourceGraphEntities", async function () {
+    try {
+       const data = await client.DescribeResourceGraphEntities({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +248,9 @@ it("cls.v20201016.DeleteConfigExtra", async function () {
     }
 })
 
-it("cls.v20201016.DescribeNetworkApplications", async function () {
+it("cls.v20201016.DeleteResourceGraph", async function () {
     try {
-       const data = await client.DescribeNetworkApplications({})
+       const data = await client.DeleteResourceGraph({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +351,26 @@ it("cls.v20201016.DescribeClusterMetricConfigs", async function () {
 it("cls.v20201016.CreateSearchView", async function () {
     try {
        const data = await client.CreateSearchView({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.RetryResourceGraph", async function () {
+    try {
+       const data = await client.RetryResourceGraph({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeResourceGraphDetail", async function () {
+    try {
+       const data = await client.DescribeResourceGraphDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,6 +498,16 @@ it("cls.v20201016.MergePartition", async function () {
     }
 })
 
+it("cls.v20201016.DescribeResourceGraphIngestTaskFailureDetail", async function () {
+    try {
+       const data = await client.DescribeResourceGraphIngestTaskFailureDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteHostMetricConfig", async function () {
     try {
        const data = await client.DeleteHostMetricConfig({})
@@ -488,9 +538,9 @@ it("cls.v20201016.CreateExport", async function () {
     }
 })
 
-it("cls.v20201016.DeleteSplunkDeliver", async function () {
+it("cls.v20201016.CloseKafkaConsumer", async function () {
     try {
-       const data = await client.DeleteSplunkDeliver({})
+       const data = await client.CloseKafkaConsumer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +578,9 @@ it("cls.v20201016.DescribeNetworkApplicationDetail", async function () {
     }
 })
 
-it("cls.v20201016.DescribeTopicMetricConfigs", async function () {
+it("cls.v20201016.DescribeResourceGraphProductIngestTaskList", async function () {
     try {
-       const data = await client.DescribeTopicMetricConfigs({})
+       const data = await client.DescribeResourceGraphProductIngestTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,6 +591,16 @@ it("cls.v20201016.DescribeTopicMetricConfigs", async function () {
 it("cls.v20201016.ModifyMetricSubscribe", async function () {
     try {
        const data = await client.ModifyMetricSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyResourceGraphProductIngestTask", async function () {
+    try {
+       const data = await client.ModifyResourceGraphProductIngestTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,9 +678,9 @@ it("cls.v20201016.DeleteMetricSubscribe", async function () {
     }
 })
 
-it("cls.v20201016.CreateEsRecharge", async function () {
+it("cls.v20201016.CreateResourceGraph", async function () {
     try {
-       const data = await client.CreateEsRecharge({})
+       const data = await client.CreateResourceGraph({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -698,6 +758,16 @@ it("cls.v20201016.DeleteAgentApplication", async function () {
     }
 })
 
+it("cls.v20201016.DescribeResourceGraphEntityDetail", async function () {
+    try {
+       const data = await client.DescribeResourceGraphEntityDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteConsumer", async function () {
     try {
        const data = await client.DeleteConsumer({})
@@ -731,6 +801,16 @@ it("cls.v20201016.DeleteMachineGroup", async function () {
 it("cls.v20201016.DeleteEsRecharge", async function () {
     try {
        const data = await client.DeleteEsRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeResourceGraphProductIngestTaskDetail", async function () {
+    try {
+       const data = await client.DescribeResourceGraphProductIngestTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -801,6 +881,16 @@ it("cls.v20201016.DeleteRemoteWriteTask", async function () {
 it("cls.v20201016.DescribeAlarms", async function () {
     try {
        const data = await client.DescribeAlarms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeResourceGraphs", async function () {
+    try {
+       const data = await client.DescribeResourceGraphs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,9 +998,9 @@ it("cls.v20201016.DeleteDashboard", async function () {
     }
 })
 
-it("cls.v20201016.ModifyShipper", async function () {
+it("cls.v20201016.ModifyResourceGraph", async function () {
     try {
-       const data = await client.ModifyShipper({})
+       const data = await client.ModifyResourceGraph({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,9 +1058,9 @@ it("cls.v20201016.PreviewKafkaRecharge", async function () {
     }
 })
 
-it("cls.v20201016.CloseKafkaConsumer", async function () {
+it("cls.v20201016.DeleteSplunkDeliver", async function () {
     try {
-       const data = await client.CloseKafkaConsumer({})
+       const data = await client.DeleteSplunkDeliver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,6 +1118,16 @@ it("cls.v20201016.CreateHostMetricConfig", async function () {
     }
 })
 
+it("cls.v20201016.ModifyKafkaConsumer", async function () {
+    try {
+       const data = await client.ModifyKafkaConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeRebuildIndexTasks", async function () {
     try {
        const data = await client.DescribeRebuildIndexTasks({})
@@ -1051,6 +1151,16 @@ it("cls.v20201016.ModifyConfig", async function () {
 it("cls.v20201016.DescribeAlarmShields", async function () {
     try {
        const data = await client.DescribeAlarmShields({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateResourceGraphProductIngestTask", async function () {
+    try {
+       const data = await client.CreateResourceGraphProductIngestTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1111,6 +1221,16 @@ it("cls.v20201016.DescribeConsoleSharingList", async function () {
 it("cls.v20201016.CommitConsumerOffsets", async function () {
     try {
        const data = await client.CommitConsumerOffsets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeResourceGraphFailureDetail", async function () {
+    try {
+       const data = await client.DescribeResourceGraphFailureDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1228,6 +1348,16 @@ it("cls.v20201016.DescribeWebCallbacks", async function () {
     }
 })
 
+it("cls.v20201016.ModifyResourceGraphEntityTopicsRelation", async function () {
+    try {
+       const data = await client.ModifyResourceGraphEntityTopicsRelation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeSplunkDelivers", async function () {
     try {
        const data = await client.DescribeSplunkDelivers({})
@@ -1261,6 +1391,16 @@ it("cls.v20201016.ModifyConsumerGroup", async function () {
 it("cls.v20201016.DeleteDashboardSubscribe", async function () {
     try {
        const data = await client.DeleteDashboardSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeResourceGraphEntityDependency", async function () {
+    try {
+       const data = await client.DescribeResourceGraphEntityDependency({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1311,6 +1451,16 @@ it("cls.v20201016.DeleteMetricConfig", async function () {
 it("cls.v20201016.CreateSplunkDeliver", async function () {
     try {
        const data = await client.CreateSplunkDeliver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeResourceGraphTkeClusterStatus", async function () {
+    try {
+       const data = await client.DescribeResourceGraphTkeClusterStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1428,6 +1578,16 @@ it("cls.v20201016.ModifyConsumer", async function () {
     }
 })
 
+it("cls.v20201016.DescribeNetworkApplications", async function () {
+    try {
+       const data = await client.DescribeNetworkApplications({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyRecordingRuleTask", async function () {
     try {
        const data = await client.ModifyRecordingRuleTask({})
@@ -1461,6 +1621,16 @@ it("cls.v20201016.DeleteShipper", async function () {
 it("cls.v20201016.ModifyWebCallback", async function () {
     try {
        const data = await client.ModifyWebCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyShipper", async function () {
+    try {
+       const data = await client.ModifyShipper({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1618,6 +1788,16 @@ it("cls.v20201016.DescribeDashboardSubscribes", async function () {
     }
 })
 
+it("cls.v20201016.CreateEsRecharge", async function () {
+    try {
+       const data = await client.CreateEsRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeShipperTasks", async function () {
     try {
        const data = await client.DescribeShipperTasks({})
@@ -1721,6 +1901,16 @@ it("cls.v20201016.DescribeConfigExtras", async function () {
 it("cls.v20201016.CheckRechargeKafkaServer", async function () {
     try {
        const data = await client.CheckRechargeKafkaServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.RetryResourceGraphProductIngestTask", async function () {
+    try {
+       const data = await client.RetryResourceGraphProductIngestTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1908,9 +2098,9 @@ it("cls.v20201016.UploadLog", async function () {
     }
 })
 
-it("cls.v20201016.CreateScheduledSql", async function () {
+it("cls.v20201016.DeleteTopic", async function () {
     try {
-       const data = await client.CreateScheduledSql({})
+       const data = await client.DeleteTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2078,9 +2268,9 @@ it("cls.v20201016.CreateAlarm", async function () {
     }
 })
 
-it("cls.v20201016.DeleteTopic", async function () {
+it("cls.v20201016.CreateScheduledSql", async function () {
     try {
-       const data = await client.DeleteTopic({})
+       const data = await client.CreateScheduledSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

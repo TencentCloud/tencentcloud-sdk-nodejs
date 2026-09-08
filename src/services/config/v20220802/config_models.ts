@@ -3499,7 +3499,12 @@ export interface UpdateAggregateConfigRuleRequest {
 /**
  * OpenConfigRecorder请求参数结构体
  */
-export type OpenConfigRecorderRequest = null
+export interface OpenConfigRecorderRequest {
+  /**
+   * <p>1:从控制中心调用</p>
+   */
+  FromMode?: number
+}
 
 /**
  * DeleteAlarmPolicy返回参数结构体

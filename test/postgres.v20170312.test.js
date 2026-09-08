@@ -58,6 +58,16 @@ it("postgres.v20170312.DescribeDBProxySSLConfig", async function () {
     }
 })
 
+it("postgres.v20170312.DescribePostgRESTService", async function () {
+    try {
+       const data = await client.DescribePostgRESTService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeDefaultParameters", async function () {
     try {
        const data = await client.DescribeDefaultParameters({})
@@ -258,6 +268,16 @@ it("postgres.v20170312.DeleteDatabase", async function () {
     }
 })
 
+it("postgres.v20170312.OpenMem0Service", async function () {
+    try {
+       const data = await client.OpenMem0Service({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeDatabases", async function () {
     try {
        const data = await client.DescribeDatabases({})
@@ -411,6 +431,16 @@ it("postgres.v20170312.DescribeParameterTemplateAttributes", async function () {
 it("postgres.v20170312.RestoreDBInstanceObjects", async function () {
     try {
        const data = await client.RestoreDBInstanceObjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.OpenPostgRESTService", async function () {
+    try {
+       const data = await client.OpenPostgRESTService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -581,6 +611,16 @@ it("postgres.v20170312.CreateParameterTemplate", async function () {
 it("postgres.v20170312.CreateReadOnlyDBInstance", async function () {
     try {
        const data = await client.CreateReadOnlyDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DescribeMem0Service", async function () {
+    try {
+       const data = await client.DescribeMem0Service({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +848,9 @@ it("postgres.v20170312.ModifyBaseBackupExpireTime", async function () {
     }
 })
 
-it("postgres.v20170312.ModifyAccountPrivileges", async function () {
+it("postgres.v20170312.CreateReadOnlyGroup", async function () {
     try {
-       const data = await client.ModifyAccountPrivileges({})
+       const data = await client.CreateReadOnlyGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -831,6 +871,16 @@ it("postgres.v20170312.DescribeSlowQueryList", async function () {
 it("postgres.v20170312.DescribeLogBackups", async function () {
     try {
        const data = await client.DescribeLogBackups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ClosePostgRESTService", async function () {
+    try {
+       const data = await client.ClosePostgRESTService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1138,9 +1188,9 @@ it("postgres.v20170312.InquiryPriceUpgradeDBInstance", async function () {
     }
 })
 
-it("postgres.v20170312.CreateReadOnlyGroup", async function () {
+it("postgres.v20170312.ModifyAccountPrivileges", async function () {
     try {
-       const data = await client.CreateReadOnlyGroup({})
+       const data = await client.ModifyAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1241,6 +1291,16 @@ it("postgres.v20170312.DescribeReadOnlyGroups", async function () {
 it("postgres.v20170312.CreateInstances", async function () {
     try {
        const data = await client.CreateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.CloseMem0Service", async function () {
+    try {
+       const data = await client.CloseMem0Service({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

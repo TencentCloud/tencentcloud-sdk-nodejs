@@ -277,6 +277,16 @@ export interface NodeActivity {
 }
 
 /**
+ * EnableClusterMonitor返回参数结构体
+ */
+export interface EnableClusterMonitorResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyClusterDeletionProtection返回参数结构体
  */
 export interface ModifyClusterDeletionProtectionResponse {
@@ -582,37 +592,13 @@ export interface ModifyInitNodeScriptsRequest {
 }
 
 /**
- * AttachNodes请求参数结构体
+ * DisableClusterMonitor请求参数结构体
  */
-export interface AttachNodesRequest {
+export interface DisableClusterMonitorRequest {
   /**
-   * <p>集群id</p>
+   * <p>集群ID。</p>
    */
   ClusterId: string
-  /**
-   * <p>节点的实例id列表</p>
-   */
-  ResourceSet: Array<string>
-  /**
-   * <p>队列名称。不指定则为默认队列：<br>SLURM默认队列为：compute。</p>
-   */
-  QueueName?: string
-  /**
-   * <p>指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜像和特定自定义镜像。如不指定，则该字段是默认镜像。</p>
-   */
-  ImageId?: string
-  /**
-   * <p>要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。</p>
-   */
-  ResourceType?: string
-  /**
-   * <p>提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅<a href="https://cloud.tencent.com/document/product/213/17526">Windows</a>和<a href="https://cloud.tencent.com/document/product/213/17525">Linux</a>启动时运行命令。</p>
-   */
-  UserData?: string
-  /**
-   * <p>控制实例加入集群是否跳过重装系统</p><p>默认值：False</p>
-   */
-  SkipResetInstance?: boolean
 }
 
 /**
@@ -912,6 +898,40 @@ export interface AddQueueRequest {
 }
 
 /**
+ * AttachNodes请求参数结构体
+ */
+export interface AttachNodesRequest {
+  /**
+   * <p>集群id</p>
+   */
+  ClusterId: string
+  /**
+   * <p>节点的实例id列表</p>
+   */
+  ResourceSet: Array<string>
+  /**
+   * <p>队列名称。不指定则为默认队列：<br>SLURM默认队列为：compute。</p>
+   */
+  QueueName?: string
+  /**
+   * <p>指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜像和特定自定义镜像。如不指定，则该字段是默认镜像。</p>
+   */
+  ImageId?: string
+  /**
+   * <p>要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅<a href="https://cloud.tencent.com/document/product/213/17526">Windows</a>和<a href="https://cloud.tencent.com/document/product/213/17525">Linux</a>启动时运行命令。</p>
+   */
+  UserData?: string
+  /**
+   * <p>控制实例加入集群是否跳过重装系统</p><p>默认值：False</p>
+   */
+  SkipResetInstance?: boolean
+}
+
+/**
  * 扩容方式配置，定义用什么创建节点。
  */
 export interface ExpansionPolicy {
@@ -1054,6 +1074,20 @@ export interface DescribeQueuesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EnableClusterMonitor请求参数结构体
+ */
+export interface EnableClusterMonitorRequest {
+  /**
+   * <p>集群ID。</p>
+   */
+  ClusterId: string
+  /**
+   * <p>Prometheus实例ID</p>
+   */
+  PrometheusId: string
 }
 
 /**
@@ -2295,6 +2329,24 @@ export interface ModifyInitNodeScriptsResponse {
 }
 
 /**
+ * DescribeClusterMonitorStatus返回参数结构体
+ */
+export interface DescribeClusterMonitorStatusResponse {
+  /**
+   * <p>集群监控状态</p>
+   */
+  MonitorStatus?: string
+  /**
+   * <p>集群关联的prometheus实例ID</p>
+   */
+  PrometheusId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 容器配置信息。
  */
 export interface Docker {
@@ -2974,6 +3026,16 @@ export interface CreateWorkspacesRequest {
 }
 
 /**
+ * DisableClusterMonitor返回参数结构体
+ */
+export interface DisableClusterMonitorResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 启动模板扩容覆盖配置。ExpansionMode=MULTI_CARD 时通过此对象指定机型族、卡数折算等覆盖参数。
  */
 export interface TemplateOverrides {
@@ -3283,17 +3345,13 @@ export interface CFSOptionOverview {
 }
 
 /**
- * ModifyWorkspacesAttribute请求参数结构体
+ * DescribeClusterMonitorStatus请求参数结构体
  */
-export interface ModifyWorkspacesAttributeRequest {
+export interface DescribeClusterMonitorStatusRequest {
   /**
-   * 工作空间列表
+   * <p>集群ID。</p>
    */
-  SpaceIds: Array<string>
-  /**
-   * 修改后的工作空间名称。可任意命名，但不得超过60个字符。
-   */
-  SpaceName?: string
+  ClusterId: string
 }
 
 /**
@@ -3447,6 +3505,20 @@ export interface SetQueueAutoScalingRequest {
    * <p>扩容策略，用于配置启动模板、机型族、GPU 卡数、规格优先级和多可用区等扩容方式。单独传入时仅更新扩容相关配置，未传字段保持原值。</p>
    */
   ExpansionPolicy?: ExpansionPolicy
+}
+
+/**
+ * ModifyWorkspacesAttribute请求参数结构体
+ */
+export interface ModifyWorkspacesAttributeRequest {
+  /**
+   * 工作空间列表
+   */
+  SpaceIds: Array<string>
+  /**
+   * 修改后的工作空间名称。可任意命名，但不得超过60个字符。
+   */
+  SpaceName?: string
 }
 
 /**

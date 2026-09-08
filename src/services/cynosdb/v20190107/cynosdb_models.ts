@@ -2664,6 +2664,10 @@ export interface DescribeInstanceSpecsRequest {
    * <p>集群级别。例如 P0, P1。若未指定可用区，针对于不支持亲和性的可用区将降级查询非亲和性资源。</p>
    */
   ClusterLevel?: string
+  /**
+   * <p>可用区</p>
+   */
+  Zone?: string
 }
 
 /**

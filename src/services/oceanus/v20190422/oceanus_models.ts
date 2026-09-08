@@ -2060,29 +2060,13 @@ export interface FetchSqlGatewayStatementResultResponse {
 }
 
 /**
- * DescribeJobSavepoint返回参数结构体
+ * DescribeVariables返回参数结构体
  */
-export interface DescribeJobSavepointResponse {
+export interface DescribeVariablesResponse {
   /**
-   * 快照列表总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * ["x","y"]
    */
-  TotalNumber?: number
-  /**
-   * 快照列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Savepoint?: Array<Savepoint>
-  /**
-   * 进行中的快照列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunningSavepoint?: Array<Savepoint>
-  /**
-   * 进行中的快照列表总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunningTotalNumber?: number
+  VariableSet?: Array<VariableItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2178,13 +2162,29 @@ export interface DeleteResourceConfigsRequest {
 }
 
 /**
- * DescribeVariables返回参数结构体
+ * DescribeJobSavepoint返回参数结构体
  */
-export interface DescribeVariablesResponse {
+export interface DescribeJobSavepointResponse {
   /**
-   * ["x","y"]
+   * 快照列表总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VariableSet?: Array<VariableItem>
+  TotalNumber?: number
+  /**
+   * 快照列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Savepoint?: Array<Savepoint>
+  /**
+   * 进行中的快照列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningSavepoint?: Array<Savepoint>
+  /**
+   * 进行中的快照列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningTotalNumber?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2959,6 +2959,45 @@ export interface TriggerJobSavepointResponse {
 }
 
 /**
+ * 树状结构资源对象
+ */
+export interface TreeResourceItem {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 资源类型
+   */
+  ResourceType: number
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark: string
+  /**
+   * 文件名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName: string
+  /**
+   * 目录ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderId: string
+  /**
+   * 分状态统计关联作业数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RefJobStatusCountSet?: Array<RefJobStatusCountItem>
+}
+
+/**
  * HiveMetastoreInfo
  */
 export interface HiveMetastoreInfo {
@@ -3373,42 +3412,35 @@ export interface ResourceRefDetail {
 }
 
 /**
- * 树状结构资源对象
+ * 搜索启动日志时返回的作业实例
  */
-export interface TreeResourceItem {
+export interface JobInstanceForSubmissionLog {
   /**
-   * 资源ID
+   * 实例的Id, 按照启动的时间顺序，从1开始
    */
-  ResourceId: string
+  RunningOrderId: number
   /**
-   * 资源名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 作业实例的启动时间
    */
-  Name: string
+  JobInstanceStartTime: string
   /**
-   * 资源类型
+   * 作业实例启动的时间（毫秒）
    */
-  ResourceType: number
+  StartingMillis: number
+}
+
+/**
+ * DescribeJobDetail返回参数结构体
+ */
+export interface DescribeJobDetailResponse {
   /**
-   * 备注
-注意：此字段可能返回 null，表示取不到有效值。
+   * flink rest api 响应
    */
-  Remark: string
+  Data?: string
   /**
-   * 文件名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FileName: string
-  /**
-   * 目录ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FolderId: string
-  /**
-   * 分状态统计关联作业数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RefJobStatusCountSet?: Array<RefJobStatusCountItem>
+  RequestId?: string
 }
 
 /**
@@ -4831,21 +4863,21 @@ export interface ScaleOceanusClusterResponse {
 }
 
 /**
- * 搜索启动日志时返回的作业实例
+ * DescribeJobDetail请求参数结构体
  */
-export interface JobInstanceForSubmissionLog {
+export interface DescribeJobDetailRequest {
   /**
-   * 实例的Id, 按照启动的时间顺序，从1开始
+   * flink rest api 路径
    */
-  RunningOrderId: number
+  Path?: string
   /**
-   * 作业实例的启动时间
+   * 作业id
    */
-  JobInstanceStartTime: string
+  JobSerialId?: string
   /**
-   * 作业实例启动的时间（毫秒）
+   * 请求rest api 方法
    */
-  StartingMillis: number
+  Method?: string
 }
 
 /**
