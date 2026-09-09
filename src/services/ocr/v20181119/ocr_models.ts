@@ -2401,6 +2401,14 @@ export interface VerifyScenePhotoResponse {
    */
   WatermarkContent?: string
   /**
+   * <p>模板图片提示</p>
+   */
+  Template?: SceneWarnInfo
+  /**
+   * <p>VLM 推理结果。仅当请求中传入 ReasoningPrompt 时返回，否则不返回此字段。</p>
+   */
+  ReasoningResult?: ReasoningResult
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2802,41 +2810,29 @@ ItemNames=["姓名","性别"]
 }
 
 /**
- * 单元格数据
+ * VLM 推理结果
  */
-export interface TableCellInfo {
+export interface ReasoningResult {
   /**
-   * 单元格左上角的列索引
+   * <p>实际使用的推理输出模式：enum 或 string。</p>
    */
-  ColTl: number
+  OutputMode?: string
   /**
-   * 单元格左上角的行索引
+   * <p>枚举模式下的推理结果值。当 OutputMode=enum 时返回，必定命中请求中 EnumValues 的某个值。 若 VLM 输出无法匹配任何枚举值，则返回 <strong>UNCERTAIN</strong>。</p>
    */
-  RowTl: number
+  EnumValue?: string
   /**
-   * 单元格右下角的列索引
+   * <p>文本模式下的推理结果值。当 OutputMode=string 时返回。 若 VLM 无法得出结论，则返回 <strong>UNCERTAIN</strong>。</p>
    */
-  ColBr: number
+  TextValue?: string
   /**
-   * 单元格右下角的行索引
+   * <p>VLM 原始输出文本（未经过结构化校验）。</p>
    */
-  RowBr: number
+  RawOutput?: string
   /**
-   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
+   * <p>变量替换后的实际 Prompt（脱敏后）。</p>
    */
-  Text: string
-  /**
-   * 单元格类型
-   */
-  Type: string
-  /**
-   * 单元格置信度
-   */
-  Confidence: number
-  /**
-   * 单元格在图像中的四点坐标
-   */
-  Polygon: Array<Coord>
+  RenderedPrompt?: string
 }
 
 /**
@@ -4104,199 +4100,25 @@ export interface ItemNames {
 }
 
 /**
- * 混贴票据中单张发票的内容
+ * 推理输出配置
  */
-export interface SingleInvoiceItem {
+export interface ReasoningConfig {
   /**
-   * 增值税专用发票
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>实际使用的推理输出模式：enum 或 string。</p>
    */
-  VatSpecialInvoice?: VatInvoiceInfo
+  OutputMode?: string
   /**
-   * 增值税普通发票
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>枚举值集合，仅在 OutputMode=enum 时生效。  VLM 输出必须精确命中此集合中的某个值。</p>
    */
-  VatCommonInvoice?: VatInvoiceInfo
+  EnumValues?: Array<string>
   /**
-   * 增值税电子普通发票
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>文本输出最大长度，仅在 OutputMode=string 时生效。</p><p>取值范围：[1, 500]</p><p>默认值：200</p>
    */
-  VatElectronicCommonInvoice?: VatInvoiceInfo
+  MaxLength?: number
   /**
-   * 增值税电子专用发票
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>是否在推理调用时向 VLM 传入原图进行多模态理解。  true（默认）：VLM 同时接收原图和渲染后的 Prompt，具备多模态理解能力，可直接&quot;看&quot;图片内容进行推理。  false：不传入原图，仅以渲染后的 Prompt（含变量注入值）进行纯文本推理。适用于推理逻辑完全基于结构化出参字段（如水印文字、置信度比较等）的场景，可降低推理延迟和计费成本。  建议：当 ReasoningPrompt 中未涉及&quot;观察图片&quot;、&quot;直接看图&quot;等多模态指令，且推理规则完全基于 ${变量名} 引用的文字结果时，可设为 false 以优化性能。</p>
    */
-  VatElectronicSpecialInvoice?: VatInvoiceInfo
-  /**
-   * 区块链电子发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VatElectronicInvoiceBlockchain?: VatInvoiceInfo
-  /**
-   * 增值税电子普通发票(通行费)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VatElectronicInvoiceToll?: VatInvoiceInfo
-  /**
-   * 电子发票(专用发票)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VatElectronicSpecialInvoiceFull?: VatElectronicInfo
-  /**
-   * 电子发票(普通发票)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VatElectronicInvoiceFull?: VatElectronicInfo
-  /**
-   * 通用机打发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MachinePrintedInvoice?: MachinePrintedInvoice
-  /**
-   * 汽车票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BusInvoice?: BusInvoice
-  /**
-   * 轮船票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ShippingInvoice?: ShippingInvoice
-  /**
-   * 过路过桥费发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TollInvoice?: TollInvoice
-  /**
-   * 其他发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OtherInvoice?: OtherInvoice
-  /**
-   * 机动车销售统一发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MotorVehicleSaleInvoice?: MotorVehicleSaleInvoice
-  /**
-   * 二手车销售统一发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UsedCarPurchaseInvoice?: UsedCarPurchaseInvoice
-  /**
-   * 增值税普通发票(卷票)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VatInvoiceRoll?: VatInvoiceRoll
-  /**
-   * 出租车发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaxiTicket?: TaxiTicket
-  /**
-   * 定额发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QuotaInvoice?: QuotaInvoice
-  /**
-   * 机票行程单
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AirTransport?: AirTransport
-  /**
-   * 非税收入通用票据
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NonTaxIncomeGeneralBill?: NonTaxIncomeBill
-  /**
-   * 非税收入一般缴款书(电子)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NonTaxIncomeElectronicBill?: NonTaxIncomeBill
-  /**
-   * 火车票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrainTicket?: TrainTicket
-  /**
-   * 医疗门诊收费票据（电子）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MedicalOutpatientInvoice?: MedicalInvoice
-  /**
-   * 医疗住院收费票据（电子）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MedicalHospitalizedInvoice?: MedicalInvoice
-  /**
-   * 增值税销货清单
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VatSalesList?: VatInvoiceInfo
-  /**
-   * 电子发票（火车票）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ElectronicTrainTicketFull?: ElectronicTrainTicketFull
-  /**
-   * 电子发票（机票行程单）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ElectronicFlightTicketFull?: ElectronicFlightTicketFull
-  /**
-   * 完税凭证
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaxPayment?: TaxPayment
-  /**
-   * 海关缴款
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CustomsPaymentReceipt?: CustomsPaymentReceipt
-  /**
-   * 银行回单
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BankSlip?: BankSlip
-  /**
-   * 网约车行程单
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OnlineTaxiItinerary?: OnlineTaxiItinerary
-  /**
-   * 海关进/出口货物报关单
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CustomsDeclaration?: CustomsDeclaration
-  /**
-   * 海外发票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OverseasInvoice?: OverseasInvoice
-  /**
-   * 购物小票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ShoppingReceipt?: ShoppingReceipt
-  /**
-   * 销货清单
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SaleInventory?: SaleInventory
-  /**
-   * 机动车销售统一发票（电子）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MotorVehicleSaleInvoiceElectronic?: MotorVehicleSaleInvoice
-  /**
-   * 二手车销售统一发票（电子）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UsedCarPurchaseInvoiceElectronic?: UsedCarPurchaseInvoice
-  /**
-   * 通行费电子票据汇总单
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ElectronicTollSummary?: ElectronicTollSummary
+  EnableImageInput?: boolean
 }
 
 /**
@@ -6947,25 +6769,41 @@ export interface SchemaList {
 }
 
 /**
- * 增值税普通发票（卷票）条目
+ * 单元格数据
  */
-export interface VatRollItem {
+export interface TableCellInfo {
   /**
-   * 项目名称
+   * 单元格左上角的列索引
    */
-  Name?: string
+  ColTl: number
   /**
-   * 数量
+   * 单元格左上角的行索引
    */
-  Quantity?: string
+  RowTl: number
   /**
-   * 单价
+   * 单元格右下角的列索引
    */
-  Price?: string
+  ColBr: number
   /**
-   * 金额
+   * 单元格右下角的行索引
    */
-  Total?: string
+  RowBr: number
+  /**
+   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
+   */
+  Text: string
+  /**
+   * 单元格类型
+   */
+  Type: string
+  /**
+   * 单元格置信度
+   */
+  Confidence: number
+  /**
+   * 单元格在图像中的四点坐标
+   */
+  Polygon: Array<Coord>
 }
 
 /**
@@ -7638,6 +7476,202 @@ export interface ClassifyStoreNameResponse {
 }
 
 /**
+ * 混贴票据中单张发票的内容
+ */
+export interface SingleInvoiceItem {
+  /**
+   * 增值税专用发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatSpecialInvoice?: VatInvoiceInfo
+  /**
+   * 增值税普通发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatCommonInvoice?: VatInvoiceInfo
+  /**
+   * 增值税电子普通发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatElectronicCommonInvoice?: VatInvoiceInfo
+  /**
+   * 增值税电子专用发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatElectronicSpecialInvoice?: VatInvoiceInfo
+  /**
+   * 区块链电子发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatElectronicInvoiceBlockchain?: VatInvoiceInfo
+  /**
+   * 增值税电子普通发票(通行费)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatElectronicInvoiceToll?: VatInvoiceInfo
+  /**
+   * 电子发票(专用发票)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatElectronicSpecialInvoiceFull?: VatElectronicInfo
+  /**
+   * 电子发票(普通发票)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatElectronicInvoiceFull?: VatElectronicInfo
+  /**
+   * 通用机打发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MachinePrintedInvoice?: MachinePrintedInvoice
+  /**
+   * 汽车票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusInvoice?: BusInvoice
+  /**
+   * 轮船票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShippingInvoice?: ShippingInvoice
+  /**
+   * 过路过桥费发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TollInvoice?: TollInvoice
+  /**
+   * 其他发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OtherInvoice?: OtherInvoice
+  /**
+   * 机动车销售统一发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MotorVehicleSaleInvoice?: MotorVehicleSaleInvoice
+  /**
+   * 二手车销售统一发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedCarPurchaseInvoice?: UsedCarPurchaseInvoice
+  /**
+   * 增值税普通发票(卷票)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatInvoiceRoll?: VatInvoiceRoll
+  /**
+   * 出租车发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaxiTicket?: TaxiTicket
+  /**
+   * 定额发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuotaInvoice?: QuotaInvoice
+  /**
+   * 机票行程单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AirTransport?: AirTransport
+  /**
+   * 非税收入通用票据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NonTaxIncomeGeneralBill?: NonTaxIncomeBill
+  /**
+   * 非税收入一般缴款书(电子)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NonTaxIncomeElectronicBill?: NonTaxIncomeBill
+  /**
+   * 火车票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainTicket?: TrainTicket
+  /**
+   * 医疗门诊收费票据（电子）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MedicalOutpatientInvoice?: MedicalInvoice
+  /**
+   * 医疗住院收费票据（电子）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MedicalHospitalizedInvoice?: MedicalInvoice
+  /**
+   * 增值税销货清单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatSalesList?: VatInvoiceInfo
+  /**
+   * 电子发票（火车票）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicTrainTicketFull?: ElectronicTrainTicketFull
+  /**
+   * 电子发票（机票行程单）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicFlightTicketFull?: ElectronicFlightTicketFull
+  /**
+   * 完税凭证
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaxPayment?: TaxPayment
+  /**
+   * 海关缴款
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomsPaymentReceipt?: CustomsPaymentReceipt
+  /**
+   * 银行回单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BankSlip?: BankSlip
+  /**
+   * 网约车行程单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnlineTaxiItinerary?: OnlineTaxiItinerary
+  /**
+   * 海关进/出口货物报关单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomsDeclaration?: CustomsDeclaration
+  /**
+   * 海外发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OverseasInvoice?: OverseasInvoice
+  /**
+   * 购物小票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShoppingReceipt?: ShoppingReceipt
+  /**
+   * 销货清单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SaleInventory?: SaleInventory
+  /**
+   * 机动车销售统一发票（电子）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MotorVehicleSaleInvoiceElectronic?: MotorVehicleSaleInvoice
+  /**
+   * 二手车销售统一发票（电子）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedCarPurchaseInvoiceElectronic?: UsedCarPurchaseInvoice
+  /**
+   * 通行费电子票据汇总单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicTollSummary?: ElectronicTollSummary
+}
+
+/**
  * DescribeExtractDocAgentJob请求参数结构体
  */
 export interface DescribeExtractDocAgentJobRequest {
@@ -8199,6 +8233,14 @@ export interface VerifyScenePhotoRequest {
    * <p>图片的 Base64 值。要求图片经Base64编码后不超过 10M。</p>
    */
   ImageBase64?: string
+  /**
+   * <p>推理 Prompt 模板，默认使用 VLM 对图片进行理解推理，同时支持使用 ${变量名} 进行推理。传入该参数即开启推理流程。</p><p>入参限制：长度限制：1–2000 字符</p>
+   */
+  ReasoningPrompt?: string
+  /**
+   * <p>推理输出配置。当 ReasoningPrompt 传入时建议同步传入，未传入时使用默认配置（OutputMode=enum, EnumValues=[&quot;true&quot;,&quot;false&quot;], EnableImageInput=true）。</p>
+   */
+  ReasoningConfig?: ReasoningConfig
 }
 
 /**
@@ -10741,29 +10783,25 @@ export interface MixedInvoiceDetectRequest {
 }
 
 /**
- * WaybillOCR请求参数结构体
+ * 增值税普通发票（卷票）条目
  */
-export interface WaybillOCRRequest {
+export interface VatRollItem {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 项目名称
    */
-  ImageBase64?: string
+  Name?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 数量
    */
-  ImageUrl?: string
+  Quantity?: string
   /**
-   * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
+   * 单价
    */
-  EnablePreDetect?: boolean
+  Price?: string
   /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   * 金额
    */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
+  Total?: string
 }
 
 /**
@@ -10805,6 +10843,32 @@ export interface BusinessCertificateInfo {
    * 坐标
    */
   Rect?: Rect
+}
+
+/**
+ * WaybillOCR请求参数结构体
+ */
+export interface WaybillOCRRequest {
+  /**
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
+   */
+  EnablePreDetect?: boolean
+  /**
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   */
+  IsPdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
 }
 
 /**

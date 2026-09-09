@@ -191,28 +191,6 @@ export interface DeleteChunkRequest {
 }
 
 /**
- * GetSessionDetails返回参数结构体
- */
-export interface GetSessionDetailsResponse {
-  /**
-   * 会话记录详情
-   */
-  RecordList?: Array<Record>
-  /**
-   * 记录总数
-   */
-  RecordCount?: number
-  /**
-   * 当前在运行的record信息
-   */
-  RunRecord?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 用户对象的权限
  */
 export interface ModelUserAuthority {
@@ -402,38 +380,6 @@ export interface StopChatAIRequest {
    * 实例ID
    */
   InstanceId?: string
-}
-
-/**
- * 步骤扩展结构
- */
-export interface StepExpand {
-  /**
-   * 标题
-   */
-  Title?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * cellid数组
-   */
-  CellIds?: Array<string>
-}
-
-/**
- * GetSessionDetails请求参数结构体
- */
-export interface GetSessionDetailsRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 会话ID
-   */
-  SessionId?: string
 }
 
 /**
@@ -697,6 +643,36 @@ export interface DeleteDataAgentSessionResponse {
 }
 
 /**
+ * QueryUserSessionDetail返回参数结构体
+ */
+export interface QueryUserSessionDetailResponse {
+  /**
+   * <p>用户 Id</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>会话id</p>
+   */
+  SessionId?: string
+  /**
+   * <p>会话详情数组</p>
+   */
+  RecordList?: Array<RecordList>
+  /**
+   * <p>记录总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>运行中的聊天请求, 返回为json字符串</p>
+   */
+  RunRecord?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetKnowledgeBaseFileList返回参数结构体
  */
 export interface GetKnowledgeBaseFileListResponse {
@@ -712,72 +688,6 @@ export interface GetKnowledgeBaseFileListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 问答结构
- */
-export interface Record {
-  /**
-   * 问题内容
-   */
-  Question: string
-  /**
-   * 回答内容
-   */
-  Answer?: string
-  /**
-   * 思考内容
-   */
-  Think?: string
-  /**
-   * 任务列表
-   */
-  TaskList?: Array<Task>
-  /**
-   * 记录创建时间
-   */
-  CreateTime?: string
-  /**
-   * 记录更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 记录id
-   */
-  RecordId?: string
-  /**
-   * 总结内容
-   */
-  FinalSummary?: string
-  /**
-   * 会话ID
-   */
-  SessionId?: string
-  /**
-   * 1=赞，2=踩，0=无反馈
-   */
-  Feedback?: number
-  /**
-   * 数据库信息
-   */
-  DbInfo?: string
-  /**
-   * 错误信息
-   */
-  ErrorContext?: string
-  /**
-   * TaskList的string字符串
-   */
-  TaskListStr?: string
-  /**
-   * 知识库id列表
-   */
-  KnowledgeBaseIds?: Array<string>
-  /**
-   * 上下文
-   */
-  Context?: string
 }
 
 /**
@@ -828,40 +738,6 @@ export interface ChatAIRequest {
    * <p>版本信息</p>
    */
   ArchVersion?: string
-}
-
-/**
- * 任务步骤
- */
-export interface StepInfo {
-  /**
-   * 步骤id
-   */
-  Id: number
-  /**
-   * 步骤名称
-   */
-  Name: string
-  /**
-   * 步骤状态
-   */
-  Status: string
-  /**
-   * 类型(text/expand)
-   */
-  Type: string
-  /**
-   * 总结
-   */
-  Summary?: string
-  /**
-   * 步骤扩展结构
-   */
-  Expand?: StepExpand
-  /**
-   * 描述
-   */
-  Desc?: string
 }
 
 /**
@@ -1107,6 +983,56 @@ export interface ExecuteAgentApiV1Request {
 }
 
 /**
+ * 记录列表
+ */
+export interface RecordList {
+  /**
+   * <p>会话上下文</p>
+   */
+  Context?: string
+  /**
+   * <p>记录id</p>
+   */
+  RecordId?: string
+  /**
+   * <p>追踪id</p>
+   */
+  TraceId?: string
+  /**
+   * <p>会话id</p>
+   */
+  SessionId?: string
+  /**
+   * <p>问题</p>
+   */
+  Question?: string
+  /**
+   * <p>回答</p>
+   */
+  Answer?: string
+  /**
+   * <p>0-否定反馈, 1-肯定反馈</p>
+   */
+  Feedback?: number
+  /**
+   * <p>错误信息</p>
+   */
+  ErrorContext?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>模型信息</p>
+   */
+  Model?: string
+}
+
+/**
  * 文件分片
  */
 export interface Chunk {
@@ -1234,6 +1160,28 @@ export interface CreateDataAgentSessionRequest {
 }
 
 /**
+ * QueryUserSessionDetail请求参数结构体
+ */
+export interface QueryUserSessionDetailRequest {
+  /**
+   * <p>会话id</p>
+   */
+  SessionId?: string
+  /**
+   * <p>分页参数</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+}
+
+/**
  * ModifyKnowledgeBase返回参数结构体
  */
 export interface ModifyKnowledgeBaseResponse {
@@ -1245,28 +1193,6 @@ export interface ModifyKnowledgeBaseResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 任务信息
- */
-export interface Task {
-  /**
-   * 任务ID
-   */
-  Id?: number
-  /**
-   * 任务名称
-   */
-  Name?: string
-  /**
-   * 任务状态
-   */
-  Status?: string
-  /**
-   * 任务步骤列表
-   */
-  StepInfoList?: Array<StepInfo>
 }
 
 /**

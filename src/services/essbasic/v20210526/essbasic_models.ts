@@ -147,7 +147,7 @@ export interface Component {
    */
   ComponentPosY?: number
   /**
-   * <p><strong>在所有的定位方式下</strong>，控件的扩展参数，为<font color="red">JSON格式</font>，不同类型的控件会有部分非通用参数。</p><p><font color="red">ComponentType为TEXT、MULTI_LINE_TEXT时</font>，支持以下参数：</p><ul><li> <b>Font</b>：目前只支持黑体、宋体、仿宋</li><li> <b>FontSize</b>： 范围6 :72</li><li> <b>FontAlign</b>： Left/Right/Center，左对齐/居中/右对齐</li><li> <b>FontColor</b>：字符串类型，格式为RGB颜色数字</li><li> <b>Bold</b>是否加粗：true/false</li></ul><b>参数样例</b>：<code>{&quot;FontColor&quot;:&quot;255,0,0&quot;,&quot;FontSize&quot;:12,&quot;Bold&quot;:false}</code><p><font color="red">ComponentType为DATE时</font>，支持以下参数：</p><ul><li> <b>Font</b>：目前只支持黑体、宋体、仿宋</li><li> <b>FontSize</b>： 范围6 :72</li></ul><b>参数样例</b>：<code>{&quot;FontColor&quot;:&quot;255,0,0&quot;,&quot;FontSize&quot;:12}</code><p><font color="red">ComponentType为WATERMARK时</font>，支持以下参数：</p><ul><li> <b>Font</b>：目前只支持黑体、宋体、仿宋</li><li> <b>FontSize</b>： 范围6 :72</li><li> <b>Opacity</b>： 透明度，范围0 :1</li><li> <b>Rotate</b>： 水印旋转角度，范围0 :359</li><li> <b>Density</b>： 水印样式，1-宽松，2-标准（默认值），3-密集，</li><li> <b>Position</b>： 水印位置，None-平铺（默认值），LeftTop-左上，LeftBottom-左下，RightTop-右上，RightBottom-右下，Center-居中</li><li> <b>SubType</b>： 水印类型：CUSTOM_WATERMARK-自定义内容，PERSON_INFO_WATERMARK-访问者信息</li></ul><b>参数样例</b>：<code>&quot;{\&quot;Font\&quot;:\&quot;黑体\&quot;,\&quot;FontSize\&quot;:20,\&quot;Opacity\&quot;:0.1,\&quot;Density\&quot;:2,\&quot;SubType\&quot;:\&quot;PERSON_INFO_WATERMARK\&quot;}&quot;</code><p><font color="red">ComponentType为FILL_IMAGE时</font>，支持以下参数：</p><ul><li> <b>NotMakeImageCenter</b>：bool。是否设置图片居中。false：居中（默认）。 true : 不居中</li><li> <b>FillMethod</b> : int. 填充方式。0-铺满（默认）；1-等比例缩放</li></ul><p><font color="red">ComponentType为SELECTOR时</font>，支持以下参数：</p><ul><li> <b>WordWrap</b>：bool。是否支持选择控件内容自动折行合成。false：不支持（默认）。 true : 支持自动折行合成</li></ul><p><font color="red">ComponentType为SIGN_SIGNATURE、SIGN_PAGING_SIGNATURE类型时</font>，可以<strong>ComponentTypeLimit</strong>参数控制签署方式</p><ul><li> <b>HANDWRITE</b> : 需要实时手写的手写签名</li><li> <b>HANDWRITTEN_ESIGN</b> : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE)</li><li> <b>OCR_ESIGN</b> : AI智能识别手写签名</li><li> <b>ESIGN</b> : 个人印章类型</li><li> <b>SYSTEM_ESIGN</b> : 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）</li><li> <b>IMG_ESIGN</b> : 图片印章(该类型支持用户在签署将上传的PNG格式的图片作为签名)</li></ul><b>参考样例</b>：<code>{&quot;ComponentTypeLimit&quot;: [&quot;SYSTEM_ESIGN&quot;]}</code>印章的对应关系参考下图![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg)<br><br><font color="red">ComponentType为SIGN_SEAL 或者 SIGN_PAGING_SEAL类型时</font>，可以通过**ComponentTypeLimit**参数控制签署方签署时要使用的印章类型，支持指定以下印章类型<ul><li> <b>OFFICIAL</b> :  企业公章</li><li> <b>CONTRACT</b> : 合同专用章</li><li> <b>FINANCE</b> : 财务专用章</li><li> <b>PERSONNEL</b> : 人事专用章</li><li> <b>OTHER</b> : 其他</li></ul><b>参考样例</b>：<code>{\&quot;ComponentTypeLimit\&quot;:[\&quot;PERSONNEL\&quot;,\&quot;FINANCE\&quot;]}</code> 表示改印章签署区,客户需使用人事专用章或财务专用章盖章签署。<br><br><p><font color="red">ComponentType为SIGN_DATE时</font>，支持以下参数：</p><ul><li> <b>Font</b> :字符串类型目前只支持"黑体"、"宋体"、仿宋，如果不填默认为"黑体"</li><li> <b>FontSize</b> : 数字类型，范围6-72，默认值为12</li><li> <b>FontAlign</b> : 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐</li><li> <b>Format</b> : 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。</li><li> <b>Gaps</b> : 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数</li></ul>如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）<b>参数样例</b>： <code>&quot;{&quot;Format&quot;:&quot;yyyy m d&quot;,&quot;FontSize&quot;:12,&quot;Gaps&quot;:&quot;2,2&quot;, &quot;FontAlign&quot;:&quot;Right&quot;}&quot;</code><p><font color="red">ComponentType为SIGN_SEAL、SIGN_SIGNATURE类型时</font>，支持以下参数：</p><ul><li> <b>PageRanges</b> :PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）</li></ul><b>参数样例</b>：<code>&quot;{&quot;PageRanges&quot;:[{&quot;BeginPage&quot;:1,&quot;EndPage&quot;:-1}]}&quot;</code><p><font color="red">签署印章旋转功能，当ComponentType为SIGN_SIGNATURE、SIGN_DATE、SIGN_SEAL时</font>，可以通过以下参数设置签署图片的旋转角度：</p><ul><li> <b>Rotate</b>：旋转角度，支持范围：-360：360，为正整数时，为顺时针旋转；为负整数时，为逆时针旋转。</li><li> <b>RotateRelation</b>：旋转关联控件，用于指定关联旋转的控件。例如：让印章控件和签署日期控件按照印章控件为中心旋转（此时，设置印章控件的RotateRelation为日期控件的ComponentId，设置日期签署控件的RotateRelation为印章控件的ComponentId）。</li></ul><b>参数样例</b>：<code>{&quot;Rotate&quot;:-30,&quot;RotateRelation&quot;:&quot;Component_Id1&quot;}</code><p><font color="red">签署印章透明度功能设置，</font>当ComponentType为SIGN_SIGNATURE、SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署印章的透明度：</p><ul><li> <b>Opacity</b>：印章透明度，支持范围：0.6-1，0.7表示70%的透明度，1表示无透明度</li></ul><b>参数样例</b>：<code>{&quot;Opacity&quot;:0.7}</code><p><font color="red">签署印章大小功能设置，</font>当ComponentType为SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署时按照实际印章的大小进行签署，如果印章没有设置大小，那么默认会是4.2cm的印章大小：</p><ul><li> <b>UseSealSize</b>：使用印章设置的大小盖章，true表示使用印章设置的大小盖章，false表示使用签署控件的大小进行盖章；不传则为false</li></ul><b>参数样例</b>：<code>{&quot;UseSealSize&quot;:true}</code><p><font color="red">签署意见功能设置，</font>当ComponentType为SIGN_OPINION时，可以通过以下参数设置签署意见的相关内容：</p><ul><li> <b>Values</b>：签署意见预设的需要用户填写的文本</li><li> <b>ValuesArray</b>：签署意见需要用户按顺序点击的分词（组合后应和Values内容一致）</li></ul><b>参数样例</b>：<code>{&quot;Values&quot;:&quot;我已知晓内容并同意签署&quot;,&quot;ValuesArray&quot;:[&quot;我&quot;,&quot;已知晓&quot;,&quot;内容&quot;,&quot;并&quot;,&quot;同意&quot;,&quot;签署&quot;]}</code><p><font color="red">关键字模式下支持关键字找不到的情况下不进行报错的设置</font></p><ul><li> <b>IgnoreKeywordError</b> :1-关键字查找不到时不进行报错</li></ul>场景说明：如果使用关键字进行定位，但是指定的PDF文件中又没有设置的关键字时，发起合同会进行关键字是否存在的校验，如果关键字不存在，会进行报错返回。如果不希望进行报错，可以设置"IgnoreKeywordError"来忽略错误。请注意，如果关键字签署控件对应的签署方在整个PDF文件中一个签署控件都没有，还是会触发报错逻辑。<b>参数样例</b>：<code>&quot;{&quot;IgnoreKeywordError&quot;:1}&quot;</code><p><font color="red">ComponentType为SIGN_VIRTUAL_COMBINATION或者VIRTUAL_COMBINATION时</font>，支持以下参数：</p><ul><li><b>Children:</b> 绝对定位模式下，用来指定此签批控件的组合子控件 </li><b>参数样例</b>：<br><code>{&quot;Children&quot;:[&quot;ComponentId_29&quot;,&quot;ComponentId_27&quot;,&quot;ComponentId_28&quot;,&quot;ComponentId_30&quot;]}</code><li><b>ChildrenComponents:</b> 关键字定位模式下，用来指定此签批控件的组合子控件 </li>ChildrenComponent结构体定义:<table border="1">     <thead>         <tr>             <th>字段名称</th>             <th>类型</th>             <th>描述</th>         </tr>     </thead>     <tbody>         <tr>             <td>ComponentType</td>             <td>string</td>             <td>子控件类型-可选值:SIGN_SIGNATURE,SIGN_DATE,SIGN_SELECTOR,SIGN_MULTI_LINE_TEXT</td>         </tr>         <tr>             <td>ComponentName</td>             <td>string</td>             <td>子控件名称</td>         </tr>         <tr>             <td>Placeholder</td>             <td>string</td>             <td>子控件提示语</td></tr><tr>             <td>ComponentValue</td>             <td>string</td>             <td>子控件值（签署方不可设置）</td>          </tr>         <tr>             <td>ComponentOffsetX</td>             <td>float</td>             <td>控件偏移位置X（相对于父控件（签批控件的ComponentX））</td>         </tr>         <tr>             <td>ComponentOffsetY</td>             <td>float</td>             <td>控件偏移位置Y 相对于父控件（签批控件的ComponentY））</td>         </tr>         <tr>             <td>ComponentWidth</td>             <td>float</td>             <td>控件宽</td>         </tr>         <tr>             <td>ComponentHeight</td>             <td>float</td>             <td>控件高</td>         </tr>         <tr>             <td>ComponentExtra</td>             <td>string</td>             <td>控件的附属信息，根据ComponentType设置</td>         </tr>     </tbody> </table><b>参数样例</b>：<pre>{    "ChildrenComponents": [        {            "ComponentType": "SIGN_SIGNATURE",            "ComponentName": "个人签名",            "Placeholder": "请签名",            "ComponentOffsetX": 10,            "ComponentOffsetY": 30,            "ComponentWidth": 119,            "ComponentHeight": 43,            "ComponentExtra": "{\"ComponentTypeLimit\":[\"SYSTEM_ESIGN\"]}"        },        {            "ComponentType": "SIGN_SELECTOR",            "ComponentName": "是否同意此协议",            "Placeholder": "",            "ComponentOffsetX": 50,            "ComponentOffsetY": 130,            "ComponentWidth": 120,            "ComponentHeight": 43,            "ComponentExtra": "{\"Values\":[\"同意\",\"不同意\",\"再想想\"],\"FontSize\":12,\"FontAlign\":\"Left\",\"Font\":\"黑体\",\"MultiSelect\":false}"        },        {            "ComponentType": "SIGN_MULTI_LINE_TEXT",            "ComponentName": "批注附言",            "Placeholder": "",            "ComponentOffsetX": 150,            "ComponentOffsetY": 300,            "ComponentWidth": 200,            "ComponentHeight": 86,            "ComponentExtra": ""        }    ]}</pre></ul>
+   * <p><strong>在所有的定位方式下</strong>，控件的扩展参数，为<font color="red">JSON格式</font>，不同类型的控件会有部分非通用参数。</p><p><font color="red">ComponentType为TEXT、MULTI_LINE_TEXT时</font>，支持以下参数：</p><ul><li> <b>Font</b>：目前只支持黑体、宋体、仿宋</li><li> <b>FontSize</b>： 范围6 :72</li><li> <b>FontAlign</b>： Left/Right/Center，左对齐/居中/右对齐</li><li> <b>FontColor</b>：字符串类型，格式为RGB颜色数字</li><li> <b>Bold</b>是否加粗：true/false</li></ul><b>参数样例</b>：<code>{&quot;FontColor&quot;:&quot;255,0,0&quot;,&quot;FontSize&quot;:12,&quot;Bold&quot;:false}</code><p><font color="red">ComponentType为DATE时</font>，支持以下参数：</p><ul><li> <b>Font</b>：目前只支持黑体、宋体、仿宋</li><li> <b>FontSize</b>： 范围6 :72</li></ul><b>参数样例</b>：<code>{&quot;FontColor&quot;:&quot;255,0,0&quot;,&quot;FontSize&quot;:12}</code><p><font color="red">ComponentType为WATERMARK时</font>，支持以下参数：</p><ul><li> <b>Font</b>：目前只支持黑体、宋体、仿宋</li><li> <b>FontSize</b>： 范围6 :72</li><li> <b>Opacity</b>： 透明度，范围0 :1</li><li> <b>Rotate</b>： 水印旋转角度，范围0 :359</li><li> <b>Density</b>： 水印样式，1-宽松，2-标准（默认值），3-密集，</li><li> <b>Position</b>： 水印位置，None-平铺（默认值），LeftTop-左上，LeftBottom-左下，RightTop-右上，RightBottom-右下，Center-居中</li><li> <b>SubType</b>： 水印类型：CUSTOM_WATERMARK-自定义内容，PERSON_INFO_WATERMARK-访问者信息</li></ul><b>参数样例</b>：<code>&quot;{\&quot;Font\&quot;:\&quot;黑体\&quot;,\&quot;FontSize\&quot;:20,\&quot;Opacity\&quot;:0.1,\&quot;Density\&quot;:2,\&quot;SubType\&quot;:\&quot;PERSON_INFO_WATERMARK\&quot;}&quot;</code><p><font color="red">ComponentType为FILL_IMAGE时</font>，支持以下参数：</p><ul><li> <b>NotMakeImageCenter</b>：bool。是否设置图片居中。false：居中（默认）。 true : 不居中</li><li> <b>FillMethod</b> : int. 填充方式。0-铺满（默认）；1-等比例缩放</li></ul><p><font color="red">ComponentType为SELECTOR时</font>，支持以下参数：</p><ul><li> <b>WordWrap</b>：bool。是否支持选择控件内容自动折行合成。false：不支持（默认）。 true : 支持自动折行合成</li></ul><p><font color="red">ComponentType为SIGN_SIGNATURE、SIGN_PAGING_SIGNATURE类型时</font>，可以<strong>ComponentTypeLimit</strong>参数控制签署方式</p><ul><li> <b>HANDWRITE</b> : 需要实时手写的手写签名</li><li> <b>HANDWRITTEN_ESIGN</b> : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE)</li><li> <b>OCR_ESIGN</b> : AI智能识别手写签名</li><li> <b>ESIGN</b> : 个人印章类型</li><li> <b>SYSTEM_ESIGN</b> : 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）</li><li> <b>IMG_ESIGN</b> : 图片印章(该类型支持用户在签署将上传的PNG格式的图片作为签名)</li></ul><b>参考样例</b>：<code>{&quot;ComponentTypeLimit&quot;: [&quot;SYSTEM_ESIGN&quot;]}</code>印章的对应关系参考下图![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg)<br><br><font color="red">ComponentType为SIGN_SEAL 或者 SIGN_PAGING_SEAL类型时</font>，可以通过**ComponentTypeLimit**参数控制签署方签署时要使用的印章类型，支持指定以下印章类型<ul><li> <b>OFFICIAL</b> :  企业公章</li><li> <b>CONTRACT</b> : 合同专用章</li><li> <b>FINANCE</b> : 财务专用章</li><li> <b>PERSONNEL</b> : 人事专用章</li><li> <b>OTHER</b> : 其他</li></ul><b>参考样例</b>：<code>{\&quot;ComponentTypeLimit\&quot;:[\&quot;PERSONNEL\&quot;,\&quot;FINANCE\&quot;]}</code> 表示改印章签署区,客户需使用人事专用章或财务专用章盖章签署。<br><br><p><font color="red">ComponentType为SIGN_DATE时</font>，支持以下参数：</p><ul><li> <b>Font</b> :字符串类型目前只支持"黑体"、"宋体"、仿宋，如果不填默认为"黑体"</li><li> <b>FontSize</b> : 数字类型，范围6-72，默认值为12</li><li> <b>FontAlign</b> : 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐</li><li> <b>Format</b> : 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”，”yyyy m d HH:MM:SS”，”yyyy/m/d HH:MM:SS”，”yyyy-m-d HH:MM:SS”，”yyyy.m.d HH:MM:SS”。</li><li> <b>Gaps</b> : 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数</li></ul>如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）<b>参数样例</b>： <code>&quot;{&quot;Format&quot;:&quot;yyyy m d&quot;,&quot;FontSize&quot;:12,&quot;Gaps&quot;:&quot;2,2&quot;, &quot;FontAlign&quot;:&quot;Right&quot;}&quot;</code><p><font color="red">ComponentType为SIGN_SEAL、SIGN_SIGNATURE类型时</font>，支持以下参数：</p><ul><li> <b>PageRanges</b> :PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）</li></ul><b>参数样例</b>：<code>&quot;{&quot;PageRanges&quot;:[{&quot;BeginPage&quot;:1,&quot;EndPage&quot;:-1}]}&quot;</code><p><font color="red">签署印章旋转功能，当ComponentType为SIGN_SIGNATURE、SIGN_DATE、SIGN_SEAL时</font>，可以通过以下参数设置签署图片的旋转角度：</p><ul><li> <b>Rotate</b>：旋转角度，支持范围：-360：360，为正整数时，为顺时针旋转；为负整数时，为逆时针旋转。</li><li> <b>RotateRelation</b>：旋转关联控件，用于指定关联旋转的控件。例如：让印章控件和签署日期控件按照印章控件为中心旋转（此时，设置印章控件的RotateRelation为日期控件的ComponentId，设置日期签署控件的RotateRelation为印章控件的ComponentId）。</li></ul><b>参数样例</b>：<code>{&quot;Rotate&quot;:-30,&quot;RotateRelation&quot;:&quot;Component_Id1&quot;}</code><p><font color="red">签署印章透明度功能设置，</font>当ComponentType为SIGN_SIGNATURE、SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署印章的透明度：</p><ul><li> <b>Opacity</b>：印章透明度，支持范围：0.6-1，0.7表示70%的透明度，1表示无透明度</li></ul><b>参数样例</b>：<code>{&quot;Opacity&quot;:0.7}</code><p><font color="red">签署印章大小功能设置，</font>当ComponentType为SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署时按照实际印章的大小进行签署，如果印章没有设置大小，那么默认会是4.2cm的印章大小：</p><ul><li> <b>UseSealSize</b>：使用印章设置的大小盖章，true表示使用印章设置的大小盖章，false表示使用签署控件的大小进行盖章；不传则为false</li></ul><b>参数样例</b>：<code>{&quot;UseSealSize&quot;:true}</code><p><font color="red">签署意见功能设置，</font>当ComponentType为SIGN_OPINION时，可以通过以下参数设置签署意见的相关内容：</p><ul><li> <b>Values</b>：签署意见预设的需要用户填写的文本</li><li> <b>ValuesArray</b>：签署意见需要用户按顺序点击的分词（组合后应和Values内容一致）</li><li> <b>ValuesArray</b>：签署意见需要用户按顺序点击的分词（组合后应和Values内容一致）</li><li> <b>SignMethod</b>：签署方式，目前支持1-词组拼接方式</li></ul><b>参数样例</b>：<code>{&quot;Values&quot;:&quot;我已知晓内容并同意签署&quot;,&quot;ValuesArray&quot;:[&quot;我&quot;,&quot;已知晓&quot;,&quot;内容&quot;,&quot;并&quot;,&quot;同意&quot;,&quot;签署&quot;],&quot;SignMethod&quot;:1}</code><p><font color="red">关键字模式下支持关键字找不到的情况下不进行报错的设置</font></p><ul><li> <b>IgnoreKeywordError</b> :1-关键字查找不到时不进行报错</li></ul>场景说明：如果使用关键字进行定位，但是指定的PDF文件中又没有设置的关键字时，发起合同会进行关键字是否存在的校验，如果关键字不存在，会进行报错返回。如果不希望进行报错，可以设置"IgnoreKeywordError"来忽略错误。请注意，如果关键字签署控件对应的签署方在整个PDF文件中一个签署控件都没有，还是会触发报错逻辑。<b>参数样例</b>：<code>&quot;{&quot;IgnoreKeywordError&quot;:1}&quot;</code><p><font color="red">ComponentType为SIGN_VIRTUAL_COMBINATION或者VIRTUAL_COMBINATION时</font>，支持以下参数：</p><ul><li><b>Children:</b> 绝对定位模式下，用来指定此签批控件的组合子控件 </li><b>参数样例</b>：<br><code>{&quot;Children&quot;:[&quot;ComponentId_29&quot;,&quot;ComponentId_27&quot;,&quot;ComponentId_28&quot;,&quot;ComponentId_30&quot;]}</code><li><b>ChildrenComponents:</b> 关键字定位模式下，用来指定此签批控件的组合子控件 </li>ChildrenComponent结构体定义:<table border="1">     <thead>         <tr>             <th>字段名称</th>             <th>类型</th>             <th>描述</th>         </tr>     </thead>     <tbody>         <tr>             <td>ComponentType</td>             <td>string</td>             <td>子控件类型-可选值:SIGN_SIGNATURE,SIGN_DATE,SIGN_SELECTOR,SIGN_MULTI_LINE_TEXT</td>         </tr>         <tr>             <td>ComponentName</td>             <td>string</td>             <td>子控件名称</td>         </tr>         <tr>             <td>Placeholder</td>             <td>string</td>             <td>子控件提示语</td></tr><tr>             <td>ComponentValue</td>             <td>string</td>             <td>子控件值（签署方不可设置）</td>          </tr>         <tr>             <td>ComponentOffsetX</td>             <td>float</td>             <td>控件偏移位置X（相对于父控件（签批控件的ComponentX））</td>         </tr>         <tr>             <td>ComponentOffsetY</td>             <td>float</td>             <td>控件偏移位置Y 相对于父控件（签批控件的ComponentY））</td>         </tr>         <tr>             <td>ComponentWidth</td>             <td>float</td>             <td>控件宽</td>         </tr>         <tr>             <td>ComponentHeight</td>             <td>float</td>             <td>控件高</td>         </tr>         <tr>             <td>ComponentExtra</td>             <td>string</td>             <td>控件的附属信息，根据ComponentType设置</td>         </tr>     </tbody> </table><b>参数样例</b>：<pre>{    "ChildrenComponents": [        {            "ComponentType": "SIGN_SIGNATURE",            "ComponentName": "个人签名",            "Placeholder": "请签名",            "ComponentOffsetX": 10,            "ComponentOffsetY": 30,            "ComponentWidth": 119,            "ComponentHeight": 43,            "ComponentExtra": "{\"ComponentTypeLimit\":[\"SYSTEM_ESIGN\"]}"        },        {            "ComponentType": "SIGN_SELECTOR",            "ComponentName": "是否同意此协议",            "Placeholder": "",            "ComponentOffsetX": 50,            "ComponentOffsetY": 130,            "ComponentWidth": 120,            "ComponentHeight": 43,            "ComponentExtra": "{\"Values\":[\"同意\",\"不同意\",\"再想想\"],\"FontSize\":12,\"FontAlign\":\"Left\",\"Font\":\"黑体\",\"MultiSelect\":false}"        },        {            "ComponentType": "SIGN_MULTI_LINE_TEXT",            "ComponentName": "批注附言",            "Placeholder": "",            "ComponentOffsetX": 150,            "ComponentOffsetY": 300,            "ComponentWidth": 200,            "ComponentHeight": 86,            "ComponentExtra": ""        }    ]}</pre></ul>
    */
   ComponentExtra?: string
   /**
@@ -1125,7 +1125,7 @@ export interface CreateFlowOption {
    */
   HideSignCodeAfterStart?: boolean
   /**
-   * <p>发起过程中是否保存草稿</p>
+   * <p>发起过程中是否展示“保存草稿”按钮<br><img src="https://qcloudimg.tencent-cloud.cn/raw/9e863549f7f53c8bab2fa3c4b43c1715.png" alt="image"></p><ol><li>点击保存后，可以通过ChannelCreatePrepareFlow返回的DraftId保存草稿id</li><li>可以用于二次发起合同： <a href="https://qian.tencent.com/developers/companyApis/embedPages/CreatePrepareFlow/">ChannelCreatePrepareFlow</a>，ResourceType    =3 //草稿</li></ol>
    */
   NeedFlowDraft?: boolean
   /**
@@ -3536,7 +3536,7 @@ export interface CreateConsoleLoginUrlRequest {
    */
   BusinessLicense?: string
   /**
-   * <p>组织机构企业注册地址。 请确认该企业注册地址与企业营业执照中注册的地址一致。</p>
+   * <p>组织机构企业注册地址。 请确认该企业注册地址与企业营业执照中注册的地址一致。    </p><p>入参限制：最大长度500个字符</p>
    */
   ProxyAddress?: string
   /**
@@ -5654,10 +5654,6 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
    */
   SealName: string
   /**
-   * <p>电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式。</p>
-   */
-  SealImage?: string
-  /**
    * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
    */
   Operator?: UserInfo
@@ -5666,30 +5662,37 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
    */
   IdCardType?: string
   /**
-   * <p>是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。</p>
-   */
-  SealImageCompress?: boolean
-  /**
    * <p>手机号码；当需要开通自动签时，该参数必传</p>
    */
   Mobile?: string
   /**
-   * <p>该字段已不再使用</p>
-   * @deprecated
+   * <p>印章图片文件 id取值：填写的FileId通过UploadFiles接口上传文件获取。</p>
    */
-  EnableAutoSign?: boolean
-  /**
-   * <p>设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减</p>
-   */
-  LicenseType?: number
+  FileId?: string
   /**
    * <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
    */
   SceneKey?: string
   /**
-   * <p>印章图片文件 id取值：填写的FileId通过UploadFiles接口上传文件获取。</p>
+   * <p>该字段已不再使用，设置不生效。</p>
+   * @deprecated
    */
-  FileId?: string
+  LicenseType?: number
+  /**
+   * <p>该字段已不再使用，请使用 FileId 参数代替。</p>
+   * @deprecated
+   */
+  SealImage?: string
+  /**
+   * <p>该字段已不再使用，设置不生效。</p>
+   * @deprecated
+   */
+  EnableAutoSign?: boolean
+  /**
+   * <p>该字段已不再使用，设置不生效。</p>
+   * @deprecated
+   */
+  SealImageCompress?: boolean
 }
 
 /**
@@ -8355,6 +8358,10 @@ export interface DescribeTemplatesRequest {
    */
   WithPreviewUrl?: boolean
   /**
+   * <p>是否在模板预览页面展示模板控件。<br><br><ul><li><strong>false</strong>：不展示（默认），返回嵌入式预览链接，预览页面仅显示模板文件内容<br><img src="https://qcloudimg.tencent-cloud.cn/raw/7524b0fba5ad2b83a53ee9d7d486d233.png" alt="ShowTemplateControls=false"></li><li><strong>true</strong>：展示，返回嵌入式预览链接，预览页面在文件上叠加展示模板中的填写控件与签署控件，并增加模拟签署的特性。<br><img src="https://qcloudimg.tencent-cloud.cn/raw/ff1b707408f9b3a7ef2e39b8ad659135.png" alt="ShowTemplateControls=true"></li></ul><br>注：仅在 <strong>WithPreviewUrl=true</strong> 时生效；当 <strong>WithPreviewUrl=false</strong> 时不生成预览链接，本参数被忽略。<br><br><strong>适用场景</strong>：当业务方需要在发起合同前预览模板中各角色的填写控件与签署控件的位置和布局，以便确认用户使用模板的控件配置是否正确时，可将此参数设置为 true。<br>示例值：false</p>
+   */
+  ShowPreviewComponents?: boolean
+  /**
    * <p>是否获取模板的PDF文件链接。</p><ul><li>**false**：不获取（默认）</li><li>**true**：获取</li></ul><p>设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地</p><p>注: <code>此功能需要开通功能白名单【第三方应用集成企业获取模板PDF下载链接】，使用前请联系对接的客户经理沟通。</code></p>
    */
   WithPdfUrl?: boolean
@@ -9228,11 +9235,11 @@ export interface ChannelDescribeBillUsageDetailRequest {
    */
   Agent: Agent
   /**
-   * <p>查询开始时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。<span style="color: red;">注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。</span></p><ul><li><p>正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。</p></li><li><p>错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。</p></li></ul><p>参数格式：yyyyMMdd</p>
+   * <p>查询开始时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。<font color="red">注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。</font></p><ul><li><p>正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。</p></li><li><p>错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。</p></li></ul><p>参数格式：yyyyMMdd</p>
    */
   StartTime: string
   /**
-   * <p>查询结束时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。<span style="color: red;">注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。</span></p><ul><li><p>正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。</p></li><li><p>错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。</p></li></ul><p>参数格式：yyyyMMdd</p>
+   * <p>查询结束时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。<font color="red">注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。</font></p><ul><li><p>正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。</p></li><li><p>错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。</p></li></ul><p>参数格式：yyyyMMdd</p>
    */
   EndTime: string
   /**

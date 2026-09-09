@@ -314,6 +314,24 @@ export interface ApiKeyAuthConfig {
 }
 
 /**
+ * Agent 插件凭据参数配置（变量模式）
+ */
+export interface AgentPluginCredentialParam {
+  /**
+   * <p>参数位置</p><p>枚举值：</p><ul><li>0： Header 鉴权</li><li>1： Query 鉴权</li></ul>
+   */
+  KeyLocation?: number
+  /**
+   * <p>参数名称</p>
+   */
+  Name?: string
+  /**
+   * <p>参数取值来源</p>
+   */
+  Input?: AgentInput
+}
+
+/**
  * DescribeConversation请求参数结构体
  */
 export interface DescribeConversationRequest {
@@ -634,6 +652,20 @@ export interface CodeToolConfig {
 }
 
 /**
+ * Skill 企业共享配置。
+ */
+export interface SkillCorpShareConfig {
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SHARE_SCOPE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>SHARE_SCOPE_TYPE_ALL</td><td>1</td><td></td></tr><tr><td>SHARE_SCOPE_TYPE_ACCOUNT</td><td>2</td><td></td></tr><tr><td>SHARE_SCOPE_TYPE_SPACE</td><td>3</td><td></td></tr></tbody></table><p>枚举值：</p><ul><li>0： 未指定</li><li>1： 全企业共享</li><li>3： 按空间共享</li></ul>
+   */
+  ShareScope?: number
+  /**
+   * <p>共享范围信息，仅支持空间；StrId 为空间ID，Name 为空间名称</p>
+   */
+  ShareScopeList?: Array<Identity>
+}
+
+/**
  * DescribeMsgRecordList请求参数结构体
  */
 export interface DescribeMsgRecordListRequest {
@@ -779,6 +811,24 @@ export interface DescribeConcurrencyLimitDetailListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeChannel请求参数结构体
+ */
+export interface DescribeChannelRequest {
+  /**
+   * <p>应用业务ID</p>
+   */
+  AppId: string
+  /**
+   * <p>渠道业务ID</p>
+   */
+  ChannelId: string
+  /**
+   * <p>渠道场景：0-B端场景，1-C端场景</p>
+   */
+  Scene?: number
 }
 
 /**
@@ -1010,17 +1060,17 @@ export interface ModifyConversationRequest {
 }
 
 /**
- * DescribeAgentReleasePreviewList返回参数结构体
+ * CreateChannel返回参数结构体
  */
-export interface DescribeAgentReleasePreviewListResponse {
+export interface CreateChannelResponse {
   /**
-   * <p>发布预览列表</p>
+   * <p>渠道ID</p>
    */
-  ReleaseList?: Array<AgentReleasePreview>
+  ChannelId?: string
   /**
-   * <p>总数</p>
+   * <p>二维码URL（扫码类渠道创建后回填，其他场景为空）</p>
    */
-  TotalCount?: number
+  QrcodeUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1199,6 +1249,24 @@ export interface ModelLimit {
    * 模型提示词长度字符数限制
    */
   PromptLengthLimit?: number
+}
+
+/**
+ * 微信公众号/小程序渠道配置
+ */
+export interface WechatChannelConfig {
+  /**
+   * <p>授权二维码URL（创建后回填）</p>
+   */
+  QrcodeUrl?: string
+  /**
+   * <p>公众号/小程序AppId（授权后回填）</p>
+   */
+  WechatAppId?: string
+  /**
+   * <p>公众号/小程序RefreshToken（授权后回填）</p>
+   */
+  WechatRefreshToken?: string
 }
 
 /**
@@ -1749,6 +1817,24 @@ export interface CopyAppResponse {
 }
 
 /**
+ * Agent 插件凭据配置
+ */
+export interface AgentPluginCredentialConfig {
+  /**
+   * <p>插件鉴权值来源</p><p>枚举值：</p><ul><li>0： 未指定</li><li>1： 使用插件默认鉴权值，仅 APIKey/AccessKey 支持</li><li>2： 引用凭证</li><li>3： 引用变量</li></ul>
+   */
+  AuthValueSource?: number
+  /**
+   * <p>凭证ID</p><p>入参限制：AuthValueSource=2时必填</p>
+   */
+  CredentialId?: string
+  /**
+   * <p>参数配置</p>
+   */
+  ParamList?: Array<AgentPluginCredentialParam>
+}
+
+/**
  * ComplexBillingItem
  */
 export interface ComplexBillingItem {
@@ -1898,6 +1984,20 @@ export interface ModifySkillResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 钉钉机器人渠道配置
+ */
+export interface DingTalkChannelConfig {
+  /**
+   * <p>钉钉机器人ClientId（AppKey）</p>
+   */
+  AppKey?: string
+  /**
+   * <p>钉钉机器人ClientSecret（AppSecret）</p>
+   */
+  AppSecret?: string
 }
 
 /**
@@ -2178,36 +2278,33 @@ export interface FavoriteSkillResponse {
  */
 export interface SkillShare {
   /**
-   * 审批ID
+   * <p>审批ID</p>
    */
   ApprovalId: string
   /**
-   * 共享后关联的新 skill_id
+   * <p>共享后关联的新 skill_id</p>
    */
   ShareSkillId: string
   /**
-   * 共享版本，如 1.0.0
+   * <p>共享版本，如 1.0.0</p>
    */
   ShareVersion: string
   /**
-   * 共享版本ID
+   * <p>共享版本ID</p>
    */
   ShareVersionId: string
   /**
-   * 原 skill_id
+   * <p>原 skill_id</p>
    */
   SkillId: string
   /**
-   * 共享状态
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 未共享 |
-| 1 | 已共享 |
-| 2 | 审批中 |
+   * <p>共享状态</p><p>枚举值:<br>| uint | 描述 |<br>| --- | --- |<br>| 0 | 未共享 |<br>| 1 | 已共享 |<br>| 2 | 审批中 |</p>
    */
   Status: number
+  /**
+   * <p>企业共享范围</p>
+   */
+  CorpShareConfig?: SkillCorpShareConfig
 }
 
 /**
@@ -2256,6 +2353,32 @@ export interface CreateWebSocketTokenRequest {
    * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
    */
   UserId?: string
+}
+
+/**
+ * DescribeChannelList请求参数结构体
+ */
+export interface DescribeChannelListRequest {
+  /**
+   * <p>应用业务ID</p>
+   */
+  AppId: string
+  /**
+   * <p>渠道场景：0-B端场景，1-C端场景</p>
+   */
+  Scene?: number
+  /**
+   * <p>过滤条件（可选，支持ChannelType/ChannelStatus等维度）</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>页码（从1开始）</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量（最大100）</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -2401,6 +2524,40 @@ export interface DescribeAccountListRequest {
 }
 
 /**
+ * 微信客服渠道配置
+ */
+export interface WechatCustomerServiceChannelConfig {
+  /**
+   * <p>企业微信应用Secret</p>
+   */
+  AgentSecret?: string
+  /**
+   * <p>头像URL</p>
+   */
+  Avatar?: string
+  /**
+   * <p>回调配置</p>
+   */
+  Callback?: CallbackConfig
+  /**
+   * <p>客服账号ID</p>
+   */
+  CustomerServiceId?: string
+  /**
+   * <p>客服账号名称</p>
+   */
+  Name?: string
+  /**
+   * <p>客服形象二维码URL</p>
+   */
+  ShareCodeUrl?: string
+  /**
+   * <p>企业微信企业ID</p>
+   */
+  WecomCorpId?: string
+}
+
+/**
  * DescribeConversationList返回参数结构体
  */
 export interface DescribeConversationListResponse {
@@ -2452,6 +2609,24 @@ export interface CreateWebSocketTokenResponse {
 }
 
 /**
+ * DescribeChannelList返回参数结构体
+ */
+export interface DescribeChannelListResponse {
+  /**
+   * <p>渠道列表</p>
+   */
+  ChannelList?: Array<Channel>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSkillCategoryList返回参数结构体
  */
 export interface DescribeSkillCategoryListResponse {
@@ -2463,6 +2638,20 @@ export interface DescribeSkillCategoryListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 飞书机器人渠道配置
+ */
+export interface LarkChannelConfig {
+  /**
+   * <p>飞书机器人AppId</p>
+   */
+  AppId?: string
+  /**
+   * <p>飞书机器人AppSecret</p>
+   */
+  AppSecret?: string
 }
 
 /**
@@ -2512,6 +2701,16 @@ export interface CreatePluginResponse {
 }
 
 /**
+ * ModifyChannel返回参数结构体
+ */
+export interface ModifyChannelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ClawAgent Agent团队协作配置
  */
 export interface ClawAgentAgentTeamConfig {
@@ -2537,6 +2736,16 @@ export interface DescribeSystemVariableListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Telegram渠道配置
+ */
+export interface TelegramChannelConfig {
+  /**
+   * <p>Telegram Bot Token</p>
+   */
+  BotToken?: string
 }
 
 /**
@@ -2627,6 +2836,24 @@ export interface DescribeSpaceListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LINE渠道配置
+ */
+export interface LineChannelConfig {
+  /**
+   * <p>LINE Channel Access Token</p>
+   */
+  AccessToken?: string
+  /**
+   * <p>LINE回调地址</p>
+   */
+  CallbackUrl?: string
+  /**
+   * <p>LINE Channel Secret</p>
+   */
+  ChannelSecret?: string
 }
 
 /**
@@ -2948,6 +3175,20 @@ export interface SingleWorkflowConfig {
 }
 
 /**
+ * DescribeChannel返回参数结构体
+ */
+export interface DescribeChannelResponse {
+  /**
+   * <p>渠道信息（含spec）</p>
+   */
+  Channel?: Channel
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Agent 的插件基本配置
  */
 export interface AgentPluginConfig {
@@ -2975,6 +3216,10 @@ export interface AgentPluginConfig {
    * <p>OAuth 授权同意模式；0-开发者授权；1-使用者授权（仅在auth_type=3时生效）</p>
    */
   OAuthConsent?: number
+  /**
+   * <p>凭证配置</p>
+   */
+  CredentialConfig?: AgentPluginCredentialConfig
 }
 
 /**
@@ -3114,6 +3359,16 @@ export interface DescribeAccountListResponse {
 }
 
 /**
+ * DeleteChannel返回参数结构体
+ */
+export interface DeleteChannelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 用户输入值
  */
 export interface AgentUserInputValue {
@@ -3128,37 +3383,41 @@ export interface AgentUserInputValue {
  */
 export interface SkillProfile {
   /**
-   * 创建时间（Unix秒）
+   * <p>创建时间（Unix秒）</p>
    */
   CreateTime: string
   /**
-   * 创建者
+   * <p>创建者</p>
    */
   Creator: string
   /**
-   * Skill 描述
+   * <p>Skill 描述</p>
    */
   Description: string
   /**
-   * Skill 展示描述
+   * <p>Skill 展示描述</p>
    */
   DisplayDescription: string
   /**
-   * Skill 展示名称
+   * <p>Skill 展示名称</p>
    */
   DisplayName: string
   /**
-   * Skill 图标
+   * <p>Skill 图标</p>
    */
   IconUrl: string
   /**
-   * Skill 名称
+   * <p>Skill 名称</p>
    */
   Name: string
   /**
-   * 更新时间（Unix秒）
+   * <p>更新时间（Unix秒）</p>
    */
   UpdateTime: string
+  /**
+   * <p>空间</p>
+   */
+  SpaceId?: string
 }
 
 /**
@@ -3544,6 +3803,24 @@ export interface SkillSummary {
 }
 
 /**
+ * 企微机器人WebSocket接入配置
+ */
+export interface WecomRobotWebsocketAccess {
+  /**
+   * <p>绑定类型：1-扫码绑定，2-填写表单绑定</p>
+   */
+  BindType?: number
+  /**
+   * <p>企微机器人BotId</p>
+   */
+  BotId?: string
+  /**
+   * <p>企微机器人BotSecret</p>
+   */
+  BotSecret?: string
+}
+
+/**
  * [数据结构定义] Agent协同配置
  */
 export interface AgentCollaborationConfig {
@@ -3851,6 +4128,32 @@ export interface UsageDetail {
 }
 
 /**
+ * 微信ClawBot渠道配置
+ */
+export interface WechatClawBotChannelConfig {
+  /**
+   * <p>ClawBot机器人ID（扫码后回填）</p>
+   */
+  BotId?: string
+  /**
+   * <p>ClawBot机器人Token（扫码后回填）</p>
+   */
+  BotToken?: string
+  /**
+   * <p>二维码状态（wait/confirmed/expired）</p>
+   */
+  QrcodeStatus?: string
+  /**
+   * <p>二维码URL（创建后回填）</p>
+   */
+  QrcodeUrl?: string
+  /**
+   * <p>微信用户ID（扫码后回填）</p>
+   */
+  WechatUserId?: string
+}
+
+/**
  * 操作日志
  */
 export interface AuditLog {
@@ -3997,48 +4300,46 @@ export interface DescribeAgentSummaryListResponse {
  */
 export interface SkillVersion {
   /**
-   * 检测信息
+   * <p>检测信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisInfo: SkillAnalysisInfo
   /**
-   * 当前生效版本号
+   * <p>当前生效版本号</p>
    */
   Version: string
   /**
-   * 当前生效版本ID
+   * <p>当前生效版本ID</p>
    */
   VersionId: string
   /**
-   *     Skill 版本发布流程状态：
-      - 0 INITIALIZED      初始化（版本初始态）
-      - 1 AUDITING         审核中（f_analysis_status ∈ {PENDING, RUNNING}）
-      - 2 PENDING_RELEASE  待发布（低/中风险，等用户确认上架）
-      - 3 RELEASED         已发布
-      - 4 UNRELEASED       未发布（HIGH / UNAVAILABLE / FAILED / 用户放弃，含历史"不通过"语义）
-    与 SkillAnalysisStatus 解耦：前者是用户视角发布生命周期，后者是安全检测阶段。
+   * <p>Skill 版本发布流程状态：</p><pre><code>  - 0 INITIALIZED      初始化（版本初始态）  - 1 AUDITING         审核中（f_analysis_status ∈ {PENDING, RUNNING}）  - 2 PENDING_RELEASE  待发布（低/中风险，等用户确认上架）  - 3 RELEASED         已发布  - 4 UNRELEASED       未发布（HIGH / UNAVAILABLE / FAILED / 用户放弃，含历史&quot;不通过&quot;语义）与 SkillAnalysisStatus 解耦：前者是用户视角发布生命周期，后者是安全检测阶段。</code></pre>
    */
   VersionStatus?: number
   /**
-   * Skill包的md5信息
+   * <p>Skill包的md5信息</p>
    */
   SkillMd5?: string
   /**
-   * 版本包地址
+   * <p>版本包地址</p>
    */
   SkillUrl?: string
   /**
-   * 版本创建时间（Unix秒）
+   * <p>版本创建时间（Unix秒）</p>
    */
   CreateTime?: string
   /**
-   * skill md文档
+   * <p>skill md文档</p>
    */
   SkillMarkdownUrl?: string
   /**
-   * 版本变更说明
+   * <p>版本变更说明</p>
    */
   UpdateDesc?: string
+  /**
+   * <p>变更用户</p>
+   */
+  Updater?: string
 }
 
 /**
@@ -4367,7 +4668,7 @@ export interface Variable {
    */
   Description: string
   /**
-   * <p>模块类型。枚举值: 1:环境参数, 2:应用参数, 3:系统参数, -1:所有参数</p>
+   * <p>变量模块类型</p><p>枚举值：</p><ul><li>0： API参数</li><li>1： 环境参数</li><li>2： 应用参数</li><li>3： 系统参数</li></ul>
    */
   ModuleType: number
   /**
@@ -4390,6 +4691,14 @@ export interface Variable {
    * <p>网络策略列表(支持: 精确域名、*.通配子域名、可带协议/端口/路径前缀)</p>
    */
   EndpointList?: Array<string>
+  /**
+   * <p>是否内置变量</p>
+   */
+  IsBuiltin?: boolean
+  /**
+   * <p>是否可注入到沙箱环境</p>
+   */
+  EnableSandbox?: boolean
 }
 
 /**
@@ -5015,6 +5324,36 @@ export interface AgentExternalToolConfig {
 }
 
 /**
+ * 企微应用渠道配置
+ */
+export interface WecomAppChannelConfig {
+  /**
+   * <p>回调配置</p>
+   */
+  Callback?: CallbackConfig
+  /**
+   * <p>第三方企业ID</p>
+   */
+  ThirdChannelCorpId?: string
+  /**
+   * <p>第三方渠道ID</p>
+   */
+  ThirdChannelId?: string
+  /**
+   * <p>企微应用ID</p>
+   */
+  WecomAgentId?: string
+  /**
+   * <p>企微应用Secret</p>
+   */
+  WecomAgentSecret?: string
+  /**
+   * <p>企业ID</p>
+   */
+  WecomCorpId?: string
+}
+
+/**
  * DescribeMsgRecordCategoryList请求参数结构体
  */
 export interface DescribeMsgRecordCategoryListRequest {
@@ -5220,6 +5559,78 @@ export interface TimerPushConfig {
 }
 
 /**
+ * 渠道规格（聚合场景/类型/名称/备注/配置）
+ */
+export interface ChannelSpec {
+  /**
+   * <p>渠道名称</p>
+   */
+  ChannelName?: string
+  /**
+   * <p>渠道类型，详见ChannelType枚举</p><p>枚举值：</p><ul><li>10000： 微信服务号(Wechat)</li><li>10002： 企微应用(WeComApp)</li><li>10004： 微信客服(WechatCustomerService)</li><li>10009： 企微智能机器人(WeComRobot)</li><li>10013： 钉钉机器人(DingTalk)</li><li>10014： 企微智能机器人WebSocket(WeComRobot)</li><li>10015： 微信ClawBot(WechatClawBot)</li><li>10011： LINE(Line)</li><li>10012： Telegram(Telegram)</li><li>10016： 飞书机器人(Lark) </li></ul><p>C端场景（Scene=1时）只支持10014和10015</p>
+   */
+  ChannelType?: number
+  /**
+   * <p>备注</p>
+   */
+  Description?: string
+  /**
+   * <p>钉钉机器人配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DingTalk?: DingTalkChannelConfig
+  /**
+   * <p>飞书机器人配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Lark?: LarkChannelConfig
+  /**
+   * <p>LINE配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Line?: LineChannelConfig
+  /**
+   * <p>渠道场景：0-B端场景，1-C端场景</p>
+   */
+  Scene?: number
+  /**
+   * <p>Telegram配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Telegram?: TelegramChannelConfig
+  /**
+   * <p>归属用户+Agent运行态标识（C端）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAgent?: UserAgentReference
+  /**
+   * <p>微信公众号/小程序配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Wechat?: WechatChannelConfig
+  /**
+   * <p>微信ClawBot配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WechatClawBot?: WechatClawBotChannelConfig
+  /**
+   * <p>微信客服配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WechatCustomerService?: WechatCustomerServiceChannelConfig
+  /**
+   * <p>企微应用配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WecomApp?: WecomAppChannelConfig
+  /**
+   * <p>企微机器人配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WecomRobot?: WecomRobotChannelConfig
+}
+
+/**
  * Agent 工具入参
  */
 export interface AgentToolConfig {
@@ -5415,6 +5826,20 @@ export interface AgentToolOutputParameter {
 }
 
 /**
+ * CreateChannel请求参数结构体
+ */
+export interface CreateChannelRequest {
+  /**
+   * <p>应用业务ID</p>
+   */
+  AppId: string
+  /**
+   * <p>渠道规格（场景/类型/名称/备注/配置，必填）</p>
+   */
+  Spec?: ChannelSpec
+}
+
+/**
  * 通用身份信息（支持数字 ID 与字符串 ID 两种形态）
  */
 export interface Identity {
@@ -5500,6 +5925,20 @@ export interface DescribeAppTriggerInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用户+Agent归属引用
+ */
+export interface UserAgentReference {
+  /**
+   * <p>claw agent 运行态标识</p>
+   */
+  AgentId?: string
+  /**
+   * <p>归属用户标识</p>
+   */
+  UserId?: string
 }
 
 /**
@@ -5899,6 +6338,24 @@ export interface DescribePluginResponse {
 }
 
 /**
+ * DescribeAgentReleasePreviewList返回参数结构体
+ */
+export interface DescribeAgentReleasePreviewListResponse {
+  /**
+   * <p>发布预览列表</p>
+   */
+  ReleaseList?: Array<AgentReleasePreview>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSkillSummaryList返回参数结构体
  */
 export interface DescribeSkillSummaryListResponse {
@@ -6153,6 +6610,28 @@ export interface AgentToolInputParameter {
 }
 
 /**
+ * 企微机器人回调接入配置
+ */
+export interface WecomRobotCallbackAccess {
+  /**
+   * <p>回调配置</p>
+   */
+  Callback?: CallbackConfig
+  /**
+   * <p>机器人名称</p>
+   */
+  RobotName?: string
+  /**
+   * <p>企微企业ID</p>
+   */
+  WecomCorpId?: string
+  /**
+   * <p>企微机器人ID</p>
+   */
+  WecomRobotId?: string
+}
+
+/**
  * RunAppTriggerNow返回参数结构体
  */
 export interface RunAppTriggerNowResponse {
@@ -6178,6 +6657,24 @@ export interface DescribeSkillDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 回调配置
+ */
+export interface CallbackConfig {
+  /**
+   * <p>回调AESKey</p>
+   */
+  CallbackAesKey?: string
+  /**
+   * <p>回调Token</p>
+   */
+  CallbackToken?: string
+  /**
+   * <p>回调URL</p>
+   */
+  CallbackUrl?: string
 }
 
 /**
@@ -6394,6 +6891,22 @@ export interface ConversationMessage {
    * <p>类型</p>
    */
   Type?: string
+}
+
+/**
+ * 企微机器人渠道配置
+ */
+export interface WecomRobotChannelConfig {
+  /**
+   * <p>回调接入配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Callback?: WecomRobotCallbackAccess
+  /**
+   * <p>WebSocket长连接配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Websocket?: WecomRobotWebsocketAccess
 }
 
 /**
@@ -6619,6 +7132,41 @@ export interface DescribePluginRequest {
    * <p>插件展示场景。不传或取 0 时不限定场景。</p><p>枚举值：</p><ul><li>0：不限定场景</li><li>1：Agent 模式</li><li>2：工作流</li><li>3：智能工作台</li></ul>
    */
   Module?: number
+}
+
+/**
+ * 渠道信息
+ */
+export interface Channel {
+  /**
+   * <p>渠道ID</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>渠道状态（仅B端）：1-未发布，2-运行中，3-已下线（与ConnectStatus互斥）</p>
+   */
+  ChannelStatus?: number
+  /**
+   * <p>连接状态（仅C端）：1-初始，2-连接成功，3-连接失败（与ChannelStatus互斥）</p>
+   */
+  ConnectStatus?: number
+  /**
+   * <p>创建时间（Unix秒）</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>渠道规格</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Spec?: ChannelSpec
+  /**
+   * <p>更新时间（Unix秒）</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>最后更新人</p>
+   */
+  Updater?: string
 }
 
 /**
@@ -7175,6 +7723,24 @@ export interface DescribeLatestReleaseRequest {
 }
 
 /**
+ * DeleteChannel请求参数结构体
+ */
+export interface DeleteChannelRequest {
+  /**
+   * <p>应用业务ID</p>
+   */
+  AppId: string
+  /**
+   * <p>渠道业务ID</p>
+   */
+  ChannelId: string
+  /**
+   * <p>渠道场景：0-B端场景，1-C端场景</p>
+   */
+  Scene?: number
+}
+
+/**
  * AppTriggerParamBindingValue
  */
 export interface AppTriggerParamBindingValue {
@@ -7238,6 +7804,32 @@ export interface AICallConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Voice: VoiceConfig
+}
+
+/**
+ * ModifyChannel请求参数结构体
+ */
+export interface ModifyChannelRequest {
+  /**
+   * <p>应用业务ID</p>
+   */
+  AppId: string
+  /**
+   * <p>渠道业务ID</p>
+   */
+  ChannelId: string
+  /**
+   * <p>渠道场景：0-B端场景，1-C端场景</p>
+   */
+  Scene?: number
+  /**
+   * <p>待更新的渠道规格</p>
+   */
+  Spec?: ChannelSpec
+  /**
+   * <p>更新字段掩码,<br>B端(Scene=0)：支持：【spec.description&quot; ,&quot;spec.wecom_robot.callback.wecom_robot_id&quot;】<br>C端(Scene=1)：支持：【&quot;spec.description&quot; , &quot;spec.wecom_robot.websocket.bot_id&quot; ,&quot;spec.wecom_robot.websocket.bot_secret&quot;】</p>
+   */
+  UpdateMask?: FieldMask
 }
 
 /**

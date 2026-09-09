@@ -28,7 +28,6 @@ import {
   ChatAIResponse,
   QueryModelsResponse,
   DeleteChunkRequest,
-  GetSessionDetailsResponse,
   ModelUserAuthority,
   AppendDocument,
   QueryChunkListResponse,
@@ -37,8 +36,6 @@ import {
   UploadJob,
   QueryChunkListRequest,
   StopChatAIRequest,
-  StepExpand,
-  GetSessionDetailsRequest,
   QueryModelsRequest,
   ModifyKnowledgeBaseRequest,
   DeleteChunkResponse,
@@ -53,10 +50,9 @@ import {
   ExecuteAgentApiRequest,
   ModifyChunkResponse,
   DeleteDataAgentSessionResponse,
+  QueryUserSessionDetailResponse,
   GetKnowledgeBaseFileListResponse,
-  Record,
   ChatAIRequest,
-  StepInfo,
   QueryUserAuthorityRequest,
   FileInfo,
   GetKnowledgeBaseFileListRequest,
@@ -68,13 +64,14 @@ import {
   ModifyUserAuthorityResponse,
   AddChunkResponse,
   ExecuteAgentApiV1Request,
+  RecordList,
   Chunk,
   UploadAndCommitFileResponse,
   AppendKnowledgeTaskRequest,
   KnowledgeTaskConfig,
   CreateDataAgentSessionRequest,
+  QueryUserSessionDetailRequest,
   ModifyKnowledgeBaseResponse,
-  Task,
   DeleteDataAgentSessionRequest,
   ExecuteAgentApiV1Response,
   ColumnInfo,
@@ -138,16 +135,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetKnowledgeBaseFileListResponse) => void
   ): Promise<GetKnowledgeBaseFileListResponse> {
     return this.request("GetKnowledgeBaseFileList", req, cb)
-  }
-
-  /**
-   * 获取用户会话记录详情列表
-   */
-  async GetSessionDetails(
-    req: GetSessionDetailsRequest,
-    cb?: (error: string, rep: GetSessionDetailsResponse) => void
-  ): Promise<GetSessionDetailsResponse> {
-    return this.request("GetSessionDetails", req, cb)
   }
 
   /**
@@ -298,6 +285,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryKnowledgeTaskResponse) => void
   ): Promise<QueryKnowledgeTaskResponse> {
     return this.request("QueryKnowledgeTask", req, cb)
+  }
+
+  /**
+   * 查询用户会话详情
+   */
+  async QueryUserSessionDetail(
+    req: QueryUserSessionDetailRequest,
+    cb?: (error: string, rep: QueryUserSessionDetailResponse) => void
+  ): Promise<QueryUserSessionDetailResponse> {
+    return this.request("QueryUserSessionDetail", req, cb)
   }
 
   /**

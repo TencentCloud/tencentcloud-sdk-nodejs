@@ -1020,6 +1020,16 @@ export interface ControlAIConversationResponse {
 }
 
 /**
+ * ai对话需要透传给客户端的数据
+ */
+export interface TransparentData {
+  /**
+   * <p>透传给客户端的信息</p>
+   */
+  Data: string
+}
+
+/**
  * StopAIConversation请求参数结构体
  */
 export interface StopAIConversationRequest {
@@ -5028,21 +5038,25 @@ export interface DescribeScaleInfoRequest {
  */
 export interface ControlAIConversationRequest {
   /**
-   * 任务唯一标识
+   * <p>任务唯一标识</p>
    */
   TaskId: string
   /**
-   * 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本. - InvokeLLM，服务端发送文本给大模型，触发对话
+   * <p>控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本. - InvokeLLM，服务端发送文本给大模型，触发对话。- TransparentData，透传信息给客户端。</p>
    */
   Command: string
   /**
-   * 服务端发送播报文本命令，当Command为ServerPushText时必填
+   * <p>服务端发送播报文本命令，当Command为ServerPushText时必填</p>
    */
   ServerPushText?: ServerPushText
   /**
-   * 服务端发送命令主动请求大模型,当Command为InvokeLLM时会把content请求到大模型,头部增加X-Invoke-LLM="1"
+   * <p>服务端发送命令主动请求大模型,当Command为InvokeLLM时会把content请求到大模型,头部增加X-Invoke-LLM=&quot;1&quot;</p>
    */
   InvokeLLM?: InvokeLLM
+  /**
+   * <p>ai对话需要透传给客户端的信息</p>
+   */
+  TransparentData?: TransparentData
 }
 
 /**

@@ -57,6 +57,7 @@ import {
   ScaleInfomation,
   AgentParams,
   ControlAIConversationResponse,
+  TransparentData,
   StopAIConversationRequest,
   VideoEncodeParams,
   UpdateAIConversationResponse,

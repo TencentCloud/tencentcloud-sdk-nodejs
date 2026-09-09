@@ -7382,7 +7382,7 @@ export interface ModifyEnvRequest {
    */
   EnvId: string
   /**
-   * <p>环境备注名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符</p>
+   * <p>环境备注名</p><p>入参限制：最大长度为32</p>
    */
   Alias?: string
   /**

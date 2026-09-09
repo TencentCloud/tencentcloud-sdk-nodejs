@@ -29,6 +29,7 @@ import {
   AppModelConfig,
   Plugin,
   ApiKeyAuthConfig,
+  AgentPluginCredentialParam,
   DescribeConversationRequest,
   Conversation,
   AuthConfig,
@@ -45,12 +46,14 @@ import {
   AppealingStatus,
   DescribeVariableResponse,
   CodeToolConfig,
+  SkillCorpShareConfig,
   DescribeMsgRecordListRequest,
   WeeklyTime,
   UsageSummary,
   SkillReferenceSummary,
   ModifyAppTriggerRequest,
   DescribeConcurrencyLimitDetailListResponse,
+  DescribeChannelRequest,
   AgentSpec,
   ClawAgentConfig,
   CreatePluginRequest,
@@ -60,7 +63,7 @@ import {
   AppConfig,
   AppAuxiliaryInfo,
   ModifyConversationRequest,
-  DescribeAgentReleasePreviewListResponse,
+  CreateChannelResponse,
   DescribeUsageDetailListResponse,
   DescribeAppTriggerResponse,
   ModifyVariableResponse,
@@ -70,6 +73,7 @@ import {
   AppWebSearchConfig,
   AgentProfile,
   ModelLimit,
+  WechatChannelConfig,
   RunAppTriggerNowRequest,
   AppTriggerWebhookConfig,
   MsgRecordSource,
@@ -90,11 +94,13 @@ import {
   DeleteConversationRequest,
   DescribeSkillSummaryListRequest,
   CopyAppResponse,
+  AgentPluginCredentialConfig,
   ComplexBillingItem,
   BackgroundImage,
   TimerScheduleConfig,
   Model,
   ModifySkillResponse,
+  DingTalkChannelConfig,
   DescribeSpaceListRequest,
   AppTriggerRunLog,
   ConversationContent,
@@ -108,6 +114,7 @@ import {
   SkillShare,
   AppShareWhitelistItem,
   CreateWebSocketTokenRequest,
+  DescribeChannelListRequest,
   DeleteSkillResponse,
   DescribeAgentReleasePreviewListRequest,
   PauseAppTriggerRequest,
@@ -115,20 +122,26 @@ import {
   ModelParameter,
   ModifyAppResponse,
   DescribeAccountListRequest,
+  WechatCustomerServiceChannelConfig,
   DescribeConversationListResponse,
   MultiAgentConfig,
   CreateWebSocketTokenResponse,
+  DescribeChannelListResponse,
   DescribeSkillCategoryListResponse,
+  LarkChannelConfig,
   TimeRange,
   DescribeConsumptionDetailListResponse,
   CreatePluginResponse,
+  ModifyChannelResponse,
   ClawAgentAgentTeamConfig,
   DescribeSystemVariableListResponse,
+  TelegramChannelConfig,
   AgentPlugin,
   ConversationResetInfo,
   ModifyConversationResponse,
   ConversationQuoteInfo,
   DescribeSpaceListResponse,
+  LineChannelConfig,
   ConversationRecordSummary,
   ConversationRecordTimeUsage,
   App,
@@ -142,12 +155,14 @@ import {
   SkillNotice,
   ResponseParam,
   SingleWorkflowConfig,
+  DescribeChannelResponse,
   AgentPluginConfig,
   PluginSummary,
   CreateWorkspaceCredentialResponse,
   ConversationMcpApp,
   ModifyPluginRequest,
   DescribeAccountListResponse,
+  DeleteChannelResponse,
   AgentUserInputValue,
   SkillProfile,
   DescribeMetricOverviewListRequest,
@@ -165,6 +180,7 @@ import {
   DescribeReleaseSummaryResponse,
   MCPToolConfig,
   SkillSummary,
+  WecomRobotWebsocketAccess,
   AgentCollaborationConfig,
   ModifyAppTriggerResponse,
   RoleConfig,
@@ -183,6 +199,7 @@ import {
   ReleaseSkillRequest,
   DescribeVariableRequest,
   UsageDetail,
+  WechatClawBotChannelConfig,
   AuditLog,
   UnfavoriteSkillRequest,
   InputBoxConfig,
@@ -236,6 +253,7 @@ import {
   ViewScope,
   CreateConversationRequest,
   AgentExternalToolConfig,
+  WecomAppChannelConfig,
   DescribeMsgRecordCategoryListRequest,
   CallSource,
   ConsumptionUsage,
@@ -248,6 +266,7 @@ import {
   DescribeAuditLogMetaResponse,
   MultiModalQAModel,
   TimerPushConfig,
+  ChannelSpec,
   AgentToolConfig,
   OAuthConfig,
   WeeklySchedule,
@@ -255,12 +274,14 @@ import {
   AgentInput,
   AgentReleasePreview,
   AgentToolOutputParameter,
+  CreateChannelRequest,
   Identity,
   DescribeAgentDetailResponse,
   CreateAppTriggerResponse,
   SystemVariable,
   ModifyPluginResponse,
   DescribeAppTriggerInstanceResponse,
+  UserAgentReference,
   CreateSkillShareRequest,
   ConsumptionDetail,
   AppGreetingConfig,
@@ -279,6 +300,7 @@ import {
   AppOperation,
   PluginProfile,
   DescribePluginResponse,
+  DescribeAgentReleasePreviewListResponse,
   DescribeSkillSummaryListResponse,
   DescribeConversationMessageListRequest,
   DescribeReleaseListResponse,
@@ -288,8 +310,10 @@ import {
   DescribeUsageSummaryListRequest,
   AgentRelease,
   AgentToolInputParameter,
+  WecomRobotCallbackAccess,
   RunAppTriggerNowResponse,
   DescribeSkillDetailResponse,
+  CallbackConfig,
   DeleteAppTriggerRequest,
   ReleaseSummary,
   OnceSchedule,
@@ -301,6 +325,7 @@ import {
   FieldMask,
   AppTriggerWebhookParamSchemaConfig,
   ConversationMessage,
+  WecomRobotChannelConfig,
   DescribeConsumptionDetailListRequest,
   DescribeVariableListRequest,
   DescribeConversationMessageListResponse,
@@ -312,6 +337,7 @@ import {
   AppTriggerScheduleStatus,
   DeleteSkillRequest,
   DescribePluginRequest,
+  Channel,
   PluginUserState,
   DuplexBilling,
   MultiModalUnderstandingModel,
@@ -337,10 +363,12 @@ import {
   DescribeAppRequest,
   IntervalSchedule,
   DescribeLatestReleaseRequest,
+  DeleteChannelRequest,
   AppTriggerParamBindingValue,
   CopyAgentFromAppResponse,
   RetryReleaseResponse,
   AICallConfig,
+  ModifyChannelRequest,
   CreateSkillShareResponse,
   AgentSummary,
   DeleteAppTriggerResponse,
@@ -391,26 +419,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Agent配置信息
-   */
-  async ModifyAgent(
-    req: ModifyAgentRequest,
-    cb?: (error: string, rep: ModifyAgentResponse) => void
-  ): Promise<ModifyAgentResponse> {
-    return this.request("ModifyAgent", req, cb)
-  }
-
-  /**
-   * 查询应用的消息记录分类树，返回分类及子分类、各分类下记录数量与操作权限
-   */
-  async DescribeMsgRecordCategoryList(
-    req: DescribeMsgRecordCategoryListRequest,
-    cb?: (error: string, rep: DescribeMsgRecordCategoryListResponse) => void
-  ): Promise<DescribeMsgRecordCategoryListResponse> {
-    return this.request("DescribeMsgRecordCategoryList", req, cb)
-  }
-
-  /**
    * DeleteAppTrigger
    */
   async DeleteAppTrigger(
@@ -418,56 +426,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAppTriggerResponse) => void
   ): Promise<DeleteAppTriggerResponse> {
     return this.request("DeleteAppTrigger", req, cb)
-  }
-
-  /**
-   * 获取空间列表
-   */
-  async DescribeSpaceList(
-    req: DescribeSpaceListRequest,
-    cb?: (error: string, rep: DescribeSpaceListResponse) => void
-  ): Promise<DescribeSpaceListResponse> {
-    return this.request("DescribeSpaceList", req, cb)
-  }
-
-  /**
-   * 删除空间
-   */
-  async DeleteSpace(
-    req: DeleteSpaceRequest,
-    cb?: (error: string, rep: DeleteSpaceResponse) => void
-  ): Promise<DeleteSpaceResponse> {
-    return this.request("DeleteSpace", req, cb)
-  }
-
-  /**
-   * ModifyAppTrigger
-   */
-  async ModifyAppTrigger(
-    req: ModifyAppTriggerRequest,
-    cb?: (error: string, rep: ModifyAppTriggerResponse) => void
-  ): Promise<ModifyAppTriggerResponse> {
-    return this.request("ModifyAppTrigger", req, cb)
-  }
-
-  /**
-   * 获取系统变量
-   */
-  async DescribeSystemVariableList(
-    req: DescribeSystemVariableListRequest,
-    cb?: (error: string, rep: DescribeSystemVariableListResponse) => void
-  ): Promise<DescribeSystemVariableListResponse> {
-    return this.request("DescribeSystemVariableList", req, cb)
-  }
-
-  /**
-   * 获取参数变量列表
-   */
-  async DescribeVariableList(
-    req: DescribeVariableListRequest,
-    cb?: (error: string, rep: DescribeVariableListResponse) => void
-  ): Promise<DescribeVariableListResponse> {
-    return this.request("DescribeVariableList", req, cb)
   }
 
   /**
@@ -501,83 +459,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeAppTriggerInstance
+   * 创建渠道（通过scene区分B端应用发布渠道与C端IM渠道）
    */
-  async DescribeAppTriggerInstance(
-    req: DescribeAppTriggerInstanceRequest,
-    cb?: (error: string, rep: DescribeAppTriggerInstanceResponse) => void
-  ): Promise<DescribeAppTriggerInstanceResponse> {
-    return this.request("DescribeAppTriggerInstance", req, cb)
-  }
-
-  /**
-   * 查看会话信息
-   */
-  async DescribeConversation(
-    req: DescribeConversationRequest,
-    cb?: (error: string, rep: DescribeConversationResponse) => void
-  ): Promise<DescribeConversationResponse> {
-    return this.request("DescribeConversation", req, cb)
-  }
-
-  /**
-   * 创建一条消息记录分类，支持指定分类名称与父分类（ParentId 为 0 时表示一级分类）
-   */
-  async CreateMsgRecordCategory(
-    req: CreateMsgRecordCategoryRequest,
-    cb?: (error: string, rep: CreateMsgRecordCategoryResponse) => void
-  ): Promise<CreateMsgRecordCategoryResponse> {
-    return this.request("CreateMsgRecordCategory", req, cb)
-  }
-
-  /**
-   * 查询某个 Skill 被引用的详情列表（按 SkillRefType 分组：OpenClaw / cloud agent / 企业助手 agent） 鉴权：同 DescribeSkillDetail（能看该 Skill 即可查）
-   */
-  async DescribeSkillReferenceList(
-    req: DescribeSkillReferenceListRequest,
-    cb?: (error: string, rep: DescribeSkillReferenceListResponse) => void
-  ): Promise<DescribeSkillReferenceListResponse> {
-    return this.request("DescribeSkillReferenceList", req, cb)
-  }
-
-  /**
-   * 上架skill
-   */
-  async ReleaseSkill(
-    req: ReleaseSkillRequest,
-    cb?: (error: string, rep: ReleaseSkillResponse) => void
-  ): Promise<ReleaseSkillResponse> {
-    return this.request("ReleaseSkill", req, cb)
-  }
-
-  /**
-   * 取消收藏skill
-   */
-  async UnfavoriteSkill(
-    req: UnfavoriteSkillRequest,
-    cb?: (error: string, rep: UnfavoriteSkillResponse) => void
-  ): Promise<UnfavoriteSkillResponse> {
-    return this.request("UnfavoriteSkill", req, cb)
-  }
-
-  /**
-   * 修改插件
-   */
-  async ModifyPlugin(
-    req: ModifyPluginRequest,
-    cb?: (error: string, rep: ModifyPluginResponse) => void
-  ): Promise<ModifyPluginResponse> {
-    return this.request("ModifyPlugin", req, cb)
-  }
-
-  /**
-   * 查看操作日志列表
-   */
-  async DescribeAuditLogList(
-    req: DescribeAuditLogListRequest,
-    cb?: (error: string, rep: DescribeAuditLogListResponse) => void
-  ): Promise<DescribeAuditLogListResponse> {
-    return this.request("DescribeAuditLogList", req, cb)
+  async CreateChannel(
+    req: CreateChannelRequest,
+    cb?: (error: string, rep: CreateChannelResponse) => void
+  ): Promise<CreateChannelResponse> {
+    return this.request("CreateChannel", req, cb)
   }
 
   /**
@@ -601,23 +489,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建工作空间凭证
+   * 修改插件
    */
-  async CreateWorkspaceCredential(
-    req: CreateWorkspaceCredentialRequest,
-    cb?: (error: string, rep: CreateWorkspaceCredentialResponse) => void
-  ): Promise<CreateWorkspaceCredentialResponse> {
-    return this.request("CreateWorkspaceCredential", req, cb)
-  }
-
-  /**
-   * DescribeAppTriggerSummaryList
-   */
-  async DescribeAppTriggerSummaryList(
-    req: DescribeAppTriggerSummaryListRequest,
-    cb?: (error: string, rep: DescribeAppTriggerSummaryListResponse) => void
-  ): Promise<DescribeAppTriggerSummaryListResponse> {
-    return this.request("DescribeAppTriggerSummaryList", req, cb)
+  async ModifyPlugin(
+    req: ModifyPluginRequest,
+    cb?: (error: string, rep: ModifyPluginResponse) => void
+  ): Promise<ModifyPluginResponse> {
+    return this.request("ModifyPlugin", req, cb)
   }
 
   /**
@@ -641,33 +519,74 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 Agent 摘要信息列表
+   * 修改Agent配置信息
    */
-  async DescribeAgentSummaryList(
-    req: DescribeAgentSummaryListRequest,
-    cb?: (error: string, rep: DescribeAgentSummaryListResponse) => void
-  ): Promise<DescribeAgentSummaryListResponse> {
-    return this.request("DescribeAgentSummaryList", req, cb)
+  async ModifyAgent(
+    req: ModifyAgentRequest,
+    cb?: (error: string, rep: ModifyAgentResponse) => void
+  ): Promise<ModifyAgentResponse> {
+    return this.request("ModifyAgent", req, cb)
   }
 
   /**
-   * RunAppTriggerNow
+   * 删除指定的消息记录分类
    */
-  async RunAppTriggerNow(
-    req: RunAppTriggerNowRequest,
-    cb?: (error: string, rep: RunAppTriggerNowResponse) => void
-  ): Promise<RunAppTriggerNowResponse> {
-    return this.request("RunAppTriggerNow", req, cb)
+  async DeleteMsgRecordCategory(
+    req: DeleteMsgRecordCategoryRequest,
+    cb?: (error: string, rep: DeleteMsgRecordCategoryResponse) => void
+  ): Promise<DeleteMsgRecordCategoryResponse> {
+    return this.request("DeleteMsgRecordCategory", req, cb)
   }
 
   /**
-   * 删除参数变量
+     * 重置会话
+注意：当前Claw模式应用会话不支持重置
+     */
+  async ResetConversation(
+    req: ResetConversationRequest,
+    cb?: (error: string, rep: ResetConversationResponse) => void
+  ): Promise<ResetConversationResponse> {
+    return this.request("ResetConversation", req, cb)
+  }
+
+  /**
+   * 创建参数变量
    */
-  async DeleteVariable(
-    req: DeleteVariableRequest,
-    cb?: (error: string, rep: DeleteVariableResponse) => void
-  ): Promise<DeleteVariableResponse> {
-    return this.request("DeleteVariable", req, cb)
+  async CreateVariable(
+    req: CreateVariableRequest,
+    cb?: (error: string, rep: CreateVariableResponse) => void
+  ): Promise<CreateVariableResponse> {
+    return this.request("CreateVariable", req, cb)
+  }
+
+  /**
+   * 获取插件列表
+   */
+  async DescribePluginSummaryList(
+    req: DescribePluginSummaryListRequest,
+    cb?: (error: string, rep: DescribePluginSummaryListResponse) => void
+  ): Promise<DescribePluginSummaryListResponse> {
+    return this.request("DescribePluginSummaryList", req, cb)
+  }
+
+  /**
+   * 查询看板总览KPI卡片数据，通过resource_type区分资源看板与业务看板域，返回各域KPI指标列表
+   */
+  async DescribeMetricOverviewList(
+    req: DescribeMetricOverviewListRequest,
+    cb?: (error: string, rep: DescribeMetricOverviewListResponse) => void
+  ): Promise<DescribeMetricOverviewListResponse> {
+    return this.request("DescribeMetricOverviewList", req, cb)
+  }
+
+  /**
+   * 获取会话列表
+   */
+  async DescribeConversationList(
+    req: DescribeConversationListRequest,
+    cb?: (error: string, rep: DescribeConversationListResponse) => void
+  ): Promise<DescribeConversationListResponse> {
+    return this.request("DescribeConversationList", req, cb)
   }
 
   /**
@@ -681,23 +600,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 收藏插件
+   * 提交自定义Skill至企业级共享审批（两段式：提交→审批→回调创建共享任务）
    */
-  async FavoritePlugin(
-    req: FavoritePluginRequest,
-    cb?: (error: string, rep: FavoritePluginResponse) => void
-  ): Promise<FavoritePluginResponse> {
-    return this.request("FavoritePlugin", req, cb)
+  async CreateSkillShare(
+    req: CreateSkillShareRequest,
+    cb?: (error: string, rep: CreateSkillShareResponse) => void
+  ): Promise<CreateSkillShareResponse> {
+    return this.request("CreateSkillShare", req, cb)
   }
 
   /**
-   * DescribeAppTriggerRunLogList
+   * 获取渠道详情（scene区分场景）
    */
-  async DescribeAppTriggerRunLogList(
-    req: DescribeAppTriggerRunLogListRequest,
-    cb?: (error: string, rep: DescribeAppTriggerRunLogListResponse) => void
-  ): Promise<DescribeAppTriggerRunLogListResponse> {
-    return this.request("DescribeAppTriggerRunLogList", req, cb)
+  async DescribeChannel(
+    req: DescribeChannelRequest,
+    cb?: (error: string, rep: DescribeChannelResponse) => void
+  ): Promise<DescribeChannelResponse> {
+    return this.request("DescribeChannel", req, cb)
   }
 
   /**
@@ -711,13 +630,113 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发布记录列表
+   * Skill修改
    */
-  async DescribeReleaseList(
-    req: DescribeReleaseListRequest,
-    cb?: (error: string, rep: DescribeReleaseListResponse) => void
-  ): Promise<DescribeReleaseListResponse> {
-    return this.request("DescribeReleaseList", req, cb)
+  async ModifySkill(
+    req: ModifySkillRequest,
+    cb?: (error: string, rep: ModifySkillResponse) => void
+  ): Promise<ModifySkillResponse> {
+    return this.request("ModifySkill", req, cb)
+  }
+
+  /**
+   * PauseAppTrigger
+   */
+  async PauseAppTrigger(
+    req: PauseAppTriggerRequest,
+    cb?: (error: string, rep: PauseAppTriggerResponse) => void
+  ): Promise<PauseAppTriggerResponse> {
+    return this.request("PauseAppTrigger", req, cb)
+  }
+
+  /**
+   * 回滚发布
+   */
+  async RollbackRelease(
+    req: RollbackReleaseRequest,
+    cb?: (error: string, rep: RollbackReleaseResponse) => void
+  ): Promise<RollbackReleaseResponse> {
+    return this.request("RollbackRelease", req, cb)
+  }
+
+  /**
+   * 查询 Agent 摘要信息列表
+   */
+  async DescribeAgentSummaryList(
+    req: DescribeAgentSummaryListRequest,
+    cb?: (error: string, rep: DescribeAgentSummaryListResponse) => void
+  ): Promise<DescribeAgentSummaryListResponse> {
+    return this.request("DescribeAgentSummaryList", req, cb)
+  }
+
+  /**
+   * DescribeAppTriggerInstance
+   */
+  async DescribeAppTriggerInstance(
+    req: DescribeAppTriggerInstanceRequest,
+    cb?: (error: string, rep: DescribeAppTriggerInstanceResponse) => void
+  ): Promise<DescribeAppTriggerInstanceResponse> {
+    return this.request("DescribeAppTriggerInstance", req, cb)
+  }
+
+  /**
+   * 取消收藏skill
+   */
+  async UnfavoriteSkill(
+    req: UnfavoriteSkillRequest,
+    cb?: (error: string, rep: UnfavoriteSkillResponse) => void
+  ): Promise<UnfavoriteSkillResponse> {
+    return this.request("UnfavoriteSkill", req, cb)
+  }
+
+  /**
+   * 修改指定消息记录分类的名称
+   */
+  async ModifyMsgRecordCategory(
+    req: ModifyMsgRecordCategoryRequest,
+    cb?: (error: string, rep: ModifyMsgRecordCategoryResponse) => void
+  ): Promise<ModifyMsgRecordCategoryResponse> {
+    return this.request("ModifyMsgRecordCategory", req, cb)
+  }
+
+  /**
+   * 查询资源消耗明细，包含计费相关字段（消耗类型、消耗目标、消耗场景、套餐包及PU消耗等）
+   */
+  async DescribeConsumptionDetailList(
+    req: DescribeConsumptionDetailListRequest,
+    cb?: (error: string, rep: DescribeConsumptionDetailListResponse) => void
+  ): Promise<DescribeConsumptionDetailListResponse> {
+    return this.request("DescribeConsumptionDetailList", req, cb)
+  }
+
+  /**
+   * 删除渠道（通过scene区分场景）
+   */
+  async DeleteChannel(
+    req: DeleteChannelRequest,
+    cb?: (error: string, rep: DeleteChannelResponse) => void
+  ): Promise<DeleteChannelResponse> {
+    return this.request("DeleteChannel", req, cb)
+  }
+
+  /**
+   * 修改渠道（支持修改备注与企微机器人渠道回调机器人ID）
+   */
+  async ModifyChannel(
+    req: ModifyChannelRequest,
+    cb?: (error: string, rep: ModifyChannelResponse) => void
+  ): Promise<ModifyChannelResponse> {
+    return this.request("ModifyChannel", req, cb)
+  }
+
+  /**
+   * 取消收藏插件
+   */
+  async UnfavoritePlugin(
+    req: UnfavoritePluginRequest,
+    cb?: (error: string, rep: UnfavoritePluginResponse) => void
+  ): Promise<UnfavoritePluginResponse> {
+    return this.request("UnfavoritePlugin", req, cb)
   }
 
   /**
@@ -738,26 +757,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAppResponse) => void
   ): Promise<DeleteAppResponse> {
     return this.request("DeleteApp", req, cb)
-  }
-
-  /**
-   * 创建Agent
-   */
-  async CreateAgent(
-    req: CreateAgentRequest,
-    cb?: (error: string, rep: CreateAgentResponse) => void
-  ): Promise<CreateAgentResponse> {
-    return this.request("CreateAgent", req, cb)
-  }
-
-  /**
-   * 修改应用
-   */
-  async ModifyApp(
-    req: ModifyAppRequest,
-    cb?: (error: string, rep: ModifyAppResponse) => void
-  ): Promise<ModifyAppResponse> {
-    return this.request("ModifyApp", req, cb)
   }
 
   /**
@@ -791,26 +790,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改插件
-   */
-  async DeletePlugin(
-    req: DeletePluginRequest,
-    cb?: (error: string, rep: DeletePluginResponse) => void
-  ): Promise<DeletePluginResponse> {
-    return this.request("DeletePlugin", req, cb)
-  }
-
-  /**
-   * 删除指定的消息记录分类
-   */
-  async DeleteMsgRecordCategory(
-    req: DeleteMsgRecordCategoryRequest,
-    cb?: (error: string, rep: DeleteMsgRecordCategoryResponse) => void
-  ): Promise<DeleteMsgRecordCategoryResponse> {
-    return this.request("DeleteMsgRecordCategory", req, cb)
-  }
-
-  /**
    * 提交共享 Skill 下架审批（v2，两段式：提交→审批→回调下架共享 Skill） 鉴权：删除权 拒绝场景：未共享 / 上架审批中 / 下架审批中
    */
   async DeleteSkillShare(
@@ -821,18 +800,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 重置会话
-注意：当前Claw模式应用会话不支持重置
-     */
-  async ResetConversation(
-    req: ResetConversationRequest,
-    cb?: (error: string, rep: ResetConversationResponse) => void
-  ): Promise<ResetConversationResponse> {
-    return this.request("ResetConversation", req, cb)
-  }
-
-  /**
-   * 创建Agent
+   * 复制 Agent（目前仅支持claw模式））
    */
   async CopyAgentFromApp(
     req: CopyAgentFromAppRequest,
@@ -862,16 +830,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改指定消息记录分类的名称
-   */
-  async ModifyMsgRecordCategory(
-    req: ModifyMsgRecordCategoryRequest,
-    cb?: (error: string, rep: ModifyMsgRecordCategoryResponse) => void
-  ): Promise<ModifyMsgRecordCategoryResponse> {
-    return this.request("ModifyMsgRecordCategory", req, cb)
-  }
-
-  /**
    * 创建skill
    */
   async CreateSkill(
@@ -882,23 +840,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建参数变量
+   * 获取渠道列表（scene区分场景）
    */
-  async CreateVariable(
-    req: CreateVariableRequest,
-    cb?: (error: string, rep: CreateVariableResponse) => void
-  ): Promise<CreateVariableResponse> {
-    return this.request("CreateVariable", req, cb)
-  }
-
-  /**
-   * 获取插件列表
-   */
-  async DescribePluginSummaryList(
-    req: DescribePluginSummaryListRequest,
-    cb?: (error: string, rep: DescribePluginSummaryListResponse) => void
-  ): Promise<DescribePluginSummaryListResponse> {
-    return this.request("DescribePluginSummaryList", req, cb)
+  async DescribeChannelList(
+    req: DescribeChannelListRequest,
+    cb?: (error: string, rep: DescribeChannelListResponse) => void
+  ): Promise<DescribeChannelListResponse> {
+    return this.request("DescribeChannelList", req, cb)
   }
 
   /**
@@ -912,113 +860,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建会话
+   * 获取空间列表
    */
-  async CreateConversation(
-    req: CreateConversationRequest,
-    cb?: (error: string, rep: CreateConversationResponse) => void
-  ): Promise<CreateConversationResponse> {
-    return this.request("CreateConversation", req, cb)
-  }
-
-  /**
-   * DescribeAppTrigger
-   */
-  async DescribeAppTrigger(
-    req: DescribeAppTriggerRequest,
-    cb?: (error: string, rep: DescribeAppTriggerResponse) => void
-  ): Promise<DescribeAppTriggerResponse> {
-    return this.request("DescribeAppTrigger", req, cb)
-  }
-
-  /**
-   * 查询看板总览KPI卡片数据，通过resource_type区分资源看板与业务看板域，返回各域KPI指标列表
-   */
-  async DescribeMetricOverviewList(
-    req: DescribeMetricOverviewListRequest,
-    cb?: (error: string, rep: DescribeMetricOverviewListResponse) => void
-  ): Promise<DescribeMetricOverviewListResponse> {
-    return this.request("DescribeMetricOverviewList", req, cb)
-  }
-
-  /**
-   * 获取会话列表
-   */
-  async DescribeConversationList(
-    req: DescribeConversationListRequest,
-    cb?: (error: string, rep: DescribeConversationListResponse) => void
-  ): Promise<DescribeConversationListResponse> {
-    return this.request("DescribeConversationList", req, cb)
-  }
-
-  /**
-   * 查看企业下的员工列表
-   */
-  async DescribeAccountList(
-    req: DescribeAccountListRequest,
-    cb?: (error: string, rep: DescribeAccountListResponse) => void
-  ): Promise<DescribeAccountListResponse> {
-    return this.request("DescribeAccountList", req, cb)
-  }
-
-  /**
-   * 提交自定义Skill至企业级共享审批（两段式：提交→审批→回调创建共享任务）
-   */
-  async CreateSkillShare(
-    req: CreateSkillShareRequest,
-    cb?: (error: string, rep: CreateSkillShareResponse) => void
-  ): Promise<CreateSkillShareResponse> {
-    return this.request("CreateSkillShare", req, cb)
-  }
-
-  /**
-   * 查询 Skill 列表
-   */
-  async DescribeSkillSummaryList(
-    req: DescribeSkillSummaryListRequest,
-    cb?: (error: string, rep: DescribeSkillSummaryListResponse) => void
-  ): Promise<DescribeSkillSummaryListResponse> {
-    return this.request("DescribeSkillSummaryList", req, cb)
-  }
-
-  /**
-   * 查询资源调用时序明细，支持模型和插件两类资源，按时间顺序返回每条调用记录的详细信息
-   */
-  async DescribeUsageDetailList(
-    req: DescribeUsageDetailListRequest,
-    cb?: (error: string, rep: DescribeUsageDetailListResponse) => void
-  ): Promise<DescribeUsageDetailListResponse> {
-    return this.request("DescribeUsageDetailList", req, cb)
-  }
-
-  /**
-   * 取消收藏插件
-   */
-  async UnfavoritePlugin(
-    req: UnfavoritePluginRequest,
-    cb?: (error: string, rep: UnfavoritePluginResponse) => void
-  ): Promise<UnfavoritePluginResponse> {
-    return this.request("UnfavoritePlugin", req, cb)
-  }
-
-  /**
-   * 查询并发超限明细，包含QPM/TPM超限与专属并发超限记录，返回超限发生时间、空间、应用、模型及请求内容
-   */
-  async DescribeConcurrencyLimitDetailList(
-    req: DescribeConcurrencyLimitDetailListRequest,
-    cb?: (error: string, rep: DescribeConcurrencyLimitDetailListResponse) => void
-  ): Promise<DescribeConcurrencyLimitDetailListResponse> {
-    return this.request("DescribeConcurrencyLimitDetailList", req, cb)
-  }
-
-  /**
-   * 收藏skill
-   */
-  async FavoriteSkill(
-    req: FavoriteSkillRequest,
-    cb?: (error: string, rep: FavoriteSkillResponse) => void
-  ): Promise<FavoriteSkillResponse> {
-    return this.request("FavoriteSkill", req, cb)
+  async DescribeSpaceList(
+    req: DescribeSpaceListRequest,
+    cb?: (error: string, rep: DescribeSpaceListResponse) => void
+  ): Promise<DescribeSpaceListResponse> {
+    return this.request("DescribeSpaceList", req, cb)
   }
 
   /**
@@ -1032,16 +880,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新参数变量
-   */
-  async ModifyVariable(
-    req: ModifyVariableRequest,
-    cb?: (error: string, rep: ModifyVariableResponse) => void
-  ): Promise<ModifyVariableResponse> {
-    return this.request("ModifyVariable", req, cb)
-  }
-
-  /**
    * 删除自定义 Skill  鉴权：创建者 ∨ (编辑权限 ∧ 删除权限） 拒绝场景：非 Custom 类型 / 已共享 / 安全检测中 / 上架审批中 / 下架审批中
    */
   async DeleteSkill(
@@ -1052,73 +890,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建应用
+   * 查询资源调用时序明细，支持模型和插件两类资源，按时间顺序返回每条调用记录的详细信息
    */
-  async CreateApp(
-    req: CreateAppRequest,
-    cb?: (error: string, rep: CreateAppResponse) => void
-  ): Promise<CreateAppResponse> {
-    return this.request("CreateApp", req, cb)
-  }
-
-  /**
-   * Skill修改
-   */
-  async ModifySkill(
-    req: ModifySkillRequest,
-    cb?: (error: string, rep: ModifySkillResponse) => void
-  ): Promise<ModifySkillResponse> {
-    return this.request("ModifySkill", req, cb)
-  }
-
-  /**
-   * 回滚发布
-   */
-  async RollbackRelease(
-    req: RollbackReleaseRequest,
-    cb?: (error: string, rep: RollbackReleaseResponse) => void
-  ): Promise<RollbackReleaseResponse> {
-    return this.request("RollbackRelease", req, cb)
-  }
-
-  /**
-   * 查询资源用量聚合明细，支持模型、插件、平台三类资源，按空间/应用维度聚合展示调用次数、Token消耗等指标
-   */
-  async DescribeUsageSummaryList(
-    req: DescribeUsageSummaryListRequest,
-    cb?: (error: string, rep: DescribeUsageSummaryListResponse) => void
-  ): Promise<DescribeUsageSummaryListResponse> {
-    return this.request("DescribeUsageSummaryList", req, cb)
-  }
-
-  /**
-   * PauseAppTrigger
-   */
-  async PauseAppTrigger(
-    req: PauseAppTriggerRequest,
-    cb?: (error: string, rep: PauseAppTriggerResponse) => void
-  ): Promise<PauseAppTriggerResponse> {
-    return this.request("PauseAppTrigger", req, cb)
-  }
-
-  /**
-   * 获取参数变量
-   */
-  async DescribeVariable(
-    req: DescribeVariableRequest,
-    cb?: (error: string, rep: DescribeVariableResponse) => void
-  ): Promise<DescribeVariableResponse> {
-    return this.request("DescribeVariable", req, cb)
-  }
-
-  /**
-   * 重试发布(发布暂停之后再次重新发布)
-   */
-  async RetryRelease(
-    req: RetryReleaseRequest,
-    cb?: (error: string, rep: RetryReleaseResponse) => void
-  ): Promise<RetryReleaseResponse> {
-    return this.request("RetryRelease", req, cb)
+  async DescribeUsageDetailList(
+    req: DescribeUsageDetailListRequest,
+    cb?: (error: string, rep: DescribeUsageDetailListResponse) => void
+  ): Promise<DescribeUsageDetailListResponse> {
+    return this.request("DescribeUsageDetailList", req, cb)
   }
 
   /**
@@ -1142,13 +920,103 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取会话历史消息
+   * 删除空间
    */
-  async DescribeConversationMessageList(
-    req: DescribeConversationMessageListRequest,
-    cb?: (error: string, rep: DescribeConversationMessageListResponse) => void
-  ): Promise<DescribeConversationMessageListResponse> {
-    return this.request("DescribeConversationMessageList", req, cb)
+  async DeleteSpace(
+    req: DeleteSpaceRequest,
+    cb?: (error: string, rep: DeleteSpaceResponse) => void
+  ): Promise<DeleteSpaceResponse> {
+    return this.request("DeleteSpace", req, cb)
+  }
+
+  /**
+   * 收藏插件
+   */
+  async FavoritePlugin(
+    req: FavoritePluginRequest,
+    cb?: (error: string, rep: FavoritePluginResponse) => void
+  ): Promise<FavoritePluginResponse> {
+    return this.request("FavoritePlugin", req, cb)
+  }
+
+  /**
+   * 查看操作日志列表
+   */
+  async DescribeAuditLogList(
+    req: DescribeAuditLogListRequest,
+    cb?: (error: string, rep: DescribeAuditLogListResponse) => void
+  ): Promise<DescribeAuditLogListResponse> {
+    return this.request("DescribeAuditLogList", req, cb)
+  }
+
+  /**
+   * 获取参数变量
+   */
+  async DescribeVariable(
+    req: DescribeVariableRequest,
+    cb?: (error: string, rep: DescribeVariableResponse) => void
+  ): Promise<DescribeVariableResponse> {
+    return this.request("DescribeVariable", req, cb)
+  }
+
+  /**
+   * 收藏skill
+   */
+  async FavoriteSkill(
+    req: FavoriteSkillRequest,
+    cb?: (error: string, rep: FavoriteSkillResponse) => void
+  ): Promise<FavoriteSkillResponse> {
+    return this.request("FavoriteSkill", req, cb)
+  }
+
+  /**
+   * RunAppTriggerNow
+   */
+  async RunAppTriggerNow(
+    req: RunAppTriggerNowRequest,
+    cb?: (error: string, rep: RunAppTriggerNowResponse) => void
+  ): Promise<RunAppTriggerNowResponse> {
+    return this.request("RunAppTriggerNow", req, cb)
+  }
+
+  /**
+   * 发布记录列表
+   */
+  async DescribeReleaseList(
+    req: DescribeReleaseListRequest,
+    cb?: (error: string, rep: DescribeReleaseListResponse) => void
+  ): Promise<DescribeReleaseListResponse> {
+    return this.request("DescribeReleaseList", req, cb)
+  }
+
+  /**
+   * 创建Agent
+   */
+  async CreateAgent(
+    req: CreateAgentRequest,
+    cb?: (error: string, rep: CreateAgentResponse) => void
+  ): Promise<CreateAgentResponse> {
+    return this.request("CreateAgent", req, cb)
+  }
+
+  /**
+   * 创建工作空间凭证
+   */
+  async CreateWorkspaceCredential(
+    req: CreateWorkspaceCredentialRequest,
+    cb?: (error: string, rep: CreateWorkspaceCredentialResponse) => void
+  ): Promise<CreateWorkspaceCredentialResponse> {
+    return this.request("CreateWorkspaceCredential", req, cb)
+  }
+
+  /**
+   * DescribeAppTrigger
+   */
+  async DescribeAppTrigger(
+    req: DescribeAppTriggerRequest,
+    cb?: (error: string, rep: DescribeAppTriggerResponse) => void
+  ): Promise<DescribeAppTriggerResponse> {
+    return this.request("DescribeAppTrigger", req, cb)
   }
 
   /**
@@ -1159,6 +1027,226 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePluginResponse) => void
   ): Promise<DescribePluginResponse> {
     return this.request("DescribePlugin", req, cb)
+  }
+
+  /**
+   * 查询 Skill 列表
+   */
+  async DescribeSkillSummaryList(
+    req: DescribeSkillSummaryListRequest,
+    cb?: (error: string, rep: DescribeSkillSummaryListResponse) => void
+  ): Promise<DescribeSkillSummaryListResponse> {
+    return this.request("DescribeSkillSummaryList", req, cb)
+  }
+
+  /**
+   * 创建应用
+   */
+  async CreateApp(
+    req: CreateAppRequest,
+    cb?: (error: string, rep: CreateAppResponse) => void
+  ): Promise<CreateAppResponse> {
+    return this.request("CreateApp", req, cb)
+  }
+
+  /**
+   * 查询并发超限明细，包含QPM/TPM超限与专属并发超限记录，返回超限发生时间、空间、应用、模型及请求内容
+   */
+  async DescribeConcurrencyLimitDetailList(
+    req: DescribeConcurrencyLimitDetailListRequest,
+    cb?: (error: string, rep: DescribeConcurrencyLimitDetailListResponse) => void
+  ): Promise<DescribeConcurrencyLimitDetailListResponse> {
+    return this.request("DescribeConcurrencyLimitDetailList", req, cb)
+  }
+
+  /**
+   * 查看企业下的员工列表
+   */
+  async DescribeAccountList(
+    req: DescribeAccountListRequest,
+    cb?: (error: string, rep: DescribeAccountListResponse) => void
+  ): Promise<DescribeAccountListResponse> {
+    return this.request("DescribeAccountList", req, cb)
+  }
+
+  /**
+   * DescribeAppTriggerRunLogList
+   */
+  async DescribeAppTriggerRunLogList(
+    req: DescribeAppTriggerRunLogListRequest,
+    cb?: (error: string, rep: DescribeAppTriggerRunLogListResponse) => void
+  ): Promise<DescribeAppTriggerRunLogListResponse> {
+    return this.request("DescribeAppTriggerRunLogList", req, cb)
+  }
+
+  /**
+   * 重试发布(发布暂停之后再次重新发布)
+   */
+  async RetryRelease(
+    req: RetryReleaseRequest,
+    cb?: (error: string, rep: RetryReleaseResponse) => void
+  ): Promise<RetryReleaseResponse> {
+    return this.request("RetryRelease", req, cb)
+  }
+
+  /**
+   * ModifyAppTrigger
+   */
+  async ModifyAppTrigger(
+    req: ModifyAppTriggerRequest,
+    cb?: (error: string, rep: ModifyAppTriggerResponse) => void
+  ): Promise<ModifyAppTriggerResponse> {
+    return this.request("ModifyAppTrigger", req, cb)
+  }
+
+  /**
+   * 获取系统变量
+   */
+  async DescribeSystemVariableList(
+    req: DescribeSystemVariableListRequest,
+    cb?: (error: string, rep: DescribeSystemVariableListResponse) => void
+  ): Promise<DescribeSystemVariableListResponse> {
+    return this.request("DescribeSystemVariableList", req, cb)
+  }
+
+  /**
+   * 查看会话信息
+   */
+  async DescribeConversation(
+    req: DescribeConversationRequest,
+    cb?: (error: string, rep: DescribeConversationResponse) => void
+  ): Promise<DescribeConversationResponse> {
+    return this.request("DescribeConversation", req, cb)
+  }
+
+  /**
+   * 创建一条消息记录分类，支持指定分类名称与父分类（ParentId 为 0 时表示一级分类）
+   */
+  async CreateMsgRecordCategory(
+    req: CreateMsgRecordCategoryRequest,
+    cb?: (error: string, rep: CreateMsgRecordCategoryResponse) => void
+  ): Promise<CreateMsgRecordCategoryResponse> {
+    return this.request("CreateMsgRecordCategory", req, cb)
+  }
+
+  /**
+   * 上架skill
+   */
+  async ReleaseSkill(
+    req: ReleaseSkillRequest,
+    cb?: (error: string, rep: ReleaseSkillResponse) => void
+  ): Promise<ReleaseSkillResponse> {
+    return this.request("ReleaseSkill", req, cb)
+  }
+
+  /**
+   * 修改应用
+   */
+  async ModifyApp(
+    req: ModifyAppRequest,
+    cb?: (error: string, rep: ModifyAppResponse) => void
+  ): Promise<ModifyAppResponse> {
+    return this.request("ModifyApp", req, cb)
+  }
+
+  /**
+   * DescribeAppTriggerSummaryList
+   */
+  async DescribeAppTriggerSummaryList(
+    req: DescribeAppTriggerSummaryListRequest,
+    cb?: (error: string, rep: DescribeAppTriggerSummaryListResponse) => void
+  ): Promise<DescribeAppTriggerSummaryListResponse> {
+    return this.request("DescribeAppTriggerSummaryList", req, cb)
+  }
+
+  /**
+   * 查询某个 Skill 被引用的详情列表（按 SkillRefType 分组：OpenClaw / cloud agent / 企业助手 agent） 鉴权：同 DescribeSkillDetail（能看该 Skill 即可查）
+   */
+  async DescribeSkillReferenceList(
+    req: DescribeSkillReferenceListRequest,
+    cb?: (error: string, rep: DescribeSkillReferenceListResponse) => void
+  ): Promise<DescribeSkillReferenceListResponse> {
+    return this.request("DescribeSkillReferenceList", req, cb)
+  }
+
+  /**
+   * 新建会话
+   */
+  async CreateConversation(
+    req: CreateConversationRequest,
+    cb?: (error: string, rep: CreateConversationResponse) => void
+  ): Promise<CreateConversationResponse> {
+    return this.request("CreateConversation", req, cb)
+  }
+
+  /**
+   * 修改插件
+   */
+  async DeletePlugin(
+    req: DeletePluginRequest,
+    cb?: (error: string, rep: DeletePluginResponse) => void
+  ): Promise<DeletePluginResponse> {
+    return this.request("DeletePlugin", req, cb)
+  }
+
+  /**
+   * 查询应用的消息记录分类树，返回分类及子分类、各分类下记录数量与操作权限
+   */
+  async DescribeMsgRecordCategoryList(
+    req: DescribeMsgRecordCategoryListRequest,
+    cb?: (error: string, rep: DescribeMsgRecordCategoryListResponse) => void
+  ): Promise<DescribeMsgRecordCategoryListResponse> {
+    return this.request("DescribeMsgRecordCategoryList", req, cb)
+  }
+
+  /**
+   * 删除参数变量
+   */
+  async DeleteVariable(
+    req: DeleteVariableRequest,
+    cb?: (error: string, rep: DeleteVariableResponse) => void
+  ): Promise<DeleteVariableResponse> {
+    return this.request("DeleteVariable", req, cb)
+  }
+
+  /**
+   * 获取参数变量列表
+   */
+  async DescribeVariableList(
+    req: DescribeVariableListRequest,
+    cb?: (error: string, rep: DescribeVariableListResponse) => void
+  ): Promise<DescribeVariableListResponse> {
+    return this.request("DescribeVariableList", req, cb)
+  }
+
+  /**
+   * 更新参数变量
+   */
+  async ModifyVariable(
+    req: ModifyVariableRequest,
+    cb?: (error: string, rep: ModifyVariableResponse) => void
+  ): Promise<ModifyVariableResponse> {
+    return this.request("ModifyVariable", req, cb)
+  }
+
+  /**
+   * 查询资源用量聚合明细，支持模型、插件、平台三类资源，按空间/应用维度聚合展示调用次数、Token消耗等指标
+   */
+  async DescribeUsageSummaryList(
+    req: DescribeUsageSummaryListRequest,
+    cb?: (error: string, rep: DescribeUsageSummaryListResponse) => void
+  ): Promise<DescribeUsageSummaryListResponse> {
+    return this.request("DescribeUsageSummaryList", req, cb)
+  }
+
+  /**
+   * 获取会话历史消息
+   */
+  async DescribeConversationMessageList(
+    req: DescribeConversationMessageListRequest,
+    cb?: (error: string, rep: DescribeConversationMessageListResponse) => void
+  ): Promise<DescribeConversationMessageListResponse> {
+    return this.request("DescribeConversationMessageList", req, cb)
   }
 
   /**
@@ -1179,16 +1267,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLatestReleaseResponse) => void
   ): Promise<DescribeLatestReleaseResponse> {
     return this.request("DescribeLatestRelease", req, cb)
-  }
-
-  /**
-   * 查询资源消耗明细，包含计费相关字段（消耗类型、消耗目标、消耗场景、套餐包及PU消耗等）
-   */
-  async DescribeConsumptionDetailList(
-    req: DescribeConsumptionDetailListRequest,
-    cb?: (error: string, rep: DescribeConsumptionDetailListResponse) => void
-  ): Promise<DescribeConsumptionDetailListResponse> {
-    return this.request("DescribeConsumptionDetailList", req, cb)
   }
 
   /**

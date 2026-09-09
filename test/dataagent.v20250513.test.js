@@ -68,16 +68,6 @@ it("dataagent.v20250513.GetKnowledgeBaseFileList", async function () {
     }
 })
 
-it("dataagent.v20250513.GetSessionDetails", async function () {
-    try {
-       const data = await client.GetSessionDetails({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dataagent.v20250513.GetUserInstanceList", async function () {
     try {
        const data = await client.GetUserInstanceList({})
@@ -221,6 +211,16 @@ it("dataagent.v20250513.AppendKnowledgeTask", async function () {
 it("dataagent.v20250513.QueryKnowledgeTask", async function () {
     try {
        const data = await client.QueryKnowledgeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.QueryUserSessionDetail", async function () {
+    try {
+       const data = await client.QueryUserSessionDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

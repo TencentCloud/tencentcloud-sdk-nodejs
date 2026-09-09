@@ -114,57 +114,53 @@ export interface CreateWorkspaceTokenRequest {
  */
 export interface CreateWorkspaceRequest {
   /**
-   * 工作空间名称, 长度限制 2~64
+   * <p>工作空间名称, 长度限制 2~64</p>
    */
   Name: string
   /**
-   * 工作空间描述, 长度限制 0~255
+   * <p>工作空间描述, 长度限制 0~255</p>
    */
   Description?: string
   /**
-   * 工作空间规格。Standard: 2C4G, Calculation: 4C8G, Profession: 8C16G. 默认是 Standard。
+   * <p>工作空间规格。Standard: 2C4G, Calculation: 4C8G, Profession: 8C16G. 默认是 Standard。</p>
    */
   Specs?: string
   /**
-   * 工作空间基础镜像名称, 默认会使用 All In One 镜像, 长度限制 1~255
+   * <p>工作空间基础镜像名称, 默认会使用 All In One 镜像, 长度限制 1~255</p>
    */
   Image?: string
   /**
-   * Git 仓库. 工作空间启动时会自动克隆该仓库
+   * <p>Git 仓库. 工作空间启动时会自动克隆该仓库</p>
    */
   Repository?: GitRepository
   /**
-   * 环境变量. 会被注入到工作空间中
+   * <p>环境变量. 会被注入到工作空间中</p>
    */
   Envs?: Array<Env>
   /**
-   * 预装插件. 工作空间启动时, 会自动安装这些插件。长度限制: 0~10
+   * <p>预装插件. 工作空间启动时, 会自动安装这些插件。长度限制: 0~10</p>
    */
   Extensions?: Array<string>
   /**
-   * 工作空间生命周期钩子.  分为三个阶段 init, start, destroy. 分别表示工作空间数据初始化阶段, 工作空间启动阶段, 工作空间关闭阶段.  用户可以自定义 shell 命令.
+   * <p>工作空间生命周期钩子.  分为三个阶段 init, start, destroy. 分别表示工作空间数据初始化阶段, 工作空间启动阶段, 工作空间关闭阶段.  用户可以自定义 shell 命令.</p>
    */
   Lifecycle?: LifeCycle
   /**
-   * 应用名称
+   * <p>应用名称</p>
    */
   TenantAppId?: number
   /**
-   * 用户UIN
+   * <p>用户UIN</p>
    */
   TenantUin?: string
   /**
-   * VPCID
+   * <p>VPCID</p>
    */
   TenantUniqVpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   TenantSubnetId?: string
-  /**
-   * 地域
-   */
-  Region?: string
 }
 
 /**
@@ -326,11 +322,11 @@ export interface ModifyWorkspaceResponse {
  */
 export interface CreateWorkspaceResponse {
   /**
-   * 工作空间 SpaceKey
+   * <p>工作空间 SpaceKey</p>
    */
   SpaceKey?: string
   /**
-   * 工作空间名称
+   * <p>工作空间名称</p>
    */
   Name?: string
   /**

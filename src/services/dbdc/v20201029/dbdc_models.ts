@@ -1375,7 +1375,7 @@ export interface CreateDBCustomNodesRequest {
    */
   ChargeType?: string
   /**
-   * <p>访问主机的网络模式</p><p>枚举值：</p><ul><li>privatelink： 四层网络联通，放通SSH 通路</li><li>cross_tenant_eni： 三层网络联通，双网卡模式</li></ul><p>默认值：默认值为：privatelink</p>
+   * <p>访问主机的网络模式</p><p>枚举值：</p><ul><li>cross_tenant_eni： 三层网络联通，双网卡模式</li></ul><p>默认值：默认值为：cross_tenant_eni</p><p>原 privatelink 访问主机的网络模式已下线。</p>
    */
   NetworkMode?: string
   /**
@@ -1596,11 +1596,23 @@ export interface ModifyDBCustomClusterAttributesRequest {
   /**
    * <p>集群ID</p><p>参数格式：dbcc-hj7gab15</p>
    */
-  ClusterId: string
+  ClusterId?: string
+  /**
+   * <p>集群 ID 列表</p><p>入参限制：最多支持 100 个</p><p>ClusterId 和 ClusterIds 必须传一个且不能同时传</p>
+   */
+  ClusterIds?: Array<string>
   /**
    * <p>是否启用集群删除保护</p><p>枚举值：</p><ul><li>true： 启用</li><li>false： 不启用</li></ul>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>集群名称</p><p>入参限制：最长128个字符</p>
+   */
+  ClusterName?: string
+  /**
+   * <p>集群描述</p><p>入参限制：最长200个字符</p>
+   */
+  ClusterDescription?: string
 }
 
 /**
@@ -2244,6 +2256,10 @@ export interface DBCustomNode {
    * <p>置放群组ID</p>
    */
   DisasterRecoverGroupId?: string
+  /**
+   * <p>节点最新进行中的任务类型</p><p>枚举值：</p><ul><li>add-nodes-to-cluster： 添加节点到集群</li><li>remove-nodes-from-cluster： 从集群中移除节点</li><li>modify-nodes-attributes： 修改节点属性</li><li>modify-nodes-drg： 修改节点置放群组</li></ul>
+   */
+  LatestRunningTaskType?: string
 }
 
 /**
@@ -2311,6 +2327,10 @@ export interface DBCustomClusterNode {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroupIds?: Array<string>
+  /**
+   * <p>节点最新进行中的任务类型</p><p>枚举值：</p><ul><li>add-nodes-to-cluster： 添加节点到集群</li><li>remove-nodes-from-cluster： 从集群中移除节点</li><li>modify-nodes-attributes： 修改节点属性</li><li>modify-nodes-drg： 修改节点置放群组</li></ul>
+   */
+  LatestRunningTaskType?: string
 }
 
 /**
@@ -2538,7 +2558,11 @@ export interface ModifyDBCustomNodeAttributesRequest {
   /**
    * <p>节点ID</p><p>参数格式：dbcn-hq98qjym</p>
    */
-  NodeId: string
+  NodeId?: string
+  /**
+   * <p>节点 ID 列表</p><p>入参限制：最多支持 100 个</p><p>NodeId 和 NodeIds 必须传一个且不能同时传</p>
+   */
+  NodeIds?: Array<string>
   /**
    * <p>主机 HostName</p><p>入参限制：参数设置规则参见：<a href="https://cloud.tencent.com/document/api/1322/132929">创建 DB Custom 节点接口</a>的 HostName 参数说明。</p><p>注意：节点在没有加入到集群之前才支持修改主机 HostName。</p>
    */

@@ -1658,7 +1658,7 @@ export interface DescribeScenesRequest {
  */
 export interface HyperParam {
   /**
-   * HiCache缓存
+   * <p>HiCache缓存</p>
    */
   HiCache?: HiCacheInfo
 }

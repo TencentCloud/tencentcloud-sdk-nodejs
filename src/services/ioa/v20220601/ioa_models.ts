@@ -2154,6 +2154,78 @@ export interface DescribeBusinessResourceData {
    * <p>域名后缀</p>
    */
   DomainSuffix?: string
+  /**
+   * <p>连通性检查开关，0-关闭 1-开启，默认1(只支持32位)</p>
+   */
+  ConnectivityCheckSwitch?: number
+  /**
+   * <p>连通性检查测试间隔数值，最小为1，默认1(只支持32位)</p>
+   */
+  ConnectivityCheckInterval?: number
+  /**
+   * <p>连通性检查测试间隔单位 minutes/hours/days，默认hours</p>
+   */
+  ConnectivityCheckIntervalUnit?: string
+  /**
+   * <p>URL审计开关：0-关闭 1-开启，默认0</p>
+   */
+  URLAuditState?: number
+  /**
+   * <p>URL审计证书ID列表，多个用分号分隔</p>
+   */
+  URLAuditId?: string
+  /**
+   * <p>URL审计路径，多个用分号分隔</p>
+   */
+  URLPath?: string
+  /**
+   * <p>检测方式：0-未检测 1-主动 2-流量</p>
+   */
+  ReachableType?: number
+  /**
+   * <p>API密钥名称</p>
+   */
+  APISecretName?: string
+  /**
+   * <p>API密钥Key</p>
+   */
+  APISecretKey?: string
+  /**
+   * <p>是否为敏感资源：0-否 1-是</p>
+   */
+  EnableSensitiveRes?: number
+  /**
+   * <p>用户接入IP限制开关：0-不启用 1-启用</p>
+   */
+  EnableIPPolicy?: number
+  /**
+   * <p>IP分组属性：0-白名单 1-黑名单</p>
+   */
+  IPPolicyAttr?: number
+  /**
+   * <p>IP分组ID列表</p>
+   */
+  IPPolicyIds?: Array<number | bigint>
+  /**
+   * <p>IP分组名称（分号分隔）</p>
+   */
+  IPPolicyNames?: string
+  /**
+   * <p>访问浏览器规则开关：0-不启用 1-启用</p>
+   */
+  EnableUserAgent?: number
+  /**
+   * <p>浏览器规则属性：0-白名单 1-黑名单</p>
+   */
+  UserAgentAttr?: number
+  /**
+   * <p>浏览器规则ID列表</p>
+   */
+  UserAgentIds?: Array<string>
+  /**
+   * <p>浏览器规则名称（分号分隔）</p>
+   */
+  UserAgentNames?: string
 }
 
 /**

@@ -8605,27 +8605,27 @@ export interface TimingDataItem {
  */
 export interface ModifyCustomErrorPageRequest {
   /**
-   * 自定义错误页面 ID。
+   * <p>自定义响应页面 ID。</p>
    */
   PageId: string
   /**
-   * 站点 ID。
+   * <p>站点 ID。</p>
    */
   ZoneId: string
   /**
-   * 自定义错误页名称，名称为2 - 60个字符。
+   * <p>自定义响应页面名称，名称为 2 - 60 个字符。</p>
    */
   Name?: string
   /**
-   * 自定义错误页描述，描述内容不超过60个字符。
+   * <p>自定义响应页面描述，描述内容不超过 60 个字符。</p>
    */
   Description?: string
   /**
-   * 自定义错误页面类型，取值有：<li>text/html。 </li><li>application/json。</li><li>plain/text。</li><li>text/xml。</li>
+   * <p>自定义响应页面类型，取值有：</p><ul><li>text/html</li><li>application/json</li><li>plain/text</li><li>text/xml</li><li>text/css</li><li>text/javascript</li><li>application/javascript</li><li>text/markdown</li></ul>
    */
   ContentType?: string
   /**
-   * 自定义错误页面内容。内容不超过 2KB。
+   * <p>自定义响应页面内容。内容不超过 16KB。</p>
    */
   Content?: string
 }
@@ -16506,7 +16506,7 @@ export interface ContentIdentifier {
  */
 export interface CreateCustomizeErrorPageResponse {
   /**
-   * 页面 ID。
+   * <p>自定义响应页面 ID。</p>
    */
   PageId?: string
   /**
@@ -17401,23 +17401,23 @@ export interface ModifyFunctionRulePriorityResponse {
  */
 export interface CreateCustomizeErrorPageRequest {
   /**
-   * 站点 ID。
+   * <p>站点 ID。</p>
    */
   ZoneId: string
   /**
-   * 自定义错误页名称，名称为 2-30 个字符。
+   * <p>自定义响应页面名称，名称为 2-30 个字符。</p>
    */
   Name: string
   /**
-   * 自定义错误页面类型，取值有：<li>text/html； </li><li>application/json；</li><li>text/plain；</li><li>text/xml。</li>
+   * <p>自定义响应页面类型，取值有：</p><ul><li>text/html</li><li>application/json</li><li>plain/text</li><li>text/xml</li><li>text/css</li><li>text/javascript</li><li>application/javascript</li><li>text/markdown</li></ul>
    */
   ContentType: string
   /**
-   * 自定义错误页面描述，描述不超过 60 个字符。
+   * <p>自定义响应页面描述，描述不超过 60 个字符。</p>
    */
   Description?: string
   /**
-   * 自定义错误页面内容，内容不超过 2KB。
+   * <p>自定义响应页面内容，内容不超过 16KB。</p>
    */
   Content?: string
 }

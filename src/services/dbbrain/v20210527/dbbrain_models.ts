@@ -1719,35 +1719,35 @@ export interface TaskInfo {
  */
 export interface DescribeMongoDBProcessListRequest {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 服务产品类型，支持值：mongodb
+   * <p>服务产品类型，支持值：mongodb</p>
    */
   Product: string
   /**
-   * 线程的ID，用于筛选线程列表。
+   * <p>线程的ID，用于筛选线程列表。</p>
    */
   ID?: number
   /**
-   * 线程的操作主机地址，用于筛选线程列表。
+   * <p>线程的操作主机地址，用于筛选线程列表。</p>
    */
   Host?: string
   /**
-   * 线程的操作数据库，用于筛选线程列表,如果是多个 使用 ','  分割
+   * <p>线程的操作数据库，用于筛选线程列表,如果是多个 使用 &#39;,&#39;  分割</p>
    */
   DB?: string
   /**
-   * 命令类型 ,如果是多个 使用 ','  分割
+   * <p>命令类型 ,如果是多个 使用 &#39;,&#39;  分割</p>
    */
   Type?: string
   /**
-   * 线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。
+   * <p>线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。</p>
    */
   Time?: number
   /**
-   * 返回数量，默认20。
+   * <p>返回数量，默认20。</p>
    */
   Limit?: number
 }
@@ -6280,7 +6280,7 @@ export interface DescribeHealthScoreResponse {
  */
 export interface DescribeMongoDBProcessListResponse {
   /**
-   * 数据
+   * <p>数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessList?: MongoDBProcessList

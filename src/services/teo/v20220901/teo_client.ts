@@ -1981,7 +1981,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 创建自定义错误页面。
+   * 创建自定义响应页面。
    */
   async CreateCustomizeErrorPage(
     req: CreateCustomizeErrorPageRequest,
@@ -3114,7 +3114,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 修改自定义错误页面。
+   * 修改自定义响应页面。
    */
   async ModifyCustomErrorPage(
     req: ModifyCustomErrorPageRequest,

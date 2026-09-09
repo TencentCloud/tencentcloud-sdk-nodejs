@@ -338,16 +338,6 @@ it("emr.v20190103.DescribeStarRocksQueryInfo", async function () {
     }
 })
 
-it("emr.v20190103.InquiryPriceRenewInstance", async function () {
-    try {
-       const data = await client.InquiryPriceRenewInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("emr.v20190103.DescribeNodeResourceConfigFast", async function () {
     try {
        const data = await client.DescribeNodeResourceConfigFast({})
@@ -598,6 +588,16 @@ it("emr.v20190103.ModifyInspectionSettings", async function () {
     }
 })
 
+it("emr.v20190103.ModifyServiceParamsByExportConfs", async function () {
+    try {
+       const data = await client.ModifyServiceParamsByExportConfs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeHBaseTableStoreSizeMetric", async function () {
     try {
        const data = await client.DescribeHBaseTableStoreSizeMetric({})
@@ -708,9 +708,9 @@ it("emr.v20190103.ResetYarnConfig", async function () {
     }
 })
 
-it("emr.v20190103.ModifyUserGroup", async function () {
+it("emr.v20190103.InquiryPriceRenewInstance", async function () {
     try {
-       const data = await client.ModifyUserGroup({})
+       const data = await client.InquiryPriceRenewInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -761,6 +761,16 @@ it("emr.v20190103.DescribeSLInstance", async function () {
 it("emr.v20190103.DescribeSparkQueries", async function () {
     try {
        const data = await client.DescribeSparkQueries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyUserGroup", async function () {
+    try {
+       const data = await client.ModifyUserGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -991,6 +1001,16 @@ it("emr.v20190103.ModifyResourceScheduleConfig", async function () {
 it("emr.v20190103.ModifyResource", async function () {
     try {
        const data = await client.ModifyResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeExportConfs", async function () {
+    try {
+       const data = await client.DescribeExportConfs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

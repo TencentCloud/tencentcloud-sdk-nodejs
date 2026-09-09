@@ -51,7 +51,7 @@ import {
   DescribeInspectionTaskResultRequest,
   InquiryPriceCreateInstanceResponse,
   DescribeHDFSStorageInfoRequest,
-  JobFlowResourceSpec,
+  LoadAutoScaleStrategy,
   DescribeMetaDBInfoResponse,
   WebUIInfo,
   PrePaySetting,
@@ -137,7 +137,7 @@ import {
   FairGlobalConfig,
   PodNewSpec,
   EmrProductConfigDetail,
-  ExternalAccess,
+  RenewPriceDetail,
   VolumeMount,
   ZoneSetting,
   TrinoQueryInfo,
@@ -150,6 +150,7 @@ import {
   PersistentVolume,
   KyuubiQueryInfo,
   ModifyAutoScaleStrategyRequest,
+  ConfSubContext,
   DescribeGroupsSTDRequest,
   QuotaEntity,
   DescribeKyuubiQueryInfoResponse,
@@ -185,6 +186,7 @@ import {
   ModifyBootScriptResponse,
   DeleteUserManagerUserListRequest,
   DescribeResourceScheduleResponse,
+  ModifyServiceParamsByExportConfsRequest,
   EMREventListItem,
   LabelSelectorRequirement,
   DescribeKyuubiQueryInfoRequest,
@@ -213,6 +215,7 @@ import {
   DescribeInstanceRenewNodesRequest,
   DescribeYarnApplicationsResponse,
   YarnApplication,
+  ExportConfMeta,
   ZoneResourceConfiguration,
   NotRepeatStrategy,
   ConfigurationItem,
@@ -251,7 +254,8 @@ import {
   TerminateDynamicInstancesResponse,
   UserManagerFilter,
   MetaDbInfo,
-  LoadAutoScaleStrategy,
+  JobFlowResourceSpec,
+  ExportConfContext,
   DescribeInstanceOplogResponse,
   ZoneDetailPriceResult,
   DescribeAutoScaleGroupGlobalConfRequest,
@@ -349,6 +353,7 @@ import {
   DescribeSparkApplicationsRequest,
   SyncPodStateResponse,
   DescribeNodeSpec,
+  DescribeExportConfsRequest,
   ModifyDynamicInstanceRequest,
   DiskSpec,
   SLInstanceInfo,
@@ -390,7 +395,7 @@ import {
   ModifyInspectionSettingsRequest,
   NodeRenewPriceDetail,
   TriggerCondition,
-  RenewPriceDetail,
+  ExternalAccess,
   ModifyResourceSchedulerRequest,
   LoginSettings,
   PriceResource,
@@ -434,11 +439,13 @@ import {
   SparkApplicationsList,
   InquiryPriceScaleOutInstanceResponse,
   NodeSelectorRequirement,
+  DescribeExportConfsResponse,
   EmrPrice,
   NodeHardwareInfo,
   ServiceBasicRestartInfo,
   TerminateClusterNodesRequest,
   Filters,
+  ModifyServiceParamsByExportConfsResponse,
   InstanceChargePrepaid,
   NodeAffinity,
   WeightedPodAffinityTerm,
@@ -778,16 +785,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 续费询价。
-   */
-  async InquiryPriceRenewInstance(
-    req: InquiryPriceRenewInstanceRequest,
-    cb?: (error: string, rep: InquiryPriceRenewInstanceResponse) => void
-  ): Promise<InquiryPriceRenewInstanceResponse> {
-    return this.request("InquiryPriceRenewInstance", req, cb)
-  }
-
-  /**
    * 快速获取当前集群的节点规格配置
    */
   async DescribeNodeResourceConfigFast(
@@ -1040,6 +1037,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 配置导入下发
+   */
+  async ModifyServiceParamsByExportConfs(
+    req: ModifyServiceParamsByExportConfsRequest,
+    cb?: (error: string, rep: ModifyServiceParamsByExportConfsResponse) => void
+  ): Promise<ModifyServiceParamsByExportConfsResponse> {
+    return this.request("ModifyServiceParamsByExportConfs", req, cb)
+  }
+
+  /**
    * 查询Hbase的表粒度StoreSize大小监控指标数据
    */
   async DescribeHBaseTableStoreSizeMetric(
@@ -1150,13 +1157,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用户管理-修改用户组
+   * 续费询价。
    */
-  async ModifyUserGroup(
-    req: ModifyUserGroupRequest,
-    cb?: (error: string, rep: ModifyUserGroupResponse) => void
-  ): Promise<ModifyUserGroupResponse> {
-    return this.request("ModifyUserGroup", req, cb)
+  async InquiryPriceRenewInstance(
+    req: InquiryPriceRenewInstanceRequest,
+    cb?: (error: string, rep: InquiryPriceRenewInstanceResponse) => void
+  ): Promise<InquiryPriceRenewInstanceResponse> {
+    return this.request("InquiryPriceRenewInstance", req, cb)
   }
 
   /**
@@ -1207,6 +1214,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSparkQueriesResponse) => void
   ): Promise<DescribeSparkQueriesResponse> {
     return this.request("DescribeSparkQueries", req, cb)
+  }
+
+  /**
+   * 用户管理-修改用户组
+   */
+  async ModifyUserGroup(
+    req: ModifyUserGroupRequest,
+    cb?: (error: string, rep: ModifyUserGroupResponse) => void
+  ): Promise<ModifyUserGroupResponse> {
+    return this.request("ModifyUserGroup", req, cb)
   }
 
   /**
@@ -1442,6 +1459,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourceResponse) => void
   ): Promise<ModifyResourceResponse> {
     return this.request("ModifyResource", req, cb)
+  }
+
+  /**
+   * 查询导出配置
+   */
+  async DescribeExportConfs(
+    req: DescribeExportConfsRequest,
+    cb?: (error: string, rep: DescribeExportConfsResponse) => void
+  ): Promise<DescribeExportConfsResponse> {
+    return this.request("DescribeExportConfs", req, cb)
   }
 
   /**

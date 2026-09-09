@@ -1011,41 +1011,114 @@ export interface DescribeHDFSStorageInfoRequest {
 }
 
 /**
- * 流程作业资源描述
+ * 自动扩缩容基于负载指标的规则
  */
-export interface JobFlowResourceSpec {
+export interface LoadAutoScaleStrategy {
   /**
-   * 主节点数量。
+   * 规则ID。
    */
-  MasterCount: number
+  StrategyId?: number
   /**
-   * 主节点配置。
+   * 规则名称。
    */
-  MasterResourceSpec: JobFlowResource
+  StrategyName?: string
   /**
-   * Core节点数量
+   * 规则生效冷却时间。
    */
-  CoreCount: number
+  CalmDownTime?: number
   /**
-   * Core节点配置。
+   * 扩缩容动作，1表示扩容，2表示缩容。
    */
-  CoreResourceSpec: JobFlowResource
+  ScaleAction?: number
   /**
-   * Task节点数量。
+   * 每次规则生效时的扩缩容数量。
    */
-  TaskCount?: number
+  ScaleNum?: number
   /**
-   * Common节点数量。
+   * 指标处理方法，1表示MAX，2表示MIN，3表示AVG。
    */
-  CommonCount?: number
+  ProcessMethod?: number
   /**
-   * Task节点配置。
+   * 规则优先级，添加时无效，默认为自增。
    */
-  TaskResourceSpec?: JobFlowResource
+  Priority?: number
   /**
-   * Common节点配置。
+   * 规则状态，1表示启动，3表示禁用。
    */
-  CommonResourceSpec?: JobFlowResource
+  StrategyStatus?: number
+  /**
+   * 规则扩容指定 yarn node label
+   */
+  YarnNodeLabel?: string
+  /**
+   * 规则生效的有效时间
+   */
+  PeriodValid?: string
+  /**
+   * 优雅缩容开关
+   */
+  GraceDownFlag?: boolean
+  /**
+   * 优雅缩容等待时间
+   */
+  GraceDownTime?: number
+  /**
+   * 是否开启任务保护
+   */
+  GraceDownProtectFlag?: boolean
+  /**
+   * 绑定标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 预设配置组
+   */
+  ConfigGroupAssigned?: string
+  /**
+   * 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。
+"DEFAULT"表示默认方式，与"INSTANCE"意义相同。
+"INSTANCE"表示按照节点计算，默认方式。
+"CPU"表示按照机器的核数计算。
+"MEMORYGB"表示按照机器内存数计算。
+   */
+  MeasureMethod?: string
+  /**
+   * 节点部署服务列表，例如["HDFS-3.1.2","YARN-3.1.2"]。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SoftDeployDesc?: Array<string>
+  /**
+   * 启动进程列表，例如["NodeManager"]。
+   */
+  ServiceNodeDesc?: string
+  /**
+   * 启动进程列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceNodeInfo?: Array<number | bigint>
+  /**
+   * 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SoftDeployInfo?: Array<number | bigint>
+  /**
+   * 多指标触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadMetricsConditions?: LoadMetricsConditions
+  /**
+   * 伸缩组Id
+   */
+  GroupId?: number
+  /**
+   * soft例如yarn
+   */
+  Soft?: string
+  /**
+   * 任务保护时间
+   */
+  GraceDownProtectTime?: number
 }
 
 /**
@@ -3351,18 +3424,29 @@ export interface EmrProductConfigDetail {
 }
 
 /**
- * 容器集群外部访问设置
+ * 节点子项续费询价明细
  */
-export interface ExternalAccess {
+export interface RenewPriceDetail {
   /**
-   * 外部访问类型，当前仅支持CLB字段
+   * 计费项名称
    */
-  Type?: string
+  BillingName?: string
   /**
-   * CLB设置信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 折扣
    */
-  CLBServer?: CLBSetting
+  Policy?: number
+  /**
+   * 数量
+   */
+  Quantity?: number
+  /**
+   * 原价
+   */
+  OriginalCost?: number
+  /**
+   * 折扣价
+   */
+  DiscountCost?: number
 }
 
 /**
@@ -3731,6 +3815,20 @@ export interface ModifyAutoScaleStrategyRequest {
    * 伸缩组Id
    */
   GroupId?: number
+}
+
+/**
+ * 配置下发参数
+ */
+export interface ConfSubContext {
+  /**
+   * 配置文件名字
+   */
+  FileName: string
+  /**
+   * 配置文件参数,需要转为base64
+   */
+  Params: string
 }
 
 /**
@@ -4900,6 +4998,28 @@ export interface DescribeResourceScheduleResponse {
 }
 
 /**
+ * ModifyServiceParamsByExportConfs请求参数结构体
+ */
+export interface ModifyServiceParamsByExportConfsRequest {
+  /**
+   * <p>集群id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>导入配置项</p>
+   */
+  ExportConfParamList: Array<ExportConfMeta>
+  /**
+   * <p>ip</p>
+   */
+  IpList?: Array<string>
+  /**
+   * <p>配置组</p>
+   */
+  ConfGroupName?: string
+}
+
+/**
  * 事件详情列表
  */
 export interface EMREventListItem {
@@ -5833,6 +5953,32 @@ export interface YarnApplication {
    * HDFS读取字节数
    */
   HDFSBytesRead?: number
+}
+
+/**
+ * 导出配置结构体
+ */
+export interface ExportConfMeta {
+  /**
+   * <p>组件名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+  /**
+   * <p>文件名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Classification?: string
+  /**
+   * <p>组件版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceVersion?: string
+  /**
+   * <p>导出配置参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: string
 }
 
 /**
@@ -6828,114 +6974,59 @@ export interface MetaDbInfo {
 }
 
 /**
- * 自动扩缩容基于负载指标的规则
+ * 流程作业资源描述
  */
-export interface LoadAutoScaleStrategy {
+export interface JobFlowResourceSpec {
   /**
-   * 规则ID。
+   * 主节点数量。
    */
-  StrategyId?: number
+  MasterCount: number
   /**
-   * 规则名称。
+   * 主节点配置。
    */
-  StrategyName?: string
+  MasterResourceSpec: JobFlowResource
   /**
-   * 规则生效冷却时间。
+   * Core节点数量
    */
-  CalmDownTime?: number
+  CoreCount: number
   /**
-   * 扩缩容动作，1表示扩容，2表示缩容。
+   * Core节点配置。
    */
-  ScaleAction?: number
+  CoreResourceSpec: JobFlowResource
   /**
-   * 每次规则生效时的扩缩容数量。
+   * Task节点数量。
    */
-  ScaleNum?: number
+  TaskCount?: number
   /**
-   * 指标处理方法，1表示MAX，2表示MIN，3表示AVG。
+   * Common节点数量。
    */
-  ProcessMethod?: number
+  CommonCount?: number
   /**
-   * 规则优先级，添加时无效，默认为自增。
+   * Task节点配置。
    */
-  Priority?: number
+  TaskResourceSpec?: JobFlowResource
   /**
-   * 规则状态，1表示启动，3表示禁用。
+   * Common节点配置。
    */
-  StrategyStatus?: number
+  CommonResourceSpec?: JobFlowResource
+}
+
+/**
+ * 指定要导出配置的上下文结构
+ */
+export interface ExportConfContext {
   /**
-   * 规则扩容指定 yarn node label
+   * <p>服务配置</p>
    */
-  YarnNodeLabel?: string
+  ServiceType: number
   /**
-   * 规则生效的有效时间
+   * <p>文件名</p>
    */
-  PeriodValid?: string
+  FileName: string
   /**
-   * 优雅缩容开关
+   * <p>服务名称</p>
    */
-  GraceDownFlag?: boolean
-  /**
-   * 优雅缩容等待时间
-   */
-  GraceDownTime?: number
-  /**
-   * 是否开启任务保护
-   */
-  GraceDownProtectFlag?: boolean
-  /**
-   * 绑定标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 预设配置组
-   */
-  ConfigGroupAssigned?: string
-  /**
-   * 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。
-"DEFAULT"表示默认方式，与"INSTANCE"意义相同。
-"INSTANCE"表示按照节点计算，默认方式。
-"CPU"表示按照机器的核数计算。
-"MEMORYGB"表示按照机器内存数计算。
-   */
-  MeasureMethod?: string
-  /**
-   * 节点部署服务列表，例如["HDFS-3.1.2","YARN-3.1.2"]。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoftDeployDesc?: Array<string>
-  /**
-   * 启动进程列表，例如["NodeManager"]。
-   */
-  ServiceNodeDesc?: string
-  /**
-   * 启动进程列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceNodeInfo?: Array<number | bigint>
-  /**
-   * 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoftDeployInfo?: Array<number | bigint>
-  /**
-   * 多指标触发条件
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadMetricsConditions?: LoadMetricsConditions
-  /**
-   * 伸缩组Id
-   */
-  GroupId?: number
-  /**
-   * soft例如yarn
-   */
-  Soft?: string
-  /**
-   * 任务保护时间
-   */
-  GraceDownProtectTime?: number
+  ServiceName?: string
 }
 
 /**
@@ -9920,6 +10011,32 @@ export interface DescribeNodeSpec {
 }
 
 /**
+ * DescribeExportConfs请求参数结构体
+ */
+export interface DescribeExportConfsRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>指定需要导出的配置</p>
+   */
+  ExportConfContexts: Array<ExportConfContext>
+  /**
+   * <p>导出类型</p><p>枚举值：</p><ul><li>0： 全部配置</li><li>1： 只导出自定义和修改过的配置</li></ul>
+   */
+  ExportType?: number
+  /**
+   * <p>节点ip</p>
+   */
+  Ip?: string
+  /**
+   * <p>配置组名称</p>
+   */
+  ConfGroupName?: string
+}
+
+/**
  * ModifyDynamicInstance请求参数结构体
  */
 export interface ModifyDynamicInstanceRequest {
@@ -11505,29 +11622,18 @@ export interface TriggerCondition {
 }
 
 /**
- * 节点子项续费询价明细
+ * 容器集群外部访问设置
  */
-export interface RenewPriceDetail {
+export interface ExternalAccess {
   /**
-   * 计费项名称
+   * 外部访问类型，当前仅支持CLB字段
    */
-  BillingName?: string
+  Type?: string
   /**
-   * 折扣
+   * CLB设置信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Policy?: number
-  /**
-   * 数量
-   */
-  Quantity?: number
-  /**
-   * 原价
-   */
-  OriginalCost?: number
-  /**
-   * 折扣价
-   */
-  DiscountCost?: number
+  CLBServer?: CLBSetting
 }
 
 /**
@@ -12816,6 +12922,21 @@ export interface NodeSelectorRequirement {
 }
 
 /**
+ * DescribeExportConfs返回参数结构体
+ */
+export interface DescribeExportConfsResponse {
+  /**
+   * <p>导出配置参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExportConfParamList?: Array<ExportConfMeta>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Emr询价描述
  */
 export interface EmrPrice {
@@ -13162,6 +13283,24 @@ export interface Filters {
    * 过滤字段值
    */
   Values: Array<string>
+}
+
+/**
+ * ModifyServiceParamsByExportConfs返回参数结构体
+ */
+export interface ModifyServiceParamsByExportConfsResponse {
+  /**
+   * <p>流程id</p>
+   */
+  FlowId?: number
+  /**
+   * <p>变更项</p>
+   */
+  WaitModifyConfList?: Array<ConfSubContext>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

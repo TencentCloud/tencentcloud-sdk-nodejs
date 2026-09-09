@@ -3761,6 +3761,10 @@ export interface Instance {
    */
   LatestOperationErrorMsg?: string
   /**
+   * <p>实例是否开启巨型帧</p>
+   */
+  EnableJumboFrame?: boolean
+  /**
    * <p>自定义metadata，本参数对应创建 CVM时指定的Metadata 信息。<strong>注：内测中</strong>。</p>
    */
   Metadata?: Metadata
