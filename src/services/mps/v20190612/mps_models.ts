@@ -2976,6 +2976,32 @@ export interface ResetWorkflowResponse {
 }
 
 /**
+ * dubbing任务配置
+ */
+export interface DubbingConfig {
+  /**
+   * <p>配音类型，可选值：FullAutoEmotionClone：全自动高情感克隆配音；RoleBasedSmartDubbing：按角色智能配音；SingleVoice：指定单一音色；</p>
+   */
+  DubbingMode: string
+  /**
+   * <p>背景音音量，范围0-100</p><p>默认值：80</p>
+   */
+  BackgroundVolume?: number
+  /**
+   * <p>二次微调开关，可选值：<br>ON: 开启二次微调；<br>OFF: 不开启二次微调；</p><p>默认值：OFF</p><p>仅 RoleBasedSmartDubbing 时允许设为 ON</p>
+   */
+  SecondaryTuning?: string
+  /**
+   * <p>指定音色</p><p>仅 SingleVoice 时有效且 Create 必填</p>
+   */
+  VoiceId?: string
+  /**
+   * <p>配音版本，可选值：v1，v2</p><p>默认值：v2</p><p>只在（FullAutoEmotionClone：全自动高情感克隆配音）模式下生效</p>
+   */
+  DubbingVersion?: string
+}
+
+/**
  * SRT FEC 高级配置
  */
 export interface SRTFECFullOptions {
@@ -4125,6 +4151,77 @@ export interface DescribeImageSpriteTemplatesRequest {
 }
 
 /**
+ * AI配音结果信息
+ */
+export interface AIDubbingTaskOutput {
+  /**
+   * <p>基于画面提取的字幕文件路径。</p>
+   */
+  OriginSubtitlePath?: string
+  /**
+   * <p>基于画面提取的字幕翻译文件路径。</p>
+   */
+  TranslateSubtitlePath?: string
+  /**
+   * <p>音色克隆后的视频文件地址</p>
+   */
+  VoiceClonedVideo?: string
+  /**
+   * <p>音色克隆的标注文件地址</p>
+   */
+  VoiceClonedMarkFile?: string
+  /**
+   * <p>视频输出路径。</p>
+   */
+  VideoPath?: string
+  /**
+   * <p>基于画面提取的字幕文件FileId。</p>
+   */
+  OriginSubtitleFileId?: string
+  /**
+   * <p>基于画面提取的字幕翻译文件FileId    。</p>
+   */
+  TranslateSubtitleFileId?: string
+  /**
+   * <p>标记文件路径。</p>
+   */
+  SpeakerPath?: string
+  /**
+   * <p>标记文件Fileid。</p>
+   */
+  SpeakerFileId?: string
+  /**
+   * <p>擦除视频输出FileId。</p>
+   */
+  EraseVideoFileId?: string
+  /**
+   * <p>擦除视频输出路径。</p>
+   */
+  EraseVideoPath?: string
+  /**
+   * <p>译文配音音频文件路径。</p>
+   */
+  DstAudioPath?: string
+  /**
+   * <p>译文配音音频文件FileId。</p>
+   */
+  DstAudioFileId?: string
+  /**
+   * <p>音色克隆编辑信息</p><p>用于音色克隆二次修改的编辑信息</p>
+   */
+  DubbingEditInfoUrl?: string
+  /**
+   * <p>擦除的字幕位置。<strong>注意</strong>：仅对字幕提取且开启返回字幕位置时有效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubtitlePos?: SubtitlePosition
+  /**
+   * <p>AI配音任务输出文件的存储位置。</p>
+   */
+  OutputStorage?: TaskOutputStorage
+}
+
+/**
  * 商品裂变任务信息
  */
 export interface FissionTaskInfo {
@@ -4601,21 +4698,25 @@ export interface CreateStreamLinkEventRequest {
 }
 
 /**
- * token 的用量
+ * dubbing任务翻译配置
  */
-export interface TokensUsage {
+export interface DubbingSubtitleConfig {
   /**
-   * <p>输入token量</p>
+   * <p>字幕来源。</p><p>枚举值：</p><ul><li>OCR： OCR文本识别，识别视频画面上的文本。</li><li>ASR： ASR语音识别，识别视频语音对话。</li><li>External： 外部字幕文件，提供原文/译文字幕URL。</li></ul>
    */
-  InputTokens?: number
+  SubtitleSource?: string
   /**
-   * <p>输出token量</p>
+   * <p>使用ASR辅助OCR。</p><p>枚举值：</p><ul><li>ON： 开启使用ASR辅助OCR。</li><li>OFF： 不开启使用ASR辅助OCR。</li></ul><p>默认值：OFF</p><p>仅 SubtitleSource=OCR 时允许设为 ON</p>
    */
-  OutputTokens?: number
+  AsrAssistOcr?: string
   /**
-   * <p>总token量，一般是输入+输出</p>
+   * <p>擦除原字幕。</p><p>枚举值：</p><ul><li>ON： 擦除原字幕。</li><li>OFF： 保留原字幕。</li></ul><p>默认值：OFF</p><p>SubtitleSource=External 时不允许设为 ON</p>
    */
-  TotalTokens?: number
+  EraseOriginalSubtitle?: string
+  /**
+   * <p>字幕位置信息。</p>
+   */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig
 }
 
 /**
@@ -6166,6 +6267,28 @@ export interface PoliticalOcrReviewTemplateInfoForUpdate {
 }
 
 /**
+ * AI配音自定义参数
+ */
+export interface OverrideAIDubbingParameter {
+  /**
+   * <p>翻译配置信息。</p>
+   */
+  TranslateConfig?: DubbingTranslateConfig
+  /**
+   * <p>字幕配置信息。</p>
+   */
+  SubtitleConfig?: DubbingSubtitleConfig
+  /**
+   * <p>配音配置信息。</p>
+   */
+  DubbingConfig?: DubbingConfig
+  /**
+   * <p>输出配置信息。</p>
+   */
+  OutputConfig?: DubbingOutputConfig
+}
+
+/**
  * 字词信息。
  */
 export interface WordResult {
@@ -6937,6 +7060,16 @@ export interface DescribeInputRTMPPullSettings {
 }
 
 /**
+ * ParseNotification请求参数结构体
+ */
+export interface ParseNotificationRequest {
+  /**
+   * 从 CMQ 获取到的事件通知内容。
+   */
+  Content: string
+}
+
+/**
  * DescribeAigcAudioTask返回参数结构体
  */
 export interface DescribeAigcAudioTaskResponse {
@@ -7195,13 +7328,21 @@ export interface DescribeOutputRTMPSettings {
 }
 
 /**
- * ParseNotification请求参数结构体
+ * dubbing任务翻译配置
  */
-export interface ParseNotificationRequest {
+export interface DubbingTranslateConfig {
   /**
-   * 从 CMQ 获取到的事件通知内容。
+   * <p>源语言。</p>
    */
-  Content: string
+  VideoSrcLanguage: string
+  /**
+   * <p>翻译目标语言。</p>
+   */
+  TranslateDstLanguage: string
+  /**
+   * <p>智能简化译文。</p><p>枚举值：</p><ul><li>ON： 开启智能简化译文。</li><li>OFF： 关闭智能简化译文。</li></ul><p>默认值：OFF</p>
+   */
+  SimplifyTranslation?: string
 }
 
 /**
@@ -7302,17 +7443,29 @@ export interface SmartEraseWatermarkConfig {
 }
 
 /**
- * CreateMediaEvaluation返回参数结构体
+ * CreateStreamPackageSource请求参数结构体
  */
-export interface CreateMediaEvaluationResponse {
+export interface CreateStreamPackageSourceRequest {
   /**
-   * <p>任务 ID。</p>
+   * 该source所属的location id，必填且唯一绑定一个location。
    */
-  TaskId?: string
+  AttachedLocation: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * Source名称，在location下面全局唯一。
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 区分直播Live和点播VOD source类型，可选值：Live、VOD。
+   */
+  Type: string
+  /**
+   * source具体配置。
+   */
+  PackageConfs?: Array<SourcePackageConf>
+  /**
+   * sourcetag标签，ADS可以根据Source Tag信息，返回更精准的广告
+   */
+  SourceTags?: Array<SourceTag>
 }
 
 /**
@@ -8658,6 +8811,48 @@ export interface DeleteBlindWatermarkTemplateResponse {
 }
 
 /**
+ * AI配音任务
+ */
+export interface AIDubbingTaskInput {
+  /**
+   * <p>AI配音模板id。</p>
+   */
+  Definition?: number
+  /**
+   * <p>AI配音自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定配音参数。</p>
+   */
+  RawParameter?: RawAIDubbingParameter
+  /**
+   * <p>AI配音自定义参数，当 Definition 不填 0 时有效。 当填写了该结构中的部分配音参数时，将使用填写的参数覆盖AI配音模板中的参数。 该参数用于高度定制场景，建议您仅使用 Definition 指定配音参数。</p>
+   */
+  OverrideParameter?: OverrideAIDubbingParameter
+  /**
+   * <p>文件的目标存储，不填则继承上层的 OutputStorage 值。</p>
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * <p>外部源字幕文件信息。</p>
+   */
+  SrcSubtitleInfo?: MediaInputInfo
+  /**
+   * <p>外部字幕文件信息，译文字幕。</p>
+   */
+  DstSubtitleInfos?: Array<DstSubtitleInput>
+  /**
+   * <p>文件的输出路径，可以为相对路径或者绝对路径。<br>若需定义输出路径，路径需以<code>.{format}</code>结尾。变量名请参考 <a href="https://cloud.tencent.com/document/product/862/37039">文件名变量说明</a>。<br>相对路径示例：</p><li>文件名_{变量名}.{format}</li><li>文件名.{format}</li>绝对路径示例：<li>/自定义路径/文件名_{变量名}.{format}</li><p><strong>注意</strong>：目前不支持<code>BatchProcessMedia</code>接口。</p>
+   */
+  OutputObjectPath?: string
+  /**
+   * <p>AI配音扩展参数，序列化的 json 字符串。</p>
+   */
+  ExtendedParameter?: string
+  /**
+   * <p>关联剧集ID。<br>注意：配音模式为按角色智能配音时此值生效。</p>
+   */
+  DramaId?: string
+}
+
+/**
  * 源信息。
  */
 export interface SourceInfo {
@@ -9028,6 +9223,46 @@ export interface DescribeStreamPackageSSAIChannelsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI配音任务结果
+ */
+export interface AIDubbingTaskResult {
+  /**
+   * <p>任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。</p>
+   */
+  Status?: string
+  /**
+   * <p>错误码，空字符串表示成功，其他值表示失败，取值请参考 <a href="https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">媒体处理类错误码</a> 列表。</p>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>AI配音任务输入。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: AIDubbingTaskInput
+  /**
+   * <p>AI配音任务输出。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AIDubbingTaskOutput
+  /**
+   * <p>任务进度。</p>
+   */
+  Progress?: number
+  /**
+   * <p>任务开始执行的时间，采用 ISO 日期格式。</p>
+   */
+  BeginProcessTime?: string
+  /**
+   * <p>任务执行完毕的时间，采用 ISO 日期格式。</p>
+   */
+  FinishTime?: string
 }
 
 /**
@@ -9557,29 +9792,13 @@ export interface PornOcrReviewTemplateInfoForUpdate {
 }
 
 /**
- * 印花提取配置。
+ * AI配音外部翻译字幕信息
  */
-export interface PatternConfig {
+export interface DstSubtitleInput {
   /**
-   * <p>透明度阈值</p><p>取值范围：[0, 255]</p><p>默认值：30</p>
+   * <p>外部翻译字幕信息。</p>
    */
-  TransparencyThreshold?: number
-  /**
-   * <p>不透明阈值，必须大于TransparencyThreshold</p><p>取值范围：[0, 255]</p><p>默认值：127</p>
-   */
-  OpaqueThreshold?: number
-  /**
-   * <p>边缘采样步数，默认5</p><p>取值范围：[1, 10]</p>
-   */
-  EdgeSamplingStep?: number
-  /**
-   * <p>边缘扩展步数，默认5</p>
-   */
-  EdgeExpansionStep?: number
-  /**
-   * <p>边缘融合强度，默认0.5</p><p>取值范围：[0, 1.0]</p>
-   */
-  EdgeBlendingIntensity?: number
+  DstSubtitleInfo?: MediaInputInfo
 }
 
 /**
@@ -10357,29 +10576,17 @@ export interface DeleteStreamPackageSourceLocationResponse {
 }
 
 /**
- * CreateStreamPackageSource请求参数结构体
+ * CreateMediaEvaluation返回参数结构体
  */
-export interface CreateStreamPackageSourceRequest {
+export interface CreateMediaEvaluationResponse {
   /**
-   * 该source所属的location id，必填且唯一绑定一个location。
+   * <p>任务 ID。</p>
    */
-  AttachedLocation: string
+  TaskId?: string
   /**
-   * Source名称，在location下面全局唯一。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-  /**
-   * 区分直播Live和点播VOD source类型，可选值：Live、VOD。
-   */
-  Type: string
-  /**
-   * source具体配置。
-   */
-  PackageConfs?: Array<SourcePackageConf>
-  /**
-   * sourcetag标签，ADS可以根据Source Tag信息，返回更精准的广告
-   */
-  SourceTags?: Array<SourceTag>
+  RequestId?: string
 }
 
 /**
@@ -10901,6 +11108,10 @@ export interface ProcessMediaRequest {
    * <p>智能擦除类型任务参数</p>
    */
   SmartEraseTask?: SmartEraseTaskInput
+  /**
+   * <p>AI配音类型任务参数</p>
+   */
+  AIDubbingTask?: AIDubbingTaskInput
   /**
    * <p>任务的事件通知信息，不填代表不获取事件通知。</p>
    */
@@ -13184,70 +13395,74 @@ export interface DescribeContentReviewTemplatesRequest {
  */
 export interface ActivityPara {
   /**
-   * 视频转码任务
+   * <p>视频转码任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranscodeTask?: TranscodeTaskInput
   /**
-   * 视频转动图任务
+   * <p>视频转动图任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnimatedGraphicTask?: AnimatedGraphicTaskInput
   /**
-   * 视频按时间点截图任务
+   * <p>视频按时间点截图任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTaskInput
   /**
-   * 视频采样截图任务
+   * <p>视频采样截图任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SampleSnapshotTask?: SampleSnapshotTaskInput
   /**
-   * 视频截雪碧图任务
+   * <p>视频截雪碧图任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageSpriteTask?: ImageSpriteTaskInput
   /**
-   * 转自适应码流任务
+   * <p>转自适应码流任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdaptiveDynamicStreamingTask?: AdaptiveDynamicStreamingTaskInput
   /**
-   * 视频内容审核类型任务
+   * <p>视频内容审核类型任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiContentReviewTask?: AiContentReviewTaskInput
   /**
-   * 视频内容分析类型任务
+   * <p>视频内容分析类型任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiAnalysisTask?: AiAnalysisTaskInput
   /**
-   * 视频内容识别类型任务
+   * <p>视频内容识别类型任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiRecognitionTask?: AiRecognitionTaskInput
   /**
-   * 媒体质检任务
+   * <p>媒体质检任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlTask?: AiQualityControlTaskInput
   /**
-   * 任务条件判断
+   * <p>任务条件判断</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecRulesTask?: ExecRulesTask
   /**
-   * 智能字幕任务
+   * <p>智能字幕任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput
   /**
-   * 智能擦除任务
+   * <p>智能擦除任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartEraseTask?: SmartEraseTaskInput
+  /**
+   * <p>AI配音任务。</p>
+   */
+  AIDubbingTask?: AIDubbingTaskInput
 }
 
 /**
@@ -14339,6 +14554,32 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
+ * 印花提取配置。
+ */
+export interface PatternConfig {
+  /**
+   * <p>透明度阈值</p><p>取值范围：[0, 255]</p><p>默认值：30</p>
+   */
+  TransparencyThreshold?: number
+  /**
+   * <p>不透明阈值，必须大于TransparencyThreshold</p><p>取值范围：[0, 255]</p><p>默认值：127</p>
+   */
+  OpaqueThreshold?: number
+  /**
+   * <p>边缘采样步数，默认5</p><p>取值范围：[1, 10]</p>
+   */
+  EdgeSamplingStep?: number
+  /**
+   * <p>边缘扩展步数，默认5</p>
+   */
+  EdgeExpansionStep?: number
+  /**
+   * <p>边缘融合强度，默认0.5</p><p>取值范围：[0, 1.0]</p>
+   */
+  EdgeBlendingIntensity?: number
+}
+
+/**
  * 图片水印模板输入参数
  */
 export interface RawImageWatermarkInput {
@@ -14377,6 +14618,32 @@ export interface DeleteAIAnalysisTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * dubbing任务输出配置
+ */
+export interface DubbingOutputConfig {
+  /**
+   * <p>输出方式</p><p>枚举值：</p><ul><li>FinalVideoOnly： 默认，仅成片视频</li><li>AudioAndSubtitle： 译文音频+译文字幕</li><li>Custom： 自定义</li></ul><p>默认值：FinalVideoOnly</p><p>使用外部字幕时无译文音频+字幕返回</p>
+   */
+  OutputMode?: string
+  /**
+   * <p>输出成片视频开关</p><p>枚举值：</p><ul><li>ON： 打开</li><li>OFF： 关闭</li></ul><p>默认值：ON</p><p>仅 Custom 模式生效</p>
+   */
+  OutputFinalVideo?: string
+  /**
+   * <p>输出字幕文件（同时包含原语音字幕、目标语言字幕）开关</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p>
+   */
+  OutputSubtitle?: string
+  /**
+   * <p>输出译文配音音频开关</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p><p>仅 Custom 模式生效</p>
+   */
+  OutputDstAudio?: string
+  /**
+   * <p>压制字幕配置信息。</p>
+   */
+  EmbedSubtitleConfig?: DubbingEmbedSubtitleConfig
 }
 
 /**
@@ -17623,19 +17890,21 @@ export interface EditMediaTaskInput {
 export type DescribeSSAIActivateStateRequest = null
 
 /**
- * 图片编码格式参数
+ * dubbing任务压制字幕配置
  */
-export interface ImageEncodeConfig {
+export interface DubbingEmbedSubtitleConfig {
   /**
-   * 图片格式，取值范围：JPEG、PNG、BMP、WebP，缺省为原图格式。不支持动画。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>压制字幕id。</p>
    */
-  Format?: string
+  SubtitleEmbedId?: number
   /**
-   * 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>沿用原字幕位置。</p><p>默认值：1</p>
    */
-  Quality?: number
+  UseOriginalPos?: number
+  /**
+   * <p>沿用原字幕字号。</p><p>默认值：1</p>
+   */
+  UseOriginalSize?: number
 }
 
 /**
@@ -18695,23 +18964,11 @@ export interface VideoRedrawTaskInfo {
  */
 export interface ActivityResult {
   /**
-   * 原子任务类型。
-<li>Transcode：转码。</li>
-<li>SampleSnapshot：采样截图。</li>
-<li>AnimatedGraphics：转动图。</li>
-<li>SnapshotByTimeOffset：时间点截图。</li>
-<li>ImageSprites：雪碧图。</li>
-<li>AdaptiveDynamicStreaming：自适应码流。</li>
-<li>AiContentReview：内容审核。</li>
-<li>AIRecognition：智能识别。</li>
-<li>AIAnalysis：智能分析。</li>
-<li>AiQualityControl：媒体质检。</li>
-<li>SmartSubtitles：智能字幕。</li>
-<li>SmartErase：智能擦除。</li>
+   * <p>原子任务类型。</p><li>Transcode：转码。</li><li>SampleSnapshot：采样截图。</li><li>AnimatedGraphics：转动图。</li><li>SnapshotByTimeOffset：时间点截图。</li><li>ImageSprites：雪碧图。</li><li>AdaptiveDynamicStreaming：自适应码流。</li><li>AiContentReview：内容审核。</li><li>AIRecognition：智能识别。</li><li>AIAnalysis：智能分析。</li><li>AiQualityControl：媒体质检。</li><li>SmartSubtitles：智能字幕。</li><li>SmartErase：智能擦除。</li><li>Dubbing: AI配音</li>
    */
   ActivityType?: string
   /**
-   * 原子任务输出。
+   * <p>原子任务输出。</p>
    */
   ActivityResItem?: ActivityResItem
 }
@@ -21632,6 +21889,24 @@ export interface ImageResizeConfig {
 }
 
 /**
+ * token 的用量
+ */
+export interface TokensUsage {
+  /**
+   * <p>输入token量</p>
+   */
+  InputTokens?: number
+  /**
+   * <p>输出token量</p>
+   */
+  OutputTokens?: number
+  /**
+   * <p>总token量，一般是输入+输出</p>
+   */
+  TotalTokens?: number
+}
+
+/**
  * 音色属性
  */
 export interface VoiceProfile {
@@ -22032,11 +22307,11 @@ export interface BeautyEffectItemConfig {
  */
 export interface AiRecognitionTaskTransTextResultOutput {
   /**
-   * 翻译片段列表。
+   * <p>翻译片段列表。</p>
    */
   SegmentSet?: Array<AiRecognitionTaskTransTextSegmentItem>
   /**
-   * 字幕文件地址。
+   * <p>字幕文件地址。</p>
    */
   SubtitlePath?: string
 }
@@ -22104,67 +22379,64 @@ export interface WorkflowInfo {
   /**
    * 工作流 ID。
    */
-  WorkflowId: number
+  WorkflowId?: number
   /**
    * 工作流名称。
    */
-  WorkflowName: string
+  WorkflowName?: string
   /**
    * 工作流状态，取值范围：
 <li>Enabled：已启用，</li>
 <li>Disabled：已禁用。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 工作流绑定的输入规则，当上传视频命中该规则到该对象时即触发工作流。
    */
-  Trigger: WorkflowTrigger
+  Trigger?: WorkflowTrigger
   /**
    * 媒体处理的文件输出存储位置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputStorage: TaskOutputStorage
+  OutputStorage?: TaskOutputStorage
   /**
    * 媒体处理类型任务参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MediaProcessTask: MediaProcessTaskInput
+  MediaProcessTask?: MediaProcessTaskInput
   /**
    * 视频内容审核类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AiContentReviewTask: AiContentReviewTaskInput
+  AiContentReviewTask?: AiContentReviewTaskInput
   /**
    * 视频内容分析类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AiAnalysisTask: AiAnalysisTaskInput
+  AiAnalysisTask?: AiAnalysisTaskInput
   /**
    * 视频内容识别类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AiRecognitionTask: AiRecognitionTaskInput
+  AiRecognitionTask?: AiRecognitionTaskInput
   /**
    * 任务的事件通知信息，不填代表不获取事件通知。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskNotifyConfig: TaskNotifyConfig
+  TaskNotifyConfig?: TaskNotifyConfig
   /**
    * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
    */
-  TaskPriority: number
+  TaskPriority?: number
   /**
    * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。
    */
-  OutputDir: string
+  OutputDir?: string
   /**
    * 工作流创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 工作流最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -24912,6 +25184,28 @@ export interface SimpleAesDrm {
 }
 
 /**
+ * AI配音自定义参数
+ */
+export interface RawAIDubbingParameter {
+  /**
+   * <p>翻译配置信息。</p>
+   */
+  TranslateConfig?: DubbingTranslateConfig
+  /**
+   * <p>字幕配置信息。</p>
+   */
+  SubtitleConfig?: DubbingSubtitleConfig
+  /**
+   * <p>配音配置信息。</p>
+   */
+  DubbingConfig?: DubbingConfig
+  /**
+   * <p>输出配置信息。</p>
+   */
+  OutputConfig?: DubbingOutputConfig
+}
+
+/**
  * DeleteTranscodeTemplate返回参数结构体
  */
 export interface DeleteTranscodeTemplateResponse {
@@ -24919,6 +25213,22 @@ export interface DeleteTranscodeTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 图片编码格式参数
+ */
+export interface ImageEncodeConfig {
+  /**
+   * 图片格式，取值范围：JPEG、PNG、BMP、WebP，缺省为原图格式。不支持动画。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Format?: string
+  /**
+   * 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Quality?: number
 }
 
 /**
@@ -25528,64 +25838,66 @@ export interface CreateSampleSnapshotTemplateRequest {
  */
 export interface WorkflowTask {
   /**
-   * 媒体处理任务 ID。
+   * <p>媒体处理任务 ID。</p>
    */
   TaskId?: string
   /**
-   * 任务流状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+   * <p>任务流状态，取值：</p><li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
    */
   Status?: string
   /**
-   * 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。
+   * <p>源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。</p>
    */
   ErrCode?: number
   /**
-   * 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。
+   * <p>源异常时返回对应异常Message，否则请使用各个具体任务的 Message。</p>
    */
   Message?: string
   /**
-   * 媒体处理的目标文件信息。
+   * <p>媒体处理的目标文件信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputInfo?: MediaInputInfo
   /**
-   * 原始视频的元信息。
+   * <p>原始视频的元信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetaData?: MediaMetaData
   /**
-   * 媒体处理任务的执行状态与结果。
+   * <p>媒体处理任务的执行状态与结果。</p>
    */
   MediaProcessResultSet?: Array<MediaProcessTaskResult>
   /**
-   * 视频内容审核任务的执行状态与结果。
+   * <p>视频内容审核任务的执行状态与结果。</p>
    */
   AiContentReviewResultSet?: Array<AiContentReviewResult>
   /**
-   * 视频内容分析任务的执行状态与结果。
+   * <p>视频内容分析任务的执行状态与结果。</p>
    */
   AiAnalysisResultSet?: Array<AiAnalysisResult>
   /**
-   * 视频内容识别任务的执行状态与结果。
+   * <p>视频内容识别任务的执行状态与结果。</p>
    */
   AiRecognitionResultSet?: Array<AiRecognitionResult>
   /**
-   * 媒体质检任务的执行状态与结果。
+   * <p>媒体质检任务的执行状态与结果。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiQualityControlTaskResult?: ScheduleQualityControlTaskResult
   /**
-   * 智能字幕任务的执行结果
+   * <p>智能字幕任务的执行结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartSubtitlesTaskResult?: Array<SmartSubtitlesResult>
   /**
-   * 智能擦除任务的执行结果
+   * <p>智能擦除任务的执行结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartEraseTaskResult?: SmartEraseTaskResult
+  /**
+   * <p>AI配音任务的执行结果。</p>
+   */
+  AiDubbingTaskResult?: AIDubbingTaskResult
 }
 
 /**
@@ -26368,70 +26680,74 @@ export interface BeautyFilterItemConfig {
  */
 export interface ActivityResItem {
   /**
-   * 转码任务输出
+   * <p>转码任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranscodeTask?: MediaProcessTaskTranscodeResult
   /**
-   * 转动图任务输出
+   * <p>转动图任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnimatedGraphicTask?: MediaProcessTaskAnimatedGraphicResult
   /**
-   * 时间点截图任务输出
+   * <p>时间点截图任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotByTimeOffsetTask?: MediaProcessTaskSnapshotByTimeOffsetResult
   /**
-   * 采样截图任务输出
+   * <p>采样截图任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SampleSnapshotTask?: MediaProcessTaskSampleSnapshotResult
   /**
-   * 雪碧图任务输出
+   * <p>雪碧图任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageSpriteTask?: MediaProcessTaskImageSpriteResult
   /**
-   * 自适应码流任务输出
+   * <p>自适应码流任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdaptiveDynamicStreamingTask?: MediaProcessTaskAdaptiveDynamicStreamingResult
   /**
-   * 识别任务输出
+   * <p>识别任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecognitionTask?: ScheduleRecognitionTaskResult
   /**
-   * 审核任务输出
+   * <p>审核任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReviewTask?: ScheduleReviewTaskResult
   /**
-   * 分析任务输出
+   * <p>分析任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisTask?: ScheduleAnalysisTaskResult
   /**
-   * 媒体质检任务输出
+   * <p>媒体质检任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlTask?: ScheduleQualityControlTaskResult
   /**
-   * 条件判断任务输出
+   * <p>条件判断任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecRuleTask?: ScheduleExecRuleTaskResult
   /**
-   * 智能字幕任务输出
+   * <p>智能字幕任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartSubtitlesTask?: ScheduleSmartSubtitleTaskResult
   /**
-   * 智能擦除任务输出
+   * <p>智能擦除任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartEraseTask?: SmartEraseTaskResult
+  /**
+   * <p>AI配音任务输出。</p>
+   */
+  AIDubbingTask?: AIDubbingTaskResult
 }
 
 /**

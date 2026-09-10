@@ -1765,21 +1765,25 @@ export interface CreateNatFwInstanceWithDomainResponse {
 export type DescribeAssetSyncRequest = null
 
 /**
- * DeleteVpcFwGroup请求参数结构体
+ * ModifyAllRuleStatus请求参数结构体
  */
-export interface DeleteVpcFwGroupRequest {
+export interface ModifyAllRuleStatusRequest {
   /**
-   * <p>防火墙(组)Id</p>
+   * 状态，0：全部停用，1：全部启用
    */
-  FwGroupId?: string
+  Status: number
   /**
-   * <p>是否删除整个防火墙(组)<br>0：不删除防火墙(组)，只删除单独实例<br>1：删除整个防火墙(组)</p>
+   * 方向，0：出站，1：入站
    */
-  DeleteFwGroup?: number
+  Direction?: number
   /**
-   * <p>待删除的防火墙实例数组</p>
+   * Edge ID值
    */
-  VpcFwInsList?: Array<string>
+  EdgeId?: string
+  /**
+   * NAT地域
+   */
+  Area?: string
 }
 
 /**
@@ -4555,6 +4559,112 @@ export interface AddNatAcRuleRequest {
 }
 
 /**
+ * NDR出站数据泄露-告警事件
+ */
+export interface DataLeakOutAlertEvent {
+  /**
+   * 风险ID
+   */
+  RiskID?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 源IP
+   */
+  SrcIP?: string
+  /**
+   * 目的IP端口，多个以逗号连接：1.1.1.1:80,1.1.1.1:8080
+   */
+  DstIPPort?: string
+  /**
+   * hostname
+   */
+  Hostname?: string
+  /**
+   * 目的服务类型
+   */
+  DstServiceType?: string
+  /**
+   * 目的服务名称
+   */
+  DstServiceName?: string
+  /**
+   * 以逗号连接的敏感类型ID集合: 10001,10002,10003
+   */
+  LeakTypeSet?: string
+  /**
+   * 事件数量
+   */
+  EventCount?: number
+  /**
+   * 首次识别时间
+   */
+  FirstIdentificationTime?: string
+  /**
+   * 最近识别时间
+   */
+  LatestIdentificationTime?: string
+  /**
+   * 风险等级
+   */
+  Level?: number
+  /**
+   * 处置状态
+   */
+  Status?: number
+  /**
+   * 备注
+   */
+  Comment?: string
+  /**
+   * API
+   */
+  ApiPattern?: string
+  /**
+   * AI分析状态
+   */
+  AnalysisStatus?: number
+  /**
+   * AI分析失败原因（失败时）
+   */
+  AnalysisFailReason?: string
+  /**
+   * API业务类型
+   */
+  ApiBizType?: string
+  /**
+   * 风险类型（风险场景）
+   */
+  RiskScenario?: string
+  /**
+   * AI建议风险等级
+   */
+  AiSuggestedLevel?: number
+  /**
+   * 目的IP地理信息
+   */
+  DstGeoLocation?: string
+  /**
+   * 最高敏感等级
+   */
+  HighestLevel?: string
+}
+
+/**
  * 新手引导扫描信息
  */
 export interface ScanInfo {
@@ -4820,9 +4930,42 @@ export interface DescribeFwSyncStatusResponse {
 }
 
 /**
- * ModifyAssetSync请求参数结构体
+ * DescribeNDRDataLeakOutAlertList返回参数结构体
  */
-export type ModifyAssetSyncRequest = null
+export interface DescribeNDRDataLeakOutAlertListResponse {
+  /**
+   * 符合查询条件的总条数
+   */
+  Total?: number
+  /**
+   * 查询结果列表
+   */
+  Data?: Array<DataLeakOutAlertEvent>
+  /**
+   * 实例类型可选项
+   */
+  InstanceTypeOptions?: Array<FieldOption>
+  /**
+   * 地域可选项
+   */
+  RegionOptions?: Array<FieldOption>
+  /**
+   * 目标服务类型可选项
+   */
+  DstServiceTypeOptions?: Array<FieldOption>
+  /**
+   * 风险场景（类型）可选项
+   */
+  RiskScenarioOptions?: Array<FieldOption>
+  /**
+   * AI分析任务状态可选项
+   */
+  AnalysisStatusOptions?: Array<FieldOption>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeRuleOverview请求参数结构体
@@ -5148,25 +5291,9 @@ export interface RemoveAclRuleResponse {
 }
 
 /**
- * 多日志主题检索错误信息
+ * ModifyAssetSync请求参数结构体
  */
-export interface SearchLogErrors {
-  /**
-   * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicId?: string
-  /**
-   * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorMsg?: string
-  /**
-   * 错误码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorCodeStr?: string
-}
+export type ModifyAssetSyncRequest = null
 
 /**
  * 访问控制列表对象
@@ -7776,6 +7903,27 @@ export interface DescribeBlockIgnoreListResponse {
 }
 
 /**
+ * 多日志主题检索错误信息
+ */
+export interface SearchLogErrors {
+  /**
+   * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeStr?: string
+}
+
+/**
  * DescribeCcnVpcFwSwitch请求参数结构体
  */
 export interface DescribeCcnVpcFwSwitchRequest {
@@ -8274,25 +8422,21 @@ export interface DescribeNatFwSwitchResponse {
 }
 
 /**
- * ModifyAllRuleStatus请求参数结构体
+ * DeleteVpcFwGroup请求参数结构体
  */
-export interface ModifyAllRuleStatusRequest {
+export interface DeleteVpcFwGroupRequest {
   /**
-   * 状态，0：全部停用，1：全部启用
+   * <p>防火墙(组)Id</p>
    */
-  Status: number
+  FwGroupId?: string
   /**
-   * 方向，0：出站，1：入站
+   * <p>是否删除整个防火墙(组)<br>0：不删除防火墙(组)，只删除单独实例<br>1：删除整个防火墙(组)</p>
    */
-  Direction?: number
+  DeleteFwGroup?: number
   /**
-   * Edge ID值
+   * <p>待删除的防火墙实例数组</p>
    */
-  EdgeId?: string
-  /**
-   * NAT地域
-   */
-  Area?: string
+  VpcFwInsList?: Array<string>
 }
 
 /**
@@ -9435,6 +9579,32 @@ export interface AccessInstanceInfo {
    * 接入防火墙的网段列表
    */
   AccessCidrList: Array<string>
+}
+
+/**
+ * DescribeNDRDataLeakOutAlertList请求参数结构体
+ */
+export interface DescribeNDRDataLeakOutAlertListRequest {
+  /**
+   * 每页条数
+   */
+  Limit: number
+  /**
+   * 偏移量
+   */
+  Offset: number
+  /**
+   * 排序方式，asc正序 desc倒序
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 查询过滤条件，多个条件之间为AND的关系
+   */
+  Filters?: Array<OperatorFilter>
 }
 
 /**

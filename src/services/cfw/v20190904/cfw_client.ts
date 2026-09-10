@@ -80,7 +80,7 @@ import {
   ModifyIsolateTableRequest,
   CreateNatFwInstanceWithDomainResponse,
   DescribeAssetSyncRequest,
-  DeleteVpcFwGroupRequest,
+  ModifyAllRuleStatusRequest,
   RuleInfoData,
   DescribeNDRAssetIdentificationCursorListResponse,
   ModifySequenceAclRulesResponse,
@@ -189,6 +189,7 @@ import {
   DescribeAcListsResponse,
   ModifyClusterFwBypassResponse,
   AddNatAcRuleRequest,
+  DataLeakOutAlertEvent,
   ScanInfo,
   DeleteVpcFwGroupResponse,
   NatFwFilter,
@@ -205,7 +206,7 @@ import {
   ModifyIpsModeSwitchResponse,
   DescribeIPStatusListRequest,
   DescribeFwSyncStatusResponse,
-  ModifyAssetSyncRequest,
+  DescribeNDRDataLeakOutAlertListResponse,
   DescribeRuleOverviewRequest,
   DescribeVpcFwCcnPolicyWhiteListRequest,
   ModifyEWRuleStatusRequest,
@@ -220,7 +221,7 @@ import {
   SecurityGroupBothWayInfo,
   ModifyAllRuleStatusResponse,
   RemoveAclRuleResponse,
-  SearchLogErrors,
+  ModifyAssetSyncRequest,
   DescAcItem,
   ExpandCfwVerticalResponse,
   DescribeNatAcRuleRequest,
@@ -323,6 +324,7 @@ import {
   FwGroupIdName,
   DescribeBlockIgnoreListRequest,
   DescribeBlockIgnoreListResponse,
+  SearchLogErrors,
   DescribeCcnVpcFwSwitchRequest,
   DescribeSecurityGroupRegionListResponse,
   DescribeIPStatusListResponse,
@@ -341,7 +343,7 @@ import {
   NatFwSwitchDetailS,
   DescribeCfwAssetsRequest,
   DescribeNatFwSwitchResponse,
-  ModifyAllRuleStatusRequest,
+  DeleteVpcFwGroupRequest,
   ModifyVpcFwGroupResponse,
   FwVpcCidr,
   ModifyRunSyncAssetRequest,
@@ -391,6 +393,7 @@ import {
   EdgeIpInfo,
   AssetZone,
   AccessInstanceInfo,
+  DescribeNDRDataLeakOutAlertListRequest,
   DescribeTLogIpListRequest,
   VpcFwJoinInstanceType,
   OpenClusterNatFwSwitchResponse,
@@ -818,6 +821,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 启用停用单条企业安全组规则
+   */
+  async ModifySecurityGroupItemRuleStatus(
+    req: ModifySecurityGroupItemRuleStatusRequest,
+    cb?: (error: string, rep: ModifySecurityGroupItemRuleStatusResponse) => void
+  ): Promise<ModifySecurityGroupItemRuleStatusResponse> {
+    return this.request("ModifySecurityGroupItemRuleStatus", req, cb)
+  }
+
+  /**
    * 修改边界防火墙开关(旁路、串行)
    */
   async ModifyEdgeIpSwitch(
@@ -1038,13 +1051,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 启用停用单条企业安全组规则
+   * DescribeNDRDataLeakOutAlertList -- 查询NDR数据泄露出站告警列表
    */
-  async ModifySecurityGroupItemRuleStatus(
-    req: ModifySecurityGroupItemRuleStatusRequest,
-    cb?: (error: string, rep: ModifySecurityGroupItemRuleStatusResponse) => void
-  ): Promise<ModifySecurityGroupItemRuleStatusResponse> {
-    return this.request("ModifySecurityGroupItemRuleStatus", req, cb)
+  async DescribeNDRDataLeakOutAlertList(
+    req: DescribeNDRDataLeakOutAlertListRequest,
+    cb?: (error: string, rep: DescribeNDRDataLeakOutAlertListResponse) => void
+  ): Promise<DescribeNDRDataLeakOutAlertListResponse> {
+    return this.request("DescribeNDRDataLeakOutAlertList", req, cb)
   }
 
   /**

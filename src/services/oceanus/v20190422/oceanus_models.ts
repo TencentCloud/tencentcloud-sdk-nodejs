@@ -4462,6 +4462,18 @@ export interface JobV1 {
    * <p>负责人Uin</p>
    */
   ManagerUin?: string
+  /**
+   * <p>启动位点</p>
+   */
+  StartupPoint?: string
+  /**
+   * <p>是否有事件</p>
+   */
+  IsEvent?: boolean
+  /**
+   * <p>是否告警</p>
+   */
+  IsAlarm?: boolean
 }
 
 /**

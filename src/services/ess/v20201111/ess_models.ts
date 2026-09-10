@@ -5115,26 +5115,26 @@ export interface RenewAutoSignLicenseResponse {
  */
 export interface UserInfo {
   /**
-   * 用户在平台的编号
+   * <p>用户在平台中的编号（UserId）</p><p>UserId 获取方式：<a href="https://qcloudimg.tencent-cloud.cn/raw/6b054d6161b04c24855de15cb243f6bf.png" target="_blank">点击查看</a></p>
    */
   UserId?: string
   /**
-   * 用户的来源渠道，一般不用传，特定场景根据接口说明传值
+   * <p>用户的来源渠道，一般不用传，特定场景根据接口说明传值</p>
    * @deprecated
    */
   Channel?: string
   /**
-   * 用户在渠道的编号，一般不用传，特定场景根据接口说明传值
+   * <p>用户在渠道的编号，一般不用传，特定场景根据接口说明传值</p>
    * @deprecated
    */
   OpenId?: string
   /**
-   * 用户真实IP，内部字段，暂未开放
+   * <p>用户真实IP，内部字段，暂未开放</p>
    * @deprecated
    */
   ClientIp?: string
   /**
-   * 用户代理IP，内部字段，暂未开放
+   * <p>用户代理IP，内部字段，暂未开放</p>
    * @deprecated
    */
   ProxyIp?: string

@@ -119,6 +119,10 @@ export interface CreateNativeNodePoolParam {
    * <p>原生节点池密码</p>
    */
   Password?: string
+  /**
+   * <p>自定义镜像 ID</p>
+   */
+  CustomImage?: string
 }
 
 /**
@@ -1251,6 +1255,11 @@ export interface NativeNodePoolInfo {
    * <p>原生节点机型 Native, NativeCVM</p>
    */
   MachineType?: string
+  /**
+   * <p>自定义镜像 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomImage?: string
 }
 
 /**
@@ -2449,6 +2458,10 @@ export interface UpdateNativeNodePoolParam {
    * <p>原生节点池密码</p>
    */
   Password?: string
+  /**
+   * <p>自定义镜像 ID</p>
+   */
+  CustomImage?: string
 }
 
 /**

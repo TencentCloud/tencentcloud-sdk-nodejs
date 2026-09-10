@@ -28,9 +28,29 @@ it("cngw.v20230418.DeleteCloudNativeAPIGatewayConsumer", async function () {
     }
 })
 
-it("cngw.v20230418.ModifyCloudNativeAPIGatewayConsumerGroup", async function () {
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayAIQuota", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayConsumerGroup({})
+       const data = await client.DescribeCloudNativeAPIGatewayAIQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPRoute", async function () {
+    try {
+       const data = await client.ModifyCloudNativeAPIGatewayMCPRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.AddCloudNativeAPIGatewayConsumerGroupAuth", async function () {
+    try {
+       const data = await client.AddCloudNativeAPIGatewayConsumerGroupAuth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,6 +88,26 @@ it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServerACL", async function () {
     }
 })
 
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayAIQuotaList", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayAIQuotaList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.CreateCloudNativeAPIGatewayAIServiceSource", async function () {
+    try {
+       const data = await client.CreateCloudNativeAPIGatewayAIServiceSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.RemoveCloudNativeAPIGatewayConsumerGroupAuth", async function () {
     try {
        const data = await client.RemoveCloudNativeAPIGatewayConsumerGroupAuth({})
@@ -81,6 +121,26 @@ it("cngw.v20230418.RemoveCloudNativeAPIGatewayConsumerGroupAuth", async function
 it("cngw.v20230418.DeleteCloudNativeAPIGatewayMCPTool", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayMCPTool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolVersion", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayMCPToolVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.ModifyCloudNativeAPIGatewayConsumerGroup", async function () {
+    try {
+       const data = await client.ModifyCloudNativeAPIGatewayConsumerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +188,9 @@ it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPToolStatus", async function () 
     }
 })
 
-it("cngw.v20230418.UnbindCloudNativeAPIGatewaySecretKey", async function () {
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolImportTask", async function () {
     try {
-       const data = await client.UnbindCloudNativeAPIGatewaySecretKey({})
+       const data = await client.DescribeCloudNativeAPIGatewayMCPToolImportTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +198,19 @@ it("cngw.v20230418.UnbindCloudNativeAPIGatewaySecretKey", async function () {
     }
 })
 
-it("cngw.v20230418.ModifyCloudNativeAPIGatewayLLMModelService", async function () {
+it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServer", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayLLMModelService({})
+       const data = await client.ModifyCloudNativeAPIGatewayMCPServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DeleteCloudNativeAPIGatewayAIServiceSource", async function () {
+    try {
+       const data = await client.DeleteCloudNativeAPIGatewayAIServiceSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +258,16 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolACLList", async function 
     }
 })
 
+it("cngw.v20230418.CheckCloudNativeAPIGatewayMCPToolVersionExist", async function () {
+    try {
+       const data = await client.CheckCloudNativeAPIGatewayMCPToolVersionExist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.CreateCloudNativeAPIGatewayLLMModelService", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGatewayLLMModelService({})
@@ -211,6 +291,16 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPServer", async function () {
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMModelAPIs", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayLLMModelAPIs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPRouteList", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayMCPRouteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +338,9 @@ it("cngw.v20230418.DescribeCNGWServicesWithRoutes", async function () {
     }
 })
 
-it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServer", async function () {
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayAIServiceSourceList", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayMCPServer({})
+       const data = await client.DescribeCloudNativeAPIGatewayAIServiceSourceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +388,29 @@ it("cngw.v20230418.DeleteCloudNativeAPIGatewaySecretKey", async function () {
     }
 })
 
+it("cngw.v20230418.UnbindCloudNativeAPIGatewaySecretKey", async function () {
+    try {
+       const data = await client.UnbindCloudNativeAPIGatewaySecretKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMModelService", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayLLMModelService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolsFromFile", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayMCPToolsFromFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +438,16 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics", async 
     }
 })
 
+it("cngw.v20230418.RollbackCloudNativeAPIGatewayMCPToolVersion", async function () {
+    try {
+       const data = await client.RollbackCloudNativeAPIGatewayMCPToolVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.CreateCloudNativeAPIGatewayConsumerGroup", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGatewayConsumerGroup({})
@@ -341,6 +461,16 @@ it("cngw.v20230418.CreateCloudNativeAPIGatewayConsumerGroup", async function () 
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPTool", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayMCPTool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.CreateCloudNativeAPIGatewayMCPRoute", async function () {
+    try {
+       const data = await client.CreateCloudNativeAPIGatewayMCPRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,6 +508,16 @@ it("cngw.v20230418.UpdateCloudNativeAPIGatewayMCPTools", async function () {
     }
 })
 
+it("cngw.v20230418.DescribeCloudNativeAPIGatewaySecretKeyList", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewaySecretKeyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServerAuth", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayMCPServerAuth({})
@@ -401,6 +541,16 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewaySecretKeyValue", async function 
 it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServerStatus", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayMCPServerStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolVersionList", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayMCPToolVersionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +628,19 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewaySecretKey", async function () {
     }
 })
 
-it("cngw.v20230418.AddCloudNativeAPIGatewayConsumerGroupAuth", async function () {
+it("cngw.v20230418.ModifyCloudNativeAPIGatewayLLMModelService", async function () {
     try {
-       const data = await client.AddCloudNativeAPIGatewayConsumerGroupAuth({})
+       const data = await client.ModifyCloudNativeAPIGatewayLLMModelService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.CompareCloudNativeAPIGatewayMCPToolVersion", async function () {
+    try {
+       const data = await client.CompareCloudNativeAPIGatewayMCPToolVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +668,29 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMModelServices", async functio
     }
 })
 
-it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolsFromFile", async function () {
+it("cngw.v20230418.ModifyCloudNativeAPIGatewayAIServiceSource", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewayMCPToolsFromFile({})
+       const data = await client.ModifyCloudNativeAPIGatewayAIServiceSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DeleteCloudNativeAPIGatewayMCPRoute", async function () {
+    try {
+       const data = await client.DeleteCloudNativeAPIGatewayMCPRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.CheckCloudNativeAPIGatewayMCPRouteMatch", async function () {
+    try {
+       const data = await client.CheckCloudNativeAPIGatewayMCPRouteMatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -521,6 +701,26 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolsFromFile", async functio
 it("cngw.v20230418.DeleteCloudNativeAPIGatewayConsumerGroup", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DeleteCloudNativeAPIGatewayMCPToolVersion", async function () {
+    try {
+       const data = await client.DeleteCloudNativeAPIGatewayMCPToolVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPRouteStatus", async function () {
+    try {
+       const data = await client.ModifyCloudNativeAPIGatewayMCPRouteStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -34,6 +34,66 @@ export interface CreateCloudNativeAPIGatewayMCPToolRequest {
 }
 
 /**
+ * CheckCloudNativeAPIGatewayMCPToolVersionExist请求参数结构体
+ */
+export interface CheckCloudNativeAPIGatewayMCPToolVersionExistRequest {
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
+  /**
+   * <p>mcp tool版本id</p>
+   */
+  ToolVersion: string
+}
+
+/**
+ * CompareCloudNativeAPIGatewayMCPToolVersion返回参数结构体
+ */
+export interface CompareCloudNativeAPIGatewayMCPToolVersionResponse {
+  /**
+   * <p>对比总结</p>
+   */
+  Result?: AIGWChangeSummary
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 密钥列表
+ */
+export interface CNAPIGwSecretKeyList {
+  /**
+   * 密钥列表
+   */
+  SecretKeys?: Array<CNAPIGwSecretKey>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayConsumerGroup返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayLLMModelServices返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelServicesResponse {
@@ -48,9 +108,9 @@ export interface DescribeCloudNativeAPIGatewayLLMModelServicesResponse {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayConsumerGroup返回参数结构体
+ * DeleteCloudNativeAPIGatewayMCPTool返回参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
+export interface DeleteCloudNativeAPIGatewayMCPToolResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -58,23 +118,13 @@ export interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPServerACL请求参数结构体
+ * RollbackCloudNativeAPIGatewayMCPToolVersion返回参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayMCPServerACLRequest {
+export interface RollbackCloudNativeAPIGatewayMCPToolVersionResponse {
   /**
-   * <p>网关实例 ID</p>
+   * <p>操作结果</p>
    */
-  GatewayId: string
-  /**
-   * <p>MCP服务ID</p>
-   */
-  ServerId: string
-}
-
-/**
- * DeleteCloudNativeAPIGatewayMCPTool返回参数结构体
- */
-export interface DeleteCloudNativeAPIGatewayMCPToolResponse {
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -141,6 +191,20 @@ export interface CreateCloudNativeAPIGatewayMCPServerRequest {
    * <p>是否开启保留原Host功能</p>
    */
   PreserveHost?: boolean
+}
+
+/**
+ * DescribeCloudNativeAPIGatewaySecretKeyList返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyListResponse {
+  /**
+   * <p>密钥列表</p>
+   */
+  Result?: CNAPIGwSecretKeyList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -384,6 +448,20 @@ export interface AIGWLatencyPriorityRouteRule {
 }
 
 /**
+ * 版本变更的兼容变更，破坏变更数
+ */
+export interface AIGWChangeSummary {
+  /**
+   * <p>破坏性变更数</p>
+   */
+  Breaking?: number
+  /**
+   * <p>兼容性变更数</p>
+   */
+  Compatible?: number
+}
+
+/**
  * AI网关 Basic Auth 凭证物料配置
  */
 export interface AIGWBasicCredentialConfig {
@@ -395,6 +473,32 @@ export interface AIGWBasicCredentialConfig {
    * <p>用户名</p>
    */
   Username?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPToolVersionList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolVersionListRequest {
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
+  /**
+   * <p>分页查询limit</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页查询偏移</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -500,17 +604,39 @@ export interface AIGWKVMatch {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPServerAuth返回参数结构体
+ * ModifyCloudNativeAPIGatewaySecretKey请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayMCPServerAuthResponse {
+export interface ModifyCloudNativeAPIGatewaySecretKeyRequest {
   /**
-   * <p>MCP服务认证查询结果</p>
+   * 实例 ID
    */
-  Result?: AIGWMCPServerAuthResult
+  GatewayId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 密钥名字
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
+  /**
+   * 描述,200字以内
+   */
+  Description?: string
+}
+
+/**
+ * AI数据源列表
+ */
+export interface CNAPIGwAIServiceSourceList {
+  /**
+   * <p>MCP服务列表</p>
+   */
+  DataList?: Array<CNAPIGwAIServiceSource>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
 }
 
 /**
@@ -553,6 +679,28 @@ export interface AIGWACLSubject {
    * <p>鉴权主体名称</p>
    */
   Name?: string
+}
+
+/**
+ * RemoveCloudNativeAPIGatewayConsumerGroupAuth请求参数结构体
+ */
+export interface RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest {
+  /**
+   * <p>网关实例id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>授权资源类型。</p><p>枚举值：</p><ul><li>ModelAPI：模型 API</li><li>MCPServer：MCP Server</li></ul>
+   */
+  ResourceType: string
+  /**
+   * <p>对应资源的 ID。</p><ul><li>ResourceType=ModelAPI 时是模型 API ID</li><li>ResourceType=MCPServer 时是 MCP Server ID</li></ul>
+   */
+  ResourceId: string
+  /**
+   * <p>消费者组 ID 列表（每个 ID 以 cg- 开头），长度 1-10。</p>
+   */
+  ConsumerGroupIds: Array<string>
 }
 
 /**
@@ -632,6 +780,58 @@ export interface AIGWTagFilter {
 }
 
 /**
+ * CreateCloudNativeAPIGatewayMCPRoute请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayMCPRouteRequest {
+  /**
+   * <p>网关ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP Server ID</p>
+   */
+  ServerId: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>Header匹配规则</p>
+   */
+  HeaderMatch?: Array<AIGWHeaderRule>
+  /**
+   * <p>http method</p>
+   */
+  Methods?: Array<string>
+  /**
+   * <p>路由名称</p>
+   */
+  Name?: string
+  /**
+   * <p>路径</p>
+   */
+  Path?: string
+  /**
+   * <p>路径匹配规则</p><p>枚举值：</p><ul><li>Exact： 精确</li><li>Prefix： 前缀</li><li>Regex： 正则</li></ul>
+   */
+  PathMatchType?: string
+  /**
+   * <p>route优先级</p>
+   */
+  Priority?: number
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPTool返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * LLM-模型参数检查信息
  */
 export interface CloudNativeAPIGatewayLLMModelParamCheckInfo {
@@ -660,9 +860,46 @@ export interface DescribeCloudNativeAPIGatewayMCPToolACLListResponse {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayMCPServerList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPServerListRequest {
+  /**
+   * <p>实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>分页大小</p>
+   */
+  Limit: number
+  /**
+   * <p>分页偏移</p>
+   */
+  Offset: number
+  /**
+   * <p>密钥凭证ID</p>
+   */
+  SecretKeyId?: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayMCPServerAuth返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayMCPServerAuthResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPRouteStatus返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPRouteStatusResponse {
+  /**
+   * <p>操作结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -949,6 +1186,24 @@ export interface KongServicePreview {
 }
 
 /**
+ * AI 的服务来源配置信息
+ */
+export interface CNAPIGwAIServiceSourceInfo {
+  /**
+   * <p>服务来源实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>授权信息</p>
+   */
+  Auth?: CNAPIGwAIServiceSourceAuth
+  /**
+   * <p>地址列表</p>
+   */
+  Addresses?: Array<string>
+}
+
+/**
  * MCP Server 列表
  */
 export interface AIGWMCPServerList {
@@ -986,13 +1241,13 @@ export interface AIGWJWTCredentialConfig {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayLLMModelService返回参数结构体
+ * DescribeCloudNativeAPIGatewayLLMModelService返回参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
+export interface DescribeCloudNativeAPIGatewayLLMModelServiceResponse {
   /**
-   * <p>是否成功</p>
+   * <p>模型服务。</p>
    */
-  Result?: boolean
+  Result?: CloudNativeAPIGatewayLLMModelService
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1087,6 +1342,24 @@ export interface RemoveCloudNativeAPIGatewayConsumerInGroupRequest {
    * <p>消费者 ID 列表，长度 1-10。</p>
    */
   ConsumerIds: Array<string>
+}
+
+/**
+ * MCP路由 Header规则对象
+ */
+export interface AIGWHeaderRule {
+  /**
+   * <p>Header的Key</p>
+   */
+  Key: string
+  /**
+   * <p>Header匹配规则</p><p>枚举值：</p><ul><li>Exact： 精确</li><li>Prefix： 前缀</li><li>Regex： 正则</li></ul>
+   */
+  MatchType: string
+  /**
+   * <p>Header匹配的值</p>
+   */
+  Value: string
 }
 
 /**
@@ -1502,6 +1775,50 @@ export interface AIGWJWTAuthPluginConfig {
 }
 
 /**
+ * MCP Tools导入任务的进度
+ */
+export interface CNAPIGwMCPToolImportTaskResult {
+  /**
+   * <p>导入失败的数量</p>
+   */
+  FailedCount?: number
+  /**
+   * <p>已处理导入Tool的总数</p>
+   */
+  ProcessedCount?: number
+  /**
+   * <p>成功导入的Tool数量</p>
+   */
+  SuccessCount?: number
+  /**
+   * <p>任务结束时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskEndTime?: string
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务开始时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskStartTime?: string
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>Running： 运行中</li><li>End： 结束</li></ul>
+   */
+  TaskStatus?: string
+  /**
+   * <p>导入结果详情</p>
+   */
+  ToolsImportResult?: Array<CNAPIGwMCPToolImportResult>
+  /**
+   * <p>待导入Tools的总数</p>
+   */
+  TotalCount?: number
+}
+
+/**
  * DescribeCNGWServicesWithRoutes返回参数结构体
  */
 export interface DescribeCNGWServicesWithRoutesResponse {
@@ -1700,6 +2017,64 @@ export interface AIGWModelRewriteRule {
 }
 
 /**
+ * AI网关配额
+ */
+export interface AIGWQuota {
+  /**
+   * <p>Id</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>Consumer： 消费者</li></ul>
+   */
+  ResourceType?: string
+  /**
+   * <p>资源 id</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>资源名字</p><p>如消费者名字</p>
+   */
+  ResourceName?: string
+  /**
+   * <p>配额类型</p><p>枚举值：</p><ul><li>RequestCount： 请求数</li><li>TotalToken： 总 token</li><li>Cost： 成本</li></ul>
+   */
+  QuotaType?: string
+  /**
+   * <p>配额周期单位</p><p>枚举值：</p><ul><li>Day： 天</li><li>Week： 周</li><li>Month： 月</li></ul>
+   */
+  PeriodUnit?: string
+  /**
+   * <p>配额</p>
+   */
+  QuotaLimit?: number
+  /**
+   * <p>启用</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>创建时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>配额类型，手动配额还是默认配额</p>
+   */
+  Source?: string
+  /**
+   * <p>配额超限行为</p><p>枚举值：</p><ul><li>Reject： 拒绝请求</li><li>AllowOverage： 允许超支</li></ul>
+   */
+  ExceedAction?: string
+  /**
+   * <p>缓存是否计入限额</p><p>枚举值：</p><ul><li>Full： 全量计入</li><li>Exclude： 不计入网关缓存命中部分</li></ul>
+   */
+  CacheHitStat?: string
+}
+
+/**
  * 创建资源通用结果
  */
 export interface CNAPIGwCreateCommonResult {
@@ -1861,6 +2236,20 @@ export interface ModifyCloudNativeAPIGatewayConsumerRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayMCPToolImportTask返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse {
+  /**
+   * <p>导入任务的进度</p>
+   */
+  Result?: CNAPIGwMCPToolImportTaskResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AI 网关日志脱敏配置
  */
 export interface AIGWLogDesensitizeConfig {
@@ -1883,17 +2272,27 @@ export interface AIGWLogDesensitizeConfig {
 }
 
 /**
- * DescribeCloudNativeAPIGatewaySecretKey返回参数结构体
+ * AI网关 Bearer Token 凭证配置
  */
-export interface DescribeCloudNativeAPIGatewaySecretKeyResponse {
+export interface AIGWBearerTokenCredentialConfig {
   /**
-   * <p>密钥详情。</p>
+   * <p>Token凭证</p>
    */
-  Result?: CNAPIGwSecretKey
+  Token?: string
+}
+
+/**
+ * 新建MCP路由结果
+ */
+export interface AIGWCreateMCPRouteResult {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>路由ID</p>
    */
-  RequestId?: string
+  RouteId?: string
+  /**
+   * <p>结果</p>
+   */
+  Success?: boolean
 }
 
 /**
@@ -1944,6 +2343,20 @@ export interface AIGWMCPServerAuthResult {
    * <p>OIDC认证配置</p>
    */
   OIDCAuthConfig?: AIGWOIDCAuthPluginConfig
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayMCPToolVersion返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayMCPToolVersionResponse {
+  /**
+   * <p>删除mcp tool版本结果</p>
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2194,13 +2607,32 @@ export interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPTool返回参数结构体
+ * DescribeCloudNativeAPIGatewayMCPRouteList返回参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayMCPToolResponse {
+export interface DescribeCloudNativeAPIGatewayMCPRouteListResponse {
+  /**
+   * <p>路由列表信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: AIGWMCPRouteListResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI网关配额列表
+ */
+export interface AIGWQuotaList {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>配额列表</p>
+   */
+  DataList?: Array<AIGWQuota>
 }
 
 /**
@@ -2310,6 +2742,34 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIResponse {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayMCPServerStatus返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPServerStatusResponse {
+  /**
+   * <p>创建结果</p>
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPToolVersion返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolVersionResponse {
+  /**
+   * <p>tool版本的json snapshot</p>
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云原生网关MCP后端信息，用于展示
  */
 export interface AIGWMCPUpstreamInfoDetail {
@@ -2368,6 +2828,340 @@ export interface AIGWMCPUpstreamInfoDetail {
 }
 
 /**
+ * MCP 路由列表分页查询结果
+ */
+export interface AIGWMCPRouteListResult {
+  /**
+   * <p>路由列表</p>
+   */
+  DataList?: Array<AIGWMCPRoute>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayLLMModelAPI请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
+  /**
+   * <p>网关 id。</p>
+   */
+  GatewayId: string
+  /**
+   * <p>模型 API ID，全局唯一标识。</p>
+   */
+  ModelAPIId: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewaySecretKeyList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
+  /**
+   * <p>实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>每页条数，范围 [1, 100]，默认 10。</p>
+   */
+  Limit: number
+  /**
+   * <p>起始位置，从 0 开始。</p>
+   */
+  Offset: number
+  /**
+   * <p>密钥归属资源类型。UseToBind=true 时必填。</p><p>枚举值：</p><ul><li>Consumer：消费者</li><li>ModelService：模型服务</li></ul>
+   */
+  ResourceType?: string
+}
+
+/**
+ * 键值对
+ */
+export interface KVMapping {
+  /**
+   * 键值映射的键
+   */
+  Key?: string
+  /**
+   * 键值映射的值
+   */
+  Value?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPRoute返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPRouteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * mcp tool版本信息
+ */
+export interface AIGWMCPToolVersion {
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>创建者</p>
+   */
+  Creator?: string
+  /**
+   * <p>是否生效</p>
+   */
+  IsActive?: boolean
+  /**
+   * <p>总参数</p>
+   */
+  TotalParam?: number
+  /**
+   * <p>版本号</p>
+   */
+  Version?: string
+}
+
+/**
+ * AI的服务来源授权信息
+ */
+export interface CNAPIGwAIServiceSourceAuth {
+  /**
+   * <p>账号</p>
+   */
+  Username?: string
+  /**
+   * <p>密码</p>
+   */
+  Password?: string
+  /**
+   * <p>接入Token</p>
+   */
+  AccessToken?: string
+}
+
+/**
+ * AI 网关token长度路由配置
+ */
+export interface AIGWTokenLengthRoute {
+  /**
+   * <p>默认tokenizer编码器</p><p>枚举值：</p><ul><li>o200k_base： OpenApi o200k_base</li><li>cl100k_base： OpenApi cl100k_base</li><li>p50k_base： OpenApi p50k_base</li><li>r50k_base： OpenApi r50k_base</li></ul>
+   */
+  DefaultEncodingName?: string
+  /**
+   * <p>token 计数失败、规则为空或未命中任何规则时执行的默认二级路由（暂时只能选择一个指定模型路由）</p>
+   */
+  DefaultTarget?: AIGWLLMModelServiceSubRoute
+  /**
+   * <p>规则</p>
+   */
+  Rules?: Array<AIGWTokenLengthRouteRule>
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPToolsFromFile返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse {
+  /**
+   * <p>解析结果</p>
+   */
+  Result?: CNAPIGwParseMCPToolsResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 缓存感知路由候选模型服务
+ */
+export interface AIGWCacheAwareRouteCandidate {
+  /**
+   * <p>模型服务ID</p>
+   */
+  ModelServiceId?: string
+  /**
+   * <p>模型服务名称</p>
+   */
+  ModelServiceName?: string
+}
+
+/**
+ * AI服务来源
+ */
+export interface CNAPIGwAIServiceSource {
+  /**
+   * <p>服务来源</p>
+   */
+  SourceName: string
+  /**
+   * <p>服务ID</p>
+   */
+  SourceId: string
+  /**
+   * <p>来源类型</p>
+   */
+  SourceType: string
+  /**
+   * <p>来源产品</p>
+   */
+  SourceProduct: string
+  /**
+   * <p>来源配置信息</p>
+   */
+  SourceInfo: CNAPIGwAIServiceSourceInfo
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayAIServiceSource返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayAIServiceSourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BindCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface BindCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+  /**
+   * 资源ID，当前最多支持一个
+   */
+  ResourceIds: Array<string>
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayAIQuota返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayAIQuotaResponse {
+  /**
+   * <p>配额详情</p>
+   */
+  Result?: AIGWQuotaDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayAIServiceSourceList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayAIServiceSourceListRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 分页大小
+   */
+  Limit: number
+  /**
+   * 分页偏移
+   */
+  Offset: number
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPServerACL返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPServerACLResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RollbackCloudNativeAPIGatewayMCPToolVersion请求参数结构体
+ */
+export interface RollbackCloudNativeAPIGatewayMCPToolVersionRequest {
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
+  /**
+   * <p>mcp tool版本</p>
+   */
+  ToolVersion: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPToolVersion请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolVersionRequest {
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
+  /**
+   * <p>tool版本id</p>
+   */
+  ToolVersion: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayMCPServer请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayMCPServerRequest {
+  /**
+   * <p>云原生API网关实例ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP服务ID</p>
+   */
+  ServerId: string
+}
+
+/**
  * Kong Upstream中的Target
  */
 export interface KongTarget {
@@ -2407,146 +3201,6 @@ export interface KongTarget {
    * target标签
    */
   Tags?: Array<string>
-}
-
-/**
- * DescribeCloudNativeAPIGatewayLLMModelAPI请求参数结构体
- */
-export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
-  /**
-   * <p>网关 id。</p>
-   */
-  GatewayId: string
-  /**
-   * <p>模型 API ID，全局唯一标识。</p>
-   */
-  ModelAPIId: string
-}
-
-/**
- * 键值对
- */
-export interface KVMapping {
-  /**
-   * 键值映射的键
-   */
-  Key?: string
-  /**
-   * 键值映射的值
-   */
-  Value?: string
-}
-
-/**
- * AI网关 Bearer Token 凭证配置
- */
-export interface AIGWBearerTokenCredentialConfig {
-  /**
-   * <p>Token凭证</p>
-   */
-  Token?: string
-}
-
-/**
- * AI 网关token长度路由配置
- */
-export interface AIGWTokenLengthRoute {
-  /**
-   * <p>默认tokenizer编码器</p><p>枚举值：</p><ul><li>o200k_base： OpenApi o200k_base</li><li>cl100k_base： OpenApi cl100k_base</li><li>p50k_base： OpenApi p50k_base</li><li>r50k_base： OpenApi r50k_base</li></ul>
-   */
-  DefaultEncodingName?: string
-  /**
-   * <p>token 计数失败、规则为空或未命中任何规则时执行的默认二级路由（暂时只能选择一个指定模型路由）</p>
-   */
-  DefaultTarget?: AIGWLLMModelServiceSubRoute
-  /**
-   * <p>规则</p>
-   */
-  Rules?: Array<AIGWTokenLengthRouteRule>
-}
-
-/**
- * 缓存感知路由候选模型服务
- */
-export interface AIGWCacheAwareRouteCandidate {
-  /**
-   * <p>模型服务ID</p>
-   */
-  ModelServiceId?: string
-  /**
-   * <p>模型服务名称</p>
-   */
-  ModelServiceName?: string
-}
-
-/**
- * BindCloudNativeAPIGatewaySecretKey请求参数结构体
- */
-export interface BindCloudNativeAPIGatewaySecretKeyRequest {
-  /**
-   * 网关实例id
-   */
-  GatewayId: string
-  /**
-   * 资源类型
-   */
-  ResourceType: string
-  /**
-   * 资源ID，当前最多支持一个
-   */
-  ResourceIds: Array<string>
-  /**
-   * 密钥id
-   */
-  SecretKeyId: string
-}
-
-/**
- * ModifyCloudNativeAPIGatewayConsumer返回参数结构体
- */
-export interface ModifyCloudNativeAPIGatewayConsumerResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyCloudNativeAPIGatewayMCPServerACL返回参数结构体
- */
-export interface ModifyCloudNativeAPIGatewayMCPServerACLResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteCloudNativeAPIGatewayMCPServer请求参数结构体
- */
-export interface DeleteCloudNativeAPIGatewayMCPServerRequest {
-  /**
-   * <p>云原生API网关实例ID</p>
-   */
-  GatewayId: string
-  /**
-   * <p>MCP服务ID</p>
-   */
-  ServerId: string
-}
-
-/**
- * ModifyCloudNativeAPIGatewayMCPServerStatus返回参数结构体
- */
-export interface ModifyCloudNativeAPIGatewayMCPServerStatusResponse {
-  /**
-   * <p>创建结果</p>
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2679,6 +3333,78 @@ export interface CreateCloudNativeAPIGatewaySecretKeyRequest {
    * <p>Basic Auth凭证配置</p>
    */
   BasicCredentialConfig?: AIGWBasicCredentialConfig
+}
+
+/**
+ * AI 网关配额详情
+ */
+export interface AIGWQuotaDetail {
+  /**
+   * <p>id</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>Consumer： 消费者</li></ul>
+   */
+  ResourceType?: string
+  /**
+   * <p>资源id</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>资源名字</p>
+   */
+  ResourceName?: string
+  /**
+   * <p>配额类型</p><p>枚举值：</p><ul><li>RequestCount： 请求数</li><li>TotalToken： token总数</li><li>Cost： 成本</li></ul>
+   */
+  QuotaType?: string
+  /**
+   * <p>配额单位</p><p>枚举值：</p><ul><li>Day： 天</li><li>Week： 周</li><li>Month： 月</li></ul>
+   */
+  PeriodUnit?: string
+  /**
+   * <p>配额</p><p>如果是成本则数值单位是分，如 1000 表示 10.00 元</p>
+   */
+  QuotaLimit?: number
+  /**
+   * <p>启用</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>用量</p>
+   */
+  Used?: number
+  /**
+   * <p>使用率</p>
+   */
+  UsageRate?: number
+  /**
+   * <p>预警级别</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Warning： 预警</li><li>NearLimit： 临近超限</li><li>Exceeded： 超限</li></ul>
+   */
+  AlarmLevel?: string
+  /**
+   * <p>配额规则来源</p><p>枚举值：</p><ul><li>Manual： 手动配置</li><li>Default： 默认配额</li></ul>
+   */
+  Source?: string
+  /**
+   * <p>配额超限行为</p><p>枚举值：</p><ul><li>Reject： 拒绝请求</li><li>AllowOverage： 允许超支</li></ul>
+   */
+  ExceedAction?: string
+  /**
+   * <p>创建时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * <p>缓存是否计入限额</p><p>枚举值：</p><ul><li>Full： 全量计入</li><li>Exclude： 不计入网关缓存命中部分</li></ul>
+   */
+  CacheHitStat?: string
 }
 
 /**
@@ -2960,6 +3686,24 @@ export interface AIGWConsumerModelScope {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewayMCPRoute请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayMCPRouteRequest {
+  /**
+   * <p>网关ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>路由ID</p>
+   */
+  RouteId: string
+  /**
+   * <p>MCP Server ID</p>
+   */
+  ServerId: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayLLMModelAPIs返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
@@ -2971,6 +3715,32 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CompareCloudNativeAPIGatewayMCPToolVersion请求参数结构体
+ */
+export interface CompareCloudNativeAPIGatewayMCPToolVersionRequest {
+  /**
+   * <p>对比源版本号</p>
+   */
+  BaseVersion: string
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>对比目标版本号</p>
+   */
+  TargetVersion: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
 }
 
 /**
@@ -3003,6 +3773,60 @@ export interface CreateCloudNativeAPIGatewayConsumerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MCP路由对象
+ */
+export interface AIGWMCPRoute {
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>路由表达式</p>
+   */
+  Expression?: string
+  /**
+   * <p>Header匹配规则</p>
+   */
+  HeaderMatch?: Array<AIGWHeaderRule>
+  /**
+   * <p>是否为默认路由</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  IsDefault?: boolean
+  /**
+   * <p>http path</p>
+   */
+  Methods?: Array<string>
+  /**
+   * <p>路由名称</p>
+   */
+  Name?: string
+  /**
+   * <p>路由路径</p>
+   */
+  Path?: string
+  /**
+   * <p>路径匹配方式</p><p>枚举值：</p><ul><li>Exact： 精确</li><li>Prefix： 前缀</li><li>Regex： 正则</li></ul>
+   */
+  PathMatchType?: string
+  /**
+   * <p>优先级</p>
+   */
+  Priority?: number
+  /**
+   * <p>路由ID</p>
+   */
+  RouteId?: string
+  /**
+   * <p>启用/禁用状态</p><p>枚举值：</p><ul><li>Enabled： 启用</li><li>Disabled： 禁用</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>是否开启保留原Host功能</p>
+   */
+  PreserveHost?: boolean
 }
 
 /**
@@ -3048,6 +3872,20 @@ export interface UnbindCloudNativeAPIGatewaySecretKeyResponse {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayMCPServerList返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPServerListResponse {
+  /**
+   * <p>MCP Server 列表结果</p>
+   */
+  Result?: AIGWMCPServerList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Token用量统计结果
  */
 export interface AIGWLLMTokenUsageListResult {
@@ -3062,13 +3900,13 @@ export interface AIGWLLMTokenUsageListResult {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPToolsFromFile返回参数结构体
+ * DescribeCloudNativeAPIGatewayMCPServerAuth返回参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse {
+export interface DescribeCloudNativeAPIGatewayMCPServerAuthResponse {
   /**
-   * <p>解析结果</p>
+   * <p>MCP服务认证查询结果</p>
    */
-  Result?: CNAPIGwParseMCPToolsResult
+  Result?: AIGWMCPServerAuthResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3076,25 +3914,77 @@ export interface DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse {
 }
 
 /**
- * ModifyCloudNativeAPIGatewaySecretKey请求参数结构体
+ * MCP Tools的导入结果
  */
-export interface ModifyCloudNativeAPIGatewaySecretKeyRequest {
+export interface CNAPIGwMCPToolImportResult {
   /**
-   * 实例 ID
+   * <p>导入失败的原因信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedMessage?: string
+  /**
+   * <p>请求方法</p>
+   */
+  Method?: string
+  /**
+   * <p>MCP Tool 名字</p>
+   */
+  Name?: string
+  /**
+   * <p>MCP Tool的请求路径</p>
+   */
+  Path?: string
+  /**
+   * <p>导入结果</p><p>枚举值：</p><ul><li>Waiting： 等待导入</li><li>Success： 导入成功</li><li>Failed： 导入失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>虚拟MCP Server的Tool的完整后端地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamUrl?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPRoute请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPRouteRequest {
+  /**
+   * <p>网关ID</p>
    */
   GatewayId: string
   /**
-   * 密钥名字
+   * <p>Route ID</p>
    */
-  Name: string
+  RouteId: string
   /**
-   * 密钥id
+   * <p>MCP Server ID</p>
    */
-  SecretKeyId: string
+  ServerId: string
   /**
-   * 描述,200字以内
+   * <p>描述</p>
    */
   Description?: string
+  /**
+   * <p>Header 匹配规则</p>
+   */
+  HeaderMatch?: Array<AIGWHeaderRule>
+  /**
+   * <p>http method</p>
+   */
+  Methods?: Array<string>
+  /**
+   * <p>路径</p>
+   */
+  Path?: string
+  /**
+   * <p>匹配规则</p><p>枚举值：</p><ul><li>Exact： 精确</li><li>Prefix： 前缀</li><li>Regex： 正则</li></ul>
+   */
+  PathMatchType?: string
+  /**
+   * <p>路由优先级</p>
+   */
+  Priority?: number
 }
 
 /**
@@ -3202,6 +4092,36 @@ export interface CNAPIGwMCPTool {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayAIServiceSource请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayAIServiceSourceRequest {
+  /**
+   * <p>实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>服务来源名字</p>
+   */
+  SourceName: string
+  /**
+   * <p>服务来源类型</p><p>枚举值：</p><ul><li>Registry： 普通注册中心</li><li>MCPRegistry： MCP注册中心</li><li>DNS： 域名服务</li></ul>
+   */
+  SourceType?: string
+  /**
+   * <p>服务来源id</p>
+   */
+  SourceId?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>来源信息</p>
+   */
+  SourceInfo?: CNAPIGwAIServiceSourceInfo
+}
+
+/**
  * AI 网关 Tool ACL 单条记录（DescribeMCPToolACLList 数组元素）
  */
 export interface AIGWMCPToolACLItem {
@@ -3242,6 +4162,32 @@ export interface DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayAIQuotaList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayAIQuotaListRequest {
+  /**
+   * <p>网关实例Id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>开始位置</p>
+   */
+  Offset: number
+  /**
+   * <p>每页数量</p>
+   */
+  Limit: number
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>配额预警级别</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Warning： 预警</li><li>NearLimit： 临近超限</li><li>Exceeded： 超限</li></ul>
+   */
+  AlarmLevels?: Array<string>
+}
+
+/**
  * LLM 模型服务列表
  */
 export interface ListCloudNativeAPIGatewayLLMModelService {
@@ -3278,6 +4224,20 @@ export interface DescribeCNGWServicesWithRoutesRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * <p>密钥详情。</p>
+   */
+  Result?: CNAPIGwSecretKey
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayMCPServerACL返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayMCPServerACLResponse {
@@ -3292,6 +4252,42 @@ export interface DescribeCloudNativeAPIGatewayMCPServerACLResponse {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayAIServiceSourceList返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayAIServiceSourceListResponse {
+  /**
+   * MCP Server 列表结果
+   */
+  Result?: CNAPIGwAIServiceSourceList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPRouteList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPRouteListRequest {
+  /**
+   * <p>网关ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP Server ID</p>
+   */
+  ServerId: string
+  /**
+   * <p>分页限制</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移</p>
+   */
+  Offset?: number
+}
+
+/**
  * ModifyCloudNativeAPIGatewayMCPServer返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayMCPServerResponse {
@@ -3302,17 +4298,37 @@ export interface ModifyCloudNativeAPIGatewayMCPServerResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayLLMModelService返回参数结构体
+ * CheckCloudNativeAPIGatewayMCPRouteMatch请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayLLMModelServiceResponse {
+export interface CheckCloudNativeAPIGatewayMCPRouteMatchRequest {
   /**
-   * <p>模型服务。</p>
+   * <p>网关 ID</p>
    */
-  Result?: CloudNativeAPIGatewayLLMModelService
+  GatewayId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>MCP Server ID</p>
    */
-  RequestId?: string
+  ServerId: string
+  /**
+   * <p>Modify时用于排除自身的Route ID</p>
+   */
+  ExcludeRouteId?: string
+  /**
+   * <p>Head匹配规则</p>
+   */
+  HeaderMatch?: Array<AIGWHeaderRule>
+  /**
+   * <p>http method</p>
+   */
+  Methods?: Array<string>
+  /**
+   * <p>路径</p>
+   */
+  Path?: string
+  /**
+   * <p>path的匹配方式</p><p>枚举值：</p><ul><li>Exact： 精确</li><li>Prefix： 前缀</li><li>Regex： 正则</li></ul>
+   */
+  PathMatchType?: string
 }
 
 /**
@@ -3327,6 +4343,20 @@ export interface AIGWLLMQuotaFallbackTrigger {
    * <p>检查维度策略</p><p>枚举值：</p><ul><li>AnyInsufficient：  RPM 或 TPM 任一不足即触发</li><li>AllInsufficient： RPM 和 TPM 同时不足才触发</li></ul>
    */
   CheckDimension?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayAIQuota请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayAIQuotaRequest {
+  /**
+   * <p>网关实例Id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>配额 id</p>
+   */
+  Id: string
 }
 
 /**
@@ -3561,6 +4591,24 @@ export interface AIGWAuthModelScopeItem {
 }
 
 /**
+ * MCP路由规则的校验结果
+ */
+export interface AIGWMCPRouteCheckResult {
+  /**
+   * <p>冲突路由ID</p>
+   */
+  ConflictRouteId?: string
+  /**
+   * <p>是否冲突</p><p>枚举值：</p><ul><li>true： 冲突</li><li>false： 未冲突</li></ul>
+   */
+  IsConflict?: boolean
+  /**
+   * <p>冲突原因</p>
+   */
+  Reason?: string
+}
+
+/**
  * DeleteCloudNativeAPIGatewayConsumer请求参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayConsumerRequest {
@@ -3596,6 +4644,43 @@ export interface ModifyCloudNativeAPIGatewayMCPToolStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCloudNativeAPIGatewayMCPRoute返回参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayMCPRouteResponse {
+  /**
+   * <p>操作结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: AIGWCreateMCPRouteResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPRouteStatus请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPRouteStatusRequest {
+  /**
+   * <p>网关ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>路由ID</p>
+   */
+  RouteId: string
+  /**
+   * <p>MCP Server ID</p>
+   */
+  ServerId: string
+  /**
+   * <p>启用/禁用状态</p><p>枚举值：</p><ul><li>Enabled： 启用</li><li>Disabled： 禁用</li></ul>
+   */
+  Status: string
 }
 
 /**
@@ -3675,6 +4760,46 @@ export interface CNAPIGwMCPToolList {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewayAIServiceSource返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayAIServiceSourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCloudNativeAPIGatewayAIServiceSource请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayAIServiceSourceRequest {
+  /**
+   * <p>实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>来源类型:</p><ul><li>MCPRegistry:  mcp 注册中心</li></ul>
+   */
+  SourceType: string
+  /**
+   * <p>服务来源名字</p>
+   */
+  SourceName?: string
+  /**
+   * <p>来源产品：- TSFNacos：TSF Nacos</p>
+   */
+  SourceProduct?: string
+  /**
+   * <p>来源详情</p>
+   */
+  SourceInfo?: CNAPIGwAIServiceSourceInfo
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+}
+
+/**
  * AI 网关Token长度路由规则
  */
 export interface AIGWTokenLengthRouteRule {
@@ -3734,6 +4859,16 @@ export interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
    * <p>消费者组描述。最长 200 字符。</p>
    */
   Description?: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayMCPRoute返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayMCPRouteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3993,47 +5128,31 @@ export interface DeleteCloudNativeAPIGatewayConsumerGroupRequest {
 }
 
 /**
- * RemoveCloudNativeAPIGatewayConsumerGroupAuth请求参数结构体
+ * DescribeCloudNativeAPIGatewayMCPToolVersionList返回参数结构体
  */
-export interface RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest {
+export interface DescribeCloudNativeAPIGatewayMCPToolVersionListResponse {
   /**
-   * <p>网关实例id</p>
+   * <p>tool版本列表</p>
    */
-  GatewayId: string
+  Result?: AIGWMCPToolVersionList
   /**
-   * <p>授权资源类型。</p><p>枚举值：</p><ul><li>ModelAPI：模型 API</li><li>MCPServer：MCP Server</li></ul>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceType: string
-  /**
-   * <p>对应资源的 ID。</p><ul><li>ResourceType=ModelAPI 时是模型 API ID</li><li>ResourceType=MCPServer 时是 MCP Server ID</li></ul>
-   */
-  ResourceId: string
-  /**
-   * <p>消费者组 ID 列表（每个 ID 以 cg- 开头），长度 1-10。</p>
-   */
-  ConsumerGroupIds: Array<string>
+  RequestId?: string
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPServerList请求参数结构体
+ * 分页查询返回的mcp tool version列表
  */
-export interface DescribeCloudNativeAPIGatewayMCPServerListRequest {
+export interface AIGWMCPToolVersionList {
   /**
-   * <p>实例 ID</p>
+   * <p>mcp. tool 版本详情</p>
    */
-  GatewayId: string
+  MCPToolVersions?: Array<AIGWMCPToolVersion>
   /**
-   * <p>分页大小</p>
+   * <p>总数</p>
    */
-  Limit: number
-  /**
-   * <p>分页偏移</p>
-   */
-  Offset: number
-  /**
-   * <p>密钥凭证ID</p>
-   */
-  SecretKeyId?: string
+  TotalCount?: number
 }
 
 /**
@@ -4044,6 +5163,35 @@ export interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
    * <p>消费者组详情。</p>
    */
   Result?: CNAPIGwConsumerGroup
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckCloudNativeAPIGatewayMCPToolVersionExist返回参数结构体
+ */
+export interface CheckCloudNativeAPIGatewayMCPToolVersionExistResponse {
+  /**
+   * <p>版本是否存在</p>
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckCloudNativeAPIGatewayMCPRouteMatch返回参数结构体
+ */
+export interface CheckCloudNativeAPIGatewayMCPRouteMatchResponse {
+  /**
+   * <p>是否冲突</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: AIGWMCPRouteCheckResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4213,6 +5361,20 @@ export interface AddCloudNativeAPIGatewayConsumerGroupAuthRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayAIQuotaList返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayAIQuotaListResponse {
+  /**
+   * <p>配额列表</p>
+   */
+  Result?: AIGWQuotaList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 模型服务二级路由配置
  */
 export interface AIGWLLMModelServiceSubRoute {
@@ -4232,6 +5394,16 @@ export interface AIGWLLMModelServiceSubRoute {
    * <p>指定模型路由（暂时只用在Token长度路由时的子路由选择）</p>
    */
   ModelServiceConfig?: AIGWRouteModelServiceConfig
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayConsumer返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4445,17 +5617,57 @@ export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPServerList返回参数结构体
+ * DeleteCloudNativeAPIGatewayAIServiceSource请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayMCPServerListResponse {
+export interface DeleteCloudNativeAPIGatewayAIServiceSourceRequest {
   /**
-   * <p>MCP Server 列表结果</p>
+   * <p>实例 ID</p>
    */
-  Result?: AIGWMCPServerList
+  GatewayId: string
+  /**
+   * <p>服务来源id</p>
+   */
+  SourceId?: string
+  /**
+   * <p>服务来源类型</p><p>枚举值：</p><ul><li>Registry： 普通注册中心</li><li>MCPRegistry： MCP注册中心</li><li>DNS： 域名服务</li></ul>
+   */
+  SourceType?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayLLMModelService返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
+  /**
+   * <p>是否成功</p>
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayMCPToolVersion请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayMCPToolVersionRequest {
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
+  /**
+   * <p>mcp tool版本</p>
+   */
+  ToolVersion: string
 }
 
 /**
@@ -4505,6 +5717,20 @@ export interface DescribeCloudNativeAPIGatewayMCPServerAuthRequest {
 }
 
 /**
+ * CreateCloudNativeAPIGatewayAIServiceSource返回参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayAIServiceSourceResponse {
+  /**
+   * <p>创建结果</p>
+   */
+  Result?: CNAPIGwCreateCommonResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCloudNativeAPIGatewayLLMModelService请求参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayLLMModelServiceRequest {
@@ -4519,6 +5745,20 @@ export interface DeleteCloudNativeAPIGatewayLLMModelServiceRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayMCPToolImportTask请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest {
+  /**
+   * <p>网关实例ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP Server ID</p>
+   */
+  MCPServerId: string
+}
+
+/**
  * DeleteCloudNativeAPIGatewayConsumerGroup返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayConsumerGroupResponse {
@@ -4526,6 +5766,20 @@ export interface DeleteCloudNativeAPIGatewayConsumerGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPServerACL请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPServerACLRequest {
+  /**
+   * <p>网关实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP服务ID</p>
+   */
+  ServerId: string
 }
 
 /**

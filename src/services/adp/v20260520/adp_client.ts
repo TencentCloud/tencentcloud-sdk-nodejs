@@ -276,6 +276,7 @@ import {
   AgentToolOutputParameter,
   CreateChannelRequest,
   Identity,
+  AccessKeyAuthConfig,
   DescribeAgentDetailResponse,
   CreateAppTriggerResponse,
   SystemVariable,
@@ -356,6 +357,7 @@ import {
   CreateAppTriggerRequest,
   AppTriggerWebhookStatus,
   ResumeAppTriggerResponse,
+  AccessKeyParamConfig,
   CategoryPermission,
   ResetConversationRequest,
   ToolBilling,
@@ -375,6 +377,7 @@ import {
   Filter,
   ToolSummary,
   MsgRecordCategory,
+  AccessKeyPassThroughConfig,
   DescribeSkillReferenceListRequest,
   AppTriggerParamBindingConfig,
   CreateSkillResponse,
@@ -990,7 +993,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Agent
+   * 创建Agent（目前仅支持claw模式）
    */
   async CreateAgent(
     req: CreateAgentRequest,

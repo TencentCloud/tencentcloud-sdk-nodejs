@@ -408,20 +408,24 @@ export interface AuthConfig {
    */
   AuthType: number
   /**
-   * API Key授权配置
+   * <p>API Key授权配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiKeyAuthConfig?: ApiKeyAuthConfig
   /**
-   * CAM授权配置
+   * <p>CAM授权配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CamAuthConfig?: CamAuthConfig
   /**
-   * OAuth2.0授权配置
+   * <p>OAuth2.0授权配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OAuthConfig?: OAuthConfig
+  /**
+   * <p>AccessKey授权配置</p>
+   */
+  AccessKeyAuthConfig?: AccessKeyAuthConfig
 }
 
 /**
@@ -2173,27 +2177,29 @@ export interface ConversationContent {
  */
 export interface CamAuthConfig {
   /**
-   * 角色名称
+   * <p>角色名称</p>
    */
   RoleName: string
   /**
-   * 密钥位置 HEADER/QUERY
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 头鉴权 |
-| 1 | 请求信息鉴权 |
+   * <p>密钥位置 HEADER/QUERY</p><p>枚举值:<br>| uint | 描述 |<br>| --- | --- |<br>| 0 | 头鉴权 |<br>| 1 | 请求信息鉴权 |</p>
    */
   KeyLocation?: number
   /**
-   * SecretId字段名称
+   * <p>SecretId字段名称</p>
    */
   SecretIdName?: string
   /**
-   * SecretKey字段名称
+   * <p>SecretKey字段名称</p>
    */
   SecretKeyName?: string
+  /**
+   * <p>CAM Access Key 字段配置</p>
+   */
+  ParamList?: Array<AccessKeyParamConfig>
+  /**
+   * <p>是否支持CAM角色授权</p>
+   */
+  SupportRoleAuth?: boolean
 }
 
 /**
@@ -2204,6 +2210,10 @@ export interface DescribeSkillReferenceListResponse {
    * <p>按 SkillRefType 分组的引用汇总：某类型 total_count = 0 时不入组（不返回空占位） 本期同时落 OPENCLAW / AGENT / CORP_ASSISTANT 三路</p>
    */
   ReferenceList?: Array<SkillReferenceGroup>
+  /**
+   * <p>当前用户是否允许强制删除有引用的Skill</p>
+   */
+  AllowForceModify?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3227,6 +3237,14 @@ export interface AgentPluginConfig {
  */
 export interface PluginSummary {
   /**
+   * <p>插件配置信息</p>
+   */
+  Config?: PluginConfig
+  /**
+   * <p>是否已配置共享</p>
+   */
+  IsShared?: boolean
+  /**
    * <p>插件运营管理信息</p>
    */
   Operation?: PluginOperation
@@ -3239,6 +3257,10 @@ export interface PluginSummary {
    */
   Profile?: PluginProfile
   /**
+   * <p>插件所属空间 ID；内置插件为空</p>
+   */
+  SpaceId?: string
+  /**
    * <p>插件统计信息</p>
    */
   Statistics?: PluginStatistics
@@ -3247,17 +3269,17 @@ export interface PluginSummary {
    */
   Status?: number
   /**
+   * <p>工具信息</p>
+   */
+  ToolList?: Array<ToolSummary>
+  /**
    * <p>用户维度的插件状态信息</p>
    */
   UserState?: PluginUserState
   /**
-   * <p>插件配置信息</p>
+   * <p>更新时间，Unix时间戳</p><p>单位：秒</p>
    */
-  Config?: PluginConfig
-  /**
-   * <p>工具信息</p>
-   */
-  ToolList?: Array<ToolSummary>
+  UpdateTime?: string
 }
 
 /**
@@ -4796,11 +4818,11 @@ export interface ManualOnlySchedule {
  */
 export interface DescribePluginSummaryListRequest {
   /**
-   * 空间ID，查询空间内的插件列表时使用
+   * <p>空间ID，查询空间内的插件列表时使用</p>
    */
   SpaceId: string
   /**
-   * 过滤条件列表 支持：PluginKind、CategoryKey、PluginSource、PluginId、PluginClass、BillingType
+   * <p>过滤条件列表，支持 PluginKind、CategoryKey、PluginSource、PluginId、PluginClass、BillingType、AuthType、IsShared、IsCreatedByMe</p>
    */
   FilterList?: Array<Filter>
   /**
@@ -4812,21 +4834,25 @@ export interface DescribePluginSummaryListRequest {
    */
   Module?: number
   /**
-   * 页码 从0开始
+   * <p>页码 从0开始</p>
    */
   PageNumber?: number
   /**
-   * 每页大小
+   * <p>每页大小</p>
    */
   PageSize?: number
   /**
-   * 查询内容 模糊匹配：插件名称/插件描述/工具名称/工具描述
+   * <p>查询内容 模糊匹配：插件名称/插件描述/工具名称/工具描述</p>
    */
   Query?: string
   /**
    * <p>排序方式。</p><p>枚举值：</p><ul><li>0：未指定，默认排序</li><li>1：按相关性排序</li><li>2：按更新时间排序</li><li>3：默认排序</li><li>4：按热度排序</li></ul>
    */
   SortType?: number
+  /**
+   * <p>筛选当前空间/企业共享插件</p><p>取值范围：[0, 2]</p>
+   */
+  PluginSpaceRelation?: number
 }
 
 /**
@@ -5225,11 +5251,11 @@ export interface SkillDetail {
  */
 export interface DescribePluginSummaryListResponse {
   /**
-   * plugin_list
+   * <p>plugin_list</p>
    */
   PluginList?: Array<PluginSummary>
   /**
-   * total_count
+   * <p>total_count</p>
    */
   TotalCount?: number
   /**
@@ -5862,6 +5888,25 @@ export interface Identity {
 }
 
 /**
+ * AccessKey鉴权配置
+ */
+export interface AccessKeyAuthConfig {
+  /**
+   * <p>Access Key字段配置</p>
+   */
+  ParamList?: Array<AccessKeyParamConfig>
+  /**
+   * <p>Access Key透传配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassThroughConfig?: AccessKeyPassThroughConfig
+  /**
+   * <p>Access Key 使用模式</p><p>枚举值：</p><ul><li>1： Access Key透传</li></ul>
+   */
+  UsageMode?: number
+}
+
+/**
  * DescribeAgentDetail返回参数结构体
  */
 export interface DescribeAgentDetailResponse {
@@ -5961,6 +6006,10 @@ export interface CreateSkillShareRequest {
    * <p>必填，被共享的版本id（必须高于已共享版本）</p>
    */
   VersionId: string
+  /**
+   * <p>共享配置</p>
+   */
+  CorpShareConfig?: SkillCorpShareConfig
 }
 
 /**
@@ -7575,6 +7624,28 @@ export interface ResumeAppTriggerResponse {
 }
 
 /**
+ * Access Key 字段配置
+ */
+export interface AccessKeyParamConfig {
+  /**
+   * <p>Access Key 字段类型，1:AccessKeyId，2:AccessKeySecret，3:SessionToken</p>
+   */
+  FieldType?: number
+  /**
+   * <p>是否必填</p>
+   */
+  IsRequired?: boolean
+  /**
+   * <p>header/query 字段名</p>
+   */
+  ParamName?: string
+  /**
+   * <p>AccessKey密钥默认值，允许为空</p>
+   */
+  ParamValue?: string
+}
+
+/**
  * CategoryPermission
  */
 export interface CategoryPermission {
@@ -7875,7 +7946,7 @@ export interface DeleteAppTriggerResponse {
 }
 
 /**
- * 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系）
+ * 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系；BETWEEN 时 value_list 必须恰好 2 个元素表示闭区间 [start, end]）
  */
 export interface Filter {
   /**
@@ -7883,7 +7954,7 @@ export interface Filter {
    */
   Name?: string
   /**
-   * 操作符，默认 IN（向后兼容）<table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>FILTER_OPERATOR_IN</td><td>0</td><td>属于 value_list（默认值，向后兼容；value_list 不可为空）</td></tr><tr><td>FILTER_OPERATOR_NOT_IN</td><td>1</td><td>不属于 value_list（value_list 不可为空）</td></tr></table>
+   * 操作符，默认 IN（向后兼容）<table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>FILTER_OPERATOR_IN</td><td>0</td><td>属于 value_list（默认值，向后兼容；value_list 不可为空）</td></tr><tr><td>FILTER_OPERATOR_NOT_IN</td><td>1</td><td>不属于 value_list（value_list 不可为空）</td></tr><tr><td>FILTER_OPERATOR_BETWEEN</td><td>2</td><td>之间（闭区间 [start, end]；value_list 必须恰好 2 个元素，允许其一为空表示单边开区间）</td></tr></table>
    */
   Operator?: number
   /**
@@ -7926,6 +7997,16 @@ export interface MsgRecordCategory {
    * <p>该分类下消息记录的数量</p>
    */
   TotalCount?: string
+}
+
+/**
+ * Access Key 透传配置
+ */
+export interface AccessKeyPassThroughConfig {
+  /**
+   * <p>Access Key 字段统一注入位置，0:Header，1:Query</p>
+   */
+  KeyLocation?: number
 }
 
 /**

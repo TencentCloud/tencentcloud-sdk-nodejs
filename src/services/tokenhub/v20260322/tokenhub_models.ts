@@ -202,19 +202,19 @@ export interface ModelImage {
  */
 export interface UsageSeries {
   /**
-   * <p>[tokens 族]总 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[12,null,15]&quot;</code>。</p>
+   * <p>[tokens / apikey_usage 族]总 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[12,null,15]&quot;</code>。</p>
    */
   TotalToken?: string
   /**
-   * <p>[tokens 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[7,null,9]&quot;</code>。</p>
+   * <p>[tokens / apikey_usage 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[7,null,9]&quot;</code>。</p>
    */
   InputTotalToken?: string
   /**
-   * <p>[tokens 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[5,null,6]&quot;</code>。</p>
+   * <p>[tokens / apikey_usage 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[5,null,6]&quot;</code>。</p>
    */
   OutputTotalToken?: string
   /**
-   * <p>[tokens 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
+   * <p>[tokens / apikey_usage 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
    */
   CacheTotalToken?: string
   /**
@@ -225,6 +225,14 @@ export interface UsageSeries {
    * <p>[search 族] 搜索引擎调用次数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
    */
   SearchCount?: string
+  /**
+   * <p>[apikey_usage 族] 请求次数在时间周期内的 JSON 字符串形式，如 <code>&quot;[12,null,15]&quot;</code>。</p>
+   */
+  RequestCount?: string
+  /**
+   * <p>[apikey_usage 族] 请求失败次数在时间周期内的 JSON 字符串形式，如 &quot;[12,null,15]&quot;。</p>
+   */
+  RequestFailCount?: string
 }
 
 /**
@@ -1258,33 +1266,41 @@ export interface TokenPlanPackageInfo {
 }
 
 /**
- * 时间周期内的统计聚合值（按 metric key 索引）。声明 tokens / search 两族字段都在本 schema 中，按 MetricKeys 实际返回取值，参见响应顶层 `MetricKeys` 字段。
+ * 时间周期内的统计聚合值，按 MetricKeys 实际返回取值，参见响应顶层 `MetricKeys` 字段。
  */
 export interface UsageStats {
   /**
-   * <p>[tokens 族] 时间周期内的累计总 token 数。</p>
+   * <p>[tokens / apikey_usage 族] 时间周期内的累计总 token 数。</p>
    */
   TotalToken?: number
   /**
-   * <p>[tokens 族] 时间周期内的累计输入 token 数。</p>
+   * <p>[tokens / apikey_usage 族] 时间周期内的累计输入 token 数。</p>
    */
   InputTotalToken?: number
   /**
-   * <p>[tokens 族] 时间周期内的累计输出 token 数。</p>
+   * <p>[tokens / apikey_usage 族] 时间周期内的累计输出 token 数。</p>
    */
   OutputTotalToken?: number
   /**
-   * <p>[tokens 族] 时间周期内的累计读缓存 token 数（命中缓存部分）</p>
+   * <p>[tokens / apikey_usage 族] 时间周期内的累计读缓存 token 数（命中缓存部分）注意：CacheTotalToken 是 InputTotalToken 的子集（已包含在内）。</p>
    */
   CacheTotalToken?: number
   /**
-   * <p>[search 族] 整段累计联网搜索请求数</p>
+   * <p>[search 族] 时间周期内的累计联网搜索请求数</p>
    */
   SearchRequestCount?: number
   /**
-   * <p>[search 族] 整段累计搜索引擎调用次数</p>
+   * <p>[search 族] 时间周期内的累计搜索引擎调用次数</p>
    */
   SearchCount?: number
+  /**
+   * <p>[apikey_usage 族] 时间周期内的累计请求次数</p>
+   */
+  RequestCount?: number
+  /**
+   * <p>[apikey_usage 族] 时间周期内的累计请求失败次数</p>
+   */
+  RequestFailCount?: number
 }
 
 /**

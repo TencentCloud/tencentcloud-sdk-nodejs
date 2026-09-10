@@ -6608,6 +6608,20 @@ export interface FrameRateWithDenInfo {
 }
 
 /**
+ * DeleteTranscodeTemplate请求参数结构体
+ */
+export interface DeleteTranscodeTemplateRequest {
+  /**
+   * 转码模板唯一标识。
+   */
+  Definition: number
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+}
+
+/**
  * 大模型解析文本转录解析配置
  */
 export interface LLMComprehendAsrForUpdate {
@@ -9018,6 +9032,10 @@ export interface ProcessImageAsyncTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BeautyConfig?: ImageBeautyConfig
+  /**
+   * <p>Ai抠图配置</p>
+   */
+  AiCutOutConfig?: AiCutOutConfig
 }
 
 /**
@@ -11836,6 +11854,32 @@ export interface FaceEnhanceInfo {
 默认：0.0。
    */
   Intensity?: number
+}
+
+/**
+ * 印花提取配置。
+ */
+export interface PatternConfig {
+  /**
+   * <p>透明度阈值</p><p>取值范围：[0, 255]</p><p>默认值：30</p>
+   */
+  TransparencyThreshold?: number
+  /**
+   * <p>不透明阈值，必须大于TransparencyThreshold</p><p>取值范围：[0, 255]</p><p>默认值：127</p>
+   */
+  OpaqueThreshold?: number
+  /**
+   * <p>边缘采样步数</p><p>取值范围：[1, 10]</p><p>默认值：5</p>
+   */
+  EdgeSamplingStep?: number
+  /**
+   * <p>边缘扩展步数</p><p>默认值：5</p>
+   */
+  EdgeExpansionStep?: number
+  /**
+   * <p>边缘融合强度</p><p>取值范围：[0.0, 1.0]</p><p>默认值：0.5</p>
+   */
+  EdgeBlendingIntensity?: number
 }
 
 /**
@@ -15766,17 +15810,26 @@ export interface CreateSubAppIdResponse {
 }
 
 /**
- * DeleteTranscodeTemplate请求参数结构体
+ * 智能抠图配置。
  */
-export interface DeleteTranscodeTemplateRequest {
+export interface AiCutOutConfig {
   /**
-   * 转码模板唯一标识。
+   * <p>能力配置开关，可选值：  ON：开启； OFF：关闭。 默认值：ON。</p>
    */
-  Definition: number
+  Switch?: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p>抠图目标类型指定：&quot;foreground&quot; / &quot;pattern&quot;</p>
    */
-  SubAppId?: number
+  Type?: string
+  /**
+   * <p>图案抠图配置。仅在Type为pattern时生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PatternConfig?: PatternConfig
+  /**
+   * <p>抠图模型选择，可不填。</p><p>枚举值：</p><ul><li>auto： 自动选择合适的模型</li><li>WAND-cutout-1.0-lite： 标准版，速度最快</li><li>WAND-cutout-2.0-lite： 增强版，速度更快</li><li>WAND-cutout-2.0-flash： 增强版，质量-速度平衡</li><li>WAND-cutout-3.0-lite： 增强版，速度更快</li><li>WAND-cutout-3.0-flash： 增强版，质量-速度平衡</li></ul>
+   */
+  Model?: string
 }
 
 /**

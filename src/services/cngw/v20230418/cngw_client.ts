@@ -19,11 +19,15 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateCloudNativeAPIGatewayMCPToolRequest,
-  DescribeCloudNativeAPIGatewayLLMModelServicesResponse,
+  CheckCloudNativeAPIGatewayMCPToolVersionExistRequest,
+  CompareCloudNativeAPIGatewayMCPToolVersionResponse,
+  CNAPIGwSecretKeyList,
   ModifyCloudNativeAPIGatewayConsumerGroupResponse,
-  DescribeCloudNativeAPIGatewayMCPServerACLRequest,
+  DescribeCloudNativeAPIGatewayLLMModelServicesResponse,
   DeleteCloudNativeAPIGatewayMCPToolResponse,
+  RollbackCloudNativeAPIGatewayMCPToolVersionResponse,
   CreateCloudNativeAPIGatewayMCPServerRequest,
+  DescribeCloudNativeAPIGatewaySecretKeyListResponse,
   DeleteCloudNativeAPIGatewaySecretKeyRequest,
   AIGWMCPUpstreamInfo,
   AIGWLLMTokenUsageItem,
@@ -34,7 +38,9 @@ import {
   AIGWFallbackServiceItem,
   DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
   AIGWLatencyPriorityRouteRule,
+  AIGWChangeSummary,
   AIGWBasicCredentialConfig,
+  DescribeCloudNativeAPIGatewayMCPToolVersionListRequest,
   AIGWConsumerGroupBrief,
   DeleteCloudNativeAPIGatewayConsumerResponse,
   RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse,
@@ -42,31 +48,39 @@ import {
   DefaultKongRoute,
   KeyValue,
   AIGWKVMatch,
-  DescribeCloudNativeAPIGatewayMCPServerAuthResponse,
+  ModifyCloudNativeAPIGatewaySecretKeyRequest,
+  CNAPIGwAIServiceSourceList,
   DescribeCloudNativeAPIGatewayConsumerRequest,
   DescribeCloudNativeAPIGatewayLLMModelServiceRequest,
   AIGWACLSubject,
+  RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
   CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy,
   CNAPIGwParseMCPToolsResult,
   ModifyCloudNativeAPIGatewaySecretKeyResponse,
   AddCloudNativeAPIGatewayConsumerInGroupResponse,
   AIGWRouteModelServiceConfig,
   AIGWTagFilter,
+  CreateCloudNativeAPIGatewayMCPRouteRequest,
+  DescribeCloudNativeAPIGatewayMCPToolResponse,
   CloudNativeAPIGatewayLLMModelParamCheckInfo,
   DescribeCloudNativeAPIGatewayMCPToolACLListResponse,
+  DescribeCloudNativeAPIGatewayMCPServerListRequest,
   ModifyCloudNativeAPIGatewayMCPServerAuthResponse,
+  ModifyCloudNativeAPIGatewayMCPRouteStatusResponse,
   CreateCloudNativeAPIGatewayConsumerGroupRequest,
   CNAPIGwSecretKey,
   ModifyCloudNativeAPIGatewayLLMModelAPIResponse,
   CNAPIGwConsumer,
   AIGWLogConfig,
   KongServicePreview,
+  CNAPIGwAIServiceSourceInfo,
   AIGWMCPServerList,
   AIGWJWTCredentialConfig,
-  ModifyCloudNativeAPIGatewayLLMModelServiceResponse,
+  DescribeCloudNativeAPIGatewayLLMModelServiceResponse,
   AIGWOIDCAuthPluginConfig,
   AIGWTopConsumersItem,
   RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
+  AIGWHeaderRule,
   CreateCloudNativeAPIGatewayLLMModelServiceRequest,
   DescribeCloudNativeAPIGatewayLLMModelServicesRequest,
   CreateCloudNativeAPIGatewayLLMModelAPIRequest,
@@ -77,22 +91,27 @@ import {
   DescribeCloudNativeAPIGatewayMCPToolACLListRequest,
   KongServiceWithRoutes,
   AIGWJWTAuthPluginConfig,
+  CNAPIGwMCPToolImportTaskResult,
   DescribeCNGWServicesWithRoutesResponse,
   CloudNativeAPIGatewayLLMModelAPI,
   DescribeCloudNativeAPIGatewayLLMModelAPIsRequest,
   ModifyCloudNativeAPIGatewayMCPServerACLRequest,
   AIGWModelRewriteRule,
+  AIGWQuota,
   CNAPIGwCreateCommonResult,
   CloudNativeAPIGatewayLLMModelServiceRoute,
   CNAPIGwConsumerGroup,
   CreateCloudNativeAPIGatewayLLMModelServiceResponse,
   AIGWMCPServerACLResult,
   ModifyCloudNativeAPIGatewayConsumerRequest,
+  DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse,
   AIGWLogDesensitizeConfig,
-  DescribeCloudNativeAPIGatewaySecretKeyResponse,
+  AIGWBearerTokenCredentialConfig,
+  AIGWCreateMCPRouteResult,
   DescribeCloudNativeAPIGatewayConsumerResponse,
   AIGWMCPSessionConfig,
   AIGWMCPServerAuthResult,
+  DeleteCloudNativeAPIGatewayMCPToolVersionResponse,
   DescribeCloudNativeAPIGatewayMCPToolListRequest,
   DeleteCloudNativeAPIGatewayMCPServerResponse,
   AIGWModelScope,
@@ -102,7 +121,8 @@ import {
   DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
   ListCloudNativeAPIGatewayLLMModelAPI,
   DeleteCloudNativeAPIGatewayLLMModelServiceResponse,
-  DescribeCloudNativeAPIGatewayMCPToolResponse,
+  DescribeCloudNativeAPIGatewayMCPRouteListResponse,
+  AIGWQuotaList,
   ModifyCloudNativeAPIGatewayMCPToolACLResponse,
   DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest,
   AIGWOIDCCredentialConfig,
@@ -110,22 +130,34 @@ import {
   CreateCloudNativeAPIGatewayConsumerGroupResponse,
   UpdateCloudNativeAPIGatewayMCPToolsResponse,
   DescribeCloudNativeAPIGatewayLLMModelAPIResponse,
-  AIGWMCPUpstreamInfoDetail,
-  KongTarget,
-  DescribeCloudNativeAPIGatewayLLMModelAPIRequest,
-  KVMapping,
-  AIGWBearerTokenCredentialConfig,
-  AIGWTokenLengthRoute,
-  AIGWCacheAwareRouteCandidate,
-  BindCloudNativeAPIGatewaySecretKeyRequest,
-  ModifyCloudNativeAPIGatewayConsumerResponse,
-  ModifyCloudNativeAPIGatewayMCPServerACLResponse,
-  DeleteCloudNativeAPIGatewayMCPServerRequest,
   ModifyCloudNativeAPIGatewayMCPServerStatusResponse,
+  DescribeCloudNativeAPIGatewayMCPToolVersionResponse,
+  AIGWMCPUpstreamInfoDetail,
+  AIGWMCPRouteListResult,
+  DescribeCloudNativeAPIGatewayLLMModelAPIRequest,
+  DescribeCloudNativeAPIGatewaySecretKeyListRequest,
+  KVMapping,
+  ModifyCloudNativeAPIGatewayMCPRouteResponse,
+  AIGWMCPToolVersion,
+  CNAPIGwAIServiceSourceAuth,
+  AIGWTokenLengthRoute,
+  DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse,
+  AIGWCacheAwareRouteCandidate,
+  CNAPIGwAIServiceSource,
+  ModifyCloudNativeAPIGatewayAIServiceSourceResponse,
+  BindCloudNativeAPIGatewaySecretKeyRequest,
+  DescribeCloudNativeAPIGatewayAIQuotaResponse,
+  DescribeCloudNativeAPIGatewayAIServiceSourceListRequest,
+  ModifyCloudNativeAPIGatewayMCPServerACLResponse,
+  RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
+  DescribeCloudNativeAPIGatewayMCPToolVersionRequest,
+  DeleteCloudNativeAPIGatewayMCPServerRequest,
+  KongTarget,
   DeleteCloudNativeAPIGatewaySecretKeyResponse,
   DescribeCloudNativeAPIGatewayMCPToolRequest,
   DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest,
   CreateCloudNativeAPIGatewaySecretKeyRequest,
+  AIGWQuotaDetail,
   DescribeCloudNativeAPIGatewayMCPServerResponse,
   AIGWCacheAwareRouteConfig,
   ModifyCloudNativeAPIGatewayMCPToolACLRequest,
@@ -141,25 +173,36 @@ import {
   AIGWCrossServiceFallbackConfig,
   AIGWUpstreamTLSConfig,
   AIGWConsumerModelScope,
+  DeleteCloudNativeAPIGatewayMCPRouteRequest,
   DescribeCloudNativeAPIGatewayLLMModelAPIsResponse,
+  CompareCloudNativeAPIGatewayMCPToolVersionRequest,
   AddCloudNativeAPIGatewayConsumerInGroupRequest,
   CreateCloudNativeAPIGatewayConsumerResponse,
+  AIGWMCPRoute,
   CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy,
   DeleteCloudNativeAPIGatewayLLMModelAPIResponse,
   UnbindCloudNativeAPIGatewaySecretKeyResponse,
+  DescribeCloudNativeAPIGatewayMCPServerListResponse,
   AIGWLLMTokenUsageListResult,
-  DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse,
-  ModifyCloudNativeAPIGatewaySecretKeyRequest,
+  DescribeCloudNativeAPIGatewayMCPServerAuthResponse,
+  CNAPIGwMCPToolImportResult,
+  ModifyCloudNativeAPIGatewayMCPRouteRequest,
   CNAPIGwMCPToolPreview,
   CNAPIGwMCPTool,
+  ModifyCloudNativeAPIGatewayAIServiceSourceRequest,
   AIGWMCPToolACLItem,
   DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse,
+  DescribeCloudNativeAPIGatewayAIQuotaListRequest,
   ListCloudNativeAPIGatewayLLMModelService,
   DescribeCNGWServicesWithRoutesRequest,
+  DescribeCloudNativeAPIGatewaySecretKeyResponse,
   DescribeCloudNativeAPIGatewayMCPServerACLResponse,
+  DescribeCloudNativeAPIGatewayAIServiceSourceListResponse,
+  DescribeCloudNativeAPIGatewayMCPRouteListRequest,
   ModifyCloudNativeAPIGatewayMCPServerResponse,
-  DescribeCloudNativeAPIGatewayLLMModelServiceResponse,
+  CheckCloudNativeAPIGatewayMCPRouteMatchRequest,
   AIGWLLMQuotaFallbackTrigger,
+  DescribeCloudNativeAPIGatewayAIQuotaRequest,
   DescribeCloudNativeAPIGatewaySecretKeyRequest,
   ModifyCloudNativeAPIGatewayMCPServerRequest,
   AIGWMCPToolACLListResult,
@@ -167,25 +210,33 @@ import {
   KongUpstreamInfo,
   DescribeCloudNativeAPIGatewaySecretKeyValueResponse,
   AIGWAuthModelScopeItem,
+  AIGWMCPRouteCheckResult,
   DeleteCloudNativeAPIGatewayConsumerRequest,
   CloudNativeAPIGatewayLLMModelFallbackRule,
   ModifyCloudNativeAPIGatewayMCPToolStatusResponse,
+  CreateCloudNativeAPIGatewayMCPRouteResponse,
+  ModifyCloudNativeAPIGatewayMCPRouteStatusRequest,
   AIGWLLMQuotaLimit,
   AIGWCustomDesensitizeRule,
   KongServiceRoute,
   CNAPIGwMCPToolList,
+  DeleteCloudNativeAPIGatewayAIServiceSourceResponse,
+  CreateCloudNativeAPIGatewayAIServiceSourceRequest,
   AIGWTokenLengthRouteRule,
   AIGWOAuthCredentialConfig,
   ModifyCloudNativeAPIGatewayConsumerGroupRequest,
+  DeleteCloudNativeAPIGatewayMCPRouteResponse,
   UnbindCloudNativeAPIGatewaySecretKeyRequest,
   AIGWQueryParamCredentialConfig,
   BindCloudNativeAPIGatewaySecretKeyResponse,
   DescribeCloudNativeAPIGatewayMCPToolListResponse,
   CloudNativeAPIGatewayLLMModelService,
   DeleteCloudNativeAPIGatewayConsumerGroupRequest,
-  RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
-  DescribeCloudNativeAPIGatewayMCPServerListRequest,
+  DescribeCloudNativeAPIGatewayMCPToolVersionListResponse,
+  AIGWMCPToolVersionList,
   DescribeCloudNativeAPIGatewayConsumerGroupResponse,
+  CheckCloudNativeAPIGatewayMCPToolVersionExistResponse,
+  CheckCloudNativeAPIGatewayMCPRouteMatchResponse,
   AIGWLatencyPriorityConfig,
   ModifyCloudNativeAPIGatewayMCPServerAuthRequest,
   DescribeCloudNativeAPIGatewayMCPServerRequest,
@@ -193,18 +244,25 @@ import {
   AIGWLLMHealthCheckSetting,
   ModifyCloudNativeAPIGatewayMCPToolStatusRequest,
   AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
+  DescribeCloudNativeAPIGatewayAIQuotaListResponse,
   AIGWLLMModelServiceSubRoute,
+  ModifyCloudNativeAPIGatewayConsumerResponse,
   AIGWForwardDesensitizeConfig,
   AIGWSensitiveWordRoute,
   AIGWAKSKCredentialConfig,
   CreateCloudNativeAPIGatewayMCPToolResponse,
   ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
-  DescribeCloudNativeAPIGatewayMCPServerListResponse,
+  DeleteCloudNativeAPIGatewayAIServiceSourceRequest,
+  ModifyCloudNativeAPIGatewayLLMModelServiceResponse,
+  DeleteCloudNativeAPIGatewayMCPToolVersionRequest,
   CreateCloudNativeAPIGatewayLLMModelAPIResponse,
   CreateCloudNativeAPIGatewaySecretKeyResponse,
   DescribeCloudNativeAPIGatewayMCPServerAuthRequest,
+  CreateCloudNativeAPIGatewayAIServiceSourceResponse,
   DeleteCloudNativeAPIGatewayLLMModelServiceRequest,
+  DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest,
   DeleteCloudNativeAPIGatewayConsumerGroupResponse,
+  DescribeCloudNativeAPIGatewayMCPServerACLRequest,
   ModifyCloudNativeAPIGatewayLLMModelAPIRequest,
   AIGWCAMCredentialConfig,
   AIGWMCPServer,
@@ -231,13 +289,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改消费者组。
+   * 查询AI网关配额
    */
-  async ModifyCloudNativeAPIGatewayConsumerGroup(
-    req: ModifyCloudNativeAPIGatewayConsumerGroupRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerGroupResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayConsumerGroupResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayConsumerGroup", req, cb)
+  async DescribeCloudNativeAPIGatewayAIQuota(
+    req: DescribeCloudNativeAPIGatewayAIQuotaRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayAIQuotaResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayAIQuotaResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayAIQuota", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async ModifyCloudNativeAPIGatewayMCPRoute(
+    req: ModifyCloudNativeAPIGatewayMCPRouteRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPRouteResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPRouteResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPRoute", req, cb)
+  }
+
+  /**
+   * 为资源（模型 API / MCP Server）添加消费者组授权。
+   */
+  async AddCloudNativeAPIGatewayConsumerGroupAuth(
+    req: AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
+    cb?: (error: string, rep: AddCloudNativeAPIGatewayConsumerGroupAuthResponse) => void
+  ): Promise<AddCloudNativeAPIGatewayConsumerGroupAuthResponse> {
+    return this.request("AddCloudNativeAPIGatewayConsumerGroupAuth", req, cb)
   }
 
   /**
@@ -271,6 +349,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询AI配额配置列表
+   */
+  async DescribeCloudNativeAPIGatewayAIQuotaList(
+    req: DescribeCloudNativeAPIGatewayAIQuotaListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayAIQuotaListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayAIQuotaListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayAIQuotaList", req, cb)
+  }
+
+  /**
+   * 创建云原生网关AI服务来源
+   */
+  async CreateCloudNativeAPIGatewayAIServiceSource(
+    req: CreateCloudNativeAPIGatewayAIServiceSourceRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayAIServiceSourceResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayAIServiceSourceResponse> {
+    return this.request("CreateCloudNativeAPIGatewayAIServiceSource", req, cb)
+  }
+
+  /**
    * 从资源（模型 API / MCP Server）移除消费者组授权。
    */
   async RemoveCloudNativeAPIGatewayConsumerGroupAuth(
@@ -288,6 +386,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPToolResponse) => void
   ): Promise<DeleteCloudNativeAPIGatewayMCPToolResponse> {
     return this.request("DeleteCloudNativeAPIGatewayMCPTool", req, cb)
+  }
+
+  /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async DescribeCloudNativeAPIGatewayMCPToolVersion(
+    req: DescribeCloudNativeAPIGatewayMCPToolVersionRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolVersionResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolVersionResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolVersion", req, cb)
+  }
+
+  /**
+   * 修改消费者组。
+   */
+  async ModifyCloudNativeAPIGatewayConsumerGroup(
+    req: ModifyCloudNativeAPIGatewayConsumerGroupRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerGroupResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayConsumerGroupResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayConsumerGroup", req, cb)
   }
 
   /**
@@ -331,23 +449,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解绑密钥
+   * 查询批量导入MCP Tools的任务进度
    */
-  async UnbindCloudNativeAPIGatewaySecretKey(
-    req: UnbindCloudNativeAPIGatewaySecretKeyRequest,
-    cb?: (error: string, rep: UnbindCloudNativeAPIGatewaySecretKeyResponse) => void
-  ): Promise<UnbindCloudNativeAPIGatewaySecretKeyResponse> {
-    return this.request("UnbindCloudNativeAPIGatewaySecretKey", req, cb)
+  async DescribeCloudNativeAPIGatewayMCPToolImportTask(
+    req: DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolImportTask", req, cb)
   }
 
   /**
-   * 修改 LLM 模型服务。
+   * 修改MCP服务配置
    */
-  async ModifyCloudNativeAPIGatewayLLMModelService(
-    req: ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayLLMModelServiceResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayLLMModelServiceResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayLLMModelService", req, cb)
+  async ModifyCloudNativeAPIGatewayMCPServer(
+    req: ModifyCloudNativeAPIGatewayMCPServerRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPServerResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPServer", req, cb)
+  }
+
+  /**
+   * 删除云原生网关AI服务来源
+   */
+  async DeleteCloudNativeAPIGatewayAIServiceSource(
+    req: DeleteCloudNativeAPIGatewayAIServiceSourceRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayAIServiceSourceResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayAIServiceSourceResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayAIServiceSource", req, cb)
   }
 
   /**
@@ -391,6 +519,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async CheckCloudNativeAPIGatewayMCPToolVersionExist(
+    req: CheckCloudNativeAPIGatewayMCPToolVersionExistRequest,
+    cb?: (error: string, rep: CheckCloudNativeAPIGatewayMCPToolVersionExistResponse) => void
+  ): Promise<CheckCloudNativeAPIGatewayMCPToolVersionExistResponse> {
+    return this.request("CheckCloudNativeAPIGatewayMCPToolVersionExist", req, cb)
+  }
+
+  /**
    * 创建 LLM 模型服务。同一网关下 Name 唯一。
    */
   async CreateCloudNativeAPIGatewayLLMModelService(
@@ -418,6 +556,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelAPIsResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayLLMModelAPIsResponse> {
     return this.request("DescribeCloudNativeAPIGatewayLLMModelAPIs", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async DescribeCloudNativeAPIGatewayMCPRouteList(
+    req: DescribeCloudNativeAPIGatewayMCPRouteListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPRouteListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPRouteListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPRouteList", req, cb)
   }
 
   /**
@@ -451,13 +599,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改MCP服务配置
+   * 查询云原生网关AI服务来源
    */
-  async ModifyCloudNativeAPIGatewayMCPServer(
-    req: ModifyCloudNativeAPIGatewayMCPServerRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPServerResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPServer", req, cb)
+  async DescribeCloudNativeAPIGatewayAIServiceSourceList(
+    req: DescribeCloudNativeAPIGatewayAIServiceSourceListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayAIServiceSourceListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayAIServiceSourceListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayAIServiceSourceList", req, cb)
   }
 
   /**
@@ -501,6 +649,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解绑密钥
+   */
+  async UnbindCloudNativeAPIGatewaySecretKey(
+    req: UnbindCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: UnbindCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<UnbindCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("UnbindCloudNativeAPIGatewaySecretKey", req, cb)
+  }
+
+  /**
    * 查询单个 LLM 模型服务详情。
    */
   async DescribeCloudNativeAPIGatewayLLMModelService(
@@ -508,6 +666,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelServiceResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayLLMModelServiceResponse> {
     return this.request("DescribeCloudNativeAPIGatewayLLMModelService", req, cb)
+  }
+
+  /**
+   * 从OpenAPI文件中解析出可导入的MCP tools
+   */
+  async DescribeCloudNativeAPIGatewayMCPToolsFromFile(
+    req: DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolsFromFile", req, cb)
   }
 
   /**
@@ -531,6 +699,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async RollbackCloudNativeAPIGatewayMCPToolVersion(
+    req: RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
+    cb?: (error: string, rep: RollbackCloudNativeAPIGatewayMCPToolVersionResponse) => void
+  ): Promise<RollbackCloudNativeAPIGatewayMCPToolVersionResponse> {
+    return this.request("RollbackCloudNativeAPIGatewayMCPToolVersion", req, cb)
+  }
+
+  /**
    * 创建AI 网关消费者组
    */
   async CreateCloudNativeAPIGatewayConsumerGroup(
@@ -548,6 +726,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayMCPToolResponse> {
     return this.request("DescribeCloudNativeAPIGatewayMCPTool", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async CreateCloudNativeAPIGatewayMCPRoute(
+    req: CreateCloudNativeAPIGatewayMCPRouteRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayMCPRouteResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayMCPRouteResponse> {
+    return this.request("CreateCloudNativeAPIGatewayMCPRoute", req, cb)
   }
 
   /**
@@ -581,6 +769,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询密钥列表。
+   */
+  async DescribeCloudNativeAPIGatewaySecretKeyList(
+    req: DescribeCloudNativeAPIGatewaySecretKeyListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewaySecretKeyList", req, cb)
+  }
+
+  /**
    * 修改 MCP Server 的认证配置
    */
   async ModifyCloudNativeAPIGatewayMCPServerAuth(
@@ -608,6 +806,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerStatusResponse) => void
   ): Promise<ModifyCloudNativeAPIGatewayMCPServerStatusResponse> {
     return this.request("ModifyCloudNativeAPIGatewayMCPServerStatus", req, cb)
+  }
+
+  /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async DescribeCloudNativeAPIGatewayMCPToolVersionList(
+    req: DescribeCloudNativeAPIGatewayMCPToolVersionListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolVersionListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolVersionListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolVersionList", req, cb)
   }
 
   /**
@@ -681,13 +889,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为资源（模型 API / MCP Server）添加消费者组授权。
+   * 修改 LLM 模型服务。
    */
-  async AddCloudNativeAPIGatewayConsumerGroupAuth(
-    req: AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
-    cb?: (error: string, rep: AddCloudNativeAPIGatewayConsumerGroupAuthResponse) => void
-  ): Promise<AddCloudNativeAPIGatewayConsumerGroupAuthResponse> {
-    return this.request("AddCloudNativeAPIGatewayConsumerGroupAuth", req, cb)
+  async ModifyCloudNativeAPIGatewayLLMModelService(
+    req: ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayLLMModelServiceResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayLLMModelServiceResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayLLMModelService", req, cb)
+  }
+
+  /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async CompareCloudNativeAPIGatewayMCPToolVersion(
+    req: CompareCloudNativeAPIGatewayMCPToolVersionRequest,
+    cb?: (error: string, rep: CompareCloudNativeAPIGatewayMCPToolVersionResponse) => void
+  ): Promise<CompareCloudNativeAPIGatewayMCPToolVersionResponse> {
+    return this.request("CompareCloudNativeAPIGatewayMCPToolVersion", req, cb)
   }
 
   /**
@@ -711,13 +929,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 从OpenAPI文件中解析出可导入的MCP tools
+   * 修改云原生网关AI服务来源
    */
-  async DescribeCloudNativeAPIGatewayMCPToolsFromFile(
-    req: DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPToolsFromFile", req, cb)
+  async ModifyCloudNativeAPIGatewayAIServiceSource(
+    req: ModifyCloudNativeAPIGatewayAIServiceSourceRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayAIServiceSourceResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayAIServiceSourceResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayAIServiceSource", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async DeleteCloudNativeAPIGatewayMCPRoute(
+    req: DeleteCloudNativeAPIGatewayMCPRouteRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPRouteResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayMCPRouteResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayMCPRoute", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async CheckCloudNativeAPIGatewayMCPRouteMatch(
+    req: CheckCloudNativeAPIGatewayMCPRouteMatchRequest,
+    cb?: (error: string, rep: CheckCloudNativeAPIGatewayMCPRouteMatchResponse) => void
+  ): Promise<CheckCloudNativeAPIGatewayMCPRouteMatchResponse> {
+    return this.request("CheckCloudNativeAPIGatewayMCPRouteMatch", req, cb)
   }
 
   /**
@@ -728,6 +966,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudNativeAPIGatewayConsumerGroupResponse) => void
   ): Promise<DeleteCloudNativeAPIGatewayConsumerGroupResponse> {
     return this.request("DeleteCloudNativeAPIGatewayConsumerGroup", req, cb)
+  }
+
+  /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async DeleteCloudNativeAPIGatewayMCPToolVersion(
+    req: DeleteCloudNativeAPIGatewayMCPToolVersionRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPToolVersionResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayMCPToolVersionResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayMCPToolVersion", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async ModifyCloudNativeAPIGatewayMCPRouteStatus(
+    req: ModifyCloudNativeAPIGatewayMCPRouteStatusRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPRouteStatusResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPRouteStatusResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPRouteStatus", req, cb)
   }
 
   /**

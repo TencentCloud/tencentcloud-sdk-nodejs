@@ -358,6 +358,16 @@ it("cfw.v20190904.ModifyBlockIgnoreRuleNew", async function () {
     }
 })
 
+it("cfw.v20190904.ModifySecurityGroupItemRuleStatus", async function () {
+    try {
+       const data = await client.ModifySecurityGroupItemRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyEdgeIpSwitch", async function () {
     try {
        const data = await client.ModifyEdgeIpSwitch({})
@@ -578,9 +588,9 @@ it("cfw.v20190904.DescribeCcnAssociatedInstances", async function () {
     }
 })
 
-it("cfw.v20190904.ModifySecurityGroupItemRuleStatus", async function () {
+it("cfw.v20190904.DescribeNDRDataLeakOutAlertList", async function () {
     try {
-       const data = await client.ModifySecurityGroupItemRuleStatus({})
+       const data = await client.DescribeNDRDataLeakOutAlertList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

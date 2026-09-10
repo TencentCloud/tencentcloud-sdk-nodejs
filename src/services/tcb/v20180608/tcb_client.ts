@@ -18,327 +18,353 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeEnvLimitResponse,
-  DescribeResourcePermissionResponse,
-  BindStorageSourceRequest,
-  ManagedAIModelChargingInfo,
-  OrderInfo,
-  CheckTcbServiceResponse,
-  DeleteCloudAppVersionResponse,
   DescribeCloudAppCosInfoRequest,
-  MigrationPlanItem,
-  LocalizedMessage,
-  GetProvidersRequest,
-  DescribeCloudBaseRunServerVersionRequest,
-  DescribeCloudBaseRunServerVersionResponse,
-  ModifyEnvPlanRequest,
-  AddProviderRequest,
-  ModifyClsTopicResponse,
   DeleteProviderResponse,
-  HTTPServiceRuleCondition,
-  CreateIndex,
-  ClusterDetail,
   DbInstance,
-  DescribeMySQLClusterDetailResponse,
-  ModifyStorageSourceResponse,
-  SMSProviderTemplateConfig,
-  CloudAppVersionItem,
-  HTTPServiceCacheKeyParams,
-  DescribeCloudAppListResponse,
-  DescribeEnvsRequest,
-  ModifyUserResponse,
-  ModifyProviderResponse,
-  DeleteUsersResp,
   DescribeEnvLimitRequest,
-  DescribeCloudBaseBuildServiceResponse,
   BuildStep,
   HTTPServiceRoute,
+  DescribeTablesResponse,
+  HTTPServiceCacheRule,
+  DescribeHTTPServiceRouteRequest,
+  ClsInfo,
+  ModifyClsTopicRequest,
+  CreateHTTPServiceRouteRequest,
+  UnbindStorageSourceResponse,
+  AgentRuntimeCodeImageConfig,
+  ModifyDatabaseACLRequest,
+  DestroyStaticStoreRequest,
+  OwnershipVerificationFileInfo,
+  MySQLTaskStatus,
+  BaasPackageInfo,
+  DescribeHTTPServiceRouteResponse,
+  GetFunctionRequest,
+  RunCommandsResponse,
+  RunSqlResponse,
+  RenewEnvResponse,
+  UpdateFunctionCodeRequest,
+  CreateAuthDomainResponse,
+  StatusReason,
+  CloudAppServiceItem,
+  DestroyMySQLResponse,
+  ModifyProviderResponse,
+  CreateAIModelResponse,
+  EmailTemplateConfig,
+  DeleteUsersResponse,
+  DescribeLoginConfigResponse,
+  DeleteApiKeyRequest,
+  ModifyProviderRequest,
+  EnvInfo,
+  DescribeCloudAppVersionResponse,
+  CreateBillDealRequest,
+  PlanInfo,
+  DestroyMySQLRequest,
+  SMSCloudFunctionConfig,
+  ValueDetail,
+  CreateAuthDomainRequest,
+  CreateHostingDomainResponse,
+  CreateFunctionRequest,
+  CreateStaticStoreResponse,
+  DeleteCloudAppRequest,
+  BuildStepStatus,
+  ModifyLoginConfigRequest,
+  ModifyPGInstanceSpecRequest,
+  CustomLogConfig,
+  DescribeApiKeyListRequest,
+  MgoIndexKeys,
+  DescribeStaticStoreRequest,
+  AssumeRoleForAllocatedEnvResponse,
+  MgoCommandParam,
+  CreateTableResponse,
   ProviderRequestParametersMap,
-  DescribeMySQLTaskStatusRequest,
-  UnbindStorageSourceRequest,
-  BuildCommands,
-  BanConfig,
-  RepairPGUserMigrationHistoryResponse,
-  RepairPGUserMigrationHistoryRequest,
-  AllocateEnvResponse,
+  PreviewPGUserMigrationsRequest,
+  DatabasesInfo,
+  GetFunctionResponse,
+  DescribeDatabaseACLRequest,
+  VerifyHTTPServiceRouteResponse,
+  AssumeRoleForAllocatedEnvRequest,
+  DescribeTablesRequest,
+  DescribeCurveDataRequest,
+  ModifyResourcePermissionResponse,
+  HTTPServiceCacheAction,
+  VerificationConfig,
+  StorageInfo,
+  ModifyUserResp,
+  DescribeTableRequest,
+  DescribeCloudAppCosInfoResponse,
+  ExternalStorage,
+  AuthDomain,
+  DescribeHTTPServiceCachePurgeTaskRequest,
+  CreateCustomLoginKeyResponse,
+  ModifyClientRequest,
+  FunctionEipConfig,
+  CheckTcbServiceRequest,
+  DescribeManagedAIModelListResponse,
+  DownloadFunctionRequest,
+  BindStorageSourceResponse,
+  ModifyEnvRequest,
+  ModifyUserRequest,
+  CreateUserResp,
+  UpdateFunctionCodeResponse,
+  ModifyLoginConfigResponse,
+  BindStorageSourceRequest,
+  ManagedAIModelChargingInfo,
+  CheckTcbServiceResponse,
+  DeleteCloudAppVersionResponse,
+  DescribeCloudBaseRunServerVersionRequest,
+  ModifyEnvPlanRequest,
+  HTTPServiceRuleCondition,
+  DescribeCloudAppVersionListResponse,
+  ClusterDetail,
+  HTTPServiceCacheKeyParams,
+  DescribeCloudBaseBuildServiceResponse,
+  ModifyUserResponse,
   DescribeCloudAppListRequest,
   ModifyEnvResponse,
+  LogServiceInfo,
+  DescribeCloudBaseRunBuildLogRequest,
+  DescribeCurveDataResponse,
+  OwnershipVerificationDnsInfo,
+  GatewayVersionItem,
+  DescribePGUserMigrationResponse,
+  MySQLNetDetail,
+  ListPGUserMigrationsRequest,
+  LocalizedTemplate,
+  MgoKeySchema,
+  DescribeSafeRuleRequest,
+  ModifyHTTPServiceRouteRequest,
+  ProviderConfig,
+  FunctionInfo,
+  DescribeApiKeyListResponse,
+  ExecutePGSqlResponse,
+  DescribeCreditsUsageRequest,
+  DescribeMySQLClusterDetailRequest,
+  CreateStaticStoreRequest,
+  DescribeBillingInfoResponse,
+  DescribeEnvsRequest,
+  Tag,
+  MigrationInput,
+  DescribeResourcePermissionResult,
+  CreateCustomLoginKeyRequest,
+  DescribeCreateMySQLResultRequest,
+  DescribeBillingInfoRequest,
+  HTTPServiceRouteQPSPolicy,
+  BindClsResponse,
+  StaticCmd,
+  ManagedAIModel,
+  DescribeUserListResponse,
+  ModifyResourcePermissionRequest,
+  UpdateTableRequest,
+  AddProviderResponse,
+  HTTPServiceHeadersHandler,
+  HTTPServiceRouteParam,
+  PushPGUserMigrationsResponse,
+  DescribeCreateMySQLResultResponse,
+  DeleteUsersRequest,
+  SearchClsLogResponse,
+  HTTPServiceCachePurgeTask,
+  PreviewPGUserMigrationsResponse,
+  CreateMySQLRequest,
+  PasswordUpdateLoginConfig,
+  CreateCloudAppResponse,
+  PostgreSQLInfo,
+  DescribeMySQLTaskStatusResponse,
+  TableInfo,
+  DeleteAIModelRequest,
+  CreateEnvResourceResponse,
+  AIModel,
+  DescribeUserListRequest,
+  BindClsRequest,
+  DescribeResourcePermissionRequest,
+  ResourcePermission,
+  FunctionEnvironment,
+  DestroyMySQLResult,
+  ModifySafeRuleResponse,
+  DeleteCloudAppVersionRequest,
+  DescribeCloudAppInfoResponse,
+  EnvBillingInfoItem,
+  CreateHTTPServiceRouteResponse,
+  IndexInfo,
+  ListFunctionsResponse,
+  CreateEnvRequest,
+  BuildSource,
+  DescribeEnvPlansResponse,
+  FunctionEipConfigFixed,
+  DeleteProviderRequest,
+  DescribeCreditsUsageDetailRequest,
+  EnvPkgCreditsUsage,
+  DescribeCloudAppVersionListRequest,
+  DescribeResourcePermissionResponse,
+  OrderInfo,
+  LocalizedMessage,
+  GetProvidersRequest,
+  ModifySafeRuleRequest,
+  AddProviderRequest,
+  SMSProviderTemplateConfig,
+  HTTPServicePathRewrite,
+  CodeReq,
+  DeleteUsersResp,
+  BuildCommands,
+  DropIndex,
+  AllocateEnvResponse,
   Indexkey,
   ManagedAIModelGroup,
-  ReleaseEnvResponse,
-  EmailSmtpConfig,
-  DescribeCloudBaseRunBuildLogRequest,
-  DescribeHTTPServiceRouteRequest,
-  Pager,
-  DescribeCurveDataResponse,
+  UpdateFunctionConfigurationResponse,
   DescribeBaasPackageListRequest,
-  ClsInfo,
-  HTTPServiceHeaderToAdd,
-  GatewayVersionItem,
-  DescribeAuthDomainsResponse,
-  ModifyClsTopicRequest,
   DescribeLoginConfigRequest,
-  CreateHTTPServiceRouteRequest,
-  CreateHostingDomainRequest,
-  HTTPServiceDomainParam,
-  HTTPServiceCacheParams,
-  SMSTemplateParams,
-  UnbindStorageSourceResponse,
-  DescribeCloudAppInfoRequest,
-  ModifyLoginConfigRequest,
   DeleteCloudAppResponse,
-  DescribePGUserMigrationResponse,
-  DestroyStaticStoreRequest,
   DescribeGatewayVersionsResponse,
-  DescribeGatewayVersionsRequest,
-  CreateEnvResourceRequest,
   CloudBaseRunBuildLog,
   DescribeHostingDomainTaskRequest,
   StaticConfig,
   EmailProviderConfig,
-  DestroyEnvRequest,
   DescribeUserListResp,
-  BaasPackageInfo,
-  ModifyHTTPServiceRouteRequest,
   DescribeQuotaDataResponse,
   CreateBillDealResponse,
-  DestroyMySQLResponse,
-  CreateMySQLResult,
-  CreateCloudAppRequest,
-  ProviderConfig,
-  ModifySafeRuleRequest,
-  KVPair,
+  DeleteFunctionRequest,
   AllocateEnvRequest,
-  FunctionInfo,
   CreateEnvResponse,
-  RunCommandsResponse,
-  DescribeTablesRequest,
-  DescribeApiKeyListResponse,
-  DeleteAIModelResponse,
-  ExecutePGSqlResponse,
-  DescribeCreditsUsageRequest,
-  HTTPServiceRouteQPSPolicy,
+  ProviderResponseParametersMap,
   CreateUserResponse,
-  DescribeEnvAccountCircleRequest,
-  CreateBillDealRequest,
-  RenewEnvResponse,
-  DescribeMySQLClusterDetailRequest,
-  DescribeCloudAppVersionListResponse,
-  CreateStaticStoreRequest,
-  HTTPServiceExtension,
-  HTTPServiceCacheSet,
-  DescribeBillingInfoResponse,
-  CreateAuthDomainResponse,
-  ModifyDatabaseACLRequest,
-  LogServiceInfo,
-  DeleteApiKeyResponse,
-  Tag,
-  MigrationInput,
+  CreateFunctionResponse,
+  MessageLocalized,
+  UpdateFunctionConfigurationRequest,
   UpdateAIModelRequest,
-  CloudAppServiceItem,
   RenewEnvRequest,
   DescribeClientResponse,
-  DeleteHTTPServiceRouteResponse,
-  UpdateTableResponse,
-  MigrationConflict,
-  DescribeResourcePermissionResult,
-  MgoKeySchema,
   UpdateAIModelResponse,
-  ListPGUserMigrationsRequest,
-  HTTPServicePathRewrite,
   ModifyEnvPlanResponse,
-  CreateCustomLoginKeyRequest,
   DescribeCreditsUsageDetailResponse,
-  CreateAIModelResponse,
-  DescribeCreateMySQLResultRequest,
   ListPGUserMigrationsResponse,
-  DescribeBillingInfoRequest,
-  HpaPolicy,
-  EmailTemplateConfig,
-  BindClsResponse,
   LogObject,
-  StaticCmd,
   DestroyStaticStoreResponse,
   DescribeAIModelsRequest,
-  ManagedAIModel,
-  DescribeUserListResponse,
-  CreateTableRequest,
-  ManagedAIModelSpec,
+  ModifyDatabaseACLResponse,
+  MigrationPlanItem,
   CreateMySQLResponse,
-  ModifyResourcePermissionRequest,
   DeleteAuthDomainResponse,
-  DeleteApiKeyRequest,
-  ModifyProviderRequest,
   DeleteTableRequest,
-  MySQLNetDetail,
-  EnvInfo,
-  DescribeCloudAppVersionResponse,
-  DestroyEnvResponse,
-  DeleteTableResponse,
-  AddProviderResponse,
-  HTTPServiceHeadersHandler,
+  DownloadFunctionResponse,
   ModifyResourcePermissionResult,
-  DestroyMySQLRequest,
-  EnvBillingInfoItem,
   DescribeEnvsResponse,
-  ListTablesRequest,
-  CreateAuthDomainRequest,
-  CreateHostingDomainResponse,
-  DescribeQuotaDataRequest,
-  StaticStorageInfo,
-  DescribeEnvPlansRequest,
-  DescribeCreateMySQLResult,
-  PurgeHTTPServiceCacheResponse,
-  DeleteCloudAppRequest,
-  ModifyResourcePermissionResponse,
-  BuildStepStatus,
-  DescribeCreateMySQLResultResponse,
-  DescribeSafeRuleRequest,
-  ModifyUserRequest,
-  DeleteUsersRequest,
-  DescribeBaasPackageListResponse,
-  PushPGUserMigrationsRequest,
+  GetProvidersResponse,
   TkeClusterInfo,
-  Provider,
-  ModifyPGInstanceSpecResponse,
-  DescribeSafeRuleResponse,
-  CustomLogConfig,
-  DescribeApiKeyListRequest,
-  WxGatewayCustomConfig,
+  PurgeHTTPServiceCacheResponse,
+  RunSqlRequest,
+  FunctionLayer,
+  HTTPServiceCacheSet,
   ModifyEnvExtraResponse,
-  MgoIndexKeys,
-  DescribeStaticStoreRequest,
   OwnershipVerificationInfo,
   HTTPServiceQPSPerClient,
-  AssumeRoleForAllocatedEnvResponse,
-  VerificationConfig,
-  DescribeTablesResponse,
+  DescribeSafeRuleResponse,
   DescribeEnvAccountCircleResponse,
   MFALoginConfig,
-  MgoCommandParam,
   PurgeHTTPServiceCacheRequest,
-  Variable,
-  ModifyDatabaseACLResponse,
-  HTTPServiceCachePurgeTask,
-  DescribeHTTPServiceRouteResponse,
-  CreateTableResponse,
-  OwnershipVerificationFileInfo,
-  DestroyMySQLResult,
-  PreviewPGUserMigrationsResponse,
-  ReleaseEnvRequest,
-  PreviewPGUserMigrationsRequest,
-  CreateMySQLRequest,
-  DatabasesInfo,
+  CreateTableRequest,
   HTTPServiceDomain,
   BuildSecret,
-  Filter,
-  DropIndex,
-  PasswordUpdateLoginConfig,
-  CreateCloudAppResponse,
-  PostgreSQLInfo,
+  RepairPGUserMigrationHistoryResponse,
   CreateUserRequest,
   CreateApiKeyResponse,
-  VerifyHTTPServiceRouteRequest,
-  DescribeMySQLTaskStatusResponse,
-  TableInfo,
-  AssumeRoleForAllocatedEnvRequest,
-  User,
   CreateAIModelRequest,
-  DescribeLoginConfigResponse,
-  DeleteAIModelRequest,
-  CreateEnvResourceResponse,
-  AIModel,
-  LogResObject,
-  ExecutePGSqlRequest,
-  DescribeUserListRequest,
-  DescribeCurveDataRequest,
-  BindClsRequest,
-  DescribeStaticStoreResponse,
-  ValueDetail,
-  DescribeResourcePermissionRequest,
-  HTTPServiceCacheAction,
-  ResourcePermission,
-  ModifyHTTPServiceRouteResponse,
-  GetProvidersResponse,
-  DescribeHTTPServiceCachePurgeTaskResponse,
-  CreateStaticStoreResponse,
-  ModifyPGInstanceSpecRequest,
-  DescribePGUserMigrationRequest,
-  ApiKeyToken,
-  StorageInfo,
-  ModifyUserResp,
-  ModifySafeRuleResponse,
-  MigrationSummary,
-  ModifyClientResponse,
-  DescribeTableRequest,
-  UpdateTableRequest,
-  DescribeCloudAppCosInfoResponse,
-  DeleteCloudAppVersionRequest,
-  DescribeCreditsUsageDetailRequest,
-  AuthDomain,
-  RunSqlResponse,
-  DescribeHTTPServiceCachePurgeTaskRequest,
-  DescribeClientRequest,
-  DescribeCloudAppInfoResponse,
-  ExternalStorage,
+  DescribeGatewayVersionsRequest,
+  DescribeQuotaDataRequest,
+  DescribeCreateMySQLResult,
+  PushPGUserMigrationsRequest,
+  FunctionTrigger,
+  PermissionInfo,
+  VerifyHTTPServiceRouteCheckItem,
   DescribeHostingDomainTaskResponse,
   DeleteAuthDomainRequest,
-  CreateHTTPServiceRouteResponse,
-  ModifyEnvExtraRequest,
-  CreateCustomLoginKeyResponse,
-  ListTablesResponse,
-  ModifyClientRequest,
-  ProviderResponseParametersMap,
-  DeleteUsersResponse,
+  DeleteTableResponse,
   DescribeCloudBaseBuildServiceRequest,
   SearchClsLogRequest,
-  MongoConnector,
-  CheckTcbServiceRequest,
-  HTTPServiceCacheRule,
-  PermissionInfo,
-  DescribeManagedAIModelListResponse,
-  SearchClsLogResponse,
   DescribeAIModelsResponse,
-  PlanInfo,
+  Function,
+  StaticStoreInfo,
+  DescribeCloudAppVersionRequest,
+  DescribeTableResponse,
+  FunctionPublicNetConfig,
+  PrivateConfig,
+  AIModelSecret,
+  DescribeEnvLimitResponse,
+  ReleaseEnvResponse,
+  DescribeCloudBaseRunServerVersionResponse,
+  ModifyClsTopicResponse,
+  CreateIndex,
+  DescribeMySQLClusterDetailResponse,
+  ModifyStorageSourceResponse,
+  CloudAppVersionItem,
+  DescribeCloudAppListResponse,
+  DescribeMySQLTaskStatusRequest,
+  BanConfig,
+  RepairPGUserMigrationHistoryRequest,
+  LogResObject,
+  EmailSmtpConfig,
+  HTTPServiceHeaderToAdd,
+  DescribeAuthDomainsResponse,
+  CreateHostingDomainRequest,
+  HTTPServiceCacheParams,
+  SMSTemplateParams,
+  DescribeCloudAppInfoRequest,
+  CreateEnvResourceRequest,
+  ManagedAIModelSpec,
+  FunctionVpcConfig,
+  CreateMySQLResult,
+  CreateCloudAppRequest,
+  KVPair,
+  DeleteAIModelResponse,
+  DescribeEnvAccountCircleRequest,
+  HTTPServiceExtension,
+  DeleteApiKeyResponse,
+  ModifyClientResponse,
+  DeleteHTTPServiceRouteResponse,
+  UpdateTableResponse,
+  HpaPolicy,
+  UnbindStorageSourceRequest,
+  ListFunctionsRequest,
+  VerifyHTTPServiceRouteRequest,
+  MigrationSummary,
+  DeleteFunctionResponse,
+  DestroyEnvRequest,
+  DestroyEnvResponse,
+  ListTablesResponse,
+  DescribeEnvPlansRequest,
+  DescribeBaasPackageListResponse,
+  Provider,
+  ModifyEnvExtraRequest,
+  User,
+  Variable,
+  StaticStorageInfo,
+  ReleaseEnvRequest,
+  Filter,
+  ExecutePGSqlRequest,
+  DescribeStaticStoreResponse,
+  ModifyHTTPServiceRouteResponse,
+  ListTablesRequest,
+  DescribeHTTPServiceCachePurgeTaskResponse,
+  DescribePGUserMigrationRequest,
+  ApiKeyToken,
+  DescribeClientRequest,
+  MigrationConflict,
+  ModifyPGInstanceSpecResponse,
+  MongoConnector,
+  HTTPServiceDomainParam,
+  Pager,
   StaticEnvironment,
-  LocalizedTemplate,
-  CreateEnvRequest,
   DeleteHTTPServiceRouteRequest,
   RunCommandsRequest,
   IndexAccesses,
   MySQLClusterDetail,
-  MySQLTaskStatus,
-  BuildSource,
   DescribeAuthDomainsRequest,
-  StaticStoreInfo,
-  ModifyStorageSourceRequest,
-  VerifyHTTPServiceRouteCheckItem,
-  RunSqlRequest,
-  DescribeEnvPlansResponse,
-  VerifyHTTPServiceRouteResponse,
-  MessageLocalized,
-  DescribeCloudAppVersionRequest,
-  OwnershipVerificationDnsInfo,
-  SMSCloudFunctionConfig,
-  DescribeTableResponse,
+  WxGatewayCustomConfig,
   MetricUsage,
   DescribeCloudBaseRunBuildLogResponse,
-  DescribeDatabaseACLRequest,
   DescribeCreditsUsageResponse,
   DescribeDatabaseACLResponse,
-  DeleteProviderRequest,
-  PushPGUserMigrationsResponse,
-  BindStorageSourceResponse,
-  EnvPkgCreditsUsage,
-  ModifyEnvRequest,
   DescribeManagedAIModelListRequest,
-  AIModelSecret,
-  HTTPServiceRouteParam,
-  IndexInfo,
-  CreateUserResp,
   AIModelGroup,
-  ModifyLoginConfigResponse,
-  DescribeCloudAppVersionListRequest,
+  ModifyStorageSourceRequest,
   CreateApiKeyRequest,
 } from "./tcb_models"
 
@@ -352,13 +378,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 从环境池里立即取出1个环境
+     * 删除云函数。
+
+删除指定环境下的云函数。调用接口后，若通过 GetFunction 接口查询不到该函数，则表示删除成功。
+     */
+  async DeleteFunction(
+    req: DeleteFunctionRequest,
+    cb?: (error: string, rep: DeleteFunctionResponse) => void
+  ): Promise<DeleteFunctionResponse> {
+    return this.request("DeleteFunction", req, cb)
+  }
+
+  /**
+   * 该接口根据传入的查询参数返回相关函数信息。
    */
-  async ReleaseEnv(
-    req: ReleaseEnvRequest,
-    cb?: (error: string, rep: ReleaseEnvResponse) => void
-  ): Promise<ReleaseEnvResponse> {
-    return this.request("ReleaseEnv", req, cb)
+  async ListFunctions(
+    req: ListFunctionsRequest,
+    cb?: (error: string, rep: ListFunctionsResponse) => void
+  ): Promise<ListFunctionsResponse> {
+    return this.request("ListFunctions", req, cb)
   }
 
   /**
@@ -558,6 +596,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: CheckTcbServiceResponse) => void
   ): Promise<CheckTcbServiceResponse> {
     return this.request("CheckTcbService", req, cb)
+  }
+
+  /**
+   * 从环境池里立即取出1个环境
+   */
+  async ReleaseEnv(
+    req: ReleaseEnvRequest,
+    cb?: (error: string, rep: ReleaseEnvResponse) => void
+  ): Promise<ReleaseEnvResponse> {
+    return this.request("ReleaseEnv", req, cb)
   }
 
   /**
@@ -811,6 +859,22 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+     * 查询云开发平台支持的托管类型 AI 模型列表。
+
+托管类型模型由云开发平台统一接入和管理，用户无需自行配置模型服务地址和访问密钥，开通后即可直接使用。返回结果按模型分组（Group）组织，包含各模型的规格参数（ModelSpec）和计费信息（ModelChargingInfo）。
+
+通常在以下场景中使用：
+
+开通托管模型前：通过本接口查询平台支持的托管模型及其规格，结合 [UpdateAIModel](https://cloud.tencent.com/document/product/876/131316) 接口完成模型配置。
+     */
+  async DescribeManagedAIModelList(
+    req: DescribeManagedAIModelListRequest,
+    cb?: (error: string, rep: DescribeManagedAIModelListResponse) => void
+  ): Promise<DescribeManagedAIModelListResponse> {
+    return this.request("DescribeManagedAIModelList", req, cb)
+  }
+
+  /**
    * 删除认证源
    */
   async DeleteProvider(
@@ -941,6 +1005,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 创建云函数
+   */
+  async CreateFunction(
+    req: CreateFunctionRequest,
+    cb?: (error: string, rep: CreateFunctionResponse) => void
+  ): Promise<CreateFunctionResponse> {
+    return this.request("CreateFunction", req, cb)
+  }
+
+  /**
    * 删除指定云开发环境下的某个 API Key 服务端访问凭证。删除后，该 API Key 对应的 Token 将被吊销，已使用该 Key 发起的请求将失败。该操作具有幂等性，若指定的 API Key 不存在则直接返回成功。需要管理员权限。
    */
   async DeleteApiKey(
@@ -948,6 +1022,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DeleteApiKeyResponse) => void
   ): Promise<DeleteApiKeyResponse> {
     return this.request("DeleteApiKey", req, cb)
+  }
+
+  /**
+   * 更新云函数代码
+   */
+  async UpdateFunctionCode(
+    req: UpdateFunctionCodeRequest,
+    cb?: (error: string, rep: UpdateFunctionCodeResponse) => void
+  ): Promise<UpdateFunctionCodeResponse> {
+    return this.request("UpdateFunctionCode", req, cb)
   }
 
   /**
@@ -983,19 +1067,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 查询云开发平台支持的托管类型 AI 模型列表。
-
-托管类型模型由云开发平台统一接入和管理，用户无需自行配置模型服务地址和访问密钥，开通后即可直接使用。返回结果按模型分组（Group）组织，包含各模型的规格参数（ModelSpec）和计费信息（ModelChargingInfo）。
-
-通常在以下场景中使用：
-
-开通托管模型前：通过本接口查询平台支持的托管模型及其规格，结合 [UpdateAIModel](https://cloud.tencent.com/document/product/876/131316) 接口完成模型配置。
-     */
-  async DescribeManagedAIModelList(
-    req: DescribeManagedAIModelListRequest,
-    cb?: (error: string, rep: DescribeManagedAIModelListResponse) => void
-  ): Promise<DescribeManagedAIModelListResponse> {
-    return this.request("DescribeManagedAIModelList", req, cb)
+   * 获取云函数详情
+   */
+  async GetFunction(
+    req: GetFunctionRequest,
+    cb?: (error: string, rep: GetFunctionResponse) => void
+  ): Promise<GetFunctionResponse> {
+    return this.request("GetFunction", req, cb)
   }
 
   /**
@@ -1060,6 +1138,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 获取云函数地址并下载zip包
+   */
+  async DownloadFunction(
+    req: DownloadFunctionRequest,
+    cb?: (error: string, rep: DownloadFunctionResponse) => void
+  ): Promise<DownloadFunctionResponse> {
+    return this.request("DownloadFunction", req, cb)
+  }
+
+  /**
      * 本接口（DescribeTable）用于查询文档型数据库表的相关信息，包括索引等信息。
 
 接口入参中的 Tag 为文档型数据库的实例 Id，可以通过 [DescribeEnvs](https://cloud.tencent.com/document/api/876/34820) 接口返回的 EnvList[0].Databases[0].InstanceId 获取。
@@ -1082,14 +1170,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 修改指定云开发环境的登录策略配置。支持开启或关闭手机号短信登录、邮箱登录、用户名密码登录和匿名登录，同时可配置短信验证码发送通道、MFA 多因子认证和密码更新策略。
-修改后立即生效，影响该环境下所有终端用户的登录行为。
-     */
-  async ModifyLoginConfig(
-    req: ModifyLoginConfigRequest,
-    cb?: (error: string, rep: ModifyLoginConfigResponse) => void
-  ): Promise<ModifyLoginConfigResponse> {
-    return this.request("ModifyLoginConfig", req, cb)
+   * 查询云应用服务版本列表信息
+   */
+  async DescribeCloudAppVersionList(
+    req: DescribeCloudAppVersionListRequest,
+    cb?: (error: string, rep: DescribeCloudAppVersionListResponse) => void
+  ): Promise<DescribeCloudAppVersionListResponse> {
+    return this.request("DescribeCloudAppVersionList", req, cb)
   }
 
   /**
@@ -1304,6 +1391,17 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+     * 修改指定云开发环境的登录策略配置。支持开启或关闭手机号短信登录、邮箱登录、用户名密码登录和匿名登录，同时可配置短信验证码发送通道、MFA 多因子认证和密码更新策略。
+修改后立即生效，影响该环境下所有终端用户的登录行为。
+     */
+  async ModifyLoginConfig(
+    req: ModifyLoginConfigRequest,
+    cb?: (error: string, rep: ModifyLoginConfigResponse) => void
+  ): Promise<ModifyLoginConfigResponse> {
+    return this.request("ModifyLoginConfig", req, cb)
+  }
+
+  /**
      * 本接口（DescribeMySQLClusterDetail）查询Mysql集群信息。
 
 调用该接口前需要先查询Mysql是否开通，可通过 [DescribeCreateMySQLResult ](https://cloud.tencent.com/document/api/876/128185) 查询，只有已开通的才能查到集群信息，Mysql开通成功后，可通过接口设置数据库账号相关功能包括但不限于【创建账号、删除账号、查询可授权权限列表、查询账号已有权限、修改主机、修改配置、修改账号库表权限】、集群操作相关【查询集群参数、修改集群参数】，连接设置相关【关闭外网、开通外网、查询集群信息】，备份回档相关【创建手动回档、删除手动回档、修改自动备份配置信息、查询备份文件列表、集群回档、查询任务列表、获取table列表、获取集群数据库列表、查询备份下载地址】，相关功能接口文档：[TDSQL-C MySQL API文档](https://cloud.tencent.com/document/product/1003/48106)，可以通过 [RunSql](https://cloud.tencent.com/document/api/876/127880) 接口来执行 MySql 命令，比如创建表格、插入数据、删除表格等 MySql 命令。
@@ -1369,16 +1467,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 在Postgres数据库上执行SQL
-   */
-  async ExecutePGSql(
-    req: ExecutePGSqlRequest,
-    cb?: (error: string, rep: ExecutePGSqlResponse) => void
-  ): Promise<ExecutePGSqlResponse> {
-    return this.request("ExecutePGSql", req, cb)
-  }
-
-  /**
      * 更新 AI 模型配置分组。支持修改分组的模型列表、服务地址、访问密钥、备注及启用状态。
 
 不同分组类型支持的更新操作如下：
@@ -1433,6 +1521,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: ModifyEnvPlanResponse) => void
   ): Promise<ModifyEnvPlanResponse> {
     return this.request("ModifyEnvPlan", req, cb)
+  }
+
+  /**
+   * 该接口根据传入参数更新函数配置。
+   */
+  async UpdateFunctionConfiguration(
+    req: UpdateFunctionConfigurationRequest,
+    cb?: (error: string, rep: UpdateFunctionConfigurationResponse) => void
+  ): Promise<UpdateFunctionConfigurationResponse> {
+    return this.request("UpdateFunctionConfiguration", req, cb)
   }
 
   /**
@@ -1518,13 +1616,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 查询云应用服务版本列表信息
+   * 在Postgres数据库上执行SQL
    */
-  async DescribeCloudAppVersionList(
-    req: DescribeCloudAppVersionListRequest,
-    cb?: (error: string, rep: DescribeCloudAppVersionListResponse) => void
-  ): Promise<DescribeCloudAppVersionListResponse> {
-    return this.request("DescribeCloudAppVersionList", req, cb)
+  async ExecutePGSql(
+    req: ExecutePGSqlRequest,
+    cb?: (error: string, rep: ExecutePGSqlResponse) => void
+  ): Promise<ExecutePGSqlResponse> {
+    return this.request("ExecutePGSql", req, cb)
   }
 
   /**

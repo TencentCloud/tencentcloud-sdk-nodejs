@@ -3371,7 +3371,7 @@ export interface DownloadL4LogsRequest {
   /**
    * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
    */
-  ZoneIds?: Array<string>
+  ZoneIds: Array<string>
   /**
    * 四层实例 ID 集合。
    */
@@ -7716,7 +7716,7 @@ export interface DownloadL7LogsRequest {
   /**
    * 站点ID集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
    */
-  ZoneIds?: Array<string>
+  ZoneIds: Array<string>
   /**
    * 子域名集合，不填默认选择全部子域名。
    */

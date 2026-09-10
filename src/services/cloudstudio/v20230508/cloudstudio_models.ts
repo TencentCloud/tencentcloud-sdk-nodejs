@@ -64,11 +64,11 @@ export interface RunWorkspaceRequest {
  */
 export interface CreateWorkspaceTokenResponse {
   /**
-   * 访问工作空间临时凭证
+   * <p>访问工作空间临时凭证</p>
    */
   Token?: string
   /**
-   * token 过期时间
+   * <p>token 过期时间</p>
    */
   ExpiredTime?: string
   /**
@@ -96,15 +96,15 @@ export interface GitRepository {
  */
 export interface CreateWorkspaceTokenRequest {
   /**
-   * 工作空间 SpaceKey
+   * <p>工作空间 SpaceKey</p>
    */
   SpaceKey: string
   /**
-   * token过期时间，单位是秒，默认 3600
+   * <p>token过期时间，单位是秒，默认 3600</p>
    */
   TokenExpiredLimitSec?: number
   /**
-   * token 授权策略，可选值为 workspace-run-only, all。默认为 workspace-run-only
+   * <p>token 授权策略，可选值为 workspace-run-only, all。默认为 workspace-run-only</p>
    */
   Policies?: Array<string>
 }
@@ -391,31 +391,31 @@ export interface DescribeWorkspacesResponse {
  */
 export interface ModifyWorkspaceRequest {
   /**
-   * 工作空间 SpaceKey. 更新该工作空间的属性
+   * <p>工作空间 SpaceKey. 更新该工作空间的属性</p>
    */
   SpaceKey: string
   /**
-   * 工作空间名称
+   * <p>工作空间名称</p>
    */
   Name?: string
   /**
-   * 工作空间描述
+   * <p>工作空间描述</p>
    */
   Description?: string
   /**
-   * 工作空间规格。STANDARD: 2C4G, CALCULATION: 4C8G, PROFESSION: 8C16G. 默认是 STANDARD。
+   * <p>工作空间规格。STANDARD: 2C4G, CALCULATION: 4C8G, PROFESSION: 8C16G. 默认是 STANDARD。</p>
    */
   Specs?: string
   /**
-   * 环境变量. 会被注入到工作空间中
+   * <p>环境变量. 会被注入到工作空间中</p>
    */
   Envs?: Array<Env>
   /**
-   * 预装插件. 工作空间启动时, 会自动安装这些插件
+   * <p>预装插件. 工作空间启动时, 会自动安装这些插件</p>
    */
   Extensions?: Array<string>
   /**
-   * 工作空间生命周期钩子.  分为三个阶段 init, start, destroy. 分别表示工作空间数据初始化阶段, 工作空间启动阶段, 工作空间关闭阶段.  用户可以自定义 shell 命令.
+   * <p>工作空间生命周期钩子.  分为三个阶段 init, start, destroy. 分别表示工作空间数据初始化阶段, 工作空间启动阶段, 工作空间关闭阶段.  用户可以自定义 shell 命令.</p>
    */
   Lifecycle?: LifeCycle
 }
