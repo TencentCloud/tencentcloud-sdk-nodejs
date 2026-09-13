@@ -176,6 +176,7 @@ import {
   DeleteSecurityGroupRuleResponse,
   SequenceData,
   DescribeSwitchErrorRequest,
+  DescribeNDRDataLeakOutAlertDetailResponse,
   CommonFilter,
   AddVpcAcRuleRequest,
   EdgeIpInfoSimple,
@@ -368,6 +369,7 @@ import {
   NatFwInstance,
   CfwNatDnatRule,
   UpdateClusterVpcFwRequest,
+  DescribeNDRDataLeakOutAlertDetailRequest,
   DescribeBlockListResponse,
   CheckClusterNatFwPreAccessResponse,
   DeleteNatFwDnatRuleRequest,
@@ -462,6 +464,7 @@ import {
   DescribeNatFwInstancesInfoResponse,
   AddNatAcRuleResponse,
   EdgeRange,
+  DisposalSuggestionItem,
   DescribeResourceGroupRequest,
   CreateAcRulesRequest,
   DescribeAssociatedInstanceListRequest,
@@ -871,13 +874,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * DescribeBlockList 告警中心阻断资产视图列表
+   * DescribeGuideScanInfo新手引导扫描接口信息
    */
-  async DescribeBlockList(
-    req: DescribeBlockListRequest,
-    cb?: (error: string, rep: DescribeBlockListResponse) => void
-  ): Promise<DescribeBlockListResponse> {
-    return this.request("DescribeBlockList", req, cb)
+  async DescribeGuideScanInfo(
+    req?: DescribeGuideScanInfoRequest,
+    cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void
+  ): Promise<DescribeGuideScanInfoResponse> {
+    return this.request("DescribeGuideScanInfo", req, cb)
   }
 
   /**
@@ -1061,13 +1064,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
+   * DescribeBlockList 告警中心阻断资产视图列表
    */
-  async DescribeNatFwInstanceWithRegion(
-    req?: DescribeNatFwInstanceWithRegionRequest,
-    cb?: (error: string, rep: DescribeNatFwInstanceWithRegionResponse) => void
-  ): Promise<DescribeNatFwInstanceWithRegionResponse> {
-    return this.request("DescribeNatFwInstanceWithRegion", req, cb)
+  async DescribeBlockList(
+    req: DescribeBlockListRequest,
+    cb?: (error: string, rep: DescribeBlockListResponse) => void
+  ): Promise<DescribeBlockListResponse> {
+    return this.request("DescribeBlockList", req, cb)
   }
 
   /**
@@ -1341,6 +1344,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateChooseVpcsResponse) => void
   ): Promise<CreateChooseVpcsResponse> {
     return this.request("CreateChooseVpcs", req, cb)
+  }
+
+  /**
+   * DescribeNDRDataLeakOutAlertDetail -- 查询出站数据泄露风险详情
+   */
+  async DescribeNDRDataLeakOutAlertDetail(
+    req: DescribeNDRDataLeakOutAlertDetailRequest,
+    cb?: (error: string, rep: DescribeNDRDataLeakOutAlertDetailResponse) => void
+  ): Promise<DescribeNDRDataLeakOutAlertDetailResponse> {
+    return this.request("DescribeNDRDataLeakOutAlertDetail", req, cb)
   }
 
   /**
@@ -1764,6 +1777,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
+   */
+  async DescribeNatFwInstanceWithRegion(
+    req?: DescribeNatFwInstanceWithRegionRequest,
+    cb?: (error: string, rep: DescribeNatFwInstanceWithRegionResponse) => void
+  ): Promise<DescribeNatFwInstanceWithRegionResponse> {
+    return this.request("DescribeNatFwInstanceWithRegion", req, cb)
+  }
+
+  /**
    * 删除规则
    */
   async DeleteAcRule(
@@ -1921,16 +1944,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeAddressTemplateListResponse) => void
   ): Promise<DescribeAddressTemplateListResponse> {
     return this.request("DescribeAddressTemplateList", req, cb)
-  }
-
-  /**
-   * DescribeGuideScanInfo新手引导扫描接口信息
-   */
-  async DescribeGuideScanInfo(
-    req?: DescribeGuideScanInfoRequest,
-    cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void
-  ): Promise<DescribeGuideScanInfoResponse> {
-    return this.request("DescribeGuideScanInfo", req, cb)
   }
 
   /**

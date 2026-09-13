@@ -408,9 +408,9 @@ it("cfw.v20190904.DescribeNatFwDnatRule", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeBlockList", async function () {
+it("cfw.v20190904.DescribeGuideScanInfo", async function () {
     try {
-       const data = await client.DescribeBlockList({})
+       const data = await client.DescribeGuideScanInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +598,9 @@ it("cfw.v20190904.DescribeNDRDataLeakOutAlertList", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeNatFwInstanceWithRegion", async function () {
+it("cfw.v20190904.DescribeBlockList", async function () {
     try {
-       const data = await client.DescribeNatFwInstanceWithRegion({})
+       const data = await client.DescribeBlockList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -871,6 +871,16 @@ it("cfw.v20190904.ModifyBlockIgnoreList", async function () {
 it("cfw.v20190904.CreateChooseVpcs", async function () {
     try {
        const data = await client.CreateChooseVpcs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeNDRDataLeakOutAlertDetail", async function () {
+    try {
+       const data = await client.DescribeNDRDataLeakOutAlertDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1298,6 +1308,16 @@ it("cfw.v20190904.ModifyNatInstance", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeNatFwInstanceWithRegion", async function () {
+    try {
+       const data = await client.DescribeNatFwInstanceWithRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DeleteAcRule", async function () {
     try {
        const data = await client.DeleteAcRule({})
@@ -1451,16 +1471,6 @@ it("cfw.v20190904.DescribeIpsModeSwitch", async function () {
 it("cfw.v20190904.DescribeAddressTemplateList", async function () {
     try {
        const data = await client.DescribeAddressTemplateList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfw.v20190904.DescribeGuideScanInfo", async function () {
-    try {
-       const data = await client.DescribeGuideScanInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

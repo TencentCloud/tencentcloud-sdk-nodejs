@@ -448,7 +448,7 @@ export interface BindAutoSnapshotPolicyRequest {
  */
 export interface CreateSnapshotResponse {
   /**
-   * 新创建的快照ID。
+   * <p>新创建的快照ID。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotId?: string
@@ -1239,27 +1239,31 @@ export interface ModifyDisksChargeTypeResponse {
  */
 export interface CreateSnapshotRequest {
   /**
-   * 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。
+   * <p>需要创建快照的云硬盘ID，可通过<a href="/document/product/362/16315">DescribeDisks</a>接口查询。</p>
    */
   DiskId?: string
   /**
-   * 快照名称，不传则新快照名称默认为“未命名”。
+   * <p>快照名称，不传则新快照名称默认为“未命名”。</p>
    */
   SnapshotName?: string
   /**
-   * 快照的到期时间，到期后该快照将会自动删除,需要传入UTC时间下的ISO-8601标准时间格式,例如:2022-01-08T09:47:55+00:00,。到期时间最小可设置为一天后的当前时间。
+   * <p>快照的到期时间，到期后该快照将会自动删除，需要传入UTC时间下的ISO-8601标准时间格式，例如:2022-01-08T09:47:55+00:00。到期时间最小可设置为一天后的当前时间。</p>
    */
   Deadline?: string
   /**
-   * 云硬盘备份点ID。传入此参数时，将通过备份点创建快照。备份点 ID 可以通过[DescribeDiskBackups](/document/product/362/80278)接口查询。
+   * <p>云硬盘备份点ID。传入此参数时，将通过备份点创建快照。备份点 ID 可以通过<a href="/document/product/362/80278">DescribeDiskBackups</a>接口查询。</p>
    */
   DiskBackupId?: string
   /**
-   * 快照绑定的标签。
+   * <p>快照绑定的标签。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 快照关联云硬盘类型, SYSTEM_DISK: 系统盘, DATA_DISK: 数据盘,非必填参数，不填时快照类型与云盘类型保持一致， 该参数基于某些场景用户需要将系统盘创建出数据盘快照共享使用。
+   * <p>是否创建极速快照。</p><p>极速快照数据存储在云硬盘所在的存储集群上，可实现秒级创建和回滚。该功能当前通过白名单控制开放。</p>
+   */
+  LocalSnap?: boolean
+  /**
+   * <p>快照关联云硬盘类型, SYSTEM_DISK: 系统盘, DATA_DISK: 数据盘,非必填参数，不填时快照类型与云盘类型保持一致， 该参数基于某些场景用户需要将系统盘创建出数据盘快照共享使用。</p>
    */
   DiskUsage?: string
 }

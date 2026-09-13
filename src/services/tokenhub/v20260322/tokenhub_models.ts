@@ -1312,11 +1312,11 @@ export interface DescribeUsageRankListResponse {
    */
   Dimension?: string
   /**
-   * <p>回填请求的指标族：tokens / search 。</p>
+   * <p>回填请求的指标族：取值同入参 MetricType（tokens / search / apikey_usage）</p><p>枚举值：</p><ul><li>tokens： tokens</li></ul>
    */
   MetricType?: string
   /**
-   * <p>本次响应中 Stats / Series / PageStats / TotalStats 实际包含的 metric key 列表，按MetricType 区分：tokens=[Total,Input,Output,Cache]、search=[SearchRequestCount,SearchCount]</p>
+   * <p>本次响应中 Stats / Series / PageStats / TotalStats 实际包含的 metric key 列表，按MetricType 区分：<br>tokens=[TotalToken, InputTotalToken, OutputTotalToken, CacheTotalToken]<br>search=[SearchRequestCount,SearchCount]<br>apikey_usage=[TotalToken, InputTotalToken, OutputTotalToken, CacheTotalToken, RequestCount, RequestFailCount]</p>
    */
   MetricKeys?: Array<string>
   /**
@@ -1352,7 +1352,7 @@ export interface DescribeUsageRankListResponse {
    */
   Timestamps?: Array<number | bigint>
   /**
-   * <p>对象排行列表，按<code>MetricKeys[0]</code>降序排序。ShowAll=false 时为当前页 10 个对象（含 Series）；ShowAll=true 时为全量对象（不含 Series，用于 CSV 导出）。</p>
+   * <p>对象排行列表，按 SortKey 降序排序。ShowAll=false 时为当前页 10 个对象（含 Series）；ShowAll=true 时为全量对象（不含 Series，用于 CSV 导出）。</p>
    */
   TopList?: Array<UsageRankItem>
   /**
@@ -1363,6 +1363,10 @@ export interface DescribeUsageRankListResponse {
    * <p>总统计结果</p>
    */
   TotalStats?: UsageStats
+  /**
+   * <p>排序指标键</p>
+   */
+  SortKey?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1906,9 +1910,13 @@ export interface DescribeUsageRankListRequest {
    */
   EndTime: string
   /**
-   * <p>指标族切换字段。</p><ul><li>tokens（默认）：Token 消耗图（statistics=sum），支持 Dimension = apikey/endpoint/model</li><li>search【待上线】：联网搜索调用次数（statistics=sum），仅支持 Dimension = model</li><li>其他值返回 InvalidParameter。</li></ul><p>枚举值：</p><ul><li>tokens： tokens</li></ul>
+   * <p>指标族切换字段。</p><ul><li>tokens（默认）：Token 用量消耗（statistics=sum），支持 Dimension = apikey/endpoint/model</li><li>search：联网搜索调用次数（statistics=sum），仅支持 Dimension = model</li><li>apikey_usage: APIKey 锚定用量统计（某 APIKey 下按模型或接入点展开）（statistics=sum），支持 Dimension = endpoint/model</li><li>其他值返回 InvalidParameter。</li></ul>
    */
   MetricType?: string
+  /**
+   * <p>锚定对象，用于缩小统计范围「在哪个具体对象之内」，MetricType 为 apikey_usage 时必填。<br>各 MetricType 是否支持/如何使用 Anchor，见 MetricType 字段说明。</p>
+   */
+  Anchor?: string
   /**
    * <p>维度过滤值。空字符串表示查询全部对象，非空时仅查询指定单个对象（如指定 APIKey ID）。最大 256 字符。</p>
    */
@@ -1925,6 +1933,10 @@ export interface DescribeUsageRankListRequest {
    * <p>是否返回全量结果。</p><ul><li>false（默认）：按 Offset 分页返回 TopList（每页 10 条），每个对象包含<br>Series 时序点用于绘制曲线。</li><li>true：忽略 Offset，返回全量对象列表，不返回 Series（CSV 导出场景）。</li></ul>
    */
   ShowAll?: boolean
+  /**
+   * <p>排序指标键（可选），具体值见响应 MetricKeys。为空时按 <code>MetricKeys[0]</code> 降序排序（tokens/apikey_usage 族为 TotalToken，search 族为 SearchRequestCount）。非法值返回 InvalidParameter。</p>
+   */
+  SortKey?: string
 }
 
 /**

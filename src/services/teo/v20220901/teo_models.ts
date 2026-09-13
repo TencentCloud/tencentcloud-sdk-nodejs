@@ -567,29 +567,42 @@ export interface OriginDetail {
  */
 export interface InferenceHardwareSpecification {
   /**
-   * 规格标识。
+   * <p>规格标识。已废弃，参考使用字段 <code>HardwareSpecId</code>。</p>
+   * @deprecated
    */
   Spec?: string
   /**
-   * 规格名称。
+   * <p>规格唯一标识 ID。</p>
+   */
+  HardwareSpecId?: string
+  /**
+   * <p>规格名称。</p>
    */
   Name?: string
   /**
-   * CPU 核数。
-   */
-  CPUNum?: number
-  /**
-   * 内存大小。单位为 MB。
-   */
-  MemSize?: number
-  /**
-   * GPU 卡数。
+   * <p>规格默认分配的 GPU 卡数。</p>
    */
   GPUNum?: number
   /**
-   * 显存大小。单位为 MB。
+   * <p>规格默认分配的 CPU 核数。</p>
+   */
+  CPUNum?: number
+  /**
+   * <p>规格默认分配的内存大小。</p><p>单位：MB</p>
+   */
+  MemSize?: number
+  /**
+   * <p>规格默认分配的显存大小。</p><p>单位：MB</p>
    */
   GPUMemSize?: number
+  /**
+   * <p>规格默认分配的磁盘大小。</p><p>单位：MB</p>
+   */
+  DiskSize?: number
+  /**
+   * <p>规格当前支持的 GPU 卡数列表。</p><p>若不填充或填充空数组，则仅支持规格默认分配的 GPU 卡数。</p>
+   */
+  AllowedGPUNums?: Array<number>
 }
 
 /**
@@ -5389,25 +5402,34 @@ export interface DescribePrefetchTasksResponse {
  */
 export interface InferenceResourceConfig {
   /**
-   * 扩容缩容的方式。取值有：<li>Auto：根据请求量自动调整实例数量；</li><li>Manual：人工设置固定的实例数量。</li>
+   * <p>扩容缩容的方式。取值有：<li>Auto：根据请求量自动调整实例数量；</li><li>Manual：人工设置固定的实例数量。</li></p>
    */
   ScalingMode: string
   /**
-   * 硬件规格。
+   * <p>硬件规格标识。已废弃，请参考使用 <code>HardwareSpecId</code>。</p>
+   * @deprecated
    */
-  HardwareSpec: string
+  HardwareSpec?: string
   /**
-   * 推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。
+   * <p>硬件规格唯一标识 ID，可通过 <code>DescribeInferenceHardwareSpecifications</code> 接口获取当前站点支持的硬件规格。</p><p>系统默认按照所选 <code>HardwareSpecId</code> 对应的硬件规格配置推理服务所需资源；如需调整，可通过 <code>HardwareConfig</code> 自定义硬件资源配置。</p>
+   */
+  HardwareSpecId?: string
+  /**
+   * <p>推理服务硬件配置。</p><p>作为入参时，若未填充则按照所选 <code>HardwareSpecId</code> 规格的默认值配置硬件资源；若填充则优先按照填写值进行配置。</p>
+   */
+  HardwareConfig?: InferenceHardwareConfig
+  /**
+   * <p>推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingConfig?: InferenceAutoScalingConfig
   /**
-   * 推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。
+   * <p>推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ManualInstanceConfig?: InferenceManualInstanceConfig
   /**
-   * 单实例的并发数。默认值为 1。
+   * <p>单实例的并发数。默认值为 1。</p>
    */
   Concurrency?: number
 }
@@ -9351,6 +9373,29 @@ export interface AclConfig {
 }
 
 /**
+ * Bot智能分析规则详情
+ */
+export interface IntelligenceRuleItem {
+  /**
+   * 智能分析标签，取值有：
+<li>evil_bot：恶意bot；</li>
+<li>suspect_bot：疑似bot；</li>
+<li>good_bot：良好bot；</li>
+<li>normal：正常请求。</li>
+   */
+  Label: string
+  /**
+   * 触发智能分析标签对应的处置方式，取值有：
+<li>drop：拦截；</li>
+<li>trans：放行；</li>
+<li>alg：Javascript挑战；</li>
+<li>captcha：数字验证码；</li>
+<li>monitor：观察。</li>
+   */
+  Action: string
+}
+
+/**
  * 视频即时处理配置
  */
 export interface JITVideoProcess {
@@ -10706,6 +10751,24 @@ export interface ModifyL7AccSettingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 边缘推理定时伸缩有效期范围配置。
+ */
+export interface InferenceScheduledScalingEffectiveRange {
+  /**
+   * <p>有效期类型。取值有：<li>LongTerm：长期有效；</li><li>Custom：自定义起止日期。</li></p>
+   */
+  EffectiveType: string
+  /**
+   * <p>有效期起始日期。当 EffectiveType 为 Custom 时必填；当 EffectiveType 为 LongTerm 时不传该字段。</p>
+   */
+  StartDate?: string
+  /**
+   * <p>有效期终止日期。当 EffectiveType 为 Custom 时必填，且不得早于 StartDate；当 EffectiveType 为 LongTerm 时不传该字段。</p>
+   */
+  EndDate?: string
 }
 
 /**
@@ -12439,21 +12502,25 @@ export interface LogItem {
  */
 export interface InferenceResourceConfigForModify {
   /**
-   * 扩容缩容的方式。取值有：<li>Auto：根据请求量自动调整实例数量；</li><li>Manual：人工设置固定的实例数量。</li>
+   * <p>扩容缩容的方式。取值有：<li>Auto：根据请求量自动调整实例数量；</li><li>Manual：人工设置固定的实例数量。</li></p>
    */
   ScalingMode?: string
   /**
-   * 推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。
+   * <p>推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。</p>
    */
   AutoScalingConfig?: InferenceAutoScalingConfig
   /**
-   * 推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。
+   * <p>推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。</p>
    */
   ManualInstanceConfig?: InferenceManualInstanceConfig
   /**
-   * 单实例的并发数。默认值为 1。
+   * <p>单实例的并发数。默认值为 1。</p>
    */
   Concurrency?: number
+  /**
+   * <p>推理服务的硬件资源配置。</p>
+   */
+  HardwareConfig?: InferenceHardwareConfigForModify
 }
 
 /**
@@ -14983,21 +15050,25 @@ export interface DescribeTopL7CacheDataRequest {
 }
 
 /**
- * 边缘推理定时伸缩有效期范围配置。
+ * 推理服务硬件配置。
  */
-export interface InferenceScheduledScalingEffectiveRange {
+export interface InferenceHardwareConfig {
   /**
-   * <p>有效期类型。取值有：<li>LongTerm：长期有效；</li><li>Custom：自定义起止日期。</li></p>
+   * <p>推理服务单个实例分配的 GPU 卡数，当前仅支持整数值，且必须为 <code>HardwareSpecId</code> 对应规格的 <code>AllowedGPUNums</code> 中的可选值。</p><p>若不填充，则使用所选 <code>HardwareSpecId</code> 规格对应的默认 <code>GPUNum</code> 值。</p>
    */
-  EffectiveType: string
+  GPUNum?: number
   /**
-   * <p>有效期起始日期。当 EffectiveType 为 Custom 时必填；当 EffectiveType 为 LongTerm 时不传该字段。</p>
+   * <p>推理服务单个实例分配的 CPU 核数，当前仅支持整数值。</p><p>若不填充，则使用所选 <code>HardwareSpecId</code> 规格对应的默认 <code>CPUNum</code> 值。</p>
    */
-  StartDate?: string
+  CPUNum?: number
   /**
-   * <p>有效期终止日期。当 EffectiveType 为 Custom 时必填，且不得早于 StartDate；当 EffectiveType 为 LongTerm 时不传该字段。</p>
+   * <p>推理服务单实例分配的内存大小。</p><p>单位：MB</p><p>若不填充，则使用所选 <code>HardwareSpecId</code> 对应规格的默认 <code>MemSize</code> 值；若填充，则必须为 <code>1024</code> 的整数倍。</p>
    */
-  EndDate?: string
+  MemSize?: number
+  /**
+   * <p>推理服务单实例分配的临时磁盘大小。</p><p>单位：MB</p><p>若不填充，则使用所选 <code>HardwareSpecId</code> 对应规格的默认 <code>DiskSize</code> 值；若填充，则必须为 <code>1024</code> 的整数倍。</p>
+   */
+  DiskSize?: number
 }
 
 /**
@@ -17840,26 +17911,21 @@ export interface RuleEngineSubRule {
 }
 
 /**
- * Bot智能分析规则详情
+ * 推理服务资源硬件配置的修改参数。
  */
-export interface IntelligenceRuleItem {
+export interface InferenceHardwareConfigForModify {
   /**
-   * 智能分析标签，取值有：
-<li>evil_bot：恶意bot；</li>
-<li>suspect_bot：疑似bot；</li>
-<li>good_bot：良好bot；</li>
-<li>normal：正常请求。</li>
+   * <p>推理服务单实例分配的 CPU 核数，当前仅支持整数值。</p><p>若不填充，则不修改。</p>
    */
-  Label: string
+  CPUNum?: number
   /**
-   * 触发智能分析标签对应的处置方式，取值有：
-<li>drop：拦截；</li>
-<li>trans：放行；</li>
-<li>alg：Javascript挑战；</li>
-<li>captcha：数字验证码；</li>
-<li>monitor：观察。</li>
+   * <p>推理服务单实例分配的内存大小。</p><p>单位：MB</p><p>若不填充，则不修改；若填写，则必须为 <code>1024</code> 的整数倍。</p>
    */
-  Action: string
+  MemSize?: number
+  /**
+   * <p>推理服务单实例分配的临时磁盘大小。</p><p>单位：MB</p><p>若不填充，则不修改；若填充，则必须为 <code>1024</code> 的整数倍。</p>
+   */
+  DiskSize?: number
 }
 
 /**

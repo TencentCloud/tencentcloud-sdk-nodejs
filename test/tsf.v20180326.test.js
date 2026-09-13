@@ -518,16 +518,6 @@ it("tsf.v20180326.CreateUnitRule", async function () {
     }
 })
 
-it("tsf.v20180326.UpdateRepository", async function () {
-    try {
-       const data = await client.UpdateRepository({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tsf.v20180326.DescribeUsableUnitNamespaces", async function () {
     try {
        const data = await client.DescribeUsableUnitNamespaces({})
@@ -558,9 +548,9 @@ it("tsf.v20180326.DescribeImageRepository", async function () {
     }
 })
 
-it("tsf.v20180326.ReassociateBusinessLogConfig", async function () {
+it("tsf.v20180326.UpdateRepository", async function () {
     try {
-       const data = await client.ReassociateBusinessLogConfig({})
+       const data = await client.UpdateRepository({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

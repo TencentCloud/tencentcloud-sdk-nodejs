@@ -854,6 +854,16 @@ export interface CreateTWeTalkAgentRequest {
 }
 
 /**
+ * TransferTWeCallDevice返回参数结构体
+ */
+export interface TransferTWeCallDeviceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 会话配置信息。
  */
 export interface TalkConversationConfigInfo {
@@ -4611,6 +4621,54 @@ export interface DescribeTWeTalkAIBotRequest {
 }
 
 /**
+ * 待开通的 TWeSee 预付费订阅信息
+ */
+export interface SeeCreateSubscriptionEntry {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+- `IMG_COMP`：图片理解
+   */
+  ServiceType: string
+  /**
+   * 套餐规格。可选值：
+
+- `BASIC`：基础版
+- `ADVANCED`：高级版
+   */
+  ServiceTier: string
+  /**
+   * 订阅购买时长，单位：月
+   */
+  Period: number
+  /**
+   * 自定义订单 ID
+   */
+  CustomOrderId?: string
+  /**
+   * 续费标识。可选值：
+
+- `NOTIFY_AND_MANUAL_RENEW`：到期前通知并手动续费（默认）
+- `NOTIFY_AND_AUTO_RENEW`：到期前通知并自动续费
+- `DISABLE_NOTIFY_AND_MANUAL_RENEW`：不通知且手动续费
+   */
+  RenewFlag?: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+}
+
+/**
  * TWeSee 语义理解自定义标签请求
  */
 export interface VisionCustomDetectQuery {
@@ -5142,6 +5200,16 @@ export interface ModifyCloudStorageAIServiceCallbackResponse {
 }
 
 /**
+ * BatchRenewTWeSeeSubscription请求参数结构体
+ */
+export interface BatchRenewTWeSeeSubscriptionRequest {
+  /**
+   * 待续费的订阅列表
+   */
+  Entries: Array<SeeRenewSubscriptionEntry>
+}
+
+/**
  * CreateTWeSeeCallback请求参数结构体
  */
 export interface CreateTWeSeeCallbackRequest {
@@ -5157,6 +5225,20 @@ export interface CreateTWeSeeCallbackRequest {
    * 回调签名 Token。最大长度 128
    */
   CallbackToken?: string
+}
+
+/**
+ * BatchCreateTWeSeeSubscription返回参数结构体
+ */
+export interface BatchCreateTWeSeeSubscriptionResponse {
+  /**
+   * 订阅开通结果列表
+   */
+  Results?: Array<SeeCreateSubscriptionResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5310,6 +5392,39 @@ export interface DescribeBindedProductsResponse {
 }
 
 /**
+ * 待续费的 TWeSee 预付费订阅信息
+ */
+export interface SeeRenewSubscriptionEntry {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+- `IMG_COMP`：图片理解
+   */
+  ServiceType: string
+  /**
+   * 续费时长，单位：月
+   */
+  Period: number
+  /**
+   * 自定义订单 ID
+   */
+  CustomOrderId?: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+}
+
+/**
  * 网关坐标
  */
 export interface LoRaGatewayLocation {
@@ -5365,6 +5480,20 @@ export interface SeeTaskMetadata {
  * ModifyTopicRule返回参数结构体
  */
 export interface ModifyTopicRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BatchRenewTWeSeeSubscription返回参数结构体
+ */
+export interface BatchRenewTWeSeeSubscriptionResponse {
+  /**
+   * 订阅续费结果列表
+   */
+  Results?: Array<SeeRenewSubscriptionResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5701,6 +5830,24 @@ export interface CreateLoRaGatewayResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TWeSee 预付费订阅续费结果
+ */
+export interface SeeRenewSubscriptionResult {
+  /**
+   * 订单 ID
+   */
+  OrderId?: string
+  /**
+   * 订单状态
+   */
+  Status?: string
+  /**
+   * 资源 ID
+   */
+  ResourceId?: string
 }
 
 /**
@@ -10290,6 +10437,14 @@ export interface TargetInfo {
    * <p>缩略图路径</p>
    */
   Thumbnail?: string
+  /**
+   * <p>搜索结果置信度</p><p>枚举值：</p><ul><li>high： 高（精准匹配，或包括性的匹配）</li><li>medium： 中（近义匹配）</li><li>low： 低（模糊匹配，部分要素与用户 Query 可能不符合）</li></ul>
+   */
+  Confidence?: string
+  /**
+   * <p>任务信息</p><p>当入参 WithTaskInfo = true 时，出参中会返回任务信息</p>
+   */
+  TaskInfo?: SeeTaskInfo
 }
 
 /**
@@ -10762,6 +10917,24 @@ export interface DevicesItem {
    * 设备名称
    */
   DeviceName: string
+}
+
+/**
+ * TWeSee 预付费订阅开通结果
+ */
+export interface SeeCreateSubscriptionResult {
+  /**
+   * 订单 ID
+   */
+  OrderId?: string
+  /**
+   * 订单状态
+   */
+  Status?: string
+  /**
+   * 资源 ID
+   */
+  ResourceId?: string
 }
 
 /**
@@ -12028,13 +12201,13 @@ export interface DeviceUpdateStatus {
 }
 
 /**
- * TransferTWeCallDevice返回参数结构体
+ * BatchCreateTWeSeeSubscription请求参数结构体
  */
-export interface TransferTWeCallDeviceResponse {
+export interface BatchCreateTWeSeeSubscriptionRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 待开通的订阅列表
    */
-  RequestId?: string
+  Entries: Array<SeeCreateSubscriptionEntry>
 }
 
 /**
@@ -14007,6 +14180,10 @@ export interface SeeTaskInfo {
    * <p>直传 COS 的对象 URI</p>
    */
   COSURI?: string
+  /**
+   * <p>任务的输入 URL</p>
+   */
+  InputURL?: string
 }
 
 /**

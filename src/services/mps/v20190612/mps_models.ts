@@ -19049,7 +19049,7 @@ export interface TextToSpeechAsyncRequest {
    */
   VoiceId: string
   /**
-   * <p>文本语言，默认中文</p>
+   * <p>文本语言，不填时默认自动探测</p>
    */
   TextLang?: string
   /**

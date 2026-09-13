@@ -1086,25 +1086,37 @@ export interface DescribeDeploymentRequest {
  */
 export interface DescribeSandboxInstanceListRequest {
   /**
-   * 沙箱实例ID列表，指定要查询的实例。如果为空则查询所有实例。最大支持100个ID
+   * <p>沙箱实例ID列表，指定要查询的实例。如果为空则查询所有实例。最大支持100个ID</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 沙箱工具ID，指定时查询该沙箱模板下的实例，为空则查询所有沙箱模板的实例
+   * <p>沙箱工具ID，指定时查询该沙箱模板下的实例，为空则查询所有沙箱模板的实例</p>
    */
   ToolId?: string
   /**
-   * 偏移量，默认为0
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100
+   * <p>返回数量，默认为20，最大值为100</p>
    */
   Limit?: number
   /**
-   * 过滤条件
+   * <p>过滤条件</p>
    */
   Filters?: Array<Filter>
+  /**
+   * <p>每次调用返回的最大结果数。如果查询返回的时候有NextToken返回，您可以使用NextToken值获取更多页结果， 当NextToke返回空或者返回的结果数量小于MaxResults时，表示没有更多数据了。允许的最大页面大小为 100。</p>
+   */
+  MaxResults?: number
+  /**
+   * <p>如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。</p>
+   */
+  NextToken?: string
+  /**
+   * <p>是否返回符合当前查询条件的沙箱实例总数，仅在使用 MaxResults/NextToken 分页时生效。设置为 true 时，首次请求（NextToken 为空）计算并返回精确的 TotalCount；后续使用 NextToken 翻页时返回首次请求计算的 TotalCount，分页期间该值保持不变。重新发起不带 NextToken 的请求时将重新计算。使用 NextToken 翻页时，本参数及其他查询参数必须与首次请求保持一致。默认值为 false，此时 TotalCount 返回 0。</p>
+   */
+  NeedTotalCount?: boolean
 }
 
 /**
@@ -1452,13 +1464,17 @@ export interface EnvVar {
  */
 export interface DescribeSandboxInstanceListResponse {
   /**
-   * 沙箱实例列表
+   * <p>沙箱实例列表</p>
    */
   InstanceSet?: Array<SandboxInstance>
   /**
-   * 符合条件的实例总数
+   * <p>符合条件的实例总数</p>
    */
   TotalCount?: number
+  /**
+   * <p>如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。</p>
+   */
+  NextToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

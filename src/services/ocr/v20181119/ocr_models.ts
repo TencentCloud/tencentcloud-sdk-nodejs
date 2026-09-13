@@ -3933,82 +3933,76 @@ export interface VatInvoiceGoodsInfo {
  */
 export interface RecognizeThaiIDCardOCRResponse {
   /**
-   * 身份证号码
+   * <p>身份证号码</p>
    */
   ID?: string
   /**
-   * 泰文姓名
+   * <p>泰文姓名</p>
    */
   ThaiName?: string
   /**
-   * 英文姓名
+   * <p>英文姓名</p>
    */
   EnFirstName?: string
   /**
-   * 英文姓名
+   * <p>英文姓名</p>
    */
   EnLastName?: string
   /**
-   * 泰文签发日期
+   * <p>泰文签发日期</p>
    */
   IssueDate?: string
   /**
-   * 泰文到期日期
+   * <p>泰文到期日期</p>
    */
   ExpirationDate?: string
   /**
-   * 英文签发日期
+   * <p>英文签发日期</p>
    */
   EnIssueDate?: string
   /**
-   * 英文到期日期
+   * <p>英文到期日期</p>
    */
   EnExpirationDate?: string
   /**
-   * 泰文出生日期
+   * <p>泰文出生日期</p>
    */
   Birthday?: string
   /**
-   * 英文出生日期
+   * <p>英文出生日期</p>
    */
   EnBirthday?: string
   /**
-   * 宗教信仰
+   * <p>宗教信仰</p>
    */
   Religion?: string
   /**
-   * 序列号
+   * <p>序列号</p>
    */
   SerialNumber?: string
   /**
-   * 地址
+   * <p>地址</p>
    */
   Address?: string
   /**
-   * 背面号码
+   * <p>背面号码</p>
    */
   LaserID?: string
   /**
-   * 证件人像照片抠取
+   * <p>证件人像照片抠取</p>
    */
   PortraitImage?: string
   /**
-   * 告警码
--9101 证件边框不完整告警
--9102 证件复印件告警
--9103 证件翻拍告警
--9107 证件反光告警
--9108 证件模糊告警
--9109 告警能力未开通
+   * <p>告警码<br>-9101 证件边框不完整告警<br>-9102 证件复印件告警<br>-9103 证件翻拍告警<br>-9104 证件PS告警<br>-9107 证件反光告警<br>-9108 证件模糊告警<br>-9109 告警能力未开通</p>
    */
   WarnCardInfos?: Array<number | bigint>
   /**
-   * 该字段已废弃， 将固定返回"1"，不建议使用。
+   * <p>该字段已废弃， 将固定返回&quot;1&quot;，不建议使用。</p>
    * @deprecated
    */
   AdvancedInfo?: string
   /**
-   * 卡证正面图片中，证件主体的数量（仅请求曼谷地域[ap-bangkok]返回）
+   * <p>卡证正面图片中，证件主体的数量（仅请求曼谷地域[ap-bangkok]返回）</p>
    */
   CardCount?: number
   /**
@@ -4761,24 +4755,23 @@ export interface TextDetectRequest {
  */
 export interface RecognizeThaiIDCardOCRRequest {
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   BackImageBase64?: string
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * <p>图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。</p>
    */
   ImageUrl?: string
   /**
-   * 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   BackImageUrl?: string
   /**
-   * 图片开关。默认为false，不返回泰国身份证头像照片的base64编码。
-设置为true时，返回旋转矫正后的泰国身份证头像照片的base64编码
+   * <p>图片开关。默认为false，不返回泰国身份证头像照片的base64编码。<br>设置为true时，返回旋转矫正后的泰国身份证头像照片的base64编码</p>
    */
   CropPortrait?: boolean
 }

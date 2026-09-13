@@ -169,6 +169,7 @@ import {
   StopMCUMixTranscodeResponse,
   VoicePrint,
   HotWord,
+  CreateAudioModerationSyncResponse,
   DescribeMixTranscodingUsageResponse,
   AsrParam,
   McuFeedBackRoomParams,
@@ -176,6 +177,7 @@ import {
   Input,
   AudioEncode,
   LayoutParams,
+  ModerationCheckDetail,
   TTSVoice,
   WaterMarkChar,
   DismissRoomRequest,
@@ -187,6 +189,7 @@ import {
   DeleteVoicePrintResponse,
   UsageList,
   StartWebRecordResponse,
+  CreateAudioModerationSyncRequest,
   TRTCDataResult,
   DescribeCloudRecordingResponse,
   ModifyCloudModerationRequest,
@@ -211,7 +214,7 @@ import {
   TranscriptionParam,
   OneSdkAppIdTranscodeTimeUsagesInfo,
   DismissRoomByStrRoomIdRequest,
-  DescribeTRTCAIRecognitionUsageRequest,
+  DescribeCloudTranscriptionRequest,
   CreateCloudSliceTaskResponse,
   StartMCUMixTranscodeResponse,
   DescribeTrtcMcuTranscodeTimeResponse,
@@ -232,6 +235,7 @@ import {
   DescribeTrtcMcuTranscodeTimeRequest,
   StopStreamIngestResponse,
   UserInformation,
+  AudioSegments,
   DescribeScaleInfoRequest,
   ControlAIConversationRequest,
   DismissRoomByStrRoomIdResponse,
@@ -280,13 +284,14 @@ import {
   MaxVideoUser,
   TextToSpeechRequest,
   DescribeStreamIngestRequest,
+  ImageLocation,
   UpdateVoicePrintResponse,
   TTSConfig,
   EncodeParams,
   DownloadRecognizeVocabV3Response,
   DescribeTRTCDedicatedCloudAccUsageResponse,
   McuPublishCdnParam,
-  DescribeCloudTranscriptionRequest,
+  DescribeTRTCAIRecognitionUsageRequest,
   AudioParams,
   StopAITranscriptionResponse,
   SeriesInfo,
@@ -313,466 +318,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("trtc.tencentcloudapi.com", "2019-07-22", clientConfig)
-  }
-
-  /**
-     * 启动AI 内容理解功能，完成房间内的音视频切片，视频截帧，或者录制音频流，投递到AI内容理解，完成内容识别。您可以通过此接口实现如下目标：
-●指定内容参数（ModerationParams）来指定内容理解需要的详细参数。
-●指定存储参数（ModerationStorageParams）将命中的切片文件指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）以及第三方AWS（S3）和阿里云（OSS）
-     */
-  async CreateCloudModeration(
-    req: CreateCloudModerationRequest,
-    cb?: (error: string, rep: CreateCloudModerationResponse) => void
-  ): Promise<CreateCloudModerationResponse> {
-    return this.request("CreateCloudModeration", req, cb)
-  }
-
-  /**
-     * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
--视频卡顿率
--音频卡顿率
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
-2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
-     */
-  async DescribeTRTCRealTimeQualityData(
-    req: DescribeTRTCRealTimeQualityDataRequest,
-    cb?: (error: string, rep: DescribeTRTCRealTimeQualityDataResponse) => void
-  ): Promise<DescribeTRTCRealTimeQualityDataResponse> {
-    return this.request("DescribeTRTCRealTimeQualityData", req, cb)
-  }
-
-  /**
-   * 停止页面录制任务
-   */
-  async StopWebRecord(
-    req: StopWebRecordRequest,
-    cb?: (error: string, rep: StopWebRecordResponse) => void
-  ): Promise<StopWebRecordResponse> {
-    return this.request("StopWebRecord", req, cb)
-  }
-
-  /**
-   * 传入声纹ID以及对应音频信息，更新对应声纹信息
-   */
-  async UpdateVoicePrint(
-    req: UpdateVoicePrintRequest,
-    cb?: (error: string, rep: UpdateVoicePrintResponse) => void
-  ): Promise<UpdateVoicePrintResponse> {
-    return this.request("UpdateVoicePrint", req, cb)
-  }
-
-  /**
-   * 更新AIConversation参数
-   */
-  async UpdateAIConversation(
-    req: UpdateAIConversationRequest,
-    cb?: (error: string, rep: UpdateAIConversationResponse) => void
-  ): Promise<UpdateAIConversationResponse> {
-    return this.request("UpdateAIConversation", req, cb)
-  }
-
-  /**
-     * 获取TRTC音视频互动的用量明细，单位:分钟。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
-- 默认接口请求频率限制：5次/秒。
-     */
-  async DescribeTrtcUsage(
-    req: DescribeTrtcUsageRequest,
-    cb?: (error: string, rep: DescribeTrtcUsageResponse) => void
-  ): Promise<DescribeTrtcUsageResponse> {
-    return this.request("DescribeTrtcUsage", req, cb)
-  }
-
-  /**
-     * 查询SdkAppId下的房间列表。默认返回10条通话，一次最多返回100条通话。最大可查询14天内的数据。（同老接口DescribeRoomInformation）
-**注意**：
-1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
-2.该接口自2024年4月1日起正式商业化，需订阅套餐解锁调用能力，提供以下两种解锁方式，可任意其一解锁：
-方式一：通过订阅[包月套餐](https://cloud.tencent.com/document/product/647/85386)「尊享版」（可查近7天）和「旗舰版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc?trtcversion=top)。
-方式二：通过订阅[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)商业套餐包「基础版」（可查近7天）和「进阶版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc_monitor)。
-     */
-  async DescribeRoomInfo(
-    req: DescribeRoomInfoRequest,
-    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
-  ): Promise<DescribeRoomInfoResponse> {
-    return this.request("DescribeRoomInfo", req, cb)
-  }
-
-  /**
-   * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁修改自定义背景图或水印素材，可通过此接口修改已上传的图片。无需频繁修改图片素材的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
-   */
-  async ModifyPicture(
-    req: ModifyPictureRequest,
-    cb?: (error: string, rep: ModifyPictureResponse) => void
-  ): Promise<ModifyPictureResponse> {
-    return this.request("ModifyPicture", req, cb)
-  }
-
-  /**
-   * 查询页面录制任务
-   */
-  async DescribeWebRecord(
-    req: DescribeWebRecordRequest,
-    cb?: (error: string, rep: DescribeWebRecordResponse) => void
-  ): Promise<DescribeWebRecordResponse> {
-    return this.request("DescribeWebRecord", req, cb)
-  }
-
-  /**
-     * 接口说明：
-用户通过本接口进行热词表的下载，获得词表权重文件形式的 base64 值，文件形式为通过 “|” 分割的词和权重，即 word|weight 的形式。
-     */
-  async DownloadRecognizeVocabV3(
-    req: DownloadRecognizeVocabV3Request,
-    cb?: (error: string, rep: DownloadRecognizeVocabV3Response) => void
-  ): Promise<DownloadRecognizeVocabV3Response> {
-    return this.request("DownloadRecognizeVocabV3", req, cb)
-  }
-
-  /**
-     * 查询指定时间内的用户列表及用户通话质量数据，最大可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。（同老接口DescribeCallDetail）
-**注意**：
-1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
-2.该接口自2024年4月1日起正式商业化，需订阅套餐解锁调用能力，提供以下两种解锁方式，可任选其一解锁：
-方式一：通过订阅[包月套餐](https://cloud.tencent.com/document/product/647/85386)「尊享版」（可查近7天）和「旗舰版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc?trtcversion=top)。
-方式二：通过订阅[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)商业套餐包「基础版」（可查近7天）和「进阶版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc_monitor)。
-     */
-  async DescribeCallDetailInfo(
-    req: DescribeCallDetailInfoRequest,
-    cb?: (error: string, rep: DescribeCallDetailInfoResponse) => void
-  ): Promise<DescribeCallDetailInfoResponse> {
-    return this.request("DescribeCallDetailInfo", req, cb)
-  }
-
-  /**
-   * 您可以查询输入在线媒体流任务的状态。
-   */
-  async DescribeStreamIngest(
-    req: DescribeStreamIngestRequest,
-    cb?: (error: string, rep: DescribeStreamIngestResponse) => void
-  ): Promise<DescribeStreamIngestResponse> {
-    return this.request("DescribeStreamIngest", req, cb)
-  }
-
-  /**
-     * 云监控monitor接口已下线，trtc同步下线接口
-
-查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
-userCount：通话人数，
-roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
-peakCurrentChannels：峰值同时在线频道数。
-peakCurrentUsers：峰值同时在线人数。
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
-2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
-     */
-  async DescribeTRTCMarketScaleMetricData(
-    req: DescribeTRTCMarketScaleMetricDataRequest,
-    cb?: (error: string, rep: DescribeTRTCMarketScaleMetricDataResponse) => void
-  ): Promise<DescribeTRTCMarketScaleMetricDataResponse> {
-    return this.request("DescribeTRTCMarketScaleMetricData", req, cb)
-  }
-
-  /**
-     * 查询云端录制计费时长。
-
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-  async DescribeRecordStatistic(
-    req: DescribeRecordStatisticRequest,
-    cb?: (error: string, rep: DescribeRecordStatisticResponse) => void
-  ): Promise<DescribeRecordStatisticResponse> {
-    return this.request("DescribeRecordStatistic", req, cb)
-  }
-
-  /**
-   * 接口说明：结束云端混流
-   */
-  async StopMCUMixTranscodeByStrRoomId(
-    req: StopMCUMixTranscodeByStrRoomIdRequest,
-    cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void
-  ): Promise<StopMCUMixTranscodeByStrRoomIdResponse> {
-    return this.request("StopMCUMixTranscodeByStrRoomId", req, cb)
-  }
-
-  /**
-     * 接口说明：
-用户通过本接口进行热词表的更新。
-     */
-  async UpdateRecognizeVocabV3(
-    req: UpdateRecognizeVocabV3Request,
-    cb?: (error: string, rep: UpdateRecognizeVocabV3Response) => void
-  ): Promise<UpdateRecognizeVocabV3Response> {
-    return this.request("UpdateRecognizeVocabV3", req, cb)
-  }
-
-  /**
-     * 接口说明：
-用户通过该接口可以设置热词表的默认状态。初始状态为0，用户可设置状态为1，即为默认状态。默认状态表示用户在请求识别时，如不设置热词表ID，则默认使用状态为1的热词表。
-     */
-  async SetVocabStateV3(
-    req: SetVocabStateV3Request,
-    cb?: (error: string, rep: SetVocabStateV3Response) => void
-  ): Promise<SetVocabStateV3Response> {
-    return this.request("SetVocabStateV3", req, cb)
-  }
-
-  /**
-     * 查询TRTC监控仪表盘-实时监控规模指标（会返回下列指标）
--userCount（在线用户数）
--roomCount（在线房间数）
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
-2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
-     */
-  async DescribeTRTCRealTimeScaleData(
-    req: DescribeTRTCRealTimeScaleDataRequest,
-    cb?: (error: string, rep: DescribeTRTCRealTimeScaleDataResponse) => void
-  ): Promise<DescribeTRTCRealTimeScaleDataResponse> {
-    return this.request("DescribeTRTCRealTimeScaleData", req, cb)
-  }
-
-  /**
-   * 查询AI对话任务状态。
-   */
-  async DescribeAIConversation(
-    req: DescribeAIConversationRequest,
-    cb?: (error: string, rep: DescribeAIConversationResponse) => void
-  ): Promise<DescribeAIConversationResponse> {
-    return this.request("DescribeAIConversation", req, cb)
-  }
-
-  /**
-     * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
-
-TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过此 API 接口，通知腾讯云服务端将多路视频画面合成一路，并指定每一路画面的位置，同时将多路声音进行混音，最终形成一路音视频流，以便用于录制和直播观看。
-
-您可以通过此接口实现如下目标：
-- 设置最终直播流的画质和音质，包括视频分辨率、视频码率、视频帧率、以及声音质量等。
-- 设置各路画面的位置和布局，您只需要在启动时设置一次，排版引擎会自动完成后续的画面排布。
-- 设置录制文件名，用于二次回放。
-- 设置 CDN 直播流 ID，用于在 CDN 进行直播观看。
-
-目前已经支持了如下几种布局模板：
-- 悬浮模板：第一个进入房间的用户的视频画面会铺满整个屏幕，其他用户的视频画面从左下角依次水平排列，显示为小画面，最多4行，每行4个，小画面悬浮于大画面之上。最多支持1个大画面和15个小画面，如果用户只发送音频，仍然会占用画面位置。
-- 九宫格模板：所有用户的视频画面大小一致，平分整个屏幕，人数越多，每个画面的尺寸越小。最多支持16个画面，如果用户只发送音频，仍然会占用画面位置。
-- 屏幕分享模板：适合视频会议和在线教育场景的布局，屏幕分享（或者主讲的摄像头）始终占据屏幕左侧的大画面位置，其他用户依次垂直排列于右侧，最多两列，每列最多8个小画面。最多支持1个大画面和15个小画面。若上行分辨率宽高比与画面输出宽高比不一致时，左侧大画面为了保持内容的完整性采用缩放方式处理，右侧小画面采用裁剪方式处理。
-- 画中画模板：适用于混合大小两路视频画面和其他用户混音，或者混合一路大画面和其他用户混音的场景。小画面悬浮于大画面之上，可以指定大小画面的用户以及小画面的显示位置。
-- 自定义模板：适用于在混流中指定用户的画面位置，或者预设视频画面位置的场景。当预设位置指定用户时，排版引擎会为该用户预留位置；当预设位置未指定用户时，排版引擎会根据进房间顺序自动填充。预设位置填满时，不再混合其他用户的画面和声音。自定义模板启用占位图功能时（LayoutParams中的PlaceHolderMode设置成1），在预设位置的用户没有上行视频时可显示对应的占位图（PlaceImageId）。
-
-注意：
-1、**混流转码为收费功能，调用接口将产生云端混流转码费用，详见[云端混流转码计费说明](https://cloud.tencent.com/document/product/647/49446)。**
-2、2020年1月9号及以后创建的应用才能直接调用此接口。2020年1月9日之前创建的应用默认使用云直播的云端混流，如需切换至MCU混流，请[提交工单](https://console.cloud.tencent.com/workorder/category)寻求帮助。
-3、客户端混流和服务端混流不能混用。
-     */
-  async StartMCUMixTranscodeByStrRoomId(
-    req: StartMCUMixTranscodeByStrRoomIdRequest,
-    cb?: (error: string, rep: StartMCUMixTranscodeByStrRoomIdResponse) => void
-  ): Promise<StartMCUMixTranscodeByStrRoomIdResponse> {
-    return this.request("StartMCUMixTranscodeByStrRoomId", req, cb)
-  }
-
-  /**
-   * 语音合成接口
-   */
-  async TextToSpeech(
-    req: TextToSpeechRequest,
-    cb?: (error: string, rep: TextToSpeechResponse) => void
-  ): Promise<TextToSpeechResponse> {
-    return this.request("TextToSpeech", req, cb)
-  }
-
-  /**
-     * 将一个在线媒体流推到TRTC房间，更多功能说明见[输入媒体流进房](https://cloud.tencent.com/document/product/647/102957#50940aad-d90f-4473-9f46-d5dd46917653)。
-使用输入在线媒体流功能需先订阅 [尊享版或旗舰版套餐包](https://cloud.tencent.com/document/product/647/85386) 解锁能力位。
-     */
-  async StartStreamIngest(
-    req: StartStreamIngestRequest,
-    cb?: (error: string, rep: StartStreamIngestResponse) => void
-  ): Promise<StartStreamIngestResponse> {
-    return this.request("StartStreamIngest", req, cb)
-  }
-
-  /**
-     * 启动AI对话任务，AI通道机器人进入TRTC房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
-
-TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
-     */
-  async StartAIConversation(
-    req: StartAIConversationRequest,
-    cb?: (error: string, rep: StartAIConversationResponse) => void
-  ): Promise<StartAIConversationResponse> {
-    return this.request("StartAIConversation", req, cb)
-  }
-
-  /**
-   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
-   */
-  async RemoveUserByStrRoomId(
-    req: RemoveUserByStrRoomIdRequest,
-    cb?: (error: string, rep: RemoveUserByStrRoomIdResponse) => void
-  ): Promise<RemoveUserByStrRoomIdResponse> {
-    return this.request("RemoveUserByStrRoomId", req, cb)
-  }
-
-  /**
-     * 接口说明：
-用户通过本接口进行热词表的删除。
-     */
-  async DeleteRecognizeVocabV3(
-    req: DeleteRecognizeVocabV3Request,
-    cb?: (error: string, rep: DeleteRecognizeVocabV3Response) => void
-  ): Promise<DeleteRecognizeVocabV3Response> {
-    return this.request("DeleteRecognizeVocabV3", req, cb)
-  }
-
-  /**
-   * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁删除自定义背景图或水印，可通过此接口删除已上传的图片。无需频繁删除图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
-   */
-  async DeletePicture(
-    req: DeletePictureRequest,
-    cb?: (error: string, rep: DeletePictureResponse) => void
-  ): Promise<DeletePictureResponse> {
-    return this.request("DeletePicture", req, cb)
-  }
-
-  /**
-   * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁新增自定义背景图或水印，可通过此接口上传新的图片素材。无需频繁新增图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
-   */
-  async CreatePicture(
-    req: CreatePictureRequest,
-    cb?: (error: string, rep: CreatePictureResponse) => void
-  ): Promise<CreatePictureResponse> {
-    return this.request("CreatePicture", req, cb)
-  }
-
-  /**
-     * 启动一路直播流审核。服务端异步拉流、定频截帧、音频切片、送审，通过回调返回结果。一次一个任务（一路流）。您可以通过此接口实现如下目标：
-●指定内容参数（LiveModerationParams）来指定内容理解需要的详细参数。
-●指定存储参数（LiveModerationStorageParams）将命中的切片文件指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）以及第三方AWS（S3）和阿里云（OSS）
-     */
-  async CreateLiveStreamModeration(
-    req: CreateLiveStreamModerationRequest,
-    cb?: (error: string, rep: CreateLiveStreamModerationResponse) => void
-  ): Promise<CreateLiveStreamModerationResponse> {
-    return this.request("CreateLiveStreamModeration", req, cb)
-  }
-
-  /**
-     * 切片截图与内容理解用量查询，支持查询音视频切片（云端切片场景）和 AI 内容理解（审核场景）两种业务类型
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-     */
-  async DescribeTRTCSegmentModerationUsage(
-    req: DescribeTRTCSegmentModerationUsageRequest,
-    cb?: (error: string, rep: DescribeTRTCSegmentModerationUsageResponse) => void
-  ): Promise<DescribeTRTCSegmentModerationUsageResponse> {
-    return this.request("DescribeTRTCSegmentModerationUsage", req, cb)
-  }
-
-  /**
-     * 接口说明：
-用户通过本接口进行热词表的创建。
-
-• 默认最多可创建30个热词表。
-• 每个热词表最多可添加1000个词，每个词最长10个汉字或30个英文字符，不能超出限制。
-• 热词表可以通过数组或者本地文件形式上传。
-• 本地文件必须为UTF-8编码格式，每行仅添加一个热词且不能包含标点和特殊字符。
-• 热词权重取值范围为[1,11]之间的整数或者100，权重越大代表该词被识别出来的概率越大。
-• 注意: 热词权重设置为11时，当前热词将升级为超级热词，建议仅将重要且必须生效的热词设置到11，设置过多权重为11的热词将影响整体字准率。
-     */
-  async CreateRecognizeVocabV3(
-    req: CreateRecognizeVocabV3Request,
-    cb?: (error: string, rep: CreateRecognizeVocabV3Response) => void
-  ): Promise<CreateRecognizeVocabV3Response> {
-    return this.request("CreateRecognizeVocabV3", req, cb)
-  }
-
-  /**
-   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
-   */
-  async RemoveUser(
-    req: RemoveUserRequest,
-    cb?: (error: string, rep: RemoveUserResponse) => void
-  ): Promise<RemoveUserResponse> {
-    return this.request("RemoveUser", req, cb)
-  }
-
-  /**
-     * 接口说明：  
-启动一个混流转推任务，将  TRTC 房间的多路音视频流混成一路音视频流，编码后推到直播 CDN 或者回推到 TRTC 房间。也支持不转码直接转推 TRTC 房间的单路流。启动成功后，会返回一个 SdkAppid 维度唯一的任务 Id（TaskId）。您需要保存该 TaskId，后续需要依赖此 TaskId 更新和结束任务。可以参考文档： [功能说明](https://cloud.tencent.com/document/product/647/84721#b9a855f4-e38c-4616-9b07-fc44e0e8282a) 和 [常见问题](https://cloud.tencent.com/document/product/647/62620)
-需要注意的是，TaskId调用时效性是30天，从成功启动转推并获得任务ID后开始计算，超时后无法调用更新和停止等接口，但是转推任务不会停止。最终任务会等所有参与混流转推的主播离开TRTC房间或切换成观众，并且超过MaxIdleTime时长后，自动停止。
-
-注意：
-您可以在控制台开通旁路转推回调功能，对转推 CDN 状态的事件进行监控，回调请参考文档：[旁路转推回调说明](https://cloud.tencent.com/document/product/647/88552)  
-您发起混流转推任务时，可能会产生如下费用：  
-MCU 混流转码费用，请参考文档：[云端混流转码计费说明](https://cloud.tencent.com/document/product/647/49446)  
-转推非腾讯云 CDN 费用，请参考文档：[云端转推计费说明](https://cloud.tencent.com/document/product/647/82155)
-     */
-  async StartPublishCdnStream(
-    req: StartPublishCdnStreamRequest,
-    cb?: (error: string, rep: StartPublishCdnStreamResponse) => void
-  ): Promise<StartPublishCdnStreamResponse> {
-    return this.request("StartPublishCdnStream", req, cb)
-  }
-
-  /**
-   * 成功开启直播流AI 内容理解任务后，可以使用此接口来查询AI 内容理解任务状态，仅在任务进行时有效，任务退出后查询将会返回错误。
-   */
-  async DescribeLiveStreamModeration(
-    req: DescribeLiveStreamModerationRequest,
-    cb?: (error: string, rep: DescribeLiveStreamModerationResponse) => void
-  ): Promise<DescribeLiveStreamModerationResponse> {
-    return this.request("DescribeLiveStreamModeration", req, cb)
-  }
-
-  /**
-   * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
-   */
-  async ModifyCloudRecording(
-    req: ModifyCloudRecordingRequest,
-    cb?: (error: string, rep: ModifyCloudRecordingResponse) => void
-  ): Promise<ModifyCloudRecordingResponse> {
-    return this.request("ModifyCloudRecording", req, cb)
-  }
-
-  /**
-   * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。（同接口DescribeDetailEvent）
-   */
-  async DescribeUserEvent(
-    req: DescribeUserEventRequest,
-    cb?: (error: string, rep: DescribeUserEventResponse) => void
-  ): Promise<DescribeUserEventResponse> {
-    return this.request("DescribeUserEvent", req, cb)
-  }
-
-  /**
-     * 通过此接口可以发起 WEB 页面录制任务，在接口参数中指定录制 URL，录制分辨率，录制结果存储等参数。
-因为参数或API逻辑问题会立即返回结果。而因为页面问题，如页面无法访问，会在回调中返回结果，请关注。
-     */
-  async StartWebRecord(
-    req: StartWebRecordRequest,
-    cb?: (error: string, rep: StartWebRecordResponse) => void
-  ): Promise<StartWebRecordResponse> {
-    return this.request("StartWebRecord", req, cb)
-  }
-
-  /**
-   * 成功开启转录后，可以使用此接口来停止转录任务。
-   */
-  async DeleteCloudTranscription(
-    req: DeleteCloudTranscriptionRequest,
-    cb?: (error: string, rep: DeleteCloudTranscriptionResponse) => void
-  ): Promise<DeleteCloudTranscriptionResponse> {
-    return this.request("DeleteCloudTranscription", req, cb)
   }
 
   /**
@@ -806,39 +351,68 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-     * 启动转录机器人，后台会通过机器人拉流进行实时进行语音识别并下发字幕和转录消息。
-转录机器人支持两种拉流方式，通过TranscriptionMode字段控制：
-- 拉取全房间的流。
-- 拉取特定用户的流。
-
-服务端通过TRTC的自定义消息实时下发字幕以及转录消息，CmdId固定是1。客户端只需监听自定义消息的回调即可，比如[c++回调](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565)。其他客户端比如安卓、Web等同样可在该链接处找到。
-
-
-**注意：**
-TranscriptionMode为0时，需要保证一个房间内只发起一个任务，如果发起多个任务，则机器人之间会相互订阅，除非主动停止任务，否则只有10小时后任务才会超时退出，这种情况下建议填写SessionId，保证后续重复发起的任务失败。
-     */
-  async StartAITranscription(
-    req: StartAITranscriptionRequest,
-    cb?: (error: string, rep: StartAITranscriptionResponse) => void
-  ): Promise<StartAITranscriptionResponse> {
-    return this.request("StartAITranscription", req, cb)
+   * 停止AI对话任务
+   */
+  async StopAIConversation(
+    req: StopAIConversationRequest,
+    cb?: (error: string, rep: StopAIConversationResponse) => void
+  ): Promise<StopAIConversationResponse> {
+    return this.request("StopAIConversation", req, cb)
   }
 
   /**
-     * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
-userCount：通话人数，
-roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
-peakCurrentChannels：峰值同时在线频道数。
-peakCurrentUsers：峰值同时在线人数。
+   * 接口说明：结束云端混流
+   */
+  async StopMCUMixTranscode(
+    req: StopMCUMixTranscodeRequest,
+    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
+  ): Promise<StopMCUMixTranscodeResponse> {
+    return this.request("StopMCUMixTranscode", req, cb)
+  }
+
+  /**
+   * 查询AI对话任务状态。
+   */
+  async DescribeAIConversation(
+    req: DescribeAIConversationRequest,
+    cb?: (error: string, rep: DescribeAIConversationResponse) => void
+  ): Promise<DescribeAIConversationResponse> {
+    return this.request("DescribeAIConversation", req, cb)
+  }
+
+  /**
+     * 查询TRTC监控仪表盘-实时监控规模指标（会返回下列指标）
+-userCount（在线用户数）
+-roomCount（在线房间数）
 注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘[版本功能和计费说明](https://cloud.tencent.com/document/product/647/81331)。
-2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
      */
-  async DescribeTRTCMarketScaleData(
-    req: DescribeTRTCMarketScaleDataRequest,
-    cb?: (error: string, rep: DescribeTRTCMarketScaleDataResponse) => void
-  ): Promise<DescribeTRTCMarketScaleDataResponse> {
-    return this.request("DescribeTRTCMarketScaleData", req, cb)
+  async DescribeTRTCRealTimeScaleData(
+    req: DescribeTRTCRealTimeScaleDataRequest,
+    cb?: (error: string, rep: DescribeTRTCRealTimeScaleDataResponse) => void
+  ): Promise<DescribeTRTCRealTimeScaleDataResponse> {
+    return this.request("DescribeTRTCRealTimeScaleData", req, cb)
+  }
+
+  /**
+   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+   */
+  async RemoveUser(
+    req: RemoveUserRequest,
+    cb?: (error: string, rep: RemoveUserResponse) => void
+  ): Promise<RemoveUserResponse> {
+    return this.request("RemoveUser", req, cb)
+  }
+
+  /**
+   * 成功开启直播流AI 内容理解任务后，可以使用此接口来查询AI 内容理解任务状态，仅在任务进行时有效，任务退出后查询将会返回错误。
+   */
+  async DescribeLiveStreamModeration(
+    req: DescribeLiveStreamModerationRequest,
+    cb?: (error: string, rep: DescribeLiveStreamModerationResponse) => void
+  ): Promise<DescribeLiveStreamModerationResponse> {
+    return this.request("DescribeLiveStreamModeration", req, cb)
   }
 
   /**
@@ -852,34 +426,293 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 成功开启AI 内容理解任务后，可以使用此接口来更新订阅黑白名单。
+   * 接口说明：结束云端混流
    */
-  async ModifyCloudModeration(
-    req: ModifyCloudModerationRequest,
-    cb?: (error: string, rep: ModifyCloudModerationResponse) => void
-  ): Promise<ModifyCloudModerationResponse> {
-    return this.request("ModifyCloudModeration", req, cb)
+  async StopMCUMixTranscodeByStrRoomId(
+    req: StopMCUMixTranscodeByStrRoomIdRequest,
+    cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void
+  ): Promise<StopMCUMixTranscodeByStrRoomIdResponse> {
+    return this.request("StopMCUMixTranscodeByStrRoomId", req, cb)
+  }
+
+  /**
+   * 声音克隆
+   */
+  async VoiceClone(
+    req: VoiceCloneRequest,
+    cb?: (error: string, rep: VoiceCloneResponse) => void
+  ): Promise<VoiceCloneResponse> {
+    return this.request("VoiceClone", req, cb)
+  }
+
+  /**
+   * 成功开启转录后，可以使用此接口来查询录制状态。仅在转录任务进行时有效，转录退出后查询将会返回错误。
+   */
+  async DescribeCloudTranscription(
+    req: DescribeCloudTranscriptionRequest,
+    cb?: (error: string, rep: DescribeCloudTranscriptionResponse) => void
+  ): Promise<DescribeCloudTranscriptionResponse> {
+    return this.request("DescribeCloudTranscription", req, cb)
+  }
+
+  /**
+   * 成功开启直播流AI 内容理解任务后，可以使用此接口来停止进行内容识别。
+   */
+  async DeleteLiveStreamModeration(
+    req: DeleteLiveStreamModerationRequest,
+    cb?: (error: string, rep: DeleteLiveStreamModerationResponse) => void
+  ): Promise<DeleteLiveStreamModerationResponse> {
+    return this.request("DeleteLiveStreamModeration", req, cb)
+  }
+
+  /**
+   * 成功开启切片任务后，可以使用此接口来更新任务。用于更新指定订阅流白名单或者黑名单。
+   */
+  async ModifyCloudSliceTask(
+    req: ModifyCloudSliceTaskRequest,
+    cb?: (error: string, rep: ModifyCloudSliceTaskResponse) => void
+  ): Promise<ModifyCloudSliceTaskResponse> {
+    return this.request("ModifyCloudSliceTask", req, cb)
+  }
+
+  /**
+     * 获取TRTC录制的用量明细。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
+- 默认接口请求频率限制：5次/秒。
+     */
+  async DescribeRecordingUsage(
+    req: DescribeRecordingUsageRequest,
+    cb?: (error: string, rep: DescribeRecordingUsageResponse) => void
+  ): Promise<DescribeRecordingUsageResponse> {
+    return this.request("DescribeRecordingUsage", req, cb)
+  }
+
+  /**
+   * 成功开启切片任务后，可以使用此接口来停止任务。停止切片成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
+   */
+  async DeleteCloudSliceTask(
+    req: DeleteCloudSliceTaskRequest,
+    cb?: (error: string, rep: DeleteCloudSliceTaskResponse) => void
+  ): Promise<DeleteCloudSliceTaskResponse> {
+    return this.request("DeleteCloudSliceTask", req, cb)
   }
 
   /**
      * 接口说明：
-停止指定的混流转推任务。如果没有调用 Stop 接口停止任务，所有参与混流转推的主播离开 TRTC 房间超过 AgentParams.MaxIdleTime 设置的时间后，任务也会自动停止。
+用户通过本接口分页列举所有的热词表。
      */
-  async StopPublishCdnStream(
-    req: StopPublishCdnStreamRequest,
-    cb?: (error: string, rep: StopPublishCdnStreamResponse) => void
-  ): Promise<StopPublishCdnStreamResponse> {
-    return this.request("StopPublishCdnStream", req, cb)
+  async GetRecognizeVocabListV3(
+    req: GetRecognizeVocabListV3Request,
+    cb?: (error: string, rep: GetRecognizeVocabListV3Response) => void
+  ): Promise<GetRecognizeVocabListV3Response> {
+    return this.request("GetRecognizeVocabListV3", req, cb)
   }
 
   /**
-   * 成功开启切片后，可以使用此接口来查询切片任务状态。仅在任务进行时有效，任务退出后查询将会返回错误。
+     * 查询TRTC音视频房间维度用量。
+- 单次只能查询一天数据，返回查询时间段内的汇总数据；通过多次查询可以查不同天数据。若查询跨天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用，不可用于账单核对，如需对账请使用账号/应用维度用量API：DescribeTrtcUsage。
+- 默认接口请求频率限制：1次/15秒。
+- 数据最早可查日期为2023年4月1日0点，最大可查范围近3个月。
+     */
+  async DescribeTrtcRoomUsage(
+    req: DescribeTrtcRoomUsageRequest,
+    cb?: (error: string, rep: DescribeTrtcRoomUsageResponse) => void
+  ): Promise<DescribeTrtcRoomUsageResponse> {
+    return this.request("DescribeTrtcRoomUsage", req, cb)
+  }
+
+  /**
+   * 查询AI转录任务状态。
    */
-  async DescribeCloudSliceTask(
-    req: DescribeCloudSliceTaskRequest,
-    cb?: (error: string, rep: DescribeCloudSliceTaskResponse) => void
-  ): Promise<DescribeCloudSliceTaskResponse> {
-    return this.request("DescribeCloudSliceTask", req, cb)
+  async DescribeAITranscription(
+    req: DescribeAITranscriptionRequest,
+    cb?: (error: string, rep: DescribeAITranscriptionResponse) => void
+  ): Promise<DescribeAITranscriptionResponse> {
+    return this.request("DescribeAITranscription", req, cb)
+  }
+
+  /**
+   * 成功开启录制后，可以使用此接口来停止录制任务。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
+   */
+  async DeleteCloudRecording(
+    req: DeleteCloudRecordingRequest,
+    cb?: (error: string, rep: DeleteCloudRecordingResponse) => void
+  ): Promise<DeleteCloudRecordingResponse> {
+    return this.request("DeleteCloudRecording", req, cb)
+  }
+
+  /**
+     * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）
+异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
+     */
+  async DescribeUnusualEvent(
+    req: DescribeUnusualEventRequest,
+    cb?: (error: string, rep: DescribeUnusualEventResponse) => void
+  ): Promise<DescribeUnusualEventResponse> {
+    return this.request("DescribeUnusualEvent", req, cb)
+  }
+
+  /**
+     * 接口说明：
+用户根据词表的ID可以获取对应的热词表信息
+     */
+  async GetRecognizeVocabV3(
+    req: GetRecognizeVocabV3Request,
+    cb?: (error: string, rep: GetRecognizeVocabV3Response) => void
+  ): Promise<GetRecognizeVocabV3Response> {
+    return this.request("GetRecognizeVocabV3", req, cb)
+  }
+
+  /**
+   * 更新AIConversation参数
+   */
+  async UpdateAIConversation(
+    req: UpdateAIConversationRequest,
+    cb?: (error: string, rep: UpdateAIConversationResponse) => void
+  ): Promise<UpdateAIConversationResponse> {
+    return this.request("UpdateAIConversation", req, cb)
+  }
+
+  /**
+     * 获取TRTC音视频互动的用量明细，单位:分钟。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
+- 默认接口请求频率限制：5次/秒。
+     */
+  async DescribeTrtcUsage(
+    req: DescribeTrtcUsageRequest,
+    cb?: (error: string, rep: DescribeTrtcUsageResponse) => void
+  ): Promise<DescribeTrtcUsageResponse> {
+    return this.request("DescribeTrtcUsage", req, cb)
+  }
+
+  /**
+     * 接口说明：  
+启动一个混流转推任务，将  TRTC 房间的多路音视频流混成一路音视频流，编码后推到直播 CDN 或者回推到 TRTC 房间。也支持不转码直接转推 TRTC 房间的单路流。启动成功后，会返回一个 SdkAppid 维度唯一的任务 Id（TaskId）。您需要保存该 TaskId，后续需要依赖此 TaskId 更新和结束任务。可以参考文档： [功能说明](https://cloud.tencent.com/document/product/647/84721#b9a855f4-e38c-4616-9b07-fc44e0e8282a) 和 [常见问题](https://cloud.tencent.com/document/product/647/62620)
+需要注意的是，TaskId调用时效性是30天，从成功启动转推并获得任务ID后开始计算，超时后无法调用更新和停止等接口，但是转推任务不会停止。最终任务会等所有参与混流转推的主播离开TRTC房间或切换成观众，并且超过MaxIdleTime时长后，自动停止。
+
+注意：
+您可以在控制台开通旁路转推回调功能，对转推 CDN 状态的事件进行监控，回调请参考文档：[旁路转推回调说明](https://cloud.tencent.com/document/product/647/88552)  
+您发起混流转推任务时，可能会产生如下费用：  
+MCU 混流转码费用，请参考文档：[云端混流转码计费说明](https://cloud.tencent.com/document/product/647/49446)  
+转推非腾讯云 CDN 费用，请参考文档：[云端转推计费说明](https://cloud.tencent.com/document/product/647/82155)
+     */
+  async StartPublishCdnStream(
+    req: StartPublishCdnStreamRequest,
+    cb?: (error: string, rep: StartPublishCdnStreamResponse) => void
+  ): Promise<StartPublishCdnStreamResponse> {
+    return this.request("StartPublishCdnStream", req, cb)
+  }
+
+  /**
+     * 查询指定时间内的用户列表及用户通话质量数据，最大可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。（同老接口DescribeCallDetail）
+**注意**：
+1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+2.该接口自2024年4月1日起正式商业化，需订阅套餐解锁调用能力，提供以下两种解锁方式，可任选其一解锁：
+方式一：通过订阅[包月套餐](https://cloud.tencent.com/document/product/647/85386)「尊享版」（可查近7天）和「旗舰版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc?trtcversion=top)。
+方式二：通过订阅[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)商业套餐包「基础版」（可查近7天）和「进阶版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc_monitor)。
+     */
+  async DescribeCallDetailInfo(
+    req: DescribeCallDetailInfoRequest,
+    cb?: (error: string, rep: DescribeCallDetailInfoResponse) => void
+  ): Promise<DescribeCallDetailInfoResponse> {
+    return this.request("DescribeCallDetailInfo", req, cb)
+  }
+
+  /**
+     * 将一个在线媒体流推到TRTC房间，更多功能说明见[输入媒体流进房](https://cloud.tencent.com/document/product/647/102957#50940aad-d90f-4473-9f46-d5dd46917653)。
+使用输入在线媒体流功能需先订阅 [尊享版或旗舰版套餐包](https://cloud.tencent.com/document/product/647/85386) 解锁能力位。
+     */
+  async StartStreamIngest(
+    req: StartStreamIngestRequest,
+    cb?: (error: string, rep: StartStreamIngestResponse) => void
+  ): Promise<StartStreamIngestResponse> {
+    return this.request("StartStreamIngest", req, cb)
+  }
+
+  /**
+   * 短音频同步内容理解接口
+   */
+  async CreateAudioModerationSync(
+    req: CreateAudioModerationSyncRequest,
+    cb?: (error: string, rep: CreateAudioModerationSyncResponse) => void
+  ): Promise<CreateAudioModerationSyncResponse> {
+    return this.request("CreateAudioModerationSync", req, cb)
+  }
+
+  /**
+   * 更新输入在线媒体流任务的StreamUrl
+   */
+  async UpdateStreamIngest(
+    req: UpdateStreamIngestRequest,
+    cb?: (error: string, rep: UpdateStreamIngestResponse) => void
+  ): Promise<UpdateStreamIngestResponse> {
+    return this.request("UpdateStreamIngest", req, cb)
+  }
+
+  /**
+   * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁删除自定义背景图或水印，可通过此接口删除已上传的图片。无需频繁删除图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
+   */
+  async DeletePicture(
+    req: DeletePictureRequest,
+    cb?: (error: string, rep: DeletePictureResponse) => void
+  ): Promise<DeletePictureResponse> {
+    return this.request("DeletePicture", req, cb)
+  }
+
+  /**
+     * 接口说明：
+用户通过本接口进行热词表的创建。
+
+• 默认最多可创建30个热词表。
+• 每个热词表最多可添加1000个词，每个词最长10个汉字或30个英文字符，不能超出限制。
+• 热词表可以通过数组或者本地文件形式上传。
+• 本地文件必须为UTF-8编码格式，每行仅添加一个热词且不能包含标点和特殊字符。
+• 热词权重取值范围为[1,11]之间的整数或者100，权重越大代表该词被识别出来的概率越大。
+• 注意: 热词权重设置为11时，当前热词将升级为超级热词，建议仅将重要且必须生效的热词设置到11，设置过多权重为11的热词将影响整体字准率。
+     */
+  async CreateRecognizeVocabV3(
+    req: CreateRecognizeVocabV3Request,
+    cb?: (error: string, rep: CreateRecognizeVocabV3Response) => void
+  ): Promise<CreateRecognizeVocabV3Response> {
+    return this.request("CreateRecognizeVocabV3", req, cb)
+  }
+
+  /**
+   * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
+   */
+  async ModifyCloudRecording(
+    req: ModifyCloudRecordingRequest,
+    cb?: (error: string, rep: ModifyCloudRecordingResponse) => void
+  ): Promise<ModifyCloudRecordingResponse> {
+    return this.request("ModifyCloudRecording", req, cb)
+  }
+
+  /**
+     * 通过此接口可以发起 WEB 页面录制任务，在接口参数中指定录制 URL，录制分辨率，录制结果存储等参数。
+因为参数或API逻辑问题会立即返回结果。而因为页面问题，如页面无法访问，会在回调中返回结果，请关注。
+     */
+  async StartWebRecord(
+    req: StartWebRecordRequest,
+    cb?: (error: string, rep: StartWebRecordResponse) => void
+  ): Promise<StartWebRecordResponse> {
+    return this.request("StartWebRecord", req, cb)
+  }
+
+  /**
+   * 停止页面录制任务
+   */
+  async StopWebRecord(
+    req: StopWebRecordRequest,
+    cb?: (error: string, rep: StopWebRecordResponse) => void
+  ): Promise<StopWebRecordResponse> {
+    return this.request("StopWebRecord", req, cb)
   }
 
   /**
@@ -925,33 +758,259 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 异步语音合成
-   */
-  async AsyncTextToSpeech(
-    req: AsyncTextToSpeechRequest,
-    cb?: (error: string, rep: AsyncTextToSpeechResponse) => void
-  ): Promise<AsyncTextToSpeechResponse> {
-    return this.request("AsyncTextToSpeech", req, cb)
+     * 获取TRTC混流转码的用量明细。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
+- 默认接口请求频率限制：5次/秒。
+     */
+  async DescribeMixTranscodingUsage(
+    req: DescribeMixTranscodingUsageRequest,
+    cb?: (error: string, rep: DescribeMixTranscodingUsageResponse) => void
+  ): Promise<DescribeMixTranscodingUsageResponse> {
+    return this.request("DescribeMixTranscodingUsage", req, cb)
   }
 
   /**
-   * 成功开启转录后，可以使用此接口来查询录制状态。仅在转录任务进行时有效，转录退出后查询将会返回错误。
-   */
-  async DescribeCloudTranscription(
-    req: DescribeCloudTranscriptionRequest,
-    cb?: (error: string, rep: DescribeCloudTranscriptionResponse) => void
-  ): Promise<DescribeCloudTranscriptionResponse> {
-    return this.request("DescribeCloudTranscription", req, cb)
+     * 查询云端录制计费时长。
+
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async DescribeRecordStatistic(
+    req: DescribeRecordStatisticRequest,
+    cb?: (error: string, rep: DescribeRecordStatisticResponse) => void
+  ): Promise<DescribeRecordStatisticResponse> {
+    return this.request("DescribeRecordStatistic", req, cb)
   }
 
   /**
-   * 成功开启直播流AI 内容理解任务后，可以使用此接口来停止进行内容识别。
+   * 查询先前注册的声纹信息
    */
-  async DeleteLiveStreamModeration(
-    req: DeleteLiveStreamModerationRequest,
-    cb?: (error: string, rep: DeleteLiveStreamModerationResponse) => void
-  ): Promise<DeleteLiveStreamModerationResponse> {
-    return this.request("DeleteLiveStreamModeration", req, cb)
+  async DescribeVoicePrint(
+    req: DescribeVoicePrintRequest,
+    cb?: (error: string, rep: DescribeVoicePrintResponse) => void
+  ): Promise<DescribeVoicePrintResponse> {
+    return this.request("DescribeVoicePrint", req, cb)
+  }
+
+  /**
+   * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+   */
+  async DismissRoomByStrRoomId(
+    req: DismissRoomByStrRoomIdRequest,
+    cb?: (error: string, rep: DismissRoomByStrRoomIdResponse) => void
+  ): Promise<DismissRoomByStrRoomIdResponse> {
+    return this.request("DismissRoomByStrRoomId", req, cb)
+  }
+
+  /**
+     * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
+-视频卡顿率
+-音频卡顿率
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+     */
+  async DescribeTRTCRealTimeQualityData(
+    req: DescribeTRTCRealTimeQualityDataRequest,
+    cb?: (error: string, rep: DescribeTRTCRealTimeQualityDataResponse) => void
+  ): Promise<DescribeTRTCRealTimeQualityDataResponse> {
+    return this.request("DescribeTRTCRealTimeQualityData", req, cb)
+  }
+
+  /**
+   * 提供服务端控制机器人的功能
+   */
+  async ControlAIConversation(
+    req: ControlAIConversationRequest,
+    cb?: (error: string, rep: ControlAIConversationResponse) => void
+  ): Promise<ControlAIConversationResponse> {
+    return this.request("ControlAIConversation", req, cb)
+  }
+
+  /**
+   * SSE流式文本转语音
+   */
+  async TextToSpeechSSE(
+    req: TextToSpeechSSERequest,
+    cb?: (error: string, rep: TextToSpeechSSEResponse) => void
+  ): Promise<TextToSpeechSSEResponse> {
+    return this.request("TextToSpeechSSE", req, cb)
+  }
+
+  /**
+     * 查询SdkAppId下的房间列表。默认返回10条通话，一次最多返回100条通话。最大可查询14天内的数据。（同老接口DescribeRoomInformation）
+**注意**：
+1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+2.该接口自2024年4月1日起正式商业化，需订阅套餐解锁调用能力，提供以下两种解锁方式，可任意其一解锁：
+方式一：通过订阅[包月套餐](https://cloud.tencent.com/document/product/647/85386)「尊享版」（可查近7天）和「旗舰版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc?trtcversion=top)。
+方式二：通过订阅[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)商业套餐包「基础版」（可查近7天）和「进阶版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc_monitor)。
+     */
+  async DescribeRoomInfo(
+    req: DescribeRoomInfoRequest,
+    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
+  ): Promise<DescribeRoomInfoResponse> {
+    return this.request("DescribeRoomInfo", req, cb)
+  }
+
+  /**
+   * 您可以查询输入在线媒体流任务的状态。
+   */
+  async DescribeStreamIngest(
+    req: DescribeStreamIngestRequest,
+    cb?: (error: string, rep: DescribeStreamIngestResponse) => void
+  ): Promise<DescribeStreamIngestResponse> {
+    return this.request("DescribeStreamIngest", req, cb)
+  }
+
+  /**
+     * 接口说明：
+用户通过该接口可以设置热词表的默认状态。初始状态为0，用户可设置状态为1，即为默认状态。默认状态表示用户在请求识别时，如不设置热词表ID，则默认使用状态为1的热词表。
+     */
+  async SetVocabStateV3(
+    req: SetVocabStateV3Request,
+    cb?: (error: string, rep: SetVocabStateV3Response) => void
+  ): Promise<SetVocabStateV3Response> {
+    return this.request("SetVocabStateV3", req, cb)
+  }
+
+  /**
+     * 接口说明：
+用户通过本接口进行热词表的更新。
+     */
+  async UpdateRecognizeVocabV3(
+    req: UpdateRecognizeVocabV3Request,
+    cb?: (error: string, rep: UpdateRecognizeVocabV3Response) => void
+  ): Promise<UpdateRecognizeVocabV3Response> {
+    return this.request("UpdateRecognizeVocabV3", req, cb)
+  }
+
+  /**
+   * 传入声纹ID，删除之前注册的声纹信息
+   */
+  async DeleteVoicePrint(
+    req: DeleteVoicePrintRequest,
+    cb?: (error: string, rep: DeleteVoicePrintResponse) => void
+  ): Promise<DeleteVoicePrintResponse> {
+    return this.request("DeleteVoicePrint", req, cb)
+  }
+
+  /**
+     * 接口说明：
+成功发起混流转推后，可以使用此接口来更新任务。仅在任务进行时有效，任务退出后更新将会返回错误。更新操作为增量更新模式。
+注意：为了保障推流的稳定性，更新不支持任务在纯音频、音视频、纯视频之间进行切换。
+     */
+  async UpdatePublishCdnStream(
+    req: UpdatePublishCdnStreamRequest,
+    cb?: (error: string, rep: UpdatePublishCdnStreamResponse) => void
+  ): Promise<UpdatePublishCdnStreamResponse> {
+    return this.request("UpdatePublishCdnStream", req, cb)
+  }
+
+  /**
+   * 语音合成接口
+   */
+  async TextToSpeech(
+    req: TextToSpeechRequest,
+    cb?: (error: string, rep: TextToSpeechResponse) => void
+  ): Promise<TextToSpeechResponse> {
+    return this.request("TextToSpeech", req, cb)
+  }
+
+  /**
+     * 启动AI对话任务，AI通道机器人进入TRTC房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
+
+TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
+     */
+  async StartAIConversation(
+    req: StartAIConversationRequest,
+    cb?: (error: string, rep: StartAIConversationResponse) => void
+  ): Promise<StartAIConversationResponse> {
+    return this.request("StartAIConversation", req, cb)
+  }
+
+  /**
+     * 接口说明：
+用户通过本接口进行热词表的删除。
+     */
+  async DeleteRecognizeVocabV3(
+    req: DeleteRecognizeVocabV3Request,
+    cb?: (error: string, rep: DeleteRecognizeVocabV3Response) => void
+  ): Promise<DeleteRecognizeVocabV3Response> {
+    return this.request("DeleteRecognizeVocabV3", req, cb)
+  }
+
+  /**
+   * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁新增自定义背景图或水印，可通过此接口上传新的图片素材。无需频繁新增图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
+   */
+  async CreatePicture(
+    req: CreatePictureRequest,
+    cb?: (error: string, rep: CreatePictureResponse) => void
+  ): Promise<CreatePictureResponse> {
+    return this.request("CreatePicture", req, cb)
+  }
+
+  /**
+     * 启动一路直播流审核。服务端异步拉流、定频截帧、音频切片、送审，通过回调返回结果。一次一个任务（一路流）。您可以通过此接口实现如下目标：
+●指定内容参数（LiveModerationParams）来指定内容理解需要的详细参数。
+●指定存储参数（LiveModerationStorageParams）将命中的切片文件指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）以及第三方AWS（S3）和阿里云（OSS）
+     */
+  async CreateLiveStreamModeration(
+    req: CreateLiveStreamModerationRequest,
+    cb?: (error: string, rep: CreateLiveStreamModerationResponse) => void
+  ): Promise<CreateLiveStreamModerationResponse> {
+    return this.request("CreateLiveStreamModeration", req, cb)
+  }
+
+  /**
+     * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
+userCount：通话人数，
+roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
+peakCurrentChannels：峰值同时在线频道数。
+peakCurrentUsers：峰值同时在线人数。
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘[版本功能和计费说明](https://cloud.tencent.com/document/product/647/81331)。
+2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+     */
+  async DescribeTRTCMarketScaleData(
+    req: DescribeTRTCMarketScaleDataRequest,
+    cb?: (error: string, rep: DescribeTRTCMarketScaleDataResponse) => void
+  ): Promise<DescribeTRTCMarketScaleDataResponse> {
+    return this.request("DescribeTRTCMarketScaleData", req, cb)
+  }
+
+  /**
+   * 成功开启AI 内容理解任务后，可以使用此接口来更新订阅黑白名单。
+   */
+  async ModifyCloudModeration(
+    req: ModifyCloudModerationRequest,
+    cb?: (error: string, rep: ModifyCloudModerationResponse) => void
+  ): Promise<ModifyCloudModerationResponse> {
+    return this.request("ModifyCloudModeration", req, cb)
+  }
+
+  /**
+   * 成功开启切片后，可以使用此接口来查询切片任务状态。仅在任务进行时有效，任务退出后查询将会返回错误。
+   */
+  async DescribeCloudSliceTask(
+    req: DescribeCloudSliceTaskRequest,
+    cb?: (error: string, rep: DescribeCloudSliceTaskResponse) => void
+  ): Promise<DescribeCloudSliceTaskResponse> {
+    return this.request("DescribeCloudSliceTask", req, cb)
+  }
+
+  /**
+   * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁修改自定义背景图或水印素材，可通过此接口修改已上传的图片。无需频繁修改图片素材的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
+   */
+  async ModifyPicture(
+    req: ModifyPictureRequest,
+    cb?: (error: string, rep: ModifyPictureResponse) => void
+  ): Promise<ModifyPictureResponse> {
+    return this.request("ModifyPicture", req, cb)
   }
 
   /**
@@ -970,23 +1029,232 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
-   */
-  async DismissRoomByStrRoomId(
-    req: DismissRoomByStrRoomIdRequest,
-    cb?: (error: string, rep: DismissRoomByStrRoomIdResponse) => void
-  ): Promise<DismissRoomByStrRoomIdResponse> {
-    return this.request("DismissRoomByStrRoomId", req, cb)
+     * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
+
+TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过此 API 接口，通知腾讯云服务端将多路视频画面合成一路，并指定每一路画面的位置，同时将多路声音进行混音，最终形成一路音视频流，以便用于录制和直播观看。
+
+您可以通过此接口实现如下目标：
+- 设置最终直播流的画质和音质，包括视频分辨率、视频码率、视频帧率、以及声音质量等。
+- 设置各路画面的位置和布局，您只需要在启动时设置一次，排版引擎会自动完成后续的画面排布。
+- 设置录制文件名，用于二次回放。
+- 设置 CDN 直播流 ID，用于在 CDN 进行直播观看。
+
+目前已经支持了如下几种布局模板：
+- 悬浮模板：第一个进入房间的用户的视频画面会铺满整个屏幕，其他用户的视频画面从左下角依次水平排列，显示为小画面，最多4行，每行4个，小画面悬浮于大画面之上。最多支持1个大画面和15个小画面，如果用户只发送音频，仍然会占用画面位置。
+- 九宫格模板：所有用户的视频画面大小一致，平分整个屏幕，人数越多，每个画面的尺寸越小。最多支持16个画面，如果用户只发送音频，仍然会占用画面位置。
+- 屏幕分享模板：适合视频会议和在线教育场景的布局，屏幕分享（或者主讲的摄像头）始终占据屏幕左侧的大画面位置，其他用户依次垂直排列于右侧，最多两列，每列最多8个小画面。最多支持1个大画面和15个小画面。若上行分辨率宽高比与画面输出宽高比不一致时，左侧大画面为了保持内容的完整性采用缩放方式处理，右侧小画面采用裁剪方式处理。
+- 画中画模板：适用于混合大小两路视频画面和其他用户混音，或者混合一路大画面和其他用户混音的场景。小画面悬浮于大画面之上，可以指定大小画面的用户以及小画面的显示位置。
+- 自定义模板：适用于在混流中指定用户的画面位置，或者预设视频画面位置的场景。当预设位置指定用户时，排版引擎会为该用户预留位置；当预设位置未指定用户时，排版引擎会根据进房间顺序自动填充。预设位置填满时，不再混合其他用户的画面和声音。自定义模板启用占位图功能时（LayoutParams中的PlaceHolderMode设置成1），在预设位置的用户没有上行视频时可显示对应的占位图（PlaceImageId）。
+
+注意：
+1、**混流转码为收费功能，调用接口将产生云端混流转码费用，详见[云端混流转码计费说明](https://cloud.tencent.com/document/product/647/49446)。**
+2、2020年1月9号及以后创建的应用才能直接调用此接口。2020年1月9日之前创建的应用默认使用云直播的云端混流，如需切换至MCU混流，请[提交工单](https://console.cloud.tencent.com/workorder/category)寻求帮助。
+3、客户端混流和服务端混流不能混用。
+     */
+  async StartMCUMixTranscodeByStrRoomId(
+    req: StartMCUMixTranscodeByStrRoomIdRequest,
+    cb?: (error: string, rep: StartMCUMixTranscodeByStrRoomIdResponse) => void
+  ): Promise<StartMCUMixTranscodeByStrRoomIdResponse> {
+    return this.request("StartMCUMixTranscodeByStrRoomId", req, cb)
   }
 
   /**
-   * 成功开启切片任务后，可以使用此接口来更新任务。用于更新指定订阅流白名单或者黑名单。
+   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
    */
-  async ModifyCloudSliceTask(
-    req: ModifyCloudSliceTaskRequest,
-    cb?: (error: string, rep: ModifyCloudSliceTaskResponse) => void
-  ): Promise<ModifyCloudSliceTaskResponse> {
-    return this.request("ModifyCloudSliceTask", req, cb)
+  async RemoveUserByStrRoomId(
+    req: RemoveUserByStrRoomIdRequest,
+    cb?: (error: string, rep: RemoveUserByStrRoomIdResponse) => void
+  ): Promise<RemoveUserByStrRoomIdResponse> {
+    return this.request("RemoveUserByStrRoomId", req, cb)
+  }
+
+  /**
+   * 停止AI转录任务。
+   */
+  async StopAITranscription(
+    req: StopAITranscriptionRequest,
+    cb?: (error: string, rep: StopAITranscriptionResponse) => void
+  ): Promise<StopAITranscriptionResponse> {
+    return this.request("StopAITranscription", req, cb)
+  }
+
+  /**
+     * 成功开启录制后，可以使用此接口来查询录制状态。仅在录制任务进行时有效，录制退出后查询将会返回错误。
+录制文件上传到云点播VOD时，StorageFileList中不会返回录制文件信息，请订阅相关录制文件回调事件，获取录制文件信息。
+     */
+  async DescribeCloudRecording(
+    req: DescribeCloudRecordingRequest,
+    cb?: (error: string, rep: DescribeCloudRecordingResponse) => void
+  ): Promise<DescribeCloudRecordingResponse> {
+    return this.request("DescribeCloudRecording", req, cb)
+  }
+
+  /**
+     * 切片截图与内容理解用量查询，支持查询音视频切片（云端切片场景）和 AI 内容理解（审核场景）两种业务类型
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+     */
+  async DescribeTRTCSegmentModerationUsage(
+    req: DescribeTRTCSegmentModerationUsageRequest,
+    cb?: (error: string, rep: DescribeTRTCSegmentModerationUsageResponse) => void
+  ): Promise<DescribeTRTCSegmentModerationUsageResponse> {
+    return this.request("DescribeTRTCSegmentModerationUsage", req, cb)
+  }
+
+  /**
+     * 接口说明：
+启动云端切片功能，完成房间内的音视频切片，并上传到指定的云存储。
+
+您可以通过此接口实现如下目标：
+* 指定切片参数（SliceParams）来指定需要切片的主播的黑名单或者白名单。
+* 指定存储参数（SliceStorageParams）来指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）和第三方AWS
+     */
+  async CreateCloudSliceTask(
+    req: CreateCloudSliceTaskRequest,
+    cb?: (error: string, rep: CreateCloudSliceTaskResponse) => void
+  ): Promise<CreateCloudSliceTaskResponse> {
+    return this.request("CreateCloudSliceTask", req, cb)
+  }
+
+  /**
+   * 查询页面录制任务
+   */
+  async DescribeWebRecord(
+    req: DescribeWebRecordRequest,
+    cb?: (error: string, rep: DescribeWebRecordResponse) => void
+  ): Promise<DescribeWebRecordResponse> {
+    return this.request("DescribeWebRecord", req, cb)
+  }
+
+  /**
+   * 成功开启AI 内容理解任务后，可以使用此接口来查询AI 内容理解任务状态和订阅的黑白名单信息。仅在任务进行时有效，任务退出后查询将会返回错误。
+   */
+  async DescribeCloudModeration(
+    req: DescribeCloudModerationRequest,
+    cb?: (error: string, rep: DescribeCloudModerationResponse) => void
+  ): Promise<DescribeCloudModerationResponse> {
+    return this.request("DescribeCloudModeration", req, cb)
+  }
+
+  /**
+     * 查询TRTC监控仪表盘-数据大盘质量指标（包括下列指标）
+joinSuccessRate：加入频道成功率。
+joinSuccessIn5sRate：5s内加入频道成功率。
+audioFreezeRate：音频卡顿率。
+videoFreezeRate：视频卡顿率。
+networkDelay ：网络延迟率。
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘[版本功能和计费说明](https://cloud.tencent.com/document/product/647/81331)。
+2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+     */
+  async DescribeTRTCMarketQualityData(
+    req: DescribeTRTCMarketQualityDataRequest,
+    cb?: (error: string, rep: DescribeTRTCMarketQualityDataResponse) => void
+  ): Promise<DescribeTRTCMarketQualityDataResponse> {
+    return this.request("DescribeTRTCMarketQualityData", req, cb)
+  }
+
+  /**
+     * 接口说明：
+停止指定的混流转推任务。如果没有调用 Stop 接口停止任务，所有参与混流转推的主播离开 TRTC 房间超过 AgentParams.MaxIdleTime 设置的时间后，任务也会自动停止。
+     */
+  async StopPublishCdnStream(
+    req: StopPublishCdnStreamRequest,
+    cb?: (error: string, rep: StopPublishCdnStreamResponse) => void
+  ): Promise<StopPublishCdnStreamResponse> {
+    return this.request("StopPublishCdnStream", req, cb)
+  }
+
+  /**
+     * 启动AI 内容理解功能，完成房间内的音视频切片，视频截帧，或者录制音频流，投递到AI内容理解，完成内容识别。您可以通过此接口实现如下目标：
+●指定内容参数（ModerationParams）来指定内容理解需要的详细参数。
+●指定存储参数（ModerationStorageParams）将命中的切片文件指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）以及第三方AWS（S3）和阿里云（OSS）
+     */
+  async CreateCloudModeration(
+    req: CreateCloudModerationRequest,
+    cb?: (error: string, rep: CreateCloudModerationResponse) => void
+  ): Promise<CreateCloudModerationResponse> {
+    return this.request("CreateCloudModeration", req, cb)
+  }
+
+  /**
+     * 云监控monitor接口已下线，trtc同步下线接口
+
+查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
+userCount：通话人数，
+roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
+peakCurrentChannels：峰值同时在线频道数。
+peakCurrentUsers：峰值同时在线人数。
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+     */
+  async DescribeTRTCMarketScaleMetricData(
+    req: DescribeTRTCMarketScaleMetricDataRequest,
+    cb?: (error: string, rep: DescribeTRTCMarketScaleMetricDataResponse) => void
+  ): Promise<DescribeTRTCMarketScaleMetricDataResponse> {
+    return this.request("DescribeTRTCMarketScaleMetricData", req, cb)
+  }
+
+  /**
+     * 接口说明：
+用户通过本接口进行热词表的下载，获得词表权重文件形式的 base64 值，文件形式为通过 “|” 分割的词和权重，即 word|weight 的形式。
+     */
+  async DownloadRecognizeVocabV3(
+    req: DownloadRecognizeVocabV3Request,
+    cb?: (error: string, rep: DownloadRecognizeVocabV3Response) => void
+  ): Promise<DownloadRecognizeVocabV3Response> {
+    return this.request("DownloadRecognizeVocabV3", req, cb)
+  }
+
+  /**
+   * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。（同接口DescribeDetailEvent）
+   */
+  async DescribeUserEvent(
+    req: DescribeUserEventRequest,
+    cb?: (error: string, rep: DescribeUserEventResponse) => void
+  ): Promise<DescribeUserEventResponse> {
+    return this.request("DescribeUserEvent", req, cb)
+  }
+
+  /**
+   * 成功开启转录后，可以使用此接口来停止转录任务。
+   */
+  async DeleteCloudTranscription(
+    req: DeleteCloudTranscriptionRequest,
+    cb?: (error: string, rep: DeleteCloudTranscriptionResponse) => void
+  ): Promise<DeleteCloudTranscriptionResponse> {
+    return this.request("DeleteCloudTranscription", req, cb)
+  }
+
+  /**
+     * 启动转录机器人，后台会通过机器人拉流进行实时进行语音识别并下发字幕和转录消息。
+转录机器人支持两种拉流方式，通过TranscriptionMode字段控制：
+- 拉取全房间的流。
+- 拉取特定用户的流。
+
+服务端通过TRTC的自定义消息实时下发字幕以及转录消息，CmdId固定是1。客户端只需监听自定义消息的回调即可，比如[c++回调](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565)。其他客户端比如安卓、Web等同样可在该链接处找到。
+
+
+**注意：**
+TranscriptionMode为0时，需要保证一个房间内只发起一个任务，如果发起多个任务，则机器人之间会相互订阅，除非主动停止任务，否则只有10小时后任务才会超时退出，这种情况下建议填写SessionId，保证后续重复发起的任务失败。
+     */
+  async StartAITranscription(
+    req: StartAITranscriptionRequest,
+    cb?: (error: string, rep: StartAITranscriptionResponse) => void
+  ): Promise<StartAITranscriptionResponse> {
+    return this.request("StartAITranscription", req, cb)
+  }
+
+  /**
+   * 异步语音合成
+   */
+  async AsyncTextToSpeech(
+    req: AsyncTextToSpeechRequest,
+    cb?: (error: string, rep: AsyncTextToSpeechResponse) => void
+  ): Promise<AsyncTextToSpeechResponse> {
+    return this.request("AsyncTextToSpeech", req, cb)
   }
 
   /**
@@ -1011,42 +1279,6 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）
-异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
-     */
-  async DescribeUnusualEvent(
-    req: DescribeUnusualEventRequest,
-    cb?: (error: string, rep: DescribeUnusualEventResponse) => void
-  ): Promise<DescribeUnusualEventResponse> {
-    return this.request("DescribeUnusualEvent", req, cb)
-  }
-
-  /**
-   * 声音克隆
-   */
-  async VoiceClone(
-    req: VoiceCloneRequest,
-    cb?: (error: string, rep: VoiceCloneResponse) => void
-  ): Promise<VoiceCloneResponse> {
-    return this.request("VoiceClone", req, cb)
-  }
-
-  /**
-     * 获取TRTC录制的用量明细。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
-- 默认接口请求频率限制：5次/秒。
-     */
-  async DescribeRecordingUsage(
-    req: DescribeRecordingUsageRequest,
-    cb?: (error: string, rep: DescribeRecordingUsageResponse) => void
-  ): Promise<DescribeRecordingUsageResponse> {
-    return this.request("DescribeRecordingUsage", req, cb)
-  }
-
-  /**
    * 查询异步语音合成状态
    */
   async DescribeAsyncTextToSpeech(
@@ -1057,21 +1289,6 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 获取TRTC混流转码的用量明细。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
-- 默认接口请求频率限制：5次/秒。
-     */
-  async DescribeMixTranscodingUsage(
-    req: DescribeMixTranscodingUsageRequest,
-    cb?: (error: string, rep: DescribeMixTranscodingUsageResponse) => void
-  ): Promise<DescribeMixTranscodingUsageResponse> {
-    return this.request("DescribeMixTranscodingUsage", req, cb)
-  }
-
-  /**
    * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
    */
   async DismissRoom(
@@ -1079,30 +1296,6 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: DismissRoomResponse) => void
   ): Promise<DismissRoomResponse> {
     return this.request("DismissRoom", req, cb)
-  }
-
-  /**
-     * 查询TRTC音视频房间维度用量。
-- 单次只能查询一天数据，返回查询时间段内的汇总数据；通过多次查询可以查不同天数据。若查询跨天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用，不可用于账单核对，如需对账请使用账号/应用维度用量API：DescribeTrtcUsage。
-- 默认接口请求频率限制：1次/15秒。
-- 数据最早可查日期为2023年4月1日0点，最大可查范围近3个月。
-     */
-  async DescribeTrtcRoomUsage(
-    req: DescribeTrtcRoomUsageRequest,
-    cb?: (error: string, rep: DescribeTrtcRoomUsageResponse) => void
-  ): Promise<DescribeTrtcRoomUsageResponse> {
-    return this.request("DescribeTrtcRoomUsage", req, cb)
-  }
-
-  /**
-   * 成功开启切片任务后，可以使用此接口来停止任务。停止切片成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
-   */
-  async DeleteCloudSliceTask(
-    req: DeleteCloudSliceTaskRequest,
-    cb?: (error: string, rep: DeleteCloudSliceTaskResponse) => void
-  ): Promise<DeleteCloudSliceTaskResponse> {
-    return this.request("DeleteCloudSliceTask", req, cb)
   }
 
   /**
@@ -1133,17 +1326,6 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 成功开启录制后，可以使用此接口来查询录制状态。仅在录制任务进行时有效，录制退出后查询将会返回错误。
-录制文件上传到云点播VOD时，StorageFileList中不会返回录制文件信息，请订阅相关录制文件回调事件，获取录制文件信息。
-     */
-  async DescribeCloudRecording(
-    req: DescribeCloudRecordingRequest,
-    cb?: (error: string, rep: DescribeCloudRecordingResponse) => void
-  ): Promise<DescribeCloudRecordingResponse> {
-    return this.request("DescribeCloudRecording", req, cb)
-  }
-
-  /**
      * 获取TRTC旁路转推的用量明细。
 - 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
 - 单次查询统计区间最多不能超过31天。
@@ -1159,70 +1341,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 查询AI转录任务状态。
+   * 传入声纹ID以及对应音频信息，更新对应声纹信息
    */
-  async DescribeAITranscription(
-    req: DescribeAITranscriptionRequest,
-    cb?: (error: string, rep: DescribeAITranscriptionResponse) => void
-  ): Promise<DescribeAITranscriptionResponse> {
-    return this.request("DescribeAITranscription", req, cb)
-  }
-
-  /**
-     * 接口说明：
-成功发起混流转推后，可以使用此接口来更新任务。仅在任务进行时有效，任务退出后更新将会返回错误。更新操作为增量更新模式。
-注意：为了保障推流的稳定性，更新不支持任务在纯音频、音视频、纯视频之间进行切换。
-     */
-  async UpdatePublishCdnStream(
-    req: UpdatePublishCdnStreamRequest,
-    cb?: (error: string, rep: UpdatePublishCdnStreamResponse) => void
-  ): Promise<UpdatePublishCdnStreamResponse> {
-    return this.request("UpdatePublishCdnStream", req, cb)
-  }
-
-  /**
-   * 传入声纹ID，删除之前注册的声纹信息
-   */
-  async DeleteVoicePrint(
-    req: DeleteVoicePrintRequest,
-    cb?: (error: string, rep: DeleteVoicePrintResponse) => void
-  ): Promise<DeleteVoicePrintResponse> {
-    return this.request("DeleteVoicePrint", req, cb)
-  }
-
-  /**
-     * 接口说明：
-启动云端切片功能，完成房间内的音视频切片，并上传到指定的云存储。
-
-您可以通过此接口实现如下目标：
-* 指定切片参数（SliceParams）来指定需要切片的主播的黑名单或者白名单。
-* 指定存储参数（SliceStorageParams）来指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）和第三方AWS
-     */
-  async CreateCloudSliceTask(
-    req: CreateCloudSliceTaskRequest,
-    cb?: (error: string, rep: CreateCloudSliceTaskResponse) => void
-  ): Promise<CreateCloudSliceTaskResponse> {
-    return this.request("CreateCloudSliceTask", req, cb)
-  }
-
-  /**
-   * 成功开启录制后，可以使用此接口来停止录制任务。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
-   */
-  async DeleteCloudRecording(
-    req: DeleteCloudRecordingRequest,
-    cb?: (error: string, rep: DeleteCloudRecordingResponse) => void
-  ): Promise<DeleteCloudRecordingResponse> {
-    return this.request("DeleteCloudRecording", req, cb)
-  }
-
-  /**
-   * 停止AI对话任务
-   */
-  async StopAIConversation(
-    req: StopAIConversationRequest,
-    cb?: (error: string, rep: StopAIConversationResponse) => void
-  ): Promise<StopAIConversationResponse> {
-    return this.request("StopAIConversation", req, cb)
+  async UpdateVoicePrint(
+    req: UpdateVoicePrintRequest,
+    cb?: (error: string, rep: UpdateVoicePrintResponse) => void
+  ): Promise<UpdateVoicePrintResponse> {
+    return this.request("UpdateVoicePrint", req, cb)
   }
 
   /**
@@ -1236,75 +1361,6 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 成功开启AI 内容理解任务后，可以使用此接口来查询AI 内容理解任务状态和订阅的黑白名单信息。仅在任务进行时有效，任务退出后查询将会返回错误。
-   */
-  async DescribeCloudModeration(
-    req: DescribeCloudModerationRequest,
-    cb?: (error: string, rep: DescribeCloudModerationResponse) => void
-  ): Promise<DescribeCloudModerationResponse> {
-    return this.request("DescribeCloudModeration", req, cb)
-  }
-
-  /**
-     * 接口说明：
-用户通过本接口分页列举所有的热词表。
-     */
-  async GetRecognizeVocabListV3(
-    req: GetRecognizeVocabListV3Request,
-    cb?: (error: string, rep: GetRecognizeVocabListV3Response) => void
-  ): Promise<GetRecognizeVocabListV3Response> {
-    return this.request("GetRecognizeVocabListV3", req, cb)
-  }
-
-  /**
-     * 查询TRTC监控仪表盘-数据大盘质量指标（包括下列指标）
-joinSuccessRate：加入频道成功率。
-joinSuccessIn5sRate：5s内加入频道成功率。
-audioFreezeRate：音频卡顿率。
-videoFreezeRate：视频卡顿率。
-networkDelay ：网络延迟率。
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘[版本功能和计费说明](https://cloud.tencent.com/document/product/647/81331)。
-2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
-     */
-  async DescribeTRTCMarketQualityData(
-    req: DescribeTRTCMarketQualityDataRequest,
-    cb?: (error: string, rep: DescribeTRTCMarketQualityDataResponse) => void
-  ): Promise<DescribeTRTCMarketQualityDataResponse> {
-    return this.request("DescribeTRTCMarketQualityData", req, cb)
-  }
-
-  /**
-   * 提供服务端控制机器人的功能
-   */
-  async ControlAIConversation(
-    req: ControlAIConversationRequest,
-    cb?: (error: string, rep: ControlAIConversationResponse) => void
-  ): Promise<ControlAIConversationResponse> {
-    return this.request("ControlAIConversation", req, cb)
-  }
-
-  /**
-   * 停止AI转录任务。
-   */
-  async StopAITranscription(
-    req: StopAITranscriptionRequest,
-    cb?: (error: string, rep: StopAITranscriptionResponse) => void
-  ): Promise<StopAITranscriptionResponse> {
-    return this.request("StopAITranscription", req, cb)
-  }
-
-  /**
-   * 更新输入在线媒体流任务的StreamUrl
-   */
-  async UpdateStreamIngest(
-    req: UpdateStreamIngestRequest,
-    cb?: (error: string, rep: UpdateStreamIngestResponse) => void
-  ): Promise<UpdateStreamIngestResponse> {
-    return this.request("UpdateStreamIngest", req, cb)
-  }
-
-  /**
      * AI 智能识别与对话用量查询（AI对话/语音转文本/实时翻译/实时语音合成）
 - 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
 - 单次查询统计区间最多不能超过31天。
@@ -1315,46 +1371,5 @@ networkDelay ：网络延迟率。
     cb?: (error: string, rep: DescribeTRTCAIRecognitionUsageResponse) => void
   ): Promise<DescribeTRTCAIRecognitionUsageResponse> {
     return this.request("DescribeTRTCAIRecognitionUsage", req, cb)
-  }
-
-  /**
-   * 查询先前注册的声纹信息
-   */
-  async DescribeVoicePrint(
-    req: DescribeVoicePrintRequest,
-    cb?: (error: string, rep: DescribeVoicePrintResponse) => void
-  ): Promise<DescribeVoicePrintResponse> {
-    return this.request("DescribeVoicePrint", req, cb)
-  }
-
-  /**
-   * SSE流式文本转语音
-   */
-  async TextToSpeechSSE(
-    req: TextToSpeechSSERequest,
-    cb?: (error: string, rep: TextToSpeechSSEResponse) => void
-  ): Promise<TextToSpeechSSEResponse> {
-    return this.request("TextToSpeechSSE", req, cb)
-  }
-
-  /**
-   * 接口说明：结束云端混流
-   */
-  async StopMCUMixTranscode(
-    req: StopMCUMixTranscodeRequest,
-    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
-  ): Promise<StopMCUMixTranscodeResponse> {
-    return this.request("StopMCUMixTranscode", req, cb)
-  }
-
-  /**
-     * 接口说明：
-用户根据词表的ID可以获取对应的热词表信息
-     */
-  async GetRecognizeVocabV3(
-    req: GetRecognizeVocabV3Request,
-    cb?: (error: string, rep: GetRecognizeVocabV3Response) => void
-  ): Promise<GetRecognizeVocabV3Response> {
-    return this.request("GetRecognizeVocabV3", req, cb)
   }
 }

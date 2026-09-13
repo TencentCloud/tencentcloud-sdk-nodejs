@@ -57,6 +57,7 @@ import {
   CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
   CreateTWeTalkAgentRequest,
+  TransferTWeCallDeviceResponse,
   TalkConversationConfigInfo,
   GetTWeTalkProductConfigListRequest,
   DescribeSpaceFenceEventListResponse,
@@ -220,6 +221,7 @@ import {
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
   DescribeTWeTalkAIBotRequest,
+  SeeCreateSubscriptionEntry,
   VisionCustomDetectQuery,
   ModifyLoRaGatewayResponse,
   TalkConversationConfig,
@@ -248,7 +250,9 @@ import {
   DescribeTWeSeePostPaidServiceResponse,
   ModifyPositionSpaceResponse,
   ModifyCloudStorageAIServiceCallbackResponse,
+  BatchRenewTWeSeeSubscriptionRequest,
   CreateTWeSeeCallbackRequest,
+  BatchCreateTWeSeeSubscriptionResponse,
   PositionItem,
   ListTWeSeeCallbackResponse,
   TalkIdleDetectionConfigInfo,
@@ -256,9 +260,11 @@ import {
   CreateFenceBindResponse,
   TalkLLMConfig,
   DescribeBindedProductsResponse,
+  SeeRenewSubscriptionEntry,
   LoRaGatewayLocation,
   SeeTaskMetadata,
   ModifyTopicRuleResponse,
+  BatchRenewTWeSeeSubscriptionResponse,
   DescribeBatchProductionRequest,
   DirectBindDeviceInFamilyRequest,
   DescribeCloudStorageAIServiceTaskResponse,
@@ -276,6 +282,7 @@ import {
   ModifyTopicPolicyRequest,
   DeleteTopicRuleRequest,
   CreateLoRaGatewayResponse,
+  SeeRenewSubscriptionResult,
   ModifyTWeSeeFaceResponse,
   DescribeDeviceBindGatewayResponse,
   BindUserDeviceResponse,
@@ -504,6 +511,7 @@ import {
   DeleteProjectRequest,
   CloudStoragePackageInfo,
   DevicesItem,
+  SeeCreateSubscriptionResult,
   TalkProductConfigV2Info,
   OtaModuleInfo,
   DescribeLicenseOverviewRequest,
@@ -560,7 +568,7 @@ import {
   ModifyTopicPolicyResponse,
   DescribeCloudStorageStreamDataResponse,
   DeviceUpdateStatus,
-  TransferTWeCallDeviceResponse,
+  BatchCreateTWeSeeSubscriptionRequest,
   DescribeTopicRuleRequest,
   ModifyCloudStorageAIServiceCallbackRequest,
   GetWechatDeviceTicketResponse,
@@ -1803,13 +1811,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取多个云存事件缩略图
+   * 为用户提供新建项目的能力，用于集中管理产品和应用。
    */
-  async DescribeCloudStorageMultiThumbnail(
-    req: DescribeCloudStorageMultiThumbnailRequest,
-    cb?: (error: string, rep: DescribeCloudStorageMultiThumbnailResponse) => void
-  ): Promise<DescribeCloudStorageMultiThumbnailResponse> {
-    return this.request("DescribeCloudStorageMultiThumbnail", req, cb)
+  async CreateProject(
+    req: CreateProjectRequest,
+    cb?: (error: string, rep: CreateProjectResponse) => void
+  ): Promise<CreateProjectResponse> {
+    return this.request("CreateProject", req, cb)
   }
 
   /**
@@ -2489,6 +2497,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提供修改产品的数据模板的能力
+   */
+  async ModifyModelDefinition(
+    req: ModifyModelDefinitionRequest,
+    cb?: (error: string, rep: ModifyModelDefinitionResponse) => void
+  ): Promise<ModifyModelDefinitionResponse> {
+    return this.request("ModifyModelDefinition", req, cb)
+  }
+
+  /**
    * 创建设备云存 AI 分析任务
    */
   async CreateCloudStorageAIServiceTask(
@@ -2701,13 +2719,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为用户提供新建项目的能力，用于集中管理产品和应用。
+   * 拉取多个云存事件缩略图
    */
-  async CreateProject(
-    req: CreateProjectRequest,
-    cb?: (error: string, rep: CreateProjectResponse) => void
-  ): Promise<CreateProjectResponse> {
-    return this.request("CreateProject", req, cb)
+  async DescribeCloudStorageMultiThumbnail(
+    req: DescribeCloudStorageMultiThumbnailRequest,
+    cb?: (error: string, rep: DescribeCloudStorageMultiThumbnailResponse) => void
+  ): Promise<DescribeCloudStorageMultiThumbnailResponse> {
+    return this.request("DescribeCloudStorageMultiThumbnail", req, cb)
   }
 
   /**
@@ -2762,6 +2780,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTWeTalkAIBotResponse) => void
   ): Promise<DeleteTWeTalkAIBotResponse> {
     return this.request("DeleteTWeTalkAIBot", req, cb)
+  }
+
+  /**
+   * 批量续费 TWeSee 预付费订阅
+   */
+  async BatchRenewTWeSeeSubscription(
+    req: BatchRenewTWeSeeSubscriptionRequest,
+    cb?: (error: string, rep: BatchRenewTWeSeeSubscriptionResponse) => void
+  ): Promise<BatchRenewTWeSeeSubscriptionResponse> {
+    return this.request("BatchRenewTWeSeeSubscription", req, cb)
   }
 
   /**
@@ -3115,13 +3143,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供修改产品的数据模板的能力
+   * 批量开通 TWeSee 预付费订阅
    */
-  async ModifyModelDefinition(
-    req: ModifyModelDefinitionRequest,
-    cb?: (error: string, rep: ModifyModelDefinitionResponse) => void
-  ): Promise<ModifyModelDefinitionResponse> {
-    return this.request("ModifyModelDefinition", req, cb)
+  async BatchCreateTWeSeeSubscription(
+    req: BatchCreateTWeSeeSubscriptionRequest,
+    cb?: (error: string, rep: BatchCreateTWeSeeSubscriptionResponse) => void
+  ): Promise<BatchCreateTWeSeeSubscriptionResponse> {
+    return this.request("BatchCreateTWeSeeSubscription", req, cb)
   }
 
   /**

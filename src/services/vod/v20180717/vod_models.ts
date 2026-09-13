@@ -22072,6 +22072,10 @@ export interface AigcImageTaskInput {
    * <p>场景类型。取值如下：<li>当 ModelName 为 Hunyuan 时：   3d_panorama 表示全景图；</li><li>其他 ModelName 暂不支持。</li></p>
    */
   SceneType?: string
+  /**
+   * <p>透传参数。</p>
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -28613,6 +28617,10 @@ export interface AigcVideoTaskInput {
    * <p>模型随机种子。</p>
    */
   Seed?: number
+  /**
+   * <p>透传参数。</p>
+   */
+  ExtInfo?: string
 }
 
 /**

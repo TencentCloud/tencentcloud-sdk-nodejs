@@ -32,7 +32,6 @@ import {
   ModifyApplicationResponse,
   TsfPageLicenseTag,
   DescribeApiVersionsResponse,
-  ReassociateBusinessLogConfigRequest,
   StopContainerGroupResponse,
   CreateConfigTemplateWithDetailRespResponse,
   DeletePathRewritesRequest,
@@ -438,7 +437,6 @@ import {
   UpdateGatewayApiRequest,
   DescribeInstancesRequest,
   GroupRelease,
-  ReassociateBusinessLogConfigResponse,
   PathRewriteCreateObject,
   PackageConfig,
   DescribeApiGroupsRequest,
@@ -1149,16 +1147,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新仓库信息
-   */
-  async UpdateRepository(
-    req: UpdateRepositoryRequest,
-    cb?: (error: string, rep: UpdateRepositoryResponse) => void
-  ): Promise<UpdateRepositoryResponse> {
-    return this.request("UpdateRepository", req, cb)
-  }
-
-  /**
    * 查询可用于被导入的命名空间列表
    */
   async DescribeUsableUnitNamespaces(
@@ -1189,15 +1177,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 后端服务已经删除这个接口,  API 接口下线处理
-
-重关联业务日志配置
-     */
-  async ReassociateBusinessLogConfig(
-    req: ReassociateBusinessLogConfigRequest,
-    cb?: (error: string, rep: ReassociateBusinessLogConfigResponse) => void
-  ): Promise<ReassociateBusinessLogConfigResponse> {
-    return this.request("ReassociateBusinessLogConfig", req, cb)
+   * 更新仓库信息
+   */
+  async UpdateRepository(
+    req: UpdateRepositoryRequest,
+    cb?: (error: string, rep: UpdateRepositoryResponse) => void
+  ): Promise<UpdateRepositoryResponse> {
+    return this.request("UpdateRepository", req, cb)
   }
 
   /**

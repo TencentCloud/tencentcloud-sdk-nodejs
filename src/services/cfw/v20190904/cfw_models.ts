@@ -4175,6 +4175,176 @@ export interface DescribeSwitchErrorRequest {
 }
 
 /**
+ * DescribeNDRDataLeakOutAlertDetail返回参数结构体
+ */
+export interface DescribeNDRDataLeakOutAlertDetailResponse {
+  /**
+   * 风险事件ID
+   */
+  RiskID?: string
+  /**
+   * 资产实例ID
+   */
+  InstanceId?: string
+  /**
+   * 资产实例名称
+   */
+  InstanceName?: string
+  /**
+   * 资产实例类型
+   */
+  InstanceType?: string
+  /**
+   * 资产所在地域
+   */
+  Region?: string
+  /**
+   * 源IP
+   */
+  SrcIP?: string
+  /**
+   * 目的IP端口
+   */
+  DstIPPort?: string
+  /**
+   * 目的Host
+   */
+  Hostname?: string
+  /**
+   * 目的服务类型
+   */
+  DstServiceType?: string
+  /**
+   * 目的服务名称
+   */
+  DstServiceName?: string
+  /**
+   * 访问API
+   */
+  ApiPattern?: string
+  /**
+   * 目的IP地理信息
+   */
+  DstGeoLocation?: string
+  /**
+   * 应用层协议
+   */
+  AppProto?: string
+  /**
+   * 敏感类型集合
+   */
+  LeakTypeSet?: string
+  /**
+   * 事件数量
+   */
+  EventCount?: number
+  /**
+   * 敏感数据数量
+   */
+  LeakDataCount?: number
+  /**
+   * 原始风险等级
+   */
+  Level?: number
+  /**
+   * 处置状态
+   */
+  Status?: number
+  /**
+   * 处置备注
+   */
+  Comment?: string
+  /**
+   * 首次识别时间
+   */
+  FirstIdentificationTime?: string
+  /**
+   * 最近识别时间
+   */
+  LatestIdentificationTime?: string
+  /**
+   * AI任务分析状态
+   */
+  AnalysisStatus?: number
+  /**
+   * AI任务失败原因
+   */
+  AnalysisFailReason?: string
+  /**
+   * 最近一次AI分析时间
+   */
+  LastAnalysisTime?: string
+  /**
+   * API业务类型
+   */
+  ApiBizType?: string
+  /**
+   * API业务描述
+   */
+  ApiBizDescription?: string
+  /**
+   * 风险场景（类型）
+   */
+  RiskScenario?: string
+  /**
+   * 风险场景（类型）描述
+   */
+  RiskScenarioDetail?: string
+  /**
+   * 风险总结（概览）
+   */
+  RiskSummary?: string
+  /**
+   * 推断依据
+   */
+  RiskBasis?: string
+  /**
+   * 风险影响范围
+   */
+  ImpactScope?: string
+  /**
+   * AI建议风险等级
+   */
+  AiSuggestedLevel?: number
+  /**
+   * 处置建议
+   */
+  DisposalSuggestions?: Array<DisposalSuggestionItem>
+  /**
+   * http请求头
+   */
+  HttpRequestHeader?: string
+  /**
+   * http请求体
+   */
+  HttpRequestBody?: string
+  /**
+   * http响应头
+   */
+  HttpResponseHeader?: string
+  /**
+   * http响应体
+   */
+  HttpResponseBody?: string
+  /**
+   * 敏感数据条目
+   */
+  LeakDataEntries?: string
+  /**
+   * 脱敏状态
+   */
+  MaskStatus?: string
+  /**
+   * 最高敏感等级
+   */
+  HighestLevel?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 通用的列表检索过滤选项
  */
 export interface CommonFilter {
@@ -8945,6 +9115,16 @@ export interface UpdateClusterVpcFwRequest {
 }
 
 /**
+ * DescribeNDRDataLeakOutAlertDetail请求参数结构体
+ */
+export interface DescribeNDRDataLeakOutAlertDetailRequest {
+  /**
+   * 风险事件ID
+   */
+  RiskId: string
+}
+
+/**
  * DescribeBlockList返回参数结构体
  */
 export interface DescribeBlockListResponse {
@@ -11472,6 +11652,28 @@ export interface EdgeRange {
    * 对端网络实例cidr，多个以逗号分隔
    */
   DstCidr?: string
+}
+
+/**
+ * 处置建议-条目
+ */
+export interface DisposalSuggestionItem {
+  /**
+   * 处置动作
+   */
+  Action?: string
+  /**
+   * 处置对象
+   */
+  Target?: string
+  /**
+   * 处置优先级
+   */
+  Priority?: string
+  /**
+   * 处置建议
+   */
+  Suggestion?: string
 }
 
 /**

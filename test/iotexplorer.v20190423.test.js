@@ -1108,9 +1108,9 @@ it("iotexplorer.v20190423.CreateTWeTalkProductConfigV2", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeCloudStorageMultiThumbnail", async function () {
+it("iotexplorer.v20190423.CreateProject", async function () {
     try {
-       const data = await client.DescribeCloudStorageMultiThumbnail({})
+       const data = await client.CreateProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1788,6 +1788,16 @@ it("iotexplorer.v20190423.DescribeTWeTalkAgentBinding", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ModifyModelDefinition", async function () {
+    try {
+       const data = await client.ModifyModelDefinition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateCloudStorageAIServiceTask", async function () {
     try {
        const data = await client.CreateCloudStorageAIServiceTask({})
@@ -1998,9 +2008,9 @@ it("iotexplorer.v20190423.BindTWeTalkAgent", async function () {
     }
 })
 
-it("iotexplorer.v20190423.CreateProject", async function () {
+it("iotexplorer.v20190423.DescribeCloudStorageMultiThumbnail", async function () {
     try {
-       const data = await client.CreateProject({})
+       const data = await client.DescribeCloudStorageMultiThumbnail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2051,6 +2061,16 @@ it("iotexplorer.v20190423.DescribeCloudStorageOrder", async function () {
 it("iotexplorer.v20190423.DeleteTWeTalkAIBot", async function () {
     try {
        const data = await client.DeleteTWeTalkAIBot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.BatchRenewTWeSeeSubscription", async function () {
+    try {
+       const data = await client.BatchRenewTWeSeeSubscription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2408,9 +2428,9 @@ it("iotexplorer.v20190423.DescribeCloudStorageEvents", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ModifyModelDefinition", async function () {
+it("iotexplorer.v20190423.BatchCreateTWeSeeSubscription", async function () {
     try {
-       const data = await client.ModifyModelDefinition({})
+       const data = await client.BatchCreateTWeSeeSubscription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

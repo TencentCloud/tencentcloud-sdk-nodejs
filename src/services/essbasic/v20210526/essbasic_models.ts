@@ -385,7 +385,7 @@ export interface CreateLegalSealQrCodeResponse {
 
 /**
  * 签署人配置信息。
-此参数对子客和自动签无效，不允许进行修改。
+此参数对子客和“授权签”无效，不允许进行修改。
  */
 export interface CommonApproverOption {
   /**
@@ -988,7 +988,7 @@ export interface OperateChannelTemplateResponse {
  */
 export interface ChannelCreateDynamicFlowApproverResponse {
   /**
-   * 动态合同补充结果列表
+   * <p>动态合同补充结果列表</p>
    */
   DynamicFlowResultList?: Array<DynamicFlowResult>
   /**
@@ -1860,7 +1860,7 @@ export interface ChannelCreateFlowByFilesRequest {
    */
   CustomerData?: string
   /**
-   * <p>发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：</p><ul><li> **false**：（默认）不需要审批，直接签署。</li><li> **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>企业可以通过ChannelCreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果<ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li><li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>注：<code>此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同</code>
+   * <p>发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：</p><ul><li> **false**：（默认）不需要审批，直接签署。</li><li> **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>企业可以通过ChannelCreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果<ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li><li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>注：<code>此功能可用于与企业内部的审批流程进行关联，支持手动、授权签署合同</code>
    */
   NeedSignReview?: boolean
   /**
@@ -1880,7 +1880,7 @@ export interface ChannelCreateFlowByFilesRequest {
    */
   CcNotifyType?: number
   /**
-   * <p>个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传：</p><ul><li> **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签）  </li><li> **OTHER** :  通用场景</li></ul>注: <code>个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。</code>
+   * <p>个人授权签名的使用场景包括以下, 个人授权签署(即ApproverType设置成个人授权签署时)业务此值必传：</p><ul><li> **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗授权签）  </li><li> **OTHER** :  通用场景</li></ul>注: <code>个人授权签名场景是白名单功能，使用前请与对接的客户经理联系沟通。</code>
    */
   AutoSignScene?: string
   /**
@@ -2848,7 +2848,7 @@ export interface DescribeTemplatesResponse {
 }
 
 /**
- * 自动签开启、签署相关配置
+ * “授权签”开启、签署相关配置
  */
 export interface AutoSignConfig {
   /**
@@ -3954,11 +3954,11 @@ export interface ChannelCreateUserAutoSignSealUrlRequest {
    */
   Agent: Agent
   /**
-   * <p>自动签使用的场景值, 可以选择的场景值如下:</p><ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   * <p>“授权签”使用的场景值, 可以选择的场景值如下:<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong> :  电子处方场景</li><li> <strong>OTHER</strong> :  通用场景</li></ul></p>
    */
   SceneKey: string
   /**
-   * <p>自动签开通个人用户信息，包括名字，身份证等。</p>
+   * <p>“授权签”开通个人用户信息，包括名字，身份证等。</p>
    */
   UserInfo: UserThreeFactor
   /**
@@ -4544,12 +4544,11 @@ export interface FlowInfo {
  */
 export interface ChannelCreateDynamicFlowApproverRequest {
   /**
-   * 动态合同信息
-
+   * <p>动态合同信息</p>
    */
   FillDynamicFlowList: Array<DynamicFlowInfo>
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 此接口下面信息必填。 <ul> <li>渠道应用标识: Agent.AppId</li> <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li> <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li> </ul> 第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 此接口下面信息必填。 <ul> <li>渠道应用标识: Agent.AppId</li> <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li> <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li> </ul> 第三方平台子客企业和员工必须已经经过实名认证</p>
    */
   Agent?: Agent
 }
@@ -4618,7 +4617,7 @@ export interface ChannelCreateUserAutoSignSealUrlResponse {
    */
   AppOriginalId?: string
   /**
-   * <p>个人用户自动签的开通链接, 短链或者长链接形式。过期时间受 <code>ExpiredTime</code> 参数控制。</p>
+   * <p>个人用户“授权签”的开通链接, 短链或者长链接形式。过期时间受 <code>ExpiredTime</code> 参数控制。</p>
    */
   Url?: string
   /**
@@ -4658,7 +4657,7 @@ export interface ApproverComponentLimitType {
 }
 
 /**
- * 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”）
+ * 授权企业列表（目前仅用于“企业“授权签” -> 合作企业授权”）
  */
 export interface HasAuthOrganization {
   /**
@@ -5064,7 +5063,7 @@ export interface CreateSignUrlsRequest {
    */
   Endpoint?: string
   /**
-   * <p>签署链接生成类型，可以选择的类型如下</p><ul><li><strong>ALL</strong>：（默认）为所有签署方生成签署链接，但不包括自动签署（静默签署）的签署方。注意：<strong>此中类型不支持多个合同ID（FlowIds）</strong>。</li><li><strong>CHANNEL</strong>：适用于第三方子企业的员工签署方。</li><li><strong>NOT_CHANNEL</strong>：适用于SaaS平台企业的员工签署方。</li><li><strong>PERSON</strong>：适用于个人或自然人签署方。</li><li><strong>FOLLOWER</strong>：适用于关注方，目前指合同的抄送方。</li><li><strong>RECIPIENT</strong>：根据RecipientId生成对应的签署链接，适用于动态添加签署人的情况。</li></ul>
+   * <p>签署链接生成类型，可以选择的类型如下</p><p>枚举值：</p><ul><li>ALL： 为所有签署方生成签署链接，但不包括授权签署的签署方。注意：此中类型不支持多个合同ID（FlowIds）。</li><li>CHANNEL： 适用于第三方子企业的员工签署方。</li><li>NOT_CHANNEL： 适用于SaaS平台企业的员工签署方。</li><li>PERSON： 适用于个人或自然人签署方。</li><li>FOLLOWER： 适用于关注方，目前指合同的抄送方。</li><li>RECIPIENT： 根据RecipientId生成对应的签署链接，适用于动态添加签署人的情况。</li></ul><p>默认值：ALL</p>
    */
   GenerateType?: string
   /**
@@ -5245,7 +5244,7 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
    */
   FlowEffectiveDay?: number
   /**
-   * <p>在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：<br> <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul></p><p>效果如下:<br><img src="https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png" alt="FlowDisplayType"></p><p>枚举值：</p><ul><li>0： 合同</li><li>1： 文件</li><li>2： 协议</li><li>3： 文书</li></ul><p>默认值：0</p>
+   * <p>在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： </p><p>枚举值：</p><ul><li>0： 合同</li><li>1： 文件</li><li>2： 协议</li><li>3： 文书</li></ul><p>默认值：0</p><p>效果如下:<br><img src="https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png" alt="FlowDisplayType"></p>
    */
   FlowDisplayType?: number
   /**
@@ -5662,7 +5661,7 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
    */
   IdCardType?: string
   /**
-   * <p>手机号码；当需要开通自动签时，该参数必传</p>
+   * <p>手机号码；当需要开通授权签时，该参数必传</p>
    */
   Mobile?: string
   /**
@@ -6936,7 +6935,7 @@ export interface CreatePartnerAutoSignAuthUrlRequest {
    */
   AuthorizedOrganizationName?: string
   /**
-   * <p>是否给平台应用授权</p><ul><li><strong>true</strong>: 表示是，授权平台应用。在此情况下，无需设置<code>AuthorizedOrganizationIds</code>和<code>AuthorizedOrganizationNames</code>。</li><li><strong>false</strong>: （默认）表示否，不是授权平台应用。</li></ul><p> 注：授权给平台应用需要开通【基于子客授权第三方应用可文件发起子客自动签署】白名单，请联系运营经理开通。</p>
+   * <p>是否给平台应用授权</p><ul><li><strong>true</strong>: 表示是，授权平台应用。在此情况下，无需设置<code>AuthorizedOrganizationIds</code>和<code>AuthorizedOrganizationNames</code>。</li><li><strong>false</strong>: （默认）表示否，不是授权平台应用。</li></ul><p> 注：授权给平台应用需要开通【基于子客授权第三方应用可文件发起子客授权签署】白名单，请联系运营经理开通。</p>
    */
   PlatformAppAuthorization?: boolean
   /**

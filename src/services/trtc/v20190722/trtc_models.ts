@@ -560,7 +560,7 @@ export interface Voice {
    */
   Pitch?: number
   /**
-   * <p>情绪控制，目前仅flow_01_ex模型支持</p><p>枚举值：</p><ul><li>happy： 高兴</li><li>sad： 悲伤</li><li>angry： 愤怒</li><li>fearful： 害怕</li><li>disgusted： 厌恶</li><li>surprised： 惊讶</li><li>calm： 中性</li><li>fluent： 生动</li><li>whisper： 低语</li></ul>
+   * <p>情绪控制</p><p>枚举值：</p><ul><li>happy： 高兴</li><li>sad： 悲伤</li><li>angry： 愤怒</li><li>fearful： 害怕</li><li>disgusted： 厌恶</li><li>surprised： 惊讶</li><li>calm： 中性</li><li>fluent： 生动</li><li>whisper： 低语</li></ul>
    */
   Emotion?: string
 }
@@ -2073,11 +2073,11 @@ export interface EmulateMobileParams {
  */
 export interface PronunciationDict {
   /**
-   * 需要纠正发音的词语，前后空格自动去除。同一请求中若有重复词语，以最后一条为准。
+   * <p>需要纠正发音的词语，同一请求中若有重复词语，以最后一条为准。</p>
    */
   Word: string
   /**
-   * 目标发音，支持以下格式：<br>① 带声调数字的拼音（1=阴平，2=阳平，3=上声，4=去声，5=轻声），如 yin2 hang2；<br>② 拼音连写（无空格），如 yin2hang2；<br>③ 文字+拼音混写，如 银hang2；<br>④ 直接文本替换，会将原始文本替换为目标文本
+   * <p>目标发音，支持以下格式：</p><ul><li>带声调数字的拼音（1=阴平，2=阳平，3=上声，4=去声，5=轻声），如 (yin2)(hang2)</li><li>英文音标，如  (rɪˈzjuːm)</li><li>裸文本替换，会将原始文本替换为目标文本</li></ul><p>支持任意格式混排，注意拼音和音标需要被括号包裹</p>
    */
   Pronunciation: string
 }
@@ -3551,6 +3551,64 @@ export interface HotWord {
 }
 
 /**
+ * CreateAudioModerationSync返回参数结构体
+ */
+export interface CreateAudioModerationSyncResponse {
+  /**
+   * <p>返回传入的DataId</p>
+   */
+  DataId?: string
+  /**
+   * <p>审核返回的任务id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>文件名</p>
+   */
+  FileName?: string
+  /**
+   * <p>1：语音。 2：图片。</p>
+   */
+  MediaType?: number
+  /**
+   * <p>0：建议通过。 1 ：建议人工重新内容识别。 2：建议屏蔽。</p>
+   */
+  Suggest?: number
+  /**
+   * <p>置信度分数，取值范围：0（置信度最低）-100（置信度最高 ），越高代表越有可能属于当前返回的标签。 实例值：100</p>
+   */
+  Rate?: number
+  /**
+   * <p>Normal：正常文本  Ad:广告 Porn：色情 Abuse：谩骂 Illegal: 违禁 Polity: 涉政 Terror: 暴恐 Sexy: 性感 Moan: 呻吟/娇喘 QRCode: 二维码 Custom: 自定义</p>
+   */
+  Label?: string
+  /**
+   * <p>子标签</p>
+   */
+  SubLabel?: string
+  /**
+   * <p>音频链接地址</p>
+   */
+  Audio?: string
+  /**
+   * <p>审核识别音频文本</p>
+   */
+  AudioText?: string
+  /**
+   * <p>音频时长，单位 ms</p>
+   */
+  Duration?: number
+  /**
+   * <p>审核明细</p>
+   */
+  CheckDetail?: Array<ModerationCheckDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeMixTranscodingUsage返回参数结构体
  */
 export interface DescribeMixTranscodingUsageResponse {
@@ -3730,6 +3788,60 @@ export interface LayoutParams {
    * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
    */
   RenderMode?: number
+}
+
+/**
+ * 内容理解明细
+ */
+export interface ModerationCheckDetail {
+  /**
+   * <p>该字段在内容理解回调事件中可直接忽略，仅在第三方审核时存在，检出违规的模型场景，枚举值：Ad/Porn/Abuse/Illegal/Polity/Terror/Sexy/Moan/Custom</p>
+   */
+  Scene?: string
+  /**
+   * <p>Normal：正常文本  Ad:广告 Porn：色情 Abuse：谩骂 Illegal: 违禁 Polity: 涉政 Terror: 暴恐 Sexy: 性感 Moan: 呻吟/娇喘 QRCode: 二维码 Custom: 自定义</p>
+   */
+  Label?: string
+  /**
+   * <p>子标签</p>
+   */
+  SubLabel?: string
+  /**
+   * <p>0：建议通过。 1 ：建议人工重新内容识别。 2：建议屏蔽。</p>
+   */
+  Suggest?: number
+  /**
+   * <p>自定义词库名。</p>
+   */
+  LibName?: string
+  /**
+   * <p>关键词。</p>
+   */
+  Keywords?: Array<string>
+  /**
+   * <p>中文二级标签。</p>
+   */
+  Desc?: string
+  /**
+   * <p>置信度分数，取值范围：0（置信度最低）-100（置信度最高 ），越高代表越有可能属于当前返回的标签。 实例值：100</p>
+   */
+  Score?: number
+  /**
+   * <p>违规严重程度: 0-不区分 1-轻度 2-严重</p>
+   */
+  Severity?: number
+  /**
+   * <p>违规严重程度描述 仅名单内sdkappid返回 负面表达,正面或中性表达,语义模糊</p>
+   */
+  SeverityDesc?: string
+  /**
+   * <p>音频切片位置信息。</p>
+   */
+  AudioSegments?: AudioSegments
+  /**
+   * <p>图片命中坐标信息。</p>
+   */
+  ImageLocation?: ImageLocation
 }
 
 /**
@@ -3961,6 +4073,40 @@ export interface StartWebRecordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateAudioModerationSync请求参数结构体
+ */
+export interface CreateAudioModerationSyncRequest {
+  /**
+   * <p>sdkappid app账号</p>
+   */
+  Sdkappid?: number
+  /**
+   * <p>BizType为策略的具体的编号, GME业务 2_2_3_sdkappid</p>
+   */
+  BizType?: string
+  /**
+   * <p>据标识，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符</p>
+   */
+  DataId?: string
+  /**
+   * <p>音频格式，当FileUrl为空时，必填。音频文件资源格式，当前支持格式：wav、mp3、m4a，请按照实际文件格式填入。 示例值：mp3</p>
+   */
+  FileFormat?: string
+  /**
+   * <p>文件名称，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符 示例值：file_name</p>
+   */
+  FileName?: string
+  /**
+   * <p>数据Base64编码，短音频同步接口仅传入可音频内容； 支持范围：文件大小不能超过5M，时长不可超过60s； 支持格式：wav (PCM编码)、mp3、m4a (采样率：16kHz~48kHz，位深：16bit 小端，声道数：单声道/双声道，建议格式：16kHz/16bit/单声道)。 示例值：1</p>
+   */
+  FileContent?: string
+  /**
+   * <p>音频资源访问链接，与FileContent参数必须二选一输入； 支持范围及格式：同FileContent；</p>
+   */
+  FileUrl?: string
 }
 
 /**
@@ -4607,29 +4753,17 @@ export interface DismissRoomByStrRoomIdRequest {
 }
 
 /**
- * DescribeTRTCAIRecognitionUsage请求参数结构体
+ * DescribeCloudTranscription请求参数结构体
  */
-export interface DescribeTRTCAIRecognitionUsageRequest {
+export interface DescribeCloudTranscriptionRequest {
   /**
-   * 查询开始时间，格式为YYYY-MM-DD HH:mm:ss。
+   * TRTC的SDKAppId，和转录的房间所对应的SDKAppId相同。
    */
-  StartTime: string
+  SdkAppId: number
   /**
-   * 查询结束时间，格式为YYYY-MM-DD HH:mm:ss。单次查询统计区间最多不能超过31天。
+   * 转录任务的唯一Id，在启动转录成功后会返回。
    */
-  EndTime: string
-  /**
-   * 用量类型列表。
-- conversation AI 实时对话
-- asr 语音转文本
-- translation 实时翻译
-- tts 实时语音合成
-   */
-  AuType: Array<string>
-  /**
-   * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
-   */
-  SdkAppId?: string
+  TaskId: string
 }
 
 /**
@@ -5011,6 +5145,20 @@ export interface UserInformation {
    * 判断用户是否已经离开房间
    */
   Finished?: boolean
+}
+
+/**
+ * 音频分片时间
+ */
+export interface AudioSegments {
+  /**
+   * <p>该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。 示例值：0</p>
+   */
+  StartTime?: number
+  /**
+   * <p>该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。 示例值：15</p>
+   */
+  FinishTime?: number
 }
 
 /**
@@ -6123,6 +6271,20 @@ export interface DescribeStreamIngestRequest {
 }
 
 /**
+ * 图片坐标
+ */
+export interface ImageLocation {
+  /**
+   * <p>该参数用于返回检测框左上角位置的横坐标（x）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。 示例值：51</p>
+   */
+  X?: number
+  /**
+   * <p>该参数用于返回检测框左上角位置的纵坐标（y）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。 示例值：448</p>
+   */
+  Y?: number
+}
+
+/**
  * UpdateVoicePrint返回参数结构体
  */
 export interface UpdateVoicePrintResponse {
@@ -6271,17 +6433,29 @@ export interface McuPublishCdnParam {
 }
 
 /**
- * DescribeCloudTranscription请求参数结构体
+ * DescribeTRTCAIRecognitionUsage请求参数结构体
  */
-export interface DescribeCloudTranscriptionRequest {
+export interface DescribeTRTCAIRecognitionUsageRequest {
   /**
-   * TRTC的SDKAppId，和转录的房间所对应的SDKAppId相同。
+   * 查询开始时间，格式为YYYY-MM-DD HH:mm:ss。
    */
-  SdkAppId: number
+  StartTime: string
   /**
-   * 转录任务的唯一Id，在启动转录成功后会返回。
+   * 查询结束时间，格式为YYYY-MM-DD HH:mm:ss。单次查询统计区间最多不能超过31天。
    */
-  TaskId: string
+  EndTime: string
+  /**
+   * 用量类型列表。
+- conversation AI 实时对话
+- asr 语音转文本
+- translation 实时翻译
+- tts 实时语音合成
+   */
+  AuType: Array<string>
+  /**
+   * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
+   */
+  SdkAppId?: string
 }
 
 /**
