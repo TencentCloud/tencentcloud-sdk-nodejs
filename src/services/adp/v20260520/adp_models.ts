@@ -123,6 +123,24 @@ export interface SkillClassification {
 }
 
 /**
+ * 检索输入
+ */
+export interface SearchInput {
+  /**
+   * <p>图片 URL 列表</p>
+   */
+  ImageUrlList?: Array<string>
+  /**
+   * <p>问题</p>
+   */
+  Question?: string
+  /**
+   * <p>拆解的子问题列表</p>
+   */
+  SubQuestionList?: Array<string>
+}
+
+/**
  * Agent高级设置
  */
 export interface AgentAdvancedConfig {
@@ -130,6 +148,16 @@ export interface AgentAdvancedConfig {
    * <p>最大推理轮数</p>
    */
   MaxReasoningRound?: number
+}
+
+/**
+ * 最终 rerank 配置
+ */
+export interface FinalRerankConfig {
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
 }
 
 /**
@@ -447,6 +475,49 @@ export interface AppShareAccessControl {
 }
 
 /**
+ * 知识库分类信息（含元数据配置）
+ */
+export interface KBCategory {
+  /**
+   * <p>是否可新增</p>
+   */
+  CanAdd?: boolean
+  /**
+   * <p>是否可删除</p>
+   */
+  CanDelete?: boolean
+  /**
+   * <p>是否可编辑</p>
+   */
+  CanEdit?: boolean
+  /**
+   * <p>分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>子分类列表</p>
+   */
+  ChildList?: Array<KBCategory>
+  /**
+   * <p>是否为叶子节点（无子分类）</p>
+   */
+  IsLeaf?: boolean
+  /**
+   * <p>分类对象的数量</p>
+   */
+  ItemCount?: number
+  /**
+   * <p>元数据配置（该分类被设置为元数据时的配置信息）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaValue?: MetaValue
+  /**
+   * <p>分类名称</p>
+   */
+  Name?: string
+}
+
+/**
  * 对话端自定义配置(所有模式共用,允许对话中动态修改配置)
  */
 export interface DialogCustomConfig {
@@ -512,6 +583,24 @@ export interface ExecuteConfig {
    * <p>工作流配置</p>
    */
   WorkflowConfig?: AppTriggerWorkflowExecuteConfig
+}
+
+/**
+ * CreateLabel返回参数结构体
+ */
+export interface CreateLabelResponse {
+  /**
+   * <p>标签 ID</p>
+   */
+  LabelId?: string
+  /**
+   * <p>标签值（标准词 + 同义词列表，含后台生成的 term_id）</p>
+   */
+  TermList?: Array<LabelTerm>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -583,6 +672,64 @@ export interface DeleteVariableResponse {
 }
 
 /**
+ * DescribeLabelSummaryList返回参数结构体
+ */
+export interface DescribeLabelSummaryListResponse {
+  /**
+   * <p>标签列表</p>
+   */
+  LabelList?: Array<LabelSummary>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDoc返回参数结构体
+ */
+export interface DescribeDocResponse {
+  /**
+   * <p>文档链接（外部链接 + COS 链接）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocLink?: DocLink
+  /**
+   * <p>解析配置（分割规则、内容过滤等）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParseConfig?: DocParseConfig
+  /**
+   * <p>文档基础信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Summary?: DocSummary
+  /**
+   * <p>开关配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: DocSwitch
+  /**
+   * <p>更新周期配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatePeriod?: DocUpdatePeriod
+  /**
+   * <p>用户访问配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAccessConfig?: UserAccessConfig
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * API插件配置
  */
 export interface ApiPluginConfig {
@@ -634,6 +781,24 @@ export interface DescribeVariableResponse {
 }
 
 /**
+ * CreateLabel请求参数结构体
+ */
+export interface CreateLabelRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>标签名称（长度不小于 1 个字符）</p>
+   */
+  Name: string
+  /**
+   * <p>标签值（标准词 + 同义词列表），其中 term_id 由后台生成、创建时留空</p>
+   */
+  TermList?: Array<LabelTerm>
+}
+
+/**
  * CodeToolConfig
  */
 export interface CodeToolConfig {
@@ -653,6 +818,24 @@ export interface CodeToolConfig {
    * <p>输出参数</p>
    */
   Outputs?: Array<ResponseParam>
+}
+
+/**
+ * 模型状态信息
+ */
+export interface ModelStatus {
+  /**
+   * 专属并发数
+   */
+  Concurrency?: number
+  /**
+   * 是否专属并发
+   */
+  IsExclusive?: boolean
+  /**
+   * 资源状态。1-资源可用, 2-资源已用尽
+   */
+  ResourceStatus?: number
 }
 
 /**
@@ -770,33 +953,17 @@ export interface SkillReferenceSummary {
 }
 
 /**
- * ModifyAppTrigger请求参数结构体
+ * BillingAttribute
  */
-export interface ModifyAppTriggerRequest {
+export interface BillingAttribute {
   /**
-   * <p>应用ID</p>
+   * <p>属性名称</p>
    */
-  AppId?: string
+  Name?: string
   /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_SCOPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_SCOPE_APP</td><td>1</td><td>B 端管理员</td></tr><tr><td>APP_TRIGGER_SCOPE_USER</td><td>2</td><td>C 端访客</td></tr></tbody></table>
+   * <p>属性值</p>
    */
-  Scope?: number
-  /**
-   * <p>触发器信息</p>
-   */
-  Trigger?: AppTrigger
-  /**
-   * <p>触发器唯一ID</p>
-   */
-  TriggerId?: string
-  /**
-   * <p>修改字段</p>
-   */
-  UpdateMask?: FieldMask
-  /**
-   * <p>访客ID</p>
-   */
-  UserId?: string
+  Value?: string
 }
 
 /**
@@ -890,6 +1057,24 @@ export interface ClawAgentConfig {
 }
 
 /**
+ * 模型限制信息
+ */
+export interface ModelLimit {
+  /**
+   * 模型上下文长度展示文案（如 "128K"、"1000K"）
+   */
+  ContextLengthDescription?: string
+  /**
+   * 模型对话框输入长度字符数限制
+   */
+  InputLengthLimit?: number
+  /**
+   * 模型提示词长度字符数限制
+   */
+  PromptLengthLimit?: number
+}
+
+/**
  * CreatePlugin请求参数结构体
  */
 export interface CreatePluginRequest {
@@ -934,6 +1119,16 @@ export interface ThinkModel {
  * DeleteAgent返回参数结构体
  */
 export interface DeleteAgentResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyConversation返回参数结构体
+ */
+export interface ModifyConversationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1022,6 +1217,20 @@ export interface AppAuxiliaryInfo {
 }
 
 /**
+ * ModifyLabel返回参数结构体
+ */
+export interface ModifyLabelResponse {
+  /**
+   * <p>修改后的标签值（标准词 + 同义词列表）</p>
+   */
+  TermList?: Array<LabelTerm>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyConversation请求参数结构体
  */
 export interface ModifyConversationRequest {
@@ -1082,6 +1291,82 @@ export interface CreateChannelResponse {
 }
 
 /**
+ * TimerScheduleConfig
+ */
+export interface TimerScheduleConfig {
+  /**
+   * cron配置
+   */
+  Cron?: CronSchedule
+  /**
+   * 每日触发
+   */
+  Daily?: DailySchedule
+  /**
+   * 固定间隔
+   */
+  Interval?: IntervalSchedule
+  /**
+   * 仅手动
+   */
+  ManualOnly?: ManualOnlySchedule
+  /**
+   * 单次
+   */
+  Once?: OnceSchedule
+  /**
+   * 
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 |  |
+| 1 | 仅手动 |
+| 2 | 每天 |
+| 3 | 每周 |
+| 4 | 按间隔 |
+| 5 | 一次性 |
+| 6 | Cron |
+   */
+  ScheduleType?: number
+  /**
+   * 时区
+   */
+  Timezone?: string
+  /**
+   * 每周固定时间触发
+   */
+  Weekly?: WeeklySchedule
+}
+
+/**
+ * DeleteCategory返回参数结构体
+ */
+export interface DeleteCategoryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 检索结果负载
+ */
+export interface SearchResultPayload {
+  /**
+   * <p>图谱附加信息（JSON 字符串）</p>
+   */
+  GraphData?: string
+  /**
+   * <p>命中的图片 URL 列表</p>
+   */
+  ImageUrlList?: Array<string>
+  /**
+   * <p>表格附加信息（JSON 字符串）</p>
+   */
+  SheetInfo?: string
+}
+
+/**
  * DescribeUsageDetailList返回参数结构体
  */
 export interface DescribeUsageDetailListResponse {
@@ -1121,6 +1406,32 @@ export interface ModifyVariableResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeKBSummaryList请求参数结构体
+ */
+export interface DescribeKBSummaryListRequest {
+  /**
+   * <p>工作空间 ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>通用过滤</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>分页页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 10，最大 100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>关键词</p>
+   */
+  Query?: string
 }
 
 /**
@@ -1238,21 +1549,40 @@ export interface AgentProfile {
 }
 
 /**
- * 模型限制信息
+ * 检索高级配置
  */
-export interface ModelLimit {
+export interface SearchAdvancedConfig {
   /**
-   * 模型上下文长度展示文案（如 "128K"、"1000K"）
+   * <p>最终 rerank 配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ContextLengthDescription?: string
+  FinalRerankConfig?: FinalRerankConfig
   /**
-   * 模型对话框输入长度字符数限制
+   * <p>各知识库的检索配置</p>
    */
-  InputLengthLimit?: number
+  KbRetrievalList?: Array<KBRetrievalConfig>
   /**
-   * 模型提示词长度字符数限制
+   * <p>检索知识类型：1=文档和问答，2=拒答<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_DOC_QA</td><td>1</td><td>文档和问答</td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_REJECTED_QUESTION</td><td>2</td><td>拒答</td></tr></tbody></table></p>
    */
-  PromptLengthLimit?: number
+  KnowledgeType?: number
+  /**
+   * <p>最终返回结果数</p>
+   */
+  RecallCount?: number
+}
+
+/**
+ * 知识生效范围
+ */
+export interface KnowledgeScope {
+  /**
+   * <p>生效作用域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
+   */
+  EffectiveDomain?: number
+  /**
+   * <p>适用范围（标签条件）</p>
+   */
+  LabelRefList?: Array<LabelRef>
 }
 
 /**
@@ -1415,6 +1745,16 @@ export interface AppShareURLInfo {
 }
 
 /**
+ * ReleaseSkill返回参数结构体
+ */
+export interface ReleaseSkillResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 模型属性
  */
 export interface ModelProperty {
@@ -1429,6 +1769,21 @@ export interface ModelProperty {
 }
 
 /**
+ * 文档解析配置
+ */
+export interface DocParseConfig {
+  /**
+   * <p>内容过滤配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentFilter?: ContentFilter
+  /**
+   * <p>分割规则</p>
+   */
+  SplitRule?: string
+}
+
+/**
  * CreateRelease返回参数结构体
  */
 export interface CreateReleaseResponse {
@@ -1440,6 +1795,24 @@ export interface CreateReleaseResponse {
    * <p>release_id</p>
    */
   ReleaseId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeConflictQASummaryList返回参数结构体
+ */
+export interface DescribeConflictQASummaryListResponse {
+  /**
+   * <p>冲突问列表</p>
+   */
+  ConflictQaList?: Array<ConflictQASummary>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1520,29 +1893,17 @@ export interface ModelDetailInfo {
 }
 
 /**
- * CreateApp请求参数结构体
+ * ModifyVariable请求参数结构体
  */
-export interface CreateAppRequest {
+export interface ModifyVariableRequest {
   /**
-   * 空间ID
+   * app_id
    */
-  SpaceId: string
+  AppId: string
   /**
-   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   * 变量信息
    */
-  AppMode?: number
-  /**
-   * 应用头像
-   */
-  Avatar?: string
-  /**
-   * 应用描述
-   */
-  Description?: string
-  /**
-   * 应用名称
-   */
-  Name?: string
+  Variable?: Variable
 }
 
 /**
@@ -1628,6 +1989,20 @@ export interface CreateMsgRecordCategoryResponse {
 }
 
 /**
+ * CreateQAList请求参数结构体
+ */
+export interface CreateQAListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>批量创建（数量：1~20）</p>
+   */
+  QaList: Array<QACreateSpec>
+}
+
+/**
  * DeleteVariable请求参数结构体
  */
 export interface DeleteVariableRequest {
@@ -1646,13 +2021,45 @@ export interface DeleteVariableRequest {
 }
 
 /**
- * ReleaseSkill返回参数结构体
+ * CreateAppTrigger请求参数结构体
  */
-export interface ReleaseSkillResponse {
+export interface CreateAppTriggerRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>应用ID</p>
    */
-  RequestId?: string
+  AppId?: string
+  /**
+   * <p>应用触发器执行配置</p>
+   */
+  ExecuteConfig?: ExecuteConfig
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td><td>1</td><td>指令执行</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td><td>2</td><td>工作流执行</td></tr></tbody></table>
+   */
+  ExecuteType?: number
+  /**
+   * <p>第三方推送配置</p>
+   */
+  PushConfig?: TimerPushConfig
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_SCOPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_SCOPE_APP</td><td>1</td><td>B 端管理员</td></tr><tr><td>APP_TRIGGER_SCOPE_USER</td><td>2</td><td>C 端访客</td></tr></tbody></table>
+   */
+  Scope?: number
+  /**
+   * <p>触发器配置</p>
+   */
+  TriggerConfig?: TriggerConfig
+  /**
+   * <p>触发器名字</p>
+   */
+  TriggerName?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>定时触发</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook 触发</td></tr></tbody></table>
+   */
+  TriggerType?: number
+  /**
+   * <p>访客ID</p>
+   */
+  UserId?: string
 }
 
 /**
@@ -1730,6 +2137,44 @@ export interface AppTriggerInstance {
 }
 
 /**
+ * ModifyDocList请求参数结构体
+ */
+export interface ModifyDocListRequest {
+  /**
+   * <p>待修改的文档 ID 列表（数量：1~20）</p>
+   */
+  DocIdList: Array<string>
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>归属分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>生效作用域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
+   */
+  EffectiveDomain?: number
+  /**
+   * <p>过期策略（有效时间与超过有效时间后的行为）</p>
+   */
+  ExpirationPolicy?: ExpirationPolicy
+  /**
+   * <p>外部链接</p>
+   */
+  ExternalLink?: DocExternalLink
+  /**
+   * <p>标签列表</p>
+   */
+  LabelRefList?: LabelRefIdentityList
+  /**
+   * <p>开关配置</p>
+   */
+  Switch?: DocSwitch
+}
+
+/**
  * DeleteConversation请求参数结构体
  */
 export interface DeleteConversationRequest {
@@ -1757,6 +2202,72 @@ export interface DeleteConversationRequest {
    * <p>Type=CONVERSATION_TYPE_SHARE 时必填，分享码</p>
    */
   ShareCode?: string
+}
+
+/**
+ * ModifyConflictQA请求参数结构体
+ */
+export interface ModifyConflictQARequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>冲突组 ID（全局忽略时可不传）</p>
+   */
+  ConflictGroupId?: string
+  /**
+   * <p>是否全局忽略（忽略当前KB下所有待处理冲突问）</p>
+   */
+  IsIgnoreAll?: boolean
+  /**
+   * <p>决策涉及的 QA ID 列表（KEEP 与 DELETE 必填）</p>
+   */
+  QaIdList?: Array<string>
+  /**
+   * <p>冲突解决策略：1=保留，2=忽略，3=删除（全局忽略时可不传）<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>CONFLICT_RESOLUTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>CONFLICT_RESOLUTION_KEEP</td><td>1</td><td>保留</td></tr><tr><td>CONFLICT_RESOLUTION_IGNORE</td><td>2</td><td>忽略</td></tr><tr><td>CONFLICT_RESOLUTION_DELETE</td><td>3</td><td>删除</td></tr><tr><td>CONFLICT_RESOLUTION_MERGE</td><td>4</td><td>合并</td></tr><tr><td>CONFLICT_RESOLUTION_REPLACE</td><td>5</td><td>替换</td></tr><tr><td>CONFLICT_RESOLUTION_RENAME</td><td>6</td><td>重命名</td></tr></tbody></table></p>
+   */
+  Resolution?: number
+}
+
+/**
+ * DescribeAppTriggerRunLogList返回参数结构体
+ */
+export interface DescribeAppTriggerRunLogListResponse {
+  /**
+   * <p>日志列表</p>
+   */
+  RunLogList?: Array<AppTriggerRunLog>
+  /**
+   * <p>日志列表数量</p>
+   */
+  TotalCount?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeConflictQASummaryList请求参数结构体
+ */
+export interface DescribeConflictQASummaryListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>通用过滤（支持按 status 筛选 PENDING/RESOLVED）</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>分页页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 10，最大 100</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -1804,6 +2315,21 @@ export interface DescribeSkillSummaryListRequest {
    * 名称/展示名称模糊搜索
    */
   Query?: string
+}
+
+/**
+ * 文档链接
+ */
+export interface DocLink {
+  /**
+   * <p>COS 链接地址，可用作预览和下载</p>
+   */
+  CosUrl?: string
+  /**
+   * <p>外部链接</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExternalLink?: DocExternalLink
 }
 
 /**
@@ -1887,51 +2413,13 @@ export interface BackgroundImage {
 }
 
 /**
- * TimerScheduleConfig
+ * ModifyConflictQA返回参数结构体
  */
-export interface TimerScheduleConfig {
+export interface ModifyConflictQAResponse {
   /**
-   * cron配置
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Cron?: CronSchedule
-  /**
-   * 每日触发
-   */
-  Daily?: DailySchedule
-  /**
-   * 固定间隔
-   */
-  Interval?: IntervalSchedule
-  /**
-   * 仅手动
-   */
-  ManualOnly?: ManualOnlySchedule
-  /**
-   * 单次
-   */
-  Once?: OnceSchedule
-  /**
-   * 
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 |  |
-| 1 | 仅手动 |
-| 2 | 每天 |
-| 3 | 每周 |
-| 4 | 按间隔 |
-| 5 | 一次性 |
-| 6 | Cron |
-   */
-  ScheduleType?: number
-  /**
-   * 时区
-   */
-  Timezone?: string
-  /**
-   * 每周固定时间触发
-   */
-  Weekly?: WeeklySchedule
+  RequestId?: string
 }
 
 /**
@@ -1981,13 +2469,46 @@ export interface Model {
 }
 
 /**
- * ModifySkill返回参数结构体
+ * 标准词校验项
  */
-export interface ModifySkillResponse {
+export interface LabelTermCheckResult {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>校验结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  CheckResult?: CheckResult
+  /**
+   * <p>待校验的标准词</p>
+   */
+  Term?: string
+  /**
+   * <p>已存在时返回对应标准词 ID</p>
+   */
+  TermId?: string
+}
+
+/**
+ * 搜索资源状态信息
+ */
+export interface SearchResourceStatusInfo {
+  /**
+   * 搜索资源状态: AVAILABLE(1)=资源可用, EXHAUSTED(2)=资源已用尽。枚举值: 1:资源可用, 2:资源已用尽
+   */
+  ResourceStatus: number
+}
+
+/**
+ * CreateQAGenerationTask请求参数结构体
+ */
+export interface CreateQAGenerationTaskRequest {
+  /**
+   * <p>待生成 QA 的文档 ID 列表（数量：1~20）</p>
+   */
+  DocIdList: Array<string>
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
 }
 
 /**
@@ -2231,25 +2752,25 @@ export interface UnfavoritePluginResponse {
 }
 
 /**
- * ModifySpace请求参数结构体
+ * CreateKB请求参数结构体
  */
-export interface ModifySpaceRequest {
+export interface CreateKBRequest {
   /**
-   * 工作空间名称,长度最大30个字符
+   * <p>知识库类型（不可为 0，取值：1=默认知识库，2=共享知识库）<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KB_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KB_TYPE_DEFAULT</td><td>1</td><td>默认知识库</td></tr><tr><td>KB_TYPE_SHARED</td><td>2</td><td>共享知识库</td></tr></tbody></table></p>
    */
-  Name?: string
+  KbType: number
   /**
-   * 空间描述，长度最大150个字符
+   * <p>工作空间 ID</p>
    */
-  Description?: string
+  SpaceId: string
   /**
-   * 空间id
+   * <p>可写属性</p>
    */
-  SpaceId?: string
+  Spec: KBSpec
   /**
-   * 指定需要更新的字段，支持Name和Description
+   * <p>共享子类型：1=普通，2=公众号<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SHARED_KB_SUB_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SHARED_KB_SUB_TYPE_NORMAL</td><td>1</td><td>普通</td></tr><tr><td>SHARED_KB_SUB_TYPE_PUBLIC_ACCOUNT</td><td>2</td><td>公众号</td></tr></tbody></table></p>
    */
-  FieldMask?: FieldMask
+  SharedSubType?: number
 }
 
 /**
@@ -2332,6 +2853,28 @@ export interface AppShareWhitelistItem {
 }
 
 /**
+ * ModifyKB请求参数结构体
+ */
+export interface ModifyKBRequest {
+  /**
+   * <p>知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>可写属性（与 update_mask 配合使用）</p>
+   */
+  Spec: KBSpec
+  /**
+   * <p>字段掩码：指定要修改的字段（蛇形字段名），未列出的字段忽略</p>
+   */
+  UpdateMask: FieldMask
+  /**
+   * <p>扩展操作（用于承载无法归类到常规字段修改的特殊操作，例如触发超量恢复等；需在 update_mask 中同时传入 &#39;extend_fields&#39; 才会生效，取值参见 KBExtendedAction：1=触发恢复超量）</p>
+   */
+  ExtendFields?: KBModifyExtendFields
+}
+
+/**
  * CreateWebSocketToken请求参数结构体
  */
 export interface CreateWebSocketTokenRequest {
@@ -2392,13 +2935,68 @@ export interface DescribeChannelListRequest {
 }
 
 /**
- * DeleteSkill返回参数结构体
+ * DescribeQA请求参数结构体
  */
-export interface DeleteSkillResponse {
+export interface DescribeQARequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>所属知识库 ID</p>
    */
-  RequestId?: string
+  KbId: string
+  /**
+   * <p>QA ID</p>
+   */
+  QaId: string
+}
+
+/**
+ * 文档查询条件
+ */
+export interface DocQuery {
+  /**
+   * <p>查询关键词（名称模糊搜索）</p>
+   */
+  Query?: string
+  /**
+   * <p>查询范围（query 作用的字段）：1=文件名，2=标签或标签值；支持多选，缺省时无效</p>
+   */
+  QueryScopeList?: Array<number | bigint>
+}
+
+/**
+ * Skill 异常通知。
+ */
+export interface SkillNotice {
+  /**
+   * 通知级别
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | 占位 |
+| 1 | 成功，字符串面："success" |
+| 2 | 警告，字符串面："warning" |
+| 3 | 错误，字符串面："error" |
+   */
+  Level?: number
+  /**
+   * 文案（i18n 后字符串）
+   */
+  NoticeContent?: string
+  /**
+   * 触发本通知的 Skill 版本ID
+   */
+  TriggerVersionId?: string
+  /**
+   * 通知类型 
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | 占位 |
+| 1 | 发布失败 |
+| 2 | 共享审批被拒 |
+   */
+  Type?: number
 }
 
 /**
@@ -2428,6 +3026,20 @@ export interface DescribeAgentReleasePreviewListRequest {
 }
 
 /**
+ * 文档开关配置
+ */
+export interface DocSwitch {
+  /**
+   * <p>是否可下载</p>
+   */
+  DownloadEnabled?: boolean
+  /**
+   * <p>是否在参考来源中展示</p>
+   */
+  ReferEnabled?: boolean
+}
+
+/**
  * PauseAppTrigger请求参数结构体
  */
 export interface PauseAppTriggerRequest {
@@ -2450,6 +3062,54 @@ export interface PauseAppTriggerRequest {
 }
 
 /**
+ * 元数据值
+ */
+export interface MetaValue {
+  /**
+   * <p>元数据值名称（仅展示使用）</p>
+   */
+  Name?: string
+  /**
+   * <p>是否引用该类型下的全部值（true 时 ref_value_id 应为 0）</p>
+   */
+  RefAll?: boolean
+  /**
+   * <p>元数据引用的业务 ID（属性 ID、分类 ID 等）；ref_all=true 时该字段应为 0</p>
+   */
+  RefValueId?: string
+  /**
+   * <p>元数据使用场景：1=仅检索使用，2=检索和生成都使用<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>META_SCENE_UNKNOWN</td><td>0</td><td>未知</td></tr><tr><td>META_SCENE_SEARCH_ONLY</td><td>1</td><td>仅检索使用</td></tr><tr><td>META_SCENE_ALL</td><td>2</td><td>检索和生成都使用</td></tr></tbody></table></p>
+   */
+  Scene?: number
+  /**
+   * <p>元数据值类型：1=属性标签，2=文档分类，3=问答分类<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>META_VALUE_TYPE_UNKNOWN</td><td>0</td><td>未知</td></tr><tr><td>META_VALUE_TYPE_TAG</td><td>1</td><td>属性标签</td></tr><tr><td>META_VALUE_TYPE_DOC_CATEGORY</td><td>2</td><td>文档分类</td></tr><tr><td>META_VALUE_TYPE_QA_CATEGORY</td><td>3</td><td>问答分类</td></tr></tbody></table></p>
+   */
+  ValueType?: number
+}
+
+/**
+ * 标签标准词修改项（增量更新）
+ */
+export interface LabelTermModifyItem {
+  /**
+   * <p>操作类型（不可为 0，取值：1=新增，2=修改，3=删除）<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODIFY_ACTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>MODIFY_ACTION_CREATE</td><td>1</td><td>新增</td></tr><tr><td>MODIFY_ACTION_UPDATE</td><td>2</td><td>修改</td></tr><tr><td>MODIFY_ACTION_DELETE</td><td>3</td><td>删除</td></tr></tbody></table></p>
+   */
+  ModifyAction: number
+  /**
+   * <p>同义词列表（CREATE 与 UPDATE 时传完整同义词集合，覆盖式更新）</p>
+   */
+  SynonymList?: Array<string>
+  /**
+   * <p>标准词（CREATE 与 UPDATE 必填，DELETE 可留空）</p>
+   */
+  Term?: string
+  /**
+   * <p>标准词 ID（UPDATE 与 DELETE 必填，CREATE 留空由后台生成）</p>
+   */
+  TermId?: string
+}
+
+/**
  * CopyAgentFromApp请求参数结构体
  */
 export interface CopyAgentFromAppRequest {
@@ -2465,6 +3125,49 @@ export interface CopyAgentFromAppRequest {
    * <p>Agent 类型，区分 B 端配置态 Agent 与 C 端用户态 Agent</p><p>枚举值：</p><ul><li>0：  配置端Agent </li><li>1：  用户态 Agent</li></ul>
    */
   Kind?: number
+}
+
+/**
+ * QA 创建规格（一次性输入的非持久化数据）
+ */
+export interface QACreateSpec {
+  /**
+   * <p>问题</p>
+   */
+  Question: string
+  /**
+   * <p>答案</p>
+   */
+  Answer?: string
+  /**
+   * <p>分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>关联文档 ID</p>
+   */
+  DocId?: string
+  /**
+   * <p>知识生效作用域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
+   */
+  EffectiveDomain?: number
+  /**
+   * <p>过期策略（有效时间与超过有效时间后的行为）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpirationPolicy?: ExpirationPolicy
+  /**
+   * <p>适用范围（标签条件）</p>
+   */
+  LabelRefList?: Array<LabelRefIdentity>
+  /**
+   * <p>问题描述</p>
+   */
+  QuestionDescription?: string
+  /**
+   * <p>相似问列表</p>
+   */
+  SimilarQuestionList?: Array<string>
 }
 
 /**
@@ -2513,6 +3216,21 @@ export interface ModifyAppResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 过期策略（有效时间与超过有效时间后的行为）
+ */
+export interface ExpirationPolicy {
+  /**
+   * <p>有效时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectivePeriod?: EffectivePeriod
+  /**
+   * <p>超过有效时间后的行为：1=NOT_RETRIEVABLE 不可被检索，2=RETRIEVABLE 仍可被检索；永久有效时无意义<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>EXPIRE_BEHAVIOR_UNKNOWN</td><td>0</td><td>未指定（服务端按默认处理）</td></tr><tr><td>EXPIRE_BEHAVIOR_NOT_RETRIEVABLE</td><td>1</td><td>不可被检索（到期下架）</td></tr><tr><td>EXPIRE_BEHAVIOR_RETRIEVABLE</td><td>2</td><td>仍可被检索（到期不下架，仅标记时效范围）</td></tr></tbody></table></p>
+   */
+  ExpireBehavior?: number
 }
 
 /**
@@ -2641,6 +3359,20 @@ export interface DescribeChannelListResponse {
 }
 
 /**
+ * QA 分片高亮信息
+ */
+export interface QASegmentHighlight {
+  /**
+   * <p>高亮结束位置</p>
+   */
+  EndPos?: string
+  /**
+   * <p>高亮起始位置</p>
+   */
+  StartPos?: string
+}
+
+/**
  * DescribeSkillCategoryList返回参数结构体
  */
 export interface DescribeSkillCategoryListResponse {
@@ -2701,17 +3433,13 @@ export interface DescribeConsumptionDetailListResponse {
 }
 
 /**
- * CreatePlugin返回参数结构体
+ * 冲突问摘要信息
  */
-export interface CreatePluginResponse {
+export interface ConflictQASummary {
   /**
-   * <p>插件id</p>
+   * <p>冲突组 ID</p>
    */
-  PluginId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ConflictGroupId?: string
 }
 
 /**
@@ -2722,6 +3450,54 @@ export interface ModifyChannelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteCategory请求参数结构体
+ */
+export interface DeleteCategoryRequest {
+  /**
+   * <p>待删除的分类 ID</p>
+   */
+  CategoryId: string
+  /**
+   * <p>分类类型（不可为 0，取值：1=文档分类，2=问答分类）<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>CATEGORY_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>CATEGORY_TYPE_DOC</td><td>1</td><td>文档分类</td></tr><tr><td>CATEGORY_TYPE_QA</td><td>2</td><td>问答分类</td></tr></tbody></table></p>
+   */
+  CategoryType: number
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+}
+
+/**
+ * 应用操作信息
+ */
+export interface AppOperation {
+  /**
+   * 创建人
+   */
+  Creator: string
+  /**
+   * 创建人UIN
+   */
+  CreatorUin: string
+  /**
+   * 创建人账号(私有化场景使用)
+   */
+  CreatorUserAccount: string
+  /**
+   * 修改时间 (Unix时间戳,秒级)
+   */
+  UpdateTime: string
+  /**
+   * 最后修改人
+   */
+  Updater: string
+  /**
+   * 修改人UIN
+   */
+  UpdaterUin: string
 }
 
 /**
@@ -2750,6 +3526,20 @@ export interface DescribeSystemVariableListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用户访问配置
+ */
+export interface UserAccessConfig {
+  /**
+   * <p>客户自定义知识 ID</p>
+   */
+  CustomerKnowledgeId?: string
+  /**
+   * <p>文档是否公开</p>
+   */
+  IsPublic?: boolean
 }
 
 /**
@@ -2797,6 +3587,52 @@ export interface AgentPlugin {
 }
 
 /**
+ * QA 相似问修改项
+ */
+export interface SimilarQuestionModifySpec {
+  /**
+   * <p>相似问内容（CREATE 与 UPDATE 必填）</p>
+   */
+  Content?: string
+  /**
+   * <p>操作类型：1=新增，2=修改，3=删除<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODIFY_ACTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>MODIFY_ACTION_CREATE</td><td>1</td><td>新增</td></tr><tr><td>MODIFY_ACTION_UPDATE</td><td>2</td><td>修改</td></tr><tr><td>MODIFY_ACTION_DELETE</td><td>3</td><td>删除</td></tr></tbody></table></p>
+   */
+  ModifyAction?: number
+  /**
+   * <p>相似问 ID（UPDATE 与 DELETE 必填）</p>
+   */
+  SimilarQuestionId?: string
+}
+
+/**
+ * 检索计费信息
+ */
+export interface SearchBilling {
+  /**
+   * <p>计费标签列表</p>
+   */
+  BillingTagList?: Array<KVPair>
+  /**
+   * <p>计费子业务类型</p>
+   */
+  FinanceSubBusinessType?: string
+}
+
+/**
+ * DeleteQAList返回参数结构体
+ */
+export interface DeleteQAListResponse {
+  /**
+   * <p>批量删除结果</p>
+   */
+  ResultList?: Array<OperationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 会话重置信息
  */
 export interface ConversationResetInfo {
@@ -2811,13 +3647,47 @@ export interface ConversationResetInfo {
 }
 
 /**
- * ModifyConversation返回参数结构体
+ * QA 来源与关联文档信息
  */
-export interface ModifyConversationResponse {
+export interface QASourceInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>关联文档的生效作用域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
    */
-  RequestId?: string
+  DocEffectiveDomain?: number
+  /**
+   * <p>关联文档 ID</p>
+   */
+  DocId?: string
+  /**
+   * <p>关联文档名称</p>
+   */
+  FileName?: string
+  /**
+   * <p>关联文档类型</p>
+   */
+  FileType?: string
+  /**
+   * <p>来源描述</p>
+   */
+  SourceDesc?: string
+  /**
+   * <p>来源类型：1=文档生成，2=批量导入，3=手动录入<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>QA_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>QA_SOURCE_TYPE_DOC</td><td>1</td><td>文档生成</td></tr><tr><td>QA_SOURCE_TYPE_BATCH_IMPORT</td><td>2</td><td>批量导入</td></tr><tr><td>QA_SOURCE_TYPE_MANUAL</td><td>3</td><td>手动录入</td></tr></tbody></table></p>
+   */
+  SourceType?: number
+}
+
+/**
+ * 通用校验结果
+ */
+export interface CheckResult {
+  /**
+   * <p>是否通过校验</p>
+   */
+  Passed?: boolean
+  /**
+   * <p>失败原因（passed=false 时填充）</p>
+   */
+  Reason?: string
 }
 
 /**
@@ -2832,6 +3702,20 @@ export interface ConversationQuoteInfo {
    * <p>参考来源位置</p>
    */
   Position: number
+}
+
+/**
+ * DeleteLabelList请求参数结构体
+ */
+export interface DeleteLabelListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>待删除标签 ID 列表（数量：1~20）</p>
+   */
+  LabelIdList: Array<string>
 }
 
 /**
@@ -2967,31 +3851,51 @@ export interface App {
 }
 
 /**
- * CronSchedule
+ * AppTriggerParamBindingValue
  */
-export interface CronSchedule {
+export interface AppTriggerParamBindingValue {
   /**
-   * cron表达式
+   * <p>参数值</p>
    */
-  Expression?: string
+  ParamValue?: string
+  /**
+   * <p>应用变量名</p>
+   */
+  VariableName?: string
 }
 
 /**
- * DescribeAppTriggerRunLogList返回参数结构体
+ * 文档元信息
  */
-export interface DescribeAppTriggerRunLogListResponse {
+export interface DocMetadata {
   /**
-   * <p>日志列表</p>
+   * <p>文档字符数</p>
    */
-  RunLogList?: Array<AppTriggerRunLog>
+  DocCharCount?: string
   /**
-   * <p>日志列表数量</p>
+   * <p>文件名</p>
    */
-  TotalCount?: string
+  FileName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>文件大小（字节）</p>
    */
-  RequestId?: string
+  FileSize?: string
+  /**
+   * <p>文件类型/扩展名</p>
+   */
+  FileType?: string
+  /**
+   * <p>元数据引用字段名列表（用于显示文档哪些分类和属性被设置为元数据）</p>
+   */
+  RefFieldNameList?: Array<string>
+  /**
+   * <p>来源描述</p>
+   */
+  SourceDesc?: string
+  /**
+   * <p>文档来源类型：1=本地上传，2=网页链接，3=COS 对接，4=外部导入<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DOC_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>DOC_SOURCE_TYPE_LOCAL</td><td>1</td><td>本地上传</td></tr><tr><td>DOC_SOURCE_TYPE_URL</td><td>2</td><td>网页链接</td></tr><tr><td>DOC_SOURCE_TYPE_COS</td><td>3</td><td>COS 对接</td></tr><tr><td>DOC_SOURCE_TYPE_IMPORT</td><td>4</td><td>外部导入</td></tr></tbody></table></p>
+   */
+  SourceType?: number
 }
 
 /**
@@ -3096,40 +4000,21 @@ export interface DescribeLatestReleaseResponse {
 }
 
 /**
- * Skill 异常通知。
+ * 检索请求上下文信息
  */
-export interface SkillNotice {
+export interface SearchContext {
   /**
-   * 通知级别
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 占位 |
-| 1 | 成功，字符串面："success" |
-| 2 | 警告，字符串面："warning" |
-| 3 | 错误，字符串面："error" |
+   * <p>请求来源<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>CALL_SOURCE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>CALL_SOURCE_RAG</td><td>1</td><td>标准模式</td></tr><tr><td>CALL_SOURCE_WORKFLOW</td><td>2</td><td>工作流</td></tr><tr><td>CALL_SOURCE_PLUGIN</td><td>3</td><td>插件</td></tr><tr><td>CALL_SOURCE_OPENCLAW</td><td>4</td><td>openclaw</td></tr><tr><td>CALL_SOURCE_RECALL_TEST</td><td>5</td><td>召回测试</td></tr><tr><td>CALL_SOURCE_RECALL_TEST_DIFF</td><td>6</td><td>召回测试在对比的场景，同样需要触发检索接口。区别这种case前端不需要更新最新配置。因为对比1，2，3 可能最后保存的是2</td></tr></tbody></table></p>
    */
-  Level?: number
+  CallSource?: number
   /**
-   * 文案（i18n 后字符串）
+   * <p>adp域：1=开发域，2=生产域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>ADP_DOMAIN_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>ADP_DOMAIN_DEV</td><td>1</td><td>开发域</td></tr><tr><td>ADP_DOMAIN_PROD</td><td>2</td><td>生产域</td></tr></tbody></table></p>
    */
-  NoticeContent?: string
+  Domain?: number
   /**
-   * 触发本通知的 Skill 版本ID
+   * <p>访客 ID</p>
    */
-  TriggerVersionId?: string
-  /**
-   * 通知类型 
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 占位 |
-| 1 | 发布失败 |
-| 2 | 共享审批被拒 |
-   */
-  Type?: number
+  VisitorId?: string
 }
 
 /**
@@ -3156,6 +4041,20 @@ export interface ResponseParam {
    * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
    */
   Type?: number
+}
+
+/**
+ * ModifyQAList返回参数结构体
+ */
+export interface ModifyQAListResponse {
+  /**
+   * <p>批量修改结果</p>
+   */
+  ResultList?: Array<OperationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3189,6 +4088,34 @@ export interface SingleWorkflowConfig {
 }
 
 /**
+ * CreatePlugin返回参数结构体
+ */
+export interface CreatePluginResponse {
+  /**
+   * <p>插件id</p>
+   */
+  PluginId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSimilarQuestion返回参数结构体
+ */
+export interface CreateSimilarQuestionResponse {
+  /**
+   * <p>生成的相似问列表</p>
+   */
+  QuestionList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeChannel返回参数结构体
  */
 export interface DescribeChannelResponse {
@@ -3200,6 +4127,53 @@ export interface DescribeChannelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QA 可修改字段集合（配合 update_mask 使用）
+ */
+export interface QAModifyFields {
+  /**
+   * <p>答案</p>
+   */
+  Answer?: string
+  /**
+   * <p>分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>关联文档 ID</p>
+   */
+  DocId?: string
+  /**
+   * <p>知识生效作用域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
+   */
+  EffectiveDomain?: number
+  /**
+   * <p>过期策略（有效时间与超过有效时间后的行为）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpirationPolicy?: ExpirationPolicy
+  /**
+   * <p>是否采纳（校验通过）</p>
+   */
+  IsAccepted?: boolean
+  /**
+   * <p>适用范围（标签条件）</p>
+   */
+  LabelRefList?: Array<LabelRefIdentity>
+  /**
+   * <p>问题</p>
+   */
+  Question?: string
+  /**
+   * <p>问题描述</p>
+   */
+  QuestionDescription?: string
+  /**
+   * <p>相似问修改列表</p>
+   */
+  SimilarQuestionList?: Array<SimilarQuestionModifySpec>
 }
 
 /**
@@ -3287,6 +4261,50 @@ export interface PluginSummary {
 }
 
 /**
+ * ModifyDocList返回参数结构体
+ */
+export interface ModifyDocListResponse {
+  /**
+   * <p>批量修改结果</p>
+   */
+  ResultList?: Array<OperationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeQASummaryList请求参数结构体
+ */
+export interface DescribeQASummaryListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 Values 为 OR 关系）：Status-QA状态,枚举值,精确匹配; CategoryId-分类ID,精确匹配; SourceType-QA来源类型,枚举值,精确匹配; EffectiveDomain-生效作用域,精确匹配; DocId-关联文档ID,精确匹配;  CreateTime-创建时间,Unix秒,BETWEEN 传 [起始秒,结束秒]; UpdateTime-更新时间,Unix秒,BETWEEN 传 [起始秒,结束秒]</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>分页页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 10，最大 100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>查询条件（关键词 + 查询范围）</p>
+   */
+  Query?: QAQuery
+  /**
+   * <p>开关配置</p>
+   */
+  SummaryListSwitch?: SummaryListSwitch
+}
+
+/**
  * CreateWorkspaceCredential返回参数结构体
  */
 export interface CreateWorkspaceCredentialResponse {
@@ -3367,6 +4385,20 @@ export interface ModifyPluginRequest {
 }
 
 /**
+ * 重复文件处理规则
+ */
+export interface DeDuplicateStrategy {
+  /**
+   * <p>校验方式：1=按文档内容判断是否相同<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DUPLICATE_FILE_CHECK_TYPE_UNKNOWN</td><td>0</td><td>未知</td></tr><tr><td>DUPLICATE_FILE_CHECK_TYPE_COS_HASH</td><td>1</td><td>按文档内容（cos_hash）判断是否相同</td></tr></tbody></table></p>
+   */
+  CheckType?: number
+  /**
+   * <p>处理方式：1=返回报错，2=跳过并返回重复的文档 ID<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DUPLICATE_FILE_HANDLE_TYPE_UNKNOWN</td><td>0</td><td>未知</td></tr><tr><td>DUPLICATE_FILE_HANDLE_TYPE_RETURN_ERR</td><td>1</td><td>返回报错</td></tr><tr><td>DUPLICATE_FILE_HANDLE_TYPE_SKIP</td><td>2</td><td>跳过，返回重复的文档 ID</td></tr></tbody></table></p>
+   */
+  HandleType?: number
+}
+
+/**
  * DescribeAccountList返回参数结构体
  */
 export interface DescribeAccountListResponse {
@@ -3392,6 +4424,80 @@ export interface DeleteChannelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MCP插件参数信息
+ */
+export interface PluginParam {
+  /**
+   * 参数配置是否隐藏不可见
+   */
+  IsGlobalHidden?: boolean
+  /**
+   * 参数是否必填
+   */
+  IsRequired?: boolean
+  /**
+   * 参数名称
+   */
+  Name?: string
+  /**
+   * 参数值
+   */
+  Value?: string
+}
+
+/**
+ * 文档可修改字段集合（配合 update_mask 使用）
+ */
+export interface DocModifyFields {
+  /**
+   * <p>归属分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>生效作用域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
+   */
+  EffectiveDomain?: number
+  /**
+   * <p>过期策略（有效时间与超过有效时间后的行为）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpirationPolicy?: ExpirationPolicy
+  /**
+   * <p>外部链接</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExternalLink?: DocExternalLink
+  /**
+   * <p>标签列表</p>
+   */
+  LabelRefList?: Array<LabelRefIdentity>
+  /**
+   * <p>文档名</p>
+   */
+  Name?: string
+  /**
+   * <p>解析配置（分割规则、内容过滤等）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParseConfig?: DocParseConfig
+  /**
+   * <p>开关配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: DocSwitch
+  /**
+   * <p>更新周期</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatePeriod?: DocUpdatePeriod
+  /**
+   * <p>用户访问配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAccessConfig?: UserAccessConfig
 }
 
 /**
@@ -3603,6 +4709,24 @@ export interface ModelBasic {
 }
 
 /**
+ * DescribeKBSummaryList返回参数结构体
+ */
+export interface DescribeKBSummaryListResponse {
+  /**
+   * <p>知识库列表</p>
+   */
+  KbList?: Array<KBSummary>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyApp请求参数结构体
  */
 export interface ModifyAppRequest {
@@ -3641,41 +4765,27 @@ export interface ModifyAppRequest {
 }
 
 /**
- * ModifySkill请求参数结构体
+ * DeleteQAList请求参数结构体
  */
-export interface ModifySkillRequest {
+export interface DeleteQAListRequest {
   /**
-   * <p>SkillId</p>
+   * <p>所属知识库 ID</p>
    */
-  SkillId: string
+  KbId: string
   /**
-   * <p>空间ID</p>
+   * <p>待删除的 QA ID 列表（数量：1~20）</p>
    */
-  SpaceId: string
+  QaIdList: Array<string>
+}
+
+/**
+ * 对应 MCP 协议工具 _meta，承载 MCP Apps 工具的 UI 元信息（本期仅消费 resourceUri）
+ */
+export interface MCPToolMeta {
   /**
-   * <p>skill描述</p>
+   * <p>工具的 UI 扩展元信息，对应 MCP 协议的 _meta.ui，声明工具关联的交互式界面资源（ResourceUri）及调用方可见性（Visibility）。仅当工具支持 MCP Apps 或声明了可见性时返回；纯文本工具该字段为空。详见 MCPToolUIMeta 结构定义。</p>
    */
-  DisplayDescription?: string
-  /**
-   * <p>skill名称</p>
-   */
-  DisplayName?: string
-  /**
-   * <p>skill包文件地址（zip）；传入则触发新版本生成，需与SkillVersion、UpdateDescription配套传入</p>
-   */
-  FileUrl?: string
-  /**
-   * <p>图标地址</p>
-   */
-  IconUrl?: string
-  /**
-   * <p>skill版本号（与FileUrl配套传入）</p>
-   */
-  SkillVersion?: string
-  /**
-   * <p>版本变更说明（与FileUrl配套传入）</p>
-   */
-  UpdateDescription?: string
+  Ui?: MCPToolUIMeta
 }
 
 /**
@@ -3690,6 +4800,62 @@ export interface CreateSpaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 文档导入规格（一次性输入的非持久化数据）
+ */
+export interface DocImportSpec {
+  /**
+   * <p>文件 ID（通过文件管理服务获取的文件标识，不可为空）</p>
+   */
+  FileId: string
+  /**
+   * <p>归属分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>重复文件处理规则列表</p>
+   */
+  DeDuplicateStrategyList?: Array<DeDuplicateStrategy>
+  /**
+   * <p>知识生效作用域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
+   */
+  EffectiveDomain?: number
+  /**
+   * <p>过期策略（有效时间与超过有效时间后的行为）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpirationPolicy?: ExpirationPolicy
+  /**
+   * <p>外部链接</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExternalLink?: DocExternalLink
+  /**
+   * <p>适用范围（标签条件）</p>
+   */
+  LabelRefList?: Array<LabelRefIdentity>
+  /**
+   * <p>解析配置（分割规则、内容过滤等）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParseConfig?: DocParseConfig
+  /**
+   * <p>开关配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: DocSwitch
+  /**
+   * <p>更新周期</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatePeriod?: DocUpdatePeriod
+  /**
+   * <p>用户访问配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAccessConfig?: UserAccessConfig
 }
 
 /**
@@ -3729,6 +4895,24 @@ export interface ConsumptionClassification {
 }
 
 /**
+ * ExportQA请求参数结构体
+ */
+export interface ExportQARequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 Values 为 OR 关系）：Status-QA状态,枚举值,精确匹配; CategoryId-分类ID,精确匹配; SourceType-QA来源类型,枚举值,精确匹配; EffectiveDomain-生效作用域,精确匹配; DocId-关联文档ID,精确匹配; CreateTime-创建时间,Unix秒,BETWEEN 传 [起始秒,结束秒]; UpdateTime-更新时间,Unix秒,BETWEEN 传 [起始秒,结束秒]; QaId-QA ID列表,精确匹配,支持多值</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>查询条件（关键词 + 查询范围），与 DescribeQASummaryList 保持一致</p>
+   */
+  Query?: QAQuery
+}
+
+/**
  * DescribeSystemVariableList请求参数结构体
  */
 export interface DescribeSystemVariableListRequest {
@@ -3753,6 +4937,51 @@ export interface DescribeReleaseSummaryResponse {
 }
 
 /**
+ * QA 摘要信息
+ */
+export interface QASummary {
+  /**
+   * <p>所属分类路径（包含分类 ID、从根节点开始的分类 ID 路径和分类名称路径）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CategoryPath?: CategoryPath
+  /**
+   * <p>知识生效范围</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeScope?: KnowledgeScope
+  /**
+   * <p>生命周期信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Lifecycle?: QALifecycle
+  /**
+   * <p>元信息（问题/答案/大小统计）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadata?: QAMetadata
+  /**
+   * <p>操作者信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorInfo?: QAOperator
+  /**
+   * <p>QA ID</p>
+   */
+  QaId?: string
+  /**
+   * <p>相似问统计</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SimilarQuestion?: SimilarQuestionStat
+  /**
+   * <p>来源信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceInfo?: QASourceInfo
+}
+
+/**
  * MCPToolConfig
  */
 export interface MCPToolConfig {
@@ -3773,6 +5002,45 @@ export interface MCPToolConfig {
    * <p>是否支持交互界面（MCP Apps），插件级标签  默认值：false</p>
    */
   SupportsApps?: boolean
+}
+
+/**
+ * DescribeKB返回参数结构体
+ */
+export interface DescribeKBResponse {
+  /**
+   * <p>关联的应用 ID 列表</p>
+   */
+  AppIdList?: Array<string>
+  /**
+   * <p>容量信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CapacityInfo?: KBCapacity
+  /**
+   * <p>ES 配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsConfig?: ESConfig
+  /**
+   * <p>模型配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelConfig?: KBModelConfig
+  /**
+   * <p>所有者信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: Operator
+  /**
+   * <p>知识库摘要信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Summary?: KBSummary
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3829,6 +5097,36 @@ export interface SkillSummary {
 }
 
 /**
+ * DescribeLabel请求参数结构体
+ */
+export interface DescribeLabelRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>标签 ID</p>
+   */
+  LabelId: string
+  /**
+   * <p>通用过滤</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>滚动加载游标的标准词 ID（首次请求传 0，后续传上一页最后一条的 TermId）</p>
+   */
+  LastTermId?: string
+  /**
+   * <p>每次加载数量，默认 10，最大 100</p>
+   */
+  Limit?: number
+  /**
+   * <p>关键词搜索</p>
+   */
+  Query?: string
+}
+
+/**
  * 企微机器人WebSocket接入配置
  */
 export interface WecomRobotWebsocketAccess {
@@ -3865,9 +5163,63 @@ export interface AgentCollaborationConfig {
 }
 
 /**
- * ModifyAppTrigger返回参数结构体
+ * MsgRecordCategory
  */
-export interface ModifyAppTriggerResponse {
+export interface MsgRecordCategory {
+  /**
+   * <p>分类的业务 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>子分类列表，树形嵌套</p>
+   */
+  Children?: Array<MsgRecordCategory>
+  /**
+   * <p>分类名称</p>
+   */
+  Name?: string
+  /**
+   * <p>当前用户对该分类的操作权限</p>
+   */
+  Permission?: CategoryPermission
+  /**
+   * <p>该分类下消息记录的数量</p>
+   */
+  TotalCount?: string
+}
+
+/**
+ * 摘要列表查询通用开关配置
+ */
+export interface SummaryListSwitch {
+  /**
+   * <p>是否显示元数据</p>
+   */
+  ShowMetadataEnabled?: boolean
+}
+
+/**
+ * CheckLabel请求参数结构体
+ */
+export interface CheckLabelRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>待校验的标准词列表（数量：1~100）</p>
+   */
+  TermList: Array<string>
+  /**
+   * <p>标签 ID（在指定标签下校验标准词唯一性）</p>
+   */
+  LabelId?: string
+}
+
+/**
+ * ModifySkill返回参数结构体
+ */
+export interface ModifySkillResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4023,6 +5375,72 @@ export interface FavoritePluginRequest {
    * <p>当前空间id</p>
    */
   SpaceId: string
+}
+
+/**
+ * 知识片段基础信息
+ */
+export interface KnowledgeSnippetProfile {
+  /**
+   * <p>内容</p>
+   */
+  Content?: string
+  /**
+   * <p>关联文档 ID</p>
+   */
+  DocId?: string
+  /**
+   * <p>文档名</p>
+   */
+  DocName?: string
+  /**
+   * <p>知识库 ID</p>
+   */
+  KbId?: string
+  /**
+   * <p>知识 ID</p>
+   */
+  KnowledgeId?: string
+  /**
+   * <p>问题</p>
+   */
+  Question?: string
+  /**
+   * <p>文档标题</p>
+   */
+  Title?: string
+}
+
+/**
+ * 内容过滤配置（图片名称正则/最小宽高），缺省时不启用过滤
+ */
+export interface ContentFilter {
+  /**
+   * <p>图片最小高度（像素），小于则过滤；&lt;=0 表示不启用</p>
+   */
+  ImageMinHeight?: number
+  /**
+   * <p>图片最小宽度（像素），小于则过滤；&lt;=0 表示不启用</p>
+   */
+  ImageMinWidth?: number
+  /**
+   * <p>图片名称过滤规则（用分号 &#39;;&#39; 分隔的多条正则，如 &#39;icon;notice;warning;info.*&#39;）</p>
+   */
+  ImageNamePatterns?: string
+}
+
+/**
+ * ImportDocList返回参数结构体
+ */
+export interface ImportDocListResponse {
+  /**
+   * <p>批量导入结果</p>
+   */
+  ResultList?: Array<OperationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4322,6 +5740,20 @@ export interface DescribeAgentSummaryListResponse {
 }
 
 /**
+ * DeleteKB请求参数结构体
+ */
+export interface DeleteKBRequest {
+  /**
+   * <p>知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>工作空间 ID</p>
+   */
+  SpaceId?: string
+}
+
+/**
  * SkillVersion Skill 版本信息。
  */
 export interface SkillVersion {
@@ -4369,13 +5801,24 @@ export interface SkillVersion {
 }
 
 /**
- * ModifyAgent返回参数结构体
+ * 模式配置 - 包含不同模式的独有配置
  */
-export interface ModifyAgentResponse {
+export interface AppModeConfig {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 多智能体配置(Agent模式)
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  MultiAgentConfig: MultiAgentConfig
+  /**
+   * 单工作流配置(单工作流模式)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SingleWorkflowConfig: SingleWorkflowConfig
+  /**
+   * ClawAgent配置(ClawAgent模式)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClawAgentConfig?: ClawAgentConfig
 }
 
 /**
@@ -4409,6 +5852,46 @@ export interface DescribeMsgRecordListResponse {
 }
 
 /**
+ * Tool
+ */
+export interface Tool {
+  /**
+   * <p>工具计费信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Billing?: ToolBilling
+  /**
+   * <p>工具调用次数</p><p>单位：次数</p>
+   */
+  CallCount?: number
+  /**
+   * <p>工具描述信息</p>
+   */
+  Description?: string
+  /**
+   * <p>工具名称</p>
+   */
+  Name?: string
+  /**
+   * <p>插件ID</p>
+   */
+  PluginId?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>TOOL_ACCESS_MODE_UNKNOWN</td><td>0</td><td>未指定</td></tr><tr><td>TOOL_ACCESS_MODE_READ_ONLY</td><td>1</td><td>只读</td></tr><tr><td>TOOL_ACCESS_MODE_WRITE_DELETE</td><td>2</td><td>写/删除</td></tr></tbody></table>
+   */
+  ToolAccessMode?: number
+  /**
+   * <p>工具配置信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToolConfig?: ToolConfig
+  /**
+   * <p>工具ID</p>
+   */
+  ToolId?: string
+}
+
+/**
  * 模型资源用量聚合明细（MODEL 域专属）
  */
 export interface ModelUsageSummary {
@@ -4435,6 +5918,37 @@ export interface ModelUsageSummary {
 }
 
 /**
+ * DescribeQA返回参数结构体
+ */
+export interface DescribeQAResponse {
+  /**
+   * <p>分片高亮信息</p>
+   */
+  HighlightList?: Array<QASegmentHighlight>
+  /**
+   * <p>分片内容</p>
+   */
+  PageContent?: string
+  /**
+   * <p>问题描述</p>
+   */
+  QuestionDescription?: string
+  /**
+   * <p>相似问列表</p>
+   */
+  SimilarQuestionList?: Array<SimilarQuestion>
+  /**
+   * <p>基础信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Summary?: QASummary
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVariableList返回参数结构体
  */
 export interface DescribeVariableListResponse {
@@ -4453,6 +5967,81 @@ export interface DescribeVariableListResponse {
 }
 
 /**
+ * 标签引用（出参用）
+ */
+export interface LabelRef {
+  /**
+   * <p>标签 ID</p>
+   */
+  LabelId?: string
+  /**
+   * <p>标签名称</p>
+   */
+  LabelName?: string
+  /**
+   * <p>标签标准词 ID 列表</p>
+   */
+  LabelTermIdList?: Array<string>
+  /**
+   * <p>标签标准词列表</p>
+   */
+  LabelTermList?: Array<string>
+}
+
+/**
+ * ModifyQA请求参数结构体
+ */
+export interface ModifyQARequest {
+  /**
+   * <p>修改字段内容（与 update_mask 配合使用）</p>
+   */
+  Fields: QAModifyFields
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>QA ID</p>
+   */
+  QaId: string
+  /**
+   * <p>字段掩码：指定要修改的字段（支持的 Paths：Question, Answer, CategoryId, DocId, LabelRefList, QuestionDescription, ExpirationPolicy, SimilarQuestionList, EffectiveDomain, IsAccepted）</p>
+   */
+  UpdateMask: FieldMask
+}
+
+/**
+ * 标签摘要
+ */
+export interface LabelSummary {
+  /**
+   * <p>标签 ID</p>
+   */
+  LabelId?: string
+  /**
+   * <p>元数据配置（该标签被设置为元数据时的配置信息）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaValue?: MetaValue
+  /**
+   * <p>标签名称</p>
+   */
+  Name?: string
+  /**
+   * <p>引用该标签的资源数</p>
+   */
+  RefCount?: number
+  /**
+   * <p>标签值（标准词 + 同义词列表）</p>
+   */
+  TermList?: Array<LabelTerm>
+  /**
+   * <p>标签值总数</p>
+   */
+  TermTotalCount?: number
+}
+
+/**
  * DescribeReleaseList请求参数结构体
  */
 export interface DescribeReleaseListRequest {
@@ -4468,6 +6057,16 @@ export interface DescribeReleaseListRequest {
    * 每页数量(最大值:100)
    */
   PageSize?: number
+}
+
+/**
+ * ModifySpace返回参数结构体
+ */
+export interface ModifySpaceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4555,6 +6154,20 @@ export interface MsgRecord {
 }
 
 /**
+ * 标签可修改字段集合（配合 update_mask 使用）
+ */
+export interface LabelModifyFields {
+  /**
+   * <p>标签名称</p>
+   */
+  Name?: string
+  /**
+   * <p>标准词增量修改列表（增/改/删）</p>
+   */
+  TermModifyList?: Array<LabelTermModifyItem>
+}
+
+/**
  * DeleteMsgRecordCategory请求参数结构体
  */
 export interface DeleteMsgRecordCategoryRequest {
@@ -4566,6 +6179,52 @@ export interface DeleteMsgRecordCategoryRequest {
    * <p>待删除的分类业务 ID</p>
    */
   CategoryId: string
+}
+
+/**
+ * 文档操作者信息
+ */
+export interface DocOperator {
+  /**
+   * <p>修改人</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Modifier?: Operator
+  /**
+   * <p>操作权限</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permission?: DocPermission
+}
+
+/**
+ * DescribeDocSummaryList请求参数结构体
+ */
+export interface DescribeDocSummaryListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 Values 为 OR 关系）：Status-文档状态,枚举值,精确匹配; CategoryId-分类ID,精确匹配; SourceType-文档来源类型,枚举值,精确匹配; EffectiveDomain-生效作用域,精确匹配; CreateTime-创建时间,Unix秒,BETWEEN 传 [起始秒,结束秒]; UpdateTime-更新时间,Unix秒,BETWEEN 传 [起始秒,结束秒]</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>分页页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 10，最大 100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>查询条件（关键词 + 查询范围）</p>
+   */
+  Query?: DocQuery
+  /**
+   * <p>开关配置</p>
+   */
+  SummaryListSwitch?: SummaryListSwitch
 }
 
 /**
@@ -4643,6 +6302,40 @@ export interface ModelUsageDetail {
    * <p>本次调用消耗 PU 量</p>
    */
   ConsumptionPU?: number
+}
+
+/**
+ * ModifyQAList请求参数结构体
+ */
+export interface ModifyQAListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>待修改的 QA ID 列表（数量：1~20）</p>
+   */
+  QaIdList: Array<string>
+  /**
+   * <p>分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>生效作用域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
+   */
+  EffectiveDomain?: number
+  /**
+   * <p>过期策略（有效时间与超过有效时间后的行为）</p>
+   */
+  ExpirationPolicy?: ExpirationPolicy
+  /**
+   * <p>是否采纳（校验通过）</p>
+   */
+  IsAccepted?: boolean
+  /**
+   * <p>适用范围（标签条件列表）</p>
+   */
+  LabelRefList?: LabelRefIdentityList
 }
 
 /**
@@ -4728,6 +6421,16 @@ export interface Variable {
 }
 
 /**
+ * 时效性检索增强配置
+ */
+export interface ExpirationAwareness {
+  /**
+   * <p>是否启用时效性检索，开启后检索结果会结合知识的有效时间进行排序</p>
+   */
+  Enabled?: boolean
+}
+
+/**
  * FavoriteSkill请求参数结构体
  */
 export interface FavoriteSkillRequest {
@@ -4794,17 +6497,14 @@ export interface DailySchedule {
 }
 
 /**
- * 应用子状态信息
+ * Prompt改写配置
  */
-export interface AppSubStatusInfo {
+export interface PromptRewriteModel {
   /**
-   * 审批记录ID (当sub_status_list包含PUBLISH_APPROVING时有效)
+   * 模型配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApprovalId: string
-  /**
-   * 应用子状态列表 (可能同时处于多个子状态)
-   */
-  SubStatusList?: Array<number | bigint>
+  Model: ModelDetailInfo
 }
 
 /**
@@ -4815,6 +6515,28 @@ export interface ManualOnlySchedule {
    * 启用
    */
   Enabled?: boolean
+}
+
+/**
+ * ModifySpace请求参数结构体
+ */
+export interface ModifySpaceRequest {
+  /**
+   * 工作空间名称,长度最大30个字符
+   */
+  Name?: string
+  /**
+   * 空间描述，长度最大150个字符
+   */
+  Description?: string
+  /**
+   * 空间id
+   */
+  SpaceId?: string
+  /**
+   * 指定需要更新的字段，支持Name和Description
+   */
+  FieldMask?: FieldMask
 }
 
 /**
@@ -4874,6 +6596,34 @@ export interface CreateAppResponse {
 }
 
 /**
+ * 知识库修改扩展字段（用于触发特殊操作）
+ */
+export interface KBModifyExtendFields {
+  /**
+   * <p>扩展操作：1=触发恢复超量<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KB_EXTENDED_ACTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KB_EXTENDED_ACTION_RESUME_EXCEEDED</td><td>1</td><td>触发恢复超量（将知识库从超量状态恢复为正常状态）</td></tr></tbody></table></p>
+   */
+  Action?: number
+}
+
+/**
+ * QA 检索配置
+ */
+export interface QARetrievalConfig {
+  /**
+   * <p>置信度阈值</p>
+   */
+  Confidence?: number
+  /**
+   * <p>是否启用</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>返回前 N 条</p>
+   */
+  TopN?: number
+}
+
+/**
  * 操作日志元数据
  */
 export interface AuditLogMetaField {
@@ -4885,6 +6635,20 @@ export interface AuditLogMetaField {
    * <p>操作日志元数据Name</p>
    */
   Name?: string
+}
+
+/**
+ * CreateQAList返回参数结构体
+ */
+export interface CreateQAListResponse {
+  /**
+   * <p>批量创建结果</p>
+   */
+  ResultList?: Array<OperationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4902,13 +6666,41 @@ export interface ModelDeveloperBasic {
 }
 
 /**
- * 对应 MCP 协议工具 _meta，承载 MCP Apps 工具的 UI 元信息（本期仅消费 resourceUri）
+ * ModifySkill请求参数结构体
  */
-export interface MCPToolMeta {
+export interface ModifySkillRequest {
   /**
-   * <p>工具的 UI 扩展元信息，对应 MCP 协议的 _meta.ui，声明工具关联的交互式界面资源（ResourceUri）及调用方可见性（Visibility）。仅当工具支持 MCP Apps 或声明了可见性时返回；纯文本工具该字段为空。详见 MCPToolUIMeta 结构定义。</p>
+   * <p>SkillId</p>
    */
-  Ui?: MCPToolUIMeta
+  SkillId: string
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>skill描述</p>
+   */
+  DisplayDescription?: string
+  /**
+   * <p>skill名称</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>skill包文件地址（zip）；传入则触发新版本生成，需与SkillVersion、UpdateDescription配套传入</p>
+   */
+  FileUrl?: string
+  /**
+   * <p>图标地址</p>
+   */
+  IconUrl?: string
+  /**
+   * <p>skill版本号（与FileUrl配套传入）</p>
+   */
+  SkillVersion?: string
+  /**
+   * <p>版本变更说明（与FileUrl配套传入）</p>
+   */
+  UpdateDescription?: string
 }
 
 /**
@@ -4955,25 +6747,29 @@ export interface ResumeAppTriggerRequest {
 }
 
 /**
- * MCP插件参数信息
+ * QA 操作者信息
  */
-export interface PluginParam {
+export interface QAOperator {
   /**
-   * 参数配置是否隐藏不可见
+   * <p>修改人</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsGlobalHidden?: boolean
+  Modifier?: Operator
   /**
-   * 参数是否必填
+   * <p>操作权限</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsRequired?: boolean
+  Permission?: QAPermission
+}
+
+/**
+ * 标签引用列表
+ */
+export interface LabelRefIdentityList {
   /**
-   * 参数名称
+   * <p>标签引用列表</p>
    */
-  Name?: string
-  /**
-   * 参数值
-   */
-  Value?: string
+  ItemList?: Array<LabelRefIdentity>
 }
 
 /**
@@ -5049,17 +6845,33 @@ export interface CreateWorkspaceCredentialRequest {
 }
 
 /**
- * BillingAttribute
+ * ModifyAppTrigger请求参数结构体
  */
-export interface BillingAttribute {
+export interface ModifyAppTriggerRequest {
   /**
-   * <p>属性名称</p>
+   * <p>应用ID</p>
    */
-  Name?: string
+  AppId?: string
   /**
-   * <p>属性值</p>
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_SCOPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_SCOPE_APP</td><td>1</td><td>B 端管理员</td></tr><tr><td>APP_TRIGGER_SCOPE_USER</td><td>2</td><td>C 端访客</td></tr></tbody></table>
    */
-  Value?: string
+  Scope?: number
+  /**
+   * <p>触发器信息</p>
+   */
+  Trigger?: AppTrigger
+  /**
+   * <p>触发器唯一ID</p>
+   */
+  TriggerId?: string
+  /**
+   * <p>修改字段</p>
+   */
+  UpdateMask?: FieldMask
+  /**
+   * <p>访客ID</p>
+   */
+  UserId?: string
 }
 
 /**
@@ -5078,6 +6890,20 @@ export interface DescribeAppTriggerSummaryListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeKB请求参数结构体
+ */
+export interface DescribeKBRequest {
+  /**
+   * <p>知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>工作空间 ID</p>
+   */
+  SpaceId?: string
 }
 
 /**
@@ -5183,53 +7009,85 @@ export interface AIOptimizeModel {
 }
 
 /**
- * Tool
+ * 检索过滤配置
  */
-export interface Tool {
+export interface SearchFilterConfig {
   /**
-   * <p>工具计费信息</p>
+   * <p>是否仅检索选中标签，true:仅检索带有选中标签的知识，false:同时检索带有选中标签和不带任何标签的知识</p>
+   */
+  OnlyRetrievalSelectedLabel?: boolean
+  /**
+   * <p>检索过滤</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Billing?: ToolBilling
-  /**
-   * <p>工具调用次数</p><p>单位：次数</p>
-   */
-  CallCount?: number
-  /**
-   * <p>工具描述信息</p>
-   */
-  Description?: string
-  /**
-   * <p>工具名称</p>
-   */
-  Name?: string
-  /**
-   * <p>插件ID</p>
-   */
-  PluginId?: string
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>TOOL_ACCESS_MODE_UNKNOWN</td><td>0</td><td>未指定</td></tr><tr><td>TOOL_ACCESS_MODE_READ_ONLY</td><td>1</td><td>只读</td></tr><tr><td>TOOL_ACCESS_MODE_WRITE_DELETE</td><td>2</td><td>写/删除</td></tr></tbody></table>
-   */
-  ToolAccessMode?: number
-  /**
-   * <p>工具配置信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ToolConfig?: ToolConfig
-  /**
-   * <p>工具ID</p>
-   */
-  ToolId?: string
+  SearchFilter?: SearchFilter
 }
 
 /**
- * ModifySpace返回参数结构体
+ * CreateSimilarQuestion请求参数结构体
  */
-export interface ModifySpaceResponse {
+export interface CreateSimilarQuestionRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>所属知识库 ID</p>
    */
-  RequestId?: string
+  KbId: string
+  /**
+   * <p>问题</p>
+   */
+  Question: string
+  /**
+   * <p>答案</p>
+   */
+  Answer?: string
+}
+
+/**
+ * 单个知识库检索配置
+ */
+export interface KBRetrievalConfig {
+  /**
+   * <p>数据库检索配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbRetrievalConfig?: DBRetrievalConfig
+  /**
+   * <p>文档检索配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocRetrievalConfig?: DocRetrievalConfig
+  /**
+   * <p>知识库 ID</p>
+   */
+  KbId?: string
+  /**
+   * <p>检索可选配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptionConfig?: RetrievalOption
+  /**
+   * <p>QA 检索配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QaRetrievalConfig?: QARetrievalConfig
+  /**
+   * <p>rerank 配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RerankConfig?: RerankConfig
+  /**
+   * <p>检索过滤配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchFilterConfig?: SearchFilterConfig
+  /**
+   * <p>检索策略：1=混合，2=语义，3=关键词，4=无<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SEARCH_STRATEGY_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_STRATEGY_TYPE_MIXING</td><td>1</td><td>混合检索</td></tr><tr><td>SEARCH_STRATEGY_TYPE_SEMANTIC</td><td>2</td><td>语义检索</td></tr><tr><td>SEARCH_STRATEGY_TYPE_KEYWORD</td><td>3</td><td>关键词检索</td></tr><tr><td>SEARCH_STRATEGY_TYPE_NONE</td><td>4</td><td>无语义/向量检索</td></tr></tbody></table></p>
+   */
+  StrategyType?: number
+  /**
+   * <p>text2sql 模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextToSqlModel?: ModelDetailInfo
 }
 
 /**
@@ -5269,14 +7127,17 @@ export interface DescribePluginSummaryListResponse {
 }
 
 /**
- * Prompt改写配置
+ * 应用子状态信息
  */
-export interface PromptRewriteModel {
+export interface AppSubStatusInfo {
   /**
-   * 模型配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * 审批记录ID (当sub_status_list包含PUBLISH_APPROVING时有效)
    */
-  Model: ModelDetailInfo
+  ApprovalId: string
+  /**
+   * 应用子状态列表 (可能同时处于多个子状态)
+   */
+  SubStatusList?: Array<number | bigint>
 }
 
 /**
@@ -5332,25 +7193,39 @@ export interface CreateConversationRequest {
 }
 
 /**
- * 调用方执行的 Function Tool 配置
+ * CreateSkill返回参数结构体
  */
-export interface AgentExternalToolConfig {
+export interface CreateSkillResponse {
   /**
-   * <p>工具类型</p><p>入参限制：目前仅支持 &quot;function&quot;</p>
+   * <p>创建成功后的skillID</p>
    */
-  Type?: string
+  SkillId?: string
   /**
-   * <p>工具名称</p>
+   * <p>创建成功后的版本ID</p>
    */
-  Name?: string
+  VersionId?: string
   /**
-   * <p>工具描述</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Description?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeDoc请求参数结构体
+ */
+export interface DescribeDocRequest {
   /**
-   * <p>工具入参定义</p>
+   * <p>文档 ID</p>
    */
-  Parameters?: Array<RequestParam>
+  DocId: string
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>字段掩码：当前支持的 Path：DocLink.CosUrl，其他未列举的字段默认都返回</p>
+   */
+  ReadMask?: FieldMask
 }
 
 /**
@@ -5458,6 +7333,74 @@ export interface DeleteSkillShareResponse {
 }
 
 /**
+ * ModifyCategory返回参数结构体
+ */
+export interface ModifyCategoryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 发布摘要信息
+ */
+export interface ReleaseSummary {
+  /**
+   * <p>创建时间 (Unix时间戳,秒级)</p>
+   */
+  CreateTime: string
+  /**
+   * <p>发布描述</p>
+   */
+  Description: string
+  /**
+   * <p>发布ID</p>
+   */
+  ReleaseId: string
+  /**
+   * <p>发布状态。枚举值: 1:待发布, 2:发布中, 3:发布成功, 4:发布失败, 5:审核中, 6:审核成功, 7:审核失败, 8:发布成功回调处理中, 9:发布暂停, 10:申诉审核中, 11:申诉审核通过, 12:申诉审核不通过</p>
+   */
+  Status: number
+  /**
+   * <p>状态描述</p>
+   */
+  StatusDescription: string
+  /**
+   * <p>应用分享访问控制</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppShareAccessControl?: AppShareAccessControl
+  /**
+   * <p>发布渠道ID列表</p>
+   */
+  ChannelIdList?: Array<string>
+  /**
+   * <p>企业共享配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorpShareConfig?: CorpShareConfig
+}
+
+/**
+ * QA 相似问
+ */
+export interface SimilarQuestion {
+  /**
+   * <p>相似问内容</p>
+   */
+  Content?: string
+  /**
+   * <p>是否 AI 生成</p>
+   */
+  IsAiGenerated?: boolean
+  /**
+   * <p>相似问 ID</p>
+   */
+  SimilarQuestionId?: string
+}
+
+/**
  * Agent的工具基础配置
  */
 export interface AgentToolBasicConfig {
@@ -5504,6 +7447,20 @@ export interface AgentToolBasicConfig {
 }
 
 /**
+ * DescribeConflictQA返回参数结构体
+ */
+export interface DescribeConflictQAResponse {
+  /**
+   * <p>一个冲突组的详情列表</p>
+   */
+  ConflictQaList?: Array<ConflictQA>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 应用状态信息 - 运行时状态信息(用户不可修改)
  */
 export interface AppStatusInfo {
@@ -5525,6 +7482,72 @@ export interface ComplexBilling {
    * <p>复合计费列表</p>
    */
   ComplexList?: Array<ComplexBillingItem>
+}
+
+/**
+ * 文档检索配置
+ */
+export interface DocRetrievalConfig {
+  /**
+   * <p>置信度阈值</p>
+   */
+  Confidence?: number
+  /**
+   * <p>是否启用</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>返回前 N 条</p>
+   */
+  TopN?: number
+}
+
+/**
+ * DescribeLabelSummaryList请求参数结构体
+ */
+export interface DescribeLabelSummaryListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>通用过滤</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>分页页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 10，最大 100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>关键词搜索</p>
+   */
+  Query?: string
+  /**
+   * <p>开关配置</p>
+   */
+  SummaryListSwitch?: SummaryListSwitch
+}
+
+/**
+ * SearchKnowledge返回参数结构体
+ */
+export interface SearchKnowledgeResponse {
+  /**
+   * <p>检索结果列表</p>
+   */
+  KnowledgeList?: Array<KnowledgeResult>
+  /**
+   * <p>消耗的 token 统计</p>
+   */
+  TokenUsageList?: Array<TokenUsage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5556,14 +7579,43 @@ export interface DescribeAuditLogMetaResponse {
 }
 
 /**
- * 多模态问答模型配置
+ * DescribeCategoryList返回参数结构体
  */
-export interface MultiModalQAModel {
+export interface DescribeCategoryListResponse {
   /**
-   * 模型配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>分类列表</p>
    */
-  Model: ModelDetailInfo
+  CategoryList?: Array<KBCategory>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AppTriggerParamSchema
+ */
+export interface AppTriggerParamSchema {
+  /**
+   * <p>参数名</p>
+   */
+  ParamName?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
+   */
+  ParamType?: number
+  /**
+   * <p>是否必选</p>
+   */
+  Required?: boolean
+  /**
+   * <p>子参数列表</p>
+   */
+  SubParamList?: Array<AppTriggerParamSchema>
 }
 
 /**
@@ -5671,29 +7723,59 @@ export interface AgentToolConfig {
 }
 
 /**
- * OAuth2.0授权信息
+ * DeleteSkill返回参数结构体
  */
-export interface OAuthConfig {
+export interface DeleteSkillResponse {
   /**
-   * OAuth服务方授权页url地址
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AuthorizationUrl?: string
+  RequestId?: string
+}
+
+/**
+ * 知识库容量信息
+ */
+export interface KBCapacity {
   /**
-   * 客户端ID
+   * <p>最大字符数</p>
    */
-  ClientId?: string
+  MaxCharSize?: string
   /**
-   * 客户端密钥
+   * <p>超量字符数</p>
    */
-  ClientSecret?: string
+  OverCharSize?: string
   /**
-   * 请求授权的数据范围
+   * <p>已用字符数</p>
    */
-  ScopeList?: Array<string>
+  UsedCharSize?: string
+}
+
+/**
+ * 相似问额外信息
+ */
+export interface SimilarQuestionExtra {
   /**
-   * 获取access token的url地址
+   * <p>相似问文本内容</p>
    */
-  TokenUrl?: string
+  Content?: string
+  /**
+   * <p>相似问 ID</p>
+   */
+  SimilarQuestionId?: string
+}
+
+/**
+ * DeleteDocList请求参数结构体
+ */
+export interface DeleteDocListRequest {
+  /**
+   * <p>待删除的文档 ID 列表（数量：1~20）</p>
+   */
+  DocIdList: Array<string>
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
 }
 
 /**
@@ -5911,13 +7993,14 @@ export interface AccessKeyAuthConfig {
 }
 
 /**
- * DescribeAgentDetail返回参数结构体
+ * DescribeLabel返回参数结构体
  */
-export interface DescribeAgentDetailResponse {
+export interface DescribeLabelResponse {
   /**
-   * <p>Agent信息</p>
+   * <p>基础信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Agent?: AgentDetail
+  Summary?: LabelSummary
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5939,6 +8022,84 @@ export interface CreateAppTriggerResponse {
 }
 
 /**
+ * DeleteKB返回参数结构体
+ */
+export interface DeleteKBResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 文档摘要信息
+ */
+export interface DocSummary {
+  /**
+   * <p>所属分类路径（包含分类 ID、从根节点开始的分类 ID 路径和分类名称路径）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CategoryPath?: CategoryPath
+  /**
+   * <p>文档 ID</p>
+   */
+  DocId?: string
+  /**
+   * <p>知识生效范围（聚合生效作用域 + 标签条件）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeScope?: KnowledgeScope
+  /**
+   * <p>生命周期信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Lifecycle?: DocLifecycle
+  /**
+   * <p>元信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadata?: DocMetadata
+  /**
+   * <p>操作者信息（聚合修改人 + 操作权限）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorInfo?: DocOperator
+  /**
+   * <p>任务状态信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskStatus?: DocTaskStatus
+}
+
+/**
+ * 知识库可写属性集合（配合 update_mask 使用）
+ */
+export interface KBSpec {
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>ES 配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsConfig?: ESConfig
+  /**
+   * <p>模型配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelConfig?: KBModelConfig
+  /**
+   * <p>知识库名称</p>
+   */
+  Name?: string
+  /**
+   * <p>所有者 ID</p>
+   */
+  OwnerId?: string
+}
+
+/**
  * 系统变量
  */
 export interface SystemVariable {
@@ -5956,6 +8117,32 @@ export interface SystemVariable {
  * ModifyPlugin返回参数结构体
  */
 export interface ModifyPluginResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeQASummaryList返回参数结构体
+ */
+export interface DescribeQASummaryListResponse {
+  /**
+   * <p>未采纳数量</p>
+   */
+  NotAcceptedCount?: number
+  /**
+   * <p>待校验数量</p>
+   */
+  PendingVerifyCount?: number
+  /**
+   * <p>QA 列表</p>
+   */
+  QaList?: Array<QASummary>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6017,6 +8204,24 @@ export interface CreateSkillShareRequest {
 }
 
 /**
+ * 标准词（标签值的一项）
+ */
+export interface LabelTerm {
+  /**
+   * <p>同义词列表</p>
+   */
+  SynonymList?: Array<string>
+  /**
+   * <p>标准词</p>
+   */
+  Term?: string
+  /**
+   * <p>标准词 ID（由后台生成，创建时不传）</p>
+   */
+  TermId?: string
+}
+
+/**
  * 资源消耗明细
  */
 export interface ConsumptionDetail {
@@ -6048,6 +8253,77 @@ export interface ConsumptionDetail {
    * <p>用户名称</p>
    */
   UserName?: string
+}
+
+/**
+ * QA 生命周期信息
+ */
+export interface QALifecycle {
+  /**
+   * <p>创建时间（Unix 秒）</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>过期策略（有效时间与超过有效时间后的行为）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpirationPolicy?: ExpirationPolicy
+  /**
+   * <p>状态：1=待校验，2=未采纳，3=导入失败，4=审核中，5=审核失败，6=学习中，7=学习失败，8=导入完成，9=已过期，10=超量失效，11=超量失效恢复中，12=人工申诉中，13=人工申诉失败<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>QA_STATUS_UNKNOWN</td><td>0</td><td></td></tr><tr><td>QA_STATUS_PENDING_VERIFY</td><td>1</td><td>待校验</td></tr><tr><td>QA_STATUS_NOT_ACCEPTED</td><td>2</td><td>未采纳</td></tr><tr><td>QA_STATUS_IMPORT_FAIL</td><td>3</td><td>导入失败</td></tr><tr><td>QA_STATUS_AUDITING</td><td>4</td><td>审核中</td></tr><tr><td>QA_STATUS_AUDIT_FAIL</td><td>5</td><td>审核失败</td></tr><tr><td>QA_STATUS_LEARNING</td><td>6</td><td>学习中</td></tr><tr><td>QA_STATUS_LEARN_FAIL</td><td>7</td><td>学习失败</td></tr><tr><td>QA_STATUS_IMPORTED</td><td>8</td><td>导入完成</td></tr><tr><td>QA_STATUS_EXPIRED</td><td>9</td><td>已过期</td></tr><tr><td>QA_STATUS_QUOTA_INVALID</td><td>10</td><td>超量失效</td></tr><tr><td>QA_STATUS_QUOTA_RECOVERING</td><td>11</td><td>超量失效恢复中</td></tr><tr><td>QA_STATUS_MANUAL_APPEALING</td><td>12</td><td>人工申诉中</td></tr><tr><td>QA_STATUS_MANUAL_APPEAL_FAIL</td><td>13</td><td>人工申诉失败</td></tr></tbody></table></p>
+   */
+  Status?: number
+  /**
+   * <p>状态描述</p>
+   */
+  StatusDesc?: string
+  /**
+   * <p>状态附加信息</p>
+   */
+  StatusMessage?: string
+  /**
+   * <p>更新时间（Unix 秒）</p>
+   */
+  UpdateTime?: string
+}
+
+/**
+ * 分类路径信息
+ */
+export interface CategoryPath {
+  /**
+   * <p>分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * <p>从根节点开始的路径分类 ID 列表</p>
+   */
+  CategoryIdPath?: Array<string>
+  /**
+   * <p>从根节点开始的路径分类名称列表</p>
+   */
+  CategoryNamePath?: Array<string>
+}
+
+/**
+ * ModifyDoc请求参数结构体
+ */
+export interface ModifyDocRequest {
+  /**
+   * <p>文档 ID</p>
+   */
+  DocId: string
+  /**
+   * <p>修改字段内容（不可为空，与 update_mask 配合使用）</p>
+   */
+  Fields: DocModifyFields
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>字段掩码：指定要修改的字段（支持的 Paths：Name, CategoryId, EffectiveDomain, LabelRefList, ExternalLink, ExpirationPolicy, UpdatePeriod, Switch, ParseConfig, UserAccessConfig）</p>
+   */
+  UpdateMask: FieldMask
 }
 
 /**
@@ -6106,6 +8382,58 @@ export interface AppTriggerScheduleConfig {
    * <p>触发器定时配置</p>
    */
   Schedule?: TimerScheduleConfig
+}
+
+/**
+ * 单条检索结果
+ */
+export interface KnowledgeResult {
+  /**
+   * <p>置信度</p>
+   */
+  Confidence?: number
+  /**
+   * <p>命中知识类型：1=问答，2=文档片段，3=数据库，4=图谱<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_QA</td><td>1</td><td>问答</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_DOC</td><td>2</td><td>文档片段</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_DB</td><td>3</td><td>数据库</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_GRAPH</td><td>4</td><td>图谱</td></tr></tbody></table></p>
+   */
+  KnowledgeType?: number
+  /**
+   * <p>召回类型列表</p>
+   */
+  RecallTypeList?: Array<number | bigint>
+  /**
+   * <p>结果负载</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultPayload?: SearchResultPayload
+  /**
+   * <p>检索结果类型<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SEARCH_RESULT_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_RESULT_TYPE_RETRIEVAL</td><td>1</td><td>普通检索结果</td></tr><tr><td>SEARCH_RESULT_TYPE_TEXT_TO_SQL</td><td>2</td><td>text2sql 结果</td></tr><tr><td>SEARCH_RESULT_TYPE_IMAGE_SEARCH_IMAGE</td><td>3</td><td></td></tr><tr><td>SEARCH_RESULT_TYPE_TEXT_SEARCH_IMAGE</td><td>4</td><td></td></tr></tbody></table></p>
+   */
+  ResultType?: number
+  /**
+   * <p>相似问额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SimilarQuestionExtra?: SimilarQuestionExtra
+  /**
+   * <p>知识片段基础信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SnippetProfile?: KnowledgeSnippetProfile
+  /**
+   * <p>知识来源信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceInfo?: KnowledgeSource
+}
+
+/**
+ * ModifyAppTrigger返回参数结构体
+ */
+export interface ModifyAppTriggerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6267,6 +8595,38 @@ export interface AgentSkill {
 }
 
 /**
+ * SearchKnowledge请求参数结构体
+ */
+export interface SearchKnowledgeRequest {
+  /**
+   * <p>检索高级配置</p>
+   */
+  AdvancedConfig: SearchAdvancedConfig
+  /**
+   * <p>检索输入</p>
+   */
+  Input: SearchInput
+  /**
+   * <p>检索上下文</p>
+   */
+  Context?: SearchContext
+  /**
+   * <p>计费信息</p>
+   */
+  SearchBilling?: SearchBilling
+}
+
+/**
+ * 数据库检索配置
+ */
+export interface DBRetrievalConfig {
+  /**
+   * <p>是否启用</p>
+   */
+  Enabled?: boolean
+}
+
+/**
  * 模型徽章
  */
 export interface ModelBadge {
@@ -6289,6 +8649,28 @@ export interface ModelBadge {
 }
 
 /**
+ * Token 使用统计
+ */
+export interface TokenUsage {
+  /**
+   * <p>completion token 数</p>
+   */
+  CompletionTokens?: number
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+  /**
+   * <p>prompt token 数</p>
+   */
+  PromptTokens?: number
+  /**
+   * <p>总 token 数</p>
+   */
+  TotalTokens?: number
+}
+
+/**
  * 平台资源用量聚合明细（PLATFORM 域专属）
  */
 export interface PlatformUsageSummary {
@@ -6296,6 +8678,20 @@ export interface PlatformUsageSummary {
    * <p>PLATFORM 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量，label 取 PlatformBizType 枚举名称字符串；典型如 unit=TIMES + label=PLATFORM_BIZ_TYPE_SECURITY_AUDIT/WEB_SEARCH/OPEN_CLAW/APP_INVOKE，unit=ITEM + label=PLATFORM_BIZ_TYPE_LONG_TERM_MEMORY</p>
    */
   ResourceConsumptionList?: Array<ResourceConsumption>
+}
+
+/**
+ * DeleteLabelList返回参数结构体
+ */
+export interface DeleteLabelListResponse {
+  /**
+   * <p>批量删除结果</p>
+   */
+  ResultList?: Array<OperationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6313,33 +8709,17 @@ export interface AgentSystemVariable {
 }
 
 /**
- * 应用操作信息
+ * 文档外部链接信息
  */
-export interface AppOperation {
+export interface DocExternalLink {
   /**
-   * 创建人
+   * <p>外部链接地址</p>
    */
-  Creator: string
+  ExternalUrl?: string
   /**
-   * 创建人UIN
+   * <p>是否替换原文展示</p>
    */
-  CreatorUin: string
-  /**
-   * 创建人账号(私有化场景使用)
-   */
-  CreatorUserAccount: string
-  /**
-   * 修改时间 (Unix时间戳,秒级)
-   */
-  UpdateTime: string
-  /**
-   * 最后修改人
-   */
-  Updater: string
-  /**
-   * 修改人UIN
-   */
-  UpdaterUin: string
+  ReplaceOriginEnabled?: boolean
 }
 
 /**
@@ -6470,6 +8850,52 @@ export interface DescribeConversationMessageListRequest {
    * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
    */
   UserId?: string
+}
+
+/**
+ * 有效期
+ */
+export interface EffectivePeriod {
+  /**
+   * <p>有效期结束时间（Unix 秒，0 表示永久有效）</p>
+   */
+  EndTime?: string
+  /**
+   * <p>有效期开始时间（Unix 秒）</p>
+   */
+  StartTime?: string
+}
+
+/**
+ * DescribeDocSummaryList返回参数结构体
+ */
+export interface DescribeDocSummaryListResponse {
+  /**
+   * <p>文档列表</p>
+   */
+  DocList?: Array<DocSummary>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDocList返回参数结构体
+ */
+export interface DeleteDocListResponse {
+  /**
+   * <p>批量删除结果</p>
+   */
+  ResultList?: Array<OperationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6699,6 +9125,20 @@ export interface RunAppTriggerNowResponse {
 }
 
 /**
+ * DescribeConflictQA请求参数结构体
+ */
+export interface DescribeConflictQARequest {
+  /**
+   * <p>冲突组 ID</p>
+   */
+  ConflictGroupId: string
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+}
+
+/**
  * DescribeSkillDetail返回参数结构体
  */
 export interface DescribeSkillDetailResponse {
@@ -6753,43 +9193,63 @@ export interface DeleteAppTriggerRequest {
 }
 
 /**
- * 发布摘要信息
+ * QA 操作权限信息
  */
-export interface ReleaseSummary {
+export interface QAPermission {
   /**
-   * <p>创建时间 (Unix时间戳,秒级)</p>
+   * <p>是否可校验（采纳/不采纳）</p>
    */
-  CreateTime: string
+  CanAccept?: boolean
   /**
-   * <p>发布描述</p>
+   * <p>是否可删除</p>
    */
-  Description: string
+  CanDelete?: boolean
   /**
-   * <p>发布ID</p>
+   * <p>是否可编辑</p>
    */
-  ReleaseId: string
+  CanEdit?: boolean
+}
+
+/**
+ * CreateQAGenerationTask返回参数结构体
+ */
+export interface CreateQAGenerationTaskResponse {
   /**
-   * <p>发布状态。枚举值: 1:待发布, 2:发布中, 3:发布成功, 4:发布失败, 5:审核中, 6:审核成功, 7:审核失败, 8:发布成功回调处理中, 9:发布暂停, 10:申诉审核中, 11:申诉审核通过, 12:申诉审核不通过</p>
+   * <p>任务 ID 列表</p>
    */
-  Status: number
+  TaskIdList?: Array<string>
   /**
-   * <p>状态描述</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StatusDescription: string
+  RequestId?: string
+}
+
+/**
+ * 分类可修改字段集合（配合 update_mask 使用）
+ */
+export interface CategoryModifyFields {
   /**
-   * <p>应用分享访问控制</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>分类名</p>
    */
-  AppShareAccessControl?: AppShareAccessControl
+  Name?: string
+}
+
+/**
+ * 通用操作结果项
+ */
+export interface OperationResult {
   /**
-   * <p>发布渠道ID列表</p>
+   * <p>资源 ID</p>
    */
-  ChannelIdList?: Array<string>
+  Id?: string
   /**
-   * <p>企业共享配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>失败原因（succeeded=false 时填充）</p>
    */
-  CorpShareConfig?: CorpShareConfig
+  Reason?: string
+  /**
+   * <p>是否成功</p>
+   */
+  Succeeded?: boolean
 }
 
 /**
@@ -6803,6 +9263,20 @@ export interface OnceSchedule {
 }
 
 /**
+ * QA 查询条件
+ */
+export interface QAQuery {
+  /**
+   * <p>查询关键词（模糊搜索）</p>
+   */
+  Query?: string
+  /**
+   * <p>查询范围（query 作用的字段）：1=问题，2=标签或标签值，3=答案；支持多选，缺省时无效</p>
+   */
+  QueryScopeList?: Array<number | bigint>
+}
+
+/**
  * UnfavoriteSkill返回参数结构体
  */
 export interface UnfavoriteSkillResponse {
@@ -6813,25 +9287,14 @@ export interface UnfavoriteSkillResponse {
 }
 
 /**
- * AppTriggerParamSchema
+ * 多模态问答模型配置
  */
-export interface AppTriggerParamSchema {
+export interface MultiModalQAModel {
   /**
-   * <p>参数名</p>
+   * 模型配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamName?: string
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
-   */
-  ParamType?: number
-  /**
-   * <p>是否必选</p>
-   */
-  Required?: boolean
-  /**
-   * <p>子参数列表</p>
-   */
-  SubParamList?: Array<AppTriggerParamSchema>
+  Model: ModelDetailInfo
 }
 
 /**
@@ -6863,13 +9326,69 @@ export interface MCPToolUIMeta {
 }
 
 /**
- * 搜索资源状态信息
+ * ModifyDoc返回参数结构体
  */
-export interface SearchResourceStatusInfo {
+export interface ModifyDocResponse {
   /**
-   * 搜索资源状态: AVAILABLE(1)=资源可用, EXHAUSTED(2)=资源已用尽。枚举值: 1:资源可用, 2:资源已用尽
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceStatus: number
+  RequestId?: string
+}
+
+/**
+ * 检索过滤
+ */
+export interface SearchFilter {
+  /**
+   * <p>检索过滤类型<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SEARCH_FILTER_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_FILTER_TYPE_CUSTOMER_LABEL_VALUE</td><td>1</td><td>用户自定义标签值</td></tr><tr><td>SEARCH_FILTER_TYPE_CUSTOMER_LABEL_VALUE_ID</td><td>2</td><td>用户自定义标签值ID</td></tr><tr><td>SEARCH_FILTER_TYPE_DOC_ID</td><td>3</td><td>指定文档 ID 检索</td></tr><tr><td>SEARCH_FILTER_TYPE_DOC_CATEGORY_ID</td><td>4</td><td>指定文档分类 ID 检索</td></tr><tr><td>SEARCH_FILTER_TYPE_DB_TABLE_ID</td><td>5</td><td>指定数据库表 ID 检索</td></tr><tr><td>SEARCH_FILTER_TYPE_KB_SCHEMA_ID</td><td>6</td><td>指定知识库 schema ID</td></tr></tbody></table></p>
+   */
+  FilterType?: number
+  /**
+   * <p>过滤值列表，根据SearchFilterType取值1：传自定义标签值；2：传自定义标签值ID；3：传文档ID；4：传分类ID</p>
+   */
+  FilterValueList?: Array<string>
+  /**
+   * <p>用户自定义标签 ID</p>
+   */
+  LabelId?: string
+  /**
+   * <p>逻辑运算符：AND 或 OR<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>LOGIC_OPR_NOOP</td><td>0</td><td></td></tr><tr><td>LOGIC_OPR_AND</td><td>1</td><td></td></tr><tr><td>LOGIC_OPR_OR</td><td>2</td><td></td></tr></tbody></table></p>
+   */
+  LogicOp?: number
+  /**
+   * <p>嵌套检索过滤</p>
+   */
+  SearchFilterList?: Array<SearchFilter>
+}
+
+/**
+ * DescribeCategoryList请求参数结构体
+ */
+export interface DescribeCategoryListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 Values 为 OR 关系）：CategoryType-分类类型,枚举值,精确匹配(CATEGORY_TYPE_DOC=1/CATEGORY_TYPE_QA=2); ParentCategoryId-父分类ID,精确匹配</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>分页页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 10，最大 100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>关键词搜索</p>
+   */
+  Query?: string
+  /**
+   * <p>开关配置</p>
+   */
+  SummaryListSwitch?: SummaryListSwitch
 }
 
 /**
@@ -6947,6 +9466,20 @@ export interface ConversationMessage {
 }
 
 /**
+ * CreateCategory返回参数结构体
+ */
+export interface CreateCategoryResponse {
+  /**
+   * <p>创建成功的分类 ID</p>
+   */
+  CategoryId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 企微机器人渠道配置
  */
 export interface WecomRobotChannelConfig {
@@ -6960,6 +9493,20 @@ export interface WecomRobotChannelConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Websocket?: WecomRobotWebsocketAccess
+}
+
+/**
+ * ImportDocList请求参数结构体
+ */
+export interface ImportDocListRequest {
+  /**
+   * <p>待导入文档列表（数量：1~20）</p>
+   */
+  DocList: Array<DocImportSpec>
+  /**
+   * <p>知识库 ID</p>
+   */
+  KbId: string
 }
 
 /**
@@ -7020,6 +9567,60 @@ export interface DescribeVariableListRequest {
    * 查询关键词
    */
   Query?: string
+}
+
+/**
+ * 通用操作人信息
+ */
+export interface Operator {
+  /**
+   * <p>用户 ID</p>
+   */
+  UserId?: string
+  /**
+   * <p>用户姓名</p>
+   */
+  UserName?: string
+}
+
+/**
+ * ExportQA返回参数结构体
+ */
+export interface ExportQAResponse {
+  /**
+   * <p>导出任务 ID（通过 DescribeAsyncTaskStatus 查询完成状态）</p>
+   */
+  ExportTaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QA 元信息
+ */
+export interface QAMetadata {
+  /**
+   * <p>答案</p>
+   */
+  Answer?: string
+  /**
+   * <p>问答字符数</p>
+   */
+  QaCharCount?: string
+  /**
+   * <p>问答大小（字节，含相似问）</p>
+   */
+  QaSize?: string
+  /**
+   * <p>问题</p>
+   */
+  Question?: string
+  /**
+   * <p>元数据引用字段名列表（用于显示问答哪些分类和属性被设置为元数据）</p>
+   */
+  RefFieldNameList?: Array<string>
 }
 
 /**
@@ -7134,6 +9735,20 @@ export interface ConversationAgentTask {
 }
 
 /**
+ * CheckLabel返回参数结构体
+ */
+export interface CheckLabelResponse {
+  /**
+   * <p>校验结果列表</p>
+   */
+  CheckList?: Array<LabelTermCheckResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AppTriggerScheduleStatus
  */
 export interface AppTriggerScheduleStatus {
@@ -7149,6 +9764,20 @@ export interface AppTriggerScheduleStatus {
    * <p>触发方式</p>
    */
   PolicySummary?: string
+}
+
+/**
+ * 通用键值对
+ */
+export interface KVPair {
+  /**
+   * 键
+   */
+  Key?: string
+  /**
+   * 值
+   */
+  Value?: string
 }
 
 /**
@@ -7241,29 +9870,34 @@ export interface PluginUserState {
 }
 
 /**
- * DuplexBilling
+ * 文档生命周期信息
  */
-export interface DuplexBilling {
+export interface DocLifecycle {
   /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>UNKNOW</td><td>0</td><td></td></tr><tr><td>TOKEN</td><td>1</td><td>按token</td></tr><tr><td>PAGE_COUNT</td><td>2</td><td>按页数</td></tr><tr><td>TIMES</td><td>3</td><td>按次数</td></tr><tr><td>TIMES_THOUSAND</td><td>4</td><td>按千次数</td></tr><tr><td>SECOND</td><td>5</td><td>按时长</td></tr><tr><td>CHARACTER</td><td>6</td><td>按字符数</td></tr><tr><td>CHARACTER_THOUSAND</td><td>7</td><td>按千字符数</td></tr><tr><td>SHEET</td><td>8</td><td>按张</td></tr><tr><td>NUMBER</td><td>9</td><td>按个数</td></tr></tbody></table>
+   * <p>创建时间（Unix 秒）</p>
    */
-  BillingUnit?: number
+  CreateTime?: string
   /**
-   * <p>输入现金价格</p><p>单位：元</p>
+   * <p>过期策略（有效时间与超过有效时间后的行为）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InputCashPrice?: number
+  ExpirationPolicy?: ExpirationPolicy
   /**
-   * <p>输入pu价格</p><p>单位：pu</p>
+   * <p>文档状态：1=解析中，2=解析失败，3=导入失败，4=审核中，5=审核失败，6=学习中，7=学习失败，8=导入完成，9=已过期，10=超量失效，11=超量失效恢复中，12=重命名审核失败，13=重命名申诉失败，14=人工申诉中，15=人工申诉失败<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DOC_STATUS_UNKNOWN</td><td>0</td><td></td></tr><tr><td>DOC_STATUS_PARSING</td><td>1</td><td>解析中</td></tr><tr><td>DOC_STATUS_PARSE_FAIL</td><td>2</td><td>解析失败</td></tr><tr><td>DOC_STATUS_IMPORT_FAIL</td><td>3</td><td>导入失败</td></tr><tr><td>DOC_STATUS_AUDITING</td><td>4</td><td>审核中</td></tr><tr><td>DOC_STATUS_AUDIT_FAIL</td><td>5</td><td>审核失败</td></tr><tr><td>DOC_STATUS_LEARNING</td><td>6</td><td>学习中</td></tr><tr><td>DOC_STATUS_LEARN_FAIL</td><td>7</td><td>学习失败</td></tr><tr><td>DOC_STATUS_IMPORTED</td><td>8</td><td>导入完成</td></tr><tr><td>DOC_STATUS_EXPIRED</td><td>9</td><td>已过期</td></tr><tr><td>DOC_STATUS_QUOTA_INVALID</td><td>10</td><td>超量失效</td></tr><tr><td>DOC_STATUS_QUOTA_RECOVERING</td><td>11</td><td>超量失效恢复中</td></tr><tr><td>DOC_STATUS_RENAME_AUDIT_FAIL</td><td>12</td><td>重命名审核失败</td></tr><tr><td>DOC_STATUS_RENAME_APPEAL_FAIL</td><td>13</td><td>重命名申诉失败</td></tr><tr><td>DOC_STATUS_MANUAL_APPEALING</td><td>14</td><td>人工申诉中</td></tr><tr><td>DOC_STATUS_MANUAL_APPEAL_FAIL</td><td>15</td><td>人工申诉失败</td></tr></tbody></table></p>
    */
-  InputPuPrice?: number
+  Status?: number
   /**
-   * <p>输出现金价格</p><p>单位：元</p>
+   * <p>状态描述</p>
    */
-  OutputCashPrice?: number
+  StatusDesc?: string
   /**
-   * <p>输出pu价格</p><p>单位：pu</p>
+   * <p>状态附加信息</p>
    */
-  OutputPuPrice?: number
+  StatusMessage?: string
+  /**
+   * <p>更新时间（Unix 秒）</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -7542,17 +10176,49 @@ export interface AgentDetail {
 }
 
 /**
- * ModifyVariable请求参数结构体
+ * GraphRAG 配置
  */
-export interface ModifyVariableRequest {
+export interface GraphRAG {
   /**
-   * app_id
+   * <p>是否启用</p>
    */
-  AppId: string
+  Enabled?: boolean
+}
+
+/**
+ * ModifyQA返回参数结构体
+ */
+export interface ModifyQAResponse {
   /**
-   * 变量信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Variable?: Variable
+  RequestId?: string
+}
+
+/**
+ * CreateApp请求参数结构体
+ */
+export interface CreateAppRequest {
+  /**
+   * 空间ID
+   */
+  SpaceId: string
+  /**
+   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   */
+  AppMode?: number
+  /**
+   * 应用头像
+   */
+  Avatar?: string
+  /**
+   * 应用描述
+   */
+  Description?: string
+  /**
+   * 应用名称
+   */
+  Name?: string
 }
 
 /**
@@ -7566,45 +10232,29 @@ export interface DeleteAppResponse {
 }
 
 /**
- * CreateAppTrigger请求参数结构体
+ * ES 配置
  */
-export interface CreateAppTriggerRequest {
+export interface ESConfig {
   /**
-   * <p>应用ID</p>
+   * <p>是否支持修改存储方式</p>
    */
-  AppId?: string
+  CanModify?: boolean
   /**
-   * <p>应用触发器执行配置</p>
+   * <p>ES 密码（加密后）</p>
    */
-  ExecuteConfig?: ExecuteConfig
+  EncryptedPassword?: string
   /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td><td>1</td><td>指令执行</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td><td>2</td><td>工作流执行</td></tr></tbody></table>
+   * <p>ES 集群 ID</p>
    */
-  ExecuteType?: number
+  InstanceId?: string
   /**
-   * <p>第三方推送配置</p>
+   * <p>存储类型：1=默认存储，2=自定义存储<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>ES_STORAGE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>ES_STORAGE_TYPE_DEFAULT</td><td>1</td><td>默认存储</td></tr><tr><td>ES_STORAGE_TYPE_CUSTOM</td><td>2</td><td>自定义存储</td></tr></tbody></table></p>
    */
-  PushConfig?: TimerPushConfig
+  StorageType?: number
   /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_SCOPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_SCOPE_APP</td><td>1</td><td>B 端管理员</td></tr><tr><td>APP_TRIGGER_SCOPE_USER</td><td>2</td><td>C 端访客</td></tr></tbody></table>
+   * <p>ES 用户名</p>
    */
-  Scope?: number
-  /**
-   * <p>触发器配置</p>
-   */
-  TriggerConfig?: TriggerConfig
-  /**
-   * <p>触发器名字</p>
-   */
-  TriggerName?: string
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>定时触发</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook 触发</td></tr></tbody></table>
-   */
-  TriggerType?: number
-  /**
-   * <p>访客ID</p>
-   */
-  UserId?: string
+  UserName?: string
 }
 
 /**
@@ -7668,6 +10318,20 @@ export interface CategoryPermission {
 }
 
 /**
+ * 文档任务状态信息
+ */
+export interface DocTaskStatus {
+  /**
+   * <p>已完成的历史任务类型列表</p>
+   */
+  CompletedTaskTypeList?: Array<number | bigint>
+  /**
+   * <p>正在进行中的任务类型列表</p>
+   */
+  OngoingTaskTypeList?: Array<number | bigint>
+}
+
+/**
  * ResetConversation请求参数结构体
  */
 export interface ResetConversationRequest {
@@ -7699,6 +10363,32 @@ export interface ResetConversationRequest {
    * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
    */
   UserId?: string
+}
+
+/**
+ * OAuth2.0授权信息
+ */
+export interface OAuthConfig {
+  /**
+   * OAuth服务方授权页url地址
+   */
+  AuthorizationUrl?: string
+  /**
+   * 客户端ID
+   */
+  ClientId?: string
+  /**
+   * 客户端密钥
+   */
+  ClientSecret?: string
+  /**
+   * 请求授权的数据范围
+   */
+  ScopeList?: Array<string>
+  /**
+   * 获取access token的url地址
+   */
+  TokenUrl?: string
 }
 
 /**
@@ -7816,17 +10506,13 @@ export interface DeleteChannelRequest {
 }
 
 /**
- * AppTriggerParamBindingValue
+ * CronSchedule
  */
-export interface AppTriggerParamBindingValue {
+export interface CronSchedule {
   /**
-   * <p>参数值</p>
+   * cron表达式
    */
-  ParamValue?: string
-  /**
-   * <p>应用变量名</p>
-   */
-  VariableName?: string
+  Expression?: string
 }
 
 /**
@@ -7841,6 +10527,66 @@ export interface CopyAgentFromAppResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 调用方执行的 Function Tool 配置
+ */
+export interface AgentExternalToolConfig {
+  /**
+   * <p>工具类型</p><p>入参限制：目前仅支持 &quot;function&quot;</p>
+   */
+  Type?: string
+  /**
+   * <p>工具名称</p>
+   */
+  Name?: string
+  /**
+   * <p>工具描述</p>
+   */
+  Description?: string
+  /**
+   * <p>工具入参定义</p>
+   */
+  Parameters?: Array<RequestParam>
+}
+
+/**
+ * 冲突 QA（冲突组中的单条 QA 快照）
+ */
+export interface ConflictQA {
+  /**
+   * <p>答案</p>
+   */
+  Answer?: string
+  /**
+   * <p>知识生效作用域：1=停用，2=仅开发域，3=仅发布域，4=全域<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>停用</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>仅开发域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>仅发布域</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>全域</td></tr></tbody></table></p>
+   */
+  EffectiveDomain?: number
+  /**
+   * <p>关联文档名称</p>
+   */
+  FileName?: string
+  /**
+   * <p>关联文档类型</p>
+   */
+  FileType?: string
+  /**
+   * <p>QA ID</p>
+   */
+  QaId?: string
+  /**
+   * <p>问题</p>
+   */
+  Question?: string
+  /**
+   * <p>来源类型：1=文档生成，2=批量导入，3=手动录入<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>QA_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>QA_SOURCE_TYPE_DOC</td><td>1</td><td>文档生成</td></tr><tr><td>QA_SOURCE_TYPE_BATCH_IMPORT</td><td>2</td><td>批量导入</td></tr><tr><td>QA_SOURCE_TYPE_MANUAL</td><td>3</td><td>手动录入</td></tr></tbody></table></p>
+   */
+  SourceType?: number
+  /**
+   * <p>更新时间（Unix 秒，用于排序判断新旧）</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -7922,6 +10668,34 @@ export interface CreateSkillShareResponse {
 }
 
 /**
+ * 表格增强配置
+ */
+export interface TableEnhancement {
+  /**
+   * <p>是否启用</p>
+   */
+  Enabled?: boolean
+}
+
+/**
+ * 知识来源信息
+ */
+export interface KnowledgeSource {
+  /**
+   * <p>是否为大数据</p>
+   */
+  IsBigData?: boolean
+  /**
+   * <p>是否为共享知识库</p>
+   */
+  IsShared?: boolean
+  /**
+   * <p>知识库名</p>
+   */
+  KbName?: string
+}
+
+/**
  * Agent摘要信息
  */
 export interface AgentSummary {
@@ -7978,29 +10752,51 @@ export interface ToolSummary {
 }
 
 /**
- * MsgRecordCategory
+ * ModifyLabel请求参数结构体
  */
-export interface MsgRecordCategory {
+export interface ModifyLabelRequest {
   /**
-   * <p>分类的业务 ID</p>
+   * <p>修改字段内容（不可为空，与 update_mask 配合使用）</p>
    */
-  CategoryId?: string
+  Fields: LabelModifyFields
   /**
-   * <p>子分类列表，树形嵌套</p>
+   * <p>所属知识库 ID</p>
    */
-  Children?: Array<MsgRecordCategory>
+  KbId: string
   /**
-   * <p>分类名称</p>
+   * <p>待修改的标签 ID</p>
    */
-  Name?: string
+  LabelId: string
   /**
-   * <p>当前用户对该分类的操作权限</p>
+   * <p>字段掩码：指定要修改的字段（支持的 Paths：Name, TermModifyList）</p>
    */
-  Permission?: CategoryPermission
+  UpdateMask: FieldMask
+}
+
+/**
+ * ModifyCategory请求参数结构体
+ */
+export interface ModifyCategoryRequest {
   /**
-   * <p>该分类下消息记录的数量</p>
+   * <p>待修改的分类 ID（必须大于 0）</p>
    */
-  TotalCount?: string
+  CategoryId: string
+  /**
+   * <p>分类类型（不可为 0，取值：1=文档分类，2=问答分类）<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>CATEGORY_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>CATEGORY_TYPE_DOC</td><td>1</td><td>文档分类</td></tr><tr><td>CATEGORY_TYPE_QA</td><td>2</td><td>问答分类</td></tr></tbody></table></p>
+   */
+  CategoryType: number
+  /**
+   * <p>修改字段内容（不可为空，与 update_mask 配合使用）</p>
+   */
+  Fields: CategoryModifyFields
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>字段掩码：指定要修改的字段（支持的 Paths：Name）</p>
+   */
+  UpdateMask: FieldMask
 }
 
 /**
@@ -8038,21 +10834,21 @@ export interface AppTriggerParamBindingConfig {
 }
 
 /**
- * CreateSkill返回参数结构体
+ * 知识库模型配置
  */
-export interface CreateSkillResponse {
+export interface KBModelConfig {
   /**
-   * <p>创建成功后的skillID</p>
+   * <p>Embedding 模型</p>
    */
-  SkillId?: string
+  EmbeddingModel?: string
   /**
-   * <p>创建成功后的版本ID</p>
+   * <p>QA 抽取模型</p>
    */
-  VersionId?: string
+  QaExtractModel?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>Schema 生成模型</p>
    */
-  RequestId?: string
+  SchemaModel?: string
 }
 
 /**
@@ -8093,6 +10889,20 @@ export interface VoiceConfig {
    * 公有云音色id
    */
   VoiceType: number
+}
+
+/**
+ * 文档更新周期配置
+ */
+export interface DocUpdatePeriod {
+  /**
+   * <p>是否开启周期性更新</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>更新周期（小时）</p>
+   */
+  PeriodHour?: number
 }
 
 /**
@@ -8213,6 +11023,20 @@ export interface AppMetadata {
 }
 
 /**
+ * CreateKB返回参数结构体
+ */
+export interface CreateKBResponse {
+  /**
+   * <p>创建后的知识库 ID</p>
+   */
+  KbId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 应用插件配置信息
  */
 export interface AppPluginConfig {
@@ -8223,21 +11047,25 @@ export interface AppPluginConfig {
 }
 
 /**
- * 模型状态信息
+ * 文档操作权限信息
  */
-export interface ModelStatus {
+export interface DocPermission {
   /**
-   * 专属并发数
+   * <p>是否可删除</p>
    */
-  Concurrency?: number
+  CanDelete?: boolean
   /**
-   * 是否专属并发
+   * <p>是否可编辑</p>
    */
-  IsExclusive?: boolean
+  CanEdit?: boolean
   /**
-   * 资源状态。1-资源可用, 2-资源已用尽
+   * <p>是否可重新生成</p>
    */
-  ResourceStatus?: number
+  CanRestart?: boolean
+  /**
+   * <p>是否可重试</p>
+   */
+  CanRetry?: boolean
 }
 
 /**
@@ -8355,6 +11183,20 @@ export interface PluginConfig {
 }
 
 /**
+ * 重排配置
+ */
+export interface RerankConfig {
+  /**
+   * <p>是否启用</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+}
+
+/**
  * 并发超限明细
  */
 export interface ConcurrencyLimitDetail {
@@ -8460,6 +11302,63 @@ export interface CopyAppRequest {
    * target_space_id
    */
   TargetSpaceId?: string
+}
+
+/**
+ * CreateCategory请求参数结构体
+ */
+export interface CreateCategoryRequest {
+  /**
+   * <p>分类类型（不可为 0，取值：1=文档分类，2=问答分类）<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>CATEGORY_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>CATEGORY_TYPE_DOC</td><td>1</td><td>文档分类</td></tr><tr><td>CATEGORY_TYPE_QA</td><td>2</td><td>问答分类</td></tr></tbody></table></p>
+   */
+  CategoryType: number
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>分类名（长度：1~64 个字符）</p>
+   */
+  Name: string
+  /**
+   * <p>父分类 ID</p>
+   */
+  ParentCategoryId?: string
+}
+
+/**
+ * DescribeAgentDetail返回参数结构体
+ */
+export interface DescribeAgentDetailResponse {
+  /**
+   * <p>Agent信息</p>
+   */
+  Agent?: AgentDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 检索可选配置
+ */
+export interface RetrievalOption {
+  /**
+   * <p>时效性检索增强配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpirationAwareness?: ExpirationAwareness
+  /**
+   * <p>GraphRAG配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GraphRag?: GraphRAG
+  /**
+   * <p>表格增强配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableEnhancement?: TableEnhancement
 }
 
 /**
@@ -8614,24 +11513,27 @@ export interface AppTriggerWorkflowExecuteConfig {
 }
 
 /**
- * 模式配置 - 包含不同模式的独有配置
+ * 标签引用身份标识（入参用）
  */
-export interface AppModeConfig {
+export interface LabelRefIdentity {
   /**
-   * 多智能体配置(Agent模式)
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>标签 ID</p>
    */
-  MultiAgentConfig: MultiAgentConfig
+  LabelId?: string
   /**
-   * 单工作流配置(单工作流模式)
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>标签标准词 ID 列表</p>
    */
-  SingleWorkflowConfig: SingleWorkflowConfig
+  LabelTermIdList?: Array<string>
+}
+
+/**
+ * ModifyAgent返回参数结构体
+ */
+export interface ModifyAgentResponse {
   /**
-   * ClawAgent配置(ClawAgent模式)
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ClawAgentConfig?: ClawAgentConfig
+  RequestId?: string
 }
 
 /**
@@ -8650,6 +11552,20 @@ export interface ModelProviderBasic {
    * 模型提供商类型。1-自有提供商, 2-自定义模型提供商, 3-第三方模型提供商
    */
   ProviderType?: number
+}
+
+/**
+ * QA 相似问统计
+ */
+export interface SimilarQuestionStat {
+  /**
+   * <p>相似问数量</p>
+   */
+  SimilarQuestionCount?: number
+  /**
+   * <p>相似问提示（展示一条相似问样例）</p>
+   */
+  SimilarQuestionTips?: string
 }
 
 /**
@@ -8680,6 +11596,66 @@ export interface AppAdvancedConf {
 }
 
 /**
+ * 知识库摘要信息
+ */
+export interface KBSummary {
+  /**
+   * <p>关联的应用列表，仅共享知识库返回</p>
+   */
+  AppList?: Array<Identity>
+  /**
+   * <p>创建时间（Unix 秒）</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>创建人</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: Operator
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>文档数</p>
+   */
+  DocCount?: number
+  /**
+   * <p>是否超量</p>
+   */
+  IsExceeded?: boolean
+  /**
+   * <p>知识库 ID</p>
+   */
+  KbId?: string
+  /**
+   * <p>类型：1=默认知识库，2=共享知识库<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>KB_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KB_TYPE_DEFAULT</td><td>1</td><td>默认知识库</td></tr><tr><td>KB_TYPE_SHARED</td><td>2</td><td>共享知识库</td></tr></tbody></table></p>
+   */
+  KbType?: number
+  /**
+   * <p>最后操作人，仅共享知识库返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestOperator?: Operator
+  /**
+   * <p>知识库名称</p>
+   */
+  Name?: string
+  /**
+   * <p>处理中状态列表</p>
+   */
+  ProcessingFlagList?: Array<number | bigint>
+  /**
+   * <p>共享子类型：1=普通，2=公众号<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SHARED_KB_SUB_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SHARED_KB_SUB_TYPE_NORMAL</td><td>1</td><td>普通</td></tr><tr><td>SHARED_KB_SUB_TYPE_PUBLIC_ACCOUNT</td><td>2</td><td>公众号</td></tr></tbody></table></p>
+   */
+  SharedSubType?: number
+  /**
+   * <p>更新时间（Unix 秒）</p>
+   */
+  UpdateTime?: string
+}
+
+/**
  * PauseAppTrigger返回参数结构体
  */
 export interface PauseAppTriggerResponse {
@@ -8687,6 +11663,42 @@ export interface PauseAppTriggerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyKB返回参数结构体
+ */
+export interface ModifyKBResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DuplexBilling
+ */
+export interface DuplexBilling {
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>UNKNOW</td><td>0</td><td></td></tr><tr><td>TOKEN</td><td>1</td><td>按token</td></tr><tr><td>PAGE_COUNT</td><td>2</td><td>按页数</td></tr><tr><td>TIMES</td><td>3</td><td>按次数</td></tr><tr><td>TIMES_THOUSAND</td><td>4</td><td>按千次数</td></tr><tr><td>SECOND</td><td>5</td><td>按时长</td></tr><tr><td>CHARACTER</td><td>6</td><td>按字符数</td></tr><tr><td>CHARACTER_THOUSAND</td><td>7</td><td>按千字符数</td></tr><tr><td>SHEET</td><td>8</td><td>按张</td></tr><tr><td>NUMBER</td><td>9</td><td>按个数</td></tr></tbody></table>
+   */
+  BillingUnit?: number
+  /**
+   * <p>输入现金价格</p><p>单位：元</p>
+   */
+  InputCashPrice?: number
+  /**
+   * <p>输入pu价格</p><p>单位：pu</p>
+   */
+  InputPuPrice?: number
+  /**
+   * <p>输出现金价格</p><p>单位：元</p>
+   */
+  OutputCashPrice?: number
+  /**
+   * <p>输出pu价格</p><p>单位：pu</p>
+   */
+  OutputPuPrice?: number
 }
 
 /**

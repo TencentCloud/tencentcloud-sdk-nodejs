@@ -406,6 +406,20 @@ export interface TalkActivateRecordLogInfo {
 }
 
 /**
+ * TWeSee 直传对象自定义元数据项
+ */
+export interface SeeObjectMetadataEntry {
+  /**
+   * 元数据名称
+   */
+  Name?: string
+  /**
+   * 元数据值
+   */
+  Value?: string
+}
+
+/**
  * ModifyPositionFence返回参数结构体
  */
 export interface ModifyPositionFenceResponse {
@@ -2170,6 +2184,40 @@ export interface SeeFaceInfo {
 }
 
 /**
+ * TWeSee 直传对象元数据
+ */
+export interface SeeObjectMetadata {
+  /**
+   * <p>对象 Key</p>
+   */
+  Key?: string
+  /**
+   * <p>对象的 COS URI</p>
+   */
+  COSURI?: string
+  /**
+   * <p>对象的 MIME 类型</p>
+   */
+  ContentType?: string
+  /**
+   * <p>对象大小，单位：字节</p>
+   */
+  Size?: number
+  /**
+   * <p>对象的 ETag</p>
+   */
+  ETag?: string
+  /**
+   * <p>对象最后修改时间，秒级 UNIX 时间戳</p>
+   */
+  LastModified?: number
+  /**
+   * <p>对象的自定义元数据列表</p>
+   */
+  Metadata?: Array<SeeObjectMetadataEntry>
+}
+
+/**
  * GetDeviceList请求参数结构体
  */
 export interface GetDeviceListRequest {
@@ -2303,6 +2351,28 @@ export interface CreateTWeSeeDirectUploadCredentialRequest {
    * <p>上传目标</p><p>枚举值：</p><ul><li>session： 一次性上传会话（默认，通过入参传递 ComprehensionConfig 等上传参数）</li><li>stream： 上传到指定设备（加载对应设备的 ComprehensionConfig 等配置）</li></ul><p>默认值：session</p>
    */
   UploadTarget?: string
+}
+
+/**
+ * OperateTWeSeeDirectUploadObject请求参数结构体
+ */
+export interface OperateTWeSeeDirectUploadObjectRequest {
+  /**
+   * TWeSee 直传对象或目录的 COS URI
+   */
+  COSURI: string
+  /**
+   * 操作类型。可选值：
+
+- `HeadObject`：查询对象元数据
+- `DeleteObject`：删除对象
+- `ListBucket`：列举对象
+   */
+  Operation: string
+  /**
+   * 列举对象时使用的分页和目录选项
+   */
+  ListOptions?: SeeObjectListOptions
 }
 
 /**
@@ -4669,6 +4739,32 @@ export interface SeeCreateSubscriptionEntry {
 }
 
 /**
+ * TWeSee 直传对象概要信息
+ */
+export interface SeeObjectSummary {
+  /**
+   * <p>对象 Key</p>
+   */
+  Key?: string
+  /**
+   * <p>TWeSee 直传对象或目录的 COS URI</p>
+   */
+  COSURI?: string
+  /**
+   * <p>对象大小，单位：字节</p>
+   */
+  Size?: number
+  /**
+   * <p>对象的 ETag</p>
+   */
+  ETag?: string
+  /**
+   * <p>对象最后修改时间，秒级 UNIX 时间戳</p>
+   */
+  LastModified?: number
+}
+
+/**
  * TWeSee 语义理解自定义标签请求
  */
 export interface VisionCustomDetectQuery {
@@ -6313,6 +6409,44 @@ export interface AppDeviceInfo {
 }
 
 /**
+ * 单个订单的查询结果。查询失败时 ErrorCode 和 ErrorMessage 非空。
+ */
+export interface BatchDescribeTWeSeeOrdersResult {
+  /**
+   * <p>订单 ID</p>
+   */
+  OrderId?: string
+  /**
+   * <p>订单状态。</p><p>枚举值：</p><ul><li>DELIVERED： 已发货</li><li>DELIVERING： 发货中</li><li>DELIVER_FAILED： 发货失败</li><li>NOT_DELIVERED： 未发货</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>资源 ID</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>币种</p>
+   */
+  Currency?: string
+  /**
+   * <p>订单价格</p>
+   */
+  Price?: string
+  /**
+   * <p>自定义订单 ID</p>
+   */
+  CustomOrderId?: string
+  /**
+   * <p>单个订单的查询错误码，查询成功时为空</p>
+   */
+  ErrorCode?: string
+  /**
+   * <p>单个订单的查询错误信息，查询成功时为空</p>
+   */
+  ErrorMessage?: string
+}
+
+/**
  * DescribeCloudStorage返回参数结构体
  */
 export interface DescribeCloudStorageResponse {
@@ -6876,13 +7010,37 @@ export interface GetTWeTalkActiveStatusResponse {
 }
 
 /**
- * DismissRoomByStrRoomIdFromTRTC请求参数结构体
+ * DescribeCloudStorageTime请求参数结构体
  */
-export interface DismissRoomByStrRoomIdFromTRTCRequest {
+export interface DescribeCloudStorageTimeRequest {
   /**
-   * 房间id
+   * 产品ID
    */
-  RoomId: string
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 云存日期，例如"2020-01-05"
+   */
+  Date: string
+  /**
+   * 开始时间，unix时间
+   */
+  StartTime?: number
+  /**
+   * 结束时间，unix时间
+   */
+  EndTime?: number
+  /**
+   * 用户ID
+   */
+  UserId?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
 }
 
 /**
@@ -7283,6 +7441,24 @@ export interface UnbindTWeTalkAIBotResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TWeSee 直传对象列举选项
+ */
+export interface SeeObjectListOptions {
+  /**
+   * 目录分隔符
+   */
+  Delimiter?: string
+  /**
+   * 分页标记
+   */
+  Marker?: string
+  /**
+   * 单页返回的最大对象数量
+   */
+  MaxKeys?: number
 }
 
 /**
@@ -8020,6 +8196,44 @@ export interface BatchInvokeTWeSeeRecognitionTaskRequest {
 }
 
 /**
+ * TWeSee 直传对象列举结果
+ */
+export interface SeeObjectListing {
+  /**
+   * <p>对象列表</p>
+   */
+  Contents?: Array<SeeObjectSummary>
+  /**
+   * <p>子目录路径列表</p>
+   */
+  CommonPrefixes?: Array<string>
+  /**
+   * <p>本次列举使用的目录分隔符</p>
+   */
+  Delimiter?: string
+  /**
+   * <p>是否还有后续分页数据</p>
+   */
+  IsTruncated?: boolean
+  /**
+   * <p>本次列举使用的分页标记</p>
+   */
+  Marker?: string
+  /**
+   * <p>本次列举的最大对象数量</p>
+   */
+  MaxKeys?: number
+  /**
+   * <p>下一页的分页标记</p>
+   */
+  NextMarker?: string
+  /**
+   * <p>本次列举的对象路径前缀</p>
+   */
+  Prefix?: string
+}
+
+/**
  * InvokeTWeSeeRecognitionTask请求参数结构体
  */
 export interface InvokeTWeSeeRecognitionTaskRequest {
@@ -8738,6 +8952,16 @@ export interface GetProjectListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * BatchDescribeTWeSeeOrders请求参数结构体
+ */
+export interface BatchDescribeTWeSeeOrdersRequest {
+  /**
+   * 待查询的订单列表，最多 200 条
+   */
+  Entries: Array<BatchDescribeTWeSeeOrdersEntry>
 }
 
 /**
@@ -9555,6 +9779,28 @@ export interface WXDeviceInfo {
 }
 
 /**
+ * OperateTWeSeeDirectUploadObject返回参数结构体
+ */
+export interface OperateTWeSeeDirectUploadObjectResponse {
+  /**
+   * 对象列举结果
+   */
+  ListingResponse?: SeeObjectListing
+  /**
+   * 对象元数据
+   */
+  ObjectResponse?: SeeObjectMetadata
+  /**
+   * 操作结果状态码
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListOtaModules返回参数结构体
  */
 export interface ListOtaModulesResponse {
@@ -10250,6 +10496,20 @@ export interface CreateVisionRecognitionTaskOutput {
 }
 
 /**
+ * 待查询的订单标识。OrderId 和 CustomOrderId 必须且只能填写一个。
+ */
+export interface BatchDescribeTWeSeeOrdersEntry {
+  /**
+   * <p>订单 ID，与 CustomOrderId 二选一</p>
+   */
+  OrderId?: string
+  /**
+   * <p>自定义订单 ID，与 OrderId 二选一</p>
+   */
+  CustomOrderId?: string
+}
+
+/**
  * BatchCreateTWeSeeRecognitionTask返回参数结构体
  */
 export interface BatchCreateTWeSeeRecognitionTaskResponse {
@@ -10486,6 +10746,20 @@ export type ModifyPositionFenceRequest = null
  * BindDevices返回参数结构体
  */
 export interface BindDevicesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BatchDescribeTWeSeeOrders返回参数结构体
+ */
+export interface BatchDescribeTWeSeeOrdersResponse {
+  /**
+   * 与请求 Entries 顺序一致的订单查询结果
+   */
+  Results?: Array<BatchDescribeTWeSeeOrdersResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14407,37 +14681,13 @@ export interface ModifyLoRaGatewayRequest {
 }
 
 /**
- * DescribeCloudStorageTime请求参数结构体
+ * DismissRoomByStrRoomIdFromTRTC请求参数结构体
  */
-export interface DescribeCloudStorageTimeRequest {
+export interface DismissRoomByStrRoomIdFromTRTCRequest {
   /**
-   * 产品ID
+   * 房间id
    */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName: string
-  /**
-   * 云存日期，例如"2020-01-05"
-   */
-  Date: string
-  /**
-   * 开始时间，unix时间
-   */
-  StartTime?: number
-  /**
-   * 结束时间，unix时间
-   */
-  EndTime?: number
-  /**
-   * 用户ID
-   */
-  UserId?: string
-  /**
-   * 通道ID
-   */
-  ChannelId?: number
+  RoomId: string
 }
 
 /**

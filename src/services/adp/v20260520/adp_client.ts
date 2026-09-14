@@ -21,7 +21,9 @@ import {
   DeleteSkillShareRequest,
   ToolConfig,
   SkillClassification,
+  SearchInput,
   AgentAdvancedConfig,
+  FinalRerankConfig,
   PluginStatistics,
   IntentAchievementInfo,
   RollbackReleaseRequest,
@@ -34,45 +36,59 @@ import {
   Conversation,
   AuthConfig,
   AppShareAccessControl,
+  KBCategory,
   DialogCustomConfig,
   DescribeMetricOverviewListResponse,
   DescribeAppSummaryListRequest,
   ExecuteConfig,
+  CreateLabelResponse,
   TriggerConfig,
   DescribeModelListRequest,
   DescribeMsgRecordCategoryListResponse,
   DeleteVariableResponse,
+  DescribeLabelSummaryListResponse,
+  DescribeDocResponse,
   ApiPluginConfig,
   AppealingStatus,
   DescribeVariableResponse,
+  CreateLabelRequest,
   CodeToolConfig,
+  ModelStatus,
   SkillCorpShareConfig,
   DescribeMsgRecordListRequest,
   WeeklyTime,
   UsageSummary,
   SkillReferenceSummary,
-  ModifyAppTriggerRequest,
+  BillingAttribute,
   DescribeConcurrencyLimitDetailListResponse,
   DescribeChannelRequest,
   AgentSpec,
   ClawAgentConfig,
+  ModelLimit,
   CreatePluginRequest,
   ThinkModel,
   DeleteAgentResponse,
+  ModifyConversationResponse,
   RetryReleaseRequest,
   AppConfig,
   AppAuxiliaryInfo,
+  ModifyLabelResponse,
   ModifyConversationRequest,
   CreateChannelResponse,
+  TimerScheduleConfig,
+  DeleteCategoryResponse,
+  SearchResultPayload,
   DescribeUsageDetailListResponse,
   DescribeAppTriggerResponse,
   ModifyVariableResponse,
+  DescribeKBSummaryListRequest,
   AgentSkillConfig,
   ModifyAgentRequest,
   PluginOperation,
   AppWebSearchConfig,
   AgentProfile,
-  ModelLimit,
+  SearchAdvancedConfig,
+  KnowledgeScope,
   WechatChannelConfig,
   RunAppTriggerNowRequest,
   AppTriggerWebhookConfig,
@@ -80,26 +96,37 @@ import {
   MsgRecordResult,
   CreateVariableResponse,
   AppShareURLInfo,
+  ReleaseSkillResponse,
   ModelProperty,
+  DocParseConfig,
   CreateReleaseResponse,
+  DescribeConflictQASummaryListResponse,
   DescribeConversationListRequest,
   ModelDetailInfo,
-  CreateAppRequest,
+  ModifyVariableRequest,
   DescribeConcurrencyLimitDetailListRequest,
   MCPPluginConfig,
   CreateMsgRecordCategoryResponse,
+  CreateQAListRequest,
   DeleteVariableRequest,
-  ReleaseSkillResponse,
+  CreateAppTriggerRequest,
   AppTriggerInstance,
+  ModifyDocListRequest,
   DeleteConversationRequest,
+  ModifyConflictQARequest,
+  DescribeAppTriggerRunLogListResponse,
+  DescribeConflictQASummaryListRequest,
   DescribeSkillSummaryListRequest,
+  DocLink,
   CopyAppResponse,
   AgentPluginCredentialConfig,
   ComplexBillingItem,
   BackgroundImage,
-  TimerScheduleConfig,
+  ModifyConflictQAResponse,
   Model,
-  ModifySkillResponse,
+  LabelTermCheckResult,
+  SearchResourceStatusInfo,
+  CreateQAGenerationTaskRequest,
   DingTalkChannelConfig,
   DescribeSpaceListRequest,
   AppTriggerRunLog,
@@ -107,62 +134,88 @@ import {
   CamAuthConfig,
   DescribeSkillReferenceListResponse,
   UnfavoritePluginResponse,
-  ModifySpaceRequest,
+  CreateKBRequest,
   DeleteMsgRecordCategoryResponse,
   GenerateModel,
   FavoriteSkillResponse,
   SkillShare,
   AppShareWhitelistItem,
+  ModifyKBRequest,
   CreateWebSocketTokenRequest,
   DescribeChannelListRequest,
-  DeleteSkillResponse,
+  DescribeQARequest,
+  DocQuery,
+  SkillNotice,
   DescribeAgentReleasePreviewListRequest,
+  DocSwitch,
   PauseAppTriggerRequest,
+  MetaValue,
+  LabelTermModifyItem,
   CopyAgentFromAppRequest,
+  QACreateSpec,
   ModelParameter,
   ModifyAppResponse,
+  ExpirationPolicy,
   DescribeAccountListRequest,
   WechatCustomerServiceChannelConfig,
   DescribeConversationListResponse,
   MultiAgentConfig,
   CreateWebSocketTokenResponse,
   DescribeChannelListResponse,
+  QASegmentHighlight,
   DescribeSkillCategoryListResponse,
   LarkChannelConfig,
   TimeRange,
   DescribeConsumptionDetailListResponse,
-  CreatePluginResponse,
+  ConflictQASummary,
   ModifyChannelResponse,
+  DeleteCategoryRequest,
+  AppOperation,
   ClawAgentAgentTeamConfig,
   DescribeSystemVariableListResponse,
+  UserAccessConfig,
   TelegramChannelConfig,
   AgentPlugin,
+  SimilarQuestionModifySpec,
+  SearchBilling,
+  DeleteQAListResponse,
   ConversationResetInfo,
-  ModifyConversationResponse,
+  QASourceInfo,
+  CheckResult,
   ConversationQuoteInfo,
+  DeleteLabelListRequest,
   DescribeSpaceListResponse,
   LineChannelConfig,
   ConversationRecordSummary,
   ConversationRecordTimeUsage,
   App,
-  CronSchedule,
-  DescribeAppTriggerRunLogListResponse,
+  AppTriggerParamBindingValue,
+  DocMetadata,
   FileParseModel,
   AppAppeal,
   DescribeSkillCategoryListRequest,
   DigitalHumanConfig,
   DescribeLatestReleaseResponse,
-  SkillNotice,
+  SearchContext,
   ResponseParam,
+  ModifyQAListResponse,
   SingleWorkflowConfig,
+  CreatePluginResponse,
+  CreateSimilarQuestionResponse,
   DescribeChannelResponse,
+  QAModifyFields,
   AgentPluginConfig,
   PluginSummary,
+  ModifyDocListResponse,
+  DescribeQASummaryListRequest,
   CreateWorkspaceCredentialResponse,
   ConversationMcpApp,
   ModifyPluginRequest,
+  DeDuplicateStrategy,
   DescribeAccountListResponse,
   DeleteChannelResponse,
+  PluginParam,
+  DocModifyFields,
   AgentUserInputValue,
   SkillProfile,
   DescribeMetricOverviewListRequest,
@@ -171,18 +224,28 @@ import {
   DescribeAppTriggerRunLogListRequest,
   ResourceConsumption,
   ModelBasic,
+  DescribeKBSummaryListResponse,
   ModifyAppRequest,
-  ModifySkillRequest,
+  DeleteQAListRequest,
+  MCPToolMeta,
   CreateSpaceResponse,
+  DocImportSpec,
   CreateVariableRequest,
   ConsumptionClassification,
+  ExportQARequest,
   DescribeSystemVariableListRequest,
   DescribeReleaseSummaryResponse,
+  QASummary,
   MCPToolConfig,
+  DescribeKBResponse,
   SkillSummary,
+  DescribeLabelRequest,
   WecomRobotWebsocketAccess,
   AgentCollaborationConfig,
-  ModifyAppTriggerResponse,
+  MsgRecordCategory,
+  SummaryListSwitch,
+  CheckLabelRequest,
+  ModifySkillResponse,
   RoleConfig,
   DescribeAuditLogListResponse,
   DescribeUsageDetailListRequest,
@@ -193,6 +256,9 @@ import {
   DescribeAppSummaryListResponse,
   ClawAgentLongMemoryConfig,
   FavoritePluginRequest,
+  KnowledgeSnippetProfile,
+  ContentFilter,
+  ImportDocListResponse,
   SupportedFileType,
   SkillCategory,
   AgentTool,
@@ -205,70 +271,101 @@ import {
   InputBoxConfig,
   AppTrigger,
   DescribeAgentSummaryListResponse,
+  DeleteKBRequest,
   SkillVersion,
-  ModifyAgentResponse,
+  AppModeConfig,
   DescribeMsgRecordListResponse,
+  Tool,
   ModelUsageSummary,
+  DescribeQAResponse,
   DescribeVariableListResponse,
+  LabelRef,
+  ModifyQARequest,
+  LabelSummary,
   DescribeReleaseListRequest,
+  ModifySpaceResponse,
   ConversationReference,
   MsgRecord,
+  LabelModifyFields,
   DeleteMsgRecordCategoryRequest,
+  DocOperator,
+  DescribeDocSummaryListRequest,
   ModifyMsgRecordCategoryResponse,
   UnfavoritePluginRequest,
   AgentModelConfig,
   ModelUsageDetail,
+  ModifyQAListRequest,
   CreateConversationResponse,
   DescribeSkillDetailRequest,
   Variable,
+  ExpirationAwareness,
   FavoriteSkillRequest,
   AppSharedKbInfo,
   ModifyMsgRecordCategoryRequest,
   ResetConversationResponse,
   DailySchedule,
-  AppSubStatusInfo,
+  PromptRewriteModel,
   ManualOnlySchedule,
+  ModifySpaceRequest,
   DescribePluginSummaryListRequest,
   CreateAppResponse,
+  KBModifyExtendFields,
+  QARetrievalConfig,
   AuditLogMetaField,
+  CreateQAListResponse,
   ModelDeveloperBasic,
-  MCPToolMeta,
+  ModifySkillRequest,
   AppExperienceConfig,
   ResumeAppTriggerRequest,
-  PluginParam,
+  QAOperator,
+  LabelRefIdentityList,
   CreateReleaseRequest,
   CreateWorkspaceCredentialRequest,
-  BillingAttribute,
+  ModifyAppTriggerRequest,
   DescribeAppTriggerSummaryListResponse,
+  DescribeKBRequest,
   CreateAgentRequest,
   ConversationExperience,
   DeletePluginResponse,
   DeletePluginRequest,
   AIOptimizeModel,
-  Tool,
-  ModifySpaceResponse,
+  SearchFilterConfig,
+  CreateSimilarQuestionRequest,
+  KBRetrievalConfig,
   SkillDetail,
   DescribePluginSummaryListResponse,
-  PromptRewriteModel,
+  AppSubStatusInfo,
   ViewScope,
   CreateConversationRequest,
-  AgentExternalToolConfig,
+  CreateSkillResponse,
+  DescribeDocRequest,
   WecomAppChannelConfig,
   DescribeMsgRecordCategoryListRequest,
   CallSource,
   ConsumptionUsage,
   AppTriggerPromptExecuteConfig,
   DeleteSkillShareResponse,
+  ModifyCategoryResponse,
+  ReleaseSummary,
+  SimilarQuestion,
   AgentToolBasicConfig,
+  DescribeConflictQAResponse,
   AppStatusInfo,
   ComplexBilling,
+  DocRetrievalConfig,
+  DescribeLabelSummaryListRequest,
+  SearchKnowledgeResponse,
   DeleteConversationResponse,
   DescribeAuditLogMetaResponse,
-  MultiModalQAModel,
+  DescribeCategoryListResponse,
+  AppTriggerParamSchema,
   TimerPushConfig,
   ChannelSpec,
   AgentToolConfig,
-  OAuthConfig,
+  DeleteSkillResponse,
+  KBCapacity,
+  SimilarQuestionExtra,
+  DeleteDocListRequest,
   WeeklySchedule,
   ModelParams,
   AgentInput,
@@ -277,17 +374,27 @@ import {
   CreateChannelRequest,
   Identity,
   AccessKeyAuthConfig,
-  DescribeAgentDetailResponse,
+  DescribeLabelResponse,
   CreateAppTriggerResponse,
+  DeleteKBResponse,
+  DocSummary,
+  KBSpec,
   SystemVariable,
   ModifyPluginResponse,
+  DescribeQASummaryListResponse,
   DescribeAppTriggerInstanceResponse,
   UserAgentReference,
   CreateSkillShareRequest,
+  LabelTerm,
   ConsumptionDetail,
+  QALifecycle,
+  CategoryPath,
+  ModifyDocRequest,
   AppGreetingConfig,
   DescribeAppTriggerSummaryListRequest,
   AppTriggerScheduleConfig,
+  KnowledgeResult,
+  ModifyAppTriggerResponse,
   AccountInfo,
   CreateSkillRequest,
   Sort,
@@ -295,15 +402,22 @@ import {
   FavoritePluginResponse,
   MetricOverview,
   AgentSkill,
+  SearchKnowledgeRequest,
+  DBRetrievalConfig,
   ModelBadge,
+  TokenUsage,
   PlatformUsageSummary,
+  DeleteLabelListResponse,
   AgentSystemVariable,
-  AppOperation,
+  DocExternalLink,
   PluginProfile,
   DescribePluginResponse,
   DescribeAgentReleasePreviewListResponse,
   DescribeSkillSummaryListResponse,
   DescribeConversationMessageListRequest,
+  EffectivePeriod,
+  DescribeDocSummaryListResponse,
+  DeleteDocListResponse,
   DescribeReleaseListResponse,
   DeleteAgentRequest,
   RequestParam,
@@ -313,34 +427,48 @@ import {
   AgentToolInputParameter,
   WecomRobotCallbackAccess,
   RunAppTriggerNowResponse,
+  DescribeConflictQARequest,
   DescribeSkillDetailResponse,
   CallbackConfig,
   DeleteAppTriggerRequest,
-  ReleaseSummary,
+  QAPermission,
+  CreateQAGenerationTaskResponse,
+  CategoryModifyFields,
+  OperationResult,
   OnceSchedule,
+  QAQuery,
   UnfavoriteSkillResponse,
-  AppTriggerParamSchema,
+  MultiModalQAModel,
   CreateSpaceRequest,
   MCPToolUIMeta,
-  SearchResourceStatusInfo,
+  ModifyDocResponse,
+  SearchFilter,
+  DescribeCategoryListRequest,
   FieldMask,
   AppTriggerWebhookParamSchemaConfig,
   ConversationMessage,
+  CreateCategoryResponse,
   WecomRobotChannelConfig,
+  ImportDocListRequest,
   DescribeConsumptionDetailListRequest,
   DescribeVariableListRequest,
+  Operator,
+  ExportQAResponse,
+  QAMetadata,
   DescribeConversationMessageListResponse,
   AppToolConfig,
   RollbackReleaseResponse,
   DescribeReleaseSummaryRequest,
   AppWorkflowConfig,
   ConversationAgentTask,
+  CheckLabelResponse,
   AppTriggerScheduleStatus,
+  KVPair,
   DeleteSkillRequest,
   DescribePluginRequest,
   Channel,
   PluginUserState,
-  DuplexBilling,
+  DocLifecycle,
   MultiModalUnderstandingModel,
   DescribeAppTriggerRequest,
   CorpShareConfig,
@@ -352,63 +480,83 @@ import {
   DescribeAppTriggerInstanceRequest,
   AppSecretInfo,
   AgentDetail,
-  ModifyVariableRequest,
+  GraphRAG,
+  ModifyQAResponse,
+  CreateAppRequest,
   DeleteAppResponse,
-  CreateAppTriggerRequest,
+  ESConfig,
   AppTriggerWebhookStatus,
   ResumeAppTriggerResponse,
   AccessKeyParamConfig,
   CategoryPermission,
+  DocTaskStatus,
   ResetConversationRequest,
+  OAuthConfig,
   ToolBilling,
   BasicBilling,
   DescribeAppRequest,
   IntervalSchedule,
   DescribeLatestReleaseRequest,
   DeleteChannelRequest,
-  AppTriggerParamBindingValue,
+  CronSchedule,
   CopyAgentFromAppResponse,
+  AgentExternalToolConfig,
+  ConflictQA,
   RetryReleaseResponse,
   AICallConfig,
   ModifyChannelRequest,
   CreateSkillShareResponse,
+  TableEnhancement,
+  KnowledgeSource,
   AgentSummary,
   DeleteAppTriggerResponse,
   Filter,
   ToolSummary,
-  MsgRecordCategory,
+  ModifyLabelRequest,
+  ModifyCategoryRequest,
   AccessKeyPassThroughConfig,
   DescribeSkillReferenceListRequest,
   AppTriggerParamBindingConfig,
-  CreateSkillResponse,
+  KBModelConfig,
   DescribeAuditLogListRequest,
   VoiceConfig,
+  DocUpdatePeriod,
   DescribeConversationResponse,
   Space,
   PluginUsageSummary,
   AppMetadata,
+  CreateKBResponse,
   AppPluginConfig,
-  ModelStatus,
+  DocPermission,
   AppMemoryConfig,
   TriggerStatus,
   DescribeAgentSummaryListRequest,
   AppTriggerParamBinding,
   PluginConfig,
+  RerankConfig,
   ConcurrencyLimitDetail,
   CreateMsgRecordCategoryRequest,
   DescribeAgentDetailRequest,
   AgentPluginParameter,
   PluginUsageDetail,
   CopyAppRequest,
+  CreateCategoryRequest,
+  DescribeAgentDetailResponse,
+  RetrievalOption,
   DeleteSpaceRequest,
   ReleaseRecord,
   ConversationRecordTokenUsage,
   SkillAnalysisInfo,
   AppTriggerWorkflowExecuteConfig,
-  AppModeConfig,
+  LabelRefIdentity,
+  ModifyAgentResponse,
   ModelProviderBasic,
+  SimilarQuestionStat,
   AppAdvancedConf,
+  KBSummary,
   PauseAppTriggerResponse,
+  ModifyKBResponse,
+  DuplexBilling,
   SpecialStatusInfo,
 } from "./adp_models"
 
@@ -432,13 +580,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改会话信息
+   * 查询标签详情
    */
-  async ModifyConversation(
-    req: ModifyConversationRequest,
-    cb?: (error: string, rep: ModifyConversationResponse) => void
-  ): Promise<ModifyConversationResponse> {
-    return this.request("ModifyConversation", req, cb)
+  async DescribeLabel(
+    req: DescribeLabelRequest,
+    cb?: (error: string, rep: DescribeLabelResponse) => void
+  ): Promise<DescribeLabelResponse> {
+    return this.request("DescribeLabel", req, cb)
   }
 
   /**
@@ -472,13 +620,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询模型列表
+   * 修改渠道（支持修改备注与企微机器人渠道回调机器人ID）
    */
-  async DescribeModelList(
-    req: DescribeModelListRequest,
-    cb?: (error: string, rep: DescribeModelListResponse) => void
-  ): Promise<DescribeModelListResponse> {
-    return this.request("DescribeModelList", req, cb)
+  async ModifyChannel(
+    req: ModifyChannelRequest,
+    cb?: (error: string, rep: ModifyChannelResponse) => void
+  ): Promise<ModifyChannelResponse> {
+    return this.request("ModifyChannel", req, cb)
+  }
+
+  /**
+   * DescribeAppTriggerRunLogList
+   */
+  async DescribeAppTriggerRunLogList(
+    req: DescribeAppTriggerRunLogListRequest,
+    cb?: (error: string, rep: DescribeAppTriggerRunLogListResponse) => void
+  ): Promise<DescribeAppTriggerRunLogListResponse> {
+    return this.request("DescribeAppTriggerRunLogList", req, cb)
   }
 
   /**
@@ -492,13 +650,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改插件
+   * 获取渠道详情（scene区分场景）
    */
-  async ModifyPlugin(
-    req: ModifyPluginRequest,
-    cb?: (error: string, rep: ModifyPluginResponse) => void
-  ): Promise<ModifyPluginResponse> {
-    return this.request("ModifyPlugin", req, cb)
+  async DescribeChannel(
+    req: DescribeChannelRequest,
+    cb?: (error: string, rep: DescribeChannelResponse) => void
+  ): Promise<DescribeChannelResponse> {
+    return this.request("DescribeChannel", req, cb)
   }
 
   /**
@@ -519,6 +677,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMsgRecordListResponse) => void
   ): Promise<DescribeMsgRecordListResponse> {
     return this.request("DescribeMsgRecordList", req, cb)
+  }
+
+  /**
+   * 查询知识库列表
+   */
+  async DescribeKBSummaryList(
+    req: DescribeKBSummaryListRequest,
+    cb?: (error: string, rep: DescribeKBSummaryListResponse) => void
+  ): Promise<DescribeKBSummaryListResponse> {
+    return this.request("DescribeKBSummaryList", req, cb)
   }
 
   /**
@@ -613,13 +781,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取渠道详情（scene区分场景）
+   * 收藏skill
    */
-  async DescribeChannel(
-    req: DescribeChannelRequest,
-    cb?: (error: string, rep: DescribeChannelResponse) => void
-  ): Promise<DescribeChannelResponse> {
-    return this.request("DescribeChannel", req, cb)
+  async FavoriteSkill(
+    req: FavoriteSkillRequest,
+    cb?: (error: string, rep: FavoriteSkillResponse) => void
+  ): Promise<FavoriteSkillResponse> {
+    return this.request("FavoriteSkill", req, cb)
   }
 
   /**
@@ -673,6 +841,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改会话信息
+   */
+  async ModifyConversation(
+    req: ModifyConversationRequest,
+    cb?: (error: string, rep: ModifyConversationResponse) => void
+  ): Promise<ModifyConversationResponse> {
+    return this.request("ModifyConversation", req, cb)
+  }
+
+  /**
+   * 修改冲突问
+   */
+  async ModifyConflictQA(
+    req: ModifyConflictQARequest,
+    cb?: (error: string, rep: ModifyConflictQAResponse) => void
+  ): Promise<ModifyConflictQAResponse> {
+    return this.request("ModifyConflictQA", req, cb)
+  }
+
+  /**
    * DescribeAppTriggerInstance
    */
   async DescribeAppTriggerInstance(
@@ -683,6 +871,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文档详情
+   */
+  async DescribeDoc(
+    req: DescribeDocRequest,
+    cb?: (error: string, rep: DescribeDocResponse) => void
+  ): Promise<DescribeDocResponse> {
+    return this.request("DescribeDoc", req, cb)
+  }
+
+  /**
    * 取消收藏skill
    */
   async UnfavoriteSkill(
@@ -690,6 +888,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnfavoriteSkillResponse) => void
   ): Promise<UnfavoriteSkillResponse> {
     return this.request("UnfavoriteSkill", req, cb)
+  }
+
+  /**
+   * 校验标签下的标准词是否已存在
+   */
+  async CheckLabel(
+    req: CheckLabelRequest,
+    cb?: (error: string, rep: CheckLabelResponse) => void
+  ): Promise<CheckLabelResponse> {
+    return this.request("CheckLabel", req, cb)
   }
 
   /**
@@ -723,13 +931,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改渠道（支持修改备注与企微机器人渠道回调机器人ID）
+   * 查询知识库详情
    */
-  async ModifyChannel(
-    req: ModifyChannelRequest,
-    cb?: (error: string, rep: ModifyChannelResponse) => void
-  ): Promise<ModifyChannelResponse> {
-    return this.request("ModifyChannel", req, cb)
+  async DescribeKB(
+    req: DescribeKBRequest,
+    cb?: (error: string, rep: DescribeKBResponse) => void
+  ): Promise<DescribeKBResponse> {
+    return this.request("DescribeKB", req, cb)
   }
 
   /**
@@ -793,6 +1001,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量导入文档
+   */
+  async ImportDocList(
+    req: ImportDocListRequest,
+    cb?: (error: string, rep: ImportDocListResponse) => void
+  ): Promise<ImportDocListResponse> {
+    return this.request("ImportDocList", req, cb)
+  }
+
+  /**
    * 提交共享 Skill 下架审批（v2，两段式：提交→审批→回调下架共享 Skill） 鉴权：删除权 拒绝场景：未共享 / 上架审批中 / 下架审批中
    */
   async DeleteSkillShare(
@@ -833,6 +1051,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建知识库
+   */
+  async CreateKB(
+    req: CreateKBRequest,
+    cb?: (error: string, rep: CreateKBResponse) => void
+  ): Promise<CreateKBResponse> {
+    return this.request("CreateKB", req, cb)
+  }
+
+  /**
    * 创建skill
    */
   async CreateSkill(
@@ -840,6 +1068,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSkillResponse) => void
   ): Promise<CreateSkillResponse> {
     return this.request("CreateSkill", req, cb)
+  }
+
+  /**
+   * 创建相似问生成任务
+   */
+  async CreateSimilarQuestion(
+    req: CreateSimilarQuestionRequest,
+    cb?: (error: string, rep: CreateSimilarQuestionResponse) => void
+  ): Promise<CreateSimilarQuestionResponse> {
+    return this.request("CreateSimilarQuestion", req, cb)
   }
 
   /**
@@ -873,33 +1111,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取审计日志元信息
+   * 查询 QA 详情
    */
-  async DescribeAuditLogMeta(
-    req?: DescribeAuditLogMetaRequest,
-    cb?: (error: string, rep: DescribeAuditLogMetaResponse) => void
-  ): Promise<DescribeAuditLogMetaResponse> {
-    return this.request("DescribeAuditLogMeta", req, cb)
+  async DescribeQA(
+    req: DescribeQARequest,
+    cb?: (error: string, rep: DescribeQAResponse) => void
+  ): Promise<DescribeQAResponse> {
+    return this.request("DescribeQA", req, cb)
   }
 
   /**
-   * 删除自定义 Skill  鉴权：创建者 ∨ (编辑权限 ∧ 删除权限） 拒绝场景：非 Custom 类型 / 已共享 / 安全检测中 / 上架审批中 / 下架审批中
+   * 创建应用
    */
-  async DeleteSkill(
-    req: DeleteSkillRequest,
-    cb?: (error: string, rep: DeleteSkillResponse) => void
-  ): Promise<DeleteSkillResponse> {
-    return this.request("DeleteSkill", req, cb)
+  async CreateApp(
+    req: CreateAppRequest,
+    cb?: (error: string, rep: CreateAppResponse) => void
+  ): Promise<CreateAppResponse> {
+    return this.request("CreateApp", req, cb)
   }
 
   /**
-   * 查询资源调用时序明细，支持模型和插件两类资源，按时间顺序返回每条调用记录的详细信息
+   * 修改单个文档
    */
-  async DescribeUsageDetailList(
-    req: DescribeUsageDetailListRequest,
-    cb?: (error: string, rep: DescribeUsageDetailListResponse) => void
-  ): Promise<DescribeUsageDetailListResponse> {
-    return this.request("DescribeUsageDetailList", req, cb)
+  async ModifyDoc(
+    req: ModifyDocRequest,
+    cb?: (error: string, rep: ModifyDocResponse) => void
+  ): Promise<ModifyDocResponse> {
+    return this.request("ModifyDoc", req, cb)
+  }
+
+  /**
+   * 创建 QA 生成任务
+   */
+  async CreateQAGenerationTask(
+    req: CreateQAGenerationTaskRequest,
+    cb?: (error: string, rep: CreateQAGenerationTaskResponse) => void
+  ): Promise<CreateQAGenerationTaskResponse> {
+    return this.request("CreateQAGenerationTask", req, cb)
   }
 
   /**
@@ -923,6 +1171,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量删除标签
+   */
+  async DeleteLabelList(
+    req: DeleteLabelListRequest,
+    cb?: (error: string, rep: DeleteLabelListResponse) => void
+  ): Promise<DeleteLabelListResponse> {
+    return this.request("DeleteLabelList", req, cb)
+  }
+
+  /**
+   * 修改分类
+   */
+  async ModifyCategory(
+    req: ModifyCategoryRequest,
+    cb?: (error: string, rep: ModifyCategoryResponse) => void
+  ): Promise<ModifyCategoryResponse> {
+    return this.request("ModifyCategory", req, cb)
+  }
+
+  /**
+   * 创建标签
+   */
+  async CreateLabel(
+    req: CreateLabelRequest,
+    cb?: (error: string, rep: CreateLabelResponse) => void
+  ): Promise<CreateLabelResponse> {
+    return this.request("CreateLabel", req, cb)
+  }
+
+  /**
    * 删除空间
    */
   async DeleteSpace(
@@ -933,6 +1211,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文档摘要列表
+   */
+  async DescribeDocSummaryList(
+    req: DescribeDocSummaryListRequest,
+    cb?: (error: string, rep: DescribeDocSummaryListResponse) => void
+  ): Promise<DescribeDocSummaryListResponse> {
+    return this.request("DescribeDocSummaryList", req, cb)
+  }
+
+  /**
+   * 查询分类列表
+   */
+  async DescribeCategoryList(
+    req: DescribeCategoryListRequest,
+    cb?: (error: string, rep: DescribeCategoryListResponse) => void
+  ): Promise<DescribeCategoryListResponse> {
+    return this.request("DescribeCategoryList", req, cb)
+  }
+
+  /**
    * 收藏插件
    */
   async FavoritePlugin(
@@ -940,6 +1238,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FavoritePluginResponse) => void
   ): Promise<FavoritePluginResponse> {
     return this.request("FavoritePlugin", req, cb)
+  }
+
+  /**
+   * 修改知识库
+   */
+  async ModifyKB(
+    req: ModifyKBRequest,
+    cb?: (error: string, rep: ModifyKBResponse) => void
+  ): Promise<ModifyKBResponse> {
+    return this.request("ModifyKB", req, cb)
   }
 
   /**
@@ -963,13 +1271,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 收藏skill
+   * 批量删除文档
    */
-  async FavoriteSkill(
-    req: FavoriteSkillRequest,
-    cb?: (error: string, rep: FavoriteSkillResponse) => void
-  ): Promise<FavoriteSkillResponse> {
-    return this.request("FavoriteSkill", req, cb)
+  async DeleteDocList(
+    req: DeleteDocListRequest,
+    cb?: (error: string, rep: DeleteDocListResponse) => void
+  ): Promise<DeleteDocListResponse> {
+    return this.request("DeleteDocList", req, cb)
+  }
+
+  /**
+   * 获取审计日志元信息
+   */
+  async DescribeAuditLogMeta(
+    req?: DescribeAuditLogMetaRequest,
+    cb?: (error: string, rep: DescribeAuditLogMetaResponse) => void
+  ): Promise<DescribeAuditLogMetaResponse> {
+    return this.request("DescribeAuditLogMeta", req, cb)
   }
 
   /**
@@ -980,6 +1298,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunAppTriggerNowResponse) => void
   ): Promise<RunAppTriggerNowResponse> {
     return this.request("RunAppTriggerNow", req, cb)
+  }
+
+  /**
+   * 查询 QA 列表
+   */
+  async DescribeQASummaryList(
+    req: DescribeQASummaryListRequest,
+    cb?: (error: string, rep: DescribeQASummaryListResponse) => void
+  ): Promise<DescribeQASummaryListResponse> {
+    return this.request("DescribeQASummaryList", req, cb)
   }
 
   /**
@@ -1003,6 +1331,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改标签
+   */
+  async ModifyLabel(
+    req: ModifyLabelRequest,
+    cb?: (error: string, rep: ModifyLabelResponse) => void
+  ): Promise<ModifyLabelResponse> {
+    return this.request("ModifyLabel", req, cb)
+  }
+
+  /**
+   * 批量修改 QA
+   */
+  async ModifyQAList(
+    req: ModifyQAListRequest,
+    cb?: (error: string, rep: ModifyQAListResponse) => void
+  ): Promise<ModifyQAListResponse> {
+    return this.request("ModifyQAList", req, cb)
+  }
+
+  /**
    * 创建工作空间凭证
    */
   async CreateWorkspaceCredential(
@@ -1013,6 +1361,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询冲突问列表
+   */
+  async DescribeConflictQASummaryList(
+    req: DescribeConflictQASummaryListRequest,
+    cb?: (error: string, rep: DescribeConflictQASummaryListResponse) => void
+  ): Promise<DescribeConflictQASummaryListResponse> {
+    return this.request("DescribeConflictQASummaryList", req, cb)
+  }
+
+  /**
    * DescribeAppTrigger
    */
   async DescribeAppTrigger(
@@ -1020,6 +1378,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppTriggerResponse) => void
   ): Promise<DescribeAppTriggerResponse> {
     return this.request("DescribeAppTrigger", req, cb)
+  }
+
+  /**
+   * 删除自定义 Skill  鉴权：创建者 ∨ (编辑权限 ∧ 删除权限） 拒绝场景：非 Custom 类型 / 已共享 / 安全检测中 / 上架审批中 / 下架审批中
+   */
+  async DeleteSkill(
+    req: DeleteSkillRequest,
+    cb?: (error: string, rep: DeleteSkillResponse) => void
+  ): Promise<DeleteSkillResponse> {
+    return this.request("DeleteSkill", req, cb)
   }
 
   /**
@@ -1043,13 +1411,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建应用
+   * 知识检索
    */
-  async CreateApp(
-    req: CreateAppRequest,
-    cb?: (error: string, rep: CreateAppResponse) => void
-  ): Promise<CreateAppResponse> {
-    return this.request("CreateApp", req, cb)
+  async SearchKnowledge(
+    req: SearchKnowledgeRequest,
+    cb?: (error: string, rep: SearchKnowledgeResponse) => void
+  ): Promise<SearchKnowledgeResponse> {
+    return this.request("SearchKnowledge", req, cb)
+  }
+
+  /**
+   * 查询资源调用时序明细，支持模型和插件两类资源，按时间顺序返回每条调用记录的详细信息
+   */
+  async DescribeUsageDetailList(
+    req: DescribeUsageDetailListRequest,
+    cb?: (error: string, rep: DescribeUsageDetailListResponse) => void
+  ): Promise<DescribeUsageDetailListResponse> {
+    return this.request("DescribeUsageDetailList", req, cb)
   }
 
   /**
@@ -1073,13 +1451,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeAppTriggerRunLogList
+   * 删除分类
    */
-  async DescribeAppTriggerRunLogList(
-    req: DescribeAppTriggerRunLogListRequest,
-    cb?: (error: string, rep: DescribeAppTriggerRunLogListResponse) => void
-  ): Promise<DescribeAppTriggerRunLogListResponse> {
-    return this.request("DescribeAppTriggerRunLogList", req, cb)
+  async DeleteCategory(
+    req: DeleteCategoryRequest,
+    cb?: (error: string, rep: DeleteCategoryResponse) => void
+  ): Promise<DeleteCategoryResponse> {
+    return this.request("DeleteCategory", req, cb)
   }
 
   /**
@@ -1100,6 +1478,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAppTriggerResponse) => void
   ): Promise<ModifyAppTriggerResponse> {
     return this.request("ModifyAppTrigger", req, cb)
+  }
+
+  /**
+   * 修改单个 QA
+   */
+  async ModifyQA(
+    req: ModifyQARequest,
+    cb?: (error: string, rep: ModifyQAResponse) => void
+  ): Promise<ModifyQAResponse> {
+    return this.request("ModifyQA", req, cb)
   }
 
   /**
@@ -1133,6 +1521,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询某个 Skill 被引用的详情列表（按 SkillRefType 分组：OpenClaw / cloud agent / 企业助手 agent） 鉴权：同 DescribeSkillDetail（能看该 Skill 即可查）
+   */
+  async DescribeSkillReferenceList(
+    req: DescribeSkillReferenceListRequest,
+    cb?: (error: string, rep: DescribeSkillReferenceListResponse) => void
+  ): Promise<DescribeSkillReferenceListResponse> {
+    return this.request("DescribeSkillReferenceList", req, cb)
+  }
+
+  /**
    * 上架skill
    */
   async ReleaseSkill(
@@ -1140,6 +1538,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReleaseSkillResponse) => void
   ): Promise<ReleaseSkillResponse> {
     return this.request("ReleaseSkill", req, cb)
+  }
+
+  /**
+   * 修改插件
+   */
+  async ModifyPlugin(
+    req: ModifyPluginRequest,
+    cb?: (error: string, rep: ModifyPluginResponse) => void
+  ): Promise<ModifyPluginResponse> {
+    return this.request("ModifyPlugin", req, cb)
+  }
+
+  /**
+   * 异步导出 QA
+   */
+  async ExportQA(
+    req: ExportQARequest,
+    cb?: (error: string, rep: ExportQAResponse) => void
+  ): Promise<ExportQAResponse> {
+    return this.request("ExportQA", req, cb)
   }
 
   /**
@@ -1163,13 +1581,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询某个 Skill 被引用的详情列表（按 SkillRefType 分组：OpenClaw / cloud agent / 企业助手 agent） 鉴权：同 DescribeSkillDetail（能看该 Skill 即可查）
+   * 查询冲突问详情
    */
-  async DescribeSkillReferenceList(
-    req: DescribeSkillReferenceListRequest,
-    cb?: (error: string, rep: DescribeSkillReferenceListResponse) => void
-  ): Promise<DescribeSkillReferenceListResponse> {
-    return this.request("DescribeSkillReferenceList", req, cb)
+  async DescribeConflictQA(
+    req: DescribeConflictQARequest,
+    cb?: (error: string, rep: DescribeConflictQAResponse) => void
+  ): Promise<DescribeConflictQAResponse> {
+    return this.request("DescribeConflictQA", req, cb)
+  }
+
+  /**
+   * 批量创建 QA
+   */
+  async CreateQAList(
+    req: CreateQAListRequest,
+    cb?: (error: string, rep: CreateQAListResponse) => void
+  ): Promise<CreateQAListResponse> {
+    return this.request("CreateQAList", req, cb)
+  }
+
+  /**
+   * 查询模型列表
+   */
+  async DescribeModelList(
+    req: DescribeModelListRequest,
+    cb?: (error: string, rep: DescribeModelListResponse) => void
+  ): Promise<DescribeModelListResponse> {
+    return this.request("DescribeModelList", req, cb)
   }
 
   /**
@@ -1183,6 +1621,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建分类
+   */
+  async CreateCategory(
+    req: CreateCategoryRequest,
+    cb?: (error: string, rep: CreateCategoryResponse) => void
+  ): Promise<CreateCategoryResponse> {
+    return this.request("CreateCategory", req, cb)
+  }
+
+  /**
    * 修改插件
    */
   async DeletePlugin(
@@ -1190,6 +1638,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePluginResponse) => void
   ): Promise<DeletePluginResponse> {
     return this.request("DeletePlugin", req, cb)
+  }
+
+  /**
+   * 批量删除 QA
+   */
+  async DeleteQAList(
+    req: DeleteQAListRequest,
+    cb?: (error: string, rep: DeleteQAListResponse) => void
+  ): Promise<DeleteQAListResponse> {
+    return this.request("DeleteQAList", req, cb)
   }
 
   /**
@@ -1213,6 +1671,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询标签列表
+   */
+  async DescribeLabelSummaryList(
+    req: DescribeLabelSummaryListRequest,
+    cb?: (error: string, rep: DescribeLabelSummaryListResponse) => void
+  ): Promise<DescribeLabelSummaryListResponse> {
+    return this.request("DescribeLabelSummaryList", req, cb)
+  }
+
+  /**
+   * 删除知识库
+   */
+  async DeleteKB(
+    req: DeleteKBRequest,
+    cb?: (error: string, rep: DeleteKBResponse) => void
+  ): Promise<DeleteKBResponse> {
+    return this.request("DeleteKB", req, cb)
+  }
+
+  /**
    * 获取参数变量列表
    */
   async DescribeVariableList(
@@ -1230,6 +1708,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyVariableResponse) => void
   ): Promise<ModifyVariableResponse> {
     return this.request("ModifyVariable", req, cb)
+  }
+
+  /**
+   * 批量修改文档
+   */
+  async ModifyDocList(
+    req: ModifyDocListRequest,
+    cb?: (error: string, rep: ModifyDocListResponse) => void
+  ): Promise<ModifyDocListResponse> {
+    return this.request("ModifyDocList", req, cb)
   }
 
   /**

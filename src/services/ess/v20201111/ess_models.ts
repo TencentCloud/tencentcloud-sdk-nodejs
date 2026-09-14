@@ -2248,35 +2248,31 @@ export interface TemplateUserFlowType {
  */
 export interface ModifyIntegrationRoleRequest {
   /**
-   * 角色Id，可通过接口 DescribeIntegrationRoles 查询获取
+   * <p>角色Id，可通过接口 DescribeIntegrationRoles 查询获取</p>
    */
   RoleId: string
   /**
-   * 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。
+   * <p>角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。</p>
    */
   Name: string
   /**
-   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
-支持填入集团子公司经办人 userId 代发合同。
-
-注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+   * <p>执行本接口操作的员工信息。使用此接口时，必须填写userId。<br>支持填入集团子公司经办人 userId 代发合同。</p><p>注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</p>
    */
   Operator: UserInfo
   /**
-   * 角色描述，最大长度为50个字符
+   * <p>角色描述，最大长度为50个字符</p>
    */
   Description?: string
   /**
-   * 权限树
+   * <p>权限树</p>
    */
   PermissionGroups?: Array<PermissionGroup>
   /**
-   * 集团角色的话，需要传递集团子企业列表，如果是全选，则传1
+   * <p>集团角色的话，需要传递集团子企业列表，如果是全选，则传1</p>
    */
   SubOrganizationIds?: Array<string>
   /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
    */
   Agent?: Agent
 }
@@ -5101,7 +5097,7 @@ export interface ChecklistCategory {
 }
 
 /**
- * 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”）
+ * 授权企业列表（目前仅用于“企业“授权签” -> 合作企业授权”）
  */
 export interface HasAuthOrganization {
   /**
@@ -5139,7 +5135,7 @@ export interface HasAuthOrganization {
  */
 export interface CreateIntegrationRoleResponse {
   /**
-   * 角色id
+   * <p>角色id</p>
    */
   RoleId?: string
   /**
@@ -7621,36 +7617,31 @@ export interface CreateOrganizationAuthUrlRequest {
  */
 export interface CreateIntegrationRoleRequest {
   /**
-   * 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。
+   * <p>角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。</p>
    */
   Name: string
   /**
-   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
-支持填入集团子公司经办人 userId 代发合同。
-
-注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+   * <p>执行本接口操作的员工信息。使用此接口时，必须填写userId。<br>支持填入集团子公司经办人 userId 代发合同。</p><p>注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</p>
    */
   Operator: UserInfo
   /**
-   * 角色描述，最大长度为50个字符
+   * <p>角色描述，最大长度为50个字符</p>
    */
   Description?: string
   /**
-   * 角色类型，0:saas角色，1:集团角色
-默认0，saas角色
+   * <p>角色类型，0:saas角色，1:集团角色<br>默认0，saas角色</p>
    */
   IsGroupRole?: number
   /**
-   * 权限树
+   * <p>权限树</p>
    */
   PermissionGroups?: Array<PermissionGroup>
   /**
-   * 集团角色的话，需要传递集团子企业列表，如果是全选，则传1
+   * <p>集团角色的话，需要传递集团子企业列表，如果是全选，则传1</p>
    */
   SubOrganizationIds?: Array<string>
   /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
    */
   Agent?: Agent
 }
@@ -8688,7 +8679,7 @@ export interface ArchiveDynamicFlowRequest {
  */
 export interface ModifyIntegrationRoleResponse {
   /**
-   * 角色id
+   * <p>角色id</p>
    */
   RoleId?: string
   /**
@@ -12713,7 +12704,7 @@ export interface CreateModifyAdminAuthorizationUrlRequest {
  */
 export interface ApproverInfo {
   /**
-   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:<strong>0</strong>：企业<strong>1</strong>：个人<strong>3</strong>：企业“授权签”注：<code>类型为3（企业“授权签”）时，此接口会默认完成该签署方的签署。“授权签”仅进行盖章操作，不能“授权签”名。</code><strong>7</strong>: 个人“授权签”，适用于个人“授权签”场景。注: <code>个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。</code></p>
+   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:</p><p><strong>0</strong>：企业</p><p><strong>1</strong>：个人</p><p><strong>3</strong>：企业“授权签”注：<code>类型为3（企业“授权签”）时，此接口会默认完成该签署方的签署。“授权签”仅进行盖章操作，不能“授权签”名。</code></p><p><strong>7</strong>: 个人“授权签”，适用于个人“授权签”场景。注: <code>个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。</code></p>
    */
   ApproverType: number
   /**

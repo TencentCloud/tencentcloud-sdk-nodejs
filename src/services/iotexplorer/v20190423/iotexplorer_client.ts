@@ -39,6 +39,7 @@ import {
   DescribeTWeTalkProductConfigResponse,
   TalkWebhookAuth,
   TalkActivateRecordLogInfo,
+  SeeObjectMetadataEntry,
   ModifyPositionFenceResponse,
   DescribeTWeSeeRecognitionTaskResponse,
   DescribeCloudStorageAIServiceTaskRequest,
@@ -119,10 +120,12 @@ import {
   DescribeGatewaySubDeviceListRequest,
   ModifyTWeSeeSubscriptionRenewFlagRequest,
   SeeFaceInfo,
+  SeeObjectMetadata,
   GetDeviceListRequest,
   DescribeDeviceDataHistoryRequest,
   DescribeStudioProductRequest,
   CreateTWeSeeDirectUploadCredentialRequest,
+  OperateTWeSeeDirectUploadObjectRequest,
   TalkAIBotInfo,
   DescribeCloudStorageThumbnailListResponse,
   DeletePositionFenceRequest,
@@ -222,6 +225,7 @@ import {
   SearchPositionSpaceRequest,
   DescribeTWeTalkAIBotRequest,
   SeeCreateSubscriptionEntry,
+  SeeObjectSummary,
   VisionCustomDetectQuery,
   ModifyLoRaGatewayResponse,
   TalkConversationConfig,
@@ -303,6 +307,7 @@ import {
   ResetTWeCallDeviceResponse,
   DescribeTWeSeePersonResponse,
   AppDeviceInfo,
+  BatchDescribeTWeSeeOrdersResult,
   DescribeCloudStorageResponse,
   ModifyTWeSeePersonRequest,
   TalkAgentBinding,
@@ -329,7 +334,7 @@ import {
   ResetCloudStorageRequest,
   DescribeCloudStorageEventsWithAITasksRequest,
   GetTWeTalkActiveStatusResponse,
-  DismissRoomByStrRoomIdFromTRTCRequest,
+  DescribeCloudStorageTimeRequest,
   SeeComprehensionResult,
   CloudStorageTimeData,
   DescribeVideoLicenseRequest,
@@ -348,6 +353,7 @@ import {
   UnbindProductsResponse,
   DeviceFirmwareInfo,
   UnbindTWeTalkAIBotResponse,
+  SeeObjectListOptions,
   CallDeviceActionSyncRequest,
   ProductDevicesPositionItem,
   GetLoRaGatewayListRequest,
@@ -383,6 +389,7 @@ import {
   DescribeSubscribedTopicPolicyRequest,
   TalkWebhookTool,
   BatchInvokeTWeSeeRecognitionTaskRequest,
+  SeeObjectListing,
   InvokeTWeSeeRecognitionTaskRequest,
   ModifyProductDynamicRegisterRequest,
   BatchProductionInfo,
@@ -413,6 +420,7 @@ import {
   ModifyCloudStorageAIServiceRequest,
   DescribeTWeSeeConfigResponse,
   GetProjectListResponse,
+  BatchDescribeTWeSeeOrdersRequest,
   GetStudioProductListRequest,
   DescribeFirmwareTaskResponse,
   DisableTopicRuleResponse,
@@ -450,6 +458,7 @@ import {
   SeeCompHighlightResult,
   CamTag,
   WXDeviceInfo,
+  OperateTWeSeeDirectUploadObjectResponse,
   ListOtaModulesResponse,
   CloudStorageEventWithAITasks,
   CreateDeviceChannelRequest,
@@ -483,6 +492,7 @@ import {
   CreateDevicePublishSDPAnswerResponse,
   GenSingleDeviceSignatureOfPublicRequest,
   CreateVisionRecognitionTaskOutput,
+  BatchDescribeTWeSeeOrdersEntry,
   BatchCreateTWeSeeRecognitionTaskResponse,
   DescribeTWeSeePersonRequest,
   DescribeGatewaySubProductsRequest,
@@ -494,6 +504,7 @@ import {
   CreateTWeTalkProductConfigRequest,
   ModifyPositionFenceRequest,
   BindDevicesResponse,
+  BatchDescribeTWeSeeOrdersResponse,
   InvokeExternalSourceAIServiceTaskResponse,
   DescribeCloudStorageAIServiceRequest,
   DeleteTWeSeeTasksByConditionResponse,
@@ -663,7 +674,7 @@ import {
   ModifyTWeTalkProductConfigV2Request,
   RemoveUserByRoomIdFromTRTCResponse,
   ModifyLoRaGatewayRequest,
-  DescribeCloudStorageTimeRequest,
+  DismissRoomByStrRoomIdFromTRTCRequest,
   EnableTopicRuleRequest,
   PublishRRPCMessageRequest,
   DescribeFirmwareTaskRequest,
@@ -2207,6 +2218,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询、删除或列举 TWeSee 直传对象
+   */
+  async OperateTWeSeeDirectUploadObject(
+    req: OperateTWeSeeDirectUploadObjectRequest,
+    cb?: (error: string, rep: OperateTWeSeeDirectUploadObjectResponse) => void
+  ): Promise<OperateTWeSeeDirectUploadObjectResponse> {
+    return this.request("OperateTWeSeeDirectUploadObject", req, cb)
+  }
+
+  /**
    * 批量禁用启用设备
    */
   async UpdateDevicesEnableState(
@@ -2694,6 +2715,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDeviceChannelResponse) => void
   ): Promise<CreateDeviceChannelResponse> {
     return this.request("CreateDeviceChannel", req, cb)
+  }
+
+  /**
+   * 批量查询 TWeSee 订单状态
+   */
+  async BatchDescribeTWeSeeOrders(
+    req: BatchDescribeTWeSeeOrdersRequest,
+    cb?: (error: string, rep: BatchDescribeTWeSeeOrdersResponse) => void
+  ): Promise<BatchDescribeTWeSeeOrdersResponse> {
+    return this.request("BatchDescribeTWeSeeOrders", req, cb)
   }
 
   /**

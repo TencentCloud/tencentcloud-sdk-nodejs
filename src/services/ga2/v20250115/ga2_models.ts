@@ -20,7 +20,7 @@
  */
 export interface DescribeTaskResultResponse {
   /**
-   * 任务状态。
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>SUCCESS： 任务成功。</li><li>FAILURE： 任务失败。</li><li>RUNNING： 任务运行。</li></ul>
    */
   Status?: string
   /**
@@ -148,11 +148,11 @@ export interface DescribeGlobalAcceleratorAccessLogResponse {
  */
 export interface DescribeForwardingPolicyResponse {
   /**
-   * 符合条件的策略信息。
+   * <p>符合条件的策略信息。</p>
    */
   ForwardingPolicySet?: Array<ForwardingPolicySet>
   /**
-   * 符合条件的实例个数。
+   * <p>符合条件的实例个数。</p>
    */
   TotalCount?: number
   /**
@@ -307,6 +307,10 @@ export interface DescribeGlobalAcceleratorAclRulesRequest {
    * <p>返回数量。</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
    */
   Limit?: number
+  /**
+   * <p>过滤条件。<li>global-accelerator-acl-rule-id - String -（过滤条件）ACL规则ID。</li></p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -438,7 +442,7 @@ export interface ModifyEndpointGroupRequest {
    */
   HealthyThreshold?: number
   /**
-   * <p>检查协议。</p><p>入参限制：支持填写：&#39;TCP&#39;, &#39;HTTP&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;。</p><p>1、当监听器是TCP时，可以选CUSTOM+TCP。<br>2、当监听器是UDP时，可以选PING+CUSTOM。<br>3、当监听器是HTTP或HTTPS时，可以选HTTP。</p>
+   * <p>检查协议。</p><p>入参限制：支持填写：&#39;TCP&#39;, &#39;HTTP&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;,&#39;HTTPS&#39;。</p><p>1、当监听器是TCP时，可以选CUSTOM+TCP。2、当监听器是UDP时，可以选PING+CUSTOM。3、当监听器是HTTP或HTTPS时，可以选HTTP。4、当监听器是HTTS时，可以选HTTPS。</p>
    */
   CheckType?: string
   /**
@@ -651,6 +655,14 @@ export interface EndpointGroupConfigurationSet {
    * <p>仅HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul>
    */
   HttpVersion?: string
+  /**
+   * <p>出终端节点组内网IP</p>
+   */
+  OriginPrivateIps?: Array<string>
+  /**
+   * <p>出终端节点组公网CIDR</p>
+   */
+  OriginPublicCidrs?: Array<string>
 }
 
 /**
@@ -1024,25 +1036,29 @@ export interface CreateGlobalAcceleratorAclPolicyRequest {
  */
 export interface DescribeForwardingRuleRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 监听器ID。
+   * <p>监听器ID。</p>
    */
   ListenerId: string
   /**
-   * 七层转发规则ID。
+   * <p>七层转发规则ID。</p>
    */
   ForwardingPolicyId: string
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
+  /**
+   * <p>过滤条件。<li>forwarding-rule-id - String -（过滤条件）规则ID。</li></p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1108,7 +1124,7 @@ export interface EndpointGroupConfiguration {
    */
   EndpointConfigurations: Array<EndpointConfigurations>
   /**
-   * <p>检查协议。支持配置&#39;TCP&#39;, &#39;HTTP&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;。</p><p>枚举值：</p><ul><li>TCP： 当终端节点组所在监听器协议是TCP时，可以选择检查协议为TCP。</li><li>HTTP： 当终端节点组所在监听器协议是HTTP或HTTPS时，可以选择检查协议为HTTP。</li><li>PING： 当终端节点组所在监听器协议是UDP时，可以选择检查协议为PING。</li><li>CUSTOM： 当终端节点组所在监听器协议是UDP或TCP时，可以选择检查协议为CUSTOM。</li></ul><p>当开启健康检查时此字段必传。</p>
+   * <p>检查协议。支持配置&#39;TCP&#39;, &#39;HTTP&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;。</p><p>枚举值：</p><ul><li>TCP： 当终端节点组所在监听器协议是TCP时，可以选择检查协议为TCP。</li><li>HTTP： 当终端节点组所在监听器协议是HTTP或HTTPS时，可以选择检查协议为HTTP。</li><li>PING： 当终端节点组所在监听器协议是UDP时，可以选择检查协议为PING。</li><li>CUSTOM： 当终端节点组所在监听器协议是UDP或TCP时，可以选择检查协议为CUSTOM。</li><li>HTTPS： 当终端节点组所在监听器协议是HTTPS时，可以选择检查协议为HTTPS。</li></ul><p>当开启健康检查时此字段必传。</p>
    */
   CheckType?: string
   /**
@@ -1360,7 +1376,7 @@ export interface CreateGlobalAcceleratorAclRuleResponse {
  */
 export interface DescribeAccelerateRegionsResponse {
   /**
-   * 加速地域信息。
+   * <p>加速地域信息。</p>
    */
   AcceleratorRegionSet?: Array<AcceleratorRegionSet>
   /**
@@ -1464,7 +1480,7 @@ export interface CreateGlobalAcceleratorAclPolicyResponse {
  */
 export interface CreateGlobalAcceleratorAccessLogRequest {
   /**
-   * <p>GA示例唯一Id</p>
+   * <p>GA实例唯一Id</p>
    */
   GlobalAcceleratorId: string
   /**
@@ -1540,7 +1556,7 @@ export interface ModifyGlobalAcceleratorAclRuleRequest {
  */
 export interface AcceleratorRegionSet {
   /**
-   * <p>地域中文名称。</p>
+   * <p>地域名称。</p>
    */
   Name?: string
   /**
@@ -1548,7 +1564,7 @@ export interface AcceleratorRegionSet {
    */
   IsAvailable?: number
   /**
-   * <p>地域信息。</p>
+   * <p>地域。</p>
    */
   Region?: string
   /**
@@ -1556,7 +1572,7 @@ export interface AcceleratorRegionSet {
    */
   AreaName?: string
   /**
-   * <p>是否中国地域。</p>
+   * <p>是否中国地域。1 代表是中国地域，0代表不是中国地域。</p>
    */
   IsChinaMainland?: number
   /**
@@ -1564,7 +1580,7 @@ export interface AcceleratorRegionSet {
    */
   SupportIspType?: Array<string>
   /**
-   * <p>是否腾讯地域。</p>
+   * <p>是否腾讯云地域。1代表是腾讯云地域，0代表不是。</p>
    */
   IsTencentRegion?: number
 }
@@ -1679,6 +1695,10 @@ export interface ModifyListenerRequest {
    * <p>获取源IP方式。</p><p>入参限制：支持选择&#39;ProxyProtocol&#39;, &#39;Close&#39;, &#39;ProxyProtocolV2&#39;, &#39;TOA&#39;。</p><p>TCP监听器才支持此参数修改。</p>
    */
   GetRealIpType?: string
+  /**
+   * <p>HTTPS监听器支持选择版本</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul>
+   */
+  HttpVersion?: string
 }
 
 /**
@@ -1716,11 +1736,11 @@ export interface HideResponseHeaders {
  */
 export interface DescribeForwardingRuleResponse {
   /**
-   * 符合条件的规则信息。
+   * <p>符合条件的规则信息。</p>
    */
   ForwardingRuleSet?: Array<ForwardingRuleSet>
   /**
-   * 符合条件的实例个数。
+   * <p>符合条件的实例个数。</p>
    */
   TotalCount?: number
   /**
@@ -1962,7 +1982,7 @@ export interface CreateListenerRequest {
  */
 export interface DescribeTaskResultRequest {
   /**
-   * 异步任务ID。
+   * <p>异步任务ID。</p>
    */
   TaskId: string
 }
@@ -2135,87 +2155,87 @@ export interface ModifyEndpointGroupResponse {
  */
 export interface ListenerSet {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId?: string
   /**
-   * 监听器ID。
+   * <p>监听器ID。</p>
    */
   ListenerId?: string
   /**
-   * 监听器名称。
+   * <p>监听器名称。</p>
    */
   Name?: string
   /**
-   * 监听器描述。
+   * <p>监听器描述。</p>
    */
   Description?: string
   /**
-   * 协议。
+   * <p>协议。</p>
    */
   Protocol?: string
   /**
-   * 端口范围。
+   * <p>端口范围。</p>
    */
   PortRanges?: PortRanges
   /**
-   * 是否打开七层获取源IP方式。
+   * <p>是否打开七层获取源IP方式。</p>
    */
   XForwardedForRealIp?: boolean
   /**
-   * 开启会话保持。
+   * <p>开启会话保持。</p>
    */
   ClientAffinity?: string
   /**
-   * 会话保持时间。
+   * <p>会话保持时间。</p>
    */
   ClientAffinityTime?: number
   /**
-   * SSL解析方式。
+   * <p>SSL解析方式。</p>
    */
   CertificationType?: string
   /**
-   * 服务器证书。
+   * <p>服务器证书。</p>
    */
   ServerCertificates?: Array<string>
   /**
-   * 客户端证书。
+   * <p>客户端证书。</p>
    */
   ClientCaCertificates?: Array<string>
   /**
-   * TLS密码套件包。
+   * <p>TLS密码套件包。</p>
    */
   CipherPolicyId?: string
   /**
-   * HTTP版本。
+   * <p>HTTP版本。</p>
    */
   HttpVersion?: string
   /**
-   * 请求超时时间。
+   * <p>请求超时时间。</p>
    */
   RequestTimeout?: number
   /**
-   * 创建时间。
+   * <p>创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 监听路由类型。
+   * <p>监听路由类型。</p>
    */
   ListenerType?: string
   /**
-   * 监听器状态。
+   * <p>监听器状态。</p><p>枚举值：</p><ul><li>ACTIVE： 可用。</li><li>CREATING： 创建中。</li><li>DELETING： 删除中。</li><li>CONFIGURING： 修改配置中。</li></ul>
    */
   Status?: string
   /**
-   * 所属监听器终端节点组个数。
+   * <p>所属监听器终端节点组个数。</p>
    */
   EndpointGroupCounts?: number
   /**
-   * 四层获取源IP方式。
+   * <p>四层获取源IP方式。</p>
    */
   GetRealIpType?: string
   /**
-   * 连接超时时间。
+   * <p>连接超时时间。</p>
    */
   IdleTimeout?: number
 }
@@ -2241,7 +2261,48 @@ export interface DescribeGlobalAcceleratorAclRulesResponse {
 /**
  * GA访问日志
  */
-export type GlobalAcceleratorAccessLog = null
+export interface GlobalAcceleratorAccessLog {
+  /**
+   * <p>日志唯一Id</p>
+   */
+  LogPushTaskId?: string
+  /**
+   * <p>GA实例唯一Id</p>
+   */
+  GlobalAcceleratorId?: string
+  /**
+   * <p>监听器唯一Id</p>
+   */
+  ListenerId?: string
+  /**
+   * <p>终端节点组唯一Id</p>
+   */
+  EndpointGroupId?: string
+  /**
+   * <p>日志任务描述</p>
+   */
+  FlowLogDescription?: string
+  /**
+   * <p>日志所在地域</p>
+   */
+  CloudRegion?: string
+  /**
+   * <p>日志主题Id</p>
+   */
+  CloudLogId?: string
+  /**
+   * <p>日志集Id</p>
+   */
+  CloudLogSetId?: string
+  /**
+   * <p>选择日志采集字段</p>
+   */
+  FieldKeys?: Array<string>
+  /**
+   * <p>日志任务状态</p><p>枚举值：</p><ul><li>active： 运行中</li><li>stopped： 已暂停</li></ul>
+   */
+  Status?: string
+}
 
 /**
  * ModifyAccessLogStatus返回参数结构体
@@ -2450,21 +2511,25 @@ export interface DescribeListenersRequest {
  */
 export interface DescribeForwardingPolicyRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 监听器ID。
+   * <p>监听器ID。</p>
    */
   ListenerId: string
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
+  /**
+   * <p>过滤条件。<li>forwarding-policy-id - String -（过滤条件）策略ID。</li></p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2536,7 +2601,12 @@ export interface DeleteGlobalAcceleratorAclPolicyRequest {
 /**
  * DescribeAccessLogParam请求参数结构体
  */
-export type DescribeAccessLogParamRequest = null
+export interface DescribeAccessLogParamRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId?: string
+}
 
 /**
  * 端口映射

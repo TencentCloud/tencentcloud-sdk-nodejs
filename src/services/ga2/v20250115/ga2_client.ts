@@ -344,7 +344,7 @@ export class Client extends AbstractClient {
    * 查看访问日志上报参数
    */
   async DescribeAccessLogParam(
-    req?: DescribeAccessLogParamRequest,
+    req: DescribeAccessLogParamRequest,
     cb?: (error: string, rep: DescribeAccessLogParamResponse) => void
   ): Promise<DescribeAccessLogParamResponse> {
     return this.request("DescribeAccessLogParam", req, cb)

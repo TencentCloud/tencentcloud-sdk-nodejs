@@ -624,6 +624,24 @@ export interface DescribeSecurityClientAttesterResponse {
 }
 
 /**
+ * 自定义变量详情。
+ */
+export interface CustomVariable {
+  /**
+   * <p>变量名称。需填写完整前缀：user.zone.* 表示站点级自定义变量，user.rule.* 表示规则级自定义变量。前缀后的自定义部分仅支持大小写字母、数字和下划线。变量名称区分大小写，长度不能超过 50 个字符。变量创建成功后，名称不可修改。</p>
+   */
+  Name: string
+  /**
+   * <p>变量初始值。支持使用常量字符串、变量以及公式。长度不能超过 255 个字符。</p>
+   */
+  InitialValue?: string
+  /**
+   * <p>变量描述。长度限制不超过 60 个字符。</p>
+   */
+  Description?: string
+}
+
+/**
  * 多通道网关示例实例与回源 IP 网段的绑定关系，以及回源 IP 网段详情。
  */
 export interface MultiPathGatewayOriginACLInfo {
@@ -4808,28 +4826,38 @@ export interface DefaultServerCertInfo {
  */
 export interface RuleEngineItem {
   /**
-   * 规则状态。取值有：<li> enable: 启用； </li><li> disable: 未启用。</li>
+   * <p>规则状态。取值有：<li> enable: 启用； </li><li> disable: 未启用。</li></p>
    */
   Status?: string
   /**
-   * 规则 ID。规则的唯一性标识，当调用 ModifyL7AccRules 时，该参数必填。
+   * <p>规则 ID。规则的唯一性标识，当调用 ModifyL7AccRule 时，该参数必填。</p>
    */
   RuleId?: string
   /**
-   * 规则名称。名称长度限制不超过 255 个字符。
+   * <p>规则名称。名称长度限制不超过 255 个字符。</p>
    */
   RuleName?: string
   /**
-   * 规则注释。可以填写多个注释。
+   * <p>规则注释。可以填写多个注释。</p>
    */
   Description?: Array<string>
   /**
-   * 子规则分支。此列表当前只支持填写一项规则，多填无效。
+   * <p>规则级自定义变量列表。CustomVariable.Name 需要使用 user.rule. 作为前缀。变量按照数组顺序依次初始化，InitialValue 支持引用站点级自定义变量，以及位于当前变量之前的规则级自定义变量，不支持引用当前变量自身或位于其后的规则级自定义变量。站点级自定义变量可通过 DescribeZoneCustomVariables 接口查询。当 Branches 为空时 CustomVariable 不允许填写，填写无效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomVariables?: Array<CustomVariable>
+  /**
+   * <p>规则级自定义变量运算详情。运算中支持引用站点级自定义变量和当前规则已定义的规则级自定义变量。站点级自定义变量可通过 DescribeZoneCustomVariables 接口查询。此列表当前只支持填写一项规则，多填无效。当 Branches 为空时 CustomVariableOperations 不允许填写，填写无效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomVariableOperations?: Array<CustomVariableOperation>
+  /**
+   * <p>子规则分支。此列表当前只支持填写一项规则，多填无效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Branches?: Array<RuleBranch>
   /**
-   * 规则优先级。仅作为出参使用。
+   * <p>规则优先级。仅作为出参使用。</p>
    */
   RulePriority?: number
 }
@@ -11511,6 +11539,26 @@ export interface OriginHealthStatus {
 }
 
 /**
+ * 自定义变量运算子规则分支。
+ */
+export interface CustomVariableOperationRuleBranch {
+  /**
+   * <p><a href="https://cloud.tencent.com/document/product/1552/90438#33f65828-c6c6-4b66-a011-25a20b548d5d">匹配条件</a>。</p>
+   */
+  Condition?: string
+  /**
+   * <p><a href="https://cloud.tencent.com/document/product/1552/90438#c7bd7e02-9247-4a72-b0e4-11c27cadb198">操作</a>。<br>注意：Actions 和 SubRules 不可同时为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Actions?: Array<CustomVariableOperationRuleAction>
+  /**
+   * <p>子规则列表。此列表中若存在多条规则，按照从上往下的顺序依次执行。<br>注意：SubRules 和 Actions 不可同时为空。且当前只支持填写一层 SubRules。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubRules?: Array<CustomVariableOperationSubRule>
+}
+
+/**
  * Grpc配置项
  */
 export interface Grpc {
@@ -11603,6 +11651,21 @@ export interface ModifyL7AccRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自定义变量规则操作。
+ */
+export interface CustomVariableOperationRuleAction {
+  /**
+   * <p>操作名称。名称需要与参数结构体对应，例如 Name=Set，则 SetParameters 必填。当前仅支持填写 Set。</p><li>Set：自定义变量设置；</li>
+   */
+  Name: string
+  /**
+   * <p>自定义变量设置参数。此参数中若存在多条运算，按照数组的顺序依次执行。当 Name 取值为 Set 时，该参数必填。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetParameters?: SetParameters
 }
 
 /**
@@ -11735,6 +11798,20 @@ export interface GrpcParameters {
 }
 
 /**
+ * 自定义变量设置参数。
+ */
+export interface SetParameters {
+  /**
+   * <p>自定义变量名称。自定义变量必须先被定义才可进行运算。</p>
+   */
+  Name: string
+  /**
+   * <p>自定义变量赋值。支持使用常量字符串、变量以及公式，不支持中文。长度不能超过 1000 个字符。</p>
+   */
+  Value: string
+}
+
+/**
  * Bot 自定义规则的配置。
  */
 export interface BotManagementCustomRules {
@@ -11854,6 +11931,21 @@ export interface ModifyAliasDomainStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自定义变量运算子规则。
+ */
+export interface CustomVariableOperationSubRule {
+  /**
+   * <p>子规则分支</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Branches?: Array<CustomVariableOperationRuleBranch>
+  /**
+   * <p>规则注释。</p>
+   */
+  Description?: Array<string>
 }
 
 /**
@@ -15657,6 +15749,21 @@ export interface DescribeIPRegionResponse {
  * DescribeAvailablePlans请求参数结构体
  */
 export type DescribeAvailablePlansRequest = null
+
+/**
+ * 自定义变量运算详情。
+ */
+export interface CustomVariableOperation {
+  /**
+   * <p>子规则分支。此列表当前只支持填写一项规则，多填无效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Branches?: Array<CustomVariableOperationRuleBranch>
+  /**
+   * <p>规则注释。可以填写多个注释。</p>
+   */
+  Description?: Array<string>
+}
 
 /**
  * ModifyMultiPathGatewayStatus返回参数结构体

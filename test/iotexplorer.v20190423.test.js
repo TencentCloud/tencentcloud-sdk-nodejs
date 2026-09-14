@@ -1498,6 +1498,16 @@ it("iotexplorer.v20190423.ModifyTWeSeeSubscriptionRenewFlag", async function () 
     }
 })
 
+it("iotexplorer.v20190423.OperateTWeSeeDirectUploadObject", async function () {
+    try {
+       const data = await client.OperateTWeSeeDirectUploadObject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.UpdateDevicesEnableState", async function () {
     try {
        const data = await client.UpdateDevicesEnableState({})
@@ -1981,6 +1991,16 @@ it("iotexplorer.v20190423.DeleteDevices", async function () {
 it("iotexplorer.v20190423.CreateDeviceChannel", async function () {
     try {
        const data = await client.CreateDeviceChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.BatchDescribeTWeSeeOrders", async function () {
+    try {
+       const data = await client.BatchDescribeTWeSeeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

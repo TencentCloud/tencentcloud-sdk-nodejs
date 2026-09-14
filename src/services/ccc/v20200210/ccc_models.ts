@@ -52,13 +52,18 @@ export interface AIRoundPath {
    */
   NodeName?: string
   /**
-   * <p>画布中的节点类型</p><p>枚举值：</p><ul><li>DIALOGUE： 对话节点</li><li>API_CALL： 接口调用节点</li><li>TRANSFER： 转接节点</li><li>KEY_PRESS： 按键节点</li><li>END_CALL： 挂断节点</li></ul>
+   * <p>画布中的节点类型</p><p>枚举值：</p><ul><li>DIALOGUE： 对话节点</li><li>API_CALL： 接口调用节点</li><li>TRANSFER： 转接节点</li><li>KEY_PRESS： 按键节点</li><li>END_CALL： 挂断节点</li><li>TRANSFER_AGENT： 转接智能体节点</li><li>WORK_TIME： 工作时间节点</li></ul>
    */
   NodeType?: string
   /**
    * <p>经过当前节点的时间戳</p><p>单位：ms</p>
    */
   Timestamp?: number
+  /**
+   * <p>接口调用节点的调用详情，包含请求、响应、耗时以及每次重试的明细。仅 NodeType 为 API_CALL 时有值，其余节点类型不返回该字段。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  APICall?: AICallAPICallDetail
 }
 
 /**
@@ -463,21 +468,21 @@ export interface DescribeAutoCalloutTaskRequest {
 }
 
 /**
- * 被叫属性
+ * DescribeAIAgentInfoList请求参数结构体
  */
-export interface CalleeAttribute {
+export interface DescribeAIAgentInfoListRequest {
   /**
-   * 被叫号码
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  Callee: string
+  SdkAppId: number
   /**
-   * 随路数据
+   * 分页尺寸，上限 100
    */
-  UUI?: string
+  PageSize: number
   /**
-   * 参数
+   * 分页页码，从 0 开始
    */
-  Variables?: Array<Variable>
+  PageNumber: number
 }
 
 /**
@@ -1325,11 +1330,11 @@ export interface UserReplyEvent {
    */
   MatchedIntent?: string
   /**
-   * <p>用户回复分类的标签， json序列化后的信息</p>
+   * <p>本轮收集到的词槽列表（TagType 为 2 或 3），json 序列化后的字符串。数组元素含 TagName（词槽名）、TagValue（词槽值）、TagType（词槽类型，2 表示必填词槽，3 表示选填词槽）三个字段；无词槽时为空字符串。</p>
    */
   ExtractedSlots?: string
   /**
-   * <p>用户回复命中的分支类型</p><p>枚举值：</p><ul><li>Intent： 用户意图</li><li>Fallback： 兜底分支</li><li>NoResponse： 无响应跳转分支</li><li>SlotCollectionSuccess： 词槽收集完成跳转分支</li><li>SlotCollectionFail： 词槽收集失败跳转分支</li><li>GlobalIntent： 全局节点意图</li><li>LogicAnd： 逻辑判断节点 and</li><li>LogicOr： 逻辑判断节点 or</li><li>DTMF成功： DTMFSuccess</li><li>DTMF失败： DTMFFail</li><li>DTMF导航： DTMFNavigation</li><li>DTMF分机： DTMFExtension</li><li>DTMF收号： DTMFCollection</li><li>转接智能体节点失败： TransferAgentFail</li></ul>
+   * <p>用户回复命中的分支类型</p><p>枚举值：</p><ul><li>Intent： 用户意图</li><li>Fallback： 兜底分支</li><li>NoResponse： 无响应跳转分支</li><li>SlotCollectionSuccess： 词槽收集完成跳转分支</li><li>SlotCollectionFail： 词槽收集失败跳转分支</li><li>GlobalIntent： 全局节点意图</li><li>LogicAnd： 逻辑判断节点 and</li><li>LogicOr： 逻辑判断节点 or</li><li>DTMFSuccess： DTMF 收号成功</li><li>DTMFFail： DTMF 收号失败</li><li>DTMFNavigation： DTMF 导航</li><li>DTMFExtension： DTMF 分机</li><li>DTMFCollection： DTMF 收号</li><li>TransferAgentFail： 转接智能体节点失败</li><li>Other： 其他分支类型</li></ul>
    */
   BranchType?: string
 }
@@ -1730,7 +1735,7 @@ export interface AICallInteractionRound {
    */
   RoundIndex?: number
   /**
-   * <p>用户回复分类的标签， json序列化后的表示</p>
+   * <p>本轮命中的普通标签列表（TagType 为 1），json 序列化后的字符串。数组元素含 TagName（标签名）、TagValue（标签值）、TagType（标签类型，1 表示普通标签）三个字段；无标签时为空字符串。</p>
    */
   Tags?: string
   /**
@@ -2231,6 +2236,41 @@ export interface CreateUserSigRequest {
 }
 
 /**
+ * 接口调用节点的调用详情
+ */
+export interface AICallAPICallDetail {
+  /**
+   * <p>是否异步上报。节点配置「等待接口返回」关闭时为 true，此时不处理响应也不影响流程走向，Status、StatusCode、CostMS 等结果字段均为空，只记录 Attempts 中的请求详情。</p>
+   */
+  Async?: boolean
+  /**
+   * <p>本次接口调用的最终状态，重试场景为最后一次尝试的状态，Async 为 true 时为空。后续可能新增取值，请做好兼容。</p><p>枚举值：</p><ul><li>success： 调通且返回 2xx，进入成功分支</li><li>failed： 调用失败或返回非 2xx，进入失败分支</li><li>terminated： 调用过程中被用户新意图打断，无最终结果</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>最终 HTTP 状态码。调不通或异步上报时为 0。</p>
+   */
+  StatusCode?: number
+  /**
+   * <p>失败摘要，格式为 {状态码或错误类型}：{错误信息}。调用成功时为空。</p>
+   */
+  Summary?: string
+  /**
+   * <p>接口调用总耗时，包含全部重试。异步上报时为 0。</p><p>单位：ms</p>
+   */
+  CostMS?: number
+  /**
+   * <p>重试次数。0 表示首次调用即结束，未发生重试。</p>
+   */
+  RetryCount?: number
+  /**
+   * <p>每次尝试的明细，按时间顺序排列，至少包含首次调用。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Attempts?: Array<AICallAPICallAttempt>
+}
+
+/**
  * DescribeAgentCruiseDialingCampaign请求参数结构体
  */
 export interface DescribeAgentCruiseDialingCampaignRequest {
@@ -2486,6 +2526,50 @@ export interface Interface {
 }
 
 /**
+ * 接口调用的单次尝试明细
+ */
+export interface AICallAPICallAttempt {
+  /**
+   * <p>尝试序号，从 1 开始，1 表示首次调用。</p>
+   */
+  Index?: number
+  /**
+   * <p>本次尝试的发起时间戳，Unix 毫秒级时间戳。</p><p>单位：ms</p>
+   */
+  Timestamp?: number
+  /**
+   * <p>本次尝试的结果状态，取值同 APICall.Status。</p><p>枚举值：</p><ul><li>success： 调通且返回 2xx，进入成功分支</li><li>failed： 调用失败或返回非 2xx，进入失败分支</li><li>internal_fail： 内部调用失败</li><li>terminated： 调用过程中被用户新意图打断，无最终结果</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>本次尝试的 HTTP 状态码。调不通时为 0。</p>
+   */
+  StatusCode?: number
+  /**
+   * <p>本次尝试调不通时的错误类型，取值同 APICall.ErrorType。</p><p>枚举值：</p><ul><li>timeout： 请求超时</li><li>connect_failed： 建立连接失败</li><li>dns_failed： DNS 解析失败</li><li>tls_failed： TLS 证书校验失败</li><li>other： 其他错误</li></ul>
+   */
+  ErrorType?: string
+  /**
+   * <p>本次尝试的失败摘要，格式为 {状态码或错误类型}：{错误信息}。本次尝试成功时为空。</p>
+   */
+  Summary?: string
+  /**
+   * <p>本次尝试耗时。</p><p>单位：ms</p>
+   */
+  CostMS?: number
+  /**
+   * <p>本次尝试的请求详情。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Request?: AICallAPICallRequestDetail
+  /**
+   * <p>本次尝试的响应详情。调不通（Status 为 unreachable）或异步上报时为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Response?: AICallAPICallResponseDetail
+}
+
+/**
  * 外呼任务被叫信息
  */
 export interface AutoCalloutTaskCalleeInfo {
@@ -2556,6 +2640,28 @@ export interface UpdateCCCSkillGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 接口调用的响应详情
+ */
+export interface AICallAPICallResponseDetail {
+  /**
+   * <p>HTTP 状态码。</p>
+   */
+  StatusCode?: number
+  /**
+   * <p>响应头，json 序列化后的字符串，键升序排列。敏感值已脱敏，无响应头时为空字符串。</p>
+   */
+  Headers?: string
+  /**
+   * <p>响应体，超长时被截断，是否截断见 Truncated。</p>
+   */
+  Body?: string
+  /**
+   * <p>响应体 Body 是否被截断。</p>
+   */
+  Truncated?: boolean
 }
 
 /**
@@ -2925,6 +3031,36 @@ export interface ForceMemberOfflineRequest {
 }
 
 /**
+ * 接口调用的请求详情
+ */
+export interface AICallAPICallRequestDetail {
+  /**
+   * <p>HTTP 请求方法，如 GET、POST。</p>
+   */
+  Method?: string
+  /**
+   * <p>请求地址。</p>
+   */
+  URL?: string
+  /**
+   * <p>请求参数（节点配置的入参与 URL query），json 序列化后的字符串，键升序排列。敏感值已脱敏，无参数时为空字符串。</p>
+   */
+  Params?: string
+  /**
+   * <p>请求头，json 序列化后的字符串，键升序排列。敏感值已脱敏，无请求头时为空字符串。</p>
+   */
+  Headers?: string
+  /**
+   * <p>请求体，超长时被截断，是否截断见 Truncated。</p>
+   */
+  Body?: string
+  /**
+   * <p>请求体 Body 是否被截断。</p>
+   */
+  Truncated?: boolean
+}
+
+/**
  * 技能组信息
  */
 export interface SkillGroupInfoItem {
@@ -3166,7 +3302,7 @@ export interface AISpeakEvent {
    */
   SpokenText?: string
   /**
-   * <p>智能体发言类型</p><p>枚举值：</p><ul><li>Script： 智能体话术</li><li>KnowledgeBase： 知识库</li><li>LLMFallback： 大模型兜底</li><li>NoResponseTip： 无响应提示</li><li>智能追问： SmartFollowUp</li><li>FAQ： FAQ</li><li>转人工 - 排队等待音： TransferWaitingPrompt</li><li>无响应挂断前放音： PlayNoResponseEndPrompt</li><li>转人工 - 排队前放音： PlayQueuePrompt</li><li>转人工 - 接待前放音： PlayPromptBeforeReception</li><li>转人工 - 排队超时放音： PlayQueueTimeoutPrompt</li><li>转人工 - 转人工失败放音： PlayTransferFailPrompt</li><li>DTMF收号（按键用户输入）： Dtmf</li><li>按键节点 - 播放提示音： PlayDtmfPrompt</li><li>按键节点 - 输入错误提示音： PlayInvalidDtmfPrompt</li><li>按键节点 - 超时提示音： PlayDtmfTimeoutPrompt</li><li>其他类型： Other</li></ul>
+   * <p>智能体发言类型</p><p>枚举值：</p><ul><li>Script： 智能体话术</li><li>KnowledgeBase： 知识库</li><li>LLMFallback： 大模型兜底</li><li>NoResponseTip： 无响应提示</li><li>SmartFollowUp： 智能追问</li><li>FAQ： FAQ</li><li>TransferWaitingPrompt： 转人工 - 排队等待音</li><li>PlayNoResponseEndPrompt： 无响应挂断前放音</li><li>PlayQueuePrompt： 转人工 - 排队前放音</li><li>PlayPromptBeforeReception： 转人工 - 接待前放音</li><li>PlayQueueTimeoutPrompt： 转人工 - 排队超时放音</li><li>PlayTransferFailPrompt： 转人工 - 转人工失败放音</li><li>Dtmf： DTMF收号（按键用户输入）</li><li>PlayDtmfPrompt： 按键节点 - 播放提示音</li><li>PlayInvalidDtmfPrompt： 按键节点 - 输入错误提示音</li><li>PlayDtmfTimeoutPrompt： 按键节点 - 超时提示音</li><li>TransferAgentPrompt： 转接智能体 - 转接至目标智能体提示音</li><li>Other： 其他类型</li></ul>
    */
   SpokenType?: string
   /**
@@ -3174,6 +3310,10 @@ export interface AISpeakEvent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatencyMetrics?: AICallLatencyMetrics
+  /**
+   * <p>用户回复命中的知识库问题标题，仅 SpokenType 为 KnowledgeBase 或 FAQ 等命中知识库的场景有值。</p>
+   */
+  KnowledgeName?: string
   /**
    * <p>节点跳转的原因，仅画布为灵活模式时有值</p>
    */
@@ -5238,21 +5378,21 @@ export interface DeleteStaffResponse {
 }
 
 /**
- * DescribeAIAgentInfoList请求参数结构体
+ * 被叫属性
  */
-export interface DescribeAIAgentInfoListRequest {
+export interface CalleeAttribute {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * 被叫号码
    */
-  SdkAppId: number
+  Callee: string
   /**
-   * 分页尺寸，上限 100
+   * 随路数据
    */
-  PageSize: number
+  UUI?: string
   /**
-   * 分页页码，从 0 开始
+   * 参数
    */
-  PageNumber: number
+  Variables?: Array<Variable>
 }
 
 /**

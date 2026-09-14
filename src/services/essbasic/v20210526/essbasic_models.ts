@@ -343,7 +343,7 @@ export interface ChannelDisableUserAutoSignResponse {
  */
 export interface DescribeExtendedServiceAuthDetailResponse {
   /**
-   * 服务授权的信息列表，根据查询类型返回特定扩展服务的开通和授权状况。
+   * <p>服务授权的信息列表，根据查询类型返回特定扩展服务的开通和授权状况。</p>
    */
   AuthInfoDetail?: AuthInfoDetail
   /**
@@ -593,44 +593,19 @@ export interface ChannelCancelFlowResponse {
  */
 export interface ModifyExtendedServiceRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经过实名认证
    */
   Agent: Agent
   /**
-   *   扩展服务类型
-<ul>
-<li>AUTO_SIGN             企业自动签（自动签署）</li>
-<li>  OVERSEA_SIGN          企业与港澳台居民签署合同</li>
-<li>  MOBILE_CHECK_APPROVER 使用手机号验证签署方身份</li>
-<li> DOWNLOAD_FLOW         授权渠道下载合同 </li>
-<li>AGE_LIMIT_EXPANSION 拓宽签署方年龄限制</li>
-<li>HIDE_OPERATOR_DISPLAY 隐藏合同经办人姓名</li>
-</ul>
+   * <p>扩展服务类型</p><p>枚举值：</p><ul><li>AUTO_SIGN： 企业授权签</li><li>OVERSEA_SIGN： 企业与港澳台居民签署合同</li><li>MOBILE_CHECK_APPROVER： 使用手机号验证签署方身份</li><li>DOWNLOAD_FLOW： 授权渠道下载合同</li><li>AGE_LIMIT_EXPANSION： 拓宽签署方年龄限制</li><li>HIDE_OPERATOR_DISPLAY： 隐藏合同经办人姓名</li></ul>
    */
   ServiceType: string
   /**
-   * 操作类型
-<ul>
-<li>OPEN : 开通</li>
-<li>CLOSE : 关闭</li>
-</ul>
+   * <p>操作类型</p><ul><li>OPEN : 开通</li><li>CLOSE : 关闭</li></ul>
    */
   Operate: string
   /**
-   * 链接跳转类型，支持以下类型
-<ul>
-<li>WEIXINAPP : 短链直接跳转到电子签小程序  (默认值)</li>
-<li>APP : 第三方APP或小程序跳转电子签小程序</li>
-<li>WEIXIN_QRCODE_URL：直接跳转至电子签小程序的二维码链接，无需通过中转页。<font color="red">您需要自行将其转换为二维码，使用微信扫码后可直接进入。请注意，直接点击链接是无效的。</font></li>
-</ul>
+   * <p>链接跳转类型，支持以下类型</p><ul><li>WEIXINAPP : 短链直接跳转到电子签小程序  (默认值)</li><li>APP : 第三方APP或小程序跳转电子签小程序</li><li>WEIXIN_QRCODE_URL：直接跳转至电子签小程序的二维码链接，无需通过中转页。<font color="red">您需要自行将其转换为二维码，使用微信扫码后可直接进入。请注意，直接点击链接是无效的。</font></li></ul>
    */
   Endpoint?: string
 }
@@ -709,27 +684,27 @@ export interface IntentionQuestionResult {
  */
 export interface AuthInfoDetail {
   /**
-   * 扩展服务类型，和入参一致
+   * <p>扩展服务类型，和入参一致</p>
    */
   Type?: string
   /**
-   * 扩展服务名称
+   * <p>扩展服务名称</p>
    */
   Name?: string
   /**
-   * 授权员工列表
+   * <p>授权员工列表</p>
    */
   HasAuthUserList?: Array<HasAuthUser>
   /**
-   * 授权企业列表（企业自动签时，该字段有值）
+   * <p>授权企业列表（企业“授权签”时，该字段有值）</p>
    */
   HasAuthOrganizationList?: Array<HasAuthOrganization>
   /**
-   * 授权员工列表总数
+   * <p>授权员工列表总数</p>
    */
   AuthUserTotal?: number
   /**
-   * 授权企业列表总数
+   * <p>授权企业列表总数</p>
    */
   AuthOrganizationTotal?: number
 }
@@ -905,19 +880,19 @@ export interface ChannelCreatePrepareFlowResponse {
  */
 export interface CreateBatchInitOrganizationUrlResponse {
   /**
-   * 小程序路径，有效时间为7天
+   * <p>小程序路径，有效时间为7天</p>
    */
   MiniAppPath?: string
   /**
-   * 操作长链，有效时间为7天
+   * <p>操作长链，有效时间为7天</p>
    */
   OperateLongUrl?: string
   /**
-   * 操作短链，有效时间为7天
+   * <p>操作短链，有效时间为7天</p>
    */
   OperateShortUrl?: string
   /**
-   * 操作二维码，有效时间为7天
+   * <p>操作二维码，有效时间为7天</p>
    */
   QRCodeUrl?: string
   /**
@@ -1081,7 +1056,7 @@ export interface CreateFlowOption {
    */
   CanSkipAddApprover?: boolean
   /**
-   * <p>是否可以编辑签署人包括新增，修改，删除 </p><ul><li>（默认） false -可以编辑签署人</li> <li> true - 禁止编辑签署人</li></ul><p>注意：</p><ul><li>如果设置参数为 true， 则 参数签署人 <a href="https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow">FlowApproverList</a> 不能为空</li><li>此参数对子客和自动签无效，不允许进行修改。</li></ul>
+   * <p>是否可以编辑签署人包括新增，修改，删除 <ul><li>（默认） false -可以编辑签署人</li> <li> true - 禁止编辑签署人</li></ul>注意：* 如果设置参数为 true， 则 参数签署人 <a href="https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow">FlowApproverList</a> 不能为空* 此参数对子客和“授权签”无效，不允许进行修改。</p>
    */
   ForbidEditApprover?: boolean
   /**
@@ -1203,82 +1178,63 @@ export interface CreateOrganizationAuthFileResponse {
  */
 export interface BaseFlowInfo {
   /**
-   * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+   * <p>合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。</p>
    */
   FlowName: string
   /**
-   * 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。
+   * <p>合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。</p>
    */
   Deadline: number
   /**
-   * 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。
+   * <p>合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。</p>
    */
   FlowType?: string
   /**
-   * 合同流程描述信息(可自定义此描述)，最大长度1000个字符。
+   * <p>合同流程描述信息(可自定义此描述)，最大长度1000个字符。</p>
    */
   FlowDescription?: string
   /**
-   * 合同流程的签署顺序类型：
-   **false**：(默认)有序签署, 本合同多个参与人需要依次签署
-   **true**：无序签署, 本合同多个参与人没有先后签署限制
+   * <p>合同流程的签署顺序类型：<br><strong>false</strong>：(默认)有序签署, 本合同多个参与人需要依次签署<br><strong>true</strong>：无序签署, 本合同多个参与人没有先后签署限制</p>
    */
   Unordered?: boolean
   /**
-   * 是否打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
+   * <p>是否打开智能添加填写区(默认开启，打开:&quot;OPEN&quot; 关闭：&quot;CLOSE&quot;)</p>
    */
   IntelligentStatus?: string
   /**
-   * 填写控件内容， 填写的控制的ID-填写的内容对列表
+   * <p>填写控件内容， 填写的控制的ID-填写的内容对列表</p>
    */
   FormFields?: Array<FormField>
   /**
-   * 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：
-<ul><li> **false**：（默认）不需要审批，直接签署。</li>
-<li> **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>
-企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果
-<ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li>
-<li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>
-注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同`
+   * <p>发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：<ul><li> <strong>false</strong>：（默认）不需要审批，直接签署。</li><li> <strong>true</strong>：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果<ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li><li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>注：<code>此功能可用于与企业内部的审批流程进行关联，支持手动、“授权签”合同</code></p>
    */
   NeedSignReview?: boolean
   /**
-   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为1000长度。
-
-在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。
+   * <p>调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为1000长度。</p><p>在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。</p>
    */
   UserData?: string
   /**
-   * 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。
-
-注
-1. 抄送人名单中可以包括自然人以及本企业的员工（本企业员工必须已经完成认证并加入企业）。
-2. 请确保抄送人列表中的成员不与任何签署人重复。
+   * <p>合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。</p><p>注</p><ol><li>抄送人名单中可以包括自然人以及本企业的员工（本企业员工必须已经完成认证并加入企业）。</li><li>请确保抄送人列表中的成员不与任何签署人重复。</li></ol>
    */
   CcInfos?: Array<CcInfo>
   /**
-   * 发起方企业的签署人进行发起操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
-
-若设置为true，发起审核结果需通过接口 [提交企业签署流程审批结果](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelCreateFlowSignReview)通知电子签，审核通过后，发起方企业签署人方可进行发起操作，否则会阻塞其发起操作。
-
-
+   * <p>发起方企业的签署人进行发起操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。</p><p>若设置为true，发起审核结果需通过接口 <a href="https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelCreateFlowSignReview">提交企业签署流程审批结果</a>通知电子签，审核通过后，发起方企业签署人方可进行发起操作，否则会阻塞其发起操作。</p>
    */
   NeedCreateReview?: boolean
   /**
-   * 填写控件：文件发起使用
+   * <p>填写控件：文件发起使用</p>
    */
   Components?: Array<Component>
   /**
-   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
-
+   * <p>在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:<img src="https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png" alt="FlowDisplayType"></p>
    */
   FlowDisplayType?: number
   /**
-   * 签署文件资源Id列表，目前仅支持单个文件
+   * <p>签署文件资源Id列表，目前仅支持单个文件</p>
    */
   FileIds?: Array<string>
   /**
-   * 合同签署人信息
+   * <p>合同签署人信息</p>
    */
   Approvers?: Array<CommonFlowApprover>
 }
@@ -1298,75 +1254,55 @@ export interface BaseFlowInfo {
  */
 export interface ReleasedApprover {
   /**
-   * 签署人在原合同签署人列表中的顺序序号(从0开始，按顺序依次递增)。
-可以通过<a href="https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo" target="_blank">DescribeFlowDetailInfo</a>接口查看原流程中的签署人列表。
+   * <p>签署人在原合同签署人列表中的顺序序号(从0开始，按顺序依次递增)。<br>可以通过<a href="https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo" target="_blank">DescribeFlowDetailInfo</a>接口查看原流程中的签署人列表。</p>
    */
   ApproverNumber: number
   /**
-   * 指定签署人类型，目前支持
-<ul><li> **ORGANIZATION**：企业(默认值)</li>
-<li> **ENTERPRISESERVER**：企业静默签</li></ul>
+   * <p>指定签署人类型，目前支持<ul><li> <strong>ORGANIZATION</strong>：企业(默认值)</li><li> <strong>ENTERPRISESERVER</strong>：企业“授权签”</li></ul></p>
    */
   ApproverType: string
   /**
-   * <font color="red">【已废弃】</font>请用ApproverNumber来指定替换的参与方的位置
+   * <p><font color="red">【已废弃】</font>请用ApproverNumber来指定替换的参与方的位置</p>
    */
   ReleasedApproverRecipientId?: string
   /**
-   * 签署人姓名，最大长度50个字。
+   * <p>签署人姓名，最大长度50个字。</p>
    */
   Name?: string
   /**
-   * 签署方经办人的证件类型，支持以下类型
-<ul><li>ID_CARD : 中国大陆居民身份证(默认值)</li>
-<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
+   * <p>签署方经办人的证件类型，支持以下类型</p><ul><li>ID_CARD : 中国大陆居民身份证(默认值)</li><li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li><li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
    */
   IdCardType?: string
   /**
-   * 证件号码，应符合以下规则
-<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。</li>
-<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。
-</li>
-<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   * <p>证件号码，应符合以下规则</p><ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。</li><li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li><li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   IdCardNumber?: string
   /**
-   * 签署人手机号。
+   * <p>签署人手机号。</p>
    */
   Mobile?: string
   /**
-   * 组织机构名称。
-请确认该名称与企业营业执照中注册的名称一致。
-如果名称中包含英文括号()，请使用中文括号（）代替。
-如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。
+   * <p>组织机构名称。<br>请确认该名称与企业营业执照中注册的名称一致。<br>如果名称中包含英文括号()，请使用中文括号（）代替。<br>如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。</p>
    */
   OrganizationName?: string
   /**
-   * 第三方平台子客企业的唯一标识，定义Agent中的ProxyOrganizationOpenId一样, 可以参考<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#agent" target="_blank">Agent结构体</a>。
-<font color="red">当为子客企业指定经办人时，此OrganizationOpenId必传。</font>
+   * <p>第三方平台子客企业的唯一标识，定义Agent中的ProxyOrganizationOpenId一样, 可以参考<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#agent" target="_blank">Agent结构体</a>。<br><font color="red">当为子客企业指定经办人时，此OrganizationOpenId必传。</font></p>
    */
   OrganizationOpenId?: string
   /**
-   * 第三方平台子客企业员工的唯一标识，长度不能超过64，只能由字母和数字组成。
-<font color="red">当签署方为同一第三方平台下的员工时，此OpenId必传。</font>
+   * <p>第三方平台子客企业员工的唯一标识，长度不能超过64，只能由字母和数字组成。<br><font color="red">当签署方为同一第三方平台下的员工时，此OpenId必传。</font></p>
    */
   OpenId?: string
   /**
-   * 签署控件类型，支持自定义企业签署方的签署控件类型
-<ul><li> **SIGN_SEAL**：默认为印章控件类型(默认值)</li>
-<li> **SIGN_SIGNATURE**：手写签名控件类型</li></ul>
+   * <p>签署控件类型，支持自定义企业签署方的签署控件类型</p><ul><li> **SIGN_SEAL**：默认为印章控件类型(默认值)</li><li> **SIGN_SIGNATURE**：手写签名控件类型</li></ul>
    */
   ApproverSignComponentType?: string
   /**
-   * 参与方在合同中的角色是按照创建合同的时候来排序的，解除协议默认会将第一个参与人叫`甲方`,第二个叫`乙方`,  第三个叫`丙方`，以此类推。
-如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/973a820ab66d1ce57082c160c2b2d44a.png)
+   * <p>参与方在合同中的角色是按照创建合同的时候来排序的，解除协议默认会将第一个参与人叫<code>甲方</code>,第二个叫<code>乙方</code>,  第三个叫<code>丙方</code>，以此类推。<br>如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。</p><p><img src="https://qcloudimg.tencent-cloud.cn/raw/973a820ab66d1ce57082c160c2b2d44a.png" alt="image"></p>
    */
   ApproverSignRole?: string
   /**
-   * 印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署
+   * <p>印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署</p>
    */
   ApproverSignSealId?: string
 }
@@ -1756,42 +1692,27 @@ export interface TaskInfo {
  */
 export interface NeedReviewApproverInfo {
   /**
-   * 签署方经办人的类型，支持以下类型
-<ul><li> ORGANIZATION 企业（含企业自动签）</li>
-<li>PERSON 个人（含个人自动签）</li></ul>
+   * <p>签署方经办人的类型，支持以下类型<ul><li> ORGANIZATION 企业（含企业“授权签”）</li><li>PERSON 个人（含个人“授权签”）</li></ul></p>
    */
   ApproverType: string
   /**
-   * 签署方经办人的姓名。 经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
+   * <p>签署方经办人的姓名。 经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。</p>
    */
   ApproverName: string
   /**
-   * 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 请确认手机号所有方为此合同签署方。
+   * <p>签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 请确认手机号所有方为此合同签署方。</p>
    */
   ApproverMobile?: string
   /**
-   * 签署方经办人的证件类型，支持以下类型
-<ul><li>ID_CARD 中国大陆居民身份证  (默认值)</li>
-<li>HONGKONG_AND_MACAO 中国港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)</li>
-<li>OTHER_CARD_TYPE 其他证件</li></ul>
-
-注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
+   * <p>签署方经办人的证件类型，支持以下类型</p><ul><li>ID_CARD 中国大陆居民身份证  (默认值)</li><li>HONGKONG_AND_MACAO 中国港澳居民来往内地通行证</li><li>HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)</li><li>OTHER_CARD_TYPE 其他证件</li></ul><p>注: <code>其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。</code></p>
    */
   ApproverIdCardType?: string
   /**
-   * 签署方经办人的证件号码，应符合以下规则
-<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。。</li>
-<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   * <p>签署方经办人的证件号码，应符合以下规则</p><ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li><li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。。</li><li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   ApproverIdCardNumber?: string
   /**
-   * 组织机构名称。
-请确认该名称与企业营业执照中注册的名称一致。
-如果名称中包含英文括号()，请使用中文括号（）代替。
-如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。
-
+   * <p>组织机构名称。<br>请确认该名称与企业营业执照中注册的名称一致。<br>如果名称中包含英文括号()，请使用中文括号（）代替。<br>如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。</p>
    */
   OrganizationName?: string
 }
@@ -2402,46 +2323,23 @@ export interface CancelFailureFlow {
  */
 export interface ChannelDescribeRolesRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 指定每页返回的数据条数，和Offset参数配合使用，单页最大200。
-
-注: `因为历史原因, 此字段为字符串类型`
+   * <p>指定每页返回的数据条数，和Offset参数配合使用，单页最大200。</p><p>注: <code>因为历史原因, 此字段为字符串类型</code></p>
    */
   Limit: string
   /**
-   * 查询的关键字段:
-Key:"**RoleType**",Values:["**1**"]查询系统角色，
-Key:"**RoleType**",Values:["**2**"]查询自定义角色
-Key:"**RoleStatus**",Values:["**1**"]查询启用角色
-Key:"**RoleStatus**",Values:["**2**"]查询禁用角色
-Key:"**IsReturnPermissionGroup**"，Values:["**0**"]表示接口不返回角色对应的权限树字段
-Key:"**IsReturnPermissionGroup**"，Values:["**1**"]表示接口返回角色对应的权限树字段
-
-注: `同名字的Key的过滤条件会冲突, 只能填写一个`
-
+   * <p>查询的关键字段:<br>Key:&quot;<strong>RoleType</strong>&quot;,Values:[&quot;<strong>1</strong>&quot;]查询系统角色，<br>Key:&quot;<strong>RoleType</strong>&quot;,Values:[&quot;<strong>2</strong>&quot;]查询自定义角色<br>Key:&quot;<strong>RoleStatus</strong>&quot;,Values:[&quot;<strong>1</strong>&quot;]查询启用角色<br>Key:&quot;<strong>RoleStatus</strong>&quot;,Values:[&quot;<strong>2</strong>&quot;]查询禁用角色<br>Key:&quot;<strong>IsReturnPermissionGroup</strong>&quot;，Values:[&quot;<strong>0</strong>&quot;]表示接口不返回角色对应的权限树字段<br>Key:&quot;<strong>IsReturnPermissionGroup</strong>&quot;，Values:[&quot;<strong>1</strong>&quot;]表示接口返回角色对应的权限树字段</p><p>注: <code>同名字的Key的过滤条件会冲突, 只能填写一个</code></p>
    */
   Filters?: Array<Filter>
   /**
-   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用，最大2000条。
-
-注：
-1.`offset从0开始，即第一页为0。`
-2.`默认从第一页返回。`
+   * <p>查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用，最大2000条。</p><p>注：<br>1.<code>offset从0开始，即第一页为0。</code><br>2.<code>默认从第一页返回。</code></p>
    */
   Offset?: number
   /**
-   * 操作人信息
+   * <p>操作人信息</p>
    * @deprecated
    */
   Operator?: UserInfo
@@ -2533,97 +2431,76 @@ export interface SignUrl {
  */
 export interface TemplateInfo {
   /**
-   * 模板ID，模板的唯一标识
+   * <p>模板ID，模板的唯一标识</p>
    */
   TemplateId?: string
   /**
-   * 模板名
+   * <p>模板名</p>
    */
   TemplateName?: string
   /**
-   * 模板描述信息
+   * <p>模板描述信息</p>
    */
   Description?: string
   /**
-   * 模板的填充控件列表
-
-[点击查看在模板中配置的填充控件的样子](https://qcloudimg.tencent-cloud.cn/raw/cb2f58529fca8d909258f9d45a56f7f4.png)
+   * <p>模板的填充控件列表</p><p><a href="https://qcloudimg.tencent-cloud.cn/raw/cb2f58529fca8d909258f9d45a56f7f4.png">点击查看在模板中配置的填充控件的样子</a></p>
    */
   Components?: Array<Component>
   /**
-   * 此模块需要签署的各个参与方的角色列表。RecipientId标识每个参与方角色对应的唯一标识符，用于确定此角色的信息。
-
-[点击查看在模板中配置的签署参与方角色列表的样子](https://qcloudimg.tencent-cloud.cn/raw/e082bbcc0d923f8cb723d98382410aa2.png)
-
-
+   * <p>此模块需要签署的各个参与方的角色列表。RecipientId标识每个参与方角色对应的唯一标识符，用于确定此角色的信息。</p><p><a href="https://qcloudimg.tencent-cloud.cn/raw/e082bbcc0d923f8cb723d98382410aa2.png">点击查看在模板中配置的签署参与方角色列表的样子</a></p>
    */
   Recipients?: Array<Recipient>
   /**
-   * 此模板中的签署控件列表
-
-[点击查看在模板中配置的签署控件的样子](https://qcloudimg.tencent-cloud.cn/raw/29bc6ed753a5a0fce4a3ab02e2c0d955.png)
+   * <p>此模板中的签署控件列表</p><p><a href="https://qcloudimg.tencent-cloud.cn/raw/29bc6ed753a5a0fce4a3ab02e2c0d955.png">点击查看在模板中配置的签署控件的样子</a></p>
    */
   SignComponents?: Array<Component>
   /**
-   * 模板类型可以分为以下两种：
-
-<b>1</b>：带有<b>本企业自动签署</b>的模板，即签署过程无需签署人手动操作，系统自动完成签署。
-<b>3</b>：普通模板，即签署人需要手动进行签署操作。
+   * <p>模板类型可以分为以下两种：<b>1</b>：带有<b>本企业“授权签”</b>的模板，即签署过程无需签署人手动操作，系统自动完成签署。<b>3</b>：普通模板，即签署人需要手动进行签署操作。</p>
    */
   TemplateType?: number
   /**
-   * 是否是发起人 ,已弃用
+   * <p>是否是发起人 ,已弃用</p>
    * @deprecated
    */
   IsPromoter?: boolean
   /**
-   * 模板的创建者名字
+   * <p>模板的创建者名字</p>
    */
   Creator?: string
   /**
-   * 模板创建的时间戳，格式为Unix标准时间戳（秒）
+   * <p>模板创建的时间戳，格式为Unix标准时间戳（秒）</p>
    */
   CreatedOn?: number
   /**
-   * 模板的 H5 预览链接，有效期为 5 分钟。
-您可以通过浏览器直接打开此链接预览模板，或将其嵌入到 iframe 中进行预览。
-
-注意：只有在请求接口时将 <b>WithPreviewUrl </b>参数设置为 true，才会生成预览链接。
+   * <p>模板的 H5 预览链接，有效期为 5 分钟。<br>您可以通过浏览器直接打开此链接预览模板，或将其嵌入到 iframe 中进行预览。</p><p>注意：只有在请求接口时将 <b>WithPreviewUrl </b>参数设置为 true，才会生成预览链接。</p>
    */
   PreviewUrl?: string
   /**
-   * 第三方应用集成-模板PDF文件链接，有效期5分钟。
-请求参数WithPdfUrl=true时返回
-（此功能开放需要联系客户经理）。
+   * <p>第三方应用集成-模板PDF文件链接，有效期5分钟。<br>请求参数WithPdfUrl=true时返回<br>（此功能开放需要联系客户经理）。</p>
    */
   PdfUrl?: string
   /**
-   * 本模板关联的第三方应用平台企业模板ID
+   * <p>本模板关联的第三方应用平台企业模板ID</p>
    */
   ChannelTemplateId?: string
   /**
-   * 本模板关联的三方应用平台平台企业模板名称
+   * <p>本模板关联的三方应用平台平台企业模板名称</p>
    */
   ChannelTemplateName?: string
   /**
-   * 0-需要子客企业手动领取平台企业的模板(默认); 
-1-平台自动设置子客模板
+   * <p>0-需要子客企业手动领取平台企业的模板(默认);<br>1-平台自动设置子客模板</p>
    */
   ChannelAutoSave?: number
   /**
-   * 模板版本，由全数字字符组成。
-默认为空，模板版本号由日期和序号组成，初始版本为yyyyMMdd001，yyyyMMdd002表示第二个版本，以此类推。
+   * <p>模板版本，由全数字字符组成。<br>默认为空，模板版本号由日期和序号组成，初始版本为yyyyMMdd001，yyyyMMdd002表示第二个版本，以此类推。</p>
    */
   TemplateVersion?: string
   /**
-   * 模板可用状态的取值通常为以下两种：
-
-<ul><li>1：启用（默认），表示模板处于启用状态，可以被用户正常使用。</li>
-<li>2：停用，表示模板处于停用状态，禁止用户使用该模板。</li></ul>
+   * <p>模板可用状态的取值通常为以下两种：</p><ul><li>1：启用（默认），表示模板处于启用状态，可以被用户正常使用。</li><li>2：停用，表示模板处于停用状态，禁止用户使用该模板。</li></ul>
    */
   Available?: number
   /**
-   * 模板的用户合同类型
+   * <p>模板的用户合同类型</p>
    */
   UserFlowType?: UserFlowType
 }
@@ -2852,7 +2729,7 @@ export interface DescribeTemplatesResponse {
  */
 export interface AutoSignConfig {
   /**
-   * <p>自动签开通个人用户信息, 包括名字,身份证等</p>
+   * <p>“授权签”开通个人用户信息, 包括名字,身份证等</p>
    */
   UserInfo: UserThreeFactor
   /**
@@ -2864,7 +2741,7 @@ export interface AutoSignConfig {
    */
   UserDefineSeal?: boolean
   /**
-   * <p>回调中是否需要自动签将要使用的印章（签名）图片的 base64:</p><ul><li>**false**: 不需要(默认)</li><li>**true**: 需要</li></ul>
+   * <p>回调中是否需要“授权签”将要使用的印章（签名）图片的 base64:<ul><li><strong>false</strong>: 不需要(默认)</li><li><strong>true</strong>: 需要</li></ul></p>
    */
   SealImgCallback?: boolean
   /**
@@ -2877,7 +2754,7 @@ export interface AutoSignConfig {
    */
   VerifyChannels?: Array<string>
   /**
-   * <p>设置用户开通自动签时是否绑定个人自动签账号许可。</p><ul><li><b>1</b>: (默认)不绑定自动签账号许可开通，开通后一直有效,   后续使用合同份额进行合同发起</li></ul><p>注：<code>该字段已经失效，请勿设置此参数。</code></p>
+   * <p>设置用户开通“授权签”时是否绑定个人“授权签”账号许可。<ul><li><b>1</b>: (默认)不绑定“授权签”账号许可开通，开通后一直有效,   后续使用合同份额进行合同发起</li></ul>注：<code>该字段已经失效，请勿设置此参数。</code></p>
    */
   LicenseType?: number
   /**
@@ -3071,20 +2948,19 @@ export interface ChannelBillUsageDetail {
  */
 export interface ChannelCancelUserAutoSignEnableUrlRequest {
   /**
-   * 渠道应用相关信息
+   * <p>渠道应用相关信息</p>
    */
   Agent: Agent
   /**
-   * 操作人信息
+   * <p>操作人信息</p>
    */
   Operator: UserInfo
   /**
-   * 自动签使用的场景值, 可以选择的场景值如下:
-<ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   * <p>授权签使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景</li><li>OTHER： 通用场景</li></ul>
    */
   SceneKey: string
   /**
-   * 指定撤销链接的用户信息，包含姓名、证件类型、证件号码。
+   * <p>指定撤销链接的用户信息，包含姓名、证件类型、证件号码。</p>
    */
   UserInfo: UserThreeFactor
 }
@@ -3146,32 +3022,19 @@ export interface ChannelCreatePrepareFlowGroupRequest {
  */
 export interface DescribeExtendedServiceAuthDetailRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 要查询的扩展服务类型。
-如下所示：
-<ul><li> AUTO_SIGN：企业静默签署</li>
-<li>BATCH_SIGN：批量签署</li>
-</ul>
-
+   * <p>要查询的扩展服务类型。<br>如下所示：</p><p>枚举值：</p><ul><li>AUTO_SIGN： 企业授权签署</li><li>BATCH_SIGN： 批量签署</li></ul>
    */
   ExtendServiceType: string
   /**
-   * 指定每页返回的数据条数，和Offset参数配合使用。 注：`1.默认值为20，单页做大值为200。`
+   * <p>指定每页返回的数据条数，和Offset参数配合使用。 注：<code>1.默认值为20，单页做大值为200。</code></p>
    */
   Limit?: number
   /**
-   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：`1.offset从0开始，即第一页为0。` `2.默认从第一页返回。`
+   * <p>查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：<code>1.offset从0开始，即第一页为0。</code> <code>2.默认从第一页返回。</code></p>
    */
   Offset?: number
 }
@@ -3692,7 +3555,7 @@ export interface CommonFlowApprover {
    */
   NotChannelOrganization?: boolean
   /**
-   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:</p><p> <strong>0</strong> :企业/企业员工（企业签署方或模板发起时的企业静默签）<br> <strong>1</strong> :个人/自然人<br><strong>3</strong> :企业/企业员工自动签（他方企业自动签署或文件发起时的本方企业自动签）</p><p>注：类型为3（企业/企业员工自动签）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。<br>使用自动签时，请确保企业已经开通自动签功能，开通方式：控制台 -&gt; 企业设置 -&gt; 扩展服务 -&gt; 企业自动签。<br>使用文件发起自动签时使用前请联系对接的客户经理沟通。</p>
+   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: <strong>0</strong> :企业/企业员工（企业签署方或模板发起时的企业“授权签”） <strong>1</strong> :个人/自然人<strong>3</strong> :企业/企业员工“授权签”（他方企业“授权签”或文件发起时的本方企业“授权签”）注：类型为3（企业/企业员工“授权签”）时，此接口会默认完成该签署方的签署。“授权签”仅进行盖章操作，不能“授权签”名。使用“授权签”时，请确保企业已经开通“授权签”功能，开通方式：控制台 -&gt; 企业设置 -&gt; 扩展服务 -&gt; 企业“授权签”。使用文件发起“授权签”时使用前请联系对接的客户经理沟通。</p>
    */
   ApproverType?: number
   /**
@@ -3700,11 +3563,11 @@ export interface CommonFlowApprover {
    */
   OrganizationId?: string
   /**
-   * <p>企业OpenId，第三方应用集成非静默签子客企业签署人发起合同必传</p>
+   * <p>企业OpenId，第三方应用集成非“授权签”子客企业签署人发起合同必传</p>
    */
   OrganizationOpenId?: string
   /**
-   * <p>企业名称，第三方应用集成非静默签子客企业签署人必传，saas企业签署人必传</p>
+   * <p>企业名称，第三方应用集成非“授权签”子客企业签署人必传，saas企业签署人必传</p>
    */
   OrganizationName?: string
   /**
@@ -3822,23 +3685,23 @@ export interface FillApproverInfo {
  */
 export interface CreatePersonAuthCertificateImageResponse {
   /**
-   * 个人用户认证证书图片下载URL，`有效期为5分钟`，超过有效期后将无法再下载。
+   * <p>个人用户认证证书图片下载URL，<code>有效期为5分钟</code>，超过有效期后将无法再下载。</p>
    */
   AuthCertUrl?: string
   /**
-   * 个人用户认证证书的编号, 为20位数字组成的字符串,  由腾讯电子签下发此编号 。该编号会合成到个人用户证书证明图片。注: `个人用户认证证书的编号和证明图片绑定, 获取新的证明图片编号会变动`
+   * <p>个人用户认证证书的编号, 为20位数字组成的字符串,  由腾讯电子签下发此编号 。该编号会合成到个人用户证书证明图片。注: <code>个人用户认证证书的编号和证明图片绑定, 获取新的证明图片编号会变动</code></p>
    */
   ImageCertId?: string
   /**
-   * 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。请注意，当证书到期并自动续期时，该序列号将会发生变化。值得注意的是，此序列号不会被合成至个人用户证书的证明图片中。
+   * <p>在数字证书申请过程中，系统会自动生成一个独一无二的序列号。请注意，当证书到期并自动续期时，该序列号将会发生变化。值得注意的是，此序列号不会被合成至个人用户证书的证明图片中。</p>
    */
   SerialNumber?: string
   /**
-   * CA证书颁发时间，格式为Unix标准时间戳（秒）   该时间格式化后会合成到个人用户证书证明图片
+   * <p>CA证书颁发时间，格式为Unix标准时间戳（秒）   该时间格式化后会合成到个人用户证书证明图片</p>
    */
   ValidFrom?: number
   /**
-   * CA证书有效截止时间，格式为Unix标准时间戳（秒）该时间格式化后会合成到个人用户证书证明图片
+   * <p>CA证书有效截止时间，格式为Unix标准时间戳（秒）该时间格式化后会合成到个人用户证书证明图片</p>
    */
   ValidTo?: number
   /**
@@ -3874,7 +3737,7 @@ export interface ModifyPartnerAutoSignAuthUrlRequest {
    */
   AuthorizedOrganizationName?: string
   /**
-   * <p>是否给平台应用授权</p><ul><li><strong>true</strong>: 表示是，授权平台应用。在此情况下，无需设置<code>AuthorizedOrganizationId</code>和<code>AuthorizedOrganizationName</code>。</li><li><strong>false</strong>: （默认）表示否，不是授权平台应用。</li></ul><p> 注：授权给平台应用需要开通【基于子客授权第三方应用可文件发起子客自动签署】白名单，请联系运营经理开通。</p>
+   * <p>是否给平台应用授权<ul><li><strong>true</strong>: 表示是，授权平台应用。在此情况下，无需设置<code>AuthorizedOrganizationId</code>和<code>AuthorizedOrganizationName</code>。</li><li><strong>false</strong>: （默认）表示否，不是授权平台应用。</li></ul> 注：授权给平台应用需要开通【基于子客授权第三方应用可文件发起子客“授权签”】白名单，请联系运营经理开通。</p>
    */
   PlatformAppAuthorization?: boolean
   /**
@@ -3954,7 +3817,7 @@ export interface ChannelCreateUserAutoSignSealUrlRequest {
    */
   Agent: Agent
   /**
-   * <p>“授权签”使用的场景值, 可以选择的场景值如下:<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong> :  电子处方场景</li><li> <strong>OTHER</strong> :  通用场景</li></ul></p>
+   * <p>“授权签”使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN：  电子处方场景</li><li>OTHER：  通用场景</li></ul>
    */
   SceneKey: string
   /**
@@ -4122,7 +3985,7 @@ export interface ChannelCreateUserAutoSignEnableUrlRequest {
    */
   Agent: Agent
   /**
-   * <p>自动签使用的场景值, 可以选择的场景值如下:</p><ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   * <p>授权签使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景</li><li>OTHER： 通用场景</li></ul>
    */
   SceneKey: string
   /**
@@ -4130,7 +3993,7 @@ export interface ChannelCreateUserAutoSignEnableUrlRequest {
    */
   Operator?: UserInfo
   /**
-   * <p>自动签开通配置信息, 包括开通的人员的信息等</p>
+   * <p>授权签开通配置信息, 包括开通的人员的信息等</p>
    */
   AutoSignConfig?: AutoSignConfig
   /**
@@ -4150,7 +4013,7 @@ export interface ChannelCreateUserAutoSignEnableUrlRequest {
    */
   ExpiredTime?: number
   /**
-   * <p>调用方自定义的个性化字段(可自定义此字段的值)，并以base64方式编码，支持的最大数据大小为 20480长度。 在个人自动签的开通、关闭等回调信息场景中，该字段的信息将原封不动地透传给贵方。</p>
+   * <p>调用方自定义的个性化字段(可自定义此字段的值)，并以base64方式编码，支持的最大数据大小为 20480长度。 在个人授权签的开通、关闭等回调信息场景中，该字段的信息将原封不动地透传给贵方。</p>
    */
   UserData?: string
   /**
@@ -4348,15 +4211,7 @@ export interface DescribeUsageRequest {
  */
 export interface DescribeExtendedServiceAuthInfoRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经过实名认证
    */
   Agent: Agent
 }
@@ -4518,7 +4373,7 @@ export interface FlowInfo {
    */
   CcInfos?: Array<CcInfo>
   /**
-   * <p>发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：</p><ul><li> **false**：（默认）不需要审批，直接签署。</li><li> **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果<ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li><li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>注：<code>此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同</code>
+   * <p>发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：<ul><li> <strong>false</strong>：（默认）不需要审批，直接签署。</li><li> <strong>true</strong>：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果<ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li><li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>注：<code>此功能可用于与企业内部的审批流程进行关联，支持手动、“授权签”合同</code></p>
    */
   NeedSignReview?: boolean
   /**
@@ -4526,7 +4381,7 @@ export interface FlowInfo {
    */
   CcNotifyType?: number
   /**
-   * <p>个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传：</p><ul><li> **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签）  </li><li> **OTHER** :  通用场景</li></ul>注: <code>个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。</code>
+   * <p>个人“授权签”名的使用场景包括以下, 个人“授权签”(即ApproverType设置成个人“授权签”时)业务此值必传：<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong>：电子处方单（医疗“授权签”）  </li><li> <strong>OTHER</strong> :  通用场景</li></ul>注: <code>个人“授权签”名场景是白名单功能，使用前请与对接的客户经理联系沟通。</code></p>
    */
   AutoSignScene?: string
   /**
@@ -5400,7 +5255,7 @@ export interface FlowApproverInfo {
    */
   OrganizationOpenId?: string
   /**
-   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:</p><ul><li> **PERSON** :个人/自然人</li><li> **PERSON_AUTO_SIGN** :个人/自然人自动签署，适用于个人自动签场景</li><li> **ORGANIZATION** :企业/企业员工（企业签署方或模板发起时的企业静默签）</li><li> **ENTERPRISESERVER** :企业/企业员工自动签（他方企业自动签署或文件发起时的本方企业自动签）</li></ul><p>注:<br><code>1. 个人自动签场景(PERSON_AUTO_SIGN)为白名单功能, 使用前请联系对接的客户经理沟通。</code><br><code>2. 若要实现他方企业（同一应用下）自动签，需要满足3个条件：</code></p><ul><li>条件1：ApproverType 设置为ENTERPRISESERVER</li><li>条件2：子客之间完成授权</li><li>条件3：联系对接的客户经理沟通如何使用</li></ul>
+   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:<ul><li> <strong>PERSON</strong> :个人/自然人</li><li> <strong>PERSON_AUTO_SIGN</strong> :个人/自然人“授权签”，适用于个人“授权签”场景</li><li> <strong>ORGANIZATION</strong> :企业/企业员工（企业签署方或模板发起时的企业“授权签”）</li><li> <strong>ENTERPRISESERVER</strong> :企业/企业员工“授权签”（他方企业“授权签”或文件发起时的本方企业“授权签”）</li></ul>注:  <code>1. 个人“授权签”场景(PERSON_AUTO_SIGN)为白名单功能, 使用前请联系对接的客户经理沟通。</code><code>2. 若要实现他方企业（同一应用下）“授权签”，需要满足3个条件：</code><ul><li>条件1：ApproverType 设置为ENTERPRISESERVER</li><li>条件2：子客之间完成授权</li><li>条件3：联系对接的客户经理沟通如何使用</li></ul></p>
    */
   ApproverType?: string
   /**
@@ -5437,7 +5292,7 @@ export interface FlowApproverInfo {
    */
   ApproverOption?: ApproverOption
   /**
-   * <p>此签署人（员工或者个人）签署前，是否需要发起方企业进行审批，取值如下：</p><ul><li>**false**：（默认）不需要审批，直接签署。</li><li>**true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待发起方企业内部审批完成。</li></ul>企业可以通过ChannelCreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果<ul><li>如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li><li>如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul><p>注：<code>此功能可用于与发起方企业内部的审批流程进行关联，支持手动、静默签署合同</code></p><p><img src="https://qcloudimg.tencent-cloud.cn/raw/b14d5188ed0229d1401e74a9a49cab6d.png" alt="image"></p>
+   * <p>此签署人（员工或者个人）签署前，是否需要发起方企业进行审批，取值如下：<ul><li><strong>false</strong>：（默认）不需要审批，直接签署。</li><li><strong>true</strong>：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待发起方企业内部审批完成。</li></ul>企业可以通过ChannelCreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果<ul><li>如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li><li>如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>注：<code>此功能可用于与发起方企业内部的审批流程进行关联，支持手动、“授权签”合同</code><img src="https://qcloudimg.tencent-cloud.cn/raw/b14d5188ed0229d1401e74a9a49cab6d.png" alt="image"></p>
    */
   ApproverNeedSignReview?: boolean
   /**
@@ -5491,7 +5346,7 @@ export interface FlowApproverInfo {
  */
 export interface ChannelCreateUserAutoSignEnableUrlResponse {
   /**
-   * <p>个人用户自动签的开通链接, 短链或者长链接形式。过期时间受 <code>ExpiredTime</code> 参数控制。</p>
+   * <p>个人用户授权签的开通链接, 短链或者长链接形式。过期时间受 <code>ExpiredTime</code> 参数控制。</p>
    */
   Url?: string
   /**
@@ -5801,23 +5656,23 @@ export interface FlowDetailInfo {
  */
 export interface CreatePersonAuthCertificateImageRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p>
    */
   Agent: Agent
   /**
-   * 个人用户名称
+   * <p>个人用户名称</p>
    */
   UserName: string
   /**
-   * 证件类型，支持以下类型<ul><li> ID_CARD  : 中国大陆居民身份证 (默认值)</li><li> HONGKONG_AND_MACAO  : 中国港澳居民来往内地通行证</li><li> HONGKONG_MACAO_AND_TAIWAN  : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
+   * <p>证件类型，支持以下类型<ul><li> ID_CARD  : 中国大陆居民身份证 (默认值)</li><li> HONGKONG_AND_MACAO  : 中国港澳居民来往内地通行证</li><li> HONGKONG_MACAO_AND_TAIWAN  : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul></p>
    */
   IdCardType: string
   /**
-   * 证件号码，应符合以下规则<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li><li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li><li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   * <p>证件号码，应符合以下规则<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li><li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li><li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul></p>
    */
   IdCardNumber: string
   /**
-   * 自动签使用的场景值, 可以选择的场景值如下:<ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>注: `不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN`
+   * <p>授权使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景</li><li>OTHER： 通用场景</li></ul><p>默认值：E_PRESCRIPTION_AUTO_SIGN</p><p>注: <code>不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN</code></p>
    */
   SceneKey?: string
 }
@@ -6527,21 +6382,19 @@ export interface CreateEmployeeChangeUrlRequest {
  */
 export interface ChannelDescribeUserAutoSignStatusRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p>
    */
   Agent: Agent
   /**
-   * 自动签使用的场景值, 可以选择的场景值如下:
-<ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   * <p>授权签使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景</li><li>OTHER： 通用场景</li></ul>
    */
   SceneKey: string
   /**
-   * 要查询状态的用户信息, 包括名字,身份证等
+   * <p>要查询状态的用户信息, 包括名字,身份证等</p>
    */
   UserInfo: UserThreeFactor
   /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
    */
   Operator?: UserInfo
 }
@@ -6591,33 +6444,23 @@ export interface UploadFile {
  */
 export interface ExtentServiceAuthInfo {
   /**
-   * 扩展服务类型
-<ul>
-<li>AUTO_SIGN             企业自动签（自动签署）</li>
-<li>  OVERSEA_SIGN          企业与港澳台居民签署合同</li>
-<li>  MOBILE_CHECK_APPROVER 使用手机号验证签署方身份</li>
-<li> DOWNLOAD_FLOW         授权渠道下载合同 </li>
-<li>AGE_LIMIT_EXPANSION 拓宽签署方年龄限制</li>
-<li>HIDE_OPERATOR_DISPLAY 隐藏合同经办人姓名</li>
-</ul>
+   * <p>扩展服务类型<ul><li>AUTO_SIGN             企业“授权签”（“授权签”）</li><li>  OVERSEA_SIGN          企业与港澳台居民签署合同</li><li>  MOBILE_CHECK_APPROVER 使用手机号验证签署方身份</li><li> DOWNLOAD_FLOW         授权渠道下载合同 </li><li>AGE_LIMIT_EXPANSION 拓宽签署方年龄限制</li><li>HIDE_OPERATOR_DISPLAY 隐藏合同经办人姓名</li></ul></p>
    */
   Type?: string
   /**
-   * 扩展服务名称
+   * <p>扩展服务名称</p>
    */
   Name?: string
   /**
-   * 扩展服务的开通状态
-   **ENABLE**：开通
-   **DISABLE**：未开通
+   * <p>扩展服务的开通状态<br><strong>ENABLE</strong>：开通<br><strong>DISABLE</strong>：未开通</p>
    */
   Status?: string
   /**
-   * 操作扩展服务的操作人第三方应用平台的用户openid
+   * <p>操作扩展服务的操作人第三方应用平台的用户openid</p>
    */
   OperatorOpenId?: string
   /**
-   * 扩展服务的操作时间，格式为Unix标准时间戳（秒）。
+   * <p>扩展服务的操作时间，格式为Unix标准时间戳（秒）。</p>
    */
   OperateOn?: number
 }
@@ -7134,21 +6977,19 @@ export interface ChannelCreateFlowSignReviewResponse {
  */
 export interface ChannelDisableUserAutoSignRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p>
    */
   Agent: Agent
   /**
-   * 自动签使用的场景值, 可以选择的场景值如下:
-<ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   * <p>授权签使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景</li><li>OTHER： 通用场景</li></ul>
    */
   SceneKey: string
   /**
-   * 需要关闭自动签的个人的信息，如姓名，证件信息等。
+   * <p>需要关闭授权签的个人的信息，如姓名，证件信息等。</p>
    */
   UserInfo: UserThreeFactor
   /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
    */
   Operator?: UserInfo
 }
@@ -7231,22 +7072,19 @@ export interface CreateSealByImageResponse {
  */
 export interface DynamicFlowInfo {
   /**
-   * 合同流程ID，为32位字符串。 
-- FlowId 在通过[ChannelCreateFlowByFiles](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles) 发起，可以在返回参数FlowId中获取。
-- 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 
-- 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+   * <p>合同流程ID，为32位字符串。 </p><ul><li>FlowId 在通过<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles">ChannelCreateFlowByFiles</a> 发起，可以在返回参数FlowId中获取。</li><li>建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 </li><li>可登录腾讯电子签控制台，在 &quot;合同&quot;-&gt;&quot;合同中心&quot; 中查看某个合同的FlowId(在页面中展示为合同ID)。</li></ul>
    */
   FlowId: string
   /**
-   * 合同流程的参与方列表, 最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，不同类型的签署方传参方式可以参考文档 [签署方入参指引](https://qian.tencent.com/developers/partner/flow_approver)。 如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序, 请确保列表中参与人的顺序符合实际签署顺序。
+   * <p>合同流程的参与方列表, 最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，不同类型的签署方传参方式可以参考文档 <a href="https://qian.tencent.com/developers/partner/flow_approver">签署方入参指引</a>。 如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序, 请确保列表中参与人的顺序符合实际签署顺序。</p>
    */
   FlowApprovers: Array<FlowApproverInfo>
   /**
-   * 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传： <ul><li> **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签） </li><li> **OTHER** : 通用场景</li></ul> 注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。`
+   * <p>个人“授权签”名的使用场景包括以下, 个人“授权签”(即ApproverType设置成个人“授权签”时)业务此值必传： <ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong>：电子处方单（医疗“授权签”） </li><li> <strong>OTHER</strong> : 通用场景</li></ul> 注: <code>个人“授权签”名场景是白名单功能，使用前请与对接的客户经理联系沟通。</code></p>
    */
   AutoSignScene?: string
   /**
-   * 签署人校验方式 VerifyCheck: 人脸识别（默认） MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证） 参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
+   * <p>签署人校验方式 VerifyCheck: 人脸识别（默认） MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证） 参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。</p>
    */
   ApproverVerifyType?: string
 }
@@ -7266,19 +7104,19 @@ export interface ChannelCancelMultiFlowSignQRCodeResponse {
  */
 export interface ChannelDescribeRolesResponse {
   /**
-   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用，最大2000条。
+   * <p>查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用，最大2000条。</p>
    */
   Offset?: number
   /**
-   * 指定每页返回的数据条数，和Offset参数配合使用，单页最大200。
+   * <p>指定每页返回的数据条数，和Offset参数配合使用，单页最大200。</p>
    */
   Limit?: number
   /**
-   * 查询角色的总数量
+   * <p>查询角色的总数量</p>
    */
   TotalCount?: number
   /**
-   * 查询的角色信息列表
+   * <p>查询的角色信息列表</p>
    */
   ChannelRoles?: Array<ChannelRole>
   /**
@@ -7302,64 +7140,42 @@ export interface CreateChannelSubOrganizationActiveResponse {
  */
 export interface ChannelCreateReleaseFlowRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 待解除的签署流程编号(即原签署流程的编号)。
-
-
-[点击查看流程编号在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png)
+   * <p>待解除的签署流程编号(即原签署流程的编号)。</p><p><a href="https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png">点击查看流程编号在控制台上的位置</a></p>
    */
   NeedRelievedFlowId: string
   /**
-   * 解除协议内容, 包括解除理由等信息。
+   * <p>解除协议内容, 包括解除理由等信息。</p>
    */
   ReliveInfo: RelieveInfo
   /**
-   * 替换解除协议的签署人， 如不指定新的签署人，将继续使用原流程的签署人作为本解除协议的参与方。 <br/>
-如需更换原合同中的企业端签署人，可通过指定该签署人在原合同列表中的ApproverNumber编号来更换此企业端签署人。(可通过接口<a href="https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo/">DescribeFlowDetailInfo</a>查询签署人的ApproverNumber编号，默认从0开始，顺序递增)<br/>
-
-注：
-1. 支持更换企业的签署人，不支持更换个人类型的签署人。
-2. 己方企业支持自动签署，他方企业不支持自动签署。
-3. <b>仅将需要替换的签署人添加至此列表</b>，无需替换的签署人无需添加进来。
+   * <p>替换解除协议的签署人， 如不指定新的签署人，将继续使用原流程的签署人作为本解除协议的参与方。 <br><br>如需更换原合同中的企业端签署人，可通过指定该签署人在原合同列表中的ApproverNumber编号来更换此企业端签署人。(可通过接口<a href="https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo/">DescribeFlowDetailInfo</a>查询签署人的ApproverNumber编号，默认从0开始，顺序递增)<br></p><p>注：</p><ol><li>支持更换企业的签署人，不支持更换个人类型的签署人。</li><li>己方企业支持授权签署，他方企业不支持授权签署。</li><li><b>仅将需要替换的签署人添加至此列表</b>，无需替换的签署人无需添加进来。</li></ol>
    */
   ReleasedApprovers?: Array<ReleasedApprover>
   /**
-   * 签署完回调url，最大长度1000个字符
+   * <p>签署完回调url，最大长度1000个字符</p>
    * @deprecated
    */
   CallbackUrl?: string
   /**
-   * 暂未开放
+   * <p>暂未开放</p>
    * @deprecated
    */
   Organization?: OrganizationInfo
   /**
-   * 暂未开放
+   * <p>暂未开放</p>
    * @deprecated
    */
   Operator?: UserInfo
   /**
-   * 合同流程的签署截止时间，格式为Unix标准时间戳(秒)，如果未设置签署截止时间，则默认为合同流程创建后的7天时截止。
-如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。
+   * <p>合同流程的签署截止时间，格式为Unix标准时间戳(秒)，如果未设置签署截止时间，则默认为合同流程创建后的7天时截止。<br>如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。</p>
    */
   Deadline?: number
   /**
-   * 调用方自定义的个性化字段，该字段的值可以是字符串JSON或其他字符串形式，客户可以根据自身需求自定义数据格式并在需要时进行解析。该字段的信息将以Base64编码的形式传输，支持的最大数据大小为20480长度。
-
-在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。
-
-回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
+   * <p>调用方自定义的个性化字段，该字段的值可以是字符串JSON或其他字符串形式，客户可以根据自身需求自定义数据格式并在需要时进行解析。该字段的信息将以Base64编码的形式传输，支持的最大数据大小为20480长度。</p><p>在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。</p><p>回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。</p>
    */
   UserData?: string
 }
@@ -7537,7 +7353,7 @@ export interface ApproverOption {
    */
   HideOneKeySign?: boolean
   /**
-   * <p>签署人信息补充类型，默认无需补充。<ul><li> <strong>1</strong> :  动态签署人（可发起合同后再补充签署人信息）注：<code>企业自动签不支持动态补充</code></li></ul>注：<code>使用动态签署人能力前，需登录腾讯电子签控制台打开服务开关</code></p><p>枚举值：</p><ul><li>1： 动态签署人</li></ul>
+   * <p>签署人信息补充类型，默认无需补充。<ul><li> <strong>1</strong> :  动态签署人（可发起合同后再补充签署人信息）注：<code>企业“授权签”不支持动态补充</code></li></ul>注：<code>使用动态签署人能力前，需登录腾讯电子签控制台打开服务开关</code></p><p>枚举值：</p><ul><li>1： 动态签署人</li></ul>
    */
   FillType?: number
   /**
@@ -7613,27 +7429,23 @@ export interface FlowResourceUrlInfo {
  */
 export interface ChannelDescribeUserAutoSignStatusResponse {
   /**
-   * 查询用户是否已开通自动签
+   * <p>查询用户是否已开通授权签</p>
    */
   IsOpen?: boolean
   /**
-   * 自动签许可生效时间。当且仅当已通过许可开通自动签时有值。
-
-值为unix时间戳,单位为秒。
+   * <p>授权签许可生效时间。当且仅当已通过许可开通授权签时有值。</p><p>值为unix时间戳,单位为秒。</p>
    */
   LicenseFrom?: number
   /**
-   * 自动签许可到期时间。当且仅当已通过许可开通自动签时有值。
-
-值为unix时间戳,单位为秒。
+   * <p>授权签许可到期时间。当且仅当已通过许可开通授权签时有值。</p><p>值为unix时间戳,单位为秒。</p>
    */
   LicenseTo?: number
   /**
-   * 设置用户开通自动签时是否绑定个人自动签账号许可。<ul><li>**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`</li><li>**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起</li></ul>
+   * <p>设置用户开通授权签时是否绑定个人授权签账号许可。</p><p>枚举值：</p><ul><li>0： 使用个人授权签账号许可进行开通，个人授权签账号许可有效期1年，注: <code>不可解绑释放更换他人</code></li><li>1： 不绑定授权签账号许可开通，后续使用合同份额进行合同发起</li></ul>
    */
   LicenseType?: number
   /**
-   * 用户开通自动签指定使用的印章，为空则未设置印章，需重新进入开通链接设置印章。
+   * <p>用户开通授权签指定使用的印章，为空则未设置印章，需重新进入开通链接设置印章。</p>
    */
   SealId?: string
   /**
@@ -7683,13 +7495,7 @@ export interface ProxyOrganizationOperator {
  */
 export interface ModifyExtendedServiceResponse {
   /**
-   * 操作跳转链接
-<ul><li><strong>链接有效期：</strong> 跳转链接的有效期为24小时。</li>
-<li><strong>没有返回链接的情形：</strong> 如果在操作时没有返回跳转链接，说明此次操作无需进行跳转，服务将会直接被开通或关闭。</li>
-<li><strong>返回链接的情形：</strong> 当操作类型为<b>OPEN（开通服务）</b>，并且扩展服务类型为<b>AUTO_SIGN（ 企业自动签署）</b>、<b>DOWNLOAD_FLOW（授权渠道下载合同）</b>时，系统将返回一个操作链接。收到操作链接后，贵方需主动联系超级管理员（超管）或法人。<font color="red"><b>由超管或法人点击链接</b></font>，以完成服务的开通操作。</li>
-</ul>
-
-
+   * <p>操作跳转链接</p><ul><li><strong>链接有效期：</strong> 跳转链接的有效期为24小时。</li><li><strong>没有返回链接的情形：</strong> 如果在操作时没有返回跳转链接，说明此次操作无需进行跳转，服务将会直接被开通或关闭。</li><li><strong>返回链接的情形：</strong> 当操作类型为<b>OPEN（开通服务）</b>，并且扩展服务类型为<b>AUTO_SIGN（ 企业授权签署）</b>、<b>DOWNLOAD_FLOW（授权渠道下载合同）</b>时，系统将返回一个操作链接。收到操作链接后，贵方需主动联系超级管理员（超管）或法人。<font color="red"><b>由超管或法人点击链接</b></font>，以完成服务的开通操作。</li></ul>
    */
   OperateUrl?: string
   /**
@@ -8190,32 +7996,23 @@ export interface RuleIdConfig {
  */
 export interface CreateBatchInitOrganizationUrlRequest {
   /**
-   * 应用相关信息。 此接口Agent.AppId 必填。
+   * <p>应用相关信息。 此接口Agent.AppId 必填。</p>
    */
   Agent: Agent
   /**
-   * 初始化操作类型
-<ul>
-<li>CREATE_SEAL : 创建印章</li>
-<li>OPEN_AUTO_SIGN :开通企业自动签署</li>
-<li>PARTNER_AUTO_SIGN_AUTH :合作方企业或应用平台方授权自动签</li>
-</ul>
+   * <p>初始化操作类型<ul><li>CREATE_SEAL : 创建印章</li><li>OPEN_AUTO_SIGN :开通企业授权签署</li><li>PARTNER_AUTO_SIGN_AUTH :合作方企业或应用平台方授权“授权签”</li></ul></p>
    */
   OperateTypes: Array<string>
   /**
-   * 批量操作的企业列表在第三方平台的企业Id列表，即ProxyOrganizationOpenId列表,最大支持50个
+   * <p>批量操作的企业列表在第三方平台的企业Id列表，即ProxyOrganizationOpenId列表,最大支持50个</p>
    */
   ProxyOrganizationOpenIds: Array<string>
   /**
-   * 当操作类型包含 PARTNER_AUTO_SIGN_AUTH 且是给应用平台方授权自动签时传true。
-![image](https://qcloudimg.tencent-cloud.cn/raw/f9aba7c999a6d79ada20b4384520e120.png)
+   * <p>当操作类型包含 PARTNER_AUTO_SIGN_AUTH 且是给应用平台方授权【授权签】时传true。<br><img src="https://qcloudimg.tencent-cloud.cn/raw/f9aba7c999a6d79ada20b4384520e120.png" alt="image"></p>
    */
   IsAuthorizePlatformApplication?: boolean
   /**
-   * 被授权的合作方企业在第三方平台子客企业标识，即ProxyOrganizationOpenId，当操作类型包含 PARTNER_AUTO_SIGN_AUTH 且要进行合作方企业授权自动签时必传。
-
-
-
+   * <p>被授权的合作方企业在第三方平台子客企业标识，即ProxyOrganizationOpenId，当操作类型包含 PARTNER_AUTO_SIGN_AUTH 且要进行合作方企业授权【授权签】时必传。</p>
    */
   AuthorizedProxyOrganizationOpenId?: string
 }
@@ -9035,7 +8832,7 @@ export interface ChannelDeleteRoleResponse {
  */
 export interface ChannelCreateReleaseFlowResponse {
   /**
-   * 解除协议流程编号
+   * <p>解除协议流程编号</p>
    */
   FlowId?: string
   /**
@@ -9282,7 +9079,7 @@ export interface ChannelCreateFlowRemindsRequest {
  */
 export interface DescribeExtendedServiceAuthInfoResponse {
   /**
-   * 服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。
+   * <p>服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。</p>
    */
   AuthInfo?: Array<ExtentServiceAuthInfo>
   /**

@@ -2550,15 +2550,15 @@ export interface DescribeOSImagesRequest {
  */
 export interface CreateEksLogConfigRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 日志采集配置的json表达
+   * <p>日志采集配置的json表达</p>
    */
   LogConfig: string
   /**
-   * 日志集ID
+   * <p>日志集ID</p>
    */
   LogsetId?: string
 }
@@ -8916,7 +8916,7 @@ export interface DescribePrometheusTemplateSyncResponse {
  */
 export interface CreateEksLogConfigResponse {
   /**
-   * 日志采集topicid
+   * <p>日志采集topicid</p>
    */
   TopicId?: string
   /**
@@ -9369,19 +9369,19 @@ export interface CreatePrometheusConfigRequest {
  */
 export interface CreateCLSLogConfigRequest {
   /**
-   * 日志采集配置的json表达
+   * <p>日志采集配置的json表达</p>
    */
   LogConfig: string
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * CLS日志集ID
+   * <p>CLS日志集ID</p>
    */
   LogsetId?: string
   /**
-   * 当前集群类型支持tke（标准集群）、eks（serverless集群）
+   * <p>当前集群类型支持tke（标准集群）、eks（serverless集群）</p>
    */
   ClusterType?: string
 }
