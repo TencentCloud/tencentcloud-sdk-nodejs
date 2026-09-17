@@ -299,28 +299,77 @@ export interface StartAIConversationResponse {
 }
 
 /**
- * CreateScanUser请求参数结构体
+ * 语音转文字参数
  */
-export interface CreateScanUserRequest {
+export interface STTConfig {
   /**
-   * 应用ID，登录控制台 - 服务管理创建应用得到的AppID
+   * 
+语音转文字支持识别的语言，默认是"zh" 中文
+
+可通过购买「AI智能识别时长包」解锁或领取包月套餐体验版解锁不同语言. 
+
+语音转文本不同套餐版本支持的语言如下：
+
+**基础版**：
+- "zh": 中文（简体）
+- "zh-TW": 中文（繁体）
+- "en": 英语
+
+**标准版：**
+- "8k_zh_large": 普方大模型引擎. 当前模型同时支持中文等语言的识别，模型参数量极大，语言模型性能增强，针对电话音频中各类场景、各类中文方言的识别准确率极大提升.
+- "16k_zh_large": 普方英大模型引擎. 当前模型同时支持中文、英文、多种中文方言等语言的识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.
+- "16k_multi_lang": 多语种大模型引擎. 当前模型同时支持英语、日语、韩语、阿拉伯语、菲律宾语、法语、印地语、印尼语、马来语、葡萄牙语、西班牙语、泰语、土耳其语、越南语、德语的识别，可实现15个语种的自动识别(句子/段落级别).
+- "16k_zh_en": 中英大模型引擎. 当前模型同时支持中文、英语识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.
+
+**高级版：**
+- "zh-dialect": 中国方言
+- "zh-yue": 中国粤语
+- "vi": 越南语
+- "ja": 日语
+- "ko": 韩语
+- "id": 印度尼西亚语
+- "th": 泰语
+- "pt": 葡萄牙语
+- "tr": 土耳其语
+- "ar": 阿拉伯语
+- "es": 西班牙语
+- "hi": 印地语
+- "fr": 法语
+- "ms": 马来语
+- "fil": 菲律宾语
+- "de": 德语
+- "it": 意大利语
+- "ru": 俄语
+- "sv": 瑞典语
+- "da": 丹麦语
+- "no": 挪威语
+
+**注意：**
+如果缺少满足您需求的语言，请联系我们技术人员。
    */
-  BizId: number
+  Language?: string
   /**
-   * 需要新增送检的用户号。示例：1234
-(若UserId不填，则UserIdString必填；两者选其一；两者都填以UserIdString为准)
+   * **发起模糊识别为高级版能力,默认按照高级版收费,仅支持填写基础版和高级版语言.**
+注意：不支持填写"zh-dialect"
    */
-  UserId?: number
+  AlternativeLanguage?: Array<string>
   /**
-   * 需要新增送检的用户号，长度不超过1024字符。示例："1234"(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
+   * 自定义参数，联系后台使用
+
    */
-  UserIdString?: string
+  CustomParam?: string
   /**
-   * 当前用户送检过期时间，单位：秒。
-若参数不为0，则在过期时间之后，用户不会被送检。
-若参数为0，则送检配置不会自动失效。 
+   * 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。
    */
-  ExpirationTime?: number
+  VadSilenceTime?: number
+  /**
+   * 热词表：该参数用于提升识别准确率。 单个热词限制："热词|权重"，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如：“腾讯云|5” 或 “ASR|11”； 热词表限制：多个热词用英文逗号分割，最多支持128个热词，如：“腾讯云|10,语音识别|5,ASR|11”；
+   */
+  HotWordList?: string
+  /**
+   * vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。
+   */
+  VadLevel?: number
 }
 
 /**
@@ -1519,6 +1568,64 @@ export interface CreateScanUserResponse {
 }
 
 /**
+ * CreateAudioModerationSync返回参数结构体
+ */
+export interface CreateAudioModerationSyncResponse {
+  /**
+   * <p>返回传入的DataId</p>
+   */
+  DataId?: string
+  /**
+   * <p>审核返回的任务id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>文件名</p>
+   */
+  FileName?: string
+  /**
+   * <p>1：语音。 2：图片。</p><p>枚举值：</p><ul><li>1： 语音</li><li>2： 图片</li></ul>
+   */
+  MediaType?: number
+  /**
+   * <p>0：建议通过。 1 ：建议人工重新内容识别。 2：建议屏蔽。</p><p>枚举值：</p><ul><li>0： 建议通过</li><li>1： 建议人工重新内容识别</li><li>2： 建议屏蔽</li></ul>
+   */
+  Suggest?: number
+  /**
+   * <p>置信度分数，取值范围：0（置信度最低）-100（置信度最高 ），越高代表越有可能属于当前返回的标签。 实例值：100</p>
+   */
+  Rate?: number
+  /**
+   * <p>Normal：正常文本  Ad:广告 Porn：色情 Abuse：谩骂 Illegal: 违禁 Polity: 涉政 Terror: 暴恐 Sexy: 性感 Moan: 呻吟/娇喘 QRCode: 二维码 Custom: 自定义</p>
+   */
+  Label?: string
+  /**
+   * <p>子标签</p>
+   */
+  SubLabel?: string
+  /**
+   * <p>音频链接地址</p>
+   */
+  Audio?: string
+  /**
+   * <p>审核识别音频文本</p>
+   */
+  AudioText?: string
+  /**
+   * <p>审核明细</p>
+   */
+  CheckDetail?: Array<ModerationCheckDetail>
+  /**
+   * <p>音频时长，单位 ms</p>
+   */
+  Duration?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 断句配置
  */
 export interface TurnDetection {
@@ -1546,6 +1653,60 @@ high 将尽快对音频进行分块。
 }
 
 /**
+ * 内容理解结果明细
+ */
+export interface ModerationCheckDetail {
+  /**
+   * <p>该字段在内容理解回调事件中可直接忽略，仅在第三方审核时存在，检出违规的模型场景，枚举值：Ad/Porn/Abuse/Illegal/Polity/Terror/Sexy/Moan/Custom</p>
+   */
+  Scene?: string
+  /**
+   * <p>Normal：正常文本  Ad:广告 Porn：色情 Abuse：谩骂 Illegal: 违禁 Polity: 涉政 Terror: 暴恐 Sexy: 性感 Moan: 呻吟/娇喘 QRCode: 二维码 Custom: 自定义</p>
+   */
+  Label?: string
+  /**
+   * <p>二级标签</p>
+   */
+  SubLabel?: string
+  /**
+   * <p>处理建议</p>
+   */
+  Suggest?: number
+  /**
+   * <p>自定义词库名</p>
+   */
+  LibName?: string
+  /**
+   * <p>命中的关键词</p>
+   */
+  Keywords?: Array<string>
+  /**
+   * <p>中文二级标签。</p>
+   */
+  Desc?: string
+  /**
+   * <p>置信度分值</p>
+   */
+  Score?: number
+  /**
+   * <p>违规严重程度: 0-不区分 1-轻度 2-严重</p>
+   */
+  Severity?: number
+  /**
+   * <p>违规严重程度描述 仅名单内sdkappid返回 负面表达,正面或中性表达,语义模糊</p>
+   */
+  SeverityDesc?: string
+  /**
+   * <p>音频切片位置信息</p>
+   */
+  AudioSegments?: AudioSegments
+  /**
+   * <p>图片命中坐标信息。</p>
+   */
+  ImageLocation?: ImageLocation
+}
+
+/**
  * 声纹配置参数
  */
 export interface VoicePrint {
@@ -1567,6 +1728,40 @@ export interface DeleteVoicePrintResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateAudioModerationSync请求参数结构体
+ */
+export interface CreateAudioModerationSyncRequest {
+  /**
+   * <p>sdkappid app账号</p>
+   */
+  Sdkappid: number
+  /**
+   * <p>BizType为策略的具体的编号, GME业务 2_2_3_sdkappid</p>
+   */
+  BizType?: string
+  /**
+   * <p>数据标识，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符</p>
+   */
+  DataId?: string
+  /**
+   * <p>音频格式，当FileUrl为空时，必填。音频文件资源格式，当前支持格式：wav、mp3、m4a，请按照实际文件格式填入。 示例值：mp3</p>
+   */
+  FileFormat?: string
+  /**
+   * <p>文件名称，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符 示例值：file_name</p>
+   */
+  FileName?: string
+  /**
+   * <p>数据Base64编码，短音频同步接口仅传入可音频内容； 支持范围：文件大小不能超过5M，时长不可超过60s； 支持格式：wav (PCM编码)、mp3、m4a (采样率：16kHz~48kHz，位深：16bit 小端，声道数：单声道/双声道，建议格式：16kHz/16bit/单声道)。 示例值：1</p>
+   */
+  FileContent?: string
+  /**
+   * <p>音频资源访问链接，与FileContent参数必须二选一输入； 支持范围及格式：同FileContent；</p>
+   */
+  FileUrl?: string
 }
 
 /**
@@ -1896,6 +2091,20 @@ export interface CreateAppRequest {
 }
 
 /**
+ * 音频片段时间信息
+ */
+export interface AudioSegments {
+  /**
+   * <p>该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。 示例值：0</p>
+   */
+  StartTime?: number
+  /**
+   * <p>该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。 示例值：15</p>
+   */
+  FinishTime?: number
+}
+
+/**
  * ControlAIConversation请求参数结构体
  */
 export interface ControlAIConversationRequest {
@@ -2086,6 +2295,20 @@ export interface DeleteRoomMemberRequest {
 }
 
 /**
+ * 图片违规位置坐标
+ */
+export interface ImageLocation {
+  /**
+   * <p>该参数用于返回检测框左上角位置的横坐标（x）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。 示例值：51</p>
+   */
+  X?: number
+  /**
+   * <p>该参数用于返回检测框左上角位置的纵坐标（y）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。 示例值：448</p>
+   */
+  Y?: number
+}
+
+/**
  * CreateCustomization请求参数结构体
  */
 export interface CreateCustomizationRequest {
@@ -2146,77 +2369,28 @@ export interface InvokeLLM {
 }
 
 /**
- * 语音转文字参数
+ * CreateScanUser请求参数结构体
  */
-export interface STTConfig {
+export interface CreateScanUserRequest {
   /**
-   * 
-语音转文字支持识别的语言，默认是"zh" 中文
-
-可通过购买「AI智能识别时长包」解锁或领取包月套餐体验版解锁不同语言. 
-
-语音转文本不同套餐版本支持的语言如下：
-
-**基础版**：
-- "zh": 中文（简体）
-- "zh-TW": 中文（繁体）
-- "en": 英语
-
-**标准版：**
-- "8k_zh_large": 普方大模型引擎. 当前模型同时支持中文等语言的识别，模型参数量极大，语言模型性能增强，针对电话音频中各类场景、各类中文方言的识别准确率极大提升.
-- "16k_zh_large": 普方英大模型引擎. 当前模型同时支持中文、英文、多种中文方言等语言的识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.
-- "16k_multi_lang": 多语种大模型引擎. 当前模型同时支持英语、日语、韩语、阿拉伯语、菲律宾语、法语、印地语、印尼语、马来语、葡萄牙语、西班牙语、泰语、土耳其语、越南语、德语的识别，可实现15个语种的自动识别(句子/段落级别).
-- "16k_zh_en": 中英大模型引擎. 当前模型同时支持中文、英语识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.
-
-**高级版：**
-- "zh-dialect": 中国方言
-- "zh-yue": 中国粤语
-- "vi": 越南语
-- "ja": 日语
-- "ko": 韩语
-- "id": 印度尼西亚语
-- "th": 泰语
-- "pt": 葡萄牙语
-- "tr": 土耳其语
-- "ar": 阿拉伯语
-- "es": 西班牙语
-- "hi": 印地语
-- "fr": 法语
-- "ms": 马来语
-- "fil": 菲律宾语
-- "de": 德语
-- "it": 意大利语
-- "ru": 俄语
-- "sv": 瑞典语
-- "da": 丹麦语
-- "no": 挪威语
-
-**注意：**
-如果缺少满足您需求的语言，请联系我们技术人员。
+   * 应用ID，登录控制台 - 服务管理创建应用得到的AppID
    */
-  Language?: string
+  BizId: number
   /**
-   * **发起模糊识别为高级版能力,默认按照高级版收费,仅支持填写基础版和高级版语言.**
-注意：不支持填写"zh-dialect"
+   * 需要新增送检的用户号。示例：1234
+(若UserId不填，则UserIdString必填；两者选其一；两者都填以UserIdString为准)
    */
-  AlternativeLanguage?: Array<string>
+  UserId?: number
   /**
-   * 自定义参数，联系后台使用
-
+   * 需要新增送检的用户号，长度不超过1024字符。示例："1234"(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
    */
-  CustomParam?: string
+  UserIdString?: string
   /**
-   * 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。
+   * 当前用户送检过期时间，单位：秒。
+若参数不为0，则在过期时间之后，用户不会被送检。
+若参数为0，则送检配置不会自动失效。 
    */
-  VadSilenceTime?: number
-  /**
-   * 热词表：该参数用于提升识别准确率。 单个热词限制："热词|权重"，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如：“腾讯云|5” 或 “ASR|11”； 热词表限制：多个热词用英文逗号分割，最多支持128个热词，如：“腾讯云|10,语音识别|5,ASR|11”；
-   */
-  HotWordList?: string
-  /**
-   * vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。
-   */
-  VadLevel?: number
+  ExpirationTime?: number
 }
 
 /**

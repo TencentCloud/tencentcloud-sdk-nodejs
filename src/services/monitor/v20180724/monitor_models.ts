@@ -12823,50 +12823,54 @@ export interface CreateConditionsTemplateRequest {
  */
 export interface PrometheusAlertGroupSet {
   /**
-   * 告警分组ID，满足正则表达式`alert-[a-z0-9]{8}`
+   * <p>告警分组ID，满足正则表达式<code>alert-[a-z0-9]{8}</code></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
-   * 告警分组名称
+   * <p>告警分组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
-   * 腾讯云可观测平台告警模板ID ，返回告警模板转换后的notice ID。
+   * <p>腾讯云可观测平台告警模板ID ，返回告警模板转换后的notice ID。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AMPReceivers?: Array<string>
   /**
-   * 自定义告警模板
+   * <p>自定义告警模板</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomReceiver?: PrometheusAlertCustomReceiver
   /**
-   * 告警通知间隔
+   * <p>告警通知间隔</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RepeatInterval?: string
   /**
-   * 若告警分组通过模板创建，则返回模板ID
+   * <p>若告警分组通过模板创建，则返回模板ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateId?: string
   /**
-   * 分组内告警规则详情
+   * <p>分组内告警规则详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Rules?: Array<PrometheusAlertGroupRuleSet>
   /**
-   * 分组创建时间
+   * <p>分组创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt?: string
   /**
-   * 分组更新时间
+   * <p>分组更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt?: string
+  /**
+   * <p>最后修改人子账号uin</p>
+   */
+  LastModifySubAccountUin?: string
 }
 
 /**

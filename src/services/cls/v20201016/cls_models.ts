@@ -20,95 +20,102 @@
  */
 export interface AlarmInfo {
   /**
-   * 告警策略名称。
+   * <p>告警策略名称。</p>
    */
   Name?: string
   /**
-   * 监控对象列表。
+   * <p>监控对象列表。</p>
    */
   AlarmTargets?: Array<AlarmTargetInfo>
   /**
-   * 监控任务运行时间点。
+   * <p>监控任务运行时间点。</p>
    */
   MonitorTime?: MonitorTime
   /**
-   * 是否触发告警的单触发条件。与MultiConditions参数互斥。
+   * <p>是否触发告警的单触发条件。与MultiConditions参数互斥。</p>
    */
   Condition?: string
   /**
-   * 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。
+   * <p>持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。</p>
    */
   TriggerCount?: number
   /**
-   * 告警重复的周期。单位是min。取值范围是0~1440。
+   * <p>告警重复的周期。单位是min。取值范围是0~1440。</p>
    */
   AlarmPeriod?: number
   /**
-   * 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥
+   * <p>关联的告警通知渠道组列表。-通过<a href="https://cloud.tencent.com/document/product/614/56462">获取通知渠道组列表</a>获取关联的告警通知渠道组列表，和MonitorNotice互斥</p>
    */
   AlarmNoticeIds?: Array<string>
   /**
-   * 开启状态。
+   * <p>开启状态。</p>
    */
   Status?: boolean
   /**
-   * 告警策略ID。
+   * <p>告警策略ID。</p>
    */
   AlarmId?: string
   /**
-   * 创建时间。格式： YYYY-MM-DD HH:MM:SS
+   * <p>创建时间。格式： YYYY-MM-DD HH:MM:SS</p>
    */
   CreateTime?: string
   /**
-   * 最近更新时间。格式： YYYY-MM-DD HH:MM:SS
+   * <p>最近更新时间。格式： YYYY-MM-DD HH:MM:SS</p>
    */
   UpdateTime?: string
   /**
-   * 自定义通知模板
+   * <p>自定义通知模板</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageTemplate?: string
   /**
-   * 自定义回调模板
+   * <p>自定义回调模板</p>
    */
   CallBack?: CallBackInfo
   /**
-   * 多维分析设置
+   * <p>多维分析设置</p>
    */
   Analysis?: Array<AnalysisDimensional>
   /**
-   * 分组触发状态。true：开启，false：关闭（默认）
+   * <p>分组触发状态。true：开启，false：关闭（默认）</p>
    */
   GroupTriggerStatus?: boolean
   /**
-   * 分组触发条件。
+   * <p>分组触发条件。</p>
    */
   GroupTriggerCondition?: Array<string>
   /**
-   * 告警策略绑定的标签信息。
+   * <p>告警策略绑定的标签信息。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 监控对象类型。0:执行语句共用监控对象;1:每个执行语句单独选择监控对象。
+   * <p>监控对象类型。0:执行语句共用监控对象;1:每个执行语句单独选择监控对象。</p>
    */
   MonitorObjectType?: number
   /**
-   * 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)。
+   * <p>告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)。</p>
    */
   AlarmLevel?: number
   /**
-   * 告警附加分类字段。
+   * <p>告警附加分类字段。</p>
    */
   Classifications?: Array<AlarmClassification>
   /**
-   * 多触发条件。与
-Condition互斥。
+   * <p>多触发条件。与<br>Condition互斥。</p>
    */
   MultiConditions?: Array<MultiCondition>
   /**
-   * 腾讯云可观测平台通知渠道相关信息，和AlarmNoticeIds互斥
+   * <p>腾讯云可观测平台通知渠道相关信息，和AlarmNoticeIds互斥</p>
    */
   MonitorNotice?: MonitorNotice
+  /**
+   * <p>AI分析内容</p>
+   */
+  AIAnalysis?: AIAnalysis
+  /**
+   * <p>最后修改人的uin信息</p>
+   */
+  SubUin?: number
 }
 
 /**
@@ -231,6 +238,30 @@ export interface CreateRebuildIndexTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI 分析的数据范围配置，如CLS日志主题配置。Key如果设置为TopicId，Value是对应日志主题topic_id，Key如果设置为Region，Value是地域的英文名，在https://cloud.tencent.com/document/product/614/18940查询。
+ */
+export interface AIAnalysisDataScopeEntry {
+  /**
+   * <p>值类型</p><p>枚举值：</p><ul><li>TopicId： 日志主题ID</li><li>Region： 地域</li></ul>
+   */
+  Key?: string
+  /**
+   * <p>Key如果设置为TopicId，Value是对应日志主题topic_id 在https://cloud.tencent.com/document/product/614/56454 查询，Key如果设置为Region，Value是地域的英文名，在https://cloud.tencent.com/document/product/614/18940查询。</p>
+   */
+  Value?: string
+}
+
+/**
+ * DeleteCLSDeliverTask请求参数结构体
+ */
+export interface DeleteCLSDeliverTaskRequest {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId: string
 }
 
 /**
@@ -984,6 +1015,25 @@ export interface ScheduledSqlTaskInfo {
    * <p>调度周期时间单位</p><p>取值范围：[1, 2]</p><p>默认值：1</p><p>默认值1（分钟），其他值2（秒）</p>
    */
   ProcessPeriodUnit?: number
+}
+
+/**
+ * DescribeCosRecharges请求参数结构体
+ */
+export interface DescribeCosRechargesRequest {
+  /**
+   * 日志主题Id。
+-  通过[获取日志主题列表](https://cloud.tencent.com/document/api/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
+   */
+  Status?: number
+  /**
+   * 是否启用:   0： 未启用  ， 1：启用
+   */
+  Enable?: number
 }
 
 /**
@@ -2174,6 +2224,16 @@ export interface DescribeResourceGraphEntitiesRequest {
 }
 
 /**
+ * DeleteCLSDeliverTask返回参数结构体
+ */
+export interface DeleteCLSDeliverTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterMetricConfigs请求参数结构体
  */
 export interface DescribeClusterMetricConfigsRequest {
@@ -2198,38 +2258,19 @@ export interface DescribeClusterMetricConfigsRequest {
 }
 
 /**
- * DescribeConfigs请求参数结构体
+ * DescribeCLSDeliverTasks请求参数结构体
  */
-export interface DescribeConfigsRequest {
+export interface DescribeCLSDeliverTasksRequest {
   /**
-   * configName
-- 按照【采集配置名称】进行模糊匹配过滤。
-- 类型：String
-- 必选：否
-- 示例：test-config
-
-configId
-- 按照【采集配置ID】进行过滤。
-- 类型：String
-- 必选：否
-- 示例：3581a3be-aa41-423b-995a-54ec84da6264
-
-topicId
-- 按照【日志主题】进行过滤。
-- 类型：String
-- 必选：否
-- 示例：3b83f9d6-3a4d-47f9-9b7f-285c868b2f9a
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
+   * <ul><li>taskId 按照【任务id】进行过滤。 类型：String 必选：否  </li><li>taskName 按照【任务名称】进行过滤。 类型：String 必选：否  </li><li>sourceLogsetId 按照【源日志集】进行过滤。 类型：String 必选：否  </li><li>targetLogsetId 按照【目标日志集】进行过滤。 类型：String 必选：否<br>每次请求的Filters的上限为10，Filter.Values的上限为10。</li></ul>
    */
   Filters?: Array<Filter>
   /**
-   * 分页的偏移量，默认值为0
+   * <p>分页的偏移量，默认值为0。</p>
    */
   Offset?: number
   /**
-   * 分页单页的限制数目，默认值为20，最大值100
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
    */
   Limit?: number
 }
@@ -2441,6 +2482,24 @@ export interface DescribeKafkaRechargesRequest {
    * 状态。1: 运行中，2: 暂停，3：错误
    */
   Status?: number
+}
+
+/**
+ * DescribeCLSDeliverTasks返回参数结构体
+ */
+export interface DescribeCLSDeliverTasksResponse {
+  /**
+   * <p>投递任务信息列表</p>
+   */
+  Infos?: Array<CLSDeliverTaskInfo>
+  /**
+   * <p>符合条件的任务总数。</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5967,6 +6026,24 @@ export interface ConsoleAccount {
 }
 
 /**
+ * 数据湖计算服务（Data Lake Compute，简称DLC）数据表配置信息
+ */
+export interface DlcTableInfo {
+  /**
+   * 数据目录
+   */
+  DataDirectory: string
+  /**
+   * 数据库
+   */
+  DatabaseName: string
+  /**
+   * 数据表
+   */
+  TableName: string
+}
+
+/**
  * CreateWebCallback返回参数结构体
  */
 export interface CreateWebCallbackResponse {
@@ -6322,6 +6399,36 @@ export interface DescribeClusterBaseMetricConfigsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 目标主题配置
+ */
+export interface TargetTopicConfig {
+  /**
+   * <p>目标账号类型。</p><p>枚举值：</p><ul><li>1： 当前主账号</li><li>2： 其他主账号</li></ul>
+   */
+  AccountType: number
+  /**
+   * <p>目标地域</p><p>参数格式：ap-guangzhou</p>
+   */
+  Region: string
+  /**
+   * <p>目标日志集id</p>
+   */
+  LogsetId: string
+  /**
+   * <p>目标日志主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>角色ARN</p><p>AccountType=2时必填</p>
+   */
+  RoleArn?: string
+  /**
+   * <p>外部ID</p><p>AccountType=2时必填</p>
+   */
+  ExternalId?: string
 }
 
 /**
@@ -6981,6 +7088,24 @@ export interface CreateDataTransformResponse {
 }
 
 /**
+ * 源日志主题配置
+ */
+export interface SourceTopicConfig {
+  /**
+   * <p>日志主题筛选方式。</p><p>枚举值：</p><ul><li>1： 静态选择</li></ul>
+   */
+  TopicFilterType: number
+  /**
+   * <p>源日志集id</p>
+   */
+  LogsetId: string
+  /**
+   * <p>源日志主题列表</p><p>TopicFilterType=1时必填</p>
+   */
+  Topics?: Array<SourceTopicInfo>
+}
+
+/**
  * DescribeKafkaConsumerTopics请求参数结构体
  */
 export type DescribeKafkaConsumerTopicsRequest = null
@@ -7517,6 +7642,64 @@ export interface DeleteAlarmRequest {
 }
 
 /**
+ * 跨账号投递任务信息
+ */
+export interface CLSDeliverTaskInfo {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务名称</p>
+   */
+  TaskName?: string
+  /**
+   * <p>主账号id</p>
+   */
+  Uin?: number
+  /**
+   * <p>源主题信息</p>
+   */
+  SourceTopicConfig?: SourceTopicConfig
+  /**
+   * <p>目标主题信息</p>
+   */
+  TargetTopicConfig?: TargetTopicConfig
+  /**
+   * <p>投递规则</p>
+   */
+  DeliverRule?: DeliverRule
+  /**
+   * <p>合规承诺</p>
+   */
+  Compliance?: number
+  /**
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>0： 运行中</li><li>1： 已暂停</li><li>2： 已完成</li><li>3： 异常</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>状态 </p><p>枚举值：</p><ul><li>0： 运行</li><li>1： 暂停</li></ul>
+   */
+  Enable?: number
+  /**
+   * <p>任务进度百分比</p>
+   */
+  Progress?: number
+  /**
+   * <p>是否开启投递服务日志。</p><p>枚举值：</p><ul><li>1： 关闭</li><li>2： 开启</li></ul>
+   */
+  HasServicesLog?: number
+  /**
+   * <p>创建时间。</p><p>单位：秒级时间戳</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p><p>单位：秒级时间戳</p>
+   */
+  UpdateTime?: number
+}
+
+/**
  * DescribeLogContext返回参数结构体
  */
 export interface DescribeLogContextResponse {
@@ -7639,6 +7822,20 @@ export interface CreateCosRechargeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI 分析的数据范围。DataScopeType值是CLSLogTopic。DataScopeEntry是数组结构，TopicId类型和Region类型是必填。实例： [{"Key":"TopicId",Value:"work-topic"},{"Key":"Region",Value:"ap-guangzhou"}]
+ */
+export interface AIAnalysisDataScope {
+  /**
+   * <p>告警AI诊断时查询的数据范围（查询哪些日志主题）</p>
+   */
+  DataScopeEntry?: Array<AIAnalysisDataScopeEntry>
+  /**
+   * <p>告警AI诊断的数据范围类型</p><p>枚举值：</p><ul><li>CLSLogTopic： 日志主题</li></ul><p>默认值：CLSLogTopic</p>
+   */
+  DataScopeType?: string
 }
 
 /**
@@ -10140,6 +10337,16 @@ export interface LogItem {
 }
 
 /**
+ * 投递规则
+ */
+export interface DeliverRule {
+  /**
+   * <p>数据投递范围。</p><p>枚举值：</p><ul><li>1： 历史+新增数据</li><li>2： 自定义时间范围</li><li>3： 仅新增</li></ul><p>本次仅支持3新增数据。后续支持： 2自定义时间范围和1历史+新增数据</p>
+   */
+  DataScope: number
+}
+
+/**
  * DescribeConfigMachineGroups请求参数结构体
  */
 export interface DescribeConfigMachineGroupsRequest {
@@ -10714,6 +10921,16 @@ export interface DescribeLogsetsResponse {
    * 日志集列表
    */
   Logsets?: Array<LogsetInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCLSDeliverTask返回参数结构体
+ */
+export interface ModifyCLSDeliverTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11789,6 +12006,36 @@ export interface ModifyKafkaConsumerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCLSDeliverTask请求参数结构体
+ */
+export interface CreateCLSDeliverTaskRequest {
+  /**
+   * <p>任务名称</p><p>参数格式：<code>^[a-zA-Z0-9_-]{1,64}$</code></p>
+   */
+  TaskName: string
+  /**
+   * <p>源主题信息</p>
+   */
+  SourceTopicConfig: SourceTopicConfig
+  /**
+   * <p>目标主题信息</p>
+   */
+  TargetTopicConfig: TargetTopicConfig
+  /**
+   * <p>投递规则</p>
+   */
+  DeliverRule: DeliverRule
+  /**
+   * <p>合规承诺。</p><p>枚举值：</p><ul><li>1： 同意数据跨域传输条款</li></ul>
+   */
+  Compliance: number
+  /**
+   * <p>是否开启投递服务日志。</p><p>枚举值：</p><ul><li>1： 关闭</li><li>2： 开启</li></ul><p>默认值：2</p>
+   */
+  HasServicesLog?: number
 }
 
 /**
@@ -13837,22 +14084,25 @@ export interface HostMetricItem {
 }
 
 /**
- * DescribeCosRecharges请求参数结构体
+ * 开启告警AI诊断。UserPrompt是给AI诊断告警时使用的提示词，比如请详细分析根因。AnalysisDataScope示例：{"DataScopeType":"CLSLogTopic","DataScopeEntry":[{"Key":"TopicId",Value:"work-topic"},{"Key":"Region",Value:"ap-guangzhou"}]}
  */
-export interface DescribeCosRechargesRequest {
+export interface AIAnalysis {
   /**
-   * 日志主题Id。
--  通过[获取日志主题列表](https://cloud.tencent.com/document/api/614/56454)获取日志主题Id。
+   * <p>是否开启告警AI诊断</p><p>默认值：false</p>
    */
-  TopicId: string
+  Enable: boolean
   /**
-   * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
+   * <p>是否显示诊断过程</p><p>默认值：false</p>
    */
-  Status?: number
+  HideProcess?: boolean
   /**
-   * 是否启用:   0： 未启用  ， 1：启用
+   * <p>AI诊断告警时给AI的提示词</p><p>参数格式：请详细诊断根因</p>
    */
-  Enable?: number
+  UserPrompt?: string
+  /**
+   * <p>AI 分析的数据范围</p>
+   */
+  AnalysisDataScope?: Array<AIAnalysisDataScope>
 }
 
 /**
@@ -14616,6 +14866,16 @@ export interface CloseKafkaConsumerRequest {
 }
 
 /**
+ * 源日志主题信息
+ */
+export interface SourceTopicInfo {
+  /**
+   * <p>日志主题id</p>
+   */
+  TopicId: string
+}
+
+/**
  * ModifyAlarmShield请求参数结构体
  */
 export interface ModifyAlarmShieldRequest {
@@ -14680,21 +14940,17 @@ export interface DeleteConfigExtraRequest {
 }
 
 /**
- * 数据湖计算服务（Data Lake Compute，简称DLC）数据表配置信息
+ * CreateCLSDeliverTask返回参数结构体
  */
-export interface DlcTableInfo {
+export interface CreateCLSDeliverTaskResponse {
   /**
-   * 数据目录
+   * <p>任务id</p>
    */
-  DataDirectory: string
+  TaskId?: string
   /**
-   * 数据库
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DatabaseName: string
-  /**
-   * 数据表
-   */
-  TableName: string
+  RequestId?: string
 }
 
 /**
@@ -15461,6 +15717,43 @@ export interface ModifyDataTransformResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeConfigs请求参数结构体
+ */
+export interface DescribeConfigsRequest {
+  /**
+   * configName
+- 按照【采集配置名称】进行模糊匹配过滤。
+- 类型：String
+- 必选：否
+- 示例：test-config
+
+configId
+- 按照【采集配置ID】进行过滤。
+- 类型：String
+- 必选：否
+- 示例：3581a3be-aa41-423b-995a-54ec84da6264
+
+topicId
+- 按照【日志主题】进行过滤。
+- 类型：String
+- 必选：否
+- 示例：3b83f9d6-3a4d-47f9-9b7f-285c868b2f9a
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页的偏移量，默认值为0
+   */
+  Offset?: number
+  /**
+   * 分页单页的限制数目，默认值为20，最大值100
+   */
+  Limit?: number
 }
 
 /**
@@ -16770,6 +17063,40 @@ export interface HostFileInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomLabels?: Array<string>
+}
+
+/**
+ * ModifyCLSDeliverTask请求参数结构体
+ */
+export interface ModifyCLSDeliverTaskRequest {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId: string
+  /**
+   * <p>任务名称</p><p>参数格式：<code>^[a-zA-Z0-9_-]{1,64}$</code></p>
+   */
+  TaskName?: string
+  /**
+   * <p>源主题信息</p>
+   */
+  SourceTopicConfig?: SourceTopicConfig
+  /**
+   * <p>目标主题信息</p>
+   */
+  TargetTopicConfig?: TargetTopicConfig
+  /**
+   * <p>投递规则</p>
+   */
+  DeliverRule?: DeliverRule
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>0： 运行</li><li>1： 暂停</li></ul>
+   */
+  Enable?: number
+  /**
+   * <p>是否开启投递服务日志。</p><p>枚举值：</p><ul><li>1： 关闭</li><li>2： 开启</li></ul>
+   */
+  HasServicesLog?: number
 }
 
 /**

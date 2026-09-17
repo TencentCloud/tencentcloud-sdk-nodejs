@@ -128,6 +128,16 @@ it("gme.v20180711.UpdateScanRooms", async function () {
     }
 })
 
+it("gme.v20180711.CreateAudioModerationSync", async function () {
+    try {
+       const data = await client.CreateAudioModerationSync({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.StartAIConversation", async function () {
     try {
        const data = await client.StartAIConversation({})

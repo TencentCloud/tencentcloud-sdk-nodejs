@@ -105,6 +105,7 @@ import {
   DescribeDomainCountInfoResponse,
   ModifyHostModeRequest,
   ModifyAntiInfoLeakRuleStatusRequest,
+  CreateDealsRequest,
   DescribeCiphersDetailResponse,
   DescribeCustomRuleListRequest,
   DeleteIpAccessControlV2Response,
@@ -240,7 +241,7 @@ import {
   CreateHostRequest,
   ModifyInstanceAttackLogPostRequest,
   GetInstanceQpsLimitResponse,
-  CreateDealsRequest,
+  CreateAndUpdateBatchCCRuleRequest,
   DescribeApiSecSensitiveRuleListRequest,
   ModifyCustomWhiteRuleResponse,
   SearchItem,
@@ -414,6 +415,7 @@ import {
   ModifyBatchCustomRuleRequest,
   DescribeApiAggregateTopNRequest,
   GetOrganizationRoleRequest,
+  CreateAndUpdateBatchCCRuleResponse,
   DescribeTopicsRequest,
   BatchCustomRuleListData,
   FreshAntiFakeUrlRequest,
@@ -722,6 +724,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePeakPointsResponse) => void
   ): Promise<DescribePeakPointsResponse> {
     return this.request("DescribePeakPoints", req, cb)
+  }
+
+  /**
+   * 批量cc规则配置接口
+   */
+  async CreateAndUpdateBatchCCRule(
+    req: CreateAndUpdateBatchCCRuleRequest,
+    cb?: (error: string, rep: CreateAndUpdateBatchCCRuleResponse) => void
+  ): Promise<CreateAndUpdateBatchCCRuleResponse> {
+    return this.request("CreateAndUpdateBatchCCRule", req, cb)
   }
 
   /**

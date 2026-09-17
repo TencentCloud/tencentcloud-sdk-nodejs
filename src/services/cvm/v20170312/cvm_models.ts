@@ -3748,6 +3748,10 @@ export interface Instance {
    */
   DisableApiTermination?: boolean
   /**
+   * <p>实例主机名。</p>
+   */
+  HostName?: string
+  /**
    * <p>默认登录用户。</p>
    */
   DefaultLoginUser?: string

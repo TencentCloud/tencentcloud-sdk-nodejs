@@ -1511,23 +1511,27 @@ export interface SessionItem {
 }
 
 /**
- * 统计分析维度下的统计数据详情
+ * 统计分析维度下的统计数据详情。
  */
 export interface StatisticDataInfo {
   /**
    * 统计维度的值。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 平均时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeAvg?: number
   /**
    * 总时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeSum?: number
   /**
    * 数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
 }

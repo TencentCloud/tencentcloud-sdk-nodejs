@@ -2718,7 +2718,7 @@ export interface AudioFormat {
    */
   Format?: string
   /**
-   * <p>生成的音频采样率，默认24000<br>可选</p><ul><li>16000</li><li>24000</li></ul>
+   * <p>生成的音频采样率，默认24000<br>支持如下采样率</p><ul><li>8000</li><li>16000</li><li>24000</li></ul>
    */
   SampleRate?: number
   /**

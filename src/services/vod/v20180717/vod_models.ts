@@ -449,36 +449,36 @@ export interface CreateAigcVideoRedrawTaskResponse {
  */
 export interface DescribeRoundPlaysRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 过滤条件：轮播播单标识，数组长度限制：100。
+   * <p>过滤条件：轮播播单标识，数组长度限制：100。</p>
    */
   RoundPlayIds?: Array<string>
   /**
-   * 过滤条件，轮播播单状态，可选值： <li>Enabled：启动状态；</li> <li>Disabled：停止状态。</li>
+   * <p>过滤条件，轮播播单状态，可选值： <li>Enabled：启动状态；</li> <li>Disabled：停止状态。</li></p>
    */
   Status?: string
   /**
-   * 过滤条件：轮播播单创建时间。
+   * <p>过滤条件：轮播播单创建时间。</p>
    */
   CreateTime?: TimeRange
   /**
-   * 过滤条件：轮播播单更新时间。
+   * <p>过滤条件：轮播播单更新时间。</p>
    */
   UpdateTime?: TimeRange
   /**
-   * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
+   * <p>翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。</p>
    */
   ScrollToken?: string
   /**
-   * 分页偏移量，默认值：0。已经废弃，请根据 ScrollToken 参数进行分批次查询。
+   * <p>分页偏移量，默认值：0。已经废弃，请根据 ScrollToken 参数进行分批次查询。</p>
    * @deprecated
    */
   Offset?: number
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * <p>返回记录条数，默认值：10，最大值：100。</p>
    */
   Limit?: number
 }
@@ -1597,37 +1597,35 @@ export interface MPSEmbedSubtitleTemplate {
  */
 export interface CreateImageSpriteTask2017 {
   /**
-   * 截图雪碧图任务 ID。
+   * <p>截图雪碧图任务 ID。</p>
    */
   TaskId?: string
   /**
-   * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
+   * <p>错误码</p><li>0：成功；</li><li>其他值：失败。</li>
    */
   ErrCode?: number
   /**
-   * 错误信息。
+   * <p>错误信息。</p>
    */
   Message?: string
   /**
-   * 截取雪碧图文件 ID。
+   * <p>截取雪碧图文件 ID。</p>
    */
   FileId?: string
   /**
-   * 雪碧图规格，参见[雪碧图截图模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * <p>雪碧图规格，参见<a href="https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF">雪碧图截图模板</a>。</p>
    */
   Definition?: number
   /**
-   * 雪碧图小图总数量。
+   * <p>雪碧图小图总数量。</p>
    */
   TotalCount?: number
   /**
-   * 截取雪碧图输出的地址。
+   * <p>截取雪碧图输出的地址。</p>
    */
   ImageSpriteUrlSet?: Array<string>
   /**
-   * 雪碧图子图位置与时间关系 WebVtt 文件地址。
+   * <p>雪碧图子图位置与时间关系 WebVtt 文件地址。</p>
    */
   WebVttUrl?: string
 }
@@ -1801,7 +1799,7 @@ export interface LLMComprehendSummary {
  */
 export interface DescribeDefaultDistributionConfigRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -1926,23 +1924,23 @@ export interface QualityEnhanceTask {
  */
 export interface AiSampleWord {
   /**
-   * 关键词。
+   * <p>关键词。</p>
    */
   Keyword?: string
   /**
-   * 关键词标签。
+   * <p>关键词标签。</p>
    */
   TagSet?: Array<string>
   /**
-   * 关键词应用场景。
+   * <p>关键词应用场景。</p>
    */
   UsageSet?: Array<string>
   /**
-   * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   CreateTime?: string
   /**
-   * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   UpdateTime?: string
 }
@@ -1952,36 +1950,36 @@ export interface AiSampleWord {
  */
 export interface OverrideTranscodeParameter {
   /**
-   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。
+   * <p>封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。</p>
    */
   Container?: string
   /**
-   * 是否去除视频数据，取值：
-<li>0：保留；<\li>
-<li>1：去除。<\li>
+   * <p>是否去除视频数据，取值：<br>&lt;li&gt;0：保留；&lt;\li&gt;<br>&lt;li&gt;1：去除。&lt;\li&gt;</p>
    */
   RemoveVideo?: number
   /**
-   * 是否去除音频数据，取值：
-<li>0：保留；<\li>
-<li>1：去除。<\li>
+   * <p>是否去除音频数据，取值：<br>&lt;li&gt;0：保留；&lt;\li&gt;<br>&lt;li&gt;1：去除。&lt;\li&gt;</p>
    */
   RemoveAudio?: number
   /**
-   * 视频流配置参数。
+   * <p>视频流配置参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoTemplate?: VideoTemplateInfoForUpdate
   /**
-   * 音频流配置参数。
+   * <p>音频流配置参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioTemplate?: AudioTemplateInfoForUpdate
   /**
-   * 极速高清转码配置参数。
+   * <p>极速高清转码配置参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TEHDConfig?: TEHDConfigForUpdate
+  /**
+   * <p>标准扩展字段，特殊用途使用。</p>
+   */
+  StdExtInfo?: string
 }
 
 /**
@@ -2185,32 +2183,23 @@ export interface SceneAigcVideoTaskInputFileInfo {
  */
 export interface FaceConfigureInfoForUpdate {
   /**
-   * 人脸识别任务开关，可选值：
-<li>ON：开启智能人脸识别任务；</li>
-<li>OFF：关闭智能人脸识别任务。</li>
+   * <p>人脸识别任务开关，可选值：</p><li>ON：开启智能人脸识别任务；</li><li>OFF：关闭智能人脸识别任务。</li>
    */
   Switch?: string
   /**
-   * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。取值范围：0-100。
+   * <p>人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。取值范围：0-100。</p>
    */
   Score?: number
   /**
-   * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainment：娱乐明星；</li>
-<li>sport：体育明星；</li>
-<li>politician：相关人物。</li>
+   * <p>默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：</p><li>entertainment：娱乐明星；</li><li>sport：体育明星；</li><li>politician：相关人物。</li>
    */
   DefaultLibraryLabelSet?: Array<string>
   /**
-   * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 100 个，每个标签长度最多 16 个字符。
+   * <p>用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。<br>标签个数最多 100 个，每个标签长度最多 16 个字符。</p>
    */
   UserDefineLibraryLabelSet?: Array<string>
   /**
-   * 人物库选择，可选值：
-<li>Default：使用默认人物库；</li>
-<li>UserDefine：使用用户自定义人物库。</li>
-<li>All：同时使用默认人物库和用户自定义人物库。</li>
+   * <p>人物库选择，可选值：</p><li>Default：使用默认人物库；</li><li>UserDefine：使用用户自定义人物库。</li><li>All：同时使用默认人物库和用户自定义人物库。</li>
    */
   FaceLibrary?: string
 }
@@ -2355,13 +2344,15 @@ export interface TaskSimpleInfo {
 <li>EditMedia：视频编辑任务；</li>
 <li>ReduceMediaBitrate：降码率任务；</li>
 <li>WechatDistribute：微信发布任务；</li>
-<li>ReviewAudioVideo：音视频审核任务。</li>
+<li>ReviewAudioVideo：音视频审核任务；</li>
+<li> MPSWorkflowTask：MPS 视频处理任务。</li>
 兼容 2017 版的任务类型：
 <li>Transcode：视频转码任务；</li>
 <li>SnapshotByTimeOffset：视频截图任务；</li>
 <li>Concat：视频拼接任务；</li>
 <li>Clip：视频剪辑任务；</li>
 <li>ImageSprites：截取雪碧图任务。</li>
+
    */
   TaskType?: string
   /**
@@ -2700,22 +2691,19 @@ export interface ResetProcedureTemplateRequest {
  */
 export interface ContentReviewOcrResult {
   /**
-   * Ocr 文字鉴别结果的评分，分值为0到100。
+   * <p>Ocr 文字鉴别结果的评分，分值为0到100。</p>
    */
   Confidence?: number
   /**
-   * Ocr 文字鉴别的结果建议，取值范围：
-<li>pass；</li>
-<li>review；</li>
-<li>block。</li>
+   * <p>Ocr 文字鉴别的结果建议，取值范围：</p><li>pass；</li><li>review；</li><li>block。</li>
    */
   Suggestion?: string
   /**
-   * Ocr 文字鉴别的嫌疑关键词列表。
+   * <p>Ocr 文字鉴别的嫌疑关键词列表。</p>
    */
   KeywordSet?: Array<string>
   /**
-   * Ocr 文字鉴别的嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+   * <p>Ocr 文字鉴别的嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。</p>
    */
   AreaCoordSet?: Array<number | bigint>
 }
@@ -3177,53 +3165,7 @@ export interface TextWatermarkTemplateInput {
  */
 export interface TransitionOpertion {
   /**
-   * 转场类型，取值有：
-<ul>
-<li>图像的转场操作，用于两个视频片段图像间的转场处理：
-<ul>
-<li>ImageFadeInFadeOut：图像淡入淡出。 </li>
-<li>BowTieHorizontal：水平蝴蝶结。 </li>
-<li>BowTieVertical：垂直蝴蝶结。 </li>
-<li>ButterflyWaveScrawler：晃动。 </li>
-<li>Cannabisleaf：枫叶。 </li>
-<li>Circle：弧形收放。 </li>
-<li>CircleCrop：圆环聚拢。 </li>
-<li>Circleopen：椭圆聚拢。 </li>
-<li>Crosswarp：横向翘曲。 </li>
-<li>Cube：立方体。 </li>
-<li>DoomScreenTransition：幕布。 </li>
-<li>Doorway：门廊。 </li>
-<li>Dreamy：波浪。 </li>
-<li>DreamyZoom：水平聚拢。 </li>
-<li>FilmBurn：火烧云。 </li>
-<li>GlitchMemories：抖动。 </li>
-<li>Heart：心形。 </li>
-<li>InvertedPageCurl：翻页。 </li>
-<li>Luma：腐蚀。 </li>
-<li>Mosaic：九宫格。 </li>
-<li>Pinwheel：风车。 </li>
-<li>PolarFunction：椭圆扩散。 </li>
-<li>PolkaDotsCurtain：弧形扩散。 </li>
-<li>Radial：雷达扫描 </li>
-<li>RotateScaleFade：上下收放。 </li>
-<li>Squeeze：上下聚拢。 </li>
-<li>Swap：放大切换。 </li>
-<li>Swirl：螺旋。 </li>
-<li>UndulatingBurnOutSwirl：水流蔓延。 </li>
-<li>Windowblinds：百叶窗。 </li>
-<li>WipeDown：向下收起。 </li>
-<li>WipeLeft：向左收起。 </li>
-<li>WipeRight：向右收起。 </li>
-<li>WipeUp：向上收起。 </li>
-<li>ZoomInCircles：水波纹。 </li>
-</ul>
-</li>
-<li>音频的转场操作，用于两个音频片段间的转场处理：
-<ul>
-<li>AudioFadeInFadeOut：声音淡入淡出。 </li>
-</ul>
-</li>
-</ul>
+   * <p>转场类型，取值有：</p><ul><li>图像的转场操作，用于两个视频片段图像间的转场处理：<ul><li>ImageFadeInFadeOut：图像淡入淡出。 </li><li>BowTieHorizontal：水平蝴蝶结。 </li><li>BowTieVertical：垂直蝴蝶结。 </li><li>ButterflyWaveScrawler：晃动。 </li><li>Cannabisleaf：枫叶。 </li><li>Circle：弧形收放。 </li><li>CircleCrop：圆环聚拢。 </li><li>Circleopen：椭圆聚拢。 </li><li>Crosswarp：横向翘曲。 </li><li>Cube：立方体。 </li><li>DoomScreenTransition：幕布。 </li><li>Doorway：门廊。 </li><li>Dreamy：波浪。 </li><li>DreamyZoom：水平聚拢。 </li><li>FilmBurn：火烧云。 </li><li>GlitchMemories：抖动。 </li><li>Heart：心形。 </li><li>InvertedPageCurl：翻页。 </li><li>Luma：腐蚀。 </li><li>Mosaic：九宫格。 </li><li>Pinwheel：风车。 </li><li>PolarFunction：椭圆扩散。 </li><li>PolkaDotsCurtain：弧形扩散。 </li><li>Radial：雷达扫描 </li><li>RotateScaleFade：上下收放。 </li><li>Squeeze：上下聚拢。 </li><li>Swap：放大切换。 </li><li>Swirl：螺旋。 </li><li>UndulatingBurnOutSwirl：水流蔓延。 </li><li>Windowblinds：百叶窗。 </li><li>WipeDown：向下收起。 </li><li>WipeLeft：向左收起。 </li><li>WipeRight：向右收起。 </li><li>WipeUp：向上收起。 </li><li>ZoomInCircles：水波纹。 </li></ul></li><li>音频的转场操作，用于两个音频片段间的转场处理：<ul><li>AudioFadeInFadeOut：声音淡入淡出。 </li></ul></li></ul>
    */
   Type: string
 }
@@ -3893,30 +3835,19 @@ export interface DescribeDailyMediaPlayStatRequest {
  */
 export interface TerrorismImgReviewTemplateInfoForUpdate {
   /**
-   * 画面鉴别涉及令人不安全的信息的任务开关，可选值：
-<li>ON：开启画面鉴别涉及令人不安全的信息的任务；</li>
-<li>OFF：关闭画面鉴别涉及令人不安全的信息的任务。</li>
+   * <p>画面鉴别涉及令人不安全的信息的任务开关，可选值：</p><li>ON：开启画面鉴别涉及令人不安全的信息的任务；</li><li>OFF：关闭画面鉴别涉及令人不安全的信息的任务。</li>
    */
   Switch?: string
   /**
-   * 画面鉴别涉及令人不安全的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
-<li>guns：武器枪支；</li>
-<li>crowd：人群聚集；</li>
-<li>bloody：血腥画面；</li>
-<li>police：警察部队；</li>
-<li>banners：暴恐旗帜；</li>
-<li>militant：武装分子；</li>
-<li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物；</li>
-<li>scenario：暴恐画面。</li>
+   * <p>画面鉴别涉及令人不安全的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：</p><li>guns：武器枪支；</li><li>crowd：人群聚集；</li><li>bloody：血腥画面；</li><li>police：警察部队；</li><li>banners：暴恐旗帜；</li><li>militant：武装分子；</li><li>explosion：爆炸火灾；</li><li>terrorists：暴恐人物；</li><li>scenario：暴恐画面。</li>
    */
   LabelSet?: Array<string>
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * <p>判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。</p>
    */
   BlockConfidence?: number
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   * <p>判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。</p>
    */
   ReviewConfidence?: number
 }
@@ -4237,21 +4168,19 @@ export interface TextWatermarkTemplateInputForUpdate {
  */
 export interface SetVodDomainCertificateRequest {
   /**
-   * 域名。
+   * <p>域名。</p>
    */
   Domain: string
   /**
-   * 本次接口调用的操作类型，可选值：
-<li>Set：设置域名的 HTTPS 所需证书；</li>
-<li>Clear: 清空域名 HTTPS 配置，清空后该域名无法支持 HTTPS 访问。</li>
+   * <p>本次接口调用的操作类型，可选值：</p><li>Set：设置域名的 HTTPS 所需证书；</li><li>Clear: 清空域名 HTTPS 配置，清空后该域名无法支持 HTTPS 访问。</li>
    */
   Operation: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * [腾讯云SSL](/document/product/400/7572) 上传的证书 ID。清空域名 HTTPS 配置时无需填写该字段。
+   * <p><a href="/document/product/400/7572">腾讯云SSL</a> 上传的证书 ID。清空域名 HTTPS 配置时无需填写该字段。</p>
    */
   CertID?: string
 }
@@ -4381,13 +4310,73 @@ export interface SceneAigcImageTaskOutputFileInfo {
 }
 
 /**
- * ModifyMediaStorageClass返回参数结构体
+ * CreateAigcHunyuan3DTask请求参数结构体
  */
-export interface ModifyMediaStorageClassResponse {
+export interface CreateAigcHunyuan3DTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
-  RequestId?: string
+  SubAppId?: number
+  /**
+   * <p>生成 3D 模型的参考图片信息。</p><p>入参限制：数组长度最大为1。</p><p>ImageInfos、MultiViewImageInfos、Prompt 三个入参各自互斥，有且只能填写一个。</p>
+   */
+  ImageInfos?: Array<AigcHunyuan3DReferenceImageInfo>
+  /**
+   * <p>用于生成 3D 模型的多视角图片信息。</p><p>入参限制：数组长度必须在2-8之间，且必须包含 front 视角。</p><p>ImageInfos、MultiViewImageInfos、Prompt 三个入参各自互斥，有且只能填写一个。</p>
+   */
+  MultiViewImageInfos?: Array<AigcHunyuan3DMultiViewImageInfo>
+  /**
+   * <p>生成 3D 模型的提示词。</p><p>入参限制：最长 1024 个 utf-8 字符。</p><p>ImageInfos、MultiViewImageInfos、Prompt 三个入参各自互斥，有且只能填写一个。</p>
+   */
+  Prompt?: string
+  /**
+   * <p>生成类型。</p><p>枚举值：</p><ul><li>Normal： 生成完整 3D 资产（几何 + 纹理）；</li><li>Geometry： 只生成几何体（无纹理，输出速度更快）；</li><li>Texture： 只生成纹理（需要填写 MeshInfos）</li></ul><p>默认值：Normal</p>
+   */
+  GenerateType?: string
+  /**
+   * <p>用于生成 3D 模型的参考 3D 模型。</p><p>入参限制：当填写 MeshInfos 时，则 GenerateType 取值必须为 Texture（贴纹理场景）。</p>
+   */
+  MeshInfos?: Array<AigcHunyuan3DMeshInfo>
+  /**
+   * <p>是否开启输出 PBR 材质。</p><p>枚举值：</p><ul><li>Enabled： 开启；</li><li>Disabled： 关闭。</li></ul><p>默认值：Disabled</p>
+   */
+  EnablePBR?: string
+  /**
+   * <p>面片数。仅 GenerateType 取值为 Normal  和 Geometry 时生效。</p><p>取值范围：[3000, 1500000]</p><p>默认值：500000</p>
+   */
+  FaceCount?: number
+  /**
+   * <p>是否保留 UV 展开。</p><p>枚举值：</p><ul><li>Enabled： 保留；</li><li>Disabled： 不保留。</li></ul><p>默认值：Disabled</p>
+   */
+  KeepUV?: string
+  /**
+   * <p>结果格式。除默认返回的 obj 和 glb 外，附加输出的一种格式。</p><p>枚举值：</p><ul><li>FBX： FBX 格式文件。</li></ul>
+   */
+  ResultFormat?: string
+  /**
+   * <p>随机种子，同一 Seed 输入下结果可复现。</p><p>取值范围：[0, 2147483647]</p>
+   */
+  Seed?: number
+  /**
+   * <p>风格控制词。</p>
+   */
+  Style?: string
+  /**
+   * <p>任务的输出媒体文件配置。</p>
+   */
+  OutputConfig?: AigcHunyuan3DOutputConfig
+  /**
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
+  /**
+   * <p>任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。</p>
+   */
+  TasksPriority?: number
 }
 
 /**
@@ -5085,6 +5074,20 @@ export interface ConcatTask2017 {
 }
 
 /**
+ * 违禁任务控制参数
+ */
+export interface ProhibitedConfigureInfoForUpdate {
+  /**
+   * 语音违禁控制参数。
+   */
+  AsrReviewInfo?: ProhibitedAsrReviewTemplateInfoForUpdate
+  /**
+   * 文本违禁控制参数。
+   */
+  OcrReviewInfo?: ProhibitedOcrReviewTemplateInfoForUpdate
+}
+
+/**
  * 异步获取 AIGC 人脸信息任务。
  */
 export interface DescribeAigcFaceInfoAsyncTask {
@@ -5476,11 +5479,11 @@ export interface UserDefineAsrTextReviewTemplateInfo {
  */
 export interface FileDeleteTask {
   /**
-   * 删除文件 ID 列表。
+   * <p>删除文件 ID 列表。</p>
    */
   FileIdSet?: Array<string>
   /**
-   * 删除文件结果信息列表。
+   * <p>删除文件结果信息列表。</p>
    */
   FileDeleteResultInfo?: Array<FileDeleteResultItem>
 }
@@ -5908,25 +5911,19 @@ export interface CreateAigcAudioTaskResponse {
  */
 export interface ModifyVodDomainAccelerateConfigRequest {
   /**
-   * 需要设置加速配置的域名。
+   * <p>需要设置加速配置的域名。</p>
    */
   Domain: string
   /**
-   * 区域，可选值：
-<li>Chinese Mainland：中国境内（不包含港澳台）。</li>
-<li>Outside Chinese Mainland: 中国境外。</li>
-<li>Global: 全球范围。</li>
+   * <p>区域，可选值：</p><li>Chinese Mainland：中国境内（不包含港澳台）。</li><li>Outside Chinese Mainland: 中国境外。</li><li>Global: 全球范围。</li>
    */
   Area: string
   /**
-   * 开启或者关闭所选区域的域名加速，可选值：
-<li>Enabled: 开启。</li>
-<li>Disabled：关闭。</li>
-开启中国境内加速的域名，需要先[备案域名](/document/product/243/18905)。
+   * <p>开启或者关闭所选区域的域名加速，可选值：</p><li>Enabled: 开启。</li><li>Disabled：关闭。</li>开启中国境内加速的域名，需要先[备案域名](/document/product/243/18905)。
    */
   Status: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -7799,18 +7796,15 @@ export interface LLMComprehendTemplateItem {
  */
 export interface AiSampleFaceOperation {
   /**
-   * 操作类型，可选值：add（添加）、delete（删除）、reset（重置）。重置操作将清空该人物已有人脸数据，并添加 FaceContents 指定人脸数据。
+   * <p>操作类型，可选值：add（添加）、delete（删除）、reset（重置）。重置操作将清空该人物已有人脸数据，并添加 FaceContents 指定人脸数据。</p>
    */
   Type: string
   /**
-   * 人脸 ID 集合，当 Type为delete 时，该字段必填。
+   * <p>人脸 ID 集合，当 Type为delete 时，该字段必填。</p>
    */
   FaceIds?: Array<string>
   /**
-   * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串集合，仅支持 jpeg、png 图片格式。
-<li>当 Type为add 或 reset 时，该字段必填；</li>
-<li>数组长度限制：5 张图片。</li>
-注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
+   * <p>人脸图片 <a href="https://tools.ietf.org/html/rfc4648">Base64</a> 编码后的字符串集合，仅支持 jpeg、png 图片格式。</p><li>当 Type为add 或 reset 时，该字段必填；</li><li>数组长度限制：5 张图片。</li>注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
    */
   FaceContents?: Array<string>
 }
@@ -10065,11 +10059,11 @@ export interface TagConfigureInfoForUpdate {
  */
 export interface DeleteWordSamplesRequest {
   /**
-   * 关键词，数组长度限制：100 个词。
+   * <p>关键词，数组长度限制：100 个词。</p>
    */
   Keywords: Array<string>
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -12313,6 +12307,28 @@ export interface AigcHunyuan3DTaskOutputFileInfo {
 }
 
 /**
+ * UpdateVoice请求参数结构体
+ */
+export interface UpdateVoiceRequest {
+  /**
+   * <p>音色Id</p>
+   */
+  VoiceId: string
+  /**
+   * <p>更新音色字段</p>
+   */
+  VoiceFields: VoiceUpdateFields
+  /**
+   * <p>点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</p>
+   */
+  SubAppId?: string
+  /**
+   * <p>扩展参数，json字符串</p>
+   */
+  ExtParam?: string
+}
+
+/**
  * 创建 AIGC 声音复刻输出信息。
  */
 export interface CreateAigcAudioCloneOutput {
@@ -13407,35 +13423,35 @@ export interface PoliticalImageResult {
  */
 export interface AiSamplePerson {
   /**
-   * 人物 ID。
+   * <p>人物 ID。</p>
    */
   PersonId?: string
   /**
-   * 人物名称。
+   * <p>人物名称。</p>
    */
   Name?: string
   /**
-   * 人物描述。
+   * <p>人物描述。</p>
    */
   Description?: string
   /**
-   * 人脸信息。
+   * <p>人脸信息。</p>
    */
   FaceInfoSet?: Array<AiSampleFaceInfo>
   /**
-   * 人物标签。
+   * <p>人物标签。</p>
    */
   TagSet?: Array<string>
   /**
-   * 应用场景。
+   * <p>应用场景。</p>
    */
   UsageSet?: Array<string>
   /**
-   * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   CreateTime?: string
   /**
-   * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   UpdateTime?: string
 }
@@ -13970,19 +13986,19 @@ export interface DescribeEnhanceMediaTemplatesRequest {
  */
 export interface DailyPlayStatInfo {
   /**
-   * 播放媒体文件的日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>播放媒体文件的日期，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   Date?: string
   /**
-   * 媒体文件ID。
+   * <p>媒体文件ID。</p>
    */
   FileId?: string
   /**
-   * 播放次数。
+   * <p>播放次数。</p>
    */
   PlayTimes?: number
   /**
-   * 播放流量，单位：字节。
+   * <p>播放流量，单位：字节。</p>
    */
   Traffic?: number
 }
@@ -14365,36 +14381,31 @@ export interface TerrorismConfigureInfoForUpdate {
  */
 export interface DescribePersonSamplesRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 拉取的素材类型，可选值：
-<li>UserDefine：用户自定义素材库；</li>
-<li>Default：系统默认素材库。</li>
-
-默认值：UserDefine，拉取用户自定义素材库素材。
-说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且五官图片只返回一张。
+   * <p>拉取的素材类型，可选值：</p><li>UserDefine：用户自定义素材库；</li><li>Default：系统默认素材库。</li><p>默认值：UserDefine，拉取用户自定义素材库素材。<br>说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且五官图片只返回一张。</p>
    */
   Type?: string
   /**
-   * 素材 ID，数组长度限制：100。
+   * <p>素材 ID，数组长度限制：100。</p>
    */
   PersonIds?: Array<string>
   /**
-   * 素材名称，数组长度限制：20。
+   * <p>素材名称，数组长度限制：20。</p>
    */
   Names?: Array<string>
   /**
-   * 素材标签，数组长度限制：20。
+   * <p>素材标签，数组长度限制：20。</p>
    */
   Tags?: Array<string>
   /**
-   * 分页偏移量，默认值：0。
+   * <p>分页偏移量，默认值：0。</p>
    */
   Offset?: number
   /**
-   * 返回记录条数，默认值：100，最大值：100。
+   * <p>返回记录条数，默认值：100，最大值：100。</p>
    */
   Limit?: number
 }
@@ -14774,7 +14785,7 @@ export interface MediaVideoStreamItem {
  */
 export interface ExecuteFunctionResponse {
   /**
-   * 处理结果打包后的字符串，具体与后台一同协调。
+   * <p>处理结果打包后的字符串，具体与后台一同协调。</p>
    */
   Result?: string
   /**
@@ -15582,27 +15593,27 @@ export interface RebuildMediaByTemplateRequest {
  */
 export interface ModifyVodDomainConfigRequest {
   /**
-   * 域名。
+   * <p>域名。</p>
    */
   Domain: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * [Referer 防盗链](/document/product/266/14046)规则。
+   * <p><a href="/document/product/266/14046">Referer 防盗链</a>规则。</p>
    */
   RefererAuthPolicy?: RefererAuthPolicy
   /**
-   * [Key 防盗链](/document/product/266/14047)规则。
+   * <p><a href="/document/product/266/14047">Key 防盗链</a>规则。</p>
    */
   UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy
   /**
-   * QUIC 配置。
+   * <p>QUIC 配置。</p>
    */
   QUICConfig?: DomainQUICConfig
   /**
-   * IP 访问限制规则。
+   * <p>IP 访问限制规则。</p>
    */
   IPFilterPolicy?: IPFilterPolicy
 }
@@ -15612,11 +15623,11 @@ export interface ModifyVodDomainConfigRequest {
  */
 export interface AiSampleTagOperation {
   /**
-   * 操作类型，可选值：add（添加）、delete（删除）、reset（重置）。
+   * <p>操作类型，可选值：add（添加）、delete（删除）、reset（重置）。</p>
    */
   Type: string
   /**
-   * 标签，长度限制：128 个字符。
+   * <p>标签，长度限制：128 个字符。</p>
    */
   Tags: Array<string>
 }
@@ -16278,13 +16289,11 @@ export interface AiRecognitionTaskOcrWordsResultItem {
  */
 export interface ParseStreamingManifestRequest {
   /**
-   * 待解析的索引文件内容。
+   * <p>待解析的索引文件内容。</p>
    */
   MediaManifestContent: string
   /**
-   * 视频索引文件格式。默认 m3u8 格式。
-<li>m3u8</li>
-<li>mpd</li>
+   * <p>视频索引文件格式。默认 m3u8 格式。</p><li>m3u8</li><li>mpd</li>
    */
   ManifestType?: string
 }
@@ -17479,21 +17488,19 @@ export interface ProcessImageAsyncOutput {
  */
 export interface SnapshotByTimeOffsetTaskInput {
   /**
-   * 指定时间点截图模板 ID。
+   * <p>指定时间点截图模板 ID。</p>
    */
   Definition: number
   /**
-   * 截图时间点列表，时间点支持 s、% 两种格式：
-<li>当字符串以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒；</li>
-<li>当字符串以 % 结尾，表示时间点为视频时长的百分比大小，如10%表示时间点为视频前第10%的时间。</li>
+   * <p>截图时间点列表，时间点支持 s、% 两种格式：</p><li>当字符串以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒；</li><li>当字符串以 % 结尾，表示时间点为视频时长的百分比大小，如10%表示时间点为视频前第10%的时间。</li>
    */
   ExtTimeOffsetSet?: Array<string>
   /**
-   * 截图时间点列表，单位为<font color=red>毫秒</font>。此参数已不再建议使用，建议您使用 ExtTimeOffsetSet 参数。
+   * <p>截图时间点列表，单位为<font color="red">毫秒</font>。此参数已不再建议使用，建议您使用 ExtTimeOffsetSet 参数。</p>
    */
   TimeOffsetSet?: Array<number>
   /**
-   * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
+   * <p>水印列表，支持多张图片或文字水印，最大可支持 10 张。</p>
    */
   WatermarkSet?: Array<WatermarkInput>
 }
@@ -18655,7 +18662,7 @@ export interface DeleteCLSTopicRequest {
  */
 export interface ParseStreamingManifestResponse {
   /**
-   * 分片文件列表。
+   * <p>分片文件列表。</p>
    */
   MediaSegmentSet?: Array<string>
   /**
@@ -19113,29 +19120,19 @@ export interface AiAnalysisTaskClassificationResult {
  */
 export interface PoliticalImgReviewTemplateInfoForUpdate {
   /**
-   * 画面鉴别涉及令人不适宜的信息的任务开关，可选值：
-<li>ON：开启画面鉴别涉及令人不适宜的信息的任务；</li>
-<li>OFF：关闭画面鉴别涉及令人不适宜的信息的任务。</li>
+   * <p>画面鉴别涉及令人不适宜的信息的任务开关，可选值：</p><li>ON：开启画面鉴别涉及令人不适宜的信息的任务；</li><li>OFF：关闭画面鉴别涉及令人不适宜的信息的任务。</li>
    */
   Switch?: string
   /**
-   * 画面鉴别涉及令人不适宜的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
-<li>violation_photo：违规图标；</li>
-<li>politician：相关人物；</li>
-<li>entertainment：娱乐人物；</li>
-<li>sport：体育人物；</li>
-<li>entrepreneur：商业人物；</li>
-<li>scholar：教育学者；</li>
-<li>celebrity：知名人物；</li>
-<li>military：相关人物。</li>
+   * <p>画面鉴别涉及令人不适宜的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：</p><li>violation_photo：违规图标；</li><li>politician：相关人物；</li><li>entertainment：娱乐人物；</li><li>sport：体育人物；</li><li>entrepreneur：商业人物；</li><li>scholar：教育学者；</li><li>celebrity：知名人物；</li><li>military：相关人物。</li>
    */
   LabelSet?: Array<string>
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * <p>判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。</p>
    */
   BlockConfidence?: number
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   * <p>判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。</p>
    */
   ReviewConfidence?: number
 }
@@ -20110,11 +20107,11 @@ export interface HandleCurrentPlaylistResponse {
  */
 export interface PushUrlCacheRequest {
   /**
-   * 预热的 URL 列表，单次最多指定20个 URL。
+   * <p>预热的 URL 列表，单次最多指定20个 URL。</p>
    */
   Urls: Array<string>
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -20803,37 +20800,24 @@ export interface DescribeDrmDataKeyRequest {
  */
 export interface AsrFullTextConfigureInfo {
   /**
-   * 语音全文识别任务开关，可选值：
-<li>ON：开启智能语音全文识别任务；</li>
-<li>OFF：关闭智能语音全文识别任务。</li>
+   * <p>语音全文识别任务开关，可选值：</p><li>ON：开启智能语音全文识别任务；</li><li>OFF：关闭智能语音全文识别任务。</li>
    */
   Switch: string
   /**
-   * 生成的字幕文件格式列表，不填或者填空数组表示不生成字幕文件，可选值：
-<li>vtt：生成 WebVTT 字幕文件；</li>
-<li>srt：生成 SRT 字幕文件。</li><font color=red>注意：</font>云点播媒资信息仅支持添加 vtt 字幕，因此当且仅当 SubtitleFormats 包含 vtt 时，云点播将生成的字幕添加到媒资。
+   * <p>生成的字幕文件格式列表，不填或者填空数组表示不生成字幕文件，可选值：</p><li>vtt：生成 WebVTT 字幕文件；</li><li>srt：生成 SRT 字幕文件。</li><font color="red">注意：</font>云点播媒资信息仅支持添加 vtt 字幕，因此当且仅当 SubtitleFormats 包含 vtt 时，云点播将生成的字幕添加到媒资。
    */
   SubtitleFormats?: Array<string>
   /**
-   * 生成的字幕文件格式，不填或者填空字符串表示不生成字幕文件，可选值：
-<li>vtt：生成 WebVTT 字幕文件；</li>
-<li>srt：生成 SRT 字幕文件。</li>
-<font color='red'>注意：此字段已废弃，建议使用 SubtitleFormats。</font>
+   * <p>生成的字幕文件格式，不填或者填空字符串表示不生成字幕文件，可选值：</p><li>vtt：生成 WebVTT 字幕文件；</li><li>srt：生成 SRT 字幕文件。</li><font color="red">注意：此字段已废弃，建议使用 SubtitleFormats。</font>
    * @deprecated
    */
   SubtitleFormat?: string
   /**
-   * 媒体源语言，取值范围：
-<li>zh：中文普通话；</li>
-<li>en：英语；</li>
-<li>ja：日语；</li>
-<li>zh-ca：粤语。</li>
-<font color=red>注意：</font> 填空字符串，或者不填该参数，则自动识别（效果较难保证，推荐填写原始媒体对应的语言，以提高识别的准确率）。
+   * <p>媒体源语言，取值范围：</p><li>zh：中文普通话；</li><li>en：英语；</li><li>ja：日语；</li><li>zh-ca：粤语。</li><font color="red">注意：</font> 填空字符串，或者不填该参数，则自动识别（效果较难保证，推荐填写原始媒体对应的语言，以提高识别的准确率）。
    */
   SrcLanguage?: string
   /**
-   * 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示，若不填则云点播自动生成。
-<font color=red>注意：</font>仅当 SubtitleFormats 包含 vtt 时，该字段有效。
+   * <p>指定字幕名称，长度限制：64 个字符。该值将用于播放器展示，若不填则云点播自动生成。<br><font color="red">注意：</font>仅当 SubtitleFormats 包含 vtt 时，该字段有效。</p>
    */
   SubtitleName?: string
 }
@@ -21347,29 +21331,19 @@ export interface AiRecognitionTaskAsrTranslateResultOutput {
  */
 export interface PoliticalImgReviewTemplateInfo {
   /**
-   * 画面鉴别涉及令人不适宜的信息的任务开关，可选值：
-<li>ON：开启画面鉴别涉及令人不适宜的信息的任务；</li>
-<li>OFF：关闭画面鉴别涉及令人不适宜的信息的任务。</li>
+   * <p>画面鉴别涉及令人不适宜的信息的任务开关，可选值：</p><li>ON：开启画面鉴别涉及令人不适宜的信息的任务；</li><li>OFF：关闭画面鉴别涉及令人不适宜的信息的任务。</li>
    */
   Switch: string
   /**
-   * 画面鉴别涉及令人不适宜的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
-<li>violation_photo：违规图标；</li>
-<li>politician：相关人物；</li>
-<li>entertainment：娱乐人物；</li>
-<li>sport：体育人物；</li>
-<li>entrepreneur：商业人物；</li>
-<li>scholar：教育学者；</li>
-<li>celebrity：知名人物；</li>
-<li>military：相关人物。</li>
+   * <p>画面鉴别涉及令人不适宜的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：</p><li>violation_photo：违规图标；</li><li>politician：相关人物；</li><li>entertainment：娱乐人物；</li><li>sport：体育人物；</li><li>entrepreneur：商业人物；</li><li>scholar：教育学者；</li><li>celebrity：知名人物；</li><li>military：相关人物。</li>
    */
   LabelSet?: Array<string>
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 97 分。取值范围：0~100。
+   * <p>判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 97 分。取值范围：0~100。</p>
    */
   BlockConfidence?: number
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 95 分。取值范围：0~100。
+   * <p>判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 95 分。取值范围：0~100。</p>
    */
   ReviewConfidence?: number
 }
@@ -21543,20 +21517,20 @@ export interface MediaCastEvent {
  */
 export interface DescribeDefaultDistributionConfigResponse {
   /**
-   * 分发配置的域名(已废弃）。
+   * <p>分发配置的域名(已废弃）。</p>
    * @deprecated
    */
   DomainName?: string
   /**
-   * 分发配置的域名。
+   * <p>分发配置的域名。</p>
    */
   Domain?: string
   /**
-   * 分发配置的协议，为 HTTP 或 HTTPS。
+   * <p>分发配置的协议，为 HTTP 或 HTTPS。</p>
    */
   Scheme?: string
   /**
-   * 播放密钥，由大小写字母（a - Z）或者数字（0 - 9）组成，长度在8 - 20个字符之间。
+   * <p>播放密钥，由大小写字母（a - Z）或者数字（0 - 9）组成，长度在8 - 20个字符之间。</p>
    */
   PlayKey?: string
   /**
@@ -21632,13 +21606,11 @@ export interface SearchMediaBySemanticsResponse {
  */
 export interface AiSampleWordInfo {
   /**
-   * 关键词，长度限制：20 个字符。
+   * <p>关键词，长度限制：20 个字符。</p>
    */
   Keyword: string
   /**
-   * 关键词标签
-<li>数组长度限制：20 个标签；</li>
-<li>单个标签长度限制：128 个字符。</li>
+   * <p>关键词标签</p><li>数组长度限制：20 个标签；</li><li>单个标签长度限制：128 个字符。</li>
    */
   Tags?: Array<string>
 }
@@ -22610,25 +22582,13 @@ export interface EnhanceMediaQualityOutputConfig {
 }
 
 /**
- * UpdateVoice请求参数结构体
+ * ModifyMediaStorageClass返回参数结构体
  */
-export interface UpdateVoiceRequest {
+export interface ModifyMediaStorageClassResponse {
   /**
-   * <p>音色Id</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  VoiceId: string
-  /**
-   * <p>更新音色字段</p>
-   */
-  VoiceFields: VoiceUpdateFields
-  /**
-   * <p>点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</p>
-   */
-  SubAppId?: string
-  /**
-   * <p>扩展参数，json字符串</p>
-   */
-  ExtParam?: string
+  RequestId?: string
 }
 
 /**
@@ -23359,11 +23319,11 @@ export interface ModifyHeadTailTemplateRequest {
  */
 export interface DescribeTasksResponse {
   /**
-   * 任务概要列表。
+   * <p>任务概要列表。</p>
    */
   TaskSet?: Array<TaskSimpleInfo>
   /**
-   * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。
+   * <p>翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。</p>
    */
   ScrollToken?: string
   /**
@@ -24022,37 +23982,35 @@ export interface DescribeCLSPushTargetsRequest {
  */
 export interface DescribeTasksRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 过滤条件：任务状态，可选值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。
+   * <p>过滤条件：任务状态，可选值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。</p>
    */
   Status?: string
   /**
-   * 过滤条件：文件 ID。
+   * <p>过滤条件：文件 ID。</p>
    */
   FileId?: string
   /**
-   * 过滤条件：任务创建时间。
+   * <p>过滤条件：任务创建时间。</p>
    */
   CreateTime?: TimeRange
   /**
-   * 过滤条件：任务结束时间。
+   * <p>过滤条件：任务结束时间。</p>
    */
   FinishTime?: TimeRange
   /**
-   * 排序方式。Sort.Field 可选：
-<li> CreateTime 任务创建时间。</li>
-<li>FinishTime 任务结束时间。</li>
+   * <p>排序方式。Sort.Field 可选：</p><li> CreateTime 任务创建时间。</li><li>FinishTime 任务结束时间。</li>
    */
   Sort?: SortBy
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * <p>返回记录条数，默认值：10，最大值：100。</p>
    */
   Limit?: number
   /**
-   * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
+   * <p>翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。</p>
    */
   ScrollToken?: string
 }
@@ -25216,7 +25174,7 @@ export interface CreateAigcImageTaskRequest {
    */
   TasksPriority?: number
   /**
-   * <p>保留字段，特殊用途时使用。</p><ul><li><p>Hunyuan 3.0</p><ul><li>支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：<code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li><p>OG</p><ul><li>支持自由设置分辨率宽高：<ul><li>计算像素大小，需要被16整除</li><li>总像素数必须至少为655,360，且不得超过 8,294,400</li><li>示例：<code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}</code></li></ul></li><li>支持设置透明图层：<ul><li>示例：<code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>支持设置扩图参数，示例：<code>{AdditionalParameters&quot;:&quot;{\&quot;down_expansion_ratio\&quot;:0.2,\&quot;left_expansion_ratio\&quot;:0.3,\&quot;right_expansion_ratio\&quot;:0.4,\&quot;up_expansion_ratio\&quot;:0.1}}</code><ul><li>通用约束：<ul><li>取值范围：[0, 2]；</li><li>新图片整体面积不得超过原图片的 3 倍；</li><li>可以通过 <code>Prompt</code> 字段传入正向提示词。</li><li>示例说明：<ul><li>up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。</li><li>down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。</li><li>left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。</li><li>right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。</li></ul></li></ul></li></ul></li></ul></li></ul>
+   * <p>保留字段，特殊用途时使用。</p><ul><li><p>Hunyuan 3.0</p><ul><li>支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：<code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li><p>OG</p><ul><li>支持自由设置分辨率宽高：<ul><li>计算像素大小，需要被16整除</li><li>总像素数必须至少为655,360，且不得超过 8,294,400</li><li>示例：<code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li>支持设置透明图层：<ul><li>示例：<code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>支持设置扩图参数，示例：<code>{&quot;AdditionalParameters&quot;:&quot;{\&quot;down_expansion_ratio\&quot;:0.2,\&quot;left_expansion_ratio\&quot;:0.3,\&quot;right_expansion_ratio\&quot;:0.4,\&quot;up_expansion_ratio\&quot;:0.1}}</code><ul><li>通用约束：<ul><li>取值范围：[0, 2]；</li><li>新图片整体面积不得超过原图片的 3 倍；</li><li>可以通过 <code>Prompt</code> 字段传入正向提示词。</li><li>示例说明：<ul><li>up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。</li><li>down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。</li><li>left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。</li><li>right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。</li></ul></li></ul></li></ul></li></ul></li></ul>
    */
   ExtInfo?: string
 }
@@ -25226,30 +25184,19 @@ export interface CreateAigcImageTaskRequest {
  */
 export interface TerrorismImgReviewTemplateInfo {
   /**
-   * 画面鉴别涉及令人不安全的信息的任务开关，可选值：
-<li>ON：开启画面鉴别涉及令人不安全的信息的任务；</li>
-<li>OFF：关闭画面鉴别涉及令人不安全的信息的任务。</li>
+   * <p>画面鉴别涉及令人不安全的信息的任务开关，可选值：</p><li>ON：开启画面鉴别涉及令人不安全的信息的任务；</li><li>OFF：关闭画面鉴别涉及令人不安全的信息的任务。</li>
    */
   Switch: string
   /**
-   * 画面鉴别涉及令人不安全的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
-<li>guns：武器枪支；</li>
-<li>crowd：人群聚集；</li>
-<li>bloody：血腥画面；</li>
-<li>police：警察部队；</li>
-<li>banners：暴恐旗帜；</li>
-<li>militant：武装分子；</li>
-<li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物；</li>
-<li>scenario：暴恐画面。</li>
+   * <p>画面鉴别涉及令人不安全的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：</p><li>guns：武器枪支；</li><li>crowd：人群聚集；</li><li>bloody：血腥画面；</li><li>police：警察部队；</li><li>banners：暴恐旗帜；</li><li>militant：武装分子；</li><li>explosion：爆炸火灾；</li><li>terrorists：暴恐人物；</li><li>scenario：暴恐画面。</li>
    */
   LabelSet?: Array<string>
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。
+   * <p>判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。</p>
    */
   BlockConfidence?: number
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 80 分。取值范围：0~100。
+   * <p>判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 80 分。取值范围：0~100。</p>
    */
   ReviewConfidence?: number
 }
@@ -25788,16 +25735,16 @@ export interface SnapshotByTimeOffsetTemplate {
  */
 export interface DescribeRoundPlaysResponse {
   /**
-   * 符合过滤条件的轮播播单总数。已经废弃，分批次查询请请使用 ScrollToken 参数。
+   * <p>符合过滤条件的轮播播单总数。已经废弃，分批次查询请请使用 ScrollToken 参数。</p>
    * @deprecated
    */
   TotalCount?: number
   /**
-   * 轮播播单详情列表。
+   * <p>轮播播单详情列表。</p>
    */
   RoundPlaySet?: Array<RoundPlayInfo>
   /**
-   * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。
+   * <p>翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。</p>
    */
   ScrollToken?: string
   /**
@@ -25811,33 +25758,23 @@ export interface DescribeRoundPlaysResponse {
  */
 export interface FaceConfigureInfo {
   /**
-   * 人脸识别任务开关，可选值：
-<li>ON：开启智能人脸识别任务；</li>
-<li>OFF：关闭智能人脸识别任务。</li>
+   * <p>人脸识别任务开关，可选值：</p><li>ON：开启智能人脸识别任务；</li><li>OFF：关闭智能人脸识别任务。</li>
    */
   Switch: string
   /**
-   * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。默认 95 分。取值范围：0 - 100。
+   * <p>人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。默认 95 分。取值范围：0 - 100。</p>
    */
   Score?: number
   /**
-   * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainment：娱乐明星；</li>
-<li>sport：体育明星；</li>
-<li>politician：相关人物。</li>
+   * <p>默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：</p><li>entertainment：娱乐明星；</li><li>sport：体育明星；</li><li>politician：相关人物。</li>
    */
   DefaultLibraryLabelSet?: Array<string>
   /**
-   * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 100 个，每个标签长度最多 16 个字符。
+   * <p>用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。<br>标签个数最多 100 个，每个标签长度最多 16 个字符。</p>
    */
   UserDefineLibraryLabelSet?: Array<string>
   /**
-   * 人物库选择，可选值：
-<li>Default：使用默认人物库；</li>
-<li>UserDefine：使用用户自定义人物库。</li>
-<li>All：同时使用默认人物库和用户自定义人物库。</li>
-默认值：All，使用系统默认人物库及用户自定义人物库。
+   * <p>人物库选择，可选值：</p><li>Default：使用默认人物库；</li><li>UserDefine：使用用户自定义人物库。</li><li>All：同时使用默认人物库和用户自定义人物库。</li>默认值：All，使用系统默认人物库及用户自定义人物库。
    */
   FaceLibrary?: string
 }
@@ -26010,27 +25947,27 @@ export interface SPEKEDrm {
  */
 export interface ExecuteFunctionRequest {
   /**
-   * 调用后端接口名称。
+   * <p>调用后端接口名称。</p>
    */
   FunctionName: string
   /**
-   * 接口参数，具体参数格式调用时与后端协调。
+   * <p>接口参数，具体参数格式调用时与后端协调。</p>
    */
   FunctionArg: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
   /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
   SessionId?: string
   /**
-   * 保留字段，特殊用途时使用。
+   * <p>保留字段，特殊用途时使用。</p>
    */
   ExtInfo?: string
 }
@@ -26443,11 +26380,11 @@ export interface CLSLogsetInfo {
  */
 export interface DescribePersonSamplesResponse {
   /**
-   * 符合条件的记录总数。
+   * <p>符合条件的记录总数。</p>
    */
   TotalCount?: number
   /**
-   * 人物信息。
+   * <p>人物信息。</p>
    */
   PersonSet?: Array<AiSamplePerson>
   /**
@@ -26562,19 +26499,19 @@ export interface PornConfigureInfo {
  */
 export interface AiRecognitionTaskObjectSeqmentItem {
   /**
-   * 识别片段起始的偏移时间，单位：秒。
+   * <p>识别片段起始的偏移时间，单位：秒。</p>
    */
   StartTimeOffset: number
   /**
-   * 识别片段终止的偏移时间，单位：秒。
+   * <p>识别片段终止的偏移时间，单位：秒。</p>
    */
   EndTimeOffset: number
   /**
-   * 识别片段置信度。取值：0~100。
+   * <p>识别片段置信度。取值：0~100。</p>
    */
   Confidence: number
   /**
-   * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+   * <p>识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。</p>
    */
   AreaCoordSet: Array<number | bigint>
 }
@@ -27470,25 +27407,19 @@ export interface AigcVideoRedrawTaskInputFileInfo {
  */
 export interface PornImgReviewTemplateInfoForUpdate {
   /**
-   * 画面鉴别涉及令人反感的信息的任务开关，可选值：
-<li>ON：开启画面鉴别涉及令人反感的信息的任务；</li>
-<li>OFF：关闭画面鉴别涉及令人反感的信息的任务。</li>
+   * <p>画面鉴别涉及令人反感的信息的任务开关，可选值：</p><li>ON：开启画面鉴别涉及令人反感的信息的任务；</li><li>OFF：关闭画面鉴别涉及令人反感的信息的任务。</li>
    */
   Switch?: string
   /**
-   * 画面鉴别涉及令人反感的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
-<li>porn：色情；</li>
-<li>vulgar：低俗；</li>
-<li>intimacy：亲密行为；</li>
-<li>sexy：性感。</li>
+   * <p>画面鉴别涉及令人反感的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：</p><li>porn：色情；</li><li>vulgar：低俗；</li><li>intimacy：亲密行为；</li><li>sexy：性感。</li>
    */
   LabelSet?: Array<string>
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * <p>判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。</p>
    */
   BlockConfidence?: number
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   * <p>判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。</p>
    */
   ReviewConfidence?: number
 }
@@ -27534,25 +27465,19 @@ export interface CreateWatermarkTemplateResponse {
  */
 export interface PornImgReviewTemplateInfo {
   /**
-   * 画面鉴别涉及令人反感的信息的任务开关，可选值：
-<li>ON：开启画面鉴别涉及令人反感的信息的任务；</li>
-<li>OFF：关闭画面鉴别涉及令人反感的信息的任务。</li>
+   * <p>画面鉴别涉及令人反感的信息的任务开关，可选值：</p><li>ON：开启画面鉴别涉及令人反感的信息的任务；</li><li>OFF：关闭画面鉴别涉及令人反感的信息的任务。</li>
    */
   Switch: string
   /**
-   * 画面鉴别涉及令人反感的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
-<li>porn：色情；</li>
-<li>vulgar：低俗；</li>
-<li>intimacy：亲密行为；</li>
-<li>sexy：性感。</li>
+   * <p>画面鉴别涉及令人反感的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：</p><li>porn：色情；</li><li>vulgar：低俗；</li><li>intimacy：亲密行为；</li><li>sexy：性感。</li>
    */
   LabelSet?: Array<string>
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。
+   * <p>判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。</p>
    */
   BlockConfidence?: number
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 0 分。取值范围：0~100。
+   * <p>判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 0 分。取值范围：0~100。</p>
    */
   ReviewConfidence?: number
 }
@@ -27827,17 +27752,17 @@ export interface SnapshotByTimeOffsetTask2017 {
 }
 
 /**
- * 违禁任务控制参数
+ * CreateAigcHunyuan3DTask返回参数结构体
  */
-export interface ProhibitedConfigureInfoForUpdate {
+export interface CreateAigcHunyuan3DTaskResponse {
   /**
-   * 语音违禁控制参数。
+   * <p>任务 ID。</p>
    */
-  AsrReviewInfo?: ProhibitedAsrReviewTemplateInfoForUpdate
+  TaskId?: string
   /**
-   * 文本违禁控制参数。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OcrReviewInfo?: ProhibitedOcrReviewTemplateInfoForUpdate
+  RequestId?: string
 }
 
 /**
@@ -27919,11 +27844,11 @@ export interface CreateAigcSubjectInput {
  */
 export interface DeleteAnimatedGraphicsTemplateRequest {
   /**
-   * 转动图模板唯一标识。
+   * <p>转动图模板唯一标识。</p>
    */
   Definition: number
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -28115,61 +28040,56 @@ export interface DescribeCLSPushTargetsResponse {
  */
 export interface PullUploadTask {
   /**
-   * 拉取上传任务 ID。
+   * <p>拉取上传任务 ID。</p>
    */
   TaskId?: string
   /**
-   * 任务流状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+   * <p>任务流状态，取值：</p><li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
    */
   Status?: string
   /**
-   * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+   * <p>错误码，0 表示成功，其他值表示失败：</p><li>40000：输入参数不合法，请检查输入参数；</li><li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li><li>70000：内部服务错误，建议重试。</li>
    */
   ErrCode?: number
   /**
-   * 错误信息。
+   * <p>错误信息。</p>
    */
   Message?: string
   /**
-   * 拉取上传完成后生成的视频 ID。
+   * <p>拉取上传完成后生成的视频 ID。</p>
    */
   FileId?: string
   /**
-   * 拉取上传完成后生成的媒体文件基础信息。
+   * <p>拉取上传完成后生成的媒体文件基础信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MediaBasicInfo?: MediaBasicInfo
   /**
-   * 输出视频的元信息。
+   * <p>输出视频的元信息。</p>
    */
   MetaData?: MediaMetaData
   /**
-   * 拉取上传完成后生成的播放地址。
+   * <p>拉取上传完成后生成的播放地址。</p>
    */
   FileUrl?: string
   /**
-   * 任务类型为 Procedure 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。
+   * <p>任务类型为 Procedure 的任务 ID。若<a href="https://cloud.tencent.com/document/api/266/35575">拉取上传</a>时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。</p>
    */
   ProcedureTaskId?: string
   /**
-   * 任务类型为 ReviewAudioVideo 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。
+   * <p>任务类型为 ReviewAudioVideo 的任务 ID。若<a href="https://cloud.tencent.com/document/api/266/35575">拉取上传</a>时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。</p>
    */
   ReviewAudioVideoTaskId?: string
   /**
-   * 来源上下文，用于透传用户请求信息，[URL 拉取视频上传完成](https://cloud.tencent.com/document/product/266/7831)将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，<a href="https://cloud.tencent.com/document/product/266/7831">URL 拉取视频上传完成</a>将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
   /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
   SessionId?: string
   /**
-   * 拉取上传进度，取值范围 [0-100] 。
+   * <p>拉取上传进度，取值范围 [0-100] 。</p>
    */
   Progress?: number
 }
@@ -28532,27 +28452,27 @@ export interface CreateAnimatedGraphicsTemplateResponse {
  */
 export interface AigcVideoTaskUsage {
   /**
-   * <p>输入 Token 数目。</p>
+   * <p>输入 Token 数目。</p><p>仅使用 GV 的 omni 版本时取值有效。</p>
    */
   InputTokens?: number
   /**
-   * <p>思考产生的 Token 数目。</p>
+   * <p>思考产生的 Token 数目。</p><p>仅使用 GV 的 omni 版本时取值有效。</p>
    */
   ThoughtTokens?: number
   /**
-   * <p>输入图片数目。</p>
+   * <p>输入图片数目。</p><p>仅使用 Hailuo 的 H3 版本时取值有效。</p>
    */
   InputImageCount?: number
   /**
-   * <p>输入视频的时长。</p><p>单位：秒。</p>
+   * <p>输入视频的时长。</p><p>单位：秒。</p><p>仅使用 Hailuo 的 H3 版本时取值有效。</p>
    */
   InputSeconds?: number
   /**
-   * <p>输出视频时长。</p><p>单位：秒。</p>
+   * <p>输出视频时长。</p><p>单位：秒。</p><p>仅使用 Hailuo 的 H3 版本时取值有效。</p>
    */
   OutputSeconds?: number
   /**
-   * <p>输入输出总时长。</p><p>默认值：秒。</p>
+   * <p>输入输出总时长。</p><p>默认值：秒。</p><p>仅使用 Hailuo 的 H3 版本时取值有效。</p>
    */
   TotalSeconds?: number
 }

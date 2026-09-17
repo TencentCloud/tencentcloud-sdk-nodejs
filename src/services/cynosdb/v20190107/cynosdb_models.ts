@@ -5205,7 +5205,7 @@ export interface AuditInstanceInfo {
  */
 export interface AddClusterSlaveZoneResponse {
   /**
-   * 异步FlowId
+   * <p>异步FlowId</p>
    */
   FlowId?: number
   /**
@@ -8870,11 +8870,11 @@ export interface VaultInfo {
  */
 export interface RemoveClusterSlaveZoneRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 从可用区
+   * <p>备可用区</p>
    */
   SlaveZone: string
 }
@@ -10439,7 +10439,7 @@ export interface BizTaskInfo {
  */
 export interface RemoveClusterSlaveZoneResponse {
   /**
-   * 异步FlowId
+   * <p>异步FlowId</p>
    */
   FlowId?: number
   /**
@@ -10748,7 +10748,7 @@ export interface DbTable {
  */
 export interface ModifyClusterSlaveZoneResponse {
   /**
-   * 异步FlowId
+   * <p>异步FlowId</p>
    */
   FlowId?: number
   /**
@@ -12397,23 +12397,23 @@ export interface CalculateBackupSaveSecExpiresResponse {
  */
 export interface ModifyClusterSlaveZoneRequest {
   /**
-   * 集群Id
+   * <p>集群Id</p>
    */
   ClusterId: string
   /**
-   * 旧从可用区
+   * <p>旧备可用区</p>
    */
   OldSlaveZone: string
   /**
-   * 新从可用区
+   * <p>新备可用区</p>
    */
   NewSlaveZone: string
   /**
-   * binlog同步方式。默认值：async。可选值：sync、semisync、async
+   * <p>binlog同步方式。默认值：async。可选值：sync、semisync、async</p>
    */
   BinlogSyncWay?: string
   /**
-   * 半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。最低设置为1000ms，最高支持4294967295ms，默认10000ms。
+   * <p>半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。最低设置为1000ms，最高支持4294967295ms，默认10000ms。</p>
    */
   SemiSyncTimeout?: number
 }
@@ -14093,19 +14093,19 @@ export interface DescribeLibraDBSlowLogsRequest {
  */
 export interface AddClusterSlaveZoneRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 从可用区
+   * <p>备可用区</p>
    */
   SlaveZone: string
   /**
-   * binlog同步方式。默认值：async。可选值：sync、semisync、async
+   * <p>binlog同步方式。默认值：async。可选值：sync、semisync、async</p>
    */
   BinlogSyncWay?: string
   /**
-   * 半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。最低设置为1000ms，最高支持4294967295ms，默认10000ms。
+   * <p>半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。最低设置为1000ms，最高支持4294967295ms，默认10000ms。</p>
    */
   SemiSyncTimeout?: number
 }

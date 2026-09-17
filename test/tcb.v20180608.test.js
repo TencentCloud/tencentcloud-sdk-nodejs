@@ -128,9 +128,9 @@ it("tcb.v20180608.DescribeBaasPackageList", async function () {
     }
 })
 
-it("tcb.v20180608.RenewEnv", async function () {
+it("tcb.v20180608.DescribePlatformEnvUsage", async function () {
     try {
-       const data = await client.RenewEnv({})
+       const data = await client.DescribePlatformEnvUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,6 +178,16 @@ it("tcb.v20180608.ListPGUserMigrations", async function () {
     }
 })
 
+it("tcb.v20180608.CreatePlatformEnv", async function () {
+    try {
+       const data = await client.CreatePlatformEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CheckTcbService", async function () {
     try {
        const data = await client.CheckTcbService({})
@@ -201,6 +211,16 @@ it("tcb.v20180608.ReleaseEnv", async function () {
 it("tcb.v20180608.DescribeCreditsUsageDetail", async function () {
     try {
        const data = await client.DescribeCreditsUsageDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribePlatformCreditsUsageDetail", async function () {
+    try {
+       const data = await client.DescribePlatformCreditsUsageDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,6 +528,16 @@ it("tcb.v20180608.ModifyStorageSource", async function () {
     }
 })
 
+it("tcb.v20180608.DescribePlatformAccountCircle", async function () {
+    try {
+       const data = await client.DescribePlatformAccountCircle({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateBillDeal", async function () {
     try {
        const data = await client.CreateBillDeal({})
@@ -528,9 +558,19 @@ it("tcb.v20180608.DestroyStaticStore", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyDatabaseACL", async function () {
+it("tcb.v20180608.DescribeMySQLClusterDetail", async function () {
     try {
-       const data = await client.ModifyDatabaseACL({})
+       const data = await client.DescribeMySQLClusterDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifySafeRule", async function () {
+    try {
+       const data = await client.ModifySafeRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -668,9 +708,19 @@ it("tcb.v20180608.DescribeCloudBaseRunServerVersion", async function () {
     }
 })
 
-it("tcb.v20180608.ModifySafeRule", async function () {
+it("tcb.v20180608.DescribePlatforms", async function () {
     try {
-       const data = await client.ModifySafeRule({})
+       const data = await client.DescribePlatforms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribePlatformCreditsUsage", async function () {
+    try {
+       const data = await client.DescribePlatformCreditsUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,6 +778,16 @@ it("tcb.v20180608.DeleteAIModel", async function () {
     }
 })
 
+it("tcb.v20180608.ModifyPlatformEnv", async function () {
+    try {
+       const data = await client.ModifyPlatformEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DeleteTable", async function () {
     try {
        const data = await client.DeleteTable({})
@@ -741,6 +801,16 @@ it("tcb.v20180608.DeleteTable", async function () {
 it("tcb.v20180608.DestroyEnv", async function () {
     try {
        const data = await client.DestroyEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.RenewEnv", async function () {
+    try {
+       const data = await client.RenewEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,9 +968,9 @@ it("tcb.v20180608.ModifyLoginConfig", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeMySQLClusterDetail", async function () {
+it("tcb.v20180608.ModifyDatabaseACL", async function () {
     try {
-       const data = await client.DescribeMySQLClusterDetail({})
+       const data = await client.ModifyDatabaseACL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -951,6 +1021,16 @@ it("tcb.v20180608.AllocateEnv", async function () {
 it("tcb.v20180608.DescribeDatabaseACL", async function () {
     try {
        const data = await client.DescribeDatabaseACL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DestroyPlatformEnv", async function () {
+    try {
+       const data = await client.DestroyPlatformEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

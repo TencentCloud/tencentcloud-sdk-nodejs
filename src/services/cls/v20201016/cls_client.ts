@@ -27,6 +27,8 @@ import {
   DeleteConsoleResponse,
   DynamicIndex,
   CreateRebuildIndexTaskResponse,
+  AIAnalysisDataScopeEntry,
+  DeleteCLSDeliverTaskRequest,
   CreateSearchViewRequest,
   DescribeAgentConfigsResponse,
   CheckFunctionRequest,
@@ -56,6 +58,7 @@ import {
   DeleteMachineGroupResponse,
   Tag,
   ScheduledSqlTaskInfo,
+  DescribeCosRechargesRequest,
   DescribeResourceGraphProductIngestTaskListResponse,
   CreateDlcDeliverResponse,
   CreateConsumerGroupRequest,
@@ -102,8 +105,9 @@ import {
   DescribeMetricSubscribesResponse,
   CreateWebCallbackRequest,
   DescribeResourceGraphEntitiesRequest,
+  DeleteCLSDeliverTaskResponse,
   DescribeClusterMetricConfigsRequest,
-  DescribeConfigsRequest,
+  DescribeCLSDeliverTasksRequest,
   DlcPartitionExtra,
   DescribeKafkaConsumerTopicsResponse,
   DashboardTopicInfo,
@@ -115,6 +119,7 @@ import {
   DescribeRemoteWriteTasksResponse,
   AddMachineGroupInfoRequest,
   DescribeKafkaRechargesRequest,
+  DescribeCLSDeliverTasksResponse,
   CreateHostMetricConfigResponse,
   ModifyConsumerGroupRequest,
   CreateTopicResponse,
@@ -256,6 +261,7 @@ import {
   DescribeLogHistogramResponse,
   DescribeConsumerGroupsRequest,
   ConsoleAccount,
+  DlcTableInfo,
   CreateWebCallbackResponse,
   DeleteConsumerGroupRequest,
   OpenKafkaConsumerRequest,
@@ -270,6 +276,7 @@ import {
   EstimateRebuildIndexTaskRequest,
   EsTimeInfo,
   DescribeClusterBaseMetricConfigsResponse,
+  TargetTopicConfig,
   ModifyKafkaRechargeRequest,
   DescribeS3RechargesRequest,
   CreateIndexResponse,
@@ -296,6 +303,7 @@ import {
   DescribeConsumerGroupsResponse,
   NoticeContent,
   CreateDataTransformResponse,
+  SourceTopicConfig,
   DescribeKafkaConsumerTopicsRequest,
   CreateConfigExtraRequest,
   CreateConsumerRequest,
@@ -309,12 +317,14 @@ import {
   ApplyConfigToMachineGroupResponse,
   AlertHistoryNotice,
   DeleteAlarmRequest,
+  CLSDeliverTaskInfo,
   DescribeLogContextResponse,
   ModifyConsoleSharingResponse,
   EstimateRebuildIndexTaskResponse,
   LogConfigInfo,
   DeleteDashboardRequest,
   CreateCosRechargeResponse,
+  AIAnalysisDataScope,
   NoticeReceiver,
   Ckafka,
   MultiCondition,
@@ -406,6 +416,7 @@ import {
   CreateMetricSubscribeRequest,
   NoticeContentTemplate,
   LogItem,
+  DeliverRule,
   DescribeConfigMachineGroupsRequest,
   DescribeMetricSubscribePreviewRequest,
   DeleteConsumerResponse,
@@ -433,6 +444,7 @@ import {
   DescribeConsoleSharingListRequest,
   RecordingRuleTaskInfo,
   DescribeLogsetsResponse,
+  ModifyCLSDeliverTaskResponse,
   DescribeKafkaConsumerPreviewResponse,
   RemoteWriteAuthInfo,
   NetworkApplicationInfo,
@@ -473,6 +485,7 @@ import {
   CreateConsoleSharingResponse,
   EnvInfo,
   ModifyKafkaConsumerResponse,
+  CreateCLSDeliverTaskRequest,
   MachineGroupTypeInfo,
   ShipperInfo,
   DescribeAlertRecordHistoryResponse,
@@ -552,7 +565,7 @@ import {
   DescribeShippersRequest,
   DescribeCloudProductLogTasksResponse,
   HostMetricItem,
-  DescribeCosRechargesRequest,
+  AIAnalysis,
   DescribeNetworkApplicationsResponse,
   DescribeTopicBaseMetricConfigsResponse,
   CloseKafkaConsumerResponse,
@@ -586,10 +599,11 @@ import {
   DeleteWebCallbackRequest,
   LogRechargeRuleInfo,
   CloseKafkaConsumerRequest,
+  SourceTopicInfo,
   ModifyAlarmShieldRequest,
   AlarmNoticeDeliverConfig,
   DeleteConfigExtraRequest,
-  DlcTableInfo,
+  CreateCLSDeliverTaskResponse,
   DeleteRemoteWriteTaskRequest,
   ModifyKafkaConsumerGroupOffsetResponse,
   CreateShipperRequest,
@@ -616,6 +630,7 @@ import {
   DeleteKafkaRechargeRequest,
   DlcInfo,
   ModifyDataTransformResponse,
+  DescribeConfigsRequest,
   AlertHistoryRecord,
   MultiTopicSearchInformation,
   AlarmNotice,
@@ -663,6 +678,7 @@ import {
   SendConsumerHeartbeatRequest,
   CommitConsumerOffsetsResponse,
   HostFileInfo,
+  ModifyCLSDeliverTaskRequest,
   DescribeSplunkPreviewResponse,
 } from "./cls_models"
 
@@ -1356,6 +1372,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: ModifyEsRechargeResponse) => void
   ): Promise<ModifyEsRechargeResponse> {
     return this.request("ModifyEsRecharge", req, cb)
+  }
+
+  /**
+   * 修改CLS投递任务
+   */
+  async ModifyCLSDeliverTask(
+    req: ModifyCLSDeliverTaskRequest,
+    cb?: (error: string, rep: ModifyCLSDeliverTaskResponse) => void
+  ): Promise<ModifyCLSDeliverTaskResponse> {
+    return this.request("ModifyCLSDeliverTask", req, cb)
   }
 
   /**
@@ -2066,13 +2092,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 以指定实体为中心，按 Direction（上/下游/全部）+ Hop（跳数）查询依赖拓扑，同时返回拓扑图（节点+边）、4 张卡片汇总、列表区数据、产品 tag 汇总。
+   * 删除CLS投递任务
    */
-  async DescribeResourceGraphEntityDependency(
-    req: DescribeResourceGraphEntityDependencyRequest,
-    cb?: (error: string, rep: DescribeResourceGraphEntityDependencyResponse) => void
-  ): Promise<DescribeResourceGraphEntityDependencyResponse> {
-    return this.request("DescribeResourceGraphEntityDependency", req, cb)
+  async DeleteCLSDeliverTask(
+    req: DeleteCLSDeliverTaskRequest,
+    cb?: (error: string, rep: DeleteCLSDeliverTaskResponse) => void
+  ): Promise<DeleteCLSDeliverTaskResponse> {
+    return this.request("DeleteCLSDeliverTask", req, cb)
   }
 
   /**
@@ -2211,6 +2237,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: CreateLogsetResponse) => void
   ): Promise<CreateLogsetResponse> {
     return this.request("CreateLogset", req, cb)
+  }
+
+  /**
+   * 本接口用于修改数据加工任务
+   */
+  async ModifyDataTransform(
+    req: ModifyDataTransformRequest,
+    cb?: (error: string, rep: ModifyDataTransformResponse) => void
+  ): Promise<ModifyDataTransformResponse> {
+    return this.request("ModifyDataTransform", req, cb)
   }
 
   /**
@@ -2959,13 +2995,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于修改数据加工任务
+   * 以指定实体为中心，按 Direction（上/下游/全部）+ Hop（跳数）查询依赖拓扑，同时返回拓扑图（节点+边）、4 张卡片汇总、列表区数据、产品 tag 汇总。
    */
-  async ModifyDataTransform(
-    req: ModifyDataTransformRequest,
-    cb?: (error: string, rep: ModifyDataTransformResponse) => void
-  ): Promise<ModifyDataTransformResponse> {
-    return this.request("ModifyDataTransform", req, cb)
+  async DescribeResourceGraphEntityDependency(
+    req: DescribeResourceGraphEntityDependencyRequest,
+    cb?: (error: string, rep: DescribeResourceGraphEntityDependencyResponse) => void
+  ): Promise<DescribeResourceGraphEntityDependencyResponse> {
+    return this.request("DescribeResourceGraphEntityDependency", req, cb)
   }
 
   /**
@@ -3040,6 +3076,16 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
+   * 获取CLS投递任务列表
+   */
+  async DescribeCLSDeliverTasks(
+    req: DescribeCLSDeliverTasksRequest,
+    cb?: (error: string, rep: DescribeCLSDeliverTasksResponse) => void
+  ): Promise<DescribeCLSDeliverTasksResponse> {
+    return this.request("DescribeCLSDeliverTasks", req, cb)
+  }
+
+  /**
    * 创建指标采集配置
    */
   async ModifyMetricConfig(
@@ -3107,5 +3153,15 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
     cb?: (error: string, rep: ModifyRemoteWriteTaskResponse) => void
   ): Promise<ModifyRemoteWriteTaskResponse> {
     return this.request("ModifyRemoteWriteTask", req, cb)
+  }
+
+  /**
+   * 新建CLS投递任务
+   */
+  async CreateCLSDeliverTask(
+    req: CreateCLSDeliverTaskRequest,
+    cb?: (error: string, rep: CreateCLSDeliverTaskResponse) => void
+  ): Promise<CreateCLSDeliverTaskResponse> {
+    return this.request("CreateCLSDeliverTask", req, cb)
   }
 }

@@ -373,11 +373,11 @@ export interface EnablePolicyTypeResponse {
  */
 export interface ListTargetsForPolicyResponse {
   /**
-   * 总数。
+   * <p>总数。</p>
    */
   TotalNum?: number
   /**
-   * 指定SCP策略关联目标列表。
+   * <p>指定SCP策略关联目标列表。</p>
    */
   List?: Array<ListTargetsForPolicyNode>
   /**
@@ -3496,21 +3496,29 @@ export interface OrgMember {
  */
 export interface ListTargetsForPolicyNode {
   /**
-   * scp账号uin或节点Id
+   * <p>scp账号uin或节点Id</p>
    */
   Uin?: number
   /**
-   * 关联类型 1-节点关联 2-用户关联
+   * <p>关联类型 1-节点关联 2-用户关联</p>
    */
   RelatedType?: number
   /**
-   * 账号或者节点名称
+   * <p>账号或者节点名称</p>
    */
   Name?: string
   /**
-   * 绑定时间
+   * <p>绑定时间</p>
    */
   AddTime?: string
+  /**
+   * <p>目标对象所属的组织层级名称路径</p>
+   */
+  NodePath?: Array<string>
+  /**
+   * <p>对应的组织层级 ID 路径</p>
+   */
+  NodePathIds?: Array<number | bigint>
 }
 
 /**
@@ -6146,27 +6154,27 @@ export interface DeleteRoleAssignmentRequest {
  */
 export interface ListTargetsForPolicyRequest {
   /**
-   * 策略Id。
+   * <p>策略Id。</p>
    */
   PolicyId: number
   /**
-   * 每页数量。默认值是 20，必须大于 0 且小于或等于 200
+   * <p>每页数量。默认值是 20，必须大于 0 且小于或等于 200</p>
    */
   Rp?: number
   /**
-   * 页码。默认值是 1，从 1开始，不能大于 200
+   * <p>页码。默认值是 1，从 1开始，不能大于 200</p>
    */
   Page?: number
   /**
-   * 策略类型。取值范围：All-全部、User-用户、Node-节点
+   * <p>策略类型。取值范围：All-全部、User-用户、Node-节点</p>
    */
   TargetType?: string
   /**
-   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   * <p>策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略</p>
    */
   PolicyType?: string
   /**
-   * 按照多个策略id搜索，空格隔开。
+   * <p>按照多个策略id搜索，空格隔开。</p>
    */
   Keyword?: string
 }

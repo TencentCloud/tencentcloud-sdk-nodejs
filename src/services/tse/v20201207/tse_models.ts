@@ -787,165 +787,173 @@ export interface PublicAddressConfig {
  */
 export interface SREInstance {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name?: string
   /**
-   * 版本号
+   * <p>版本号</p>
    */
   Edition?: string
   /**
-   * 状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail
+   * <p>状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail</p>
    */
   Status?: string
   /**
-   * 规格ID
+   * <p>规格ID</p>
    */
   SpecId?: string
   /**
-   * 副本数
+   * <p>副本数</p>
    */
   Replica?: number
   /**
-   * 类型
+   * <p>类型</p>
    */
   Type?: string
   /**
-   * Vpc iD
+   * <p>Vpc iD</p>
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetIds?: Array<string>
   /**
-   * 是否开启持久化存储
+   * <p>是否开启持久化存储</p>
    */
   EnableStorage?: boolean
   /**
-   * 数据存储方式
+   * <p>数据存储方式</p>
    */
   StorageType?: string
   /**
-   * 云硬盘容量
+   * <p>云硬盘容量</p>
    */
   StorageCapacity?: number
   /**
-   * 计费方式
+   * <p>计费方式</p>
    */
   Paymode?: string
   /**
-   * EKS集群的ID
+   * <p>EKS集群的ID</p>
    */
   EKSClusterID?: string
   /**
-   * 集群创建时间
+   * <p>集群创建时间</p>
    */
   CreateTime?: string
   /**
-   * 环境配置信息列表
+   * <p>环境配置信息列表</p>
    */
   EnvInfos?: Array<EnvInfo>
   /**
-   * 引擎所在的区域
+   * <p>引擎所在的区域</p>
    */
   EngineRegion?: string
   /**
-   * 注册引擎是否开启公网
+   * <p>注册引擎是否开启公网</p>
    */
   EnableInternet?: boolean
   /**
-   * 私有网络列表信息
+   * <p>私有网络列表信息</p>
    */
   VpcInfos?: Array<VpcInfo>
   /**
-   * 服务治理相关信息列表
+   * <p>服务治理相关信息列表</p>
    */
   ServiceGovernanceInfos?: Array<ServiceGovernanceInfo>
   /**
-   * 实例的标签信息
+   * <p>实例的标签信息</p>
    */
   Tags?: Array<KVPair>
   /**
-   * 引擎实例是否开启控制台公网访问地址
+   * <p>引擎实例是否开启控制台公网访问地址</p>
    */
   EnableConsoleInternet?: boolean
   /**
-   * 引擎实例是否开启控制台内网访问地址
+   * <p>引擎实例是否开启控制台内网访问地址</p>
    */
   EnableConsoleIntranet?: boolean
   /**
-   * 引擎实例是否展示参数配置页面
+   * <p>引擎实例是否展示参数配置页面</p>
    */
   ConfigInfoVisible?: boolean
   /**
-   * 引擎实例控制台默认密码
+   * <p>引擎实例控制台默认密码</p>
    */
   ConsoleDefaultPwd?: string
   /**
-   * 交易付费类型，0后付费/1预付费
+   * <p>交易付费类型，0后付费/1预付费</p>
    */
   TradeType?: number
   /**
-   * 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费
+   * <p>自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费</p>
    */
   AutoRenewFlag?: number
   /**
-   * 预付费到期时间
+   * <p>预付费到期时间</p>
    */
   CurDeadline?: string
   /**
-   * 隔离开始时间
+   * <p>隔离开始时间</p>
    */
   IsolateTime?: string
   /**
-   * 实例地域相关的描述信息
+   * <p>实例地域相关的描述信息</p>
    */
   RegionInfos?: Array<DescribeInstanceRegionInfo>
   /**
-   * 所在EKS环境，分为common和yunti
+   * <p>所在EKS环境，分为common和yunti</p>
    */
   EKSType?: string
   /**
-   * 引擎的产品版本
+   * <p>引擎的产品版本</p>
    */
   FeatureVersion?: string
   /**
-   * 引擎实例是否开启客户端内网访问地址
+   * <p>引擎实例是否开启客户端内网访问地址</p>
    */
   EnableClientIntranet?: boolean
   /**
-   * 存储额外配置选项
+   * <p>存储额外配置选项</p>
    */
   StorageOption?: Array<StorageOption>
   /**
-   * Zookeeper的额外环境数据信息
+   * <p>Zookeeper的额外环境数据信息</p>
    */
   ZookeeperRegionInfo?: ZookeeperRegionInfo
   /**
-   * 部署架构
+   * <p>部署架构</p>
    */
   DeployMode?: string
   /**
-   * 全局属性
+   * <p>全局属性</p>
    */
   GlobalType?: string
   /**
-   * 所属组类型
+   * <p>所属组类型</p>
    */
   GroupType?: string
   /**
-   * 组id
+   * <p>组id</p>
    */
   GroupId?: Array<string>
   /**
-   * 是否为主地域
+   * <p>是否为主地域</p>
    */
   IsMainRegion?: boolean
+  /**
+   * <p>是否禁止变更</p>
+   */
+  MutationEnabled?: boolean
+  /**
+   * <p>禁止限流</p>
+   */
+  MaxCapacityLimitEnabled?: boolean
 }
 
 /**
@@ -3976,6 +3984,10 @@ export interface GovernanceServiceInput {
    * <p>服务类型</p><p>枚举值：</p><ul><li>0： 微服务（默认）</li><li>1： MCP Server</li><li>2： AI Agent</li></ul><p>默认值：0</p>
    */
   Type?: number
+  /**
+   * <p>拓展服务元数据</p>
+   */
+  ExtendedMetadata?: Array<ExtendedMetadata>
 }
 
 /**
@@ -7292,6 +7304,10 @@ export interface GovernanceService {
    * <p>服务类型</p><p>枚举值：</p><ul><li>0： 微服务（默认）</li><li>1： MCP Server</li><li>2： AI Agent</li></ul>
    */
   Type?: number
+  /**
+   * <p>服务元数据</p>
+   */
+  ExtendedMetadata?: Array<ExtendedMetadata>
 }
 
 /**
@@ -8690,6 +8706,44 @@ export interface DescribeNacosServerInterfacesRequest {
 }
 
 /**
+ * AgentSkill AI Agent 技能定义
+ */
+export interface AgentSkill {
+  /**
+   * <p>agentID</p>
+   */
+  Id?: string
+  /**
+   * <p>skill名称</p>
+   */
+  Name?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>样例</p>
+   */
+  Examples?: Array<string>
+  /**
+   * <p>输入模式</p>
+   */
+  InputModes?: Array<string>
+  /**
+   * <p>输出模式</p>
+   */
+  OutputModes?: Array<string>
+  /**
+   * <p>版本</p>
+   */
+  Version?: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayConsumerGroup请求参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
@@ -9689,6 +9743,20 @@ export interface ModifyCloudNativeAPIGatewayServiceResponse {
 }
 
 /**
+ * 服务扩展元数据
+ */
+export interface ExtendedMetadata {
+  /**
+   * <p>枚举类型</p>
+   */
+  Type?: string
+  /**
+   * <p>agent参数</p>
+   */
+  AgentSkill?: AgentSkill
+}
+
+/**
  * nacos服务端接口列表，用于云监控
  */
 export interface NacosServerInterface {
@@ -10403,45 +10471,53 @@ export interface DeleteNativeGatewayServerGroupResult {
  */
 export interface ServiceGovernanceInfo {
   /**
-   * 引擎所在的地域
+   * <p>引擎所在的地域</p>
    */
   EngineRegion: string
   /**
-   * 服务治理引擎绑定的kubernetes集群信息
+   * <p>服务治理引擎绑定的kubernetes集群信息</p>
    */
   BoundK8SInfos?: Array<BoundK8SInfo>
   /**
-   * 服务治理引擎绑定的网络信息
+   * <p>服务治理引擎绑定的网络信息</p>
    */
   VpcInfos?: Array<VpcInfo>
   /**
-   * 当前实例鉴权是否开启
+   * <p>当前实例鉴权是否开启</p>
    */
   AuthOpen?: boolean
   /**
-   * 该实例支持的功能，鉴权就是 Auth
+   * <p>该实例支持的功能，鉴权就是 Auth</p>
    */
   Features?: Array<string>
   /**
-   * 主账户名默认为 polaris，该值为主账户的默认密码
+   * <p>主账户名默认为 polaris，该值为主账户的默认密码</p>
    */
   MainPassword?: string
   /**
-   * 服务治理pushgateway引擎绑定的网络信息
+   * <p>服务治理pushgateway引擎绑定的网络信息</p>
    */
   PgwVpcInfos?: Array<VpcInfo>
   /**
-   * 服务治理限流server引擎绑定的网络信息
+   * <p>服务治理限流server引擎绑定的网络信息</p>
    */
   LimiterVpcInfos?: Array<VpcInfo>
   /**
-   * 引擎关联CLS日志主题信息
+   * <p>引擎关联CLS日志主题信息</p>
    */
   CLSTopics?: Array<PolarisCLSTopicInfo>
   /**
-   * 子用户密码
+   * <p>子用户密码</p>
    */
   SubPassword?: string
+  /**
+   * <p>是否允许变更</p>
+   */
+  DisableMutation?: boolean
+  /**
+   * <p>是否开启限流</p>
+   */
+  MaxCapacityLimitEnabled?: boolean
 }
 
 /**

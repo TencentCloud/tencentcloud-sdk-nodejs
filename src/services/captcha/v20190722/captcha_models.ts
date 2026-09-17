@@ -684,46 +684,37 @@ export interface DescribeCaptchaTicketDataRequest {
  */
 export interface DescribeCaptchaResultResponse {
   /**
-   * 1 OK 验证通过
-7 captcha no match 传入的Randstr不合法，请检查Randstr是否与前端返回的Randstr一致
-8 ticket expired 传入的Ticket已过期（Ticket有效期5分钟），请重新生成Ticket、Randstr进行校验
-9 ticket reused 传入的Ticket被重复使用，请重新生成Ticket、Randstr进行校验
-15 decrypt fail 传入的Ticket不合法，请检查Ticket是否与前端返回的Ticket一致
-16 appid-ticket mismatch 传入的CaptchaAppId错误，请检查CaptchaAppId是否与前端传入的CaptchaAppId一致，并且保障CaptchaAppId是从验证码控制台【验证管理】->【基础配置】中获取
-21 diff 票据校验异常，可能的原因是（1）若Ticket包含trerror前缀，一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理。（2）若Ticket不包含trerror前缀，则是由于验证码风控系统发现请求有安全风险，业务侧可根据需要进行拦截。
-100 appid-secretkey-ticket mismatch 参数校验错误，（1）请检查CaptchaAppId与AppSecretKey是否正确，CaptchaAppId、AppSecretKey需要在验证码控制台【验证管理】>【基础配置】中获取（2）请检查传入的Ticket是否由传入的CaptchaAppId生成
+   * <p>1 OK 验证通过<br>7 captcha no match 传入的Randstr不合法，请检查Randstr是否与前端返回的Randstr一致<br>8 ticket expired 传入的Ticket已过期（Ticket有效期5分钟），请重新生成Ticket、Randstr进行校验<br>9 ticket reused 传入的Ticket被重复使用，请重新生成Ticket、Randstr进行校验<br>15 decrypt fail 传入的Ticket不合法，请检查Ticket是否与前端返回的Ticket一致<br>16 appid-ticket mismatch 传入的CaptchaAppId错误，请检查CaptchaAppId是否与前端传入的CaptchaAppId一致，并且保障CaptchaAppId是从验证码控制台【验证管理】-&gt;【基础配置】中获取<br>21 diff 票据校验异常，可能的原因是（1）若Ticket包含trerror前缀，一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理。（2）若Ticket不包含trerror前缀，则是由于验证码风控系统发现请求有安全风险，业务侧可根据需要进行拦截。<br>100 appid-secretkey-ticket mismatch 参数校验错误，（1）请检查CaptchaAppId与AppSecretKey是否正确，CaptchaAppId、AppSecretKey需要在验证码控制台【验证管理】&gt;【基础配置】中获取（2）请检查传入的Ticket是否由传入的CaptchaAppId生成</p>
    */
   CaptchaCode?: number
   /**
-   * 状态描述及验证错误信息
+   * <p>状态描述及验证错误信息</p>
    */
   CaptchaMsg?: string
   /**
-   * 无感验证模式下，该参数返回验证结果：
-EvilLevel=0 请求无恶意
-EvilLevel=100 请求有恶意
+   * <p>无感验证模式下，该参数返回验证结果：<br>EvilLevel=0 请求无恶意<br>EvilLevel=100 请求有恶意</p>
    */
   EvilLevel?: number
   /**
-   * 前端获取验证码时间，时间戳格式
+   * <p>前端获取验证码时间，时间戳格式</p>
    */
   GetCaptchaTime?: number
   /**
-   * 拦截类型
+   * <p>拦截类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EvilBitmap?: number
   /**
-   * 提交验证码时间
+   * <p>提交验证码时间</p>
    */
   SubmitCaptchaTime?: number
   /**
-   * 设备风险大类
+   * <p>设备风险大类</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceRiskCategory?: string
   /**
-   * 验证码评分
+   * <p>验证码评分</p><p>取值0-100，分值越高，风险越大</p>
    */
   Score?: number
   /**
@@ -986,47 +977,47 @@ export interface DescribeCaptchaDataResponse {
  */
 export interface DescribeCaptchaResultRequest {
   /**
-   * 固定填值：9。
+   * <p>固定填值：9。</p>
    */
   CaptchaType: number
   /**
-   * 前端回调函数返回的用户验证票据
+   * <p>前端回调函数返回的用户验证票据</p>
    */
   Ticket: string
   /**
-   * 业务侧获取到的验证码使用者的外网IP
+   * <p>业务侧获取到的验证码使用者的外网IP</p>
    */
   UserIp: string
   /**
-   * 前端回调函数返回的随机字符串
+   * <p>前端回调函数返回的随机字符串</p>
    */
   Randstr: string
   /**
-   * 验证码应用ID。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到CaptchaAppId。
+   * <p>验证码应用ID。登录 <a href="https://console.cloud.tencent.com/captcha/graphical">验证码控制台</a>，在验证列表的【密钥】列，即可查看到CaptchaAppId。</p>
    */
   CaptchaAppId: number
   /**
-   * 验证码应用密钥。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到AppSecretKey。AppSecretKey属于服务器端校验验证码票据的密钥，请妥善保密，请勿泄露给第三方。
+   * <p>验证码应用密钥。登录 <a href="https://console.cloud.tencent.com/captcha/graphical">验证码控制台</a>，在验证列表的【密钥】列，即可查看到AppSecretKey。AppSecretKey属于服务器端校验验证码票据的密钥，请妥善保密，请勿泄露给第三方。</p>
    */
   AppSecretKey: string
   /**
-   * 预留字段
+   * <p>预留字段</p>
    */
   BusinessId?: number
   /**
-   * 预留字段
+   * <p>预留字段</p>
    */
   SceneId?: number
   /**
-   * mac 地址或设备唯一标识
+   * <p>mac 地址或设备唯一标识</p>
    */
   MacAddress?: string
   /**
-   * 手机设备号
+   * <p>手机设备号</p>
    */
   Imei?: string
   /**
-   * 是否返回前端获取验证码时间，取值1：需要返回
+   * <p>是否返回前端获取验证码时间，取值1：需要返回</p>
    */
   NeedGetCaptchaTime?: number
 }

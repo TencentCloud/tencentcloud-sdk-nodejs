@@ -261,6 +261,24 @@ export interface CreateHTTPServiceRouteRequest {
 }
 
 /**
+ * CreatePlatformEnv请求参数结构体
+ */
+export interface CreatePlatformEnvRequest {
+  /**
+   * <p>环境别名</p>
+   */
+  Alias: string
+  /**
+   * <p>套餐池标识</p>
+   */
+  PlatformId: string
+  /**
+   * <p>幂等键</p>
+   */
+  ReqKey: string
+}
+
+/**
  * UnbindStorageSource返回参数结构体
  */
 export interface UnbindStorageSourceResponse {
@@ -365,6 +383,28 @@ export interface MySQLTaskStatus {
 }
 
 /**
+ * DescribePlatformEnvUsage返回参数结构体
+ */
+export interface DescribePlatformEnvUsageResponse {
+  /**
+   * <p>资源用量信息</p>
+   */
+  Resources?: Array<PlatformResUsageItem>
+  /**
+   * <p>资源点</p>
+   */
+  TotalCredits?: number
+  /**
+   * <p>资源点取整倍数</p>
+   */
+  CreditsScale?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云开发新套餐详情
  */
 export interface BaasPackageInfo {
@@ -455,6 +495,16 @@ export interface GetFunctionRequest {
    * <p>是否返回代码</p>
    */
   ShowCode?: string
+}
+
+/**
+ * ModifyPlatformEnv返回参数结构体
+ */
+export interface ModifyPlatformEnvResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -959,94 +1009,13 @@ export interface DescribeCloudAppVersionResponse {
 }
 
 /**
- * CreateBillDeal请求参数结构体
+ * DeleteTable返回参数结构体
  */
-export interface CreateBillDealRequest {
+export interface DeleteTableResponse {
   /**
-   * 当前下单的操作类型，可取[purchase,renew,modify]三种值，分别代表新购，续费，变配。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DealType: string
-  /**
-   * 购买的产品类型，可取[tcb-baas,tcb-promotion,tcb-package], 分别代表baas套餐、大促包、资源包
-   */
-  ProductType: string
-  /**
-   * 目标下单产品/套餐Id。
-对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
-   */
-  PackageId: string
-  /**
-   * 默认只下单不支付，为ture则下单并支付。
-如果需要下单并支付，请确保账户下有足够的余额，否则会导致下单失败。
-   */
-  CreateAndPay?: boolean
-  /**
-   * 购买时长，与TimeUnit字段搭配使用。
-   */
-  TimeSpan?: number
-  /**
-   * 购买时长单位,按各产品规则可选d(天),m(月),y(年),p(一次性)。
-对于 云开发环境的 新购和续费，目前仅支持 按月购买（即 TimeUnit=m）。
-   */
-  TimeUnit?: string
-  /**
-   * 资源唯一标识。
-在云开发环境 续费和变配 场景下必传，取值为环境ID。
-   */
-  ResourceId?: string
-  /**
-   * 来源可选[qcloud,miniapp]，默认qcloud。
-miniapp表示微信云开发，主要适用于[小程序云开发](https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/billing/price.html)。
-
-   */
-  Source?: string
-  /**
-   * 环境别名，用于新购云开发环境时，给云开发环境起别名。
-仅当 新购云开发环境（DealType=purchase 并且 ProductType=tcb-baas ）时有效。
-
-### 格式要求
-- 可选字符： 小写字母(a~z)、数字、减号(-)
-- 不能以 减号(-) 开头或结尾
-- 不能有连个连续的 减号(-)
-- 长度不超过20位
-   */
-  Alias?: string
-  /**
-   * 环境id，当购买资源包和大促包时（ProductType取值为tcb-promotion 或 tcb-package）必传，表示资源包在哪个环境下生效。
-   */
-  EnvId?: string
-  /**
-   * 开启超限按量。
-开启后，当 套餐内的资源点 和 资源包 都用尽后，会自动按量计费。
-详见 [计费说明](https://cloud.tencent.com/document/product/876/127357)。
-   */
-  EnableExcess?: boolean
-  /**
-   * 变配目标套餐id，对于云开发环境变配场景下必传。
-对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
-   */
-  ModifyPackageId?: string
-  /**
-   * jsonstr附加信息
-   */
-  Extension?: string
-  /**
-   * 是否自动选择代金券支付。
-   */
-  AutoVoucher?: boolean
-  /**
-   * 资源类型。
-代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要发货哪些资源。
-可取值：flexdb, cos, cdn, scf
-
-   */
-  ResourceTypes?: Array<string>
-  /**
-   * 环境标签。
- 代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要打的标签。
-
-   */
-  EnvTags?: Array<Tag>
+  RequestId?: string
 }
 
 /**
@@ -2096,6 +2065,32 @@ export interface DescribeCloudAppCosInfoResponse {
 }
 
 /**
+ * DescribePlatformCreditsUsage返回参数结构体
+ */
+export interface DescribePlatformCreditsUsageResponse {
+  /**
+   * <p>资源点套餐内用量总和</p>
+   */
+  DeductValueCount?: number
+  /**
+   * <p>资源点资源包用量总和</p>
+   */
+  PackageDeductValueCount?: number
+  /**
+   * <p>资源点按量用量总和</p>
+   */
+  ReportValueCount?: number
+  /**
+   * <p>每日消耗具体数据</p>
+   */
+  DailyList?: Array<PlatformCreditsUsageDaily>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 外部存储。
 标识该存储介质，并非由云开发CloudBase创建，而是绑定的其他存储介质。
 目前仅支持 [腾讯云-对象存储](https://cloud.tencent.com/document/product/436)。
@@ -2531,7 +2526,7 @@ export interface HTTPServiceRuleCondition {
    */
   MatchType?: string
   /**
-   * <p>Values 匹配值集合，Values 内任一命中即认为条件成立（OR 语义）</p><p>入参限制：单项 1~1024 字节，最多 100 条</p>
+   * <p>Values 匹配值集合，Values 内任一命中即认为条件成立（OR 语义）</p><p>入参限制：单项 1~1024 字节，最多 30 条</p>
    */
   Values?: Array<string>
 }
@@ -2614,6 +2609,7 @@ export interface ClusterDetail {
  * 自定义缓存键参数。约束：FullURLCache=on 与 QueryStringSwitch=on 互斥
 使用示例：
 - 整 URL 参与缓存键：{FullURLCache: "on", QueryStringSwitch: "off"}
+- 整 URL 不参与缓存键：{FullURLCache: "off", QueryStringSwitch: "off"}
 - URL 路径 + 仅保留 x/y：{FullURLCache: "off", QueryStringSwitch: "on", QueryStringAction: "includeCustom", QueryStringValues: ["x", "y"]}
 - URL 路径 + 忽略 debug：{FullURLCache: "off", QueryStringSwitch: "on", QueryStringAction: "excludeCustom", QueryStringValues: ["debug"]}
  */
@@ -2631,7 +2627,7 @@ export interface HTTPServiceCacheKeyParams {
    */
   QueryStringAction?: string
   /**
-   * <p>参数名列表</p><p>入参限制：最多 100 项，单项 1~128 字节</p>
+   * <p>参数名列表</p><p>入参限制：最多 30 项，单项 1~128 字节</p>
    */
   QueryStringValues?: Array<string>
 }
@@ -3241,6 +3237,20 @@ export interface DescribeMySQLClusterDetailRequest {
 }
 
 /**
+ * ModifyEnvExtra请求参数结构体
+ */
+export interface ModifyEnvExtraRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>开启或关闭 <code>超限转按量</code>。<br>可取值： TRUE/FALSE （字符串类型）<br>非法制、不传、为空 则不变更该字段。</p>
+   */
+  EnableOverrun?: string
+}
+
+/**
  * CreateStaticStore请求参数结构体
  */
 export interface CreateStaticStoreRequest {
@@ -3622,6 +3632,40 @@ export interface PushPGUserMigrationsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模块内平台版资源点用量及原始用量数据结构
+ */
+export interface PlatformPkgCreditsUsage {
+  /**
+   * <p>平台版套餐id</p>
+   */
+  PlatformId?: string
+  /**
+   * <p>模块</p>
+   */
+  Module?: string
+  /**
+   * <p>module总资源点用量</p>
+   */
+  CreditsValue?: number
+  /**
+   * <p>指标用量明细</p>
+   */
+  MetricUsageDetail?: Array<MetricUsage>
+  /**
+   * <p>资源点套餐内用量</p>
+   */
+  DeductValue?: number
+  /**
+   * <p>资源点资源包用量</p>
+   */
+  PackageDeductValue?: number
+  /**
+   * <p>资源点按量用量</p>
+   */
+  ReportValue?: number
 }
 
 /**
@@ -4270,6 +4314,20 @@ export interface ListFunctionsResponse {
 }
 
 /**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+ */
+export interface Filter {
+  /**
+   * <p>需要过滤的字段。过滤条件数量限制为10。</p>
+   */
+  Name?: string
+  /**
+   * <p>字段的过滤值。</p>
+   */
+  Values?: Array<string>
+}
+
+/**
  * CreateEnv请求参数结构体
  */
 export interface CreateEnvRequest {
@@ -4350,6 +4408,24 @@ export interface BuildSource {
 }
 
 /**
+ * DescribePlatformAccountCircle返回参数结构体
+ */
+export interface DescribePlatformAccountCircleResponse {
+  /**
+   * <p>套餐计费周期开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>套餐计费周期结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeEnvPlans返回参数结构体
  */
 export interface DescribeEnvPlansResponse {
@@ -4364,13 +4440,29 @@ export interface DescribeEnvPlansResponse {
 }
 
 /**
- * 固定 IP 配置
+ * DescribePlatformCreditsUsageDetail请求参数结构体
  */
-export interface FunctionEipConfigFixed {
+export interface DescribePlatformCreditsUsageDetailRequest {
   /**
-   * <p>是否固定 IP，TRUE / FALSE</p>
+   * <p>模块列表</p><p>枚举值：</p><ul><li>FLEXDB： 文档数据库</li><li>TDSQL： MYSQL数据库</li><li>SCF： 云函数</li><li>AI： 大模型</li><li>EKS： 云托管</li><li>COS： 云存储</li><li>HOSTING： 静态托管</li><li>Auth： 用户权限</li><li>APIInvocation： API调用</li><li>HTTPInvocation： HTTP调用</li><li>VM： 主机</li><li>Workflow： 工作流</li><li>Other： 其他</li><li>PostgreSQL： PostgreSQL</li><li>Token： Token</li></ul>
    */
-  EipFixed?: string
+  Modules: Array<string>
+  /**
+   * <p>开始日期</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  StartDate: string
+  /**
+   * <p>结束日期</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  EndDate: string
+  /**
+   * <p>是否需要每日用量明细</p>
+   */
+  NeedUsageDetails: boolean
+  /**
+   * <p>平台版套餐id</p>
+   */
+  PlatformId: string
 }
 
 /**
@@ -4953,6 +5045,36 @@ export interface DeleteCloudAppResponse {
 }
 
 /**
+ * 平台版资源信息
+ */
+export interface PlatFormResourceInfo {
+  /**
+   * <p>资源类系</p><p>枚举值：</p><ul><li>log： 日志</li><li>storage： 云存储</li><li>hosting： 静态托管</li></ul>
+   */
+  ResType?: string
+  /**
+   * <p>资源唯一标识</p>
+   */
+  ResName?: string
+  /**
+   * <p>资源详细信息</p>
+   */
+  Detail?: string
+  /**
+   * <p>资源状态</p><p>枚举值：</p><ul><li>0： 正常</li><li>5： 初始化中</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>资源id</p>
+   */
+  PlatformId?: number
+  /**
+   * <p>对用平台资源id</p>
+   */
+  Id?: number
+}
+
+/**
  * DescribeGatewayVersions返回参数结构体
  */
 export interface DescribeGatewayVersionsResponse {
@@ -5403,6 +5525,24 @@ export interface UpdateAIModelRequest {
 }
 
 /**
+ * 每日用量详情结构
+ */
+export interface DailyUsageList {
+  /**
+   * <p>资源点用量</p>
+   */
+  Credits?: number
+  /**
+   * <p>资源点用量日期</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  Date?: string
+  /**
+   * <p>原始资源用量</p>
+   */
+  UsageValue?: number
+}
+
+/**
  * RenewEnv请求参数结构体
  */
 export interface RenewEnvRequest {
@@ -5739,21 +5879,21 @@ export interface GetProvidersResponse {
 }
 
 /**
- * tke集群信息
+ * DescribePlatforms请求参数结构体
  */
-export interface TkeClusterInfo {
+export interface DescribePlatformsRequest {
   /**
-   * 集群ID
+   * <p>平台版套餐id列表</p><p>默认值：若不指定，则分页返回当前账号下所有平台版资源</p>
    */
-  ClusterId?: string
+  PlatformIds?: Array<string>
   /**
-   * 集群的vpcId
+   * <p>分页限制</p><p>取值范围：[10, 100]</p><p>默认值：10</p>
    */
-  VpcId?: string
+  Limit?: number
   /**
-   * 版本内网CLB所在子网Id
+   * <p>分页偏移量</p><p>默认值：0</p>
    */
-  VersionClbSubnetId?: string
+  Offset?: number
 }
 
 /**
@@ -5797,6 +5937,20 @@ export interface RunSqlRequest {
 }
 
 /**
+ * ModifyPlatformEnv请求参数结构体
+ */
+export interface ModifyPlatformEnvRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>环境状态</p><p>枚举值：</p><ul><li>ENABLE： 启用环境</li><li>DISABLE： 禁用环境</li></ul>
+   */
+  Status?: string
+}
+
+/**
  * 云函数Layer版本
  */
 export interface FunctionLayer {
@@ -5808,6 +5962,24 @@ export interface FunctionLayer {
    * <p>层版本号</p>
    */
   LayerVersion?: number
+}
+
+/**
+ * tke集群信息
+ */
+export interface TkeClusterInfo {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群的vpcId
+   */
+  VpcId?: string
+  /**
+   * 版本内网CLB所在子网Id
+   */
+  VersionClbSubnetId?: string
 }
 
 /**
@@ -6007,7 +6179,7 @@ export interface HTTPServiceDomain {
    */
   DomainType?: string
   /**
-   * <p>绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF）</p>
+   * <p>绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF）</p><p>枚举值：</p><ul><li>DIRECT： 直连到HTTP访问服务</li><li>CDN： 接入云开发CDN（即将下线）</li><li>EO： 接入云开发EdgeOne</li><li>CUSTOM： 自定义接入类型（其他CDN或者WAF）</li><li>NONE： 不接入，当使用泛域名接入时，可通过NONE来接入子域名，子域名证书及协议继承泛域名</li></ul><p>默认值：DIRECT</p>
    */
   AccessType?: string
   /**
@@ -6165,6 +6337,32 @@ export interface CreateApiKeyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePlatformEnvUsage请求参数结构体
+ */
+export interface DescribePlatformEnvUsageRequest {
+  /**
+   * <p>环境Id</p>
+   */
+  EnvId: string
+  /**
+   * <p>查询用量起始时间</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  StartDate?: string
+  /**
+   * <p>查询用量结束时间</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  EndDate?: string
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>Storage： 云存储</li><li>Function： 云函数</li><li>Database： 数据库</li></ul>
+   */
+  ResourceTypes?: Array<string>
+  /**
+   * <p>是否展示用量明细</p>
+   */
+  NeedUsageDetails?: boolean
 }
 
 /**
@@ -6344,6 +6542,20 @@ export interface FunctionTrigger {
 }
 
 /**
+ * CreatePlatformEnv返回参数结构体
+ */
+export interface CreatePlatformEnvResponse {
+  /**
+   * <p>环境id</p>
+   */
+  EnvId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * FlexDB数据库权限信息
  */
 export interface PermissionInfo {
@@ -6416,13 +6628,94 @@ export interface DeleteAuthDomainRequest {
 }
 
 /**
- * DeleteTable返回参数结构体
+ * CreateBillDeal请求参数结构体
  */
-export interface DeleteTableResponse {
+export interface CreateBillDealRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 当前下单的操作类型，可取[purchase,renew,modify]三种值，分别代表新购，续费，变配。
    */
-  RequestId?: string
+  DealType: string
+  /**
+   * 购买的产品类型，可取[tcb-baas,tcb-promotion,tcb-package], 分别代表baas套餐、大促包、资源包
+   */
+  ProductType: string
+  /**
+   * 目标下单产品/套餐Id。
+对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
+   */
+  PackageId: string
+  /**
+   * 默认只下单不支付，为ture则下单并支付。
+如果需要下单并支付，请确保账户下有足够的余额，否则会导致下单失败。
+   */
+  CreateAndPay?: boolean
+  /**
+   * 购买时长，与TimeUnit字段搭配使用。
+   */
+  TimeSpan?: number
+  /**
+   * 购买时长单位,按各产品规则可选d(天),m(月),y(年),p(一次性)。
+对于 云开发环境的 新购和续费，目前仅支持 按月购买（即 TimeUnit=m）。
+   */
+  TimeUnit?: string
+  /**
+   * 资源唯一标识。
+在云开发环境 续费和变配 场景下必传，取值为环境ID。
+   */
+  ResourceId?: string
+  /**
+   * 来源可选[qcloud,miniapp]，默认qcloud。
+miniapp表示微信云开发，主要适用于[小程序云开发](https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/billing/price.html)。
+
+   */
+  Source?: string
+  /**
+   * 环境别名，用于新购云开发环境时，给云开发环境起别名。
+仅当 新购云开发环境（DealType=purchase 并且 ProductType=tcb-baas ）时有效。
+
+### 格式要求
+- 可选字符： 小写字母(a~z)、数字、减号(-)
+- 不能以 减号(-) 开头或结尾
+- 不能有连个连续的 减号(-)
+- 长度不超过20位
+   */
+  Alias?: string
+  /**
+   * 环境id，当购买资源包和大促包时（ProductType取值为tcb-promotion 或 tcb-package）必传，表示资源包在哪个环境下生效。
+   */
+  EnvId?: string
+  /**
+   * 开启超限按量。
+开启后，当 套餐内的资源点 和 资源包 都用尽后，会自动按量计费。
+详见 [计费说明](https://cloud.tencent.com/document/product/876/127357)。
+   */
+  EnableExcess?: boolean
+  /**
+   * 变配目标套餐id，对于云开发环境变配场景下必传。
+对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
+   */
+  ModifyPackageId?: string
+  /**
+   * jsonstr附加信息
+   */
+  Extension?: string
+  /**
+   * 是否自动选择代金券支付。
+   */
+  AutoVoucher?: boolean
+  /**
+   * 资源类型。
+代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要发货哪些资源。
+可取值：flexdb, cos, cdn, scf
+
+   */
+  ResourceTypes?: Array<string>
+  /**
+   * 环境标签。
+ 代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要打的标签。
+
+   */
+  EnvTags?: Array<Tag>
 }
 
 /**
@@ -6640,17 +6933,9 @@ export interface DescribeCloudAppVersionRequest {
 }
 
 /**
- * DescribeTable返回参数结构体
+ * DestroyPlatformEnv返回参数结构体
  */
-export interface DescribeTableResponse {
-  /**
-   * 索引相关信息
-   */
-  Indexes?: Array<IndexInfo>
-  /**
-   * 索引个数
-   */
-  IndexNum?: number
+export interface DestroyPlatformEnvResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7096,6 +7381,24 @@ export interface BanConfig {
 }
 
 /**
+ * DescribeTable返回参数结构体
+ */
+export interface DescribeTableResponse {
+  /**
+   * 索引相关信息
+   */
+  Indexes?: Array<IndexInfo>
+  /**
+   * 索引个数
+   */
+  IndexNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RepairPGUserMigrationHistory请求参数结构体
  */
 export interface RepairPGUserMigrationHistoryRequest {
@@ -7307,6 +7610,24 @@ export interface ManagedAIModelSpec {
 }
 
 /**
+ * DescribePlatforms返回参数结构体
+ */
+export interface DescribePlatformsResponse {
+  /**
+   * <p>平台版资源列表</p>
+   */
+  PlatformList?: Array<PlatformInfo>
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 私有网络参数配置
  */
 export interface FunctionVpcConfig {
@@ -7427,7 +7748,7 @@ export interface HTTPServiceExtension {
    */
   HeadersHandler?: HTTPServiceHeadersHandler
   /**
-   * <p>HTTPService 缓存配置，包含Cache 节点缓存 / MaxAge 浏览器缓存 / CacheKey 自定义缓存键</p>
+   * <p>HTTPService 缓存配置，仅限自定义域名配置。包含Cache 节点缓存 / MaxAge 浏览器缓存 / CacheKey 自定义缓存键</p>
    */
   Cache?: HTTPServiceCacheSet
 }
@@ -7450,6 +7771,56 @@ export interface ModifyClientResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 平台版资源信息
+ */
+export interface PlatformInfo {
+  /**
+   * <p>平台版套餐id</p>
+   */
+  PlatformId?: string
+  /**
+   * <p>套餐别名</p>
+   */
+  Alias?: string
+  /**
+   * <p>套餐id</p>
+   */
+  PackageId?: string
+  /**
+   * <p>计费状态</p><p>枚举值：</p><ul><li>normal： 正常</li><li>isolated： 已隔离</li><li>destroyed： 已销毁</li></ul>
+   */
+  BillStatus?: string
+  /**
+   * <p>套餐资源状态</p><p>枚举值：</p><ul><li>0： 可用</li><li>5： 发货中</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>资源配置</p>
+   */
+  Spec?: string
+  /**
+   * <p>购买时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  BillTime?: string
+  /**
+   * <p>套餐过期时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>是否自动续费</p><p>枚举值：</p><ul><li>0： 未设置</li><li>1： 自动续费</li><li>2： 设置为到期不续费</li></ul>
+   */
+  IsAutoRenew?: number
+  /**
+   * <p>资源信息列表</p>
+   */
+  Resources?: Array<PlatFormResourceInfo>
+  /**
+   * <p>所属地域</p><p>枚举值：</p><ul><li>ap-shanghai： 上海</li><li>ap-singapore： 新加坡</li></ul>
+   */
+  Region?: string
 }
 
 /**
@@ -7738,17 +8109,21 @@ export interface Provider {
 }
 
 /**
- * ModifyEnvExtra请求参数结构体
+ * DescribePlatformCreditsUsage请求参数结构体
  */
-export interface ModifyEnvExtraRequest {
+export interface DescribePlatformCreditsUsageRequest {
   /**
-   * <p>环境ID</p>
+   * <p>开始日期</p><p>参数格式：2025-09-22</p>
    */
-  EnvId: string
+  StartDate: string
   /**
-   * <p>开启或关闭 <code>超限转按量</code>。<br>可取值： TRUE/FALSE （字符串类型）<br>非法制、不传、为空 则不变更该字段。</p>
+   * <p>结束日期</p><p>参数格式：2025-09-22</p>
    */
-  EnableOverrun?: string
+  EndDate: string
+  /**
+   * <p>平台版套餐id</p>
+   */
+  PlatformId: string
 }
 
 /**
@@ -7856,17 +8231,47 @@ export interface ReleaseEnvRequest {
 }
 
 /**
- * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+ * 固定 IP 配置
  */
-export interface Filter {
+export interface FunctionEipConfigFixed {
   /**
-   * <p>需要过滤的字段。过滤条件数量限制为10。</p>
+   * <p>是否固定 IP，TRUE / FALSE</p>
    */
-  Name?: string
+  EipFixed?: string
+}
+
+/**
+ * 平台版指标用量信息
+ */
+export interface PlatformMetricUsageItem {
   /**
-   * <p>字段的过滤值。</p>
+   * <p>指标名称</p>
    */
-  Values?: Array<string>
+  MetricName?: string
+  /**
+   * <p>原始资源类型</p><p>枚举值：</p><ul><li>COS： 对象存储</li></ul>
+   */
+  OriginalResourceType?: string
+  /**
+   * <p>原始指标</p>
+   */
+  OriginalMetricName?: string
+  /**
+   * <p>资源用量</p>
+   */
+  UsageValue?: number
+  /**
+   * <p>资源用量单位</p>
+   */
+  UsageUnit?: string
+  /**
+   * <p>资源点</p>
+   */
+  Credits?: number
+  /**
+   * <p>用量按日明细列表</p>
+   */
+  DailyUsageList?: Array<DailyUsageList>
 }
 
 /**
@@ -7969,6 +8374,16 @@ export interface DescribeHTTPServiceCachePurgeTaskResponse {
 }
 
 /**
+ * DestroyPlatformEnv请求参数结构体
+ */
+export interface DestroyPlatformEnvRequest {
+  /**
+   * <p>环境id</p>
+   */
+  EnvId: string
+}
+
+/**
  * DescribePGUserMigration请求参数结构体
  */
 export interface DescribePGUserMigrationRequest {
@@ -8009,6 +8424,24 @@ export interface ApiKeyToken {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateAt?: string
+}
+
+/**
+ * 平台版资源用量信息
+ */
+export interface PlatformResUsageItem {
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>Storage： 云存储</li><li>Function： 云函数</li></ul>
+   */
+  ResourceType?: string
+  /**
+   * <p>资源点</p>
+   */
+  TotalCredits?: number
+  /**
+   * <p>指标用量信息</p>
+   */
+  Metrics?: Array<PlatformMetricUsageItem>
 }
 
 /**
@@ -8078,6 +8511,11 @@ export interface ModifyPGInstanceSpecResponse {
 }
 
 /**
+ * DescribePlatformAccountCircle请求参数结构体
+ */
+export type DescribePlatformAccountCircleRequest = null
+
+/**
  * MongoDB连接器配置
  */
 export interface MongoConnector {
@@ -8100,7 +8538,7 @@ export interface HTTPServiceDomainParam {
    */
   Domain: string
   /**
-   * <p>绑定类型</p><p>枚举值：</p><ul><li>DIRECT： 直连到HTTP访问服务</li><li>CDN： 接入云开发CDN（即将下线）</li><li>CUSTOM： 自定义接入类型（CDN、EO、WAF等接入）</li><li>EO： 接入云开发EdgeOne</li></ul><p>默认值：DIRECT</p>
+   * <p>绑定类型</p><p>枚举值：</p><ul><li>DIRECT： 直连到HTTP访问服务</li><li>CDN： 接入云开发CDN（即将下线）</li><li>EO： 接入云开发EdgeOne</li><li>NONE： 不接入，当使用泛域名接入时，可通过NONE来接入子域名，子域名证书及协议继承泛域名</li></ul><p>默认值：DIRECT</p>
    */
   AccessType?: string
   /**
@@ -8246,6 +8684,32 @@ export interface DescribeAuthDomainsRequest {
 }
 
 /**
+ * 平台版本消耗数据
+ */
+export interface PlatformCreditsUsageDaily {
+  /**
+   * <p>数据日期</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  Date?: string
+  /**
+   * <p>资源点套餐内用量</p>
+   */
+  DeductValue?: number
+  /**
+   * <p>资源点资源包用量</p>
+   */
+  PackageDeductValue?: number
+  /**
+   * <p>资源点按量用量</p>
+   */
+  ReportValue?: number
+  /**
+   * <p>资源点原价消耗</p>
+   */
+  OriginCredits?: number
+}
+
+/**
  * 安全网关自定义配置
  */
 export interface WxGatewayCustomConfig {
@@ -8370,6 +8834,20 @@ export interface DescribeDatabaseACLResponse {
 <li> ADMINONLY：仅管理员可读写</li>
    */
   AclTag?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePlatformCreditsUsageDetail返回参数结构体
+ */
+export interface DescribePlatformCreditsUsageDetailResponse {
+  /**
+   * <p>用量数据</p>
+   */
+  Usages?: Array<PlatformPkgCreditsUsage>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -180,7 +180,7 @@ import {
   MediaSnapshotByTimeOffsetItem,
   ProductInstanceRecource,
   SceneAigcImageTaskOutputFileInfo,
-  ModifyMediaStorageClassResponse,
+  CreateAigcHunyuan3DTaskRequest,
   CreateAigcQuotaResponse,
   DescribeProcedureTemplatesRequest,
   AiReviewPornTaskInput,
@@ -207,6 +207,7 @@ import {
   DescribeAigcFaceInfoAsyncRequest,
   RefreshUrlCacheResponse,
   ConcatTask2017,
+  ProhibitedConfigureInfoForUpdate,
   DescribeAigcFaceInfoAsyncTask,
   DeleteAIRecognitionTemplateRequest,
   FileUploadTask,
@@ -489,6 +490,7 @@ import {
   RestoreMediaResponse,
   ImageUnderstandingItem,
   AigcHunyuan3DTaskOutputFileInfo,
+  UpdateVoiceRequest,
   CreateAigcAudioCloneOutput,
   ModifyEnhanceMediaTemplateResponse,
   KnowledgeAnalysisInfo,
@@ -887,7 +889,7 @@ import {
   CreateQualityInspectTemplateResponse,
   RebuildMediaTaskOutput,
   EnhanceMediaQualityOutputConfig,
-  UpdateVoiceRequest,
+  ModifyMediaStorageClassResponse,
   AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
   DescribeStorageDataRequest,
   DescribeTaskDetailResponse,
@@ -1083,7 +1085,7 @@ import {
   CommitUploadRequest,
   WatermarkCycleConfigForUpdate,
   SnapshotByTimeOffsetTask2017,
-  ProhibitedConfigureInfoForUpdate,
+  CreateAigcHunyuan3DTaskResponse,
   AigcHunyuan3DMultiViewImageInfo,
   MediaClassInfo,
   CreateAigcSubjectInput,
@@ -3720,6 +3722,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMediaInfosResponse) => void
   ): Promise<DescribeMediaInfosResponse> {
     return this.request("DescribeMediaInfos", req, cb)
+  }
+
+  /**
+   * 该接口用于创建 AIGC 混元 3D 任务。
+   */
+  async CreateAigcHunyuan3DTask(
+    req: CreateAigcHunyuan3DTaskRequest,
+    cb?: (error: string, rep: CreateAigcHunyuan3DTaskResponse) => void
+  ): Promise<CreateAigcHunyuan3DTaskResponse> {
+    return this.request("CreateAigcHunyuan3DTask", req, cb)
   }
 
   /**

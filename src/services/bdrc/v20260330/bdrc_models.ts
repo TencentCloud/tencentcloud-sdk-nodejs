@@ -229,17 +229,21 @@ export interface RunSecurityServiceEnabled {
  */
 export interface ModifyCopyPairAttributeRequest {
   /**
-   * 要修改属性的复制对id
+   * <p>要修改属性的复制对id</p>
    */
   CopyPairId: string
   /**
-   * 要修改的复制对类型，可选值：DISK、INSTANCE、CFS，默认 INSTANCE
+   * <p>要修改的复制对类型，可选值：DISK、INSTANCE、CFS，默认 INSTANCE</p>
    */
   CopyPairType?: string
   /**
-   * 修改复制对名称（长度最大支持 64 个字符）
+   * <p>修改复制对名称（长度最大支持 64 个字符）</p>
    */
   CopyPairName?: string
+  /**
+   * <p>容灾端实例类型（仅容灾端CVM未创建时可修改）</p>
+   */
+  InstanceType?: string
 }
 
 /**

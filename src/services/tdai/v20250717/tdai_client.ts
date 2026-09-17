@@ -75,9 +75,10 @@ import {
   DescribeMemoryPlusSpacesResponse,
   IsolateMemoryPlusSpaceRequest,
   ModifyAgentInstanceParametersRequest,
+  TerminateAgentInstanceRequest,
   ContinueAgentWorkResponse,
   DescribeServiceAccessKeyResponse,
-  StartAgentTaskResponse,
+  Attachments,
   DescribeAgentInstancesResponse,
   StartAgentTaskRequest,
   CreateChatCompletionRes,
@@ -96,7 +97,7 @@ import {
   AgentInstance,
   RemoveChatResponse,
   PauseAgentWorkResponse,
-  TerminateAgentInstanceRequest,
+  StartAgentTaskResponse,
   ResourceTag,
 } from "./tdai_models"
 

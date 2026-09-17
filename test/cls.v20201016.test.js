@@ -698,6 +698,16 @@ it("cls.v20201016.ModifyEsRecharge", async function () {
     }
 })
 
+it("cls.v20201016.ModifyCLSDeliverTask", async function () {
+    try {
+       const data = await client.ModifyCLSDeliverTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteDlcDeliver", async function () {
     try {
        const data = await client.DeleteDlcDeliver({})
@@ -1398,9 +1408,9 @@ it("cls.v20201016.DeleteDashboardSubscribe", async function () {
     }
 })
 
-it("cls.v20201016.DescribeResourceGraphEntityDependency", async function () {
+it("cls.v20201016.DeleteCLSDeliverTask", async function () {
     try {
-       const data = await client.DescribeResourceGraphEntityDependency({})
+       const data = await client.DeleteCLSDeliverTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1531,6 +1541,16 @@ it("cls.v20201016.DescribePartitions", async function () {
 it("cls.v20201016.CreateLogset", async function () {
     try {
        const data = await client.CreateLogset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyDataTransform", async function () {
+    try {
+       const data = await client.ModifyDataTransform({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2138,9 +2158,9 @@ it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
     }
 })
 
-it("cls.v20201016.ModifyDataTransform", async function () {
+it("cls.v20201016.DescribeResourceGraphEntityDependency", async function () {
     try {
-       const data = await client.ModifyDataTransform({})
+       const data = await client.DescribeResourceGraphEntityDependency({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2218,6 +2238,16 @@ it("cls.v20201016.DescribeNoticeContents", async function () {
     }
 })
 
+it("cls.v20201016.DescribeCLSDeliverTasks", async function () {
+    try {
+       const data = await client.DescribeCLSDeliverTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyMetricConfig", async function () {
     try {
        const data = await client.ModifyMetricConfig({})
@@ -2281,6 +2311,16 @@ it("cls.v20201016.CreateScheduledSql", async function () {
 it("cls.v20201016.ModifyRemoteWriteTask", async function () {
     try {
        const data = await client.ModifyRemoteWriteTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateCLSDeliverTask", async function () {
+    try {
+       const data = await client.CreateCLSDeliverTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

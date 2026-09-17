@@ -2228,6 +2228,16 @@ it("vod.v20180717.DescribeMediaInfos", async function () {
     }
 })
 
+it("vod.v20180717.CreateAigcHunyuan3DTask", async function () {
+    try {
+       const data = await client.CreateAigcHunyuan3DTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.RebuildMediaByTemplate", async function () {
     try {
        const data = await client.RebuildMediaByTemplate({})

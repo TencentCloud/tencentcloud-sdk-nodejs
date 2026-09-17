@@ -817,51 +817,51 @@ export interface DsgcBindingInfo {
  */
 export interface CreateTimerReportRequest {
   /**
-   * 任务名称 不变更为""
+   * <p>任务名称 不变更为&quot;&quot;</p>
    */
   TplName?: string
   /**
-   * 执行日期 重复周期为天：无意义周：星期几1-7月每月几号 1-31
+   * <p>执行日期 重复周期为天：无意义周：星期几1-7月每月几号 1-31</p>
    */
   CntTime?: number
   /**
-   * 重复周期
+   * <p>重复周期</p>
    */
   CntCycle?: number
   /**
-   * 发送目标
+   * <p>发送目标</p>
    */
   Receivers?: string
   /**
-   * 时间范围 1:24小时 7:近一周 30:近30天 90:近90天 180:近180天 不变更为0
+   * <p>时间范围 1:24小时 7:近一周 30:近30天 90:近90天 180:近180天 不变更为0</p>
    */
   CntDay?: number
   /**
-   * 执行时间 格式15:04 到分钟
+   * <p>执行时间 格式15:04 到分钟</p>
    */
   CntDate?: string
   /**
-   * 报告说明
+   * <p>报告说明</p>
    */
   Remark?: string
   /**
-   * 模版Id
+   * <p>模板Id</p>
    */
   TemplateId?: number
   /**
-   * 报表类型
+   * <p>报表类型</p>
    */
   ReportType?: number
   /**
-   * 关联的资产数组
+   * <p>关联的资产数组</p>
    */
   AssetsId?: Array<number | bigint>
   /**
-   * 报表通知 1关闭 2开启 不变更为0
+   * <p>报表通知 1关闭 2开启 不变更为0</p>
    */
   Notification?: number
   /**
-   * 任务起停 1:关闭 2:开启 单次报表默认为2
+   * <p>任务起停 1:关闭 2:开启 单次报表默认为2</p>
    */
   MissionStart?: number
 }
@@ -871,11 +871,11 @@ export interface CreateTimerReportRequest {
  */
 export interface DescribeReportListResponse {
   /**
-   * 总数目
+   * <p>总数目</p>
    */
   TotalCount?: number
   /**
-   * 数据列表
+   * <p>数据列表</p>
    */
   List?: Array<Reports>
   /**
@@ -894,47 +894,47 @@ export type DescribeDbauditInstanceTypeRequest = null
  */
 export interface DescribeReportListRequest {
   /**
-   * 限制数目
+   * <p>限制数目</p>
    */
   Limit?: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 报告名称
+   * <p>报告名称</p>
    */
   Name?: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: number
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: number
   /**
-   * 报告类型
+   * <p>报告类型</p>
    */
   ReportType?: number
   /**
-   * 报告状态
+   * <p>报告状态</p>
    */
   ReportStatus?: number
   /**
-   * 报表模版id
+   * <p>报表模板id</p>
    */
   TemplateId?: number
   /**
-   * 需要排序的字段
+   * <p>需要排序的字段</p>
    */
   Field?: string
   /**
-   * 排序顺序 asc desc
+   * <p>排序顺序 asc desc</p>
    */
   Sort?: string
   /**
-   * 时间范围 1:24小时 7:近一周 30:近30天 90:近90天 180:近180天 不变更为0
+   * <p>时间范围 1:24小时 7:近一周 30:近30天 90:近90天 180:近180天 不变更为0</p>
    */
   CntDay?: number
 }

@@ -1549,6 +1549,10 @@ export interface UpgradeDBInstanceEngineVersionResponse {
    */
   AsyncRequestId?: string
   /**
+   * <p>任务列表ID</p>
+   */
+  JobId?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7037,7 +7041,7 @@ export interface DescribeCpuExpandHistoryRequest {
  */
 export interface AdjustCdbProxyResponse {
   /**
-   * 异步任务ID
+   * <p>异步任务ID</p>
    */
   AsyncRequestId?: string
   /**
@@ -9124,32 +9128,29 @@ export interface IsolateDBInstanceResponse {
  */
 export interface AdjustCdbProxyRequest {
   /**
-   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/product/236/15872">DescribeDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。
+   * <p>代理组 ID。可通过 <a href="https://cloud.tencent.com/document/api/236/90585">DescribeCdbProxyInfo</a> 接口获取。</p>
    */
   ProxyGroupId: string
   /**
-   * 节点规格配置
-备注：数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。
-示例中参数说明：
-NodeCount：节点个数
-Region：节点地域
-Zone：节点可用区
-Cpu：单个代理节点核数（单位：核）
-Mem：单个代理节点内存数（单位：MB）
+   * <p>节点规格配置<br>备注：数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。<br>示例中参数说明：<br>NodeCount：节点个数<br>Region：节点地域<br>Zone：节点可用区<br>Cpu：单个代理节点核数（单位：核）<br>Mem：单个代理节点内存数（单位：MB）</p>
    */
   ProxyNodeCustom: Array<ProxyNodeCustom>
   /**
-   * 重新负载均衡：auto(自动),manual(手动)
+   * <p>重新负载均衡：auto(自动),manual(手动)</p>
    */
   ReloadBalance: string
   /**
-   * 升级切换时间：nowTime(升级完成时),timeWindow(维护时间内)
+   * <p>升级切换时间。</p><p>枚举值：</p><ul><li>nowTime： 升级完成时</li><li>timeWindow： 维护时间内</li><li>rollUpgrade： 滚动升级</li></ul>
    */
   UpgradeTime: string
+  /**
+   * <p>滚动升级或平滑变配等待时间</p><p>取值范围：[0, 3600]</p><p>单位：秒</p>
+   */
+  RollUpgradeWaitingTime?: number
 }
 
 /**
@@ -10635,7 +10636,7 @@ export interface RoGroupAttr {
  */
 export interface UpgradeCDBProxyVersionResponse {
   /**
-   * 异步处理ID
+   * <p>异步处理ID</p>
    */
   AsyncRequestId?: string
   /**
@@ -11294,25 +11295,29 @@ export interface UpgradeDBInstanceResponse {
  */
 export interface UpgradeCDBProxyVersionRequest {
   /**
-   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/product/236/15872">DescribeDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 数据库代理 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。
+   * <p>数据库代理 ID。可通过 <a href="https://cloud.tencent.com/document/api/236/90585">DescribeCdbProxyInfo</a> 接口获取。</p>
    */
   ProxyGroupId: string
   /**
-   * 数据库代理当前版本
+   * <p>数据库代理当前版本</p>
    */
   SrcProxyVersion: string
   /**
-   * 数据库代理升级版本
+   * <p>数据库代理升级版本</p>
    */
   DstProxyVersion: string
   /**
-   * 升级时间 ：nowTime（升级完成时）timeWindow（实例维护时间）
+   * <p>升级切换时间</p><p>枚举值：</p><ul><li>nowTime： 升级完成时</li><li>timeWindow： 实例维护时间</li><li>rollUpgrade： 滚动升级</li></ul>
    */
   UpgradeTime: string
+  /**
+   * <p>滚动升级等待时间</p><p>取值范围：[10, 3600]</p><p>单位：秒</p>
+   */
+  RollUpgradeWaitingTime?: number
 }
 
 /**

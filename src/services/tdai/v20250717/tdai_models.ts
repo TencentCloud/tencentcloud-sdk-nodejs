@@ -670,6 +670,10 @@ export interface CreateChatCompletionRequest {
    * <p>是否隐藏会话</p>
    */
   IsChatHidden?: boolean
+  /**
+   * <p>传递图片附件</p>
+   */
+  Attachments?: Array<Attachments>
 }
 
 /**
@@ -1242,6 +1246,16 @@ export interface ModifyAgentInstanceParametersRequest {
 }
 
 /**
+ * TerminateAgentInstance请求参数结构体
+ */
+export interface TerminateAgentInstanceRequest {
+  /**
+   * 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选
+   */
+  InstanceId: string
+}
+
+/**
  * ContinueAgentWork返回参数结构体
  */
 export interface ContinueAgentWorkResponse {
@@ -1266,17 +1280,17 @@ export interface DescribeServiceAccessKeyResponse {
 }
 
 /**
- * StartAgentTask返回参数结构体
+ * 聊天图片附件列表
  */
-export interface StartAgentTaskResponse {
+export interface Attachments {
   /**
-   * 任务ID
+   * <p>cos key</p>
    */
-  TaskId?: string
+  CosKey?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>图片类型</p>
    */
-  RequestId?: string
+  MimeType?: string
 }
 
 /**
@@ -1705,6 +1719,14 @@ export interface AgentInstance {
    * <p>商业化资源归属</p>
    */
   ProductName?: string
+  /**
+   * <p>具备能力</p>
+   */
+  Capabilities?: Array<string>
+  /**
+   * <p>是否是免部署实例</p>
+   */
+  DeploymentFree?: boolean
 }
 
 /**
@@ -1728,13 +1750,17 @@ export interface PauseAgentWorkResponse {
 }
 
 /**
- * TerminateAgentInstance请求参数结构体
+ * StartAgentTask返回参数结构体
  */
-export interface TerminateAgentInstanceRequest {
+export interface StartAgentTaskResponse {
   /**
-   * 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选
+   * 任务ID
    */
-  InstanceId: string
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

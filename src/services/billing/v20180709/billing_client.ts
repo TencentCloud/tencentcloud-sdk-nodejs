@@ -462,7 +462,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取代金券相关信息
+   * 获取近两年的代金券信息。
    */
   async DescribeVoucherInfo(
     req: DescribeVoucherInfoRequest,
@@ -588,7 +588,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取代金券使用记录
+   * 获取代金券近两年的使用记录。
    */
   async DescribeVoucherUsageDetails(
     req: DescribeVoucherUsageDetailsRequest,

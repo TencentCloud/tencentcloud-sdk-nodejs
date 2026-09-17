@@ -4114,10 +4114,12 @@ export interface CloneViralAIGC {
 export interface ViewImage {
   /**
    * <p>视角类型</p><p>枚举值：</p><ul><li>front： 正视图 （必填）</li><li>back： 背视图</li><li>left： 左视图</li><li>right： 右视图</li><li>top： 顶视图</li><li>bottom： 底视图</li><li>left_front： 左前 45°</li><li>right_front： 右前 45°</li></ul><p>MultiViewImages 数组长度 ≥ 2 ; 必须包含 front 视角;  同一 ViewType 不允许重复; 每项必须提供 ViewImageUrl</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ViewType: string
   /**
    * <p>图片 URL（http / https）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ViewImageUrl: string
 }
@@ -4463,7 +4465,7 @@ export interface AiAnalysisTaskReelInput {
  */
 export interface CreateImageConfig {
   /**
-   * <p>生图模型</p><p>枚举值：</p><ul><li>WAND-create-1.0-lite： 轻量生图模型</li><li>WAND-create-1.0-flash： 质量-速度平衡生图模型</li><li>WAND-create-1.0-pro： 高质量生图模型</li></ul>
+   * <p>生图模型</p><p>枚举值：</p><ul><li>scene-image-lite： 场景生图 lite 模型</li></ul>
    */
   Model: string
   /**
@@ -9911,7 +9913,7 @@ export interface CreateAigcAudioTaskRequest {
    */
   ModelName?: string
   /**
-   * <p>指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：3.0-clip、3.0-pro。模型MiniMaxMusic支持的版本号：2.0、2.5、2.6， 3.0。模型EL支持的版本号: compose_v2、sound_t2s_v2。模型Mureka支持的版本号: song_8、song_9、song_9.5、instrumental_8、instrumental_9、instrumental_9.5。</p>
+   * <p>指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。<br>模型GL支持的版本号：3.0-clip、3.0-pro。<br>模型MiniMaxMusic支持的版本号：2.0、2.5、2.6， 3.0。<br>模型EL支持的版本号: compose_v2、sound_t2s_v2。<br>模型Mureka支持的版本号: song_8、song_9、song_9.5、instrumental_8、instrumental_9、instrumental_9.5。</p>
    */
   ModelVersion?: string
   /**
@@ -9939,7 +9941,7 @@ export interface CreateAigcAudioTaskRequest {
    */
   ExtraParameters?: AigcAudioExtraParam
   /**
-   * <p>用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。<br>示例MinimaxMusic模型传入歌词时：<br>{"lyric":{"小马在快乐奔跑，花儿在开放"}}</p><ol><li>MiniMaxMusic生纯音乐参数使用示例: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;。<br>支持的透传参数有: lyrics，is_instrumental，aigc_watermark，sample_rate，bitrate。</li><li>EL生音乐支持透传的参数有:<br>PromptInfluence，WithTimestamps，CompositionPlan，ForceInstrumental等参数。</li></ol>
+   * <p>用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。<br>示例MinimaxMusic模型传入歌词时：<br>{"lyric":{"小马在快乐奔跑，花儿在开放"}}</p><ol><li>MiniMaxMusic生纯音乐参数使用示例: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;。<br>支持的透传参数有: lyrics，is_instrumental，aigc_watermark，sample_rate，bitrate。</li><li>EL生音乐支持透传的参数有:<br>PromptInfluence，WithTimestamps，CompositionPlan，ForceInstrumental等参数。</li><li>Mureka模型支持的透传参数有：<br>n: 指定输出音频文件数。<br>非instrumental版本支持：lyrics，gender，reference_id，melody_id。<br>instrumental版本支持：instrumental_id。</li></ol>
    */
   AdditionalParameters?: string
   /**
@@ -18723,13 +18725,13 @@ export interface DocToVideoInput {
    */
   Prompt: string
   /**
-   * <p>文档生成视频模型名称</p><p>默认值：Wand</p>
-   */
-  ModelName: string
-  /**
    * <p>文档生成视频模型版本号</p><p>枚举值：</p><ul><li>1.0： 1.0</li><li>1.0-lite： 1.0-lite</li></ul><p>默认值：1.0</p>
    */
-  ModelVersion: string
+  ModelVersion?: string
+  /**
+   * <p>文档生成视频模型名称</p><p>枚举值：</p><ul><li>WAND： WAND</li></ul><p>默认值：WAND</p>
+   */
+  ModelName?: string
   /**
    * <p>生成视频的宽高比。</p><p>枚举值：</p><ul><li>16:9： 16:9</li><li>9:16： 9:16</li><li>1:1： 1:1</li></ul><p>默认值：16:9</p>
    */
@@ -26209,6 +26211,14 @@ export interface DescribeVoicesRequest {
    * <p>场景</p>
    */
   Scenes?: Array<string>
+  /**
+   * <p>分页查询页码。从1开始，默认1</p>
+   */
+  PageNum?: number
+  /**
+   * <p>页大小。不填默认返回所有符合条件数据</p>
+   */
+  PageSize?: number
   /**
    * <p>扩展参数，json字符串</p><p>其他筛选条件voiceName String 音色名，模糊匹配labels Array of String 标签，匹配包含这些标签的音色</p>
    */

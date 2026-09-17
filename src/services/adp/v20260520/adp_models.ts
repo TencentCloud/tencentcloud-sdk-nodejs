@@ -175,17 +175,45 @@ export interface PluginStatistics {
 }
 
 /**
- * 意图达成信息
+ * 计费增值包用量信息
  */
-export interface IntentAchievementInfo {
+export interface AddOnPackageInfo {
   /**
-   * 描述
+   * <p>增值包总量</p>
    */
-  Description: string
+  AddOnTotal?: number
   /**
-   * 名称
+   * <p>增值包用量</p>
    */
-  Name: string
+  AddOnUsage?: number
+  /**
+   * <p>专属并发总数</p>
+   */
+  ExclusiveConcurrency?: number
+  /**
+   * <p>资源包状态</p><p>枚举值：</p><ul><li>1： 可使</li><li>2： 已用完</li><li>3： 已过期</li></ul>
+   */
+  ResourceStatus?: number
+  /**
+   * <p>专属并发状态</p><p>枚举值：</p><ul><li>1： 可使</li><li>3： 已过期</li></ul>
+   */
+  ConcurrencyStatus?: number
+  /**
+   * <p>专属tpm</p>
+   */
+  ExclusiveTpm?: number
+  /**
+   * <p>专属tpm状态</p><p>枚举值：</p><ul><li>1： 可使</li><li>3： 已过期</li></ul>
+   */
+  ExclusiveTpmStatus?: number
+  /**
+   * <p>专属计算单元</p>
+   */
+  ExclusiveComputeUnit?: number
+  /**
+   * <p>专属计算单元状态</p><p>枚举值：</p><ul><li>1： 可使</li><li>3： 已过期</li><li>4： 已销毁</li><li>5： 已隔离</li><li>6： 未生效</li><li>7： 暂不可用（套餐包过期时）</li></ul>
+   */
+  ExclusiveComputeUnitStatus?: number
 }
 
 /**
@@ -601,6 +629,16 @@ export interface CreateLabelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Telegram渠道配置
+ */
+export interface TelegramChannelConfig {
+  /**
+   * <p>Telegram Bot Token</p>
+   */
+  BotToken?: string
 }
 
 /**
@@ -1291,51 +1329,17 @@ export interface CreateChannelResponse {
 }
 
 /**
- * TimerScheduleConfig
+ * 意图达成信息
  */
-export interface TimerScheduleConfig {
+export interface IntentAchievementInfo {
   /**
-   * cron配置
+   * 描述
    */
-  Cron?: CronSchedule
+  Description: string
   /**
-   * 每日触发
+   * 名称
    */
-  Daily?: DailySchedule
-  /**
-   * 固定间隔
-   */
-  Interval?: IntervalSchedule
-  /**
-   * 仅手动
-   */
-  ManualOnly?: ManualOnlySchedule
-  /**
-   * 单次
-   */
-  Once?: OnceSchedule
-  /**
-   * 
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 |  |
-| 1 | 仅手动 |
-| 2 | 每天 |
-| 3 | 每周 |
-| 4 | 按间隔 |
-| 5 | 一次性 |
-| 6 | Cron |
-   */
-  ScheduleType?: number
-  /**
-   * 时区
-   */
-  Timezone?: string
-  /**
-   * 每周固定时间触发
-   */
-  Weekly?: WeeklySchedule
+  Name: string
 }
 
 /**
@@ -2473,16 +2477,16 @@ export interface Model {
  */
 export interface LabelTermCheckResult {
   /**
-   * <p>校验结果</p>
+   * 校验结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckResult?: CheckResult
   /**
-   * <p>待校验的标准词</p>
+   * 待校验的标准词
    */
   Term?: string
   /**
-   * <p>已存在时返回对应标准词 ID</p>
+   * 已存在时返回对应标准词 ID
    */
   TermId?: string
 }
@@ -3543,13 +3547,21 @@ export interface UserAccessConfig {
 }
 
 /**
- * Telegram渠道配置
+ * 知识库模型配置
  */
-export interface TelegramChannelConfig {
+export interface KBModelConfig {
   /**
-   * <p>Telegram Bot Token</p>
+   * <p>Embedding 模型</p>
    */
-  BotToken?: string
+  EmbeddingModel?: string
+  /**
+   * <p>QA 抽取模型</p>
+   */
+  QaExtractModel?: string
+  /**
+   * <p>Schema 生成模型</p>
+   */
+  SchemaModel?: string
 }
 
 /**
@@ -3681,11 +3693,11 @@ export interface QASourceInfo {
  */
 export interface CheckResult {
   /**
-   * <p>是否通过校验</p>
+   * 是否通过校验
    */
   Passed?: boolean
   /**
-   * <p>失败原因（passed=false 时填充）</p>
+   * 失败原因（passed=false 时填充）
    */
   Reason?: string
 }
@@ -4041,20 +4053,6 @@ export interface ResponseParam {
    * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
    */
   Type?: number
-}
-
-/**
- * ModifyQAList返回参数结构体
- */
-export interface ModifyQAListResponse {
-  /**
-   * <p>批量修改结果</p>
-   */
-  ResultList?: Array<OperationResult>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6431,6 +6429,28 @@ export interface ExpirationAwareness {
 }
 
 /**
+ * 企微机器人回调接入配置
+ */
+export interface WecomRobotCallbackAccess {
+  /**
+   * <p>回调配置</p>
+   */
+  Callback?: CallbackConfig
+  /**
+   * <p>机器人名称</p>
+   */
+  RobotName?: string
+  /**
+   * <p>企微企业ID</p>
+   */
+  WecomCorpId?: string
+  /**
+   * <p>企微机器人ID</p>
+   */
+  WecomRobotId?: string
+}
+
+/**
  * FavoriteSkill请求参数结构体
  */
 export interface FavoriteSkillRequest {
@@ -7145,7 +7165,7 @@ export interface AppSubStatusInfo {
  */
 export interface ViewScope {
   /**
-   * <p>视图类型；枚举值：VIEW_TYPE_CORP(1) 企业视图、VIEW_TYPE_SPACE(2) 空间视图、VIEW_TYPE_APP(3) 应用视图</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>VIEW_TYPE_UNSPECIFIED</td><td>0</td><td>未指定（无效值，请求勿传）</td></tr><tr><td>VIEW_TYPE_CORP</td><td>1</td><td>企业视图</td></tr><tr><td>VIEW_TYPE_SPACE</td><td>2</td><td>空间视图</td></tr><tr><td>VIEW_TYPE_APP</td><td>3</td><td>应用视图</td></tr></tbody></table>
+   * <p>视图类型；枚举值：VIEW_TYPE_CORP(1) 企业视图、VIEW_TYPE_SPACE(2) 空间视图、VIEW_TYPE_APP(3) 应用视图</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>VIEW_TYPE_UNSPECIFIED</td><td>0</td><td>未指定（无效值，请求勿传）</td></tr><tr><td>VIEW_TYPE_CORP</td><td>1</td><td>企业视图</td></tr><tr><td>VIEW_TYPE_SPACE</td><td>2</td><td>空间视图</td></tr><tr><td>VIEW_TYPE_APP</td><td>3</td><td>应用视图</td></tr></table>
    */
   ViewType: number
   /**
@@ -7193,21 +7213,25 @@ export interface CreateConversationRequest {
 }
 
 /**
- * CreateSkill返回参数结构体
+ * 调用方执行的 Function Tool 配置
  */
-export interface CreateSkillResponse {
+export interface AgentExternalToolConfig {
   /**
-   * <p>创建成功后的skillID</p>
+   * <p>工具类型</p><p>入参限制：目前仅支持 &quot;function&quot;</p>
    */
-  SkillId?: string
+  Type?: string
   /**
-   * <p>创建成功后的版本ID</p>
+   * <p>工具名称</p>
    */
-  VersionId?: string
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>工具描述</p>
    */
-  RequestId?: string
+  Description?: string
+  /**
+   * <p>工具入参定义</p>
+   */
+  Parameters?: Array<RequestParam>
 }
 
 /**
@@ -7793,56 +7817,60 @@ export interface WeeklySchedule {
  */
 export interface ModelParams {
   /**
-   * 是否开启深度思考
+   * <p>是否开启深度思考</p>
    */
   DeepThinking?: string
   /**
-   * 频率惩罚
+   * <p>频率惩罚</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrequencyPenalty?: number
   /**
-   * 最大输出长度
+   * <p>最大输出长度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxTokens?: number
   /**
-   * 存在惩罚
+   * <p>存在惩罚</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PresencePenalty?: number
   /**
-   * 深度思考效果
+   * <p>深度思考效果</p>
    */
   ReasoningEffort?: string
   /**
-   * 重复惩罚
+   * <p>重复惩罚</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RepetitionPenalty?: number
   /**
-   * 输出格式（text、json_object）
+   * <p>输出格式（text、json_object）</p>
    */
   ReplyFormat?: string
   /**
-   * seed 随机种子
+   * <p>seed 随机种子</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Seed?: number
   /**
-   * 停止序列
+   * <p>停止序列</p>
    */
   StopSequenceList?: Array<string>
   /**
-   * 温度
+   * <p>温度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Temperature?: number
   /**
-   * top_p
+   * <p>top_p</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopP?: number
+  /**
+   * <p>top_k</p>
+   */
+  TopK?: number
 }
 
 /**
@@ -7956,19 +7984,19 @@ export interface CreateChannelRequest {
  */
 export interface Identity {
   /**
-   * <p>描述</p>
+   * 描述
    */
   Description?: string
   /**
-   * <p>数字 ID</p>
+   * 数字 ID
    */
   Id?: string
   /**
-   * <p>名称</p>
+   * 名称
    */
   Name?: string
   /**
-   * <p>字符串 ID</p>
+   * 字符串 ID
    */
   StrId?: string
 }
@@ -9089,25 +9117,21 @@ export interface AgentToolInputParameter {
 }
 
 /**
- * 企微机器人回调接入配置
+ * 知识库操作权限信息
  */
-export interface WecomRobotCallbackAccess {
+export interface KBPermission {
   /**
-   * <p>回调配置</p>
+   * <p>是否可删除</p>
    */
-  Callback?: CallbackConfig
+  CanDelete?: boolean
   /**
-   * <p>机器人名称</p>
+   * <p>是否可编辑</p>
    */
-  RobotName?: string
+  CanEdit?: boolean
   /**
-   * <p>企微企业ID</p>
+   * <p>是否可查看</p>
    */
-  WecomCorpId?: string
-  /**
-   * <p>企微机器人ID</p>
-   */
-  WecomRobotId?: string
+  CanView?: boolean
 }
 
 /**
@@ -9536,6 +9560,36 @@ export interface DescribeConsumptionDetailListRequest {
 }
 
 /**
+ * 计费套餐包用量信息
+ */
+export interface ResourcePackageInfo {
+  /**
+   * <p>套餐类型</p><p>枚举值：</p><ul><li>1： 免费版</li><li>2： 专业版</li><li>3： 企业版</li></ul>
+   */
+  PackageType?: number
+  /**
+   * <p>资源包总量</p>
+   */
+  ResourceTotal?: number
+  /**
+   * <p>资源包用量</p>
+   */
+  ResourceUsage?: number
+  /**
+   * <p>知识库容量</p>
+   */
+  KnowledgeCapacity?: number
+  /**
+   * <p>知识库用量</p>
+   */
+  KnowledgeUsage?: number
+  /**
+   * <p>资源包状态</p><p>枚举值：</p><ul><li>1： 正常</li><li>3： 已到期</li><li>4： 即将到期</li></ul>
+   */
+  ResourceStatus?: number
+}
+
+/**
  * DescribeVariableList请求参数结构体
  */
 export interface DescribeVariableListRequest {
@@ -9574,11 +9628,11 @@ export interface DescribeVariableListRequest {
  */
 export interface Operator {
   /**
-   * <p>用户 ID</p>
+   * 用户 ID
    */
   UserId?: string
   /**
-   * <p>用户姓名</p>
+   * 用户姓名
    */
   UserName?: string
 }
@@ -10366,6 +10420,54 @@ export interface ResetConversationRequest {
 }
 
 /**
+ * TimerScheduleConfig
+ */
+export interface TimerScheduleConfig {
+  /**
+   * cron配置
+   */
+  Cron?: CronSchedule
+  /**
+   * 每日触发
+   */
+  Daily?: DailySchedule
+  /**
+   * 固定间隔
+   */
+  Interval?: IntervalSchedule
+  /**
+   * 仅手动
+   */
+  ManualOnly?: ManualOnlySchedule
+  /**
+   * 单次
+   */
+  Once?: OnceSchedule
+  /**
+   * 
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 |  |
+| 1 | 仅手动 |
+| 2 | 每天 |
+| 3 | 每周 |
+| 4 | 按间隔 |
+| 5 | 一次性 |
+| 6 | Cron |
+   */
+  ScheduleType?: number
+  /**
+   * 时区
+   */
+  Timezone?: string
+  /**
+   * 每周固定时间触发
+   */
+  Weekly?: WeeklySchedule
+}
+
+/**
  * OAuth2.0授权信息
  */
 export interface OAuthConfig {
@@ -10454,6 +10556,11 @@ export interface DescribeAppRequest {
 }
 
 /**
+ * DescribeResourceSummary请求参数结构体
+ */
+export type DescribeResourceSummaryRequest = null
+
+/**
  * IntervalSchedule
  */
 export interface IntervalSchedule {
@@ -10530,25 +10637,17 @@ export interface CopyAgentFromAppResponse {
 }
 
 /**
- * 调用方执行的 Function Tool 配置
+ * ModifyQAList返回参数结构体
  */
-export interface AgentExternalToolConfig {
+export interface ModifyQAListResponse {
   /**
-   * <p>工具类型</p><p>入参限制：目前仅支持 &quot;function&quot;</p>
+   * <p>批量修改结果</p>
    */
-  Type?: string
+  ResultList?: Array<OperationResult>
   /**
-   * <p>工具名称</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * <p>工具描述</p>
-   */
-  Description?: string
-  /**
-   * <p>工具入参定义</p>
-   */
-  Parameters?: Array<RequestParam>
+  RequestId?: string
 }
 
 /**
@@ -10742,6 +10841,24 @@ export interface Filter {
 }
 
 /**
+ * DescribeResourceSummary返回参数结构体
+ */
+export interface DescribeResourceSummaryResponse {
+  /**
+   * <p>计费套餐包用量信息</p>
+   */
+  ResourcePackage?: ResourcePackageInfo
+  /**
+   * <p>计费增值包用量信息</p>
+   */
+  AddOnPackage?: AddOnPackageInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 工具信息
  */
 export interface ToolSummary {
@@ -10834,21 +10951,21 @@ export interface AppTriggerParamBindingConfig {
 }
 
 /**
- * 知识库模型配置
+ * CreateSkill返回参数结构体
  */
-export interface KBModelConfig {
+export interface CreateSkillResponse {
   /**
-   * <p>Embedding 模型</p>
+   * <p>创建成功后的skillID</p>
    */
-  EmbeddingModel?: string
+  SkillId?: string
   /**
-   * <p>QA 抽取模型</p>
+   * <p>创建成功后的版本ID</p>
    */
-  QaExtractModel?: string
+  VersionId?: string
   /**
-   * <p>Schema 生成模型</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SchemaModel?: string
+  RequestId?: string
 }
 
 /**
@@ -11641,6 +11758,11 @@ export interface KBSummary {
    * <p>知识库名称</p>
    */
   Name?: string
+  /**
+   * <p>操作权限</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permission?: KBPermission
   /**
    * <p>处理中状态列表</p>
    */

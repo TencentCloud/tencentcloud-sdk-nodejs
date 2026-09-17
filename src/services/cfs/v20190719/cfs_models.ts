@@ -392,11 +392,11 @@ export interface FileSystemClient {
  */
 export interface DescribeCfsFileSystemsResponse {
   /**
-   * 文件系统信息
+   * <p>文件系统信息</p>
    */
   FileSystems?: Array<FileSystemInfo>
   /**
-   * 文件系统总数
+   * <p>文件系统总数</p>
    */
   TotalCount?: number
   /**
@@ -2198,6 +2198,18 @@ export interface FileSystemInfo {
    * <p>业务场景。</p><p>枚举值：</p><ul><li>AgentSandbox： 创建 AgentCFS</li></ul>
    */
   Scenario?: string
+  /**
+   * <p>过满删除容量占比，0.0 表示关闭</p><p>取值范围：[0.0, 1.0]</p>
+   */
+  FullDeleteCapacityUsage?: number
+  /**
+   * <p>过满删除最小存活时间，单位秒</p><p>单位：秒</p>
+   */
+  FullDeleteMinTtl?: number
+  /**
+   * <p>过期删除 TTL，单位秒，0 表示关闭</p><p>单位：秒</p>
+   */
+  ExpireDeleteTtl?: number
 }
 
 /**
@@ -2468,29 +2480,37 @@ export interface DescribeCfsSnapshotsResponse {
  */
 export interface DescribeCfsFileSystemsRequest {
   /**
-   * 文件系统 ID
+   * <p>文件系统 ID</p>
    */
   FileSystemId?: string
   /**
-   * 私有网络（VPC） ID
+   * <p>私有网络（VPC） ID</p>
    */
   VpcId?: string
   /**
-   * 子网 ID
+   * <p>子网 ID</p>
    */
   SubnetId?: string
   /**
-   * Offset 分页码,默认0
+   * <p>Offset 分页码,默认0</p>
    */
   Offset?: number
   /**
-   * Limit 页面大小，默认10
+   * <p>Limit 页面大小，默认10</p>
    */
   Limit?: number
   /**
-   * 用户自定义名称
+   * <p>用户自定义名称</p>
    */
   CreationToken?: string
+  /**
+   * <p>过滤条件。<br><br><li>Protocol - Array of String - 是否必填：否 -（过滤条件）按协议过滤。(NFS | CIFS | TURBO) </li><br><br><li>StorageType - Array of String - 是否必填：否 -（过滤条件）按存储类型过滤。(SD | HP | TB | TP | THP) </li><br><br><li>LifeCycleState - Array of String - 是否必填：否 -（过滤条件）按生命周期过滤。(creating | create_failed | available | deleting | delete_failed | upgrading | unserviced | expanding) </li><br><br><li>Zone - Array of String - 是否必填：否 -（过滤条件）按可用区过滤。(例如：ap-guangzhou-3) </li><br><br><li>IpAddress - Array of String - 是否必填：否 -（过滤条件）按导出点IP地址过滤。(例如：10.0.0.3) </li><br><br><li>PGroupId - Array of String - 是否必填：否 -（过滤条件）按权限组ID过滤。(例如：pgroup-xxxxxrxt) </li><br><br><li>PGroupName - Array of String - 是否必填：否 -（过滤条件）按权限组名称过滤。(例如：默认权限组) </li><br><br><li>Scenario- Array of String - 是否必填：否 -（过滤条件）按权限组名称过滤。(例如：AgentSandbox) </li></p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**

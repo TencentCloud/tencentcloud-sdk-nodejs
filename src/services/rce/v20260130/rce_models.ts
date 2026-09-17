@@ -117,6 +117,24 @@ export interface Decision {
 }
 
 /**
+ * 接收者信息
+ */
+export interface Receiver {
+  /**
+   * <p>接收者账号ID</p>
+   */
+  UserId?: string
+  /**
+   * <p>接收者账号信息</p>
+   */
+  UserInfo?: User
+  /**
+   * <p>接收者角色信息</p>
+   */
+  RoleInfo?: Role
+}
+
+/**
  * 个人信息
  */
 export interface Person {
@@ -257,6 +275,32 @@ export interface PromotionCode {
 }
 
 /**
+ * 编辑公会资料事件详情
+ */
+export interface ModifyGuildEvent {
+  /**
+   * <p>修改后的公会名，允许空串</p>
+   */
+  GuildNameAfter: string
+  /**
+   * <p>修改后的公会签名，允许空串</p>
+   */
+  GuildSignatureAfter: string
+  /**
+   * <p>所属服务器ID，允许空串</p>
+   */
+  ServerId: string
+  /**
+   * <p>编辑者账号信息</p>
+   */
+  UserInfo?: User
+  /**
+   * <p>公会信息</p>
+   */
+  Guild?: Guild
+}
+
+/**
  * 拒付事件详情
  */
 export interface ChargeBackEvent {
@@ -291,11 +335,49 @@ export interface ChargeBackEvent {
 }
 
 /**
+ * IP地理位置信息
+ */
+export interface IPLocation {
+  /**
+   * <p>IP地址所属国家</p>
+   */
+  Country?: string
+  /**
+   * <p>IP地址所属省份</p>
+   */
+  Region?: string
+  /**
+   * <p>IP地址所属城市</p>
+   */
+  City?: string
+  /**
+   * <p>IP地址所属地区</p>
+   */
+  District?: string
+  /**
+   * <p>IP地址的经度</p>
+   */
+  Longitude?: string
+  /**
+   * <p>IP地址的纬度</p>
+   */
+  Latitude?: string
+  /**
+   * <p>IP地址所属时区</p>
+   */
+  Timezone?: string
+  /**
+   * <p>IP地址的邮政编码</p>
+   */
+  ZipCode?: string
+}
+
+/**
  * ReportEvent请求参数结构体
  */
 export interface ReportEventRequest {
   /**
-   * <p>事件码。用于指定业务接入的场景节点。</p><p> 账号保护产品下的标准事件包含：</p><ul><li> login： 登录<p></p></li> <li>register： 注册 </li><li>sms： 短信 </li><li>logout： 登出 </li><li>modify_account： 修改账号 </li><li>modify_password： 修改密码 </li><li>security_verification： 安全验证</li></ul><p>交易保护产品下的标准事件包含：</p><ul><li>create_order： 创建订单 </li><li>transaction： 交易支付 </li><li>charge_back： 拒付</li></ul><p>营销保护产品下的标准事件包含：</p><ul><li>add_promotion： 参加营销活动 </li><li>redeem： 兑奖 </li><li>withdraw： 提现 </li><li>cust_event： 自定义事件，cust_xxx </li><li>scan_code： 扫码 </li><li>lucky_draw： 抽奖 </li><li>task： 做任务 </li><li>invitation： 邀请 </li><li>claim_red_packet： 领红包 </li><li>browse： 浏览</li></ul><p>自定义事件可与RCE约定后进行风险评估</p>
+   * <p>事件码。用于指定业务接入的场景节点。</p><p>账号保护产品下的标准事件包含：</p><ul><li>login： 登录</li><li>register： 注册（创建账户）</li><li>sms： 短信</li><li>logout： 登出</li><li>modify_account： 修改账号</li><li>modify_password： 修改密码</li><li>security_verification： 安全验证</li></ul><p>交易保护产品下的标准事件包含：</p><ul><li>create_order： 创建订单</li><li>transaction： 交易支付</li><li>charge_back： 拒付</li></ul><p>营销保护产品下的标准事件包含：</p><ul><li>add_promotion： 参与营销活动</li><li>redeem： 兑奖</li><li>withdraw： 提现</li><li>scan_code： 扫码</li><li>task： 做任务</li><li>claim_red_packet： 领红包</li><li>lucky_draw： 抽奖</li><li>invitation： 邀请</li><li>browse： 浏览</li></ul><p>社群保护产品下的标准事件包含：</p><ul><li>chat： 聊天消息</li><li>modify_role： 编辑角色资料</li><li>add_friend： 添加好友</li><li>modify_guild： 编辑公会资料</li></ul><p>自定义事件以 cust_ 为前缀，可与 RCE 约定后进行风险评估。</p>
    */
   EventCode: string
   /**
@@ -358,36 +440,108 @@ export interface ReportEventRequest {
    * <p>QQ应用ID，当传入QQ开放账号时，该字段必填，QQ分配给网站或应用的AppId，用来唯一标识网站或应用</p>
    */
   QQAppId?: string
+  /**
+   * <p>业务序列号，您系统中一次业务动作的流水号</p>
+   */
+  BusinessId?: string
 }
 
 /**
- * 提现事件详情
+ * 注册事件详情
  */
-export interface WithdrawEvent {
+export interface RegisterEvent {
   /**
-   * <p>提现金额</p>
+   * <p>注册结果</p>
    */
-  Amount: Amount
+  RegisterResult?: Result
   /**
-   * <p>提现方式</p><p>枚举值：</p><ul><li>card： 银行卡</li><li>wallet： 电子钱包</li></ul>
+   * <p>用户基础信息</p>
    */
-  Method: string
+  UserInfo?: User
   /**
-   * <p>提现银行卡，当提现方式是card时必填</p>
+   * <p>用户注册时填写的个人信息</p>
    */
-  Card?: Card
+  Person?: Person
   /**
-   * <p>提现数字钱包，当提现方式是wallet时必填</p>
+   * <p>用户注册时填写的账单地址</p>
    */
-  Wallet?: Wallet
+  BillingAddress?: Address
   /**
-   * <p>提现结果</p>
+   * <p>用户注册时填写的收货地址</p>
    */
-  Result?: Result
+  DeliveryAddress?: Address
+  /**
+   * <p>邀请人信息</p>
+   */
+  Inviter?: Inviter
   /**
    * <p>与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
    */
   Cust?: Array<Cust>
+}
+
+/**
+ * 浏览事件详情
+ */
+export interface BrowseEvent {
+  /**
+   * <p>当前浏览网页的类型，例如主页、搜索页等</p>
+   */
+  PageType?: string
+  /**
+   * <p>当前浏览的网页URL</p>
+   */
+  PageUrl?: string
+  /**
+   * <p>浏览耗时</p><p>单位：毫秒</p>
+   */
+  Duration?: number
+  /**
+   * <p>网页内容类型，例如广告、视频、文章等</p>
+   */
+  ContentType?: string
+  /**
+   * <p>网页内容ID</p>
+   */
+  ContentId?: string
+  /**
+   * <p>上一个网页的类型，例如主页、搜索页等</p>
+   */
+  ReferPageType?: string
+  /**
+   * <p>上一个网页URL</p>
+   */
+  ReferPageUrl?: string
+  /**
+   * <p>游客账号ID</p>
+   */
+  GuestId?: string
+  /**
+   * <p>与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
+   */
+  Cust?: Array<Cust>
+}
+
+/**
+ * 聊天消息事件详情
+ */
+export interface ChatEvent {
+  /**
+   * <p>聊天信息</p>
+   */
+  ChatInfo: Chat
+  /**
+   * <p>所属服务器ID，允许空串</p>
+   */
+  ServerId: string
+  /**
+   * <p>发送者信息</p>
+   */
+  Sender?: Sender
+  /**
+   * <p>接收者信息</p>
+   */
+  Receiver?: Receiver
 }
 
 /**
@@ -659,6 +813,10 @@ export interface User {
    * <p>用户类型</p>
    */
   UserType?: string
+  /**
+   * <p>是否付费账号</p>
+   */
+  IsPaid?: boolean
 }
 
 /**
@@ -912,41 +1070,43 @@ export interface CustEvent {
 }
 
 /**
- * IP地理位置信息
+ * 公会信息
  */
-export interface IPLocation {
+export interface Guild {
   /**
-   * <p>IP地址所属国家</p>
+   * <p>公会唯一ID</p>
    */
-  Country?: string
+  GuildId: string
   /**
-   * <p>IP地址所属省份</p>
+   * <p>公会名称，允许空串</p>
    */
-  Region?: string
+  GuildName: string
   /**
-   * <p>IP地址所属城市</p>
+   * <p>公会签名，允许空串</p>
    */
-  City?: string
+  GuildSignature: string
   /**
-   * <p>IP地址所属地区</p>
+   * <p>公会会长账号ID</p>
    */
-  District?: string
+  PresidentUserId?: string
   /**
-   * <p>IP地址的经度</p>
+   * <p>公会会长角色ID</p>
    */
-  Longitude?: string
+  PresidentRoleId?: string
+}
+
+/**
+ * 发送者信息
+ */
+export interface Sender {
   /**
-   * <p>IP地址的纬度</p>
+   * <p>发送者账号信息</p>
    */
-  Latitude?: string
+  UserInfo?: User
   /**
-   * <p>IP地址所属时区</p>
+   * <p>发送者角色信息</p>
    */
-  Timezone?: string
-  /**
-   * <p>IP地址的邮政编码</p>
-   */
-  ZipCode?: string
+  RoleInfo?: Role
 }
 
 /**
@@ -969,45 +1129,21 @@ export interface DataScore {
 }
 
 /**
- * 浏览事件详情
+ * 添加好友事件详情
  */
-export interface BrowseEvent {
+export interface AddFriendEvent {
   /**
-   * <p>当前浏览网页的类型，例如主页、搜索页等</p>
+   * <p>所属服务器ID，允许空串</p>
    */
-  PageType?: string
+  ServerId: string
   /**
-   * <p>当前浏览的网页URL</p>
+   * <p>发送者信息</p>
    */
-  PageUrl?: string
+  Sender?: Sender
   /**
-   * <p>浏览耗时</p><p>单位：毫秒</p>
+   * <p>接收者信息</p>
    */
-  Duration?: number
-  /**
-   * <p>网页内容类型，例如广告、视频、文章等</p>
-   */
-  ContentType?: string
-  /**
-   * <p>网页内容ID</p>
-   */
-  ContentId?: string
-  /**
-   * <p>上一个网页的类型，例如主页、搜索页等</p>
-   */
-  ReferPageType?: string
-  /**
-   * <p>上一个网页URL</p>
-   */
-  ReferPageUrl?: string
-  /**
-   * <p>游客账号ID</p>
-   */
-  GuestId?: string
-  /**
-   * <p>与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
-   */
-  Cust?: Array<Cust>
+  Receiver?: Receiver
 }
 
 /**
@@ -1517,37 +1653,29 @@ export interface Coupon {
 }
 
 /**
- * 注册事件详情
+ * 编辑角色资料事件详情
  */
-export interface RegisterEvent {
+export interface ModifyRoleEvent {
   /**
-   * <p>注册结果</p>
+   * <p>修改后的角色名，允许空串</p>
    */
-  RegisterResult?: Result
+  RoleNameAfter: string
   /**
-   * <p>用户基础信息</p>
+   * <p>修改后的签名档，允许空串</p>
+   */
+  RoleSignatureAfter: string
+  /**
+   * <p>所属服务器ID，允许空串</p>
+   */
+  ServerId: string
+  /**
+   * <p>编辑者账号信息</p>
    */
   UserInfo?: User
   /**
-   * <p>用户注册时填写的个人信息</p>
+   * <p>角色信息</p>
    */
-  Person?: Person
-  /**
-   * <p>用户注册时填写的账单地址</p>
-   */
-  BillingAddress?: Address
-  /**
-   * <p>用户注册时填写的收货地址</p>
-   */
-  DeliveryAddress?: Address
-  /**
-   * <p>邀请人信息</p>
-   */
-  Inviter?: Inviter
-  /**
-   * <p>与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
-   */
-  Cust?: Array<Cust>
+  RoleInfo?: Role
 }
 
 /**
@@ -1612,6 +1740,36 @@ export interface LoginEvent {
    * <p>是否付费用户。</p><p>枚举值：</p><ul><li>true： 付费用户</li><li>false： 非付费用户</li></ul>
    */
   IsPaidUser?: boolean
+  /**
+   * <p>与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
+   */
+  Cust?: Array<Cust>
+}
+
+/**
+ * 提现事件详情
+ */
+export interface WithdrawEvent {
+  /**
+   * <p>提现金额</p>
+   */
+  Amount: Amount
+  /**
+   * <p>提现方式</p><p>枚举值：</p><ul><li>card： 银行卡</li><li>wallet： 电子钱包</li></ul>
+   */
+  Method: string
+  /**
+   * <p>提现银行卡，当提现方式是card时必填</p>
+   */
+  Card?: Card
+  /**
+   * <p>提现数字钱包，当提现方式是wallet时必填</p>
+   */
+  Wallet?: Wallet
+  /**
+   * <p>提现结果</p>
+   */
+  Result?: Result
   /**
    * <p>与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
    */
@@ -1702,6 +1860,22 @@ export interface EventDetail {
    * <p>浏览</p>
    */
   Browse?: BrowseEvent
+  /**
+   * <p>聊天消息</p>
+   */
+  Chat?: ChatEvent
+  /**
+   * <p>编辑角色资料</p>
+   */
+  ModifyRole?: ModifyRoleEvent
+  /**
+   * <p>添加好友</p>
+   */
+  AddFriend?: AddFriendEvent
+  /**
+   * <p>编辑公会资料</p>
+   */
+  ModifyGuild?: ModifyGuildEvent
 }
 
 /**
@@ -1828,6 +2002,32 @@ export interface AssessDeviceRiskPremiumRsp {
 }
 
 /**
+ * 聊天信息
+ */
+export interface Chat {
+  /**
+   * <p>聊天文本内容，不含HTML、不含昵称，限2000字符</p>
+   */
+  ChatText: string
+  /**
+   * <p>频道类型，枚举值：world-世界 / guild-公会 / single-单聊 / other-其他</p>
+   */
+  ChannelType: string
+  /**
+   * <p>群/频道唯一ID（单聊时为空）</p>
+   */
+  GroupId?: string
+  /**
+   * <p>群/频道名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>群主/管理员ID</p>
+   */
+  GroupAdministrator?: string
+}
+
+/**
  * 兑奖事件详情
  */
 export interface RedeemEvent {
@@ -1904,11 +2104,41 @@ export interface InvitationEvent {
 }
 
 /**
+ * 角色信息
+ */
+export interface Role {
+  /**
+   * <p>角色ID</p>
+   */
+  RoleId?: string
+  /**
+   * <p>角色名称</p>
+   */
+  RoleName?: string
+  /**
+   * <p>个性签名</p>
+   */
+  RoleSignature?: string
+  /**
+   * <p>角色等级</p>
+   */
+  RoleLevel?: string
+  /**
+   * <p>角色总战力</p>
+   */
+  RoleCe?: number
+  /**
+   * <p>角色创建时间</p>
+   */
+  RoleCreateTime?: string
+}
+
+/**
  * AssessRisk请求参数结构体
  */
 export interface AssessRiskRequest {
   /**
-   * <p>事件码。用于指定业务接入的场景节点。</p><p> 账号保护产品下的标准事件包含：</p><ul><li> login： 登录<p></p></li> <li>register： 注册 </li><li>sms： 短信 </li><li>logout： 登出 </li><li>modify_account： 修改账号 </li><li>modify_password： 修改密码 </li><li>security_verification： 安全验证</li></ul><p>交易保护产品下的标准事件包含：</p><ul><li>create_order： 创建订单 </li><li>transaction： 交易支付 </li><li>charge_back： 拒付</li></ul><p>营销保护产品下的标准事件包含：</p><ul><li>add_promotion： 参加营销活动 </li><li>redeem： 兑奖 </li><li>withdraw： 提现 </li><li>cust_event： 自定义事件，cust_xxx </li><li>scan_code： 扫码 </li><li>lucky_draw： 抽奖 </li><li>task： 做任务 </li><li>invitation： 邀请 </li><li>claim_red_packet： 领红包 </li><li>browse： 浏览</li></ul><p>自定义事件可与RCE约定后进行风险评估</p>
+   * <p>事件码。用于指定业务接入的场景节点。</p><p>账号保护产品下的标准事件包含：</p><ul><li>login： 登录</li><li>register： 注册（创建账户）</li><li>sms： 短信</li><li>logout： 登出</li><li>modify_account： 修改账号</li><li>modify_password： 修改密码</li><li>security_verification： 安全验证</li></ul><p>交易保护产品下的标准事件包含：</p><ul><li>create_order： 创建订单</li><li>transaction： 交易支付</li><li>charge_back： 拒付</li></ul><p>营销保护产品下的标准事件包含：</p><ul><li>add_promotion： 参与营销活动</li><li>redeem： 兑奖</li><li>withdraw： 提现</li><li>scan_code： 扫码</li><li>task： 做任务</li><li>claim_red_packet： 领红包</li><li>lucky_draw： 抽奖</li><li>invitation： 邀请</li><li>browse： 浏览</li></ul><p>社群保护产品下的标准事件包含：</p><ul><li>chat： 聊天消息</li><li>modify_role： 编辑角色资料</li><li>add_friend： 添加好友</li><li>modify_guild： 编辑公会资料</li></ul><p>自定义事件以 cust_ 为前缀，可与 RCE 约定后进行风险评估。</p>
    */
   EventCode: string
   /**
@@ -1971,6 +2201,10 @@ export interface AssessRiskRequest {
    * <p>QQ应用ID，当传入QQ开放账号时，该字段必填，QQ分配给网站或应用的AppId，用来唯一标识网站或应用</p>
    */
   QQAppId?: string
+  /**
+   * <p>业务序列号，您系统中一次业务动作的流水号</p>
+   */
+  BusinessId?: string
 }
 
 /**

@@ -712,84 +712,79 @@ export interface IPAddressInfo {
  */
 export interface DescribeListenerDetailResponse {
   /**
-   * 监听器绑定的CA证书ID列表。
+   * <p>监听器绑定的CA证书ID列表。</p>
    */
   CaCertificateIds?: Array<string>
   /**
-   * 是否开启双向认证。
+   * <p>是否开启双向认证。</p>
    */
   CaEnabled?: boolean
   /**
-   * 服务器证书 ID 列表。
+   * <p>服务器证书 ID 列表。</p>
    */
   CertificateIds?: Array<string>
   /**
-   * 监听器实例的创建时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00）
+   * <p>监听器实例的创建时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00）</p>
    */
   CreateTime?: string
   /**
-   * 规则动作列表。
+   * <p>规则动作列表。</p>
    */
   DefaultActions?: Array<DefaultAction>
   /**
-   * 是否启用 Gzip 压缩。
+   * <p>是否启用 Gzip 压缩。</p>
    */
   GzipEnabled?: boolean
   /**
-   * 是否开启HTTP/2特性。
+   * <p>是否开启HTTP/2特性。</p>
    */
   Http2Enabled?: boolean
   /**
-   * 指定连接空闲超时时间。单位：秒。
+   * <p>指定连接空闲超时时间。单位：秒。</p>
    */
   IdleTimeout?: number
   /**
-   * 监听器 ID，格式为 lst- 后接 8 位字母数字。
+   * <p>监听器 ID，格式为 lst- 后接 8 位字母数字。</p>
    */
   ListenerId?: string
   /**
-   * 自定义监听名称。
+   * <p>自定义监听名称。</p>
    */
   ListenerName?: string
   /**
-   * 负载均衡实例前端使用的端口。
+   * <p>负载均衡实例前端使用的端口。</p>
    */
   ListenerPort?: number
   /**
-   * 监听协议。
+   * <p>监听协议。</p>
    */
   ListenerProtocol?: string
   /**
-   * 监听器状态。取值:=
-
-- **Active**: 运行中。
-- **Provisioning**：创建中。
-- **Configuring**：变配中。
-- **ProvisionFailed**：创建失败
+   * <p>监听器状态。取值:=</p><ul><li><strong>Active</strong>: 运行中。</li><li><strong>Provisioning</strong>：创建中。</li><li><strong>Configuring</strong>：变配中。</li><li><strong>ProvisionFailed</strong>：创建失败</li></ul>
    */
   ListenerStatus?: string
   /**
-   * 负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。
+   * <p>负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。</p>
    */
   LoadBalancerId?: string
   /**
-   * 监听器实例的最后变更时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00）
+   * <p>监听器实例的最后变更时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00）</p>
    */
   ModifyTime?: string
   /**
-   * 请求超时时间。单位：秒。
+   * <p>连接请求超时时间。单位：秒。</p>
    */
   RequestTimeout?: number
   /**
-   * 安全策略 ID，格式为 tls- 后接 8 位字母数字。
+   * <p>安全策略 ID，格式为 tls- 后接 8 位字母数字。</p>
    */
   SecurityPolicyId?: string
   /**
-   * 标签。
+   * <p>标签。</p>
    */
   Tags?: Array<TagInfo>
   /**
-   * XForwardedFor配置。
+   * <p>XForwardedFor配置。</p>
    */
   XForwardedForConfig?: XForwardedForConfig
   /**
@@ -913,11 +908,11 @@ export interface RemoveTargetsFromTargetGroupRequest {
  */
 export interface DescribeListenerDetailRequest {
   /**
-   * 监听器 ID，格式为 lst- 后接 8 位字母数字。
+   * <p>监听器 ID，格式为 lst- 后接 8 位字母数字。</p>
    */
   ListenerId: string
   /**
-   * 负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。
+   * <p>负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。</p>
    */
   LoadBalancerId: string
 }
@@ -1596,68 +1591,63 @@ export interface AssociateListenerAdditionalCertificatesResponse {
  */
 export interface ListenerOutput {
   /**
-   * 是否开启双向认证。
+   * <p>是否开启双向认证。</p>
    */
   CaEnable?: boolean
   /**
-   * 监听器实例的创建时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00）
+   * <p>监听器实例的创建时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00）</p>
    */
   CreateTime?: string
   /**
-   * 是否启用 Gzip 压缩。
+   * <p>是否启用 Gzip 压缩。</p>
    */
   GzipEnabled?: boolean
   /**
-   * 是否启用http2。
+   * <p>是否启用http2。</p>
    */
   Http2Enable?: boolean
   /**
-   * 空闲超时时间。
+   * <p>空闲超时时间。</p>
    */
   IdleTimeout?: number
   /**
-   * 监听器 ID，格式为 lst- 后接 8 位字母数字。
+   * <p>监听器 ID，格式为 lst- 后接 8 位字母数字。</p>
    */
   ListenerId?: string
   /**
-   * 监听器名称。
+   * <p>监听器名称。</p>
    */
   ListenerName?: string
   /**
-   * 监听器端口。
+   * <p>监听器端口。</p>
    */
   ListenerPort?: number
   /**
-   * 监听器协议。
+   * <p>监听器协议。</p>
    */
   ListenerProtocol?: string
   /**
-   * 监听器状态。取值:=
-
-- **Active**: 运行中。
-- **Provisioning**：创建中。
-- **Configuring**：变配中。
-- **ProvisionFailed**：创建失败
+   * <p>监听器状态。取值:=</p><ul><li><strong>Active</strong>: 运行中。</li><li><strong>Provisioning</strong>：创建中。</li><li><strong>Configuring</strong>：变配中。</li><li><strong>ProvisionFailed</strong>：创建失败</li></ul>
    */
   ListenerStatus?: string
   /**
-   * 监听器实例的最后变更时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00）
+   * <p>监听器实例的最后变更时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00）</p>
    */
   ModifyTime?: string
   /**
-   * 请求超时时间。
+   * <p>连接请求超时时间。</p>
    */
   RequestTimeout?: number
   /**
-   * 标签。
+   * <p>标签。</p>
    */
   Tags?: Array<TagInfo>
   /**
-   * 安全策略 ID。
+   * <p>安全策略 ID。</p>
    */
   TlsSecurityPolicyId?: string
   /**
-   * XForwardedFor配置。
+   * <p>XForwardedFor配置。</p>
    */
   XForwardedForConfig?: XForwardedForConfig
 }
@@ -1896,7 +1886,7 @@ export interface DescribeAsyncJobsRequest {
  */
 export interface CreateListenerResponse {
   /**
-   * 监听器 ID，格式为 lst- 后接 8 位字母数字。
+   * <p>监听器 ID，格式为 lst- 后接 8 位字母数字。</p>
    */
   ListenerId?: string
   /**
@@ -2336,79 +2326,67 @@ export interface TargetHealthStatusInfo {
  */
 export interface CreateListenerRequest {
   /**
-   * 默认转发规则动作列表。目前监听器仅支持添加 1 个默认转发规则动作。
+   * <p>默认转发规则动作列表。目前监听器仅支持添加 1 个默认转发规则动作。</p>
    */
   DefaultActions: Array<DefaultAction>
   /**
-   * 负载均衡实例前端使用的端口。  取值：1~65535。
+   * <p>负载均衡实例前端使用的端口。  取值：1~65535。</p>
    */
   ListenerPort: number
   /**
-   * 监听协议。  取值：HTTP、HTTPS 或 QUIC。
+   * <p>监听协议。  取值：HTTP、HTTPS 或 QUIC。</p>
    */
   ListenerProtocol: string
   /**
-   * 负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。
+   * <p>负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。</p>
    */
   LoadBalancerId: string
   /**
-   * 监听器配置的CA证书ID列表。目前监听器仅支持添加 1 个 CA 证书。
-当 CaEnabled 参数取值为 true 时，此参数必填。
+   * <p>监听器配置的CA证书ID列表。目前监听器仅支持添加 1 个 CA 证书。<br>当 CaEnabled 参数取值为 true 时，此参数必填。</p>
    */
   CaCertificateIds?: Array<string>
   /**
-   * 是否开启双向认证。
-取值：
-true：开启。
-false（默认值）：不开启。
+   * <p>是否开启双向认证。<br>取值：<br>true：开启。<br>false（默认值）：不开启。</p>
    */
   CaEnabled?: boolean
   /**
-   * 服务器证书 ID 列表。
+   * <p>服务器证书 ID 列表。</p>
    */
   CertificateIds?: Array<string>
   /**
-   * 客户端Token，用于保证请求的幂等性。  
-
-从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符。
+   * <p>客户端Token，用于保证请求的幂等性。  </p><p>从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符。</p>
    */
   ClientToken?: string
   /**
-   * 是否开启Gzip压缩。取值:true(默认值):是。false:否
+   * <p>是否开启Gzip压缩。取值:true(默认值):是。false:否</p>
    */
   GzipEnabled?: boolean
   /**
-   * 是否开启HTTP/2特性。HTTP 协议默认 false，HTTPS 协议默认 true。只有 HTTPS 协议支持此参数。
+   * <p>是否开启HTTP/2特性。HTTP 协议默认 false，HTTPS 协议默认 true。只有 HTTPS 协议支持此参数。</p>
    */
   Http2Enabled?: boolean
   /**
-   * 连接空闲超时时间。单位：秒。
-取值范围：1~600。
-默认值：15。
-如果在超时时间内一直没有访问请求，负载均衡会断开当前连接，在下次请求到来时创建新的连接。
+   * <p>连接空闲超时时间。单位：秒。<br>取值范围：1~600。<br>默认值：15。<br>如果在超时时间内一直没有访问请求，负载均衡会断开当前连接，在下次请求到来时创建新的连接。</p>
    */
   IdleTimeout?: number
   /**
-   * 自定义监听名称。  长度为 1~255 个字符，必须是中文和无害字符串中的字符，  可包含中文、字母、数字、短划线（-）、正斜线（/）、半角句号（.）、下划线（_）。
+   * <p>自定义监听名称。  长度为 1~255 个字符，必须是中文和无害字符串中的字符，  可包含中文、字母、数字、短划线（-）、正斜线（/）、半角句号（.）、下划线（_）。</p>
    */
   ListenerName?: string
   /**
-   * 请求超时时间。单位：秒。
-取值：1~600。
-默认值：60。
-如果在超时时间内后端服务器没有返回响应，负载均衡将放弃等待，并给客户端返回HTTP 504错误码。
+   * <p>连接请求超时时间。单位：秒。取值：1~600。默认值：60。如果在超时时间内后端服务器没有返回响应，负载均衡将放弃等待，并给客户端返回HTTP 504错误码。</p>
    */
   RequestTimeout?: number
   /**
-   * 安全策略 ID，格式为 tls- 后接 8 位字母数字。
+   * <p>安全策略 ID，格式为 tls- 后接 8 位字母数字。</p>
    */
   SecurityPolicyId?: string
   /**
-   * 标签列表。最大支持20个。
+   * <p>标签列表。最大支持20个。</p>
    */
   Tags?: Array<TagInfo>
   /**
-   * X-Forwarded-For配置
+   * <p>X-Forwarded-For配置</p>
    */
   XForwardedForConfig?: XForwardedForConfig
 }

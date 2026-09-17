@@ -25,7 +25,7 @@ import {
   AgentAdvancedConfig,
   FinalRerankConfig,
   PluginStatistics,
-  IntentAchievementInfo,
+  AddOnPackageInfo,
   RollbackReleaseRequest,
   DescribeModelListResponse,
   AppModelConfig,
@@ -42,6 +42,7 @@ import {
   DescribeAppSummaryListRequest,
   ExecuteConfig,
   CreateLabelResponse,
+  TelegramChannelConfig,
   TriggerConfig,
   DescribeModelListRequest,
   DescribeMsgRecordCategoryListResponse,
@@ -75,7 +76,7 @@ import {
   ModifyLabelResponse,
   ModifyConversationRequest,
   CreateChannelResponse,
-  TimerScheduleConfig,
+  IntentAchievementInfo,
   DeleteCategoryResponse,
   SearchResultPayload,
   DescribeUsageDetailListResponse,
@@ -174,7 +175,7 @@ import {
   ClawAgentAgentTeamConfig,
   DescribeSystemVariableListResponse,
   UserAccessConfig,
-  TelegramChannelConfig,
+  KBModelConfig,
   AgentPlugin,
   SimilarQuestionModifySpec,
   SearchBilling,
@@ -198,7 +199,6 @@ import {
   DescribeLatestReleaseResponse,
   SearchContext,
   ResponseParam,
-  ModifyQAListResponse,
   SingleWorkflowConfig,
   CreatePluginResponse,
   CreateSimilarQuestionResponse,
@@ -299,6 +299,7 @@ import {
   DescribeSkillDetailRequest,
   Variable,
   ExpirationAwareness,
+  WecomRobotCallbackAccess,
   FavoriteSkillRequest,
   AppSharedKbInfo,
   ModifyMsgRecordCategoryRequest,
@@ -337,7 +338,7 @@ import {
   AppSubStatusInfo,
   ViewScope,
   CreateConversationRequest,
-  CreateSkillResponse,
+  AgentExternalToolConfig,
   DescribeDocRequest,
   WecomAppChannelConfig,
   DescribeMsgRecordCategoryListRequest,
@@ -425,7 +426,7 @@ import {
   DescribeUsageSummaryListRequest,
   AgentRelease,
   AgentToolInputParameter,
-  WecomRobotCallbackAccess,
+  KBPermission,
   RunAppTriggerNowResponse,
   DescribeConflictQARequest,
   DescribeSkillDetailResponse,
@@ -451,6 +452,7 @@ import {
   WecomRobotChannelConfig,
   ImportDocListRequest,
   DescribeConsumptionDetailListRequest,
+  ResourcePackageInfo,
   DescribeVariableListRequest,
   Operator,
   ExportQAResponse,
@@ -491,16 +493,18 @@ import {
   CategoryPermission,
   DocTaskStatus,
   ResetConversationRequest,
+  TimerScheduleConfig,
   OAuthConfig,
   ToolBilling,
   BasicBilling,
   DescribeAppRequest,
+  DescribeResourceSummaryRequest,
   IntervalSchedule,
   DescribeLatestReleaseRequest,
   DeleteChannelRequest,
   CronSchedule,
   CopyAgentFromAppResponse,
-  AgentExternalToolConfig,
+  ModifyQAListResponse,
   ConflictQA,
   RetryReleaseResponse,
   AICallConfig,
@@ -511,13 +515,14 @@ import {
   AgentSummary,
   DeleteAppTriggerResponse,
   Filter,
+  DescribeResourceSummaryResponse,
   ToolSummary,
   ModifyLabelRequest,
   ModifyCategoryRequest,
   AccessKeyPassThroughConfig,
   DescribeSkillReferenceListRequest,
   AppTriggerParamBindingConfig,
-  KBModelConfig,
+  CreateSkillResponse,
   DescribeAuditLogListRequest,
   VoiceConfig,
   DocUpdatePeriod,
@@ -677,6 +682,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMsgRecordListResponse) => void
   ): Promise<DescribeMsgRecordListResponse> {
     return this.request("DescribeMsgRecordList", req, cb)
+  }
+
+  /**
+   * 获取用户资源套餐和增值包用量信息
+   */
+  async DescribeResourceSummary(
+    req?: DescribeResourceSummaryRequest,
+    cb?: (error: string, rep: DescribeResourceSummaryResponse) => void
+  ): Promise<DescribeResourceSummaryResponse> {
+    return this.request("DescribeResourceSummary", req, cb)
   }
 
   /**
@@ -891,7 +906,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 校验标签下的标准词是否已存在
+   * 校验标签
    */
   async CheckLabel(
     req: CheckLabelRequest,

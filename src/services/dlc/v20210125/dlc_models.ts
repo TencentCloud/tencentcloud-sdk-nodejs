@@ -982,6 +982,10 @@ export interface GetRayClusterResponse {
    */
   Queue?: string
   /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
+  /**
    * <p>应用ID</p>
    */
   AppId?: number
@@ -1089,6 +1093,25 @@ export interface AlterTableCommentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 腾讯云资源标签键值对
+ */
+export interface CloudTag {
+  /**
+   * <p>标签键</p>
+   */
+  TagKey?: string
+  /**
+   * <p>标签值</p>
+   */
+  TagValue?: string
+  /**
+   * <p>标签类型：Custom（自定义）/ System（系统）/ All（全部），仅查询接口返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Category?: string
 }
 
 /**
@@ -1474,6 +1497,10 @@ export interface RayClusterEntity {
    * <p>所属队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
   /**
    * <p>应用ID</p>
    */
@@ -2332,8 +2359,14 @@ export interface CreatePartitionResponse {
   DealName?: string
   /**
    * <p>大订单号</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDealId?: string
+  /**
+   * <p>冻结流水号（后付费返回；预付费为空）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2419,9 +2452,19 @@ export interface PartitionInfo {
    */
   ResourceQuota?: Array<ResourceQuota>
   /**
+   * <p>各计费项的单 worker/executor 最大可调度资源量列表，用于约束提交作业时可申请的规格上限；仅包含分区已有的非 GPU 计费项，无可返回项时为空数组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulableLimitList?: Array<SchedulableLimit>
+  /**
    * <p>计费类型：1-包年包月，0-按量计费</p>
    */
   PayMode?: number
+  /**
+   * <p>续费标志：0-默认，1-自动续费，2-不自动续费（仅预付费有效）；按量计费分区无该字段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewFlag?: number
   /**
    * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2437,6 +2480,21 @@ export interface PartitionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
+  /**
+   * <p>资源池形态：SYSTEM（系统）/ USER（用户）/ EXTERNAL_TKE（纳管外部 TKE 集群）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourcePoolKind?: string
+  /**
+   * <p>纳管外部集群的原始 ID（例如 EMR 实例 ID emr-xxx），仅 EXTERNAL_TKE 等纳管场景有值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExternalClusterId?: string
+  /**
+   * <p>资源已绑定的标签列表，由标签平台 GetResources 接口实时查询得到；列表场景下仅对当前页分区加载，单分区标签查询失败时降级留空</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<CloudTag>
 }
 
 /**
@@ -2617,6 +2675,10 @@ export interface JobSpec {
    */
   Queue?: string
   /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
+  /**
    * <p>集群组Id</p>
    */
   GroupId?: string
@@ -2637,6 +2699,10 @@ export interface JobSpec {
    */
   JobPackageName?: string
   /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
    * <p>优先级</p>
    */
   Priority?: number
@@ -2652,6 +2718,10 @@ export interface JobSpec {
    * <p>子用户UIN</p>
    */
   SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
   /**
    * <p>创建时间</p>
    */
@@ -2891,10 +2961,6 @@ export interface CreatePartitionQueueRequest {
    */
   PartitionCode: string
   /**
-   * <p>队列名称</p>
-   */
-  QueueName: string
-  /**
    * <p>资源规格列表，定义队列的资源类型及大小范围</p>
    */
   ResourceUsages: Array<ResourceUsage>
@@ -2902,6 +2968,14 @@ export interface CreatePartitionQueueRequest {
    * <p>队列类型：1-独占型，2-共享型</p>
    */
   QueueType: number
+  /**
+   * <p>队列编码（不可变 code）：透传时按 RFC1123 校验并作为队列的固定标识；未透传时系统自动生成（格式 dlc-rg-xxxxxxxx）。落库后不可修改</p>
+   */
+  QueueName?: string
+  /**
+   * <p>队列别名（显示名）：用户可见、可修改；未提供时等于最终 QueueName。可与其它队列重复</p>
+   */
+  Alias?: string
   /**
    * <p>队列描述</p>
    */
@@ -4165,6 +4239,10 @@ export interface CreateJobSpecResponse {
    */
   Queue?: string
   /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
+  /**
    * <p>作业包URL</p>
    */
   JobPackage?: string
@@ -4816,14 +4894,23 @@ export interface QueueInfo {
    */
   Id?: number
   /**
-   * <p>队列名称</p>
+   * <p>不可变的Code</p>
    */
   QueueName?: string
+  /**
+   * <p>队列别名（用户可改显示名）；alias 为空时回落为 QueueName</p>
+   */
+  Alias?: string
   /**
    * <p>资源用量列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceUsage?: Array<ResourceUsage>
+  /**
+   * <p>队列各资源类型的实时余量（总量 / 已用量 / 可用量）。由 Kueue Prometheus 指标实时计算；监控关闭或查询失败时为 null，字段省略不返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceQuotas?: Array<QueueResourceQuota>
   /**
    * <p>队列描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5704,6 +5791,10 @@ export interface UpdateJobSpecResponse {
    * <p>默认队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
   /**
    * <p>作业包URL</p>
    */
@@ -7680,6 +7771,14 @@ export interface CreatePartitionQueueResponse {
    */
   Id?: number
   /**
+   * <p>最终生效的队列编码（含系统生成场景），与 DescribePartitionQueues 出参的 QueueName 语义一致</p>
+   */
+  QueueName?: string
+  /**
+   * <p>队列别名（显示名）</p>
+   */
+  Alias?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8761,6 +8860,20 @@ export interface GetRayClusterYamlRequest {
 }
 
 /**
+ * 文本格式
+ */
+export interface TextFile {
+  /**
+   * 文本类型，本参数取值为TextFile。
+   */
+  Format?: string
+  /**
+   * 处理文本用的正则表达式。
+   */
+  Regex?: string
+}
+
+/**
  * DescribeModelTaskOptions返回参数结构体
  */
 export interface DescribeModelTaskOptionsResponse {
@@ -9297,6 +9410,10 @@ export interface TrainingJobInstance {
    * <p>队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
   /**
    * <p>提交时 runtime_env JSON</p>
    */
@@ -9879,6 +9996,10 @@ export interface GetLabDetailResponse {
    */
   Queue?: string
   /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
+  /**
    * <p>应用ID</p>
    */
   AppId?: number
@@ -10203,17 +10324,17 @@ export interface CancelTaskRequest {
 }
 
 /**
- * 文本格式
+ * 计费项最大可调度限制
  */
-export interface TextFile {
+export interface SchedulableLimit {
   /**
-   * 文本类型，本参数取值为TextFile。
+   * <p>四层计费项，与 ResourceQuota[].ResourceSpec.BillingItem 同值</p>
    */
-  Format?: string
+  BillingItem?: string
   /**
-   * 处理文本用的正则表达式。
+   * <p>该计费项下单 worker/executor 可申请的最大可调度资源量，单位随计费项资源类型：CPU 计费项为 CU 数，GPU 计费项为 GU（卡）数</p>
    */
-  Regex?: string
+  MaxSchedulableUnits?: number
 }
 
 /**
@@ -11260,9 +11381,13 @@ export interface ModifyPartitionQueueRequest {
    */
   PartitionCode?: string
   /**
-   * 队列名称
+   * 队列编码（不可变 code）：与 Id 定位记录的一致性校验键，传入值必须与队列当前 QueueName 一致，不参与更新
    */
   QueueName?: string
+  /**
+   * 队列别名（显示名）：透传时更新，未透传时保持不变。可与其它队列重复
+   */
+  Alias?: string
   /**
    * 队列描述
    */
@@ -11375,6 +11500,10 @@ export interface GetJobSpecResponse {
    * <p>默认队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
   /**
    * <p>作业包URL</p>
    */
@@ -14022,6 +14151,11 @@ export interface PartitionDetail {
    */
   ResourceQuota?: Array<ResourceQuota>
   /**
+   * <p>各计费项的单 worker/executor 最大可调度资源量列表，用于约束提交作业时可申请的规格上限；仅包含分区已有的非 GPU 计费项，无可返回项时为空数组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulableLimitList?: Array<SchedulableLimit>
+  /**
    * <p>付费模式</p>
    */
   PayMode?: number
@@ -14038,6 +14172,27 @@ export interface PartitionDetail {
    * <p>状态</p>
    */
   Status?: number
+  /**
+   * <p>过期时间</p><p>参数格式：yyyy-MM-dd hh:mm:ss</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>过期时间</p><p>参数格式：yyyy-MM-dd hh:mm:ss</p>
+   */
+  IsolatedTimestamp?: string
+  /**
+   * <p>资源已绑定的标签列表，由标签平台 GetResources 接口实时查询得到</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<CloudTag>
+  /**
+   * <p>资源池形态：SYSTEM（系统）/ USER（用户）/ EXTERNAL_TKE（纳管外部 TKE 集群）</p>
+   */
+  ResourcePoolKind?: string
+  /**
+   * <p>纳管外部集群的原始 ID（例如 EMR 实例 ID emr-xxx），仅 EXTERNAL_TKE 等纳管场景有值</p>
+   */
+  ExternalClusterId?: string
 }
 
 /**
@@ -14250,6 +14405,10 @@ export interface DescribePartitionQueuesRequest {
    * 每页返回数量
    */
   PageSize?: number
+  /**
+   * 是否返回队列实时余量（ResourceQuotas），默认 false 不返回。余量需实时查询 Prometheus，仅在需要时透传 true。Used 为计费 spec 口径（队列内业务容器 Pod limits，经 kube_pod_labels 队列过滤），依赖 kube_pod_labels 指标采集
+   */
+  ShowResourceQuotas?: boolean
 }
 
 /**
@@ -14380,6 +14539,10 @@ export interface GetRayJobResponse {
    * <p>所属队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
   /**
    * <p>任务状态</p>
    */
@@ -17133,6 +17296,32 @@ export interface CreateDatasourceConnectionRequest {
 }
 
 /**
+ * 队列维度单条资源配额数据（含总量、已用量、可用量）
+ */
+export interface QueueResourceQuota {
+  /**
+   * <p>资源类型标识。CPU / HM_CPU 类计费项统一映射为 "CU"；GPU 类计费项取卡型简称（如 "T4"、"H20"）</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>资源单位。CU 类为 "core"；GPU 类为 "card"</p>
+   */
+  Unit?: string
+  /**
+   * <p>配额总量，由 resource_usage 最大值（index 1）× spec 折算得出</p>
+   */
+  Total?: number
+  /**
+   * 当前已使用量，计费 spec 口径：队列内业务容器（ray-head/ray-worker）的 Pod limits 之和，经 kube_pod_labels 按 local queue 过滤。依赖 kube_pod_labels 指标采集，未开启时恒为 0
+   */
+  Used?: number
+  /**
+   * <p>可用量（总量 - 已使用量，截断至 0）。当 used 超出 total 时（例如配额尚未生效或数据短暂不一致），返回 0 而非负数</p>
+   */
+  Available?: number
+}
+
+/**
  * GrantDLCCatalogAccess请求参数结构体
  */
 export interface GrantDLCCatalogAccessRequest {
@@ -19176,6 +19365,10 @@ export interface RayJobSubmitEntity {
    */
   Queue?: string
   /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
+  /**
    * <p>任务状态</p>
    */
   Status?: string
@@ -20835,6 +21028,10 @@ export interface TrainingJobSpec {
    */
   Queue?: string
   /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
+  /**
    * <p>Checkpoint 挂载摘要</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -21046,6 +21243,10 @@ export interface CopyJobSpecResponse {
    * <p>默认队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
   /**
    * <p>作业包URL</p>
    */
@@ -21609,7 +21810,7 @@ export interface UpdateServiceAuthConfigResponse {
  */
 export interface DescribePartitionDetailResponse {
   /**
-   * 分区详情
+   * <p>分区详情</p>
    */
   PartitionDetail?: PartitionDetail
   /**
@@ -23182,6 +23383,10 @@ export interface LabResponse {
    */
   Queue?: string
   /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
+  /**
    * <p>应用ID</p>
    */
   AppId?: number
@@ -23902,7 +24107,7 @@ export interface CHDFSProductVpcInfo {
  */
 export interface DescribePartitionDetailRequest {
   /**
-   * 分区编码
+   * <p>分区编码</p>
    */
   PartitionCode: string
 }
@@ -28258,20 +28463,19 @@ export interface ResourceConfig {
  */
 export interface FlowActivityDetail {
   /**
-   * <p>活动编码</p>
+   * <p>活动编码；国际站返回英文编码，国内站返回中文描述</p>
    */
   ActivityCode?: string
   /**
-   * <p>活动状态</p>
+   * <p>活动状态：1-运行中，2-已完成，-2-失败</p>
    */
   Status?: number
   /**
-   * <p>创建时间</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>活动创建时间</p>
    */
   CreateTime?: string
   /**
-   * <p>耗时（秒）</p>
+   * <p>耗时（秒），活动未完成时省略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: number

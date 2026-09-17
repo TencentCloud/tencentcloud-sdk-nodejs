@@ -30,15 +30,18 @@ import {
   ClsInfo,
   ModifyClsTopicRequest,
   CreateHTTPServiceRouteRequest,
+  CreatePlatformEnvRequest,
   UnbindStorageSourceResponse,
   AgentRuntimeCodeImageConfig,
   ModifyDatabaseACLRequest,
   DestroyStaticStoreRequest,
   OwnershipVerificationFileInfo,
   MySQLTaskStatus,
+  DescribePlatformEnvUsageResponse,
   BaasPackageInfo,
   DescribeHTTPServiceRouteResponse,
   GetFunctionRequest,
+  ModifyPlatformEnvResponse,
   RunCommandsResponse,
   RunSqlResponse,
   RenewEnvResponse,
@@ -56,7 +59,7 @@ import {
   ModifyProviderRequest,
   EnvInfo,
   DescribeCloudAppVersionResponse,
-  CreateBillDealRequest,
+  DeleteTableResponse,
   PlanInfo,
   DestroyMySQLRequest,
   SMSCloudFunctionConfig,
@@ -92,6 +95,7 @@ import {
   ModifyUserResp,
   DescribeTableRequest,
   DescribeCloudAppCosInfoResponse,
+  DescribePlatformCreditsUsageResponse,
   ExternalStorage,
   AuthDomain,
   DescribeHTTPServiceCachePurgeTaskRequest,
@@ -139,6 +143,7 @@ import {
   ExecutePGSqlResponse,
   DescribeCreditsUsageRequest,
   DescribeMySQLClusterDetailRequest,
+  ModifyEnvExtraRequest,
   CreateStaticStoreRequest,
   DescribeBillingInfoResponse,
   DescribeEnvsRequest,
@@ -159,6 +164,7 @@ import {
   HTTPServiceHeadersHandler,
   HTTPServiceRouteParam,
   PushPGUserMigrationsResponse,
+  PlatformPkgCreditsUsage,
   DescribeCreateMySQLResultResponse,
   DeleteUsersRequest,
   SearchClsLogResponse,
@@ -186,10 +192,12 @@ import {
   CreateHTTPServiceRouteResponse,
   IndexInfo,
   ListFunctionsResponse,
+  Filter,
   CreateEnvRequest,
   BuildSource,
+  DescribePlatformAccountCircleResponse,
   DescribeEnvPlansResponse,
-  FunctionEipConfigFixed,
+  DescribePlatformCreditsUsageDetailRequest,
   DeleteProviderRequest,
   DescribeCreditsUsageDetailRequest,
   EnvPkgCreditsUsage,
@@ -213,6 +221,7 @@ import {
   DescribeBaasPackageListRequest,
   DescribeLoginConfigRequest,
   DeleteCloudAppResponse,
+  PlatFormResourceInfo,
   DescribeGatewayVersionsResponse,
   CloudBaseRunBuildLog,
   DescribeHostingDomainTaskRequest,
@@ -230,6 +239,7 @@ import {
   MessageLocalized,
   UpdateFunctionConfigurationRequest,
   UpdateAIModelRequest,
+  DailyUsageList,
   RenewEnvRequest,
   DescribeClientResponse,
   UpdateAIModelResponse,
@@ -248,10 +258,12 @@ import {
   ModifyResourcePermissionResult,
   DescribeEnvsResponse,
   GetProvidersResponse,
-  TkeClusterInfo,
+  DescribePlatformsRequest,
   PurgeHTTPServiceCacheResponse,
   RunSqlRequest,
+  ModifyPlatformEnvRequest,
   FunctionLayer,
+  TkeClusterInfo,
   HTTPServiceCacheSet,
   ModifyEnvExtraResponse,
   OwnershipVerificationInfo,
@@ -266,24 +278,26 @@ import {
   RepairPGUserMigrationHistoryResponse,
   CreateUserRequest,
   CreateApiKeyResponse,
+  DescribePlatformEnvUsageRequest,
   CreateAIModelRequest,
   DescribeGatewayVersionsRequest,
   DescribeQuotaDataRequest,
   DescribeCreateMySQLResult,
   PushPGUserMigrationsRequest,
   FunctionTrigger,
+  CreatePlatformEnvResponse,
   PermissionInfo,
   VerifyHTTPServiceRouteCheckItem,
   DescribeHostingDomainTaskResponse,
   DeleteAuthDomainRequest,
-  DeleteTableResponse,
+  CreateBillDealRequest,
   DescribeCloudBaseBuildServiceRequest,
   SearchClsLogRequest,
   DescribeAIModelsResponse,
   Function,
   StaticStoreInfo,
   DescribeCloudAppVersionRequest,
-  DescribeTableResponse,
+  DestroyPlatformEnvResponse,
   FunctionPublicNetConfig,
   PrivateConfig,
   AIModelSecret,
@@ -298,6 +312,7 @@ import {
   DescribeCloudAppListResponse,
   DescribeMySQLTaskStatusRequest,
   BanConfig,
+  DescribeTableResponse,
   RepairPGUserMigrationHistoryRequest,
   LogResObject,
   EmailSmtpConfig,
@@ -309,6 +324,7 @@ import {
   DescribeCloudAppInfoRequest,
   CreateEnvResourceRequest,
   ManagedAIModelSpec,
+  DescribePlatformsResponse,
   FunctionVpcConfig,
   CreateMySQLResult,
   CreateCloudAppRequest,
@@ -318,6 +334,7 @@ import {
   HTTPServiceExtension,
   DeleteApiKeyResponse,
   ModifyClientResponse,
+  PlatformInfo,
   DeleteHTTPServiceRouteResponse,
   UpdateTableResponse,
   HpaPolicy,
@@ -332,22 +349,26 @@ import {
   DescribeEnvPlansRequest,
   DescribeBaasPackageListResponse,
   Provider,
-  ModifyEnvExtraRequest,
+  DescribePlatformCreditsUsageRequest,
   User,
   Variable,
   StaticStorageInfo,
   ReleaseEnvRequest,
-  Filter,
+  FunctionEipConfigFixed,
+  PlatformMetricUsageItem,
   ExecutePGSqlRequest,
   DescribeStaticStoreResponse,
   ModifyHTTPServiceRouteResponse,
   ListTablesRequest,
   DescribeHTTPServiceCachePurgeTaskResponse,
+  DestroyPlatformEnvRequest,
   DescribePGUserMigrationRequest,
   ApiKeyToken,
+  PlatformResUsageItem,
   DescribeClientRequest,
   MigrationConflict,
   ModifyPGInstanceSpecResponse,
+  DescribePlatformAccountCircleRequest,
   MongoConnector,
   HTTPServiceDomainParam,
   Pager,
@@ -357,11 +378,13 @@ import {
   IndexAccesses,
   MySQLClusterDetail,
   DescribeAuthDomainsRequest,
+  PlatformCreditsUsageDaily,
   WxGatewayCustomConfig,
   MetricUsage,
   DescribeCloudBaseRunBuildLogResponse,
   DescribeCreditsUsageResponse,
   DescribeDatabaseACLResponse,
+  DescribePlatformCreditsUsageDetailResponse,
   DescribeManagedAIModelListRequest,
   AIModelGroup,
   ModifyStorageSourceRequest,
@@ -533,15 +556,19 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 本接口用于云开发环境套餐续费。
-该接口会自动下单并支付，会在腾讯云账户中扣除余额（余额不足会下单失败）。
-该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
+     * 查询平台版环境资源用量
+
+指定查询范围，按资源类型返回各资源指标的用量及用量明细(按天)
+用量信息包含资源点用量，原始用量值（如流量、调用次数、容量等），原始用量单位等
+
+影响范围：只读查询、不改变资源
+使用场景：控制台用量页/API 查询平台版环境用量
      */
-  async RenewEnv(
-    req: RenewEnvRequest,
-    cb?: (error: string, rep: RenewEnvResponse) => void
-  ): Promise<RenewEnvResponse> {
-    return this.request("RenewEnv", req, cb)
+  async DescribePlatformEnvUsage(
+    req: DescribePlatformEnvUsageRequest,
+    cb?: (error: string, rep: DescribePlatformEnvUsageResponse) => void
+  ): Promise<DescribePlatformEnvUsageResponse> {
+    return this.request("DescribePlatformEnvUsage", req, cb)
   }
 
   /**
@@ -589,6 +616,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 用户在购买平台版套餐后，可调用此接口创建平台版套餐环境，将产生一个平台版套餐环境。
+   */
+  async CreatePlatformEnv(
+    req: CreatePlatformEnvRequest,
+    cb?: (error: string, rep: CreatePlatformEnvResponse) => void
+  ): Promise<CreatePlatformEnvResponse> {
+    return this.request("CreatePlatformEnv", req, cb)
+  }
+
+  /**
    * 检查是否开通Tcb服务
    */
   async CheckTcbService(
@@ -616,6 +653,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeCreditsUsageDetailResponse) => void
   ): Promise<DescribeCreditsUsageDetailResponse> {
     return this.request("DescribeCreditsUsageDetail", req, cb)
+  }
+
+  /**
+   * 查询平台版资源点模式下的资源点用量及原始用量明细
+   */
+  async DescribePlatformCreditsUsageDetail(
+    req: DescribePlatformCreditsUsageDetailRequest,
+    cb?: (error: string, rep: DescribePlatformCreditsUsageDetailResponse) => void
+  ): Promise<DescribePlatformCreditsUsageDetailResponse> {
+    return this.request("DescribePlatformCreditsUsageDetail", req, cb)
   }
 
   /**
@@ -957,6 +1004,28 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+     * 查询平台版资源计费周期。
+云开发平台版资源点都是按月结算的，每个月都有一定的抵扣额度。
+
+例如：
+  某个平台版在 2026-01-05 购买了3个月(到期时间: 2026-04-05)，则他可以在以下3个周期内，分别享有40000资源点的额度：
+  1. 2026-01-05 ~ 2026-02-05 23:59:59
+  2. 2026-02-06 ~ 2026-03-05 23:59:59
+  3. 2026-03-06 ~ 2026-04-05 23:59:59
+
+本接口，用于获取平台版当前属于哪个计费周期内。
+
+影响范围：只读查询，不影响平台版资源
+使用场景：控制台资源用量页面/API 主动查询当前计费周期等
+     */
+  async DescribePlatformAccountCircle(
+    req?: DescribePlatformAccountCircleRequest,
+    cb?: (error: string, rep: DescribePlatformAccountCircleResponse) => void
+  ): Promise<DescribePlatformAccountCircleResponse> {
+    return this.request("DescribePlatformAccountCircle", req, cb)
+  }
+
+  /**
      * 创建云开发产品计费订单，用于以下几种场景：
 1. 购买云开发环境
 2. 续费云开发环境
@@ -985,13 +1054,26 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 本接口（ModifyDatabaseACL）用于修改文档型数据库权限。
-   */
-  async ModifyDatabaseACL(
-    req: ModifyDatabaseACLRequest,
-    cb?: (error: string, rep: ModifyDatabaseACLResponse) => void
-  ): Promise<ModifyDatabaseACLResponse> {
-    return this.request("ModifyDatabaseACL", req, cb)
+     * 本接口（DescribeMySQLClusterDetail）查询Mysql集群信息。
+
+调用该接口前需要先查询Mysql是否开通，可通过 [DescribeCreateMySQLResult ](https://cloud.tencent.com/document/api/876/128185) 查询，只有已开通的才能查到集群信息，Mysql开通成功后，可通过接口设置数据库账号相关功能包括但不限于【创建账号、删除账号、查询可授权权限列表、查询账号已有权限、修改主机、修改配置、修改账号库表权限】、集群操作相关【查询集群参数、修改集群参数】，连接设置相关【关闭外网、开通外网、查询集群信息】，备份回档相关【创建手动回档、删除手动回档、修改自动备份配置信息、查询备份文件列表、集群回档、查询任务列表、获取table列表、获取集群数据库列表、查询备份下载地址】，相关功能接口文档：[TDSQL-C MySQL API文档](https://cloud.tencent.com/document/product/1003/48106)，可以通过 [RunSql](https://cloud.tencent.com/document/api/876/127880) 接口来执行 MySql 命令，比如创建表格、插入数据、删除表格等 MySql 命令。
+     */
+  async DescribeMySQLClusterDetail(
+    req: DescribeMySQLClusterDetailRequest,
+    cb?: (error: string, rep: DescribeMySQLClusterDetailResponse) => void
+  ): Promise<DescribeMySQLClusterDetailResponse> {
+    return this.request("DescribeMySQLClusterDetail", req, cb)
+  }
+
+  /**
+     * 设置数据库安全规则。
+安全规则，用于控制C端用户的访问权限。详见 [安全规则介绍 ](https://cloud.tencent.com/document/product/876/123478)。
+     */
+  async ModifySafeRule(
+    req: ModifySafeRuleRequest,
+    cb?: (error: string, rep: ModifySafeRuleResponse) => void
+  ): Promise<ModifySafeRuleResponse> {
+    return this.request("ModifySafeRule", req, cb)
   }
 
   /**
@@ -1127,14 +1209,32 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 设置数据库安全规则。
-安全规则，用于控制C端用户的访问权限。详见 [安全规则介绍 ](https://cloud.tencent.com/document/product/876/123478)。
+     * 查询平台版资源信息列表，返回信息包括
+
+1.平台版基础信息如资源id，所属地域等;
+2.计费相关信息如：购买/过期时间，资源规格，计费状态等; 
+3.底层资源信息如：存储，日志，静态托管等资源信息等;
+
+入参支持platformIds，可查询指定平台版套餐信息
+
+影响范围：查询接口，返回当前用户账号下平台版资源信息
+使用场景：控制台展示平台版套餐信息/查平台版资源详情/资源状态
      */
-  async ModifySafeRule(
-    req: ModifySafeRuleRequest,
-    cb?: (error: string, rep: ModifySafeRuleResponse) => void
-  ): Promise<ModifySafeRuleResponse> {
-    return this.request("ModifySafeRule", req, cb)
+  async DescribePlatforms(
+    req: DescribePlatformsRequest,
+    cb?: (error: string, rep: DescribePlatformsResponse) => void
+  ): Promise<DescribePlatformsResponse> {
+    return this.request("DescribePlatforms", req, cb)
+  }
+
+  /**
+   * 查询平台版本资源点模式下的资源点用量
+   */
+  async DescribePlatformCreditsUsage(
+    req: DescribePlatformCreditsUsageRequest,
+    cb?: (error: string, rep: DescribePlatformCreditsUsageResponse) => void
+  ): Promise<DescribePlatformCreditsUsageResponse> {
+    return this.request("DescribePlatformCreditsUsage", req, cb)
   }
 
   /**
@@ -1195,6 +1295,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 修改平台版环境信息
+   */
+  async ModifyPlatformEnv(
+    req: ModifyPlatformEnvRequest,
+    cb?: (error: string, rep: ModifyPlatformEnvResponse) => void
+  ): Promise<ModifyPlatformEnvResponse> {
+    return this.request("ModifyPlatformEnv", req, cb)
+  }
+
+  /**
      * 本接口(DeleteTable)用于删除文档型数据库表，删除表后表中数据将会被删除且无法恢复，请谨慎操作。
 
 接口入参中的 Tag 为文档型数据库的实例 Id，可以通过 [DescribeEnvs](https://cloud.tencent.com/document/api/876/34820) 接口返回的 EnvList[0].Databases[0].InstanceId 获取。
@@ -1223,6 +1333,18 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DestroyEnvResponse) => void
   ): Promise<DestroyEnvResponse> {
     return this.request("DestroyEnv", req, cb)
+  }
+
+  /**
+     * 本接口用于云开发环境套餐续费。
+该接口会自动下单并支付，会在腾讯云账户中扣除余额（余额不足会下单失败）。
+该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
+     */
+  async RenewEnv(
+    req: RenewEnvRequest,
+    cb?: (error: string, rep: RenewEnvResponse) => void
+  ): Promise<RenewEnvResponse> {
+    return this.request("RenewEnv", req, cb)
   }
 
   /**
@@ -1402,15 +1524,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 本接口（DescribeMySQLClusterDetail）查询Mysql集群信息。
-
-调用该接口前需要先查询Mysql是否开通，可通过 [DescribeCreateMySQLResult ](https://cloud.tencent.com/document/api/876/128185) 查询，只有已开通的才能查到集群信息，Mysql开通成功后，可通过接口设置数据库账号相关功能包括但不限于【创建账号、删除账号、查询可授权权限列表、查询账号已有权限、修改主机、修改配置、修改账号库表权限】、集群操作相关【查询集群参数、修改集群参数】，连接设置相关【关闭外网、开通外网、查询集群信息】，备份回档相关【创建手动回档、删除手动回档、修改自动备份配置信息、查询备份文件列表、集群回档、查询任务列表、获取table列表、获取集群数据库列表、查询备份下载地址】，相关功能接口文档：[TDSQL-C MySQL API文档](https://cloud.tencent.com/document/product/1003/48106)，可以通过 [RunSql](https://cloud.tencent.com/document/api/876/127880) 接口来执行 MySql 命令，比如创建表格、插入数据、删除表格等 MySql 命令。
-     */
-  async DescribeMySQLClusterDetail(
-    req: DescribeMySQLClusterDetailRequest,
-    cb?: (error: string, rep: DescribeMySQLClusterDetailResponse) => void
-  ): Promise<DescribeMySQLClusterDetailResponse> {
-    return this.request("DescribeMySQLClusterDetail", req, cb)
+   * 本接口（ModifyDatabaseACL）用于修改文档型数据库权限。
+   */
+  async ModifyDatabaseACL(
+    req: ModifyDatabaseACLRequest,
+    cb?: (error: string, rep: ModifyDatabaseACLResponse) => void
+  ): Promise<ModifyDatabaseACLResponse> {
+    return this.request("ModifyDatabaseACL", req, cb)
   }
 
   /**
@@ -1464,6 +1584,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeDatabaseACLResponse) => void
   ): Promise<DescribeDatabaseACLResponse> {
     return this.request("DescribeDatabaseACL", req, cb)
+  }
+
+  /**
+   * 用户可以调用本接口，删除平台版套餐下的指定平台版环境。
+   */
+  async DestroyPlatformEnv(
+    req: DestroyPlatformEnvRequest,
+    cb?: (error: string, rep: DestroyPlatformEnvResponse) => void
+  ): Promise<DestroyPlatformEnvResponse> {
+    return this.request("DestroyPlatformEnv", req, cb)
   }
 
   /**

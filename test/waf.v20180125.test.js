@@ -48,6 +48,16 @@ it("waf.v20180125.DescribePeakPoints", async function () {
     }
 })
 
+it("waf.v20180125.CreateAndUpdateBatchCCRule", async function () {
+    try {
+       const data = await client.CreateAndUpdateBatchCCRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeDomainDetailsClb", async function () {
     try {
        const data = await client.DescribeDomainDetailsClb({})

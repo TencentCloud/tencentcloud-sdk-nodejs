@@ -1773,17 +1773,21 @@ export interface DeleteHaVipResponse {
  */
 export interface VpnGatewayQuota {
   /**
-   * 带宽配额，单位：Mbps。
+   * <p>带宽配额，单位：Mbps。</p>
    */
   Bandwidth?: number
   /**
-   * 配额中文名称
+   * <p>配额中文名称</p>
    */
   Cname?: string
   /**
-   * 配额英文名称
+   * <p>配额英文名称</p>
    */
   Name?: string
+  /**
+   * <p>SSL 连接数可选配额</p>
+   */
+  MaxConnection?: Array<number | bigint>
 }
 
 /**
@@ -2126,59 +2130,59 @@ export interface ModifyHighPriorityRouteAttributeResponse {
  */
 export interface CreateVpnGatewaySslServerRequest {
   /**
-   * VPN网关实例ID。
+   * <p>VPN网关实例ID。</p>
    */
   VpnGatewayId: string
   /**
-   * SSL-VPN-SERVER 实例名称，长度不超过60个字节。
+   * <p>SSL-VPN-SERVER 实例名称，长度不超过60个字节。</p>
    */
   SslVpnServerName: string
   /**
-   * 客户端地址网段。
+   * <p>客户端地址网段。</p>
    */
   RemoteAddress: string
   /**
-   * 云端地址（CIDR）列表。
+   * <p>云端地址（CIDR）列表。</p>
    */
   LocalAddress?: Array<string>
   /**
-   * SSL VPN服务端监听协议。当前仅支持 UDP，默认UDP。
+   * <p>SSL VPN服务端监听协议。当前仅支持 UDP，默认UDP。</p>
    */
   SslVpnProtocol?: string
   /**
-   * SSL VPN服务端监听协议端口，默认1194。
+   * <p>SSL VPN服务端监听协议端口，默认9798。</p>
    */
   SslVpnPort?: number
   /**
-   * 认证算法。可选 'SHA1'，默认SHA1。
+   * <p>认证算法。可选 &#39;SHA1&#39;, &#39;SHA224&#39;, &#39;SHA256&#39;, &#39;SHA384&#39;, &#39;SHA512&#39; 默认SHA1。</p>
    */
   IntegrityAlgorithm?: string
   /**
-   * 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 默认AES-128-CBC。
+   * <p>加密算法。可选 &#39;AES-128-CBC&#39;,&#39;AES-192-CBC&#39;, &#39;AES-256-CBC&#39;, &#39;AES-128-GCM&#39;, &#39;AES-192-GCM&#39;, &#39;AES-256-GCM&#39;。</p><p>默认值：AES-128-CBC</p>
    */
   EncryptAlgorithm?: string
   /**
-   * 是否支持压缩。当前不支持压缩，默认False。
+   * <p>是否支持压缩。当前不支持压缩，默认False。</p>
    */
   Compress?: boolean
   /**
-   * 是否开启SSO认证。默认为False。该功能当前需要申请开白使用。
+   * <p>是否开启SSO认证。默认为False。该功能当前需要申请开白使用。</p>
    */
   SsoEnabled?: boolean
   /**
-   * 是否开启策略访问控制。默认为False
+   * <p>是否开启策略访问控制。默认为False</p>
    */
   AccessPolicyEnabled?: boolean
   /**
-   * SAML-DATA，开启SSO时传。
+   * <p>SAML-DATA，开启SSO时传。</p>
    */
   SamlData?: string
   /**
-   * 指定绑定的标签列表
+   * <p>指定绑定的标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * DNS Server 地址
+   * <p>DNS Server 地址</p>
    */
   DnsServers?: DnsServers
 }
@@ -6666,7 +6670,7 @@ export interface ResetRoutePolicyEntriesResponse {
  */
 export interface ModifyVpnGatewaySslServerResponse {
   /**
-   * 异步任务TASKID
+   * <p>异步任务TASKID</p>
    */
   TaskId?: number
   /**
@@ -7811,25 +7815,33 @@ export interface TranslationAclRule {
  */
 export interface CustomerGateway {
   /**
-   * 用户网关唯一ID
+   * <p>用户网关唯一ID</p>
    */
   CustomerGatewayId?: string
   /**
-   * 网关名称
+   * <p>网关名称</p>
    */
   CustomerGatewayName?: string
   /**
-   * 公网地址
+   * <p>公网地址</p>
    */
   IpAddress?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * BGP ASN。
+   * <p>BGP ASN。</p>
    */
   BgpAsn?: number
+  /**
+   * <p>关联通道数</p>
+   */
+  VpnConnNum?: number
+  /**
+   * <p>标签信息</p>
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -7905,11 +7917,11 @@ export interface ModifyBandwidthPackageAttributeResponse {
  */
 export interface CreateVpnGatewaySslServerResponse {
   /**
-   * 创建SSL-VPN server 异步任务ID。
+   * <p>创建SSL-VPN server 异步任务ID。</p>
    */
   TaskId?: number
   /**
-   * SSL-VPN-SERVER 唯一ID。
+   * <p>SSL-VPN-SERVER 唯一ID。</p>
    */
   SslVpnServerId?: string
   /**
@@ -8807,13 +8819,17 @@ export interface DeleteAddressTemplateGroupRequest {
  */
 export interface CreateVpnGatewaySslClientResponse {
   /**
-   * 异步任务ID。
+   * <p>异步任务ID。</p>
    */
   TaskId?: number
   /**
-   * SSL-VPN client 唯一ID
+   * <p>SSL VPN客户端唯一ID</p>
    */
   SslVpnClientId?: string
+  /**
+   * <p>SSL VPN客户端唯一ID</p><p>仅批量场景返回</p>
+   */
+  SslVpnClientIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11794,51 +11810,52 @@ export interface RenewAddressesResponse {
  */
 export interface ModifyVpnGatewaySslServerRequest {
   /**
-   * SSL-VPN SERVER 实例ID
+   * <p>SSL-VPN SERVER 实例ID</p>
    */
   SslVpnServerId: string
   /**
-   * SSL-VPN SERVER NAME
+   * <p>SSL-VPN SERVER NAME</p>
    */
   SslVpnServerName?: string
   /**
-   * 本端地址
+   * <p>本端地址</p>
    */
   LocalAddress?: Array<string>
   /**
-   * 客户端地址
+   * <p>客户端地址</p>
    */
   RemoteAddress?: string
   /**
-   * SSL VPN服务端监听协议。当前仅支持 UDP。默认UDP
+   * <p>SSL VPN服务端监听协议。当前仅支持 UDP。默认UDP</p>
+   * @deprecated
    */
   SslVpnProtocol?: string
   /**
-   * SSL VPN服务端监听协议端口。
+   * <p>SSL VPN服务端监听协议端口。</p>
    */
   SslVpnPort?: number
   /**
-   * 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 默认AES-128-CBC。
+   * <p>加密算法。可选值 &#39;AES-128-CBC&#39;, &#39;AES-192-CBC&#39;, &#39;AES-256-CBC&#39;, &#39;AES-128-GCM&#39;, &#39;AES-192-GCM&#39;, &#39;AES-256-GCM&#39;, 默认AES-128-CBC。</p>
    */
   EncryptAlgorithm?: string
   /**
-   * 认证算法。可选 'SHA1'，默认SHA1。
+   * <p>认证算法。可选 &#39;SHA1&#39;, &#39;MD5&#39;, &#39;SHA224&#39;, &#39;SHA256&#39;, &#39;SHA384&#39;, &#39;SHA512&#39;，默认SHA1。</p>
    */
   IntegrityAlgorithm?: string
   /**
-   * 是否支持压缩。当前不支持压缩。默认False。
+   * <p>是否支持压缩。当前不支持压缩。默认False。</p>
    */
   Compress?: boolean
   /**
-   * 是否开启SSO认证。默认为False。该功能当前需要申请开白使用。
+   * <p>是否开启SSO认证。默认为False。该功能当前需要申请开白使用。</p>
    */
   SsoEnabled?: boolean
   /**
-   * SAML-DATA
+   * <p>SAML-DATA</p>
    */
   SamlData?: string
   /**
-   * DNS Server地址
+   * <p>DNS Server地址</p>
    */
   DnsServers?: DnsServers
 }
@@ -12603,19 +12620,19 @@ export interface GatewayFlowMonitorDetail {
  */
 export interface CreateVpnGatewaySslClientRequest {
   /**
-   * SSL-VPN-SERVER 实例ID。
+   * <p>SSL-VPN-SERVER 实例ID。</p>
    */
   SslVpnServerId: string
   /**
-   * SSL-VPN-CLIENT实例Name。不可和SslVpnClientNames同时使用。
+   * <p>SSL-VPN-CLIENT实例Name。不可和SslVpnClientNames同时使用。</p>
    */
   SslVpnClientName?: string
   /**
-   * SSL-VPN-CLIENT实例Name数字。批量创建时使用。不可和SslVpnClientName同时使用。
+   * <p>SSL-VPN-CLIENT实例Name数字。批量创建时使用。不可和SslVpnClientName同时使用。</p>
    */
   SslVpnClientNames?: Array<string>
   /**
-   * 指定绑定的标签列表
+   * <p>指定绑定的标签列表</p>
    */
   Tags?: Array<Tag>
 }
@@ -14657,22 +14674,19 @@ export interface DnsServers {
  */
 export interface DescribeCustomerGatewaysRequest {
   /**
-   * 对端网关ID，例如：cgw-2wqq41m9。每次请求的实例的上限为100。参数不支持同时指定CustomerGatewayIds和Filters。
+   * <p>对端网关ID，例如：cgw-2wqq41m9。每次请求的实例的上限为100。参数不支持同时指定CustomerGatewayIds和Filters。</p>
    */
   CustomerGatewayIds?: Array<string>
   /**
-   * 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定CustomerGatewayIds和Filters。
-<li>customer-gateway-id - String - （过滤条件）用户网关唯一ID形如：`cgw-mgp33pll`。</li>
-<li>customer-gateway-name - String - （过滤条件）用户网关名称形如：`test-cgw`。</li>
-<li>ip-address - String - （过滤条件）公网地址形如：`58.211.1.12`。</li>
+   * <p>过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定CustomerGatewayIds和Filters。<li>customer-gateway-id - String - （过滤条件）用户网关唯一ID形如：<code>cgw-mgp33pll</code>。</li><li>customer-gateway-name - String - （过滤条件）用户网关名称形如：<code>test-cgw</code>。</li><li>ip-address - String - （过滤条件）公网地址形如：<code>58.211.1.12</code>。</li><li>ip-version - String - （过滤条件）公网地址类型,可选值[&#39;IPv4&#39;,&#39;IPv6&#39;]。</li></p>
    */
   Filters?: Array<Filter>
   /**
-   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
+   * <p>偏移量，默认为0。关于Offset的更进一步介绍请参考 API <a href="https://cloud.tencent.com/document/api/213/11646">简介</a>中的相关小节。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
 }
@@ -15795,6 +15809,10 @@ export interface VpnGateway {
    * <p>标签列表</p>
    */
   TagSet?: Array<Tag>
+  /**
+   * <p>私网VPN标识</p>
+   */
+  IsPrivate?: boolean
 }
 
 /**
@@ -17200,11 +17218,11 @@ export interface DescribeSubnetsResponse {
  */
 export interface DescribeCustomerGatewaysResponse {
   /**
-   * 对端网关对象列表。
+   * <p>对端网关对象列表。</p>
    */
   CustomerGatewaySet?: Array<CustomerGateway>
   /**
-   * 符合条件的实例数量。
+   * <p>符合条件的实例数量。</p>
    */
   TotalCount?: number
   /**
@@ -18076,6 +18094,7 @@ export interface CreateVpnGatewayRequest {
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
    * <p>可用区，如：ap-guangzhou-2。</p>
+   * @deprecated
    */
   Zone?: string
   /**
@@ -18098,6 +18117,26 @@ export interface CreateVpnGatewayRequest {
    * <p>BGP ASN。</p>
    */
   BgpAsn?: number
+  /**
+   * <p>是否是私网类型</p>
+   */
+  IsPrivate?: boolean
+  /**
+   * <p>私网唯一ID</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>BGP 开关，开启时需指定BgpAsn。</p>
+   */
+  BgpEnable?: boolean
+  /**
+   * <p>内外层IP协议</p><p>枚举值：</p><ul><li>4in4： IPv4 over IPv4</li><li>6in4： IPv6 over IPv4</li><li>6in6： IPv6 over IPv6</li><li>4in6： IPv4 over IPv6</li></ul><p>默认值：4in4</p>
+   */
+  IpStack?: string
+  /**
+   * <p>CCN类型私网VPN接入网段</p>
+   */
+  AccessSubnet?: string
 }
 
 /**

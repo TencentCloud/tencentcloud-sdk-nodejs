@@ -11864,6 +11864,14 @@ export interface CreateCloudInstanceRequest {
    * <p>是否开启实例保护</p>
    */
   TerminateProtection?: boolean
+  /**
+   * <p>是否启用emr-proxy</p><p>枚举值：</p><ul><li>true： 启用</li><li>false： 关闭</li></ul>
+   */
+  EnableEmrProxy?: boolean
+  /**
+   * <p>日志存储服务实例id</p>
+   */
+  LogStoreID?: string
 }
 
 /**

@@ -3865,7 +3865,7 @@ export interface DeleteCustomErrorPageRequest {
    */
   ZoneId: string
   /**
-   * 自定义页面 ID。
+   * 自定义响应页面 ID。
    */
   PageId: string
 }
@@ -5206,11 +5206,11 @@ export interface MaxAge {
  */
 export interface DescribeCustomErrorPagesResponse {
   /**
-   * 自定义错误页面总数。
+   * <p>自定义响应页面总数。</p>
    */
   TotalCount?: number
   /**
-   * 自定义错误页面数据列表。
+   * <p>自定义响应页面数据列表。</p>
    */
   ErrorPages?: Array<CustomErrorPage>
   /**
@@ -13154,23 +13154,19 @@ export interface ModifyL4ProxyRulesStatusRequest {
  */
 export interface DescribeCustomErrorPagesRequest {
   /**
-   * 站点 ID。
+   * <p>站点 ID。</p>
    */
   ZoneId: string
   /**
-   * 过滤条件，Filters.Values 的上限为20，详细的过滤条件Name值如下：
-<li>page-id： 按照页面 ID 进行过滤；</li>
-<li>name： 按照页面名称进行过滤；</li>
-<li>description：按照页面描述过滤；</li>
-<li>content-type：按照页面类型过滤。</li>
+   * <p>过滤条件，Filters.Values 的上限为 20，详细的过滤条件Name值如下：<li>page-id： 按照页面 ID 进行过滤；</li><li>name： 按照页面名称进行过滤；</li><li>description：按照页面描述过滤；</li><li>content-type：按照页面类型过滤。</li></p>
    */
   Filters?: Array<AdvancedFilter>
   /**
-   * 分页查询偏移量。默认值：0。
+   * <p>分页查询偏移量。默认值：0。</p>
    */
   Offset?: number
   /**
-   * 分页查询限制数目。默认值：20，最大值：1000。
+   * <p>分页查询限制数目。默认值：20，最大值：1000。</p>
    */
   Limit?: number
 }

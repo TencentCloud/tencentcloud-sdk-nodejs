@@ -28,7 +28,7 @@ import {
   ServerPushText,
   RoomUser,
   StartAIConversationResponse,
-  CreateScanUserRequest,
+  STTConfig,
   StartAIConversationRequest,
   DescribeScanResultListRequest,
   StartRecordRequest,
@@ -91,9 +91,12 @@ import {
   VoiceFilterConf,
   DescribeApplicationDataRequest,
   CreateScanUserResponse,
+  CreateAudioModerationSyncResponse,
   TurnDetection,
+  ModerationCheckDetail,
   VoicePrint,
   DeleteVoicePrintResponse,
+  CreateAudioModerationSyncRequest,
   ModifyUserMicStatusResponse,
   DescribeTaskInfoResponse,
   ApplicationDataStatistics,
@@ -109,6 +112,7 @@ import {
   DescribeAppStatisticsRequest,
   StopRecordRequest,
   CreateAppRequest,
+  AudioSegments,
   ControlAIConversationRequest,
   StatisticsItem,
   ScanVoiceResponse,
@@ -117,11 +121,12 @@ import {
   DescribeRealtimeScanConfigResponse,
   Task,
   DeleteRoomMemberRequest,
+  ImageLocation,
   CreateCustomizationRequest,
   UpdateScanRoomsRequest,
   DescribeRealtimeScanConfigRequest,
   InvokeLLM,
-  STTConfig,
+  CreateScanUserRequest,
   StreamTextStatisticsItem,
   DescribeAgeDetectTaskResponse,
   StopAIConversationRequest,
@@ -261,6 +266,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateScanRoomsResponse) => void
   ): Promise<UpdateScanRoomsResponse> {
     return this.request("UpdateScanRooms", req, cb)
+  }
+
+  /**
+   * 短音频内容理解同步接口
+   */
+  async CreateAudioModerationSync(
+    req: CreateAudioModerationSyncRequest,
+    cb?: (error: string, rep: CreateAudioModerationSyncResponse) => void
+  ): Promise<CreateAudioModerationSyncResponse> {
+    return this.request("CreateAudioModerationSync", req, cb)
   }
 
   /**

@@ -345,15 +345,15 @@ export interface DeleteMonitorRequest {
  */
 export interface DescribeAddressPoolListRequest {
   /**
-   * 告警过滤条件：PoolName：地址池名称；MonitorId：监控器id
+   * <p>告警过滤条件：PoolName：地址池名称；MonitorId：监控器id</p>
    */
   Filters?: Array<ResourceFilter>
   /**
-   * 页数
+   * <p>页数</p>
    */
   Offset?: number
   /**
-   * 每页数
+   * <p>每页数</p>
    */
   Limit?: number
 }
@@ -377,7 +377,7 @@ export interface ModifyStrategyResponse {
  */
 export interface DescribeDnsLineListRequest {
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId: string
 }
@@ -1169,11 +1169,11 @@ export interface DescribeDetectTaskPackageListRequest {
  */
 export interface DescribeStrategyListResponse {
   /**
-   * 策略列表
+   * <p>策略列表</p>
    */
   StrategySet?: Array<Strategy>
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
@@ -1221,7 +1221,7 @@ export interface CreateStrategyRequest {
  */
 export interface DescribeDnsLineListResponse {
   /**
-   * 地址池列表
+   * <p>地址池列表</p>
    */
   DnsLineSet?: Array<GroupLine>
   /**
@@ -1249,7 +1249,7 @@ export interface DescribeInstanceDetailResponse {
  */
 export interface DescribeMonitorDetailResponse {
   /**
-   * 探测规则
+   * <p>探测规则</p>
    */
   MonitorDetail?: MonitorDetail
   /**
@@ -1511,19 +1511,19 @@ export interface DescribeAddressLocationRequest {
  */
 export interface DescribeStrategyListRequest {
   /**
-   * 实例 id
+   * <p>实例 id</p>
    */
   InstanceId: string
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit?: number
   /**
-   * 策略过滤条件：StrategyName：策略名称
+   * <p>策略过滤条件：StrategyName：策略名称</p>
    */
   Filters?: Array<ResourceFilter>
 }
@@ -1533,7 +1533,7 @@ export interface DescribeStrategyListRequest {
  */
 export interface DescribeMonitorDetailRequest {
   /**
-   * 监控器id
+   * <p>监控器id</p>
    */
   MonitorId: number
 }
@@ -1693,11 +1693,11 @@ AUTO INTERNAL OVERSEAS IPV6 ALL
  */
 export interface DescribeAddressPoolListResponse {
   /**
-   * 资源组列表
+   * <p>资源组列表</p>
    */
   AddressPoolSet?: Array<AddressPool>
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
@@ -2022,8 +2022,8 @@ export interface DescribeInstanceListResponse {
 export interface ResourceFilter {
   /**
    * 过滤字段名，支持的列表如下：
-- type：主资源类型，CDN。
-- instanceId：IGTM实例ID。此为必传参数，未传将导致接口查询失败。
+- MonitorName：监控器名称。
+- MonitorId：监控器名称
    */
   Name: string
   /**
