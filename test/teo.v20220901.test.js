@@ -1608,9 +1608,9 @@ it("teo.v20220901.DescribeEdgeKVNamespaces", async function () {
     }
 })
 
-it("teo.v20220901.ModifyHostsCertificate", async function () {
+it("teo.v20220901.DescribeAvailableOriginACLFamily", async function () {
     try {
-       const data = await client.ModifyHostsCertificate({})
+       const data = await client.DescribeAvailableOriginACLFamily({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1921,6 +1921,16 @@ it("teo.v20220901.DescribeOriginProtection", async function () {
 it("teo.v20220901.ModifyL4ProxyRulesStatus", async function () {
     try {
        const data = await client.ModifyL4ProxyRulesStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyHostsCertificate", async function () {
+    try {
+       const data = await client.ModifyHostsCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

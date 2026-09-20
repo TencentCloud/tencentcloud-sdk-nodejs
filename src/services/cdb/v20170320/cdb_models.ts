@@ -3461,6 +3461,10 @@ export interface SlaveInfo {
    * <p>第二备机信息</p>
    */
   Second?: SlaveInstanceInfo
+  /**
+   * <p>第三备机信息</p>
+   */
+  Third?: SlaveInstanceInfo
 }
 
 /**
@@ -4671,15 +4675,15 @@ export interface DeliverSummary {
  */
 export interface OpenDBInstanceEncryptionRequest {
   /**
-   * 云数据库实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   * <p>云数据库实例 ID。可通过 <a href="https://cloud.tencent.com/document/product/236/15872">DescribeDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 用户自定义密钥 ID，CMK 唯一标识符。该值为空时，将使用腾讯云自动生成的密钥 KMS-CDB。
+   * <p>用户自定义密钥 ID，CMK 唯一标识符。该值为空时，将使用腾讯云自动生成的密钥 KMS-CDB。</p>
    */
   KeyId?: string
   /**
-   * 用户自定义密钥的存储地域。如：ap-guangzhou 。KeyId 不为空时，该参数必填。
+   * <p>用户自定义密钥的存储地域。如：ap-guangzhou 。KeyId 不为空时，该参数必填。</p>
    */
   KeyRegion?: string
 }
@@ -7415,6 +7419,10 @@ export interface InstanceInfo {
    * <p>实例销毁保护状态，on表示开启保护，否则为关闭保护</p>
    */
   DestroyProtect?: string
+  /**
+   * <p>云盘版实例才使用该值。 on表示磁盘加密，否则为不加密。</p>
+   */
+  DiskEncryption?: string
   /**
    * <p>TDSQL引擎参数</p>
    */

@@ -238,17 +238,13 @@ export interface DescribeDBInstanceParamTplRequest {
 }
 
 /**
- * CreateBackupDBInstance返回参数结构体
+ * CheckDBInstanceElasticCpuScalable请求参数结构体
  */
-export interface CreateBackupDBInstanceResponse {
+export interface CheckDBInstanceElasticCpuScalableRequest {
   /**
-   * <p>查询备份流程的状态。</p>
+   * <p>实例ID</p>
    */
-  AsyncRequestId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId?: string
 }
 
 /**
@@ -309,6 +305,48 @@ export interface DBInstancePrice {
    * 实例折扣价。单位：元。
    */
   DiscountPrice: number
+}
+
+/**
+ * CheckDBInstanceElasticCpuScalable返回参数结构体
+ */
+export interface CheckDBInstanceElasticCpuScalableResponse {
+  /**
+   * <p>是否可以进行弹性CPU扩容</p>
+   */
+  Scalable?: boolean
+  /**
+   * <p>当前是否处于扩容状态</p>
+   */
+  IsScaled?: boolean
+  /**
+   * <p>实例是否被锁定（有流程在执行）</p>
+   */
+  IsLocked?: boolean
+  /**
+   * <p>不可扩容的原因</p>
+   */
+  Reason?: string
+  /**
+   * <p>最大可扩容的CPU核数，MIN(最小分片CPU核数, 24)</p>
+   */
+  MaxExtraCpu?: number
+  /**
+   * <p>当前扩容的CPU核数（如果处于扩容状态）</p>
+   */
+  ExtraCpu?: number
+  /**
+   * <p>扩容触发类型: 1-手动, 2-周期, 3-一次性时间段, 4-监控</p>
+   */
+  TriggerType?: number
+  /**
+   * <p>扩容时间</p>
+   */
+  ScaleUpTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -866,18 +904,13 @@ export interface DescribeDBInstanceDealResponse {
 }
 
 /**
- * DescribeAuditInstanceList返回参数结构体
+ * CreateBackupDBInstance返回参数结构体
  */
-export interface DescribeAuditInstanceListResponse {
+export interface CreateBackupDBInstanceResponse {
   /**
-   * 实例总数。
+   * <p>查询备份流程的状态。</p>
    */
-  TotalCount?: number
-  /**
-   * 审计实例详情。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<AuditInstance>
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4741,6 +4774,25 @@ export interface OfflineIsolatedDBInstanceRequest {
    * 实例ID。请登录 [MongoDB 控制台回收站](https://console.cloud.tencent.com/mongodb/recycle)在实例列表复制需下线的实例 ID。
    */
   InstanceId: string
+}
+
+/**
+ * DescribeAuditInstanceList返回参数结构体
+ */
+export interface DescribeAuditInstanceListResponse {
+  /**
+   * 实例总数。
+   */
+  TotalCount?: number
+  /**
+   * 审计实例详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<AuditInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

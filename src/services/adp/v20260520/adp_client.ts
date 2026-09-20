@@ -66,6 +66,7 @@ import {
   AgentSpec,
   ClawAgentConfig,
   ModelLimit,
+  Distribution,
   CreatePluginRequest,
   ThinkModel,
   DeleteAgentResponse,
@@ -107,6 +108,7 @@ import {
   ModifyVariableRequest,
   DescribeConcurrencyLimitDetailListRequest,
   MCPPluginConfig,
+  DescribeAppStatisticsOverviewRequest,
   CreateMsgRecordCategoryResponse,
   CreateQAListRequest,
   DeleteVariableRequest,
@@ -196,11 +198,11 @@ import {
   AppAppeal,
   DescribeSkillCategoryListRequest,
   DigitalHumanConfig,
+  IntervalSchedule,
   DescribeLatestReleaseResponse,
   SearchContext,
   ResponseParam,
   SingleWorkflowConfig,
-  CreatePluginResponse,
   CreateSimilarQuestionResponse,
   DescribeChannelResponse,
   QAModifyFields,
@@ -268,7 +270,7 @@ import {
   WechatClawBotChannelConfig,
   AuditLog,
   UnfavoriteSkillRequest,
-  InputBoxConfig,
+  DescribeConversationResponse,
   AppTrigger,
   DescribeAgentSummaryListResponse,
   DeleteKBRequest,
@@ -499,7 +501,7 @@ import {
   BasicBilling,
   DescribeAppRequest,
   DescribeResourceSummaryRequest,
-  IntervalSchedule,
+  CreatePluginResponse,
   DescribeLatestReleaseRequest,
   DeleteChannelRequest,
   CronSchedule,
@@ -526,7 +528,7 @@ import {
   DescribeAuditLogListRequest,
   VoiceConfig,
   DocUpdatePeriod,
-  DescribeConversationResponse,
+  InputBoxConfig,
   Space,
   PluginUsageSummary,
   AppMetadata,
@@ -541,6 +543,7 @@ import {
   RerankConfig,
   ConcurrencyLimitDetail,
   CreateMsgRecordCategoryRequest,
+  DescribeAppStatisticsOverviewResponse,
   DescribeAgentDetailRequest,
   AgentPluginParameter,
   PluginUsageDetail,
@@ -1563,6 +1566,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPluginResponse) => void
   ): Promise<ModifyPluginResponse> {
     return this.request("ModifyPlugin", req, cb)
+  }
+
+  /**
+   * 查询应用视图下的调用统计总览，包含总调用次数、调用成功率、总tokens平均耗时及首tokens平均耗时；RAG 应用额外返回各回复方式的调用次数及占比，用于绘制饼图
+   */
+  async DescribeAppStatisticsOverview(
+    req: DescribeAppStatisticsOverviewRequest,
+    cb?: (error: string, rep: DescribeAppStatisticsOverviewResponse) => void
+  ): Promise<DescribeAppStatisticsOverviewResponse> {
+    return this.request("DescribeAppStatisticsOverview", req, cb)
   }
 
   /**

@@ -260,6 +260,7 @@ import {
   AlgDetectRule,
   SecEntryValue,
   DescribeSecurityAPIResourceRequest,
+  OriginACLFamilyInfo,
   DiffIPWhitelist,
   DeleteSecurityIPGroupResponse,
   ModifyRuleRequest,
@@ -325,7 +326,7 @@ import {
   DummyParseZoneFullConfigRequest,
   DescribeConfigGroupVersionDetailRequest,
   ModifyPlanResponse,
-  DropPageDetail,
+  DescribeAvailableOriginACLFamilyResponse,
   CnameStatus,
   DescribeLogAnalysisDownloadTasksResponse,
   WafConfig,
@@ -769,6 +770,7 @@ import {
   DDoSBlockData,
   IPSSLSetting,
   DescribeContentQuotaRequest,
+  DescribeAvailableOriginACLFamilyRequest,
   ModifyFunctionReplicaRequest,
   DescribeMultiPathGatewaysRequest,
   BotPortraitRule,
@@ -850,6 +852,7 @@ import {
   DescribeL4ProxyRulesRequest,
   AiRule,
   Function,
+  DropPageDetail,
   DescribeWebSecurityTemplatesResponse,
   KVNamespaceParameters,
   DescribePrefetchOriginLimitResponse,
@@ -2541,15 +2544,29 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-     * 完成域名创建之后，您可以为域名配置自有证书，也可以使用 EdgeOne 为您提供的 [免费证书](https://cloud.tencent.com/document/product/1552/90437)。
-如果您需要配置自有证书，请先将证书上传至 [SSL证书控制台](https://console.cloud.tencent.com/certoverview)，然后在本接口中传入对应的证书 ID。详情参考 [部署自有证书至 EdgeOne 域名
-](https://cloud.tencent.com/document/product/1552/88874)。
+     * 查询源站防护 IP 段控制域详细信息，包含版本号和具体IP网段信息等。
+标准控制域和精简控制域主要区别在于提供的 IP 段数量差异，后者数量更少,但是使用上有些限制，具体限制请咨询产品。具体格式说明如下：
+标准控制域：
+<li>gaz：标准全球控制域；</li>
+<li>mlc：标准中国控制域；</li>
+<li>emc：标准海外(全球不含中国)控制域；</li>
+精简控制域控制域：
+<li>plat-gaz：精简全球控制域；</li>
+<li>plat-mlc：精简中国控制域；</li>
+<li>plat-emc：精简海外(全球不含中国)控制域；</li>
+<li>plat-specific-gaz：定制版控全球可用区制域；</li>
+<li>plat-specific-mlc：定制版控中国大陆可用区控制域；</li>
+<li>plat-specific-emc：定制版控全球（不含中国大陆）可用区控制域；</li>
+缩写说明：
+<li>gaz：Global AZ Availability Zone;</li>
+<li>mlc：mainlandChina;</li>
+<li>emc：Exclude mainlandChina.</li>
      */
-  async ModifyHostsCertificate(
-    req: ModifyHostsCertificateRequest,
-    cb?: (error: string, rep: ModifyHostsCertificateResponse) => void
-  ): Promise<ModifyHostsCertificateResponse> {
-    return this.request("ModifyHostsCertificate", req, cb)
+  async DescribeAvailableOriginACLFamily(
+    req: DescribeAvailableOriginACLFamilyRequest,
+    cb?: (error: string, rep: DescribeAvailableOriginACLFamilyResponse) => void
+  ): Promise<DescribeAvailableOriginACLFamilyResponse> {
+    return this.request("DescribeAvailableOriginACLFamily", req, cb)
   }
 
   /**
@@ -2870,6 +2887,18 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyL4ProxyRulesStatusResponse) => void
   ): Promise<ModifyL4ProxyRulesStatusResponse> {
     return this.request("ModifyL4ProxyRulesStatus", req, cb)
+  }
+
+  /**
+     * 完成域名创建之后，您可以为域名配置自有证书，也可以使用 EdgeOne 为您提供的 [免费证书](https://cloud.tencent.com/document/product/1552/90437)。
+如果您需要配置自有证书，请先将证书上传至 [SSL证书控制台](https://console.cloud.tencent.com/certoverview)，然后在本接口中传入对应的证书 ID。详情参考 [部署自有证书至 EdgeOne 域名
+](https://cloud.tencent.com/document/product/1552/88874)。
+     */
+  async ModifyHostsCertificate(
+    req: ModifyHostsCertificateRequest,
+    cb?: (error: string, rep: ModifyHostsCertificateResponse) => void
+  ): Promise<ModifyHostsCertificateResponse> {
+    return this.request("ModifyHostsCertificate", req, cb)
   }
 
   /**

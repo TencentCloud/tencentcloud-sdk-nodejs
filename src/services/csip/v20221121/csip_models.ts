@@ -1407,6 +1407,18 @@ export interface DescribeSkillScanPayInfoResponse {
    */
   NickName?: string
   /**
+   * <p>后付费资源状态<br>枚举值：<br>0：未开通<br>1：正常<br>2：隔离</p>
+   */
+  PostPayStatus?: number
+  /**
+   * <p>后付费资源ID，未开通后付费时为空</p>
+   */
+  PostPayResourceId?: string
+  /**
+   * <p>后付费资源开通时间，未开通后付费时为空。格式 YYYY-MM-DD HH:mm:ss</p>
+   */
+  PostPayBeginTime?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5390,73 +5402,46 @@ export interface CustomAgentRunModePolicy {
 }
 
 /**
- * 风险详情
+ * DescribeSkillScanTaskList请求参数结构体
  */
-export interface RiskDetailItem {
+export interface DescribeSkillScanTaskListRequest {
   /**
-   * <p>首次发现时间</p>
+   * 偏移量，默认 0
    */
-  CreateTime?: string
+  Offset?: number
   /**
-   * <p>更新时间</p>
+   * 每页数量，默认 10，上限 200
    */
-  UpdateTime?: string
+  Limit?: number
   /**
-   * <p>风险状态</p>
+   * 开始时间，筛选上传时间不早于该时刻的任务
+参数格式：YYYY-MM-DD HH:mm:ss
+最大长度：128 字符
+使用约束：StartTime 与 EndTime 要么同时传入，要么都不传；都不传时默认查询本月数据
    */
-  RiskStatus?: number
+  StartTime?: string
   /**
-   * <p>风险内容</p>
+   * 结束时间，筛选上传时间不晚于该时刻的任务
+参数格式：YYYY-MM-DD HH:mm:ss
+最大长度：128 字符
+建议与 StartTime 同时传入；未传入时默认使用当前时间作为结束时间
    */
-  RiskContent?: string
+  EndTime?: string
   /**
-   * <p>云厂商</p>
+   * 排序方式
+最大长度：128 字符
+枚举值：
+ASC：升序
+DESC：降序（默认）
    */
-  Provider?: string
+  Order?: string
   /**
-   * <p>云厂商名称</p>
+   * 排序字段
+最大长度：128 字符
+枚举值：
+InsertTime：上传时间（默认）
    */
-  ProviderName?: string
-  /**
-   * <p>云账号</p>
-   */
-  CloudAccountId?: string
-  /**
-   * <p>云账号名称</p>
-   */
-  CloudAccountName?: string
-  /**
-   * <p>实例ID</p>
-   */
-  InstanceId?: string
-  /**
-   * <p>实例名称</p>
-   */
-  InstanceName?: string
-  /**
-   * <p>风险ID</p>
-   */
-  RiskId?: number
-  /**
-   * <p>风险规则ID</p>
-   */
-  RiskRuleId?: string
-  /**
-   * <p>风险验证状态</p>
-   */
-  CheckStatus?: string
-  /**
-   * <p>用户AppID</p>
-   */
-  AppID?: number
-  /**
-   * <p>资产类型</p>
-   */
-  AssetType?: string
-  /**
-   * <p>风险忽略原因</p>
-   */
-  Reason?: string
+  By?: string
 }
 
 /**
@@ -9139,7 +9124,7 @@ export interface DescribeDspmSessionListRequest {
    */
   Offset?: number
   /**
-   * <p>登陆状态(0 全部 1 成功 2 失败)</p>
+   * <p>登录状态</p><p>枚举值：</p><ul><li>0： 全部</li><li>1： 成功</li><li>2： 失败</li></ul>
    */
   LoginType?: number
   /**
@@ -12366,6 +12351,24 @@ export interface CycleScanConf {
    * <p>扫描时段结束时间，格式 HH:mm，例如 06:00。</p>
    */
   ScanEnd: string
+}
+
+/**
+ * DescribeSkillScanTaskList返回参数结构体
+ */
+export interface DescribeSkillScanTaskListResponse {
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+  /**
+   * 扫描任务列表，按上传时间倒序排列
+   */
+  TaskList?: Array<SkillScanTaskItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16920,6 +16923,10 @@ export interface CreateCFGRiskPDFReportExportJobRequest {
    * <p>排序字段</p>
    */
   By?: string
+  /**
+   * <p>资产标签ID</p>
+   */
+  AssetTagIDs?: Array<number | bigint>
 }
 
 /**
@@ -17440,24 +17447,6 @@ export interface DescribeUserDspmInfoListResponse {
    * 账号总数
    */
   Count?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClusterListV2返回参数结构体
- */
-export interface DescribeClusterListV2Response {
-  /**
-   * <p>总数</p>
-   */
-  TotalCount?: number
-  /**
-   * <p>列表</p>
-   */
-  List?: Array<ClusterListItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20705,6 +20694,25 @@ export interface CopyBaselinePolicyRequest {
 }
 
 /**
+ * Skill 扫描任务列表项
+ */
+export interface SkillScanTaskItem {
+  /**
+   * 上传时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  InsertTime?: string
+  /**
+   * Skill 名称
+   */
+  SkillName?: string
+  /**
+   * 消耗次数（总消耗次数）
+   */
+  DeductCount?: number
+}
+
+/**
  * ScanEDRTaskAgain请求参数结构体
  */
 export interface ScanEDRTaskAgainRequest {
@@ -23642,15 +23650,15 @@ export interface DescribeCheckViewRisksRequest {
  */
 export interface DescribeDspmAssetFieldListRequest {
   /**
-   * 资产实例id
+   * <p>资产实例id</p>
    */
   AssetId: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName: string
   /**
-   * 表名
+   * <p>表名</p>
    */
   TableName: string
   /**
@@ -23658,9 +23666,13 @@ export interface DescribeDspmAssetFieldListRequest {
    */
   MemberId?: Array<string>
   /**
-   * 筛选项
+   * <p>筛选项</p>
    */
   Filter?: Filter
+  /**
+   * <p>SchemaName</p>
+   */
+  SchemaName?: string
 }
 
 /**
@@ -28469,39 +28481,39 @@ export interface BaselineItem {
  */
 export interface ModifyDspmCkafkaSaveRequest {
   /**
-   * 接入类型，当前支持 1和7, 类型vip网络类型（1:外网TGW 2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境）
+   * <p>接入类型，当前支持 1和7</p><p>枚举值：</p><ul><li>1： 外网TGW</li><li>2： 基础网络</li><li>3： VPC网络</li><li>4： idc环境-支撑网络</li><li>5： SSL外网访问方式访问</li><li>6： 黑石环境vpc</li><li>7： cvm环境-支撑网络</li></ul>
    */
   VipType: number
   /**
-   * 实例的地域
+   * <p>实例的地域</p>
    */
   RegionId: string
   /**
-   * 实例的id
+   * <p>实例的id</p>
    */
   InstanceId: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName: string
   /**
-   * 实例的接入信息
+   * <p>实例的接入信息</p>
    */
   RouteInfo: RouteInfo
   /**
-   * 接入为域名的时候，有效
+   * <p>接入为域名的时候，有效</p>
    */
   Username: string
   /**
-   * 接入为域名的时候，有效
+   * <p>接入为域名的时候，有效</p>
    */
   Password: string
   /**
-   * 日志投递的主题配置
+   * <p>日志投递的主题配置</p>
    */
   LogDeliveryInfo: Array<LogDeliveryInfo>
   /**
-   * 已存在配置时是否覆盖，默认 false（不覆盖，保持兼容）
+   * <p>已存在配置时是否覆盖，默认 false（不覆盖，保持兼容）</p>
    */
   IsOverwrite?: boolean
   /**
@@ -29243,19 +29255,23 @@ export interface ModifyCosAuditObjectSampleRateResponse {
  */
 export interface DescribeDspmAssetTableListRequest {
   /**
-   * 资产实例id
+   * <p>资产实例id</p>
    */
   AssetId: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName: string
+  /**
+   * <p>Schema名称</p>
+   */
+  SchemaName?: string
   /**
    * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
-   * 筛选项
+   * <p>筛选项</p>
    */
   Filter?: Filter
 }
@@ -34488,11 +34504,11 @@ export interface DescribeNICAssetsRequest {
  */
 export interface DescribeDspmAssetFieldListResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   DataSet?: Array<DspmAssetFieldInfo>
   /**
@@ -36098,20 +36114,6 @@ export interface DeleteIaCFileRequest {
    * <p>删除ID列表</p>
    */
   Id: Array<number | bigint>
-}
-
-/**
- * DescribeClusterListV2请求参数结构体
- */
-export interface DescribeClusterListV2Request {
-  /**
-   * <p>集团账号的成员id</p>
-   */
-  MemberId?: Array<string>
-  /**
-   * <p>通用过滤条件列表。支持的过滤字段：<br>ClusterId：集群ID，精确匹配。<br>ClusterName：集群名称，模糊匹配。<br>ClusterType：集群类型，精确匹配。取值：TKE_MANAGED_CLUSTER（腾讯云标准集群）、TKE_INDEPENDENT_CLUSTER（标准集群Master自维护）、TKE_SERVERLESS_CLUSTER（Serverless集群）、TKE_EDGE_CLUSTER（边缘集群）、SELF_BUILT（腾讯云内自建）、SELF_BUILT_OTHER（非腾讯云自建/混合云）。<br>RunStatus：集群运行状态，精确匹配。取值：Running（运行中）、Exception（异常）、Unknown（未知）。<br>AccessedStatus：接入状态，精确匹配。取值：AccessedNone（未接入）、AccessedInstalling（接入中）、AccessedException（接入异常）、AccessedInstalled（已接入）。<br>DefendStatus：防护状态，精确匹配。取值：Enabled（已防护）、Partial（部分防护）、Disabled（未防护）。<br>RiskStatus：风险检查状态，精确匹配。<br>RiskLevel：风险等级，精确匹配。取值：CRITICAL、HIGH、MEDIUM、LOW、NONE（无风险）。<br>HasHighRisk：仅筛选含高危及以上风险的集群，无需填入 value，传入 HasHighRisk 即生效。<br>Region：地域，精确匹配。<br>OwnerName：负责人，模糊匹配。<br>ClusterAssetIds：集群资产ID，精确匹配。<br>ExcludeClusterAssetIds：排除的集群资产ID，精确排除。</p>
-   */
-  Filter?: Filter
 }
 
 /**
@@ -38794,25 +38796,73 @@ export interface VULRiskInfo {
 }
 
 /**
- * BindClusterOwner请求参数结构体
+ * 风险详情
  */
-export interface BindClusterOwnerRequest {
+export interface RiskDetailItem {
   /**
-   * <p>集群资产id</p>
+   * <p>首次发现时间</p>
    */
-  ClusterAssetIds: Array<string>
+  CreateTime?: string
   /**
-   * <p>集团账号的成员id</p>
+   * <p>更新时间</p>
    */
-  MemberId?: Array<string>
+  UpdateTime?: string
   /**
-   * <p>负责人名称</p>
+   * <p>风险状态</p>
    */
-  OwnerName?: string
+  RiskStatus?: number
   /**
-   * <p>集群CAMD5值</p>
+   * <p>风险内容</p>
    */
-  ClusterCaMD5List?: Array<string>
+  RiskContent?: string
+  /**
+   * <p>云厂商</p>
+   */
+  Provider?: string
+  /**
+   * <p>云厂商名称</p>
+   */
+  ProviderName?: string
+  /**
+   * <p>云账号</p>
+   */
+  CloudAccountId?: string
+  /**
+   * <p>云账号名称</p>
+   */
+  CloudAccountName?: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>风险ID</p>
+   */
+  RiskId?: number
+  /**
+   * <p>风险规则ID</p>
+   */
+  RiskRuleId?: string
+  /**
+   * <p>风险验证状态</p>
+   */
+  CheckStatus?: string
+  /**
+   * <p>用户AppID</p>
+   */
+  AppID?: number
+  /**
+   * <p>资产类型</p>
+   */
+  AssetType?: string
+  /**
+   * <p>风险忽略原因</p>
+   */
+  Reason?: string
 }
 
 /**
@@ -40385,7 +40435,7 @@ export interface DescribeEdrAlertListRequest {
    */
   MemberId?: Array<string>
   /**
-   * <p>PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效</p>
+   * <p>过滤条件，支持的 Name 如下：<br/>【资源属性过滤】（前缀模糊，后端自动反查资产后按实例过滤）<br/>InstanceName - string - 是否必填：否 - 资产名称（前缀匹配）<br/>InstanceID - string - 是否必填：否 - 实例ID（前缀匹配）<br/>IP - string - 是否必填：否 - IP地址，支持内网/外网IP（前缀匹配）<br/>Tags - string - 是否必填：否 - 腾讯云标签，格式 tagKey$tagValue（仅单账号场景生效）<br/>CSIPTag - string - 是否必填：否 - 安全中心标签名称（前缀匹配，按语言环境匹配中/英文字段）<br/>AssetTagIds - string - 是否必填：否 - 安全中心资产标签ID（精确匹配，多个标签ID之间为或关系；标签ID可通过资产中心标签树接口 DescribeAssetTagTree 获取）<br/>【容器维度过滤】（前缀模糊，命中后仅返回容器告警）<br/>ClusterName - string - 是否必填：否 - 集群名称（前缀匹配）<br/>ContainerName - string - 是否必填：否 - 容器名称（前缀匹配）<br/>【告警字段过滤】（精确匹配，支持多值）<br/>Status - int - 是否必填：否 - 处理状态<br/>Level - int - 是否必填：否 - 威胁等级<br/>AlertCategory - string - 是否必填：否 - 告警大类<br/>AlertSubType - string - 是否必填：否 - 告警子类型<br/>AttackStage - string - 是否必填：否 - 攻击阶段<br/>DetectMode - string - 是否必填：否 - 检测模式<br/>AlertSource - string - 是否必填：否 - 告警来源（HOST/CONTAINER）<br/>AlertId - string - 是否必填：否 - 告警ID<br/>InstanceId - string - 是否必填：否 - 实例ID（精确匹配）<br/>ContainerId - string - 是否必填：否 - 容器ID（精确匹配）<br/>ClusterId - string - 是否必填：否 - 集群ID（精确匹配）<br/>【时间范围】<br/>StartTime - string - 是否必填：否 - 开始时间，格式 2006-01-02 15:04:05（默认近180天）<br/>EndTime - string - 是否必填：否 - 结束时间，格式 2006-01-02 15:04:05（默认当前时间）</p>
    */
   Filters?: Array<EDRFilter>
   /**
@@ -41219,19 +41269,19 @@ export interface DescribeExposePathRequest {
    */
   MemberId?: Array<string>
   /**
-   * 资产ID
+   * <p>资产ID</p>
    */
   AssetId?: string
   /**
-   * 资产IP
+   * <p>资产IP</p>
    */
   Ip?: string
   /**
-   * 资产域名
+   * <p>资产域名</p>
    */
   Domain?: string
   /**
-   * 端口或端口范围
+   * <p>端口或端口范围</p>
    */
   Port?: string
 }
@@ -41658,6 +41708,10 @@ export interface ImageRegistryInfo {
    * <p>镜像仓库用户名</p>
    */
   UserName?: string
+  /**
+   * <p>连接状态</p><p>枚举值：</p><ul><li>status_connected： 连接成功</li><li>status_connecting： 连接中</li><li>status_connect_failed： 连接失败</li><li>status_partial_failed： 部分连接失败</li></ul>
+   */
+  ConnStatus?: string
 }
 
 /**
@@ -42298,6 +42352,10 @@ export interface CustomRiskRuleItem {
    * <p>资产类型图标</p>
    */
   AssetTypeIconURL?: string
+  /**
+   * <p>规则默认开启状态</p>
+   */
+  EnableDefault?: number
 }
 
 /**
@@ -42658,6 +42716,10 @@ export interface AssetProviderDistributeInfo {
    * <p>微软云资产数量</p>
    */
   AzureAssetCount?: number
+  /**
+   * <p>腾讯TCE专有云资产数量</p>
+   */
+  TceAssetCount?: number
 }
 
 /**
@@ -45057,9 +45119,13 @@ export interface DescribeUebaBehaviorSummaryRequest {
  */
 export interface DescribeExposePathResponse {
   /**
-   * 云边界分析路径节点内容
+   * <p>云边界分析路径节点内容</p>
    */
   Content?: string
+  /**
+   * <p>互联网节点数量</p>
+   */
+  PathCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -45987,7 +46053,7 @@ export interface CreateBaselineMainTaskExportJobResponse {
  */
 export interface DescribeScanStatisticRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -46008,6 +46074,10 @@ export interface DescribeCFGRiskReportStatisticsRequest {
    * <p>规范ID</p>
    */
   StandardIDs?: Array<number | bigint>
+  /**
+   * <p>资产标签ID</p>
+   */
+  AssetTagIDs?: Array<number | bigint>
 }
 
 /**
@@ -50627,6 +50697,10 @@ export interface CreateCFGRisksExportJobRequest {
    * <p>规范ID</p>
    */
   StandardIDs?: Array<number | bigint>
+  /**
+   * <p>资产标签ID</p>
+   */
+  AssetTagIDs?: Array<number | bigint>
 }
 
 /**
@@ -51978,6 +52052,10 @@ export interface DescribeCWPExposePathResponse {
    */
   Content?: string
   /**
+   * <p>互联网节点数量</p>
+   */
+  PathCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -52120,11 +52198,11 @@ export interface DescribeSandboxDLPSystemRuleListResponse {
  */
 export interface DescribeDspmAssetTableListResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   DataSet?: Array<DspmAssetTableInfo>
   /**
@@ -53077,7 +53155,7 @@ export interface ModifyCspmShardConfigRequest {
  */
 export interface CreateScanStatisticExportJobRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -53287,16 +53365,6 @@ export interface DeleteDspmIdentifyRuleResponse {
  * ModifyDspmRiskInfo返回参数结构体
  */
 export interface ModifyDspmRiskInfoResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * BindClusterOwner返回参数结构体
- */
-export interface BindClusterOwnerResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

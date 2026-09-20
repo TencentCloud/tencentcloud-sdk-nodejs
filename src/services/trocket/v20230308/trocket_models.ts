@@ -3459,6 +3459,10 @@ export interface DeleteConsumerRouteConfigRequest {
    * <p>消费组</p>
    */
   Group: string
+  /**
+   * <p>消费者标签</p><p>传入 Label 表示只删除该标签路由，不传表示删除完整路由</p>
+   */
+  Label?: string
 }
 
 /**

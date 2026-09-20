@@ -3043,6 +3043,10 @@ export interface DescribeModelResponseVO {
    */
   ID?: string
   /**
+   * <p>模型提供商</p>
+   */
+  Provider?: string
+  /**
    * <p>模型名称</p>
    */
   Name?: string
@@ -3354,15 +3358,23 @@ export interface CreateModelRequest {
   /**
    * <p>协议类型：http/https</p>
    */
-  HttpProtocolType: string
+  HttpProtocolType?: string
   /**
    * <p>目标路径</p>
    */
-  TargetPath: string
+  TargetPath?: string
   /**
    * <p>目标服务器</p>
    */
-  TargetHosts: Array<TargetHostDTO>
+  TargetHosts?: Array<TargetHostDTO>
+  /**
+   * <p>模型提供商</p><p>枚举值：</p><ul><li>tencentTokenHub： 腾讯云TokenHub</li><li>tiONE： TI-ONE应用</li><li>default： 其他</li></ul>
+   */
+  Provider?: string
+  /**
+   * <p>Provider=tencentTokenHub时对应的密钥</p>
+   */
+  ApiKeys?: Array<string>
   /**
    * <p>凭据ID</p>
    */

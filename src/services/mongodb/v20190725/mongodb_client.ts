@@ -24,9 +24,10 @@ import {
   CreateDBInstanceParamTplResponse,
   DescribeAccountUsersRequest,
   DescribeDBInstanceParamTplRequest,
-  CreateBackupDBInstanceResponse,
+  CheckDBInstanceElasticCpuScalableRequest,
   DescribeAuditLogsRequest,
   DBInstancePrice,
+  CheckDBInstanceElasticCpuScalableResponse,
   DescribePasswordRotationResponse,
   ScaleUpDBInstanceCpuRequest,
   KillOpsRequest,
@@ -54,7 +55,7 @@ import {
   AssignProjectResponse,
   AuditLogFilter,
   DescribeDBInstanceDealResponse,
-  DescribeAuditInstanceListResponse,
+  CreateBackupDBInstanceResponse,
   OfflineIsolatedDBInstanceResponse,
   IsolateDBInstanceResponse,
   DescribeInstanceParamsRequest,
@@ -220,6 +221,7 @@ import {
   DeleteAccountUserResponse,
   DescribeDBInstancesResponse,
   OfflineIsolatedDBInstanceRequest,
+  DescribeAuditInstanceListResponse,
   KMSInfoDetail,
   InquirePriceCreateDBInstancesRequest,
   Operation,
@@ -744,6 +746,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuditConfigResponse) => void
   ): Promise<DescribeAuditConfigResponse> {
     return this.request("DescribeAuditConfig", req, cb)
+  }
+
+  /**
+   * 查询cpu弹性扩容信息
+   */
+  async CheckDBInstanceElasticCpuScalable(
+    req: CheckDBInstanceElasticCpuScalableRequest,
+    cb?: (error: string, rep: CheckDBInstanceElasticCpuScalableResponse) => void
+  ): Promise<CheckDBInstanceElasticCpuScalableResponse> {
+    return this.request("CheckDBInstanceElasticCpuScalable", req, cb)
   }
 
   /**

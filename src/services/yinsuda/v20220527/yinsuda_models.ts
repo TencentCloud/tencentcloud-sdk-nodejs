@@ -1168,40 +1168,36 @@ export interface KTVMatchRule {
  */
 export interface KTVMusicBaseInfo {
   /**
-   * 歌曲Id。
+   * <p>歌曲Id。</p>
    */
   MusicId?: string
   /**
-   * 歌曲名称。
+   * <p>歌曲名称。</p>
    */
   Name?: string
   /**
-   * 歌手名称。
+   * <p>歌手名称。</p>
    */
   SingerSet?: Array<string>
   /**
-   * 播放时长。
+   * <p>播放时长。</p><p>单位：秒</p>
    */
   Duration?: number
   /**
-   * 歌手图片链接。
+   * <p>歌手图片链接。</p>
    */
   SingerImageUrl?: string
   /**
-   * 专辑信息。
+   * <p>专辑信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlbumInfo?: MusicAlbumInfo
   /**
-   * 权益列表，取值有：
-<li>Play：可播；</li>
-<li>Sing：可唱。</li>
+   * <p>权益列表，取值有：</p><li>Play：可播；</li><li>Sing：可唱。</li>
    */
   RightSet?: Array<string>
   /**
-   * 推荐类型，取值有：
-<li>Featured：精选；</li>
-<li>Other：其他。</li>
+   * <p>推荐类型，取值有：</p><li>Featured：精选；</li><li>Other：其他。</li>
    */
   RecommendType?: string
 }
@@ -1376,11 +1372,11 @@ export interface KTVPlaylistBaseInfo {
  */
 export interface DescribeUserInfoRequest {
   /**
-   * 应用名称。
+   * <p>应用名称。</p>
    */
   AppName: string
   /**
-   * 用户标识。
+   * <p>用户标识。</p>
    */
   UserId: string
 }
@@ -1507,7 +1503,7 @@ export interface UserInfo {
  */
 export interface DescribeUserInfoResponse {
   /**
-   * 用户信息。
+   * <p>用户信息。</p>
    */
   UserInfo?: UserInfo
   /**

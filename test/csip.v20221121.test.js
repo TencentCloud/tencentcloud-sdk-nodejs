@@ -718,9 +718,9 @@ it("csip.v20221121.DescribeCustomRiskRuleDetail", async function () {
     }
 })
 
-it("csip.v20221121.ModifyReverseShellSystemPolicyConfig", async function () {
+it("csip.v20221121.DescribeSkillScanTaskList", async function () {
     try {
-       const data = await client.ModifyReverseShellSystemPolicyConfig({})
+       const data = await client.DescribeSkillScanTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2021,16 +2021,6 @@ it("csip.v20221121.DescribeCosIdentifyFileList", async function () {
 it("csip.v20221121.CreateClusterAssetSyncTask", async function () {
     try {
        const data = await client.CreateClusterAssetSyncTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("csip.v20221121.BindClusterOwner", async function () {
-    try {
-       const data = await client.BindClusterOwner({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -4648,6 +4638,16 @@ it("csip.v20221121.DescribeImageAssetList", async function () {
     }
 })
 
+it("csip.v20221121.ModifyReverseShellSystemPolicyConfig", async function () {
+    try {
+       const data = await client.ModifyReverseShellSystemPolicyConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.ModifyDspmIdentifyRuleStatus", async function () {
     try {
        const data = await client.ModifyDspmIdentifyRuleStatus({})
@@ -4958,9 +4958,9 @@ it("csip.v20221121.DescribeSkillScanResult", async function () {
     }
 })
 
-it("csip.v20221121.DescribeClusterListV2", async function () {
+it("csip.v20221121.DescribeSCFFunctionList", async function () {
     try {
-       const data = await client.DescribeClusterListV2({})
+       const data = await client.DescribeSCFFunctionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -5131,16 +5131,6 @@ it("csip.v20221121.DescribeTopAttackInfo", async function () {
 it("csip.v20221121.CreateImageRegistryTimedScanTaskConfig", async function () {
     try {
        const data = await client.CreateImageRegistryTimedScanTaskConfig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("csip.v20221121.ModifyAssetTags", async function () {
-    try {
-       const data = await client.ModifyAssetTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -7358,9 +7348,9 @@ it("csip.v20221121.DescribeBaselineCategoryItemList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeSCFFunctionList", async function () {
+it("csip.v20221121.ModifyAssetTags", async function () {
     try {
-       const data = await client.DescribeSCFFunctionList({})
+       const data = await client.ModifyAssetTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

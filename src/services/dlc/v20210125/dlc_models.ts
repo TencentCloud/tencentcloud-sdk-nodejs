@@ -24476,15 +24476,15 @@ export interface DeleteWorkGroupRequest {
 }
 
 /**
- * 配置格式
+ * 通用键值对 POJO（替代各 DTO 中重复定义的 PropEntry / KVPair / PropertyEntry）。
  */
 export interface KVPair {
   /**
-   * <p>配置的key值</p>
+   * 配置的key值
    */
   Key: string
   /**
-   * <p>配置的value值</p>
+   * 配置的value值
    */
   Value: string
 }

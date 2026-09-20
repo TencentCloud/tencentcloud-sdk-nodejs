@@ -3691,6 +3691,14 @@ export interface TestServiceProviderConnectionRequest {
    * <p>端点路径</p>
    */
   EndpointPath?: string
+  /**
+   * <p>健康检查方式</p><p>枚举值：</p><ul><li>Service： 探测服务可用性</li><li>Model： 探测模型可用性</li></ul>
+   */
+  HealthCheckMethod?: string
+  /**
+   * <p>健康检查路径。仅HealthCheckMethod为Service时生效。</p>
+   */
+  HealthCheckPath?: string
 }
 
 /**

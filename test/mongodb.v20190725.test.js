@@ -498,6 +498,16 @@ it("mongodb.v20190725.DescribeAuditConfig", async function () {
     }
 })
 
+it("mongodb.v20190725.CheckDBInstanceElasticCpuScalable", async function () {
+    try {
+       const data = await client.CheckDBInstanceElasticCpuScalable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeAsyncRequestInfo", async function () {
     try {
        const data = await client.DescribeAsyncRequestInfo({})

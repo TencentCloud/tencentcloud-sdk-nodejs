@@ -7582,11 +7582,11 @@ export type DescribeCloudAppInfoRequest = null
  */
 export interface CreateEnvResourceRequest {
   /**
-   * 环境ID
+   * <p>环境ID</p>
    */
   EnvId: string
   /**
-   * 资源类型。代表本次开通哪些资源。 可取值以及含义： - log : 表示日志资源，当前仅支持 log（日志资源类型），后续版本可能扩展，该数组不能为空，且每个元素必须为合法的资源类型值
+   * <p>资源类型。代表本次开通哪些资源。<br>可取值以及含义：</p><ul><li>log : 表示日志资源。</li><li>function： 表示云函数资源。</li></ul><p>该数组不能为空，且每个元素必须为合法的资源类型值</p>
    */
   Resources: Array<string>
 }

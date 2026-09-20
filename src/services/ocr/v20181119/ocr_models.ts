@@ -241,20 +241,20 @@ FailedOperation.UnKnowError：表示识别失败；
  */
 export interface HKIDCardOCRRequest {
   /**
-   * 是否返回人像照片。
+   * <p>是否返回人像照片。</p>
    */
   ReturnHeadImage?: boolean
   /**
-   * 是否鉴伪。
+   * <p>是否鉴伪。</p>
    * @deprecated
    */
   DetectFake?: boolean
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。
+   * <p>图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
 }
@@ -1978,79 +1978,72 @@ export interface WordCoordPoint {
  */
 export interface HKIDCardOCRResponse {
   /**
-   * 中文姓名
+   * <p>中文姓名</p>
    */
   CnName?: string
   /**
-   * 英文姓名
+   * <p>英文姓名</p>
    */
   EnName?: string
   /**
-   * 中文姓名对应电码
+   * <p>中文姓名对应电码</p>
    */
   TelexCode?: string
   /**
-   * 性别 ：“男M”或“女F”
+   * <p>性别 ：“男M”或“女F”</p>
    */
   Sex?: string
   /**
-   * 出生日期
+   * <p>出生日期</p>
    */
   Birthday?: string
   /**
-   * 永久性居民身份证。
-0：非永久；
-1：永久；
--1：未知。
+   * <p>永久性居民身份证。<br>0：非永久；<br>1：永久；<br>-1：未知。</p>
    */
   Permanent?: number
   /**
-   * 身份证号码
+   * <p>身份证号码</p>
    */
   IdNum?: string
   /**
-   * 证件符号，出生日期下的符号，例如"***AZ"
+   * <p>证件符号，出生日期下的符号，例如&quot;***AZ&quot;</p>
    */
   Symbol?: string
   /**
-   * 首次签发日期
+   * <p>首次签发日期</p>
    */
   FirstIssueDate?: string
   /**
-   * 最近领用日期
+   * <p>最近领用日期</p>
    */
   CurrentIssueDate?: string
   /**
-   * 真假判断。
-0：无法判断（图像模糊、不完整、反光、过暗等导致无法判断）；
-1：假；
-2：真。
+   * <p>真假判断。<br>0：无法判断（图像模糊、不完整、反光、过暗等导致无法判断）；<br>1：假；<br>2：真。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   FakeDetectResult?: number
   /**
-   * Base64编码的证件左侧人像大图
+   * <p>Base64编码的证件左侧人像大图</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HeadImage?: string
   /**
-   * Base64编码的证件右侧人像小图
+   * <p>Base64编码的证件右侧人像小图</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmallHeadImage?: string
   /**
-   * 该字段已废弃， 将固定返回空数组，不建议使用。
-
+   * <p>该字段已废弃， 将固定返回空数组，不建议使用。</p>
    * @deprecated
    */
   WarningCode?: Array<number | bigint>
   /**
-   * 该字段仅对国际站请求起作用，国内站该字段将固定返回空数组。国际站告警码如下：    告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通
+   * <p>该字段仅对国际站请求起作用，国内站该字段将固定返回空数组。国际站告警码如下：    告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通</p>
    */
   WarnCardInfos?: Array<number | bigint>
   /**
-   * 证件透明视窗内的文本信息
+   * <p>证件透明视窗内的文本信息</p>
    */
   WindowEmbeddedText?: string
   /**

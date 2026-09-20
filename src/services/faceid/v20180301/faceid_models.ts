@@ -1885,7 +1885,7 @@ export interface CheckIdCardInformationRequest {
    */
   ImageBase64?: string
   /**
-   * <p>身份证人像面的 Url 地址</p><ul><li>支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。</li><li>支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。</li><li>图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。</li><li>非腾讯云存储的 Url 速度和稳定性可能受一定影响。</li></ul>
+   * <p>身份证人像面的 Url 地址</p><ul><li>支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。</li><li>支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。</li><li>图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。</li><li>非腾讯云存储的 Url 速度和稳定性可能受一定影响。</li></ul>
    */
   ImageUrl?: string
   /**
@@ -2865,7 +2865,7 @@ export interface ImageRecognitionV2Request {
    */
   Encryption?: Encryption
   /**
-   * <p>自定义描述字段。</p><ul><li>用于描述调用业务信息，出参中将返回此描述字段。 </li><li>每个自定义描述字段支持[1,10]个字符。</li></ul>
+   * <p>自定义描述字段。</p><ul><li><p>用于描述调用业务信息，出参中将返回此描述字段。</p></li><li><p>每个自定义描述字段最长支持10 个字符（即 [0,10] 个字符）；不传该参数时，出参中此字段返回空字符串。</p></li></ul>
    */
   Extra?: string
 }

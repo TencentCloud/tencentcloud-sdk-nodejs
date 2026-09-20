@@ -103,7 +103,7 @@ import {
   RelatedTask,
   DescribeTemplateDimCountRequest,
   CreateCodeTemplateVersionResponse,
-  DescribeDataSourceListRequest,
+  BundleResource,
   DescribeInstanceByCycleResponse,
   DataServiceRequestParam,
   DataSourceEnvInfo,
@@ -153,7 +153,7 @@ import {
   EventCaseOpsDto,
   InstanceDetailVO,
   MakePlanOpsDtoCollection,
-  DescribeTableMetasResponse,
+  BooleanResponse,
   UploadContentResponse,
   UploadResourceRequest,
   RuleExecLog,
@@ -258,6 +258,7 @@ import {
   DescribeTableInfoListRequest,
   DescribeQualityScoreRequest,
   RunForceSucScheduleInstancesResponse,
+  UnbindingResourceRequest,
   CommitIntegrationTaskResponse,
   Apply,
   ColumnValueConfig,
@@ -284,7 +285,7 @@ import {
   CreateTaskAlarmRegularRequest,
   ModifyRuleRequest,
   RegisterDsEventResponse,
-  WorkflowExtOpsDtoPage,
+  DescribeTableMetasResponse,
   DataSourceInfo,
   LineageRelationVO,
   RemoveTableResponse,
@@ -461,6 +462,7 @@ import {
   MakePlanTaskOpsDtoCollection,
   SimpleColumnInfo,
   CreateWorkflowDsRequest,
+  WorkflowExtOpsDtoPage,
   DescribeTaskDetailDsResponse,
   LineageProperty,
   CreateTaskResponse,
@@ -601,7 +603,7 @@ import {
   DescribeDataServicePublishedApiDetailRequest,
   DescribeTaskTableMetricOverviewRequest,
   ColumnLineage,
-  UnboundProjectExecutorResourceRequest,
+  DescribeDataSourceListRequest,
   SourceFieldInfo,
   GetTaskInstanceRequest,
   DeleteDsFolderRequest,
@@ -675,6 +677,7 @@ import {
   DescribeSchedulerTaskCntByStatusRequest,
   ModifyApproveStatusRequest,
   UpdateDataModelRegistryInfoResponse,
+  UnbindingResourceResponse,
   DescribeOperateOpsTasksResponse,
   DescribeResourceManagePathTreesRequest,
   ModifyExecStrategyRequest,
@@ -822,6 +825,7 @@ import {
   RuleExecStat,
   DescribeStatisticInstanceStatusTrendOpsRequest,
   ColumnAggregationLineage,
+  UnboundProjectExecutorResourceRequest,
   DescribeTableSchemaInfoResponse,
   DiagnoseProResponse,
   DescribeReportTaskDetailResponse,
@@ -1422,6 +1426,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTaskNameResponse) => void
   ): Promise<ModifyTaskNameResponse> {
     return this.request("ModifyTaskName", req, cb)
+  }
+
+  /**
+   * 解绑bundle绑定的资源
+   */
+  async UnbindingResource(
+    req: UnbindingResourceRequest,
+    cb?: (error: string, rep: UnbindingResourceResponse) => void
+  ): Promise<UnbindingResourceResponse> {
+    return this.request("UnbindingResource", req, cb)
   }
 
   /**

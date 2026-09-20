@@ -23,11 +23,12 @@ import {
   AvatarImageInfo,
   DescribeOriginStreamInfoResponse,
   DescribeLiveWatermarkRulesResponse,
-  StartLiveAvatarRoomRequest,
+  AuditGroupClassInfo,
   CasterMarkPicInfo,
   CreateLiveAvatarCloneFigureRequest,
   DeleteLiveRecordTemplateRequest,
   ModifyLiveTimeShiftTemplateResponse,
+  AuditImage,
   DescribeLiveTranscodeTemplatesRequest,
   DescribeBackupStreamListResponse,
   DescribeLiveSnapshotTemplateRequest,
@@ -36,13 +37,14 @@ import {
   PublishTime,
   CommonMixOutputParams,
   DescribeAuditKeywordsResponse,
-  DescribeCasterOutputInfosResponse,
+  DeleteAuditKeywordLibRequest,
   CreateLiveAvatarCloneFigureResponse,
   DescribeGroupProIspPlayInfoListResponse,
   DescribeDeliverBandwidthListResponse,
   DescribeLiveTranscodeDetailInfoRequest,
   DescribeLiveSnapshotTemplatesRequest,
   CreateLiveWatermarkRuleResponse,
+  AuditLabelGroupInfo,
   CreateCasterPvwResponse,
   DescribeCasterMarkPicInfosRequest,
   PlayCodeTotalInfo,
@@ -59,16 +61,19 @@ import {
   SendLiveCloudEffectRequest,
   DescribeCasterPlayUrlResponse,
   CancelCommonMixStreamResponse,
+  CreateAuditImagesResponse,
   DescribeLiveCertsResponse,
   LiveEnhanceInfo,
   ResumeDelayLiveStreamRequest,
   DescribeCallbackRecordsListRequest,
   CasterDisplayInfo,
+  ModifyLiveRecordTemplateRequest,
   CallbackEventInfo,
   DescribeTopClientIpSumInfoListResponse,
   DescribeLiveStreamStateResponse,
   DeleteLiveWatermarkRuleRequest,
   DescribeLiveWatermarksRequest,
+  StartLiveAvatarRoomRequest,
   DescribeLiveWatermarkRulesRequest,
   EnableOptimalSwitchingRequest,
   DescribeCasterInputInfosResponse,
@@ -110,6 +115,7 @@ import {
   BandwidthInfo,
   LiveStreamMonitorOutputInfo,
   DeleteLiveTranscodeTemplateRequest,
+  DescribeAuditKeywordLibsResponse,
   StopLiveAvatarRoomResponse,
   StopRecordTaskResponse,
   CommonMixControlParams,
@@ -167,7 +173,7 @@ import {
   CreateCasterRequest,
   AddCasterOutputInfoRequest,
   DescribeUploadStreamNumsResponse,
-  DescribeLiveTranscodeDetailInfoResponse,
+  DescribeCasterOutputInfosResponse,
   DeleteLiveTranscodeTemplateResponse,
   StartLiveStreamMonitorResponse,
   CreateScreenshotTaskResponse,
@@ -187,10 +193,11 @@ import {
   DescribeLivePadTemplatesResponse,
   CreateCasterPgmFromPvwResponse,
   DescribeLiveTranscodeRulesRequest,
+  ModifyAuditKeywordLibRequest,
   PlayDataInfoByStream,
   LiveStreamMonitorInputInfo,
   DeleteLivePullStreamTaskRequest,
-  CopyLiveAvatarRoomResponse,
+  DescribeCasterMarkPicInfosResponse,
   CreateAuditKeywordsRequest,
   DescribeLiveAvatarImageListResponse,
   DescribeAIGCTaskStatusRequest,
@@ -201,6 +208,7 @@ import {
   DeleteScreenshotTaskRequest,
   ModifyCasterLayoutInfoResponse,
   DescribeTimeShiftStreamListResponse,
+  DeleteAuditImagesResponse,
   DescribePlayErrorCodeSumInfoListRequest,
   TranscodeTaskNum,
   BillCountryInfo,
@@ -217,7 +225,8 @@ import {
   DescribeBackupStreamListRequest,
   DescribeDeliverLogDownListRequest,
   LivePackageInfo,
-  DescribeLiveTimeShiftTemplatesRequest,
+  CreateLiveTranscodeTemplateResponse,
+  AuditImageCreateDetail,
   StopLiveStreamMonitorResponse,
   DayStreamPlayInfo,
   ModifyLivePlayDomainResponse,
@@ -229,7 +238,7 @@ import {
   DescribeLiveRecordTemplatesResponse,
   DescribeScreenshotTaskRequest,
   BackupStreamGroupInfo,
-  MonitorStreamPlayInfo,
+  DescribeAuditKeywordLibsRequest,
   DescribeLivePadStreamListResponse,
   ScreenshotTask,
   DeletePullStreamConfigResponse,
@@ -260,7 +269,7 @@ import {
   DescribeCallbackRecordsListResponse,
   DeleteLiveWatermarkRequest,
   UpdateLiveWatermarkRequest,
-  SceneStoreCosParam,
+  ModifyAuditKeywordLibResponse,
   CreateLiveRecordRequest,
   TemplateInfo,
   DescribeLiveStreamPushInfoListResponse,
@@ -273,6 +282,7 @@ import {
   DescribeLiveDelayInfoListResponse,
   ClientIpPlaySumInfo,
   CreateLiveSnapshotTemplateResponse,
+  SceneStoreCosParam,
   ModifyCasterMarkPicInfoRequest,
   DescribeProIspPlaySumInfoListRequest,
   TranscodeTotalInfo,
@@ -308,6 +318,7 @@ import {
   DescribeLiveCallbackTemplatesResponse,
   DescribeLivePushAuthKeyResponse,
   DescribeLivePullStreamTaskStatusRequest,
+  AuditImageDeleteDetail,
   RestartLivePullStreamTaskRequest,
   CasterBriefInfo,
   DescribeCasterTransitionTypesRequest,
@@ -332,6 +343,7 @@ import {
   CreateLivePullStreamTaskRequest,
   DeleteLiveSnapshotTemplateRequest,
   DomainInfoList,
+  AuditImageInfo,
   CreateScreenshotTaskRequest,
   DescribeAreaBillBandwidthAndFluxListResponse,
   DescribeCasterResponse,
@@ -339,6 +351,7 @@ import {
   ProIspPlayCodeDataInfo,
   ConcurrentRecordStreamNum,
   DescribeLiveAvatarScriptsResponse,
+  DescribeLiveTranscodeDetailInfoResponse,
   CreateLivePullStreamTaskResponse,
   ModifyLivePushAuthKeyRequest,
   DescribeProIspPlaySumInfoListResponse,
@@ -346,6 +359,7 @@ import {
   DescribeLiveCallbackTemplatesRequest,
   CreateLivePadRuleRequest,
   DeleteLiveSnapshotRuleRequest,
+  AuditKeywordLibInfo,
   CreateLiveTimeShiftRuleRequest,
   StopCasterPvwResponse,
   DeleteLiveAvatarScriptResponse,
@@ -387,7 +401,7 @@ import {
   CreateCasterResponse,
   PushDataInfo,
   AuditKeywordDeleteDetail,
-  DescribeLiveSnapshotTemplateResponse,
+  CasterInfo,
   CreateLiveTimeShiftTemplateRequest,
   DescribeLiveDomainRefererResponse,
   DescribeLivePadTemplateRequest,
@@ -402,11 +416,13 @@ import {
   SceneVideoReferenceImageInfo,
   DescribeScreenshotTaskResponse,
   ModifyPullStreamConfigRequest,
+  DescribeAuditGroupTagResponse,
   DescribeProvinceIspPlayInfoListResponse,
   DescribeLivePackageInfoResponse,
   AvatarScriptInfo,
   CreateLiveCallbackRuleRequest,
   TimeShiftRecord,
+  DescribeAuditGroupTagRequest,
   AvatarRoomInfo,
   AvatarBackgroundInfo,
   DescribeLiveAvatarBackgroundListResponse,
@@ -415,7 +431,7 @@ import {
   DescribeLiveTimeShiftBillInfoListResponse,
   CertInfo,
   DescribeLiveCallbackRulesRequest,
-  CasterInfo,
+  DescribeLiveSnapshotTemplateResponse,
   DescribeConcurrentRecordStreamNumRequest,
   DeleteCasterInputInfoRequest,
   DeleteScreenshotTaskResponse,
@@ -425,6 +441,7 @@ import {
   DescribeLiveStreamStateRequest,
   CreateLiveRecordTemplateResponse,
   VideoRedrawTaskInfo,
+  CreateAuditImagesRequest,
   AddCasterMarkWordInfoRequest,
   DescribeLiveAvatarTimbreListRequest,
   ModifyLivePlayAuthKeyResponse,
@@ -435,6 +452,7 @@ import {
   TaskStatusInfo,
   DescribeCasterInputInfosRequest,
   DescribeCasterMarkWordInfosRequest,
+  MonitorStreamPlayInfo,
   DescribeVisitTopSumInfoListResponse,
   TimeShiftBillData,
   HlsSpecialParam,
@@ -461,8 +479,9 @@ import {
   PullStreamTaskInfo,
   CreateLiveTimeShiftTemplateResponse,
   DeleteCasterOutputInfoResponse,
+  DescribeAuditImagesRequest,
   DescribeLivePadRulesRequest,
-  DescribeCasterMarkPicInfosResponse,
+  CopyLiveAvatarRoomResponse,
   DescribePullStreamConfigsResponse,
   DescribeTranscodeTaskNumRequest,
   DescribeLiveCallbackRulesResponse,
@@ -520,7 +539,7 @@ import {
   LiveCertDomainInfo,
   DescribeLiveTimeShiftRulesRequest,
   DescribeOriginStreamInfoRequest,
-  DescribeLiveTimeShiftBillInfoListRequest,
+  DeleteAuditKeywordLibResponse,
   RecordTask,
   ModifyCasterRequest,
   DescribeCasterEmergencyStatusRequest,
@@ -571,22 +590,24 @@ import {
   DescribeLiveTimeShiftWriteSizeInfoListResponse,
   DescribeCasterListResponse,
   RecordParam,
-  ModifyLiveRecordTemplateRequest,
+  DeleteAuditImagesRequest,
   StartLivePadStreamRequest,
   DeleteLiveAvatarCloneFigureResponse,
   DescribeLiveDomainRefererRequest,
   DescribeLiveAvatarTimbreListResponse,
   HttpCodeInfo,
   DescribeLiveStreamPublishedListResponse,
+  DescribeAuditImagesResponse,
   AddDelayLiveStreamResponse,
   CloudEffectTemplateInfo,
+  AuditGroupInfo,
   DescribeLivePadTemplatesRequest,
   EnableLiveDomainRequest,
   DescribeLiveTranscodeTotalInfoResponse,
   SendLiveCloudEffectResponse,
   DescribeLiveEnhanceInfoListResponse,
   CreateLiveTranscodeRuleResponse,
-  CreateLiveTranscodeTemplateResponse,
+  DescribeLiveTimeShiftTemplatesRequest,
   ModifyLivePadTemplateRequest,
   BackupStreamDetailData,
   CreateLiveSnapshotTemplateRequest,
@@ -605,6 +626,7 @@ import {
   DeleteCasterOutputInfoRequest,
   OriginStreamCustomizationRule,
   DescribeTimeShiftRecordDetailResponse,
+  DescribeLiveTimeShiftBillInfoListRequest,
   DeleteLiveDomainResponse,
   AddCasterMarkPicInfoRequest,
   CloseSourceStreamResponse,
@@ -1349,13 +1371,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询直播拉流配置。该接口已下线,请使用新接口 DescribeLivePullStreamTasks。
+   * 获取关键词库列表，直播审核功能使用。
    */
-  async DescribePullStreamConfigs(
-    req: DescribePullStreamConfigsRequest,
-    cb?: (error: string, rep: DescribePullStreamConfigsResponse) => void
-  ): Promise<DescribePullStreamConfigsResponse> {
-    return this.request("DescribePullStreamConfigs", req, cb)
+  async DescribeAuditKeywordLibs(
+    req: DescribeAuditKeywordLibsRequest,
+    cb?: (error: string, rep: DescribeAuditKeywordLibsResponse) => void
+  ): Promise<DescribeAuditKeywordLibsResponse> {
+    return this.request("DescribeAuditKeywordLibs", req, cb)
   }
 
   /**
@@ -1485,13 +1507,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改转码模板配置。
+   * 更新关键词库信息，直播审核功能使用。
    */
-  async ModifyLiveTranscodeTemplate(
-    req: ModifyLiveTranscodeTemplateRequest,
-    cb?: (error: string, rep: ModifyLiveTranscodeTemplateResponse) => void
-  ): Promise<ModifyLiveTranscodeTemplateResponse> {
-    return this.request("ModifyLiveTranscodeTemplate", req, cb)
+  async ModifyAuditKeywordLib(
+    req: ModifyAuditKeywordLibRequest,
+    cb?: (error: string, rep: ModifyAuditKeywordLibResponse) => void
+  ): Promise<ModifyAuditKeywordLibResponse> {
+    return this.request("ModifyAuditKeywordLib", req, cb)
   }
 
   /**
@@ -1601,6 +1623,26 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyLiveDomainCertBindingsResponse) => void
   ): Promise<ModifyLiveDomainCertBindingsResponse> {
     return this.request("ModifyLiveDomainCertBindings", req, cb)
+  }
+
+  /**
+   * 查询直播拉流配置。该接口已下线,请使用新接口 DescribeLivePullStreamTasks。
+   */
+  async DescribePullStreamConfigs(
+    req: DescribePullStreamConfigsRequest,
+    cb?: (error: string, rep: DescribePullStreamConfigsResponse) => void
+  ): Promise<DescribePullStreamConfigsResponse> {
+    return this.request("DescribePullStreamConfigs", req, cb)
+  }
+
+  /**
+   * 修改转码模板配置。
+   */
+  async ModifyLiveTranscodeTemplate(
+    req: ModifyLiveTranscodeTemplateRequest,
+    cb?: (error: string, rep: ModifyLiveTranscodeTemplateResponse) => void
+  ): Promise<ModifyLiveTranscodeTemplateResponse> {
+    return this.request("ModifyLiveTranscodeTemplate", req, cb)
   }
 
   /**
@@ -2000,6 +2042,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 直播审核图库删除图片。
+   */
+  async DeleteAuditImages(
+    req: DeleteAuditImagesRequest,
+    cb?: (error: string, rep: DeleteAuditImagesResponse) => void
+  ): Promise<DeleteAuditImagesResponse> {
+    return this.request("DeleteAuditImages", req, cb)
+  }
+
+  /**
      * 批量获取日志URL。
 日志数据打包存在一定延迟，24小时候数据包趋于完整。
      */
@@ -2112,13 +2164,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询直播域名信息。
+   * 删除直播时移规则。
    */
-  async DescribeLiveDomain(
-    req: DescribeLiveDomainRequest,
-    cb?: (error: string, rep: DescribeLiveDomainResponse) => void
-  ): Promise<DescribeLiveDomainResponse> {
-    return this.request("DescribeLiveDomain", req, cb)
+  async DeleteLiveTimeShiftRule(
+    req: DeleteLiveTimeShiftRuleRequest,
+    cb?: (error: string, rep: DeleteLiveTimeShiftRuleResponse) => void
+  ): Promise<DeleteLiveTimeShiftRuleResponse> {
+    return this.request("DeleteLiveTimeShiftRule", req, cb)
   }
 
   /**
@@ -2194,14 +2246,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
-查询下行播放错误码信息，某段时间内1分钟粒度的各http错误码出现的次数，包括4xx，5xx。
-     */
-  async DescribePlayErrorCodeDetailInfoList(
-    req: DescribePlayErrorCodeDetailInfoListRequest,
-    cb?: (error: string, rep: DescribePlayErrorCodeDetailInfoListResponse) => void
-  ): Promise<DescribePlayErrorCodeDetailInfoListResponse> {
-    return this.request("DescribePlayErrorCodeDetailInfoList", req, cb)
+   * 获取标签组分类数据，直播审核中。
+   */
+  async DescribeAuditGroupTag(
+    req: DescribeAuditGroupTagRequest,
+    cb?: (error: string, rep: DescribeAuditGroupTagResponse) => void
+  ): Promise<DescribeAuditGroupTagResponse> {
+    return this.request("DescribeAuditGroupTag", req, cb)
   }
 
   /**
@@ -2236,6 +2287,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeScreenshotTaskResponse) => void
   ): Promise<DescribeScreenshotTaskResponse> {
     return this.request("DescribeScreenshotTask", req, cb)
+  }
+
+  /**
+   * 查询直播域名信息。
+   */
+  async DescribeLiveDomain(
+    req: DescribeLiveDomainRequest,
+    cb?: (error: string, rep: DescribeLiveDomainResponse) => void
+  ): Promise<DescribeLiveDomainResponse> {
+    return this.request("DescribeLiveDomain", req, cb)
   }
 
   /**
@@ -2355,6 +2416,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 直播审核图库添加图片，添加到预设库，图库不需要创建。
+   */
+  async CreateAuditImages(
+    req: CreateAuditImagesRequest,
+    cb?: (error: string, rep: CreateAuditImagesResponse) => void
+  ): Promise<CreateAuditImagesResponse> {
+    return this.request("CreateAuditImages", req, cb)
+  }
+
+  /**
    * 调用该接口，用于创建数字人直播间。
    */
   async CreateLiveAvatarRoom(
@@ -2466,6 +2537,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 删除关键词库，直播审核功能使用。
+   */
+  async DeleteAuditKeywordLib(
+    req: DeleteAuditKeywordLibRequest,
+    cb?: (error: string, rep: DeleteAuditKeywordLibResponse) => void
+  ): Promise<DeleteAuditKeywordLibResponse> {
+    return this.request("DeleteAuditKeywordLib", req, cb)
+  }
+
+  /**
    * 直播播放带宽和流量数据查询。
    */
   async DescribeBillBandwidthAndFluxList(
@@ -2507,13 +2588,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 删除直播时移规则。
+   * 直播审核图库获取图片。
    */
-  async DeleteLiveTimeShiftRule(
-    req: DeleteLiveTimeShiftRuleRequest,
-    cb?: (error: string, rep: DeleteLiveTimeShiftRuleResponse) => void
-  ): Promise<DeleteLiveTimeShiftRuleResponse> {
-    return this.request("DeleteLiveTimeShiftRule", req, cb)
+  async DescribeAuditImages(
+    req: DescribeAuditImagesRequest,
+    cb?: (error: string, rep: DescribeAuditImagesResponse) => void
+  ): Promise<DescribeAuditImagesResponse> {
+    return this.request("DescribeAuditImages", req, cb)
   }
 
   /**
@@ -2527,6 +2608,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: RestartLivePullStreamTaskResponse) => void
   ): Promise<RestartLivePullStreamTaskResponse> {
     return this.request("RestartLivePullStreamTask", req, cb)
+  }
+
+  /**
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询下行播放错误码信息，某段时间内1分钟粒度的各http错误码出现的次数，包括4xx，5xx。
+     */
+  async DescribePlayErrorCodeDetailInfoList(
+    req: DescribePlayErrorCodeDetailInfoListRequest,
+    cb?: (error: string, rep: DescribePlayErrorCodeDetailInfoListResponse) => void
+  ): Promise<DescribePlayErrorCodeDetailInfoListResponse> {
+    return this.request("DescribePlayErrorCodeDetailInfoList", req, cb)
   }
 
   /**

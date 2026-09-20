@@ -1115,7 +1115,7 @@ export interface AiCutoutConfig {
    */
   PatternConfig?: PatternConfig
   /**
-   * <p>抠图模型选择，可不填。</p><p>枚举值：</p><ul><li>auto： 自动选择合适的模型</li><li>WAND-cutout-1.0-lite： 标准版，速度最快</li><li>WAND-cutout-2.0-lite： 增强版，速度最快</li><li>WAND-cutout-2.0-flash： 增强版，质量-速度平衡</li></ul>
+   * <p>抠图模型选择。</p><p>枚举值：</p><ul><li>cutout-1.0-lite： 基础版，速度最快</li><li>cutout-1.0-flash： 标准版，质量-速度平衡</li></ul>
    */
   Model?: string
 }

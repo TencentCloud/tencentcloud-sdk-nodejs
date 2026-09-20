@@ -20,28 +20,36 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DependOnBrief,
   FileInfo,
+  UpdateConsoleUsersResponse,
   Workflow,
   TaskRetryStrategy,
   FileStorage,
-  WorkflowTriggerAdvancedConfiguration,
+  ScheduledTimeConfig,
   DeleteWorkflowResponse,
+  ListConsoleUsersResponse,
+  RemoveConsoleUsersResponse,
   InnerWorkflowTaskBrief,
   MonitorMetricBrief,
+  ParamInfo,
   InnerWorkflowTaskRunIteration,
   DeleteWorkflowRequest,
   ListWorkflowTaskRunsRequest,
   AlarmBrief,
   WorkflowTaskNodeBrief,
-  WorkflowBaseInfoDetail,
+  UpdateConsoleUsersRsp,
+  CreateWorkflowRequest,
   WorkflowRunBrief,
+  WorkflowTriggerAdvancedConfiguration,
   AsyncActionRsp,
-  FileOutputConf,
+  CreateFileResponse,
   TaskSchedulingParameterBrief,
   UpdateWorkflowRequest,
   TaskRunConditionRule,
   ResourceGroupInfo,
   UnbindWorkflowBundleResponse,
   KillWorkflowRunResponse,
+  AddConsoleUsersRsp,
+  ListWorkflowsRequest,
   ListWorkflowRunsRequest,
   WorkflowTriggerConfiguration,
   GetWorkflowTaskRunResponse,
@@ -53,7 +61,6 @@ import {
   CreateWorkflowRsp,
   GetFileResponse,
   AsyncOperation,
-  CreateWorkflowRequest,
   GetWorkflowRunRsp,
   ListWorkflowTaskRunsRsp,
   ScheduleBizEnumBrief,
@@ -62,14 +69,16 @@ import {
   RerunWorkflowRunRequest,
   ListWorkflowsResponse,
   LabelBrief,
+  AddConsoleUsersRequest,
+  WorkflowBaseInfoDetail,
   WorkflowBrief,
   KillWorkflowRunRequest,
   ListWorkflowTaskRunsResponse,
-  ParamInfo,
+  AddConsoleUsersResponse,
   UnbindWorkflowBundleRsp,
   DeleteFileResult,
   RunActionBrief,
-  CreateFileResponse,
+  FileOutputConf,
   RunWorkflowRequest,
   WorkflowTaskRun,
   GetWorkflowResponse,
@@ -86,11 +95,13 @@ import {
   CreateFileRequest,
   UpdateFileRequest,
   GetWorkflowRunRequest,
-  ListWorkflowsRequest,
+  RemoveConsoleUsersRequest,
   FileConfig,
   RunWorkflowResponse,
+  ListConsoleUsersRequest,
   ListWorkflowRunsResponse,
   AdvancedParameter,
+  ConsoleUserInfo,
   UpdateWorkflowRsp,
   OrderBy,
   WorkflowAdvanceConfig,
@@ -100,10 +111,15 @@ import {
   AlarmGroup,
   DeleteFileRequest,
   DeleteWorkflowRsp,
+  CommonFailItem,
+  RemoveConsoleUsersRsp,
   GetWorkflowRunResponse,
+  ListConsoleUsersRsp,
   GetWorkflowRsp,
   UnbindWorkflowBundleRequest,
+  RoleBasicInfo,
   UpdateFileResponse,
+  UpdateConsoleUsersRequest,
   GetWorkflowTaskRunRsp,
 } from "./databuddy_models"
 
@@ -127,13 +143,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新工作流
+   * <p>批量移除控制台用户（单次最多10个；前置校验任一不满足整体拒绝；执行阶段单个失败不中断后续删除，成败以 SuccessUins/FailItems 为准）</p>
    */
-  async UpdateWorkflow(
-    req: UpdateWorkflowRequest,
-    cb?: (error: string, rep: UpdateWorkflowResponse) => void
-  ): Promise<UpdateWorkflowResponse> {
-    return this.request("UpdateWorkflow", req, cb)
+  async RemoveConsoleUsers(
+    req: RemoveConsoleUsersRequest,
+    cb?: (error: string, rep: RemoveConsoleUsersResponse) => void
+  ): Promise<RemoveConsoleUsersResponse> {
+    return this.request("RemoveConsoleUsers", req, cb)
   }
 
   /**
@@ -144,6 +160,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkflowResponse) => void
   ): Promise<CreateWorkflowResponse> {
     return this.request("CreateWorkflow", req, cb)
+  }
+
+  /**
+   * 添加控制台用户
+   */
+  async AddConsoleUsers(
+    req: AddConsoleUsersRequest,
+    cb?: (error: string, rep: AddConsoleUsersResponse) => void
+  ): Promise<AddConsoleUsersResponse> {
+    return this.request("AddConsoleUsers", req, cb)
+  }
+
+  /**
+   * 获取工作流详细信息
+   */
+  async GetWorkflow(
+    req: GetWorkflowRequest,
+    cb?: (error: string, rep: GetWorkflowResponse) => void
+  ): Promise<GetWorkflowResponse> {
+    return this.request("GetWorkflow", req, cb)
+  }
+
+  /**
+   * 查询工作流运行详情
+   */
+  async GetWorkflowRun(
+    req: GetWorkflowRunRequest,
+    cb?: (error: string, rep: GetWorkflowRunResponse) => void
+  ): Promise<GetWorkflowRunResponse> {
+    return this.request("GetWorkflowRun", req, cb)
   }
 
   /**
@@ -173,26 +219,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateFileResponse) => void
   ): Promise<UpdateFileResponse> {
     return this.request("UpdateFile", req, cb)
-  }
-
-  /**
-   * 获取工作流详细信息
-   */
-  async GetWorkflow(
-    req: GetWorkflowRequest,
-    cb?: (error: string, rep: GetWorkflowResponse) => void
-  ): Promise<GetWorkflowResponse> {
-    return this.request("GetWorkflow", req, cb)
-  }
-
-  /**
-   * 查询工作流运行详情
-   */
-  async GetWorkflowRun(
-    req: GetWorkflowRunRequest,
-    cb?: (error: string, rep: GetWorkflowRunResponse) => void
-  ): Promise<GetWorkflowRunResponse> {
-    return this.request("GetWorkflowRun", req, cb)
   }
 
   /**
@@ -230,6 +256,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWorkflowTaskRunsResponse) => void
   ): Promise<ListWorkflowTaskRunsResponse> {
     return this.request("ListWorkflowTaskRuns", req, cb)
+  }
+
+  /**
+   * 查询控制台用户列表
+   */
+  async ListConsoleUsers(
+    req: ListConsoleUsersRequest,
+    cb?: (error: string, rep: ListConsoleUsersResponse) => void
+  ): Promise<ListConsoleUsersResponse> {
+    return this.request("ListConsoleUsers", req, cb)
+  }
+
+  /**
+   * 修改控制台用户角色
+   */
+  async UpdateConsoleUsers(
+    req: UpdateConsoleUsersRequest,
+    cb?: (error: string, rep: UpdateConsoleUsersResponse) => void
+  ): Promise<UpdateConsoleUsersResponse> {
+    return this.request("UpdateConsoleUsers", req, cb)
   }
 
   /**
@@ -297,6 +343,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFileResponse) => void
   ): Promise<GetFileResponse> {
     return this.request("GetFile", req, cb)
+  }
+
+  /**
+   * 更新工作流
+   */
+  async UpdateWorkflow(
+    req: UpdateWorkflowRequest,
+    cb?: (error: string, rep: UpdateWorkflowResponse) => void
+  ): Promise<UpdateWorkflowResponse> {
+    return this.request("UpdateWorkflow", req, cb)
   }
 
   /**

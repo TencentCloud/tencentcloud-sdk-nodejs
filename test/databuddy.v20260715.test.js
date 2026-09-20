@@ -28,9 +28,9 @@ it("databuddy.v20260715.RerunWorkflowRun", async function () {
     }
 })
 
-it("databuddy.v20260715.UpdateWorkflow", async function () {
+it("databuddy.v20260715.RemoveConsoleUsers", async function () {
     try {
-       const data = await client.UpdateWorkflow({})
+       const data = await client.RemoveConsoleUsers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("databuddy.v20260715.CreateWorkflow", async function () {
     }
 })
 
-it("databuddy.v20260715.UpdateFile", async function () {
+it("databuddy.v20260715.AddConsoleUsers", async function () {
     try {
-       const data = await client.UpdateFile({})
+       const data = await client.AddConsoleUsers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,6 +71,16 @@ it("databuddy.v20260715.GetWorkflow", async function () {
 it("databuddy.v20260715.GetWorkflowRun", async function () {
     try {
        const data = await client.GetWorkflowRun({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.UpdateFile", async function () {
+    try {
+       const data = await client.UpdateFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +111,26 @@ it("databuddy.v20260715.GetWorkflowTaskRun", async function () {
 it("databuddy.v20260715.ListWorkflowTaskRuns", async function () {
     try {
        const data = await client.ListWorkflowTaskRuns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.ListConsoleUsers", async function () {
+    try {
+       const data = await client.ListConsoleUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.UpdateConsoleUsers", async function () {
+    try {
+       const data = await client.UpdateConsoleUsers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +181,16 @@ it("databuddy.v20260715.DeleteWorkflow", async function () {
 it("databuddy.v20260715.GetFile", async function () {
     try {
        const data = await client.GetFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.UpdateWorkflow", async function () {
+    try {
+       const data = await client.UpdateWorkflow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

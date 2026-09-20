@@ -136,6 +136,20 @@ export interface FileInfo {
 }
 
 /**
+ * UpdateConsoleUsers返回参数结构体
+ */
+export interface UpdateConsoleUsersResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: UpdateConsoleUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 工作流完整配置
  */
 export interface Workflow {
@@ -257,14 +271,34 @@ export interface FileStorage {
 }
 
 /**
- * 工作流调度高级配置。
+ * 计划调度时间配置
  */
-export interface WorkflowTriggerAdvancedConfiguration {
+export interface ScheduledTimeConfig {
   /**
-   * 任务重试模式
+   * <p>调度时区，IANA 时区 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskRetryMode?: string
+  ScheduledTimeZone?: string
+  /**
+   * <p>调度生效开始时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * <p>调度生效结束时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * <p>周期类型</p><p>枚举值：</p><ul><li>DAY_CYCLE： 天</li><li>HOUR_CYCLE： 小时</li><li>MINUTE_CYCLE： 分钟</li><li>WEEK_CYCLE： 周</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleType?: string
+  /**
+   * <p>周期步长</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleNum?: number
 }
 
 /**
@@ -276,6 +310,34 @@ export interface DeleteWorkflowResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DeleteWorkflowRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListConsoleUsers返回参数结构体
+ */
+export interface ListConsoleUsersResponse {
+  /**
+   * <p>控制台用户列表</p>
+   */
+  Data?: ListConsoleUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveConsoleUsers返回参数结构体
+ */
+export interface RemoveConsoleUsersResponse {
+  /**
+   * <p>批量移除控制台用户结果</p>
+   */
+  Data?: RemoveConsoleUsersRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -322,6 +384,27 @@ export interface MonitorMetricBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Metrics?: Array<MonitorMetricItem>
+}
+
+/**
+ * 参数键值对
+ */
+export interface ParamInfo {
+  /**
+   * 参数ID，创建时无需传入，由服务端生成
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamId?: string
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamKey?: string
+  /**
+   * 参数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamValue?: string
 }
 
 /**
@@ -523,59 +606,71 @@ export interface WorkflowTaskNodeBrief {
 }
 
 /**
- * 工作流基本信息（出参用，含系统生成字段与负责人展示信息）
+ * 修改控制台用户响应
  */
-export interface WorkflowBaseInfoDetail {
+export interface UpdateConsoleUsersRsp {
   /**
-   * 工作流名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 操作是否成功
    */
-  WorkflowName?: string
+  Status?: boolean
+}
+
+/**
+ * CreateWorkflow请求参数结构体
+ */
+export interface CreateWorkflowRequest {
   /**
-   * 工作流ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
    */
-  WorkflowId?: string
+  WorkspaceId: string
   /**
-   * 创建人UIN
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作流基本信息。必填，其中 WorkflowName 必填且工作空间内唯一</p>
    */
-  CreateUserUin?: string
+  BaseInfo: WorkflowBaseInfo
   /**
-   * 工作流运行人UIN
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作流调度配置</p>
    */
-  RunUserUin?: string
+  Trigger?: Array<WorkflowTriggerConfiguration>
   /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作流参数列表</p>
    */
-  Description?: string
+  ParamList?: Array<ParamInfo>
   /**
-   * 工作流负责人用户名
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>标签列表</p>
    */
-  OwnerUserName?: string
+  LabelList?: Array<LabelBrief>
   /**
-   * 工作流负责人UIN
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作流告警配置</p>
    */
-  OwnerUserUin?: string
+  Alarm?: AlarmBrief
   /**
-   * 工作流负责人展示名
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>监控指标配置。若告警条件中选择了监控告警，则本字段必填</p>
    */
-  OwnerDisplayName?: string
+  MonitorMetric?: MonitorMetricBrief
   /**
-   * 创建时间，单位：毫秒时间戳
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作流高级设置</p>
    */
-  CreateTime?: string
+  AdvanceConfig?: WorkflowAdvanceConfig
   /**
-   * 更新时间，单位：毫秒时间戳
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作流任务列表</p>
    */
-  UpdateTime?: string
+  TaskList?: Array<WorkflowTask>
+  /**
+   * <p>BundleId，可通过 Bundle 相关接口获取</p>
+   */
+  BundleId?: string
+  /**
+   * <p>Bundle信息</p>
+   */
+  BundleInfo?: string
+  /**
+   * <p>Git配置ID，可通过 Git 配置相关接口获取</p>
+   */
+  GitConfigId?: string
+  /**
+   * <p>Git分支信息</p>
+   */
+  GitBranch?: string
 }
 
 /**
@@ -605,6 +700,17 @@ export interface WorkflowRunBrief {
 }
 
 /**
+ * 工作流调度高级配置。
+ */
+export interface WorkflowTriggerAdvancedConfiguration {
+  /**
+   * 任务重试模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskRetryMode?: string
+}
+
+/**
  * 批量异步操作的逐项结果
  */
 export interface AsyncActionRsp {
@@ -616,24 +722,18 @@ export interface AsyncActionRsp {
 }
 
 /**
- * Notebook/Python单元格输出配置
+ * CreateFile返回参数结构体
  */
-export interface FileOutputConf {
+export interface CreateFileResponse {
   /**
-   * 单元格 ID
+   * <p>返回结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CellId?: string
+  Data?: FileInfo
   /**
-   * Dashboard 图表配置，JSON 字符串
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DashboardConf?: string
-  /**
-   * 执行结果文件的预签名下载链接
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputPath?: string
+  RequestId?: string
 }
 
 /**
@@ -756,6 +856,66 @@ export interface KillWorkflowRunResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 添加控制台用户响应
+ */
+export interface AddConsoleUsersRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
+}
+
+/**
+ * ListWorkflows请求参数结构体
+ */
+export interface ListWorkflowsRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>分页页码，从 1 开始。非必填，默认 1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
+   */
+  PageSize?: number
+  /**
+   * <p>工作流名称关键字，对 WorkflowName 做模糊匹配。非必填，单值</p>
+   */
+  WorkflowNameKeyword?: string
+  /**
+   * <p>工作流名称，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  WorkflowNames?: Array<string>
+  /**
+   * <p>工作流ID，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  WorkflowIds?: Array<string>
+  /**
+   * <p>工作流运行人UIN，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  RunUserUins?: Array<string>
+  /**
+   * <p>标签名称ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  LabelKeyIds?: Array<string>
+  /**
+   * <p>标签值ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  LabelValueIds?: Array<string>
+  /**
+   * <p>快速筛选类型。非必填，单值</p><p>对齐老云 API（wedata/2025-10-10）文档示例值：</p><ul><li>MY_FAVORITE：我收藏的</li><li>MY_OWNER：我负责的</li><li>MY_AUTHORITY：我有权限</li><li>WorkflowId：支持多个工作流ID筛选</li></ul><p>后端实现现状：当前仅 MY_FAVORITE 生效（设置 favoriteUserUin 过滤当前用户收藏），MY_OWNER / MY_AUTHORITY 暂未在 Service 层实现，传入会被忽略（按全量返回）。</p>
+   */
+  QuickSelectionType?: string
+  /**
+   * <p>排序条件，多个之间按数组顺序表示优先级。非必填。<br>可排序字段白名单：CreateTime</p>
+   */
+  OrderBys?: Array<OrderBy>
 }
 
 /**
@@ -1206,64 +1366,6 @@ export interface AsyncOperation {
 }
 
 /**
- * CreateWorkflow请求参数结构体
- */
-export interface CreateWorkflowRequest {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>工作流基本信息。必填，其中 WorkflowName 必填且工作空间内唯一</p>
-   */
-  BaseInfo: WorkflowBaseInfo
-  /**
-   * <p>工作流调度配置</p>
-   */
-  Trigger?: Array<WorkflowTriggerConfiguration>
-  /**
-   * <p>工作流参数列表</p>
-   */
-  ParamList?: Array<ParamInfo>
-  /**
-   * <p>标签列表</p>
-   */
-  LabelList?: Array<LabelBrief>
-  /**
-   * <p>工作流告警配置</p>
-   */
-  Alarm?: AlarmBrief
-  /**
-   * <p>监控指标配置。若告警条件中选择了监控告警，则本字段必填</p>
-   */
-  MonitorMetric?: MonitorMetricBrief
-  /**
-   * <p>工作流高级设置</p>
-   */
-  AdvanceConfig?: WorkflowAdvanceConfig
-  /**
-   * <p>工作流任务列表</p>
-   */
-  TaskList?: Array<WorkflowTask>
-  /**
-   * <p>BundleId，可通过 Bundle 相关接口获取</p>
-   */
-  BundleId?: string
-  /**
-   * <p>Bundle信息</p>
-   */
-  BundleInfo?: string
-  /**
-   * <p>Git配置ID，可通过 Git 配置相关接口获取</p>
-   */
-  GitConfigId?: string
-  /**
-   * <p>Git分支信息</p>
-   */
-  GitBranch?: string
-}
-
-/**
  * 查询工作流运行详情响应。
  */
 export interface GetWorkflowRunRsp {
@@ -1431,6 +1533,10 @@ export interface RerunWorkflowRunRequest {
    * <p>本次需要重跑指定的任务ID集合，可通过 ListWorkflowTasks 获取，不传默认重跑该工作流下所有任务</p>
    */
   TaskIds?: Array<string>
+  /**
+   * <p>计划调度时间列表配置</p>
+   */
+  ScheduledTimeConfig?: ScheduledTimeConfig
 }
 
 /**
@@ -1472,6 +1578,76 @@ export interface LabelBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelValueId?: string
+}
+
+/**
+ * AddConsoleUsers请求参数结构体
+ */
+export interface AddConsoleUsersRequest {
+  /**
+   * <p>用户 UIN 列表，单次最多100个</p>
+   */
+  UserUins: Array<string>
+  /**
+   * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul>
+   */
+  RoleIds: Array<string>
+}
+
+/**
+ * 工作流基本信息（出参用，含系统生成字段与负责人展示信息）
+ */
+export interface WorkflowBaseInfoDetail {
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 创建人UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserUin?: string
+  /**
+   * 工作流运行人UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserUin?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 工作流负责人用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserName?: string
+  /**
+   * 工作流负责人UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserUin?: string
+  /**
+   * 工作流负责人展示名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerDisplayName?: string
+  /**
+   * 创建时间，单位：毫秒时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间，单位：毫秒时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -1627,24 +1803,17 @@ export interface ListWorkflowTaskRunsResponse {
 }
 
 /**
- * 参数键值对
+ * AddConsoleUsers返回参数结构体
  */
-export interface ParamInfo {
+export interface AddConsoleUsersResponse {
   /**
-   * 参数ID，创建时无需传入，由服务端生成
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>返回结果</p>
    */
-  ParamId?: string
+  Data?: AddConsoleUsersRsp
   /**
-   * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ParamKey?: string
-  /**
-   * 参数值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamValue?: string
+  RequestId?: string
 }
 
 /**
@@ -1711,18 +1880,24 @@ export interface RunActionBrief {
 }
 
 /**
- * CreateFile返回参数结构体
+ * Notebook/Python单元格输出配置
  */
-export interface CreateFileResponse {
+export interface FileOutputConf {
   /**
-   * <p>返回结果</p>
+   * 单元格 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: FileInfo
+  CellId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * Dashboard 图表配置，JSON 字符串
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  DashboardConf?: string
+  /**
+   * 执行结果文件的预签名下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputPath?: string
 }
 
 /**
@@ -1753,6 +1928,10 @@ export interface RunWorkflowRequest {
    * <p>幂等令牌。非必填，相同令牌的重复请求只会触发一次运行</p>
    */
   IdempotencyToken?: string
+  /**
+   * <p>计划调度时间列表配置</p>
+   */
+  ScheduledTimeConfig?: ScheduledTimeConfig
 }
 
 /**
@@ -1954,6 +2133,11 @@ export interface WorkflowTaskRun {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InnerTask?: InnerWorkflowTaskBrief
+  /**
+   * <p>计划调度时间</p><p>参数格式：毫秒时间戳，UTC</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduledTime?: string
 }
 
 /**
@@ -2217,165 +2401,170 @@ export interface InnerWorkflowTaskRunListOption {
  */
 export interface WorkflowRun {
   /**
-   * 主账号ID
+   * <p>主账号ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流运行ID
+   * <p>工作流运行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowRunId?: string
   /**
-   * 工作空间ID
+   * <p>工作空间ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: string
   /**
-   * 触发方式，Scheduler、ManualTrigger、Event (参考SchedulerTriggerType)
+   * <p>触发方式，Scheduler、ManualTrigger、Event (参考SchedulerTriggerType)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerType?: string
   /**
-   * 运行开始时间，单位：毫秒时间戳
+   * <p>运行开始时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunStartTime?: string
   /**
-   * pending 状态开始时间，单位：毫秒时间戳
+   * <p>pending 状态开始时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingStartTime?: string
   /**
-   * queue 状态开始时间，单位：毫秒时间戳
+   * <p>queue 状态开始时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueStartTime?: string
   /**
-   * 运行结束时间，单位：毫秒时间戳
+   * <p>运行结束时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunEndTime?: string
   /**
-   * 终态时间，运行进入终态时都有值，单位：毫秒时间戳
+   * <p>终态时间，运行进入终态时都有值，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 运行时长，单位：秒
+   * <p>运行时长，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunCostTime?: string
   /**
-   * 并发排队花费时间，单位：秒
+   * <p>并发排队花费时间，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueCostTime?: string
   /**
-   * 等待资源花费时间，单位：秒
+   * <p>等待资源花费时间，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingCostTime?: string
   /**
-   * 运行状态。取值参考工作流运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed
+   * <p>运行状态。取值参考工作流运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunState?: string
   /**
-   * 计算资源（任务的资源组ID集合）
+   * <p>计算资源（任务的资源组ID集合）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupIds?: Array<string>
   /**
-   * 运行用户UIN
+   * <p>运行用户UIN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunUserUin?: string
   /**
-   * 运行用户名称
+   * <p>运行用户名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunUserName?: string
   /**
-   * 错误码
+   * <p>错误码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorCodeString?: string
   /**
-   * 运行参数
+   * <p>运行参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowParams?: string
   /**
-   * 工作流版本ID
+   * <p>工作流版本ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowVersionId?: string
   /**
-   * 当前工作流是否支持重跑
+   * <p>当前工作流是否支持重跑</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportRerun?: boolean
   /**
-   * 工作流运行创建时间，单位：毫秒时间戳
+   * <p>工作流运行创建时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 重跑次数
+   * <p>重跑次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RerunTimes?: number
   /**
-   * 运行的任务范围，任务ID列表
+   * <p>运行的任务范围，任务ID列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelectedTaskIds?: Array<string>
   /**
-   * 资源组信息列表
+   * <p>资源组信息列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupInfoList?: Array<ResourceGroupInfo>
   /**
-   * 标签列表
+   * <p>标签列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelList?: Array<LabelBrief>
   /**
-   * 父工作流运行ID 【由嵌套工作流触发独有】
+   * <p>父工作流运行ID 【由嵌套工作流触发独有】</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentWorkflowRunId?: string
   /**
-   * 父工作流任务运行ID 【由嵌套工作流触发独有】
+   * <p>父工作流任务运行ID 【由嵌套工作流触发独有】</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentWorkflowTaskRunId?: string
   /**
-   * 父工作流任务运行名称 【由嵌套工作流触发独有】
+   * <p>父工作流任务运行名称 【由嵌套工作流触发独有】</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentWorkflowTaskRunName?: string
   /**
-   * 权限信息
+   * <p>授权权限类型<br>PERMISSION_TYPE_UNSPECIFIED：未指定权限<br>MANAGE : 管理权限：包含所有操作权限<br>RUN : 运行权限：可执行实体<br>VIEW : 查看权限：可查看实体内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Permission?: string
   /**
-   * 工作流高级运行时用户填入的参数
+   * <p>工作流高级运行时用户填入的参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedParameters?: Array<AdvancedParameter>
+  /**
+   * <p>计划调度时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduledTime?: string
 }
 
 /**
@@ -2501,53 +2690,13 @@ export interface GetWorkflowRunRequest {
 }
 
 /**
- * ListWorkflows请求参数结构体
+ * RemoveConsoleUsers请求参数结构体
  */
-export interface ListWorkflowsRequest {
+export interface RemoveConsoleUsersRequest {
   /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
    */
-  WorkspaceId: string
-  /**
-   * <p>分页页码，从 1 开始。非必填，默认 1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
-   */
-  PageSize?: number
-  /**
-   * <p>工作流名称关键字，对 WorkflowName 做模糊匹配。非必填，单值</p>
-   */
-  WorkflowNameKeyword?: string
-  /**
-   * <p>工作流名称，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  WorkflowNames?: Array<string>
-  /**
-   * <p>工作流ID，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  WorkflowIds?: Array<string>
-  /**
-   * <p>工作流运行人UIN，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  RunUserUins?: Array<string>
-  /**
-   * <p>标签名称ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  LabelKeyIds?: Array<string>
-  /**
-   * <p>标签值ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  LabelValueIds?: Array<string>
-  /**
-   * <p>快速筛选类型。非必填，单值</p><p>对齐老云 API（wedata/2025-10-10）文档示例值：</p><ul><li>MY_FAVORITE：我收藏的</li><li>MY_OWNER：我负责的</li><li>MY_AUTHORITY：我有权限</li><li>WorkflowId：支持多个工作流ID筛选</li></ul><p>后端实现现状：当前仅 MY_FAVORITE 生效（设置 favoriteUserUin 过滤当前用户收藏），MY_OWNER / MY_AUTHORITY 暂未在 Service 层实现，传入会被忽略（按全量返回）。</p>
-   */
-  QuickSelectionType?: string
-  /**
-   * <p>排序条件，多个之间按数组顺序表示优先级。非必填。<br>可排序字段白名单：CreateTime</p>
-   */
-  OrderBys?: Array<OrderBy>
+  UserUins: Array<string>
 }
 
 /**
@@ -2621,6 +2770,32 @@ export interface RunWorkflowResponse {
 }
 
 /**
+ * ListConsoleUsers请求参数结构体
+ */
+export interface ListConsoleUsersRequest {
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大200</p>
+   */
+  PageSize?: number
+  /**
+   * <p>用户名称与 UIN 模糊匹配</p>
+   */
+  UserKeyword?: string
+  /**
+   * <p>用于过滤角色关联的用户</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul>
+   */
+  RoleIds?: Array<string>
+  /**
+   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+}
+
+/**
  * ListWorkflowRuns返回参数结构体
  */
 export interface ListWorkflowRunsResponse {
@@ -2649,6 +2824,53 @@ export interface AdvancedParameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamValue?: string
+}
+
+/**
+ * 控制台用户信息（规范化，与内部 UserDetailInfo 解耦）
+ */
+export interface ConsoleUserInfo {
+  /**
+   * 用户 UIN
+   */
+  UserUin?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 昵称
+   */
+  Nickname?: string
+  /**
+   * 角色列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Roles?: Array<RoleBasicInfo>
+  /**
+   * 用户来源，group：用户组、user:用户
+   */
+  UserSource?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 是否主账号
+   */
+  IsOwner?: boolean
+  /**
+   * 0: 普通用户 1: entraId用户
+   */
+  UserTag?: number
+  /**
+   * 是否具有 admin 权限的子账号
+   */
+  IsAdmin?: boolean
 }
 
 /**
@@ -2853,6 +3075,38 @@ export interface DeleteWorkflowRsp {
 }
 
 /**
+ * 通用错误信息
+ */
+export interface CommonFailItem {
+  /**
+   * <p>uin或者groupId</p>
+   */
+  Item?: string
+  /**
+   * <p>错误信息</p>
+   */
+  FailReason?: string
+}
+
+/**
+ * 批量移除控制台用户响应
+ */
+export interface RemoveConsoleUsersRsp {
+  /**
+   * <p>请求已完成处理；即使部分失败也为 true，逐个结果以 SuccessUins/FailItems 为准</p>
+   */
+  Status?: boolean
+  /**
+   * <p>删除成功的用户 UIN 列表</p>
+   */
+  SuccessUins?: Array<string>
+  /**
+   * <p>失败项列表（Item 为用户 UIN，FailReason 为失败原因）</p>
+   */
+  FailItems?: Array<CommonFailItem>
+}
+
+/**
  * GetWorkflowRun返回参数结构体
  */
 export interface GetWorkflowRunResponse {
@@ -2865,6 +3119,33 @@ export interface GetWorkflowRunResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 查询控制台用户列表响应
+ */
+export interface ListConsoleUsersRsp {
+  /**
+   * 用户列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ConsoleUserInfo>
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber?: number
 }
 
 /**
@@ -2953,6 +3234,40 @@ export interface UnbindWorkflowBundleRequest {
 }
 
 /**
+ * 角色基础信息
+ */
+export interface RoleBasicInfo {
+  /**
+   * <p>角色ID</p>
+   */
+  Id?: string
+  /**
+   * <p>角色名称</p>
+   */
+  Name?: string
+  /**
+   * <p>角色描述</p>
+   */
+  Description?: string
+  /**
+   * <p>显示名称</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>角色类型</p>
+   */
+  RoleType?: string
+  /**
+   * <p>角色来源，参考 web_enum_standard.proto -&gt; RoleSource：0=未指定 1=用户直绑 2=用户组继承 3=两者都有</p>
+   */
+  Source?: number
+  /**
+   * <p>继承来源的用户组名称列表，Source=1 时为空</p>
+   */
+  GroupNames?: Array<string>
+}
+
+/**
  * UpdateFile返回参数结构体
  */
 export interface UpdateFileResponse {
@@ -2968,197 +3283,216 @@ export interface UpdateFileResponse {
 }
 
 /**
+ * UpdateConsoleUsers请求参数结构体
+ */
+export interface UpdateConsoleUsersRequest {
+  /**
+   * <p>用户 UIN 列表，单次最多100个</p>
+   */
+  UserUins: Array<string>
+  /**
+   * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul>
+   */
+  RoleIds: Array<string>
+}
+
+/**
  * GetWorkflowTaskRunRsp
  */
 export interface GetWorkflowTaskRunRsp {
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
-   * 任务运行ID
+   * <p>任务运行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowTaskRunId?: string
   /**
-   * 运行状态。取值参考工作流任务运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed
+   * <p>运行状态。取值参考工作流任务运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunState?: string
   /**
-   * 工作空间ID
+   * <p>工作空间ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: string
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流运行ID
+   * <p>工作流运行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowRunId?: string
   /**
-   * 任务ID
+   * <p>任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 任务类型名称
+   * <p>任务类型名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeName?: string
   /**
-   * 任务版本ID
+   * <p>任务版本ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskVersionId?: string
   /**
-   * 触发类型 (参考SchedulerTriggerType枚举)
+   * <p>触发类型 (参考SchedulerTriggerType枚举)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerType?: string
   /**
-   * 所属资源组ID
+   * <p>所属资源组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 错误码
+   * <p>错误码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorCodeString?: string
   /**
-   * 运行用户UIN
+   * <p>运行用户UIN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunUserUin?: string
   /**
-   * 运行用户名称
+   * <p>运行用户名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunUserName?: string
   /**
-   * 创建人UIN
+   * <p>创建人UIN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserUin?: string
   /**
-   * 执行平台执行ID
+   * <p>执行平台执行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: string
   /**
-   * 创建时间，单位：毫秒时间戳
+   * <p>创建时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 更新时间，单位：毫秒时间戳
+   * <p>更新时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 依赖任务完成时间，单位：毫秒时间戳
+   * <p>依赖任务完成时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependenceFinishedTime?: string
   /**
-   * 运行开始时间，单位：毫秒时间戳
+   * <p>运行开始时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunStartTime?: string
   /**
-   * 运行结束时间，单位：毫秒时间戳
+   * <p>运行结束时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunEndTime?: string
   /**
-   * 运行时长，单位：秒
+   * <p>运行时长，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunCostTime?: string
   /**
-   * 等待时长（依赖就绪到开始运行的等待耗时），单位：秒
+   * <p>等待时长（依赖就绪到开始运行的等待耗时），单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WaitTime?: string
   /**
-   * 下发执行平台时间，单位：毫秒时间戳
+   * <p>下发执行平台时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IssueTime?: string
   /**
-   * 时区
+   * <p>时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeZone?: string
   /**
-   * 依赖上游任务ID列表
+   * <p>依赖上游任务ID列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependOnList?: Array<string>
   /**
-   * 运行参数
+   * <p>运行参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunParams?: string
   /**
-   * 任务扩展信息，包含脚本路径
+   * <p>任务扩展信息，包含脚本路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeExtensions?: string
   /**
-   * 任务X坐标
+   * <p>任务X坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LeftCoordinate?: number
   /**
-   * 任务Y坐标
+   * <p>任务Y坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopCoordinate?: number
   /**
-   * 重试次数
+   * <p>重试次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryTimes?: number
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 重跑次数
+   * <p>重跑次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RerunTimes?: number
   /**
-   * 是否最新一次运行
+   * <p>是否最新一次运行</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLatestRun?: boolean
   /**
-   * 资源组信息列表
+   * <p>资源组信息列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupInfoList?: Array<ResourceGroupInfo>
   /**
-   * 错误消息
+   * <p>错误消息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: string
   /**
-   * 运行结果
+   * <p>运行结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunResult?: string
   /**
-   * 内嵌工作流任务运行详情（仅限 FOR_EACH 任务，其他任务类型不返回该字段）
+   * <p>内嵌工作流任务运行详情（仅限 FOR_EACH 任务，其他任务类型不返回该字段）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InnerWorkflowTaskRun?: InnerWorkflowTaskRun
+  /**
+   * <p>计划调度时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduledTime?: string
 }

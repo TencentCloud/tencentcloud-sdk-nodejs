@@ -128,6 +128,16 @@ it("iotexplorer.v20190423.InvokeVideosKeywordsAnalyzer", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeTWeSeeDirectUploadInfo", async function () {
+    try {
+       const data = await client.DescribeTWeSeeDirectUploadInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.RenewTWeSeeSubscription", async function () {
     try {
        const data = await client.RenewTWeSeeSubscription({})
@@ -331,6 +341,16 @@ it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
 it("iotexplorer.v20190423.GetBatchProductionsList", async function () {
     try {
        const data = await client.GetBatchProductionsList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.RemoveUserByRoomIdFromTRTC", async function () {
+    try {
+       const data = await client.RemoveUserByRoomIdFromTRTC({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1118,6 +1138,16 @@ it("iotexplorer.v20190423.CreateProject", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetVodCloudStorageVideoList", async function () {
+    try {
+       const data = await client.GetVodCloudStorageVideoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CallDeviceActionAsync", async function () {
     try {
        const data = await client.CallDeviceActionAsync({})
@@ -1478,6 +1508,16 @@ it("iotexplorer.v20190423.CreateFreeCloudStorage", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeVodCloudStorageDate", async function () {
+    try {
+       const data = await client.DescribeVodCloudStorageDate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyApplication", async function () {
     try {
        const data = await client.ModifyApplication({})
@@ -1558,9 +1598,9 @@ it("iotexplorer.v20190423.CreateDeviceSDPAnswer", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeSubscribedTopicPolicy", async function () {
+it("iotexplorer.v20190423.DescribeCloudStorageEventsByTWeSeePerson", async function () {
     try {
-       const data = await client.DescribeSubscribedTopicPolicy({})
+       const data = await client.DescribeCloudStorageEventsByTWeSeePerson({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1641,6 +1681,16 @@ it("iotexplorer.v20190423.DescribeTWeSeeCallback", async function () {
 it("iotexplorer.v20190423.GetTWeTalkProductConfigListV2", async function () {
     try {
        const data = await client.GetTWeTalkProductConfigListV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetVodCloudStorageEventList", async function () {
+    try {
+       const data = await client.GetVodCloudStorageEventList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1738,9 +1788,9 @@ it("iotexplorer.v20190423.DescribeDeviceFirmwares", async function () {
     }
 })
 
-it("iotexplorer.v20190423.RemoveUserByRoomIdFromTRTC", async function () {
+it("iotexplorer.v20190423.DescribeSubscribedTopicPolicy", async function () {
     try {
-       const data = await client.RemoveUserByRoomIdFromTRTC({})
+       const data = await client.DescribeSubscribedTopicPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

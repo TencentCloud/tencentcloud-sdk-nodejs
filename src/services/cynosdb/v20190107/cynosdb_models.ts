@@ -453,9 +453,13 @@ export interface ModifyBackupDownloadRestrictionResponse {
  */
 export interface UpgradeClusterVersionResponse {
   /**
-   * 异步任务id
+   * <p>异步任务id</p>
    */
   FlowId?: number
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5564,15 +5568,15 @@ export interface DescribeAccountAllGrantPrivilegesResponse {
  */
 export interface ModifyDbVersionData {
   /**
-   * 修改前版本
+   * <p>修改前版本</p>
    */
   OldVersion?: string
   /**
-   * 修改后版本
+   * <p>修改后版本</p>
    */
   NewVersion?: string
   /**
-   * 升级方式
+   * <p>升级方式</p>
    */
   UpgradeType?: string
 }
@@ -15302,15 +15306,15 @@ export interface ModifyClusterPasswordComplexityResponse {
  */
 export interface UpgradeClusterVersionRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId: string
   /**
-   * 内核版本
+   * <p>内核版本</p>
    */
   CynosVersion: string
   /**
-   * 升级时间类型，可选：upgradeImmediate,upgradeInMaintain
+   * <p>升级时间类型，可选：upgradeImmediate,upgradeInMaintain</p>
    */
   UpgradeType: string
 }

@@ -113,6 +113,7 @@ import {
   DashboardTopicInfo,
   DeleteResourceGraphProductIngestTaskRequest,
   CloudProductLogTaskInfo,
+  PrivateDomainNames,
   Instance,
   DescribeAlarmNoticesResponse,
   DeleteDataTransformRequest,
@@ -387,7 +388,7 @@ import {
   SplitPartitionResponse,
   AlarmClassification,
   WebCallbackInfo,
-  SplitPartitionRequest,
+  NetworkInfo,
   DescribeConsoleSharingListResponse,
   CreateLogsetResponse,
   ModifyHostMetricConfigRequest,
@@ -506,6 +507,7 @@ import {
   DescribeSearchViewsRequest,
   ModifyWebCallbackRequest,
   DeleteTopicResponse,
+  SplitPartitionRequest,
   ModifyResourceGraphEntityTopicsRelationRequest,
   ResourceGraphEntityRelatedTopic,
   CreateExportResponse,
@@ -3035,8 +3037,10 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-     * 本接口用于搜索日志上下文附近的内容，详情参考[上下文检索](https://cloud.tencent.com/document/product/614/53248)。
-API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Accept-Encoding:gzip）。
+     * 本接口用于搜索日志上下文附近的内容，部分日志采集方式不支持本接口，详情参考[上下文检索](https://cloud.tencent.com/document/product/614/53248)。
+**注意事项**：
+1. API返回数据包最大49MB，返回数据量大时，建议启用 gzip 压缩（HTTP Request Header Accept-Encoding:gzip）。
+2. 本接口存在频率限制，不适合批量读取海量日志，如需下载或实时读取日志，建议使用[日志下载](https://cloud.tencent.com/document/product/614/52901)或[投递与消费](https://cloud.tencent.com/document/product/614/37908)功能。
      */
   async DescribeLogContext(
     req: DescribeLogContextRequest,

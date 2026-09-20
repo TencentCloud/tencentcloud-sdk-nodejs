@@ -251,7 +251,7 @@ import {
   AssetItem,
   AssetComponent,
   CustomAgentRunModePolicy,
-  RiskDetailItem,
+  DescribeSkillScanTaskListRequest,
   DescribeClbListenerListResponse,
   DescribeSandboxDLPRuleListResponse,
   DescribeNatRulesRequest,
@@ -537,6 +537,7 @@ import {
   TaskAdvanceCFG,
   KBUpdateMachineItem,
   CycleScanConf,
+  DescribeSkillScanTaskListResponse,
   ImageVul,
   ModifyAIScheduleResponse,
   DescribePreventUninstallHostResponse,
@@ -725,7 +726,6 @@ import {
   DspmRisk,
   CosActionInfo,
   DescribeUserDspmInfoListResponse,
-  DescribeClusterListV2Response,
   AlertExtraInfo,
   CreateEdrAlertExportJobResponse,
   ModifyEdrAlertPermanentIgnoreRequest,
@@ -832,6 +832,7 @@ import {
   DescribeHostVulOverviewRequest,
   DescribeSecurityGroupPolicyRequest,
   CopyBaselinePolicyRequest,
+  SkillScanTaskItem,
   ScanEDRTaskAgainRequest,
   CosRiskBucketInfo,
   LogValueInfo,
@@ -1418,7 +1419,6 @@ import {
   ComplianceCheckItemsOverview,
   ModifyProtectionSetting,
   DeleteIaCFileRequest,
-  DescribeClusterListV2Request,
   DeleteDspmExportTaskResponse,
   DomainAssetVO,
   DescribeAccessKeyUserDetailResponse,
@@ -1517,7 +1517,7 @@ import {
   DescribeDspmAccessTopologyAssetsRequest,
   DescribeExposeRiskStatisticsRequest,
   VULRiskInfo,
-  BindClusterOwnerRequest,
+  RiskDetailItem,
   DescribePublicIpAssetsResponse,
   EnableAIScheduleRequest,
   DescribeEDRRuleListResponse,
@@ -2059,7 +2059,6 @@ import {
   DescribeClusterContainerPortListRequest,
   DeleteDspmIdentifyRuleResponse,
   ModifyDspmRiskInfoResponse,
-  BindClusterOwnerResponse,
   DescribeDspmAuditFilterStrategyRequest,
   DownloadDspmExportLogRequest,
   DisableAIScheduleRequest,
@@ -2797,13 +2796,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改反弹Shell内网告警与资产范围配置
+   * 分页查询 Skill 扫描任务列表，返回每个任务的 Skill 名称、消耗次数与上传时间，按上传时间倒序排列。默认查询本月数据，可通过 StartTime / EndTime 指定时间范围。
    */
-  async ModifyReverseShellSystemPolicyConfig(
-    req: ModifyReverseShellSystemPolicyConfigRequest,
-    cb?: (error: string, rep: ModifyReverseShellSystemPolicyConfigResponse) => void
-  ): Promise<ModifyReverseShellSystemPolicyConfigResponse> {
-    return this.request("ModifyReverseShellSystemPolicyConfig", req, cb)
+  async DescribeSkillScanTaskList(
+    req: DescribeSkillScanTaskListRequest,
+    cb?: (error: string, rep: DescribeSkillScanTaskListResponse) => void
+  ): Promise<DescribeSkillScanTaskListResponse> {
+    return this.request("DescribeSkillScanTaskList", req, cb)
   }
 
   /**
@@ -4112,16 +4111,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterAssetSyncTaskResponse) => void
   ): Promise<CreateClusterAssetSyncTaskResponse> {
     return this.request("CreateClusterAssetSyncTask", req, cb)
-  }
-
-  /**
-   * 绑定集群负责人
-   */
-  async BindClusterOwner(
-    req: BindClusterOwnerRequest,
-    cb?: (error: string, rep: BindClusterOwnerResponse) => void
-  ): Promise<BindClusterOwnerResponse> {
-    return this.request("BindClusterOwner", req, cb)
   }
 
   /**
@@ -6745,6 +6734,16 @@ capi 层处理流程：
   }
 
   /**
+   * 修改反弹Shell内网告警与资产范围配置
+   */
+  async ModifyReverseShellSystemPolicyConfig(
+    req: ModifyReverseShellSystemPolicyConfigRequest,
+    cb?: (error: string, rep: ModifyReverseShellSystemPolicyConfigResponse) => void
+  ): Promise<ModifyReverseShellSystemPolicyConfigResponse> {
+    return this.request("ModifyReverseShellSystemPolicyConfig", req, cb)
+  }
+
+  /**
    * 修改dspm数据识别数据项状态
    */
   async ModifyDspmIdentifyRuleStatus(
@@ -7057,13 +7056,13 @@ capi 层处理流程：
   }
 
   /**
-   * 查询集群列表
+   * 查询指定命名空间下的 SCF 函数列表，仅返回 Event 触发器类型的函数。
    */
-  async DescribeClusterListV2(
-    req: DescribeClusterListV2Request,
-    cb?: (error: string, rep: DescribeClusterListV2Response) => void
-  ): Promise<DescribeClusterListV2Response> {
-    return this.request("DescribeClusterListV2", req, cb)
+  async DescribeSCFFunctionList(
+    req: DescribeSCFFunctionListRequest,
+    cb?: (error: string, rep: DescribeSCFFunctionListResponse) => void
+  ): Promise<DescribeSCFFunctionListResponse> {
+    return this.request("DescribeSCFFunctionList", req, cb)
   }
 
   /**
@@ -7236,16 +7235,6 @@ capi 层处理流程：
     cb?: (error: string, rep: CreateImageRegistryTimedScanTaskConfigResponse) => void
   ): Promise<CreateImageRegistryTimedScanTaskConfigResponse> {
     return this.request("CreateImageRegistryTimedScanTaskConfig", req, cb)
-  }
-
-  /**
-   * 操作资产编辑标签
-   */
-  async ModifyAssetTags(
-    req: ModifyAssetTagsRequest,
-    cb?: (error: string, rep: ModifyAssetTagsResponse) => void
-  ): Promise<ModifyAssetTagsResponse> {
-    return this.request("ModifyAssetTags", req, cb)
   }
 
   /**
@@ -8308,7 +8297,7 @@ capi 层处理流程：
   }
 
   /**
-   * 查询 Skill 安全检测计费信息，包括订单状态、总配额、已消耗配额、到期时间、支付模式等。无订单时返回零值（仅含 TimeNow 和 BetaEndTime）。试用订单通过 ModifyTrialStatus(Module=9) 领取，正式订单通过计费系统创建。
+   * 查询 Skill 安全检测计费信息，包括订单状态、总配额、已消耗配额、到期时间、支付模式等。无订单时返回零值（仅含 TimeNow 和 BetaEndTime）。试用订单通过 ModifyTrialStatus(Module=9) 领取，正式订单通过计费系统创建。后付费资源信息通过 PostPayStatus、PostPayResourceId、PostPayBeginTime 返回，与预付费订单字段相互独立，二者可同时有效（预付额度耗尽后溢出用量进入后付费）。
    */
   async DescribeSkillScanPayInfo(
     req?: DescribeSkillScanPayInfoRequest,
@@ -9472,13 +9461,13 @@ capi 层处理流程：
   }
 
   /**
-   * 查询指定命名空间下的 SCF 函数列表，仅返回 Event 触发器类型的函数。
+   * 操作资产编辑标签
    */
-  async DescribeSCFFunctionList(
-    req: DescribeSCFFunctionListRequest,
-    cb?: (error: string, rep: DescribeSCFFunctionListResponse) => void
-  ): Promise<DescribeSCFFunctionListResponse> {
-    return this.request("DescribeSCFFunctionList", req, cb)
+  async ModifyAssetTags(
+    req: ModifyAssetTagsRequest,
+    cb?: (error: string, rep: ModifyAssetTagsResponse) => void
+  ): Promise<ModifyAssetTagsResponse> {
+    return this.request("ModifyAssetTags", req, cb)
   }
 
   /**

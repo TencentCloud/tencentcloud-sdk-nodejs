@@ -912,6 +912,32 @@ export interface TalkConversationConfigInfo {
 }
 
 /**
+ * DescribeTWeSeeDirectUploadInfo返回参数结构体
+ */
+export interface DescribeTWeSeeDirectUploadInfoResponse {
+  /**
+   * <p>TWeSee 直传目录的 COS URI</p>
+   */
+  COSURI?: string
+  /**
+   * <p>TWeSee 直传存储桶</p>
+   */
+  StorageBucket?: string
+  /**
+   * <p>TWeSee 直传目录路径</p>
+   */
+  StoragePath?: string
+  /**
+   * <p>TWeSee 直传存储地域</p>
+   */
+  StorageRegion?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetTWeTalkProductConfigList请求参数结构体
  */
 export interface GetTWeTalkProductConfigListRequest {
@@ -2033,6 +2059,20 @@ export interface RegisteredDeviceNetTypeInfo {
 }
 
 /**
+ * DescribeVodCloudStorageDate返回参数结构体
+ */
+export interface DescribeVodCloudStorageDateResponse {
+  /**
+   * <p>日期数据</p>
+   */
+  Data?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InvokeAISearchService返回参数结构体
  */
 export interface InvokeAISearchServiceResponse {
@@ -3024,25 +3064,25 @@ export interface GetTWeTalkActiveRecordListRequest {
 }
 
 /**
- * 设备的用户
+ * DescribeTWeSeeFace请求参数结构体
  */
-export interface DeviceUser {
+export interface DescribeTWeSeeFaceRequest {
   /**
-   * 用户ID
+   * 产品 ID
    */
-  UserId?: string
+  ProductId: string
   /**
-   * 用户角色 1所有者，0：其他分享者
+   * 设备名称
    */
-  Role?: number
+  DeviceName: string
   /**
-   * 家庭ID，所有者带该参数
+   * 人脸 ID
    */
-  FamilyId?: string
+  FaceId: string
   /**
-   * 家庭名称，所有者带该参数
+   * 通道 ID，默认值为 0
    */
-  FamilyName?: string
+  ChannelId?: number
 }
 
 /**
@@ -4319,6 +4359,36 @@ export interface GenSingleDeviceSignatureOfPublicResponse {
 }
 
 /**
+ * 加密云存事件数据
+ */
+export interface VodCloudStorageEvent {
+  /**
+   * <p>事件id</p>
+   */
+  EventId?: string
+  /**
+   * <p>缩略图url</p>
+   */
+  ThumbnailUrl?: string
+  /**
+   * <p>事件开始时间</p>
+   */
+  EventStartTime?: number
+  /**
+   * <p>事件结束时间</p>
+   */
+  EventEndTime?: number
+  /**
+   * <p>视频相关信息</p>
+   */
+  VideoList?: Array<VideoList>
+  /**
+   * <p>是否为图片事件</p><p>枚举值：</p><ul><li>true： 图片事件</li><li>false： 视频事件</li></ul>
+   */
+  IsStaticEvent?: boolean
+}
+
+/**
  * DeleteTWeTalkProductConfigV2请求参数结构体
  */
 export interface DeleteTWeTalkProductConfigV2Request {
@@ -4604,6 +4674,24 @@ export interface ModifyTWeSeeSubscriptionRequest {
    * 每日与每周总结配置，不传则不修改
    */
   SummarizeConfig?: SeeSummarizeConfig
+}
+
+/**
+ * CreateTWeSeeCallback请求参数结构体
+ */
+export interface CreateTWeSeeCallbackRequest {
+  /**
+   * 回调类型。可选值：\n- `http` HTTP 回调
+   */
+  Type: string
+  /**
+   * 回调 URL。要求 http 或 https 协议，仅支持 80 或 443 端口
+   */
+  CallbackUrl: string
+  /**
+   * 回调签名 Token。最大长度 128
+   */
+  CallbackToken?: string
 }
 
 /**
@@ -5306,21 +5394,33 @@ export interface BatchRenewTWeSeeSubscriptionRequest {
 }
 
 /**
- * CreateTWeSeeCallback请求参数结构体
+ * DescribeTWeSeeDirectUploadInfo请求参数结构体
  */
-export interface CreateTWeSeeCallbackRequest {
+export interface DescribeTWeSeeDirectUploadInfoRequest {
   /**
-   * 回调类型。可选值：\n- `http` HTTP 回调
+   * <p>产品 ID</p>
    */
-  Type: string
+  ProductId: string
   /**
-   * 回调 URL。要求 http 或 https 协议，仅支持 80 或 443 端口
+   * <p>设备名称</p>
    */
-  CallbackUrl: string
+  DeviceName: string
   /**
-   * 回调签名 Token。最大长度 128
+   * <p>服务类型。</p><p>枚举值：</p><ul><li>VID_COMP： 视频理解</li><li>IMG_COMP： 图片理解</li></ul>
    */
-  CallbackToken?: string
+  ServiceType: string
+  /**
+   * <p>上传方式。</p><p>枚举值：</p><ul><li>single： 单文件上传</li><li>manifest： 上传源文件与 Manifest（先上传多个源文件，然后上传 Manifest JSON 触发分析）</li></ul><p>默认值：single</p>
+   */
+  UploadMethod?: string
+  /**
+   * <p>上传目标，固定取值为 <code>stream</code>，不填时默认为 <code>stream</code></p><p>枚举值：</p><ul><li>stream： 上传到指定设备（加载对应设备的 ComprehensionConfig 等配置）</li></ul><p>默认值：stream</p>
+   */
+  UploadTarget?: string
+  /**
+   * <p>通道 ID，非 NVR 设备不填，NVR 设备必填</p>
+   */
+  ChannelId?: number
 }
 
 /**
@@ -5401,6 +5501,36 @@ export interface TalkIdleDetectionConfigInfo {
    * 空闲响应
    */
   IdleResponses?: Array<IdleResponseInfo>
+}
+
+/**
+ * GetVodCloudStorageEventList返回参数结构体
+ */
+export interface GetVodCloudStorageEventListResponse {
+  /**
+   * <p>事件列表</p>
+   */
+  Events?: Array<VodCloudStorageEvent>
+  /**
+   * <p>数据是否已完整</p>
+   */
+  Listover?: boolean
+  /**
+   * <p>下一页游标</p>
+   */
+  Context?: string
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * <p>加密播放器使用的 VOD 子应用 ID</p>
+   */
+  VodAppId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5783,25 +5913,25 @@ export interface DescribeInstanceResponse {
 }
 
 /**
- * DescribeTWeSeeFace请求参数结构体
+ * 设备的用户
  */
-export interface DescribeTWeSeeFaceRequest {
+export interface DeviceUser {
   /**
-   * 产品 ID
+   * 用户ID
    */
-  ProductId: string
+  UserId?: string
   /**
-   * 设备名称
+   * 用户角色 1所有者，0：其他分享者
    */
-  DeviceName: string
+  Role?: number
   /**
-   * 人脸 ID
+   * 家庭ID，所有者带该参数
    */
-  FaceId: string
+  FamilyId?: string
   /**
-   * 通道 ID，默认值为 0
+   * 家庭名称，所有者带该参数
    */
-  ChannelId?: number
+  FamilyName?: string
 }
 
 /**
@@ -6312,6 +6442,36 @@ export interface DeletePositionSpaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 加密云存视频列表数据
+ */
+export interface VideoList {
+  /**
+   * <p>用于播放加密视频</p>
+   */
+  Psign?: string
+  /**
+   * <p>开始时间</p>
+   */
+  StartTime?: number
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime?: number
+  /**
+   * <p>播放url</p>
+   */
+  Url?: string
+  /**
+   * <p>视频类型</p>
+   */
+  StreamType?: string
+  /**
+   * <p>点播文件id</p>
+   */
+  FileId?: string
 }
 
 /**
@@ -7416,6 +7576,32 @@ export interface UnbindProductsResponse {
 }
 
 /**
+ * GetVodCloudStorageVideoList返回参数结构体
+ */
+export interface GetVodCloudStorageVideoListResponse {
+  /**
+   * <p>播放器使用的 VOD 子应用 ID</p>
+   */
+  VodAppId?: string
+  /**
+   * <p>视频列表</p>
+   */
+  VideoList?: Array<VideoList>
+  /**
+   * <p>是否已拉完</p>
+   */
+  Listover?: boolean
+  /**
+   * <p>下一页游标</p>
+   */
+  Context?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 设备固件信息
  */
 export interface DeviceFirmwareInfo {
@@ -7533,6 +7719,24 @@ export interface DeleteTWeSeeFaceResponse {
  * ResetCloudStorageAIService返回参数结构体
  */
 export interface ResetCloudStorageAIServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudStorageEventsByTWeSeePerson返回参数结构体
+ */
+export interface DescribeCloudStorageEventsByTWeSeePersonResponse {
+  /**
+   * <p>人员关联的云存事件列表</p>
+   */
+  Events?: Array<CloudStorageEventWithAITasks>
+  /**
+   * <p>人员关联的云存事件总数</p>
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8775,6 +8979,62 @@ export interface DescribeTWeSeePostPaidServiceRequest {
 - `IMG_COMP`：图片理解
    */
   ServiceType: string
+}
+
+/**
+ * ModifyTWeTalkProductConfig请求参数结构体
+ */
+export interface ModifyTWeTalkProductConfigRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 系统提示词
+   */
+  SystemPrompt?: string
+  /**
+   * 欢迎语
+   */
+  GreetingMessage?: string
+  /**
+   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
+   */
+  VoiceType?: number
+  /**
+   * 复刻音色
+   */
+  FastVoiceType?: string
+  /**
+   * 支持的语言，zh-中文；en-英文；默认zh
+   */
+  TargetLanguage?: string
+}
+
+/**
+ * DescribeVodCloudStorageDate请求参数结构体
+ */
+export interface DescribeVodCloudStorageDateRequest {
+  /**
+   * <p>产品id</p>
+   */
+  ProductId: string
+  /**
+   * <p>设备名</p>
+   */
+  DeviceName: string
+  /**
+   * <p>通道id</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>用户id</p>
+   */
+  UserId?: string
+  /**
+   * <p>时区</p>
+   */
+  TimeZone?: string
 }
 
 /**
@@ -10507,6 +10767,36 @@ export interface BatchDescribeTWeSeeOrdersEntry {
    * <p>自定义订单 ID，与 OrderId 二选一</p>
    */
   CustomOrderId?: string
+}
+
+/**
+ * DescribeCloudStorageEventsByTWeSeePerson请求参数结构体
+ */
+export interface DescribeCloudStorageEventsByTWeSeePersonRequest {
+  /**
+   * <p>产品 ID</p>
+   */
+  ProductId: string
+  /**
+   * <p>设备名称</p>
+   */
+  DeviceName: string
+  /**
+   * <p>人员 ID</p>
+   */
+  PersonId: string
+  /**
+   * <p>分页拉取数量，取值范围为 1-100</p>
+   */
+  Limit: number
+  /**
+   * <p>分页拉取偏移</p>
+   */
+  Offset?: number
+  /**
+   * <p>通道 ID，非 NVR 设备不填，NVR 设备必填</p>
+   */
+  ChannelId?: number
 }
 
 /**
@@ -12957,33 +13247,57 @@ export interface DescribeFirmwareTasksResponse {
 }
 
 /**
- * ModifyTWeTalkProductConfig请求参数结构体
+ * GetVodCloudStorageVideoList请求参数结构体
  */
-export interface ModifyTWeTalkProductConfigRequest {
+export interface GetVodCloudStorageVideoListRequest {
   /**
-   * 产品ID
+   * <p>产品id</p>
    */
   ProductId: string
   /**
-   * 系统提示词
+   * <p>设备名称</p>
    */
-  SystemPrompt?: string
+  DeviceName: string
   /**
-   * 欢迎语
+   * <p>日期</p><p>参数格式：格式 yyyy-MM-dd</p>
    */
-  GreetingMessage?: string
+  Date: string
   /**
-   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
+   * <p>通道id</p>
    */
-  VoiceType?: number
+  ChannelId?: number
   /**
-   * 复刻音色
+   * <p>开始时间；与 EndTime 必须同时填或同时省略</p><p>单位：秒</p>
    */
-  FastVoiceType?: string
+  StartTime?: number
   /**
-   * 支持的语言，zh-中文；en-英文；默认zh
+   * <p>结束时间</p><p>单位：秒</p>
    */
-  TargetLanguage?: string
+  EndTime?: number
+  /**
+   * <p>用户id</p>
+   */
+  UserId?: string
+  /**
+   * <p>时区</p>
+   */
+  TimeZone?: string
+  /**
+   * <p>非加密文件的防盗链 URL 有效期</p><p>单位：秒</p>
+   */
+  ExpireSec?: number
+  /**
+   * <p>0 Android，1 小程序，2 iOS，3 鸿蒙</p>
+   */
+  Platform?: number
+  /**
+   * <p>分页游标；首页传空，之后原样回填上一页响应的 Context</p>
+   */
+  Context?: string
+  /**
+   * <p>每页视频条数；&lt;=0 或不填默认 10，&gt;100 按 100 计</p>
+   */
+  Size?: number
 }
 
 /**
@@ -13042,6 +13356,52 @@ export interface InvokeTWeSeeComprehensionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetVodCloudStorageEventList请求参数结构体
+ */
+export interface GetVodCloudStorageEventListRequest {
+  /**
+   * <p>产品id</p>
+   */
+  ProductId?: string
+  /**
+   * <p>设备名</p>
+   */
+  DeviceName?: string
+  /**
+   * <p>日期</p><p>参数格式：格式 yyyy-MM-dd</p>
+   */
+  Date?: string
+  /**
+   * <p>分页游标，首页为空。</p>
+   */
+  Context?: string
+  /**
+   * <p>分页大小</p><p>取值范围：[10, 100]</p><p>默认值：10</p>
+   */
+  Size?: number
+  /**
+   * <p>通道id</p>
+   */
+  ChannelId?: number
+  /**
+   * <p>用户id</p>
+   */
+  UserId?: string
+  /**
+   * <p>时区</p>
+   */
+  TimeZone?: string
+  /**
+   * <p>非加密 URL 签名有效期</p><p>单位：秒</p>
+   */
+  ExpireSec?: number
+  /**
+   * <p>请求平台：0 Android，1 小程序，2 iOS，3 鸿蒙</p>
+   */
+  Platform?: number
 }
 
 /**

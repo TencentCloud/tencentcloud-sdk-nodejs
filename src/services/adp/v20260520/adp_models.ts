@@ -1113,6 +1113,24 @@ export interface ModelLimit {
 }
 
 /**
+ * 回复类型分布项
+ */
+export interface Distribution {
+  /**
+   * <p>该回复方式的调用次数</p>
+   */
+  CallCount?: string
+  /**
+   * <p>该回复方式在总调用次数中的占比（百分比，0~100，保留两位小数；无数据时全为 0，有数据时各项之和为 100）</p>
+   */
+  Percentage?: number
+  /**
+   * <p>回复方式名称（已按请求语言国际化；i18n 缺失时兜底为 reply_method 的枚举名）</p>
+   */
+  ReplyName?: string
+}
+
+/**
  * CreatePlugin请求参数结构体
  */
 export interface CreatePluginRequest {
@@ -1976,6 +1994,36 @@ export interface MCPPluginConfig {
    * <p>是否支持交互界面（MCP Apps），插件级标签，默认false</p>
    */
   SupportsApps?: boolean
+}
+
+/**
+ * DescribeAppStatisticsOverview请求参数结构体
+ */
+export interface DescribeAppStatisticsOverviewRequest {
+  /**
+   * <p>应用类型。可选值：APP_TYPE_RAG（RAG）、APP_TYPE_WORKFLOW（Workflow）、APP_TYPE_CLAW（Claw）、APP_TYPE_MULTIAGENT（MultiAgent）；本期仅 APP_TYPE_RAG 生效，其余为预留值，传入将返回 InvalidParameter</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TYPE_UNSPECIFIED</td><td>0</td><td>未指定（无效值，请求勿传）</td></tr><tr><td>APP_TYPE_RAG</td><td>1</td><td>RAG（本期唯一支持）</td></tr><tr><td>APP_TYPE_WORKFLOW</td><td>2</td><td>Workflow（预留，暂不支持）</td></tr><tr><td>APP_TYPE_CLAW</td><td>3</td><td>Claw（预留，暂不支持）</td></tr><tr><td>APP_TYPE_MULTIAGENT</td><td>4</td><td>MultiAgent（预留，暂不支持）</td></tr></tbody></table>
+   */
+  AppType: number
+  /**
+   * <p>查询时间范围（Unix 秒）</p>
+   */
+  TimeRange: TimeRange
+  /**
+   * <p>视图范围：应用视图（VIEW_TYPE_APP），scope_id 填应用 ID（uint64 雪花 ID 的十进制字符串）</p>
+   */
+  ViewScope: ViewScope
+  /**
+   * <p>空间 ID</p><p>参数格式：<p>空间 ID</p></p><p>默认值：default_space</p>
+   */
+  SpaceId: string
+  /**
+   * <p>应用 ID</p><p>参数格式：</p><p>应用 ID</p><p></p><p>参考值：2099767969573745984</p>
+   */
+  AppId: string
+  /**
+   * <p>扩展过滤。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：space_id（空间 ID）、channel_type（调用方式/渠道类型，取值参考 trpc.adp.common.v2.ChannelType 枚举名）；channel_type 不传时按全部渠道聚合</p>
+   */
+  FilterList?: Array<Filter>
 }
 
 /**
@@ -3994,6 +4042,30 @@ export interface DigitalHumanConfig {
 }
 
 /**
+ * IntervalSchedule
+ */
+export interface IntervalSchedule {
+  /**
+   * 开始时间
+   */
+  StartAt?: string
+  /**
+   * 
+枚举值:
+| 枚举值 | uint |
+| --- | --- |
+| INTERVAL_UNIT_UNSPECIFIED | 0 |
+| INTERVAL_UNIT_HOUR | 1 |
+| INTERVAL_UNIT_DAY | 2 |
+   */
+  Unit?: number
+  /**
+   * 值
+   */
+  Value?: number
+}
+
+/**
  * DescribeLatestRelease返回参数结构体
  */
 export interface DescribeLatestReleaseResponse {
@@ -4083,20 +4155,6 @@ export interface SingleWorkflowConfig {
    * <p>工作流是否启用</p>
    */
   Enabled?: boolean
-}
-
-/**
- * CreatePlugin返回参数结构体
- */
-export interface CreatePluginResponse {
-  /**
-   * <p>插件id</p>
-   */
-  PluginId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5648,13 +5706,46 @@ export interface UnfavoriteSkillRequest {
 }
 
 /**
- * 输入框配置
+ * DescribeConversation返回参数结构体
  */
-export interface InputBoxConfig {
+export interface DescribeConversationResponse {
   /**
-   * 输入框按钮，1：上传图片、2：上传文档，3：腾讯文档，4：联网搜索
+   * <p>应用 ID</p>
    */
-  InputBoxButtons?: Array<number | bigint>
+  AppId?: string
+  /**
+   * <p>会话 ID</p>
+   */
+  ConversationId?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接)</p>
+   */
+  Type?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>工作空间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Workspace?: ConversationWorkspace
+  /**
+   * <p>会话标题</p>
+   */
+  Title?: string
+  /**
+   * <p>会话使用的用户端 AgentId</p>
+   */
+  AgentId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10561,27 +10652,17 @@ export interface DescribeAppRequest {
 export type DescribeResourceSummaryRequest = null
 
 /**
- * IntervalSchedule
+ * CreatePlugin返回参数结构体
  */
-export interface IntervalSchedule {
+export interface CreatePluginResponse {
   /**
-   * 开始时间
+   * <p>插件id</p>
    */
-  StartAt?: string
+  PluginId?: string
   /**
-   * 
-枚举值:
-| 枚举值 | uint |
-| --- | --- |
-| INTERVAL_UNIT_UNSPECIFIED | 0 |
-| INTERVAL_UNIT_HOUR | 1 |
-| INTERVAL_UNIT_DAY | 2 |
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Unit?: number
-  /**
-   * 值
-   */
-  Value?: number
+  RequestId?: string
 }
 
 /**
@@ -11023,46 +11104,13 @@ export interface DocUpdatePeriod {
 }
 
 /**
- * DescribeConversation返回参数结构体
+ * 输入框配置
  */
-export interface DescribeConversationResponse {
+export interface InputBoxConfig {
   /**
-   * <p>应用 ID</p>
+   * 输入框按钮，1：上传图片、2：上传文档，3：腾讯文档，4：联网搜索
    */
-  AppId?: string
-  /**
-   * <p>会话 ID</p>
-   */
-  ConversationId?: string
-  /**
-   * <p>创建时间</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接)</p>
-   */
-  Type?: number
-  /**
-   * <p>更新时间</p>
-   */
-  UpdateTime?: string
-  /**
-   * <p>工作空间</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Workspace?: ConversationWorkspace
-  /**
-   * <p>会话标题</p>
-   */
-  Title?: string
-  /**
-   * <p>会话使用的用户端 AgentId</p>
-   */
-  AgentId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InputBoxButtons?: Array<number | bigint>
 }
 
 /**
@@ -11355,6 +11403,36 @@ export interface CreateMsgRecordCategoryRequest {
    * <p>父分类业务 ID，0 表示一级分类（未分类）</p>
    */
   ParentId?: string
+}
+
+/**
+ * DescribeAppStatisticsOverview返回参数结构体
+ */
+export interface DescribeAppStatisticsOverviewResponse {
+  /**
+   * <p>首 tokens 平均耗时（毫秒）</p>
+   */
+  AvgFirstTokenTime?: string
+  /**
+   * <p>总 tokens 平均耗时（毫秒）</p>
+   */
+  AvgTotalTokenTime?: string
+  /**
+   * <p>应用调用成功率（百分比，0~100）</p>
+   */
+  CallSuccessRate?: number
+  /**
+   * <p>回复类型分布列表；按 app_type 统计，已补全所有回复方式并按固定顺序返回，无数据的回复方式 call_count 为 0</p>
+   */
+  ReplyTypeDistributionList?: Array<Distribution>
+  /**
+   * <p>总调用次数</p>
+   */
+  TotalCallCount?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

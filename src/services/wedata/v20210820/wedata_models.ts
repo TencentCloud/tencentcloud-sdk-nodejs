@@ -3377,25 +3377,29 @@ export interface CreateCodeTemplateVersionResponse {
 }
 
 /**
- * DescribeDataSourceList请求参数结构体
+ * boundle 绑定/解绑操作资源信息
  */
-export interface DescribeDataSourceListRequest {
+export interface BundleResource {
   /**
-   * <p>页码</p>
+   * <p>资源类型，取值范围：</p>
+<ul>
+<li>WORKFLOW 工作流</li>
+<li>TASK 任务</li>
+<li>CODE_TEMPLATE 代码模版</li>
+<li>RESOURCE 资源信息</li>
+<li>EVENT 事件</li>
+<li>PROJECT_PARAM 项目参数</li>
+</ul>
    */
-  PageNumber?: number
+  ResourceType: string
   /**
-   * <p>返回数量</p>
+   * 资源id
    */
-  PageSize?: number
+  ResourceId?: string
   /**
-   * <p>排序配置</p>
+   * 资源名称
    */
-  OrderFields?: Array<OrderField>
-  /**
-   * <p>可选过滤条件，Filter可选配置(参考): &quot;Name&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;数据源名称&quot; }, &quot;Type&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;类型&quot; }, &quot;ClusterId&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;集群id&quot; }, &quot;CategoryId&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;分类，项目或空间id&quot; }</p>
-   */
-  Filters?: Array<Filter>
+  ResourceName?: string
 }
 
 /**
@@ -5504,23 +5508,28 @@ export interface MakePlanOpsDtoCollection {
 }
 
 /**
- * DescribeTableMetas返回参数结构体
+ * BooleanResponse
  */
-export interface DescribeTableMetasResponse {
+export interface BooleanResponse {
   /**
-   * 表元数据
+   * 是否成功
+   */
+  Success?: boolean
+  /**
+   * 失败返回提示信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableMetas?: Array<TableMeta>
+  Message?: string
   /**
-   * 总条数
+   * 基线Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  BaselineId?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Code?: string
 }
 
 /**
@@ -8911,6 +8920,20 @@ export interface RunForceSucScheduleInstancesResponse {
 }
 
 /**
+ * UnbindingResource请求参数结构体
+ */
+export interface UnbindingResourceRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 资源列表
+   */
+  ResourceList: Array<BundleResource>
+}
+
+/**
  * CommitIntegrationTask返回参数结构体
  */
 export interface CommitIntegrationTaskResponse {
@@ -10056,19 +10079,23 @@ export interface RegisterDsEventResponse {
 }
 
 /**
- * 用户生产工作流列表分页
+ * DescribeTableMetas返回参数结构体
  */
-export interface WorkflowExtOpsDtoPage {
+export interface DescribeTableMetasResponse {
   /**
-   * 记录总数
+   * 表元数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableMetas?: Array<TableMeta>
+  /**
+   * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * 记录列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Items?: Array<WorkflowExtOpsDto>
+  RequestId?: string
 }
 
 /**
@@ -16606,6 +16633,22 @@ export interface CreateWorkflowDsRequest {
 }
 
 /**
+ * 用户生产工作流列表分页
+ */
+export interface WorkflowExtOpsDtoPage {
+  /**
+   * 记录总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<WorkflowExtOpsDto>
+}
+
+/**
  * DescribeTaskDetailDs返回参数结构体
  */
 export interface DescribeTaskDetailDsResponse {
@@ -20750,25 +20793,25 @@ export interface ColumnLineage {
 }
 
 /**
- * UnboundProjectExecutorResource请求参数结构体
+ * DescribeDataSourceList请求参数结构体
  */
-export interface UnboundProjectExecutorResourceRequest {
+export interface DescribeDataSourceListRequest {
   /**
-   * 执行资源组id
+   * <p>页码</p>
    */
-  ExecutorGroupId: string
+  PageNumber?: number
   /**
-   * 项目id
+   * <p>返回数量</p>
    */
-  ProjectId?: string
+  PageSize?: number
   /**
-   * 可选: 需要绑定的多个项目id, 若申明将带上ProjectId一起绑定
+   * <p>排序配置</p>
    */
-  ProjectIdList?: Array<string>
+  OrderFields?: Array<OrderField>
   /**
-   * 需要绑定项目的资源包id集合，为空则绑定整个资源组
+   * <p>可选过滤条件，Filter可选配置(参考): &quot;Name&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;数据源名称&quot; }, &quot;Type&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;类型&quot; }, &quot;ClusterId&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;集群id&quot; }, &quot;CategoryId&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;分类，项目或空间id&quot; }</p>
    */
-  ExecutorResourcePackageIds?: Array<string>
+  Filters?: Array<Filter>
 }
 
 /**
@@ -23159,6 +23202,21 @@ export interface UpdateDataModelRegistryInfoResponse {
    * 数语向wedata注册成功
    */
   Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindingResource返回参数结构体
+ */
+export interface UnbindingResourceResponse {
+  /**
+   * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<BooleanResponse>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -28660,6 +28718,28 @@ export interface ColumnAggregationLineage {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColumnInfoSet: Array<SimpleColumnInfo>
+}
+
+/**
+ * UnboundProjectExecutorResource请求参数结构体
+ */
+export interface UnboundProjectExecutorResourceRequest {
+  /**
+   * 执行资源组id
+   */
+  ExecutorGroupId: string
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 可选: 需要绑定的多个项目id, 若申明将带上ProjectId一起绑定
+   */
+  ProjectIdList?: Array<string>
+  /**
+   * 需要绑定项目的资源包id集合，为空则绑定整个资源组
+   */
+  ExecutorResourcePackageIds?: Array<string>
 }
 
 /**

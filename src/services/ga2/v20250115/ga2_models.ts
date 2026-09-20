@@ -1696,7 +1696,7 @@ export interface ModifyListenerRequest {
    */
   GetRealIpType?: string
   /**
-   * <p>HTTPS监听器支持选择版本</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul>
+   * <p>HTTPS监听器支持选择版本</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul><p>当前还支持修改。</p>
    */
   HttpVersion?: string
 }
@@ -1956,7 +1956,7 @@ export interface CreateListenerRequest {
    */
   XForwardedForRealIp?: boolean
   /**
-   * <p>解析方式。</p><p>枚举值：</p><ul><li>UNIDIRECTIONAL： 双向。</li><li>U： 单向。</li></ul><p>HTTPS监听器，此字段必传。</p>
+   * <p>解析方式。</p><p>枚举值：</p><ul><li>UNIDIRECTIONAL： 单向。</li><li>MUTUAL： 双向。</li></ul><p>HTTPS监听器，此字段必传。</p>
    */
   CertificationType?: string
   /**

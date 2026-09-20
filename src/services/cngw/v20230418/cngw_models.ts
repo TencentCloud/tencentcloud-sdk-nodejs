@@ -156,7 +156,7 @@ export interface CreateCloudNativeAPIGatewayMCPServerRequest {
    */
   Transport: string
   /**
-   * <p>后端类型</p><p>枚举值：</p><ul><li>MCPRegistry： mcp 注册中心- Registry</li><li>Registry： 普通注册中心</li><li>HostIP： 域名或ip</li><li>VirtualMCPServer： 虚拟MCPServer</li></ul>
+   * <p>后端类型</p><p>枚举值：</p><ul><li>MCPRegistry： mcp 注册中心</li><li>Registry： 普通注册中心</li><li>HostIP： 域名或ip</li><li>VirtualMCPServer： 虚拟MCPServer</li><li>DNS： 私有域名</li><li>Kubernetes： Kubernetes服务</li></ul>
    */
   UpstreamType: string
   /**
@@ -191,6 +191,10 @@ export interface CreateCloudNativeAPIGatewayMCPServerRequest {
    * <p>是否开启保留原Host功能</p>
    */
   PreserveHost?: boolean
+  /**
+   * <p>日志采集配置</p>
+   */
+  LogConfig?: AIGWLogConfig
 }
 
 /**
@@ -435,6 +439,10 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
    * 密钥id
    */
   SecretKeyId: string
+  /**
+   * 指定从 AKSK 或 CAM 成对凭证中返回哪一半。取值：AccessKey（AKSK 返回 AccessKeyId，CAM 返回 SecretId）、SecretKey（AKSK 返回 SecretAccessKey，CAM 返回 SecretKey）。不传则保持原行为，仅返回 AccessKeyId 或 SecretId。
+   */
+  SecretValueType?: string
 }
 
 /**
@@ -1044,6 +1052,14 @@ export interface CNAPIGwSecretKey {
    * <p>自定义Query参数凭证配置</p>
    */
   QueryParamCredentialConfig?: AIGWQueryParamCredentialConfig
+  /**
+   * <p>该消费者密钥绑定的模型密钥列表</p>
+   */
+  BoundModelSecretKeys?: Array<AIGWSimpleSecretKey>
+  /**
+   * <p>绑定了该模型密钥的消费者密钥列表</p>
+   */
+  BoundConsumerSecretKeys?: Array<AIGWSimpleSecretKey>
 }
 
 /**
@@ -2872,9 +2888,25 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
    */
   Offset: number
   /**
+   * <p>过滤条件。支持的 Name：Status / GenerateType / SecretType。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>模糊匹配密钥名称。</p>
+   */
+  Keyword?: string
+  /**
+   * <p>对应资源的 ID（消费者 ID 或模型服务 ID）。</p>
+   */
+  ResourceId?: string
+  /**
    * <p>密钥归属资源类型。UseToBind=true 时必填。</p><p>枚举值：</p><ul><li>Consumer：消费者</li><li>ModelService：模型服务</li></ul>
    */
   ResourceType?: string
+  /**
+   * <p>是否用于绑定场景。true 时返回可被绑定到指定资源的密钥。</p>
+   */
+  UseToBind?: boolean
 }
 
 /**
@@ -3080,17 +3112,25 @@ export interface DescribeCloudNativeAPIGatewayAIQuotaResponse {
  */
 export interface DescribeCloudNativeAPIGatewayAIServiceSourceListRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   GatewayId: string
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   Limit: number
   /**
-   * 分页偏移
+   * <p>分页偏移</p>
    */
   Offset: number
+  /**
+   * <p>搜索关键词</p>
+   */
+  Keyword?: string
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -3862,13 +3902,29 @@ export interface DeleteCloudNativeAPIGatewayLLMModelAPIResponse {
 }
 
 /**
- * UnbindCloudNativeAPIGatewaySecretKey返回参数结构体
+ * 简单密钥信息
  */
-export interface UnbindCloudNativeAPIGatewaySecretKeyResponse {
+export interface AIGWSimpleSecretKey {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>密钥ID</p>
    */
-  RequestId?: string
+  SecretKeyId?: string
+  /**
+   * <p>密钥名称</p>
+   */
+  Name?: string
+  /**
+   * <p>启用状态</p><p>枚举值：</p><ul><li>Enable： 启动</li><li>Disable： 禁用</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>密钥类型</p><p>枚举值：</p><ul><li>ApiKey： ApiKey类型</li></ul>
+   */
+  SecretType?: string
+  /**
+   * <p>创建时间</p><p>参数格式：2026-09-03 14:11:05</p>
+   */
+  CreateTime?: string
 }
 
 /**
@@ -4178,6 +4234,10 @@ export interface DescribeCloudNativeAPIGatewayAIQuotaListRequest {
    */
   Limit: number
   /**
+   * <p>关键字</p>
+   */
+  Keyword?: string
+  /**
    * <p>过滤条件</p>
    */
   Filters?: Array<Filter>
@@ -4256,7 +4316,7 @@ export interface DescribeCloudNativeAPIGatewayMCPServerACLResponse {
  */
 export interface DescribeCloudNativeAPIGatewayAIServiceSourceListResponse {
   /**
-   * MCP Server 列表结果
+   * <p>MCP Server 列表结果</p>
    */
   Result?: CNAPIGwAIServiceSourceList
   /**
@@ -4390,7 +4450,7 @@ export interface ModifyCloudNativeAPIGatewayMCPServerRequest {
    */
   ServerId: string
   /**
-   * <p>后端类型</p><p>枚举值：</p><ul><li>HostIP： 域名 ip</li><li>MCPRegistry： MCP 注册中心</li><li>VirtualMCPServer： 虚拟MCP 服务</li></ul>
+   * <p>后端类型</p><p>枚举值：</p><ul><li>MCPRegistry： mcp 注册中心</li><li>Registry： 普通注册中心</li><li>HostIP： 域名或ip</li><li>VirtualMCPServer： 虚拟MCPServer</li><li>DNS： 私有域名</li><li>Kubernetes： Kubernetes服务</li></ul>
    */
   UpstreamType: string
   /**
@@ -4425,6 +4485,10 @@ export interface ModifyCloudNativeAPIGatewayMCPServerRequest {
    * <p>是否开启保留原Host功能</p>
    */
   PreserveHost?: boolean
+  /**
+   * <p>日志配置</p>
+   */
+  LogConfig?: AIGWLogConfig
 }
 
 /**
@@ -4763,6 +4827,16 @@ export interface CNAPIGwMCPToolList {
  * DeleteCloudNativeAPIGatewayAIServiceSource返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayAIServiceSourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface UnbindCloudNativeAPIGatewaySecretKeyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5879,7 +5953,7 @@ export interface AIGWMCPServer {
    */
   Transport: string
   /**
-   * <p>服务类型：</p><ul><li>Registry  </li><li>HostIP</li></ul>
+   * <p>后端类型</p><p>枚举值：</p><ul><li>MCPRegistry： mcp 注册中心</li><li>Registry： 普通注册中心</li><li>HostIP： 域名或ip</li><li>VirtualMCPServer： 虚拟MCPServer</li><li>DNS： 私有域名</li><li>Kubernetes： Kubernetes服务</li></ul>
    */
   UpstreamType: string
   /**
@@ -5949,6 +6023,10 @@ export interface AIGWMCPServer {
    * <p>是否开启保留原Host功能</p>
    */
   PreserveHost?: boolean
+  /**
+   * <p>日志采集配置</p>
+   */
+  LogConfig?: AIGWLogConfig
 }
 
 /**

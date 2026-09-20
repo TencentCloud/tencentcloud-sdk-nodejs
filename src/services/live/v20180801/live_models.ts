@@ -264,45 +264,22 @@ export interface DescribeLiveWatermarkRulesResponse {
 }
 
 /**
- * StartLiveAvatarRoom请求参数结构体
+ * 直播审核标签分组数据
  */
-export interface StartLiveAvatarRoomRequest {
+export interface AuditGroupClassInfo {
   /**
-   * <p>数字人直播间 ID。</p>
+   * <p>标签组分类中文名。</p>
    */
-  RoomId: string
+  GroupClassName?: string
   /**
-   * <p>目标地址描述。</p>
+   * <p>标签组分类英文名。</p>
    */
-  Comment: string
+  GroupClassEname?: string
   /**
-   * <p>推流目标地址。</p>
+   * <p>标签组列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ToUrl: string
-  /**
-   * <p>操作者。</p>
-   */
-  Operator?: string
-  /**
-   * <p>房间类型。AIGC：AIGC形象房间；PRESET：预设形象房间</p><p>枚举值：</p><ul><li>AIGC： AIGC形象房间</li><li>PRESET： 预设形象房间</li></ul>
-   */
-  RoomType?: string
-  /**
-   * <p>交互模式下的协议，支持rtmp和trtc，默认是rtmp</p>
-   */
-  SessionProtocol?: string
-  /**
-   * <p>使用trtc协议时，在trtc的appid</p>
-   */
-  TrtcSdkAppId?: string
-  /**
-   * <p>进入房间时需要用UserSign来校验权限</p>
-   */
-  TrtcUserSig?: string
-  /**
-   * <p>要进入的房间</p>
-   */
-  TrtcRoomId?: string
+  LabelGroupList?: Array<AuditLabelGroupInfo>
 }
 
 /**
@@ -410,6 +387,32 @@ export interface ModifyLiveTimeShiftTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 向图库提交的图片数据类型。
+ */
+export interface AuditImage {
+  /**
+   * <p>提交的图片顺序索引。</p>
+   */
+  Index: string
+  /**
+   * <p>图片地址。</p>
+   */
+  Url: string
+  /**
+   * <p>图片 md5 值。</p>
+   */
+  Md5: string
+  /**
+   * <p>图片名称。</p>
+   */
+  Name: string
+  /**
+   * <p>违规类型。<br>可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。</p>
+   */
+  Label: string
 }
 
 /**
@@ -587,17 +590,13 @@ export interface DescribeAuditKeywordsResponse {
 }
 
 /**
- * DescribeCasterOutputInfos返回参数结构体
+ * DeleteAuditKeywordLib请求参数结构体
  */
-export interface DescribeCasterOutputInfosResponse {
+export interface DeleteAuditKeywordLibRequest {
   /**
-   * 导播台的推流信息列表。
+   * <p>词库 Id。</p>
    */
-  OutputInfos?: Array<CasterOutputInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  LibId: string
 }
 
 /**
@@ -693,6 +692,24 @@ export interface CreateLiveWatermarkRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 直播审核标签组信息。
+ */
+export interface AuditLabelGroupInfo {
+  /**
+   * <p>标签组中文名。</p>
+   */
+  GroupName?: string
+  /**
+   * <p>标签组英文名。</p>
+   */
+  GroupEname?: string
+  /**
+   * <p>标签组描述。</p>
+   */
+  GroupMsg?: string
 }
 
 /**
@@ -1064,6 +1081,20 @@ export interface CancelCommonMixStreamResponse {
 }
 
 /**
+ * CreateAuditImages返回参数结构体
+ */
+export interface CreateAuditImagesResponse {
+  /**
+   * <p>创建图片结果详情。</p>
+   */
+  Infos?: Array<AuditImageCreateDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveCerts返回参数结构体
  */
 export interface DescribeLiveCertsResponse {
@@ -1219,6 +1250,56 @@ export interface CasterDisplayInfo {
 }
 
 /**
+ * ModifyLiveRecordTemplate请求参数结构体
+ */
+export interface ModifyLiveRecordTemplateRequest {
+  /**
+   * DescribeRecordTemplates接口获取到的模板 ID。
+   */
+  TemplateId: number
+  /**
+   * 模板名称。
+   */
+  TemplateName?: string
+  /**
+   * 描述信息。
+   */
+  Description?: string
+  /**
+   * FLV 录制参数，开启 FLV 录制时设置。
+   */
+  FlvParam?: RecordParam
+  /**
+   * HLS 录制参数，开启 HLS 录制时设置。
+   */
+  HlsParam?: RecordParam
+  /**
+   * MP4 录制参数，开启 MP4 录制时设置。
+   */
+  Mp4Param?: RecordParam
+  /**
+   * AAC 录制参数，开启 AAC 录制时设置。
+   */
+  AacParam?: RecordParam
+  /**
+   * HLS 录制定制参数。
+   */
+  HlsSpecialParam?: HlsSpecialParam
+  /**
+   * MP3 录制参数，开启 MP3 录制时设置。
+   */
+  Mp3Param?: RecordParam
+  /**
+   * 是否去除水印，类型为慢直播时此参数无效。
+   */
+  RemoveWatermark?: boolean
+  /**
+   * FLV 录制定制参数。
+   */
+  FlvSpecialParam?: FlvSpecialParam
+}
+
+/**
  * 回调事件信息
  */
 export interface CallbackEventInfo {
@@ -1345,6 +1426,48 @@ export interface DescribeLiveWatermarksRequest {
    * 分页的大小参数，默认值500
    */
   PageSize?: number
+}
+
+/**
+ * StartLiveAvatarRoom请求参数结构体
+ */
+export interface StartLiveAvatarRoomRequest {
+  /**
+   * <p>数字人直播间 ID。</p>
+   */
+  RoomId: string
+  /**
+   * <p>目标地址描述。</p>
+   */
+  Comment: string
+  /**
+   * <p>推流目标地址。</p>
+   */
+  ToUrl: string
+  /**
+   * <p>操作者。</p>
+   */
+  Operator?: string
+  /**
+   * <p>房间类型。AIGC：AIGC形象房间；PRESET：预设形象房间</p><p>枚举值：</p><ul><li>AIGC： AIGC形象房间</li><li>PRESET： 预设形象房间</li></ul>
+   */
+  RoomType?: string
+  /**
+   * <p>交互模式下的协议，支持rtmp和trtc，默认是rtmp</p>
+   */
+  SessionProtocol?: string
+  /**
+   * <p>使用trtc协议时，在trtc的appid</p>
+   */
+  TrtcSdkAppId?: string
+  /**
+   * <p>进入房间时需要用UserSign来校验权限</p>
+   */
+  TrtcUserSig?: string
+  /**
+   * <p>要进入的房间</p>
+   */
+  TrtcRoomId?: string
 }
 
 /**
@@ -2332,6 +2455,24 @@ export interface DeleteLiveTranscodeTemplateRequest {
 2. 可以从接口 [DescribeLiveTranscodeTemplates](/document/product/267/32641) 查询已经创建过的模板列表。
    */
   TemplateId: number
+}
+
+/**
+ * DescribeAuditKeywordLibs返回参数结构体
+ */
+export interface DescribeAuditKeywordLibsResponse {
+  /**
+   * <p>满足条件的关键词库数量。</p>
+   */
+  Total?: number
+  /**
+   * <p>关键词库信息列表。</p>
+   */
+  Infos?: Array<AuditKeywordLibInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3669,29 +3810,13 @@ export interface DescribeUploadStreamNumsResponse {
 }
 
 /**
- * DescribeLiveTranscodeDetailInfo返回参数结构体
+ * DescribeCasterOutputInfos返回参数结构体
  */
-export interface DescribeLiveTranscodeDetailInfoResponse {
+export interface DescribeCasterOutputInfosResponse {
   /**
-   * <p>统计数据列表。</p>
+   * 导播台的推流信息列表。
    */
-  DataInfoList?: Array<TranscodeDetailInfo>
-  /**
-   * <p>页码。</p>
-   */
-  PageNum?: number
-  /**
-   * <p>每页个数。</p>
-   */
-  PageSize?: number
-  /**
-   * <p>总个数。</p>
-   */
-  TotalNum?: number
-  /**
-   * <p>总页数。</p>
-   */
-  TotalPage?: number
+  OutputInfos?: Array<CasterOutputInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4127,6 +4252,28 @@ export interface DescribeLiveTranscodeRulesRequest {
 }
 
 /**
+ * ModifyAuditKeywordLib请求参数结构体
+ */
+export interface ModifyAuditKeywordLibRequest {
+  /**
+   * <p>自定义词库名称。</p>
+   */
+  Name: string
+  /**
+   * <p>自定义词库描述。</p>
+   */
+  Description: string
+  /**
+   * <p>处理建议。<br>可取值：Review 疑似，Block 违规。</p>
+   */
+  Suggestion: string
+  /**
+   * <p>要更新的词库 Id。</p>
+   */
+  LibId: string
+}
+
+/**
  * 流维度的播放信息。
  */
 export interface PlayDataInfoByStream {
@@ -4197,13 +4344,13 @@ export interface DeleteLivePullStreamTaskRequest {
 }
 
 /**
- * CopyLiveAvatarRoom返回参数结构体
+ * DescribeCasterMarkPicInfos返回参数结构体
  */
-export interface CopyLiveAvatarRoomResponse {
+export interface DescribeCasterMarkPicInfosResponse {
   /**
-   * 数字人直播间 ID。
+   * 导播台的水印信息列表。
    */
-  RoomId?: string
+  MarkPicInfos?: Array<CasterMarkPicInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4315,6 +4462,20 @@ export interface DescribeTimeShiftStreamListResponse {
    * 流列表。
    */
   StreamList?: Array<TimeShiftStreamInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAuditImages返回参数结构体
+ */
+export interface DeleteAuditImagesResponse {
+  /**
+   * <p>创建图片结果详情。</p>
+   */
+  Infos?: Array<AuditImageDeleteDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4828,9 +4989,44 @@ export interface LivePackageInfo {
 }
 
 /**
- * DescribeLiveTimeShiftTemplates请求参数结构体
+ * CreateLiveTranscodeTemplate返回参数结构体
  */
-export type DescribeLiveTimeShiftTemplatesRequest = null
+export interface CreateLiveTranscodeTemplateResponse {
+  /**
+   * <p>模板Id。</p>
+   */
+  TemplateId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 直播审核图库添加图片详细结果。
+ */
+export interface AuditImageCreateDetail {
+  /**
+   * 图片上传状态，0 表示成功，其他表示失败。
+10101: url 解码失败。
+10102: url 解析失败。
+10103: url 不是 cos 地址。
+10301: label 不合法。
+20101: 数据入库错误。
+30101: cos 下载图片连接错误。
+30102: cos 下载图片响应错误。
+40101: 优图接口调用错误。
+   */
+  Status: number
+  /**
+   * 上传的图片 Id。
+   */
+  ImageId: string
+  /**
+   * 图片上传顺序索引。
+   */
+  Index: string
+}
 
 /**
  * StopLiveStreamMonitor返回参数结构体
@@ -5033,37 +5229,21 @@ export interface BackupStreamGroupInfo {
 }
 
 /**
- * 监控播放数据
+ * DescribeAuditKeywordLibs请求参数结构体
  */
-export interface MonitorStreamPlayInfo {
+export interface DescribeAuditKeywordLibsRequest {
   /**
-   * 播放域名。
+   * <p>获取偏移量。</p>
    */
-  PlayDomain?: string
+  Offset: number
   /**
-   * 流id。
+   * <p>获取条数。</p>
    */
-  StreamName?: string
+  Limit: number
   /**
-   * 播放码率，0表示原始码率。
+   * <p>根据关键词库名进行模糊查询。<br>传递空字符串时，忽略。</p>
    */
-  Rate?: number
-  /**
-   * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
-   */
-  Protocol?: string
-  /**
-   * 带宽，单位是Mbps。
-   */
-  Bandwidth?: number
-  /**
-   * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
-   */
-  Online?: number
-  /**
-   * 请求数。
-   */
-  Request?: number
+  Name: string
 }
 
 /**
@@ -5645,21 +5825,13 @@ URL中禁止包含的字符：
 }
 
 /**
- * 场景化视频结果文件上传COS时，需传入的信息。 需创建并授权LVB_QCSRole角色。
+ * ModifyAuditKeywordLib返回参数结构体
  */
-export interface SceneStoreCosParam {
+export interface ModifyAuditKeywordLibResponse {
   /**
-   * <p>Cos桶名称。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CosBucketName?: string
-  /**
-   * <p>Cos桶地域。</p>
-   */
-  CosBucketRegion?: string
-  /**
-   * <p>存储路径。</p>
-   */
-  CosBucketPath?: string
+  RequestId?: string
 }
 
 /**
@@ -6029,6 +6201,24 @@ export interface CreateLiveSnapshotTemplateResponse {
 }
 
 /**
+ * 场景化视频结果文件上传COS时，需传入的信息。 需创建并授权LVB_QCSRole角色。
+ */
+export interface SceneStoreCosParam {
+  /**
+   * <p>Cos桶名称。</p>
+   */
+  CosBucketName?: string
+  /**
+   * <p>Cos桶地域。</p>
+   */
+  CosBucketRegion?: string
+  /**
+   * <p>存储路径。</p>
+   */
+  CosBucketPath?: string
+}
+
+/**
  * ModifyCasterMarkPicInfo请求参数结构体
  */
 export interface ModifyCasterMarkPicInfoRequest {
@@ -6371,7 +6561,7 @@ export interface CreateAuditKeywordsResponse {
   /**
    * <p>新增成功关键词列表</p>
    */
-  Keywords?: Array<AuditKeywordInfo>
+  Keywords?: AuditKeywordInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6757,6 +6947,32 @@ export interface DescribeLivePullStreamTaskStatusRequest {
    * 任务 ID。
    */
   TaskId: string
+}
+
+/**
+ * 直播审核图库删除图片详细结果。
+ */
+export interface AuditImageDeleteDetail {
+  /**
+   * <p>图片 Id。</p>
+   */
+  ImageId?: string
+  /**
+   * <p>图片名称</p>
+   */
+  Name?: string
+  /**
+   * <p>删除状态。<br>0：成功。<br>10104：原图不存在。<br>40201:  图库删图失败。<br>20201:  图库记录删除失败。</p>
+   */
+  Status?: number
+  /**
+   * <p>违规类型。<br>可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。</p>
+   */
+  Label?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  ErrMsg?: string
 }
 
 /**
@@ -7373,6 +7589,16 @@ export interface DomainInfoList {
 }
 
 /**
+ * 直播审核图库图片信息。
+ */
+export interface AuditImageInfo {
+  /**
+   * 图片名称。
+   */
+  Name: string
+}
+
+/**
  * CreateScreenshotTask请求参数结构体
  */
 export interface CreateScreenshotTaskRequest {
@@ -7573,6 +7799,36 @@ export interface DescribeLiveAvatarScriptsResponse {
 }
 
 /**
+ * DescribeLiveTranscodeDetailInfo返回参数结构体
+ */
+export interface DescribeLiveTranscodeDetailInfoResponse {
+  /**
+   * <p>统计数据列表。</p>
+   */
+  DataInfoList?: Array<TranscodeDetailInfo>
+  /**
+   * <p>页码。</p>
+   */
+  PageNum?: number
+  /**
+   * <p>每页个数。</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总个数。</p>
+   */
+  TotalNum?: number
+  /**
+   * <p>总页数。</p>
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateLivePullStreamTask返回参数结构体
  */
 export interface CreateLivePullStreamTaskResponse {
@@ -7719,6 +7975,36 @@ export interface DeleteLiveSnapshotRuleRequest {
    * 流名称。
    */
   StreamName?: string
+}
+
+/**
+ * 直播审核，关键词库信息。
+ */
+export interface AuditKeywordLibInfo {
+  /**
+   * <p>词库 Id。</p>
+   */
+  LibId?: string
+  /**
+   * <p>自定义词库名称。</p>
+   */
+  Name?: string
+  /**
+   * <p>自定义词库描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>创建时间。UTC 格式，例如：2018-11-29T19:00:00Z。<br>注意：</p><ol><li>北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示。</li></ol>
+   */
+  CreateTime?: string
+  /**
+   * <p>处理建议。<br>可取值：Review 疑似，Block 违规。</p>
+   */
+  Suggestion?: string
+  /**
+   * <p>匹配模式。<br>可取值：ExactMatch 精确匹配， FuzzyMatch 模糊匹配。</p>
+   */
+  MatchType?: string
 }
 
 /**
@@ -8722,17 +9008,81 @@ export interface AuditKeywordDeleteDetail {
 }
 
 /**
- * DescribeLiveSnapshotTemplate返回参数结构体
+ * 导播台信息
  */
-export interface DescribeLiveSnapshotTemplateResponse {
+export interface CasterInfo {
   /**
-   * 截图模板信息。
+   * <p>导播台ID</p>
    */
-  Template?: SnapshotTemplateInfo
+  CasterId?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>导播台名称</p>
    */
-  RequestId?: string
+  CasterName?: string
+  /**
+   * <p>导播台上一次启动pgm的时间，值为unix时间戳。</p>
+   */
+  StartLiveTime?: number
+  /**
+   * <p>导播台的描述</p>
+   */
+  Description?: string
+  /**
+   * <p>导播台创建时间，值为unix时间戳。</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>导播台状态<br>0：停止状态，无预监，无主监<br>1：无预监，有主监<br>2：有预监，无主监<br>3：有预监，有主监</p>
+   */
+  Status?: number
+  /**
+   * <p>导播台的过期时间戳。值为-1或unix时间戳。<br>默认值为-1。 当值为-1时，表示该导播台永不过期。<br>当值为正常unix时间戳时，导播台将在该时间过期。<br>导播台过期后，预监与主监画面将自动停止，转推自动停止。<br>点播、直播url将停止转拉，推流url需自行停止推流。</p>
+   */
+  ExpireTime?: number
+  /**
+   * <p>导播台延时播放时间，单位为秒。</p>
+   */
+  DelayTime?: number
+  /**
+   * <p>导播台主监输出的宽度，单位为像素。</p>
+   */
+  PgmWidth?: number
+  /**
+   * <p>导播台主监输出的高度，单位为像素。</p>
+   */
+  PgmHeight?: number
+  /**
+   * <p>导播台主监输出的帧率。</p>
+   */
+  PgmFps?: number
+  /**
+   * <p>导播台主监输出的码率，单位为kbps</p>
+   */
+  PgmBitRate?: number
+  /**
+   * <p>导播台主监输出的音频码率，单位为kbps。</p>
+   */
+  PgmAudioBitRate?: number
+  /**
+   * <p>导播台的计费类型。<br>0 通用型 1 播单型。<br>注： 本参数暂无作用。</p>
+   */
+  FeeType?: number
+  /**
+   * <p>录制模板id。</p>
+   */
+  RecordTemplateId?: number
+  /**
+   * <p>录制状态。<br>0：未录制<br>1：录制中</p>
+   */
+  RecordStatus?: number
+  /**
+   * <p>录制接口返回的taskid</p>
+   */
+  RecordTaskId?: string
+  /**
+   * <p>导播台主监输出的编码方式</p><p>枚举值：</p><ul><li>h264： h264编码</li><li>h265： h265编码</li></ul><p>默认值：h264</p>
+   */
+  PgmVcodec?: string
 }
 
 /**
@@ -9021,6 +9371,20 @@ export interface ModifyPullStreamConfigRequest {
 }
 
 /**
+ * DescribeAuditGroupTag返回参数结构体
+ */
+export interface DescribeAuditGroupTagResponse {
+  /**
+   * <p>标签组分类数据按类型返回。</p>
+   */
+  GroupTypeList?: Array<AuditGroupInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProvinceIspPlayInfoList返回参数结构体
  */
 export interface DescribeProvinceIspPlayInfoListResponse {
@@ -9173,6 +9537,16 @@ export interface TimeShiftRecord {
    * 录制会话结束时间，Unix 时间戳。
    */
   EndTime?: number
+}
+
+/**
+ * DescribeAuditGroupTag请求参数结构体
+ */
+export interface DescribeAuditGroupTagRequest {
+  /**
+   * <p>标签类别。<br>Other：全量，TagText：文字，TagImage：图片，TagAudio：音频。</p>
+   */
+  TagType: string
 }
 
 /**
@@ -9443,81 +9817,17 @@ export interface CertInfo {
 export type DescribeLiveCallbackRulesRequest = null
 
 /**
- * 导播台信息
+ * DescribeLiveSnapshotTemplate返回参数结构体
  */
-export interface CasterInfo {
+export interface DescribeLiveSnapshotTemplateResponse {
   /**
-   * <p>导播台ID</p>
+   * 截图模板信息。
    */
-  CasterId?: number
+  Template?: SnapshotTemplateInfo
   /**
-   * <p>导播台名称</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CasterName?: string
-  /**
-   * <p>导播台上一次启动pgm的时间，值为unix时间戳。</p>
-   */
-  StartLiveTime?: number
-  /**
-   * <p>导播台的描述</p>
-   */
-  Description?: string
-  /**
-   * <p>导播台创建时间，值为unix时间戳。</p>
-   */
-  CreateTime?: number
-  /**
-   * <p>导播台状态<br>0：停止状态，无预监，无主监<br>1：无预监，有主监<br>2：有预监，无主监<br>3：有预监，有主监</p>
-   */
-  Status?: number
-  /**
-   * <p>导播台的过期时间戳。值为-1或unix时间戳。<br>默认值为-1。 当值为-1时，表示该导播台永不过期。<br>当值为正常unix时间戳时，导播台将在该时间过期。<br>导播台过期后，预监与主监画面将自动停止，转推自动停止。<br>点播、直播url将停止转拉，推流url需自行停止推流。</p>
-   */
-  ExpireTime?: number
-  /**
-   * <p>导播台延时播放时间，单位为秒。</p>
-   */
-  DelayTime?: number
-  /**
-   * <p>导播台主监输出的宽度，单位为像素。</p>
-   */
-  PgmWidth?: number
-  /**
-   * <p>导播台主监输出的高度，单位为像素。</p>
-   */
-  PgmHeight?: number
-  /**
-   * <p>导播台主监输出的帧率。</p>
-   */
-  PgmFps?: number
-  /**
-   * <p>导播台主监输出的码率，单位为kbps</p>
-   */
-  PgmBitRate?: number
-  /**
-   * <p>导播台主监输出的音频码率，单位为kbps。</p>
-   */
-  PgmAudioBitRate?: number
-  /**
-   * <p>导播台的计费类型。<br>0 通用型 1 播单型。<br>注： 本参数暂无作用。</p>
-   */
-  FeeType?: number
-  /**
-   * <p>录制模板id。</p>
-   */
-  RecordTemplateId?: number
-  /**
-   * <p>录制状态。<br>0：未录制<br>1：录制中</p>
-   */
-  RecordStatus?: number
-  /**
-   * <p>录制接口返回的taskid</p>
-   */
-  RecordTaskId?: string
-  /**
-   * <p>导播台主监输出的编码方式</p><p>枚举值：</p><ul><li>h264： h264编码</li><li>h265： h265编码</li></ul><p>默认值：h264</p>
-   */
-  PgmVcodec?: string
+  RequestId?: string
 }
 
 /**
@@ -9677,6 +9987,16 @@ export interface VideoRedrawTaskInfo {
    * <p>转绘视频风格，如动漫、赛博朋克、水墨等</p>
    */
   Style?: string
+}
+
+/**
+ * CreateAuditImages请求参数结构体
+ */
+export interface CreateAuditImagesRequest {
+  /**
+   * <p>样本图片列表。</p>
+   */
+  Images: Array<AuditImage>
 }
 
 /**
@@ -9843,6 +10163,40 @@ export interface DescribeCasterMarkWordInfosRequest {
    * 导播台ID。
    */
   CasterId: number
+}
+
+/**
+ * 监控播放数据
+ */
+export interface MonitorStreamPlayInfo {
+  /**
+   * 播放域名。
+   */
+  PlayDomain?: string
+  /**
+   * 流id。
+   */
+  StreamName?: string
+  /**
+   * 播放码率，0表示原始码率。
+   */
+  Rate?: number
+  /**
+   * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
+   */
+  Protocol?: string
+  /**
+   * 带宽，单位是Mbps。
+   */
+  Bandwidth?: number
+  /**
+   * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
+   */
+  Online?: number
+  /**
+   * 请求数。
+   */
+  Request?: number
 }
 
 /**
@@ -10716,18 +11070,36 @@ export interface DeleteCasterOutputInfoResponse {
 }
 
 /**
+ * DescribeAuditImages请求参数结构体
+ */
+export interface DescribeAuditImagesRequest {
+  /**
+   * <p>违规类型。<br>可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。</p>
+   */
+  Label: string
+  /**
+   * <p>查询页码。</p>
+   */
+  PageIndex: number
+  /**
+   * <p>查询条目数。</p>
+   */
+  PageSize: number
+}
+
+/**
  * DescribeLivePadRules请求参数结构体
  */
 export type DescribeLivePadRulesRequest = null
 
 /**
- * DescribeCasterMarkPicInfos返回参数结构体
+ * CopyLiveAvatarRoom返回参数结构体
  */
-export interface DescribeCasterMarkPicInfosResponse {
+export interface CopyLiveAvatarRoomResponse {
   /**
-   * 导播台的水印信息列表。
+   * 数字人直播间 ID。
    */
-  MarkPicInfos?: Array<CasterMarkPicInfo>
+  RoomId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11840,21 +12212,13 @@ export interface DescribeOriginStreamInfoRequest {
 }
 
 /**
- * DescribeLiveTimeShiftBillInfoList请求参数结构体
+ * DeleteAuditKeywordLib返回参数结构体
  */
-export interface DescribeLiveTimeShiftBillInfoListRequest {
+export interface DeleteAuditKeywordLibResponse {
   /**
-   * UTC开始时间，支持最近三个月的查询，查询时间最长跨度为一天。使用 UTC 格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime: string
-  /**
-   * UTC结束时间，支持最近三个月的查询，查询时间最长跨度为一天。使用 UTC 格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
-   */
-  EndTime: string
-  /**
-   * 推流域名列表，若不传递此参数，则表示查询总体数据。
-   */
-  PushDomains?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -13118,53 +13482,13 @@ export interface RecordParam {
 }
 
 /**
- * ModifyLiveRecordTemplate请求参数结构体
+ * DeleteAuditImages请求参数结构体
  */
-export interface ModifyLiveRecordTemplateRequest {
+export interface DeleteAuditImagesRequest {
   /**
-   * DescribeRecordTemplates接口获取到的模板 ID。
+   * <p>图片 Id 列表。</p>
    */
-  TemplateId: number
-  /**
-   * 模板名称。
-   */
-  TemplateName?: string
-  /**
-   * 描述信息。
-   */
-  Description?: string
-  /**
-   * FLV 录制参数，开启 FLV 录制时设置。
-   */
-  FlvParam?: RecordParam
-  /**
-   * HLS 录制参数，开启 HLS 录制时设置。
-   */
-  HlsParam?: RecordParam
-  /**
-   * MP4 录制参数，开启 MP4 录制时设置。
-   */
-  Mp4Param?: RecordParam
-  /**
-   * AAC 录制参数，开启 AAC 录制时设置。
-   */
-  AacParam?: RecordParam
-  /**
-   * HLS 录制定制参数。
-   */
-  HlsSpecialParam?: HlsSpecialParam
-  /**
-   * MP3 录制参数，开启 MP3 录制时设置。
-   */
-  Mp3Param?: RecordParam
-  /**
-   * 是否去除水印，类型为慢直播时此参数无效。
-   */
-  RemoveWatermark?: boolean
-  /**
-   * FLV 录制定制参数。
-   */
-  FlvSpecialParam?: FlvSpecialParam
+  ImageIds: Array<string>
 }
 
 /**
@@ -13269,6 +13593,24 @@ export interface DescribeLiveStreamPublishedListResponse {
 }
 
 /**
+ * DescribeAuditImages返回参数结构体
+ */
+export interface DescribeAuditImagesResponse {
+  /**
+   * <p>创建图片结果详情。</p>
+   */
+  Infos?: Array<AuditImageInfo>
+  /**
+   * <p>图片总数。</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddDelayLiveStream返回参数结构体
  */
 export interface AddDelayLiveStreamResponse {
@@ -13302,6 +13644,21 @@ export interface CloudEffectTemplateInfo {
    * <p>模板视频宽高比。</p>
    */
   VideoRatio?: string
+}
+
+/**
+ * 直播审核标签分组信息
+ */
+export interface AuditGroupInfo {
+  /**
+   * <p>标签类型。<br>可取值：TagImage，TagText，TagAudio。</p>
+   */
+  TagType?: string
+  /**
+   * <p>标签组分类列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupClassList?: Array<AuditGroupClassInfo>
 }
 
 /**
@@ -13368,18 +13725,9 @@ export interface CreateLiveTranscodeRuleResponse {
 }
 
 /**
- * CreateLiveTranscodeTemplate返回参数结构体
+ * DescribeLiveTimeShiftTemplates请求参数结构体
  */
-export interface CreateLiveTranscodeTemplateResponse {
-  /**
-   * <p>模板Id。</p>
-   */
-  TemplateId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeLiveTimeShiftTemplatesRequest = null
 
 /**
  * ModifyLivePadTemplate请求参数结构体
@@ -13876,6 +14224,24 @@ export interface DescribeTimeShiftRecordDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLiveTimeShiftBillInfoList请求参数结构体
+ */
+export interface DescribeLiveTimeShiftBillInfoListRequest {
+  /**
+   * UTC开始时间，支持最近三个月的查询，查询时间最长跨度为一天。使用 UTC 格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
+   */
+  StartTime: string
+  /**
+   * UTC结束时间，支持最近三个月的查询，查询时间最长跨度为一天。使用 UTC 格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
+   */
+  EndTime: string
+  /**
+   * 推流域名列表，若不传递此参数，则表示查询总体数据。
+   */
+  PushDomains?: Array<string>
 }
 
 /**
