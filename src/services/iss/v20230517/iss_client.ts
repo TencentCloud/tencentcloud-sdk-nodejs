@@ -71,6 +71,7 @@ import {
   AddRecordPlanResponse,
   ListOrganizationChannelNumbersRequest,
   ListVideoDownloadTaskResponse,
+  SipCarrierEndpoints,
   DeleteDomainRequest,
   ListRecordRetrieveTasksRequest,
   DeleteRecordPlanRequest,

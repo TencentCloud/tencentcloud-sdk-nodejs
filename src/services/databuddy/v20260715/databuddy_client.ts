@@ -19,13 +19,16 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DependOnBrief,
-  FileInfo,
+  ListConsoleGroupUsersRequest,
+  ListConsoleGroupsRequest,
+  ListConsoleGroupsRsp,
   UpdateConsoleUsersResponse,
   Workflow,
   TaskRetryStrategy,
   FileStorage,
   ScheduledTimeConfig,
   DeleteWorkflowResponse,
+  ListConsoleRolesRsp,
   ListConsoleUsersResponse,
   RemoveConsoleUsersResponse,
   InnerWorkflowTaskBrief,
@@ -47,9 +50,12 @@ import {
   TaskRunConditionRule,
   ResourceGroupInfo,
   UnbindWorkflowBundleResponse,
+  UpdateConsoleGroupRsp,
+  UnbindWorkflowBundleRsp,
   KillWorkflowRunResponse,
   AddConsoleUsersRsp,
   ListWorkflowsRequest,
+  DeleteConsoleGroupsRsp,
   ListWorkflowRunsRequest,
   WorkflowTriggerConfiguration,
   GetWorkflowTaskRunResponse,
@@ -61,53 +67,69 @@ import {
   CreateWorkflowRsp,
   GetFileResponse,
   AsyncOperation,
+  RoleMetaData,
   GetWorkflowRunRsp,
+  ListConsoleGroupUsersResponse,
   ListWorkflowTaskRunsRsp,
   ScheduleBizEnumBrief,
+  WorkflowTaskRun,
   InnerWorkflowTaskRunIterationBrief,
+  CreateConsoleGroupRequest,
   ListWorkflowsRsp,
   RerunWorkflowRunRequest,
   ListWorkflowsResponse,
   LabelBrief,
   AddConsoleUsersRequest,
+  CreateConsoleGroupRsp,
   WorkflowBaseInfoDetail,
   WorkflowBrief,
   KillWorkflowRunRequest,
   ListWorkflowTaskRunsResponse,
   AddConsoleUsersResponse,
-  UnbindWorkflowBundleRsp,
+  ListConsoleGroupsResponse,
+  ConsoleRoleInfo,
+  ConsoleGroupUserInfo,
   DeleteFileResult,
   RunActionBrief,
   FileOutputConf,
   RunWorkflowRequest,
-  WorkflowTaskRun,
+  UpdateConsoleGroupRequest,
+  ConsoleGroupInfo,
+  FileInfo,
   GetWorkflowResponse,
   GetWorkflowTaskRunRequest,
   DeleteFileResponse,
-  ListWorkflowRunsRsp,
+  CreateConsoleGroupResponse,
   WorkflowTask,
   AdvancedDependencyConfig,
+  DeleteConsoleGroupsRequest,
   UpdateWorkflowResponse,
   GetWorkflowRequest,
   InnerWorkflowTaskRunListOption,
   WorkflowRun,
   TaskTypeProperty,
+  ListWorkflowRunsRsp,
   CreateFileRequest,
   UpdateFileRequest,
   GetWorkflowRunRequest,
   RemoveConsoleUsersRequest,
+  RolePermission,
   FileConfig,
   RunWorkflowResponse,
   ListConsoleUsersRequest,
   ListWorkflowRunsResponse,
   AdvancedParameter,
+  UpdateConsoleGroupResponse,
   ConsoleUserInfo,
   UpdateWorkflowRsp,
   OrderBy,
   WorkflowAdvanceConfig,
+  DeleteConsoleGroupsResponse,
   InnerWorkflowTaskRun,
   MonitorMetricItem,
   CreateWorkflowResponse,
+  ListConsoleRolesRequest,
+  ListConsoleGroupUsersRsp,
   AlarmGroup,
   DeleteFileRequest,
   DeleteWorkflowRsp,
@@ -118,6 +140,7 @@ import {
   GetWorkflowRsp,
   UnbindWorkflowBundleRequest,
   RoleBasicInfo,
+  ListConsoleRolesResponse,
   UpdateFileResponse,
   UpdateConsoleUsersRequest,
   GetWorkflowTaskRunRsp,
@@ -133,33 +156,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重跑工作流
+   * 更新工作流
    */
-  async RerunWorkflowRun(
-    req: RerunWorkflowRunRequest,
-    cb?: (error: string, rep: RerunWorkflowRunResponse) => void
-  ): Promise<RerunWorkflowRunResponse> {
-    return this.request("RerunWorkflowRun", req, cb)
-  }
-
-  /**
-   * <p>批量移除控制台用户（单次最多10个；前置校验任一不满足整体拒绝；执行阶段单个失败不中断后续删除，成败以 SuccessUins/FailItems 为准）</p>
-   */
-  async RemoveConsoleUsers(
-    req: RemoveConsoleUsersRequest,
-    cb?: (error: string, rep: RemoveConsoleUsersResponse) => void
-  ): Promise<RemoveConsoleUsersResponse> {
-    return this.request("RemoveConsoleUsers", req, cb)
-  }
-
-  /**
-   * 创建工作流
-   */
-  async CreateWorkflow(
-    req: CreateWorkflowRequest,
-    cb?: (error: string, rep: CreateWorkflowResponse) => void
-  ): Promise<CreateWorkflowResponse> {
-    return this.request("CreateWorkflow", req, cb)
+  async UpdateWorkflow(
+    req: UpdateWorkflowRequest,
+    cb?: (error: string, rep: UpdateWorkflowResponse) => void
+  ): Promise<UpdateWorkflowResponse> {
+    return this.request("UpdateWorkflow", req, cb)
   }
 
   /**
@@ -183,6 +186,141 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询任务运行详情
+   */
+  async GetWorkflowTaskRun(
+    req: GetWorkflowTaskRunRequest,
+    cb?: (error: string, rep: GetWorkflowTaskRunResponse) => void
+  ): Promise<GetWorkflowTaskRunResponse> {
+    return this.request("GetWorkflowTaskRun", req, cb)
+  }
+
+  /**
+   * 查询工作流任务历史运行列表
+   */
+  async ListWorkflowTaskRuns(
+    req: ListWorkflowTaskRunsRequest,
+    cb?: (error: string, rep: ListWorkflowTaskRunsResponse) => void
+  ): Promise<ListWorkflowTaskRunsResponse> {
+    return this.request("ListWorkflowTaskRuns", req, cb)
+  }
+
+  /**
+   * 删除控制台用户组
+   */
+  async DeleteConsoleGroups(
+    req: DeleteConsoleGroupsRequest,
+    cb?: (error: string, rep: DeleteConsoleGroupsResponse) => void
+  ): Promise<DeleteConsoleGroupsResponse> {
+    return this.request("DeleteConsoleGroups", req, cb)
+  }
+
+  /**
+     * 获取文件的元信息，可选包含文件内容，支持按版本读取历史快照。
+
+**前置条件**
+1. FileId 与 FilePath 二选一，至少传一个；同时传时以 FileId 为准；
+2. 对应文件必须存在，且调用方对该文件有读权限；
+3. 传 VersionId 时该版本必须存在。
+
+**错误码（Module 均为 `Studio`）**
+
+| 错误码（Code） | InnerCode | 描述 | 处理建议 |
+| --- | --- | --- | --- |
+| `MissingParameter.WorkspaceId` | 1030001 | 缺少 WorkspaceId | 请传入 WorkspaceId |
+| `MissingParameter.FileId` | 1030003 | FileId 与 FilePath 同时为空 | FileId 与 FilePath 二选一，至少传一个 |
+| `InvalidParameterValue.FileType` | 1030102 | FileType 取值不支持 | FileType 取 FILE/NOTEBOOK_FILE/SQL_FILE |
+| `ResourceNotFound.FileNotFound` | 1030203 | 文件不存在或已删除 | 请确认 FileId 或 FilePath |
+| `ResourceNotFound.FileVersionNotFound` | 1030205 | 指定的文件版本不存在 | 请确认 VersionId，或调用 ListFileVersions 获取 |
+| `UnauthorizedOperation.FileReadDenied` | 1030304 | 对该文件无读权限 | 请联系文件负责人或空间管理员授权 |
+| `InternalError` | 1030900 | 服务内部异常 | 请携带 RequestId 联系支持 |
+     */
+  async GetFile(
+    req: GetFileRequest,
+    cb?: (error: string, rep: GetFileResponse) => void
+  ): Promise<GetFileResponse> {
+    return this.request("GetFile", req, cb)
+  }
+
+  /**
+   * 查询工作流列表
+   */
+  async ListWorkflows(
+    req: ListWorkflowsRequest,
+    cb?: (error: string, rep: ListWorkflowsResponse) => void
+  ): Promise<ListWorkflowsResponse> {
+    return this.request("ListWorkflows", req, cb)
+  }
+
+  /**
+     * 解绑工作流Bundle信息
+说明：本接口语义等同于规范动词清单中的 Detach，因兼容既有产品形态保留 Unbind 命名
+     */
+  async UnbindWorkflowBundle(
+    req: UnbindWorkflowBundleRequest,
+    cb?: (error: string, rep: UnbindWorkflowBundleResponse) => void
+  ): Promise<UnbindWorkflowBundleResponse> {
+    return this.request("UnbindWorkflowBundle", req, cb)
+  }
+
+  /**
+   * 删除工作流
+   */
+  async DeleteWorkflow(
+    req: DeleteWorkflowRequest,
+    cb?: (error: string, rep: DeleteWorkflowResponse) => void
+  ): Promise<DeleteWorkflowResponse> {
+    return this.request("DeleteWorkflow", req, cb)
+  }
+
+  /**
+     * 将文件移入回收站（软删除），同时清理该文件的版本记录与执行结果快照。
+
+**前置条件**
+1. FileId 对应文件必须存在且为活跃状态；
+2. 调用方对该文件有删除权限；
+3. 文件未被工作流任务引用。
+
+**错误码（Module 均为 `Studio`）**
+
+| 错误码（Code） | InnerCode | 描述 | 处理建议 |
+| --- | --- | --- | --- |
+| `MissingParameter.WorkspaceId` | 1030001 | 缺少 WorkspaceId | 请传入 WorkspaceId |
+| `MissingParameter.FileId` | 1030003 | 缺少 FileId | 请传入 FileId  |
+| `InvalidParameterValue.FileType` | 1030102 | FileType 取值不支持 | FileType 取 FILE/NOTEBOOK_FILE/SQL_FILE |
+| `ResourceNotFound.FileNotFound` | 1030203 | 文件不存在或已删除 | 请确认 FileId |
+| `ResourceInUse.FileReferencedByTask` | 1030204 | 文件被工作流任务引用，不允许删除 | 请先解除任务引用后再删除 |
+| `UnauthorizedOperation.FileDeleteDenied` | 1030303 | 对该文件无删除权限 | 请联系文件负责人或空间管理员授权 |
+| `InternalError` | 1030900 | 服务内部异常 | 请携带 RequestId 联系支持 |
+     */
+  async DeleteFile(
+    req: DeleteFileRequest,
+    cb?: (error: string, rep: DeleteFileResponse) => void
+  ): Promise<DeleteFileResponse> {
+    return this.request("DeleteFile", req, cb)
+  }
+
+  /**
+   * 创建控制台用户组
+   */
+  async CreateConsoleGroup(
+    req: CreateConsoleGroupRequest,
+    cb?: (error: string, rep: CreateConsoleGroupResponse) => void
+  ): Promise<CreateConsoleGroupResponse> {
+    return this.request("CreateConsoleGroup", req, cb)
+  }
+
+  /**
+   * 终止工作流的运行
+   */
+  async KillWorkflowRun(
+    req: KillWorkflowRunRequest,
+    cb?: (error: string, rep: KillWorkflowRunResponse) => void
+  ): Promise<KillWorkflowRunResponse> {
+    return this.request("KillWorkflowRun", req, cb)
+  }
+
+  /**
    * 查询工作流运行详情
    */
   async GetWorkflowRun(
@@ -190,6 +328,86 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetWorkflowRunResponse) => void
   ): Promise<GetWorkflowRunResponse> {
     return this.request("GetWorkflowRun", req, cb)
+  }
+
+  /**
+   * 查询控制台用户列表
+   */
+  async ListConsoleUsers(
+    req: ListConsoleUsersRequest,
+    cb?: (error: string, rep: ListConsoleUsersResponse) => void
+  ): Promise<ListConsoleUsersResponse> {
+    return this.request("ListConsoleUsers", req, cb)
+  }
+
+  /**
+   * <p>批量移除控制台用户（单次最多10个；前置校验任一不满足整体拒绝；执行阶段单个失败不中断后续删除，成败以 SuccessUins/FailItems 为准）</p>
+   */
+  async RemoveConsoleUsers(
+    req: RemoveConsoleUsersRequest,
+    cb?: (error: string, rep: RemoveConsoleUsersResponse) => void
+  ): Promise<RemoveConsoleUsersResponse> {
+    return this.request("RemoveConsoleUsers", req, cb)
+  }
+
+  /**
+   * 运行工作流
+   */
+  async RunWorkflow(
+    req: RunWorkflowRequest,
+    cb?: (error: string, rep: RunWorkflowResponse) => void
+  ): Promise<RunWorkflowResponse> {
+    return this.request("RunWorkflow", req, cb)
+  }
+
+  /**
+   * 查询控制台用户组列表
+   */
+  async ListConsoleGroups(
+    req: ListConsoleGroupsRequest,
+    cb?: (error: string, rep: ListConsoleGroupsResponse) => void
+  ): Promise<ListConsoleGroupsResponse> {
+    return this.request("ListConsoleGroups", req, cb)
+  }
+
+  /**
+   * 查询控制台角色列表
+   */
+  async ListConsoleRoles(
+    req: ListConsoleRolesRequest,
+    cb?: (error: string, rep: ListConsoleRolesResponse) => void
+  ): Promise<ListConsoleRolesResponse> {
+    return this.request("ListConsoleRoles", req, cb)
+  }
+
+  /**
+   * 重跑工作流
+   */
+  async RerunWorkflowRun(
+    req: RerunWorkflowRunRequest,
+    cb?: (error: string, rep: RerunWorkflowRunResponse) => void
+  ): Promise<RerunWorkflowRunResponse> {
+    return this.request("RerunWorkflowRun", req, cb)
+  }
+
+  /**
+   * 修改控制台用户组
+   */
+  async UpdateConsoleGroup(
+    req: UpdateConsoleGroupRequest,
+    cb?: (error: string, rep: UpdateConsoleGroupResponse) => void
+  ): Promise<UpdateConsoleGroupResponse> {
+    return this.request("UpdateConsoleGroup", req, cb)
+  }
+
+  /**
+   * 创建工作流
+   */
+  async CreateWorkflow(
+    req: CreateWorkflowRequest,
+    cb?: (error: string, rep: CreateWorkflowResponse) => void
+  ): Promise<CreateWorkflowResponse> {
+    return this.request("CreateWorkflow", req, cb)
   }
 
   /**
@@ -222,6 +440,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改控制台用户角色
+   */
+  async UpdateConsoleUsers(
+    req: UpdateConsoleUsersRequest,
+    cb?: (error: string, rep: UpdateConsoleUsersResponse) => void
+  ): Promise<UpdateConsoleUsersResponse> {
+    return this.request("UpdateConsoleUsers", req, cb)
+  }
+
+  /**
      * 在Studio（统一开发 IDE）的工作空间文件树中新建一个文件（Notebook/SQL/Python等），创建成功后返回文件的完整元信息。
 
 **前置条件**
@@ -239,53 +467,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务运行详情
+   * 查询控制台用户组成员列表
    */
-  async GetWorkflowTaskRun(
-    req: GetWorkflowTaskRunRequest,
-    cb?: (error: string, rep: GetWorkflowTaskRunResponse) => void
-  ): Promise<GetWorkflowTaskRunResponse> {
-    return this.request("GetWorkflowTaskRun", req, cb)
-  }
-
-  /**
-   * 查询工作流任务历史运行列表
-   */
-  async ListWorkflowTaskRuns(
-    req: ListWorkflowTaskRunsRequest,
-    cb?: (error: string, rep: ListWorkflowTaskRunsResponse) => void
-  ): Promise<ListWorkflowTaskRunsResponse> {
-    return this.request("ListWorkflowTaskRuns", req, cb)
-  }
-
-  /**
-   * 查询控制台用户列表
-   */
-  async ListConsoleUsers(
-    req: ListConsoleUsersRequest,
-    cb?: (error: string, rep: ListConsoleUsersResponse) => void
-  ): Promise<ListConsoleUsersResponse> {
-    return this.request("ListConsoleUsers", req, cb)
-  }
-
-  /**
-   * 修改控制台用户角色
-   */
-  async UpdateConsoleUsers(
-    req: UpdateConsoleUsersRequest,
-    cb?: (error: string, rep: UpdateConsoleUsersResponse) => void
-  ): Promise<UpdateConsoleUsersResponse> {
-    return this.request("UpdateConsoleUsers", req, cb)
-  }
-
-  /**
-   * 运行工作流
-   */
-  async RunWorkflow(
-    req: RunWorkflowRequest,
-    cb?: (error: string, rep: RunWorkflowResponse) => void
-  ): Promise<RunWorkflowResponse> {
-    return this.request("RunWorkflow", req, cb)
+  async ListConsoleGroupUsers(
+    req: ListConsoleGroupUsersRequest,
+    cb?: (error: string, rep: ListConsoleGroupUsersResponse) => void
+  ): Promise<ListConsoleGroupUsersResponse> {
+    return this.request("ListConsoleGroupUsers", req, cb)
   }
 
   /**
@@ -296,110 +484,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWorkflowRunsResponse) => void
   ): Promise<ListWorkflowRunsResponse> {
     return this.request("ListWorkflowRuns", req, cb)
-  }
-
-  /**
-   * 终止工作流的运行
-   */
-  async KillWorkflowRun(
-    req: KillWorkflowRunRequest,
-    cb?: (error: string, rep: KillWorkflowRunResponse) => void
-  ): Promise<KillWorkflowRunResponse> {
-    return this.request("KillWorkflowRun", req, cb)
-  }
-
-  /**
-   * 删除工作流
-   */
-  async DeleteWorkflow(
-    req: DeleteWorkflowRequest,
-    cb?: (error: string, rep: DeleteWorkflowResponse) => void
-  ): Promise<DeleteWorkflowResponse> {
-    return this.request("DeleteWorkflow", req, cb)
-  }
-
-  /**
-     * 获取文件的元信息，可选包含文件内容，支持按版本读取历史快照。
-
-**前置条件**
-1. FileId 与 FilePath 二选一，至少传一个；同时传时以 FileId 为准；
-2. 对应文件必须存在，且调用方对该文件有读权限；
-3. 传 VersionId 时该版本必须存在。
-
-**错误码（Module 均为 `Studio`）**
-
-| 错误码（Code） | InnerCode | 描述 | 处理建议 |
-| --- | --- | --- | --- |
-| `MissingParameter.WorkspaceId` | 1030001 | 缺少 WorkspaceId | 请传入 WorkspaceId |
-| `MissingParameter.FileId` | 1030003 | FileId 与 FilePath 同时为空 | FileId 与 FilePath 二选一，至少传一个 |
-| `InvalidParameterValue.FileType` | 1030102 | FileType 取值不支持 | FileType 取 FILE/NOTEBOOK_FILE/SQL_FILE |
-| `ResourceNotFound.FileNotFound` | 1030203 | 文件不存在或已删除 | 请确认 FileId 或 FilePath |
-| `ResourceNotFound.FileVersionNotFound` | 1030205 | 指定的文件版本不存在 | 请确认 VersionId，或调用 ListFileVersions 获取 |
-| `UnauthorizedOperation.FileReadDenied` | 1030304 | 对该文件无读权限 | 请联系文件负责人或空间管理员授权 |
-| `InternalError` | 1030900 | 服务内部异常 | 请携带 RequestId 联系支持 |
-     */
-  async GetFile(
-    req: GetFileRequest,
-    cb?: (error: string, rep: GetFileResponse) => void
-  ): Promise<GetFileResponse> {
-    return this.request("GetFile", req, cb)
-  }
-
-  /**
-   * 更新工作流
-   */
-  async UpdateWorkflow(
-    req: UpdateWorkflowRequest,
-    cb?: (error: string, rep: UpdateWorkflowResponse) => void
-  ): Promise<UpdateWorkflowResponse> {
-    return this.request("UpdateWorkflow", req, cb)
-  }
-
-  /**
-   * 查询工作流列表
-   */
-  async ListWorkflows(
-    req: ListWorkflowsRequest,
-    cb?: (error: string, rep: ListWorkflowsResponse) => void
-  ): Promise<ListWorkflowsResponse> {
-    return this.request("ListWorkflows", req, cb)
-  }
-
-  /**
-     * 将文件移入回收站（软删除），同时清理该文件的版本记录与执行结果快照。
-
-**前置条件**
-1. FileId 对应文件必须存在且为活跃状态；
-2. 调用方对该文件有删除权限；
-3. 文件未被工作流任务引用。
-
-**错误码（Module 均为 `Studio`）**
-
-| 错误码（Code） | InnerCode | 描述 | 处理建议 |
-| --- | --- | --- | --- |
-| `MissingParameter.WorkspaceId` | 1030001 | 缺少 WorkspaceId | 请传入 WorkspaceId |
-| `MissingParameter.FileId` | 1030003 | 缺少 FileId | 请传入 FileId  |
-| `InvalidParameterValue.FileType` | 1030102 | FileType 取值不支持 | FileType 取 FILE/NOTEBOOK_FILE/SQL_FILE |
-| `ResourceNotFound.FileNotFound` | 1030203 | 文件不存在或已删除 | 请确认 FileId |
-| `ResourceInUse.FileReferencedByTask` | 1030204 | 文件被工作流任务引用，不允许删除 | 请先解除任务引用后再删除 |
-| `UnauthorizedOperation.FileDeleteDenied` | 1030303 | 对该文件无删除权限 | 请联系文件负责人或空间管理员授权 |
-| `InternalError` | 1030900 | 服务内部异常 | 请携带 RequestId 联系支持 |
-     */
-  async DeleteFile(
-    req: DeleteFileRequest,
-    cb?: (error: string, rep: DeleteFileResponse) => void
-  ): Promise<DeleteFileResponse> {
-    return this.request("DeleteFile", req, cb)
-  }
-
-  /**
-     * 解绑工作流Bundle信息
-说明：本接口语义等同于规范动词清单中的 Detach，因兼容既有产品形态保留 Unbind 命名
-     */
-  async UnbindWorkflowBundle(
-    req: UnbindWorkflowBundleRequest,
-    cb?: (error: string, rep: UnbindWorkflowBundleResponse) => void
-  ): Promise<UnbindWorkflowBundleResponse> {
-    return this.request("UnbindWorkflowBundle", req, cb)
   }
 }

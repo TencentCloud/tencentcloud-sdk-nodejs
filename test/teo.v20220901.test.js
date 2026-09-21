@@ -1348,6 +1348,16 @@ it("teo.v20220901.CreateSecurityClientAttester", async function () {
     }
 })
 
+it("teo.v20220901.ModifyZoneCustomVariables", async function () {
+    try {
+       const data = await client.ModifyZoneCustomVariables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DisableOriginACL", async function () {
     try {
        const data = await client.DisableOriginACL({})
@@ -1891,6 +1901,16 @@ it("teo.v20220901.ModifyZoneWorkMode", async function () {
 it("teo.v20220901.ModifyRealtimeLogDeliveryTask", async function () {
     try {
        const data = await client.ModifyRealtimeLogDeliveryTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeZoneCustomVariables", async function () {
+    try {
+       const data = await client.DescribeZoneCustomVariables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -4473,11 +4473,11 @@ export interface CreateImageConfig {
    */
   Prompt: string
   /**
-   * <p>输出图片的分辨率</p><p>枚举值：</p><ul><li>1K： 短边分辨率 1080</li><li>2K： 短边分辨率 1440</li><li>4K： 短边分辨率 2160</li></ul><p>默认值：1K</p>
+   * <p>输出图片的分辨率，可取值：1K/2K/4K。</p><p>默认值：1K</p>
    */
   Resolution?: string
   /**
-   * <p>输出图片的宽高比</p><p>枚举值：</p><ul><li>1:1： 宽高比 1:1</li><li>2:3： 宽高比 2:3</li><li>3:2： 宽高比 3:2</li><li>3:4： 宽高比 3:4</li><li>4:3： 宽高比 4:3</li><li>9:16： 宽高比 9:16</li><li>16:9： 宽高比 16:9</li></ul><p>默认值：1:1</p>
+   * <p>输出图片的宽高比，可取值：</p><ul><li>1:1</li><li>2:3</li><li>3:2</li><li>3:4</li><li>4:3</li><li>4:5</li><li>5:4</li><li>9:16</li><li>16:9</li></ul><p>默认值：1:1</p>
    */
   AspectRatio?: string
   /**
@@ -8281,7 +8281,7 @@ export interface DeleteStreamPackageSourceRequest {
  */
 export interface UnderstandImageConfig {
   /**
-   * <p>图片理解模型</p><p>枚举值：</p><ul><li>WAND-understand-1.0-lite： 轻量理解模型</li><li>WAND-understand-1.0-flash： 质量-速度平衡理解模型</li><li>WAND-understand-1.0-pro： 高质量理解模型</li></ul>
+   * <p>图片理解模型</p><p>枚举值：</p><ul><li>understand-1.0-lite： 轻量理解模型</li><li>understand-1.0-flash： 质量-速度平衡理解模型</li><li>understand-1.0-pro： 高质量理解模型</li></ul>
    */
   Model: string
   /**
@@ -10447,13 +10447,17 @@ export interface MediaAnimatedGraphicsItem {
  */
 export interface BeautyConfig {
   /**
-   * 美颜效果
+   * <p>美颜效果</p>
    */
   BeautyEffectItems?: Array<BeautyEffectItemConfig>
   /**
-   * 美颜滤镜
+   * <p>美颜滤镜</p>
    */
   BeautyFilterItems?: Array<BeautyFilterItemConfig>
+  /**
+   * <p>美颜类型</p><p>枚举值：</p><ul><li>auto： 智能自动美颜</li></ul><p>传入美颜参数时，忽略该参数。</p>
+   */
+  Type?: string
 }
 
 /**
@@ -17439,7 +17443,7 @@ export interface DescribeInputRTSPPullSettings {
  */
 export interface AiTryOnConfig {
   /**
-   * <p>换装模型，取值：</p><ul><li>WAND-tryon-1.0-lite</li><li>WAND-tryon-1.0-flash</li><li>WAND-tryon-1.0-pro</li></ul>
+   * <p>换装模型，取值：</p><ul><li>tryon-1.0-lite</li><li>tryon-1.0-flash</li><li>tryon-1.0-pro</li></ul>
    */
   Model: string
   /**
@@ -20542,27 +20546,28 @@ export interface ProhibitedOcrReviewTemplateInfo {
  */
 export interface ImageEraseLogoConfig {
   /**
-   * 能力配置开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
-默认值：ON。
+   * <p>能力配置开关，可选值：</p><li>ON：开启；</li><li>OFF：关闭。</li>默认值：ON。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Switch?: string
   /**
-   * 需要擦除的多个框选区域，最多开启16个区域。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>需要擦除的多个框选区域，最多开启16个区域。<br>注意：此字段可能返回 null，表示取不到有效值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageAreaBoxes?: Array<ImageAreaBoxInfo>
   /**
-   * 图片框选区域类型，可选值：
-<li>logo：图标；</li>
-<li>text：文字；</li>
-<li>watermark：水印；</li>
+   * <p>图片框选区域类型，可选值：</p><li>logo：图标；</li><li>text：文字；</li><li>watermark：水印；</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DetectTypes?: Array<string>
+  /**
+   * <p>水印擦除能力档位，可选值：</p><p>枚举值：</p><ul><li>low： 快速擦除档位</li><li>mid： 擦除效果和速度均衡档位</li><li>high： 进阶擦除效果档位</li></ul><p>注意：根据擦除场景复杂度选择对应擦除档位。</p>
+   */
+  EraseStrength?: string
+  /**
+   * <p>擦除图像水印时，选择特定水印类型，可选值：</p><p>枚举值：</p><ul><li>corner_watermark： 擦除常规定点水印</li><li>tiled_watermark： 擦除全图平铺水印</li><li>auto_detect_type： 自动识别水印类型擦除</li><li>selected_watermark： 跳过自动擦除，按指定位置进行水印擦除</li></ul>
+   */
+  WatermarkType?: string
 }
 
 /**

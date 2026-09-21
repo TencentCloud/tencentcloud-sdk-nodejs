@@ -52,9 +52,54 @@ Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
 }
 
 /**
- * QueryTextToImageJob返回参数结构体
+ * logo参数
  */
-export interface QueryTextToImageJobResponse {
+export interface LogoParam {
+  /**
+   * 水印 Url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogoUrl?: string
+  /**
+   * 水印 Base64，Url 和 Base64 二选一传入，如果都提供以 Url 为准
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogoImage?: string
+  /**
+   * 水印图片位于生成结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogoRect?: LogoRect
+}
+
+/**
+ * SubmitMemeJob返回参数结构体
+ */
+export interface SubmitMemeJobResponse {
+  /**
+   * <p>任务id</p>
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryMemeJob请求参数结构体
+ */
+export interface QueryMemeJobRequest {
+  /**
+   * 查询表情动图生成任务 ID。
+   */
+  JobId: string
+}
+
+/**
+ * QueryTextToImageProJob返回参数结构体
+ */
+export interface QueryTextToImageProJobResponse {
   /**
    * 当前任务状态码：
 1：等待中、2：运行中、4：处理失败、5：处理完成。
@@ -96,144 +141,6 @@ export interface QueryTextToImageJobResponse {
 }
 
 /**
- * logo参数
- */
-export interface LogoParam {
-  /**
-   * 水印 Url
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogoUrl?: string
-  /**
-   * 水印 Base64，Url 和 Base64 二选一传入，如果都提供以 Url 为准
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogoImage?: string
-  /**
-   * 水印图片位于生成结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogoRect?: LogoRect
-}
-
-/**
- * ImageToImage请求参数结构体
- */
-export interface ImageToImageRequest {
-  /**
-   * <p>输入图 Base64 数据。<br>算法将根据输入的图片，结合文本描述智能生成与之相关的图像。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px且大于50px，转成 Base64 字符串后小于 8MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
-   */
-  InputImage?: string
-  /**
-   * <p>输入图 Url。<br>算法将根据输入的图片，结合文本描述智能生成与之相关的图像。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px且大于50px，转成 Base64 字符串后小于 8MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
-   */
-  InputUrl?: string
-  /**
-   * <p>文本描述。<br>用于在输入图的基础上引导生成图效果，增加生成结果中出现描述内容的可能。<br>推荐使用中文。最多支持256个 utf-8 字符。</p>
-   */
-  Prompt?: string
-  /**
-   * <p>反向文本描述。<br>用于一定程度上从反面引导模型生成的走向，减少生成结果中出现描述内容的可能，但不能完全杜绝。<br>推荐使用中文。最多可传256个 utf-8 字符。</p>
-   */
-  NegativePrompt?: string
-  /**
-   * <p>绘画风格。<br>请在  <a href="https://cloud.tencent.com/document/product/1668/86250">图像风格化风格列表</a> 中选择期望的风格，传入风格编号。<br>推荐使用且只使用一种风格。不传默认使用201（日系动漫风格）。</p>
-   */
-  Styles?: Array<string>
-  /**
-   * <p>生成图结果的配置，包括输出图片分辨率和尺寸等。<br>支持生成以下分辨率的图片：origin（与输入图分辨率一致，长边最高为2000，超出将做等比例缩小）、768:768（1:1）、768:1024（3:4）、1024:768（4:3）。<br>不传默认使用origin。<br>单位为 px。</p>
-   */
-  ResultConfig?: ResultConfig
-  /**
-   * <p>为生成结果图添加标识的开关，默认为1。<br>1：添加标识。<br>0：不添加标识。<br>其他数值：默认按1处理。<br>建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。</p>
-   */
-  LogoAdd?: number
-  /**
-   * <p>标识内容设置。<br>默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。</p>
-   */
-  LogoParam?: LogoParam
-  /**
-   * <p>生成自由度。<br>Strength 值越小，生成图和原图越接近，取值范围(0, 1]，不传使用模型内置的默认值。<br>推荐的取值范围为0.6 - 0.8。</p>
-   */
-  Strength?: number
-  /**
-   * <p>返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。</p>
-   */
-  RspImgType?: string
-  /**
-   * <p>画质增强开关，默认关闭。<br>1：开启<br>0：关闭<br>开启后将增强图像的画质清晰度，生成耗时有所增加。</p>
-   */
-  EnhanceImage?: number
-  /**
-   * <p>细节优化的面部数量上限，支持0 ~ 6，默认为0。<br>若上传大于0的值，将以此为上限对每张图片中面积占比较小的面部进行细节修复，生成耗时根据实际优化的面部个数有所增加。</p>
-   */
-  RestoreFace?: number
-}
-
-/**
- * QueryTrainPortraitModelJob请求参数结构体
- */
-export interface QueryTrainPortraitModelJobRequest {
-  /**
-   * 写真模型 ID。
-
-   */
-  ModelId: string
-}
-
-/**
- * GenerateAvatar请求参数结构体
- */
-export interface GenerateAvatarRequest {
-  /**
-   * <p>图像类型，默认为人像。<br>human：人像头像，仅支持人像图片输入，建议避免上传无人、多人、人像过小的图片。<br>pet：萌宠贴纸，仅支持动物图片输入，建议避免上传无动物、多动物、动物过小的图片。</p>
-   */
-  Type?: string
-  /**
-   * <p>头像风格，仅在人像模式下生效。<br>若使用人像模式，请在  <a href="https://cloud.tencent.com/document/product/1668/107741">百变头像风格列表</a> 中选择期望的风格，传入风格编号，不传默认使用 flower 风格。<br>若使用萌宠贴纸模式，无需选择风格，该参数不生效。</p>
-   */
-  Style?: string
-  /**
-   * <p>输入图 Base64 数据。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
-   */
-  InputImage?: string
-  /**
-   * <p>输入图 Url。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
-   */
-  InputUrl?: string
-  /**
-   * <p>输入人像图的质量检测开关，默认开启，仅在人像模式下生效。<br>1：开启<br>0：关闭<br>建议开启检测，可提升生成效果，关闭检测可能因输入图像质量较差导致生成效果受损。<br>开启后，将增强对输入图像的质量要求，如果输入图像单边分辨率&lt;500、图像中人脸占比较小、存在多人、没有检测到人脸、人脸不完整、人脸遮挡等，将被拦截。<br>关闭后，将降低对输入图像的质量要求，如果图像中没有检测到人脸或人脸占比过小等，将被拦截。</p>
-   */
-  Filter?: number
-  /**
-   * <p>为生成结果图添加标识的开关，默认为1。<br>1：添加标识。<br>0：不添加标识。<br>其他数值：默认按1处理。<br>建议您使用显著标识来提示结果图是 AI 生成的图片。</p>
-   */
-  LogoAdd?: number
-  /**
-   * <p>标识内容设置。<br>默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。</p>
-   */
-  LogoParam?: LogoParam
-  /**
-   * <p>返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。</p>
-   */
-  RspImgType?: string
-}
-
-/**
- * UploadTrainPortraitImages返回参数结构体
- */
-export interface UploadTrainPortraitImagesResponse {
-  /**
-   * <p>用于提示对应上传的Urls训练图片是否符合要求，如果未通过需要重新上传。如果基础图像不符合要求会直接通过ErrorCode提示。如果您选择了快速模式，该参数返回为空数组。</p>
-   */
-  ResultDetails?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * UploadTrainPortraitImages请求参数结构体
  */
 export interface UploadTrainPortraitImagesRequest {
@@ -260,26 +167,14 @@ export interface UploadTrainPortraitImagesRequest {
 }
 
 /**
- * 返回结果配置
+ * QueryTrainPortraitModelJob请求参数结构体
  */
-export interface ResultConfig {
+export interface QueryTrainPortraitModelJobRequest {
   /**
-   * 生成图分辨率
+   * 写真模型 ID。
 
-图像风格化（图生图）支持生成以下分辨率的图片：origin（与输入图分辨率一致，长边最高为2000，超出将做等比例缩小）、768:768（1:1）、768:1024（3:4）、1024:768（4:3），不传默认使用origin，如果指定生成的长宽比与输入图长宽比差异过大可能导致图片内容被裁剪。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Resolution?: string
-}
-
-/**
- * QueryMemeJob请求参数结构体
- */
-export interface QueryMemeJobRequest {
-  /**
-   * 查询表情动图生成任务 ID。
-   */
-  JobId: string
+  ModelId: string
 }
 
 /**
@@ -483,40 +378,6 @@ export interface ChangeClothesResponse {
 }
 
 /**
- * SubmitTextToImageJob请求参数结构体
- */
-export interface SubmitTextToImageJobRequest {
-  /**
-   * <p>文本描述。<br>算法将根据输入的文本智能生成与之相关的图像。<br>不能为空，推荐使用中文。最多可传8192个 utf-8 字符。</p>
-   */
-  Prompt: string
-  /**
-   * <p>参考图，最多三张图。  - Base64 或 Url 。</p><ul><li>单张图片限制：输入图分辨率单边最小50px，最大5000px；图片base64后大小小于6M ；格式支持 jpg、jpeg、png、bmp、tiff、webp。</li></ul>
-   */
-  Images?: Array<string>
-  /**
-   * <p>生成图分辨率<br>单位为 px。<br>格式：&quot;${宽}:${高}&quot;，说明：分辨率的设置和输入是否有参考图（image_urls/images参数）有关：<br>一、文生图（无参考图）<br>默认分辨率：1024:1024；<br>尺寸约束：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。<br>二、图生图（有参考图）<br>尺寸约束：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。</p><p>传入尺寸时（输出自适应，不严格遵循传入尺寸）：<br>输入图分辨率分桶与传入尺寸分桶一致时：按输入图长宽比，缩放至接近 1024:1024 面积输出；<br>输入图分辨率分桶与传入尺寸分桶不一致时：从 尺寸列表 中选取最接近传入尺寸的尺寸输出<br>尺寸列表：2048:512、1984:512、1920:512、1856:512、1792:512、<br>1728:512、1664:512、1600:512、1536:512、1472:576、<br>1408:640、1344:704、1280:768、1216:832、1152:896、<br>1088:960、1024:1024、960:1088、896:1152、832:1216、<br>768:1280、704:1344、640:1408、576:1472、512:1536、<br>512:1600、512:1664、512:1728、512:1792、512:1856、<br>512:1920、512:1984、512:2048、768:1024、720:1280、<br>1024:768、1280:720<br>不传入尺寸时：将传入默认值1024:1024。</p>
-   */
-  Resolution?: string
-  /**
-   * <p>随机种子，默认随机。<br>不传：随机种子生成。<br>正数：固定种子生成。<br>扩写开启时固定种子不生效，将保持随机。<br>取值范围：1 - 4294967295</p>
-   */
-  Seed?: number
-  /**
-   * <p>为生成结果图添加显式水印标识的开关，默认为1。<br>1：添加。<br>0：不添加。<br>其他数值：默认按1处理。<br>建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。</p>
-   */
-  LogoAdd?: number
-  /**
-   * <p>标识内容设置。<br>默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。</p>
-   */
-  LogoParam?: LogoParam
-  /**
-   * <p>是否开启prompt改写，为空时默认开启，改写预计会增加20s左右耗时。<br>0：关闭改写<br>1：开启改写<br>建议默认开启，如果关闭改写，需要调用方自己接改写，否则对生图效果有较大影响，改写方法可以参考：<a href="https://github.com/Tencent-Hunyuan/HunyuanImage-3.0/tree/main/PE">改写</a><br>示例值：1</p>
-   */
-  Revise?: number
-}
-
-/**
  * SubmitGlamPicJob返回参数结构体
  */
 export interface SubmitGlamPicJobResponse {
@@ -531,11 +392,11 @@ export interface SubmitGlamPicJobResponse {
 }
 
 /**
- * SubmitMemeJob返回参数结构体
+ * SubmitTextToImageProJob返回参数结构体
  */
-export interface SubmitMemeJobResponse {
+export interface SubmitTextToImageProJobResponse {
   /**
-   * <p>任务id</p>
+   * 任务 ID。
    */
   JobId?: string
   /**
@@ -623,20 +484,6 @@ export interface FaceInfo {
 }
 
 /**
- * SubmitTextToImageProJob返回参数结构体
- */
-export interface SubmitTextToImageProJobResponse {
-  /**
-   * 任务 ID。
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * SubmitGlamPicJob请求参数结构体
  */
 export interface SubmitGlamPicJobRequest {
@@ -675,47 +522,41 @@ export interface SubmitGlamPicJobRequest {
 }
 
 /**
- * QueryTextToImageProJob返回参数结构体
+ * GenerateAvatar请求参数结构体
  */
-export interface QueryTextToImageProJobResponse {
+export interface GenerateAvatarRequest {
   /**
-   * 当前任务状态码：
-1：等待中、2：运行中、4：处理失败、5：处理完成。
+   * <p>图像类型，默认为人像。<br>human：人像头像，仅支持人像图片输入，建议避免上传无人、多人、人像过小的图片。<br>pet：萌宠贴纸，仅支持动物图片输入，建议避免上传无动物、多动物、动物过小的图片。</p>
    */
-  JobStatusCode?: string
+  Type?: string
   /**
-   * 当前任务状态：排队中、处理中、处理失败或者处理完成。
-
+   * <p>头像风格，仅在人像模式下生效。<br>若使用人像模式，请在  <a href="https://cloud.tencent.com/document/product/1668/107741">百变头像风格列表</a> 中选择期望的风格，传入风格编号，不传默认使用 flower 风格。<br>若使用萌宠贴纸模式，无需选择风格，该参数不生效。</p>
    */
-  JobStatusMsg?: string
+  Style?: string
   /**
-   * 任务处理失败错误码。
-
+   * <p>输入图 Base64 数据。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
    */
-  JobErrorCode?: string
+  InputImage?: string
   /**
-   * 任务处理失败错误信息。
-
+   * <p>输入图 Url。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
    */
-  JobErrorMsg?: string
+  InputUrl?: string
   /**
-   * 生成图 URL 列表，有效期1小时，请及时保存。
-
+   * <p>输入人像图的质量检测开关，默认开启，仅在人像模式下生效。<br>1：开启<br>0：关闭<br>建议开启检测，可提升生成效果，关闭检测可能因输入图像质量较差导致生成效果受损。<br>开启后，将增强对输入图像的质量要求，如果输入图像单边分辨率&lt;500、图像中人脸占比较小、存在多人、没有检测到人脸、人脸不完整、人脸遮挡等，将被拦截。<br>关闭后，将降低对输入图像的质量要求，如果图像中没有检测到人脸或人脸占比过小等，将被拦截。</p>
    */
-  ResultImage?: Array<string>
+  Filter?: number
   /**
-   * 结果 detail 数组，Success 代表成功。
-
+   * <p>为生成结果图添加标识的开关，默认为1。<br>1：添加标识。<br>0：不添加标识。<br>其他数值：默认按1处理。<br>建议您使用显著标识来提示结果图是 AI 生成的图片。</p>
    */
-  ResultDetails?: Array<string>
+  LogoAdd?: number
   /**
-   * 对应 SubmitTextToImageProJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。
+   * <p>标识内容设置。<br>默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。</p>
    */
-  RevisedPrompt?: Array<string>
+  LogoParam?: LogoParam
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。</p>
    */
-  RequestId?: string
+  RspImgType?: string
 }
 
 /**
@@ -742,40 +583,6 @@ export interface LogoRect {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Height?: number
-}
-
-/**
- * TextToImageLite请求参数结构体
- */
-export interface TextToImageLiteRequest {
-  /**
-   * <p>文本描述。将根据输入的文本智能生成与之相关的图像。<br>不能为空，推荐使用中文。最多可传1024个 utf-8 字符。</p>
-   */
-  Prompt: string
-  /**
-   * <p>反向提示词。 减少生成结果中出现描述内容。<br>推荐使用中文。最多可传1024个 utf-8 字符。</p>
-   */
-  NegativePrompt?: string
-  /**
-   * <p>生成图分辨率，默认1024:1024。<br>支持的图像宽高比例: 1:1，3:4，4:3，9:16，16:9。<br>支持的长边分辨率: 160，200，225，258，512，520，608，768，1024，1080，1280，1600，1620，1920，2048，2400，2560，2592，3440，3840，4096。<br>单位为px。</p>
-   */
-  Resolution?: string
-  /**
-   * <p>随机种子，默认随机。<br>0：随机种子生成。<br>不传：随机种子生成。<br>正数：固定种子生成。</p>
-   */
-  Seed?: number
-  /**
-   * <p>为生成结果图添加标识的开关，默认为1。<br>1：添加标识。<br>0：不添加标识。<br>其他数值：默认按1处理。<br>建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。</p>
-   */
-  LogoAdd?: number
-  /**
-   * <p>标识内容设置。<br>默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。</p>
-   */
-  LogoParam?: LogoParam
-  /**
-   * <p>返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。</p>
-   */
-  RspImgType?: string
 }
 
 /**
@@ -810,38 +617,6 @@ export interface Filter {
 }
 
 /**
- * TextToImageRapid返回参数结构体
- */
-export interface TextToImageRapidResponse {
-  /**
-   * <p>根据入参 RspImgType 填入不同，返回不同的内容。<br>如果传入 base64 则返回生成图 Base64 编码。<br>如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。</p>
-   */
-  ResultImage?: string
-  /**
-   * <p>Seed</p>
-   */
-  Seed?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SubmitTextToImageJob返回参数结构体
- */
-export interface SubmitTextToImageJobResponse {
-  /**
-   * <p>任务 ID。</p>
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ImageInpaintingRemoval返回参数结构体
  */
 export interface ImageInpaintingRemovalResponse {
@@ -853,54 +628,6 @@ export interface ImageInpaintingRemovalResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * SubmitMemeJob请求参数结构体
- */
-export interface SubmitMemeJobRequest {
-  /**
-   * <p>表情模板。<br>请在 <a href="https://cloud.tencent.com/document/product/1668/115327">表情动图模板列表</a>  中选择期望的模板，传入 Pose 名称。</p>
-   */
-  Pose: string
-  /**
-   * <p>人像参考图 Base64 数据。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
-   */
-  InputImage?: string
-  /**
-   * <p>人像参考图 Url。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
-   */
-  InputUrl?: string
-  /**
-   * <p>生成分辨率，单位为 px。<br>真人类型支持256、512，默认为256，<br>卡通类型仅支持512。</p>
-   */
-  Resolution?: number
-  /**
-   * <p>自定义文案。<br>仅对真人类型的 Pose 生效，将在生成的表情动图中显示指定的文字。如果传入的字符串长度大于10，只截取前10个显示。<br>如果不传，默认使用自带的文案。<br>如果 text = &quot;&quot; 空字符串，代表不在表情动图中添加文案。</p>
-   */
-  Text?: string
-  /**
-   * <p>头发遮罩开关。<br>true：裁剪过长的头发。<br>false：不裁剪过长的头发。<br>仅对卡通类型的 Pose 生效，默认为 false。</p>
-   */
-  Haircut?: boolean
-  /**
-   * <p>为生成结果图添加标识的开关，默认为1。<br>1：添加标识。<br>0：不添加标识。<br>其他数值：默认按1处理。<br>建议您使用显著标识来提示结果图是 AI 生成的图片。</p>
-   */
-  LogoAdd?: number
-  /**
-   * <p>标识内容设置。<br>默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。<br>示例值：{&quot;LogoUrl&quot;: &quot;https://cos.ap-guangzhou.myqcloud.com/logo.jpg&quot;, &quot;LogoRect&quot;: {&quot;X&quot;: 10, &quot;Y&quot;: 10, &quot;Width&quot;: 20, &quot;Height&quot;: 20}}</p>
-   */
-  LogoParam?: LogoParam
-}
-
-/**
- * QueryTextToImageJob请求参数结构体
- */
-export interface QueryTextToImageJobRequest {
-  /**
-   * 任务 ID。
-   */
-  JobId: string
 }
 
 /**
@@ -1015,9 +742,47 @@ export interface QueryDrawPortraitJobRequest {
 }
 
 /**
- * ImageToImage返回参数结构体
+ * SubmitMemeJob请求参数结构体
  */
-export interface ImageToImageResponse {
+export interface SubmitMemeJobRequest {
+  /**
+   * <p>表情模板。<br>请在 <a href="https://cloud.tencent.com/document/product/1668/115327">表情动图模板列表</a>  中选择期望的模板，传入 Pose 名称。</p>
+   */
+  Pose: string
+  /**
+   * <p>人像参考图 Base64 数据。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
+   */
+  InputImage?: string
+  /**
+   * <p>人像参考图 Url。<br>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。<br>图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
+   */
+  InputUrl?: string
+  /**
+   * <p>生成分辨率，单位为 px。<br>真人类型支持256、512，默认为256，<br>卡通类型仅支持512。</p>
+   */
+  Resolution?: number
+  /**
+   * <p>自定义文案。<br>仅对真人类型的 Pose 生效，将在生成的表情动图中显示指定的文字。如果传入的字符串长度大于10，只截取前10个显示。<br>如果不传，默认使用自带的文案。<br>如果 text = &quot;&quot; 空字符串，代表不在表情动图中添加文案。</p>
+   */
+  Text?: string
+  /**
+   * <p>头发遮罩开关。<br>true：裁剪过长的头发。<br>false：不裁剪过长的头发。<br>仅对卡通类型的 Pose 生效，默认为 false。</p>
+   */
+  Haircut?: boolean
+  /**
+   * <p>为生成结果图添加标识的开关，默认为1。<br>1：添加标识。<br>0：不添加标识。<br>其他数值：默认按1处理。<br>建议您使用显著标识来提示结果图是 AI 生成的图片。</p>
+   */
+  LogoAdd?: number
+  /**
+   * <p>标识内容设置。<br>默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。<br>示例值：{&quot;LogoUrl&quot;: &quot;https://cos.ap-guangzhou.myqcloud.com/logo.jpg&quot;, &quot;LogoRect&quot;: {&quot;X&quot;: 10, &quot;Y&quot;: 10, &quot;Width&quot;: 20, &quot;Height&quot;: 20}}</p>
+   */
+  LogoParam?: LogoParam
+}
+
+/**
+ * SketchToImage返回参数结构体
+ */
+export interface SketchToImageResponse {
   /**
    * <p>根据入参 RspImgType 填入不同，返回不同的内容。<br>如果传入 base64 则返回生成图 Base64 编码。<br>如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。</p>
    */
@@ -1026,58 +791,6 @@ export interface ImageToImageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * TextToImageRapid请求参数结构体
- */
-export interface TextToImageRapidRequest {
-  /**
-   * <p>文本描述。<br>算法将根据输入的文本智能生成与之相关的图像。建议详细描述画面主体、细节、场景等，文本描述越丰富，生成效果越精美。<br>不能为空，推荐使用中文。最多可传256个 utf-8 字符。</p>
-   */
-  Prompt: string
-  /**
-   * <p>生成图分辨率，默认1024:1024。<br>支持的图像宽高比例: 1:1，3:4，4:3，9:16，16:9。<br>支持的长边分辨率: 160，200，225，258，512，520，608，768，1024，1080，1280，1600，1620，1920，2048，2400，2560，2592，3440，3840，4096。<br>单位为 px。</p>
-   */
-  Resolution?: string
-  /**
-   * <p>随机种子，默认随机。<br>0：随机种子生成。<br>不传：随机种子生成。<br>正数：固定种子生成。</p>
-   */
-  Seed?: number
-  /**
-   * <p>参考图。</p><ul><li>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。</li><li>当传入Image参数时，Style和Resolution参数不生效，输出图分辨率将保持Image传入图分辨率。</li><li>图片限制：单边分辨率大于128px且小于2048px；图片小于6M；格式支持 jpg、jpeg、png、bmp、tiff、webp。</li></ul>
-   */
-  Image?: Image
-  /**
-   * <p>生成的图片风格，参考值：</p><p>1：宫崎骏风格；<br>2：新海诚风格；<br>3：去旅行风格；<br>4：水彩风格；<br>5：像素风格；<br>6：童话世界风格；<br>7：奇趣卡通风格；<br>8：赛博朋克风格；<br>9：极简风格；<br>10：复古风格；<br>11：暗黑系风格；<br>12：波普风风格；<br>13：糖果色风格；<br>14：胶片电影风格；<br>15：素描风格；<br>16：水墨画风格；<br>17：油画风格；<br>18：粉笔风格；<br>19：粘土风格；<br>20：毛毡风格；<br>21：刺绣风格；<br>22：彩铅风格；<br>23：莫奈风格；<br>24：毕加索风格；<br>25：穆夏风格；<br>26：古风二次元风格；<br>27：都市二次元风格；<br>28：悬疑风格；<br>29：校园风格；<br>30：都市异能风格。</p>
-   */
-  Style?: string
-  /**
-   * <p>为生成结果图添加标识的开关，默认为1。<br>1：添加标识。<br>0：不添加标识。<br>其他数值：默认按1处理。<br>建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。</p>
-   */
-  LogoAdd?: number
-  /**
-   * <p>标识内容设置。<br>默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。</p>
-   */
-  LogoParam?: LogoParam
-  /**
-   * <p>返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。</p>
-   */
-  RspImgType?: string
-}
-
-/**
- * 图片
- */
-export interface Image {
-  /**
-   * 图片Base64
-   */
-  Base64?: string
-  /**
-   * 图片Url
-   */
-  Url?: string
 }
 
 /**
@@ -1188,17 +901,13 @@ export interface ImageOutpaintingResponse {
 }
 
 /**
- * TextToImageLite返回参数结构体
+ * UploadTrainPortraitImages返回参数结构体
  */
-export interface TextToImageLiteResponse {
+export interface UploadTrainPortraitImagesResponse {
   /**
-   * <p>根据入参 RspImgType 填入不同，返回不同的内容。<br>如果传入 base64 则返回生成图 Base64 编码。<br>如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。</p>
+   * <p>用于提示对应上传的Urls训练图片是否符合要求，如果未通过需要重新上传。如果基础图像不符合要求会直接通过ErrorCode提示。如果您选择了快速模式，该参数返回为空数组。</p>
    */
-  ResultImage?: string
-  /**
-   * <p>Seed</p>
-   */
-  Seed?: number
+  ResultDetails?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1237,20 +946,6 @@ export interface RefineImageResponse {
    * 根据入参 RspImgType 填入不同，返回不同的内容。
 如果传入 base64 则返回生成图 Base64 编码。
 如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
-   */
-  ResultImage?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SketchToImage返回参数结构体
- */
-export interface SketchToImageResponse {
-  /**
-   * <p>根据入参 RspImgType 填入不同，返回不同的内容。<br>如果传入 base64 则返回生成图 Base64 编码。<br>如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。</p>
    */
   ResultImage?: string
   /**

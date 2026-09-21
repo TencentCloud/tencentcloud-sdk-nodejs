@@ -188,6 +188,20 @@ export interface DescribeSmoothMigrationTaskListRequest {
 }
 
 /**
+ * CreateConsumerLabels请求参数结构体
+ */
+export interface CreateConsumerLabelsRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * <p>消费组标签列表</p><p>入参限制：批量上限为 32 条</p>
+   */
+  Labels?: Array<ConsumerLabelKey>
+}
+
+/**
  * DescribeConsumerRouteVersionList返回参数结构体
  */
 export interface DescribeConsumerRouteVersionListResponse {
@@ -509,20 +523,19 @@ export interface DescribeMessageListRequest {
 }
 
 /**
- * 重试策略
+ * 批量写入路由配置的单条失败项
  */
-export interface RetryPolicy {
+export interface PutConsumerRouteConfigFailure {
   /**
-   * 重试策略类型，枚举值如下：
-
-- EXPONENTIAL：固定间隔
-- CUSTOMIZED：阶梯退避
+   * <p>失败项标识</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyType: string
+  Key?: ConsumerRouteKey
   /**
-   * 固定重试间隔，仅在重试策略为固定间隔时生效
+   * <p>错误信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RetryInterval?: number
+  Error?: ErrorInfo
 }
 
 /**
@@ -584,6 +597,20 @@ export interface ModifyInstanceRequest {
    * 部署可用区列表
    */
   ZoneIds?: Array<string>
+}
+
+/**
+ * DescribeConsumerLabelLists请求参数结构体
+ */
+export interface DescribeConsumerLabelListsRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * <p>消费组名称列表</p><p>入参限制：批量上限为 32 条</p>
+   */
+  Groups: Array<string>
 }
 
 /**
@@ -975,6 +1002,28 @@ S_NA_D_RW 目标集群读写
 }
 
 /**
+ * PutConsumerRouteConfigs返回参数结构体
+ */
+export interface PutConsumerRouteConfigsResponse {
+  /**
+   * 查询总数
+   */
+  TotalCount?: number
+  /**
+   * <p>失败数量</p>
+   */
+  FailedCount?: number
+  /**
+   * <p>写入失败的消费者路由配置列表</p>
+   */
+  Failures?: Array<PutConsumerRouteConfigFailure>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSmoothMigrationTaskList返回参数结构体
  */
 export interface DescribeSmoothMigrationTaskListResponse {
@@ -1027,6 +1076,27 @@ export interface VpcInfo {
 }
 
 /**
+ * 批量写入路由配置的单个配置项
+ */
+export interface PutConsumerRouteConfigItem {
+  /**
+   * <p>Topic 名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic?: string
+  /**
+   * <p>消费组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group?: string
+  /**
+   * <p>路由规则列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<RouteRule>
+}
+
+/**
  * DeleteConsumerRouteConfig返回参数结构体
  */
 export interface DeleteConsumerRouteConfigResponse {
@@ -1059,25 +1129,13 @@ export interface DescribeRoleListRequest {
 }
 
 /**
- * DescribeMigratingTopicStats返回参数结构体
+ * DescribeConsumerLabel返回参数结构体
  */
-export interface DescribeMigratingTopicStatsResponse {
+export interface DescribeConsumerLabelResponse {
   /**
-   * 源集群的消费者数量
+   * <p>标签详情</p>
    */
-  SourceClusterConsumerCount?: number
-  /**
-   * 目标集群的消费者数量
-   */
-  TargetClusterConsumerCount?: number
-  /**
-   * 源集群消费组列表
-   */
-  SourceClusterConsumerGroups?: Array<string>
-  /**
-   * 目标集群消费组列表
-   */
-  TargetClusterConsumerGroups?: Array<string>
+  Label?: ConsumerLabel
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1149,6 +1207,32 @@ export interface SendMessageRequest {
    * 轻量主题
    */
   LiteTopic?: string
+}
+
+/**
+ * DescribeMigratingTopicStats返回参数结构体
+ */
+export interface DescribeMigratingTopicStatsResponse {
+  /**
+   * 源集群的消费者数量
+   */
+  SourceClusterConsumerCount?: number
+  /**
+   * 目标集群的消费者数量
+   */
+  TargetClusterConsumerCount?: number
+  /**
+   * 源集群消费组列表
+   */
+  SourceClusterConsumerGroups?: Array<string>
+  /**
+   * 目标集群消费组列表
+   */
+  TargetClusterConsumerGroups?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1409,6 +1493,46 @@ export interface DescribeSourceClusterGroupListRequest {
 }
 
 /**
+ * DescribeConsumerLabel请求参数结构体
+ */
+export interface DescribeConsumerLabelRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * <p>消费组</p>
+   */
+  Group: string
+  /**
+   * <p>标签</p>
+   */
+  Label: string
+}
+
+/**
+ * DeleteConsumerLabels返回参数结构体
+ */
+export interface DeleteConsumerLabelsResponse {
+  /**
+   * 查询总数
+   */
+  TotalCount?: number
+  /**
+   * <p>失败数量</p>
+   */
+  FailedCount?: number
+  /**
+   * <p>删除失败的消费组标签列表</p>
+   */
+  Failures?: Array<ConsumerLabelFailure>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeConsumerRouteConfig返回参数结构体
  */
 export interface DescribeConsumerRouteConfigResponse {
@@ -1446,6 +1570,43 @@ export interface DescribeMigrationTaskListRequest {
    * 查询结果限制数量，默认20。
    */
   Limit?: number
+}
+
+/**
+ * 消费组灰度标签项
+ */
+export interface ConsumerLabelItem {
+  /**
+   * <p>标签名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Label?: string
+  /**
+   * <p>标签状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * <p>最近更新时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedAt?: number
+}
+
+/**
+ * 批量标签接口的单条失败项
+ */
+export interface ConsumerLabelFailure {
+  /**
+   * <p>失败项标识</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: ConsumerLabelKey
+  /**
+   * <p>错误信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Error?: ErrorInfo
 }
 
 /**
@@ -1502,25 +1663,19 @@ export interface ImportSourceClusterTopicsRequest {
 }
 
 /**
- * DescribeFusionInstanceList请求参数结构体
+ * 消费组灰度路由配置键
  */
-export interface DescribeFusionInstanceListRequest {
+export interface ConsumerRouteKey {
   /**
-   * 查询起始位置，默认为0。
+   * <p>Topic 名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  Topic?: string
   /**
-   * 查询结果限制数量，默认20。
+   * <p>消费组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
-  /**
-   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
-   */
-  Filters?: Array<Filter>
-  /**
-   * 标签过滤器
-   */
-  TagFilters?: Array<TagFilter>
+  Group?: string
 }
 
 /**
@@ -1703,6 +1858,28 @@ Cancelled 已取消
 }
 
 /**
+ * DeleteConsumerRouteConfigs返回参数结构体
+ */
+export interface DeleteConsumerRouteConfigsResponse {
+  /**
+   * 查询总数
+   */
+  TotalCount?: number
+  /**
+   * <p>失败数量</p>
+   */
+  FailedCount?: number
+  /**
+   * <p>删除失败的消费者路由列表</p>
+   */
+  Failures?: Array<DeleteConsumerRouteConfigFailure>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyRole请求参数结构体
  */
 export interface ModifyRoleRequest {
@@ -1755,21 +1932,53 @@ export interface DescribeTopicStatsResponse {
 }
 
 /**
- * DescribeFusionInstanceList返回参数结构体
+ * 单个标签键命中的 Topic 路由结果
  */
-export interface DescribeFusionInstanceListResponse {
+export interface ConsumerLabelRoute {
   /**
-   * 查询总数
+   * <p>标签键</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  Key?: ConsumerLabelKey
   /**
-   * 实例列表
+   * <p>命中的路由规则列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<FusionInstanceItem>
+  Routes?: Array<ConsumerLabelRouteItem>
+}
+
+/**
+ * DescribeMessage请求参数结构体
+ */
+export interface DescribeMessageRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
+   */
+  Topic: string
+  /**
+   * <p>消息 ID，从 <a href="https://cloud.tencent.com/document/api/1493/114593">DescribeMessageList</a> 接口或业务日志中获得。</p>
+   */
+  MsgId: string
+  /**
+   * 查询起始位置，默认为0。
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量，默认20。
+   */
+  Limit?: number
+  /**
+   * <p>是否是死信消息，默认为false</p>
+   */
+  QueryDeadLetterMessage?: boolean
+  /**
+   * <p>是否是延时消息，默认为false</p>
+   */
+  QueryDelayMessage?: boolean
 }
 
 /**
@@ -1821,37 +2030,21 @@ export interface CreateTopicRequest {
 }
 
 /**
- * DescribeMessage请求参数结构体
+ * DescribeFusionInstanceList返回参数结构体
  */
-export interface DescribeMessageRequest {
+export interface DescribeFusionInstanceListResponse {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   * 查询总数
    */
-  InstanceId: string
+  TotalCount?: number
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
+   * 实例列表
    */
-  Topic: string
+  Data?: Array<FusionInstanceItem>
   /**
-   * <p>消息 ID，从 <a href="https://cloud.tencent.com/document/api/1493/114593">DescribeMessageList</a> 接口或业务日志中获得。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MsgId: string
-  /**
-   * 查询起始位置，默认为0。
-   */
-  Offset?: number
-  /**
-   * 查询结果限制数量，默认20。
-   */
-  Limit?: number
-  /**
-   * <p>是否是死信消息，默认为false</p>
-   */
-  QueryDeadLetterMessage?: boolean
-  /**
-   * <p>是否是延时消息，默认为false</p>
-   */
-  QueryDelayMessage?: boolean
+  RequestId?: string
 }
 
 /**
@@ -1894,23 +2087,17 @@ export interface ModifyConsumerGroupResponse {
 }
 
 /**
- * DescribeMigratingTopicStats请求参数结构体
+ * DescribeConsumerLabelList请求参数结构体
  */
-export interface DescribeMigratingTopicStatsRequest {
+export interface DescribeConsumerLabelListRequest {
   /**
-   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
-
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
-  TaskId: string
+  InstanceId: string
   /**
-   * 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
-
+   * <p>消费组</p>
    */
-  TopicName: string
-  /**
-   * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
-   */
-  Namespace?: string
+  Group: string
 }
 
 /**
@@ -1946,23 +2133,34 @@ export interface CreateConsumerGroupResponse {
 }
 
 /**
- * RollbackMigratingTopicStage请求参数结构体
+ * 批量删除路由配置的单条失败项
  */
-export interface RollbackMigratingTopicStageRequest {
+export interface DeleteConsumerRouteConfigFailure {
   /**
-   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+   * <p>失败项标识</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: ConsumerRouteLabelKey
+  /**
+   * <p>错误信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Error?: ErrorInfo
+}
 
-   */
-  TaskId: string
+/**
+ * 价格标签信息，一个完整的价格标签包含计价类别和计费项标签。
+ */
+export interface PriceTag {
   /**
-   * 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
-
+   * 计价名称（枚举值：tps：TPS基础价；stepTps：TPS步长）
    */
-  TopicName: string
+  Name?: string
   /**
-   * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+   * 计费项对应的步长数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Namespace?: string
+  Step?: number
 }
 
 /**
@@ -2072,6 +2270,27 @@ export interface DescribeMigratingTopicListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 消费组灰度路由配置及标签键
+ */
+export interface ConsumerRouteLabelKey {
+  /**
+   * <p>Topic 名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic?: string
+  /**
+   * <p>消费组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group?: string
+  /**
+   * <p>灰度标签名称，为空表示完整路由配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Label?: string
 }
 
 /**
@@ -2419,17 +2638,24 @@ export interface DescribeMessageResponse {
 }
 
 /**
- * proxy调度时各个可用区有无调度任务
+ * 单个消费组下的标签列表
  */
-export interface ZoneScheduledItem {
+export interface ConsumerLabelList {
   /**
-   * 可用区ID
+   * <p>消费组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId?: string
+  Group?: string
   /**
-   * 有剔除的调度任务且没有切回的可用区时，该值为true，反之为false
+   * <p>标签数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodePermWipeFlag?: boolean
+  TotalCount?: number
+  /**
+   * <p>标签列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Labels?: Array<ConsumerLabelItem>
 }
 
 /**
@@ -2473,17 +2699,51 @@ export interface DescribeTopicListRequest {
 }
 
 /**
- * DescribeConsumerLabelList请求参数结构体
+ * DescribeMigratingTopicStats请求参数结构体
  */
-export interface DescribeConsumerLabelListRequest {
+export interface DescribeMigratingTopicStatsRequest {
+  /**
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
+   */
+  TaskId: string
+  /**
+   * 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+
+   */
+  TopicName: string
+  /**
+   * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+   */
+  Namespace?: string
+}
+
+/**
+ * DescribeConsumerRouteConfigs请求参数结构体
+ */
+export interface DescribeConsumerRouteConfigsRequest {
   /**
    * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * <p>消费组</p>
+   * <p>批量查询的路由配置列表</p><p>入参限制：批量上限为 32 条</p>
    */
-  Group: string
+  Configs: Array<ConsumerRouteKey>
+}
+
+/**
+ * PutConsumerRouteConfigs请求参数结构体
+ */
+export interface PutConsumerRouteConfigsRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * <p>批量写入的消费者路由配置列表</p><p>入参限制：批量上限为 32 条</p><p>覆盖式写入</p>
+   */
+  Configs?: Array<PutConsumerRouteConfigItem>
 }
 
 /**
@@ -2874,21 +3134,33 @@ export interface MessageTraceItem {
 }
 
 /**
- * DescribeProducerList返回参数结构体
+ * DescribeConsumerClient请求参数结构体
  */
-export interface DescribeProducerListResponse {
+export interface DescribeConsumerClientRequest {
   /**
-   * 查询总数
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
-  TotalCount?: number
+  InstanceId: string
   /**
-   * 生产者信息列表
+   * <p>客户端ID，从 <a href="https://cloud.tencent.com/document/api/1493/120140">DescribeConsumerClientList</a> 接口中的 <a href="https://cloud.tencent.com/document/api/1493/96031#ConsumerClient">ConsumerClient</a> 出参中获得。</p>
    */
-  ProducerList?: Array<ProducerInfo>
+  ClientId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
-  RequestId?: string
+  Filters?: Array<Filter>
+  /**
+   * 查询起始位置，默认为0。
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量，默认20。
+   */
+  Limit?: number
+  /**
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
+   */
+  ConsumerGroup?: string
 }
 
 /**
@@ -2899,6 +3171,20 @@ export interface ModifyTopicResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteConsumerLabels请求参数结构体
+ */
+export interface DeleteConsumerLabelsRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * <p>批量删除的消费标签列表</p><p>入参限制：批量上限为 32 条</p>
+   */
+  Labels?: Array<ConsumerLabelKey>
 }
 
 /**
@@ -2916,13 +3202,39 @@ export interface SendMessageResponse {
 }
 
 /**
- * DescribeConsumerLag返回参数结构体
+ * 批量查询路由配置的单条结果
  */
-export interface DescribeConsumerLagResponse {
+export interface DescribeConsumerRouteConfigItem {
   /**
-   * 堆积数
+   * <p>配置项标识</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConsumerLag?: number
+  Key?: ConsumerRouteKey
+  /**
+   * <p>版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: number
+  /**
+   * <p>路由规则列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<RouteRule>
+  /**
+   * <p>切流时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CutTimestamp?: number
+}
+
+/**
+ * CreateRole返回参数结构体
+ */
+export interface CreateRoleResponse {
+  /**
+   * 角色名
+   */
+  Role?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2986,13 +3298,17 @@ export interface DescribeTopicListByGroupRequest {
 }
 
 /**
- * DescribeConsumerLabel返回参数结构体
+ * DescribeConsumerLabelLists返回参数结构体
  */
-export interface DescribeConsumerLabelResponse {
+export interface DescribeConsumerLabelListsResponse {
   /**
-   * <p>标签详情</p>
+   * 查询总数
    */
-  Label?: ConsumerLabel
+  TotalCount?: number
+  /**
+   * <p>消费者标签列表</p>
+   */
+  Results?: Array<ConsumerLabelList>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3068,6 +3384,26 @@ export interface ModifyTopicRequest {
    * <p>过期时间（仅针对轻量主题类型）</p><p>取值范围：[30, 720]</p><p>单位：分钟</p>
    */
   AutoExpireTime?: number
+}
+
+/**
+ * RollbackMigratingTopicStage请求参数结构体
+ */
+export interface RollbackMigratingTopicStageRequest {
+  /**
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
+   */
+  TaskId: string
+  /**
+   * 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+
+   */
+  TopicName: string
+  /**
+   * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+   */
+  Namespace?: string
 }
 
 /**
@@ -3304,33 +3640,21 @@ export interface MessageTrackItem {
 }
 
 /**
- * DescribeConsumerClient请求参数结构体
+ * DescribeProducerList返回参数结构体
  */
-export interface DescribeConsumerClientRequest {
+export interface DescribeProducerListResponse {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   * 查询总数
    */
-  InstanceId: string
+  TotalCount?: number
   /**
-   * <p>客户端ID，从 <a href="https://cloud.tencent.com/document/api/1493/120140">DescribeConsumerClientList</a> 接口中的 <a href="https://cloud.tencent.com/document/api/1493/96031#ConsumerClient">ConsumerClient</a> 出参中获得。</p>
+   * 生产者信息列表
    */
-  ClientId: string
+  ProducerList?: Array<ProducerInfo>
   /**
-   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<Filter>
-  /**
-   * 查询起始位置，默认为0。
-   */
-  Offset?: number
-  /**
-   * 查询结果限制数量，默认20。
-   */
-  Limit?: number
-  /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
-   */
-  ConsumerGroup?: string
+  RequestId?: string
 }
 
 /**
@@ -3394,13 +3718,39 @@ export interface RollbackMigratingTopicStageResponse {
 }
 
 /**
- * CreateRole返回参数结构体
+ * DescribeFusionInstanceList请求参数结构体
  */
-export interface CreateRoleResponse {
+export interface DescribeFusionInstanceListRequest {
   /**
-   * 角色名
+   * 查询起始位置，默认为0。
    */
-  Role?: string
+  Offset?: number
+  /**
+   * 查询结果限制数量，默认20。
+   */
+  Limit?: number
+  /**
+   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 标签过滤器
+   */
+  TagFilters?: Array<TagFilter>
+}
+
+/**
+ * DescribeConsumerRouteConfigs返回参数结构体
+ */
+export interface DescribeConsumerRouteConfigsResponse {
+  /**
+   * 查询总数
+   */
+  TotalCount?: number
+  /**
+   * <p>路由配置列表</p>
+   */
+  Results?: Array<DescribeConsumerRouteConfigItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3476,6 +3826,20 @@ export interface DeleteConsumerLabelResponse {
 }
 
 /**
+ * DescribeConsumerLag返回参数结构体
+ */
+export interface DescribeConsumerLagResponse {
+  /**
+   * 堆积数
+   */
+  ConsumerLag?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstanceEndpoint请求参数结构体
  */
 export interface ModifyInstanceEndpointRequest {
@@ -3503,6 +3867,20 @@ PUBLIC 公网
 }
 
 /**
+ * proxy调度时各个可用区有无调度任务
+ */
+export interface ZoneScheduledItem {
+  /**
+   * 可用区ID
+   */
+  ZoneId?: string
+  /**
+   * 有剔除的调度任务且没有切回的可用区时，该值为true，反之为false
+   */
+  NodePermWipeFlag?: boolean
+}
+
+/**
  * CreateMigrationTask返回参数结构体
  */
 export interface CreateMigrationTaskResponse {
@@ -3510,6 +3888,27 @@ export interface CreateMigrationTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签命中的单条 Topic 路由规则项
+ */
+export interface ConsumerLabelRouteItem {
+  /**
+   * <p>Topic 名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic?: string
+  /**
+   * <p>匹配条件</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchCondition?: string
+  /**
+   * <p>目标消费组灰度标签名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetConsumerLabel?: string
 }
 
 /**
@@ -3669,6 +4068,23 @@ export interface CreateRoleRequest {
 }
 
 /**
+ * 重试策略
+ */
+export interface RetryPolicy {
+  /**
+   * 重试策略类型，枚举值如下：
+
+- EXPONENTIAL：固定间隔
+- CUSTOMIZED：阶梯退避
+   */
+  PolicyType: string
+  /**
+   * 固定重试间隔，仅在重试策略为固定间隔时生效
+   */
+  RetryInterval?: number
+}
+
+/**
  * DeleteConsumerGroup返回参数结构体
  */
 export interface DeleteConsumerGroupResponse {
@@ -3679,21 +4095,17 @@ export interface DeleteConsumerGroupResponse {
 }
 
 /**
- * DescribeConsumerLabel请求参数结构体
+ * DescribeConsumerLabelRoutes请求参数结构体
  */
-export interface DescribeConsumerLabelRequest {
+export interface DescribeConsumerLabelRoutesRequest {
   /**
    * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * <p>消费组</p>
+   * <p>批量查询的消费者标签列表</p><p>入参限制：批量上限为 32 条</p>
    */
-  Group: string
-  /**
-   * <p>标签</p>
-   */
-  Label: string
+  Labels: Array<ConsumerLabelKey>
 }
 
 /**
@@ -3772,6 +4184,24 @@ export interface DescribeConsumerRouteVersionListRequest {
    * <p>消费组</p>
    */
   Group: string
+}
+
+/**
+ * IP规则
+ */
+export interface IpRule {
+  /**
+   * IP地址
+   */
+  Ip: string
+  /**
+   * 是否允许放行，默认为false表示拒绝
+   */
+  Allow: boolean
+  /**
+   * 备注信息
+   */
+  Remark: string
 }
 
 /**
@@ -3895,18 +4325,18 @@ export interface DescribeConsumerGroupListResponse {
 }
 
 /**
- * 价格标签信息，一个完整的价格标签包含计价类别和计费项标签。
+ * DescribeProductSKUs返回参数结构体
  */
-export interface PriceTag {
+export interface DescribeProductSKUsResponse {
   /**
-   * 计价名称（枚举值：tps：TPS基础价；stepTps：TPS步长）
-   */
-  Name?: string
-  /**
-   * 计费项对应的步长数
+   * 商品配置信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Step?: number
+  Data?: Array<ProductSKU>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3929,6 +4359,24 @@ export interface PutConsumerRouteConfigRequest {
    * <p>路由规则</p>
    */
   Rules: Array<RouteRule>
+}
+
+/**
+ * DescribeConsumerLabelRoutes返回参数结构体
+ */
+export interface DescribeConsumerLabelRoutesResponse {
+  /**
+   * 查询总数
+   */
+  TotalCount?: number
+  /**
+   * <p>消费者标签绑定的路由</p>
+   */
+  Results?: Array<ConsumerLabelRoute>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3994,6 +4442,36 @@ export interface DeleteTopicResponse {
 }
 
 /**
+ * DeleteConsumerRouteConfigs请求参数结构体
+ */
+export interface DeleteConsumerRouteConfigsRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * <p>批量删除的消费组路由列表</p><p>入参限制：批量上限为 32 条</p><p>传入 Label 表示只删除该标签路由，不传表示删除完整路由</p>
+   */
+  Configs: Array<ConsumerRouteLabelKey>
+}
+
+/**
+ * 错误信息
+ */
+export interface ErrorInfo {
+  /**
+   * <p>错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Code?: string
+  /**
+   * <p>错误信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+}
+
+/**
  * ModifyInstanceEndpoint返回参数结构体
  */
 export interface ModifyInstanceEndpointResponse {
@@ -4014,14 +4492,22 @@ export interface DescribeInstanceRequest {
 }
 
 /**
- * DescribeProductSKUs返回参数结构体
+ * CreateConsumerLabels返回参数结构体
  */
-export interface DescribeProductSKUsResponse {
+export interface CreateConsumerLabelsResponse {
   /**
-   * 商品配置信息
+   * 查询总数
+   */
+  TotalCount?: number
+  /**
+   * <p>失败数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<ProductSKU>
+  FailedCount?: number
+  /**
+   * <p>创建失败的消费组标签列表</p>
+   */
+  Failures?: Array<ConsumerLabelFailure>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4039,21 +4525,19 @@ export interface RemoveMigratingTopicResponse {
 }
 
 /**
- * IP规则
+ * 消费组灰度标签键
  */
-export interface IpRule {
+export interface ConsumerLabelKey {
   /**
-   * IP地址
+   * <p>消费组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ip: string
+  Group?: string
   /**
-   * 是否允许放行，默认为false表示拒绝
+   * <p>灰度标签名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Allow: boolean
-  /**
-   * 备注信息
-   */
-  Remark: string
+  Label?: string
 }
 
 /**

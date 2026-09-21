@@ -40,13 +40,13 @@ import {
   DeleteServiceRequest,
   DeploymentConfig,
   StartInstanceResponse,
+  DescribeInstanceNetworkStatusResponse,
   DescribeApplicationsResponse,
   NetworkStatus,
   DescribeServiceLoginSettingsResponse,
   ServicePriceDetail,
   StartInstanceRequest,
   DeployInferServiceResponse,
-  ServiceChargePrepaid,
   LoginSetting,
   DescribeMuskPromptsResponse,
   UpdateServiceConfigsResponse,
@@ -66,7 +66,7 @@ import {
   MuskPromptInfo,
   InquirePriceRunInstancesRequest,
   EnvParam,
-  ResetInstancesPasswordResponse,
+  GetServicePodLogsResponse,
   DeleteServiceResponse,
   Instance,
   InquirePriceUpdateServiceConfigsRequest,
@@ -74,7 +74,7 @@ import {
   CreateMuskPromptResponse,
   ServiceMetaData,
   ResetInstancesPasswordRequest,
-  DescribeInstancesRequest,
+  ResetInstancesPasswordResponse,
   DescribeServiceLoginSettingsRequest,
   DescribeDeployTemplatesRequest,
   ResizeInstanceDiskResponse,
@@ -83,7 +83,8 @@ import {
   DescribeModelsRequest,
   CreateMuskPromptRequest,
   ItemPrice,
-  DescribeInstanceNetworkStatusResponse,
+  ServiceChargePrepaid,
+  GetServicePodLogsRequest,
   InquirePriceRunInstancesResponse,
   TerminateInstancesRequest,
   StorageInfo,
@@ -91,6 +92,7 @@ import {
   HiCacheInfo,
   Price,
   DescribeMuskPromptsRequest,
+  DescribeInstancesRequest,
   DescribeApplicationsRequest,
   CreateApplicationRequest,
   ContainerInfo,
@@ -275,6 +277,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRegionsResponse) => void
   ): Promise<DescribeRegionsResponse> {
     return this.request("DescribeRegions", req, cb)
+  }
+
+  /**
+   * 本接口(GetServicePodLogs)用于查询推理服务Pod日志
+   */
+  async GetServicePodLogs(
+    req?: GetServicePodLogsRequest,
+    cb?: (error: string, rep: GetServicePodLogsResponse) => void
+  ): Promise<GetServicePodLogsResponse> {
+    return this.request("GetServicePodLogs", req, cb)
   }
 
   /**

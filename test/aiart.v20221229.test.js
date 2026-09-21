@@ -18,6 +18,46 @@ const client = new tencentcloud.aiart.v20221229.Client({
 })
 describe("aiart.v20221229.test.js", function () {
 
+it("aiart.v20221229.SubmitMemeJob", async function () {
+    try {
+       const data = await client.SubmitMemeJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.RefineImage", async function () {
+    try {
+       const data = await client.RefineImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.SketchToImage", async function () {
+    try {
+       const data = await client.SketchToImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.SubmitTextToImageProJob", async function () {
+    try {
+       const data = await client.SubmitTextToImageProJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.ReplaceBackground", async function () {
     try {
        const data = await client.ReplaceBackground({})
@@ -31,36 +71,6 @@ it("aiart.v20221229.ReplaceBackground", async function () {
 it("aiart.v20221229.SubmitTrainPortraitModelJob", async function () {
     try {
        const data = await client.SubmitTrainPortraitModelJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.SubmitDrawPortraitJob", async function () {
-    try {
-       const data = await client.SubmitDrawPortraitJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.ImageToImage", async function () {
-    try {
-       const data = await client.ImageToImage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.RefineImage", async function () {
-    try {
-       const data = await client.RefineImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,46 +98,6 @@ it("aiart.v20221229.GenerateAvatar", async function () {
     }
 })
 
-it("aiart.v20221229.QueryTextToImageJob", async function () {
-    try {
-       const data = await client.QueryTextToImageJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.SubmitMemeJob", async function () {
-    try {
-       const data = await client.SubmitMemeJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.SketchToImage", async function () {
-    try {
-       const data = await client.SketchToImage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.QueryTextToImageProJob", async function () {
-    try {
-       const data = await client.QueryTextToImageProJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("aiart.v20221229.QueryMemeJob", async function () {
     try {
        const data = await client.QueryMemeJob({})
@@ -148,49 +118,19 @@ it("aiart.v20221229.QueryTrainPortraitModelJob", async function () {
     }
 })
 
+it("aiart.v20221229.QueryDrawPortraitJob", async function () {
+    try {
+       const data = await client.QueryDrawPortraitJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.QueryGlamPicJob", async function () {
     try {
        const data = await client.QueryGlamPicJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.ImageInpaintingRemoval", async function () {
-    try {
-       const data = await client.ImageInpaintingRemoval({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.TextToImageRapid", async function () {
-    try {
-       const data = await client.TextToImageRapid({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.SubmitTextToImageProJob", async function () {
-    try {
-       const data = await client.SubmitTextToImageProJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aiart.v20221229.SubmitTextToImageJob", async function () {
-    try {
-       const data = await client.SubmitTextToImageJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +148,9 @@ it("aiart.v20221229.UploadTrainPortraitImages", async function () {
     }
 })
 
-it("aiart.v20221229.QueryDrawPortraitJob", async function () {
+it("aiart.v20221229.QueryTextToImageProJob", async function () {
     try {
-       const data = await client.QueryDrawPortraitJob({})
+       const data = await client.QueryTextToImageProJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +168,9 @@ it("aiart.v20221229.SubmitGlamPicJob", async function () {
     }
 })
 
-it("aiart.v20221229.ChangeClothes", async function () {
+it("aiart.v20221229.SubmitDrawPortraitJob", async function () {
     try {
-       const data = await client.ChangeClothes({})
+       const data = await client.SubmitDrawPortraitJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +178,19 @@ it("aiart.v20221229.ChangeClothes", async function () {
     }
 })
 
-it("aiart.v20221229.TextToImageLite", async function () {
+it("aiart.v20221229.ImageInpaintingRemoval", async function () {
     try {
-       const data = await client.TextToImageLite({})
+       const data = await client.ImageInpaintingRemoval({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.ChangeClothes", async function () {
+    try {
+       const data = await client.ChangeClothes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

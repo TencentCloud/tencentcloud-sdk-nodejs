@@ -168,25 +168,18 @@ export interface DescribeCustomizedConfigListResponse {
 }
 
 /**
- * 异步任务信息
+ * ModifyLoadBalancerAttributes返回参数结构体
  */
-export interface Job {
+export interface ModifyLoadBalancerAttributesResponse {
   /**
-   * <p>接口名称</p>
+   * <p>切换负载均衡计费方式时，可用此参数查询切换任务是否成功。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApiName?: string
+  DealName?: string
   /**
-   * <p>请求ID</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-  /**
-   * <p>异步任务状态</p><p>枚举值：</p><ul><li>Processing： 进行中</li><li>Succeeded： 成功</li><li>Failed： 失败</li></ul>
-   */
-  Status?: string
-  /**
-   * <p>资源ID</p>
-   */
-  ResourceIds?: Array<string>
 }
 
 /**
@@ -268,9 +261,17 @@ export interface ModelAlias {
    */
   Status?: string
   /**
-   * <p>模型能力</p>
+   * <p>模型输出模态</p><p>枚举值：</p><ul><li>chat ： 文本</li><li>embedding： 向量</li><li>rerank： 重排序</li><li>video： 视频</li></ul>
    */
   Capability?: string
+  /**
+   * <p>分级积分系数配置</p>
+   */
+  CoefficientTiers?: Array<CoefficientTier>
+  /**
+   * <p>峰谷积分系数配置</p>
+   */
+  CoefficientSchedule?: Array<CoefficientScheduleRule>
 }
 
 /**
@@ -333,6 +334,20 @@ export interface DeleteUserGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 积分分档配置
+ */
+export interface CoefficientTier {
+  /**
+   * <p>积分分级条件</p>
+   */
+  Condition?: CoefficientTierCondition
+  /**
+   * <p>积分系数</p>
+   */
+  Coefficient?: Coefficient
 }
 
 /**
@@ -648,6 +663,52 @@ export interface DescribeModelRouterResourcePackageDeductionResponse {
 }
 
 /**
+ * ModifyLoadBalancerAttributes请求参数结构体
+ */
+export interface ModifyLoadBalancerAttributesRequest {
+  /**
+   * <p>负载均衡的唯一ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口获取。</p>
+   */
+  LoadBalancerId: string
+  /**
+   * <p>负载均衡实例名称，规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
+   */
+  LoadBalancerName?: string
+  /**
+   * <p>设置负载均衡跨地域绑定1.0的后端服务信息</p>
+   */
+  TargetRegionInfo?: TargetRegionInfo
+  /**
+   * <p>网络计费相关参数</p>
+   */
+  InternetChargeInfo?: InternetAccessible
+  /**
+   * <p>Target是否放通来自CLB的流量。<br>开启放通（true）：只验证CLB上的安全组；<br>不开启放通（false）：需同时验证CLB和后端实例上的安全组。<br>不填则不修改。</p>
+   */
+  LoadBalancerPassToTarget?: boolean
+  /**
+   * <p>不同计费模式之间的切换：0表示不切换，1表示预付费和后付费切换，2表示后付费之间切换。默认值：0</p>
+   */
+  SwitchFlag?: number
+  /**
+   * <p>是否开启跨地域绑定2.0功能。不填则不修改。</p>
+   */
+  SnatPro?: boolean
+  /**
+   * <p>是否开启删除保护，不填则不修改。</p>
+   */
+  DeleteProtect?: boolean
+  /**
+   * <p>将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换，修改后mycloud.com域名将失效。不填则不修改。</p>
+   */
+  ModifyClassicDomain?: boolean
+  /**
+   * <p>关联的终端节点Id，可通过<a href="https://cloud.tencent.com/document/product/215/54679">DescribeVpcEndPoint</a>接口查询。传空字符串代表解除关联。</p>
+   */
+  AssociateEndpoint?: string
+}
+
+/**
  * DescribeLoadBalancerTraffic请求参数结构体
  */
 export interface DescribeLoadBalancerTrafficRequest {
@@ -655,6 +716,20 @@ export interface DescribeLoadBalancerTrafficRequest {
    * 负载均衡所在地域，不传默认返回所有地域负载均衡。
    */
   LoadBalancerRegion?: string
+}
+
+/**
+ * 积分分档匹配条件
+ */
+export interface CoefficientTierCondition {
+  /**
+   * <p>仅 chat；单位 K Token（1K=1000 Token）；非负整数，最大 2147483647；非空数组首条必须为 0，数组内严格递增、无重复；输入总 Token 严格超过阈值×1000，取满足条件的最大阈值，整单选价</p>
+   */
+  InputTokensAbove?: number
+  /**
+   * <p>video 仅 480p／720p／768p／1024p／1080p／2k／4k，统一小写；只校验全局枚举，不校验模型支持子集；列表内不重复</p>
+   */
+  Resolution?: string
 }
 
 /**
@@ -2030,6 +2105,18 @@ export interface Coefficient {
    * <p>输出积分系数。</p><p>取值范围：[1, 5000]</p><p>默认值：100</p>
    */
   OutputCoefficient?: number
+  /**
+   * <p>输入图片系数</p>
+   */
+  InputImageCoefficient?: number
+  /**
+   * <p>输入视频每秒系数</p>
+   */
+  InputVideoSecondCoefficient?: number
+  /**
+   * <p>输出视频每秒系数</p>
+   */
+  OutputVideoSecondCoefficient?: number
 }
 
 /**
@@ -3454,18 +3541,25 @@ export interface CertIdRelatedWithLoadBalancers {
 export type DescribeClsLogSetRequest = null
 
 /**
- * ModifyLoadBalancerAttributes返回参数结构体
+ * 异步任务信息
  */
-export interface ModifyLoadBalancerAttributesResponse {
+export interface Job {
   /**
-   * <p>切换负载均衡计费方式时，可用此参数查询切换任务是否成功。</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>接口名称</p>
    */
-  DealName?: string
+  ApiName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>请求ID</p>
    */
   RequestId?: string
+  /**
+   * <p>异步任务状态</p><p>枚举值：</p><ul><li>Processing： 进行中</li><li>Succeeded： 成功</li><li>Failed： 失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>资源ID</p>
+   */
+  ResourceIds?: Array<string>
 }
 
 /**
@@ -3525,7 +3619,7 @@ export interface ServiceProviderHealthCheckConfigItemOutput {
  */
 export interface DescribeModelAliasesRequest {
   /**
-   * <p>过滤条件</p><p>支持的过滤键：</p><ul><li>ModelAliasName：按模型别名过滤。</li></ul>
+   * <p>过滤条件</p><p></p>- ModelAliasName：模型别名<p></p><p></p>- Capability：输出模态<p></p>
    */
   Filters?: Array<Filter>
   /**
@@ -3537,7 +3631,7 @@ export interface DescribeModelAliasesRequest {
    */
   Offset?: number
   /**
-   * <p>排序条件。支持按 InputCoefficient、InputCachedCoefficient 或 OutputCoefficient 排序，Order 支持 ASC、DESC。不传或传空数组时，默认按 OutputCoefficient 降序排列。最多支持 3 个排序条件，排序字段不可重复。</p>
+   * <p>排序条件。支持按 InputCoefficient 或 OutputCoefficient 排序，Order 支持 ASC、DESC。不传或传空数组时，默认按 OutputCoefficient 降序排列。最多支持 2 个排序条件，排序字段不可重复。</p>
    */
   Sort?: Array<Sort>
 }
@@ -5525,49 +5619,13 @@ export interface ModifyFunctionTargetsResponse {
 }
 
 /**
- * ModifyLoadBalancerAttributes请求参数结构体
+ * DisassociateTargetGroups返回参数结构体
  */
-export interface ModifyLoadBalancerAttributesRequest {
+export interface DisassociateTargetGroupsResponse {
   /**
-   * <p>负载均衡的唯一ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口获取。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LoadBalancerId: string
-  /**
-   * <p>负载均衡实例名称，规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
-   */
-  LoadBalancerName?: string
-  /**
-   * <p>设置负载均衡跨地域绑定1.0的后端服务信息</p>
-   */
-  TargetRegionInfo?: TargetRegionInfo
-  /**
-   * <p>网络计费相关参数</p>
-   */
-  InternetChargeInfo?: InternetAccessible
-  /**
-   * <p>Target是否放通来自CLB的流量。<br>开启放通（true）：只验证CLB上的安全组；<br>不开启放通（false）：需同时验证CLB和后端实例上的安全组。<br>不填则不修改。</p>
-   */
-  LoadBalancerPassToTarget?: boolean
-  /**
-   * <p>不同计费模式之间的切换：0表示不切换，1表示预付费和后付费切换，2表示后付费之间切换。默认值：0</p>
-   */
-  SwitchFlag?: number
-  /**
-   * <p>是否开启跨地域绑定2.0功能。不填则不修改。</p>
-   */
-  SnatPro?: boolean
-  /**
-   * <p>是否开启删除保护，不填则不修改。</p>
-   */
-  DeleteProtect?: boolean
-  /**
-   * <p>将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换，修改后mycloud.com域名将失效。不填则不修改。</p>
-   */
-  ModifyClassicDomain?: boolean
-  /**
-   * <p>关联的终端节点Id，可通过<a href="https://cloud.tencent.com/document/product/215/54679">DescribeVpcEndPoint</a>接口查询。传空字符串代表解除关联。</p>
-   */
-  AssociateEndpoint?: string
+  RequestId?: string
 }
 
 /**
@@ -5696,16 +5754,6 @@ export interface ListenerItem {
  * SetLoadBalancerStartStatus返回参数结构体
  */
 export interface SetLoadBalancerStartStatusResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DisassociateTargetGroups返回参数结构体
- */
-export interface DisassociateTargetGroupsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6928,21 +6976,29 @@ export interface DescribeAsyncJobsRequest {
  */
 export interface ModifyModelAliasAttributesRequest {
   /**
-   * <p>模型积分系数配置。</p><p>必填，包含 <code>InputCoefficient</code> 和 <code>OutputCoefficient</code>。</p><p><code>InputCoefficient</code> 为输入积分系数。</p><p><code>OutputCoefficient</code> 为输出积分系数。</p><p>取值范围：[1, 200]，最多支持 1 位小数。</p>
-   */
-  Coefficient: Coefficient
-  /**
    * <p>模型别名</p>
    */
   ModelAliasNames: Array<string>
+  /**
+   * <p>基础积分系数配置，选填。不传时保留原配置。各系数字段均为选填，取值范围为 [0, 5000]，最多支持 6 位小数，0 表示零价。传入本参数时，至少填写一项有效系数，不能传空对象。</p>
+   */
+  Coefficient?: Coefficient
   /**
    * <p>BYOK 实例（ServiceProvider）ID 列表。</p><p>可选，数组。传入时按 ServiceProvider 维度修改：把同一份 Coefficient 批量应用到数组内每一个实例（覆盖配置，仅作用于这些实例），此时 <code>ModelAliasNames</code> 只能传 1 个别名（即 1 别名 × N ServiceProvider）；数组需去重、非空、上限 100，任一实例不归属/不存在/该实例下无该别名将整批返回错误。不传时按 ModelAlias（账号）维度修改，作用于该别名下未单独配置覆盖的全部实例。</p>
    */
   ServiceProviderIds?: Array<string>
   /**
-   * <p>模型能力</p>
+   * <p>模型输出模态</p><p>枚举值：</p><ul><li>chat： 文本</li><li>embedding： 向量</li><li>video： 视频</li><li>rerank： 重排序</li></ul>
    */
   Capability?: string
+  /**
+   * <p>积分梯度设置</p>
+   */
+  CoefficientTiers?: Array<CoefficientTier>
+  /**
+   * <p>积分峰谷设置</p>
+   */
+  CoefficientSchedule?: Array<CoefficientScheduleRule>
 }
 
 /**
@@ -8660,6 +8716,14 @@ export interface ServiceProviderCoefficient {
    * <p>BYOK 实例（ServiceProvider）名称。</p>
    */
   ServiceProviderName?: string
+  /**
+   * <p>分级积分系数设置</p>
+   */
+  CoefficientTiers?: Array<CoefficientTier>
+  /**
+   * <p>峰谷积分系数设置</p>
+   */
+  CoefficientSchedule?: Array<CoefficientScheduleRule>
 }
 
 /**
@@ -10965,6 +11029,28 @@ export interface CreateModelRouterRequest {
    * <p>Embedding 配置</p>
    */
   EmbeddingConfig?: EmbeddingConfig
+}
+
+/**
+ * 峰谷计费配置
+ */
+export interface CoefficientScheduleRule {
+  /**
+   * <p>1～7，表示周一至周日</p>
+   */
+  Weekdays?: Array<number | bigint>
+  /**
+   * <p>00:00～23:59，固定 UTC+8，窗口左闭</p><p>参数格式：HH:mm</p>
+   */
+  StartTime?: string
+  /**
+   * <p>大于 StartTime，最大 24:00，窗口右开；跨午夜拆分并调整星期</p><p>参数格式：HH:mm</p>
+   */
+  EndTime?: string
+  /**
+   * <p>有限非负数，建议最多 6 位小数；0 免费、0.5 半价、1 原价，可大于 1；倍率计算后的价格须在服务支持的数值范围内</p>
+   */
+  Multiplier?: number
 }
 
 /**

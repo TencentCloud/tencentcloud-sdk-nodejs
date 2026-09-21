@@ -1037,65 +1037,65 @@ export interface DescribeSingleSignOnEmployeesRequest {
  */
 export interface PdfVerifyResult {
   /**
-   * 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。
+   * <p>验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。</p>
    */
   VerifyResult?: number
   /**
-   * 签署平台
-如果文件是在腾讯电子签平台签署，则为**腾讯电子签**，
-如果文件不在腾讯电子签平台签署，则为**其他平台**。
+   * <p>签署平台<br>如果文件是在腾讯电子签平台签署，则为<strong>腾讯电子签</strong>，<br>如果文件不在腾讯电子签平台签署，则为<strong>其他平台</strong>。</p>
    */
   SignPlatform?: string
   /**
-   * 申请证书的主体的名字
-
-如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下
-**企业**:  ESS@企业名称@编码
-**个人**: ESS@个人姓名@证件号@808854
-
-如果在其他平台签署的, 主体的名字参考其他平台的说明
+   * <p>申请证书的主体的名字</p><p>如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下<br><strong>企业</strong>:  ESS@企业名称@编码<br><strong>个人</strong>: ESS@个人姓名@证件号@808854</p><p>如果在其他平台签署的, 主体的名字参考其他平台的说明</p>
    */
   SignerName?: string
   /**
-   * 签署时间的Unix时间戳，单位毫秒
+   * <p>签署时间的Unix时间戳，单位毫秒</p>
    */
   SignTime?: number
   /**
-   * 证书签名算法,  如SHA1withRSA等算法
+   * <p>证书签名算法,  如SHA1withRSA等算法</p>
    */
   SignAlgorithm?: string
   /**
-   * 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。
+   * <p>在数字证书申请过程中，系统会自动生成一个独一无二的序列号。</p>
    */
   CertSn?: string
   /**
-   * 证书起始时间的Unix时间戳，单位毫秒
+   * <p>证书起始时间的Unix时间戳，单位毫秒</p>
    */
   CertNotBefore?: number
   /**
-   * 证书过期时间的时间戳，单位毫秒
+   * <p>证书过期时间的时间戳，单位毫秒</p>
    */
   CertNotAfter?: number
   /**
-   * 签名域横坐标，单位px
+   * <p>签名域横坐标，单位px</p>
    */
   ComponentPosX?: number
   /**
-   * 签名域纵坐标，单位px
+   * <p>签名域纵坐标，单位px</p>
    */
   ComponentPosY?: number
   /**
-   * 签名域宽度，单位px
+   * <p>签名域宽度，单位px</p>
    */
   ComponentWidth?: number
   /**
-   * 签名域高度，单位px
+   * <p>签名域高度，单位px</p>
    */
   ComponentHeight?: number
   /**
-   * 签名域所在页码，1～N
+   * <p>签名域所在页码，1～N</p>
    */
   ComponentPage?: number
+  /**
+   * <p>证书颁发机构</p>
+   */
+  CertProvider?: string
+  /**
+   * <p>是否有可信时间戳</p>
+   */
+  IsTimestampTrust?: boolean
 }
 
 /**
@@ -3143,47 +3143,33 @@ export interface DescribePersonCertificateRequest {
  */
 export interface ComparisonDetail {
   /**
-   * 合同对比差异点唯一ID。
+   * <p>合同对比差异点唯一ID。</p>
    */
   ComparisonPointId?: string
   /**
-   * 对比前后差异类型，具体如下：
-<ul><li> **add**：新增</li>
-<li> **change**：变更</li>
-<li> **delete**：删除</li>
-</ul>
+   * <p>对比前后差异类型，具体如下：</p><ul><li> **add**：新增</li><li> **change**：变更</li><li> **delete**：删除</li></ul>
    */
   ComparisonType?: string
   /**
-   * 对比内容类型，具体如下：
-<ul><li> **text**：文本</li>
-<li> **table**：表格</li>
-<li> **picture**：图片</li>
-</ul>
+   * <p>对比内容类型，具体如下：</p><ul><li> **text**：文本</li><li> **table**：表格</li><li> **picture**：图片</li></ul>
    */
   ContentType?: string
   /**
-   * 原文文本。
+   * <p>原文文本。</p>
    */
   OriginText?: string
   /**
-   * 对比文本。
+   * <p>对比文本。</p>
    */
   DiffText?: string
   /**
-   * 合同文本的格式类型。
-类型如下：
-<ul><li> **0**：段落（正文）</li>
-<li> **1**：标点符号</li>
-<li> **2**：页眉页脚</li>
-<li> **3**：目录</li>
-<li> **4**：印章</li>
-<li> **5**：序号</li>
-<li> **6**：水印</li>
-<li> **7**：下划线内容（填写区）</li>
-</ul>
+   * <p>合同文本的格式类型。<br>类型如下：</p><ul><li> **0**：段落（正文）</li><li> **1**：标点符号</li><li> **2**：页眉页脚</li><li> **3**：目录</li><li> **4**：印章</li><li> **5**：序号</li><li> **6**：水印</li><li> **7**：下划线内容（填写区）</li></ul>
    */
   FormatType?: number
+  /**
+   * <p>页码：对比点所在页码。</p>
+   */
+  PageNumber?: number
 }
 
 /**

@@ -178,6 +178,16 @@ it("hai.v20230812.DescribeRegions", async function () {
     }
 })
 
+it("hai.v20230812.GetServicePodLogs", async function () {
+    try {
+       const data = await client.GetServicePodLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.DescribeServices", async function () {
     try {
        const data = await client.DescribeServices({})

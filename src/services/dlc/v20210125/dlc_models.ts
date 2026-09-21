@@ -25504,191 +25504,199 @@ export interface DescribeWorkGroupsResponse {
  */
 export interface SparkJobInfo {
   /**
-   * spark作业ID
+   * <p>spark作业ID</p>
    */
   JobId?: string
   /**
-   * spark作业名
+   * <p>spark作业名</p>
    */
   JobName?: string
   /**
-   * spark作业类型，可去1或者2，1表示batch作业， 2表示streaming作业
+   * <p>spark作业类型，可去1或者2，1表示batch作业， 2表示streaming作业</p>
    */
   JobType?: number
   /**
-   * 引擎名
+   * <p>引擎名</p>
    */
   DataEngine?: string
   /**
-   * 该字段已下线，请使用字段Datasource
+   * <p>该字段已下线，请使用字段Datasource</p>
    */
   Eni?: string
   /**
-   * 程序包是否本地上传，cos或者lakefs
+   * <p>程序包是否本地上传，cos或者lakefs</p>
    */
   IsLocal?: string
   /**
-   * 程序包路径
+   * <p>程序包路径</p>
    */
   JobFile?: string
   /**
-   * 角色ID
+   * <p>角色ID</p>
    */
   RoleArn?: number
   /**
-   * spark作业运行主类
+   * <p>spark作业运行主类</p>
    */
   MainClass?: string
   /**
-   * 命令行参数，spark作业命令行参数，空格分隔
+   * <p>命令行参数，spark作业命令行参数，空格分隔</p>
    */
   CmdArgs?: string
   /**
-   * spark原生配置，换行符分隔
+   * <p>spark原生配置，换行符分隔</p>
    */
   JobConf?: string
   /**
-   * 依赖jars是否本地上传，cos或者lakefs
+   * <p>依赖jars是否本地上传，cos或者lakefs</p>
    */
   IsLocalJars?: string
   /**
-   * spark作业依赖jars，逗号分隔
+   * <p>spark作业依赖jars，逗号分隔</p>
    */
   JobJars?: string
   /**
-   * 依赖文件是否本地上传，cos或者lakefs
+   * <p>依赖文件是否本地上传，cos或者lakefs</p>
    */
   IsLocalFiles?: string
   /**
-   * spark作业依赖文件，逗号分隔
+   * <p>spark作业依赖文件，逗号分隔</p>
    */
   JobFiles?: string
   /**
-   * spark作业driver资源大小
+   * <p>spark作业driver资源大小</p>
    */
   JobDriverSize?: string
   /**
-   * spark作业executor资源大小
+   * <p>spark作业executor资源大小</p>
    */
   JobExecutorSize?: string
   /**
-   * spark作业executor个数
+   * <p>spark作业executor个数</p>
    */
   JobExecutorNums?: number
   /**
-   * spark流任务最大重试次数
+   * <p>spark流任务最大重试次数</p>
    */
   JobMaxAttempts?: number
   /**
-   * spark作业创建者
+   * <p>spark作业创建者</p>
    */
   JobCreator?: string
   /**
-   * spark作业创建时间
+   * <p>spark作业创建时间</p>
    */
   JobCreateTime?: number
   /**
-   * spark作业更新时间
+   * <p>spark作业更新时间</p>
    */
   JobUpdateTime?: number
   /**
-   * spark作业最近任务ID
+   * <p>spark作业最近任务ID</p>
    */
   CurrentTaskId?: string
   /**
-   * spark作业最近运行状态，初始化：0，运行中：1，成功：2，数据写入中： 3， 排队中： 4， 失败： -1， 已删除： -3，已过期： -5
+   * <p>spark作业最近运行状态，初始化：0，运行中：1，成功：2，数据写入中： 3， 排队中： 4， 失败： -1， 已删除： -3，已过期： -5</p>
    */
   JobStatus?: number
   /**
-   * spark流作业统计
+   * <p>spark流作业统计</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamingStat?: StreamingStatistics
   /**
-   * 数据源名
+   * <p>数据源名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSource?: string
   /**
-   * pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   * <p>pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLocalPythonFiles?: string
   /**
-   * 注：该返回值已废弃
+   * <p>注：该返回值已废弃</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppPythonFiles?: string
   /**
-   * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   * <p>archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLocalArchives?: string
   /**
-   * archives：依赖资源
+   * <p>archives：依赖资源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobArchives?: string
   /**
-   * Spark Image 版本
+   * <p>Spark Image 版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkImage?: string
   /**
-   * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+   * <p>pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobPythonFiles?: string
   /**
-   * 当前job正在运行或准备运行的任务个数
+   * <p>当前job正在运行或准备运行的任务个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskNum?: number
   /**
-   * 引擎状态：-100（默认：未知状态），-2~11：引擎正常状态；
+   * <p>引擎状态：-100（默认：未知状态），-2~11：引擎正常状态；</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineStatus?: number
   /**
-   * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于JobExecutorNums
+   * <p>指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于JobExecutorNums</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobExecutorMaxNumbers?: number
   /**
-   * 镜像版本
+   * <p>镜像版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkImageVersion?: string
   /**
-   * 查询脚本关联id
+   * <p>查询脚本关联id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionId?: string
   /**
-   * spark_emr_livy
+   * <p>spark_emr_livy</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineClusterType?: string
   /**
-   * Spark 3.2-EMR
+   * <p>Spark 3.2-EMR</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineImageVersion?: string
   /**
-   * 任务资源配置是否继承集群模板，0（默认）不继承，1：继承
+   * <p>任务资源配置是否继承集群模板，0（默认）不继承，1：继承</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsInherit?: number
   /**
-   * 是否使用session脚本的sql运行任务：false：否，true：是
+   * <p>是否使用session脚本的sql运行任务：false：否，true：是</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSessionStarted?: boolean
   /**
-   * 引擎详细类型：SparkSQL、PrestoSQL、SparkBatch、StandardSpark、StandardPresto
+   * <p>引擎详细类型：SparkSQL、PrestoSQL、SparkBatch、StandardSpark、StandardPresto</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineTypeDetail?: string
+  /**
+   * <p>标准引擎依赖包</p>
+   */
+  DependencyPackages?: Array<DependencyPackage>
+  /**
+   * <p>作业运行鉴权身份</p>
+   */
+  RunAsIdentity?: string
 }
 
 /**

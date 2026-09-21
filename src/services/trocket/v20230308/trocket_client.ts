@@ -25,6 +25,7 @@ import {
   ResetConsumerGroupOffsetResponse,
   RouteRuleVersion,
   DescribeSmoothMigrationTaskListRequest,
+  CreateConsumerLabelsRequest,
   DescribeConsumerRouteVersionListResponse,
   DescribeRoleListResponse,
   CreateConsumerLabelResponse,
@@ -34,8 +35,9 @@ import {
   ConsumeGroupItem,
   TopicStatsDetail,
   DescribeMessageListRequest,
-  RetryPolicy,
+  PutConsumerRouteConfigFailure,
   ModifyInstanceRequest,
+  DescribeConsumerLabelListsRequest,
   MigrationTaskItem,
   FusionInstanceItem,
   InstanceItemExtraInfo,
@@ -44,15 +46,18 @@ import {
   DeleteTopicRequest,
   DescribeTopicStatsRequest,
   MigratingTopic,
+  PutConsumerRouteConfigsResponse,
   DescribeSmoothMigrationTaskListResponse,
   DescribeMigrationTaskListResponse,
   VpcInfo,
+  PutConsumerRouteConfigItem,
   DeleteConsumerRouteConfigResponse,
   DescribeRoleListRequest,
-  DescribeMigratingTopicStatsResponse,
+  DescribeConsumerLabelResponse,
   ImportSourceClusterConsumerGroupsRequest,
   DescribeConsumerLagRequest,
   SendMessageRequest,
+  DescribeMigratingTopicStatsResponse,
   DescribeMigratingGroupStatsRequest,
   Tag,
   DescribeSourceClusterGroupListResponse,
@@ -66,34 +71,42 @@ import {
   ClientSubscriptionInfo,
   ChangeMigratingTopicToNextStageResponse,
   DescribeSourceClusterGroupListRequest,
+  DescribeConsumerLabelRequest,
+  DeleteConsumerLabelsResponse,
   DescribeConsumerRouteConfigResponse,
   DescribeMigrationTaskListRequest,
+  ConsumerLabelItem,
+  ConsumerLabelFailure,
   VerifyMessageConsumptionResponse,
   ModifyRoleResponse,
   TopicStageChangeResult,
   ImportSourceClusterTopicsRequest,
-  DescribeFusionInstanceListRequest,
+  ConsumerRouteKey,
   SourceClusterGroupConfig,
   DeleteInstanceResponse,
   DescribeTopicResponse,
   SmoothMigrationTaskItem,
+  DeleteConsumerRouteConfigsResponse,
   ModifyRoleRequest,
   DescribeTopicStatsResponse,
-  DescribeFusionInstanceListResponse,
-  CreateTopicRequest,
+  ConsumerLabelRoute,
   DescribeMessageRequest,
+  CreateTopicRequest,
+  DescribeFusionInstanceListResponse,
   DeleteRoleRequest,
   ResendDeadLetterMessageResponse,
   ModifyConsumerGroupResponse,
-  DescribeMigratingTopicStatsRequest,
+  DescribeConsumerLabelListRequest,
   DeleteConsumerGroupRequest,
   CreateConsumerGroupResponse,
-  RollbackMigratingTopicStageRequest,
+  DeleteConsumerRouteConfigFailure,
+  PriceTag,
   DescribeTopicListByGroupResponse,
   DescribeMessageTraceResponse,
   DoHealthCheckOnMigratingTopicRequest,
   DescribeProducerListRequest,
   DescribeMigratingTopicListResponse,
+  ConsumerRouteLabelKey,
   InstanceItem,
   VerifyMessageConsumptionRequest,
   DescribeTopicRequest,
@@ -104,10 +117,12 @@ import {
   TopicConsumeStats,
   RemoveMigratingTopicRequest,
   DescribeMessageResponse,
-  ZoneScheduledItem,
+  ConsumerLabelList,
   ImportSourceClusterTopicsResponse,
   DescribeTopicListRequest,
-  DescribeConsumerLabelListRequest,
+  DescribeMigratingTopicStatsRequest,
+  DescribeConsumerRouteConfigsRequest,
+  PutConsumerRouteConfigsRequest,
   ModifyConsumerGroupRequest,
   DescribeConsumerGroupRequest,
   DescribeConsumerGroupListRequest,
@@ -116,55 +131,67 @@ import {
   CreateInstanceRequest,
   ConsumerClient,
   MessageTraceItem,
-  DescribeProducerListResponse,
+  DescribeConsumerClientRequest,
   ModifyTopicResponse,
+  DeleteConsumerLabelsRequest,
   SendMessageResponse,
-  DescribeConsumerLagResponse,
+  DescribeConsumerRouteConfigItem,
+  CreateRoleResponse,
   ChangeMigratingTopicToNextStageRequest,
   DeleteRoleResponse,
   DescribeTopicListByGroupRequest,
-  DescribeConsumerLabelResponse,
+  DescribeConsumerLabelListsResponse,
   DescribeMigratingTopicListRequest,
   Filter,
   ModifyTopicRequest,
+  RollbackMigratingTopicStageRequest,
   DescribeInstanceResponse,
   DescribeConsumerClientResponse,
   DeleteInstanceRequest,
   MessageTrackItem,
-  DescribeConsumerClientRequest,
+  DescribeProducerListResponse,
   RouteRule,
   ResendDeadLetterMessageRequest,
   DescribeConsumerLabelListResponse,
   RollbackMigratingTopicStageResponse,
-  CreateRoleResponse,
+  DescribeFusionInstanceListRequest,
+  DescribeConsumerRouteConfigsResponse,
   DoHealthCheckOnMigratingTopicResponse,
   DeleteConsumerRouteConfigRequest,
   DeleteConsumerLabelResponse,
+  DescribeConsumerLagResponse,
   ModifyInstanceEndpointRequest,
+  ZoneScheduledItem,
   CreateMigrationTaskResponse,
+  ConsumerLabelRouteItem,
   CreateConsumerLabelRequest,
   DescribeTopicListResponse,
   PutConsumerRouteConfigResponse,
   DescribeConsumerClientListRequest,
   DescribeInstanceListRequest,
   CreateRoleRequest,
+  RetryPolicy,
   DeleteConsumerGroupResponse,
-  DescribeConsumerLabelRequest,
+  DescribeConsumerLabelRoutesRequest,
   Endpoint,
   DescribeConsumerRouteVersionListRequest,
+  IpRule,
   MessageItem,
   RoleItem,
   TagFilter,
   DescribeConsumerGroupListResponse,
-  PriceTag,
+  DescribeProductSKUsResponse,
   PutConsumerRouteConfigRequest,
+  DescribeConsumerLabelRoutesResponse,
   ProducerInfo,
   DeleteTopicResponse,
+  DeleteConsumerRouteConfigsRequest,
+  ErrorInfo,
   ModifyInstanceEndpointResponse,
   DescribeInstanceRequest,
-  DescribeProductSKUsResponse,
+  CreateConsumerLabelsResponse,
   RemoveMigratingTopicResponse,
-  IpRule,
+  ConsumerLabelKey,
   DeleteConsumerLabelRequest,
   ResetConsumerGroupOffsetRequest,
 } from "./trocket_models"
@@ -209,6 +236,16 @@ Filters示例：
     cb?: (error: string, rep: DescribeSourceClusterGroupListResponse) => void
   ): Promise<DescribeSourceClusterGroupListResponse> {
     return this.request("DescribeSourceClusterGroupList", req, cb)
+  }
+
+  /**
+   * 批量删除消费组灰度标签
+   */
+  async DeleteConsumerLabels(
+    req: DeleteConsumerLabelsRequest,
+    cb?: (error: string, rep: DeleteConsumerLabelsResponse) => void
+  ): Promise<DeleteConsumerLabelsResponse> {
+    return this.request("DeleteConsumerLabels", req, cb)
   }
 
   /**
@@ -404,13 +441,13 @@ Filters示例：
   }
 
   /**
-   * 检查迁移中的主题是否处于正常状态，只有处于正常状态的主题，才可以进入下一个迁移阶段
+   * 批量查询消费组灰度标签命中的 Topic 路由
    */
-  async DoHealthCheckOnMigratingTopic(
-    req: DoHealthCheckOnMigratingTopicRequest,
-    cb?: (error: string, rep: DoHealthCheckOnMigratingTopicResponse) => void
-  ): Promise<DoHealthCheckOnMigratingTopicResponse> {
-    return this.request("DoHealthCheckOnMigratingTopic", req, cb)
+  async DescribeConsumerLabelRoutes(
+    req: DescribeConsumerLabelRoutesRequest,
+    cb?: (error: string, rep: DescribeConsumerLabelRoutesResponse) => void
+  ): Promise<DescribeConsumerLabelRoutesResponse> {
+    return this.request("DescribeConsumerLabelRoutes", req, cb)
   }
 
   /**
@@ -500,6 +537,16 @@ Filters示例：
   }
 
   /**
+   * 批量查询多个消费组的灰度标签列表
+   */
+  async DescribeConsumerLabelLists(
+    req: DescribeConsumerLabelListsRequest,
+    cb?: (error: string, rep: DescribeConsumerLabelListsResponse) => void
+  ): Promise<DescribeConsumerLabelListsResponse> {
+    return this.request("DescribeConsumerLabelLists", req, cb)
+  }
+
+  /**
    * 查询产品售卖规格，针对 RocketMQ 5.x 集群。
    */
   async DescribeProductSKUs(
@@ -518,6 +565,16 @@ Filters示例：
     cb?: (error: string, rep: DescribeTopicStatsResponse) => void
   ): Promise<DescribeTopicStatsResponse> {
     return this.request("DescribeTopicStats", req, cb)
+  }
+
+  /**
+   * 检查迁移中的主题是否处于正常状态，只有处于正常状态的主题，才可以进入下一个迁移阶段
+   */
+  async DoHealthCheckOnMigratingTopic(
+    req: DoHealthCheckOnMigratingTopicRequest,
+    cb?: (error: string, rep: DoHealthCheckOnMigratingTopicResponse) => void
+  ): Promise<DoHealthCheckOnMigratingTopicResponse> {
+    return this.request("DoHealthCheckOnMigratingTopic", req, cb)
   }
 
   /**
@@ -549,6 +606,16 @@ Filters示例：
     cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void
   ): Promise<ImportSourceClusterTopicsResponse> {
     return this.request("ImportSourceClusterTopics", req, cb)
+  }
+
+  /**
+   * 批量删除消费组灰度路由配置
+   */
+  async DeleteConsumerRouteConfigs(
+    req: DeleteConsumerRouteConfigsRequest,
+    cb?: (error: string, rep: DeleteConsumerRouteConfigsResponse) => void
+  ): Promise<DeleteConsumerRouteConfigsResponse> {
+    return this.request("DeleteConsumerRouteConfigs", req, cb)
   }
 
   /**
@@ -585,6 +652,23 @@ Filters示例：
   }
 
   /**
+     * 获取主题列表，Filter参数使用说明如下：
+
+- TopicName 主题名称，支持模糊搜索，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得
+- TopicType 主题类型查询，支持多选，参考 [DescribeTopic](https://cloud.tencent.com/document/api/1493/97945) 接口 TopicType 字段
+
+Filters示例：
+ [{ "Name": "TopicName", "Values": ["test_topic"] }]
+当前 API 适用集群：5.x 集群。4.x 集群的获取主题列表接口文档见 [DescribeRocketMQTopics](https://cloud.tencent.com/document/api/1179/63418)。
+     */
+  async DescribeTopicList(
+    req: DescribeTopicListRequest,
+    cb?: (error: string, rep: DescribeTopicListResponse) => void
+  ): Promise<DescribeTopicListResponse> {
+    return this.request("DescribeTopicList", req, cb)
+  }
+
+  /**
      * 创建 RocketMQ 5.x 集群。
 当前 API 适用集群：5.x 集群。创建 4.x 专享/通用集群的接口文档见 [CreateRocketMQVipInstance](https://cloud.tencent.com/document/product/1179/95721)。
      */
@@ -617,20 +701,13 @@ Filters示例：
   }
 
   /**
-     * 获取主题列表，Filter参数使用说明如下：
-
-- TopicName 主题名称，支持模糊搜索，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得
-- TopicType 主题类型查询，支持多选，参考 [DescribeTopic](https://cloud.tencent.com/document/api/1493/97945) 接口 TopicType 字段
-
-Filters示例：
- [{ "Name": "TopicName", "Values": ["test_topic"] }]
-当前 API 适用集群：5.x 集群。4.x 集群的获取主题列表接口文档见 [DescribeRocketMQTopics](https://cloud.tencent.com/document/api/1179/63418)。
-     */
-  async DescribeTopicList(
-    req: DescribeTopicListRequest,
-    cb?: (error: string, rep: DescribeTopicListResponse) => void
-  ): Promise<DescribeTopicListResponse> {
-    return this.request("DescribeTopicList", req, cb)
+   * 批量查询消费组灰度路由配置
+   */
+  async DescribeConsumerRouteConfigs(
+    req: DescribeConsumerRouteConfigsRequest,
+    cb?: (error: string, rep: DescribeConsumerRouteConfigsResponse) => void
+  ): Promise<DescribeConsumerRouteConfigsResponse> {
+    return this.request("DescribeConsumerRouteConfigs", req, cb)
   }
 
   /**
@@ -642,6 +719,16 @@ Filters示例：
     cb?: (error: string, rep: ResendDeadLetterMessageResponse) => void
   ): Promise<ResendDeadLetterMessageResponse> {
     return this.request("ResendDeadLetterMessage", req, cb)
+  }
+
+  /**
+   * 批量写入消费组灰度路由配置
+   */
+  async PutConsumerRouteConfigs(
+    req: PutConsumerRouteConfigsRequest,
+    cb?: (error: string, rep: PutConsumerRouteConfigsResponse) => void
+  ): Promise<PutConsumerRouteConfigsResponse> {
+    return this.request("PutConsumerRouteConfigs", req, cb)
   }
 
   /**
@@ -675,6 +762,16 @@ Filters示例：
     cb?: (error: string, rep: DescribeProducerListResponse) => void
   ): Promise<DescribeProducerListResponse> {
     return this.request("DescribeProducerList", req, cb)
+  }
+
+  /**
+   * 批量创建消费组灰度标签
+   */
+  async CreateConsumerLabels(
+    req: CreateConsumerLabelsRequest,
+    cb?: (error: string, rep: CreateConsumerLabelsResponse) => void
+  ): Promise<CreateConsumerLabelsResponse> {
+    return this.request("CreateConsumerLabels", req, cb)
   }
 
   /**

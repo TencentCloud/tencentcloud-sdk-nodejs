@@ -674,11 +674,11 @@ export interface DescribeAclRuleRequest {
    */
   Filters?: Array<CommonFilter>
   /**
-   * <p>检索的起始时间，可不传</p>
+   * <p>检索的起始时间，规则创建时间，可不传</p><p>参数格式：2022-07-27 16:00:00</p>
    */
   StartTime?: string
   /**
-   * <p>检索的截止时间，可不传</p>
+   * <p>检索的截止时间，规则创建时间，可不传</p><p>参数格式：2022-07-27 16:00:00</p>
    */
   EndTime?: string
   /**
@@ -5659,11 +5659,11 @@ export interface DescribeNatAcRuleRequest {
    */
   Filters?: Array<CommonFilter>
   /**
-   * <p>检索的起始时间，可不传</p>
+   * <p>检索的起始时间，规则创建时间，可不传</p><p>参数格式：2022-07-27 16:00:00</p>
    */
   StartTime?: string
   /**
-   * <p>检索的截止时间，可不传</p>
+   * <p>检索的截止时间，规则创建时间，可不传</p><p>参数格式：2022-07-27 16:00:00</p>
    */
   EndTime?: string
   /**
@@ -9437,11 +9437,11 @@ export interface DescribeVpcAcRuleRequest {
    */
   Filters?: Array<CommonFilter>
   /**
-   * <p>检索的起始时间，可不传</p>
+   * <p>检索的起始时间，规则创建时间，可不传</p><p>参数格式：2022-07-27 16:00:00</p>
    */
   StartTime?: string
   /**
-   * <p>检索的截止时间，可不传</p>
+   * <p>检索的截止时间，规则创建时间，可不传</p><p>参数格式：2022-07-27 16:00:00</p>
    */
   EndTime?: string
   /**

@@ -519,6 +519,24 @@ export interface StartInstanceResponse {
 }
 
 /**
+ * DescribeInstanceNetworkStatus返回参数结构体
+ */
+export interface DescribeInstanceNetworkStatusResponse {
+  /**
+   * 查询结果集长度
+   */
+  TotalCount?: number
+  /**
+   * 查询结果集
+   */
+  NetworkStatusSet?: Array<NetworkStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeApplications返回参数结构体
  */
 export interface DescribeApplicationsResponse {
@@ -614,24 +632,6 @@ export interface DeployInferServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 服务级包年包月入参
- */
-export interface ServiceChargePrepaid {
-  /**
-   * <p>购买时长，默认1</p>
-   */
-  Period?: number
-  /**
-   * <p>时长单位：MONTH(月)/DAY(天)</p>
-   */
-  TimeUnit?: string
-  /**
-   * <p>自动续费：NOTIFY_AND_AUTO_RENEW/NOTIFY_AND_MANUAL_RENEW/DISABLE_NOTIFY_AND_MANUAL_RENEW</p>
-   */
-  RenewFlag?: string
 }
 
 /**
@@ -1044,13 +1044,9 @@ export interface EnvParam {
 }
 
 /**
- * ResetInstancesPassword返回参数结构体
+ * GetServicePodLogs返回参数结构体
  */
-export interface ResetInstancesPasswordResponse {
-  /**
-   * task任务id
-   */
-  TaskId?: number
+export interface GetServicePodLogsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1243,25 +1239,17 @@ export interface ResetInstancesPasswordRequest {
 }
 
 /**
- * DescribeInstances请求参数结构体
+ * ResetInstancesPassword返回参数结构体
  */
-export interface DescribeInstancesRequest {
+export interface ResetInstancesPasswordResponse {
   /**
-   * 实例元组，数量上限100
+   * task任务id
    */
-  InstanceIds?: Array<string>
+  TaskId?: number
   /**
-   * 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有： instance-id，实例id； instance-state，实例状态：RUNNING，PENDING，STOPPED，ARREARS，STOPPED_NO_CHARGE； charge-type，付费方式：PREPAID_BY_MONTH，POSTPAID_BY_HOUR； public-ip-address，公网IP过滤
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<Filter>
-  /**
-   * 偏移量，默认为0，不得大于100
-   */
-  Offset?: number
-  /**
-   * 返回量，默认为20，不能小于0
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -1406,22 +1394,27 @@ export interface ItemPrice {
 }
 
 /**
- * DescribeInstanceNetworkStatus返回参数结构体
+ * 服务级包年包月入参
  */
-export interface DescribeInstanceNetworkStatusResponse {
+export interface ServiceChargePrepaid {
   /**
-   * 查询结果集长度
+   * <p>购买时长，默认1</p>
    */
-  TotalCount?: number
+  Period?: number
   /**
-   * 查询结果集
+   * <p>时长单位：MONTH(月)/DAY(天)</p>
    */
-  NetworkStatusSet?: Array<NetworkStatus>
+  TimeUnit?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>自动续费：NOTIFY_AND_AUTO_RENEW/NOTIFY_AND_MANUAL_RENEW/DISABLE_NOTIFY_AND_MANUAL_RENEW</p>
    */
-  RequestId?: string
+  RenewFlag?: string
 }
+
+/**
+ * GetServicePodLogs请求参数结构体
+ */
+export type GetServicePodLogsRequest = null
 
 /**
  * InquirePriceRunInstances返回参数结构体
@@ -1535,6 +1528,28 @@ export interface DescribeMuskPromptsRequest {
    * 过滤参数 支持过滤的键值： PromptId，Status
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ */
+export interface DescribeInstancesRequest {
+  /**
+   * 实例元组，数量上限100
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有： instance-id，实例id； instance-state，实例状态：RUNNING，PENDING，STOPPED，ARREARS，STOPPED_NO_CHARGE； charge-type，付费方式：PREPAID_BY_MONTH，POSTPAID_BY_HOUR； public-ip-address，公网IP过滤
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0，不得大于100
+   */
+  Offset?: number
+  /**
+   * 返回量，默认为20，不能小于0
+   */
+  Limit?: number
 }
 
 /**

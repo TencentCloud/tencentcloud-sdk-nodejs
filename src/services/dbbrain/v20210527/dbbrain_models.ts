@@ -303,6 +303,32 @@ export interface DescribeUserAutonomyProfileResponse {
 }
 
 /**
+ * DescribeTopSpaceTablesV2请求参数结构体
+ */
+export interface DescribeTopSpaceTablesV2Request {
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>服务产品类型，支持值包括：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）、dcdb（TDSQL MySQL 版）、tdsql（TDSQL）、mariadb（云数据库 MariaDB）。</p>
+   */
+  Product: string
+  /**
+   * <p>查询日期，格式：yyyy-MM-dd。默认当天。</p>
+   */
+  Date?: string
+  /**
+   * <p>排序字段。MySQL/PG/TDSQL 系列支持：PhysicalFileSize/DataLength/IndexLength/TotalLength/DataFree/FragRatio/TableRows，默认 PhysicalFileSize。MongoDB 支持：Collection.CollectionSize/Collection.StorageSize/Collection.Size/Collection.AvgObjSize/Collection.Count/Collection.TotalIndexSize，默认 Collection.CollectionSize。</p>
+   */
+  SortBy?: string
+  /**
+   * <p>返回数量，默认20，最大100。</p>
+   */
+  Limit?: number
+}
+
+/**
  * DescribeRedisTopHotKeys请求参数结构体
  */
 export interface DescribeRedisTopHotKeysRequest {
@@ -817,6 +843,57 @@ export interface DescribeRedisBigKeyAnalysisTasksResponse {
 }
 
 /**
+ * PostgreSQL 产品空间对象项。字段语义与 MySQL 不同：使用 pg_relation_size / pg_total_relation_size 等 PG 特有指标。库级查询时不包含 TableSchema/TableName 字段；表级查询时包含全部字段。
+ */
+export interface PostgresSpaceObjectItem {
+  /**
+   * <p>数据库名（PostgreSQL 顶层 catalog）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableCatalog?: string
+  /**
+   * <p>Schema 名（Level=TABLE 时返回）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableSchema?: string
+  /**
+   * <p>表名（Level=TABLE 时返回）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * <p>表本身大小（MB），对应 pg_relation_size。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelationSize?: number
+  /**
+   * <p>表数据大小（MB），含 TOAST 但不含索引，对应 pg_table_size。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableSize?: number
+  /**
+   * <p>索引大小（MB），对应 pg_indexes_size。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexSize?: number
+  /**
+   * <p>总大小（MB），含数据、索引、TOAST，对应 pg_total_relation_size。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalRelationSize?: number
+  /**
+   * <p>表膨胀率（PostgreSQL 特有指标）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableBloat?: number
+  /**
+   * <p>表行数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableRows?: number
+}
+
+/**
  * DescribeDBDiagReportTasks返回参数结构体
  */
 export interface DescribeDBDiagReportTasksResponse {
@@ -1187,6 +1264,14 @@ export interface SlowLogTopSqlItem {
    * SQL模板的MD5值
    */
   Md5?: string
+  /**
+   *
+   */
+  SqlType?: string
+  /**
+   *
+   */
+  InstanceId?: string
 }
 
 /**
@@ -2359,6 +2444,10 @@ export interface SlowLogInfoItem {
    * 返回行数
    */
   RowsSent?: number
+  /**
+   *
+   */
+  InstanceId?: string
 }
 
 /**
@@ -2460,29 +2549,69 @@ export interface IndexesToBuild {
 }
 
 /**
- * OpenAuditService请求参数结构体
+ * MongoDB 集合级空间使用明细，包含集合的存储、索引、碎片等各维度指标。
  */
-export interface OpenAuditServiceRequest {
+export interface MongoCollectionDetail {
   /**
-   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。
+   * <p>集合命名空间，格式为 db.collection。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Product: string
+  CollStats?: string
   /**
-   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   * <p>集合逻辑大小（字节，未压缩）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeRequestType: string
+  CollectionSize?: number
   /**
-   * 实例ID。
+   * <p>集合已分配但未使用的空间（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  DataFree?: number
   /**
-   * 日志保存总时长，只能是7,30,90,180,365,1095,1825。
+   * <p>空间利用率（百分比字符串）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogExpireDay: number
+  SpaceRatio?: string
   /**
-   * 高频日志保存时长，只能是7,30,90,180,365,1095,1825。
+   * <p>碎片率（百分比字符串）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  HotLogExpireDay: number
+  FragRatio?: string
+  /**
+   * <p>集合数据大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * <p>所有索引占用大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalIndexSize?: number
+  /**
+   * <p>平均文档大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvgObjSize?: number
+  /**
+   * <p>集合实际占用存储大小（字节，压缩后）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageSize?: number
+  /**
+   * <p>文档数量。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
+  /**
+   * <p>压缩率（百分比字符串）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompressionRatio?: string
+  /**
+   * <p>可复用文件空间（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileReuseBytes?: number
 }
 
 /**
@@ -4015,6 +4144,32 @@ export interface DescribeRedisTopCostCommandsResponse {
 }
 
 /**
+ * OpenAuditService请求参数结构体
+ */
+export interface OpenAuditServiceRequest {
+  /**
+   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。
+   */
+  Product: string
+  /**
+   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   */
+  NodeRequestType: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 日志保存总时长，只能是7,30,90,180,365,1095,1825。
+   */
+  LogExpireDay: number
+  /**
+   * 高频日志保存时长，只能是7,30,90,180,365,1095,1825。
+   */
+  HotLogExpireDay: number
+}
+
+/**
  * 库空间统计数据。
  */
 export interface SchemaSpaceData {
@@ -4621,6 +4776,42 @@ export interface DescribeAlarmTemplateResponse {
 }
 
 /**
+ * MongoDB 产品表级（集合级）空间对象项，描述单个集合的空间使用统计信息。
+ */
+export interface MongoDBTableSpaceItem {
+  /**
+   * <p>应用 Id（AppId）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * <p>实例 Id。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * <p>数据库名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Db?: string
+  /**
+   * <p>数据采集时间戳（毫秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: number
+  /**
+   * <p>磁盘占用大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SizeOnDisk?: number
+  /**
+   * <p>集合级空间使用明细。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Collection?: MongoCollectionDetail
+}
+
+/**
  * DescribeTopSpaceSchemaTimeSeries请求参数结构体
  */
 export interface DescribeTopSpaceSchemaTimeSeriesRequest {
@@ -5180,6 +5371,20 @@ export interface DescribeRedisCommandOverviewResponse {
 }
 
 /**
+ * sql会话统计信息
+ */
+export interface StatisticInfo {
+  /**
+   * 统计分析的维度。
+   */
+  Dimension?: string
+  /**
+   * 统计分析的维度下的统计数据详情。
+   */
+  Data?: Array<StatisticDataInfo>
+}
+
+/**
  * CreateSqlFilter返回参数结构体
  */
 export interface CreateSqlFilterResponse {
@@ -5588,17 +5793,59 @@ export interface DescribeProxyProcessStatisticsRequest {
 }
 
 /**
- * sql会话统计信息
+ * MySQL 系列产品空间对象项。库级查询时不包含 TableName/Engine 字段；表级查询时包含全部字段。
  */
-export interface StatisticInfo {
+export interface MysqlSpaceObjectItem {
   /**
-   * 统计分析的维度。
+   * <p>数据库名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Dimension?: string
+  TableSchema?: string
   /**
-   * 统计分析的维度下的统计数据详情。
+   * <p>表名（Level=TABLE时返回）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<StatisticDataInfo>
+  TableName?: string
+  /**
+   * <p>存储引擎（Level=TABLE时返回）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Engine?: string
+  /**
+   * <p>行数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableRows?: number
+  /**
+   * <p>总使用空间（MB）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalLength?: number
+  /**
+   * <p>数据空间（MB）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataLength?: number
+  /**
+   * <p>索引空间（MB）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexLength?: number
+  /**
+   * <p>碎片空间（MB）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataFree?: number
+  /**
+   * <p>碎片率（%）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragRatio?: number
+  /**
+   * <p>物理文件大小（MB）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhysicalFileSize?: number
 }
 
 /**
@@ -5809,6 +6056,35 @@ export interface DeleteAuditLogFileRequest {
  * ModifyDiagDBInstanceConf返回参数结构体
  */
 export interface ModifyDiagDBInstanceConfResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTopSpaceTablesV2返回参数结构体
+ */
+export interface DescribeTopSpaceTablesV2Response {
+  /**
+   * <p>MySQL/PG/TDSQL 系列产品表级空间对象列表。当产品为 mysql/cynosdb/tdsql/dcdb/mariadb/postgres 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MysqlObjects?: Array<MysqlSpaceObjectItem>
+  /**
+   * <p>PostgreSQL 产品表级空间对象列表。当产品为 postgres 时返回。字段语义与 MySQL 不同：使用 RelationSize / TableSize / IndexSize / TotalRelationSize / TableBloat 等 PG 特有指标。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostgresObjects?: Array<PostgresSpaceObjectItem>
+  /**
+   * <p>MongoDB 产品表级（集合级）空间对象列表。当产品为 mongodb 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MongodbObjects?: Array<MongoDBTableSpaceItem>
+  /**
+   * <p>数据采集时间戳（秒）。</p>
+   */
+  Timestamp?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

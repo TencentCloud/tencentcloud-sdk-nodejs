@@ -66,7 +66,7 @@ export interface ApiSecCustomEventRule {
  */
 export interface DeleteOwaspWhiteRuleRequest {
   /**
-   * 规则白名单ID列表
+   * 规则白名单ID列表，可通过 [DescribeOwaspWhiteRule](https://cloud.tencent.com/document/product/627/122155) 接口获取
    */
   Ids: Array<number | bigint>
   /**
@@ -3001,7 +3001,7 @@ export interface ModifyApiSecEventChangeRequest {
  */
 export interface DescribePostCLSFlowsRequest {
   /**
-   * 1-访问日志，2-攻击日志，默认为访问日志。
+   * <p>1-访问日志，2-攻击日志，默认为访问日志。</p>
    */
   LogType?: number
 }
@@ -3245,7 +3245,7 @@ export interface BotIdDetail {
  */
 export interface DescribePostCLSFlowsResponse {
   /**
-   * 客户的投递流列表
+   * <p>客户的投递流列表</p>
    */
   PostCLSFlows?: Array<PostCLSFlowInfo>
   /**
@@ -4426,15 +4426,15 @@ export interface ModifyUserSignatureClassRequest {
  */
 export interface HostDel {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain: string
   /**
-   * 域名ID
+   * <p>域名ID，使用DescribeDomains接口可以查询获取</p>
    */
   DomainId: string
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   InstanceID?: string
 }
@@ -8167,11 +8167,11 @@ export interface ModifyProtectGroupRequest {
  */
 export interface DestroyPostCKafkaFlowRequest {
   /**
-   * 投递流的流ID
+   * <p>投递流的流ID，可以通过DescribePostCKafkaFlows接口获取</p>
    */
   FlowId: number
   /**
-   * 1-访问日志，2-攻击日志，默认为访问日志。
+   * <p>1-访问日志，2-攻击日志，默认为访问日志。</p>
    */
   LogType?: number
 }
@@ -12031,7 +12031,7 @@ export interface DescribeDomainDetailsSaasResponse {
  */
 export interface DeleteExportRequest {
   /**
-   * 日志导出ID
+   * <p>日志导出ID，可以通过DescribeExports接口获取</p>
    */
   ExportId: string
 }

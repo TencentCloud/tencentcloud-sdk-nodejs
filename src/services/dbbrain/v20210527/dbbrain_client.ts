@@ -30,6 +30,7 @@ import {
   CancelDBAutonomyActionResponse,
   OpenAuditServiceResponse,
   DescribeUserAutonomyProfileResponse,
+  DescribeTopSpaceTablesV2Request,
   DescribeRedisTopHotKeysRequest,
   CreateDBDiagReportTaskRequest,
   DescribeDBDiagReportContentRequest,
@@ -49,6 +50,7 @@ import {
   DescribeDBAutonomyActionsResponse,
   DescribeSlowLogTopSqlsRequest,
   DescribeRedisBigKeyAnalysisTasksResponse,
+  PostgresSpaceObjectItem,
   DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
   AuditInstanceInfo,
@@ -115,7 +117,7 @@ import {
   CreateAuditLogFileResponse,
   AuditInstance,
   IndexesToBuild,
-  OpenAuditServiceRequest,
+  MongoCollectionDetail,
   DescribeDatabaseAutonomyStatusResponse,
   DeleteSqlFiltersResponse,
   DescribeHealthScoreTimeSeriesRequest,
@@ -183,6 +185,7 @@ import {
   CreateMongoDBKillTaskRequest,
   DescribeTopSpaceTablesRequest,
   DescribeRedisTopCostCommandsResponse,
+  OpenAuditServiceRequest,
   SchemaSpaceData,
   DescribeAllUserContactRequest,
   MySqlProcess,
@@ -202,6 +205,7 @@ import {
   CreateSchedulerMailProfileResponse,
   RedisCmdInfo,
   DescribeAlarmTemplateResponse,
+  MongoDBTableSpaceItem,
   DescribeTopSpaceSchemaTimeSeriesRequest,
   DescribeDBAuditLogTopSqlsResponse,
   DescribeIndexRecommendAggregationSlowLogsResponse,
@@ -227,6 +231,7 @@ import {
   CreateSecurityAuditLogExportTaskResponse,
   SchemaItem,
   DescribeRedisCommandOverviewResponse,
+  StatisticInfo,
   CreateSqlFilterResponse,
   DescribeSlowLogUserHostStatsRequest,
   TagPair,
@@ -240,7 +245,7 @@ import {
   VerifyUserAccountResponse,
   DescribeSlowLogTimeSeriesStatsResponse,
   DescribeProxyProcessStatisticsRequest,
-  StatisticInfo,
+  MysqlSpaceObjectItem,
   MonitorFloatMetric,
   ModifyAlarmPolicyRequest,
   CreateMongoDBKillTaskResponse,
@@ -250,6 +255,7 @@ import {
   CreateAuditLogFileRequest,
   DeleteAuditLogFileRequest,
   ModifyDiagDBInstanceConfResponse,
+  DescribeTopSpaceTablesV2Response,
   DescribeUserSqlAdviceResponse,
   DescribeDBSpaceStatusResponse,
   SQLFilter,
@@ -943,6 +949,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProxyProcessStatisticsResponse) => void
   ): Promise<DescribeProxyProcessStatisticsResponse> {
     return this.request("DescribeProxyProcessStatistics", req, cb)
+  }
+
+  /**
+   * 表级空间 Top 对象查询（融合接口，多产品统一入口），按 SortBy 指定的排序字段返回实例内空间占用 Top N 的表/集合。支持产品：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）、dcdb（TDSQL MySQL 版）、tdsql（TDSQL）、mariadb（云数据库 MariaDB）。返回值根据产品类型返回对应字段：MySQL 系列返回 MysqlObjects，PostgreSQL 返回 PostgresObjects（PG 的 relation/bloat 字段与 MySQL 语义不同），MongoDB 返回 MongodbObjects。
+   */
+  async DescribeTopSpaceTablesV2(
+    req: DescribeTopSpaceTablesV2Request,
+    cb?: (error: string, rep: DescribeTopSpaceTablesV2Response) => void
+  ): Promise<DescribeTopSpaceTablesV2Response> {
+    return this.request("DescribeTopSpaceTablesV2", req, cb)
   }
 
   /**

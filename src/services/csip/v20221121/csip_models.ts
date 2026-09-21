@@ -34233,57 +34233,69 @@ export interface ComplianceTermItem {
  */
 export interface BackupLog {
   /**
-   * 索引
+   * <p>索引</p>
    */
   Id: number
   /**
-   * 索引开始时间
+   * <p>索引开始时间</p>
    */
   IndexStartTime: number
   /**
-   * 索引结束时间
+   * <p>索引结束时间</p>
    */
   IndexEndTime: number
   /**
-   * 备份后压缩的大小，单位M
+   * <p>备份后压缩的大小，单位M</p>
    */
   BackupSize: number
   /**
-   * 日志状态 0备份未完成， 1备份文件，2恢复中，3已恢复，4.已删除
+   * <p>日志状态 0备份未完成， 1备份文件，2恢复中，3已恢复，4.已删除</p>
    */
   Status: number
   /**
-   * 恢复剩余的分钟数，分钟，需要前端转换
+   * <p>恢复剩余的分钟数，分钟，需要前端转换</p>
    */
   RestoreProcessRemindTime?: number
   /**
-   * 恢复日志保留的时间
+   * <p>恢复日志保留的时间</p>
    */
   RestoreRemindTime?: number
   /**
-   * 恢复索引大小
+   * <p>恢复索引大小</p>
    */
   RestoreIndexSize?: number
   /**
-   * 恢复日志执行结束时间
+   * <p>恢复日志执行结束时间</p>
    */
   RestoreEndTime?: number
   /**
-   * 备份所属的appId
+   * <p>备份所属的appId</p>
    */
   AppId?: number
   /**
-   * 备份所属的资产ID
+   * <p>备份所属的资产ID</p>
    */
   AssetId?: number
   /**
-   * 账号昵称
+   * <p>账号昵称</p>
    */
   NickName?: string
   /**
-   * 资产所属账号uin
+   * <p>资产所属账号uin</p>
    */
   Uin?: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>实例类型</p><p>枚举值：</p><ul><li>cdb：  cdb</li><li>mariadb： mariadb</li></ul>
+   */
+  AssetType?: string
 }
 
 /**

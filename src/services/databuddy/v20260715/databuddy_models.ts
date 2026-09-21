@@ -32,107 +32,86 @@ export interface DependOnBrief {
 }
 
 /**
- * 文件详情
+ * ListConsoleGroupUsers请求参数结构体
  */
-export interface FileInfo {
+export interface ListConsoleGroupUsersRequest {
   /**
-   * <p>主账号 AppId</p>
+   * <p>用户组 ID</p>
+   */
+  GroupId: string
+  /**
+   * <p>用户名称或 UIN 模糊匹配</p>
+   */
+  UserKeyword?: string
+  /**
+   * <p>通过 UIN 批量查询用户信息</p>
+   */
+  UserUins?: Array<string>
+  /**
+   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;DESC&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;ASC&#39;}]，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大200</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * ListConsoleGroups请求参数结构体
+ */
+export interface ListConsoleGroupsRequest {
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大200</p>
+   */
+  PageSize?: number
+  /**
+   * <p>通过用户组 ID 批量查询</p>
+   */
+  GroupIds?: Array<string>
+  /**
+   * <p>用户组名称模糊匹配</p>
+   */
+  GroupKeyword?: string
+  /**
+   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+}
+
+/**
+ * 查询控制台用户组列表响应
+ */
+export interface ListConsoleGroupsRsp {
+  /**
+   * 用户组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId?: string
+  Items?: Array<ConsoleGroupInfo>
   /**
-   * <p>工作空间 ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 当前页码
    */
-  WorkspaceId?: string
+  PageNumber?: number
   /**
-   * <p>文件 ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 每页大小
    */
-  FileId?: string
+  PageSize?: number
   /**
-   * <p>文件名，含后缀</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总记录数
    */
-  FileName?: string
+  TotalCount?: number
   /**
-   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总页数
    */
-  FileType?: string
-  /**
-   * <p>文件在工作空间中的完整路径，以 / 开头，如 /etl/daily/demo.ipynb</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Path?: string
-  /**
-   * <p>文件运行配置</p>
-   */
-  FileConfig?: FileConfig
-  /**
-   * <p>绑定的 BundleId</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleId?: string
-  /**
-   * <p>绑定的 BundleInfo，JSON 字符串</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleInfo?: string
-  /**
-   * <p>文件状态。active=正常，deleted=已删除</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * <p>文件负责人用户名</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnerUserName?: string
-  /**
-   * <p>创建人子账号 Uin</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateUserUin?: string
-  /**
-   * <p>最近更新人子账号 Uin</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateUserUin?: string
-  /**
-   * <p>创建时间，毫秒级时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * <p>最近更新时间，毫秒级时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-  /**
-   * <p>文件存储信息。仅当请求 IncludeContent=true 时返回内容</p>
-   */
-  Storage?: FileStorage
-  /**
-   * <p>当前调用方对该文件的权限点列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Permissions?: string
-  /**
-   * <p>是否已发布</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReleaseStatus?: boolean
-  /**
-   * <p>资源模式。1=分布式，2=单节点</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceMode?: number
-  /**
-   * ZIP 异步创建时透传 Workspace 作业信息；普通同步创建或其他复用该返回结构的接口不设置该字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AsyncOperation?: AsyncOperation
+  TotalPageNumber?: number
 }
 
 /**
@@ -317,6 +296,33 @@ export interface DeleteWorkflowResponse {
 }
 
 /**
+ * 查询控制台角色列表响应
+ */
+export interface ListConsoleRolesRsp {
+  /**
+   * 角色列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ConsoleRoleInfo>
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber?: number
+}
+
+/**
  * ListConsoleUsers返回参数结构体
  */
 export interface ListConsoleUsersResponse {
@@ -359,7 +365,7 @@ export interface InnerWorkflowTaskBrief {
    */
   TaskName?: string
   /**
-   * 任务类型名称
+   * 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeName?: string
@@ -539,67 +545,67 @@ export interface AlarmBrief {
  */
 export interface WorkflowTaskNodeBrief {
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 任务ID
+   * <p>任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
-   * 任务类型名称
+   * <p>任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeName?: string
   /**
-   * 任务依赖列表
+   * <p>任务依赖列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependOnList?: Array<DependOnBrief>
   /**
-   * 任务资源组ID
+   * <p>任务资源组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 任务资源组名称
+   * <p>任务资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 任务X坐标
+   * <p>任务X坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LeftCoordinate?: number
   /**
-   * 任务Y坐标
+   * <p>任务Y坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopCoordinate?: number
   /**
-   * 任务重试策略
+   * <p>任务重试策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskRetryStrategy?: TaskRetryStrategy
   /**
-   * 依赖运行条件
+   * <p>任依赖运行条件</p><ul><li>ALL_SUCCESS: 全部成功：所有上游依赖任务均已执行并成功</li><li>ONE_SUCCESS: 至少一个成功：至少有一个上游依赖任务成功</li><li>NONE_FAILED: 目前没有失败：没有依赖任务失败，并且至少有一个依赖任务在运行中</li><li>ALL_DONE: 全部完成：所有上游依赖任务均已执行并完成（无论成功或失败</li><li>ONE_FAILED: 至少一个失败：至少有一个上游依赖任务失败</li><li>ALL_FAILED: 全部失败：所有上游依赖任务都失败</li><li>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行</li><li>ALL_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行</li><li>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游</li><li>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行</li><li>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行</li><li>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行</li><li>ADVANCED:运行条件为高级模式时配置</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependOnRunCondition?: string
   /**
-   * 高级依赖配置
+   * <p>高级依赖配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedDependencyConfig?: AdvancedDependencyConfig
   /**
-   * 内嵌工作流任务节点
+   * <p>内嵌工作流任务节点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InnerTask?: WorkflowTaskNodeBrief
@@ -779,18 +785,17 @@ export interface UpdateWorkflowRequest {
  */
 export interface TaskRunConditionRule {
   /**
-   * 上游任务ID
+   * <p>上游任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamTaskId?: string
   /**
-   * 上游任务名称
+   * <p>上游任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamTaskName?: string
   /**
-   * 任务可运行条件
-支持的状态值： - SUCCESS: 成功 - FAILED: 失败 - UPSTREAM_FAILED: 上游失败 - EXCLUDED: 排除运行
+   * <p>任务可运行条件<br>支持的状态值： - SUCCESS: 成功 - FAILED: 失败 - UPSTREAM_FAILED: 上游失败 - EXCLUDED: 排除运行</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowedStates?: Array<string>
@@ -801,28 +806,17 @@ export interface TaskRunConditionRule {
  */
 export interface ResourceGroupInfo {
   /**
-   * 资源组ID
+   * <p>资源组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 资源组名称
+   * <p>资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 资源组状态
-COMPUTE_RESOURCE_STATUS_UNSPECIFIED 未指定
-COMPUTE_RESOURCE_STATUS_PENDING_CREATE 待创建
-COMPUTE_RESOURCE_STATUS_CREATING 创建中
-COMPUTE_RESOURCE_STATUS_RUNNING 运行中
-COMPUTE_RESOURCE_STATUS_STOPPED 已停止
-COMPUTE_RESOURCE_STATUS_STOPPING 停止中
-COMPUTE_RESOURCE_STATUS_STARTING 启动中
-COMPUTE_RESOURCE_STATUS_UPDATING 更新中
-COMPUTE_RESOURCE_STATUS_DELETING 删除中
-COMPUTE_RESOURCE_STATUS_DELETED 已删除
-COMPUTE_RESOURCE_STATUS_FAILED  失败
+   * <p>资源组状态</p><p>参数格式：0 // 未指定 1 // 待创建 2 // 创建中 3 // 运行中 4 // 已停止 5 // 停止中 6 // 启动中 7 // 更新中 8 // 删除中 9 // 已删除 10 // 用户主动启动 / 自动启动（有任务提交且自动启停开启） 11 // 可用: 仅存在于数据计算型 12 // 不可用: 仅存在于数据计算型 13 // 失败</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupStatus?: string
@@ -841,6 +835,27 @@ export interface UnbindWorkflowBundleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 修改控制台用户组响应
+ */
+export interface UpdateConsoleGroupRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
+}
+
+/**
+ * UnbindWorkflowBundleRsp
+ */
+export interface UnbindWorkflowBundleRsp {
+  /**
+   * 操作状态，true 表示成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: boolean
 }
 
 /**
@@ -919,6 +934,16 @@ export interface ListWorkflowsRequest {
 }
 
 /**
+ * 删除控制台用户组响应
+ */
+export interface DeleteConsoleGroupsRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
+}
+
+/**
  * ListWorkflowRuns请求参数结构体
  */
 export interface ListWorkflowRunsRequest {
@@ -981,64 +1006,57 @@ export interface ListWorkflowRunsRequest {
  */
 export interface WorkflowTriggerConfiguration {
   /**
-   * 调度配置ID，创建时无需传入，由服务端生成
+   * <p>调度配置ID，创建时无需传入，由服务端生成</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerId?: string
   /**
-   * 调度状态 启动：START，暂停：PAUSE
+   * <p>调度状态 启动：START，暂停：PAUSE</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerStatus?: string
   /**
-   * 触发方式，
-- 定时触发：TIME_TRIGGER
-- 持续运行：CONTINUE_RUN
-
-注意：
-- TIME_TRIGGER 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；
-- CONTINUE_RUN 模式下，AdvancedConfig必填；
+   * <p>触发方式，</p><ul><li>定时触发：TIME_TRIGGER</li><li>持续运行：CONTINUE_RUN</li></ul><p>注意：</p><ul><li>TIME_TRIGGER 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；</li><li>CONTINUE_RUN 模式下，AdvancedConfig必填；</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerMode?: string
   /**
-   * 调度时区
+   * <p>调度时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerTimeZone?: string
   /**
-   * 调度生效时间，单位：毫秒时间戳。必须小于 EndTime
+   * <p>调度生效时间，单位：毫秒时间戳。必须小于 EndTime</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 调度结束时间，单位：毫秒时间戳。必须大于 StartTime
+   * <p>调度结束时间，单位：毫秒时间戳。必须大于 StartTime</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 配置方式，常规：COMMON，CRON表达式：CRON_EXPRESSION
+   * <p>配置方式，常规：COMMON，CRON表达式：CRON_EXPRESSION</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigMode?: string
   /**
-   * 周期类型：支持的类型为 ONEOFF_CYCLE: 一次性 YEAR_CYCLE: 年 MONTH_CYCLE: 月 WEEK_CYCLE: 周 DAY_CYCLE: 天
-HOUR_CYCLE: 小时 MINUTE_CYCLE: 分钟 CRONTAB_CYCLE: crontab表达式类型
+   * <p>周期类型：支持的类型为 ONEOFF_CYCLE: 一次性 YEAR_CYCLE: 年 MONTH_CYCLE: 月 WEEK_CYCLE: 周 DAY_CYCLE: 天<br>HOUR_CYCLE: 小时 MINUTE_CYCLE: 分钟 CRONTAB_CYCLE: crontab表达式类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * cron表达式
+   * <p>cron表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrontabExpression?: string
   /**
-   * Json格式，对账使用
+   * <p>Json格式，对账使用</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraInfo?: string
   /**
-   * 高级配置
+   * <p>高级配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedConfig?: WorkflowTriggerAdvancedConfiguration
@@ -1366,6 +1384,28 @@ export interface AsyncOperation {
 }
 
 /**
+ * 角色元数据
+ */
+export interface RoleMetaData {
+  /**
+   * 创建者
+   */
+  Creator?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新者
+   */
+  Updater?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
  * 查询工作流运行详情响应。
  */
 export interface GetWorkflowRunRsp {
@@ -1374,6 +1414,20 @@ export interface GetWorkflowRunRsp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowRun?: WorkflowRun
+}
+
+/**
+ * ListConsoleGroupUsers返回参数结构体
+ */
+export interface ListConsoleGroupUsersResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: ListConsoleGroupUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1429,6 +1483,212 @@ export interface ScheduleBizEnumBrief {
 }
 
 /**
+ * 工作流任务运行信息
+ */
+export interface WorkflowTaskRun {
+  /**
+   * <p>任务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * <p>任务运行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowTaskRunId?: string
+  /**
+   * <p>运行状态。取值参考工作流任务运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunState?: string
+  /**
+   * <p>工作空间ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkspaceId?: string
+  /**
+   * <p>工作流ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * <p>工作流运行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunId?: string
+  /**
+   * <p>任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeName?: string
+  /**
+   * <p>任务版本ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskVersionId?: string
+  /**
+   * <p>触发类型 (参考SchedulerTriggerType枚举)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerType?: string
+  /**
+   * <p>所属资源组ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupId?: string
+  /**
+   * <p>错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeString?: string
+  /**
+   * <p>运行用户UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserUin?: string
+  /**
+   * <p>运行用户名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserName?: string
+  /**
+   * <p>创建人UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserUin?: string
+  /**
+   * <p>执行平台执行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobId?: string
+  /**
+   * <p>创建时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * <p>依赖任务完成时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependenceFinishedTime?: string
+  /**
+   * <p>运行开始时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunStartTime?: string
+  /**
+   * <p>运行结束时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunEndTime?: string
+  /**
+   * <p>运行时长，单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunCostTime?: string
+  /**
+   * <p>等待时长（依赖就绪到开始运行的等待耗时），单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaitTime?: string
+  /**
+   * <p>下发执行平台时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IssueTime?: string
+  /**
+   * <p>时区</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeZone?: string
+  /**
+   * <p>依赖上游任务ID列表。保留字段，暂时返回为[]</p><p>保留字段，暂时返回为[]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependOnList?: Array<string>
+  /**
+   * <p>运行参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunParams?: string
+  /**
+   * <p>任务扩展信息，包含脚本路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeExtensions?: string
+  /**
+   * <p>任务X坐标</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LeftCoordinate?: number
+  /**
+   * <p>任务Y坐标</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopCoordinate?: number
+  /**
+   * <p>重试次数，为 0 则表示首次运行</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryTimes?: number
+  /**
+   * <p>工作流名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * <p>重跑次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RerunTimes?: number
+  /**
+   * <p>是否最新一次运行</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLatestRun?: boolean
+  /**
+   * <p>资源组信息列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupInfoList?: Array<ResourceGroupInfo>
+  /**
+   * <p>运行结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunResult?: string
+  /**
+   * <p>任务依赖运行条件</p><p>ALL_SUCCESS: 全部成功：所有上游依赖任务均已执行并成功<br>ONE_SUCCESS: 至少一个成功：至少有一个上游依赖任务成功<br>NONE_FAILED: 目前没有失败：没有依赖任务失败，并且至少有一个依赖任务在运行中<br>ALL_DONE: 全部完成：所有上游依赖任务均已执行并完成（无论成功或失败<br>ONE_FAILED: 至少一个失败：至少有一个上游依赖任务失败<br>ALL_FAILED: 全部失败：所有上游依赖任务都失败<br>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行<br>ALL_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行<br>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游<br>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行<br>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行<br>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行<br>ADVANCED:运行条件为高级模式时配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependOnRunCondition?: string
+  /**
+   * <p>高级依赖配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdvancedDependencyConfig?: AdvancedDependencyConfig
+  /**
+   * <p>内嵌工作流任务信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerTask?: InnerWorkflowTaskBrief
+  /**
+   * <p>计划调度时间</p><p>参数格式：毫秒时间戳，UTC</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduledTime?: string
+}
+
+/**
  * 内嵌工作流迭代中的任务运行简要信息
  */
 export interface InnerWorkflowTaskRunIterationBrief {
@@ -1472,6 +1732,24 @@ export interface InnerWorkflowTaskRunIterationBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorCodeString?: string
+}
+
+/**
+ * CreateConsoleGroup请求参数结构体
+ */
+export interface CreateConsoleGroupRequest {
+  /**
+   * <p>用户组名称</p>
+   */
+  GroupName: string
+  /**
+   * <p>用户组别名</p>
+   */
+  GroupNickname?: string
+  /**
+   * <p>用户组描述</p>
+   */
+  Description?: string
 }
 
 /**
@@ -1592,6 +1870,16 @@ export interface AddConsoleUsersRequest {
    * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul>
    */
   RoleIds: Array<string>
+}
+
+/**
+ * 创建控制台用户组响应
+ */
+export interface CreateConsoleGroupRsp {
+  /**
+   * 创建成功的用户组 ID
+   */
+  GroupId?: string
 }
 
 /**
@@ -1735,7 +2023,7 @@ export interface WorkflowBrief {
    */
   ResourceGroupInfoList?: Array<ResourceGroupInfo>
   /**
-   * <p>工作流权限信息</p>
+   * <p>授权权限类型<br>PERMISSION_TYPE_UNSPECIFIED：未指定权限<br>MANAGE : 管理权限：包含所有操作权限<br>RUN : 运行权限：可执行实体<br>VIEW : 查看权限：可查看实体内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Permission?: string
@@ -1817,14 +2105,64 @@ export interface AddConsoleUsersResponse {
 }
 
 /**
- * UnbindWorkflowBundleRsp
+ * ListConsoleGroups返回参数结构体
  */
-export interface UnbindWorkflowBundleRsp {
+export interface ListConsoleGroupsResponse {
   /**
-   * 操作状态，true 表示成功
+   * <p>返回结果</p>
+   */
+  Data?: ListConsoleGroupsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 控制台角色信息（对外标准版，与内部 Role 解耦）
+ */
+export interface ConsoleRoleInfo {
+  /**
+   * 角色基本信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: boolean
+  BasicInfo?: RoleBasicInfo
+  /**
+   * 角色元信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaData?: RoleMetaData
+  /**
+   * 角色权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permissions?: Array<RolePermission>
+}
+
+/**
+ * 控制台用户组成员信息（对外标准版，与内部 GroupUserInfo 解耦）
+ */
+export interface ConsoleGroupUserInfo {
+  /**
+   * 用户 UIN
+   */
+  UserUin?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 昵称
+   */
+  Nickname?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -1935,209 +2273,172 @@ export interface RunWorkflowRequest {
 }
 
 /**
- * 工作流任务运行信息
+ * UpdateConsoleGroup请求参数结构体
  */
-export interface WorkflowTaskRun {
+export interface UpdateConsoleGroupRequest {
   /**
-   * <p>任务名称</p>
+   * <p>用户组 ID</p>
+   */
+  GroupId: string
+  /**
+   * <p>修改标识：USER_GROUP_OPER_TYPE_ADD_USER(1)=添加成员、USER_GROUP_OPER_TYPE_DELETE_USER(2)=删除成员、USER_GROUP_OPER_TYPE_BASIC_INFO(3)=基础信息（别名和描述）</p>
+   */
+  OperType: number
+  /**
+   * <p>用户组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>用户组别名</p>
+   */
+  GroupNickname?: string
+  /**
+   * <p>用户组描述</p>
+   */
+  Description?: string
+  /**
+   * <p>成员 UIN 列表（OperType 为添加/删除成员时使用）</p>
+   */
+  UserUins?: Array<string>
+}
+
+/**
+ * 控制台用户组信息（对外标准版，与内部 UserGroupRoleInfo 解耦）
+ */
+export interface ConsoleGroupInfo {
+  /**
+   * 用户组 ID
+   */
+  GroupId?: string
+  /**
+   * 用户组名称
+   */
+  GroupName?: string
+  /**
+   * 角色列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskName?: string
+  Roles?: Array<RoleBasicInfo>
   /**
-   * <p>任务运行ID</p>
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 用户组下用户数量
+   */
+  UserCount?: number
+  /**
+   * 用户组类型。取值为枚举数值的字符串形式："0"=控制台系统类型（包含全部user）、"1"=控制台自定义类型、"2"=工作空间系统类型、"3"=工作空间自定义类型
+   */
+  GroupType?: string
+}
+
+/**
+ * 文件详情
+ */
+export interface FileInfo {
+  /**
+   * <p>主账号 AppId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowTaskRunId?: string
+  AppId?: string
   /**
-   * <p>运行状态。取值参考工作流任务运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunState?: string
-  /**
-   * <p>工作空间ID</p>
+   * <p>工作空间 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: string
   /**
-   * <p>工作流ID</p>
+   * <p>文件 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId?: string
+  FileId?: string
   /**
-   * <p>工作流运行ID</p>
+   * <p>文件名，含后缀</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowRunId?: string
+  FileName?: string
   /**
-   * <p>任务ID</p>
+   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId?: string
+  FileType?: string
   /**
-   * <p>任务类型名称</p>
+   * <p>文件在工作空间中的完整路径，以 / 开头，如 /etl/daily/demo.ipynb</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskTypeName?: string
+  Path?: string
   /**
-   * <p>任务版本ID</p>
+   * <p>文件运行配置</p>
+   */
+  FileConfig?: FileConfig
+  /**
+   * <p>绑定的 BundleId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskVersionId?: string
+  BundleId?: string
   /**
-   * <p>触发类型 (参考SchedulerTriggerType枚举)</p>
+   * <p>绑定的 BundleInfo，JSON 字符串</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TriggerType?: string
+  BundleInfo?: string
   /**
-   * <p>所属资源组ID</p>
+   * <p>文件状态。active=正常，deleted=已删除</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceGroupId?: string
+  Status?: string
   /**
-   * <p>错误码</p>
+   * <p>文件负责人用户名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorCodeString?: string
+  OwnerUserName?: string
   /**
-   * <p>运行用户UIN</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserUin?: string
-  /**
-   * <p>运行用户名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserName?: string
-  /**
-   * <p>创建人UIN</p>
+   * <p>创建人子账号 Uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserUin?: string
   /**
-   * <p>执行平台执行ID</p>
+   * <p>最近更新人子账号 Uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobId?: string
+  UpdateUserUin?: string
   /**
-   * <p>创建时间，单位：毫秒时间戳</p>
+   * <p>创建时间，毫秒级时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * <p>更新时间，单位：毫秒时间戳</p>
+   * <p>最近更新时间，毫秒级时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * <p>依赖任务完成时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>文件存储信息。仅当请求 IncludeContent=true 时返回内容</p>
    */
-  DependenceFinishedTime?: string
+  Storage?: FileStorage
   /**
-   * <p>运行开始时间，单位：毫秒时间戳</p>
+   * <p>当前调用方对该文件的权限点列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunStartTime?: string
+  Permissions?: string
   /**
-   * <p>运行结束时间，单位：毫秒时间戳</p>
+   * <p>是否已发布</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunEndTime?: string
+  ReleaseStatus?: boolean
   /**
-   * <p>运行时长，单位：秒</p>
+   * <p>资源模式。1=分布式，2=单节点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunCostTime?: string
+  ResourceMode?: number
   /**
-   * <p>等待时长（依赖就绪到开始运行的等待耗时），单位：秒</p>
+   * ZIP 异步创建时透传 Workspace 作业信息；普通同步创建或其他复用该返回结构的接口不设置该字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WaitTime?: string
-  /**
-   * <p>下发执行平台时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IssueTime?: string
-  /**
-   * <p>时区</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimeZone?: string
-  /**
-   * <p>依赖上游任务ID列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DependOnList?: Array<string>
-  /**
-   * <p>运行参数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunParams?: string
-  /**
-   * <p>任务扩展信息，包含脚本路径</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskTypeExtensions?: string
-  /**
-   * <p>任务X坐标</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LeftCoordinate?: number
-  /**
-   * <p>任务Y坐标</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopCoordinate?: number
-  /**
-   * <p>重试次数，为 0 则表示首次运行</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RetryTimes?: number
-  /**
-   * <p>工作流名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowName?: string
-  /**
-   * <p>重跑次数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RerunTimes?: number
-  /**
-   * <p>是否最新一次运行</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsLatestRun?: boolean
-  /**
-   * <p>资源组信息列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupInfoList?: Array<ResourceGroupInfo>
-  /**
-   * <p>运行结果</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunResult?: string
-  /**
-   * <p>依赖运行条件</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DependOnRunCondition?: string
-  /**
-   * <p>高级依赖配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AdvancedDependencyConfig?: AdvancedDependencyConfig
-  /**
-   * <p>内嵌工作流任务信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerTask?: InnerWorkflowTaskBrief
-  /**
-   * <p>计划调度时间</p><p>参数格式：毫秒时间戳，UTC</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScheduledTime?: string
+  AsyncOperation?: AsyncOperation
 }
 
 /**
@@ -2189,46 +2490,17 @@ export interface DeleteFileResponse {
 }
 
 /**
- * ListWorkflowRunsRsp
+ * CreateConsoleGroup返回参数结构体
  */
-export interface ListWorkflowRunsRsp {
+export interface CreateConsoleGroupResponse {
   /**
-   * 当前页码
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>返回结果</p>
    */
-  PageNumber?: number
+  Data?: CreateConsoleGroupRsp
   /**
-   * 每页大小
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PageSize?: number
-  /**
-   * 总记录数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalPageNumber?: number
-  /**
-   * 工作流运行列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<WorkflowRun>
-  /**
-   * 工作流运行状态数量统计。
-统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BizStateEnumInfos?: Array<ScheduleBizEnumBrief>
-  /**
-   * 工作流运行错误码数量统计。
-统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BizErrorCodeEnumInfos?: Array<ScheduleBizEnumBrief>
+  RequestId?: string
 }
 
 /**
@@ -2344,6 +2616,16 @@ export interface AdvancedDependencyConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Conditions?: Array<TaskRunConditionRule>
+}
+
+/**
+ * DeleteConsoleGroups请求参数结构体
+ */
+export interface DeleteConsoleGroupsRequest {
+  /**
+   * <p>要删除的用户组 ID 列表</p>
+   */
+  GroupIds: Array<string>
 }
 
 /**
@@ -2471,7 +2753,7 @@ export interface WorkflowRun {
    */
   PendingCostTime?: string
   /**
-   * <p>运行状态。取值参考工作流运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed</p>
+   * <p>运行状态。CREATE(&quot;初始化&quot;),     QUEUED(&quot;等待中&quot;),     PENDING(&quot;准备中&quot;),     RUNNING(&quot;运行中&quot;),     SKIPPED(&quot;跳过运行&quot;),     SUCCESS(&quot;成功&quot;),     FAILED(&quot;失败&quot;),     TERMINATING(&quot;终止中&quot;),     TERMINATED(&quot;终止&quot;),     CANCELLED(&quot;被手动终止&quot;)等</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunState?: string
@@ -2581,6 +2863,49 @@ export interface TaskTypeProperty {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PropertyValue?: string
+}
+
+/**
+ * ListWorkflowRunsRsp
+ */
+export interface ListWorkflowRunsRsp {
+  /**
+   * 当前页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber?: number
+  /**
+   * 工作流运行列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<WorkflowRun>
+  /**
+   * 工作流运行状态数量统计。
+统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizStateEnumInfos?: Array<ScheduleBizEnumBrief>
+  /**
+   * 工作流运行错误码数量统计。
+统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizErrorCodeEnumInfos?: Array<ScheduleBizEnumBrief>
 }
 
 /**
@@ -2697,6 +3022,20 @@ export interface RemoveConsoleUsersRequest {
    * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
    */
   UserUins: Array<string>
+}
+
+/**
+ * 角色权限
+ */
+export interface RolePermission {
+  /**
+   * 模块ID
+   */
+  ModuleId?: string
+  /**
+   * 权限点
+   */
+  Permissions?: string
 }
 
 /**
@@ -2827,6 +3166,20 @@ export interface AdvancedParameter {
 }
 
 /**
+ * UpdateConsoleGroup返回参数结构体
+ */
+export interface UpdateConsoleGroupResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: UpdateConsoleGroupRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 控制台用户信息（规范化，与内部 UserDetailInfo 解耦）
  */
 export interface ConsoleUserInfo {
@@ -2915,6 +3268,20 @@ QueuingMode为ON时，MaxConcurrentNum 设置才生效；只能输入大于0的�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxConcurrentNum?: number
+}
+
+/**
+ * DeleteConsoleGroups返回参数结构体
+ */
+export interface DeleteConsoleGroupsResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: DeleteConsoleGroupsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3012,6 +3379,51 @@ export interface CreateWorkflowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListConsoleRoles请求参数结构体
+ */
+export interface ListConsoleRolesRequest {
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大200</p>
+   */
+  PageSize?: number
+  /**
+   * <p>角色名称或描述模糊匹配</p>
+   */
+  RoleKeyword?: string
+}
+
+/**
+ * 查询控制台用户组成员列表响应
+ */
+export interface ListConsoleGroupUsersRsp {
+  /**
+   * 用户组成员列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ConsoleGroupUserInfo>
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber?: number
 }
 
 /**
@@ -3268,6 +3680,20 @@ export interface RoleBasicInfo {
 }
 
 /**
+ * ListConsoleRoles返回参数结构体
+ */
+export interface ListConsoleRolesResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: ListConsoleRolesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateFile返回参数结构体
  */
 export interface UpdateFileResponse {
@@ -3336,7 +3762,7 @@ export interface GetWorkflowTaskRunRsp {
    */
   TaskId?: string
   /**
-   * <p>任务类型名称</p>
+   * 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeName?: string
@@ -3426,7 +3852,7 @@ export interface GetWorkflowTaskRunRsp {
    */
   TimeZone?: string
   /**
-   * <p>依赖上游任务ID列表</p>
+   * <p>依赖上游任务ID列表。保留字段，暂时返回为[]</p><p>保留字段，暂时返回为[]</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependOnList?: Array<string>

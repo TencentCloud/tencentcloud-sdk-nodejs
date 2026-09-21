@@ -7983,14 +7983,6 @@ export interface PassInvoiceInfo {
    * <p>税收分类编码</p>
    */
   TaxClassifyCode?: string
-  /**
-   * <p>通行费车牌号</p>
-   */
-  CarType?: string
-  /**
-   * <p>通行费车辆类型</p>
-   */
-  PlateNumber?: string
 }
 
 /**

@@ -4201,29 +4201,27 @@ export interface DescribeOriginACLResponse {
  */
 export interface SharedCNAMEInfo {
   /**
-   * 共享CNAME类型：取值范围如下：
-<li>custom：由用户创建的自定义共享CNAME</li>
-<li>ip-ssl：IP SSL类型的共享CNAME</li>
+   * <p>共享CNAME类型：取值范围如下：</p><li>custom：由用户创建的自定义共享CNAME</li><li>ip-ssl：IP SSL类型的共享CNAME</li><li>zero-rating：免流类型的共享CNAME</li><li>preset：预置资源类型的共享CNAME</li>
    */
   Type?: string
   /**
-   * 共享CNAME名称。
+   * <p>共享CNAME名称。</p>
    */
   SharedCNAME?: string
   /**
-   * 描述。
+   * <p>描述。</p>
    */
   Description?: string
   /**
-   * 当type为ip-ssl时，展示该共享CNAME关联的 IP SSL 配置信息。
+   * <p>当type为ip-ssl时，展示该共享CNAME关联的 IP SSL 配置信息。</p>
    */
   IPSSLConfig?: IPSSLConfig
   /**
-   * 共享CNAME绑定的加速域名数量。
+   * <p>共享CNAME绑定的加速域名数量。</p>
    */
   BindDomainCount?: number
   /**
-   * 加入该共享CNAME的加速域名列表。当加入的域名数量超过100个时，只返回前100个加速域名。
+   * <p>加入该共享CNAME的加速域名列表。当加入的域名数量超过100个时，只返回前100个加速域名。</p>
    */
   AccelerationDomains?: Array<ReferenceHolder>
 }
@@ -7712,6 +7710,24 @@ export interface ModifyL7AccRulePriorityResponse {
 }
 
 /**
+ * DescribeZoneCustomVariables返回参数结构体
+ */
+export interface DescribeZoneCustomVariablesResponse {
+  /**
+   * <p>站点级自定义变量列表。</p>
+   */
+  CustomVariables?: Array<CustomVariable>
+  /**
+   * <p>站点级自定义变量运算规则。</p>
+   */
+  CustomVariableOperations?: Array<CustomVariableOperation>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * API 服务配置。
  */
 export interface APIService {
@@ -8664,6 +8680,16 @@ export interface TimingDataItem {
    * 具体数值。
    */
   Value?: number
+}
+
+/**
+ * DescribeZoneCustomVariables请求参数结构体
+ */
+export interface DescribeZoneCustomVariablesRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
 }
 
 /**
@@ -14651,6 +14677,16 @@ export interface IdentifyZoneRequest {
 }
 
 /**
+ * ModifyZoneCustomVariables返回参数结构体
+ */
+export interface ModifyZoneCustomVariablesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * [Vary 特性](https://cloud.tencent.com/document/product/1552/89301) 配置参数。
  */
 export interface VaryParameters {
@@ -17040,6 +17076,24 @@ export interface IPSSLSetting {
    * 要绑定的IP SSL的所属域名。
    */
   AssociatedDomain: string
+}
+
+/**
+ * ModifyZoneCustomVariables请求参数结构体
+ */
+export interface ModifyZoneCustomVariablesRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>站点级自定义变量列表。CustomVariable.Name 需要使用 user.zone. 作为前缀。变量按照数组顺序依次初始化，InitialValue 仅支持引用位于当前变量之前的变量，不支持引用当前变量自身或位于当前变量之后的变量。</p>
+   */
+  CustomVariables?: Array<CustomVariable>
+  /**
+   * <p>站点级自定义变量运算规则。运算中支持引用已定义的站点级自定义变量。此列表当前只支持填写一项规则，多填无效。</p>
+   */
+  CustomVariableOperations?: Array<CustomVariableOperation>
 }
 
 /**
