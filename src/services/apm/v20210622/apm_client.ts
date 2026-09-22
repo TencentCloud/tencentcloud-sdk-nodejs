@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  OpenApmPaidVersionRequest,
   DescribeApmAssociationResponse,
   CreateApmInstanceRequest,
   DescribeApmVulnerabilityCountResponse,
@@ -102,6 +103,7 @@ import {
   ModifyGeneralApmApplicationConfigRequest,
   DescribeApmServiceMetricRequest,
   CreateApmPrometheusRuleRequest,
+  OpenApmPaidVersionResponse,
   DescribeApmAllVulCountRequest,
   TkeMeta,
   Instrument,
@@ -135,6 +137,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("apm.tencentcloudapi.com", "2021-06-22", clientConfig)
+  }
+
+  /**
+   * 开通付费版本
+   */
+  async OpenApmPaidVersion(
+    req?: OpenApmPaidVersionRequest,
+    cb?: (error: string, rep: OpenApmPaidVersionResponse) => void
+  ): Promise<OpenApmPaidVersionResponse> {
+    return this.request("OpenApmPaidVersion", req, cb)
   }
 
   /**

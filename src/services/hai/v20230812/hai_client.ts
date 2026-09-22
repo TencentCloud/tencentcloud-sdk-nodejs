@@ -283,7 +283,7 @@ export class Client extends AbstractClient {
    * 本接口(GetServicePodLogs)用于查询推理服务Pod日志
    */
   async GetServicePodLogs(
-    req?: GetServicePodLogsRequest,
+    req: GetServicePodLogsRequest,
     cb?: (error: string, rep: GetServicePodLogsResponse) => void
   ): Promise<GetServicePodLogsResponse> {
     return this.request("GetServicePodLogs", req, cb)

@@ -3363,6 +3363,16 @@ export interface DescribeResourcePermissionResult {
 }
 
 /**
+ * ResetPGAccountPassword返回参数结构体
+ */
+export interface ResetPGAccountPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCustomLoginKey请求参数结构体
  */
 export interface CreateCustomLoginKeyRequest {
@@ -4537,6 +4547,20 @@ export interface EnvPkgCreditsUsage {
    * <p>资源点按量用量</p>
    */
   ReportValue?: number
+}
+
+/**
+ * Key-Value类型，模拟的 object 类型
+ */
+export interface ObjectKV {
+  /**
+   * object 的 key
+   */
+  Key?: string
+  /**
+   * object key 对应的 value
+   */
+  Value?: string
 }
 
 /**
@@ -7057,6 +7081,48 @@ export interface DescribeEnvLimitResponse {
 }
 
 /**
+ * DescribeTaskResult返回参数结构体
+ */
+export interface DescribeTaskResultResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务类型</p><p>枚举值：</p><ul><li>PGUserMigration： PG Migrate 任务</li></ul>
+   */
+  TaskType?: string
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>Failed： 失败</li><li>Succeed： 成功</li><li>Accepted： 已接收</li><li>Running： 运行中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>当前步骤</p>
+   */
+  Phase?: string
+  /**
+   * <p>失败原因</p>
+   */
+  Reason?: string
+  /**
+   * <p>创建时间</p><p>参数格式：2026-05-26T11:26:14+08:00</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>最后更新时间</p><p>参数格式：2026-05-26T11:26:14+08:00</p>
+   */
+  UpdatedAt?: string
+  /**
+   * <p>任务参数</p>
+   */
+  Params?: Array<ObjectKV>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReleaseEnv返回参数结构体
  */
 export interface ReleaseEnvResponse {
@@ -7510,6 +7576,36 @@ export interface DescribeAuthDomainsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpgradePGInstanceToDedicated请求参数结构体
+ */
+export interface UpgradePGInstanceToDedicatedRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>切换时机</p><p>枚举值：</p><ul><li>0： 立即切换</li><li>1： 指定时间切换</li></ul>
+   */
+  SwitchTag: number
+  /**
+   * <p>切换开始时间</p><p>参数格式：15:04:05</p>
+   */
+  SwitchStartTime?: string
+  /**
+   * <p>切换结束时间</p><p>参数格式：15:04:05</p>
+   */
+  SwitchEndTime?: string
+  /**
+   * <p>PG 规格</p>
+   */
+  SpecCode?: string
+  /**
+   * <p>存储空间大小</p>
+   */
+  Storage?: number
 }
 
 /**
@@ -8005,6 +8101,20 @@ export interface ListTablesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Pager?: Pager
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpgradePGInstanceToDedicated返回参数结构体
+ */
+export interface UpgradePGInstanceToDedicatedResponse {
+  /**
+   * <p>任务ID</p><p>可通过DescribeTaskResult 接口查询进度</p>
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8600,6 +8710,20 @@ export interface StaticEnvironment {
 }
 
 /**
+ * DescribeTaskResult请求参数结构体
+ */
+export interface DescribeTaskResultRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId: string
+}
+
+/**
  * DeleteHTTPServiceRoute请求参数结构体
  */
 export interface DeleteHTTPServiceRouteRequest {
@@ -8733,6 +8857,20 @@ export interface WxGatewayCustomConfig {
    * 是否开启http1.0
    */
   IsAcceptHttpOne?: boolean
+}
+
+/**
+ * ResetPGAccountPassword请求参数结构体
+ */
+export interface ResetPGAccountPasswordRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>要设置的密码</p><p>入参限制：长度8 ~ 32位，不能以&quot; / &quot;开头; 必须包含以下四项，字符种类:  小写字母： [a ~ z] 大写字母：[A ～ Z] 数字：0 - 9 特殊字符：()~!@#$%^&amp;*-+=_|{}[]:&lt;&gt;,.?/` 示例值：A8b!C2d#E4f&amp;</p>
+   */
+  Password: string
 }
 
 /**

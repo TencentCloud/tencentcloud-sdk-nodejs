@@ -736,13 +736,22 @@ export interface CreateCasterPvwResponse {
 }
 
 /**
- * DescribeCasterMarkPicInfos请求参数结构体
+ * DescribeDeliverBandwidthList请求参数结构体
  */
-export interface DescribeCasterMarkPicInfosRequest {
+export interface DescribeDeliverBandwidthListRequest {
   /**
-   * 导播台ID。
+   * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
    */
-  CasterId: number
+  StartTime: string
+  /**
+   * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+支持最近三个月的数据查询，时间跨度最大是1个月。
+   */
+  EndTime: string
 }
 
 /**
@@ -1520,25 +1529,13 @@ export interface AddCasterMarkWordInfoResponse {
 }
 
 /**
- * 获取省份/运营商的播放信息。
+ * DeleteLiveSnapshotRule返回参数结构体
  */
-export interface ProIspPlaySumInfo {
+export interface DeleteLiveSnapshotRuleResponse {
   /**
-   * 省份/运营商/国家或地区。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 总流量，单位: MB。
-   */
-  TotalFlux?: number
-  /**
-   * 总请求数。
-   */
-  TotalRequest?: number
-  /**
-   * 平均下载流量，单位: MB/s。
-   */
-  AvgFluxPerSecond?: number
+  RequestId?: string
 }
 
 /**
@@ -1770,6 +1767,24 @@ export interface DescribeLiveCertResponse {
    * 证书信息。
    */
   CertInfo?: CertInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTimeShiftStreamList返回参数结构体
+ */
+export interface DescribeTimeShiftStreamListResponse {
+  /**
+   * 时间段内所有的数据量。
+   */
+  TotalSize?: number
+  /**
+   * 流列表。
+   */
+  StreamList?: Array<TimeShiftStreamInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2139,97 +2154,25 @@ export interface DeleteLiveWatermarkRuleResponse {
 }
 
 /**
- * 自适应码率转码模板，子模板，出入参数。
+ * DescribeAuditRules请求参数结构体
  */
-export interface ChildTemplateInfo {
+export interface DescribeAuditRulesRequest {
   /**
-   * <p>自适应码率转码模板，子模板Id。<br>入参时候，填写此字段，表示更新子模板，否则是新增子模板。</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>域名。</p>
+   */
+  DomainName?: string
+  /**
+   * <p>审核模板 ID 。</p>
    */
   TemplateId?: number
   /**
-   * <p>子模板名称。</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>AppName 。</p>
    */
-  TemplateName?: string
+  AppName?: string
   /**
-   * <p>视频编码：h264/h265/origin，默认origin。</p><p>origin: 保持原始编码格式。</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>流 ID 。</p>
    */
-  Vcodec?: string
-  /**
-   * <p>视频码率。范围：0kbps - 8000kbps。<br>0为保持原始码率。<br>注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VideoBitrate?: number
-  /**
-   * <p>宽，默认0。<br>范围[0-3000]。<br>数值必须是2的倍数，0是原始宽度。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Width?: number
-  /**
-   * <p>高，默认0。<br>范围[0-3000]<br>数值必须是2的倍数，0是原始高度。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Height?: number
-  /**
-   * <p>帧率，默认0。<br>范围0-60fps。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Fps?: number
-  /**
-   * <p>关键帧间隔，单位：秒。<br>默认原始的间隔。<br>范围2-6。<br>同一个父模板下面的所有子模板，gop必须相等且存在。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Gop?: number
-  /**
-   * <p>是否保留视频，0：否，1：是。默认1。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NeedVideo?: number
-  /**
-   * <p>是否保留音频，0：否，1：是。默认1。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NeedAudio?: number
-  /**
-   * <p>当设置的码率&gt;原始码率时，是否以原始码率为准。<br>0：否， 1：是<br>默认 0。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BitrateToOrig?: number
-  /**
-   * <p>当设置的高度&gt;原始高度时，是否以原始高度为准。<br>0：否， 1：是<br>默认 0。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HeightToOrig?: number
-  /**
-   * <p>当设置的帧率&gt;原始帧率时，是否以原始帧率为准。<br>0：否， 1：是<br>默认 0。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FpsToOrig?: number
-  /**
-   * <p>是否以短边作为高度，0：否，1：是。默认0。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ShortEdgeAsHeight?: number
-  /**
-   * <p>HLS 分片类型。<br>可选值：ts、fmp4。<br>注：编码方式为 H.265 时生效。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HlsContainerFormat?: string
-  /**
-   * <p>编码标签。<br>可选值：hvc1、hev1。<br>注：HLS 分片类型选择 fmp4 时生效。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HlsMp4VideoCodecTag?: string
-  /**
-   * <p>子流音频编码类型。默认为&quot;自动适配&quot;</p>
-   */
-  Acodec?: string
-  /**
-   * <p>子流音频码率</p><p>单位：Kbps</p>
-   */
-  AudioBitrate?: number
+  StreamName?: string
 }
 
 /**
@@ -2243,17 +2186,25 @@ export interface DeleteCasterMarkWordInfoResponse {
 }
 
 /**
- * DescribeLiveTranscodeTemplates返回参数结构体
+ * CreateAuditRule请求参数结构体
  */
-export interface DescribeLiveTranscodeTemplatesResponse {
+export interface CreateAuditRuleRequest {
   /**
-   * 转码模板列表。
+   * <p>推流域名。</p>
    */
-  Templates?: Array<TemplateInfo>
+  DomainName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>推流路径，与推流和播放地址中的AppName 保持一致。</p>
    */
-  RequestId?: string
+  AppName: string
+  /**
+   * <p>审核模板 ID。</p>
+   */
+  TemplateId: number
+  /**
+   * <p>流名称。 不传默认为空。</p>
+   */
+  StreamName?: string
 }
 
 /**
@@ -2906,6 +2857,16 @@ export interface ModifyLiveStreamMonitorResponse {
 }
 
 /**
+ * DescribeAuditTemplate请求参数结构体
+ */
+export interface DescribeAuditTemplateRequest {
+  /**
+   * <p>模板 ID 。</p>
+   */
+  TemplateId: number
+}
+
+/**
  * ForbidLiveDomain返回参数结构体
  */
 export interface ForbidLiveDomainResponse {
@@ -2954,21 +2915,17 @@ export interface CreateRecordTaskRequest {
 }
 
 /**
- * 拉流转推任务的时长分布信息
+ * ModifyAuditTemplate返回参数结构体
  */
-export interface TaskDurationInfo {
+export interface ModifyAuditTemplateResponse {
   /**
-   * 拉流转推任务的时间点
+   * <p>模板 ID 。</p>
    */
-  Time?: string
+  TemplateId?: number
   /**
-   * 拉流转推任务的时长，单位为分钟
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Duration?: number
-  /**
-   * 拉流转推任务的时长，单位为秒
-   */
-  DurationSecond?: number
+  RequestId?: string
 }
 
 /**
@@ -3007,6 +2964,20 @@ export interface DescribeLivePadTemplateResponse {
    * 直播垫片模板信息。
    */
   Template?: PadTemplate
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAuditTemplates返回参数结构体
+ */
+export interface DescribeAuditTemplatesResponse {
+  /**
+   * <p>审核模板列表。</p>
+   */
+  AuditTemplates?: Array<AuditTemplate>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3212,6 +3183,24 @@ export interface DescribeCasterOutputInfosRequest {
 }
 
 /**
+ * 拉流转推任务的时长分布信息
+ */
+export interface TaskDurationInfo {
+  /**
+   * 拉流转推任务的时间点
+   */
+  Time?: string
+  /**
+   * 拉流转推任务的时长，单位为分钟
+   */
+  Duration?: number
+  /**
+   * 拉流转推任务的时长，单位为秒
+   */
+  DurationSecond?: number
+}
+
+/**
  * CreateLiveCallbackTemplate返回参数结构体
  */
 export interface CreateLiveCallbackTemplateResponse {
@@ -3393,6 +3382,20 @@ export interface CreateLiveWatermarkRuleRequest {
    * 水印Id，即调用[AddLiveWatermark](/document/product/267/30154)接口返回的WatermarkId。
    */
   TemplateId: number
+}
+
+/**
+ * DescribeAuditTemplate返回参数结构体
+ */
+export interface DescribeAuditTemplateResponse {
+  /**
+   * <p>审核模板。</p>
+   */
+  AuditTemplate?: AuditTemplate
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3844,6 +3847,16 @@ export interface StartLiveStreamMonitorResponse {
 }
 
 /**
+ * CreateAuditRule返回参数结构体
+ */
+export interface CreateAuditRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateScreenshotTask返回参数结构体
  */
 export interface CreateScreenshotTaskResponse {
@@ -4208,6 +4221,20 @@ export interface DescribeLivePadTemplatesResponse {
 }
 
 /**
+ * CreateAuditTemplate返回参数结构体
+ */
+export interface CreateAuditTemplateResponse {
+  /**
+   * <p>模板 ID 。</p>
+   */
+  TemplateId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCasterPgmFromPvw返回参数结构体
  */
 export interface CreateCasterPgmFromPvwResponse {
@@ -4451,17 +4478,80 @@ export interface ModifyCasterLayoutInfoResponse {
 }
 
 /**
- * DescribeTimeShiftStreamList返回参数结构体
+ * 审核模板。
  */
-export interface DescribeTimeShiftStreamListResponse {
+export interface AuditTemplate {
   /**
-   * 时间段内所有的数据量。
+   * <p>模板 ID 。<br>CreateAuditTemplate 时，此参数不传或传 0 。</p><p>ModifyAuditTemplate 时，此参数必传。</p>
    */
-  TotalSize?: number
+  TemplateId?: number
   /**
-   * 流列表。
+   * <p>模板名称。<br>CreateAuditTemplate 必填。</p>
    */
-  StreamList?: Array<TimeShiftStreamInfo>
+  TemplateName?: string
+  /**
+   * <p>描述信息。<br>CreateAuditTemplate 必填。</p>
+   */
+  Description?: string
+  /**
+   * <p>Cos Bucket名称。<br>CreateAuditTemplate 必填。</p>
+   */
+  CosBucket?: string
+  /**
+   * <p>Cos 地域。<br>CreateAuditTemplate 必填。</p>
+   */
+  CosRegion?: string
+  /**
+   * <p>Cos 完整文件名（包括前缀）。CreateAuditTemplate 必填。</p>
+   */
+  CosFilePath?: string
+  /**
+   * <p>是否启用图片审核。<br>CreateAuditTemplate 必填。</p>
+   */
+  AuditImage?: boolean
+  /**
+   * <p>是否启用音频审核。<br>CreateAuditTemplate 必填。</p>
+   */
+  AuditAudio?: boolean
+  /**
+   * <p>截图间隔，1-60秒。<br>CreateAuditTemplate 必填。</p>
+   */
+  SnapshotInterval?: number
+  /**
+   * <p>音频间隔，1-60秒。<br>CreateAuditTemplate 必填。</p>
+   */
+  AudioInterval?: number
+  /**
+   * <p>是否开启 Cos 容灾。<br>CreateAuditTemplate 必填。</p>
+   */
+  EnableFailoverCos?: boolean
+  /**
+   * <p>容灾 Cos Bucket 。<br>CreateAuditTemplate 必填。</p>
+   */
+  FailoverCosBucket?: string
+  /**
+   * <p>容灾 Cos 地域。<br>CreateAuditTemplate 必填。</p>
+   */
+  FailoverCosRegion?: string
+  /**
+   * <p>场景策略配置信息。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SceneInfos?: Array<CMSSceneDetail>
+  /**
+   * <p>1：表示启用音频文本识别。0 ：不启用。默认 0 。</p>
+   */
+  AuditText?: number
+}
+
+/**
+ * CreateLiveSmartEraseTemplate返回参数结构体
+ */
+export interface CreateLiveSmartEraseTemplateResponse {
+  /**
+   * <p>模板Id。</p>
+   */
+  TemplateId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4778,6 +4868,16 @@ export interface DescribeLivePadStreamListRequest {
 }
 
 /**
+ * CreateAuditTemplate请求参数结构体
+ */
+export interface CreateAuditTemplateRequest {
+  /**
+   * <p>审核模板。</p>
+   */
+  AuditTemplate: AuditTemplate
+}
+
+/**
  * DescribeDeliverLogDownList返回参数结构体
  */
 export interface DescribeDeliverLogDownListResponse {
@@ -4897,6 +4997,32 @@ export interface DescribeBackupStreamListRequest {
    * 流名称，用于精确查询。
    */
   StreamName?: string
+}
+
+/**
+ * 天御内容安全 策略基本信息。
+ */
+export interface CMSBizInfo {
+  /**
+   * <p>策略类型，可选值：<br>Text：文本ShortAudio：音频<br>Image:<br>图片。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyType: string
+  /**
+   * <p>策略标识（自动生成）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizType: string
+  /**
+   * <p>策略开通状态。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: boolean
+  /**
+   * <p>策略配置。<br>json字符串。</p><p>具体取值方式如下：举例：色情：&quot;{"ability":{"asr_text":true,"audio":true},"asr_text_labels":{"porn":["OVR","Pornography","PornographyObscene"]},"audio_labels":{},"user_text_libs":["320fb40e-9305-4b00-a191-945c219b5cc0"]}&quot;    可选项： {     value: &#39;OVR&#39;,     text: t(&#39;低俗语音识别&#39;),     msg: t(&#39;示例：呻吟、娇喘、娇喘等性暗示相关的语音&#39;),   },   {     value: &#39;Pornography&#39;,     text: t(&#39;严重色情&#39;),     msg: t(&#39;性行为、性器官等相关描述&#39;),   },   {     value: &#39;PornographyObscene&#39;,     text: t(&#39;色情低俗&#39;),     msg: t(&#39;低俗行为、性暗示等相关描述&#39;),   }</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyConfig?: string
 }
 
 /**
@@ -5367,6 +5493,16 @@ export interface DescribePlayErrorCodeDetailInfoListResponse {
 }
 
 /**
+ * ModifyAuditTemplate请求参数结构体
+ */
+export interface ModifyAuditTemplateRequest {
+  /**
+   * <p>审核模板。</p>
+   */
+  AuditTemplate: AuditTemplate
+}
+
+/**
  * DescribeLiveCloudEffectConfig请求参数结构体
  */
 export type DescribeLiveCloudEffectConfigRequest = null
@@ -5671,6 +5807,20 @@ export interface CreatePullStreamConfigResponse {
  * ModifyLivePadTemplate返回参数结构体
  */
 export interface ModifyLivePadTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLiveTranscodeTemplates返回参数结构体
+ */
+export interface DescribeLiveTranscodeTemplatesResponse {
+  /**
+   * 转码模板列表。
+   */
+  Templates?: Array<TemplateInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6201,6 +6351,56 @@ export interface CreateLiveSnapshotTemplateResponse {
 }
 
 /**
+ * CreateLiveSmartEraseTemplate请求参数结构体
+ */
+export interface CreateLiveSmartEraseTemplateRequest {
+  /**
+   * <p>模板名称。长度上限：100字节。</p>
+   */
+  TemplateName: string
+  /**
+   * <p>擦除类型，如&quot;illegal audio|illegal image|logo|privacy protection 。</p>
+   */
+  Type: string
+  /**
+   * <p>描述信息。<br>长度上限：1024字节。<br>仅支持中文、英文、数字、_、-。</p>
+   */
+  Description?: string
+  /**
+   * <p>关联的审核模板id, 表audio_conf 。</p>
+   */
+  AuditConfId?: number
+  /**
+   * <p>天御图片审核策略BizType  Image 。</p>
+   */
+  ImageBizType?: string
+  /**
+   * <p>天御音频审核策略BizType  ShortAudio 。</p>
+   */
+  AudioBizType?: string
+  /**
+   * <p>天御音频文本审核策略BizType  ShortAudio 。</p>
+   */
+  AudioTextBizType?: string
+  /**
+   * <p>展示模式，取值 1:延时稳态展示; 3.实时动态展示。默认1 。</p>
+   */
+  DisplayMode?: number
+  /**
+   * <p>字幕延迟展示时间,单位毫秒。默认10000。</p>
+   */
+  DisplayDelayTime?: number
+  /**
+   * <p>隐私保护可选的类型名，包括人脸模糊、车牌模糊</p><p>枚举值：</p><ul><li>blur face： 人脸模糊</li><li>blur license plate： 车牌模糊</li><li>blur face|blur license plate： 复选</li></ul>
+   */
+  PrivacyProtection?: string
+  /**
+   * <p>音频处理可选项：静音擦除、哔音擦除，默认选择静音擦除</p><p>枚举值：</p><ul><li>0： 静音</li><li>1： 哔音</li></ul><p>默认值：0</p>
+   */
+  AudioErasureMode?: number
+}
+
+/**
  * 场景化视频结果文件上传COS时，需传入的信息。 需创建并授权LVB_QCSRole角色。
  */
 export interface SceneStoreCosParam {
@@ -6614,6 +6814,16 @@ export interface SendTemporaryScriptToAvatarRoomRequest {
    * 临时话术，最长不超过500字。
    */
   Content: string
+}
+
+/**
+ * ResumeDelayLiveStream返回参数结构体
+ */
+export interface ResumeDelayLiveStreamResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7636,20 +7846,6 @@ export interface CreateScreenshotTaskRequest {
    * 扩展字段，暂无定义。默认为空。
    */
   Extension?: string
-}
-
-/**
- * DescribeAreaBillBandwidthAndFluxList返回参数结构体
- */
-export interface DescribeAreaBillBandwidthAndFluxListResponse {
-  /**
-   * 明细数据信息。
-   */
-  DataInfoList: Array<BillAreaInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -9086,6 +9282,16 @@ export interface CasterInfo {
 }
 
 /**
+ * DeleteAuditTemplate请求参数结构体
+ */
+export interface DeleteAuditTemplateRequest {
+  /**
+   * <p>审核模板 ID 。</p>
+   */
+  TemplateId: number
+}
+
+/**
  * CreateLiveTimeShiftTemplate请求参数结构体
  */
 export interface CreateLiveTimeShiftTemplateRequest {
@@ -9501,6 +9707,28 @@ export interface AvatarScriptInfo {
    * <p>已完成状态的视频URL</p>
    */
   MediaUrl?: string
+}
+
+/**
+ * 获取省份/运营商的播放信息。
+ */
+export interface ProIspPlaySumInfo {
+  /**
+   * 省份/运营商/国家或地区。
+   */
+  Name?: string
+  /**
+   * 总流量，单位: MB。
+   */
+  TotalFlux?: number
+  /**
+   * 总请求数。
+   */
+  TotalRequest?: number
+  /**
+   * 平均下载流量，单位: MB/s。
+   */
+  AvgFluxPerSecond?: number
 }
 
 /**
@@ -10014,6 +10242,20 @@ export interface AddCasterMarkWordInfoRequest {
 }
 
 /**
+ * DescribeAuditRules返回参数结构体
+ */
+export interface DescribeAuditRulesResponse {
+  /**
+   * <p>规则信息列表。</p>
+   */
+  Rules?: Array<RuleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveAvatarTimbreList请求参数结构体
  */
 export interface DescribeLiveAvatarTimbreListRequest {
@@ -10087,6 +10329,16 @@ export interface DeleteLiveCallbackRuleRequest {
    * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
    */
   AppName: string
+}
+
+/**
+ * DescribeCasterMarkPicInfos请求参数结构体
+ */
+export interface DescribeCasterMarkPicInfosRequest {
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
 }
 
 /**
@@ -11167,13 +11419,17 @@ export interface CreateRecordTaskResponse {
 }
 
 /**
- * ResumeDelayLiveStream返回参数结构体
+ * 直播审核（内容安全）场景明细。
  */
-export interface ResumeDelayLiveStreamResponse {
+export interface CMSSceneDetail {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>策略信息</p>
    */
-  RequestId?: string
+  BizInfos?: Array<CMSBizInfo>
+  /**
+   * <p>SceneID 。</p>
+   */
+  SceneID?: string
 }
 
 /**
@@ -11464,6 +11720,30 @@ dbCheck :  检查是否已经验证成功过。
 }
 
 /**
+ * 推流域名日志信息。
+ */
+export interface PushLogInfo {
+  /**
+   * 日志名称。
+   */
+  LogName: string
+  /**
+   * 日志下载地址。
+   */
+  LogUrl: string
+  /**
+   * 日志时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：
+1. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  LogTime: string
+  /**
+   * 文件大小，单位字节。
+   */
+  FileSize: number
+}
+
+/**
  * AddCasterMarkPicInfo返回参数结构体
  */
 export interface AddCasterMarkPicInfoResponse {
@@ -11551,27 +11831,21 @@ export interface DescribeLiveTranscodeTemplateResponse {
 }
 
 /**
- * 推流域名日志信息。
+ * DeleteAuditRule请求参数结构体
  */
-export interface PushLogInfo {
+export interface DeleteAuditRuleRequest {
   /**
-   * 日志名称。
+   * <p>推流域名。</p>
    */
-  LogName: string
+  DomainName: string
   /**
-   * 日志下载地址。
+   * <p>推流路径，与推流和播放地址中的AppName保持一致。</p>
    */
-  LogUrl: string
+  AppName: string
   /**
-   * 日志时间。UTC 格式，例如：2018-11-29T19:00:00Z。
-注意：
-1. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>流名称 。 不传默认为空。</p>
    */
-  LogTime: string
-  /**
-   * 文件大小，单位字节。
-   */
-  FileSize: number
+  StreamName?: string
 }
 
 /**
@@ -12502,25 +12776,6 @@ export interface PlaySumStatInfo {
 }
 
 /**
- * DescribeDeliverBandwidthList请求参数结构体
- */
-export interface DescribeDeliverBandwidthListRequest {
-  /**
-   * 起始时间点，接口查询支持两种时间格式：
-1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
-   */
-  StartTime: string
-  /**
-   * 结束时间点，接口查询支持两种时间格式：
-1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
-支持最近三个月的数据查询，时间跨度最大是1个月。
-   */
-  EndTime: string
-}
-
-/**
  * DeleteAuditKeywords返回参数结构体
  */
 export interface DeleteAuditKeywordsResponse {
@@ -13003,6 +13258,100 @@ export interface DescribeLiveWatermarkResponse {
 }
 
 /**
+ * 自适应码率转码模板，子模板，出入参数。
+ */
+export interface ChildTemplateInfo {
+  /**
+   * <p>自适应码率转码模板，子模板Id。<br>入参时候，填写此字段，表示更新子模板，否则是新增子模板。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateId?: number
+  /**
+   * <p>子模板名称。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateName?: string
+  /**
+   * <p>视频编码：h264/h265/origin，默认origin。</p><p>origin: 保持原始编码格式。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vcodec?: string
+  /**
+   * <p>视频码率。范围：0kbps - 8000kbps。<br>0为保持原始码率。<br>注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoBitrate?: number
+  /**
+   * <p>宽，默认0。<br>范围[0-3000]。<br>数值必须是2的倍数，0是原始宽度。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Width?: number
+  /**
+   * <p>高，默认0。<br>范围[0-3000]<br>数值必须是2的倍数，0是原始高度。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Height?: number
+  /**
+   * <p>帧率，默认0。<br>范围0-60fps。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fps?: number
+  /**
+   * <p>关键帧间隔，单位：秒。<br>默认原始的间隔。<br>范围2-6。<br>同一个父模板下面的所有子模板，gop必须相等且存在。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gop?: number
+  /**
+   * <p>是否保留视频，0：否，1：是。默认1。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NeedVideo?: number
+  /**
+   * <p>是否保留音频，0：否，1：是。默认1。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NeedAudio?: number
+  /**
+   * <p>当设置的码率&gt;原始码率时，是否以原始码率为准。<br>0：否， 1：是<br>默认 0。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BitrateToOrig?: number
+  /**
+   * <p>当设置的高度&gt;原始高度时，是否以原始高度为准。<br>0：否， 1：是<br>默认 0。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeightToOrig?: number
+  /**
+   * <p>当设置的帧率&gt;原始帧率时，是否以原始帧率为准。<br>0：否， 1：是<br>默认 0。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FpsToOrig?: number
+  /**
+   * <p>是否以短边作为高度，0：否，1：是。默认0。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShortEdgeAsHeight?: number
+  /**
+   * <p>HLS 分片类型。<br>可选值：ts、fmp4。<br>注：编码方式为 H.265 时生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HlsContainerFormat?: string
+  /**
+   * <p>编码标签。<br>可选值：hvc1、hev1。<br>注：HLS 分片类型选择 fmp4 时生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HlsMp4VideoCodecTag?: string
+  /**
+   * <p>子流音频编码类型。默认为&quot;自动适配&quot;</p>
+   */
+  Acodec?: string
+  /**
+   * <p>子流音频码率</p><p>单位：Kbps</p>
+   */
+  AudioBitrate?: number
+}
+
+/**
  * CloseSourceStream请求参数结构体
  */
 export interface CloseSourceStreamRequest {
@@ -13209,6 +13558,16 @@ export interface RecentPullInfo {
 }
 
 /**
+ * DeleteAuditTemplate返回参数结构体
+ */
+export interface DeleteAuditTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCasterInputInfo返回参数结构体
  */
 export interface DeleteCasterInputInfoResponse {
@@ -13352,9 +13711,13 @@ export interface DescribeCasterPlayUrlRequest {
 }
 
 /**
- * DeleteLiveSnapshotRule返回参数结构体
+ * DescribeAreaBillBandwidthAndFluxList返回参数结构体
  */
-export interface DeleteLiveSnapshotRuleResponse {
+export interface DescribeAreaBillBandwidthAndFluxListResponse {
+  /**
+   * 明细数据信息。
+   */
+  DataInfoList: Array<BillAreaInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13604,6 +13967,16 @@ export interface DescribeAuditImagesResponse {
    * <p>图片总数。</p>
    */
   Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAuditRule返回参数结构体
+ */
+export interface DeleteAuditRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13939,6 +14312,24 @@ export interface DeleteCasterLayoutInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAuditTemplates请求参数结构体
+ */
+export interface DescribeAuditTemplatesRequest {
+  /**
+   * <p>是否过滤出文本审核，false不过滤，true过滤。</p>
+   */
+  WithTextAudit?: boolean
+  /**
+   * <p>页码。</p>
+   */
+  PageNum?: number
+  /**
+   * <p>每页数量。</p><p>取值范围：[5, 100]</p>
+   */
+  PageSize?: number
 }
 
 /**

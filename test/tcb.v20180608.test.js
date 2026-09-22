@@ -28,6 +28,16 @@ it("tcb.v20180608.DeleteFunction", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeTaskResult", async function () {
+    try {
+       const data = await client.DescribeTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ListFunctions", async function () {
     try {
        const data = await client.ListFunctions({})
@@ -201,6 +211,16 @@ it("tcb.v20180608.CheckTcbService", async function () {
 it("tcb.v20180608.ReleaseEnv", async function () {
     try {
        const data = await client.ReleaseEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.UpgradePGInstanceToDedicated", async function () {
+    try {
+       const data = await client.UpgradePGInstanceToDedicated({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1061,6 +1081,16 @@ it("tcb.v20180608.DescribeStaticStore", async function () {
 it("tcb.v20180608.UpdateTable", async function () {
     try {
        const data = await client.UpdateTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ResetPGAccountPassword", async function () {
+    try {
+       const data = await client.ResetPGAccountPassword({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

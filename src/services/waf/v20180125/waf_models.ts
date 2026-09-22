@@ -11863,64 +11863,63 @@ export interface AccessLogInfo {
  */
 export interface ExportInfo {
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   TopicId?: string
   /**
-   * 日志导出任务ID
+   * <p>日志导出任务ID</p>
    */
   ExportId?: string
   /**
-   * 日志导出查询语句
+   * <p>日志导出查询语句</p>
    */
   Query?: string
   /**
-   * 日志导出文件名
+   * <p>日志导出文件名</p>
    */
   FileName?: string
   /**
-   * 日志文件大小
+   * <p>日志文件大小</p><p>单位：字节</p>
    */
   FileSize?: number
   /**
-   * 日志导出时间排序
+   * <p>日志导出时间排序</p>
    */
   Order?: string
   /**
-   * 日志导出格式
+   * <p>日志导出格式</p>
    */
   Format?: string
   /**
-   * 日志导出数量
+   * <p>日志导出数量</p>
    */
   Count?: number
   /**
-   * 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中
+   * <p>日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中</p>
    */
   Status?: string
   /**
-   * 日志导出起始时间
+   * <p>日志导出起始时间</p>
    */
   From?: number
   /**
-   * 日志导出结束时间
+   * <p>日志导出结束时间</p>
    */
   To?: number
   /**
-   * 日志导出路径,有效期一个小时，请尽快使用该路径下载。
+   * <p>日志导出路径,有效期一个小时，请尽快使用该路径下载。</p>
    */
   CosPath?: string
   /**
-   * 日志导出创建时间
+   * <p>日志导出创建时间</p>
    */
   CreateTime?: string
   /**
-   * 语法规则。 默认值为0。
-0：Lucene语法，1：CQL语法。
+   * <p>语法规则。 默认值为0。<br>0：Lucene语法，1：CQL语法。</p>
    */
   SyntaxRule?: number
   /**
-   * 导出字段
+   * <p>导出字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DerivedFields?: Array<string>

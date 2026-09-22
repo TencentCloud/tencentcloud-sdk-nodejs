@@ -1183,7 +1183,7 @@ export interface CommonFilter {
    */
   Values?: Array<string>
   /**
-   * 操作类型：1-精确匹配 9-模糊匹配
+   * 操作类型：1=精确匹配，7=in，9=模糊匹配
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperatorType?: number
@@ -1388,23 +1388,23 @@ export interface DescribeRiskCategoryStatsResponse {
  */
 export interface MemberInfo {
   /**
-   * <p>成员AppId</p>
+   * 成员 AppId
    */
   AppId?: string
   /**
-   * <p>成员Uin</p>
+   * 成员 Uin
    */
   Uin?: string
   /**
-   * <p>成员昵称</p>
+   * 成员昵称
    */
   Nickname?: string
   /**
-   * <p>成员Id</p>
+   * 成员 ID（个人场景为空）
    */
   MemberId?: string
   /**
-   * <p>所属部门</p>
+   * 所属部门
    */
   NodeName?: string
 }

@@ -8078,6 +8078,18 @@ export interface CynosdbInstanceDetail {
    * <p>集群的读写实例所在可用区</p>
    */
   MasterZone?: string
+  /**
+   * <p>实例的真实可用区</p>
+   */
+  RealZone?: string
+  /**
+   * <p>备可用区列表</p>
+   */
+  SlaveZones?: Array<string>
+  /**
+   * <p>存储版本</p><p>枚举值：</p><ul><li>1.0： 1.0版本存储</li><li>2.0： 2.0版本存储</li></ul>
+   */
+  StorageVersion?: string
 }
 
 /**

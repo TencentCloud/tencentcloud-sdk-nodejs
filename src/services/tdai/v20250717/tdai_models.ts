@@ -375,6 +375,14 @@ export interface CreateAgentInstanceRequest {
    * <p>企业版是否使用平台大账号模式发货</p>
    */
   UsePlatformAccount?: boolean
+  /**
+   * <p>是否是免部署实例</p>
+   */
+  DeploymentFree?: boolean
+  /**
+   * <p>是否支持记忆</p>
+   */
+  EnableMemory?: boolean
 }
 
 /**

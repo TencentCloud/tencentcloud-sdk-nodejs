@@ -94,6 +94,7 @@ import {
   CreateTopicRequest,
   ModifyResourceGraphResponse,
   ModifyDataTransformRequest,
+  DependencyTopology,
   CreateDlcDeliverRequest,
   Dimension,
   ModifyScheduledSqlRequest,
@@ -174,6 +175,7 @@ import {
   DescribeCloudProductLogTasksRequest,
   CreateAlarmNoticeRequest,
   HistogramInfo,
+  EntityAttribute,
   DescribeTopicMetricConfigsRequest,
   ModifyLogsetRequest,
   SearchDashboardSubscribeResponse,
@@ -244,6 +246,7 @@ import {
   DescribePartitionsResponse,
   ModifyHostMetricConfigResponse,
   DescribeMetricCorrectDimensionResponse,
+  TopologyNode,
   ModifyAlarmNoticeRequest,
   ToolCallFunction,
   ScheduledSqlResouceInfo,
@@ -426,6 +429,7 @@ import {
   RetryShipperTaskRequest,
   DeleteCosRechargeRequest,
   CreateHostMetricConfigRequest,
+  EntityInfo,
   AccessControlRule,
   ModifyWebCallbackResponse,
   ModifyCloudProductLogCollectionResponse,
@@ -504,6 +508,7 @@ import {
   DescribeMachineGroupConfigsResponse,
   DescribeConfigExtrasRequest,
   DescribeMachineGroupConfigsRequest,
+  RelatedTopicItem,
   DescribeSearchViewsRequest,
   ModifyWebCallbackRequest,
   DeleteTopicResponse,
@@ -547,6 +552,7 @@ import {
   DescribeIndexRequest,
   ProductIngestTaskDetail,
   DescribeKafkaConsumerGroupListRequest,
+  TopologyEdge,
   CreateConsoleRequest,
   DeleteMachineGroupInfoRequest,
   ModifyNoticeContentResponse,
@@ -585,6 +591,7 @@ import {
   ModifyIndexResponse,
   ModifySearchViewResponse,
   QueryRangeMetricResponse,
+  ResourceGraphInfo,
   DescribeDashboardSubscribesResponse,
   BaseMetricCollectConfig,
   EBPFDNSFilter,
@@ -1580,7 +1587,7 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
    * 分页查询工作区列表，支持按 WorkAreaId / Name / Region 过滤。
    */
   async DescribeResourceGraphs(
-    req?: DescribeResourceGraphsRequest,
+    req: DescribeResourceGraphsRequest,
     cb?: (error: string, rep: DescribeResourceGraphsResponse) => void
   ): Promise<DescribeResourceGraphsResponse> {
     return this.request("DescribeResourceGraphs", req, cb)

@@ -830,6 +830,14 @@ export interface AdvancedConsumerConfiguration {
  */
 export interface DescribeResourceGraphEntitiesResponse {
   /**
+   * <p>实体列表</p>
+   */
+  EntityInfos?: Array<EntityInfo>
+  /**
+   * <p>是否还有下一页</p><p>枚举值：</p><ul><li>0： 没有下一页</li><li>1： 还有下一页</li></ul>
+   */
+  HasMore?: number
+  /**
    * <p>分页的游标，有值则下次分页请求原样带上，无值则表示无下一页</p>
    */
   NextCursor?: string
@@ -1921,6 +1929,20 @@ export interface ModifyDataTransformRequest {
    * 设置的环境变量
    */
   EnvInfos?: Array<EnvInfo>
+}
+
+/**
+ * 拓扑图（节点 + 边）
+ */
+export interface DependencyTopology {
+  /**
+   * 节点列表
+   */
+  Nodes?: Array<TopologyNode>
+  /**
+   * 边列表
+   */
+  Edges?: Array<TopologyEdge>
 }
 
 /**
@@ -3871,6 +3893,20 @@ export interface HistogramInfo {
 }
 
 /**
+ * 实体动态属性 KV
+ */
+export interface EntityAttribute {
+  /**
+   * 属性 key
+   */
+  Key?: string
+  /**
+   * 属性 value
+   */
+  Value?: string
+}
+
+/**
  * DescribeTopicMetricConfigs请求参数结构体
  */
 export interface DescribeTopicMetricConfigsRequest {
@@ -4499,6 +4535,10 @@ export interface UploadLogRequest {
  * DescribeResourceGraphEntityDependency返回参数结构体
  */
 export interface DescribeResourceGraphEntityDependencyResponse {
+  /**
+   * <p>拓扑图（节点 + 边）</p>
+   */
+  Topology?: DependencyTopology
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5527,6 +5567,36 @@ export interface DescribeMetricCorrectDimensionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 拓扑节点
+ */
+export interface TopologyNode {
+  /**
+   * <p>实体 ID</p>
+   */
+  EntityId?: string
+  /**
+   * <p>实体名称</p>
+   */
+  Name?: string
+  /**
+   * <p>实体所属域</p>
+   */
+  Domain?: string
+  /**
+   * <p>实体所在产品</p>
+   */
+  Product?: string
+  /**
+   * <p>实体类型</p>
+   */
+  EntityClassName?: string
+  /**
+   * <p>距离中心节点深度</p>
+   */
+  Depth?: number
 }
 
 /**
@@ -9875,6 +9945,10 @@ export interface DescribeConsumerRequest {
  */
 export interface CreateResourceGraphResponse {
   /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -10497,6 +10571,48 @@ export interface CreateHostMetricConfigRequest {
 - system：系统
    */
   HostMetricItems: Array<HostMetricItem>
+}
+
+/**
+ * 实体详情
+ */
+export interface EntityInfo {
+  /**
+   * <p>实体 ID</p>
+   */
+  EntityId?: string
+  /**
+   * <p>实体所属域</p><p>默认值：实体所在域，如TC，App</p>
+   */
+  Domain?: string
+  /**
+   * <p>实体所属产品</p><p>参数格式：实体归属的产品，如CDB, Application</p>
+   */
+  Product?: string
+  /**
+   * <p>实体名称</p>
+   */
+  EntityName?: string
+  /**
+   * <p>实体类名称</p><p>参数格式：TC.CDB.Instance</p>
+   */
+  EntityClassName?: string
+  /**
+   * <p>动态属性（base 在前 + 字典序）</p>
+   */
+  Attributes?: Array<EntityAttribute>
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>关联日志主题</p>
+   */
+  RelatedLogTopics?: Array<RelatedTopicItem>
+  /**
+   * <p> 实体资源ID </p>
+   */
+  ResourceId?: string
 }
 
 /**
@@ -11970,6 +12086,10 @@ export interface ModifyResourceGraphProductIngestTaskResponse {
  */
 export interface DescribeResourceGraphEntityDetailResponse {
   /**
+   * <p>实体信息</p>
+   */
+  EntityInfo?: EntityInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -12497,6 +12617,28 @@ export interface DescribeMachineGroupConfigsRequest {
 - 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组Id。
    */
   GroupId: string
+}
+
+/**
+ * 已关联主题
+ */
+export interface RelatedTopicItem {
+  /**
+   * <p>主题 ID</p>
+   */
+  TopicId?: string
+  /**
+   * <p>主题地域</p>
+   */
+  Region?: string
+  /**
+   * <p>日志类型</p><p>枚举值：</p><ul><li>Auditlog： 审计日志</li><li>Eventlog： 事件日志</li><li>ComponentLog： 组件日志</li></ul>
+   */
+  LogType?: string
+  /**
+   * <p>日志类型， 0: 日志主题 ; 1: 指标主题</p><p>枚举值：</p><ul><li>0： 日志主题</li><li>1： 指标主题</li></ul>
+   */
+  BizType?: number
 }
 
 /**
@@ -13479,7 +13621,20 @@ export interface S3RechargeInfo {
 /**
  * DescribeResourceGraphs请求参数结构体
  */
-export type DescribeResourceGraphsRequest = null
+export interface DescribeResourceGraphsRequest {
+  /**
+   * <ul><li>ResourceGraphId 按【资源图谱 ID】精确匹配。类型：String。必选：否</li><li>Name 按【资源图谱名称】模糊匹配。类型：String。必选：否</li><li>Status 按【状态】模糊匹配。类型：int。必选：否；0：初始化中；1：就绪；2：创建失败；3：删除中；5：删除失败</li><li>tagKey 按照【标签键】进行过滤。类型：String。必选：否</li><li>tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否</li></ul>注意：每次请求的 Filters 上限 10，Filter.Values 上限 100。
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>分页偏移量</p><p>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页单页数量</p><p>取值范围：[0, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
+}
 
 /**
  * DescribeIndex请求参数结构体
@@ -13549,6 +13704,24 @@ export interface DescribeKafkaConsumerGroupListRequest {
    * 分页单页限制数目，默认值为20，最大值100。
    */
   Limit?: number
+}
+
+/**
+ * 拓扑边
+ */
+export interface TopologyEdge {
+  /**
+   * <p>源实体 ID</p>
+   */
+  SrcEntityId?: string
+  /**
+   * <p>目的实体 ID</p>
+   */
+  DstEntityId?: string
+  /**
+   * <p>关系类型：contains / same_as / calls</p><p>枚举值：</p><ul><li>contains： 包含关系，A 包含 B</li><li>same_as： 等价关系，A 等价 B</li><li>calls： 调用关系， A 调用 B</li></ul><p>默认值：-</p>
+   */
+  RelationType?: string
 }
 
 /**
@@ -14461,6 +14634,14 @@ export interface DashboardSubscribeData {
  */
 export interface DescribeResourceGraphsResponse {
   /**
+   * <p>资源图谱信息</p>
+   */
+  ResourceGraphInfos?: Array<ResourceGraphInfo>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -14506,6 +14687,48 @@ export interface QueryRangeMetricResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源图谱基本信息
+ */
+export interface ResourceGraphInfo {
+  /**
+   * <p>资源图谱id</p>
+   */
+  ResourceGraphId?: string
+  /**
+   * <p>工作区名称</p>
+   */
+  Name?: string
+  /**
+   * <p>工作区描述</p>
+   */
+  Description?: string
+  /**
+   * <p>工作区状态</p><p>枚举值：</p><ul><li>0： 初始化中</li><li>1： 成功</li><li>2： 失败</li><li>3： 删除中</li><li>4： 已删除</li><li>5： 删除失败</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>关联的日志集</p>
+   */
+  RelationLogset?: RelationLogset
+  /**
+   * <p>关联的topic</p>
+   */
+  RelationTopics?: Array<RelationTopic>
+  /**
+   * <p>工作区绑定的标签信息</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**

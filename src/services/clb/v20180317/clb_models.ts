@@ -623,23 +623,23 @@ export interface DescribeListenersResponse {
  */
 export interface AutoRewriteRequest {
   /**
-   * 负载均衡实例ID。
+   * <p>负载均衡实例ID。</p>
    */
   LoadBalancerId: string
   /**
-   * HTTPS:443监听器的ID。
+   * <p>HTTPS:443监听器的ID。</p>
    */
   ListenerId: string
   /**
-   * HTTPS:443监听器下需要重定向的域名，若不填，则对HTTPS:443监听器下的所有域名都设置重定向。
+   * <p>HTTPS:443监听器下需要重定向的域名，若不填，则对HTTPS:443监听器下的所有域名都设置重定向。</p>
    */
   Domains?: Array<string>
   /**
-   * 重定向状态码，可取值301,302,307。
+   * <p>重定向状态码，可取值301,302,307。</p><p>默认值：302</p>
    */
   RewriteCodes?: Array<number | bigint>
   /**
-   * 重定向是否携带匹配的URL。
+   * <p>重定向是否携带匹配的URL。</p>
    */
   TakeUrls?: Array<boolean>
 }
@@ -3605,6 +3605,7 @@ export interface ServiceProviderHealthCheckConfigItemOutput {
   HealthCheckUnhealthyThreshold?: number
   /**
    * <p>健康检查使用的最大Token数量。部分模型如gpt系列可能仅支持大于等于16。</p><p>默认值：1</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheckMaxTokens?: number
   /**
@@ -3612,6 +3613,14 @@ export interface ServiceProviderHealthCheckConfigItemOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheckProtocol?: string
+  /**
+   * <p>健康检查路径。仅HealthCheckMethod为Service时生效。</p>
+   */
+  HealthCheckPath?: string
+  /**
+   * <p>健康检查方式。</p>
+   */
+  HealthCheckMethod?: string
 }
 
 /**
@@ -10847,6 +10856,14 @@ export interface ServiceProviderHealthCheckConfigItemInput {
    * <p>健康检查协议</p><p>枚举值：</p><ul><li>chat： 表示/chat/completion协议</li><li>messages： 表示/v1/messages协议</li><li>responses： 表示/v1/messages协议</li></ul>
    */
   HealthCheckProtocol?: string
+  /**
+   * <p>健康检查路径。仅HealthCheckMethod为Service时生效。</p>
+   */
+  HealthCheckPath?: string
+  /**
+   * <p>健康检查方式。</p><p>枚举值：</p><ul><li>Service： 探测服务可用性</li><li>Model： 探测模型可用性</li></ul>
+   */
+  HealthCheckMethod?: string
 }
 
 /**

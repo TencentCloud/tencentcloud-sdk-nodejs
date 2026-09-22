@@ -1670,7 +1670,7 @@ export interface BindClusterVpcRequest {
  */
 export interface QueueOverview {
   /**
-   * 队列名称。
+   * <p>队列名称。</p>
    */
   QueueName?: string
 }

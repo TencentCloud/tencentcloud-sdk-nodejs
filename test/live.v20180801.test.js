@@ -358,9 +358,9 @@ it("live.v20180801.DescribeCasterOutputInfos", async function () {
     }
 })
 
-it("live.v20180801.DescribeOriginStreamInfo", async function () {
+it("live.v20180801.DeleteAuditTemplate", async function () {
     try {
-       const data = await client.DescribeOriginStreamInfo({})
+       const data = await client.DeleteAuditTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +418,16 @@ it("live.v20180801.AuthenticateDomainOwner", async function () {
     }
 })
 
+it("live.v20180801.CreateAuditTemplate", async function () {
+    try {
+       const data = await client.CreateAuditTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.ModifyLivePlayAuthKey", async function () {
     try {
        const data = await client.ModifyLivePlayAuthKey({})
@@ -461,6 +471,26 @@ it("live.v20180801.AddCasterLayoutInfo", async function () {
 it("live.v20180801.DescribeLiveDomainCert", async function () {
     try {
        const data = await client.DescribeLiveDomainCert({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeAuditTemplates", async function () {
+    try {
+       const data = await client.DescribeAuditTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeLiveCerts", async function () {
+    try {
+       const data = await client.DescribeLiveCerts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -668,6 +698,16 @@ it("live.v20180801.DescribeLiveTranscodeTemplate", async function () {
     }
 })
 
+it("live.v20180801.DescribeOriginStreamInfo", async function () {
+    try {
+       const data = await client.DescribeOriginStreamInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.StopScreenshotTask", async function () {
     try {
        const data = await client.StopScreenshotTask({})
@@ -701,6 +741,16 @@ it("live.v20180801.DescribeMonitorReport", async function () {
 it("live.v20180801.DescribeAuditKeywordLibs", async function () {
     try {
        const data = await client.DescribeAuditKeywordLibs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeAuditTemplate", async function () {
+    try {
+       const data = await client.DescribeAuditTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -861,6 +911,16 @@ it("live.v20180801.DescribeLiveTranscodeTotalInfo", async function () {
 it("live.v20180801.DeleteLiveSnapshotRule", async function () {
     try {
        const data = await client.DeleteLiveSnapshotRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyAuditTemplate", async function () {
+    try {
+       const data = await client.ModifyAuditTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1468,9 +1528,9 @@ it("live.v20180801.DeleteLiveRecordRule", async function () {
     }
 })
 
-it("live.v20180801.DeleteLiveTimeShiftRule", async function () {
+it("live.v20180801.DescribeAuditImages", async function () {
     try {
-       const data = await client.DeleteLiveTimeShiftRule({})
+       const data = await client.DescribeAuditImages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1538,9 +1598,9 @@ it("live.v20180801.CreateLiveAvatarCloneFigure", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveCallbackRules", async function () {
+it("live.v20180801.CreateAuditRule", async function () {
     try {
-       const data = await client.DescribeLiveCallbackRules({})
+       const data = await client.CreateAuditRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1828,6 +1888,16 @@ it("live.v20180801.DeleteAuditKeywordLib", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveCallbackRules", async function () {
+    try {
+       const data = await client.DescribeLiveCallbackRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeBillBandwidthAndFluxList", async function () {
     try {
        const data = await client.DescribeBillBandwidthAndFluxList({})
@@ -1868,9 +1938,19 @@ it("live.v20180801.CreateLiveTranscodeRule", async function () {
     }
 })
 
-it("live.v20180801.DescribeAuditImages", async function () {
+it("live.v20180801.DeleteLiveTimeShiftRule", async function () {
     try {
-       const data = await client.DescribeAuditImages({})
+       const data = await client.DeleteLiveTimeShiftRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.CreateLiveSmartEraseTemplate", async function () {
+    try {
+       const data = await client.CreateLiveSmartEraseTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2041,6 +2121,16 @@ it("live.v20180801.DeleteLiveStreamMonitor", async function () {
 it("live.v20180801.DescribeAuditKeywords", async function () {
     try {
        const data = await client.DescribeAuditKeywords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeAuditRules", async function () {
+    try {
+       const data = await client.DescribeAuditRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2288,9 +2378,9 @@ it("live.v20180801.CreateLiveTranscodeTemplate", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveCerts", async function () {
+it("live.v20180801.DeleteAuditRule", async function () {
     try {
-       const data = await client.DescribeLiveCerts({})
+       const data = await client.DeleteAuditRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

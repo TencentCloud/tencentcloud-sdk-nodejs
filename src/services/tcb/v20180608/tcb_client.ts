@@ -150,6 +150,7 @@ import {
   Tag,
   MigrationInput,
   DescribeResourcePermissionResult,
+  ResetPGAccountPasswordResponse,
   CreateCustomLoginKeyRequest,
   DescribeCreateMySQLResultRequest,
   DescribeBillingInfoRequest,
@@ -201,6 +202,7 @@ import {
   DeleteProviderRequest,
   DescribeCreditsUsageDetailRequest,
   EnvPkgCreditsUsage,
+  ObjectKV,
   DescribeCloudAppVersionListRequest,
   DescribeResourcePermissionResponse,
   OrderInfo,
@@ -302,6 +304,7 @@ import {
   PrivateConfig,
   AIModelSecret,
   DescribeEnvLimitResponse,
+  DescribeTaskResultResponse,
   ReleaseEnvResponse,
   DescribeCloudBaseRunServerVersionResponse,
   ModifyClsTopicResponse,
@@ -318,6 +321,7 @@ import {
   EmailSmtpConfig,
   HTTPServiceHeaderToAdd,
   DescribeAuthDomainsResponse,
+  UpgradePGInstanceToDedicatedRequest,
   CreateHostingDomainRequest,
   HTTPServiceCacheParams,
   SMSTemplateParams,
@@ -346,6 +350,7 @@ import {
   DestroyEnvRequest,
   DestroyEnvResponse,
   ListTablesResponse,
+  UpgradePGInstanceToDedicatedResponse,
   DescribeEnvPlansRequest,
   DescribeBaasPackageListResponse,
   Provider,
@@ -373,6 +378,7 @@ import {
   HTTPServiceDomainParam,
   Pager,
   StaticEnvironment,
+  DescribeTaskResultRequest,
   DeleteHTTPServiceRouteRequest,
   RunCommandsRequest,
   IndexAccesses,
@@ -380,6 +386,7 @@ import {
   DescribeAuthDomainsRequest,
   PlatformCreditsUsageDaily,
   WxGatewayCustomConfig,
+  ResetPGAccountPasswordRequest,
   MetricUsage,
   DescribeCloudBaseRunBuildLogResponse,
   DescribeCreditsUsageResponse,
@@ -410,6 +417,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteFunctionResponse) => void
   ): Promise<DeleteFunctionResponse> {
     return this.request("DeleteFunction", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeTaskResult）用于查询任务结果。
+   */
+  async DescribeTaskResult(
+    req: DescribeTaskResultRequest,
+    cb?: (error: string, rep: DescribeTaskResultResponse) => void
+  ): Promise<DescribeTaskResultResponse> {
+    return this.request("DescribeTaskResult", req, cb)
   }
 
   /**
@@ -643,6 +660,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: ReleaseEnvResponse) => void
   ): Promise<ReleaseEnvResponse> {
     return this.request("ReleaseEnv", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradePGInstanceToDedicated）用于共享PG升级独享PG。
+   */
+  async UpgradePGInstanceToDedicated(
+    req: UpgradePGInstanceToDedicatedRequest,
+    cb?: (error: string, rep: UpgradePGInstanceToDedicatedResponse) => void
+  ): Promise<UpgradePGInstanceToDedicatedResponse> {
+    return this.request("UpgradePGInstanceToDedicated", req, cb)
   }
 
   /**
@@ -1639,6 +1666,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: UpdateTableResponse) => void
   ): Promise<UpdateTableResponse> {
     return this.request("UpdateTable", req, cb)
+  }
+
+  /**
+   * 修改 PG 实例用户角色密码。
+   */
+  async ResetPGAccountPassword(
+    req: ResetPGAccountPasswordRequest,
+    cb?: (error: string, rep: ResetPGAccountPasswordResponse) => void
+  ): Promise<ResetPGAccountPasswordResponse> {
+    return this.request("ResetPGAccountPassword", req, cb)
   }
 
   /**
