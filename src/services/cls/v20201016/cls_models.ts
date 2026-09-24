@@ -6181,6 +6181,14 @@ export interface OpenKafkaConsumerRequest {
    */
   HasServicesLog?: number
   /**
+   * <p>外网消费开关，默认开启</p>
+   */
+  EnableInternetConsume?: boolean
+  /**
+   * <p>内网消费开关，默认开启</p>
+   */
+  EnableIntranetConsume?: boolean
+  /**
    * <p>消费范围类型，0:最新；1:历史+最新；默认值:0</p>
    */
   ScopeType?: number
@@ -7055,6 +7063,14 @@ export interface ModifyKafkaConsumerRequest {
    * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
    */
   HasServicesLog?: number
+  /**
+   * <p>外网消费开关。</p>
+   */
+  EnableInternetConsume?: boolean
+  /**
+   * <p>内网消费开关。</p>
+   */
+  EnableIntranetConsume?: boolean
   /**
    * <p>消费范围类型，0:最新，1:历史+最新</p>
    */
@@ -9351,6 +9367,14 @@ export interface DescribeKafkaConsumerResponse {
    * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
    */
   HasServicesLog?: number
+  /**
+   * <p>外网消费开关。</p>
+   */
+  EnableInternetConsume?: boolean
+  /**
+   * <p>内网消费开关。</p>
+   */
+  EnableIntranetConsume?: boolean
   /**
    * <p>消费范围类型，0:最新，1:历史+最新</p>
    */

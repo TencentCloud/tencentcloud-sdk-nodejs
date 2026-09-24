@@ -417,6 +417,7 @@ export class Client extends AbstractClient {
 
 >     
 - 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+- 注：对比[人脸比对](https://cloud.tencent.com/document/product/867/44987)接口，该版本算法版本更新，功能一样。
      */
   async DetectFaceSimilarity(
     req: DetectFaceSimilarityRequest,

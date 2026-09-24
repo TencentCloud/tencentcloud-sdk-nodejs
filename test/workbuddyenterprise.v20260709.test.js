@@ -238,6 +238,16 @@ it("workbuddyenterprise.v20260709.DescribeAgent", async function () {
     }
 })
 
+it("workbuddyenterprise.v20260709.DescribeUserAccessToken", async function () {
+    try {
+       const data = await client.DescribeUserAccessToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("workbuddyenterprise.v20260709.DeleteAgent", async function () {
     try {
        const data = await client.DeleteAgent({})

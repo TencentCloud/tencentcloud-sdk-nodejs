@@ -3163,11 +3163,11 @@ export interface ExposePortConfig {
  */
 export interface Option {
   /**
-   * 指标名
+   * <p>指标名</p>
    */
   Name: string
   /**
-   * 指标值
+   * <p>指标值</p>
    */
   Value: number
 }
@@ -8539,6 +8539,10 @@ export interface EnvVar {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
+  /**
+   * <p>是否对外不可见,true 表示该环境变量的 Value 为敏感值.</p>
+   */
+  IsPrivate?: boolean
 }
 
 /**

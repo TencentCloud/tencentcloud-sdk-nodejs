@@ -40,10 +40,12 @@ import {
   DescribeDevicesResponse,
   DescribeAggrSoftDeviceListData,
   GrantResourcesByVirtualGroupsRequest,
+  UnbindVirtualAccountData,
   DescribeAccountGroupsData,
   DescribeAccountGroupsRequest,
   DescribeDeviceVirtualGroupsResponse,
   CreateBusinessResourceResponse,
+  DescribeVirtualAccountsData,
   DescribeAggrSoftCategorySoftListRequest,
   DeviceNetworkInfo,
   CreateDeviceVirtualGroupRequest,
@@ -57,6 +59,7 @@ import {
   DescribeResourceGrantedAccountsResponse,
   DescribeResourceGrantedAccountGroupsResponse,
   DirectoryConfigResultData,
+  DescribeProfileFieldsMenuRequest,
   DeleteAccountGroupResponse,
   DescribeLocalAccountsRequest,
   CreateDeviceTaskResponse,
@@ -64,15 +67,21 @@ import {
   GrantResourcesByAccountGroupsRequest,
   DescribeLocalAccountsPage,
   DescribeSoftwareInformationPageData,
+  OptionsItem,
   ModifyDeviceTrustStatusResponse,
   CreateDLPFileDetectionTaskRequest,
   GrantedVirtualGroupItem,
   BindBusinessResourceConnectorGroupRequest,
   DeleteResourceData,
   DescribeSoftCensusListByDeviceData,
+  DescribeDeviceSecurityInfoData,
+  DeviceVideoCardBrief,
+  UnbindVirtualAccountsRequest,
+  DescribeVirtualAccountsRequest,
   ModifyBusinessResourceResponse,
   CreateBusinessResourceRequest,
   DescribeDeviceInfoRequest,
+  UnbindVirtualAccountsResponse,
   CreateBusinessResourceData,
   GrantResourcesByAccountsRequest,
   DescribeDLPFileDetectTaskResult,
@@ -82,9 +91,10 @@ import {
   AggrCategorySoftDetailRow,
   DescribeDeviceInfoResponse,
   CreatePrivilegeCodeRspData,
+  ProfileTips,
   DescribeBusinessResourceData,
   DescribeAccountGroupsPageResp,
-  DeviceVideoCardBrief,
+  DescribeDeviceSecurityInfoRequest,
   DescribeDLPEdgeNodesResponse,
   ExportSoftwareInformationListResponse,
   DescribeResourceGrantedVirtualGroupsRequest,
@@ -94,10 +104,12 @@ import {
   DescribeAggrSoftCategorySoftListData,
   GrantResourceOperationByAccounts,
   DescribeDLPEdgeNodesPageData,
+  DescribeAccountAccountGroupsData,
   RulePayload,
   DescribeDLPFileDetectTaskResultResponse,
   CreateDLPFileDetectTaskResponse,
   CreateDLPFileDetectTaskData,
+  BindVirtualAccountResultData,
   DescribeDLPEdgeNodesRequest,
   Paging,
   GrantResourcesByAccountsResponse,
@@ -113,15 +125,19 @@ import {
   CreateDLPFileDetectTaskRequest,
   DescribeDLPFileDetectResultRequest,
   ExportDeviceDownloadTaskRequest,
+  ProfileFieldItem,
   CreateDeviceVirtualGroupResponse,
   CreateDLPFileDetectionTaskData,
   DescribeDeviceVirtualGroupsPageRsp,
   CreateCompanyDirectoryConfigResponse,
   AggrSoftDeviceRow,
+  AccountUserIdItem,
   DeleteDeviceVirtualGroupResponse,
   SoftVersionAndNum,
   ExportDeviceDownloadTaskResponse,
   DescribeDeviceDetailListPageData,
+  BindVirtualAccountsResponse,
+  DescribeProfileFieldsMenuResponse,
   DescribeSoftwareInformationResponse,
   GrantResourcesByAccountGroupsResponse,
   ModifyVirtualDeviceGroupsResponse,
@@ -133,12 +149,14 @@ import {
   DescribeDevicesPageRsp,
   DescribeSoftCensusListByDeviceResponse,
   DescribeDLPEdgeNodesRspItem,
+  BindVirtualAccountData,
   DeleteDeviceVirtualGroupRequest,
   DescribeDLPEdgeNodeGroupsRspItem,
   DescribeDLPEdgeNodeGroupsResponse,
   Filter,
   GrantResourcesByVirtualGroupsResponse,
   ModifyDeviceTrustStatusRequest,
+  DescribeDeviceSecurityInfoResponse,
   DescribeAggrSoftDeviceListResponse,
   DescribeRootAccountGroupResponse,
   DescribeDirectAccountGroupResourcesResponse,
@@ -151,6 +169,7 @@ import {
   DescribeDeviceInfoRspData,
   DirectoryConfigData,
   ModifyVirtualDeviceGroupsRequest,
+  DescribeVirtualAccountsPageData,
   GetAccountGroupData,
   Sort,
   BindBusinessResourceConnectorGroupResponse,
@@ -166,14 +185,18 @@ import {
   DescribeDeviceChildGroupsRspData,
   DeviceDownloadTask,
   DeviceGroupDetail,
+  BindVirtualAccountsRequest,
   DescribeSoftCensusListByDevicePageData,
   DeleteAccountGroupResourcesResponse,
   DescribeDevicesRequest,
   RuleItem,
   DescribeAggrSoftCategorySoftListResponse,
+  DeviceProfile,
   DescribeAggrSoftDetailResponse,
+  DescribeVirtualAccountsResponse,
   CreateDLPFileDetectionTaskResponse,
   DescribeDeviceChildGroupsResponse,
+  DescribeProfileFieldsRspData,
   DescribeVirtualDevicesRequest,
   GrantResourceOperationByVirtualGroups,
   DescribeDLPFileDetectResultResponse,
@@ -285,6 +308,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关联账户到虚拟组上，支持批量，私有化调用path为：capi/Assets/BindVirtualAccount，从7.x版本开始支持
+   */
+  async BindVirtualAccounts(
+    req: BindVirtualAccountsRequest,
+    cb?: (error: string, rep: BindVirtualAccountsResponse) => void
+  ): Promise<BindVirtualAccountsResponse> {
+    return this.request("BindVirtualAccounts", req, cb)
+  }
+
+  /**
    * 编辑企业目录配置
    */
   async ModifyCompanyDirectoryConfig(
@@ -325,13 +358,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 展示自定义分组终端列表，私有化调用path为：/capi/Assets/DescribeVirtualDevices
+   * 查询终端描述字段数据,私有化调用path为：capi/Assets/Device/DescribeProfileFieldsMenu
    */
-  async DescribeVirtualDevices(
-    req: DescribeVirtualDevicesRequest,
-    cb?: (error: string, rep: DescribeVirtualDevicesResponse) => void
-  ): Promise<DescribeVirtualDevicesResponse> {
-    return this.request("DescribeVirtualDevices", req, cb)
+  async DescribeProfileFieldsMenu(
+    req: DescribeProfileFieldsMenuRequest,
+    cb?: (error: string, rep: DescribeProfileFieldsMenuResponse) => void
+  ): Promise<DescribeProfileFieldsMenuResponse> {
+    return this.request("DescribeProfileFieldsMenu", req, cb)
+  }
+
+  /**
+   * 查询指定终端的病毒库版本、漏洞库版本、系统修复引擎版本、防火墙状态和实时防护状态
+   */
+  async DescribeDeviceSecurityInfo(
+    req: DescribeDeviceSecurityInfoRequest,
+    cb?: (error: string, rep: DescribeDeviceSecurityInfoResponse) => void
+  ): Promise<DescribeDeviceSecurityInfoResponse> {
+    return this.request("DescribeDeviceSecurityInfo", req, cb)
   }
 
   /**
@@ -342,6 +385,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAccountGroupResponse) => void
   ): Promise<DeleteAccountGroupResponse> {
     return this.request("DeleteAccountGroup", req, cb)
+  }
+
+  /**
+   * 取消关联账户到虚拟组上，支持批量，私有化调用path为：capi/Assets/UnbindVirtualAccount，从7.x版本开始支持
+   */
+  async UnbindVirtualAccounts(
+    req: UnbindVirtualAccountsRequest,
+    cb?: (error: string, rep: UnbindVirtualAccountsResponse) => void
+  ): Promise<UnbindVirtualAccountsResponse> {
+    return this.request("UnbindVirtualAccounts", req, cb)
   }
 
   /**
@@ -372,6 +425,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrivilegeCodeResponse) => void
   ): Promise<CreatePrivilegeCodeResponse> {
     return this.request("CreatePrivilegeCode", req, cb)
+  }
+
+  /**
+   * 列表虚拟组的账户，私有化调用path为：/capi/Assets/AccountVirtualGroup/DescribeVirtualAccounts，从7.x版本开始支持
+   */
+  async DescribeVirtualAccounts(
+    req: DescribeVirtualAccountsRequest,
+    cb?: (error: string, rep: DescribeVirtualAccountsResponse) => void
+  ): Promise<DescribeVirtualAccountsResponse> {
+    return this.request("DescribeVirtualAccounts", req, cb)
   }
 
   /**
@@ -644,5 +707,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourceGrantedVirtualGroupsResponse) => void
   ): Promise<DescribeResourceGrantedVirtualGroupsResponse> {
     return this.request("DescribeResourceGrantedVirtualGroups", req, cb)
+  }
+
+  /**
+   * 展示自定义分组终端列表，私有化调用path为：/capi/Assets/DescribeVirtualDevices
+   */
+  async DescribeVirtualDevices(
+    req: DescribeVirtualDevicesRequest,
+    cb?: (error: string, rep: DescribeVirtualDevicesResponse) => void
+  ): Promise<DescribeVirtualDevicesResponse> {
+    return this.request("DescribeVirtualDevices", req, cb)
   }
 }

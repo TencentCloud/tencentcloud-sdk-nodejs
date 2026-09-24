@@ -42,7 +42,24 @@ export interface AffinityConfiguration {
 /**
  * ApproveRegistryRecord请求参数结构体
  */
-export type ApproveRegistryRecordRequest = null
+export interface ApproveRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>Version ID。</p>
+   */
+  VersionId: string
+  /**
+   * <p>动作留言；非空。</p>
+   */
+  Comment: string
+}
 
 /**
  * AppendEvent返回参数结构体
@@ -63,31 +80,62 @@ export interface AppendEventResponse {
  */
 export interface DescribeRegistryRecordResponse {
   /**
+   * <p>Record 元数据和全部 Label。</p>
+   */
+  Record?: CloudRecord
+  /**
+   * <p>根据 VersionId / Label 解析得到的完整 Version。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: CloudRecordVersion
+  /**
+   * <p>解析方式：DEFAULT_STABLE / LABEL / VERSION_ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResolvedBy?: string
+  /**
+   * <p>通过 Label 解析（ResolvedBy=LABEL 或 DEFAULT_STABLE）时返回该 Label 名称，例如 stable。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResolvedLabel?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
 
 /**
- * DescribeSandboxToolList请求参数结构体
+ * DescribeQuotaOverview请求参数结构体
  */
-export interface DescribeSandboxToolListRequest {
+export interface DescribeQuotaOverviewRequest {
   /**
-   * 沙箱工具ID列表，指定要查询的工具。如果为空则查询所有工具。最大支持100个ID
-   */
-  ToolIds?: Array<string>
-  /**
-   * 偏移量，默认为0
+   * <p>分页偏移量，从 0 开始，默认值为 0，必须大于等于 0。</p><p>单位：偏移量</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100
+   * <p>每页返回的配额组数量</p><p>单位：个</p>
    */
   Limit?: number
   /**
-   * 过滤条件
+   * <p>配额组过滤条件</p>
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * AGENT_SKILLS 内容来源。Type 判别 MANUAL 与 TAR_PACKAGE 两种模式。
+ */
+export interface CloudSkillSourceInput {
+  /**
+   * <p>来源类型。MANUAL：直接提交 SKILL.md 文本；TAR_PACKAGE：由服务端签发 COS PUT 预签名 URL，客户端上传后由服务端异步校验。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * <p>SKILL.md 原文；Type=MANUAL 时必填非空；Type=TAR_PACKAGE 时不得提供。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkillMd?: string
 }
 
 /**
@@ -185,6 +233,77 @@ export interface DescribePreCacheImageTaskRequest {
 }
 
 /**
+ * Registry Record 对象。Record 只保存元数据；协议描述符与内容状态请通过 Version 相关接口获取。
+ */
+export interface CloudRecord {
+  /**
+   * <p>Record ID；格式 <code>rec-</code> + 8 位小写字母/数字。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordId: string
+  /**
+   * <p>所属 Registry ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegistryId: string
+  /**
+   * <p>Record 名称；同一 Registry 内可重复。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * <p>描述。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * <p>协议描述符类型；创建后不可变。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DescriptorType: string
+  /**
+   * <p>生命周期状态。ACTIVE：可用；DELETED：软删除墓碑，不再参与常规查询、下发或版本配额。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifecycleStatus: string
+  /**
+   * <p>所属租户 AppId。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId: number
+  /**
+   * <p>创建者主账号 UIN。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorUin: string
+  /**
+   * <p>创建者子账号 UIN；主账号直接创建时为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorSubAccountUin: string
+  /**
+   * <p>创建时间，ISO 8601 UTC。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * <p>最近一次更新时间。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * <p>Record 下未删除 Version 数量。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionCount?: number
+  /**
+   * <p>Record 下所有 Label Name（含未绑定 Label），包括系统 Label（stable / latest）和自定义 Label。仅名称，不含 VersionId、更新时间或操作者。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelSet?: Array<string>
+}
+
+/**
  * DescribeDeployment返回参数结构体
  */
 export interface DescribeDeploymentResponse {
@@ -203,9 +322,29 @@ export interface DescribeDeploymentResponse {
  */
 export interface RejectRegistryRecordResponse {
   /**
+   * <p>更新后的 Version。</p>
+   */
+  Version?: CloudRecordVersion
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 腾讯云自定义标签。
+ */
+export interface CloudTag {
+  /**
+   * <p>自定义标签键；不可使用 qcs:、project 或项目预留前缀，且不可包含首尾空格。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * <p>自定义标签值，不可包含首尾空格。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
 }
 
 /**
@@ -229,12 +368,108 @@ export interface DNSConfig {
 /**
  * DescribeRegistryRecordList请求参数结构体
  */
-export type DescribeRegistryRecordListRequest = null
+export interface DescribeRegistryRecordListRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>分页起始偏移，默认 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页条数，默认 20，最大 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件。支持 Filter.Name：<code>name</code>/<code>search</code>（按 Record Name 模糊搜索）；其他名称返回 <code>InvalidParameter.Filters.Name</code>。</p>
+   */
+  Filters?: Array<CloudFilter>
+}
+
+/**
+ * Registry 对象。包含注册中心的基本信息与 Record 计数。
+ */
+export interface CloudRegistry {
+  /**
+   * <p>Registry ID；格式 <code>reg-</code> + 8 位小写字母/数字。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegistryId: string
+  /**
+   * <p>Registry 同一 AppId + Region 唯一名称。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * <p>描述。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * <p>审批模式；AUTO 自动通过，MANUAL 需人工审批；创建时确定，不可修改。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApprovalMode: string
+  /**
+   * <p>Registry 所在腾讯云地域，如 <code>ap-guangzhou</code>。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region: string
+  /**
+   * <p>Registry 状态。ACTIVE / ARCHIVED。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: string
+  /**
+   * <p>创建时间，ISO 8601 UTC，如 <code>2026-08-11T10:00:00Z</code>。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * <p>最近一次更新时间，ISO 8601 UTC。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * <p>Registry 下 Record 总数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordCount: number
+  /**
+   * <p>权威读取的腾讯云自定义标签，按 Key、Value 稳定排序；无标签时固定返回空数组，不返回 null。</p>
+   */
+  Tags: Array<CloudTag>
+  /**
+   * <p>Stable Label 已绑定的 Record 数量。Approved Version 数量和可对外消费的 Record 数量已不再等价。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublishedRecordCount?: number
+  /**
+   * <p>所属租户 AppId。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * <p>创建者主账号 UIN。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorUin?: string
+  /**
+   * <p>创建者子账号 UIN；主账号直接创建时为空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorSubAccountUin?: string
+}
 
 /**
  * UpdateRegistry返回参数结构体
  */
 export interface UpdateRegistryResponse {
+  /**
+   * <p>更新后的 Registry 详情。</p>
+   */
+  Registry?: CloudRegistry
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -245,6 +480,10 @@ export interface UpdateRegistryResponse {
  * ApproveRegistryRecord返回参数结构体
  */
 export interface ApproveRegistryRecordResponse {
+  /**
+   * <p>更新后的 Version。</p>
+   */
+  Version?: CloudRecordVersion
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -295,6 +534,122 @@ export interface AcquireSandboxInstanceTokenRequest {
 }
 
 /**
+ * Record 的一个不可变 Version 快照；记录了描述符、来源配置与审批状态。
+ */
+export interface CloudRecordVersion {
+  /**
+   * <p>Version ID；格式 <code>rv-</code> + 8 位小写字母/数字。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * <p>所属 Record ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordId?: string
+  /**
+   * <p>Version 递增序号（1 起）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Revision?: number
+  /**
+   * <p>Version 状态。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>审批模式；创建时锁定，后续变更 Registry 审批模式不影响本 Version。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApprovalMode?: string
+  /**
+   * <p>所属租户 AppId。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * <p>创建者主账号 UIN。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorUin?: string
+  /**
+   * <p>创建时间。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>最近一次更新时间。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * <p>Version 别名（可选）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionName?: string
+  /**
+   * <p>协议描述符对象。（JSON 字符串形式）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Descriptors?: string
+  /**
+   * <p>内容来源。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceType?: string
+  /**
+   * <p>规范化来源配置对象。（JSON 字符串形式）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceConfig?: string
+  /**
+   * <p>内容状态。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentStatus?: string
+  /**
+   * <p>READY 内容 SHA-256。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentSHA256?: string
+  /**
+   * <p>READY 内容字节数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentSizeBytes?: number
+  /**
+   * <p>配置内容规范化后的 SHA-256（用于幂等去重）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigSHA256?: string
+  /**
+   * <p>创建者子账号 UIN。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorSubAccountUin?: string
+  /**
+   * <p>Version 历次审批动作。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApprovalActions?: Array<CloudVersionApprovalAction>
+  /**
+   * <p>TAR 内容成功校验、完成物化并进入 READY 的时间；MANUAL / URL_IMPORT 或尚未 READY 的 TAR_PACKAGE 均为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentReadyTime?: string
+  /**
+   * <p>本次 Version 的变更原因，最大 4096 字符；不可修改。Revision 1 或未填写时返回空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChangeLog?: string
+  /**
+   * <p>当前绑定该 Version 的 Label Name 列表（例如 stable / latest 或自定义 Label 名称）。未绑定 Label 不在此返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelSet?: Array<string>
+}
+
+/**
  * DescribeAPIKeyList返回参数结构体
  */
 export interface DescribeAPIKeyListResponse {
@@ -316,6 +671,14 @@ export interface DescribeAPIKeyListResponse {
  * PreviewRegistryRecord返回参数结构体
  */
 export interface PreviewRegistryRecordResponse {
+  /**
+   * <p>只读元数据预览结果对象（JSON 字符串形式）。字段：StatusCode（远端 HTTP 状态码，必返）、Body（远端响应体截断字符串，必返）、HasUpdate（Boolean，必返；远端内容按 Sync 相同的规范化规则处理后是否与请求 Version 配置不同；Error 非空时固定返回 false，此时不表示远端没有变化）、Error（调用错误信息，可选）。</p>
+   */
+  PreviewResult?: string
+  /**
+   * <p>实际预览的 Version ID（由 VersionId / Label 解析得到）。</p>
+   */
+  ResolvedVersionId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -401,13 +764,63 @@ export interface DescribeSessionSpaceResponse {
 }
 
 /**
- * DeleteSandboxTool请求参数结构体
+ * CreateSandboxTool返回参数结构体
  */
-export interface DeleteSandboxToolRequest {
+export interface CreateSandboxToolResponse {
   /**
-   * 沙箱工具ID
+   * <p>创建的沙箱工具 ID</p>
    */
-  ToolId: string
+  ToolId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Version 一次审批动作条目。
+ */
+export interface CloudVersionApprovalAction {
+  /**
+   * <p>动作 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionId?: string
+  /**
+   * <p>动作类型。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionType?: string
+  /**
+   * <p>动作发起者类型。USER 用户；SYSTEM 系统自动通过。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActorType?: string
+  /**
+   * <p>发起者主账号 UIN。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActorUin?: string
+  /**
+   * <p>发起者子账号 UIN。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActorSubAccountUin?: string
+  /**
+   * <p>动作留言。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * <p>发生时间。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>对应云 API 请求的 RequestId。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestId?: string
 }
 
 /**
@@ -428,6 +841,14 @@ export interface VPCConfig {
  * CreateRegistry返回参数结构体
  */
 export interface CreateRegistryResponse {
+  /**
+   * <p>创建成功的 Registry ID。</p>
+   */
+  RegistryId?: string
+  /**
+   * <p>Registry 详细信息。</p>
+   */
+  Registry?: CloudRegistry
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -487,7 +908,20 @@ export interface DeleteDeploymentRequest {
 /**
  * GetSkillPackageUploadURL请求参数结构体
  */
-export type GetSkillPackageUploadURLRequest = null
+export interface GetSkillPackageUploadURLRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>Version ID；格式 <code>rv-</code> + 8 位小写字母/数字。</p>
+   */
+  VersionId: string
+}
 
 /**
  * UpdateSandboxTool请求参数结构体
@@ -538,21 +972,17 @@ export interface DescribeSessionSpacesResponse {
 }
 
 /**
- * DescribeSandboxInstanceList返回参数结构体
+ * DescribeRegistryRecordVersionList返回参数结构体
  */
-export interface DescribeSandboxInstanceListResponse {
+export interface DescribeRegistryRecordVersionListResponse {
   /**
-   * <p>沙箱实例列表</p>
+   * <p>Version 对象数组。</p>
    */
-  InstanceSet?: Array<SandboxInstance>
+  VersionSet?: Array<CloudRecordVersion>
   /**
-   * <p>符合条件的实例总数</p>
+   * <p>符合条件的总数。</p>
    */
   TotalCount?: number
-  /**
-   * <p>如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。</p>
-   */
-  NextToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -570,24 +1000,52 @@ export interface StopSandboxInstanceResponse {
 }
 
 /**
- * DescribeRegistryRecordVersionList返回参数结构体
- */
-export interface DescribeRegistryRecordVersionListResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeRegistryRecordVersionList请求参数结构体
  */
-export type DescribeRegistryRecordVersionListRequest = null
+export interface DescribeRegistryRecordVersionListRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>分页起始偏移，默认 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页条数，默认 20，最大 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件。支持：status（按 Version 状态：PREPARING/PENDING_APPROVAL/APPROVED/REJECTED/CANCELED，多值 OR）、source_type（按内容来源：MANUAL/URL_IMPORT/TAR_PACKAGE，多值 OR）。</p>
+   */
+  Filters?: Array<CloudFilter>
+}
 
 /**
  * RejectRegistryRecord请求参数结构体
  */
-export type RejectRegistryRecordRequest = null
+export interface RejectRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>Version ID。</p>
+   */
+  VersionId: string
+  /**
+   * <p>动作留言；非空。</p>
+   */
+  Comment: string
+}
 
 /**
  * CreateDeployment请求参数结构体
@@ -646,12 +1104,37 @@ export interface StopSandboxInstanceRequest {
 /**
  * GetSkillPackageDownloadURL请求参数结构体
  */
-export type GetSkillPackageDownloadURLRequest = null
+export interface GetSkillPackageDownloadURLRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID；必须 AGENT_SKILLS 且 ContentStatus=READY。</p>
+   */
+  RecordId: string
+  /**
+   * <p>可选。指定要下载的 Version；与 Label 互斥；均省略时使用 Stable。</p>
+   */
+  VersionId?: string
+  /**
+   * <p>可选。指定要下载的 Label 目标；与 VersionId 互斥；均省略时使用 Stable。</p>
+   */
+  Label?: string
+}
 
 /**
- * DeleteSandboxTool返回参数结构体
+ * DescribeSandboxToolList返回参数结构体
  */
-export interface DeleteSandboxToolResponse {
+export interface DescribeSandboxToolListResponse {
+  /**
+   * 沙箱工具列表
+   */
+  SandboxToolSet?: Array<SandboxTool>
+  /**
+   * 符合条件的沙箱工具总数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -760,12 +1243,46 @@ export interface InlineDataInfo {
 /**
  * DescribeRegistryRecord请求参数结构体
  */
-export type DescribeRegistryRecordRequest = null
+export interface DescribeRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>Version ID，与 Label 互斥。指定时返回该 Version；均省略时等价于 Label=stable。</p>
+   */
+  VersionId?: string
+  /**
+   * <p>Label 名称，与 VersionId 互斥。指定时返回 Label 当前指向的 Version；均省略时等价于 stable。</p>
+   */
+  Label?: string
+}
 
 /**
  * CancelRegistryRecord请求参数结构体
  */
-export type CancelRegistryRecordRequest = null
+export interface CancelRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>Version ID。</p>
+   */
+  VersionId: string
+  /**
+   * <p>动作留言；非空。</p>
+   */
+  Comment: string
+}
 
 /**
  * API密钥简略信息
@@ -794,6 +1311,28 @@ export interface APIKeyInfo {
 }
 
 /**
+ * DescribeSandboxToolList请求参数结构体
+ */
+export interface DescribeSandboxToolListRequest {
+  /**
+   * 沙箱工具ID列表，指定要查询的工具。如果为空则查询所有工具。最大支持100个ID
+   */
+  ToolIds?: Array<string>
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100
+   */
+  Limit?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * 挂载存储配置
  */
 export interface StorageSource {
@@ -816,17 +1355,13 @@ export interface StorageSource {
 }
 
 /**
- * CreateSandboxTool返回参数结构体
+ * DeleteSandboxTool请求参数结构体
  */
-export interface CreateSandboxToolResponse {
+export interface DeleteSandboxToolRequest {
   /**
-   * <p>创建的沙箱工具 ID</p>
+   * 沙箱工具ID
    */
-  ToolId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ToolId: string
 }
 
 /**
@@ -840,17 +1375,9 @@ export interface CreateAPIKeyRequest {
 }
 
 /**
- * DescribeSandboxToolList返回参数结构体
+ * DeleteSandboxTool返回参数结构体
  */
-export interface DescribeSandboxToolListResponse {
-  /**
-   * 沙箱工具列表
-   */
-  SandboxToolSet?: Array<SandboxTool>
-  /**
-   * 符合条件的沙箱工具总数
-   */
-  TotalCount?: number
+export interface DeleteSandboxToolResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -935,6 +1462,34 @@ export interface SandboxTool {
  * CreateRegistryRecord返回参数结构体
  */
 export interface CreateRegistryRecordResponse {
+  /**
+   * <p>新 Record ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordId?: string
+  /**
+   * <p>新建的 Record 详情。</p>
+   */
+  Record?: CloudRecord
+  /**
+   * <p>本次创建的 Revision 1 Version 详情。</p>
+   */
+  Version?: CloudRecordVersion
+  /**
+   * <p>SkillSource.Type=TAR_PACKAGE 时返回：TAR 包上传预签名 URL。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UploadURL?: string
+  /**
+   * <p>SkillSource.Type=TAR_PACKAGE 时返回：UploadURL 过期时间，ISO 8601 UTC。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * <p>SkillSource.Type=TAR_PACKAGE 时返回：Version 内容当前状态（UPLOADING 等）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentStatus?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1064,7 +1619,28 @@ export interface CustomConfiguration {
 /**
  * SyncRegistryRecord请求参数结构体
  */
-export type SyncRegistryRecordRequest = null
+export interface SyncRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>可选。指定要同步的目标 Version；与 Label 互斥；均省略时使用 Stable。</p>
+   */
+  VersionId?: string
+  /**
+   * <p>可选。指定要同步的目标 Label；与 VersionId 互斥；均省略时使用 Stable。Label 在请求开始时只解析一次。</p>
+   */
+  Label?: string
+  /**
+   * <p>可选，最大 4096 字符。若同步创建新 Version，将写入新 Version 的 ChangeLog；省略时保存为空。</p>
+   */
+  ChangeLog?: string
+}
 
 /**
  * 日志源配置
@@ -1078,34 +1654,13 @@ export interface LogSources {
 }
 
 /**
- * DescribeSession请求参数结构体
+ * DescribeRegistry请求参数结构体
  */
-export interface DescribeSessionRequest {
+export interface DescribeRegistryRequest {
   /**
-   * <p>会话所属空间 ID。</p>
+   * <p>Registry ID。</p>
    */
-  SpaceId: string
-  /**
-   * <p>用户 ID。可通过调用方业务系统接口获取。</p>
-   */
-  UserId: string
-  /**
-   * <p>会话 ID。可通过 CreateSession 或 DescribeSessions 接口获取。</p>
-   */
-  SessionId: string
-  /**
-   * <p>Agent ID。可选。</p>
-   * @deprecated
-   */
-  AgentId?: string
-  /**
-   * <p>返回最近事件数量，默认为 0，最大值为 200。</p>
-   */
-  NumRecentEvents?: number
-  /**
-   * <p>事件起始时间，RFC3339 格式，最大长度 64 字符。</p>
-   */
-  AfterTimestamp?: string
+  RegistryId: string
 }
 
 /**
@@ -1124,13 +1679,25 @@ export interface DeleteRegistryResponse {
 export type DescribeAPIKeyListRequest = null
 
 /**
- * DescribeSessionSpace请求参数结构体
+ * DescribeSandboxInstanceList返回参数结构体
  */
-export interface DescribeSessionSpaceRequest {
+export interface DescribeSandboxInstanceListResponse {
   /**
-   * <p>需要查询的会话空间唯一标识。</p><p>入参限制：必填，不能为空。</p><p>可通过 CreateSessionSpace 或 DescribeSessionSpaces 获取，不应自行构造。</p>
+   * <p>沙箱实例列表</p>
    */
-  SpaceId: string
+  InstanceSet?: Array<SandboxInstance>
+  /**
+   * <p>符合条件的实例总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。</p>
+   */
+  NextToken?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1193,6 +1760,22 @@ export interface EventInfo {
  */
 export interface GetSkillPackageUploadURLResponse {
   /**
+   * <p>Version 详情（Revision 不变）。</p>
+   */
+  Version?: CloudRecordVersion
+  /**
+   * <p>新的 COS PUT 预签名 URL。</p>
+   */
+  UploadURL?: string
+  /**
+   * <p>重试后的内容状态。</p>
+   */
+  ContentStatus?: string
+  /**
+   * <p>UploadURL 过期时间。</p>
+   */
+  ExpireTime?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1213,19 +1796,28 @@ export interface CreateSessionSpaceResponse {
 }
 
 /**
- * DescribeRegistryList返回参数结构体
+ * 沙箱工具日志推送CLS相关配置
  */
-export interface DescribeRegistryListResponse {
+export interface CLSConfig {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 沙箱工具日志推送所使用的CLS日志主题ID
    */
-  RequestId?: string
+  TopicId?: string
 }
 
 /**
  * UpdateRegistry请求参数结构体
  */
-export type UpdateRegistryRequest = null
+export interface UpdateRegistryRequest {
+  /**
+   * <p>Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>新的描述；必填；最长 4096。</p>
+   */
+  Description: string
+}
 
 /**
  * DescribeSessions返回参数结构体
@@ -1266,7 +1858,44 @@ export interface DescribeDeploymentListRequest {
 /**
  * DescribeRegistryAuditLogList请求参数结构体
  */
-export type DescribeRegistryAuditLogListRequest = null
+export interface DescribeRegistryAuditLogListRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId?: string
+  /**
+   * <p>Version ID；仅过滤 Version 维度动作，可选。</p>
+   */
+  VersionId?: string
+  /**
+   * <p>Action 精确过滤（如 <code>record.version.create</code>），可选。</p>
+   */
+  ActionFilter?: string
+  /**
+   * <p>发起者过滤（主账号 UIN 或子账号 UIN），可选。</p>
+   */
+  Actor?: string
+  /**
+   * <p>起始时间；ISO 8601，可选。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间；ISO 8601，可选。</p>
+   */
+  EndTime?: string
+  /**
+   * <p>分页起始偏移，默认 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页条数，默认 20，最大 100。</p>
+   */
+  Limit?: number
+}
 
 /**
  * PauseSandboxInstance请求参数结构体
@@ -1287,15 +1916,110 @@ export interface PauseSandboxInstanceRequest {
  */
 export interface DescribeRegistryRecordListResponse {
   /**
+   * <p>Record 对象数组。</p>
+   */
+  RecordSet?: Array<CloudRecord>
+  /**
+   * <p>符合条件的总数。</p>
+   */
+  TotalCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
 
 /**
+ * 审计日志条目。记录 Registry / Record / Version 维度的动作。
+ */
+export interface CloudAuditLog {
+  /**
+   * <p>审计日志 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditLogId: string
+  /**
+   * <p>所属 Registry ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegistryId: string
+  /**
+   * <p>动作发起者（主账号 UIN 或子账号 UIN）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Actor: string
+  /**
+   * <p>Action 名称，等同 X-TC-Action。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Action: string
+  /**
+   * <p>动作脱敏摘要对象；使用云 API 字段命名，字段随 Action 而变；不包含凭据、预签名 URL 或完整 Descriptor。（JSON 字符串形式）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Details: string
+  /**
+   * <p>动作发生时间。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * <p>关联 Record ID；仅 Record / Version 相关动作。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordId?: string
+  /**
+   * <p>关联 Version ID；仅 Version 相关动作。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+}
+
+/**
  * UpdateRegistryRecord请求参数结构体
  */
-export type UpdateRegistryRecordRequest = null
+export interface UpdateRegistryRecordRequest {
+  /**
+   * <p>Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>Record 描述，可选。Record 更新模式下允许，允许空字符串清空；Version 创建模式禁止。</p>
+   */
+  Description?: string
+  /**
+   * <p>新 Version 的展示名，可选。仅 Version 创建模式允许。</p>
+   */
+  VersionName?: string
+  /**
+   * <p>新 Version 的变更原因，最大 4096 字符，可选。仅 Version 创建模式允许。</p>
+   */
+  ChangeLog?: string
+  /**
+   * <p>Version 创建模式：现有 Record 的 DescriptorType=MCP 时可提交。</p>
+   */
+  MCPSource?: CloudMCPSourceInput
+  /**
+   * <p>Version 创建模式：现有 Record 的 DescriptorType=A2A 或 AGUI 时可提交。</p>
+   */
+  AgentSource?: CloudAgentSourceInput
+  /**
+   * <p>Version 创建模式：现有 Record 的 DescriptorType=AGENT_SKILLS 时可提交。</p>
+   */
+  SkillSource?: CloudSkillSourceInput
+  /**
+   * <p>Version 创建模式：现有 Record 的 DescriptorType=CUSTOM 时可提交，必须是 JSON object 字符串。</p>
+   */
+  CustomDescriptors?: string
+  /**
+   * <p>Record 更新模式：Label 变更列表，最多 32 条，同一次请求中 Label Name 不可重复。</p>
+   */
+  LabelMutations?: Array<CloudRecordLabelMutation>
+}
 
 /**
  * CreateAPIKey返回参数结构体
@@ -1320,9 +2044,35 @@ export interface CreateAPIKeyResponse {
 }
 
 /**
- * DescribeRegistry请求参数结构体
+ * DescribeSession请求参数结构体
  */
-export type DescribeRegistryRequest = null
+export interface DescribeSessionRequest {
+  /**
+   * <p>会话所属空间 ID。</p>
+   */
+  SpaceId: string
+  /**
+   * <p>用户 ID。可通过调用方业务系统接口获取。</p>
+   */
+  UserId: string
+  /**
+   * <p>会话 ID。可通过 CreateSession 或 DescribeSessions 接口获取。</p>
+   */
+  SessionId: string
+  /**
+   * <p>Agent ID。可选。</p>
+   * @deprecated
+   */
+  AgentId?: string
+  /**
+   * <p>返回最近事件数量，默认为 0，最大值为 200。</p>
+   */
+  NumRecentEvents?: number
+  /**
+   * <p>事件起始时间，RFC3339 格式，最大长度 64 字符。</p>
+   */
+  AfterTimestamp?: string
+}
 
 /**
  * AcquireDeploymentToken请求参数结构体
@@ -1374,6 +2124,10 @@ export interface DescribeDeploymentListResponse {
  * DescribeRegistry返回参数结构体
  */
 export interface DescribeRegistryResponse {
+  /**
+   * <p>Registry 详情。</p>
+   */
+  Registry?: CloudRegistry
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1429,7 +2183,20 @@ export interface DeleteAPIKeyResponse {
 /**
  * DescribeRegistryList请求参数结构体
  */
-export type DescribeRegistryListRequest = null
+export interface DescribeRegistryListRequest {
+  /**
+   * <p>分页起始偏移，默认 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页条数，默认 20，最大 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件。Name 支持：<code>name</code>/<code>search</code>（模糊）、<code>archived</code>/<code>status</code>（true/false/all）、<code>tag-key</code> 和 <code>tag:&lt;key&gt;</code>；最多 6 个标签过滤组，每个标签过滤组最多 10 个 Values，同 Key 多值为 OR，不同 Key 为 AND。</p>
+   */
+  Filters?: Array<CloudFilter>
+}
 
 /**
  * 沙箱自定义配置详细信息
@@ -1494,12 +2261,33 @@ export interface CreateDeploymentResponse {
 /**
  * DeleteRegistry请求参数结构体
  */
-export type DeleteRegistryRequest = null
+export interface DeleteRegistryRequest {
+  /**
+   * <p>Registry ID。</p>
+   */
+  RegistryId: string
+}
 
 /**
  * GetSkillPackageDownloadURL返回参数结构体
  */
 export interface GetSkillPackageDownloadURLResponse {
+  /**
+   * <p>COS GET 预签名 URL；带 response-content-disposition；默认 TTL 5 分钟；bearer 凭证禁止持久化。</p>
+   */
+  DownloadURL?: string
+  /**
+   * <p>URL 过期时间。</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>服务端记录的 SHA-256；下载后应本地自检。</p>
+   */
+  SHA256?: string
+  /**
+   * <p>解析出的 Version ID（Stable Version）。</p>
+   */
+  ResolvedVersionId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1564,6 +2352,16 @@ export interface StartSandboxInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSessionSpace请求参数结构体
+ */
+export interface DescribeSessionSpaceRequest {
+  /**
+   * <p>需要查询的会话空间唯一标识。</p><p>入参限制：必填，不能为空。</p><p>可通过 CreateSessionSpace 或 DescribeSessionSpaces 获取，不应自行构造。</p>
+   */
+  SpaceId: string
 }
 
 /**
@@ -1641,6 +2439,27 @@ export interface ModifyDeploymentRequest {
 }
 
 /**
+ * Agent Record 内容来源。Type 判别 MANUAL 与 URL_IMPORT。
+ */
+export interface CloudAgentSourceInput {
+  /**
+   * <p>来源类型。MANUAL：直接提交 Agent Descriptors JSON 文本；URL_IMPORT：从远端 Agent Card / AGUI 端点导入。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * <p>Type=MANUAL 时必填；值为通用 JSON object 文本；A2A 标准校验或 AGUI/CUSTOM 规则由后端执行。（JSON 字符串形式）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Descriptors?: string
+  /**
+   * <p>A2A：Agent Card URL；AGUI：Runtime Endpoint URL。Type=URL_IMPORT 时必填，HTTPS。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointURL?: string
+}
+
+/**
  * 镜像卷挂载源配置
  */
 export interface ImageStorageSource {
@@ -1666,6 +2485,14 @@ export interface ImageStorageSource {
  * DescribeRegistryAuditLogList返回参数结构体
  */
 export interface DescribeRegistryAuditLogListResponse {
+  /**
+   * <p>Record 维度的审计日志。</p>
+   */
+  AuditLogSet?: Array<CloudAuditLog>
+  /**
+   * <p>符合条件的总数。</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1724,6 +2551,32 @@ export interface AgentBucketStorageSource {
    * <p>用于传入 AgentBucket 的 AccessDomain</p>
    */
   AccessDomain?: string
+}
+
+/**
+ * Record Label 变更操作项。Operation=SET 时可携带 VersionId；DELETE 时禁止 VersionId。
+ */
+export interface CloudRecordLabelMutation {
+  /**
+   * <p>操作类型。SET：创建或移动 Label；DELETE：删除自定义 Label（stable/latest 保留 Label 禁止删除）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operation: string
+  /**
+   * <p>Label 名称，长度 1..63，格式 ^[a-z][a-z0-9._-]{0,62}$，按小写规范化。stable、latest 为系统保留 Label。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * <p>目标 Version ID。SET 时可选：省略表示未绑定（自定义 Label 允许，stable 禁止）；DELETE 时禁止携带。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * <p>变更原因，最大 1024 字符，可选。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
 }
 
 /**
@@ -1800,6 +2653,10 @@ export interface StartSandboxInstanceRequest {
  * CancelRegistryRecord返回参数结构体
  */
 export interface CancelRegistryRecordResponse {
+  /**
+   * <p>更新后的 Version。</p>
+   */
+  Version?: CloudRecordVersion
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1942,19 +2799,50 @@ export interface ComputerConfiguration {
 }
 
 /**
- * 沙箱工具日志推送CLS相关配置
+ * DescribeRegistryList返回参数结构体
  */
-export interface CLSConfig {
+export interface DescribeRegistryListResponse {
   /**
-   * 沙箱工具日志推送所使用的CLS日志主题ID
+   * <p>Registry 对象数组。</p>
    */
-  TopicId?: string
+  RegistrySet?: Array<CloudRegistry>
+  /**
+   * <p>符合条件的总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
  * UpdateRegistryRecord返回参数结构体
  */
 export interface UpdateRegistryRecordResponse {
+  /**
+   * <p>更新后的 Record。</p>
+   */
+  Record?: CloudRecord
+  /**
+   * <p>Version 创建模式返回：本次创建的新 Version。</p>
+   */
+  Version?: CloudRecordVersion
+  /**
+   * <p>Version 创建模式且 SkillSource.Type=TAR_PACKAGE 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UploadURL?: string
+  /**
+   * <p>Version 创建模式且 SkillSource.Type=TAR_PACKAGE 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * <p>Version 创建模式且 SkillSource.Type=TAR_PACKAGE 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentStatus?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2153,7 +3041,44 @@ export interface DeleteRegistryRecordResponse {
 /**
  * CreateRegistryRecord请求参数结构体
  */
-export type CreateRegistryRecordRequest = null
+export interface CreateRegistryRecordRequest {
+  /**
+   * <p>所属 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record 名称，长度 1..255，同一租户、Registry 内按规范化 Name 唯一（大小写不敏感）；软删除后允许复用。</p>
+   */
+  Name: string
+  /**
+   * <p>协议描述符类型。MCP / A2A / AGUI / CUSTOM / AGENT_SKILLS。Record 创建后不可修改。</p>
+   */
+  DescriptorType: string
+  /**
+   * <p>Record 描述，最大 4096 字符，可选，默认空。</p>
+   */
+  Description?: string
+  /**
+   * <p>Revision 1 的展示名称，可选。</p>
+   */
+  VersionName?: string
+  /**
+   * <p>DescriptorType=MCP 时必填，其他类型禁止。</p>
+   */
+  MCPSource?: CloudMCPSourceInput
+  /**
+   * <p>DescriptorType=A2A 或 AGUI 时必填，其他类型禁止。</p>
+   */
+  AgentSource?: CloudAgentSourceInput
+  /**
+   * <p>DescriptorType=AGENT_SKILLS 时必填，其他类型禁止。</p>
+   */
+  SkillSource?: CloudSkillSourceInput
+  /**
+   * <p>DescriptorType=CUSTOM 时必填，其他类型禁止。内容必须是 JSON object 字符串；服务端解析后写入 CloudRecordVersion.Descriptors，Version 的 SourceType 固定为 MANUAL、SourceConfig 固定为空对象。</p>
+   */
+  CustomDescriptors?: string
+}
 
 /**
  * ModifySession返回参数结构体
@@ -2244,6 +3169,39 @@ export interface DeleteDeploymentResponse {
  */
 export interface SyncRegistryRecordResponse {
   /**
+   * <p>同步结果：UNCHANGED（远端无变化）/ VERSION_CREATED（远端有变化，已生成新 Version）/ FAILED（同步失败）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SyncStatus?: string
+  /**
+   * <p>作为同步来源解析出的 Version ID（可能由 Label 解析而来）；不为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResolvedVersionId?: string
+  /**
+   * <p>SyncStatus=VERSION_CREATED 时返回：本次新建的 Version。</p>
+   */
+  CreatedVersion?: CloudRecordVersion
+  /**
+   * <p>SyncStatus=VERSION_CREATED 时返回：同步后的最新 Record。</p>
+   */
+  Record?: CloudRecord
+  /**
+   * <p>最后一次同步时间，ISO 8601 UTC。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastSyncTime?: string
+  /**
+   * <p>失败错误码；SyncStatus=FAILED 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCode?: string
+  /**
+   * <p>失败错误信息；SyncStatus=FAILED 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2266,7 +3224,24 @@ export interface DescribeSessionResponse {
 /**
  * DeleteRegistryRecord请求参数结构体
  */
-export type DeleteRegistryRecordRequest = null
+export interface DeleteRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>可选。传入时只删除 Record 下指定 Version（软删除）；省略时删除整个 Record。显式传入空字符串或 null 返回 InvalidParameter.VersionId，不得回退为删除整个 Record。</p>
+   */
+  VersionId?: string
+  /**
+   * <p>删除原因，最大 1024 字符。删除单个 Version 时必填；删除整个 Record 时可选。</p>
+   */
+  Reason?: string
+}
 
 /**
  * 多模态内容片段信息
@@ -2413,6 +3388,44 @@ export interface LifecycleConfiguration {
 }
 
 /**
+ * PreviewRegistryRecord请求参数结构体
+ */
+export interface PreviewRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>可选。指定要预览的目标 Version；与 Label 互斥；均省略时使用 Stable。</p>
+   */
+  VersionId?: string
+  /**
+   * <p>可选。指定要预览的目标 Label；与 VersionId 互斥；均省略时使用 Stable。</p>
+   */
+  Label?: string
+}
+
+/**
+ * 通用过滤条件。Name 为字段名，Values 为字段候选值；字段间 AND、Values 内 OR。
+ */
+export interface CloudFilter {
+  /**
+   * <p>过滤字段名。DescribeRegistryList 支持 <code>name</code> / <code>search</code>（模糊搜索）与 <code>archived</code> / <code>status</code>（true / false / all）；DescribeRegistryRecordList 支持 <code>name</code> / <code>search</code>（模糊）、<code>descriptor-type</code>、<code>lifecycle-status</code>（精确）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * <p>过滤字段候选值列表；至少 1 项。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values: Array<string>
+}
+
+/**
  * DescribeEvents请求参数结构体
  */
 export interface DescribeEventsRequest {
@@ -2502,24 +3515,23 @@ export interface Filter {
 /**
  * CreateRegistry请求参数结构体
  */
-export type CreateRegistryRequest = null
-
-/**
- * DescribeQuotaOverview请求参数结构体
- */
-export interface DescribeQuotaOverviewRequest {
+export interface CreateRegistryRequest {
   /**
-   * <p>分页偏移量，从 0 开始，默认值为 0，必须大于等于 0。</p><p>单位：偏移量</p>
+   * <p>同一 AppId + Region 唯一、长度 1–255</p>
    */
-  Offset?: number
+  Name: string
   /**
-   * <p>每页返回的配额组数量</p><p>单位：个</p>
+   * <p>描述文本；最长 4096。</p>
    */
-  Limit?: number
+  Description?: string
   /**
-   * <p>配额组过滤条件</p>
+   * <p>审批模式；创建时确定，创建后不可修改；省略时默认为 AUTO，枚举值区分大小写。</p>
    */
-  Filters?: Array<Filter>
+  ApprovalMode?: string
+  /**
+   * <p>创建时绑定的腾讯云自定义标签；Key 不可重复；最多 10 个。</p>
+   */
+  Tags?: Array<CloudTag>
 }
 
 /**
@@ -2579,9 +3591,25 @@ export interface MetadataVar {
 }
 
 /**
- * PreviewRegistryRecord请求参数结构体
+ * MCP Record 内容来源。Type 判别 MANUAL 与 URL_IMPORT。
  */
-export type PreviewRegistryRecordRequest = null
+export interface CloudMCPSourceInput {
+  /**
+   * <p>来源类型。MANUAL：直接提交 MCP Descriptors JSON 文本；URL_IMPORT：从远端 MCP server.json URL 导入。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * <p>Type=MANUAL 时必填；值为完整 MCP server.json 对象的 JSON 文本；完整 MCP 2025-12-11 标准校验由后端执行。（JSON 字符串形式）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Descriptors?: string
+  /**
+   * <p>远端 MCP server.json URL；HTTPS。Type=URL_IMPORT 时必填。Version 从远端 initialize.serverInfo.version 观测获得，无需请求参数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointURL?: string
+}
 
 /**
  * 环境变量

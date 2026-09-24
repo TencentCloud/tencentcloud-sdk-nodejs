@@ -773,9 +773,13 @@ export interface DescribeModelAssociationsRequest {
    */
   Offset?: number
   /**
-   * <p>模型输出模态</p>
+   * <p>模型输出模态</p><p>枚举值：</p><ul><li>chat： 文本</li><li>embedding： 向量</li><li>video： 视频</li><li>rerank： 重排序</li></ul>
    */
   Capability?: string
+  /**
+   * <p>模型输出模态</p><p>枚举值：</p><ul><li>chat： 文本</li><li>embedding： 向量</li><li>rerank： 重排序</li><li>video： 视频</li></ul>
+   */
+  Capabilities?: Array<string>
 }
 
 /**
@@ -1514,6 +1518,27 @@ export interface GuardrailConfig {
 }
 
 /**
+ * Rerank调度配置。
+ */
+export interface RerankConfig {
+  /**
+   * <p>L2路由策略</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LeastBusy： 最低繁忙路由</li><li>LatencyBasedRouting： 最低延迟路由</li><li>UsageBasedRouting： 用量均衡路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategy?: string
+  /**
+   * <p>L2路由算法参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategyArgs?: RoutingStrategyArgs
+  /**
+   * <p>CMR实例级别模型组内请求重试次数</p><p>取值范围：[0, 5]</p><p>默认值：2</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumRetries?: number
+}
+
+/**
  * 独占集群信息
  */
 export interface ClusterItem {
@@ -1561,13 +1586,25 @@ export interface ModifyModelRouterAttributesRequest {
    */
   Bandwidth?: number
   /**
-   * <p>模型输出模态</p>
+   * <p>模型输出模态</p><p>枚举值：</p><ul><li>chat： 文本</li><li>embedding： 向量</li><li>video： 视频</li><li>rerank： 重排序</li></ul>
    */
   Capability?: string
   /**
-   * <p>embedding 模态配置</p>
+   * <p>Embedding 调度配置</p><p>传入该参数时，必须传Capability为embedding</p>
    */
   EmbeddingConfig?: EmbeddingConfig
+  /**
+   * <p>Video 调度配置</p>
+   */
+  VideoConfig?: VideoConfig
+  /**
+   * <p>Rerank 调度配置</p><p>传入该参数时，必须传Capability为rerank</p>
+   */
+  RerankConfig?: RerankConfig
+  /**
+   * <p>Decisions 调度配置</p>
+   */
+  DecisionsConfig?: DecisionsConfig
 }
 
 /**
@@ -1993,9 +2030,27 @@ export interface ModelRouterDetail {
    */
   BillingConfig?: ModelRouterBillingConfigOutput
   /**
-   * <p>Embedding配置</p>
+   * <p>Embedding调度配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EmbeddingConfig?: EmbeddingConfig
+  /**
+   * <p>CMR关联的负载均衡实例id</p>
+   */
+  LoadBalancerId?: string
+  /**
+   * <p>视频模型设置</p>
+   */
+  VideoConfig?: VideoConfig
+  /**
+   * <p>Rerank调度配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RerankConfig?: RerankConfig
+  /**
+   * <p>决策模型设置</p>
+   */
+  DecisionsConfig?: DecisionsConfig
 }
 
 /**
@@ -3504,6 +3559,27 @@ export interface DeleteIntentRouterRequest {
 }
 
 /**
+ * DecisionsConfig配置。
+ */
+export interface DecisionsConfig {
+  /**
+   * <p>模型内路由策略</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LeastBusy： 最低繁忙路由</li><li>LatencyBasedRouting： 最低延迟路由</li><li>UsageBasedRouting： 用量均衡路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategy?: string
+  /**
+   * <p>路由参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategyArgs?: RoutingStrategyArgs
+  /**
+   * <p>CMR实例级别模型组内请求重试次数</p><p>取值范围：[0, 5]</p><p>默认值：2</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumRetries?: number
+}
+
+/**
  * DescribeBlockIPList请求参数结构体
  */
 export interface DescribeBlockIPListRequest {
@@ -3787,7 +3863,7 @@ export interface TestServiceProviderConnectionRequest {
    */
   CMRPrivateNetworkTunnelId?: string
   /**
-   * <p>对应模型的能力</p><p>枚举值：</p><ul><li>chat： 生文能力</li><li>embedding： 向量能力</li></ul>
+   * <p>对应模型的能力</p><p>枚举值：</p><ul><li>chat： 生文能力</li><li>embedding： 向量能力</li><li>rerank： 重排序能力</li><li>video： 生视频能力</li></ul>
    */
   Capability?: string
   /**
@@ -4397,7 +4473,7 @@ export interface ModifyTargetGroupInstancesPortRequest {
  */
 export interface EmbeddingConfig {
   /**
-   * <p>模型内路由策略</p>
+   * <p>模型内路由策略</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LeastBusy： 最低繁忙路由</li><li>LatencyBasedRouting： 最低延迟路由</li><li>UsageBasedRouting： 用量均衡路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RoutingStrategy?: string
@@ -4407,7 +4483,7 @@ export interface EmbeddingConfig {
    */
   RoutingStrategyArgs?: RoutingStrategyArgs
   /**
-   * <p>同一模型请求重试次数</p>
+   * <p>CMR实例级别模型组内请求重试次数</p><p>取值范围：[0, 5]</p><p>默认值：2</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NumRetries?: number
@@ -4623,7 +4699,7 @@ export interface CreateModelRequest {
    */
   HealthCheckConfigs?: Array<ServiceProviderHealthCheckConfigItemInput>
   /**
-   * <p>模型输出模态</p>
+   * <p>模型输出模态</p><p>枚举值：</p><ul><li>chat： 文本</li><li>embedding： 向量</li><li>video： 视频</li><li>rerank： 重排序</li></ul>
    */
   Capability?: string
   /**
@@ -6100,6 +6176,27 @@ export interface DescribeCustomizedConfigListRequest {
 获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * video配置。
+ */
+export interface VideoConfig {
+  /**
+   * <p>模型内路由策略</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategy?: string
+  /**
+   * <p>路由参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategyArgs?: RoutingStrategyArgs
+  /**
+   * <p>同一模型请求重试次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumRetries?: number
 }
 
 /**
@@ -9800,7 +9897,7 @@ export interface ModelKeyInfoItem {
    */
   HealthCheckConfigs?: Array<ServiceProviderHealthCheckConfigItemOutput>
   /**
-   * <p>模型输出模态</p>
+   * <p>模型输出模态</p><p>枚举值：</p><ul><li>chat： 文本</li><li>embedding： 向量</li><li>video： 视频</li><li>rerank： 重排序</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Capability?: string
@@ -10770,7 +10867,7 @@ export interface ModelAssociation {
    */
   Type?: string
   /**
-   * <p>输出模态</p>
+   * <p>输出模态</p><p>枚举值：</p><ul><li>chat： 文本</li><li>embedding： 向量</li><li>video： 视频</li><li>rerank： 重排序</li></ul>
    */
   Capability?: string
 }
@@ -11043,9 +11140,21 @@ export interface CreateModelRouterRequest {
    */
   Bandwidth?: number
   /**
-   * <p>Embedding 配置</p>
+   * <p>Embedding 调度配置</p>
    */
   EmbeddingConfig?: EmbeddingConfig
+  /**
+   * <p>Video 配置</p>
+   */
+  VideoConfig?: VideoConfig
+  /**
+   * <p>Rerank 调度配置</p>
+   */
+  RerankConfig?: RerankConfig
+  /**
+   * <p>Decisions 调度配置</p>
+   */
+  DecisionsConfig?: DecisionsConfig
 }
 
 /**

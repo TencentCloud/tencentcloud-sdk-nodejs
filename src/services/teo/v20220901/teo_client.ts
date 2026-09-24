@@ -246,6 +246,7 @@ import {
   ModifyPrefetchOriginLimitResponse,
   ModifyMultiPathGatewayRequest,
   LoadBalancer,
+  OperateInferenceDomainRequest,
   CustomExpressionField,
   DescribeFunctionReplicasResponse,
   CreateSecurityAPIServiceResponse,
@@ -315,7 +316,7 @@ import {
   ApplicationProxyRule,
   UpstreamCertInfo,
   Zone,
-  RuleNormalActionParams,
+  ModifyContentIdentifierRequest,
   ErrorPageParameters,
   DescribeRulesSettingResponse,
   BindSecurityTemplateToEntityResponse,
@@ -381,6 +382,7 @@ import {
   DescribeInferenceHardwareSpecificationsResponse,
   InferenceServiceConfig,
   TopEntry,
+  JSInjectionRule,
   DescribeConfigGroupVersionsResponse,
   FunctionEnvironmentVariable,
   DeleteRealtimeLogDeliveryTaskResponse,
@@ -416,6 +418,7 @@ import {
   DeleteOriginGroupResponse,
   ModifyOriginParameters,
   DescribeMultiPathGatewayRegionsResponse,
+  HostCertInfo,
   DeleteEdgeKVNamespaceRequest,
   DescribeL4ProxyRequest,
   DescribeIdentificationsRequest,
@@ -494,6 +497,7 @@ import {
   ModifyOriginACLRequest,
   ModifyOriginGroupResponse,
   DeleteAccelerationDomainsRequest,
+  ManagedRuleAction,
   RenewPlanResponse,
   CustomErrorPage,
   DescribeDeployHistoryRequest,
@@ -509,6 +513,7 @@ import {
   CreateRuleResponse,
   ModifyL7AccSettingResponse,
   InferenceScheduledScalingEffectiveRange,
+  DescribeInferenceDomainsResponse,
   DeleteSecurityJSInjectionRuleResponse,
   ReturnCustomPageActionParameters,
   DescribeSecurityIPGroupContentRequest,
@@ -547,7 +552,7 @@ import {
   ClientIpCountry,
   DeleteSecurityClientAttesterRequest,
   DeleteApplicationProxyRuleRequest,
-  ManagedRuleAction,
+  HostsCertificate,
   ModifyL7AccRuleResponse,
   CustomVariableOperationRuleAction,
   FileAscriptionInfo,
@@ -566,7 +571,7 @@ import {
   ModifyAliasDomainStatusResponse,
   CustomVariableOperationSubRule,
   DeleteFunctionRulesRequest,
-  DescribeTimingL7AnalysisDataRequest,
+  CreateInferenceDomainRequest,
   NoCache,
   ModifyFunctionRequest,
   ManagedRuleGroup,
@@ -614,7 +619,7 @@ import {
   CachePrefreshParameters,
   RuleEngineCustomAction,
   Action,
-  JSInjectionRule,
+  DescribeTimingL7AnalysisDataRequest,
   UpstreamFollowRedirectParameters,
   DeleteSecurityAPIServiceRequest,
   ApplicationProxy,
@@ -636,6 +641,7 @@ import {
   InferenceAPIToken,
   ExceptionRule,
   FollowOrigin,
+  OperateInferenceDomainResponse,
   EdgeKVDeleteRequest,
   DescribeMultiPathGatewayResponse,
   IPRegionInfo,
@@ -655,7 +661,7 @@ import {
   DeleteAliasDomainRequest,
   DeleteFunctionRulesResponse,
   DescribeTopL7AnalysisDataResponse,
-  ModifyContentIdentifierRequest,
+  DescribeInferenceDomainsRequest,
   DeleteMultiPathGatewayLineRequest,
   Resource,
   DDoSProtection,
@@ -726,6 +732,7 @@ import {
   AlgDetectSession,
   ModifyZoneStatusResponse,
   DeleteContentIdentifierRequest,
+  CreateInferenceDomainResponse,
   RefreshMultiPathGatewaySecretKeyRequest,
   CreateContentIdentifierRequest,
   OriginProtectionInfo,
@@ -770,6 +777,7 @@ import {
   InferenceAffinityConfig,
   DescribeOverviewL7DataRequest,
   CreateMultiPathGatewayRequest,
+  RuleNormalActionParams,
   DeleteSharedCNAMEResponse,
   ModifyMultiPathGatewaySecretKeyResponse,
   DescribeMultiPathGatewaySecretKeyRequest,
@@ -815,6 +823,7 @@ import {
   TCRCEOption,
   NsVerification,
   AccelerateMainland,
+  InferenceDomain,
   ChallengeActionParameters,
   SecurityPolicyTemplateInfo,
   StandardDebug,
@@ -851,6 +860,7 @@ import {
   CreateOriginGroupResponse,
   CreateMultiPathGatewayLineRequest,
   IPGroupReference,
+  ZoneCustomVariables,
   CreateContentIdentifierResponse,
   HostHeaderParameters,
   DescribeConfigGroupVersionsRequest,
@@ -1450,13 +1460,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
+   * 创建推理 API Token，用于访问推理服务时进行鉴权，Token 内容仅在创建时返回一次，每个站点最多创建 100 个。
    */
-  async DescribeConfigGroupVersionDetail(
-    req: DescribeConfigGroupVersionDetailRequest,
-    cb?: (error: string, rep: DescribeConfigGroupVersionDetailResponse) => void
-  ): Promise<DescribeConfigGroupVersionDetailResponse> {
-    return this.request("DescribeConfigGroupVersionDetail", req, cb)
+  async CreateInferenceAPIToken(
+    req: CreateInferenceAPITokenRequest,
+    cb?: (error: string, rep: CreateInferenceAPITokenResponse) => void
+  ): Promise<CreateInferenceAPITokenResponse> {
+    return this.request("CreateInferenceAPIToken", req, cb)
   }
 
   /**
@@ -1508,6 +1518,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribePrefetchTasksResponse) => void
   ): Promise<DescribePrefetchTasksResponse> {
     return this.request("DescribePrefetchTasks", req, cb)
+  }
+
+  /**
+   * 操作推理服务域名，支持停止、启用和删除推理服务域名，删除后的资源不可恢复。
+   */
+  async OperateInferenceDomain(
+    req: OperateInferenceDomainRequest,
+    cb?: (error: string, rep: OperateInferenceDomainResponse) => void
+  ): Promise<OperateInferenceDomainResponse> {
+    return this.request("OperateInferenceDomain", req, cb)
   }
 
   /**
@@ -1601,6 +1621,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: RefreshMultiPathGatewaySecretKeyResponse) => void
   ): Promise<RefreshMultiPathGatewaySecretKeyResponse> {
     return this.request("RefreshMultiPathGatewaySecretKey", req, cb)
+  }
+
+  /**
+   * 查询推理服务域名列表，返回域名的Cname地址、归属权验证和证书等相关信息。
+   */
+  async DescribeInferenceDomains(
+    req: DescribeInferenceDomainsRequest,
+    cb?: (error: string, rep: DescribeInferenceDomainsResponse) => void
+  ): Promise<DescribeInferenceDomainsResponse> {
+    return this.request("DescribeInferenceDomains", req, cb)
   }
 
   /**
@@ -1784,13 +1814,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 创建推理 API Token，用于访问推理服务时进行鉴权，Token 内容仅在创建时返回一次，每个站点最多创建 100 个。
+   * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
    */
-  async CreateInferenceAPIToken(
-    req: CreateInferenceAPITokenRequest,
-    cb?: (error: string, rep: CreateInferenceAPITokenResponse) => void
-  ): Promise<CreateInferenceAPITokenResponse> {
-    return this.request("CreateInferenceAPIToken", req, cb)
+  async DescribeConfigGroupVersionDetail(
+    req: DescribeConfigGroupVersionDetailRequest,
+    cb?: (error: string, rep: DescribeConfigGroupVersionDetailResponse) => void
+  ): Promise<DescribeConfigGroupVersionDetailResponse> {
+    return this.request("DescribeConfigGroupVersionDetail", req, cb)
   }
 
   /**
@@ -2072,16 +2102,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-     * 本接口用于查询七层域名业务的时序数据。
-注意：
-1. 本接口查询数据有 10 分钟左右延迟，建议拉取当前时间 10 分钟以前的数据。
-2. 本接口默认返回防护后的流量请求数据，用户可在 `Filters.mitigatedByWebSecurity` 中自定义查询已防护缓释的数据。
+     * 创建推理服务域名，用于通过自定义域名访问推理服务，一个推理服务下最多支持创建 5 个自定义域名。
+创建成功后，还需完成以下步骤，域名才能正常对外提供访问：
+1. 校验域名 CNAME 配置状态，请参考 [CheckCnameStatus](https://cloud.tencent.com/document/api/1552/94491) 接口；
+2. 验证归属权，请参考 [VerifyOwnership](https://cloud.tencent.com/document/api/1552/98879) 接口；
+3. 配置域名证书，请参考 [ModifyHostsCertificate](https://cloud.tencent.com/document/api/1552/80764) 接口。
      */
-  async DescribeTimingL7AnalysisData(
-    req: DescribeTimingL7AnalysisDataRequest,
-    cb?: (error: string, rep: DescribeTimingL7AnalysisDataResponse) => void
-  ): Promise<DescribeTimingL7AnalysisDataResponse> {
-    return this.request("DescribeTimingL7AnalysisData", req, cb)
+  async CreateInferenceDomain(
+    req: CreateInferenceDomainRequest,
+    cb?: (error: string, rep: CreateInferenceDomainResponse) => void
+  ): Promise<CreateInferenceDomainResponse> {
+    return this.request("CreateInferenceDomain", req, cb)
   }
 
   /**
@@ -3171,6 +3202,19 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ImportZoneConfigResponse) => void
   ): Promise<ImportZoneConfigResponse> {
     return this.request("ImportZoneConfig", req, cb)
+  }
+
+  /**
+     * 本接口用于查询七层域名业务的时序数据。
+注意：
+1. 本接口查询数据有 10 分钟左右延迟，建议拉取当前时间 10 分钟以前的数据。
+2. 本接口默认返回防护后的流量请求数据，用户可在 `Filters.mitigatedByWebSecurity` 中自定义查询已防护缓释的数据。
+     */
+  async DescribeTimingL7AnalysisData(
+    req: DescribeTimingL7AnalysisDataRequest,
+    cb?: (error: string, rep: DescribeTimingL7AnalysisDataResponse) => void
+  ): Promise<DescribeTimingL7AnalysisDataResponse> {
+    return this.request("DescribeTimingL7AnalysisData", req, cb)
   }
 
   /**

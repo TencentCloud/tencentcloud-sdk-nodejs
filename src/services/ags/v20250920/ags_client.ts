@@ -23,28 +23,34 @@ import {
   ApproveRegistryRecordRequest,
   AppendEventResponse,
   DescribeRegistryRecordResponse,
-  DescribeSandboxToolListRequest,
+  DescribeQuotaOverviewRequest,
+  CloudSkillSourceInput,
   CreatePreCacheImageTaskResponse,
   QuotaResourceInfo,
   ResumeSandboxInstanceRequest,
   ModifySessionSpaceResponse,
   DescribePreCacheImageTaskRequest,
+  CloudRecord,
   DescribeDeploymentResponse,
   RejectRegistryRecordResponse,
+  CloudTag,
   DNSConfig,
   DescribeRegistryRecordListRequest,
+  CloudRegistry,
   UpdateRegistryResponse,
   ApproveRegistryRecordResponse,
   DeleteSessionRequest,
   ResumeSandboxInstanceResponse,
   AcquireSandboxInstanceTokenRequest,
+  CloudRecordVersion,
   DescribeAPIKeyListResponse,
   PreviewRegistryRecordResponse,
   CreateSessionRequest,
   DescribeDeploymentRequest,
   ResourceConfiguration,
   DescribeSessionSpaceResponse,
-  DeleteSandboxToolRequest,
+  CreateSandboxToolResponse,
+  CloudVersionApprovalAction,
   VPCConfig,
   CreateRegistryResponse,
   DeleteAPIKeyRequest,
@@ -53,16 +59,15 @@ import {
   GetSkillPackageUploadURLRequest,
   UpdateSandboxToolRequest,
   DescribeSessionSpacesResponse,
-  DescribeSandboxInstanceListResponse,
-  StopSandboxInstanceResponse,
   DescribeRegistryRecordVersionListResponse,
+  StopSandboxInstanceResponse,
   DescribeRegistryRecordVersionListRequest,
   RejectRegistryRecordRequest,
   CreateDeploymentRequest,
   CfsStorageSource,
   StopSandboxInstanceRequest,
   GetSkillPackageDownloadURLRequest,
-  DeleteSandboxToolResponse,
+  DescribeSandboxToolListResponse,
   SessionInfo,
   DescribeQuotaOverviewResponse,
   UpdateSandboxToolResponse,
@@ -70,10 +75,11 @@ import {
   DescribeRegistryRecordRequest,
   CancelRegistryRecordRequest,
   APIKeyInfo,
+  DescribeSandboxToolListRequest,
   StorageSource,
-  CreateSandboxToolResponse,
+  DeleteSandboxToolRequest,
   CreateAPIKeyRequest,
-  DescribeSandboxToolListResponse,
+  DeleteSandboxToolResponse,
   SandboxTool,
   CreateRegistryRecordResponse,
   SessionSpaceInfo,
@@ -82,23 +88,24 @@ import {
   CustomConfiguration,
   SyncRegistryRecordRequest,
   LogSources,
-  DescribeSessionRequest,
+  DescribeRegistryRequest,
   DeleteRegistryResponse,
   DescribeAPIKeyListRequest,
-  DescribeSessionSpaceRequest,
+  DescribeSandboxInstanceListResponse,
   EventInfo,
   GetSkillPackageUploadURLResponse,
   CreateSessionSpaceResponse,
-  DescribeRegistryListResponse,
+  CLSConfig,
   UpdateRegistryRequest,
   DescribeSessionsResponse,
   DescribeDeploymentListRequest,
   DescribeRegistryAuditLogListRequest,
   PauseSandboxInstanceRequest,
   DescribeRegistryRecordListResponse,
+  CloudAuditLog,
   UpdateRegistryRecordRequest,
   CreateAPIKeyResponse,
-  DescribeRegistryRequest,
+  DescribeSessionRequest,
   AcquireDeploymentTokenRequest,
   DescribeEventsResponse,
   DescribeDeploymentListResponse,
@@ -115,14 +122,17 @@ import {
   MountOption,
   CreateSessionResponse,
   StartSandboxInstanceResponse,
+  DescribeSessionSpaceRequest,
   DescribeSandboxInstanceListRequest,
   NetworkConfiguration,
   ModifyDeploymentRequest,
+  CloudAgentSourceInput,
   ImageStorageSource,
   DescribeRegistryAuditLogListResponse,
   AcquireSandboxInstanceTokenResponse,
   AccountQuotaOverview,
   AgentBucketStorageSource,
+  CloudRecordLabelMutation,
   PauseSandboxInstanceResponse,
   CosStorageSource,
   StartSandboxInstanceRequest,
@@ -132,7 +142,7 @@ import {
   WAAConfiguration,
   StorageMount,
   ComputerConfiguration,
-  CLSConfig,
+  DescribeRegistryListResponse,
   UpdateRegistryRecordResponse,
   DeleteSessionSpaceRequest,
   OSWorldConfiguration,
@@ -157,17 +167,18 @@ import {
   QuotaGroupOverview,
   DeleteSessionResponse,
   LifecycleConfiguration,
+  PreviewRegistryRecordRequest,
+  CloudFilter,
   DescribeEventsRequest,
   EventContentInfo,
   PortConfiguration,
   Filter,
   CreateRegistryRequest,
-  DescribeQuotaOverviewRequest,
   ModifyDeploymentResponse,
   CreatePreCacheImageTaskRequest,
   LogConfiguration,
   MetadataVar,
-  PreviewRegistryRecordRequest,
+  CloudMCPSourceInput,
   EnvVar,
   EventActionsInfo,
 } from "./ags_models"
@@ -195,7 +206,7 @@ export class Client extends AbstractClient {
    * 对 Record 的指定 Version 或 Label 目标发起一次预览调用。VersionId 与 Label 互斥；均省略时使用 Stable。不创建 Version、不修改 Label。
    */
   async PreviewRegistryRecord(
-    req?: PreviewRegistryRecordRequest,
+    req: PreviewRegistryRecordRequest,
     cb?: (error: string, rep: PreviewRegistryRecordResponse) => void
   ): Promise<PreviewRegistryRecordResponse> {
     return this.request("PreviewRegistryRecord", req, cb)
@@ -258,7 +269,7 @@ export class Client extends AbstractClient {
    * 创建 Agent Registry（注册中心）。
    */
   async CreateRegistry(
-    req?: CreateRegistryRequest,
+    req: CreateRegistryRequest,
     cb?: (error: string, rep: CreateRegistryResponse) => void
   ): Promise<CreateRegistryResponse> {
     return this.request("CreateRegistry", req, cb)
@@ -268,7 +279,7 @@ export class Client extends AbstractClient {
    * 触发一次从远端拉取描述符 / 元数据的同步。可通过互斥的 VersionId 或 Label 指定来源 Version，均省略时默认使用 Stable。有变化时创建新 Version 并移动 Latest；来源必须 SourceType=URL_IMPORT，否则返回 UnsupportedOperation.SourceType。
    */
   async SyncRegistryRecord(
-    req?: SyncRegistryRecordRequest,
+    req: SyncRegistryRecordRequest,
     cb?: (error: string, rep: SyncRegistryRecordResponse) => void
   ): Promise<SyncRegistryRecordResponse> {
     return this.request("SyncRegistryRecord", req, cb)
@@ -278,7 +289,7 @@ export class Client extends AbstractClient {
    * 分页查询指定Registry / Record / Version的审计日志。
    */
   async DescribeRegistryAuditLogList(
-    req?: DescribeRegistryAuditLogListRequest,
+    req: DescribeRegistryAuditLogListRequest,
     cb?: (error: string, rep: DescribeRegistryAuditLogListResponse) => void
   ): Promise<DescribeRegistryAuditLogListResponse> {
     return this.request("DescribeRegistryAuditLogList", req, cb)
@@ -298,7 +309,7 @@ export class Client extends AbstractClient {
    * 更新 Registry 的可变元数据。
    */
   async UpdateRegistry(
-    req?: UpdateRegistryRequest,
+    req: UpdateRegistryRequest,
     cb?: (error: string, rep: UpdateRegistryResponse) => void
   ): Promise<UpdateRegistryResponse> {
     return this.request("UpdateRegistry", req, cb)
@@ -350,7 +361,7 @@ export class Client extends AbstractClient {
    * 分页查询 Record 的 Version 列表。list 类接口不接入 CAM 转发鉴权。
    */
   async DescribeRegistryRecordVersionList(
-    req?: DescribeRegistryRecordVersionListRequest,
+    req: DescribeRegistryRecordVersionListRequest,
     cb?: (error: string, rep: DescribeRegistryRecordVersionListResponse) => void
   ): Promise<DescribeRegistryRecordVersionListResponse> {
     return this.request("DescribeRegistryRecordVersionList", req, cb)
@@ -360,7 +371,7 @@ export class Client extends AbstractClient {
    * 通过 Version 审批：PENDING_APPROVAL → APPROVED。Comment 必填。
    */
   async ApproveRegistryRecord(
-    req?: ApproveRegistryRecordRequest,
+    req: ApproveRegistryRecordRequest,
     cb?: (error: string, rep: ApproveRegistryRecordResponse) => void
   ): Promise<ApproveRegistryRecordResponse> {
     return this.request("ApproveRegistryRecord", req, cb)
@@ -370,7 +381,7 @@ export class Client extends AbstractClient {
    * 分页查询 Registry 下的 Record 列表。list 类接口不接入 CAM 转发鉴权；业务侧按 CAM 二次过滤。
    */
   async DescribeRegistryRecordList(
-    req?: DescribeRegistryRecordListRequest,
+    req: DescribeRegistryRecordListRequest,
     cb?: (error: string, rep: DescribeRegistryRecordListResponse) => void
   ): Promise<DescribeRegistryRecordListResponse> {
     return this.request("DescribeRegistryRecordList", req, cb)
@@ -400,7 +411,7 @@ export class Client extends AbstractClient {
    * 统一创建 Registry Record（含 revision 1）。请求通过 DescriptorType 与严格内容输入 Union 选择底层类型：MCPSource / AgentSource / SkillSource / CustomDescriptors 四选一，必须与 DescriptorType 对应。不接受 RecordId 或 ChangeLog；同名 Record 返回冲突，不隐式追加 Version。追加 Version 请使用 UpdateRegistryRecord。
    */
   async CreateRegistryRecord(
-    req?: CreateRegistryRecordRequest,
+    req: CreateRegistryRecordRequest,
     cb?: (error: string, rep: CreateRegistryRecordResponse) => void
   ): Promise<CreateRegistryRecordResponse> {
     return this.request("CreateRegistryRecord", req, cb)
@@ -410,7 +421,7 @@ export class Client extends AbstractClient {
    * PREPARING/PENDING_APPROVAL → CANCELED。Comment 必填。
    */
   async CancelRegistryRecord(
-    req?: CancelRegistryRecordRequest,
+    req: CancelRegistryRecordRequest,
     cb?: (error: string, rep: CancelRegistryRecordResponse) => void
   ): Promise<CancelRegistryRecordResponse> {
     return this.request("CancelRegistryRecord", req, cb)
@@ -431,7 +442,7 @@ export class Client extends AbstractClient {
    * 删除 Registry。
    */
   async DeleteRegistry(
-    req?: DeleteRegistryRequest,
+    req: DeleteRegistryRequest,
     cb?: (error: string, rep: DeleteRegistryResponse) => void
   ): Promise<DeleteRegistryResponse> {
     return this.request("DeleteRegistry", req, cb)
@@ -471,7 +482,7 @@ export class Client extends AbstractClient {
    * 为 FAILED / EXPIRED 的 TAR Skill Version 生成新的上传尝试；VersionId 与 Revision 保持不变。
    */
   async GetSkillPackageUploadURL(
-    req?: GetSkillPackageUploadURLRequest,
+    req: GetSkillPackageUploadURLRequest,
     cb?: (error: string, rep: GetSkillPackageUploadURLResponse) => void
   ): Promise<GetSkillPackageUploadURLResponse> {
     return this.request("GetSkillPackageUploadURL", req, cb)
@@ -481,7 +492,7 @@ export class Client extends AbstractClient {
    * 查询 Record 详情和其中一个 Version。请求可通过互斥的 VersionId 或 Label 选择 Version；均省略时默认 Label=stable。取代原 DescribeRegistryRecordVersion。
    */
   async DescribeRegistryRecord(
-    req?: DescribeRegistryRecordRequest,
+    req: DescribeRegistryRecordRequest,
     cb?: (error: string, rep: DescribeRegistryRecordResponse) => void
   ): Promise<DescribeRegistryRecordResponse> {
     return this.request("DescribeRegistryRecord", req, cb)
@@ -502,7 +513,7 @@ export class Client extends AbstractClient {
    * 删除 Registry Record 或指定 Version。省略 VersionId 时对整个 Record 进行软删除；传入 VersionId 时只删除指定 Version（Stable 指向的 Version 不允许删除；仅剩一个 Approved Version 时不允许删除）。取代原 DeleteRegistryRecordVersion。
    */
   async DeleteRegistryRecord(
-    req?: DeleteRegistryRecordRequest,
+    req: DeleteRegistryRecordRequest,
     cb?: (error: string, rep: DeleteRegistryRecordResponse) => void
   ): Promise<DeleteRegistryRecordResponse> {
     return this.request("DeleteRegistryRecord", req, cb)
@@ -532,7 +543,7 @@ export class Client extends AbstractClient {
    * 获取 Skill 包下载 URL。VersionId 与 Label 互斥；均省略时使用 Stable。响应包含 ResolvedVersionId，便于调用方回填。
    */
   async GetSkillPackageDownloadURL(
-    req?: GetSkillPackageDownloadURLRequest,
+    req: GetSkillPackageDownloadURLRequest,
     cb?: (error: string, rep: GetSkillPackageDownloadURLResponse) => void
   ): Promise<GetSkillPackageDownloadURLResponse> {
     return this.request("GetSkillPackageDownloadURL", req, cb)
@@ -542,7 +553,7 @@ export class Client extends AbstractClient {
    * 驳回 Version 审批：PENDING_APPROVAL → REJECTED。Comment 必填。
    */
   async RejectRegistryRecord(
-    req?: RejectRegistryRecordRequest,
+    req: RejectRegistryRecordRequest,
     cb?: (error: string, rep: RejectRegistryRecordResponse) => void
   ): Promise<RejectRegistryRecordResponse> {
     return this.request("RejectRegistryRecord", req, cb)
@@ -562,7 +573,7 @@ export class Client extends AbstractClient {
    * 更新 Registry Record。两种互斥模式：①Record 更新模式：不提交任何 Source / CustomDescriptors，可通过 Description、LabelMutations 修改元数据与 Label（至少提交一项）；②Version 创建模式：提交且仅提交一种与现有 DescriptorType 匹配的内容输入，可选 VersionName / ChangeLog，禁止 Description / LabelMutations，服务端在 Record 下创建下一个 Revision。取代原 ChangeRegistryRecordStableVersion / RollbackRegistryRecordVersion / Create*RegistryRecordVersion。
    */
   async UpdateRegistryRecord(
-    req?: UpdateRegistryRecordRequest,
+    req: UpdateRegistryRecordRequest,
     cb?: (error: string, rep: UpdateRegistryRecordResponse) => void
   ): Promise<UpdateRegistryRecordResponse> {
     return this.request("UpdateRegistryRecord", req, cb)
@@ -625,7 +636,7 @@ export class Client extends AbstractClient {
    * 分页查询当前租户可见的 Registry 列表。
    */
   async DescribeRegistryList(
-    req?: DescribeRegistryListRequest,
+    req: DescribeRegistryListRequest,
     cb?: (error: string, rep: DescribeRegistryListResponse) => void
   ): Promise<DescribeRegistryListResponse> {
     return this.request("DescribeRegistryList", req, cb)
@@ -675,7 +686,7 @@ export class Client extends AbstractClient {
    * 按 RegistryId 查询 Registry 详情。
    */
   async DescribeRegistry(
-    req?: DescribeRegistryRequest,
+    req: DescribeRegistryRequest,
     cb?: (error: string, rep: DescribeRegistryResponse) => void
   ): Promise<DescribeRegistryResponse> {
     return this.request("DescribeRegistry", req, cb)

@@ -1817,40 +1817,35 @@ export interface RestoreAndroidInstanceFromStorageResponse {
  */
 export interface DescribeAndroidInstancesRequest {
   /**
-   * 偏移量，默认为 0
+   * <p>偏移量，默认为 0</p>
    */
   Offset?: number
   /**
-   * 限制量，默认为20，最大值为100
+   * <p>限制量，默认为20，最大值为100</p>
    */
   Limit?: number
   /**
-   * 实例ID。每次请求的实例的上限为100。
+   * <p>实例ID。每次请求的实例的上限为100。</p>
    */
   AndroidInstanceIds?: Array<string>
   /**
-   * 实例地域。目前还不支持按地域进行聚合查询
+   * <p>实例地域。目前还不支持按地域进行聚合查询</p>
    */
   AndroidInstanceRegion?: string
   /**
-   * 实例可用区
+   * <p>实例可用区</p>
    */
   AndroidInstanceZone?: string
   /**
-   * 实例分组 ID 列表
+   * <p>实例分组 ID 列表</p>
    */
   AndroidInstanceGroupIds?: Array<string>
   /**
-   * 实例标签选择器
+   * <p>实例标签选择器</p>
    */
   LabelSelector?: Array<LabelRequirement>
   /**
-   * 字段过滤器。Filter 的 Name 有以下值：
-Name：实例名称
-UserId：实例用户ID
-HostSerialNumber：宿主机序列号
-HostServerSerialNumber：机箱序列号
-AndroidInstanceModel：实例型号
+   * <p>字段过滤器。Filter 的 Name 有以下值：<br>Name：实例名称<br>UserId：实例用户ID<br>HostSerialNumber：宿主机序列号<br>HostServerSerialNumber：机箱序列号<br>AndroidInstanceModel：实例型号</p>
    */
   Filters?: Array<Filter>
 }
@@ -1860,11 +1855,11 @@ AndroidInstanceModel：实例型号
  */
 export interface DescribeAndroidInstancesResponse {
   /**
-   * 实例总数量
+   * <p>实例总数量</p>
    */
   TotalCount?: number
   /**
-   * 实例列表
+   * <p>实例列表</p>
    */
   AndroidInstances?: Array<AndroidInstance>
   /**

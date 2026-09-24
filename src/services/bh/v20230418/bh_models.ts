@@ -3594,42 +3594,39 @@ export interface DeleteDeviceAccountsRequest {
  */
 export interface SearchTaskResultRequest {
   /**
-   * 搜索区间的开始时间
+   * <p>搜索区间的开始时间，缺省时取结束时间前7天（含结束时间当日）</p>
    */
   StartTime?: string
   /**
-   * 搜索区间的结束时间
+   * <p>搜索区间的结束时间。未指定时，默认取当前时间</p>
    */
   EndTime?: string
   /**
-   * 运维任务ID
+   * <p>运维任务ID</p>
    */
   OperationId?: string
   /**
-   * 运维任务名称
+   * <p>运维任务名称</p>
    */
   Name?: string
   /**
-   * 用户名，长度不超过20
+   * <p>用户名，长度不超过20</p>
    */
   UserName?: string
   /**
-   * 姓名，长度不超过20
+   * <p>姓名，长度不超过20</p>
    */
   RealName?: string
   /**
-   * 任务类型
-1 手工运维任务
-2 定时任务
-3 账号推送任务
+   * <p>任务类型<br>1 手工运维任务<br>2 定时任务<br>3 账号推送任务</p>
    */
   TaskType?: Array<number | bigint>
   /**
-   * 查询偏移
+   * <p>查询偏移</p>
    */
   Offset?: number
   /**
-   * 分页的页内记录数，默认为20，最大200
+   * <p>分页的页内记录数，默认为20，最大200</p>
    */
   Limit?: number
 }
@@ -5488,11 +5485,11 @@ export interface CreateChangePwdTaskRequest {
  */
 export interface SearchTaskResultResponse {
   /**
-   * 记录数
+   * <p>记录数</p>
    */
   TotalCount?: number
   /**
-   * 运维任务执行结果
+   * <p>运维任务执行结果</p>
    */
   TaskResult?: Array<TaskResult>
   /**

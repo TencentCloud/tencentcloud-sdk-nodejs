@@ -418,33 +418,25 @@ export interface ClawConfigInfo {
 }
 
 /**
- * 流式输出消息数据体
+ * AGM 记忆服务开通信息
  */
-export interface UploadChoice {
+export interface AgentMemInfo {
   /**
-   * 消息索引
+   * <p>Memory实例ID</p>
    */
-  Index?: number
+  MemInstanceId?: string
   /**
-   * 当前消息步骤
+   * <p>1=active, 0=disabled（软删/关闭/下线历史行）</p>
    */
-  StepNo?: number
+  Status?: number
   /**
-   * 当前步骤
+   * <p>0=待安装,1=成功,2=失败待重试,3=开启中,4=关闭中/已关闭</p>
    */
-  CurrentStep?: string
+  InstallStatus?: number
   /**
-   * 增量信息
+   * <p>creating/online/isolated/error/</p>
    */
-  Delta?: UploadDelta
-  /**
-   * 结束原因
-   */
-  FinishReason?: string
-  /**
-   * 错误信息，FinishReason为error时有效
-   */
-  ErrorMessage?: string
+  MemStatus?: string
 }
 
 /**
@@ -487,25 +479,33 @@ export interface Parameter {
 }
 
 /**
- * vdb数据库文档中键值结构
+ * 流式输出消息数据体
  */
-export interface VDBFieldMap {
+export interface UploadChoice {
   /**
-   * <p>vdb document字段名</p>
+   * 消息索引
    */
-  Name?: string
+  Index?: number
   /**
-   * <p>vdb document字段值</p>
+   * 当前消息步骤
    */
-  Value?: string
+  StepNo?: number
   /**
-   * <p>vdb document字段类型</p>
+   * 当前步骤
    */
-  Type?: string
+  CurrentStep?: string
   /**
-   * <p>字段描述</p>
+   * 增量信息
    */
-  Description?: string
+  Delta?: UploadDelta
+  /**
+   * 结束原因
+   */
+  FinishReason?: string
+  /**
+   * 错误信息，FinishReason为error时有效
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -786,37 +786,39 @@ export interface VDBDocument {
 }
 
 /**
- * CreateMemoryPlusSpace请求参数结构体
+ * DescribeAgentDutyTaskDetail返回参数结构体
  */
-export interface CreateMemoryPlusSpaceRequest {
+export interface DescribeAgentDutyTaskDetailResponse {
   /**
-   * <p>Memory 实例的自定义名称，用于唯一标识和管理实例。支持 60 个字符内的中英文、数字、中划线（-）及下划线（_）。</p>
+   * 任务详细信息
+   */
+  AgentDutyTask?: AgentDutyTask
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * vdb数据库文档中键值结构
+ */
+export interface VDBFieldMap {
+  /**
+   * <p>vdb document字段名</p>
    */
   Name?: string
   /**
-   * <p>emory 实例的简要描述，包括使用场景、用途或背景信息，便于日常运维识别。长度限制为 0-200 个字符。</p>
+   * <p>vdb document字段值</p>
+   */
+  Value?: string
+  /**
+   * <p>vdb document字段类型</p>
+   */
+  Type?: string
+  /**
+   * <p>字段描述</p>
    */
   Description?: string
-  /**
-   * <p>以键值对（Key-Value）形式为 Memory 实例绑定的标签，用于项目管理、成本分摊、环境隔离等场景。</p>
-   */
-  ResourceTags?: Array<ResourceTag>
-  /**
-   * <p>单次批量创建 Memory 实例的数量。取值范围为 1-50。</p>
-   */
-  GoodsNum?: number
-  /**
-   * <p>计费模式。</p><p>枚举值：</p><ul><li>0： 按量计费。</li><li>1： 包年包月。</li></ul>
-   */
-  PayMode?: number
-  /**
-   * <p>包年包月周期</p>
-   */
-  PayPeriod?: number
-  /**
-   * <p>是否自动续费</p>
-   */
-  AutoRenew?: number
 }
 
 /**
@@ -1288,56 +1290,6 @@ export interface DescribeServiceAccessKeyResponse {
 }
 
 /**
- * 聊天图片附件列表
- */
-export interface Attachments {
-  /**
-   * <p>cos key</p>
-   */
-  CosKey?: string
-  /**
-   * <p>图片类型</p>
-   */
-  MimeType?: string
-}
-
-/**
- * DescribeAgentInstances返回参数结构体
- */
-export interface DescribeAgentInstancesResponse {
-  /**
-   * 查询结果总数量
-   */
-  TotalCount?: number
-  /**
-   * <p>智能体实例列表</p>
-   */
-  Items?: Array<AgentInstance>
-  /**
-   * <p>无</p>
-   */
-  StatusCounts?: Array<StatusItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * StartAgentTask请求参数结构体
- */
-export interface StartAgentTaskRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 配置Token
-   */
-  InstanceToken?: string
-}
-
-/**
  * 对话接口出参
  */
 export interface CreateChatCompletionRes {
@@ -1386,6 +1338,56 @@ export interface CreateChatCompletionRes {
    * 消息的数据详情
    */
   Choices?: Array<UploadChoice>
+}
+
+/**
+ * DescribeAgentInstances返回参数结构体
+ */
+export interface DescribeAgentInstancesResponse {
+  /**
+   * 查询结果总数量
+   */
+  TotalCount?: number
+  /**
+   * <p>智能体实例列表</p>
+   */
+  Items?: Array<AgentInstance>
+  /**
+   * <p>无</p>
+   */
+  StatusCounts?: Array<StatusItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartAgentTask请求参数结构体
+ */
+export interface StartAgentTaskRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 配置Token
+   */
+  InstanceToken?: string
+}
+
+/**
+ * 聊天图片附件列表
+ */
+export interface Attachments {
+  /**
+   * <p>cos key</p>
+   */
+  CosKey?: string
+  /**
+   * <p>图片类型</p>
+   */
+  MimeType?: string
 }
 
 /**
@@ -1600,17 +1602,37 @@ export interface StatusItem {
 export type DescribeReportUrlRequest = null
 
 /**
- * DescribeAgentDutyTaskDetail返回参数结构体
+ * CreateMemoryPlusSpace请求参数结构体
  */
-export interface DescribeAgentDutyTaskDetailResponse {
+export interface CreateMemoryPlusSpaceRequest {
   /**
-   * 任务详细信息
+   * <p>Memory 实例的自定义名称，用于唯一标识和管理实例。支持 60 个字符内的中英文、数字、中划线（-）及下划线（_）。</p>
    */
-  AgentDutyTask?: AgentDutyTask
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>emory 实例的简要描述，包括使用场景、用途或背景信息，便于日常运维识别。长度限制为 0-200 个字符。</p>
    */
-  RequestId?: string
+  Description?: string
+  /**
+   * <p>以键值对（Key-Value）形式为 Memory 实例绑定的标签，用于项目管理、成本分摊、环境隔离等场景。</p>
+   */
+  ResourceTags?: Array<ResourceTag>
+  /**
+   * <p>单次批量创建 Memory 实例的数量。取值范围为 1-50。</p>
+   */
+  GoodsNum?: number
+  /**
+   * <p>计费模式。</p><p>枚举值：</p><ul><li>0： 按量计费。</li><li>1： 包年包月。</li></ul>
+   */
+  PayMode?: number
+  /**
+   * <p>包年包月周期</p>
+   */
+  PayPeriod?: number
+  /**
+   * <p>是否自动续费</p>
+   */
+  AutoRenew?: number
 }
 
 /**
@@ -1735,6 +1757,10 @@ export interface AgentInstance {
    * <p>是否是免部署实例</p>
    */
   DeploymentFree?: boolean
+  /**
+   * <p>agent memory 服务详情</p>
+   */
+  AgentMem?: AgentMemInfo
 }
 
 /**

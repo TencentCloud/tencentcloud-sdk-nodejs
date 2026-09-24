@@ -2098,6 +2098,16 @@ it("iotexplorer.v20190423.PublishMessage", async function () {
     }
 })
 
+it("iotexplorer.v20190423.BatchPublishMessage", async function () {
+    try {
+       const data = await client.BatchPublishMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GenerateCloudStorageAIServiceTaskFileURL", async function () {
     try {
        const data = await client.GenerateCloudStorageAIServiceTaskFileURL({})

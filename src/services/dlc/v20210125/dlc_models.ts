@@ -819,6 +819,20 @@ export interface DropDMSDatabaseRequest {
 }
 
 /**
+ * 日志条目。
+ */
+export interface ClsLogEntry {
+  /**
+   * <p>Unix 毫秒时间戳。</p>
+   */
+  Time?: number
+  /**
+   * <p>日志 JSON 字符串。</p>
+   */
+  LogJson?: string
+}
+
+/**
  * 按批提交Statement运行SQL任务。
  */
 export interface NotebookSessionStatementBatchInformation {
@@ -1093,6 +1107,40 @@ export interface AlterTableCommentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * tcc lakehouse 连接信息
+ */
+export interface LakeHouseConnection {
+  /**
+   * <p>元数据服务id</p>
+   */
+  MetastoreEndpointServiceId?: string
+  /**
+   * <p>endpoint服务id</p>
+   */
+  EndpointServiceId?: string
+  /**
+   * <p>元数据url</p>
+   */
+  MetaStoreUrl?: string
+  /**
+   * <p>ranger信息</p>
+   */
+  RangerConnection?: RangerConnection
+  /**
+   * <p>hive版本</p>
+   */
+  HiveVersion?: string
+  /**
+   * <p>存储位置</p>
+   */
+  Location?: string
+  /**
+   * <p>网络信息</p>
+   */
+  NetWork?: NetWork
 }
 
 /**
@@ -1822,6 +1870,36 @@ export interface CreateDatabaseRequest {
 }
 
 /**
+ * DescribeSchemaNamesPage请求参数结构体
+ */
+export interface DescribeSchemaNamesPageRequest {
+  /**
+   * <p>数据目录名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>分页大小</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移</p>
+   */
+  Offset?: number
+  /**
+   * <p>是否快照分页</p>
+   */
+  SnapshotBased?: boolean
+  /**
+   * <p>快照 ID</p>
+   */
+  SnapshotId?: string
+  /**
+   * <p>SQL查询格式匹配</p>
+   */
+  SchemaNamePattern?: string
+}
+
+/**
  * DescribeDMSTables返回参数结构体
  */
 export interface DescribeDMSTablesResponse {
@@ -2160,6 +2238,16 @@ export interface CancelNotebookSessionStatementBatchResponse {
 }
 
 /**
+ * tcc volume 连接信息
+ */
+export interface VolumeConnection {
+  /**
+   * <p>存储路径</p>
+   */
+  Location?: string
+}
+
+/**
  * 节点标签模型
  */
 export interface Label {
@@ -2337,6 +2425,16 @@ export interface StartRayClusterRequest {
    * <p>集群ID</p>
    */
   Id: string
+}
+
+/**
+ * UpdateNetworkConnection返回参数结构体
+ */
+export interface UpdateNetworkConnectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4058,6 +4156,26 @@ export interface AttachDataMaskPolicyRequest {
 }
 
 /**
+ * DescribeRecommendedParams返回参数结构体
+ */
+export interface DescribeRecommendedParamsResponse {
+  /**
+   * <p>推荐来源: builtin | matched | default</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: string
+  /**
+   * <p>推荐的高级参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdvancedParams?: RecommendedAdvancedParams
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 元数据存储描述属性
  */
 export interface DMSSds {
@@ -4153,6 +4271,28 @@ export interface OpendThirdAccessUserInfo {
    * 开通时间
    */
   CreateTime?: string
+}
+
+/**
+ * DescribeCatalogTableNamesPage返回参数结构体
+ */
+export interface DescribeCatalogTableNamesPageResponse {
+  /**
+   * <p>table名字列表</p>
+   */
+  TableNames?: Array<NameIdentifier>
+  /**
+   * <p>table总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>快照id</p>
+   */
+  SnapshotId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4795,6 +4935,20 @@ export interface QueryMonitorOverviewRequest {
 }
 
 /**
+ * DescribeCatalogTableNames请求参数结构体
+ */
+export interface DescribeCatalogTableNamesRequest {
+  /**
+   * <p>Catalog名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>Schema名称</p>
+   */
+  SchemaName: string
+}
+
+/**
  * 工作组集合
  */
 export interface WorkGroups {
@@ -4817,6 +4971,80 @@ export interface DeleteStandardEngineResourceGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 入站作业摘要（DescribeJobList.Items[] 元素）.
+ */
+export interface JobBriefInfo {
+  /**
+   * <p>作业唯一标识.</p>
+   */
+  JobId?: string
+  /**
+   * <p>作业名称.</p>
+   */
+  JobName?: string
+  /**
+   * <p>创建/提交者子账号 UIN。</p>
+   */
+  CreatorSubUin?: string
+  /**
+   * <p>作业状态.</p>
+   */
+  State?: string
+  /**
+   * <p>引擎大类.</p>
+   */
+  MajorType?: string
+  /**
+   * <p>引擎子类型.</p>
+   */
+  MinorType?: string
+  /**
+   * <p>运行模式（WAREHOUSE / JOB）.</p>
+   */
+  RunMode?: string
+  /**
+   * <p>计算仓库 ID，RunMode=WAREHOUSE 时非空.</p>
+   */
+  WarehouseId?: string
+  /**
+   * <p>资源分区编码.</p>
+   */
+  PartitionCode?: string
+  /**
+   * <p>资源分区展示名（解析不到时为空）.</p>
+   */
+  PartitionName?: string
+  /**
+   * <p>队列名称.</p>
+   */
+  QueueName?: string
+  /**
+   * <p>流作业 checkpoint 路径（MinorType=SPARK_STREAM 时非空）。同一流作业的多次运行必须复用同一路径，变更等于重置消费进度。</p>
+   */
+  CheckpointLocation?: string
+  /**
+   * <p>创建时间（Unix 毫秒时间戳）.</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>提交时间（Unix 毫秒时间戳）.</p>
+   */
+  SubmitTime?: number
+  /**
+   * <p>完成时间（Unix 毫秒时间戳）.</p>
+   */
+  FinishTime?: number
+  /**
+   * <p>运行时长（毫秒）.</p>
+   */
+  RunningTimeMs?: number
+  /**
+   * <p>计算仓库名称（列表整页批量反查填充；warehouse 模式下非空）.</p>
+   */
+  WarehouseName?: string
 }
 
 /**
@@ -6565,6 +6793,28 @@ export interface PostTrainingResources {
 }
 
 /**
+ * 结果集列定义（DescribeJobResult.Columns 的元素）.
+ */
+export interface ResultColumn {
+  /**
+   * <p>列名。</p>
+   */
+  Name?: string
+  /**
+   * <p>列数据类型（如 int / string）。</p>
+   */
+  DataType?: string
+  /**
+   * <p>列注释。</p>
+   */
+  Comment?: string
+  /**
+   * <p>是否可为 NULL。</p>
+   */
+  Nullable?: boolean
+}
+
+/**
  * DeleteDataMaskStrategy请求参数结构体
  */
 export interface DeleteDataMaskStrategyRequest {
@@ -7090,6 +7340,24 @@ export interface DeleteModelVersionResponse {
 }
 
 /**
+ * DescribeJobDefinitions返回参数结构体
+ */
+export interface DescribeJobDefinitionsResponse {
+  /**
+   * <p>总记录数.</p>
+   */
+  Total?: number
+  /**
+   * <p>作业定义列表项。</p>
+   */
+  Items?: Array<JobDefinitionItemInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTasksCostInfo返回参数结构体
  */
 export interface DescribeTasksCostInfoResponse {
@@ -7302,6 +7570,28 @@ export interface CancelNotebookSessionStatementRequest {
 }
 
 /**
+ * DescribeSchemaNamesPage返回参数结构体
+ */
+export interface DescribeSchemaNamesPageResponse {
+  /**
+   * <p>数据库名称列表</p>
+   */
+  SchemaNames?: Array<NameIdentifier>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>快照 ID</p>
+   */
+  SnapshotId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 对指定参数的更新、增加、删除
  */
 export interface Param {
@@ -7392,6 +7682,20 @@ export interface GetRayClusterEventRequest {
 }
 
 /**
+ * DescribeCatalogTableInfo返回参数结构体
+ */
+export interface DescribeCatalogTableInfoResponse {
+  /**
+   * <p>Table详细信息</p>
+   */
+  Table?: CatalogTaleInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateStandardEngineResourceGroupBaseInfo请求参数结构体
  */
 export interface UpdateStandardEngineResourceGroupBaseInfoRequest {
@@ -7415,6 +7719,16 @@ export interface UpdateStandardEngineResourceGroupBaseInfoRequest {
    * 任务并发数
    */
   MaxConcurrency?: number
+}
+
+/**
+ * 结果集单行数据（DescribeJobResult.Rows 的元素）.
+ */
+export interface ResultRow {
+  /**
+   * <p>本行的单元格值列表，与 SchemaJson 列定义顺序一一对应；NULL 值以 null 表示.</p>
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -7500,17 +7814,25 @@ export interface SubmitTrainingJobResponse {
 }
 
 /**
- * ResumeTrainingJobInstance返回参数结构体
+ * tcc ranger连接信息
  */
-export interface ResumeTrainingJobInstanceResponse {
+export interface RangerConnection {
   /**
-   * <p>训练实例详情</p>
+   * <p>服务名称</p>
    */
-  Instance?: TrainingJobInstance
+  ServiceName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>服务url</p>
    */
-  RequestId?: string
+  ServiceUrl?: string
+  /**
+   * <p>用户名</p>
+   */
+  UserName?: string
+  /**
+   * <p>密码</p>
+   */
+  Password?: string
 }
 
 /**
@@ -7651,56 +7973,9 @@ export interface DeleteMlflowServerRequest {
 }
 
 /**
- * DescribeTablesName请求参数结构体
+ * DescribeSaleRegions请求参数结构体
  */
-export interface DescribeTablesNameRequest {
-  /**
-   * 列出该数据库下所属数据表。
-   */
-  DatabaseName: string
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 数据偏移量，从0开始，默认为0。
-   */
-  Offset?: number
-  /**
-   * 过滤条件，如下支持的过滤类型，传参Name应为其一
-table-name - String - （过滤条件）数据表名称,形如：table-001。
-table-id - String - （过滤条件）table id形如：12342。
-   */
-  Filters?: Array<Filter>
-  /**
-   * 指定查询的数据源名称，默认为DataLakeCatalog
-   */
-  DatasourceConnectionName?: string
-  /**
-   * 起始时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
-   */
-  StartTime?: string
-  /**
-   * 终止时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
-   */
-  EndTime?: string
-  /**
-   * 排序字段，支持：CreateTime（创建时间）、UpdateTime（更新时间）、StorageSize（存储空间）、RecordCount（行数）、Name（表名称）（不传则默认按name升序）
-   */
-  Sort?: string
-  /**
-   * 排序字段，false：降序（默认）；true：升序
-   */
-  Asc?: boolean
-  /**
-   * table type，表类型查询,可用值:EXTERNAL_TABLE,INDEX_TABLE,MANAGED_TABLE,MATERIALIZED_VIEW,TABLE,VIEW,VIRTUAL_VIEW
-   */
-  TableType?: string
-  /**
-   * 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它；
-   */
-  TableFormat?: string
-}
+export type DescribeSaleRegionsRequest = null
 
 /**
  * UnbindWorkGroupsFromUser返回参数结构体
@@ -7720,6 +7995,20 @@ export interface DescribeTaskDetailRequest {
    * 任务id
    */
   TaskInstanceId: string
+}
+
+/**
+ * CreateJobDefinition返回参数结构体
+ */
+export interface CreateJobDefinitionResponse {
+  /**
+   * <p>作业定义唯一标识符（ID）。</p>
+   */
+  JobDefinitionId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7778,6 +8067,20 @@ export interface CreatePartitionQueueResponse {
    * <p>队列别名（显示名）</p>
    */
   Alias?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SuspendResumeDataEngine返回参数结构体
+ */
+export interface SuspendResumeDataEngineResponse {
+  /**
+   * 虚拟集群详细信息
+   */
+  DataEngineName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8149,6 +8452,20 @@ export interface ServiceMetricsItem {
 }
 
 /**
+ * CreateJobFromDefinition返回参数结构体
+ */
+export interface CreateJobFromDefinitionResponse {
+  /**
+   * <p>作业唯一标识符（ID）。</p>
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetRayClusterPods请求参数结构体
  */
 export interface GetRayClusterPodsRequest {
@@ -8210,6 +8527,20 @@ export interface ListExampleTagsRequest {
    * <p>案例标签</p>
    */
   Category?: string
+}
+
+/**
+ * tcc ListPartitioning分区定义
+ */
+export interface ListPartitioning {
+  /**
+   * <p>分区字段</p>
+   */
+  FieldNames?: Array<string>
+  /**
+   * <p>分区列表信息</p>
+   */
+  Assignments?: Array<ListPartition>
 }
 
 /**
@@ -8291,6 +8622,36 @@ export interface DescribeUserInfoRequest {
    * <p>TF 资源 ID</p>
    */
   PolicyId?: string
+}
+
+/**
+ * tcc doris连接信息
+ */
+export interface DorisConnection {
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>JDBC连接地址</p>
+   */
+  JDBCUrl?: string
+  /**
+   * <p>账号</p>
+   */
+  User?: string
+  /**
+   * <p>密码</p>
+   */
+  Password?: string
+  /**
+   * <p>网络信息</p>
+   */
+  NetWork?: NetWork
 }
 
 /**
@@ -8604,19 +8965,13 @@ export interface DescribeUserTypeResponse {
 }
 
 /**
- * DescribeRecommendedParams返回参数结构体
+ * CreateJob返回参数结构体
  */
-export interface DescribeRecommendedParamsResponse {
+export interface CreateJobResponse {
   /**
-   * <p>推荐来源: builtin | matched | default</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>作业唯一标识符（ID）。</p>
    */
-  Source?: string
-  /**
-   * <p>推荐的高级参数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AdvancedParams?: RecommendedAdvancedParams
+  JobId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8874,6 +9229,20 @@ export interface TextFile {
 }
 
 /**
+ * tcc 通用命名标识
+ */
+export interface NameIdentifier {
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: Array<string>
+}
+
+/**
  * DescribeModelTaskOptions返回参数结构体
  */
 export interface DescribeModelTaskOptionsResponse {
@@ -9125,6 +9494,20 @@ export interface KerberosInfo {
    * 服务主体
    */
   ServicePrincipal?: string
+}
+
+/**
+ * tcc RangePartitioning定义
+ */
+export interface RangePartitioning {
+  /**
+   * <p>字段名</p>
+   */
+  FieldName?: string
+  /**
+   * <p>分区信息</p>
+   */
+  Assignments?: Array<RangePartition>
 }
 
 /**
@@ -9607,49 +9990,13 @@ export interface DescribeUsersRequest {
 }
 
 /**
- * TCHouseP 结构
+ * CreateJobFromDefinition请求参数结构体
  */
-export interface TCHousePInfo {
+export interface CreateJobFromDefinitionRequest {
   /**
-   * <p>实例id</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>作业定义 ID（由 CreateJobDefinition 返回）。必填。</p>
    */
-  InstanceId?: string
-  /**
-   * <p>实例名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceName?: string
-  /**
-   * <p>JdbcUrl</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  JdbcUrl?: string
-  /**
-   * <p>用户名</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  User?: string
-  /**
-   * <p>密码</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Password?: string
-  /**
-   * <p>地址</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Location?: DatasourceConnectionLocation
-  /**
-   * <p>数据库名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DbName?: string
-  /**
-   * <p>地址信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccessInfo?: string
+  JobDefinitionId: string
 }
 
 /**
@@ -9934,6 +10281,28 @@ export interface DataEngineConfigPair {
 }
 
 /**
+ * tcc RangePartition定义
+ */
+export interface RangePartition {
+  /**
+   * <p>分区名</p>
+   */
+  Name?: string
+  /**
+   * <p>下界</p>
+   */
+  Lower?: Literal
+  /**
+   * <p>上界</p>
+   */
+  Upper?: Literal
+  /**
+   * <p>属性</p>
+   */
+  Properties?: Array<KVPair>
+}
+
+/**
  * 合并策略sort类型的规则定义
  */
 export interface SortOrder {
@@ -10128,17 +10497,13 @@ export interface EventItem {
 }
 
 /**
- * SuspendResumeDataEngine返回参数结构体
+ * DescribeJobDefinitionDetail请求参数结构体
  */
-export interface SuspendResumeDataEngineResponse {
+export interface DescribeJobDefinitionDetailRequest {
   /**
-   * 虚拟集群详细信息
+   * <p>作业定义 ID。必填。</p>
    */
-  DataEngineName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  JobDefinitionId: string
 }
 
 /**
@@ -10889,6 +11254,101 @@ export interface CreateScriptRequest {
 }
 
 /**
+ * UpdateInferenceModel返回参数结构体
+ */
+export interface UpdateInferenceModelResponse {
+  /**
+   * <p>推理模型ID</p>
+   */
+  ModelId?: string
+  /**
+   * <p>推理模型UID</p>
+   */
+  ModelUid?: string
+  /**
+   * <p>模型名称</p>
+   */
+  Name?: string
+  /**
+   * <p>模型提供方</p>
+   */
+  Provider?: string
+  /**
+   * <p>模型描述</p>
+   */
+  Description?: string
+  /**
+   * <p>模型类型</p>
+   */
+  ModelType?: string
+  /**
+   * <p>模型参数量</p>
+   */
+  ParameterSize?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>最新版本号</p>
+   */
+  LatestVersion?: string
+  /**
+   * <p>版本总数</p>
+   */
+  VersionCount?: number
+  /**
+   * <p>关联的推理服务数量</p>
+   */
+  ServiceCount?: number
+  /**
+   * <p>是否有存储</p>
+   */
+  HasStorage?: boolean
+  /**
+   * <p>是否使用用户自带存储桶</p>
+   */
+  HasCustomStorage?: boolean
+  /**
+   * <p>存储后端类型</p>
+   */
+  StorageType?: string
+  /**
+   * <p>是否内置模型</p>
+   */
+  BuiltIn?: boolean
+  /**
+   * <p>任务类型列表</p>
+   */
+  Tasks?: Array<string>
+  /**
+   * <p>APPID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>SUB UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>系统标签列表（TagKey-TagValue）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeUserVpcConnection请求参数结构体
  */
 export interface DescribeUserVpcConnectionRequest {
@@ -10904,6 +11364,16 @@ export interface DescribeUserVpcConnectionRequest {
    * 终端节点ID集合
    */
   UserVpcEndpointIds?: Array<string>
+}
+
+/**
+ * DescribeJobDetail返回参数结构体
+ */
+export interface DescribeJobDetailResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11195,6 +11665,52 @@ export interface GooseFSConfig {
 }
 
 /**
+ * TCHouseP 结构
+ */
+export interface TCHousePInfo {
+  /**
+   * <p>实例id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * <p>JdbcUrl</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JdbcUrl?: string
+  /**
+   * <p>用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * <p>密码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * <p>地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * <p>数据库名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * <p>地址信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessInfo?: string
+}
+
+/**
  * 返回数据表的相关信息。
  */
 export interface TableInfo {
@@ -11221,15 +11737,15 @@ export interface TableInfo {
 }
 
 /**
- * DescribeFlowList返回参数结构体
+ * DescribeCatalogs返回参数结构体
  */
-export interface DescribeFlowListResponse {
+export interface DescribeCatalogsResponse {
   /**
-   * 流程列表
+   * <p>Catalog详细信息列表</p>
    */
-  FlowInfoList?: Array<FlowInfo>
+  Catalogs?: Array<CatalogConfig>
   /**
-   * 总记录数
+   * <p>Catalog总数</p>
    */
   Total?: number
   /**
@@ -12177,6 +12693,20 @@ export interface DeleteDataEngineRequest {
 }
 
 /**
+ * tcc DlcConnection定义
+ */
+export interface DlcConnection {
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称</p>
+   */
+  InstanceName?: string
+}
+
+/**
  * DeleteInferenceService请求参数结构体
  */
 export interface DeleteInferenceServiceRequest {
@@ -12409,6 +12939,20 @@ export interface UpdateStandardEngineResourceGroupResourceInfoResponse {
 }
 
 /**
+ * tcc TruncatePartitioning定义
+ */
+export interface TruncatePartitioning {
+  /**
+   * <p>截取长度</p>
+   */
+  Width?: number
+  /**
+   * <p>字段名</p>
+   */
+  FieldName?: string
+}
+
+/**
  * DescribeTable返回参数结构体
  */
 export interface DescribeTableResponse {
@@ -12442,17 +12986,67 @@ export interface ListRegionLbsResponse {
 }
 
 /**
- * DescribeLakeFsTaskResult返回参数结构体
+ * tcc IndexInfo定义
  */
-export interface DescribeLakeFsTaskResultResponse {
+export interface IndexInfo {
   /**
-   * 路径的访问实例
+   * <p>索引名称</p>
    */
-  AccessToken?: LakeFileSystemToken
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>索引类型</p><p>枚举值：</p><ul><li>primary_key： 主键</li></ul>
    */
-  RequestId?: string
+  Type?: string
+  /**
+   * <p>索引字段</p>
+   */
+  FieldNames?: Array<string>
+}
+
+/**
+ * DescribeJobLog请求参数结构体
+ */
+export interface DescribeJobLogRequest {
+  /**
+   * <p>作业 ID（必填）。</p>
+   */
+  JobId: string
+  /**
+   * <p>日志类型（必填）。可选值：SPARK_SQL_OPERATION / SPARK_BATCH_OPERATION / SPARK_LAUNCH / SPARK_DRIVER_STDOUT / SPARK_DRIVER_LOG4J / SPARK_EXECUTOR_STDOUT / SPARK_EXECUTOR_LOG4J。</p>
+   */
+  LogType?: string
+  /**
+   * <p>Statement 序号（1-based，仅 LogType=SPARK_SQL_OPERATION 时可传），定位多语句作业中的具体语句。</p>
+   */
+  StatementIndex?: number
+  /**
+   * <p>分页游标（首页不传，后续页原样透传上一响应的 Cursor；不透明，无需解析）。无法续读时以 HasMore=false 终止分页。</p>
+   */
+  Cursor?: string
+  /**
+   * <p>返回上限（行数），范围 [1, 1000]。</p>
+   */
+  Limit?: number
+  /**
+   * <p>关键词过滤。</p>
+   */
+  Keyword?: string
+  /**
+   * <p>Pod 名称过滤。</p>
+   */
+  PodName?: string
+  /**
+   * <p>日志级别过滤。取值：ERROR / WARN / INFO / DEBUG / TRACE，非法值拒绝。</p>
+   */
+  LogLevel?: string
+  /**
+   * <p>起始时间，Unix 毫秒。</p>
+   */
+  From?: number
+  /**
+   * <p>结束时间，Unix 毫秒。</p>
+   */
+  To?: number
 }
 
 /**
@@ -12467,6 +13061,40 @@ export interface CoreInfo {
    * core 用量
    */
   CoreUsage?: Array<number | bigint>
+}
+
+/**
+ * tcc链接信息
+ */
+export interface ConnectionConfig {
+  /**
+   * <p>mysql数据源连接信息</p>
+   */
+  MysqlConnection?: MysqlConnection
+  /**
+   * <p>hive数据源连接信息</p>
+   */
+  EmrHiveConnection?: HiveConnection
+  /**
+   * <p>doris数据源连接信息</p>
+   */
+  TCHouseDConnection?: DorisConnection
+  /**
+   * <p>数据卷连接信息</p>
+   */
+  VolumeConnection?: VolumeConnection
+  /**
+   * <p>lakehouse连接信息</p>
+   */
+  LakeHouseConnection?: LakeHouseConnection
+  /**
+   * <p>PostgreSQL数据源连接信息</p>
+   */
+  PostgreSQLConnection?: PostgreSQLConnection
+  /**
+   * <p>dlc数据源连接信息</p>
+   */
+  DlcConnection?: DlcConnection
 }
 
 /**
@@ -13735,6 +14363,20 @@ export interface DescribeDataEngineEventsRequest {
 }
 
 /**
+ * UpdateRowFilter请求参数结构体
+ */
+export interface UpdateRowFilterRequest {
+  /**
+   * 行过滤策略的id，此值可以通过DescribeUserInfo或者DescribeWorkGroupInfo接口获取
+   */
+  PolicyId: number
+  /**
+   * 新的过滤策略。
+   */
+  Policy: Policy
+}
+
+/**
  * DescribeDataEnginePythonSparkImages返回参数结构体
  */
 export interface DescribeDataEnginePythonSparkImagesResponse {
@@ -14004,17 +14646,33 @@ export interface DatasourceConnectionConfig {
 }
 
 /**
- * UpdateRowFilter请求参数结构体
+ * tcc table列定义
  */
-export interface UpdateRowFilterRequest {
+export interface ColumnInfo {
   /**
-   * 行过滤策略的id，此值可以通过DescribeUserInfo或者DescribeWorkGroupInfo接口获取
+   * <p>字段名</p>
    */
-  PolicyId: number
+  Name?: string
   /**
-   * 新的过滤策略。
+   * <p>字段类型</p><p>枚举值：</p><ul><li>integer： 数值类型</li></ul>
    */
-  Policy: Policy
+  Type?: string
+  /**
+   * <p>字段描述</p>
+   */
+  Comment?: string
+  /**
+   * <p>字段设置（已废弃）</p>
+   */
+  FieldSetting?: string
+  /**
+   * <p>是否为主键（已废弃）</p><p>枚举值：</p><ul><li>true： 是主键</li></ul>
+   */
+  IsPrimaryKey?: boolean
+  /**
+   * <p>字段类型 sqlType 格式</p>
+   */
+  TypeText?: string
 }
 
 /**
@@ -14770,6 +15428,21 @@ export interface IpPortPair {
 }
 
 /**
+ * DescribeTaskResult返回参数结构体
+ */
+export interface DescribeTaskResultResponse {
+  /**
+   * 查询的任务信息，返回为空表示输入任务ID对应的任务不存在。只有当任务状态为成功（2）的时候，才会返回任务的结果。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskInfo?: TaskResultInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Presto监控指标
  */
 export interface PrestoMonitorMetrics {
@@ -14880,6 +15553,24 @@ export interface DeploymentReplicaInfo {
  * StopMlflowServer返回参数结构体
  */
 export interface StopMlflowServerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeWarehouses返回参数结构体
+ */
+export interface DescribeWarehousesResponse {
+  /**
+   * <p>总记录数.</p>
+   */
+  Total?: number
+  /**
+   * <p>计算仓库列表。</p>
+   */
+  WarehouseList?: Array<WarehouseInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15199,6 +15890,24 @@ export interface DescribeUserRegisterTimeResponse {
 }
 
 /**
+ * DescribeFlowList返回参数结构体
+ */
+export interface DescribeFlowListResponse {
+  /**
+   * 流程列表
+   */
+  FlowInfoList?: Array<FlowInfo>
+  /**
+   * 总记录数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DropDMSTable返回参数结构体
  */
 export interface DropDMSTableResponse {
@@ -15232,6 +15941,68 @@ export interface DescribeMlFlowConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyJobDefinition请求参数结构体
+ */
+export interface ModifyJobDefinitionRequest {
+  /**
+   * <p>作业定义 ID。必填。</p>
+   */
+  JobDefinitionId: string
+  /**
+   * <p>作业定义名称。创建后不可修改：仅接受与当前名称相同的值（回显），传不同值报错；不传表示不修改。</p>
+   */
+  Name?: string
+  /**
+   * <p>修改后的作业定义描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>引擎大类（当前仅支持 SPARK）。</p>
+   */
+  MajorType?: string
+  /**
+   * <p>作业子类型，SPARK_SQL / SPARK_BATCH / SPARK_STREAM；非必填。</p>
+   */
+  MinorType?: string
+  /**
+   * <p>流作业 checkpoint 路径（如 cosn://bucket/path/checkpoint），非必填，传了即覆盖。SPARK_STREAM 定义必须非空；变更等于重置消费进度。</p>
+   */
+  CheckpointLocation?: string
+  /**
+   * <p>资源分区代码，仅目标 RunMode=JOB 可传（QueueName 非空时必填）；目标 RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  PartitionCode?: string
+  /**
+   * <p>队列名称，仅目标 RunMode=JOB 可传且须与 PartitionCode 成对；目标 RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  QueueName?: string
+  /**
+   * <p>运行时/镜像编码，可选（null=沿用当前值）。仅对 JOB 模式定义生效；目标 RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  RuntimeCode?: string
+  /**
+   * <p>内置 Catalog 版本码（取值为 DescribeSysCatalogList 返回的目录子类型），可选（null=沿用当前值）。</p>
+   */
+  SysCatalogVersion?: string
+  /**
+   * <p>自定义 Spark conf（JSON 字符串，亦接受多行 key=value 文本，归一化为 JSON 存储、出参恒为 JSON），非必填，传了即整串覆盖。</p>
+   */
+  CustomProperties?: string
+  /**
+   * <p>环境变量（KEY=VALUE）列表，非必填，传了即整体覆盖。仅对 JOB 模式定义生效；目标 RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  EnvVars?: Array<KVPair>
+  /**
+   * <p>目标运行模式：WAREHOUSE / JOB；未传=保持不变。切换模式时两种模式的参数集严格隔离（切换 WAREHOUSE 须提供 WarehouseId 且禁传 JOB 模式专属字段，反之亦然）。</p>
+   */
+  RunMode?: string
+  /**
+   * <p>计算仓库 ID。仅目标 RunMode=WAREHOUSE 时可传（必填）；未传 RunMode 或目标为 JOB 时禁止传。</p>
+   */
+  WarehouseId?: string
 }
 
 /**
@@ -15561,81 +16332,41 @@ export interface AssignMangedTablePropertiesRequest {
 }
 
 /**
- * UpdateLab请求参数结构体
+ * tcc PostgreSQL连接信息
  */
-export interface UpdateLabRequest {
+export interface PostgreSQLConnection {
   /**
-   * <p>数据实验室名称</p>
+   * <p>IP地址</p>
    */
-  Name: string
+  Ip?: string
   /**
-   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   * <p>端口</p>
    */
-  Image?: string
+  Port?: string
   /**
-   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   * <p>用户名</p>
    */
-  LabImage?: string
+  User?: string
   /**
-   * <p>数据实验室描述</p>
+   * <p>密码</p>
    */
-  Description?: string
+  Password?: string
   /**
-   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   * <p>实例ID</p>
    */
-  ImagePullPolicy?: string
+  InstanceId?: string
   /**
-   * <p>资源配置ID</p>
+   * <p>实例名字</p>
    */
-  ResourceConfigId?: string
+  InstanceName?: string
   /**
-   * <p>计算组 ID</p>
+   * <p>网络信息</p>
    */
-  GroupId?: string
+  NetWork?: NetWork
   /**
-   * <p>资源分区ID</p>
+   * <p>数据库</p>
    */
-  ResourcePartitionId?: string
-  /**
-   * <p>队列名称</p>
-   */
-  Queue?: string
-  /**
-   * <p>案例ID，当 startMode=EXAMPLE 时必填</p>
-   */
-  ExampleId?: string
-  /**
-   * <p>案例代码包地址，当 startMode=EXAMPLE 时填写</p>
-   */
-  CodeArchiveUrl?: string
-  /**
-   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
-   */
-  LabImagePullPolicy?: string
-  /**
-   * <p>优先级（1-9，数字越大优先级越高）</p>
-   */
-  Priority?: number
-  /**
-   * <p>是否开启token认证</p>
-   */
-  EnableToken?: boolean
-  /**
-   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
-   */
-  Tags?: Array<Tag>
-  /**
-   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
-   */
-  PersistentWorkDir?: PersistentWorkDir
-  /**
-   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
-   */
-  ImagePullType?: string
-  /**
-   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
-   */
-  LabImagePullType?: string
+  Database?: string
 }
 
 /**
@@ -16018,6 +16749,84 @@ export interface CreateUserResponse {
 }
 
 /**
+ * UpdateLab请求参数结构体
+ */
+export interface UpdateLabRequest {
+  /**
+   * <p>数据实验室名称</p>
+   */
+  Name: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   */
+  LabImage?: string
+  /**
+   * <p>数据实验室描述</p>
+   */
+  Description?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>案例ID，当 startMode=EXAMPLE 时必填</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>案例代码包地址，当 startMode=EXAMPLE 时填写</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  LabImagePullPolicy?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
+}
+
+/**
  * DescribeNotebookSessionStatements请求参数结构体
  */
 export interface DescribeNotebookSessionStatementsRequest {
@@ -16029,6 +16838,24 @@ export interface DescribeNotebookSessionStatementsRequest {
    * 批任务id
    */
   BatchId: string
+}
+
+/**
+ * DescribeFlowList请求参数结构体
+ */
+export interface DescribeFlowListRequest {
+  /**
+   * 分区编码
+   */
+  PartitionCode: string
+  /**
+   * 页码，从1开始，默认为1
+   */
+  Page?: number
+  /**
+   * 每页返回数量，默认为10
+   */
+  PageSize?: number
 }
 
 /**
@@ -16069,6 +16896,20 @@ export interface ListDeploymentsRequest {
  * UpdateDataEngine返回参数结构体
  */
 export interface UpdateDataEngineResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResumeTrainingJobInstance返回参数结构体
+ */
+export interface ResumeTrainingJobInstanceResponse {
+  /**
+   * <p>训练实例详情</p>
+   */
+  Instance?: TrainingJobInstance
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16151,6 +16992,59 @@ export interface TPartition {
    * 策略参数
    */
   TransformArgs?: Array<string>
+}
+
+/**
+ * Doris数据源详细信息
+ */
+export interface TCHouseD {
+  /**
+   * 数据源实例的唯一ID
+   */
+  InstanceId?: string
+  /**
+   * 数据源名称
+   */
+  InstanceName?: string
+  /**
+   * 数据源的JDBC
+   */
+  JdbcUrl?: string
+  /**
+   * 用于访问数据源的用户
+   */
+  User?: string
+  /**
+   * 数据源访问密码，需要base64编码
+   */
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名
+   */
+  DbName?: string
+  /**
+   * 访问信息
+   */
+  AccessInfo?: string
+}
+
+/**
+ * DescribeCatalogTableNames返回参数结构体
+ */
+export interface DescribeCatalogTableNamesResponse {
+  /**
+   * <p>Table名称列表</p>
+   */
+  TableNames?: Array<NameIdentifier>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16583,34 +17477,13 @@ export interface ListServiceApiKeysResponse {
 }
 
 /**
- * DescribeEmrClusterInfo返回参数结构体
+ * CheckDataEngineImageCanBeRollback请求参数结构体
  */
-export interface DescribeEmrClusterInfoResponse {
+export interface CheckDataEngineImageCanBeRollbackRequest {
   /**
-   * <p>EMR 集群 ID，例如 emr-40ybwbbn</p>
+   * 引擎唯一id
    */
-  ClusterId?: string
-  /**
-   * <p>EMR 集群名称</p>
-   */
-  ClusterName?: string
-  /**
-   * <p>集群绑定的 COS Bucket 名称</p>
-   */
-  CosBucket?: string
-  /**
-   * <p>关联的 TKE 集群 ID，例如 cls-xxxxxxxx</p>
-   */
-  TkeClusterId?: string
-  /**
-   * <p>集群资源用量（Cpu / Mem）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceUsage?: EmrResourceUsage
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DataEngineId: string
 }
 
 /**
@@ -17048,9 +17921,62 @@ export interface StopBenchmarkTaskResponse {
 export type DescribeStoreLocationRequest = null
 
 /**
+ * DescribeWarehouses请求参数结构体
+ */
+export interface DescribeWarehousesRequest {
+  /**
+   * <p>页码，从1开始，默认为1.</p>
+   */
+  Page?: number
+  /**
+   * <p>每页返回数量，默认为10.</p>
+   */
+  PageSize?: number
+  /**
+   * <p>高级过滤条件列表，元素 Name 为过滤字段名（PascalCase，可用字段与操作符约束见各接口 Filters 说明），Values 为过滤值列表；未列入白名单或非 PascalCase 的 Name 报 InvalidParameter。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表，元素 Field 为排序字段名（PascalCase，与响应字段命名对齐，可用字段见各接口 SortFields 说明），Order 为排序方向（ASC/DESC，不传默认 DESC）；未列入白名单或非 PascalCase 的 Field 报 InvalidParameter。</p>
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
  * AddUsersToWorkGroup返回参数结构体
  */
 export interface AddUsersToWorkGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeEmrClusterInfo返回参数结构体
+ */
+export interface DescribeEmrClusterInfoResponse {
+  /**
+   * <p>EMR 集群 ID，例如 emr-40ybwbbn</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>EMR 集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * <p>集群绑定的 COS Bucket 名称</p>
+   */
+  CosBucket?: string
+  /**
+   * <p>关联的 TKE 集群 ID，例如 cls-xxxxxxxx</p>
+   */
+  TkeClusterId?: string
+  /**
+   * <p>集群资源用量（Cpu / Mem）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceUsage?: EmrResourceUsage
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17575,9 +18501,77 @@ export interface LaunchStandardEngineResourceGroupsResponse {
 }
 
 /**
- * UpdateNetworkConnection返回参数结构体
+ * DescribeTablesName请求参数结构体
  */
-export interface UpdateNetworkConnectionResponse {
+export interface DescribeTablesNameRequest {
+  /**
+   * 列出该数据库下所属数据表。
+   */
+  DatabaseName: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 数据偏移量，从0开始，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为其一
+table-name - String - （过滤条件）数据表名称,形如：table-001。
+table-id - String - （过滤条件）table id形如：12342。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 指定查询的数据源名称，默认为DataLakeCatalog
+   */
+  DatasourceConnectionName?: string
+  /**
+   * 起始时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
+   */
+  StartTime?: string
+  /**
+   * 终止时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
+   */
+  EndTime?: string
+  /**
+   * 排序字段，支持：CreateTime（创建时间）、UpdateTime（更新时间）、StorageSize（存储空间）、RecordCount（行数）、Name（表名称）（不传则默认按name升序）
+   */
+  Sort?: string
+  /**
+   * 排序字段，false：降序（默认）；true：升序
+   */
+  Asc?: boolean
+  /**
+   * table type，表类型查询,可用值:EXTERNAL_TABLE,INDEX_TABLE,MANAGED_TABLE,MATERIALIZED_VIEW,TABLE,VIEW,VIRTUAL_VIEW
+   */
+  TableType?: string
+  /**
+   * 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它；
+   */
+  TableFormat?: string
+}
+
+/**
+ * DescribeJobLog返回参数结构体
+ */
+export interface DescribeJobLogResponse {
+  /**
+   * <p>日志行数据。</p>
+   */
+  Lines?: Array<string>
+  /**
+   * <p>下一页游标（不透明令牌，原样透传回请求即可；无更多日志时不返回）。</p>
+   */
+  Cursor?: string
+  /**
+   * <p>是否还有更多日志。</p>
+   */
+  HasMore?: boolean
+  /**
+   * <p>日志条目列表。</p>
+   */
+  Results?: Array<ClsLogEntry>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17929,105 +18923,29 @@ export interface GetRayJobPodYamlResponse {
 }
 
 /**
- * UpdateRayCluster返回参数结构体
+ * tcc hive连接信息
  */
-export interface UpdateRayClusterResponse {
+export interface HiveConnection {
   /**
-   * <p>集群ID</p>
+   * <p>实例id</p>
    */
-  Id?: string
+  InstanceId?: string
   /**
-   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   * <p>实例名称</p>
    */
-  Type?: string
+  InstanceName?: string
   /**
-   * <p>集群名称</p>
+   * <p>元数据url</p>
    */
-  Name?: string
+  MetaStoreUrl?: string
   /**
-   * <p>集群描述</p>
+   * <p>网络信息</p>
    */
-  Description?: string
+  NetWork?: NetWork
   /**
-   * <p>所属资源分区ID</p>
+   * <p>hive版本</p>
    */
-  ResourcePartitionId?: string
-  /**
-   * <p>默认资源分区名称</p>
-   */
-  ResourcePartitionName?: string
-  /**
-   * <p>所属队列名称</p>
-   */
-  Queue?: string
-  /**
-   * <p>应用ID</p>
-   */
-  AppId?: number
-  /**
-   * <p>用户UIN</p>
-   */
-  Uin?: string
-  /**
-   * <p>子用户UIN</p>
-   */
-  SubAccountUin?: string
-  /**
-   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
-   */
-  SubAccountName?: string
-  /**
-   * <p>集群状态</p>
-   */
-  Status?: string
-  /**
-   * <p>创建时间</p>
-   */
-  CreateTime?: number
-  /**
-   * <p>计算组 ID</p>
-   */
-  GroupId?: string
-  /**
-   * <p>资源配置(JSON)</p>
-   */
-  ResourceConfig?: string
-  /**
-   * <p>资源配置ID</p>
-   */
-  ResourceConfigId?: string
-  /**
-   * <p>镜像地址</p>
-   */
-  Image?: string
-  /**
-   * <p>存储卷和挂载卷配置(JSON)</p>
-   */
-  Catalog?: string
-  /**
-   * <p>镜像拉取策略</p>
-   */
-  ImagePullPolicy?: string
-  /**
-   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
-   */
-  ImagePullType?: string
-  /**
-   * <p>高级参数（规范化后的扁平 KV JSON）</p>
-   */
-  AdvancedOptions?: string
-  /**
-   * <p>优先级（1-9，数字越大优先级越高）</p>
-   */
-  Priority?: number
-  /**
-   * <p>标签列表（TagKey-TagValue）</p>
-   */
-  Tags?: Array<Tag>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  HiveVersion?: string
 }
 
 /**
@@ -18553,21 +19471,81 @@ export interface ImportTkeClusterResponse {
 }
 
 /**
- * MLFlow 实验追踪配置
+ * 作业定义列表项 POJO（精简版）.
  */
-export interface MlFlowConfig {
+export interface JobDefinitionItemInfo {
   /**
-   * <p>MlFlow 追踪模式：local=MlFlow Sidecar / remote=已有 MlFlow Server / none=不启用</p>
+   * <p>作业定义唯一标识符（ID）。</p>
    */
-  MlFlowMode?: string
+  JobDefinitionId?: string
   /**
-   * <p>已有MlFlow Server 的 ID（仅 mlFlowMode=remote 时填写，前端下拉选择后传入）</p>
+   * <p>作业定义名称。</p>
    */
-  MlFlowServerId?: string
+  Name?: string
   /**
-   * <p>MlFlow Sidecar 持久化存储的 COS 路径（仅 mlFlowMode=local 时填写）</p>
+   * <p>作业定义描述。</p>
    */
-  MlFlowCosPath?: string
+  Description?: string
+  /**
+   * <p>作业主类型。</p>
+   */
+  MajorType?: string
+  /**
+   * <p>作业子类型。</p>
+   */
+  MinorType?: string
+  /**
+   * <p>流作业 checkpoint 路径（MinorType=SPARK_STREAM 时非空）。同一流作业的多次运行必须复用同一路径，变更等于重置消费进度。</p>
+   */
+  CheckpointLocation?: string
+  /**
+   * <p>创建者（子账号 UIN）。</p>
+   */
+  CreatorSubUin?: string
+  /**
+   * <p>创建时间（Unix 毫秒时间戳）。</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（Unix 毫秒时间戳）。</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>分区编码。</p>
+   */
+  PartitionCode?: string
+  /**
+   * <p>分区展示名（解析不到时为空）。</p>
+   */
+  PartitionName?: string
+  /**
+   * <p>队列名称。</p>
+   */
+  QueueName?: string
+  /**
+   * <p>运行模式: JOB | WAREHOUSE.</p>
+   */
+  RunMode?: string
+  /**
+   * <p>计算仓库 ID, RunMode=WAREHOUSE 时非空.</p>
+   */
+  WarehouseId?: string
+  /**
+   * <p>请求时间窗口（InstanceTimeRange，默认 7 天）内的作业实例数。</p>
+   */
+  InstanceCount?: number
+  /**
+   * <p>运行时/镜像编码（可选值见 DescribeSparkRuntimes）。JOB 模式取定义自身配置，WAREHOUSE 模式取所属计算仓库运行时；解析不到时为空。</p>
+   */
+  RuntimeCode?: string
+  /**
+   * <p>运行时展示名（如 Spark 3.5.5），与 RuntimeCode 配套；解析不到时为空。</p>
+   */
+  RuntimeName?: string
+  /**
+   * <p>计算仓库名称（列表整页按去重后的仓库反查填充；warehouse 模式下非空，仓库已销毁时仍回填历史名称）。</p>
+   */
+  WarehouseName?: string
 }
 
 /**
@@ -18782,6 +19760,24 @@ export interface DescribeDataEngineSessionParametersRequest {
    * 引擎名称，当指定引擎名称后优先使用名称获取配置
    */
   DataEngineName?: string
+}
+
+/**
+ * DescribeCatalogTableInfo请求参数结构体
+ */
+export interface DescribeCatalogTableInfoRequest {
+  /**
+   * <p>Catalog名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>Schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>Table名称</p>
+   */
+  TableName: string
 }
 
 /**
@@ -19969,6 +20965,16 @@ export interface ResourceSaleInfo {
 }
 
 /**
+ * DescribeJobDetail请求参数结构体
+ */
+export interface DescribeJobDetailRequest {
+  /**
+   * <p>作业唯一标识符（ID）。必填。</p>
+   */
+  JobId: string
+}
+
+/**
  * 任务监控信息
  */
 export interface TaskMonitorInfo {
@@ -20766,9 +21772,26 @@ export interface DescribeDataEngineImageVersionsResponse {
 }
 
 /**
- * DescribeSaleRegions请求参数结构体
+ * DescribeJobResult请求参数结构体
  */
-export type DescribeSaleRegionsRequest = null
+export interface DescribeJobResultRequest {
+  /**
+   * <p>作业唯一标识符（ID）。必填。</p>
+   */
+  JobId: string
+  /**
+   * <p>页码，从1开始，默认为1.</p>
+   */
+  Page?: number
+  /**
+   * <p>每页返回数量，默认为10.</p>
+   */
+  PageSize?: number
+  /**
+   * <p>Statement 序号（1-based），多语句作业时指定；缺省为 0，取整作业第一个结果集.</p>
+   */
+  StatementIndex?: number
+}
 
 /**
  * CreateTcIcebergTable返回参数结构体
@@ -21876,6 +22899,16 @@ export interface ListTaskJobLogDetailResponse {
 }
 
 /**
+ * UpdateEngineResourceGroupNetworkConfigInfo返回参数结构体
+ */
+export interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateMetaDatabase返回参数结构体
  */
 export interface CreateMetaDatabaseResponse {
@@ -22439,13 +23472,17 @@ export interface GetInferenceServiceResponse {
 }
 
 /**
- * CheckDataEngineImageCanBeRollback请求参数结构体
+ * DescribeLakeFsTaskResult返回参数结构体
  */
-export interface CheckDataEngineImageCanBeRollbackRequest {
+export interface DescribeLakeFsTaskResultResponse {
   /**
-   * 引擎唯一id
+   * 路径的访问实例
    */
-  DataEngineId: string
+  AccessToken?: LakeFileSystemToken
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -22768,18 +23805,37 @@ export interface GetExampleDetailResponse {
 }
 
 /**
- * DescribeTaskResult返回参数结构体
+ * DescribeJobDefinitions请求参数结构体
  */
-export interface DescribeTaskResultResponse {
+export interface DescribeJobDefinitionsRequest {
   /**
-   * 查询的任务信息，返回为空表示输入任务ID对应的任务不存在。只有当任务状态为成功（2）的时候，才会返回任务的结果。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>页码，从1开始，默认为1.</p>
    */
-  TaskInfo?: TaskResultInfo
+  Page?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>每页返回数量，默认为10.</p>
    */
-  RequestId?: string
+  PageSize?: number
+  /**
+   * <p>高级过滤条件列表，元素 Name 为过滤字段名（PascalCase，可用字段与操作符约束见各接口 Filters 说明），Values 为过滤值列表；未列入白名单或非 PascalCase 的 Name 报 InvalidParameter。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表，元素 Field 为排序字段名（PascalCase，与响应字段命名对齐，可用字段见各接口 SortFields 说明），Order 为排序方向（ASC/DESC，不传默认 DESC）；未列入白名单或非 PascalCase 的 Field 报 InvalidParameter。</p>
+   */
+  SortFields?: Array<SortField>
+  /**
+   * <p>创建时间下限（Unix 毫秒时间戳）。</p>
+   */
+  CreateTimeStart?: number
+  /**
+   * <p>创建时间上限（Unix 毫秒时间戳）。</p>
+   */
+  CreateTimeEnd?: number
+  /**
+   * <p>作业实例计数时间窗口（毫秒时长）。不传时默认 7 天。</p>
+   */
+  InstanceTimeRange?: number
 }
 
 /**
@@ -22975,42 +24031,79 @@ export interface CreateSparkAppForTDLCResponse {
 }
 
 /**
- * Doris数据源详细信息
+ * DescribeJobResult返回参数结构体
  */
-export interface TCHouseD {
+export interface DescribeJobResultResponse {
   /**
-   * 数据源实例的唯一ID
+   * <p>总记录数.</p>
    */
-  InstanceId?: string
+  Total?: number
   /**
-   * 数据源名称
+   * <p>作业 ID。</p>
    */
-  InstanceName?: string
+  JobId?: string
   /**
-   * 数据源的JDBC
+   * <p>结果状态（对客）：SUCCEEDED（结果集可用，含 0 行——DDL/DML 等无结果集语句亦归入此类，message 说明）/ UNAVAILABLE（终态无结果：statement 已失败或取消）/ ERROR（结果集拉取出错）/ NOT_READY（结果未就绪）/ NOT_SUPPORTED（作业形态不产出结果集）。</p>
    */
-  JdbcUrl?: string
+  State?: string
   /**
-   * 用于访问数据源的用户
+   * <p>状态描述（SUCCEEDED 0 行时为无结果集说明；ERROR 为错误信息；UNAVAILABLE 为 statement 失败/取消原因）。</p>
    */
-  User?: string
+  Message?: string
   /**
-   * 数据源访问密码，需要base64编码
+   * <p>列定义列表（按结果集列顺序；State=SUCCEEDED 才有）。</p>
    */
-  Password?: string
+  Columns?: Array<ResultColumn>
   /**
-   * 数据源的VPC和子网信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>结果集全量行数（未按在线展示上限封顶）。Total 为在线可见行数，二者不等说明仅部分行可内联查看，完整结果通过 Download 获取。</p>
    */
-  Location?: DatasourceConnectionLocation
+  TotalRows?: number
   /**
-   * 默认数据库名
+   * <p>行数据（State=SUCCEEDED 才有），每行为 {"Values": [单元格值...]} 数组。</p>
    */
-  DbName?: string
+  Rows?: Array<ResultRow>
   /**
-   * 访问信息
+   * <p>本页内容是否因响应大小限制被截断（单元格/行超限，结果集仅 1 行时也可能触发）。行数超过在线展示上限不由本标记表达，以 TotalRows > Total 判断，完整结果通过 Download 获取.</p>
    */
-  AccessInfo?: string
+  Truncated?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCatalogTableNamesPage请求参数结构体
+ */
+export interface DescribeCatalogTableNamesPageRequest {
+  /**
+   * <p>catalog名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>Schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>每页大小</p>
+   */
+  Limit?: number
+  /**
+   * <p>页数</p>
+   */
+  Offset?: number
+  /**
+   * <p>是否基于快照</p>
+   */
+  SnapshotBased?: boolean
+  /**
+   * <p>快照id</p>
+   */
+  SnapshotId?: string
+  /**
+   * <p>table匹配规则</p>
+   */
+  TableNamePattern?: string
 }
 
 /**
@@ -23130,6 +24223,20 @@ export interface DescribeSubUserAccessPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * tcc BucketPartitioning定义
+ */
+export interface BucketPartitioning {
+  /**
+   * <p>分桶字段</p>
+   */
+  FieldNames?: Array<string>
+  /**
+   * <p>分桶数</p>
+   */
+  NumBuckets?: number
 }
 
 /**
@@ -23693,6 +24800,52 @@ export interface DropDMSPartitionsRequest {
 }
 
 /**
+ * tcc Partition分区定义
+ */
+export interface Partitioning {
+  /**
+   * <p>转换策略</p>
+   */
+  Strategy?: string
+  /**
+   * <p>按年分区策略</p>
+   */
+  YearPartitioning?: SingleFieldPartitioning
+  /**
+   * <p>按月分区策略</p>
+   */
+  MonthPartitioning?: SingleFieldPartitioning
+  /**
+   * <p>按天分区策略</p>
+   */
+  DayPartitioning?: SingleFieldPartitioning
+  /**
+   * <p>按小时分区策略</p>
+   */
+  HourPartitioning?: SingleFieldPartitioning
+  /**
+   * <p>按字段分区策略</p>
+   */
+  IdentityPartitioning?: SingleFieldPartitioning
+  /**
+   * <p>列表分区策略</p>
+   */
+  ListPartitioning?: ListPartitioning
+  /**
+   * <p>范围分区策略</p>
+   */
+  RangePartitioning?: RangePartitioning
+  /**
+   * <p>分桶分区策略</p>
+   */
+  BucketPartitioning?: BucketPartitioning
+  /**
+   * <p>截断分区策略</p>
+   */
+  TruncatePartitioning?: TruncatePartitioning
+}
+
+/**
  * DescribeTaskResourceUsage返回参数结构体
  */
 export interface DescribeTaskResourceUsageResponse {
@@ -23900,6 +25053,60 @@ export interface DescribeUserTypeRequest {
    * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
    */
   AccountType?: string
+}
+
+/**
+ * 数据目录配置
+ */
+export interface CatalogConfig {
+  /**
+   * <p>数据目录唯一 ID</p>
+   */
+  Id?: string
+  /**
+   * <p>数据目录名字</p>
+   */
+  Name?: string
+  /**
+   * <p>数据目录类型</p><p>枚举值：</p><ul><li>LAKEHOUSE： LAKEHOUSE类型</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>数据目录描述信息</p>
+   */
+  Comment?: string
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>2： 连接成功</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>数据目录属性</p>
+   */
+  Properties?: Array<KVPair>
+  /**
+   * <p>连接信息</p>
+   */
+  Connection?: ConnectionConfig
+  /**
+   * <p>操作人 uin</p>
+   */
+  Operator?: string
+  /**
+   * <p>连接日志</p>
+   */
+  Message?: string
+  /**
+   * <p>审计信息</p>
+   */
+  Audit?: Audit
+  /**
+   * <p>创建时间（已废弃）</p><p>参数格式：2024-01-01 12:00:00</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间（已废弃）</p><p>参数格式：2024-01-01 12:00:00</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -24418,21 +25625,61 @@ export interface DescribeTasksRequest {
 }
 
 /**
- * CreateSparkAppTask请求参数结构体
+ * CreateJobDefinition请求参数结构体
  */
-export interface CreateSparkAppTaskRequest {
+export interface CreateJobDefinitionRequest {
   /**
-   * <p>spark作业名</p>
+   * <p>作业定义名称。必填，trim 后非空。</p>
    */
-  JobName: string
+  Name?: string
   /**
-   * <p>spark作业程序入参，以空格分隔；一般用于周期性调用使用</p>
+   * <p>作业定义描述。</p>
    */
-  CmdArgs?: string
+  Description?: string
   /**
-   * <p>任务来源信息</p>
+   * <p>引擎大类，非必传，缺省 SPARK；当前仅支持 SPARK。</p>
    */
-  SourceInfo?: Array<KVPair>
+  MajorType?: string
+  /**
+   * <p>作业子类型，SPARK_SQL / SPARK_BATCH / SPARK_STREAM，必填；决定 Entrypoint 字段的校验规则。</p>
+   */
+  MinorType?: string
+  /**
+   * <p>流作业 checkpoint 路径（如 cosn://bucket/path/checkpoint）。MinorType=SPARK_STREAM 时必填；同一作业的多次运行必须复用同一路径，变更等于重置消费进度。</p>
+   */
+  CheckpointLocation?: string
+  /**
+   * <p>资源分区代码，仅 RunMode=JOB 可传（QueueName 非空时必填）；RunMode=WAREHOUSE 时禁止传（被仓库反查值覆盖）。</p>
+   */
+  PartitionCode?: string
+  /**
+   * <p>队列名称，仅 RunMode=JOB 可传且须与 PartitionCode 成对；RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  QueueName?: string
+  /**
+   * <p>运行时/镜像编码（可选值见 DescribeSparkRuntimes）。RunMode=JOB 新建时必填（无基座继承语义）；克隆场景可省略（继承源定义快照）；RunMode=WAREHOUSE 时忽略。</p>
+   */
+  RuntimeCode?: string
+  /**
+   * <p>内置 Catalog 版本码（取值为 DescribeSysCatalogList 返回的目录子类型）。RunMode=JOB 新建时条件必填：未传时若可用（enabled）SysCatalog 唯一则自动选中，多个/零个报错；克隆场景可省略（继承源定义快照）；RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  SysCatalogVersion?: string
+  /**
+   * <p>自定义 Spark conf（JSON 字符串，亦接受多行 key=value 文本，归一化为 JSON 存储、出参恒为 JSON），作为 SPARK_CUSTOM 配置通道落库，两种运行模式均生效。</p>
+   */
+  CustomProperties?: string
+  /**
+   * <p>环境变量（KEY=VALUE）列表。仅 RunMode=JOB 可传；RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  EnvVars?: Array<KVPair>
+  /**
+   * <p>运行模式，必填。可选值：WAREHOUSE（提交到计算仓库执行）/ JOB（按 Spec 独享资源）。两种模式的参数集严格隔离，详见各字段说明。</p>
+   */
+  RunMode?: string
+  /**
+   * <p>计算仓库 ID。RunMode=WAREHOUSE 时必填（仓库需可启动）；RunMode=JOB 时禁止传。</p>
+   */
+  WarehouseId?: string
 }
 
 /**
@@ -24565,6 +25812,88 @@ export interface UnlockMetaDataRequest {
 }
 
 /**
+ * 计算仓库基础信息（对外 API 响应，DescribeWarehouses 列表结构）.
+ */
+export interface WarehouseInfo {
+  /**
+   * <p>仓库 id（格式 "dlc-wh-xxxxxxxx"）.</p>
+   */
+  WarehouseId?: string
+  /**
+   * <p>仓库名称，租户内唯一。</p>
+   */
+  Name?: string
+  /**
+   * <p>创建者子账号 UIN。</p>
+   */
+  CreatorSubUin?: string
+  /**
+   * <p>仓库描述信息。</p>
+   */
+  Description?: string
+  /**
+   * <p>fermion 合并后的单一状态。取值：STARTING / RUNNING / STOPPING / STOPPED / UPDATING / UNAVAILABLE / DESTROYING（销毁中，只读：不接受任何生命周期操作）。</p>
+   */
+  State?: string
+  /**
+   * <p>资源池编码.</p>
+   */
+  PartitionCode?: string
+  /**
+   * <p>资源池展示名（解析不到时为空）.</p>
+   */
+  PartitionName?: string
+  /**
+   * <p>资源组/队列名。</p>
+   */
+  QueueName?: string
+  /**
+   * <p>创建时间（毫秒时间戳）。</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>最后更新时间（毫秒时间戳）。</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>活跃集群数（describe 与 list 均返回）。集群明细等完整快照仅 DescribeWarehouseDetail 的 Observability 返回。</p>
+   */
+  ActiveClusters?: number
+  /**
+   * <p>最小集群数（即最小实例数下限；describe 与 list 均返回）.</p>
+   */
+  MinClusters?: number
+  /**
+   * <p>最大集群数（即最大实例数上限；describe 与 list 均返回）.</p>
+   */
+  MaxClusters?: number
+  /**
+   * <p>运行时/镜像.</p>
+   */
+  RuntimeCode?: string
+  /**
+   * <p>运行时展示名（如 Spark 3.5.5），与 RuntimeCode 配套；解析不到时为空.</p>
+   */
+  RuntimeName?: string
+  /**
+   * <p>Catalog 版本码.</p>
+   */
+  SysCatalogVersion?: string
+  /**
+   * <p>环境变量.</p>
+   */
+  EnvVars?: Array<KVPair>
+  /**
+   * <p>静态运行参数（RuntimeConf）：spark.* KV 的 JSON 字符串（如 "{\"spark.sql.shuffle.partitions\":\"400\"}"），spark-submit 时生效。</p>
+   */
+  RuntimeConf?: string
+  /**
+   * <p>动态参数（DynamicProperties）：spark.* KV 的 JSON 字符串，运行期生效（会话级，openSession 弱注入，即改即生效）。</p>
+   */
+  DynamicProperties?: string
+}
+
+/**
  * GenerateCreateMangedTableSql返回参数结构体
  */
 export interface GenerateCreateMangedTableSqlResponse {
@@ -24651,23 +25980,78 @@ export interface ListTaskJobLogDetailRequest {
 }
 
 /**
- * CLS 日志主题条目
+ * 用于返回训练作业的checkpoint的配置信息
  */
-export interface ClsTopicItem {
+export interface CheckpointConfig {
   /**
-   * <p>日志主题 ID</p>
+   * <p>Checkpoint 产出存储的 Catalog 配置 JSON（结构同顶层 Catalog）</p>
    */
-  TopicId?: string
+  Catalog?: string
   /**
-   * <p>日志主题名称</p>
+   * <p>保存策略：steps / epoch / none，默认 steps；GRPO 仅支持 steps / none</p>
    */
-  TopicName?: string
+  SaveStrategy?: string
+  /**
+   * <p>保存频率（每 N 步或每 N epoch），默认 500</p>
+   */
+  SaveFreq?: number
+  /**
+   * <p>最大保留数量，0 表示不限制，默认 3</p>
+   */
+  MaxKeep?: number
+  /**
+   * <p>容器内输出目录回退值（可选；正常场景由 Checkpoint 挂载路径决定，仅在挂载路径为空时生效，默认 /workspace/output/{mode}）</p>
+   */
+  OutputDir?: string
 }
 
 /**
- * DescribeSaleResourceInfo请求参数结构体
+ * tcc mysql连接信息
  */
-export type DescribeSaleResourceInfoRequest = null
+export interface MysqlConnection {
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>JDBC连接地址</p>
+   */
+  JDBCUrl?: string
+  /**
+   * <p>账号</p>
+   */
+  User?: string
+  /**
+   * <p>密码</p>
+   */
+  Password?: string
+  /**
+   * <p>网络信息</p>
+   */
+  NetWork?: NetWork
+}
+
+/**
+ * DescribeJobList返回参数结构体
+ */
+export interface DescribeJobListResponse {
+  /**
+   * <p>总记录数.</p>
+   */
+  Total?: number
+  /**
+   * <p>作业摘要列表。</p>
+   */
+  Items?: Array<JobBriefInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeNativeSparkSessions请求参数结构体
@@ -24987,6 +26371,36 @@ export interface DataMaskStrategyInfo {
    * 策略Id
    */
   StrategyId?: string
+}
+
+/**
+ * DescribeJobList请求参数结构体
+ */
+export interface DescribeJobListRequest {
+  /**
+   * <p>页码，从1开始，默认为1.</p>
+   */
+  Page?: number
+  /**
+   * <p>每页返回数量，默认为10.</p>
+   */
+  PageSize?: number
+  /**
+   * <p>高级过滤条件列表，元素 Name 为过滤字段名（PascalCase，可用字段与操作符约束见各接口 Filters 说明），Values 为过滤值列表；未列入白名单或非 PascalCase 的 Name 报 InvalidParameter。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表，元素 Field 为排序字段名（PascalCase，与响应字段命名对齐，可用字段见各接口 SortFields 说明），Order 为排序方向（ASC/DESC，不传默认 DESC）；未列入白名单或非 PascalCase 的 Field 报 InvalidParameter。</p>
+   */
+  SortFields?: Array<SortField>
+  /**
+   * <p>创建时间下限（Unix 毫秒时间戳）。</p>
+   */
+  CreateTimeStart?: number
+  /**
+   * <p>创建时间上限（Unix 毫秒时间戳）。</p>
+   */
+  CreateTimeEnd?: number
 }
 
 /**
@@ -25376,6 +26790,24 @@ export interface DeleteScriptRequest {
    * 脚本id，其可以通过DescribeScripts接口提取
    */
   ScriptIds: Array<string>
+}
+
+/**
+ * tcc ListPartition定义
+ */
+export interface ListPartition {
+  /**
+   * <p>分区名</p>
+   */
+  Name?: string
+  /**
+   * <p>分区列表</p>
+   */
+  Lists?: Array<Literal>
+  /**
+   * <p>属性</p>
+   */
+  Properties?: Array<KVPair>
 }
 
 /**
@@ -26199,148 +27631,6 @@ export interface ListBenchmarkTasksRequest {
 }
 
 /**
- * DescribeBindablePrometheus请求参数结构体
- */
-export interface DescribeBindablePrometheusRequest {
-  /**
-   * <p>TKE 集群 ID</p>
-   */
-  ClusterId: string
-  /**
-   * <p>Prometheus 实例 ID（用于列表精确搜索）</p>
-   */
-  InstanceId?: string
-  /**
-   * <p>分页大小，默认 20，最大 100</p>
-   */
-  Limit?: number
-  /**
-   * <p>分页偏移，默认 0</p>
-   */
-  Offset?: number
-}
-
-/**
- * ListExampleCategories返回参数结构体
- */
-export interface ListExampleCategoriesResponse {
-  /**
-   * <p>总记录数</p>
-   */
-  Total?: number
-  /**
-   * <p>当前页码（从1开始）</p>
-   */
-  Page?: number
-  /**
-   * <p>页数</p>
-   */
-  PageSize?: number
-  /**
-   * <p>总页数</p>
-   */
-  TotalPages?: number
-  /**
-   * <p>分类列表</p>
-   */
-  Items?: Array<ExampleCategories>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMlflowServer请求参数结构体
- */
-export interface DescribeMlflowServerRequest {
-  /**
-   * <p>MlFlowServer的ID</p>
-   */
-  ServerId?: string
-}
-
-/**
- * spark流任务统计信息
- */
-export interface StreamingStatistics {
-  /**
-   * 任务开始时间
-   */
-  StartTime: string
-  /**
-   * 数据接收器数
-   */
-  Receivers: number
-  /**
-   * 运行中的接收器数
-   */
-  NumActiveReceivers: number
-  /**
-   * 不活跃的接收器数
-   */
-  NumInactiveReceivers: number
-  /**
-   * 运行中的批数
-   */
-  NumActiveBatches: number
-  /**
-   * 待处理的批数
-   */
-  NumRetainedCompletedBatches: number
-  /**
-   * 已完成的批数
-   */
-  NumTotalCompletedBatches: number
-  /**
-   * 平均输入速率
-   */
-  AverageInputRate: number
-  /**
-   * 平均等待时长
-   */
-  AverageSchedulingDelay: number
-  /**
-   * 平均处理时长
-   */
-  AverageProcessingTime: number
-  /**
-   * 平均延时
-   */
-  AverageTotalDelay: number
-}
-
-/**
- * ListImages返回参数结构体
- */
-export interface ListImagesResponse {
-  /**
-   * 总记录数
-   */
-  Total?: number
-  /**
-   * 当前页码（从1开始）
-   */
-  Page?: number
-  /**
-   * 页数
-   */
-  PageSize?: number
-  /**
-   * 总页数
-   */
-  TotalPages?: number
-  /**
-   * 镜像列表
-   */
-  Items?: Array<ImageDto>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 任务实例。
  */
 export interface TaskResponseInfo {
@@ -26526,6 +27816,162 @@ export interface TaskResponseInfo {
 }
 
 /**
+ * DescribeBindablePrometheus请求参数结构体
+ */
+export interface DescribeBindablePrometheusRequest {
+  /**
+   * <p>TKE 集群 ID</p>
+   */
+  ClusterId: string
+  /**
+   * <p>Prometheus 实例 ID（用于列表精确搜索）</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>分页大小，默认 20，最大 100</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移，默认 0</p>
+   */
+  Offset?: number
+}
+
+/**
+ * ListExampleCategories返回参数结构体
+ */
+export interface ListExampleCategoriesResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>分类列表</p>
+   */
+  Items?: Array<ExampleCategories>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMlflowServer请求参数结构体
+ */
+export interface DescribeMlflowServerRequest {
+  /**
+   * <p>MlFlowServer的ID</p>
+   */
+  ServerId?: string
+}
+
+/**
+ * tcc Literal定义
+ */
+export interface Literal {
+  /**
+   * <p>数值</p>
+   */
+  Value?: string
+  /**
+   * <p>类型</p><p>枚举值：</p><ul><li>integer： 整数类型</li></ul>
+   */
+  DataType?: string
+}
+
+/**
+ * ListImages返回参数结构体
+ */
+export interface ListImagesResponse {
+  /**
+   * 总记录数
+   */
+  Total?: number
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * 镜像列表
+   */
+  Items?: Array<ImageDto>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * spark流任务统计信息
+ */
+export interface StreamingStatistics {
+  /**
+   * 任务开始时间
+   */
+  StartTime: string
+  /**
+   * 数据接收器数
+   */
+  Receivers: number
+  /**
+   * 运行中的接收器数
+   */
+  NumActiveReceivers: number
+  /**
+   * 不活跃的接收器数
+   */
+  NumInactiveReceivers: number
+  /**
+   * 运行中的批数
+   */
+  NumActiveBatches: number
+  /**
+   * 待处理的批数
+   */
+  NumRetainedCompletedBatches: number
+  /**
+   * 已完成的批数
+   */
+  NumTotalCompletedBatches: number
+  /**
+   * 平均输入速率
+   */
+  AverageInputRate: number
+  /**
+   * 平均等待时长
+   */
+  AverageSchedulingDelay: number
+  /**
+   * 平均处理时长
+   */
+  AverageProcessingTime: number
+  /**
+   * 平均延时
+   */
+  AverageTotalDelay: number
+}
+
+/**
  * 操作资源组，返回的操作失败信息
  */
 export interface OperateEngineResourceGroupFailMessage {
@@ -26583,6 +28029,34 @@ export interface DescribeTCLakeMetaInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyJobDefinition返回参数结构体
+ */
+export interface ModifyJobDefinitionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSparkAppTask请求参数结构体
+ */
+export interface CreateSparkAppTaskRequest {
+  /**
+   * <p>spark作业名</p>
+   */
+  JobName: string
+  /**
+   * <p>spark作业程序入参，以空格分隔；一般用于周期性调用使用</p>
+   */
+  CmdArgs?: string
+  /**
+   * <p>任务来源信息</p>
+   */
+  SourceInfo?: Array<KVPair>
 }
 
 /**
@@ -26730,6 +28204,108 @@ export interface CreateInferenceServiceResponse {
    * <p>是否是自定义 RayServe 创建</p>
    */
   IsCustom?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateRayCluster返回参数结构体
+ */
+export interface UpdateRayClusterResponse {
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26887,94 +28463,9 @@ export interface DescribeClusterEventLogSwitchResponse {
 }
 
 /**
- * UpdateInferenceModel返回参数结构体
+ * DescribeJobDefinitionDetail返回参数结构体
  */
-export interface UpdateInferenceModelResponse {
-  /**
-   * <p>推理模型ID</p>
-   */
-  ModelId?: string
-  /**
-   * <p>推理模型UID</p>
-   */
-  ModelUid?: string
-  /**
-   * <p>模型名称</p>
-   */
-  Name?: string
-  /**
-   * <p>模型提供方</p>
-   */
-  Provider?: string
-  /**
-   * <p>模型描述</p>
-   */
-  Description?: string
-  /**
-   * <p>模型类型</p>
-   */
-  ModelType?: string
-  /**
-   * <p>模型参数量</p>
-   */
-  ParameterSize?: string
-  /**
-   * <p>标签</p>
-   */
-  Tags?: Array<string>
-  /**
-   * <p>最新版本号</p>
-   */
-  LatestVersion?: string
-  /**
-   * <p>版本总数</p>
-   */
-  VersionCount?: number
-  /**
-   * <p>关联的推理服务数量</p>
-   */
-  ServiceCount?: number
-  /**
-   * <p>是否有存储</p>
-   */
-  HasStorage?: boolean
-  /**
-   * <p>是否使用用户自带存储桶</p>
-   */
-  HasCustomStorage?: boolean
-  /**
-   * <p>存储后端类型</p>
-   */
-  StorageType?: string
-  /**
-   * <p>是否内置模型</p>
-   */
-  BuiltIn?: boolean
-  /**
-   * <p>任务类型列表</p>
-   */
-  Tasks?: Array<string>
-  /**
-   * <p>APPID</p>
-   */
-  AppId?: number
-  /**
-   * <p>创建时间</p>
-   */
-  CreateTime?: number
-  /**
-   * <p>更新时间</p>
-   */
-  UpdateTime?: number
-  /**
-   * <p>SUB UIN</p>
-   */
-  SubAccountUin?: string
-  /**
-   * <p>系统标签列表（TagKey-TagValue）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceTags?: Array<Tag>
+export interface DescribeJobDefinitionDetailResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -27596,21 +29087,71 @@ export interface CheckDataEngineImageCanBeRollbackResponse {
 }
 
 /**
- * DescribeFlowList请求参数结构体
+ * MLFlow 实验追踪配置
  */
-export interface DescribeFlowListRequest {
+export interface MlFlowConfig {
   /**
-   * 分区编码
+   * <p>MlFlow 追踪模式：local=MlFlow Sidecar / remote=已有 MlFlow Server / none=不启用</p>
    */
-  PartitionCode: string
+  MlFlowMode?: string
   /**
-   * 页码，从1开始，默认为1
+   * <p>已有MlFlow Server 的 ID（仅 mlFlowMode=remote 时填写，前端下拉选择后传入）</p>
    */
-  Page?: number
+  MlFlowServerId?: string
   /**
-   * 每页返回数量，默认为10
+   * <p>MlFlow Sidecar 持久化存储的 COS 路径（仅 mlFlowMode=local 时填写）</p>
    */
-  PageSize?: number
+  MlFlowCosPath?: string
+}
+
+/**
+ * DescribeCatalogs请求参数结构体
+ */
+export interface DescribeCatalogsRequest {
+  /**
+   * <p>数据目录 ID</p>
+   */
+  CatalogId?: string
+  /**
+   * <p>数据目录名称</p>
+   */
+  Name?: string
+  /**
+   * <p>操作人 uin</p>
+   */
+  Operator?: string
+  /**
+   * <p>排序字段，支持 CreateTime / UpdateTime（默认 UpdateTime）</p>
+   */
+  Sort?: string
+  /**
+   * <p>true:升序（默认）/ false:降序</p>
+   */
+  Asc?: string
+  /**
+   * <p>分页大小</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移</p>
+   */
+  Offset?: number
+  /**
+   * <p>状态：0 注册中 / 1 待测试 / 2 连接成功 / 3 连接失败 / 4 删除中 / 5 已删除</p><p>枚举值：</p><ul><li>0： 注册中</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>数据目录类型</p><p>枚举值：</p><ul><li>LAKEHOUSE： lakehouse类型</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>在这个时间之后创建（时间戳）</p>
+   */
+  CreatedAfter?: number
+  /**
+   * <p>在这个时间之前创建（时间戳）</p>
+   */
+  CreatedBefore?: number
 }
 
 /**
@@ -27858,6 +29399,16 @@ export interface DatabaseInfo {
 }
 
 /**
+ * tcc SingleFieldPartitioning定义
+ */
+export interface SingleFieldPartitioning {
+  /**
+   * <p>分区字段</p>
+   */
+  FieldName?: string
+}
+
+/**
  * ListBenchmarkTasks返回参数结构体
  */
 export interface ListBenchmarkTasksResponse {
@@ -27885,6 +29436,68 @@ export interface ListBenchmarkTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateJob请求参数结构体
+ */
+export interface CreateJobRequest {
+  /**
+   * <p>作业名称，长度 ≤256；可省略，省略时服务端回退为 JobId。</p>
+   */
+  JobName?: string
+  /**
+   * <p>流作业 checkpoint 路径（如 cosn://bucket/path/checkpoint）。MinorType=SPARK_STREAM 时必填；同一作业的多次运行必须复用同一路径，变更等于重置消费进度。</p>
+   */
+  CheckpointLocation?: string
+  /**
+   * <p>引擎大类，非必传，缺省 SPARK；当前仅支持 SPARK。</p>
+   */
+  MajorType?: string
+  /**
+   * <p>作业子类型，决定入口形态：SPARK_SQL（SQL 作业，Entrypoint.Statement 必填）/ SPARK_BATCH（批处理作业，Entrypoint.EntryFile 必填）/ SPARK_STREAM（流作业，EntryFile 与 CheckpointLocation 必填）。</p>
+   */
+  MinorType?: string
+  /**
+   * <p>工作流实例关联 ID（长度 ≤64）：同一工作流/会话的多条 SQL 作业传相同 FlowId，可共享同一 Spark 会话、复用已就绪引擎。MinorType=SPARK_SQL 时必填；FlowId 非空时必须同时传 ExecutionId。WAREHOUSE 模式下 FlowId 即会话句柄（一个 FlowId 只对应一个会话）：会话过期或已销毁后须换新 FlowId，否则返回 FailedOperation.FlowIdNotExists。</p>
+   */
+  FlowId?: string
+  /**
+   * <p>工作流内部执行标识（长度 ≤64），同一 FlowId 下每次提交须唯一（如自增序号/UUID）。用于重复提交防重：同一账号下命中未删除的同 (FlowId, ExecutionId) 作业时返回 FailedOperation.FlowExecutionConflict。FlowId 非空时必填（SPARK_SQL 因 FlowId 必填而必填）。</p>
+   */
+  ExecutionId?: string
+  /**
+   * <p>运行模式，必填。WAREHOUSE / JOB.</p>
+   */
+  RunMode?: string
+  /**
+   * <p>计算仓库 ID。RunMode=WAREHOUSE 时必填（仓库需处于 RUNNING，或 STOPPED 且 AutoStart 开启（提交后冷启动拉起））；RunMode=JOB 时必须为空。</p>
+   */
+  WarehouseId?: string
+  /**
+   * <p>运行时/镜像编码（可选值见 DescribeSparkRuntimes）。RunMode=JOB 时必填；RunMode=WAREHOUSE 时忽略。</p>
+   */
+  RuntimeCode?: string
+  /**
+   * <p>内置 Catalog 版本码（取值为 DescribeSysCatalogList 返回的目录子类型）。RunMode=JOB 时条件必填：未传时若可用（enabled）SysCatalog 唯一则自动选中，多个/零个报错；RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  SysCatalogVersion?: string
+  /**
+   * <p>资源分区代码，仅 RunMode=JOB 可传（QueueName 非空时必填）；RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  PartitionCode?: string
+  /**
+   * <p>队列名称，必须与 PartitionCode 成对使用（RunMode=JOB 下可选）；RunMode=WAREHOUSE 下被仓库反查值覆盖，无需传。</p>
+   */
+  QueueName?: string
+  /**
+   * <p>自定义 Spark conf（JSON 字符串，亦接受多行 key=value 文本，归一化为 JSON 存储、出参恒为 JSON），作为 SPARK_CUSTOM 配置通道落库，两种运行模式均生效。</p>
+   */
+  CustomProperties?: string
+  /**
+   * <p>环境变量（KEY=VALUE）列表。仅 RunMode=JOB 可传；RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  EnvVars?: Array<KVPair>
 }
 
 /**
@@ -28000,29 +29613,17 @@ export interface DescribeDataEnginesRequest {
 }
 
 /**
- * 用于返回训练作业的checkpoint的配置信息
+ * CLS 日志主题条目
  */
-export interface CheckpointConfig {
+export interface ClsTopicItem {
   /**
-   * <p>Checkpoint 产出存储的 Catalog 配置 JSON（结构同顶层 Catalog）</p>
+   * <p>日志主题 ID</p>
    */
-  Catalog?: string
+  TopicId?: string
   /**
-   * <p>保存策略：steps / epoch / none，默认 steps；GRPO 仅支持 steps / none</p>
+   * <p>日志主题名称</p>
    */
-  SaveStrategy?: string
-  /**
-   * <p>保存频率（每 N 步或每 N epoch），默认 500</p>
-   */
-  SaveFreq?: number
-  /**
-   * <p>最大保留数量，0 表示不限制，默认 3</p>
-   */
-  MaxKeep?: number
-  /**
-   * <p>容器内输出目录回退值（可选；正常场景由 Checkpoint 挂载路径决定，仅在挂载路径为空时生效，默认 /workspace/output/{mode}）</p>
-   */
-  OutputDir?: string
+  TopicName?: string
 }
 
 /**
@@ -28117,14 +29718,9 @@ export interface GetLabServiceUrlsRequest {
 }
 
 /**
- * UpdateEngineResourceGroupNetworkConfigInfo返回参数结构体
+ * DescribeSaleResourceInfo请求参数结构体
  */
-export interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeSaleResourceInfoRequest = null
 
 /**
  * DeleteRayJob返回参数结构体
@@ -28274,6 +29870,64 @@ export interface ResourceSpec {
    * <p>单个物理节点上该计费项对应的最大 GPU 卡数，CPU / HM_CPU 恒为 0</p>
    */
   MaxCardPerNode?: number
+}
+
+/**
+ * tcc TableInfo定义
+ */
+export interface CatalogTaleInfo {
+  /**
+   * <p>表名称</p>
+   */
+  Name?: string
+  /**
+   * <p>描述</p>
+   */
+  Comment?: string
+  /**
+   * <p>字段信息</p>
+   */
+  Columns?: Array<ColumnInfo>
+  /**
+   * <p>属性值</p>
+   */
+  Properties?: Array<KVPair>
+  /**
+   * <p>分区</p>
+   */
+  Partitioning?: Array<Partitioning>
+  /**
+   * <p>索引</p>
+   */
+  Indexes?: Array<IndexInfo>
+  /**
+   * <p>编辑者/审计信息</p>
+   */
+  Audit?: Audit
+  /**
+   * <p>数据目录名称</p>
+   */
+  CatalogName?: string
+  /**
+   * <p>数据库名称</p>
+   */
+  SchemaName?: string
+  /**
+   * <p>表格式</p>
+   */
+  TableFormat?: string
+  /**
+   * <p>表格式类型</p><p>枚举值：</p><ul><li>v2： TcIceberg v2版本</li></ul>
+   */
+  FormatType?: string
+  /**
+   * <p>表类型</p><p>枚举值：</p><ul><li>Managed： 内部表</li></ul>
+   */
+  TableType?: string
+  /**
+   * <p>场景类型</p><p>枚举值：</p><ul><li>REALTIME： 实时类型</li></ul>
+   */
+  TableMode?: string
 }
 
 /**
@@ -28579,6 +30233,36 @@ export interface DeleteDeploymentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * tcc 审计信息
+ */
+export interface Audit {
+  /**
+   * <p>创建者</p>
+   */
+  Creator?: string
+  /**
+   * <p>最后修改者</p>
+   */
+  LastModifier?: string
+  /**
+   * <p>创建时间戳</p>
+   */
+  CreatedAt?: number
+  /**
+   * <p>最后修改时间戳</p>
+   */
+  LastModifiedAt?: number
+  /**
+   * <p>最后修改时间（已废弃）</p><p>参数格式：2024-11-01 11:01:01</p>
+   */
+  LastModifiedTime?: string
+  /**
+   * <p>创建时间（已废弃）</p><p>参数格式：2024-11-01 11:01:01</p>
+   */
+  CreatedTime?: string
 }
 
 /**

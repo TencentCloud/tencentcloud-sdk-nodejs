@@ -61,6 +61,7 @@ import {
   DescribeExternalAgentListRequest,
   ModifyAgentA2AConfigRequest,
   AgentVersionItem,
+  DescribeUserAccessTokenResponse,
   CreateAgentVersionFromSourceResponse,
   DescribeAgentListRequest,
   ModifyAgentA2AConfigResponse,
@@ -71,6 +72,7 @@ import {
   RoutingItem,
   MessageEventToolCall,
   DescribeAgentVersionResponse,
+  DescribeUserAccessTokenRequest,
   A2AConfig,
   DescribeAgentSessionListRequest,
   MessageEvent,
@@ -318,6 +320,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentResponse) => void
   ): Promise<DescribeAgentResponse> {
     return this.request("DescribeAgent", req, cb)
+  }
+
+  /**
+   * 根据调用者的 Uin / SubAccountUin 调用 OneID 换取用户级 access_token。换取到的 token 是 OneID 用户身份的短期凭证，供调用方以用户身份访问 OneID 开平接口。默认开启 JIT，SubAccountUin 不存在时自动在目标企业下创建影子用户。
+   */
+  async DescribeUserAccessToken(
+    req?: DescribeUserAccessTokenRequest,
+    cb?: (error: string, rep: DescribeUserAccessTokenResponse) => void
+  ): Promise<DescribeUserAccessTokenResponse> {
+    return this.request("DescribeUserAccessToken", req, cb)
   }
 
   /**

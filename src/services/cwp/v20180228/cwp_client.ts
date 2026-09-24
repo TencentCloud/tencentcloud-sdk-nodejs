@@ -145,6 +145,7 @@ import {
   ModifyWebHookReceiverResponse,
   OpenPortStatistics,
   DescribeRansomDefenseMachineListRequest,
+  RecentLoginItem,
   ExportAssetCoreModuleListRequest,
   ExportAssetMachineDetailResponse,
   ProtectDirRelatedServer,

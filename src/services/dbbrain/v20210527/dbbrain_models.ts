@@ -495,7 +495,7 @@ export interface DescribeIndexRecommendAggregationSlowLogsRequest {
  */
 export interface DescribeSlowLogsRequest {
   /**
-   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB for MySQL，&quot;tdstore&quot; - 云数据库TDSQL Boundless，默认为&quot;mysql&quot;。</p>
+   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB for MySQL，&quot;tdstore&quot; - 云数据库TDSQL Boundless，&quot;sqlserver&quot; - 云数据库 SQL Server， 默认为&quot;mysql&quot;。</p>
    */
   Product: string
   /**
@@ -819,7 +819,7 @@ export interface DescribeSlowLogTopSqlsRequest {
    */
   SchemaList?: Array<SchemaItem>
   /**
-   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB  for MySQL， &quot;tdstore&quot; - 云数据库TDSQL Boundless，默认为&quot;mysql&quot;。</p>
+   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB  for MySQL， &quot;tdstore&quot; - 云数据库TDSQL Boundless，&quot;sqlserver&quot; - 云数据库 SQL Server，默认为&quot;mysql&quot;。</p>
    */
   Product?: string
 }
@@ -2448,6 +2448,14 @@ export interface SlowLogInfoItem {
    *
    */
   InstanceId?: string
+  /**
+   *
+   */
+  ClientAppName?: string
+  /**
+   *
+   */
+  ClientHostName?: string
 }
 
 /**
@@ -3100,19 +3108,19 @@ export interface VerifyUserAccountRequest {
  */
 export interface DescribeSlowLogUserHostStatsResponse {
   /**
-   * 来源地址数目。
+   * <p>来源地址数目。</p>
    */
   TotalCount?: number
   /**
-   * 各来源地址的慢日志占比详情列表。
+   * <p>各来源地址的慢日志占比详情列表。</p>
    */
   Items?: Array<SlowLogHost>
   /**
-   * 各来源用户名的慢日志占比详情列表。
+   * <p>各来源用户名的慢日志占比详情列表。</p>
    */
   UserNameItems?: Array<SlowLogUser>
   /**
-   * 来源用户数目。
+   * <p>来源用户数目。</p>
    */
   UserTotalCount?: number
   /**
@@ -5403,31 +5411,31 @@ export interface CreateSqlFilterResponse {
  */
 export interface DescribeSlowLogUserHostStatsRequest {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 查询范围的开始时间，格式: "yyyy-MM-dd'T'HH:mm:ssXXX"。
+   * <p>查询范围的开始时间，格式: &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX&quot;。</p>
    */
   StartTime: string
   /**
-   * 查询范围的结束时间，格式: "yyyy-MM-dd'T'HH:mm:ssXXX"。
+   * <p>查询范围的结束时间，格式: &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX&quot;。</p>
    */
   EndTime: string
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * <p>服务产品类型，支持值：&quot;mysql&quot; - 云数据库 MySQL；&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;sqlserver&quot; - 云数据库 SQL Server，默认为&quot;mysql&quot;。</p>
    */
   Product?: string
   /**
-   * SQL模板的MD5值
+   * <p>SQL模板的MD5值</p>
    */
   Md5?: string
   /**
-   * 仅Redis产品使用；实例Proxy ID。
+   * <p>仅Redis产品使用；实例Proxy ID。</p>
    */
   InstanceProxyId?: string
   /**
-   * 仅Redis产品使用；命令。
+   * <p>仅Redis产品使用；命令。</p>
    */
   Cmd?: string
 }
@@ -5469,11 +5477,11 @@ export interface DescribeTopSpaceSchemasResponse {
  */
 export interface DescribeSlowLogQueryTimeStatsResponse {
   /**
-   * 符合条件的记录总数。
+   * <p>符合条件的记录总数。</p>
    */
   TotalCount?: number
   /**
-   * 慢日志 top sql 列表。
+   * <p>慢日志 top sql 列表。</p>
    */
   Items?: Array<SqlCostDistribution>
   /**
@@ -6939,34 +6947,31 @@ export interface DescribeSecurityAuditLogDownloadUrlsResponse {
  */
 export interface DescribeSlowLogQueryTimeStatsRequest {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 开始时间，如“2019-09-10 12:13:14”，截止时间与开始时间的间隔小于7天。
+   * <p>开始时间，如“2019-09-10 12:13:14”，截止时间与开始时间的间隔小于7天。</p>
    */
   StartTime: string
   /**
-   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
+   * <p>截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。</p>
    */
   EndTime: string
   /**
-   * "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
+   * <p>&quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;sqlserver&quot; - 云数据库 SQL Server，默认为&quot;mysql&quot;。</p>
    */
   Product: string
   /**
-   * Proxy节点ID。
+   * <p>Proxy节点ID。</p>
    */
   InstanceProxyId?: string
   /**
-   * 实例节点ID。
+   * <p>实例节点ID。</p>
    */
   InstanceNodeId?: string
   /**
-   * 查询类型，目前支持值：mongod，mongos。
-其中：
-mongod - MongoDB的数据存储节点
-mongos - MongoDB的路由节点
+   * <p>查询类型，目前支持值：mongod，mongos。<br>其中：<br>mongod - MongoDB的数据存储节点<br>mongos - MongoDB的路由节点</p>
    */
   Type?: string
 }

@@ -1860,11 +1860,11 @@ export interface CreateMultiPathGatewaySecretKeyResponse {
  */
 export interface DescribeAccelerationDomainsResponse {
   /**
-   * 符合查询条件的加速域名个数。
+   * <p>符合查询条件的加速域名个数。</p>
    */
   TotalCount?: number
   /**
-   * 符合查询条件的所有加速域名的信息。
+   * <p>符合查询条件的所有加速域名的信息。</p>
    */
   AccelerationDomains?: Array<AccelerationDomain>
   /**
@@ -4370,7 +4370,7 @@ export interface CreateMultiPathGatewaySecretKeyRequest {
  */
 export interface HTTPUpstreamTimeoutParameters {
   /**
-   * HTTP 应答超时时间，单位为秒，取值：5～600。
+   * <p>HTTP 应答超时时间。</p><p>取值范围：[5, 600]</p><p>单位：秒</p><p>默认值：15</p>
    */
   ResponseTimeout?: number
 }
@@ -5013,6 +5013,28 @@ export interface LoadBalancer {
    * <p>负载均衡被引用实例的列表。</p>
    */
   References?: Array<OriginGroupReference>
+}
+
+/**
+ * OperateInferenceDomain请求参数结构体
+ */
+export interface OperateInferenceDomainRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>推理服务 ID。</p>
+   */
+  ServiceId: string
+  /**
+   * <p>推理服务域名。</p>
+   */
+  Domain: string
+  /**
+   * <p>操作类型。</p><p>枚举值：</p><ul><li>Resume： 启用域名；</li><li>Stop： 停用域名；</li><li>Delete： 删除域名。</li></ul>
+   */
+  Operation: string
 }
 
 /**
@@ -6761,17 +6783,17 @@ export interface Zone {
 }
 
 /**
- * 规则引擎条件常规动作参数
+ * ModifyContentIdentifier请求参数结构体
  */
-export interface RuleNormalActionParams {
+export interface ModifyContentIdentifierRequest {
   /**
-   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   * 内容标识符 ID。
    */
-  Name: string
+  ContentId: string
   /**
-   * 参数值。
+   * 内容标识符描述，长度限制不超过 20 个字符。
    */
-  Values: Array<string>
+  Description: string
 }
 
 /**
@@ -8221,6 +8243,35 @@ export interface TopEntry {
 }
 
 /**
+ * JavaScript 注入规则。
+ */
+export interface JSInjectionRule {
+  /**
+   * 规则 ID。
+   */
+  RuleId?: string
+  /**
+   * 规则名称。
+   */
+  Name?: string
+  /**
+   * 规则优先级，数值越小越优先执行，范围是 0 ~ 100，默认为 0。
+   */
+  Priority?: number
+  /**
+   * 匹配条件内容。需符合表达式语法，详细规范参见产品文档。
+   */
+  Condition?: string
+  /**
+   * JavaScript 注入选项。默认值为 run-attestations，取值有：
+<li> no-injection: 不注入 JavaScript;</li>
+<li> inject-sdk-only: 注入当前支持的所有认证方式的 SDK，当前支持：TC-RCE 和 TC-CAPTCHA。注意：若需执行认证检测，请配置挑战规则。</li>
+
+   */
+  InjectJS?: string
+}
+
+/**
  * DescribeConfigGroupVersions返回参数结构体
  */
 export interface DescribeConfigGroupVersionsResponse {
@@ -8981,6 +9032,55 @@ export interface DescribeMultiPathGatewayRegionsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * https 服务端证书配置
+ */
+export interface HostCertInfo {
+  /**
+   * 服务器证书 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertId: string
+  /**
+   * 证书备注名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Alias?: string
+  /**
+   * 证书类型，取值有：
+<li>default：默认证书；</lil>
+<li>upload：用户上传；</li>
+<li>managed：腾讯云托管。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 证书过期时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 证书部署时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeployTime?: string
+  /**
+   * 签名算法。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SignAlgo?: string
+  /**
+   * 证书状态，取值有：
+<li>deployed：已部署；</li>
+<li>processing：部署中；</li>
+<li>applying：申请中；</li>
+<li>failed：申请失败；</li>
+<li>issued：绑定失败。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**
@@ -10607,6 +10707,20 @@ export interface DeleteAccelerationDomainsRequest {
 }
 
 /**
+ * 托管规则的项配置
+ */
+export interface ManagedRuleAction {
+  /**
+   * 托管规则组下的具体项，用于改写此单条规则项配置的内容，具体参考产品文档。
+   */
+  RuleId: string
+  /**
+   * RuleId 中指定托管规则项的处置动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，响应拦截页面；</li><li>Monitor：观察，不处理请求记录安全事件到日志中；</li><li>Disabled：未启用，不扫描请求跳过该规则。</li>
+   */
+  Action: SecurityAction
+}
+
+/**
  * RenewPlan返回参数结构体
  */
 export interface RenewPlanResponse {
@@ -10883,6 +10997,24 @@ export interface InferenceScheduledScalingEffectiveRange {
    * <p>有效期终止日期。当 EffectiveType 为 Custom 时必填，且不得早于 StartDate；当 EffectiveType 为 LongTerm 时不传该字段。</p>
    */
   EndDate?: string
+}
+
+/**
+ * DescribeInferenceDomains返回参数结构体
+ */
+export interface DescribeInferenceDomainsResponse {
+  /**
+   * <p>推理服务域名总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>推理服务域名列表。</p>
+   */
+  Domains?: Array<InferenceDomain>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11716,17 +11848,34 @@ export interface DeleteApplicationProxyRuleRequest {
 }
 
 /**
- * 托管规则的项配置
+ * 域名证书配置
  */
-export interface ManagedRuleAction {
+export interface HostsCertificate {
   /**
-   * 托管规则组下的具体项，用于改写此单条规则项配置的内容，具体参考产品文档。
+   * 域名。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleId: string
+  Host?: string
   /**
-   * RuleId 中指定托管规则项的处置动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，响应拦截页面；</li><li>Monitor：观察，不处理请求记录安全事件到日志中；</li><li>Disabled：未启用，不扫描请求跳过该规则。</li>
+   * 配置证书的模式，取值有：
+<li>disable：不配置证书；</li>
+<li>eofreecert：配置 EdgeOne 免费证书；</li> 
+<li>sslcert：配置 SSL 证书；</li> 
    */
-  Action: SecurityAction
+  Mode?: string
+  /**
+   * 服务端证书配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostCertInfo?: Array<HostCertInfo>
+  /**
+   * 申请类型，取值有：
+<li>apply：托管EdgeOne；</li>
+<li>none：不托管EdgeOne。</li>不填，默认取值为none。
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ApplyType?: string
 }
 
 /**
@@ -12049,37 +12198,25 @@ export interface DeleteFunctionRulesRequest {
 }
 
 /**
- * DescribeTimingL7AnalysisData请求参数结构体
+ * CreateInferenceDomain请求参数结构体
  */
-export interface DescribeTimingL7AnalysisDataRequest {
+export interface CreateInferenceDomainRequest {
   /**
-   * <p>开始时间。</p>
+   * <p>站点 ID。</p>
    */
-  StartTime: string
+  ZoneId: string
   /**
-   * <p>结束时间。查询时间范围（<code>EndTime</code> - <code>StartTime</code>）需小于等于 31 天。</p>
+   * <p>推理服务ID。</p>
    */
-  EndTime: string
+  ServiceId: string
   /**
-   * <p>指标列表，取值有:</p><li>l7Flow_outFlux: L7 EdgeOne 响应流量，单位：Byte；</li><li>l7Flow_inFlux: L7 客户端请求流量，单位：Byte；</li><li>l7Flow_flux: L7 访问总流量（EdgeOne 响应+客户端请求），单位：Byte；</li><li>l7Flow_outBandwidth: L7 EdgeOne 响应带宽，单位：bps；</li><li>l7Flow_inBandwidth：L7 客户端请求带宽，单位：bps；</li><li>l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求），单位：bps；</li><li>l7Flow_request: L7 访问请求数，单位：次；</li><li> l7Flow_avgResponseTime: L7 访问平均响应耗时，单位：ms；</li><li> l7Flow_avgFirstByteResponseTime: L7 访问平均首字节响应耗时，单位：ms；</li><li>l7Flow_requestRate: L7 访问请求速率，单位：qps。</li>
+   * <p>推理服务域名。</p>
    */
-  MetricNames: Array<string>
+  Domain: string
   /**
-   * <p>站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：<a href="https://cloud.tencent.com/document/product/1552/104902">【腾讯云 EdgeOne】云 API 变更通知</a>。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 <code>*</code> 代替，查询账号级别数据需具备本接口全部站点资源权限。</p>
+   * <p>推理任务请求鉴权开关。</p><p>枚举值：</p><ul><li>Off： 关闭鉴权；</li><li>On： 开启鉴权。</li></ul><p>默认值：On。</p>
    */
-  ZoneIds?: Array<string>
-  /**
-   * <p>查询时间粒度。</p><p>枚举值：</p><ul><li>min： 1分钟</li><li>5min： 5分钟</li><li>hour： 1小时</li><li>day： 1天</li></ul><p>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。</p>
-   */
-  Interval?: string
-  /**
-   * <p>筛选数据时使用的过滤条件，取值参考 <a href="https://cloud.tencent.com/document/product/1552/98219#1aaf1150-55a4-4b4d-b103-3a8317ac7945">指标分析筛选条件说明</a> 中针对 L7 访问流量、带宽、请求数的可用筛选项。<br>如需限定站点或内容标识符，请在 <code>ZoneIds.N</code> 参数中另行传入对应的值。</p>
-   */
-  Filters?: Array<QueryCondition>
-  /**
-   * <p>数据归属地区。该参数已废弃。请在 <code>Filters.country</code> 中按客户端地域过滤数据。</p>
-   */
-  Area?: string
+  AuthSwitch?: string
 }
 
 /**
@@ -13375,32 +13512,37 @@ export interface Action {
 }
 
 /**
- * JavaScript 注入规则。
+ * DescribeTimingL7AnalysisData请求参数结构体
  */
-export interface JSInjectionRule {
+export interface DescribeTimingL7AnalysisDataRequest {
   /**
-   * 规则 ID。
+   * <p>开始时间。</p>
    */
-  RuleId?: string
+  StartTime: string
   /**
-   * 规则名称。
+   * <p>结束时间。查询时间范围（<code>EndTime</code> - <code>StartTime</code>）需小于等于 31 天。</p>
    */
-  Name?: string
+  EndTime: string
   /**
-   * 规则优先级，数值越小越优先执行，范围是 0 ~ 100，默认为 0。
+   * <p>指标列表，取值有:</p><li>l7Flow_outFlux: L7 EdgeOne 响应流量，单位：Byte；</li><li>l7Flow_inFlux: L7 客户端请求流量，单位：Byte；</li><li>l7Flow_flux: L7 访问总流量（EdgeOne 响应+客户端请求），单位：Byte；</li><li>l7Flow_outBandwidth: L7 EdgeOne 响应带宽，单位：bps；</li><li>l7Flow_inBandwidth：L7 客户端请求带宽，单位：bps；</li><li>l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求），单位：bps；</li><li>l7Flow_request: L7 访问请求数，单位：次；</li><li> l7Flow_avgResponseTime: L7 访问平均响应耗时，单位：ms；</li><li> l7Flow_avgFirstByteResponseTime: L7 访问平均首字节响应耗时，单位：ms；</li><li>l7Flow_requestRate: L7 访问请求速率，单位：qps。</li>
    */
-  Priority?: number
+  MetricNames: Array<string>
   /**
-   * 匹配条件内容。需符合表达式语法，详细规范参见产品文档。
+   * <p>站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：<a href="https://cloud.tencent.com/document/product/1552/104902">【腾讯云 EdgeOne】云 API 变更通知</a>。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 <code>*</code> 代替，查询账号级别数据需具备本接口全部站点资源权限。</p>
    */
-  Condition?: string
+  ZoneIds?: Array<string>
   /**
-   * JavaScript 注入选项。默认值为 run-attestations，取值有：
-<li> no-injection: 不注入 JavaScript;</li>
-<li> inject-sdk-only: 注入当前支持的所有认证方式的 SDK，当前支持：TC-RCE 和 TC-CAPTCHA。注意：若需执行认证检测，请配置挑战规则。</li>
-
+   * <p>查询时间粒度。</p><p>枚举值：</p><ul><li>min： 1分钟</li><li>5min： 5分钟</li><li>hour： 1小时</li><li>day： 1天</li></ul><p>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。</p>
    */
-  InjectJS?: string
+  Interval?: string
+  /**
+   * <p>筛选数据时使用的过滤条件，取值参考 <a href="https://cloud.tencent.com/document/product/1552/98219#1aaf1150-55a4-4b4d-b103-3a8317ac7945">指标分析筛选条件说明</a> 中针对 L7 访问流量、带宽、请求数的可用筛选项。<br>如需限定站点或内容标识符，请在 <code>ZoneIds.N</code> 参数中另行传入对应的值。</p>
+   */
+  Filters?: Array<QueryCondition>
+  /**
+   * <p>数据归属地区。该参数已废弃。请在 <code>Filters.country</code> 中按客户端地域过滤数据。</p>
+   */
+  Area?: string
 }
 
 /**
@@ -14029,6 +14171,16 @@ export interface FollowOrigin {
 }
 
 /**
+ * OperateInferenceDomain返回参数结构体
+ */
+export interface OperateInferenceDomainResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EdgeKVDelete请求参数结构体
  */
 export interface EdgeKVDeleteRequest {
@@ -14343,17 +14495,33 @@ export interface DescribeTopL7AnalysisDataResponse {
 }
 
 /**
- * ModifyContentIdentifier请求参数结构体
+ * DescribeInferenceDomains请求参数结构体
  */
-export interface ModifyContentIdentifierRequest {
+export interface DescribeInferenceDomainsRequest {
   /**
-   * 内容标识符 ID。
+   * <p>站点 ID。</p>
    */
-  ContentId: string
+  ZoneId: string
   /**
-   * 内容标识符描述，长度限制不超过 20 个字符。
+   * <p>推理服务 ID。</p>
    */
-  Description: string
+  ServiceId: string
+  /**
+   * <p>排序字段。</p><p>枚举值：</p><ul><li>CreateTime： 域名创建时间；</li><li>UpdateTime： 域名修改时间。</li></ul><p>默认值：CreateTime。</p>
+   */
+  SortBy?: string
+  /**
+   * <p>排序方式。</p><p>枚举值：</p><ul><li>Asc： 升序方式；</li><li>Desc： 降序方式。</li></ul><p>默认值：Desc。</p>
+   */
+  SortOrder?: string
+  /**
+   * <p>分页查询偏移量。</p><p>默认值：0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页查询限制数目。</p><p>默认值：20。</p><p>最大值：200。</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -14695,6 +14863,10 @@ export interface ZoneFullConfig {
    * <p>站点级配置，包含「站点加速」中所有配置项，且所有项均为必选，否则配置无效。</p>
    */
   ZoneConfig?: ZoneConfig
+  /**
+   * <p>站点级自定义变量配置，包括变量定义和变量运算。</p>
+   */
+  ZoneCustomVariables?: ZoneCustomVariables
   /**
    * <p>规则级配置，包含「规则引擎」中所有规则，且数组可为空，表示不启用任何规则。</p>
    */
@@ -15967,6 +16139,16 @@ export interface DeleteContentIdentifierRequest {
 }
 
 /**
+ * CreateInferenceDomain返回参数结构体
+ */
+export interface CreateInferenceDomainResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RefreshMultiPathGatewaySecretKey请求参数结构体
  */
 export interface RefreshMultiPathGatewaySecretKeyRequest {
@@ -17087,6 +17269,20 @@ export interface CreateMultiPathGatewayRequest {
 }
 
 /**
+ * 规则引擎条件常规动作参数
+ */
+export interface RuleNormalActionParams {
+  /**
+   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   */
+  Name: string
+  /**
+   * 参数值。
+   */
+  Values: Array<string>
+}
+
+/**
  * DeleteSharedCNAME返回参数结构体
  */
 export interface DeleteSharedCNAMEResponse {
@@ -17980,6 +18176,44 @@ export interface AccelerateMainland {
 }
 
 /**
+ * 推理服务的域名信息。
+ */
+export interface InferenceDomain {
+  /**
+   * <p>域名名称。</p>
+   */
+  Domain?: string
+  /**
+   * <p>域名状态。</p><p>枚举值：</p><ul><li>Online： 已生效；</li><li>Process： 部署中；</li><li>Offline： 已停用；</li><li>Init： 未生效，待激活站点。</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>推理任务请求鉴权开关。</p><p>枚举值：</p><ul><li>Off： 关闭鉴权；</li><li>On： 开启鉴权。</li></ul><p>默认值：On。</p>
+   */
+  AuthSwitch?: string
+  /**
+   * <p>CNAME 地址。</p><p>校验域名 CNAME 配置状态，请参考<a href="https://cloud.tencent.com/document/api/1552/94491"> CheckCnameStatus </a>接口。</p>
+   */
+  Cname?: string
+  /**
+   * <p>域名需进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。</p><p>验证归属权，请参考<a href="https://cloud.tencent.com/document/api/1552/98879"> VerifyOwnership </a>接口。</p>
+   */
+  OwnershipVerification?: OwnershipVerification
+  /**
+   * <p>域名证书信息。</p><p>申请免费证书，请参考 <a href="https://cloud.tencent.com/document/api/1552/124807">ApplyFreeCertificate</a> 接口；<br>检查免费证书申请结果，请参考 <a href="https://cloud.tencent.com/document/api/1552/124806">CheckFreeCertificateVerification</a> 接口；<br>配置域名证书，请参考 <a href="https://cloud.tencent.com/document/api/1552/80764">ModifyHostsCertificate</a> 接口。</p>
+   */
+  Certificate?: HostsCertificate
+  /**
+   * <p>创建时间。</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>修改时间。</p>
+   */
+  UpdateTime?: string
+}
+
+/**
  * Web 安全 Challenge 挑战的附加参数
  */
 export interface ChallengeActionParameters {
@@ -18661,6 +18895,20 @@ export interface IPGroupReference {
    * <p>子实体名称，根据 SubEntityType 不同代表不同的含义：</p><ul><li>WebSec.ExceptionRule：规则名称；</li><li>WebSec.BasicAccessRule：规则名称；</li><li>WebSec.PreciseMatchRule：规则名称；</li><li>WebSec.RateLimitRule：规则名称；</li><li>WebSec.BotCustomRule：规则名称；</li><li>DDoS.L4Proxy.IpAccessControl：规则名称，block 表示黑名单，allow 表示白名单；</li><li>DDoS.L3Transit.IpAccessControl：规则名称，block 表示黑名单，allow 表示白名单。</li></ul>
    */
   SubEntityName?: string
+}
+
+/**
+ * 站点级自定义变量配置，包括变量定义和变量运算。
+ */
+export interface ZoneCustomVariables {
+  /**
+   * <p>站点级自定义变量列表。CustomVariable.Name 需要使用 user.zone. 作为前缀。变量按照数组顺序依次初始化，InitialValue 仅支持引用位于当前变量之前的变量，不支持引用当前变量自身或位于当前变量之后的变量。</p>
+   */
+  CustomVariables: Array<CustomVariable>
+  /**
+   * <p>站点级自定义变量运算规则。运算中支持引用已定义的站点级自定义变量。此列表当前只支持填写一项规则，多填无效。</p>
+   */
+  CustomVariableOperations: Array<CustomVariableOperation>
 }
 
 /**
@@ -19492,43 +19740,31 @@ export interface ModifySecurityClientAttesterRequest {
  */
 export interface DescribeAccelerationDomainsRequest {
   /**
-   * 加速域名所属站点 ID。
+   * <p>加速域名所属站点 ID。</p>
    */
   ZoneId: string
   /**
-   * 分页查询偏移量，默认为 0。
+   * <p>分页查询偏移量，默认为 0。</p>
    */
   Offset?: number
   /**
-   * 分页查询限制数目，默认值：20，上限：200。
+   * <p>分页查询限制数目，默认值：20，上限：200。</p>
    */
   Limit?: number
   /**
-   * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有域名信息。详细的过滤条件如下：
-<li>domain-name：按照加速域名进行过滤；</li>
-<li>origin-type：按照源站类型进行过滤；</li>
-<li>origin：按照主源站地址进行过滤；</li>
-<li>backup-origin： 按照备用源站地址进行过滤；</li>
-<li>domain-cname：按照 CNAME 进行过滤；</li>
-<li>share-cname：按照共享 CNAME 进行过滤；</li>
+   * <p>过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有域名信息。详细的过滤条件如下：</p><li>domain-name：按照加速域名进行过滤；</li><li>origin-type：按照源站类型进行过滤；</li><li>origin：按照主源站地址进行过滤；</li><li>backup-origin： 按照备用源站地址进行过滤；</li><li>domain-cname：按照 CNAME 进行过滤；</li><li>share-cname：按照共享 CNAME 进行过滤；</li>
    */
   Filters?: Array<AdvancedFilter>
   /**
-   * 可根据该字段对返回结果进行排序，取值有：
-<li>created_on：加速域名创建时间；</li>
-<li>domain-name：加速域名。</li>不填写时，默认对返回结果按照 domain-name 排序。
+   * <p>可根据该字段对返回结果进行排序，取值有：</p><li>created_on：加速域名创建时间；</li><li>domain-name：加速域名。</li>不填写时，默认对返回结果按照 domain-name 排序。
    */
   Order?: string
   /**
-   * 排序方向，如果是字段值为数字，则根据数字大小排序；如果字段值为文本，则根据 ascill 码的大小排序。取值有：
-<li>asc：升序排列；</li>
-<li>desc：降序排列。</li>不填写使用默认值 asc。
+   * <p>排序方向，如果是字段值为数字，则根据数字大小排序；如果字段值为文本，则根据 ASCII 码的大小排序。取值有：</p><li>asc：升序排列；</li><li>desc：降序排列。</li>不填写使用默认值 asc。
    */
   Direction?: string
   /**
-   * 匹配方式，取值有：
-<li>all：返回匹配所有查询条件的加速域名；</li>
-<li>any：返回匹配任意一个查询条件的加速域名。</li>不填写时默认值为 all。
+   * <p>匹配方式，取值有：</p><li>all：返回匹配所有查询条件的加速域名；</li><li>any：返回匹配任意一个查询条件的加速域名。</li>不填写时默认值为 all。
    */
   Match?: string
 }

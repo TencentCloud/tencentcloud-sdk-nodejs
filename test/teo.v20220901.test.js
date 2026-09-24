@@ -538,9 +538,9 @@ it("teo.v20220901.CreateEdgeKVNamespace", async function () {
     }
 })
 
-it("teo.v20220901.DescribeConfigGroupVersionDetail", async function () {
+it("teo.v20220901.CreateInferenceAPIToken", async function () {
     try {
-       const data = await client.DescribeConfigGroupVersionDetail({})
+       const data = await client.CreateInferenceAPIToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +591,16 @@ it("teo.v20220901.ModifyApplicationProxyRuleStatus", async function () {
 it("teo.v20220901.DescribePrefetchTasks", async function () {
     try {
        const data = await client.DescribePrefetchTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.OperateInferenceDomain", async function () {
+    try {
+       const data = await client.OperateInferenceDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -681,6 +691,16 @@ it("teo.v20220901.DeleteSecurityJSInjectionRule", async function () {
 it("teo.v20220901.RefreshMultiPathGatewaySecretKey", async function () {
     try {
        const data = await client.RefreshMultiPathGatewaySecretKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeInferenceDomains", async function () {
+    try {
+       const data = await client.DescribeInferenceDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,9 +878,9 @@ it("teo.v20220901.ModifyFunctionRule", async function () {
     }
 })
 
-it("teo.v20220901.CreateInferenceAPIToken", async function () {
+it("teo.v20220901.DescribeConfigGroupVersionDetail", async function () {
     try {
-       const data = await client.CreateInferenceAPIToken({})
+       const data = await client.DescribeConfigGroupVersionDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1138,9 +1158,9 @@ it("teo.v20220901.DeleteLoadBalancer", async function () {
     }
 })
 
-it("teo.v20220901.DescribeTimingL7AnalysisData", async function () {
+it("teo.v20220901.CreateInferenceDomain", async function () {
     try {
-       const data = await client.DescribeTimingL7AnalysisData({})
+       const data = await client.CreateInferenceDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2171,6 +2191,16 @@ it("teo.v20220901.CreateLogAnalysisDownloadTask", async function () {
 it("teo.v20220901.ImportZoneConfig", async function () {
     try {
        const data = await client.ImportZoneConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeTimingL7AnalysisData", async function () {
+    try {
+       const data = await client.DescribeTimingL7AnalysisData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

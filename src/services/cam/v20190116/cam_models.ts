@@ -78,23 +78,23 @@ export interface ListAttachedRolePoliciesResponse {
  */
 export interface CreateMessageReceiverRequest {
   /**
-   * 消息接收人的用户名
+   * <p>消息接收人的用户名</p>
    */
   Name: string
   /**
-   * 手机号国际区号，国内为86
+   * <p>手机号国际区号，国内为86</p>
    */
   CountryCode: string
   /**
-   * 手机号码, 例如：132****2492
-   */
-  PhoneNumber: string
-  /**
-   * 邮箱，例如：57*****@qq.com
+   * <p>邮箱，例如：57<strong>*</strong>@qq.com</p>
    */
   Email: string
   /**
-   * 消息接收人的备注，选填
+   * <p>手机号码, 例如：132****2492</p>
+   */
+  PhoneNumber: string
+  /**
+   * <p>消息接收人的备注，选填</p>
    */
   Remark?: string
 }
@@ -1787,39 +1787,39 @@ export interface GroupInfo {
  */
 export interface AddUserRequest {
   /**
-   * 子用户用户名
+   * <p>子用户用户名</p>
    */
   Name: string
   /**
-   * 子用户备注
+   * <p>子用户备注</p>
    */
   Remark?: string
   /**
-   * 子用户是否可以登录控制台。传0子用户无法登录控制台，传1子用户可以登录控制台。
+   * <p>子用户是否可以登录控制台。传0子用户无法登录控制台，传1子用户可以登录控制台。</p>
    */
   ConsoleLogin?: number
   /**
-   * 是否生成子用户密钥。传0不生成子用户密钥，传1生成子用户密钥。
+   * <p>是否生成子用户密钥。传0不生成子用户密钥，传1生成子用户密钥。</p>
    */
   UseApi?: number
   /**
-   * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大小写字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大小写字母、数字和特殊字符。
+   * <p>子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大小写字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大小写字母、数字和特殊字符。</p>
    */
   Password?: string
   /**
-   * 子用户是否要在下次登录时重置密码。传0子用户下次登录控制台不需重置密码，传1子用户下次登录控制台需要重置密码。
+   * <p>子用户是否要在下次登录时重置密码。传0子用户下次登录控制台不需重置密码，传1子用户下次登录控制台需要重置密码。</p>
    */
   NeedResetPassword?: number
   /**
-   * 手机号
+   * <p>手机号</p>
    */
   PhoneNum?: string
   /**
-   * 区号
+   * <p>区号</p>
    */
   CountryCode?: string
   /**
-   * 邮箱
+   * <p>邮箱</p>
    */
   Email?: string
 }
@@ -2865,29 +2865,33 @@ export interface CreateUserOIDCConfigRequest {
  */
 export interface AddUserResponse {
   /**
-   * 子用户 UIN
+   * <p>子用户 UIN</p>
    */
   Uin?: number
   /**
-   * 子用户用户名
+   * <p>子用户用户名</p>
    */
   Name?: string
   /**
-   * 如果输入参数组合为自动生成随机密码，则返回生成的密码
+   * <p>如果输入参数组合为自动生成随机密码，则返回生成的密码</p>
    */
   Password?: string
   /**
-   * 子用户密钥 ID
+   * <p>子用户密钥 ID</p>
    */
   SecretId?: string
   /**
-   * 子用户密钥 Key
+   * <p>子用户密钥 Key</p>
    */
   SecretKey?: string
   /**
-   * 子用户 UID
+   * <p>子用户 UID</p>
    */
   Uid?: number
+  /**
+   * <p>手机号验证地址。</p>
+   */
+  PhoneNumVerifyLink?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4160,6 +4164,10 @@ export interface DeleteOIDCConfigRequest {
  * CreateMessageReceiver返回参数结构体
  */
 export interface CreateMessageReceiverResponse {
+  /**
+   * <p>手机号验证地址。</p>
+   */
+  PhoneNumVerifyLink?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

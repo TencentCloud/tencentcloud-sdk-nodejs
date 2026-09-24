@@ -1837,6 +1837,10 @@ export interface ModifyApmInstanceRequest {
    * <p>跨账号关联ID</p>
    */
   CrossAccountPeerId?: string
+  /**
+   * <p>是否开启Token 展示安全保护</p><p>单位：0：不开启，1：开启</p><p>默认值：0</p>
+   */
+  TokenDisplayProtection?: number
 }
 
 /**
@@ -2733,6 +2737,10 @@ export interface ApmInstanceDetail {
    * <p>跨账号关联ID</p>
    */
   CrossAccountPeerId?: string
+  /**
+   * <p>开启Token展示安全保护</p><p>单位：是、否</p>
+   */
+  TokenDisplayProtection?: number
 }
 
 /**

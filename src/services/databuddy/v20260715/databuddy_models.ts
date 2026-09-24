@@ -48,7 +48,7 @@ export interface ListConsoleGroupUsersRequest {
    */
   UserUins?: Array<string>
   /**
-   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;DESC&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;ASC&#39;}]，默认按创建时间降序</p>
+   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
    */
   OrderBys?: Array<OrderBy>
   /**
@@ -56,7 +56,7 @@ export interface ListConsoleGroupUsersRequest {
    */
   PageNumber?: number
   /**
-   * <p>每页大小，默认10，最小10，最大200</p>
+   * <p>每页大小，默认10，最小10，最大100</p>
    */
   PageSize?: number
 }
@@ -70,7 +70,7 @@ export interface ListConsoleGroupsRequest {
    */
   PageNumber?: number
   /**
-   * <p>每页大小，默认10，最小10，最大200</p>
+   * <p>每页大小，默认10，最小10，最大100</p>
    */
   PageSize?: number
   /**
@@ -2295,7 +2295,7 @@ export interface UpdateConsoleGroupRequest {
    */
   Description?: string
   /**
-   * <p>成员 UIN 列表（OperType 为添加/删除成员时使用）</p>
+   * <p>成员 UIN 列表（OperType 为添加/删除成员时使用），单次最多100个</p>
    */
   UserUins?: Array<string>
 }
@@ -2621,7 +2621,7 @@ export interface AdvancedDependencyConfig {
  */
 export interface DeleteConsoleGroupsRequest {
   /**
-   * <p>要删除的用户组 ID 列表</p>
+   * <p>要删除的用户组 ID 列表，单次最多100个</p>
    */
   GroupIds: Array<string>
 }
@@ -3115,7 +3115,7 @@ export interface ListConsoleUsersRequest {
    */
   PageNumber?: number
   /**
-   * <p>每页大小，默认10，最小10，最大200</p>
+   * <p>每页大小，默认10，最小10，最大100</p>
    */
   PageSize?: number
   /**
@@ -3388,7 +3388,7 @@ export interface ListConsoleRolesRequest {
    */
   PageNumber?: number
   /**
-   * <p>每页大小，默认10，最小10，最大200</p>
+   * <p>每页大小，默认10，最小10，最大100</p>
    */
   PageSize?: number
   /**

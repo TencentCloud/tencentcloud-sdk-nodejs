@@ -79,6 +79,7 @@ import {
   CreateTWeSeeDirectUploadCredentialResponse,
   CreateProjectResponse,
   DeleteProjectResponse,
+  BatchPublishMessageResponse,
   CallDeviceActionAsyncRequest,
   CreateDeviceResponse,
   CreateDeviceRequest,
@@ -194,6 +195,7 @@ import {
   ModifyTWeTalkAIBotRequest,
   DescribeDevicePositionListRequest,
   DeleteOtaModuleRequest,
+  ModifyFenceBindRequest,
   CreateStudioProductRequest,
   TransferCloudStorageRequest,
   CreateTWeSeeServiceRequest,
@@ -436,6 +438,7 @@ import {
   DisableTopicRuleResponse,
   TopicRuleInfo,
   DescribeCloudStorageAIServiceTasksRequest,
+  BatchPublishMessageRequest,
   DescribeTWeTalkAgentRequest,
   ListFirmwaresRequest,
   TalkActivationInfo,
@@ -574,6 +577,7 @@ import {
   ProductEntry,
   BindDeviceInfo,
   CloudStorageAIServiceTask,
+  SeeExtendedOutput,
   DescribeLicenseOverviewResponse,
   ListTopicPolicyRequest,
   SeeSummarizeResult,
@@ -612,7 +616,7 @@ import {
   DescribeFirmwareTasksResponse,
   GetVodCloudStorageVideoListRequest,
   GetDeviceLocationHistoryResponse,
-  ModifyFenceBindRequest,
+  DeviceResult,
   InvokeTWeSeeComprehensionResponse,
   GetVodCloudStorageEventListRequest,
   GetLoRaGatewayListResponse,
@@ -656,6 +660,7 @@ import {
   CreateOtaModuleResponse,
   ModifyTWeTalkAgentRequest,
   CreateBatchProductionResponse,
+  SeeExtendedOutputPrompt,
   PositionFenceInfo,
   VisionObjectDetectConfig,
   BatchUpdateFirmwareRequest,
@@ -2829,6 +2834,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PublishMessageResponse) => void
   ): Promise<PublishMessageResponse> {
     return this.request("PublishMessage", req, cb)
+  }
+
+  /**
+   * 批量设备透传指令控制
+   */
+  async BatchPublishMessage(
+    req: BatchPublishMessageRequest,
+    cb?: (error: string, rep: BatchPublishMessageResponse) => void
+  ): Promise<BatchPublishMessageResponse> {
+    return this.request("BatchPublishMessage", req, cb)
   }
 
   /**

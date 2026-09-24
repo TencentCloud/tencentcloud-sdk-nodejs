@@ -690,7 +690,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 AI 网关Token 消耗统计汇总
+   * 查询 AI 网关Token 消耗统计汇总含（消费者消费金额数据）
    */
   async DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics(
     req: DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest,
@@ -840,7 +840,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 AI 网关Token 消耗统计
+   * 查询 AI 网关Token 消耗统计（消费者消费金额数据）
    */
   async DescribeCloudNativeAPIGatewayLLMTokenUsageList(
     req: DescribeCloudNativeAPIGatewayLLMTokenUsageListRequest,

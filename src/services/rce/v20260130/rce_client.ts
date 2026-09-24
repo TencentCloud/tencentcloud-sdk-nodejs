@@ -106,7 +106,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设备风险评估-基础版
+   * 基于设备端SDK 采集设备指纹 token和IP进行风险识别，提供设备维度的风险标签和设备基础信息，以及 IP 的地理位置和网络信息。
    */
   async AssessDeviceRiskPro(
     req: AssessDeviceRiskProRequest,
@@ -116,7 +116,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设备风险评估-高级版
+   * 基于设备端SDK 采集设备指纹 token和IP进行风险识别，提供设备、环境、行为等维度给出的综合风险评估（包含决策结果、风险评分、风险标签）和设备以及 IP 的基础信息。
    */
   async AssessDeviceRiskPremiumPro(
     req: AssessDeviceRiskPremiumProRequest,
@@ -136,7 +136,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 环境风险评估
+   * 基于传入的客户端IP进行风险识别，提供环境的风险评估（包含风险等级、风险标签）以及IP的地理位置和网络信息。
    */
   async AssessEnvironmentRisk(
     req: AssessEnvironmentRiskRequest,

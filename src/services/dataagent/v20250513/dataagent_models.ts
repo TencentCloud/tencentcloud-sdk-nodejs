@@ -97,6 +97,28 @@ export interface AddChunkRequest {
 export type GetUserInstanceListRequest = null
 
 /**
+ * 模型思考强度
+ */
+export interface Thinking {
+  /**
+   * <p>模式</p><p>枚举值：</p><ul><li>toggle： 可开关</li><li>always_on： 固定开启</li><li>always_off： 固定关闭</li><li>unconfigured： 未配置</li></ul>
+   */
+  Mode?: string
+  /**
+   * <p>默认是否开启思考</p>
+   */
+  DefaultEnabled?: boolean
+  /**
+   * <p>思考强度可选项，如 [&quot;high&quot;,&quot;max&quot;]</p>
+   */
+  EffortOptions?: Array<string>
+  /**
+   * <p>默认思考强度</p>
+   */
+  DefaultEffort?: string
+}
+
+/**
  * 模型详情
  */
 export interface ModelList {
@@ -108,6 +130,30 @@ export interface ModelList {
    * <p>模型厂商</p>
    */
   Vendor?: string
+  /**
+   * <p>展示名称</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>模型描述</p>
+   */
+  Description?: string
+  /**
+   * <p>上下文窗口大小，单位 token</p>
+   */
+  ContextWindow?: number
+  /**
+   * <p>模型图标 URL</p>
+   */
+  IconUrl?: string
+  /**
+   * <p>计费倍率</p>
+   */
+  CreditMultiplier?: number
+  /**
+   * <p>思考配置</p>
+   */
+  Thinking?: Thinking
 }
 
 /**

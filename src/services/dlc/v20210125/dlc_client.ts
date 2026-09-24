@@ -43,6 +43,7 @@ import {
   DescribeTaskListResponse,
   Policys,
   DropDMSDatabaseRequest,
+  ClsLogEntry,
   NotebookSessionStatementBatchInformation,
   ApiKeyInfo,
   DescribeDataEngineEventsResponse,
@@ -50,6 +51,7 @@ import {
   GetRayClusterResponse,
   DeleteNativeSparkSessionResponse,
   AlterTableCommentResponse,
+  LakeHouseConnection,
   CloudTag,
   ImportTkeClusterRequest,
   DescribeEngineUsageInfoRequest,
@@ -69,6 +71,7 @@ import {
   DeleteBenchmarkTaskResponse,
   DataEngineImageSessionParameter,
   CreateDatabaseRequest,
+  DescribeSchemaNamesPageRequest,
   DescribeDMSTablesResponse,
   Tag,
   CreateInferenceServiceRequest,
@@ -84,6 +87,7 @@ import {
   DescribeTrainingJobInstanceResponse,
   GetRayClusterRequest,
   CancelNotebookSessionStatementBatchResponse,
+  VolumeConnection,
   Label,
   ListDeploymentReplicasRequest,
   ImportExternalClusterRequest,
@@ -92,6 +96,7 @@ import {
   ModifySparkAppForTDLCResponse,
   GroupInfo,
   StartRayClusterRequest,
+  UpdateNetworkConnectionResponse,
   UnboundDatasourceHouseRequest,
   CreatePartitionResponse,
   DescribeEmrClusterInfoRequest,
@@ -148,8 +153,10 @@ import {
   CreateRayClusterRequest,
   DescribeUserRegisterTimeRequest,
   AttachDataMaskPolicyRequest,
+  DescribeRecommendedParamsResponse,
   DMSSds,
   OpendThirdAccessUserInfo,
+  DescribeCatalogTableNamesPageResponse,
   DescribeDataEnginesScaleDetailResponse,
   CreateJobSpecResponse,
   OptimizerEngineInfo,
@@ -165,8 +172,10 @@ import {
   CreateTableResponse,
   CreateBenchmarkTaskRequest,
   QueryMonitorOverviewRequest,
+  DescribeCatalogTableNamesRequest,
   WorkGroups,
   DeleteStandardEngineResourceGroupResponse,
+  JobBriefInfo,
   DescribeTaskResultRequest,
   UpdateUDFPolicyRequest,
   DeleteMetaDatabaseResponse,
@@ -231,6 +240,7 @@ import {
   CheckpointMountInfo,
   GetRayJobRequest,
   PostTrainingResources,
+  ResultColumn,
   DeleteDataMaskStrategyRequest,
   ListExampleTagsResponse,
   CreateWorkGroupRequest,
@@ -254,30 +264,36 @@ import {
   GetResourceConfigRequest,
   ListExampleCategoriesRequest,
   DeleteModelVersionResponse,
+  DescribeJobDefinitionsResponse,
   DescribeTasksCostInfoResponse,
   BindApiKeyResponse,
   DescribeClusterGroupClustersResponse,
   ModifyClusterPriorityResponse,
   DataEngineBasicInfo,
   CancelNotebookSessionStatementRequest,
+  DescribeSchemaNamesPageResponse,
   Param,
   GPUInfo,
   GetRayClusterEventRequest,
+  DescribeCatalogTableInfoResponse,
   UpdateStandardEngineResourceGroupBaseInfoRequest,
+  ResultRow,
   ListMlflowServerTrainingInstancesResponse,
   DescribeTablePartitionsRequest,
   SubmitTrainingJobResponse,
-  ResumeTrainingJobInstanceResponse,
+  RangerConnection,
   TaskResultInfo,
   SparkMonitorMetrics,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
   DeleteMlflowServerRequest,
-  DescribeTablesNameRequest,
+  DescribeSaleRegionsRequest,
   UnbindWorkGroupsFromUserResponse,
   DescribeTaskDetailRequest,
+  CreateJobDefinitionResponse,
   WorkGroupInfo,
   CreatePartitionQueueResponse,
+  SuspendResumeDataEngineResponse,
   DLCCatalogAccess,
   ModifyUserResponse,
   DeleteScriptResponse,
@@ -295,15 +311,18 @@ import {
   DetachWorkGroupPolicyResponse,
   DescribeSparkSessionBatchSqlLogResponse,
   ServiceMetricsItem,
+  CreateJobFromDefinitionResponse,
   GetRayClusterPodsRequest,
   SwitchDataEngineResponse,
   DeleteMlflowServerResponse,
   ListExampleTagsRequest,
+  ListPartitioning,
   DescribeLakeFsInfoRequest,
   DeleteDeploymentRequest,
   UpdateStandardEngineResourceGroupConfigInfoResponse,
   CreateCHDFSBindingProductResponse,
   DescribeUserInfoRequest,
+  DorisConnection,
   CreateModelVersionResponse,
   PauseStandardEngineResourceGroupsResponse,
   DescribeSaleRegionsResponse,
@@ -312,7 +331,7 @@ import {
   GatewayInfo,
   ResourceUsage,
   DescribeUserTypeResponse,
-  DescribeRecommendedParamsResponse,
+  CreateJobResponse,
   QueryResultResponse,
   SubmitTrainingJobRequest,
   RegisterThirdPartyAccessUserResponse,
@@ -323,6 +342,7 @@ import {
   DescribePartitionsResponse,
   GetRayClusterYamlRequest,
   TextFile,
+  NameIdentifier,
   DescribeModelTaskOptionsResponse,
   DeleteUserResponse,
   CreateUserRoleRequest,
@@ -335,6 +355,7 @@ import {
   DescribeDataEngineRequest,
   CreateNotebookSessionRequest,
   KerberosInfo,
+  RangePartitioning,
   AssociateDatasourceHouseRequest,
   CreateDataEngineRequest,
   QueryDashboardServiceListResponse,
@@ -348,7 +369,7 @@ import {
   DropDMSPartitionsResponse,
   DeleteBenchmarkTaskRequest,
   DescribeUsersRequest,
-  TCHousePInfo,
+  CreateJobFromDefinitionRequest,
   UpdateDeploymentRequest,
   DeploymentResourceInfo,
   CreateExportTaskResponse,
@@ -362,10 +383,11 @@ import {
   GetModelReadmeRequest,
   GetRayJobHistoryResponse,
   DataEngineConfigPair,
+  RangePartition,
   SortOrder,
   GetLabDetailResponse,
   EventItem,
-  SuspendResumeDataEngineResponse,
+  DescribeJobDefinitionDetailRequest,
   ModifyUserRequest,
   DatasourceConnectionLocation,
   PodItem,
@@ -392,7 +414,9 @@ import {
   ListDeploymentReplicasResponse,
   SmartPolicy,
   CreateScriptRequest,
+  UpdateInferenceModelResponse,
   DescribeUserVpcConnectionRequest,
+  DescribeJobDetailResponse,
   DescribeTrainingCheckpointsResponse,
   EvalDatasetConfig,
   SharedMountFileItem,
@@ -406,8 +430,9 @@ import {
   DescribeOtherCHDFSBindingListRequest,
   CancelTaskResponse,
   GooseFSConfig,
+  TCHousePInfo,
   TableInfo,
-  DescribeFlowListResponse,
+  DescribeCatalogsResponse,
   DescribeSparkSessionBatchSQLResponse,
   DescribeResourceGroupUsageInfoResponse,
   JobPodEntity,
@@ -425,6 +450,7 @@ import {
   SmartOptimizerChangeTablePolicy,
   StartMlflowServerRequest,
   DeleteDataEngineRequest,
+  DlcConnection,
   DeleteInferenceServiceRequest,
   CreateSparkSessionBatchSQLResponse,
   DescribeDMSDatabaseRequest,
@@ -439,10 +465,13 @@ import {
   DeleteTrainingJobSpecResponse,
   AlterDMSPartitionResponse,
   UpdateStandardEngineResourceGroupResourceInfoResponse,
+  TruncatePartitioning,
   DescribeTableResponse,
   ListRegionLbsResponse,
-  DescribeLakeFsTaskResultResponse,
+  IndexInfo,
+  DescribeJobLogRequest,
   CoreInfo,
+  ConnectionConfig,
   DetachUserPolicyResponse,
   UpdateLabResponse,
   GetRayClusterEventResponse,
@@ -472,6 +501,7 @@ import {
   DescribeOtherCHDFSBindingListResponse,
   GetLabHistoryResponse,
   DescribeDataEngineEventsRequest,
+  UpdateRowFilterRequest,
   DescribeDataEnginePythonSparkImagesResponse,
   DescribeViewsResponse,
   UpdateInferenceModelRequest,
@@ -481,7 +511,7 @@ import {
   RecommendedAdvancedParams,
   CopyJobSpecRequest,
   DatasourceConnectionConfig,
-  UpdateRowFilterRequest,
+  ColumnInfo,
   TColumn,
   LakeFileSystemToken,
   DeleteNativeSparkSessionRequest,
@@ -504,9 +534,11 @@ import {
   QueryMonitorOverviewResponse,
   RerunBenchmarkTaskResponse,
   IpPortPair,
+  DescribeTaskResultResponse,
   PrestoMonitorMetrics,
   DeploymentReplicaInfo,
   StopMlflowServerResponse,
+  DescribeWarehousesResponse,
   CheckModelIdentifierResponse,
   DescribeMlflowServerEventsRequest,
   DescribeTasksAnalysisResponse,
@@ -522,8 +554,10 @@ import {
   DescribeSparkAppTasksResponse,
   CpuSummaryItem,
   DescribeUserRegisterTimeResponse,
+  DescribeFlowListResponse,
   DropDMSTableResponse,
   DescribeMlFlowConfigResponse,
+  ModifyJobDefinitionRequest,
   AddDMSPartitionsResponse,
   DescribePostTrainingPresetRequest,
   ListTaskJobLogNameResponse,
@@ -533,7 +567,7 @@ import {
   ModifySparkAppRequest,
   SpecInfo,
   AssignMangedTablePropertiesRequest,
-  UpdateLabRequest,
+  PostgreSQLConnection,
   UserIdSetOfWorkGroupId,
   InitializeTCLakeRequest,
   AlterDMSPartitionRequest,
@@ -555,12 +589,17 @@ import {
   StatementOutput,
   TagInfo,
   CreateUserResponse,
+  UpdateLabRequest,
   DescribeNotebookSessionStatementsRequest,
+  DescribeFlowListRequest,
   ListDeploymentsRequest,
   UpdateDataEngineResponse,
+  ResumeTrainingJobInstanceResponse,
   DescribeClusterGroupRequest,
   DescribeTasksOverviewRequest,
   TPartition,
+  TCHouseD,
+  DescribeCatalogTableNamesResponse,
   DeleteUserVpcConnectionRequest,
   ExampleEntity,
   MixedTablePartitions,
@@ -572,7 +611,7 @@ import {
   LakeFsInfo,
   UpdateRayClusterRequest,
   ListServiceApiKeysResponse,
-  DescribeEmrClusterInfoResponse,
+  CheckDataEngineImageCanBeRollbackRequest,
   CheckJobSpecNameRequest,
   CreateTaskRequest,
   DeleteTrainingJobInstanceResponse,
@@ -591,7 +630,9 @@ import {
   DeleteTableRequest,
   StopBenchmarkTaskResponse,
   DescribeStoreLocationRequest,
+  DescribeWarehousesRequest,
   AddUsersToWorkGroupResponse,
+  DescribeEmrClusterInfoResponse,
   StandardEngineResourceGroupInfo,
   CreateStandardEngineResourceGroupResponse,
   CreateDatasourceConnectionRequest,
@@ -606,7 +647,8 @@ import {
   ModifyTrainingJobSpecResponse,
   DescribeDMSTablesRequest,
   LaunchStandardEngineResourceGroupsResponse,
-  UpdateNetworkConnectionResponse,
+  DescribeTablesNameRequest,
+  DescribeJobLogResponse,
   DescribeMlFlowConfigRequest,
   CancelTrainingJobInstanceResponse,
   ListJobSpecsResponse,
@@ -617,7 +659,7 @@ import {
   DescribeDataEngineImageVersionsRequest,
   CheckServiceNameResponse,
   GetRayJobPodYamlResponse,
-  UpdateRayClusterResponse,
+  HiveConnection,
   ListExamplesResponse,
   ApiKeyResponseInfo,
   SparkSessionBatchLog,
@@ -633,7 +675,7 @@ import {
   DescribeClusterGroupResponse,
   StartLabRequest,
   ImportTkeClusterResponse,
-  MlFlowConfig,
+  JobDefinitionItemInfo,
   DeleteJobSpecResponse,
   SmartOptimizerIndexPolicy,
   SwitchDataEngineRequest,
@@ -641,6 +683,7 @@ import {
   ModifySparkAppForTDLCRequest,
   RenewDataEngineRequest,
   DescribeDataEngineSessionParametersRequest,
+  DescribeCatalogTableInfoRequest,
   DescribeDataEngineSessionParametersResponse,
   StopDeploymentResponse,
   DescribeScriptsResponse,
@@ -676,6 +719,7 @@ import {
   DescribeThirdPartyAccessUserRequest,
   AssignMangedTablePropertiesResponse,
   ResourceSaleInfo,
+  DescribeJobDetailRequest,
   TaskMonitorInfo,
   DataEngineImageVersion,
   ListModelVersionsResponse,
@@ -698,7 +742,7 @@ import {
   GetLabYamlRequest,
   BenchmarkSummaryInfo,
   DescribeDataEngineImageVersionsResponse,
-  DescribeSaleRegionsRequest,
+  DescribeJobResultRequest,
   CreateTcIcebergTableResponse,
   DescribeWorkGroupsRequest,
   DescribeUserDataEngineConfigRequest,
@@ -716,6 +760,7 @@ import {
   DescribePartitionDetailResponse,
   ListInferenceEnginesResponse,
   ListTaskJobLogDetailResponse,
+  UpdateEngineResourceGroupNetworkConfigInfoResponse,
   CreateMetaDatabaseResponse,
   VpcInfo,
   UpdateJobSpecPriorityResponse,
@@ -734,7 +779,7 @@ import {
   DescribeTkeClusterImportInfoRequest,
   CancelNotebookSessionStatementBatchRequest,
   GetInferenceServiceResponse,
-  CheckDataEngineImageCanBeRollbackRequest,
+  DescribeLakeFsTaskResultResponse,
   CheckModifyPartitionResponse,
   DescribeTkeClusterImportInfoResponse,
   ListBenchmarkSummaryRequest,
@@ -743,7 +788,7 @@ import {
   DescribeTasksCostInfoRequest,
   UserDetailInfo,
   GetExampleDetailResponse,
-  DescribeTaskResultResponse,
+  DescribeJobDefinitionsRequest,
   DescribeDatasourceConnectionResponse,
   CreateDatasourceConnectionResponse,
   DescribeNotebookSessionStatementRequest,
@@ -756,7 +801,8 @@ import {
   DeleteRayClusterResponse,
   DescribeTaskDetailResponse,
   CreateSparkAppForTDLCResponse,
-  TCHouseD,
+  DescribeJobResultResponse,
+  DescribeCatalogTableNamesPageRequest,
   CreateResultDownloadResponse,
   RestartDataEngineRequest,
   CheckQueueNameResponse,
@@ -764,6 +810,7 @@ import {
   GetModelConfigRequest,
   DescribeNotebookSessionResponse,
   DescribeSubUserAccessPolicyResponse,
+  BucketPartitioning,
   CreateRayClusterResponse,
   CreateScriptResponse,
   ModifyAdvancedStoreLocationResponse,
@@ -780,6 +827,7 @@ import {
   DescribeTaskLogResponse,
   DescribeTasksResponse,
   DropDMSPartitionsRequest,
+  Partitioning,
   DescribeTaskResourceUsageResponse,
   CommonMetrics,
   UserRole,
@@ -787,6 +835,7 @@ import {
   JobStatusHistory,
   DescribeBindablePrometheusResponse,
   DescribeUserTypeRequest,
+  CatalogConfig,
   ListTrainingJobSpecResponse,
   CheckDataEngineConfigPairsValidityRequest,
   DescribeTablePartitionsResponse,
@@ -805,17 +854,19 @@ import {
   TypeKVPair,
   AddOptimizerEnginesResponse,
   DescribeTasksRequest,
-  CreateSparkAppTaskRequest,
+  CreateJobDefinitionRequest,
   ListApiKeysResponse,
   DeleteWorkGroupRequest,
   KVPair,
   TableBaseInfo,
   UnlockMetaDataRequest,
+  WarehouseInfo,
   GenerateCreateMangedTableSqlResponse,
   ListRayJobsResponse,
   ListTaskJobLogDetailRequest,
-  ClsTopicItem,
-  DescribeSaleResourceInfoRequest,
+  CheckpointConfig,
+  MysqlConnection,
+  DescribeJobListResponse,
   DescribeNativeSparkSessionsRequest,
   GetInferenceModelRequest,
   DescribeSessionImageVersionRequest,
@@ -830,6 +881,7 @@ import {
   CreateDataMaskStrategyResponse,
   UpdateServiceAuthConfigRequest,
   DataMaskStrategyInfo,
+  DescribeJobListRequest,
   RollbackDataEngineImageResponse,
   AddOptimizerEnginesRequest,
   CreateLabResponse,
@@ -842,6 +894,7 @@ import {
   LaunchStandardEngineResourceGroupsRequest,
   ListRayClusterJobsRequest,
   DeleteScriptRequest,
+  ListPartition,
   Property,
   UserVpcConnectionInfo,
   ListMlflowServersRequest,
@@ -863,21 +916,25 @@ import {
   UpdateJobSpecRequest,
   DescribeTrainingJobSpecResponse,
   ListBenchmarkTasksRequest,
+  TaskResponseInfo,
   DescribeBindablePrometheusRequest,
   ListExampleCategoriesResponse,
   DescribeMlflowServerRequest,
-  StreamingStatistics,
+  Literal,
   ListImagesResponse,
-  TaskResponseInfo,
+  StreamingStatistics,
   OperateEngineResourceGroupFailMessage,
   GetRayJobHistoryRequest,
   DescribeStoreLocationResponse,
   DescribeTCLakeMetaInstanceResponse,
+  ModifyJobDefinitionResponse,
+  CreateSparkAppTaskRequest,
   CreateInferenceServiceResponse,
+  UpdateRayClusterResponse,
   StopRayClusterResponse,
   QueryTaskCostDetailResponse,
   DescribeClusterEventLogSwitchResponse,
-  UpdateInferenceModelResponse,
+  DescribeJobDefinitionDetailResponse,
   ListTrainingJobSpecRequest,
   NotebookSessionInfo,
   Execution,
@@ -903,7 +960,8 @@ import {
   ModifySparkAppBatchResponse,
   ModifyLabPriorityRequest,
   CheckDataEngineImageCanBeRollbackResponse,
-  DescribeFlowListRequest,
+  MlFlowConfig,
+  DescribeCatalogsRequest,
   DeleteNotebookSessionResponse,
   DescribeThirdPartyAccessUserResponse,
   StopLabRequest,
@@ -913,23 +971,26 @@ import {
   DescribeClsTopicsRequest,
   ParallelKeyMapping,
   DatabaseInfo,
+  SingleFieldPartitioning,
   ListBenchmarkTasksResponse,
+  CreateJobRequest,
   CancelTasksResponse,
   InitializeTCLakeResponse,
   ListImagesRequest,
   DescribeDataEnginesRequest,
-  CheckpointConfig,
+  ClsTopicItem,
   JobLogResult,
   DropDMSDatabaseResponse,
   VpcCidrBlock,
   DeleteUsersFromWorkGroupRequest,
   DMSColumnOrder,
   GetLabServiceUrlsRequest,
-  UpdateEngineResourceGroupNetworkConfigInfoResponse,
+  DescribeSaleResourceInfoRequest,
   DeleteRayJobResponse,
   DeleteSparkAppResponse,
   CreateLabRequest,
   ResourceSpec,
+  CatalogTaleInfo,
   CreateSparkAppForTDLCRequest,
   GetRayClusterPodYamlResponse,
   ResourceConfig,
@@ -940,6 +1001,7 @@ import {
   RegionInfo,
   DescribeSparkSessionBatchSQLCostRequest,
   DeleteDeploymentResponse,
+  Audit,
   CreateNotebookSessionResponse,
   ListBenchmarkSummaryResponse,
   DataMaskStrategyPolicy,
@@ -1097,6 +1159,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDatasourceConnectionResponse) => void
   ): Promise<CreateDatasourceConnectionResponse> {
     return this.request("CreateDatasourceConnection", req, cb)
+  }
+
+  /**
+   * 修改作业定义。
+   */
+  async ModifyJobDefinition(
+    req: ModifyJobDefinitionRequest,
+    cb?: (error: string, rep: ModifyJobDefinitionResponse) => void
+  ): Promise<ModifyJobDefinitionResponse> {
+    return this.request("ModifyJobDefinition", req, cb)
   }
 
   /**
@@ -1695,6 +1767,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 创建并提交作业 Action。
+   */
+  async CreateJob(
+    req: CreateJobRequest,
+    cb?: (error: string, rep: CreateJobResponse) => void
+  ): Promise<CreateJobResponse> {
+    return this.request("CreateJob", req, cb)
+  }
+
+  /**
    * 续费数据引擎
    */
   async RenewDataEngine(
@@ -1702,6 +1784,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: RenewDataEngineResponse) => void
   ): Promise<RenewDataEngineResponse> {
     return this.request("RenewDataEngine", req, cb)
+  }
+
+  /**
+   * 分页查询 Catalog 下 Schema 列表
+   */
+  async DescribeSchemaNamesPage(
+    req: DescribeSchemaNamesPageRequest,
+    cb?: (error: string, rep: DescribeSchemaNamesPageResponse) => void
+  ): Promise<DescribeSchemaNamesPageResponse> {
+    return this.request("DescribeSchemaNamesPage", req, cb)
   }
 
   /**
@@ -1715,13 +1807,13 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
-   * 停止实验室
+   * 修改实验室的调度优先级（1-9，数字越大优先级越高）
    */
-  async StopLab(
-    req: StopLabRequest,
-    cb?: (error: string, rep: StopLabResponse) => void
-  ): Promise<StopLabResponse> {
-    return this.request("StopLab", req, cb)
+  async ModifyLabPriority(
+    req: ModifyLabPriorityRequest,
+    cb?: (error: string, rep: ModifyLabPriorityResponse) => void
+  ): Promise<ModifyLabPriorityResponse> {
+    return this.request("ModifyLabPriority", req, cb)
   }
 
   /**
@@ -2115,13 +2207,13 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
-   * 查询引擎可用的节点规格
+   * 暂停标准引擎session
    */
-  async DescribeEngineNodeSpec(
-    req: DescribeEngineNodeSpecRequest,
-    cb?: (error: string, rep: DescribeEngineNodeSpecResponse) => void
-  ): Promise<DescribeEngineNodeSpecResponse> {
-    return this.request("DescribeEngineNodeSpec", req, cb)
+  async PauseStandardEngineResourceGroups(
+    req: PauseStandardEngineResourceGroupsRequest,
+    cb?: (error: string, rep: PauseStandardEngineResourceGroupsResponse) => void
+  ): Promise<PauseStandardEngineResourceGroupsResponse> {
+    return this.request("PauseStandardEngineResourceGroups", req, cb)
   }
 
   /**
@@ -2245,13 +2337,13 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
-   * 修改实验室的调度优先级（1-9，数字越大优先级越高）
+   * 停止实验室
    */
-  async ModifyLabPriority(
-    req: ModifyLabPriorityRequest,
-    cb?: (error: string, rep: ModifyLabPriorityResponse) => void
-  ): Promise<ModifyLabPriorityResponse> {
-    return this.request("ModifyLabPriority", req, cb)
+  async StopLab(
+    req: StopLabRequest,
+    cb?: (error: string, rep: StopLabResponse) => void
+  ): Promise<StopLabResponse> {
+    return this.request("StopLab", req, cb)
   }
 
   /**
@@ -2305,6 +2397,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 查询引擎可用的节点规格
+   */
+  async DescribeEngineNodeSpec(
+    req: DescribeEngineNodeSpecRequest,
+    cb?: (error: string, rep: DescribeEngineNodeSpecResponse) => void
+  ): Promise<DescribeEngineNodeSpecResponse> {
+    return this.request("DescribeEngineNodeSpec", req, cb)
+  }
+
+  /**
    * 本接口（ModifySparkAppBatch）用于批量修改Spark作业参数配置
    */
   async ModifySparkAppBatch(
@@ -2352,6 +2454,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: DescribeDMSTableResponse) => void
   ): Promise<DescribeDMSTableResponse> {
     return this.request("DescribeDMSTable", req, cb)
+  }
+
+  /**
+   * 获取 Table 详情
+   */
+  async DescribeCatalogTableInfo(
+    req: DescribeCatalogTableInfoRequest,
+    cb?: (error: string, rep: DescribeCatalogTableInfoResponse) => void
+  ): Promise<DescribeCatalogTableInfoResponse> {
+    return this.request("DescribeCatalogTableInfo", req, cb)
   }
 
   /**
@@ -2525,6 +2637,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 查询数据目录列表
+   */
+  async DescribeCatalogs(
+    req: DescribeCatalogsRequest,
+    cb?: (error: string, rep: DescribeCatalogsResponse) => void
+  ): Promise<DescribeCatalogsResponse> {
+    return this.request("DescribeCatalogs", req, cb)
+  }
+
+  /**
    * 更新tdlc spark作业
    */
   async ModifySparkAppForTDLC(
@@ -2645,6 +2767,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 查询作业定义详情。
+   */
+  async DescribeJobDefinitionDetail(
+    req: DescribeJobDefinitionDetailRequest,
+    cb?: (error: string, rep: DescribeJobDefinitionDetailResponse) => void
+  ): Promise<DescribeJobDefinitionDetailResponse> {
+    return this.request("DescribeJobDefinitionDetail", req, cb)
+  }
+
+  /**
    * 查询任务监控指标信息
    */
   async DescribeClusterMonitorInfos(
@@ -2652,16 +2784,6 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: DescribeClusterMonitorInfosResponse) => void
   ): Promise<DescribeClusterMonitorInfosResponse> {
     return this.request("DescribeClusterMonitorInfos", req, cb)
-  }
-
-  /**
-   * 暂停标准引擎session
-   */
-  async PauseStandardEngineResourceGroups(
-    req: PauseStandardEngineResourceGroupsRequest,
-    cb?: (error: string, rep: PauseStandardEngineResourceGroupsResponse) => void
-  ): Promise<PauseStandardEngineResourceGroupsResponse> {
-    return this.request("PauseStandardEngineResourceGroups", req, cb)
   }
 
   /**
@@ -3345,6 +3467,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 查询作业完整详情 Action。
+   */
+  async DescribeJobDetail(
+    req: DescribeJobDetailRequest,
+    cb?: (error: string, rep: DescribeJobDetailResponse) => void
+  ): Promise<DescribeJobDetailResponse> {
+    return this.request("DescribeJobDetail", req, cb)
+  }
+
+  /**
    * 获取用户详细信息
    */
   async DescribeUserInfo(
@@ -3435,6 +3567,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 获取 Schema 下所有 Table
+   */
+  async DescribeCatalogTableNames(
+    req: DescribeCatalogTableNamesRequest,
+    cb?: (error: string, rep: DescribeCatalogTableNamesResponse) => void
+  ): Promise<DescribeCatalogTableNamesResponse> {
+    return this.request("DescribeCatalogTableNames", req, cb)
+  }
+
+  /**
    * 创建资源配置模板
    */
   async CreateResourceConfig(
@@ -3482,6 +3624,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: DescribeWorkGroupsResponse) => void
   ): Promise<DescribeWorkGroupsResponse> {
     return this.request("DescribeWorkGroups", req, cb)
+  }
+
+  /**
+   * 分页查询作业列表 Action. PageSize 上限 200；QueueName 必须配合 PartitionCode。
+   */
+  async DescribeJobList(
+    req: DescribeJobListRequest,
+    cb?: (error: string, rep: DescribeJobListResponse) => void
+  ): Promise<DescribeJobListResponse> {
+    return this.request("DescribeJobList", req, cb)
   }
 
   /**
@@ -3625,6 +3777,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 查询计算仓库列表 Action。
+   */
+  async DescribeWarehouses(
+    req: DescribeWarehousesRequest,
+    cb?: (error: string, rep: DescribeWarehousesResponse) => void
+  ): Promise<DescribeWarehousesResponse> {
+    return this.request("DescribeWarehouses", req, cb)
+  }
+
+  /**
    * 查询引擎网络信息
    */
   async DescribeEngineNetworks(
@@ -3712,6 +3874,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: DescribeTaskDetailResponse) => void
   ): Promise<DescribeTaskDetailResponse> {
     return this.request("DescribeTaskDetail", req, cb)
+  }
+
+  /**
+   * 获取 SQL 作业结果集 Action. 仅 MinorType=SPARK_SQL 有效（Batch 固定返回 State=NOT_SUPPORTED）。
+   */
+  async DescribeJobResult(
+    req: DescribeJobResultRequest,
+    cb?: (error: string, rep: DescribeJobResultResponse) => void
+  ): Promise<DescribeJobResultResponse> {
+    return this.request("DescribeJobResult", req, cb)
   }
 
   /**
@@ -4055,6 +4227,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 按作业定义创建作业。
+   */
+  async CreateJobFromDefinition(
+    req: CreateJobFromDefinitionRequest,
+    cb?: (error: string, rep: CreateJobFromDefinitionResponse) => void
+  ): Promise<CreateJobFromDefinitionResponse> {
+    return this.request("CreateJobFromDefinition", req, cb)
+  }
+
+  /**
    * 停止性能评测任务
    */
   async StopBenchmarkTask(
@@ -4062,6 +4244,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: StopBenchmarkTaskResponse) => void
   ): Promise<StopBenchmarkTaskResponse> {
     return this.request("StopBenchmarkTask", req, cb)
+  }
+
+  /**
+   * 分页查询表名
+   */
+  async DescribeCatalogTableNamesPage(
+    req: DescribeCatalogTableNamesPageRequest,
+    cb?: (error: string, rep: DescribeCatalogTableNamesPageResponse) => void
+  ): Promise<DescribeCatalogTableNamesPageResponse> {
+    return this.request("DescribeCatalogTableNamesPage", req, cb)
   }
 
   /**
@@ -4232,6 +4424,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: GetRayJobPodYamlResponse) => void
   ): Promise<GetRayJobPodYamlResponse> {
     return this.request("GetRayJobPodYaml", req, cb)
+  }
+
+  /**
+   * 查询作业定义列表。
+   */
+  async DescribeJobDefinitions(
+    req: DescribeJobDefinitionsRequest,
+    cb?: (error: string, rep: DescribeJobDefinitionsResponse) => void
+  ): Promise<DescribeJobDefinitionsResponse> {
+    return this.request("DescribeJobDefinitions", req, cb)
   }
 
   /**
@@ -4445,6 +4647,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
   }
 
   /**
+   * 创建作业定义。
+   */
+  async CreateJobDefinition(
+    req: CreateJobDefinitionRequest,
+    cb?: (error: string, rep: CreateJobDefinitionResponse) => void
+  ): Promise<CreateJobDefinitionResponse> {
+    return this.request("CreateJobDefinition", req, cb)
+  }
+
+  /**
    * 解绑用户上的用户组
    */
   async UnbindWorkGroupsFromUser(
@@ -4512,6 +4724,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: DescribeDMSDatabaseResponse) => void
   ): Promise<DescribeDMSDatabaseResponse> {
     return this.request("DescribeDMSDatabase", req, cb)
+  }
+
+  /**
+   * 统一作业日志查询 Action。
+   */
+  async DescribeJobLog(
+    req: DescribeJobLogRequest,
+    cb?: (error: string, rep: DescribeJobLogResponse) => void
+  ): Promise<DescribeJobLogResponse> {
+    return this.request("DescribeJobLog", req, cb)
   }
 
   /**

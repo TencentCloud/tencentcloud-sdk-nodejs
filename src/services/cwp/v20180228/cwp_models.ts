@@ -3346,6 +3346,24 @@ export interface DescribeRansomDefenseMachineListRequest {
 }
 
 /**
+ * 异常登陆历史记录
+ */
+export interface RecentLoginItem {
+  /**
+   * <p>登录时间</p><p>参数格式：YYYY-MM-DD HH:MM:SS</p>
+   */
+  LoginTime?: string
+  /**
+   * <p>登录方式</p><p>枚举值：</p><ul><li>0： 无效用户</li><li>1： 密码错误</li><li>2： 密码登录</li><li>3： 密钥登录</li><li>4： PAM 认证失败（sshd）</li><li>5： PAM 认证失败（tty）</li><li>6： 键盘交互登录</li><li>7： 键盘交互认证失败</li><li>8： PAM 认证失败</li></ul>
+   */
+  LoginType?: number
+  /**
+   * <p>登录方式描述</p>
+   */
+  LoginTypeDesc?: string
+}
+
+/**
  * ExportAssetCoreModuleList请求参数结构体
  */
 export interface ExportAssetCoreModuleListRequest {
@@ -4625,101 +4643,129 @@ export interface DescribeNetAttackSettingRequest {
  */
 export interface HostLoginList {
   /**
-   * 记录Id
+   * <p>记录Id</p>
    */
   Id?: number
   /**
-   * 主机Uuid
+   * <p>主机Uuid</p>
    */
   Uuid?: string
   /**
-   * 主机ip
+   * <p>主机ip</p>
    */
   MachineIp?: string
   /**
-   * 主机名
+   * <p>主机名</p>
    */
   MachineName?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 来源ip
+   * <p>来源ip</p>
    */
   SrcIp?: string
   /**
-   * 1:正常登录；2异地登录； 5已加白； 14：已处理；15：已忽略。
+   * <p>1:正常登录；2异地登录； 5已加白； 14：已处理；15：已忽略。</p>
    */
   Status?: number
   /**
-   * 国家id
+   * <p>国家id</p>
    */
   Country?: number
   /**
-   * 城市id
+   * <p>城市id</p>
    */
   City?: number
   /**
-   * 省份id
+   * <p>省份id</p>
    */
   Province?: number
   /**
-   * 登录时间
+   * <p>登录时间</p>
    */
   LoginTime?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 是否命中异地登录异常  1表示命中此类异常, 0表示未命中
+   * <p>是否命中异地登录异常  1表示命中此类异常, 0表示未命中</p>
    */
   IsRiskArea?: number
   /**
-   * 是否命中异常用户异常 1表示命中此类异常, 0表示未命中
+   * <p>是否命中异常用户异常 1表示命中此类异常, 0表示未命中</p>
    */
   IsRiskUser?: number
   /**
-   * 是否命中异常时间异常 1表示命中此类异常, 0表示未命中
+   * <p>是否命中异常时间异常 1表示命中此类异常, 0表示未命中</p>
    */
   IsRiskTime?: number
   /**
-   * 是否命中异常IP异常 1表示命中此类异常, 0表示未命中
+   * <p>是否命中异常IP异常 1表示命中此类异常, 0表示未命中</p>
    */
   IsRiskSrcIp?: number
   /**
-   * 危险等级：
-0 高危
-1 可疑
+   * <p>危险等级：<br>0 高危<br>1 可疑</p>
    */
   RiskLevel?: number
   /**
-   * 位置名称
+   * <p>位置名称</p>
    */
   Location?: string
   /**
-   * 主机quuid
+   * <p>主机quuid</p>
    */
   Quuid?: string
   /**
-   * 高危信息说明：
-ABROAD - 境外IP；
-XTI - 威胁情报
+   * <p>高危信息说明：<br>ABROAD - 境外IP；<br>XTI - 威胁情报</p>
    */
   Desc?: string
   /**
-   * 附加信息
+   * <p>附加信息</p>
    */
   MachineExtraInfo?: MachineExtraInfo
   /**
-   * 请求目的端口
+   * <p>请求目的端口</p>
    */
   Port?: number
   /**
-   * ip分析
+   * <p>ip分析</p>
    */
   IPAnalyse?: IPAnalyse
+  /**
+   * <p>命中策略ID</p><p>枚举值：</p><ul><li>risk_login_1： 威胁情报</li><li>risk_login_2： 密码破解成功后登录</li><li>risk_login_3： 弱口令账户登录</li><li>risk_login_4： 非法账户登录</li><li>risk_login_5： 登录后存在入侵行为</li><li>risk_login_101： 海外IP登录</li><li>risk_login_102： 非常用登录地登录</li><li>risk_login_103： 非工作时间登录</li></ul>
+   */
+  HitRule?: string
+  /**
+   * <p>命中策略名</p>
+   */
+  HitRuleName?: string
+  /**
+   * <p>告警数量</p>
+   */
+  AlertCount?: number
+  /**
+   * <p>首次发现时间</p><p>参数格式：YYYY-MM-DD HH:MM:SS</p>
+   */
+  FirstDiscoverTime?: string
+  /**
+   * <p>最近发现时间</p><p>参数格式：YYYY-MM-DD HH:MM:SS</p>
+   */
+  LastDiscoverTime?: string
+  /**
+   * <p>危害描述</p>
+   */
+  HarmDescribe?: string
+  /**
+   * <p>修复建议</p>
+   */
+  SuggestScheme?: string
+  /**
+   * <p>最近登录历史</p>
+   */
+  RecentLoginList?: Array<RecentLoginItem>
 }
 
 /**

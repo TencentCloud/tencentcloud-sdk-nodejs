@@ -23,6 +23,7 @@ import {
   QueryUserAuthorityResponse,
   AddChunkRequest,
   GetUserInstanceListRequest,
+  Thinking,
   ModelList,
   ModifyChunkRequest,
   ChatAIResponse,

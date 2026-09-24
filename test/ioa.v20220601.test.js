@@ -108,6 +108,16 @@ it("ioa.v20220601.CreateDLPFileDetectTask", async function () {
     }
 })
 
+it("ioa.v20220601.BindVirtualAccounts", async function () {
+    try {
+       const data = await client.BindVirtualAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.ModifyCompanyDirectoryConfig", async function () {
     try {
        const data = await client.ModifyCompanyDirectoryConfig({})
@@ -148,9 +158,19 @@ it("ioa.v20220601.DescribeDLPFileDetectTaskResult", async function () {
     }
 })
 
-it("ioa.v20220601.DescribeVirtualDevices", async function () {
+it("ioa.v20220601.DescribeProfileFieldsMenu", async function () {
     try {
-       const data = await client.DescribeVirtualDevices({})
+       const data = await client.DescribeProfileFieldsMenu({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDeviceSecurityInfo", async function () {
+    try {
+       const data = await client.DescribeDeviceSecurityInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +181,16 @@ it("ioa.v20220601.DescribeVirtualDevices", async function () {
 it("ioa.v20220601.DeleteAccountGroup", async function () {
     try {
        const data = await client.DeleteAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.UnbindVirtualAccounts", async function () {
+    try {
+       const data = await client.UnbindVirtualAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +221,16 @@ it("ioa.v20220601.CreateDLPFileDetectionTask", async function () {
 it("ioa.v20220601.CreatePrivilegeCode", async function () {
     try {
        const data = await client.CreatePrivilegeCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeVirtualAccounts", async function () {
+    try {
+       const data = await client.DescribeVirtualAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +501,16 @@ it("ioa.v20220601.DescribeBusinessResources", async function () {
 it("ioa.v20220601.DescribeResourceGrantedVirtualGroups", async function () {
     try {
        const data = await client.DescribeResourceGrantedVirtualGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeVirtualDevices", async function () {
+    try {
+       const data = await client.DescribeVirtualDevices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -27104,43 +27104,41 @@ export interface TrackInfo {
  */
 export interface QualityControlTemplate {
   /**
-   * 媒体质检模板唯一标识。
+   * <p>媒体质检模板唯一标识。</p>
    */
   Definition?: number
   /**
-   * 媒体质检模板名称。
+   * <p>媒体质检模板名称。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 模板描述信息。
+   * <p>模板描述信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
-   * 模板类型，取值：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+   * <p>模板类型，取值：</p><li>Preset：系统预置模板；</li><li>Custom：用户自定义模板。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * 媒体质检配置参数。
+   * <p>媒体质检配置参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlItemSet?: Array<QualityControlItemConfig>
   /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   * <p>模板创建时间，使用 <a href="https://cloud.tencent.com/document/product/862/37710#52">ISO 日期格式</a>。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   * <p>模板最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/862/37710#52">ISO 日期格式</a>。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 媒体质检的抽检策略。
+   * <p>媒体质检的抽检策略。</p>
    */
   Strategy?: QualityControlStrategy
 }

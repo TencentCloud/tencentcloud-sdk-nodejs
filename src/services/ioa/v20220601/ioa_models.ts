@@ -600,6 +600,20 @@ export interface GrantResourcesByVirtualGroupsRequest {
 }
 
 /**
+ * 取消绑定账户虚拟组响应数据
+ */
+export interface UnbindVirtualAccountData {
+  /**
+   * <p>解绑失败明细（含失败原因）</p>
+   */
+  FailItems?: Array<BindVirtualAccountResultData>
+  /**
+   * <p>解绑成功明细（含幂等场景：本就未绑定的账号也归入成功）</p>
+   */
+  SuccessItems?: Array<BindVirtualAccountResultData>
+}
+
+/**
  * 账号分组信息
  */
 export interface DescribeAccountGroupsData {
@@ -749,6 +763,87 @@ export interface CreateBusinessResourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 列表虚拟组的账户分页数据集合
+ */
+export interface DescribeVirtualAccountsData {
+  /**
+   * <p>Id(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * <p>用户账号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * <p>用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * <p>账户分组Id(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupId?: number
+  /**
+   * <p>账户组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * <p>关联服务器名称(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountId?: number
+  /**
+   * <p>账户源(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: number
+  /**
+   * <p>状态(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * <p>账户namepath</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamePath?: string
+  /**
+   * <p>账户扩展信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo?: string
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Itime?: string
+  /**
+   * <p>更新时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Utime?: string
+  /**
+   * <p>多OU组信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroups?: Array<DescribeAccountAccountGroupsData>
+  /**
+   * <p>绑定PC端数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PcBindNum?: number
+  /**
+   * <p>绑定移动端数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MobileBindNum?: number
 }
 
 /**
@@ -1114,6 +1209,10 @@ export interface DeviceDetail {
    */
   HostName?: string
   /**
+   * <p>信息登记数据</p>
+   */
+  Profiles?: Array<DeviceProfile>
+  /**
    * <p>主板序列号</p>
    */
   BaseBoardSn?: string
@@ -1149,6 +1248,10 @@ export interface DeviceDetail {
    * <p>是否开启磁盘访问权限，仅macOS， 0： 未开启、 1： 开启</p>
    */
   DiskAccessPermission?: number
+  /**
+   * <p>安装状态（私有化：0: 已安装 1: 已卸载 ）（SaaS及一体化：0: 未知 1: 已安装 2: 已卸载）</p>
+   */
+  InstallationStatus?: number
   /**
    * <p>终端备注名</p>
    */
@@ -1323,6 +1426,20 @@ export interface DirectoryConfigResultData {
 }
 
 /**
+ * DescribeProfileFieldsMenu请求参数结构体
+ */
+export interface DescribeProfileFieldsMenuRequest {
+  /**
+   * <p>查找自动填写字段</p>
+   */
+  OnlyRule: boolean
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+}
+
+/**
  * DeleteAccountGroup返回参数结构体
  */
 export interface DeleteAccountGroupResponse {
@@ -1466,6 +1583,24 @@ export interface DescribeSoftwareInformationPageData {
    * 分页公共对象
    */
   Page?: Paging
+}
+
+/**
+ * 多项选择数据
+ */
+export interface OptionsItem {
+  /**
+   * <p>中文值</p>
+   */
+  ValueCh?: string
+  /**
+   * <p>英文值</p>
+   */
+  ValueEn?: string
+  /**
+   * <p>每一项的Key值</p>
+   */
+  OptionKey?: number
 }
 
 /**
@@ -1637,6 +1772,82 @@ export interface DescribeSoftCensusListByDeviceData {
 }
 
 /**
+ * 终端安全信息
+ */
+export interface DescribeDeviceSecurityInfoData {
+  /**
+   * <p>防火墙状态</p><p>枚举值：</p><ul><li>0：未开启</li><li>1：已开启</li></ul>
+   */
+  FirewallStatus?: number
+  /**
+   * <p>实时防护状态</p><p>枚举值：</p><ul><li>0：未开启</li><li>1：部分开启</li><li>2：已开启</li><li>-1：未知</li></ul>
+   */
+  RealTimeProtectionStatus?: number
+  /**
+   * <p>系统修复引擎版本</p>
+   */
+  SysRepVersion?: string
+  /**
+   * <p>病毒库版本</p>
+   */
+  VirusVer?: string
+  /**
+   * <p>漏洞库版本</p>
+   */
+  VulVersion?: string
+}
+
+/**
+ * 设备显卡简要信息
+ */
+export interface DeviceVideoCardBrief {
+  /**
+   * <p>显卡名称</p>
+   */
+  VideoCardName?: string
+}
+
+/**
+ * UnbindVirtualAccounts请求参数结构体
+ */
+export interface UnbindVirtualAccountsRequest {
+  /**
+   * <p>Comment: 虚拟组id;Required:true</p>
+   */
+  VirtualGroupId: number
+  /**
+   * <p>Comment: 要取消绑定的账户Id集合，这里的Id指的是DescribeLocalAccountsData结构体里返回的Id;Required:true</p>
+   */
+  AccountIdList?: Array<number | bigint>
+  /**
+   * <p>Comment: 要取消绑定的账户(目录MenuId+登录账号UserId)集合，与AccountIdList二选一或并用，查不到的账号会被跳过;Required:false</p>
+   */
+  AccountUserList?: Array<AccountUserIdItem>
+  /**
+   * Comment: 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+}
+
+/**
+ * DescribeVirtualAccounts请求参数结构体
+ */
+export interface DescribeVirtualAccountsRequest {
+  /**
+   * <p>账户虚拟组Id(只支持32位)</p>
+   */
+  VirtualGroupId: number
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * <p>滤条件、分页参数</p><li>UserName - String - 是否必填：否 - 操作符: eq,like  - 排序支持：否- 按用户名称过滤。</li><li>UserId - String - 是否必填：否 - 操作符: eq,like  - 排序支持：否- 按用户账号过滤。</li><li>Phone - String - 是否必填：否 - 操作符: eq,like  - 排序支持：否- 按电话过滤。</li>
+   */
+  Condition?: Condition
+}
+
+/**
  * ModifyBusinessResource返回参数结构体
  */
 export interface ModifyBusinessResourceResponse {
@@ -1700,6 +1911,20 @@ export interface DescribeDeviceInfoRequest {
    * 查询类型  process_list network_list service_list
    */
   Type?: string
+}
+
+/**
+ * UnbindVirtualAccounts返回参数结构体
+ */
+export interface UnbindVirtualAccountsResponse {
+  /**
+   * <p>业务响应数据</p>
+   */
+  Data?: UnbindVirtualAccountData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1941,6 +2166,20 @@ export interface CreatePrivilegeCodeRspData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: string
+}
+
+/**
+ * profile开关配置
+ */
+export interface ProfileTips {
+  /**
+   * 配置id
+   */
+  Id?: number
+  /**
+   * 各开关值(json)
+   */
+  Value?: string
 }
 
 /**
@@ -2243,13 +2482,13 @@ export interface DescribeAccountGroupsPageResp {
 }
 
 /**
- * 设备显卡简要信息
+ * DescribeDeviceSecurityInfo请求参数结构体
  */
-export interface DeviceVideoCardBrief {
+export interface DescribeDeviceSecurityInfoRequest {
   /**
-   * <p>显卡名称</p>
+   * <p>设备唯一标识符</p>
    */
-  VideoCardName?: string
+  Mid: string
 }
 
 /**
@@ -2434,6 +2673,37 @@ export interface DescribeDLPEdgeNodesPageData {
 }
 
 /**
+ * 多OU组信息
+ */
+export interface DescribeAccountAccountGroupsData {
+  /**
+   * <p>组Id(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupId?: number
+  /**
+   * <p>组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupName?: string
+  /**
+   * <p>主组标识(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterFlag?: number
+  /**
+   * <p>组路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupNamePaths?: Array<string>
+  /**
+   * <p>组路径Id(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupPathIds?: Array<number | bigint>
+}
+
+/**
  * 条件筛选
  */
 export interface RulePayload {
@@ -2485,6 +2755,28 @@ export interface CreateDLPFileDetectTaskData {
    * 任务请求唯一Id
    */
   TaskRequestId?: Array<string>
+}
+
+/**
+ * 绑定虚拟组结果明细项
+ */
+export interface BindVirtualAccountResultData {
+  /**
+   * <p>账号Id（通过AccountIdList传入时回显）</p>
+   */
+  AccountId?: number
+  /**
+   * <p>目录ID（通过AccountUserList传入时回显，否则为0）</p>
+   */
+  MenuId?: number
+  /**
+   * <p>失败原因，仅失败项有值：ACCOUNT_NOT_FOUND / ACCOUNT_NOT_IN_GROUP / DB_ERROR</p>
+   */
+  Reason?: string
+  /**
+   * <p>登录账号（通过AccountUserList传入时回显，否则为空）</p>
+   */
+  UserId?: string
 }
 
 /**
@@ -2830,6 +3122,76 @@ export interface ExportDeviceDownloadTaskRequest {
 }
 
 /**
+ * 登记信息数据
+ */
+export interface ProfileFieldItem {
+  /**
+   * <p>键值id</p>
+   */
+  Id?: number
+  /**
+   * <p>排序key(只支持32位)</p>
+   */
+  Key?: number
+  /**
+   * <p>名称</p>
+   */
+  Title?: string
+  /**
+   * <p>输入类型(只支持32位)</p>
+   */
+  Type?: number
+  /**
+   * <p>是否必选(只支持32位)</p>
+   */
+  IsMust?: number
+  /**
+   * <p>是否显示(只支持32位)</p>
+   */
+  IsShow?: number
+  /**
+   * <p>是否自定义(只支持32位)</p>
+   */
+  IsCustom?: number
+  /**
+   * <p>下一个选项key(只支持32位)</p>
+   */
+  NextOptionKey?: number
+  /**
+   * <p>选项数据</p>
+   */
+  Options?: string
+  /**
+   * <p>是否覆盖(只支持32位)</p>
+   */
+  IsReplace?: number
+  /**
+   * <p>是否可以修改分组</p>
+   */
+  GroupEditable?: boolean
+  /**
+   * <p>是否有规则</p>
+   */
+  HasRules?: boolean
+  /**
+   * <p>规则id</p>
+   */
+  RuleId?: number
+  /**
+   * <p>名称-英文</p>
+   */
+  TitleEn?: string
+  /**
+   * <p>选项数据-英文</p>
+   */
+  OptionsEn?: string
+  /**
+   * <p>选项数据(包含中英文)</p>
+   */
+  OptionsItem?: Array<OptionsItem>
+}
+
+/**
  * CreateDeviceVirtualGroup返回参数结构体
  */
 export interface CreateDeviceVirtualGroupResponse {
@@ -2987,6 +3349,20 @@ export interface AggrSoftDeviceRow {
 }
 
 /**
+ * 账户标识项(目录MenuId+登录账号UserId)，用于以(菜单目录、登录账号)代替账号Id标识账户
+ */
+export interface AccountUserIdItem {
+  /**
+   * <p>Comment: 账号所在目录ID(MenuId)，与accounts表menu_id一致，用于同一登录账号在不同目录下去重;Required:true</p>
+   */
+  MenuId?: number
+  /**
+   * <p>Comment: 登录账号(UserId)，对应DescribeLocalAccount -&gt; UserId;Required:true</p>
+   */
+  UserId?: string
+}
+
+/**
  * DeleteDeviceVirtualGroup返回参数结构体
  */
 export interface DeleteDeviceVirtualGroupResponse {
@@ -3040,6 +3416,34 @@ export interface DescribeDeviceDetailListPageData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Page?: Paging
+}
+
+/**
+ * BindVirtualAccounts返回参数结构体
+ */
+export interface BindVirtualAccountsResponse {
+  /**
+   * <p>业务响应数据</p>
+   */
+  Data?: BindVirtualAccountData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeProfileFieldsMenu返回参数结构体
+ */
+export interface DescribeProfileFieldsMenuResponse {
+  /**
+   * <p>描述字段数据</p>
+   */
+  Data?: DescribeProfileFieldsRspData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3267,6 +3671,20 @@ export interface DescribeDLPEdgeNodesRspItem {
 }
 
 /**
+ * 绑定账户虚拟组响应数据
+ */
+export interface BindVirtualAccountData {
+  /**
+   * <p>绑定失败明细（含失败原因）</p>
+   */
+  FailItems?: Array<BindVirtualAccountResultData>
+  /**
+   * <p>绑定成功明细（含幂等场景：已存在绑定的账号也归入成功）</p>
+   */
+  SuccessItems?: Array<BindVirtualAccountResultData>
+}
+
+/**
  * DeleteDeviceVirtualGroup请求参数结构体
  */
 export interface DeleteDeviceVirtualGroupRequest {
@@ -3376,6 +3794,20 @@ export interface ModifyDeviceTrustStatusRequest {
    * <p>默认值：0，根据id更新，1根据DeviceIDList</p>
    */
   UpdateFlags?: number
+}
+
+/**
+ * DescribeDeviceSecurityInfo返回参数结构体
+ */
+export interface DescribeDeviceSecurityInfoResponse {
+  /**
+   * <p>终端安全信息</p>
+   */
+  Data?: DescribeDeviceSecurityInfoData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3637,6 +4069,22 @@ export interface ModifyVirtualDeviceGroupsRequest {
    * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
   OsType?: number
+}
+
+/**
+ * 业务响应数据
+ */
+export interface DescribeVirtualAccountsPageData {
+  /**
+   * <p>分页公共对象</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: Paging
+  /**
+   * <p>列表虚拟组的账户分页数据集合</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DescribeVirtualAccountsData>
 }
 
 /**
@@ -3972,6 +4420,28 @@ export interface DeviceGroupDetail {
 }
 
 /**
+ * BindVirtualAccounts请求参数结构体
+ */
+export interface BindVirtualAccountsRequest {
+  /**
+   * <p>Comment: 虚拟组id;Required:true</p>
+   */
+  VirtualGroupId: number
+  /**
+   * <p>Comment: 要绑定的账户Id集合，这里的Id指的是DescribeLocalAccountsData结构体里返回的Id;Required:true</p>
+   */
+  AccountIdList?: Array<number | bigint>
+  /**
+   * <p>Comment: 要绑定的账户(目录MenuId+登录账号UserId)集合，与AccountIdList二选一或并用，查不到的账号会被跳过;Required:false</p>
+   */
+  AccountUserList?: Array<AccountUserIdItem>
+  /**
+   * Comment: 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+}
+
+/**
  * 业务响应数据
  */
 export interface DescribeSoftCensusListByDevicePageData {
@@ -4084,6 +4554,44 @@ export interface DescribeAggrSoftCategorySoftListResponse {
 }
 
 /**
+ * 信息登记数据
+ */
+export interface DeviceProfile {
+  /**
+   * <p>值</p>
+   */
+  Value?: string
+  /**
+   * <p>属性ID(只支持32位)</p>
+   */
+  FieldId?: number
+  /**
+   * <p>设备唯一标识码</p>
+   */
+  Mid?: string
+  /**
+   * <p>名称</p>
+   */
+  Title?: string
+  /**
+   * <p>类型(只支持32位)</p>
+   */
+  Type?: number
+  /**
+   * <p>可选数据</p>
+   */
+  Options?: string
+  /**
+   * <p>必填数据</p>
+   */
+  IsMust?: string
+  /**
+   * <p>必填数据</p>
+   */
+  IsCustom?: string
+}
+
+/**
  * DescribeAggrSoftDetail返回参数结构体
  */
 export interface DescribeAggrSoftDetailResponse {
@@ -4091,6 +4599,21 @@ export interface DescribeAggrSoftDetailResponse {
    * 数据
    */
   Data?: DescribeAggrSoftDetailData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVirtualAccounts返回参数结构体
+ */
+export interface DescribeVirtualAccountsResponse {
+  /**
+   * <p>业务响应数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeVirtualAccountsPageData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4123,6 +4646,20 @@ export interface DescribeDeviceChildGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述字段数据
+ */
+export interface DescribeProfileFieldsRspData {
+  /**
+   * <p>详情item</p>
+   */
+  Item?: Array<ProfileFieldItem>
+  /**
+   * <p>profile开关配置</p>
+   */
+  ProfileTips?: ProfileTips
 }
 
 /**
