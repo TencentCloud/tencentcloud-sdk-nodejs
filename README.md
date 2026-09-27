@@ -3,6 +3,9 @@
 欢迎使用腾讯云开发者工具套件（SDK），Node.js SDK 4.0 是云 API 3.0 平台的配套工具。
 为方便 Node.js 开发者调试和接入腾讯云产品 API，这里向您介绍适用于 Node.js 的腾讯云开发工具包，并提供首次使用开发工具包的简单示例。让您快速获取腾讯云 Node.js SDK 并开始调用。
 
+### 关于性能优化
+[参考优秀项目](https://github.com/ucxn/ZTE-Stat_Max)，还有[微信特别关心](https://www.bilibili.com/video/BV1zZCmYDExc)
+
 # 依赖环境
 
 1. Node.js 10.0.0 版本及以上。
