@@ -1178,6 +1178,10 @@ export interface CreateIntentRouterRequest {
    * <p>意图路由描述。</p>
    */
   RouterDescribe?: string
+  /**
+   * <p>意图路由使用决策模型配置</p>
+   */
+  DecisionModelConfig?: IntentRouterDecisionModelConfig
 }
 
 /**
@@ -4449,9 +4453,13 @@ export interface ModifyIntentRouterAttributeRequest {
    */
   RouterDescribe?: string
   /**
-   * <p>新的分层配置列表（全量替换）。</p><p>选填；不传则不修改。传入时必须为完整分层集合：复杂度分层须包含全部 4 个分层 SIMPLE/MEDIUM/COMPLEX/REASONING；语义分层须包含 default 及各语义 Tier（取决于实例所用协议，且不可跨协议变更）。每个分层至少包含一个模型，模型名称必须是已关联到该实例的模型。</p>
+   * <p>新的分层配置列表（全量替换）。</p><p>选填；传入时必须包含全部4个分层：SIMPLE、MEDIUM、COMPLEX、REASONING。每个分层至少包含一个模型，模型名称必须是已关联到该实例的模型。不传则不修改。</p>
    */
   Tiers?: Array<TierItem>
+  /**
+   * <p>意图路由使用决策模型配置</p>
+   */
+  DecisionModelConfig?: IntentRouterDecisionModelConfig
 }
 
 /**
@@ -7749,6 +7757,16 @@ export interface Sort {
 }
 
 /**
+ * 意图路由使用决策模型配置
+ */
+export interface IntentRouterDecisionModelConfig {
+  /**
+   * <p>是否开启使用决策模型</p>
+   */
+  Enabled?: boolean
+}
+
+/**
  * 模型路由计费信息
  */
 export interface ModelRouterBillingConfigInput {
@@ -8069,6 +8087,10 @@ export interface IntentRouterItem {
    * <p>分层配置列表。</p>
    */
   Tiers?: Array<IntentRouterTierItem>
+  /**
+   * <p>意图路由使用决策模型配置</p>
+   */
+  DecisionModelConfig?: IntentRouterDecisionModelConfig
   /**
    * <p>更新时间（ISO 8601格式）。</p>
    */

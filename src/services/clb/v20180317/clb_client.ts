@@ -351,6 +351,7 @@ import {
   ModifyLoadBalancerMixIpTargetResponse,
   ModifyModelAttributesResponse,
   Sort,
+  IntentRouterDecisionModelConfig,
   ModelRouterBillingConfigInput,
   DisassociateModelsFromModelRouterResponse,
   TargetGroupHealthCheck,
