@@ -34,13 +34,49 @@ export interface ConfigParams {
 }
 
 /**
- * ModifyInstance返回参数结构体
+ * 批量实例状态项
  */
-export interface ModifyInstanceResponse {
+export interface InstanceStateItem {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>集群实例名称</p>
    */
-  RequestId?: string
+  InstanceId?: string
+  /**
+   * <p>集群状态，例如：Serving</p>
+   */
+  InstanceState?: string
+  /**
+   * <p>集群状态描述，例如：运行中</p>
+   */
+  InstanceStateDesc?: string
+  /**
+   * <p>集群备份任务开启状态</p>
+   */
+  BackupStatus?: number
+  /**
+   * <p>集群备份任务开启状态2</p>
+   */
+  BackupOpenStatus?: number
+  /**
+   * <p>集群操作创建时间</p>
+   */
+  FlowCreateTime?: string
+  /**
+   * <p>集群操作名称</p>
+   */
+  FlowName?: string
+  /**
+   * <p>集群操作进度</p>
+   */
+  FlowProgress?: number
+  /**
+   * <p>集群流程错误信息</p>
+   */
+  FlowMsg?: string
+  /**
+   * <p>当前步骤的名称</p>
+   */
+  ProcessName?: string
 }
 
 /**
@@ -234,9 +270,13 @@ export interface NormQueryItem {
  */
 export interface DescribeInstanceStateRequest {
   /**
-   * 集群实例名称
+   * <p>集群实例名称</p>
    */
-  InstanceId: string
+  InstanceId?: string
+  /**
+   * <p>集群实例名称列表（批量查询，优先于 InstanceId；上限100，超出截断）</p>
+   */
+  InstanceIds?: Array<string>
 }
 
 /**
@@ -338,13 +378,13 @@ export interface ChargeProperties {
    */
   TimeUnit: string
   /**
-   * 计费类型0-按量计费，1-包年包月
-   */
-  PayMode?: number
-  /**
    * PREPAID、POSTPAID_BY_HOUR
    */
   ChargeType?: string
+  /**
+   * 计费类型0-按量计费，1-包年包月
+   */
+  PayMode?: number
 }
 
 /**
@@ -556,21 +596,31 @@ export interface DescribeDBParamsRequest {
 }
 
 /**
+ * ModifyInstance返回参数结构体
+ */
+export interface ModifyInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 磁盘规格
  */
 export interface CBSSpec {
   /**
-   * 盘类型
+   * 个数
    */
-  DiskType: string
+  DiskCount: number
   /**
    * 大小
    */
   DiskSize: number
   /**
-   * 个数
+   * 盘类型
    */
-  DiskCount: number
+  DiskType: string
 }
 
 /**
@@ -1411,14 +1461,6 @@ export interface ScaleUpInstanceRequest {
  */
 export interface CNResourceSpec {
   /**
-   * 节点类型
-   */
-  Type: string
-  /**
-   * 机型
-   */
-  SpecName: string
-  /**
    * 节点个数
    */
   Count: number
@@ -1426,6 +1468,14 @@ export interface CNResourceSpec {
    * 磁盘信息
    */
   DiskSpec: CBSSpec
+  /**
+   * 机型
+   */
+  SpecName: string
+  /**
+   * 节点类型
+   */
+  Type: string
 }
 
 /**
@@ -1728,41 +1778,45 @@ export interface Tag {
  */
 export interface DescribeInstanceStateResponse {
   /**
-   * 集群状态，例如：Serving
+   * <p>集群备份任务开启状态2</p>
    */
-  InstanceState?: string
+  BackupOpenStatus?: number
   /**
-   * 集群操作创建时间
-   */
-  FlowCreateTime?: string
-  /**
-   * 集群操作名称
-   */
-  FlowName?: string
-  /**
-   * 集群操作进度
-   */
-  FlowProgress?: number
-  /**
-   * 集群状态描述，例如：运行中
-   */
-  InstanceStateDesc?: string
-  /**
-   * 集群流程错误信息，例如：“创建失败，资源不足”
-   */
-  FlowMsg?: string
-  /**
-   * 当前步骤的名称，例如：”购买资源中“
-   */
-  ProcessName?: string
-  /**
-   * 集群备份任务开启状态
+   * <p>集群备份任务开启状态</p>
    */
   BackupStatus?: number
   /**
-   * 集群备份任务开启状态2
+   * <p>集群操作创建时间</p>
    */
-  BackupOpenStatus?: number
+  FlowCreateTime?: string
+  /**
+   * <p>集群流程错误信息，例如：“创建失败，资源不足”</p>
+   */
+  FlowMsg?: string
+  /**
+   * <p>集群操作名称</p>
+   */
+  FlowName?: string
+  /**
+   * <p>集群操作进度</p>
+   */
+  FlowProgress?: number
+  /**
+   * <p>集群状态，例如：Serving</p>
+   */
+  InstanceState?: string
+  /**
+   * <p>集群状态描述，例如：运行中</p>
+   */
+  InstanceStateDesc?: string
+  /**
+   * <p>当前步骤的名称，例如：”购买资源中“</p>
+   */
+  ProcessName?: string
+  /**
+   * <p>批量实例状态列表（InstanceIds 入参时返回，每项含 InstanceId 与状态字段）</p>
+   */
+  InstanceStates?: Array<InstanceStateItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -18,29 +18,40 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  GetFolderRsp,
   DependOnBrief,
   ListConsoleGroupUsersRequest,
+  DeleteFolderResponse,
+  FolderLocator,
   ListConsoleGroupsRequest,
-  ListConsoleGroupsRsp,
+  FileInfo,
   UpdateConsoleUsersResponse,
+  ListWorkflowTaskRunsRequest,
   Workflow,
   TaskRetryStrategy,
   FileStorage,
   ScheduledTimeConfig,
   DeleteWorkflowResponse,
-  ListConsoleRolesRsp,
+  GetWorkspaceResponse,
   ListConsoleUsersResponse,
   RemoveConsoleUsersResponse,
   InnerWorkflowTaskBrief,
   MonitorMetricBrief,
   ParamInfo,
+  UpdateWorkspaceResponse,
   InnerWorkflowTaskRunIteration,
+  SparseCheckoutConfig,
   DeleteWorkflowRequest,
-  ListWorkflowTaskRunsRequest,
+  WorkspaceInfo,
+  GetWorkspaceRequest,
+  ListConsoleGroupsRsp,
   AlarmBrief,
+  CreateWorkspaceRsp,
   WorkflowTaskNodeBrief,
   UpdateConsoleUsersRsp,
+  UpdateWorkspaceRsp,
   CreateWorkflowRequest,
+  ListFilesRequest,
   WorkflowRunBrief,
   WorkflowTriggerAdvancedConfiguration,
   AsyncActionRsp,
@@ -52,41 +63,55 @@ import {
   UnbindWorkflowBundleResponse,
   UpdateConsoleGroupRsp,
   UnbindWorkflowBundleRsp,
+  CreateFolderRequest,
   KillWorkflowRunResponse,
+  DeleteFolderRequest,
+  CreateWorkspaceRequest,
   AddConsoleUsersRsp,
-  ListWorkflowsRequest,
+  RemoveConsoleUsersRequest,
   DeleteConsoleGroupsRsp,
   ListWorkflowRunsRequest,
   WorkflowTriggerConfiguration,
   GetWorkflowTaskRunResponse,
+  DeleteWorkspaceResponse,
   GetFileRequest,
   WorkflowBaseInfo,
   TaskType,
   TaskTypeNotebookExt,
+  GetFolderResponse,
   RerunWorkflowRunResponse,
   CreateWorkflowRsp,
   GetFileResponse,
   AsyncOperation,
+  UpdateWorkspaceRequest,
+  ListFilesRsp,
   RoleMetaData,
   GetWorkflowRunRsp,
   ListConsoleGroupUsersResponse,
   ListWorkflowTaskRunsRsp,
   ScheduleBizEnumBrief,
-  WorkflowTaskRun,
+  GetWorkspaceRsp,
+  CreateFolderResponse,
   InnerWorkflowTaskRunIterationBrief,
   CreateConsoleGroupRequest,
-  ListWorkflowsRsp,
-  RerunWorkflowRunRequest,
   ListWorkflowsResponse,
+  ListWorkflowsRsp,
+  UpdateFolderResponse,
+  RerunWorkflowRunRequest,
+  DeleteWorkspaceRequest,
   LabelBrief,
   AddConsoleUsersRequest,
   CreateConsoleGroupRsp,
+  WorkflowTaskRun,
+  DeleteWorkspaceRsp,
   WorkflowBaseInfoDetail,
   WorkflowBrief,
   KillWorkflowRunRequest,
   ListWorkflowTaskRunsResponse,
   AddConsoleUsersResponse,
-  ListConsoleGroupsResponse,
+  ListConsoleUsersRsp,
+  FileMeta,
+  UnbindWorkflowBundleRequest,
   ConsoleRoleInfo,
   ConsoleGroupUserInfo,
   DeleteFileResult,
@@ -95,11 +120,12 @@ import {
   RunWorkflowRequest,
   UpdateConsoleGroupRequest,
   ConsoleGroupInfo,
-  FileInfo,
+  ListConsoleRolesRsp,
   GetWorkflowResponse,
   GetWorkflowTaskRunRequest,
   DeleteFileResponse,
   CreateConsoleGroupResponse,
+  ListFilesResponse,
   WorkflowTask,
   AdvancedDependencyConfig,
   DeleteConsoleGroupsRequest,
@@ -107,12 +133,15 @@ import {
   GetWorkflowRequest,
   InnerWorkflowTaskRunListOption,
   WorkflowRun,
+  FileNode,
+  UpdateFolderRsp,
   TaskTypeProperty,
-  ListWorkflowRunsRsp,
+  GetFolderRequest,
   CreateFileRequest,
   UpdateFileRequest,
   GetWorkflowRunRequest,
-  RemoveConsoleUsersRequest,
+  UserInfo,
+  ListWorkflowsRequest,
   RolePermission,
   FileConfig,
   RunWorkflowResponse,
@@ -120,9 +149,12 @@ import {
   ListWorkflowRunsResponse,
   AdvancedParameter,
   UpdateConsoleGroupResponse,
+  StandardUserInfo,
   ConsoleUserInfo,
   UpdateWorkflowRsp,
   OrderBy,
+  UpdateFolderRequest,
+  DeleteFolderRsp,
   WorkflowAdvanceConfig,
   DeleteConsoleGroupsResponse,
   InnerWorkflowTaskRun,
@@ -136,12 +168,15 @@ import {
   CommonFailItem,
   RemoveConsoleUsersRsp,
   GetWorkflowRunResponse,
-  ListConsoleUsersRsp,
+  ListConsoleGroupsResponse,
   GetWorkflowRsp,
-  UnbindWorkflowBundleRequest,
+  ListWorkflowRunsRsp,
   RoleBasicInfo,
+  GitRepoConfig,
   ListConsoleRolesResponse,
+  CreateWorkspaceResponse,
   UpdateFileResponse,
+  CreateFolderRsp,
   UpdateConsoleUsersRequest,
   GetWorkflowTaskRunRsp,
 } from "./databuddy_models"
@@ -186,6 +221,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改工作空间
+   */
+  async UpdateWorkspace(
+    req: UpdateWorkspaceRequest,
+    cb?: (error: string, rep: UpdateWorkspaceResponse) => void
+  ): Promise<UpdateWorkspaceResponse> {
+    return this.request("UpdateWorkspace", req, cb)
+  }
+
+  /**
    * 查询任务运行详情
    */
   async GetWorkflowTaskRun(
@@ -203,6 +248,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWorkflowTaskRunsResponse) => void
   ): Promise<ListWorkflowTaskRunsResponse> {
     return this.request("ListWorkflowTaskRuns", req, cb)
+  }
+
+  /**
+   * 查询工作空间详情
+   */
+  async GetWorkspace(
+    req: GetWorkspaceRequest,
+    cb?: (error: string, rep: GetWorkspaceResponse) => void
+  ): Promise<GetWorkspaceResponse> {
+    return this.request("GetWorkspace", req, cb)
+  }
+
+  /**
+   * 获取文件夹详情
+   */
+  async GetFolder(
+    req: GetFolderRequest,
+    cb?: (error: string, rep: GetFolderResponse) => void
+  ): Promise<GetFolderResponse> {
+    return this.request("GetFolder", req, cb)
   }
 
   /**
@@ -264,6 +329,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建工作空间
+   */
+  async CreateWorkspace(
+    req: CreateWorkspaceRequest,
+    cb?: (error: string, rep: CreateWorkspaceResponse) => void
+  ): Promise<CreateWorkspaceResponse> {
+    return this.request("CreateWorkspace", req, cb)
+  }
+
+  /**
+   * 终止工作流的运行
+   */
+  async KillWorkflowRun(
+    req: KillWorkflowRunRequest,
+    cb?: (error: string, rep: KillWorkflowRunResponse) => void
+  ): Promise<KillWorkflowRunResponse> {
+    return this.request("KillWorkflowRun", req, cb)
+  }
+
+  /**
    * 删除工作流
    */
   async DeleteWorkflow(
@@ -311,16 +396,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 终止工作流的运行
-   */
-  async KillWorkflowRun(
-    req: KillWorkflowRunRequest,
-    cb?: (error: string, rep: KillWorkflowRunResponse) => void
-  ): Promise<KillWorkflowRunResponse> {
-    return this.request("KillWorkflowRun", req, cb)
-  }
-
-  /**
    * 查询工作流运行详情
    */
   async GetWorkflowRun(
@@ -328,6 +403,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetWorkflowRunResponse) => void
   ): Promise<GetWorkflowRunResponse> {
     return this.request("GetWorkflowRun", req, cb)
+  }
+
+  /**
+   * 更新文件夹（支持重命名+移动）
+   */
+  async UpdateFolder(
+    req: UpdateFolderRequest,
+    cb?: (error: string, rep: UpdateFolderResponse) => void
+  ): Promise<UpdateFolderResponse> {
+    return this.request("UpdateFolder", req, cb)
+  }
+
+  /**
+   * 创建文件夹
+   */
+  async CreateFolder(
+    req: CreateFolderRequest,
+    cb?: (error: string, rep: CreateFolderResponse) => void
+  ): Promise<CreateFolderResponse> {
+    return this.request("CreateFolder", req, cb)
   }
 
   /**
@@ -358,6 +453,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunWorkflowResponse) => void
   ): Promise<RunWorkflowResponse> {
     return this.request("RunWorkflow", req, cb)
+  }
+
+  /**
+   * 获取文件夹和文件列表
+   */
+  async ListFiles(
+    req: ListFilesRequest,
+    cb?: (error: string, rep: ListFilesResponse) => void
+  ): Promise<ListFilesResponse> {
+    return this.request("ListFiles", req, cb)
+  }
+
+  /**
+   * 删除文件夹
+   */
+  async DeleteFolder(
+    req: DeleteFolderRequest,
+    cb?: (error: string, rep: DeleteFolderResponse) => void
+  ): Promise<DeleteFolderResponse> {
+    return this.request("DeleteFolder", req, cb)
   }
 
   /**
@@ -484,5 +599,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWorkflowRunsResponse) => void
   ): Promise<ListWorkflowRunsResponse> {
     return this.request("ListWorkflowRuns", req, cb)
+  }
+
+  /**
+   * 删除工作空间
+   */
+  async DeleteWorkspace(
+    req: DeleteWorkspaceRequest,
+    cb?: (error: string, rep: DeleteWorkspaceResponse) => void
+  ): Promise<DeleteWorkspaceResponse> {
+    return this.request("DeleteWorkspace", req, cb)
   }
 }

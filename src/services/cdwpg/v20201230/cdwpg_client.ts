@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ConfigParams,
-  ModifyInstanceResponse,
+  InstanceStateItem,
   DescribeInstanceInfoRequest,
   DescribeUserHbaConfigResponse,
   AccessInfo,
@@ -42,6 +42,7 @@ import {
   DescribeDBConfigHistoryRequest,
   ErrorLogDetail,
   DescribeDBParamsRequest,
+  ModifyInstanceResponse,
   CBSSpec,
   DescribeInstanceNodesResponse,
   ModifyInstanceRequest,

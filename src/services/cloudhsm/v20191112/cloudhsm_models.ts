@@ -84,11 +84,11 @@ export interface DescribeSubnetRequest {
  */
 export interface DescribeVsmsResponse {
   /**
-   * 获取实例的总个数
+   * <p>获取实例的总个数</p>
    */
   TotalCount?: number
   /**
-   * 资源信息
+   * <p>资源信息</p>
    */
   VsmList?: Array<ResourceInfo>
   /**
@@ -263,9 +263,17 @@ export interface DescribeSubnetResponse {
  */
 export interface GetVsmMonitorInfoResponse {
   /**
-   * VSM监控信息
+   * <p>VSM监控信息</p>
    */
   MonitorInfo?: Array<string>
+  /**
+   * <p>vsm摘要列表</p>
+   */
+  DigestList?: Array<VsmDigestItem>
+  /**
+   * <p>初始化状态</p>
+   */
+  InitStatus?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -300,6 +308,20 @@ export interface DescribeSupportedHsmRequest {
  * GetAlarmEvent请求参数结构体
  */
 export type GetAlarmEventRequest = null
+
+/**
+ * VSM摘要信息
+ */
+export interface VsmDigestItem {
+  /**
+   * <p>计数</p>
+   */
+  DigestVer?: number
+  /**
+   * <p>摘要值</p>
+   */
+  Value?: string
+}
 
 /**
  * DescribeHSMByVpcId返回参数结构体
@@ -459,6 +481,18 @@ export interface ResourceInfo {
    * <p>环境</p><p>默认值：cloud</p><p>cloud或者cdc</p>
    */
   DeployEnv?: string
+  /**
+   * <p>vsm版本号</p>
+   */
+  Version?: string
+  /**
+   * <p>集群id</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群角色，0-未加入集群 1-主 2-从</p>
+   */
+  ClusterRole?: number
 }
 
 /**
@@ -672,6 +706,14 @@ export interface DescribeVsmAttributesResponse {
    */
   DeployEnv?: string
   /**
+   * <p>集群id</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群角色</p>
+   */
+  ClusterRole?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -820,11 +862,11 @@ export interface DescribeHSMBySubnetIdResponse {
  */
 export interface GetVsmMonitorInfoRequest {
   /**
-   * 资源Id
+   * <p>资源Id</p>
    */
   ResourceId: string
   /**
-   * 资源名称
+   * <p>资源名称</p>
    */
   ResourceName?: string
 }
@@ -862,29 +904,33 @@ export interface DescribeHSMBySubnetIdRequest {
  */
 export interface DescribeVsmsRequest {
   /**
-   * 偏移
+   * <p>偏移</p>
    */
   Offset: number
   /**
-   * 最大数量
+   * <p>最大数量</p>
    */
   Limit: number
   /**
-   * 资源ID或者资源名字模糊查询的关键字
+   * <p>资源ID或者资源名字模糊查询的关键字</p>
    */
   SearchWord?: string
   /**
-   * 标签过滤条件
+   * <p>标签过滤条件</p>
    */
   TagFilters?: Array<TagFilter>
   /**
-   * 设备所属的厂商名称，根据厂商来进行筛选
+   * <p>设备所属的厂商名称，根据厂商来进行筛选</p>
    */
   Manufacturer?: string
   /**
-   * Hsm服务类型，可选virtualization、physical、GHSM、EHSM、SHSM、all
+   * <p>Hsm服务类型，可选virtualization、physical、GHSM、EHSM、SHSM、all</p>
    */
   HsmType?: string
+  /**
+   * <p>集群id</p>
+   */
+  ClusterId?: string
 }
 
 /**

@@ -48,6 +48,16 @@ it("databuddy.v20260715.GetWorkflow", async function () {
     }
 })
 
+it("databuddy.v20260715.UpdateWorkspace", async function () {
+    try {
+       const data = await client.UpdateWorkspace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.GetWorkflowTaskRun", async function () {
     try {
        const data = await client.GetWorkflowTaskRun({})
@@ -61,6 +71,26 @@ it("databuddy.v20260715.GetWorkflowTaskRun", async function () {
 it("databuddy.v20260715.ListWorkflowTaskRuns", async function () {
     try {
        const data = await client.ListWorkflowTaskRuns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.GetWorkspace", async function () {
+    try {
+       const data = await client.GetWorkspace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.GetFolder", async function () {
+    try {
+       const data = await client.GetFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,6 +138,26 @@ it("databuddy.v20260715.UnbindWorkflowBundle", async function () {
     }
 })
 
+it("databuddy.v20260715.CreateWorkspace", async function () {
+    try {
+       const data = await client.CreateWorkspace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.KillWorkflowRun", async function () {
+    try {
+       const data = await client.KillWorkflowRun({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.DeleteWorkflow", async function () {
     try {
        const data = await client.DeleteWorkflow({})
@@ -138,9 +188,9 @@ it("databuddy.v20260715.CreateConsoleGroup", async function () {
     }
 })
 
-it("databuddy.v20260715.KillWorkflowRun", async function () {
+it("databuddy.v20260715.GetWorkflowRun", async function () {
     try {
-       const data = await client.KillWorkflowRun({})
+       const data = await client.GetWorkflowRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +198,19 @@ it("databuddy.v20260715.KillWorkflowRun", async function () {
     }
 })
 
-it("databuddy.v20260715.GetWorkflowRun", async function () {
+it("databuddy.v20260715.UpdateFolder", async function () {
     try {
-       const data = await client.GetWorkflowRun({})
+       const data = await client.UpdateFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.CreateFolder", async function () {
+    try {
+       const data = await client.CreateFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +241,26 @@ it("databuddy.v20260715.RemoveConsoleUsers", async function () {
 it("databuddy.v20260715.RunWorkflow", async function () {
     try {
        const data = await client.RunWorkflow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.ListFiles", async function () {
+    try {
+       const data = await client.ListFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.DeleteFolder", async function () {
+    try {
+       const data = await client.DeleteFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +361,16 @@ it("databuddy.v20260715.ListConsoleGroupUsers", async function () {
 it("databuddy.v20260715.ListWorkflowRuns", async function () {
     try {
        const data = await client.ListWorkflowRuns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.DeleteWorkspace", async function () {
+    try {
+       const data = await client.DeleteWorkspace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

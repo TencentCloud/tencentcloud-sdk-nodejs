@@ -32,6 +32,7 @@ import {
   VsmInfo,
   DescribeSupportedHsmRequest,
   GetAlarmEventRequest,
+  VsmDigestItem,
   DescribeHSMByVpcIdResponse,
   DescribeUsgRuleResponse,
   Tag,

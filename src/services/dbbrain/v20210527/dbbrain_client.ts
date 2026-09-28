@@ -68,7 +68,9 @@ import {
   DescribeRedisSlowLogTopSqlsResponse,
   DescribeDBInstancesResponse,
   DiagHistoryEventItem,
+  DeadLockLogItem,
   CreateUserAutonomyProfileResponse,
+  SlowLogInfoItem,
   DescribeProxySessionKillTasksRequest,
   ModifyAlarmPolicyResponse,
   ModifyUserAutonomyProfileResponse,
@@ -80,6 +82,7 @@ import {
   SessionItem,
   StatisticDataInfo,
   DescribeRedisSlowLogTopSqlsRequest,
+  WaiterItem,
   AutonomyEventVo,
   RedisPreKeySpaceData,
   DescribeTopSpaceTablesResponse,
@@ -101,9 +104,11 @@ import {
   DescribeSlowLogsResponse,
   TagInfo,
   DescribeSecurityAuditLogDownloadUrlsRequest,
-  CreateDBDiagReportTaskResponse,
+  DescribeDBDiagEventsRequest,
   ProcessStatistic,
+  IssueTypeInfo,
   MongoDBProcessItem,
+  DeadlockResource,
   DescribeDBInstancesRequest,
   CreateDBDiagReportUrlsResponse,
   UpdateMonitorSwitchResponse,
@@ -113,7 +118,7 @@ import {
   CancelKillTaskRequest,
   InstanceID,
   CreateIgnoreDiagRecordResponse,
-  SlowLogInfoItem,
+  OwnerItem,
   CreateAuditLogFileResponse,
   AuditInstance,
   IndexesToBuild,
@@ -121,7 +126,7 @@ import {
   DescribeDatabaseAutonomyStatusResponse,
   DeleteSqlFiltersResponse,
   DescribeHealthScoreTimeSeriesRequest,
-  DescribeDBDiagEventsRequest,
+  CreateDBDiagReportTaskResponse,
   CreateDBDiagReportUrlsRequest,
   CreateDBDiagReportUrlResponse,
   ScoreDetail,
@@ -170,7 +175,7 @@ import {
   RedisInstanceConf,
   DescribeDBDiagHistoryResponse,
   CreateUserAutonomyProfileRequest,
-  Aggregation,
+  DescribeDBDiagEventRequest,
   HealthStatus,
   DescribeAllUserContactResponse,
   DescribeRedisCommandCostStatisticsResponse,
@@ -189,9 +194,10 @@ import {
   SchemaSpaceData,
   DescribeAllUserContactRequest,
   MySqlProcess,
-  DescribeDBDiagEventRequest,
+  Aggregation,
+  DeadlockTransaction,
   DescribeNoPrimaryKeyTablesRequest,
-  StatDimension,
+  DeadlockFrame,
   AlarmProfileList,
   InstanceInfo,
   DescribeTopSpaceSchemasRequest,
@@ -218,12 +224,13 @@ import {
   CancelRedisBigKeyAnalysisTasksRequest,
   HealthScoreTimeSeriesData,
   Process,
+  StatDimension,
   ModifyAuditServiceResponse,
   DescribeDBAutonomyEventsRequest,
   DescribeHealthScoreRequest,
   CreateIgnoreDiagRecordRequest,
   DeleteRedisBigKeyAnalysisTasksRequest,
-  IssueTypeInfo,
+  DescribeDeadLockLogsResponse,
   DescribeDiagDBInstancesResponse,
   DescribeAllUserGroupRequest,
   CreateKillTaskRequest,
@@ -236,6 +243,7 @@ import {
   DescribeSlowLogUserHostStatsRequest,
   TagPair,
   DescribeTopSpaceSchemasResponse,
+  DescribeDeadLockLogsRequest,
   DescribeSlowLogQueryTimeStatsResponse,
   CreateProxySessionKillTaskResponse,
   TopSqlTpl,
@@ -252,6 +260,7 @@ import {
   DescribeRedisCommandOverviewRequest,
   DescribeAllUserGroupResponse,
   DescribeRedisProcessListResponse,
+  DeadlockSession,
   CreateAuditLogFileRequest,
   DeleteAuditLogFileRequest,
   ModifyDiagDBInstanceConfResponse,
@@ -562,6 +571,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询实例的死锁事件列表
+   */
+  async DescribeDeadLockLogs(
+    req: DescribeDeadLockLogsRequest,
+    cb?: (error: string, rep: DescribeDeadLockLogsResponse) => void
+  ): Promise<DescribeDeadLockLogsResponse> {
+    return this.request("DescribeDeadLockLogs", req, cb)
+  }
+
+  /**
    * 查询实例的索引推荐信息，包括索引统计相关信息，推荐索引列表，无效索引列表等。
    */
   async DescribeIndexRecommendInfo(
@@ -712,13 +731,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例的配置信息。
+   * 用于创建云数据库实例的审计日志文件
    */
-  async ModifyDiagDBInstanceConf(
-    req: ModifyDiagDBInstanceConfRequest,
-    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
-  ): Promise<ModifyDiagDBInstanceConfResponse> {
-    return this.request("ModifyDiagDBInstanceConf", req, cb)
+  async DescribeAuditLogFiles(
+    req: DescribeAuditLogFilesRequest,
+    cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
+  ): Promise<DescribeAuditLogFilesResponse> {
+    return this.request("DescribeAuditLogFiles", req, cb)
   }
 
   /**
@@ -1032,13 +1051,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于创建云数据库实例的审计日志文件
+   * 修改实例的配置信息。
    */
-  async DescribeAuditLogFiles(
-    req: DescribeAuditLogFilesRequest,
-    cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
-  ): Promise<DescribeAuditLogFilesResponse> {
-    return this.request("DescribeAuditLogFiles", req, cb)
+  async ModifyDiagDBInstanceConf(
+    req: ModifyDiagDBInstanceConfRequest,
+    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
+  ): Promise<ModifyDiagDBInstanceConfResponse> {
+    return this.request("ModifyDiagDBInstanceConf", req, cb)
   }
 
   /**

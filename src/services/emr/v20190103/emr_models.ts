@@ -4049,17 +4049,25 @@ export interface TimeAutoScaleStrategy {
 }
 
 /**
- * DescribeBootScript请求参数结构体
+ * airflow dag源目录来源
  */
-export interface DescribeBootScriptRequest {
+export interface AirflowDagSourceInput {
   /**
-   * EMR实例序列号
+   * <p>是否支持dag共享源</p>
    */
-  InstanceId: string
+  Enabled: boolean
   /**
-   * 引导脚本类型，resourceAfter,clusterAfter,clusterBefore不填时表示全部时机
+   * <p>dag源类型</p><p>枚举值：</p><ul><li>CFS： CFS</li><li>GIT： Git</li></ul>
    */
-  BootType?: string
+  Type?: string
+  /**
+   * <p>cfs实例DAG源配置</p>
+   */
+  Cfs?: AirflowCfsSource
+  /**
+   * <p>Git型DAG源配置</p>
+   */
+  Git?: AirflowGitSource
 }
 
 /**
@@ -6124,82 +6132,13 @@ export interface InquiryPriceCreateInstanceRequest {
 }
 
 /**
- * DescribeSLInstance返回参数结构体
+ * DescribeEmrOverviewMetrics返回参数结构体
  */
-export interface DescribeSLInstanceResponse {
+export interface DescribeEmrOverviewMetricsResponse {
   /**
-   * 实例字符串标识。
+   * 指标数据明细
    */
-  InstanceId?: string
-  /**
-   * 实例名称。
-   */
-  InstanceName?: string
-  /**
-   * 实例计费模式。0表示后付费，即按量计费，1表示预付费，即包年包月。
-   */
-  PayMode?: number
-  /**
-   * 实例存储类型。
-   */
-  DiskType?: string
-  /**
-   * 实例单节点磁盘容量，单位GB。
-   */
-  DiskSize?: number
-  /**
-   * 实例节点规格。
-   */
-  NodeType?: string
-  /**
-   * 实例可用区详细配置，包含可用区名称，VPC信息、节点数量。
-   */
-  ZoneSettings?: Array<ZoneSetting>
-  /**
-   * 实例绑定的标签列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 实例数字标识。
-   */
-  ClusterId?: number
-  /**
-   * 实例区域ID。
-   */
-  RegionId?: number
-  /**
-   * 实例主可用区。
-   */
-  Zone?: string
-  /**
-   * 实例过期时间，后付费返回0000-00-00 00:00:00
-   */
-  ExpireTime?: string
-  /**
-   * 实例隔离时间，未隔离返回0000-00-00 00:00:00。
-   */
-  IsolateTime?: string
-  /**
-   * 实例创建时间。
-   */
-  CreateTime?: string
-  /**
-   * 实例状态码，-2:  "TERMINATED", 2:   "RUNNING", 14:  "TERMINATING", 19:  "ISOLATING", 22:  "ADJUSTING", 201: "ISOLATED"。
-   */
-  Status?: number
-  /**
-   * 自动续费标记， 0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费，若业务无续费概念为0
-   */
-  AutoRenewFlag?: number
-  /**
-   * 实例节点总数。
-   */
-  NodeNum?: number
-  /**
-   * Serverless Instance infomation
-   */
-  SLInstance?: Array<SLInstance>
+  Result?: Array<OverviewMetricData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7399,17 +7338,52 @@ export interface DescribeYarnQueueResponse {
 }
 
 /**
- * CreateGroupsSTD请求参数结构体
+ * DescribeClusterFlowStatusDetail返回参数结构体
  */
-export interface CreateGroupsSTDRequest {
+export interface DescribeClusterFlowStatusDetailResponse {
   /**
-   * 集群名称
+   * 任务步骤详情
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  StageDetails?: Array<StageInfoDetail>
   /**
-   * 批量用户组信息
+   * 任务参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Groups: Array<GroupInfo>
+  FlowDesc?: Array<FlowParamsDesc>
+  /**
+   * 任务名称
+   */
+  FlowName?: string
+  /**
+   * 总任务流程进度：
+例如：0.8
+   */
+  FlowTotalProgress?: number
+  /**
+   * 定义流程总状态：
+0:初始化，
+1:运行中，
+2:完成，
+3:完成（存在跳过步骤），
+-1:失败，
+-3:阻塞，
+   */
+  FlowTotalStatus?: number
+  /**
+   * 流程额外信息
+NeedExtraDetail为true时返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowExtraDetail?: Array<FlowExtraDetail>
+  /**
+   * 流程描述
+   */
+  FlowInfo?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9215,6 +9189,20 @@ export interface ModifySLInstanceBasicResponse {
 }
 
 /**
+ * airflow cfs dag目录源配置
+ */
+export interface AirflowCfsSource {
+  /**
+   * <p>cfs实例id</p>
+   */
+  FileSystemId?: string
+  /**
+   * <p>cfs实例挂载目录</p>
+   */
+  Directory?: string
+}
+
+/**
  * 资源调度 - 队列修改信息
  */
 export interface ConfigModifyInfoV2 {
@@ -9902,52 +9890,17 @@ export interface DescribeHBaseTableOverviewRequest {
 }
 
 /**
- * DescribeClusterFlowStatusDetail返回参数结构体
+ * CreateGroupsSTD请求参数结构体
  */
-export interface DescribeClusterFlowStatusDetailResponse {
+export interface CreateGroupsSTDRequest {
   /**
-   * 任务步骤详情
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集群名称
    */
-  StageDetails?: Array<StageInfoDetail>
+  InstanceId: string
   /**
-   * 任务参数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 批量用户组信息
    */
-  FlowDesc?: Array<FlowParamsDesc>
-  /**
-   * 任务名称
-   */
-  FlowName?: string
-  /**
-   * 总任务流程进度：
-例如：0.8
-   */
-  FlowTotalProgress?: number
-  /**
-   * 定义流程总状态：
-0:初始化，
-1:运行中，
-2:完成，
-3:完成（存在跳过步骤），
--1:失败，
--3:阻塞，
-   */
-  FlowTotalStatus?: number
-  /**
-   * 流程额外信息
-NeedExtraDetail为true时返回
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowExtraDetail?: Array<FlowExtraDetail>
-  /**
-   * 流程描述
-   */
-  FlowInfo?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Groups: Array<GroupInfo>
 }
 
 /**
@@ -11524,6 +11477,24 @@ export interface ModifyYarnQueueV2Response {
 }
 
 /**
+ * airflow dag目录git源配置
+ */
+export interface AirflowGitSource {
+  /**
+   * <p>git仓库URL</p>
+   */
+  RepositoryUrl?: string
+  /**
+   * <p>DAG跟踪分支/TAG</p>
+   */
+  Ref?: string
+  /**
+   * <p>DAG挂载目录</p>
+   */
+  Directory?: string
+}
+
+/**
  * ModifyInspectionSettings请求参数结构体
  */
 export interface ModifyInspectionSettingsRequest {
@@ -11872,6 +11843,14 @@ export interface CreateCloudInstanceRequest {
    * <p>日志存储服务实例id</p>
    */
   LogStoreID?: string
+  /**
+   * <p>airflow目录源</p>
+   */
+  AirflowDagSource?: AirflowDagSourceInput
+  /**
+   * <p>airflow源凭证</p>
+   */
+  AirflowGitCredential?: AirflowGitCredentialInput
 }
 
 /**
@@ -11956,6 +11935,20 @@ export interface ModifyYarnQueueV2Request {
    * 资源池数据
    */
   ConfigModifyInfoList: Array<ConfigModifyInfoV2>
+}
+
+/**
+ * DescribeBootScript请求参数结构体
+ */
+export interface DescribeBootScriptRequest {
+  /**
+   * EMR实例序列号
+   */
+  InstanceId: string
+  /**
+   * 引导脚本类型，resourceAfter,clusterAfter,clusterBefore不填时表示全部时机
+   */
+  BootType?: string
 }
 
 /**
@@ -12129,13 +12122,82 @@ export interface UpdateInstanceSettings {
 }
 
 /**
- * DescribeEmrOverviewMetrics返回参数结构体
+ * DescribeSLInstance返回参数结构体
  */
-export interface DescribeEmrOverviewMetricsResponse {
+export interface DescribeSLInstanceResponse {
   /**
-   * 指标数据明细
+   * 实例字符串标识。
    */
-  Result?: Array<OverviewMetricData>
+  InstanceId?: string
+  /**
+   * 实例名称。
+   */
+  InstanceName?: string
+  /**
+   * 实例计费模式。0表示后付费，即按量计费，1表示预付费，即包年包月。
+   */
+  PayMode?: number
+  /**
+   * 实例存储类型。
+   */
+  DiskType?: string
+  /**
+   * 实例单节点磁盘容量，单位GB。
+   */
+  DiskSize?: number
+  /**
+   * 实例节点规格。
+   */
+  NodeType?: string
+  /**
+   * 实例可用区详细配置，包含可用区名称，VPC信息、节点数量。
+   */
+  ZoneSettings?: Array<ZoneSetting>
+  /**
+   * 实例绑定的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 实例数字标识。
+   */
+  ClusterId?: number
+  /**
+   * 实例区域ID。
+   */
+  RegionId?: number
+  /**
+   * 实例主可用区。
+   */
+  Zone?: string
+  /**
+   * 实例过期时间，后付费返回0000-00-00 00:00:00
+   */
+  ExpireTime?: string
+  /**
+   * 实例隔离时间，未隔离返回0000-00-00 00:00:00。
+   */
+  IsolateTime?: string
+  /**
+   * 实例创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 实例状态码，-2:  "TERMINATED", 2:   "RUNNING", 14:  "TERMINATING", 19:  "ISOLATING", 22:  "ADJUSTING", 201: "ISOLATED"。
+   */
+  Status?: number
+  /**
+   * 自动续费标记， 0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费，若业务无续费概念为0
+   */
+  AutoRenewFlag?: number
+  /**
+   * 实例节点总数。
+   */
+  NodeNum?: number
+  /**
+   * Serverless Instance infomation
+   */
+  SLInstance?: Array<SLInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12617,6 +12679,20 @@ export interface DescribeAutoScaleStrategiesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * airflow git鉴权配置
+ */
+export interface AirflowGitCredentialInput {
+  /**
+   * <p>用户名</p>
+   */
+  Username?: string
+  /**
+   * <p>用户凭证</p>
+   */
+  Token?: string
 }
 
 /**

@@ -24,6 +24,7 @@ import {
   DescribeEnvLimitRequest,
   BuildStep,
   HTTPServiceRoute,
+  DeletePlatformHTTPServiceRouteRequest,
   DescribeTablesResponse,
   HTTPServiceCacheRule,
   DescribeHTTPServiceRouteRequest,
@@ -71,7 +72,7 @@ import {
   DeleteCloudAppRequest,
   BuildStepStatus,
   ModifyLoginConfigRequest,
-  ModifyPGInstanceSpecRequest,
+  PushPGUserMigrationsRequest,
   CustomLogConfig,
   DescribeApiKeyListRequest,
   MgoIndexKeys,
@@ -101,15 +102,18 @@ import {
   DescribeHTTPServiceCachePurgeTaskRequest,
   CreateCustomLoginKeyResponse,
   ModifyClientRequest,
+  DeletePlatformHTTPServiceRouteResponse,
   FunctionEipConfig,
   CheckTcbServiceRequest,
   DescribeManagedAIModelListResponse,
   DownloadFunctionRequest,
+  PushPGUserMigrationsResponse,
   BindStorageSourceResponse,
   ModifyEnvRequest,
   ModifyUserRequest,
   CreateUserResp,
   UpdateFunctionCodeResponse,
+  DescribePlatformHTTPServiceRouteRequest,
   ModifyLoginConfigResponse,
   BindStorageSourceRequest,
   ManagedAIModelChargingInfo,
@@ -164,7 +168,7 @@ import {
   AddProviderResponse,
   HTTPServiceHeadersHandler,
   HTTPServiceRouteParam,
-  PushPGUserMigrationsResponse,
+  ModifyPGInstanceSpecResponse,
   PlatformPkgCreditsUsage,
   DescribeCreateMySQLResultResponse,
   DeleteUsersRequest,
@@ -177,6 +181,7 @@ import {
   PostgreSQLInfo,
   DescribeMySQLTaskStatusResponse,
   TableInfo,
+  ModifyPlatformHTTPServiceRouteResponse,
   DeleteAIModelRequest,
   CreateEnvResourceResponse,
   AIModel,
@@ -187,6 +192,7 @@ import {
   FunctionEnvironment,
   DestroyMySQLResult,
   ModifySafeRuleResponse,
+  CloudAppWebHook,
   DeleteCloudAppVersionRequest,
   DescribeCloudAppInfoResponse,
   EnvBillingInfoItem,
@@ -214,6 +220,7 @@ import {
   HTTPServicePathRewrite,
   CodeReq,
   DeleteUsersResp,
+  BuildContext,
   BuildCommands,
   DropIndex,
   AllocateEnvResponse,
@@ -221,6 +228,7 @@ import {
   ManagedAIModelGroup,
   UpdateFunctionConfigurationResponse,
   DescribeBaasPackageListRequest,
+  CloudAppLinkService,
   DescribeLoginConfigRequest,
   DeleteCloudAppResponse,
   PlatFormResourceInfo,
@@ -240,6 +248,7 @@ import {
   CreateFunctionResponse,
   MessageLocalized,
   UpdateFunctionConfigurationRequest,
+  VerifyPlatformHTTPServiceRouteResponse,
   UpdateAIModelRequest,
   DailyUsageList,
   RenewEnvRequest,
@@ -248,6 +257,7 @@ import {
   ModifyEnvPlanResponse,
   DescribeCreditsUsageDetailResponse,
   ListPGUserMigrationsResponse,
+  CreatePlatformHTTPServiceRouteRequest,
   LogObject,
   DestroyStaticStoreResponse,
   DescribeAIModelsRequest,
@@ -260,6 +270,7 @@ import {
   ModifyResourcePermissionResult,
   DescribeEnvsResponse,
   GetProvidersResponse,
+  CreatePlatformHTTPServiceRouteResponse,
   DescribePlatformsRequest,
   PurgeHTTPServiceCacheResponse,
   RunSqlRequest,
@@ -278,6 +289,7 @@ import {
   HTTPServiceDomain,
   BuildSecret,
   RepairPGUserMigrationHistoryResponse,
+  VerifyPlatformHTTPServiceRouteRequest,
   CreateUserRequest,
   CreateApiKeyResponse,
   DescribePlatformEnvUsageRequest,
@@ -285,7 +297,7 @@ import {
   DescribeGatewayVersionsRequest,
   DescribeQuotaDataRequest,
   DescribeCreateMySQLResult,
-  PushPGUserMigrationsRequest,
+  ModifyPGInstanceSpecRequest,
   FunctionTrigger,
   CreatePlatformEnvResponse,
   PermissionInfo,
@@ -298,6 +310,7 @@ import {
   DescribeAIModelsResponse,
   Function,
   StaticStoreInfo,
+  CloudAppRoute,
   DescribeCloudAppVersionRequest,
   DestroyPlatformEnvResponse,
   FunctionPublicNetConfig,
@@ -323,6 +336,7 @@ import {
   DescribeAuthDomainsResponse,
   UpgradePGInstanceToDedicatedRequest,
   CreateHostingDomainRequest,
+  BuildArtifactInfo,
   HTTPServiceCacheParams,
   SMSTemplateParams,
   DescribeCloudAppInfoRequest,
@@ -335,6 +349,7 @@ import {
   KVPair,
   DeleteAIModelResponse,
   DescribeEnvAccountCircleRequest,
+  ModifyPlatformHTTPServiceRouteRequest,
   HTTPServiceExtension,
   DeleteApiKeyResponse,
   ModifyClientResponse,
@@ -355,11 +370,13 @@ import {
   DescribeBaasPackageListResponse,
   Provider,
   DescribePlatformCreditsUsageRequest,
+  CloudAppFilter,
   User,
   Variable,
   StaticStorageInfo,
   ReleaseEnvRequest,
   FunctionEipConfigFixed,
+  CloudAppResourceItem,
   PlatformMetricUsageItem,
   ExecutePGSqlRequest,
   DescribeStaticStoreResponse,
@@ -369,10 +386,11 @@ import {
   DestroyPlatformEnvRequest,
   DescribePGUserMigrationRequest,
   ApiKeyToken,
+  DescribePlatformHTTPServiceRouteResponse,
   PlatformResUsageItem,
   DescribeClientRequest,
   MigrationConflict,
-  ModifyPGInstanceSpecResponse,
+  CloudAppTrigger,
   DescribePlatformAccountCircleRequest,
   MongoConnector,
   HTTPServiceDomainParam,
@@ -551,15 +569,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 修改资源基础权限。
-
-修改云函数、云存储和数据库表的基础权限配置。支持预定义权限级别和自定义安全规则两种方式配置资源访问权限。
-     */
-  async ModifyResourcePermission(
-    req: ModifyResourcePermissionRequest,
-    cb?: (error: string, rep: ModifyResourcePermissionResponse) => void
-  ): Promise<ModifyResourcePermissionResponse> {
-    return this.request("ModifyResourcePermission", req, cb)
+   * 获取云函数详情
+   */
+  async GetFunction(
+    req: GetFunctionRequest,
+    cb?: (error: string, rep: GetFunctionResponse) => void
+  ): Promise<GetFunctionResponse> {
+    return this.request("GetFunction", req, cb)
   }
 
   /**
@@ -923,6 +939,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 本接口CreateHTTPServiceRoute用于创建平台版HTTP访问服务路由。如果不传Domain.Routes，仅创建域名信息。首次创建域名后需要调用DescribeHTTPServiceRoute查询域名状态，如果状态是PROCESSING，需要轮询查询域名状态直到SUCCESS或者FAIL。如果状态是FAIL，可以删除后重新创建。创建成功后域名可能无法访问，原因是异步下发的路由，可通过http或者https探测路由是否下发，如果http访问返回404或者https访问握手失败，可等待一会再试，直到访问正常。此外HTTP访问服务提供了默认域名，通过DescribeHTTPServiceRoute接口可直接获取默认域名。
+   */
+  async CreatePlatformHTTPServiceRoute(
+    req: CreatePlatformHTTPServiceRouteRequest,
+    cb?: (error: string, rep: CreatePlatformHTTPServiceRouteResponse) => void
+  ): Promise<CreatePlatformHTTPServiceRouteResponse> {
+    return this.request("CreatePlatformHTTPServiceRoute", req, cb)
+  }
+
+  /**
    * 查询指定云开发环境的登录策略配置。包括手机号短信登录、邮箱登录、用户名密码登录和匿名登录方式的开启状态，同时包含短信验证码发送通道、MFA 多因子认证和密码的更新策略。
    */
   async DescribeLoginConfig(
@@ -933,19 +959,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 查询云开发平台支持的托管类型 AI 模型列表。
-
-托管类型模型由云开发平台统一接入和管理，用户无需自行配置模型服务地址和访问密钥，开通后即可直接使用。返回结果按模型分组（Group）组织，包含各模型的规格参数（ModelSpec）和计费信息（ModelChargingInfo）。
-
-通常在以下场景中使用：
-
-开通托管模型前：通过本接口查询平台支持的托管模型及其规格，结合 [UpdateAIModel](https://cloud.tencent.com/document/product/876/131316) 接口完成模型配置。
-     */
-  async DescribeManagedAIModelList(
-    req: DescribeManagedAIModelListRequest,
-    cb?: (error: string, rep: DescribeManagedAIModelListResponse) => void
-  ): Promise<DescribeManagedAIModelListResponse> {
-    return this.request("DescribeManagedAIModelList", req, cb)
+   * 本接口DescribeHTTPServiceRoute用于查询平台版下HTTP访问服务路由信息。可通过Filters过滤。如果不存在不会返回错误。HTTP访问服务提供了默认域名，通过本接口可直接获取默认域名。前置需已开通 HTTP 访问服务；调用CreateHTTPServiceRoute或者ModifyHTTPServiceRoute后可使用本接口查询创建或者修改结果
+   */
+  async DescribePlatformHTTPServiceRoute(
+    req: DescribePlatformHTTPServiceRouteRequest,
+    cb?: (error: string, rep: DescribePlatformHTTPServiceRouteResponse) => void
+  ): Promise<DescribePlatformHTTPServiceRouteResponse> {
+    return this.request("DescribePlatformHTTPServiceRoute", req, cb)
   }
 
   /**
@@ -956,6 +976,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DeleteProviderResponse) => void
   ): Promise<DeleteProviderResponse> {
     return this.request("DeleteProvider", req, cb)
+  }
+
+  /**
+   * 本接口ModifyHTTPServiceRoute用于修改平台版HTTP访问服务路由。支持增量修改，对应字段不传参数则不修改
+   */
+  async ModifyPlatformHTTPServiceRoute(
+    req: ModifyPlatformHTTPServiceRouteRequest,
+    cb?: (error: string, rep: ModifyPlatformHTTPServiceRouteResponse) => void
+  ): Promise<ModifyPlatformHTTPServiceRouteResponse> {
+    return this.request("ModifyPlatformHTTPServiceRoute", req, cb)
   }
 
   /**
@@ -1166,6 +1196,18 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+     * 修改资源基础权限。
+
+修改云函数、云存储和数据库表的基础权限配置。支持预定义权限级别和自定义安全规则两种方式配置资源访问权限。
+     */
+  async ModifyResourcePermission(
+    req: ModifyResourcePermissionRequest,
+    cb?: (error: string, rep: ModifyResourcePermissionResponse) => void
+  ): Promise<ModifyResourcePermissionResponse> {
+    return this.request("ModifyResourcePermission", req, cb)
+  }
+
+  /**
    * 本接口（DescribePGUserMigration）用于查询目标环境指定 migration 详情。
    */
   async DescribePGUserMigration(
@@ -1176,13 +1218,19 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 获取云函数详情
-   */
-  async GetFunction(
-    req: GetFunctionRequest,
-    cb?: (error: string, rep: GetFunctionResponse) => void
-  ): Promise<GetFunctionResponse> {
-    return this.request("GetFunction", req, cb)
+     * 查询云开发平台支持的托管类型 AI 模型列表。
+
+托管类型模型由云开发平台统一接入和管理，用户无需自行配置模型服务地址和访问密钥，开通后即可直接使用。返回结果按模型分组（Group）组织，包含各模型的规格参数（ModelSpec）和计费信息（ModelChargingInfo）。
+
+通常在以下场景中使用：
+
+开通托管模型前：通过本接口查询平台支持的托管模型及其规格，结合 [UpdateAIModel](https://cloud.tencent.com/document/product/876/131316) 接口完成模型配置。
+     */
+  async DescribeManagedAIModelList(
+    req: DescribeManagedAIModelListRequest,
+    cb?: (error: string, rep: DescribeManagedAIModelListResponse) => void
+  ): Promise<DescribeManagedAIModelListResponse> {
+    return this.request("DescribeManagedAIModelList", req, cb)
   }
 
   /**
@@ -1262,6 +1310,31 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribePlatformCreditsUsageResponse) => void
   ): Promise<DescribePlatformCreditsUsageResponse> {
     return this.request("DescribePlatformCreditsUsage", req, cb)
+  }
+
+  /**
+     * 本接口VerifyPlatformHTTPServiceRoute用于前置校验平台版HTTP访问服务域名或者路由。覆盖的校验项包括：
+1. Ownership：域名所有权（TXT/CNAME 记录）；
+2. Cert：证书与域名匹配（CertId 为空时跳过）；
+3. Quota：环境下域名/路径数量配额；
+4. RouteConflict：同域名下路由路径冲突；
+5. DomainConflict：域名被其他环境占用；
+6. InternalAccount：内部域名且非内部账号；
+7. Blacklist：域名黑名单；
+8. CDNResource：AccessType=CDN 时 CDN 资源存在性 / 状态（含 ICP 未备案提示）；
+9. EO：AccessType=EO 时 EdgeOne 侧域名冲突 / 备案 / 归属权预检。
+
+使用方式：
+- 调用本接口前置校验，若 Passed=true 表示所有启用检查项均通过，可继续调用 CreateHTTPServiceRoute 正式创建；
+- 若 Passed=false，前端应根据各 CheckItem 的 Code 精确渲染对应的错误提示与用户操作指引（如 DNS 归属权配置、ICP 备案指引等），用户修正参数后可重复调用本接口，直到通过后再进行创建。
+
+注意：本接口为只读 dry-run 操作，不落库、不创建任何资源，仅返回各项检查的详细结果。本接口通过不代表 CreateHTTPServiceRoute 必然成功（例如证书运行时状态、并发抢占等仍需创建时最终判定），但本接口不通过则 CreateHTTPServiceRoute 必然不通过。
+     */
+  async VerifyPlatformHTTPServiceRoute(
+    req: VerifyPlatformHTTPServiceRouteRequest,
+    cb?: (error: string, rep: VerifyPlatformHTTPServiceRouteResponse) => void
+  ): Promise<VerifyPlatformHTTPServiceRouteResponse> {
+    return this.request("VerifyPlatformHTTPServiceRoute", req, cb)
   }
 
   /**
@@ -1768,6 +1841,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeEnvPlansResponse) => void
   ): Promise<DescribeEnvPlansResponse> {
     return this.request("DescribeEnvPlans", req, cb)
+  }
+
+  /**
+   * 本接口DeleteHTTPServiceRoute用于删除平台版HTTP访问服务域名或者路由。可批量删除多条path路由、删除域名及所有path路由，如果Paths字段为空则删除域名及所有path路由，如果Paths不为空则仅删除path路由。
+   */
+  async DeletePlatformHTTPServiceRoute(
+    req: DeletePlatformHTTPServiceRouteRequest,
+    cb?: (error: string, rep: DeletePlatformHTTPServiceRouteResponse) => void
+  ): Promise<DeletePlatformHTTPServiceRouteResponse> {
+    return this.request("DeletePlatformHTTPServiceRoute", req, cb)
   }
 
   /**

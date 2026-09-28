@@ -16,6 +16,16 @@
  */
 
 /**
+ * 获取文件夹回包
+ */
+export interface GetFolderRsp {
+  /**
+   * <p>文件夹信息</p>
+   */
+  Folder?: FileNode
+}
+
+/**
  * 任务依赖简要信息
  */
 export interface DependOnBrief {
@@ -62,6 +72,34 @@ export interface ListConsoleGroupUsersRequest {
 }
 
 /**
+ * DeleteFolder返回参数结构体
+ */
+export interface DeleteFolderResponse {
+  /**
+   * <p>删除文件夹结果</p>
+   */
+  Data?: DeleteFolderRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 文件夹定位器
+ */
+export interface FolderLocator {
+  /**
+   * <p>节点id</p>
+   */
+  FolderId?: string
+  /**
+   * <p>节点path</p>
+   */
+  PathName?: string
+}
+
+/**
  * ListConsoleGroups请求参数结构体
  */
 export interface ListConsoleGroupsRequest {
@@ -88,30 +126,107 @@ export interface ListConsoleGroupsRequest {
 }
 
 /**
- * 查询控制台用户组列表响应
+ * 文件详情
  */
-export interface ListConsoleGroupsRsp {
+export interface FileInfo {
   /**
-   * 用户组列表
+   * <p>主账号 AppId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items?: Array<ConsoleGroupInfo>
+  AppId?: string
   /**
-   * 当前页码
+   * <p>工作空间 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageNumber?: number
+  WorkspaceId?: string
   /**
-   * 每页大小
+   * <p>文件 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageSize?: number
+  FileId?: string
   /**
-   * 总记录数
+   * <p>文件名，含后缀</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  FileName?: string
   /**
-   * 总页数
+   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalPageNumber?: number
+  FileType?: string
+  /**
+   * <p>文件在工作空间中的完整路径，以 / 开头，如 /etl/daily/demo.ipynb</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * <p>文件运行配置</p>
+   */
+  FileConfig?: FileConfig
+  /**
+   * <p>绑定的 BundleId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleId?: string
+  /**
+   * <p>绑定的 BundleInfo，JSON 字符串</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleInfo?: string
+  /**
+   * <p>文件状态。active=正常，deleted=已删除</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>文件负责人用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserName?: string
+  /**
+   * <p>创建人子账号 Uin</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserUin?: string
+  /**
+   * <p>最近更新人子账号 Uin</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateUserUin?: string
+  /**
+   * <p>创建时间，毫秒级时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>最近更新时间，毫秒级时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * <p>文件存储信息。仅当请求 IncludeContent=true 时返回内容</p>
+   */
+  Storage?: FileStorage
+  /**
+   * <p>当前调用方对该文件的权限点列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permissions?: string
+  /**
+   * <p>是否已发布</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseStatus?: boolean
+  /**
+   * <p>资源模式。1=分布式，2=单节点</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceMode?: number
+  /**
+   * ZIP 异步创建时透传 Workspace 作业信息；普通同步创建或其他复用该返回结构的接口不设置该字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncOperation?: AsyncOperation
 }
 
 /**
@@ -126,6 +241,32 @@ export interface UpdateConsoleUsersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListWorkflowTaskRuns请求参数结构体
+ */
+export interface ListWorkflowTaskRunsRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>任务ID，可通过 ListWorkflowTasks 获取。非必填，精确匹配。与 WorkflowRunId 至少传一个：仅传 TaskId 时查询该任务的全部运行历史。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>工作流运行ID，可通过 ListWorkflowRuns 获取。非必填，精确匹配。与 TaskId 至少传一个：仅传 WorkflowRunId 时查询该次工作流运行下的全部任务运行。</p>
+   */
+  WorkflowRunId?: string
+  /**
+   * <p>分页页码，从 1 开始。非必填，默认 1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -296,30 +437,17 @@ export interface DeleteWorkflowResponse {
 }
 
 /**
- * 查询控制台角色列表响应
+ * GetWorkspace返回参数结构体
  */
-export interface ListConsoleRolesRsp {
+export interface GetWorkspaceResponse {
   /**
-   * 角色列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作空间详情</p>
    */
-  Items?: Array<ConsoleRoleInfo>
+  Data?: GetWorkspaceRsp
   /**
-   * 当前页码
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PageNumber?: number
-  /**
-   * 每页大小
-   */
-  PageSize?: number
-  /**
-   * 总记录数
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-   */
-  TotalPageNumber?: number
+  RequestId?: string
 }
 
 /**
@@ -414,6 +542,20 @@ export interface ParamInfo {
 }
 
 /**
+ * UpdateWorkspace返回参数结构体
+ */
+export interface UpdateWorkspaceResponse {
+  /**
+   * <p>操作结果</p>
+   */
+  Data?: UpdateWorkspaceRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 内嵌工作流单次迭代运行信息
  */
 export interface InnerWorkflowTaskRunIteration {
@@ -465,6 +607,27 @@ export interface InnerWorkflowTaskRunIteration {
 }
 
 /**
+ * git检出规则
+ */
+export interface SparseCheckoutConfig {
+  /**
+   * <p>是否启用稀疏检出</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * <p>是否使用 cone 模式（推荐 true，按目录匹配更高效）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConeMode?: boolean
+  /**
+   * <p>稀疏检出路径列表（如 [&quot;src/module-a/&quot;, &quot;docs/&quot;]）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Patterns?: Array<string>
+}
+
+/**
  * DeleteWorkflow请求参数结构体
  */
 export interface DeleteWorkflowRequest {
@@ -479,29 +642,86 @@ export interface DeleteWorkflowRequest {
 }
 
 /**
- * ListWorkflowTaskRuns请求参数结构体
+ * 工作空间信息
  */
-export interface ListWorkflowTaskRunsRequest {
+export interface WorkspaceInfo {
   /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   * 工作空间ID
+   */
+  WorkspaceId?: string
+  /**
+   * 工作空间名称
+   */
+  WorkspaceName?: string
+  /**
+   * 工作空间描述
+   */
+  Description?: string
+  /**
+   * 工作空间地域（如 ap-guangzhou）
+   */
+  WorkspaceRegion?: string
+  /**
+   * 工作空间状态：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除
+   */
+  Status?: number
+  /**
+   * 失败原因（Status=2 创建失败时有值）
+   */
+  ErrorReason?: string
+  /**
+   * 创建者信息
+   */
+  Creator?: StandardUserInfo
+  /**
+   * 创建时间，毫秒时间戳
+   */
+  CreateTime?: string
+  /**
+   * 更新时间，毫秒时间戳
+   */
+  UpdateTime?: string
+  /**
+   * 当前用户是否拥有该工作空间的访问权限
+   */
+  HasAccess?: boolean
+}
+
+/**
+ * GetWorkspace请求参数结构体
+ */
+export interface GetWorkspaceRequest {
+  /**
+   * <p>工作空间ID</p>
    */
   WorkspaceId: string
+}
+
+/**
+ * 查询控制台用户组列表响应
+ */
+export interface ListConsoleGroupsRsp {
   /**
-   * <p>任务ID，可通过 ListWorkflowTasks 获取。非必填，精确匹配。与 WorkflowRunId 至少传一个：仅传 TaskId 时查询该任务的全部运行历史。</p>
+   * 用户组列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId?: string
+  Items?: Array<ConsoleGroupInfo>
   /**
-   * <p>工作流运行ID，可通过 ListWorkflowRuns 获取。非必填，精确匹配。与 TaskId 至少传一个：仅传 WorkflowRunId 时查询该次工作流运行下的全部任务运行。</p>
-   */
-  WorkflowRunId?: string
-  /**
-   * <p>分页页码，从 1 开始。非必填，默认 1</p>
+   * 当前页码
    */
   PageNumber?: number
   /**
-   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
+   * 每页大小
    */
   PageSize?: number
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber?: number
 }
 
 /**
@@ -538,6 +758,16 @@ export interface AlarmBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DoNotDisturbUntilTheLastRetry?: boolean
+}
+
+/**
+ * 创建工作空间响应
+ */
+export interface CreateWorkspaceRsp {
+  /**
+   * 创建成功的工作空间ID
+   */
+  WorkspaceId?: string
 }
 
 /**
@@ -622,6 +852,16 @@ export interface UpdateConsoleUsersRsp {
 }
 
 /**
+ * 修改工作空间响应
+ */
+export interface UpdateWorkspaceRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
+}
+
+/**
  * CreateWorkflow请求参数结构体
  */
 export interface CreateWorkflowRequest {
@@ -677,6 +917,48 @@ export interface CreateWorkflowRequest {
    * <p>Git分支信息</p>
    */
   GitBranch?: string
+}
+
+/**
+ * ListFiles请求参数结构体
+ */
+export interface ListFilesRequest {
+  /**
+   * <p>工作空间id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>父目录，不填默认查询根节点</p>
+   */
+  Parent?: FolderLocator
+  /**
+   * <p>按文件类型过滤</p>
+   */
+  FileTypes?: Array<string>
+  /**
+   * <p>文件名模糊匹配</p>
+   */
+  NameKeyword?: string
+  /**
+   * <p>按所有者UIN过滤，多值为或关系</p>
+   */
+  OwnerUserUins?: Array<string>
+  /**
+   * <p>是否只列出文件夹，默认 false</p>
+   */
+  OnlyFolder?: boolean
+  /**
+   * <p>排序字段列表，如创建时间 [{Name: &#39;CreateTime&#39;, Direction: &#39;DESC&#39;}]，文件名称 [{Name: &#39;Name&#39;, Direction: &#39;ASC&#39;}]</p>
+   */
+  OrderBys?: Array<OrderBy>
+  /**
+   * <p>页码，默认1，最小值1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页条数，默认10，最小值10，最大值100</p><p>取值范围：[10, 100]</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -859,6 +1141,32 @@ export interface UnbindWorkflowBundleRsp {
 }
 
 /**
+ * CreateFolder请求参数结构体
+ */
+export interface CreateFolderRequest {
+  /**
+   * <p>工作空间名称</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>文件夹名称</p>
+   */
+  FolderName: string
+  /**
+   * <p>文件夹类型</p><p>枚举值：</p><ul><li>FOLDER： 文件夹</li><li>GIT_FOLDER： git文件夹</li></ul>
+   */
+  FolderType: string
+  /**
+   * <p>父节点</p>
+   */
+  ParentFolder?: FolderLocator
+  /**
+   * <p>git配置，FolderType=GIT_FOLDER 时必填</p>
+   */
+  GitConfig?: GitRepoConfig
+}
+
+/**
  * KillWorkflowRun返回参数结构体
  */
 export interface KillWorkflowRunResponse {
@@ -874,6 +1182,42 @@ export interface KillWorkflowRunResponse {
 }
 
 /**
+ * DeleteFolder请求参数结构体
+ */
+export interface DeleteFolderRequest {
+  /**
+   * <p>工作空间id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>待删除的文件夹</p>
+   */
+  Folder: FolderLocator
+  /**
+   * <p>软删除还是从回收站硬删除</p><p>枚举值：</p><ul><li>false： 软删除到回收站</li><li>true： 从回收站硬删除</li></ul>
+   */
+  ForceDelete?: boolean
+}
+
+/**
+ * CreateWorkspace请求参数结构体
+ */
+export interface CreateWorkspaceRequest {
+  /**
+   * <p>工作空间名称，max_len=128</p>
+   */
+  WorkspaceName: string
+  /**
+   * <p>工作空间地域（如 ap-guangzhou），max_len=64</p>
+   */
+  WorkspaceRegion: string
+  /**
+   * <p>工作空间描述，max_len=300</p>
+   */
+  Description?: string
+}
+
+/**
  * 添加控制台用户响应
  */
 export interface AddConsoleUsersRsp {
@@ -884,53 +1228,13 @@ export interface AddConsoleUsersRsp {
 }
 
 /**
- * ListWorkflows请求参数结构体
+ * RemoveConsoleUsers请求参数结构体
  */
-export interface ListWorkflowsRequest {
+export interface RemoveConsoleUsersRequest {
   /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
    */
-  WorkspaceId: string
-  /**
-   * <p>分页页码，从 1 开始。非必填，默认 1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
-   */
-  PageSize?: number
-  /**
-   * <p>工作流名称关键字，对 WorkflowName 做模糊匹配。非必填，单值</p>
-   */
-  WorkflowNameKeyword?: string
-  /**
-   * <p>工作流名称，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  WorkflowNames?: Array<string>
-  /**
-   * <p>工作流ID，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  WorkflowIds?: Array<string>
-  /**
-   * <p>工作流运行人UIN，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  RunUserUins?: Array<string>
-  /**
-   * <p>标签名称ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  LabelKeyIds?: Array<string>
-  /**
-   * <p>标签值ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  LabelValueIds?: Array<string>
-  /**
-   * <p>快速筛选类型。非必填，单值</p><p>对齐老云 API（wedata/2025-10-10）文档示例值：</p><ul><li>MY_FAVORITE：我收藏的</li><li>MY_OWNER：我负责的</li><li>MY_AUTHORITY：我有权限</li><li>WorkflowId：支持多个工作流ID筛选</li></ul><p>后端实现现状：当前仅 MY_FAVORITE 生效（设置 favoriteUserUin 过滤当前用户收藏），MY_OWNER / MY_AUTHORITY 暂未在 Service 层实现，传入会被忽略（按全量返回）。</p>
-   */
-  QuickSelectionType?: string
-  /**
-   * <p>排序条件，多个之间按数组顺序表示优先级。非必填。<br>可排序字段白名单：CreateTime</p>
-   */
-  OrderBys?: Array<OrderBy>
+  UserUins: Array<string>
 }
 
 /**
@@ -1071,6 +1375,20 @@ export interface GetWorkflowTaskRunResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: GetWorkflowTaskRunRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteWorkspace返回参数结构体
+ */
+export interface DeleteWorkspaceResponse {
+  /**
+   * <p>操作结果</p>
+   */
+  Data?: DeleteWorkspaceRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1315,6 +1633,20 @@ export interface TaskTypeNotebookExt {
 }
 
 /**
+ * GetFolder返回参数结构体
+ */
+export interface GetFolderResponse {
+  /**
+   * <p>文件夹详情结果</p>
+   */
+  Data?: GetFolderRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RerunWorkflowRun返回参数结构体
  */
 export interface RerunWorkflowRunResponse {
@@ -1379,6 +1711,50 @@ export interface AsyncOperation {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: number
+}
+
+/**
+ * UpdateWorkspace请求参数结构体
+ */
+export interface UpdateWorkspaceRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作空间名称，max_len=128</p>
+   */
+  WorkspaceName: string
+  /**
+   * <p>工作空间描述，max_len=300</p>
+   */
+  Description?: string
+}
+
+/**
+ * 查询文件信息结果
+ */
+export interface ListFilesRsp {
+  /**
+   * <p>文件/文件夹节点列表</p>
+   */
+  Items?: Array<FileNode>
+  /**
+   * <p>当前页码</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页条数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总条数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPageNumber?: number
 }
 
 /**
@@ -1478,6 +1854,248 @@ export interface ScheduleBizEnumBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
+}
+
+/**
+ * 查询工作空间详情响应
+ */
+export interface GetWorkspaceRsp {
+  /**
+   * 工作空间详情
+   */
+  WorkspaceInfo?: WorkspaceInfo
+}
+
+/**
+ * CreateFolder返回参数结构体
+ */
+export interface CreateFolderResponse {
+  /**
+   * <p>创建文件夹结果</p>
+   */
+  Data?: CreateFolderRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 内嵌工作流迭代中的任务运行简要信息
+ */
+export interface InnerWorkflowTaskRunIterationBrief {
+  /**
+   * <p>任务运行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowTaskRunId?: string
+  /**
+   * <p>迭代序号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IterationIndex?: string
+  /**
+   * <p>运行开始时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunStartTime?: string
+  /**
+   * <p>运行结束时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunEndTime?: string
+  /**
+   * <p>运行状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunState?: string
+  /**
+   * <p>运行时长，单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunCostTime?: string
+  /**
+   * <p>运行参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskParams?: string
+  /**
+   * <p>错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeString?: string
+}
+
+/**
+ * CreateConsoleGroup请求参数结构体
+ */
+export interface CreateConsoleGroupRequest {
+  /**
+   * <p>用户组名称</p>
+   */
+  GroupName: string
+  /**
+   * <p>用户组别名</p>
+   */
+  GroupNickname?: string
+  /**
+   * <p>用户组描述</p>
+   */
+  Description?: string
+}
+
+/**
+ * ListWorkflows返回参数结构体
+ */
+export interface ListWorkflowsResponse {
+  /**
+   * <p>查询工作流列表响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListWorkflowsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListWorkflowsRsp
+ */
+export interface ListWorkflowsRsp {
+  /**
+   * 当前页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber?: number
+  /**
+   * 工作流列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<WorkflowBrief>
+}
+
+/**
+ * UpdateFolder返回参数结构体
+ */
+export interface UpdateFolderResponse {
+  /**
+   * <p>更新文件夹结果</p>
+   */
+  Data?: UpdateFolderRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RerunWorkflowRun请求参数结构体
+ */
+export interface RerunWorkflowRunRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   */
+  WorkflowId: string
+  /**
+   * <p>工作流运行ID，可通过 ListWorkflowRuns 获取。必填</p>
+   */
+  WorkflowRunId: string
+  /**
+   * <p>运行类型。必填。取值：1 普通运行，2 高级运行</p>
+   */
+  RunType: number
+  /**
+   * <p>运行类型为高级运行时填写的自定义运行参数</p>
+   */
+  AdvancedParams?: Array<TaskSchedulingParameterBrief>
+  /**
+   * <p>本次需要重跑指定的任务ID集合，可通过 ListWorkflowTasks 获取，不传默认重跑该工作流下所有任务</p>
+   */
+  TaskIds?: Array<string>
+  /**
+   * <p>计划调度时间列表配置</p>
+   */
+  ScheduledTimeConfig?: ScheduledTimeConfig
+}
+
+/**
+ * DeleteWorkspace请求参数结构体
+ */
+export interface DeleteWorkspaceRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+}
+
+/**
+ * 标签信息
+ */
+export interface LabelBrief {
+  /**
+   * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelKey?: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValue?: string
+  /**
+   * 标签名称ID，可通过标签相关接口获取
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelKeyId?: string
+  /**
+   * 标签值ID，可通过标签相关接口获取
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValueId?: string
+}
+
+/**
+ * AddConsoleUsers请求参数结构体
+ */
+export interface AddConsoleUsersRequest {
+  /**
+   * <p>用户 UIN 列表，单次最多100个</p>
+   */
+  UserUins: Array<string>
+  /**
+   * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul>
+   */
+  RoleIds: Array<string>
+}
+
+/**
+ * 创建控制台用户组响应
+ */
+export interface CreateConsoleGroupRsp {
+  /**
+   * 创建成功的用户组 ID
+   */
+  GroupId?: string
 }
 
 /**
@@ -1687,197 +2305,13 @@ export interface WorkflowTaskRun {
 }
 
 /**
- * 内嵌工作流迭代中的任务运行简要信息
+ * 删除工作空间响应
  */
-export interface InnerWorkflowTaskRunIterationBrief {
+export interface DeleteWorkspaceRsp {
   /**
-   * <p>任务运行ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 操作是否成功
    */
-  WorkflowTaskRunId?: string
-  /**
-   * <p>迭代序号</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IterationIndex?: string
-  /**
-   * <p>运行开始时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunStartTime?: string
-  /**
-   * <p>运行结束时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunEndTime?: string
-  /**
-   * <p>运行状态</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunState?: string
-  /**
-   * <p>运行时长，单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunCostTime?: string
-  /**
-   * <p>运行参数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskParams?: string
-  /**
-   * <p>错误码</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorCodeString?: string
-}
-
-/**
- * CreateConsoleGroup请求参数结构体
- */
-export interface CreateConsoleGroupRequest {
-  /**
-   * <p>用户组名称</p>
-   */
-  GroupName: string
-  /**
-   * <p>用户组别名</p>
-   */
-  GroupNickname?: string
-  /**
-   * <p>用户组描述</p>
-   */
-  Description?: string
-}
-
-/**
- * ListWorkflowsRsp
- */
-export interface ListWorkflowsRsp {
-  /**
-   * 当前页码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageNumber?: number
-  /**
-   * 每页大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageSize?: number
-  /**
-   * 总记录数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalPageNumber?: number
-  /**
-   * 工作流列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<WorkflowBrief>
-}
-
-/**
- * RerunWorkflowRun请求参数结构体
- */
-export interface RerunWorkflowRunRequest {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
-   */
-  WorkflowId: string
-  /**
-   * <p>工作流运行ID，可通过 ListWorkflowRuns 获取。必填</p>
-   */
-  WorkflowRunId: string
-  /**
-   * <p>运行类型。必填。取值：1 普通运行，2 高级运行</p>
-   */
-  RunType: number
-  /**
-   * <p>运行类型为高级运行时填写的自定义运行参数</p>
-   */
-  AdvancedParams?: Array<TaskSchedulingParameterBrief>
-  /**
-   * <p>本次需要重跑指定的任务ID集合，可通过 ListWorkflowTasks 获取，不传默认重跑该工作流下所有任务</p>
-   */
-  TaskIds?: Array<string>
-  /**
-   * <p>计划调度时间列表配置</p>
-   */
-  ScheduledTimeConfig?: ScheduledTimeConfig
-}
-
-/**
- * ListWorkflows返回参数结构体
- */
-export interface ListWorkflowsResponse {
-  /**
-   * <p>查询工作流列表响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: ListWorkflowsRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 标签信息
- */
-export interface LabelBrief {
-  /**
-   * 标签名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelKey?: string
-  /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelValue?: string
-  /**
-   * 标签名称ID，可通过标签相关接口获取
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelKeyId?: string
-  /**
-   * 标签值ID，可通过标签相关接口获取
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelValueId?: string
-}
-
-/**
- * AddConsoleUsers请求参数结构体
- */
-export interface AddConsoleUsersRequest {
-  /**
-   * <p>用户 UIN 列表，单次最多100个</p>
-   */
-  UserUins: Array<string>
-  /**
-   * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul>
-   */
-  RoleIds: Array<string>
-}
-
-/**
- * 创建控制台用户组响应
- */
-export interface CreateConsoleGroupRsp {
-  /**
-   * 创建成功的用户组 ID
-   */
-  GroupId?: string
+  Status?: boolean
 }
 
 /**
@@ -2103,17 +2537,86 @@ export interface AddConsoleUsersResponse {
 }
 
 /**
- * ListConsoleGroups返回参数结构体
+ * 查询控制台用户列表响应
  */
-export interface ListConsoleGroupsResponse {
+export interface ListConsoleUsersRsp {
   /**
-   * <p>返回结果</p>
+   * 用户列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: ListConsoleGroupsRsp
+  Items?: Array<ConsoleUserInfo>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 当前页码
    */
-  RequestId?: string
+  PageNumber?: number
+  /**
+   * 每页大小
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber?: number
+}
+
+/**
+ * 文件元数据
+ */
+export interface FileMeta {
+  /**
+   * <p>文件id</p>
+   */
+  FileId?: string
+  /**
+   * <p>文件/文件夹名称</p>
+   */
+  FileName?: string
+  /**
+   * <p>文件类型</p>
+   */
+  FileType?: string
+  /**
+   * <p>创建时间，毫秒秒级时间戳</p><p>参数格式：时间戳</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：时间戳字符串</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>acl权限类型</p>
+   */
+  AllowActions?: Array<string>
+  /**
+   * <p>是否收藏</p>
+   */
+  IsFavorite?: boolean
+  /**
+   * <p>文件path</p>
+   */
+  PathName?: string
+  /**
+   * <p>是否系统创建</p>
+   */
+  IsSystemGenerated?: boolean
+}
+
+/**
+ * UnbindWorkflowBundle请求参数结构体
+ */
+export interface UnbindWorkflowBundleRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   */
+  WorkflowId: string
 }
 
 /**
@@ -2336,107 +2839,30 @@ export interface ConsoleGroupInfo {
 }
 
 /**
- * 文件详情
+ * 查询控制台角色列表响应
  */
-export interface FileInfo {
+export interface ListConsoleRolesRsp {
   /**
-   * <p>主账号 AppId</p>
+   * 角色列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId?: string
+  Items?: Array<ConsoleRoleInfo>
   /**
-   * <p>工作空间 ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 当前页码
    */
-  WorkspaceId?: string
+  PageNumber?: number
   /**
-   * <p>文件 ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 每页大小
    */
-  FileId?: string
+  PageSize?: number
   /**
-   * <p>文件名，含后缀</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总记录数
    */
-  FileName?: string
+  TotalCount?: number
   /**
-   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总页数
    */
-  FileType?: string
-  /**
-   * <p>文件在工作空间中的完整路径，以 / 开头，如 /etl/daily/demo.ipynb</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Path?: string
-  /**
-   * <p>文件运行配置</p>
-   */
-  FileConfig?: FileConfig
-  /**
-   * <p>绑定的 BundleId</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleId?: string
-  /**
-   * <p>绑定的 BundleInfo，JSON 字符串</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleInfo?: string
-  /**
-   * <p>文件状态。active=正常，deleted=已删除</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * <p>文件负责人用户名</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnerUserName?: string
-  /**
-   * <p>创建人子账号 Uin</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateUserUin?: string
-  /**
-   * <p>最近更新人子账号 Uin</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateUserUin?: string
-  /**
-   * <p>创建时间，毫秒级时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * <p>最近更新时间，毫秒级时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-  /**
-   * <p>文件存储信息。仅当请求 IncludeContent=true 时返回内容</p>
-   */
-  Storage?: FileStorage
-  /**
-   * <p>当前调用方对该文件的权限点列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Permissions?: string
-  /**
-   * <p>是否已发布</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReleaseStatus?: boolean
-  /**
-   * <p>资源模式。1=分布式，2=单节点</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceMode?: number
-  /**
-   * ZIP 异步创建时透传 Workspace 作业信息；普通同步创建或其他复用该返回结构的接口不设置该字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AsyncOperation?: AsyncOperation
+  TotalPageNumber?: number
 }
 
 /**
@@ -2495,6 +2921,20 @@ export interface CreateConsoleGroupResponse {
    * <p>返回结果</p>
    */
   Data?: CreateConsoleGroupRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListFiles返回参数结构体
+ */
+export interface ListFilesResponse {
+  /**
+   * <p>文件列表结果</p>
+   */
+  Data?: ListFilesRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2848,6 +3288,55 @@ export interface WorkflowRun {
 }
 
 /**
+ * 文件节点
+ */
+export interface FileNode {
+  /**
+   * <p>当前节点</p>
+   */
+  Node?: FileMeta
+  /**
+   * <p>父节点</p>
+   */
+  Parent?: FileMeta
+  /**
+   * <p>创建人</p>
+   */
+  Creator?: UserInfo
+  /**
+   * <p>拥有者</p>
+   */
+  Owner?: UserInfo
+  /**
+   * <p>节点类型</p>
+   */
+  NodeType?: string
+  /**
+   * <p>原始路径</p>
+   */
+  OriginPath?: string
+  /**
+   * <p>回收时间</p>
+   */
+  DeleteTime?: string
+  /**
+   * <p>文件git配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GitConfig?: GitRepoConfig
+}
+
+/**
+ * 更新文件夹回包
+ */
+export interface UpdateFolderRsp {
+  /**
+   * <p>更新文件夹结果，true为成功</p>
+   */
+  Status?: boolean
+}
+
+/**
  * 任务类型属性键值对
  */
 export interface TaskTypeProperty {
@@ -2864,46 +3353,17 @@ export interface TaskTypeProperty {
 }
 
 /**
- * ListWorkflowRunsRsp
+ * GetFolder请求参数结构体
  */
-export interface ListWorkflowRunsRsp {
+export interface GetFolderRequest {
   /**
-   * 当前页码
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作空间id</p>
    */
-  PageNumber?: number
+  WorkspaceId: string
   /**
-   * 每页大小
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>文件夹定位</p>
    */
-  PageSize?: number
-  /**
-   * 总记录数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalPageNumber?: number
-  /**
-   * 工作流运行列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<WorkflowRun>
-  /**
-   * 工作流运行状态数量统计。
-统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BizStateEnumInfos?: Array<ScheduleBizEnumBrief>
-  /**
-   * 工作流运行错误码数量统计。
-统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BizErrorCodeEnumInfos?: Array<ScheduleBizEnumBrief>
+  Folder: FolderLocator
 }
 
 /**
@@ -3013,13 +3473,75 @@ export interface GetWorkflowRunRequest {
 }
 
 /**
- * RemoveConsoleUsers请求参数结构体
+ * 用户基本信息
  */
-export interface RemoveConsoleUsersRequest {
+export interface UserInfo {
   /**
-   * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
+   * <p>uin</p>
    */
-  UserUins: Array<string>
+  UserUin?: string
+  /**
+   * <p>子用户名称</p>
+   */
+  UserName?: string
+  /**
+   * <p>子用户昵称</p>
+   */
+  Nickname?: string
+  /**
+   * <p>0: 普通用户 1: entraId用户</p>
+   */
+  UserTag?: string
+}
+
+/**
+ * ListWorkflows请求参数结构体
+ */
+export interface ListWorkflowsRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>分页页码，从 1 开始。非必填，默认 1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
+   */
+  PageSize?: number
+  /**
+   * <p>工作流名称关键字，对 WorkflowName 做模糊匹配。非必填，单值</p>
+   */
+  WorkflowNameKeyword?: string
+  /**
+   * <p>工作流名称，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  WorkflowNames?: Array<string>
+  /**
+   * <p>工作流ID，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  WorkflowIds?: Array<string>
+  /**
+   * <p>工作流运行人UIN，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  RunUserUins?: Array<string>
+  /**
+   * <p>标签名称ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  LabelKeyIds?: Array<string>
+  /**
+   * <p>标签值ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  LabelValueIds?: Array<string>
+  /**
+   * <p>快速筛选类型。非必填，单值</p><p>对齐老云 API（wedata/2025-10-10）文档示例值：</p><ul><li>MY_FAVORITE：我收藏的</li><li>MY_OWNER：我负责的</li><li>MY_AUTHORITY：我有权限</li><li>WorkflowId：支持多个工作流ID筛选</li></ul><p>后端实现现状：当前仅 MY_FAVORITE 生效（设置 favoriteUserUin 过滤当前用户收藏），MY_OWNER / MY_AUTHORITY 暂未在 Service 层实现，传入会被忽略（按全量返回）。</p>
+   */
+  QuickSelectionType?: string
+  /**
+   * <p>排序条件，多个之间按数组顺序表示优先级。非必填。<br>可排序字段白名单：CreateTime</p>
+   */
+  OrderBys?: Array<OrderBy>
 }
 
 /**
@@ -3178,6 +3700,28 @@ export interface UpdateConsoleGroupResponse {
 }
 
 /**
+ * 用户基础展示信息
+ */
+export interface StandardUserInfo {
+  /**
+   * 用户UIN
+   */
+  UserUin?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 昵称
+   */
+  Nickname?: string
+  /**
+   * 0: 普通用户 1: entraId用户
+   */
+  UserTag?: string
+}
+
+/**
  * 控制台用户信息（规范化，与内部 UserDetailInfo 解耦）
  */
 export interface ConsoleUserInfo {
@@ -3247,6 +3791,42 @@ export interface OrderBy {
    * 排序字段名
    */
   Name?: string
+}
+
+/**
+ * UpdateFolder请求参数结构体
+ */
+export interface UpdateFolderRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>待更新文件夹</p>
+   */
+  Folder?: FolderLocator
+  /**
+   * <p>操作类型</p><p>枚举值：</p><ul><li>1： 重命名</li><li>2： 移动</li></ul>
+   */
+  OperationType?: string
+  /**
+   * <p>重命名后的文件名，OperationType = 1时生效</p>
+   */
+  FolderName?: string
+  /**
+   * <p>移动的目的文件夹，OperationType = 2时生效</p>
+   */
+  TargetParent?: FolderLocator
+}
+
+/**
+ * 删除文件夹回包
+ */
+export interface DeleteFolderRsp {
+  /**
+   * <p>删除文件夹状态</p>
+   */
+  Status?: boolean
 }
 
 /**
@@ -3532,30 +4112,17 @@ export interface GetWorkflowRunResponse {
 }
 
 /**
- * 查询控制台用户列表响应
+ * ListConsoleGroups返回参数结构体
  */
-export interface ListConsoleUsersRsp {
+export interface ListConsoleGroupsResponse {
   /**
-   * 用户列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>返回结果</p>
    */
-  Items?: Array<ConsoleUserInfo>
+  Data?: ListConsoleGroupsRsp
   /**
-   * 当前页码
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PageNumber?: number
-  /**
-   * 每页大小
-   */
-  PageSize?: number
-  /**
-   * 总记录数
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-   */
-  TotalPageNumber?: number
+  RequestId?: string
 }
 
 /**
@@ -3630,17 +4197,46 @@ export interface GetWorkflowRsp {
 }
 
 /**
- * UnbindWorkflowBundle请求参数结构体
+ * ListWorkflowRunsRsp
  */
-export interface UnbindWorkflowBundleRequest {
+export interface ListWorkflowRunsRsp {
   /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   * 当前页码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkspaceId: string
+  PageNumber?: number
   /**
-   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   * 每页大小
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId: string
+  PageSize?: number
+  /**
+   * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber?: number
+  /**
+   * 工作流运行列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<WorkflowRun>
+  /**
+   * 工作流运行状态数量统计。
+统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizStateEnumInfos?: Array<ScheduleBizEnumBrief>
+  /**
+   * 工作流运行错误码数量统计。
+统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizErrorCodeEnumInfos?: Array<ScheduleBizEnumBrief>
 }
 
 /**
@@ -3678,6 +4274,29 @@ export interface RoleBasicInfo {
 }
 
 /**
+ * git配置
+ */
+export interface GitRepoConfig {
+  /**
+   * <p>检出规则</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparseCheckout?: SparseCheckoutConfig
+  /**
+   * <p>Git 仓库地址</p>
+   */
+  RepoUrl?: string
+  /**
+   * <p>分支名</p>
+   */
+  Branch?: string
+  /**
+   * <p>关联的 gitAuth 配置名称</p>
+   */
+  AuthConfigName?: string
+}
+
+/**
  * ListConsoleRoles返回参数结构体
  */
 export interface ListConsoleRolesResponse {
@@ -3685,6 +4304,20 @@ export interface ListConsoleRolesResponse {
    * <p>返回结果</p>
    */
   Data?: ListConsoleRolesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateWorkspace返回参数结构体
+ */
+export interface CreateWorkspaceResponse {
+  /**
+   * <p>创建成功的工作空间ID</p>
+   */
+  Data?: CreateWorkspaceRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3704,6 +4337,16 @@ export interface UpdateFileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建文件夹回包
+ */
+export interface CreateFolderRsp {
+  /**
+   * <p>文件夹 ID</p>
+   */
+  FolderId?: string
 }
 
 /**

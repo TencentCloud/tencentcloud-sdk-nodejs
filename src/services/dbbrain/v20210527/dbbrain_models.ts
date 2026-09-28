@@ -1401,6 +1401,105 @@ export interface DiagHistoryEventItem {
 }
 
 /**
+ * 死锁事件列表。按事件时间倒序排列（最近的死锁在前）。
+ */
+export interface DeadLockLogItem {
+  /**
+   * <p>实例 ID，例如 mssql-ks3s56dj。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>时间字段来源。XML_EVENT 表示时间来自 xml_deadlock_report 的引擎打点；OBSERVED_LOG 表示时间来自 chain/lock 观测记录（partial 事件）。</p>
+   */
+  TimestampSource?: string
+  /**
+   * <p>降级原因码。IsPartial=true 时值为 XML_NOT_AVAILABLE；否则为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartialReasonCode?: string
+  /**
+   * <p>被回滚的进程内部指针列表，例如 process260256c7468。与 Resources.Owners/Waiters.ProcessId 对齐，可用于死锁环节点定位。</p>
+   */
+  VictimProcessIds?: Array<string>
+  /**
+   * <p>原始负载是否被上游截断。true 表示 XmlReport 或 chain/lock payload 有过截断，会影响诊断可信度。</p>
+   */
+  PayloadTruncated?: boolean
+  /**
+   * <p>组成本事件的所有 XEvent 原始消息 UUID 列表（去重后按字典序排序），用于多源溯源、审计、补数。</p>
+   */
+  SourceUuids?: Array<string>
+  /**
+   * <p>实际可归因（有 TransactionId）的事务数量。</p>
+   */
+  ObservedTransactionCount?: number
+  /**
+   * <p>死锁发生时间。ISO-8601 带偏移格式，例如 2026-09-16T06:58:52.611+00:00。来源于 XEvent 原始 timestamp。</p>
+   */
+  EventTimestamp?: string
+  /**
+   * <p>死锁图完整性。COMPLETE 表示成功装配 xml_deadlock_report；MISSING 表示无 xml 只有 chain/lock 消息（对应 IsPartial=true）。</p>
+   */
+  GraphStatus?: string
+  /**
+   * <p>本次响应中是否内联了原始死锁 XML。仅当请求参数 IncludeXml=true 且事件为 COMPLETE 时为 true。</p>
+   */
+  XmlIncluded?: boolean
+  /**
+   * <p>参与死锁的进程总数。2 方死锁最常见，N 方死锁更严重。</p>
+   */
+  ProcessCount?: number
+  /**
+   * <p>参与死锁的事务列表（按 IsVictim=true 排前、TransactionId 升序）。每个事务下可能有多个 Session（例如并行执行 worker）。</p>
+   */
+  Transactions?: Array<DeadlockTransaction>
+  /**
+   * <p>引擎内的死锁编号，例如 84。与 SQL Server 端 xml_deadlock_report 对齐。同实例短期内可辨识，重启后会复用。若上游数据缺失则为 null。</p>
+   */
+  DeadlockId?: string
+  /**
+   * <p>原始 SQL Server 死锁图 XML 字符串（xml_deadlock_report 输出）。IncludeXml=false 或事件为 partial 时为 null。可用于前端直接绘制死锁环、AI 深度诊断，或落到对象存储做冷归档。</p>
+   */
+  XmlReport?: string
+  /**
+   * <p>原始 XML 字节数，用于采集侧健康度评估。partial 事件为 null。</p>
+   */
+  OriginalXmlBytes?: number
+  /**
+   * <p>被 SQL Server 选中回滚的会话 SPID 列表（去重）。DBA 复盘定位牺牲者的核心字段。</p>
+   */
+  VictimSessionIds?: Array<number | bigint>
+  /**
+   * <p>是否为降级 partial 事件。true 表示无 xml_deadlock_report，Transactions/Resources 只能从 chain/lock 消息尽力还原。AI 诊断前建议过滤 IsPartial=true 的记录。</p>
+   */
+  IsPartial?: boolean
+  /**
+   * <p>涉及的数据库名去重列表，用于分库聚合与影响范围判断。</p>
+   */
+  DatabaseNames?: Array<string>
+  /**
+   * <p>事件唯一 ID，格式为 xml:&lt;uuid&gt; 或 partial:&lt;uuid&gt;。前缀 xml 表示由 xml_deadlock_report 装配的完整事件；partial 表示只有 chain/lock 消息的降级事件。可作为幂等主键。</p>
+   */
+  EventId?: string
+  /**
+   * <p>死锁事件级签名（SHA-1 前 16 位）。基于参与死锁的所有锁资源三元组 (Kind, ObjectName, IndexName, Mode) 排序后计算，用于聚合相同锁冲突模式的死锁模板。partial 事件无 Resources 时为 null。</p>
+   */
+  DeadlockSignature?: string
+  /**
+   * <p>死锁涉及的锁资源节点列表。每个资源节点有若干 Owners（持有边）与 Waiters（等待边），二者组合构成死锁环。partial 事件为空数组。</p>
+   */
+  Resources?: Array<DeadlockResource>
+  /**
+   * <p>XE 辅助事件（chain/lock）与 XML 图的关联状态。MATCHED 表示至少一个 chain/lock 消息已关联到该 xml；UNMATCHED 表示只有孤立 xml 或降级 partial 事件。</p>
+   */
+  AssociationStatus?: string
+  /**
+   * <p>参与死锁的事务总数（有 TransactionId 的会话按事务分组后的数量）。当存在无 TransactionId 的会话时为 null，通过 ObservedTransactionCount 与该字段的差值可以判断归因缺失情况。</p>
+   */
+  TransactionCount?: number
+}
+
+/**
  * CreateUserAutonomyProfile返回参数结构体
  */
 export interface CreateUserAutonomyProfileResponse {
@@ -1408,6 +1507,60 @@ export interface CreateUserAutonomyProfileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 慢日志详细信息
+ */
+export interface SlowLogInfoItem {
+  /**
+   * 慢日志开始时间，格式: "yyyy-MM-dd HH:mm:ss"
+   */
+  Timestamp?: string
+  /**
+   * sql语句
+   */
+  SqlText?: string
+  /**
+   * 数据库
+   */
+  Database?: string
+  /**
+   * User来源
+   */
+  UserName?: string
+  /**
+   * IP来源
+   */
+  UserHost?: string
+  /**
+   * 执行时间,单位秒
+   */
+  QueryTime?: number
+  /**
+   * 锁时间,单位秒
+   */
+  LockTime?: number
+  /**
+   * 扫描行数
+   */
+  RowsExamined?: number
+  /**
+   * 返回行数
+   */
+  RowsSent?: number
+  /**
+   *
+   */
+  InstanceId?: string
+  /**
+   *
+   */
+  ClientAppName?: string
+  /**
+   *
+   */
+  ClientHostName?: string
 }
 
 /**
@@ -1661,6 +1814,32 @@ export interface DescribeRedisSlowLogTopSqlsRequest {
    * 偏移量，默认为0。
    */
   Offset?: number
+}
+
+/**
+ * 等待该锁资源的进程列表（死锁环的等待边）。
+ */
+export interface WaiterItem {
+  /**
+   * <p>该边持有或申请的锁模式。</p>
+   */
+  Mode?: string
+  /**
+   * <p>并行执行子线程 ID。0 表示主线程；大于 0 表示并行计划的 worker。SessionId + ExecutionContextId 组合可唯一区分并行执行下的 worker。</p>
+   */
+  ExecutionContextId?: number
+  /**
+   * <p>进程内部指针，对应 Transactions[].Processes[].ProcessId。</p>
+   */
+  ProcessId?: string
+  /**
+   * <p>该边对应进程的 SPID，便于前端直接展示无需回查。</p>
+   */
+  SessionId?: number
+  /**
+   * <p>仅 Waiters 边有值。常见值：wait（普通等待）/ convert（锁转换，如从 S 升级到 X）。owner 边无此字段。</p>
+   */
+  RequestType?: string
 }
 
 /**
@@ -2180,17 +2359,41 @@ export interface DescribeSecurityAuditLogDownloadUrlsRequest {
 }
 
 /**
- * CreateDBDiagReportTask返回参数结构体
+ * DescribeDBDiagEvents请求参数结构体
  */
-export interface CreateDBDiagReportTaskResponse {
+export interface DescribeDBDiagEventsRequest {
   /**
-   * <p>异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。</p>
+   * <p>开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。</p>
    */
-  AsyncRequestId?: number
+  StartTime: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。</p>
    */
-  RequestId?: string
+  EndTime: string
+  /**
+   * <p>风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。</p>
+   */
+  Severities?: Array<number | bigint>
+  /**
+   * <p>诊断项列表，对于MySQL支持Connectivity,IUDSlow,SlowSql,SlowQueries,WaitRowLock,TrxNotCommit,DDLWaitMDL,IUDWaitMDL,QueryWaitMDL,DeadLock,ReadLock,SqlWaitMDL,FlushWaitLock,HighActiveSession,HighRequest,ManyPrepareStatement,SpaceUsage,MemoryUsage,CpuUsage,DbHealthCheck,LowTableOpenCacheHit,RiskAccount,BigTable,ReplIOError,ReplROResources,ReplSqlError,ReplDelayByDDL,ReplDelayByTrx,ReplDelayByRLock,AutoIncrement,AutoIncrementOverflowV2,BinlogDumpNonGtid,ReplDelay,Switch,BackendInstanceMigration,RoRemove,OutOfStorage,OutOfMemory,CpuUsagePeak,MemoryUsagePeak,SpaceUsagePeak,SqlJoinColumnTypeInconsistent,HighLatencyInTimeWindow</p>
+   */
+  DiagItems?: Array<string>
+  /**
+   * <p>实例ID列表。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。<br>查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&amp;Shard实例ID，如：dcdbt-157xxxk&amp;shard-qxxxx</p>
+   */
+  InstanceIds?: Array<string>
+  /**
+   * <p>服务产品类型，支持值包括：&quot;mysql&quot; - 云数据库 MySQL，&quot;mongodb&quot;- 云数据库MongoDB, &quot;postgres&quot;-云数据库postgres,云数据库&quot;redis&quot; - 云数据库 Redis，&quot;mariadb&quot;-数据库mariadb，&quot;cynosdb&quot;-数据库 TDSQL-C, &quot;dcdb&quot;-数据库TDSQL MySQL    默认为&quot;mysql&quot;。</p>
+   */
+  Product?: string
+  /**
+   * <p>偏移量，默认0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，默认20，最大值为50。</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -2209,6 +2412,24 @@ export interface ProcessStatistic {
    * 总活跃连接数。
    */
   ActiveConnSum: number
+}
+
+/**
+ * 指标信息。
+ */
+export interface IssueTypeInfo {
+  /**
+   * 指标分类：AVAILABILITY：可用性，MAINTAINABILITY：可维护性，PERFORMANCE，性能，RELIABILITY可靠性。
+   */
+  IssueType: string
+  /**
+   * 异常事件。
+   */
+  Events: Array<EventInfo>
+  /**
+   * 异常事件总数。
+   */
+  TotalCount: number
 }
 
 /**
@@ -2266,6 +2487,48 @@ export interface MongoDBProcessItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DB?: string
+}
+
+/**
+ * 死锁涉及的锁资源节点。Owners（持有边）+ Waiters（等待边）与 Transactions[].Processes[] 关联，构成完整死锁环。
+ */
+export interface DeadlockResource {
+  /**
+   * <p>锁资源对应的索引名。keylock/ridlock 尤为重要，可判断索引设计是否合理。</p>
+   */
+  IndexName?: string
+  /**
+   * <p>分区 HoBT ID（从 Attributes.hobtid 抽出）。分区表死锁排查必需字段，可定位到具体物理分区。</p>
+   */
+  PartitionId?: string
+  /**
+   * <p>等待该锁资源的进程列表（死锁环的等待边）。</p>
+   */
+  Waiters?: Array<WaiterItem>
+  /**
+   * <p>锁资源类型。常见值：keylock / pagelock / objectlock / ridlock / applicationlock / exchangeEvent 等。</p>
+   */
+  Kind?: string
+  /**
+   * <p>锁模式。常见值：X（排他）/ U（更新）/ S（共享）/ IX / IU / RangeS-U / RangeX-X 等。</p>
+   */
+  Mode?: string
+  /**
+   * <p>关联对象 ID（从 Attributes.associatedObjectId 抽出）。ObjectName 为空时可用于兜底定位对象。</p>
+   */
+  AssociatedObjectId?: string
+  /**
+   * <p>SQL Server 引擎内的锁资源指针，例如 lock26054644a80。环内节点唯一标识，串联 Owners/Waiters。</p>
+   */
+  Id?: string
+  /**
+   * <p>锁资源对应的数据库对象名，格式 &#39;数据库.架构.表&#39;，例如 tempdb.dbo.dl_a。applicationlock 无此字段。</p>
+   */
+  ObjectName?: string
+  /**
+   * <p>持有该锁资源的进程列表（死锁环的持有边）。</p>
+   */
+  Owners?: Array<OwnerItem>
 }
 
 /**
@@ -2405,57 +2668,25 @@ export interface CreateIgnoreDiagRecordResponse {
 }
 
 /**
- * 慢日志详细信息
+ * 持有该锁资源的进程列表（死锁环的持有边）。
  */
-export interface SlowLogInfoItem {
+export interface OwnerItem {
   /**
-   * 慢日志开始时间，格式: "yyyy-MM-dd HH:mm:ss"
+   * <p>锁模式。常见值：X（排他）/ U（更新）/ S（共享）/ IX / IU / RangeS-U / RangeX-X 等。</p>
    */
-  Timestamp?: string
+  Mode?: string
   /**
-   * sql语句
+   * <p>该边对应进程的并行执行子线程 ID。</p>
    */
-  SqlText?: string
+  ExecutionContextId?: number
   /**
-   * 数据库
+   * <p>SQL Server 引擎内的进程指针，例如 process260256c7468。与 Resources.Owners/Waiters.ProcessId 拼接死锁环。partial 事件为 null。</p>
    */
-  Database?: string
+  ProcessId?: string
   /**
-   * User来源
+   * <p>SQL Server 会话 ID。日志排查主键。</p>
    */
-  UserName?: string
-  /**
-   * IP来源
-   */
-  UserHost?: string
-  /**
-   * 执行时间,单位秒
-   */
-  QueryTime?: number
-  /**
-   * 锁时间,单位秒
-   */
-  LockTime?: number
-  /**
-   * 扫描行数
-   */
-  RowsExamined?: number
-  /**
-   * 返回行数
-   */
-  RowsSent?: number
-  /**
-   *
-   */
-  InstanceId?: string
-  /**
-   *
-   */
-  ClientAppName?: string
-  /**
-   *
-   */
-  ClientHostName?: string
+  SessionId?: number
 }
 
 /**
@@ -2669,41 +2900,17 @@ export interface DescribeHealthScoreTimeSeriesRequest {
 }
 
 /**
- * DescribeDBDiagEvents请求参数结构体
+ * CreateDBDiagReportTask返回参数结构体
  */
-export interface DescribeDBDiagEventsRequest {
+export interface CreateDBDiagReportTaskResponse {
   /**
-   * <p>开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。</p>
+   * <p>异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。</p>
    */
-  StartTime: string
+  AsyncRequestId?: number
   /**
-   * <p>结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
-  /**
-   * <p>风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。</p>
-   */
-  Severities?: Array<number | bigint>
-  /**
-   * <p>诊断项列表，对于MySQL支持Connectivity,IUDSlow,SlowSql,SlowQueries,WaitRowLock,TrxNotCommit,DDLWaitMDL,IUDWaitMDL,QueryWaitMDL,DeadLock,ReadLock,SqlWaitMDL,FlushWaitLock,HighActiveSession,HighRequest,ManyPrepareStatement,SpaceUsage,MemoryUsage,CpuUsage,DbHealthCheck,LowTableOpenCacheHit,RiskAccount,BigTable,ReplIOError,ReplROResources,ReplSqlError,ReplDelayByDDL,ReplDelayByTrx,ReplDelayByRLock,AutoIncrement,AutoIncrementOverflowV2,BinlogDumpNonGtid,ReplDelay,Switch,BackendInstanceMigration,RoRemove,OutOfStorage,OutOfMemory,CpuUsagePeak,MemoryUsagePeak,SpaceUsagePeak,SqlJoinColumnTypeInconsistent,HighLatencyInTimeWindow</p>
-   */
-  DiagItems?: Array<string>
-  /**
-   * <p>实例ID列表。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。<br>查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&amp;Shard实例ID，如：dcdbt-157xxxk&amp;shard-qxxxx</p>
-   */
-  InstanceIds?: Array<string>
-  /**
-   * <p>服务产品类型，支持值包括：&quot;mysql&quot; - 云数据库 MySQL，&quot;mongodb&quot;- 云数据库MongoDB, &quot;postgres&quot;-云数据库postgres,云数据库&quot;redis&quot; - 云数据库 Redis，&quot;mariadb&quot;-数据库mariadb，&quot;cynosdb&quot;-数据库 TDSQL-C, &quot;dcdb&quot;-数据库TDSQL MySQL    默认为&quot;mysql&quot;。</p>
-   */
-  Product?: string
-  /**
-   * <p>偏移量，默认0。</p>
-   */
-  Offset?: number
-  /**
-   * <p>返回数量，默认20，最大值为50。</p>
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -3796,29 +4003,23 @@ export interface CreateUserAutonomyProfileRequest {
 }
 
 /**
- * mongodb慢查模板概览明细
+ * DescribeDBDiagEvent请求参数结构体
  */
-export interface Aggregation {
+export interface DescribeDBDiagEventRequest {
   /**
-   * 平均执行时间（ms）。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+
+查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx
    */
-  AvgExecTime?: number
+  InstanceId: string
   /**
-   * 平均扫描行数。
+   * 事件 ID 。通过“获取实例诊断历史[DescribeDBDiagHistory](https://cloud.tencent.com/document/product/1130/39559) ”获取。
    */
-  AvgDocsExamined?: number
+  EventId: number
   /**
-   * 产生慢查次数（/天）。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。
    */
-  SlowLogCount?: number
-  /**
-   * 内存排序次数。
-   */
-  SortCount?: number
-  /**
-   * 慢查模板概览。
-   */
-  SlowLogs?: Array<string>
+  Product?: string
 }
 
 /**
@@ -4273,23 +4474,51 @@ export interface MySqlProcess {
 }
 
 /**
- * DescribeDBDiagEvent请求参数结构体
+ * mongodb慢查模板概览明细
  */
-export interface DescribeDBDiagEventRequest {
+export interface Aggregation {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * 平均执行时间（ms）。
+   */
+  AvgExecTime?: number
+  /**
+   * 平均扫描行数。
+   */
+  AvgDocsExamined?: number
+  /**
+   * 产生慢查次数（/天）。
+   */
+  SlowLogCount?: number
+  /**
+   * 内存排序次数。
+   */
+  SortCount?: number
+  /**
+   * 慢查模板概览。
+   */
+  SlowLogs?: Array<string>
+}
 
-查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx
-   */
-  InstanceId: string
+/**
+ * 参与死锁的单个事务。
+ */
+export interface DeadlockTransaction {
   /**
-   * 事件 ID 。通过“获取实例诊断历史[DescribeDBDiagHistory](https://cloud.tencent.com/document/product/1130/39559) ”获取。
+   * <p>事务最终状态。Rollback（被回滚，对应 IsVictim=true）/ Normal（正常，对应 IsVictim=false）/ Unknown（无 victim 信息）。</p>
    */
-  EventId: number
+  Status?: string
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。
+   * <p>SQL Server 引擎内的事务 ID。同实例短期内唯一。与 Auxiliary 记录里的 transaction_id 对齐。</p>
    */
-  Product?: string
+  TransactionId?: string
+  /**
+   * <p>本事务是否为牺牲事务。true 表示 SQL Server 已回滚该事务；false 表示正常提交；null 表示 XML 缺 VictimProcessIds 无法判定。</p>
+   */
+  IsVictim?: boolean
+  /**
+   * <p>该事务下的进程/会话列表。并行计划下同一事务可能包含多个 worker（SessionId 相同 ExecutionContextId 不同）。</p>
+   */
+  Sessions?: Array<DeadlockSession>
 }
 
 /**
@@ -4319,22 +4548,29 @@ export interface DescribeNoPrimaryKeyTablesRequest {
 }
 
 /**
- * 会话统计的维度信息,可以多个维度
+ * SQL Server 执行栈中的单个帧。
  */
-export interface StatDimension {
+export interface DeadlockFrame {
   /**
-   * 维度名称，目前仅支持：SqlTag。
+   * <p>帧对应的行号（存储过程内的行号）。</p>
    */
-  Dimension: string
+  Line?: number
   /**
-   * SQL 标签过滤与统计信息
-示例：
-
-示例 1：[p=position] 统计包含 p=position 标签的 SQL 会话。
-示例 2：[p] 统计包含 p 标签的 SQL 会话。
-示例 3：[p=position, c=idCard] 统计同时包含 p=position 标签和 c=idCard 标签的 SQL 会话。
+   * <p>语句在存储过程文本内的起始字节偏移。</p>
    */
-  Data?: Array<string>
+  StatementStart?: number
+  /**
+   * <p>存储过程名。adhoc 表示动态 SQL、非存过。</p>
+   */
+  ProcName?: string
+  /**
+   * <p>SQL 句柄（0x 十六进制字节），用于拉取具体语句文本和关联执行计划。</p>
+   */
+  SqlHandle?: string
+  /**
+   * <p>语句在存储过程文本内的结束字节偏移。StatementStart/StatementEnd 组合用于精确切片。</p>
+   */
+  StatementEnd?: number
 }
 
 /**
@@ -5125,6 +5361,25 @@ export interface Process {
 }
 
 /**
+ * 会话统计的维度信息,可以多个维度
+ */
+export interface StatDimension {
+  /**
+   * 维度名称，目前仅支持：SqlTag。
+   */
+  Dimension: string
+  /**
+   * SQL 标签过滤与统计信息
+示例：
+
+示例 1：[p=position] 统计包含 p=position 标签的 SQL 会话。
+示例 2：[p] 统计包含 p 标签的 SQL 会话。
+示例 3：[p=position, c=idCard] 统计同时包含 p=position 标签和 c=idCard 标签的 SQL 会话。
+   */
+  Data?: Array<string>
+}
+
+/**
  * ModifyAuditService返回参数结构体
  */
 export interface ModifyAuditServiceResponse {
@@ -5227,21 +5482,29 @@ export interface DeleteRedisBigKeyAnalysisTasksRequest {
 }
 
 /**
- * 指标信息。
+ * DescribeDeadLockLogs返回参数结构体
  */
-export interface IssueTypeInfo {
+export interface DescribeDeadLockLogsResponse {
   /**
-   * 指标分类：AVAILABILITY：可用性，MAINTAINABILITY：可维护性，PERFORMANCE，性能，RELIABILITY可靠性。
+   * <p>是否还有更多分页。true 表示 Offset+Limit &lt; TotalCount，客户端可用 Offset+Limit 与本次 ResultVersion 继续翻页。</p>
    */
-  IssueType: string
+  HasMore?: boolean
   /**
-   * 异常事件。
+   * <p>当前查询窗口内可用的死锁事件总数（去重、关联、时间窗口过滤后）。</p>
    */
-  Events: Array<EventInfo>
+  TotalCount?: number
   /**
-   * 异常事件总数。
+   * <p>结果集版本号（SHA-256 十六进制）。同一批数据在同一查询条件下保持不变；数据发生变化时版本变化。翻页必须透传。</p>
    */
-  TotalCount: number
+  ResultVersion?: string
+  /**
+   * <p>死锁事件列表。按事件时间倒序排列（最近的死锁在前）。</p>
+   */
+  Items?: Array<DeadLockLogItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5470,6 +5733,44 @@ export interface DescribeTopSpaceSchemasResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDeadLockLogs请求参数结构体
+ */
+export interface DescribeDeadLockLogsRequest {
+  /**
+   * <p>服务产品类型。取值：sqlserver（云数据库 Sqlserver）。</p>
+   */
+  Product: string
+  /**
+   * <p>实例 ID。SQLServer: mssql-xxxx。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>查询开始时间，格式 yyyy-MM-dd HH:mm:ss，按 UTC+8 解析；也兼容带偏移的 ISO-8601（如 2026-09-16T00:00:00+08:00）。半开区间左闭。</p><p>参数格式：2026-09-16 00:00:00</p>
+   */
+  StartTime: string
+  /**
+   * <p>查询结束时间，格式同 StartTime。EndTime 必须大于 StartTime，且总查询窗口不超过 24 小时。半开区间右开。</p><p>参数格式：2026-09-16 23:59:59</p>
+   */
+  EndTime: string
+  /**
+   * <p>分页偏移量，非负整数，默认 0。当 Offset&gt;0 时必须同时传入 ResultVersion，否则报 INVALID_PARAMETER。</p>
+   */
+  Offset?: number
+  /**
+   * <p>单页返回死锁事件数量，范围 [1, 100]。默认 20。</p>
+   */
+  Limit?: number
+  /**
+   * <p>是否在响应中包含原始死锁图 XML（XmlReport）。默认 false，避免响应体过大。仅在需要绘制完整死锁环时置 true。</p>
+   */
+  IncludeXml?: boolean
+  /**
+   * <p>结果集版本号，最大 128 字符。首次查询无需传入；翻页时必须透传首次响应中的 ResultVersion，服务端会校验结果集是否发生变化，变化时返回 RESULT_CHANGED 提示重新拉取首页。</p>
+   */
+  ResultVersion?: string
 }
 
 /**
@@ -6006,6 +6307,92 @@ export interface DescribeRedisProcessListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 参与死锁的单个进程/会话。
+ */
+export interface DeadlockSession {
+  /**
+   * <p>SQL 归一化后的指纹（SHA-1 前 16 位）。去掉字面量、注释、参数名、空白差异后计算，抗字面量差异，用于聚合相同 SQL 模板。SqlText 为空时为 null。</p>
+   */
+  SqlFingerprint?: string
+  /**
+   * <p>SQL Server 登录账号，用于权限归因。可判断是 SQLAgent、业务账号还是 DBA 账号。</p>
+   */
+  LoginName?: string
+  /**
+   * <p>会话执行栈帧列表（xml 的 executionStack.frame），用于定位到存储过程内的具体语句区间。partial 事件为空数组。</p>
+   */
+  Frames?: Array<DeadlockFrame>
+  /**
+   * <p>事务隔离级别，例如 &#39;read committed (2)&#39;、&#39;repeatable read (3)&#39;、&#39;serializable (4)&#39; 等。显著影响锁形态和死锁模式。</p>
+   */
+  IsolationLevel?: string
+  /**
+   * <p>进程状态。常见值：suspended（挂起等锁）/ running / background。判断是否运行中被检测终止。</p>
+   */
+  ProcessStatus?: string
+  /**
+   * <p>客户端应用名（xml 的 clientapp）。判断连接来源，例如 SQLAgent Job、ORM、SSMS、业务服务名等。</p>
+   */
+  ClientApp?: string
+  /**
+   * <p>会话的 DEADLOCK_PRIORITY 设置。-10 表示主动降级为牺牲者候选；10 表示优先级更高。可解释为何这一方成为牺牲品。</p>
+   */
+  Priority?: number
+  /**
+   * <p>会话当前活跃的数据库名（xml 的 currentdbname）。</p>
+   */
+  DatabaseName?: string
+  /**
+   * <p>本进程当前持有的锁资源描述列表（死锁环的持有边）。格式同 LockRequest 但结尾为 &#39;holding&#39;。partial 事件为空数组。</p>
+   */
+  LockHold?: Array<string>
+  /**
+   * <p>会话最近执行的 SQL 文本（xml 的 InputBuf）。是 AI 诊断的主输入与 SqlFingerprint 的来源。</p>
+   */
+  SqlText?: string
+  /**
+   * <p>客户端主机的 IP 地址（点分十进制，来自 message.ip）。判断是否来自同一台机器、批处理源。</p>
+   */
+  Host?: string
+  /**
+   * <p>会话当前活跃的数据库 ID（xml 的 currentdb）。</p>
+   */
+  DatabaseId?: number
+  /**
+   * <p>本事务是否为牺牲事务。true 表示 SQL Server 已回滚该事务；false 表示正常提交；null 表示 XML 缺 VictimProcessIds 无法判定。</p>
+   */
+  IsVictim?: boolean
+  /**
+   * <p>等锁时长，单位毫秒。判断死锁检测延迟、事务超时的辅助指标。</p>
+   */
+  WaitTimeMs?: number
+  /**
+   * <p>事务开始时间（xml 里的 lasttranstarted，本地时间字符串，如 2026-09-16T14:58:23.840）。用于分析长事务、锁持有时长。</p>
+   */
+  LastTransStarted?: string
+  /**
+   * <p>该边对应进程的并行执行子线程 ID。</p>
+   */
+  ExecutionContextId?: number
+  /**
+   * <p>SQL Server 引擎内的进程指针，例如 process260256c7468。与 Resources.Owners/Waiters.ProcessId 拼接死锁环。partial 事件为 null。</p>
+   */
+  ProcessId?: string
+  /**
+   * <p>归一化后的客户端应用名。去掉 SQLAgent 的 JobId（16-64 位十六进制串）、Step 号、GUID、末尾进程号等易变部分，用于按应用类别聚合。</p>
+   */
+  ClientAppNormalized?: string
+  /**
+   * <p>本进程正在等待的锁资源描述列表（死锁环的等待边）。每条形如 &#39;keylock on tempdb.dbo.dl_a mode X waiting&#39;。applicationlock 会展示原始资源名（如 &#39;lock_a&#39;）。partial 事件为空数组。</p>
+   */
+  LockRequest?: Array<string>
+  /**
+   * <p>SQL Server 会话 ID。日志排查主键。</p>
+   */
+  SessionId?: number
 }
 
 /**

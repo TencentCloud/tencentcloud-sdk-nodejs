@@ -22563,6 +22563,10 @@ export interface NotifyAssetConfigItem {
    * <p>总数</p>
    */
   TotalCount?: number
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectIds?: Array<number | bigint>
 }
 
 /**
@@ -50835,30 +50839,29 @@ export interface ModifyVulWhitelistConfigResponse {
  */
 export interface WebhookAssetScope {
   /**
-   * 资产范围类型（对齐 NotifyAssetRange）
-枚举值：
-1：全部主机（可剔除）
-2：自选主机
-3：按标签选择
+   * <p>资产范围类型（对齐 NotifyAssetRange）<br>枚举值：<br>1：全部主机（可剔除）<br>2：自选主机<br>3：按标签选择</p>
    */
   AssetRange: number
   /**
-   * 选中的主机 quuid 列表，仅 AssetRange=2 生效
+   * <p>选中的主机 quuid 列表，仅 AssetRange=2 生效</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 排除的主机 quuid 列表，仅 AssetRange=1 生效
+   * <p>排除的主机 quuid 列表，仅 AssetRange=1 生效</p>
    */
   ExcludedInstanceIds?: Array<string>
   /**
-   * 安全中心标签 ID 列表，仅 AssetRange=3 生效
+   * <p>安全中心标签 ID 列表，仅 AssetRange=3 生效</p>
    */
   TagIds?: Array<number | bigint>
   /**
-   * 腾讯云标签列表，仅 AssetRange=3 生效
-入参限制：AssetRange=3 时 TagIds + CloudTags 不能同时为空
+   * <p>腾讯云标签列表，仅 AssetRange=3 生效<br>入参限制：AssetRange=3 时 TagIds + CloudTags 不能同时为空</p>
    */
   CloudTags?: Array<string>
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectIds?: Array<number | bigint>
 }
 
 /**

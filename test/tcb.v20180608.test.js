@@ -118,9 +118,9 @@ it("tcb.v20180608.DescribeClient", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyResourcePermission", async function () {
+it("tcb.v20180608.GetFunction", async function () {
     try {
-       const data = await client.ModifyResourcePermission({})
+       const data = await client.GetFunction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,6 +458,16 @@ it("tcb.v20180608.ModifyHTTPServiceRoute", async function () {
     }
 })
 
+it("tcb.v20180608.CreatePlatformHTTPServiceRoute", async function () {
+    try {
+       const data = await client.CreatePlatformHTTPServiceRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeLoginConfig", async function () {
     try {
        const data = await client.DescribeLoginConfig({})
@@ -468,9 +478,9 @@ it("tcb.v20180608.DescribeLoginConfig", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeManagedAIModelList", async function () {
+it("tcb.v20180608.DescribePlatformHTTPServiceRoute", async function () {
     try {
-       const data = await client.DescribeManagedAIModelList({})
+       const data = await client.DescribePlatformHTTPServiceRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -481,6 +491,16 @@ it("tcb.v20180608.DescribeManagedAIModelList", async function () {
 it("tcb.v20180608.DeleteProvider", async function () {
     try {
        const data = await client.DeleteProvider({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyPlatformHTTPServiceRoute", async function () {
+    try {
+       const data = await client.ModifyPlatformHTTPServiceRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,6 +678,16 @@ it("tcb.v20180608.CreateCloudApp", async function () {
     }
 })
 
+it("tcb.v20180608.ModifyResourcePermission", async function () {
+    try {
+       const data = await client.ModifyResourcePermission({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribePGUserMigration", async function () {
     try {
        const data = await client.DescribePGUserMigration({})
@@ -668,9 +698,9 @@ it("tcb.v20180608.DescribePGUserMigration", async function () {
     }
 })
 
-it("tcb.v20180608.GetFunction", async function () {
+it("tcb.v20180608.DescribeManagedAIModelList", async function () {
     try {
-       const data = await client.GetFunction({})
+       const data = await client.DescribeManagedAIModelList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +771,16 @@ it("tcb.v20180608.DescribePlatforms", async function () {
 it("tcb.v20180608.DescribePlatformCreditsUsage", async function () {
     try {
        const data = await client.DescribePlatformCreditsUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.VerifyPlatformHTTPServiceRoute", async function () {
+    try {
+       const data = await client.VerifyPlatformHTTPServiceRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1181,6 +1221,16 @@ it("tcb.v20180608.DescribeCloudAppCosInfo", async function () {
 it("tcb.v20180608.DescribeEnvPlans", async function () {
     try {
        const data = await client.DescribeEnvPlans({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DeletePlatformHTTPServiceRoute", async function () {
+    try {
+       const data = await client.DeletePlatformHTTPServiceRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -278,6 +278,16 @@ it("dbbrain.v20210527.CreateSchedulerMailProfile", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeDeadLockLogs", async function () {
+    try {
+       const data = await client.DescribeDeadLockLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeIndexRecommendInfo", async function () {
     try {
        const data = await client.DescribeIndexRecommendInfo({})
@@ -428,9 +438,9 @@ it("dbbrain.v20210527.UpdateAgentSwitch", async function () {
     }
 })
 
-it("dbbrain.v20210527.ModifyDiagDBInstanceConf", async function () {
+it("dbbrain.v20210527.DescribeAuditLogFiles", async function () {
     try {
-       const data = await client.ModifyDiagDBInstanceConf({})
+       const data = await client.DescribeAuditLogFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +758,9 @@ it("dbbrain.v20210527.DescribeHealthScoreTimeSeries", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeAuditLogFiles", async function () {
+it("dbbrain.v20210527.ModifyDiagDBInstanceConf", async function () {
     try {
-       const data = await client.DescribeAuditLogFiles({})
+       const data = await client.ModifyDiagDBInstanceConf({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

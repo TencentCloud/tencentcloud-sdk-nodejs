@@ -2795,33 +2795,17 @@ export interface ModifyScheduleRequest {
 }
 
 /**
- * DescribeWatermarkTemplates请求参数结构体
+ * DescribeStreamPackageSourceLocations请求参数结构体
  */
-export interface DescribeWatermarkTemplatesRequest {
+export interface DescribeStreamPackageSourceLocationsRequest {
   /**
-   * 水印模板唯一标识过滤条件，数组长度限制：100。
+   * 页数，取值范围为[1, 1000]。
    */
-  Definitions?: Array<number | bigint>
+  PageNum?: number
   /**
-   * 水印类型过滤条件，可选值：
-<li>image：图片水印；</li>
-<li>text：文字水印。</li>
+   * 每页大小，取值范围为[1, 1000]。
    */
-  Type?: string
-  /**
-   * 分页偏移量，默认值：0。
-   */
-  Offset?: number
-  /**
-   * 返回记录条数
-<li>默认值：10；</li>
-<li>最大值：100。</li>
-   */
-  Limit?: number
-  /**
-   * 水印模板标识过滤条件，长度限制：64 个字符。
-   */
-  Name?: string
+  PageSize?: number
 }
 
 /**
@@ -4529,14 +4513,25 @@ AudioNoise：音频噪声。
 }
 
 /**
- * 内容审核鉴黄任务输入参数类型
+ * 图片处理图层融合配置
  */
-export interface AiReviewPornTaskInput {
+export interface AiComposeConfig {
   /**
-   * 鉴黄模板 ID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>能力配置开关。</p><li>ON：开启（默认值）；</li><li>OFF：关闭。</li>
    */
-  Definition: number
+  Switch?: string
+  /**
+   * <p>合成模型。可选值：compose-1.0-lite（默认值，可不传）。</p>
+   */
+  Model?: string
+  /**
+   * <p>画布定义。可省略：省略时取 ZIndex 最小的图层（底层图层）的自然尺寸。</p>
+   */
+  Canvas?: ImageComposeCanvas
+  /**
+   * <p>图层列表，图层的唯一来源。至少 1 层、最多 20 层。</p>
+   */
+  Layers?: Array<ImageComposeLayer>
 }
 
 /**
@@ -4817,6 +4812,10 @@ export interface ImageTaskInput {
    * <p>图片质量评估配置</p>
    */
   ImageQualityConfig?: ImageQualityConfig
+  /**
+   * <p>图层融合配置。</p>
+   */
+  AiComposeConfig?: AiComposeConfig
 }
 
 /**
@@ -8756,6 +8755,36 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
 }
 
 /**
+ * DescribeWatermarkTemplates请求参数结构体
+ */
+export interface DescribeWatermarkTemplatesRequest {
+  /**
+   * 水印模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 水印类型过滤条件，可选值：
+<li>image：图片水印；</li>
+<li>text：文字水印。</li>
+   */
+  Type?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数
+<li>默认值：10；</li>
+<li>最大值：100。</li>
+   */
+  Limit?: number
+  /**
+   * 水印模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
+}
+
+/**
  * DescribeStreamPackageActivateState请求参数结构体
  */
 export type DescribeStreamPackageActivateStateRequest = null
@@ -9863,17 +9892,13 @@ export interface DescribeLiveRecordTemplatesRequest {
 }
 
 /**
- * DescribeStreamPackageSourceLocations请求参数结构体
+ * DescribeStreamLinkFlow请求参数结构体
  */
-export interface DescribeStreamPackageSourceLocationsRequest {
+export interface DescribeStreamLinkFlowRequest {
   /**
-   * 页数，取值范围为[1, 1000]。
+   * 流Id。
    */
-  PageNum?: number
-  /**
-   * 每页大小，取值范围为[1, 1000]。
-   */
-  PageSize?: number
+  FlowId: string
 }
 
 /**
@@ -16229,6 +16254,16 @@ OcrFullTextRecognition 时有效。
 }
 
 /**
+ * StopStreamLinkFlow返回参数结构体
+ */
+export interface StopStreamLinkFlowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询输出的SRT配置信息。
  */
 export interface DescribeOutputSRTSettings {
@@ -16289,13 +16324,21 @@ export interface DescribeOutputSRTSettings {
 }
 
 /**
- * StopStreamLinkFlow返回参数结构体
+ * 图片处理图层融合功能画布参数
  */
-export interface StopStreamLinkFlowResponse {
+export interface ImageComposeCanvas {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>画布宽度，取值范围 [1, 10240]，需与 Height 同时设置。</p>
    */
-  RequestId?: string
+  Width?: number
+  /**
+   * <p>画布高度，取值范围 [1, 10240]，需与 Width 同时设置。</p>
+   */
+  Height?: number
+  /**
+   * <p>画布底色，统一为 8 位十六进制 #RRGGBBAA（含 alpha），原样作为画布底色。缺省 #00000000（全透明）。示例：#FFFFFFFF 不透明白、#FFFFFF80 半透明白。</p><p>输出格式不支持透明通道时（如 JPEG），透明区域按该底色的 RGB 塌陷；缺省值会得到黑底，需要白底请显式传    #FFFFFFFF。</p>
+   */
+  Background?: string
 }
 
 /**
@@ -26040,13 +26083,14 @@ export interface ModifyBlindWatermarkTemplateRequest {
 }
 
 /**
- * DescribeStreamLinkFlow请求参数结构体
+ * 内容审核鉴黄任务输入参数类型
  */
-export interface DescribeStreamLinkFlowRequest {
+export interface AiReviewPornTaskInput {
   /**
-   * 流Id。
+   * 鉴黄模板 ID。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: string
+  Definition: number
 }
 
 /**
@@ -26247,6 +26291,28 @@ export interface AiRecognitionTaskFaceResultOutput {
    * 智能人脸识别结果集。
    */
   ResultSet: Array<AiRecognitionTaskFaceResultItem>
+}
+
+/**
+ * 图片处理图层融合功能图层数据结构
+ */
+export interface ImageComposeLayer {
+  /**
+   * <p>图层堆叠顺序，必填。同一请求内不可重复，数值越大越靠上（建议从 0 开始连续编号）。</p>
+   */
+  ZIndex?: number
+  /**
+   * <p>图层图片来源，必填。支持 URL / COS / AWS-S3 / VOD。</p>
+   */
+  InputInfo?: MediaInputInfo
+  /**
+   * <p>图层在画布中的位置与尺寸，必填。长度为 4 的数组 [X1, Y1, X2, Y2]：左上角 + 右下角坐标，要求 X2 &gt; X1、Y2 &gt;    Y1。</p><p>两种语义（与图片擦除能力的 BoundingBox 对齐）：</p><ul><li>像素：坐标值，取值范围 [-10240,    10240]，允许为负或超出画布（超出部分被裁掉）；</li><li>比例：各值 ∈ [-1, 1]，按画布宽高换算（x 乘画布宽、y    乘画布高）。</li></ul><p>图层会缩放填满该矩形；超出画布的部分一律裁掉，输出尺寸恒等于画布尺寸。</p>
+   */
+  BoundingBox?: Array<number>
+  /**
+   * <p>坐标单位，与图片擦除能力对齐。取值：</p><ul><li>0：自动判定（不传时的默认值）；</li><li>1：比例；</li><li>2：像素。</li></ul><p>自动判定规则：四个值全部大于 1 按像素解释、全部不大于 1 按比例解释；混合取值会返回InvalidParameter，建议始终显式指定。</p>
+   */
+  BoundingBoxUnitType?: number
 }
 
 /**
@@ -27525,7 +27591,7 @@ export interface AiPosterSuiteConfig {
    */
   CustomVariables?: Array<CustomVariable>
   /**
-   * <p>模型名称。</p><p>枚举值：</p><ul><li>WAND-suite-1.0-flash： WAND-suite-1.0-flash</li></ul>
+   * <p>模型名称。</p><p>枚举值：</p><ul><li>suite-1.0-flash： suite-1.0-flash</li></ul>
    */
   Model?: string
 }

@@ -1407,15 +1407,15 @@ export interface BackupTableContent {
  */
 export interface CreateInstanceNewResponse {
   /**
-   * 流程ID
+   * <p>流程ID</p>
    */
   FlowId?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   ErrorMsg?: string
   /**
@@ -1494,90 +1494,91 @@ export interface ModifySecurityGroupsRequest {
  */
 export interface CreateInstanceNewRequest {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone: string
   /**
-   * FE规格
+   * <p>FE规格</p>
    */
   FeSpec: CreateInstanceSpec
   /**
-   * BE规格
+   * <p>BE规格</p>
    */
   BeSpec: CreateInstanceSpec
   /**
-   * 是否高可用
+   * <p>是否高可用</p>
    */
   HaFlag: boolean
   /**
-   * 用户VPCID
+   * <p>用户VPCID</p>
    */
   UserVPCId: string
   /**
-   * 用户子网ID
+   * <p>用户子网ID</p>
    */
   UserSubnetId: string
   /**
-   * 产品版本号
+   * <p>产品版本号</p>
    */
   ProductVersion: string
   /**
-   * 付费类型
+   * <p>付费类型</p>
    */
   ChargeProperties: ChargeProperties
   /**
-   * 实例名字
+   * <p>实例名字</p>
    */
   InstanceName: string
   /**
-   * 数据库密码
+   * <p>数据库密码</p>
    */
   DorisUserPwd: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 高可用类型：
-0：非高可用（只有1个FE，FeSpec.CreateInstanceSpec.Count=1），
-1：读高可用（至少需部署3个FE，FeSpec.CreateInstanceSpec.Count>=3，且为奇数），
-2：读写高可用（至少需部署5个FE，FeSpec.CreateInstanceSpec.Count>=5，且为奇数）。
+   * <p>高可用类型：<br>0：非高可用（只有1个FE，FeSpec.CreateInstanceSpec.Count=1），<br>1：读高可用（至少需部署3个FE，FeSpec.CreateInstanceSpec.Count&gt;=3，且为奇数），<br>2：读写高可用（至少需部署5个FE，FeSpec.CreateInstanceSpec.Count&gt;=5，且为奇数）。</p>
    */
   HaType?: number
   /**
-   * 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储
+   * <p>表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储</p>
    */
   CaseSensitive?: number
   /**
-   * 是否开启多可用区
+   * <p>是否开启多可用区</p>
    */
   EnableMultiZones?: boolean
   /**
-   * 开启多可用区后，用户的所有可用区和子网信息
+   * <p>开启多可用区后，用户的所有可用区和子网信息</p>
    * @deprecated
    */
   UserMultiZoneInfos?: NetworkInfo
   /**
-   * 开启多可用区后，用户的所有可用区和子网信息
+   * <p>开启多可用区后，用户的所有可用区和子网信息</p>
    */
   UserMultiZoneInfoArr?: Array<NetworkInfo>
   /**
-   * 是否存算分离
+   * <p>是否存算分离</p>
    */
   IsSSC?: boolean
   /**
-   * CU数
+   * <p>CU数</p>
    */
   SSCCU?: number
   /**
-   * 缓存盘大小
+   * <p>缓存盘大小</p>
    * @deprecated
    */
   CacheDiskSize?: string
   /**
-   * 缓存盘大小
+   * <p>缓存盘大小</p>
    */
   CacheDataDiskSize?: number
+  /**
+   * <p>磁盘加密</p>
+   */
+  DiskEncrypt?: number
 }
 
 /**

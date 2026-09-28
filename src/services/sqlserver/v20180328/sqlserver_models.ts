@@ -3294,6 +3294,11 @@ export interface DescribeBackupsResponse {
  */
 export interface CreateExportTaskResponse {
   /**
+   * <p>下载文件名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4207,6 +4212,21 @@ export interface ExportFile {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncRequestId?: number
+  /**
+   * <p>日志开始时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogStartTime?: string
+  /**
+   * <p>日志结束时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogEndTime?: string
+  /**
+   * <p>日志过滤条件</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogFilter?: string
 }
 
 /**
@@ -8535,175 +8555,180 @@ export interface DescribeDBPrivilegeByAccountRequest {
  */
 export interface LogResult {
   /**
-   * 时间戳
+   * <p>时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp?: number
   /**
-   * 错误类别
+   * <p>错误类别</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Category?: string
   /**
-   * 客户端应用程序名称
+   * <p>客户端应用程序名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientAppName?: string
   /**
-   * 客户端主机名
+   * <p>客户端主机名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientHostName?: string
   /**
-   * CPU 时间
+   * <p>CPU 时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuTime?: number
   /**
-   * 数据库 ID
+   * <p>数据库 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseId?: number
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
-   * 执行时间
+   * <p>执行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: number
   /**
-   * 错误编号
+   * <p>错误编号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorNumber?: number
   /**
-   * 是否被拦截
+   * <p>是否被拦截</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsIntercepted?: string
   /**
-   * 最后行计数
+   * <p>最后行计数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastRowCount?: number
   /**
-   * 逻辑读取
+   * <p>逻辑读取</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogicalReads?: number
   /**
-   * 消息
+   * <p>消息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
-   * 对象 ID
+   * <p>对象 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectId?: number
   /**
-   * 对象名称
+   * <p>对象名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectName?: string
   /**
-   * 对象类型
+   * <p>对象类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectType?: string
   /**
-   * 输出参数
+   * <p>输出参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputParameters?: string
   /**
-   * 参数化计划句柄
+   * <p>参数化计划句柄</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterizedPlanHandle?: string
   /**
-   * 物理读取
+   * <p>物理读取</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhysicalReads?: number
   /**
-   * 结果
+   * <p>结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
-   * 行计数
+   * <p>行计数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RowCount?: number
   /**
-   * 服务器主体名称
+   * <p>服务器主体名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServerPrincipalName?: string
   /**
-   * 会话服务器主体名称
+   * <p>会话服务器主体名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionServerPrincipalName?: string
   /**
-   * 严重性
+   * <p>严重性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Severity?: number
   /**
-   * 源数据库 ID
+   * <p>源数据库 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceDatabaseId?: number
   /**
-   * SQL 文本
+   * <p>SQL 文本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SqlText?: string
   /**
-   * 状态
+   * <p>状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: number
   /**
-   * 语句
+   * <p>语句</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Statement?: string
   /**
-   * 系统线程 ID
+   * <p>系统线程 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SystemThreadId?: number
   /**
-   * 事务 ID
+   * <p>事务 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TransactionId?: number
   /**
-   * 用户定义
+   * <p>用户定义</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserDefined?: string
   /**
-   * 用户名
+   * <p>用户名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
-   * 写入
+   * <p>写入</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Writes?: number
   /**
-   * 目标
+   * <p>目标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Destination?: string
+  /**
+   * <p>事件名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventName?: string
 }
 
 /**
