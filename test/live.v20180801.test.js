@@ -18,6 +18,16 @@ const client = new tencentcloud.live.v20180801.Client({
 })
 describe("live.v20180801.test.js", function () {
 
+it("live.v20180801.DescribeLiveSmartEraseRules", async function () {
+    try {
+       const data = await client.DescribeLiveSmartEraseRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeCasterList", async function () {
     try {
        const data = await client.DescribeCasterList({})
@@ -298,9 +308,9 @@ it("live.v20180801.DescribeLiveDomainReferer", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveTimeShiftWriteSizeInfoList", async function () {
+it("live.v20180801.DeleteLiveSmartEraseRule", async function () {
     try {
-       const data = await client.DescribeLiveTimeShiftWriteSizeInfoList({})
+       const data = await client.DeleteLiveSmartEraseRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +361,16 @@ it("live.v20180801.CreateCasterInputPushUrl", async function () {
 it("live.v20180801.DescribeCasterOutputInfos", async function () {
     try {
        const data = await client.DescribeCasterOutputInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DeleteLiveSmartEraseTemplate", async function () {
+    try {
+       const data = await client.DeleteLiveSmartEraseTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -631,6 +651,16 @@ it("live.v20180801.ModifyCasterMarkPicInfo", async function () {
 it("live.v20180801.DescribeCasterPlayUrl", async function () {
     try {
        const data = await client.DescribeCasterPlayUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeLiveTimeShiftWriteSizeInfoList", async function () {
+    try {
+       const data = await client.DescribeLiveTimeShiftWriteSizeInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1018,6 +1048,16 @@ it("live.v20180801.ModifyLiveTranscodeTemplate", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveSmartEraseTemplates", async function () {
+    try {
+       const data = await client.DescribeLiveSmartEraseTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeDeliverLogDownList", async function () {
     try {
        const data = await client.DescribeDeliverLogDownList({})
@@ -1261,6 +1301,26 @@ it("live.v20180801.DescribeLivePullStreamTaskStatus", async function () {
 it("live.v20180801.SwitchBackupStream", async function () {
     try {
        const data = await client.SwitchBackupStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.CreateLiveSmartEraseRule", async function () {
+    try {
+       const data = await client.CreateLiveSmartEraseRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeLiveSmartEraseTemplate", async function () {
+    try {
+       const data = await client.DescribeLiveSmartEraseTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1701,6 +1761,16 @@ it("live.v20180801.CloseSourceStream", async function () {
 it("live.v20180801.ResumeLiveStream", async function () {
     try {
        const data = await client.ResumeLiveStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLiveSmartEraseTemplate", async function () {
+    try {
+       const data = await client.ModifyLiveSmartEraseTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

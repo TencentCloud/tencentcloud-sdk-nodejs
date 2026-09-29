@@ -426,7 +426,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询控制台用户列表
+   * 查询控制台用户列表，该接口为控制台级接口，仅支持在中心地域调用：国内站请传入 ap-guangzhou，国际站请传入 ap-singapore；其他地域调用将返回 UnsupportedRegion。
    */
   async ListConsoleUsers(
     req: ListConsoleUsersRequest,
@@ -476,7 +476,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询控制台用户组列表
+   * 查询控制台用户组列表，该接口为控制台级接口，仅支持在中心地域调用：国内站请传入 ap-guangzhou，国际站请传入 ap-singapore；其他地域调用将返回 UnsupportedRegion。
    */
   async ListConsoleGroups(
     req: ListConsoleGroupsRequest,
@@ -486,7 +486,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询控制台角色列表
+   * 查询控制台角色列表，该接口为控制台级接口，仅支持在中心地域调用：国内站请传入 ap-guangzhou，国际站请传入 ap-singapore；其他地域调用将返回 UnsupportedRegion。
    */
   async ListConsoleRoles(
     req: ListConsoleRolesRequest,
@@ -582,7 +582,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询控制台用户组成员列表
+   * 查询控制台用户组成员列表，该接口为控制台级接口，仅支持在中心地域调用：国内站请传入 ap-guangzhou，国际站请传入 ap-singapore；其他地域调用将返回 UnsupportedRegion。
    */
   async ListConsoleGroupUsers(
     req: ListConsoleGroupUsersRequest,

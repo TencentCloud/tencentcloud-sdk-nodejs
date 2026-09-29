@@ -46,7 +46,7 @@ export interface DependOnBrief {
  */
 export interface ListConsoleGroupUsersRequest {
   /**
-   * <p>用户组 ID</p>
+   * <p>用户组 ID，可通过 ListConsoleGroups 接口获取</p>
    */
   GroupId: string
   /**
@@ -112,7 +112,7 @@ export interface ListConsoleGroupsRequest {
    */
   PageSize?: number
   /**
-   * <p>通过用户组 ID 批量查询</p>
+   * <p>通过用户组ID批量查询；用户组ID可通过 ListConsoleGroups 接口获取</p>
    */
   GroupIds?: Array<string>
   /**
@@ -3549,11 +3549,11 @@ export interface ListWorkflowsRequest {
  */
 export interface RolePermission {
   /**
-   * 模块ID
+   * <p>模块ID，须为当前租户已开通的功能模块（叶子节点）的模块ID（层级编码字符串，如 101=快速开始、109=工作流、116101103=工作空间管理_角色权限），非法值返回 InvalidParameterValue；模块清单可通过控制台「工作空间设置-角色权限」页面查看</p>
    */
   ModuleId?: string
   /**
-   * 权限点
+   * <p>模块访问权限，单值：R=只读，RW=读写，RWD=读写删除，N=无权限</p>
    */
   Permissions?: string
 }
@@ -3645,7 +3645,7 @@ export interface ListConsoleUsersRequest {
    */
   UserKeyword?: string
   /**
-   * <p>用于过滤角色关联的用户</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul>
+   * <p>用于过滤角色关联的用户</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul><p>可通过 ListConsoleRoles 接口获取</p>
    */
   RoleIds?: Array<string>
   /**
@@ -4244,7 +4244,7 @@ export interface ListWorkflowRunsRsp {
  */
 export interface RoleBasicInfo {
   /**
-   * <p>角色ID</p>
+   * <p>角色ID，可通过 ListWorkspaceRoles / ListConsoleRoles 接口获取；创建/更新角色时无需填写（由系统自动生成，创建成功后从响应 Data.RoleId 获取）</p>
    */
   Id?: string
   /**
@@ -4260,15 +4260,15 @@ export interface RoleBasicInfo {
    */
   DisplayName?: string
   /**
-   * <p>角色类型</p>
+   * <p>角色类型：workspace=工作空间系统角色，workspace_custom=工作空间自定义角色，console=控制台角色；查询时返回，创建时无需填写（系统固定创建自定义角色）</p>
    */
   RoleType?: string
   /**
-   * <p>角色来源，参考 web_enum_standard.proto -&gt; RoleSource：0=未指定 1=用户直绑 2=用户组继承 3=两者都有</p>
+   * <p>角色来源（查询侧字段，创建时无需填写）：0=未指定，1=用户直绑，2=用户组继承，3=两者都有</p>
    */
   Source?: number
   /**
-   * <p>继承来源的用户组名称列表，Source=1 时为空</p>
+   * <p>继承来源的用户组名称列表（查询侧字段，创建时无需填写），Source=1 时为空</p>
    */
   GroupNames?: Array<string>
 }

@@ -49,8 +49,10 @@ import {
   DescribeDeliverBandwidthListRequest,
   PlayCodeTotalInfo,
   AddLiveWatermarkRequest,
+  CreateLiveSmartEraseRuleRequest,
   CommonMixLayoutParams,
   DescribeLiveDomainCertRequest,
+  DescribeLiveSmartEraseTemplatesRequest,
   DescribeLiveEnhanceInfoListRequest,
   DiagnoseResult,
   StopRecordTaskRequest,
@@ -59,6 +61,7 @@ import {
   StopCasterPgmResponse,
   CreateCasterPgmRequest,
   SendLiveCloudEffectRequest,
+  HttpStatusInfo,
   DescribeCasterPlayUrlResponse,
   CancelCommonMixStreamResponse,
   CreateAuditImagesResponse,
@@ -95,6 +98,7 @@ import {
   StopLivePadStreamResponse,
   DescribePushBandwidthAndFluxListResponse,
   DescribeLiveStreamOnlineListResponse,
+  DescribeLiveSmartEraseTemplatesResponse,
   DescribeCasterMarkWordInfosResponse,
   TurnPushInfo,
   DescribeStreamPushInfoListResponse,
@@ -126,7 +130,7 @@ import {
   ModifyLiveTranscodeTemplateRequest,
   DeleteLivePadRuleResponse,
   DescribeLiveRecordTemplateRequest,
-  HttpStatusInfo,
+  DescribeLiveSmartEraseRulesRequest,
   CreateLiveTranscodeTemplateRequest,
   MPSResult,
   DescribeLiveTimeShiftTemplatesResponse,
@@ -196,7 +200,7 @@ import {
   SendTemporaryScriptToAvatarRoomResponse,
   CreateCasterInputPushUrlRequest,
   DescribeLiveCloudEffectListResponse,
-  DescribeLivePadTemplatesResponse,
+  DescribeCasterMarkWordInfosRequest,
   CreateAuditTemplateResponse,
   CreateCasterPgmFromPvwResponse,
   DescribeLiveTranscodeRulesRequest,
@@ -216,6 +220,7 @@ import {
   ModifyCasterLayoutInfoResponse,
   AuditTemplate,
   CreateLiveSmartEraseTemplateResponse,
+  ModifyLiveSmartEraseTemplateRequest,
   DeleteAuditImagesResponse,
   DescribePlayErrorCodeSumInfoListRequest,
   TranscodeTaskNum,
@@ -269,6 +274,7 @@ import {
   AddCasterLayoutInfoResponse,
   DeleteLivePullStreamTaskResponse,
   DescribeStreamPushInfoListRequest,
+  DeleteLiveSmartEraseRuleRequest,
   ResumeLiveStreamResponse,
   DeletePullStreamConfigRequest,
   ModifyCasterResponse,
@@ -299,7 +305,7 @@ import {
   ModifyCasterMarkPicInfoRequest,
   DescribeProIspPlaySumInfoListRequest,
   TranscodeTotalInfo,
-  UnBindLiveDomainCertResponse,
+  DeleteLiveSmartEraseTemplateRequest,
   SceneVideoReferenceVideoInfo,
   CreateLiveAvatarScriptResponse,
   StreamOnlineInfo,
@@ -348,6 +354,7 @@ import {
   DeleteLiveRecordRuleRequest,
   StopScreenshotTaskRequest,
   DescribePullTransformPushInfoRequest,
+  ModifyLiveSmartEraseTemplateResponse,
   DescribeBillBandwidthAndFluxListRequest,
   AddCasterLayoutInfoRequest,
   GenerateLiveAvatarScriptBroadcastResponse,
@@ -359,6 +366,7 @@ import {
   DomainInfoList,
   AuditImageInfo,
   CreateScreenshotTaskRequest,
+  UnBindLiveDomainCertResponse,
   DescribeCasterResponse,
   RecordTemplateInfo,
   ProIspPlayCodeDataInfo,
@@ -383,6 +391,7 @@ import {
   ModifyLiveSnapshotTemplateResponse,
   DeleteLivePadTemplateRequest,
   DescribeTimeShiftStreamListRequest,
+  DescribeLiveSmartEraseTemplateResponse,
   CasterLayoutInfo,
   DescribeLiveWatermarkRequest,
   DescribeLiveAvatarRoomsResponse,
@@ -404,6 +413,7 @@ import {
   StreamEventInfo,
   DeleteRecordTaskResponse,
   ModifyCasterOutputInfoRequest,
+  DeleteLiveSmartEraseTemplateResponse,
   CreateLiveTranscodeRuleRequest,
   AvatarAnchorInfo,
   DropLiveStreamRequest,
@@ -416,10 +426,11 @@ import {
   AuditKeywordDeleteDetail,
   CasterInfo,
   DeleteAuditTemplateRequest,
-  CreateLiveTimeShiftTemplateRequest,
+  CreateLiveSmartEraseRuleResponse,
   DescribeLiveDomainRefererResponse,
   DescribeLivePadTemplateRequest,
   DeleteLiveAvatarScriptRequest,
+  SmartEraseTemplate,
   DescribeHttpStatusInfoListRequest,
   StartLiveStreamMonitorRequest,
   DescribeCasterRequest,
@@ -454,6 +465,7 @@ import {
   DescribePullTransformPushInfoResponse,
   DescribeLiveCloudEffectListRequest,
   DescribeLiveStreamStateRequest,
+  CreateLiveTimeShiftTemplateRequest,
   CreateLiveRecordTemplateResponse,
   VideoRedrawTaskInfo,
   CreateAuditImagesRequest,
@@ -468,7 +480,7 @@ import {
   DescribeAllStreamPlayInfoListResponse,
   TaskStatusInfo,
   DescribeCasterInputInfosRequest,
-  DescribeCasterMarkWordInfosRequest,
+  DescribeLivePadTemplatesResponse,
   MonitorStreamPlayInfo,
   DescribeVisitTopSumInfoListResponse,
   TimeShiftBillData,
@@ -528,6 +540,7 @@ import {
   DescribeLiveTranscodeTemplateResponse,
   DeleteAuditRuleRequest,
   DescribeScreenShotSheetNumListResponse,
+  DescribeLiveSmartEraseRulesResponse,
   ModifyLivePullStreamTaskResponse,
   CasterMarkWordInfo,
   DescribeLiveSnapshotRulesResponse,
@@ -551,6 +564,7 @@ import {
   TimeValue,
   CreateLiveRecordResponse,
   UpdateLiveWatermarkResponse,
+  DeleteLiveSmartEraseRuleResponse,
   ModifyLiveSnapshotTemplateRequest,
   DescribeLiveRecordTemplateResponse,
   BillAreaInfo,
@@ -600,6 +614,7 @@ import {
   ForbidLiveStreamResponse,
   DescribeLiveSnapshotTemplatesResponse,
   DescribeRecordTaskResponse,
+  DescribeLiveSmartEraseTemplateRequest,
   CreateLiveAvatarRoomResponse,
   ModifyLiveAvatarRoomRequest,
   DescribeCasterPlayUrlRequest,
@@ -661,6 +676,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("live.tencentcloudapi.com", "2018-08-01", clientConfig)
+  }
+
+  /**
+   * 获取直播智能擦除规则列表。
+   */
+  async DescribeLiveSmartEraseRules(
+    req?: DescribeLiveSmartEraseRulesRequest,
+    cb?: (error: string, rep: DescribeLiveSmartEraseRulesResponse) => void
+  ): Promise<DescribeLiveSmartEraseRulesResponse> {
+    return this.request("DescribeLiveSmartEraseRules", req, cb)
   }
 
   /**
@@ -977,13 +1002,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 支持直播时移写入量数据查询。
+   * 删除直播智能擦除规则。
    */
-  async DescribeLiveTimeShiftWriteSizeInfoList(
-    req: DescribeLiveTimeShiftWriteSizeInfoListRequest,
-    cb?: (error: string, rep: DescribeLiveTimeShiftWriteSizeInfoListResponse) => void
-  ): Promise<DescribeLiveTimeShiftWriteSizeInfoListResponse> {
-    return this.request("DescribeLiveTimeShiftWriteSizeInfoList", req, cb)
+  async DeleteLiveSmartEraseRule(
+    req: DeleteLiveSmartEraseRuleRequest,
+    cb?: (error: string, rep: DeleteLiveSmartEraseRuleResponse) => void
+  ): Promise<DeleteLiveSmartEraseRuleResponse> {
+    return this.request("DeleteLiveSmartEraseRule", req, cb)
   }
 
   /**
@@ -1036,6 +1061,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCasterOutputInfosResponse) => void
   ): Promise<DescribeCasterOutputInfosResponse> {
     return this.request("DescribeCasterOutputInfos", req, cb)
+  }
+
+  /**
+   * 删除直播智能擦除模板。
+   */
+  async DeleteLiveSmartEraseTemplate(
+    req: DeleteLiveSmartEraseTemplateRequest,
+    cb?: (error: string, rep: DeleteLiveSmartEraseTemplateResponse) => void
+  ): Promise<DeleteLiveSmartEraseTemplateResponse> {
+    return this.request("DeleteLiveSmartEraseTemplate", req, cb)
   }
 
   /**
@@ -1329,6 +1364,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCasterPlayUrlResponse) => void
   ): Promise<DescribeCasterPlayUrlResponse> {
     return this.request("DescribeCasterPlayUrl", req, cb)
+  }
+
+  /**
+   * 支持直播时移写入量数据查询。
+   */
+  async DescribeLiveTimeShiftWriteSizeInfoList(
+    req: DescribeLiveTimeShiftWriteSizeInfoListRequest,
+    cb?: (error: string, rep: DescribeLiveTimeShiftWriteSizeInfoListResponse) => void
+  ): Promise<DescribeLiveTimeShiftWriteSizeInfoListResponse> {
+    return this.request("DescribeLiveTimeShiftWriteSizeInfoList", req, cb)
   }
 
   /**
@@ -1727,6 +1772,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 获取直播智能擦除模板。
+   */
+  async DescribeLiveSmartEraseTemplates(
+    req?: DescribeLiveSmartEraseTemplatesRequest,
+    cb?: (error: string, rep: DescribeLiveSmartEraseTemplatesResponse) => void
+  ): Promise<DescribeLiveSmartEraseTemplatesResponse> {
+    return this.request("DescribeLiveSmartEraseTemplates", req, cb)
+  }
+
+  /**
    * 批量获取转推日志的URL。
    */
   async DescribeDeliverLogDownList(
@@ -1979,6 +2034,26 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: SwitchBackupStreamResponse) => void
   ): Promise<SwitchBackupStreamResponse> {
     return this.request("SwitchBackupStream", req, cb)
+  }
+
+  /**
+   * 创建直播智能擦除规则。
+   */
+  async CreateLiveSmartEraseRule(
+    req: CreateLiveSmartEraseRuleRequest,
+    cb?: (error: string, rep: CreateLiveSmartEraseRuleResponse) => void
+  ): Promise<CreateLiveSmartEraseRuleResponse> {
+    return this.request("CreateLiveSmartEraseRule", req, cb)
+  }
+
+  /**
+   * 获取单个直播智能擦除模板
+   */
+  async DescribeLiveSmartEraseTemplate(
+    req: DescribeLiveSmartEraseTemplateRequest,
+    cb?: (error: string, rep: DescribeLiveSmartEraseTemplateResponse) => void
+  ): Promise<DescribeLiveSmartEraseTemplateResponse> {
+    return this.request("DescribeLiveSmartEraseTemplate", req, cb)
   }
 
   /**
@@ -2430,6 +2505,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ResumeLiveStreamResponse) => void
   ): Promise<ResumeLiveStreamResponse> {
     return this.request("ResumeLiveStream", req, cb)
+  }
+
+  /**
+   * 修改直播智能擦除模板。
+   */
+  async ModifyLiveSmartEraseTemplate(
+    req: ModifyLiveSmartEraseTemplateRequest,
+    cb?: (error: string, rep: ModifyLiveSmartEraseTemplateResponse) => void
+  ): Promise<ModifyLiveSmartEraseTemplateResponse> {
+    return this.request("ModifyLiveSmartEraseTemplate", req, cb)
   }
 
   /**

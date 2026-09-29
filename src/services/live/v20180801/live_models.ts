@@ -808,6 +808,28 @@ export interface AddLiveWatermarkRequest {
 }
 
 /**
+ * CreateLiveSmartEraseRule请求参数结构体
+ */
+export interface CreateLiveSmartEraseRuleRequest {
+  /**
+   * <p>模板 ID。</p>
+   */
+  TemplateId: number
+  /**
+   * <p>推流域名。</p>
+   */
+  DomainName?: string
+  /**
+   * <p>推流路径，与推流和播放地址中的AppName保持一致，默认为 live。</p>
+   */
+  AppName?: string
+  /**
+   * <p>流名称。<br>注：如果本参数设置为非空字符串，规则将只对此推流起作用。</p>
+   */
+  StreamName?: string
+}
+
+/**
  * 通用混流布局参数。
  */
 export interface CommonMixLayoutParams {
@@ -858,6 +880,11 @@ export interface DescribeLiveDomainCertRequest {
    */
   DomainName: string
 }
+
+/**
+ * DescribeLiveSmartEraseTemplates请求参数结构体
+ */
+export type DescribeLiveSmartEraseTemplatesRequest = null
 
 /**
  * DescribeLiveEnhanceInfoList请求参数结构体
@@ -1056,6 +1083,20 @@ export interface SendLiveCloudEffectRequest {
 原点为画面左上角，该参数指定特效渲染离原点的纵向比例，可选值 0 - 100。
    */
   YPosition?: string
+}
+
+/**
+ * 播放错误码信息
+ */
+export interface HttpStatusInfo {
+  /**
+   * 播放HTTP状态码。
+   */
+  HttpStatus?: string
+  /**
+   * 个数。
+   */
+  Num?: number
 }
 
 /**
@@ -1935,6 +1976,20 @@ export interface DescribeLiveStreamOnlineListResponse {
 }
 
 /**
+ * DescribeLiveSmartEraseTemplates返回参数结构体
+ */
+export interface DescribeLiveSmartEraseTemplatesResponse {
+  /**
+   * <p>直播智能擦除模板信息。</p>
+   */
+  Templates?: Array<SmartEraseTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCasterMarkWordInfos返回参数结构体
  */
 export interface DescribeCasterMarkWordInfosResponse {
@@ -2641,18 +2696,9 @@ export interface DescribeLiveRecordTemplateRequest {
 }
 
 /**
- * 播放错误码信息
+ * DescribeLiveSmartEraseRules请求参数结构体
  */
-export interface HttpStatusInfo {
-  /**
-   * 播放HTTP状态码。
-   */
-  HttpStatus?: string
-  /**
-   * 个数。
-   */
-  Num?: number
-}
+export type DescribeLiveSmartEraseRulesRequest = null
 
 /**
  * CreateLiveTranscodeTemplate请求参数结构体
@@ -4207,17 +4253,13 @@ export interface DescribeLiveCloudEffectListResponse {
 }
 
 /**
- * DescribeLivePadTemplates返回参数结构体
+ * DescribeCasterMarkWordInfos请求参数结构体
  */
-export interface DescribeLivePadTemplatesResponse {
+export interface DescribeCasterMarkWordInfosRequest {
   /**
-   * 直播垫片模板信息。
+   * 导播台ID。
    */
-  Templates?: Array<PadTemplate>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CasterId: number
 }
 
 /**
@@ -4556,6 +4598,60 @@ export interface CreateLiveSmartEraseTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLiveSmartEraseTemplate请求参数结构体
+ */
+export interface ModifyLiveSmartEraseTemplateRequest {
+  /**
+   * <p>模板id。</p>
+   */
+  TemplateId: number
+  /**
+   * <p>模板名称。长度上限：100字节。</p>
+   */
+  TemplateName?: string
+  /**
+   * <p>擦除类型，如&quot;illegal audio|illegal image|logo|privacy protection 。</p>
+   */
+  Type?: string
+  /**
+   * <p>关联的审核模板id, 表audio_conf 。</p><p>取值为DescribeAuditTemplates返回的TemplateId</p>
+   */
+  AuditConfId?: number
+  /**
+   * <p>描述信息。<br>长度上限：1024字节。<br>仅支持中文、英文、数字、_、-。</p>
+   */
+  Description?: string
+  /**
+   * <p>天御图片审核策略BizType Image 。</p><p>取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为&quot;Image&quot;的BizType值</p>
+   */
+  ImageBizType?: string
+  /**
+   * <p>天御音频审核策略BizType ShortAudio 。</p><p>取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为&quot;ShortAudio&quot;的BizType值</p>
+   */
+  AudioBizType?: string
+  /**
+   * <p>天御音频文本审核策略BizType ShortAudio</p><p>取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为&quot;Text&quot;的BizType值</p>
+   */
+  AudioTextBizType?: string
+  /**
+   * <p>展示模式，取值 1:延时稳态展示; 3.实时动态展示。默认1 。</p>
+   */
+  DisplayMode?: number
+  /**
+   * <p>字幕延迟展示时间,单位毫秒。默认10000。</p>
+   */
+  DisplayDelayTime?: number
+  /**
+   * <p>擦除类型选择“隐私保护”后，该项可见</p><p>枚举值：</p><ul><li>blur face： 人脸模糊</li><li>license plate： 车牌模糊</li></ul>
+   */
+  PrivacyProtection?: string
+  /**
+   * <p>仅当擦除类型选择了违规音频，该项可见</p><p>枚举值：</p><ul><li>0： 静音</li><li>1： 哔音</li></ul><p>默认值：0</p>
+   */
+  AudioErasureMode?: number
 }
 
 /**
@@ -5740,6 +5836,28 @@ export interface DescribeStreamPushInfoListRequest {
 }
 
 /**
+ * DeleteLiveSmartEraseRule请求参数结构体
+ */
+export interface DeleteLiveSmartEraseRuleRequest {
+  /**
+   * <p>直播智能擦除模板id。</p>
+   */
+  TemplateId: number
+  /**
+   * <p>推流域名。<br>域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。</p>
+   */
+  DomainName?: string
+  /**
+   * <p>，与推流和播放地址中的AppName保持一致，默认为 live。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。推流路径</p>
+   */
+  AppName?: string
+  /**
+   * <p>流名称。<br>域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。</p>
+   */
+  StreamName?: string
+}
+
+/**
  * ResumeLiveStream返回参数结构体
  */
 export interface ResumeLiveStreamResponse {
@@ -6509,13 +6627,13 @@ topspeed_H265 =》极速高清-H265。
 }
 
 /**
- * UnBindLiveDomainCert返回参数结构体
+ * DeleteLiveSmartEraseTemplate请求参数结构体
  */
-export interface UnBindLiveDomainCertResponse {
+export interface DeleteLiveSmartEraseTemplateRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>模板 ID。</p>
    */
-  RequestId?: string
+  TemplateId: number
 }
 
 /**
@@ -7444,6 +7562,16 @@ Oversea：则查询国外数据，
 }
 
 /**
+ * ModifyLiveSmartEraseTemplate返回参数结构体
+ */
+export interface ModifyLiveSmartEraseTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBillBandwidthAndFluxList请求参数结构体
  */
 export interface DescribeBillBandwidthAndFluxListRequest {
@@ -7846,6 +7974,16 @@ export interface CreateScreenshotTaskRequest {
    * 扩展字段，暂无定义。默认为空。
    */
   Extension?: string
+}
+
+/**
+ * UnBindLiveDomainCert返回参数结构体
+ */
+export interface UnBindLiveDomainCertResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8455,6 +8593,20 @@ export interface DescribeTimeShiftStreamListRequest {
 }
 
 /**
+ * DescribeLiveSmartEraseTemplate返回参数结构体
+ */
+export interface DescribeLiveSmartEraseTemplateResponse {
+  /**
+   * <p>直播智能擦除模板信息。</p>
+   */
+  Template?: SmartEraseTemplate
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 导播台布局参数。
  */
 export interface CasterLayoutInfo {
@@ -8937,6 +9089,16 @@ export interface ModifyCasterOutputInfoRequest {
 }
 
 /**
+ * DeleteLiveSmartEraseTemplate返回参数结构体
+ */
+export interface DeleteLiveSmartEraseTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateLiveTranscodeRule请求参数结构体
  */
 export interface CreateLiveTranscodeRuleRequest {
@@ -9292,49 +9454,13 @@ export interface DeleteAuditTemplateRequest {
 }
 
 /**
- * CreateLiveTimeShiftTemplate请求参数结构体
+ * CreateLiveSmartEraseRule返回参数结构体
  */
-export interface CreateLiveTimeShiftTemplateRequest {
+export interface CreateLiveSmartEraseRuleResponse {
   /**
-   * 模板名称。
-长度上限：255字节。
-仅支持中文、英文、数字、_、-。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TemplateName: string
-  /**
-   * 时移时长。单位：s。取值范围：86400 259200 604800 1296000 2592000。
-   */
-  Duration: number
-  /**
-   * 描述信息。
-仅支持中文、英文、数字、_、-。
-   */
-  Description?: string
-  /**
-   * 地域。
-Mainland：中国大陆。
-Overseas：海外及港澳台地区。
-默认值：Mainland。
-   */
-  Area?: string
-  /**
-   * 分片时长。
-可取3-10。
-单位：s。
-默认值：5。
-   */
-  ItemDuration?: number
-  /**
-   * 是否去除水印。
-传true则将录制原始流。
-默认值：false。
-   */
-  RemoveWatermark?: boolean
-  /**
-   * 转码流id列表。
-此参数仅在 RemoveWatermark为false时生效。
-   */
-  TranscodeTemplateIds?: Array<number | bigint>
+  RequestId?: string
 }
 
 /**
@@ -9369,6 +9495,68 @@ export interface DeleteLiveAvatarScriptRequest {
    * 话术ID。
    */
   ScriptId: string
+}
+
+/**
+ * 直播智能擦除模板。
+ */
+export interface SmartEraseTemplate {
+  /**
+   * <p>模板id。</p>
+   */
+  TemplateId?: number
+  /**
+   * <p>模板名称。</p>
+   */
+  TemplateName?: string
+  /**
+   * <p>模板描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>擦除类型，如&quot;illegal audio|illegal image|logo|privacy protection 。</p>
+   */
+  Type?: string
+  /**
+   * <p>关联的审核模板id, 表audio_conf 。</p><p>取值为DescribeAuditTemplates接口返回的AuditTemplates里面的TemplateId字段</p>
+   */
+  AuditConfId?: number
+  /**
+   * <p>天御图片审核策略BizType  Image 。</p><p>取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为&quot;Image&quot;的BizType值</p>
+   */
+  ImageBizType?: string
+  /**
+   * <p>天御音频审核策略BizType  ShortAudio 。</p><p>取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为&quot;ShortAudio&quot;的BizType值</p>
+   */
+  AudioBizType?: string
+  /**
+   * <p>天御音频文本审核策略BizType  ShortAudio 。</p><p>取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为&quot;Text&quot;的BizType值</p>
+   */
+  AudioTextBizType?: string
+  /**
+   * <p>模板创建时间。</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>模板修改时间。</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>展示模式，取值 1:延时稳态展示; 3.实时动态展示。默认1 。</p>
+   */
+  DisplayMode?: number
+  /**
+   * <p>字幕延迟展示时间,单位毫秒。默认10000。</p>
+   */
+  DisplayDelayTime?: number
+  /**
+   * <p>仅当擦除类型选择了违规音频，该项可见</p><p>枚举值：</p><ul><li>blur face： 人脸模糊</li><li>blur license plate： 车牌模糊</li></ul>
+   */
+  PrivacyProtection?: string
+  /**
+   * <p>仅当擦除类型选择了“隐私保护”后，该项可见</p><p>枚举值：</p><ul><li>0： 静音</li><li>1： 哔音</li></ul>
+   */
+  AudioErasureMode?: number
 }
 
 /**
@@ -10194,6 +10382,52 @@ export interface DescribeLiveStreamStateRequest {
 }
 
 /**
+ * CreateLiveTimeShiftTemplate请求参数结构体
+ */
+export interface CreateLiveTimeShiftTemplateRequest {
+  /**
+   * 模板名称。
+长度上限：255字节。
+仅支持中文、英文、数字、_、-。
+   */
+  TemplateName: string
+  /**
+   * 时移时长。单位：s。取值范围：86400 259200 604800 1296000 2592000。
+   */
+  Duration: number
+  /**
+   * 描述信息。
+仅支持中文、英文、数字、_、-。
+   */
+  Description?: string
+  /**
+   * 地域。
+Mainland：中国大陆。
+Overseas：海外及港澳台地区。
+默认值：Mainland。
+   */
+  Area?: string
+  /**
+   * 分片时长。
+可取3-10。
+单位：s。
+默认值：5。
+   */
+  ItemDuration?: number
+  /**
+   * 是否去除水印。
+传true则将录制原始流。
+默认值：false。
+   */
+  RemoveWatermark?: boolean
+  /**
+   * 转码流id列表。
+此参数仅在 RemoveWatermark为false时生效。
+   */
+  TranscodeTemplateIds?: Array<number | bigint>
+}
+
+/**
  * CreateLiveRecordTemplate返回参数结构体
  */
 export interface CreateLiveRecordTemplateResponse {
@@ -10408,13 +10642,17 @@ export interface DescribeCasterInputInfosRequest {
 }
 
 /**
- * DescribeCasterMarkWordInfos请求参数结构体
+ * DescribeLivePadTemplates返回参数结构体
  */
-export interface DescribeCasterMarkWordInfosRequest {
+export interface DescribeLivePadTemplatesResponse {
   /**
-   * 导播台ID。
+   * 直播垫片模板信息。
    */
-  CasterId: number
+  Templates?: Array<PadTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11863,6 +12101,20 @@ export interface DescribeScreenShotSheetNumListResponse {
 }
 
 /**
+ * DescribeLiveSmartEraseRules返回参数结构体
+ */
+export interface DescribeLiveSmartEraseRulesResponse {
+  /**
+   * <p>规则信息列表。</p>
+   */
+  Rules?: Array<RuleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyLivePullStreamTask返回参数结构体
  */
 export interface ModifyLivePullStreamTaskResponse {
@@ -12356,6 +12608,16 @@ export interface CreateLiveRecordResponse {
  * UpdateLiveWatermark返回参数结构体
  */
 export interface UpdateLiveWatermarkResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLiveSmartEraseRule返回参数结构体
+ */
+export interface DeleteLiveSmartEraseRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13617,6 +13879,16 @@ export interface DescribeRecordTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLiveSmartEraseTemplate请求参数结构体
+ */
+export interface DescribeLiveSmartEraseTemplateRequest {
+  /**
+   * <p>模板id。</p>
+   */
+  TemplateId: number
 }
 
 /**

@@ -188,6 +188,7 @@ import {
   ListDataSourcesResponse,
   TimeOutStrategyInfo,
   GetCodeFileRequest,
+  GetSQLRunResultResponse,
   ExploreAuthorizationRecycleObject,
   OperateResult,
   ListSchemaPage,
@@ -363,8 +364,10 @@ import {
   UpdateDataSourceRequest,
   QualityRuleGroupsTableVO,
   AssociateResourceGroupToProjectRequest,
+  ResultColumnInfo,
   ListOpsWorkflowsRequest,
   CreateWorkflowFolderResponse,
+  SqlRunResult,
   GetDataSourceRelatedTasksRequest,
   UpdateTriggerTaskBaseAttribute,
   ResourceFolderPage,
@@ -441,6 +444,7 @@ import {
   ListUpstreamTasksRequest,
   ReconciliationStrategyInfo,
   AddCalcEnginesToProjectResponse,
+  SqlRunResultRow,
   RevokePrivilegesRsp,
   ModifyQualityRuleGroupRequest,
   EventListener,
@@ -466,6 +470,7 @@ import {
   GetSQLScriptResponse,
   CreateCodeFileRequest,
   ChildDependencyConfigPage,
+  GetSQLRunResultRequest,
   LineageRelation,
   CreateTaskConfiguration,
   CompareQualityResult,
@@ -635,6 +640,7 @@ import {
   DataBackfillRange,
   QualityRuleGroupConfig,
   ListTriggerTaskVersionsResponse,
+  SqlRunExecutionResult,
   DeleteCodeFileResponse,
   QualityRuleGroupResult,
   TaskOpsInfo,
@@ -1130,6 +1136,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableProjectResponse) => void
   ): Promise<EnableProjectResponse> {
     return this.request("EnableProject", req, cb)
+  }
+
+  /**
+   * 获取SQL查询任务的数据结果。直接返回预览数据结果，而非预览结果文件路径。不传 JobExecutionId 时返回该任务下全部子查询的结果数组。返回数据总大小不超过 10MB。任务处于非终态（QUEUED/RUNNING）时不报错，返回当前 Status 与空的 Results 数组，并通过 StatusMessage 说明原因，调用方应采用指数退避策略轮询直至进入终态。
+   */
+  async GetSQLRunResult(
+    req: GetSQLRunResultRequest,
+    cb?: (error: string, rep: GetSQLRunResultResponse) => void
+  ): Promise<GetSQLRunResultResponse> {
+    return this.request("GetSQLRunResult", req, cb)
   }
 
   /**

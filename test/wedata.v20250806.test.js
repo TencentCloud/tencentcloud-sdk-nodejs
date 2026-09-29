@@ -478,6 +478,16 @@ it("wedata.v20250806.EnableProject", async function () {
     }
 })
 
+it("wedata.v20250806.GetSQLRunResult", async function () {
+    try {
+       const data = await client.GetSQLRunResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.ListTriggerTaskVersions", async function () {
     try {
        const data = await client.ListTriggerTaskVersions({})
