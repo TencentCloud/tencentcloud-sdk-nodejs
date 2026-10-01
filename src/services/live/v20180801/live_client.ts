@@ -72,6 +72,7 @@ import {
   CasterDisplayInfo,
   ModifyLiveRecordTemplateRequest,
   CallbackEventInfo,
+  DescribeOriginWhiteIpListResponse,
   DescribeTopClientIpSumInfoListResponse,
   DescribeLiveStreamStateResponse,
   DeleteLiveWatermarkRuleRequest,
@@ -340,6 +341,7 @@ import {
   DescribeLivePullStreamTaskStatusRequest,
   AuditImageDeleteDetail,
   RestartLivePullStreamTaskRequest,
+  DescribeOriginWhiteIpListRequest,
   CasterBriefInfo,
   DescribeCasterTransitionTypesRequest,
   DelayInfo,
@@ -3299,6 +3301,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeCasterResponse) => void
   ): Promise<DescribeCasterResponse> {
     return this.request("DescribeCaster", req, cb)
+  }
+
+  /**
+   * 获取直播源站的拉流IP白名单列表
+   */
+  async DescribeOriginWhiteIpList(
+    req?: DescribeOriginWhiteIpListRequest,
+    cb?: (error: string, rep: DescribeOriginWhiteIpListResponse) => void
+  ): Promise<DescribeOriginWhiteIpListResponse> {
+    return this.request("DescribeOriginWhiteIpList", req, cb)
   }
 
   /**

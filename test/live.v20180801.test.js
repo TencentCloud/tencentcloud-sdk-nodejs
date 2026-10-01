@@ -2508,6 +2508,16 @@ it("live.v20180801.DescribeCaster", async function () {
     }
 })
 
+it("live.v20180801.DescribeOriginWhiteIpList", async function () {
+    try {
+       const data = await client.DescribeOriginWhiteIpList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLivePackageInfo", async function () {
     try {
        const data = await client.DescribeLivePackageInfo({})
