@@ -18,19 +18,21 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreateWorkspaceRoleResponse,
   GetFolderRsp,
   DependOnBrief,
   ListConsoleGroupUsersRequest,
   DeleteFolderResponse,
   FolderLocator,
   ListConsoleGroupsRequest,
-  FileInfo,
+  InnerWorkflowTaskRunListOption,
   UpdateConsoleUsersResponse,
   ListWorkflowTaskRunsRequest,
   Workflow,
   TaskRetryStrategy,
   FileStorage,
   ScheduledTimeConfig,
+  FetchOption,
   DeleteWorkflowResponse,
   GetWorkspaceResponse,
   ListConsoleUsersResponse,
@@ -40,24 +42,32 @@ import {
   ParamInfo,
   UpdateWorkspaceResponse,
   InnerWorkflowTaskRunIteration,
+  CreateCatalogRequest,
   SparseCheckoutConfig,
+  StartComputeRsp,
   DeleteWorkflowRequest,
   WorkspaceInfo,
+  CreateSchemaRsp,
   GetWorkspaceRequest,
   ListConsoleGroupsRsp,
   AlarmBrief,
   CreateWorkspaceRsp,
+  RerunWorkflowRunResponse,
+  ListWorkspacesRequest,
   WorkflowTaskNodeBrief,
-  UpdateConsoleUsersRsp,
   UpdateWorkspaceRsp,
+  CreateWorkspaceRoleRequest,
+  ListSchemasResponse,
   CreateWorkflowRequest,
   ListFilesRequest,
   WorkflowRunBrief,
   WorkflowTriggerAdvancedConfiguration,
+  UpdateWorkspaceRoleResult,
   AsyncActionRsp,
   CreateFileResponse,
   TaskSchedulingParameterBrief,
   UpdateWorkflowRequest,
+  KVPair,
   TaskRunConditionRule,
   ResourceGroupInfo,
   UnbindWorkflowBundleResponse,
@@ -65,8 +75,9 @@ import {
   UnbindWorkflowBundleRsp,
   CreateFolderRequest,
   KillWorkflowRunResponse,
+  ListSchemasRsp,
   DeleteFolderRequest,
-  CreateWorkspaceRequest,
+  CommonTagInfo,
   AddConsoleUsersRsp,
   RemoveConsoleUsersRequest,
   DeleteConsoleGroupsRsp,
@@ -79,7 +90,7 @@ import {
   TaskType,
   TaskTypeNotebookExt,
   GetFolderResponse,
-  RerunWorkflowRunResponse,
+  DeleteCatalogRsp,
   CreateWorkflowRsp,
   GetFileResponse,
   AsyncOperation,
@@ -87,30 +98,41 @@ import {
   ListFilesRsp,
   RoleMetaData,
   GetWorkflowRunRsp,
+  DeleteSchemaResponse,
+  DeleteWorkspaceRoleResponse,
   ListConsoleGroupUsersResponse,
   ListWorkflowTaskRunsRsp,
   ScheduleBizEnumBrief,
+  CreateCatalogRsp,
   GetWorkspaceRsp,
+  CreateSchemaResponse,
   CreateFolderResponse,
   InnerWorkflowTaskRunIterationBrief,
   CreateConsoleGroupRequest,
+  RemoveConsoleUsersRsp,
   ListWorkflowsResponse,
   ListWorkflowsRsp,
   UpdateFolderResponse,
   RerunWorkflowRunRequest,
   DeleteWorkspaceRequest,
+  StartComputeResponse,
   LabelBrief,
+  DeleteWorkspaceRoleRequest,
+  CreateSchemaRequest,
   AddConsoleUsersRequest,
   CreateConsoleGroupRsp,
   WorkflowTaskRun,
+  DeleteCatalogResponse,
   DeleteWorkspaceRsp,
   WorkflowBaseInfoDetail,
   WorkflowBrief,
+  StopComputeRequest,
   KillWorkflowRunRequest,
   ListWorkflowTaskRunsResponse,
   AddConsoleUsersResponse,
   ListConsoleUsersRsp,
   FileMeta,
+  MetaOwner,
   UnbindWorkflowBundleRequest,
   ConsoleRoleInfo,
   ConsoleGroupUserInfo,
@@ -118,20 +140,27 @@ import {
   RunActionBrief,
   FileOutputConf,
   RunWorkflowRequest,
+  ListWorkflowRunsRsp,
   UpdateConsoleGroupRequest,
   ConsoleGroupInfo,
+  UpdateWorkspaceRoleResponse,
   ListConsoleRolesRsp,
   GetWorkflowResponse,
   GetWorkflowTaskRunRequest,
   DeleteFileResponse,
+  UpdateConsoleUsersRsp,
   CreateConsoleGroupResponse,
   ListFilesResponse,
   WorkflowTask,
+  DeleteSchemaRsp,
+  StopComputeResponse,
   AdvancedDependencyConfig,
+  StopComputeRsp,
   DeleteConsoleGroupsRequest,
   UpdateWorkflowResponse,
   GetWorkflowRequest,
-  InnerWorkflowTaskRunListOption,
+  FileInfo,
+  UpdateWorkspaceRoleRequest,
   WorkflowRun,
   FileNode,
   UpdateFolderRsp,
@@ -144,39 +173,50 @@ import {
   ListWorkflowsRequest,
   RolePermission,
   FileConfig,
+  CreateWorkspaceRoleResult,
   RunWorkflowResponse,
   ListConsoleUsersRequest,
   ListWorkflowRunsResponse,
   AdvancedParameter,
+  DeleteWorkspaceRoleResult,
   UpdateConsoleGroupResponse,
   StandardUserInfo,
   ConsoleUserInfo,
   UpdateWorkflowRsp,
+  DeleteCatalogRequest,
+  Schema,
   OrderBy,
   UpdateFolderRequest,
   DeleteFolderRsp,
   WorkflowAdvanceConfig,
+  ListSchemasRequest,
+  CreateCatalogResponse,
   DeleteConsoleGroupsResponse,
   InnerWorkflowTaskRun,
   MonitorMetricItem,
   CreateWorkflowResponse,
   ListConsoleRolesRequest,
   ListConsoleGroupUsersRsp,
+  Audit,
   AlarmGroup,
   DeleteFileRequest,
   DeleteWorkflowRsp,
   CommonFailItem,
-  RemoveConsoleUsersRsp,
+  ListWorkspacesResponse,
+  PermissionDetail,
   GetWorkflowRunResponse,
   ListConsoleGroupsResponse,
   GetWorkflowRsp,
-  ListWorkflowRunsRsp,
+  CreateWorkspaceRequest,
   RoleBasicInfo,
   GitRepoConfig,
   ListConsoleRolesResponse,
+  ListWorkspacesRsp,
   CreateWorkspaceResponse,
   UpdateFileResponse,
   CreateFolderRsp,
+  DeleteSchemaRequest,
+  StartComputeRequest,
   UpdateConsoleUsersRequest,
   GetWorkflowTaskRunRsp,
 } from "./databuddy_models"
@@ -188,6 +228,17 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("databuddy.tencentcloudapi.com", "2026-07-15", clientConfig)
+  }
+
+  /**
+     * 解绑工作流Bundle信息
+说明：本接口语义等同于规范动词清单中的 Detach，因兼容既有产品形态保留 Unbind 命名
+     */
+  async UnbindWorkflowBundle(
+    req: UnbindWorkflowBundleRequest,
+    cb?: (error: string, rep: UnbindWorkflowBundleResponse) => void
+  ): Promise<UnbindWorkflowBundleResponse> {
+    return this.request("UnbindWorkflowBundle", req, cb)
   }
 
   /**
@@ -221,13 +272,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改工作空间
+   * 创建schema
    */
-  async UpdateWorkspace(
-    req: UpdateWorkspaceRequest,
-    cb?: (error: string, rep: UpdateWorkspaceResponse) => void
-  ): Promise<UpdateWorkspaceResponse> {
-    return this.request("UpdateWorkspace", req, cb)
+  async CreateSchema(
+    req: CreateSchemaRequest,
+    cb?: (error: string, rep: CreateSchemaResponse) => void
+  ): Promise<CreateSchemaResponse> {
+    return this.request("CreateSchema", req, cb)
   }
 
   /**
@@ -261,6 +312,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询工作流运行详情
+   */
+  async GetWorkflowRun(
+    req: GetWorkflowRunRequest,
+    cb?: (error: string, rep: GetWorkflowRunResponse) => void
+  ): Promise<GetWorkflowRunResponse> {
+    return this.request("GetWorkflowRun", req, cb)
+  }
+
+  /**
    * 获取文件夹详情
    */
   async GetFolder(
@@ -278,6 +339,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteConsoleGroupsResponse) => void
   ): Promise<DeleteConsoleGroupsResponse> {
     return this.request("DeleteConsoleGroups", req, cb)
+  }
+
+  /**
+   * 查询工作空间列表
+   */
+  async ListWorkspaces(
+    req: ListWorkspacesRequest,
+    cb?: (error: string, rep: ListWorkspacesResponse) => void
+  ): Promise<ListWorkspacesResponse> {
+    return this.request("ListWorkspaces", req, cb)
   }
 
   /**
@@ -318,14 +389,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 解绑工作流Bundle信息
-说明：本接口语义等同于规范动词清单中的 Detach，因兼容既有产品形态保留 Unbind 命名
-     */
-  async UnbindWorkflowBundle(
-    req: UnbindWorkflowBundleRequest,
-    cb?: (error: string, rep: UnbindWorkflowBundleResponse) => void
-  ): Promise<UnbindWorkflowBundleResponse> {
-    return this.request("UnbindWorkflowBundle", req, cb)
+   * 删除catalog
+   */
+  async DeleteCatalog(
+    req: DeleteCatalogRequest,
+    cb?: (error: string, rep: DeleteCatalogResponse) => void
+  ): Promise<DeleteCatalogResponse> {
+    return this.request("DeleteCatalog", req, cb)
   }
 
   /**
@@ -356,6 +426,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWorkflowResponse) => void
   ): Promise<DeleteWorkflowResponse> {
     return this.request("DeleteWorkflow", req, cb)
+  }
+
+  /**
+   * 获取schema列表
+   */
+  async ListSchemas(
+    req: ListSchemasRequest,
+    cb?: (error: string, rep: ListSchemasResponse) => void
+  ): Promise<ListSchemasResponse> {
+    return this.request("ListSchemas", req, cb)
+  }
+
+  /**
+   * 修改工作空间
+   */
+  async UpdateWorkspace(
+    req: UpdateWorkspaceRequest,
+    cb?: (error: string, rep: UpdateWorkspaceResponse) => void
+  ): Promise<UpdateWorkspaceResponse> {
+    return this.request("UpdateWorkspace", req, cb)
   }
 
   /**
@@ -396,23 +486,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询工作流运行详情
+   * 创建数据目录接口
    */
-  async GetWorkflowRun(
-    req: GetWorkflowRunRequest,
-    cb?: (error: string, rep: GetWorkflowRunResponse) => void
-  ): Promise<GetWorkflowRunResponse> {
-    return this.request("GetWorkflowRun", req, cb)
+  async CreateCatalog(
+    req: CreateCatalogRequest,
+    cb?: (error: string, rep: CreateCatalogResponse) => void
+  ): Promise<CreateCatalogResponse> {
+    return this.request("CreateCatalog", req, cb)
   }
 
   /**
-   * 更新文件夹（支持重命名+移动）
+   * 删除schema
    */
-  async UpdateFolder(
-    req: UpdateFolderRequest,
-    cb?: (error: string, rep: UpdateFolderResponse) => void
-  ): Promise<UpdateFolderResponse> {
-    return this.request("UpdateFolder", req, cb)
+  async DeleteSchema(
+    req: DeleteSchemaRequest,
+    cb?: (error: string, rep: DeleteSchemaResponse) => void
+  ): Promise<DeleteSchemaResponse> {
+    return this.request("DeleteSchema", req, cb)
+  }
+
+  /**
+   * 创建工作空间角色
+   */
+  async CreateWorkspaceRole(
+    req: CreateWorkspaceRoleRequest,
+    cb?: (error: string, rep: CreateWorkspaceRoleResponse) => void
+  ): Promise<CreateWorkspaceRoleResponse> {
+    return this.request("CreateWorkspaceRole", req, cb)
+  }
+
+  /**
+   * 启动计算资源
+   */
+  async StartCompute(
+    req: StartComputeRequest,
+    cb?: (error: string, rep: StartComputeResponse) => void
+  ): Promise<StartComputeResponse> {
+    return this.request("StartCompute", req, cb)
   }
 
   /**
@@ -446,6 +556,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止计算资源
+   */
+  async StopCompute(
+    req: StopComputeRequest,
+    cb?: (error: string, rep: StopComputeResponse) => void
+  ): Promise<StopComputeResponse> {
+    return this.request("StopCompute", req, cb)
+  }
+
+  /**
    * 运行工作流
    */
   async RunWorkflow(
@@ -463,6 +583,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListFilesResponse) => void
   ): Promise<ListFilesResponse> {
     return this.request("ListFiles", req, cb)
+  }
+
+  /**
+   * 更新工作空间角色
+   */
+  async UpdateWorkspaceRole(
+    req: UpdateWorkspaceRoleRequest,
+    cb?: (error: string, rep: UpdateWorkspaceRoleResponse) => void
+  ): Promise<UpdateWorkspaceRoleResponse> {
+    return this.request("UpdateWorkspaceRole", req, cb)
   }
 
   /**
@@ -592,6 +722,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除工作空间角色
+   */
+  async DeleteWorkspaceRole(
+    req: DeleteWorkspaceRoleRequest,
+    cb?: (error: string, rep: DeleteWorkspaceRoleResponse) => void
+  ): Promise<DeleteWorkspaceRoleResponse> {
+    return this.request("DeleteWorkspaceRole", req, cb)
+  }
+
+  /**
    * 工作流运行列表
    */
   async ListWorkflowRuns(
@@ -599,6 +739,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWorkflowRunsResponse) => void
   ): Promise<ListWorkflowRunsResponse> {
     return this.request("ListWorkflowRuns", req, cb)
+  }
+
+  /**
+   * 更新文件夹（支持重命名+移动）
+   */
+  async UpdateFolder(
+    req: UpdateFolderRequest,
+    cb?: (error: string, rep: UpdateFolderResponse) => void
+  ): Promise<UpdateFolderResponse> {
+    return this.request("UpdateFolder", req, cb)
   }
 
   /**

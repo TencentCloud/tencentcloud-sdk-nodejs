@@ -3307,7 +3307,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
    * 获取直播源站的拉流IP白名单列表
    */
   async DescribeOriginWhiteIpList(
-    req?: DescribeOriginWhiteIpListRequest,
+    req: DescribeOriginWhiteIpListRequest,
     cb?: (error: string, rep: DescribeOriginWhiteIpListResponse) => void
   ): Promise<DescribeOriginWhiteIpListResponse> {
     return this.request("DescribeOriginWhiteIpList", req, cb)

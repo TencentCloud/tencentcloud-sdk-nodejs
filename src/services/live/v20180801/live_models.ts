@@ -7330,7 +7330,12 @@ export interface RestartLivePullStreamTaskRequest {
 /**
  * DescribeOriginWhiteIpList请求参数结构体
  */
-export type DescribeOriginWhiteIpListRequest = null
+export interface DescribeOriginWhiteIpListRequest {
+  /**
+   * <p>播放域名</p>
+   */
+  Domain: string
+}
 
 /**
  * 导播台简略信息
