@@ -13333,6 +13333,10 @@ export interface SubmitHunyuan3DTaskRequest {
    * <p>风格控制词</p>
    */
   Style?: string
+  /**
+   * <p>客户自己申请创建的COS存储桶</p>
+   */
+  StoreCosParam?: AigcStoreCosParam
 }
 
 /**
@@ -19207,6 +19211,46 @@ export interface QueryHunyuan3DTaskResponse {
    * <p>仅 Status=DONE 时有值，产物文件列表</p>
    */
   ResultFile3Ds?: Array<File3D>
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务类型</p><p>枚举值：</p><ul><li>text_to_3d： 文生3D</li><li>image_to_3d： 图生3D</li><li>multiview_to_3d： 多视图生3D</li><li>mesh_to_texture： 网格生纹理</li><li>mesh_to_geometry： 网格生几何</li></ul>
+   */
+  TaskType?: string
+  /**
+   * <p>输入的Prompt</p>
+   */
+  Prompt?: string
+  /**
+   * <p>图生3D场景下输入的图片URL</p>
+   */
+  RefImage?: string
+  /**
+   * <p>多图生3D场景下输入的图片信息</p>
+   */
+  MultiViewImages?: Array<ViewImage>
+  /**
+   * <p>任务创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>任务更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>提交任务的目标面数</p>
+   */
+  FaceCount?: number
+  /**
+   * <p>生成类型</p><p>枚举值：</p><ul><li>Normal： 生成完整 3D 资产（几何 + 纹理）</li><li>Geometry： 只生成几何体（无纹理，输出速度更快）</li><li>Texture： 只生成纹理（需要传 MeshUrl）</li></ul><p>默认值：Normal</p>
+   */
+  GenerateType?: string
+  /**
+   * <p>任务在队列中的位置，数值越小越靠前；</p>
+   */
+  QueuePosition?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -496,7 +496,7 @@ export interface DescribeTWeSeeSubscriptionResponse {
    */
   ResourceId?: string
   /**
-   * <p>套餐规格。可能取值：</p><ul><li><code>BASIC</code>：包年包月基础版（适用于视频理解）</li></ul>
+   * <p>套餐规格</p><p>枚举值：</p><ul><li>BASIC： 包年包月基础版</li><li>ADVANCED： 包年包月高级版</li></ul>
    */
   ServiceTier?: string
   /**
@@ -528,25 +528,33 @@ export interface DescribeTWeSeeSubscriptionResponse {
    */
   SummarizeConfig?: SeeSummarizeConfig
   /**
-   * <p>当前周期基础能力总额度</p>
+   * <p>当前周期内的额度总量</p>
    */
-  QuotaBasic?: number
+  CreditsQuota?: number
   /**
-   * <p>当前周期基础能力已用额度</p>
+   * <p>当前周期内的已使用额度</p>
    */
-  QuotaUsedBasic?: number
-  /**
-   * <p>当前周期高级能力总额度</p>
-   */
-  QuotaAdvanced?: number
-  /**
-   * <p>当前周期高级能力已用额度</p>
-   */
-  QuotaUsedAdvanced?: number
+  CreditsUsed?: number
   /**
    * <p>额度刷新时间</p>
    */
   QuotaRefreshTime?: number
+  /**
+   * <p>当前周期基础能力总额度（已废弃，当 ServiceTier=BASIC 时，取值等于 CreditsQuota）</p>
+   */
+  QuotaBasic?: number
+  /**
+   * <p>当前周期基础能力已用额度（已废弃，当 ServiceTier=BASIC 时，取值等于 CreditsUsed 向下取整）</p>
+   */
+  QuotaUsedBasic?: number
+  /**
+   * <p>当前周期高级能力总额度（已废弃，当 ServiceTier=ADVANCED 时，取值等于 CreditsQuota）</p>
+   */
+  QuotaAdvanced?: number
+  /**
+   * <p>当前周期高级能力已用额度（已废弃，当 ServiceTier=ADVANCED 时，取值等于 CreditsUsed 向下取整）</p>
+   */
+  QuotaUsedAdvanced?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -727,29 +735,27 @@ export interface DescribeActivateLicenseServiceResponse {
  */
 export interface RenewTWeSeeSubscriptionRequest {
   /**
-   * 产品 ID
+   * <p>产品 ID</p>
    */
   ProductId: string
   /**
-   * 设备名称
+   * <p>设备名称</p>
    */
   DeviceName: string
   /**
-   * 算法类型。可选值：
-
-- `VID_COMP`：视频理解
+   * <p>算法类型。可选值：</p><ul><li><code>VID_COMP</code>：视频理解</li></ul>
    */
   ServiceType: string
   /**
-   * 续费时长，单位：月，支持 1-60
+   * <p>续费时长，单位：月，支持 1-60</p>
    */
   Period: number
   /**
-   * 通道 ID
+   * <p>通道 ID</p>
    */
   ChannelId?: number
   /**
-   * 自定义订单 ID
+   * <p>自定义订单 ID</p>
    */
   CustomOrderId?: string
 }
@@ -1108,6 +1114,10 @@ export interface InvokeTWeSeeComprehensionRequest {
    * <p>等待结果的超时时间（单位：秒）。填 0 表示无需等待结果。最大超时时长 25 秒，默认超时时长 20 秒。</p>
    */
   WaitResultTimeout?: number
+  /**
+   * <p>需额外等待结果的字段列表</p><p>枚举值：</p><ul><li>FaceRecognitionResult： 等待人脸检测结果（仅当 ComprehensionConfig.EnableFaceDetection = true 时有效）</li></ul><p>接口固定会等待视觉理解结果，可选增加等待人脸检测结果</p>
+   */
+  WaitResultFields?: Array<string>
   /**
    * <p>回调目标 ID</p>
    */
@@ -3904,21 +3914,21 @@ export interface CheckFirmwareUpdateResponse {
  */
 export interface ListTWeSeeTasksRequest {
   /**
-   * <p>设备名称</p>
-   */
-  DeviceName: string
-  /**
-   * <p>分页拉取数量</p>
-   */
-  Limit: number
-  /**
    * <p>产品 ID</p>
    */
   ProductId: string
   /**
+   * <p>设备名称</p>
+   */
+  DeviceName: string
+  /**
    * <p>算法类目。可选值：</p><ul><li><code>COMPREHENSION</code>：视觉理解</li><li><code>HIGHLIGHT</code>：视频浓缩</li><li><code>SUMMARIZATION</code>：每日/每周总结</li></ul>
    */
   ServiceCategory: string
+  /**
+   * <p>分页拉取数量</p>
+   */
+  Limit: number
   /**
    * <p>通道 ID</p>
    */
@@ -4563,27 +4573,27 @@ export interface ModifyTWeSeeFaceRequest {
  */
 export interface CreateTWeSeeSubscriptionResponse {
   /**
-   * 订单 ID
+   * <p>订单 ID</p>
    */
   OrderId?: string
   /**
-   * 订单状态
+   * <p>订单状态</p>
    */
   Status?: string
   /**
-   * 资源 ID
+   * <p>资源 ID</p>
    */
   ResourceId?: string
   /**
-   * 原价
+   * <p>原价</p>
    */
   OriginalPrice?: string
   /**
-   * 折后价
+   * <p>折后价</p>
    */
   DiscountPrice?: string
   /**
-   * 币种
+   * <p>币种</p>
    */
   Currency?: string
   /**
@@ -4681,13 +4691,13 @@ export interface ModifyTWeTalkProductConfigResponse {
  */
 export interface ModifyTWeSeeSubscriptionRequest {
   /**
-   * 设备名称
-   */
-  DeviceName: string
-  /**
    * 产品 ID
    */
   ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
   /**
    * 算法类型。可选值：
 
@@ -4695,29 +4705,29 @@ export interface ModifyTWeSeeSubscriptionRequest {
    */
   ServiceType: string
   /**
-   * 通道 ID
+   * 视觉理解配置（适用于视频理解、图片理解），不传则不修改
    */
-  ChannelId?: number
+  ComprehensionConfig?: SeeComprehensionConfig
   /**
    * 视频语义浓缩配置（适用于视频语义浓缩），不传则不修改
    */
   CompHighlightConfig?: SeeCompHighlightConfig
   /**
-   * 视觉理解配置（适用于视频理解、图片理解），不传则不修改
+   * 每日与每周总结配置，不传则不修改
    */
-  ComprehensionConfig?: SeeComprehensionConfig
-  /**
-   * 功能开关。`true` 为开启，`false` 为关闭；不传表示不修改
-   */
-  Enabled?: boolean
+  SummarizeConfig?: SeeSummarizeConfig
   /**
    * 云存事件 ID 过滤规则配置，不传则不修改
    */
   EventIdFilterConfig?: SeeEventIdFilterConfig
   /**
-   * 每日与每周总结配置，不传则不修改
+   * 通道 ID
    */
-  SummarizeConfig?: SeeSummarizeConfig
+  ChannelId?: number
+  /**
+   * 功能开关。`true` 为开启，`false` 为关闭；不传表示不修改
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -5099,27 +5109,27 @@ export interface PackageConsumeTask {
  */
 export interface RenewTWeSeeSubscriptionResponse {
   /**
-   * 订单 ID
+   * <p>订单 ID</p>
    */
   OrderId?: string
   /**
-   * 订单状态
+   * <p>订单状态</p>
    */
   Status?: string
   /**
-   * 资源 ID
+   * <p>资源 ID</p>
    */
   ResourceId?: string
   /**
-   * 原价
+   * <p>原价</p>
    */
   OriginalPrice?: string
   /**
-   * 折后价
+   * <p>折后价</p>
    */
   DiscountPrice?: string
   /**
-   * 币种
+   * <p>币种</p>
    */
   Currency?: string
   /**
@@ -11944,21 +11954,25 @@ export interface DeleteOtaModuleResponse {
  */
 export interface SeeStatItem {
   /**
-   * 时间
+   * <p>时间</p>
    */
   Time?: string
   /**
-   * 任务数量
+   * <p>任务数量</p>
    */
   Count?: number
   /**
-   * 基础能力用量
+   * <p>基础能力后付费用量</p>
    */
   CostBasic?: number
   /**
-   * 高级能力用量
+   * <p>高级能力后付费用量</p>
    */
   CostAdvanced?: number
+  /**
+   * <p>预付费额度用量</p>
+   */
+  CostCredits?: number
 }
 
 /**
@@ -13086,42 +13100,35 @@ export interface GetCOSURLRequest {
  */
 export interface CreateTWeSeeSubscriptionRequest {
   /**
-   * 产品 ID
+   * <p>产品 ID</p>
    */
   ProductId: string
   /**
-   * 设备名称
+   * <p>设备名称</p>
    */
   DeviceName: string
   /**
-   * 算法类型。可选值：
-
-- `VID_COMP`：视频理解
+   * <p>算法类型</p><p>枚举值：</p><ul><li>VID_COMP： 视频理解</li></ul>
    */
   ServiceType: string
   /**
-   * 套餐规格。可选值：
-
-- `BASIC`：包年包月基础版（适用于视频理解）
+   * <p>套餐规格</p><p>枚举值：</p><ul><li>BASIC： 包年包月基础版</li><li>ADVANCED： 包年包月高级版</li></ul>
    */
   ServiceTier: string
   /**
-   * 订阅购买时长，单位：月，支持 1-60
+   * <p>订阅购买时长，单位：月，支持 1-60</p>
    */
   Period: number
   /**
-   * 通道 ID
+   * <p>通道 ID</p>
    */
   ChannelId?: number
   /**
-   * 自定义订单 ID
+   * <p>自定义订单 ID</p>
    */
   CustomOrderId?: string
   /**
-   * 续费标识。可选值：
-- `NOTIFY_AND_MANUAL_RENEW`：到期前通知并手动续费（默认）
-- `NOTIFY_AND_AUTO_RENEW`：到期前通知并自动续费
-- `DISABLE_NOTIFY_AND_MANUAL_RENEW`：不通知且手动续费
+   * <p>续费标识。可选值：</p><ul><li><code>NOTIFY_AND_MANUAL_RENEW</code>：到期前通知并手动续费（默认）</li><li><code>NOTIFY_AND_AUTO_RENEW</code>：到期前通知并自动续费</li><li><code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>：不通知且手动续费</li></ul>
    */
   RenewFlag?: string
 }
@@ -13469,13 +13476,17 @@ export interface InvokeTWeSeeComprehensionResponse {
    */
   ComprehensionResult?: SeeComprehensionResult
   /**
-   * <p>完成该任务所消耗的基础能力额度</p>
+   * <p>完成该任务所产生的视觉理解基础能力后付费用量</p>
    */
   CostBasic?: number
   /**
-   * <p>完成该任务所消耗的高级能力额度</p>
+   * <p>完成该任务所产生的视觉理解高级能力后付费用量</p>
    */
   CostAdvanced?: number
+  /**
+   * <p>完成该任务所消耗的视觉理解预付费额度</p>
+   */
+  CostCredits?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14933,13 +14944,17 @@ export interface SeeTaskInfo {
    */
   SummarizeResult?: SeeSummarizeResult
   /**
-   * <p>完成该任务所消耗的基础能力额度</p>
+   * <p>完成该任务所产生的视觉理解基础能力后付费用量</p>
    */
   CostBasic?: number
   /**
-   * <p>完成该任务所消耗的高级能力额度</p>
+   * <p>完成该任务所产生的视觉理解高级能力后付费用量</p>
    */
   CostAdvanced?: number
+  /**
+   * <p>完成该任务所消耗的视觉理解预付费额度</p>
+   */
+  CostCredits?: number
   /**
    * <p>输出文件名列表</p>
    */
