@@ -471,6 +471,48 @@ export interface CloudRegistry {
 }
 
 /**
+ * 沙箱快照
+ */
+export interface SandboxSnapshot {
+  /**
+   * <p>沙箱快照 ID</p>
+   */
+  SnapshotId?: string
+  /**
+   * <p>沙箱快照名称</p>
+   */
+  SnapshotName?: string
+  /**
+   * <p>源沙箱实例 ID，沙箱快照由其派生</p>
+   */
+  SourceInstanceId?: string
+  /**
+   * <p>制作快照时是否包含内存状态</p>
+   */
+  MemoryIncluded?: boolean
+  /**
+   * <p>沙箱快照状态</p><p>枚举值：</p><ul><li>ACTIVE： 可用</li><li>DELETING： 删除中</li><li>DELETED： 已删除</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>用于说明沙箱快照处于该状态的原因</p>
+   */
+  StatusReason?: string
+  /**
+   * <p>云资源标签</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>创建时间</p><p>参数格式：ISO8601</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：ISO8601</p>
+   */
+  UpdateTime?: string
+}
+
+/**
  * UpdateRegistry返回参数结构体
  */
 export interface UpdateRegistryResponse {
@@ -739,6 +781,36 @@ export interface DescribeDeploymentRequest {
 }
 
 /**
+ * DescribeSandboxSnapshotList请求参数结构体
+ */
+export interface DescribeSandboxSnapshotListRequest {
+  /**
+   * <p>待查询的沙箱快照 ID 列表</p>
+   */
+  SnapshotIds?: Array<string>
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移量，与 NextToken 参数互斥</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量上限</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移 token，与 Offset 参数互斥</p>
+   */
+  NextToken?: string
+  /**
+   * <p>每次调用返回的最大结果数。如果查询返回的时候有NextToken返回，您可以使用NextToken值获取更多页结果， 当NextToke返回空或者返回的结果数量小于MaxResults时，表示没有更多数据了。允许的最大页面大小为 100。</p>
+   */
+  MaxResults?: number
+}
+
+/**
  * 资源配置
  */
 export interface ResourceConfiguration {
@@ -998,9 +1070,9 @@ export interface DescribeRegistryRecordVersionListResponse {
 }
 
 /**
- * StopSandboxInstance返回参数结构体
+ * DeleteSandboxSnapshot返回参数结构体
  */
-export interface StopSandboxInstanceResponse {
+export interface DeleteSandboxSnapshotResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1194,6 +1266,20 @@ export interface SessionInfo {
    * <p>更新时间。</p>
    */
   UpdateTime?: string
+}
+
+/**
+ * CreateSandboxSnapshot返回参数结构体
+ */
+export interface CreateSandboxSnapshotResponse {
+  /**
+   * <p>沙箱快照</p>
+   */
+  Snapshot?: SandboxSnapshot
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1464,6 +1550,16 @@ export interface SandboxTool {
    * <p>用于说明沙箱工具处于该状态的原因</p>
    */
   StatusReason?: string
+}
+
+/**
+ * DeleteSandboxSnapshot请求参数结构体
+ */
+export interface DeleteSandboxSnapshotRequest {
+  /**
+   * <p>待删除的沙箱快照 ID</p>
+   */
+  SnapshotId: string
 }
 
 /**
@@ -2588,6 +2684,28 @@ export interface CloudRecordLabelMutation {
 }
 
 /**
+ * DescribeSandboxSnapshotList返回参数结构体
+ */
+export interface DescribeSandboxSnapshotListResponse {
+  /**
+   * <p>查询到的沙箱快照列表</p>
+   */
+  SnapshotSet?: Array<SandboxSnapshot>
+  /**
+   * <p>查询到的沙箱快照数量</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>分页偏移 token，可用于下一次查询</p>
+   */
+  NextToken?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * PauseSandboxInstance返回参数结构体
  */
 export interface PauseSandboxInstanceResponse {
@@ -2631,6 +2749,10 @@ export interface StartSandboxInstanceRequest {
    * <p>沙箱工具名称，与 ToolId 至少有一个要填</p>
    */
   ToolName?: string
+  /**
+   * <p>待克隆的源沙箱 ID</p>
+   */
+  SourceInstanceId?: string
   /**
    * <p>超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h</p>
    */
@@ -3317,6 +3439,16 @@ export interface Tag {
 }
 
 /**
+ * StopSandboxInstance返回参数结构体
+ */
+export interface StopSandboxInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Deployment 活跃容量配置
  */
 export interface ScalingConfiguration {
@@ -3332,6 +3464,32 @@ export interface ScalingConfiguration {
    * <p>每个活跃 Sandbox Instance 同时持有的 Deployment 请求或连接 Lease 上限，必须大于等于 1。</p>
    */
   MaxInstanceRequestConcurrency?: number
+}
+
+/**
+ * CreateSandboxSnapshot请求参数结构体
+ */
+export interface CreateSandboxSnapshotRequest {
+  /**
+   * <p>待制作快照的沙箱实例 ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>快照名称</p>
+   */
+  SnapshotName?: string
+  /**
+   * <p>制作快照时是否包含内存状态</p>
+   */
+  Memory?: boolean
+  /**
+   * <p>云资源标签</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>幂等 token</p>
+   */
+  ClientToken?: string
 }
 
 /**

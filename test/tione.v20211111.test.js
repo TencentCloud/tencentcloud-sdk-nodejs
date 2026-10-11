@@ -688,6 +688,16 @@ it("tione.v20211111.DescribeNotebook", async function () {
     }
 })
 
+it("tione.v20211111.EnableTrainingTaskClsConfig", async function () {
+    try {
+       const data = await client.EnableTrainingTaskClsConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteTrainingModelVersion", async function () {
     try {
        const data = await client.DeleteTrainingModelVersion({})

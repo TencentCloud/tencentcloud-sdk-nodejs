@@ -278,9 +278,9 @@ it("mqtt.v20240516.RegisterDeviceCertificate", async function () {
     }
 })
 
-it("mqtt.v20240516.ModifyInstanceCertBinding", async function () {
+it("mqtt.v20240516.ModifyAuthorizationPolicy", async function () {
     try {
-       const data = await client.ModifyInstanceCertBinding({})
+       const data = await client.ModifyAuthorizationPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +311,16 @@ it("mqtt.v20240516.DescribeClientList", async function () {
 it("mqtt.v20240516.DescribeProductSKUList", async function () {
     try {
        const data = await client.DescribeProductSKUList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.ModifyInstanceCertBinding", async function () {
+    try {
+       const data = await client.ModifyInstanceCertBinding({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,9 +628,9 @@ it("mqtt.v20240516.DescribeMessageDetails", async function () {
     }
 })
 
-it("mqtt.v20240516.ModifyAuthorizationPolicy", async function () {
+it("mqtt.v20240516.DescribeClientEvents", async function () {
     try {
-       const data = await client.ModifyAuthorizationPolicy({})
+       const data = await client.DescribeClientEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

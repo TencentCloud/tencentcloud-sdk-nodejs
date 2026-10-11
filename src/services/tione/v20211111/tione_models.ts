@@ -4709,6 +4709,16 @@ export interface ModifyModelServiceAuthorizationResponse {
 }
 
 /**
+ * EnableTrainingTaskClsConfig返回参数结构体
+ */
+export interface EnableTrainingTaskClsConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteModelService请求参数结构体
  */
 export interface DeleteModelServiceRequest {
@@ -7425,6 +7435,24 @@ export interface UpdateSubAccountLinuxUserInfoRequest {
    * 子账号信息列表
    */
   SubAccountList?: Array<SubAccountInfo>
+}
+
+/**
+ * EnableTrainingTaskClsConfig请求参数结构体
+ */
+export interface EnableTrainingTaskClsConfigRequest {
+  /**
+   * 训练任务ID
+   */
+  TaskId: string
+  /**
+   * 是否开启CLS日志投递
+   */
+  LogEnable: boolean
+  /**
+   * 日志配置
+   */
+  LogConfig?: LogConfig
 }
 
 /**

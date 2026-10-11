@@ -7248,32 +7248,32 @@ export interface CreateRecordingRuleRequest {
  */
 export interface ModifyPrometheusConfigRequest {
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId: string
   /**
-   * 集群类型
+   * <p>集群类型</p>
    */
   ClusterType: string
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId: string
   /**
-   * ServiceMonitors配置
+   * <p>ServiceMonitors配置</p>
    */
   ServiceMonitors?: Array<PrometheusConfigItem>
   /**
-   * PodMonitors配置
+   * <p>PodMonitors配置</p>
    */
   PodMonitors?: Array<PrometheusConfigItem>
   /**
-   * prometheus原生Job配置
+   * <p>prometheus原生Job配置</p>
    */
   RawJobs?: Array<PrometheusConfigItem>
   /**
-   * 0: 更新实例组件镜像版本；
-1: 不更新实例组件镜像版本
+   * <p>0: 更新实例组件镜像版本；<br>1: 不更新实例组件镜像版本</p><p>取值范围：[0, 1]</p><p>默认值：0</p>
+   * @deprecated
    */
   UpdateImage?: number
 }

@@ -559,6 +559,28 @@ export interface ProcessLiveStreamResponse {
 }
 
 /**
+ * 传输流媒体的视频数据。
+ */
+export interface FlowMediaVideo {
+  /**
+   * 帧率。
+   */
+  Fps: number
+  /**
+   * 码率，单位是bps。
+   */
+  Rate: number
+  /**
+   * 视频Pid。
+   */
+  Pid: number
+  /**
+   * 标志同一次推流。
+   */
+  SessionId: string
+}
+
+/**
  * 直播流媒体质检结果
  */
 export interface LiveStreamAiQualityControlResultInfo {
@@ -2371,21 +2393,14 @@ export interface AigcAudioReferenceAudioInfo {
 }
 
 /**
- * 智能擦除模板隐私保护配置
+ * 直播摘要结果信息。
  */
-export interface SmartErasePrivacyConfig {
+export interface LiveAiAnalysisDescriptionItem {
   /**
-   * 隐私保护擦除方式。
-- blur 模糊
-- mosaic 马赛克
+   * 分段结果。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrivacyModel: string
-  /**
-   * 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。
-- face 人脸
-- plate 车牌
-   */
-  PrivacyTargets: Array<string>
+  Paragraphs?: Array<LiveAiParagraphInfo>
 }
 
 /**
@@ -2674,6 +2689,11 @@ export interface VideoEnhanceConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiRestoration?: AiRestorationConfig
+  /**
+   * <p>大模型增强专业版配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiffusionEnhanceV2?: DiffusionEnhanceV2Config
 }
 
 /**
@@ -4816,6 +4836,10 @@ export interface ImageTaskInput {
    * <p>图层融合配置。</p>
    */
   AiComposeConfig?: AiComposeConfig
+  /**
+   * <p>图层分离配置。</p>
+   */
+  AiDecomposeConfig?: AiDecomposeConfig
 }
 
 /**
@@ -9370,7 +9394,7 @@ export interface PidSelector {
  */
 export interface DeleteWordSamplesRequest {
   /**
-   * 关键词，数组长度限制：100 个词。
+   * <p>关键词，数组长度限制：100 个词。</p>
    */
   Keywords: Array<string>
 }
@@ -9792,14 +9816,17 @@ export interface AudioDenoiseConfig {
 }
 
 /**
- * 直播摘要结果信息。
+ * 音频增强编辑
  */
-export interface LiveAiAnalysisDescriptionItem {
+export interface AudioEnhanceEditConfig {
   /**
-   * 分段结果。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>能力配置开关</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p>
    */
-  Paragraphs?: Array<LiveAiParagraphInfo>
+  Switch?: string
+  /**
+   * <p>音频编辑类型</p><p>枚举值：</p><ul><li>restore： 修复</li></ul><p>默认值：restore</p>
+   */
+  Type?: string
 }
 
 /**
@@ -12333,25 +12360,18 @@ export interface MediaAiAnalysisFrameTagItem {
 }
 
 /**
- * 传输流媒体的视频数据。
+ * 大模型增强-专业版
  */
-export interface FlowMediaVideo {
+export interface DiffusionEnhanceV2Config {
   /**
-   * 帧率。
+   * <p>能力配置开关</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p>
    */
-  Fps: number
+  Switch?: string
   /**
-   * 码率，单位是bps。
+   * <p>强度类型</p><p>枚举值：</p><ul><li>weak： 弱</li><li>normal： 中</li><li>strong： 强</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Rate: number
-  /**
-   * 视频Pid。
-   */
-  Pid: number
-  /**
-   * 标志同一次推流。
-   */
-  SessionId: string
+  Type?: string
 }
 
 /**
@@ -13402,7 +13422,7 @@ export interface EvaluationMediaInputInfo {
  */
 export interface DescribeContentReviewTemplatesRequest {
   /**
-   * 智能审核模板唯一标识过滤条件，数组长度限制：50。
+   * 智能审核模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number | bigint>
   /**
@@ -14497,6 +14517,28 @@ export interface AiRecognitionTaskObjectResultItem {
    * 物体出现的片段列表。
    */
   SegmentSet?: Array<AiRecognitionTaskObjectSeqmentItem>
+}
+
+/**
+ * 智能图层拆分配置。
+ */
+export interface AiDecomposeConfig {
+  /**
+   * <p>能力配置开关。</p><p>枚举值：</p><ul><li>ON： 开启图层分离功能。</li><li>OFF： 关闭图层分离功能。</li></ul><p>默认值：ON</p>
+   */
+  Switch?: string
+  /**
+   * <p>预期拆层数量。</p><p>取值范围：[2, 17]</p>
+   */
+  Layers?: number
+  /**
+   * <p>提示词。</p>
+   */
+  Prompt?: string
+  /**
+   * <p>模型名称。</p><p>枚举值：</p><ul><li>decompose-1.0-flash： 1.0版本 flash模型</li></ul>
+   */
+  Model?: string
 }
 
 /**
@@ -18540,83 +18582,21 @@ export interface SmartSubtitleTaskFullTextResult {
 }
 
 /**
- * 转码任务输入参数类型
+ * 智能擦除模板隐私保护配置
  */
-export interface TranscodeTaskInput {
+export interface SmartErasePrivacyConfig {
   /**
-   * 视频转码模板 ID。
+   * 隐私保护擦除方式。
+- blur 模糊
+- mosaic 马赛克
    */
-  Definition: number
+  PrivacyModel: string
   /**
-   * 视频转码自定义参数，当 Definition 填 0 时有效。
-该参数用于高度定制场景，建议您优先使用 Definition 指定转码参数。
+   * 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。
+- face 人脸
+- plate 车牌
    */
-  RawParameter?: RawTranscodeParameter
-  /**
-   * 视频转码自定义参数，当 Definition 不填 0 时有效。
-当填写了该结构中的部分转码参数时，将使用填写的参数覆盖转码模板中的参数。
-该参数用于高度定制场景，建议您仅使用 Definition 指定转码参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OverrideParameter?: OverrideTranscodeParameter
-  /**
-   * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-   */
-  WatermarkSet?: Array<WatermarkInput>
-  /**
-   * 数字水印参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BlindWatermark?: BlindWatermarkInput
-  /**
-   * 马赛克列表，最大可支持 10 张。
-   */
-  MosaicSet?: Array<MosaicInput>
-  /**
-   * 转码后的视频的起始时间偏移，单位：秒。
-<li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
-<li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
-<li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
-   */
-  StartTimeOffset?: number
-  /**
-   * 转码后视频的终止时间偏移，单位：秒。
-<li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li>
-<li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li>
-<li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
-   */
-  EndTimeOffset?: number
-  /**
-   * 转码后文件的目标存储，不填则继承上层的 OutputStorage 值。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputStorage?: TaskOutputStorage
-  /**
-   * 转码后主文件的输出路径，可以为相对路径或者绝对路径。
-若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
-相对路径示例：
-<li>文件名_{变量名}.{format}</li>
-<li>文件名.{format}</li>
-绝对路径示例：
-<li>/自定义路径/文件名_{变量名}.{format}</li>
-如果不填，则默认为相对路径：`{inputName}_transcode_{definition}.{format}`。
-
-   */
-  OutputObjectPath?: string
-  /**
-   * 转码后分片文件的输出路径（转码 HLS 时 ts 的路径），只能为相对路径。如果不填，则默认为：`{inputName}_transcode_{definition}_{number}.{format}`。
-   */
-  SegmentObjectName?: string
-  /**
-   * 转码后输出路径中的`{number}`变量的规则。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ObjectNumberFormat?: NumberFormat
-  /**
-   * 片头片尾参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HeadTailParameter?: HeadTailParameter
+  PrivacyTargets: Array<string>
 }
 
 /**
@@ -27645,25 +27625,30 @@ export interface AiPosterSuiteConfig {
  */
 export interface AudioEnhanceConfig {
   /**
-   * 音频降噪配置。
+   * <p>音频降噪配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Denoise?: AudioDenoiseConfig
   /**
-   * 音频分离配置。
+   * <p>音频分离配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Separate?: AudioSeparateConfig
   /**
-   * 音量均衡配置。
+   * <p>音量均衡配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeBalance?: VolumeBalanceConfig
   /**
-   * 音频美化配置。
+   * <p>音频美化配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Beautify?: AudioBeautifyConfig
+  /**
+   * <p>音频增强编辑。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioEnhanceEdit?: AudioEnhanceEditConfig
 }
 
 /**
@@ -28609,6 +28594,86 @@ export interface DescribeAIRecognitionTemplatesRequest {
    * 视频内容识别模板标识过滤条件，长度限制：64 个字符。
    */
   Name?: string
+}
+
+/**
+ * 转码任务输入参数类型
+ */
+export interface TranscodeTaskInput {
+  /**
+   * 视频转码模板 ID。
+   */
+  Definition: number
+  /**
+   * 视频转码自定义参数，当 Definition 填 0 时有效。
+该参数用于高度定制场景，建议您优先使用 Definition 指定转码参数。
+   */
+  RawParameter?: RawTranscodeParameter
+  /**
+   * 视频转码自定义参数，当 Definition 不填 0 时有效。
+当填写了该结构中的部分转码参数时，将使用填写的参数覆盖转码模板中的参数。
+该参数用于高度定制场景，建议您仅使用 Definition 指定转码参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OverrideParameter?: OverrideTranscodeParameter
+  /**
+   * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
+   */
+  WatermarkSet?: Array<WatermarkInput>
+  /**
+   * 数字水印参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlindWatermark?: BlindWatermarkInput
+  /**
+   * 马赛克列表，最大可支持 10 张。
+   */
+  MosaicSet?: Array<MosaicInput>
+  /**
+   * 转码后的视频的起始时间偏移，单位：秒。
+<li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
+   */
+  StartTimeOffset?: number
+  /**
+   * 转码后视频的终止时间偏移，单位：秒。
+<li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
+   */
+  EndTimeOffset?: number
+  /**
+   * 转码后文件的目标存储，不填则继承上层的 OutputStorage 值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 转码后主文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+如果不填，则默认为相对路径：`{inputName}_transcode_{definition}.{format}`。
+
+   */
+  OutputObjectPath?: string
+  /**
+   * 转码后分片文件的输出路径（转码 HLS 时 ts 的路径），只能为相对路径。如果不填，则默认为：`{inputName}_transcode_{definition}_{number}.{format}`。
+   */
+  SegmentObjectName?: string
+  /**
+   * 转码后输出路径中的`{number}`变量的规则。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectNumberFormat?: NumberFormat
+  /**
+   * 片头片尾参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeadTailParameter?: HeadTailParameter
 }
 
 /**

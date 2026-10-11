@@ -75,6 +75,20 @@ export interface ModifyDeviceIdentityResponse {
 }
 
 /**
+ * DescribeClientEvents返回参数结构体
+ */
+export interface DescribeClientEventsResponse {
+  /**
+   * 轨迹
+   */
+  Events?: Array<EventItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUser请求参数结构体
  */
 export interface DeleteUserRequest {
@@ -1753,6 +1767,11 @@ export interface CreateInsPublicEndpointResponse {
 }
 
 /**
+ * DescribeProductSKUList请求参数结构体
+ */
+export type DescribeProductSKUListRequest = null
+
+/**
  * CreateUser返回参数结构体
  */
 export interface CreateUserResponse {
@@ -2575,6 +2594,32 @@ sub：订阅mqtt消息
 }
 
 /**
+ * 事件
+ */
+export interface EventItem {
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: number
+  /**
+   * <p>事件</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Event?: string
+  /**
+   * <p>发消息或者收消息的clientid</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientId?: string
+  /**
+   * <p>事件的相关信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Info?: Array<EventInfo>
+}
+
+/**
  * ModifyX509Config返回参数结构体
  */
 export interface ModifyX509ConfigResponse {
@@ -2973,6 +3018,28 @@ export interface CreateInsPublicEndpointRequest {
 }
 
 /**
+ * 查询共享订阅组（带订阅）
+ */
+export interface SharedSubscriptionGroupWithSubscriptions {
+  /**
+   * <p>共享组名</p>
+   */
+  SharedName?: string
+  /**
+   * <p>创建时间</p><p>单位：毫秒级时间戳</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p><p>单位：毫秒级时间戳</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>订阅表达式</p>
+   */
+  TopicFilters?: Array<string>
+}
+
+/**
  * RegisterDeviceCertificate请求参数结构体
  */
 export interface RegisterDeviceCertificateRequest {
@@ -3169,25 +3236,19 @@ export interface UpdateMessageEnrichmentRulePriorityRequest {
 }
 
 /**
- * 查询共享订阅组（带订阅）
+ * 客户端事件信息详情
  */
-export interface SharedSubscriptionGroupWithSubscriptions {
+export interface EventInfo {
   /**
-   * <p>共享组名</p>
+   * 事件信息key
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SharedName?: string
+  Key?: string
   /**
-   * <p>创建时间</p><p>单位：毫秒级时间戳</p>
+   * 事件信息值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime?: number
-  /**
-   * <p>更新时间</p><p>单位：毫秒级时间戳</p>
-   */
-  UpdateTime?: number
-  /**
-   * <p>订阅表达式</p>
-   */
-  TopicFilters?: Array<string>
+  Value?: string
 }
 
 /**
@@ -4260,9 +4321,26 @@ sub：订阅
 }
 
 /**
- * DescribeProductSKUList请求参数结构体
+ * DescribeClientEvents请求参数结构体
  */
-export type DescribeProductSKUListRequest = null
+export interface DescribeClientEventsRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 客户端id
+   */
+  ClientId: string
+}
 
 /**
  * DescribeTopicList返回参数结构体

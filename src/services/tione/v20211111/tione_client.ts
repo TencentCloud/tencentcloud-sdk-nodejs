@@ -164,6 +164,7 @@ import {
   CreateTrainingTaskResponse,
   ModifyModelServiceAuthTokenResponse,
   ModifyModelServiceAuthorizationResponse,
+  EnableTrainingTaskClsConfigResponse,
   DeleteModelServiceRequest,
   DeleteModelServiceAuthTokenRequest,
   CreateTrainingTaskRequest,
@@ -244,6 +245,7 @@ import {
   TrainingTaskDetail,
   DescribeExportRequest,
   UpdateSubAccountLinuxUserInfoRequest,
+  EnableTrainingTaskClsConfigRequest,
   DescribeNotebookRequest,
   DescribePublicAlgoVersionListRequest,
   StorageExtraConf,
@@ -984,6 +986,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: DescribeNotebookResponse) => void
   ): Promise<DescribeNotebookResponse> {
     return this.request("DescribeNotebook", req, cb)
+  }
+
+  /**
+   * 开启CLS日志投递
+   */
+  async EnableTrainingTaskClsConfig(
+    req: EnableTrainingTaskClsConfigRequest,
+    cb?: (error: string, rep: EnableTrainingTaskClsConfigResponse) => void
+  ): Promise<EnableTrainingTaskClsConfigResponse> {
+    return this.request("EnableTrainingTaskClsConfig", req, cb)
   }
 
   /**

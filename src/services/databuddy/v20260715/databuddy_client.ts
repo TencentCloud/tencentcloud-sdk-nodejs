@@ -18,29 +18,43 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  WorkflowBrief,
+  UpdateWorkspaceRequest,
   CreateWorkspaceRoleResponse,
+  AddWorkspaceGroupsRequest,
   GetFolderRsp,
   DependOnBrief,
   ListConsoleGroupUsersRequest,
   DeleteFolderResponse,
+  ListWorkspaceGroupUsersRequest,
   FolderLocator,
+  ListWorkspaceGroupsResponse,
   ListConsoleGroupsRequest,
   InnerWorkflowTaskRunListOption,
+  RemoveWorkspaceGroupsResponse,
+  PermissionDetail,
   UpdateConsoleUsersResponse,
   ListWorkflowTaskRunsRequest,
-  Workflow,
+  WorkspaceUserInfo,
+  ListTablesRsp,
   TaskRetryStrategy,
   FileStorage,
   ScheduledTimeConfig,
+  Catalog,
+  BucketPartitioning,
+  WorkflowRun,
   FetchOption,
   DeleteWorkflowResponse,
   GetWorkspaceResponse,
   ListConsoleUsersResponse,
   RemoveConsoleUsersResponse,
-  InnerWorkflowTaskBrief,
+  GetTablesRequest,
   MonitorMetricBrief,
-  ParamInfo,
+  ListCatalogsResponse,
+  ListWorkspaceUsersRsp,
   UpdateWorkspaceResponse,
+  PlatformStatusRsp,
+  AddWorkspaceUsersResponse,
   InnerWorkflowTaskRunIteration,
   CreateCatalogRequest,
   SparseCheckoutConfig,
@@ -48,10 +62,13 @@ import {
   DeleteWorkflowRequest,
   WorkspaceInfo,
   CreateSchemaRsp,
+  ListPartition,
   GetWorkspaceRequest,
   ListConsoleGroupsRsp,
+  TaskTypeNotebookExt,
+  ListPartitioning,
   AlarmBrief,
-  CreateWorkspaceRsp,
+  DataMaskGroup,
   RerunWorkflowRunResponse,
   ListWorkspacesRequest,
   WorkflowTaskNodeBrief,
@@ -62,14 +79,17 @@ import {
   ListFilesRequest,
   WorkflowRunBrief,
   WorkflowTriggerAdvancedConfiguration,
-  UpdateWorkspaceRoleResult,
+  Index,
   AsyncActionRsp,
   CreateFileResponse,
   TaskSchedulingParameterBrief,
+  CreateWorkspaceRsp,
   UpdateWorkflowRequest,
+  ListWorkspaceGroupsRsp,
   KVPair,
   TaskRunConditionRule,
   ResourceGroupInfo,
+  DictDimensionInfo,
   UnbindWorkflowBundleResponse,
   UpdateConsoleGroupRsp,
   UnbindWorkflowBundleRsp,
@@ -88,52 +108,65 @@ import {
   GetFileRequest,
   WorkflowBaseInfo,
   TaskType,
-  TaskTypeNotebookExt,
+  WorkflowTaskRun,
+  GetTablesRsp,
+  ListWorkspaceUsersRequest,
   GetFolderResponse,
   DeleteCatalogRsp,
   CreateWorkflowRsp,
   GetFileResponse,
   AsyncOperation,
-  UpdateWorkspaceRequest,
+  DataMaskStrategyInfo,
   ListFilesRsp,
+  RangePartitioning,
   RoleMetaData,
   GetWorkflowRunRsp,
   DeleteSchemaResponse,
   DeleteWorkspaceRoleResponse,
+  GetCatalogRsp,
   ListConsoleGroupUsersResponse,
   ListWorkflowTaskRunsRsp,
   ScheduleBizEnumBrief,
+  AddWorkspaceGroupsResponse,
   CreateCatalogRsp,
   GetWorkspaceRsp,
+  GetSchemaResponse,
+  TagValueInfo,
   CreateSchemaResponse,
   CreateFolderResponse,
   InnerWorkflowTaskRunIterationBrief,
   CreateConsoleGroupRequest,
   RemoveConsoleUsersRsp,
-  ListWorkflowsResponse,
+  GetSchemaRsp,
   ListWorkflowsRsp,
   UpdateFolderResponse,
-  RerunWorkflowRunRequest,
+  DataMaskLabelInfo,
+  DeleteTableRequest,
   DeleteWorkspaceRequest,
-  StartComputeResponse,
+  ListWorkspaceGroupUsersResponse,
   LabelBrief,
   DeleteWorkspaceRoleRequest,
   CreateSchemaRequest,
+  UpdateWorkspaceRoleRequest,
   AddConsoleUsersRequest,
   CreateConsoleGroupRsp,
-  WorkflowTaskRun,
+  ListWorkspaceGroupUsersRsp,
   DeleteCatalogResponse,
+  ListTablesRequest,
   DeleteWorkspaceRsp,
   WorkflowBaseInfoDetail,
-  WorkflowBrief,
+  ListTablesResponse,
   StopComputeRequest,
   KillWorkflowRunRequest,
+  GetCatalogRequest,
   ListWorkflowTaskRunsResponse,
   AddConsoleUsersResponse,
   ListConsoleUsersRsp,
   FileMeta,
+  Literal,
+  FeatureTableDetail,
   MetaOwner,
-  UnbindWorkflowBundleRequest,
+  GroupUserInfo,
   ConsoleRoleInfo,
   ConsoleGroupUserInfo,
   DeleteFileResult,
@@ -143,81 +176,113 @@ import {
   ListWorkflowRunsRsp,
   UpdateConsoleGroupRequest,
   ConsoleGroupInfo,
+  GetTableRequest,
   UpdateWorkspaceRoleResponse,
   ListConsoleRolesRsp,
+  UserTagInfo,
+  UpdateWorkspaceUsersRolesRequest,
   GetWorkflowResponse,
   GetWorkflowTaskRunRequest,
   DeleteFileResponse,
   UpdateConsoleUsersRsp,
-  CreateConsoleGroupResponse,
+  AddWorkspaceUsersRequest,
   ListFilesResponse,
   WorkflowTask,
+  ListWorkspaceUsersResponse,
   DeleteSchemaRsp,
-  StopComputeResponse,
+  UpdateWorkspaceGroupsRolesRequest,
+  DictItem,
   AdvancedDependencyConfig,
   StopComputeRsp,
   DeleteConsoleGroupsRequest,
+  ListCatalogsRsp,
   UpdateWorkflowResponse,
   GetWorkflowRequest,
   FileInfo,
-  UpdateWorkspaceRoleRequest,
-  WorkflowRun,
+  GetFolderRequest,
+  InnerWorkflowTaskBrief,
   FileNode,
   UpdateFolderRsp,
   TaskTypeProperty,
-  GetFolderRequest,
+  TableInfo,
+  UpdateWorkspaceGroupsRolesResponse,
+  CreateConsoleGroupResponse,
   CreateFileRequest,
   UpdateFileRequest,
   GetWorkflowRunRequest,
   UserInfo,
   ListWorkflowsRequest,
   RolePermission,
+  ListCatalogsRequest,
   FileConfig,
   CreateWorkspaceRoleResult,
   RunWorkflowResponse,
   ListConsoleUsersRequest,
   ListWorkflowRunsResponse,
+  RemoveWorkspaceGroupsRequest,
+  ListWorkspaceGroupsRequest,
+  UnbindWorkflowBundleRequest,
   AdvancedParameter,
+  RerunWorkflowRunRequest,
   DeleteWorkspaceRoleResult,
   UpdateConsoleGroupResponse,
   StandardUserInfo,
   ConsoleUserInfo,
   UpdateWorkflowRsp,
+  StartComputeResponse,
+  GetTablesResponse,
+  GetSchemaRequest,
+  Workflow,
   DeleteCatalogRequest,
   Schema,
   OrderBy,
   UpdateFolderRequest,
   DeleteFolderRsp,
+  TruncatePartitioning,
+  DeleteTableResponse,
   WorkflowAdvanceConfig,
   ListSchemasRequest,
+  ParamInfo,
   CreateCatalogResponse,
   DeleteConsoleGroupsResponse,
   InnerWorkflowTaskRun,
   MonitorMetricItem,
+  GetTableResponse,
   CreateWorkflowResponse,
+  DeleteSchemaRequest,
   ListConsoleRolesRequest,
   ListConsoleGroupUsersRsp,
   Audit,
+  Partitioning,
+  SingleFieldPartitioning,
   AlarmGroup,
   DeleteFileRequest,
   DeleteWorkflowRsp,
+  StopComputeResponse,
   CommonFailItem,
   ListWorkspacesResponse,
-  PermissionDetail,
+  GetCatalogResponse,
+  UpdateWorkspaceRoleResult,
   GetWorkflowRunResponse,
   ListConsoleGroupsResponse,
   GetWorkflowRsp,
   CreateWorkspaceRequest,
+  WorkspaceGroupInfo,
   RoleBasicInfo,
+  UpdateWorkspaceUsersRolesResponse,
   GitRepoConfig,
+  GetTableRsp,
   ListConsoleRolesResponse,
   ListWorkspacesRsp,
   CreateWorkspaceResponse,
+  ListWorkflowsResponse,
   UpdateFileResponse,
+  RangePartition,
   CreateFolderRsp,
-  DeleteSchemaRequest,
+  DeleteTableRsp,
   StartComputeRequest,
   UpdateConsoleUsersRequest,
+  ColumnInfo,
   GetWorkflowTaskRunRsp,
 } from "./databuddy_models"
 
@@ -342,6 +407,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建用户组
+   */
+  async AddWorkspaceUsers(
+    req: AddWorkspaceUsersRequest,
+    cb?: (error: string, rep: AddWorkspaceUsersResponse) => void
+  ): Promise<AddWorkspaceUsersResponse> {
+    return this.request("AddWorkspaceUsers", req, cb)
+  }
+
+  /**
    * 查询工作空间列表
    */
   async ListWorkspaces(
@@ -389,6 +464,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 移除工作空间用户组
+   */
+  async RemoveWorkspaceGroups(
+    req: RemoveWorkspaceGroupsRequest,
+    cb?: (error: string, rep: RemoveWorkspaceGroupsResponse) => void
+  ): Promise<RemoveWorkspaceGroupsResponse> {
+    return this.request("RemoveWorkspaceGroups", req, cb)
+  }
+
+  /**
    * 删除catalog
    */
   async DeleteCatalog(
@@ -396,6 +481,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCatalogResponse) => void
   ): Promise<DeleteCatalogResponse> {
     return this.request("DeleteCatalog", req, cb)
+  }
+
+  /**
+   * 批量获取表的元数据。使用场景：根据表的全名列表（catalogName.schemaName.tableName）批量获取表的详细元数据信息。前置条件：需要有对应workspace的读权限，仅返回当前workspace有权限的catalog下的表。权限校验：通过getAuthedCatalogNames获取有权限的catalogName进行过滤，不在权限范围内的表会被静默跳过。限制：FullNames最大支持20个表全名
+   */
+  async GetTables(
+    req: GetTablesRequest,
+    cb?: (error: string, rep: GetTablesResponse) => void
+  ): Promise<GetTablesResponse> {
+    return this.request("GetTables", req, cb)
+  }
+
+  /**
+   * 修改工作空间用户角色
+   */
+  async UpdateWorkspaceUsersRoles(
+    req: UpdateWorkspaceUsersRolesRequest,
+    cb?: (error: string, rep: UpdateWorkspaceUsersRolesResponse) => void
+  ): Promise<UpdateWorkspaceUsersRolesResponse> {
+    return this.request("UpdateWorkspaceUsersRoles", req, cb)
   }
 
   /**
@@ -426,6 +531,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWorkflowResponse) => void
   ): Promise<DeleteWorkflowResponse> {
     return this.request("DeleteWorkflow", req, cb)
+  }
+
+  /**
+   * 查询schema详情
+   */
+  async GetSchema(
+    req: GetSchemaRequest,
+    cb?: (error: string, rep: GetSchemaResponse) => void
+  ): Promise<GetSchemaResponse> {
+    return this.request("GetSchema", req, cb)
   }
 
   /**
@@ -483,6 +598,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateConsoleGroupResponse) => void
   ): Promise<CreateConsoleGroupResponse> {
     return this.request("CreateConsoleGroup", req, cb)
+  }
+
+  /**
+   * 更新工作空间用户组角色
+   */
+  async UpdateWorkspaceGroupsRoles(
+    req: UpdateWorkspaceGroupsRolesRequest,
+    cb?: (error: string, rep: UpdateWorkspaceGroupsRolesResponse) => void
+  ): Promise<UpdateWorkspaceGroupsRolesResponse> {
+    return this.request("UpdateWorkspaceGroupsRoles", req, cb)
   }
 
   /**
@@ -586,13 +711,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新工作空间角色
+   * 获取table列表
    */
-  async UpdateWorkspaceRole(
-    req: UpdateWorkspaceRoleRequest,
-    cb?: (error: string, rep: UpdateWorkspaceRoleResponse) => void
-  ): Promise<UpdateWorkspaceRoleResponse> {
-    return this.request("UpdateWorkspaceRole", req, cb)
+  async ListTables(
+    req: ListTablesRequest,
+    cb?: (error: string, rep: ListTablesResponse) => void
+  ): Promise<ListTablesResponse> {
+    return this.request("ListTables", req, cb)
+  }
+
+  /**
+   * 分页获取数据目录列表
+   */
+  async ListCatalogs(
+    req: ListCatalogsRequest,
+    cb?: (error: string, rep: ListCatalogsResponse) => void
+  ): Promise<ListCatalogsResponse> {
+    return this.request("ListCatalogs", req, cb)
   }
 
   /**
@@ -613,6 +748,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListConsoleGroupsResponse) => void
   ): Promise<ListConsoleGroupsResponse> {
     return this.request("ListConsoleGroups", req, cb)
+  }
+
+  /**
+   * 查询catalog详情
+   */
+  async GetCatalog(
+    req: GetCatalogRequest,
+    cb?: (error: string, rep: GetCatalogResponse) => void
+  ): Promise<GetCatalogResponse> {
+    return this.request("GetCatalog", req, cb)
+  }
+
+  /**
+   * 查询工作空间用户组列表
+   */
+  async ListWorkspaceGroups(
+    req: ListWorkspaceGroupsRequest,
+    cb?: (error: string, rep: ListWorkspaceGroupsResponse) => void
+  ): Promise<ListWorkspaceGroupsResponse> {
+    return this.request("ListWorkspaceGroups", req, cb)
   }
 
   /**
@@ -643,6 +798,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateConsoleGroupResponse) => void
   ): Promise<UpdateConsoleGroupResponse> {
     return this.request("UpdateConsoleGroup", req, cb)
+  }
+
+  /**
+   * 查询工作空间用户列表
+   */
+  async ListWorkspaceUsers(
+    req: ListWorkspaceUsersRequest,
+    cb?: (error: string, rep: ListWorkspaceUsersResponse) => void
+  ): Promise<ListWorkspaceUsersResponse> {
+    return this.request("ListWorkspaceUsers", req, cb)
+  }
+
+  /**
+   * 删除table
+   */
+  async DeleteTable(
+    req: DeleteTableRequest,
+    cb?: (error: string, rep: DeleteTableResponse) => void
+  ): Promise<DeleteTableResponse> {
+    return this.request("DeleteTable", req, cb)
   }
 
   /**
@@ -695,6 +870,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加工作空间用户组
+   */
+  async AddWorkspaceGroups(
+    req: AddWorkspaceGroupsRequest,
+    cb?: (error: string, rep: AddWorkspaceGroupsResponse) => void
+  ): Promise<AddWorkspaceGroupsResponse> {
+    return this.request("AddWorkspaceGroups", req, cb)
+  }
+
+  /**
+   * 查询工作空间用户组用户列表
+   */
+  async ListWorkspaceGroupUsers(
+    req: ListWorkspaceGroupUsersRequest,
+    cb?: (error: string, rep: ListWorkspaceGroupUsersResponse) => void
+  ): Promise<ListWorkspaceGroupUsersResponse> {
+    return this.request("ListWorkspaceGroupUsers", req, cb)
+  }
+
+  /**
      * 在Studio（统一开发 IDE）的工作空间文件树中新建一个文件（Notebook/SQL/Python等），创建成功后返回文件的完整元信息。
 
 **前置条件**
@@ -722,6 +917,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新工作空间角色
+   */
+  async UpdateWorkspaceRole(
+    req: UpdateWorkspaceRoleRequest,
+    cb?: (error: string, rep: UpdateWorkspaceRoleResponse) => void
+  ): Promise<UpdateWorkspaceRoleResponse> {
+    return this.request("UpdateWorkspaceRole", req, cb)
+  }
+
+  /**
    * 删除工作空间角色
    */
   async DeleteWorkspaceRole(
@@ -729,6 +934,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWorkspaceRoleResponse) => void
   ): Promise<DeleteWorkspaceRoleResponse> {
     return this.request("DeleteWorkspaceRole", req, cb)
+  }
+
+  /**
+   * 查询table详情
+   */
+  async GetTable(
+    req: GetTableRequest,
+    cb?: (error: string, rep: GetTableResponse) => void
+  ): Promise<GetTableResponse> {
+    return this.request("GetTable", req, cb)
   }
 
   /**

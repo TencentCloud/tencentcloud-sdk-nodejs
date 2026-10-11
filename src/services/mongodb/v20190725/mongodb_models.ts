@@ -350,6 +350,20 @@ export interface CheckDBInstanceElasticCpuScalableResponse {
 }
 
 /**
+ * 角色
+ */
+export interface Role {
+  /**
+   * <p>角色名</p>
+   */
+  RoleName: string
+  /**
+   * <p>角色所属db</p>
+   */
+  Database: string
+}
+
+/**
  * DescribePasswordRotation返回参数结构体
  */
 export interface DescribePasswordRotationResponse {
@@ -522,6 +536,20 @@ export interface DescribeCurrentOpResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 角色权限
+ */
+export interface RolePrivilege {
+  /**
+   * <p>资源</p>
+   */
+  Resource: RoleResource
+  /**
+   * <p>动作</p>
+   */
+  Actions: Array<string>
 }
 
 /**
@@ -755,47 +783,17 @@ export interface SlowLogPattern {
 }
 
 /**
- * 日志下载任务描述
+ * SetAccountUserPrivilege返回参数结构体
  */
-export interface Task {
+export interface SetAccountUserPrivilegeResponse {
   /**
-   * 下载任务类型，0:慢日志，1:错误日志
+   * 任务ID。
    */
-  TaskType?: number
+  FlowId?: number
   /**
-   * 任务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-  /**
-   * 文件大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileSize?: number
-  /**
-   * 任务状态，0:初始化，1:运行中，2:成功，3:失败
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 百分比
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Percent?: number
-  /**
-   * 下载链接
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Url?: string
+  RequestId?: string
 }
 
 /**
@@ -824,6 +822,36 @@ export interface AssignProjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyInstanceAz请求参数结构体
+ */
+export interface ModifyInstanceAzRequest {
+  /**
+   * <p>实例 ID，例如：cmgo-p8vn****。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>主节点所在的可用区 ID。获取方式，请参见<a href="https://cloud.tencent.com/document/product/240/3637">地域和可用区</a>。</p>
+   */
+  PrimaryNodeZone: string
+  /**
+   * <p>从节点所在的可用区 ID 列表。<br><strong>注意</strong>：不可包含主节点与 Hidden 节点所在的可用区。</p>
+   */
+  SecondaryNodeZone: Array<string>
+  /**
+   * <p>若当前实例未配置 Hidden 节点，则无需传入此参数。</p>
+   */
+  HiddenNodeZone?: string
+  /**
+   * <p>只读节点所在的可用区 ID 列表。<br><strong>注意</strong>：若当前实例已包含只读节点，则此参数为必填项。</p>
+   */
+  ReadonlyNodeZone?: Array<string>
+  /**
+   * <p>指定切换可用区的执行时间策略。</p><ul><li>0：立即执行切换。</li><li>1：在设定的维护时间窗执行切换。具体信息，请参见<a href="https://cloud.tencent.com/document/product/240/19910">设置实例维护时间</a>。</li></ul>
+   */
+  InMaintenance?: number
 }
 
 /**
@@ -1083,9 +1111,17 @@ export interface AddNodeList {
 }
 
 /**
- * EnablePasswordRotation返回参数结构体
+ * DescribeInstanceRoles返回参数结构体
  */
-export interface EnablePasswordRotationResponse {
+export interface DescribeInstanceRolesResponse {
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * <p>角色列表</p>
+   */
+  Roles?: Array<RoleInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1121,13 +1157,9 @@ export interface ParamType {
 }
 
 /**
- * SetAccountUserPrivilege返回参数结构体
+ * EnablePasswordRotation返回参数结构体
  */
-export interface SetAccountUserPrivilegeResponse {
-  /**
-   * 任务ID。
-   */
-  FlowId?: number
+export interface EnablePasswordRotationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1532,13 +1564,13 @@ export interface DescribeDetailedSlowLogsRequest {
 }
 
 /**
- * ModifyInstanceAz返回参数结构体
+ * CreateInstanceUser返回参数结构体
  */
-export interface ModifyInstanceAzResponse {
+export interface CreateInstanceUserResponse {
   /**
-   * <p>可用区调整订单ID。</p>
+   * <p>异步任务ID</p>
    */
-  DealId?: string
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1573,17 +1605,45 @@ export interface UpgradeDbInstanceVersionRequest {
 }
 
 /**
- * ModifyDBInstanceNetworkAddress返回参数结构体
+ * 账号信息
  */
-export interface ModifyDBInstanceNetworkAddressResponse {
+export interface InstanceUserInfo {
   /**
-   * 修改网络异步流程任务ID。
+   * <p>用户名</p>
    */
-  FlowId?: number
+  UserName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>认证数据库</p>
    */
-  RequestId?: string
+  Database?: string
+  /**
+   * <p>角色列表（新方式）</p>
+   */
+  Roles?: Array<Role>
+  /**
+   * <p>权限列表（老方式）</p>
+   */
+  AuthRole?: Array<Auth>
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>控制台密码更新时间</p>
+   */
+  ConsolePassUpdateTime?: string
+  /**
+   * <p>是否开启密码轮转</p>
+   */
+  EnablePasswordRotation?: number
+  /**
+   * <p>自定义描述</p>
+   */
+  Description?: string
 }
 
 /**
@@ -1843,28 +1903,17 @@ export interface DescribeDBInstancesRequest {
 }
 
 /**
- * InstanceEnableSSL返回参数结构体
+ * DescribeInstanceUsers返回参数结构体
  */
-export interface InstanceEnableSSLResponse {
+export interface DescribeInstanceUsersResponse {
   /**
-   * <p>SSL开启状态。</p><ul><li>0：关闭。</li><li>1：开启。</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>账号列表</p>
    */
-  Status?: number
+  Users?: Array<InstanceUserInfo>
   /**
-   * <p>证书文件过期时间，格式为：2023-05-01 12:00:00。</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>总数</p>
    */
-  ExpiredTime?: string
-  /**
-   * <p>证书文件的下载链接。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertUrl?: string
-  /**
-   * <p>流程id</p>
-   */
-  FlowId?: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2190,6 +2239,24 @@ export interface AuditInstance {
 }
 
 /**
+ * DeleteInstanceRole请求参数结构体
+ */
+export interface DeleteInstanceRoleRequest {
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>角色名</p>
+   */
+  RoleName: string
+  /**
+   * <p>角色所属数据库</p>
+   */
+  Database?: string
+}
+
+/**
  * 实例可修改参数 Integer 类型集合。
  */
 export interface InstanceIntegerParam {
@@ -2240,33 +2307,45 @@ export interface InstanceIntegerParam {
 }
 
 /**
- * ModifyInstanceAz请求参数结构体
+ * CreateInstanceUser请求参数结构体
  */
-export interface ModifyInstanceAzRequest {
+export interface CreateInstanceUserRequest {
   /**
-   * <p>实例 ID，例如：cmgo-p8vn****。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
+   * <p>实例id</p>
    */
   InstanceId: string
   /**
-   * <p>主节点所在的可用区 ID。获取方式，请参见<a href="https://cloud.tencent.com/document/product/240/3637">地域和可用区</a>。</p>
+   * <p>用户名</p>
    */
-  PrimaryNodeZone: string
+  UserName: string
   /**
-   * <p>从节点所在的可用区 ID 列表。<br><strong>注意</strong>：不可包含主节点与 Hidden 节点所在的可用区。</p>
+   * <p>密码</p>
    */
-  SecondaryNodeZone: Array<string>
+  Password?: string
   /**
-   * <p>若当前实例未配置 Hidden 节点，则无需传入此参数。</p>
+   * <p>加密后的密码（与Password二选一）</p>
    */
-  HiddenNodeZone?: string
+  EncryptedPassword?: string
   /**
-   * <p>只读节点所在的可用区 ID 列表。<br><strong>注意</strong>：若当前实例已包含只读节点，则此参数为必填项。</p>
+   * <p>认证数据库（用户所属数据库）</p>
    */
-  ReadonlyNodeZone?: Array<string>
+  Database?: string
   /**
-   * <p>指定切换可用区的执行时间策略。</p><ul><li>0：立即执行切换。</li><li>1：在设定的维护时间窗执行切换。具体信息，请参见<a href="https://cloud.tencent.com/document/product/240/19910">设置实例维护时间</a>。</li></ul>
+   * <p>角色列表（新方式，可包含内置角色和自定义角色）</p>
    */
-  InMaintenance?: number
+  Roles?: Array<Role>
+  /**
+   * <p>权限列表（旧方式）</p>
+   */
+  AuthRole?: Array<Auth>
+  /**
+   * <p>自定义描述</p>
+   */
+  Description?: string
+  /**
+   * <p>是否开启密码轮转（0-不开启，1-开启）</p>
+   */
+  EnablePasswordRotation?: number
 }
 
 /**
@@ -2331,6 +2410,20 @@ export interface CreateDBInstanceResponse {
    * <p>创建的实例ID列表</p>
    */
   InstanceIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteInstanceRole返回参数结构体
+ */
+export interface DeleteInstanceRoleResponse {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2476,18 +2569,32 @@ export interface InstanceTextParam {
 }
 
 /**
- * ModifyDBInstanceSecurityGroup请求参数结构体
+ * InstanceEnableSSL返回参数结构体
  */
-export interface ModifyDBInstanceSecurityGroupRequest {
+export interface InstanceEnableSSLResponse {
   /**
-   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * <p>SSL开启状态。</p><ul><li>0：关闭。</li><li>1：开启。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  Status?: number
   /**
-   * 目标安全组 ID。请登录[安全组控制台页面](https://console.cloud.tencent.com/vpc/security-group)复制目标安全组 ID。
-   **注意**：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。
+   * <p>证书文件过期时间，格式为：2023-05-01 12:00:00。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecurityGroupIds: Array<string>
+  ExpiredTime?: string
+  /**
+   * <p>证书文件的下载链接。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertUrl?: string
+  /**
+   * <p>流程id</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2610,6 +2717,21 @@ export interface ModifyDBInstanceLogToCLSRequest {
    * <p>CLS 所在地域，不填则默认为 Region 的参数值。</p>
    */
   CLSRegion?: string
+}
+
+/**
+ * ModifyDBInstanceSecurityGroup请求参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupRequest {
+  /**
+   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 目标安全组 ID。请登录[安全组控制台页面](https://console.cloud.tencent.com/vpc/security-group)复制目标安全组 ID。
+   **注意**：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。
+   */
+  SecurityGroupIds: Array<string>
 }
 
 /**
@@ -2751,6 +2873,44 @@ export interface UserInfo {
 }
 
 /**
+ * UpdateInstanceUser请求参数结构体
+ */
+export interface UpdateInstanceUserRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>用户名</p>
+   */
+  UserName: string
+  /**
+   * <p>认证数据库</p>
+   */
+  Database?: string
+  /**
+   * <p>新密码（可选，为空则不修改密码）</p>
+   */
+  Password?: string
+  /**
+   * <p>加密后的密码（可选，与Password二选一）</p>
+   */
+  EncryptedPassword?: string
+  /**
+   * <p>新的角色列表（可选，为空则不修改角色）</p>
+   */
+  Roles?: Array<Role>
+  /**
+   * <p>新的权限列表（可选，为空则不修改权限）</p>
+   */
+  AuthRole?: Array<Auth>
+  /**
+   * <p>用户描述（可选，为空则不修改描述）</p>
+   */
+  Description?: string
+}
+
+/**
  * CloseAuditService返回参数结构体
  */
 export interface CloseAuditServiceResponse {
@@ -2796,6 +2956,20 @@ export interface CloseAuditServiceRequest {
    * 实例ID，格式如：cmgo-test1234，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
+}
+
+/**
+ * DeleteInstanceUser返回参数结构体
+ */
+export interface DeleteInstanceUserResponse {
+  /**
+   * <p>流程ID</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3010,6 +3184,24 @@ export interface DescribeAsyncRequestInfoRequest {
    * 指定需查询的异步请求 ID。当接口操作涉及异步流程时（如 [CreateBackupDBInstance](https://cloud.tencent.com/document/product/240/46599)），其返回值中的 AsyncRequestId 即为本参数所需填入的 ID。
    */
   AsyncRequestId: string
+}
+
+/**
+ * DeleteInstanceUser请求参数结构体
+ */
+export interface DeleteInstanceUserRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>用户名</p>
+   */
+  UserName: string
+  /**
+   * <p>认证数据库</p>
+   */
+  Database?: string
 }
 
 /**
@@ -3309,6 +3501,32 @@ export interface SecurityGroupBound {
    * 安全组描述信息。
    */
   Desc?: string
+}
+
+/**
+ * UpdateInstanceRole请求参数结构体
+ */
+export interface UpdateInstanceRoleRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>角色名称</p>
+   */
+  RoleName: string
+  /**
+   * <p>角色所属数据库</p>
+   */
+  Database?: string
+  /**
+   * <p>角色权限列表，不传则不修改</p>
+   */
+  Privileges?: Array<RolePrivilege>
+  /**
+   * <p>角色列表，不传则不修改</p>
+   */
+  InheritedRoles?: Array<Role>
 }
 
 /**
@@ -3803,9 +4021,13 @@ export interface DescribeClientConnectionsRequest {
 }
 
 /**
- * SetDBInstanceDeletionProtection返回参数结构体
+ * ModifyDBInstanceNetworkAddress返回参数结构体
  */
-export interface SetDBInstanceDeletionProtectionResponse {
+export interface ModifyDBInstanceNetworkAddressResponse {
+  /**
+   * 修改网络异步流程任务ID。
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4098,6 +4320,40 @@ export interface RestoreDatabases {
 }
 
 /**
+ * DescribeInstanceUsers请求参数结构体
+ */
+export interface DescribeInstanceUsersRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>用户名，为空则查询所有用户</p>
+   */
+  UserName?: string
+  /**
+   * <p>数据库名，为空则查询所有数据库的账号</p>
+   */
+  Database?: string
+  /**
+   * <p>排序字段，可选值：UserName；不传则默认按 UserName 排序</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>排序方式，可选值：asc（升序）、desc（降序），默认 asc</p>
+   */
+  OrderType?: string
+  /**
+   * <p>分页偏移量，默认为 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页数量，默认为 20，最大 100</p>
+   */
+  Limit?: number
+}
+
+/**
  * SetAccountUserPrivilege请求参数结构体
  */
 export interface SetAccountUserPrivilegeRequest {
@@ -4246,6 +4502,20 @@ export interface DescribeDBInstanceLogToCLSResponse {
 }
 
 /**
+ * UpdateInstanceRole返回参数结构体
+ */
+export interface UpdateInstanceRoleResponse {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePasswordRotation请求参数结构体
  */
 export type DescribePasswordRotationRequest = null
@@ -4305,9 +4575,71 @@ export interface EnableTransparentDataEncryptionResponse {
 }
 
 /**
+ * 角色资源
+ */
+export interface RoleResource {
+  /**
+   * <p>是否集群级资源</p>
+   */
+  Cluster?: boolean
+  /**
+   * <p>db名</p>
+   */
+  Database?: string
+  /**
+   * <p>collection名</p>
+   */
+  Collection?: string
+}
+
+/**
  * IncreaseDBInstanceConnectionLimit请求参数结构体
  */
 export type IncreaseDBInstanceConnectionLimitRequest = null
+
+/**
+ * 日志下载任务描述
+ */
+export interface Task {
+  /**
+   * 下载任务类型，0:慢日志，1:错误日志
+   */
+  TaskType?: number
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSize?: number
+  /**
+   * 任务状态，0:初始化，1:运行中，2:成功，3:失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percent?: number
+  /**
+   * 下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+}
 
 /**
  * 单shark变配入参
@@ -4332,25 +4664,17 @@ export interface ModifyShardSpecInfo {
 }
 
 /**
- * DescribeAuditLogFiles请求参数结构体
+ * DescribeDBInstanceParamTplDetail请求参数结构体
  */
-export interface DescribeAuditLogFilesRequest {
+export interface DescribeDBInstanceParamTplDetailRequest {
   /**
-   * 实例 ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。
+   * 参数模板 ID。请通过接口 [DescribeDBInstanceParamTpl](https://cloud.tencent.com/document/product/240/109155) 获取模板 ID。
    */
-  InstanceId: string
+  TplId: string
   /**
-   * 分页大小参数。默认值为 20，取值范围[1,100]。
+   * 参数名称，传入该值，则只会获取该字段的参数详情。为空时，返回全部参数。
    */
-  Limit?: number
-  /**
-   * 分页偏移量。
-   */
-  Offset?: number
-  /**
-   * 审计日志文件名。该接口将根据此参数过滤相关的审计日志文件。
-   */
-  FileName?: string
+  ParamName?: string
 }
 
 /**
@@ -4777,6 +5101,20 @@ export interface OfflineIsolatedDBInstanceRequest {
 }
 
 /**
+ * ModifyInstanceAz返回参数结构体
+ */
+export interface ModifyInstanceAzResponse {
+  /**
+   * <p>可用区调整订单ID。</p>
+   */
+  DealId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAuditInstanceList返回参数结构体
  */
 export interface DescribeAuditInstanceListResponse {
@@ -4829,6 +5167,20 @@ export interface KMSInfoDetail {
    * kms所在地域。
    */
   KmsRegion?: string
+}
+
+/**
+ * CreateInstanceRole返回参数结构体
+ */
+export interface CreateInstanceRoleResponse {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4914,6 +5266,20 @@ export interface InquirePriceCreateDBInstancesRequest {
 }
 
 /**
+ * UpdateInstanceUser返回参数结构体
+ */
+export interface UpdateInstanceUserResponse {
+  /**
+   * <p>流程ID</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 需要终止的操作。
  */
 export interface Operation {
@@ -4980,6 +5346,32 @@ export interface DescribeDBInstanceParamTplResponse {
 }
 
 /**
+ * 角色详细信息
+ */
+export interface RoleInfo {
+  /**
+   * <p>角色名称</p>
+   */
+  RoleName?: string
+  /**
+   * <p>角色所属数据库</p>
+   */
+  Database?: string
+  /**
+   * <p>角色类型：builtin_database-内置数据库角色，builtin_cluster-内置集群角色，custom-自定义角色</p>
+   */
+  RoleType?: string
+  /**
+   * <p>授予的权限</p>
+   */
+  Privileges?: Array<RolePrivilege>
+  /**
+   * <p>继承的角色</p>
+   */
+  InheritedRoles?: Array<Role>
+}
+
+/**
  * ModifyDBInstanceSpec返回参数结构体
  */
 export interface ModifyDBInstanceSpecResponse {
@@ -4991,6 +5383,48 @@ export interface ModifyDBInstanceSpecResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeInstanceRoles请求参数结构体
+ */
+export interface DescribeInstanceRolesRequest {
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>数据库名，为空则查询所有数据库的角色</p>
+   */
+  Database?: string
+  /**
+   * <p>角色类型：builtin_database-内置数据库角色，builtin_cluster-内置集群角色，custom-自定义角色，为空则查询所有</p>
+   */
+  RoleType?: Array<string>
+  /**
+   * <p>角色名称，为空则查询所有角色</p>
+   */
+  RoleName?: string
+  /**
+   * <p>通用搜索关键字，模糊匹配继承角色和权限相关数据库名、角色名、Action名等</p>
+   */
+  SearchKey?: string
+  /**
+   * <p>排序字段，支持：RoleName，默认为 RoleName</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>排序方式：asc-升序，desc-降序，默认为 asc</p>
+   */
+  OrderType?: string
+  /**
+   * <p>分页偏移量，默认为 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页数量，默认为 20，最大 100</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -5168,6 +5602,32 @@ export interface InstanceChargePrepaid {
 }
 
 /**
+ * CreateInstanceRole请求参数结构体
+ */
+export interface CreateInstanceRoleRequest {
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>角色名</p>
+   */
+  RoleName: string
+  /**
+   * <p>角色所属db</p>
+   */
+  Database?: string
+  /**
+   * <p>权限</p>
+   */
+  Privileges?: Array<RolePrivilege>
+  /**
+   * <p>继承角色</p>
+   */
+  InheritedRoles?: Array<Role>
+}
+
+/**
  * 修改mongoDB实例，请求参数
  */
 export interface ModifyMongoDBParamType {
@@ -5238,17 +5698,35 @@ export interface DescribeDBInstanceURLRequest {
 }
 
 /**
- * DescribeDBInstanceParamTplDetail请求参数结构体
+ * SetDBInstanceDeletionProtection返回参数结构体
  */
-export interface DescribeDBInstanceParamTplDetailRequest {
+export interface SetDBInstanceDeletionProtectionResponse {
   /**
-   * 参数模板 ID。请通过接口 [DescribeDBInstanceParamTpl](https://cloud.tencent.com/document/product/240/109155) 获取模板 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TplId: string
+  RequestId?: string
+}
+
+/**
+ * DescribeAuditLogFiles请求参数结构体
+ */
+export interface DescribeAuditLogFilesRequest {
   /**
-   * 参数名称，传入该值，则只会获取该字段的参数详情。为空时，返回全部参数。
+   * 实例 ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。
    */
-  ParamName?: string
+  InstanceId: string
+  /**
+   * 分页大小参数。默认值为 20，取值范围[1,100]。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量。
+   */
+  Offset?: number
+  /**
+   * 审计日志文件名。该接口将根据此参数过滤相关的审计日志文件。
+   */
+  FileName?: string
 }
 
 /**

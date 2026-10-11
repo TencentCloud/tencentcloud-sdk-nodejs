@@ -38,6 +38,16 @@ it("ags.v20250920.PreviewRegistryRecord", async function () {
     }
 })
 
+it("ags.v20250920.CreateSandboxSnapshot", async function () {
+    try {
+       const data = await client.CreateSandboxSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.UpdateSandboxInstance", async function () {
     try {
        const data = await client.UpdateSandboxInstance({})
@@ -108,9 +118,9 @@ it("ags.v20250920.SyncRegistryRecord", async function () {
     }
 })
 
-it("ags.v20250920.DescribeRegistryAuditLogList", async function () {
+it("ags.v20250920.DeleteSandboxSnapshot", async function () {
     try {
-       const data = await client.DescribeRegistryAuditLogList({})
+       const data = await client.DeleteSandboxSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +261,16 @@ it("ags.v20250920.CancelRegistryRecord", async function () {
 it("ags.v20250920.DeleteSessionSpace", async function () {
     try {
        const data = await client.DeleteSessionSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.DescribeSandboxSnapshotList", async function () {
+    try {
+       const data = await client.DescribeSandboxSnapshotList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +511,16 @@ it("ags.v20250920.DescribePreCacheImageTask", async function () {
 it("ags.v20250920.StopSandboxInstance", async function () {
     try {
        const data = await client.StopSandboxInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.DescribeRegistryAuditLogList", async function () {
+    try {
+       const data = await client.DescribeRegistryAuditLogList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

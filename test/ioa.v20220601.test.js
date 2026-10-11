@@ -298,6 +298,16 @@ it("ioa.v20220601.BindBusinessResourceConnectorGroup", async function () {
     }
 })
 
+it("ioa.v20220601.DescribeAccountVirtualGroups", async function () {
+    try {
+       const data = await client.DescribeAccountVirtualGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeDirectAccountGroupResources", async function () {
     try {
        const data = await client.DescribeDirectAccountGroupResources({})

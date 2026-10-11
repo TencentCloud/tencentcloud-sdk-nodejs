@@ -322,6 +322,20 @@ Value 填写：
 }
 
 /**
+ * 接口列表
+ */
+export interface YAxis {
+  /**
+   * <p>接口列表</p>
+   */
+  Keys: Array<string>
+  /**
+   * <p>接口列表</p>
+   */
+  Data: Array<string>
+}
+
+/**
  * DescribeTopologyNew返回参数结构体
  */
 export interface DescribeTopologyNewResponse {
@@ -709,6 +723,44 @@ export interface DescribeApmPrometheusRuleRequest {
    * 业务系统ID
    */
   InstanceId: string
+}
+
+/**
+ * 树形结构
+ */
+export interface SpanTreeView {
+  /**
+   * 树结构json串
+   */
+  TreeData?: string
+  /**
+   * 列表
+   */
+  ChartData?: ChartData
+  /**
+   * Trace概览信息
+   */
+  TraceOverview?: TraceOverview
+  /**
+   * 压缩编码后的树结构json串
+   */
+  CompressedTreeData?: string
+  /**
+   * 整条链路的 span 数量是否超过限制
+   */
+  CntExceeded?: boolean
+  /**
+   * 是否有内部查询超时
+   */
+  QueryTimeout?: boolean
+  /**
+   * 链路中 span 总数量
+   */
+  SpanTotalCnt?: number
+  /**
+   * 过滤视图的标签值列表
+   */
+  FilterViewTagValues?: Array<TagValues>
 }
 
 /**
@@ -1348,6 +1400,20 @@ export interface APMKVItem {
 }
 
 /**
+ * 接口参数列表
+ */
+export interface ChartData {
+  /**
+   * <p>接口参数id列表</p>
+   */
+  Series: Array<Series>
+  /**
+   * <p>接口参数列表</p>
+   */
+  YAxis: Array<YAxis>
+}
+
+/**
  * DescribeGeneralSpanList请求参数结构体
  */
 export interface DescribeGeneralSpanListRequest {
@@ -1383,6 +1449,20 @@ export interface DescribeGeneralSpanListRequest {
    * <p>分页</p>
    */
   Offset?: number
+}
+
+/**
+ * 错误Span的数据项
+ */
+export interface ErrorSpan {
+  /**
+   * <p>异常SpanId</p>
+   */
+  SpanID?: string
+  /**
+   * <p>异常信息</p>
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -1864,15 +1944,15 @@ export interface SpanLog {
  */
 export interface QueryMetricItem {
   /**
-   * 指标名
+   * <p>指标名</p>
    */
   MetricName: string
   /**
-   * 同比，现支持 CompareByYesterday (与昨天相比)和CompareByLastWeek (与上周相比)
+   * <p>同比，现支持 CompareByYesterday (与昨天相比)和CompareByLastWeek (与上周相比)</p>
    */
   Compares?: Array<string>
   /**
-   * 同比，已弃用，不建议使用
+   * <p>同比，已弃用，不建议使用</p>
    */
   Compare?: string
 }
@@ -1969,6 +2049,20 @@ export interface DescribeApmInstancesResponse {
 }
 
 /**
+ * DescribeSpanTreeByID返回参数结构体
+ */
+export interface DescribeSpanTreeByIDResponse {
+  /**
+   * <p>树形图</p>
+   */
+  SpanTreeView?: SpanTreeView
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeApmPrometheusRule返回参数结构体
  */
 export interface DescribeApmPrometheusRuleResponse {
@@ -2001,6 +2095,20 @@ export interface ServiceRelation {
 }
 
 /**
+ * 维度值（值为List）
+ */
+export interface TagValues {
+  /**
+   * 维度键
+   */
+  Key?: string
+  /**
+   * 维度值
+   */
+  Values?: Array<string>
+}
+
+/**
  * ModifyApmSampleConfig返回参数结构体
  */
 export interface ModifyApmSampleConfigResponse {
@@ -2022,6 +2130,52 @@ export interface DescribeApmApplicationConfigRequest {
    * 服务名称
    */
   ServiceName: string
+}
+
+/**
+ * Trace概览查询
+ */
+export interface TraceOverview {
+  /**
+   * <p>traceID调用状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * <p>TraceId查询</p>
+   */
+  TraceID?: string
+  /**
+   * <p>错误信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * <p>服务名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+  /**
+   * <p>耗时</p>
+   */
+  Duration?: number
+  /**
+   * <p>接口名</p>
+   */
+  Operation?: string
+  /**
+   * <p>开始时间（微秒）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>应用数</p>
+   */
+  ApplicationCount?: number
+  /**
+   * <p>异常Span列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorSpans?: Array<ErrorSpan>
 }
 
 /**
@@ -2099,29 +2253,45 @@ export interface ApmTag {
 }
 
 /**
- * DescribeRelatedServicesOnTrace请求参数结构体
+ * DescribeApmSQLInjectionDetail请求参数结构体
  */
-export interface DescribeRelatedServicesOnTraceRequest {
+export interface DescribeApmSQLInjectionDetailRequest {
   /**
    * 业务系统 ID
    */
   InstanceId: string
   /**
-   * 查询开始时间
+   * 限制
    */
-  StartTime: number
+  Limit?: number
   /**
-   * 查询结束时间
+   * 偏移量
    */
-  EndTime: number
+  Offset?: number
   /**
-   * 应用名
+   * 秒级时间戳
    */
-  ServiceName?: string
+  StartTime?: number
   /**
-   * 是否为应用拓扑查询
+   * 秒级时间戳
    */
-  IsServiceTopology?: boolean
+  EndTime?: number
+  /**
+   * 排序
+   */
+  OrderBy?: OrderBy
+  /**
+   * 查询过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 聚合维度
+   */
+  GroupBy?: Array<string>
+  /**
+   * 指标列表
+   */
+  Metrics?: Array<QueryMetricItem>
 }
 
 /**
@@ -2208,6 +2378,48 @@ export interface AutoProfilingConfig {
    * 内存自动剖析任务时长
    */
   MemoryProfilingDuration?: number
+}
+
+/**
+ * DescribeSpanTreeByID请求参数结构体
+ */
+export interface DescribeSpanTreeByIDRequest {
+  /**
+   * <p>业务系统 ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>TraceID</p>
+   */
+  Filters: Array<Filter>
+  /**
+   * <p>Span查询开始时间戳（单位:秒）</p>
+   */
+  StartTime: number
+  /**
+   * <p>Span查询结束时间戳（单位:秒）</p>
+   */
+  EndTime: number
+  /**
+   * <p>代表请求的是否为完整瀑布图</p>
+   */
+  IsFold?: boolean
+  /**
+   * <p>开启关键调用视图</p>
+   */
+  EntrySpanSelected?: boolean
+  /**
+   * <p>关注的SpanId</p>
+   */
+  FocusSpanId?: string
+  /**
+   * <p>过滤视图的Tag列表</p>
+   */
+  FilterViewTagKeyList?: Array<string>
+  /**
+   * <p>是否开启云资源关联</p>
+   */
+  EnableResourceLink?: boolean
 }
 
 /**
@@ -2929,31 +3141,31 @@ export interface DescribeApmAllVulCountRequest {
  */
 export interface TkeMeta {
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterID?: string
   /**
-   * pod name
+   * <p>pod name</p>
    */
   PodName?: string
   /**
-   * 命名空间
+   * <p>命名空间</p>
    */
   Namespace?: string
   /**
-   * 工作负载
+   * <p>工作负载</p>
    */
   Deployment?: string
   /**
-   * pod ip
+   * <p>pod ip</p>
    */
   PodIP?: string
   /**
-   * node ip
+   * <p>node ip</p>
    */
   NodeIP?: string
 }
@@ -3377,45 +3589,29 @@ export interface Resource {
 }
 
 /**
- * DescribeApmSQLInjectionDetail请求参数结构体
+ * DescribeRelatedServicesOnTrace请求参数结构体
  */
-export interface DescribeApmSQLInjectionDetailRequest {
+export interface DescribeRelatedServicesOnTraceRequest {
   /**
    * 业务系统 ID
    */
   InstanceId: string
   /**
-   * 限制
+   * 查询开始时间
    */
-  Limit?: number
+  StartTime: number
   /**
-   * 偏移量
+   * 查询结束时间
    */
-  Offset?: number
+  EndTime: number
   /**
-   * 秒级时间戳
+   * 应用名
    */
-  StartTime?: number
+  ServiceName?: string
   /**
-   * 秒级时间戳
+   * 是否为应用拓扑查询
    */
-  EndTime?: number
-  /**
-   * 排序
-   */
-  OrderBy?: OrderBy
-  /**
-   * 查询过滤条件
-   */
-  Filters?: Array<Filter>
-  /**
-   * 聚合维度
-   */
-  GroupBy?: Array<string>
-  /**
-   * 指标列表
-   */
-  Metrics?: Array<QueryMetricItem>
+  IsServiceTopology?: boolean
 }
 
 /**
@@ -3423,7 +3619,7 @@ export interface DescribeApmSQLInjectionDetailRequest {
  */
 export interface Selectors {
   /**
-   * 组件勾选情况
+   * <p>组件勾选情况</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Component?: Array<string>
@@ -3813,6 +4009,25 @@ export interface SpanProcess {
    * Tags 标签数组
    */
   Tags: Array<SpanTag>
+}
+
+/**
+ * 耗时消耗时间
+ */
+export interface Series {
+  /**
+   * 耗时列表信息
+   */
+  Data: Array<number | bigint>
+  /**
+   * 描述
+   */
+  Stack: string
+  /**
+   * 字段名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
 }
 
 /**

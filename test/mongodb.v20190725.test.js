@@ -198,9 +198,29 @@ it("mongodb.v20190725.ResetDBInstancePassword", async function () {
     }
 })
 
+it("mongodb.v20190725.CreateInstanceUser", async function () {
+    try {
+       const data = await client.CreateInstanceUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBBackups", async function () {
     try {
        const data = await client.DescribeDBBackups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeInstanceUsers", async function () {
+    try {
+       const data = await client.DescribeInstanceUsers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +291,16 @@ it("mongodb.v20190725.CreateDBInstanceParamTpl", async function () {
 it("mongodb.v20190725.DropDBInstanceParamTpl", async function () {
     try {
        const data = await client.DropDBInstanceParamTpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.UpdateInstanceUser", async function () {
+    try {
+       const data = await client.UpdateInstanceUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,6 +588,16 @@ it("mongodb.v20190725.DescribeDBInstances", async function () {
     }
 })
 
+it("mongodb.v20190725.UpdateInstanceRole", async function () {
+    try {
+       const data = await client.UpdateInstanceRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.IsolateDBInstance", async function () {
     try {
        const data = await client.IsolateDBInstance({})
@@ -778,6 +818,16 @@ it("mongodb.v20190725.ModifyAuditService", async function () {
     }
 })
 
+it("mongodb.v20190725.CreateInstanceRole", async function () {
+    try {
+       const data = await client.CreateInstanceRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.SetBackupRules", async function () {
     try {
        const data = await client.SetBackupRules({})
@@ -818,6 +868,16 @@ it("mongodb.v20190725.InquirePriceCreateDBInstances", async function () {
     }
 })
 
+it("mongodb.v20190725.DeleteInstanceRole", async function () {
+    try {
+       const data = await client.DeleteInstanceRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribePasswordRotation", async function () {
     try {
        const data = await client.DescribePasswordRotation({})
@@ -851,6 +911,16 @@ it("mongodb.v20190725.AssignProject", async function () {
 it("mongodb.v20190725.DescribeTransparentDataEncryptionStatus", async function () {
     try {
        const data = await client.DescribeTransparentDataEncryptionStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeInstanceRoles", async function () {
+    try {
+       const data = await client.DescribeInstanceRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -901,6 +971,16 @@ it("mongodb.v20190725.KillOps", async function () {
 it("mongodb.v20190725.InquirePriceRenewDBInstances", async function () {
     try {
        const data = await client.InquirePriceRenewDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DeleteInstanceUser", async function () {
+    try {
+       const data = await client.DeleteInstanceUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

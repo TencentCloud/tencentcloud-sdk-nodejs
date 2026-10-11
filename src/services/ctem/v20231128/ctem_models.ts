@@ -791,6 +791,14 @@ export interface DisplayConfig {
    * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
    */
   AggregationCount?: number
+  /**
+   * <p>状态</p>
+   */
+  Status?: string
+  /**
+   * <p>最近检测时间</p>
+   */
+  LastCheckTime?: string
 }
 
 /**
@@ -1785,6 +1793,14 @@ export interface DisplaySensitiveInfo {
    * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
    */
   AggregationCount?: number
+  /**
+   * <p>状态</p>
+   */
+  Status?: string
+  /**
+   * <p>最近检测时间</p>
+   */
+  LastCheckTime?: string
 }
 
 /**

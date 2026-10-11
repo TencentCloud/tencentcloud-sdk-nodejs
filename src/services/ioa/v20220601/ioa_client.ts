@@ -27,7 +27,7 @@ import {
   DescribeDeviceDetailListResponse,
   ModifyCompanyDirectoryConfigRequest,
   ModifyBusinessResourceRequest,
-  DescribeAggrSoftDeviceListRequest,
+  DescribeAccountVirtualGroupsPageData,
   ComplexRule,
   DescribeDeviceHardwareInfoListResponse,
   DescribeResourceGrantedAccountsRequest,
@@ -39,6 +39,7 @@ import {
   I18nString,
   DescribeDevicesResponse,
   DescribeAggrSoftDeviceListData,
+  DescribeAccountVirtualGroupsData,
   GrantResourcesByVirtualGroupsRequest,
   UnbindVirtualAccountData,
   DescribeAccountGroupsData,
@@ -48,10 +49,12 @@ import {
   DescribeVirtualAccountsData,
   DescribeAggrSoftCategorySoftListRequest,
   DeviceNetworkInfo,
+  DescribeAccountVirtualGroupsRequest,
   CreateDeviceVirtualGroupRequest,
   DescribeLocalAccountsData,
   CreateDeviceTaskRequest,
   DeviceDetail,
+  DescribeAggrSoftDeviceListRequest,
   DescribeResourceGrantedVirtualGroupsResponse,
   DescribeSoftCensusListByDeviceRequest,
   GrantedAccountItem,
@@ -111,6 +114,7 @@ import {
   CreateDLPFileDetectTaskData,
   BindVirtualAccountResultData,
   DescribeDLPEdgeNodesRequest,
+  DescribeAccountVirtualGroupsResponse,
   Paging,
   GrantResourcesByAccountsResponse,
   SoftwareInformationData,
@@ -495,6 +499,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindBusinessResourceConnectorGroupResponse) => void
   ): Promise<BindBusinessResourceConnectorGroupResponse> {
     return this.request("BindBusinessResourceConnectorGroup", req, cb)
+  }
+
+  /**
+   * 列表账户虚拟组，支持分页，名称搜索，私有化调用path为：capi/Assets/DescribeAccountVirtualGroups，从7.x版本开始支持
+   */
+  async DescribeAccountVirtualGroups(
+    req: DescribeAccountVirtualGroupsRequest,
+    cb?: (error: string, rep: DescribeAccountVirtualGroupsResponse) => void
+  ): Promise<DescribeAccountVirtualGroupsResponse> {
+    return this.request("DescribeAccountVirtualGroups", req, cb)
   }
 
   /**

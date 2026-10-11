@@ -506,7 +506,7 @@ export interface CreateInstancesRequest {
    */
   DryRun?: boolean
   /**
-   * <p>指实例部署模式。</p><ul><li>local：传统架构，默认为 local。</li><li>cdc：独享集群。</li><li>cloud：云原生，当前已暂停售卖。</li></ul>
+   * <p>指实例部署类型。</p><p>枚举值：</p><ul><li>local： 通用 I 型。</li><li>localv2： 通用 II 型。</li><li>cdc： 独享集群型。</li><li>cloud： 云原生，当前已暂停售卖。</li></ul>
    */
   ProductVersion?: string
   /**
@@ -3056,6 +3056,20 @@ export interface KillMasterGroupRequest {
 }
 
 /**
+ * UpgradeInstanceProductVersion返回参数结构体
+ */
+export interface UpgradeInstanceProductVersionResponse {
+  /**
+   * <p>订单号。</p>
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SwitchAccessNewInstance返回参数结构体
  */
 export interface SwitchAccessNewInstanceResponse {
@@ -5475,6 +5489,24 @@ export interface FailedInstance {
    * <p>失败信息</p>
    */
   Message?: string
+}
+
+/**
+ * UpgradeInstanceProductVersion请求参数结构体
+ */
+export interface UpgradeInstanceProductVersionRequest {
+  /**
+   * <p>变更的目标产品类型。</p><p>枚举值：</p><ul><li>localv2： 通用 II 型</li></ul>
+   */
+  TargetProductVersion: string
+  /**
+   * <p>切换时间。</p><ul><li>1：维护时间窗切换。</li><li>2：立即切换。</li></ul>
+   */
+  SwitchOption: number
+  /**
+   * <p>指定实例 ID。例如：crs-xjhsdj****，请登录<a href="https://console.cloud.tencent.com/redis#/">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
 }
 
 /**

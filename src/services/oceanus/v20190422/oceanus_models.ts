@@ -1025,6 +1025,16 @@ export interface Setats {
    * <p>集群隔离时间，0为7天，1为15天</p>
    */
   IsolationPolicyVersion?: number
+  /**
+   * <p>安全组信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * <p>网络信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CCNs?: Array<CCN>
 }
 
 /**
@@ -1346,17 +1356,17 @@ export interface RenewOceanusClusterResponse {
  */
 export interface CCN {
   /**
-   * 私有网络 ID
+   * <p>私有网络 ID</p>
    */
-  VpcId: string
+  VpcId?: string
   /**
-   * 子网 ID
+   * <p>子网 ID</p>
    */
-  SubnetId: string
+  SubnetId?: string
   /**
-   * 云联网 ID，如 ccn-rahigzjd
+   * <p>云联网 ID，如 ccn-rahigzjd</p>
    */
-  CcnId: string
+  CcnId?: string
 }
 
 /**
@@ -4978,6 +4988,11 @@ export interface Warehouse {
    * <p>hive cata 类型</p>
    */
   HiveCatalogType?: number
+  /**
+   * <p>流湖托管通serialId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageSerialId?: string
 }
 
 /**
@@ -5009,95 +5024,150 @@ export interface SubFolderInfo {
  */
 export interface ClusterSession {
   /**
-   * 集群SerialId
+   * <p>集群SerialId</p>
    */
   ClusterGroupSerialId?: string
   /**
-   * 创建者appId
+   * <p>创建者appId</p>
    */
   AppId?: number
   /**
-   * 创建者主账号
+   * <p>创建者主账号</p>
    */
   OwnerUin?: string
   /**
-   * 创建者账号
+   * <p>创建者账号</p>
    */
   CreatorUin?: string
   /**
-   * 区域
+   * <p>区域</p>
    */
   Region?: string
   /**
-   * zone
+   * <p>zone</p>
    */
   Zone?: string
   /**
-   * Session集群状态
+   * <p>Session集群状态</p>
    */
   Status?: number
   /**
-   * Session集群消耗的cu数量
+   * <p>Session集群消耗的cu数量</p>
    */
   CuNum?: number
   /**
-   * Session集群的Flink版本
+   * <p>Session集群的Flink版本</p>
    */
   FlinkVersion?: string
   /**
-   * session集群FlinkUi地址
+   * <p>session集群FlinkUi地址</p>
    */
   WebUIUrl?: string
   /**
-   * session集群高级参数
+   * <p>session集群高级参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Properties?: Array<Property>
   /**
-   * 引用资源
+   * <p>引用资源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceRefs?: Array<SessionClusterRefItem>
   /**
-   * JobManager的规格
+   * <p>JobManager的规格</p>
    */
   JobManagerCuSpec?: number
   /**
-   * TaskManager的规格
+   * <p>TaskManager的规格</p>
    */
   TaskManagerCuSpec?: number
   /**
-   * TaskManager启动的数量
+   * <p>TaskManager启动的数量</p>
    */
   TaskManagerNum?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * JobManagerCpu
+   * <p>JobManagerCpu</p>
    */
   JobManagerCpu?: number
   /**
-   * JobManagerMem
+   * <p>JobManagerMem</p>
    */
   JobManagerMem?: number
   /**
-   * TaskManagerCpu
+   * <p>TaskManagerCpu</p>
    */
   TaskManagerCpu?: number
   /**
-   * TaskManagerMem
+   * <p>TaskManagerMem</p>
    */
   TaskManagerMem?: number
   /**
-   * jdk版本
+   * <p>jdk版本</p>
    */
   JdkVersion?: string
+  /**
+   * <p>描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>session集群SerialId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialId?: string
+  /**
+   * <p>集群名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterGroupName?: string
+  /**
+   * <p>cu</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCpu?: number
+  /**
+   * <p>使用Mem</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalMem?: number
+  /**
+   * <p>空间Id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkSpaceId?: string
+  /**
+   * <p>空间名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkSpaceName?: string
+  /**
+   * <p>标签列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>采集日志配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogConfig?: string
+  /**
+   * <p>更新用户</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateUin?: string
 }
 
 /**

@@ -408,16 +408,6 @@ it("ocr.v20181119.RecognizeTableOCR", async function () {
     }
 })
 
-it("ocr.v20181119.HandwritingEssayOCR", async function () {
-    try {
-       const data = await client.HandwritingEssayOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.TextDetect", async function () {
     try {
        const data = await client.TextDetect({})
@@ -428,9 +418,39 @@ it("ocr.v20181119.TextDetect", async function () {
     }
 })
 
+it("ocr.v20181119.HandwritingEssayOCR", async function () {
+    try {
+       const data = await client.HandwritingEssayOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.RunRerank", async function () {
+    try {
+       const data = await client.RunRerank({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.SmartStructuralOCR", async function () {
     try {
        const data = await client.SmartStructuralOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.CropEnhanceImageOCR", async function () {
+    try {
+       const data = await client.CropEnhanceImageOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,6 +738,16 @@ it("ocr.v20181119.LicensePlateOCR", async function () {
     }
 })
 
+it("ocr.v20181119.VerifyGeneralCardWarn", async function () {
+    try {
+       const data = await client.VerifyGeneralCardWarn({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.GetOCRToken", async function () {
     try {
        const data = await client.GetOCRToken({})
@@ -728,9 +758,9 @@ it("ocr.v20181119.GetOCRToken", async function () {
     }
 })
 
-it("ocr.v20181119.VerifyGeneralCardWarn", async function () {
+it("ocr.v20181119.SubmitMultimodalDocParseJob", async function () {
     try {
-       const data = await client.VerifyGeneralCardWarn({})
+       const data = await client.SubmitMultimodalDocParseJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +798,9 @@ it("ocr.v20181119.MixedInvoiceOCR", async function () {
     }
 })
 
-it("ocr.v20181119.CropEnhanceImageOCR", async function () {
+it("ocr.v20181119.DescribeMultimodalDocParseJob", async function () {
     try {
-       const data = await client.CropEnhanceImageOCR({})
+       const data = await client.DescribeMultimodalDocParseJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

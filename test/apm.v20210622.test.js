@@ -98,6 +98,16 @@ it("apm.v20210622.CreateApmInstance", async function () {
     }
 })
 
+it("apm.v20210622.DescribeSpanTreeByID", async function () {
+    try {
+       const data = await client.DescribeSpanTreeByID({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.DescribeTopologyNew", async function () {
     try {
        const data = await client.DescribeTopologyNew({})

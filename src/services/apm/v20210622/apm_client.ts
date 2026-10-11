@@ -31,6 +31,7 @@ import {
   DescribeApmAllVulCountResponse,
   DescribeApmSampleConfigResponse,
   DescribeServiceOverviewRequest,
+  YAxis,
   DescribeTopologyNewResponse,
   DescribeOPRAllVulCountResponse,
   ModifyApmApplicationConfigResponse,
@@ -47,6 +48,7 @@ import {
   DeleteApmSampleConfigResponse,
   TopologyEdgeNew,
   DescribeApmPrometheusRuleRequest,
+  SpanTreeView,
   CreateApmPrometheusRuleResponse,
   TerminateApmInstanceResponse,
   ApmPrometheusRules,
@@ -61,7 +63,9 @@ import {
   Line,
   ModifyApmAssociationResponse,
   APMKVItem,
+  ChartData,
   DescribeGeneralSpanListRequest,
+  ErrorSpan,
   DescribeApmAgentRequest,
   DescribeMetricRecordsRequest,
   DescribeGeneralMetricDataRequest,
@@ -75,19 +79,23 @@ import {
   QueryMetricItem,
   ServiceDetail,
   DescribeApmInstancesResponse,
+  DescribeSpanTreeByIDResponse,
   DescribeApmPrometheusRuleResponse,
   ServiceRelation,
+  TagValues,
   ModifyApmSampleConfigResponse,
   DescribeApmApplicationConfigRequest,
+  TraceOverview,
   CreateProfileTaskResponse,
   DescribeApmVulnerabilityDetailResponse,
   ModifyApmPrometheusRuleResponse,
   DescribeMetricRecordsResponse,
   ApmTag,
-  DescribeRelatedServicesOnTraceRequest,
+  DescribeApmSQLInjectionDetailRequest,
   Filter,
   DescribeGeneralOTSpanListRequest,
   AutoProfilingConfig,
+  DescribeSpanTreeByIDRequest,
   DescribeGeneralApmApplicationConfigResponse,
   CreateApmInstanceResponse,
   ApmVulnerabilityServiceDetail,
@@ -116,7 +124,7 @@ import {
   DescribeGeneralSpanListResponse,
   ApmAssociation,
   Resource,
-  DescribeApmSQLInjectionDetailRequest,
+  DescribeRelatedServicesOnTraceRequest,
   Selectors,
   ModifyApmServiceResponse,
   ModifyApmApplicationConfigRequest,
@@ -126,6 +134,7 @@ import {
   ModifyApmServiceRequest,
   SpanReference,
   SpanProcess,
+  Series,
   GeneralFilter,
   DescribeOPRAllVulCountRequest,
 } from "./apm_models"
@@ -217,6 +226,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateApmInstanceResponse) => void
   ): Promise<CreateApmInstanceResponse> {
     return this.request("CreateApmInstance", req, cb)
+  }
+
+  /**
+   * 查询trace详情接口信息
+   */
+  async DescribeSpanTreeByID(
+    req: DescribeSpanTreeByIDRequest,
+    cb?: (error: string, rep: DescribeSpanTreeByIDResponse) => void
+  ): Promise<DescribeSpanTreeByIDResponse> {
+    return this.request("DescribeSpanTreeByID", req, cb)
   }
 
   /**

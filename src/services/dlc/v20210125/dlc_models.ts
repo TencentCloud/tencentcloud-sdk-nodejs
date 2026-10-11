@@ -2151,17 +2151,25 @@ export interface DescribeTablesNameResponse {
 }
 
 /**
- * GetLabPodYaml返回参数结构体
+ * 引擎依赖管理，对应 Spark 的 --jars / --files / --archives / --py-files 四类资源。每条 JAR 要么 COS 路径（cos:///cosn://），要么 Maven GAV（group:artifact:version）；files/archives/pyFiles 是 COS 路径列表（pyFiles 支持 .py/.zip/.egg/.whl）。
  */
-export interface GetLabPodYamlResponse {
+export interface EngineConfigDependencies {
   /**
-   * <p>Pod YAML</p>
+   * <p>JAR 列表：每行一个 COS 路径或 Maven GAV。</p>
    */
-  Yaml?: string
+  Jars?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>files 列表：COS 路径，下载到 executor 工作目录（不解压）。</p>
    */
-  RequestId?: string
+  Files?: Array<string>
+  /**
+   * <p>archives 列表：COS 路径，下载并解压到 executor 工作目录。</p>
+   */
+  Archives?: Array<string>
+  /**
+   * <p>pyFiles 列表：COS 路径（.py/.zip/.egg/.whl），等价 Spark --py-files。</p>
+   */
+  PyFiles?: Array<string>
 }
 
 /**
@@ -4791,6 +4799,37 @@ export interface RecommendedKeyValue {
 }
 
 /**
+ * 用户vpc网络连接信息
+ */
+export interface UserVpcConnectionInfo {
+  /**
+   * 引擎网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNetworkId?: string
+  /**
+   * 用户vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserVpcId?: string
+  /**
+   * 用户终端节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserVpcEndpointId?: string
+  /**
+   * 用户终端节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserVpcEndpointName?: string
+  /**
+   * 接入点信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessConnectionInfos?: Array<string>
+}
+
+/**
  * UpdateResourceConfig返回参数结构体
  */
 export interface UpdateResourceConfigResponse {
@@ -5952,164 +5991,17 @@ export interface StopInferenceServiceRequest {
 }
 
 /**
- * UpdateJobSpec返回参数结构体
+ * 标签对信息
  */
-export interface UpdateJobSpecResponse {
+export interface TagInfo {
   /**
-   * <p>配置ID</p>
+   * 标签键
    */
-  Id?: string
+  TagKey?: string
   /**
-   * <p>配置名称</p>
+   * 标签值
    */
-  Name?: string
-  /**
-   * <p>配置描述</p>
-   */
-  Description?: string
-  /**
-   * <p>入口命令</p>
-   */
-  Entrypoint?: string
-  /**
-   * <p>镜像地址</p>
-   */
-  Image?: string
-  /**
-   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
-   */
-  ImagePullType?: string
-  /**
-   * <p>镜像拉取策略</p>
-   */
-  ImagePullPolicy?: string
-  /**
-   * <p>资源配置(JSON)</p>
-   */
-  ResourceConfig?: string
-  /**
-   * <p>运行时环境配置(JSON)</p>
-   */
-  RuntimeEnv?: string
-  /**
-   * <p>存储卷和挂载卷配置(JSON)</p>
-   */
-  Catalog?: string
-  /**
-   * <p>弹性伸缩配置(JSON)</p>
-   */
-  AutoscalerOptions?: string
-  /**
-   * <p>资源配置ID</p>
-   */
-  ResourceConfigId?: string
-  /**
-   * <p>资源配置模板是否变更</p>
-   */
-  ResourceConfigChanged?: boolean
-  /**
-   * <p>默认资源分区ID</p>
-   */
-  ResourcePartitionId?: string
-  /**
-   * <p>默认资源分区名称</p>
-   */
-  ResourcePartitionName?: string
-  /**
-   * <p>默认队列名称</p>
-   */
-  Queue?: string
-  /**
-   * <p>所属队列别名</p>
-   */
-  QueueAlias?: string
-  /**
-   * <p>作业包URL</p>
-   */
-  JobPackage?: string
-  /**
-   * <p>作业包名称</p>
-   */
-  JobPackageName?: string
-  /**
-   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
-   */
-  JobPackageSource?: string
-  /**
-   * <p>应用ID</p>
-   */
-  AppId?: number
-  /**
-   * <p>创建者UIN</p>
-   */
-  Uin?: string
-  /**
-   * <p>子用户UIN</p>
-   */
-  SubAccountUin?: string
-  /**
-   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
-   */
-  SubAccountName?: string
-  /**
-   * <p>创建时间</p>
-   */
-  CreateTime?: number
-  /**
-   * <p>更新时间</p>
-   */
-  UpdateTime?: number
-  /**
-   * <p>该配置产生的作业实例数量</p>
-   */
-  JobInstanceCount?: number
-  /**
-   * <p>是否有运行中的作业实例</p>
-   */
-  HasRunningJobs?: boolean
-  /**
-   * <p>高级参数json</p>
-   */
-  AdvancedOptions?: string
-  /**
-   * <p>默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupId?: string
-  /**
-   * <p>默认集群 ID（与 GroupId 互斥）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClusterId?: string
-  /**
-   * <p>作业优先级（1-9，数字越大优先级越高）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Priority?: number
-  /**
-   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
-   */
-  Tags?: Array<Tag>
-  /**
-   * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
-   */
-  DispatchStrategy?: string
-  /**
-   * <p>作业提交目标</p><p>枚举值：</p><ul><li>GROUP： 按计算组分派</li></ul>
-   */
-  SubmissionTarget?: string
-  /**
-   * <p>计算组名称</p>
-   */
-  GroupName?: string
-  /**
-   * <p>集群名称</p>
-   */
-  ClusterName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TagValue?: string
 }
 
 /**
@@ -9956,6 +9848,20 @@ export interface DeleteBenchmarkTaskRequest {
 }
 
 /**
+ * GetLabPodYaml返回参数结构体
+ */
+export interface GetLabPodYamlResponse {
+  /**
+   * <p>Pod YAML</p>
+   */
+  Yaml?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeUsers请求参数结构体
  */
 export interface DescribeUsersRequest {
@@ -11371,6 +11277,10 @@ export interface DescribeUserVpcConnectionRequest {
  */
 export interface DescribeJobDetailResponse {
   /**
+   * <p>作业详情，JSON 嵌套在 JobDetail 键下。</p>
+   */
+  JobDetail?: JobDetailInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -12660,6 +12570,10 @@ export interface TaskFullRespInfo {
    * <p>资源组类型</p>
    */
   ResourceGroupType?: string
+  /**
+   * <p>任务标签</p><p>参数格式：任意字符串</p>
+   */
+  Tag?: string
 }
 
 /**
@@ -12680,6 +12594,28 @@ export interface StartMlflowServerRequest {
    * <p>MlFlow Server的ID</p>
    */
   ServerId?: string
+}
+
+/**
+ * 入站作业入口（Entrypoint）.
+ */
+export interface EntrypointInfo {
+  /**
+   * <p>SQL 语句文本，须为 Base64 编码的 UTF-8 文本。仅 SPARK_SQL 模式可传且必填（解码后 ≤1MB）；SPARK_BATCH 模式禁止传。</p>
+   */
+  Statement?: string
+  /**
+   * <p>作业文件路径（JAR/Python），须匹配配置的路径前缀白名单。以 .py 结尾判定为 Python 入口（EntryPoint 禁传），否则为 JAR 入口（EntryPoint 必填）。</p>
+   */
+  EntryFile?: string
+  /**
+   * <p>入口类名（main class 全限定名）。JAR 入口（EntryFile 非 .py 结尾）必填；Python 入口（.py 结尾）禁传；SPARK_SQL 模式禁止传。</p>
+   */
+  EntryPoint?: string
+  /**
+   * <p>主方法参数列表（JSON 数组字符串），仅 SPARK_BATCH 模式可传；SPARK_SQL 模式禁止传。</p>
+   */
+  MainArgs?: string
 }
 
 /**
@@ -14515,6 +14451,28 @@ export interface StandardEngineResourceGroupConfigInfo {
    * 更新时间
    */
   UpdateTime?: number
+}
+
+/**
+ * 入站下载信息（结果集 / 日志通用）.
+ */
+export interface DownloadInfo {
+  /**
+   * <p>下载链接地址.</p>
+   */
+  Url?: string
+  /**
+   * <p>文件格式（如 CSV / JSON）.</p>
+   */
+  Format?: string
+  /**
+   * <p>文件大小（字节）.</p>
+   */
+  Size?: number
+  /**
+   * <p>链接有效时长（秒）.</p>
+   */
+  ExpireSeconds?: number
 }
 
 /**
@@ -16725,17 +16683,14 @@ export interface StatementOutput {
 }
 
 /**
- * 标签对信息
+ * 作业资源规格（跨引擎平铺载体；字段须与请求 MajorType 匹配）。
  */
-export interface TagInfo {
+export interface Spec {
   /**
-   * 标签键
+   * <p>SPARK 资源规格（CU 维度）；MajorType=SPARK 时必填，其余引擎字段须为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKey?: string
-  /**
-   * 标签值
-   */
-  TagValue?: string
+  Spark?: SparkJobSpec
 }
 
 /**
@@ -17498,6 +17453,36 @@ export interface CheckJobSpecNameRequest {
    * <p>排除的配置 ID（编辑场景排除自己；创建场景不传）</p>
    */
   SpecId?: string
+}
+
+/**
+ * Spark 集群资源规格（CU 维度），Spec.Spark 平铺字段载体。
+ */
+export interface SparkJobSpec {
+  /**
+   * <p>Driver 资源规格（CU 数）.</p>
+   */
+  DriverCU?: number
+  /**
+   * <p>Executor 资源规格（CU 数）.</p>
+   */
+  ExecutorCU?: number
+  /**
+   * <p>Executor 实例数量（弹性伸缩关闭时的固定数量）.</p>
+   */
+  ExecutorNum?: number
+  /**
+   * <p>是否开启弹性扩缩容.</p>
+   */
+  DynamicAllocation?: boolean
+  /**
+   * <p>弹性扩缩容最小 Executor 数.</p>
+   */
+  MinExecutors?: number
+  /**
+   * <p>弹性扩缩容最大 Executor 数.</p>
+   */
+  MaxExecutors?: number
 }
 
 /**
@@ -20850,6 +20835,124 @@ export interface DeletePartitionQueueRequest {
 }
 
 /**
+ * 作业详情 POJO.
+ */
+export interface JobDetailInfo {
+  /**
+   * <p>作业唯一标识.</p>
+   */
+  JobId?: string
+  /**
+   * <p>作业名称.</p>
+   */
+  JobName?: string
+  /**
+   * <p>创建/提交者子账号 UIN。</p>
+   */
+  CreatorSubUin?: string
+  /**
+   * <p>作业状态.</p>
+   */
+  State?: string
+  /**
+   * <p>引擎大类.</p>
+   */
+  MajorType?: string
+  /**
+   * <p>引擎子类型.</p>
+   */
+  MinorType?: string
+  /**
+   * <p>运行模式（WAREHOUSE / JOB）.</p>
+   */
+  RunMode?: string
+  /**
+   * <p>计算仓库 ID，RunMode=WAREHOUSE 时非空.</p>
+   */
+  WarehouseId?: string
+  /**
+   * <p>资源分区编码.</p>
+   */
+  PartitionCode?: string
+  /**
+   * <p>资源分区展示名（解析不到时为空）.</p>
+   */
+  PartitionName?: string
+  /**
+   * <p>队列名称.</p>
+   */
+  QueueName?: string
+  /**
+   * <p>流作业 checkpoint 路径（MinorType=SPARK_STREAM 时非空）。同一流作业的多次运行必须复用同一路径，变更等于重置消费进度。</p>
+   */
+  CheckpointLocation?: string
+  /**
+   * <p>创建时间（Unix 毫秒时间戳）.</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>提交时间（Unix 毫秒时间戳）.</p>
+   */
+  SubmitTime?: number
+  /**
+   * <p>完成时间（Unix 毫秒时间戳）.</p>
+   */
+  FinishTime?: number
+  /**
+   * <p>运行时长（毫秒）.</p>
+   */
+  RunningTimeMs?: number
+  /**
+   * <p>计算仓库名称（详情接口反查填充，warehouse 模式下非空）.</p>
+   */
+  WarehouseName?: string
+  /**
+   * <p>流程 ID。</p>
+   */
+  FlowId?: string
+  /**
+   * <p>执行 ID。</p>
+   */
+  ExecutionId?: string
+  /**
+   * <p>作业来源。</p>
+   */
+  JobSource?: string
+  /**
+   * <p>排队等待时长（毫秒）。</p>
+   */
+  WaitingTimeMs?: number
+  /**
+   * <p>Spark UI 历史链接。</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>失败时的错误信息。</p>
+   */
+  ErrorMessage?: string
+  /**
+   * <p>自定义 Spark conf（JSON 字符串，由 job_config 组装）.</p>
+   */
+  CustomProperties?: string
+  /**
+   * <p>环境变量.</p>
+   */
+  EnvVars?: Array<KVPair>
+  /**
+   * <p>运行时/镜像。</p>
+   */
+  RuntimeCode?: string
+  /**
+   * <p>运行时展示名（如 Spark 3.5.5），与 RuntimeCode 配套；解析不到时为空。</p>
+   */
+  RuntimeName?: string
+  /**
+   * <p>Catalog 版本码。</p>
+   */
+  SysCatalogVersion?: string
+}
+
+/**
  * 工作组详细信息
  */
 export interface WorkGroupDetailInfo {
@@ -24063,7 +24166,11 @@ export interface DescribeJobResultResponse {
    */
   Rows?: Array<ResultRow>
   /**
-   * <p>本页内容是否因响应大小限制被截断（单元格/行超限，结果集仅 1 行时也可能触发）。行数超过在线展示上限不由本标记表达，以 TotalRows > Total 判断，完整结果通过 Download 获取.</p>
+   * <p>下载链接（结果集可用时按需返回；结果过大无法内联展示时仅返回 Download）。</p>
+   */
+  Download?: DownloadInfo
+  /**
+   * <p>本页内容是否因响应大小限制被截断（单元格/行超限，结果集仅 1 行时也可能触发）。行数超过在线展示上限不由本标记表达，以 TotalRows &gt; Total 判断，完整结果通过 Download 获取.</p>
    */
   Truncated?: boolean
   /**
@@ -26825,34 +26932,164 @@ export interface Property {
 }
 
 /**
- * 用户vpc网络连接信息
+ * UpdateJobSpec返回参数结构体
  */
-export interface UserVpcConnectionInfo {
+export interface UpdateJobSpecResponse {
   /**
-   * 引擎网络ID
+   * <p>配置ID</p>
+   */
+  Id?: string
+  /**
+   * <p>配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>资源配置模板是否变更</p>
+   */
+  ResourceConfigChanged?: boolean
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>所属队列别名</p>
+   */
+  QueueAlias?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>该配置产生的作业实例数量</p>
+   */
+  JobInstanceCount?: number
+  /**
+   * <p>是否有运行中的作业实例</p>
+   */
+  HasRunningJobs?: boolean
+  /**
+   * <p>高级参数json</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EngineNetworkId?: string
+  GroupId?: string
   /**
-   * 用户vpcid
+   * <p>默认集群 ID（与 GroupId 互斥）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserVpcId?: string
+  ClusterId?: string
   /**
-   * 用户终端节点ID
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserVpcEndpointId?: string
+  Priority?: number
   /**
-   * 用户终端节点名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
    */
-  UserVpcEndpointName?: string
+  Tags?: Array<Tag>
   /**
-   * 接入点信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
    */
-  AccessConnectionInfos?: Array<string>
+  DispatchStrategy?: string
+  /**
+   * <p>作业提交目标</p><p>枚举值：</p><ul><li>GROUP： 按计算组分派</li></ul>
+   */
+  SubmissionTarget?: string
+  /**
+   * <p>计算组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -29491,13 +29728,25 @@ export interface CreateJobRequest {
    */
   QueueName?: string
   /**
+   * <p>集群规格配置。RunMode=JOB 时必填（MajorType 对应引擎字段须非空、其余引擎字段须为空）；RunMode=WAREHOUSE 时忽略。</p>
+   */
+  Spec?: Spec
+  /**
    * <p>自定义 Spark conf（JSON 字符串，亦接受多行 key=value 文本，归一化为 JSON 存储、出参恒为 JSON），作为 SPARK_CUSTOM 配置通道落库，两种运行模式均生效。</p>
    */
   CustomProperties?: string
   /**
+   * <p>依赖管理（jars / files / archives / pyFiles）。仅 RunMode=JOB 可传；RunMode=WAREHOUSE 时禁止传。</p>
+   */
+  Dependencies?: EngineConfigDependencies
+  /**
    * <p>环境变量（KEY=VALUE）列表。仅 RunMode=JOB 可传；RunMode=WAREHOUSE 时禁止传。</p>
    */
   EnvVars?: Array<KVPair>
+  /**
+   * <p>入口点配置，必填。SPARK_SQL 时 Statement 必填（≤1MB）；SPARK_BATCH 时 Statement 或 EntryFile 至少其一（EntryFile 须匹配路径前缀白名单）。</p>
+   */
+  Entrypoint?: EntrypointInfo
 }
 
 /**

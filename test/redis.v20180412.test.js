@@ -888,6 +888,16 @@ it("redis.v20180412.DescribeCommonDBInstances", async function () {
     }
 })
 
+it("redis.v20180412.UpgradeInstanceProductVersion", async function () {
+    try {
+       const data = await client.UpgradeInstanceProductVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeSlowLog", async function () {
     try {
        const data = await client.DescribeSlowLog({})

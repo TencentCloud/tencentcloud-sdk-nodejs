@@ -4104,135 +4104,135 @@ export interface ResetUserRequest {
  */
 export interface Device {
   /**
-   * 资产ID
+   * <p>资产ID</p>
    */
   Id?: number
   /**
-   * 实例ID，对应CVM、CDB等实例ID
+   * <p>实例ID，对应CVM、CDB等实例ID</p>
    */
   InstanceId?: string
   /**
-   * 资产名
+   * <p>资产名</p>
    */
   Name?: string
   /**
-   * 公网IP
+   * <p>公网IP</p>
    */
   PublicIp?: string
   /**
-   * 内网IP
+   * <p>内网IP</p>
    */
   PrivateIp?: string
   /**
-   * 地域编码
+   * <p>地域编码</p>
    */
   ApCode?: string
   /**
-   * 地域名称
+   * <p>地域名称</p>
    */
   ApName?: string
   /**
-   * 操作系统名称
+   * <p>操作系统名称</p>
    */
   OsName?: string
   /**
-   * 资产类型 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
+   * <p>资产类型 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer</p>
    */
   Kind?: number
   /**
-   * 管理端口
+   * <p>管理端口</p>
    */
   Port?: number
   /**
-   * 所属资产组列表
+   * <p>所属资产组列表</p>
    */
   GroupSet?: Array<Group>
   /**
-   * 资产绑定的账号数
+   * <p>资产绑定的账号数</p>
    */
   AccountCount?: number
   /**
-   * VPC ID
+   * <p>VPC ID</p>
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: string
   /**
-   * 堡垒机服务信息，注意没有绑定服务时为null
+   * <p>堡垒机服务信息，注意没有绑定服务时为null</p>
    */
   Resource?: Resource
   /**
-   * 资产所属部门
+   * <p>资产所属部门</p>
    */
   Department?: Department
   /**
-   * 数据库资产的多节点
+   * <p>数据库资产的多节点</p>
    */
   IpPortSet?: Array<string>
   /**
-   * 网络域Id
+   * <p>网络域Id</p>
    */
   DomainId?: string
   /**
-   * 网络域名称
+   * <p>网络域名称</p>
    */
   DomainName?: string
   /**
-   * 是否启用SSL，仅支持Redis资产。0：禁用 1：启用
+   * <p>是否启用SSL，仅支持Redis资产。0：禁用 1：启用</p>
    */
   EnableSSL?: number
   /**
-   * 已上传的SSL证书名称
+   * <p>已上传的SSL证书名称</p>
    */
   SSLCertName?: string
   /**
-   * IOA侧的资源ID
+   * <p>IOA侧的资源ID</p>
    */
   IOAId?: number
   /**
-   * K8S集群托管维度。1-集群，2-命名空间，3-工作负载
+   * <p>K8S集群托管维度。1-集群，2-命名空间，3-工作负载</p>
    */
   ManageDimension?: number
   /**
-   * K8S集群托管账号id
+   * <p>K8S集群托管账号id</p>
    */
   ManageAccountId?: number
   /**
-   * K8S集群命名空间
+   * <p>K8S集群命名空间</p>
    */
   Namespace?: string
   /**
-   * K8S集群工作负载
+   * <p>K8S集群工作负载</p>
    */
   Workload?: string
   /**
-   * K8S集群pod已同步数量
+   * <p>K8S集群pod已同步数量</p>
    */
   SyncPodCount?: number
   /**
-   * K8S集群pod总数量
+   * <p>K8S集群pod总数量</p>
    */
   TotalPodCount?: number
   /**
-   * 云账号id
+   * <p>云账号id</p>
    */
   CloudAccountId?: number
   /**
-   * 云账号名称
+   * <p>云账号名称</p>
    */
   CloudAccountName?: string
   /**
-   * 云厂商类型1-腾讯云，2-阿里云
+   * <p>云厂商类型1-腾讯云，2-阿里云</p>
    */
   ProviderType?: number
   /**
-   * 云厂商名称
+   * <p>云厂商名称</p>
    */
   ProviderName?: string
   /**
-   * 同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期
+   * <p>同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期</p>
    */
   SyncCloudDeviceStatus?: number
 }

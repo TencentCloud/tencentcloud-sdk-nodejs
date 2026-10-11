@@ -664,6 +664,14 @@ export interface ModifyInstanceSSLStatusRequest {
    * <p>是否启用SSL</p>
    */
   Enabled: boolean
+  /**
+   * <p>证书类型</p><p>枚举值：</p><ul><li>Cloud： 云端证书</li><li>Custom： 自定义证书</li></ul>
+   */
+  CertificateType?: string
+  /**
+   * <p>腾讯云SSL证书服务的证书ID</p>
+   */
+  CertificateId?: string
 }
 
 /**
@@ -3583,25 +3591,51 @@ export interface ModifyDBSBackupSetCommentResponse {
 }
 
 /**
- * serverless实例的资源范围
+ * 实例变配的资源范围
 ResourceType 为 cpu 时表示 ccu
 为 nodecount 时表示节点数范围
+为 disk 表示磁盘容量范围（单位 GB）
+ScaleUpEnabled 为是否打开升配
+ScaleDownEnabled 为是否打开降配
+ThresholdPercent 为触发阈值（%）
+Step 为变配步长
  */
 export interface AutoScalingConfig {
   /**
-   * <p>ccu最小值</p>
+   * <p>最小值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RangeMin: number
   /**
-   * <p>ccu最大值</p>
+   * <p>最大值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RangeMax: number
   /**
-   * <p>返回的 range 参数对应的资源类型</p><p>枚举值：</p><ul><li>cpu： 返回的是 cpu 调整返回限制，当不存在mem限制时代表 ccu</li><li>nodecount： 返回的是水平扩缩容的节点数限制范围</li></ul>
+   * <p>返回的 range 参数对应的资源类型</p><p>枚举值：</p><ul><li>cpu： 返回的是 cpu 调整返回限制，当不存在mem限制时代表 ccu</li><li>nodecount： 返回的是水平扩缩容的节点数限制范围</li><li>datadisk： 返回的是磁盘扩容的容量限制范围</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType?: string
+  /**
+   * <p>是否允许升配</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleUpEnabled?: boolean
+  /**
+   * <p>是否允许降配</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleDownEnabled?: boolean
+  /**
+   * <p>触发阈值（%）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThresholdPercent?: number
+  /**
+   * <p>变配步长</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Step?: number
 }
 
 /**
@@ -3714,6 +3748,10 @@ export interface DescribeSpecsRequest {
    * <p>独享实例</p>
    */
   IsExclusiveInstance?: number
+  /**
+   * <p>可用区组合列表</p>
+   */
+  Zones?: Array<string>
 }
 
 /**

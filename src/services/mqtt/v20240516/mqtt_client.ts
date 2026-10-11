@@ -22,6 +22,7 @@ import {
   MQTTClientSubscription,
   DeleteBlockRuleResponse,
   ModifyDeviceIdentityResponse,
+  DescribeClientEventsResponse,
   DeleteUserRequest,
   DescribeSharedSubscriptionGroupsWithSubscriptionsResponse,
   ModifyJWTAuthenticatorResponse,
@@ -86,6 +87,7 @@ import {
   DescribeWillMessageResponse,
   DeleteDeviceIdentityResponse,
   CreateInsPublicEndpointResponse,
+  DescribeProductSKUListRequest,
   CreateUserResponse,
   CreateAuthorizationPolicyRequest,
   PublishMessageResponse,
@@ -126,6 +128,7 @@ import {
   DescribeTopicRequest,
   PublishMessageRequest,
   AuthorizationPolicyItem,
+  EventItem,
   ModifyX509ConfigResponse,
   DescribeClientListRequest,
   SharedGroup,
@@ -145,6 +148,7 @@ import {
   DescribeCaCertificateRequest,
   DescribeSharedSubscriptionsResponse,
   CreateInsPublicEndpointRequest,
+  SharedSubscriptionGroupWithSubscriptions,
   RegisterDeviceCertificateRequest,
   CreateBlockRuleRequest,
   Filter,
@@ -155,7 +159,7 @@ import {
   DescribeAuthenticatorRequest,
   ModifyInstanceCertBindingResponse,
   UpdateMessageEnrichmentRulePriorityRequest,
-  SharedSubscriptionGroupWithSubscriptions,
+  EventInfo,
   MQTTUserItem,
   DeleteInstanceRequest,
   DescribeDeviceCertificateRequest,
@@ -199,7 +203,7 @@ import {
   MQTTTopicItem,
   PriceTag,
   ModifyAuthorizationPolicyRequest,
-  DescribeProductSKUListRequest,
+  DescribeClientEventsRequest,
   DescribeTopicListResponse,
   DeleteTopicResponse,
   ModifyInstanceCertBindingRequest,
@@ -483,14 +487,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 更新MQTT集群绑定证书
-参数传空，则为删除证书
-     */
-  async ModifyInstanceCertBinding(
-    req: ModifyInstanceCertBindingRequest,
-    cb?: (error: string, rep: ModifyInstanceCertBindingResponse) => void
-  ): Promise<ModifyInstanceCertBindingResponse> {
-    return this.request("ModifyInstanceCertBinding", req, cb)
+   * 修改策略规则，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)
+   */
+  async ModifyAuthorizationPolicy(
+    req: ModifyAuthorizationPolicyRequest,
+    cb?: (error: string, rep: ModifyAuthorizationPolicyResponse) => void
+  ): Promise<ModifyAuthorizationPolicyResponse> {
+    return this.request("ModifyAuthorizationPolicy", req, cb)
   }
 
   /**
@@ -521,6 +524,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductSKUListResponse) => void
   ): Promise<DescribeProductSKUListResponse> {
     return this.request("DescribeProductSKUList", req, cb)
+  }
+
+  /**
+     * 更新MQTT集群绑定证书
+参数传空，则为删除证书
+     */
+  async ModifyInstanceCertBinding(
+    req: ModifyInstanceCertBindingRequest,
+    cb?: (error: string, rep: ModifyInstanceCertBindingResponse) => void
+  ): Promise<ModifyInstanceCertBindingResponse> {
+    return this.request("ModifyInstanceCertBinding", req, cb)
   }
 
   /**
@@ -835,13 +849,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改策略规则，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)
+   * 查询轨迹
    */
-  async ModifyAuthorizationPolicy(
-    req: ModifyAuthorizationPolicyRequest,
-    cb?: (error: string, rep: ModifyAuthorizationPolicyResponse) => void
-  ): Promise<ModifyAuthorizationPolicyResponse> {
-    return this.request("ModifyAuthorizationPolicy", req, cb)
+  async DescribeClientEvents(
+    req: DescribeClientEventsRequest,
+    cb?: (error: string, rep: DescribeClientEventsResponse) => void
+  ): Promise<DescribeClientEventsResponse> {
+    return this.request("DescribeClientEvents", req, cb)
   }
 
   /**

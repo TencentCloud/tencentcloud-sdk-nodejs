@@ -38,6 +38,16 @@ it("goosefs.v20220519.ExpandCapacity", async function () {
     }
 })
 
+it("goosefs.v20220519.CancelPolicyRuleExecuteRecord", async function () {
+    try {
+       const data = await client.CancelPolicyRuleExecuteRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.DeleteCustomerCluster", async function () {
     try {
        const data = await client.DeleteCustomerCluster({})
@@ -118,6 +128,16 @@ it("goosefs.v20220519.ModifyDataRepositoryTaskStatus", async function () {
     }
 })
 
+it("goosefs.v20220519.DisablePolicyRule", async function () {
+    try {
+       const data = await client.DisablePolicyRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.BatchDeleteClientNodes", async function () {
     try {
        const data = await client.BatchDeleteClientNodes({})
@@ -128,9 +148,29 @@ it("goosefs.v20220519.BatchDeleteClientNodes", async function () {
     }
 })
 
+it("goosefs.v20220519.DescribePolicyRuleExecuteRecord", async function () {
+    try {
+       const data = await client.DescribePolicyRuleExecuteRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.DescribeFilesetGeneralConfig", async function () {
     try {
        const data = await client.DescribeFilesetGeneralConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.DescribePolicyRule", async function () {
+    try {
+       const data = await client.DescribePolicyRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +298,29 @@ it("goosefs.v20220519.DescribeFilesets", async function () {
     }
 })
 
+it("goosefs.v20220519.DeletePolicyRule", async function () {
+    try {
+       const data = await client.DeletePolicyRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.BuildCustomerCluster", async function () {
     try {
        const data = await client.BuildCustomerCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.EnablePolicyRule", async function () {
+    try {
+       const data = await client.EnablePolicyRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +421,16 @@ it("goosefs.v20220519.AttachFileSystemBucket", async function () {
 it("goosefs.v20220519.QueryDataRepositoryBandwidth", async function () {
     try {
        const data = await client.QueryDataRepositoryBandwidth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.CreatePolicyRule", async function () {
+    try {
+       const data = await client.CreatePolicyRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

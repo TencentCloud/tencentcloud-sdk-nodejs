@@ -46,6 +46,16 @@ export interface DistributedLoadAttrs {
 }
 
 /**
+ * EnablePolicyRule返回参数结构体
+ */
+export interface EnablePolicyRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 预热任务参数
  */
 export interface LoadTaskAttrs {
@@ -104,6 +114,54 @@ export interface LoadTaskAttrs {
 }
 
 /**
+ * EnablePolicyRule请求参数结构体
+ */
+export interface EnablePolicyRuleRequest {
+  /**
+   * <p>规则ID</p>
+   */
+  RuleId: string
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+}
+
+/**
+ * CreatePolicyRule请求参数结构体
+ */
+export interface CreatePolicyRuleRequest {
+  /**
+   * <p>文件系统id</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>扫描目录</p>
+   */
+  ScanDir: string
+  /**
+   * <p>规则名称</p>
+   */
+  Name: string
+  /**
+   * <p>执行计划</p>
+   */
+  Execution: ExecutionPlan
+  /**
+   * <p>过滤规则</p>
+   */
+  PolicyRuleSet?: Array<PolicyRuleOperator>
+  /**
+   * <p>是否输出清单</p>
+   */
+  EnableManifest?: boolean
+  /**
+   * <p>清单配置</p>
+   */
+  Manifest?: ManifestAttr
+}
+
+/**
  * 付费信息详情
  */
 export interface ChargeAttribute {
@@ -136,17 +194,17 @@ export interface UpdateFilesetGeneralConfigResponse {
 }
 
 /**
- * CreateDataRepositoryTask返回参数结构体
+ * AttachFileSystemBucket请求参数结构体
  */
-export interface CreateDataRepositoryTaskResponse {
+export interface AttachFileSystemBucketRequest {
   /**
-   * <p>任务ID</p>
+   * 无
    */
-  TaskId?: string
+  FileSystemId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 关联新Bucket
    */
-  RequestId?: string
+  Bucket: MappedBucket
 }
 
 /**
@@ -320,13 +378,17 @@ export interface ExpandCapacityRequest {
    */
   FileSystemId: string
   /**
-   * 新增扩容的系统容量
+   * 新增扩容的系统容量(单位 GiB)
    */
   ExpandedCapacity: number
   /**
    * 容量修改类型：add/sub
    */
   ModifyType?: string
+  /**
+   * 是否是快速扩容,只针对部分model有效
+   */
+  RapidExpansion?: boolean
 }
 
 /**
@@ -381,29 +443,39 @@ export interface BatchDeleteClientNodesRequest {
 }
 
 /**
- * vpc子网信息
+ * DescribePolicyRuleExecuteRecord返回参数结构体
  */
-export interface SubnetInfo {
+export interface DescribePolicyRuleExecuteRecordResponse {
   /**
-   * vpc id
+   * <p>执行记录详情</p>
    */
-  VpcId: string
+  RuleExecuteList?: Array<RuleExecuteAttribute>
   /**
-   * 子网ID
+   * <p>任务总数</p>
    */
-  SubnetId?: string
+  TotalCount?: number
   /**
-   * 应用的集群；可以是集群id,也可以是All
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UsedCluster?: string
+  RequestId?: string
+}
+
+/**
+ * Policy扫描规则
+ */
+export interface PolicyRuleOperator {
   /**
-   * cidr，只有当IsDirectConnect为true时才生效
+   * <p>规则名</p><p>枚举值：</p><ul><li>CREATION_TIME_DAYS： 创建时间，比较的value 是days，数字整数。判断条件均为与“今天”相差。例如 CREATION_TIME &gt; 5，指的是创建时间-今天大于5天，即5天前（以及更早）创建的文件</li><li>CHANGE_TIME_DAYS： 元数据修改时间，比较的value 是days，数字整数。判断条件均为与“今天”相差。例如 CHANGE_TIME &gt; 5，指的是元数据修改时间-今天大于5天，即5天前以及更早修改元数据的文件</li><li>MODIFICATION_TIME_DAYS： 数据修改时间，比较的value 是days，数字整数。判断条件均为与“今天”相差。例如 MODIFICATION_TIME &gt; 5，指的是数据修改时间-今天大于5天，即5天前（以及更早）修改的文件</li><li>ACCESS_TIME_DAYS： 访问时间，比较的value 是days，数字整数。判断条件均为与“今天”相差。例如 ACCESS_TIME &gt; 5，指的是访问时间-今天大于5天，即5天前（以及更早）访问的文件</li><li>CREATION_TIME_DATE： 创建时间，比较的value 是date,日期，格式为YYYY-MM-DD。判断条件均为与value对应的日期的对比。例如 CREATION_TIME &gt; 2026-06-01，指的是创建时间晚于2026年6月1日</li><li>CHANGE_TIME_DATE： 元数据修改时间，比较的value 是date,日期，格式为YYYY-MM-DD。判断条件均为与value对应的日期的对比。例如 CHANGE_TIME &gt; 2026-06-01，指的是元数据修改晚于2026年6月1日</li><li>MODIFICATION_TIME_DATE： 数据修改时间，比较的value 是date,日期，格式为YYYY-MM-DD。判断条件均为与value对应的日期的对比。例如 MODIFICATION_TIME &gt; 2026-06-01，指的是数据修改时间晚于2026年6月1日</li><li>ACCESS_TIME_DATE： 访问时间，比较的value 是date,日期，格式为YYYY-MM-DD。判断条件均为与value对应的日期的对比。例如 ACCESS_TIME &gt; 2026-06-01，指的是访问时间晚于2026年6月1日</li><li>FILE_SIZE： 文件大小，数字，单位byte，整数，0 ～ 64位整数最大值</li></ul>
    */
-  CIDR?: string
+  Key?: string
   /**
-   * 是否为专线接入场景
+   * <p>比较关系</p><p>枚举值：</p><ul><li>&gt;：  大于</li><li>&gt;=： 大于等于</li><li>=： 相等</li><li>&lt;： 小于</li><li>&lt;=： 小于等于</li></ul>
    */
-  IsDirectConnect?: boolean
+  Operator?: string
+  /**
+   * <p>比较值</p><p>如果Key是CREATION_TIME_DAYS、CHANGE_TIME_DAYS、MODIFICATION_TIME_DAYS、ACCESS_TIME_DAYS时，值是整数；<br>如果Key是CREATION_TIME_DATE、CHANGE_TIME_DATE、MODIFICATION_TIME_DATE、ACCESS_TIME_DATE时，值是日期，格式是YYYY-MM-DD；<br>如果Key是FILE_SIZE，值是整数，单位是byte</p>
+   */
+  Value?: string
 }
 
 /**
@@ -443,6 +515,20 @@ export interface LinuxNodeAttribute {
 }
 
 /**
+ * DeletePolicyRule请求参数结构体
+ */
+export interface DeletePolicyRuleRequest {
+  /**
+   * <p>规则id</p>
+   */
+  RuleId: string
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+}
+
+/**
  * DescribeFileSystems请求参数结构体
  */
 export interface DescribeFileSystemsRequest {
@@ -457,17 +543,43 @@ export interface DescribeFileSystemsRequest {
 }
 
 /**
- * AttachFileSystemBucket请求参数结构体
+ * CreateDataRepositoryTask返回参数结构体
  */
-export interface AttachFileSystemBucketRequest {
+export interface CreateDataRepositoryTaskResponse {
   /**
-   * 无
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateFileset请求参数结构体
+ */
+export interface UpdateFilesetRequest {
+  /**
+   * 文件系统id
    */
   FileSystemId: string
   /**
-   * 关联新Bucket
+   * Fileset id
    */
-  Bucket: MappedBucket
+  FsetId: string
+  /**
+   * 容量配额限定值
+   */
+  QuotaSizeLimit?: string
+  /**
+   * 文件数配额限定值
+   */
+  QuotaFilesLimit?: string
+  /**
+   * Fileset文件删除操作审计
+   */
+  AuditState?: string
 }
 
 /**
@@ -485,13 +597,17 @@ export interface Tag {
 }
 
 /**
- * MountMultipleStorageFileSystem返回参数结构体
+ * ModifyDataRepositoryBandwidth请求参数结构体
  */
-export interface MountMultipleStorageFileSystemResponse {
+export interface ModifyDataRepositoryBandwidthRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 文件系统ID
    */
-  RequestId?: string
+  FileSystemId: string
+  /**
+   * 带宽, 单位MB/S
+   */
+  Bandwidth: number
 }
 
 /**
@@ -744,29 +860,35 @@ export interface DescribeFileSystemBucketsRequest {
 }
 
 /**
- * DescribeDataRepositoryTaskStatus返回参数结构体
+ * CreatePolicyRule返回参数结构体
  */
-export interface DescribeDataRepositoryTaskStatusResponse {
+export interface CreatePolicyRuleResponse {
   /**
-   * 任务id
+   * <p>规则id</p>
    */
-  TaskId?: string
-  /**
-   * 任务状态 0(初始化中), 1(运行中), 2(已完成), 3(任务失败)
-   */
-  Status?: number
-  /**
-   * 已完成的文件数量
-   */
-  FinishedFileNumber?: number
-  /**
-   * 已完成的数据量
-   */
-  FinishedCapacity?: number
+  RuleId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePolicyRule请求参数结构体
+ */
+export interface DescribePolicyRuleRequest {
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>偏移量</p>
+   */
+  Offset: number
+  /**
+   * <p>最大返回数量</p>
+   */
+  Limit: number
 }
 
 /**
@@ -831,6 +953,20 @@ export interface DescribeLoadTaskResponse {
 }
 
 /**
+ * DisablePolicyRule请求参数结构体
+ */
+export interface DisablePolicyRuleRequest {
+  /**
+   * <p>规则ID</p>
+   */
+  RuleId: string
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+}
+
+/**
  * DetachFileSystemBucket请求参数结构体
  */
 export interface DetachFileSystemBucketRequest {
@@ -845,43 +981,35 @@ export interface DetachFileSystemBucketRequest {
 }
 
 /**
- * ModifyDataRepositoryBandwidth请求参数结构体
+ * MountMultipleStorageFileSystem返回参数结构体
  */
-export interface ModifyDataRepositoryBandwidthRequest {
+export interface MountMultipleStorageFileSystemResponse {
   /**
-   * 文件系统ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FileSystemId: string
-  /**
-   * 带宽, 单位MB/S
-   */
-  Bandwidth: number
+  RequestId?: string
 }
 
 /**
- * UpdateFileset请求参数结构体
+ * 清单配置
  */
-export interface UpdateFilesetRequest {
+export interface ManifestAttr {
   /**
-   * 文件系统id
+   * <p>桶名字</p>
    */
-  FileSystemId: string
+  Bucket?: string
   /**
-   * Fileset id
+   * <p>目录前缀</p>
    */
-  FsetId: string
+  Prefix?: string
   /**
-   * 容量配额限定值
+   * <p>文件属性</p>
    */
-  QuotaSizeLimit?: string
+  Attributes?: Array<string>
   /**
-   * 文件数配额限定值
+   * <p>桶所在地域</p><p>桶所在的地域，可以不填，认为是实例所在地域</p>
    */
-  QuotaFilesLimit?: string
-  /**
-   * Fileset文件删除操作审计
-   */
-  AuditState?: string
+  Region?: string
 }
 
 /**
@@ -1093,6 +1221,24 @@ export interface LoadTaskCreationAttrs {
 }
 
 /**
+ * CancelPolicyRuleExecuteRecord请求参数结构体
+ */
+export interface CancelPolicyRuleExecuteRecordRequest {
+  /**
+   * <p>规则id</p>
+   */
+  RuleId: string
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>执行记录id</p>
+   */
+  RecordId: string
+}
+
+/**
  * ModifyDataRepositoryBandwidth返回参数结构体
  */
 export interface ModifyDataRepositoryBandwidthResponse {
@@ -1195,6 +1341,56 @@ export interface GooseFSxBuildElement {
    * @deprecated
    */
   MappedBucketList?: Array<MappedBucket>
+}
+
+/**
+ * AddCrossVpcSubnetSupportForClientNode请求参数结构体
+ */
+export interface AddCrossVpcSubnetSupportForClientNodeRequest {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+  /**
+   * 子网信息
+   */
+  SubnetInfo: SubnetInfo
+}
+
+/**
+ * vpc子网信息
+ */
+export interface SubnetInfo {
+  /**
+   * vpc id
+   */
+  VpcId: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 应用的集群；可以是集群id,也可以是All
+   */
+  UsedCluster?: string
+  /**
+   * cidr，只有当IsDirectConnect为true时才生效
+   */
+  CIDR?: string
+  /**
+   * 是否为专线接入场景
+   */
+  IsDirectConnect?: boolean
+}
+
+/**
+ * CancelPolicyRuleExecuteRecord返回参数结构体
+ */
+export interface CancelPolicyRuleExecuteRecordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1311,6 +1507,32 @@ export interface DescribeClientNodesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 周期执行启动配置
+ */
+export interface ExecutePeriodAttribute {
+  /**
+   * <p>选择的周期类型</p><p>枚举值：</p><ul><li>DAY： 每天执行 </li><li>WEEK： 每周执行</li><li>MONTH： 每月执行</li></ul>
+   */
+  PeriodType?: string
+  /**
+   * <p>选择每周执行时必填，需要选择周几,0-6 分别是周日到周六</p><p>取值范围：[0, 6]</p><p>默认值：0</p>
+   */
+  StartWeekday?: number
+  /**
+   * <p>选择每月执行时必填，1-28日选择一天</p><p>取值范围：[1, 28]</p><p>默认值：1</p>
+   */
+  StartDate?: number
+  /**
+   * <p>周期中的时间点，取值0~59</p><p>取值范围：[0, 59]</p>
+   */
+  StartMinute?: number
+  /**
+   * <p>24小时周期开始的小时数，取值0~23</p><p>取值范围：[0, 23]</p><p>默认值：1</p>
+   */
+  StartHour?: number
 }
 
 /**
@@ -1502,6 +1724,16 @@ export interface CreateLoadTaskResponse {
 }
 
 /**
+ * DisablePolicyRule返回参数结构体
+ */
+export interface DisablePolicyRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 元数据预热参数
  */
 export interface MetadataLoadAttrs {
@@ -1602,6 +1834,16 @@ export interface DeleteCrossVpcSubnetSupportForClientNodeRequest {
 }
 
 /**
+ * DeletePolicyRule返回参数结构体
+ */
+export interface DeletePolicyRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AttachFileSystemBucket返回参数结构体
  */
 export interface AttachFileSystemBucketResponse {
@@ -1630,6 +1872,30 @@ export interface BuildClientNodeMountCommandRequest {
 }
 
 /**
+ * 执行时间
+ */
+export interface ExecutionPlan {
+  /**
+   * <p>执行类型</p><p>枚举值：</p><ul><li>scheduled： 指定时间执行</li><li>periodic： 周期执行</li></ul>
+   */
+  ExecuteMode?: string
+  /**
+   * <p>任务执行时间</p><p>参数格式：2026-07-23 08:30</p><p>入参限制：只有立即执行或者指定时间执行时设置，周期执行不需要设置</p><p>默认值：当前时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteAt?: string
+  /**
+   * <p>周期执行的时间设置</p><p>入参限制：选择周期执行时必填</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutePeriod?: ExecutePeriodAttribute
+  /**
+   * <p>任务等待时间</p><p>取值范围：[1, 500]</p><p>单位：H</p><p>默认值：12</p><p>任务执行的等待时间，超过时间任务未启动，自动取消</p>
+   */
+  WaitTime?: number
+}
+
+/**
  * BuildCustomerCluster请求参数结构体
  */
 export interface BuildCustomerClusterRequest {
@@ -1653,6 +1919,80 @@ export interface BuildCustomerClusterRequest {
    * <p>可用区</p>
    */
   Zone?: string
+}
+
+/**
+ * DescribePolicyRule返回参数结构体
+ */
+export interface DescribePolicyRuleResponse {
+  /**
+   * <p>规则任务详情</p>
+   */
+  PolicyRuleTaskList?: Array<PolicyRuleTaskAttribute>
+  /**
+   * <p>任务总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 扫描规则执行信息
+ */
+export interface RuleExecuteAttribute {
+  /**
+   * <p>执行id</p>
+   */
+  RecordId?: string
+  /**
+   * <p>开始执行时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>执行结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>执行状态</p><p>枚举值：</p><ul><li>0： 等待中</li><li>1： 执行中</li><li>2： 已完成</li><li>3： 已跳过</li></ul><p>默认值：0</p><p>已跳过是指任务排队超过了任务的等待时间会自动跳过</p>
+   */
+  Status?: number
+  /**
+   * <p>存储量</p><p>单位：GB</p><p>默认值：0</p><p>不足1G按照1G 统计</p>
+   */
+  Capacity?: number
+  /**
+   * <p>文件数</p>
+   */
+  FileCount?: number
+  /**
+   * <p>文件清单路径</p><p>参数格式：http://xxx/xxx/xx</p>
+   */
+  ManifestUrl?: string
+}
+
+/**
+ * DescribePolicyRuleExecuteRecord请求参数结构体
+ */
+export interface DescribePolicyRuleExecuteRecordRequest {
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>偏移量</p>
+   */
+  Offset: number
+  /**
+   * <p>最大返回数量</p>
+   */
+  Limit: number
+  /**
+   * <p>规则id</p>
+   */
+  RuleId?: string
 }
 
 /**
@@ -1716,17 +2056,29 @@ export interface DeleteCustomerClusterResponse {
 }
 
 /**
- * AddCrossVpcSubnetSupportForClientNode请求参数结构体
+ * DescribeDataRepositoryTaskStatus返回参数结构体
  */
-export interface AddCrossVpcSubnetSupportForClientNodeRequest {
+export interface DescribeDataRepositoryTaskStatusResponse {
   /**
-   * 文件系统ID
+   * 任务id
    */
-  FileSystemId: string
+  TaskId?: string
   /**
-   * 子网信息
+   * 任务状态 0(初始化中), 1(运行中), 2(已完成), 3(任务失败)
    */
-  SubnetInfo: SubnetInfo
+  Status?: number
+  /**
+   * 已完成的文件数量
+   */
+  FinishedFileNumber?: number
+  /**
+   * 已完成的数据量
+   */
+  FinishedCapacity?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1813,6 +2165,54 @@ export interface ModifyDataRepositoryTaskStatusRequest {
    * <p>修改数据流动任务目标状态对应的类型，仅支持任务暂停和恢复（暂停对应pause，恢复对应resume）</p><p>枚举值：</p><ul><li>pause： 暂停</li><li>resume： 恢复</li></ul>
    */
   ModifyType: string
+}
+
+/**
+ * 扫描规则信息
+ */
+export interface PolicyRuleTaskAttribute {
+  /**
+   * <p>规则id</p>
+   */
+  RuleId?: string
+  /**
+   * <p>规则名称</p>
+   */
+  Name?: string
+  /**
+   * <p>扫描目录</p>
+   */
+  ScanDir?: string
+  /**
+   * <p>执行计划</p>
+   */
+  Execution?: ExecutionPlan
+  /**
+   * <p>扫描规则</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyRuleSet?: Array<PolicyRuleOperator>
+  /**
+   * <p>是否输出清单</p>
+   */
+  EnableManifest?: boolean
+  /**
+   * <p>输出清单配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Manifest?: ManifestAttr
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>0： 启用（enable）</li><li>1： 禁用（disable）</li></ul><p>默认值：0</p>
+   */
+  Status?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>修改时间</p>
+   */
+  ModifyTime?: string
 }
 
 /**

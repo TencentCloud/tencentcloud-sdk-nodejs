@@ -19,10 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DistributedLoadAttrs,
+  EnablePolicyRuleResponse,
   LoadTaskAttrs,
+  EnablePolicyRuleRequest,
+  CreatePolicyRuleRequest,
   ChargeAttribute,
   UpdateFilesetGeneralConfigResponse,
-  CreateDataRepositoryTaskResponse,
+  AttachFileSystemBucketRequest,
   DeleteFileSystemRequest,
   MountPointEntry,
   DeleteFilesetResponse,
@@ -36,13 +39,16 @@ import {
   ClusterMountAttr,
   CancelLoadTaskRequest,
   BatchDeleteClientNodesRequest,
-  SubnetInfo,
+  DescribePolicyRuleExecuteRecordResponse,
+  PolicyRuleOperator,
   UpdateFilesetResponse,
   LinuxNodeAttribute,
+  DeletePolicyRuleRequest,
   DescribeFileSystemsRequest,
-  AttachFileSystemBucketRequest,
+  CreateDataRepositoryTaskResponse,
+  UpdateFilesetRequest,
   Tag,
-  MountMultipleStorageFileSystemResponse,
+  ModifyDataRepositoryBandwidthRequest,
   CreateDataRepositoryTaskRequest,
   MappedBucket,
   CreateFilesetRequest,
@@ -51,12 +57,14 @@ import {
   MountMultipleStorageFileSystemRequest,
   DescribeLoadTaskRequest,
   DescribeFileSystemBucketsRequest,
-  DescribeDataRepositoryTaskStatusResponse,
+  CreatePolicyRuleResponse,
+  DescribePolicyRuleRequest,
   CreateFileSystemRequest,
   DescribeLoadTaskResponse,
+  DisablePolicyRuleRequest,
   DetachFileSystemBucketRequest,
-  ModifyDataRepositoryBandwidthRequest,
-  UpdateFilesetRequest,
+  MountMultipleStorageFileSystemResponse,
+  ManifestAttr,
   DescribeCustomerClusterRequest,
   DescribeFilesetGeneralConfigResponse,
   CreateFilesetResponse,
@@ -67,6 +75,7 @@ import {
   BuildClientNodeMountCommandResponse,
   CreateLoadTaskRequest,
   LoadTaskCreationAttrs,
+  CancelPolicyRuleExecuteRecordRequest,
   ModifyDataRepositoryBandwidthResponse,
   ModifyDataRepositoryTaskStatusResponse,
   ExpandCapacityResponse,
@@ -75,6 +84,9 @@ import {
   QueryClientNodeMountCommandRequest,
   DescribeClusterRoleTokenResponse,
   GooseFSxBuildElement,
+  AddCrossVpcSubnetSupportForClientNodeRequest,
+  SubnetInfo,
+  CancelPolicyRuleExecuteRecordResponse,
   CancelLoadTaskResponse,
   BatchAddClientNodesResponse,
   QueryClientNodeMountCommandResponse,
@@ -83,6 +95,7 @@ import {
   QueryDataRepositoryBandwidthResponse,
   QueryDataRepositoryBandwidthRequest,
   DescribeClientNodesResponse,
+  ExecutePeriodAttribute,
   DescribeDataRepositoryTaskStatusRequest,
   DescribeCustomerClusterResponse,
   DetachFileSystemBucketResponse,
@@ -95,23 +108,30 @@ import {
   GooseFSxAttribute,
   DescribeFilesetsRequest,
   CreateLoadTaskResponse,
+  DisablePolicyRuleResponse,
   MetadataLoadAttrs,
   DescribeFileSystemsResponse,
   BatchDeleteClientNodesResponse,
   LoadDataAttrs,
   QueryCrossVpcSubnetSupportForClientNodeRequest,
   DeleteCrossVpcSubnetSupportForClientNodeRequest,
+  DeletePolicyRuleResponse,
   AttachFileSystemBucketResponse,
   BuildClientNodeMountCommandRequest,
+  ExecutionPlan,
   BuildCustomerClusterRequest,
+  DescribePolicyRuleResponse,
+  RuleExecuteAttribute,
+  DescribePolicyRuleExecuteRecordRequest,
   ClientClusterManagerNodeInfo,
   UpdateFilesetGeneralConfigRequest,
   BuildCustomerClusterResponse,
   DeleteCustomerClusterResponse,
-  AddCrossVpcSubnetSupportForClientNodeRequest,
+  DescribeDataRepositoryTaskStatusResponse,
   RoleToken,
   CustomerClusterAttr,
   ModifyDataRepositoryTaskStatusRequest,
+  PolicyRuleTaskAttribute,
   DeleteCustomerClusterRequest,
 } from "./goosefs_models"
 
@@ -142,6 +162,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExpandCapacityResponse) => void
   ): Promise<ExpandCapacityResponse> {
     return this.request("ExpandCapacity", req, cb)
+  }
+
+  /**
+   * 取消正在执行的扫描任务，正在扫描的任务取消后没有结果
+   */
+  async CancelPolicyRuleExecuteRecord(
+    req: CancelPolicyRuleExecuteRecordRequest,
+    cb?: (error: string, rep: CancelPolicyRuleExecuteRecordResponse) => void
+  ): Promise<CancelPolicyRuleExecuteRecordResponse> {
+    return this.request("CancelPolicyRuleExecuteRecord", req, cb)
   }
 
   /**
@@ -225,6 +255,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 禁用扫描任务
+   */
+  async DisablePolicyRule(
+    req: DisablePolicyRuleRequest,
+    cb?: (error: string, rep: DisablePolicyRuleResponse) => void
+  ): Promise<DisablePolicyRuleResponse> {
+    return this.request("DisablePolicyRule", req, cb)
+  }
+
+  /**
    * 批量删除客户端节点
    */
   async BatchDeleteClientNodes(
@@ -235,6 +275,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 列出指定扫描规则的执行记录
+   */
+  async DescribePolicyRuleExecuteRecord(
+    req: DescribePolicyRuleExecuteRecordRequest,
+    cb?: (error: string, rep: DescribePolicyRuleExecuteRecordResponse) => void
+  ): Promise<DescribePolicyRuleExecuteRecordResponse> {
+    return this.request("DescribePolicyRuleExecuteRecord", req, cb)
+  }
+
+  /**
    * 查询Fileset通用配置
    */
   async DescribeFilesetGeneralConfig(
@@ -242,6 +292,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFilesetGeneralConfigResponse) => void
   ): Promise<DescribeFilesetGeneralConfigResponse> {
     return this.request("DescribeFilesetGeneralConfig", req, cb)
+  }
+
+  /**
+   * 列出所有的扫描规则
+   */
+  async DescribePolicyRule(
+    req: DescribePolicyRuleRequest,
+    cb?: (error: string, rep: DescribePolicyRuleResponse) => void
+  ): Promise<DescribePolicyRuleResponse> {
+    return this.request("DescribePolicyRule", req, cb)
   }
 
   /**
@@ -365,6 +425,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除扫描规则
+   */
+  async DeletePolicyRule(
+    req: DeletePolicyRuleRequest,
+    cb?: (error: string, rep: DeletePolicyRuleResponse) => void
+  ): Promise<DeletePolicyRuleResponse> {
+    return this.request("DeletePolicyRule", req, cb)
+  }
+
+  /**
    * 构建客户端集群
    */
   async BuildCustomerCluster(
@@ -372,6 +442,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BuildCustomerClusterResponse) => void
   ): Promise<BuildCustomerClusterResponse> {
     return this.request("BuildCustomerCluster", req, cb)
+  }
+
+  /**
+   * 启用扫描任务
+   */
+  async EnablePolicyRule(
+    req: EnablePolicyRuleRequest,
+    cb?: (error: string, rep: EnablePolicyRuleResponse) => void
+  ): Promise<EnablePolicyRuleResponse> {
+    return this.request("EnablePolicyRule", req, cb)
   }
 
   /**
@@ -472,6 +552,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryDataRepositoryBandwidthResponse) => void
   ): Promise<QueryDataRepositoryBandwidthResponse> {
     return this.request("QueryDataRepositoryBandwidth", req, cb)
+  }
+
+  /**
+   * 创建数据洞察任务
+   */
+  async CreatePolicyRule(
+    req: CreatePolicyRuleRequest,
+    cb?: (error: string, rep: CreatePolicyRuleResponse) => void
+  ): Promise<CreatePolicyRuleResponse> {
+    return this.request("CreatePolicyRule", req, cb)
   }
 
   /**

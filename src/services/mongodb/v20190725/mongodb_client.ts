@@ -28,6 +28,7 @@ import {
   DescribeAuditLogsRequest,
   DBInstancePrice,
   CheckDBInstanceElasticCpuScalableResponse,
+  Role,
   DescribePasswordRotationResponse,
   ScaleUpDBInstanceCpuRequest,
   KillOpsRequest,
@@ -40,6 +41,7 @@ import {
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
   DescribeCurrentOpResponse,
+  RolePrivilege,
   PromoteDBInstanceToActiveRequest,
   InstanceMultiParam,
   DescribeSRVConnectionDomainResponse,
@@ -50,9 +52,10 @@ import {
   DescribeBackupRulesResponse,
   ModifyBackupExpireTimeResponse,
   SlowLogPattern,
-  Task,
+  SetAccountUserPrivilegeResponse,
   ModifySRVConnectionUrlResponse,
   AssignProjectResponse,
+  ModifyInstanceAzRequest,
   AuditLogFilter,
   DescribeDBInstanceDealResponse,
   CreateBackupDBInstanceResponse,
@@ -66,10 +69,10 @@ import {
   DescribeBackupRulesRequest,
   DescribeBackupDownloadTaskResponse,
   AddNodeList,
-  EnablePasswordRotationResponse,
+  DescribeInstanceRolesResponse,
   DBInstanceInfo,
   ParamType,
-  SetAccountUserPrivilegeResponse,
+  EnablePasswordRotationResponse,
   WanServiceNodeList,
   FlashbackDatabase,
   ModifyDBInstanceLogToCLSResponse,
@@ -83,9 +86,9 @@ import {
   SpecItem,
   LogFilter,
   DescribeDetailedSlowLogsRequest,
-  ModifyInstanceAzResponse,
+  CreateInstanceUserResponse,
   UpgradeDbInstanceVersionRequest,
-  ModifyDBInstanceNetworkAddressResponse,
+  InstanceUserInfo,
   DeleteAuditLogFileResponse,
   CreateAccountUserResponse,
   DescribeSlowLogPatternsResponse,
@@ -94,7 +97,7 @@ import {
   InquirePriceModifyDBInstanceSpecRequest,
   BackupInfo,
   DescribeDBInstancesRequest,
-  InstanceEnableSSLResponse,
+  DescribeInstanceUsersResponse,
   CurrentOp,
   ModifyDBInstanceSpecRequest,
   DescribeLogDownloadTasksRequest,
@@ -104,21 +107,24 @@ import {
   ResetDBInstancePasswordRequest,
   CreateAuditLogFileResponse,
   AuditInstance,
+  DeleteInstanceRoleRequest,
   InstanceIntegerParam,
-  ModifyInstanceAzRequest,
+  CreateInstanceUserRequest,
   ModifyNetworkAddress,
   EnableSRVConnectionUrlResponse,
   DescribeAsyncRequestInfoResponse,
   CreateDBInstanceResponse,
+  DeleteInstanceRoleResponse,
   CreateLogDownloadTaskRequest,
   OpenAuditServiceRequest,
   CreateAccountUserRequest,
   InstanceTextParam,
-  ModifyDBInstanceSecurityGroupRequest,
+  InstanceEnableSSLResponse,
   DescribeAccountUsersResponse,
   DescribeAuditLogFilesResponse,
   DescribeBackupDownloadTaskRequest,
   ModifyDBInstanceLogToCLSRequest,
+  ModifyDBInstanceSecurityGroupRequest,
   ModifySRVConnectionUrlRequest,
   ScaleUpDBInstanceCpuResponse,
   DescribeClientConnectionsResponse,
@@ -128,10 +134,12 @@ import {
   DescribeDBBackupsResponse,
   ModifyDBInstanceSecurityGroupResponse,
   UserInfo,
+  UpdateInstanceUserRequest,
   CloseAuditServiceResponse,
   NodeTag,
   InquirePriceCreateDBInstancesResponse,
   CloseAuditServiceRequest,
+  DeleteInstanceUserResponse,
   OpenAuditServiceResponse,
   DescribeSecurityGroupResponse,
   DescribeTransparentDataEncryptionStatusRequest,
@@ -146,6 +154,7 @@ import {
   DescribeDBInstanceDealRequest,
   UpgradeDBInstanceKernelVersionResponse,
   DescribeAsyncRequestInfoRequest,
+  DeleteInstanceUserRequest,
   FBKeyValue,
   CreateBackupDownloadTaskRequest,
   TerminateDBInstancesRequest,
@@ -155,6 +164,7 @@ import {
   CreateDBInstanceHourRequest,
   DeleteDBBackupsResponse,
   SecurityGroupBound,
+  UpdateInstanceRoleRequest,
   RestoreDBInstanceResponse,
   BackupTotalSize,
   DescribeDBInstanceNodePropertyResponse,
@@ -171,7 +181,7 @@ import {
   BackupDownloadTask,
   DescribeDBBackupsRequest,
   DescribeClientConnectionsRequest,
-  SetDBInstanceDeletionProtectionResponse,
+  ModifyDBInstanceNetworkAddressResponse,
   DescribeDetailedSlowLogsResponse,
   ShardInfo,
   SetBackupRulesResponse,
@@ -189,6 +199,7 @@ import {
   DescribeDBInstanceLogToCLSRequest,
   CreateBackupDBInstanceRequest,
   RestoreDatabases,
+  DescribeInstanceUsersRequest,
   SetAccountUserPrivilegeRequest,
   UpgradeDbInstanceVersionResponse,
   DescribeMongodbLogsResponse,
@@ -196,12 +207,15 @@ import {
   KillOpsResponse,
   IsolateDBInstanceRequest,
   DescribeDBInstanceLogToCLSResponse,
+  UpdateInstanceRoleResponse,
   DescribePasswordRotationRequest,
   AuditLogFile,
   EnableTransparentDataEncryptionResponse,
+  RoleResource,
   IncreaseDBInstanceConnectionLimitRequest,
+  Task,
   ModifyShardSpecInfo,
-  DescribeAuditLogFilesRequest,
+  DescribeDBInstanceParamTplDetailRequest,
   SetBackupRulesRequest,
   AssignProjectRequest,
   DescribeMongodbLogsRequest,
@@ -221,13 +235,18 @@ import {
   DeleteAccountUserResponse,
   DescribeDBInstancesResponse,
   OfflineIsolatedDBInstanceRequest,
+  ModifyInstanceAzResponse,
   DescribeAuditInstanceListResponse,
   KMSInfoDetail,
+  CreateInstanceRoleResponse,
   InquirePriceCreateDBInstancesRequest,
+  UpdateInstanceUserResponse,
   Operation,
   DescribeInstanceParamsResponse,
   DescribeDBInstanceParamTplResponse,
+  RoleInfo,
   ModifyDBInstanceSpecResponse,
+  DescribeInstanceRolesRequest,
   DescribeDBInstanceURLResponse,
   DescribeAuditConfigResponse,
   AuditLog,
@@ -235,12 +254,14 @@ import {
   SlowLogItem,
   RestartNodesRequest,
   InstanceChargePrepaid,
+  CreateInstanceRoleRequest,
   ModifyMongoDBParamType,
   ModifyAuditServiceResponse,
   SetInstanceMaintenanceRequest,
   RestartNodesResponse,
   DescribeDBInstanceURLRequest,
-  DescribeDBInstanceParamTplDetailRequest,
+  SetDBInstanceDeletionProtectionResponse,
+  DescribeAuditLogFilesRequest,
   InstanceDetail,
   DescribeSlowLogPatternsRequest,
   UpgradeDBInstanceKernelVersionRequest,
@@ -445,6 +466,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建数据库账号
+   */
+  async CreateInstanceUser(
+    req: CreateInstanceUserRequest,
+    cb?: (error: string, rep: CreateInstanceUserResponse) => void
+  ): Promise<CreateInstanceUserResponse> {
+    return this.request("CreateInstanceUser", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDBBackups）用于查询实例备份列表，目前只支持查询7天内的备份记录。
    */
   async DescribeDBBackups(
@@ -452,6 +483,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBBackupsResponse) => void
   ): Promise<DescribeDBBackupsResponse> {
     return this.request("DescribeDBBackups", req, cb)
+  }
+
+  /**
+   * 获取账号列表
+   */
+  async DescribeInstanceUsers(
+    req: DescribeInstanceUsersRequest,
+    cb?: (error: string, rep: DescribeInstanceUsersResponse) => void
+  ): Promise<DescribeInstanceUsersResponse> {
+    return this.request("DescribeInstanceUsers", req, cb)
   }
 
   /**
@@ -524,6 +565,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DropDBInstanceParamTplResponse) => void
   ): Promise<DropDBInstanceParamTplResponse> {
     return this.request("DropDBInstanceParamTpl", req, cb)
+  }
+
+  /**
+   * 更新数据库账号
+   */
+  async UpdateInstanceUser(
+    req: UpdateInstanceUserRequest,
+    cb?: (error: string, rep: UpdateInstanceUserResponse) => void
+  ): Promise<UpdateInstanceUserResponse> {
+    return this.request("UpdateInstanceUser", req, cb)
   }
 
   /**
@@ -809,6 +860,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新数据库角色
+   */
+  async UpdateInstanceRole(
+    req: UpdateInstanceRoleRequest,
+    cb?: (error: string, rep: UpdateInstanceRoleResponse) => void
+  ): Promise<UpdateInstanceRoleResponse> {
+    return this.request("UpdateInstanceRole", req, cb)
+  }
+
+  /**
    * 本接口（IsolateDBInstance）用于隔离 MongoDB 云数据库按量计费实例。隔离后实例保留在回收站中，不能再写入数据。隔离一定时间后，实例会彻底删除，回收站保存时间请参考按量计费的服务条款。已删除的按量计费实例无法恢复，请谨慎操作。
    */
   async IsolateDBInstance(
@@ -1029,6 +1090,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建数据库角色
+   */
+  async CreateInstanceRole(
+    req: CreateInstanceRoleRequest,
+    cb?: (error: string, rep: CreateInstanceRoleResponse) => void
+  ): Promise<CreateInstanceRoleResponse> {
+    return this.request("CreateInstanceRole", req, cb)
+  }
+
+  /**
    * 本接口（SetBackupRules）用于设置 MongoDB 云数据库的自动备份规则。
    */
   async SetBackupRules(
@@ -1069,6 +1140,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除角色
+   */
+  async DeleteInstanceRole(
+    req: DeleteInstanceRoleRequest,
+    cb?: (error: string, rep: DeleteInstanceRoleResponse) => void
+  ): Promise<DeleteInstanceRoleResponse> {
+    return this.request("DeleteInstanceRole", req, cb)
+  }
+
+  /**
    * 获取密码轮转状态信息
    */
   async DescribePasswordRotation(
@@ -1106,6 +1187,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTransparentDataEncryptionStatusResponse) => void
   ): Promise<DescribeTransparentDataEncryptionStatusResponse> {
     return this.request("DescribeTransparentDataEncryptionStatus", req, cb)
+  }
+
+  /**
+   * 获取角色列表
+   */
+  async DescribeInstanceRoles(
+    req: DescribeInstanceRolesRequest,
+    cb?: (error: string, rep: DescribeInstanceRolesResponse) => void
+  ): Promise<DescribeInstanceRolesResponse> {
+    return this.request("DescribeInstanceRoles", req, cb)
   }
 
   /**
@@ -1157,5 +1248,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceRenewDBInstancesResponse) => void
   ): Promise<InquirePriceRenewDBInstancesResponse> {
     return this.request("InquirePriceRenewDBInstances", req, cb)
+  }
+
+  /**
+   * 删除数据库账号。
+   */
+  async DeleteInstanceUser(
+    req: DeleteInstanceUserRequest,
+    cb?: (error: string, rep: DeleteInstanceUserResponse) => void
+  ): Promise<DeleteInstanceUserResponse> {
+    return this.request("DeleteInstanceUser", req, cb)
   }
 }

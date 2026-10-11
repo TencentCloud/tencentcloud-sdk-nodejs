@@ -601,74 +601,79 @@ Trigger 告警触发; Recovery 告警恢复
  */
 export interface AlarmNotifyHistory {
   /**
-   * 通知的唯一ID
+   * <p>通知的唯一ID</p>
    */
   NotifyId?: string
   /**
-   * 告警策略ID
+   * <p>告警策略ID</p>
    */
   PolicyId?: string
   /**
-   * 告警周期iD
+   * <p>告警周期iD</p>
    */
   SessionId?: string
   /**
-   * 通知时间 unix秒级时间戳
+   * <p>通知时间 unix秒级时间戳</p>
    */
   NotifyTime?: number
   /**
-   * 触发时间 unix秒级时间戳
+   * <p>触发时间 unix秒级时间戳</p>
    */
   TriggerTime?: number
   /**
-   * 告警级别 None 非分级告警级别; Note 提示级别; Warn 严重级别; Serious 紧急级别
+   * <p>告警级别 None 非分级告警级别; Note 提示级别; Warn 严重级别; Serious 紧急级别</p>
    */
   TriggerLevel?: string
   /**
-   * 告警内容
+   * <p>告警内容</p>
    */
   AlarmContent?: string
   /**
-   * 告警对象
+   * <p>告警对象</p>
    */
   AlarmObject?: string
   /**
-   * 本次告警通知涉及到的渠道合集
+   * <p>本次告警通知涉及到的渠道合集</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelSet?: Array<string>
   /**
-   * 渠道的接收人信息
+   * <p>渠道的接收人信息</p>
    */
   ChannelsReceivers?: Array<ChannelsReceivers>
   /**
-   * 告警策略名称
+   * <p>告警策略名称</p>
    */
   PolicyName?: string
   /**
-   * Prometheus实例ID, 仅当 MT_PROME 时有效
+   * <p>Prometheus实例ID, 仅当 MT_PROME 时有效</p>
    */
   PromeInstanceID?: string
   /**
-   * Prometheus实例所在的地域, 仅当 MT_PROME 时有效
+   * <p>Prometheus实例所在的地域, 仅当 MT_PROME 时有效</p>
    */
   PromeInstanceRegion?: string
   /**
-   * 通知模板相关的配置信息
+   * <p>通知模板相关的配置信息</p>
    */
   Notices?: Array<NotifyRelatedNotice>
   /**
-   * 告警触发状态  Trigger 告警状态触发; Recovery 告警状态恢复
+   * <p>告警触发状态  Trigger 告警状态触发; Recovery 告警状态恢复</p>
    */
   TriggerStatus?: string
   /**
-   * 与当前Prometheus通知历史相关控制台页面地址，仅当 MR_PROME 时有效
+   * <p>与当前Prometheus通知历史相关控制台页面地址，仅当 MR_PROME 时有效</p>
    */
   PromeConsoleURL?: string
   /**
-   * 告警的lable
+   * <p>告警的lable</p>
    */
   Labels?: Array<AlarmLable>
+  /**
+   * <p>该条通知实际执行的接收人/组明细。一条元素对应通知模板里的一条渠道发送规则</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiverGroups?: Array<ReceiverGroup>
 }
 
 /**
@@ -987,33 +992,37 @@ export interface DescribeKafkaResponse {
  */
 export interface DescribeAlarmNotifyHistoriesRequest {
   /**
-   * 监控类型
+   * <p>监控类型</p>
    */
   MonitorType: string
   /**
-   * 起始时间点，unix秒级时间戳
+   * <p>起始时间点，unix秒级时间戳</p>
    */
   QueryBaseTime: number
   /**
-   * 从 QueryBaseTime 开始，需要查询往前多久的时间，单位秒
+   * <p>从 QueryBaseTime 开始，需要查询往前多久的时间，单位秒</p>
    */
   QueryBeforeSeconds: number
   /**
-   * 分页参数
+   * <p>分页参数</p>
    */
   PageParams: PageByNoParams
   /**
-   * 当监控类型为 MT_QCE 时候需要填写，归属的命名空间
+   * <p>当监控类型为 MT_QCE 时候需要填写，归属的命名空间</p>
    */
   Namespace?: string
   /**
-   * 当监控类型为 MT_QCE 时候需要填写， 告警策略类型
+   * <p>当监控类型为 MT_QCE 时候需要填写， 告警策略类型</p>
    */
   ModelName?: string
   /**
-   * 查询某个策略的通知历史
+   * <p>查询某个策略的通知历史</p>
    */
   PolicyId?: string
+  /**
+   * <p>详情页展示所需id</p>
+   */
+  NotifyId?: string
 }
 
 /**
@@ -1412,11 +1421,11 @@ export interface ModifyDispenseExternalRuleRequest {
  */
 export interface DescribeAlarmNotifyHistoriesResponse {
   /**
-   * 告警历史
+   * <p>告警历史</p>
    */
   AlarmNotifyHistoryList?: Array<AlarmNotifyHistory>
   /**
-   * 分页情况
+   * <p>分页情况</p>
    */
   PageResult?: PageByNoResult
   /**
@@ -1785,15 +1794,66 @@ export interface DeleteNoticeContentTmplsRequest {
  */
 export interface PageByNoParams {
   /**
-   * 每个分页的数量是多少
+   * <p>每个分页的数量是多少</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PerPage?: number
   /**
-   * 第几个分页，从1开始
+   * <p>第几个分页，从1开始</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNo?: string
+}
+
+/**
+ * 承载消息接收人/组明细
+ */
+export interface ReceiverGroup {
+  /**
+   * <p>本条发送规则的接收者类型</p><p>枚举值：</p><ul><li>UIDs： 按用户 UID</li><li>UINs： 按账号 UIN</li><li>Group： 按用户分组。ReceiverIds 为分组 ID</li><li>Oncall： 按值班表，且未被发送时的真实接收人覆盖</li><li>RtxName： 发送时解析出的员工 RTX 英文名</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiverType?: string
+  /**
+   * <p>本条规则配置的原始接收者 ID 列表。具体是哪一种 ID，由 ReceiverType 决定</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiverIds?: Array<string>
+  /**
+   * <p>接收者展示名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Names?: Array<string>
+  /**
+   * <p>用户分组展开后的成员用户 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemberIds?: Array<string>
+  /**
+   * <p>该规则允许通知的星期。语义与 time.Weekday 一致</p><p>枚举值：</p><ul><li>0： 周日</li><li>1： 周一</li><li>2： 周二</li><li>3： 周三</li><li>4： 周四</li><li>5： 周五</li><li>6： 周六</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WeekDay?: Array<number | bigint>
+  /**
+   * <p>通知时段相对当日零点的秒数偏移，需配合 TimeZoneName 解读</p><p>单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DayStartSeconds?: number
+  /**
+   * <p>通知时段相对当日零点的秒数偏移，需配合 TimeZoneName 解读</p><p>单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DayEndSeconds?: number
+  /**
+   * <p>DayStartSeconds、DayEndSeconds 所属时区</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeZoneName?: string
+  /**
+   * <p>该规则实际发送的接收渠道全名列表</p><p>枚举值：</p><ul><li>QCloudYehe_site： 腾讯云野鹤，站内信</li><li>QCloudYehe_email： 腾讯云野鹤，电子邮件</li><li>QCloudYehe_sms： 腾讯云野鹤，短信</li><li>QCloudYehe_wechat： 腾讯云野鹤，微信</li><li>QCloudYehe_voice： 腾讯云野鹤，语音</li><li>QCloudYehe_qywx： 腾讯云野鹤，企业微信</li><li>QCloudYehe_andon： 腾讯云野鹤，安灯</li><li>TOF_weWorkMessage： TOF，企业微信消息</li><li>TOF_email： TOF，企业邮箱</li><li>TOF_phoneCall： TOF，电话</li><li>WeWork： 企业微信机器人</li><li>WebHook： 自定义 WebHook</li><li>FeiShu： 飞书</li><li>DingDing： 钉钉</li><li>Slack： Slack</li><li>GoogleChat： Google Chat</li><li>Teams： Teams</li><li>TeamsWorkflow： Teams Workflow</li><li>PagerDuty： PagerDuty</li><li>CLS： 日志服务 CLS</li><li>AS： 弹性伸缩</li><li>TCSYehe： TCS 野鹤。正文的 SubChannel 取渠道名本身</li><li>SCF： 云函数。不返回 Contents</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelNames?: Array<string>
 }
 
 /**
@@ -1845,24 +1905,64 @@ export interface ListAIWorkbenchResourceInstancesRequest {
 }
 
 /**
- * 接受人详情信息
+ * 接受人详情信息和通知详情页展示
  */
 export interface ChannelsReceivers {
   /**
-   * 通知渠道名称
+   * <p>通知渠道名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelName?: string
   /**
-   * 接收者
+   * <p>接收者</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Receivers?: Array<string>
   /**
-   * 发送结果,0-无效,1-成功,2-失败,3-无需发送
+   * <p>发送结果,0-无效,1-成功,2-失败,3-无需发送</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SendStatus?: string
+  /**
+   * <p>参数定义 渠道返回的原始状态码。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendStatusCode?: string
+  /**
+   * <p>Ark 发起该渠道调用的时间</p><p>单位：Unix 秒级时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendTime?: number
+  /**
+   * <p>该渠道本次实际发送的子渠道全名，格式为 父渠道_子渠道</p><p>枚举值：</p><ul><li>QCloudYehe_site： 腾讯云野鹤，站内信</li><li>QCloudYehe_email： 腾讯云野鹤，电子邮件</li><li>QCloudYehe_sms： 腾讯云野鹤，短信</li><li>QCloudYehe_wechat： 腾讯云野鹤，微信</li><li>QCloudYehe_voice： 腾讯云野鹤，语音</li><li>QCloudYehe_qywx： 腾讯云野鹤，企业微信</li><li>QCloudYehe_andon： 腾讯云野鹤，安灯</li><li>TOF_weWorkMessage： TOF，企业微信消息</li><li>TOF_email： TOF，企业邮箱</li><li>TOF_phoneCall： TOF，电话</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubChannels?: Array<string>
+  /**
+   * <p>该渠道本次执行情况的文字描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecDetail?: string
+  /**
+   * <p>短信真实投递状态，来自野鹤 smsStatus 回调的 reportStatus 原值</p><p>枚举值：</p><ul><li>SUCCESS： 短信已真实送达</li><li>FAIL： 短信真实投递失败，失败原因见 RealDeliverErrMsg</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RealDeliverStatus?: string
+  /**
+   * <p>用户真实收到短信的时间，取野鹤回调 userReceiverTime 原文字符串</p><p>参数格式：YYYY-MM-DD HH:mm:ss</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RealDeliverTime?: string
+  /**
+   * <p>短信真实投递回执中的结果码，取野鹤回调 errmsg 原值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RealDeliverErrMsg?: string
+  /**
+   * <p>该渠道下各子渠道的消息正文明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Contents?: Array<ChannelContent>
 }
 
 /**
@@ -2656,6 +2756,22 @@ export interface DescribeAIWorkbenchAgentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 消息正文
+ */
+export interface ChannelContent {
+  /**
+   * <p>本段正文所属的渠道或子渠道全名</p><p>枚举值：</p><ul><li>QCloudYehe_site： 腾讯云野鹤，站内信</li><li>QCloudYehe_email： 腾讯云野鹤，电子邮件</li><li>QCloudYehe_sms： 腾讯云野鹤，短信</li><li>QCloudYehe_wechat： 腾讯云野鹤，微信</li><li>QCloudYehe_voice： 腾讯云野鹤，语音</li><li>QCloudYehe_qywx： 腾讯云野鹤，企业微信</li><li>QCloudYehe_andon： 腾讯云野鹤，安灯</li><li>TOF_weWorkMessage： TOF，企业微信消息</li><li>TOF_email： TOF，企业邮箱</li><li>TOF_phoneCall： TOF，电话</li><li>WeWork： 企业微信机器人</li><li>WebHook： 自定义 WebHook</li><li>FeiShu： 飞书</li><li>DingDing： 钉钉</li><li>Slack： Slack</li><li>GoogleChat： Google Chat</li><li>Teams： Teams</li><li>TeamsWorkflow： Teams Workflow</li><li>PagerDuty： PagerDuty</li><li>CLS： 日志服务 CLS</li><li>AS： 弹性伸缩</li><li>TCSYehe： TCS 野鹤。正文的 SubChannel 取渠道名本身</li><li>SCF： 云函数。不返回 Contents</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubChannel?: string
+  /**
+   * <p>该渠道实际发送的消息正文，由 Ark 按写时捕获的内容还原</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
 }
 
 /**

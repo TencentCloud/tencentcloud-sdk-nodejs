@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   TableOCRRequest,
-  StoreInfo,
+  RerankResult,
   NonTaxItem,
   FieldsInfo,
   TextTable,
@@ -44,7 +44,7 @@ import {
   MLIDPassportOCRRequest,
   OverseasInvoice,
   ItemInfo,
-  TextDetectResponse,
+  RunRerankRequest,
   TaxPayment,
   GetOCRTokenResponse,
   IDCardInfoResult,
@@ -58,6 +58,7 @@ import {
   Rect,
   CustomsPaymentReceipt,
   SingleInvoiceInfo,
+  RideHailingDriverLicenseOCRResponse,
   Key,
   MLIDCardOCRRequest,
   VatInvoiceItem,
@@ -92,7 +93,7 @@ import {
   RecognizeStoreNameRequest,
   StructuralItem,
   InvoiceDetectInfo,
-  VerifyScenePhotoResponse,
+  MainlandTravelPermitBackInfos,
   FlightItemInfo,
   RecognizeAgentResponse,
   TrainTicketOCRResponse,
@@ -117,7 +118,7 @@ import {
   BusInvoice,
   RecognizeGeneralInvoiceRequest,
   GeneralBasicOCRResponse,
-  MainlandTravelPermitBackInfos,
+  ItemNames,
   OtherInvoice,
   CellContent,
   RecognizeMedicalInvoiceOCRResponse,
@@ -142,7 +143,7 @@ import {
   RecognizeThaiIDCardOCRResponse,
   GroupInfo,
   QuotaInvoice,
-  ItemNames,
+  DescribeMultimodalDocParseJobRequest,
   ReasoningConfig,
   VatInvoiceInfo,
   OnlineTaxiItineraryInfo,
@@ -151,6 +152,7 @@ import {
   MachinePrintedInvoice,
   FinancialBillItem,
   ShoppingReceipt,
+  SubmitExtractDocAgentJobResponse,
   TrainTicket,
   TextDetectRequest,
   RecognizeThaiIDCardOCRRequest,
@@ -160,7 +162,7 @@ import {
   RecognizeEncryptedIDCardOCRRequest,
   UsedVehicleInvoiceInfo,
   PassportRecognizeInfos,
-  SubmitExtractDocAgentJobResponse,
+  ReconstructDocumentFailedPage,
   ImageEnhancementResponse,
   PortraitImageInfo,
   QrcodeImgSize,
@@ -179,9 +181,10 @@ import {
   SubmitMarkEssayAgentJobResponse,
   GeneralEfficientOCRRequest,
   AdvertiseOCRRequest,
+  SubmitMultimodalDocParseJobResponse,
   AirTicketInfo,
   SubmitQuestionMarkAgentJobResponse,
-  RideHailingDriverLicenseOCRResponse,
+  DescribeMultimodalDocParseJobResponse,
   ImageEnhancementRequest,
   ExtractDocBasicResponse,
   EnterpriseLicenseOCRRequest,
@@ -197,6 +200,7 @@ import {
   VatInvoiceVerifyNewRequest,
   CarInvoiceInfo,
   SchemaList,
+  VehicleRegCertOCRResponse,
   TableCellInfo,
   DetailInformationOfAirTicketTupleList,
   TextVehicleFront,
@@ -220,6 +224,7 @@ import {
   RecognizeTableAccurateOCRRequest,
   Coord,
   SealOCRResponse,
+  VatInvoiceRoll,
   VerifyBizLicenseEnterprise4Response,
   HandwritingEssayOCRRequest,
   BankSlipOCRResponse,
@@ -245,10 +250,11 @@ import {
   TableDetectInfo,
   DescribeExtractDocAgentJobResponse,
   ResidenceBookletOCRResponse,
-  VatInvoiceRoll,
+  SaleInventory,
   RedLetterInvoiceItem,
+  VerifyScenePhotoResponse,
   CarInvoiceOCRResponse,
-  VehicleRegCertOCRResponse,
+  StoreInfo,
   GeneralFastOCRRequest,
   ImageSize,
   RecognizeGeneralInvoiceResponse,
@@ -284,10 +290,12 @@ import {
   TaxiTicket,
   EnglishOCRResponse,
   ImageCoordinates,
+  SubmitMultimodalDocParseJobRequest,
   VerifyBizLicenseEnterprise3Request,
   RecognizeEncryptedIDCardOCRResponse,
   Positions,
   RideHailingTransportLicenseOCRResponse,
+  TextDetectResponse,
   CandWord,
   TollInvoice,
   SubmitQuestionSplitJobRequest,
@@ -313,7 +321,7 @@ import {
   MLIDCardOCRResponse,
   RecognizeTableOCRRequest,
   EstateCertOCRRequest,
-  SaleInventory,
+  RunRerankResponse,
   DescribeQuestionSplitJobResponse,
   BizLicenseOCRResponse,
   ResultList,
@@ -965,18 +973,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口专为教育场景设计，可高精度识别中英文手写字符，智能分栏并按阅读顺序分割内容，自动过滤手写与印刷体混排干扰，精准返回词、行、段落及标题的文本与坐标信息。点击[立即体验](https://ocrdemo.cloud.tencent.com/)。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async HandwritingEssayOCR(
-    req: HandwritingEssayOCRRequest,
-    cb?: (error: string, rep: HandwritingEssayOCRResponse) => void
-  ): Promise<HandwritingEssayOCRResponse> {
-    return this.request("HandwritingEssayOCR", req, cb)
-  }
-
-  /**
      * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
 
 默认接口请求频率限制：5次/秒。
@@ -989,6 +985,28 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口专为教育场景设计，可高精度识别中英文手写字符，智能分栏并按阅读顺序分割内容，自动过滤手写与印刷体混排干扰，精准返回词、行、段落及标题的文本与坐标信息。点击[立即体验](https://ocrdemo.cloud.tencent.com/)。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async HandwritingEssayOCR(
+    req: HandwritingEssayOCRRequest,
+    cb?: (error: string, rep: HandwritingEssayOCRResponse) => void
+  ): Promise<HandwritingEssayOCRResponse> {
+    return this.request("HandwritingEssayOCR", req, cb)
+  }
+
+  /**
+   * 基于知识引擎精调模型技术的 Rerank 模型，支持对多路召回的结果进行重排序，根据查询内容与文档切片内容的相关性，按顺序返回每一条文档内容与查询内容的相关性分数。
+   */
+  async RunRerank(
+    req: RunRerankRequest,
+    cb?: (error: string, rep: RunRerankResponse) => void
+  ): Promise<RunRerankResponse> {
+    return this.request("RunRerank", req, cb)
+  }
+
+  /**
      * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
 
 默认接口请求频率限制：5次/秒。
@@ -998,6 +1016,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SmartStructuralOCRResponse) => void
   ): Promise<SmartStructuralOCRResponse> {
     return this.request("SmartStructuralOCR", req, cb)
+  }
+
+  /**
+     * 图像切边矫正增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度，可以作为所有识别场景的图像预处理原子能力，从而提升识别效果。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async CropEnhanceImageOCR(
+    req: CropEnhanceImageOCRRequest,
+    cb?: (error: string, rep: CropEnhanceImageOCRResponse) => void
+  ): Promise<CropEnhanceImageOCRResponse> {
+    return this.request("CropEnhanceImageOCR", req, cb)
   }
 
   /**
@@ -1412,6 +1442,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提供针对卡证（如身份证、营业执照等）图片的PS篡改、AIGC合成、图片质量检测能力，可应用于业务流程中对卡证图片真实性、有效性校验的场景。
+   */
+  async VerifyGeneralCardWarn(
+    req: VerifyGeneralCardWarnRequest,
+    cb?: (error: string, rep: VerifyGeneralCardWarnResponse) => void
+  ): Promise<VerifyGeneralCardWarnResponse> {
+    return this.request("VerifyGeneralCardWarn", req, cb)
+  }
+
+  /**
    * 获取ocr的token值
    */
   async GetOCRToken(
@@ -1422,13 +1462,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供针对卡证（如身份证、营业执照等）图片的PS篡改、AIGC合成、图片质量检测能力，可应用于业务流程中对卡证图片真实性、有效性校验的场景。
-   */
-  async VerifyGeneralCardWarn(
-    req: VerifyGeneralCardWarnRequest,
-    cb?: (error: string, rep: VerifyGeneralCardWarnResponse) => void
-  ): Promise<VerifyGeneralCardWarnResponse> {
-    return this.request("VerifyGeneralCardWarn", req, cb)
+     * 本接口为异步多模态文档解析的任务提交接口，支持解析多种类型的文档文件（PDF、Word、PPT、Excel、Markdown、TXT、图片、WPS），服务端异步执行解析任务，提交后返回任务唯一 ID，可通过「异步多模态文档解析（查询任务）」接口获取最终解析结果。需要 SubmitMultimodalDocParseJob（创建任务）、DescribeMultimodalDocParseJob（查询任务）两个接口配套使用，计费发生在提交任务后。
+
+查询任务接口文档地址：https://cloud.tencent.com/document/product/1024/953219
+
+默认接口请求频率限制：5 页并发（注：可同时解析5页，且同步和异步接口共享并发资源，支持增购并发）。
+     */
+  async SubmitMultimodalDocParseJob(
+    req: SubmitMultimodalDocParseJobRequest,
+    cb?: (error: string, rep: SubmitMultimodalDocParseJobResponse) => void
+  ): Promise<SubmitMultimodalDocParseJobResponse> {
+    return this.request("SubmitMultimodalDocParseJob", req, cb)
   }
 
   /**
@@ -1445,8 +1489,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 异步试卷切题识别可将整页练习册、试卷或教辅中的题目进行自动切题，并识别出其中的文字内容和坐标位置，是试卷切题的接口补充。主要解决试卷录题这类多页场景、单题跨页场景。需要 SubmitQuestionSplitOCRJob（提交任务）、DescribeQuestionSplitOCRJob（查询任务）两个接口配套使用，计费发生在提交任务后。
-   */
+     * 异步试卷切题识别可将整页练习册、试卷或教辅中的题目进行自动切题，并识别出其中的文字内容和坐标位置，是试卷切题的接口补充。主要解决试卷录题这类多页场景、单题跨页场景。需要 SubmitQuestionSplitOCRJob（提交任务）、DescribeQuestionSplitOCRJob（查询任务）两个接口配套使用，计费发生在提交任务后。
+
+默认接口请求频率限制：5次/秒。
+     */
   async SubmitQuestionSplitJob(
     req: SubmitQuestionSplitJobRequest,
     cb?: (error: string, rep: SubmitQuestionSplitJobResponse) => void
@@ -1467,15 +1513,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 图像切边矫正增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度，可以作为所有识别场景的图像预处理原子能力，从而提升识别效果。
+     * 用于查询异步多模态文档解析任务的执行状态与结果，任务执行成功时返回解析结果包的下载地址，任务执行失败时返回对应错误信息。需要 SubmitMultimodalDocParseJob（创建任务）、DescribeMultimodalDocParseJob（查询任务）两个接口配套使用，计费发生在提交任务后。
 
-默认接口请求频率限制：5次/秒。
+创建任务接口文档地址：https://cloud.tencent.com/document/product/1024/953218
+
+默认接口请求频率限制：5 页并发（注：可同时解析5页，且同步和异步接口共享并发资源，支持增购并发）。
      */
-  async CropEnhanceImageOCR(
-    req: CropEnhanceImageOCRRequest,
-    cb?: (error: string, rep: CropEnhanceImageOCRResponse) => void
-  ): Promise<CropEnhanceImageOCRResponse> {
-    return this.request("CropEnhanceImageOCR", req, cb)
+  async DescribeMultimodalDocParseJob(
+    req: DescribeMultimodalDocParseJobRequest,
+    cb?: (error: string, rep: DescribeMultimodalDocParseJobResponse) => void
+  ): Promise<DescribeMultimodalDocParseJobResponse> {
+    return this.request("DescribeMultimodalDocParseJob", req, cb)
   }
 
   /**

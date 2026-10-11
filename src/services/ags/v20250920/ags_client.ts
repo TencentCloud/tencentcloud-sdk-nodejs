@@ -37,6 +37,7 @@ import {
   DNSConfig,
   DescribeRegistryRecordListRequest,
   CloudRegistry,
+  SandboxSnapshot,
   UpdateRegistryResponse,
   ApproveRegistryRecordResponse,
   DeleteSessionRequest,
@@ -47,6 +48,7 @@ import {
   PreviewRegistryRecordResponse,
   CreateSessionRequest,
   DescribeDeploymentRequest,
+  DescribeSandboxSnapshotListRequest,
   ResourceConfiguration,
   DescribeSessionSpaceResponse,
   CreateSandboxToolResponse,
@@ -60,7 +62,7 @@ import {
   UpdateSandboxToolRequest,
   DescribeSessionSpacesResponse,
   DescribeRegistryRecordVersionListResponse,
-  StopSandboxInstanceResponse,
+  DeleteSandboxSnapshotResponse,
   DescribeRegistryRecordVersionListRequest,
   RejectRegistryRecordRequest,
   CreateDeploymentRequest,
@@ -69,6 +71,7 @@ import {
   GetSkillPackageDownloadURLRequest,
   DescribeSandboxToolListResponse,
   SessionInfo,
+  CreateSandboxSnapshotResponse,
   DescribeQuotaOverviewResponse,
   UpdateSandboxToolResponse,
   InlineDataInfo,
@@ -81,6 +84,7 @@ import {
   CreateAPIKeyRequest,
   DeleteSandboxToolResponse,
   SandboxTool,
+  DeleteSandboxSnapshotRequest,
   CreateRegistryRecordResponse,
   SessionSpaceInfo,
   UpdateSandboxInstanceRequest,
@@ -133,6 +137,7 @@ import {
   AccountQuotaOverview,
   AgentBucketStorageSource,
   CloudRecordLabelMutation,
+  DescribeSandboxSnapshotListResponse,
   PauseSandboxInstanceResponse,
   CosStorageSource,
   StartSandboxInstanceRequest,
@@ -162,7 +167,9 @@ import {
   DeleteRegistryRecordRequest,
   EventPartInfo,
   Tag,
+  StopSandboxInstanceResponse,
   ScalingConfiguration,
+  CreateSandboxSnapshotRequest,
   AppendEventRequest,
   QuotaGroupOverview,
   DeleteSessionResponse,
@@ -210,6 +217,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PreviewRegistryRecordResponse) => void
   ): Promise<PreviewRegistryRecordResponse> {
     return this.request("PreviewRegistryRecord", req, cb)
+  }
+
+  /**
+     * 创建沙箱快照
+该接口属于 Runtime Snapshot API ，当前为预览版本（Beta）。接口后续可能发生不兼容变更或被弃用，不保证向后兼容。接入方需关注后续版本及变更说明，并根据需要调整调用代码。
+     */
+  async CreateSandboxSnapshot(
+    req: CreateSandboxSnapshotRequest,
+    cb?: (error: string, rep: CreateSandboxSnapshotResponse) => void
+  ): Promise<CreateSandboxSnapshotResponse> {
+    return this.request("CreateSandboxSnapshot", req, cb)
   }
 
   /**
@@ -286,13 +304,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分页查询指定Registry / Record / Version的审计日志。
-   */
-  async DescribeRegistryAuditLogList(
-    req: DescribeRegistryAuditLogListRequest,
-    cb?: (error: string, rep: DescribeRegistryAuditLogListResponse) => void
-  ): Promise<DescribeRegistryAuditLogListResponse> {
-    return this.request("DescribeRegistryAuditLogList", req, cb)
+     * 删除沙箱快照
+该接口属于 Runtime Snapshot API ，当前为预览版本（Beta）。接口后续可能发生不兼容变更或被弃用，不保证向后兼容。接入方需关注后续版本及变更说明，并根据需要调整调用代码。
+     */
+  async DeleteSandboxSnapshot(
+    req: DeleteSandboxSnapshotRequest,
+    cb?: (error: string, rep: DeleteSandboxSnapshotResponse) => void
+  ): Promise<DeleteSandboxSnapshotResponse> {
+    return this.request("DeleteSandboxSnapshot", req, cb)
   }
 
   /**
@@ -436,6 +455,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSessionSpaceResponse) => void
   ): Promise<DeleteSessionSpaceResponse> {
     return this.request("DeleteSessionSpace", req, cb)
+  }
+
+  /**
+     * 查询沙箱快照
+该接口属于 Runtime Snapshot API ，当前为预览版本（Beta）。接口后续可能发生不兼容变更或被弃用，不保证向后兼容。请关注后续版本及变更说明，并根据需要调整调用代码。
+     */
+  async DescribeSandboxSnapshotList(
+    req: DescribeSandboxSnapshotListRequest,
+    cb?: (error: string, rep: DescribeSandboxSnapshotListResponse) => void
+  ): Promise<DescribeSandboxSnapshotListResponse> {
+    return this.request("DescribeSandboxSnapshotList", req, cb)
   }
 
   /**
@@ -680,6 +710,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopSandboxInstanceResponse) => void
   ): Promise<StopSandboxInstanceResponse> {
     return this.request("StopSandboxInstance", req, cb)
+  }
+
+  /**
+   * 分页查询指定Registry / Record / Version的审计日志。
+   */
+  async DescribeRegistryAuditLogList(
+    req: DescribeRegistryAuditLogListRequest,
+    cb?: (error: string, rep: DescribeRegistryAuditLogListResponse) => void
+  ): Promise<DescribeRegistryAuditLogListResponse> {
+    return this.request("DescribeRegistryAuditLogList", req, cb)
   }
 
   /**

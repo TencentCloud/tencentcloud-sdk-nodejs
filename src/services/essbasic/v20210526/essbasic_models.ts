@@ -3339,7 +3339,7 @@ export interface CreateConsoleLoginUrlRequest {
    */
   Agent: Agent
   /**
-   * <p>第三方平台子客的企业名称，请确认该企业名称与企业营业执照中注册的名称完全一致。<br><font color="red"><br>在测试环境联调的过程中，企业名称请统一加上“测试”二字，如：典子谦示例企业测试，否则将无法审核通过。<br>企业名称请使用以下名称, 以下名称可以不用走收录。<br><strong>子客测试专用企业1 - 子客测试专用企业9</strong></font></p><p>注:<br> <code>1. 如果名称中包含英文括号()，请使用中文括号（）代替。</code><br> <code>2、该名称需要与Agent.ProxyOrganizationOpenId相匹配,  企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。</code></p>
+   * <p>第三方平台子客的企业名称，请确认该企业名称与企业营业执照中注册的名称完全一致。<br><font color="red"><br>在测试环境联调的过程中，企业名称请再最后统一加上“测试”二字，如：典子谦示例企业测试，否则将无法审核通过。<br></font></p><p>注:<br> <code>1. 如果名称中包含英文括号()，请使用中文括号（）代替。</code><br> <code>2、该名称需要与Agent.ProxyOrganizationOpenId相匹配,  企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。</code></p>
    */
   ProxyOrganizationName: string
   /**

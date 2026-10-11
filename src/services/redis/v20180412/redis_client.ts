@@ -150,6 +150,7 @@ import {
   SwitchAccessNewInstanceRequest,
   RemoveReplicationGroupResponse,
   KillMasterGroupRequest,
+  UpgradeInstanceProductVersionResponse,
   SwitchAccessNewInstanceResponse,
   CloneInstancesResponse,
   DescribeBackupDownloadRestrictionResponse,
@@ -245,6 +246,7 @@ import {
   ModifyParamTemplateRequest,
   AvailableRegion,
   FailedInstance,
+  UpgradeInstanceProductVersionRequest,
   ReleaseWanAddressRequest,
   InquiryPriceRenewInstanceRequest,
   CloseSSLResponse,
@@ -1205,6 +1207,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCommonDBInstancesResponse) => void
   ): Promise<DescribeCommonDBInstancesResponse> {
     return this.request("DescribeCommonDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradeInstanceProductVersion）用于升级实例类型，可从通用 I 型升级到通用 II 型。
+   */
+  async UpgradeInstanceProductVersion(
+    req: UpgradeInstanceProductVersionRequest,
+    cb?: (error: string, rep: UpgradeInstanceProductVersionResponse) => void
+  ): Promise<UpgradeInstanceProductVersionResponse> {
+    return this.request("UpgradeInstanceProductVersion", req, cb)
   }
 
   /**

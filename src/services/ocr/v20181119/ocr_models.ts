@@ -37,21 +37,17 @@ export interface TableOCRRequest {
 }
 
 /**
- * 门头照识别结果
+ * 重排序结果
  */
-export interface StoreInfo {
+export interface RerankResult {
   /**
-   * 识别出的字段名称(关键字)，如商店名称
+   * 文档在输入 Docs 列表中的索引，从 0 开始，用于回溯原文档。
    */
-  Name?: string
+  Index?: number
   /**
-   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+   * 文档与查询内容的相关性得分，数值越大越相关。
    */
-  Value?: string
-  /**
-   * 文本行在旋转纠正之后的图像中的像素坐标
-   */
-  Rect?: Rect
+  Score?: number
 }
 
 /**
@@ -823,17 +819,21 @@ export interface ItemInfo {
 }
 
 /**
- * TextDetect返回参数结构体
+ * RunRerank请求参数结构体
  */
-export interface TextDetectResponse {
+export interface RunRerankRequest {
   /**
-   * 图片中是否包含文字。
+   * <p>选择模型。<br>0：Rerank-2b<br>1：Rerank-0.6b</p>
    */
-  HasText?: boolean
+  Model: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>查询内容。用于匹配的query，即用户检索意图。</p>
    */
-  RequestId?: string
+  Query: string
+  /**
+   * <p>文档内容列表。</p>
+   */
+  Docs: Array<string>
 }
 
 /**
@@ -1299,6 +1299,36 @@ export interface SingleInvoiceInfo {
    * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
    */
   Row?: number
+}
+
+/**
+ * RideHailingDriverLicenseOCR返回参数结构体
+ */
+export interface RideHailingDriverLicenseOCRResponse {
+  /**
+   * 姓名
+   */
+  Name?: string
+  /**
+   * 证号，对应网约车驾驶证字段：证号/从业资格证号/驾驶员证号/身份证号
+   */
+  LicenseNumber?: string
+  /**
+   * 有效起始日期
+   */
+  StartDate?: string
+  /**
+   * 有效期截止时间，对应网约车驾驶证字段：有效期至/营运期限止
+   */
+  EndDate?: string
+  /**
+   * 初始发证日期，对应网约车驾驶证字段：初始领证日期/发证日期
+   */
+  ReleaseDate?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2366,45 +2396,29 @@ export interface InvoiceDetectInfo {
 }
 
 /**
- * VerifyScenePhoto返回参数结构体
+ * 港澳台来往内地通行证背面字段信息
  */
-export interface VerifyScenePhotoResponse {
+export interface MainlandTravelPermitBackInfos {
   /**
-   * <p>区域篡改提示</p>
+   * String	证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tamper?: SceneWarnInfo
+  Type?: string
   /**
-   * <p>AIGC合成提示</p>
+   * 卡证背面的中文姓名	
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Synthesis?: SceneWarnInfo
+  Name?: string
   /**
-   * <p>屏幕翻拍提示</p>
+   * 卡证背面的身份证号码	
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RemakeScreen?: SceneWarnInfo
+  IDNumber?: string
   /**
-   * <p>截图提示</p>
+   * 历史通行证号码	
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Screenshot?: SceneWarnInfo
-  /**
-   * <p>文字水印提示</p>
-   */
-  TextWatermark?: SceneWarnInfo
-  /**
-   * <p>水印内容，当未检测到文字水印时不返回，返回多组水印时以 | 分隔。</p>
-   */
-  WatermarkContent?: string
-  /**
-   * <p>模板图片提示</p>
-   */
-  Template?: SceneWarnInfo
-  /**
-   * <p>VLM 推理结果。仅当请求中传入 ReasoningPrompt 时返回，否则不返回此字段。</p>
-   */
-  ReasoningResult?: ReasoningResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  HistoryNumber?: string
 }
 
 /**
@@ -2811,19 +2825,19 @@ export interface ReasoningResult {
    */
   OutputMode?: string
   /**
-   * <p>枚举模式下的推理结果值。当 OutputMode=enum 时返回，必定命中请求中 EnumValues 的某个值。 若 VLM 输出无法匹配任何枚举值，则返回 <strong>UNCERTAIN</strong>。</p>
+   * <p>枚举模式下的推理结果值。当 OutputMode=enum 时返回，取值对应请求中配置的 EnumValues。</p>
    */
   EnumValue?: string
   /**
-   * <p>文本模式下的推理结果值。当 OutputMode=string 时返回。 若 VLM 无法得出结论，则返回 <strong>UNCERTAIN</strong>。</p>
+   * <p>文本模式下的推理结果值。当 OutputMode=string 时返回，以文本形式描述推理结论。</p>
    */
   TextValue?: string
   /**
-   * <p>VLM 原始输出文本（未经过结构化校验）。</p>
+   * <p>VLM 原始输出文本（未经过结构化校验）。该字段仅用于调试，生产环境可忽略。</p>
    */
   RawOutput?: string
   /**
-   * <p>变量替换后的实际 Prompt（脱敏后）。</p>
+   * <p>变量替换后的用户 Prompt 文本。该字段仅用于调试，生产环境可忽略。</p>
    */
   RenderedPrompt?: string
 }
@@ -3283,29 +3297,29 @@ export interface GeneralBasicOCRResponse {
 }
 
 /**
- * 港澳台来往内地通行证背面字段信息
+ * 自定义抽取需要的字段名称、字段类型、字段提示词。
  */
-export interface MainlandTravelPermitBackInfos {
+export interface ItemNames {
   /**
-   * String	证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>自定义抽取功能需返回的字段名称。</p>
    */
-  Type?: string
+  KeyName?: string
   /**
-   * 卡证背面的中文姓名	
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>默认 0；0表示kv对  1表示 表格字段。</p>
    */
-  Name?: string
+  KeyType?: number
   /**
-   * 卡证背面的身份证号码	
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>抽取字段的描述内容。</p>
    */
-  IDNumber?: string
+  KeyPrompt?: string
   /**
-   * 历史通行证号码	
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>自定义字段对应期望的值内容（这个一般需要对字段审核比对才需要输入）。</p>
    */
-  HistoryNumber?: string
+  KeyExpectedValue?: string
+  /**
+   * <p>自定义字段审核比对的规则prompt。</p><p>比如keyname是姓名，KeyExpectedValue 张三，KeyAuditPrompt设置为“字符需要完全匹配则审核返回正确”/“字符匹配90%就审核返回正确”</p>
+   */
+  KeyAuditPrompt?: string
 }
 
 /**
@@ -4060,29 +4074,13 @@ export interface QuotaInvoice {
 }
 
 /**
- * 自定义抽取需要的字段名称、字段类型、字段提示词。
+ * DescribeMultimodalDocParseJob请求参数结构体
  */
-export interface ItemNames {
+export interface DescribeMultimodalDocParseJobRequest {
   /**
-   * <p>自定义抽取功能需返回的字段名称。</p>
+   * <p>解析任务ID。由创建任务接口返回。</p>
    */
-  KeyName?: string
-  /**
-   * <p>默认 0；0表示kv对  1表示 表格字段。</p>
-   */
-  KeyType?: number
-  /**
-   * <p>抽取字段的描述内容。</p>
-   */
-  KeyPrompt?: string
-  /**
-   * <p>自定义字段对应期望的值内容（这个一般需要对字段审核比对才需要输入）。</p>
-   */
-  KeyExpectedValue?: string
-  /**
-   * <p>自定义字段审核比对的规则prompt。</p><p>比如keyname是姓名，KeyExpectedValue 张三，KeyAuditPrompt设置为“字符需要完全匹配则审核返回正确”/“字符匹配90%就审核返回正确”</p>
-   */
-  KeyAuditPrompt?: string
+  TaskId: string
 }
 
 /**
@@ -4090,19 +4088,19 @@ export interface ItemNames {
  */
 export interface ReasoningConfig {
   /**
-   * <p>实际使用的推理输出模式：enum 或 string。</p>
+   * <p>推理输出模式。可选值：enum（枚举值输出）、string（自由文本输出）。<br>enum：VLM 必须从 EnumValues 中选择一个值输出，适用于二值判断或分类决策。<br>string：VLM 输出自由文本，适用于需要自然语言解释的场景。</p>
    */
   OutputMode?: string
   /**
-   * <p>枚举值集合，仅在 OutputMode=enum 时生效。  VLM 输出必须精确命中此集合中的某个值。</p>
+   * <p>枚举值集合，仅在 OutputMode=enum 时生效，设置后VLM推理结果必须精确命中此集合中的某个值，否则会返回“输出偏离枚举值”，Prompt中的指令应与枚举值匹配。</p>
    */
   EnumValues?: Array<string>
   /**
-   * <p>文本输出最大长度，仅在 OutputMode=string 时生效。</p><p>取值范围：[1, 500]</p><p>默认值：200</p>
+   * <p>文本输出最大长度，仅在 OutputMode=string 时生效。</p><p>取值范围：[1, 500]</p>
    */
   MaxLength?: number
   /**
-   * <p>是否在推理调用时向 VLM 传入原图进行多模态理解。  true（默认）：VLM 同时接收原图和渲染后的 Prompt，具备多模态理解能力，可直接&quot;看&quot;图片内容进行推理。  false：不传入原图，仅以渲染后的 Prompt（含变量注入值）进行纯文本推理。适用于推理逻辑完全基于结构化出参字段（如水印文字、置信度比较等）的场景，可降低推理延迟和计费成本。  建议：当 ReasoningPrompt 中未涉及&quot;观察图片&quot;、&quot;直接看图&quot;等多模态指令，且推理规则完全基于 ${变量名} 引用的文字结果时，可设为 false 以优化性能。</p>
+   * <p>是否在推理时向 VLM 传入原图进行多模态理解，不传入时默认为true。<br>true：VLM 同时接收原图和渲染后的 Prompt，具备多模态理解能力，可直接&quot;看&quot;图片内容进行推理。<br>false：不传入原图，仅以渲染后的 Prompt（含变量注入值）进行纯文本推理，适用于推理逻辑完全基于结构化出参字段（如水印文字、置信度比较等）的场景。<br>建议：当 ReasoningPrompt 中未涉及&quot;观察图片&quot;、&quot;分析图片&quot;等多模态指令，推理规则完全基于 ${变量名} 引用的文字结果时，可设为 false 以获得更低的延迟。</p>
    */
   EnableImageInput?: boolean
 }
@@ -4616,6 +4614,20 @@ export interface ShoppingReceipt {
    * 识别出的字段名称(关键字)
    */
   Content?: Array<OtherInvoiceItem>
+}
+
+/**
+ * SubmitExtractDocAgentJob返回参数结构体
+ */
+export interface SubmitExtractDocAgentJobResponse {
+  /**
+   * <p>任务唯一ID。由服务端生成。</p>
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5271,17 +5283,13 @@ export interface PassportRecognizeInfos {
 }
 
 /**
- * SubmitExtractDocAgentJob返回参数结构体
+ * 解析失败的页数
  */
-export interface SubmitExtractDocAgentJobResponse {
+export interface ReconstructDocumentFailedPage {
   /**
-   * <p>任务唯一ID。由服务端生成。</p>
+   * <p>解析失败页数。</p>
    */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  PageNumber?: number
 }
 
 /**
@@ -5937,6 +5945,20 @@ export interface AdvertiseOCRRequest {
 }
 
 /**
+ * SubmitMultimodalDocParseJob返回参数结构体
+ */
+export interface SubmitMultimodalDocParseJobResponse {
+  /**
+   * <p>任务唯一 ID。30天内可以通过DescribeMultimodalDocParseJob接口查询TaskId对应的处理结果。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 航空运输电子客票行程单信息
  */
 export interface AirTicketInfo {
@@ -6069,29 +6091,37 @@ export interface SubmitQuestionMarkAgentJobResponse {
 }
 
 /**
- * RideHailingDriverLicenseOCR返回参数结构体
+ * DescribeMultimodalDocParseJob返回参数结构体
  */
-export interface RideHailingDriverLicenseOCRResponse {
+export interface DescribeMultimodalDocParseJobResponse {
   /**
-   * 姓名
+   * <p>任务状态。取值：</p><ul><li>Created：已创建，等待处理</li><li>Processing：处理中</li><li>Success：成功</li><li>Failed：失败</li><li>Unknown：未知</li></ul>
    */
-  Name?: string
+  Status?: string
   /**
-   * 证号，对应网约车驾驶证字段：证号/从业资格证号/驾驶员证号/身份证号
+   * <p>任务执行错误码。当任务状态不为 Failed 时，该值为“”。</p>
    */
-  LicenseNumber?: string
+  ErrorCode?: string
   /**
-   * 有效起始日期
+   * <p>任务执行错误信息。当任务状态不为 Failed 时，该值为“”。</p>
    */
-  StartDate?: string
+  ErrorMessage?: string
   /**
-   * 有效期截止时间，对应网约车驾驶证字段：有效期至/营运期限止
+   * <p>结果的临时下载地址。文件类型为 zip 压缩包，下载链接有效期 30 分钟。压缩包内包含 <em>.md、</em>.json 以及 images 文件夹。仅当任务状态为 Success 时返回该字段。</p>
    */
-  EndDate?: string
+  ResultUrl?: string
   /**
-   * 初始发证日期，对应网约车驾驶证字段：初始领证日期/发证日期
+   * <p>解析失败的页码列表。仅当任务状态为 Success 时返回该字段。</p>
    */
-  ReleaseDate?: string
+  FailedPages?: Array<ReconstructDocumentFailedPage>
+  /**
+   * <p>解析成功页数。</p>
+   */
+  SuccessPageNum?: number
+  /**
+   * <p>解析失败页数。</p>
+   */
+  FailPageNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6741,6 +6771,20 @@ export interface SchemaList {
    * <p>嵌套SchemaList结构，最多支持嵌套三层。注：仅当KeyType=1时生效。</p>
    */
   SubItems?: Array<SchemaList>
+}
+
+/**
+ * VehicleRegCertOCR返回参数结构体
+ */
+export interface VehicleRegCertOCRResponse {
+  /**
+   * 机动车登记证书识别结果，具体内容请点击左侧链接。
+   */
+  VehicleRegCertInfos?: Array<VehicleRegCertInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7842,6 +7886,100 @@ export interface SealOCRResponse {
 }
 
 /**
+ * 增值税普通发票(卷票)
+ */
+export interface VatInvoiceRoll {
+  /**
+   * 发票名称
+   */
+  Title?: string
+  /**
+   * 发票代码
+   */
+  Code?: string
+  /**
+   * 发票号码
+   */
+  Number?: string
+  /**
+   * 机打发票号码
+   */
+  NumberConfirm?: string
+  /**
+   * 开票日期
+   */
+  Date?: string
+  /**
+   * 校验码
+   */
+  CheckCode?: string
+  /**
+   * 销售方名称
+   */
+  Seller?: string
+  /**
+   * 销售方纳税人识别号
+   */
+  SellerTaxID?: string
+  /**
+   * 购买方名称
+   */
+  Buyer?: string
+  /**
+   * 购买方纳税人识别号
+   */
+  BuyerTaxID?: string
+  /**
+   * 种类
+   */
+  Category?: string
+  /**
+   * 价税合计（小写）
+   */
+  Total?: string
+  /**
+   * 价税合计（大写）
+   */
+  TotalCn?: string
+  /**
+   * 发票消费类型
+   */
+  Kind?: string
+  /**
+   * 省
+   */
+  Province?: string
+  /**
+   * 市
+   */
+  City?: string
+  /**
+   * 是否有公司印章（0：没有，1：有）
+   */
+  CompanySealMark?: number
+  /**
+   * 是否存在二维码（1：有，0：无）
+   */
+  QRCodeMark?: number
+  /**
+   * 服务类型
+   */
+  ServiceName?: string
+  /**
+   * 公司印章内容
+   */
+  CompanySealContent?: string
+  /**
+   * 税务局章内容
+   */
+  TaxSealContent?: string
+  /**
+   * 条目
+   */
+  VatRollItems?: Array<VatRollItem>
+}
+
+/**
  * VerifyBizLicenseEnterprise4返回参数结构体
  */
 export interface VerifyBizLicenseEnterprise4Response {
@@ -8193,11 +8331,11 @@ export interface VerifyScenePhotoRequest {
    */
   Scene: string
   /**
-   * <p>鉴伪模式，目前支持以下模式，对应支持不同的入参、出参。<br>Image：图像鉴伪模式，根据图像分析输出告警提示，支持推理，支持区域篡改提示、AIGC合成提示、屏幕翻拍提示、截图提示、文字水印提示、水印内容、模板图片提示、VLM 推理结果。每次调用按1次调用计费。<br>Video：视频鉴伪模式，根据视频分析输出告警提示，不支持推理，支持屏幕翻拍提示。每次调用按1次调用计费。<br>Hybrid：混合鉴伪模式，综合图像、视频分析输出告警提示，支持推理，支持区域篡改提示、AIGC合成提示、屏幕翻拍提示、截图提示、文字水印提示、水印内容、模板图片提示、VLM 推理结果。每次调用按2次调用计费。</p>
+   * <p>鉴伪模式，目前支持以下模式，对应支持不同的入参、出参，默认值为Image。<br>Image：图像鉴伪模式，根据图像分析输出告警提示，支持自定义推理，支持区域篡改提示、AIGC合成提示、屏幕翻拍提示、截图提示、文字水印提示、水印内容、模板图片提示、VLM 推理结果。<strong>每次调用按1次调用计费</strong>。<br>Video：视频鉴伪模式，根据视频分析输出告警提示，不支持自定义推理，支持屏幕翻拍提示。<strong>每次调用按1次调用计费</strong>。<br>Hybrid：混合鉴伪模式，综合图像、视频分析输出告警提示，支持自定义推理，支持区域篡改提示、AIGC合成提示、屏幕翻拍提示、截图提示、文字水印提示、水印内容、模板图片提示、VLM 推理结果。<strong>每次调用按2次调用计费</strong>。</p>
    */
   Mode?: string
   /**
-   * <p>视频的 Url 地址。格式支持：xxxxxx。要求视频不超过 100M。建议视频时长不小于1s。</p>
+   * <p>视频的 Url 地址。格式支持：mp4、avi、mov、mkv、webm，要求视频不超过 100M。建议视频时长不小于1s。</p>
    */
   VideoUrl?: string
   /**
@@ -8209,7 +8347,7 @@ export interface VerifyScenePhotoRequest {
    */
   ImageBase64?: string
   /**
-   * <p>推理 Prompt 模板，默认使用 VLM 对图片进行理解推理，同时支持使用 ${变量名} 进行推理。传入该参数即开启推理流程。</p><p>入参限制：长度限制：1–2000 字符</p>
+   * <p>推理 Prompt 模板，默认使用 VLM 对图片进行理解推理，同时支持使用 ${变量名} 进行推理。传入该参数即开启推理流程。</p><p>入参限制：长度限制：1–3000 字符</p>
    */
   ReasoningPrompt?: string
   /**
@@ -8621,97 +8759,17 @@ export interface ResidenceBookletOCRResponse {
 }
 
 /**
- * 增值税普通发票(卷票)
+ * 销货清单
  */
-export interface VatInvoiceRoll {
+export interface SaleInventory {
   /**
    * 发票名称
    */
   Title?: string
   /**
-   * 发票代码
+   * 识别出的字段名称(关键字)
    */
-  Code?: string
-  /**
-   * 发票号码
-   */
-  Number?: string
-  /**
-   * 机打发票号码
-   */
-  NumberConfirm?: string
-  /**
-   * 开票日期
-   */
-  Date?: string
-  /**
-   * 校验码
-   */
-  CheckCode?: string
-  /**
-   * 销售方名称
-   */
-  Seller?: string
-  /**
-   * 销售方纳税人识别号
-   */
-  SellerTaxID?: string
-  /**
-   * 购买方名称
-   */
-  Buyer?: string
-  /**
-   * 购买方纳税人识别号
-   */
-  BuyerTaxID?: string
-  /**
-   * 种类
-   */
-  Category?: string
-  /**
-   * 价税合计（小写）
-   */
-  Total?: string
-  /**
-   * 价税合计（大写）
-   */
-  TotalCn?: string
-  /**
-   * 发票消费类型
-   */
-  Kind?: string
-  /**
-   * 省
-   */
-  Province?: string
-  /**
-   * 市
-   */
-  City?: string
-  /**
-   * 是否有公司印章（0：没有，1：有）
-   */
-  CompanySealMark?: number
-  /**
-   * 是否存在二维码（1：有，0：无）
-   */
-  QRCodeMark?: number
-  /**
-   * 服务类型
-   */
-  ServiceName?: string
-  /**
-   * 公司印章内容
-   */
-  CompanySealContent?: string
-  /**
-   * 税务局章内容
-   */
-  TaxSealContent?: string
-  /**
-   * 条目
-   */
-  VatRollItems?: Array<VatRollItem>
+  Content?: Array<OtherInvoiceItem>
 }
 
 /**
@@ -8741,6 +8799,48 @@ export interface RedLetterInvoiceItem {
 }
 
 /**
+ * VerifyScenePhoto返回参数结构体
+ */
+export interface VerifyScenePhotoResponse {
+  /**
+   * <p>区域篡改提示</p>
+   */
+  Tamper?: SceneWarnInfo
+  /**
+   * <p>AIGC合成提示</p>
+   */
+  Synthesis?: SceneWarnInfo
+  /**
+   * <p>屏幕翻拍提示</p>
+   */
+  RemakeScreen?: SceneWarnInfo
+  /**
+   * <p>截图提示</p>
+   */
+  Screenshot?: SceneWarnInfo
+  /**
+   * <p>文字水印提示</p>
+   */
+  TextWatermark?: SceneWarnInfo
+  /**
+   * <p>水印内容，当未检测到文字水印时不返回，返回多组水印时以 | 分隔。</p>
+   */
+  WatermarkContent?: string
+  /**
+   * <p>模板图片提示</p>
+   */
+  Template?: SceneWarnInfo
+  /**
+   * <p>VLM 推理结果。仅当请求中传入 ReasoningPrompt 时返回，否则不返回此字段。</p>
+   */
+  ReasoningResult?: ReasoningResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CarInvoiceOCR返回参数结构体
  */
 export interface CarInvoiceOCRResponse {
@@ -8755,17 +8855,21 @@ export interface CarInvoiceOCRResponse {
 }
 
 /**
- * VehicleRegCertOCR返回参数结构体
+ * 门头照识别结果
  */
-export interface VehicleRegCertOCRResponse {
+export interface StoreInfo {
   /**
-   * 机动车登记证书识别结果，具体内容请点击左侧链接。
+   * 识别出的字段名称(关键字)，如商店名称
    */
-  VehicleRegCertInfos?: Array<VehicleRegCertInfo>
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  RequestId?: string
+  Value?: string
+  /**
+   * 文本行在旋转纠正之后的图像中的像素坐标
+   */
+  Rect?: Rect
 }
 
 /**
@@ -10205,6 +10309,44 @@ export interface ImageCoordinates {
 }
 
 /**
+ * SubmitMultimodalDocParseJob请求参数结构体
+ */
+export interface SubmitMultimodalDocParseJobRequest {
+  /**
+   * <p>支持解析的文件类型。取值：</p><ul><li>1：PDF 文档</li><li>2：Word 文档（.doc/.docx）</li><li>3：PPT 演示文稿（.ppt/.pptx）</li><li>4：Excel 表格（.xls/.xlsx）</li><li>5：Markdown 文档（.md）</li><li>6：纯文本文件（.txt）</li><li>7：图片文件（.png/.jpg/.jpeg 等）</li><li>8：WPS 文档<br>支持的文件大小：PDF/WORD/PPT 支持 150M 且 300 页。</li></ul>
+   */
+  FileType: number
+  /**
+   * <p>文件的 Url 地址，支持 FileType 参数对应的文件格式及大小。文件下载时间不超过 3 秒。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
+   */
+  FileUrl?: string
+  /**
+   * <p>文件的 Base64 值。支持 FileType 参数对应的文件格式，支持的文件大小不超过 8M。文件下载时间不超过 3 秒。<br>文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。</p>
+   */
+  FileBase64?: string
+  /**
+   * <p>输出格式。<br>1：json格式<br>2：markdown格式<br>3：xml格式<br>9：json+markdown+xml格式</p>
+   */
+  ResultType?: number
+  /**
+   * <p>是否开启子图提取，默认为 false。</p>
+   */
+  EnableSubImg?: boolean
+  /**
+   * <p>文档的起始页码。用来指定识别的起始页码，识别的页码包含当前值，不填时默认从文档第一页开始解析。本参数与 FileEndPageNumber 可分开填写，也可只填其中一个。</p>
+   */
+  FileStartPageNumber?: number
+  /**
+   * <p>文档的结束页码。用来指定识别的结束页码，识别的页码包含当前值，不填时默认解析到文档最后一页。本参数与 FileStartPageNumber 可分开填写，也可只填其中一个。</p>
+   */
+  FileEndPageNumber?: number
+  /**
+   * <p>任务类型，默认为 0。取值：</p><ul><li>0：默认</li><li>1：Free OCR</li><li>2：OCR</li><li>3：表格识别</li><li>4：代码识别</li></ul>
+   */
+  TaskType?: number
+}
+
+/**
  * VerifyBizLicenseEnterprise3请求参数结构体
  */
 export interface VerifyBizLicenseEnterprise3Request {
@@ -10330,6 +10472,20 @@ export interface RideHailingTransportLicenseOCRResponse {
    * 初始发证日期，对应网约车运输证字段：初始领证日期/发证日期。
    */
   ReleaseDate?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TextDetect返回参数结构体
+ */
+export interface TextDetectResponse {
+  /**
+   * 图片中是否包含文字。
+   */
+  HasText?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10979,17 +11135,17 @@ export interface EstateCertOCRRequest {
 }
 
 /**
- * 销货清单
+ * RunRerank返回参数结构体
  */
-export interface SaleInventory {
+export interface RunRerankResponse {
   /**
-   * 发票名称
+   * <p>重排序后的结果列表，按相关性得分从高到低排列。</p>
    */
-  Title?: string
+  Results?: Array<RerankResult>
   /**
-   * 识别出的字段名称(关键字)
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Content?: Array<OtherInvoiceItem>
+  RequestId?: string
 }
 
 /**

@@ -224,29 +224,19 @@ export interface ModifyBusinessResourceRequest {
 }
 
 /**
- * DescribeAggrSoftDeviceList请求参数结构体
+ * 业务响应数据
  */
-export interface DescribeAggrSoftDeviceListRequest {
+export interface DescribeAccountVirtualGroupsPageData {
   /**
-   * 过滤条件
+   * <p>分页公共对象</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Condition?: Condition
+  Page?: Paging
   /**
-   * 软件名
+   * <p>列表账户虚拟组分页数据集</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
-  /**
-   * 0:win 2:mac
-   */
-  OsType?: number
-  /**
-   * 分组ID
-   */
-  GroupId?: number
-  /**
-   * 分组类型 1-终端分组 2-组织架构(账号分组) 3/4-虚拟分组
-   */
-  GroupType?: number
+  Items?: Array<DescribeAccountVirtualGroupsData>
 }
 
 /**
@@ -590,6 +580,57 @@ export interface DescribeAggrSoftDeviceListData {
 }
 
 /**
+ * 列表账户虚拟组分页数据集
+ */
+export interface DescribeAccountVirtualGroupsData {
+  /**
+   * <p>id(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * <p>分组id(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupId?: number
+  /**
+   * <p>账户虚拟组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>源类型，手动、自动(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceType?: number
+  /**
+   * <p>扩展信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo?: string
+  /**
+   * <p>用户总数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserTotal?: number
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Itime?: string
+  /**
+   * <p>最后更新时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Utime?: string
+}
+
+/**
  * GrantResourcesByVirtualGroups请求参数结构体
  */
 export interface GrantResourcesByVirtualGroupsRequest {
@@ -904,6 +945,24 @@ export interface DeviceNetworkInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: number
+}
+
+/**
+ * DescribeAccountVirtualGroups请求参数结构体
+ */
+export interface DescribeAccountVirtualGroupsRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * <p>滤条件、分页参数</p><li>Name - String - 是否必填：否 - 操作符: eq,like  - 排序支持：否- 按账号虚拟组名称过滤。</li>
+   */
+  Condition?: Condition
+  /**
+   * <p>顶层目录分组ID，表示要查询哪个目录下的虚拟组</p>
+   */
+  AccountGroupId?: number
 }
 
 /**
@@ -1260,6 +1319,32 @@ export interface DeviceDetail {
    * <p>BiosUUID（启动盘标识符）</p>
    */
   BiosUuid?: string
+}
+
+/**
+ * DescribeAggrSoftDeviceList请求参数结构体
+ */
+export interface DescribeAggrSoftDeviceListRequest {
+  /**
+   * 过滤条件
+   */
+  Condition?: Condition
+  /**
+   * 软件名
+   */
+  Name?: string
+  /**
+   * 0:win 2:mac
+   */
+  OsType?: number
+  /**
+   * 分组ID
+   */
+  GroupId?: number
+  /**
+   * 分组类型 1-终端分组 2-组织架构(账号分组) 3/4-虚拟分组
+   */
+  GroupType?: number
 }
 
 /**
@@ -2791,6 +2876,21 @@ export interface DescribeDLPEdgeNodesRequest {
    * 过滤条件、分页参数<li>EdgeNodeName - string - 是否必填：否 - 操作符: ilike  - 排序支持：否- 按节点名称过滤。</li>
    */
   Condition?: Condition
+}
+
+/**
+ * DescribeAccountVirtualGroups返回参数结构体
+ */
+export interface DescribeAccountVirtualGroupsResponse {
+  /**
+   * <p>业务响应数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeAccountVirtualGroupsPageData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
