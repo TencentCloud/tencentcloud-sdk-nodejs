@@ -1035,6 +1035,11 @@ export interface Setats {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CCNs?: Array<CCN>
+  /**
+   * <p>挂靠的宿主集群</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterGroupSerialId?: string
 }
 
 /**

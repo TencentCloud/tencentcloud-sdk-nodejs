@@ -926,6 +926,20 @@ export interface AddUserContactResponse {
 }
 
 /**
+ * 索引详细信息
+ */
+export interface IndexDDLInfo {
+  /**
+   * <p>索引名称。</p>
+   */
+  IndexName?: string
+  /**
+   * <p>创建索引语句。</p>
+   */
+  DDL?: string
+}
+
+/**
  * 实例详情
  */
 export interface AuditInstanceInfo {
@@ -1286,6 +1300,182 @@ export interface CreateKillTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Proxy 层审计日志单条明细。字段由 DruidCommonUtil#changeLogsTdsqlProxy 和 BusinessCodeUtils 固定输出。
+ */
+export interface AuditProxyLogItem {
+  /**
+   * <p>SQL 执行时间点（格式化字符串，yyyy-MM-dd HH:mm:ss）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: string
+  /**
+   * <p>集群 ID（dcdb/mariadb 集群标识，与 InstanceId 相同）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>影响行数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectRows?: number
+  /**
+   * <p>是否自动提交。1 表示开启，0 表示关闭。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Autocommit?: string
+  /**
+   * <p>MySQL 网络协议命令类型（如 COM_QUERY、COM_CONNECT 等）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComType?: string
+  /**
+   * <p>新建连接耗时。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnTc?: number
+  /**
+   * <p>后端 DB 实例地址（多个用英文逗号分隔）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DBHost?: string
+  /**
+   * <p>SQL 执行所在的数据库名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DBName?: string
+  /**
+   * <p>SQL 执行返回的错误码，0 表示成功。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrCode?: string
+  /**
+   * <p>错误信息。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrInfo?: string
+  /**
+   * <p>SQL 执行耗时（微秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecTime?: number
+  /**
+   * <p>请求结束后仍占用的连接数（非事务请求通常为 0）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HoldConns?: string
+  /**
+   * <p>客户端来源 IP。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * <p>是否开启全局一致性读（0 否、1 是）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mc?: string
+  /**
+   * <p>SQL 开始时间（微秒精度中的微秒部分）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlStartTimeUs?: number
+  /**
+   * <p>本次请求新建的连接数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NewConnNum?: number
+  /**
+   * <p>Proxy 代理节点地址。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxyHost?: string
+  /**
+   * <p>Proxy ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxyId?: string
+  /**
+   * <p>查询 ID（用于关联查询）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryId?: string
+  /**
+   * <p>返回行数（扫描结果集行数）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SentRows?: number
+  /**
+   * <p>是否为 Proxy 改写后的查询：0 原始查询，1 改写后查询。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Splited?: number
+  /**
+   * <p>执行的 SQL 语句原文。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sql?: string
+  /**
+   * <p>SQL 模板。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlTemplate?: string
+  /**
+   * <p>SQL 模板 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlTemplateId?: string
+  /**
+   * <p>SQL 类型（如 Select、Insert、Create、Login、Set 等）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlType?: string
+  /**
+   * <p>涉及的表（多表以英文逗号分隔）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: string
+  /**
+   * <p>线程 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThreadId?: string
+  /**
+   * <p>SQL 开始时间（毫秒级时间戳）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlStartTime?: number
+  /**
+   * <p>执行 SQL 的数据库用户名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * <p>客户端连接的 HostPort。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostPort?: string
+  /**
+   * <p>Proxy 节点处理线程 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxyThread?: string
+  /**
+   * <p>后端 DB Host 数量。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbHostNum?: string
+  /**
+   * <p>业务码（由业务侧 SQL 注释中 i/o/p 等 KV 提取）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessCode?: string
+  /**
+   * <p>业务标签（根据业务码后置补齐）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessTag?: string
 }
 
 /**
@@ -1885,33 +2075,57 @@ export interface AutonomyEventVo {
 }
 
 /**
- * redis key前缀空间信息
+ * DescribeDBAuditLogs请求参数结构体
  */
-export interface RedisPreKeySpaceData {
+export interface DescribeDBAuditLogsRequest {
   /**
-   * 平均元素长度。
+   * <p>服务产品类型。当前  云 API 仅支持：dcdb、mariadb（cdb、cynosdb 已切至中台）。</p>
    */
-  AveElementSize: number
+  Product: string
   /**
-   * 总占用内存（Byte）。
+   * <p>开始时间，格式 yyyy-MM-dd HH:mm:ss。</p>
    */
-  Length: number
+  StartTime: string
   /**
-   * key前缀。
+   * <p>结束时间，格式 yyyy-MM-dd HH:mm:ss。</p>
    */
-  KeyPreIndex: string
+  EndTime: string
   /**
-   * 元素数量。
+   * <p>实例 ID，必填。dcdb、mariadb 场景以实例维度查询审计日志。</p>
    */
-  ItemCount: number
+  InstanceId?: string
   /**
-   * key个数。
+   * <p>日志类型：Proxy 代理日志，DB 数据库日志，All 全部。</p>
    */
-  Count: number
+  LogType?: string
   /**
-   * 最大元素长度。
+   * <p>排序字段，默认 Timestamp。</p>
    */
-  MaxElementSize: number
+  SortBy?: string
+  /**
+   * <p>排序方式：ASC 升序，DESC 降序。默认 DESC。</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>偏移量，默认 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，默认 20，最大 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>SQL 开始时间（毫秒级时间戳），根据 QueryId 关联查询时使用。</p>
+   */
+  SqlStartTime?: number
+  /**
+   * <p>审计日志查询过滤条件集合。</p>
+   */
+  Filter?: AuditLogQueryFilter
+  /**
+   * <p>集群 ID，dcdb 产品以集群维度查询审计日志</p>
+   */
+  ClusterId?: string
 }
 
 /**
@@ -2341,21 +2555,85 @@ export interface TagInfo {
 }
 
 /**
- * DescribeSecurityAuditLogDownloadUrls请求参数结构体
+ * 审计日志查询过滤条件集合。所有字段均可选。注意：MultiSql 、 ExcludeMultiSql 以 JSON 字符串承载二维数组（云 API 平台不支持二维数组），示例：[[a,b]] 表示 (a OR b)。
  */
-export interface DescribeSecurityAuditLogDownloadUrlsRequest {
+export interface AuditLogQueryFilter {
   /**
-   * 安全审计组Id。
+   * <p>SQL 类型列表，取值如 SELECT、INSERT、UPDATE、DELETE 等。</p>
    */
-  SecAuditGroupId: string
+  SqlType?: Array<string>
   /**
-   * 异步任务Id。
+   * <p>执行耗时范围（毫秒），长度为 2 的数组：[最小值, 最大值]。</p>
    */
-  AsyncRequestId: number
+  ExecTime?: Array<number | bigint>
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL。
+   * <p>IO 等待耗时范围（毫秒），长度为 2 的数组。</p>
    */
-  Product: string
+  IoWaitTime?: Array<number | bigint>
+  /**
+   * <p>CPU 耗时范围（毫秒），长度为 2 的数组。</p>
+   */
+  CpuTime?: Array<number | bigint>
+  /**
+   * <p>锁等待耗时范围（毫秒），长度为 2 的数组。</p>
+   */
+  LockWaitTime?: Array<number | bigint>
+  /**
+   * <p>SQL 执行错误码，例如 0 表示成功。</p>
+   */
+  ErrCode?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  ErrInfo?: string
+  /**
+   * <p>数据库名列表。</p>
+   */
+  DBName?: Array<string>
+  /**
+   * <p>用户名列表。</p>
+   */
+  User?: Array<string>
+  /**
+   * <p>来源 IP 列表。</p>
+   */
+  Host?: Array<string>
+  /**
+   * <p>线程 ID 列表。</p>
+   */
+  ThreadId?: Array<string>
+  /**
+   * <p>代理节点 Host 列表。</p>
+   */
+  ProxyHostList?: Array<string>
+  /**
+   * <p>后端 Set Host 列表。</p>
+   */
+  SetHostList?: Array<string>
+  /**
+   * <p>后端 Set ID 列表。</p>
+   */
+  SetIdList?: Array<string>
+  /**
+   * <p>多 SQL 关键词条件，JSON 字符串，内部为二维数组：第一级为 AND，第二级为 OR。注意云 API 平台不支持二维数组，此处用字符串承载，服务端自动解析。</p>
+   */
+  MultiSql?: string
+  /**
+   * <p>排除的多 SQL 关键词条件，JSON 字符串，结构同 MultiSql。</p>
+   */
+  ExcludeMultiSql?: string
+  /**
+   * <p>SQL 模板 ID。</p>
+   */
+  SqlTemplateId?: string
+  /**
+   * <p>SQL 开始时间，示例：2026-10-10 11:05:06.002211</p><p>参数格式：YYYY-MM-DD hh:mm:ss.SSSSSS</p>
+   */
+  SqlStartTime?: string
+  /**
+   * <p>查询 ID，关联查询时使用（LogType=All 时必填）。</p>
+   */
+  QueryId?: string
 }
 
 /**
@@ -2562,13 +2840,21 @@ export interface CreateDBDiagReportUrlsResponse {
 }
 
 /**
- * UpdateMonitorSwitch返回参数结构体
+ * 描述组信息。
  */
-export interface UpdateMonitorSwitchResponse {
+export interface GroupItem {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 组id。
    */
-  RequestId?: string
+  Id?: number
+  /**
+   * 组名称。
+   */
+  Name?: string
+  /**
+   * 组成员数量。
+   */
+  MemberCount?: number
 }
 
 /**
@@ -3553,6 +3839,60 @@ export interface DeleteSecurityAuditLogExportTasksResponse {
 }
 
 /**
+ * 表统计信息明细
+ */
+export interface TableStatistics {
+  /**
+   * <p>表名。</p>
+   */
+  TableName?: string
+  /**
+   * <p>Schema 名。</p>
+   */
+  TableSchema?: string
+  /**
+   * <p>库名（catalog）。</p>
+   */
+  DatabaseName?: string
+  /**
+   * <p>存储引擎。</p>
+   */
+  Engine?: string
+  /**
+   * <p>数据空间。</p><p>单位：MB</p>
+   */
+  DataLength?: number
+  /**
+   * <p>索引空间。</p><p>单位：MB</p>
+   */
+  IndexLength?: number
+  /**
+   * <p>总分配空间。</p><p>单位：MB</p>
+   */
+  TotalLength?: number
+  /**
+   * <p>已用空间。</p><p>单位：MB</p>
+   */
+  UsedLength?: number
+  /**
+   * <p>碎片空间。</p><p>单位：MB</p>
+   */
+  DataFree?: number
+  /**
+   * <p>行数。</p>
+   */
+  TableRows?: number
+  /**
+   * <p>碎片率（%）。</p>
+   */
+  FragRatio?: number
+  /**
+   * <p>物理文件大小。</p><p>单位：MB</p>
+   */
+  PhysicalFileSize?: number
+}
+
+/**
  * KillMySqlThreads请求参数结构体
  */
 export interface KillMySqlThreadsRequest {
@@ -4379,6 +4719,34 @@ export interface OpenAuditServiceRequest {
 }
 
 /**
+ * DescribeDBAuditLogs返回参数结构体
+ */
+export interface DescribeDBAuditLogsResponse {
+  /**
+   * <p>满足条件的总条数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * <p>过滤后记录数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilteredRecords?: number
+  /**
+   * <p>Proxy 层审计日志列表。LogType=Proxy 或 All 时返回，字段结构参见 AuditProxyLogItem。</p>
+   */
+  ProxyLogs?: Array<AuditProxyLogItem>
+  /**
+   * <p>DB 层审计日志列表。LogType=DB 或 All 时返回，字段结构参见 AuditDBLogItem。</p>
+   */
+  DBLogs?: Array<AuditDBLogItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 库空间统计数据。
  */
 export interface SchemaSpaceData {
@@ -4633,6 +5001,36 @@ export interface AlarmProfileList {
    * webhook数量
    */
   WebHookCount?: number
+}
+
+/**
+ * redis key前缀空间信息
+ */
+export interface RedisPreKeySpaceData {
+  /**
+   * 平均元素长度。
+   */
+  AveElementSize: number
+  /**
+   * 总占用内存（Byte）。
+   */
+  Length: number
+  /**
+   * key前缀。
+   */
+  KeyPreIndex: string
+  /**
+   * 元素数量。
+   */
+  ItemCount: number
+  /**
+   * key个数。
+   */
+  Count: number
+  /**
+   * 最大元素长度。
+   */
+  MaxElementSize: number
 }
 
 /**
@@ -5020,6 +5418,36 @@ export interface DescribeAlarmTemplateResponse {
 }
 
 /**
+ * DescribeNoPrimaryKeyTables返回参数结构体
+ */
+export interface DescribeNoPrimaryKeyTablesResponse {
+  /**
+   * 无主键表总数。
+   */
+  NoPrimaryKeyTableCount?: number
+  /**
+   * 与昨日扫描无主键表的差值，正数为增加，负数为减少，0为无变化。
+   */
+  NoPrimaryKeyTableCountDiff?: number
+  /**
+   * 记录的无主键表总数（不超过无主键表总数），可用于分页查询。
+   */
+  NoPrimaryKeyTableRecordCount?: number
+  /**
+   * 无主键表列表。
+   */
+  NoPrimaryKeyTables?: Array<Table>
+  /**
+   * 采集时间戳（秒）。
+   */
+  Timestamp?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MongoDB 产品表级（集合级）空间对象项，描述单个集合的空间使用统计信息。
  */
 export interface MongoDBTableSpaceItem {
@@ -5111,6 +5539,36 @@ export interface DescribeIndexRecommendAggregationSlowLogsResponse {
    * 查询实例慢查询聚合结果。
    */
   Aggregation?: Aggregation
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDatabaseObjectV2返回参数结构体
+ */
+export interface DescribeDatabaseObjectV2Response {
+  /**
+   * <p>索引 DDL 列表，每项为一条 CREATE INDEX 语句，无索引时为空数组。</p>
+   */
+  IndexDDLs?: Array<IndexDDLInfo>
+  /**
+   * <p>建表 DDL 语句，对象不存在时为空串。</p>
+   */
+  TableDDL?: string
+  /**
+   * <p>表名。</p>
+   */
+  TableName?: string
+  /**
+   * <p>库名。</p>
+   */
+  TableSchema?: string
+  /**
+   * <p>表空间统计。</p>
+   */
+  TableStatistics?: TableStatistics
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6010,6 +6468,157 @@ export interface DeleteDBDiagReportTasksRequest {
 }
 
 /**
+ * DB 层审计日志单条明细。字段由 DruidCommonUtil#changeLogsTdsqlDB 和 BusinessCodeUtils 固定输出。LogType=All 时额外追加 FlowTime。
+ */
+export interface AuditDBLogItem {
+  /**
+   * <p>SQL 执行时间点（格式化字符串，yyyy-MM-dd HH:mm:ss）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: string
+  /**
+   * <p>集群 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>影响行数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectRows?: number
+  /**
+   * <p>扫描行数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckRows?: number
+  /**
+   * <p>CPU 耗时（微秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuTime?: number
+  /**
+   * <p>后端 Set Host（源字段 dbHost）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetHost?: string
+  /**
+   * <p>SQL 执行所在的数据库名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DBName?: string
+  /**
+   * <p>SQL 执行返回的错误码，0 表示成功。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrCode?: string
+  /**
+   * <p>SQL 执行耗时（微秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecTime?: number
+  /**
+   * <p>客户端来源 IP。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * <p>Set 名称（源字段 instanceId）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetName?: string
+  /**
+   * <p>IO 等待时间（微秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IoWaitTime?: number
+  /**
+   * <p>锁等待时间（微秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockWaitTime?: number
+  /**
+   * <p>SQL 开始时间（纳秒级时间戳）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlStartTimeNs?: number
+  /**
+   * <p>查询 ID（用于关联查询）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryId?: string
+  /**
+   * <p>查询序号（同一事务内 SQL 的序列号）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryNo?: number
+  /**
+   * <p>返回行数（扫描结果集行数）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SentRows?: number
+  /**
+   * <p>执行的 SQL 语句原文。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sql?: string
+  /**
+   * <p>SQL 模板 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlTemplateId?: string
+  /**
+   * <p>SQL 类型（如 Select、Insert、Update、Delete 等）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlType?: string
+  /**
+   * <p>涉及的表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: string
+  /**
+   * <p>线程 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThreadId?: string
+  /**
+   * <p>SQL 开始时间（毫秒级时间戳）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlStartTime?: number
+  /**
+   * <p>事务存活时间（微秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrxLivingTime?: number
+  /**
+   * <p>执行 SQL 的数据库用户名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * <p>事务 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrxId?: string
+  /**
+   * <p>内部 XID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternalXId?: string
+  /**
+   * <p>业务码（由业务侧 SQL 注释中 i/o/p 等 KV 提取）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessCode?: string
+  /**
+   * <p>网关流转耗时（毫秒），仅 LogType=All 时由 Gateway 日志关联后返回；LogType=DB 时该字段不下发。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowTime?: number
+}
+
+/**
  * DescribeAlarmTemplate请求参数结构体
  */
 export interface DescribeAlarmTemplateRequest {
@@ -6072,7 +6681,7 @@ export interface DescribeSlowLogTimeSeriesStatsResponse {
  */
 export interface DescribeProxyProcessStatisticsRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -6093,10 +6702,19 @@ export interface DescribeProxyProcessStatisticsRequest {
   Offset?: number
   /**
    * 按照某字段排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。
+其中：
+
+- AllConn ：表示总连接数（活跃连接 + 非活跃连接）
+- ActiveConn：表示活跃连接数
+- Ip：表示 IP 地址
    */
   SortBy?: string
   /**
    * 排序方向。支持值包括："DESC"，"ASC"。
+其中：
+
+- DESC：降序
+- ASC：升序
    */
   OrderDirection?: string
 }
@@ -6285,6 +6903,16 @@ export interface DescribeAllUserGroupResponse {
    * 组信息。
    */
   Groups?: Array<GroupItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateMonitorSwitch返回参数结构体
+ */
+export interface UpdateMonitorSwitchResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6601,21 +7229,21 @@ export interface SQLFilter {
 }
 
 /**
- * 描述组信息。
+ * DescribeSecurityAuditLogDownloadUrls请求参数结构体
  */
-export interface GroupItem {
+export interface DescribeSecurityAuditLogDownloadUrlsRequest {
   /**
-   * 组id。
+   * 安全审计组Id。
    */
-  Id?: number
+  SecAuditGroupId: string
   /**
-   * 组名称。
+   * 异步任务Id。
    */
-  Name?: string
+  AsyncRequestId: number
   /**
-   * 组成员数量。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL。
    */
-  MemberCount?: number
+  Product: string
 }
 
 /**
@@ -7030,33 +7658,29 @@ export interface DescribeSlowLogTopSqlsResponse {
 }
 
 /**
- * DescribeNoPrimaryKeyTables返回参数结构体
+ * DescribeDatabaseObjectV2请求参数结构体
  */
-export interface DescribeNoPrimaryKeyTablesResponse {
+export interface DescribeDatabaseObjectV2Request {
   /**
-   * 无主键表总数。
+   * <p>服务产品类型。取值：sqlserver（云数据库 Sqlserver）。</p>
    */
-  NoPrimaryKeyTableCount?: number
+  Product: string
   /**
-   * 与昨日扫描无主键表的差值，正数为增加，负数为减少，0为无变化。
+   * <p>查询对象类型。</p><p>枚举值：</p><ul><li>TableDDL： 建表+索引DDL</li><li>TableStatistics： 表空间统计</li></ul>
    */
-  NoPrimaryKeyTableCountDiff?: number
+  ObjectType: string
   /**
-   * 记录的无主键表总数（不超过无主键表总数），可用于分页查询。
+   * <p>实例 ID。SQLServer: mssql-xxxx。</p>
    */
-  NoPrimaryKeyTableRecordCount?: number
+  InstanceId?: string
   /**
-   * 无主键表列表。
+   * <p>库名（catalog）。TableStatistics 时必填；TableDDL 时可选。</p>
    */
-  NoPrimaryKeyTables?: Array<Table>
+  TableSchema?: string
   /**
-   * 采集时间戳（秒）。
+   * <p>当产品为sqlserver时，表名/视图名，支持 schema.table 格式，未带 schema 默认 dbo</p>
    */
-  Timestamp?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TableName?: string
 }
 
 /**

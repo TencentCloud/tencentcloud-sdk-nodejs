@@ -2301,6 +2301,14 @@ export interface ModifyWebhookTriggerRequest {
    * <p>命名空间</p>
    */
   Namespace: string
+  /**
+   * <p>产品名称，非空时创建的 webhook 将被隐藏</p>
+   */
+  Product?: string
+  /**
+   * <p>预热目标地域，AGS 镜像预热的目标地域，非 AGS 触发器为空</p>
+   */
+  PreheatRegion?: string
 }
 
 /**
@@ -2882,6 +2890,16 @@ export interface WebhookTrigger {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceName?: string
+  /**
+   * <p>触发器所属产品类型：ags 为镜像预热，apparate 为镜像加速，普通 webhook 为空</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Product?: string
+  /**
+   * <p>预热目标地域，AGS 镜像预热的目标地域，非 AGS 触发器为空</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PreheatRegion?: string
 }
 
 /**
@@ -4711,17 +4729,25 @@ export interface ManageReplicationResponse {
  */
 export interface CreateWebhookTriggerRequest {
   /**
-   * 实例 Id
+   * <p>实例 Id</p>
    */
   RegistryId: string
   /**
-   * 触发器参数
+   * <p>触发器参数</p>
    */
   Trigger: WebhookTrigger
   /**
-   * 命名空间
+   * <p>命名空间</p>
    */
   Namespace: string
+  /**
+   * <p>产品名称，非空时创建的 webhook 将被隐藏</p>
+   */
+  Product?: string
+  /**
+   * <p>预热目标地域，AGS 镜像预热的目标地域，非 AGS 触发器为空</p>
+   */
+  PreheatRegion?: string
 }
 
 /**
@@ -5831,7 +5857,7 @@ export interface DeleteImmutableTagRulesRequest {
  */
 export interface CreateWebhookTriggerResponse {
   /**
-   * 新建的触发器
+   * <p>新建的触发器</p>
    */
   Trigger?: WebhookTrigger
   /**

@@ -16,6 +16,34 @@
  */
 
 /**
+ * DescribeTask返回参数结构体
+ */
+export interface DescribeTaskResponse {
+  /**
+   * 任务详情
+   */
+  Data?: TaskData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BatchGetVLPlanSourceFileURL请求参数结构体
+ */
+export interface BatchGetVLPlanSourceFileURLRequest {
+  /**
+   * <p>分析结果 ID 列表，最多 200 个</p>
+   */
+  VLPlanResultIds: Array<string>
+  /**
+   * <p>URL 有效期（秒），范围 [60, 86400]，默认 600</p>
+   */
+  Expire?: number
+}
+
+/**
  * UpdateDeviceStatus请求参数结构体
  */
 export interface UpdateDeviceStatusRequest {
@@ -90,13 +118,59 @@ export interface DeleteRecordBackupPlanResponse {
 }
 
 /**
- * 批量查询设备接口返回数据
+ * 查询设备通道信息返回结果
  */
-export interface DescribeDeviceListData {
+export interface DescribeDeviceChannelData {
   /**
-   * 设备详情列表
+   * 设备 ID
    */
-  List?: Array<DescribeDeviceData>
+  DeviceId?: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: string
+  /**
+   * 通道编码
+   */
+  ChannelCode?: string
+  /**
+   * 通道名称
+   */
+  Name?: string
+  /**
+   * 流状态（0:未传输,1:传输中）
+   */
+  Status?: number
+  /**
+   * 是否可控 Ptz（0:不可控,1:可控）
+   */
+  PTZType?: number
+  /**
+   * 通道厂商
+   */
+  Manufacturer?: string
+  /**
+   * 通道支持分辨率（分辨率列表由‘/’隔开，国标协议样例（6/3），自定义样例（12800960/640480））
+   */
+  Resolution?: string
+  /**
+   * 通道在离线状态（0:离线,1:在线）
+   */
+  State?: number
+  /**
+   * 所在地域
+   */
+  Region?: string
+}
+
+/**
+ * 录像下载任务数据结构
+ */
+export interface VideoDownloadTaskData {
+  /**
+   * 下载任务ID
+   */
+  DownloadTaskId?: string
 }
 
 /**
@@ -161,6 +235,28 @@ export interface ListSubTasksRequest {
    * 默认不对该字段进行筛选，否则根据任务状态进行筛选。状态码：1-NEW，2-RUNNING，3-COMPLETED，4-FAILED
    */
   Status?: number
+}
+
+/**
+ * 视觉理解计划源素材 URL 信息
+ */
+export interface VLPlanResultSnapshotImageUrlInfo {
+  /**
+   * <p>分析结果 ID</p>
+   */
+  VLPlanResultId?: string
+  /**
+   * <p>源素材下载 URL（失败时为空）</p>
+   */
+  SourceFileURL?: string
+  /**
+   * <p>URL 有效期（秒，失败时为 0）</p>
+   */
+  Expire?: number
+  /**
+   * <p>错误信息（失败时有值）</p>
+   */
+  ErrMsg?: string
 }
 
 /**
@@ -231,6 +327,20 @@ export interface ControlRecordTimelineRequest {
    * 结束时间
    */
   End: number
+}
+
+/**
+ * CreateVLTemplate返回参数结构体
+ */
+export interface CreateVLTemplateResponse {
+  /**
+   * <p>视觉理解模板信息</p>
+   */
+  Data?: VLTemplateInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -508,6 +618,20 @@ export interface DescribeDeviceData {
 }
 
 /**
+ * DescribeDeviceChannel返回参数结构体
+ */
+export interface DescribeDeviceChannelResponse {
+  /**
+   * 返回结果
+   */
+  Data?: Array<DescribeDeviceChannelData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BatchDeleteVideoDownloadTask请求参数结构体
  */
 export interface BatchDeleteVideoDownloadTaskRequest {
@@ -515,6 +639,76 @@ export interface BatchDeleteVideoDownloadTaskRequest {
    * 本地录像下载任务 ID 列表
    */
   DownloadTaskIds?: Array<string>
+}
+
+/**
+ * BatchAssignVLPlanChannels返回参数结构体
+ */
+export interface BatchAssignVLPlanChannelsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListVideoSnapshotTemplate请求参数结构体
+ */
+export interface ListVideoSnapshotTemplateRequest {
+  /**
+   * <p>模板名称</p>
+   */
+  Name?: string
+  /**
+   * <p>截图类型</p><p>枚举值：</p><ul><li>1： 实时截帧</li><li>2： 低频截帧</li></ul>
+   */
+  Type?: number
+  /**
+   * <p>排序参数</p><p>默认值：update_time</p>
+   */
+  Sort?: string
+  /**
+   * <p>排序顺序</p><p>枚举值：</p><ul><li>desc： 降序</li><li>asc： 生序</li></ul><p>默认值：desc</p>
+   */
+  Order?: string
+  /**
+   * <p>页码</p><p>默认值：1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数目</p><p>默认值：20</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * ModifyVLPlan请求参数结构体
+ */
+export interface ModifyVLPlanRequest {
+  /**
+   * <p>计划 ID</p>
+   */
+  VLPlanId: string
+  /**
+   * <p>新计划名称</p>
+   */
+  Name?: string
+  /**
+   * <p>新计划描述</p>
+   */
+  Describe?: string
+  /**
+   * <p>新关联视觉理解模板 ID</p>
+   */
+  VLTemplateId?: string
+  /**
+   * <p>新存储天数，范围 [7, 1080]，0 表示不修改</p>
+   */
+  FileExpires?: number
+  /**
+   * <p>新回调配置</p>
+   */
+  Callback?: CallbackURL
 }
 
 /**
@@ -556,13 +750,13 @@ export interface AddOrganizationResponse {
 }
 
 /**
- * BatchOperateDevice返回参数结构体
+ * CreateVideoSnapshotTemplate返回参数结构体
  */
-export interface BatchOperateDeviceResponse {
+export interface CreateVideoSnapshotTemplateResponse {
   /**
-   * <p>返回结果</p>
+   * <p>截图模板信息</p>
    */
-  Data?: BatchOperateDeviceData
+  Data?: VideoSnapshotTemplateInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -673,6 +867,92 @@ export interface DescribeRecordRetrieveTaskData {
 }
 
 /**
+ * 视觉理解计划结果详情
+ */
+export interface VLPlanResultDetailInfo {
+  /**
+   * <p>分析结果 ID</p>
+   */
+  VLPlanResultId?: string
+  /**
+   * <p>媒体类型，当前固定为 image</p>
+   */
+  MediaType?: string
+  /**
+   * <p>所属分析计划 ID</p>
+   */
+  VLPlanId?: string
+  /**
+   * <p>计划名称</p>
+   */
+  VLPlanName?: string
+  /**
+   * <p>通道 ID</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>通道名称</p>
+   */
+  ChannelName?: string
+  /**
+   * <p>设备 ID</p>
+   */
+  DeviceId?: string
+  /**
+   * <p>设备名称</p>
+   */
+  DeviceName?: string
+  /**
+   * <p>所属组织 ID</p>
+   */
+  OrganizationId?: string
+  /**
+   * <p>所属组织名称</p>
+   */
+  OrganizationName?: string
+  /**
+   * <p>分析时间戳（秒）</p>
+   */
+  VLResultTimestamp?: number
+  /**
+   * <p>图片模式截图时间戳（秒）</p>
+   */
+  SnapshotTimestamp?: number
+  /**
+   * <p>视频片段开始时间戳（秒）</p>
+   */
+  VideoStartTimestamp?: number
+  /**
+   * <p>视频片段结束时间戳（秒）</p>
+   */
+  VideoEndTimestamp?: number
+  /**
+   * <p>视频模式计费帧数</p>
+   */
+  BilledFrameCount?: number
+  /**
+   * <p>AI 分析结果内容（JSON 字符串）</p>
+   */
+  Content?: string
+  /**
+   * <p>截图临时下载 URL（有效期 300 秒）</p>
+   */
+  ImageUrl?: string
+  /**
+   * <p>截图 URL 有效期（秒）</p>
+   */
+  ImageUrlExpire?: number
+  /**
+   * <p>创建时间，格式 2006-01-02 15:04:05</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>更新时间，格式 2006-01-02 15:04:05</p>
+   */
+  UpdatedAt?: string
+}
+
+/**
  * 查询录像上云模板返回数据
  */
 export interface DescribeRecordBackupTemplateData {
@@ -708,6 +988,16 @@ export interface DescribeRecordBackupTemplateData {
    * <p>周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像</p>
    */
   DayOffset?: number
+}
+
+/**
+ * DeleteVLPlan请求参数结构体
+ */
+export interface DeleteVLPlanRequest {
+  /**
+   * <p>计划 ID</p>
+   */
+  VLPlanId: string
 }
 
 /**
@@ -817,13 +1107,23 @@ export interface UpdateUserDeviceRequest {
 }
 
 /**
- * DescribeDeviceChannel返回参数结构体
+ * DescribeVideoSnapshotTemplate请求参数结构体
  */
-export interface DescribeDeviceChannelResponse {
+export interface DescribeVideoSnapshotTemplateRequest {
   /**
-   * 返回结果
+   * <p>截图模板Id</p>
    */
-  Data?: Array<DescribeDeviceChannelData>
+  TemplateId: string
+}
+
+/**
+ * CreateVLPlan返回参数结构体
+ */
+export interface CreateVLPlanResponse {
+  /**
+   * <p>视觉理解计划信息</p>
+   */
+  Data?: VLPlanInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -891,6 +1191,48 @@ export interface DescribeUserDeviceListRequest {
 }
 
 /**
+ * 视觉理解计划信息
+ */
+export interface VLPlanInfo {
+  /**
+   * <p>计划ID</p>
+   */
+  VLPlanId?: string
+  /**
+   * <p>计划名称</p>
+   */
+  Name?: string
+  /**
+   * <p>计划描述</p>
+   */
+  Describe?: string
+  /**
+   * <p>视觉理解模板ID</p>
+   */
+  VLTemplateId?: string
+  /**
+   * <p>回调通知配置</p>
+   */
+  Callback?: CallbackURL
+  /**
+   * <p>文件过期时间（秒）</p>
+   */
+  FileExpires?: number
+  /**
+   * <p>计划包含的通道数量</p>
+   */
+  ChannelCount?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>最近一次更新时间</p>
+   */
+  UpdatedAt?: string
+}
+
+/**
  * DescribeRecordRetrieveTask请求参数结构体
  */
 export interface DescribeRecordRetrieveTaskRequest {
@@ -908,6 +1250,24 @@ export interface ControlDeviceSnapshotResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 多张截图模式
+ */
+export interface MultiSnapshotMode {
+  /**
+   * <p>是否启用多张模式</p><p>false时为单张模式，忽略Interval、Total参数</p><p>默认值：false</p>
+   */
+  Enable: boolean
+  /**
+   * <p>截帧间隔</p><p>取值范围：[10, 600]</p><p>单位：秒</p>
+   */
+  Interval: number
+  /**
+   * <p>截帧张数</p><p>取值范围：[1, 10]</p>
+   */
+  Total: number
 }
 
 /**
@@ -938,6 +1298,16 @@ export interface DescribeRecordTemplateRequest {
    * 模板ID
    */
   TemplateId: string
+}
+
+/**
+ * DeleteVideoSnapshotTemplate返回参数结构体
+ */
+export interface DeleteVideoSnapshotTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -988,89 +1358,17 @@ export interface ListRecordBackupPlanDevicesData {
 }
 
 /**
- * 查询复杂任务详情返回结果
+ * BatchGetVideoSnapshotImageUrl返回参数结构体
  */
-export interface TaskData {
+export interface BatchGetVideoSnapshotImageUrlResponse {
   /**
-   * 任务ID
+   * <p>截图图片URL结果列表</p>
    */
-  TaskId?: string
+  Data?: BatchGetVideoSnapshotImageUrlData
   /**
-   * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Status?: number
-  /**
-   * 失败原因
-   */
-  FailReason?: string
-  /**
-   * 进度（0-1）
-   */
-  Progress?: number
-  /**
-   * 任务操作类型，批量任务类型以Batch开头
-   */
-  Action?: string
-  /**
-   * 操作类型中文描述
-   */
-  ActionZhDesc?: string
-  /**
-   * 任务类型 1.简单 2.复杂 3.子任务
-   */
-  TaskType?: number
-  /**
-   * 任务资源id（复杂任务该字段无效）
-   */
-  ResourceId?: string
-  /**
-   * 总任务数（仅复杂任务有效）
-   */
-  Total?: number
-  /**
-   * 成功任务数（仅复杂任务有效）
-   */
-  SuccessCount?: number
-  /**
-   * 失败任务数（仅复杂任务有效）
-   */
-  FailCount?: number
-  /**
-   * 运行任务数（仅复杂任务有效）
-   */
-  RunningCount?: number
-  /**
-   * 启动任务时间
-   */
-  StartedAt?: string
-  /**
-   * 创建任务时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新任务时间
-   */
-  UpdatedAt?: string
-  /**
-   * 任务运行时间，单位ms
-   */
-  Runtime?: number
-  /**
-   * 设备ID
-   */
-  DeviceId?: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 通道ID
-   */
-  ChannelId?: string
-  /**
-   *  通道名称
-   */
-  ChannelName?: string
+  RequestId?: string
 }
 
 /**
@@ -1143,6 +1441,21 @@ export interface ListOrganizationChannelNumbersRequest {
    * 组织ID，json数组格式，最多一次支持10个组织
    */
   OrganizationId: Array<string>
+}
+
+/**
+ * ListRecordRetrieveTasks返回参数结构体
+ */
+export interface ListRecordRetrieveTasksResponse {
+  /**
+   * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<RecordRetrieveTaskDetailsInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1282,13 +1595,27 @@ export interface DescribeUserDeviceResponse {
 }
 
 /**
- * ListSubTasks返回参数结构体
+ * DescribeRecordRetrieveTask返回参数结构体
  */
-export interface ListSubTasksResponse {
+export interface DescribeRecordRetrieveTaskResponse {
   /**
-   * 返回数据
+   * 返回结果
    */
-  Data?: ListSubTasksData
+  Data?: DescribeRecordRetrieveTaskData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVLPlan返回参数结构体
+ */
+export interface DescribeVLPlanResponse {
+  /**
+   * <p>视觉理解计划信息</p>
+   */
+  Data?: VLPlanInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1343,6 +1670,16 @@ export interface UpdateRecordPlanRequest {
  * DescribeOrganization请求参数结构体
  */
 export type DescribeOrganizationRequest = null
+
+/**
+ * DescribeVideoSnapshotConfig请求参数结构体
+ */
+export interface DescribeVideoSnapshotConfigRequest {
+  /**
+   * <p>截图配置Id</p>
+   */
+  ConfigId: string
+}
 
 /**
  * ControlRecord返回参数结构体
@@ -1471,6 +1808,20 @@ export interface AddRecordPlanRequest {
 }
 
 /**
+ * ModifyVLPlan返回参数结构体
+ */
+export interface ModifyVLPlanResponse {
+  /**
+   * <p>视觉理解计划信息</p>
+   */
+  Data?: VLPlanInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListRecordTemplates请求参数结构体
  */
 export type ListRecordTemplatesRequest = null
@@ -1511,6 +1862,52 @@ export interface DescribeOrganizationData {
    * 设备在线数量
    */
   Online?: number
+}
+
+/**
+ * 截图配置信息
+ */
+export interface VideoSnapshotConfigInfo {
+  /**
+   * <p>截图配置Id</p>
+   */
+  ConfigId?: string
+  /**
+   * <p>截图配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>截图模板Id</p>
+   */
+  TemplateId?: string
+  /**
+   * <p>截图模板名称</p>
+   */
+  TemplateName?: string
+  /**
+   * <p>截图类型</p><p>枚举值：</p><ul><li>1： 实时截帧</li><li>2： 低频截帧</li></ul>
+   */
+  Type?: number
+  /**
+   * <p>图片存储天数</p><p>单位：天</p>
+   */
+  FileExpires?: number
+  /**
+   * <p>回调配置</p>
+   */
+  Callback?: CallbackURL
+  /**
+   * <p>截图配置关联的通道数</p>
+   */
+  RelatedChannelCount?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>最近一次更新时间</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -1562,6 +1959,24 @@ export interface RecordPlanOptData {
 }
 
 /**
+ * 生效时段
+ */
+export interface EffectiveTime {
+  /**
+   * <p>开始时间</p><p>参数格式：hh:mm:ss</p>
+   */
+  BeginTime: string
+  /**
+   * <p>结束时间</p><p>参数格式：hh:mm:ss</p>
+   */
+  EndTime: string
+  /**
+   * <p>重复周期： 1-周一 2-周二 3-周三 4-周四 5-周五 6-周六 7-周日</p><p>取值范围：[1, 7]</p>
+   */
+  WeekDay: number
+}
+
+/**
  * DescribeUserDeviceList返回参数结构体
  */
 export interface DescribeUserDeviceListResponse {
@@ -1587,6 +2002,36 @@ export interface Timeline {
    * 分片结束时间
    */
   End?: number
+}
+
+/**
+ * 获取截图模板详情列表
+ */
+export interface ListVideoSnapshotTemplateData {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>排序参数</p>
+   */
+  Sort?: string
+  /**
+   * <p>排序顺序</p>
+   */
+  Order?: string
+  /**
+   * <p>页码</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数目</p>
+   */
+  PageSize?: number
+  /**
+   * <p>截图模板列表</p>
+   */
+  List?: Array<VideoSnapshotTemplateInfo>
 }
 
 /**
@@ -1650,6 +2095,16 @@ export interface RecordRetrieveTaskChannelInfo {
 }
 
 /**
+ * DescribeVLPlan请求参数结构体
+ */
+export interface DescribeVLPlanRequest {
+  /**
+   * <p>计划 ID</p>
+   */
+  VLPlanId: string
+}
+
+/**
  * CallISAPI请求参数结构体
  */
 export interface CallISAPIRequest {
@@ -1709,6 +2164,24 @@ export interface DescribeRecordPlanRequest {
    * 实时上云计划ID
    */
   PlanId: string
+}
+
+/**
+ * 视频场景配置（预留）
+ */
+export interface VideoSceneInfo {
+  /**
+   * <p>分析间隔（秒）：每隔多少秒触发一次分析（滑动步长）</p>
+   */
+  Interval: number
+  /**
+   * <p>分析片段时长（秒）：单次送入模型的视频窗口长度，范围 [5, 12800]</p>
+   */
+  Duration: number
+  /**
+   * <p>抽帧率，默认 1，范围 [0.1, 1]，每隔 1/Fps 秒抽 1 帧送模型</p>
+   */
+  Fps?: number
 }
 
 /**
@@ -1776,6 +2249,16 @@ export interface ChannelInfo {
 }
 
 /**
+ * DeleteVideoSnapshotConfig请求参数结构体
+ */
+export interface DeleteVideoSnapshotConfigRequest {
+  /**
+   * <p>截图配置Id</p>
+   */
+  ConfigId: string
+}
+
+/**
  * DescribeDevicePreset请求参数结构体
  */
 export interface DescribeDevicePresetRequest {
@@ -1839,72 +2322,71 @@ export interface ListOrganizationChannelNumbersData {
  */
 export interface VideoDownloadTask {
   /**
-   * 下载任务 ID
+   * <p>下载任务 ID</p>
    */
   DownloadTaskId?: string
   /**
-   * 通道 ID
+   * <p>通道 ID</p>
    */
   ChannelId?: string
   /**
-   * 通道名称
+   * <p>通道名称</p>
    */
   ChannelName?: string
   /**
-   * 通道编码
+   * <p>通道编码</p>
    */
   ChannelCode?: string
   /**
-   * 设备名称
+   * <p>设备名称</p>
    */
   DeviceName?: string
   /**
-   * 设备编码
+   * <p>设备编码</p>
    */
   DeviceCode?: string
   /**
-   * 任务状态（0：未执行；1：执行中；2 任务完成；
-3：任务失败）
+   * <p>任务状态（0：未执行；1：执行中；2 任务完成；<br>3：任务失败）</p>
    */
   Status?: number
   /**
-   * 下载录像时间段
+   * <p>下载录像时间段</p>
    */
   VideoTimeSection?: string
   /**
-   * 倍速
+   * <p>倍速</p>
    */
   Scale?: number
   /**
-   * 下载时长
+   * <p>下载时长</p><p>单位：秒</p>
    */
   DownloadTime?: number
   /**
-   * 录像大小
+   * <p>录像大小</p><p>单位：字节（Byte）</p>
    */
   VideoSize?: number
   /**
-   * 任务开始时间
+   * <p>任务开始时间</p>
    */
   StartTime?: string
   /**
-   * 任务结束时间
+   * <p>任务结束时间</p>
    */
   EndTime?: string
   /**
-   * 文件下载地址
+   * <p>文件下载地址</p>
    */
   FileDownloadUrl?: string
   /**
-   * 失败原因
+   * <p>失败原因</p>
    */
   FailedReason?: string
   /**
-   * 生命周期规则，热存天数
+   * <p>生命周期规则，热存天数</p>
    */
   Expire?: number
   /**
-   * mp4预览地址
+   * <p>mp4预览地址</p>
    */
   PreviewUrl?: string
 }
@@ -2052,37 +2534,31 @@ export interface RefreshDeviceChannelRequest {
 }
 
 /**
- * 抓拍结果信息
+ * DescribeVLPlanResult请求参数结构体
  */
-export interface GBDeviceSnapInfo {
+export interface DescribeVLPlanResultRequest {
   /**
-   * 文件名称
+   * <p>分析结果 ID</p>
    */
-  FileName?: string
+  VLPlanResultId: string
+}
+
+/**
+ * 截图结果的回调地址配置
+ */
+export interface CallbackURL {
   /**
-   * 下载地址，空值表示存储图片过期
+   * <p>图片回调地址</p>
    */
-  DownloadUrl?: string
+  Url?: string
   /**
-   * 图片大小，单位B
+   * <p>Token</p>
    */
-  ImageSize?: number
+  Token?: string
   /**
-   * 文件的创建时间
+   * <p>是否开启</p>
    */
-  CreatedTime?: string
-  /**
-   * 图片的接收时间
-   */
-  ReceivedTime?: string
-  /**
-   * 预览地址，空值表示存储图片过期
-   */
-  PreviewUrl?: string
-  /**
-   * 国标信令会话ID，同时对应控制设备抓拍 ( ControlDeviceSnapshot )接口返回的request_id
-   */
-  SessionId?: string
+  Enable?: boolean
 }
 
 /**
@@ -2242,6 +2718,66 @@ export interface ListRecordPlanChannelsResponse {
 }
 
 /**
+ * 截图模板信息
+ */
+export interface VideoSnapshotTemplateInfo {
+  /**
+   * <p>截图模板Id</p>
+   */
+  TemplateId?: string
+  /**
+   * <p>截图模板名称</p>
+   */
+  Name?: string
+  /**
+   * <p>截图类型</p><p>枚举值：</p><ul><li>1： 实时截帧</li><li>2： 低频截帧</li></ul>
+   */
+  Type?: number
+  /**
+   * <p>截帧频率</p>
+   */
+  Interval?: number
+  /**
+   * <p>多张模式</p>
+   */
+  MultiMode?: MultiVideoSnapshotMode
+  /**
+   * <p>生效时段</p>
+   */
+  Times?: Array<EffectiveTime>
+  /**
+   * <p>模板关联的配置数</p>
+   */
+  RelatedConfigCount?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>最近一次更新时间</p>
+   */
+  UpdateTime?: string
+}
+
+/**
+ * 多张模式参数
+ */
+export interface MultiVideoSnapshotMode {
+  /**
+   * <p>是否启用多张模式， false时，为单张模式，忽略Interval、Total参数</p><p>默认值：false</p>
+   */
+  Enable: boolean
+  /**
+   * <p>截帧间隔</p><p>取值范围：[10, 600]</p><p>单位：秒</p>
+   */
+  Interval: number
+  /**
+   * <p>截帧张数</p><p>取值范围：[1, 10]</p>
+   */
+  Total: number
+}
+
+/**
  * UpdateRecordTemplate请求参数结构体
  */
 export interface UpdateRecordTemplateRequest {
@@ -2321,6 +2857,20 @@ export interface DescribeRecordTemplateResponse {
 }
 
 /**
+ * BatchAddVideoSnapshotConfigChannel请求参数结构体
+ */
+export interface BatchAddVideoSnapshotConfigChannelRequest {
+  /**
+   * <p>截图配置Id</p>
+   */
+  ConfigId: string
+  /**
+   * <p>通道Id列表</p>
+   */
+  Channels?: Array<string>
+}
+
+/**
  * DescribeRecordSlice返回参数结构体
  */
 export interface DescribeRecordSliceResponse {
@@ -2364,6 +2914,11 @@ export interface DescribeDevicePresetResponse {
 }
 
 /**
+ * DescribeStreamAuth请求参数结构体
+ */
+export type DescribeStreamAuthRequest = null
+
+/**
  * UpdateRecordBackupPlan请求参数结构体
  */
 export interface UpdateRecordBackupPlanRequest {
@@ -2393,6 +2948,60 @@ export interface RecordTimeLine {
    * 对应时间片段的播放url
    */
   HlsUrl?: string
+}
+
+/**
+ * 视觉理解模板信息
+ */
+export interface VLTemplateInfo {
+  /**
+   * <p>模板ID</p>
+   */
+  VLTemplateId?: string
+  /**
+   * <p>AI 模型</p><p>枚举值：</p><ul><li>IVC-G： 视图默认大模型</li></ul>
+   */
+  AIModel?: string
+  /**
+   * <p>AI场景名称</p>
+   */
+  Name?: string
+  /**
+   * <p>AI场景描述</p>
+   */
+  Describe?: string
+  /**
+   * <p>提示词</p>
+   */
+  Prompt?: string
+  /**
+   * <p>分析模式</p><p>枚举值：</p><ul><li>image： 图片模式</li><li>video： 视频模式</li></ul>
+   */
+  AnalysisMode?: string
+  /**
+   * <p>图片场景配置</p>
+   */
+  ImageConfig?: ImageSceneInfo
+  /**
+   * <p>生效时段列表</p>
+   */
+  Times?: Array<EffectiveTime>
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>最近一次更新时间</p>
+   */
+  UpdatedAt?: string
+  /**
+   * <p>是否关联到视觉理解计划</p>
+   */
+  IsUsed?: boolean
+  /**
+   * <p>视频场景配置</p>
+   */
+  VideoConfig?: VideoSceneInfo
 }
 
 /**
@@ -2435,6 +3044,28 @@ export interface ControlDevicePTZResponse {
  * ListRecordBackupPlans请求参数结构体
  */
 export type ListRecordBackupPlansRequest = null
+
+/**
+ * CreateVideoSnapshotConfig请求参数结构体
+ */
+export interface CreateVideoSnapshotConfigRequest {
+  /**
+   * <p>截图配置名称</p><p>入参限制：中文、英文、数字、“-”、“_” 长度不超过128个字符</p>
+   */
+  Name: string
+  /**
+   * <p>截图模板Id</p>
+   */
+  TemplateId: string
+  /**
+   * <p>图片文件的热存储天数</p><p>枚举值：</p><ul><li>7： 7天</li><li>15： 15天</li><li>30： 30天</li><li>60： 60天</li><li>90： 90天</li><li>180： 180天</li><li>270： 270天</li><li>360： 360天</li><li>540： 540天</li><li>720： 720天</li><li>900： 900天</li><li>1080： 1080天</li></ul>
+   */
+  FileExpires: number
+  /**
+   * <p>截图结果回调地址</p>
+   */
+  Callback?: CallbackURL
+}
 
 /**
  * 增加组织接口返回数据
@@ -2569,6 +3200,20 @@ export interface DeleteTaskRequest {
 }
 
 /**
+ * UpdateUserDevice返回参数结构体
+ */
+export interface UpdateUserDeviceResponse {
+  /**
+   * <p>返回数据</p>
+   */
+  Data?: UpdateDeviceData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ControlDevicePTZ请求参数结构体
  */
 export interface ControlDevicePTZRequest {
@@ -2615,6 +3260,20 @@ export interface DescribeRecordBackupPlanResponse {
 }
 
 /**
+ * 列举子任务列表
+ */
+export interface ListSubTasksData {
+  /**
+   * 子任务列表
+   */
+  List?: Array<SubTaskData>
+  /**
+   * 子任务数量
+   */
+  TotalCount?: number
+}
+
+/**
  * DescribeDeviceChannel请求参数结构体
  */
 export interface DescribeDeviceChannelRequest {
@@ -2625,13 +3284,13 @@ export interface DescribeDeviceChannelRequest {
 }
 
 /**
- * UpdateUserDevice返回参数结构体
+ * DescribeVideoSnapshotTemplate返回参数结构体
  */
-export interface UpdateUserDeviceResponse {
+export interface DescribeVideoSnapshotTemplateResponse {
   /**
-   * <p>返回数据</p>
+   * <p>截图模板详情</p>
    */
-  Data?: UpdateDeviceData
+  Data?: VideoSnapshotTemplateInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2639,13 +3298,95 @@ export interface UpdateUserDeviceResponse {
 }
 
 /**
- * 录像下载任务数据结构
+ * BatchGetVLPlanSourceFileURL返回参数结构体
  */
-export interface VideoDownloadTaskData {
+export interface BatchGetVLPlanSourceFileURLResponse {
   /**
-   * 下载任务ID
+   * <p>URL 列表</p>
    */
-  DownloadTaskId?: string
+  Data?: Array<VLPlanResultSnapshotImageUrlInfo>
+  /**
+   * <p>总数量</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListVLPlans返回参数结构体
+ */
+export interface ListVLPlansResponse {
+  /**
+   * <p>计划列表</p>
+   */
+  Data?: Array<VLPlanInfo>
+  /**
+   * <p>总数量</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 修改实时上云录像计划的数据
+ */
+export interface UpdateRecordPlanData {
+  /**
+   * 上云计划名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段
+   */
+  PlanName?: string
+  /**
+   * 上云模板ID，不修改模板ID时，不需要该字段
+   */
+  TemplateId?: string
+  /**
+   * 上云计划描述，仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段
+   */
+  Describe?: string
+  /**
+   * 码流类型，default:不指定码流类型，以设备默认推送类型为主， main:主码流，sub:子码流，其他根据设备能力集自定义，长度不能超过32个字节
+   */
+  StreamType?: string
+  /**
+   * 生命周期，文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段
+   */
+  LifeCycle?: LifeCycleData
+  /**
+   * 要新增的设备通道,Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量
+   */
+  Add?: Array<ChannelInfo>
+  /**
+   * 要删除的设备通道，Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段
+   */
+  Del?: Array<string>
+  /**
+   * 组织目录ID，添加组织目录下所有设备通道，Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量）
+   */
+  OrganizationId?: Array<string>
+  /**
+   * 录像补录模式（0:不启用，1:启用）
+   */
+  RepairMode?: number
+}
+
+/**
+ * CreateVideoSnapshotConfig返回参数结构体
+ */
+export interface CreateVideoSnapshotConfigResponse {
+  /**
+   * <p>截图配置信息</p>
+   */
+  Data?: VideoSnapshotConfigInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2776,6 +3517,24 @@ export interface AddRecordBackupPlanData {
 }
 
 /**
+ * ListVLPlans请求参数结构体
+ */
+export interface ListVLPlansRequest {
+  /**
+   * <p>计划名称，精确匹配</p>
+   */
+  Name?: string
+  /**
+   * <p>页码，默认 1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 20，最大 200</p>
+   */
+  PageSize?: number
+}
+
+/**
  * DescribeGBDeviceAddr请求参数结构体
  */
 export interface DescribeGBDeviceAddrRequest {
@@ -2783,6 +3542,50 @@ export interface DescribeGBDeviceAddrRequest {
    * 设备ID列表
    */
   DeviceIds: Array<string>
+}
+
+/**
+ * 抓拍结果信息
+ */
+export interface GBDeviceSnapInfo {
+  /**
+   * 文件名称
+   */
+  FileName?: string
+  /**
+   * 下载地址，空值表示存储图片过期
+   */
+  DownloadUrl?: string
+  /**
+   * 图片大小，单位B
+   */
+  ImageSize?: number
+  /**
+   * 文件的创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 图片的接收时间
+   */
+  ReceivedTime?: string
+  /**
+   * 预览地址，空值表示存储图片过期
+   */
+  PreviewUrl?: string
+  /**
+   * 国标信令会话ID，同时对应控制设备抓拍 ( ControlDeviceSnapshot )接口返回的request_id
+   */
+  SessionId?: string
+}
+
+/**
+ * 批量查询设备接口返回数据
+ */
+export interface DescribeDeviceListData {
+  /**
+   * 设备详情列表
+   */
+  List?: Array<DescribeDeviceData>
 }
 
 /**
@@ -2864,6 +3667,92 @@ export interface DescribeRecordFileRequest {
    * 是否携带每个时间段的播放url
    */
   WithUrl?: boolean
+}
+
+/**
+ * 查询复杂任务详情返回结果
+ */
+export interface TaskData {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
+   */
+  Status?: number
+  /**
+   * 失败原因
+   */
+  FailReason?: string
+  /**
+   * 进度（0-1）
+   */
+  Progress?: number
+  /**
+   * 任务操作类型，批量任务类型以Batch开头
+   */
+  Action?: string
+  /**
+   * 操作类型中文描述
+   */
+  ActionZhDesc?: string
+  /**
+   * 任务类型 1.简单 2.复杂 3.子任务
+   */
+  TaskType?: number
+  /**
+   * 任务资源id（复杂任务该字段无效）
+   */
+  ResourceId?: string
+  /**
+   * 总任务数（仅复杂任务有效）
+   */
+  Total?: number
+  /**
+   * 成功任务数（仅复杂任务有效）
+   */
+  SuccessCount?: number
+  /**
+   * 失败任务数（仅复杂任务有效）
+   */
+  FailCount?: number
+  /**
+   * 运行任务数（仅复杂任务有效）
+   */
+  RunningCount?: number
+  /**
+   * 启动任务时间
+   */
+  StartedAt?: string
+  /**
+   * 创建任务时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新任务时间
+   */
+  UpdatedAt?: string
+  /**
+   * 任务运行时间，单位ms
+   */
+  Runtime?: number
+  /**
+   * 设备ID
+   */
+  DeviceId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: string
+  /**
+   *  通道名称
+   */
+  ChannelName?: string
 }
 
 /**
@@ -2981,9 +3870,32 @@ export interface RecordPlanBaseInfo {
 }
 
 /**
- * ListRecordBackupTemplates请求参数结构体
+ * 批量获取截图图片URL列表信息
  */
-export type ListRecordBackupTemplatesRequest = null
+export interface BatchGetVideoSnapshotImageUrlData {
+  /**
+   * <p>图片Url信息</p>
+   */
+  Images?: Array<ImageUrlInfo>
+  /**
+   * <p>图片Url有效期</p><p>单位：秒</p><p>默认值：600</p>
+   */
+  ImageUrlExpires?: number
+}
+
+/**
+ * DescribeVLPlanResult返回参数结构体
+ */
+export interface DescribeVLPlanResultResponse {
+  /**
+   * <p>分析结果详情</p>
+   */
+  Data?: VLPlanResultDetailInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeRecordSlice请求参数结构体
@@ -3017,6 +3929,47 @@ export interface DescribeUserDeviceRequest {
  * DescribeDeviceRegion请求参数结构体
  */
 export type DescribeDeviceRegionRequest = null
+
+/**
+ * 用于查询设备云端录像时间轴信息返回数据
+ */
+export interface DescribeRecordFileData {
+  /**
+   * 提示类型，0:时间段内无归档录像，1:时间段内有归档录像
+   */
+  Tips?: number
+  /**
+   * 存在为数组格式，不存在字段内容为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<RecordTimeLine>
+}
+
+/**
+ * ModifyVideoSnapshotConfig请求参数结构体
+ */
+export interface ModifyVideoSnapshotConfigRequest {
+  /**
+   * <p>截图配置Id</p>
+   */
+  ConfigId: string
+  /**
+   * <p>截图配置名称</p><p>入参限制：中文、英文、数字、“-”、“_” 长度不超过128个字符</p>
+   */
+  Name?: string
+  /**
+   * <p>截图模板Id</p>
+   */
+  TemplateId?: string
+  /**
+   * <p>图片文件的热存储天数</p><p>枚举值：</p><ul><li>7： 7天</li><li>15： 15天</li><li>30： 30天</li><li>60： 60天</li><li>90： 90天</li><li>180： 180天</li><li>270： 270天</li><li>360： 360天</li><li>540： 540天</li><li>720： 720天</li><li>900： 900天</li><li>1080： 1080天</li></ul>
+   */
+  FileExpires?: number
+  /**
+   * <p>回调配置</p>
+   */
+  Callback?: CallbackURL
+}
 
 /**
  * AddStreamAuth请求参数结构体
@@ -3137,6 +4090,16 @@ export interface UpdateRecordBackupTemplateModify {
 }
 
 /**
+ * DeleteRecordRetrieveTask请求参数结构体
+ */
+export interface DeleteRecordRetrieveTaskRequest {
+  /**
+   * 取回任务ID
+   */
+  TaskId: string
+}
+
+/**
  * QueryForbidPlayChannelList请求参数结构体
  */
 export interface QueryForbidPlayChannelListRequest {
@@ -3155,49 +4118,13 @@ export interface QueryForbidPlayChannelListRequest {
 }
 
 /**
- * 查询设备通道信息返回结果
+ * DeleteVideoSnapshotConfig返回参数结构体
  */
-export interface DescribeDeviceChannelData {
+export interface DeleteVideoSnapshotConfigResponse {
   /**
-   * 设备 ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DeviceId?: string
-  /**
-   * 通道 ID
-   */
-  ChannelId?: string
-  /**
-   * 通道编码
-   */
-  ChannelCode?: string
-  /**
-   * 通道名称
-   */
-  Name?: string
-  /**
-   * 流状态（0:未传输,1:传输中）
-   */
-  Status?: number
-  /**
-   * 是否可控 Ptz（0:不可控,1:可控）
-   */
-  PTZType?: number
-  /**
-   * 通道厂商
-   */
-  Manufacturer?: string
-  /**
-   * 通道支持分辨率（分辨率列表由‘/’隔开，国标协议样例（6/3），自定义样例（12800960/640480））
-   */
-  Resolution?: string
-  /**
-   * 通道在离线状态（0:离线,1:在线）
-   */
-  State?: number
-  /**
-   * 所在地域
-   */
-  Region?: string
+  RequestId?: string
 }
 
 /**
@@ -3278,14 +4205,13 @@ export interface ControlDeviceStreamRequest {
 }
 
 /**
- * ListRecordRetrieveTasks返回参数结构体
+ * DescribeVideoSnapshotConfig返回参数结构体
  */
-export interface ListRecordRetrieveTasksResponse {
+export interface DescribeVideoSnapshotConfigResponse {
   /**
-   * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>截图配置详情结果</p>
    */
-  Data?: Array<RecordRetrieveTaskDetailsInfo>
+  Data?: VideoSnapshotConfigInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3320,6 +4246,20 @@ export interface ListRecordBackupPlanDevicesRequest {
    * 分页页数
    */
   PageNumber?: number
+}
+
+/**
+ * ModifyVideoSnapshotConfig返回参数结构体
+ */
+export interface ModifyVideoSnapshotConfigResponse {
+  /**
+   * <p>截图配置信息</p>
+   */
+  Data?: VideoSnapshotConfigInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3433,6 +4373,32 @@ export interface ListRecordTemplatesResponse {
 }
 
 /**
+ * ListVLTemplates请求参数结构体
+ */
+export interface ListVLTemplatesRequest {
+  /**
+   * <p>模板名称，精确匹配</p>
+   */
+  Name?: string
+  /**
+   * <p>分析模式过滤，image / video</p>
+   */
+  AnalysisMode?: string
+  /**
+   * <p>截图类型过滤（仅 AnalysisMode=image 时生效）：realtime / low</p>
+   */
+  CaptureType?: string
+  /**
+   * <p>页码，默认 1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 20，最大 200</p>
+   */
+  PageSize?: number
+}
+
+/**
  * DescribeRecordBackupTemplate请求参数结构体
  */
 export interface DescribeRecordBackupTemplateRequest {
@@ -3440,6 +4406,34 @@ export interface DescribeRecordBackupTemplateRequest {
    * 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取）
    */
   TemplateId: string
+}
+
+/**
+ * ListSubTasks返回参数结构体
+ */
+export interface ListSubTasksResponse {
+  /**
+   * 返回数据
+   */
+  Data?: ListSubTasksData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVLTemplate返回参数结构体
+ */
+export interface DescribeVLTemplateResponse {
+  /**
+   * <p>视觉理解模板信息</p>
+   */
+  Data?: VLTemplateInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3514,13 +4508,25 @@ export interface AddRecordRetrieveTaskData {
 }
 
 /**
- * DeleteRecordRetrieveTask请求参数结构体
+ * BatchAssignVLPlanChannels请求参数结构体
  */
-export interface DeleteRecordRetrieveTaskRequest {
+export interface BatchAssignVLPlanChannelsRequest {
   /**
-   * 取回任务ID
+   * <p>计划 ID</p>
    */
-  TaskId: string
+  VLPlanId: string
+  /**
+   * <p>操作命令：1=关联，2=解绑</p>
+   */
+  Cmd: number
+  /**
+   * <p>通道 ID 列表，最多 500 个；与 OrganizationIds 至少传一个（Cmd=1 时）</p>
+   */
+  ChannelIds?: Array<string>
+  /**
+   * <p>组织 ID 列表（仅 Cmd=1 时有效，Cmd=2 时不允许传入）；展开该组织下所有通道参与关联，与 ChannelIds 取并集去重</p>
+   */
+  OrganizationIds?: Array<string>
 }
 
 /**
@@ -3566,6 +4572,24 @@ export interface DescribeRecordBackupPlanData {
 }
 
 /**
+ * 图片下载URL信息
+ */
+export interface ImageUrlInfo {
+  /**
+   * <p>图片Id</p>
+   */
+  ImageId?: string
+  /**
+   * <p>图片Url</p>
+   */
+  ImageUrl?: string
+  /**
+   * <p>错误信息</p><p>说明获取图片url失败的原因</p>
+   */
+  ErrorMessage?: string
+}
+
+/**
  * 通道属性信息
  */
 export interface ChannelAttrInfo {
@@ -3602,13 +4626,9 @@ export interface UpdateRecordPlanResponse {
 }
 
 /**
- * DescribeTask返回参数结构体
+ * DeleteVLTemplate返回参数结构体
  */
-export interface DescribeTaskResponse {
-  /**
-   * 任务详情
-   */
-  Data?: TaskData
+export interface DeleteVLTemplateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3638,6 +4658,11 @@ export interface DeleteRecordBackupPlanRequest {
    */
   PlanId: string
 }
+
+/**
+ * ListRecordBackupTemplates请求参数结构体
+ */
+export type ListRecordBackupTemplatesRequest = null
 
 /**
  * ListRecordPlanChannels请求参数结构体
@@ -3749,6 +4774,20 @@ export interface ListVideoDownloadTaskRequest {
 }
 
 /**
+ * ListVideoSnapshotTemplate返回参数结构体
+ */
+export interface ListVideoSnapshotTemplateResponse {
+  /**
+   * <p>截图模板结果列表</p>
+   */
+  Data?: ListVideoSnapshotTemplateData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRecordBackupTemplate请求参数结构体
  */
 export interface DeleteRecordBackupTemplateRequest {
@@ -3802,6 +4841,20 @@ export interface RecordRetrieveTaskDetailsInfo {
    * 任务通道数量
    */
   ChannelCount?: number
+}
+
+/**
+ * DescribeStreamAuth返回参数结构体
+ */
+export interface DescribeStreamAuthResponse {
+  /**
+   * 返回结果
+   */
+  Data?: DescribeStreamAuthData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3919,45 +4972,13 @@ export interface DescribeRecordPlaybackUrlResponse {
 }
 
 /**
- * 修改实时上云录像计划的数据
+ * DeleteVLPlan返回参数结构体
  */
-export interface UpdateRecordPlanData {
+export interface DeleteVLPlanResponse {
   /**
-   * 上云计划名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PlanName?: string
-  /**
-   * 上云模板ID，不修改模板ID时，不需要该字段
-   */
-  TemplateId?: string
-  /**
-   * 上云计划描述，仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段
-   */
-  Describe?: string
-  /**
-   * 码流类型，default:不指定码流类型，以设备默认推送类型为主， main:主码流，sub:子码流，其他根据设备能力集自定义，长度不能超过32个字节
-   */
-  StreamType?: string
-  /**
-   * 生命周期，文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段
-   */
-  LifeCycle?: LifeCycleData
-  /**
-   * 要新增的设备通道,Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量
-   */
-  Add?: Array<ChannelInfo>
-  /**
-   * 要删除的设备通道，Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段
-   */
-  Del?: Array<string>
-  /**
-   * 组织目录ID，添加组织目录下所有设备通道，Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量）
-   */
-  OrganizationId?: Array<string>
-  /**
-   * 录像补录模式（0:不启用，1:启用）
-   */
-  RepairMode?: number
+  RequestId?: string
 }
 
 /**
@@ -3968,6 +4989,25 @@ export interface DescribeTaskRequest {
    * 简单任务或复杂任务ID
    */
   TaskId: string
+}
+
+/**
+ * 图片场景配置
+ */
+export interface ImageSceneInfo {
+  /**
+   * <p>截图类型</p><p>枚举值：</p><ul><li>1：实时截帧</li><li>2：低频截帧</li></ul>
+   */
+  Type: number
+  /**
+   * <p>截帧频率</p><p>Type=1时取值[5, 180]秒，Type=2时取值[30, 36000]秒</p>
+   */
+  Interval: number
+  /**
+   * <p>多张截图模式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MultiMode?: MultiSnapshotMode
 }
 
 /**
@@ -3985,18 +5025,47 @@ export interface ListOrganizationChannelsResponse {
 }
 
 /**
- * 用于查询设备云端录像时间轴信息返回数据
+ * DescribeVLTemplate请求参数结构体
  */
-export interface DescribeRecordFileData {
+export interface DescribeVLTemplateRequest {
   /**
-   * 提示类型，0:时间段内无归档录像，1:时间段内有归档录像
+   * <p>模板 ID</p>
    */
-  Tips?: number
+  VLTemplateId: string
+}
+
+/**
+ * CreateVLTemplate请求参数结构体
+ */
+export interface CreateVLTemplateRequest {
   /**
-   * 存在为数组格式，不存在字段内容为空
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>AI 模型</p><p>枚举值：</p><ul><li>ivc-vl-1.0： 视图大模型</li></ul>
    */
-  List?: Array<RecordTimeLine>
+  AIModel: string
+  /**
+   * <p>模板名称，仅支持中文/英文/数字/_/-，最长 32 个字符</p>
+   */
+  Name: string
+  /**
+   * <p>提示词，最大 2MB</p>
+   */
+  Prompt: string
+  /**
+   * <p>分析模式</p><p>枚举值：</p><ul><li>image： 图片模式</li><li>video： 视频模式</li></ul>
+   */
+  AnalysisMode: string
+  /**
+   * <p>生效时段列表，最多 100 条</p>
+   */
+  Times: Array<EffectiveTime>
+  /**
+   * <p>模板描述，最长 256 个字符</p>
+   */
+  Describe?: string
+  /**
+   * <p>图片场景配置（AnalysisMode=image 时必填）</p>
+   */
+  ImageConfig?: ImageSceneInfo
 }
 
 /**
@@ -4133,17 +5202,29 @@ export interface ListTasksData {
 }
 
 /**
- * 列举子任务列表
+ * CreateVLPlan请求参数结构体
  */
-export interface ListSubTasksData {
+export interface CreateVLPlanRequest {
   /**
-   * 子任务列表
+   * <p>计划名称，仅支持中文/英文/数字/_/-，最长 32 个字符</p>
    */
-  List?: Array<SubTaskData>
+  Name: string
   /**
-   * 子任务数量
+   * <p>关联的视觉理解模板 ID</p>
    */
-  TotalCount?: number
+  VLTemplateId: string
+  /**
+   * <p>计划描述，最长 256 个字符</p>
+   */
+  Describe?: string
+  /**
+   * <p>截图文件存储天数，范围 [7, 1080]；图片模式必填，视频模式不传</p>
+   */
+  FileExpires?: number
+  /**
+   * <p>回调通知配置</p>
+   */
+  Callback?: CallbackURL
 }
 
 /**
@@ -4212,6 +5293,16 @@ export interface UpdateRecordBackupTemplateRequest {
    * 修改录像上云模板数据
    */
   Mod: UpdateRecordBackupTemplateModify
+}
+
+/**
+ * DeleteVLTemplate请求参数结构体
+ */
+export interface DeleteVLTemplateRequest {
+  /**
+   * <p>模板 ID</p>
+   */
+  VLTemplateId: string
 }
 
 /**
@@ -4295,17 +5386,59 @@ export interface RemoteAddrInfo {
 }
 
 /**
- * DescribeStreamAuth返回参数结构体
+ * BatchGetVideoSnapshotImageUrl请求参数结构体
  */
-export interface DescribeStreamAuthResponse {
+export interface BatchGetVideoSnapshotImageUrlRequest {
   /**
-   * 返回结果
+   * <p>图片Id</p>
    */
-  Data?: DescribeStreamAuthData
+  ImageIds: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>图片URL有效期，单位：秒</p><p>取值范围：[60, 86400]</p><p>默认值：600</p>
    */
-  RequestId?: string
+  ImageUrlExpires?: number
+}
+
+/**
+ * 修改录像上云计划返回数据
+ */
+export interface UpdateRecordBackupPlanData {
+  /**
+   * 录像上云计划ID
+   */
+  PlanId?: string
+  /**
+   * 录像上云计划名称
+   */
+  PlanName?: string
+  /**
+   * 录像上云模板ID
+   */
+  TemplateId?: string
+  /**
+   * 录像上云计划描述
+   */
+  Describe?: string
+  /**
+   * 云文件生命周期
+   */
+  LifeCycle?: LifeCycleData
+  /**
+   * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
+   */
+  Status?: number
+  /**
+   * 通道数量
+   */
+  ChannelCount?: number
+  /**
+   * 创建时间
+   */
+  CreateAt?: string
+  /**
+   * 修改时间
+   */
+  UpdateAt?: string
 }
 
 /**
@@ -4395,23 +5528,50 @@ export interface CreateVideoDownloadTaskRequest {
 }
 
 /**
- * DescribeRecordRetrieveTask返回参数结构体
+ * CreateVideoSnapshotTemplate请求参数结构体
  */
-export interface DescribeRecordRetrieveTaskResponse {
+export interface CreateVideoSnapshotTemplateRequest {
   /**
-   * 返回结果
+   * <p>模板名称： 中文、英文、数字、“-”、“_” 长度不超过128个字符</p>
    */
-  Data?: DescribeRecordRetrieveTaskData
+  Name: string
+  /**
+   * <p>截图类型： 1-实时截帧 2-低频截帧<br>注意：实时截帧在生效时段期间一直拉取实时流， 低频截帧在生效时段期间按需拉取实时流，每次拉流的最短持续时间不低于1分钟</p><p>枚举值：</p><ul><li>1： 实时截帧</li><li>2： 低频截帧</li></ul>
+   */
+  Type: number
+  /**
+   * <p>截帧频率： Type = 1时，取值[5, 180]秒 Type = 2时 取值[30, 36000]秒</p>
+   */
+  Interval: number
+  /**
+   * <p>生效时段，注：数组大小不超过100个且每个时间段不低于1分钟</p>
+   */
+  Times: Array<EffectiveTime>
+  /**
+   * <p>多张模式</p>
+   */
+  MultiMode?: MultiVideoSnapshotMode
+}
+
+/**
+ * DeleteVideoSnapshotTemplate请求参数结构体
+ */
+export interface DeleteVideoSnapshotTemplateRequest {
+  /**
+   * <p>截图模板Id</p>
+   */
+  TemplateId: string
+}
+
+/**
+ * BatchAddVideoSnapshotConfigChannel返回参数结构体
+ */
+export interface BatchAddVideoSnapshotConfigChannelResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
-
-/**
- * DescribeStreamAuth请求参数结构体
- */
-export type DescribeStreamAuthRequest = null
 
 /**
  * 修改录像上云模板返回数据
@@ -4452,45 +5612,35 @@ export interface UpdateRecordBackupTemplateData {
 }
 
 /**
- * 修改录像上云计划返回数据
+ * BatchOperateDevice返回参数结构体
  */
-export interface UpdateRecordBackupPlanData {
+export interface BatchOperateDeviceResponse {
   /**
-   * 录像上云计划ID
+   * <p>返回结果</p>
    */
-  PlanId?: string
+  Data?: BatchOperateDeviceData
   /**
-   * 录像上云计划名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PlanName?: string
+  RequestId?: string
+}
+
+/**
+ * ListVLTemplates返回参数结构体
+ */
+export interface ListVLTemplatesResponse {
   /**
-   * 录像上云模板ID
+   * <p>模板列表</p>
    */
-  TemplateId?: string
+  Data?: Array<VLTemplateInfo>
   /**
-   * 录像上云计划描述
+   * <p>总数量</p>
    */
-  Describe?: string
+  TotalCount?: number
   /**
-   * 云文件生命周期
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LifeCycle?: LifeCycleData
-  /**
-   * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
-   */
-  Status?: number
-  /**
-   * 通道数量
-   */
-  ChannelCount?: number
-  /**
-   * 创建时间
-   */
-  CreateAt?: string
-  /**
-   * 修改时间
-   */
-  UpdateAt?: string
+  RequestId?: string
 }
 
 /**

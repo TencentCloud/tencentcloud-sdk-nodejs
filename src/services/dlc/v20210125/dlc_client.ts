@@ -564,6 +564,7 @@ import {
   ModifyJobDefinitionRequest,
   AddDMSPartitionsResponse,
   DescribePostTrainingPresetRequest,
+  WarehouseProfileBriefInfo,
   ListTaskJobLogNameResponse,
   RayClusterHistory,
   ListMlflowServersResponse,

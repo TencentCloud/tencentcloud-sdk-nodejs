@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeLLMWafDLPRulesResponse,
   ApiSecCustomEventRule,
   DeleteOwaspWhiteRuleRequest,
   ModifyUserLevelResponse,
@@ -41,6 +42,7 @@ import {
   LoadBalancerPackageNew,
   DescribeOwaspWhiteRulesRequest,
   SearchLogResponse,
+  DescribeLLMWafProtectRulesResponse,
   ModifyUserSignatureClassResponse,
   UpdateProtectionModesResponse,
   LLMDetectResult,
@@ -48,7 +50,7 @@ import {
   CCRuleItem,
   DescribeCertificateVerifyResultResponse,
   ModifyUserSignatureRuleResponse,
-  ModifyInstanceNameResponse,
+  ModifyApiAnalyzeStatusRequest,
   InstanceBriefInfo,
   DescribeWafAutoDenyRulesRequest,
   MajorEventsProPkg,
@@ -60,12 +62,14 @@ import {
   DescribeAreaBanAreasResponse,
   ConditionInfo,
   MajorEventsPkg,
+  DescribeLLMContentRuleListResponse,
   DescribeDomainRulesRequest,
   DescribeScanIpRequest,
   DeleteAccessExportResponse,
+  ModifyLLMWafProtectRuleResponse,
   DescribeModuleStatusResponse,
   AccessKeyValueInfo,
-  TokenDisplaySetting,
+  LLMOptionsItem,
   KVInt,
   ProtectGroupInfo,
   AddAntiInfoLeakRulesRequest,
@@ -105,6 +109,7 @@ import {
   DescribeDomainCountInfoResponse,
   ModifyHostModeRequest,
   ModifyAntiInfoLeakRuleStatusRequest,
+  ModifyLLMKeywordLibraryRequest,
   CreateDealsRequest,
   DescribeCiphersDetailResponse,
   DescribeCustomRuleListRequest,
@@ -129,9 +134,11 @@ import {
   AccessValueInfo,
   Rule,
   DescribePostCKafkaFlowsResponse,
+  ModifyLLMKeywordLibraryResponse,
   Strategy,
   RemoveBypassAllRuleRequest,
   ModifyOwaspDomainUpdateStatusRequest,
+  DescribeLLMSdkAccessResponse,
   ModifyInstanceAttackLogPostResponse,
   UpsertCCRuleResponse,
   DescribeHostRequest,
@@ -144,6 +151,7 @@ import {
   DescribeHostsRequest,
   ModifyCustomWhiteRuleStatusRequest,
   ModifyAreaBanRuleRequest,
+  ModifyLLMStatusRequest,
   UpdateRateLimitV2Response,
   ClbWafRegionItem,
   DescribeFindDomainListRequest,
@@ -166,6 +174,7 @@ import {
   HistogramInfo,
   DescribeAccessIndexResponse,
   ModifyUserSignatureRuleRequest,
+  SearchAccessLogRequest,
   CreatePostCKafkaFlowResponse,
   FieldWriteConfig,
   ModifyWafThreatenIntelligenceResponse,
@@ -187,13 +196,16 @@ import {
   ApiEventSample,
   AddCustomWhiteRuleResponse,
   ModifyBatchCustomWhiteRuleStatusRequest,
+  DescribeLLMContentRuleListRequest,
   ModifyUserSignatureClassRequest,
   HostDel,
   DescribeModuleStatusRequest,
+  DescribeLLMSdkAccessRequest,
   DeleteRateLimitsV2Response,
   DeleteAttackWhiteRuleRequest,
   CreateRateLimitV2Request,
   CreateProtectGroupRequest,
+  DeleteLLMContentRuleRequest,
   CreatePostCLSFlowResponse,
   DescribeHostsResponse,
   DescribeAccessIndexRequest,
@@ -219,13 +231,15 @@ import {
   GenerateLLMSecAnswerRequest,
   ApiAsset,
   QueryBypassAllStatusRequest,
-  DescribeOwaspRulesRequest,
+  DeleteLLMKeywordLibraryResponse,
   DescribeCCRuleListRequest,
   EnableClientMsgRequest,
   ResponseCode,
+  ValueLevel,
   PeakPointsItem,
   TopicExtendInfo,
   ModifyAttackWhiteRuleResponse,
+  ModifyLLMContentRuleStatusResponse,
   SearchAccessLogResponse,
   DescribeAntiInfoLeakageRulesRequest,
   CreateHostResponse,
@@ -255,8 +269,10 @@ import {
   DescribeUserSignatureClassResponse,
   DescribePortsRequest,
   DescribeWafAutoDenyStatusResponse,
+  ModifyLLMWafDLPRuleResponse,
   AreaBanRule,
   DescribeTlsVersionRequest,
+  RuleItem,
   DealData,
   ModifyBatchCustomRuleStatusResponse,
   DeleteBatchCustomWhiteRuleResponse,
@@ -274,10 +290,12 @@ import {
   ModifyInstanceRenewFlagRequest,
   UserWhiteRuleItem,
   DescribeBotSceneUCBRuleResponse,
+  TokenDisplaySetting,
   GoodsDetailNew,
   DescribeAreaBanSupportAreasRequest,
   GoodsDetail,
   DeleteIpAccessControlResponse,
+  DescribeLLMKeywordLibraryRequest,
   ToolCallResult,
   BatchIpAccessControlItem,
   UserWhiteRule,
@@ -302,6 +320,7 @@ import {
   GoodNews,
   ModifyBotSceneUCBRuleRequest,
   ScanIpInfo,
+  ModifyLLMWafProtectRuleRequest,
   DescribeUserSignatureRuleRequest,
   DeleteOwaspRuleStatusResponse,
   ModifyProtectionStatusResponse,
@@ -321,13 +340,14 @@ import {
   DownloadAttackRecordInfo,
   ApiSecSensitiveWhiteField,
   DescribeRuleLimitResponse,
-  CreateAccessExportResponse,
+  DeleteProtectGroupRequest,
   LimitPath,
   TLSVersion,
   DescribeBatchCustomWhiteRulesResponse,
   ModifyOwaspRuleTypeLevelRequest,
   GetInstanceQpsLimitRequest,
   LLMMonPkg,
+  ModifyOwaspDomainUpdateStatusResponse,
   ModifyHostRequest,
   ApiSecExcludeRule,
   ModifyProtectGroupRequest,
@@ -341,6 +361,7 @@ import {
   ModifyBotSceneUCBRuleResponse,
   DescribeIpHitItemsResponse,
   ModifyHostResponse,
+  ModifyLLMWafDLPRuleRequest,
   DescribeCertificateVerifyResultRequest,
   DescribeUserCdcClbWafRegionsRequest,
   ParamCompareList,
@@ -371,8 +392,9 @@ import {
   AccessLogItem,
   SwitchDomainRulesRequest,
   DeleteSessionRequest,
-  ModifyOwaspDomainUpdateStatusResponse,
+  LLMKeywordLibrary,
   SearchAttackLogRequest,
+  ModifyIpAccessControlResponse,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
   BatchCustomRuleListItem,
@@ -469,8 +491,9 @@ import {
   DescribeBatchIpAccessControlResponse,
   DescribeDomainDetailsSaasResponse,
   DeleteExportRequest,
-  ModifyApiAnalyzeStatusRequest,
+  ExportLLMKeywordLibRequest,
   ModifyAntiInfoLeakRuleStatusResponse,
+  UpdateProtectionModesRequest,
   LimitRuleV2,
   AddBatchCustomRuleRequest,
   ModifyAreaBanStatusResponse,
@@ -499,7 +522,7 @@ import {
   GetAttackDownloadRecordsResponse,
   DeleteProtectGroupResponse,
   DescribeAreaBanRuleRequest,
-  ModifyIpAccessControlResponse,
+  DescribeApiDetailResponse,
   VipInfo,
   DescribeAccessHistogramResponse,
   DeleteOwaspRuleStatusRequest,
@@ -522,6 +545,7 @@ import {
   DescribeAreaBanAreasRsp,
   UpsertCCRuleRequest,
   DescribeApiSecEventListResponse,
+  ModifyLLMStatusResponse,
   TokenRuleEntry,
   ModifyAreaBanRuleResponse,
   DescribeDomainsRequest,
@@ -531,6 +555,7 @@ import {
   DescribeProtectionModesResponse,
   DescribeApiSecEventDetailRequest,
   DescribeWafAutoDenyRulesResponse,
+  ModifyInstanceNameResponse,
   ModifyDomainPostActionResponse,
   RefreshAccessCheckResultRequest,
   IpHitItemsData,
@@ -539,6 +564,7 @@ import {
   DescribeSpartaProtectionInfoResponse,
   DescribeRateLimitsV2Response,
   ModifyModuleStatusRequest,
+  DeleteLLMContentRuleResponse,
   ModifyUserSignatureRuleV2Response,
   AccessLogItems,
   ModifyInstanceNameRequest,
@@ -562,6 +588,7 @@ import {
   ModifyDomainIpv6StatusRequest,
   SkillScanQueryData,
   DescribeAttackWhiteRuleRequest,
+  LLMSdkAccessItem,
   DescribeAntiInfoLeakageRulesResponse,
   AddAreaBanAreasResponse,
   DescribeScanIpResponse,
@@ -572,6 +599,7 @@ import {
   SecretInfo,
   ImageResult,
   DescribeAttackTypeRequest,
+  CategoryGroup,
   ModifyCustomWhiteRuleRequest,
   DeleteCustomWhiteRuleRequest,
   ModifyInstanceRenewFlagResponse,
@@ -593,6 +621,7 @@ import {
   DescribeExportsRequest,
   ModifyAreaBanAreasRequest,
   ModifyModuleStatusResponse,
+  RuleDetail,
   InOutputBotUCBRule,
   AttackLogInfo,
   ModifyHostStatusResponse,
@@ -606,15 +635,18 @@ import {
   ApiEvent,
   CreateDealsGoods,
   TokenRuleEntryValue,
+  DescribeLLMWafProtectRulesRequest,
   LimitHeader,
   ModifyOwaspWhiteRuleResponse,
   SkillRuleCatalogItem,
   ModifyBotIdRuleResponse,
   ModifyApiSecEventChangeResponse,
+  CreateAccessExportResponse,
   ModifyCustomWhiteRuleStatusResponse,
   AccessFieldValueRatioInfo,
   BatchIpAccessControlData,
   ModifyAntiFakeUrlStatusRequest,
+  DeleteLLMKeywordLibraryRequest,
   DescribePeakValueRequest,
   BotQPS,
   DestroyPostCLSFlowRequest,
@@ -625,10 +657,12 @@ import {
   ApiNameMethod,
   GetAttackTotalCountResponse,
   DescribeDomainRulesResponse,
-  DeleteProtectGroupRequest,
+  DescribeLLMWafDLPRulesRequest,
   CreateDealsResponse,
+  DescribeOwaspRulesRequest,
   EnableClientMsgResponse,
   DestroyPostCKafkaFlowResponse,
+  ModifyLLMContentRuleStatusRequest,
   DescribeCiphersDetailRequest,
   DescribeDomainVerifyResultResponse,
   AddCustomRuleRequest,
@@ -645,14 +679,15 @@ import {
   DescribeOwaspRuleTypesResponse,
   ModifyInstanceElasticModeRequest,
   AutoDenyDetail,
+  ModifyLLMContentRuleRequest,
   DeleteBatchIpAccessControlRequest,
   DescribeWebshellStatusResponse,
-  UpdateProtectionModesRequest,
+  ModifyLLMContentRuleResponse,
   FindAllDomainDetail,
   DescribeProtectGroupResponse,
   DescribeBotSceneOverviewResponse,
   DescribeVipInfoResponse,
-  DescribeApiDetailResponse,
+  DescribeLLMKeywordLibraryResponse,
   ProtectGroupDomainInfo,
   TokenVerifyRule,
   BotTopItem,
@@ -674,7 +709,7 @@ import {
   DescribeHostLimitRequest,
   ClbDomainsInfo,
   DescribeObjectsResponse,
-  SearchAccessLogRequest,
+  ExportLLMKeywordLibResponse,
   MiniExtendPkg,
   CreateOwaspWhiteRuleResponse,
   DomainURI,
@@ -724,6 +759,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePeakPointsResponse) => void
   ): Promise<DescribePeakPointsResponse> {
     return this.request("DescribePeakPoints", req, cb)
+  }
+
+  /**
+   * 查询 DLP 规则
+   */
+  async DescribeLLMWafDLPRules(
+    req: DescribeLLMWafDLPRulesRequest,
+    cb?: (error: string, rep: DescribeLLMWafDLPRulesResponse) => void
+  ): Promise<DescribeLLMWafDLPRulesResponse> {
+    return this.request("DescribeLLMWafDLPRules", req, cb)
   }
 
   /**
@@ -787,6 +832,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询 LLM 规则请求
+   */
+  async DescribeLLMWafProtectRules(
+    req: DescribeLLMWafProtectRulesRequest,
+    cb?: (error: string, rep: DescribeLLMWafProtectRulesResponse) => void
+  ): Promise<DescribeLLMWafProtectRulesResponse> {
+    return this.request("DescribeLLMWafProtectRules", req, cb)
+  }
+
+  /**
    * 按照条件查询展示攻击总次数
    */
   async GetAttackTotalCount(
@@ -814,6 +869,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddCustomWhiteRuleResponse) => void
   ): Promise<AddCustomWhiteRuleResponse> {
     return this.request("AddCustomWhiteRule", req, cb)
+  }
+
+  /**
+   * 修改大模型防护的模块开关状态，支持总开关及各子模块独立开关的开启/关闭操作。开启前需确保实例已购买大模型防护能力，未购买时开启操作会返回 AuthFailure.ErrCodeNoPurchased 错误。
+   */
+  async ModifyLLMStatus(
+    req: ModifyLLMStatusRequest,
+    cb?: (error: string, rep: ModifyLLMStatusResponse) => void
+  ): Promise<ModifyLLMStatusResponse> {
+    return this.request("ModifyLLMStatus", req, cb)
   }
 
   /**
@@ -1299,6 +1364,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Waf IP黑白名单编辑接口
+   */
+  async ModifyIpAccessControl(
+    req: ModifyIpAccessControlRequest,
+    cb?: (error: string, rep: ModifyIpAccessControlResponse) => void
+  ): Promise<ModifyIpAccessControlResponse> {
+    return this.request("ModifyIpAccessControl", req, cb)
+  }
+
+  /**
    * 获取WAF地域封禁支持的地域列表
    */
   async DescribeAreaBanSupportAreas(
@@ -1390,6 +1465,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询sdk接入配置
+   */
+  async DescribeLLMSdkAccess(
+    req: DescribeLLMSdkAccessRequest,
+    cb?: (error: string, rep: DescribeLLMSdkAccessResponse) => void
+  ): Promise<DescribeLLMSdkAccessResponse> {
+    return this.request("DescribeLLMSdkAccess", req, cb)
+  }
+
+  /**
+   * 查询单个saaswaf域名详情
+   */
+  async DescribeDomainDetailsSaas(
+    req: DescribeDomainDetailsSaasRequest,
+    cb?: (error: string, rep: DescribeDomainDetailsSaasResponse) => void
+  ): Promise<DescribeDomainDetailsSaasResponse> {
+    return this.request("DescribeDomainDetailsSaas", req, cb)
+  }
+
+  /**
    * 删除批量精准白名单规则
    */
   async DeleteBatchCustomWhiteRule(
@@ -1427,6 +1522,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAttackHistogramResponse) => void
   ): Promise<GetAttackHistogramResponse> {
     return this.request("GetAttackHistogram", req, cb)
+  }
+
+  /**
+   * 更新大模型内容安全规则
+   */
+  async ModifyLLMContentRule(
+    req: ModifyLLMContentRuleRequest,
+    cb?: (error: string, rep: ModifyLLMContentRuleResponse) => void
+  ): Promise<ModifyLLMContentRuleResponse> {
+    return this.request("ModifyLLMContentRule", req, cb)
   }
 
   /**
@@ -1520,6 +1625,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改实例的自动续费开关
+   */
+  async ModifyInstanceRenewFlag(
+    req: ModifyInstanceRenewFlagRequest,
+    cb?: (error: string, rep: ModifyInstanceRenewFlagResponse) => void
+  ): Promise<ModifyInstanceRenewFlagResponse> {
+    return this.request("ModifyInstanceRenewFlag", req, cb)
+  }
+
+  /**
    * 开关开启后，会将客户端的ip和port透传到后端
    */
   async EnableClientMsg(
@@ -1570,23 +1685,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例的自动续费开关
+   * 删除词库列表
    */
-  async ModifyInstanceRenewFlag(
-    req: ModifyInstanceRenewFlagRequest,
-    cb?: (error: string, rep: ModifyInstanceRenewFlagResponse) => void
-  ): Promise<ModifyInstanceRenewFlagResponse> {
-    return this.request("ModifyInstanceRenewFlag", req, cb)
-  }
-
-  /**
-   * 查询单个saaswaf域名详情
-   */
-  async DescribeDomainDetailsSaas(
-    req: DescribeDomainDetailsSaasRequest,
-    cb?: (error: string, rep: DescribeDomainDetailsSaasResponse) => void
-  ): Promise<DescribeDomainDetailsSaasResponse> {
-    return this.request("DescribeDomainDetailsSaas", req, cb)
+  async DeleteLLMKeywordLibrary(
+    req: DeleteLLMKeywordLibraryRequest,
+    cb?: (error: string, rep: DeleteLLMKeywordLibraryResponse) => void
+  ): Promise<DeleteLLMKeywordLibraryResponse> {
+    return this.request("DeleteLLMKeywordLibrary", req, cb)
   }
 
   /**
@@ -1597,6 +1702,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCCRuleResponse) => void
   ): Promise<DescribeCCRuleResponse> {
     return this.request("DescribeCCRule", req, cb)
+  }
+
+  /**
+   * 用户修改自定义词库
+   */
+  async ModifyLLMKeywordLibrary(
+    req: ModifyLLMKeywordLibraryRequest,
+    cb?: (error: string, rep: ModifyLLMKeywordLibraryResponse) => void
+  ): Promise<ModifyLLMKeywordLibraryResponse> {
+    return this.request("ModifyLLMKeywordLibrary", req, cb)
+  }
+
+  /**
+   * 本接口用于构建日志数量直方图
+   */
+  async DescribeLogHistogram(
+    req: DescribeLogHistogramRequest,
+    cb?: (error: string, rep: DescribeLogHistogramResponse) => void
+  ): Promise<DescribeLogHistogramResponse> {
+    return this.request("DescribeLogHistogram", req, cb)
   }
 
   /**
@@ -1630,16 +1755,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于构建日志数量直方图
-   */
-  async DescribeLogHistogram(
-    req: DescribeLogHistogramRequest,
-    cb?: (error: string, rep: DescribeLogHistogramResponse) => void
-  ): Promise<DescribeLogHistogramResponse> {
-    return this.request("DescribeLogHistogram", req, cb)
-  }
-
-  /**
    * 查询规则引擎的规则类型列表
    */
   async DescribeOwaspRuleTypes(
@@ -1667,6 +1782,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAttackDownloadRecordResponse) => void
   ): Promise<DeleteAttackDownloadRecordResponse> {
     return this.request("DeleteAttackDownloadRecord", req, cb)
+  }
+
+  /**
+   * 修改 LLM 规则
+   */
+  async ModifyLLMWafProtectRule(
+    req: ModifyLLMWafProtectRuleRequest,
+    cb?: (error: string, rep: ModifyLLMWafProtectRuleResponse) => void
+  ): Promise<ModifyLLMWafProtectRuleResponse> {
+    return this.request("ModifyLLMWafProtectRule", req, cb)
   }
 
   /**
@@ -1767,6 +1892,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePolicyStatusResponse) => void
   ): Promise<DescribePolicyStatusResponse> {
     return this.request("DescribePolicyStatus", req, cb)
+  }
+
+  /**
+   * 导出词库文件
+   */
+  async ExportLLMKeywordLib(
+    req: ExportLLMKeywordLibRequest,
+    cb?: (error: string, rep: ExportLLMKeywordLibResponse) => void
+  ): Promise<ExportLLMKeywordLibResponse> {
+    return this.request("ExportLLMKeywordLib", req, cb)
   }
 
   /**
@@ -1900,6 +2035,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除大模型内容防护规则
+   */
+  async DeleteLLMContentRule(
+    req: DeleteLLMContentRuleRequest,
+    cb?: (error: string, rep: DeleteLLMContentRuleResponse) => void
+  ): Promise<DeleteLLMContentRuleResponse> {
+    return this.request("DeleteLLMContentRule", req, cb)
+  }
+
+  /**
    * 修改防护域名的地域封禁状态
    */
   async ModifyAreaBanStatus(
@@ -1910,13 +2055,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Waf IP黑白名单编辑接口
+   * 查询关键词列表
    */
-  async ModifyIpAccessControl(
-    req: ModifyIpAccessControlRequest,
-    cb?: (error: string, rep: ModifyIpAccessControlResponse) => void
-  ): Promise<ModifyIpAccessControlResponse> {
-    return this.request("ModifyIpAccessControl", req, cb)
+  async DescribeLLMKeywordLibrary(
+    req: DescribeLLMKeywordLibraryRequest,
+    cb?: (error: string, rep: DescribeLLMKeywordLibraryResponse) => void
+  ): Promise<DescribeLLMKeywordLibraryResponse> {
+    return this.request("DescribeLLMKeywordLibrary", req, cb)
   }
 
   /**
@@ -1977,6 +2122,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBatchIpAccessControlResponse) => void
   ): Promise<CreateBatchIpAccessControlResponse> {
     return this.request("CreateBatchIpAccessControl", req, cb)
+  }
+
+  /**
+   * 获取LLM大模型内容防护规则
+   */
+  async DescribeLLMContentRuleList(
+    req?: DescribeLLMContentRuleListRequest,
+    cb?: (error: string, rep: DescribeLLMContentRuleListResponse) => void
+  ): Promise<DescribeLLMContentRuleListResponse> {
+    return this.request("DescribeLLMContentRuleList", req, cb)
   }
 
   /**
@@ -2117,6 +2272,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProtectGroupResponse) => void
   ): Promise<CreateProtectGroupResponse> {
     return this.request("CreateProtectGroup", req, cb)
+  }
+
+  /**
+   * Waf  CC V2 Upsert接口
+   */
+  async UpsertCCRule(
+    req: UpsertCCRuleRequest,
+    cb?: (error: string, rep: UpsertCCRuleResponse) => void
+  ): Promise<UpsertCCRuleResponse> {
+    return this.request("UpsertCCRule", req, cb)
   }
 
   /**
@@ -2503,6 +2668,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 切换大模型内容防护规则开关
+   */
+  async ModifyLLMContentRuleStatus(
+    req: ModifyLLMContentRuleStatusRequest,
+    cb?: (error: string, rep: ModifyLLMContentRuleStatusResponse) => void
+  ): Promise<ModifyLLMContentRuleStatusResponse> {
+    return this.request("ModifyLLMContentRuleStatus", req, cb)
+  }
+
+  /**
    * 供用户控制台调用，修改Tiga规则引擎白名单。
    */
   async ModifyAttackWhiteRule(
@@ -2755,13 +2930,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Waf  CC V2 Upsert接口
+   * 修改llmwaf DLP 规则
    */
-  async UpsertCCRule(
-    req: UpsertCCRuleRequest,
-    cb?: (error: string, rep: UpsertCCRuleResponse) => void
-  ): Promise<UpsertCCRuleResponse> {
-    return this.request("UpsertCCRule", req, cb)
+  async ModifyLLMWafDLPRule(
+    req: ModifyLLMWafDLPRuleRequest,
+    cb?: (error: string, rep: ModifyLLMWafDLPRuleResponse) => void
+  ): Promise<ModifyLLMWafDLPRuleResponse> {
+    return this.request("ModifyLLMWafDLPRule", req, cb)
   }
 
   /**

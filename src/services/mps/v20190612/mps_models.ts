@@ -1887,7 +1887,7 @@ export interface OcrWordsConfigureInfo {
  */
 export interface DescribeStreamLinkEventRequest {
   /**
-   * 媒体传输事件ID。
+   * <p>媒体传输事件ID。</p>
    */
   EventId: string
 }
@@ -5267,7 +5267,7 @@ export interface CreateStreamLinkSecurityGroupRequest {
  */
 export interface DescribeStreamLinkEventResponse {
   /**
-   * 媒体传输事件的配置信息。
+   * <p>媒体传输事件的配置信息。</p>
    */
   Info: DescribeEvent
   /**
@@ -7534,23 +7534,23 @@ export interface FaceConfigureInfo {
  */
 export interface DescribeStreamLinkEventsResponse {
   /**
-   * 媒体传输事件的配置信息列表。
+   * <p>媒体传输事件的配置信息列表。</p>
    */
   Infos?: Array<DescribeEvent>
   /**
-   * 当前页数。
+   * <p>当前页数。</p>
    */
   PageNum?: number
   /**
-   * 每页大小。
+   * <p>每页大小。</p>
    */
   PageSize?: number
   /**
-   * 总数量。
+   * <p>总数量。</p>
    */
   TotalNum?: number
   /**
-   * 总页数。
+   * <p>总页数。</p>
    */
   TotalPage?: number
   /**
@@ -9824,7 +9824,7 @@ export interface AudioEnhanceEditConfig {
    */
   Switch?: string
   /**
-   * <p>音频编辑类型</p><p>枚举值：</p><ul><li>restore： 修复</li></ul><p>默认值：restore</p>
+   * <p>音频编辑类型</p><p>枚举值：</p><ul><li>restore： 修复</li></ul><p>开关开启时，必须显式指定枚举值</p>
    */
   Type?: string
 }
@@ -11665,11 +11665,11 @@ export interface AddBlindWatermarkConfig {
  */
 export interface CreateAigcVideoTaskRequest {
   /**
-   * <p>模型名称。<br>当前支持的模型列表:<br>Hunyuan，<br>Hailuo，<br>Kling，<br>Vidu，<br>PixVerse，<br>Mingmou，<br>H2。</p>
+   * <p>模型名称。<br>当前支持的模型列表:<br>Hunyuan，<br>wand-vega-video，<br>Hailuo，<br>Kling，<br>Vidu，<br>PixVerse，<br>Mingmou，<br>H2。</p>
    */
   ModelName?: string
   /**
-   * <p>指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。</p><ol><li>Hunyuan，可选 [1.5]。</li><li>Hailuo，可选 [02、2.3、2.3-fast]。</li><li>Kling，可选 [1.6、2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。</li><li>Vidu，可选 [q2、q2-pro、q2-turbo、q3-pro、q3-turbo、q3、q3-mix]。</li><li>PixVerse，可选 [v5.6、v6、c1]。</li><li>H2，可选 [1.0]。</li></ol>
+   * <p>指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。</p><ol><li>Hunyuan，可选 [1.5]。</li><li>wand-vega-video, 可选[1.0-lite]。</li><li>Hailuo，可选 [02、2.3、2.3-fast]。</li><li>Kling，可选 [1.6、2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。</li><li>Vidu，可选 [q2、q2-pro、q2-turbo、q3-pro、q3-turbo、q3、q3-mix]。</li><li>PixVerse，可选 [v5.6、v6、c1]。</li><li>H2，可选 [1.0]。</li></ol>
    */
   ModelVersion?: string
   /**
@@ -11693,11 +11693,11 @@ export interface CreateAigcVideoTaskRequest {
    */
   ImageUrl?: string
   /**
-   * <p>模型将以此参数传入的图片作为尾帧画面来生成视频。<br>支持此参数的模型：</p><ol><li>Kling，2.0、O1、3.0、3.0-Omni 支持首尾帧。</li><li>Kling，1.6、2.1、2.5、2.6 在 Resolution:1080P 的情况下支持首尾帧。</li><li>Vidu，q2-pro、q2-turbo、q3-pro、q3-turbo 支持首尾帧。</li><li>PixVerse，v5.6、v6、c1 支持首尾帧。</li><li>Hailuo，02 支持首尾帧。</li></ol><p>注意：</p><ol><li>推荐图片大小不超过10M，各模型限制不同。</li><li>支持的图片格式：jpeg、png。</li></ol>
+   * <p>模型将以此参数传入的图片作为尾帧画面来生成视频。<br>支持此参数的模型：</p><ol><li>Kling，2.0、O1、3.0、3.0-Omni 支持首尾帧。</li><li>Kling，1.6、2.1、2.5、2.6 在 Resolution:1080P 的情况下支持首尾帧。</li><li>Vidu，q2-pro、q2-turbo、q3-pro、q3-turbo 支持首尾帧。</li><li>PixVerse，v5.6、v6、c1 支持首尾帧。</li><li>Hailuo，02 支持首尾帧。</li><li>wand-vega-video，1.0-lite 支持首尾帧。</li></ol><p>注意：</p><ol><li>推荐图片大小不超过10M，各模型限制不同。</li><li>支持的图片格式：jpeg、png。</li></ol>
    */
   LastImageUrl?: string
   /**
-   * <p>包含多张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。</p><p>支持多图输入的模型：</p><ol><li>Vidu，q2、q2-pro、q3-turbo、q3、q3-mix 支持多图参考生视频。支持上传 1-7 张图片，可通过 ImageInfos 里面的 ReferenceType 作为主体 id 来传入。</li><li>Kling，O1、3.0-Omni、1.6 支持多图参考生视频。<ol><li>Kling 1.6 支持上传 1-4 张图片。</li><li>Kling O1、3.0-Omni 支持上传 1-7 张图片。当有参考视频时，支持上传 0-4 张图片。</li></ol></li><li>PixVerse，v5.6、v6、c1 支持多图参考生视频。支持上传 1-7 张图片，需要通过 ImageInfos 里面的 Text 字段传入图片名称。</li><li>H2，1.0 支持多图参数生视频。支持上传 1-9 张图片。当有参考视频时，支持上传 0-5 张图片。</li></ol><p>注意：</p><ol><li>图片大小不超过10M。</li><li>支持的图片格式：jpeg、png。</li></ol>
+   * <p>包含多张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。</p><p>支持多图输入的模型：</p><ol><li>Vidu，q2、q2-pro、q3-turbo、q3、q3-mix 支持多图参考生视频。支持上传 1-7 张图片，可通过 ImageInfos 里面的 ReferenceType 作为主体 id 来传入。</li><li>wand-vega-video，1.0-lite支持最多9张参考图。</li><li>Kling，O1、3.0-Omni、1.6 支持多图参考生视频。<ol><li>Kling 1.6 支持上传 1-4 张图片。</li><li>Kling O1、3.0-Omni 支持上传 1-7 张图片。当有参考视频时，支持上传 0-4 张图片。</li></ol></li><li>PixVerse，v5.6、v6、c1 支持多图参考生视频。支持上传 1-7 张图片，需要通过 ImageInfos 里面的 Text 字段传入图片名称。</li><li>H2，1.0 支持多图参数生视频。支持上传 1-9 张图片。当有参考视频时，支持上传 0-5 张图片。</li></ol><p>注意：</p><ol><li>图片大小不超过10M。</li><li>支持的图片格式：jpeg、png。</li></ol>
    */
   ImageInfos?: Array<AigcVideoReferenceImageInfo>
   /**
@@ -11713,7 +11713,7 @@ export interface CreateAigcVideoTaskRequest {
    */
   SubjectInfos?: Array<AigcVideoReferenceSubjectInfo>
   /**
-   * <p>生成视频的时长。<br>注意：</p><ol><li>Kling，默认：5 秒。<ul><li>O1 支持 3-10 秒。</li><li>3.0-Omni 支持 3-15 秒，当使用视频参考时只支持 3-10 秒。</li><li>3.0 支持 3-15 秒。</li><li>其他版本支持 5、10 秒。</li></ul></li><li>Hailuo 的 std 模式可支持 6、10 秒，其他仅 6 秒。默认：6 秒。</li><li>Vidu，默认：5 秒。<ul><li>q3-pro、q3-turbo、q3、q3-mix 支持 3-16 秒。</li><li>q2-pro、q2-turbo、q2 支持 1-10 秒。 </li></ul></li><li>PixVerse，默认：5 秒。<ul><li>v5.6 支持 5、8、10 秒。</li><li>v6、c1 支持 1-15 秒。</li></ul></li><li>H2，支持 3-15 秒，默认 ：5 秒。</li></ol>
+   * <p>生成视频的时长。<br>注意：</p><ol><li>Kling，默认：5 秒。<ul><li>O1 支持 3-10 秒。</li><li>3.0-Omni 支持 3-15 秒，当使用视频参考时只支持 3-10 秒。</li><li>3.0 支持 3-15 秒。</li><li>其他版本支持 5、10 秒。</li></ul></li><li>wand-vega-video, 1.0-lite支持：4-15秒。</li><li>Hailuo 的 std 模式可支持 6、10 秒，其他仅 6 秒。默认：6 秒。</li><li>Vidu，默认：5 秒。<ul><li>q3-pro、q3-turbo、q3、q3-mix 支持 3-16 秒。</li><li>q2-pro、q2-turbo、q2 支持 1-10 秒。 </li></ul></li><li>PixVerse，默认：5 秒。<ul><li>v5.6 支持 5、8、10 秒。</li><li>v6、c1 支持 1-15 秒。</li></ul></li><li>H2，支持 3-15 秒，默认 ：5 秒。</li></ol>
    */
   Duration?: number
   /**
@@ -12705,11 +12705,11 @@ export interface DescribeGroupAttachFlowsByIdRequest {
  */
 export interface DescribeWorkflowsResponse {
   /**
-   * 符合过滤条件的记录总数。
+   * <p>符合过滤条件的记录总数。</p>
    */
   TotalCount?: number
   /**
-   * 工作流信息数组。
+   * <p>工作流信息数组。</p>
    */
   WorkflowInfoSet?: Array<WorkflowInfo>
   /**
@@ -18535,11 +18535,11 @@ export interface DescribeStreamPackageSourceRequest {
  */
 export interface DescribeStreamLinkEventsRequest {
   /**
-   * 当前页数，默认1。
+   * <p>当前页数，默认1。</p>
    */
   PageNum?: number
   /**
-   * 每页大小，默认10。
+   * <p>每页大小，默认10。</p>
    */
   PageSize?: number
 }
@@ -21283,7 +21283,7 @@ export interface ModifyStreamLinkInputResponse {
   /**
    * 修改后的Input信息。
    */
-  Info: DescribeInput
+  Info?: DescribeInput
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23284,22 +23284,19 @@ export interface FlowRealtimeStatusItem {
  */
 export interface DescribeWorkflowsRequest {
   /**
-   * 工作流 ID 过滤条件，数组长度限制：100。
+   * <p>工作流 ID 过滤条件，数组长度限制：100。</p>
    */
   WorkflowIds?: Array<number | bigint>
   /**
-   * 工作流状态，取值范围：
-<li>Enabled：已启用，</li>
-<li>Disabled：已禁用。</li>
-不填此参数，则不区分工作流状态。
+   * <p>工作流状态，取值范围：</p><li>Enabled：已启用，</li><li>Disabled：已禁用。</li>不填此参数，则不区分工作流状态。
    */
   Status?: string
   /**
-   * 分页偏移量，默认值：0。
+   * <p>分页偏移量，默认值：0。</p>
    */
   Offset?: number
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * <p>返回记录条数，默认值：10，最大值：100。</p>
    */
   Limit?: number
 }
@@ -26522,11 +26519,11 @@ export interface OcrFullTextConfigureInfo {
  */
 export interface CreateStreamLinkInputRequest {
   /**
-   * 媒体传输流ID。
+   * <p>媒体传输流ID。</p>
    */
   FlowId: string
   /**
-   * 流的输入组。
+   * <p>流的输入组。</p>
    */
   InputGroup?: Array<CreateInput>
 }
@@ -27894,7 +27891,7 @@ export interface StreamSelector {
  */
 export interface CreateStreamLinkInputResponse {
   /**
-   * 创建的Flow信息。
+   * <p>创建的Flow信息。</p>
    */
   Info?: DescribeFlow
   /**

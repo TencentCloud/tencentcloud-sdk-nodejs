@@ -28,9 +28,9 @@ it("adp.v20260520.DeleteAppTrigger", async function () {
     }
 })
 
-it("adp.v20260520.DescribeLabel", async function () {
+it("adp.v20260520.DescribeSkillSummaryList", async function () {
     try {
-       const data = await client.DescribeLabel({})
+       const data = await client.DescribeSkillSummaryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("adp.v20260520.ModifyChannel", async function () {
     }
 })
 
-it("adp.v20260520.DescribeAppTriggerRunLogList", async function () {
+it("adp.v20260520.DescribeModelList", async function () {
     try {
-       const data = await client.DescribeAppTriggerRunLogList({})
+       const data = await client.DescribeModelList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,6 +138,16 @@ it("adp.v20260520.DescribeResourceSummary", async function () {
     }
 })
 
+it("adp.v20260520.SaveWorkflowDebugContext", async function () {
+    try {
+       const data = await client.SaveWorkflowDebugContext({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeKBSummaryList", async function () {
     try {
        const data = await client.DescribeKBSummaryList({})
@@ -151,6 +161,16 @@ it("adp.v20260520.DescribeKBSummaryList", async function () {
 it("adp.v20260520.ModifyAgent", async function () {
     try {
        const data = await client.ModifyAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeWorkflowRunSummaryList", async function () {
+    try {
+       const data = await client.DescribeWorkflowRunSummaryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +308,16 @@ it("adp.v20260520.RollbackRelease", async function () {
     }
 })
 
+it("adp.v20260520.SaveWorkflowToolNodeOutput", async function () {
+    try {
+       const data = await client.SaveWorkflowToolNodeOutput({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeAgentSummaryList", async function () {
     try {
        const data = await client.DescribeAgentSummaryList({})
@@ -361,6 +391,16 @@ it("adp.v20260520.CheckLabel", async function () {
 it("adp.v20260520.ModifyMsgRecordCategory", async function () {
     try {
        const data = await client.ModifyMsgRecordCategory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeVariable", async function () {
+    try {
+       const data = await client.DescribeVariable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +598,29 @@ it("adp.v20260520.CreateWebSocketToken", async function () {
     }
 })
 
+it("adp.v20260520.StopWorkflowRunList", async function () {
+    try {
+       const data = await client.StopWorkflowRunList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeSpaceList", async function () {
     try {
        const data = await client.DescribeSpaceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ResumeWorkflowRun", async function () {
+    try {
+       const data = await client.ResumeWorkflowRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +778,9 @@ it("adp.v20260520.DescribeAuditLogList", async function () {
     }
 })
 
-it("adp.v20260520.DescribeVariable", async function () {
+it("adp.v20260520.CreateWorkflowRun", async function () {
     try {
-       const data = await client.DescribeVariable({})
+       const data = await client.CreateWorkflowRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,9 +918,9 @@ it("adp.v20260520.DescribePlugin", async function () {
     }
 })
 
-it("adp.v20260520.DescribeSkillSummaryList", async function () {
+it("adp.v20260520.DescribeLabel", async function () {
     try {
-       const data = await client.DescribeSkillSummaryList({})
+       const data = await client.DescribeLabel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -901,6 +961,16 @@ it("adp.v20260520.DescribeConcurrencyLimitDetailList", async function () {
 it("adp.v20260520.DescribeAccountList", async function () {
     try {
        const data = await client.DescribeAccountList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeNodeBatchRun", async function () {
+    try {
+       const data = await client.DescribeNodeBatchRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -951,6 +1021,16 @@ it("adp.v20260520.ModifyQA", async function () {
 it("adp.v20260520.DescribeSystemVariableList", async function () {
     try {
        const data = await client.DescribeSystemVariableList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeNodeRunDetail", async function () {
+    try {
+       const data = await client.DescribeNodeRunDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,9 +1148,19 @@ it("adp.v20260520.CreateQAList", async function () {
     }
 })
 
-it("adp.v20260520.DescribeModelList", async function () {
+it("adp.v20260520.DescribeAppTriggerRunLogList", async function () {
     try {
-       const data = await client.DescribeModelList({})
+       const data = await client.DescribeAppTriggerRunLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeWorkflowRun", async function () {
+    try {
+       const data = await client.DescribeWorkflowRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

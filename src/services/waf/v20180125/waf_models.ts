@@ -16,6 +16,20 @@
  */
 
 /**
+ * DescribeLLMWafDLPRules返回参数结构体
+ */
+export interface DescribeLLMWafDLPRulesResponse {
+  /**
+   * <p>规则列表</p>
+   */
+  Rules?: Array<RuleDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * api安全自定义事件规则结构体
  */
 export interface ApiSecCustomEventRule {
@@ -666,6 +680,20 @@ export interface SearchLogResponse {
 }
 
 /**
+ * DescribeLLMWafProtectRules返回参数结构体
+ */
+export interface DescribeLLMWafProtectRulesResponse {
+  /**
+   * <p>类别列表</p>
+   */
+  Categories?: Array<CategoryGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyUserSignatureClass返回参数结构体
  */
 export interface ModifyUserSignatureClassResponse {
@@ -878,17 +906,25 @@ export interface ModifyUserSignatureRuleResponse {
 }
 
 /**
- * ModifyInstanceName返回参数结构体
+ * ModifyApiAnalyzeStatus请求参数结构体
  */
-export interface ModifyInstanceNameResponse {
+export interface ModifyApiAnalyzeStatusRequest {
   /**
-   * 修改状态：0为成功
+   * 开关状态
    */
-  ModifyCode?: number
+  Status: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 域名
    */
-  RequestId?: string
+  Domain?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 需要批量开启的实体列表
+   */
+  TargetList?: Array<TargetEntity>
 }
 
 /**
@@ -1098,6 +1134,16 @@ export interface MajorEventsPkg {
 }
 
 /**
+ * DescribeLLMContentRuleList返回参数结构体
+ */
+export interface DescribeLLMContentRuleListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDomainRules请求参数结构体
  */
 export interface DescribeDomainRulesRequest {
@@ -1121,6 +1167,16 @@ export interface DescribeScanIpRequest {
  * DeleteAccessExport返回参数结构体
  */
 export interface DeleteAccessExportResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLLMWafProtectRule返回参数结构体
+ */
+export interface ModifyLLMWafProtectRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1184,17 +1240,29 @@ export interface AccessKeyValueInfo {
 }
 
 /**
- * JWT显示设置（只有当校验方式为JWS/JWE的时候才会有该配置信息）
+ * 大模型Rule生效条件
  */
-export interface TokenDisplaySetting {
+export interface LLMOptionsItem {
   /**
-   * 是否使用payload字段作为显示token
+   * 键
    */
-  DisplayWithPayloadEnable?: boolean
+  Key?: string
   /**
-   * 用于显示的payload字段名
+   * 操作符
    */
-  FieldName?: string
+  Op?: string
+  /**
+   * 值
+   */
+  Value?: Array<string>
+  /**
+   * Header参数值时使用
+   */
+  Name?: string
+  /**
+   * 区域选择
+   */
+  Areas?: Array<Area>
 }
 
 /**
@@ -2152,6 +2220,16 @@ export interface ModifyAntiInfoLeakRuleStatusRequest {
 }
 
 /**
+ * ModifyLLMKeywordLibrary请求参数结构体
+ */
+export interface ModifyLLMKeywordLibraryRequest {
+  /**
+   * 新增的关键词库列表
+   */
+  LibList: Array<LLMKeywordLibrary>
+}
+
+/**
  * CreateDeals请求参数结构体
  */
 export interface CreateDealsRequest {
@@ -2603,6 +2681,20 @@ export interface DescribePostCKafkaFlowsResponse {
 }
 
 /**
+ * ModifyLLMKeywordLibrary返回参数结构体
+ */
+export interface ModifyLLMKeywordLibraryResponse {
+  /**
+   * 成功创建的列表id
+   */
+  RuleIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 规则的匹配条件结构体
  */
 export interface Strategy {
@@ -2833,6 +2925,24 @@ export interface ModifyOwaspDomainUpdateStatusRequest {
    * 新规则状态，0为关闭，1为开启，2为仅观察
    */
   UpdateStatus: number
+}
+
+/**
+ * DescribeLLMSdkAccess返回参数结构体
+ */
+export interface DescribeLLMSdkAccessResponse {
+  /**
+   * 查询结果中规则数量
+   */
+  Total?: number
+  /**
+   * 操作结果
+   */
+  Data?: Array<LLMSdkAccessItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3092,6 +3202,28 @@ export interface ModifyAreaBanRuleRequest {
    * 地域信息的语言，支持cn、en，默认为中文cn
    */
   Lang?: string
+}
+
+/**
+ * ModifyLLMStatus请求参数结构体
+ */
+export interface ModifyLLMStatusRequest {
+  /**
+   * <p>开关状态。true：开启，false：关闭。</p>
+   */
+  Status: boolean
+  /**
+   * <p>需要操作的域名或者serviceid</p>
+   */
+  Domain: string
+  /**
+   * <p>开关类型，用于指定要操作的防护模块开关。取值如下：<br>1：防护总开关，控制大模型防护功能的全局开启/关闭。<br>2：算力消耗防护规则开关，控制算力消耗限制功能的开启/关闭。<br>3：自定义防护规则开关，控制内容安全自定义规则功能的开启/关闭。<br>4：ToolCall 防护开关，控制工具调用安全检测功能的开启/关闭。<br>5：提示词攻击防护开关，控制提示词注入/越狱攻击检测功能的开启/关闭。<br>6：内容合规检测开关，控制输入输出内容合规检测功能的开启/关闭。<br>7：敏感数据检测开关，控制敏感信息泄露检测（DLP）功能的开启/关闭。<br>8：Skill 安全检测开关，控制 Skill/Plugin 调用安全检测功能的开启/关闭。<br>9：意图行为检测开关，控制用户意图识别与行为检测功能的开启/关闭。<br>10：恶意URL检测开关，控制响应中恶意链接检测功能的开启/关闭。</p>
+   */
+  SwitchType: number
+  /**
+   * <p>WAF 实例 ID，表示当前操作所属的 WAF 实例。可通过 DescribeInstances 接口获取。</p>
+   */
+  InstanceId?: string
 }
 
 /**
@@ -3825,6 +3957,44 @@ export interface ModifyUserSignatureRuleRequest {
 }
 
 /**
+ * SearchAccessLog请求参数结构体
+ */
+export interface SearchAccessLogRequest {
+  /**
+   * 客户要查询的日志主题ID，每个客户都有对应的一个主题，新版本此字段填空字符串
+   */
+  TopicId: string
+  /**
+   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   */
+  From: number
+  /**
+   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   */
+  To: number
+  /**
+   * 查询语句，语句长度最大为4096
+   */
+  Query: string
+  /**
+   * 单次查询返回的日志条数，最大值为100
+   */
+  Limit?: number
+  /**
+   * 新版本此字段失效，填空字符串，翻页使用Page
+   */
+  Context?: string
+  /**
+   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   */
+  Sort?: string
+  /**
+   * 第几页，从0开始。新版本接口字段
+   */
+  Page?: number
+}
+
+/**
  * CreatePostCKafkaFlow返回参数结构体
  */
 export interface CreatePostCKafkaFlowResponse {
@@ -4404,6 +4574,11 @@ export interface ModifyBatchCustomWhiteRuleStatusRequest {
 }
 
 /**
+ * DescribeLLMContentRuleList请求参数结构体
+ */
+export type DescribeLLMContentRuleListRequest = null
+
+/**
  * ModifyUserSignatureClass请求参数结构体
  */
 export interface ModifyUserSignatureClassRequest {
@@ -4447,6 +4622,36 @@ export interface DescribeModuleStatusRequest {
    * 要查询状态的域名
    */
   Domain: string
+}
+
+/**
+ * DescribeLLMSdkAccess请求参数结构体
+ */
+export interface DescribeLLMSdkAccessRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 分页的起始位置
+   */
+  Offset?: number
+  /**
+   * 每页行数
+   */
+  Limit?: number
+  /**
+   * 过滤器
+   */
+  Filters?: Array<FiltersItemNew>
+  /**
+   * 支持根据ts排序
+   */
+  By?: string
+  /**
+   * asc或者desc
+   */
+  Order?: string
 }
 
 /**
@@ -4591,6 +4796,20 @@ export interface CreateProtectGroupRequest {
    * <p>标签信息</p>
    */
   Tags?: Array<TagInfo>
+}
+
+/**
+ * DeleteLLMContentRule请求参数结构体
+ */
+export interface DeleteLLMContentRuleRequest {
+  /**
+   * <p>Id列表</p>
+   */
+  Ids: Array<string>
+  /**
+   * <p>域名</p>
+   */
+  Domain?: string
 }
 
 /**
@@ -5294,33 +5513,13 @@ export interface ApiAsset {
 export type QueryBypassAllStatusRequest = null
 
 /**
- * DescribeOwaspRules请求参数结构体
+ * DeleteLLMKeywordLibrary返回参数结构体
  */
-export interface DescribeOwaspRulesRequest {
+export interface DeleteLLMKeywordLibraryResponse {
   /**
-   * 需要查询的域名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Domain: string
-  /**
-   * 分页页数，默认为0
-   */
-  Offset?: number
-  /**
-   * 每页容量，默认为10
-   */
-  Limit?: number
-  /**
-   * 排序字段，支持 RuleId, ModifyTime
-   */
-  By?: string
-  /**
-   * 排序方式，支持asc、desc
-   */
-  Order?: string
-  /**
-   * 筛选条件，支持 RuleId：规则ID、TypeId：规则类型、Desc：规则描述 、CveID：CVE编号、Status：规则状态、VulLevel：威胁等级
-   */
-  Filters?: Array<FiltersItemNew>
+  RequestId?: string
 }
 
 /**
@@ -5379,6 +5578,20 @@ export interface ResponseCode {
    * 如果成功则返回Success，失败则返回WAF定义的二级错误码
    */
   Message?: string
+}
+
+/**
+ * 大模型内容安全，不当信息配置中，敏感度配置
+ */
+export interface ValueLevel {
+  /**
+   * 标签，如政治等
+   */
+  Label: string
+  /**
+   * 敏感度
+   */
+  Level: number
 }
 
 /**
@@ -5494,6 +5707,16 @@ export interface ModifyAttackWhiteRuleResponse {
    * 规则总数
    */
   RuleId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLLMContentRuleStatus返回参数结构体
+ */
+export interface ModifyLLMContentRuleStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6150,6 +6373,16 @@ export interface DescribeWafAutoDenyStatusResponse {
 }
 
 /**
+ * ModifyLLMWafDLPRule返回参数结构体
+ */
+export interface ModifyLLMWafDLPRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 地域封禁规则详情
  */
 export interface AreaBanRule {
@@ -6187,6 +6420,29 @@ export interface AreaBanRule {
  * DescribeTlsVersion请求参数结构体
  */
 export type DescribeTlsVersionRequest = null
+
+/**
+ * 大模型检测内容匹配
+ */
+export interface RuleItem {
+  /**
+   *  信息类型
+   */
+  Key?: string
+  /**
+   *  操作符，默认是包含
+
+   */
+  Op?: string
+  /**
+   * 信息类型
+   */
+  Value?: Array<string>
+  /**
+   * 信息类
+   */
+  Levels?: Array<ValueLevel>
+}
 
 /**
  * 计费下单响应实体
@@ -6568,6 +6824,20 @@ export interface DescribeBotSceneUCBRuleResponse {
 }
 
 /**
+ * JWT显示设置（只有当校验方式为JWS/JWE的时候才会有该配置信息）
+ */
+export interface TokenDisplaySetting {
+  /**
+   * 是否使用payload字段作为显示token
+   */
+  DisplayWithPayloadEnable?: boolean
+  /**
+   * 用于显示的payload字段名
+   */
+  FieldName?: string
+}
+
+/**
  * 产品明细
  */
 export interface GoodsDetailNew {
@@ -6758,6 +7028,50 @@ export interface DeleteIpAccessControlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLLMKeywordLibrary请求参数结构体
+ */
+export interface DescribeLLMKeywordLibraryRequest {
+  /**
+   * 词库类型筛选
+枚举值：
+custom：自定义黑库
+builtin：内置词库
+all：全部词库
+white：自定义白库
+   */
+  Type: string
+  /**
+   * 分页偏移量
+取值范围：[0, +∞)
+默认值：0
+   */
+  Offset?: number
+  /**
+   * 每页返回数量
+取值范围：[1, 1000]
+默认值：10
+   */
+  Limit?: number
+  /**
+   * 排序字段
+枚举值：
+UpdateTime：按更新时间排序
+CreateTime：按创建时间排序
+Name：按名称排序
+默认值：UpdateTime
+   */
+  By?: string
+  /**
+   * 排序方向
+枚举值：
+ASC：升序
+DESC：降序
+默认值：DESC
+   */
+  Order?: string
 }
 
 /**
@@ -7522,6 +7836,36 @@ export interface ScanIpInfo {
 }
 
 /**
+ * ModifyLLMWafProtectRule请求参数结构体
+ */
+export interface ModifyLLMWafProtectRuleRequest {
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceId: string
+  /**
+   * <p>要修改的规则id列表</p>
+   */
+  RuleIds: Array<string>
+  /**
+   * <p>规则动作</p>
+   */
+  RuleAction?: string
+  /**
+   * <p>开关</p>
+   */
+  Status?: number
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>检测方向：1是入向，2是出向，3是入向和出向都检测</p>
+   */
+  Direction?: number
+}
+
+/**
  * DescribeUserSignatureRule请求参数结构体
  */
 export interface DescribeUserSignatureRuleRequest {
@@ -7964,17 +8308,13 @@ export interface DescribeRuleLimitResponse {
 }
 
 /**
- * CreateAccessExport返回参数结构体
+ * DeleteProtectGroup请求参数结构体
  */
-export interface CreateAccessExportResponse {
+export interface DeleteProtectGroupRequest {
   /**
-   * 日志导出ID。
+   * 防护对象组ID列表，支持批量删除
    */
-  ExportId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  GroupIds?: Array<number | bigint>
 }
 
 /**
@@ -8098,6 +8438,16 @@ export interface LLMMonPkg {
    * 实例id
    */
   InstanceId?: string
+}
+
+/**
+ * ModifyOwaspDomainUpdateStatus返回参数结构体
+ */
+export interface ModifyOwaspDomainUpdateStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8476,6 +8826,36 @@ export interface ModifyHostResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLLMWafDLPRule请求参数结构体
+ */
+export interface ModifyLLMWafDLPRuleRequest {
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceId: string
+  /**
+   * <p>要修改的规则id列表</p>
+   */
+  RuleIds: Array<string>
+  /**
+   * <p>动作</p>
+   */
+  RuleAction?: string
+  /**
+   * <p>开关</p>
+   */
+  Status?: number
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>检测方向：1是入向，2是出向，3是入向和出向都检测</p>
+   */
+  Direction?: number
 }
 
 /**
@@ -9129,13 +9509,41 @@ export interface DeleteSessionRequest {
 }
 
 /**
- * ModifyOwaspDomainUpdateStatus返回参数结构体
+ * LLM waf 自定义词库实体
  */
-export interface ModifyOwaspDomainUpdateStatusResponse {
+export interface LLMKeywordLibrary {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 词库名
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 词库描述
+   */
+  Description: string
+  /**
+   * 词库类型，custom 或 builtin
+   */
+  Type: string
+  /**
+   * 关键词列表
+   */
+  Keywords: Array<string>
+  /**
+   * 词库规则 id
+   */
+  RuleId?: string
+  /**
+   * 被引用的规则 id 列表
+   */
+  ReferencedRules?: Array<string>
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 词库类别：black-黑库(默认)，white-白库；空值按黑库处理
+   */
+  Category?: string
 }
 
 /**
@@ -9174,6 +9582,16 @@ export interface SearchAttackLogRequest {
    * 第几页，从0开始
    */
   Page?: number
+}
+
+/**
+ * ModifyIpAccessControl返回参数结构体
+ */
+export interface ModifyIpAccessControlResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12036,25 +12454,13 @@ export interface DeleteExportRequest {
 }
 
 /**
- * ModifyApiAnalyzeStatus请求参数结构体
+ * ExportLLMKeywordLib请求参数结构体
  */
-export interface ModifyApiAnalyzeStatusRequest {
+export interface ExportLLMKeywordLibRequest {
   /**
-   * 开关状态
+   * 要导出的词库id列表
    */
-  Status: number
-  /**
-   * 域名
-   */
-  Domain?: string
-  /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 需要批量开启的实体列表
-   */
-  TargetList?: Array<TargetEntity>
+  RuleIds: Array<string>
 }
 
 /**
@@ -12065,6 +12471,28 @@ export interface ModifyAntiInfoLeakRuleStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateProtectionModes请求参数结构体
+ */
+export interface UpdateProtectionModesRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 资源类型
+   */
+  Edition: string
+  /**
+   * 大类规则ID
+   */
+  TypeIDs: Array<string>
+  /**
+   * 0表示观察，1表示拦截
+   */
+  Mode: number
 }
 
 /**
@@ -12760,9 +13188,65 @@ export interface DescribeAreaBanRuleRequest {
 }
 
 /**
- * ModifyIpAccessControl返回参数结构体
+ * DescribeApiDetail返回参数结构体
  */
-export interface ModifyIpAccessControlResponse {
+export interface DescribeApiDetailResponse {
+  /**
+   * 请求样例，json字符串格式
+   */
+  Log?: string
+  /**
+   * 完整请求样例
+   */
+  FullReqLog?: string
+  /**
+   * 请求参数样例列表
+   */
+  ParameterList?: Array<ApiParameterType>
+  /**
+   * 当前场景标签
+   */
+  Scene?: string
+  /**
+   * 敏感字段
+   */
+  SensitiveFields?: Array<string>
+  /**
+   * 7天内是否活跃
+   */
+  IsActive?: boolean
+  /**
+   * 访问ip数
+   */
+  IpCount?: number
+  /**
+   * 访问地域数量
+   */
+  RegionCount?: number
+  /**
+   * 关联事件数
+   */
+  EventCount?: number
+  /**
+   * 涉敏数据条数
+   */
+  SensitiveCount?: number
+  /**
+   * 风险等级
+   */
+  Level?: number
+  /**
+   * 响应体
+   */
+  RspLog?: string
+  /**
+   * 昨日访问峰值QPS
+   */
+  MaxQPS?: number
+  /**
+   * 历史样例
+   */
+  ApiDetailSampleHistory?: Array<ApiDetailSampleHistory>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13377,6 +13861,20 @@ export interface DescribeApiSecEventListResponse {
 }
 
 /**
+ * ModifyLLMStatus返回参数结构体
+ */
+export interface ModifyLLMStatusResponse {
+  /**
+   * <p>操作结果，成功时返回 &quot;Success&quot;。</p>
+   */
+  Res?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Token有效性校验规则
  */
 export interface TokenRuleEntry {
@@ -13573,6 +14071,20 @@ export interface DescribeWafAutoDenyRulesResponse {
    * 重保护网域名状态
    */
   HWState?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceName返回参数结构体
+ */
+export interface ModifyInstanceNameResponse {
+  /**
+   * 修改状态：0为成功
+   */
+  ModifyCode?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13814,6 +14326,16 @@ export interface ModifyModuleStatusRequest {
    * gzip 开关
    */
   GzipAnalysis?: number
+}
+
+/**
+ * DeleteLLMContentRule返回参数结构体
+ */
+export interface DeleteLLMContentRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14499,6 +15021,84 @@ export interface DescribeAttackWhiteRuleRequest {
 }
 
 /**
+ * sdk接入配置
+ */
+export interface LLMSdkAccessItem {
+  /**
+   * <p>服务id</p>
+   */
+  Domain?: string
+  /**
+   * <p>服务名称</p>
+   */
+  Name?: string
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>SDK接入来源，tokenhub 表示通过 TokenHub 创建，空字符串表示通过控制台创建</p>
+   */
+  SdkSource?: string
+  /**
+   * <p>总开关</p>
+   */
+  MainStatus?: boolean
+  /**
+   * <p>限速开关</p>
+   */
+  LimitRuleStatus?: boolean
+  /**
+   * <p>内容安全开关</p>
+   */
+  ContentRuleStatus?: boolean
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>修改时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>限流规则数量</p>
+   */
+  LimitRuleCount?: number
+  /**
+   * <p>内容安全规则数量</p>
+   */
+  ContentRuleCount?: number
+  /**
+   * <p>toolcall防护开关</p>
+   */
+  ToolCallStatus?: boolean
+  /**
+   * <p>llm推理防护开关</p>
+   */
+  LLMProtectStatus?: boolean
+  /**
+   * <p>内容合规检测开关</p>
+   */
+  ContentComplianceStatus?: boolean
+  /**
+   * <p>dlp防护开关</p>
+   */
+  DLPStatus?: boolean
+  /**
+   * <p>skills防护开关</p>
+   */
+  SkillsStatus?: boolean
+  /**
+   * <p>意图识别检测开关</p>
+   */
+  IntentStatus?: boolean
+  /**
+   * <p>生效规则数量</p>
+   */
+  EffectiveRules?: number
+}
+
+/**
  * DescribeAntiInfoLeakageRules返回参数结构体
  */
 export interface DescribeAntiInfoLeakageRulesResponse {
@@ -14769,6 +15369,24 @@ export interface DescribeAttackTypeRequest {
    * 域名过滤，不传则不过滤，用于替代Host字段，逐步淘汰Host
    */
   Domain?: string
+}
+
+/**
+ * 按分类分组的规则列表
+ */
+export interface CategoryGroup {
+  /**
+   * <p>分类</p>
+   */
+  Category?: string
+  /**
+   * <p>总数</p>
+   */
+  Count?: number
+  /**
+   * <p>规则列表</p>
+   */
+  Rules?: Array<RuleDetail>
 }
 
 /**
@@ -15688,6 +16306,44 @@ export interface ModifyModuleStatusResponse {
 }
 
 /**
+ * aiguard规则详情
+ */
+export interface RuleDetail {
+  /**
+   * <p>规则ID</p>
+   */
+  RuleId?: string
+  /**
+   * <p>规则名称</p>
+   */
+  RuleName?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>严重度</p>
+   */
+  Severity?: string
+  /**
+   * <p>动作</p>
+   */
+  Action?: string
+  /**
+   * <p>开关</p>
+   */
+  Status?: number
+  /**
+   * <p>脱敏样例</p>
+   */
+  DesensitizeSample?: string
+  /**
+   * <p>检测方向</p><p>取值范围：[0, 3]</p>
+   */
+  Direction?: number
+}
+
+/**
  * 修改/新增自定义规则的入参，查询自定义规则列表时的出参
  */
 export interface InOutputBotUCBRule {
@@ -16098,6 +16754,24 @@ export interface TokenRuleEntryValue {
 }
 
 /**
+ * DescribeLLMWafProtectRules请求参数结构体
+ */
+export interface DescribeLLMWafProtectRulesRequest {
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>规则类型</p>
+   */
+  RuleType?: string
+}
+
+/**
  * 限流Header数据结构
  */
 export interface LimitHeader {
@@ -16156,6 +16830,20 @@ export interface ModifyBotIdRuleResponse {
  * ModifyApiSecEventChange返回参数结构体
  */
 export interface ModifyApiSecEventChangeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAccessExport返回参数结构体
+ */
+export interface CreateAccessExportResponse {
+  /**
+   * 日志导出ID。
+   */
+  ExportId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16224,6 +16912,16 @@ export interface ModifyAntiFakeUrlStatusRequest {
    * Id列表
    */
   Ids: Array<number | bigint>
+}
+
+/**
+ * DeleteLLMKeywordLibrary请求参数结构体
+ */
+export interface DeleteLLMKeywordLibraryRequest {
+  /**
+   * 要删除的词库 id 列表
+   */
+  Ids?: Array<string>
 }
 
 /**
@@ -16428,13 +17126,17 @@ export interface DescribeDomainRulesResponse {
 }
 
 /**
- * DeleteProtectGroup请求参数结构体
+ * DescribeLLMWafDLPRules请求参数结构体
  */
-export interface DeleteProtectGroupRequest {
+export interface DescribeLLMWafDLPRulesRequest {
   /**
-   * 防护对象组ID列表，支持批量删除
+   * <p>服务ID</p>
    */
-  GroupIds?: Array<number | bigint>
+  ServiceId?: string
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
 }
 
 /**
@@ -16460,6 +17162,36 @@ export interface CreateDealsResponse {
 }
 
 /**
+ * DescribeOwaspRules请求参数结构体
+ */
+export interface DescribeOwaspRulesRequest {
+  /**
+   * 需要查询的域名
+   */
+  Domain: string
+  /**
+   * 分页页数，默认为0
+   */
+  Offset?: number
+  /**
+   * 每页容量，默认为10
+   */
+  Limit?: number
+  /**
+   * 排序字段，支持 RuleId, ModifyTime
+   */
+  By?: string
+  /**
+   * 排序方式，支持asc、desc
+   */
+  Order?: string
+  /**
+   * 筛选条件，支持 RuleId：规则ID、TypeId：规则类型、Desc：规则描述 、CveID：CVE编号、Status：规则状态、VulLevel：威胁等级
+   */
+  Filters?: Array<FiltersItemNew>
+}
+
+/**
  * EnableClientMsg返回参数结构体
  */
 export interface EnableClientMsgResponse {
@@ -16481,6 +17213,24 @@ export interface DestroyPostCKafkaFlowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLLMContentRuleStatus请求参数结构体
+ */
+export interface ModifyLLMContentRuleStatusRequest {
+  /**
+   * <p>状态</p>
+   */
+  Status: number
+  /**
+   * <p>Id列表</p>
+   */
+  Ids: Array<string>
+  /**
+   * <p>域名</p>
+   */
+  Domain?: string
 }
 
 /**
@@ -16815,6 +17565,92 @@ export interface AutoDenyDetail {
 }
 
 /**
+ * ModifyLLMContentRule请求参数结构体
+ */
+export interface ModifyLLMContentRuleRequest {
+  /**
+   * <p>名称</p>
+   */
+  Name: string
+  /**
+   * <p>优先级</p>
+   */
+  Priority: number
+  /**
+   * <p>规则开关</p>
+   */
+  Status: number
+  /**
+   * <p>检测范围，1：入向，2：出向，3：入向和出向</p>
+   */
+  CheckType: number
+  /**
+   * <p>检测内容匹配</p>
+   */
+  RuleItem: Array<RuleItem>
+  /**
+   * <p>匹配条件</p>
+   */
+  Options: Array<LLMOptionsItem>
+  /**
+   * <p>域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>动作，观察monitor，拦截intercept</p>
+   */
+  ActionType?: string
+  /**
+   * <p>响应提示内容</p>
+   */
+  ResponseText?: string
+  /**
+   * <p>规则需要启用的SessionID</p>
+   */
+  SessionApplied?: Array<string>
+  /**
+   * <p>规则ID，新增时填0</p>
+   */
+  RuleId?: string
+  /**
+   * <p>拦截页面id</p>
+   */
+  PageId?: number
+  /**
+   * <p>检测内容and or表达式,默认为and</p>
+   */
+  ContentLogicalOp?: string
+  /**
+   * <p>实例id，必填项</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>代答类型：1-内置可信模型安全代答，2-自定义代答（ActionType=reply时生效</p><p>枚举值：</p><ul><li>1： 内置可信模型安全代答</li><li>2： 自定义代答ActionType=reply时生效</li></ul>
+   */
+  ReplyType?: number
+  /**
+   * <p>自定义回答模板</p>
+   */
+  CustomReplyRuleId?: string
+  /**
+   * <p>模态类型：0-文本（默认），1-图片</p><p>枚举值：</p><ul><li>0： 文本</li><li>1： 图片</li></ul>
+   */
+  ModalType?: number
+  /**
+   * <p>规则类别：black-普通规则(默认)，white-白名单规则；空值按black处理。white时ActionType仅允许pass(放行)，RuleItem支持白名单匹配字段(Key: ip/geo/type/content/chat_id/user_id/tool_name/tool_args/keyword_whitelist；Op: belong/not_belong/equal/not_equal/contain/not_contain/prefix/suffix/wildcard)</p>
+   */
+  Category?: string
+  /**
+   * <p>白名单规则生效范围：多个serviceId/domain列表（Category=white时使用），表示该白名单规则同时生效于哪些域名/serviceId。黑名单规则不使用此字段。</p>
+   */
+  Domains?: Array<string>
+  /**
+   * <p>加白生效模块type列表（Category=white时使用），表示该白名单规则命中后对哪些防护模块生效(放行)。取值：2-算力消耗规则，3-自定义防护规则，4-ToolCall防护，5-提示词攻击防护，6-内容合规检测，7-敏感数据检测。</p>
+   */
+  AppliedModules?: Array<number | bigint>
+}
+
+/**
  * DeleteBatchIpAccessControl请求参数结构体
  */
 export interface DeleteBatchIpAccessControlRequest {
@@ -16843,25 +17679,17 @@ export interface DescribeWebshellStatusResponse {
 }
 
 /**
- * UpdateProtectionModes请求参数结构体
+ * ModifyLLMContentRule返回参数结构体
  */
-export interface UpdateProtectionModesRequest {
+export interface ModifyLLMContentRuleResponse {
   /**
-   * 域名
+   * <p>操作的RuleId</p>
    */
-  Domain: string
+  RuleId?: string
   /**
-   * 资源类型
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Edition: string
-  /**
-   * 大类规则ID
-   */
-  TypeIDs: Array<string>
-  /**
-   * 0表示观察，1表示拦截
-   */
-  Mode: number
+  RequestId?: string
 }
 
 /**
@@ -16969,65 +17797,17 @@ export interface DescribeVipInfoResponse {
 }
 
 /**
- * DescribeApiDetail返回参数结构体
+ * DescribeLLMKeywordLibrary返回参数结构体
  */
-export interface DescribeApiDetailResponse {
+export interface DescribeLLMKeywordLibraryResponse {
   /**
-   * 请求样例，json字符串格式
+   * 关键词库列表
    */
-  Log?: string
+  LibList?: Array<LLMKeywordLibrary>
   /**
-   * 完整请求样例
+   * 词库总数
    */
-  FullReqLog?: string
-  /**
-   * 请求参数样例列表
-   */
-  ParameterList?: Array<ApiParameterType>
-  /**
-   * 当前场景标签
-   */
-  Scene?: string
-  /**
-   * 敏感字段
-   */
-  SensitiveFields?: Array<string>
-  /**
-   * 7天内是否活跃
-   */
-  IsActive?: boolean
-  /**
-   * 访问ip数
-   */
-  IpCount?: number
-  /**
-   * 访问地域数量
-   */
-  RegionCount?: number
-  /**
-   * 关联事件数
-   */
-  EventCount?: number
-  /**
-   * 涉敏数据条数
-   */
-  SensitiveCount?: number
-  /**
-   * 风险等级
-   */
-  Level?: number
-  /**
-   * 响应体
-   */
-  RspLog?: string
-  /**
-   * 昨日访问峰值QPS
-   */
-  MaxQPS?: number
-  /**
-   * 历史样例
-   */
-  ApiDetailSampleHistory?: Array<ApiDetailSampleHistory>
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17669,41 +18449,17 @@ export interface DescribeObjectsResponse {
 }
 
 /**
- * SearchAccessLog请求参数结构体
+ * ExportLLMKeywordLib返回参数结构体
  */
-export interface SearchAccessLogRequest {
+export interface ExportLLMKeywordLibResponse {
   /**
-   * 客户要查询的日志主题ID，每个客户都有对应的一个主题，新版本此字段填空字符串
+   * 导出的文件url
    */
-  TopicId: string
+  Url?: string
   /**
-   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  From: number
-  /**
-   * 要查询的日志的结束时间，Unix时间戳，单位ms
-   */
-  To: number
-  /**
-   * 查询语句，语句长度最大为4096
-   */
-  Query: string
-  /**
-   * 单次查询返回的日志条数，最大值为100
-   */
-  Limit?: number
-  /**
-   * 新版本此字段失效，填空字符串，翻页使用Page
-   */
-  Context?: string
-  /**
-   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
-   */
-  Sort?: string
-  /**
-   * 第几页，从0开始。新版本接口字段
-   */
-  Page?: number
+  RequestId?: string
 }
 
 /**

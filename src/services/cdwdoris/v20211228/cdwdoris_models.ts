@@ -2596,267 +2596,263 @@ export interface RestartClusterForConfigsResponse {
  */
 export interface InstanceInfo {
   /**
-   * 集群实例ID, "cdwdoris-xxxx" 字符串类型
+   * <p>集群实例ID, &quot;cdwdoris-xxxx&quot; 字符串类型</p>
    */
   InstanceId?: string
   /**
-   * 集群实例名称
+   * <p>集群实例名称</p>
    */
   InstanceName?: string
   /**
-   * 状态,
-Init  创建中
-Serving   运行中
-Isolated   已隔离
-Changing  变更中
+   * <p>状态,<br>Init  创建中<br>Serving   运行中<br>Isolated   已隔离<br>Changing  变更中</p>
    */
   Status?: string
   /**
-   * 版本
+   * <p>版本</p>
    */
   Version?: string
   /**
-   * 地域, ap-guangzhou
+   * <p>地域, ap-guangzhou</p>
    */
   Region?: string
   /**
-   * 可用区， ap-guangzhou-3
+   * <p>可用区， ap-guangzhou-3</p>
    */
   Zone?: string
   /**
-   * 私有网络名称
+   * <p>私有网络名称</p>
    */
   VpcId?: string
   /**
-   * 子网名称
+   * <p>子网名称</p>
    */
   SubnetId?: string
   /**
-   * 付费类型，"hour", "prepay"
+   * <p>付费类型，&quot;hour&quot;, &quot;prepay&quot;</p>
    */
   PayMode?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpireTime?: string
   /**
-   * 数据节点描述信息
+   * <p>数据节点描述信息</p>
    */
   MasterSummary?: NodesSummary
   /**
-   * zookeeper节点描述信息
+   * <p>zookeeper节点描述信息</p>
    */
   CoreSummary?: NodesSummary
   /**
-   * 高可用，"true" "false"
+   * <p>高可用，&quot;true&quot; &quot;false&quot;</p>
    */
   HA?: string
   /**
-   * 高可用类型：
-0：非高可用
-1：读高可用
-2：读写高可用。
+   * <p>高可用类型：<br>0：非高可用<br>1：读高可用<br>2：读写高可用。</p>
    */
   HaType?: number
   /**
-   * 访问地址，例如 "10.0.0.1:9000"
+   * <p>访问地址，例如 &quot;10.0.0.1:9000&quot;</p>
    */
   AccessInfo?: string
   /**
-   * 记录ID，数值型
+   * <p>记录ID，数值型</p>
    */
   Id?: number
   /**
-   * regionId, 表示地域
+   * <p>regionId, 表示地域</p>
    */
   RegionId?: number
   /**
-   * 可用区说明，例如 "广州三区"
+   * <p>可用区说明，例如 &quot;广州三区&quot;</p>
    */
   ZoneDesc?: string
   /**
-   * 错误流程说明信息
+   * <p>错误流程说明信息</p>
    */
   FlowMsg?: string
   /**
-   * 状态描述，例如“运行中”等
+   * <p>状态描述，例如“运行中”等</p>
    */
   StatusDesc?: string
   /**
-   * 自动续费标记
+   * <p>自动续费标记</p>
    */
   RenewFlag?: boolean
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 监控信息
+   * <p>监控信息</p>
    */
   Monitor?: string
   /**
-   * 是否开通日志
+   * <p>是否开通日志</p>
    */
   HasClsTopic?: boolean
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   ClsTopicId?: string
   /**
-   * 日志集ID
+   * <p>日志集ID</p>
    */
   ClsLogSetId?: string
   /**
-   * 是否支持xml配置管理
+   * <p>是否支持xml配置管理</p>
    */
   EnableXMLConfig?: number
   /**
-   * 区域
+   * <p>区域</p>
    */
   RegionDesc?: string
   /**
-   * 弹性网卡地址
+   * <p>弹性网卡地址</p>
    */
   Eip?: string
   /**
-   * 冷热分层系数
+   * <p>冷热分层系数</p>
    */
   CosMoveFactor?: number
   /**
-   * external/local/yunti
+   * <p>external/local/yunti</p>
    */
   Kind?: string
   /**
-   * cos桶
+   * <p>cos桶</p>
    */
   CosBucketName?: string
   /**
-   * cbs
+   * <p>cbs</p>
    */
   CanAttachCbs?: boolean
   /**
-   * 小版本
+   * <p>小版本</p>
    */
   BuildVersion?: string
   /**
-   * 组件信息
-注：这里返回类型实际为map[string]struct类型，并非显示的string类型，可以参考“示例值”进行数据的解析。
+   * <p>组件信息<br>注：这里返回类型实际为map[string]struct类型，并非显示的string类型，可以参考“示例值”进行数据的解析。</p>
    */
   Components?: string
   /**
-   * 判断审计日志表是否有catalog字段
+   * <p>判断审计日志表是否有catalog字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   IfExistCatalog?: number
   /**
-   * 页面特性，用于前端屏蔽一些页面入口
+   * <p>页面特性，用于前端屏蔽一些页面入口</p>
    */
   Characteristic?: Array<string>
   /**
-   * 超时时间 单位s
+   * <p>超时时间 单位s</p>
    */
   RestartTimeout?: string
   /**
-   * 内核优雅重启超时时间，如果为-1说明未设置
+   * <p>内核优雅重启超时时间，如果为-1说明未设置</p>
    */
   GraceShutdownWaitSeconds?: string
   /**
-   * 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储
+   * <p>表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储</p>
    */
   CaseSensitive?: number
   /**
-   * 用户是否可以绑定安全组
+   * <p>用户是否可以绑定安全组</p>
    */
   IsWhiteSGs?: boolean
   /**
-   * 已绑定的安全组信息
+   * <p>已绑定的安全组信息</p>
    */
   BindSGs?: Array<string>
   /**
-   * 是否为多可用区
+   * <p>是否为多可用区</p>
    */
   EnableMultiZones?: boolean
   /**
-   * 用户可用区和子网信息
+   * <p>用户可用区和子网信息</p>
    */
   UserNetworkInfos?: string
   /**
-   * 是否启用冷热分层。0：未开启 1：已开启
+   * <p>是否启用冷热分层。0：未开启 1：已开启</p>
    */
   EnableCoolDown?: number
   /**
-   * 冷热分层使用COS桶
+   * <p>冷热分层使用COS桶</p>
    */
   CoolDownBucket?: string
   /**
-   * 实例扩展信息
+   * <p>实例扩展信息</p>
    */
   Details?: InstanceDetail
   /**
-   * 是否启用DLC 0:关闭 1:开启
+   * <p>是否启用DLC 0:关闭 1:开启</p>
    */
   EnableDlc?: number
   /**
-   * 账户类型 0:普通用户 1:CAM用户
+   * <p>账户类型 0:普通用户 1:CAM用户</p>
    */
   AccountType?: number
   /**
-   * 监控模式 0: 老监控 1：新监控
+   * <p>监控模式 0: 老监控 1：新监控</p>
    */
   MonitorMode?: number
   /**
-   * cn节点信息
+   * <p>cn节点信息</p>
    */
   CNSummary?: NodesSummary
   /**
-   * 计算组个数
+   * <p>计算组个数</p>
    */
   ComputeGroupCount?: number
   /**
-   * 存算分离cos存储数据
+   * <p>存算分离cos存储数据</p>
    */
   CosStorageSize?: number
   /**
-   * 存算分离的指标 当是true 不支持新建计算组
+   * <p>存算分离的指标 当是true 不支持新建计算组</p>
    */
   IsMasterNonVM?: boolean
   /**
-   * Cos容量包大小
+   * <p>Cos容量包大小</p>
    */
   CosPkgCapacity?: number
   /**
-   * 集群是否使用托管桶
+   * <p>集群是否使用托管桶</p>
    */
   UseManagedBucket?: boolean
   /**
-   * 集群类型
+   * <p>集群类型</p>
    */
   InstanceType?: string
   /**
-   * 对应主集群
+   * <p>对应主集群</p>
    */
   MasterInstance?: string
   /**
-   * 对应备集群
+   * <p>对应备集群</p>
    */
   SlaveInstances?: Array<string>
   /**
-   * ccr服务部署节点ip
+   * <p>ccr服务部署节点ip</p>
    */
   SyncerIp?: string
   /**
-   * 是否支持sql convertor
+   * <p>是否支持sql convertor</p>
    */
   EnableSqlConv?: number
   /**
-   * 集群时区，默认+08:00
+   * <p>集群时区，默认+08:00</p>
    */
   TimeZone?: string
+  /**
+   * <p>缓存盘介质：任一计算组为单副本SSD即ELASTIC_REMOTE_SSD（不支持变配多可用区部署等），否则为默认计算组介质；非存算分离为空</p>
+   */
+  CacheDiskType?: string
 }
 
 /**
@@ -3889,45 +3885,49 @@ export interface DescribeCoolDownPoliciesRequest {
  */
 export interface ResourceSpec {
   /**
-   * 规格名称，例如“SCH1"
+   * <p>规格名称，例如“SCH1&quot;</p>
    */
   Name?: string
   /**
-   * cpu核数
+   * <p>cpu核数</p>
    */
   Cpu?: number
   /**
-   * 内存大小，单位G
+   * <p>内存大小，单位G</p>
    */
   Mem?: number
   /**
-   * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
+   * <p>分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO</p>
    */
   Type?: string
   /**
-   * 系统盘描述信息
+   * <p>系统盘描述信息</p>
    */
   SystemDisk?: DiskSpec
   /**
-   * 数据盘描述信息
+   * <p>数据盘描述信息</p>
    */
   DataDisk?: DiskSpec
   /**
-   * 最大节点数目限制
+   * <p>最大节点数目限制</p>
    */
   MaxNodeSize?: number
   /**
-   * 是否可用，false代表售罄
+   * <p>是否可用，false代表售罄</p>
    */
   Available?: boolean
   /**
-   * 规格描述信息
+   * <p>规格描述信息</p>
    */
   ComputeSpecDesc?: string
   /**
-   * cvm库存
+   * <p>cvm库存</p>
    */
   InstanceQuota?: number
+  /**
+   * <p>计算组ID自定义后缀。1到8位小写字母、数字或连字符，首尾须为字母或数字；不传则随机生成8位后缀。最终计算组ID格式为实例ID-后缀，同时作为内核计算组名</p>
+   */
+  ComputeGroupSuffix?: string
 }
 
 /**

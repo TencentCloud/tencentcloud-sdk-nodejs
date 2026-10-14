@@ -139,6 +139,7 @@ import {
   DescribeSwitchListsRequest,
   DeleteAddressTemplateRequest,
   AttachInsInfo,
+  DescribeNatCcnFwSwitchResponse,
   FwGroupSwitch,
   ModifyEnterpriseSecurityDispatchStatusRequest,
   ModifyStorageSettingResponse,
@@ -216,7 +217,7 @@ import {
   DescribeVpcFwGroupSwitchResponse,
   ModifyBlockIgnoreRuleResponse,
   DescribeCcnAssociatedInstancesResponse,
-  ModifyNatFwReSelectRequest,
+  FwGroupIpFlowStat,
   DescribeVpcAclEdgeRangeRequest,
   ModifyFwGroupSwitchResponse,
   SecurityGroupBothWayInfo,
@@ -253,6 +254,7 @@ import {
   DescribeRuleOverviewResponse,
   CreateAlertCenterRuleAsyncRequest,
   VpcFwInstanceInfo,
+  DescribeCcnVpcFwSwitchResponse,
   ModifyNatAcRuleRequest,
   SwitchFailInfo,
   DescribeSourceAssetResponse,
@@ -310,7 +312,7 @@ import {
   ModifyIsolateTableResponse,
   ModifySecurityGroupSequenceRulesRequest,
   CreateChooseVpcsResponse,
-  DescribeNatCcnFwSwitchResponse,
+  ModifyNatFwReSelectRequest,
   ModifyRunSyncAssetResponse,
   CreateWhiteRuleRequest,
   ModifySequenceAclRulesRequest,
@@ -405,7 +407,7 @@ import {
   DescribeCcnVpcFwPolicyLimitRequest,
   DescribeDefenseSwitchRequest,
   SecurityGroupListData,
-  DescribeCcnVpcFwSwitchResponse,
+  DescribeVpcFwIpStatRequest,
   RemoveAcRuleRequest,
   NatSwitchListData,
   IPDefendStatus,
@@ -422,6 +424,7 @@ import {
   CreateAlertCenterOmitResponse,
   DescribeSerialRegionRequest,
   DescribeOfflineExportTaskResponse,
+  DescribeVpcFwIpStatResponse,
   IocListData,
   ModifyEdgeIpSwitchResponse,
   UpdateCheckCcnNonDirectFlagRequest,
@@ -1081,6 +1084,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateBlockIgnoreRuleNewResponse) => void
   ): Promise<CreateBlockIgnoreRuleNewResponse> {
     return this.request("CreateBlockIgnoreRuleNew", req, cb)
+  }
+
+  /**
+   * 编辑NAT防火墙
+   */
+  async ModifyNatInstance(
+    req: ModifyNatInstanceRequest,
+    cb?: (error: string, rep: ModifyNatInstanceResponse) => void
+  ): Promise<ModifyNatInstanceResponse> {
+    return this.request("ModifyNatInstance", req, cb)
   }
 
   /**
@@ -1767,13 +1780,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 编辑NAT防火墙
+   * 查询VPC防火墙下，单IP粒度的流量统计
    */
-  async ModifyNatInstance(
-    req: ModifyNatInstanceRequest,
-    cb?: (error: string, rep: ModifyNatInstanceResponse) => void
-  ): Promise<ModifyNatInstanceResponse> {
-    return this.request("ModifyNatInstance", req, cb)
+  async DescribeVpcFwIpStat(
+    req: DescribeVpcFwIpStatRequest,
+    cb?: (error: string, rep: DescribeVpcFwIpStatResponse) => void
+  ): Promise<DescribeVpcFwIpStatResponse> {
+    return this.request("DescribeVpcFwIpStat", req, cb)
   }
 
   /**

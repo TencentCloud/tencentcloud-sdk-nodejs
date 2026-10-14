@@ -53,6 +53,7 @@ import {
   PostgresSpaceObjectItem,
   DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
+  IndexDDLInfo,
   AuditInstanceInfo,
   RedisBigKeyTask,
   HealthReportTask,
@@ -64,6 +65,7 @@ import {
   AuditLogFilter,
   SlowLogTopSqlItem,
   CreateKillTaskResponse,
+  AuditProxyLogItem,
   DescribeAuditInstanceListResponse,
   DescribeRedisSlowLogTopSqlsResponse,
   DescribeDBInstancesResponse,
@@ -84,7 +86,7 @@ import {
   DescribeRedisSlowLogTopSqlsRequest,
   WaiterItem,
   AutonomyEventVo,
-  RedisPreKeySpaceData,
+  DescribeDBAuditLogsRequest,
   DescribeTopSpaceTablesResponse,
   TaskInfo,
   DescribeMongoDBProcessListRequest,
@@ -103,7 +105,7 @@ import {
   ModifyDiagDBInstanceConfRequest,
   DescribeSlowLogsResponse,
   TagInfo,
-  DescribeSecurityAuditLogDownloadUrlsRequest,
+  AuditLogQueryFilter,
   DescribeDBDiagEventsRequest,
   ProcessStatistic,
   IssueTypeInfo,
@@ -111,7 +113,7 @@ import {
   DeadlockResource,
   DescribeDBInstancesRequest,
   CreateDBDiagReportUrlsResponse,
-  UpdateMonitorSwitchResponse,
+  GroupItem,
   DescribeDBAutonomyActionRequest,
   DescribeRedisTopKeyPrefixListRequest,
   MetricThreshold,
@@ -157,6 +159,7 @@ import {
   ReceiveUin,
   ModifyAuditServiceRequest,
   DeleteSecurityAuditLogExportTasksResponse,
+  TableStatistics,
   KillMySqlThreadsRequest,
   DescribeSqlFiltersResponse,
   MongoDBIndex,
@@ -191,6 +194,7 @@ import {
   DescribeTopSpaceTablesRequest,
   DescribeRedisTopCostCommandsResponse,
   OpenAuditServiceRequest,
+  DescribeDBAuditLogsResponse,
   SchemaSpaceData,
   DescribeAllUserContactRequest,
   MySqlProcess,
@@ -199,6 +203,7 @@ import {
   DescribeNoPrimaryKeyTablesRequest,
   DeadlockFrame,
   AlarmProfileList,
+  RedisPreKeySpaceData,
   InstanceInfo,
   DescribeTopSpaceSchemasRequest,
   TemplateInfo,
@@ -211,10 +216,12 @@ import {
   CreateSchedulerMailProfileResponse,
   RedisCmdInfo,
   DescribeAlarmTemplateResponse,
+  DescribeNoPrimaryKeyTablesResponse,
   MongoDBTableSpaceItem,
   DescribeTopSpaceSchemaTimeSeriesRequest,
   DescribeDBAuditLogTopSqlsResponse,
   DescribeIndexRecommendAggregationSlowLogsResponse,
+  DescribeDatabaseObjectV2Response,
   DescribeDBDiagEventsResponse,
   DescribeMailProfileResponse,
   CmdCostGroup,
@@ -249,6 +256,7 @@ import {
   TopSqlTpl,
   CancelDBAutonomyActionRequest,
   DeleteDBDiagReportTasksRequest,
+  AuditDBLogItem,
   DescribeAlarmTemplateRequest,
   VerifyUserAccountResponse,
   DescribeSlowLogTimeSeriesStatsResponse,
@@ -259,6 +267,7 @@ import {
   CreateMongoDBKillTaskResponse,
   DescribeRedisCommandOverviewRequest,
   DescribeAllUserGroupResponse,
+  UpdateMonitorSwitchResponse,
   DescribeRedisProcessListResponse,
   DeadlockSession,
   CreateAuditLogFileRequest,
@@ -268,7 +277,7 @@ import {
   DescribeUserSqlAdviceResponse,
   DescribeDBSpaceStatusResponse,
   SQLFilter,
-  GroupItem,
+  DescribeSecurityAuditLogDownloadUrlsRequest,
   CancelDBAutonomyEventRequest,
   MongoDBProcessList,
   DescribeTopSpaceTableTimeSeriesRequest,
@@ -287,7 +296,7 @@ import {
   DescribeSecurityAuditLogExportTasksResponse,
   DescribeDBDiagReportContentResponse,
   DescribeSlowLogTopSqlsResponse,
-  DescribeNoPrimaryKeyTablesResponse,
+  DescribeDatabaseObjectV2Request,
   DescribeDBPerfTimeSeriesRequest,
   DescribeAuditLogFilesRequest,
   DeleteSqlFiltersRequest,
@@ -648,6 +657,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSqlFilterResponse) => void
   ): Promise<CreateSqlFilterResponse> {
     return this.request("CreateSqlFilter", req, cb)
+  }
+
+  /**
+   * 查询指定实例在时间窗口内的审计日志明细，支持按 SQL 类型、执行耗时、错误码、关键词等多条件过滤。当前仅支持 dcdb、mariadb 产品（cdb、cynosdb 已切至中台）。注意 Filter.MultiSql 与 Filter.ExcludeMultiSql 需以 JSON 字符串形式传递二维数组内容，例如 [["a","b"]] 表示 (a OR b)，服务端会自动解析。
+   */
+  async DescribeDBAuditLogs(
+    req: DescribeDBAuditLogsRequest,
+    cb?: (error: string, rep: DescribeDBAuditLogsResponse) => void
+  ): Promise<DescribeDBAuditLogsResponse> {
+    return this.request("DescribeDBAuditLogs", req, cb)
   }
 
   /**
@@ -1248,5 +1267,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenAuditServiceResponse) => void
   ): Promise<OpenAuditServiceResponse> {
     return this.request("OpenAuditService", req, cb)
+  }
+
+  /**
+   * 查询指定 SELECT SQL 在实例上的执行计划，常用于慢 SQL 分析、SQL 优化等场景。仅支持 SELECT 类语句
+   */
+  async DescribeDatabaseObjectV2(
+    req: DescribeDatabaseObjectV2Request,
+    cb?: (error: string, rep: DescribeDatabaseObjectV2Response) => void
+  ): Promise<DescribeDatabaseObjectV2Response> {
+    return this.request("DescribeDatabaseObjectV2", req, cb)
   }
 }

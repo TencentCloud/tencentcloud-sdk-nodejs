@@ -700,11 +700,11 @@ export interface DescribeAutoScaleDiskInfoResponse {
  */
 export interface DescribeInstancesResponse {
   /**
-   * 返回的实例个数
+   * <p>返回的实例个数</p>
    */
   TotalCount?: number
   /**
-   * 实例详细信息列表
+   * <p>实例详细信息列表</p>
    */
   InstanceList?: Array<InstanceInfo>
   /**
@@ -1304,6 +1304,16 @@ export interface DescribeEventDataDetailResponse {
    * 异常事件详情
    */
   EventDataDetail?: EventDataDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SaveAndDeployLogstashPipeline返回参数结构体
+ */
+export interface SaveAndDeployLogstashPipelineResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2259,64 +2269,93 @@ export interface CreateServerlessSpaceV2Request {
  */
 export interface CollectorTarget {
   /**
-   * 采集配置名称
+   * <p>采集配置名称</p>
    */
   TargetName: string
   /**
-   * 命名空间列表，包括Include包含和Exclude不包含选项，两者都为空时等同于全部命名空间(包含当前所有的以及未来创建的)。
+   * <p>命名空间列表，包括Include包含和Exclude不包含选项，两者都为空时等同于全部命名空间(包含当前所有的以及未来创建的)。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespaces?: Namespaces
   /**
-   * Pod标签列表
+   * <p>Pod标签列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PodLabels?: Array<PodLabel>
   /**
-   * 容器名称，支持小写字母、数字、连接符-、下划线_，最多支持63个字符
+   * <p>容器名称，支持小写字母、数字、连接符-、下划线_，最多支持63个字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerName?: string
   /**
-   * ES索引名称前缀，如果当前采集配置下的容器日志输出到ES集群，则使用该字段作为ES索引名称的前缀，支持大小写字母、数字、连接符-、下划线_，最多支持50个字符
+   * <p>ES索引名称前缀，如果当前采集配置下的容器日志输出到ES集群，则使用该字段作为ES索引名称的前缀，支持大小写字母、数字、连接符-、下划线_，最多支持50个字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexPrefix?: string
   /**
-   * 日志内容过滤，以逗号分隔，支持大小写字母、数字、连接符-、下划线_以及逗号，最多支持50个字符
+   * <p>日志内容过滤，以逗号分隔，支持大小写字母、数字、连接符-、下划线_以及逗号，最多支持50个字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogFilters?: string
   /**
-   * 高级配置，可自定义采集规则，最多支持2048个字符
+   * <p>高级配置，可自定义采集规则，最多支持2048个字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigContent?: string
   /**
-   * Ckafka实例的Topic
+   * <p>Ckafka实例的Topic</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaTopic?: string
   /**
-   * ES索引名称，如果当前采集配置下的容器日志输出到ES集群，则使用该字段作为ES索引名称，支持大小写字母、数字、连接符-、下划线_，最多支持50个字符
+   * <p>ES索引名称，如果当前采集配置下的容器日志输出到ES集群，则使用该字段作为ES索引名称，支持大小写字母、数字、连接符-、下划线_，最多支持50个字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexAlias?: string
   /**
-   * /
+   * <p>/</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputType?: string
   /**
-   * 日志采集host路径
+   * <p>日志采集host路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputPath?: string
   /**
-   * inputs.tail_files
+   * <p>inputs.tail_files</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputsTailFiles?: boolean
+  /**
+   * <p>开关inputs.multitline</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputsMultiLineEnabled?: boolean
+  /**
+   * <p>inputs.multiline.type</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputsMultiLineType?: string
+  /**
+   * <p>inputs.multiline.pattern</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputsMultiLinePattern?: string
+  /**
+   * <p>inputs.multiline.negate</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputsMultiLineNegate?: boolean
+  /**
+   * <p>inputs.multiline.match</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputsMultiLineMatch?: string
+  /**
+   * <p>按空间采集时 tke 的采集类型，默认为 container，支持 container、filestream</p>
+   */
+  TkeCollectType?: string
 }
 
 /**
@@ -3921,13 +3960,33 @@ export interface RestartKibanaRequest {
 }
 
 /**
- * SaveAndDeployLogstashPipeline返回参数结构体
+ * 机型族下单个机型族的资源可用性明细
  */
-export interface SaveAndDeployLogstashPipelineResponse {
+export interface FamilyResourceStat {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>机型族，如 &quot;SA5&quot;</p>
    */
-  RequestId?: string
+  InsFamily?: string
+  /**
+   * <p>CVM资源是否有货</p>
+   */
+  CvmAvailable?: boolean
+  /**
+   * <p>系统盘资源是否有货</p>
+   */
+  SysDiskAvailable?: boolean
+  /**
+   * <p>该盘型数据盘资源是否有货</p>
+   */
+  DiskAvailable?: boolean
+  /**
+   * <p>三类资源是否全部有货(可直接购买)</p>
+   */
+  Purchasable?: boolean
+  /**
+   * <p>缺少的资源，取值 CVM/SYSDISK/DISK；为空表示不缺</p>
+   */
+  MissingResources?: Array<string>
 }
 
 /**
@@ -5178,128 +5237,163 @@ export interface DeleteServerlessSpaceUserRequest {
  */
 export interface LogstashNodeTypeResource {
   /**
-   * 规格名称
+   * <p>规格名称</p>
    */
   NodeTypeName?: string
   /**
-   * 是否可售
+   * <p>是否可售</p>
    */
   Available?: boolean
   /**
-   * 规格信息
+   * <p>规格信息</p>
    */
   NodeTypeInfo?: NodeTypeInfo
   /**
-   * SSD盘是否可售
+   * <p>SSD盘是否可售</p>
    */
   SsdAvailable?: boolean
   /**
-   * SSD磁盘取值范围
+   * <p>SSD磁盘取值范围</p>
    */
   SsdDiskSizeRange?: DiskSizeRange
   /**
-   * SATA盘是否可售
+   * <p>SSD云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SsdSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>SATA盘是否可售</p>
    */
   SataAvailable?: boolean
   /**
-   * SATA磁盘取值范围
+   * <p>SATA磁盘取值范围</p>
    */
   SataDiskSizeRange?: DiskSizeRange
   /**
-   * SSD机型售罄原因
+   * <p>SSD机型售罄原因</p>
    */
   SsdSoldOutReason?: string
   /**
-   * SATA机型售罄原因
+   * <p>SATA机型售罄原因</p>
    */
   SataSoldOutReason?: string
   /**
-   * 本地盘信息
+   * <p>高性能云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SataSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>本地盘信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalDiskInfo?: LocalDiskInfo
   /**
-   * 云盘块数取值范围
+   * <p>云盘块数取值范围</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCountRange?: DiskCountRange
   /**
-   * 增强型SSD是否可用
+   * <p>增强型SSD是否可用</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HSsdAvailable?: boolean
   /**
-   * 增强型SSD机型售罄原因
+   * <p>增强型SSD机型售罄原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HSsdSoldOutReason?: string
   /**
-   * 增强型SSD磁盘取值范围
+   * <p>增强型SSD售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HSsdSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>增强型SSD磁盘取值范围</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HSsdDiskSizeRange?: DiskSizeRange
   /**
-   * 吞吐型云盘是否可用
+   * <p>吞吐型云盘是否可用</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThroughputAvailable?: boolean
   /**
-   * 吞吐型云盘售罄原因
+   * <p>吞吐型云盘售罄原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThroughputSoldOutReason?: string
   /**
-   * 吞吐型云盘取值范围
+   * <p>吞吐型云硬盘售罄</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThroughputSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>吞吐型云盘取值范围</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThroughputDiskSizeRange?: DiskSizeRange
   /**
-   * BigData盘是否可售
+   * <p>BigData盘是否可售</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDataAvailable?: boolean
   /**
-   * BigData盘售罄原因
+   * <p>BigData盘售罄原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDataSoldOutReason?: string
   /**
-   * BigData磁盘取值范围
+   * <p>大数据型云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDataSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>BigData磁盘取值范围</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDataDiskSizeRange?: DiskSizeRange
   /**
-   * HighIO盘是否可售
+   * <p>HighIO盘是否可售</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HighIOAvailable?: boolean
   /**
-   * HighIO盘售罄原因
+   * <p>HighIO盘售罄原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HighIOSoldOutReason?: string
   /**
-   * HighIO磁盘取值范围
+   * <p>高IO型云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighIOSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>HighIO磁盘取值范围</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HighIODiskSizeRange?: DiskSizeRange
   /**
-   * Bssd盘是否可售
+   * <p>Bssd盘是否可售</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BssdAvailable?: boolean
   /**
-   * Bssd盘售罄原因
+   * <p>Bssd盘售罄原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BssdSoldOutReason?: string
   /**
-   * Bssd盘取值范围
+   * <p>Bssd盘取值范围</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BssdDiskSizeRange?: DiskSizeRange
   /**
-   * GpuInfo
+   * <p>通用型SSD云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>GpuInfo</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuInfo?: GpuInfo
@@ -5310,55 +5404,59 @@ export interface LogstashNodeTypeResource {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 集群实例所属可用区，不传则默认所有可用区
+   * <p>集群实例所属可用区，不传则默认所有可用区</p>
    */
   Zone?: string
   /**
-   * 集群实例ID列表
+   * <p>集群实例ID列表</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 集群实例名称列表
+   * <p>集群实例名称列表</p>
    */
   InstanceNames?: Array<string>
   /**
-   * 分页起始值, 默认值0
+   * <p>分页起始值, 默认值0</p>
    */
   Offset?: number
   /**
-   * 分页大小，默认值20
+   * <p>分页大小，默认值20</p>
    */
   Limit?: number
   /**
-   * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderByKey未传递则按创建时间降序排序
+   * <p>排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderByKey未传递则按创建时间降序排序</p>
    */
   OrderByKey?: number
   /**
-   * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
+   * <p>排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序</p>
    */
   OrderByType?: number
   /**
-   * 节点标签信息列表
+   * <p>节点标签信息列表</p>
    */
   TagList?: Array<TagInfo>
   /**
-   * 私有网络vip列表
+   * <p>私有网络vip列表</p>
    */
   IpList?: Array<string>
   /**
-   * 可用区列表
+   * <p>集群节点IP列表</p>
+   */
+  NodeIps?: Array<string>
+  /**
+   * <p>可用区列表</p>
    */
   ZoneList?: Array<string>
   /**
-   * 健康状态筛列表:0表示绿色，1表示黄色，2表示红色,-1表示未知
+   * <p>健康状态筛列表:0表示绿色，1表示黄色，2表示红色,-1表示未知</p>
    */
   HealthStatus?: Array<number | bigint>
   /**
-   * Vpc列表 筛选项
+   * <p>Vpc列表 筛选项</p>
    */
   VpcIds?: Array<string>
   /**
-   * cdc集群id
+   * <p>cdc集群id</p>
    */
   CdcId?: string
 }
@@ -6400,6 +6498,10 @@ export interface EventDataInfoOverview {
    * <p>子事件名称</p>
    */
   SubEventName?: string
+  /**
+   * <p>事件范围</p><p>枚举值：</p><ul><li>0： 实例级</li><li>1： 账号级</li></ul>
+   */
+  EventScope?: number
 }
 
 /**
@@ -6463,115 +6565,150 @@ export interface UpdatePluginsResponse {
  */
 export interface NodeTypeResource {
   /**
-   * 规格名称
+   * <p>规格名称</p>
    */
   NodeTypeName?: string
   /**
-   * 是否可售
+   * <p>是否可售</p>
    */
   Available?: boolean
   /**
-   * 规格信息
+   * <p>规格信息</p>
    */
   NodeTypeInfo?: NodeTypeInfo
   /**
-   * SSD盘是否可售
+   * <p>SSD盘是否可售</p>
    */
   SsdAvailable?: boolean
   /**
-   * SSD磁盘取值范围
+   * <p>SSD磁盘取值范围</p>
    */
   SsdDiskSizeRange?: DiskSizeRange
   /**
-   * SATA盘是否可售
-   */
-  SataAvailable?: boolean
-  /**
-   * SATA磁盘取值范围
-   */
-  SataDiskSizeRange?: DiskSizeRange
-  /**
-   * SSD机型售罄原因
+   * <p>SSD机型售罄原因</p>
    */
   SsdSoldOutReason?: string
   /**
-   * SATA机型售罄原因
+   * <p>SSD云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SsdSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>SATA盘是否可售</p>
+   */
+  SataAvailable?: boolean
+  /**
+   * <p>SATA磁盘取值范围</p>
+   */
+  SataDiskSizeRange?: DiskSizeRange
+  /**
+   * <p>SATA机型售罄原因</p>
    */
   SataSoldOutReason?: string
   /**
-   * 本地盘信息
+   * <p>高性能云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SataSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>本地盘信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalDiskInfo?: LocalDiskInfo
   /**
-   * 云盘块数取值范围
+   * <p>云盘块数取值范围</p>
    */
   DiskCountRange?: DiskCountRange
   /**
-   * HSSD盘是否可售
+   * <p>HSSD盘是否可售</p>
    */
   HSsdAvailable?: boolean
   /**
-   * HSSD机型售罄原因
-   */
-  HSsdSoldOutReason?: string
-  /**
-   * HSSD磁盘取值范围
+   * <p>HSSD磁盘取值范围</p>
    */
   HSsdDiskSizeRange?: DiskSizeRange
   /**
-   * Throughput盘是否可售
+   * <p>HSSD机型售罄原因</p>
+   */
+  HSsdSoldOutReason?: string
+  /**
+   * <p>增强型SSD售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HSsdSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>Throughput盘是否可售</p>
    */
   ThroughputAvailable?: boolean
   /**
-   * Throughput机型售罄原因
-   */
-  ThroughputSoldOutReason?: string
-  /**
-   * Throughput磁盘取值范围
+   * <p>Throughput磁盘取值范围</p>
    */
   ThroughputDiskSizeRange?: DiskSizeRange
   /**
-   * BigData盘是否可售
+   * <p>Throughput机型售罄原因</p>
+   */
+  ThroughputSoldOutReason?: string
+  /**
+   * <p>吞吐型云硬盘售罄</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThroughputSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>BigData盘是否可售</p>
    */
   BigDataAvailable?: boolean
   /**
-   * BigData盘售罄原因
-   */
-  BigDataSoldOutReason?: string
-  /**
-   * BigData磁盘取值范围
+   * <p>BigData磁盘取值范围</p>
    */
   BigDataDiskSizeRange?: DiskSizeRange
   /**
-   * HighIO盘是否可售
+   * <p>BigData盘售罄原因</p>
+   */
+  BigDataSoldOutReason?: string
+  /**
+   * <p>大数据型云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDataSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>HighIO盘是否可售</p>
    */
   HighIOAvailable?: boolean
   /**
-   * HighIO盘售罄原因
+   * <p>HighIO盘售罄原因</p>
    */
   HighIOSoldOutReason?: string
   /**
-   * HighIO磁盘取值范围
+   * <p>HighIO磁盘取值范围</p>
    */
   HighIODiskSizeRange?: DiskSizeRange
   /**
-   * Bssd盘是否可售
+   * <p>高IO型云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighIOSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>Bssd盘是否可售</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BssdAvailable?: boolean
   /**
-   * Bssd盘售罄原因
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BssdSoldOutReason?: string
-  /**
-   * Bssd盘取值范围
+   * <p>Bssd盘取值范围</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BssdDiskSizeRange?: DiskSizeRange
   /**
-   * 节点Gpu信息
+   * <p>Bssd盘售罄原因</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdSoldOutReason?: string
+  /**
+   * <p>通用型SSD云硬盘售罄明细</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdSoldOutDetail?: Array<FamilyResourceStat>
+  /**
+   * <p>节点Gpu信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuInfo?: GpuInfo
@@ -7819,19 +7956,19 @@ export interface DescribeServerlessSpacesRequest {
  */
 export interface RestartInstanceRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 是否强制重启<li>true：强制重启</li><li>false：不强制重启</li>默认false
+   * <p>是否强制重启<li>true：强制重启</li><li>false：不强制重启</li>默认false</p>
    */
   ForceRestart?: boolean
   /**
-   * 重启模式：0 滚动重启； 1 全量重启
+   * <p>重启模式：0 滚动重启； 1 全量重启</p>
    */
   RestartMode?: number
   /**
-   * 重启时选择是否升级内核patch版本
+   * <p>重启时选择是否升级内核patch版本</p>
    */
   UpgradeKernel?: boolean
 }

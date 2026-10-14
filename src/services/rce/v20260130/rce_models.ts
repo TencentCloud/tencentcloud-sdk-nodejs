@@ -161,6 +161,28 @@ export interface Person {
 }
 
 /**
+ * 预约事件详情（营销保护）
+ */
+export interface BookingEvent {
+  /**
+   * <p>预约场景。例如：预订机票、预订酒店</p>
+   */
+  BookingScene?: string
+  /**
+   * <p>预约时间。要求符合ISO-8601标准的带时区的毫秒级时间，格式&quot;YYYY-MM-DDTHH:mm:ss.sssZ&quot; ，例如&quot;2025-10-19T09:11:10.145+08:00&quot;。</p>
+   */
+  BookingTime?: string
+  /**
+   * <p>预约单唯一ID。</p>
+   */
+  BookingId?: string
+  /**
+   * <p>与RCE-PRO约定的定制化信息。为K:V 格式的对象数组。<br>示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
+   */
+  Cust?: Array<Cust>
+}
+
+/**
  * 环境基础信息
  */
 export interface Environment {
@@ -272,6 +294,32 @@ export interface PromotionCode {
    * <p>营销活动码关联的商品</p>
    */
   Items?: Array<Item>
+}
+
+/**
+ * 查询事件详情（营销保护）
+ */
+export interface SearchEvent {
+  /**
+   * <p>查询场景。例如：查询航班、查询库存等。</p>
+   */
+  SearchScene?: string
+  /**
+   * <p>查询参数。查询时输入的参数。</p>
+   */
+  SearchParam?: string
+  /**
+   * <p>上一个网页URL</p>
+   */
+  ReferPageUrl?: string
+  /**
+   * <p>游客账号ID</p>
+   */
+  GuestId?: string
+  /**
+   * <p>与RCE-PRO约定的定制化信息。为K:V 格式的对象数组。<br>示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
+   */
+  Cust?: Array<Cust>
 }
 
 /**
@@ -642,6 +690,20 @@ export interface Delivery {
    * <p>物流追踪单号</p>
    */
   DeliveryTracking?: string
+}
+
+/**
+ * 事件结果
+ */
+export interface Result {
+  /**
+   * <p>实际是否完成状态</p><p>枚举值：</p><ul><li>success： 成功</li><li>failure： 失败</li></ul>
+   */
+  Status: string
+  /**
+   * <p>失败原因</p>
+   */
+  FailureReason?: string
 }
 
 /**
@@ -1022,17 +1084,26 @@ export interface Card {
 }
 
 /**
- * 事件结果
+ * 设备风险评估高级版返回结果
  */
-export interface Result {
+export interface AssessDeviceRiskPremiumRsp {
   /**
-   * <p>实际是否完成状态</p><p>枚举值：</p><ul><li>success： 成功</li><li>failure： 失败</li></ul>
+   * <p>决策信息</p>
    */
-  Status: string
+  Decision?: Decision
   /**
-   * <p>失败原因</p>
+   * <p>设备风险分信息</p>
    */
-  FailureReason?: string
+  Score?: DataScore
+  /**
+   * <p>设备基础信息</p>
+   */
+  Device?: Device
+  /**
+   * <p>IP环境基础信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Environment?: Environment
 }
 
 /**
@@ -1567,22 +1638,77 @@ export interface TransactionEvent {
 }
 
 /**
- * 事件风险评估返回结果
+ * AssessRisk请求参数结构体
  */
-export interface AssessRiskRsp {
+export interface AssessRiskRequest {
   /**
-   * <p>决策信息</p>
+   * <p>事件码。用于指定业务接入的场景节点。</p><p>账号保护产品下的标准事件包含：</p><ul><li>login： 登录</li><li>register： 注册（创建账户）</li><li>sms： 短信</li><li>logout： 登出</li><li>modify_account： 修改账号</li><li>modify_password： 修改密码</li><li>security_verification： 安全验证</li></ul><p>交易保护产品下的标准事件包含：</p><ul><li>create_order： 创建订单</li><li>transaction： 交易支付</li><li>charge_back： 拒付</li></ul><p>营销保护产品下的标准事件包含：</p><ul><li>add_promotion： 参与营销活动</li><li>redeem： 兑奖</li><li>withdraw： 提现</li><li>scan_code： 扫码</li><li>task： 做任务</li><li>claim_red_packet： 领红包</li><li>lucky_draw： 抽奖</li><li>invitation： 邀请</li><li>browse： 浏览</li></ul><p>社群保护产品下的标准事件包含：</p><ul><li>chat： 聊天消息</li><li>modify_role： 编辑角色资料</li><li>add_friend： 添加好友</li><li>modify_guild： 编辑公会资料</li></ul><p>自定义事件以 cust_ 为前缀，可与 RCE 约定后进行风险评估。</p>
    */
-  Decision?: Decision
+  EventCode: string
   /**
-   * <p>风险分，根据您开启的产品服务计算的评分结果</p>
+   * <p>事件的发生时间</p><p>参数格式：符合ISO 8601标准的带UTC时区的毫秒级时间</p>
    */
-  Score?: Score
+  EventTime: string
   /**
-   * <p>扩展信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>用户当前会话 ID， 用于关联用户登录前后的动作，如果没有传UserId，则SessionId必传，如缺失则可填充空字符串</p>
    */
-  ExtraInfo?: Array<Cust>
+  SessionId: string
+  /**
+   * <p>用户设备指纹token标识，在您的网站或者应用程序中集成设备指纹的SDK后获取</p>
+   */
+  DeviceToken: string
+  /**
+   * <p>客户端 IP 地址（IPv4或IPv6）</p>
+   */
+  UserIp: string
+  /**
+   * <p>事件详情，根据您输入的事件码传入对应的事件信息</p>
+   */
+  EventDetail: EventDetail
+  /**
+   * <p>用户在您系统中的唯一ID</p>
+   */
+  UserId?: string
+  /**
+   * <p>用户邮箱</p>
+   */
+  UserEmail?: string
+  /**
+   * <p>用户提供的联系方式</p><p>参数格式：符合E.164标准的带“+”、地区编码和号码的格式</p>
+   */
+  UserPhone?: string
+  /**
+   * <p>web浏览器相关信息，若您已集成我们的设备指纹SDK，则无需传入此字段</p>
+   */
+  Browser?: Browser
+  /**
+   * <p>应用程序、操作系统和移动设备详细信息，若您已集成我们的设备指纹SDK，则无需传入此字段</p>
+   */
+  App?: App
+  /**
+   * <p>数据授权信息，境内地域必填</p>
+   */
+  DataAuthorization?: DataAuthorization
+  /**
+   * <p>手机号码加密方式，境内地域必填</p><p>枚举值：</p><ul><li>md5： md5加密</li><li>plain： 明文</li></ul>
+   */
+  UserPhoneEncrypt?: string
+  /**
+   * <p>微信开放账号</p>
+   */
+  WeChatOpenId?: string
+  /**
+   * <p>QQ开放账号</p>
+   */
+  QQOpenId?: string
+  /**
+   * <p>QQ应用ID，当传入QQ开放账号时，该字段必填，QQ分配给网站或应用的AppId，用来唯一标识网站或应用</p>
+   */
+  QQAppId?: string
+  /**
+   * <p>业务序列号，您系统中一次业务动作的流水号</p>
+   */
+  BusinessId?: string
 }
 
 /**
@@ -1876,6 +2002,18 @@ export interface EventDetail {
    * <p>编辑公会资料</p>
    */
   ModifyGuild?: ModifyGuildEvent
+  /**
+   * <p>搜索</p>
+   */
+  Search?: SearchEvent
+  /**
+   * <p>预约</p>
+   */
+  Booking?: BookingEvent
+  /**
+   * <p>账号安全</p>
+   */
+  AccountSecurity?: AccountSecurityEvent
 }
 
 /**
@@ -1979,26 +2117,13 @@ export interface SecurityVerificationEvent {
 }
 
 /**
- * 设备风险评估高级版返回结果
+ * 账号安全详情（账号保护）
  */
-export interface AssessDeviceRiskPremiumRsp {
+export interface AccountSecurityEvent {
   /**
-   * <p>决策信息</p>
+   * <p>与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{&quot;Key&quot;: &quot;ApproverName&quot;, &quot;Value&quot;: &quot;bob&quot;},{&quot;Key&quot;:&quot;ApproverPhone&quot;,&quot;Value&quot;: &quot;+86131****5678&quot;}]</p>
    */
-  Decision?: Decision
-  /**
-   * <p>设备风险分信息</p>
-   */
-  Score?: DataScore
-  /**
-   * <p>设备基础信息</p>
-   */
-  Device?: Device
-  /**
-   * <p>IP环境基础信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Environment?: Environment
+  Cust?: Array<Cust>
 }
 
 /**
@@ -2134,77 +2259,22 @@ export interface Role {
 }
 
 /**
- * AssessRisk请求参数结构体
+ * 事件风险评估返回结果
  */
-export interface AssessRiskRequest {
+export interface AssessRiskRsp {
   /**
-   * <p>事件码。用于指定业务接入的场景节点。</p><p>账号保护产品下的标准事件包含：</p><ul><li>login： 登录</li><li>register： 注册（创建账户）</li><li>sms： 短信</li><li>logout： 登出</li><li>modify_account： 修改账号</li><li>modify_password： 修改密码</li><li>security_verification： 安全验证</li></ul><p>交易保护产品下的标准事件包含：</p><ul><li>create_order： 创建订单</li><li>transaction： 交易支付</li><li>charge_back： 拒付</li></ul><p>营销保护产品下的标准事件包含：</p><ul><li>add_promotion： 参与营销活动</li><li>redeem： 兑奖</li><li>withdraw： 提现</li><li>scan_code： 扫码</li><li>task： 做任务</li><li>claim_red_packet： 领红包</li><li>lucky_draw： 抽奖</li><li>invitation： 邀请</li><li>browse： 浏览</li></ul><p>社群保护产品下的标准事件包含：</p><ul><li>chat： 聊天消息</li><li>modify_role： 编辑角色资料</li><li>add_friend： 添加好友</li><li>modify_guild： 编辑公会资料</li></ul><p>自定义事件以 cust_ 为前缀，可与 RCE 约定后进行风险评估。</p>
+   * <p>决策信息</p>
    */
-  EventCode: string
+  Decision?: Decision
   /**
-   * <p>事件的发生时间</p><p>参数格式：符合ISO 8601标准的带UTC时区的毫秒级时间</p>
+   * <p>风险分，根据您开启的产品服务计算的评分结果</p>
    */
-  EventTime: string
+  Score?: Score
   /**
-   * <p>用户当前会话 ID， 用于关联用户登录前后的动作，如果没有传UserId，则SessionId必传，如缺失则可填充空字符串</p>
+   * <p>扩展信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SessionId: string
-  /**
-   * <p>用户设备指纹token标识，在您的网站或者应用程序中集成设备指纹的SDK后获取</p>
-   */
-  DeviceToken: string
-  /**
-   * <p>客户端 IP 地址（IPv4或IPv6）</p>
-   */
-  UserIp: string
-  /**
-   * <p>事件详情，根据您输入的事件码传入对应的事件信息</p>
-   */
-  EventDetail: EventDetail
-  /**
-   * <p>用户在您系统中的唯一ID</p>
-   */
-  UserId?: string
-  /**
-   * <p>用户邮箱</p>
-   */
-  UserEmail?: string
-  /**
-   * <p>用户提供的联系方式</p><p>参数格式：符合E.164标准的带“+”、地区编码和号码的格式</p>
-   */
-  UserPhone?: string
-  /**
-   * <p>web浏览器相关信息，若您已集成我们的设备指纹SDK，则无需传入此字段</p>
-   */
-  Browser?: Browser
-  /**
-   * <p>应用程序、操作系统和移动设备详细信息，若您已集成我们的设备指纹SDK，则无需传入此字段</p>
-   */
-  App?: App
-  /**
-   * <p>数据授权信息，境内地域必填</p>
-   */
-  DataAuthorization?: DataAuthorization
-  /**
-   * <p>手机号码加密方式，境内地域必填</p><p>枚举值：</p><ul><li>md5： md5加密</li><li>plain： 明文</li></ul>
-   */
-  UserPhoneEncrypt?: string
-  /**
-   * <p>微信开放账号</p>
-   */
-  WeChatOpenId?: string
-  /**
-   * <p>QQ开放账号</p>
-   */
-  QQOpenId?: string
-  /**
-   * <p>QQ应用ID，当传入QQ开放账号时，该字段必填，QQ分配给网站或应用的AppId，用来唯一标识网站或应用</p>
-   */
-  QQAppId?: string
-  /**
-   * <p>业务序列号，您系统中一次业务动作的流水号</p>
-   */
-  BusinessId?: string
+  ExtraInfo?: Array<Cust>
 }
 
 /**

@@ -5835,7 +5835,7 @@ export interface Policy {
    */
   Catalog: string
   /**
-   * <p>需要授权的表名，填 * 代表当前Database下所有表。当授权类型为管理员级别时，只允许填“*”，当授权类型为数据连接级别、数据库级别时只允许填空，其他类型下可以任意指定数据表。</p>
+   * <p>需要授权的表名，填 * 代表当前Database有表（TClake场景下暂不支持通配符）。当授权类型为管理员级别时，只允许填“*”，当授权类型为数据连接级别、数据库级别时只允许填空，其他类型下可以任意指定数据表。</p>
    */
   Table: string
   /**
@@ -16004,6 +16004,32 @@ export interface DescribePostTrainingPresetRequest {
 }
 
 /**
+ * Warehouse Profile 对外基础信息（对外 API 精简视图）.
+ */
+export interface WarehouseProfileBriefInfo {
+  /**
+   * <p>规格编码（常见 XS / S / M / L / XL，租户自定义编码亦合法）.</p>
+   */
+  ProfileCode?: string
+  /**
+   * <p>规格名称.</p>
+   */
+  ProfileName?: string
+  /**
+   * <p>规格描述.</p>
+   */
+  Description?: string
+  /**
+   * <p>规格展示文案（后端渲染后的字符串，如 "4CU"；前端直接展示，不做二次拼装）.</p>
+   */
+  Spec?: string
+  /**
+   * <p>适用场景描述.</p>
+   */
+  Scenario?: string
+}
+
+/**
  * ListTaskJobLogName返回参数结构体
  */
 export interface ListTaskJobLogNameResponse {
@@ -25954,6 +25980,11 @@ export interface WarehouseInfo {
    * <p>资源组/队列名。</p>
    */
   QueueName?: string
+  /**
+   * <p>规格详情（profile 完整基础信息，describe 与 list 均返回）.</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProfileDetail?: WarehouseProfileBriefInfo
   /**
    * <p>创建时间（毫秒时间戳）。</p>
    */

@@ -308,6 +308,16 @@ it("live.v20180801.DescribeLiveDomainReferer", async function () {
     }
 })
 
+it("live.v20180801.DescribeStreamPackageOutputStatistics", async function () {
+    try {
+       const data = await client.DescribeStreamPackageOutputStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteLiveSmartEraseRule", async function () {
     try {
        const data = await client.DeleteLiveSmartEraseRule({})
@@ -651,6 +661,16 @@ it("live.v20180801.ModifyCasterMarkPicInfo", async function () {
 it("live.v20180801.DescribeCasterPlayUrl", async function () {
     try {
        const data = await client.DescribeCasterPlayUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeStreamPackageRemuxStatistics", async function () {
+    try {
+       const data = await client.DescribeStreamPackageRemuxStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2491,6 +2511,16 @@ it("live.v20180801.EnableLiveDomain", async function () {
 it("live.v20180801.CancelCommonMixStream", async function () {
     try {
        const data = await client.CancelCommonMixStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeStreamPackageIngestStatistics", async function () {
+    try {
+       const data = await client.DescribeStreamPackageIngestStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

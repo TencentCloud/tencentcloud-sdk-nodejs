@@ -8509,14 +8509,6 @@ export interface CcnPolicyBasedRoutingRule {
    */
   PolicyBasedRoutingNextHopId: string
   /**
-   * <p>实例类型[VPC,DIRECTCONNECT,VPNGW]</p>
-   */
-  InstanceType: string
-  /**
-   * <p>实例ID</p>
-   */
-  InstanceId: string
-  /**
    * <p>源地址CIDR</p>
    */
   SourceCidrBlock: string
@@ -8528,6 +8520,18 @@ export interface CcnPolicyBasedRoutingRule {
    * <p>优先级</p>
    */
   Priority: number
+  /**
+   * <p>实例类型[VPC,DIRECTCONNECT,VPNGW]</p>
+   */
+  InstanceType: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>实例所在地域</p>
+   */
+  InstanceRegion?: string
   /**
    * <p>描述</p>
    */

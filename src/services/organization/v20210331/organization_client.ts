@@ -93,7 +93,7 @@ import {
   UpdateCustomPolicyForRoleConfigurationResponse,
   DescribeShareUnitMembersResponse,
   MemberMainInfo,
-  CreateRoleAssignmentRequest,
+  DeleteOrganizationMembersResponse,
   DeleteShareUnitResourcesRequest,
   MemberIdentity,
   RejectJoinShareUnitInvitationResponse,
@@ -105,12 +105,13 @@ import {
   DescribeOrganizationAuthNodeResponse,
   OrgPermission,
   ListPoliciesResponse,
+  AuditPermissionApplyOrderRequest,
   BindOrganizationMemberAuthAccountRequest,
   DescribeShareUnitsResponse,
   SAMLIdentityProviderConfiguration,
   UpdateOrganizationMemberEmailBindResponse,
   GetZoneSAMLServiceProviderInfoResponse,
-  DeleteOrganizationMembersResponse,
+  CreateRoleAssignmentRequest,
   ManagerShareUnit,
   UpdateSCIMCredentialStatusResponse,
   DescribeShareUnitNodesResponse,
@@ -251,7 +252,7 @@ import {
   RemovePermissionPolicyFromRoleConfigurationResponse,
   ListPoliciesRequest,
   BindOrganizationPolicySubAccountRequest,
-  OrgMemberAuthAccount,
+  AuditPermissionApplyOrderResponse,
   UpdateOrganizationMembersPolicyRequest,
   CreateOrganizationMemberRequest,
   AuthRelationFile,
@@ -310,6 +311,7 @@ import {
   CreateSCIMCredentialRequest,
   DescribeOrganizationMembersAuthPolicyResponse,
   DescribePolicyRequest,
+  OrgMemberAuthAccount,
   DeleteGroupResponse,
   UpdateOrganizationMembersPolicyResponse,
   UpdateUserStatusRequest,
@@ -693,6 +695,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListUsersResponse) => void
   ): Promise<ListUsersResponse> {
     return this.request("ListUsers", req, cb)
+  }
+
+  /**
+   * 审批用户权限申请
+   */
+  async AuditPermissionApplyOrder(
+    req: AuditPermissionApplyOrderRequest,
+    cb?: (error: string, rep: AuditPermissionApplyOrderResponse) => void
+  ): Promise<AuditPermissionApplyOrderResponse> {
+    return this.request("AuditPermissionApplyOrder", req, cb)
   }
 
   /**

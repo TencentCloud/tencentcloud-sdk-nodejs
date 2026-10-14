@@ -618,6 +618,16 @@ it("cfw.v20190904.CreateBlockIgnoreRuleNew", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyNatInstance", async function () {
+    try {
+       const data = await client.ModifyNatInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.CloseClusterNatFwSwitch", async function () {
     try {
        const data = await client.CloseClusterNatFwSwitch({})
@@ -1298,9 +1308,9 @@ it("cfw.v20190904.DescribeAssociatedInstanceList", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyNatInstance", async function () {
+it("cfw.v20190904.DescribeVpcFwIpStat", async function () {
     try {
-       const data = await client.ModifyNatInstance({})
+       const data = await client.DescribeVpcFwIpStat({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

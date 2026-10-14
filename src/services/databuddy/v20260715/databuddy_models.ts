@@ -3469,6 +3469,10 @@ export interface ListTablesRequest {
    */
   SchemaName: string
   /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
    * <p>最大结果条数</p>
    */
   MaxResults?: number
@@ -3476,10 +3480,6 @@ export interface ListTablesRequest {
    * <p>分页token</p>
    */
   PageToken?: string
-  /**
-   * <p>调用时所在workspace唯一id</p>
-   */
-  WorkspaceId?: string
   /**
    * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
@@ -4116,7 +4116,7 @@ export interface GetTableRequest {
   /**
    * <p>调用时所在workspace唯一id</p>
    */
-  WorkspaceId?: string
+  WorkspaceId: string
   /**
    * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
@@ -5479,7 +5479,7 @@ export interface GetSchemaRequest {
   /**
    * <p>调用时所在workspace唯一id</p>
    */
-  WorkspaceId?: string
+  WorkspaceId: string
   /**
    * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
@@ -5576,7 +5576,7 @@ export interface DeleteCatalogRequest {
   /**
    * 调用时所在workspace唯一id
    */
-  WorkspaceId?: string
+  WorkspaceId: string
   /**
    * 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径
    */
@@ -5733,6 +5733,10 @@ export interface ListSchemasRequest {
    */
   CatalogName: string
   /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
    * <p>最大结果条数</p>
    */
   MaxResults?: number
@@ -5740,10 +5744,6 @@ export interface ListSchemasRequest {
    * <p>分页token</p>
    */
   PageToken?: string
-  /**
-   * <p>调用时所在workspace唯一id</p>
-   */
-  WorkspaceId?: string
   /**
    * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
@@ -5935,7 +5935,7 @@ export interface DeleteSchemaRequest {
   /**
    * 调用时所在workspace唯一id
    */
-  WorkspaceId?: string
+  WorkspaceId: string
   /**
    * 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误
    */

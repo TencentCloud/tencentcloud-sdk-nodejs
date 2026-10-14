@@ -3219,6 +3219,36 @@ export interface AttachInsInfo {
 }
 
 /**
+ * DescribeNatCcnFwSwitch返回参数结构体
+ */
+export interface DescribeNatCcnFwSwitchResponse {
+  /**
+   * <p>开关接入模式，1-自动接入，2-手动接入</p><p>枚举值：</p><ul><li>1： 自动接入</li><li>2： 手动接入</li></ul>
+   */
+  SwitchMode?: number
+  /**
+   * <p>引流路由方法，0-多路由表，1-策略路由</p><p>枚举值：</p><ul><li>0： 多路由表</li><li>1： 策略路由</li></ul>
+   */
+  RoutingMode?: number
+  /**
+   * <p>Bypass状态，0-关闭，1-开启</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul>
+   */
+  Bypass?: number
+  /**
+   * <p>云联网实例ID</p>
+   */
+  CcnId?: string
+  /**
+   * <p>接入的实例列表</p>
+   */
+  AccessInstanceList?: Array<AccessInstanceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 多种VPC墙模式开关结构
  */
 export interface FwGroupSwitch {
@@ -5261,29 +5291,59 @@ export interface DescribeCcnAssociatedInstancesResponse {
 }
 
 /**
- * ModifyNatFwReSelect请求参数结构体
+ * VPC防火墙状态监控图
  */
-export interface ModifyNatFwReSelectRequest {
+export interface FwGroupIpFlowStat {
   /**
-   * <p>模式 1：接入模式；0：新增模式</p>
+   * IP
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Mode: number
+  Ip?: string
   /**
-   * <p>防火墙实例id</p>
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CfwInstance: string
+  InstanceId?: string
   /**
-   * <p>接入模式重新接入的nat网关列表，其中NatGwList和VpcList只能传递一个。</p>
+   * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NatGwList?: Array<string>
+  InstanceName?: string
   /**
-   * <p>新增模式重新接入的vpc列表，其中NatGwList和NatgwList只能传递一个。</p>
+   * VPCID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcList?: Array<string>
+  VpcId?: string
   /**
-   * <p>指定防火墙使用网段信息</p>
+   * VPC 名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FwCidrInfo?: FwCidrInfo
+  VpcName?: string
+  /**
+   * 峰值流量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowMax?: number
+  /**
+   * 均值带宽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowAvg?: number
+  /**
+   * 限速状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TcRuleStatus?: number
+  /**
+   * 防火墙ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FwInsId?: string
+  /**
+   * 0 IPV4 , 1 IPV6
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpVersion?: number
 }
 
 /**
@@ -6442,6 +6502,21 @@ export interface VpcFwInstanceInfo {
    * <p>按流量弹性开关</p><p>取值范围：[0, 1]</p><p>默认值：0</p>
    */
   ElasticTrafficSwitch?: number
+}
+
+/**
+ * DescribeCcnVpcFwSwitch返回参数结构体
+ */
+export interface DescribeCcnVpcFwSwitchResponse {
+  /**
+   * <p>互联对配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InterconnectPairs?: Array<InterconnectPair>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7661,33 +7736,29 @@ export interface CreateChooseVpcsResponse {
 }
 
 /**
- * DescribeNatCcnFwSwitch返回参数结构体
+ * ModifyNatFwReSelect请求参数结构体
  */
-export interface DescribeNatCcnFwSwitchResponse {
+export interface ModifyNatFwReSelectRequest {
   /**
-   * <p>开关接入模式，1-自动接入，2-手动接入</p><p>枚举值：</p><ul><li>1： 自动接入</li><li>2： 手动接入</li></ul>
+   * <p>模式 1：接入模式；0：新增模式</p>
    */
-  SwitchMode?: number
+  Mode: number
   /**
-   * <p>引流路由方法，0-多路由表，1-策略路由</p><p>枚举值：</p><ul><li>0： 多路由表</li><li>1： 策略路由</li></ul>
+   * <p>防火墙实例id</p>
    */
-  RoutingMode?: number
+  CfwInstance: string
   /**
-   * <p>Bypass状态，0-关闭，1-开启</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul>
+   * <p>接入模式重新接入的nat网关列表，其中NatGwList和VpcList只能传递一个。</p>
    */
-  Bypass?: number
+  NatGwList?: Array<string>
   /**
-   * <p>云联网实例ID</p>
+   * <p>新增模式重新接入的vpc列表，其中NatGwList和NatgwList只能传递一个。</p>
    */
-  CcnId?: string
+  VpcList?: Array<string>
   /**
-   * <p>接入的实例列表</p>
+   * <p>指定防火墙使用网段信息</p>
    */
-  AccessInstanceList?: Array<AccessInstanceInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  FwCidrInfo?: FwCidrInfo
 }
 
 /**
@@ -10024,18 +10095,49 @@ export interface SecurityGroupListData {
 }
 
 /**
- * DescribeCcnVpcFwSwitch返回参数结构体
+ * DescribeVpcFwIpStat请求参数结构体
  */
-export interface DescribeCcnVpcFwSwitchResponse {
+export interface DescribeVpcFwIpStatRequest {
   /**
-   * <p>互联对配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>每页条数</p>
    */
-  InterconnectPairs?: Array<InterconnectPair>
+  Limit: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>偏移值</p>
    */
-  RequestId?: string
+  Offset: number
+  /**
+   * <p>防火墙组ID</p>
+   */
+  FwGroupId?: string
+  /**
+   * <p>防火墙的实例id</p>
+   */
+  FwInsId?: string
+  /**
+   * <p>选择的时间区间 1:1小时内，2: 24 小时 ，3：7天， 4：1个月</p>
+   */
+  TimeType?: number
+  /**
+   * <p>过滤条件组合</p>
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * <p>检索的起始时间，可不传</p>
+   */
+  StartTime?: string
+  /**
+   * <p>检索的截止时间，可不传</p>
+   */
+  EndTime?: string
+  /**
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值</p>
+   */
+  Order?: string
+  /**
+   * <p>排序所用到的字段</p>
+   */
+  By?: string
 }
 
 /**
@@ -10517,6 +10619,30 @@ export interface DescribeOfflineExportTaskResponse {
    * <p>导出数据限制</p>
    */
   ExportLimit?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVpcFwIpStat返回参数结构体
+ */
+export interface DescribeVpcFwIpStatResponse {
+  /**
+   * <p>单台cvm峰值带宽统计列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<FwGroupIpFlowStat>
+  /**
+   * <p>总行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * <p>异步查询状态，1查询执行中，0查询已结束</p>
+   */
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -358,6 +358,16 @@ it("dbbrain.v20210527.CreateSqlFilter", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeDBAuditLogs", async function () {
+    try {
+       const data = await client.DescribeDBAuditLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeHealthScore", async function () {
     try {
        const data = await client.DescribeHealthScore({})
@@ -951,6 +961,16 @@ it("dbbrain.v20210527.UpdateDatabaseAutonomyStatus", async function () {
 it("dbbrain.v20210527.OpenAuditService", async function () {
     try {
        const data = await client.OpenAuditService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeDatabaseObjectV2", async function () {
+    try {
+       const data = await client.DescribeDatabaseObjectV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

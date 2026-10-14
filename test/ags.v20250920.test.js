@@ -218,9 +218,9 @@ it("ags.v20250920.DescribeRegistryRecordList", async function () {
     }
 })
 
-it("ags.v20250920.DescribeSandboxInstanceList", async function () {
+it("ags.v20250920.DescribePreCacheImageList", async function () {
     try {
-       const data = await client.DescribeSandboxInstanceList({})
+       const data = await client.DescribePreCacheImageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,6 +368,16 @@ it("ags.v20250920.DescribeSessions", async function () {
     }
 })
 
+it("ags.v20250920.DescribeSandboxInstanceList", async function () {
+    try {
+       const data = await client.DescribeSandboxInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.DescribeSandboxToolList", async function () {
     try {
        const data = await client.DescribeSandboxToolList({})
@@ -461,6 +471,16 @@ it("ags.v20250920.CreateSessionSpace", async function () {
 it("ags.v20250920.DescribeSessionSpaces", async function () {
     try {
        const data = await client.DescribeSessionSpaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.DeletePreCacheImage", async function () {
+    try {
+       const data = await client.DeletePreCacheImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

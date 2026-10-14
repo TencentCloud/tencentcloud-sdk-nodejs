@@ -1080,6 +1080,28 @@ export interface DeleteSandboxSnapshotResponse {
 }
 
 /**
+ * DescribePreCacheImageList请求参数结构体
+ */
+export interface DescribePreCacheImageListRequest {
+  /**
+   * <p>查询过滤条件。支持 Image, ImageDigest, ImageRegistryType, Status, SourceType；不同 Filter 之间为 AND，同一 Filter 的 Values 之间为 OR。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>返回数据列数</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  MaxResults?: number
+  /**
+   * <p>NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。</p>
+   */
+  NextToken?: string
+  /**
+   * <p>默认 false；仅控制是否返回精确总数</p>
+   */
+  NeedTotalCount?: boolean
+}
+
+/**
  * DescribeRegistryRecordVersionList请求参数结构体
  */
 export interface DescribeRegistryRecordVersionListRequest {
@@ -1635,6 +1657,28 @@ export interface SessionSpaceInfo {
 }
 
 /**
+ * DescribePreCacheImageList返回参数结构体
+ */
+export interface DescribePreCacheImageListResponse {
+  /**
+   * <p>镜像预热总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>镜像预热列表</p>
+   */
+  PreCacheImageList?: Array<PreCacheImage>
+  /**
+   * <p>如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。</p>
+   */
+  NextToken?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateSandboxInstance请求参数结构体
  */
 export interface UpdateSandboxInstanceRequest {
@@ -2126,6 +2170,16 @@ export interface UpdateRegistryRecordRequest {
 }
 
 /**
+ * DeletePreCacheImage返回参数结构体
+ */
+export interface DeletePreCacheImageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAPIKey返回参数结构体
  */
 export interface CreateAPIKeyResponse {
@@ -2399,6 +2453,48 @@ export interface GetSkillPackageDownloadURLResponse {
 }
 
 /**
+ * 镜像预热产物
+ */
+export interface PreCacheImage {
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像 Digest</p>
+   */
+  ImageDigest?: string
+  /**
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>、<code>custom</code> 。</p><p>枚举值：</p><ul><li>enterprise： tcr 企业容器镜像服务</li><li>personal： ccr 个人容器镜像服务</li></ul>
+   */
+  ImageRegistryType?: string
+  /**
+   * <p>镜像预热状态</p>
+   */
+  Status?: string
+  /**
+   * <p>镜像预热创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>镜像预热ID</p>
+   */
+  PreCacheImageId?: string
+  /**
+   * <p>镜像预热来源</p><p>枚举值：</p><ul><li>AUTO： Sandbox Tool / Instance 自动预热</li><li>EXPLICIT： 手动预热</li><li>TCR_AUTO： TCR自动预热</li></ul>
+   */
+  SourceType?: string
+  /**
+   * <p>镜像预热存储大小</p><p>单位：Byte</p>
+   */
+  CachedImageSizeBytes?: number
+  /**
+   * <p>该预热镜像最近一次被沙箱实例使用时间</p>
+   */
+  LastUsedTime?: string
+}
+
+/**
  * Session 快照状态
  */
 export interface SessionState {
@@ -2658,6 +2754,28 @@ export interface AgentBucketStorageSource {
 }
 
 /**
+ * DeletePreCacheImage请求参数结构体
+ */
+export interface DeletePreCacheImageRequest {
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像仓库配置</p>
+   */
+  ImageDigest?: string
+  /**
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>、<code>custom</code> 。</p><p>枚举值：</p><ul><li>enterprise： tcr 企业容器镜像服务</li><li>personal： ccr 个人容器镜像服务</li></ul>
+   */
+  ImageRegistryType?: string
+  /**
+   * <p>镜像预热ID</p>
+   */
+  PreCacheImageId?: string
+}
+
+/**
  * Record Label 变更操作项。Operation=SET 时可携带 VersionId；DELETE 时禁止 VersionId。
  */
 export interface CloudRecordLabelMutation {
@@ -2753,6 +2871,10 @@ export interface StartSandboxInstanceRequest {
    * <p>待克隆的源沙箱 ID</p>
    */
   SourceInstanceId?: string
+  /**
+   * <p>待启动的沙箱快照 ID</p>
+   */
+  SnapshotId?: string
   /**
    * <p>超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h</p>
    */

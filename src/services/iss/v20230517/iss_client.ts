@@ -18,17 +18,22 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeTaskResponse,
+  BatchGetVLPlanSourceFileURLRequest,
   UpdateDeviceStatusRequest,
   ListDevicesRequest,
   DeleteRecordBackupPlanResponse,
-  DescribeDeviceListData,
+  DescribeDeviceChannelData,
+  VideoDownloadTaskData,
   ListOrganizationChannelsRequest,
   DescribeDevicePresetData,
   ListSubTasksRequest,
+  VLPlanResultSnapshotImageUrlInfo,
   AddRecordBackupPlanResponse,
   DescribeCNAMERequest,
   DescribeVideoDownloadUrlData,
   ControlRecordTimelineRequest,
+  CreateVLTemplateResponse,
   DeleteOrganizationRequest,
   SetForbidPlayChannelsRequest,
   SubTaskData,
@@ -36,40 +41,51 @@ import {
   ISAPIOutputData,
   UpdateOrganizationResponse,
   DescribeDeviceData,
+  DescribeDeviceChannelResponse,
   BatchDeleteVideoDownloadTaskRequest,
+  BatchAssignVLPlanChannelsResponse,
+  ListVideoSnapshotTemplateRequest,
+  ModifyVLPlanRequest,
   UpdateDeviceOrganizationRequest,
   UpdateDeviceOrganizationResponse,
   AddOrganizationResponse,
-  BatchOperateDeviceResponse,
+  CreateVideoSnapshotTemplateResponse,
   DescribeDeviceRegionResponse,
   ListRecordPlanChannelsData,
   DescribeVideoBitRateResponse,
   DescribeDomainResponse,
   DescribeRecordRetrieveTaskData,
+  VLPlanResultDetailInfo,
   DescribeRecordBackupTemplateData,
+  DeleteVLPlanRequest,
   ControlDeviceStreamResponse,
   DeleteRecordRetrieveTaskResponse,
   DeleteRecordPlanResponse,
   DescribeOrganizationResponse,
   UpdateUserDeviceRequest,
-  DescribeDeviceChannelResponse,
+  DescribeVideoSnapshotTemplateRequest,
+  CreateVLPlanResponse,
   AddRecordBackupTemplateRequest,
   DescribeVideoBitRateRequest,
   SetForbidplayChannelParam,
   DescribeUserDeviceListRequest,
+  VLPlanInfo,
   DescribeRecordRetrieveTaskRequest,
   ControlDeviceSnapshotResponse,
+  MultiSnapshotMode,
   RefreshDeviceChannelResponse,
   DeleteOrganizationResponse,
   DescribeRecordTemplateRequest,
+  DeleteVideoSnapshotTemplateResponse,
   DeleteRecordTemplateRequest,
   DescribeRecordPlanResponse,
   ListRecordBackupPlanDevicesData,
-  TaskData,
+  BatchGetVideoSnapshotImageUrlResponse,
   AddRecordBackupTemplateData,
   DeleteUserDeviceRequest,
   AddRecordPlanResponse,
   ListOrganizationChannelNumbersRequest,
+  ListRecordRetrieveTasksResponse,
   ListVideoDownloadTaskResponse,
   SipCarrierEndpoints,
   DeleteDomainRequest,
@@ -79,28 +95,37 @@ import {
   AddRecordTemplateResponse,
   ListRecordPlansRequest,
   DescribeUserDeviceResponse,
-  ListSubTasksResponse,
+  DescribeRecordRetrieveTaskResponse,
+  DescribeVLPlanResponse,
   ListDeviceSnapshotsRequest,
   UpdateRecordPlanRequest,
   DescribeOrganizationRequest,
+  DescribeVideoSnapshotConfigRequest,
   ControlRecordResponse,
   UpdateDeviceData,
   AddRecordPlanRequest,
+  ModifyVLPlanResponse,
   ListRecordTemplatesRequest,
   DescribeOrganizationData,
+  VideoSnapshotConfigInfo,
   DescribeVideoDownloadUrlResponse,
   RecordPlanOptData,
+  EffectiveTime,
   DescribeUserDeviceListResponse,
   Timeline,
+  ListVideoSnapshotTemplateData,
   UpdateRecordBackupPlanModify,
   RecordRetrieveTaskChannelInfo,
+  DescribeVLPlanRequest,
   CallISAPIRequest,
   AddRecordRetrieveTaskRequest,
   DescribeRecordPlanRequest,
+  VideoSceneInfo,
   ControlDevicePresetResponse,
   ListRecordBackupPlansResponse,
   OrganizationChannelInfo,
   ChannelInfo,
+  DeleteVideoSnapshotConfigRequest,
   DescribeDevicePresetRequest,
   DescribeDomainRequest,
   BatchOperateDeviceData,
@@ -115,92 +140,120 @@ import {
   ListDevicesResponse,
   AddStreamAuthData,
   RefreshDeviceChannelRequest,
-  GBDeviceSnapInfo,
+  DescribeVLPlanResultRequest,
+  CallbackURL,
   ListDeviceInfo,
   LifeCycleData,
   ListOrganizationChannelNumbersResponse,
   DescribeDomainData,
   ListRecordBackupTemplatesResponse,
   ListRecordPlanChannelsResponse,
+  VideoSnapshotTemplateInfo,
+  MultiVideoSnapshotMode,
   UpdateRecordTemplateRequest,
   DescribeRecordPlaybackUrlRequest,
   DescribeDeviceAddrList,
   ListRecordPlansResponse,
   DescribeRecordTemplateResponse,
+  BatchAddVideoSnapshotConfigChannelRequest,
   DescribeRecordSliceResponse,
   ListRecordPlanDevicesResponse,
   DescribeDevicePresetResponse,
+  DescribeStreamAuthRequest,
   UpdateRecordBackupPlanRequest,
   RecordTimeLine,
+  VLTemplateInfo,
   ControlRecordRequest,
   ControlDevicePTZResponse,
   ListRecordBackupPlansRequest,
+  CreateVideoSnapshotConfigRequest,
   AddOrgData,
   AddUserDeviceRequest,
   ListRecordBackupPlanDevicesResponse,
   DeleteTaskRequest,
+  UpdateUserDeviceResponse,
   ControlDevicePTZRequest,
   DescribeRecordBackupPlanRequest,
   DescribeRecordBackupPlanResponse,
+  ListSubTasksData,
   DescribeDeviceChannelRequest,
-  UpdateUserDeviceResponse,
-  VideoDownloadTaskData,
+  DescribeVideoSnapshotTemplateResponse,
+  BatchGetVLPlanSourceFileURLResponse,
+  ListVLPlansResponse,
+  UpdateRecordPlanData,
+  CreateVideoSnapshotConfigResponse,
   ListTasksRequest,
   ListForbidplayChannelsData,
   CreateVideoDownloadTaskResponse,
   UpdateOrganizationRequest,
   AddRecordBackupPlanData,
+  ListVLPlansRequest,
   DescribeGBDeviceAddrRequest,
+  GBDeviceSnapInfo,
+  DescribeDeviceListData,
   ControlDeviceSnapshotRequest,
   UpdateRecordTemplateData,
   DescribeDomainRegionRequest,
   AddRecordTemplateRequest,
   DescribeRecordFileRequest,
+  TaskData,
   RecordSliceInfo,
   QueryForbidPlayChannelListResponse,
   DescribeVideoDownloadUrlRequest,
   RecordPlanBaseInfo,
-  ListRecordBackupTemplatesRequest,
+  BatchGetVideoSnapshotImageUrlData,
+  DescribeVLPlanResultResponse,
   DescribeRecordSliceRequest,
   DescribeUserDeviceRequest,
   DescribeDeviceRegionRequest,
+  DescribeRecordFileData,
+  ModifyVideoSnapshotConfigRequest,
   AddStreamAuthRequest,
   RecordTemplateTimeSections,
   BitRateInfo,
   PlayRecordRequest,
   UpdateRecordBackupTemplateModify,
+  DeleteRecordRetrieveTaskRequest,
   QueryForbidPlayChannelListRequest,
-  DescribeDeviceChannelData,
+  DeleteVideoSnapshotConfigResponse,
   DescribeRecordFileResponse,
   DescribeGBDeviceAddrResponse,
   ControlDevicePresetRequest,
   ControlDeviceStreamRequest,
-  ListRecordRetrieveTasksResponse,
+  DescribeVideoSnapshotConfigResponse,
   ListRecordBackupPlanDevicesRequest,
+  ModifyVideoSnapshotConfigResponse,
   DeleteDomainResponse,
   AddRecordRetrieveTaskResponse,
   DeleteRecordTemplateResponse,
   ListRecordPlanDevicesData,
   ListRecordBackupTemplatesData,
   ListRecordTemplatesResponse,
+  ListVLTemplatesRequest,
   DescribeRecordBackupTemplateRequest,
+  ListSubTasksResponse,
+  DescribeVLTemplateResponse,
   UpdateRecordBackupTemplateResponse,
   ControlRecordTimelineResponse,
   AddRecordRetrieveTaskData,
-  DeleteRecordRetrieveTaskRequest,
+  BatchAssignVLPlanChannelsRequest,
   DescribeRecordBackupPlanData,
+  ImageUrlInfo,
   ChannelAttrInfo,
   UpdateRecordPlanResponse,
-  DescribeTaskResponse,
+  DeleteVLTemplateResponse,
   ListVideoDownloadTaskData,
   DeleteRecordBackupPlanRequest,
+  ListRecordBackupTemplatesRequest,
   ListRecordPlanChannelsRequest,
   DescribeDeviceRegion,
   RecordPlanChannelInfo,
   SetForbidPlayChannelsResponse,
   ListVideoDownloadTaskRequest,
+  ListVideoSnapshotTemplateResponse,
   DeleteRecordBackupTemplateRequest,
   RecordRetrieveTaskDetailsInfo,
+  DescribeStreamAuthResponse,
   DescribeVideoBitRateList,
   UpdateRecordTemplateResponse,
   AddRecordBackupTemplateResponse,
@@ -210,35 +263,41 @@ import {
   PlayRecordData,
   DeleteTaskResponse,
   DescribeRecordPlaybackUrlResponse,
-  UpdateRecordPlanData,
+  DeleteVLPlanResponse,
   DescribeTaskRequest,
+  ImageSceneInfo,
   ListOrganizationChannelsResponse,
-  DescribeRecordFileData,
+  DescribeVLTemplateRequest,
+  CreateVLTemplateRequest,
   UpdateOrgData,
   DescribeDomainRegionResponse,
   BatchOperateDeviceRequest,
   ListOrganizationChannelsData,
   AddRecordBackupPlanRequest,
   ListTasksData,
-  ListSubTasksData,
+  CreateVLPlanRequest,
   ControlDeviceStreamData,
   ListDeviceSnapshotsResponse,
   RecordTemplateInfo,
   UpdateRecordBackupTemplateRequest,
+  DeleteVLTemplateRequest,
   UpdateDeviceStatusResponse,
   DeleteUserDeviceResponse,
   UpdateRecordBackupPlanResponse,
   DescribeDomainRegionData,
   AddOrganizationRequest,
   RemoteAddrInfo,
-  DescribeStreamAuthResponse,
+  BatchGetVideoSnapshotImageUrlRequest,
+  UpdateRecordBackupPlanData,
   ListRecordBackupPlanData,
   DeleteRecordBackupTemplateResponse,
   CreateVideoDownloadTaskRequest,
-  DescribeRecordRetrieveTaskResponse,
-  DescribeStreamAuthRequest,
+  CreateVideoSnapshotTemplateRequest,
+  DeleteVideoSnapshotTemplateRequest,
+  BatchAddVideoSnapshotConfigChannelResponse,
   UpdateRecordBackupTemplateData,
-  UpdateRecordBackupPlanData,
+  BatchOperateDeviceResponse,
+  ListVLTemplatesResponse,
   AddDeviceData,
 } from "./iss_models"
 
@@ -249,6 +308,206 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("iss.tencentcloudapi.com", "2023-05-17", clientConfig)
+  }
+
+  /**
+   * 获取视觉理解计划列表
+   */
+  async ListVLPlans(
+    req: ListVLPlansRequest,
+    cb?: (error: string, rep: ListVLPlansResponse) => void
+  ): Promise<ListVLPlansResponse> {
+    return this.request("ListVLPlans", req, cb)
+  }
+
+  /**
+   * 用于查询取回任务列表
+   */
+  async ListRecordRetrieveTasks(
+    req?: ListRecordRetrieveTasksRequest,
+    cb?: (error: string, rep: ListRecordRetrieveTasksResponse) => void
+  ): Promise<ListRecordRetrieveTasksResponse> {
+    return this.request("ListRecordRetrieveTasks", req, cb)
+  }
+
+  /**
+   * 用于查询实时上云计划列表
+   */
+  async ListRecordPlans(
+    req?: ListRecordPlansRequest,
+    cb?: (error: string, rep: ListRecordPlansResponse) => void
+  ): Promise<ListRecordPlansResponse> {
+    return this.request("ListRecordPlans", req, cb)
+  }
+
+  /**
+   * 创建截图配置
+   */
+  async CreateVideoSnapshotConfig(
+    req: CreateVideoSnapshotConfigRequest,
+    cb?: (error: string, rep: CreateVideoSnapshotConfigResponse) => void
+  ): Promise<CreateVideoSnapshotConfigResponse> {
+    return this.request("CreateVideoSnapshotConfig", req, cb)
+  }
+
+  /**
+   * 用于修改组织。
+   */
+  async UpdateOrganization(
+    req: UpdateOrganizationRequest,
+    cb?: (error: string, rep: UpdateOrganizationResponse) => void
+  ): Promise<UpdateOrganizationResponse> {
+    return this.request("UpdateOrganization", req, cb)
+  }
+
+  /**
+   * 用于查询组织目录下的通道列表
+   */
+  async ListOrganizationChannels(
+    req: ListOrganizationChannelsRequest,
+    cb?: (error: string, rep: ListOrganizationChannelsResponse) => void
+  ): Promise<ListOrganizationChannelsResponse> {
+    return this.request("ListOrganizationChannels", req, cb)
+  }
+
+  /**
+   * 批量添加截图配置的通道
+   */
+  async BatchAddVideoSnapshotConfigChannel(
+    req: BatchAddVideoSnapshotConfigChannelRequest,
+    cb?: (error: string, rep: BatchAddVideoSnapshotConfigChannelResponse) => void
+  ): Promise<BatchAddVideoSnapshotConfigChannelResponse> {
+    return this.request("BatchAddVideoSnapshotConfigChannel", req, cb)
+  }
+
+  /**
+   * 用于查询添加的域名列表。
+   */
+  async DescribeDomain(
+    req?: DescribeDomainRequest,
+    cb?: (error: string, rep: DescribeDomainResponse) => void
+  ): Promise<DescribeDomainResponse> {
+    return this.request("DescribeDomain", req, cb)
+  }
+
+  /**
+   * 用于删除录像上云模板。
+   */
+  async DeleteRecordBackupTemplate(
+    req: DeleteRecordBackupTemplateRequest,
+    cb?: (error: string, rep: DeleteRecordBackupTemplateResponse) => void
+  ): Promise<DeleteRecordBackupTemplateResponse> {
+    return this.request("DeleteRecordBackupTemplate", req, cb)
+  }
+
+  /**
+   * 用于同步国标设备的通道（接口调用后，触发向设备请求通道列表，新增的通道入库，设备上已删除的通道需自行删除、后台不自动删除）。
+   */
+  async RefreshDeviceChannel(
+    req: RefreshDeviceChannelRequest,
+    cb?: (error: string, rep: RefreshDeviceChannelResponse) => void
+  ): Promise<RefreshDeviceChannelResponse> {
+    return this.request("RefreshDeviceChannel", req, cb)
+  }
+
+  /**
+   * 控制设备抓拍--单次，当前仅支持国标设备
+   */
+  async ControlDeviceSnapshot(
+    req: ControlDeviceSnapshotRequest,
+    cb?: (error: string, rep: ControlDeviceSnapshotResponse) => void
+  ): Promise<ControlDeviceSnapshotResponse> {
+    return this.request("ControlDeviceSnapshot", req, cb)
+  }
+
+  /**
+   * 批量关联视觉理解计划通道
+   */
+  async BatchAssignVLPlanChannels(
+    req: BatchAssignVLPlanChannelsRequest,
+    cb?: (error: string, rep: BatchAssignVLPlanChannelsResponse) => void
+  ): Promise<BatchAssignVLPlanChannelsResponse> {
+    return this.request("BatchAssignVLPlanChannels", req, cb)
+  }
+
+  /**
+   * 用于删除实时上云计划
+   */
+  async DeleteRecordPlan(
+    req: DeleteRecordPlanRequest,
+    cb?: (error: string, rep: DeleteRecordPlanResponse) => void
+  ): Promise<DeleteRecordPlanResponse> {
+    return this.request("DeleteRecordPlan", req, cb)
+  }
+
+  /**
+   * 用于设备通道云台控制，包括转动、变倍、变焦、光圈等。
+   */
+  async ControlDevicePTZ(
+    req: ControlDevicePTZRequest,
+    cb?: (error: string, rep: ControlDevicePTZResponse) => void
+  ): Promise<ControlDevicePTZResponse> {
+    return this.request("ControlDevicePTZ", req, cb)
+  }
+
+  /**
+   * 用于查询录像上云计划下的设备通道列表。
+   */
+  async ListRecordBackupPlanDevices(
+    req: ListRecordBackupPlanDevicesRequest,
+    cb?: (error: string, rep: ListRecordBackupPlanDevicesResponse) => void
+  ): Promise<ListRecordBackupPlanDevicesResponse> {
+    return this.request("ListRecordBackupPlanDevices", req, cb)
+  }
+
+  /**
+   * 用于查询批量任务和简单任务列表
+   */
+  async ListTasks(
+    req: ListTasksRequest,
+    cb?: (error: string, rep: ListTasksResponse) => void
+  ): Promise<ListTasksResponse> {
+    return this.request("ListTasks", req, cb)
+  }
+
+  /**
+   * 用于设置推拉流鉴权配置。
+   */
+  async AddStreamAuth(
+    req: AddStreamAuthRequest,
+    cb?: (error: string, rep: AddStreamAuthResponse) => void
+  ): Promise<AddStreamAuthResponse> {
+    return this.request("AddStreamAuth", req, cb)
+  }
+
+  /**
+   * 用于删除录像上云模板。
+   */
+  async DeleteRecordBackupPlan(
+    req: DeleteRecordBackupPlanRequest,
+    cb?: (error: string, rep: DeleteRecordBackupPlanResponse) => void
+  ): Promise<DeleteRecordBackupPlanResponse> {
+    return this.request("DeleteRecordBackupPlan", req, cb)
+  }
+
+  /**
+   * 用于获取设备本地录像 URL 地址。
+   */
+  async PlayRecord(
+    req: PlayRecordRequest,
+    cb?: (error: string, rep: PlayRecordResponse) => void
+  ): Promise<PlayRecordResponse> {
+    return this.request("PlayRecord", req, cb)
+  }
+
+  /**
+   * 用于修改实时上云模板
+   */
+  async UpdateRecordTemplate(
+    req: UpdateRecordTemplateRequest,
+    cb?: (error: string, rep: UpdateRecordTemplateResponse) => void
+  ): Promise<UpdateRecordTemplateResponse> {
+    return this.request("UpdateRecordTemplate", req, cb)
   }
 
   /**
@@ -272,46 +531,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询取回任务列表
-   */
-  async ListRecordRetrieveTasks(
-    req?: ListRecordRetrieveTasksRequest,
-    cb?: (error: string, rep: ListRecordRetrieveTasksResponse) => void
-  ): Promise<ListRecordRetrieveTasksResponse> {
-    return this.request("ListRecordRetrieveTasks", req, cb)
-  }
-
-  /**
-   * 用于查询录像上云计划列表。
-   */
-  async ListRecordBackupPlans(
-    req?: ListRecordBackupPlansRequest,
-    cb?: (error: string, rep: ListRecordBackupPlansResponse) => void
-  ): Promise<ListRecordBackupPlansResponse> {
-    return this.request("ListRecordBackupPlans", req, cb)
-  }
-
-  /**
-   * 用于删除已添加的设备。
-   */
-  async DeleteUserDevice(
-    req: DeleteUserDeviceRequest,
-    cb?: (error: string, rep: DeleteUserDeviceResponse) => void
-  ): Promise<DeleteUserDeviceResponse> {
-    return this.request("DeleteUserDevice", req, cb)
-  }
-
-  /**
-   * 用于查询设备的通道。
-   */
-  async DescribeDeviceChannel(
-    req: DescribeDeviceChannelRequest,
-    cb?: (error: string, rep: DescribeDeviceChannelResponse) => void
-  ): Promise<DescribeDeviceChannelResponse> {
-    return this.request("DescribeDeviceChannel", req, cb)
-  }
-
-  /**
    * 用于新建取回任务
    */
   async AddRecordRetrieveTask(
@@ -319,6 +538,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddRecordRetrieveTaskResponse) => void
   ): Promise<AddRecordRetrieveTaskResponse> {
     return this.request("AddRecordRetrieveTask", req, cb)
+  }
+
+  /**
+   * 查询视觉理解计划详情
+   */
+  async DescribeVLPlan(
+    req: DescribeVLPlanRequest,
+    cb?: (error: string, rep: DescribeVLPlanResponse) => void
+  ): Promise<DescribeVLPlanResponse> {
+    return this.request("DescribeVLPlan", req, cb)
   }
 
   /**
@@ -332,14 +561,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 平台支持将数据以TS切片的形式存入客户自有COS桶，该接口用于支持客户快捷查询切片信息列表
-（注意：只支持标准存储类型的查询）
-     */
-  async DescribeRecordSlice(
-    req: DescribeRecordSliceRequest,
-    cb?: (error: string, rep: DescribeRecordSliceResponse) => void
-  ): Promise<DescribeRecordSliceResponse> {
-    return this.request("DescribeRecordSlice", req, cb)
+   * 用于查询录像上云模板列表。
+   */
+  async ListRecordBackupTemplates(
+    req?: ListRecordBackupTemplatesRequest,
+    cb?: (error: string, rep: ListRecordBackupTemplatesResponse) => void
+  ): Promise<ListRecordBackupTemplatesResponse> {
+    return this.request("ListRecordBackupTemplates", req, cb)
   }
 
   /**
@@ -350,16 +578,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRecordBackupTemplateResponse) => void
   ): Promise<DescribeRecordBackupTemplateResponse> {
     return this.request("DescribeRecordBackupTemplate", req, cb)
-  }
-
-  /**
-   * 用于修改录像上云模板。
-   */
-  async UpdateRecordBackupTemplate(
-    req: UpdateRecordBackupTemplateRequest,
-    cb?: (error: string, rep: UpdateRecordBackupTemplateResponse) => void
-  ): Promise<UpdateRecordBackupTemplateResponse> {
-    return this.request("UpdateRecordBackupTemplate", req, cb)
   }
 
   /**
@@ -393,33 +611,243 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询禁播通道列表
+   * 删除视觉理解模板
    */
-  async QueryForbidPlayChannelList(
-    req: QueryForbidPlayChannelListRequest,
-    cb?: (error: string, rep: QueryForbidPlayChannelListResponse) => void
-  ): Promise<QueryForbidPlayChannelListResponse> {
-    return this.request("QueryForbidPlayChannelList", req, cb)
+  async DeleteVLTemplate(
+    req: DeleteVLTemplateRequest,
+    cb?: (error: string, rep: DeleteVLTemplateResponse) => void
+  ): Promise<DeleteVLTemplateResponse> {
+    return this.request("DeleteVLTemplate", req, cb)
   }
 
   /**
-   * 用于查询用户下所有实时上云计划中的通道列表
+   * 用于查询录像上云计划详情。
    */
-  async ListRecordPlanChannels(
-    req?: ListRecordPlanChannelsRequest,
-    cb?: (error: string, rep: ListRecordPlanChannelsResponse) => void
-  ): Promise<ListRecordPlanChannelsResponse> {
-    return this.request("ListRecordPlanChannels", req, cb)
+  async DescribeRecordBackupPlan(
+    req: DescribeRecordBackupPlanRequest,
+    cb?: (error: string, rep: DescribeRecordBackupPlanResponse) => void
+  ): Promise<DescribeRecordBackupPlanResponse> {
+    return this.request("DescribeRecordBackupPlan", req, cb)
   }
 
   /**
-   * 用于添加设备时，查询设备可以使用的服务节点，查询结果为已经绑定了域名的服务节点。
+   * 用于查询云录像取回任务详情
    */
-  async DescribeDeviceRegion(
-    req?: DescribeDeviceRegionRequest,
-    cb?: (error: string, rep: DescribeDeviceRegionResponse) => void
-  ): Promise<DescribeDeviceRegionResponse> {
-    return this.request("DescribeDeviceRegion", req, cb)
+  async DescribeRecordRetrieveTask(
+    req: DescribeRecordRetrieveTaskRequest,
+    cb?: (error: string, rep: DescribeRecordRetrieveTaskResponse) => void
+  ): Promise<DescribeRecordRetrieveTaskResponse> {
+    return this.request("DescribeRecordRetrieveTask", req, cb)
+  }
+
+  /**
+   * 获取设备抓拍结果列表
+   */
+  async ListDeviceSnapshots(
+    req: ListDeviceSnapshotsRequest,
+    cb?: (error: string, rep: ListDeviceSnapshotsResponse) => void
+  ): Promise<ListDeviceSnapshotsResponse> {
+    return this.request("ListDeviceSnapshots", req, cb)
+  }
+
+  /**
+   * 用于查询任务详情
+   */
+  async DescribeTask(
+    req: DescribeTaskRequest,
+    cb?: (error: string, rep: DescribeTaskResponse) => void
+  ): Promise<DescribeTaskResponse> {
+    return this.request("DescribeTask", req, cb)
+  }
+
+  /**
+   * 用于批量更改设备的组织。
+   */
+  async UpdateDeviceOrganization(
+    req: UpdateDeviceOrganizationRequest,
+    cb?: (error: string, rep: UpdateDeviceOrganizationResponse) => void
+  ): Promise<UpdateDeviceOrganizationResponse> {
+    return this.request("UpdateDeviceOrganization", req, cb)
+  }
+
+  /**
+   * 用于查询实时上云计划下的设备通道列表
+   */
+  async ListRecordPlanDevices(
+    req: ListRecordPlanDevicesRequest,
+    cb?: (error: string, rep: ListRecordPlanDevicesResponse) => void
+  ): Promise<ListRecordPlanDevicesResponse> {
+    return this.request("ListRecordPlanDevices", req, cb)
+  }
+
+  /**
+   * 用于获取云录像下载 url
+   */
+  async DescribeVideoDownloadUrl(
+    req: DescribeVideoDownloadUrlRequest,
+    cb?: (error: string, rep: DescribeVideoDownloadUrlResponse) => void
+  ): Promise<DescribeVideoDownloadUrlResponse> {
+    return this.request("DescribeVideoDownloadUrl", req, cb)
+  }
+
+  /**
+   * 用于批量操作（启用，禁用，删除）设备
+   */
+  async BatchOperateDevice(
+    req: BatchOperateDeviceRequest,
+    cb?: (error: string, rep: BatchOperateDeviceResponse) => void
+  ): Promise<BatchOperateDeviceResponse> {
+    return this.request("BatchOperateDevice", req, cb)
+  }
+
+  /**
+   * 用于查询推拉流鉴权配置。
+   */
+  async DescribeStreamAuth(
+    req?: DescribeStreamAuthRequest,
+    cb?: (error: string, rep: DescribeStreamAuthResponse) => void
+  ): Promise<DescribeStreamAuthResponse> {
+    return this.request("DescribeStreamAuth", req, cb)
+  }
+
+  /**
+   * 用于新增实时上云模板
+   */
+  async AddRecordTemplate(
+    req: AddRecordTemplateRequest,
+    cb?: (error: string, rep: AddRecordTemplateResponse) => void
+  ): Promise<AddRecordTemplateResponse> {
+    return this.request("AddRecordTemplate", req, cb)
+  }
+
+  /**
+   * 用于查询组织目录下的未添加到实时上云计划中的通道数量
+   */
+  async ListOrganizationChannelNumbers(
+    req: ListOrganizationChannelNumbersRequest,
+    cb?: (error: string, rep: ListOrganizationChannelNumbersResponse) => void
+  ): Promise<ListOrganizationChannelNumbersResponse> {
+    return this.request("ListOrganizationChannelNumbers", req, cb)
+  }
+
+  /**
+   * 用于获取对应组织下的设备列表。
+   */
+  async ListDevices(
+    req: ListDevicesRequest,
+    cb?: (error: string, rep: ListDevicesResponse) => void
+  ): Promise<ListDevicesResponse> {
+    return this.request("ListDevices", req, cb)
+  }
+
+  /**
+   * 用于查询实时上云模板详情
+   */
+  async DescribeRecordTemplate(
+    req: DescribeRecordTemplateRequest,
+    cb?: (error: string, rep: DescribeRecordTemplateResponse) => void
+  ): Promise<DescribeRecordTemplateResponse> {
+    return this.request("DescribeRecordTemplate", req, cb)
+  }
+
+  /**
+   * 用于查询设备云端录像时间轴信息（即为视频上云后设置录像计划后云存储的录像）
+   */
+  async DescribeRecordFile(
+    req: DescribeRecordFileRequest,
+    cb?: (error: string, rep: DescribeRecordFileResponse) => void
+  ): Promise<DescribeRecordFileResponse> {
+    return this.request("DescribeRecordFile", req, cb)
+  }
+
+  /**
+   * 查询视觉理解计划结果详情
+   */
+  async DescribeVLPlanResult(
+    req: DescribeVLPlanResultRequest,
+    cb?: (error: string, rep: DescribeVLPlanResultResponse) => void
+  ): Promise<DescribeVLPlanResultResponse> {
+    return this.request("DescribeVLPlanResult", req, cb)
+  }
+
+  /**
+   * 获取视觉理解模板列表
+   */
+  async ListVLTemplates(
+    req: ListVLTemplatesRequest,
+    cb?: (error: string, rep: ListVLTemplatesResponse) => void
+  ): Promise<ListVLTemplatesResponse> {
+    return this.request("ListVLTemplates", req, cb)
+  }
+
+  /**
+   * 用于删除域名。
+   */
+  async DeleteDomain(
+    req: DeleteDomainRequest,
+    cb?: (error: string, rep: DeleteDomainResponse) => void
+  ): Promise<DeleteDomainResponse> {
+    return this.request("DeleteDomain", req, cb)
+  }
+
+  /**
+   * 创建视觉理解模板
+   */
+  async CreateVLTemplate(
+    req: CreateVLTemplateRequest,
+    cb?: (error: string, rep: CreateVLTemplateResponse) => void
+  ): Promise<CreateVLTemplateResponse> {
+    return this.request("CreateVLTemplate", req, cb)
+  }
+
+  /**
+   * 用于修改设备的配置信息。
+   */
+  async UpdateUserDevice(
+    req: UpdateUserDeviceRequest,
+    cb?: (error: string, rep: UpdateUserDeviceResponse) => void
+  ): Promise<UpdateUserDeviceResponse> {
+    return this.request("UpdateUserDevice", req, cb)
+  }
+
+  /**
+   * 用于查询设备的通道。
+   */
+  async DescribeDeviceChannel(
+    req: DescribeDeviceChannelRequest,
+    cb?: (error: string, rep: DescribeDeviceChannelResponse) => void
+  ): Promise<DescribeDeviceChannelResponse> {
+    return this.request("DescribeDeviceChannel", req, cb)
+  }
+
+  /**
+   * 删除截图配置
+   */
+  async DeleteVideoSnapshotConfig(
+    req: DeleteVideoSnapshotConfigRequest,
+    cb?: (error: string, rep: DeleteVideoSnapshotConfigResponse) => void
+  ): Promise<DeleteVideoSnapshotConfigResponse> {
+    return this.request("DeleteVideoSnapshotConfig", req, cb)
+  }
+
+  /**
+   * 用于查询录像上云计划列表。
+   */
+  async ListRecordBackupPlans(
+    req?: ListRecordBackupPlansRequest,
+    cb?: (error: string, rep: ListRecordBackupPlansResponse) => void
+  ): Promise<ListRecordBackupPlansResponse> {
+    return this.request("ListRecordBackupPlans", req, cb)
+  }
+
+  /**
+   * 用于获取国标设备的公网地址
+   */
+  async DescribeGBDeviceAddr(
+    req: DescribeGBDeviceAddrRequest,
+    cb?: (error: string, rep: DescribeGBDeviceAddrResponse) => void
+  ): Promise<DescribeGBDeviceAddrResponse> {
+    return this.request("DescribeGBDeviceAddr", req, cb)
   }
 
   /**
@@ -453,33 +881,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询录像上云计划详情。
+   * 用于查询任务的子任务列表
    */
-  async DescribeRecordBackupPlan(
-    req: DescribeRecordBackupPlanRequest,
-    cb?: (error: string, rep: DescribeRecordBackupPlanResponse) => void
-  ): Promise<DescribeRecordBackupPlanResponse> {
-    return this.request("DescribeRecordBackupPlan", req, cb)
-  }
-
-  /**
-   * 用于查询设备云端录像时间轴信息（即为视频上云后设置录像计划后云存储的录像）
-   */
-  async DescribeRecordFile(
-    req: DescribeRecordFileRequest,
-    cb?: (error: string, rep: DescribeRecordFileResponse) => void
-  ): Promise<DescribeRecordFileResponse> {
-    return this.request("DescribeRecordFile", req, cb)
-  }
-
-  /**
-   * 用于查询云录像取回任务详情
-   */
-  async DescribeRecordRetrieveTask(
-    req: DescribeRecordRetrieveTaskRequest,
-    cb?: (error: string, rep: DescribeRecordRetrieveTaskResponse) => void
-  ): Promise<DescribeRecordRetrieveTaskResponse> {
-    return this.request("DescribeRecordRetrieveTask", req, cb)
+  async ListSubTasks(
+    req: ListSubTasksRequest,
+    cb?: (error: string, rep: ListSubTasksResponse) => void
+  ): Promise<ListSubTasksResponse> {
+    return this.request("ListSubTasks", req, cb)
   }
 
   /**
@@ -493,53 +901,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取设备抓拍结果列表
+   * 创建截图模板
    */
-  async ListDeviceSnapshots(
-    req: ListDeviceSnapshotsRequest,
-    cb?: (error: string, rep: ListDeviceSnapshotsResponse) => void
-  ): Promise<ListDeviceSnapshotsResponse> {
-    return this.request("ListDeviceSnapshots", req, cb)
+  async CreateVideoSnapshotTemplate(
+    req: CreateVideoSnapshotTemplateRequest,
+    cb?: (error: string, rep: CreateVideoSnapshotTemplateResponse) => void
+  ): Promise<CreateVideoSnapshotTemplateResponse> {
+    return this.request("CreateVideoSnapshotTemplate", req, cb)
   }
 
   /**
-   * 用于获取国标设备的公网地址
+   * 获取截图模板详情
    */
-  async DescribeGBDeviceAddr(
-    req: DescribeGBDeviceAddrRequest,
-    cb?: (error: string, rep: DescribeGBDeviceAddrResponse) => void
-  ): Promise<DescribeGBDeviceAddrResponse> {
-    return this.request("DescribeGBDeviceAddr", req, cb)
+  async DescribeVideoSnapshotTemplate(
+    req: DescribeVideoSnapshotTemplateRequest,
+    cb?: (error: string, rep: DescribeVideoSnapshotTemplateResponse) => void
+  ): Promise<DescribeVideoSnapshotTemplateResponse> {
+    return this.request("DescribeVideoSnapshotTemplate", req, cb)
   }
 
   /**
-   * 用于修改实时上云模板
+   * 用于查询用户下所有实时上云计划中的通道列表
    */
-  async UpdateRecordTemplate(
-    req: UpdateRecordTemplateRequest,
-    cb?: (error: string, rep: UpdateRecordTemplateResponse) => void
-  ): Promise<UpdateRecordTemplateResponse> {
-    return this.request("UpdateRecordTemplate", req, cb)
-  }
-
-  /**
-   * 用于删除录像上云模板。
-   */
-  async DeleteRecordBackupTemplate(
-    req: DeleteRecordBackupTemplateRequest,
-    cb?: (error: string, rep: DeleteRecordBackupTemplateResponse) => void
-  ): Promise<DeleteRecordBackupTemplateResponse> {
-    return this.request("DeleteRecordBackupTemplate", req, cb)
-  }
-
-  /**
-   * 用于根据服务节点获取 CNAME 值。
-   */
-  async DescribeCNAME(
-    req: DescribeCNAMERequest,
-    cb?: (error: string, rep: DescribeCNAMEResponse) => void
-  ): Promise<DescribeCNAMEResponse> {
-    return this.request("DescribeCNAME", req, cb)
+  async ListRecordPlanChannels(
+    req?: ListRecordPlanChannelsRequest,
+    cb?: (error: string, rep: ListRecordPlanChannelsResponse) => void
+  ): Promise<ListRecordPlanChannelsResponse> {
+    return this.request("ListRecordPlanChannels", req, cb)
   }
 
   /**
@@ -583,86 +971,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于批量更改设备的组织。
-   */
-  async UpdateDeviceOrganization(
-    req: UpdateDeviceOrganizationRequest,
-    cb?: (error: string, rep: UpdateDeviceOrganizationResponse) => void
-  ): Promise<UpdateDeviceOrganizationResponse> {
-    return this.request("UpdateDeviceOrganization", req, cb)
-  }
-
-  /**
-   * 用于查询添加的域名列表。
-   */
-  async DescribeDomain(
-    req?: DescribeDomainRequest,
-    cb?: (error: string, rep: DescribeDomainResponse) => void
-  ): Promise<DescribeDomainResponse> {
-    return this.request("DescribeDomain", req, cb)
-  }
-
-  /**
-   * 用于获取设备的实时开流地址。
-   */
-  async ControlDeviceStream(
-    req: ControlDeviceStreamRequest,
-    cb?: (error: string, rep: ControlDeviceStreamResponse) => void
-  ): Promise<ControlDeviceStreamResponse> {
-    return this.request("ControlDeviceStream", req, cb)
-  }
-
-  /**
-   * 用于获取云录像下载 url
-   */
-  async DescribeVideoDownloadUrl(
-    req: DescribeVideoDownloadUrlRequest,
-    cb?: (error: string, rep: DescribeVideoDownloadUrlResponse) => void
-  ): Promise<DescribeVideoDownloadUrlResponse> {
-    return this.request("DescribeVideoDownloadUrl", req, cb)
-  }
-
-  /**
-   * 用于同步国标设备的通道（接口调用后，触发向设备请求通道列表，新增的通道入库，设备上已删除的通道需自行删除、后台不自动删除）。
-   */
-  async RefreshDeviceChannel(
-    req: RefreshDeviceChannelRequest,
-    cb?: (error: string, rep: RefreshDeviceChannelResponse) => void
-  ): Promise<RefreshDeviceChannelResponse> {
-    return this.request("RefreshDeviceChannel", req, cb)
-  }
-
-  /**
-   * 用于操作设备预置位，包括设置、删除、调用。
-   */
-  async ControlDevicePreset(
-    req: ControlDevicePresetRequest,
-    cb?: (error: string, rep: ControlDevicePresetResponse) => void
-  ): Promise<ControlDevicePresetResponse> {
-    return this.request("ControlDevicePreset", req, cb)
-  }
-
-  /**
-   * 用于批量操作（启用，禁用，删除）设备
-   */
-  async BatchOperateDevice(
-    req: BatchOperateDeviceRequest,
-    cb?: (error: string, rep: BatchOperateDeviceResponse) => void
-  ): Promise<BatchOperateDeviceResponse> {
-    return this.request("BatchOperateDevice", req, cb)
-  }
-
-  /**
-   * 本接口可基于海康ISUP 5.0协议实现透传ISAPI的请求数据，调用接口前需确保设备采用ISUP协议成功注册至本平台
-   */
-  async CallISAPI(
-    req: CallISAPIRequest,
-    cb?: (error: string, rep: CallISAPIResponse) => void
-  ): Promise<CallISAPIResponse> {
-    return this.request("CallISAPI", req, cb)
-  }
-
-  /**
    * 用于查询实时上云计划详情
    */
   async DescribeRecordPlan(
@@ -673,113 +981,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 控制设备抓拍--单次，当前仅支持国标设备
+   * 修改视觉理解计划
    */
-  async ControlDeviceSnapshot(
-    req: ControlDeviceSnapshotRequest,
-    cb?: (error: string, rep: ControlDeviceSnapshotResponse) => void
-  ): Promise<ControlDeviceSnapshotResponse> {
-    return this.request("ControlDeviceSnapshot", req, cb)
-  }
-
-  /**
-   * 查询本店里录像下载任务列表
-   */
-  async ListVideoDownloadTask(
-    req: ListVideoDownloadTaskRequest,
-    cb?: (error: string, rep: ListVideoDownloadTaskResponse) => void
-  ): Promise<ListVideoDownloadTaskResponse> {
-    return this.request("ListVideoDownloadTask", req, cb)
-  }
-
-  /**
-   * 用于修改实时上云计划
-   */
-  async UpdateRecordPlan(
-    req: UpdateRecordPlanRequest,
-    cb?: (error: string, rep: UpdateRecordPlanResponse) => void
-  ): Promise<UpdateRecordPlanResponse> {
-    return this.request("UpdateRecordPlan", req, cb)
-  }
-
-  /**
-   * 用于修改组织。
-   */
-  async UpdateOrganization(
-    req: UpdateOrganizationRequest,
-    cb?: (error: string, rep: UpdateOrganizationResponse) => void
-  ): Promise<UpdateOrganizationResponse> {
-    return this.request("UpdateOrganization", req, cb)
-  }
-
-  /**
-   * 用于删除实时上云计划
-   */
-  async DeleteRecordPlan(
-    req: DeleteRecordPlanRequest,
-    cb?: (error: string, rep: DeleteRecordPlanResponse) => void
-  ): Promise<DeleteRecordPlanResponse> {
-    return this.request("DeleteRecordPlan", req, cb)
-  }
-
-  /**
-   * 用于新增实时上云模板
-   */
-  async AddRecordTemplate(
-    req: AddRecordTemplateRequest,
-    cb?: (error: string, rep: AddRecordTemplateResponse) => void
-  ): Promise<AddRecordTemplateResponse> {
-    return this.request("AddRecordTemplate", req, cb)
-  }
-
-  /**
-   * 用于新增实时上云计划
-   */
-  async AddRecordPlan(
-    req: AddRecordPlanRequest,
-    cb?: (error: string, rep: AddRecordPlanResponse) => void
-  ): Promise<AddRecordPlanResponse> {
-    return this.request("AddRecordPlan", req, cb)
-  }
-
-  /**
-   * 禁止主、子账号对视频通道的实况预览
-   */
-  async SetForbidPlayChannels(
-    req: SetForbidPlayChannelsRequest,
-    cb?: (error: string, rep: SetForbidPlayChannelsResponse) => void
-  ): Promise<SetForbidPlayChannelsResponse> {
-    return this.request("SetForbidPlayChannels", req, cb)
-  }
-
-  /**
-   * 用于查询组织目录下的未添加到实时上云计划中的通道数量
-   */
-  async ListOrganizationChannelNumbers(
-    req: ListOrganizationChannelNumbersRequest,
-    cb?: (error: string, rep: ListOrganizationChannelNumbersResponse) => void
-  ): Promise<ListOrganizationChannelNumbersResponse> {
-    return this.request("ListOrganizationChannelNumbers", req, cb)
-  }
-
-  /**
-   * 用于修改录像上云计划。
-   */
-  async UpdateRecordBackupPlan(
-    req: UpdateRecordBackupPlanRequest,
-    cb?: (error: string, rep: UpdateRecordBackupPlanResponse) => void
-  ): Promise<UpdateRecordBackupPlanResponse> {
-    return this.request("UpdateRecordBackupPlan", req, cb)
-  }
-
-  /**
-   * 用于查询实时上云模板列表
-   */
-  async ListRecordTemplates(
-    req?: ListRecordTemplatesRequest,
-    cb?: (error: string, rep: ListRecordTemplatesResponse) => void
-  ): Promise<ListRecordTemplatesResponse> {
-    return this.request("ListRecordTemplates", req, cb)
+  async ModifyVLPlan(
+    req: ModifyVLPlanRequest,
+    cb?: (error: string, rep: ModifyVLPlanResponse) => void
+  ): Promise<ModifyVLPlanResponse> {
+    return this.request("ModifyVLPlan", req, cb)
   }
 
   /**
@@ -793,6 +1001,220 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新截图配置
+   */
+  async ModifyVideoSnapshotConfig(
+    req: ModifyVideoSnapshotConfigRequest,
+    cb?: (error: string, rep: ModifyVideoSnapshotConfigResponse) => void
+  ): Promise<ModifyVideoSnapshotConfigResponse> {
+    return this.request("ModifyVideoSnapshotConfig", req, cb)
+  }
+
+  /**
+   * 用于获取设备的实时开流地址。
+   */
+  async ControlDeviceStream(
+    req: ControlDeviceStreamRequest,
+    cb?: (error: string, rep: ControlDeviceStreamResponse) => void
+  ): Promise<ControlDeviceStreamResponse> {
+    return this.request("ControlDeviceStream", req, cb)
+  }
+
+  /**
+   * 删除视觉理解计划
+   */
+  async DeleteVLPlan(
+    req: DeleteVLPlanRequest,
+    cb?: (error: string, rep: DeleteVLPlanResponse) => void
+  ): Promise<DeleteVLPlanResponse> {
+    return this.request("DeleteVLPlan", req, cb)
+  }
+
+  /**
+     * 平台支持将数据以TS切片的形式存入客户自有COS桶，该接口用于支持客户快捷查询切片信息列表
+（注意：只支持标准存储类型的查询）
+     */
+  async DescribeRecordSlice(
+    req: DescribeRecordSliceRequest,
+    cb?: (error: string, rep: DescribeRecordSliceResponse) => void
+  ): Promise<DescribeRecordSliceResponse> {
+    return this.request("DescribeRecordSlice", req, cb)
+  }
+
+  /**
+   * 禁止主、子账号对视频通道的实况预览
+   */
+  async SetForbidPlayChannels(
+    req: SetForbidPlayChannelsRequest,
+    cb?: (error: string, rep: SetForbidPlayChannelsResponse) => void
+  ): Promise<SetForbidPlayChannelsResponse> {
+    return this.request("SetForbidPlayChannels", req, cb)
+  }
+
+  /**
+     * 用于新增录像上云模板。
+> 该功能本质是拉取设备本地录像数据上云（即存在 IPC 摄像头存储卡或 NVR 硬盘中的录像），操作时需先设定录像时间段（即想要上云的设备本地录像），再设定上云时间段和上云倍速，平台将于上云时间段倍速拉取设备对应前一天的录像时间段数据。
+
+> 设定需至少满足（上云时间段=前一天的录像时间段/上云倍速），建议上云时间段可多设定10%左右的时间，避免因网络波动导致数据拉取不完整。
+     */
+  async AddRecordBackupTemplate(
+    req: AddRecordBackupTemplateRequest,
+    cb?: (error: string, rep: AddRecordBackupTemplateResponse) => void
+  ): Promise<AddRecordBackupTemplateResponse> {
+    return this.request("AddRecordBackupTemplate", req, cb)
+  }
+
+  /**
+   * 用于修改实时上云计划
+   */
+  async UpdateRecordPlan(
+    req: UpdateRecordPlanRequest,
+    cb?: (error: string, rep: UpdateRecordPlanResponse) => void
+  ): Promise<UpdateRecordPlanResponse> {
+    return this.request("UpdateRecordPlan", req, cb)
+  }
+
+  /**
+   * 用于删除已添加的设备。
+   */
+  async DeleteUserDevice(
+    req: DeleteUserDeviceRequest,
+    cb?: (error: string, rep: DeleteUserDeviceResponse) => void
+  ): Promise<DeleteUserDeviceResponse> {
+    return this.request("DeleteUserDevice", req, cb)
+  }
+
+  /**
+   * 查询视觉理解模板详情
+   */
+  async DescribeVLTemplate(
+    req: DescribeVLTemplateRequest,
+    cb?: (error: string, rep: DescribeVLTemplateResponse) => void
+  ): Promise<DescribeVLTemplateResponse> {
+    return this.request("DescribeVLTemplate", req, cb)
+  }
+
+  /**
+   * 批量获取截图图片URL
+   */
+  async BatchGetVideoSnapshotImageUrl(
+    req: BatchGetVideoSnapshotImageUrlRequest,
+    cb?: (error: string, rep: BatchGetVideoSnapshotImageUrlResponse) => void
+  ): Promise<BatchGetVideoSnapshotImageUrlResponse> {
+    return this.request("BatchGetVideoSnapshotImageUrl", req, cb)
+  }
+
+  /**
+   * 查询本店里录像下载任务列表
+   */
+  async ListVideoDownloadTask(
+    req: ListVideoDownloadTaskRequest,
+    cb?: (error: string, rep: ListVideoDownloadTaskResponse) => void
+  ): Promise<ListVideoDownloadTaskResponse> {
+    return this.request("ListVideoDownloadTask", req, cb)
+  }
+
+  /**
+   * 用于添加设备时，查询设备可以使用的服务节点，查询结果为已经绑定了域名的服务节点。
+   */
+  async DescribeDeviceRegion(
+    req?: DescribeDeviceRegionRequest,
+    cb?: (error: string, rep: DescribeDeviceRegionResponse) => void
+  ): Promise<DescribeDeviceRegionResponse> {
+    return this.request("DescribeDeviceRegion", req, cb)
+  }
+
+  /**
+   * 用于查询实时上云模板列表
+   */
+  async ListRecordTemplates(
+    req?: ListRecordTemplatesRequest,
+    cb?: (error: string, rep: ListRecordTemplatesResponse) => void
+  ): Promise<ListRecordTemplatesResponse> {
+    return this.request("ListRecordTemplates", req, cb)
+  }
+
+  /**
+   * 删除截图模板
+   */
+  async DeleteVideoSnapshotTemplate(
+    req: DeleteVideoSnapshotTemplateRequest,
+    cb?: (error: string, rep: DeleteVideoSnapshotTemplateResponse) => void
+  ): Promise<DeleteVideoSnapshotTemplateResponse> {
+    return this.request("DeleteVideoSnapshotTemplate", req, cb)
+  }
+
+  /**
+   * 用于根据服务节点获取 CNAME 值。
+   */
+  async DescribeCNAME(
+    req: DescribeCNAMERequest,
+    cb?: (error: string, rep: DescribeCNAMEResponse) => void
+  ): Promise<DescribeCNAMEResponse> {
+    return this.request("DescribeCNAME", req, cb)
+  }
+
+  /**
+   * 获取截图配置详情
+   */
+  async DescribeVideoSnapshotConfig(
+    req: DescribeVideoSnapshotConfigRequest,
+    cb?: (error: string, rep: DescribeVideoSnapshotConfigResponse) => void
+  ): Promise<DescribeVideoSnapshotConfigResponse> {
+    return this.request("DescribeVideoSnapshotConfig", req, cb)
+  }
+
+  /**
+   * 获取截图模板详情列表
+   */
+  async ListVideoSnapshotTemplate(
+    req: ListVideoSnapshotTemplateRequest,
+    cb?: (error: string, rep: ListVideoSnapshotTemplateResponse) => void
+  ): Promise<ListVideoSnapshotTemplateResponse> {
+    return this.request("ListVideoSnapshotTemplate", req, cb)
+  }
+
+  /**
+   * 用于操作设备预置位，包括设置、删除、调用。
+   */
+  async ControlDevicePreset(
+    req: ControlDevicePresetRequest,
+    cb?: (error: string, rep: ControlDevicePresetResponse) => void
+  ): Promise<ControlDevicePresetResponse> {
+    return this.request("ControlDevicePreset", req, cb)
+  }
+
+  /**
+   * 本接口可基于海康ISUP 5.0协议实现透传ISAPI的请求数据，调用接口前需确保设备采用ISUP协议成功注册至本平台
+   */
+  async CallISAPI(
+    req: CallISAPIRequest,
+    cb?: (error: string, rep: CallISAPIResponse) => void
+  ): Promise<CallISAPIResponse> {
+    return this.request("CallISAPI", req, cb)
+  }
+
+  /**
+   * 用于新增实时上云计划
+   */
+  async AddRecordPlan(
+    req: AddRecordPlanRequest,
+    cb?: (error: string, rep: AddRecordPlanResponse) => void
+  ): Promise<AddRecordPlanResponse> {
+    return this.request("AddRecordPlan", req, cb)
+  }
+
+  /**
+   * 用于修改录像上云计划。
+   */
+  async UpdateRecordBackupPlan(
+    req: UpdateRecordBackupPlanRequest,
+    cb?: (error: string, rep: UpdateRecordBackupPlanResponse) => void
+  ): Promise<UpdateRecordBackupPlanResponse> {
+    return this.request("UpdateRecordBackupPlan", req, cb)
+  }
+
+  /**
    * 用于录像回放过程中的倍速、跳转、播放/暂停/停止等控制。
    */
   async ControlRecord(
@@ -803,103 +1225,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取对应组织下的设备列表。
+   * 批量获取视觉理解计划源素材 URL
    */
-  async ListDevices(
-    req: ListDevicesRequest,
-    cb?: (error: string, rep: ListDevicesResponse) => void
-  ): Promise<ListDevicesResponse> {
-    return this.request("ListDevices", req, cb)
+  async BatchGetVLPlanSourceFileURL(
+    req: BatchGetVLPlanSourceFileURLRequest,
+    cb?: (error: string, rep: BatchGetVLPlanSourceFileURLResponse) => void
+  ): Promise<BatchGetVLPlanSourceFileURLResponse> {
+    return this.request("BatchGetVLPlanSourceFileURL", req, cb)
   }
 
   /**
-   * 用于查询录像上云模板列表。
+   * 查询禁播通道列表
    */
-  async ListRecordBackupTemplates(
-    req?: ListRecordBackupTemplatesRequest,
-    cb?: (error: string, rep: ListRecordBackupTemplatesResponse) => void
-  ): Promise<ListRecordBackupTemplatesResponse> {
-    return this.request("ListRecordBackupTemplates", req, cb)
+  async QueryForbidPlayChannelList(
+    req: QueryForbidPlayChannelListRequest,
+    cb?: (error: string, rep: QueryForbidPlayChannelListResponse) => void
+  ): Promise<QueryForbidPlayChannelListResponse> {
+    return this.request("QueryForbidPlayChannelList", req, cb)
   }
 
   /**
-   * 用于设备通道云台控制，包括转动、变倍、变焦、光圈等。
+   * 用于修改录像上云模板。
    */
-  async ControlDevicePTZ(
-    req: ControlDevicePTZRequest,
-    cb?: (error: string, rep: ControlDevicePTZResponse) => void
-  ): Promise<ControlDevicePTZResponse> {
-    return this.request("ControlDevicePTZ", req, cb)
+  async UpdateRecordBackupTemplate(
+    req: UpdateRecordBackupTemplateRequest,
+    cb?: (error: string, rep: UpdateRecordBackupTemplateResponse) => void
+  ): Promise<UpdateRecordBackupTemplateResponse> {
+    return this.request("UpdateRecordBackupTemplate", req, cb)
   }
 
   /**
-   * 用于修改设备的配置信息。
+   * 创建视觉理解计划
    */
-  async UpdateUserDevice(
-    req: UpdateUserDeviceRequest,
-    cb?: (error: string, rep: UpdateUserDeviceResponse) => void
-  ): Promise<UpdateUserDeviceResponse> {
-    return this.request("UpdateUserDevice", req, cb)
-  }
-
-  /**
-   * 用于查询实时上云模板详情
-   */
-  async DescribeRecordTemplate(
-    req: DescribeRecordTemplateRequest,
-    cb?: (error: string, rep: DescribeRecordTemplateResponse) => void
-  ): Promise<DescribeRecordTemplateResponse> {
-    return this.request("DescribeRecordTemplate", req, cb)
-  }
-
-  /**
-   * 用于查询录像上云计划下的设备通道列表。
-   */
-  async ListRecordBackupPlanDevices(
-    req: ListRecordBackupPlanDevicesRequest,
-    cb?: (error: string, rep: ListRecordBackupPlanDevicesResponse) => void
-  ): Promise<ListRecordBackupPlanDevicesResponse> {
-    return this.request("ListRecordBackupPlanDevices", req, cb)
-  }
-
-  /**
-   * 用于查询任务详情
-   */
-  async DescribeTask(
-    req: DescribeTaskRequest,
-    cb?: (error: string, rep: DescribeTaskResponse) => void
-  ): Promise<DescribeTaskResponse> {
-    return this.request("DescribeTask", req, cb)
-  }
-
-  /**
-   * 用于查询实时上云计划下的设备通道列表
-   */
-  async ListRecordPlanDevices(
-    req: ListRecordPlanDevicesRequest,
-    cb?: (error: string, rep: ListRecordPlanDevicesResponse) => void
-  ): Promise<ListRecordPlanDevicesResponse> {
-    return this.request("ListRecordPlanDevices", req, cb)
-  }
-
-  /**
-   * 用于设置推拉流鉴权配置。
-   */
-  async AddStreamAuth(
-    req: AddStreamAuthRequest,
-    cb?: (error: string, rep: AddStreamAuthResponse) => void
-  ): Promise<AddStreamAuthResponse> {
-    return this.request("AddStreamAuth", req, cb)
-  }
-
-  /**
-   * 用于查询批量任务和简单任务列表
-   */
-  async ListTasks(
-    req: ListTasksRequest,
-    cb?: (error: string, rep: ListTasksResponse) => void
-  ): Promise<ListTasksResponse> {
-    return this.request("ListTasks", req, cb)
+  async CreateVLPlan(
+    req: CreateVLPlanRequest,
+    cb?: (error: string, rep: CreateVLPlanResponse) => void
+  ): Promise<CreateVLPlanResponse> {
+    return this.request("CreateVLPlan", req, cb)
   }
 
   /**
@@ -930,88 +1292,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ControlRecordTimelineResponse) => void
   ): Promise<ControlRecordTimelineResponse> {
     return this.request("ControlRecordTimeline", req, cb)
-  }
-
-  /**
-   * 用于查询任务的子任务列表
-   */
-  async ListSubTasks(
-    req: ListSubTasksRequest,
-    cb?: (error: string, rep: ListSubTasksResponse) => void
-  ): Promise<ListSubTasksResponse> {
-    return this.request("ListSubTasks", req, cb)
-  }
-
-  /**
-   * 用于删除录像上云模板。
-   */
-  async DeleteRecordBackupPlan(
-    req: DeleteRecordBackupPlanRequest,
-    cb?: (error: string, rep: DeleteRecordBackupPlanResponse) => void
-  ): Promise<DeleteRecordBackupPlanResponse> {
-    return this.request("DeleteRecordBackupPlan", req, cb)
-  }
-
-  /**
-   * 用于查询推拉流鉴权配置。
-   */
-  async DescribeStreamAuth(
-    req?: DescribeStreamAuthRequest,
-    cb?: (error: string, rep: DescribeStreamAuthResponse) => void
-  ): Promise<DescribeStreamAuthResponse> {
-    return this.request("DescribeStreamAuth", req, cb)
-  }
-
-  /**
-   * 用于查询实时上云计划列表
-   */
-  async ListRecordPlans(
-    req?: ListRecordPlansRequest,
-    cb?: (error: string, rep: ListRecordPlansResponse) => void
-  ): Promise<ListRecordPlansResponse> {
-    return this.request("ListRecordPlans", req, cb)
-  }
-
-  /**
-   * 用于删除域名。
-   */
-  async DeleteDomain(
-    req: DeleteDomainRequest,
-    cb?: (error: string, rep: DeleteDomainResponse) => void
-  ): Promise<DeleteDomainResponse> {
-    return this.request("DeleteDomain", req, cb)
-  }
-
-  /**
-   * 用于获取设备本地录像 URL 地址。
-   */
-  async PlayRecord(
-    req: PlayRecordRequest,
-    cb?: (error: string, rep: PlayRecordResponse) => void
-  ): Promise<PlayRecordResponse> {
-    return this.request("PlayRecord", req, cb)
-  }
-
-  /**
-     * 用于新增录像上云模板。
-> 该功能本质是拉取设备本地录像数据上云（即存在 IPC 摄像头存储卡或 NVR 硬盘中的录像），操作时需先设定录像时间段（即想要上云的设备本地录像），再设定上云时间段和上云倍速，平台将于上云时间段倍速拉取设备对应前一天的录像时间段数据。
-
-> 设定需至少满足（上云时间段=前一天的录像时间段/上云倍速），建议上云时间段可多设定10%左右的时间，避免因网络波动导致数据拉取不完整。
-     */
-  async AddRecordBackupTemplate(
-    req: AddRecordBackupTemplateRequest,
-    cb?: (error: string, rep: AddRecordBackupTemplateResponse) => void
-  ): Promise<AddRecordBackupTemplateResponse> {
-    return this.request("AddRecordBackupTemplate", req, cb)
-  }
-
-  /**
-   * 用于查询组织目录下的通道列表
-   */
-  async ListOrganizationChannels(
-    req: ListOrganizationChannelsRequest,
-    cb?: (error: string, rep: ListOrganizationChannelsResponse) => void
-  ): Promise<ListOrganizationChannelsResponse> {
-    return this.request("ListOrganizationChannels", req, cb)
   }
 }

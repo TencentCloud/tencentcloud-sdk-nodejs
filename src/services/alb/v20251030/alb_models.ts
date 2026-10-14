@@ -2108,18 +2108,15 @@ export interface SecurityPolicyCapability {
  */
 export interface ModificationProtectionInfo {
   /**
-   * 是否开启修改保护。开启后，可防止实例被意外修改或删除。
-- true：开启修改保护
-- false：关闭修改保护
+   * <p>是否开启修改保护。开启后，可防止实例被意外修改或删除。</p><ul><li>true：开启修改保护</li><li>false：关闭修改保护</li></ul>
    */
   ModificationProtectionEnabled?: boolean
   /**
-   * 1238716123
+   * <p>1238716123</p>
    */
   OperatorUin?: string
   /**
-   * 开启修改保护的原因说明。
-长度为 1~255 个字符，必须是中文和无害字符串中的字符， 可包含中文、字母、数字、短划线（-）、正斜线（/）、半角句号（.）、下划线（_）。
+   * <p>开启修改保护的原因说明。<br>长度为 1~255 个字符，必须是中文和无害字符串中的字符， 可包含中文、字母、数字、短划线（-）、正斜线（/）、半角句号（.）、下划线（_）。</p>
    */
   Reason?: string
 }
@@ -3687,10 +3684,6 @@ export interface DeleteHealthCheckTemplatesResponse {
  * 列表展示的应用型负载均衡实例结构。
  */
 export interface LoadBalancer {
-  /**
-   * 访问日志配置结构。
-   */
-  AccessLogConfig?: AccessLogConfig
   /**
    * IP 地址版本，取值 IPv4 或 IPv6。
 注意：此字段可能返回 null，表示取不到有效值。

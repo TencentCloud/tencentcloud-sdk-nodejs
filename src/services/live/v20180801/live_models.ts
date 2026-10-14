@@ -646,6 +646,36 @@ export interface DescribeDeliverBandwidthListResponse {
 }
 
 /**
+ * DescribeStreamPackageIngestStatistics请求参数结构体
+ */
+export interface DescribeStreamPackageIngestStatisticsRequest {
+  /**
+   * <p>查询起始时间，RFC3339 格式，如2026-08-24T00:00:00+08:00</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询结束时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00；必须晚于 StartTime</p>
+   */
+  EndTime?: string
+  /**
+   * <p>频道ID列表，不传则查全部频道</p>
+   */
+  ChannelIds?: Array<string>
+  /**
+   * <p>频道类型过滤，枚举值：LiveChannel、SSAI、FASTChannel</p>
+   */
+  Types?: Array<string>
+  /**
+   * <p>维度，false(默认): summary 汇总模式；true: detail 明细模式（按时间拆分），当为false时粒度不生效</p>
+   */
+  Dimension?: boolean
+  /**
+   * <p>时间粒度（分钟），支持5（默认）/ 60 / 1440</p>
+   */
+  Granularity?: number
+}
+
+/**
  * DescribeLiveTranscodeDetailInfo请求参数结构体
  */
 export interface DescribeLiveTranscodeDetailInfoRequest {
@@ -3644,41 +3674,21 @@ export interface DescribeLiveStreamEventListResponse {
 }
 
 /**
- * 用于场景化创作视频时用到的扩展参数信息。
+ * DescribeStreamPackageRemuxStatistics返回参数结构体
  */
-export interface SceneVideoExtraParam {
+export interface DescribeStreamPackageRemuxStatisticsResponse {
   /**
-   * <p>指定输出分辨率。选项:720P, 1080P, 2K, 4K。</p>
+   * <p>封装用量数据</p>
    */
-  Resolution?: string
+  DataInfoList?: Array<RemuxStatisticsDataInfo>
   /**
-   * <p>指定输出视频的宽高比，示例：16:9。</p>
+   * <p>封装总用量</p>
    */
-  AspectRatio?: string
+  TotalRemux?: number
   /**
-   * <p>错峰模型，仅支持的模型可使用。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OffPeak?: boolean
-  /**
-   * <p>自动添加水印，默认左上角添加 &quot;AI生成&quot; 标识。</p>
-   */
-  LogoAdd?: boolean
-  /**
-   * <p>使用音画同出。</p>
-   */
-  EnableAudio?: boolean
-  /**
-   * <p>生成背景音乐。</p>
-   */
-  EnableBgm?: boolean
-  /**
-   * <p>对输入的Prompt进行优化。</p>
-   */
-  EnablePromptEnhance?: boolean
-  /**
-   * <p>回调URL。</p>
-   */
-  CallbackUrl?: string
+  RequestId?: string
 }
 
 /**
@@ -4119,6 +4129,32 @@ export interface ModifyOriginStreamInfoRequest {
 }
 
 /**
+ * DescribeStreamPackageRemuxStatistics请求参数结构体
+ */
+export interface DescribeStreamPackageRemuxStatisticsRequest {
+  /**
+   * <p>查询起始时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询结束时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00；必须晚于 StartTime</p>
+   */
+  EndTime?: string
+  /**
+   * <p>频道ID列表，不传则查全部频道</p>
+   */
+  ChannelIds?: Array<string>
+  /**
+   * <p>维度，false(默认): summary 汇总模式；true: detail 明细模式（按时间拆分），当为false时粒度不生效</p>
+   */
+  Dimension?: boolean
+  /**
+   * <p>时间粒度（分钟），支持5（默认）/ 60 / 1440</p>
+   */
+  Granularity?: number
+}
+
+/**
  * 推流鉴权key信息。
  */
 export interface PushAuthKeyInfo {
@@ -4448,6 +4484,28 @@ export interface CreateAuditKeywordsRequest {
    * <p>直播审核词库Id。</p>
    */
   LibId: string
+}
+
+/**
+ * OutputStatisticsDataInfo
+ */
+export interface OutputStatisticsDataInfo {
+  /**
+   * <p>输出用量</p>
+   */
+  Output?: number
+  /**
+   * <p>时间</p>
+   */
+  Time?: string
+  /**
+   * <p>频道Id</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>类型</p>
+   */
+  Type?: string
 }
 
 /**
@@ -5506,6 +5564,28 @@ export interface DescribeLivePadStreamListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IngestStatisticsDataInfo
+ */
+export interface IngestStatisticsDataInfo {
+  /**
+   * <p>输入用量</p>
+   */
+  Ingest?: number
+  /**
+   * <p>时间</p>
+   */
+  Time?: string
+  /**
+   * <p>频道Id</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>频道类型</p>
+   */
+  Type?: string
 }
 
 /**
@@ -6721,6 +6801,44 @@ export interface CopyLiveAvatarRoomRequest {
 }
 
 /**
+ * 用于场景化创作视频时用到的扩展参数信息。
+ */
+export interface SceneVideoExtraParam {
+  /**
+   * <p>指定输出分辨率。选项:720P, 1080P, 2K, 4K。</p>
+   */
+  Resolution?: string
+  /**
+   * <p>指定输出视频的宽高比，示例：16:9。</p>
+   */
+  AspectRatio?: string
+  /**
+   * <p>错峰模型，仅支持的模型可使用。</p>
+   */
+  OffPeak?: boolean
+  /**
+   * <p>自动添加水印，默认左上角添加 &quot;AI生成&quot; 标识。</p>
+   */
+  LogoAdd?: boolean
+  /**
+   * <p>使用音画同出。</p>
+   */
+  EnableAudio?: boolean
+  /**
+   * <p>生成背景音乐。</p>
+   */
+  EnableBgm?: boolean
+  /**
+   * <p>对输入的Prompt进行优化。</p>
+   */
+  EnablePromptEnhance?: boolean
+  /**
+   * <p>回调URL。</p>
+   */
+  CallbackUrl?: string
+}
+
+/**
  * DeleteLiveRecord请求参数结构体
  */
 export interface DeleteLiveRecordRequest {
@@ -6777,6 +6895,24 @@ export interface CasterLayoutParam {
    * 是否启用抠图。
    */
   UsePortraitSegment?: boolean
+}
+
+/**
+ * DescribeStreamPackageIngestStatistics返回参数结构体
+ */
+export interface DescribeStreamPackageIngestStatisticsResponse {
+  /**
+   * <p>输入流量数据</p>
+   */
+  DataInfoList?: Array<IngestStatisticsDataInfo>
+  /**
+   * <p>总输入用量</p>
+   */
+  TotalIngest?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8404,6 +8540,20 @@ export interface DeleteLiveAvatarScriptResponse {
 }
 
 /**
+ * SwitchCasterToEmergency返回参数结构体
+ */
+export interface SwitchCasterToEmergencyResponse {
+  /**
+   * <p>备播状态，范围[0,1,2]</p><ol start="0"><li>正常直播状态</li><li>备播状态</li><li>备播切换正常直播中，在配置了延播时长时出现</li></ol>
+   */
+  EmergencyStatus?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveDomain请求参数结构体
  */
 export interface DescribeLiveDomainRequest {
@@ -9285,6 +9435,36 @@ export interface CreateCasterResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeStreamPackageOutputStatistics请求参数结构体
+ */
+export interface DescribeStreamPackageOutputStatisticsRequest {
+  /**
+   * <p>查询起始时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询结束时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00；必须晚于 StartTime</p>
+   */
+  EndTime?: string
+  /**
+   * <p>频道ID列表，不传则查全部频道</p>
+   */
+  ChannelIds?: Array<string>
+  /**
+   * <p>频道类型过滤，枚举值：LiveChannel</p>
+   */
+  Types?: Array<string>
+  /**
+   * <p>维度，false(默认): summary 汇总模式；true: detail 明细模式（按时间拆分），当为false时粒度不生效</p>
+   */
+  Dimension?: boolean
+  /**
+   * <p>时间粒度（分钟），支持5（默认）/ 60 / 1440</p>
+   */
+  Granularity?: number
 }
 
 /**
@@ -13191,6 +13371,24 @@ export interface ModifyLiveRecordTemplateResponse {
 }
 
 /**
+ * DescribeStreamPackageOutputStatistics返回参数结构体
+ */
+export interface DescribeStreamPackageOutputStatisticsResponse {
+  /**
+   * <p>输出流量统计</p>
+   */
+  DataInfoList?: Array<OutputStatisticsDataInfo>
+  /**
+   * <p>输出总用量</p>
+   */
+  TotalOutput?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopLivePadStream请求参数结构体
  */
 export interface StopLivePadStreamRequest {
@@ -14625,17 +14823,21 @@ export interface DescribeAuditTemplatesRequest {
 }
 
 /**
- * SwitchCasterToEmergency返回参数结构体
+ * RemuxStatisticsDataInfo
  */
-export interface SwitchCasterToEmergencyResponse {
+export interface RemuxStatisticsDataInfo {
   /**
-   * <p>备播状态，范围[0,1,2]</p><ol start="0"><li>正常直播状态</li><li>备播状态</li><li>备播切换正常直播中，在配置了延播时长时出现</li></ol>
+   * <p>转封装用量</p>
    */
-  EmergencyStatus?: number
+  Remux?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>时间</p>
    */
-  RequestId?: string
+  Time?: string
+  /**
+   * <p>频道Id</p>
+   */
+  ChannelId?: string
 }
 
 /**

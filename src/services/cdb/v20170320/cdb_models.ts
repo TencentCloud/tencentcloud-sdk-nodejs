@@ -3044,17 +3044,25 @@ export interface DescribeDataBackupOverviewResponse {
  */
 export interface DescribeBackupsRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+   * <p>实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。</p>
    */
   InstanceId: string
   /**
-   * 偏移量，最小值为0。
+   * <p>偏移量，最小值为0。</p>
    */
   Offset?: number
   /**
-   * 分页大小，默认值为20，最小值为1，最大值为1000。
+   * <p>分页大小，默认值为20，最小值为1，最大值为1000。</p>
    */
   Limit?: number
+  /**
+   * <p>备份开始时间，筛选大于等于此值，时间格式：2016-03-17 02:10:37</p>
+   */
+  MinStartTime?: string
+  /**
+   * <p>备份开始时间，筛选小于等于此值，时间格式：2016-03-17 02:10:37</p>
+   */
+  MaxStartTime?: string
 }
 
 /**
@@ -3756,11 +3764,11 @@ export interface DeleteTimeWindowResponse {
  */
 export interface DescribeBackupsResponse {
   /**
-   * 符合查询条件的实例总数。
+   * <p>符合查询条件的实例总数。</p>
    */
   TotalCount?: number
   /**
-   * 符合查询条件的备份信息详情。
+   * <p>符合查询条件的备份信息详情。</p>
    */
   Items?: Array<BackupInfo>
   /**

@@ -27,6 +27,7 @@ import {
   PluginStatistics,
   AddOnPackageInfo,
   RollbackReleaseRequest,
+  CustomVariable,
   DescribeModelListResponse,
   AppModelConfig,
   Plugin,
@@ -49,6 +50,7 @@ import {
   DeleteVariableResponse,
   DescribeLabelSummaryListResponse,
   DescribeDocResponse,
+  SaveWorkflowDebugContextRequest,
   ApiPluginConfig,
   AppealingStatus,
   DescribeVariableResponse,
@@ -59,6 +61,7 @@ import {
   DescribeMsgRecordListRequest,
   WeeklyTime,
   UsageSummary,
+  FileVolumeMount,
   SkillReferenceSummary,
   BillingAttribute,
   DescribeConcurrencyLimitDetailListResponse,
@@ -71,12 +74,14 @@ import {
   ThinkModel,
   DeleteAgentResponse,
   ModifyConversationResponse,
+  DescribeWorkflowRunSummaryListRequest,
   RetryReleaseRequest,
   AppConfig,
   AppAuxiliaryInfo,
   ModifyLabelResponse,
   ModifyConversationRequest,
   CreateChannelResponse,
+  DescribeNodeRunDetailRequest,
   IntentAchievementInfo,
   DeleteCategoryResponse,
   SearchResultPayload,
@@ -86,10 +91,11 @@ import {
   DescribeKBSummaryListRequest,
   AgentSkillConfig,
   ModifyAgentRequest,
-  PluginOperation,
+  NodeRunDetail,
   AppWebSearchConfig,
   AgentProfile,
   SearchAdvancedConfig,
+  KBSpaceShare,
   KnowledgeScope,
   WechatChannelConfig,
   RunAppTriggerNowRequest,
@@ -107,6 +113,7 @@ import {
   ModelDetailInfo,
   ModifyVariableRequest,
   DescribeConcurrencyLimitDetailListRequest,
+  DescribeNodeRunDetailResponse,
   MCPPluginConfig,
   DescribeAppStatisticsOverviewRequest,
   CreateMsgRecordCategoryResponse,
@@ -115,6 +122,8 @@ import {
   CreateAppTriggerRequest,
   AppTriggerInstance,
   ModifyDocListRequest,
+  DescribeWorkflowRunResponse,
+  ResumeWorkflowRunResponse,
   DeleteConversationRequest,
   ModifyConflictQARequest,
   DescribeAppTriggerRunLogListResponse,
@@ -123,6 +132,7 @@ import {
   DocLink,
   CopyAppResponse,
   AgentPluginCredentialConfig,
+  SaveWorkflowToolNodeOutputRequest,
   ComplexBillingItem,
   BackgroundImage,
   ModifyConflictQAResponse,
@@ -131,6 +141,7 @@ import {
   SearchResourceStatusInfo,
   CreateQAGenerationTaskRequest,
   DingTalkChannelConfig,
+  AppVariableValue,
   DescribeSpaceListRequest,
   AppTriggerRunLog,
   ConversationContent,
@@ -138,6 +149,7 @@ import {
   DescribeSkillReferenceListResponse,
   UnfavoritePluginResponse,
   CreateKBRequest,
+  CreateWorkflowRunResponse,
   DeleteMsgRecordCategoryResponse,
   GenerateModel,
   FavoriteSkillResponse,
@@ -145,7 +157,8 @@ import {
   AppShareWhitelistItem,
   ModifyKBRequest,
   CreateWebSocketTokenRequest,
-  DescribeChannelListRequest,
+  CreateWorkflowRunRequest,
+  NodeRunExecution,
   DescribeQARequest,
   DocQuery,
   SkillNotice,
@@ -165,6 +178,7 @@ import {
   MultiAgentConfig,
   CreateWebSocketTokenResponse,
   DescribeChannelListResponse,
+  Statistic,
   QASegmentHighlight,
   DescribeSkillCategoryListResponse,
   LarkChannelConfig,
@@ -177,13 +191,16 @@ import {
   ClawAgentAgentTeamConfig,
   DescribeSystemVariableListResponse,
   UserAccessConfig,
+  WorkflowRunMetadata,
   KBModelConfig,
   AgentPlugin,
   SimilarQuestionModifySpec,
   SearchBilling,
   DeleteQAListResponse,
+  NodeRun,
   ConversationResetInfo,
   QASourceInfo,
+  SaveWorkflowDebugContextResponse,
   CheckResult,
   ConversationQuoteInfo,
   DeleteLabelListRequest,
@@ -205,6 +222,7 @@ import {
   SingleWorkflowConfig,
   CreateSimilarQuestionResponse,
   DescribeChannelResponse,
+  WorkflowRunTime,
   QAModifyFields,
   AgentPluginConfig,
   PluginSummary,
@@ -239,7 +257,7 @@ import {
   DescribeReleaseSummaryResponse,
   QASummary,
   MCPToolConfig,
-  DescribeKBResponse,
+  EffectivePeriod,
   SkillSummary,
   DescribeLabelRequest,
   WecomRobotWebsocketAccess,
@@ -266,9 +284,11 @@ import {
   AgentTool,
   ReleaseSkillRequest,
   DescribeVariableRequest,
+  WorkflowRunProfile,
   UsageDetail,
   WechatClawBotChannelConfig,
   AuditLog,
+  WorkflowRunOutput,
   UnfavoriteSkillRequest,
   DescribeConversationResponse,
   AppTrigger,
@@ -290,6 +310,9 @@ import {
   MsgRecord,
   LabelModifyFields,
   DeleteMsgRecordCategoryRequest,
+  ConversationWidget,
+  WorkflowRun,
+  DescribeWorkflowRunRequest,
   DocOperator,
   DescribeDocSummaryListRequest,
   ModifyMsgRecordCategoryResponse,
@@ -298,6 +321,7 @@ import {
   ModelUsageDetail,
   ModifyQAListRequest,
   CreateConversationResponse,
+  NodeRunLog,
   DescribeSkillDetailRequest,
   Variable,
   ExpirationAwareness,
@@ -311,6 +335,7 @@ import {
   ManualOnlySchedule,
   ModifySpaceRequest,
   DescribePluginSummaryListRequest,
+  AppFileVolumeMount,
   CreateAppResponse,
   KBModifyExtendFields,
   QARetrievalConfig,
@@ -320,6 +345,7 @@ import {
   ModifySkillRequest,
   AppExperienceConfig,
   ResumeAppTriggerRequest,
+  ReplyContent,
   QAOperator,
   LabelRefIdentityList,
   CreateReleaseRequest,
@@ -349,6 +375,7 @@ import {
   AppTriggerPromptExecuteConfig,
   DeleteSkillShareResponse,
   ModifyCategoryResponse,
+  WorkflowRunSummary,
   ReleaseSummary,
   SimilarQuestion,
   AgentToolBasicConfig,
@@ -356,10 +383,11 @@ import {
   AppStatusInfo,
   ComplexBilling,
   DocRetrievalConfig,
-  DescribeLabelSummaryListRequest,
+  DescribeChannelListRequest,
   SearchKnowledgeResponse,
   DeleteConversationResponse,
   DescribeAuditLogMetaResponse,
+  ConversationFileInfo,
   DescribeCategoryListResponse,
   AppTriggerParamSchema,
   TimerPushConfig,
@@ -371,6 +399,7 @@ import {
   DeleteDocListRequest,
   WeeklySchedule,
   ModelParams,
+  ConversationFileCollection,
   AgentInput,
   AgentReleasePreview,
   AgentToolOutputParameter,
@@ -389,6 +418,7 @@ import {
   UserAgentReference,
   CreateSkillShareRequest,
   LabelTerm,
+  DescribeWorkflowRunSummaryListResponse,
   ConsumptionDetail,
   QALifecycle,
   CategoryPath,
@@ -400,6 +430,7 @@ import {
   ModifyAppTriggerResponse,
   AccountInfo,
   CreateSkillRequest,
+  ResumeWorkflowRunRequest,
   Sort,
   CreateAgentResponse,
   FavoritePluginResponse,
@@ -414,11 +445,13 @@ import {
   AgentSystemVariable,
   DocExternalLink,
   PluginProfile,
+  DescribeLabelSummaryListRequest,
   DescribePluginResponse,
+  ClawAgentChannelContextTimeoutConfig,
   DescribeAgentReleasePreviewListResponse,
   DescribeSkillSummaryListResponse,
   DescribeConversationMessageListRequest,
-  EffectivePeriod,
+  DescribeKBResponse,
   DescribeDocSummaryListResponse,
   DeleteDocListResponse,
   DescribeReleaseListResponse,
@@ -439,6 +472,7 @@ import {
   CategoryModifyFields,
   OperationResult,
   OnceSchedule,
+  SaveWorkflowToolNodeOutputResponse,
   QAQuery,
   UnfavoriteSkillResponse,
   MultiModalQAModel,
@@ -448,9 +482,12 @@ import {
   SearchFilter,
   DescribeCategoryListRequest,
   FieldMask,
+  KBShareStatus,
   AppTriggerWebhookParamSchemaConfig,
   ConversationMessage,
+  StopWorkflowRunListResponse,
   CreateCategoryResponse,
+  DescribeNodeBatchRunRequest,
   WecomRobotChannelConfig,
   ImportDocListRequest,
   DescribeConsumptionDetailListRequest,
@@ -470,11 +507,15 @@ import {
   KVPair,
   DeleteSkillRequest,
   DescribePluginRequest,
+  BatchRunSummary,
   Channel,
+  PortalShareConfig,
   PluginUserState,
   DocLifecycle,
   MultiModalUnderstandingModel,
   DescribeAppTriggerRequest,
+  WorkflowRunResult,
+  PluginOperation,
   CorpShareConfig,
   AppSummary,
   AppTriggerSummary,
@@ -484,6 +525,8 @@ import {
   DescribeAppTriggerInstanceRequest,
   AppSecretInfo,
   AgentDetail,
+  AppIdentity,
+  StopWorkflowRunListRequest,
   GraphRAG,
   ModifyQAResponse,
   CreateAppRequest,
@@ -510,6 +553,7 @@ import {
   ConflictQA,
   RetryReleaseResponse,
   AICallConfig,
+  DescribeNodeBatchRunResponse,
   ModifyChannelRequest,
   CreateSkillShareResponse,
   TableEnhancement,
@@ -550,6 +594,7 @@ import {
   CopyAppRequest,
   CreateCategoryRequest,
   DescribeAgentDetailResponse,
+  NodeRunContent,
   RetrievalOption,
   DeleteSpaceRequest,
   ReleaseRecord,
@@ -560,6 +605,7 @@ import {
   ModifyAgentResponse,
   ModelProviderBasic,
   SimilarQuestionStat,
+  ReplyMessage,
   AppAdvancedConf,
   KBSummary,
   PauseAppTriggerResponse,
@@ -588,13 +634,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询标签详情
+   * 查询 Skill 列表
    */
-  async DescribeLabel(
-    req: DescribeLabelRequest,
-    cb?: (error: string, rep: DescribeLabelResponse) => void
-  ): Promise<DescribeLabelResponse> {
-    return this.request("DescribeLabel", req, cb)
+  async DescribeSkillSummaryList(
+    req: DescribeSkillSummaryListRequest,
+    cb?: (error: string, rep: DescribeSkillSummaryListResponse) => void
+  ): Promise<DescribeSkillSummaryListResponse> {
+    return this.request("DescribeSkillSummaryList", req, cb)
   }
 
   /**
@@ -638,13 +684,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeAppTriggerRunLogList
+   * 查询模型列表
    */
-  async DescribeAppTriggerRunLogList(
-    req: DescribeAppTriggerRunLogListRequest,
-    cb?: (error: string, rep: DescribeAppTriggerRunLogListResponse) => void
-  ): Promise<DescribeAppTriggerRunLogListResponse> {
-    return this.request("DescribeAppTriggerRunLogList", req, cb)
+  async DescribeModelList(
+    req: DescribeModelListRequest,
+    cb?: (error: string, rep: DescribeModelListResponse) => void
+  ): Promise<DescribeModelListResponse> {
+    return this.request("DescribeModelList", req, cb)
   }
 
   /**
@@ -698,6 +744,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * SaveWorkflowDebugContext
+   */
+  async SaveWorkflowDebugContext(
+    req: SaveWorkflowDebugContextRequest,
+    cb?: (error: string, rep: SaveWorkflowDebugContextResponse) => void
+  ): Promise<SaveWorkflowDebugContextResponse> {
+    return this.request("SaveWorkflowDebugContext", req, cb)
+  }
+
+  /**
    * 查询知识库列表
    */
   async DescribeKBSummaryList(
@@ -715,6 +771,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAgentResponse) => void
   ): Promise<ModifyAgentResponse> {
     return this.request("ModifyAgent", req, cb)
+  }
+
+  /**
+   * 查询工作流运行实例列表
+   */
+  async DescribeWorkflowRunSummaryList(
+    req: DescribeWorkflowRunSummaryListRequest,
+    cb?: (error: string, rep: DescribeWorkflowRunSummaryListResponse) => void
+  ): Promise<DescribeWorkflowRunSummaryListResponse> {
+    return this.request("DescribeWorkflowRunSummaryList", req, cb)
   }
 
   /**
@@ -849,6 +915,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * SaveWorkflowToolNodeOutput
+   */
+  async SaveWorkflowToolNodeOutput(
+    req: SaveWorkflowToolNodeOutputRequest,
+    cb?: (error: string, rep: SaveWorkflowToolNodeOutputResponse) => void
+  ): Promise<SaveWorkflowToolNodeOutputResponse> {
+    return this.request("SaveWorkflowToolNodeOutput", req, cb)
+  }
+
+  /**
    * 查询 Agent 摘要信息列表
    */
   async DescribeAgentSummaryList(
@@ -926,6 +1002,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMsgRecordCategoryResponse) => void
   ): Promise<ModifyMsgRecordCategoryResponse> {
     return this.request("ModifyMsgRecordCategory", req, cb)
+  }
+
+  /**
+   * 获取参数变量
+   */
+  async DescribeVariable(
+    req: DescribeVariableRequest,
+    cb?: (error: string, rep: DescribeVariableResponse) => void
+  ): Promise<DescribeVariableResponse> {
+    return this.request("DescribeVariable", req, cb)
   }
 
   /**
@@ -1119,6 +1205,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量停止正在进行的工作流运行实例。
+   */
+  async StopWorkflowRunList(
+    req: StopWorkflowRunListRequest,
+    cb?: (error: string, rep: StopWorkflowRunListResponse) => void
+  ): Promise<StopWorkflowRunListResponse> {
+    return this.request("StopWorkflowRunList", req, cb)
+  }
+
+  /**
    * 获取空间列表
    */
   async DescribeSpaceList(
@@ -1126,6 +1222,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSpaceListResponse) => void
   ): Promise<DescribeSpaceListResponse> {
     return this.request("DescribeSpaceList", req, cb)
+  }
+
+  /**
+   * 继续运行等待输入的工作流异步运行实例
+   */
+  async ResumeWorkflowRun(
+    req: ResumeWorkflowRunRequest,
+    cb?: (error: string, rep: ResumeWorkflowRunResponse) => void
+  ): Promise<ResumeWorkflowRunResponse> {
+    return this.request("ResumeWorkflowRun", req, cb)
   }
 
   /**
@@ -1279,13 +1385,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取参数变量
-   */
-  async DescribeVariable(
-    req: DescribeVariableRequest,
-    cb?: (error: string, rep: DescribeVariableResponse) => void
-  ): Promise<DescribeVariableResponse> {
-    return this.request("DescribeVariable", req, cb)
+     * 本接口用来创建工作流的异步运行实例，创建成功后工作流会在后台异步运行，接口返回工作流运行实例ID（WorkflowRunId）等信息。后面可通过调用DescribeWorkflowRun接口查工作流运行的详情。
+注意：工作流的异步运行是基于应用的，需要先把对应的应用配置成“单工作流模式”，才能创建成功。
+     */
+  async CreateWorkflowRun(
+    req: CreateWorkflowRunRequest,
+    cb?: (error: string, rep: CreateWorkflowRunResponse) => void
+  ): Promise<CreateWorkflowRunResponse> {
+    return this.request("CreateWorkflowRun", req, cb)
   }
 
   /**
@@ -1419,13 +1526,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 Skill 列表
+   * 查询标签详情
    */
-  async DescribeSkillSummaryList(
-    req: DescribeSkillSummaryListRequest,
-    cb?: (error: string, rep: DescribeSkillSummaryListResponse) => void
-  ): Promise<DescribeSkillSummaryListResponse> {
-    return this.request("DescribeSkillSummaryList", req, cb)
+  async DescribeLabel(
+    req: DescribeLabelRequest,
+    cb?: (error: string, rep: DescribeLabelResponse) => void
+  ): Promise<DescribeLabelResponse> {
+    return this.request("DescribeLabel", req, cb)
   }
 
   /**
@@ -1466,6 +1573,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountListResponse) => void
   ): Promise<DescribeAccountListResponse> {
     return this.request("DescribeAccountList", req, cb)
+  }
+
+  /**
+   * DescribeNodeBatchRun
+   */
+  async DescribeNodeBatchRun(
+    req: DescribeNodeBatchRunRequest,
+    cb?: (error: string, rep: DescribeNodeBatchRunResponse) => void
+  ): Promise<DescribeNodeBatchRunResponse> {
+    return this.request("DescribeNodeBatchRun", req, cb)
   }
 
   /**
@@ -1516,6 +1633,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSystemVariableListResponse) => void
   ): Promise<DescribeSystemVariableListResponse> {
     return this.request("DescribeSystemVariableList", req, cb)
+  }
+
+  /**
+   * 查看工作流节点运行详情
+   */
+  async DescribeNodeRunDetail(
+    req: DescribeNodeRunDetailRequest,
+    cb?: (error: string, rep: DescribeNodeRunDetailResponse) => void
+  ): Promise<DescribeNodeRunDetailResponse> {
+    return this.request("DescribeNodeRunDetail", req, cb)
   }
 
   /**
@@ -1629,13 +1756,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询模型列表
+   * DescribeAppTriggerRunLogList
    */
-  async DescribeModelList(
-    req: DescribeModelListRequest,
-    cb?: (error: string, rep: DescribeModelListResponse) => void
-  ): Promise<DescribeModelListResponse> {
-    return this.request("DescribeModelList", req, cb)
+  async DescribeAppTriggerRunLogList(
+    req: DescribeAppTriggerRunLogListRequest,
+    cb?: (error: string, rep: DescribeAppTriggerRunLogListResponse) => void
+  ): Promise<DescribeAppTriggerRunLogListResponse> {
+    return this.request("DescribeAppTriggerRunLogList", req, cb)
+  }
+
+  /**
+   * 查询工作流运行详情
+   */
+  async DescribeWorkflowRun(
+    req: DescribeWorkflowRunRequest,
+    cb?: (error: string, rep: DescribeWorkflowRunResponse) => void
+  ): Promise<DescribeWorkflowRunResponse> {
+    return this.request("DescribeWorkflowRun", req, cb)
   }
 
   /**

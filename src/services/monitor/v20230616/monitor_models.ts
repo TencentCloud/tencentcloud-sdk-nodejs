@@ -1762,6 +1762,14 @@ export interface ListAIWorkbenchArtifactsRequest {
    * <p>排序</p><p>枚举值：</p><ul><li>ASC： 正序</li><li>DESC： 倒序</li></ul>
    */
   OrderDirection?: string
+  /**
+   * <p>数字分身ID</p>
+   */
+  AgentId?: string
+  /**
+   * <p>模糊搜索制品信息</p>
+   */
+  NameKeyword?: string
 }
 
 /**
@@ -2419,6 +2427,21 @@ export interface ArtifactInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StoragePath?: string
+  /**
+   * <p>来源类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceType?: string
+  /**
+   * <p>来源名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceName?: string
+  /**
+   * <p>预览摘要</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionSummary?: string
 }
 
 /**

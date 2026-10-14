@@ -1274,6 +1274,10 @@ export interface ImageAssociatedAssetCount {
    * <p>镜像所属账号uin</p>
    */
   OwnerUin?: string
+  /**
+   * <p>镜像关联超级节点数</p>
+   */
+  SuperNodeHostCount?: number
 }
 
 /**

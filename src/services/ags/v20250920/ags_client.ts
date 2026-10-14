@@ -63,6 +63,7 @@ import {
   DescribeSessionSpacesResponse,
   DescribeRegistryRecordVersionListResponse,
   DeleteSandboxSnapshotResponse,
+  DescribePreCacheImageListRequest,
   DescribeRegistryRecordVersionListRequest,
   RejectRegistryRecordRequest,
   CreateDeploymentRequest,
@@ -87,6 +88,7 @@ import {
   DeleteSandboxSnapshotRequest,
   CreateRegistryRecordResponse,
   SessionSpaceInfo,
+  DescribePreCacheImageListResponse,
   UpdateSandboxInstanceRequest,
   ModifySessionRequest,
   CustomConfiguration,
@@ -108,6 +110,7 @@ import {
   DescribeRegistryRecordListResponse,
   CloudAuditLog,
   UpdateRegistryRecordRequest,
+  DeletePreCacheImageResponse,
   CreateAPIKeyResponse,
   DescribeSessionRequest,
   AcquireDeploymentTokenRequest,
@@ -122,6 +125,7 @@ import {
   CreateDeploymentResponse,
   DeleteRegistryRequest,
   GetSkillPackageDownloadURLResponse,
+  PreCacheImage,
   SessionState,
   MountOption,
   CreateSessionResponse,
@@ -136,6 +140,7 @@ import {
   AcquireSandboxInstanceTokenResponse,
   AccountQuotaOverview,
   AgentBucketStorageSource,
+  DeletePreCacheImageRequest,
   CloudRecordLabelMutation,
   DescribeSandboxSnapshotListResponse,
   PauseSandboxInstanceResponse,
@@ -407,13 +412,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询沙箱实例列表
+   * 查询镜像预热列表
    */
-  async DescribeSandboxInstanceList(
-    req: DescribeSandboxInstanceListRequest,
-    cb?: (error: string, rep: DescribeSandboxInstanceListResponse) => void
-  ): Promise<DescribeSandboxInstanceListResponse> {
-    return this.request("DescribeSandboxInstanceList", req, cb)
+  async DescribePreCacheImageList(
+    req: DescribePreCacheImageListRequest,
+    cb?: (error: string, rep: DescribePreCacheImageListResponse) => void
+  ): Promise<DescribePreCacheImageListResponse> {
+    return this.request("DescribePreCacheImageList", req, cb)
   }
 
   /**
@@ -560,6 +565,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询沙箱实例列表
+   */
+  async DescribeSandboxInstanceList(
+    req: DescribeSandboxInstanceListRequest,
+    cb?: (error: string, rep: DescribeSandboxInstanceListResponse) => void
+  ): Promise<DescribeSandboxInstanceListResponse> {
+    return this.request("DescribeSandboxInstanceList", req, cb)
+  }
+
+  /**
    * 查询沙箱工具列表
    */
   async DescribeSandboxToolList(
@@ -660,6 +675,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSessionSpacesResponse) => void
   ): Promise<DescribeSessionSpacesResponse> {
     return this.request("DescribeSessionSpaces", req, cb)
+  }
+
+  /**
+   * 删除预热镜像
+   */
+  async DeletePreCacheImage(
+    req: DeletePreCacheImageRequest,
+    cb?: (error: string, rep: DeletePreCacheImageResponse) => void
+  ): Promise<DeletePreCacheImageResponse> {
+    return this.request("DeletePreCacheImage", req, cb)
   }
 
   /**

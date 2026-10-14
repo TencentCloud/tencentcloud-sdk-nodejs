@@ -28460,19 +28460,19 @@ export interface AigcVideoTaskUsage {
    */
   ThoughtTokens?: number
   /**
-   * <p>输入图片数目。</p><p>仅使用 Hailuo 的 H3 版本时取值有效。</p>
+   * <p>输入图片数目。</p><p>仅使用 Hailuo(H3/H3-Max)、wand-vega-video(1.0-lite) 时取值有效。</p>
    */
   InputImageCount?: number
   /**
-   * <p>输入视频的时长。</p><p>单位：秒。</p><p>仅使用 Hailuo 的 H3 版本时取值有效。</p>
+   * <p>输入视频的时长。</p><p>单位：秒。</p><p> 仅使用 Hailuo(H3/H3-Max)、wand-vega-video(1.0-lite/1.0-pro/1.5-pro)、Wan(3.0/3.0-prime) 时取值有效。</p>
    */
   InputSeconds?: number
   /**
-   * <p>输出视频时长。</p><p>单位：秒。</p><p>仅使用 Hailuo 的 H3 版本时取值有效。</p>
+   * <p>输出视频时长。</p><p>单位：秒。</p><p>所有模型版本取值均有效。</p>
    */
   OutputSeconds?: number
   /**
-   * <p>输入输出总时长。</p><p>默认值：秒。</p><p>仅使用 Hailuo 的 H3 版本时取值有效。</p>
+   * <p>输入输出总时长。</p><p>默认值：秒。</p><p> 仅使用 Hailuo(H3/H3-Max)、wand-vega-video(1.0-lite/1.0-pro/1.5-pro)、Wan(3.0/3.0-prime) 时取值有效。</p>
    */
   TotalSeconds?: number
 }

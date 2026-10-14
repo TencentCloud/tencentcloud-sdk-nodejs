@@ -1627,17 +1627,13 @@ export interface MemberMainInfo {
 }
 
 /**
- * CreateRoleAssignment请求参数结构体
+ * DeleteOrganizationMembers返回参数结构体
  */
-export interface CreateRoleAssignmentRequest {
+export interface DeleteOrganizationMembersResponse {
   /**
-   * 空间 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
-  /**
-   * 授权成员账号信息，最多授权50条。
-   */
-  RoleAssignmentInfo?: Array<RoleAssignmentInfo>
+  RequestId?: string
 }
 
 /**
@@ -1847,6 +1843,28 @@ export interface ListPoliciesResponse {
 }
 
 /**
+ * AuditPermissionApplyOrder请求参数结构体
+ */
+export interface AuditPermissionApplyOrderRequest {
+  /**
+   * <p>空间 ID</p>
+   */
+  ZoneId: string
+  /**
+   * <p>申请单 ID</p>
+   */
+  ApplyId: string
+  /**
+   * <p>审批结果</p><p>枚举值：</p><ul><li>Approve： 通过</li><li>Reject： 拒绝</li></ul>
+   */
+  AuditResult: string
+  /**
+   * <p>审批意见</p>
+   */
+  AuditOpinion?: string
+}
+
+/**
  * BindOrganizationMemberAuthAccount请求参数结构体
  */
 export interface BindOrganizationMemberAuthAccountRequest {
@@ -1941,13 +1959,17 @@ export interface GetZoneSAMLServiceProviderInfoResponse {
 }
 
 /**
- * DeleteOrganizationMembers返回参数结构体
+ * CreateRoleAssignment请求参数结构体
  */
-export interface DeleteOrganizationMembersResponse {
+export interface CreateRoleAssignmentRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 空间 ID。
    */
-  RequestId?: string
+  ZoneId: string
+  /**
+   * 授权成员账号信息，最多授权50条。
+   */
+  RoleAssignmentInfo?: Array<RoleAssignmentInfo>
 }
 
 /**
@@ -4726,45 +4748,17 @@ export interface BindOrganizationPolicySubAccountRequest {
 }
 
 /**
- * 成员和子账号的授权关系
+ * AuditPermissionApplyOrder返回参数结构体
  */
-export interface OrgMemberAuthAccount {
+export interface AuditPermissionApplyOrderResponse {
   /**
-   * 组织子账号Uin。
+   * <p>同步任务列表</p>
    */
-  OrgSubAccountUin?: number
+  Tasks?: Array<TaskInfo>
   /**
-   * 策略ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PolicyId?: number
-  /**
-   * 策略名。
-   */
-  PolicyName?: string
-  /**
-   * 身份ID。
-   */
-  IdentityId?: number
-  /**
-   * 身份角色名。
-   */
-  IdentityRoleName?: string
-  /**
-   * 身份角色别名。
-   */
-  IdentityRoleAliasName?: string
-  /**
-   * 创建时间。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间。
-   */
-  UpdateTime?: string
-  /**
-   * 子账号名称
-   */
-  OrgSubAccountName?: string
+  RequestId?: string
 }
 
 /**
@@ -5953,6 +5947,48 @@ export interface DescribePolicyRequest {
    * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
    */
   PolicyType?: string
+}
+
+/**
+ * 成员和子账号的授权关系
+ */
+export interface OrgMemberAuthAccount {
+  /**
+   * 组织子账号Uin。
+   */
+  OrgSubAccountUin?: number
+  /**
+   * 策略ID。
+   */
+  PolicyId?: number
+  /**
+   * 策略名。
+   */
+  PolicyName?: string
+  /**
+   * 身份ID。
+   */
+  IdentityId?: number
+  /**
+   * 身份角色名。
+   */
+  IdentityRoleName?: string
+  /**
+   * 身份角色别名。
+   */
+  IdentityRoleAliasName?: string
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。
+   */
+  UpdateTime?: string
+  /**
+   * 子账号名称
+   */
+  OrgSubAccountName?: string
 }
 
 /**

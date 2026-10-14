@@ -41,6 +41,7 @@ import {
   CreateLiveAvatarCloneFigureResponse,
   DescribeGroupProIspPlayInfoListResponse,
   DescribeDeliverBandwidthListResponse,
+  DescribeStreamPackageIngestStatisticsRequest,
   DescribeLiveTranscodeDetailInfoRequest,
   DescribeLiveSnapshotTemplatesRequest,
   CreateLiveWatermarkRuleResponse,
@@ -172,7 +173,7 @@ import {
   DeleteLivePadRuleRequest,
   CreateLiveSnapshotRuleResponse,
   DescribeLiveStreamEventListResponse,
-  SceneVideoExtraParam,
+  DescribeStreamPackageRemuxStatisticsResponse,
   DescribeLiveTranscodeTotalInfoRequest,
   CommonMixCropParams,
   DescribeLivePushAuthKeyRequest,
@@ -192,6 +193,7 @@ import {
   DescribeLiveStreamPublishedListRequest,
   DescribeCasterDisplayInfoRequest,
   ModifyOriginStreamInfoRequest,
+  DescribeStreamPackageRemuxStatisticsRequest,
   PushAuthKeyInfo,
   CreateCasterInputPushUrlResponse,
   DescribeLivePlayAuthKeyRequest,
@@ -211,6 +213,7 @@ import {
   DeleteLivePullStreamTaskRequest,
   DescribeCasterMarkPicInfosResponse,
   CreateAuditKeywordsRequest,
+  OutputStatisticsDataInfo,
   DescribeLiveAvatarImageListResponse,
   DescribeAIGCTaskStatusRequest,
   DescribeSceneVideoTaskRequest,
@@ -256,6 +259,7 @@ import {
   BackupStreamGroupInfo,
   DescribeAuditKeywordLibsRequest,
   DescribeLivePadStreamListResponse,
+  IngestStatisticsDataInfo,
   ScreenshotTask,
   DeletePullStreamConfigResponse,
   ModifyLivePlayDomainRequest,
@@ -311,9 +315,11 @@ import {
   CreateLiveAvatarScriptResponse,
   StreamOnlineInfo,
   CopyLiveAvatarRoomRequest,
+  SceneVideoExtraParam,
   DeleteLiveRecordRequest,
   StopLiveRecordRequest,
   CasterLayoutParam,
+  DescribeStreamPackageIngestStatisticsResponse,
   DeleteLiveCallbackTemplateResponse,
   CreateSceneVideoTaskResponse,
   BatchDomainOperateErrors,
@@ -386,6 +392,7 @@ import {
   CreateLiveTimeShiftRuleRequest,
   StopCasterPvwResponse,
   DeleteLiveAvatarScriptResponse,
+  SwitchCasterToEmergencyResponse,
   DescribeLiveDomainRequest,
   DescribePushBandwidthAndFluxListRequest,
   CreateLiveRecordRuleRequest,
@@ -424,6 +431,7 @@ import {
   DeleteCasterMarkPicInfoRequest,
   DeleteLiveAvatarCloneFigureRequest,
   CreateCasterResponse,
+  DescribeStreamPackageOutputStatisticsRequest,
   PushDataInfo,
   AuditKeywordDeleteDetail,
   CasterInfo,
@@ -588,6 +596,7 @@ import {
   TranscodeDetailInfo,
   DeleteCasterMarkWordInfoRequest,
   ModifyLiveRecordTemplateResponse,
+  DescribeStreamPackageOutputStatisticsResponse,
   StopLivePadStreamRequest,
   AddLiveDomainRequest,
   StreamName,
@@ -651,7 +660,7 @@ import {
   ModifyLiveCallbackTemplateRequest,
   DeleteCasterLayoutInfoResponse,
   DescribeAuditTemplatesRequest,
-  SwitchCasterToEmergencyResponse,
+  RemuxStatisticsDataInfo,
   DescribeMonitorReportRequest,
   DescribeAllStreamPlayInfoListRequest,
   DescribeLiveDomainResponse,
@@ -1001,6 +1010,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveDomainRefererResponse) => void
   ): Promise<DescribeLiveDomainRefererResponse> {
     return this.request("DescribeLiveDomainReferer", req, cb)
+  }
+
+  /**
+   * 查询媒体包装输出用量信息
+   */
+  async DescribeStreamPackageOutputStatistics(
+    req: DescribeStreamPackageOutputStatisticsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageOutputStatisticsResponse) => void
+  ): Promise<DescribeStreamPackageOutputStatisticsResponse> {
+    return this.request("DescribeStreamPackageOutputStatistics", req, cb)
   }
 
   /**
@@ -1366,6 +1385,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCasterPlayUrlResponse) => void
   ): Promise<DescribeCasterPlayUrlResponse> {
     return this.request("DescribeCasterPlayUrl", req, cb)
+  }
+
+  /**
+   * DescribeStreamPackageRemuxStatistics
+   */
+  async DescribeStreamPackageRemuxStatistics(
+    req: DescribeStreamPackageRemuxStatisticsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageRemuxStatisticsResponse) => void
+  ): Promise<DescribeStreamPackageRemuxStatisticsResponse> {
+    return this.request("DescribeStreamPackageRemuxStatistics", req, cb)
   }
 
   /**
@@ -3291,6 +3320,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CancelCommonMixStreamResponse) => void
   ): Promise<CancelCommonMixStreamResponse> {
     return this.request("CancelCommonMixStream", req, cb)
+  }
+
+  /**
+   * DescribeStreamPackageIngestStatistics
+   */
+  async DescribeStreamPackageIngestStatistics(
+    req: DescribeStreamPackageIngestStatisticsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageIngestStatisticsResponse) => void
+  ): Promise<DescribeStreamPackageIngestStatisticsResponse> {
+    return this.request("DescribeStreamPackageIngestStatistics", req, cb)
   }
 
   /**

@@ -48,6 +48,16 @@ it("waf.v20180125.DescribePeakPoints", async function () {
     }
 })
 
+it("waf.v20180125.DescribeLLMWafDLPRules", async function () {
+    try {
+       const data = await client.DescribeLLMWafDLPRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.CreateAndUpdateBatchCCRule", async function () {
     try {
        const data = await client.CreateAndUpdateBatchCCRule({})
@@ -108,6 +118,16 @@ it("waf.v20180125.DescribeAccessIndex", async function () {
     }
 })
 
+it("waf.v20180125.DescribeLLMWafProtectRules", async function () {
+    try {
+       const data = await client.DescribeLLMWafProtectRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.GetAttackTotalCount", async function () {
     try {
        const data = await client.GetAttackTotalCount({})
@@ -131,6 +151,16 @@ it("waf.v20180125.ImportIpAccessControl", async function () {
 it("waf.v20180125.AddCustomWhiteRule", async function () {
     try {
        const data = await client.AddCustomWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyLLMStatus", async function () {
+    try {
+       const data = await client.ModifyLLMStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,6 +648,16 @@ it("waf.v20180125.CreateDeals", async function () {
     }
 })
 
+it("waf.v20180125.ModifyIpAccessControl", async function () {
+    try {
+       const data = await client.ModifyIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAreaBanSupportAreas", async function () {
     try {
        const data = await client.DescribeAreaBanSupportAreas({})
@@ -708,6 +748,26 @@ it("waf.v20180125.ModifyBotSceneUCBRule", async function () {
     }
 })
 
+it("waf.v20180125.DescribeLLMSdkAccess", async function () {
+    try {
+       const data = await client.DescribeLLMSdkAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
+    try {
+       const data = await client.DescribeDomainDetailsSaas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteBatchCustomWhiteRule", async function () {
     try {
        const data = await client.DeleteBatchCustomWhiteRule({})
@@ -741,6 +801,16 @@ it("waf.v20180125.CreatePostCLSFlow", async function () {
 it("waf.v20180125.GetAttackHistogram", async function () {
     try {
        const data = await client.GetAttackHistogram({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyLLMContentRule", async function () {
+    try {
+       const data = await client.ModifyLLMContentRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,6 +908,16 @@ it("waf.v20180125.CreateAreaBanRule", async function () {
     }
 })
 
+it("waf.v20180125.ModifyInstanceRenewFlag", async function () {
+    try {
+       const data = await client.ModifyInstanceRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.EnableClientMsg", async function () {
     try {
        const data = await client.EnableClientMsg({})
@@ -888,19 +968,9 @@ it("waf.v20180125.SwitchElasticMode", async function () {
     }
 })
 
-it("waf.v20180125.ModifyInstanceRenewFlag", async function () {
+it("waf.v20180125.DeleteLLMKeywordLibrary", async function () {
     try {
-       const data = await client.ModifyInstanceRenewFlag({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
-    try {
-       const data = await client.DescribeDomainDetailsSaas({})
+       const data = await client.DeleteLLMKeywordLibrary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -911,6 +981,26 @@ it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
 it("waf.v20180125.DescribeCCRule", async function () {
     try {
        const data = await client.DescribeCCRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyLLMKeywordLibrary", async function () {
+    try {
+       const data = await client.ModifyLLMKeywordLibrary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeLogHistogram", async function () {
+    try {
+       const data = await client.DescribeLogHistogram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,16 +1038,6 @@ it("waf.v20180125.DescribeApiSecSensitiveRuleList", async function () {
     }
 })
 
-it("waf.v20180125.DescribeLogHistogram", async function () {
-    try {
-       const data = await client.DescribeLogHistogram({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.DescribeOwaspRuleTypes", async function () {
     try {
        const data = await client.DescribeOwaspRuleTypes({})
@@ -981,6 +1061,16 @@ it("waf.v20180125.ModifyOwaspDomainUpdateStatus", async function () {
 it("waf.v20180125.DeleteAttackDownloadRecord", async function () {
     try {
        const data = await client.DeleteAttackDownloadRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyLLMWafProtectRule", async function () {
+    try {
+       const data = await client.ModifyLLMWafProtectRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1081,6 +1171,16 @@ it("waf.v20180125.ModifyBatchCustomRuleStatus", async function () {
 it("waf.v20180125.DescribePolicyStatus", async function () {
     try {
        const data = await client.DescribePolicyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ExportLLMKeywordLib", async function () {
+    try {
+       const data = await client.ExportLLMKeywordLib({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1218,6 +1318,16 @@ it("waf.v20180125.DescribeOwaspWhiteRules", async function () {
     }
 })
 
+it("waf.v20180125.DeleteLLMContentRule", async function () {
+    try {
+       const data = await client.DeleteLLMContentRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyAreaBanStatus", async function () {
     try {
        const data = await client.ModifyAreaBanStatus({})
@@ -1228,9 +1338,9 @@ it("waf.v20180125.ModifyAreaBanStatus", async function () {
     }
 })
 
-it("waf.v20180125.ModifyIpAccessControl", async function () {
+it("waf.v20180125.DescribeLLMKeywordLibrary", async function () {
     try {
-       const data = await client.ModifyIpAccessControl({})
+       const data = await client.DescribeLLMKeywordLibrary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1291,6 +1401,16 @@ it("waf.v20180125.DescribeAccessHistogram", async function () {
 it("waf.v20180125.CreateBatchIpAccessControl", async function () {
     try {
        const data = await client.CreateBatchIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeLLMContentRuleList", async function () {
+    try {
+       const data = await client.DescribeLLMContentRuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1431,6 +1551,16 @@ it("waf.v20180125.DeleteAttackWhiteRule", async function () {
 it("waf.v20180125.CreateProtectGroup", async function () {
     try {
        const data = await client.CreateProtectGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.UpsertCCRule", async function () {
+    try {
+       const data = await client.UpsertCCRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1818,6 +1948,16 @@ it("waf.v20180125.DescribeDomainVerifyResult", async function () {
     }
 })
 
+it("waf.v20180125.ModifyLLMContentRuleStatus", async function () {
+    try {
+       const data = await client.ModifyLLMContentRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyAttackWhiteRule", async function () {
     try {
        const data = await client.ModifyAttackWhiteRule({})
@@ -2068,9 +2208,9 @@ it("waf.v20180125.DescribeModuleStatus", async function () {
     }
 })
 
-it("waf.v20180125.UpsertCCRule", async function () {
+it("waf.v20180125.ModifyLLMWafDLPRule", async function () {
     try {
-       const data = await client.UpsertCCRule({})
+       const data = await client.ModifyLLMWafDLPRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

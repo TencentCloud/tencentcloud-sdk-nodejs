@@ -231,6 +231,20 @@ export interface RollbackReleaseRequest {
 }
 
 /**
+ * 工作流的API参数
+ */
+export interface CustomVariable {
+  /**
+   * 参数名称
+   */
+  Name?: string
+  /**
+   * 参数的值
+   */
+  Value?: string
+}
+
+/**
  * DescribeModelList返回参数结构体
  */
 export interface DescribeModelListResponse {
@@ -664,13 +678,9 @@ export interface DescribeModelListRequest {
    */
   ModelScene: number
   /**
-   * <p>空间ID</p>
+   * <p>过滤条件(多个 Filter 之间为 AND, 同一 Filter 多 Values 为 OR)<br>DeveloperName： 模型作者名称<br>ProviderName： 模型提供商名称<br>ProviderType：模型提供商类型</p>
    */
-  SpaceId?: string
-  /**
-   * <p>关键词模糊搜索</p>
-   */
-  Query?: string
+  FilterList?: Array<Filter>
   /**
    * <p>页码。从0开始</p>
    */
@@ -680,9 +690,13 @@ export interface DescribeModelListRequest {
    */
   PageSize?: number
   /**
-   * <p>过滤条件(多个 Filter 之间为 AND, 同一 Filter 多 Values 为 OR)<br>DeveloperName： 模型作者名称<br>ProviderName： 模型提供商名称<br>ProviderType：模型提供商类型</p>
+   * <p>关键词模糊搜索</p>
    */
-  FilterList?: Array<Filter>
+  Query?: string
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId?: string
 }
 
 /**
@@ -765,6 +779,28 @@ export interface DescribeDocResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SaveWorkflowDebugContext请求参数结构体
+ */
+export interface SaveWorkflowDebugContextRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>应用变量列表</p>
+   */
+  AppVariableValueList?: Array<AppVariableValue>
+  /**
+   * <p>会话ID</p>
+   */
+  SessionId?: string
+  /**
+   * <p>自定义用户ID</p>
+   */
+  UserId?: string
 }
 
 /**
@@ -859,21 +895,33 @@ export interface CodeToolConfig {
 }
 
 /**
- * 模型状态信息
+ * <p>模型状态</p>
  */
 export interface ModelStatus {
   /**
-   * 专属并发数
+   * <p>专属并发数</p>
    */
   Concurrency?: number
   /**
-   * 是否专属并发
+   * <p>是否专属并发</p>
    */
   IsExclusive?: boolean
   /**
-   * 资源状态。1-资源可用, 2-资源已用尽
+   * <p>是否支持在智能工作台直接体验（模型广场详情页：依赖 space_id 动态判定；false 时前端置灰「立即体验」按钮）</p>
+   */
+  IsExperienceSupported?: boolean
+  /**
+   * <p>资源状态</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_STATUS_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>RESOURCE_STATUS_AVAILABLE</td><td>1</td><td>资源可用</td></tr><tr><td>RESOURCE_STATUS_EXHAUSTED</td><td>2</td><td>资源已用尽</td></tr></table>
    */
   ResourceStatus?: number
+  /**
+   * <p>调用 RPM 上限（当前账号维度：有配置取配置，无配置取默认；0 表示未获取到）</p>
+   */
+  RpmLimit?: string
+  /**
+   * <p>调用 TPM 上限（当前账号维度：有配置取配置，无配置取默认；0 表示未获取到）</p>
+   */
+  TpmLimit?: string
 }
 
 /**
@@ -961,6 +1009,36 @@ export interface UsageSummary {
 }
 
 /**
+ * 应用沙箱中的云盘挂载配置。
+ */
+export interface FileVolumeMount {
+  /**
+   * <p>访问模式：RO=只读，RW=读写；必填。挂载到 /workdir 时只能使用 RW。</p>
+   */
+  AccessMode: string
+  /**
+   * <p>沙箱内的绝对挂载目录；/workdir 最多挂载一条且只能使用 RW。</p>
+   */
+  MountPath: string
+  /**
+   * <p>云盘标识</p>
+   */
+  VolumeId: string
+  /**
+   * <p>服务端生成的挂载标识，修改保留，新增可不传</p>
+   */
+  MountId?: string
+  /**
+   * <p>相对云盘 data 根目录的路径；空字符串表示挂载整个 data 根目录。</p>
+   */
+  RelativePath?: string
+  /**
+   * <p>云盘名称，仅在查询应用配置时由服务端补充，修改时忽略；不可获取时为空且不影响挂载配置</p>
+   */
+  VolumeName?: string
+}
+
+/**
  * 引用摘要（用于详情页展示，对应DB t_skill_reference）
  */
 export interface SkillReferenceSummary {
@@ -988,6 +1066,10 @@ export interface SkillReferenceSummary {
    * <p>Reference实例拥有者</p>
    */
   Owner?: string
+  /**
+   * <p>应用标识</p>
+   */
+  AppIdentity?: AppIdentity
 }
 
 /**
@@ -1083,31 +1165,44 @@ export interface AgentSpec {
  */
 export interface ClawAgentConfig {
   /**
-   * Agent团队协作配置
+   * <p>Agent团队协作配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentTeamConfig?: ClawAgentAgentTeamConfig
   /**
-   * 长期记忆配置
+   * <p>长期记忆配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LongMemoryConfig?: ClawAgentLongMemoryConfig
+  /**
+   * <p>渠道上下文超时清空配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelContextTimeoutConfig?: ClawAgentChannelContextTimeoutConfig
 }
 
 /**
- * 模型限制信息
+ * <p>模型限制信息</p>
  */
 export interface ModelLimit {
   /**
-   * 模型上下文长度展示文案（如 "128K"、"1000K"）
+   * <p>模型上下文长度展示文案（如 128K、1000K）</p>
    */
   ContextLengthDescription?: string
   /**
-   * 模型对话框输入长度字符数限制
+   * <p>模型对话框输入长度字符数限制</p>
    */
   InputLengthLimit?: number
   /**
-   * 模型提示词长度字符数限制
+   * <p>最大输入 Tokens 展示文案（如 960k，服务端格式化，未配置为空串）</p>
+   */
+  MaxInputTokensDescription?: string
+  /**
+   * <p>最大输出 Tokens 展示文案（如 64k，服务端格式化，未配置为空串）</p>
+   */
+  MaxOutputTokensDescription?: string
+  /**
+   * <p>模型提示词长度字符数限制</p>
    */
   PromptLengthLimit?: number
 }
@@ -1189,6 +1284,32 @@ export interface ModifyConversationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeWorkflowRunSummaryList请求参数结构体
+ */
+export interface DescribeWorkflowRunSummaryListRequest {
+  /**
+   * <p>应用ID, 获取方法参看如何获取 <a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">AppId</a></p>
+   */
+  AppId: string
+  /**
+   * <p>每页数量(取值范围1-200)</p>
+   */
+  PageSize: number
+  /**
+   * <p>页码(必须大于0)</p>
+   */
+  PageNumber: number
+  /**
+   * <p>运行环境。1:开发域，2:生产域    -</p>
+   */
+  Domain: number
+  /**
+   * <p>参数过滤</p>
+   */
+  FilterList?: Array<Filter>
 }
 
 /**
@@ -1347,6 +1468,20 @@ export interface CreateChannelResponse {
 }
 
 /**
+ * DescribeNodeRunDetail请求参数结构体
+ */
+export interface DescribeNodeRunDetailRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId: string
+  /**
+   * <p>节点运行实例ID</p>
+   */
+  NodeRunId: string
+}
+
+/**
  * 意图达成信息
  */
 export interface IntentAchievementInfo {
@@ -1489,29 +1624,33 @@ export interface ModifyAgentRequest {
 }
 
 /**
- * PluginOperation
+ * 工作流节点运行详情
  */
-export interface PluginOperation {
+export interface NodeRunDetail {
   /**
-   * 是否允许外部调用
+   * <p>节点运行信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AllowExternalAccess?: boolean
+  NodeRun?: NodeRun
   /**
-   * <p>计费类型。</p><p>枚举值：</p><ul><li>0：免费</li><li>1：公测</li><li>2：官方收费</li></ul>
+   * <p>节点运行内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillingType?: number
+  NodeRunContent?: NodeRunContent
   /**
-   * 插件分类标识
+   * <p>节点运行过程</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryKey?: string
+  NodeRunExecution?: NodeRunExecution
   /**
-   * 插件概述
+   * <p>节点运行日志</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Introduction?: string
+  NodeRunLog?: NodeRunLog
   /**
-   * 是否精选
+   * <p>统计信息</p>
    */
-  IsRecommended?: boolean
+  StatisticList?: Array<Statistic>
 }
 
 /**
@@ -1591,6 +1730,30 @@ export interface SearchAdvancedConfig {
    * <p>最终返回结果数</p>
    */
   RecallCount?: number
+}
+
+/**
+ * 知识库空间共享信息
+ */
+export interface KBSpaceShare {
+  /**
+   * <p>是否已被其他空间引用</p>
+   */
+  IsSpaceShared?: boolean
+  /**
+   * <p>被引用空间信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SharedSpaceList?: Array<Identity>
+  /**
+   * <p>共享状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubStatus?: KBShareStatus
+  /**
+   * <p>是否允许操作</p>
+   */
+  Enable?: boolean
 }
 
 /**
@@ -1777,15 +1940,15 @@ export interface ReleaseSkillResponse {
 }
 
 /**
- * 模型属性
+ * <p>模型属性（支持工作流类型/AI 通话类型/是否关闭模型参数/是否支持深度思考/是否限时免费/是否默认模型等）</p>
  */
 export interface ModelProperty {
   /**
-   * 属性名称
+   * <p>属性名称</p>
    */
   Name?: string
   /**
-   * 属性值
+   * <p>属性值</p>
    */
   Value?: string
 }
@@ -1952,6 +2115,20 @@ export interface DescribeConcurrencyLimitDetailListRequest {
    * <p>每页数量，最大 100</p>
    */
   PageSize?: number
+}
+
+/**
+ * DescribeNodeRunDetail返回参数结构体
+ */
+export interface DescribeNodeRunDetailResponse {
+  /**
+   * <p>节点运行实例详情</p>
+   */
+  NodeRunDetail?: NodeRunDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2227,6 +2404,38 @@ export interface ModifyDocListRequest {
 }
 
 /**
+ * DescribeWorkflowRun返回参数结构体
+ */
+export interface DescribeWorkflowRunResponse {
+  /**
+   * <p>工作流运行实例详情</p>
+   */
+  WorkflowRun?: WorkflowRun
+  /**
+   * <p>节点列表</p>
+   */
+  NodeRunList?: Array<NodeRun>
+  /**
+   * <p>子工作流对应的NodePath</p>
+   */
+  SubWorkflowNodePath?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResumeWorkflowRun返回参数结构体
+ */
+export interface ResumeWorkflowRunResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteConversation请求参数结构体
  */
 export interface DeleteConversationRequest {
@@ -2417,6 +2626,20 @@ export interface AgentPluginCredentialConfig {
 }
 
 /**
+ * SaveWorkflowToolNodeOutput请求参数结构体
+ */
+export interface SaveWorkflowToolNodeOutputRequest {
+  /**
+   * <p>回调Token</p><p>Request Header X-ADP-Callback-Token</p>
+   */
+  CallbackToken?: string
+  /**
+   * <p>回调结果</p>
+   */
+  Result?: string
+}
+
+/**
  * ComplexBillingItem
  */
 export interface ComplexBillingItem {
@@ -2475,13 +2698,19 @@ export interface ModifyConflictQAResponse {
 }
 
 /**
- * 模型完整信息
+ * <p>模型完整信息</p>
  */
 export interface Model {
   /**
    * <p>模型徽章列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BadgeList?: Array<ModelBadge>
+  /**
+   * <p>模型作者信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeveloperInfo?: ModelDeveloperBasic
   /**
    * <p>模型限制信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2494,10 +2723,12 @@ export interface Model {
   ModelBasic?: ModelBasic
   /**
    * <p>模型超参配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterList?: Array<ModelParameter>
   /**
    * <p>模型属性配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PropertyList?: Array<ModelProperty>
   /**
@@ -2514,10 +2745,6 @@ export interface Model {
    * <p>模型标签列表</p>
    */
   TagList?: Array<string>
-  /**
-   * <p>模型作者信息</p>
-   */
-  DeveloperInfo?: ModelDeveloperBasic
 }
 
 /**
@@ -2575,6 +2802,20 @@ export interface DingTalkChannelConfig {
    * <p>钉钉机器人ClientSecret（AppSecret）</p>
    */
   AppSecret?: string
+}
+
+/**
+ * AppVariableValue
+ */
+export interface AppVariableValue {
+  /**
+   * <p>变量ID</p>
+   */
+  VariableId?: string
+  /**
+   * <p>变量值</p>
+   */
+  VariableValue?: string
 }
 
 /**
@@ -2826,6 +3067,24 @@ export interface CreateKBRequest {
 }
 
 /**
+ * CreateWorkflowRun返回参数结构体
+ */
+export interface CreateWorkflowRunResponse {
+  /**
+   * <p>工作流运行实例的ID</p>
+   */
+  WorkflowRunId?: string
+  /**
+   * <p>创建时间（毫秒时间戳）</p>
+   */
+  CreateTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteMsgRecordCategory返回参数结构体
  */
 export interface DeleteMsgRecordCategoryResponse {
@@ -2961,29 +3220,48 @@ export interface CreateWebSocketTokenRequest {
 }
 
 /**
- * DescribeChannelList请求参数结构体
+ * CreateWorkflowRun请求参数结构体
  */
-export interface DescribeChannelListRequest {
+export interface CreateWorkflowRunRequest {
   /**
-   * <p>应用业务ID</p>
+   * <p>应用ID, 获取方法参看如何获取 <a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">AppId</a></p>
    */
   AppId: string
   /**
-   * <p>渠道场景：0-B端场景，1-C端场景</p>
+   * <p>运行环境。1:开发域，2:生产域</p>
    */
-  Scene?: number
+  Domain: number
   /**
-   * <p>过滤条件（可选，支持ChannelType/ChannelStatus等维度）</p>
+   * <p>用户输入的内容</p>
    */
-  FilterList?: Array<Filter>
+  Query?: string
   /**
-   * <p>页码（从1开始）</p>
+   * <p>API参数配置</p>
    */
-  PageNumber?: number
+  CustomVariableList?: Array<CustomVariable>
   /**
-   * <p>每页数量（最大100）</p>
+   * <p>用户ID</p>
    */
-  PageSize?: number
+  UserId?: string
+}
+
+/**
+ * NodeRunExecution
+ */
+export interface NodeRunExecution {
+  /**
+   * <p>批次运行汇总</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BatchRunSummary?: BatchRunSummary
+  /**
+   * <p>结束时间（毫秒时间戳）</p>
+   */
+  EndTime?: string
+  /**
+   * <p>开始时间（毫秒时间戳）</p>
+   */
+  StartTime?: string
 }
 
 /**
@@ -3411,6 +3689,36 @@ export interface DescribeChannelListResponse {
 }
 
 /**
+ * 统计信息
+ */
+export interface Statistic {
+  /**
+   * <p>首token耗时</p>
+   */
+  FirstTokenCostMs: number
+  /**
+   * <p>输入token数量</p>
+   */
+  InputTokens: number
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName: string
+  /**
+   * <p>输出token数量</p>
+   */
+  OutputTokens: number
+  /**
+   * <p>推理总耗时</p>
+   */
+  TotalCostMs: number
+  /**
+   * <p>输入+输出总token</p>
+   */
+  TotalTokens: number
+}
+
+/**
  * QA 分片高亮信息
  */
 export interface QASegmentHighlight {
@@ -3595,6 +3903,28 @@ export interface UserAccessConfig {
 }
 
 /**
+ * 工作流运行实例元数据
+ */
+export interface WorkflowRunMetadata {
+  /**
+   * 用户的输入
+   */
+  Query?: string
+  /**
+   * 主模型名称
+   */
+  MainModelName?: string
+  /**
+   * API参数配置
+   */
+  CustomVariableList?: Array<CustomVariable>
+  /**
+   * 工作流的流程图
+   */
+  WorkflowGraph?: string
+}
+
+/**
  * 知识库模型配置
  */
 export interface KBModelConfig {
@@ -3693,6 +4023,83 @@ export interface DeleteQAListResponse {
 }
 
 /**
+ * 节点运行的基本信息
+ */
+export interface NodeRun {
+  /**
+   * 节点运行的ID
+   */
+  NodeRunId?: string
+  /**
+   * 节点ID
+   */
+  NodeId?: string
+  /**
+   * 工作流运行实例的ID
+   */
+  WorkflowRunId?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * 节点类型。
+1： 开始节点
+2：参数提取节点
+3：大模型节点
+4：知识问答节点
+5：知识检索节点
+6：标签提取节点
+7：代码执行节点
+8：工具节点
+9：逻辑判断节点
+10：回复节点
+11：选项卡节点
+12：循环节点
+13：意图识别节点
+14：工作流节点
+15：插件节点
+16：结束节点
+17: 变量聚合节点数据
+18: 批处理节点
+19: 消息队列节点
+20: 数据库节点
+21: 变量赋值节点数据
+22: 变量转换节点数据
+23: Agent节点
+24: 注释节点
+25: 文件收集节点
+26: 文本收集节点
+27: Widget节点
+   */
+  NodeType?: number
+  /**
+   * 运行状态。1: 初始状态；2: 运行中；3: 运行成功； 4: 运行失败； 5: 已取消
+   */
+  Status?: number
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗的总时间（毫秒）
+   */
+  TotalCostMs?: number
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
+  /**
+   * 错误码
+   */
+  FailCode?: string
+  /**
+   * 分支下标的列表
+   */
+  BranchIndexList?: Array<number | bigint>
+}
+
+/**
  * 会话重置信息
  */
 export interface ConversationResetInfo {
@@ -3734,6 +4141,16 @@ export interface QASourceInfo {
    * <p>来源类型：1=文档生成，2=批量导入，3=手动录入<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>QA_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>QA_SOURCE_TYPE_DOC</td><td>1</td><td>文档生成</td></tr><tr><td>QA_SOURCE_TYPE_BATCH_IMPORT</td><td>2</td><td>批量导入</td></tr><tr><td>QA_SOURCE_TYPE_MANUAL</td><td>3</td><td>手动录入</td></tr></tbody></table></p>
    */
   SourceType?: number
+}
+
+/**
+ * SaveWorkflowDebugContext返回参数结构体
+ */
+export interface SaveWorkflowDebugContextResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3900,14 +4317,25 @@ export interface App {
    */
   Status: AppStatusInfo
   /**
-   * <p>应用引用的共享知识库列表</p>
-   */
-  SharedKbList?: Array<AppSharedKbInfo>
-  /**
    * <p>企业共享配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CorpShareConfig?: CorpShareConfig
+  /**
+   * <p>应用引用的共享知识库列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SharedKbList?: Array<AppSharedKbInfo>
+  /**
+   * <p>portal共享配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PortalShareConfig?: PortalShareConfig
+  /**
+   * <p>应用挂载云盘</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileVolumeMountList?: Array<FileVolumeMount>
 }
 
 /**
@@ -4183,6 +4611,24 @@ export interface DescribeChannelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 工作流运行实例时间信息
+ */
+export interface WorkflowRunTime {
+  /**
+   * 创建时间（毫秒时间戳）
+   */
+  CreateTime?: string
+  /**
+   * 开始时间（毫秒时间戳）
+   */
+  StartTime?: string
+  /**
+   * 结束时间（毫秒时间戳）
+   */
+  EndTime?: string
 }
 
 /**
@@ -4739,27 +5185,27 @@ export interface ResourceConsumption {
 }
 
 /**
- * 模型基本信息
+ * <p>模型基本信息（已弃用，请使用 ModelProfile）</p>
  */
 export interface ModelBasic {
   /**
-   * 模型描述
+   * <p>模型描述</p>
    */
   Description?: string
   /**
-   * 模型图标地址
+   * <p>模型图标地址</p>
    */
   IconUrl?: string
   /**
-   * 模型ID
+   * <p>模型ID</p>
    */
   ModelId?: string
   /**
-   * 模型类型。1-LLM模型, 2-Rerank模型, 3-Embedding模型, 4-文档解析模型
+   * <p>模型类型</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODEL_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>MODEL_TYPE_LLM</td><td>1</td><td>LLM模型</td></tr><tr><td>MODEL_TYPE_RERANK</td><td>2</td><td>Rerank模型</td></tr><tr><td>MODEL_TYPE_EMBEDDING</td><td>3</td><td>Embedding模型</td></tr><tr><td>MODEL_TYPE_FILE_PARSE</td><td>4</td><td>文档解析模型</td></tr></table>
    */
   ModelType?: number
   /**
-   * 模型名称
+   * <p>模型名称</p>
    */
   Name?: string
 }
@@ -4815,7 +5261,11 @@ export interface ModifyAppRequest {
    */
   SharedKbIdList?: Array<string>
   /**
-   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig, Config.Mode.ClawAgentConfig<br>【Mode.ClawAgentConfig】Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility, Config.Experience.Advanced.DialogCustomConfig</p>
+   * <p>应用挂载云盘</p>
+   */
+  FileVolumeMountList?: Array<AppFileVolumeMount>
+  /**
+   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility</p>
    */
   UpdateMask?: FieldMask
 }
@@ -5061,42 +5511,17 @@ export interface MCPToolConfig {
 }
 
 /**
- * DescribeKB返回参数结构体
+ * 有效期
  */
-export interface DescribeKBResponse {
+export interface EffectivePeriod {
   /**
-   * <p>关联的应用 ID 列表</p>
+   * <p>有效期结束时间（Unix 秒，0 表示永久有效）</p>
    */
-  AppIdList?: Array<string>
+  EndTime?: string
   /**
-   * <p>容量信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>有效期开始时间（Unix 秒）</p>
    */
-  CapacityInfo?: KBCapacity
-  /**
-   * <p>ES 配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EsConfig?: ESConfig
-  /**
-   * <p>模型配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModelConfig?: KBModelConfig
-  /**
-   * <p>所有者信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Owner?: Operator
-  /**
-   * <p>知识库摘要信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Summary?: KBSummary
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  StartTime?: string
 }
 
 /**
@@ -5315,7 +5740,7 @@ export interface DescribeAuditLogListResponse {
  */
 export interface DescribeUsageDetailListRequest {
   /**
-   * <p>资源类型，限定为 RESOURCE_TYPE_MODEL / RESOURCE_TYPE_PLUGIN</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>平台功能用量</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）</td></tr></tbody></table>
+   * <p>资源类型，限定为 RESOURCE_TYPE_MODEL / RESOURCE_TYPE_PLUGIN</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>平台功能用量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）（预留，暂不支持）</td></tr></tbody></table>
    */
   ResourceType: number
   /**
@@ -5504,15 +5929,15 @@ export interface ImportDocListResponse {
  */
 export interface SupportedFileType {
   /**
-   * 文件类型描述(如"文本文档")
+   * <p>描述信息</p>
    */
   Description: string
   /**
-   * 文件类型(如 txt、pdf、jpg, 建议用扩展名)
+   * <p>文件类型（如 txt、pdf、jpg，建议用扩展名）</p>
    */
   FileExt: string
   /**
-   * 文件大小限制(单位: 字节)
+   * <p>文件大小限制（单位：字节）</p>
    */
   MaxSizeBytes: string
 }
@@ -5591,6 +6016,28 @@ export interface DescribeVariableRequest {
    * module_type。枚举值: 1:环境参数, 2:应用参数, 3:系统参数, -1:所有参数
    */
   ModuleType?: number
+}
+
+/**
+ * 工作流运行实例基本信息
+ */
+export interface WorkflowRunProfile {
+  /**
+   * 应用ID
+   */
+  AppId?: string
+  /**
+   * 工作流运行实例的ID
+   */
+  WorkflowRunId?: string
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
+  /**
+   * 名称
+   */
+  Name?: string
 }
 
 /**
@@ -5689,6 +6136,21 @@ export interface AuditLog {
    * <p>操作唯一ID</p>
    */
   UniqueId?: string
+}
+
+/**
+ * 工作流运行实例输出信息
+ */
+export interface WorkflowRunOutput {
+  /**
+   * 工作流输出
+   */
+  Output?: string
+  /**
+   * 当前的回复消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestMessage?: ReplyMessage
 }
 
 /**
@@ -6271,6 +6733,80 @@ export interface DeleteMsgRecordCategoryRequest {
 }
 
 /**
+ * Widget 组件内容信息
+ */
+export interface ConversationWidget {
+  /**
+   * <p>Base64 编码的原始 widget 数据</p>
+   */
+  EncodedWidget: string
+  /**
+   * <p>用户上次提交的 payload</p>
+   */
+  Payload: string
+  /**
+   * <p>widget 在正文中的位置</p>
+   */
+  Position: number
+  /**
+   * <p>widget 状态 JSON 数据</p>
+   */
+  State: string
+  /**
+   * <p>widget 视图数据</p>
+   */
+  View: string
+  /**
+   * <p>组件 ID</p>
+   */
+  WidgetId: string
+  /**
+   * <p>组件运行 ID</p>
+   */
+  WidgetRunId: string
+}
+
+/**
+ * 工作流运行实例信息
+ */
+export interface WorkflowRun {
+  /**
+   * 工作流运行实例基本信息
+   */
+  WorkflowRunSummary?: WorkflowRunSummary
+  /**
+   * 工作流运行实例输出信息
+   */
+  WorkflowRunOutput?: WorkflowRunOutput
+  /**
+   * 工作流运行实例元数据
+   */
+  WorkflowRunMetadata?: WorkflowRunMetadata
+}
+
+/**
+ * DescribeWorkflowRun请求参数结构体
+ */
+export interface DescribeWorkflowRunRequest {
+  /**
+   * <p>应用ID, 获取方法参看如何获取 <a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">AppId</a></p>
+   */
+  AppId: string
+  /**
+   * <p>工作流运行实例ID</p>
+   */
+  WorkflowRunId: string
+  /**
+   * <p>指定的子工作流对应的NodePath。 格式：[&lt;node_id&gt;[&lt;index&gt;].]*&lt;node_id&gt;[&lt;index&gt;]  此路径用于定位一个具体的工作流实例（Workflow Run），可以是主工作流实例或某个子工作流节点产生的子实例。 路径由点号（.）分隔的节点标识符组成，每个节点标识符格式为 节点ID[实例索引]。 节点ID (node_id)：子工作流所属的节点的ID。 实例索引 (index)：“实例索引” 在工作流节点的时候为空，循环、批处理节点非空，从1开始。 示例： &quot;&quot; 或 不设置 -&gt; 查询主工作流实例 (父工作流) &quot;node_id_a&quot; -&gt; 查询由主工作流中工作流节点node_id_a对应的子工作流实例 &quot;node_id_a.node_id_b[1]&quot; -&gt; 查询工作流节点node_id_a对应的子工作流的循环节点node_id_b的第1轮循环的子工作流运行状态</p>
+   */
+  SubWorkflowNodePath?: string
+  /**
+   * <p>是否需要返回工作流的流程图配置</p>
+   */
+  IncludeWorkflowGraph?: boolean
+}
+
+/**
  * 文档操作者信息
  */
 export interface DocOperator {
@@ -6376,7 +6912,7 @@ export interface ModelUsageDetail {
    */
   CallType?: string
   /**
-   * <p>是否默认知识库</p>
+   * <p>是否默认知识库，仅ResourceType=5（知识库容量）业务下有意义</p>
    */
   IsDefaultKB?: boolean
   /**
@@ -6439,6 +6975,20 @@ export interface CreateConversationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * NodeRunLog
+ */
+export interface NodeRunLog {
+  /**
+   * <p>节点的日志。</p>
+   */
+  Log?: string
+  /**
+   * <p>节点的日志的完整内容的链接志（当Log内容超过限制的时候才有值）</p>
+   */
+  LogRef?: string
 }
 
 /**
@@ -6693,11 +7243,25 @@ export interface DescribePluginSummaryListRequest {
 }
 
 /**
+ * 应用级云盘挂载配置
+ */
+export interface AppFileVolumeMount {
+  /**
+   * <p>应用云盘配置</p>
+   */
+  FileVolumeMount?: FileVolumeMount
+  /**
+   * <p>1：新增 2：修改 3：删除</p>
+   */
+  Action?: number
+}
+
+/**
  * CreateApp返回参数结构体
  */
 export interface CreateAppResponse {
   /**
-   * app_id
+   * <p>app_id</p>
    */
   AppId?: string
   /**
@@ -6763,17 +7327,17 @@ export interface CreateQAListResponse {
 }
 
 /**
- * 模型作者信息
+ * <p>模型作者基本信息（已弃用）</p>
  */
 export interface ModelDeveloperBasic {
+  /**
+   * <p>作者别名</p>
+   */
+  Alias?: string
   /**
    * <p>作者标识</p>
    */
   Name?: string
-  /**
-   * <p>作者显示名称</p>
-   */
-  Alias?: string
 }
 
 /**
@@ -6858,6 +7422,36 @@ export interface ResumeAppTriggerRequest {
 }
 
 /**
+ * 回复内容的详情
+ */
+export interface ReplyContent {
+  /**
+   * <p>消息内容类型<br>text：文本<br>image：图片<br>file：文件<br>option_cards：选项卡<br>custom_params：用户自定义业务参数<br>sandbox：云桌面<br>custom_variables：自定义输入参数<br>web_search: 网页搜索内容<br>file_collection：文件收集信息<br>widget：widget信息<br>widget_action：用户端widget动作信息</p>
+   */
+  Type?: string
+  /**
+   * <p>文本内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: string
+  /**
+   * <p>选项卡信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptionCardList?: Array<string>
+  /**
+   * <p>文件收集信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileCollection?: ConversationFileCollection
+  /**
+   * <p>Widget信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Widget?: ConversationWidget
+}
+
+/**
  * QA 操作者信息
  */
 export interface QAOperator {
@@ -6915,6 +7509,10 @@ export interface CreateReleaseRequest {
    * <p>是否同步发布为应用模板</p>
    */
   IsPublishAsTemplate?: boolean
+  /**
+   * <p>portal配置</p>
+   */
+  PortalShareConfig?: PortalShareConfig
 }
 
 /**
@@ -7040,42 +7638,42 @@ export interface CreateAgentRequest {
  */
 export interface ConversationExperience {
   /**
-   * AI通话配置
+   * <p>AI通话配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiCall: AICallConfig
   /**
-   * 背景图片配置
+   * <p>背景图片配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackgroundImage: BackgroundImage
   /**
-   * 兜底回复开关
+   * <p>兜底回复开关</p>
    */
   EnableFallbackReply: boolean
   /**
-   * 是否使用推荐问
+   * <p>是否使用推荐问</p>
    */
   EnableRecommended: boolean
   /**
-   * 是否使用联网搜索
+   * <p>是否使用联网搜索</p>
    */
   EnableWebSearch: boolean
   /**
-   * 兜底回复语
+   * <p>兜底回复语</p>
    */
   FallbackReply: string
   /**
-   * 输入框配置
+   * <p>输入框配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputBoxConfig: InputBoxConfig
   /**
-   * 输出方式。枚举值: 1:流式, 2:非流式
+   * <p>输出方式。枚举值: 1:流式, 2:非流式</p>
    */
   Method: number
   /**
-   * 推荐问生成prompt模式。枚举值: 1:仅结合知识库输出推荐问的prompt
+   * <p>推荐问生成prompt模式。枚举值: 1:仅结合知识库输出推荐问的prompt</p>
    */
   RecommendPromptMode: number
 }
@@ -7458,6 +8056,28 @@ export interface ModifyCategoryResponse {
 }
 
 /**
+ * 工作流运行实例的基本信息
+ */
+export interface WorkflowRunSummary {
+  /**
+   * <p>运行环境。1:开发域，2:生产域</p>
+   */
+  Domain?: number
+  /**
+   * <p>工作流运行实例基本信息</p>
+   */
+  WorkflowRunProfile?: WorkflowRunProfile
+  /**
+   * <p>工作流运行实例结果</p>
+   */
+  WorkflowRunResult?: WorkflowRunResult
+  /**
+   * <p>工作流运行实例时间信息</p>
+   */
+  WorkflowRunTime?: WorkflowRunTime
+}
+
+/**
  * 发布摘要信息
  */
 export interface ReleaseSummary {
@@ -7495,6 +8115,11 @@ export interface ReleaseSummary {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CorpShareConfig?: CorpShareConfig
+  /**
+   * <p>portal配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PortalShareConfig?: PortalShareConfig
 }
 
 /**
@@ -7618,33 +8243,29 @@ export interface DocRetrievalConfig {
 }
 
 /**
- * DescribeLabelSummaryList请求参数结构体
+ * DescribeChannelList请求参数结构体
  */
-export interface DescribeLabelSummaryListRequest {
+export interface DescribeChannelListRequest {
   /**
-   * <p>所属知识库 ID</p>
+   * <p>应用业务ID</p>
    */
-  KbId: string
+  AppId: string
   /**
-   * <p>通用过滤</p>
+   * <p>渠道场景：0-B端场景，1-C端场景</p>
+   */
+  Scene?: number
+  /**
+   * <p>过滤条件（可选，支持ChannelType/ChannelStatus等维度）</p>
    */
   FilterList?: Array<Filter>
   /**
-   * <p>分页页码，从 0 开始</p>
+   * <p>页码（从1开始）</p>
    */
   PageNumber?: number
   /**
-   * <p>每页数量，默认 10，最大 100</p>
+   * <p>每页数量（最大100）</p>
    */
   PageSize?: number
-  /**
-   * <p>关键词搜索</p>
-   */
-  Query?: string
-  /**
-   * <p>开关配置</p>
-   */
-  SummaryListSwitch?: SummaryListSwitch
 }
 
 /**
@@ -7691,6 +8312,44 @@ export interface DescribeAuditLogMetaResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * FileInfo 文件信息
+ */
+export interface ConversationFileInfo {
+  /**
+   * <p>文件创建时间</p>
+   */
+  CreateTime: string
+  /**
+   * <p>文档业务 ID</p>
+   */
+  DocId: string
+  /**
+   * <p>文件名</p>
+   */
+  FileName: string
+  /**
+   * <p>文件大小</p>
+   */
+  FileSize: string
+  /**
+   * <p>文件类型</p>
+   */
+  FileType: string
+  /**
+   * <p>文件下载链接</p>
+   */
+  FileUrl: string
+  /**
+   * <p>文件在沙箱中的原始路径</p>
+   */
+  LocalPath?: string
+  /**
+   * <p>文件审核状态</p><p>枚举值：</p><ul><li>1： 审核中</li><li>2： 审核通过</li><li>3： 审核不通过</li></ul>
+   */
+  AuditStatus?: number
 }
 
 /**
@@ -7962,6 +8621,24 @@ export interface ModelParams {
    * <p>top_k</p>
    */
   TopK?: number
+}
+
+/**
+ * FileCollection 文件收集信息
+ */
+export interface ConversationFileCollection {
+  /**
+   * <p>最大文件数量</p>
+   */
+  MaxFileCount: number
+  /**
+   * <p>支持的文件类型列表</p>
+   */
+  SupportedFileTypeList?: Array<string>
+  /**
+   * <p>支持的文件类型列表</p>
+   */
+  SupportedFileTypes?: Array<string>
 }
 
 /**
@@ -8341,6 +9018,24 @@ export interface LabelTerm {
 }
 
 /**
+ * DescribeWorkflowRunSummaryList返回参数结构体
+ */
+export interface DescribeWorkflowRunSummaryListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>工作流运行实例列表</p>
+   */
+  WorkflowRunSummaryList?: Array<WorkflowRunSummary>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资源消耗明细
  */
 export interface ConsumptionDetail {
@@ -8616,6 +9311,28 @@ export interface CreateSkillRequest {
 }
 
 /**
+ * ResumeWorkflowRun请求参数结构体
+ */
+export interface ResumeWorkflowRunRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId: string
+  /**
+   * <p>工作流运行实例ID</p>
+   */
+  WorkflowRunId: string
+  /**
+   * <p>用户输入的内容</p>
+   */
+  Query?: string
+  /**
+   * <p>文件信息</p>
+   */
+  FileList?: Array<ConversationFileInfo>
+}
+
+/**
  * <p>排序条件</p>
  */
 export interface Sort {
@@ -8746,23 +9463,23 @@ export interface DBRetrievalConfig {
 }
 
 /**
- * 模型徽章
+ * <p>模型徽章（对外，用户端可见）：所有文案已渲染为最终展示内容，不暴露模板参数</p>
  */
 export interface ModelBadge {
   /**
-   * 展示文案
+   * <p>展示文案（已渲染为最终文案）</p>
    */
   Text?: string
   /**
-   * 样式主题。1-信息（蓝色）, 2-成功（绿色）, 3-警告（橙色）, 4-危险（红色）
+   * <p>样式主题</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODEL_BADGE_THEME_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>MODEL_BADGE_THEME_INFO</td><td>1</td><td>信息（蓝色）</td></tr><tr><td>MODEL_BADGE_THEME_SUCCESS</td><td>2</td><td>成功（绿色）</td></tr><tr><td>MODEL_BADGE_THEME_WARNING</td><td>3</td><td>警告（橙色）</td></tr><tr><td>MODEL_BADGE_THEME_DANGER</td><td>4</td><td>危险（红色）</td></tr></table>
    */
   Theme?: number
   /**
-   * tooltip文案，为空则不展示
+   * <p>tooltip 文案（已渲染为最终文案），为空则不展示</p>
    */
   Tips?: string
   /**
-   * 徽章类型。1-限时免费, 2-即将下线, 3-新模型, 4-热门
+   * <p>徽章类型</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODEL_BADGE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>MODEL_BADGE_TYPE_FREE_TRIAL</td><td>1</td><td>限时免费</td></tr><tr><td>MODEL_BADGE_TYPE_DEPRECATING</td><td>2</td><td>即将下线</td></tr><tr><td>MODEL_BADGE_TYPE_NEW</td><td>3</td><td>新模型</td></tr><tr><td>MODEL_BADGE_TYPE_HOT</td><td>4</td><td>热门</td></tr></table>
    */
   Type?: number
 }
@@ -8876,6 +9593,36 @@ export interface PluginProfile {
 }
 
 /**
+ * DescribeLabelSummaryList请求参数结构体
+ */
+export interface DescribeLabelSummaryListRequest {
+  /**
+   * <p>所属知识库 ID</p>
+   */
+  KbId: string
+  /**
+   * <p>通用过滤</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>分页页码，从 0 开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 10，最大 100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>关键词搜索</p>
+   */
+  Query?: string
+  /**
+   * <p>开关配置</p>
+   */
+  SummaryListSwitch?: SummaryListSwitch
+}
+
+/**
  * DescribePlugin返回参数结构体
  */
 export interface DescribePluginResponse {
@@ -8887,6 +9634,20 @@ export interface DescribePluginResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 渠道上下文超时清空配置
+ */
+export interface ClawAgentChannelContextTimeoutConfig {
+  /**
+   * <p>是否开启渠道上下文超时清空</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>渠道上下文超时时长</p><p>取值范围：[1, 99]</p>
+   */
+  TimeoutHour?: number
 }
 
 /**
@@ -8972,17 +9733,42 @@ export interface DescribeConversationMessageListRequest {
 }
 
 /**
- * 有效期
+ * DescribeKB返回参数结构体
  */
-export interface EffectivePeriod {
+export interface DescribeKBResponse {
   /**
-   * <p>有效期结束时间（Unix 秒，0 表示永久有效）</p>
+   * <p>关联的应用 ID 列表</p>
    */
-  EndTime?: string
+  AppIdList?: Array<string>
   /**
-   * <p>有效期开始时间（Unix 秒）</p>
+   * <p>容量信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime?: string
+  CapacityInfo?: KBCapacity
+  /**
+   * <p>ES 配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsConfig?: ESConfig
+  /**
+   * <p>模型配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelConfig?: KBModelConfig
+  /**
+   * <p>所有者信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: Operator
+  /**
+   * <p>知识库摘要信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Summary?: KBSummary
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9114,7 +9900,7 @@ export interface ConversationRecordErrorInfo {
  */
 export interface DescribeUsageSummaryListRequest {
   /**
-   * <p>资源类型，限定为 MODEL / PLUGIN / PLATFORM</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>平台功能用量</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）</td></tr></tbody></table>
+   * <p>资源类型，限定为 MODEL / PLUGIN / PLATFORM</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_PLATFORM（预留，暂不支持）</td><td>3</td><td>平台功能用量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）（预留，暂不支持）</td></tr></tbody></table>
    */
   ResourceType: number
   /**
@@ -9219,6 +10005,10 @@ export interface KBPermission {
    * <p>是否可编辑</p>
    */
   CanEdit?: boolean
+  /**
+   * <p>能否被共享</p>
+   */
+  CanShare?: boolean
   /**
    * <p>是否可查看</p>
    */
@@ -9378,6 +10168,24 @@ export interface OnceSchedule {
 }
 
 /**
+ * SaveWorkflowToolNodeOutput返回参数结构体
+ */
+export interface SaveWorkflowToolNodeOutputResponse {
+  /**
+   * <p>状态码</p><p>枚举值：</p><ul><li>0： 成功</li><li>1000： 失败</li></ul>
+   */
+  Code?: number
+  /**
+   * <p>错误描述</p>
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QA 查询条件
  */
 export interface QAQuery {
@@ -9517,6 +10325,20 @@ export interface FieldMask {
 }
 
 /**
+ * 知识库子状态信息
+ */
+export interface KBShareStatus {
+  /**
+   * <p>审批Id</p>
+   */
+  ApprovalId?: string
+  /**
+   * <p>审批/共享状态：1=PENDING 审批中，2=REJECTED 已驳回， 3=APPROVED 同意, 4=CANCELLED 已取消</p>
+   */
+  SubStatusList?: Array<number | bigint>
+}
+
+/**
  * AppTriggerWebhookParamSchemaConfig
  */
 export interface AppTriggerWebhookParamSchemaConfig {
@@ -9581,6 +10403,24 @@ export interface ConversationMessage {
 }
 
 /**
+ * StopWorkflowRunList返回参数结构体
+ */
+export interface StopWorkflowRunListResponse {
+  /**
+   * <p>停止成功的运行实例ID列表</p>
+   */
+  SuccessIdList?: Array<string>
+  /**
+   * <p>停止失败的运行实例ID列表</p>
+   */
+  FailedIdList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCategory返回参数结构体
  */
 export interface CreateCategoryResponse {
@@ -9592,6 +10432,32 @@ export interface CreateCategoryResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeNodeBatchRun请求参数结构体
+ */
+export interface DescribeNodeBatchRunRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>索引号</p>
+   */
+  Index?: number
+  /**
+   * <p>工作流节点ID</p>
+   */
+  NodeId?: string
+  /**
+   * <p>子工作流所属节点</p><p>node_id_a.node_id_b[1]</p>
+   */
+  SubWorkflowNodePath?: string
+  /**
+   * <p>工作流运行ID</p>
+   */
+  WorkflowRunId?: string
 }
 
 /**
@@ -9962,6 +10828,40 @@ export interface DescribePluginRequest {
 }
 
 /**
+ * BatchRunSummary
+ */
+export interface BatchRunSummary {
+  /**
+   * 	失败数量
+   */
+  FailedCount?: number
+  /**
+   * 	成功数量
+   */
+  SuccessCount?: number
+  /**
+   * 总批次
+   */
+  TotalCount?: number
+  /**
+   * 失败的下标
+   */
+  FailedIndexList?: Array<number | bigint>
+  /**
+   * 	上一轮完成的批次
+   */
+  JustCompletedIndexList?: Array<number | bigint>
+  /**
+   * 运行中的下标
+   */
+  RunningIndexList?: Array<number | bigint>
+  /**
+   * 成功的下标
+   */
+  SuccessIndexList?: Array<number | bigint>
+}
+
+/**
  * 渠道信息
  */
 export interface Channel {
@@ -9994,6 +10894,16 @@ export interface Channel {
    * <p>最后更新人</p>
    */
   Updater?: string
+}
+
+/**
+ * PortalShareConfig
+ */
+export interface PortalShareConfig {
+  /**
+   * <p>企业共享开关</p>
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -10079,6 +10989,50 @@ export interface DescribeAppTriggerRequest {
 }
 
 /**
+ * 工作流运行实例状态信息
+ */
+export interface WorkflowRunResult {
+  /**
+   * 运行状态。1: 排队中；2: 运行中；3: 运行成功；4: 运行失败； 5: 已取消
+   */
+  Status?: number
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
+}
+
+/**
+ * PluginOperation
+ */
+export interface PluginOperation {
+  /**
+   * 是否允许外部调用
+   */
+  AllowExternalAccess?: boolean
+  /**
+   * <p>计费类型。</p><p>枚举值：</p><ul><li>0：免费</li><li>1：公测</li><li>2：官方收费</li></ul>
+   */
+  BillingType?: number
+  /**
+   * 插件分类标识
+   */
+  CategoryKey?: string
+  /**
+   * 插件概述
+   */
+  Introduction?: string
+  /**
+   * 是否精选
+   */
+  IsRecommended?: boolean
+}
+
+/**
  * CorpShareConfig
  */
 export interface CorpShareConfig {
@@ -10105,40 +11059,44 @@ export interface CorpShareConfig {
  */
 export interface AppSummary {
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   AppId: string
   /**
-   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   * <p>应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式</p>
    */
   AppMode: number
   /**
-   * 应用头像
+   * <p>应用头像</p>
    */
   Avatar: string
   /**
-   * 应用名称
+   * <p>应用名称</p>
    */
   Name: string
   /**
-   * 操作信息
+   * <p>操作信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperationInfo: AppOperation
   /**
-   * 状态信息
+   * <p>状态信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: AppStatusInfo
   /**
-   * 子状态信息
+   * <p>子状态信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubStatus: AppSubStatusInfo
   /**
-   * 资源操作权限
+   * <p>资源操作权限</p>
    */
   PermissionIdList?: Array<string>
+  /**
+   * <p>应用描述信息</p>
+   */
+  Description?: string
 }
 
 /**
@@ -10321,6 +11279,38 @@ export interface AgentDetail {
 }
 
 /**
+ * 应用标识
+ */
+export interface AppIdentity {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>应用名称</p>
+   */
+  AppName?: string
+  /**
+   * <p>应用模式</p><p>枚举值：</p><ul><li>1： 标准模式</li><li>2： agent模式</li><li>3： 单工作流模式</li><li>4： ClawAgent模式</li></ul>
+   */
+  AppMode?: number
+}
+
+/**
+ * StopWorkflowRunList请求参数结构体
+ */
+export interface StopWorkflowRunListRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId: string
+  /**
+   * <p>工作流运行实例ID列表</p>
+   */
+  WorkflowRunIdList: Array<string>
+}
+
+/**
  * GraphRAG 配置
  */
 export interface GraphRAG {
@@ -10345,23 +11335,23 @@ export interface ModifyQAResponse {
  */
 export interface CreateAppRequest {
   /**
-   * 空间ID
+   * <p>空间ID</p>
    */
   SpaceId: string
   /**
-   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   * <p>应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式</p>
    */
   AppMode?: number
   /**
-   * 应用头像
+   * <p>应用头像</p>
    */
   Avatar?: string
   /**
-   * 应用描述
+   * <p>应用描述</p>
    */
   Description?: string
   /**
-   * 应用名称
+   * <p>应用名称</p>
    */
   Name?: string
 }
@@ -10637,7 +11627,7 @@ export interface DescribeAppRequest {
    */
   Domain?: number
   /**
-   * <p>字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置)</p>
+   * <p>字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置), FileVolumeMountList(云盘挂载列表)</p>
    */
   FieldMask?: FieldMask
   /**
@@ -10805,6 +11795,44 @@ export interface AICallConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Voice: VoiceConfig
+}
+
+/**
+ * DescribeNodeBatchRun返回参数结构体
+ */
+export interface DescribeNodeBatchRunResponse {
+  /**
+   * <p>错误码</p>
+   */
+  FailCode?: string
+  /**
+   * <p>错误描述</p>
+   */
+  FailMessage?: string
+  /**
+   * <p>输入参数</p>
+   */
+  Input?: string
+  /**
+   * <p>输入参数Cos地址</p>
+   */
+  InputRef?: string
+  /**
+   * <p>输出参数</p>
+   */
+  Output?: string
+  /**
+   * <p>输出参数Cos地址</p>
+   */
+  OutputRef?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>NODE_BATCH_RUN_STATUS_UNSPECIFIED</td><td>0</td><td>未定义</td></tr><tr><td>NODE_BATCH_RUN_STATUS_INIT</td><td>1</td><td>初始状态</td></tr><tr><td>NODE_BATCH_RUN_STATUS_RUNNING</td><td>2</td><td>运行中</td></tr><tr><td>NODE_BATCH_RUN_STATUS_SUCCESS</td><td>3</td><td>运行成功</td></tr><tr><td>NODE_BATCH_RUN_STATUS_FAILED</td><td>4</td><td>运行失败</td></tr><tr><td>NODE_BATCH_RUN_STATUS_CANCELED</td><td>5</td><td>已取消</td></tr><tr><td>NODE_BATCH_RUN_STATUS_WAITING_INPUT</td><td>6</td><td>待处理</td></tr></tbody></table>
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11536,6 +12564,36 @@ export interface DescribeAgentDetailResponse {
 }
 
 /**
+ * 节点运行的内容
+ */
+export interface NodeRunContent {
+  /**
+   * 输入变量信息
+   */
+  Input?: string
+  /**
+   * 输出变量信息
+   */
+  Output?: string
+  /**
+   * 原始输出信息。部分节点才有值，如工具节点、代码节点
+   */
+  OriginalOutput?: string
+  /**
+   * 节点输入的完整内容的链接。（当Input内容超过限制的时候此字段才有值）
+   */
+  InputRef?: string
+  /**
+   * 节点输出的完整内容的链接。（当Output内容超过限制的时候此字段才有值）
+   */
+  OutputRef?: string
+  /**
+   * 任务的原始输出的完整内容的链接。（当TaskOutput内容超过限制的时候此字段才有值）
+   */
+  OriginalOutputRef?: string
+}
+
+/**
  * 检索可选配置
  */
 export interface RetrievalOption {
@@ -11732,19 +12790,19 @@ export interface ModifyAgentResponse {
 }
 
 /**
- * 模型提供商基本信息
+ * <p>模型提供商基本信息（已弃用，请使用 ModelProviderProfile）</p>
  */
 export interface ModelProviderBasic {
   /**
-   * 模型提供商别名
+   * <p>模型提供商别名</p>
    */
   Alias?: string
   /**
-   * 模型提供商名称
+   * <p>模型提供商名称</p>
    */
   Name?: string
   /**
-   * 模型提供商类型。1-自有提供商, 2-自定义模型提供商, 3-第三方模型提供商
+   * <p>模型提供商类型</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODEL_PROVIDER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>MODEL_PROVIDER_TYPE_SELF</td><td>1</td><td>自有提供商</td></tr><tr><td>MODEL_PROVIDER_TYPE_CUSTOM</td><td>2</td><td>自定义模型提供商</td></tr><tr><td>MODEL_PROVIDER_TYPE_THIRD</td><td>3</td><td>第三方模型提供商</td></tr></table>
    */
   ProviderType?: number
 }
@@ -11761,6 +12819,16 @@ export interface SimilarQuestionStat {
    * <p>相似问提示（展示一条相似问样例）</p>
    */
   SimilarQuestionTips?: string
+}
+
+/**
+ * 回复消息
+ */
+export interface ReplyMessage {
+  /**
+   * 消息数组，包含多个消息对象
+   */
+  ContentList?: Array<ReplyContent>
 }
 
 /**
@@ -11853,6 +12921,11 @@ export interface KBSummary {
    * <p>更新时间（Unix 秒）</p>
    */
   UpdateTime?: string
+  /**
+   * <p>知识库空间共享信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpaceShare?: KBSpaceShare
 }
 
 /**
