@@ -183,6 +183,7 @@ import {
   CreateAigcHunyuan3DTaskRequest,
   CreateAigcQuotaResponse,
   DescribeProcedureTemplatesRequest,
+  VideoDepthEstimationOutputConfig,
   AiReviewPornTaskInput,
   JitterConfigureInfoForUpdate,
   CloneVoiceAsyncTask,
@@ -378,6 +379,7 @@ import {
   ModifyAigcQuotaResponse,
   DescribeReviewTemplatesResponse,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
+  VideoDepthEstimationResponse,
   MediaMiniProgramReviewInfo,
   ForbidMediaDistributionResponse,
   DeleteBlindWatermarkTemplateResponse,
@@ -467,6 +469,7 @@ import {
   DescribeRebuildMediaTemplatesRequest,
   ReviewImageSegmentItem,
   CreateCLSTopicResponse,
+  VideoDepthEstimationRequest,
   CreateRoundPlayResponse,
   MediaSubtitleInput,
   FileVerifyInfo,
@@ -2486,6 +2489,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCLSTopicsResponse) => void
   ): Promise<DescribeCLSTopicsResponse> {
     return this.request("DescribeCLSTopics", req, cb)
+  }
+
+  /**
+   * 视频深度估计接口。输入视频，输出灰度深度视频，白色为近、黑色为远。深度值为单视频内归一化的相对深度。输出存储由 OutputConfig 控制，默认临时存储 7 天后过期。任务提交成功后返回任务 ID，可通过 DescribeTaskDetail 查询结果
+   */
+  async VideoDepthEstimation(
+    req: VideoDepthEstimationRequest,
+    cb?: (error: string, rep: VideoDepthEstimationResponse) => void
+  ): Promise<VideoDepthEstimationResponse> {
+    return this.request("VideoDepthEstimation", req, cb)
   }
 
   /**

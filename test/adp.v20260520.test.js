@@ -298,6 +298,16 @@ it("adp.v20260520.PauseAppTrigger", async function () {
     }
 })
 
+it("adp.v20260520.ReadMCPResource", async function () {
+    try {
+       const data = await client.ReadMCPResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.RollbackRelease", async function () {
     try {
        const data = await client.RollbackRelease({})
@@ -598,9 +608,9 @@ it("adp.v20260520.CreateWebSocketToken", async function () {
     }
 })
 
-it("adp.v20260520.StopWorkflowRunList", async function () {
+it("adp.v20260520.CallMCPTool", async function () {
     try {
-       const data = await client.StopWorkflowRunList({})
+       const data = await client.CallMCPTool({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -641,6 +651,16 @@ it("adp.v20260520.DescribeQA", async function () {
 it("adp.v20260520.CreateApp", async function () {
     try {
        const data = await client.CreateApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.StopWorkflowRunList", async function () {
+    try {
+       const data = await client.StopWorkflowRunList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

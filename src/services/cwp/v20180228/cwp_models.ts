@@ -3482,17 +3482,25 @@ export interface ModifyNetAttackWhiteListResponse {
  */
 export interface PolicyRules {
   /**
-   * 进程
+   * <p>进程</p>
    */
   Process?: CommandLine
   /**
-   * 父进程
+   * <p>父进程</p>
    */
   PProcess?: CommandLine
   /**
-   * 祖先进程
+   * <p>祖先进程</p>
    */
   AProcess?: CommandLine
+  /**
+   * <p>目标文件路径（匹配类型=文件操作时有效）</p>
+   */
+  FilePath?: string
+  /**
+   * <p>动作列表（匹配类型=文件操作时有效，多选为或关系）：read-读 write-写 rename-重命名 delete-删除 truncate-清空内容</p>
+   */
+  FileActions?: Array<string>
 }
 
 /**
@@ -5209,93 +5217,105 @@ export interface ExportReverseShellEventsRequest {
  */
 export interface BashEventNew {
   /**
-   * 数据ID
+   * <p>数据ID</p>
    */
   Id?: number
   /**
-   * 主机安全ID
+   * <p>主机安全ID</p>
    */
   Uuid?: string
   /**
-   * 主机ID
+   * <p>主机ID</p>
    */
   Quuid?: string
   /**
-   * 主机内网IP
+   * <p>主机内网IP</p>
    */
   HostIp?: string
   /**
-   * 执行用户名
+   * <p>执行用户名</p>
    */
   User?: string
   /**
-   * 平台类型
+   * <p>平台类型</p>
    */
   Platform?: number
   /**
-   * 执行命令
+   * <p>执行命令</p>
    */
   BashCmd?: string
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleId?: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName?: string
   /**
-   * 规则等级：1-高 2-中 3-低
+   * <p>规则等级：1-高 2-中 3-低</p>
    */
   RuleLevel?: number
   /**
-   * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略
+   * <p>处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略</p>
    */
   Status?: number
   /**
-   * 发生时间
+   * <p>发生时间</p>
    */
   CreateTime?: string
   /**
-   * 主机名
+   * <p>主机名</p>
    */
   MachineName?: string
   /**
-   * 0: bash日志 1: 实时监控(雷霆版)
+   * <p>0: bash日志 1: 实时监控(雷霆版)</p>
    */
   DetectBy?: number
   /**
-   * 进程id
+   * <p>进程id</p>
    */
   Pid?: string
   /**
-   * 进程名称
+   * <p>进程名称</p>
    */
   Exe?: string
   /**
-   * 处理时间
+   * <p>处理时间</p>
    */
   ModifyTime?: string
   /**
-   * 规则类别  0=系统规则，1=用户规则
+   * <p>规则类别  0=系统规则，1=用户规则</p>
    */
   RuleCategory?: number
   /**
-   * 转义后的正则表达式
+   * <p>转义后的正则表达式</p>
    */
   RegexBashCmd?: string
   /**
-   * 转义后的正则表达式
+   * <p>转义后的正则表达式</p>
    */
   RegexExe?: string
   /**
-   * 0:普通 1:专业版 2:旗舰版
+   * <p>0:普通 1:专业版 2:旗舰版</p>
    */
   MachineType?: number
   /**
-   * 机器额外信息
+   * <p>机器额外信息</p>
    */
   MachineExtraInfo?: MachineExtraInfo
+  /**
+   * <p>告警次数：同一聚合维度当天的告警命中次数，老数据为空</p>
+   */
+  EventCount?: number
+  /**
+   * <p>首次发现时间（格式 yyyy-MM-dd HH:mm:ss）</p>
+   */
+  FirstDetectTime?: string
+  /**
+   * <p>最近发现时间（格式 yyyy-MM-dd HH:mm:ss）</p>
+   */
+  LatestDetectTime?: string
 }
 
 /**
@@ -19039,73 +19059,77 @@ export interface DescribeWarningHostConfigRequest {
  */
 export interface BashPolicy {
   /**
-   * 策略名称
+   * <p>策略名称</p>
    */
   Name: string
   /**
-   * 1:有效 0:无效
+   * <p>1:有效 0:无效</p>
    */
   Enable: number
   /**
-   * 0:黑名单 1:白名单
+   * <p>0:黑名单 1:白名单</p>
    */
   White: number
   /**
-   * 0:告警 1:白名单 2:拦截
+   * <p>0:告警 1:白名单 2:拦截</p>
    */
   BashAction: number
   /**
-   * 正则表达式 base64 加密,该字段废弃,如果写入则自动替换为Rules.Process.CmdLine
+   * <p>正则表达式 base64 加密,该字段废弃,如果写入则自动替换为Rules.Process.CmdLine</p>
    */
   Rule: string
   /**
-   * 危险等级(0:无，1: 高危 2:中危 3: 低危)
+   * <p>危险等级(0:无，1: 高危 2:中危 3: 低危)</p>
    */
   Level: number
   /**
-   * 生效范围（0:一组quuid 1:所有专业版(包含旗舰版) 2:所有旗舰版 3:所有主机）
+   * <p>生效范围（0:一组quuid 1:所有专业版(包含旗舰版) 2:所有旗舰版 3:所有主机）</p>
    */
   Scope: number
   /**
-   * 策略ID
+   * <p>策略ID</p>
    */
   Id?: number
   /**
-   * 策略描述
+   * <p>策略描述</p>
    */
   Descript?: string
   /**
-   * 事件列表点击“加入白名单”时,需要传EventId 事件的id
+   * <p>事件列表点击“加入白名单”时,需要传EventId 事件的id</p>
    */
   EventId?: number
   /**
-   * 是否处理旧事件为白名单 0=不处理 1=处理
+   * <p>是否处理旧事件为白名单 0=不处理 1=处理</p>
    */
   DealOldEvents?: number
   /**
-   * 生效主机的QUUID集合
+   * <p>生效主机的QUUID集合</p>
    */
   Quuids?: Array<string>
   /**
-   * 策略类型，0:系统  1:用户
+   * <p>策略类型，0:系统  1:用户</p>
    */
   Category?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 老版本兼容可能会用到
+   * <p>老版本兼容可能会用到</p>
    */
   Uuids?: Array<string>
   /**
-   * 规则表达式
+   * <p>规则表达式</p>
    */
   Rules?: PolicyRules
+  /**
+   * <p>匹配类型：0-命令行（默认） 1-文件操作</p>
+   */
+  MatchType?: number
 }
 
 /**
@@ -21956,117 +21980,169 @@ export interface ExportBaselineEffectHostListResponse {
  */
 export interface BashEventsInfoNew {
   /**
-   * 数据ID
+   * <p>数据ID</p>
    */
   Id?: number
   /**
-   * 主机安全ID
+   * <p>主机安全ID</p>
    */
   Uuid?: string
   /**
-   * 主机ID
+   * <p>主机ID</p>
    */
   Quuid?: string
   /**
-   * 主机内网IP
+   * <p>主机内网IP</p>
    */
   HostIp?: string
   /**
-   * 平台类型
+   * <p>平台类型</p>
    */
   Platform?: number
   /**
-   * 执行命令
+   * <p>执行命令</p>
    */
   BashCmd?: string
   /**
-   * 规则ID,等于0表示已规则已被删除或生效范围已修改
+   * <p>规则ID,等于0表示已规则已被删除或生效范围已修改</p>
    */
   RuleId?: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName?: string
   /**
-   * 规则等级：1-高 2-中 3-低
+   * <p>规则等级：1-高 2-中 3-低</p>
    */
   RuleLevel?: number
   /**
-   * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略
+   * <p>处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略</p>
    */
   Status?: number
   /**
-   * 发生时间
+   * <p>发生时间</p>
    */
   CreateTime?: string
   /**
-   * 主机名
+   * <p>主机名</p>
    */
   MachineName?: string
   /**
-   * 进程名称
+   * <p>进程名称</p>
    */
   Exe?: string
   /**
-   * 处理时间
+   * <p>处理时间</p>
    */
   ModifyTime?: string
   /**
-   * 规则类别  0=系统规则，1=用户规则
+   * <p>规则类别  0=系统规则，1=用户规则</p>
    */
   RuleCategory?: number
   /**
-   * 自动生成的正则表达式
+   * <p>自动生成的正则表达式</p>
    */
   RegexBashCmd?: string
   /**
-   * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+   * <p>进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源</p>
    */
   PsTree?: string
   /**
-   * 建议方案
+   * <p>建议方案</p>
    */
   SuggestScheme?: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   HarmDescribe?: string
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tags?: Array<string>
   /**
-   * 参考链接
+   * <p>参考链接</p>
    */
   References?: Array<string>
   /**
-   * 主机外网ip
+   * <p>主机外网ip</p>
    */
   MachineWanIp?: string
   /**
-   * 主机在线状态 OFFLINE  ONLINE
+   * <p>主机在线状态 OFFLINE  ONLINE</p>
    */
   MachineStatus?: string
   /**
-   * 登录用户
+   * <p>登录用户</p>
    */
   User?: string
   /**
-   * 进程号
+   * <p>进程号</p>
    */
   Pid?: string
   /**
-   * 0:普通 1:专业版 2:旗舰版
+   * <p>0:普通 1:专业版 2:旗舰版</p>
    */
   MachineType?: number
   /**
-   * 检测来源 0:bash日志 1:实时监控
+   * <p>检测来源 0:bash日志 1:实时监控</p>
    */
   DetectBy?: number
   /**
-   * 执行命令(解码后)
+   * <p>执行命令(解码后)</p>
    */
   BashCmdDecoded?: string
+  /**
+   * <p>告警次数：同一聚合维度当天的告警命中次数，老数据为空</p>
+   */
+  EventCount?: number
+  /**
+   * <p>首次发现时间（格式 yyyy-MM-dd HH:mm:ss）</p>
+   */
+  FirstDetectTime?: string
+  /**
+   * <p>最近发现时间（格式 yyyy-MM-dd HH:mm:ss）</p>
+   */
+  LatestDetectTime?: string
+  /**
+   * <p>进程MD5（文件监控行为独有）</p>
+   */
+  FileProcessMd5?: string
+  /**
+   * <p>动作：进程对文件的操作，如 读/写/重命名/删除/清空内容（文件监控行为独有）</p>
+   */
+  FileAction?: string
+  /**
+   * <p>文件路径（文件监控行为独有）</p>
+   */
+  FilePath?: string
+  /**
+   * <p>文件MD5（文件监控行为独有）</p>
+   */
+  FileMd5?: string
+  /**
+   * <p>文件名称（文件监控行为独有）</p>
+   */
+  FileName?: string
+  /**
+   * <p>文件大小（文件监控行为独有）</p>
+   */
+  FileSize?: string
+  /**
+   * <p>文件修改时间（文件监控行为独有）</p>
+   */
+  FileModifyTime?: string
+  /**
+   * <p>文件权限（文件监控行为独有）</p>
+   */
+  FilePermission?: string
+  /**
+   * <p>文件访问时间</p>
+   */
+  FileAccessTime?: string
+  /**
+   * <p>高危命令事件类型</p><p>枚举值：</p><ul><li>filemon： 文件监控事件</li><li>connect： 外联行为事件</li><li>process： 进程启动事件</li></ul>
+   */
+  BashType?: string
 }
 
 /**

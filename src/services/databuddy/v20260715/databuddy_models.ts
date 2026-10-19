@@ -2103,7 +2103,7 @@ export interface ListWorkflowRunsRequest {
    */
   PageSize?: number
   /**
-   * <p>工作流ID，精确匹配。非必填，单值</p>
+   * <p>工作流ID，精确匹配。非必填，单值</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/1835/138002">ListWorkflows</a> 返回值 <code>Data</code></p>
    */
   WorkflowId?: string
   /**
@@ -3047,19 +3047,19 @@ export interface GetSchemaResponse {
  */
 export interface TagValueInfo {
   /**
-   * 标签值ID
+   * <p>标签值ID。ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中必填，可通过 ListTags 接口出参 Items[].TagValues[].TagValueId 获取，也可通过 CreateTagValues 创建后获取；按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中无需传入；查询接口出参中回填。ID 不存在或已删除时接口报错 TagValueNotExist</p>
    */
   TagValueId?: string
   /**
-   * 标签值内容，查询时填充，写入时不传
+   * <p>标签值内容。按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中必填；ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中无需传入，服务端忽略；查询接口出参中回填</p>
    */
   TagValue?: string
   /**
-   * 标签来源，参考 web_enum_standard.proto -> TagSource：0=未指定 1=用户直绑 2=用户组继承 3=两者都有，查询时填充，写入时不传
+   * <p>标签来源，枚举值：0=未指定 1=用户直绑 2=用户组继承 3=两者都有。仅查询接口出参中返回；所有写接口均无需传入，服务端忽略</p>
    */
   Source?: number
   /**
-   * 继承来源的用户组名称列表，Source=1 时为空，查询时填充，写入时不传
+   * <p>继承来源的用户组名称列表（标签来源 Source=1 用户直绑时为空）。仅查询接口出参中返回；所有写接口均无需传入，服务端忽略</p>
    */
   GroupNames?: Array<string>
 }
@@ -4177,15 +4177,15 @@ export interface ListConsoleRolesRsp {
  */
 export interface UserTagInfo {
   /**
-   * <p>标签维度ID</p>
+   * <p>标签维度ID。ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中必填，可通过 ListTags 接口出参 Items[].TagId 获取，也可通过 CreateTags 创建后获取；按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中无需传入；查询接口出参中回填。ID 不存在或已删除时接口报错 TagNotExist</p>
    */
   TagId?: string
   /**
-   * <p>标签名称，查询时填充，写入时不传</p>
+   * <p>标签名称。按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中必填；ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中无需传入，服务端忽略；查询接口出参中回填</p>
    */
   TagName?: string
   /**
-   * <p>该维度下绑定的所有标签值</p>
+   * <p>该标签维度下绑定的标签值集合，元素结构见 TagValueInfo。ID 模式写接口中元素 TagValueId 必填；按名称模式接口中元素 TagValue 必填；查询接口出参中回填</p>
    */
   Values?: Array<TagValueInfo>
 }
@@ -5012,7 +5012,7 @@ export interface ListWorkflowsRequest {
    */
   WorkflowNames?: Array<string>
   /**
-   * <p>工作流ID，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
+   * <p>工作流ID，精确匹配。非必填，多选（多个值之间为 OR 关系）</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/1835/138002">ListWorkflows</a> 返回值 <code>Data</code></p>
    */
   WorkflowIds?: Array<string>
   /**
@@ -5028,11 +5028,11 @@ export interface ListWorkflowsRequest {
    */
   LabelValueIds?: Array<string>
   /**
-   * <p>快速筛选类型。非必填，单值</p><p>对齐老云 API（wedata/2025-10-10）文档示例值：</p><ul><li>MY_FAVORITE：我收藏的</li><li>MY_OWNER：我负责的</li><li>MY_AUTHORITY：我有权限</li><li>WorkflowId：支持多个工作流ID筛选</li></ul><p>后端实现现状：当前仅 MY_FAVORITE 生效（设置 favoriteUserUin 过滤当前用户收藏），MY_OWNER / MY_AUTHORITY 暂未在 Service 层实现，传入会被忽略（按全量返回）。</p>
+   * <p>快速筛选类型。非必填，单值，当前仅支持 MY_FAVORITE（我收藏的）</p>
    */
   QuickSelectionType?: string
   /**
-   * <p>排序条件，多个之间按数组顺序表示优先级。非必填。<br>可排序字段白名单：CreateTime</p>
+   * <p>排序条件，多个之间按数组顺序表示优先级。非必填。可排序字段白名单：CreateTime</p>
    */
   OrderBys?: Array<OrderBy>
 }

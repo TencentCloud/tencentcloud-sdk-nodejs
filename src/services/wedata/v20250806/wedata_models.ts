@@ -2702,17 +2702,17 @@ export interface ProjectBrief {
 }
 
 /**
- * UpdateOpsTriggerTasksOwner返回参数结构体
+ * 资源组标签数据
  */
-export interface UpdateOpsTriggerTasksOwnerResponse {
+export interface ResourceTag {
   /**
-   * 批量操作结果
+   * <p>标签键</p>
    */
-  Data?: BatchOperationOpsDto
+  TagKey: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>标签值</p>
    */
-  RequestId?: string
+  TagValue: string
 }
 
 /**
@@ -4832,41 +4832,45 @@ export interface GetResourcePrivilegeDetailRsp {
  */
 export interface CreateResourceGroupRequest {
   /**
-   * 资源组名称。创建通用资源组的名称，必须以字母开头，可包含字母、数字、下划线（_），最多 64 个字符。
+   * <p>资源组名称。创建通用资源组的名称，必须以字母开头，可包含字母、数字、下划线（_），最多 64 个字符。</p>
    */
   Name: string
   /**
-   * 开通的资源组信息
+   * <p>开通的资源组信息</p>
    */
   Type: ResourceType
   /**
-   * 是否自动续费
+   * <p>是否自动续费</p>
    */
   AutoRenewEnabled: boolean
   /**
-   * 购买时长，单位月
+   * <p>购买时长，单位月</p>
    */
   PurchasePeriod: number
   /**
-   * vpcId
+   * <p>vpcId</p>
    */
   VpcId: string
   /**
-   * 子网
+   * <p>子网</p>
    */
   SubNet: string
   /**
-   * 资源购买地域
+   * <p>资源购买地域</p>
    */
   ResourceRegion: string
   /**
-   * 关联项目空间项目id
+   * <p>关联项目空间项目id</p>
    */
   AssociatedProjectId?: string
   /**
-   * 资源组描述
+   * <p>资源组描述</p>
    */
   Description?: string
+  /**
+   * <p>标签值</p>
+   */
+  Tags?: Array<ResourceTag>
 }
 
 /**
@@ -7006,7 +7010,7 @@ export interface AssociateResourceGroupToProjectResponse {
  */
 export interface CreateResourceGroupResponse {
   /**
-   * 是否开启成功
+   * <p>是否开启成功</p>
    */
   Data?: ResourceResult
   /**
@@ -10714,6 +10718,20 @@ export interface UpdateDataSourceRequest {
    * <p>数据源描述信息</p>
    */
   Description?: string
+}
+
+/**
+ * UpdateOpsTriggerTasksOwner返回参数结构体
+ */
+export interface UpdateOpsTriggerTasksOwnerResponse {
+  /**
+   * 批量操作结果
+   */
+  Data?: BatchOperationOpsDto
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -15818,6 +15836,16 @@ export interface LineageNodeInfo {
    * 下游数量
    */
   UpStreamCount?: number
+  /**
+   * 查询字段名（本次请求携带的字段名，用于聚合）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceColumnName?: string
+  /**
+   * 当前结果字段名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnName?: string
 }
 
 /**
@@ -16244,6 +16272,10 @@ export interface Project {
    * <p>项目状态：0：禁用，1：启用，-3:禁用中，2：启用中</p>
    */
   Status?: number
+  /**
+   * <p>项目状态枚举：ENABLED 正常、UNABLED 已禁用、ENABLING 启用中、UNABLING 禁用中、REMOVING 删除中、DELETED 已删除</p>
+   */
+  DisplayStatus?: string
   /**
    * <p>项目模式，SIMPLE：简单模式 STANDARD：标准模式</p>
 注意：此字段可能返回 null，表示取不到有效值。

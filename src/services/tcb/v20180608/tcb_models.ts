@@ -3094,6 +3094,26 @@ export interface LocalizedTemplate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnUS?: string
+  /**
+   * <p>中文主题</p><p>入参限制：长度限制100字符以内，仅允许：{{.VerificationCode}}、{{.Usage}}、{{.Email}}、{{.ExpireMinutes}}、{{.ConfirmationURL}}，未知变量拒绝</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubjectZhCN?: string
+  /**
+   * <p>英文主题</p><p>入参限制：长度限制100字符以内，仅允许：{{.VerificationCode}}、{{.Usage}}、{{.Email}}、{{.ExpireMinutes}}、{{.ConfirmationURL}}，未知变量拒绝</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubjectEnUS?: string
+  /**
+   * <p>中文发件人</p><p>入参限制：长度限制50字符以内，静态纯文本，不支持变量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SenderNameZhCN?: string
+  /**
+   * <p>英文发件人</p><p>默认值：长度限制50字符以内，静态纯文本，不支持变量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SenderNameEnUS?: string
 }
 
 /**

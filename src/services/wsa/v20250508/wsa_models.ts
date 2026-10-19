@@ -24,7 +24,7 @@ export interface SearchProRequest {
    */
   Query: string
   /**
-   * <p>返回结果类型，不传默认为0。（<strong>极速版不支持该参数</strong>）</p><p>枚举值：</p><ul><li>0： 公开网页信源结果（自然结果）</li><li>1： 优质权威垂直信源结果（VR 卡）</li><li>2： 混合结果（自然结果+VR卡）</li></ul>
+   * <p>返回结果类型，不传默认为0。（<strong>极速版不支持该参数</strong>）</p><p>枚举值：</p><ul><li>0： 公开网页信源结果<pre><code>  注：旗舰版在此模式下会额外返回一部分不影响接口耗时的“优质权威垂直信源”结果。</code></pre></li><li>1： 优质权威垂直信源结果</li><li>2： 混合结果</li></ul>
    */
   Mode?: number
   /**

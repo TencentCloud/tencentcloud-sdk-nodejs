@@ -2472,7 +2472,7 @@ export interface DescribeSpanTreeByIDRequest {
  */
 export interface DescribeGeneralApmApplicationConfigResponse {
   /**
-   * 应用配置项
+   * <p>应用配置项</p>
    */
   ApmApplicationConfigView?: ApmApplicationConfigView
   /**
@@ -2521,11 +2521,11 @@ export interface ApmVulnerabilityServiceDetail {
  */
 export interface DescribeGeneralApmApplicationConfigRequest {
   /**
-   * 应用名
+   * <p>应用名</p>
    */
   ServiceName: string
   /**
-   * 业务系统ID
+   * <p>业务系统ID</p>
    */
   InstanceId: string
 }

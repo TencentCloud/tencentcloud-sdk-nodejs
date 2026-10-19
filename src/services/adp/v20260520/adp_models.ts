@@ -1524,6 +1524,37 @@ export interface SearchResultPayload {
 }
 
 /**
+ * MCP ResourceContents，chat-manage 侧不解析内部字段，仅结构透传
+ */
+export interface MCPResourceContents {
+  /**
+   * <p>二进制内容，与 text 二选一</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Blob?: string
+  /**
+   * <p>JSON：单个资源的 _meta 原文</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Meta?: string
+  /**
+   * <p>MIME 类型，MCP App 的 HTML 为 text/html;profile=mcp-app</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MimeType?: string
+  /**
+   * <p>文本内容，与 blob 二选一</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: string
+  /**
+   * <p>资源 URI</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uri?: string
+}
+
+/**
  * DescribeUsageDetailList返回参数结构体
  */
 export interface DescribeUsageDetailListResponse {
@@ -1553,6 +1584,28 @@ export interface DescribeAppTriggerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CallMCPTool请求参数结构体
+ */
+export interface CallMCPToolRequest {
+  /**
+   * <p>能力边界：一次请求只能调该 plugin 上的工具</p>
+   */
+  PluginId: string
+  /**
+   * <p>agent-exec 侧 thread</p>
+   */
+  ThreadId: string
+  /**
+   * <p>工具名，用于在 plugin 配置的 tool_list 中定位 tool_id</p>
+   */
+  ToolName: string
+  /**
+   * <p>JSON：工具入参原文，原样透传给 MCP Server</p>
+   */
+  Arguments?: string
 }
 
 /**
@@ -1930,16 +1983,6 @@ export interface AppShareURLInfo {
 }
 
 /**
- * ReleaseSkill返回参数结构体
- */
-export interface ReleaseSkillResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * <p>模型属性（支持工作流类型/AI 通话类型/是否关闭模型参数/是否支持深度思考/是否限时免费/是否默认模型等）</p>
  */
 export interface ModelProperty {
@@ -2174,6 +2217,24 @@ export interface MCPPluginConfig {
 }
 
 /**
+ * ReadMCPResource请求参数结构体
+ */
+export interface ReadMCPResourceRequest {
+  /**
+   * <p>能力边界：一次请求只能读该 plugin 的资源</p>
+   */
+  PluginId: string
+  /**
+   * <p>agent-exec 侧 thread</p>
+   */
+  ThreadId: string
+  /**
+   * <p>资源 URI，来源 tool 的 _meta.ui.resourceUri</p>
+   */
+  Uri: string
+}
+
+/**
  * DescribeAppStatisticsOverview请求参数结构体
  */
 export interface DescribeAppStatisticsOverviewRequest {
@@ -2250,45 +2311,13 @@ export interface DeleteVariableRequest {
 }
 
 /**
- * CreateAppTrigger请求参数结构体
+ * ReleaseSkill返回参数结构体
  */
-export interface CreateAppTriggerRequest {
+export interface ReleaseSkillResponse {
   /**
-   * <p>应用ID</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppId?: string
-  /**
-   * <p>应用触发器执行配置</p>
-   */
-  ExecuteConfig?: ExecuteConfig
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td><td>1</td><td>指令执行</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td><td>2</td><td>工作流执行</td></tr></tbody></table>
-   */
-  ExecuteType?: number
-  /**
-   * <p>第三方推送配置</p>
-   */
-  PushConfig?: TimerPushConfig
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_SCOPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_SCOPE_APP</td><td>1</td><td>B 端管理员</td></tr><tr><td>APP_TRIGGER_SCOPE_USER</td><td>2</td><td>C 端访客</td></tr></tbody></table>
-   */
-  Scope?: number
-  /**
-   * <p>触发器配置</p>
-   */
-  TriggerConfig?: TriggerConfig
-  /**
-   * <p>触发器名字</p>
-   */
-  TriggerName?: string
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>定时触发</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook 触发</td></tr></tbody></table>
-   */
-  TriggerType?: number
-  /**
-   * <p>访客ID</p>
-   */
-  UserId?: string
+  RequestId?: string
 }
 
 /**
@@ -2637,6 +2666,20 @@ export interface SaveWorkflowToolNodeOutputRequest {
    * <p>回调结果</p>
    */
   Result?: string
+}
+
+/**
+ * CallMCPTool返回参数结构体
+ */
+export interface CallMCPToolResponse {
+  /**
+   * <p>JSON：完整 CallToolResult 原文，含 structuredContent / isError / _meta</p>
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7307,6 +7350,32 @@ export interface QARetrievalConfig {
 }
 
 /**
+ * ES 配置
+ */
+export interface ESConfig {
+  /**
+   * <p>是否支持修改存储方式</p>
+   */
+  CanModify?: boolean
+  /**
+   * <p>ES 密码（加密后）</p>
+   */
+  EncryptedPassword?: string
+  /**
+   * <p>ES 集群 ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>存储类型：1=默认存储，2=自定义存储<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>ES_STORAGE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>ES_STORAGE_TYPE_DEFAULT</td><td>1</td><td>默认存储</td></tr><tr><td>ES_STORAGE_TYPE_CUSTOM</td><td>2</td><td>自定义存储</td></tr></tbody></table></p>
+   */
+  StorageType?: number
+  /**
+   * <p>ES 用户名</p>
+   */
+  UserName?: string
+}
+
+/**
  * 操作日志元数据
  */
 export interface AuditLogMetaField {
@@ -7837,6 +7906,24 @@ export interface DescribePluginSummaryListResponse {
    * <p>total_count</p>
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReadMCPResource返回参数结构体
+ */
+export interface ReadMCPResourceResponse {
+  /**
+   * <p>MCP resources/read 返回的资源内容</p>
+   */
+  Contents?: Array<MCPResourceContents>
+  /**
+   * <p>JSON：Resource 的 _meta 原文，MCP App 场景 Host 依据 ui.csp 强制 CSP 策略</p>
+   */
+  ResourceMeta?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11385,29 +11472,45 @@ export interface DeleteAppResponse {
 }
 
 /**
- * ES 配置
+ * CreateAppTrigger请求参数结构体
  */
-export interface ESConfig {
+export interface CreateAppTriggerRequest {
   /**
-   * <p>是否支持修改存储方式</p>
+   * <p>应用ID</p>
    */
-  CanModify?: boolean
+  AppId?: string
   /**
-   * <p>ES 密码（加密后）</p>
+   * <p>应用触发器执行配置</p>
    */
-  EncryptedPassword?: string
+  ExecuteConfig?: ExecuteConfig
   /**
-   * <p>ES 集群 ID</p>
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td><td>1</td><td>指令执行</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td><td>2</td><td>工作流执行</td></tr></tbody></table>
    */
-  InstanceId?: string
+  ExecuteType?: number
   /**
-   * <p>存储类型：1=默认存储，2=自定义存储<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>ES_STORAGE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>ES_STORAGE_TYPE_DEFAULT</td><td>1</td><td>默认存储</td></tr><tr><td>ES_STORAGE_TYPE_CUSTOM</td><td>2</td><td>自定义存储</td></tr></tbody></table></p>
+   * <p>第三方推送配置</p>
    */
-  StorageType?: number
+  PushConfig?: TimerPushConfig
   /**
-   * <p>ES 用户名</p>
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_SCOPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_SCOPE_APP</td><td>1</td><td>B 端管理员</td></tr><tr><td>APP_TRIGGER_SCOPE_USER</td><td>2</td><td>C 端访客</td></tr></tbody></table>
    */
-  UserName?: string
+  Scope?: number
+  /**
+   * <p>触发器配置</p>
+   */
+  TriggerConfig?: TriggerConfig
+  /**
+   * <p>触发器名字</p>
+   */
+  TriggerName?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>定时触发</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook 触发</td></tr></tbody></table>
+   */
+  TriggerType?: number
+  /**
+   * <p>访客ID</p>
+   */
+  UserId?: string
 }
 
 /**

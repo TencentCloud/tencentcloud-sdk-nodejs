@@ -5442,12 +5442,16 @@ export interface AnonymousLoginInfo {
    * <p>匿名登录账号secretId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretId: string
+  SecretId?: string
   /**
    * <p>匿名登录账号secretKey</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretKey?: string
+  /**
+   * <p>角色的资源描述，可在<a href="https://console.cloud.tencent.com/cam/role">访问管理</a>，点击角色名获取。<br>普通角色：<br>qcs::cam::uin/12345678:role/4611686018427397919、qcs::cam::uin/12345678:roleName/testRoleName<br>服务角色：<br>qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::cam::uin/12345678:role/tencentcloudServiceRoleName/testServiceRoleName</p><p>DataSight将扮演此角色，使用此角色的临时密钥来发起API请求。</p>
+   */
+  RoleArn?: string
 }
 
 /**
@@ -6101,17 +6105,21 @@ export interface ConsoleAccount {
    * <p>腾讯云账号SecretId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretId: string
+  SecretId?: string
   /**
    * <p>腾讯云账号SecretKey</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretKey: string
+  SecretKey?: string
   /**
    * <p>电子邮箱，用于发送验证码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
+  /**
+   * <p>角色的资源描述，可在<a href="https://console.cloud.tencent.com/cam/role">访问管理</a>，点击角色名获取。<br>普通角色：<br>qcs::cam::uin/12345678:role/4611686018427397919、qcs::cam::uin/12345678:roleName/testRoleName<br>服务角色：<br>qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::cam::uin/12345678:role/tencentcloudServiceRoleName/testServiceRoleName</p><p>DataSight将扮演此角色，使用此角色的临时密钥来发起API请求。</p>
+   */
+  RoleArn?: string
 }
 
 /**
@@ -12002,11 +12010,11 @@ export interface ModifyConsoleRequest {
    */
   DomainPrefix?: string
   /**
-   * <p>用户账号信息</p><p>“账号密码鉴权”登录方式必传</p>
+   * <p>用户账号信息</p><p>“账号密码鉴权”登录方式必传。<br>如果SecretId、SecretKey、RoleArn都不传，表示不修改这部分鉴权信息。</p>
    */
   Accounts?: Array<ConsoleAccount>
   /**
-   * <p>匿名登录账号信息</p><p>“匿名登录”登录方式必传</p>
+   * <p>匿名登录账号信息</p><p>“匿名登录”登录方式必传。<br>如果SecretId、SecretKey、RoleArn都不传，表示不修改这部分鉴权信息。</p>
    */
   AnonymousLogin?: AnonymousLoginInfo
   /**
@@ -12026,7 +12034,7 @@ export interface ModifyConsoleRequest {
    */
   SubnetId?: string
   /**
-   * <p>Auth用户角色信息</p><p>“第三方认证登录”登录方式必传</p>
+   * <p>Auth用户角色信息</p><p>“第三方认证登录”登录方式必传。<br>如果SecretId、SecretKey、RoleArn都不传，表示不修改这部分鉴权信息。</p>
    */
   AuthRoles?: Array<AuthRoleInfo>
   /**
@@ -13759,11 +13767,11 @@ export interface CreateConsoleRequest {
    */
   DomainPrefix: string
   /**
-   * <p>用户账号信息</p><p>“账号密码鉴权”登录方式必传</p>
+   * <p>用户账号信息</p><p>“账号密码鉴权”登录方式必传。<br>SecretId + SecretKey 或 RoleArn需要传其中一种。</p>
    */
   Accounts?: Array<ConsoleAccount>
   /**
-   * <p>匿名登录账号信息</p><p>“匿名登录”登录方式必传</p>
+   * <p>匿名登录账号信息</p><p>“匿名登录”登录方式必传。<br>SecretId + SecretKey 或 RoleArn需要传其中一种。</p>
    */
   AnonymousLogin?: AnonymousLoginInfo
   /**
@@ -13783,7 +13791,7 @@ export interface CreateConsoleRequest {
    */
   SubnetId?: string
   /**
-   * <p>Auth角色信息</p><p>“第三方认证登录”登录方式必传</p>
+   * <p>Auth角色信息</p><p>“第三方认证登录”登录方式必传。<br>SecretId + SecretKey 或 RoleArn需要传其中一种。</p>
    */
   AuthRoles?: Array<AuthRoleInfo>
   /**
@@ -16354,12 +16362,16 @@ export interface AuthRoleInfo {
   /**
    * <p>Auth角色对应权限SecretId</p>
    */
-  SecretId: string
+  SecretId?: string
   /**
    * <p>Auth角色对应权限SecretKey</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretKey?: string
+  /**
+   * <p>角色的资源描述，可在<a href="https://console.cloud.tencent.com/cam/role">访问管理</a>，点击角色名获取。<br>普通角色：<br>qcs::cam::uin/12345678:role/4611686018427397919、qcs::cam::uin/12345678:roleName/testRoleName<br>服务角色：<br>qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::cam::uin/12345678:role/tencentcloudServiceRoleName/testServiceRoleName</p><p>DataSight将扮演此角色，使用此角色的临时密钥来发起API请求。</p>
+   */
+  RoleArn?: string
 }
 
 /**

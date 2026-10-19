@@ -477,25 +477,29 @@ export interface CarInvoiceOCRRequest {
  */
 export interface DescribeQuestionMarkAgentJobResponse {
   /**
-   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
+   * <p>任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。</p>
    */
   ErrorCode?: string
   /**
-   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
+   * <p>任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。</p>
    */
   ErrorMessage?: string
   /**
-   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   * <p>任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功</p>
    */
   JobStatus?: string
   /**
-   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。
+   * <p>图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。</p>
    */
   Angle?: number
   /**
-   * 试题批改信息
+   * <p>试题批改信息  （该字段后续废弃，使用QuestionInfo兼容多页批改场景）</p>
    */
   MarkInfos?: Array<MarkInfo>
+  /**
+   * <p>试题批改信息。</p>
+   */
+  QuestionInfo?: Array<QuestionInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6063,7 +6067,7 @@ export interface SubmitQuestionMarkAgentJobResponse {
    */
   QuestionCount?: string
   /**
-   * <p>客户图片url</p>
+   * <p>废弃字段</p>
    */
   OriginalImageUrl?: string
   /**
@@ -6955,6 +6959,102 @@ export interface AdvertiseTextDetection {
 GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
    */
   AdvancedInfo?: string
+}
+
+/**
+ * VerifyOfdVatInvoiceOCR返回参数结构体
+ */
+export interface VerifyOfdVatInvoiceOCRResponse {
+  /**
+   * 发票类型
+026:增值税电子普通发票
+028:增值税电子专用发票
+010:电子发票（普通发票）
+020:电子发票（增值税专用发票）
+030:电子发票（铁路电子客票）
+040:电子发票（航空运输电子客票行程单）
+   */
+  Type?: string
+  /**
+   * 发票代码
+   */
+  InvoiceCode?: string
+  /**
+   * 发票号码
+   */
+  InvoiceNumber?: string
+  /**
+   * 开票日期
+   */
+  IssueDate?: string
+  /**
+   * 验证码
+   */
+  InvoiceCheckCode?: string
+  /**
+   * 机器编号
+   */
+  MachineNumber?: string
+  /**
+   * 密码区
+   */
+  TaxControlCode?: string
+  /**
+   * 购买方
+   */
+  Buyer?: VatInvoiceUserInfo
+  /**
+   * 销售方
+   */
+  Seller?: VatInvoiceUserInfo
+  /**
+   * 价税合计
+   */
+  TaxInclusiveTotalAmount?: string
+  /**
+   * 开票人
+   */
+  InvoiceClerk?: string
+  /**
+   * 收款人
+   */
+  Payee?: string
+  /**
+   * 复核人
+   */
+  Checker?: string
+  /**
+   * 税额
+   */
+  TaxTotalAmount?: string
+  /**
+   * 不含税金额
+   */
+  TaxExclusiveTotalAmount?: string
+  /**
+   * 备注
+   */
+  Note?: string
+  /**
+   * 货物或服务清单
+   */
+  GoodsInfos?: Array<VatInvoiceGoodsInfo>
+  /**
+   * 航空运输电子客票行程单信息
+   */
+  AirTicketInfo?: AirTicketInfo
+  /**
+   * 铁路电子客票
+   */
+  RailwayTicketInfo?: RailwayTicketInfo
+  /**
+   * 发票标题
+   */
+  InvoiceTitle?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8336,7 +8436,7 @@ export interface VerifyScenePhotoRequest {
  */
 export interface DescribeQuestionMarkAgentJobRequest {
   /**
-   * 任务唯一ID。由服务端生成。
+   * <p>任务唯一ID。由服务端生成。</p>
    */
   JobId?: string
 }
@@ -9364,99 +9464,21 @@ export interface CropEnhanceImageOCRRequest {
 }
 
 /**
- * VerifyOfdVatInvoiceOCR返回参数结构体
+ * 试题识别结果-答案元素内容
  */
-export interface VerifyOfdVatInvoiceOCRResponse {
+export interface AnswerElement {
   /**
-   * 发票类型
-026:增值税电子普通发票
-028:增值税电子专用发票
-010:电子发票（普通发票）
-020:电子发票（增值税专用发票）
-030:电子发票（铁路电子客票）
-040:电子发票（航空运输电子客票行程单）
+   * <p>答案是否正确</p>
    */
-  Type?: string
+  IsCorrect?: boolean
   /**
-   * 发票代码
+   * <p>答案分析结果</p>
    */
-  InvoiceCode?: string
+  AnswerAnalysis?: string
   /**
-   * 发票号码
+   * <p>返回正确答案内容</p>
    */
-  InvoiceNumber?: string
-  /**
-   * 开票日期
-   */
-  IssueDate?: string
-  /**
-   * 验证码
-   */
-  InvoiceCheckCode?: string
-  /**
-   * 机器编号
-   */
-  MachineNumber?: string
-  /**
-   * 密码区
-   */
-  TaxControlCode?: string
-  /**
-   * 购买方
-   */
-  Buyer?: VatInvoiceUserInfo
-  /**
-   * 销售方
-   */
-  Seller?: VatInvoiceUserInfo
-  /**
-   * 价税合计
-   */
-  TaxInclusiveTotalAmount?: string
-  /**
-   * 开票人
-   */
-  InvoiceClerk?: string
-  /**
-   * 收款人
-   */
-  Payee?: string
-  /**
-   * 复核人
-   */
-  Checker?: string
-  /**
-   * 税额
-   */
-  TaxTotalAmount?: string
-  /**
-   * 不含税金额
-   */
-  TaxExclusiveTotalAmount?: string
-  /**
-   * 备注
-   */
-  Note?: string
-  /**
-   * 货物或服务清单
-   */
-  GoodsInfos?: Array<VatInvoiceGoodsInfo>
-  /**
-   * 航空运输电子客票行程单信息
-   */
-  AirTicketInfo?: AirTicketInfo
-  /**
-   * 铁路电子客票
-   */
-  RailwayTicketInfo?: RailwayTicketInfo
-  /**
-   * 发票标题
-   */
-  InvoiceTitle?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  RightAnswer?: string
 }
 
 /**
@@ -10155,6 +10177,10 @@ export interface QuestionInfo {
    * <p>预处理后的图片base64编码</p>
    */
   ImageBase64?: string
+  /**
+   * <p>预处理后的图片URL,如果开启了图像切边矫正，后续的坐标都是基于当前图片返回的坐标</p>
+   */
+  ReturnImageUrl?: string
 }
 
 /**
@@ -10539,6 +10565,10 @@ export interface SubmitQuestionSplitJobRequest {
    * <p>选择切题模型</p><p>枚举值：</p><ul><li>youtu_crop： 轻量化切题模型，运算速度更快，适合常规切题</li><li>youtu_crop_pro： 属于切题精调大模型，针对双栏、跨栏等复杂版式识别精度大幅提升，但推理耗时更长</li></ul><p>默认值：youtu_crop</p>
    */
   ModelType?: string
+  /**
+   * <p>是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-&gt; ReturnImageUr中l,默认为false不开启</p>
+   */
+  EnableImageCrop?: boolean
 }
 
 /**
@@ -10651,6 +10681,10 @@ export interface Element {
    * <p>元素所在页</p><p>单位：页</p><p>默认值：1</p>
    */
   PageIndex?: number
+  /**
+   * <p>批改时答案的额外数据</p>
+   */
+  AnswerElement?: AnswerElement
 }
 
 /**
@@ -11293,6 +11327,18 @@ export interface ResultList {
    * <p>多坐标返回，显示坐标所在页</p><p>默认值：[]</p>
    */
   CoordPageIndex?: Array<number | bigint>
+  /**
+   * <p>返回正确答案内容</p>
+   */
+  RightAnswer?: string
+  /**
+   * <p>学科（如语文、数学、英语）</p>
+   */
+  Subject?: string
+  /**
+   * <p>返回题目的知识点内容</p>
+   */
+  KnowledgePoints?: Array<string>
 }
 
 /**
@@ -11400,7 +11446,7 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   ImageUrl?: string
   /**
-   * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。</p>
+   * <p>不传则默认识别整个PDF，如果识别单页则输入指定页码</p>
    */
   PdfPageNumber?: number
   /**
@@ -11414,19 +11460,19 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   EnableDeepThink?: boolean
   /**
-   * <p>题目信息输出配置，当key对应为true表示开启配置开关。</p><p>当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；<br>当key为TrueAnswer value为true 表示输出每道题的正确答案 ；<br>当key为StepCorrection value为true表示启用步骤级批改；</p><p>当key为DisableAnswerAnalysis value为true表示不输出答案解析；</p><p>当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标；</p><p>当key为UseCoordAssist value为true表示使用精调坐标辅助模型，false表示默认模型坐标（性能更优）；</p><p>参数格式：{&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p>
+   * <p>题目信息输出配置，当key对应为true表示开启配置开关。<br>当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；<br>当key为TrueAnswer value为true 表示输出每道题的正确答案 ；<br>当key为StepCorrection value为true表示启用步骤级批改；<br>当key为DisableAnswerAnalysis value为true表示不输出答案解析；<br>当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标；<br>当key为UseCoordAssist value为true表示使用精调坐标辅助模型，false表示默认模型坐标（性能更优）；</p>
    */
   QuestionConfigMap?: string
   /**
-   * <p>仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中</p>
+   * <p>【废除字段】<br>仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中</p>
    */
   ReferenceAnswer?: string
   /**
-   * <p>批量base64图片入口，每个base64参考单独ImageBase64参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N来输入答题试卷和含正确解析试卷，最多两张</li><li>当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行拼接逻辑（解决单题跨页场景）</li></ol>
+   * <p>批量base64图片入口，每个base64参考单独ImageBase64参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N来输入答题试卷和含正确解析试卷，最多两张</li><li>当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行多图同时批改逻辑（解决单题跨页场景）</li></ol>
    */
   ImageBase64List?: Array<string>
   /**
-   * <p>批量ImageUrl图片入口，每个ImageUrl参考单独ImageUrl参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N 来输入答题试卷和含正确解析试卷，最多两张</li><li>当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行拼接逻辑（解决单题跨页场景）</li></ol>
+   * <p>批量ImageUrl图片入口，每个ImageUrl参考单独ImageUrl参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N 来输入答题试卷和含正确解析试卷，最多两张</li><li>当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行多图同时批改逻辑（解决单题跨页场景）</li></ol>
    */
   ImageUrlList?: Array<string>
   /**
@@ -11437,6 +11483,10 @@ export interface SubmitQuestionMarkAgentJobRequest {
    * <p>单题辅助批改文本内容列表，当AssistMarkType为1时生效，用于提供题目相关的辅助文本信息。</p><ol><li>当key为ReferenceAnswer，value可以输入单题的辅助答案文本。</li><li>当key为QuestionAuxStem，value可以输入单题的辅助题干。</li></ol>
    */
   AnswerAssistMap?: string
+  /**
+   * <p>是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-&gt; ReturnImageUr中l,默认为false不开启<br>示例值：false</p>
+   */
+  EnableImageCrop?: boolean
 }
 
 /**

@@ -428,6 +428,16 @@ it("dbbrain.v20210527.DescribeRedisUnExpiredKeyStatistics", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeBlockingLogs", async function () {
+    try {
+       const data = await client.DescribeBlockingLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeRedisSlowLogTopSqls", async function () {
     try {
        const data = await client.DescribeRedisSlowLogTopSqls({})

@@ -20,7 +20,7 @@
  */
 export interface CreateModelServiceRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -714,6 +714,10 @@ export interface DeleteNotebookRequest {
    * notebook id
    */
   Id: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -1203,6 +1207,10 @@ export interface ModifyServiceGroupWeightsRequest {
    * 权重设置
    */
   Weights: Array<WeightEntry>
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -1210,7 +1218,7 @@ export interface ModifyServiceGroupWeightsRequest {
  */
 export interface DescribeTrainingTasksRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -1390,6 +1398,10 @@ export interface ModifyNotebookTagsRequest {
    */
   Id: string
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * Notebook修改标签集合
    */
   Tags?: Array<Tag>
@@ -1490,7 +1502,7 @@ export interface DescribeTrainingTaskRequest {
    */
   Id: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -1719,17 +1731,25 @@ export interface DescribeMountInstanceRequest {
  */
 export interface CreateNotebookImageRequest {
   /**
-   * 镜像信息
+   * <p>镜像信息</p>
    */
   ImageInfo: ImageInfo
   /**
-   * notebook id
+   * <p>notebook id</p>
    */
   NotebookId: string
   /**
-   * 要保存的kernel数组
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>要保存的kernel数组</p>
    */
   Kernels?: Array<string>
+  /**
+   * <p>是否保存到镜像中心</p>
+   */
+  RegisterToImageCenter?: boolean
 }
 
 /**
@@ -1740,6 +1760,10 @@ export interface StartNotebookRequest {
    * notebook id
    */
   Id: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -1820,7 +1844,7 @@ export interface StartTrainingTaskRequest {
    */
   Id: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -1923,7 +1947,7 @@ export interface ModifyModelServiceRequest {
    */
   ServiceId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -2089,7 +2113,7 @@ export interface ChatCompletionRequest {
    */
   Messages: Array<Message>
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -2104,6 +2128,36 @@ export interface ChatCompletionRequest {
    * <p>仅当模型为自行部署的开源大模型时生效。默认 512，模型可生成内容的最长 token 数量，最大不能超过模型支持的上下文长度。</p>
    */
   MaxTokens?: number
+}
+
+/**
+ * 智能路由完整对象（挂在 ServiceGroup 的 44 号）
+ */
+export interface SmartRouter {
+  /**
+   * 智能路由开关状态（true=已开启，false=未开启/已停止）
+   */
+  Enabled?: boolean
+  /**
+   * 绑定的服务组 ID（一对一）
+   */
+  ServiceGroupId?: string
+  /**
+   * 组件列表（gateway + scheduler；repeated 为未来扩展预留）
+   */
+  ComponentList?: Array<SmartRouterComponent>
+  /**
+   * 创建人
+   */
+  Creator?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -2290,6 +2344,10 @@ export interface ModifyNotebookRequest {
    */
   LogEnable: boolean
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * <p>资源组ID(for预付费)</p>
    */
   ResourceGroupId?: string
@@ -2372,7 +2430,7 @@ export interface DescribeModelServiceCallInfoRequest {
    */
   ServiceGroupId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -2666,7 +2724,7 @@ export interface DescribeBillingResourceGroupAttachedWorkspacesRequest {
    */
   ResourceGroupId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -3333,7 +3391,7 @@ export interface ModifyModelServiceAuthTokenRequest {
    */
   ServiceGroupId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -3692,7 +3750,7 @@ export interface DescribeBillingSpecsRequest {
    */
   ChargeType: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -3782,6 +3840,10 @@ export interface ModifyModelServiceAuthorizationRequest {
    * 服务组Id
    */
   ServiceGroupId: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
   /**
    * 是否开启鉴权,true表示开启
    */
@@ -4033,11 +4095,11 @@ export interface PrivateLinkInfo {
  */
 export interface DescribeNotebooksResponse {
   /**
-   * notebook详情
+   * <p>notebook详情</p>
    */
   NotebookSet?: Array<NotebookSetItem>
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   TotalCount?: number
   /**
@@ -4342,7 +4404,7 @@ export interface PodSSHInfo {
  */
 export interface DescribeModelServiceGroupsRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -4704,7 +4766,7 @@ export interface DescribeModelServiceRequest {
    */
   ServiceId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -4767,7 +4829,7 @@ export interface DeleteModelServiceRequest {
    */
   ServiceId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -4786,7 +4848,7 @@ export interface DeleteModelServiceAuthTokenRequest {
    */
   ServiceGroupId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -4812,7 +4874,7 @@ export interface CreateTrainingTaskRequest {
    */
   ResourceConfigInfos: Array<ResourceConfigInfo>
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -4947,6 +5009,24 @@ export interface CreatePresignedNotebookUrlRequest {
    * Notebook ID
    */
   Id: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+}
+
+/**
+ * 存储额外配置
+ */
+export interface StorageExtraConf {
+  /**
+   * <p>cfs的存储类型<br>  // HP:通用性能型<br>  // SD:通用标准型<br>  // TP:turbo性能型<br>  // TB:turbo标准型<br>  // THP:吞吐型</p>
+   */
+  CFSStorageType?: string
+  /**
+   * <p>cfs的协议</p>
+   */
+  CFSProtocol?: string
 }
 
 /**
@@ -5175,6 +5255,10 @@ export interface DescribeBillingSpecsPriceRequest {
    * 询价参数，支持批量询价
    */
   SpecsParam: Array<SpecUnit>
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -5405,6 +5489,41 @@ export interface DescribeBillingSpecsResponse {
 }
 
 /**
+ * 智能路由资源规格（整个智能路由实例共享，Gateway/Scheduler 两个组件使用同一套资源池）。对应推理服务 CreateModelServiceRequest 顶层的 ChargeType/Zone/QueueId 等字段语义。
+ */
+export interface SmartRouterResourceSpec {
+  /**
+   * <p>付费模式：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）。不传则默认 POSTPAID_BY_HOUR</p>
+   */
+  ChargeType?: string
+  /**
+   * <p>预付费资源组 ID（ChargeType=PREPAID 时必填）</p>
+   */
+  ResourceGroupId?: string
+  /**
+   * <p>预付费资源组名称（output only，ChargeType=PREPAID 时有值，查询时回显）</p>
+   */
+  ResourceGroupName?: string
+  /**
+   * <p>可用区（如 ap-guangzhou-3），公有云场景用于指定机器来源</p>
+   */
+  Zone?: string
+  /**
+   * <p>资源队列 ID（内网版使用，标识任务所属的调度队列）</p>
+   */
+  QueueId?: string
+  /**
+   * <p>服务的优先级，可选范围 [0,9]，默认 0（内网版/私有化使用）</p>
+   */
+  Priority?: number
+  /**
+   * <p>资源供应属性（潮汐/竞价等供应模式），公有云场景用于指定机器来源类型。仅区分供应来源，计费/部署/伸缩仍按后付费处理（ChargeType 恒为 POSTPAID_BY_HOUR）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute
+}
+
+/**
  * DeleteTrainingTask返回参数结构体
  */
 export interface DeleteTrainingTaskResponse {
@@ -5465,12 +5584,12 @@ export interface AuthToken {
  */
 export interface DescribeEventsResponse {
   /**
-   * 事件的列表
+   * <p>事件的列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Events?: Array<Event>
   /**
-   * 此次查询的事件的个数
+   * <p>此次查询的事件的个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
@@ -5954,42 +6073,31 @@ export interface ScheduledAction {
  */
 export interface DescribeNotebooksRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
-   * 偏移量，默认为0
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 每页返回的实例数，默认为10
+   * <p>每页返回的实例数，默认为 10，最小值 0，最大值 100</p>
    */
   Limit?: number
   /**
-   * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列。默认为DESC
+   * <p>输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列。默认为DESC</p>
    */
   Order?: string
   /**
-   * 根据哪个字段排序，如：CreateTime、UpdateTime，默认为UpdateTime
+   * <p>根据哪个字段排序，如：CreateTime、UpdateTime，默认为UpdateTime</p>
    */
   OrderField?: string
   /**
-   * 过滤器，eg：[{ "Name": "Id", "Values": ["nb-123456789"] }]
-
-取值范围
-Name（名称）：notebook1
-Id（notebook ID）：nb-123456789
-Status（状态）：Starting / Running / Stopped / Stopping / Failed / SubmitFailed
-Creator（创建者 uin）：100014761913
-ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）
-ChargeStatus（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ BILLING_STORAGE（存储计费中）/ARREARS_STOP（欠费停止）
-DefaultCodeRepoId（默认代码仓库ID）：cr-123456789
-AdditionalCodeRepoId（关联代码仓库ID）：cr-123456789
-LifecycleScriptId（生命周期ID）：ls-12312312311312
+   * <p>过滤器，eg：[{ &quot;Name&quot;: &quot;Id&quot;, &quot;Values&quot;: [&quot;nb-123456789&quot;] }]</p><p>取值范围<br>Name（名称）：notebook1<br>Id（notebook ID）：nb-123456789<br>Status（状态）：Starting / Running / Stopped / Stopping / Failed / SubmitFailed<br>Creator（创建者 uin）：100014761913<br>ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）<br>ChargeStatus（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ BILLING_STORAGE（存储计费中）/ARREARS_STOP（欠费停止）<br>DefaultCodeRepoId（默认代码仓库ID）：cr-123456789<br>AdditionalCodeRepoId（关联代码仓库ID）：cr-123456789<br>LifecycleScriptId（生命周期ID）：ls-12312312311312</p>
    */
   Filters?: Array<Filter>
   /**
-   * 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }]
+   * <p>标签过滤器，eg：[{ &quot;TagKey&quot;: &quot;TagKeyA&quot;, &quot;TagValue&quot;: [&quot;TagValueA&quot;] }]</p>
    */
   TagFilters?: Array<TagFilter>
 }
@@ -6027,7 +6135,7 @@ export interface DeleteTrainingTaskRequest {
    */
   Id: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -6303,7 +6411,7 @@ export interface DescribeBillingResourceInstanceRunningJobsRequest {
    */
   ResourceInstanceId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -6721,6 +6829,11 @@ export interface ServiceGroup {
    * <p>变更服务的子账户名称</p>
    */
   ChangerName?: string
+  /**
+   * <p>智能路由（SmartRouter）配置与运行时状态。未开启时该字段为空</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartRouter?: SmartRouter
 }
 
 /**
@@ -7484,6 +7597,10 @@ export interface DescribeExportRequest {
  */
 export interface UpdateSubAccountLinuxUserInfoRequest {
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * 子账号信息列表
    */
   SubAccountList?: Array<SubAccountInfo>
@@ -7502,6 +7619,10 @@ export interface EnableTrainingTaskClsConfigRequest {
    */
   LogEnable: boolean
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * 日志配置
    */
   LogConfig?: LogConfig
@@ -7516,7 +7637,7 @@ export interface DescribeNotebookRequest {
    */
   Id: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -7525,6 +7646,10 @@ export interface DescribeNotebookRequest {
  * DescribePublicAlgoVersionList请求参数结构体
  */
 export interface DescribePublicAlgoVersionListRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
   /**
    * 过滤器
    */
@@ -7544,17 +7669,34 @@ export interface DescribePublicAlgoVersionListRequest {
 }
 
 /**
- * 存储额外配置
+ * Gateway（Envoy）与 Scheduler（EPP）资源配置（字段完全一致，合并为统一类型）
  */
-export interface StorageExtraConf {
+export interface SmartRouterResourceConfig {
   /**
-   * <p>cfs的存储类型<br>  // HP:通用性能型<br>  // SD:通用标准型<br>  // TP:turbo性能型<br>  // TB:turbo标准型<br>  // THP:吞吐型</p>
+   * <p>副本数，最小 1，建议 &gt;=2 以确保高可用；Scheduler（EPP）默认 2（保障 EPP 高可用与 Gossip 同步）</p>
    */
-  CFSStorageType?: string
+  Replicas: number
   /**
-   * <p>cfs的协议</p>
+   * <p>处理器资源，单位为 1/1000 核（milliCPU），与 EMS 一致</p>
    */
-  CFSProtocol?: string
+  Cpu: number
+  /**
+   * <p>内存资源，单位为 1MB，与 EMS 一致</p>
+   */
+  Memory: number
+  /**
+   * <p>自定义环境变量，用于覆盖 Deployment 内置默认环境变量。Gateway 典型用途：覆盖 BACKEND_SERVICE_HOST 等；Scheduler 典型用途：覆盖 LRU_CAPACITY、BLOCK_SIZE_TOKENS 等</p>
+   */
+  Env?: Array<EnvVar>
+  /**
+   * <p>实例类型/规格，用于指定组件运行的机器规格</p>
+   */
+  InstanceType?: string
+  /**
+   * <p>sidecar 容器配置，复用推理服务同款 SidecarSpec；未设置或 ImageInfo.ImageUrl 为空时不创建 sidecar 容器。sidecar 容器环境变量与组件主容器保持一致，不单独下发</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sidecar?: SidecarSpec
 }
 
 /**
@@ -7599,6 +7741,10 @@ export interface DescribeTrainingTaskPodUrlRequest {
    * 任务实例名
    */
   PodName: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -7660,6 +7806,10 @@ export interface StopNotebookRequest {
    * notebook id
    */
   Id: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -7671,7 +7821,7 @@ export interface DeleteModelServiceGroupRequest {
    */
   ServiceGroupId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -7831,7 +7981,7 @@ export interface CreateModelServiceAuthTokenRequest {
    */
   ServiceGroupId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -8038,6 +8188,10 @@ export interface SSHConfig {
  */
 export interface DescribeSubAccountLinuxUserInfosRequest {
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * 分页偏移量（0 表示全量）
    */
   Offset?: number
@@ -8116,7 +8270,7 @@ export interface DescribeTrainingTaskPodsRequest {
    */
   Id: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -8331,7 +8485,7 @@ export interface DescribeModelServiceGroupRequest {
    */
   ServiceGroupId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -8630,59 +8784,43 @@ export interface EnvVar {
  */
 export interface DescribeEventsRequest {
   /**
-   * 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测
-枚举值：
-- TRAIN
-- NOTEBOOK
-- INFER
-- BATCH
+   * <p>服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测<br>枚举值：</p><ul><li>TRAIN</li><li>NOTEBOOK</li><li>INFER</li><li>BATCH</li></ul>
    */
   Service: string
   /**
-   * 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：
-- Service类型为TRAIN：
-  调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId
-- Service类型为NOTEBOOK：
-  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName
-- Service类型为INFER：
-  调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId
-- Service类型为BATCH：
-  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：</p><ul><li>Service类型为TRAIN：<br>调用<a href="/document/product/851/75089">DescribeTrainingTask接口</a>查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId</li><li>Service类型为NOTEBOOK：<br>调用<a href="/document/product/851/95662">DescribeNotebook接口</a>查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName</li><li>Service类型为INFER：<br>调用<a href="/document/product/851/82285">DescribeModelServiceGroup接口</a>查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId</li><li>Service类型为BATCH：<br>调用<a href="/document/product/851/80180">DescribeBatchTask接口</a>查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId</li></ul>
    */
   ServiceId?: string
   /**
-   * 查询事件最早发生的时间（RFC3339格式的时间字符串），默认值为当前时间的前一天
+   * <p>查询事件最早发生的时间（RFC3339格式的时间字符串），默认值为当前时间的前一天</p>
    */
   StartTime?: string
   /**
-   * 查询事件最晚发生的时间（RFC3339格式的时间字符串），默认值为当前时间
+   * <p>查询事件最晚发生的时间（RFC3339格式的时间字符串），默认值为当前时间</p>
    */
   EndTime?: string
   /**
-   * 分页Limit，默认值为100，最大值为100
+   * <p>分页Limit，默认值为100，最大值为100</p>
    */
   Limit?: number
   /**
-   * 分页Offset，默认值为0
+   * <p>分页Offset，默认值为0</p>
    */
   Offset?: number
   /**
-   * 排列顺序（可选值为ASC, DESC ），默认为DESC
+   * <p>排列顺序（可选值为ASC, DESC ），默认为DESC</p>
    */
   Order?: string
   /**
-   * 排序的依据字段（可选值为FirstTimestamp, LastTimestamp），默认值为LastTimestamp
+   * <p>排序的依据字段（可选值为FirstTimestamp, LastTimestamp），默认值为LastTimestamp</p>
    */
   OrderField?: string
   /**
-   * 过滤条件
-注意: 
-1. Filter.Name：目前支持ResourceKind（按事件关联的资源类型过滤）；Type（按事件类型过滤）
-2. Filter.Values：
-对于Name为ResourceKind，Values的可选取值为Deployment, Replicaset, Pod等K8S资源类型；
-对于Name为Type，Values的可选取值仅为Normal或者Warning；
-Values为多个的时候表示同时满足
-3. Filter. Negative和Filter. Fuzzy没有使用
+   * <p>过滤条件<br>注意: </p><ol><li>Filter.Name：目前支持ResourceKind（按事件关联的资源类型过滤）；Type（按事件类型过滤）</li><li>Filter.Values：<br>对于Name为ResourceKind，Values的可选取值为Deployment, Replicaset, Pod等K8S资源类型；<br>对于Name为Type，Values的可选取值仅为Normal或者Warning；<br>Values为多个的时候表示同时满足</li><li>Filter. Negative和Filter. Fuzzy没有使用</li></ol>
    */
   Filters?: Array<Filter>
 }
@@ -8847,6 +8985,47 @@ export interface DescribePlatformImagesRequest {
    * 返回数量, 默认100
    */
   Limit?: number
+}
+
+/**
+ * 智能路由组件（运行时视图，对齐 ModelService.RoleSpec + ServiceInfo.Status）
+ */
+export interface SmartRouterComponent {
+  /**
+   * <p>组件名称：{ServiceGroupId}-gateway / {ServiceGroupId}-scheduler</p>
+   */
+  Name?: string
+  /**
+   * <p>组件类型：&quot;Gateway&quot; / &quot;Scheduler&quot;</p>
+   */
+  Type?: string
+  /**
+   * <p>组件镜像（从 K8s Deployment 实时查询）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageInfo?: ImageInfo
+  /**
+   * <p>期望配置（Replicas/Cpu/Memory/Env）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceConfig?: SmartRouterResourceConfig
+  /**
+   * <p>组件状态：CREATING 创建中 / CREATE_FAILED 创建失败 / Normal 正常运行中 / Stopped 已停止 / Stopping 停止中 / Abnormal 异常 / Pending 启动中 / Waiting 就绪中</p>
+   */
+  Status?: string
+  /**
+   * <p>资源规格（查询时回显用户创建/修改时的资源选择）。公有云场景展示：ChargeType / Zone / ResourceSupplyAttribute；内网版场景展示：QueueId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceSpec?: SmartRouterResourceSpec
+  /**
+   * <p>业务状态（组件级计费状态，Gateway/Scheduler 独立判定）：Billing 计费中 / Normal 正常（未计费或已停止计费）/ WhitelistUsing 白名单使用中（免计费）</p>
+   */
+  BusinessStatus?: string
+  /**
+   * <p>费用信息（组件级计费明细 JSON 字符串，格式与 Service.BillingInfo 一致，前端可复用同一渲染逻辑）</p>
+   */
+  BillingInfo?: string
 }
 
 /**
@@ -9065,7 +9244,7 @@ export interface StopTrainingTaskRequest {
    */
   Id: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }

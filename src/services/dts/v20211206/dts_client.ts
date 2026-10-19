@@ -198,6 +198,7 @@ import {
   DescribeConsumerGroupsResponse,
   ModifyMigrateRateLimitRequest,
   CompareTableItem,
+  SkipDdlOnError,
   DescribeSyncCompareReportResponse,
   DescribeMigrateGtidCompareReportResponse,
   ConfigureSyncJobResponse,

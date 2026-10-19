@@ -1005,7 +1005,7 @@ export interface DeleteVLPlanRequest {
  */
 export interface ControlDeviceStreamResponse {
   /**
-   * 返回数据
+   * <p>返回数据</p>
    */
   Data?: ControlDeviceStreamData
   /**
@@ -4042,27 +4042,27 @@ export interface BitRateInfo {
  */
 export interface PlayRecordRequest {
   /**
-   * 通道 ID（从查询通道DescribeDeviceChannel接口中获取）
+   * <p>通道 ID（从查询通道DescribeDeviceChannel接口中获取）</p>
    */
   ChannelId: string
   /**
-   * 起始时间
+   * <p>起始时间</p>
    */
   Start: number
   /**
-   *  结束时间
+   * <p>结束时间</p>
    */
   End: number
   /**
-   * 流类型（1:主码流；2:子码流（不可以和 Resolution 同时下发））
+   * <p>流类型（1:主码流；2:子码流（不可以和 Resolution 同时下发））</p>
    */
   StreamType?: number
   /**
-   * 分辨率（1:QCIF；2:CIF； 3:4CIF； 4:D1； 5:720P； 6:1080P/I； 自定义的19201080等等（需设备支持）（不可以和 StreamType 同时下发））
+   * <p>分辨率（1:QCIF；2:CIF； 3:4CIF； 4:D1； 5:720P； 6:1080P/I； 自定义的19201080等等（需设备支持）（不可以和 StreamType 同时下发））</p>
    */
   Resolution?: string
   /**
-   * 是否内网
+   * <p>是否内网</p>
    */
   IsInternal?: boolean
 }
@@ -4180,26 +4180,19 @@ del:预置位删除）
  */
 export interface ControlDeviceStreamRequest {
   /**
-   * 通道 ID（从通道查询接口DescribeDeviceChannel中获取）
+   * <p>通道 ID（从通道查询接口DescribeDeviceChannel中获取）</p>
    */
   ChannelId: string
   /**
-   * 流类型（1:主码流；
-2:子码流（不可以和 Resolution 同时下发））
+   * <p>流类型（1:主码流；<br>2:子码流（不可以和 Resolution 同时下发））</p>
    */
   StreamType?: string
   /**
-   * 分辨率（1:QCIF；
-2:CIF；
-3:4CIF；
-4:D1；
-5:720P；
-6:1080P/I；
-自定义的19201080等等（需设备支持）（不可以和 StreamType 同时下发））
+   * <p>分辨率（1:QCIF；<br>2:CIF；<br>3:4CIF；<br>4:D1；<br>5:720P；<br>6:1080P/I；<br>自定义的19201080等等（需设备支持）（不可以和 StreamType 同时下发））</p>
    */
   Resolution?: string
   /**
-   * 是否内网
+   * <p>是否内网</p>
    */
   IsInternal?: boolean
 }
@@ -4900,7 +4893,7 @@ export interface AddRecordBackupTemplateResponse {
  */
 export interface PlayRecordResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Data?: PlayRecordData
   /**
@@ -4942,9 +4935,13 @@ export interface AddUserDeviceResponse {
  */
 export interface PlayRecordData {
   /**
-   * 录像播放地址
+   * <p>flv录像播放地址</p>
    */
   Flv?: string
+  /**
+   * <p>fmp4录像播放地址</p>
+   */
+  FMp4?: string
 }
 
 /**
@@ -5232,17 +5229,21 @@ export interface CreateVLPlanRequest {
  */
 export interface ControlDeviceStreamData {
   /**
-   * flv 流地址
+   * <p>flv 流地址</p>
    */
   Flv?: string
   /**
-   * hls 流地址
+   * <p>hls 流地址</p>
    */
   Hls?: string
   /**
-   * rtmp 流地址
+   * <p>rtmp 流地址</p>
    */
   Rtmp?: string
+  /**
+   * <p>fmp4地址</p>
+   */
+  FMp4?: string
 }
 
 /**

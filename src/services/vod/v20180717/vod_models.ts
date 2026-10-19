@@ -4420,6 +4420,27 @@ export interface DescribeProcedureTemplatesRequest {
 }
 
 /**
+ * 视频深度估计输出存储配置。
+ */
+export interface VideoDepthEstimationOutputConfig {
+  /**
+   * <p>存储模式。可选值：Temporary（默认，产物临时存储 7 天，不返回 FileId）、Permanent（产物写入当前应用媒资库并返回 FileId）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageMode?: string
+  /**
+   * <p>输出媒资名称，仅 StorageMode 为 Permanent 时生效，不传默认为 depthVideoGenFile。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MediaName?: string
+  /**
+   * <p>输出媒资过期时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>，仅 StorageMode 为 Permanent 时生效。不传表示永不过期。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+}
+
+/**
  * 音视频审核涉及令人反感的信息的任务输入参数类型
  */
 export interface AiReviewPornTaskInput {
@@ -9429,6 +9450,20 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
 }
 
 /**
+ * VideoDepthEstimation返回参数结构体
+ */
+export interface VideoDepthEstimationResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 小程序音视频审核信息
  */
 export interface MediaMiniProgramReviewInfo {
@@ -11788,6 +11823,43 @@ export interface CreateCLSTopicResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * VideoDepthEstimation请求参数结构体
+ */
+export interface VideoDepthEstimationRequest {
+  /**
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
+   */
+  SubAppId?: number
+  /**
+   * 输入视频地址，必填。支持三种形态，按前缀自动识别：
+vod://{FileId} —— 引用当前账号下的 VOD 媒资。要求媒资存在且未处于禁用状态，否则将报参数错误。源文件不受影响。
+http(s)://... —— 公网可下载的视频地址，长度不超过 8182 字符。
+data:{mime};base64,{payload} —— Base64 内联媒体，适合小体积素材。解码后大小上限 20 MB，mime 须为视频容器类型（如 video/mp4、video/quicktime）。
+   */
+  Url?: string
+  /**
+   * 输出存储配置。不传时为临时存储。
+   */
+  OutputConfig?: VideoDepthEstimationOutputConfig
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务完成回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**

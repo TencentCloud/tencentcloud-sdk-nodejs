@@ -3650,7 +3650,7 @@ export interface DescribeAsyncRequestInfoResponse {
  */
 export interface DeleteAccountsResponse {
   /**
-   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+   * <p>异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。</p>
    */
   AsyncRequestId?: string
   /**
@@ -4856,13 +4856,13 @@ export interface CreateDeployGroupRequest {
  */
 export interface DeleteAccountsRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * <p>实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。</p>
    */
   InstanceId: string
   /**
-   * 云数据库账号。
+   * <p>云数据库账号。</p>
    */
-  Accounts: Array<Account>
+  Accounts?: Array<Account>
 }
 
 /**
@@ -4910,15 +4910,15 @@ export interface HistoryJob {
  */
 export interface DescribeAccountsResponse {
   /**
-   * 符合查询条件的账号数量。
+   * <p>符合查询条件的账号数量。</p>
    */
   TotalCount?: number
   /**
-   * 符合查询条件的账号详细信息。
+   * <p>符合查询条件的账号详细信息。</p>
    */
   Items?: Array<AccountInfo>
   /**
-   * 用户可设置实例最大连接数。
+   * <p>用户可设置实例最大连接数。</p>
    */
   MaxUserConnections?: number
   /**
@@ -5564,31 +5564,31 @@ export interface RoVipInfo {
  */
 export interface DescribeAccountsRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * <p>实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。</p>
    */
   InstanceId: string
   /**
-   * 记录偏移量，默认值为0。
+   * <p>记录偏移量，默认值为0。</p>
    */
   Offset?: number
   /**
-   * 单次请求返回的数量，默认值为20，最小值为1，最大值为100。
+   * <p>单次请求返回的数量，默认值为20，最小值为1，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 匹配账号名的正则表达式，规则同 MySQL 官网。
+   * <p>匹配账号名的正则表达式，规则同 MySQL 官网。</p>
    */
   AccountRegexp?: string
   /**
-   * 默认无排序，支持：ASC、DESC、asc、desc
+   * <p>默认无排序，支持：ASC、DESC、asc、desc</p>
    */
   SortBy?: string
   /**
-   * 待排序的时间字段，可选：CreateTime(账号创建时间)、ModifyTime(账号更新时间)、ModifyPasswordTime(密码修改时间)
+   * <p>待排序的时间字段，可选：CreateTime(账号创建时间)、ModifyTime(账号更新时间)、ModifyPasswordTime(密码修改时间)</p>
    */
   OrderBy?: string
   /**
-   * 匹配账号主机地址（Host）的正则表达式，规则同 MySQL 官网
+   * <p>匹配账号主机地址（Host）的正则表达式，规则同 MySQL 官网</p>
    */
   HostRegexp?: string
 }
@@ -6392,11 +6392,11 @@ export interface CreateAccountsRequest {
   /**
    * <p>云数据库账号。</p>
    */
-  Accounts: Array<Account>
+  Accounts?: Array<Account>
   /**
    * <p>新账户的密码。<br>说明：</p><ol><li>在8 ～ 64位字符数以内（推荐12位以上）。</li><li>至少包含其中两项：小写字母 a ~ z 或 大写字母 A ～ Z。数字0 ～ 9。_+-,&amp;=!@#$%^*().|。</li><li>不能包含非法字符。</li></ol>
    */
-  Password: string
+  Password?: string
   /**
    * <p>备注信息。最多支持输入255个字符。</p>
    */

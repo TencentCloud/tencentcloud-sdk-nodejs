@@ -8957,100 +8957,104 @@ export interface CommitIntegrationTaskResponse {
  */
 export interface Apply {
   /**
-   * 申请人id
+   * <p>申请人id</p>
    */
   ApplicantId?: string
   /**
-   * 申请人名称
+   * <p>申请人名称</p>
    */
   ApplicantName?: string
   /**
-   * 审批备注
+   * <p>审批备注</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 审批分类key
+   * <p>审批分类key</p>
    */
   ApproveClassification?: string
   /**
-   * 审批单id
+   * <p>审批单id</p>
    */
   ApproveId?: string
   /**
-   * 审批类型key
+   * <p>审批类型key</p>
    */
   ApproveType?: string
   /**
-   * 申请原因
+   * <p>申请原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 审批时间
+   * <p>审批时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveTime?: string
   /**
-   * 审批分类名称
+   * <p>审批分类名称</p>
    */
   ApproveClassificationName?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 审批类型名称
+   * <p>审批类型名称</p>
    */
   ApproveTypeName?: string
   /**
-   * 审批异常或者失败信息
+   * <p>审批异常或者失败信息</p>
    */
   ErrorMessage?: string
   /**
-   * 申请名称
+   * <p>申请名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplyName?: string
   /**
-   * 审批人id
+   * <p>审批人id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproverId?: string
   /**
-   * 审批人名称
+   * <p>审批人名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproverName?: string
   /**
-   * 审批所属项目
+   * <p>审批所属项目</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveProjectName?: string
   /**
-   * 审批id
+   * <p>审批id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplyId?: string
   /**
-   * 扩展字段
+   * <p>扩展字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadata?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTimestamp?: number
   /**
-   * 审批时间
+   * <p>审批时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveTimestamp?: number
+  /**
+   * <p>审批扩展码</p>
+   */
+  ApproveCode?: string
 }
 
 /**
@@ -14419,7 +14423,7 @@ export interface SearchConditionNew {
  */
 export interface RenewWorkflowSchedulerInfoDsResponse {
   /**
-   * 数据
+   * <p>数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: BatchResultDs
@@ -29459,149 +29463,153 @@ export interface DescribeRuleRequest {
  */
 export interface ModifyTaskInfoDsRequest {
   /**
-   * 项目Id
+   * <p>项目Id</p>
    */
   ProjectId: string
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId: string
   /**
-   * 执行时间，单位分钟，天/周/月/年调度才有。比如天调度，每天的02:00点执行一次，delayTime就是120分钟
+   * <p>执行时间，单位分钟，天/周/月/年调度才有。比如天调度，每天的02:00点执行一次，delayTime就是120分钟</p>
    */
   DelayTime?: number
   /**
-   * 启动时间：该字段已废弃，无需填写
+   * <p>启动时间：该字段已废弃，无需填写</p>
    */
   StartupTime?: number
   /**
-   * 自依赖类型  1:有序串行 一次一个 排队  2: 无序串行 一次一个 不排队 3:并行 一次多个；暂不支持其他值
+   * <p>自依赖类型  1:有序串行 一次一个 排队  2: 无序串行 一次一个 不排队 3:并行 一次多个；暂不支持其他值</p>
    */
   SelfDepend?: number
   /**
-   * 生效开始时间，格式 yyyy-MM-dd HH:mm:ss
+   * <p>生效开始时间，格式 yyyy-MM-dd HH:mm:ss</p>
    */
   StartTime?: string
   /**
-   * 生效结束时间，格式 yyyy-MM-dd HH:mm:ss
+   * <p>生效结束时间，格式 yyyy-MM-dd HH:mm:ss</p>
    */
   EndTime?: string
   /**
-   * 调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为 0,3,4。设置该值时，请把CycleStep字段设置为1（如果原始值不为1）。
+   * <p>调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为 0,3,4。设置该值时，请把CycleStep字段设置为1（如果原始值不为1）。</p>
    */
   TaskAction?: string
   /**
-   * 周期类型  0:crontab类型, 1:分钟，2:小时，3:天，4:周，5:月，6:一次性，7:用户驱动，10:弹性周期 周,11:弹性周期 月,12:年,13:即时触发Instant类型，与正常周期调度任务逻辑隔离
+   * <p>周期类型  0:crontab类型, 1:分钟，2:小时，3:天，4:周，5:月，6:一次性，7:用户驱动，10:弹性周期 周,11:弹性周期 月,12:年,13:即时触发Instant类型，与正常周期调度任务逻辑隔离</p>
    */
   CycleType?: number
   /**
-   * 小时和分钟任务才有；分钟任务：5、10、15、20、30，表示每隔5【或其他值】分钟执行一次；小时任务：1、2、3、4、5、6、7、8、9、10、11、12，表示每隔1【或其他值】小时执行一次。该值大于1时，请把TaskAction字段设置为空字符串。
+   * <p>小时和分钟任务才有；分钟任务：5、10、15、20、30，表示每隔5【或其他值】分钟执行一次；小时任务：1、2、3、4、5、6、7、8、9、10、11、12，表示每隔1【或其他值】小时执行一次。该值大于1时，请把TaskAction字段设置为空字符串。</p>
    */
   CycleStep?: number
   /**
-   * cron表达式  周期类型为crontab调度才需要
+   * <p>cron表达式  周期类型为crontab调度才需要</p>
    */
   CrontabExpression?: string
   /**
-   * 执行时间左闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效
+   * <p>执行时间左闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效</p>
    */
   ExecutionStartTime?: string
   /**
-   * 执行时间右闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效
+   * <p>执行时间右闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效</p>
    */
   ExecutionEndTime?: string
   /**
-   * 任务名，该字段废弃，请勿使用该字段重命名任务
+   * <p>任务名，该字段废弃，请勿使用该字段重命名任务</p>
    */
   TaskName?: string
   /**
-   * 失败重试间隔,单位分钟，创建任务的时候已经给了默认值
+   * <p>失败重试间隔,单位分钟，创建任务的时候已经给了默认值</p>
    */
   RetryWait?: number
   /**
-   * 失败重试次数，创建任务的时候已经给了默认值
+   * <p>失败重试次数，创建任务的时候已经给了默认值</p>
    */
   TryLimit?: number
   /**
-   * 是否可重试，0代码不可重试，1代表可以重试；暂不支持其他值
+   * <p>是否可重试，0代码不可重试，1代表可以重试；暂不支持其他值</p>
    */
   Retriable?: number
   /**
-   * 运行优先级，4高 5中 6低；暂不支持其他值
+   * <p>运行优先级，4高 5中 6低；暂不支持其他值</p>
    */
   RunPriority?: number
   /**
-   * 任务的扩展配置
+   * <p>任务的扩展配置</p>
    */
   TaskExt?: Array<TaskExtInfo>
   /**
-   * 执行资源组Id，需要去资源管理服务上创建调度资源组，并且绑定cvm机器
+   * <p>执行资源组Id，需要去资源管理服务上创建调度资源组，并且绑定cvm机器</p>
    */
   ResourceGroup?: string
   /**
-   * 资源池队列名称
+   * <p>资源池队列名称</p>
    */
   YarnQueue?: string
   /**
-   * 资源组下具体执行机，any 表示可以跑在任意一台。
+   * <p>资源组下具体执行机，any 表示可以跑在任意一台。</p>
    */
   BrokerIp?: string
   /**
-   * 责任人，多个责任人请用分号隔开
+   * <p>责任人，多个责任人请用分号隔开</p>
    */
   InCharge?: string
   /**
-   * 任务备注
+   * <p>任务备注</p>
    */
   Notes?: string
   /**
-   * 任务参数
+   * <p>任务参数</p>
    */
   TaskParamInfos?: Array<ParamInfo>
   /**
-   * 源数据源Id
+   * <p>源数据源Id</p>
    */
   SourceServer?: string
   /**
-   * 目标数据源Id
+   * <p>目标数据源Id</p>
    */
   TargetServer?: string
   /**
-   * 是否支持工作流依赖 yes / no 默认 no
+   * <p>是否支持工作流依赖 yes / no 默认 no</p>
    */
   DependencyWorkflow?: string
   /**
-   * 依赖配置,仅可修改上游任务实例配置方法
+   * <p>依赖配置,仅可修改上游任务实例配置方法</p>
    */
   DependencyConfigDTOs?: Array<DependencyConfig>
   /**
-   * 运行耗时超时时间分钟数
+   * <p>运行耗时超时时间分钟数</p>
    */
   ExecutionTTL?: number
   /**
-   * 脚本是否改变
+   * <p>脚本是否改变</p>
    */
   ScriptChange?: boolean
   /**
-   * 任务时区，仅支持整数时区配置
+   * <p>任务时区，仅支持整数时区配置</p>
    */
   ScheduleTimeZone?: string
   /**
-   * 0 正常调度 1 空跑调度；暂不支持其他值
+   * <p>0 正常调度 1 空跑调度；暂不支持其他值</p>
    */
   ScheduleRunType?: number
   /**
-   * 0 并发度达到上限时，本次排队等待 1 并发度达到上限时，本次不执行，直接kill；暂不支持其他值
+   * <p>0 并发度达到上限时，本次排队等待 1 并发度达到上限时，本次不执行，直接kill；暂不支持其他值</p>
    */
   ConcurrentStrategy?: number
   /**
-   * shell任务发布事件
+   * <p>shell任务发布事件</p>
    */
   RegisterDsEventPublisherRequest?: RegisterDsEventPublisherReq
   /**
-   * base64编码后脚本内容
+   * <p>base64编码后脚本内容</p>
    */
   Content?: string
+  /**
+   * <p>分钟任务相位偏移</p>
+   */
+  MinuteOffset?: number
 }
 
 /**
@@ -31531,98 +31539,101 @@ export interface DeleteLinkResponse {
  */
 export interface RenewWorkflowSchedulerInfoDsRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
    */
   WorkflowId: string
   /**
-   * 延迟时间
+   * <p>延迟时间</p>
    */
   DelayTime?: number
   /**
-   * 启动时间
+   * <p>启动时间</p>
    */
   StartupTime?: number
   /**
-   * 任务依赖
+   * <p>任务依赖</p>
    */
   SelfDepend?: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
   /**
-   * 指定运行时间
+   * <p>指定运行时间</p>
    */
   TaskAction?: string
   /**
-   * 调度周期时间单位
+   * <p>调度周期时间单位</p>
    */
   CycleType?: string
   /**
-   * 调度周期
+   * <p>调度周期</p>
    */
   CycleStep?: number
   /**
-   * 执行时间左闭区间
+   * <p>执行时间左闭区间</p>
    */
   ExecutionStartTime?: string
   /**
-   * 执行时间右闭区间
+   * <p>执行时间右闭区间</p>
    */
   ExecutionEndTime?: string
   /**
-   * 任务初始化策略，T_PLUS_1、T_PLUS_0、T_MINUS_1
+   * <p>任务初始化策略，T_PLUS_1、T_PLUS_0、T_MINUS_1</p>
    */
   InstanceInitStrategy?: string
   /**
-   * 工作流依赖，yes or no
+   * <p>工作流依赖，yes or no</p>
    */
   DependencyWorkflow?: string
   /**
-   * CrontabExpression
+   * <p>CrontabExpression</p>
    */
   CrontabExpression?: string
   /**
-   * 0：不修改
-1：将任务的上游依赖配置改为默认值 
+   * <p>0：不修改<br>1：将任务的上游依赖配置改为默认值</p>
    */
   ModifyCycleValue?: string
   /**
-   * 是否开启日历调度 1 开启 0关闭
+   * <p>是否开启日历调度 1 开启 0关闭</p>
    */
   CalendarOpen?: string
   /**
-   * 日历名称
+   * <p>日历名称</p>
    */
   CalendarName?: string
   /**
-   * 日历id
+   * <p>日历id</p>
    */
   CalendarId?: string
   /**
-   * 时区
+   * <p>时区</p>
    */
   ScheduleTimeZone?: string
   /**
-   * 是否自动清理不支持的任务链接
+   * <p>是否自动清理不支持的任务链接</p>
    */
   ClearLink?: boolean
   /**
-   * ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-时间维度
+   * <p>ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-时间维度</p>
    */
   MainCyclicConfig?: string
   /**
-   * ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-实例范围
+   * <p>ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-实例范围</p>
    */
   SubordinateCyclicConfig?: string
+  /**
+   * <p>分钟任务相位偏移</p>
+   */
+  MinuteOffset?: number
 }
 
 /**
@@ -35529,7 +35540,7 @@ export interface WorkflowDsDTO {
  */
 export interface ModifyTaskInfoDsResponse {
   /**
-   * 执行结果
+   * <p>执行结果</p>
    */
   Data?: boolean
   /**

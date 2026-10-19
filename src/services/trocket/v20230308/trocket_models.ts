@@ -361,67 +361,74 @@ Failure 失败
  */
 export interface ConsumeGroupItem {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 消费组名称
+   * <p>消费组名称</p>
    */
   ConsumerGroup?: string
   /**
-   * 是否开启消费
+   * <p>是否开启消费</p>
    */
   ConsumeEnable?: boolean
   /**
-   * 顺序投递：true
-并发投递：false
+   * <p>顺序投递：true<br>并发投递：false</p>
    */
   ConsumeMessageOrderly?: boolean
   /**
-   * 最大重试次数
+   * <p>最大重试次数</p>
    */
   MaxRetryTimes?: number
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 4.x的集群ID
+   * <p>4.x的集群ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterIdV4?: string
   /**
-   * 4.x的命名空间
+   * <p>4.x的命名空间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceV4?: string
   /**
-   * 4.x的消费组名称
+   * <p>4.x的消费组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerGroupV4?: string
   /**
-   * 4.x的完整命名空间
+   * <p>4.x的完整命名空间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FullNamespaceV4?: string
   /**
-   * 订阅的主题个数
+   * <p>订阅的主题个数</p>
    */
   SubscribeTopicNum?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
-   * 绑定的标签列表
+   * <p>绑定的标签列表</p>
    */
   TagList?: Array<Tag>
   /**
-   * 重试策略
+   * <p>重试策略</p>
    */
   RetryPolicy?: RetryPolicy
+  /**
+   * <p>消费模式，枚举值如下：</p><ul><li>CLUSTERING：集群/广播消费</li><li>LITE：LiteTopic 消费</li></ul>
+   */
+  ConsumeModel?: string
+  /**
+   * <p>自定义的死信Topic名称</p>
+   */
+  DeadLetterTargetTopic?: string
 }
 
 /**
@@ -896,6 +903,10 @@ export interface DescribeConsumerGroupResponse {
    */
   LiteTopic?: string
   /**
+   * <p>自定义死信Topic</p>
+   */
+  DeadLetterTargetTopic?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1192,21 +1203,25 @@ export interface SendMessageRequest {
    */
   Topic: string
   /**
-   * 消息内容
+   * <p>消息内容</p>
    */
   MsgBody: string
   /**
-   * 消息Key
+   * <p>消息Key</p>
    */
   MsgKey?: string
   /**
-   * 消息Tag
+   * <p>消息Tag</p>
    */
   MsgTag?: string
   /**
-   * 轻量主题
+   * <p>轻量主题</p>
    */
   LiteTopic?: string
+  /**
+   * <p>指定队列优先级</p>
+   */
+  Priority?: number
 }
 
 /**
@@ -1427,6 +1442,10 @@ export interface CreateConsumerGroupRequest {
    * <p>轻量主题</p>
    */
   LiteTopic?: string
+  /**
+   * <p>自定义死信 Topic</p><p>非必选，死信消息默认投递到系统死信 Topic</p>
+   */
+  DeadLetterTargetTopic?: string
 }
 
 /**
@@ -1762,6 +1781,10 @@ export interface DescribeTopicResponse {
    */
   TopicType?: string
   /**
+   * <p>队列数量</p>
+   */
+  QueueNum?: number
+  /**
    * <p>备注</p>
    */
   Remark?: string
@@ -1994,37 +2017,31 @@ export interface CreateTopicRequest {
    */
   Topic: string
   /**
-   * 主题类型，枚举值如下：
-
-- NORMAL: 普通消息
-- FIFO: 顺序消息
-- DELAY: 延时消息
-- TRANSACTION: 事务消息
-- LITE: 轻量消息
+   * <p>主题类型</p><p>枚举值：</p><ul><li>NORMAL： 普通消息</li><li>FIFO： 顺序消息</li><li>DELAY： 延迟消息</li><li>TRANSACTION： 事务消息</li><li>LITE： 轻量消息</li><li>PRIORITY： 优先级消息</li></ul>
    */
   TopicType: string
   /**
-   * 队列数量，取值范围3～16
+   * <p>队列数量，取值范围3～16</p>
    */
   QueueNum?: number
   /**
-   * 备注信息，最多 128 个字符
+   * <p>备注信息，最多 128 个字符</p>
    */
   Remark?: string
   /**
-   * 消息保留时长（单位：小时）
+   * <p>消息保留时长（单位：小时）</p>
    */
   MsgTTL?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   TagList?: Array<Tag>
   /**
-   * 是否过期自动删除（仅针对轻量主题类型）
+   * <p>是否过期自动删除（仅针对轻量主题类型）</p>
    */
   AutoExpireDelete?: boolean
   /**
-   * 过期时间，单位：秒（仅针对轻量主题类型）
+   * <p>过期时间，单位：秒（仅针对轻量主题类型）</p>
    */
   AutoExpireTime?: number
 }
@@ -2472,6 +2489,14 @@ export interface DescribeMessageTraceRequest {
    * <p>是否是延时消息，默认为false</p>
    */
   QueryDelayMessage?: boolean
+  /**
+   * <p>是否为重试消息</p>
+   */
+  QueryRetryMessage?: boolean
+  /**
+   * <p>查询重试消息时，需要指定具体的消费组名称</p>
+   */
+  GroupId?: string
 }
 
 /**
@@ -2489,11 +2514,11 @@ export interface DeleteSmoothMigrationTaskResponse {
  */
 export interface CreateTopicResponse {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   InstanceId?: string
   /**
-   * 主题名
+   * <p>主题名</p>
    */
   Topic?: string
   /**
@@ -2755,12 +2780,11 @@ export interface ModifyConsumerGroupRequest {
    */
   InstanceId: string
   /**
-   * 是否开启消费
+   * <p>是否开启消费</p>
    */
   ConsumeEnable: boolean
   /**
-   * 顺序投递：true
-并发投递：false
+   * <p>顺序投递：true<br>并发投递：false</p>
    */
   ConsumeMessageOrderly: boolean
   /**
@@ -2768,17 +2792,21 @@ export interface ModifyConsumerGroupRequest {
    */
   ConsumerGroup?: string
   /**
-   * 最大重试次数，取值范围0～1000
+   * <p>最大重试次数，取值范围0～1000</p>
    */
   MaxRetryTimes?: number
   /**
-   * 备注信息，最多 128 个字符
+   * <p>备注信息，最多 128 个字符</p>
    */
   Remark?: string
   /**
-   * 重试策略
+   * <p>重试策略</p>
    */
   RetryPolicy?: RetryPolicy
+  /**
+   * <p>自定义死信Topic</p>
+   */
+  DeadLetterTargetTopic?: string
 }
 
 /**
@@ -2842,57 +2870,63 @@ export interface DescribeConsumerGroupListRequest {
  */
 export interface TopicItem {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 主题名称
+   * <p>主题名称</p>
    */
   Topic?: string
   /**
-   * 主题类型
-NORMAL:普通消息,
-FIFO:顺序消息,
-DELAY:延时消息,
-TRANSACTION:事务消息
+   * <p>主题类型<br>NORMAL:普通消息,<br>FIFO:顺序消息,<br>DELAY:延时消息,<br>TRANSACTION:事务消息</p>
    */
   TopicType?: string
   /**
-   * 队列数量
+   * <p>队列数量</p>
    */
   QueueNum?: number
   /**
-   * 备注信息
+   * <p>备注信息</p>
    */
   Remark?: string
   /**
-   * 4.x的集群id
+   * <p>4.x的集群id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterIdV4?: string
   /**
-   * 4.x的命名空间
+   * <p>4.x的命名空间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceV4?: string
   /**
-   * 4.x的主题名称
+   * <p>4.x的主题名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicV4?: string
   /**
-   * 4.x的完整命名空间
+   * <p>4.x的完整命名空间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FullNamespaceV4?: string
   /**
-   * 消息保留时长
+   * <p>消息保留时长</p>
    */
   MsgTTL?: number
   /**
-   * 绑定的标签列表
+   * <p>绑定的标签列表</p>
    */
   TagList?: Array<Tag>
+  /**
+   * <p>LITE 类型 Topic 专用：是否开启自动过期删除</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoExpireDelete?: boolean
+  /**
+   * <p>LITE 类型 Topic 专用：自动过期时间</p><p>单位：分钟</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoExpireTime?: number
 }
 
 /**
@@ -3192,7 +3226,7 @@ export interface DeleteConsumerLabelsRequest {
  */
 export interface SendMessageResponse {
   /**
-   * 消息ID
+   * <p>消息ID</p>
    */
   MsgId?: string
   /**

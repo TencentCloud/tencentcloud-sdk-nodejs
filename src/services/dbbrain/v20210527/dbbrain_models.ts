@@ -2477,25 +2477,105 @@ export interface AuditLogFile {
 }
 
 /**
- * DescribeRedisCommandCostStatistics请求参数结构体
+ * DescribeBlockingLogs请求参数结构体
  */
-export interface DescribeRedisCommandCostStatisticsRequest {
+export interface DescribeBlockingLogsRequest {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * <p>实例ID。</p>
    */
   InstanceId: string
   /**
-   * 开始时间，如“2025-03-17T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。
+   * <p>服务产品类型，固定为sqlserver。</p>
+   */
+  Product: string
+  /**
+   * <p>查询起始时间（服务端时区 UTC+8），格式：yyyy-MM-dd HH:mm:ss。必须在最近 30 天内，否则返回 InvalidParameterValue。</p>
    */
   StartTime: string
   /**
-   * 结束时间，如“2025-03-17T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。
+   * <p>查询结束时间（服务端时区 UTC+8），格式：yyyy-MM-dd HH:mm:ss，需大于 StartTime。单次查询跨度必须 ≤ 1 天（24 小时），否则返回 InvalidParameterValue。大跨度趋势场景请改用 DescribeBlockingTrend。</p>
    */
   EndTime: string
   /**
-   * 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。
+   * <p>根因过滤（可选），支持：C1_LONG_QUERY=长事务查询持锁；C2_SLEEP_UNCOMMITTED=sleeping会话持未提交事务；C3_LOCK_ESCALATION=锁升级；C4_HIGH_CONCURRENCY=高并发争用；C5_INDEX_MISS=索引缺失导致大范围锁；C6_ORPHAN_TRAN=孤儿事务。</p>
    */
-  Product: string
+  RootCause?: string
+  /**
+   * <p>头SQL（blocker）MD5过滤（可选）。</p>
+   */
+  BlockingSqlMd5?: string
+  /**
+   * <p>被阻塞SQL（blocked）MD5过滤（可选）。</p>
+   */
+  BlockedSqlMd5?: string
+  /**
+   * <p>数据库名列表过滤（可选），按阻塞事件所在数据库名过滤；列表内任意匹配即命中，最多50项。多库实例场景下推荐用本字段定位阻塞所在库。</p>
+   */
+  DatabaseNames?: Array<string>
+  /**
+   * <p>头阻塞会话 ID（SPID）列表过滤（可选），列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockingSessionIds?: Array<number | bigint>
+  /**
+   * <p>被阻塞会话 ID（SPID）列表过滤（可选），列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockedSessionIds?: Array<number | bigint>
+  /**
+   * <p>头阻塞登录名列表过滤（可选），列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockingLoginNames?: Array<string>
+  /**
+   * <p>被阻塞登录名列表过滤（可选），列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockedLoginNames?: Array<string>
+  /**
+   * <p>头阻塞客户端主机列表过滤（可选），列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockingHostNames?: Array<string>
+  /**
+   * <p>被阻塞客户端主机列表过滤（可选），列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockedHostNames?: Array<string>
+  /**
+   * <p>头阻塞客户端应用列表过滤（可选），列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockingClientApps?: Array<string>
+  /**
+   * <p>被阻塞客户端应用列表过滤（可选），列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockedClientApps?: Array<string>
+  /**
+   * <p>被阻塞方等待锁模式列表过滤（可选），SQL Server原生lock_mode枚举，常见取值（非穷尽）：S、U、X、IS、IU、IX、SIU、SIX、UIX、Sch-S、Sch-M；serializable隔离级别下还可能出现RangeS-S / RangeS-U / RangeX-X / RangeI-N系列。列表内任意匹配即命中，最多50项。</p>
+   */
+  BlockedLockModes?: Array<string>
+  /**
+   * <p>被阻塞方等待时长下限（毫秒，含），用于筛选慢阻塞（可选）。</p>
+   */
+  DurationMsMin?: number
+  /**
+   * <p>被阻塞方等待时长上限（毫秒，含），用于筛选阻塞时长不超过某值的记录（可选）。</p>
+   */
+  DurationMsMax?: number
+  /**
+   * <p>排序字段（可选），支持reportTime（按明细行上报时间，默认）/ durationMs（按链路阻塞时长）/ blockedWaitTimeMs（按被阻塞方等待时长）/ blockingWaitTimeMs（按头阻塞自身等待时长）。</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>排序方向（可选），支持desc（默认，倒序）/ asc（正序）。</p>
+   */
+  OrderDirection?: string
+  /**
+   * <p>返回条数上限，默认20，最大100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量，默认 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>是否返回原始 blocked_process_report XML（可选，默认 false 不返回）。该字段体积较大（KB 级起步，含完整执行计划/等待链/死锁明细等原始上下文），常规列表展示不需要，仅在需要查看完整 XML 现场（如线下诊断、离线分析）时将本参数置为 true 按需拉取。</p>
+   */
+  WithXml?: boolean
 }
 
 /**
@@ -4236,30 +4316,209 @@ export interface DescribeSqlTemplateResponse {
 }
 
 /**
- * 获取健康得分返回的详情。
+ * 阻塞日志扁平明细行：一次blocked_process_report（blocker→blocked边）在某一次monitorLoop内被lock monitor捕获的瞬时数据。
  */
-export interface HealthScoreInfo {
+export interface BlockingLogItem {
   /**
-   * 异常详情。
+   * <p>本条明细行上报时间（事件时间，__time；时区UTC+8），格式：yyyy-MM-dd HH:mm:ss。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IssueTypes?: Array<IssueTypeInfo>
+  ReportTime?: string
   /**
-   * 异常事件总数。
+   * <p>监控轮次ID（同一实例内唯一标识一次采集快照，可透传至DescribeBlockingLockTree下钻查看完整阻塞树）。文本承载数值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventsTotalCount?: number
+  MonitorLoop?: string
   /**
-   * 健康得分。
+   * <p>被阻塞方的等待时长（毫秒）。来源：Kafka顶层Fields.duration÷1000（微秒→毫秒），来自SQL Server内核XEvent事件的duration字段。与BlockedWaitTimeMs来源不同但通常非常接近（非严格相等，两者为同一事件的两个独立快照）；仅为OrderBy=durationMs排序别名保留。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  HealthScore?: number
+  DurationMs?: number
   /**
-   * 健康等级, 如："HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"。
-其中：
-HEALTH - 健康
-SUB_HEALTH - 亚健康
-RISK - 危险
-HIGH_RISK - 高危
+   * <p>阻塞发生所在的数据库名称。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  HealthLevel?: string
+  DatabaseName?: string
+  /**
+   * <p>阻塞发生所在的数据库 ID（Fields.database_id，对应 SQL Server sys.databases.database_id）。可配合 DatabaseName 使用：ID 稳定、Name 易读；Name 在重命名场景下会变化，ID 则不会。采样为空时该字段不返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseId?: number
+  /**
+   * <p>阻塞锁资源归属的对象 ID（Fields.object_id，对应 SQL Server sys.objects.object_id）。标识具体的表/视图/存储过程等用户对象；可结合 sys.objects 元数据查询对象名。采样为空时该字段不返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectId?: number
+  /**
+   * <p>阻塞锁资源归属的索引 ID（Fields.index_id，对应 SQL Server sys.indexes.index_id）。常见取值：0=堆（无聚集索引）、1=聚集索引、&gt;1=非聚集索引；&gt;250 通常为系统内部索引（如全文/XML/空间索引），诊断时按&quot;是否为用户索引&quot;判断即可。采样为空时该字段不返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexId?: number
+  /**
+   * <p>根因分类（与枚举BlockingRootCause一一对应）。取值：C1_LONG_QUERY=长查询正常运行阻塞；C2_SLEEPING_UNCOMMITTED=休眠会话且存在未提交事务；C3_CLIENT_NOT_FETCHING=客户端未取完结果行；C4_APP_DEADLOCK=应用层分布式死锁；C5_ROLLBACK=会话正在rollback；C6_ORPHAN_TRANSACTION=孤立事务；UNKNOWN=未识别。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootCause?: string
+  /**
+   * <p>根因分类的可读中文描述（服务端已完成中文化，前端可直接展示；与RootCause代号一一对应，例如C1_LONG_QUERY→&quot;长查询正常运行阻塞，考虑优化SQL/索引&quot;，未识别或空值统一返回&quot;未识别&quot;）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootCauseDesc?: string
+  /**
+   * <p>头阻塞会话 ID（对应 SQL Server sys.dm_exec_sessions.session_id，即 SPID）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingSessionId?: number
+  /**
+   * <p>头阻塞会话数据库用户。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingLoginName?: string
+  /**
+   * <p>头阻塞会话客户端主机。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingHostName?: string
+  /**
+   * <p>头阻塞会话客户端应用名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingClientApp?: string
+  /**
+   * <p>头阻塞会话运行时状态（SQL Server sys.dm_exec_sessions.status文本），常见取值：running / sleeping / suspended / background。sleeping+trancount&gt;0是C2_SLEEPING_UNCOMMITTED（休眠会话持未提交事务）的直接证据。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingStatus?: string
+  /**
+   * <p>头阻塞会话事务隔离级别（SQL Server原生取值：read uncommitted / read committed / repeatable read / serializable / snapshot）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingIsolationLevel?: string
+  /**
+   * <p>头阻塞会话当前显式事务名（XEvent transactionname，如user_transaction / implicit_transaction）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingTransactionName?: string
+  /**
+   * <p>头阻塞会话当前显式事务嵌套层数（XEvent trancount）。&gt;0表示持有显式事务；与BlockingStatus=sleeping组合是C2_SLEEPING_UNCOMMITTED（休眠会话持未提交事务）的直接证据。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingTranCount?: number
+  /**
+   * <p>头阻塞会话显式事务BEGIN TRAN时刻（XEvent lasttranstarted，SQL Server服务端本地时区的ISO 8601字符串，无时区后缀）。该字段代表事务持锁开始时刻：ReportTime-BlockingLastTranStarted≈事务持锁时长，用于C1_LONG_QUERY / C6_ORPHAN_TRANSACTION根因复核；在多语句事务场景下比lastbatchstarted更稳定（不会被每个新batch刷新）。值为空表示XML未提供该属性（blocking-process侧常见）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingLastTranStarted?: string
+  /**
+   * <p>头阻塞会话正在执行的SQL原文（对应DBCC INPUTBUFFER返回内容，单条最长16KB，超长截断）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingInputBuffer?: string
+  /**
+   * <p>头阻塞SQL归一化模板。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingSqlTemplate?: string
+  /**
+   * <p>头阻塞SQL模板MD5。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingSqlMd5?: string
+  /**
+   * <p>头阻塞会话持有或请求的锁模式（SQL Server原生lock_mode枚举；blocker通常不处于等锁状态，该字段多为空）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingLockMode?: string
+  /**
+   * <p>头阻塞会话自身的等待时长（毫秒）。多数场景为0。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingWaitTimeMs?: number
+  /**
+   * <p>被阻塞会话 ID（对应 SQL Server sys.dm_exec_sessions.session_id，即 SPID）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedSessionId?: number
+  /**
+   * <p>被阻塞会话事务ID（SQL Server transaction_id，bigint）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedTransactionId?: number
+  /**
+   * <p>被阻塞会话等待时长（毫秒）。来源：XML &lt;blocked-process&gt;&lt;process waittime&gt;属性（来自ys.dm_os_waiting_tasks.wait_duration_ms在report生成瞬间的快照）。与DurationMs来源不同但通常非常接近；仅为OrderBy=blockedWaitTimeMs排序别名保留。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedWaitTimeMs?: number
+  /**
+   * <p>被阻塞会话正在等待的锁模式（SQL Server原生lock_mode枚举，常见取值：S、U、X、IS、IU、IX、SIU、SIX、UIX、Sch-S、Sch-M）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedLockMode?: string
+  /**
+   * <p>被阻塞会话等待资源。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedWaitResource?: string
+  /**
+   * <p>被阻塞会话数据库用户。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedLoginName?: string
+  /**
+   * <p>被阻塞会话客户端主机。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedHostName?: string
+  /**
+   * <p>被阻塞会话客户端应用名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedClientApp?: string
+  /**
+   * <p>被阻塞会话运行时状态（SQL Server sys.dm_exec_sessions.status文本），常见取值：running / sleeping / suspended / background。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedStatus?: string
+  /**
+   * <p>被阻塞会话事务隔离级别（SQL Server原生取值：read uncommitted / read committed / repeatable read / serializable / snapshot）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedIsolationLevel?: string
+  /**
+   * <p>被阻塞会话当前显式事务名（XEvent transactionname）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedTransactionName?: string
+  /**
+   * <p>被阻塞会话当前显式事务嵌套层数（XEvent trancount）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedTranCount?: number
+  /**
+   * <p>被阻塞会话显式事务BEGIN TRAN时刻（XEvent lasttranstarted，SQL Server服务端本地时区的ISO 8601字符串，无时区后缀）。该字段代表事务开始时刻，在多语句事务场景下比lastbatchstarted更稳定。咨视值1900-01-01T00:00:00表示未知。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedLastTranStarted?: string
+  /**
+   * <p>被阻塞会话正在执行的SQL原文（对应DBCC INPUTBUFFER返回内容，单条最长16KB，超长截断）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedInputBuffer?: string
+  /**
+   * <p>被阻塞SQL归一化模板。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedSqlTemplate?: string
+  /**
+   * <p>被阻塞SQL模板MD5。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedSqlMd5?: string
+  /**
+   * <p>被阻塞方 blocked_process_report 原始 XML 文本（含完整执行计划、等待链、死锁明细等原始现场；字段体积较大，KB 级起步）。仅当请求参数 WithXml=true 时才返回；默认 false 时该字段省略，不出现在响应体中。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedProcessXml?: string
 }
 
 /**
@@ -4360,6 +4619,33 @@ export interface DescribeDBDiagEventRequest {
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * 获取健康得分返回的详情。
+ */
+export interface HealthScoreInfo {
+  /**
+   * 异常详情。
+   */
+  IssueTypes?: Array<IssueTypeInfo>
+  /**
+   * 异常事件总数。
+   */
+  EventsTotalCount?: number
+  /**
+   * 健康得分。
+   */
+  HealthScore?: number
+  /**
+   * 健康等级, 如："HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"。
+其中：
+HEALTH - 健康
+SUB_HEALTH - 亚健康
+RISK - 危险
+HIGH_RISK - 高危
+   */
+  HealthLevel?: string
 }
 
 /**
@@ -5411,6 +5697,24 @@ export interface DescribeAlarmTemplateResponse {
    * 模板总数
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBlockingLogs返回参数结构体
+ */
+export interface DescribeBlockingLogsResponse {
+  /**
+   * <p>满足条件的阻塞明细总条数。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>阻塞明细行列表（按OrderBy / OrderDirection排序）。</p>
+   */
+  Items?: Array<BlockingLogItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6717,6 +7021,28 @@ export interface DescribeProxyProcessStatisticsRequest {
 - ASC：升序
    */
   OrderDirection?: string
+}
+
+/**
+ * DescribeRedisCommandCostStatistics请求参数结构体
+ */
+export interface DescribeRedisCommandCostStatisticsRequest {
+  /**
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   */
+  InstanceId: string
+  /**
+   * 开始时间，如“2025-03-17T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。
+   */
+  StartTime: string
+  /**
+   * 结束时间，如“2025-03-17T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。
+   */
+  EndTime: string
+  /**
+   * 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。
+   */
+  Product: string
 }
 
 /**

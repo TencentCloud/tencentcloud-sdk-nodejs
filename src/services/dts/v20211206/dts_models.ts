@@ -2439,6 +2439,10 @@ export interface MigrateOption {
    * <p>迁移配置阶段限速相关参数</p>
    */
   RateLimit?: RateLimit
+  /**
+   * <p>跳过报错的DDL策略</p>
+   */
+  SkipDdlOnError?: SkipDdlOnError
 }
 
 /**
@@ -3266,6 +3270,10 @@ export interface Options {
    * <p>同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持</p>
    */
   FilterCheckpoint?: boolean
+  /**
+   * <p>跳过报错的DDL策略</p>
+   */
+  SkipDdlOnError?: SkipDdlOnError
 }
 
 /**
@@ -4085,6 +4093,20 @@ export interface CompareTableItem {
    * 时区选择。如 "+08:00", "-08:00", "+00:00"（空值等价于"+00:00"）
    */
   FilterTimeZone?: string
+}
+
+/**
+ * 跳过报错DDL的策略
+ */
+export interface SkipDdlOnError {
+  /**
+   * <p>按表名跳过，支持精确 &quot;db.tbl&quot;、库通配 &quot;db.*&quot;、表通配 &quot;<em>.tbl&quot;、全通配 &quot;</em>&quot;</p>
+   */
+  Tables?: Array<string>
+  /**
+   * <p>按 MySQL 错误码（1~65535）跳过</p><p>取值范围：[1, 65535]</p>
+   */
+  ErrorCodes?: Array<number | bigint>
 }
 
 /**

@@ -3059,6 +3059,11 @@ export interface TemplateOverrides {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableMultiZone?: boolean
+  /**
+   * <p>是否开启按作业负载自动伸缩。开启后扩容数量由队列中排队作业的实际资源需求（节点数 / GPU 卡数）决定；关闭（默认）时按 DesiredCapacity 配额收敛。仅支持 Slurm 集群与同构队列，由服务端校验。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableJobLoadAutoscaling?: boolean
 }
 
 /**

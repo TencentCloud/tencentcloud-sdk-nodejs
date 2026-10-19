@@ -12121,51 +12121,51 @@ export interface CreateBackupRequest {
  */
 export interface RedoLogItem {
   /**
-   * 文件名
+   * <p>文件名</p>
    */
   FileName?: string
   /**
-   * 文件大小
+   * <p>文件大小</p>
    */
   FileSize?: number
   /**
-   * 备份时间
+   * <p>备份时间</p>
    */
   BackupTime?: string
   /**
-   * redoLogId
+   * <p>redoLogId</p>
    */
   RedoLogId?: number
   /**
-   * 跨地域信息
+   * <p>跨地域信息</p>
    */
   RedoCrossRegions?: Array<BackupRegionAndIds>
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: string
   /**
-   * 完成时间
+   * <p>完成时间</p>
    */
   FinishTime?: string
   /**
-   * 保险箱信息
+   * <p>保险箱信息</p>
    */
   VaultInfos?: Array<VaultInfo>
   /**
-   * 备份投递状态
+   * <p>备份投递状态</p>
    */
   CopyStatus?: string
   /**
-   * 加密秘钥key
+   * <p>加密秘钥key</p>
    */
   EncryptKeyId?: string
   /**
-   * 加密秘钥地域
+   * <p>加密秘钥地域</p>
    */
   EncryptRegion?: string
 }

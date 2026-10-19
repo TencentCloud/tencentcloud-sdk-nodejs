@@ -1158,6 +1158,16 @@ it("vod.v20180717.DescribeCLSTopics", async function () {
     }
 })
 
+it("vod.v20180717.VideoDepthEstimation", async function () {
+    try {
+       const data = await client.VideoDepthEstimation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateCLSTopic", async function () {
     try {
        const data = await client.CreateCLSTopic({})

@@ -2697,6 +2697,24 @@ export interface CreateRiskCenterScanTaskRequest {
 }
 
 /**
+ * 基线策略简要信息
+ */
+export interface BaselinePolicyBrief {
+  /**
+   * <p>基线策略 ID。</p>
+   */
+  ID?: number
+  /**
+   * <p>基线策略名称。</p>
+   */
+  PolicyName?: string
+  /**
+   * <p>是否为系统内置策略。true 是，false 否（用户自定义策略）。</p>
+   */
+  IsSystem?: boolean
+}
+
+/**
  * ModifyEDRRuleStatus返回参数结构体
  */
 export interface ModifyEDRRuleStatusResponse {
@@ -6855,6 +6873,10 @@ export interface ExportEDRRulesRequest {
    * <p>排序列，ModifyTime</p>
    */
   By?: string
+  /**
+   * <p>文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或）</p>
+   */
+  FileOperationRules?: RuleContentFileOperation
 }
 
 /**
@@ -14786,7 +14808,16 @@ export interface DescribeCosIdentifyFileListRequest {
 /**
  * DescribeCSCPayInfo请求参数结构体
  */
-export type DescribeCSCPayInfoRequest = null
+export interface DescribeCSCPayInfoRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>是否返回配额已使用量。默认为 false：不采集用量，QuotaList 中的 QuotaUsed 恒为 0；需要展示已用量的调用方显式传 true。只关心订单状态、到期时间或配额购买数量的调用方无需传入</p>
+   */
+  NeedQuotaUsed?: boolean
+}
 
 /**
  * DescribeHostVulItemVPRInfo返回参数结构体
@@ -15155,6 +15186,10 @@ export interface DescribeCSCPayInfoResponse {
    * <p>用户计费信息，Key为L4</p>
    */
   QuotaList?: Array<OrderQuotaInfo>
+  /**
+   * <p>配额用量查询失败提示。仅请求参数 NeedQuotaUsed 为 true 时可能非空：此时订单信息仍正常返回，QuotaList 中的 QuotaUsed 恒为 0；查询正常或未请求用量时为空字符串</p>
+   */
+  QuotaUsedError?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25785,6 +25820,10 @@ export interface EDRRule {
    * <p>安全中心标签</p>
    */
   TagItems?: Array<EDRRuleTagItem>
+  /**
+   * <p>文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或）</p>
+   */
+  FileOperationRules?: RuleContentFileOperation
 }
 
 /**
@@ -30821,6 +30860,10 @@ export interface BaselineAggregatedPolicy {
    * <p>该基线类别是否被扫描过</p>
    */
   Scanned?: boolean
+  /**
+   * <p>自定义策略情况下策略的appid</p>
+   */
+  AppID?: number
 }
 
 /**
@@ -32519,20 +32562,21 @@ export interface DspmIdentifyComplianceRuleRelation {
  */
 export interface OrderQuotaInfo {
   /**
-   * 配额键
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>配额键</p>
    */
   QuotaKey?: string
   /**
-   * 配额总量
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>配额总量</p>
    */
   QuotaNum?: number
   /**
-   * 配额已使用量
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>配额已使用量（含共享给其他账号的消耗）。仅请求参数 NeedQuotaUsed 为 true 时采集；未传或为 false 时恒为 0；用量查询失败时恒为 0，错误提示见响应 QuotaUsedError 字段</p>
    */
   QuotaUsed?: number
+  /**
+   * <p>赠送配额。仅 CSPM 存在赠送额度，其余计费项为 0</p>
+   */
+  QuotaGranted?: number
 }
 
 /**
@@ -39431,6 +39475,28 @@ export interface DescribeSubUserInfoResponse {
 }
 
 /**
+ * EDR文件操作规则（ContentType=file_operation，高危命令聚合降噪新增）
+ */
+export interface RuleContentFileOperation {
+  /**
+   * <p>当前进程命令行信息（可选，未配置时该维度不参与匹配）</p>
+   */
+  Process?: RuleContentProcessInfo
+  /**
+   * <p>父进程命令行信息（可选，未配置时该维度不参与匹配）</p>
+   */
+  ParentProcess?: RuleContentProcessInfo
+  /**
+   * <p>目标文件路径（正则）</p>
+   */
+  FilePath?: string
+  /**
+   * <p>动作列表（多选为或关系）：read-读 write-写 rename-重命名 delete-删除 truncate-清空内容</p>
+   */
+  FileActions?: Array<string>
+}
+
+/**
  * DescribeDomainAssets返回参数结构体
  */
 export interface DescribeDomainAssetsResponse {
@@ -43773,6 +43839,10 @@ export interface LicenseStatusItem {
    * <p>最晚到期时间（格式：2006-01-02 15:04:05）</p>
    */
   EndTime?: string
+  /**
+   * <p>订单类型</p><p>枚举值：</p><ul><li>PURCHASED： 正式订单</li><li>TRIAL： 试用订单</li></ul>
+   */
+  OrderType?: string
 }
 
 /**
@@ -44055,6 +44125,10 @@ export interface WebhookNotifyItem {
    * <p>处理状态等</p>
    */
   Items?: Array<string>
+  /**
+   * <p>可选项</p>
+   */
+  Options?: Array<string>
 }
 
 /**
@@ -44932,6 +45006,10 @@ export interface ModifyEDRRuleRequest {
    * <p>容器条件匹配</p>
    */
   ConditionMatches?: Array<ConditionMatch>
+  /**
+   * <p>文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或）</p>
+   */
+  FileOperationRules?: RuleContentFileOperation
 }
 
 /**
@@ -50093,6 +50171,10 @@ export interface BaselineMainTask {
    * <p>子任务总数</p>
    */
   ScanTotalCount?: number
+  /**
+   * <p>检测的策略列表</p>
+   */
+  PolicyList?: Array<BaselinePolicyBrief>
 }
 
 /**
@@ -52288,6 +52370,10 @@ export interface DescribeEDRRuleListRequest {
    * <p>可选排序列: [ModifyTime]</p>
    */
   By?: string
+  /**
+   * <p>文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或）</p>
+   */
+  FileOperationRules?: RuleContentFileOperation
 }
 
 /**

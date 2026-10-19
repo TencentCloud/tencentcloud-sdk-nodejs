@@ -85,8 +85,10 @@ import {
   IntentAchievementInfo,
   DeleteCategoryResponse,
   SearchResultPayload,
+  MCPResourceContents,
   DescribeUsageDetailListResponse,
   DescribeAppTriggerResponse,
+  CallMCPToolRequest,
   ModifyVariableResponse,
   DescribeKBSummaryListRequest,
   AgentSkillConfig,
@@ -104,7 +106,6 @@ import {
   MsgRecordResult,
   CreateVariableResponse,
   AppShareURLInfo,
-  ReleaseSkillResponse,
   ModelProperty,
   DocParseConfig,
   CreateReleaseResponse,
@@ -115,11 +116,12 @@ import {
   DescribeConcurrencyLimitDetailListRequest,
   DescribeNodeRunDetailResponse,
   MCPPluginConfig,
+  ReadMCPResourceRequest,
   DescribeAppStatisticsOverviewRequest,
   CreateMsgRecordCategoryResponse,
   CreateQAListRequest,
   DeleteVariableRequest,
-  CreateAppTriggerRequest,
+  ReleaseSkillResponse,
   AppTriggerInstance,
   ModifyDocListRequest,
   DescribeWorkflowRunResponse,
@@ -133,6 +135,7 @@ import {
   CopyAppResponse,
   AgentPluginCredentialConfig,
   SaveWorkflowToolNodeOutputRequest,
+  CallMCPToolResponse,
   ComplexBillingItem,
   BackgroundImage,
   ModifyConflictQAResponse,
@@ -339,6 +342,7 @@ import {
   CreateAppResponse,
   KBModifyExtendFields,
   QARetrievalConfig,
+  ESConfig,
   AuditLogMetaField,
   CreateQAListResponse,
   ModelDeveloperBasic,
@@ -363,6 +367,7 @@ import {
   KBRetrievalConfig,
   SkillDetail,
   DescribePluginSummaryListResponse,
+  ReadMCPResourceResponse,
   AppSubStatusInfo,
   ViewScope,
   CreateConversationRequest,
@@ -531,7 +536,7 @@ import {
   ModifyQAResponse,
   CreateAppRequest,
   DeleteAppResponse,
-  ESConfig,
+  CreateAppTriggerRequest,
   AppTriggerWebhookStatus,
   ResumeAppTriggerResponse,
   AccessKeyParamConfig,
@@ -905,6 +910,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 读取 MCP UI 资源（HTML），供前端 iframe 加载 MCP App 界面
+   */
+  async ReadMCPResource(
+    req: ReadMCPResourceRequest,
+    cb?: (error: string, rep: ReadMCPResourceResponse) => void
+  ): Promise<ReadMCPResourceResponse> {
+    return this.request("ReadMCPResource", req, cb)
+  }
+
+  /**
    * 回滚发布
    */
   async RollbackRelease(
@@ -1205,13 +1220,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量停止正在进行的工作流运行实例。
+   * 用户在 MCP App iframe 内触发的工具调用
    */
-  async StopWorkflowRunList(
-    req: StopWorkflowRunListRequest,
-    cb?: (error: string, rep: StopWorkflowRunListResponse) => void
-  ): Promise<StopWorkflowRunListResponse> {
-    return this.request("StopWorkflowRunList", req, cb)
+  async CallMCPTool(
+    req: CallMCPToolRequest,
+    cb?: (error: string, rep: CallMCPToolResponse) => void
+  ): Promise<CallMCPToolResponse> {
+    return this.request("CallMCPTool", req, cb)
   }
 
   /**
@@ -1252,6 +1267,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAppResponse) => void
   ): Promise<CreateAppResponse> {
     return this.request("CreateApp", req, cb)
+  }
+
+  /**
+   * 批量停止正在进行的工作流运行实例。
+   */
+  async StopWorkflowRunList(
+    req: StopWorkflowRunListRequest,
+    cb?: (error: string, rep: StopWorkflowRunListResponse) => void
+  ): Promise<StopWorkflowRunListResponse> {
+    return this.request("StopWorkflowRunList", req, cb)
   }
 
   /**
