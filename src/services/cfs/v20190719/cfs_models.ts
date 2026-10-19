@@ -1922,9 +1922,13 @@ export interface DeleteDataFlowResponse {
  */
 export interface CreateAccessCertRequest {
   /**
-   * 证书描述，不超过64字符
+   * <p>证书描述，不超过64字符</p>
    */
   CertDesc: string
+  /**
+   * <p>凭证类型</p><p>枚举值：</p><ul><li>ssh： 通用系列文件系统凭证</li><li>gss： Turbo系列文件系统凭证</li></ul><p>默认值：ssh</p>
+   */
+  Type?: string
 }
 
 /**
@@ -3456,7 +3460,7 @@ export interface StopMigrationTaskResponse {
  */
 export interface CreateAccessCertResponse {
   /**
-   * 凭证唯一标识
+   * <p>凭证唯一标识</p>
    */
   CertId?: string
   /**

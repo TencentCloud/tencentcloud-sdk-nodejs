@@ -107,7 +107,7 @@ import {
   SwitchInstanceVipRequest,
   ChangeReplicaToMasterRequest,
   ProxyNodes,
-  ModifyInstanceResponse,
+  DescribeBackupEncryptConfigResponse,
   RedisCommonInstanceList,
   SourceInfo,
   ModifyInstancePasswordPolicyResponse,
@@ -120,6 +120,7 @@ import {
   DescribeProductInfoResponse,
   ModifyInstanceAccountRequest,
   ModifyMaintenanceWindowRequest,
+  SecondLevelBackupMissingTimestamps,
   DescribeParamTemplateInfoRequest,
   DescribeBackupUrlResponse,
   InquiryPriceRenewInstanceResponse,
@@ -165,7 +166,7 @@ import {
   DescribeTaskListRequest,
   ChangeMasterInstanceResponse,
   ModifyInstanceEventRequest,
-  SecondLevelBackupMissingTimestamps,
+  ModifyBackupEncryptResponse,
   DescribeBackupDetailResponse,
   ChangeReplicaToMasterResponse,
   CreateInstancesResponse,
@@ -238,11 +239,13 @@ import {
   DeleteInstanceAccountRequest,
   DescribeInstanceMonitorHotKeyRequest,
   DeleteParamTemplateResponse,
+  ModifyInstanceResponse,
   UpgradeInstanceResponse,
   ResourceBundle,
   ManualBackupInstanceRequest,
   DescribeReplicationGroupResponse,
   ModifyInstancePasswordPolicyRequest,
+  DescribeBackupEncryptConfigRequest,
   ModifyParamTemplateRequest,
   AvailableRegion,
   FailedInstance,
@@ -313,6 +316,7 @@ import {
   ModifyInstanceLogDeliveryRequest,
   ChangeInstanceRoleResponse,
   DescribeGlobalReplicationAreaResponse,
+  ModifyBackupEncryptRequest,
   ZoneCapacityConf,
   ModifyInstanceEventResponse,
   UpgradeInstanceVersionRequest,
@@ -530,13 +534,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyInstanceParams）用于修改 Redis 实例的参数配置。
+   * 本接口（DescribeBackupEncryptConfig）用于查询实例 备份加密相关信息，包括开启状态、加密密钥等。
    */
-  async ModifyInstanceParams(
-    req: ModifyInstanceParamsRequest,
-    cb?: (error: string, rep: ModifyInstanceParamsResponse) => void
-  ): Promise<ModifyInstanceParamsResponse> {
-    return this.request("ModifyInstanceParams", req, cb)
+  async DescribeBackupEncryptConfig(
+    req: DescribeBackupEncryptConfigRequest,
+    cb?: (error: string, rep: DescribeBackupEncryptConfigResponse) => void
+  ): Promise<DescribeBackupEncryptConfigResponse> {
+    return this.request("DescribeBackupEncryptConfig", req, cb)
   }
 
   /**
@@ -810,6 +814,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyInstanceParams）用于修改 Redis 实例的参数配置。
+   */
+  async ModifyInstanceParams(
+    req: ModifyInstanceParamsRequest,
+    cb?: (error: string, rep: ModifyInstanceParamsResponse) => void
+  ): Promise<ModifyInstanceParamsResponse> {
+    return this.request("ModifyInstanceParams", req, cb)
+  }
+
+  /**
    * 本接口（ModifyParamTemplate）用于修改参数模板。
    */
   async ModifyParamTemplate(
@@ -917,6 +931,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceSpecBandwidthResponse) => void
   ): Promise<DescribeInstanceSpecBandwidthResponse> {
     return this.request("DescribeInstanceSpecBandwidth", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyBackupEncrypt）用于开启 /关闭备份加密，修改备份密钥功能。
+   */
+  async ModifyBackupEncrypt(
+    req: ModifyBackupEncryptRequest,
+    cb?: (error: string, rep: ModifyBackupEncryptResponse) => void
+  ): Promise<ModifyBackupEncryptResponse> {
+    return this.request("ModifyBackupEncrypt", req, cb)
   }
 
   /**

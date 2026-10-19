@@ -268,6 +268,24 @@ export interface ZoneInfo {
 }
 
 /**
+ * ModifyOrderStatus请求参数结构体
+ */
+export interface ModifyOrderStatusRequest {
+  /**
+   * 要更新成的状态
+   */
+  Status: string
+  /**
+   * 大订单ID，可以在本地专用集群的基础信息页获取大订单ID
+   */
+  DedicatedClusterOrderId?: string
+  /**
+   * 小订单ID，进入大订单的详情页，可以看到小订单ID
+   */
+  SubOrderIds?: Array<string>
+}
+
+/**
  * DescribeDedicatedClusterOverview返回参数结构体
  */
 export interface DescribeDedicatedClusterOverviewResponse {
@@ -459,21 +477,25 @@ export interface CreateDedicatedClusterOrderRequest {
 }
 
 /**
- * ModifyOrderStatus请求参数结构体
+ * DescribeSitesDetail请求参数结构体
  */
-export interface ModifyOrderStatusRequest {
+export interface DescribeSitesDetailRequest {
   /**
-   * 要更新成的状态
+   * 按照站点id过滤
    */
-  Status: string
+  SiteIds?: Array<string>
   /**
-   * 大订单ID，可以在本地专用集群的基础信息页获取大订单ID
+   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
-  DedicatedClusterOrderId?: string
+  Offset?: number
   /**
-   * 小订单ID，进入大订单的详情页，可以看到小订单ID
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
-  SubOrderIds?: Array<string>
+  Limit?: number
+  /**
+   * 按照站定名称模糊匹配
+   */
+  Name?: string
 }
 
 /**
@@ -783,6 +805,20 @@ export interface DeleteDedicatedClusterImageCacheRequest {
 }
 
 /**
+ * VPN网关的流量监控数据。
+ */
+export interface VpngwBandwidthData {
+  /**
+   * 出带宽流量
+   */
+  OutBandwidth?: OutBandwidth
+  /**
+   * 入带宽流量
+   */
+  InBandwidth?: InBandwidth
+}
+
+/**
  * DescribeSites返回参数结构体
  */
 export interface DescribeSitesResponse {
@@ -801,26 +837,9 @@ export interface DescribeSitesResponse {
 }
 
 /**
- * DescribeSitesDetail请求参数结构体
+ * DescribeEdgeHostVm请求参数结构体
  */
-export interface DescribeSitesDetailRequest {
-  /**
-   * 按照站点id过滤
-   */
-  SiteIds?: Array<string>
-  /**
-   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Offset?: number
-  /**
-   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Limit?: number
-  /**
-   * 按照站定名称模糊匹配
-   */
-  Name?: string
-}
+export type DescribeEdgeHostVmRequest = null
 
 /**
  * 带有时间戳的详细数据。
@@ -1580,17 +1599,13 @@ export interface CosCapacity {
 }
 
 /**
- * VPN网关的流量监控数据。
+ * DescribeEdgeHostVm返回参数结构体
  */
-export interface VpngwBandwidthData {
+export interface DescribeEdgeHostVmResponse {
   /**
-   * 出带宽流量
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OutBandwidth?: OutBandwidth
-  /**
-   * 入带宽流量
-   */
-  InBandwidth?: InBandwidth
+  RequestId?: string
 }
 
 /**

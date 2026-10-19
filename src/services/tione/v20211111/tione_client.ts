@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateModelServiceRequest,
+  CreateNotebookImageResponse,
   DescribePresetImageListRequest,
   DescribeLogsRequest,
   DescribeModelAccelerateVersionsRequest,
@@ -72,6 +73,7 @@ import {
   DefaultNginxGatewayCallInfo,
   CFSConfig,
   DescribeMountInstanceRequest,
+  CreateNotebookImageRequest,
   StartNotebookRequest,
   NumOrPercent,
   InferTemplate,
@@ -649,6 +651,16 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
+   * 批量查询子账号Linux用户信息
+   */
+  async DescribeSubAccountLinuxUserInfos(
+    req: DescribeSubAccountLinuxUserInfosRequest,
+    cb?: (error: string, rep: DescribeSubAccountLinuxUserInfosResponse) => void
+  ): Promise<DescribeSubAccountLinuxUserInfosResponse> {
+    return this.request("DescribeSubAccountLinuxUserInfos", req, cb)
+  }
+
+  /**
    * 创建挂载限制
    */
   async UpdateMountLimit(
@@ -729,13 +741,13 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
-   * 批量查询子账号Linux用户信息
+   * 保存镜像
    */
-  async DescribeSubAccountLinuxUserInfos(
-    req: DescribeSubAccountLinuxUserInfosRequest,
-    cb?: (error: string, rep: DescribeSubAccountLinuxUserInfosResponse) => void
-  ): Promise<DescribeSubAccountLinuxUserInfosResponse> {
-    return this.request("DescribeSubAccountLinuxUserInfos", req, cb)
+  async CreateNotebookImage(
+    req: CreateNotebookImageRequest,
+    cb?: (error: string, rep: CreateNotebookImageResponse) => void
+  ): Promise<CreateNotebookImageResponse> {
+    return this.request("CreateNotebookImage", req, cb)
   }
 
   /**

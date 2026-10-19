@@ -38,7 +38,7 @@ export interface DeleteGlobalAcceleratorAccessLogRequest {
    */
   LogPushTaskId: string
   /**
-   * <p>GA实例唯一Id</p>
+   * <p>全球加速实例ID</p>
    */
   GlobalAcceleratorId: string
 }
@@ -272,7 +272,7 @@ export interface DescribeEndpointGroupsRequest {
    */
   Limit?: number
   /**
-   * <p>过滤条件。  endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。</p>
+   * <p>过滤条件。  endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。listener-id- String -（过滤条件）监听器实例ID。endpoint-group-name- String -（过滤条件）终端节点组名称。</p>
    */
   Filters?: Array<Filter>
 }
@@ -318,7 +318,7 @@ export interface DescribeGlobalAcceleratorAclRulesRequest {
  */
 export interface DeleteGlobalAcceleratorAclRuleResponse {
   /**
-   * 异步任务ID。
+   * <p>异步任务ID。</p>
    */
   TaskId?: string
   /**
@@ -882,7 +882,7 @@ export interface DescribeGlobalAcceleratorsRequest {
    */
   Limit?: number
   /**
-   * <p>过滤条件。<li>global-accelerator-id - String -（过滤条件）全球加速实例ID。</li> <li>global-accelerator-state - String -（过滤条件）全球加速实例状态。</li></p>
+   * <p>过滤条件。<li>global-accelerator-id - String -（过滤条件）全球加速实例ID。</li> <li>global-accelerator-state - String -（过滤条件）全球加速实例状态。</li><li>global-accelerator-name - String -（过滤条件）全球加速实例名称。</li></p>
    */
   Filters?: Array<Filter>
 }
@@ -892,15 +892,15 @@ export interface DescribeGlobalAcceleratorsRequest {
  */
 export interface DeleteGlobalAcceleratorAclRuleRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 安全策略ID
+   * <p>访问控制策略ID</p>
    */
   GlobalAcceleratorAclPolicyId: string
   /**
-   * Acl规则ID。
+   * <p>访问规则ID</p>
    */
   GlobalAcceleratorAclRuleIds: Array<string>
 }
@@ -998,7 +998,7 @@ export interface ModifyAccessLogStatusRequest {
    */
   Status: string
   /**
-   * <p>GA实例唯一Id</p>
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
 }
@@ -1940,7 +1940,7 @@ export interface CreateListenerRequest {
    */
   IdleTimeout?: number
   /**
-   * <p>四层获取源IP方式，支持&#39;TOA&#39;, &#39;ProxyProtocol&#39;, &#39;ProxyProtocolV2&#39;。</p><p>需要开启四层获取源IP方式，才填写此参数。</p>
+   * <p>四层获取源IP方式。</p><p>枚举值：</p><ul><li>TOA： TOA</li><li>ProxyProtocol： ProxyProtocol</li><li>ProxyProtocolV2： ProxyProtocolV2</li></ul><p>需要开启四层获取源IP方式，才填写此参数。</p>
    */
   GetRealIpType?: string
   /**
@@ -2022,7 +2022,7 @@ export interface Filter {
    */
   Name: string
   /**
-   * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。当值类型为布尔类型时，可直接取值为字符串"TRUE"或 "FALSE"。
+   * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
    */
   Values: Array<string>
 }
@@ -2037,7 +2037,7 @@ export type DescribeAccelerateRegionsRequest = null
  */
 export interface DeleteForwardingRuleResponse {
   /**
-   * 异步任务ID。
+   * <p>异步任务ID。</p>
    */
   TaskId?: string
   /**
@@ -2537,19 +2537,19 @@ export interface DescribeForwardingPolicyRequest {
  */
 export interface DeleteForwardingRuleRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 监听器ID。
+   * <p>监听器ID。</p>
    */
   ListenerId: string
   /**
-   * 策略ID。
+   * <p>七层转发策略ID。</p>
    */
   ForwardingPolicyId: string
   /**
-   * 七层转发规则ID。
+   * <p>七层转发规则ID。</p>
    */
   ForwardingRuleId: string
 }

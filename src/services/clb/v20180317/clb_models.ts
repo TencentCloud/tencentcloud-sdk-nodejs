@@ -1609,6 +1609,10 @@ export interface ModifyModelRouterAttributesRequest {
    * <p>Decisions 调度配置</p>
    */
   DecisionsConfig?: DecisionsConfig
+  /**
+   * <p>Images 生图配置</p>
+   */
+  ImageConfig?: ImageConfig
 }
 
 /**
@@ -2055,6 +2059,10 @@ export interface ModelRouterDetail {
    * <p>决策模型设置</p>
    */
   DecisionsConfig?: DecisionsConfig
+  /**
+   * <p>Images 生图配置</p>
+   */
+  ImageConfig?: ImageConfig
 }
 
 /**
@@ -2176,6 +2184,10 @@ export interface Coefficient {
    * <p>输出视频每秒系数</p>
    */
   OutputVideoSecondCoefficient?: number
+  /**
+   * <p>输出图片系数</p>
+   */
+  OutputImageCoefficient?: number
 }
 
 /**
@@ -3701,6 +3713,10 @@ export interface ServiceProviderHealthCheckConfigItemOutput {
    * <p>健康检查方式。</p>
    */
   HealthCheckMethod?: string
+  /**
+   * <p>健康检查超时时间</p><p>单位：秒</p><p>默认值：15</p>
+   */
+  HealthCheckTimeout?: number
 }
 
 /**
@@ -8180,6 +8196,31 @@ export interface TestModelInputModalitiesRequest {
 }
 
 /**
+ * video配置。
+ */
+export interface ImageConfig {
+  /**
+   * <p>模型内路由策略</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategy?: string
+  /**
+   * <p>路由参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategyArgs?: RoutingStrategyArgs
+  /**
+   * <p>同一模型请求重试次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumRetries?: number
+  /**
+   * <p>同步超时时间</p><p>取值范围：[0, 60]</p><p>单位：秒</p>
+   */
+  WaitSeconds?: number
+}
+
+/**
  * DeleteKeys请求参数结构体
  */
 export interface DeleteKeysRequest {
@@ -10983,6 +11024,10 @@ export interface ServiceProviderHealthCheckConfigItemInput {
    * <p>健康检查方式。</p><p>枚举值：</p><ul><li>Service： 探测服务可用性</li><li>Model： 探测模型可用性</li></ul>
    */
   HealthCheckMethod?: string
+  /**
+   * <p>健康检查超时时间</p><p>取值范围：[1, 60]</p><p>单位：秒</p>
+   */
+  HealthCheckTimeout?: number
 }
 
 /**
@@ -11177,6 +11222,10 @@ export interface CreateModelRouterRequest {
    * <p>Decisions 调度配置</p>
    */
   DecisionsConfig?: DecisionsConfig
+  /**
+   * <p>Images 生图配置</p>
+   */
+  ImageConfig?: ImageConfig
 }
 
 /**

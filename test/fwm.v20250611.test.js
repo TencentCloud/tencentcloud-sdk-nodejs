@@ -148,16 +148,6 @@ it("fwm.v20250611.CreateAnalyzePolicyTask", async function () {
     }
 })
 
-it("fwm.v20250611.CreateStrategy", async function () {
-    try {
-       const data = await client.CreateStrategy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("fwm.v20250611.DispatchStrategy", async function () {
     try {
        const data = await client.DispatchStrategy({})
@@ -168,9 +158,9 @@ it("fwm.v20250611.DispatchStrategy", async function () {
     }
 })
 
-it("fwm.v20250611.CreateSecurityGroupRuleGroup", async function () {
+it("fwm.v20250611.CreateStrategy", async function () {
     try {
-       const data = await client.CreateSecurityGroupRuleGroup({})
+       const data = await client.CreateStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +328,26 @@ it("fwm.v20250611.DescribeNatAclRules", async function () {
     }
 })
 
+it("fwm.v20250611.CreateRuleGroup", async function () {
+    try {
+       const data = await client.CreateRuleGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("fwm.v20250611.DescribeOrganSummary", async function () {
+    try {
+       const data = await client.DescribeOrganSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("fwm.v20250611.CreateEdgeAclRule", async function () {
     try {
        const data = await client.CreateEdgeAclRule({})
@@ -388,9 +398,9 @@ it("fwm.v20250611.DescribeEdgeAclRules", async function () {
     }
 })
 
-it("fwm.v20250611.DescribeOrganSummary", async function () {
+it("fwm.v20250611.CreateSecurityGroupRuleGroup", async function () {
     try {
-       const data = await client.DescribeOrganSummary({})
+       const data = await client.CreateSecurityGroupRuleGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

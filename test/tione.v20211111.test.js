@@ -348,6 +348,16 @@ it("tione.v20211111.DescribeBillingResourceGroupAttachedWorkspaces", async funct
     }
 })
 
+it("tione.v20211111.DescribeSubAccountLinuxUserInfos", async function () {
+    try {
+       const data = await client.DescribeSubAccountLinuxUserInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.UpdateMountLimit", async function () {
     try {
        const data = await client.UpdateMountLimit({})
@@ -428,9 +438,9 @@ it("tione.v20211111.DescribeTrainingModelVersions", async function () {
     }
 })
 
-it("tione.v20211111.DescribeSubAccountLinuxUserInfos", async function () {
+it("tione.v20211111.CreateNotebookImage", async function () {
     try {
-       const data = await client.DescribeSubAccountLinuxUserInfos({})
+       const data = await client.CreateNotebookImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

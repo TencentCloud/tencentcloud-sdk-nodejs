@@ -208,9 +208,9 @@ it("redis.v20180412.DescribeGlobalReplicationArea", async function () {
     }
 })
 
-it("redis.v20180412.ModifyInstanceParams", async function () {
+it("redis.v20180412.DescribeBackupEncryptConfig", async function () {
     try {
-       const data = await client.ModifyInstanceParams({})
+       const data = await client.DescribeBackupEncryptConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,6 +488,16 @@ it("redis.v20180412.DescribeTendisSlowLog", async function () {
     }
 })
 
+it("redis.v20180412.ModifyInstanceParams", async function () {
+    try {
+       const data = await client.ModifyInstanceParams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ModifyParamTemplate", async function () {
     try {
        const data = await client.ModifyParamTemplate({})
@@ -591,6 +601,16 @@ it("redis.v20180412.ManualBackupInstance", async function () {
 it("redis.v20180412.DescribeInstanceSpecBandwidth", async function () {
     try {
        const data = await client.DescribeInstanceSpecBandwidth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ModifyBackupEncrypt", async function () {
+    try {
+       const data = await client.ModifyBackupEncrypt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

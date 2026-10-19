@@ -28,6 +28,7 @@ import {
   DeleteSitesRequest,
   CosInfo,
   ZoneInfo,
+  ModifyOrderStatusRequest,
   DescribeDedicatedClusterOverviewResponse,
   DescribeSitesRequest,
   HostInfo,
@@ -35,7 +36,7 @@ import {
   DescribeDedicatedSupportedZonesResponse,
   ModifySiteInfoResponse,
   CreateDedicatedClusterOrderRequest,
-  ModifyOrderStatusRequest,
+  DescribeSitesDetailRequest,
   DedicatedClusterOrderItem,
   CreateSiteRequest,
   DescribeDedicatedSupportedZonesRequest,
@@ -45,8 +46,9 @@ import {
   InBandwidth,
   DeleteDedicatedClustersRequest,
   DeleteDedicatedClusterImageCacheRequest,
+  VpngwBandwidthData,
   DescribeSitesResponse,
-  DescribeSitesDetailRequest,
+  DescribeEdgeHostVmRequest,
   DetailData,
   DedicatedClusterOrder,
   ModifyDedicatedClusterInfoRequest,
@@ -74,7 +76,7 @@ import {
   SiteDetail,
   DeleteSitesResponse,
   CosCapacity,
-  VpngwBandwidthData,
+  DescribeEdgeHostVmResponse,
   ModifySiteDeviceInfoRequest,
   DescribeDedicatedClusterHostStatisticsResponse,
   Site,
@@ -115,6 +117,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySiteInfoResponse) => void
   ): Promise<ModifySiteInfoResponse> {
     return this.request("ModifySiteInfo", req, cb)
+  }
+
+  /**
+   * 查询专属集群宿主机上的虚机信息
+   */
+  async DescribeEdgeHostVm(
+    req?: DescribeEdgeHostVmRequest,
+    cb?: (error: string, rep: DescribeEdgeHostVmResponse) => void
+  ): Promise<DescribeEdgeHostVmResponse> {
+    return this.request("DescribeEdgeHostVm", req, cb)
   }
 
   /**

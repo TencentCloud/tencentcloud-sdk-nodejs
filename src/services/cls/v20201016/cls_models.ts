@@ -5425,7 +5425,7 @@ export interface DataTransformResouceInfo {
    */
   ExternalId?: string
   /**
-   * <p>topic名称</p>
+   * <p>目标日志主题的名称,当DataTransformType=1(前置加工任务)时, 该值和源日志主题名称的值相同.</p>
    */
   TopicName?: string
   /**
@@ -7487,105 +7487,99 @@ export interface DashboardInfo {
  */
 export interface DataTransformTaskInfo {
   /**
-   * 数据加工任务名称
+   * <p>数据加工任务名称</p>
    */
   Name?: string
   /**
-   * 数据加工任务id
+   * <p>数据加工任务id</p>
    */
   TaskId?: string
   /**
-   * 任务启用状态，默认为1，正常开启,  2关闭
+   * <p>任务启用状态，默认为1，正常开启,  2关闭</p>
    */
   EnableFlag?: number
   /**
-   * 加工任务类型，1： DSL(使用自定义加工语言的加工任务)， 2：SQL(使用sql的加工任务)
+   * <p>加工任务类型，1： DSL(使用自定义加工语言的加工任务)， 2：SQL(使用sql的加工任务)</p>
    */
   Type?: number
   /**
-   * 源日志主题
+   * <p>源日志主题ID,当DataTransformType=1,代表当前任务的类型是前置加工任务,该值和目标日志主题的ID值相同.</p>
    */
   SrcTopicId?: string
   /**
-   * 当前加工任务状态（1准备中/2运行中/3停止中/4已停止）
+   * <p>当前加工任务状态（1准备中/2运行中/3停止中/4已停止）</p>
    */
   Status?: number
   /**
-   * 创建时间
-时间格式：yyyy-MM-dd HH:mm:ss
+   * <p>创建时间<br>时间格式：yyyy-MM-dd HH:mm:ss</p>
    */
   CreateTime?: string
   /**
-   * 最近修改时间
-时间格式：yyyy-MM-dd HH:mm:ss
+   * <p>最近修改时间<br>时间格式：yyyy-MM-dd HH:mm:ss</p>
    */
   UpdateTime?: string
   /**
-   * 最后启用时间，如果需要重建集群，修改该时间
-时间格式：yyyy-MM-dd HH:mm:ss
+   * <p>最后启用时间，如果需要重建集群，修改该时间<br>时间格式：yyyy-MM-dd HH:mm:ss</p>
    */
   LastEnableTime?: string
   /**
-   * 日志主题名称
+   * <p>源日志主题名称,当DataTransformType=1,代表当前任务的类型是前置加工任务,该值和目标日志主题名称的值相同.</p>
    */
   SrcTopicName?: string
   /**
-   * 日志集id
+   * <p>日志集id</p>
    */
   LogsetId?: string
   /**
-   * 加工任务目的topic_id以及别名
+   * <p>加工任务目的topic_id以及别名</p>
    */
   DstResources?: Array<DataTransformResouceInfo>
   /**
-   * 加工逻辑函数。
+   * <p>加工逻辑函数。</p>
    */
   EtlContent?: string
   /**
-   * 兜底topic_id
+   * <p>兜底topic_id</p>
    */
   BackupTopicID?: string
   /**
-   * 超限之后是否丢弃日志数据
+   * <p>超限之后是否丢弃日志数据</p>
    */
   BackupGiveUpData?: boolean
   /**
-   * 是否开启投递服务日志。 1关闭,2开启
+   * <p>是否开启投递服务日志。 1关闭,2开启</p>
    */
   HasServicesLog?: number
   /**
-   * 任务目标日志主题数量
+   * <p>任务目标日志主题数量</p>
    */
   TaskDstCount?: number
   /**
-   * 数据加工类型。0：标准加工任务；1：前置加工任务。
+   * <p>数据加工类型。0：标准加工任务；1：前置加工任务。当该值=1时, 源日志主题和目标日志主题的名称和ID相同.</p><p>枚举值：</p><ul><li>1： 前置加工任务</li><li>0： 标准加工任务</li></ul>
    */
   DataTransformType?: number
   /**
-   * 保留失败日志状态。 1:不保留，2:保留
+   * <p>保留失败日志状态。 1:不保留，2:保留</p>
    */
   KeepFailureLog?: number
   /**
-   * 失败日志的字段名称
+   * <p>失败日志的字段名称</p>
    */
   FailureLogKey?: string
   /**
-   * 指定加工数据的开始时间，秒级时间戳。
-- 日志主题生命周期内的任意时间范围，如果超出了生命周期,只处理生命周期内有数据的部分。
+   * <p>指定加工数据的开始时间，秒级时间戳。</p><ul><li>日志主题生命周期内的任意时间范围，如果超出了生命周期,只处理生命周期内有数据的部分。</li></ul>
    */
   ProcessFromTimestamp?: number
   /**
-   * 指定加工数据的结束时间，秒级时间戳。
-1. 不可指定未来的时间
-2. 不填则表示持续执行
+   * <p>指定加工数据的结束时间，秒级时间戳。</p><ol><li>不可指定未来的时间</li><li>不填则表示持续执行</li></ol>
    */
   ProcessToTimestamp?: number
   /**
-   * sql数据源信息
+   * <p>sql数据源信息</p>
    */
   DataTransformSqlDataSources?: Array<DataTransformSqlDataSource>
   /**
-   * 环境变量
+   * <p>环境变量</p>
    */
   EnvInfos?: Array<EnvInfo>
 }

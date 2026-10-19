@@ -2653,34 +2653,23 @@ export interface ArithmeticOCRResponse {
  */
 export interface RecognizeGeneralCardWarnRequest {
   /**
-   * 图片链接
+   * <p>图片链接</p>
    */
   ImageUrl?: string
   /**
-   * 图片base64
+   * <p>图片base64</p>
    */
   ImageBase64?: string
   /**
-   * 卡证类型参数，包含以下范围：  
-General：通用卡证
-IDCard：身份证 
-Passport：护照 
-BankCard：银行卡
-VehicleLicense：行驶证
-DriverLicense：驾驶证
-BizLicense：营业执照 
-HmtResidentPermit：港澳台居住证
-ForeignPermanentResident：外国人永居证
-MainlandPermit：港澳台来往内地通行证
-SocialSecurityCard：社保卡
+   * <p>卡证类型参数，选填，不填则默认为General，枚举值：<br>（如输入图片的卡证类型明确，建议填入，可降低请求耗时）</p><p>General：系统自动分类/其他类型<br>IDCard：身份证<br>Passport：护照<br>BankCard：银行卡<br>VehicleLicense：行驶证<br>DriverLicense：驾驶证<br>BizLicense：营业执照<br>HmtResidentPermit：港澳台居住证<br>ForeignPermanentResident：外国人永居证<br>MainlandPermit：港澳台来往内地通行证<br>SocialSecurityCard：社保卡</p>
    */
   CardType?: string
   /**
-   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+   * <p>是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。</p>
    */
   IsPdf?: boolean
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。</p>
    */
   PdfPageNumber?: number
 }
@@ -2875,30 +2864,23 @@ export interface GeneralHandwritingOCRRequest {
  */
 export interface BizLicenseOCRRequest {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片的 Base64 值。<br>支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。<br>支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。<br>图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片的 Url 地址。<br>支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。<br>支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。<br>图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。<br>非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
   /**
-   * 是否返回告警码，默认为false
+   * <p>是否返回告警码，默认为false</p>
    */
   EnableCopyWarn?: boolean
   /**
-   * 是否返回自动拼接的有效期，默认为true
+   * <p>是否返回自动拼接的有效期，默认为true</p>
    */
   EnablePeriodComplete?: boolean
   /**
-   * 是否支持营业类证件识别（包括营业执照和非营业执照的其他证件），默认为false
+   * <p>是否支持营业类证件识别（包括营业执照和非营业执照的其他证件），默认为false</p>
    */
   EnableBusinessCertificate?: boolean
 }
@@ -7412,62 +7394,51 @@ export interface GetOCRTokenRequest {
  */
 export interface RecognizeGeneralCardWarnResponse {
   /**
-   * 卡证类型参数，包含以下范围： 
-General：通用卡证
-IDCard：身份证 
-Passport：护照 
-BankCard：银行卡
-VehicleLicense：行驶证
-DriverLicense：驾驶证
-BizLicense：营业执照 
-HmtResidentPermit：港澳台居住证
-ForeignPermanentResident：外国人永居证
-MainlandPermit：港澳台来往内地通行证
-SocialSecurityCard：社保卡
+   * <p>卡证类型参数，枚举值：<br>（如入参CardType未填或填入General，返回自动分类的卡证类型，未能分类的其他类型返回General；如入参CardType填入General以外的值，则不进行自动分类、返回相同的值）</p><p>General：其他类型<br>IDCard：身份证<br>Passport：护照<br>BankCard：银行卡<br>VehicleLicense：行驶证<br>DriverLicense：驾驶证<br>BizLicense：营业执照<br>HmtResidentPermit：港澳台居住证<br>ForeignPermanentResident：外国人永居证<br>MainlandPermit：港澳台来往内地通行证<br>SocialSecurityCard：社保卡</p>
    */
   CardType?: string
   /**
-   * 模糊信息
+   * <p>模糊信息</p>
    */
   Blur?: GeneralCardWarnInfo
   /**
-   * 边框不完整信息
+   * <p>边框不完整信息</p>
    */
   BorderIncomplete?: GeneralCardWarnInfo
   /**
-   * 复印件信息
+   * <p>复印件信息</p>
    */
   Copy?: GeneralCardWarnInfo
   /**
-   * ps篡改信息
+   * <p>ps篡改信息</p>
    */
   Ps?: GeneralCardWarnInfo
   /**
-   * 反光信息
+   * <p>反光信息</p>
    */
   Reflection?: GeneralCardWarnInfo
   /**
-   * 翻拍件信息
+   * <p>翻拍件信息</p>
    */
   Reprint?: GeneralCardWarnInfo
   /**
-   * 是否截图
+   * <p>是否截图</p>
    */
   Screenshot?: GeneralCardWarnInfo
   /**
-   * 是否遮挡
+   * <p>是否遮挡</p>
    */
   Cover?: GeneralCardWarnInfo
   /**
-   * 是否重叠
+   * <p>是否重叠</p>
    */
   Overlap?: GeneralCardWarnInfo
   /**
-   * 是否水印
+   * <p>是否水印</p>
    */
   Watermark?: GeneralCardWarnInfo
   /**
-   * 是否电子证照（目前仅支持电子身份证、电子营业执照识别
+   * <p>是否电子证照（目前仅支持电子身份证、电子营业执照识别</p>
    */
   Electron?: GeneralCardWarnInfo
   /**
@@ -11179,105 +11150,99 @@ export interface DescribeQuestionSplitJobResponse {
  */
 export interface BizLicenseOCRResponse {
   /**
-   * 统一社会信用代码（三合一之前为注册号）
+   * <p>统一社会信用代码（三合一之前为注册号）</p>
    */
   RegNum?: string
   /**
-   * 公司名称
+   * <p>公司名称</p>
    */
   Name?: string
   /**
-   * 注册资本
+   * <p>注册资本</p>
    */
   Capital?: string
   /**
-   * 法定代表人
+   * <p>法定代表人</p>
    */
   Person?: string
   /**
-   * 地址
+   * <p>地址</p>
    */
   Address?: string
   /**
-   * 经营范围
+   * <p>经营范围</p>
    */
   Business?: string
   /**
-   * 主体类型
+   * <p>主体类型</p>
    */
   Type?: string
   /**
-   * 营业期限
+   * <p>营业期限</p>
    */
   Period?: string
   /**
-   * 组成形式
+   * <p>组成形式</p>
    */
   ComposingForm?: string
   /**
-   * 成立日期
+   * <p>成立日期</p>
    */
   SetDate?: string
   /**
-   * Code 告警码列表和释义：
--9102 黑白复印件告警
--9104 翻拍件告警
+   * <p>Code 告警码列表和释义：<br>-9102 黑白复印件告警<br>-9104 翻拍件告警<br>-9108 经营范围识别异常告警（由于文字过小、模糊、反光、遮挡或明显倾斜等情况导致未能正常识别）</p>
    */
   RecognizeWarnCode?: Array<number | bigint>
   /**
-   * 告警码说明：
-WARN_COPY_CARD 黑白复印件告警
-WARN_RESHOOT_CARD翻拍件告警
+   * <p>告警码说明：<br>WARN_COPY_CARD 黑白复印件告警<br>WARN_RESHOOT_CARD翻拍件告警<br>WARN_EARLY_STOP 经营范围识别异常告警</p>
    */
   RecognizeWarnMsg?: Array<string>
   /**
-   * 是否为副本。1为是，-1为不是。
+   * <p>是否为副本。1为是，-1为不是。</p>
    */
   IsDuplication?: number
   /**
-   * 登记日期
+   * <p>登记日期</p>
    */
   RegistrationDate?: string
   /**
-   *  图片旋转角度(角度制)，文本的水平方向为0度；顺时针为正，角度范围是0-360度
-
-
+   * <p>图片旋转角度(角度制)，文本的水平方向为0度；顺时针为正，角度范围是0-360度</p>
    */
   Angle?: number
   /**
-   * 是否有国徽。false为没有，true为有。
+   * <p>是否有国徽。false为没有，true为有。</p>
    */
   NationalEmblem?: boolean
   /**
-   * 是否有二维码。false为没有，true为有。
+   * <p>是否有二维码。false为没有，true为有。</p>
    */
   QRCode?: boolean
   /**
-   * 是否有印章。false为没有，true为有。
+   * <p>是否有印章。false为没有，true为有。</p>
    */
   Seal?: boolean
   /**
-   * 标题
+   * <p>标题</p>
    */
   Title?: string
   /**
-   * 编号
+   * <p>编号</p>
    */
   SerialNumber?: string
   /**
-   * 登记机关
+   * <p>登记机关</p>
    */
   RegistrationAuthority?: string
   /**
-   * 是否是电子营业执照。false为没有，true为有。
+   * <p>是否是电子营业执照。false为没有，true为有。</p>
    */
   Electronic?: boolean
   /**
-   * 非营业执照的营业类证件识别结果，将以结构化形式呈现。
+   * <p>非营业执照的营业类证件识别结果，将以结构化形式呈现。</p>
    */
   BusinessCertificate?: Array<BusinessCertificateInfo>
   /**
-   * 重要提示字段
+   * <p>重要提示字段</p>
    */
   Important?: string
   /**

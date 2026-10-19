@@ -38,6 +38,16 @@ it("cdc.v20201214.ModifySiteInfo", async function () {
     }
 })
 
+it("cdc.v20201214.DescribeEdgeHostVm", async function () {
+    try {
+       const data = await client.DescribeEdgeHostVm({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdc.v20201214.DescribeDedicatedClusterHosts", async function () {
     try {
        const data = await client.DescribeDedicatedClusterHosts({})

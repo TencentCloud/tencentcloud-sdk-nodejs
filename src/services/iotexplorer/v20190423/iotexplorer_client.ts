@@ -41,7 +41,6 @@ import {
   TalkActivateRecordLogInfo,
   SeeObjectMetadataEntry,
   ModifyPositionFenceResponse,
-  DescribeTWeSeeRecognitionTaskResponse,
   DescribeCloudStorageAIServiceTaskRequest,
   SeeFaceRecognitionResult,
   DescribeCloudStorageThumbnailListRequest,
@@ -79,7 +78,7 @@ import {
   CreateTWeSeeDirectUploadCredentialResponse,
   CreateProjectResponse,
   DeleteProjectResponse,
-  BatchPublishMessageResponse,
+  DescribeFirmwareUpdateStatusResponse,
   CallDeviceActionAsyncRequest,
   CreateDeviceResponse,
   CreateDeviceRequest,
@@ -104,7 +103,6 @@ import {
   InquireTWeSeeSubscriptionCreatePriceRequest,
   ResetCloudStorageEventRequest,
   TopicItem,
-  CreateTWeTalkAIBotResponse,
   DeleteTWeSeeCallbackResponse,
   DescribeTWeTalkAgentListResponse,
   DescribeTWeSeeTaskStatisticsResponse,
@@ -129,7 +127,6 @@ import {
   DescribeStudioProductRequest,
   CreateTWeSeeDirectUploadCredentialRequest,
   OperateTWeSeeDirectUploadObjectRequest,
-  TalkAIBotInfo,
   DescribeCloudStorageThumbnailListResponse,
   DeletePositionFenceRequest,
   ListTWeSeeCallbackRequest,
@@ -156,7 +153,7 @@ import {
   CreateTWeSeeRecognitionTaskWithFileResponse,
   SeeCallbackInfo,
   GetTWeTalkActiveRecordListRequest,
-  DescribeTWeSeeFaceRequest,
+  DeviceUser,
   ProductModelDefinition,
   GetBatchProductionsListRequest,
   DeleteDeviceResponse,
@@ -192,7 +189,6 @@ import {
   InquireTWeSeeSubscriptionRenewPriceResponse,
   DescribeFreeCloudStorageNumRequest,
   CloudStorageUserInfo,
-  ModifyTWeTalkAIBotRequest,
   DescribeDevicePositionListRequest,
   DeleteOtaModuleRequest,
   ModifyFenceBindRequest,
@@ -214,8 +210,6 @@ import {
   VodCloudStorageEvent,
   DeleteTWeTalkProductConfigV2Request,
   SearchStudioProductResponse,
-  DescribeTWeTalkAIBotResponse,
-  TalkProductInfo,
   ModifyTWeSeeSubscriptionResponse,
   FenceBindDeviceItem,
   ModifyTWeSeeFaceRequest,
@@ -229,7 +223,6 @@ import {
   GetTWeTalkActiveRecordListResponse,
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
-  DescribeTWeTalkAIBotRequest,
   SeeCreateSubscriptionEntry,
   SeeObjectSummary,
   VisionCustomDetectQuery,
@@ -284,11 +277,10 @@ import {
   InquireTWeSeeSubscriptionCreatePriceResponse,
   CreateTWeTalkProductConfigV2Request,
   DescribeInstanceResponse,
-  DeviceUser,
+  DescribeTWeSeeFaceRequest,
   DeleteTWeSeeTasksByConditionRequest,
   DescribeProjectRequest,
   SeeEventIdFilterConfig,
-  GetTWeTalkAIBotListResponse,
   UploadFirmwareResponse,
   ModifyTopicPolicyRequest,
   DeleteTopicRuleRequest,
@@ -305,7 +297,6 @@ import {
   CreateTWeTalkProductConfigResponse,
   ListProductOtaModulesResponse,
   AISearchInfo,
-  TalkAgentConfigInfo,
   ResetCloudStorageEventResponse,
   DescribeCloudStorageAIServiceTasksResponse,
   DeletePositionSpaceResponse,
@@ -356,12 +347,11 @@ import {
   BindDevicesRequest,
   DescribePackageConsumeTaskRequest,
   DismissRoomByStrRoomIdFromTRTCResponse,
-  DescribeFirmwareUpdateStatusResponse,
+  BatchPublishMessageResponse,
   PublishFirmwareUpdateMessageResponse,
   UnbindProductsResponse,
   GetVodCloudStorageVideoListResponse,
   DeviceFirmwareInfo,
-  UnbindTWeTalkAIBotResponse,
   SeeObjectListOptions,
   CallDeviceActionSyncRequest,
   ProductDevicesPositionItem,
@@ -375,7 +365,6 @@ import {
   UpdateOtaTaskStatusRequest,
   LoRaFrequencyEntry,
   ModifyFenceBindResponse,
-  UnbindTWeTalkAIBotRequest,
   DescribeTWeSeeTaskStatisticsRequest,
   DeletePositionFenceResponse,
   TalkProductConfigInfo,
@@ -489,7 +478,6 @@ import {
   ADPConfig,
   DeleteTWeTalkAgentResponse,
   LoRaGatewayItem,
-  BindTWeTalkAIBotRequest,
   TalkSTTTRTC,
   UpdateOtaModuleRequest,
   ModifyLoRaFrequencyRequest,
@@ -497,7 +485,6 @@ import {
   DescribeTWeTalkProductConfigV2Request,
   LicenseOverview,
   VisionRecognitionTask,
-  ModifyTWeTalkAIBotResponse,
   CreateLoRaFrequencyResponse,
   EnableTopicRuleResponse,
   GetGatewaySubDeviceListRequest,
@@ -516,7 +503,6 @@ import {
   TerminateTWeSeeSubscriptionResponse,
   TargetInfo,
   CreateTWeTalkProductConfigRequest,
-  ModifyPositionFenceRequest,
   BindDevicesResponse,
   BatchDescribeTWeSeeOrdersResponse,
   InvokeExternalSourceAIServiceTaskResponse,
@@ -544,7 +530,7 @@ import {
   DeleteTWeTalkProductConfigV2Response,
   VisionSummaryConfig,
   BatchInvokeTWeSeeRecognitionTaskResponse,
-  BindTWeTalkAIBotResponse,
+  ModifyPositionFenceRequest,
   PositionFenceItem,
   DeleteTopicRuleResponse,
   ModifyModelDefinitionRequest,
@@ -590,7 +576,7 @@ import {
   InvokeExternalSourceAIServiceTaskRequest,
   DescribeProductCloudStorageAIServiceRequest,
   DeleteLoRaGatewayRequest,
-  DeleteTWeTalkAIBotRequest,
+  DescribeTWeSeeRecognitionTaskResponse,
   ModifyTopicPolicyResponse,
   DescribeCloudStorageStreamDataResponse,
   DeviceUpdateStatus,
@@ -606,7 +592,6 @@ import {
   GetCOSURLRequest,
   CreateTWeSeeSubscriptionRequest,
   CreateFenceBindRequest,
-  CreateTWeTalkAIBotRequest,
   TalkWebhookEndpoint,
   AuthMiniProgramAppInfo,
   FamilySubDevice,
@@ -665,7 +650,6 @@ import {
   VisionObjectDetectConfig,
   BatchUpdateFirmwareRequest,
   SeeCompHighlightConfig,
-  GetTWeTalkAIBotListRequest,
   GetTopicRuleListRequest,
   ListOtaModulesRequest,
   SeeDetectContinuousConfig,
@@ -684,7 +668,6 @@ import {
   DescribeProductDynamicRegisterResponse,
   PublishFirmwareUpdateMessageRequest,
   UpdateDevicesEnableStateRequest,
-  DeleteTWeTalkAIBotResponse,
   ResetCloudStorageAIServiceRequest,
   UpdateOtaTaskStatusResponse,
   ModifyModelDefinitionResponse,
@@ -1351,13 +1334,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询TWeTalk智能体详情。
+   * 启用规则
    */
-  async DescribeTWeTalkAIBot(
-    req: DescribeTWeTalkAIBotRequest,
-    cb?: (error: string, rep: DescribeTWeTalkAIBotResponse) => void
-  ): Promise<DescribeTWeTalkAIBotResponse> {
-    return this.request("DescribeTWeTalkAIBot", req, cb)
+  async EnableTopicRule(
+    req: EnableTopicRuleRequest,
+    cb?: (error: string, rep: EnableTopicRuleResponse) => void
+  ): Promise<EnableTopicRuleResponse> {
+    return this.request("EnableTopicRule", req, cb)
   }
 
   /**
@@ -1649,16 +1632,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询TWeTalk智能体列表。
-   */
-  async GetTWeTalkAIBotList(
-    req: GetTWeTalkAIBotListRequest,
-    cb?: (error: string, rep: GetTWeTalkAIBotListResponse) => void
-  ): Promise<GetTWeTalkAIBotListResponse> {
-    return this.request("GetTWeTalkAIBotList", req, cb)
-  }
-
-  /**
    * 创建设备
    */
   async CreateDevice(
@@ -1726,16 +1699,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFirmwareTaskResponse) => void
   ): Promise<DescribeFirmwareTaskResponse> {
     return this.request("DescribeFirmwareTask", req, cb)
-  }
-
-  /**
-   * 用于修改配置TWeTalk服务连接产品配置信息。
-   */
-  async ModifyTWeTalkProductConfigV2(
-    req: ModifyTWeTalkProductConfigV2Request,
-    cb?: (error: string, rep: ModifyTWeTalkProductConfigV2Response) => void
-  ): Promise<ModifyTWeTalkProductConfigV2Response> {
-    return this.request("ModifyTWeTalkProductConfigV2", req, cb)
   }
 
   /**
@@ -1946,16 +1909,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTWeSeeSubscriptionResponse) => void
   ): Promise<DescribeTWeSeeSubscriptionResponse> {
     return this.request("DescribeTWeSeeSubscription", req, cb)
-  }
-
-  /**
-   * 用于新增TWeTalk智能体。
-   */
-  async CreateTWeTalkAIBot(
-    req: CreateTWeTalkAIBotRequest,
-    cb?: (error: string, rep: CreateTWeTalkAIBotResponse) => void
-  ): Promise<CreateTWeTalkAIBotResponse> {
-    return this.request("CreateTWeTalkAIBot", req, cb)
   }
 
   /**
@@ -2180,16 +2133,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateOtaTaskStatusResponse) => void
   ): Promise<UpdateOtaTaskStatusResponse> {
     return this.request("UpdateOtaTaskStatus", req, cb)
-  }
-
-  /**
-   * 用于修改TWeTalk智能体。
-   */
-  async ModifyTWeTalkAIBot(
-    req: ModifyTWeTalkAIBotRequest,
-    cb?: (error: string, rep: ModifyTWeTalkAIBotResponse) => void
-  ): Promise<ModifyTWeTalkAIBotResponse> {
-    return this.request("ModifyTWeTalkAIBot", req, cb)
   }
 
   /**
@@ -2545,16 +2488,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于解除一个产品和智能体的绑定。
-   */
-  async UnbindTWeTalkAIBot(
-    req: UnbindTWeTalkAIBotRequest,
-    cb?: (error: string, rep: UnbindTWeTalkAIBotResponse) => void
-  ): Promise<UnbindTWeTalkAIBotResponse> {
-    return this.request("UnbindTWeTalkAIBot", req, cb)
-  }
-
-  /**
    * 用于新建批量生产设备
    */
   async CreateBatchProduction(
@@ -2625,13 +2558,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用规则
+   * 用于修改配置TWeTalk服务连接产品配置信息。
    */
-  async EnableTopicRule(
-    req: EnableTopicRuleRequest,
-    cb?: (error: string, rep: EnableTopicRuleResponse) => void
-  ): Promise<EnableTopicRuleResponse> {
-    return this.request("EnableTopicRule", req, cb)
+  async ModifyTWeTalkProductConfigV2(
+    req: ModifyTWeTalkProductConfigV2Request,
+    cb?: (error: string, rep: ModifyTWeTalkProductConfigV2Response) => void
+  ): Promise<ModifyTWeTalkProductConfigV2Response> {
+    return this.request("ModifyTWeTalkProductConfigV2", req, cb)
   }
 
   /**
@@ -2878,16 +2811,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageOrderResponse) => void
   ): Promise<DescribeCloudStorageOrderResponse> {
     return this.request("DescribeCloudStorageOrder", req, cb)
-  }
-
-  /**
-   * 用于删除TWeTalk智能体。
-   */
-  async DeleteTWeTalkAIBot(
-    req: DeleteTWeTalkAIBotRequest,
-    cb?: (error: string, rep: DeleteTWeTalkAIBotResponse) => void
-  ): Promise<DeleteTWeTalkAIBotResponse> {
-    return this.request("DeleteTWeTalkAIBot", req, cb)
   }
 
   /**
@@ -3148,16 +3071,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportTWeSeeFacesResponse) => void
   ): Promise<ImportTWeSeeFacesResponse> {
     return this.request("ImportTWeSeeFaces", req, cb)
-  }
-
-  /**
-   * 用于绑定一个产品和智能体。
-   */
-  async BindTWeTalkAIBot(
-    req: BindTWeTalkAIBotRequest,
-    cb?: (error: string, rep: BindTWeTalkAIBotResponse) => void
-  ): Promise<BindTWeTalkAIBotResponse> {
-    return this.request("BindTWeTalkAIBot", req, cb)
   }
 
   /**

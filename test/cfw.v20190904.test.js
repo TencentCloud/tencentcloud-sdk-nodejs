@@ -188,9 +188,9 @@ it("cfw.v20190904.ModifySecurityGroupSequenceRules", async function () {
     }
 })
 
-it("cfw.v20190904.RemoveEnterpriseSecurityGroupRule", async function () {
+it("cfw.v20190904.DescribeVpcFwCcnPolicyWhiteList", async function () {
     try {
-       const data = await client.RemoveEnterpriseSecurityGroupRule({})
+       const data = await client.DescribeVpcFwCcnPolicyWhiteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,6 +838,16 @@ it("cfw.v20190904.ModifyClusterNatFwSwitch", async function () {
     }
 })
 
+it("cfw.v20190904.RemoveEnterpriseSecurityGroupRule", async function () {
+    try {
+       const data = await client.RemoveEnterpriseSecurityGroupRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyTableStatus", async function () {
     try {
        const data = await client.ModifyTableStatus({})
@@ -848,9 +858,9 @@ it("cfw.v20190904.ModifyTableStatus", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeVpcFwCcnPolicyWhiteList", async function () {
+it("cfw.v20190904.DescribeOverviewResourceQuota", async function () {
     try {
-       const data = await client.DescribeVpcFwCcnPolicyWhiteList({})
+       const data = await client.DescribeOverviewResourceQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

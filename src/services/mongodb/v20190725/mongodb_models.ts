@@ -1209,27 +1209,23 @@ export interface ModifyDBInstanceLogToCLSResponse {
  */
 export interface ModifyDBInstanceNetworkAddressRequest {
   /**
-   * 指定需修改网络的实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
-
+   * <p>指定需修改网络的实例 ID。例如：cmgo-p8vn****。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 原 IP 地址保留时长。
-- 单位为分钟，0表示立即回收原 IP 地址。
-- 原 IP 将在约定时间后释放，在释放前原 IP和新 IP均可访问。
-
+   * <p>原 IP 地址保留时长。</p><ul><li>单位为分钟，0表示立即回收原 IP 地址。</li><li>原 IP 将在约定时间后释放，在释放前原 IP和新 IP均可访问。</li></ul>
    */
   OldIpExpiredTime: number
   /**
-   * 切换后的私有网络 ID，若实例当前为基础网络，该字段无需配置。请通过接口 [DescribeDBInstances](https://cloud.tencent.com/document/product/240/38568) 获取私有网络 ID。
+   * <p>切换后的私有网络 ID，若实例当前为基础网络，该字段无需配置。请通过接口 <a href="https://cloud.tencent.com/document/product/240/38568">DescribeDBInstances</a> 获取私有网络 ID。</p>
    */
   NewUniqVpcId: string
   /**
-   * 切换后私有网络的子网 ID。若实例当前为基础网络，该字段无需配置。请通过接口 [DescribeDBInstances](https://cloud.tencent.com/document/product/240/38568) 获取私有网络的子网 ID。
+   * <p>切换后私有网络的子网 ID。若实例当前为基础网络，该字段无需配置。请通过接口 <a href="https://cloud.tencent.com/document/product/240/38568">DescribeDBInstances</a> 获取私有网络的子网 ID。</p>
    */
   NewUniqSubnetId: string
   /**
-   * IP 地址信息，包含新 IP 地址与 原 IP 地址。
+   * <p>IP 地址信息，包含新 IP 地址与 原 IP 地址。</p>
    */
   NetworkAddresses?: Array<ModifyNetworkAddress>
 }
@@ -2353,13 +2349,17 @@ export interface CreateInstanceUserRequest {
  */
 export interface ModifyNetworkAddress {
   /**
-   * 新IP地址。
+   * <p>新IP地址。</p>
    */
   NewIPAddress: string
   /**
-   * 原IP地址。
+   * <p>原IP地址。</p>
    */
   OldIpAddress: string
+  /**
+   * <p>在副本集时，修改网络需要传此字段，用于标识该ip地址为主节点或者hidden节点</p><p>枚举值：</p><ul><li>PRIMARY： 主节点</li><li>HIDDEN： hidden节点</li></ul>
+   */
+  NodeType?: string
 }
 
 /**
@@ -4025,7 +4025,7 @@ export interface DescribeClientConnectionsRequest {
  */
 export interface ModifyDBInstanceNetworkAddressResponse {
   /**
-   * 修改网络异步流程任务ID。
+   * <p>修改网络异步流程任务ID。</p>
    */
   FlowId?: number
   /**

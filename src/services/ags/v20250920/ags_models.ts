@@ -340,6 +340,20 @@ export interface RejectRegistryRecordResponse {
 }
 
 /**
+ * SecurityContext 包含将应用于容器的安全配置。
+ */
+export interface SecurityContext {
+  /**
+   * <p>是否开启特权</p><p>默认值：true</p>
+   */
+  Privileged?: boolean
+  /**
+   * <p>Capabilities 指的是可以添加到正在运行的容器中或从中移除的 POSIX capabilities。</p>
+   */
+  Capabilities?: Capabilities
+}
+
+/**
  * 腾讯云自定义标签。
  */
 export interface CloudTag {
@@ -1194,6 +1208,22 @@ export interface CfsStorageSource {
 }
 
 /**
+ * 对 VolumeTemplate 的引用
+ */
+export interface VolumeTemplateRef {
+  /**
+   * <p>VolumeTemplate 名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeTemplateName: string
+  /**
+   * <p>复用键，可为字面量或 ${metadata.xxx}</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReuseKey?: string
+}
+
+/**
  * StopSandboxInstance请求参数结构体
  */
 export interface StopSandboxInstanceRequest {
@@ -1762,6 +1792,10 @@ export interface CustomConfiguration {
    * <p>沙箱 DNS 配置</p>
    */
   DNSConfig?: DNSConfig
+  /**
+   * <p>沙箱安全上下文</p>
+   */
+  SecurityContext?: SecurityContext
 }
 
 /**
@@ -2243,6 +2277,22 @@ export interface AcquireDeploymentTokenRequest {
 }
 
 /**
+ * 对 Volume 的引用，其中 Name 或 Id 之一必须不为空
+ */
+export interface VolumeRef {
+  /**
+   * Volume 名称；服务端在当前认证 AppId 下解析为稳定 VolumeId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeName?: string
+  /**
+   * 稳定 Volume ID，格式 vol-xxxxxxxx
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeId?: string
+}
+
+/**
  * DescribeEvents返回参数结构体
  */
 export interface DescribeEventsResponse {
@@ -2400,6 +2450,10 @@ export interface CustomConfigurationDetail {
    * <p>沙箱 DNS 配置</p>
    */
   DNSConfig?: DNSConfig
+  /**
+   * <p>沙箱安全上下文</p>
+   */
+  SecurityContext?: SecurityContext
 }
 
 /**
@@ -3004,6 +3058,20 @@ export interface SandboxInstance {
 }
 
 /**
+ * 可以添加到正在运行的容器中或从中移除的 POSIX POSIX capabilities。
+ */
+export interface Capabilities {
+  /**
+   * <p>要添加的capabilities</p><p>取值参考：[&quot;SYS_ADMIN&quot;]</p>
+   */
+  Add?: Array<string>
+  /**
+   * <p>要移除的capabilities</p><p>取值参考：[&quot;ALL&quot;]</p>
+   */
+  Drop?: Array<string>
+}
+
+/**
  * waa自定义配置项
  */
 export interface WAAConfiguration {
@@ -3034,6 +3102,16 @@ export interface StorageMount {
    * <p>存储挂载读写权限配置，默认为false</p>
    */
   ReadOnly?: boolean
+  /**
+   * <p>Volume的引用</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Volume?: VolumeRef
+  /**
+   * <p>VolumeTemplate 的引用以及派生规则</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeTemplate?: VolumeTemplateRef
 }
 
 /**

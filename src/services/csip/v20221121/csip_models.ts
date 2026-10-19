@@ -440,103 +440,109 @@ export interface CreateImageVulSummaryListExportJobResponse {
  */
 export interface OrganizationUserInfo {
   /**
-   * 成员账号Uin
+   * <p>成员账号Uin</p>
    */
   Uin?: string
   /**
-   * 成员账号名称
+   * <p>成员账号名称</p>
    */
   NickName?: string
   /**
-   * 部门节点名称，账号所属部门
+   * <p>部门节点名称，账号所属部门</p>
    */
   NodeName?: string
   /**
-   * 资产数量
+   * <p>资产数量</p>
    */
   AssetCount?: number
   /**
-   * 风险数量
+   * <p>风险数量</p>
    */
   RiskCount?: number
   /**
-   * 攻击数量
+   * <p>攻击数量</p>
    */
   AttackCount?: number
   /**
-   * Member/Admin/;成员或者管理员
+   * <p>Member/Admin/;成员或者管理员</p>
    */
   Role?: string
   /**
-   * 成员账号id
+   * <p>成员账号id</p>
    */
   MemberId?: string
   /**
-   * 成员账号Appid
+   * <p>成员账号Appid</p>
    */
   AppId?: string
   /**
-   * 账号加入方式,create/invite
+   * <p>账号加入方式,create/invite</p>
    */
   JoinType?: string
   /**
-   * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+   * <p>空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本</p>
    */
   CFWProtect?: string
   /**
-   * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+   * <p>空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本</p>
    */
   WAFProtect?: string
   /**
-   * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+   * <p>空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本</p>
    */
   CWPProtect?: string
   /**
-   * 1启用，0未启用
+   * <p>1启用，0未启用</p>
    */
   Enable?: number
   /**
-   * "Free"       //免费版  "Advanced"   //高级版 "Enterprise" //企业版 "Ultimate"   //旗舰版
+   * <p>&quot;Free&quot;       //免费版  &quot;Advanced&quot;   //高级版 &quot;Enterprise&quot; //企业版 &quot;Ultimate&quot;   //旗舰版</p>
    */
   CSIPProtect?: string
   /**
-   * 1为配额消耗者
+   * <p>1为配额消耗者</p>
    */
   QuotaConsumer?: number
   /**
-   * 账户类型，0为腾讯云账户，1为AWS账户
+   * <p>账户类型，0为腾讯云账户，1为AWS账户</p>
    */
   CloudType?: number
   /**
-   * 0为缺省值，1为10分钟，2为1小时，3为24小时
+   * <p>0为缺省值，1为10分钟，2为1小时，3为24小时</p>
    */
   SyncFrequency?: number
   /**
-   * 多云账户是否过期
+   * <p>多云账户是否过期</p>
    */
   IsExpired?: boolean
   /**
-   * 多云账户 权限列表
+   * <p>多云账户 权限列表</p>
    */
   PermissionList?: Array<string>
   /**
-   * 1
+   * <p>账户权限类型</p><p>枚举值：</p><ul><li>1： 认证类型-Root账号AKSK</li><li>2： 认证类型-子账号AKSK</li><li>3： 认证类型-角色</li></ul>
    */
   AuthType?: number
   /**
-   * 0 腾讯云集团账户
-1 腾讯云接入账户
-2 非腾讯云
+   * <p>0 腾讯云集团账户<br>1 腾讯云接入账户<br>2 非腾讯云</p>
    */
   TcMemberType?: number
   /**
-   * 子账号数量
+   * <p>子账号数量</p>
    */
   SubUserCount?: number
   /**
-   * 加入方式详细信息
+   * <p>加入方式详细信息</p>
    */
   JoinTypeInfo?: string
+  /**
+   * <p>被共享模块列表</p><p>枚举值：</p><ul><li>AKSK： 云API异常监测</li><li>SDL： 日志分析</li><li>CSPM： 云安全态势管理</li><li>CWP： 主机安全</li><li>COS_AUDIT： COS审计</li><li>IMAGE_SCAN： 容器镜像扫描</li><li>SKILL_SCAN： Skill安全检测</li><li>SKILL_SCAN_POST： Skill安全检测(后付费)</li><li>DSPM： 数据安全态势管理</li></ul><p>默认值：[]</p>
+   */
+  SharedModules?: Array<string>
+  /**
+   * <p>安全分</p>
+   */
+  SecurityScore?: number
 }
 
 /**
@@ -21249,56 +21255,64 @@ export interface WebsiteRisk {
  */
 export interface DspmRiskCount {
   /**
-   * 待处理风险个数
+   * <p>待处理风险个数</p>
    */
   UnprocessedRisk?: number
   /**
-   * 配置风险个数
+   * <p>配置风险个数</p>
    * @deprecated
    */
   ConfigurationRisk?: number
   /**
-   * 基线风险个数
+   * <p>基线风险个数</p>
    * @deprecated
    */
   BaselineDeviation?: number
   /**
-   * 泄露风险个数
+   * <p>泄露风险个数</p>
    * @deprecated
    */
   LeakDetection?: number
   /**
-   * SQL行为异常风险个数
+   * <p>SQL行为异常风险个数</p>
    */
   SQLBehaviorAnomaly?: number
   /**
-   * 权限异常风险个数
+   * <p>权限异常风险个数</p>
    */
   PermissionAnomaly?: number
   /**
-   * 登录行为异常风险个数
+   * <p>登录行为异常风险个数</p>
    */
   LoginBehaviorAnomaly?: number
   /**
-   * 攻击面风险个数
+   * <p>攻击面风险个数</p>
    */
   AttackSurfaceRisk?: number
   /**
-   * 账号敏感操作个数
+   * <p>账号敏感操作个数</p>
    */
   AccountSensitiveOperation?: number
   /**
-   * 待处理告警个数
+   * <p>待处理告警个数</p>
    */
   UnprocessedAlarm?: number
   /**
-   * 新增事件告警
+   * <p>新增事件告警</p>
    */
   NumOfNewAlarmEvent?: number
   /**
-   * 新增配置风险
+   * <p>新增配置风险</p>
    */
   NumOfNewConfigRisk?: number
+  /**
+   * <p>账号风险条数</p>
+   */
+  AccountRisk?: number
+  /**
+   * <p>配置风险条数</p>
+   */
+  ConfigRisk?: number
 }
 
 /**
@@ -32017,49 +32031,57 @@ export interface DeleteEdrLogCollectPathsRequest {
  */
 export interface UserDspmInfo {
   /**
-   * APPID
+   * <p>APPID</p>
    */
   AppID?: number
   /**
-   * UIN
+   * <p>UIN</p>
    */
   Uin?: string
   /**
-   * 账号昵称
+   * <p>账号昵称</p>
    */
   NickName?: string
   /**
-   * 账号下数据库资产数量
+   * <p>账号下数据库资产数量</p>
    */
   AssetNum?: number
   /**
-   * 账号下开启安全分析数据库资产数量
+   * <p>账号下开启安全分析数据库资产数量</p>
    */
   UsedAssetNum?: number
   /**
-   * 是否被共享，1-被共享，2-未被共享
+   * <p>是否被共享，1-被共享，2-未被共享</p>
    */
   IsShared?: number
   /**
-   * 是否单独购买，1-单独购买，2-未单独购买
+   * <p>是否单独购买，1-单独购买，2-未单独购买</p>
    */
   IsSelfBuy?: number
   /**
-   * 配额来源账号
+   * <p>配额来源账号</p>
    */
   ShareFromAppID?: number
   /**
-   * 云类型（0：腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云）
+   * <p>云类型（0：腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云）</p>
    */
   CloudType?: number
   /**
-   * 账号是否隔离中
+   * <p>账号是否隔离中</p>
    */
   IsIsolating?: boolean
   /**
-   * 是否正在数据清理
+   * <p>是否正在数据清理</p>
    */
   IsDataCleaning?: boolean
+  /**
+   * <p>集团账号角色（member-普通成员/admin-管理员/delegatedAdmin-委派管理员），非集团账号为空</p>
+   */
+  Role?: string
+  /**
+   * <p>所属部门名称，未分配部门或非集团账号为空</p>
+   */
+  NodeName?: string
 }
 
 /**
@@ -45897,6 +45919,10 @@ export interface DspmDbAsset {
    */
   LogDeliveryDisableReason?: string
   /**
+   * <p>日志审计禁止开通时的详细说明</p>
+   */
+  LogDeliveryDisableMessage?: string
+  /**
    * <p>在线日志的起始时间戳，精确到秒</p>
    */
   OldestOnlineLogTimestamp?: number
@@ -45934,6 +45960,10 @@ export interface DspmDbAsset {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
+  /**
+   * <p>数据库版本</p>
+   */
+  DbVersion?: string
 }
 
 /**

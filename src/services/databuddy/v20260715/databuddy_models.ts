@@ -163,15 +163,15 @@ export interface CreateWorkspaceRoleResponse {
  */
 export interface AddWorkspaceGroupsRequest {
   /**
-   * 用户组ID，可通过 ListWorkspaceGroups 接口获取
+   * <p>用户组ID，可通过 ListConsoleGroups 接口获取</p>
    */
   GroupIds: Array<string>
   /**
-   * 工作空间ID
+   * <p>工作空间ID</p>
    */
   WorkspaceId: string
   /**
-   * 角色ID，可通过 ListWorkspaceRoles 接口获取
+   * <p>角色ID，可通过 ListWorkspaceRoles 接口获取</p>
    */
   RoleIds: Array<string>
 }
@@ -2997,7 +2997,7 @@ export interface ScheduleBizEnumBrief {
  */
 export interface AddWorkspaceGroupsResponse {
   /**
-   * 添加结果
+   * <p>添加结果</p>
    */
   Data?: PlatformStatusRsp
   /**
@@ -3400,7 +3400,7 @@ export interface AddConsoleUsersRequest {
    */
   UserUins: Array<string>
   /**
-   * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul>
+   * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul><p>可通过 ListConsoleRoles 接口获取</p>
    */
   RoleIds: Array<string>
 }

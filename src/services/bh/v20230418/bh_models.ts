@@ -658,11 +658,11 @@ export interface ModifyAssetSyncFlagRequest {
  */
 export interface DescribeDevicesResponse {
   /**
-   * 资产总数
+   * <p>资产总数</p>
    */
   TotalCount?: number
   /**
-   * 资产信息列表
+   * <p>资产信息列表</p>
    */
   DeviceSet?: Array<Device>
   /**
@@ -1139,23 +1139,23 @@ export interface ImportExternalDeviceRequest {
  */
 export interface DescribeResourcesRequest {
   /**
-   * 地域码, 如: ap-guangzhou
+   * <p>地域码, 如: ap-guangzhou</p>
    */
   ApCode?: string
   /**
-   * 按照堡垒机开通的 VPC 实例ID查询
+   * <p>按照堡垒机开通的 VPC 实例ID查询</p>
    */
   VpcId?: string
   /**
-   * 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId
+   * <p>资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId</p>
    */
   ResourceIds?: Array<string>
   /**
-   * 每页条目数量
+   * <p>每页条目数量</p>
    */
   Limit?: number
   /**
-   * 分页偏移位置
+   * <p>分页偏移位置</p>
    */
   Offset?: number
 }
@@ -3015,11 +3015,11 @@ export interface AssetSyncStatus {
  */
 export interface DescribeResourcesResponse {
   /**
-   * 堡垒机资源列表
+   * <p>堡垒机资源列表</p>
    */
   ResourceSet?: Array<Resource>
   /**
-   * 堡垒机资源数量
+   * <p>堡垒机资源数量</p>
    */
   TotalCount?: number
   /**
@@ -4235,6 +4235,18 @@ export interface Device {
    * <p>同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期</p>
    */
   SyncCloudDeviceStatus?: number
+  /**
+   * <p>所属账号 AppId</p>
+   */
+  OwnerAppId?: number
+  /**
+   * <p>所属账号 UIN</p>
+   */
+  OwnerAccountUin?: string
+  /**
+   * <p>所属账号展示名</p>
+   */
+  OwnerAccountName?: string
 }
 
 /**
@@ -6247,6 +6259,10 @@ export interface Resource {
    * <p>堡垒机实例的可用区信息</p>
    */
   ResourceZoneSet?: Array<ResourceDeployZone>
+  /**
+   * <p>多账号额度</p>
+   */
+  OrgAccountQuota?: number
 }
 
 /**
@@ -6524,74 +6540,77 @@ export interface TagFilter {
  */
 export interface DescribeDevicesRequest {
   /**
-   * 资产ID集合
+   * <p>资产ID集合</p>
    */
   IdSet?: Array<number | bigint>
   /**
-   * 资产名或资产IP，模糊查询
+   * <p>资产名或资产IP，模糊查询</p>
    */
   Name?: string
   /**
-   * 暂未使用
+   * <p>暂未使用</p>
    */
   Ip?: string
   /**
-   * 地域码集合
+   * <p>地域码集合</p>
    */
   ApCodeSet?: Array<string>
   /**
-   * 操作系统类型, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
+   * <p>操作系统类型, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer</p>
    */
   Kind?: number
   /**
-   * 分页偏移位置，默认值为0
+   * <p>分页偏移位置，默认值为0</p>
    */
   Offset?: number
   /**
-   * 每页条目数量，默认20
+   * <p>每页条目数量</p><p>取值范围：[0, 500]</p><p>默认值：20</p>
    */
   Limit?: number
   /**
-   * 有该资产访问权限的用户ID集合
+   * <p>有该资产访问权限的用户ID集合</p>
    */
   AuthorizedUserIdSet?: Array<number | bigint>
   /**
-   * 过滤条件，资产绑定的堡垒机服务ID集合
+   * <p>过滤条件，资产绑定的堡垒机服务ID集合</p>
    */
   ResourceIdSet?: Array<string>
   /**
-   * 可提供按照多种类型过滤, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
+   * <p>可提供按照多种类型过滤, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer</p>
    */
   KindSet?: Array<number | bigint>
   /**
-   * 资产是否包含托管账号。1，包含；0，不包含
+   * <p>资产是否包含托管账号。1，包含；0，不包含</p>
    */
   ManagedAccount?: string
   /**
-   * 过滤条件，可按照部门ID进行过滤
+   * <p>过滤条件，可按照部门ID进行过滤</p>
    */
   DepartmentId?: string
   /**
-   * 资产所属云账号id
+   * <p>资产所属云账号id</p>
    */
   AccountIdSet?: Array<number | bigint>
   /**
-   * 云厂商类型，1-腾讯云，2-阿里云
+   * <p>云厂商类型，1-腾讯云，2-阿里云</p>
    */
   ProviderTypeSet?: Array<number | bigint>
   /**
-   * 同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期
+   * <p>同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期</p>
    */
   CloudDeviceStatusSet?: Array<number | bigint>
   /**
-   * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
+   * <p>过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系</p>
    */
   TagFilters?: Array<TagFilter>
   /**
-   * 过滤数组。支持的Name：
-BindingStatus 绑定状态
+   * <p>过滤数组。支持的Name：<br>BindingStatus 绑定状态</p>
    */
   Filters?: Array<Filter>
+  /**
+   * <p>所属成员 AppId</p>
+   */
+  OwnerAppIds?: Array<number | bigint>
 }
 
 /**

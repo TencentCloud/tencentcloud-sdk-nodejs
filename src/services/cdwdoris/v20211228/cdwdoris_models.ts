@@ -1576,7 +1576,7 @@ export interface CreateInstanceNewRequest {
    */
   CacheDataDiskSize?: number
   /**
-   * <p>磁盘加密</p>
+   * <p>磁盘加密</p><p>默认为0不加密，1表示加密</p>
    */
   DiskEncrypt?: number
 }

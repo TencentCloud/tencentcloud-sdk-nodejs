@@ -367,6 +367,7 @@ import {
   DeleteLoadBalancerListenersResponse,
   DescribeIdleLoadBalancersRequest,
   TestModelInputModalitiesRequest,
+  ImageConfig,
   DeleteKeysRequest,
   DescribeLBListenersResponse,
   DescribeQuotaResponse,

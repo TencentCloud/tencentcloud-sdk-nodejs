@@ -13507,6 +13507,11 @@ export interface WorkflowScheduleDtoDs {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Privilege?: string
+  /**
+   * <p>分钟任务相位偏移</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinuteOffset?: number
 }
 
 /**
@@ -27142,6 +27147,11 @@ export interface TaskDsDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Privilege?: string
+  /**
+   * <p>分钟任务相位偏移</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinuteOffset?: number
 }
 
 /**

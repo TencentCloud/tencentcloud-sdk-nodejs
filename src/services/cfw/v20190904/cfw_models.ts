@@ -1760,6 +1760,36 @@ export interface CreateNatFwInstanceWithDomainResponse {
 }
 
 /**
+ * 概览 NDR 带宽详情
+ */
+export interface OverviewNDRDetail {
+  /**
+   * <p>NDR 能力或服务状态标识。</p>
+   */
+  Status?: number
+  /**
+   * <p>NDR 总带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  TotalMbps?: number
+  /**
+   * <p>入方向峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  InMaxBps?: number
+  /**
+   * <p>出方向峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  OutMaxBps?: number
+  /**
+   * <p>总体峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  MaxFlowBps?: number
+  /**
+   * <p>当前流量使用率。</p><p>单位：%</p>
+   */
+  FlowPercent?: number
+}
+
+/**
  * DescribeAssetSync请求参数结构体
  */
 export type DescribeAssetSyncRequest = null
@@ -2402,6 +2432,28 @@ ANY:表示所有
 }
 
 /**
+ * DescribeOverviewResourceQuota返回参数结构体
+ */
+export interface DescribeOverviewResourceQuotaResponse {
+  /**
+   * <p>资源与配额详情数据</p><p>包含详情字段和能力标识，具体字段含义见关联数据结构说明。访问控制规则同时提供汇总字段及按互联网边界、NAT边界、VPC边界拆分的字段。</p>
+   */
+  Data?: OverviewResourceQuotaDataLite
+  /**
+   * <p>返回代码</p>
+   */
+  ReturnCode?: number
+  /**
+   * <p>返回状态字符</p>
+   */
+  ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateCheckCcnNonDirectFlag返回参数结构体
  */
 export interface UpdateCheckCcnNonDirectFlagResponse {
@@ -2730,6 +2782,28 @@ export interface StopSecurityGroupRuleDispatchResponse {
 export type DescribeNatFwInfoCountRequest = null
 
 /**
+ * 概览封禁列表配额
+ */
+export interface OverviewBlockListQuota {
+  /**
+   * <p>封禁列表总配额数量。</p>
+   */
+  TotalCnt?: number
+  /**
+   * <p>封禁列表已使用数量。</p>
+   */
+  UsedCnt?: number
+  /**
+   * <p>入站方向已使用的封禁列表记录。</p>
+   */
+  InUsedCnt?: number
+  /**
+   * <p>出方向封禁列表已使用数量。</p>
+   */
+  OutUsedCnt?: number
+}
+
+/**
  * SetNatFwDnatRule请求参数结构体
  */
 export interface SetNatFwDnatRuleRequest {
@@ -2962,6 +3036,116 @@ export interface DescribeClusterVpcFwSwitchsRequest {
    * <p>排序所用到的字段</p>
    */
   By?: string
+}
+
+/**
+ * 概览资源与配额详情
+ */
+export interface OverviewQuotaDetail {
+  /**
+   * <p>已使用公网 IP 数量。</p>
+   */
+  PublicIpUsed?: number
+  /**
+   * <p>公网 IP 总配额数量。</p>
+   */
+  PublicIpTotal?: number
+  /**
+   * <p>通用实例总配额数量。</p>
+   */
+  CommonInstanceTotal?: number
+  /**
+   * <p>通用实例剩余配额数量。</p>
+   */
+  CommonInstanceRemain?: number
+  /**
+   * <p>通用实例已使用数量。</p>
+   */
+  CommonInstanceUsed?: number
+  /**
+   * <p>访问控制规则已使用数量。</p>
+   */
+  AccessControlRuleUsed?: number
+  /**
+   * <p>访问控制规则总配额数量。</p>
+   */
+  AccessControlRuleTotal?: number
+  /**
+   * <p>已使用串行地域数量。</p>
+   */
+  SerialRegionUsed?: number
+  /**
+   * <p>已使用 NAT 防火墙实例数量。</p>
+   */
+  NatInstanceUsed?: number
+  /**
+   * <p>已使用 VPC 防火墙实例数量。</p>
+   */
+  VpcInstanceUsed?: number
+  /**
+   * <p>边界规则配额详情。</p>
+   */
+  BorderRuleQuota?: OverviewCommonRuleQuotaDetail
+  /**
+   * <p>NAT 规则配额详情。</p>
+   */
+  NatRuleQuota?: OverviewCommonRuleQuotaDetail
+  /**
+   * <p>VPC 规则配额详情。</p>
+   */
+  VpcRuleQuota?: OverviewVpcRuleQuotaDetail
+  /**
+   * <p>封禁列表配额统计信息。</p>
+   */
+  BlockListQuota?: OverviewBlockListQuota
+  /**
+   * <p>封禁 IP 总数量。</p>
+   */
+  BlockIpCount?: number
+  /**
+   * <p>已使用封禁 IP 数量。</p>
+   */
+  BlockIpUsed?: number
+  /**
+   * <p>封禁 IP 总配额数量。</p>
+   */
+  BlockIpTotal?: number
+  /**
+   * <p>封禁列表基础包与扩容包配额详情。</p>
+   */
+  BlockListQuotaDetail?: OverviewBlockListQuotaDetail
+  /**
+   * <p>安全组规则已使用数量。</p>
+   */
+  SgRuleQuotaUsed?: number
+  /**
+   * <p>安全组规则总配额数量。</p>
+   */
+  SgRuleQuotaTotal?: number
+  /**
+   * <p>总扩容资源已使用数量。</p>
+   */
+  TotalExtensionUsed?: number
+  /**
+   * <p>总扩容资源配额数量。</p>
+   */
+  TotalExtensionNum?: number
+  /**
+   * <p>地址模板已使用数量。</p>
+   */
+  AddressTemplateUsed?: number
+  /**
+   * <p>地址模板总配额数量。</p>
+   */
+  AddressTemplateTotal?: number
+  /**
+   * <p>蜜罐已使用数量。</p>
+   */
+  HoneyPotUsed?: number
+  /**
+   * <p>蜜罐总配额数量。</p>
+   */
+  HoneyPotTotal?: number
 }
 
 /**
@@ -4129,6 +4313,64 @@ export interface DescribeNatCcnFwSwitchRequest {
 }
 
 /**
+ * 概览 VPC 规则配额详情
+ */
+export interface OverviewVpcRuleQuotaDetail {
+  /**
+   * <p>允许使用的规则总数。</p>
+   */
+  AllowedNum?: number
+  /**
+   * <p>已使用规则数量。</p>
+   */
+  UsedNum?: number
+  /**
+   * <p>剩余规则配额数量。</p>
+   */
+  RemainQuota?: number
+  /**
+   * <p>剩余扩容规则数量。</p>
+   */
+  RemainExtensionNum?: number
+  /**
+   * <p>全局规则总数。</p>
+   */
+  GlobalRuleNum?: number
+  /**
+   * <p>当前已启用的全局规则条目。</p>
+   */
+  GlobalEnableRuleNum?: number
+  /**
+   * <p>边界规则总数。</p>
+   */
+  EdgeRuleNum?: number
+  /**
+   * <p>边界启用规则数。</p>
+   */
+  EdgeEnableRuleNum?: number
+  /**
+   * <p>IPv4 规则总数。</p>
+   */
+  V4RuleTotal?: number
+  /**
+   * <p>当前已启用的 IPv4 规则条目。</p>
+   */
+  V4EnableRuleTotal?: number
+  /**
+   * <p>IPv6 规则总数。</p>
+   */
+  V6RuleTotal?: number
+  /**
+   * <p>当前已启用的 IPv6 规则条目。</p>
+   */
+  V6EnableRuleTotal?: number
+  /**
+   * <p>VPC 防火墙开关状态标识。</p>
+   */
+  IsSwitchEnable?: number
+}
+
+/**
  * DescribeCfwAnalysisData请求参数结构体
  */
 export interface DescribeCfwAnalysisDataRequest {
@@ -4696,6 +4938,48 @@ export interface BetaInfoByACL {
    * 任务名称
    */
   TaskName?: string
+}
+
+/**
+ * 概览封禁列表配额详情
+ */
+export interface OverviewBlockListQuotaDetail {
+  /**
+   * <p>封禁列表总配额数量。</p>
+   */
+  TotalCnt?: number
+  /**
+   * <p>封禁列表已使用数量。</p>
+   */
+  UsedCnt?: number
+  /**
+   * <p>封禁列表剩余配额数量。</p>
+   */
+  RemainCnt?: number
+  /**
+   * <p>基础配额总数量。</p>
+   */
+  BaseTotalCnt?: number
+  /**
+   * <p>基础配额已使用数量。</p>
+   */
+  BaseUsedCnt?: number
+  /**
+   * <p>基础配额剩余数量。</p>
+   */
+  BaseRemainCnt?: number
+  /**
+   * <p>扩容配额总数量。</p>
+   */
+  ExtensionTotalCnt?: number
+  /**
+   * <p>扩容配额已使用数量。</p>
+   */
+  ExtensionUsedCnt?: number
+  /**
+   * <p>扩容配额剩余数量。</p>
+   */
+  ExtensionRemainCnt?: number
 }
 
 /**
@@ -6592,6 +6876,44 @@ export interface DescribeVpcAclEdgeRangeResponse {
 }
 
 /**
+ * 概览通用规则配额详情
+ */
+export interface OverviewCommonRuleQuotaDetail {
+  /**
+   * <p>允许使用的规则总数。</p>
+   */
+  AllowedNum?: number
+  /**
+   * <p>已使用规则数量。</p>
+   */
+  UsedNum?: number
+  /**
+   * <p>剩余规则配额数量。</p>
+   */
+  RemainQuota?: number
+  /**
+   * <p>剩余扩容规则数量。</p>
+   */
+  RemainExtensionNum?: number
+  /**
+   * <p>入方向规则总数。</p>
+   */
+  InTotal?: number
+  /**
+   * <p>入方向启用规则数。</p>
+   */
+  InEnableNum?: number
+  /**
+   * <p>出方向规则总数。</p>
+   */
+  OutTotal?: number
+  /**
+   * <p>出方向启用规则数。</p>
+   */
+  OutEnableNum?: number
+}
+
+/**
  * ModifyNatFwVpcDnsSwitch请求参数结构体
  */
 export interface ModifyNatFwVpcDnsSwitchRequest {
@@ -6825,6 +7147,32 @@ export interface ExportLogsOfflineResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 纯按量计费版本使用详情
+ */
+export interface VolumeUsageDetail {
+  /**
+   * <p>防护IP数</p><p>默认值：0</p>
+   */
+  PublicIpUsed?: number
+  /**
+   * <p>防护实例数</p><p>默认值：0</p>
+   */
+  InstanceUsed?: number
+  /**
+   * <p>统计日期</p>
+   */
+  StatDate?: string
+  /**
+   * <p>处理流量</p>
+   */
+  TodayTrafficGB?: number
+  /**
+   * <p>防护天数</p>
+   */
+  ProtectDays?: number
 }
 
 /**
@@ -7355,6 +7703,32 @@ export interface SwitchError {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InsertTime?: string
+}
+
+/**
+ * 概览资源与配额详情字段
+ */
+export interface OverviewResourceQuotaDetail {
+  /**
+   * <p>南北向带宽与流量详情数据。</p>
+   */
+  NorthSouthDetail?: OverviewNorthSouthDetail
+  /**
+   * <p>东西向带宽与流量详情数据。</p>
+   */
+  EastWestDetail?: OverviewEastWestDetail
+  /**
+   * <p>NDR 带宽与流量详情数据。</p>
+   */
+  NDRDetail?: OverviewNDRDetail
+  /**
+   * <p>账号下资源、实例、规则和扩容配额详情数据。</p>
+   */
+  QuotaDetail?: OverviewQuotaDetail
+  /**
+   * <p>日志存储使用量、保留天数和各类日志容量详情数据。</p>
+   */
+  LogStorageDetail?: OverviewLogStorageDetail
 }
 
 /**
@@ -8145,6 +8519,20 @@ export interface DescribeBlockIgnoreListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源与配额详情返回数据，包含详情字段和能力标识
+ */
+export interface OverviewResourceQuotaDataLite {
+  /**
+   * <p>资源与配额详情核心数据，包含南北向带宽、东西向带宽、NDR 带宽、资源配额和日志存储信息。</p>
+   */
+  Detail?: OverviewResourceQuotaDetail
+  /**
+   * <p>纯按量计费使用情况</p>
+   */
+  VolumeUsageDetail?: VolumeUsageDetail
 }
 
 /**
@@ -9367,6 +9755,16 @@ export interface DescribeCcnVpcFwPolicyLimitResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeOverviewResourceQuota请求参数结构体
+ */
+export interface DescribeOverviewResourceQuotaRequest {
+  /**
+   * <p>返回视图范围</p><p>默认值：不传该参数时，默认返回完整的资源与配额详情数据</p>
+   */
+  Scene?: string
 }
 
 /**
@@ -10688,6 +11086,92 @@ export interface UpdateCheckCcnNonDirectFlagRequest {
 }
 
 /**
+ * 概览东西向带宽详情
+ */
+export interface OverviewEastWestDetail {
+  /**
+   * <p>东西向总带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  TotalMbps?: number
+  /**
+   * <p>当前已使用流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  UsedBps?: number
+  /**
+   * <p>当前带宽使用率。</p><p>单位：%</p>
+   */
+  UsagePercent?: number
+  /**
+   * <p>已分配并使用的带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  AllocatedBandwidthUsedMbps?: number
+  /**
+   * <p>当前仍可使用带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  CanUsedBandwidthMbps?: number
+  /**
+   * <p>集群模式带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  ClusterModeWidthMbps?: number
+  /**
+   * <p>主备模式带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  MasterSlaveModeWidthMbps?: number
+  /**
+   * <p>同地域防火墙实例 ID。</p>
+   */
+  SameRegionFwInsId?: string
+  /**
+   * <p>同地域防火墙实例名称。</p>
+   */
+  SameRegionFwInsName?: string
+  /**
+   * <p>同地域防火墙实例峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  SameRegionMaxFlowBps?: number
+  /**
+   * <p>跨地域防火墙实例 ID。</p>
+   */
+  DiffRegionFwInsId?: string
+  /**
+   * <p>跨地域防火墙实例名称。</p>
+   */
+  DiffRegionFwInsName?: string
+  /**
+   * <p>跨地域防火墙实例峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  DiffRegionMaxFlowBps?: number
+  /**
+   * <p>防火墙实例组 ID。</p>
+   */
+  FwGroupId?: string
+  /**
+   * <p>防火墙实例组名称。</p>
+   */
+  FwGroupName?: string
+  /**
+   * <p>防火墙实例组峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  FwGroupMaxFlowBps?: number
+  /**
+   * <p>防火墙实例 ID。</p>
+   */
+  FwInsId?: string
+  /**
+   * <p>防火墙实例名称。</p>
+   */
+  FwInsName?: string
+  /**
+   * <p>防火墙实例峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  FwInsMaxFlowBps?: number
+  /**
+   * <p>集群 VPC 峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  ClusterVpcMaxFlowBps?: number
+}
+
+/**
  * DeleteNatFwInstance请求参数结构体
  */
 export interface DeleteNatFwInstanceRequest {
@@ -10866,6 +11350,60 @@ export interface CcnAssociatedInstance {
    * <p>是否跨账号</p>
    */
   IsCrossInstance?: number
+}
+
+/**
+ * 概览日志存储详情
+ */
+export interface OverviewLogStorageDetail {
+  /**
+   * <p>日志已使用存储容量，单位为 Byte。</p><p>单位：Byte</p>
+   */
+  UsedBytes?: number
+  /**
+   * <p>日志总存储容量，单位为 Byte。</p><p>单位：Byte</p>
+   */
+  TotalBytes?: number
+  /**
+   * <p>日志保留天数。</p><p>单位：天</p>
+   */
+  StorageDay?: number
+  /**
+   * <p>NDR 日志保留天数。</p><p>单位：天</p>
+   */
+  NDRStorageDay?: number
+  /**
+   * <p>访问控制日志占用容量，单位为 Byte。</p><p>单位：Byte</p>
+   */
+  AclSize?: number
+  /**
+   * <p>入侵检测日志占用容量，单位为 Byte。</p><p>单位：Byte</p>
+   */
+  IdsSize?: number
+  /**
+   * <p>流量日志占用容量，单位为 Byte。</p><p>单位：Byte</p>
+   */
+  NetFlowSize?: number
+  /**
+   * <p>操作日志占用容量，单位为 Byte。</p><p>单位：Byte</p>
+   */
+  OperateSize?: number
+  /**
+   * <p>NDR 风险日志占用容量，单位为 Byte。</p><p>单位：Byte</p>
+   */
+  NDRRiskSize?: number
+  /**
+   * <p>NDR 流量日志占用容量，单位为 Byte。</p><p>单位：Byte</p>
+   */
+  NDRNetFlowSize?: number
+  /**
+   * <p>日志存储计费模式标识。</p>
+   */
+  PayMode?: number
+  /**
+   * <p>是否因欠费停止写入日志的状态标识。</p>
+   */
+  ArrearsStopWriting?: number
 }
 
 /**
@@ -11196,6 +11734,52 @@ export interface DescribeClusterVpcFwSwitchsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 概览南北向带宽详情
+ */
+export interface OverviewNorthSouthDetail {
+  /**
+   * <p>南北向互联网总带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  InternetBandwidthTotalMbps?: number
+  /**
+   * <p>南北向网络峰值流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  NetMaxFlowBps?: number
+  /**
+   * <p>串行接入总带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  SerialBandwidthTotalMbps?: number
+  /**
+   * <p>NAT 防火墙总带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  NatBandwidthTotalMbps?: number
+  /**
+   * <p>仅旁路接入带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  BypassOnlyBandwidthMbps?: number
+  /**
+   * <p>未使用带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  UnusedBandwidthMbps?: number
+  /**
+   * <p>当前仍可使用带宽，单位为 Mbps。</p><p>单位：Mbps</p>
+   */
+  CanUsedBandwidthMbps?: number
+  /**
+   * <p>串行链路峰值流量最高的地域名称。</p>
+   */
+  MaxSerialRegion?: string
+  /**
+   * <p>峰值最高地域的入站流量峰值，单位为 bps。</p><p>单位：bps</p>
+   */
+  SerialRegionInFlowMax?: number
+  /**
+   * <p>峰值最高地域的出方向最大流量，单位为 bps。</p><p>单位：bps</p>
+   */
+  SerialRegionOutFlowMax?: number
 }
 
 /**

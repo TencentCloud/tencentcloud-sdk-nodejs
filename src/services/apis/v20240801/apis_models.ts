@@ -45,18 +45,22 @@ export interface CreateModelServiceRequest {
   PathMatchType?: string
   /**
    * <p>是否开启限流</p>
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>限流配置</p>
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
    * <p>是否开启token控制</p>
+   * @deprecated
    */
   TokenLimitStatus?: boolean
   /**
    * <p>token控制</p>
+   * @deprecated
    */
   TokenLimitConfig?: TokenLimitConfigDTO
   /**
@@ -372,10 +376,12 @@ export interface ToolConfigDTO {
   ToolName?: string
   /**
    * 是否开启限流配置
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * 限流配置
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
@@ -624,11 +630,13 @@ export interface DescribeMcpServerResponseVO {
   /**
    * <p>流量控制状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>流量控制配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
@@ -924,18 +932,22 @@ export interface ModifyModelServiceRequest {
   TargetModels?: Array<TargetModelDTO>
   /**
    * <p>是否开启限流</p>
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>限流配置</p>
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
    * <p>是否开启token控制</p>
+   * @deprecated
    */
   TokenLimitStatus?: boolean
   /**
    * <p>token控制</p>
+   * @deprecated
    */
   TokenLimitConfig?: TokenLimitConfigDTO
   /**
@@ -1980,10 +1992,12 @@ export interface CreateMcpServerRequest {
   TargetPath?: string
   /**
    * <p>流量控制开启状态</p>
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>流量控制配置</p>
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
@@ -2185,10 +2199,12 @@ export interface ModifyServiceRequest {
   ResponseParamsValidatorJsonInfoT?: string
   /**
    * <p>流量控制</p>
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>流量控制</p>
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
@@ -2532,18 +2548,22 @@ export interface AgentAppModelServiceDTO {
   ID?: string
   /**
    * 是否开启流量控制
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * 流量控制
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
    * 是否开启token控制
+   * @deprecated
    */
   TokenLimitStatus?: boolean
   /**
    * token控制
+   * @deprecated
    */
   TokenLimitConfig?: TokenLimitConfigDTO
 }
@@ -2770,11 +2790,13 @@ export interface ServiceVO {
   /**
    * <p>流量控制</p>
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>流量控制</p>
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
@@ -3455,10 +3477,12 @@ export interface AgentAppServiceDTO {
   ID?: string
   /**
    * <p>是否限流</p>
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>限流配置</p>
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
@@ -3588,10 +3612,12 @@ export interface ModifyMcpServerRequest {
   TargetPath?: string
   /**
    * <p>流量控制开启状态</p>
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>流量控制配置</p>
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
@@ -3928,10 +3954,12 @@ export interface DescribeModelServiceResponseVO {
   ModelNames?: Array<string>
   /**
    * <p>是否开启限流</p>
+   * @deprecated
    */
   InvokeLimitConfigStatus?: boolean
   /**
    * <p>限流配置</p>
+   * @deprecated
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
@@ -3944,10 +3972,12 @@ export interface DescribeModelServiceResponseVO {
   LastUpdateTime?: string
   /**
    * <p>是否开启token控制</p>
+   * @deprecated
    */
   TokenLimitStatus?: boolean
   /**
    * <p>token控制</p>
+   * @deprecated
    */
   TokenLimitConfig?: TokenLimitConfigDTO
   /**
@@ -4259,13 +4289,13 @@ export interface DescribeModelsResponse {
  */
 export interface DescribeAgentAppServicesRequest {
   /**
-   * <p>实例ID</p>
-   */
-  InstanceID: string
-  /**
    * <p>数据量</p>
    */
   Limit: number
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID?: string
   /**
    * <p>IDs</p>
    */

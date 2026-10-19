@@ -2163,17 +2163,21 @@ export interface DeleteSecurityPolicyRequest {
  */
 export interface RuleHealthStatusInfo {
   /**
-   * 是否为默认转发规则。
+   * <p>是否为默认转发规则。</p>
    */
   IsDefaultRule?: string
   /**
-   * 转发规则 ID，格式为 rule- 后接 8 位字母数字。
+   * <p>转发规则 ID，格式为 rule- 后接 8 位字母数字。</p>
    */
   RuleId?: string
   /**
-   * 目标组健康状态。
+   * <p>目标组健康状态。</p>
    */
   TargetGroupHealthInfos?: Array<TargetGroupHealthInfo>
+  /**
+   * <p>优先级，值越小优先级越高，取值范围：1~10000。</p>
+   */
+  Priority?: number
 }
 
 /**

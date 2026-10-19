@@ -186,6 +186,10 @@ export interface DescribeMemoryPlusSpaceResponse {
    */
   CreditLimit?: number
   /**
+   * <p>是否开启压缩</p>
+   */
+  Compressed?: boolean
+  /**
    * <p>Memory 实例的内网访问地址。</p>
    */
   AccessUrl?: string
@@ -1146,6 +1150,10 @@ export interface MemoryPlusInfo {
    */
   CreditUsage?: number
   /**
+   * <p>是否开启压缩</p>
+   */
+  Compressed?: boolean
+  /**
    * <p>资源标签</p>
    */
   ResourceTags?: Array<ResourceTag>
@@ -1651,6 +1659,10 @@ export interface ModifyMemoryPlusSpaceRequest {
    * <p>指定修改后的实例描述。最多支持 200 个字符。</p>
    */
   Description?: string
+  /**
+   * <p>是否开启压缩</p>
+   */
+  Compressed?: boolean
 }
 
 /**
@@ -1761,6 +1773,10 @@ export interface AgentInstance {
    * <p>agent memory 服务详情</p>
    */
   AgentMem?: AgentMemInfo
+  /**
+   * <p>关联的 memory（AGM）实例ID（仅免部署实例有值）</p>
+   */
+  MemInstanceId?: string
 }
 
 /**

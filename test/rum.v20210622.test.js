@@ -48,6 +48,16 @@ it("rum.v20210622.DescribeRumLogExport", async function () {
     }
 })
 
+it("rum.v20210622.DescribeRumLogExports", async function () {
+    try {
+       const data = await client.DescribeRumLogExports({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.ResumeInstance", async function () {
     try {
        const data = await client.ResumeInstance({})
@@ -68,9 +78,9 @@ it("rum.v20210622.DescribeExceptionReportList", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
+it("rum.v20210622.ModifyProjectLimit", async function () {
     try {
-       const data = await client.DescribeDataFetchUrlInfo({})
+       const data = await client.ModifyProjectLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +158,9 @@ it("rum.v20210622.DeleteWhitelist", async function () {
     }
 })
 
-it("rum.v20210622.ModifyProjectLimit", async function () {
+it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
     try {
-       const data = await client.ModifyProjectLimit({})
+       const data = await client.DescribeDataFetchUrlInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +298,9 @@ it("rum.v20210622.DescribeDataPvUrlStatisticsV2", async function () {
     }
 })
 
-it("rum.v20210622.DescribeRumLogExports", async function () {
+it("rum.v20210622.DescribeFileCertificate", async function () {
     try {
-       const data = await client.DescribeRumLogExports({})
+       const data = await client.DescribeFileCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

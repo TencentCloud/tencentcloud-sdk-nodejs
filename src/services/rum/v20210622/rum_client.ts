@@ -25,6 +25,7 @@ import {
   StopProjectRequest,
   DescribeFOOMMallocReportListRequest,
   DescribeProjectLimitsResponse,
+  DescribeFileCertificateResponse,
   DescribeTawInstancesRequest,
   DescribeTokenResponse,
   ResumeProjectResponse,
@@ -37,7 +38,7 @@ import {
   DescribeErrorRequest,
   StopInstanceRequest,
   DescribeDataStaticUrlV2Request,
-  ModifyInstanceRequest,
+  DescribeFileCertificateRequest,
   DescribeDataStaticProjectV2Response,
   DescribeErrorResponse,
   ModifyProjectLimitRequest,
@@ -131,6 +132,7 @@ import {
   DescribeRumLogExportV2Response,
   ResumeInstanceResponse,
   DescribeDataStaticProjectResponse,
+  ModifyInstanceRequest,
   CreateStarProjectRequest,
   DescribeAppSingleCaseListRequest,
   DescribeDataSetUrlStatisticsV2Request,
@@ -255,6 +257,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取项目下的日志导出列表
+   */
+  async DescribeRumLogExports(
+    req: DescribeRumLogExportsRequest,
+    cb?: (error: string, rep: DescribeRumLogExportsResponse) => void
+  ): Promise<DescribeRumLogExportsResponse> {
+    return this.request("DescribeRumLogExports", req, cb)
+  }
+
+  /**
    * 恢复 RUM 业务系统，恢复后，用户可以正常使用和上报数据
    */
   async ResumeInstance(
@@ -275,13 +287,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DescribeDataFetchUrlInfo信息
+   * 新增修改限流
    */
-  async DescribeDataFetchUrlInfo(
-    req: DescribeDataFetchUrlInfoRequest,
-    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
-  ): Promise<DescribeDataFetchUrlInfoResponse> {
-    return this.request("DescribeDataFetchUrlInfo", req, cb)
+  async ModifyProjectLimit(
+    req: ModifyProjectLimitRequest,
+    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
+  ): Promise<ModifyProjectLimitResponse> {
+    return this.request("ModifyProjectLimit", req, cb)
   }
 
   /**
@@ -355,13 +367,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增修改限流
+   * 获取DescribeDataFetchUrlInfo信息
    */
-  async ModifyProjectLimit(
-    req: ModifyProjectLimitRequest,
-    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
-  ): Promise<ModifyProjectLimitResponse> {
-    return this.request("ModifyProjectLimit", req, cb)
+  async DescribeDataFetchUrlInfo(
+    req: DescribeDataFetchUrlInfoRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
+  ): Promise<DescribeDataFetchUrlInfoResponse> {
+    return this.request("DescribeDataFetchUrlInfo", req, cb)
   }
 
   /**
@@ -495,13 +507,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目下的日志导出列表
+   * 获取COS存储的临时密钥，具体到ProjectId
    */
-  async DescribeRumLogExports(
-    req: DescribeRumLogExportsRequest,
-    cb?: (error: string, rep: DescribeRumLogExportsResponse) => void
-  ): Promise<DescribeRumLogExportsResponse> {
-    return this.request("DescribeRumLogExports", req, cb)
+  async DescribeFileCertificate(
+    req: DescribeFileCertificateRequest,
+    cb?: (error: string, rep: DescribeFileCertificateResponse) => void
+  ): Promise<DescribeFileCertificateResponse> {
+    return this.request("DescribeFileCertificate", req, cb)
   }
 
   /**

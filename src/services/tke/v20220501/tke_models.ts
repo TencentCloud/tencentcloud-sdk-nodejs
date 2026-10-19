@@ -123,6 +123,10 @@ export interface CreateNativeNodePoolParam {
    * <p>自定义镜像 ID</p>
    */
   CustomImage?: string
+  /**
+   * 原生节点池 containerd 运行时纯版本号，例如 1.7.28 或 1.7.28-tke.3。未指定或为空时使用原有 GPE 默认版本。仅对新建节点生效。
+   */
+  RuntimeVersion?: string
 }
 
 /**

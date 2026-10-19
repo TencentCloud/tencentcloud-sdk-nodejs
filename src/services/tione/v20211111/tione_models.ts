@@ -218,11 +218,21 @@ export interface CreateModelServiceRequest {
 }
 
 /**
+ * CreateNotebookImage返回参数结构体
+ */
+export interface CreateNotebookImageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePresetImageList请求参数结构体
  */
 export interface DescribePresetImageListRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -310,6 +320,10 @@ export interface DescribeLogsRequest {
  */
 export interface DescribeModelAccelerateVersionsRequest {
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * 过滤条件
     Filter.Name: 枚举值: ModelJobName (任务名称)|TrainingModelVersionId (模型版本id)
     Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
@@ -343,9 +357,13 @@ export interface DescribeModelAccelerateVersionsRequest {
  */
 export interface StopModelAccelerateTaskRequest {
   /**
-   * 模型加速任务ID
+   * <p>模型加速任务ID</p>
    */
   ModelAccTaskId: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -757,19 +775,15 @@ export interface TrainToolConfig {
  */
 export interface DescribeTrainingModelVersionsRequest {
   /**
-   * 模型ID
+   * <p>模型ID</p>
    */
   TrainingModelId: string
   /**
-   * 过滤条件
-Filter.Name: 枚举值:
-    TrainingModelVersionId (模型版本ID)
-    ModelVersionType (模型版本类型) 其值支持: NORMAL(通用) ACCELERATE (加速)
-    ModelFormat（模型格式）其值Filter.Values支持：
-TORCH_SCRIPT/PYTORCH/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML
-    AlgorithmFramework (算法框架) 其值Filter.Values支持：TENSORFLOW/PYTORCH/DETECTRON2
-Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
-每次请求的Filters的上限为10，Filter.Values的上限为100
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>过滤条件<br>Filter.Name: 枚举值:<br>    TrainingModelVersionId (模型版本ID)<br>    ModelVersionType (模型版本类型) 其值支持: NORMAL(通用) ACCELERATE (加速)<br>    ModelFormat（模型格式）其值Filter.Values支持：<br>TORCH_SCRIPT/PYTORCH/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML<br>    AlgorithmFramework (算法框架) 其值Filter.Values支持：TENSORFLOW/PYTORCH/DETECTRON2<br>Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询<br>每次请求的Filters的上限为10，Filter.Values的上限为100</p>
    */
   Filters?: Array<Filter>
 }
@@ -1114,7 +1128,7 @@ export interface ResourceGroupInWorkspace {
  */
 export interface DescribeDataSourcesRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -1148,7 +1162,7 @@ export interface DescribeDataSourcesRequest {
  */
 export interface CreateDataSourceRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -1294,7 +1308,7 @@ export interface DescribeMountInstancesRequest {
    */
   Type: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -1322,7 +1336,7 @@ export interface ModifyNotebookTagsResponse {
  */
 export interface UpdateDataSourceRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -1526,7 +1540,7 @@ export interface DescribeAnnotatedTaskListRequest {
    */
   Limit: number
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -1568,9 +1582,13 @@ export interface CFSTurbo {
  */
 export interface DescribeTrainingModelVersionRequest {
   /**
-   * 模型版本ID
+   * <p>模型版本ID</p>
    */
   TrainingModelVersionId: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -1687,13 +1705,31 @@ export interface DescribeMountInstanceRequest {
    */
   Type: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
    * 存储实例ID
    */
   StorageId?: string
+}
+
+/**
+ * CreateNotebookImage请求参数结构体
+ */
+export interface CreateNotebookImageRequest {
+  /**
+   * 镜像信息
+   */
+  ImageInfo: ImageInfo
+  /**
+   * notebook id
+   */
+  NotebookId: string
+  /**
+   * 要保存的kernel数组
+   */
+  Kernels?: Array<string>
 }
 
 /**
@@ -1873,7 +1909,7 @@ export interface UpdateMountLimitRequest {
    */
   LimitMount: boolean
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -2440,6 +2476,10 @@ EXIST：导入现有版本
    */
   ReasoningEnvironmentSource: string
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * 模型名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
    */
   TrainingModelName?: string
@@ -2706,7 +2746,7 @@ export interface Spec {
  */
 export interface DescribeDataSourceRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -3177,7 +3217,7 @@ export interface Option {
  */
 export interface DescribeMountLimitsRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -3496,7 +3536,7 @@ export interface MountInstanceInfo {
  */
 export interface DescribeDatasetsRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -4240,22 +4280,22 @@ export interface DatasetInfo {
  */
 export interface DescribeModelAccelerateTaskResponse {
   /**
-   * 模型加速任务详情
+   * <p>模型加速任务详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelAccelerateTask?: ModelAccelerateTask
   /**
-   * 模型加速时长，单位s
+   * <p>模型加速时长，单位s</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelAccRuntimeInSecond?: number
   /**
-   * 模型加速任务开始时间
+   * <p>模型加速任务开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelAccStartTime?: string
   /**
-   * 模型加速任务结束时间
+   * <p>模型加速任务结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelAccEndTime?: string
@@ -5387,7 +5427,7 @@ export interface CreateMountLimitRequest {
    */
   StorageId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -6438,7 +6478,7 @@ export interface CreateDatasetRequest {
    */
   DatasetName: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -6807,7 +6847,7 @@ export interface AuthTokenLimit {
  */
 export interface DeleteDataSourceRequest {
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -6849,12 +6889,12 @@ export interface ExecAction {
  */
 export interface StopModelAccelerateTaskResponse {
   /**
-   * 模型加速任务ID
+   * <p>模型加速任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelAccTaskId?: string
   /**
-   * 异步任务ID
+   * <p>异步任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncTaskId?: string
@@ -7098,9 +7138,13 @@ export interface UpdateMountLimitResponse {
  */
 export interface DescribeModelAccelerateTaskRequest {
   /**
-   * 模型加速任务ID
+   * <p>模型加速任务ID</p>
    */
   ModelAccTaskId: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -8082,7 +8126,7 @@ export interface DescribeTrainingTaskPodsRequest {
  */
 export interface DescribeTrainingModelVersionsResponse {
   /**
-   * 模型版本列表
+   * <p>模型版本列表</p>
    */
   TrainingModelVersions?: Array<TrainingModelVersionDTO>
   /**
@@ -8122,7 +8166,7 @@ export interface DeleteDatasetRequest {
    */
   DeleteLabelEnable: boolean
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
 }
@@ -8652,6 +8696,10 @@ export interface DeleteTrainingModelRequest {
    */
   TrainingModelId: string
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * 是否同步清理cos
    */
   EnableDeleteCos?: boolean
@@ -8784,6 +8832,10 @@ export interface PlatformImageInfo {
  */
 export interface DescribePlatformImagesRequest {
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * 过滤器,  Name支持ImageId/ImageName/SupportDataPipeline/AllowSaveAllContent/ImageRange，其中ImageRange支持枚举值Train,Inference,Notebook
    */
   Filters?: Array<Filter>
@@ -8886,6 +8938,10 @@ export interface DeleteTrainingModelVersionRequest {
    */
   TrainingModelVersionId: string
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * 是否同步清理cos
    */
   EnableDeleteCos?: boolean
@@ -8928,7 +8984,7 @@ export interface MultiModalContent {
  */
 export interface DescribeTrainingModelVersionResponse {
   /**
-   * 模型版本
+   * <p>模型版本</p>
    */
   TrainingModelVersion?: TrainingModelVersionDTO
   /**

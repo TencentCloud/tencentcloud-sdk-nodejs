@@ -230,6 +230,40 @@ export interface DescribeProjectLimitsResponse {
 }
 
 /**
+ * DescribeFileCertificate返回参数结构体
+ */
+export interface DescribeFileCertificateResponse {
+  /**
+   * 临时密钥key
+   */
+  SecretKey?: string
+  /**
+   * 临时密钥 id
+   */
+  SecretID?: string
+  /**
+   * 临时密钥临时 token
+   */
+  SessionToken?: string
+  /**
+   * 开始时间戳
+   */
+  StartTime?: number
+  /**
+   * 过期时间戳
+   */
+  ExpiredTime?: number
+  /**
+   * 桶地址
+   */
+  BucketAddress?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTawInstances请求参数结构体
  */
 export interface DescribeTawInstancesRequest {
@@ -629,21 +663,25 @@ export interface DescribeDataStaticUrlV2Request {
 }
 
 /**
- * ModifyInstance请求参数结构体
+ * DescribeFileCertificate请求参数结构体
  */
-export interface ModifyInstanceRequest {
+export interface DescribeFileCertificateRequest {
   /**
-   * 要修改的实例id
+   * 超时时间，不填默认是 5 分钟
    */
-  InstanceId: string
+  Timeout?: number
   /**
-   * 新的实例名称(长度最大不超过255)
+   * bucket类型，不填默认1:web，2:app
    */
-  InstanceName?: string
+  FileType?: number
   /**
-   * 新的实例描述(长度最大不超过1024)
+   * ProjectID
    */
-  InstanceDesc?: string
+  ID?: number
+  /**
+   * reigon对应的id
+   */
+  RegionID?: number
 }
 
 /**
@@ -3859,6 +3897,24 @@ export interface DescribeDataStaticProjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyInstance请求参数结构体
+ */
+export interface ModifyInstanceRequest {
+  /**
+   * 要修改的实例id
+   */
+  InstanceId: string
+  /**
+   * 新的实例名称(长度最大不超过255)
+   */
+  InstanceName?: string
+  /**
+   * 新的实例描述(长度最大不超过1024)
+   */
+  InstanceDesc?: string
 }
 
 /**

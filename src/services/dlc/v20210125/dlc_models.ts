@@ -273,6 +273,10 @@ export interface StartRayClusterResponse {
    */
   Tags?: Array<Tag>
   /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1084,6 +1088,10 @@ export interface GetRayClusterResponse {
    */
   ResourceConfigId?: string
   /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1633,6 +1641,10 @@ export interface RayClusterEntity {
    * <p>标签列表（TagKey-TagValue）</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -1713,6 +1725,10 @@ export interface AddDeploymentRequest {
    * <p>高级参数</p>
    */
   AdvancedOptions?: string
+  /**
+   * <p>NetworkConfig</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -2024,6 +2040,10 @@ export interface CreateInferenceServiceRequest {
    * <p>python runtime env</p>
    */
   RuntimeEnv?: string
+  /**
+   * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -2868,6 +2888,10 @@ export interface JobSpec {
    * <p>集群名称</p>
    */
   ClusterName?: string
+  /**
+   * <p>网络配置，JSON 字符串</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -3335,7 +3359,7 @@ export interface DescribeTaskListRequest {
    */
   Filters?: Array<Filter>
   /**
-   * <p>排序字段，支持如下字段类型，create-time（创建时间，默认）、update-time（更新时间）</p>
+   * <p>排序字段，支持如下字段类型，create-time（创建时间，默认）</p>
    */
   SortBy?: string
   /**
@@ -4146,6 +4170,10 @@ export interface CreateRayClusterRequest {
    * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>自定义网络配置</p><p>参数格式：{"appId":22,"uin":"111","uniqVpcId":"vpc-xxx","subnetId":"subnet-xxx"}</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -4473,6 +4501,10 @@ export interface CreateJobSpecResponse {
    * <p>集群名称</p>
    */
   ClusterName?: string
+  /**
+   * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
+   */
+  NetworkConfig?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5575,6 +5607,10 @@ export interface StartLabResponse {
    * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
   ImagePullType?: string
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6961,6 +6997,10 @@ export interface ModifyTrainingJobSpecRequest {
    * <p>调优参数（整体替换，未填字段回模板默认值；不传则不更新；仅 POST_TRAINING）</p>
    */
   TuningParams?: TrainingTuningParams
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -9000,6 +9040,10 @@ export interface SubmitTrainingJobRequest {
    * <p>产出模型名称（用于后续模型注册，当前仅保存）</p>
    */
   OutputModelName?: string
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -10362,6 +10406,10 @@ export interface GetLabDetailResponse {
    * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
   ImagePullType?: string
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12014,6 +12062,10 @@ export interface GetJobSpecResponse {
    */
   ClusterName?: string
   /**
+   * <p>用户自定义网络配置</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -13152,6 +13204,10 @@ export interface UpdateLabResponse {
    */
   ImagePullType?: string
   /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -14140,6 +14196,10 @@ export interface CreateJobSpecRequest {
    * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
    */
   DispatchStrategy?: string
+  /**
+   * <p>用户自定义网络配置JSON</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -16805,6 +16865,10 @@ export interface UpdateLabRequest {
    * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
   LabImagePullType?: string
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -17425,6 +17489,10 @@ export interface UpdateRayClusterRequest {
    * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -22271,6 +22339,18 @@ export interface TrainingJobSpec {
    * <p>高级参数 JSON（透传给 Neutrino advanced_options）</p>
    */
   AdvancedOptions?: string
+  /**
+   * <p>创建人子账号 UIN（实际提交者）</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建人子账号名称（CAM 解析，解析失败为 null）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -24469,6 +24549,10 @@ export interface CreateRayClusterResponse {
    */
   Tags?: Array<Tag>
   /**
+   * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -24731,6 +24815,10 @@ export interface LabResponse {
    * <p>Token 认证密钥（开启 token 认证时由系统生成）</p>
    */
   Token?: string
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -26694,6 +26782,10 @@ export interface CreateLabResponse {
    */
   ImagePullType?: string
   /**
+   * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -27117,6 +27209,10 @@ export interface UpdateJobSpecResponse {
    * <p>集群名称</p>
    */
   ClusterName?: string
+  /**
+   * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
+   */
+  NetworkConfig?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -27848,6 +27944,10 @@ export interface UpdateJobSpecRequest {
    * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
    */
   DispatchStrategy?: string
+  /**
+   * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -28473,6 +28573,10 @@ export interface CreateInferenceServiceResponse {
    */
   IsCustom?: boolean
   /**
+   * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -28575,6 +28679,10 @@ export interface UpdateRayClusterResponse {
    */
   Tags?: Array<Tag>
   /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -28676,6 +28784,10 @@ export interface StopRayClusterResponse {
    * <p>标签列表（TagKey-TagValue）</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -29587,6 +29699,10 @@ export interface StopLabResponse {
    */
   ImagePullType?: string
   /**
+   * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
+   */
+  NetworkConfig?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -30114,6 +30230,10 @@ export interface CreateLabRequest {
    * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
   LabImagePullType?: string
+  /**
+   * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
+   */
+  NetworkConfig?: string
 }
 
 /**

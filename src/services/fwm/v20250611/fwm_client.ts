@@ -43,12 +43,13 @@ import {
   ModifyEdgeAclRuleSequenceRequest,
   SecurityGroupRule,
   DeleteSecurityGroupRuleResponse,
-  OrganSummary,
+  CreateRuleGroupRequest,
   DescribeNatAclRulesResponse,
   DescribeSecurityGroupRuleRequest,
   DescribeStrategyRequest,
   DeleteNatAclRuleResponse,
   SgDnsParseCount,
+  ModifyStrategySequenceResponse,
   DescribeOrganSummaryResponse,
   DeleteVpcAclRuleRequest,
   DeleteStrategyResponse,
@@ -56,6 +57,7 @@ import {
   DescribeOrganMembersResponse,
   ModifyEdgeAclRuleRequest,
   ModifyNatAclRuleSequenceResponse,
+  OrganSummary,
   DeleteEdgeAclRuleRequest,
   DeleteEdgeAclRuleResponse,
   ModifyVpcAclRuleResponse,
@@ -75,7 +77,7 @@ import {
   CreateVpcAclRuleGroupResponse,
   CreateSecurityGroupRuleResponse,
   DispatchStrategyResponse,
-  ModifyNatAclRuleResponse,
+  DescribeRiskListRequest,
   DescribeSecurityGroupRuleResponse,
   DescribeRiskCategoryStatsResponse,
   MemberInfo,
@@ -104,7 +106,7 @@ import {
   DescribeOrganSummaryRequest,
   SgRuleResp,
   DeleteNatAclRuleRequest,
-  ModifyStrategySequenceResponse,
+  CreateRuleGroupResponse,
   ModifyEdgeAclRuleResponse,
   IgnorePolicyRiskRequest,
   VpcAclRuleResp,
@@ -126,7 +128,7 @@ import {
   AccountProductDetailStats,
   AccountStatsGroup,
   CreateSecurityGroupRuleRequest,
-  DescribeRiskListRequest,
+  ModifyNatAclRuleResponse,
   RiskCategoryItem,
   Account,
   CancelIgnorePolicyRiskResponse,
@@ -277,16 +279,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建策略
-   */
-  async CreateStrategy(
-    req: CreateStrategyRequest,
-    cb?: (error: string, rep: CreateStrategyResponse) => void
-  ): Promise<CreateStrategyResponse> {
-    return this.request("CreateStrategy", req, cb)
-  }
-
-  /**
    * 下发策略
    */
   async DispatchStrategy(
@@ -297,13 +289,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建规则组（规则组管理）
+   * 创建策略
    */
-  async CreateSecurityGroupRuleGroup(
-    req: CreateSecurityGroupRuleGroupRequest,
-    cb?: (error: string, rep: CreateSecurityGroupRuleGroupResponse) => void
-  ): Promise<CreateSecurityGroupRuleGroupResponse> {
-    return this.request("CreateSecurityGroupRuleGroup", req, cb)
+  async CreateStrategy(
+    req: CreateStrategyRequest,
+    cb?: (error: string, rep: CreateStrategyResponse) => void
+  ): Promise<CreateStrategyResponse> {
+    return this.request("CreateStrategy", req, cb)
   }
 
   /**
@@ -467,6 +459,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建一个不含规则的规则组，归属产品由 Product 指定。规则组是四类防火墙产品共用的资源，落库于 fwm_rule_group 并以 product 字段区分归属；规则需另行通过 CreateSecurityGroupRule / CreateVpcAclRule / CreateNatAclRule / CreateEdgeAclRule 追加。规则组的查询/修改/删除已由 DescribeRuleGroup / DescribeRuleGroups / ModifyRuleGroup / DeleteRuleGroup 统一承载，本接口补齐创建侧，供 Terraform 等需要「建组」与「建规则」分离的资源模型使用。返回新规则组 ID（fwmrg- 前缀），初始 RuleCount 为 0。注意：创建空规则组同样计入规则组配额，且三墙（VPC/NAT/Edge）受预付费写门禁约束，企业安全组不受该门禁约束。
+   */
+  async CreateRuleGroup(
+    req: CreateRuleGroupRequest,
+    cb?: (error: string, rep: CreateRuleGroupResponse) => void
+  ): Promise<CreateRuleGroupResponse> {
+    return this.request("CreateRuleGroup", req, cb)
+  }
+
+  /**
+   * 获取集团概览信息，包括集团名称、管理员信息、成员数量等
+   */
+  async DescribeOrganSummary(
+    req?: DescribeOrganSummaryRequest,
+    cb?: (error: string, rep: DescribeOrganSummaryResponse) => void
+  ): Promise<DescribeOrganSummaryResponse> {
+    return this.request("DescribeOrganSummary", req, cb)
+  }
+
+  /**
    * 向已有的互联网边界ACL规则组中添加规则。需要先创建规则组，然后通过此接口添加规则。
    */
   async CreateEdgeAclRule(
@@ -517,13 +529,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集团概览信息，包括集团名称、管理员信息、成员数量等
+   * 创建规则组（规则组管理）
    */
-  async DescribeOrganSummary(
-    req?: DescribeOrganSummaryRequest,
-    cb?: (error: string, rep: DescribeOrganSummaryResponse) => void
-  ): Promise<DescribeOrganSummaryResponse> {
-    return this.request("DescribeOrganSummary", req, cb)
+  async CreateSecurityGroupRuleGroup(
+    req: CreateSecurityGroupRuleGroupRequest,
+    cb?: (error: string, rep: CreateSecurityGroupRuleGroupResponse) => void
+  ): Promise<CreateSecurityGroupRuleGroupResponse> {
+    return this.request("CreateSecurityGroupRuleGroup", req, cb)
   }
 
   /**

@@ -6607,6 +6607,10 @@ export interface CreateTaskSchedulerConfiguration {
    * @deprecated
    */
   AllowDownstreamDependency?: number
+  /**
+   * <p>分钟任务相位偏移</p>
+   */
+  MinuteOffset?: number
 }
 
 /**
@@ -8793,114 +8797,69 @@ export interface GetTaskInstanceResponse {
  */
 export interface WorkflowSchedulerConfigurationInfo {
   /**
-   * 时区
+   * <p>时区</p>
    */
   ScheduleTimeZone: string
   /**
-   * 周期类型：支持的类型为
-ONEOFF_CYCLE: 一次性
-YEAR_CYCLE: 年
-MONTH_CYCLE: 月
-WEEK_CYCLE: 周
-DAY_CYCLE: 天
-HOUR_CYCLE: 小时
-MINUTE_CYCLE: 分钟
-CRONTAB_CYCLE: crontab表达式类型
+   * <p>周期类型：支持的类型为<br>ONEOFF_CYCLE: 一次性<br>YEAR_CYCLE: 年<br>MONTH_CYCLE: 月<br>WEEK_CYCLE: 周<br>DAY_CYCLE: 天<br>HOUR_CYCLE: 小时<br>MINUTE_CYCLE: 分钟<br>CRONTAB_CYCLE: crontab表达式类型</p>
    */
   CycleType: string
   /**
-   * 自依赖, 默认值 serial, 取值为：parallel(并行), serial(串行), orderly(有序)
+   * <p>自依赖, 默认值 serial, 取值为：parallel(并行), serial(串行), orderly(有序)</p>
    */
   SelfDepend: string
   /**
-   * 生效开始时间
+   * <p>生效开始时间</p>
    */
   StartTime: string
   /**
-   * 生效结束时间
+   * <p>生效结束时间</p>
    */
   EndTime: string
   /**
-   * cron表达式
+   * <p>cron表达式</p>
    */
   CrontabExpression: string
   /**
-   * 工作流依赖，yes or no
+   * <p>工作流依赖，yes or no</p>
    */
   DependencyWorkflow?: string
   /**
-   * 0：不修改 1：将任务的上游依赖配置改为默认值
+   * <p>0：不修改 1：将任务的上游依赖配置改为默认值</p>
    */
   ModifyCycleValue?: string
   /**
-   * 工作流存在跨工作流依赖且使用cron表达式调度。如果保存统一调度，会断开不支持的依赖关系
+   * <p>工作流存在跨工作流依赖且使用cron表达式调度。如果保存统一调度，会断开不支持的依赖关系</p>
    */
   ClearLink?: boolean
   /**
-   * ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-时间维度，取值为：
-* CRONTAB
-* DAY
-* HOUR
-* LIST_DAY
-* LIST_HOUR
-* LIST_MINUTE
-* MINUTE
-* MONTH
-* RANGE_DAY
-* RANGE_HOUR
-* RANGE_MINUTE
-* WEEK
-* YEAR
-
-https://capi.woa.com/object/detail?product=wedata&env=api_dev&version=2025-08-06&name=WorkflowSchedulerConfigurationInfo
+   * <p>ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-时间维度，取值为：</p><ul><li>CRONTAB</li><li>DAY</li><li>HOUR</li><li>LIST_DAY</li><li>LIST_HOUR</li><li>LIST_MINUTE</li><li>MINUTE</li><li>MONTH</li><li>RANGE_DAY</li><li>RANGE_HOUR</li><li>RANGE_MINUTE</li><li>WEEK</li><li>YEAR</li></ul><p>https://capi.woa.com/object/detail?product=wedata&amp;env=api_dev&amp;version=2025-08-06&amp;name=WorkflowSchedulerConfigurationInfo</p>
    */
   MainCyclicConfig?: string
   /**
-   * ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-实例范围
-取值为：
-* ALL_DAY_OF_YEAR
-* ALL_MONTH_OF_YEAR
-* CURRENT
-* CURRENT_DAY
-* CURRENT_HOUR
-* CURRENT_MINUTE
-* CURRENT_MONTH
-* CURRENT_WEEK
-* CURRENT_YEAR
-* PREVIOUS_BEGIN_OF_MONTH
-* PREVIOUS_DAY
-* PREVIOUS_DAY_LATER_OFFSET_HOUR
-* PREVIOUS_DAY_LATER_OFFSET_MINUTE
-* PREVIOUS_END_OF_MONTH
-* PREVIOUS_FRIDAY
-* PREVIOUS_HOUR
-* PREVIOUS_HOUR_CYCLE
-* PREVIOUS_HOUR_LATER_OFFSET_MINUTE
-* PREVIOUS_MINUTE_CYCLE
-* PREVIOUS_MONTH
-* PREVIOUS_WEEK
-* PREVIOUS_WEEKEND
-* RECENT_DATE
-
-https://capi.woa.com/object/detail?product=wedata&env=api_dev&version=2025-08-06&name=WorkflowSchedulerConfigurationInfo
+   * <p>ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-实例范围<br>取值为：</p><ul><li>ALL_DAY_OF_YEAR</li><li>ALL_MONTH_OF_YEAR</li><li>CURRENT</li><li>CURRENT_DAY</li><li>CURRENT_HOUR</li><li>CURRENT_MINUTE</li><li>CURRENT_MONTH</li><li>CURRENT_WEEK</li><li>CURRENT_YEAR</li><li>PREVIOUS_BEGIN_OF_MONTH</li><li>PREVIOUS_DAY</li><li>PREVIOUS_DAY_LATER_OFFSET_HOUR</li><li>PREVIOUS_DAY_LATER_OFFSET_MINUTE</li><li>PREVIOUS_END_OF_MONTH</li><li>PREVIOUS_FRIDAY</li><li>PREVIOUS_HOUR</li><li>PREVIOUS_HOUR_CYCLE</li><li>PREVIOUS_HOUR_LATER_OFFSET_MINUTE</li><li>PREVIOUS_MINUTE_CYCLE</li><li>PREVIOUS_MONTH</li><li>PREVIOUS_WEEK</li><li>PREVIOUS_WEEKEND</li><li>RECENT_DATE</li></ul><p>https://capi.woa.com/object/detail?product=wedata&amp;env=api_dev&amp;version=2025-08-06&amp;name=WorkflowSchedulerConfigurationInfo</p>
    */
   SubordinateCyclicConfig?: string
   /**
-   * 执行时间左闭区间，示例：00:00，只有周期类型为MINUTE_CYCLE才需要填入
+   * <p>执行时间左闭区间，示例：00:00，只有周期类型为MINUTE_CYCLE才需要填入</p>
    */
   ExecutionStartTime?: string
   /**
-   * 执行时间右闭区间，示例：23:59，只有周期类型为MINUTE_CYCLE才需要填入
+   * <p>执行时间右闭区间，示例：23:59，只有周期类型为MINUTE_CYCLE才需要填入</p>
    */
   ExecutionEndTime?: string
   /**
-   * 是否开启日历调度 1 开启 0关闭
+   * <p>是否开启日历调度 1 开启 0关闭</p>
    */
   CalendarOpen?: string
   /**
-   * 日历id
+   * <p>日历id</p>
    */
   CalendarId?: string
+  /**
+   * <p>分钟任务相位偏移</p>
+   */
+  MinuteOffset?: number
 }
 
 /**
@@ -13713,73 +13672,70 @@ export interface ListTaskInfo {
  */
 export interface WorkflowSchedulerConfiguration {
   /**
-   * 时区
+   * <p>时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
   /**
-   * 周期类型：支持的类型为
-ONEOFF_CYCLE: 一次性
-YEAR_CYCLE: 年
-MONTH_CYCLE: 月
-WEEK_CYCLE: 周
-DAY_CYCLE: 天
-HOUR_CYCLE: 小时
-MINUTE_CYCLE: 分钟
-CRONTAB_CYCLE: crontab表达式类型
+   * <p>周期类型：支持的类型为<br>ONEOFF_CYCLE: 一次性<br>YEAR_CYCLE: 年<br>MONTH_CYCLE: 月<br>WEEK_CYCLE: 周<br>DAY_CYCLE: 天<br>HOUR_CYCLE: 小时<br>MINUTE_CYCLE: 分钟<br>CRONTAB_CYCLE: crontab表达式类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * 自依赖, 默认值 serial, 取值为：parallel(并行), serial(串行), orderly(有序)
+   * <p>自依赖, 默认值 serial, 取值为：parallel(并行), serial(串行), orderly(有序)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfDepend?: string
   /**
-   * 生效开始时间
+   * <p>生效开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 生效结束时间
+   * <p>生效结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 工作流依赖，yes or no
+   * <p>工作流依赖，yes or no</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyWorkflow?: string
   /**
-   * 执行时间左闭区间，示例：00:00
+   * <p>执行时间左闭区间，示例：00:00</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStartTime?: string
   /**
-   * 执行时间右闭区间，示例：23:59
+   * <p>执行时间右闭区间，示例：23:59</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionEndTime?: string
   /**
-   * cron表达式
+   * <p>cron表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrontabExpression?: string
   /**
-   * 是否开启日历调度 1 开启 0关闭
+   * <p>是否开启日历调度 1 开启 0关闭</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalendarOpen?: string
   /**
-   * 日历名称
+   * <p>日历名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalendarName?: string
   /**
-   * 日历id
+   * <p>日历id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalendarId?: string
+  /**
+   * <p>分钟任务相位偏移</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinuteOffset?: number
 }
 
 /**
@@ -17498,6 +17454,11 @@ export interface TaskSchedulerConfiguration {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowDownstreamDependency?: number
+  /**
+   * <p>分钟任务相位偏移</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinuteOffset?: number
 }
 
 /**

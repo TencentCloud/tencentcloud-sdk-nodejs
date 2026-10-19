@@ -76,17 +76,17 @@ export interface ApiSecCustomEventRule {
 }
 
 /**
- * DeleteOwaspWhiteRule请求参数结构体
+ * AddLLMSdkAccess返回参数结构体
  */
-export interface DeleteOwaspWhiteRuleRequest {
+export interface AddLLMSdkAccessResponse {
   /**
-   * 规则白名单ID列表，可通过 [DescribeOwaspWhiteRule](https://cloud.tencent.com/document/product/627/122155) 接口获取
+   * 服务id
    */
-  Ids: Array<number | bigint>
+  Domain?: string
   /**
-   * 域名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Domain: string
+  RequestId?: string
 }
 
 /**
@@ -352,25 +352,25 @@ export interface DescribeApiListVersionTwoResponse {
 }
 
 /**
- * 当前开启的、匹配范围为全局、优先级最高的场景信息
+ * DescribeAfterPayInstances请求参数结构体
  */
-export interface GlobalSceneInfo {
+export interface DescribeAfterPayInstancesRequest {
   /**
-   * 场景ID
+   * 偏移量
    */
-  SceneId?: string
+  Offset: number
   /**
-   * 场景名称
+   * 容量
    */
-  SceneName?: string
+  Limit: number
   /**
-   * 场景优先级
+   * 过滤数组
    */
-  Priority?: number
+  Filters?: Array<FiltersItemNew>
   /**
-   * 场景更新时间
+   * 释放延期标识
    */
-  UpdateTime?: number
+  FreeDelayFlag?: number
 }
 
 /**
@@ -2140,6 +2140,28 @@ export interface DeleteRateLimitsV2Request {
 }
 
 /**
+ * 当前开启的、匹配范围为全局、优先级最高的场景信息
+ */
+export interface GlobalSceneInfo {
+  /**
+   * 场景ID
+   */
+  SceneId?: string
+  /**
+   * 场景名称
+   */
+  SceneName?: string
+  /**
+   * 场景优先级
+   */
+  Priority?: number
+  /**
+   * 场景更新时间
+   */
+  UpdateTime?: number
+}
+
+/**
  * DescribeDomainCountInfo返回参数结构体
  */
 export interface DescribeDomainCountInfoResponse {
@@ -3775,6 +3797,20 @@ https：使用https协议回源
 }
 
 /**
+ * 近7天图片送检趋势的单日数据点
+ */
+export interface LLMImageTrendItem {
+  /**
+   * <p>YYYYMMDD 格式日期</p>
+   */
+  DayTime?: string
+  /**
+   * <p>当日图片送检量（单位：张）</p>
+   */
+  ImageUsage?: number
+}
+
+/**
  * DeleteAttackDownloadRecord请求参数结构体
  */
 export interface DeleteAttackDownloadRecordRequest {
@@ -3935,6 +3971,20 @@ export interface DescribeAccessIndexResponse {
 }
 
 /**
+ * DescribeWafAutoDenyStatus返回参数结构体
+ */
+export interface DescribeWafAutoDenyStatusResponse {
+  /**
+   * WAF 自动封禁详情
+   */
+  WafAutoDenyDetails?: AutoDenyDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyUserSignatureRule请求参数结构体
  */
 export interface ModifyUserSignatureRuleRequest {
@@ -4024,6 +4074,36 @@ export interface FieldWriteConfig {
    * <p>响应方向body<br>1:开启 0:不开启</p>
    */
   EnableResponse?: number
+}
+
+/**
+ * LLM实例当天4个计费模块的token消耗量及近7天趋势（均为实例维度）
+ */
+export interface LLMTokenUsage {
+  /**
+   * <p>今日提示词攻击防护 token 消耗量</p>
+   */
+  PromptUsage?: number
+  /**
+   * <p>今日内容安全文本检测 token 消耗量</p>
+   */
+  ContentTextUsage?: number
+  /**
+   * <p>今日敏感数据检测 token 消耗量</p>
+   */
+  SensitiveDataUsage?: number
+  /**
+   * <p>今日图片送检量（单位：张）</p>
+   */
+  ContentImageUsage?: number
+  /**
+   * <p>该实例近7天token总量趋势（按天，缺失日期补0）</p>
+   */
+  TokenTrend?: Array<LLMTokenTrendItem>
+  /**
+   * <p>该实例近7天图片送检趋势（按天，缺失日期补0）</p>
+   */
+  ImageTrend?: Array<LLMImageTrendItem>
 }
 
 /**
@@ -5193,9 +5273,17 @@ export interface ModifySpartaProtectionModeResponse {
 }
 
 /**
- * ModifySpartaProtection返回参数结构体
+ * DescribeAfterPayInstances返回参数结构体
  */
-export interface ModifySpartaProtectionResponse {
+export interface DescribeAfterPayInstancesResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 后付费实例列表
+   */
+  Instances?: Array<AfterPayInstanceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6313,6 +6401,20 @@ export interface DeleteBotSceneUCBRuleResponse {
 }
 
 /**
+ * 近7天token总量趋势的单日数据点
+ */
+export interface LLMTokenTrendItem {
+  /**
+   * <p>YYYYMMDD 格式日期</p>
+   */
+  DayTime?: string
+  /**
+   * <p>当日token总用量</p>
+   */
+  TokenUsage?: number
+}
+
+/**
  * 免鉴权信息
  */
 export interface AnonymousInfo {
@@ -6359,17 +6461,17 @@ export interface DescribePortsRequest {
 }
 
 /**
- * DescribeWafAutoDenyStatus返回参数结构体
+ * DeleteOwaspWhiteRule请求参数结构体
  */
-export interface DescribeWafAutoDenyStatusResponse {
+export interface DeleteOwaspWhiteRuleRequest {
   /**
-   * WAF 自动封禁详情
+   * 规则白名单ID列表，可通过 [DescribeOwaspWhiteRule](https://cloud.tencent.com/document/product/627/122155) 接口获取
    */
-  WafAutoDenyDetails?: AutoDenyDetail
+  Ids: Array<number | bigint>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 域名
    */
-  RequestId?: string
+  Domain: string
 }
 
 /**
@@ -7947,6 +8049,24 @@ export interface DescribeUserClbWafRegionsRequest {
    * 流量来源，不填默认clb。clb：负载均衡器，tsegw：云原生API网关，scf：云函数，apisix：腾讯云上其他网关
    */
   AlbType?: string
+}
+
+/**
+ * AddLLMSdkAccess请求参数结构体
+ */
+export interface AddLLMSdkAccessRequest {
+  /**
+   * 要接入的应用名称
+   */
+  Name: string
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**
@@ -10184,6 +10304,104 @@ export interface DescribeBotIdRuleRequest {
    * 动作类型-用于筛选
    */
   RuleAction?: Array<string>
+}
+
+/**
+ * 后付费实例（Edition=llm-sdk-waf）的基础信息，仅包含 tb_instance_conf 基础字段
+ */
+export interface AfterPayInstanceInfo {
+  /**
+   * <p>用户appid</p>
+   */
+  AppId: number
+  /**
+   * <p>实例唯一ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>实例名称</p>
+   */
+  InstanceName: string
+  /**
+   * <p>实例对应资源ID，计费使用</p>
+   */
+  ResourceIds: string
+  /**
+   * <p>实例版本，后付费实例固定为 llm-sdk-waf</p>
+   */
+  Edition: string
+  /**
+   * <p>实例所属地域</p>
+   */
+  Region: string
+  /**
+   * <p>付费模式，后付费实例为 0</p>
+   */
+  PayMode: number
+  /**
+   * <p>实例过期时间</p>
+   */
+  ValidTime: string
+  /**
+   * <p>实例开始时间</p>
+   */
+  BeginTime: string
+  /**
+   * <p>计费项</p>
+   */
+  BillingItem: string
+  /**
+   * <p>自动续费标识。<br>0：关闭<br>1：开启</p>
+   */
+  RenewFlag?: number
+  /**
+   * <p>实例套餐版本</p>
+   */
+  Level?: number
+  /**
+   * <p>实例修改时间</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>域名数量上限</p>
+   */
+  SubDomainLimit?: number
+  /**
+   * <p>主域名数量上限</p>
+   */
+  MainDomainLimit?: number
+  /**
+   * <p>qps弹性计费上限</p>
+   */
+  ElasticBilling?: number
+  /**
+   * <p>攻击日志投递开关</p>
+   */
+  AttackLogPost?: number
+  /**
+   * <p>api安全是否购买</p>
+   */
+  APISecurity?: number
+  /**
+   * <p>是否api 安全试用</p>
+   */
+  IsAPISecurityTrial?: number
+  /**
+   * <p>实例延期释放标识</p>
+   */
+  FreeDelayFlag?: number
+  /**
+   * <p>1是基础2025版本；0不是</p>
+   */
+  BasicFlag?: number
+  /**
+   * <p>大模型安全「后付费」资源信息，结构与内容与 DescribeInstances 的 InstanceDetail.LLMPkg 保持一致</p>
+   */
+  LLMPkg?: LLMPkg
+  /**
+   * <p>LLM实例当天4个计费模块token消耗量及近7天趋势（仅后付费llm-sdk-waf实例返回）</p>
+   */
+  LLMTokenUsage?: LLMTokenUsage
 }
 
 /**
@@ -12829,17 +13047,21 @@ export interface DescribeAccessFastAnalysisResponse {
 }
 
 /**
- * DeleteAntiInfoLeakRule请求参数结构体
+ * DescribeProtectGroup返回参数结构体
  */
-export interface DeleteAntiInfoLeakRuleRequest {
+export interface DescribeProtectGroupResponse {
   /**
-   * 域名
+   * 防护对象组的详情
    */
-  Domain: string
+  Data?: Array<ProtectGroupInfo>
   /**
-   * 规则id
+   * 对象组的总数
    */
-  RuleId: number
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -15037,7 +15259,7 @@ export interface LLMSdkAccessItem {
    */
   Remark?: string
   /**
-   * <p>SDK接入来源，tokenhub 表示通过 TokenHub 创建，空字符串表示通过控制台创建</p>
+   * <p>SDK接入来源，可不填</p>
    */
   SdkSource?: string
   /**
@@ -15092,6 +15314,10 @@ export interface LLMSdkAccessItem {
    * <p>意图识别检测开关</p>
    */
   IntentStatus?: boolean
+  /**
+   * <p>恶意URL检测开关</p>
+   */
+  UrlDetectStatus?: boolean
   /**
    * <p>生效规则数量</p>
    */
@@ -15453,6 +15679,16 @@ export interface DeleteCustomWhiteRuleRequest {
  * ModifyInstanceRenewFlag返回参数结构体
  */
 export interface ModifyInstanceRenewFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySpartaProtection返回参数结构体
+ */
+export interface ModifySpartaProtectionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17731,21 +17967,17 @@ export interface FindAllDomainDetail {
 }
 
 /**
- * DescribeProtectGroup返回参数结构体
+ * DeleteAntiInfoLeakRule请求参数结构体
  */
-export interface DescribeProtectGroupResponse {
+export interface DeleteAntiInfoLeakRuleRequest {
   /**
-   * 防护对象组的详情
+   * 域名
    */
-  Data?: Array<ProtectGroupInfo>
+  Domain: string
   /**
-   * 对象组的总数
+   * 规则id
    */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  RuleId: number
 }
 
 /**

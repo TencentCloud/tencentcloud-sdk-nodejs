@@ -4475,7 +4475,7 @@ export interface ModifyAuditConfigResponse {
  */
 export interface SwitchDrInstanceToMasterResponse {
   /**
-   * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+   * <p>异步任务的请求ID，可使用此ID查询异步任务的执行结果。</p>
    */
   AsyncRequestId?: string
   /**
@@ -6075,9 +6075,13 @@ export interface DescribeDBInstanceRebootTimeResponse {
  */
 export interface SwitchDrInstanceToMasterRequest {
   /**
-   * 灾备实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * <p>灾备实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。</p>
    */
   InstanceId: string
+  /**
+   * <p>忽略同步延迟的阈值，不填默认为0表示完全等待追平</p><p>取值范围：[0, 104857600]</p><p>默认值：0</p>
+   */
+  IgnoreSyncDelay?: number
 }
 
 /**

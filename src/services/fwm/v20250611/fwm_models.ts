@@ -618,57 +618,17 @@ export interface DeleteSecurityGroupRuleResponse {
 }
 
 /**
- * 集团概览
+ * CreateRuleGroup请求参数结构体
  */
-export interface OrganSummary {
+export interface CreateRuleGroupRequest {
   /**
-   * 集团名称
+   * <p>规则组名称，不可为空，最长50字符（按字符数计，中文按1个字符计）</p>
    */
   GroupName?: string
   /**
-   * 管理员账号信息
+   * <p>规则组归属产品。enterprise_sg-企业安全组，cfw_vpc_acl-VPC边界防火墙，cfw_nat_acl-NAT边界防火墙，cfw_edge_acl-互联网边界防火墙。必填，不接受 all</p>
    */
-  AdminInfo?: MemberInfo
-  /**
-   * 管理员/委派管理员数量
-   */
-  AdminCount?: number
-  /**
-   * 已接入成员数
-   */
-  JoinedMemberCount?: number
-  /**
-   * 接入成员上限（-1表示无上限）
-   */
-  MemberLimit?: number
-  /**
-   * 接入成员上限显示
-   */
-  MemberLimitDisplay?: string
-  /**
-   * 规格共享者数量
-   */
-  CfwSharerCount?: number
-  /**
-   * 规格使用者数量
-   */
-  CfwUserCount?: number
-  /**
-   * 部门名称列表
-   */
-  Departments?: Array<string>
-  /**
-   * 纳管账号数
-   */
-  ManagedMemberCount?: number
-  /**
-   * 纳管产品数
-   */
-  ManagedProductCount?: number
-  /**
-   * 纳管账号数
-   */
-  CfwManageCount?: number
+  Product?: string
 }
 
 /**
@@ -739,6 +699,16 @@ export interface SgDnsParseCount {
    * 未下发的IP个数，离散数据
    */
   InvalidCount?: number
+}
+
+/**
+ * ModifyStrategySequence返回参数结构体
+ */
+export interface ModifyStrategySequenceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -889,6 +859,64 @@ export interface ModifyNatAclRuleSequenceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集团概览
+ */
+export interface OrganSummary {
+  /**
+   * <p>集团名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>管理员账号信息</p>
+   */
+  AdminInfo?: MemberInfo
+  /**
+   * <p>管理员/委派管理员数量</p>
+   */
+  AdminCount?: number
+  /**
+   * <p>已接入成员数</p>
+   */
+  JoinedMemberCount?: number
+  /**
+   * <p>接入成员上限（-1表示无上限）</p>
+   */
+  MemberLimit?: number
+  /**
+   * <p>接入成员上限显示</p>
+   */
+  MemberLimitDisplay?: string
+  /**
+   * <p>规格共享者数量</p>
+   */
+  CfwSharerCount?: number
+  /**
+   * <p>规格使用者数量</p>
+   */
+  CfwUserCount?: number
+  /**
+   * <p>部门名称列表</p>
+   */
+  Departments?: Array<string>
+  /**
+   * <p>纳管账号数</p>
+   */
+  ManagedMemberCount?: number
+  /**
+   * <p>纳管产品数</p>
+   */
+  ManagedProductCount?: number
+  /**
+   * <p>纳管账号数</p>
+   */
+  CfwManageCount?: number
+  /**
+   * <p>规格共享总配额</p>
+   */
+  FwmShareUserQuota?: number
 }
 
 /**
@@ -1078,6 +1106,14 @@ export interface NatAclRuleResp {
    * 域名数
    */
   DnsParseCnt?: number
+  /**
+   * 命中次数。该规则在所有已下发成员账号下的累计命中次数合计，直接采用云防火墙返回值，不做时间窗口换算；从未命中时为 0
+   */
+  HitCount?: number
+  /**
+   * 最近命中时间。取该规则在所有已下发成员账号中最新的命中时间；从未命中时为 "-"
+   */
+  LastHitTime?: string
 }
 
 /**
@@ -1085,23 +1121,23 @@ export interface NatAclRuleResp {
  */
 export interface CreateStrategyRequest {
   /**
-   * 产品类型
+   * <p>产品类型</p>
    */
   Product: string
   /**
-   * 下发账号
+   * <p>下发账号</p>
    */
   ReceiveAccount?: Array<string>
   /**
-   * 前区规则组
+   * <p>前区规则组</p>
    */
   PreStrategy?: Array<StrategyReq>
   /**
-   * 后区规则组
+   * <p>后区规则组</p>
    */
   PostStrategy?: Array<StrategyReq>
   /**
-   * 下发账号组
+   * <p>下发账号组</p>
    */
   ReceiveGroup?: Array<string>
 }
@@ -1322,6 +1358,10 @@ export interface CreateVpcAclRuleGroupResponse {
  */
 export interface CreateSecurityGroupRuleResponse {
   /**
+   * <p>规则Id列表</p>
+   */
+  RuleIds?: Array<string>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1342,13 +1382,37 @@ export interface DispatchStrategyResponse {
 }
 
 /**
- * ModifyNatAclRule返回参数结构体
+ * DescribeRiskList请求参数结构体
  */
-export interface ModifyNatAclRuleResponse {
+export interface DescribeRiskListRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 条数限制
    */
-  RequestId?: string
+  Limit: number
+  /**
+   * 偏移量
+   */
+  Offset: number
+  /**
+   * 产品类型
+   */
+  Product?: string
+  /**
+   * 筛选条件
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * 排序方式
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 成员Id
+   */
+  MemberId?: string
 }
 
 /**
@@ -1432,6 +1496,10 @@ export interface DescribePolicyRiskAccountProductStatsRequest {
  */
 export interface CreateEdgeAclRuleResponse {
   /**
+   * <p>规则Id列表</p>
+   */
+  RuleIds?: Array<string>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1441,6 +1509,10 @@ export interface CreateEdgeAclRuleResponse {
  * CreateStrategy返回参数结构体
  */
 export interface CreateStrategyResponse {
+  /**
+   * <p>策略Id列表</p>
+   */
+  StrategyIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1513,6 +1585,10 @@ export interface ModifyStrategyResponse {
  * CreateVpcAclRule返回参数结构体
  */
 export interface CreateVpcAclRuleResponse {
+  /**
+   * <p>规则Id列表</p>
+   */
+  RuleIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2093,9 +2169,13 @@ export interface DeleteNatAclRuleRequest {
 }
 
 /**
- * ModifyStrategySequence返回参数结构体
+ * CreateRuleGroup返回参数结构体
  */
-export interface ModifyStrategySequenceResponse {
+export interface CreateRuleGroupResponse {
+  /**
+   * <p>创建成功的规则组唯一标识，fwmrg- 前缀</p>
+   */
+  GroupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2229,6 +2309,14 @@ export interface VpcAclRuleResp {
    * 防火墙组名称
    */
   FwGroupName?: string
+  /**
+   * 命中次数。该规则在所有已下发成员账号下的累计命中次数合计，直接采用云防火墙返回值，不做时间窗口换算；从未命中时为 0
+   */
+  HitCount?: number
+  /**
+   * 最近命中时间。取该规则在所有已下发成员账号中最新的命中时间；从未命中时为 "-"
+   */
+  LastHitTime?: string
 }
 
 /**
@@ -2399,6 +2487,7 @@ export interface SecGroupRuleResp {
   Id?: number
   /**
    * <p>域名解析的IP统计</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DnsParseCount?: SgDnsParseCount
   /**
@@ -2578,6 +2667,14 @@ export interface EdgeAclRuleResp {
    * 域名数
    */
   DnsParseCnt?: number
+  /**
+   * 命中次数。该规则在所有已下发成员账号下的累计命中次数合计，直接采用云防火墙返回值，不做时间窗口换算；从未命中时为 0
+   */
+  HitCount?: number
+  /**
+   * 最近命中时间。取该规则在所有已下发成员账号中最新的命中时间；从未命中时为 "-"
+   */
+  LastHitTime?: string
 }
 
 /**
@@ -2595,11 +2692,11 @@ export interface ModifyRuleGroupResponse {
  */
 export interface CreateEdgeAclRuleRequest {
   /**
-   * 规则组ID
+   * <p>规则组ID</p>
    */
   GroupId?: string
   /**
-   * 规则列表
+   * <p>规则列表</p>
    */
   Rules?: Array<EdgeAclRuleInfo>
 }
@@ -2609,11 +2706,11 @@ export interface CreateEdgeAclRuleRequest {
  */
 export interface CreateVpcAclRuleRequest {
   /**
-   * 规则组ID
+   * <p>规则组ID</p>
    */
   GroupId: string
   /**
-   * 规则列表
+   * <p>规则列表</p>
    */
   Rules: Array<VpcAclRule>
 }
@@ -2656,6 +2753,10 @@ export interface CreateSecurityGroupRuleGroupRequest {
  * CreateNatAclRule返回参数结构体
  */
 export interface CreateNatAclRuleResponse {
+  /**
+   * <p>规则Id列表</p>
+   */
+  RuleIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2883,47 +2984,23 @@ export interface AccountStatsGroup {
  */
 export interface CreateSecurityGroupRuleRequest {
   /**
-   * 规则组Id
+   * <p>规则组Id</p>
    */
   GroupId?: string
   /**
-   * 规则列表
+   * <p>规则列表</p>
    */
   Rules?: Array<SecurityGroupRule>
 }
 
 /**
- * DescribeRiskList请求参数结构体
+ * ModifyNatAclRule返回参数结构体
  */
-export interface DescribeRiskListRequest {
+export interface ModifyNatAclRuleResponse {
   /**
-   * 条数限制
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit: number
-  /**
-   * 偏移量
-   */
-  Offset: number
-  /**
-   * 产品类型
-   */
-  Product?: string
-  /**
-   * 筛选条件
-   */
-  Filters?: Array<CommonFilter>
-  /**
-   * 排序方式
-   */
-  Order?: string
-  /**
-   * 排序字段
-   */
-  By?: string
-  /**
-   * 成员Id
-   */
-  MemberId?: string
+  RequestId?: string
 }
 
 /**
@@ -3163,11 +3240,11 @@ export interface CreateEdgeAclRuleGroupRequest {
  */
 export interface CreateNatAclRuleRequest {
   /**
-   * 规则组ID
+   * <p>规则组ID</p>
    */
   GroupId: string
   /**
-   * 规则列表
+   * <p>规则列表</p>
    */
   Rules: Array<NatAclRule>
 }

@@ -935,9 +935,9 @@ export interface CloneViralRequest {
    */
   VideoUrl: string
   /**
-   * <p>产品信息</p>
+   * <p>产品信息。除深度提取外，其他模式必填</p>
    */
-  Product: CloneViralProduct
+  Product?: CloneViralProduct
   /**
    * <p>AIGC生视频相关参数</p>
    */
@@ -4107,7 +4107,7 @@ export interface CloneViralAIGC {
    */
   Resolution?: string
   /**
-   * <p>模型等级。flagship（默认）、standard</p>
+   * <p>模式。flagship（高级版，默认）、standard（标准版）、depthcrafter(深度提取)</p>
    */
   ModelTier?: string
 }

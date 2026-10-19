@@ -2185,9 +2185,25 @@ export interface ProxyNodes {
 }
 
 /**
- * ModifyInstance返回参数结构体
+ * DescribeBackupEncryptConfig返回参数结构体
  */
-export interface ModifyInstanceResponse {
+export interface DescribeBackupEncryptConfigResponse {
+  /**
+   * <p>备份是否加密</p><p>枚举值：</p><ul><li>true： 加密</li><li>false： 不加密</li></ul>
+   */
+  BackupEncrypt?: boolean
+  /**
+   * <p>加密密钥类型。</p><p>枚举值：</p><ul><li>0： 腾讯云托管（默认）</li><li>1： 用户自定义 KMS 密钥</li></ul>
+   */
+  EncryptKeyType?: number
+  /**
+   * <p>KMS的密钥ID。</p><p>参数格式：xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx</p>
+   */
+  KmsKeyId?: string
+  /**
+   * <p>KMS地域信息。</p><p>参数格式：ap-xxxx</p>
+   */
+  KmsRegion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2475,6 +2491,20 @@ export interface ModifyMaintenanceWindowRequest {
    **说明：**维护时间窗时长，当前支持：30分钟、1小时、1.5小时、2小时、3小时。
    */
   EndTime: string
+}
+
+/**
+ * 秒级备份不存在的时间戳范围
+ */
+export interface SecondLevelBackupMissingTimestamps {
+  /**
+   * 开始时间戳
+   */
+  StartTimeStamp?: number
+  /**
+   * 结束时间戳
+   */
+  EndTimeStamp?: number
 }
 
 /**
@@ -3468,17 +3498,13 @@ export interface ModifyInstanceEventRequest {
 }
 
 /**
- * 秒级备份不存在的时间戳范围
+ * ModifyBackupEncrypt返回参数结构体
  */
-export interface SecondLevelBackupMissingTimestamps {
+export interface ModifyBackupEncryptResponse {
   /**
-   * 开始时间戳
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTimeStamp?: number
-  /**
-   * 结束时间戳
-   */
-  EndTimeStamp?: number
+  RequestId?: string
 }
 
 /**
@@ -5352,6 +5378,16 @@ export interface DeleteParamTemplateResponse {
 }
 
 /**
+ * ModifyInstance返回参数结构体
+ */
+export interface ModifyInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpgradeInstance返回参数结构体
  */
 export interface UpgradeInstanceResponse {
@@ -5439,6 +5475,16 @@ export interface ModifyInstancePasswordPolicyRequest {
    * <p>实例的密码复杂度策略控制对象，包含密码长度及各类字符（字母/数字/特殊符号）最小数量的校验指标。</p>
    */
   PasswordPolicy: PasswordPolicy
+}
+
+/**
+ * DescribeBackupEncryptConfig请求参数结构体
+ */
+export interface DescribeBackupEncryptConfigRequest {
+  /**
+   * <p>实例 ID，请登录<a href="https://console.cloud.tencent.com/redis/instance/list">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
 }
 
 /**
@@ -7275,6 +7321,32 @@ export interface DescribeGlobalReplicationAreaResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyBackupEncrypt请求参数结构体
+ */
+export interface ModifyBackupEncryptRequest {
+  /**
+   * <p>实例 ID，请登录Redis控制台在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>是否开启备份加密。</p><p>默认值：false</p>
+   */
+  BackupEncrypt: boolean
+  /**
+   * <p>加密密钥类型。</p><p>枚举值：</p><ul><li>0： 腾讯云托管（默认）</li><li>1： 用户自定义 KMS 密钥</li></ul><p>默认值：0</p>
+   */
+  EncryptKeyType?: number
+  /**
+   * <p>KMS的密钥ID。</p><p>参数格式：xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx</p>
+   */
+  KmsKeyId?: string
+  /**
+   * <p>地域信息。</p><p>参数格式：ap-xxxx</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/573/34406#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">KMS支持的地域列表</a></p>
+   */
+  KmsRegion?: string
 }
 
 /**

@@ -2421,6 +2421,10 @@ export interface CreateProxyEndPointRequest {
    * <p>负载均衡模式</p><p>枚举值：</p><ul><li>static： 静态负载</li><li>dynamic： 动态负载</li></ul>
    */
   LoadBalanceMode?: string
+  /**
+   * <p>是否开启事务全拆分。在一个事务中将事务写前和写后的读拆分到不同的实例上去执行。</p>
+   */
+  TransAllSplit?: boolean
 }
 
 /**
@@ -3104,6 +3108,10 @@ export interface ProxyGroupRwInfo {
    * <p>自动负载</p><p>枚举值：</p><ul><li>static： 静态负载</li><li>dynamic： 动态负载</li></ul>
    */
   LoadBalanceMode?: string
+  /**
+   * <p>是否开启事务全拆分。在一个事务中将事务写前和写后的读拆分到不同的实例上去执行。</p>
+   */
+  TransAllSplit?: boolean
 }
 
 /**
@@ -4621,6 +4629,10 @@ export interface ModifyProxyRwSplitRequest {
    * <p>负载均衡模式</p><p>枚举值：</p><ul><li>static： 静态负载</li><li>dynamic： 动态负载</li></ul>
    */
   LoadBalanceMode?: string
+  /**
+   * <p>是否开启事务全拆分。在一个事务中将事务写前和写后的读拆分到不同的实例上去执行。</p>
+   */
+  TransAllSplit?: boolean
 }
 
 /**
@@ -13618,6 +13630,22 @@ export interface DownloadLibraDBClusterListRequest {
  */
 export interface ClusterInstanceDetail {
   /**
+   * <p>用户Uin</p>
+   */
+  Uin?: string
+  /**
+   * <p>用户AppId</p>
+   */
+  AppId?: number
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
    * <p>实例ID</p>
    */
   InstanceId?: string
@@ -13639,8 +13667,25 @@ export interface ClusterInstanceDetail {
   InstanceStatusDesc?: string
   /**
    * <p>cpu核数</p>
+   * @deprecated
    */
   InstanceCpu?: number
+  /**
+   * <p>Cpu</p><p>单位：核</p>
+   */
+  Cpu?: number
+  /**
+   * <p>serverless实例cpu下限</p><p>单位：核</p>
+   */
+  MinCpu?: number
+  /**
+   * <p>serverless实例cpu上限</p><p>单位：核</p>
+   */
+  MaxCpu?: number
+  /**
+   * <p>内存</p><p>单位：GB</p>
+   */
+  Memory?: number
   /**
    * <p>内存</p>
    */
@@ -13666,10 +13711,6 @@ export interface ClusterInstanceDetail {
    */
   MaintainWeekDays?: Array<string>
   /**
-   * <p>serverless实例子状态</p>
-   */
-  ServerlessStatus?: string
-  /**
    * <p>实例任务信息</p>
    */
   InstanceTasks?: Array<ObjectTask>
@@ -13690,9 +13731,158 @@ export interface ClusterInstanceDetail {
    */
   NodeList?: Array<string>
   /**
+   * <p>serverless实例子状态</p>
+   */
+  ServerlessStatus?: string
+  /**
    * <p>AI优化器状态</p>
    */
   AIOptimizerStatus?: AIOptimizerStatus
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId?: number
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>可用区</p>
+   */
+  Zone?: string
+  /**
+   * <p>实例所在的物理可用区</p>
+   */
+  PhysicalZone?: string
+  /**
+   * <p>实例状态</p><p>枚举值：</p><ul><li>creating： 创建中</li><li>running： 运行中</li><li>isolating： 隔离中</li><li>isolated： 已隔离</li><li>activating： 恢复中</li><li>offlining： 下线中</li><li>offlined： 已下线</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>实例状态中文描述</p>
+   */
+  StatusDesc?: string
+  /**
+   * <p>数据库类型</p>
+   */
+  DbType?: string
+  /**
+   * <p>数据库版本</p>
+   */
+  DbVersion?: string
+  /**
+   * <p>存储量</p><p>单位：GB</p>
+   */
+  Storage?: number
+  /**
+   * <p>预付费存储Id</p>
+   */
+  StorageId?: string
+  /**
+   * <p>存储付费类型</p><p>枚举值：</p><ul><li>0： 后付费</li><li>1： 预付费</li></ul>
+   */
+  StoragePayMode?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>隔离时间</p>
+   */
+  IsolateTime?: string
+  /**
+   * <p>实例销毁时间</p>
+   */
+  DestroyTime?: string
+  /**
+   * <p>销毁期限</p>
+   */
+  DestroyDeadlineText?: string
+  /**
+   * <p>实例过期时间</p>
+   */
+  PeriodEndTime?: string
+  /**
+   * <p>VPC网络ID</p>
+   */
+  VpcId?: string
+  /**
+   * <p>子网ID</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>实例内网IP</p>
+   */
+  Vip?: string
+  /**
+   * <p>实例内网端口</p>
+   */
+  Vport?: number
+  /**
+   * <p>网络类型</p>
+   */
+  NetType?: number
+  /**
+   * <p>外网IP</p>
+   */
+  WanIP?: string
+  /**
+   * <p>外网端口</p>
+   */
+  WanPort?: number
+  /**
+   * <p>外网开启状态</p>
+   */
+  WanStatus?: string
+  /**
+   * <p>实例外网域名</p>
+   */
+  WanDomain?: string
+  /**
+   * <p>实例的网络信息</p>
+   */
+  InstanceNetInfo?: Array<InstanceNetInfo>
+  /**
+   * <p>付费模式</p><p>枚举值：</p><ul><li>0： 后付费</li><li>1： 预付费</li></ul>
+   */
+  PayMode?: number
+  /**
+   * <p>正在处理的任务</p>
+   */
+  ProcessingTask?: string
+  /**
+   * <p>续费标志</p>
+   */
+  RenewFlag?: number
+  /**
+   * <p>任务</p>
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * <p>是否冻结</p>
+   */
+  IsFreeze?: string
+  /**
+   * <p>资源标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * <p>当前实例支持的能力</p>
+   */
+  InstanceAbility?: InstanceAbility
+  /**
+   * <p>实例机器类型</p><p>枚举值：</p><ul><li>common： 通用型</li><li>exclusive： 独享型</li></ul>
+   */
+  DeviceType?: string
+  /**
+   * <p>全球数据库唯一标识</p>
+   */
+  GdnId?: string
 }
 
 /**

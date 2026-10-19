@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeLLMWafDLPRulesResponse,
   ApiSecCustomEventRule,
-  DeleteOwaspWhiteRuleRequest,
+  AddLLMSdkAccessResponse,
   ModifyUserLevelResponse,
   ApiSecEventChange,
   DescribeLogHistogramRequest,
@@ -33,7 +33,7 @@ import {
   AddAntiFakeUrlRequest,
   DescribeOwaspWhiteRulesResponse,
   DescribeApiListVersionTwoResponse,
-  GlobalSceneInfo,
+  DescribeAfterPayInstancesRequest,
   Object,
   DescribePeakValueResponse,
   PathItem,
@@ -106,6 +106,7 @@ import {
   UCBActionProportion,
   DeleteIpAccessControlRequest,
   DeleteRateLimitsV2Request,
+  GlobalSceneInfo,
   DescribeDomainCountInfoResponse,
   ModifyHostModeRequest,
   ModifyAntiInfoLeakRuleStatusRequest,
@@ -164,6 +165,7 @@ import {
   ModifyApiSecSensitiveRuleRequest,
   DescribeCustomWhiteRuleResponse,
   ModifySpartaProtectionRequest,
+  LLMImageTrendItem,
   DeleteAttackDownloadRecordRequest,
   DescribeAntiFakeRulesRequest,
   DescribeVipInfoRequest,
@@ -173,10 +175,12 @@ import {
   DeleteSessionResponse,
   HistogramInfo,
   DescribeAccessIndexResponse,
+  DescribeWafAutoDenyStatusResponse,
   ModifyUserSignatureRuleRequest,
   SearchAccessLogRequest,
   CreatePostCKafkaFlowResponse,
   FieldWriteConfig,
+  LLMTokenUsage,
   ModifyWafThreatenIntelligenceResponse,
   DescribeUserDomainInfoResponse,
   QueryBypassAllStatusResponse,
@@ -219,7 +223,7 @@ import {
   AddAntiFakeUrlResponse,
   SearchAttackLogResponse,
   ModifySpartaProtectionModeResponse,
-  ModifySpartaProtectionResponse,
+  DescribeAfterPayInstancesResponse,
   DescribeUserCdcClbWafRegionsResponse,
   SwitchElasticModeResponse,
   AccessRuleInfo,
@@ -265,10 +269,11 @@ import {
   DescribeBatchCustomRuleListResponse,
   TigaMainClassMode,
   DeleteBotSceneUCBRuleResponse,
+  LLMTokenTrendItem,
   AnonymousInfo,
   DescribeUserSignatureClassResponse,
   DescribePortsRequest,
-  DescribeWafAutoDenyStatusResponse,
+  DeleteOwaspWhiteRuleRequest,
   ModifyLLMWafDLPRuleResponse,
   AreaBanRule,
   DescribeTlsVersionRequest,
@@ -327,6 +332,7 @@ import {
   GenerateLLMSecAnswerResponse,
   CreateExportResponse,
   DescribeUserClbWafRegionsRequest,
+  AddLLMSdkAccessRequest,
   DescribePostCKafkaFlowsRequest,
   CreatePostCKafkaFlowRequest,
   DescribeBotSceneListResponse,
@@ -416,6 +422,7 @@ import {
   IntentContent,
   TokenValidation,
   DescribeBotIdRuleRequest,
+  AfterPayInstanceInfo,
   DescribeCustomRuleListResponse,
   TagInfo,
   BotIdStat,
@@ -503,7 +510,7 @@ import {
   LLMPkg,
   DescribeTopAttackDomainRequest,
   DescribeAccessFastAnalysisResponse,
-  DeleteAntiInfoLeakRuleRequest,
+  DescribeProtectGroupResponse,
   ModifyDomainIpv6StatusResponse,
   UploadSkillSecScanResponse,
   DescribeHostLimitResponse,
@@ -603,6 +610,7 @@ import {
   ModifyCustomWhiteRuleRequest,
   DeleteCustomWhiteRuleRequest,
   ModifyInstanceRenewFlagResponse,
+  ModifySpartaProtectionResponse,
   ModifyOwaspRuleTypeStatusResponse,
   AddAttackWhiteRuleResponse,
   DescribeApiAggregateTopNResponse,
@@ -684,7 +692,7 @@ import {
   DescribeWebshellStatusResponse,
   ModifyLLMContentRuleResponse,
   FindAllDomainDetail,
-  DescribeProtectGroupResponse,
+  DeleteAntiInfoLeakRuleRequest,
   DescribeBotSceneOverviewResponse,
   DescribeVipInfoResponse,
   DescribeLLMKeywordLibraryResponse,
@@ -1089,6 +1097,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCustomRuleResponse) => void
   ): Promise<DeleteCustomRuleResponse> {
     return this.request("DeleteCustomRule", req, cb)
+  }
+
+  /**
+   * llmwaf-sdk新增接入配置接口
+   */
+  async AddLLMSdkAccess(
+    req: AddLLMSdkAccessRequest,
+    cb?: (error: string, rep: AddLLMSdkAccessResponse) => void
+  ): Promise<AddLLMSdkAccessResponse> {
+    return this.request("AddLLMSdkAccess", req, cb)
   }
 
   /**
@@ -2112,6 +2130,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessHistogramResponse) => void
   ): Promise<DescribeAccessHistogramResponse> {
     return this.request("DescribeAccessHistogram", req, cb)
+  }
+
+  /**
+   * 查询后付费实例列表（仅 Edition=llm-sdk-waf）。请求参数与 DescribeInstances 一致；仅返回 tb_instance_conf 基础数据，不含套餐/标签等扩展信息。
+   */
+  async DescribeAfterPayInstances(
+    req: DescribeAfterPayInstancesRequest,
+    cb?: (error: string, rep: DescribeAfterPayInstancesResponse) => void
+  ): Promise<DescribeAfterPayInstancesResponse> {
+    return this.request("DescribeAfterPayInstances", req, cb)
   }
 
   /**

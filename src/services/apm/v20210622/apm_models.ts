@@ -448,6 +448,23 @@ export interface DescribeApmServiceMetricResponse {
 }
 
 /**
+ * https://iwiki.woa.com/p/4035597532
+自定义 Span 状态
+ */
+export interface SpanStatusConfig {
+  /**
+   * <p>标记为错误规则组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MarkAsError?: ErrorSpanConf
+  /**
+   * <p>标记为正常规则组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MarkAsOk?: ErrorSpanConf
+}
+
+/**
  * ModifyApmAssociation请求参数结构体
  */
 export interface ModifyApmAssociationRequest {
@@ -1329,6 +1346,14 @@ export interface ApmAppConfig {
    * <p>跨账号关联ID</p>
    */
   CrossAccountPeerId?: string
+  /**
+   * <p>自定义 Span 状态配置</p>
+   */
+  SpanStatusConfig?: SpanStatusConfig
+  /**
+   * <p>应用级自定义 Span 状态开关</p>
+   */
+  EnableSpanStatusConfig?: boolean
 }
 
 /**
@@ -1343,6 +1368,20 @@ export interface CreateApmSampleConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 接口参数列表
+ */
+export interface ChartData {
+  /**
+   * <p>接口参数id列表</p>
+   */
+  Series: Array<Series>
+  /**
+   * <p>接口参数列表</p>
+   */
+  YAxis: Array<YAxis>
 }
 
 /**
@@ -1400,17 +1439,19 @@ export interface APMKVItem {
 }
 
 /**
- * 接口参数列表
+ * 具体单个配置
  */
-export interface ChartData {
+export interface ErrorSpanConf {
   /**
-   * <p>接口参数id列表</p>
+   * <p>错误类型匹配规则列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Series: Array<Series>
+  ErrorObjectPatterns?: Array<string>
   /**
-   * <p>接口参数列表</p>
+   * <p>错误码匹配规则列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  YAxis: Array<YAxis>
+  ErrorCodes?: Array<string>
 }
 
 /**
@@ -1921,6 +1962,10 @@ export interface ModifyApmInstanceRequest {
    * <p>是否开启Token 展示安全保护</p><p>单位：0：不开启，1：开启</p><p>默认值：0</p>
    */
   TokenDisplayProtection?: number
+  /**
+   * <p>自定义 Span 状态配置</p>
+   */
+  SpanStatusConfig?: SpanStatusConfig
 }
 
 /**
@@ -2953,6 +2998,10 @@ export interface ApmInstanceDetail {
    * <p>开启Token展示安全保护</p><p>单位：是、否</p>
    */
   TokenDisplayProtection?: number
+  /**
+   * <p>自定义 Span 状态配置</p>
+   */
+  SpanStatusConfig?: SpanStatusConfig
 }
 
 /**
@@ -3895,6 +3944,14 @@ export interface ModifyApmApplicationConfigRequest {
    * <p>跨账号关联ID</p>
    */
   CrossAccountPeerId?: string
+  /**
+   * <p>应用级自定义 Span 状态开关</p>
+   */
+  EnableSpanStatusConfig?: boolean
+  /**
+   * <p>自定义 Span 状态配置</p>
+   */
+  SpanStatusConfig?: SpanStatusConfig
 }
 
 /**

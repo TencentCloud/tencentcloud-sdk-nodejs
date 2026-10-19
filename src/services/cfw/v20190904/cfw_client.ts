@@ -79,6 +79,7 @@ import {
   EdgeIpSwitch,
   ModifyIsolateTableRequest,
   CreateNatFwInstanceWithDomainResponse,
+  OverviewNDRDetail,
   DescribeAssetSyncRequest,
   ModifyAllRuleStatusRequest,
   RuleInfoData,
@@ -101,6 +102,7 @@ import {
   ModifyClusterVpcFwSwitchRequest,
   DescribeVpcAcRuleResponse,
   EnterpriseSecurityGroupRuleRuleInfo,
+  DescribeOverviewResourceQuotaResponse,
   UpdateCheckCcnNonDirectFlagResponse,
   DescribeFwSyncStatusRequest,
   DeleteNatFwDnatRuleResponse,
@@ -118,6 +120,7 @@ import {
   DescribeTLogIpListResponse,
   StopSecurityGroupRuleDispatchResponse,
   DescribeNatFwInfoCountRequest,
+  OverviewBlockListQuota,
   SetNatFwDnatRuleRequest,
   StopSecurityGroupRuleDispatchRequest,
   EnterpriseSecurityGroupRuleBetaInfo,
@@ -130,6 +133,7 @@ import {
   TLogInfo,
   DescribeLogsResponse,
   DescribeClusterVpcFwSwitchsRequest,
+  OverviewQuotaDetail,
   DescribeFwGroupIdNamesResponse,
   DescribeCfwAlertsRequest,
   DescribeSerialRegionResponse,
@@ -173,6 +177,7 @@ import {
   DeleteBlockIgnoreRuleListResponse,
   DescribeNDRAssetIdentificationListRequest,
   DescribeNatCcnFwSwitchRequest,
+  OverviewVpcRuleQuotaDetail,
   DescribeCfwAnalysisDataRequest,
   DeleteSecurityGroupRuleResponse,
   SequenceData,
@@ -187,6 +192,7 @@ import {
   DescribeCcnAssociatedInstancesRequest,
   ModifyVpcAcRuleRequest,
   BetaInfoByACL,
+  OverviewBlockListQuotaDetail,
   CreateNatFwDnatRuleResponse,
   DescribeAcListsResponse,
   ModifyClusterFwBypassResponse,
@@ -259,6 +265,7 @@ import {
   SwitchFailInfo,
   DescribeSourceAssetResponse,
   DescribeVpcAclEdgeRangeResponse,
+  OverviewCommonRuleQuotaDetail,
   ModifyNatFwVpcDnsSwitchRequest,
   DeleteBlockIgnoreRuleNewResponse,
   DescribeCfwStatusMonitorResponse,
@@ -271,6 +278,7 @@ import {
   AssociatedInstanceInfo,
   ModifyNatAcRuleResponse,
   ExportLogsOfflineResponse,
+  VolumeUsageDetail,
   ModifyAssetScanRequest,
   VpcFwCvmInsInfo,
   DescribeEnterpriseSGRuleProgressResponse,
@@ -291,6 +299,7 @@ import {
   DescribeCfwInsStatusRequest,
   LogItem,
   SwitchError,
+  OverviewResourceQuotaDetail,
   DescribeNatRuleScopesRequest,
   DescribeCfwRuleOptimizationRequest,
   StorageHistogramShow,
@@ -327,6 +336,7 @@ import {
   FwGroupIdName,
   DescribeBlockIgnoreListRequest,
   DescribeBlockIgnoreListResponse,
+  OverviewResourceQuotaDataLite,
   SearchLogErrors,
   DescribeCcnVpcFwSwitchRequest,
   DescribeSecurityGroupRegionListResponse,
@@ -381,6 +391,7 @@ import {
   ModifyBlockIgnoreListResponse,
   RemoveAcRuleResponse,
   DescribeCcnVpcFwPolicyLimitResponse,
+  DescribeOverviewResourceQuotaRequest,
   AddVpcAcRuleResponse,
   CheckClusterVpcFwPreAccessResponse,
   ModifySequenceRulesRequest,
@@ -428,6 +439,7 @@ import {
   IocListData,
   ModifyEdgeIpSwitchResponse,
   UpdateCheckCcnNonDirectFlagRequest,
+  OverviewEastWestDetail,
   DeleteNatFwInstanceRequest,
   DescribeCfwRulesResponse,
   SetNatFwDnatRuleResponse,
@@ -436,6 +448,7 @@ import {
   DescribeDefenseSwitchResponse,
   DescribeAcListsRequest,
   CcnAssociatedInstance,
+  OverviewLogStorageDetail,
   DeleteAcRuleRequest,
   ModifyNatFwSwitchRequest,
   DeleteBlockIgnoreRuleNewRequest,
@@ -447,6 +460,7 @@ import {
   DescribeNatFwDnatRuleResponse,
   DescribeGuideScanInfoRequest,
   DescribeClusterVpcFwSwitchsResponse,
+  OverviewNorthSouthDetail,
   CheckClusterVpcFwPreAccessRequest,
   CreateSecurityGroupRulesRequest,
   NDRAssetServiceInfo,
@@ -657,13 +671,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 删除企业安全组规则。
+   * 查询VPC防火墙策略路由功能开白的CCN列表
    */
-  async RemoveEnterpriseSecurityGroupRule(
-    req: RemoveEnterpriseSecurityGroupRuleRequest,
-    cb?: (error: string, rep: RemoveEnterpriseSecurityGroupRuleResponse) => void
-  ): Promise<RemoveEnterpriseSecurityGroupRuleResponse> {
-    return this.request("RemoveEnterpriseSecurityGroupRule", req, cb)
+  async DescribeVpcFwCcnPolicyWhiteList(
+    req?: DescribeVpcFwCcnPolicyWhiteListRequest,
+    cb?: (error: string, rep: DescribeVpcFwCcnPolicyWhiteListResponse) => void
+  ): Promise<DescribeVpcFwCcnPolicyWhiteListResponse> {
+    return this.request("DescribeVpcFwCcnPolicyWhiteList", req, cb)
   }
 
   /**
@@ -1307,6 +1321,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 删除企业安全组规则。
+   */
+  async RemoveEnterpriseSecurityGroupRule(
+    req: RemoveEnterpriseSecurityGroupRuleRequest,
+    cb?: (error: string, rep: RemoveEnterpriseSecurityGroupRuleResponse) => void
+  ): Promise<RemoveEnterpriseSecurityGroupRuleResponse> {
+    return this.request("RemoveEnterpriseSecurityGroupRule", req, cb)
+  }
+
+  /**
    * 修改规则表状态
    */
   async ModifyTableStatus(
@@ -1317,13 +1341,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 查询VPC防火墙策略路由功能开白的CCN列表
+   * 查询云防火墙概览页资源与配额详情信息，返回带宽配额、实例与规则配额、日志存储信息及相关能力标识。
    */
-  async DescribeVpcFwCcnPolicyWhiteList(
-    req?: DescribeVpcFwCcnPolicyWhiteListRequest,
-    cb?: (error: string, rep: DescribeVpcFwCcnPolicyWhiteListResponse) => void
-  ): Promise<DescribeVpcFwCcnPolicyWhiteListResponse> {
-    return this.request("DescribeVpcFwCcnPolicyWhiteList", req, cb)
+  async DescribeOverviewResourceQuota(
+    req: DescribeOverviewResourceQuotaRequest,
+    cb?: (error: string, rep: DescribeOverviewResourceQuotaResponse) => void
+  ): Promise<DescribeOverviewResourceQuotaResponse> {
+    return this.request("DescribeOverviewResourceQuota", req, cb)
   }
 
   /**

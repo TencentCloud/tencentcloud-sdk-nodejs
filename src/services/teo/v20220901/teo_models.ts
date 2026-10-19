@@ -1025,9 +1025,13 @@ export interface DescribeOriginProtectionResponse {
  */
 export interface TCEOCaptchaOption {
   /**
-   * EdgeOne 人机校验模式，取值有：<li> Invisible：无感验证；</li><li>Adaptive：自适应交互验证。</li>
+   * <p>浏览器端 WebView 人机校验交互模式。</p><p>枚举值：</p><ul><li>Invisible： 无感验证</li><li>Adaptive： 自适应交互验证</li></ul><p>默认值：Invisible</p>
    */
   CaptchaMode?: string
+  /**
+   * <p>移动端原生 App 人机校验交互模式。</p><p>枚举值：</p><ul><li>Invisible： 无感验证</li><li>Visible： 交互验证</li></ul><p>默认值：Invisible</p>
+   */
+  MobileCaptchaMode?: string
 }
 
 /**
