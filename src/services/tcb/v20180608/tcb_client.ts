@@ -103,6 +103,7 @@ import {
   CreateCustomLoginKeyResponse,
   ModifyClientRequest,
   DeletePlatformHTTPServiceRouteResponse,
+  ModifyAIModelStatusRequest,
   FunctionEipConfig,
   CheckTcbServiceRequest,
   DescribeManagedAIModelListResponse,
@@ -120,6 +121,7 @@ import {
   CheckTcbServiceResponse,
   DeleteCloudAppVersionResponse,
   DescribeCloudBaseRunServerVersionRequest,
+  ModifyAIModelStatusResponse,
   ModifyEnvPlanRequest,
   HTTPServiceRuleCondition,
   DescribeCloudAppVersionListResponse,
@@ -147,7 +149,7 @@ import {
   ExecutePGSqlResponse,
   DescribeCreditsUsageRequest,
   DescribeMySQLClusterDetailRequest,
-  ModifyEnvExtraRequest,
+  DescribePlatformCreditsUsageRequest,
   CreateStaticStoreRequest,
   DescribeBillingInfoResponse,
   DescribeEnvsRequest,
@@ -249,6 +251,7 @@ import {
   MessageLocalized,
   UpdateFunctionConfigurationRequest,
   VerifyPlatformHTTPServiceRouteResponse,
+  AIModelStatus,
   UpdateAIModelRequest,
   DailyUsageList,
   RenewEnvRequest,
@@ -369,7 +372,7 @@ import {
   DescribeEnvPlansRequest,
   DescribeBaasPackageListResponse,
   Provider,
-  DescribePlatformCreditsUsageRequest,
+  ModifyEnvExtraRequest,
   CloudAppFilter,
   User,
   Variable,
@@ -1310,6 +1313,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribePlatformCreditsUsageResponse) => void
   ): Promise<DescribePlatformCreditsUsageResponse> {
     return this.request("DescribePlatformCreditsUsage", req, cb)
+  }
+
+  /**
+   * 启停AI模型，只支持内置分组 cloudbase 和 hunyuan-image
+   */
+  async ModifyAIModelStatus(
+    req: ModifyAIModelStatusRequest,
+    cb?: (error: string, rep: ModifyAIModelStatusResponse) => void
+  ): Promise<ModifyAIModelStatusResponse> {
+    return this.request("ModifyAIModelStatus", req, cb)
   }
 
   /**

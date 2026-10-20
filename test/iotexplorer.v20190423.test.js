@@ -158,6 +158,16 @@ it("iotexplorer.v20190423.RevokeShareDeviceFromUser", async function () {
     }
 })
 
+it("iotexplorer.v20190423.StopPackageUsageReport", async function () {
+    try {
+       const data = await client.StopPackageUsageReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeTopicPolicy", async function () {
     try {
        const data = await client.DescribeTopicPolicy({})
@@ -511,6 +521,16 @@ it("iotexplorer.v20190423.BatchInvokeTWeSeeRecognitionTask", async function () {
 it("iotexplorer.v20190423.ControlDeviceData", async function () {
     try {
        const data = await client.ControlDeviceData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.StartPackageUsageReport", async function () {
+    try {
+       const data = await client.StartPackageUsageReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1078,6 +1098,16 @@ it("iotexplorer.v20190423.GetTopicRuleList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.UploadFirmware", async function () {
+    try {
+       const data = await client.UploadFirmware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeCloudStorageThumbnail", async function () {
     try {
        const data = await client.DescribeCloudStorageThumbnail({})
@@ -1191,6 +1221,16 @@ it("iotexplorer.v20190423.DescribeTWeSeePostPaidService", async function () {
 it("iotexplorer.v20190423.DescribeTWeSeeSubscription", async function () {
     try {
        const data = await client.DescribeTWeSeeSubscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.PurchaseImagePackage", async function () {
+    try {
+       const data = await client.PurchaseImagePackage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1428,9 +1468,9 @@ it("iotexplorer.v20190423.BindUserDevice", async function () {
     }
 })
 
-it("iotexplorer.v20190423.UploadFirmware", async function () {
+it("iotexplorer.v20190423.PurchaseVideoPackage", async function () {
     try {
-       const data = await client.UploadFirmware({})
+       const data = await client.PurchaseVideoPackage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

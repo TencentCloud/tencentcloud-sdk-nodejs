@@ -262,6 +262,7 @@ import {
   GetVodCloudStorageEventListResponse,
   DeleteTWeTalkAgentRequest,
   CreateFenceBindResponse,
+  PurchaseVideoPackageResponse,
   TalkLLMConfig,
   DescribeBindedProductsResponse,
   SeeRenewSubscriptionEntry,
@@ -292,6 +293,7 @@ import {
   ControlDeviceDataResponse,
   TalkLLMConfigInfo,
   EventHistoryItem,
+  StartPackageUsageReportRequest,
   ListTWeSeePersonsRequest,
   CreatePositionSpaceResponse,
   CreateTWeTalkProductConfigResponse,
@@ -352,6 +354,7 @@ import {
   UnbindProductsResponse,
   GetVodCloudStorageVideoListResponse,
   DeviceFirmwareInfo,
+  StartPackageUsageReportResponse,
   SeeObjectListOptions,
   CallDeviceActionSyncRequest,
   ProductDevicesPositionItem,
@@ -376,10 +379,13 @@ import {
   ModifyProductCloudStorageAIServiceResponse,
   ModifyTWeSeeConfigResponse,
   DevicePositionItem,
+  PurchaseVideoPackageRequest,
+  StopPackageUsageReportResponse,
   GetDeviceLocationHistoryRequest,
   DeletePositionSpaceRequest,
   DescribeActivateDeviceRequest,
   CreateProjectRequest,
+  StopPackageUsageReportRequest,
   TalkTTSConfigInfo,
   CreateCloudStorageAIServiceResponse,
   ModifyTWeSeeCallbackRequest,
@@ -644,6 +650,7 @@ import {
   BindTWeTalkAgentResponse,
   CreateOtaModuleResponse,
   ModifyTWeTalkAgentRequest,
+  PurchaseImagePackageRequest,
   CreateBatchProductionResponse,
   SeeExtendedOutputPrompt,
   PositionFenceInfo,
@@ -669,6 +676,7 @@ import {
   PublishFirmwareUpdateMessageRequest,
   UpdateDevicesEnableStateRequest,
   ResetCloudStorageAIServiceRequest,
+  PurchaseImagePackageResponse,
   UpdateOtaTaskStatusResponse,
   ModifyModelDefinitionResponse,
   ModifyTWeTalkProductConfigV2Request,
@@ -831,6 +839,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RevokeShareDeviceFromUserResponse) => void
   ): Promise<RevokeShareDeviceFromUserResponse> {
     return this.request("RevokeShareDeviceFromUser", req, cb)
+  }
+
+  /**
+   * 停用套餐用量上报
+   */
+  async StopPackageUsageReport(
+    req: StopPackageUsageReportRequest,
+    cb?: (error: string, rep: StopPackageUsageReportResponse) => void
+  ): Promise<StopPackageUsageReportResponse> {
+    return this.request("StopPackageUsageReport", req, cb)
   }
 
   /**
@@ -1191,6 +1209,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ControlDeviceDataResponse) => void
   ): Promise<ControlDeviceDataResponse> {
     return this.request("ControlDeviceData", req, cb)
+  }
+
+  /**
+   * 启用套餐用量上报
+   */
+  async StartPackageUsageReport(
+    req: StartPackageUsageReportRequest,
+    cb?: (error: string, rep: StartPackageUsageReportResponse) => void
+  ): Promise<StartPackageUsageReportResponse> {
+    return this.request("StartPackageUsageReport", req, cb)
   }
 
   /**
@@ -1792,6 +1820,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UploadFirmware）用于创建设备固件版本信息，在平台用于固件版本升级、固件资源下发等。
+   */
+  async UploadFirmware(
+    req: UploadFirmwareRequest,
+    cb?: (error: string, rep: UploadFirmwareResponse) => void
+  ): Promise<UploadFirmwareResponse> {
+    return this.request("UploadFirmware", req, cb)
+  }
+
+  /**
    * 拉取云存事件缩略图
    */
   async DescribeCloudStorageThumbnail(
@@ -1909,6 +1947,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTWeSeeSubscriptionResponse) => void
   ): Promise<DescribeTWeSeeSubscriptionResponse> {
     return this.request("DescribeTWeSeeSubscription", req, cb)
+  }
+
+  /**
+   * 新购图片云存资源包
+   */
+  async PurchaseImagePackage(
+    req: PurchaseImagePackageRequest,
+    cb?: (error: string, rep: PurchaseImagePackageResponse) => void
+  ): Promise<PurchaseImagePackageResponse> {
+    return this.request("PurchaseImagePackage", req, cb)
   }
 
   /**
@@ -2148,13 +2196,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UploadFirmware）用于创建设备固件版本信息，在平台用于固件版本升级、固件资源下发等。
+   * 新购视频云存资源包
    */
-  async UploadFirmware(
-    req: UploadFirmwareRequest,
-    cb?: (error: string, rep: UploadFirmwareResponse) => void
-  ): Promise<UploadFirmwareResponse> {
-    return this.request("UploadFirmware", req, cb)
+  async PurchaseVideoPackage(
+    req: PurchaseVideoPackageRequest,
+    cb?: (error: string, rep: PurchaseVideoPackageResponse) => void
+  ): Promise<PurchaseVideoPackageResponse> {
+    return this.request("PurchaseVideoPackage", req, cb)
   }
 
   /**

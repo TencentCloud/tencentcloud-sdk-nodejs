@@ -2288,6 +2288,24 @@ export interface DeletePlatformHTTPServiceRouteResponse {
 }
 
 /**
+ * ModifyAIModelStatus请求参数结构体
+ */
+export interface ModifyAIModelStatusRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>分组名</p><p>枚举值：</p><ul><li>cloudbase： 生文系列内置模型</li><li>hunyuan-image： 生图系列内置模型</li></ul><p>系统内置分组固定标识</p>
+   */
+  GroupName: string
+  /**
+   * <p>模型设置</p><p>空数组表示无操作</p>
+   */
+  Models?: Array<AIModelStatus>
+}
+
+/**
  * 云函数公网访问固定ip配置
  */
 export interface FunctionEipConfig {
@@ -2576,6 +2594,20 @@ export interface DescribeCloudBaseRunServerVersionRequest {
    * 版本名称
    */
   VersionName: string
+}
+
+/**
+ * ModifyAIModelStatus返回参数结构体
+ */
+export interface ModifyAIModelStatusResponse {
+  /**
+   * <p>影响的分组数</p>
+   */
+  Count?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3345,17 +3377,21 @@ export interface DescribeMySQLClusterDetailRequest {
 }
 
 /**
- * ModifyEnvExtra请求参数结构体
+ * DescribePlatformCreditsUsage请求参数结构体
  */
-export interface ModifyEnvExtraRequest {
+export interface DescribePlatformCreditsUsageRequest {
   /**
-   * <p>环境ID</p>
+   * <p>开始日期</p><p>参数格式：2025-09-22</p>
    */
-  EnvId: string
+  StartDate: string
   /**
-   * <p>开启或关闭 <code>超限转按量</code>。<br>可取值： TRUE/FALSE （字符串类型）<br>非法制、不传、为空 则不变更该字段。</p>
+   * <p>结束日期</p><p>参数格式：2025-09-22</p>
    */
-  EnableOverrun?: string
+  EndDate: string
+  /**
+   * <p>平台版套餐id</p>
+   */
+  PlatformId: string
 }
 
 /**
@@ -5762,6 +5798,20 @@ export interface VerifyPlatformHTTPServiceRouteResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 控制模型启用和停止
+ */
+export interface AIModelStatus {
+  /**
+   * <p>模型名称</p>
+   */
+  Model?: string
+  /**
+   * <p>开关状态</p><p>枚举值：</p><ul><li>ENABLE： 打开模型</li><li>DISABLE： 关闭模型</li></ul>
+   */
+  Status?: string
 }
 
 /**
@@ -8629,21 +8679,17 @@ export interface Provider {
 }
 
 /**
- * DescribePlatformCreditsUsage请求参数结构体
+ * ModifyEnvExtra请求参数结构体
  */
-export interface DescribePlatformCreditsUsageRequest {
+export interface ModifyEnvExtraRequest {
   /**
-   * <p>开始日期</p><p>参数格式：2025-09-22</p>
+   * <p>环境ID</p>
    */
-  StartDate: string
+  EnvId: string
   /**
-   * <p>结束日期</p><p>参数格式：2025-09-22</p>
+   * <p>开启或关闭 <code>超限转按量</code>。<br>可取值： TRUE/FALSE （字符串类型）<br>非法制、不传、为空 则不变更该字段。</p>
    */
-  EndDate: string
-  /**
-   * <p>平台版套餐id</p>
-   */
-  PlatformId: string
+  EnableOverrun?: string
 }
 
 /**

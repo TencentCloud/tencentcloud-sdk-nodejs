@@ -58,6 +58,16 @@ it("organization.v20210331.ListOrganizationIdentity", async function () {
     }
 })
 
+it("organization.v20210331.ListPoliciesForTarget", async function () {
+    try {
+       const data = await client.ListPoliciesForTarget({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.AddOrganizationNode", async function () {
     try {
        const data = await client.AddOrganizationNode({})
@@ -421,6 +431,16 @@ it("organization.v20210331.ProvisionRoleConfiguration", async function () {
 it("organization.v20210331.DescribeShareUnitNodes", async function () {
     try {
        const data = await client.DescribeShareUnitNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DeleteRoleConfigurationApplyScope", async function () {
+    try {
+       const data = await client.DeleteRoleConfigurationApplyScope({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,9 +858,9 @@ it("organization.v20210331.DeleteOrganization", async function () {
     }
 })
 
-it("organization.v20210331.ListPoliciesForTarget", async function () {
+it("organization.v20210331.ListPermissionApplyOrders", async function () {
     try {
-       const data = await client.ListPoliciesForTarget({})
+       const data = await client.ListPermissionApplyOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -891,6 +911,16 @@ it("organization.v20210331.DescribeOrganization", async function () {
 it("organization.v20210331.UpdateSCIMSynchronizationStatus", async function () {
     try {
        const data = await client.UpdateSCIMSynchronizationStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateRoleConfigurationApplyScope", async function () {
+    try {
+       const data = await client.CreateRoleConfigurationApplyScope({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1281,6 +1311,16 @@ it("organization.v20210331.DeleteOrganizationIdentity", async function () {
 it("organization.v20210331.EnablePolicyType", async function () {
     try {
        const data = await client.EnablePolicyType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.ListRoleConfigurationApplyScopes", async function () {
+    try {
+       const data = await client.ListRoleConfigurationApplyScopes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

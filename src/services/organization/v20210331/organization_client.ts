@@ -25,9 +25,10 @@ import {
   SetExternalSAMLIdentityProviderRequest,
   ListGroupMembersRequest,
   RoleConfigurationProvisionings,
-  UpdatePolicyRequest,
+  ListRoleConfigurationApplyScopesRequest,
+  ZoneStatistics,
   DescribeShareUnitResourcesResponse,
-  RoleConfiguration,
+  ListPermissionApplyOrdersRequest,
   DescribeOrganizationMemberEmailBindResponse,
   EnablePolicyTypeResponse,
   ListTargetsForPolicyResponse,
@@ -56,9 +57,10 @@ import {
   OrgFinancialByMonth,
   MoveOrganizationNodeMembersResponse,
   AttachPolicyRequest,
+  UpdatePolicyRequest,
   DeleteShareUnitResponse,
   UpdateShareUnitRequest,
-  RemoveExternalSAMLIdPCertificateResponse,
+  AddOrganizationMemberEmailRequest,
   CreateGroupRequest,
   ListUsersResponse,
   DeleteRoleConfigurationRequest,
@@ -78,7 +80,7 @@ import {
   TaskStatus,
   DeleteOrganizationMembersPolicyResponse,
   DismantleRoleConfigurationResponse,
-  ClearExternalSAMLIdentityProviderRequest,
+  DeleteOrganizationResponse,
   CreateUserSyncProvisioningResponse,
   ListUserSyncProvisioningsRequest,
   ShareUnitMember,
@@ -88,7 +90,8 @@ import {
   UpdateUserRequest,
   GetGroupRequest,
   OrganizationServiceAssign,
-  DeleteOrganizationResponse,
+  TaskInfo,
+  ClearExternalSAMLIdentityProviderRequest,
   DismantleRoleConfigurationRequest,
   UpdateCustomPolicyForRoleConfigurationResponse,
   DescribeShareUnitMembersResponse,
@@ -129,7 +132,7 @@ import {
   GetTaskStatusResponse,
   SAMLIdPCertificate,
   AddShareUnitNodeRequest,
-  UpdateOrganizationMemberResponse,
+  GetZoneStatisticsRequest,
   AuthNode,
   DeleteGroupRequest,
   GetUserResponse,
@@ -138,16 +141,17 @@ import {
   CreatePolicyResponse,
   EffectivePolicy,
   Tag,
-  AddOrganizationMemberEmailRequest,
+  ApplyRoleConfiguration,
   ListOrganizationIdentityResponse,
   CancelOrganizationPolicySubAccountRequest,
   ShareArea,
   DeletePolicyRequest,
+  PolicyDetail,
   CancelOrganizationPolicySubAccountResponse,
   DescribeOrganizationMembersAuthPolicyRequest,
   GroupInfo,
   GetSCIMSynchronizationStatusResponse,
-  GetZoneStatisticsRequest,
+  CreateRoleConfigurationApplyScopeResponse,
   NodeMainInfo,
   RemovePermissionPolicyFromRoleConfigurationRequest,
   InviteOrganizationMemberRequest,
@@ -158,7 +162,7 @@ import {
   AddShareUnitRequest,
   SendOrgMemberAccountBindEmailResponse,
   OrgMemberFinancial,
-  DescribeOrganizationAuthNodeRequest,
+  DeleteRoleConfigurationApplyScopeRequest,
   OpenIdentityCenterRequest,
   GetProvisioningTaskStatusResponse,
   DescribeOrganizationMemberAuthAccountsRequest,
@@ -182,7 +186,7 @@ import {
   UserInfo,
   DeleteOrganizationMemberAuthIdentityResponse,
   GetIPWhitelistRequest,
-  TaskInfo,
+  DisablePolicyTypeRequest,
   BindOrganizationPolicySubAccountResponse,
   DeleteOrganizationMemberAuthIdentityRequest,
   OrgMember,
@@ -194,7 +198,7 @@ import {
   ListOrgServiceAssignMemberResponse,
   SendOrgMemberAccountBindEmailRequest,
   DeleteRoleAssignmentResponse,
-  DisablePolicyTypeRequest,
+  DescribeOrganizationAuthNodeRequest,
   DescribeEffectivePolicyResponse,
   CreateOrgServiceAssignResponse,
   AddOrganizationMemberEmailResponse,
@@ -204,6 +208,7 @@ import {
   CreateOrganizationMemberPolicyRequest,
   Tags,
   GetUserSyncProvisioningResponse,
+  ListRoleConfigurationApplyScopesResponse,
   CreateOrganizationRequest,
   ListJoinedGroupsForUserRequest,
   UpdateRoleConfigurationResponse,
@@ -235,6 +240,8 @@ import {
   ListPoliciesForTargetResponse,
   DeleteShareUnitMembersRequest,
   OpenIdentityCenterResponse,
+  PermissionApplyOrder,
+  UpdateUserStatusRequest,
   NotAllowReason,
   ListUsersRequest,
   DescribeOrganizationMemberAuthIdentitiesResponse,
@@ -252,14 +259,15 @@ import {
   RemovePermissionPolicyFromRoleConfigurationResponse,
   ListPoliciesRequest,
   BindOrganizationPolicySubAccountRequest,
+  UpdateSCIMSynchronizationStatusResponse,
   AuditPermissionApplyOrderResponse,
   UpdateOrganizationMembersPolicyRequest,
   CreateOrganizationMemberRequest,
   AuthRelationFile,
-  UpdateSCIMSynchronizationStatusResponse,
+  UpdateOrganizationNodeRequest,
   CreatePolicyRequest,
   OrgMemberAuthIdentity,
-  PolicyDetail,
+  CreateRoleConfigurationApplyScopeRequest,
   DescribePolicyConfigRequest,
   AddExternalSAMLIdPCertificateRequest,
   GetProvisioningTaskStatusRequest,
@@ -292,12 +300,14 @@ import {
   DescribeOrganizationMembersRequest,
   GetZoneSAMLServiceProviderInfoRequest,
   ListRoleConfigurationsResponse,
+  DeleteRoleConfigurationApplyScopeResponse,
   ListSCIMCredentialsResponse,
   DescribeOrganizationNodesRequest,
   UpdateCustomPolicyForRoleConfigurationRequest,
   UpdateIPWhitelistResponse,
   ShareResourceToMember,
   InviteOrganizationMemberResponse,
+  RemoveExternalSAMLIdPCertificateResponse,
   BindOrganizationMemberAuthAccountResponse,
   ListOrgServiceAssignMemberRequest,
   UpdateOrganizationIdentityResponse,
@@ -314,7 +324,7 @@ import {
   OrgMemberAuthAccount,
   DeleteGroupResponse,
   UpdateOrganizationMembersPolicyResponse,
-  UpdateUserStatusRequest,
+  RoleConfiguration,
   JoinedGroups,
   CreateRoleConfigurationResponse,
   GroupMembers,
@@ -323,9 +333,9 @@ import {
   DeleteRoleAssignmentRequest,
   ListTargetsForPolicyRequest,
   DeleteOrganizationIdentityRequest,
-  UpdateOrganizationNodeRequest,
+  ListPermissionApplyOrdersResponse,
   ShareUnitNode,
-  ZoneStatistics,
+  UpdateOrganizationMemberResponse,
   DeleteOrganizationNodesResponse,
   DescribeOrganizationFinancialByMemberResponse,
   AddUserToGroupResponse,
@@ -395,6 +405,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
   ): Promise<ListOrganizationIdentityResponse> {
     return this.request("ListOrganizationIdentity", req, cb)
+  }
+
+  /**
+   * 本接口（ListPoliciesForTarget）查询目标关联的策略列表
+   */
+  async ListPoliciesForTarget(
+    req: ListPoliciesForTargetRequest,
+    cb?: (error: string, rep: ListPoliciesForTargetResponse) => void
+  ): Promise<ListPoliciesForTargetResponse> {
+    return this.request("ListPoliciesForTarget", req, cb)
   }
 
   /**
@@ -765,6 +785,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeShareUnitNodesResponse) => void
   ): Promise<DescribeShareUnitNodesResponse> {
     return this.request("DescribeShareUnitNodes", req, cb)
+  }
+
+  /**
+   * 删除权限申请范围
+   */
+  async DeleteRoleConfigurationApplyScope(
+    req: DeleteRoleConfigurationApplyScopeRequest,
+    cb?: (error: string, rep: DeleteRoleConfigurationApplyScopeResponse) => void
+  ): Promise<DeleteRoleConfigurationApplyScopeResponse> {
+    return this.request("DeleteRoleConfigurationApplyScope", req, cb)
   }
 
   /**
@@ -1178,13 +1208,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ListPoliciesForTarget）查询目标关联的策略列表
+   * 管理员审批列表
    */
-  async ListPoliciesForTarget(
-    req: ListPoliciesForTargetRequest,
-    cb?: (error: string, rep: ListPoliciesForTargetResponse) => void
-  ): Promise<ListPoliciesForTargetResponse> {
-    return this.request("ListPoliciesForTarget", req, cb)
+  async ListPermissionApplyOrders(
+    req: ListPermissionApplyOrdersRequest,
+    cb?: (error: string, rep: ListPermissionApplyOrdersResponse) => void
+  ): Promise<ListPermissionApplyOrdersResponse> {
+    return this.request("ListPermissionApplyOrders", req, cb)
   }
 
   /**
@@ -1235,6 +1265,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateSCIMSynchronizationStatusResponse) => void
   ): Promise<UpdateSCIMSynchronizationStatusResponse> {
     return this.request("UpdateSCIMSynchronizationStatus", req, cb)
+  }
+
+  /**
+   * 创建权限申请范围，支持批量upsert
+   */
+  async CreateRoleConfigurationApplyScope(
+    req: CreateRoleConfigurationApplyScopeRequest,
+    cb?: (error: string, rep: CreateRoleConfigurationApplyScopeResponse) => void
+  ): Promise<CreateRoleConfigurationApplyScopeResponse> {
+    return this.request("CreateRoleConfigurationApplyScope", req, cb)
   }
 
   /**
@@ -1625,6 +1665,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnablePolicyTypeResponse) => void
   ): Promise<EnablePolicyTypeResponse> {
     return this.request("EnablePolicyType", req, cb)
+  }
+
+  /**
+   * 权限申请范围列表
+   */
+  async ListRoleConfigurationApplyScopes(
+    req: ListRoleConfigurationApplyScopesRequest,
+    cb?: (error: string, rep: ListRoleConfigurationApplyScopesResponse) => void
+  ): Promise<ListRoleConfigurationApplyScopesResponse> {
+    return this.request("ListRoleConfigurationApplyScopes", req, cb)
   }
 
   /**

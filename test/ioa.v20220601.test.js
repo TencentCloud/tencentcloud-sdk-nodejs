@@ -68,6 +68,16 @@ it("ioa.v20220601.ExportDeviceDownloadTask", async function () {
     }
 })
 
+it("ioa.v20220601.ModifyDeliveryServer", async function () {
+    try {
+       const data = await client.ModifyDeliveryServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.CreateDeviceTask", async function () {
     try {
        const data = await client.CreateDeviceTask({})
@@ -138,6 +148,16 @@ it("ioa.v20220601.CreateCompanyDirectoryConfig", async function () {
     }
 })
 
+it("ioa.v20220601.ModifyDeliveryStrategy", async function () {
+    try {
+       const data = await client.ModifyDeliveryStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.CreateDeviceVirtualGroup", async function () {
     try {
        const data = await client.CreateDeviceVirtualGroup({})
@@ -168,9 +188,9 @@ it("ioa.v20220601.DescribeProfileFieldsMenu", async function () {
     }
 })
 
-it("ioa.v20220601.DescribeDeviceSecurityInfo", async function () {
+it("ioa.v20220601.DescribeDeliveryStrategy", async function () {
     try {
-       const data = await client.DescribeDeviceSecurityInfo({})
+       const data = await client.DescribeDeliveryStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +318,16 @@ it("ioa.v20220601.BindBusinessResourceConnectorGroup", async function () {
     }
 })
 
+it("ioa.v20220601.DeleteDeliveryStrategy", async function () {
+    try {
+       const data = await client.DeleteDeliveryStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeAccountVirtualGroups", async function () {
     try {
        const data = await client.DescribeAccountVirtualGroups({})
@@ -358,6 +388,16 @@ it("ioa.v20220601.DescribeDeviceInfo", async function () {
     }
 })
 
+it("ioa.v20220601.DescribePublicEncryptKey", async function () {
+    try {
+       const data = await client.DescribePublicEncryptKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeDeviceHardwareInfoList", async function () {
     try {
        const data = await client.DescribeDeviceHardwareInfoList({})
@@ -368,9 +408,19 @@ it("ioa.v20220601.DescribeDeviceHardwareInfoList", async function () {
     }
 })
 
-it("ioa.v20220601.DescribeDeviceChildGroups", async function () {
+it("ioa.v20220601.DeleteDeliveryServer", async function () {
     try {
-       const data = await client.DescribeDeviceChildGroups({})
+       const data = await client.DeleteDeliveryServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDeviceSecurityInfo", async function () {
+    try {
+       const data = await client.DescribeDeviceSecurityInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -401,6 +451,16 @@ it("ioa.v20220601.DescribeDeviceDetailList", async function () {
 it("ioa.v20220601.ModifyDeviceTrustStatus", async function () {
     try {
        const data = await client.ModifyDeviceTrustStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDeliveryServer", async function () {
+    try {
+       const data = await client.DescribeDeliveryServer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -481,6 +541,16 @@ it("ioa.v20220601.GrantResourcesByVirtualGroups", async function () {
 it("ioa.v20220601.DescribeSoftCensusListByDevice", async function () {
     try {
        const data = await client.DescribeSoftCensusListByDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDeviceChildGroups", async function () {
+    try {
+       const data = await client.DescribeDeviceChildGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

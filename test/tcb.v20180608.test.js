@@ -778,6 +778,16 @@ it("tcb.v20180608.DescribePlatformCreditsUsage", async function () {
     }
 })
 
+it("tcb.v20180608.ModifyAIModelStatus", async function () {
+    try {
+       const data = await client.ModifyAIModelStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.VerifyPlatformHTTPServiceRoute", async function () {
     try {
        const data = await client.VerifyPlatformHTTPServiceRoute({})

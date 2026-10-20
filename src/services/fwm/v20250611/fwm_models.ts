@@ -712,6 +712,22 @@ export interface ModifyStrategySequenceResponse {
 }
 
 /**
+ * 规则序号调整结构
+ */
+export interface SequenceIndex {
+  /**
+   * 原规则序号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrderIndex?: number
+  /**
+   * 新规则序号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NewOrderIndex?: number
+}
+
+/**
  * DescribeOrganSummary返回参数结构体
  */
 export interface DescribeOrganSummaryResponse {
@@ -817,6 +833,68 @@ export interface StrategyResp {
    * 创建时间
    */
   CreateTime?: string
+}
+
+/**
+ * 规则组详情数据
+ */
+export interface RuleGroupResp {
+  /**
+   * 租户Id
+   */
+  AppId?: string
+  /**
+   * 规则组Id
+   */
+  GroupId?: string
+  /**
+   * 规则组名称
+   */
+  GroupName?: string
+  /**
+   * 规则数量
+   */
+  RuleCount?: number
+  /**
+   * 产品类型
+   */
+  Product?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 创建人SubUin
+   */
+  CreateBy?: string
+  /**
+   * 创建人名称
+   */
+  CreateName?: string
+  /**
+   * 更新人SubUin
+   */
+  UpdateBy?: string
+  /**
+   * 更新人名称
+   */
+  UpdateName?: string
+  /**
+   * 下发关联账号
+   */
+  ReceiveAccount?: Array<ReceiveAccount>
+  /**
+   *  所属阶段
+   */
+  ExecAreas?: Array<string>
+  /**
+   * 规则方向：1-入站规则，0-出站规则，-1 表示无方向
+   */
+  Direction?: number
 }
 
 /**
@@ -941,6 +1019,40 @@ export interface DeleteEdgeAclRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRiskCategoryStats请求参数结构体
+ */
+export interface DescribeRiskCategoryStatsRequest {
+  /**
+   * 分页大小,默认20
+   */
+  Limit?: number
+  /**
+   * 分页偏移量,默认0
+   */
+  Offset?: number
+  /**
+   * 产品类型
+   */
+  Product?: string
+  /**
+   * 筛选器
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * 排序字段："RuleCount", "TreatedCount", "IgnoredCount", "UntreatedCount", "DisposalRate"
+   */
+  By?: string
+  /**
+   * 顺序
+   */
+  Order?: string
+  /**
+   * 成员Id
+   */
+  MemberId?: string
 }
 
 /**
@@ -1596,37 +1708,21 @@ export interface CreateVpcAclRuleResponse {
 }
 
 /**
- * DescribeRiskCategoryStats请求参数结构体
+ * DescribeRuleGroups返回参数结构体
  */
-export interface DescribeRiskCategoryStatsRequest {
+export interface DescribeRuleGroupsResponse {
   /**
-   * 分页大小,默认20
+   * 总记录数
    */
-  Limit?: number
+  TotalCount?: number
   /**
-   * 分页偏移量,默认0
+   * 规则组列表
    */
-  Offset?: number
+  RuleGroups?: Array<RuleGroupResp>
   /**
-   * 产品类型
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Product?: string
-  /**
-   * 筛选器
-   */
-  Filters?: Array<CommonFilter>
-  /**
-   * 排序字段："RuleCount", "TreatedCount", "IgnoredCount", "UntreatedCount", "DisposalRate"
-   */
-  By?: string
-  /**
-   * 顺序
-   */
-  Order?: string
-  /**
-   * 成员Id
-   */
-  MemberId?: string
+  RequestId?: string
 }
 
 /**
@@ -2716,19 +2812,33 @@ export interface CreateVpcAclRuleRequest {
 }
 
 /**
- * 规则序号调整结构
+ * DescribeRuleGroups请求参数结构体
  */
-export interface SequenceIndex {
+export interface DescribeRuleGroupsRequest {
   /**
-   * 原规则序号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 产品类型
    */
-  OrderIndex?: number
+  Product?: string
   /**
-   * 新规则序号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 产品类型
    */
-  NewOrderIndex?: number
+  Filters?: Array<CommonFilter>
+  /**
+   * 排序
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 起始位置
+   */
+  Offset?: number
+  /**
+   * 查询数量
+   */
+  Limit?: number
 }
 
 /**

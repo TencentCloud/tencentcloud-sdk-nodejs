@@ -268,6 +268,16 @@ it("fwm.v20250611.DeleteEdgeAclRule", async function () {
     }
 })
 
+it("fwm.v20250611.DescribeRuleGroups", async function () {
+    try {
+       const data = await client.DescribeRuleGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("fwm.v20250611.ModifyVpcAclRuleSequence", async function () {
     try {
        const data = await client.ModifyVpcAclRuleSequence({})

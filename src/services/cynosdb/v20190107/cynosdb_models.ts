@@ -1274,6 +1274,16 @@ export interface DescribeClusterDetailRequest {
 }
 
 /**
+ * RestartLibraDBInstance请求参数结构体
+ */
+export interface RestartLibraDBInstanceRequest {
+  /**
+   * 只读分析引擎实例 ID
+   */
+  InstanceId: string
+}
+
+/**
  * CopyBackupToVault返回参数结构体
  */
 export interface CopyBackupToVaultResponse {
@@ -6155,13 +6165,35 @@ export interface DescribeInstanceDetailResponse {
 }
 
 /**
- * RestartLibraDBInstance请求参数结构体
+ * 数据库代理规格
  */
-export interface RestartLibraDBInstanceRequest {
+export interface ProxyZoneStockInfo {
   /**
-   * 只读分析引擎实例 ID
+   * <p>地域</p>
    */
-  InstanceId: string
+  Region?: string
+  /**
+   * <p>可用区</p>
+   */
+  Zone?: string
+  /**
+   * <p>CPU库存</p><p>该字段不作为发货是否有资源的判断标准，资源请参考CheckProxyStockInfos</p>
+   */
+  CpuStock?: number
+  /**
+   * <p>内存库存</p><p>该字段不作为发货是否有资源的判断标准，资源请参考CheckProxyStockInfos</p>
+   */
+  MemStock?: number
+}
+
+/**
+ * GrantAccountPrivileges返回参数结构体
+ */
+export interface GrantAccountPrivilegesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6769,6 +6801,16 @@ export interface InstanceAuditStatus {
 }
 
 /**
+ * CancelTask请求参数结构体
+ */
+export interface CancelTaskRequest {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId: number
+}
+
+/**
  * CopyClusterPasswordComplexity请求参数结构体
  */
 export interface CopyClusterPasswordComplexityRequest {
@@ -7251,9 +7293,23 @@ export interface DescribeLibraDBClusterDetailResponse {
 }
 
 /**
- * GrantAccountPrivileges返回参数结构体
+ * CancelTask返回参数结构体
  */
-export interface GrantAccountPrivilegesResponse {
+export interface CancelTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeProxyZoneStocks返回参数结构体
+ */
+export interface DescribeProxyZoneStocksResponse {
+  /**
+   * <p>数据库代理地域库存列表</p>
+   */
+  ProxyZoneStockInfos?: Array<ProxyZoneStockInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13530,6 +13586,16 @@ export interface ModifyLibraDBClusterAccountPrivilegeRequest {
 }
 
 /**
+ * DescribeProxyZoneStocks请求参数结构体
+ */
+export interface DescribeProxyZoneStocksRequest {
+  /**
+   * <p>可用区</p>
+   */
+  Zone: string
+}
+
+/**
  * DescribeDBSecurityGroups返回参数结构体
  */
 export interface DescribeDBSecurityGroupsResponse {
@@ -13658,22 +13724,32 @@ export interface ClusterInstanceDetail {
    */
   InstanceType?: string
   /**
+   * <p>实例状态</p><p>枚举值：</p><ul><li>creating： 创建中</li><li>running： 运行中</li><li>isolating： 隔离中</li><li>isolated： 已隔离</li><li>activating： 恢复中</li><li>offlining： 下线中</li><li>offlined： 已下线</li></ul>
+   */
+  Status?: string
+  /**
    * <p>实例状态</p>
+   * @deprecated
    */
   InstanceStatus?: string
   /**
+   * <p>实例状态中文描述</p>
+   */
+  StatusDesc?: string
+  /**
    * <p>实例状态描述</p>
+   * @deprecated
    */
   InstanceStatusDesc?: string
+  /**
+   * <p>Cpu</p><p>单位：核</p>
+   */
+  Cpu?: number
   /**
    * <p>cpu核数</p>
    * @deprecated
    */
   InstanceCpu?: number
-  /**
-   * <p>Cpu</p><p>单位：核</p>
-   */
-  Cpu?: number
   /**
    * <p>serverless实例cpu下限</p><p>单位：核</p>
    */
@@ -13688,6 +13764,7 @@ export interface ClusterInstanceDetail {
   Memory?: number
   /**
    * <p>内存</p>
+   * @deprecated
    */
   InstanceMemory?: number
   /**
@@ -13715,7 +13792,12 @@ export interface ClusterInstanceDetail {
    */
   InstanceTasks?: Array<ObjectTask>
   /**
+   * <p>实例机器类型</p><p>枚举值：</p><ul><li>common： 通用型</li><li>exclusive： 独享型</li></ul>
+   */
+  DeviceType?: string
+  /**
    * <p>实例机器类型</p><ol><li>common，通用型。</li><li>exclusive，独享型。</li></ol>
+   * @deprecated
    */
   InstanceDeviceType?: string
   /**
@@ -13754,14 +13836,6 @@ export interface ClusterInstanceDetail {
    * <p>实例所在的物理可用区</p>
    */
   PhysicalZone?: string
-  /**
-   * <p>实例状态</p><p>枚举值：</p><ul><li>creating： 创建中</li><li>running： 运行中</li><li>isolating： 隔离中</li><li>isolated： 已隔离</li><li>activating： 恢复中</li><li>offlining： 下线中</li><li>offlined： 已下线</li></ul>
-   */
-  Status?: string
-  /**
-   * <p>实例状态中文描述</p>
-   */
-  StatusDesc?: string
   /**
    * <p>数据库类型</p>
    */
@@ -13875,10 +13949,6 @@ export interface ClusterInstanceDetail {
    * <p>当前实例支持的能力</p>
    */
   InstanceAbility?: InstanceAbility
-  /**
-   * <p>实例机器类型</p><p>枚举值：</p><ul><li>common： 通用型</li><li>exclusive： 独享型</li></ul>
-   */
-  DeviceType?: string
   /**
    * <p>全球数据库唯一标识</p>
    */

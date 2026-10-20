@@ -22,7 +22,9 @@ import {
   DeviceNetworkCardBrief,
   DescribeDeviceHardwareInfoListRspData,
   DeleteAccountGroupResourcesRequest,
+  DeleteDeliveryStrategyResponse,
   DescribeAccountResourcesData,
+  Paging,
   ModifyVirtualDeviceGroupsReqItem,
   DescribeDeviceDetailListResponse,
   ModifyCompanyDirectoryConfigRequest,
@@ -40,9 +42,12 @@ import {
   DescribeDevicesResponse,
   DescribeAggrSoftDeviceListData,
   DescribeAccountVirtualGroupsData,
+  UnbindVirtualAccountsResponse,
   GrantResourcesByVirtualGroupsRequest,
   UnbindVirtualAccountData,
   DescribeAccountGroupsData,
+  DeliveryStrategyData,
+  ModifyDeliveryStrategyResponse,
   DescribeAccountGroupsRequest,
   DescribeDeviceVirtualGroupsResponse,
   CreateBusinessResourceResponse,
@@ -75,7 +80,9 @@ import {
   CreateDLPFileDetectionTaskRequest,
   GrantedVirtualGroupItem,
   BindBusinessResourceConnectorGroupRequest,
+  DeliverServerItem,
   DeleteResourceData,
+  ModifyDeliveryServerResponse,
   DescribeSoftCensusListByDeviceData,
   DescribeDeviceSecurityInfoData,
   DeviceVideoCardBrief,
@@ -84,8 +91,9 @@ import {
   ModifyBusinessResourceResponse,
   CreateBusinessResourceRequest,
   DescribeDeviceInfoRequest,
-  UnbindVirtualAccountsResponse,
+  ExportSoftwareInformationListResponse,
   CreateBusinessResourceData,
+  DescribePublicEncryptKeyResponse,
   GrantResourcesByAccountsRequest,
   DescribeDLPFileDetectTaskResult,
   DescribeDLPFileDetectResultData,
@@ -99,27 +107,30 @@ import {
   DescribeAccountGroupsPageResp,
   DescribeDeviceSecurityInfoRequest,
   DescribeDLPEdgeNodesResponse,
-  ExportSoftwareInformationListResponse,
+  DescribeDeliveryStrategyResponse,
   DescribeResourceGrantedVirtualGroupsRequest,
   FilterGroup,
   DescribeBusinessResourcesRequest,
+  ExportDeviceDownloadTaskResponse,
   DescribeSoftwareInformationRequest,
   DescribeAggrSoftCategorySoftListData,
   GrantResourceOperationByAccounts,
   DescribeDLPEdgeNodesPageData,
   DescribeAccountAccountGroupsData,
   RulePayload,
+  DescribeDeliveryStrategyRequest,
   DescribeDLPFileDetectTaskResultResponse,
   CreateDLPFileDetectTaskResponse,
   CreateDLPFileDetectTaskData,
   BindVirtualAccountResultData,
   DescribeDLPEdgeNodesRequest,
   DescribeAccountVirtualGroupsResponse,
-  Paging,
+  DescribeDeliveryServerResponse,
   GrantResourcesByAccountsResponse,
   SoftwareInformationData,
   DescribeBusinessResourcesResponse,
   DescribeBusinessResourcePageRsp,
+  DeleteDeliveryStrategyRequest,
   DescribeAggrSoftDetailRequest,
   CreateDeviceVirtualGroupRspData,
   DescribeDLPEdgeNodeGroupsRequest,
@@ -138,13 +149,15 @@ import {
   AccountUserIdItem,
   DeleteDeviceVirtualGroupResponse,
   SoftVersionAndNum,
-  ExportDeviceDownloadTaskResponse,
+  DirectoryConfigData,
   DescribeDeviceDetailListPageData,
   BindVirtualAccountsResponse,
+  ModifyDeliveryServerRequest,
   DescribeProfileFieldsMenuResponse,
   DescribeSoftwareInformationResponse,
   GrantResourcesByAccountGroupsResponse,
   ModifyVirtualDeviceGroupsResponse,
+  DescribeDeliveryServerRequest,
   DescribeLocalAccountsResponse,
   DescribeVirtualDevicesPageRsp,
   Condition,
@@ -152,6 +165,7 @@ import {
   DeviceVirtualDeviceGroupsDetail,
   DescribeDevicesPageRsp,
   DescribeSoftCensusListByDeviceResponse,
+  ModifyDeliveryStrategyRequest,
   DescribeDLPEdgeNodesRspItem,
   BindVirtualAccountData,
   DeleteDeviceVirtualGroupRequest,
@@ -159,10 +173,12 @@ import {
   DescribeDLPEdgeNodeGroupsResponse,
   Filter,
   GrantResourcesByVirtualGroupsResponse,
+  DeliveryStrategyItem,
   ModifyDeviceTrustStatusRequest,
   DescribeDeviceSecurityInfoResponse,
   DescribeAggrSoftDeviceListResponse,
   DescribeRootAccountGroupResponse,
+  DeleteDeliveryServerResponse,
   DescribeDirectAccountGroupResourcesResponse,
   SimpleRule,
   DescribeDLPFileDetectTaskResultRequest,
@@ -171,7 +187,7 @@ import {
   DescribeLocalAccountAccountGroupsData,
   ExportSoftwareInformationListRequest,
   DescribeDeviceInfoRspData,
-  DirectoryConfigData,
+  DescribePublicEncryptKeyData,
   ModifyVirtualDeviceGroupsRequest,
   DescribeVirtualAccountsPageData,
   GetAccountGroupData,
@@ -188,14 +204,17 @@ import {
   DescribeRootAccountGroupRequest,
   DescribeDeviceChildGroupsRspData,
   DeviceDownloadTask,
+  DescribePublicEncryptKeyRequest,
+  DeleteDeliveryServerRequest,
   DeviceGroupDetail,
-  BindVirtualAccountsRequest,
+  DescribeCompanyDirectoryConfigRequest,
   DescribeSoftCensusListByDevicePageData,
   DeleteAccountGroupResourcesResponse,
   DescribeDevicesRequest,
   RuleItem,
-  DescribeAggrSoftCategorySoftListResponse,
+  DescribeDeviceHardwareInfoListRequest,
   DeviceProfile,
+  ModifyDeliveryServerData,
   DescribeAggrSoftDetailResponse,
   DescribeVirtualAccountsResponse,
   CreateDLPFileDetectionTaskResponse,
@@ -204,9 +223,10 @@ import {
   DescribeVirtualDevicesRequest,
   GrantResourceOperationByVirtualGroups,
   DescribeDLPFileDetectResultResponse,
-  DescribeCompanyDirectoryConfigRequest,
+  BindVirtualAccountsRequest,
   CreatePrivilegeCodeResponse,
-  DescribeDeviceHardwareInfoListRequest,
+  DescribeAggrSoftCategorySoftListResponse,
+  ModifyDeliveryStrategyData,
   DescribeAggrSoftDetailData,
   GrantResourceOperationByAccountGroups,
   GrantedAccountGroupItem,
@@ -269,6 +289,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportDeviceDownloadTaskResponse) => void
   ): Promise<ExportDeviceDownloadTaskResponse> {
     return this.request("ExportDeviceDownloadTask", req, cb)
+  }
+
+  /**
+   * 创建或编辑日志转发服务器，私有化调用path为：capi/LogCenter/DeliveryLog/ModifyDeliveryServer
+   */
+  async ModifyDeliveryServer(
+    req: ModifyDeliveryServerRequest,
+    cb?: (error: string, rep: ModifyDeliveryServerResponse) => void
+  ): Promise<ModifyDeliveryServerResponse> {
+    return this.request("ModifyDeliveryServer", req, cb)
   }
 
   /**
@@ -342,6 +372,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建或编辑日志转发策略，私有化调用path为：capi/LogCenter/DeliveryLog/ModifyDeliveryStrategy
+   */
+  async ModifyDeliveryStrategy(
+    req: ModifyDeliveryStrategyRequest,
+    cb?: (error: string, rep: ModifyDeliveryStrategyResponse) => void
+  ): Promise<ModifyDeliveryStrategyResponse> {
+    return this.request("ModifyDeliveryStrategy", req, cb)
+  }
+
+  /**
    * 创建终端自定义分组，私有化调用path为：/capi/Assets/Device/CreateDeviceVirtualGroup
    */
   async CreateDeviceVirtualGroup(
@@ -372,13 +412,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定终端的病毒库版本、漏洞库版本、系统修复引擎版本、防火墙状态和实时防护状态
+   * 转发策略详情，私有化调用path为：capi/LogCenter/DeliveryLog/DescribeDeliveryStrategy
    */
-  async DescribeDeviceSecurityInfo(
-    req: DescribeDeviceSecurityInfoRequest,
-    cb?: (error: string, rep: DescribeDeviceSecurityInfoResponse) => void
-  ): Promise<DescribeDeviceSecurityInfoResponse> {
-    return this.request("DescribeDeviceSecurityInfo", req, cb)
+  async DescribeDeliveryStrategy(
+    req: DescribeDeliveryStrategyRequest,
+    cb?: (error: string, rep: DescribeDeliveryStrategyResponse) => void
+  ): Promise<DescribeDeliveryStrategyResponse> {
+    return this.request("DescribeDeliveryStrategy", req, cb)
   }
 
   /**
@@ -502,6 +542,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除转发策略，私有化调用path为：capi/LogCenter/DeliveryLog/DeleteDeliveryStrategy
+   */
+  async DeleteDeliveryStrategy(
+    req: DeleteDeliveryStrategyRequest,
+    cb?: (error: string, rep: DeleteDeliveryStrategyResponse) => void
+  ): Promise<DeleteDeliveryStrategyResponse> {
+    return this.request("DeleteDeliveryStrategy", req, cb)
+  }
+
+  /**
    * 列表账户虚拟组，支持分页，名称搜索，私有化调用path为：capi/Assets/DescribeAccountVirtualGroups，从7.x版本开始支持
    */
   async DescribeAccountVirtualGroups(
@@ -562,6 +612,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取用于RSA加密的公钥，对敏感数据进行加密传输。
+   */
+  async DescribePublicEncryptKey(
+    req?: DescribePublicEncryptKeyRequest,
+    cb?: (error: string, rep: DescribePublicEncryptKeyResponse) => void
+  ): Promise<DescribePublicEncryptKeyResponse> {
+    return this.request("DescribePublicEncryptKey", req, cb)
+  }
+
+  /**
    * 查询满足条件的查询终端硬件信息列表，私有化调用path为：/capi/Assets/Device/DescribeDeviceHardwareInfoList
    */
   async DescribeDeviceHardwareInfoList(
@@ -572,13 +632,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询设备组子分组详情，私有化调用path为：capi/Assets/Device/DescribeDeviceChildGroups
+   * 删除转发服务器，私有化调用path为：capi/LogCenter/DeliveryLog/DeleteDeliveryServer
    */
-  async DescribeDeviceChildGroups(
-    req: DescribeDeviceChildGroupsRequest,
-    cb?: (error: string, rep: DescribeDeviceChildGroupsResponse) => void
-  ): Promise<DescribeDeviceChildGroupsResponse> {
-    return this.request("DescribeDeviceChildGroups", req, cb)
+  async DeleteDeliveryServer(
+    req: DeleteDeliveryServerRequest,
+    cb?: (error: string, rep: DeleteDeliveryServerResponse) => void
+  ): Promise<DeleteDeliveryServerResponse> {
+    return this.request("DeleteDeliveryServer", req, cb)
+  }
+
+  /**
+   * 查询指定终端的病毒库版本、漏洞库版本、系统修复引擎版本、防火墙状态和实时防护状态
+   */
+  async DescribeDeviceSecurityInfo(
+    req: DescribeDeviceSecurityInfoRequest,
+    cb?: (error: string, rep: DescribeDeviceSecurityInfoResponse) => void
+  ): Promise<DescribeDeviceSecurityInfoResponse> {
+    return this.request("DescribeDeviceSecurityInfo", req, cb)
   }
 
   /**
@@ -611,6 +681,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDeviceTrustStatusResponse) => void
   ): Promise<ModifyDeviceTrustStatusResponse> {
     return this.request("ModifyDeviceTrustStatus", req, cb)
+  }
+
+  /**
+   * 转发服务器详情，私有化调用path为：capi/LogCenter/DescribeDeliveryServer
+   */
+  async DescribeDeliveryServer(
+    req: DescribeDeliveryServerRequest,
+    cb?: (error: string, rep: DescribeDeliveryServerResponse) => void
+  ): Promise<DescribeDeliveryServerResponse> {
+    return this.request("DescribeDeliveryServer", req, cb)
   }
 
   /**
@@ -691,6 +771,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSoftCensusListByDeviceResponse) => void
   ): Promise<DescribeSoftCensusListByDeviceResponse> {
     return this.request("DescribeSoftCensusListByDevice", req, cb)
+  }
+
+  /**
+   * 查询设备组子分组详情，私有化调用path为：capi/Assets/Device/DescribeDeviceChildGroups
+   */
+  async DescribeDeviceChildGroups(
+    req: DescribeDeviceChildGroupsRequest,
+    cb?: (error: string, rep: DescribeDeviceChildGroupsResponse) => void
+  ): Promise<DescribeDeviceChildGroupsResponse> {
+    return this.request("DescribeDeviceChildGroups", req, cb)
   }
 
   /**

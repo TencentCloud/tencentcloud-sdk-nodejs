@@ -2973,6 +2973,10 @@ export interface CreateNotebookRequest {
    */
   DirectInternetAccess: boolean
   /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
    * <p>资源组ID(for预付费)</p>
    */
   ResourceGroupId?: string

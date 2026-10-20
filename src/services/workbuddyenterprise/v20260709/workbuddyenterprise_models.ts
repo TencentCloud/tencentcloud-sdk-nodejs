@@ -1082,7 +1082,7 @@ export interface ConnectorInfo {
    */
   ServiceUrl?: string
   /**
-   * 授权方式列表：NONE / ONEID / OAUTH2_IDP
+   * 授权方式列表：NONE / ONEID / OAUTH2_IDP / API_KEY
    */
   AuthModes?: Array<string>
   /**
@@ -1105,6 +1105,10 @@ export interface ConnectorInfo {
    * 最后修改时间（ISO8601，UTC）
    */
   ModifiedTime?: string
+  /**
+   * VPC 网络配置 ID。为空表示该连接器通过公网访问 ServiceUrl。仅绑定 VPC 网络配置时本字段有值。
+   */
+  VpcConfigId?: string
 }
 
 /**

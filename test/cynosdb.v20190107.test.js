@@ -78,9 +78,9 @@ it("cynosdb.v20190107.ModifyBinlogConfig", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeLibraDBClusterAccounts", async function () {
+it("cynosdb.v20190107.DescribeClusterTransparentEncryptInfo", async function () {
     try {
-       const data = await client.DescribeLibraDBClusterAccounts({})
+       const data = await client.DescribeClusterTransparentEncryptInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +211,16 @@ it("cynosdb.v20190107.CloseAuditService", async function () {
 it("cynosdb.v20190107.DescribeVaults", async function () {
     try {
        const data = await client.DescribeVaults({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.CancelTask", async function () {
+    try {
+       const data = await client.CancelTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +538,9 @@ it("cynosdb.v20190107.DisassociateSecurityGroups", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeClusterTransparentEncryptInfo", async function () {
+it("cynosdb.v20190107.CopyBackupToVault", async function () {
     try {
-       const data = await client.DescribeClusterTransparentEncryptInfo({})
+       const data = await client.CopyBackupToVault({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1021,6 +1031,16 @@ it("cynosdb.v20190107.ModifyLibraDBClusterAccountDescription", async function ()
 it("cynosdb.v20190107.DescribeInstanceSlowQueries", async function () {
     try {
        const data = await client.DescribeInstanceSlowQueries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeProxyZoneStocks", async function () {
+    try {
+       const data = await client.DescribeProxyZoneStocks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1908,6 +1928,16 @@ it("cynosdb.v20190107.TransferStoragePrepayToPostpay", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeLibraDBClusterAccounts", async function () {
+    try {
+       const data = await client.DescribeLibraDBClusterAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyAccountDescription", async function () {
     try {
        const data = await client.ModifyAccountDescription({})
@@ -1941,16 +1971,6 @@ it("cynosdb.v20190107.CreateClusterDatabase", async function () {
 it("cynosdb.v20190107.OpenAuditService", async function () {
     try {
        const data = await client.OpenAuditService({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cynosdb.v20190107.CopyBackupToVault", async function () {
-    try {
-       const data = await client.CopyBackupToVault({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

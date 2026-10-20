@@ -6067,7 +6067,7 @@ export interface SubmitQuestionMarkAgentJobResponse {
    */
   QuestionCount?: string
   /**
-   * <p>废弃字段</p>
+   * <p>【废弃字段】</p>
    */
   OriginalImageUrl?: string
   /**
@@ -11438,11 +11438,11 @@ export interface BankCardOCRResponse {
  */
 export interface SubmitQuestionMarkAgentJobRequest {
   /**
-   * <p>图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。  示例值：/9j/4AAQSkZJRg.....s97n//2Q==</p>
+   * <p>图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * <p>图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。  示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg</p>
+   * <p>图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
   /**
@@ -11464,15 +11464,15 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   QuestionConfigMap?: string
   /**
-   * <p>【废除字段】<br>仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中</p>
+   * <p>【废弃字段】</p>
    */
   ReferenceAnswer?: string
   /**
-   * <p>批量base64图片入口，每个base64参考单独ImageBase64参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N来输入答题试卷和含正确解析试卷，最多两张</li><li>当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行多图同时批改逻辑（解决单题跨页场景）</li></ol>
+   * <p>批量base64图片入口，每个base64参考单独ImageBase64参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N来输入含正确解析试卷，最多1张</li><li>当AssistMarkType为0时，ImageBase64List.N/ImageUrlList.N图片会执行多图同时批改逻辑（解决单题跨页场景）</li></ol>
    */
   ImageBase64List?: Array<string>
   /**
-   * <p>批量ImageUrl图片入口，每个ImageUrl参考单独ImageUrl参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N 来输入答题试卷和含正确解析试卷，最多两张</li><li>当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行多图同时批改逻辑（解决单题跨页场景）</li></ol>
+   * <p>批量ImageUrl图片入口，每个ImageUrl参考单独ImageUrl参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N 来输入含正确解析试卷，最多1张</li><li>当AssistMarkType为1时，ImageBase64List.N/ImageUrlList.N图片会执行多图同时批改逻辑（解决单题跨页场景）</li></ol>
    */
   ImageUrlList?: Array<string>
   /**
@@ -11484,7 +11484,7 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   AnswerAssistMap?: string
   /**
-   * <p>是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-&gt; ReturnImageUr中l,默认为false不开启<br>示例值：false</p>
+   * <p>是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-&gt; ReturnImageUr中l,默认为false不开启</p>
    */
   EnableImageCrop?: boolean
 }

@@ -50,16 +50,19 @@ import {
   DeleteNatAclRuleResponse,
   SgDnsParseCount,
   ModifyStrategySequenceResponse,
+  SequenceIndex,
   DescribeOrganSummaryResponse,
   DeleteVpcAclRuleRequest,
   DeleteStrategyResponse,
   StrategyResp,
+  RuleGroupResp,
   DescribeOrganMembersResponse,
   ModifyEdgeAclRuleRequest,
   ModifyNatAclRuleSequenceResponse,
   OrganSummary,
   DeleteEdgeAclRuleRequest,
   DeleteEdgeAclRuleResponse,
+  DescribeRiskCategoryStatsRequest,
   ModifyVpcAclRuleResponse,
   NatAclRuleResp,
   CreateStrategyRequest,
@@ -88,7 +91,7 @@ import {
   DescribeStrategyDispatchStatusResponse,
   ModifyStrategyResponse,
   CreateVpcAclRuleResponse,
-  DescribeRiskCategoryStatsRequest,
+  DescribeRuleGroupsResponse,
   AnalysisSgRuleInfoResp,
   NatAclRule,
   ModifySecurityGroupRuleResponse,
@@ -117,7 +120,7 @@ import {
   ModifyRuleGroupResponse,
   CreateEdgeAclRuleRequest,
   CreateVpcAclRuleRequest,
-  SequenceIndex,
+  DescribeRuleGroupsRequest,
   CreateSecurityGroupRuleGroupRequest,
   CreateNatAclRuleResponse,
   CreateAnalyzePolicyTaskResponse,
@@ -396,6 +399,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteEdgeAclRuleResponse) => void
   ): Promise<DeleteEdgeAclRuleResponse> {
     return this.request("DeleteEdgeAclRule", req, cb)
+  }
+
+  /**
+   * 查询规则组列表
+   */
+  async DescribeRuleGroups(
+    req: DescribeRuleGroupsRequest,
+    cb?: (error: string, rep: DescribeRuleGroupsResponse) => void
+  ): Promise<DescribeRuleGroupsResponse> {
+    return this.request("DescribeRuleGroups", req, cb)
   }
 
   /**

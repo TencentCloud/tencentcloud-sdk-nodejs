@@ -118,17 +118,17 @@ export interface Field {
  */
 export interface DescribeNodeGroupsResponse {
   /**
-   * 树状节点列表，总共两级
+   * <p>树状节点列表，总共两级</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeList?: Array<NodeTree>
   /**
-   * 省份或国家列表
+   * <p>省份或国家列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DistrictList?: Array<DistinctOrNetServiceInfo>
   /**
-   * 运营商列表
+   * <p>运营商列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NetServiceList?: Array<DistinctOrNetServiceInfo>
@@ -216,102 +216,76 @@ export interface ProbeTaskBasicConfiguration {
  */
 export interface ProbeTask {
   /**
-   * 任务名
+   * <p>任务名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 任务 ID
+   * <p>任务 ID</p>
    */
   TaskId?: string
   /**
-   * 拨测类型
-<li>1 = 页面浏览</li>
-<li> 2 =文件上传 </li>
-<li> 3 = 文件下载</li>
-<li> 4 = 端口性能 </li>
-<li> 5 = 网络质量 </li>
-<li> 6 =流媒体 </li>
-
-即时拨测只支持页面浏览，网络质量，文件下载
+   * <p>拨测类型</p><li>1 = 页面浏览</li><li> 2 =文件上传 </li><li> 3 = 文件下载</li><li> 4 = 端口性能 </li><li> 5 = 网络质量 </li><li> 6 =流媒体 </li><p>即时拨测只支持页面浏览，网络质量，文件下载</p>
    */
   TaskType?: number
   /**
-   * 拨测节点列表
+   * <p>拨测节点列表</p>
    */
   Nodes?: Array<string>
   /**
-   * 拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6
+   * <p>拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeIpType?: number
   /**
-   * 拨测间隔，单位为分钟
+   * <p>拨测间隔，单位为分钟</p>
    */
   Interval?: number
   /**
-   * 拨测参数
+   * <p>拨测参数</p>
    */
   Parameters?: string
   /**
-   * 任务状态
-<li>1 = 创建中</li>
-<li> 2 = 运行中 </li>
-<li> 3 = 运行异常 </li>
-<li> 4 = 暂停中 </li>
-<li> 5 = 暂停异常 </li>
-<li> 6 = 任务暂停 </li>
-<li> 7 = 任务删除中 </li>
-<li> 8 = 任务删除异常 </li>
-<li> 9 = 任务删除</li>
-<li> 10 = 定时任务暂停中 </li>
+   * <p>任务状态</p><li>1 = 创建中</li><li> 2 = 运行中 </li><li> 3 = 运行异常 </li><li> 4 = 暂停中 </li><li> 5 = 暂停异常 </li><li> 6 = 任务暂停 </li><li> 7 = 任务删除中 </li><li> 8 = 任务删除异常 </li><li> 9 = 任务删除</li><li> 10 = 定时任务暂停中 </li>
    */
   Status?: number
   /**
-   * 目标地址
+   * <p>目标地址</p>
    */
   TargetAddress?: string
   /**
-   * 付费模式
-<li>1 = 试用版本</li>
-<li> 2 = 付费版本 </li>
+   * <p>付费模式</p><li>1 = 试用版本</li><li> 2 = 付费版本 </li>
    */
   PayMode?: number
   /**
-   * 订单状态
-<li>1 = 正常</li>
-<li> 2 = 欠费 </li>
+   * <p>订单状态</p><li>1 = 正常</li><li> 2 = 欠费 </li>
    */
   OrderState?: number
   /**
-   * 任务分类
-<li>1 = PC</li>
-<li> 2 = Mobile </li>
+   * <p>任务分类</p><li>1 = PC</li><li> 2 = Mobile </li>
    */
   TaskCategory?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedAt?: string
   /**
-   * 定时任务cron表达式
+   * <p>定时任务cron表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Cron?: string
   /**
-   * 定时任务启动状态
-<li>1 = 定时任务表达式生效</li>
-<li> 2 = 定时任务表达式未生效（一般为任务手动暂停）</li>
+   * <p>定时任务启动状态</p><li>1 = 定时任务表达式生效</li><li> 2 = 定时任务表达式未生效（一般为任务手动暂停）</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CronState?: number
   /**
-   * 任务当前绑定的标签
+   * <p>任务当前绑定的标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagInfoList?: Array<KeyValuePair>
   /**
-   * 是否为同步账号
+   * <p>是否为同步账号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubSyncFlag?: number
@@ -322,12 +296,12 @@ export interface ProbeTask {
  */
 export interface DescribeInstantTasksResponse {
   /**
-   * 任务
+   * <p>任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tasks?: Array<SingleInstantTask>
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
@@ -407,12 +381,12 @@ export interface DescribeDetailedSingleProbeDataRequest {
  */
 export interface DescribeProbeTasksResponse {
   /**
-   * 任务列表
+   * <p>任务列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskSet?: Array<ProbeTask>
   /**
-   * 任务总数
+   * <p>任务总数</p>
    */
   Total?: number
   /**
@@ -436,34 +410,23 @@ export interface UpdateProbeTaskAttributesResponse {
  */
 export interface DescribeProbeMetricTagValuesRequest {
   /**
-   * 分析任务类型，支持以下几种类型：
-AnalyzeTaskType_Network：网络质量
-AnalyzeTaskType_Browse：页面性能 
-AnalyzeTaskType_Transport：端口性能
-AnalyzeTaskType_UploadDownload：文件传输
-AnalyzeTaskType_MediaStream：音视频体验
-
+   * <p>分析任务类型，支持以下几种类型：<br>AnalyzeTaskType_Network：网络质量<br>AnalyzeTaskType_Browse：页面性能<br>AnalyzeTaskType_Transport：端口性能<br>AnalyzeTaskType_UploadDownload：文件传输<br>AnalyzeTaskType_MediaStream：音视频体验</p>
    */
   AnalyzeTaskType?: string
   /**
-   * 维度标签值，参考：
-host：任务域名
-errorInfo：状态类型
-area：拨测点地区
-operator：拨测点运营商
-taskId：任务ID
+   * <p>维度标签值，参考：<br>host：任务域名<br>errorInfo：状态类型<br>area：拨测点地区<br>operator：拨测点运营商<br>taskId：任务ID</p>
    */
   Key?: string
   /**
-   * 过滤条件，可以传单个过滤条件也可以拼接多个参数，支持正则匹配
+   * <p>过滤条件，可以传单个过滤条件也可以拼接多个参数，支持正则匹配</p>
    */
   Filter?: string
   /**
-   * 过滤条件数组
+   * <p>过滤条件数组</p>
    */
   Filters?: Array<string>
   /**
-   * 时间范围
+   * <p>时间范围</p>
    */
   TimeRange?: string
 }
@@ -597,7 +560,7 @@ export interface DescribeProbeMetricDataRequest {
  */
 export interface DescribeProbeMetricTagValuesResponse {
   /**
-   * 标签值序列化后的字符串
+   * <p>标签值序列化后的字符串</p>
    */
   TagValueSet?: string
   /**
@@ -611,77 +574,55 @@ export interface DescribeProbeMetricTagValuesResponse {
  */
 export interface DescribeProbeTasksRequest {
   /**
-   * 任务 ID  列表
+   * <p>任务 ID  列表</p>
    */
   TaskIDs?: Array<string>
   /**
-   * 任务名
+   * <p>任务名</p>
    */
   TaskName?: string
   /**
-   * 拨测目标
+   * <p>拨测目标</p>
    */
   TargetAddress?: string
   /**
-   * 任务状态列表
-<li>1 = 创建中</li>
-<li> 2 = 运行中 </li>
-<li> 3 = 运行异常 </li>
-<li> 4 = 暂停中 </li>
-<li> 5 = 暂停异常 </li>
-<li> 6 = 任务暂停 </li>
-<li> 7 = 任务删除中 </li>
-<li> 8 = 任务删除异常 </li>
-<li> 9 = 任务删除</li>
-<li> 10 = 定时任务暂停中 </li>
+   * <p>任务状态列表</p><li>1 = 创建中</li><li> 2 = 运行中 </li><li> 3 = 运行异常 </li><li> 4 = 暂停中 </li><li> 5 = 暂停异常 </li><li> 6 = 任务暂停 </li><li> 7 = 任务删除中 </li><li> 8 = 任务删除异常 </li><li> 9 = 任务删除</li><li> 10 = 定时任务暂停中 </li>
    */
   TaskStatus?: Array<number | bigint>
   /**
-   * 偏移量，默认为0
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100
+   * <p>返回数量，默认为20，最大值为100</p>
    */
   Limit?: number
   /**
-   * 付费模式
-<li>1 = 试用版本</li>
-<li> 2 = 付费版本 </li>
+   * <p>付费模式</p><li>1 = 试用版本</li><li> 2 = 付费版本 </li>
    */
   PayMode?: number
   /**
-   * 订单状态
-<li>1 = 正常</li>
-<li> 2 = 欠费 </li>
+   * <p>订单状态</p><li>1 = 正常</li><li> 2 = 欠费 </li>
    */
   OrderState?: number
   /**
-   * 拨测类型
-<li>1 = 页面浏览</li>
-<li> 2 =文件上传 </li>
-<li> 3 = 文件下载</li>
-<li> 4 = 端口性能 </li>
-<li> 5 = 网络质量 </li>
-<li> 6 =流媒体 </li>
-
-即使拨测只支持页面浏览，网络质量，文件下载
+   * <p>拨测类型</p><li>1 = 页面浏览</li><li> 2 =文件上传 </li><li> 3 = 文件下载</li><li> 4 = 端口性能 </li><li> 5 = 网络质量 </li><li> 6 =流媒体 </li><p>即使拨测只支持页面浏览，网络质量，文件下载</p>
    */
   TaskType?: Array<number | bigint>
   /**
-   * 节点类型
+   * <p>节点类型</p>
    */
   TaskCategory?: Array<number | bigint>
   /**
-   * 排序的列
+   * <p>排序的列</p>
    */
   OrderBy?: string
   /**
-   * 是否正序
+   * <p>是否正序</p>
    */
   Ascend?: boolean
   /**
-   * 资源标签值
+   * <p>资源标签值</p>
    */
   TagFilters?: Array<KeyValuePair>
 }
@@ -691,11 +632,11 @@ export interface DescribeProbeTasksRequest {
  */
 export interface DescribeInstantTasksRequest {
   /**
-   * 数量
+   * <p>数量</p>
    */
   Limit: number
   /**
-   * 起始位置
+   * <p>起始位置</p>
    */
   Offset: number
 }
@@ -705,36 +646,35 @@ export interface DescribeInstantTasksRequest {
  */
 export interface UpdateProbeTaskConfigurationListRequest {
   /**
-   * 任务 ID，如task-n1wchki8
+   * <p>任务 ID，如task-n1wchki8</p>
    */
   TaskIds: Array<string>
   /**
-   * 拨测节点，如10001，详细地区运营商拨测编号请联系云拨测。
+   * <p>拨测节点，如10001，详细地区运营商拨测编号请联系云拨测。</p>
    */
   Nodes: Array<string>
   /**
-   * 拨测间隔，如30，单位为分钟。
+   * <p>拨测间隔，如30，单位为分钟。</p>
    */
   Interval: number
   /**
-   * 拨测参数，详细参数配置可参考云拨测官网文档。
+   * <p>拨测参数，详细参数配置可参考云拨测官网文档。</p>
    */
   Parameters: string
   /**
-   * 定时任务cron表达式
+   * <p>定时任务cron表达式</p>
    */
   Cron?: string
   /**
-   * 预付费套餐id
-需要与taskId对应
+   * <p>预付费套餐id<br>需要与taskId对应</p>
    */
   ResourceIDs?: Array<string>
   /**
-   * 拨测节点的IP类型，0-不限，1-IPv4，2-IPv6
+   * <p>拨测节点的IP类型，0-不限，1-IPv4，2-IPv6</p>
    */
   NodeIpType?: number
   /**
-   * 批量任务名-地址
+   * <p>批量任务名-地址</p>
    */
   BatchTasks?: Array<ProbeTaskBasicConfiguration>
 }
@@ -744,61 +684,59 @@ export interface UpdateProbeTaskConfigurationListRequest {
  */
 export interface CreateProbeTasksRequest {
   /**
-   * 批量任务名-地址
+   * <p>批量任务名-地址</p>
    */
   BatchTasks: Array<ProbeTaskBasicConfiguration>
   /**
-   * 任务类型，如1、2、3、4、5、6、7；1-页面性能、2-文件上传、3-文件下载、4-端口性能、5-网络质量、6-音视频体验、7-域名whois
+   * <p>任务类型，如1、2、3、4、5、6、7；1-页面性能、2-文件上传、3-文件下载、4-端口性能、5-网络质量、6-音视频体验、7-域名whois</p>
    */
   TaskType: number
   /**
-   * 拨测节点，如10001，具体拨测地域运营商对应的拨测点编号可联系云拨测确认。
+   * <p>拨测节点，如10001，具体拨测地域运营商对应的拨测点编号可联系云拨测确认。</p>
    */
   Nodes: Array<string>
   /**
-   * 拨测间隔，单位为分钟
+   * <p>拨测间隔，单位为分钟</p>
    */
   Interval: number
   /**
-   * 拨测参数，详细可参考云拨测官方文档,链接:https://cloud.tencent.com/document/product/248/87308#createprobetasks。
+   * <p>拨测参数，详细可参考云拨测官方文档,链接:https://cloud.tencent.com/document/product/248/87308#createprobetasks。</p>
    */
   Parameters: string
   /**
-   * 任务分类
-<li>1 = PC</li>
-<li> 2 = Mobile </li>
+   * <p>任务分类</p><li>1 = PC</li><li> 2 = Mobile </li>
    */
   TaskCategory: number
   /**
-   * 定时任务cron表达式
+   * <p>定时任务cron表达式</p>
    */
   Cron?: string
   /**
-   * 资源标签值
+   * <p>资源标签值</p>
    */
   Tag?: Array<Tag>
   /**
-   * 测试类型，包含定时测试与即时测试。0-定时拨测，其它表示即时拨测。
+   * <p>测试类型，包含定时测试与即时测试。0-定时拨测，其它表示即时拨测。</p>
    */
   ProbeType?: number
   /**
-   * 插件类型，如CDN，详情参考云拨测官方文档。
+   * <p>插件类型，如CDN，详情参考云拨测官方文档。</p>
    */
   PluginSource?: string
   /**
-   * 客户端ID
+   * <p>客户端ID</p>
    */
   ClientNum?: string
   /**
-   * 拨测点IP类型：0-不限制IP类型，1-IPv4，2-IPv6
+   * <p>拨测点IP类型：0-不限制IP类型，1-IPv4，2-IPv6</p>
    */
   NodeIpType?: number
   /**
-   * 供应商子账户同步标志
+   * <p>供应商子账户同步标志</p>
    */
   SubSyncFlag?: number
   /**
-   * 创建者名称
+   * <p>创建者名称</p>
    */
   RtxName?: string
 }
@@ -840,43 +778,43 @@ export interface NodeLeaf {
  */
 export interface DescribeNodeGroupsRequest {
   /**
-   * 节点类型。0: 全部 1: IDC 2: LastMile 3: Mobile，不填默认为0
+   * <p>节点类型。0: 全部 1: IDC 2: LastMile 3: Mobile，不填默认为0</p>
    */
   NodeType?: Array<number | bigint>
   /**
-   * 节点分类。0: 全部 1: PC 2：Mobile，不填默认为0。PC分类包括IDC和LM节点类型，Mobile分类包括Mobile节点类型。与NodeType参数取交集。
+   * <p>节点分类。0: 全部 1: PC 2：Mobile，不填默认为0。PC分类包括IDC和LM节点类型，Mobile分类包括Mobile节点类型。与NodeType参数取交集。</p>
    */
   TaskCategory?: number
   /**
-   * IP类型。0: 全部 1: IPv4 2: IPv6，不填默认为0
+   * <p>IP类型。0: 全部 1: IPv4 2: IPv6，不填默认为0</p>
    */
   IPType?: number
   /**
-   * 拨测点描述关键词。
+   * <p>拨测点描述关键词。</p>
    */
   Name?: string
   /**
-   * 地域ID。0: 精选拨测点 1: 国内 2: 港澳台 3: 亚太 4: 欧洲与美洲 5: 非洲与大洋洲，不填默认为0
+   * <p>地域ID。0: 精选拨测点 1: 国内 2: 港澳台 3: 亚太 4: 欧洲与美洲 5: 非洲与大洋洲，不填默认为0</p>
    */
   RegionID?: number
   /**
-   * 省份或国家ID。0表示全部，不填默认为0
+   * <p>省份或国家ID。0表示全部，不填默认为0</p>
    */
   DistrictID?: number
   /**
-   * 运营商ID。0: 全部 1: 中国电信 2: 中国联通 3: 中国移动 99: 其他，不填默认为0
+   * <p>运营商ID。0: 全部 1: 中国电信 2: 中国联通 3: 中国移动 99: 其他，不填默认为0</p>
    */
   NetServiceID?: number
   /**
-   * 节点组类型。0: 高级拨测点组 1: 可用性节点 2: 我的拨测点组，不填默认为0
+   * <p>节点组类型。0: 高级拨测点组 1: 可用性节点 2: 我的拨测点组，不填默认为0</p>
    */
   NodeGroupType?: number
   /**
-   * 任务类型，如1、2、3、4、5、6、7；1-页面性能、2-文件上传、3-文件下载、4-端口性能、5-网络质量、6-音视频体验、7-域名whois，不填默认为0，不对任务类型做过滤
+   * <p>任务类型，如1、2、3、4、5、6、7；1-页面性能、2-文件上传、3-文件下载、4-端口性能、5-网络质量、6-音视频体验、7-域名whois，不填默认为0，不对任务类型做过滤</p>
    */
   TaskType?: number
   /**
-   * 测试类型，包含定时测试与即时测试。0-定时拨测，其它表示即时拨测。
+   * <p>测试类型，包含定时测试与即时测试。0-定时拨测，其它表示即时拨测。</p>
    */
   ProbeType?: number
 }
@@ -934,7 +872,7 @@ export interface DeleteProbeTaskResponse {
  */
 export interface CreateProbeTasksResponse {
   /**
-   * 任务ID列表
+   * <p>任务ID列表</p>
    */
   TaskIDs?: Array<string>
   /**

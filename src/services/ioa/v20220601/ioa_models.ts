@@ -92,6 +92,16 @@ export interface DeleteAccountGroupResourcesRequest {
 }
 
 /**
+ * DeleteDeliveryStrategy返回参数结构体
+ */
+export interface DeleteDeliveryStrategyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据集
  */
 export interface DescribeAccountResourcesData {
@@ -100,6 +110,28 @@ export interface DescribeAccountResourcesData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<DescribeAccountResourcesItems>
+}
+
+/**
+ * 页码
+ */
+export interface Paging {
+  /**
+   * 每页条数
+   */
+  PageSize?: number
+  /**
+   * 页码
+   */
+  PageNum?: number
+  /**
+   * 总页数
+   */
+  PageCount?: number
+  /**
+   * 记录总数
+   */
+  Total?: number
 }
 
 /**
@@ -631,6 +663,20 @@ export interface DescribeAccountVirtualGroupsData {
 }
 
 /**
+ * UnbindVirtualAccounts返回参数结构体
+ */
+export interface UnbindVirtualAccountsResponse {
+  /**
+   * <p>业务响应数据</p>
+   */
+  Data?: UnbindVirtualAccountData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GrantResourcesByVirtualGroups请求参数结构体
  */
 export interface GrantResourcesByVirtualGroupsRequest {
@@ -742,6 +788,31 @@ export interface DescribeAccountGroupsData {
    * <p>分组名称数组</p>
    */
   NamePathArr?: Array<string>
+}
+
+/**
+ * 数据
+ */
+export interface DeliveryStrategyData {
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DeliveryStrategyItem
+}
+
+/**
+ * ModifyDeliveryStrategy返回参数结构体
+ */
+export interface ModifyDeliveryStrategyResponse {
+  /**
+   * <p>策略返回内容</p>
+   */
+  Data?: ModifyDeliveryStrategyData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1771,6 +1842,105 @@ export interface BindBusinessResourceConnectorGroupRequest {
 }
 
 /**
+ * 编辑的数据内容
+ */
+export interface DeliverServerItem {
+  /**
+   * <p>服务器id  (创建时忽略)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: number
+  /**
+   * <p>服务器名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>转发服务器地址类型 4:syslog, 2:kafka, 3:http(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * <p>服务器描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>syslog服务器地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetSyslogAddress?: string
+  /**
+   * <p>syslog协议类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetSyslogProtocol?: string
+  /**
+   * <p>syslog协议端口(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetSyslogPort?: number
+  /**
+   * <p>syslog设备/Facility</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SyslogFacility?: string
+  /**
+   * <p>Kafka服务器地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetKafkaAddress?: string
+  /**
+   * <p>Kafka主题</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetKafkaTopic?: string
+  /**
+   * <p>Kafka版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KafkaVersion?: string
+  /**
+   * <p>Kafka sasl用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KafkaSaslUserName?: string
+  /**
+   * <p>Kafka sasl密码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KafkaSaslPassword?: string
+  /**
+   * <p>http服务器地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetHttpUrl?: string
+  /**
+   * <p>http服务超时时间(只支持32位)</p><p>单位：毫秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetHttpTimeout?: number
+  /**
+   * <p>连接器分组ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectorGroupId?: string
+  /**
+   * <p>连接器分组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectorGroupName?: string
+  /**
+   * <p>KAFKA是否启用SSL</p>
+   */
+  KafkaSSLEnable?: boolean
+  /**
+   * <p>跳过证书检查</p>
+   */
+  SSLSkipVerify?: boolean
+}
+
+/**
  * 资源集
  */
 export interface DeleteResourceData {
@@ -1784,6 +1954,20 @@ export interface DeleteResourceData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId: number
+}
+
+/**
+ * ModifyDeliveryServer返回参数结构体
+ */
+export interface ModifyDeliveryServerResponse {
+  /**
+   * <p>转发服务器返回内容</p>
+   */
+  Data?: ModifyDeliveryServerData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1999,13 +2183,13 @@ export interface DescribeDeviceInfoRequest {
 }
 
 /**
- * UnbindVirtualAccounts返回参数结构体
+ * ExportSoftwareInformationList返回参数结构体
  */
-export interface UnbindVirtualAccountsResponse {
+export interface ExportSoftwareInformationListResponse {
   /**
-   * <p>业务响应数据</p>
+   * 业务响应数据
    */
-  Data?: UnbindVirtualAccountData
+  Data?: ExportSoftwareDownloadUrlRspData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2021,6 +2205,20 @@ export interface CreateBusinessResourceData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceId?: number
+}
+
+/**
+ * DescribePublicEncryptKey返回参数结构体
+ */
+export interface DescribePublicEncryptKeyResponse {
+  /**
+   * 获取公钥加密的key数据
+   */
+  Data?: DescribePublicEncryptKeyData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2591,13 +2789,14 @@ export interface DescribeDLPEdgeNodesResponse {
 }
 
 /**
- * ExportSoftwareInformationList返回参数结构体
+ * DescribeDeliveryStrategy返回参数结构体
  */
-export interface ExportSoftwareInformationListResponse {
+export interface DescribeDeliveryStrategyResponse {
   /**
-   * 业务响应数据
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: ExportSoftwareDownloadUrlRspData
+  Data?: DeliveryStrategyData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2668,6 +2867,20 @@ export interface DescribeBusinessResourcesRequest {
    * web资源前端地址
    */
   FrontAddr?: string
+}
+
+/**
+ * ExportDeviceDownloadTask返回参数结构体
+ */
+export interface ExportDeviceDownloadTaskResponse {
+  /**
+   * 业务响应数据
+   */
+  Data?: DeviceDownloadTask
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2805,6 +3018,16 @@ export interface RulePayload {
 }
 
 /**
+ * DescribeDeliveryStrategy请求参数结构体
+ */
+export interface DescribeDeliveryStrategyRequest {
+  /**
+   * <p>转发策略id</p>
+   */
+  ID?: number
+}
+
+/**
  * DescribeDLPFileDetectTaskResult返回参数结构体
  */
 export interface DescribeDLPFileDetectTaskResultResponse {
@@ -2894,25 +3117,18 @@ export interface DescribeAccountVirtualGroupsResponse {
 }
 
 /**
- * 页码
+ * DescribeDeliveryServer返回参数结构体
  */
-export interface Paging {
+export interface DescribeDeliveryServerResponse {
   /**
-   * 每页条数
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageSize?: number
+  Data?: DeliverServerItem
   /**
-   * 页码
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PageNum?: number
-  /**
-   * 总页数
-   */
-  PageCount?: number
-  /**
-   * 记录总数
-   */
-  Total?: number
+  RequestId?: string
 }
 
 /**
@@ -3000,6 +3216,16 @@ export interface DescribeBusinessResourcePageRsp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Page?: Paging
+}
+
+/**
+ * DeleteDeliveryStrategy请求参数结构体
+ */
+export interface DeleteDeliveryStrategyRequest {
+  /**
+   * <p>转发策略id</p>
+   */
+  ID?: number
 }
 
 /**
@@ -3489,17 +3715,57 @@ export interface SoftVersionAndNum {
 }
 
 /**
- * ExportDeviceDownloadTask返回参数结构体
+ * 企业目录的配置数据
  */
-export interface ExportDeviceDownloadTaskResponse {
+export interface DirectoryConfigData {
   /**
-   * 业务响应数据
+   * <p>企业目录 ID</p>
    */
-  Data?: DeviceDownloadTask
+  Id?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>目录对应身份源类型</p><p>枚举值：</p><ul><li>WeCom： 企业微信</li><li>Lark： 飞书</li><li>DingTalk： 钉钉</li><li>MicrosoftEntraID： 微软 AAD</li></ul>
    */
-  RequestId?: string
+  Type?: string
+  /**
+   * <p>企业目录名称</p>
+   */
+  Name?: string
+  /**
+   * <p>使用 JSON 字符串表示的配置信息</p>
+   */
+  Config?: string
+  /**
+   * <p>是否开启了定时同步</p>
+   */
+  SyncEnable?: boolean
+  /**
+   * <p>定时同步的策略</p><p>枚举值：</p><ul><li>4hours： 按创建时间开始的每 4 小时</li><li>daily： 每日</li><li>weekly： 每周</li></ul>
+   */
+  SyncPolicy?: string
+  /**
+   * <p>JSON 字符串，针对不同类型的同步策略，提取对应不同的值</p>
+   */
+  SyncPolicyParams?: string
+  /**
+   * <p>是否配置了同步创建认证配置</p>
+   */
+  CreateAuthConfig?: boolean
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>对应 Config 的配置 ID</p>
+   */
+  SourceId?: string
+  /**
+   * <p>是否在登录页展示</p>
+   */
+  DisplayOnLoginPage?: boolean
+  /**
+   * <p>名称多语言</p>
+   */
+  NameI18n?: Array<I18nString>
 }
 
 /**
@@ -3530,6 +3796,16 @@ export interface BindVirtualAccountsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDeliveryServer请求参数结构体
+ */
+export interface ModifyDeliveryServerRequest {
+  /**
+   * <p>编辑的数据内容</p>
+   */
+  Data?: DeliverServerItem
 }
 
 /**
@@ -3578,6 +3854,16 @@ export interface ModifyVirtualDeviceGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDeliveryServer请求参数结构体
+ */
+export interface DescribeDeliveryServerRequest {
+  /**
+   * <p>服务器id</p>
+   */
+  ID?: number
 }
 
 /**
@@ -3714,6 +4000,40 @@ export interface DescribeSoftCensusListByDeviceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDeliveryStrategy请求参数结构体
+ */
+export interface ModifyDeliveryStrategyRequest {
+  /**
+   * <p>策略名称</p>
+   */
+  Name?: string
+  /**
+   * <p>转发日志类型列表 身份安全:&quot;040201000000&quot;,资源访问日志:&quot;040203000000&quot;,客户端操作日志:&quot;040202000000&quot;,终端安全日志:&quot;040205000000&quot;,终端管控日志:&quot;040206000000&quot;,终端合规日志:&quot;040207000000&quot;,license授权日志:&quot;040212000000&quot;</p>
+   */
+  LogTypes?: Array<string>
+  /**
+   * <p>转发方式 0:syslog, 2:kafka, 3:http(只支持32位)</p>
+   */
+  Type?: number
+  /**
+   * <p>转发服务器id(只支持32位)</p>
+   */
+  ConfigId?: number
+  /**
+   * <p>转发策略描述</p>
+   */
+  Description?: string
+  /**
+   * <p>是否开启</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>转发策略id 创建时传递 编辑时候无需传递(只支持32位)</p>
+   */
+  ID?: number
 }
 
 /**
@@ -3871,6 +4191,47 @@ export interface GrantResourcesByVirtualGroupsResponse {
 }
 
 /**
+ * 数据
+ */
+export interface DeliveryStrategyItem {
+  /**
+   * <p>策略名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>转发方式 0:syslog, 2:kafka, 3:http(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * <p>转发日志类型列表 身份安全:&quot;040201000000&quot;,资源访问日志:&quot;040203000000&quot;,客户端操作日志:&quot;040202000000&quot;,终端安全日志:&quot;040205000000&quot;,终端管控日志:&quot;040206000000&quot;,终端合规日志:&quot;040207000000&quot;,license授权日志:&quot;040212000000&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogTypes?: Array<string>
+  /**
+   * <p>转发配置服务器名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigName?: string
+  /**
+   * <p>策略描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>转发策略id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: number
+  /**
+   * <p>转发服务器id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigId?: number
+}
+
+/**
  * ModifyDeviceTrustStatus请求参数结构体
  */
 export interface ModifyDeviceTrustStatusRequest {
@@ -3932,6 +4293,16 @@ export interface DescribeRootAccountGroupResponse {
    * 账号根分组响应详情
    */
   Data?: GetAccountGroupData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDeliveryServer返回参数结构体
+ */
+export interface DeleteDeliveryServerResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4092,57 +4463,13 @@ export interface DescribeDeviceInfoRspData {
 }
 
 /**
- * 企业目录的配置数据
+ * 获取公钥加密的key数据
  */
-export interface DirectoryConfigData {
+export interface DescribePublicEncryptKeyData {
   /**
-   * <p>企业目录 ID</p>
+   * <p>返回公钥，base64编码后返回，使用需要base64解码</p>
    */
-  Id?: number
-  /**
-   * <p>目录对应身份源类型</p><p>枚举值：</p><ul><li>WeCom： 企业微信</li><li>Lark： 飞书</li><li>DingTalk： 钉钉</li><li>MicrosoftEntraID： 微软 AAD</li></ul>
-   */
-  Type?: string
-  /**
-   * <p>企业目录名称</p>
-   */
-  Name?: string
-  /**
-   * <p>使用 JSON 字符串表示的配置信息</p>
-   */
-  Config?: string
-  /**
-   * <p>是否开启了定时同步</p>
-   */
-  SyncEnable?: boolean
-  /**
-   * <p>定时同步的策略</p><p>枚举值：</p><ul><li>4hours： 按创建时间开始的每 4 小时</li><li>daily： 每日</li><li>weekly： 每周</li></ul>
-   */
-  SyncPolicy?: string
-  /**
-   * <p>JSON 字符串，针对不同类型的同步策略，提取对应不同的值</p>
-   */
-  SyncPolicyParams?: string
-  /**
-   * <p>是否配置了同步创建认证配置</p>
-   */
-  CreateAuthConfig?: boolean
-  /**
-   * <p>描述</p>
-   */
-  Description?: string
-  /**
-   * <p>对应 Config 的配置 ID</p>
-   */
-  SourceId?: string
-  /**
-   * <p>是否在登录页展示</p>
-   */
-  DisplayOnLoginPage?: boolean
-  /**
-   * <p>名称多语言</p>
-   */
-  NameI18n?: Array<I18nString>
+  PublicEncryptKey?: string
 }
 
 /**
@@ -4442,6 +4769,21 @@ export interface DeviceDownloadTask {
 }
 
 /**
+ * DescribePublicEncryptKey请求参数结构体
+ */
+export type DescribePublicEncryptKeyRequest = null
+
+/**
+ * DeleteDeliveryServer请求参数结构体
+ */
+export interface DeleteDeliveryServerRequest {
+  /**
+   * <p>服务器id</p>
+   */
+  ID?: number
+}
+
+/**
  * 返回的数组列表
  */
 export interface DeviceGroupDetail {
@@ -4520,25 +4862,13 @@ export interface DeviceGroupDetail {
 }
 
 /**
- * BindVirtualAccounts请求参数结构体
+ * DescribeCompanyDirectoryConfig请求参数结构体
  */
-export interface BindVirtualAccountsRequest {
+export interface DescribeCompanyDirectoryConfigRequest {
   /**
-   * <p>Comment: 虚拟组id;Required:true</p>
+   * <p>企业目录 ID</p>
    */
-  VirtualGroupId: number
-  /**
-   * <p>Comment: 要绑定的账户Id集合，这里的Id指的是DescribeLocalAccountsData结构体里返回的Id;Required:true</p>
-   */
-  AccountIdList?: Array<number | bigint>
-  /**
-   * <p>Comment: 要绑定的账户(目录MenuId+登录账号UserId)集合，与AccountIdList二选一或并用，查不到的账号会被跳过;Required:false</p>
-   */
-  AccountUserList?: Array<AccountUserIdItem>
-  /**
-   * Comment: 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
-   */
-  DomainInstanceId?: string
+  Id?: number
 }
 
 /**
@@ -4640,17 +4970,25 @@ export interface RuleItem {
 }
 
 /**
- * DescribeAggrSoftCategorySoftList返回参数结构体
+ * DescribeDeviceHardwareInfoList请求参数结构体
  */
-export interface DescribeAggrSoftCategorySoftListResponse {
+export interface DescribeDeviceHardwareInfoListRequest {
   /**
-   * 数据
+   * <p>【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1    全网终端    Win2    未分组终端    Win30000000    服务器    Win40000101    全网终端    Linux40000102    未分组终端    Linux40000103    服务器    Linux40000201    全网终端    macOS40000202    未分组终端    macOS40000203    服务器    macOS40000401    全网终端    Android40000402    未分组终端    Android40000501    全网终端    iOS40000502    未分组终端    iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id</p>
    */
-  Data?: DescribeAggrSoftCategorySoftListData
+  GroupId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>【必填】系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本））(只支持32位)，需要和GroupId或者GroupIds匹配</p><p>枚举值：</p><ul><li>0： Windows</li><li>1： Linux</li><li>2： macOS</li><li>4： Android</li><li>5： iOS</li><li>-1： 全系统（SaaS一体化版本）</li></ul>
    */
-  RequestId?: string
+  OsType: number
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * <p>过滤条件参数（字段含义请参考接口返回值）  - Name, 类型String，支持操作：【eq，like，ilike】，支持排序  - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序  - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序  - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序  - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序  - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序  ，支持排序分页参数  - PageNum 从1开始，小于等于0时使用默认参数 - PageSize 最大值5000，最好不超过100</p>
+   */
+  Condition?: Condition
 }
 
 /**
@@ -4689,6 +5027,16 @@ export interface DeviceProfile {
    * <p>必填数据</p>
    */
   IsCustom?: string
+}
+
+/**
+ * 修改转发服务器返回数据
+ */
+export interface ModifyDeliveryServerData {
+  /**
+   * <p>服务器ID</p>
+   */
+  ID?: number
 }
 
 /**
@@ -4829,13 +5177,25 @@ export interface DescribeDLPFileDetectResultResponse {
 }
 
 /**
- * DescribeCompanyDirectoryConfig请求参数结构体
+ * BindVirtualAccounts请求参数结构体
  */
-export interface DescribeCompanyDirectoryConfigRequest {
+export interface BindVirtualAccountsRequest {
   /**
-   * <p>企业目录 ID</p>
+   * <p>Comment: 虚拟组id;Required:true</p>
    */
-  Id?: number
+  VirtualGroupId: number
+  /**
+   * <p>Comment: 要绑定的账户Id集合，这里的Id指的是DescribeLocalAccountsData结构体里返回的Id;Required:true</p>
+   */
+  AccountIdList?: Array<number | bigint>
+  /**
+   * <p>Comment: 要绑定的账户(目录MenuId+登录账号UserId)集合，与AccountIdList二选一或并用，查不到的账号会被跳过;Required:false</p>
+   */
+  AccountUserList?: Array<AccountUserIdItem>
+  /**
+   * Comment: 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
 }
 
 /**
@@ -4853,25 +5213,27 @@ export interface CreatePrivilegeCodeResponse {
 }
 
 /**
- * DescribeDeviceHardwareInfoList请求参数结构体
+ * DescribeAggrSoftCategorySoftList返回参数结构体
  */
-export interface DescribeDeviceHardwareInfoListRequest {
+export interface DescribeAggrSoftCategorySoftListResponse {
   /**
-   * <p>【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1    全网终端    Win2    未分组终端    Win30000000    服务器    Win40000101    全网终端    Linux40000102    未分组终端    Linux40000103    服务器    Linux40000201    全网终端    macOS40000202    未分组终端    macOS40000203    服务器    macOS40000401    全网终端    Android40000402    未分组终端    Android40000501    全网终端    iOS40000502    未分组终端    iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id</p>
+   * 数据
    */
-  GroupId: number
+  Data?: DescribeAggrSoftCategorySoftListData
   /**
-   * <p>【必填】系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本））(只支持32位)，需要和GroupId或者GroupIds匹配</p><p>枚举值：</p><ul><li>0： Windows</li><li>1： Linux</li><li>2： macOS</li><li>4： Android</li><li>5： iOS</li><li>-1： 全系统（SaaS一体化版本）</li></ul>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OsType: number
+  RequestId?: string
+}
+
+/**
+ * 修改转发策略返回数据
+ */
+export interface ModifyDeliveryStrategyData {
   /**
-   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   * <p>策略ID</p>
    */
-  DomainInstanceId?: string
-  /**
-   * <p>过滤条件参数（字段含义请参考接口返回值）  - Name, 类型String，支持操作：【eq，like，ilike】，支持排序  - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序  - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序  - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序  - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序  - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序  ，支持排序分页参数  - PageNum 从1开始，小于等于0时使用默认参数 - PageSize 最大值5000，最好不超过100</p>
-   */
-  Condition?: Condition
+  ID?: number
 }
 
 /**

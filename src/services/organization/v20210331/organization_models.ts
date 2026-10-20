@@ -230,29 +230,79 @@ export interface RoleConfigurationProvisionings {
 }
 
 /**
- * UpdatePolicy请求参数结构体
+ * ListRoleConfigurationApplyScopes请求参数结构体
  */
-export interface UpdatePolicyRequest {
+export interface ListRoleConfigurationApplyScopesRequest {
   /**
-   * 需要编辑的策略ID。可以调用[ListPolicies](https://cloud.tencent.com/document/product/850/105311)获取
+   * <p>空间 ID</p>
    */
-  PolicyId: number
+  ZoneId: string
   /**
-   * 策略描述。
+   * <p>身份 ID</p>
    */
-  Description?: string
+  PrincipalId: string
   /**
-   * 策略内容。参考CAM策略语法
+   * <p>身份类型</p><p>枚举值：</p><ul><li>User： 用户</li><li>Group： 用户组</li></ul>
    */
-  Content?: string
+  PrincipalType: string
   /**
-   * 策略名。长度为1~128个字符，可以包含汉字、英文字母、数字和下划线（_）
+   * <p>目标账号 UIN</p>
    */
-  Name?: string
+  TargetUin?: number
   /**
-   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   * <p>过滤条件</p>
    */
-  Type?: string
+  Filter?: string
+  /**
+   * <p>每页条数</p><p>取值范围：[1, 100]</p><p>默认值：10</p>
+   */
+  MaxResults?: number
+  /**
+   * <p>翻页游标</p>
+   */
+  NextToken?: string
+}
+
+/**
+ * CIC的空间统计
+ */
+export interface ZoneStatistics {
+  /**
+   * 用户配额。
+   */
+  UserQuota?: number
+  /**
+   * 用户组配额。
+   */
+  GroupQuota?: number
+  /**
+   * 权限配置配额。
+   */
+  RoleConfigurationQuota?: number
+  /**
+   * 权限配置绑定的系统策略配额。
+   */
+  SystemPolicyPerRoleConfigurationQuota?: number
+  /**
+   * 用户数。
+   */
+  UserCount?: number
+  /**
+   * 用户组数。
+   */
+  GroupCount?: number
+  /**
+   * 权限配置数
+   */
+  RoleConfigurationCount?: number
+  /**
+   * 同步用户数。
+   */
+  UserProvisioningCount?: number
+  /**
+   * 同步角色数。
+   */
+  RoleConfigurationSyncCount?: number
 }
 
 /**
@@ -274,42 +324,29 @@ export interface DescribeShareUnitResourcesResponse {
 }
 
 /**
- * CIC权限配置
+ * ListPermissionApplyOrders请求参数结构体
  */
-export interface RoleConfiguration {
+export interface ListPermissionApplyOrdersRequest {
   /**
-   * 权限配置配置ID。
+   * <p>空间 ID</p>
    */
-  RoleConfigurationId?: string
+  ZoneId: string
   /**
-   * 权限配置配名称。
+   * <p>搜索字段</p><p>按用户名 / 用户 ID 搜索</p>
    */
-  RoleConfigurationName?: string
+  SearchValue?: string
   /**
-   * 权限配置的描述。
+   * <p>状态值</p><p>枚举值：</p><ul><li>1： 待审核</li><li>2： 已通过 - 同步中</li><li>3： 已通过 - 同步成功</li><li>4： 已通过 - 同步失败</li><li>5： 已拒绝</li></ul>
    */
-  Description?: string
+  Status?: number
   /**
-   * 会话持续时间。CIC 用户使用访问配置访问成员账号时，会话最多保持的时间。
-单位：秒。
+   * <p>每页条数</p><p>取值范围：[1, 100]</p><p>默认值：10</p>
    */
-  SessionDuration?: number
+  MaxResults?: number
   /**
-   * 初始访问页面。CIC 用户使用访问配置访问成员账号时，初始访问的页面地址。
+   * <p>翻页游标</p>
    */
-  RelayState?: string
-  /**
-   * 权限配置的创建时间。
-   */
-  CreateTime?: string
-  /**
-   * 权限配置的更新时间。
-   */
-  UpdateTime?: string
-  /**
-   * 如果有入参FilterTargets查询成员账号是否配置过权限，配置了返回true，否则返回false。
-   */
-  IsSelected?: boolean
+  NextToken?: string
 }
 
 /**
@@ -808,6 +845,32 @@ export interface AttachPolicyRequest {
 }
 
 /**
+ * UpdatePolicy请求参数结构体
+ */
+export interface UpdatePolicyRequest {
+  /**
+   * 需要编辑的策略ID。可以调用[ListPolicies](https://cloud.tencent.com/document/product/850/105311)获取
+   */
+  PolicyId: number
+  /**
+   * 策略描述。
+   */
+  Description?: string
+  /**
+   * 策略内容。参考CAM策略语法
+   */
+  Content?: string
+  /**
+   * 策略名。长度为1~128个字符，可以包含汉字、英文字母、数字和下划线（_）
+   */
+  Name?: string
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  Type?: string
+}
+
+/**
  * DeleteShareUnit返回参数结构体
  */
 export interface DeleteShareUnitResponse {
@@ -840,13 +903,25 @@ export interface UpdateShareUnitRequest {
 }
 
 /**
- * RemoveExternalSAMLIdPCertificate返回参数结构体
+ * AddOrganizationMemberEmail请求参数结构体
  */
-export interface RemoveExternalSAMLIdPCertificateResponse {
+export interface AddOrganizationMemberEmailRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 成员Uin。
    */
-  RequestId?: string
+  MemberUin: number
+  /**
+   * 邮箱地址。
+   */
+  Email: string
+  /**
+   * 国际区号。
+   */
+  CountryCode: string
+  /**
+   * 手机号。
+   */
+  Phone: string
 }
 
 /**
@@ -1280,13 +1355,13 @@ export interface DismantleRoleConfigurationResponse {
 }
 
 /**
- * ClearExternalSAMLIdentityProvider请求参数结构体
+ * DeleteOrganization返回参数结构体
  */
-export interface ClearExternalSAMLIdentityProviderRequest {
+export interface DeleteOrganizationResponse {
   /**
-   * 空间ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
+  RequestId?: string
 }
 
 /**
@@ -1553,13 +1628,59 @@ export interface OrganizationServiceAssign {
 }
 
 /**
- * DeleteOrganization返回参数结构体
+ * 任务状态信息。
  */
-export interface DeleteOrganizationResponse {
+export interface TaskInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID。
    */
-  RequestId?: string
+  TaskId?: string
+  /**
+   * 权限配置ID。
+   */
+  RoleConfigurationId?: string
+  /**
+   * 权限配置名称。
+   */
+  RoleConfigurationName?: string
+  /**
+   * 授权的目标成员账号的UIN
+   */
+  TargetUin?: number
+  /**
+   * 同步的目标账号的类型，ManagerUin管理账号;MemberUin成员账号
+   */
+  TargetType?: string
+  /**
+   * 用户授权的身份ID,如果是身份类型是CIC用户,则为用户ID; 如果是用户组，则为用户组ID;
+   */
+  PrincipalId?: string
+  /**
+   * 用户授权的身份类型, User代表CIC用户, Group代表CIC用户组
+   */
+  PrincipalType?: string
+  /**
+   * 任务类型。
+   */
+  TaskType?: string
+  /**
+   * InProgress：任务执行中。 Success：任务执行成功。 Failed：任务执行失败。
+   */
+  Status?: string
+  /**
+   * 失败原因
+   */
+  FailureReason?: string
+}
+
+/**
+ * ClearExternalSAMLIdentityProvider请求参数结构体
+ */
+export interface ClearExternalSAMLIdentityProviderRequest {
+  /**
+   * 空间ID。
+   */
+  ZoneId: string
 }
 
 /**
@@ -2343,13 +2464,13 @@ export interface AddShareUnitNodeRequest {
 }
 
 /**
- * UpdateOrganizationMember返回参数结构体
+ * GetZoneStatistics请求参数结构体
  */
-export interface UpdateOrganizationMemberResponse {
+export interface GetZoneStatisticsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 空间ID
    */
-  RequestId?: string
+  ZoneId: string
 }
 
 /**
@@ -2469,25 +2590,21 @@ export interface Tag {
 }
 
 /**
- * AddOrganizationMemberEmail请求参数结构体
+ * 申请的权限配置，包含用户申请权限配置的配置 ID、配置名称、描述信息
  */
-export interface AddOrganizationMemberEmailRequest {
+export interface ApplyRoleConfiguration {
   /**
-   * 成员Uin。
+   * <p>权限配置 ID</p>
    */
-  MemberUin: number
+  RoleConfigurationId: string
   /**
-   * 邮箱地址。
+   * <p>权限配置名称</p>
    */
-  Email: string
+  RoleConfigurationName: string
   /**
-   * 国际区号。
+   * <p>说明</p>
    */
-  CountryCode: string
-  /**
-   * 手机号。
-   */
-  Phone: string
+  Description?: string
 }
 
 /**
@@ -2553,6 +2670,20 @@ export interface DeletePolicyRequest {
    * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
    */
   Type?: string
+}
+
+/**
+ * 策略详情
+ */
+export interface PolicyDetail {
+  /**
+   * 策略ID。
+   */
+  PolicyId: number
+  /**
+   * 策略名称。
+   */
+  PolicyName?: string
 }
 
 /**
@@ -2644,13 +2775,17 @@ export interface GetSCIMSynchronizationStatusResponse {
 }
 
 /**
- * GetZoneStatistics请求参数结构体
+ * CreateRoleConfigurationApplyScope返回参数结构体
  */
-export interface GetZoneStatisticsRequest {
+export interface CreateRoleConfigurationApplyScopeResponse {
   /**
-   * 空间ID
+   * <p>成功 upsert 的条目数</p>
    */
-  ZoneId: string
+  SuccessCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2878,21 +3013,29 @@ export interface OrgMemberFinancial {
 }
 
 /**
- * DescribeOrganizationAuthNode请求参数结构体
+ * DeleteRoleConfigurationApplyScope请求参数结构体
  */
-export interface DescribeOrganizationAuthNodeRequest {
+export interface DeleteRoleConfigurationApplyScopeRequest {
   /**
-   * 偏移量。取值是limit的整数倍。默认值 : 0。
+   * <p>空间ID</p>
    */
-  Offset: number
+  ZoneId: string
   /**
-   * 限制数目。取值范围：1~50。默认值：10。
+   * <p>权限配置 ID 列表</p>
    */
-  Limit: number
+  RoleConfigurationIds: Array<string>
   /**
-   * 互信主体名称。
+   * <p>目标账号 UIN</p>
    */
-  AuthName?: string
+  TargetUin: number
+  /**
+   * <p>身份 ID</p>
+   */
+  PrincipalId: string
+  /**
+   * <p>身份类型</p><p>枚举值：</p><ul><li>User： 用户</li><li>Group： 用户组</li></ul>
+   */
+  PrincipalType: string
 }
 
 /**
@@ -3362,49 +3505,17 @@ export interface GetIPWhitelistRequest {
 }
 
 /**
- * 任务状态信息。
+ * DisablePolicyType请求参数结构体
  */
-export interface TaskInfo {
+export interface DisablePolicyTypeRequest {
   /**
-   * 任务ID。
+   * 企业组织Id。可以调用[DescribeOrganization](https://cloud.tencent.com/document/product/850/67059)获取
    */
-  TaskId?: string
+  OrganizationId: number
   /**
-   * 权限配置ID。
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
    */
-  RoleConfigurationId?: string
-  /**
-   * 权限配置名称。
-   */
-  RoleConfigurationName?: string
-  /**
-   * 授权的目标成员账号的UIN
-   */
-  TargetUin?: number
-  /**
-   * 同步的目标账号的类型，ManagerUin管理账号;MemberUin成员账号
-   */
-  TargetType?: string
-  /**
-   * 用户授权的身份ID,如果是身份类型是CIC用户,则为用户ID; 如果是用户组，则为用户组ID;
-   */
-  PrincipalId?: string
-  /**
-   * 用户授权的身份类型, User代表CIC用户, Group代表CIC用户组
-   */
-  PrincipalType?: string
-  /**
-   * 任务类型。
-   */
-  TaskType?: string
-  /**
-   * InProgress：任务执行中。 Success：任务执行成功。 Failed：任务执行失败。
-   */
-  Status?: string
-  /**
-   * 失败原因
-   */
-  FailureReason?: string
+  PolicyType: string
 }
 
 /**
@@ -3698,17 +3809,21 @@ export interface DeleteRoleAssignmentResponse {
 }
 
 /**
- * DisablePolicyType请求参数结构体
+ * DescribeOrganizationAuthNode请求参数结构体
  */
-export interface DisablePolicyTypeRequest {
+export interface DescribeOrganizationAuthNodeRequest {
   /**
-   * 企业组织Id。可以调用[DescribeOrganization](https://cloud.tencent.com/document/product/850/67059)获取
+   * 偏移量。取值是limit的整数倍。默认值 : 0。
    */
-  OrganizationId: number
+  Offset: number
   /**
-   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   * 限制数目。取值范围：1~50。默认值：10。
    */
-  PolicyType: string
+  Limit: number
+  /**
+   * 互信主体名称。
+   */
+  AuthName?: string
 }
 
 /**
@@ -3863,6 +3978,36 @@ export interface GetUserSyncProvisioningResponse {
    * CAM 用户同步信息。
    */
   UserProvisioning?: UserProvisioning
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListRoleConfigurationApplyScopes返回参数结构体
+ */
+export interface ListRoleConfigurationApplyScopesResponse {
+  /**
+   * <p>申请范围列表</p>
+   */
+  ApplyScopes?: Array<RoleAssignments>
+  /**
+   * <p>总数</p>
+   */
+  TotalCounts?: number
+  /**
+   * <p>每页条数</p>
+   */
+  MaxResults?: number
+  /**
+   * <p>翻页游标</p>
+   */
+  NextToken?: string
+  /**
+   * <p>是否被截断</p>
+   */
+  IsTruncated?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4392,6 +4537,70 @@ export interface OpenIdentityCenterResponse {
 }
 
 /**
+ * 权限申请单，描述一张完整的权限申请工单，即谁（UserId/UserName）向哪个成员账号（TargetUin/TargetName）申请了哪些权限配置（RoleConfigurations），以及审批进展如何
+ */
+export interface PermissionApplyOrder {
+  /**
+   * <p>申请单 ID</p>
+   */
+  ApplyId: string
+  /**
+   * <p>申请人用户 ID</p>
+   */
+  UserId: string
+  /**
+   * <p>申请人用户名</p>
+   */
+  UserName: string
+  /**
+   * <p>目标成员账号 UIN</p>
+   */
+  TargetUin: number
+  /**
+   * <p>目标成员账号名称</p>
+   */
+  TargetName: string
+  /**
+   * <p>申请的权限配置</p>
+   */
+  RoleConfigurations: Array<ApplyRoleConfiguration>
+  /**
+   * <p>申请单状态</p><p>枚举值：</p><ul><li>1： 待审核</li><li>2： 已通过 - 同步中</li><li>3： 已通过 - 同步成功</li><li>4： 已通过 - 同步失败</li><li>5： 已拒绝</li></ul>
+   */
+  Status: number
+  /**
+   * <p>创建时间</p><p>参数格式：YYYY-M-DD hh:mm:ss</p>
+   */
+  CreateTime: string
+  /**
+   * <p>审批意见</p>
+   */
+  AuditOpinion?: string
+  /**
+   * <p>审批时间</p><p>参数格式：YYYY-M-DD hh:mm:ss</p><p>未审批为空</p>
+   */
+  AuditTime?: string
+}
+
+/**
+ * UpdateUserStatus请求参数结构体
+ */
+export interface UpdateUserStatusRequest {
+  /**
+   * 空间 ID。
+   */
+  ZoneId: string
+  /**
+   * 用户 ID。
+   */
+  UserId: string
+  /**
+   * 用户的状态。取值：  Enabled：启用。 Disabled：禁用。
+   */
+  NewUserStatus: string
+}
+
+/**
  * 不允许删除的原因。
  */
 export interface NotAllowReason {
@@ -4748,6 +4957,16 @@ export interface BindOrganizationPolicySubAccountRequest {
 }
 
 /**
+ * UpdateSCIMSynchronizationStatus返回参数结构体
+ */
+export interface UpdateSCIMSynchronizationStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AuditPermissionApplyOrder返回参数结构体
  */
 export interface AuditPermissionApplyOrderResponse {
@@ -4848,13 +5067,21 @@ export interface AuthRelationFile {
 }
 
 /**
- * UpdateSCIMSynchronizationStatus返回参数结构体
+ * UpdateOrganizationNode请求参数结构体
  */
-export interface UpdateSCIMSynchronizationStatusResponse {
+export interface UpdateOrganizationNodeRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取
    */
-  RequestId?: string
+  NodeId: number
+  /**
+   * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
+   */
+  Name?: string
+  /**
+   * 备注。
+   */
+  Remark?: string
 }
 
 /**
@@ -4927,17 +5154,17 @@ export interface OrgMemberAuthIdentity {
 }
 
 /**
- * 策略详情
+ * CreateRoleConfigurationApplyScope请求参数结构体
  */
-export interface PolicyDetail {
+export interface CreateRoleConfigurationApplyScopeRequest {
   /**
-   * 策略ID。
+   * <p>用户目录</p>
    */
-  PolicyId: number
+  ZoneId: string
   /**
-   * 策略名称。
+   * <p>申请范围条目</p>
    */
-  PolicyName?: string
+  ApplyScopeInfo: Array<RoleAssignmentInfo>
 }
 
 /**
@@ -5650,6 +5877,16 @@ export interface ListRoleConfigurationsResponse {
 }
 
 /**
+ * DeleteRoleConfigurationApplyScope返回参数结构体
+ */
+export interface DeleteRoleConfigurationApplyScopeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListSCIMCredentials返回参数结构体
  */
 export interface ListSCIMCredentialsResponse {
@@ -5759,6 +5996,16 @@ export interface ShareResourceToMember {
  * InviteOrganizationMember返回参数结构体
  */
 export interface InviteOrganizationMemberResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveExternalSAMLIdPCertificate返回参数结构体
+ */
+export interface RemoveExternalSAMLIdPCertificateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6012,21 +6259,42 @@ export interface UpdateOrganizationMembersPolicyResponse {
 }
 
 /**
- * UpdateUserStatus请求参数结构体
+ * CIC权限配置
  */
-export interface UpdateUserStatusRequest {
+export interface RoleConfiguration {
   /**
-   * 空间 ID。
+   * 权限配置配置ID。
    */
-  ZoneId: string
+  RoleConfigurationId?: string
   /**
-   * 用户 ID。
+   * 权限配置配名称。
    */
-  UserId: string
+  RoleConfigurationName?: string
   /**
-   * 用户的状态。取值：  Enabled：启用。 Disabled：禁用。
+   * 权限配置的描述。
    */
-  NewUserStatus: string
+  Description?: string
+  /**
+   * 会话持续时间。CIC 用户使用访问配置访问成员账号时，会话最多保持的时间。
+单位：秒。
+   */
+  SessionDuration?: number
+  /**
+   * 初始访问页面。CIC 用户使用访问配置访问成员账号时，初始访问的页面地址。
+   */
+  RelayState?: string
+  /**
+   * 权限配置的创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 权限配置的更新时间。
+   */
+  UpdateTime?: string
+  /**
+   * 如果有入参FilterTargets查询成员账号是否配置过权限，配置了返回true，否则返回false。
+   */
+  IsSelected?: boolean
 }
 
 /**
@@ -6226,21 +6494,33 @@ export interface DeleteOrganizationIdentityRequest {
 }
 
 /**
- * UpdateOrganizationNode请求参数结构体
+ * ListPermissionApplyOrders返回参数结构体
  */
-export interface UpdateOrganizationNodeRequest {
+export interface ListPermissionApplyOrdersResponse {
   /**
-   * 节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取
+   * <p>申请单列表</p>
    */
-  NodeId: number
+  ApplyOrders?: Array<PermissionApplyOrder>
   /**
-   * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
+   * <p>总数</p>
    */
-  Name?: string
+  TotalCounts?: number
   /**
-   * 备注。
+   * <p>翻页游标</p>
    */
-  Remark?: string
+  NextToken?: string
+  /**
+   * <p>是否还有下一页</p>
+   */
+  IsTruncated?: boolean
+  /**
+   * <p>每页条数</p>
+   */
+  MaxResults?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6258,45 +6538,13 @@ export interface ShareUnitNode {
 }
 
 /**
- * CIC的空间统计
+ * UpdateOrganizationMember返回参数结构体
  */
-export interface ZoneStatistics {
+export interface UpdateOrganizationMemberResponse {
   /**
-   * 用户配额。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserQuota?: number
-  /**
-   * 用户组配额。
-   */
-  GroupQuota?: number
-  /**
-   * 权限配置配额。
-   */
-  RoleConfigurationQuota?: number
-  /**
-   * 权限配置绑定的系统策略配额。
-   */
-  SystemPolicyPerRoleConfigurationQuota?: number
-  /**
-   * 用户数。
-   */
-  UserCount?: number
-  /**
-   * 用户组数。
-   */
-  GroupCount?: number
-  /**
-   * 权限配置数
-   */
-  RoleConfigurationCount?: number
-  /**
-   * 同步用户数。
-   */
-  UserProvisioningCount?: number
-  /**
-   * 同步角色数。
-   */
-  RoleConfigurationSyncCount?: number
+  RequestId?: string
 }
 
 /**

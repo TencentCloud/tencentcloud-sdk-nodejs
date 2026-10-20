@@ -1328,17 +1328,43 @@ export interface PartitionInfo {
 }
 
 /**
- * CreateNoticeContent返回参数结构体
+ * CreateEsRecharge请求参数结构体
  */
-export interface CreateNoticeContentResponse {
+export interface CreateEsRechargeRequest {
   /**
-   * 通知内容配置ID
+   * 日志主题id。
+- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
+- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
    */
-  NoticeContentId?: string
+  TopicId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 名称：长度不超过64字符。
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 索引信息。不同索引可以通过英文逗号分隔，支持*通配符
+   */
+  Index: string
+  /**
+   * es查询语句。
+   */
+  Query: string
+  /**
+   * es集群配置信息。
+   */
+  EsInfo: EsInfo
+  /**
+   * es导入信息。
+   */
+  ImportInfo: EsImportInfo
+  /**
+   * es导入时间字段信息。
+   */
+  TimeInfo: EsTimeInfo
+  /**
+   * 是否开启投递服务日志。1：关闭，2：开启。默认开启。
+   */
+  HasServicesLog?: number
 }
 
 /**
@@ -3743,6 +3769,64 @@ export interface DescribeExportsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云产品投递任务topic配置信息
+ */
+export interface CloudProductTopicConfig {
+  /**
+   * <p>加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。</p><p>枚举值：</p><ul><li>0： 不加密</li><li>1： kms-cls 云产品密钥加密</li></ul><p>默认值：0</p>
+   */
+  Encryption?: number
+  /**
+   * <p>主题分区个数。默认创建1个，最大支持创建10个分区。</p>
+   */
+  PartitionCount?: number
+  /**
+   * <p>是否开启自动分裂，默认值为true</p>
+   */
+  AutoSplit?: boolean
+  /**
+   * <p>开启自动分裂后，每个主题能够允许的最大分区数</p><p>默认值：50</p>
+   */
+  MaxSplitPartitions?: number
+  /**
+   * <p>日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）。指标主题不支持该配置。</p><p>默认值：hot</p>
+   */
+  StorageType?: string
+  /**
+   * <p>存储时间，单位天。</p><ul><li>日志主题：日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。</li><li>日志主题：日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。</li><li>指标主题：支持1至3600天，值为3640时代表永久保存。</li></ul>
+   */
+  Period?: number
+  /**
+   * <p>0：日志主题关闭日志沉降。<br>非0：日志主题开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。<br>仅在StorageType为 hot 时生效，指标主题不支持该配置。</p>
+   */
+  HotPeriod?: number
+  /**
+   * <p>计费模式</p><p>枚举值：</p><ul><li>0： 按使用功能计费</li><li>1： 按原始日志量计费（目前仅面向少部分客户支持）</li></ul>
+   */
+  BillingMode?: number
+  /**
+   * <p>主题描述</p>
+   */
+  Describes?: string
+  /**
+   * <p>开启记录公网来源ip和服务端接收时间</p>
+   */
+  IsSourceFrom?: boolean
+  /**
+   * <p>免鉴权开关。 false：关闭； true：开启。默认为false。 开启后将支持指定操作匿名访问该日志主题。</p>
+   */
+  IsWebTracking?: boolean
+  /**
+   * <p>用户自定义 KMS 密钥信息；为空则使用默认密钥（别名 KMS-CLS）<br>当参数 Encryption为 1 时有效。</p>
+   */
+  CustomKmsInfo?: CustomKmsInfo
+  /**
+   * <p>主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。</p><ul><li>用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符</li><li>尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。</li><li>如果指定该字段，需保证全地域唯一</li></ul>
+   */
+  TopicId?: string
 }
 
 /**
@@ -8896,43 +8980,17 @@ export interface DeleteMetricConfigRequest {
 }
 
 /**
- * CreateEsRecharge请求参数结构体
+ * CreateNoticeContent返回参数结构体
  */
-export interface CreateEsRechargeRequest {
+export interface CreateNoticeContentResponse {
   /**
-   * 日志主题id。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
+   * 通知内容配置ID
    */
-  TopicId: string
+  NoticeContentId?: string
   /**
-   * 名称：长度不超过64字符。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-  /**
-   * 索引信息。不同索引可以通过英文逗号分隔，支持*通配符
-   */
-  Index: string
-  /**
-   * es查询语句。
-   */
-  Query: string
-  /**
-   * es集群配置信息。
-   */
-  EsInfo: EsInfo
-  /**
-   * es导入信息。
-   */
-  ImportInfo: EsImportInfo
-  /**
-   * es导入时间字段信息。
-   */
-  TimeInfo: EsTimeInfo
-  /**
-   * 是否开启投递服务日志。1：关闭，2：开启。默认开启。
-   */
-  HasServicesLog?: number
+  RequestId?: string
 }
 
 /**
@@ -13294,6 +13352,10 @@ export interface CreateAgentApplicationRequest {
    * <p>日志集Id。通过 <a href="https://cloud.tencent.com/document/product/614/58624">获取日志集列表</a>获取日志集Id。</p>
    */
   LogsetId?: string
+  /**
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到应用创建的主题和日志集。</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -13560,6 +13622,10 @@ export interface CreateCloudProductLogCollectionRequest {
    * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>日志主题信息。当创建云产品投递任务并传递TopicName时，会创建具备这些属性的日志主题。</p>
+   */
+  TopicConfig?: CloudProductTopicConfig
 }
 
 /**

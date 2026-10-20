@@ -75,6 +75,7 @@ import {
   BackupRegionAndIds,
   SearchClusterTablesResponse,
   DescribeClusterDetailRequest,
+  RestartLibraDBInstanceRequest,
   CopyBackupToVaultResponse,
   ModifyResourcePackageNameRequest,
   UpgradeProxy,
@@ -253,7 +254,8 @@ import {
   CreateAuditLogFileResponse,
   PauseServerlessResponse,
   DescribeInstanceDetailResponse,
-  RestartLibraDBInstanceRequest,
+  ProxyZoneStockInfo,
+  GrantAccountPrivilegesResponse,
   DeleteAccountsResponse,
   RenewLibraDBClustersRequest,
   DescribeClusterServerlessScalePlansResponse,
@@ -277,6 +279,7 @@ import {
   DbInfo,
   DescribeBackupDownloadUrlRequest,
   InstanceAuditStatus,
+  CancelTaskRequest,
   CopyClusterPasswordComplexityRequest,
   DescribeClusterInstanceGroupsResponse,
   CreateLibraDBClusterAccountsResponse,
@@ -296,7 +299,8 @@ import {
   ModifyLibraDBClusterAccountDescriptionRequest,
   ModifyAuditServiceRequest,
   DescribeLibraDBClusterDetailResponse,
-  GrantAccountPrivilegesResponse,
+  CancelTaskResponse,
+  DescribeProxyZoneStocksResponse,
   ModifyClusterNameResponse,
   CrossRegionBackupItem,
   ExportInstanceSlowQueriesRequest,
@@ -531,6 +535,7 @@ import {
   RollbackInstanceInfo,
   DescribeClusterPeriodScalePolicyRequest,
   ModifyLibraDBClusterAccountPrivilegeRequest,
+  DescribeProxyZoneStocksRequest,
   DescribeDBSecurityGroupsResponse,
   DeleteParamTemplateResponse,
   CreateClusterPeriodScalePolicyRequest,
@@ -756,13 +761,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeLibraDBClusterAccounts）用于查询分析集群账号
+   * 查询集群透明加密信息
    */
-  async DescribeLibraDBClusterAccounts(
-    req: DescribeLibraDBClusterAccountsRequest,
-    cb?: (error: string, rep: DescribeLibraDBClusterAccountsResponse) => void
-  ): Promise<DescribeLibraDBClusterAccountsResponse> {
-    return this.request("DescribeLibraDBClusterAccounts", req, cb)
+  async DescribeClusterTransparentEncryptInfo(
+    req: DescribeClusterTransparentEncryptInfoRequest,
+    cb?: (error: string, rep: DescribeClusterTransparentEncryptInfoResponse) => void
+  ): Promise<DescribeClusterTransparentEncryptInfoResponse> {
+    return this.request("DescribeClusterTransparentEncryptInfo", req, cb)
   }
 
   /**
@@ -893,6 +898,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVaultsResponse) => void
   ): Promise<DescribeVaultsResponse> {
     return this.request("DescribeVaults", req, cb)
+  }
+
+  /**
+   * 取消等待执行的任务
+   */
+  async CancelTask(
+    req: CancelTaskRequest,
+    cb?: (error: string, rep: CancelTaskResponse) => void
+  ): Promise<CancelTaskResponse> {
+    return this.request("CancelTask", req, cb)
   }
 
   /**
@@ -1206,13 +1221,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群透明加密信息
+   * 将备份文件复制到指定的备份保险箱
    */
-  async DescribeClusterTransparentEncryptInfo(
-    req: DescribeClusterTransparentEncryptInfoRequest,
-    cb?: (error: string, rep: DescribeClusterTransparentEncryptInfoResponse) => void
-  ): Promise<DescribeClusterTransparentEncryptInfoResponse> {
-    return this.request("DescribeClusterTransparentEncryptInfo", req, cb)
+  async CopyBackupToVault(
+    req: CopyBackupToVaultRequest,
+    cb?: (error: string, rep: CopyBackupToVaultResponse) => void
+  ): Promise<CopyBackupToVaultResponse> {
+    return this.request("CopyBackupToVault", req, cb)
   }
 
   /**
@@ -1703,6 +1718,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceSlowQueriesResponse) => void
   ): Promise<DescribeInstanceSlowQueriesResponse> {
     return this.request("DescribeInstanceSlowQueries", req, cb)
+  }
+
+  /**
+   * 该接口(DescribeProxyZoneStocks)查询数据库代理地域库存
+   */
+  async DescribeProxyZoneStocks(
+    req: DescribeProxyZoneStocksRequest,
+    cb?: (error: string, rep: DescribeProxyZoneStocksResponse) => void
+  ): Promise<DescribeProxyZoneStocksResponse> {
+    return this.request("DescribeProxyZoneStocks", req, cb)
   }
 
   /**
@@ -2586,6 +2611,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeLibraDBClusterAccounts）用于查询分析集群账号
+   */
+  async DescribeLibraDBClusterAccounts(
+    req: DescribeLibraDBClusterAccountsRequest,
+    cb?: (error: string, rep: DescribeLibraDBClusterAccountsResponse) => void
+  ): Promise<DescribeLibraDBClusterAccountsResponse> {
+    return this.request("DescribeLibraDBClusterAccounts", req, cb)
+  }
+
+  /**
    * 本接口(ModifyAccountDescription)用于修改数据库账号描述信息。
    */
   async ModifyAccountDescription(
@@ -2623,16 +2658,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenAuditServiceResponse) => void
   ): Promise<OpenAuditServiceResponse> {
     return this.request("OpenAuditService", req, cb)
-  }
-
-  /**
-   * 将备份文件复制到指定的备份保险箱
-   */
-  async CopyBackupToVault(
-    req: CopyBackupToVaultRequest,
-    cb?: (error: string, rep: CopyBackupToVaultResponse) => void
-  ): Promise<CopyBackupToVaultResponse> {
-    return this.request("CopyBackupToVault", req, cb)
   }
 
   /**
