@@ -1726,7 +1726,7 @@ export interface HideResponseHeaders {
    */
   Key: string
   /**
-   * <p>value</p><p>当前仅支持传空字符串&quot;&quot;</p>
+   * <p>value值</p><p>枚举值：</p><ul><li>&#39;&#39;： &#39;&#39;</li></ul>
    */
   Value: string
 }

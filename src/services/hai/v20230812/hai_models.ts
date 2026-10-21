@@ -55,6 +55,10 @@ export interface ComputeDetail {
    * <p>该套餐是否支持按量计费</p>
    */
   PostpaidEnable?: boolean
+  /**
+   * <p>该算力套餐支持的计费模式列表：POSTPAID_BY_HOUR（按量）、PREPAID（包年包月）、SPOT（竞价）</p>
+   */
+  SupportedChargeTypes?: Array<string>
 }
 
 /**
@@ -799,7 +803,7 @@ export interface CreateInferServiceByTemplateRequest {
    */
   Replicas?: number
   /**
-   * <p>付费方式，POSTPAID_BY_HOUR按量后付费</p>
+   * <p>付费方式：POSTPAID_BY_HOUR 按量后付费，PREPAID_BY_MONTH 包年包月，SPOT 竞价售卖（竞价需先调用 BidSpotInferService 对套餐出价）</p>
    */
   ServiceChargeType?: string
   /**
@@ -1219,7 +1223,7 @@ export interface ServiceMetaData {
    */
   ServiceName?: string
   /**
-   * 收费类型
+   * <p>付费方式：POSTPAID_BY_HOUR 按量后付费，PREPAID_BY_MONTH 包年包月，SPOT 竞价售卖（竞价需先调用 BidSpotInferService 对套餐出价）</p>
    */
   ServiceChargeType?: string
 }

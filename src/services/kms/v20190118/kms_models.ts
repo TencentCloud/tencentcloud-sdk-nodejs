@@ -1749,6 +1749,14 @@ export interface GetServiceStatusResponse {
    */
   ResourceRegion?: number
   /**
+   * <p>多账号开通额度</p><p>单位：个数</p>
+   */
+  MultiAccountLimit?: number
+  /**
+   * <p>多账号启用个数</p><p>单位：个数</p>
+   */
+  MultiAccountUsedCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

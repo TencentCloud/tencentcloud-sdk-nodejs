@@ -25,11 +25,13 @@ import {
   DescribeStrategiesRequest,
   IgnorePolicyRiskResponse,
   DescribeRiskListResponse,
+  DeleteAccountGroupRequest,
   DescribeNatAclRulesRequest,
   ModifyStrategyRequest,
   DeleteStrategyRequest,
   ModifyRuleGroupRequest,
   ModifyEdgeAclRuleSequenceResponse,
+  DescribeAccountGroupsRequest,
   ModifySecurityGroupRuleRequest,
   DescribeVpcAclRulesRequest,
   DescribePolicyRiskAccountProductStatsResponse,
@@ -38,24 +40,28 @@ import {
   DescribeStrategyResponse,
   DescribeEdgeAclRulesRequest,
   DescribeStrategiesResponse,
+  DeleteAccountGroupResponse,
   DescribeStrategyAccountsRequest,
   DescribeStrategyDispatchStatusRequest,
-  ModifyEdgeAclRuleSequenceRequest,
+  DeleteStrategyResponse,
   SecurityGroupRule,
   DeleteSecurityGroupRuleResponse,
   CreateRuleGroupRequest,
+  SequenceIndex,
   DescribeNatAclRulesResponse,
+  CreateAccountGroupRequest,
   DescribeSecurityGroupRuleRequest,
   DescribeStrategyRequest,
   DeleteNatAclRuleResponse,
   SgDnsParseCount,
   ModifyStrategySequenceResponse,
-  SequenceIndex,
+  ModifyCfwShareRoleResponse,
   DescribeOrganSummaryResponse,
   DeleteVpcAclRuleRequest,
-  DeleteStrategyResponse,
+  ModifyEdgeAclRuleSequenceRequest,
   StrategyResp,
   RuleGroupResp,
+  ModifyAccountGroupRequest,
   DescribeOrganMembersResponse,
   ModifyEdgeAclRuleRequest,
   ModifyNatAclRuleSequenceResponse,
@@ -66,13 +72,16 @@ import {
   ModifyVpcAclRuleResponse,
   NatAclRuleResp,
   CreateStrategyRequest,
+  ModifyMemberGroupResponse,
   VpcAclRule,
   CommonFilter,
   ModifyVpcAclRuleSequenceResponse,
   DeleteRuleGroupResponse,
+  ModifyCfwManagedRequest,
   CancelIgnorePolicyRiskRequest,
   DeleteVpcAclRuleResponse,
   CreateSecurityGroupRuleGroupResponse,
+  ModifyMemberGroupRequest,
   ServiceTemplateSpecification,
   ModifyVpcAclRuleSequenceRequest,
   ModifyNatAclRuleRequest,
@@ -82,13 +91,16 @@ import {
   DispatchStrategyResponse,
   DescribeRiskListRequest,
   DescribeSecurityGroupRuleResponse,
+  ModifyCfwShareRoleRequest,
   DescribeRiskCategoryStatsResponse,
   MemberInfo,
+  ModifyAccountGroupResponse,
   DescribePolicyRiskAccountProductStatsRequest,
   CreateEdgeAclRuleResponse,
   CreateStrategyResponse,
   AccountGroupInfo,
   DescribeStrategyDispatchStatusResponse,
+  ModifyNatAclRuleResponse,
   ModifyStrategyResponse,
   CreateVpcAclRuleResponse,
   DescribeRuleGroupsResponse,
@@ -99,6 +111,8 @@ import {
   CreateVpcAclRuleGroupRequest,
   ModifyVpcAclRuleRequest,
   DescribeEdgeAclRulesResponse,
+  DescribeAccountGroupsResponse,
+  ModifyCfwManagedResponse,
   ModifyNatAclRuleSequenceRequest,
   DescribeStrategyAccountsResponse,
   DescribeSecurityGroupRulesResponse,
@@ -111,7 +125,7 @@ import {
   DeleteNatAclRuleRequest,
   CreateRuleGroupResponse,
   ModifyEdgeAclRuleResponse,
-  IgnorePolicyRiskRequest,
+  Account,
   VpcAclRuleResp,
   SecurityGroupRiskPolicy,
   SecGroupRuleResp,
@@ -123,6 +137,7 @@ import {
   DescribeRuleGroupsRequest,
   CreateSecurityGroupRuleGroupRequest,
   CreateNatAclRuleResponse,
+  IgnorePolicyRiskRequest,
   CreateAnalyzePolicyTaskResponse,
   PolicyRisk,
   DeleteSecurityGroupRuleRequest,
@@ -131,11 +146,11 @@ import {
   AccountProductDetailStats,
   AccountStatsGroup,
   CreateSecurityGroupRuleRequest,
-  ModifyNatAclRuleResponse,
+  CreateAccountGroupResponse,
   RiskCategoryItem,
-  Account,
   CancelIgnorePolicyRiskResponse,
   ReceiveAccount,
+  AccountGroup,
   EdgeAclRuleInfo,
   DeleteRuleGroupRequest,
   CreateEdgeAclRuleGroupRequest,
@@ -149,6 +164,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("fwm.tencentcloudapi.com", "2025-06-11", clientConfig)
+  }
+
+  /**
+   * 创建账户组
+   */
+  async CreateAccountGroup(
+    req: CreateAccountGroupRequest,
+    cb?: (error: string, rep: CreateAccountGroupResponse) => void
+  ): Promise<CreateAccountGroupResponse> {
+    return this.request("CreateAccountGroup", req, cb)
   }
 
   /**
@@ -252,6 +277,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改账户组名称
+   */
+  async ModifyAccountGroup(
+    req: ModifyAccountGroupRequest,
+    cb?: (error: string, rep: ModifyAccountGroupResponse) => void
+  ): Promise<ModifyAccountGroupResponse> {
+    return this.request("ModifyAccountGroup", req, cb)
+  }
+
+  /**
    * 查询用户所有规则的策略问题
    */
   async DescribeRiskList(
@@ -282,13 +317,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下发策略
+   * 删除账户组，账户组下有成员时不可删除
    */
-  async DispatchStrategy(
-    req: DispatchStrategyRequest,
-    cb?: (error: string, rep: DispatchStrategyResponse) => void
-  ): Promise<DispatchStrategyResponse> {
-    return this.request("DispatchStrategy", req, cb)
+  async DeleteAccountGroup(
+    req: DeleteAccountGroupRequest,
+    cb?: (error: string, rep: DeleteAccountGroupResponse) => void
+  ): Promise<DeleteAccountGroupResponse> {
+    return this.request("DeleteAccountGroup", req, cb)
   }
 
   /**
@@ -319,6 +354,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityGroupRulesResponse) => void
   ): Promise<DescribeSecurityGroupRulesResponse> {
     return this.request("DescribeSecurityGroupRules", req, cb)
+  }
+
+  /**
+   * 修改策略信息
+   */
+  async ModifyStrategy(
+    req: ModifyStrategyRequest,
+    cb?: (error: string, rep: ModifyStrategyResponse) => void
+  ): Promise<ModifyStrategyResponse> {
+    return this.request("ModifyStrategy", req, cb)
   }
 
   /**
@@ -359,6 +404,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganMembersResponse) => void
   ): Promise<DescribeOrganMembersResponse> {
     return this.request("DescribeOrganMembers", req, cb)
+  }
+
+  /**
+   * 设置成员所属账户组，GroupId为空字符串表示移出账户组
+   */
+  async ModifyMemberGroup(
+    req: ModifyMemberGroupRequest,
+    cb?: (error: string, rep: ModifyMemberGroupResponse) => void
+  ): Promise<ModifyMemberGroupResponse> {
+    return this.request("ModifyMemberGroup", req, cb)
   }
 
   /**
@@ -472,6 +527,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取账户组列表，支持分页和关键词搜索
+   */
+  async DescribeAccountGroups(
+    req: DescribeAccountGroupsRequest,
+    cb?: (error: string, rep: DescribeAccountGroupsResponse) => void
+  ): Promise<DescribeAccountGroupsResponse> {
+    return this.request("DescribeAccountGroups", req, cb)
+  }
+
+  /**
    * 创建一个不含规则的规则组，归属产品由 Product 指定。规则组是四类防火墙产品共用的资源，落库于 fwm_rule_group 并以 product 字段区分归属；规则需另行通过 CreateSecurityGroupRule / CreateVpcAclRule / CreateNatAclRule / CreateEdgeAclRule 追加。规则组的查询/修改/删除已由 DescribeRuleGroup / DescribeRuleGroups / ModifyRuleGroup / DeleteRuleGroup 统一承载，本接口补齐创建侧，供 Terraform 等需要「建组」与「建规则」分离的资源模型使用。返回新规则组 ID（fwmrg- 前缀），初始 RuleCount 为 0。注意：创建空规则组同样计入规则组配额，且三墙（VPC/NAT/Edge）受预付费写门禁约束，企业安全组不受该门禁约束。
    */
   async CreateRuleGroup(
@@ -542,6 +607,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置成员账号的云防火墙纳管状态
+   */
+  async ModifyCfwManaged(
+    req: ModifyCfwManagedRequest,
+    cb?: (error: string, rep: ModifyCfwManagedResponse) => void
+  ): Promise<ModifyCfwManagedResponse> {
+    return this.request("ModifyCfwManaged", req, cb)
+  }
+
+  /**
    * 创建规则组（规则组管理）
    */
   async CreateSecurityGroupRuleGroup(
@@ -552,13 +627,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改策略信息
+   * 设置集团成员的云防火墙共享角色（sharer/user/none）。共享者全集团唯一；共享者→使用者禁止直接变更，需先将角色改为 none；设为使用者时必须指定共享者 SharerAppId。仅管理员可操作。
    */
-  async ModifyStrategy(
-    req: ModifyStrategyRequest,
-    cb?: (error: string, rep: ModifyStrategyResponse) => void
-  ): Promise<ModifyStrategyResponse> {
-    return this.request("ModifyStrategy", req, cb)
+  async ModifyCfwShareRole(
+    req: ModifyCfwShareRoleRequest,
+    cb?: (error: string, rep: ModifyCfwShareRoleResponse) => void
+  ): Promise<ModifyCfwShareRoleResponse> {
+    return this.request("ModifyCfwShareRole", req, cb)
   }
 
   /**
@@ -599,6 +674,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyVpcAclRuleResponse) => void
   ): Promise<ModifyVpcAclRuleResponse> {
     return this.request("ModifyVpcAclRule", req, cb)
+  }
+
+  /**
+   * 下发策略
+   */
+  async DispatchStrategy(
+    req: DispatchStrategyRequest,
+    cb?: (error: string, rep: DispatchStrategyResponse) => void
+  ): Promise<DispatchStrategyResponse> {
+    return this.request("DispatchStrategy", req, cb)
   }
 
   /**

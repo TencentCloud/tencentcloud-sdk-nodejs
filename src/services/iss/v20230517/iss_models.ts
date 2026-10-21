@@ -1528,37 +1528,41 @@ export interface DeleteRecordPlanRequest {
  */
 export interface DescribeStreamAuthData {
   /**
-   * 鉴权配置ID（uuid）
+   * <p>鉴权配置ID（uuid）</p>
    */
   Id?: string
   /**
-   * 是否开播放鉴权（1:开启,0:关闭）
+   * <p>是否开播放鉴权（1:开启,0:关闭）</p>
    */
   PullState?: number
   /**
-   * 播放密钥（仅支持字母数字，长度0-10位）
+   * <p>播放密钥（仅支持字母数字，长度0-10位）</p>
    */
   PullSecret?: string
   /**
-   * 播放过期时间（单位：分钟）
+   * <p>播放过期时间（单位：分钟）</p>
    */
   PullExpired?: number
   /**
-   * 是否开启推流鉴权（1:开启,0:关闭）
+   * <p>是否开启推流鉴权（1:开启,0:关闭）</p>
    */
   PushState?: number
   /**
-   * 推流密钥（仅支持字母数字，长度0-10位）
+   * <p>推流密钥（仅支持字母数字，长度0-10位）</p>
    */
   PushSecret?: string
   /**
-   * 推流过期时间（单位：分钟）
+   * <p>推流过期时间（单位：分钟）</p>
    */
   PushExpired?: number
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   AppId?: number
+  /**
+   * <p>不生效推流鉴权的域名 ID 列表</p>
+   */
+  ExcludePushDomainIds?: Array<string>
 }
 
 /**
@@ -2457,7 +2461,7 @@ export interface ListTasksResponse {
  */
 export interface AddStreamAuthResponse {
   /**
-   * 设置推拉流鉴权返回数据
+   * <p>设置推拉流鉴权返回数据</p>
    */
   Data?: AddStreamAuthData
   /**
@@ -2490,37 +2494,41 @@ export interface ListDevicesResponse {
  */
 export interface AddStreamAuthData {
   /**
-   * 鉴权配置ID（uuid）
+   * <p>鉴权配置ID（uuid）</p>
    */
   Id?: string
   /**
-   * 是否开播放鉴权（1:开启,0:关闭）
+   * <p>是否开播放鉴权（1:开启,0:关闭）</p>
    */
   PullState?: number
   /**
-   * 播放密钥（仅支持字母数字，长度0-10位）
+   * <p>播放密钥（仅支持字母数字，长度0-10位）</p>
    */
   PullSecret?: string
   /**
-   * 播放过期时间（单位：分钟）
+   * <p>播放过期时间（单位：分钟）</p>
    */
   PullExpired?: number
   /**
-   * 是否开启推流鉴权（1:开启,0:关闭）
+   * <p>是否开启推流鉴权（1:开启,0:关闭）</p>
    */
   PushState?: number
   /**
-   * 推流密钥（仅支持字母数字，长度0-10位）
+   * <p>推流密钥（仅支持字母数字，长度0-10位）</p>
    */
   PushSecret?: string
   /**
-   * 推流过期时间（单位：分钟）
+   * <p>推流过期时间（单位：分钟）</p>
    */
   PushExpired?: number
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   AppId?: number
+  /**
+   * <p>不生效推流鉴权的域名 ID 列表</p>
+   */
+  ExcludePushDomainIds?: Array<string>
 }
 
 /**
@@ -3976,33 +3984,37 @@ export interface ModifyVideoSnapshotConfigRequest {
  */
 export interface AddStreamAuthRequest {
   /**
-   * 鉴权配置ID（uuid）
+   * <p>鉴权配置ID（uuid）</p>
    */
   Id: string
   /**
-   * 是否开播放鉴权（1:开启,0:关闭）
+   * <p>是否开播放鉴权（1:开启,0:关闭）</p>
    */
   PullState: number
   /**
-   * 播放密钥（仅支持字母数字，长度0-10位）
+   * <p>播放密钥（仅支持字母数字，长度0-10位）</p>
    */
   PullSecret: string
   /**
-   * 播放过期时间（单位：分钟）
+   * <p>播放过期时间（单位：分钟）</p>
    */
   PullExpired: number
   /**
-   * 是否开启推流鉴权（1:开启,0:关闭）
+   * <p>是否开启推流鉴权（1:开启,0:关闭）</p>
    */
   PushState: number
   /**
-   * 推流密钥（仅支持字母数字，长度0-10位）
+   * <p>推流密钥（仅支持字母数字，长度0-10位）</p>
    */
   PushSecret: string
   /**
-   * 推流过期时间（单位：分钟）
+   * <p>推流过期时间（单位：分钟）</p>
    */
   PushExpired: number
+  /**
+   * <p>不生效推流鉴权的域名 ID 列表</p>
+   */
+  ExcludePushDomainIds?: Array<string>
 }
 
 /**

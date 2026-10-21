@@ -138,6 +138,16 @@ export interface DescribeRiskListResponse {
 }
 
 /**
+ * DeleteAccountGroup请求参数结构体
+ */
+export interface DeleteAccountGroupRequest {
+  /**
+   * 账户组ID
+   */
+  GroupId: string
+}
+
+/**
  * DescribeNatAclRules请求参数结构体
  */
 export interface DescribeNatAclRulesRequest {
@@ -229,6 +239,32 @@ export interface ModifyEdgeAclRuleSequenceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAccountGroups请求参数结构体
+ */
+export interface DescribeAccountGroupsRequest {
+  /**
+   * 关键词搜索（可选）
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * 分页大小，默认20
+   */
+  Limit?: number
+  /**
+   * 分页偏移，默认0
+   */
+  Offset?: number
+  /**
+   * 顺序
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
 }
 
 /**
@@ -488,6 +524,16 @@ export interface DescribeStrategiesResponse {
 }
 
 /**
+ * DeleteAccountGroup返回参数结构体
+ */
+export interface DeleteAccountGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStrategyAccounts请求参数结构体
  */
 export interface DescribeStrategyAccountsRequest {
@@ -512,21 +558,13 @@ export interface DescribeStrategyDispatchStatusRequest {
 }
 
 /**
- * ModifyEdgeAclRuleSequence请求参数结构体
+ * DeleteStrategy返回参数结构体
  */
-export interface ModifyEdgeAclRuleSequenceRequest {
+export interface DeleteStrategyResponse {
   /**
-   * 出入站方向 0=出向，1=入向
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Direction: number
-  /**
-   * 规则组ID
-   */
-  GroupId?: string
-  /**
-   * 规则序号调整列表，必须包含所有受影响的规则
-   */
-  Sequences?: Array<SequenceIndex>
+  RequestId?: string
 }
 
 /**
@@ -632,6 +670,22 @@ export interface CreateRuleGroupRequest {
 }
 
 /**
+ * 规则序号调整结构
+ */
+export interface SequenceIndex {
+  /**
+   * 原规则序号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrderIndex?: number
+  /**
+   * 新规则序号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NewOrderIndex?: number
+}
+
+/**
  * DescribeNatAclRules返回参数结构体
  */
 export interface DescribeNatAclRulesResponse {
@@ -651,6 +705,20 @@ export interface DescribeNatAclRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateAccountGroup请求参数结构体
+ */
+export interface CreateAccountGroupRequest {
+  /**
+   * 账户组名称
+   */
+  GroupName: string
+  /**
+   * 描述（可选）
+   */
+  Description?: string
 }
 
 /**
@@ -712,19 +780,13 @@ export interface ModifyStrategySequenceResponse {
 }
 
 /**
- * 规则序号调整结构
+ * ModifyCfwShareRole返回参数结构体
  */
-export interface SequenceIndex {
+export interface ModifyCfwShareRoleResponse {
   /**
-   * 原规则序号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OrderIndex?: number
-  /**
-   * 新规则序号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NewOrderIndex?: number
+  RequestId?: string
 }
 
 /**
@@ -756,13 +818,21 @@ export interface DeleteVpcAclRuleRequest {
 }
 
 /**
- * DeleteStrategy返回参数结构体
+ * ModifyEdgeAclRuleSequence请求参数结构体
  */
-export interface DeleteStrategyResponse {
+export interface ModifyEdgeAclRuleSequenceRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 出入站方向 0=出向，1=入向
    */
-  RequestId?: string
+  Direction: number
+  /**
+   * 规则组ID
+   */
+  GroupId?: string
+  /**
+   * 规则序号调整列表，必须包含所有受影响的规则
+   */
+  Sequences?: Array<SequenceIndex>
 }
 
 /**
@@ -895,6 +965,20 @@ export interface RuleGroupResp {
    * 规则方向：1-入站规则，0-出站规则，-1 表示无方向
    */
   Direction?: number
+}
+
+/**
+ * ModifyAccountGroup请求参数结构体
+ */
+export interface ModifyAccountGroupRequest {
+  /**
+   * 账户组ID
+   */
+  GroupId: string
+  /**
+   * 账户组名称
+   */
+  GroupName: string
 }
 
 /**
@@ -1255,6 +1339,16 @@ export interface CreateStrategyRequest {
 }
 
 /**
+ * ModifyMemberGroup返回参数结构体
+ */
+export interface ModifyMemberGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * VPC边界规则
  */
 export interface VpcAclRule {
@@ -1358,6 +1452,20 @@ export interface DeleteRuleGroupResponse {
 }
 
 /**
+ * ModifyCfwManaged请求参数结构体
+ */
+export interface ModifyCfwManagedRequest {
+  /**
+   * 目标成员 Id
+   */
+  MemberId: string
+  /**
+   * 云防火墙纳管：0-关闭，1-开启
+   */
+  CfwManaged: number
+}
+
+/**
  * CancelIgnorePolicyRisk请求参数结构体
  */
 export interface CancelIgnorePolicyRiskRequest {
@@ -1393,6 +1501,20 @@ export interface CreateSecurityGroupRuleGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyMemberGroup请求参数结构体
+ */
+export interface ModifyMemberGroupRequest {
+  /**
+   * 目标成员 AppId
+   */
+  UserMemberId: string
+  /**
+   * 账户组ID（空字符串表示移出账户组）
+   */
+  GroupId?: string
 }
 
 /**
@@ -1542,6 +1664,24 @@ export interface DescribeSecurityGroupRuleResponse {
 }
 
 /**
+ * ModifyCfwShareRole请求参数结构体
+ */
+export interface ModifyCfwShareRoleRequest {
+  /**
+   * 云防火墙共享角色，取值：sharer（共享者）、user（使用者）、none（无共享角色）。共享者→使用者禁止直接变更，需先设为 none
+   */
+  CfwShareRole: string
+  /**
+   * 使用者Id
+   */
+  UserMemberId: string
+  /**
+   * 共享者账号ID，CfwShareRole 为 user 时必填
+   */
+  SharerMemberId?: string
+}
+
+/**
  * DescribeRiskCategoryStats返回参数结构体
  */
 export interface DescribeRiskCategoryStatsResponse {
@@ -1583,6 +1723,16 @@ export interface MemberInfo {
    * 所属部门
    */
   NodeName?: string
+}
+
+/**
+ * ModifyAccountGroup返回参数结构体
+ */
+export interface ModifyAccountGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1677,6 +1827,16 @@ export interface DescribeStrategyDispatchStatusResponse {
    * 下发关联策略id列表
    */
   DispatchStrategyList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyNatAclRule返回参数结构体
+ */
+export interface ModifyNatAclRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2026,6 +2186,34 @@ export interface DescribeEdgeAclRulesResponse {
 }
 
 /**
+ * DescribeAccountGroups返回参数结构体
+ */
+export interface DescribeAccountGroupsResponse {
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+  /**
+   * 账户组列表
+   */
+  AccountGroups?: Array<AccountGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCfwManaged返回参数结构体
+ */
+export interface ModifyCfwManagedResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyNatAclRuleSequence请求参数结构体
  */
 export interface ModifyNatAclRuleSequenceRequest {
@@ -2289,13 +2477,37 @@ export interface ModifyEdgeAclRuleResponse {
 }
 
 /**
- * IgnorePolicyRisk请求参数结构体
+ * 账号基本信息，主要有 Uin 和 AppId
  */
-export interface IgnorePolicyRiskRequest {
+export interface Account {
   /**
-   * 策略问题ID
+   * 租户appid
    */
-  RiskId: string
+  AppId?: string
+  /**
+   * 租户uin
+   */
+  Uin?: string
+  /**
+   * 剩余可用额度
+   */
+  RemainQuota?: number
+  /**
+   * 租户名称
+   */
+  Nickname?: string
+  /**
+   * 下发规则数
+   */
+  DispatchRuleNum?: number
+  /**
+   * 产品已有规则数
+   */
+  OriginRuleNum?: number
+  /**
+   * 总额度
+   */
+  TotalQuota?: number
   /**
    * 成员Id
    */
@@ -2874,6 +3086,20 @@ export interface CreateNatAclRuleResponse {
 }
 
 /**
+ * IgnorePolicyRisk请求参数结构体
+ */
+export interface IgnorePolicyRiskRequest {
+  /**
+   * 策略问题ID
+   */
+  RiskId: string
+  /**
+   * 成员Id
+   */
+  MemberId?: string
+}
+
+/**
  * CreateAnalyzePolicyTask返回参数结构体
  */
 export interface CreateAnalyzePolicyTaskResponse {
@@ -3104,9 +3330,13 @@ export interface CreateSecurityGroupRuleRequest {
 }
 
 /**
- * ModifyNatAclRule返回参数结构体
+ * CreateAccountGroup返回参数结构体
  */
-export interface ModifyNatAclRuleResponse {
+export interface CreateAccountGroupResponse {
+  /**
+   * 新建账户组ID
+   */
+  GroupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3186,44 +3416,6 @@ Incomplete： 未整改完成（整改率 < 100%）
 }
 
 /**
- * 账号基本信息，主要有 Uin 和 AppId
- */
-export interface Account {
-  /**
-   * 租户appid
-   */
-  AppId?: string
-  /**
-   * 租户uin
-   */
-  Uin?: string
-  /**
-   * 剩余可用额度
-   */
-  RemainQuota?: number
-  /**
-   * 租户名称
-   */
-  Nickname?: string
-  /**
-   * 下发规则数
-   */
-  DispatchRuleNum?: number
-  /**
-   * 产品已有规则数
-   */
-  OriginRuleNum?: number
-  /**
-   * 总额度
-   */
-  TotalQuota?: number
-  /**
-   * 成员Id
-   */
-  MemberId?: string
-}
-
-/**
  * CancelIgnorePolicyRisk返回参数结构体
  */
 export interface CancelIgnorePolicyRiskResponse {
@@ -3253,6 +3445,37 @@ export interface ReceiveAccount {
    * 只有ReceiverType 是 1 时 才返回账号列表
    */
   Members?: Array<MemberInfo>
+}
+
+/**
+ * 账户组信息
+ */
+export interface AccountGroup {
+  /**
+   * 账户组ID
+   */
+  GroupId?: string
+  /**
+   * 账户组名称
+   */
+  GroupName?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 成员数量
+   */
+  MemberCount?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否可删除
+   */
+  CanDelete?: boolean
 }
 
 /**

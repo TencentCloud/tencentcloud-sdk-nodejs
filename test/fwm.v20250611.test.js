@@ -18,6 +18,16 @@ const client = new tencentcloud.fwm.v20250611.Client({
 })
 describe("fwm.v20250611.test.js", function () {
 
+it("fwm.v20250611.CreateAccountGroup", async function () {
+    try {
+       const data = await client.CreateAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("fwm.v20250611.ModifyRuleGroup", async function () {
     try {
        const data = await client.ModifyRuleGroup({})
@@ -118,6 +128,16 @@ it("fwm.v20250611.DeleteNatAclRule", async function () {
     }
 })
 
+it("fwm.v20250611.ModifyAccountGroup", async function () {
+    try {
+       const data = await client.ModifyAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("fwm.v20250611.DescribeRiskList", async function () {
     try {
        const data = await client.DescribeRiskList({})
@@ -148,9 +168,9 @@ it("fwm.v20250611.CreateAnalyzePolicyTask", async function () {
     }
 })
 
-it("fwm.v20250611.DispatchStrategy", async function () {
+it("fwm.v20250611.DeleteAccountGroup", async function () {
     try {
-       const data = await client.DispatchStrategy({})
+       const data = await client.DeleteAccountGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +201,16 @@ it("fwm.v20250611.ModifyEdgeAclRuleSequence", async function () {
 it("fwm.v20250611.DescribeSecurityGroupRules", async function () {
     try {
        const data = await client.DescribeSecurityGroupRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("fwm.v20250611.ModifyStrategy", async function () {
+    try {
+       const data = await client.ModifyStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +251,16 @@ it("fwm.v20250611.DescribeRiskCategoryStats", async function () {
 it("fwm.v20250611.DescribeOrganMembers", async function () {
     try {
        const data = await client.DescribeOrganMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("fwm.v20250611.ModifyMemberGroup", async function () {
+    try {
+       const data = await client.ModifyMemberGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +378,16 @@ it("fwm.v20250611.DescribeNatAclRules", async function () {
     }
 })
 
+it("fwm.v20250611.DescribeAccountGroups", async function () {
+    try {
+       const data = await client.DescribeAccountGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("fwm.v20250611.CreateRuleGroup", async function () {
     try {
        const data = await client.CreateRuleGroup({})
@@ -408,6 +458,16 @@ it("fwm.v20250611.DescribeEdgeAclRules", async function () {
     }
 })
 
+it("fwm.v20250611.ModifyCfwManaged", async function () {
+    try {
+       const data = await client.ModifyCfwManaged({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("fwm.v20250611.CreateSecurityGroupRuleGroup", async function () {
     try {
        const data = await client.CreateSecurityGroupRuleGroup({})
@@ -418,9 +478,9 @@ it("fwm.v20250611.CreateSecurityGroupRuleGroup", async function () {
     }
 })
 
-it("fwm.v20250611.ModifyStrategy", async function () {
+it("fwm.v20250611.ModifyCfwShareRole", async function () {
     try {
-       const data = await client.ModifyStrategy({})
+       const data = await client.ModifyCfwShareRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +521,16 @@ it("fwm.v20250611.ModifyEdgeAclRule", async function () {
 it("fwm.v20250611.ModifyVpcAclRule", async function () {
     try {
        const data = await client.ModifyVpcAclRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("fwm.v20250611.DispatchStrategy", async function () {
+    try {
+       const data = await client.DispatchStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1983,7 +1983,7 @@ export interface SeeComprehensionConfig {
  */
 export interface CreateTWeSeeCallbackResponse {
   /**
-   * 回调目标 ID
+   * <p>回调目标 ID</p>
    */
   CallbackId?: string
   /**
@@ -2891,6 +2891,24 @@ export interface ModifyTWeSeeCallbackResponse {
 }
 
 /**
+ * TWeSee CKafka 回调配置
+ */
+export interface SeeCallbackCKafkaConfig {
+  /**
+   * <p>CKafka 实例 ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>CKafka 实例中的 Topic 名</p>
+   */
+  Topic: string
+  /**
+   * <p>CKafka 实例所在的地域</p>
+   */
+  Region: string
+}
+
+/**
  * DescribeDeviceDataHistory返回参数结构体
  */
 export interface DescribeDeviceDataHistoryResponse {
@@ -2935,27 +2953,31 @@ export interface CreateTWeSeeRecognitionTaskWithFileResponse {
  */
 export interface SeeCallbackInfo {
   /**
-   * 回调目标 ID
+   * <p>回调目标 ID</p>
    */
   CallbackId?: string
   /**
-   * 回调签名 token
-   */
-  CallbackToken?: string
-  /**
-   * 回调 URL
-   */
-  CallbackUrl?: string
-  /**
-   * 创建时间（秒级时间戳）
-   */
-  CreateTime?: number
-  /**
-   * 回调类型
+   * <p>回调类型</p><p>枚举值：</p><ul><li>none： 不回调</li><li>http： HTTP 回调</li><li>ckafka： 投递 CKafka Topic</li></ul>
    */
   Type?: string
   /**
-   * 更新时间（秒级时间戳）
+   * <p>回调 URL</p>
+   */
+  CallbackUrl?: string
+  /**
+   * <p>回调签名 token</p>
+   */
+  CallbackToken?: string
+  /**
+   * <p>回调 CKafka 配置</p>
+   */
+  CallbackCKafka?: SeeCallbackCKafkaConfig
+  /**
+   * <p>创建时间（秒级时间戳）</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（秒级时间戳）</p>
    */
   UpdateTime?: number
 }
@@ -4554,17 +4576,25 @@ export interface ModifyTWeSeeSubscriptionRequest {
  */
 export interface CreateTWeSeeCallbackRequest {
   /**
-   * 回调类型。可选值：\n- `http` HTTP 回调
+   * <p>回调类型</p><p>枚举值：</p><ul><li>none： 不回调</li><li>http： HTTP 回调</li><li>ckafka： 投递 CKafka Topic</li></ul>
    */
   Type: string
   /**
-   * 回调 URL。要求 http 或 https 协议，仅支持 80 或 443 端口
+   * <p>回调 URL。要求 http 或 https 协议，仅支持 80 或 443 端口</p>
    */
-  CallbackUrl: string
+  CallbackUrl?: string
   /**
-   * 回调签名 Token。最大长度 128
+   * <p>回调签名 Token。最大长度 128</p>
    */
   CallbackToken?: string
+  /**
+   * <p>回调 CKafka 配置</p>
+   */
+  CallbackCKafka?: SeeCallbackCKafkaConfig
+  /**
+   * <p>要创建回调目标的产品 ID</p>
+   */
+  ProductId?: string
 }
 
 /**
@@ -7593,7 +7623,7 @@ export interface SeeSummarizeConfig {
  */
 export interface DeleteTWeSeeCallbackRequest {
   /**
-   * 回调目标 ID，格式为 `callback-` + 8 位小写字母数字
+   * <p>回调目标 ID</p>
    */
   CallbackId: string
 }
@@ -8215,21 +8245,25 @@ export interface CreateCloudStorageAIServiceResponse {
  */
 export interface ModifyTWeSeeCallbackRequest {
   /**
-   * 回调目标 ID，格式为 `callback-` + 8 位小写字母数字
+   * <p>回调目标 ID</p>
    */
   CallbackId: string
   /**
-   * 回调 URL，需要可访问并通过 Echo 校验
-   */
-  CallbackUrl: string
-  /**
-   * 回调类型。当前仅支持：`http`
+   * <p>回调类型</p><p>枚举值：</p><ul><li>none： 不回调</li><li>http： HTTP 回调</li><li>ckafka： 投递 CKafka Topic</li></ul>
    */
   Type: string
   /**
-   * 回调签名 token，最大长度 128
+   * <p>回调 URL，需要可访问并通过 Echo 校验</p>
+   */
+  CallbackUrl?: string
+  /**
+   * <p>回调签名 token，最大长度 128</p>
    */
   CallbackToken?: string
+  /**
+   * <p>回调 CKafka 配置</p>
+   */
+  CallbackCKafka?: SeeCallbackCKafkaConfig
 }
 
 /**

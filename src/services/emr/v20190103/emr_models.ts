@@ -11851,6 +11851,10 @@ export interface CreateCloudInstanceRequest {
    * <p>airflow源凭证</p>
    */
   AirflowGitCredential?: AirflowGitCredentialInput
+  /**
+   * <p>多安全组绑定</p>
+   */
+  SgIds?: Array<string>
 }
 
 /**

@@ -149,6 +149,7 @@ import {
   ModifyTWeSeePersonResponse,
   TalkAgentInfo,
   ModifyTWeSeeCallbackResponse,
+  SeeCallbackCKafkaConfig,
   DescribeDeviceDataHistoryResponse,
   CreateTWeSeeRecognitionTaskWithFileResponse,
   SeeCallbackInfo,
