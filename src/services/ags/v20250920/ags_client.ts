@@ -147,6 +147,7 @@ import {
   CloudRecordLabelMutation,
   DescribeSandboxSnapshotListResponse,
   PauseSandboxInstanceResponse,
+  DescribeSandboxInstancesRequest,
   CosStorageSource,
   StartSandboxInstanceRequest,
   CancelRegistryRecordResponse,
@@ -189,6 +190,7 @@ import {
   EventContentInfo,
   PortConfiguration,
   Filter,
+  DescribeSandboxInstancesResponse,
   CreateRegistryRequest,
   ModifyDeploymentResponse,
   CreatePreCacheImageTaskRequest,
@@ -436,6 +438,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询会话列表
+   */
+  async DescribeSessions(
+    req: DescribeSessionsRequest,
+    cb?: (error: string, rep: DescribeSessionsResponse) => void
+  ): Promise<DescribeSessionsResponse> {
+    return this.request("DescribeSessions", req, cb)
+  }
+
+  /**
    * 统一创建 Registry Record（含 revision 1）。请求通过 DescriptorType 与严格内容输入 Union 选择底层类型：MCPSource / AgentSource / SkillSource / CustomDescriptors 四选一，必须与 DescriptorType 对应。不接受 RecordId 或 ChangeLog；同名 Record 返回冲突，不隐式追加 Version。追加 Version 请使用 UpdateRegistryRecord。
    */
   async CreateRegistryRecord(
@@ -559,13 +571,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询会话列表
+   * 查询沙箱实例
    */
-  async DescribeSessions(
-    req: DescribeSessionsRequest,
-    cb?: (error: string, rep: DescribeSessionsResponse) => void
-  ): Promise<DescribeSessionsResponse> {
-    return this.request("DescribeSessions", req, cb)
+  async DescribeSandboxInstances(
+    req: DescribeSandboxInstancesRequest,
+    cb?: (error: string, rep: DescribeSandboxInstancesResponse) => void
+  ): Promise<DescribeSandboxInstancesResponse> {
+    return this.request("DescribeSandboxInstances", req, cb)
   }
 
   /**

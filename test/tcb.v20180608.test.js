@@ -18,6 +18,16 @@ const client = new tencentcloud.tcb.v20180608.Client({
 })
 describe("tcb.v20180608.test.js", function () {
 
+it("tcb.v20180608.DeleteUserKey", async function () {
+    try {
+       const data = await client.DeleteUserKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DeleteFunction", async function () {
     try {
        const data = await client.DeleteFunction({})
@@ -228,6 +238,16 @@ it("tcb.v20180608.UpgradePGInstanceToDedicated", async function () {
     }
 })
 
+it("tcb.v20180608.UpdateUserKey", async function () {
+    try {
+       const data = await client.UpdateUserKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeCreditsUsageDetail", async function () {
     try {
        const data = await client.DescribeCreditsUsageDetail({})
@@ -341,6 +361,16 @@ it("tcb.v20180608.ModifyClsTopic", async function () {
 it("tcb.v20180608.DescribeUserList", async function () {
     try {
        const data = await client.DescribeUserList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.CreateUserKey", async function () {
+    try {
+       const data = await client.CreateUserKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +708,9 @@ it("tcb.v20180608.CreateCloudApp", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyResourcePermission", async function () {
+it("tcb.v20180608.GetOneUserKey", async function () {
     try {
-       const data = await client.ModifyResourcePermission({})
+       const data = await client.GetOneUserKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +771,16 @@ it("tcb.v20180608.PushPGUserMigrations", async function () {
 it("tcb.v20180608.DeleteHTTPServiceRoute", async function () {
     try {
        const data = await client.DeleteHTTPServiceRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyResourcePermission", async function () {
+    try {
+       const data = await client.ModifyResourcePermission({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -871,6 +911,16 @@ it("tcb.v20180608.DeleteTable", async function () {
 it("tcb.v20180608.DestroyEnv", async function () {
     try {
        const data = await client.DestroyEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.GetUserKeyList", async function () {
+    try {
+       const data = await client.GetUserKeyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

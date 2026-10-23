@@ -4044,27 +4044,27 @@ export interface DescribeConsumerGroupsResponse {
  */
 export interface ModifyMigrateRateLimitRequest {
   /**
-   * 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+   * <p>迁移任务 Id，可通过<a href="https://cloud.tencent.com/document/product/571/82084">DescribeMigrationJobs</a>接口获取。</p>
    */
   JobId: string
   /**
-   * 迁移任务全量导出线程数、有效值为 1-16
+   * <p>迁移任务全量导出线程数、有效值为 1-16</p>
    */
   DumpThread?: number
   /**
-   * 迁移全量导出的 Rps 限制、需要大于 0
+   * <p>迁移全量导出的 Rps 限制、需要大于 0</p>
    */
   DumpRps?: number
   /**
-   * 迁移任务全量导入线程数、有效值为 1-16
+   * <p>迁移任务全量导入线程数、有效值为 1-16</p>
    */
   LoadThread?: number
   /**
-   * 迁移任务增量导入线程数、有效值为 1-128
+   * <p>迁移任务增量导入线程数、有效值为 1-128</p>
    */
   SinkerThread?: number
   /**
-   * 全量导入Rps限制
+   * <p>全量导入Rps限制</p>
    */
   LoadRps?: number
 }

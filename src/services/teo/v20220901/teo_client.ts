@@ -209,6 +209,7 @@ import {
   ModifyL4ProxyRulesRequest,
   DescribeRulesSettingRequest,
   EntityStatus,
+  StatisticsRecord,
   SmartRoutingParameters,
   DisableOriginACLResponse,
   CreateFunctionRuleResponse,
@@ -293,6 +294,7 @@ import {
   CustomizedHeader,
   ModifyDDoSProtectionResponse,
   DescribeFunctionsRequest,
+  DescribeLogAnalysisStatisticsResponse,
   ModifyDnsRecordsStatusRequest,
   ManagedRuleAutoUpdate,
   CustomRule,
@@ -573,6 +575,7 @@ import {
   DeleteFunctionRulesRequest,
   CreateInferenceDomainRequest,
   NoCache,
+  DescribeLogAnalysisStatisticsRequest,
   ModifyFunctionRequest,
   ManagedRuleGroup,
   DummyParseZoneFullConfigResponse,
@@ -1113,13 +1116,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新多通道安全网关状态。
+   * 用于启用/停用四层代理转发规则状态，支持单条或者批量操作。
    */
-  async ModifyMultiPathGatewayStatus(
-    req: ModifyMultiPathGatewayStatusRequest,
-    cb?: (error: string, rep: ModifyMultiPathGatewayStatusResponse) => void
-  ): Promise<ModifyMultiPathGatewayStatusResponse> {
-    return this.request("ModifyMultiPathGatewayStatus", req, cb)
+  async ModifyL4ProxyRulesStatus(
+    req: ModifyL4ProxyRulesStatusRequest,
+    cb?: (error: string, rep: ModifyL4ProxyRulesStatusResponse) => void
+  ): Promise<ModifyL4ProxyRulesStatusResponse> {
+    return this.request("ModifyL4ProxyRulesStatus", req, cb)
   }
 
   /**
@@ -1151,6 +1154,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogAnalysisDownloadTasksResponse) => void
   ): Promise<DescribeLogAnalysisDownloadTasksResponse> {
     return this.request("DescribeLogAnalysisDownloadTasks", req, cb)
+  }
+
+  /**
+   * 更新多通道安全网关状态。
+   */
+  async ModifyMultiPathGatewayStatus(
+    req: ModifyMultiPathGatewayStatusRequest,
+    cb?: (error: string, rep: ModifyMultiPathGatewayStatusResponse) => void
+  ): Promise<ModifyMultiPathGatewayStatusResponse> {
+    return this.request("ModifyMultiPathGatewayStatus", req, cb)
   }
 
   /**
@@ -2951,13 +2964,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于启用/停用四层代理转发规则状态，支持单条或者批量操作。
+   * 本接口用于日志分析统计结果查询。用户在检索语句后追加 SQL 聚合语句（[检索条件] | [SQL语句]），后端执行聚合并返回列式统计结果（列定义 + 数据行）。
    */
-  async ModifyL4ProxyRulesStatus(
-    req: ModifyL4ProxyRulesStatusRequest,
-    cb?: (error: string, rep: ModifyL4ProxyRulesStatusResponse) => void
-  ): Promise<ModifyL4ProxyRulesStatusResponse> {
-    return this.request("ModifyL4ProxyRulesStatus", req, cb)
+  async DescribeLogAnalysisStatistics(
+    req: DescribeLogAnalysisStatisticsRequest,
+    cb?: (error: string, rep: DescribeLogAnalysisStatisticsResponse) => void
+  ): Promise<DescribeLogAnalysisStatisticsResponse> {
+    return this.request("DescribeLogAnalysisStatistics", req, cb)
   }
 
   /**

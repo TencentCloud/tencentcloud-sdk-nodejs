@@ -16,6 +16,24 @@
  */
 
 /**
+ * GetUserKeyList返回参数结构体
+ */
+export interface GetUserKeyListResponse {
+  /**
+   * <p>用户密钥对列表</p>
+   */
+  UserKeyList?: Array<APIsUserKeyInfo>
+  /**
+   * <p>数据记录条数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudAppCosInfo请求参数结构体
  */
 export interface DescribeCloudAppCosInfoRequest {
@@ -71,6 +89,48 @@ export interface DbInstance {
    * 数据库名；为空时使用连接器配置的默认数据库名
    */
   Schema?: string
+}
+
+/**
+ * UpdateUserKey请求参数结构体
+ */
+export interface UpdateUserKeyRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>用户密钥名称</p>
+   */
+  Name?: string
+  /**
+   * <p>用户密钥对标识，前半部分用户填写，后半部分平台按照一定规则生成</p>
+   */
+  KeyID?: string
+  /**
+   * <p>密钥对描述</p>
+   */
+  Description?: string
+  /**
+   * <p>授权类型code</p>
+   */
+  AuthTypeCode?: string
+  /**
+   * <p>根据授权类型的不同，ext会有不同的子结构</p>
+   */
+  Ext?: string
+  /**
+   * <p>业务类型，integration：从集成中心来的，默认为空，表示是从授权管理中心来的</p>
+   */
+  Business?: string
+  /**
+   * <p>创建集成时创建对应的示例代码云函数需要的参数</p>
+   */
+  RuntimeConfig?: AgentRuntimeConfig
+  /**
+   * <p>创建集成时创建对应的示例代码云函数需要的函数名</p>
+   */
+  DemoCodeFunctionName?: string
 }
 
 /**
@@ -2192,6 +2252,20 @@ export interface AuthDomain {
 }
 
 /**
+ * CreateUserKey返回参数结构体
+ */
+export interface CreateUserKeyResponse {
+  /**
+   * <p>创建成功记录条数</p>
+   */
+  CreateResult?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeHTTPServiceCachePurgeTask请求参数结构体
  */
 export interface DescribeHTTPServiceCachePurgeTaskRequest {
@@ -2337,6 +2411,60 @@ export interface DescribeManagedAIModelListResponse {
 }
 
 /**
+ * Agent 云函数配置
+ */
+export interface AgentRuntimeConfig {
+  /**
+   * 函数代码. 注意：不能同时指定Cos和ZipFile
+   */
+  Code?: AgentRuntimeCode
+  /**
+   * 函数运行环境，默认Python2.7
+目前支持的运行环境：
+- Python2.7
+- Python3.6
+- Python3.7
+- Python3.9
+- Python3.10
+- Nodejs6.10
+- Nodejs8.9
+- Nodejs10.15
+- Nodejs12.16
+- Nodejs14.18
+- Nodejs16.13
+- Nodejs18.15
+- Php5.6
+- Php7(7.2版本)
+- Php7.4
+- Php8.0
+- Go1
+- Java8
+- CustomRuntime
+   */
+  Runtime?: string
+  /**
+   * 函数运行时内存大小，默认为 128M，可选范围 64、128MB-3072MB，并且以 128MB 为阶梯
+   */
+  MemorySize?: number
+  /**
+   * 函数是否自动安装依赖
+   */
+  InstallDependency?: boolean
+  /**
+   * 函数最长执行时间，单位为秒，可选值范围 1-900 秒，默认为 3 秒
+   */
+  Timeout?: number
+  /**
+   * 函数的环境变量，满足json格式
+   */
+  Environment?: string
+  /**
+   * Agent Session 配置
+   */
+  SessionConfig?: AgentRuntimeSessionConfig
+}
+
+/**
  * DownloadFunction请求参数结构体
  */
 export interface DownloadFunctionRequest {
@@ -2352,6 +2480,40 @@ export interface DownloadFunctionRequest {
    * <p>函数的版本</p>
    */
   Qualifier?: string
+}
+
+/**
+ * Agent 云函数代码
+ */
+export interface AgentRuntimeCode {
+  /**
+   * 对象存储桶名称
+   */
+  CosBucketName?: string
+  /**
+   * 对象存储中代码包文件路径，以/开头
+   */
+  CosObjectName?: string
+  /**
+   * 包含函数代码文件及其依赖项的 zip 格式文件，zip包大小上限为 50MB，使用该接口时要求将 zip 文件的内容转成 base64 编码
+   */
+  ZipFile?: string
+  /**
+   * 对象存储的地域，地域为北京时需要传入ap-beijing,北京一区时需要传递ap-beijing-1，其他的地域不需要传递。
+   */
+  CosBucketRegion?: string
+  /**
+   * 如果是从TempCos创建的话，需要传入TempCosObjectName
+   */
+  TempCosObjectName?: string
+  /**
+   * 镜像部署时配置TCR镜像信息
+   */
+  ImageConfig?: AgentRuntimeCodeImageConfig
+  /**
+   * 云函数DemoId
+   */
+  DemoId?: string
 }
 
 /**
@@ -2842,6 +3004,40 @@ export interface ModifyEnvResponse {
 }
 
 /**
+ * 平台版指标用量信息
+ */
+export interface PlatformMetricUsageItem {
+  /**
+   * <p>指标名称</p>
+   */
+  MetricName?: string
+  /**
+   * <p>原始资源类型</p><p>枚举值：</p><ul><li>COS： 对象存储</li></ul>
+   */
+  OriginalResourceType?: string
+  /**
+   * <p>原始指标</p>
+   */
+  OriginalMetricName?: string
+  /**
+   * <p>资源用量</p>
+   */
+  UsageValue?: number
+  /**
+   * <p>资源用量单位</p>
+   */
+  UsageUnit?: string
+  /**
+   * <p>资源点</p>
+   */
+  Credits?: number
+  /**
+   * <p>用量按日明细列表</p>
+   */
+  DailyUsageList?: Array<DailyUsageList>
+}
+
+/**
  * 云日志服务相关信息
  */
 export interface LogServiceInfo {
@@ -3316,36 +3512,37 @@ export interface DescribeApiKeyListResponse {
 }
 
 /**
- * ExecutePGSql返回参数结构体
+ * migration 执行计划冲突项
  */
-export interface ExecutePGSqlResponse {
+export interface MigrationConflict {
   /**
-   * <p>影响行数</p>
+   * <p>migration 版本号</p><p>参数格式：纯数字，14位时间格式</p>
    */
-  AffectedRows?: number
+  Version?: string
   /**
-   * <p>字段名列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>migration 版本名</p><p>参数格式：仅允许小写字母和下划线</p>
    */
-  Columns?: Array<string>
+  Name?: string
   /**
-   * <p>字段类型名</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>数据库已应用migration的版本名</p><p>参数格式：仅允许小写字母和下划线</p>
    */
-  ColumnTypes?: Array<string>
+  RemoteName?: string
   /**
-   * <p>数据行。每一行数据都是一个JSON串，将JSON进行反序列化将得到了每列的值。值可能是 null 或者 字符串，如果是 null 说明该列的值为 &lt;null&gt;，如果是字符串则为该列的值的字符串表示形式。</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>本次sql计算出来的checksum</p>
    */
-  Rows?: Array<string>
+  LocalChecksum?: string
   /**
-   * <p>SQL执行耗时</p><p>单位：毫秒</p>
+   * <p>已应用的migration，数据库存储的checksum</p>
    */
-  ExecutionTimeMs?: number
+  RemoteChecksum?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>归入该分组的原因</p>
    */
-  RequestId?: string
+  Reason?: string
+  /**
+   * <p>冲突信息</p>
+   */
+  Message?: string
 }
 
 /**
@@ -3517,6 +3714,20 @@ export interface ResetPGAccountPasswordResponse {
 }
 
 /**
+ * DeleteUserKey请求参数结构体
+ */
+export interface DeleteUserKeyRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 用户密钥对标识，前半部分用户填写，后半部分平台按照一定规则生成
+   */
+  KeyID?: string
+}
+
+/**
  * CreateCustomLoginKey请求参数结构体
  */
 export interface CreateCustomLoginKeyRequest {
@@ -3602,6 +3813,24 @@ export interface StaticCmd {
    * 部署命令
    */
   DeployCmd?: string
+}
+
+/**
+ * 密钥对绑定的mcp服务列表和apis服务列表
+ */
+export interface BindServiceList {
+  /**
+   * 密钥对绑定的mcp服务列表
+   */
+  Mcp?: Array<BindService>
+  /**
+   * 密钥对绑定的apis服务列表
+   */
+  Apis?: Array<BindService>
+  /**
+   * 登记哪个资源下的哪个场景使用了密钥对
+   */
+  Other?: Array<BindService>
 }
 
 /**
@@ -4493,6 +4722,20 @@ export interface IndexInfo {
 }
 
 /**
+ * GetOneUserKey返回参数结构体
+ */
+export interface GetOneUserKeyResponse {
+  /**
+   * <p>单个密钥对详情页</p>
+   */
+  UserKeyInfo?: APIsUserKeyInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListFunctions返回参数结构体
  */
 export interface ListFunctionsResponse {
@@ -4509,20 +4752,6 @@ export interface ListFunctionsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
- */
-export interface Filter {
-  /**
-   * <p>需要过滤的字段。过滤条件数量限制为10。</p>
-   */
-  Name?: string
-  /**
-   * <p>字段的过滤值。</p>
-   */
-  Values?: Array<string>
 }
 
 /**
@@ -4642,29 +4871,43 @@ export interface DescribeEnvPlansResponse {
 }
 
 /**
- * DescribePlatformCreditsUsageDetail请求参数结构体
+ * GetUserKeyList请求参数结构体
  */
-export interface DescribePlatformCreditsUsageDetailRequest {
+export interface GetUserKeyListRequest {
   /**
-   * <p>模块列表</p><p>枚举值：</p><ul><li>FLEXDB： 文档数据库</li><li>TDSQL： MYSQL数据库</li><li>SCF： 云函数</li><li>AI： 大模型</li><li>EKS： 云托管</li><li>COS： 云存储</li><li>HOSTING： 静态托管</li><li>Auth： 用户权限</li><li>APIInvocation： API调用</li><li>HTTPInvocation： HTTP调用</li><li>VM： 主机</li><li>Workflow： 工作流</li><li>Other： 其他</li><li>PostgreSQL： PostgreSQL</li><li>Token： Token</li></ul>
+   * <p>环境ID</p>
    */
-  Modules: Array<string>
+  EnvId: string
   /**
-   * <p>开始日期</p><p>参数格式：YYYY-MM-DD</p>
+   * <p>分页的offset，从0开始</p>
    */
-  StartDate: string
+  Offset: number
   /**
-   * <p>结束日期</p><p>参数格式：YYYY-MM-DD</p>
+   * <p>分页的每页多少条</p>
    */
-  EndDate: string
+  Limit: number
   /**
-   * <p>是否需要每日用量明细</p>
+   * <p>根据集成名称模糊查询，name</p>
    */
-  NeedUsageDetails: boolean
+  Name?: string
   /**
-   * <p>平台版套餐id</p>
+   * <p>集成类型映射码</p>
    */
-  PlatformId: string
+  AuthTypeCode?: string
+  /**
+   * <p>业务类型，integration：从集成中心来的，默认为空，表示是从授权管理中心来的</p>
+   */
+  Business?: string
+}
+
+/**
+ * 固定 IP 配置
+ */
+export interface FunctionEipConfigFixed {
+  /**
+   * <p>是否固定 IP，TRUE / FALSE</p>
+   */
+  EipFixed?: string
 }
 
 /**
@@ -5578,6 +5821,36 @@ export interface CreateEnvResponse {
 }
 
 /**
+ * Agent 运行时 Session 配置
+ */
+export interface AgentRuntimeSessionConfig {
+  /**
+   * 单实例并发数最大值。取值范围 [1,100]
+   */
+  MaxConcurrency?: number
+  /**
+   * session 来源，三选一：'HEADER', 'COOKIE', 'QUERY_STRING'
+   */
+  SessionSource?: string
+  /**
+   * session 名称，以字母开头，非首字母可包含数字、字母、下划线、中划线，长度5-40个字符
+   */
+  SessionName?: string
+  /**
+   * 最大并发会话数
+   */
+  MaximumConcurrencySessionPerInstance?: number
+  /**
+   * 生命周期
+   */
+  MaximumTTLInSeconds?: number
+  /**
+   * 空闲时长
+   */
+  MaximumIdleTimeInSeconds?: number
+}
+
+/**
  * 三方认证出参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：microsoft, github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。
  */
 export interface ProviderResponseParametersMap {
@@ -5662,6 +5935,52 @@ export interface MessageLocalized {
    * 在该语言中
    */
   Locale: string
+}
+
+/**
+ * CreateUserKey请求参数结构体
+ */
+export interface CreateUserKeyRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>用户创建的集成名称，或者密钥名称</p>
+   */
+  Name?: string
+  /**
+   * <p>用户创建的集成ID，集成表示，或者密钥对标识，前半部分用户填写，后半部分平台按照一定规则生成</p>
+   */
+  KeyID?: string
+  /**
+   * <p>集成描述</p>
+   */
+  Description?: string
+  /**
+   * <p>集成类型，或者授权类型码，对应GetUserKeyTemplateList接口的AuthTypeCode字段，比如github、gitlab、gitee、meeting、PublicAccountOpenService等</p>
+   */
+  AuthTypeCode?: string
+  /**
+   * <p>根据集成类型的不同，ext会有不同的子结构，具体每种授权类型的ext需要填写的信息，可以通过GetUserKeyTemplateList获取</p>
+   */
+  Ext?: string
+  /**
+   * <p>github、gitlab、gitee、腾讯会议等oauth类型的，需要传这个ticket_id，创建的密钥对跟auth_ticket_token(对于github、gitlab、gitee)、weda_ticket_token(对于腾讯会议)关联起来</p>
+   */
+  TicketID?: string
+  /**
+   * <p>业务类型，integration：从集成中心来的，默认为空，表示是从授权管理中心来的</p>
+   */
+  Business?: string
+  /**
+   * <p>创建demo代码云函数需要的参数信息</p><p>入参限制：当Business为integration，且AuthTypeCode为(weixinmp、wxvirtualpay、weixin-store、channels、weixinpaydc)之一时必填</p>
+   */
+  RuntimeConfig?: AgentRuntimeConfig
+  /**
+   * <p>创建集成时创建关联的示例代码云函数的名称，当Business为integration，且AuthTypeCode为(weixinmp、wxvirtualpay、weixin-store、channels、weixinpaydc)之一时必填</p>
+   */
+  DemoCodeFunctionName?: string
 }
 
 /**
@@ -5867,6 +6186,20 @@ export interface DailyUsageList {
 }
 
 /**
+ * UpdateUserKey返回参数结构体
+ */
+export interface UpdateUserKeyResponse {
+  /**
+   * <p>更新记录条数</p>
+   */
+  UpdateResult?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RenewEnv请求参数结构体
  */
 export interface RenewEnvRequest {
@@ -5922,6 +6255,24 @@ export interface DescribeClientResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ID:服务标识ID，Name:服务名称
+ */
+export interface BindService {
+  /**
+   * 服务标识
+   */
+  ID?: string
+  /**
+   * 服务名称
+   */
+  Name?: string
+  /**
+   * 场景，云托管、云函数、aibuilder等
+   */
+  Scene?: string
 }
 
 /**
@@ -8330,6 +8681,24 @@ export interface ModifyClientResponse {
 }
 
 /**
+ * MySql 集群详情
+ */
+export interface MySQLClusterDetail {
+  /**
+   * 集群ID
+   */
+  DbClusterId?: string
+  /**
+   * 网络详情
+   */
+  NetInfo?: MySQLNetDetail
+  /**
+   * 数据库详情
+   */
+  DbInfo?: ClusterDetail
+}
+
+/**
  * 平台版资源信息
  */
 export interface PlatformInfo {
@@ -8807,13 +9176,17 @@ export interface ReleaseEnvRequest {
 }
 
 /**
- * 固定 IP 配置
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
  */
-export interface FunctionEipConfigFixed {
+export interface Filter {
   /**
-   * <p>是否固定 IP，TRUE / FALSE</p>
+   * <p>需要过滤的字段。过滤条件数量限制为10。</p>
    */
-  EipFixed?: string
+  Name?: string
+  /**
+   * <p>字段的过滤值。</p>
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -8843,37 +9216,57 @@ export interface CloudAppResourceItem {
 }
 
 /**
- * 平台版指标用量信息
+ * 用户密钥对管理
  */
-export interface PlatformMetricUsageItem {
+export interface APIsUserKeyInfo {
   /**
-   * <p>指标名称</p>
+   * <p>用户创建的集成的名称</p>
    */
-  MetricName?: string
+  Name?: string
   /**
-   * <p>原始资源类型</p><p>枚举值：</p><ul><li>COS： 对象存储</li></ul>
+   * <p>用户对创建的集成的描述</p>
    */
-  OriginalResourceType?: string
+  Description?: string
   /**
-   * <p>原始指标</p>
+   * <p>集成ID，用户创建的集成的标识id，前半部分用户填写，后半部分平台按照一定规则生成</p>
    */
-  OriginalMetricName?: string
+  KeyID?: string
   /**
-   * <p>资源用量</p>
+   * <p>额外信息,根据集成类型不同，ext会有不同的子结构</p>
    */
-  UsageValue?: number
+  Ext?: string
   /**
-   * <p>资源用量单位</p>
+   * <p>集成类型Code</p>
    */
-  UsageUnit?: string
+  AuthTypeCode?: string
   /**
-   * <p>资源点</p>
+   * <p>状态</p>
    */
-  Credits?: number
+  Status?: string
   /**
-   * <p>用量按日明细列表</p>
+   * <p>引用该集成的服务列表</p>
    */
-  DailyUsageList?: Array<DailyUsageList>
+  BindServiceList?: BindServiceList
+  /**
+   * <p>AuthTypeName 和AuthType 分别1-1对应</p>
+   */
+  AuthTypeName?: string
+  /**
+   * <p>github、gitlab、gitee、腾讯会议等oauth类型的，需要传这个ticket_id，创建的密钥对跟auth_ticket_token(对于github、gitlab、gitee)、weda_ticket_token(对于腾讯会议)关联起来</p>
+   */
+  TicketID?: string
+  /**
+   * <p>用户在创建(weixinmp、wxvirtualpay、weixin-store、channels、weixinpaydc)这五种之一时创建的关联的示例代码云函数的函数名</p>
+   */
+  DemoCodeFunctionName?: string
+  /**
+   * <p>创建时间</p><p>参数格式：2026-05-25T11:18:28+08:00</p>
+   */
+  CreateAt?: string
+  /**
+   * <p>更新时间</p><p>参数格式：2026-05-25T11:18:28+08:00</p>
+   */
+  UpdateAt?: string
 }
 
 /**
@@ -8907,6 +9300,28 @@ export interface DescribeStaticStoreResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetOneUserKey请求参数结构体
+ */
+export interface GetOneUserKeyRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>用户密钥对标识，前半部分用户填写，后半部分平台按照一定规则生成</p>
+   */
+  KeyID?: string
+  /**
+   * <p>业务场景来源，默认不传，表示来源授权中心，integration表示来源集成中心，当从集成中心请求时必传integration</p>
+   */
+  Business?: string
+  /**
+   * <p>是否需要加密字段的值，true：是，false：否，默认不传，不需要</p><p>默认值：false</p><p>当为true时，返回加密字段的值，前端进行按约定解密</p>
+   */
+  NeedPwd?: boolean
 }
 
 /**
@@ -9083,37 +9498,36 @@ export interface DescribeClientRequest {
 }
 
 /**
- * migration 执行计划冲突项
+ * ExecutePGSql返回参数结构体
  */
-export interface MigrationConflict {
+export interface ExecutePGSqlResponse {
   /**
-   * <p>migration 版本号</p><p>参数格式：纯数字，14位时间格式</p>
+   * <p>影响行数</p>
    */
-  Version?: string
+  AffectedRows?: number
   /**
-   * <p>migration 版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   * <p>字段名列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  Columns?: Array<string>
   /**
-   * <p>数据库已应用migration的版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   * <p>字段类型名</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RemoteName?: string
+  ColumnTypes?: Array<string>
   /**
-   * <p>本次sql计算出来的checksum</p>
+   * <p>数据行。每一行数据都是一个JSON串，将JSON进行反序列化将得到了每列的值。值可能是 null 或者 字符串，如果是 null 说明该列的值为 &lt;null&gt;，如果是字符串则为该列的值的字符串表示形式。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocalChecksum?: string
+  Rows?: Array<string>
   /**
-   * <p>已应用的migration，数据库存储的checksum</p>
+   * <p>SQL执行耗时</p><p>单位：毫秒</p>
    */
-  RemoteChecksum?: string
+  ExecutionTimeMs?: number
   /**
-   * <p>归入该分组的原因</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Reason?: string
-  /**
-   * <p>冲突信息</p>
-   */
-  Message?: string
+  RequestId?: string
 }
 
 /**
@@ -9286,21 +9700,17 @@ export interface IndexAccesses {
 }
 
 /**
- * MySql 集群详情
+ * DeleteUserKey返回参数结构体
  */
-export interface MySQLClusterDetail {
+export interface DeleteUserKeyResponse {
   /**
-   * 集群ID
+   * 删除记录条数
    */
-  DbClusterId?: string
+  DeleteResult?: number
   /**
-   * 网络详情
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NetInfo?: MySQLNetDetail
-  /**
-   * 数据库详情
-   */
-  DbInfo?: ClusterDetail
+  RequestId?: string
 }
 
 /**
@@ -9377,6 +9787,32 @@ export interface ResetPGAccountPasswordRequest {
    * <p>要设置的密码</p><p>入参限制：长度8 ~ 32位，不能以&quot; / &quot;开头; 必须包含以下四项，字符种类:  小写字母： [a ~ z] 大写字母：[A ～ Z] 数字：0 - 9 特殊字符：()~!@#$%^&amp;*-+=_|{}[]:&lt;&gt;,.?/` 示例值：A8b!C2d#E4f&amp;</p>
    */
   Password: string
+}
+
+/**
+ * DescribePlatformCreditsUsageDetail请求参数结构体
+ */
+export interface DescribePlatformCreditsUsageDetailRequest {
+  /**
+   * <p>模块列表</p><p>枚举值：</p><ul><li>FLEXDB： 文档数据库</li><li>TDSQL： MYSQL数据库</li><li>SCF： 云函数</li><li>AI： 大模型</li><li>EKS： 云托管</li><li>COS： 云存储</li><li>HOSTING： 静态托管</li><li>Auth： 用户权限</li><li>APIInvocation： API调用</li><li>HTTPInvocation： HTTP调用</li><li>VM： 主机</li><li>Workflow： 工作流</li><li>Other： 其他</li><li>PostgreSQL： PostgreSQL</li><li>Token： Token</li></ul>
+   */
+  Modules: Array<string>
+  /**
+   * <p>开始日期</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  StartDate: string
+  /**
+   * <p>结束日期</p><p>参数格式：YYYY-MM-DD</p>
+   */
+  EndDate: string
+  /**
+   * <p>是否需要每日用量明细</p>
+   */
+  NeedUsageDetails: boolean
+  /**
+   * <p>平台版套餐id</p>
+   */
+  PlatformId: string
 }
 
 /**

@@ -1037,18 +1037,21 @@ export interface DetachClassicLinkVpcRequest {
  */
 export interface ModifyAddressAttributeRequest {
   /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
+   * <p>标识 EIP 的唯一 ID。EIP 唯一 ID 形如：<code>eip-11112222</code>。可以使用<a href="https://cloud.tencent.com/document/product/215/16702">DescribeAddresses</a>接口获取AddressId。</p>
    */
   AddressId: string
   /**
-   * 修改后的 EIP 名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"\_"，不能包含空格。
+   * <p>修改后的 EIP 名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符&quot;-&quot;和下划线&quot;_&quot;，不能包含空格。</p>
    */
   AddressName?: string
   /**
-   * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。
-注意：该参数仅对 EIP 直通功能可见的用户可以设定，EIP 必须为绑定状态，绑定的对象为 CVM 。
+   * <p>设定EIP是否直通，&quot;TRUE&quot;表示直通，&quot;FALSE&quot;表示非直通。<br>注意：该参数仅对 EIP 直通功能可见的用户可以设定，EIP 必须为绑定状态，绑定的对象为 CVM 。</p>
    */
   EipDirectConnection?: string
+  /**
+   * <p>设定EIP是否在网卡可见</p>
+   */
+  EipVisibleOnEni?: boolean
 }
 
 /**
@@ -4492,13 +4495,17 @@ export interface ModifyNetworkAclAttributeResponse {
  */
 export interface ModifyIPv6AddressesAttributesRequest {
   /**
-   * 弹性公网IPv6唯一ID列表。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressIds。
+   * <p>弹性公网IPv6唯一ID列表。可以使用<a href="https://cloud.tencent.com/document/api/215/113677">DescribeIPv6Addresses</a>接口获取IPv6AddressIds。</p>
    */
   IPv6AddressIds: Array<string>
   /**
-   * 弹性公网IPv6地址名称，长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"_"，不能包含空格。
+   * <p>弹性公网IPv6地址名称，长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符&quot;-&quot;和下划线&quot;_&quot;，不能包含空格。</p>
    */
   IPv6AddressName?: string
+  /**
+   * <p>是否开启弹性公网IPv6地址网卡可见</p>
+   */
+  EipVisibleOnEni?: boolean
 }
 
 /**
@@ -15631,142 +15638,123 @@ export interface DescribeVpcPeeringConnectionsRequest {
  */
 export interface Address {
   /**
-   * `EIP`的`ID`，是`EIP`的唯一标识。
+   * <p><code>EIP</code>的<code>ID</code>，是<code>EIP</code>的唯一标识。</p>
    */
   AddressId?: string
   /**
-   * `EIP`名称。
+   * <p><code>EIP</code>名称。</p>
    */
   AddressName?: string
   /**
-   * `EIP`状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡)
+   * <p><code>EIP</code>状态，包含&#39;CREATING&#39;(创建中),&#39;BINDING&#39;(绑定中),&#39;BIND&#39;(已绑定),&#39;UNBINDING&#39;(解绑中),&#39;UNBIND&#39;(已解绑),&#39;OFFLINING&#39;(释放中),&#39;BIND_ENI&#39;(绑定悬空弹性网卡)</p>
    */
   AddressStatus?: string
   /**
-   * 外网IP地址
+   * <p>外网IP地址</p>
    */
   AddressIp?: string
   /**
-   * 绑定的资源实例`ID`。可能是一个`CVM`，`NAT`。
+   * <p>绑定的资源实例<code>ID</code>。可能是一个<code>CVM</code>，<code>NAT</code>。</p>
    */
   InstanceId?: string
   /**
-   * 创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+   * <p>创建时间。按照<code>ISO8601</code>标准表示，并且使用<code>UTC</code>时间。格式为：<code>YYYY-MM-DDThh:mm:ssZ</code>。</p>
    */
   CreatedTime?: string
   /**
-   * 绑定的弹性网卡ID，null表示没有绑定弹性网卡。
+   * <p>绑定的弹性网卡ID，null表示没有绑定弹性网卡。</p>
    */
   NetworkInterfaceId?: string
   /**
-   * 绑定的资源内网ip，null表示没有绑定资源内网ip。
+   * <p>绑定的资源内网ip，null表示没有绑定资源内网ip。</p>
    */
   PrivateAddressIp?: string
   /**
-   * 资源隔离状态。true表示eip处于隔离状态，false表示资源处于未隔离状态
+   * <p>资源隔离状态。true表示eip处于隔离状态，false表示资源处于未隔离状态</p>
    */
   IsArrears?: boolean
   /**
-   * 资源封堵状态。true表示eip处于封堵状态，false表示eip处于未封堵状态
+   * <p>资源封堵状态。true表示eip处于封堵状态，false表示eip处于未封堵状态</p>
    */
   IsBlocked?: boolean
   /**
-   * eip是否支持直通模式。true表示eip支持直通模式，false表示资源不支持直通模式
+   * <p>eip是否支持直通模式。true表示eip支持直通模式，false表示资源不支持直通模式</p>
    */
   IsEipDirectConnection?: boolean
   /**
-   * EIP 资源类型，包括CalcIP、WanIP、EIP和AnycastEIP、高防EIP。其中：`CalcIP` 表示设备 IP，`WanIP` 表示普通公网 IP，`EIP` 表示弹性公网 IP，`AnycastEIP` 表示加速 EIP，`AntiDDoSEIP`表示高防EIP。
+   * <p>EIP 资源类型，包括CalcIP、WanIP、EIP和AnycastEIP、高防EIP。其中：<code>CalcIP</code> 表示设备 IP，<code>WanIP</code> 表示普通公网 IP，<code>EIP</code> 表示弹性公网 IP，<code>AnycastEIP</code> 表示加速 EIP，<code>AntiDDoSEIP</code>表示高防EIP。</p>
    */
   AddressType?: string
   /**
-   * eip是否在解绑后自动释放。true表示eip将会在解绑后自动释放，false表示eip在解绑后不会自动释放
+   * <p>eip是否在解绑后自动释放。true表示eip将会在解绑后自动释放，false表示eip在解绑后不会自动释放</p>
    */
   CascadeRelease?: boolean
   /**
-   * EIP ALG开启的协议类型。
+   * <p>EIP ALG开启的协议类型。</p>
    */
   EipAlgType?: AlgType
   /**
-   * 弹性公网IP的运营商信息，当前可能返回值包括"CMCC"(移动),"CTCC"(电信),"CUCC"(联通),"BGP"(常规BGP)。
+   * <p>弹性公网IP的运营商信息，当前可能返回值包括&quot;CMCC&quot;(移动),&quot;CTCC&quot;(电信),&quot;CUCC&quot;(联通),&quot;BGP&quot;(常规BGP)。</p>
    */
   InternetServiceProvider?: string
   /**
-   * 是否本地带宽EIP，可选值：
-<li>true：本地带宽EIP</li>
-<li>false：非本地带宽EIP</li>
+   * <p>是否本地带宽EIP，可选值：</p><li>true：本地带宽EIP</li><li>false：非本地带宽EIP</li>
    */
   LocalBgp?: boolean
   /**
-   * 弹性公网IP的带宽值。注意，传统账户类型账户的弹性公网IP没有带宽属性，值为空。
+   * <p>弹性公网IP的带宽值。注意，传统账户类型账户的弹性公网IP没有带宽属性，值为空。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Bandwidth?: number
   /**
-   * 弹性公网IP的网络计费模式。注意，传统账户类型账户的弹性公网IP没有网络计费模式属性，值为空。
-注意：此字段可能返回 null，表示取不到有效值。
-包括：
-<li><strong>BANDWIDTH_PREPAID_BY_MONTH</strong></li>
-<p style="padding-left: 30px;">表示包月带宽预付费。</p>
-<li><strong>TRAFFIC_POSTPAID_BY_HOUR</strong></li>
-<p style="padding-left: 30px;">表示按小时流量后付费。</p>
-<li><strong>BANDWIDTH_POSTPAID_BY_HOUR</strong></li>
-<p style="padding-left: 30px;">表示按小时带宽后付费。</p>
-<li><strong>BANDWIDTH_PACKAGE</strong></li>
-<p style="padding-left: 30px;">表示共享带宽包。</p>
+   * <p>弹性公网IP的网络计费模式。注意，传统账户类型账户的弹性公网IP没有网络计费模式属性，值为空。<br>注意：此字段可能返回 null，表示取不到有效值。<br>包括：</p><li><strong>BANDWIDTH_PREPAID_BY_MONTH</strong></li><p style="padding-left: 30px;">表示包月带宽预付费。</p><li><strong>TRAFFIC_POSTPAID_BY_HOUR</strong></li><p style="padding-left: 30px;">表示按小时流量后付费。</p><li><strong>BANDWIDTH_POSTPAID_BY_HOUR</strong></li><p style="padding-left: 30px;">表示按小时带宽后付费。</p><li><strong>BANDWIDTH_PACKAGE</strong></li><p style="padding-left: 30px;">表示共享带宽包。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetChargeType?: string
   /**
-   * 弹性公网IP关联的标签列表。
+   * <p>弹性公网IP关联的标签列表。</p>
    */
   TagSet?: Array<Tag>
   /**
-   * 预付费包月带宽IP到期时间。
-时间格式：YYYY-MM-DDThh:mm:ssZ
+   * <p>预付费包月带宽IP到期时间。<br>时间格式：YYYY-MM-DDThh:mm:ssZ</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeadlineDate?: string
   /**
-   * EIP绑定的实例类型。可选值：
-<li>CVM：云服务器</li>
-<li>NAT：NAT 网关</li>
-<li>HAVIP：高可用虚拟IP</li>
-<li>ENI：弹性网卡</li>
-<li>CLB：内网CLB</li>
-<li>DHCPIP：弹性内网IP</li>
-
-
+   * <p>EIP绑定的实例类型。可选值：</p><li>CVM：云服务器</li><li>NAT：NAT 网关</li><li>HAVIP：高可用虚拟IP</li><li>ENI：弹性网卡</li><li>CLB：内网CLB</li><li>DHCPIP：弹性内网IP</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
-   * 静态单线IP网络出口
+   * <p>静态单线IP网络出口</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Egress?: string
   /**
-   * 高防包ID,当EIP类型为高防EIP时，返回EIP绑定的高防包ID.
+   * <p>高防包ID,当EIP类型为高防EIP时，返回EIP绑定的高防包ID.</p>
    */
   AntiDDoSPackageId?: string
   /**
-   * 当前EIP是否自动续费，只有按月带宽预付费的EIP才会显示该字段，具体值示例如下:
-<li>NOTIFY_AND_MANUAL_RENEW:正常续费</li><li>NOTIFY_AND_AUTO_RENEW:自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW:到期不续费 </li>
-
+   * <p>当前EIP是否自动续费，只有按月带宽预付费的EIP才会显示该字段，具体值示例如下:</p><li>NOTIFY_AND_MANUAL_RENEW:正常续费</li><li>NOTIFY_AND_AUTO_RENEW:自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW:到期不续费 </li>
    */
   RenewFlag?: string
   /**
-   * 当前公网IP所关联的带宽包ID，如果该公网IP未使用带宽包计费，则返回为空
+   * <p>当前公网IP所关联的带宽包ID，如果该公网IP未使用带宽包计费，则返回为空</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BandwidthPackageId?: string
   /**
-   * 传统弹性公网IPv6所属vpc唯一ID
+   * <p>传统弹性公网IPv6所属vpc唯一ID</p>
    */
   UnVpcId?: string
   /**
-   * CDC唯一ID
+   * <p>CDC唯一ID</p>
    */
   DedicatedClusterId?: string
+  /**
+   * <p>eip是否在网卡上可见。true表示支持，false表示不支持</p>
+   */
+  EipVisibleOnEni?: boolean
 }
 
 /**

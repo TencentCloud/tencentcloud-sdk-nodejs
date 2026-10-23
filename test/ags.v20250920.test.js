@@ -238,6 +238,16 @@ it("ags.v20250920.ResumeSandboxInstance", async function () {
     }
 })
 
+it("ags.v20250920.DescribeSessions", async function () {
+    try {
+       const data = await client.DescribeSessions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.CreateRegistryRecord", async function () {
     try {
        const data = await client.CreateRegistryRecord({})
@@ -358,9 +368,9 @@ it("ags.v20250920.DeleteRegistryRecord", async function () {
     }
 })
 
-it("ags.v20250920.DescribeSessions", async function () {
+it("ags.v20250920.DescribeSandboxInstances", async function () {
     try {
-       const data = await client.DescribeSessions({})
+       const data = await client.DescribeSandboxInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -811,6 +811,14 @@ export interface NativeNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * <p>是否是迁移的节点</p><p>默认值：false</p>
+   */
+  IsMigrated?: boolean
+  /**
+   * <p>资源 ID</p>
+   */
+  ResourceId?: string
 }
 
 /**

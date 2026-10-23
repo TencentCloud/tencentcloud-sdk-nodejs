@@ -3221,6 +3221,45 @@ export interface DeleteShareUnitNodeRequest {
 }
 
 /**
+ * UpdateOrganizationMember请求参数结构体
+ */
+export interface UpdateOrganizationMemberRequest {
+  /**
+   * 成员Uin。
+   */
+  MemberUin: number
+  /**
+   * 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
+   */
+  Name?: string
+  /**
+   * 备注。最大长度为40个字符
+   */
+  Remark?: string
+  /**
+   * 关系策略类型。PolicyType不为空，PermissionIds不能为空。取值：Financial
+   */
+  PolicyType?: string
+  /**
+   * 成员财务权限ID列表。PermissionIds不为空，PolicyType不能为空。
+取值：1-查看账单、2-查看余额、3-资金划拨（若需要开启资金划拨权限，请联系您的商务经理内部开通。）、4-合并出账、5-开票、6-优惠继承、7-代付费、8-成本分析、9-预算管理、10-信用额度设置（若需要开启信用额度设置权限，请联系您的商务经理内部开通。），1、2 默认必须
+   */
+  PermissionIds?: Array<number | bigint>
+  /**
+   * 是否允许成员退出组织。取值：Allow-允许、Denied-不允许
+   */
+  IsAllowQuit?: string
+  /**
+   * 代付者Uin。成员财务权限有代付费时需要，取值为成员对应主体的主体管理员Uin
+   */
+  PayUin?: string
+  /**
+   * 是否同步组织成员名称到成员账号昵称。取值： 1-同步 0-不同步
+   */
+  IsModifyNickName?: number
+}
+
+/**
  * 授权成员账号信息
  */
 export interface RoleAssignmentInfo {
@@ -3701,25 +3740,29 @@ export interface ListGroupsRequest {
  */
 export interface UpdateRoleConfigurationRequest {
   /**
-   * 空间 ID
+   * <p>空间 ID</p>
    */
   ZoneId: string
   /**
-   * 权限配置 ID
+   * <p>权限配置 ID</p>
    */
   RoleConfigurationId: string
   /**
-   * 新的权限配置描述。  长度：最大 1024 个字符。
+   * <p>新的权限配置描述。  长度：最大 1024 个字符。</p>
    */
   NewDescription?: string
   /**
-   * 新的会话持续时间。  CIC 用户使用权限配置访问集团账号目标账号时，会话最多保持的时间。  单位：秒。  取值范围：900-43200（15 分钟-12 小时）。
+   * <p>新的会话持续时间。  CIC 用户使用权限配置访问集团账号目标账号时，会话最多保持的时间。  单位：秒。  取值范围：900-43200（15 分钟-12 小时）。</p>
    */
   NewSessionDuration?: number
   /**
-   * 新的初始访问页面。  CIC 用户使用权限配置访问集团账号目标账号时，初始访问的页面地址。  该页面必须是腾讯云控制台页面。
+   * <p>新的初始访问页面。  CIC 用户使用权限配置访问集团账号目标账号时，初始访问的页面地址。  该页面必须是腾讯云控制台页面。</p>
    */
   NewRelayState?: string
+  /**
+   * <p>true=保存并应用（立即下发）；false/缺省=仅保存</p>
+   */
+  IsApply?: boolean
 }
 
 /**
@@ -4046,7 +4089,7 @@ export interface ListJoinedGroupsForUserRequest {
  */
 export interface UpdateRoleConfigurationResponse {
   /**
-   * 权限配置详情
+   * <p>权限配置详情</p>
    */
   RoleConfigurationInfo?: RoleConfiguration
   /**
@@ -5696,42 +5739,17 @@ export interface CreateRoleConfigurationRequest {
 }
 
 /**
- * UpdateOrganizationMember请求参数结构体
+ * 失败账号信息
  */
-export interface UpdateOrganizationMemberRequest {
+export interface FailedAccount {
   /**
-   * 成员Uin。
+   * <p>下发失败的成员账号 UIN</p>
    */
-  MemberUin: number
+  TargetUin?: number
   /**
-   * 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
+   * <p>下发失败的成员账号名</p>
    */
-  Name?: string
-  /**
-   * 备注。最大长度为40个字符
-   */
-  Remark?: string
-  /**
-   * 关系策略类型。PolicyType不为空，PermissionIds不能为空。取值：Financial
-   */
-  PolicyType?: string
-  /**
-   * 成员财务权限ID列表。PermissionIds不为空，PolicyType不能为空。
-取值：1-查看账单、2-查看余额、3-资金划拨（若需要开启资金划拨权限，请联系您的商务经理内部开通。）、4-合并出账、5-开票、6-优惠继承、7-代付费、8-成本分析、9-预算管理、10-信用额度设置（若需要开启信用额度设置权限，请联系您的商务经理内部开通。），1、2 默认必须
-   */
-  PermissionIds?: Array<number | bigint>
-  /**
-   * 是否允许成员退出组织。取值：Allow-允许、Denied-不允许
-   */
-  IsAllowQuit?: string
-  /**
-   * 代付者Uin。成员财务权限有代付费时需要，取值为成员对应主体的主体管理员Uin
-   */
-  PayUin?: string
-  /**
-   * 是否同步组织成员名称到成员账号昵称。取值： 1-同步 0-不同步
-   */
-  IsModifyNickName?: number
+  TargetName?: string
 }
 
 /**
@@ -6263,38 +6281,53 @@ export interface UpdateOrganizationMembersPolicyResponse {
  */
 export interface RoleConfiguration {
   /**
-   * 权限配置配置ID。
+   * <p>权限配置配置ID。</p>
    */
   RoleConfigurationId?: string
   /**
-   * 权限配置配名称。
+   * <p>权限配置配名称。</p>
    */
   RoleConfigurationName?: string
   /**
-   * 权限配置的描述。
+   * <p>权限配置的描述。</p>
    */
   Description?: string
   /**
-   * 会话持续时间。CIC 用户使用访问配置访问成员账号时，会话最多保持的时间。
-单位：秒。
+   * <p>会话持续时间。CIC 用户使用访问配置访问成员账号时，会话最多保持的时间。<br>单位：秒。</p>
    */
   SessionDuration?: number
   /**
-   * 初始访问页面。CIC 用户使用访问配置访问成员账号时，初始访问的页面地址。
+   * <p>初始访问页面。CIC 用户使用访问配置访问成员账号时，初始访问的页面地址。</p>
    */
   RelayState?: string
   /**
-   * 权限配置的创建时间。
+   * <p>权限配置的创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 权限配置的更新时间。
+   * <p>权限配置的更新时间。</p>
    */
   UpdateTime?: string
   /**
-   * 如果有入参FilterTargets查询成员账号是否配置过权限，配置了返回true，否则返回false。
+   * <p>如果有入参FilterTargets查询成员账号是否配置过权限，配置了返回true，否则返回false。</p>
    */
   IsSelected?: boolean
+  /**
+   * <p>会话时长应用状态</p><p>枚举值：</p><ul><li>Success： 全部账号应用成功</li><li>Failed： 存在失败账号</li><li>Applying： 任务在途</li><li>Unknown： 已部署账号超查询上限</li></ul>
+   */
+  ApplyStatus?: string
+  /**
+   * <p>当前已真实下发到 CAM 的会话时长</p><p>取值范围：[900, 43200]</p><p>单位：秒</p>
+   */
+  AppliedSessionDuration?: number
+  /**
+   * <p>最近一次成功下发时间</p><p>参数格式： YYYY-MM-DD hh:mm:ss</p>
+   */
+  SessionDurationUpdateTime?: string
+  /**
+   * <p>未成功应用的账号明细</p><p>仅 Failed 态返回</p>
+   */
+  FailedAccounts?: Array<FailedAccount>
 }
 
 /**

@@ -2281,12 +2281,12 @@ export interface AcquireDeploymentTokenRequest {
  */
 export interface VolumeRef {
   /**
-   * Volume 名称；服务端在当前认证 AppId 下解析为稳定 VolumeId
+   * <p>Volume 名称；服务端在当前认证 AppId 下解析为稳定 VolumeId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeName?: string
   /**
-   * 稳定 Volume ID，格式 vol-xxxxxxxx
+   * <p>稳定 Volume ID，格式 vol-xxxxxxxx</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeId?: string
@@ -2889,6 +2889,16 @@ export interface PauseSandboxInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSandboxInstances请求参数结构体
+ */
+export interface DescribeSandboxInstancesRequest {
+  /**
+   * <p>沙箱实例ID列表，指定要查询的实例。如果为空则查询所有实例。最大支持100个ID</p>
+   */
+  InstanceIds: Array<string>
 }
 
 /**
@@ -3896,6 +3906,20 @@ export interface Filter {
    * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
    */
   Values?: Array<string>
+}
+
+/**
+ * DescribeSandboxInstances返回参数结构体
+ */
+export interface DescribeSandboxInstancesResponse {
+  /**
+   * <p>沙箱实例列表</p>
+   */
+  InstanceSet?: Array<SandboxInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

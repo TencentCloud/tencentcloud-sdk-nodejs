@@ -198,9 +198,9 @@ it("teo.v20220901.DeleteFunctionRules", async function () {
     }
 })
 
-it("teo.v20220901.ModifyMultiPathGatewayStatus", async function () {
+it("teo.v20220901.ModifyL4ProxyRulesStatus", async function () {
     try {
-       const data = await client.ModifyMultiPathGatewayStatus({})
+       const data = await client.ModifyL4ProxyRulesStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +231,16 @@ it("teo.v20220901.DescribeDefaultCertificates", async function () {
 it("teo.v20220901.DescribeLogAnalysisDownloadTasks", async function () {
     try {
        const data = await client.DescribeLogAnalysisDownloadTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyMultiPathGatewayStatus", async function () {
+    try {
+       const data = await client.ModifyMultiPathGatewayStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1958,9 +1968,9 @@ it("teo.v20220901.DescribeOriginProtection", async function () {
     }
 })
 
-it("teo.v20220901.ModifyL4ProxyRulesStatus", async function () {
+it("teo.v20220901.DescribeLogAnalysisStatistics", async function () {
     try {
-       const data = await client.ModifyL4ProxyRulesStatus({})
+       const data = await client.DescribeLogAnalysisStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

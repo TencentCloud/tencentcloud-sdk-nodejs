@@ -1258,7 +1258,7 @@ export interface ReleasedApprover {
    */
   ApproverNumber: number
   /**
-   * <p>指定签署人类型，目前支持<ul><li> <strong>ORGANIZATION</strong>：企业(默认值)</li><li> <strong>ENTERPRISESERVER</strong>：企业“授权签”</li></ul></p>
+   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:  <ul>          <li> <strong>ORGANIZATION</strong> :企业/企业员工（企业签署方或模板发起时的企业“授权签”）</li>         <li> <strong>ENTERPRISESERVER</strong> :本方企业“授权签”</li> <li> <strong>ORGANIZATION_PIN_CODE_SIGN</strong> :本方企业 PIN 码授权，注：<code>使用前需先完成员工PIN码授权</code></li>          </ul></p>
    */
   ApproverType: string
   /**
@@ -1305,6 +1305,10 @@ export interface ReleasedApprover {
    * <p>印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署</p>
    */
   ApproverSignSealId?: string
+  /**
+   * <h2>PinCode计算规则</h2>  <p>当使用 PIN 码授权签进行身份验证时，需要按以下规则生成 <code>PinCode</code>。</p>  <h3 id="计算公式">计算公式</h3>  <pre><code class="language-text">PinCode = HMAC_SHA256(SHA256(PIN 码)，合同名称) </code></pre>  <p>示例： PinCode = HMAC_SHA256(SHA256("v0ZIwH8lRDLsWRHJWJT7PR05FoXdl4S2")，"给张三的入职合同")</p>  <table> <thead> <tr> <th>参数</th> <th>说明</th> </tr> </thead>  <tbody> <tr> <td><strong>PIN 码</strong></td> <td>本方企业员工PIN 码</td> </tr>  <tr> <td><strong>合同名称</strong></td> <td>签署流程名称，即FlowName，<font color="#FF0000">需去除合同名称前后空格后再进行计算</font></td> </tr>   </tbody> </table>
+   */
+  PinCode?: string
 }
 
 /**
@@ -1692,7 +1696,7 @@ export interface TaskInfo {
  */
 export interface NeedReviewApproverInfo {
   /**
-   * <p>签署方经办人的类型，支持以下类型<ul><li> ORGANIZATION 企业（含企业“授权签”）</li><li>PERSON 个人（含个人“授权签”）</li></ul></p>
+   * <p>签署方经办人的类型，支持以下类型<ul><li> ORGANIZATION 企业（含企业“授权签”、pin码签署）</li><li>PERSON 个人（含个人“授权签”、pin码签署）</li></ul></p>
    */
   ApproverType: string
   /**
@@ -1712,7 +1716,7 @@ export interface NeedReviewApproverInfo {
    */
   ApproverIdCardNumber?: string
   /**
-   * <p>组织机构名称。<br>请确认该名称与企业营业执照中注册的名称一致。<br>如果名称中包含英文括号()，请使用中文括号（）代替。<br>如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。</p>
+   * <p>组织机构名称。<br>请确认该名称与企业营业执照中注册的名称一致。<br>如果名称中包含英文括号()，请使用中文括号（）代替。<br>如果签署方是企业签署方， 则企业名称必填。</p>
    */
   OrganizationName?: string
 }
@@ -3678,6 +3682,10 @@ export interface FillApproverInfo {
    * <p>合同流程ID</p><ul><li>补充合同组子合同动态签署人时必传。</li><li>补充正常合同，请阅读：<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口</a>接口使用说明</li></ul>
    */
   FlowId?: string
+  /**
+   * <h2>PinCode计算规则</h2>  <p>当使用 PIN 码授权签进行身份验证时，需要按以下规则生成 <code>PinCode</code>。</p>  <h3 id="计算公式">计算公式</h3>  <pre><code class="language-text">PinCode = HMAC_SHA256(SHA256(PIN 码)，合同名称) </code></pre>  <p>示例： PinCode = HMAC_SHA256(SHA256("v0ZIwH8lRDLsWRHJWJT7PR05FoXdl4S2")，"给张三的入职合同")</p>  <table> <thead> <tr> <th>参数</th> <th>说明</th> </tr> </thead>  <tbody> <tr> <td><strong>PIN 码</strong></td> <td>个人授权的 PIN 码</td> </tr>  <tr> <td><strong>合同名称</strong></td> <td>签署流程名称，即FlowName，<font color="#FF0000">需去除合同名称前后空格后再进行计算</font></td> </tr>   </tbody> </table>
+   */
+  PinCode?: string
 }
 
 /**
@@ -5255,7 +5263,7 @@ export interface FlowApproverInfo {
    */
   OrganizationOpenId?: string
   /**
-   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:<ul><li> <strong>PERSON</strong> :个人/自然人</li><li> <strong>PERSON_AUTO_SIGN</strong> :个人/自然人“授权签”，适用于个人“授权签”场景</li><li> <strong>ORGANIZATION</strong> :企业/企业员工（企业签署方或模板发起时的企业“授权签”）</li><li> <strong>ENTERPRISESERVER</strong> :企业/企业员工“授权签”（他方企业“授权签”或文件发起时的本方企业“授权签”）</li></ul>注:  <code>1. 个人“授权签”场景(PERSON_AUTO_SIGN)为白名单功能, 使用前请联系对接的客户经理沟通。</code><code>2. 若要实现他方企业（同一应用下）“授权签”，需要满足3个条件：</code><ul><li>条件1：ApproverType 设置为ENTERPRISESERVER</li><li>条件2：子客之间完成授权</li><li>条件3：联系对接的客户经理沟通如何使用</li></ul></p>
+   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:</p><ul>    <li> **PERSON** :个人/自然人</li>    <li> **PERSON_AUTO_SIGN** :个人/自然人“授权签”，适用于个人“授权签”场景</li>    <li> **ORGANIZATION** :企业/企业员工（企业签署方或模板发起时的企业“授权签”）</li>    <li> **ENTERPRISESERVER** :企业/企业员工“授权签”（他方企业“授权签”或文件发起时的本方企业“授权签”）</li>    <li> **ORGANIZATION_PIN_CODE_SIGN** :本方企业 PIN 码授权，注：<code>使用前需先完成员工PIN码授权</code></li>    <li> **OTHER_ORGANIZATION_PIN_CODE_SIGN** :他方企业 PIN 码授权，注：<code>使用前需先完成合作方企业PIN码授权</code></li>    <li> **PERSON_PIN_CODE_SIGN** :个人 PIN 码授权，适用于个人“授权签”场景。注: <code>个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。</code></li></ul>注:  <code>1. 个人“授权签”场景(PERSON_AUTO_SIGN)为白名单功能, 使用前请联系对接的客户经理沟通。</code>`2. 若要实现他方企业（同一应用下）“授权签”，需要满足3个条件：`    <ul><li>条件1：ApproverType 设置为ENTERPRISESERVER    </li><li>条件2：子客之间完成授权    </li><li>条件3：联系对接的客户经理沟通如何使用</li></ul>
    */
   ApproverType?: string
   /**
@@ -5339,6 +5347,10 @@ export interface FlowApproverInfo {
    * <p>用户指定的邮箱地址</p>
    */
   ApproverEmail?: string
+  /**
+   * <h2>PinCode计算规则</h2>  <p>当使用 PIN 码授权签进行身份验证时，需要按以下规则生成 <code>PinCode</code>。</p>  <h3 id="计算公式">计算公式</h3>  <pre><code class="language-text">PinCode = HMAC_SHA256(SHA256(PIN 码)，合同名称) </code></pre>  <p>示例： PinCode = HMAC_SHA256(SHA256("v0ZIwH8lRDLsWRHJWJT7PR05FoXdl4S2")，"给张三的入职合同")</p>  <table> <thead> <tr> <th>参数</th> <th>说明</th> </tr> </thead>  <tbody> <tr> <td><strong>PIN 码</strong></td> <td>企业员工、他方(合作方)企业、个人授权的 PIN 码</td> </tr>  <tr> <td><strong>合同名称</strong></td> <td>签署流程名称，即FlowName，<font color="#FF0000">需去除合同名称前后空格后再进行计算</font></td> </tr>   </tbody> </table>
+   */
+  PinCode?: string
 }
 
 /**
@@ -7178,6 +7190,10 @@ export interface ChannelCreateReleaseFlowRequest {
    * <p>调用方自定义的个性化字段，该字段的值可以是字符串JSON或其他字符串形式，客户可以根据自身需求自定义数据格式并在需要时进行解析。该字段的信息将以Base64编码的形式传输，支持的最大数据大小为20480长度。</p><p>在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。</p><p>回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。</p>
    */
   UserData?: string
+  /**
+   * <p>合同名称 </p><p>入参限制：如果替换解除协议的签署人中有本企业PIN 码签署人类型，则此字段必填</p>
+   */
+  FlowName?: string
 }
 
 /**
@@ -7313,7 +7329,7 @@ export interface AdminChangeInvitationInfo {
    */
   NewAdminIdCardNumber?: string
   /**
-   * <p>授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。</p><p> p.s. 如果上传授权书 ，需遵循以下条件 1. 超管的信息（超管姓名，超管手机号）必须为必填参数。</p>
+   * <p>授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。</p><p> p.s. 如果上传授权书 ，需遵循以下条件 1. 超管的信息（超管姓名，超管手机号）必须为必填参数。</p><p>入参限制：在<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchAdminChangeInvitationsUrl">批量变更超管接口</a>，超管授权书为必填参数</p>
    */
   AuthFiles?: Array<string>
 }

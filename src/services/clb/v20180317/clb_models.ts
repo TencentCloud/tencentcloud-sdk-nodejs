@@ -2943,6 +2943,26 @@ export interface ModifyModelAttributesRequest {
    * <p>非chat输出模态的请求后缀</p>
    */
   EndpointPath?: string
+  /**
+   * <p>所属厂商</p>
+   */
+  ModelProvider?: string
+  /**
+   * <p>协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>所使用的CMR 私网管道 ID</p>
+   */
+  CMRPrivateNetworkTunnelId?: string
+  /**
+   * <p>携带的Host Header</p>
+   */
+  HostHeader?: string
+  /**
+   * <p>是否需要进行ssl校验</p>
+   */
+  VerifySSL?: boolean
 }
 
 /**
@@ -3303,6 +3323,10 @@ export interface StickyConfig {
    * <p>是否开启粘连路由</p>
    */
   Enabled?: boolean
+  /**
+   * <p>会话粘性的超时时间（秒），取值范围 1–86400。创建时默认为 1800；修改时若不设置该字段，则保留原有值。</p><p>取值范围：[1, 86400]</p><p>单位：秒</p><p>默认值：1800</p>
+   */
+  TimeoutSeconds?: number
 }
 
 /**
@@ -4319,6 +4343,14 @@ export interface ModifyServiceProviderModelAttributesRequest {
    * <p>该模型支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul>
    */
   InputModalities?: Array<string>
+  /**
+   * <p>新的上游模型名称</p>
+   */
+  NewModelName?: string
+  /**
+   * <p>新的对外模型名称</p>
+   */
+  NewModelAlias?: string
 }
 
 /**

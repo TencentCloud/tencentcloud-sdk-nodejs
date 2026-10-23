@@ -18,9 +18,11 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  GetUserKeyListResponse,
   DescribeCloudAppCosInfoRequest,
   DeleteProviderResponse,
   DbInstance,
+  UpdateUserKeyRequest,
   DescribeEnvLimitRequest,
   BuildStep,
   HTTPServiceRoute,
@@ -99,6 +101,7 @@ import {
   DescribePlatformCreditsUsageResponse,
   ExternalStorage,
   AuthDomain,
+  CreateUserKeyResponse,
   DescribeHTTPServiceCachePurgeTaskRequest,
   CreateCustomLoginKeyResponse,
   ModifyClientRequest,
@@ -107,7 +110,9 @@ import {
   FunctionEipConfig,
   CheckTcbServiceRequest,
   DescribeManagedAIModelListResponse,
+  AgentRuntimeConfig,
   DownloadFunctionRequest,
+  AgentRuntimeCode,
   PushPGUserMigrationsResponse,
   BindStorageSourceResponse,
   ModifyEnvRequest,
@@ -131,6 +136,7 @@ import {
   ModifyUserResponse,
   DescribeCloudAppListRequest,
   ModifyEnvResponse,
+  PlatformMetricUsageItem,
   LogServiceInfo,
   DescribeCloudBaseRunBuildLogRequest,
   DescribeCurveDataResponse,
@@ -146,7 +152,7 @@ import {
   ProviderConfig,
   FunctionInfo,
   DescribeApiKeyListResponse,
-  ExecutePGSqlResponse,
+  MigrationConflict,
   DescribeCreditsUsageRequest,
   DescribeMySQLClusterDetailRequest,
   DescribePlatformCreditsUsageRequest,
@@ -157,12 +163,14 @@ import {
   MigrationInput,
   DescribeResourcePermissionResult,
   ResetPGAccountPasswordResponse,
+  DeleteUserKeyRequest,
   CreateCustomLoginKeyRequest,
   DescribeCreateMySQLResultRequest,
   DescribeBillingInfoRequest,
   HTTPServiceRouteQPSPolicy,
   BindClsResponse,
   StaticCmd,
+  BindServiceList,
   ManagedAIModel,
   DescribeUserListResponse,
   ModifyResourcePermissionRequest,
@@ -200,13 +208,14 @@ import {
   EnvBillingInfoItem,
   CreateHTTPServiceRouteResponse,
   IndexInfo,
+  GetOneUserKeyResponse,
   ListFunctionsResponse,
-  Filter,
   CreateEnvRequest,
   BuildSource,
   DescribePlatformAccountCircleResponse,
   DescribeEnvPlansResponse,
-  DescribePlatformCreditsUsageDetailRequest,
+  GetUserKeyListRequest,
+  FunctionEipConfigFixed,
   DeleteProviderRequest,
   DescribeCreditsUsageDetailRequest,
   EnvPkgCreditsUsage,
@@ -245,17 +254,21 @@ import {
   DeleteFunctionRequest,
   AllocateEnvRequest,
   CreateEnvResponse,
+  AgentRuntimeSessionConfig,
   ProviderResponseParametersMap,
   CreateUserResponse,
   CreateFunctionResponse,
   MessageLocalized,
+  CreateUserKeyRequest,
   UpdateFunctionConfigurationRequest,
   VerifyPlatformHTTPServiceRouteResponse,
   AIModelStatus,
   UpdateAIModelRequest,
   DailyUsageList,
+  UpdateUserKeyResponse,
   RenewEnvRequest,
   DescribeClientResponse,
+  BindService,
   UpdateAIModelResponse,
   ModifyEnvPlanResponse,
   DescribeCreditsUsageDetailResponse,
@@ -356,6 +369,7 @@ import {
   HTTPServiceExtension,
   DeleteApiKeyResponse,
   ModifyClientResponse,
+  MySQLClusterDetail,
   PlatformInfo,
   DeleteHTTPServiceRouteResponse,
   UpdateTableResponse,
@@ -378,11 +392,12 @@ import {
   Variable,
   StaticStorageInfo,
   ReleaseEnvRequest,
-  FunctionEipConfigFixed,
+  Filter,
   CloudAppResourceItem,
-  PlatformMetricUsageItem,
+  APIsUserKeyInfo,
   ExecutePGSqlRequest,
   DescribeStaticStoreResponse,
+  GetOneUserKeyRequest,
   ModifyHTTPServiceRouteResponse,
   ListTablesRequest,
   DescribeHTTPServiceCachePurgeTaskResponse,
@@ -392,7 +407,7 @@ import {
   DescribePlatformHTTPServiceRouteResponse,
   PlatformResUsageItem,
   DescribeClientRequest,
-  MigrationConflict,
+  ExecutePGSqlResponse,
   CloudAppTrigger,
   DescribePlatformAccountCircleRequest,
   MongoConnector,
@@ -403,11 +418,12 @@ import {
   DeleteHTTPServiceRouteRequest,
   RunCommandsRequest,
   IndexAccesses,
-  MySQLClusterDetail,
+  DeleteUserKeyResponse,
   DescribeAuthDomainsRequest,
   PlatformCreditsUsageDaily,
   WxGatewayCustomConfig,
   ResetPGAccountPasswordRequest,
+  DescribePlatformCreditsUsageDetailRequest,
   MetricUsage,
   DescribeCloudBaseRunBuildLogResponse,
   DescribeCreditsUsageResponse,
@@ -426,6 +442,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tcb.tencentcloudapi.com", "2018-06-08", clientConfig)
+  }
+
+  /**
+   * 用户删除集成
+   */
+  async DeleteUserKey(
+    req: DeleteUserKeyRequest,
+    cb?: (error: string, rep: DeleteUserKeyResponse) => void
+  ): Promise<DeleteUserKeyResponse> {
+    return this.request("DeleteUserKey", req, cb)
   }
 
   /**
@@ -692,6 +718,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 用户更新集成信息
+   */
+  async UpdateUserKey(
+    req: UpdateUserKeyRequest,
+    cb?: (error: string, rep: UpdateUserKeyResponse) => void
+  ): Promise<UpdateUserKeyResponse> {
+    return this.request("UpdateUserKey", req, cb)
+  }
+
+  /**
    * 查询资源点模式下的资源点用量及原始用量明细
    */
   async DescribeCreditsUsageDetail(
@@ -813,6 +849,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeUserListResponse) => void
   ): Promise<DescribeUserListResponse> {
     return this.request("DescribeUserList", req, cb)
+  }
+
+  /**
+   * 用户创建集成
+   */
+  async CreateUserKey(
+    req: CreateUserKeyRequest,
+    cb?: (error: string, rep: CreateUserKeyResponse) => void
+  ): Promise<CreateUserKeyResponse> {
+    return this.request("CreateUserKey", req, cb)
   }
 
   /**
@@ -1199,15 +1245,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 修改资源基础权限。
-
-修改云函数、云存储和数据库表的基础权限配置。支持预定义权限级别和自定义安全规则两种方式配置资源访问权限。
-     */
-  async ModifyResourcePermission(
-    req: ModifyResourcePermissionRequest,
-    cb?: (error: string, rep: ModifyResourcePermissionResponse) => void
-  ): Promise<ModifyResourcePermissionResponse> {
-    return this.request("ModifyResourcePermission", req, cb)
+   * 用户获取集成详情
+   */
+  async GetOneUserKey(
+    req: GetOneUserKeyRequest,
+    cb?: (error: string, rep: GetOneUserKeyResponse) => void
+  ): Promise<GetOneUserKeyResponse> {
+    return this.request("GetOneUserKey", req, cb)
   }
 
   /**
@@ -1274,6 +1318,18 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DeleteHTTPServiceRouteResponse) => void
   ): Promise<DeleteHTTPServiceRouteResponse> {
     return this.request("DeleteHTTPServiceRoute", req, cb)
+  }
+
+  /**
+     * 修改资源基础权限。
+
+修改云函数、云存储和数据库表的基础权限配置。支持预定义权限级别和自定义安全规则两种方式配置资源访问权限。
+     */
+  async ModifyResourcePermission(
+    req: ModifyResourcePermissionRequest,
+    cb?: (error: string, rep: ModifyResourcePermissionResponse) => void
+  ): Promise<ModifyResourcePermissionResponse> {
+    return this.request("ModifyResourcePermission", req, cb)
   }
 
   /**
@@ -1446,6 +1502,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DestroyEnvResponse) => void
   ): Promise<DestroyEnvResponse> {
     return this.request("DestroyEnv", req, cb)
+  }
+
+  /**
+   * 用户获取集成列表
+   */
+  async GetUserKeyList(
+    req: GetUserKeyListRequest,
+    cb?: (error: string, rep: GetUserKeyListResponse) => void
+  ): Promise<GetUserKeyListResponse> {
+    return this.request("GetUserKeyList", req, cb)
   }
 
   /**
