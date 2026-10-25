@@ -148,6 +148,16 @@ it("iotexplorer.v20190423.RenewTWeSeeSubscription", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetWechatDeviceTicket", async function () {
+    try {
+       const data = await client.GetWechatDeviceTicket({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.RevokeShareDeviceFromUser", async function () {
     try {
        const data = await client.RevokeShareDeviceFromUser({})
@@ -198,9 +208,9 @@ it("iotexplorer.v20190423.CreateTWeSeeCallback", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetProjectList", async function () {
+it("iotexplorer.v20190423.DeleteProductPrivateCA", async function () {
     try {
-       const data = await client.GetProjectList({})
+       const data = await client.DeleteProductPrivateCA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +558,16 @@ it("iotexplorer.v20190423.DescribeUnbindedDevices", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeFenceEventList", async function () {
+    try {
+       const data = await client.DescribeFenceEventList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateIotVideoCloudStorage", async function () {
     try {
        const data = await client.CreateIotVideoCloudStorage({})
@@ -848,6 +868,16 @@ it("iotexplorer.v20190423.ListOtaModules", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeProductCA", async function () {
+    try {
+       const data = await client.DescribeProductCA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeFirmwareTasks", async function () {
     try {
        const data = await client.DescribeFirmwareTasks({})
@@ -861,6 +891,16 @@ it("iotexplorer.v20190423.DescribeFirmwareTasks", async function () {
 it("iotexplorer.v20190423.DescribeTWeTalkAgentList", async function () {
     try {
        const data = await client.DescribeTWeTalkAgentList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribePrivateCABindedProducts", async function () {
+    try {
+       const data = await client.DescribePrivateCABindedProducts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,6 +998,16 @@ it("iotexplorer.v20190423.CreateTWeTalkProductConfig", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreatePrivateCA", async function () {
+    try {
+       const data = await client.CreatePrivateCA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyTWeSeeSubscription", async function () {
     try {
        const data = await client.ModifyTWeSeeSubscription({})
@@ -988,9 +1038,9 @@ it("iotexplorer.v20190423.DeleteTWeTalkProductConfigV2", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeFenceEventList", async function () {
+it("iotexplorer.v20190423.DeletePrivateCA", async function () {
     try {
-       const data = await client.DescribeFenceEventList({})
+       const data = await client.DeletePrivateCA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1478,9 +1528,9 @@ it("iotexplorer.v20190423.PurchaseVideoPackage", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetWechatDeviceTicket", async function () {
+it("iotexplorer.v20190423.GetProjectList", async function () {
     try {
-       const data = await client.GetWechatDeviceTicket({})
+       const data = await client.GetProjectList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1708,6 +1758,16 @@ it("iotexplorer.v20190423.DescribeProductDynamicRegister", async function () {
     }
 })
 
+it("iotexplorer.v20190423.UpdatePrivateCA", async function () {
+    try {
+       const data = await client.UpdatePrivateCA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateTWeSeeService", async function () {
     try {
        const data = await client.CreateTWeSeeService({})
@@ -1898,9 +1958,9 @@ it("iotexplorer.v20190423.ModifyCloudStorageAIService", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ResumeWeCallDevice", async function () {
+it("iotexplorer.v20190423.DescribeProject", async function () {
     try {
-       const data = await client.ResumeWeCallDevice({})
+       const data = await client.DescribeProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1948,6 +2008,16 @@ it("iotexplorer.v20190423.DescribeGatewaySubDeviceList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ResumeWeCallDevice", async function () {
+    try {
+       const data = await client.ResumeWeCallDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetDeviceSumStatistics", async function () {
     try {
        const data = await client.GetDeviceSumStatistics({})
@@ -1968,9 +2038,9 @@ it("iotexplorer.v20190423.DescribeBatchProduction", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ResetCloudStorageAIService", async function () {
+it("iotexplorer.v20190423.DescribePrivateCAs", async function () {
     try {
-       const data = await client.ResetCloudStorageAIService({})
+       const data = await client.DescribePrivateCAs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2101,6 +2171,16 @@ it("iotexplorer.v20190423.BatchPublishMessage", async function () {
 it("iotexplorer.v20190423.GenerateCloudStorageAIServiceTaskFileURL", async function () {
     try {
        const data = await client.GenerateCloudStorageAIServiceTaskFileURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.UpdateProductPrivateCA", async function () {
+    try {
+       const data = await client.UpdateProductPrivateCA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2271,6 +2351,16 @@ it("iotexplorer.v20190423.ResetCloudStorageEvent", async function () {
 it("iotexplorer.v20190423.DescribeCloudStorageAIServiceCallback", async function () {
     try {
        const data = await client.DescribeCloudStorageAIServiceCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ResetCloudStorageAIService", async function () {
+    try {
+       const data = await client.ResetCloudStorageAIService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2498,9 +2588,9 @@ it("iotexplorer.v20190423.GetFamilyDeviceUserList", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeProject", async function () {
+it("iotexplorer.v20190423.DescribePrivateCA", async function () {
     try {
-       const data = await client.DescribeProject({})
+       const data = await client.DescribePrivateCA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

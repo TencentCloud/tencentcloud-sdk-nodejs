@@ -1500,7 +1500,7 @@ export interface UpgradeProxyRequest {
  */
 export interface DescribeBinlogDownloadUrlResponse {
   /**
-   * 下载地址
+   * <p>下载地址</p>
    */
   DownloadUrl?: string
   /**
@@ -6721,15 +6721,15 @@ export interface DbInfo {
  */
 export interface DescribeBackupDownloadUrlRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 备份ID
+   * <p>备份ID</p>
    */
   BackupId: number
   /**
-   * 备份下载来源限制条件
+   * <p>备份下载来源限制条件</p>
    */
   DownloadRestriction?: BackupLimitRestriction
 }
@@ -11608,7 +11608,7 @@ export interface CloseClusterPasswordComplexityResponse {
  */
 export interface DescribeBackupDownloadUrlResponse {
   /**
-   * 备份下载地址
+   * <p>备份下载地址</p>
    */
   DownloadUrl?: string
   /**
@@ -13468,15 +13468,15 @@ export interface RefundResourcePackageRequest {
  */
 export interface DescribeBinlogDownloadUrlRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * Binlog文件ID
+   * <p>Binlog文件ID</p>
    */
   BinlogId: number
   /**
-   * 备份下载来源限制条件
+   * <p>备份下载来源限制条件</p>
    */
   DownloadRestriction?: BackupLimitRestriction
 }
@@ -15849,12 +15849,10 @@ export interface BackupLimitRestriction {
   IpComparisonSymbol?: string
   /**
    * 限制下载的vpc设置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LimitVpcs?: Array<BackupLimitVpcItem>
   /**
    * 限制下载的ip设置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LimitIps?: Array<string>
 }

@@ -1042,73 +1042,78 @@ export interface DescribeBuiltinModelListRequest {
  */
 export interface ConnectorInfo {
   /**
-   * 连接器 ID
+   * <p>连接器 ID</p>
    */
   ConnectorId?: string
   /**
-   * 连接器短标识（终身不变，跨版本稳定）
+   * <p>连接器短标识（终身不变，跨版本稳定）</p>
    */
   ConnectorSlug?: string
   /**
-   * 版本级连接器密钥
+   * <p>版本级连接器密钥</p>
    */
   ConnectorKey?: string
   /**
-   * 连接器名称
+   * <p>连接器名称</p>
    */
   Name?: string
   /**
-   * 连接器描述
+   * <p>连接器描述</p>
    */
   Description?: string
   /**
-   * 头像 URL
+   * <p>头像 URL</p>
    */
   AvatarUrl?: string
   /**
-   * 连接器来源：ENTERPRISE_AGENT / ASSISTANT
+   * <p>连接器来源：ENTERPRISE_AGENT / ASSISTANT</p>
    */
   Source?: string
   /**
-   * 归属企业 ID
+   * <p>归属企业 ID</p>
    */
   EnterpriseId?: string
   /**
-   * 连接器类型：MCP_SERVER / A2A / API_SERVICE
+   * <p>连接器类型：MCP_SERVER / A2A / API_SERVICE</p>
    */
   Type?: string
   /**
-   * 上游服务地址
+   * <p>上游服务地址</p>
    */
   ServiceUrl?: string
   /**
-   * 授权方式列表：NONE / ONEID / OAUTH2_IDP / API_KEY
+   * <p>授权方式列表：NONE / ONEID / OAUTH2_IDP / API_KEY / DYNAMIC_API_KEY。DYNAMIC_API_KEY 表示按每轮请求提供的动态字段，通过 HeaderMappings 注入出站 HTTP Header。</p>
    */
   AuthModes?: Array<string>
   /**
-   * 最新版本号
+   * <p>最新版本号</p>
    */
   LatestVersionNo?: number
   /**
-   * 连接器状态：ACTIVE / DISABLED
+   * <p>连接器状态：ACTIVE / DISABLED</p>
    */
   Status?: string
   /**
-   * 创建人 ID
+   * <p>创建人 ID</p>
    */
   CreatorId?: string
   /**
-   * 创建时间（ISO8601，UTC）
+   * <p>创建时间（ISO8601，UTC）</p>
    */
   CreatedTime?: string
   /**
-   * 最后修改时间（ISO8601，UTC）
+   * <p>最后修改时间（ISO8601，UTC）</p>
    */
   ModifiedTime?: string
   /**
-   * VPC 网络配置 ID。为空表示该连接器通过公网访问 ServiceUrl。仅绑定 VPC 网络配置时本字段有值。
+   * <p>VPC 网络配置 ID。为空表示该连接器通过公网访问 ServiceUrl。仅绑定 VPC 网络配置时本字段有值。</p>
    */
   VpcConfigId?: string
+  /**
+   * <p>展示名：console 老连接器目录（DescribeConsoleConnectorList）下发，取 registry data.display_name，老数据缺失时回落 Name；云上目录无独立展示名，省略不返回。Name 是存储名/选型回写键（含 scope 前缀），不承担展示职责。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName?: string
 }
 
 /**

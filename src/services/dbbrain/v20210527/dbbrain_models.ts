@@ -172,24 +172,25 @@ export interface DescribeDBAuditLogTopSqlsRequest {
 }
 
 /**
- * 健康报告URL信息
+ * DescribeBlockingTrend请求参数结构体
  */
-export interface DiagReportUrlItem {
+export interface DescribeBlockingTrendRequest {
   /**
-   * 异步任务ID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>实例ID。</p>
    */
-  AsyncRequestId?: number
+  InstanceId: string
   /**
-   * 报告下载地址。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>服务产品类型，固定为sqlserver。</p>
    */
-  ReportUrl?: string
+  Product: string
   /**
-   * 链接过期时间，Unix时间戳（秒），-1表示永不过期。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>查询起始时间（服务端时区 UTC+8），格式：yyyy-MM-dd HH:mm:ss。必须在最近 30 天内，否则返回 InvalidParameterValue。</p>
    */
-  ExpireTime?: number
+  StartTime: string
+  /**
+   * <p>查询结束时间（服务端时区 UTC+8），格式：yyyy-MM-dd HH:mm:ss，需大于 StartTime。单次查询跨度必须 ≤ 7 天（Trend 走 Druid 原生聚合，跨度比明细类接口更宽泛），否则返回 InvalidParameterValue。</p>
+   */
+  EndTime: string
 }
 
 /**
@@ -208,6 +209,24 @@ export interface DescribeDBAutonomyActionsRequest {
    * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
   Product: string
+}
+
+/**
+ * DescribeRedisProcessList返回参数结构体
+ */
+export interface DescribeRedisProcessListResponse {
+  /**
+   * 该实例的Proxy节点数量，可用于分页查询。
+   */
+  ProxyCount?: number
+  /**
+   * 实时会话详情列表。
+   */
+  Processes?: Array<Process>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -673,6 +692,122 @@ export interface CreateSecurityAuditLogExportTaskRequest {
 }
 
 /**
+ * 阻塞树，一棵阻塞链的完整视图。一棵树的定义：同一(instanceId, monitorLoop)下，通过blocker/blocked边可达构成的一个连通分量。根节点是入度为0的会话（即从未被任何会话阻塞的头blocker）。一个monitorLoop可能对应多棵独立阻塞树。
+ */
+export interface BlockingChainTree {
+  /**
+   * <p>监控轮次ID（同一实例内唯一标识一次采集快照，同一快照可包含多棵独立阻塞树）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorLoop?: string
+  /**
+   * <p>阻塞发生所在的数据库名称（整条链路隶属同一 database，放在树级返回一次即可）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * <p>头阻塞会话ID（对应 SQL Server sys.dm_exec_sessions.session_id，即 SPID）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingSessionId?: number
+  /**
+   * <p>头阻塞会话事务ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingTransactionId?: number
+  /**
+   * <p>头阻塞会话数据库用户。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingLoginName?: string
+  /**
+   * <p>头阻塞会话客户端主机。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingHostName?: string
+  /**
+   * <p>头阻塞会话客户端应用名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingClientApp?: string
+  /**
+   * <p>头阻塞会话运行时状态（SQL Server sys.dm_exec_sessions.status 文本），常见取值：running / sleeping / suspended / background。sleeping + BlockingTranCount&gt;0 是 C2_SLEEPING_UNCOMMITTED（休眠会话持未提交事务）的直接证据。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingStatus?: string
+  /**
+   * <p>头阻塞会话事务隔离级别（SQL Server 原生取值：read uncommitted / read committed / repeatable read / serializable / snapshot）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingIsolationLevel?: string
+  /**
+   * <p>头阻塞会话当前显式事务嵌套层数（XEvent trancount）。&gt;0 表示持有显式事务；与 BlockingStatus=sleeping 组合是 C2_SLEEPING_UNCOMMITTED（休眠会话持未提交事务）的直接证据。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingTranCount?: number
+  /**
+   * <p>头阻塞会话正在执行的 SQL 原文（对应 DBCC INPUTBUFFER 返回内容，单条最长 16KB，超长截断）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingInputBuffer?: string
+  /**
+   * <p>头阻塞SQL归一化模板。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingSqlTemplate?: string
+  /**
+   * <p>头阻塞SQL模板MD5。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingSqlMd5?: string
+  /**
+   * <p>头阻塞会话自身的等待时长（毫秒，来自XML blocking-process/process的waittime属性）。多数场景为0。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockingWaitTimeMs?: number
+  /**
+   * <p>根因分类。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootCause?: string
+  /**
+   * <p>根因分类的可读中文描述（服务端已完成中文化，前端可直接展示；与 RootCause 代号一一对应；未识别或空值统一返回“未识别”）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootCauseDesc?: string
+  /**
+   * <p>该链路阻塞事件的起始时间（该树内__time最小值），格式：yyyy-MM-dd HH:mm:ss。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * <p>该链路阻塞事件的结束时间（该树内__time最大值），格式：yyyy-MM-dd HH:mm:ss。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * <p>该链路最长等待时长（毫秒），作为链路影响时长。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DurationMs?: number
+  /**
+   * <p>该链路被阻塞会话数（等价于树节点数-1，即受影响会话数）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChainLength?: number
+  /**
+   * <p>树深度（根节点为0，最长路径的深度）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChainDepth?: number
+  /**
+   * <p>被阻塞节点子树（可能为空，也可能多叉或多层）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Details?: Array<BlockingChainNode>
+}
+
+/**
  * DescribeTopSpaceTableTimeSeries返回参数结构体
  */
 export interface DescribeTopSpaceTableTimeSeriesResponse {
@@ -843,7 +978,7 @@ export interface DescribeRedisBigKeyAnalysisTasksResponse {
 }
 
 /**
- * PostgreSQL 产品空间对象项。字段语义与 MySQL 不同：使用 pg_relation_size / pg_total_relation_size 等 PG 特有指标。库级查询时不包含 TableSchema/TableName 字段；表级查询时包含全部字段。
+ * PostgreSQL 产品空间对象项（单表明细）。字段语义与 MySQL 不同：使用 pg_relation_size / pg_total_relation_size 等 PG 特有指标。
  */
 export interface PostgresSpaceObjectItem {
   /**
@@ -861,6 +996,11 @@ export interface PostgresSpaceObjectItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName?: string
+  /**
+   * <p>表状态（仅单表查询 DescribeTableSpaceDataV2 返回；取值：-1 表示库表最新一次采集不到或实例超限不拉取，0 正在拉取，1 拉取完成；该字段仅针对实例级别）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableStatus?: number
   /**
    * <p>表本身大小（MB），对应 pg_relation_size。</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -909,6 +1049,27 @@ export interface DescribeDBDiagReportTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 健康报告URL信息
+ */
+export interface DiagReportUrlItem {
+  /**
+   * 异步任务ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncRequestId?: number
+  /**
+   * 报告下载地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReportUrl?: string
+  /**
+   * 链接过期时间，Unix时间戳（秒），-1表示永不过期。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: number
 }
 
 /**
@@ -1289,13 +1450,13 @@ export interface SlowLogTopSqlItem {
 }
 
 /**
- * CreateKillTask返回参数结构体
+ * CreateAuditLogFile返回参数结构体
  */
-export interface CreateKillTaskResponse {
+export interface CreateAuditLogFileResponse {
   /**
-   * kill会话任务创建成功返回1
+   * 审计日志文件下载的任务ID
    */
-  Status?: number
+  AsyncRequestId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1529,6 +1690,22 @@ export interface DescribeDBInstancesResponse {
 }
 
 /**
+ * MongoDB 产品表空间数据对象。对应 V1 底层返回的顶层包装结构，包含集合级空间明细数组 SpaceSchemas 与外层采集时间戳 Timestamp。
+ */
+export interface MongodbSpaceObjectItem {
+  /**
+   * <p>集合级空间明细数组。每项含顶层标识字段（AppId/InstanceId/Db/Timestamp/SizeOnDisk）与嵌套 Collection 明细。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpaceSchemas?: Array<MongoDBTableSpaceItem>
+  /**
+   * <p>数据采集时间戳（秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: number
+}
+
+/**
  * 实例诊断历史事件
  */
 export interface DiagHistoryEventItem {
@@ -1754,27 +1931,35 @@ export interface SlowLogInfoItem {
 }
 
 /**
- * DescribeProxySessionKillTasks请求参数结构体
+ * DescribeBlockingLockTree返回参数结构体
  */
-export interface DescribeProxySessionKillTasksRequest {
+export interface DescribeBlockingLockTreeResponse {
   /**
-   * 实例ID。
+   * <p>阻塞树列表（同一 MonitorLoop 下可能存在多棵独立阻塞树，按链路影响时长倒序）。若按 BlockingTime 定位时未找到附近 MonitorLoop，返回空列表。</p>
    */
-  InstanceId: string
+  Items?: Array<BlockingChainTree>
   /**
-   * kill 会话异步任务 ID,  接口 CreateProxySessionKillTask 调用成功后获取。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AsyncRequestIds: Array<number | bigint>
-  /**
-   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
-   */
-  Product: string
+  RequestId?: string
 }
 
 /**
- * ModifyAlarmPolicy返回参数结构体
+ * DescribeBlockingTrend返回参数结构体
  */
-export interface ModifyAlarmPolicyResponse {
+export interface DescribeBlockingTrendResponse {
+  /**
+   * <p>使用的粒度名称，取值：SECONDS / MINUTES / FIVE_MINUTES / TEN_MINUTES / FIFTEEN_MINUTES / THIRTY_MINUTES / HOUR。时间窗口 ≤ 1 分钟时自动采用 SECONDS（1 秒）粒度。</p>
+   */
+  Granularity?: string
+  /**
+   * <p>粒度对应的毫秒值（SECONDS=1000，MINUTES=60000，... HOUR=3600000）。</p>
+   */
+  GranularityMs?: number
+  /**
+   * <p>阻塞趋势时序点列表（按 ReportTime 升序，稠密时序：窗口内每个 bucket 都返回一个点，无数据 bucket 补零）。</p>
+   */
+  DataPoints?: Array<BlockingTrendPoint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2033,6 +2218,32 @@ export interface WaiterItem {
 }
 
 /**
+ * 阻塞趋势时序点，表示某个粒度 bucket 的阻塞聚合统计。
+ */
+export interface BlockingTrendPoint {
+  /**
+   * <p>该 bucket 的实际聚合区间左端（含），格式：yyyy-MM-dd HH:mm:ss。聚合区间为前闭后开 [StartTime, EndTime)。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * <p>该 bucket 的实际聚合区间右端（不含），格式：yyyy-MM-dd HH:mm:ss。即 StartTime + GranularityMs。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * <p>该 bucket 内的阻塞 report 行数（底层 blocked_process_report 事件数），无数据 bucket 返回 0。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockCount?: number
+  /**
+   * <p>该 bucket 内观测到的不同 monitorLoop 数量（lock monitor 扫描快照数），无数据 bucket 返回 0。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorLoopCount?: number
+}
+
+/**
  * 自治事件详情
  */
 export interface AutonomyEventVo {
@@ -2253,6 +2464,48 @@ export interface DescribeDatabaseAutonomyStatusRequest {
 }
 
 /**
+ * DescribeTableSpaceDataV2请求参数结构体
+ */
+export interface DescribeTableSpaceDataV2Request {
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>服务产品类型（用于云 API 平台路由到对应产品后端）。取值：mysql / cynosdb / mariadb / postgres / mongodb / sqlserver 等。</p>
+   */
+  Product: string
+  /**
+   * <p>数据库名（PG 系产品的 schema 名；MongoDB 为 database 名；MySQL / CynosDB / SqlServer 为库名）。PostgreSQL / MySQL / CynosDB / SqlServer 必传；MongoDB 可不传（底层使用 optString(&quot;&quot;), 不传时按空库名查询）。</p>
+   */
+  TableSchema: string
+  /**
+   * <p>表名（MongoDB 场景下为 collection 名，如 oplog.rs）。PostgreSQL / MySQL / CynosDB / SqlServer 必传；MongoDB 可不传（底层对该字段为空时直接返回空列表而非报错）。</p>
+   */
+  TableName: string
+  /**
+   * <p>表所在的 Catalog（数据库目录）名。PostgreSQL / TBase 等 PG 系产品必传（例如 postgres），用于唯一定位 (catalog, schema, name) 三元组；MySQL / CynosDB / MongoDB / SqlServer 等非 PG 系产品可不传。</p>
+   */
+  TableCatalog?: string
+  /**
+   * <p>查询日期，格式：yyyy-MM-dd。MySQL / CynosDB / PostgreSQL / SqlServer 可选（默认当天）；MongoDB 本接口不读取该字段（底层通过 dbbrain.collInfo 直接查询实时集合空间，不区分日期）。</p>
+   */
+  Date?: string
+  /**
+   * <p>排序字段。本接口（单表/单集合明细查询）均为可选：MySQL / CynosDB 可选，默认按 total_length 排序；PostgreSQL 可选，默认按 relation_size 排序；SqlServer 本接口不消费该字段的值；MongoDB 本接口完全不读取该字段。如需在 Top 表/库场景使用排序，请改用 DescribeTopSpaceTablesV2 / DescribeTopSpaceSchemasV2 接口。</p>
+   */
+  SortBy?: string
+  /**
+   * <p>返回条数上限，默认 20，最大 100。MySQL / CynosDB / PostgreSQL 本接口会读取该参数控制明细条数；MongoDB 本接口不读取该字段（底层按入参 TableName 精确匹配返回集合明细，不受 Limit 控制）；SqlServer 本接口会校验但不消费其值。</p>
+   */
+  Limit?: number
+  /**
+   * <p>MongoDB 专用——表名/集合名是否按正则模糊匹配。默认 true。其他产品忽略该字段。</p>
+   */
+  Regex?: boolean
+}
+
+/**
  * KillMySqlThreads返回参数结构体
  */
 export interface KillMySqlThreadsResponse {
@@ -2326,6 +2579,20 @@ export interface DescribeDBAutonomyEventsResponse {
    * 自治事件列表。
    */
   Events?: Array<AutonomyEventVo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VerifyUserAccount返回参数结构体
+ */
+export interface VerifyUserAccountResponse {
+  /**
+   * 会话token，有效期为5分钟。
+   */
+  SessionToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3034,6 +3301,57 @@ export interface CreateIgnoreDiagRecordResponse {
 }
 
 /**
+ * SQL Server 产品空间对象项（单表明细）。字段命名与 MySQL 同构（TableSchema/TableName/Engine/TableRows/TotalLength/DataLength/IndexLength/DataFree，单位 MB），无 FragRatio / PhysicalFileSize。
+ */
+export interface SqlServerSpaceObjectItem {
+  /**
+   * <p>数据库名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableSchema?: string
+  /**
+   * <p>表名（库内限定名 schema.table，如 dbo.users）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * <p>存储引擎标识，固定为 SqlServer。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Engine?: string
+  /**
+   * <p>表状态（仅单表查询 DescribeTableSpaceDataV2 返回；取值：-1 表示库表最新一次采集不到或实例超限不拉取，0 正在拉取，1 拉取完成；该字段仅针对实例级别）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableStatus?: number
+  /**
+   * <p>行数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableRows?: number
+  /**
+   * <p>总使用空间（MB）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalLength?: number
+  /**
+   * <p>数据空间（MB）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataLength?: number
+  /**
+   * <p>索引空间（MB）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexLength?: number
+  /**
+   * <p>碎片空间（MB），对应保留空洞 reserved-used。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataFree?: number
+}
+
+/**
  * 持有该锁资源的进程列表（死锁环的持有边）。
  */
 export interface OwnerItem {
@@ -3056,13 +3374,13 @@ export interface OwnerItem {
 }
 
 /**
- * CreateAuditLogFile返回参数结构体
+ * CreateKillTask返回参数结构体
  */
-export interface CreateAuditLogFileResponse {
+export interface CreateKillTaskResponse {
   /**
-   * 审计日志文件下载的任务ID
+   * kill会话任务创建成功返回1
    */
-  AsyncRequestId?: number
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3158,62 +3476,62 @@ export interface IndexesToBuild {
  */
 export interface MongoCollectionDetail {
   /**
-   * <p>集合命名空间，格式为 db.collection。</p>
+   * 集合命名空间，格式为 db.collection。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CollStats?: string
   /**
-   * <p>集合逻辑大小（字节，未压缩）。</p>
+   * 集合逻辑大小（字节，未压缩）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CollectionSize?: number
   /**
-   * <p>集合已分配但未使用的空间（字节）。</p>
+   * 集合已分配但未使用的空间（字节）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataFree?: number
   /**
-   * <p>空间利用率（百分比字符串）。</p>
+   * 空间利用率（百分比字符串）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceRatio?: string
   /**
-   * <p>碎片率（百分比字符串）。</p>
+   * 碎片率（百分比字符串）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FragRatio?: string
   /**
-   * <p>集合数据大小（字节）。</p>
+   * 集合数据大小（字节）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Size?: number
   /**
-   * <p>所有索引占用大小（字节）。</p>
+   * 所有索引占用大小（字节）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalIndexSize?: number
   /**
-   * <p>平均文档大小（字节）。</p>
+   * 平均文档大小（字节）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AvgObjSize?: number
   /**
-   * <p>集合实际占用存储大小（字节，压缩后）。</p>
+   * 集合实际占用存储大小（字节，压缩后）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageSize?: number
   /**
-   * <p>文档数量。</p>
+   * 文档数量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
   /**
-   * <p>压缩率（百分比字符串）。</p>
+   * 压缩率（百分比字符串）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompressionRatio?: string
   /**
-   * <p>可复用文件空间（字节）。</p>
+   * 可复用文件空间（字节）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileReuseBytes?: number
@@ -3237,6 +3555,16 @@ export interface DescribeDatabaseAutonomyStatusResponse {
  * DeleteSqlFilters返回参数结构体
  */
 export interface DeleteSqlFiltersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAlarmPolicy返回参数结构体
+ */
+export interface ModifyAlarmPolicyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3869,17 +4197,17 @@ export interface DescribeMailProfileRequest {
 }
 
 /**
- * 接收用户
+ * ModifyAuditService返回参数结构体
  */
-export interface ReceiveUin {
+export interface ModifyAuditServiceResponse {
   /**
-   * 用户名
+   * 审计配置修改结果，0-修改成功,非0-修改失败。
    */
-  UinName?: string
+  Success?: number
   /**
-   * 用户id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Uin?: string
+  RequestId?: string
 }
 
 /**
@@ -5752,36 +6080,36 @@ export interface DescribeNoPrimaryKeyTablesResponse {
 }
 
 /**
- * MongoDB 产品表级（集合级）空间对象项，描述单个集合的空间使用统计信息。
+ * MongoDB 产品集合级空间对象项，包含顶层标识字段与嵌套 Collection 明细。
  */
 export interface MongoDBTableSpaceItem {
   /**
-   * <p>应用 Id（AppId）。</p>
+   * 应用 Id（AppId）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
-   * <p>实例 Id。</p>
+   * 实例 Id。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
-   * <p>数据库名。</p>
+   * 数据库名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Db?: string
   /**
-   * <p>数据采集时间戳（毫秒）。</p>
+   * 数据采集时间戳（毫秒）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp?: number
   /**
-   * <p>磁盘占用大小（字节）。</p>
+   * 磁盘占用大小（字节）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SizeOnDisk?: number
   /**
-   * <p>集合级空间使用明细。</p>
+   * 集合级空间使用明细。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Collection?: MongoCollectionDetail
@@ -6142,17 +6470,29 @@ export interface StatDimension {
 }
 
 /**
- * ModifyAuditService返回参数结构体
+ * DescribeDatabaseObjectV2请求参数结构体
  */
-export interface ModifyAuditServiceResponse {
+export interface DescribeDatabaseObjectV2Request {
   /**
-   * 审计配置修改结果，0-修改成功,非0-修改失败。
+   * <p>服务产品类型。取值：sqlserver（云数据库 Sqlserver）。</p>
    */
-  Success?: number
+  Product: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>查询对象类型。</p><p>枚举值：</p><ul><li>TableDDL： 建表+索引DDL</li><li>TableStatistics： 表空间统计</li></ul>
    */
-  RequestId?: string
+  ObjectType: string
+  /**
+   * <p>实例 ID。SQLServer: mssql-xxxx。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>库名（catalog）。TableStatistics 时必填；TableDDL 时可选。</p>
+   */
+  TableSchema?: string
+  /**
+   * <p>当产品为sqlserver时，表名/视图名，支持 schema.table 格式，未带 schema 默认 dbo</p>
+   */
+  TableName?: string
 }
 
 /**
@@ -6945,13 +7285,34 @@ export interface DescribeAlarmTemplateRequest {
 }
 
 /**
- * VerifyUserAccount返回参数结构体
+ * DescribeTableSpaceDataV2返回参数结构体
  */
-export interface VerifyUserAccountResponse {
+export interface DescribeTableSpaceDataV2Response {
   /**
-   * 会话token，有效期为5分钟。
+   * <p>MySQL 系列产品表空间数据。当产品为 mysql/cynosdb/tdsql/dcdb/mariadb 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SessionToken?: string
+  MysqlTableSpaceData?: MysqlSpaceObjectItem
+  /**
+   * <p>PostgreSQL 产品表空间数据。当产品为 postgres 时返回。字段语义与 MySQL 不同：使用 RelationSize / TableSize / IndexSize / TotalRelationSize / TableBloat 等 PG 特有指标。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostgresTableSpaceData?: PostgresSpaceObjectItem
+  /**
+   * <p>MongoDB 产品表空间数据。当产品为 mongodb 时返回。包含集合级明细数组 SpaceSchemas 以及外层采集时间戳 Timestamp（秒级）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MongodbTableSpaceData?: MongodbSpaceObjectItem
+  /**
+   * <p>SQL Server 产品表空间数据。当产品为 sqlserver 时返回。字段结构与 MysqlSpaceObjectItem 同构，无 FragRatio / PhysicalFileSize。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlServerTableSpaceData?: SqlServerSpaceObjectItem
+  /**
+   * <p>数据采集时间戳（秒）。可能为空（部分产品分支/异常场景下不保证返回），调用方请做空值兼容。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7046,7 +7407,7 @@ export interface DescribeRedisCommandCostStatisticsRequest {
 }
 
 /**
- * MySQL 系列产品空间对象项。库级查询时不包含 TableName/Engine 字段；表级查询时包含全部字段。
+ * MySQL 系列产品空间对象项（单表明细）。
  */
 export interface MysqlSpaceObjectItem {
   /**
@@ -7064,6 +7425,11 @@ export interface MysqlSpaceObjectItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Engine?: string
+  /**
+   * <p>表状态（仅单表查询 DescribeTableSpaceDataV2 返回；取值：-1 表示库表最新一次采集不到或实例超限不拉取，0 正在拉取，1 拉取完成；该字段仅针对实例级别）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableStatus?: number
   /**
    * <p>行数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -7246,21 +7612,21 @@ export interface UpdateMonitorSwitchResponse {
 }
 
 /**
- * DescribeRedisProcessList返回参数结构体
+ * DescribeProxySessionKillTasks请求参数结构体
  */
-export interface DescribeRedisProcessListResponse {
+export interface DescribeProxySessionKillTasksRequest {
   /**
-   * 该实例的Proxy节点数量，可用于分页查询。
+   * 实例ID。
    */
-  ProxyCount?: number
+  InstanceId: string
   /**
-   * 实时会话详情列表。
+   * kill 会话异步任务 ID,  接口 CreateProxySessionKillTask 调用成功后获取。
    */
-  Processes?: Array<Process>
+  AsyncRequestIds: Array<number | bigint>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
-  RequestId?: string
+  Product: string
 }
 
 /**
@@ -7723,6 +8089,28 @@ CANCELLED  - 已取消
 }
 
 /**
+ * DescribeBlockingLockTree请求参数结构体
+ */
+export interface DescribeBlockingLockTreeRequest {
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>服务产品类型，固定为sqlserver。</p>
+   */
+  Product: string
+  /**
+   * <p>lock monitor 扫描轮次 ID（可从 DescribeBlockingTimeRange 返回的 MonitorLoops 列表选择，也可从 DescribeBlockingLogs / DescribeBlockingTrees 返回的 MonitorLoop 字段获取）。与 BlockingTime 二选一，MonitorLoop 优先。</p>
+   */
+  MonitorLoop?: string
+  /**
+   * <p>阻塞时间点，格式：yyyy-MM-dd HH:mm:ss。当 MonitorLoop 为空时使用该字段定位：后端会在该时间点±1分钟范围内寻找最接近的 MonitorLoop 并下钻其阻塞树。与 MonitorLoop 二选一。BlockingTime 必须在最近 30 天内，否则返回 InvalidParameterValue。</p>
+   */
+  BlockingTime?: string
+}
+
+/**
  * DescribeDBDiagReportTasks请求参数结构体
  */
 export interface DescribeDBDiagReportTasksRequest {
@@ -7966,6 +8354,20 @@ export interface DescribeDBDiagReportContentResponse {
 }
 
 /**
+ * 接收用户
+ */
+export interface ReceiveUin {
+  /**
+   * 用户名
+   */
+  UinName?: string
+  /**
+   * 用户id
+   */
+  Uin?: string
+}
+
+/**
  * DescribeSlowLogTopSqls返回参数结构体
  */
 export interface DescribeSlowLogTopSqlsResponse {
@@ -7984,29 +8386,104 @@ export interface DescribeSlowLogTopSqlsResponse {
 }
 
 /**
- * DescribeDatabaseObjectV2请求参数结构体
+ * 阻塞树节点，表示一个被阻塞会话。若该会话又阻塞了其它会话，则通过children递归表达。
  */
-export interface DescribeDatabaseObjectV2Request {
+export interface BlockingChainNode {
   /**
-   * <p>服务产品类型。取值：sqlserver（云数据库 Sqlserver）。</p>
+   * <p>被阻塞会话 ID（对应 SQL Server sys.dm_exec_sessions.session_id，即 SPID）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Product: string
+  BlockedSessionId?: number
   /**
-   * <p>查询对象类型。</p><p>枚举值：</p><ul><li>TableDDL： 建表+索引DDL</li><li>TableStatistics： 表空间统计</li></ul>
+   * <p>被阻塞会话事务ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ObjectType: string
+  BlockedTransactionId?: number
   /**
-   * <p>实例 ID。SQLServer: mssql-xxxx。</p>
+   * <p>被阻塞会话等待时长（毫秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId?: string
+  BlockedWaitTimeMs?: number
   /**
-   * <p>库名（catalog）。TableStatistics 时必填；TableDDL 时可选。</p>
+   * <p>被阻塞会话正在等待的锁模式（SQL Server原生lock_mode枚举，常见取值：S、U、X、IS、IU、IX、SIU、SIX、UIX、Sch-S、Sch-M）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableSchema?: string
+  BlockedLockMode?: string
   /**
-   * <p>当产品为sqlserver时，表名/视图名，支持 schema.table 格式，未带 schema 默认 dbo</p>
+   * <p>被阻塞会话等待资源。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName?: string
+  BlockedWaitResource?: string
+  /**
+   * <p>被阻塞会话数据库用户。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedLoginName?: string
+  /**
+   * <p>被阻塞会话客户端主机。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedHostName?: string
+  /**
+   * <p>被阻塞会话客户端应用名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedClientApp?: string
+  /**
+   * <p>被阻塞会话运行时状态（SQL Server sys.dm_exec_sessions.status 文本），常见取值：running / sleeping / suspended / background。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedStatus?: string
+  /**
+   * <p>被阻塞会话事务隔离级别（SQL Server 原生取值：read uncommitted / read committed / repeatable read / serializable / snapshot）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedIsolationLevel?: string
+  /**
+   * <p>被阻塞会话当前显式事务名（XEvent transactionname）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedTransactionName?: string
+  /**
+   * <p>被阻塞会话当前显式事务嵌套层数（XEvent trancount）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedTranCount?: number
+  /**
+   * <p>被阻塞会话显式事务 BEGIN TRAN 时刻（XEvent lasttranstarted，SQL Server 服务端本地时区的 ISO 8601 字符串，无时区后缀）。多语句事务场景下比 lastbatchstarted 更稳定。咨视值 1900-01-01T00:00:00 表示未知。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedLastTranStarted?: string
+  /**
+   * <p>被阻塞会话正在执行的 SQL 原文（对应 DBCC INPUTBUFFER 返回内容，单条最长 16KB，超长截断）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedInputBuffer?: string
+  /**
+   * <p>被阻塞SQL归一化模板。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedSqlTemplate?: string
+  /**
+   * <p>被阻塞SQL模板MD5。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlockedSqlMd5?: string
+  /**
+   * <p>根因分类（继承自所属报告的rootCause）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootCause?: string
+  /**
+   * <p>本节点上报事件时间（__time），格式：yyyy-MM-dd HH:mm:ss。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReportTime?: string
+  /**
+   * <p>本节点又阻塞的下级会话（可能为空）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Children?: Array<BlockingChainNode>
 }
 
 /**

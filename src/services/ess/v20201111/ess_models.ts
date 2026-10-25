@@ -13063,6 +13063,10 @@ export interface DescribeBillUsageRequest {
    * <p>是否展示集团子企业的明细，默认否</p>
    */
   DisplaySubEnterprise?: boolean
+  /**
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
+   */
+  Operator?: UserInfo
 }
 
 /**

@@ -28,6 +28,7 @@ import {
   DescribeModelDefinitionResponse,
   SubscribedTopicItem,
   GetGatewaySubDeviceListResponse,
+  UpdatePrivateCARequest,
   DeleteStudioProductResponse,
   DescribeDevicePackagesRequest,
   TalkEventCallbackConfig,
@@ -36,11 +37,12 @@ import {
   ModifyApplicationResponse,
   DescribeCsReportCountDataInfoRequest,
   CreateFreeCloudStorageResponse,
-  DescribeTWeTalkProductConfigResponse,
+  DescribeProductCARequest,
   TalkWebhookAuth,
   TalkActivateRecordLogInfo,
   SeeObjectMetadataEntry,
   ModifyPositionFenceResponse,
+  UpdatePrivateCAResponse,
   DescribeCloudStorageAIServiceTaskRequest,
   SeeFaceRecognitionResult,
   DescribeCloudStorageThumbnailListRequest,
@@ -52,8 +54,10 @@ import {
   SeeTaskPersonInfo,
   DescribeCloudStoragePackageConsumeDetailsRequest,
   BatchUpdateFirmwareResponse,
+  SeeObjectSummary,
   DescribeActivateLicenseServiceResponse,
   RenewTWeSeeSubscriptionRequest,
+  DeleteProductPrivateCAResponse,
   CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
   CreateTWeTalkAgentRequest,
@@ -103,6 +107,7 @@ import {
   InquireTWeSeeSubscriptionCreatePriceRequest,
   ResetCloudStorageEventRequest,
   TopicItem,
+  DescribeTWeTalkProductConfigResponse,
   DeleteTWeSeeCallbackResponse,
   DescribeTWeTalkAgentListResponse,
   DescribeTWeSeeTaskStatisticsResponse,
@@ -124,6 +129,7 @@ import {
   SeeObjectMetadata,
   GetDeviceListRequest,
   DescribeDeviceDataHistoryRequest,
+  DescribePrivateCABindedProductsRequest,
   DescribeStudioProductRequest,
   CreateTWeSeeDirectUploadCredentialRequest,
   OperateTWeSeeDirectUploadObjectRequest,
@@ -154,12 +160,13 @@ import {
   CreateTWeSeeRecognitionTaskWithFileResponse,
   SeeCallbackInfo,
   GetTWeTalkActiveRecordListRequest,
-  DeviceUser,
+  DescribeTWeSeeFaceRequest,
   ProductModelDefinition,
   GetBatchProductionsListRequest,
   DeleteDeviceResponse,
   ModifyLoRaFrequencyResponse,
   InstanceDetail,
+  DescribeBindedProductsResponse,
   InvokeTWeSeeRecognitionTaskWithFileResponse,
   GetBatchProductionsListResponse,
   DescribeGatewayBindDevicesResponse,
@@ -171,7 +178,7 @@ import {
   CreateTWeSeeRecognitionTaskWithFileRequest,
   DescribeTopicPolicyRequest,
   DescribeDeviceFirmwaresRequest,
-  ProjectEntry,
+  PrivateCABindProductInfo,
   CreateVisionRecognitionTaskInput,
   UnbindDevicesRequest,
   PublishBroadcastMessageRequest,
@@ -189,7 +196,7 @@ import {
   ListTWeSeeTasksRequest,
   InquireTWeSeeSubscriptionRenewPriceResponse,
   DescribeFreeCloudStorageNumRequest,
-  CloudStorageUserInfo,
+  DescribePrivateCARequest,
   DescribeDevicePositionListRequest,
   DeleteOtaModuleRequest,
   ModifyFenceBindRequest,
@@ -225,7 +232,7 @@ import {
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
   SeeCreateSubscriptionEntry,
-  SeeObjectSummary,
+  DirectBindDeviceInFamilyResponse,
   VisionCustomDetectQuery,
   ModifyLoRaGatewayResponse,
   TalkConversationConfig,
@@ -255,6 +262,7 @@ import {
   ModifyPositionSpaceResponse,
   ModifyCloudStorageAIServiceCallbackResponse,
   BatchRenewTWeSeeSubscriptionRequest,
+  DeleteProductPrivateCARequest,
   DescribeTWeSeeDirectUploadInfoRequest,
   BatchCreateTWeSeeSubscriptionResponse,
   PositionItem,
@@ -265,7 +273,7 @@ import {
   CreateFenceBindResponse,
   PurchaseVideoPackageResponse,
   TalkLLMConfig,
-  DescribeBindedProductsResponse,
+  CreatePrivateCARequest,
   SeeRenewSubscriptionEntry,
   LoRaGatewayLocation,
   SeeTaskMetadata,
@@ -279,10 +287,11 @@ import {
   InquireTWeSeeSubscriptionCreatePriceResponse,
   CreateTWeTalkProductConfigV2Request,
   DescribeInstanceResponse,
-  DescribeTWeSeeFaceRequest,
+  DeviceUser,
   DeleteTWeSeeTasksByConditionRequest,
   DescribeProjectRequest,
   SeeEventIdFilterConfig,
+  CloudStorageUserInfo,
   UploadFirmwareResponse,
   ModifyTopicPolicyRequest,
   DeleteTopicRuleRequest,
@@ -319,6 +328,7 @@ import {
   BatchCreateTWeSeeRecognitionTaskRequest,
   ProjectEntryEx,
   PublishMessageResponse,
+  DescribePrivateCAsRequest,
   SearchKeyword,
   DescribeModelDefinitionRequest,
   DisableTopicRuleRequest,
@@ -336,6 +346,7 @@ import {
   ResetCloudStorageRequest,
   DescribeCloudStorageEventsWithAITasksRequest,
   GetTWeTalkActiveStatusResponse,
+  DismissRoomByStrRoomIdFromTRTCResponse,
   DescribeCloudStorageTimeRequest,
   SeeComprehensionResult,
   CloudStorageTimeData,
@@ -345,11 +356,12 @@ import {
   PackageInfo,
   DescribeTWeSeeTaskResponse,
   DeleteDevicesResponse,
+  DeletePrivateCAResponse,
   ModifyStudioProductResponse,
   CloudStorageAIServiceTaskFileLabel,
   BindDevicesRequest,
   DescribePackageConsumeTaskRequest,
-  DismissRoomByStrRoomIdFromTRTCResponse,
+  CreatePrivateCAResponse,
   BatchPublishMessageResponse,
   PublishFirmwareUpdateMessageResponse,
   UnbindProductsResponse,
@@ -447,6 +459,7 @@ import {
   GetTopicRuleListResponse,
   SearchPositionSpaceResponse,
   GenerateCloudStorageAIServiceTaskFileURLResponse,
+  ProjectEntry,
   ChangeP2PRouteRequest,
   CreateTWeSeePostPaidServiceResponse,
   ResetTWeCallDeviceRequest,
@@ -468,7 +481,7 @@ import {
   CamTag,
   WXDeviceInfo,
   OperateTWeSeeDirectUploadObjectResponse,
-  ListOtaModulesResponse,
+  CertInfo,
   CloudStorageEventWithAITasks,
   CreateDeviceChannelRequest,
   DescribeDevicePackagesResponse,
@@ -485,6 +498,7 @@ import {
   ADPConfig,
   DeleteTWeTalkAgentResponse,
   LoRaGatewayItem,
+  DescribePrivateCAsResponse,
   TalkSTTTRTC,
   UpdateOtaModuleRequest,
   ModifyLoRaFrequencyRequest,
@@ -528,6 +542,7 @@ import {
   BindUserDeviceRequest,
   DeleteProjectRequest,
   CloudStoragePackageInfo,
+  DescribeProductCAResponse,
   DevicesItem,
   SeeCreateSubscriptionResult,
   TalkProductConfigV2Info,
@@ -553,6 +568,7 @@ import {
   DescribeCloudStoragePackageConsumeStatsResponse,
   SeeDetectContinuousResult,
   ListEventHistoryRequest,
+  UpdateProductPrivateCAResponse,
   WXIoTDeviceInfo,
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
@@ -599,6 +615,7 @@ import {
   GetCOSURLRequest,
   CreateTWeSeeSubscriptionRequest,
   CreateFenceBindRequest,
+  UpdateProductPrivateCARequest,
   TalkWebhookEndpoint,
   AuthMiniProgramAppInfo,
   FamilySubDevice,
@@ -614,7 +631,7 @@ import {
   GetLoRaGatewayListResponse,
   GetTWeTalkActiveStatusRequest,
   DeviceData,
-  DirectBindDeviceInFamilyResponse,
+  DescribePrivateCABindedProductsResponse,
   TopicRule,
   DescribeCloudStoragePackageConsumeStatsRequest,
   DeleteFenceBindResponse,
@@ -657,6 +674,7 @@ import {
   PositionFenceInfo,
   VisionObjectDetectConfig,
   BatchUpdateFirmwareRequest,
+  ListOtaModulesResponse,
   SeeCompHighlightConfig,
   GetTopicRuleListRequest,
   ListOtaModulesRequest,
@@ -671,6 +689,7 @@ import {
   GenerateSignedVideoURLResponse,
   CreateTWeSeePostPaidServiceRequest,
   DeleteTWeSeeFaceRequest,
+  DescribePrivateCAResponse,
   SeeTaskInfo,
   DescribeCloudStorageThumbnailResponse,
   DescribeProductDynamicRegisterResponse,
@@ -678,6 +697,7 @@ import {
   UpdateDevicesEnableStateRequest,
   ResetCloudStorageAIServiceRequest,
   PurchaseImagePackageResponse,
+  DeletePrivateCARequest,
   UpdateOtaTaskStatusResponse,
   ModifyModelDefinitionResponse,
   ModifyTWeTalkProductConfigV2Request,
@@ -829,6 +849,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询微信设备授权票据
+   */
+  async GetWechatDeviceTicket(
+    req: GetWechatDeviceTicketRequest,
+    cb?: (error: string, rep: GetWechatDeviceTicketResponse) => void
+  ): Promise<GetWechatDeviceTicketResponse> {
+    return this.request("GetWechatDeviceTicket", req, cb)
+  }
+
+  /**
      * Owner 取消对指定用户的设备分享：
 1. 校验产品 ACL / 子产品禁止 / 设备真实存在；
 2. 只读定位 Owner（必须已存在），并校验 Owner 持有该设备；
@@ -883,13 +913,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供查询用户所创建的项目列表查询功能。
+   * 删除产品绑定的CA证书
    */
-  async GetProjectList(
-    req: GetProjectListRequest,
-    cb?: (error: string, rep: GetProjectListResponse) => void
-  ): Promise<GetProjectListResponse> {
-    return this.request("GetProjectList", req, cb)
+  async DeleteProductPrivateCA(
+    req: DeleteProductPrivateCARequest,
+    cb?: (error: string, rep: DeleteProductPrivateCAResponse) => void
+  ): Promise<DeleteProductPrivateCAResponse> {
+    return this.request("DeleteProductPrivateCA", req, cb)
   }
 
   /**
@@ -1233,6 +1263,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取围栏告警事件列表。
+   */
+  async DescribeFenceEventList(
+    req: DescribeFenceEventListRequest,
+    cb?: (error: string, rep: DescribeFenceEventListResponse) => void
+  ): Promise<DescribeFenceEventListResponse> {
+    return this.request("DescribeFenceEventList", req, cb)
+  }
+
+  /**
    * 开通云存服务
    */
   async CreateIotVideoCloudStorage(
@@ -1569,6 +1609,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询产品绑定的CA证书
+   */
+  async DescribeProductCA(
+    req: DescribeProductCARequest,
+    cb?: (error: string, rep: DescribeProductCAResponse) => void
+  ): Promise<DescribeProductCAResponse> {
+    return this.request("DescribeProductCA", req, cb)
+  }
+
+  /**
    * 搜索固件升级任务列表
    */
   async DescribeFirmwareTasks(
@@ -1586,6 +1636,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTWeTalkAgentListResponse) => void
   ): Promise<DescribeTWeTalkAgentListResponse> {
     return this.request("DescribeTWeTalkAgentList", req, cb)
+  }
+
+  /**
+   * 查询私有CA绑定的产品列表
+   */
+  async DescribePrivateCABindedProducts(
+    req: DescribePrivateCABindedProductsRequest,
+    cb?: (error: string, rep: DescribePrivateCABindedProductsResponse) => void
+  ): Promise<DescribePrivateCABindedProductsResponse> {
+    return this.request("DescribePrivateCABindedProducts", req, cb)
   }
 
   /**
@@ -1681,6 +1741,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建私有CA证书
+   */
+  async CreatePrivateCA(
+    req: CreatePrivateCARequest,
+    cb?: (error: string, rep: CreatePrivateCAResponse) => void
+  ): Promise<CreatePrivateCAResponse> {
+    return this.request("CreatePrivateCA", req, cb)
+  }
+
+  /**
    * 修改 TWeSee 预付费订阅
    */
   async ModifyTWeSeeSubscription(
@@ -1711,13 +1781,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取围栏告警事件列表。
+   * 删除私有CA证书
    */
-  async DescribeFenceEventList(
-    req: DescribeFenceEventListRequest,
-    cb?: (error: string, rep: DescribeFenceEventListResponse) => void
-  ): Promise<DescribeFenceEventListResponse> {
-    return this.request("DescribeFenceEventList", req, cb)
+  async DeletePrivateCA(
+    req: DeletePrivateCARequest,
+    cb?: (error: string, rep: DeletePrivateCAResponse) => void
+  ): Promise<DeletePrivateCAResponse> {
+    return this.request("DeletePrivateCA", req, cb)
   }
 
   /**
@@ -2207,13 +2277,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询微信设备授权票据
+   * 提供查询用户所创建的项目列表查询功能。
    */
-  async GetWechatDeviceTicket(
-    req: GetWechatDeviceTicketRequest,
-    cb?: (error: string, rep: GetWechatDeviceTicketResponse) => void
-  ): Promise<GetWechatDeviceTicketResponse> {
-    return this.request("GetWechatDeviceTicket", req, cb)
+  async GetProjectList(
+    req: GetProjectListRequest,
+    cb?: (error: string, rep: GetProjectListResponse) => void
+  ): Promise<GetProjectListResponse> {
+    return this.request("GetProjectList", req, cb)
   }
 
   /**
@@ -2437,6 +2507,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新私有CA证书
+   */
+  async UpdatePrivateCA(
+    req: UpdatePrivateCARequest,
+    cb?: (error: string, rep: UpdatePrivateCAResponse) => void
+  ): Promise<UpdatePrivateCAResponse> {
+    return this.request("UpdatePrivateCA", req, cb)
+  }
+
+  /**
    * 开通 TWeSee 后付费服务
    */
   async CreateTWeSeeService(
@@ -2627,13 +2707,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 恢复设备
+   * 查询项目详情
    */
-  async ResumeWeCallDevice(
-    req: ResumeWeCallDeviceRequest,
-    cb?: (error: string, rep: ResumeWeCallDeviceResponse) => void
-  ): Promise<ResumeWeCallDeviceResponse> {
-    return this.request("ResumeWeCallDevice", req, cb)
+  async DescribeProject(
+    req: DescribeProjectRequest,
+    cb?: (error: string, rep: DescribeProjectResponse) => void
+  ): Promise<DescribeProjectResponse> {
+    return this.request("DescribeProject", req, cb)
   }
 
   /**
@@ -2677,6 +2757,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 恢复设备
+   */
+  async ResumeWeCallDevice(
+    req: ResumeWeCallDeviceRequest,
+    cb?: (error: string, rep: ResumeWeCallDeviceResponse) => void
+  ): Promise<ResumeWeCallDeviceResponse> {
+    return this.request("ResumeWeCallDevice", req, cb)
+  }
+
+  /**
    * 拉取设备统计汇总数据
    */
   async GetDeviceSumStatistics(
@@ -2697,13 +2787,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置指定设备的云存 AI 服务
+   * 查询私有CA证书列表
    */
-  async ResetCloudStorageAIService(
-    req: ResetCloudStorageAIServiceRequest,
-    cb?: (error: string, rep: ResetCloudStorageAIServiceResponse) => void
-  ): Promise<ResetCloudStorageAIServiceResponse> {
-    return this.request("ResetCloudStorageAIService", req, cb)
+  async DescribePrivateCAs(
+    req?: DescribePrivateCAsRequest,
+    cb?: (error: string, rep: DescribePrivateCAsResponse) => void
+  ): Promise<DescribePrivateCAsResponse> {
+    return this.request("DescribePrivateCAs", req, cb)
   }
 
   /**
@@ -2836,6 +2926,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GenerateCloudStorageAIServiceTaskFileURLResponse) => void
   ): Promise<GenerateCloudStorageAIServiceTaskFileURLResponse> {
     return this.request("GenerateCloudStorageAIServiceTaskFileURL", req, cb)
+  }
+
+  /**
+   * 更新产品的私有CA
+   */
+  async UpdateProductPrivateCA(
+    req: UpdateProductPrivateCARequest,
+    cb?: (error: string, rep: UpdateProductPrivateCAResponse) => void
+  ): Promise<UpdateProductPrivateCAResponse> {
+    return this.request("UpdateProductPrivateCA", req, cb)
   }
 
   /**
@@ -3010,6 +3110,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageAIServiceCallbackResponse) => void
   ): Promise<DescribeCloudStorageAIServiceCallbackResponse> {
     return this.request("DescribeCloudStorageAIServiceCallback", req, cb)
+  }
+
+  /**
+   * 重置指定设备的云存 AI 服务
+   */
+  async ResetCloudStorageAIService(
+    req: ResetCloudStorageAIServiceRequest,
+    cb?: (error: string, rep: ResetCloudStorageAIServiceResponse) => void
+  ): Promise<ResetCloudStorageAIServiceResponse> {
+    return this.request("ResetCloudStorageAIService", req, cb)
   }
 
   /**
@@ -3233,13 +3343,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询项目详情
+   * 查询私有化CA信息
    */
-  async DescribeProject(
-    req: DescribeProjectRequest,
-    cb?: (error: string, rep: DescribeProjectResponse) => void
-  ): Promise<DescribeProjectResponse> {
-    return this.request("DescribeProject", req, cb)
+  async DescribePrivateCA(
+    req: DescribePrivateCARequest,
+    cb?: (error: string, rep: DescribePrivateCAResponse) => void
+  ): Promise<DescribePrivateCAResponse> {
+    return this.request("DescribePrivateCA", req, cb)
   }
 
   /**

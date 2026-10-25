@@ -435,6 +435,20 @@ export interface DescribeClassicalLBByInstanceIdResponse {
 }
 
 /**
+ * 重定向配置
+ */
+export interface RedirectConfig {
+  /**
+   * <p>重定向状态码</p><p>枚举值：</p><ul><li>301： 永久重定向</li><li>302： 临时重定向</li><li>303： 查看其他位置</li><li>307： 临时重定向（保留请求方法）</li><li>308： 永久重定向（保留请求方法）</li></ul>
+   */
+  StatusCode?: number
+  /**
+   * <p>目标地址，填写为空表示关闭重定向。不支持路径填写。</p>
+   */
+  TargetUrl?: string
+}
+
+/**
  * DeleteModel返回参数结构体
  */
 export interface DeleteModelResponse {
@@ -523,7 +537,7 @@ export interface DescribeModelNamesRequest {
    */
   VpcId?: string
   /**
-   * <p>过滤器，Name取值：</p><ul><li>ModelName：按照模型名称过滤。</li><li>ServiceProviderId：按照BYOK ID过滤。</li><li>InputModalitiesUnion：按照模态过滤。</li></ul>
+   * <p>过滤器，Name取值：</p><ul><li>ModelName：按照模型名称过滤。</li><li>ServiceProviderId：按照BYOK ID过滤。</li><li>InputModalitiesUnion：按照输入模态过滤。</li><li>Capability：按照输出模态过滤。</li></ul>
    */
   Filters?: Array<Filter>
 }
@@ -1621,6 +1635,18 @@ export interface ModifyModelRouterAttributesRequest {
    * <p>Images 生图配置</p>
    */
   ImageConfig?: ImageConfig
+  /**
+   * <p>实例重定向配置</p>
+   */
+  RedirectConfig?: RedirectConfig
+  /**
+   * <p>网络协议</p>
+   */
+  Schema?: string
+  /**
+   * <p>监听端口</p><p>取值范围：[1, 65535]</p>
+   */
+  Port?: number
 }
 
 /**
@@ -2071,6 +2097,10 @@ export interface ModelRouterDetail {
    * <p>Images 生图配置</p>
    */
   ImageConfig?: ImageConfig
+  /**
+   * <p>实例重定向配置</p>
+   */
+  RedirectConfig?: RedirectConfig
 }
 
 /**
@@ -2828,7 +2858,7 @@ export interface MultiModalityAttachments {
    */
   Data: string
   /**
-   * <p>附件类型</p><p>枚举值：</p><ul><li>image： 图像</li><li>pdf： pdf（文件）</li></ul>
+   * <p>附件类型</p><p>枚举值：</p><ul><li>image： 图像</li><li>pdf： pdf（文件）</li><li>video： 视频</li></ul>
    */
   Type: string
 }
@@ -3324,7 +3354,7 @@ export interface StickyConfig {
    */
   Enabled?: boolean
   /**
-   * <p>会话粘性的超时时间（秒），取值范围 1–86400。创建时默认为 1800；修改时若不设置该字段，则保留原有值。</p><p>取值范围：[1, 86400]</p><p>单位：秒</p><p>默认值：1800</p>
+   * <p>会话粘性的超时时间（秒），取值范围 180–86400。创建时默认为 1800；修改时若不设置该字段，则保留原有值。</p><p>取值范围：[180, 21600]</p><p>单位：秒</p><p>默认值：1800</p>
    */
   TimeoutSeconds?: number
 }
@@ -5013,7 +5043,7 @@ export interface DeregisterTargetsRequest {
  */
 export interface ModelAvailability {
   /**
-   * <p>该模型所有健康BYOK实例下支持的输入多模态能力的并集。模型不健康时返回空列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul>
+   * <p>该模型所有健康BYOK实例下支持的输入多模态能力的并集。模型不健康时返回空列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>video： 支持视频输入</li></ul>
    */
   InputModalities?: Array<string>
   /**
@@ -6186,6 +6216,10 @@ export interface ModelRouterSet {
    * <p>计费信息</p>
    */
   BillingConfig?: ModelRouterBillingConfigOutput
+  /**
+   * <p>实例重定向配置</p>
+   */
+  RedirectConfig?: RedirectConfig
 }
 
 /**
@@ -6737,7 +6771,7 @@ export interface ServiceProvider {
    */
   AccessType?: string
   /**
-   * <p>单个byok实例下该模型可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>image： 支持图像输入</li></ul>
+   * <p>单个byok实例下该模型可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>image： 支持图像输入</li><li>video： 支持视频输入</li></ul>
    */
   InputModalities?: Array<string>
   /**
@@ -7582,7 +7616,7 @@ export interface TestModelInputModalitiesResponse {
    */
   Model?: string
   /**
-   * <p>该模型确认支持的输入模态列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul><p>收到上游大模型对于输入模态的响应即为“确认支持”</p>
+   * <p>该模型确认支持的输入模态列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>video： 支持视频输入</li></ul><p>收到上游大模型对于输入模态的响应即为“确认支持”</p>
    */
   SupportedModalities?: Array<string>
   /**
@@ -7820,6 +7854,10 @@ export interface IntentRouterDecisionModelConfig {
    * <p>是否开启使用决策模型</p>
    */
   Enabled?: boolean
+  /**
+   * <p>选定的分类决策模型名，不传递表示随机选用。</p>
+   */
+  ModelName?: string
 }
 
 /**
@@ -8018,7 +8056,7 @@ export interface ServiceProviderItem {
    */
   ModelProvider?: string
   /**
-   * <p>该byok实例下该模型可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>image： 支持图像输入</li></ul>
+   * <p>该byok实例下该模型可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>image： 支持图像输入</li><li>video： 支持视频输入</li></ul>
    */
   InputModalities?: Array<string>
 }
@@ -9109,7 +9147,7 @@ export interface ModelNameAggregatedItem {
    */
   ServiceProviders?: Array<ServiceProviderItem>
   /**
-   * <p>该模型最大可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul>
+   * <p>该模型最大可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>video： 支持视频输入</li></ul>
    */
   InputModalitiesUnion?: Array<string>
 }
@@ -10328,7 +10366,7 @@ export interface ModelItem {
    */
   ModelId: string
   /**
-   * <p>该模型当前支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul><p>默认值：text</p>
+   * <p>该模型当前支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>video： 支持视频输入</li></ul><p>默认值：text</p>
    */
   InputModalities?: Array<string>
   /**
@@ -10954,7 +10992,7 @@ export interface RateLimitConfigForKey {
  */
 export interface ModelAssociation {
   /**
-   * <p>该模型最大可支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul>
+   * <p>该模型最大可支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>video： 支持视频输入</li></ul>
    */
   InputModalitiesUnion?: Array<string>
   /**

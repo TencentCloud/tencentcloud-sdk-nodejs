@@ -24,8 +24,9 @@ import {
   DescribeUserAutonomyProfileRequest,
   DescribeMetricTopProxiesResponse,
   DescribeDBAuditLogTopSqlsRequest,
-  DiagReportUrlItem,
+  DescribeBlockingTrendRequest,
   DescribeDBAutonomyActionsRequest,
+  DescribeRedisProcessListResponse,
   SecLogExportTaskInfo,
   CancelDBAutonomyActionResponse,
   OpenAuditServiceResponse,
@@ -44,6 +45,7 @@ import {
   CreateRedisBigKeyAnalysisTaskResponse,
   UpdateDatabaseAutonomyStatusRequest,
   CreateSecurityAuditLogExportTaskRequest,
+  BlockingChainTree,
   DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagEventResponse,
   DescribeDBDiagHistoryRequest,
@@ -52,6 +54,7 @@ import {
   DescribeRedisBigKeyAnalysisTasksResponse,
   PostgresSpaceObjectItem,
   DescribeDBDiagReportTasksResponse,
+  DiagReportUrlItem,
   AddUserContactResponse,
   IndexDDLInfo,
   AuditInstanceInfo,
@@ -64,17 +67,18 @@ import {
   ModifySqlFiltersRequest,
   AuditLogFilter,
   SlowLogTopSqlItem,
-  CreateKillTaskResponse,
+  CreateAuditLogFileResponse,
   AuditProxyLogItem,
   DescribeAuditInstanceListResponse,
   DescribeRedisSlowLogTopSqlsResponse,
   DescribeDBInstancesResponse,
+  MongodbSpaceObjectItem,
   DiagHistoryEventItem,
   DeadLockLogItem,
   CreateUserAutonomyProfileResponse,
   SlowLogInfoItem,
-  DescribeProxySessionKillTasksRequest,
-  ModifyAlarmPolicyResponse,
+  DescribeBlockingLockTreeResponse,
+  DescribeBlockingTrendResponse,
   ModifyUserAutonomyProfileResponse,
   DescribeIndexRecommendInfoResponse,
   CreateRedisBigKeyAnalysisTaskRequest,
@@ -85,16 +89,19 @@ import {
   StatisticDataInfo,
   DescribeRedisSlowLogTopSqlsRequest,
   WaiterItem,
+  BlockingTrendPoint,
   AutonomyEventVo,
   DescribeDBAuditLogsRequest,
   DescribeTopSpaceTablesResponse,
   TaskInfo,
   DescribeMongoDBProcessListRequest,
   DescribeDatabaseAutonomyStatusRequest,
+  DescribeTableSpaceDataV2Request,
   KillMySqlThreadsResponse,
   CreateSchedulerMailProfileRequest,
   ContactItem,
   DescribeDBAutonomyEventsResponse,
+  VerifyUserAccountResponse,
   DeleteAuditLogFileResponse,
   DescribeDBSpaceStatusRequest,
   AlarmsRules,
@@ -120,13 +127,15 @@ import {
   CancelKillTaskRequest,
   InstanceID,
   CreateIgnoreDiagRecordResponse,
+  SqlServerSpaceObjectItem,
   OwnerItem,
-  CreateAuditLogFileResponse,
+  CreateKillTaskResponse,
   AuditInstance,
   IndexesToBuild,
   MongoCollectionDetail,
   DescribeDatabaseAutonomyStatusResponse,
   DeleteSqlFiltersResponse,
+  ModifyAlarmPolicyResponse,
   DescribeHealthScoreTimeSeriesRequest,
   CreateDBDiagReportTaskResponse,
   CreateDBDiagReportUrlsRequest,
@@ -156,7 +165,7 @@ import {
   DescribeIndexRecommendInfoRequest,
   AuditInstanceFilter,
   DescribeMailProfileRequest,
-  ReceiveUin,
+  ModifyAuditServiceResponse,
   ModifyAuditServiceRequest,
   DeleteSecurityAuditLogExportTasksResponse,
   TableStatistics,
@@ -234,7 +243,7 @@ import {
   HealthScoreTimeSeriesData,
   Process,
   StatDimension,
-  ModifyAuditServiceResponse,
+  DescribeDatabaseObjectV2Request,
   DescribeDBAutonomyEventsRequest,
   DescribeHealthScoreRequest,
   CreateIgnoreDiagRecordRequest,
@@ -260,7 +269,7 @@ import {
   DeleteDBDiagReportTasksRequest,
   AuditDBLogItem,
   DescribeAlarmTemplateRequest,
-  VerifyUserAccountResponse,
+  DescribeTableSpaceDataV2Response,
   DescribeSlowLogTimeSeriesStatsResponse,
   DescribeProxyProcessStatisticsRequest,
   DescribeRedisCommandCostStatisticsRequest,
@@ -271,7 +280,7 @@ import {
   DescribeRedisCommandOverviewRequest,
   DescribeAllUserGroupResponse,
   UpdateMonitorSwitchResponse,
-  DescribeRedisProcessListResponse,
+  DescribeProxySessionKillTasksRequest,
   DeadlockSession,
   CreateAuditLogFileRequest,
   DeleteAuditLogFileRequest,
@@ -286,6 +295,7 @@ import {
   DescribeTopSpaceTableTimeSeriesRequest,
   DescribeUserSqlAdviceRequest,
   DescribeDBAutonomyActionResponse,
+  DescribeBlockingLockTreeRequest,
   DescribeDBDiagReportTasksRequest,
   MonitorMetricSeriesData,
   DescribeDBPerfTimeSeriesResponse,
@@ -298,8 +308,9 @@ import {
   CancelRedisBigKeyAnalysisTasksResponse,
   DescribeSecurityAuditLogExportTasksResponse,
   DescribeDBDiagReportContentResponse,
+  ReceiveUin,
   DescribeSlowLogTopSqlsResponse,
-  DescribeDatabaseObjectV2Request,
+  BlockingChainNode,
   DescribeDBPerfTimeSeriesRequest,
   DescribeAuditLogFilesRequest,
   DeleteSqlFiltersRequest,
@@ -473,6 +484,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 自治中心-终止自治任务（单次）
+   */
+  async CancelDBAutonomyAction(
+    req: CancelDBAutonomyActionRequest,
+    cb?: (error: string, rep: CancelDBAutonomyActionResponse) => void
+  ): Promise<CancelDBAutonomyActionResponse> {
+    return this.request("CancelDBAutonomyAction", req, cb)
+  }
+
+  /**
    * 修改告警策略
    */
   async ModifyAlarmPolicy(
@@ -503,13 +524,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 自治中心-终止自治任务（单次）
+   * 查询指定实例在时间窗口内按时间粒度聚合的阻塞计数时序，用于前端绘制阻塞趋势图。返回每个粒度 bucket 的 (StartTime, EndTime, LockCount, MonitorLoopCount)，实际聚合区间为前闭后开 [StartTime, EndTime)。为稠密时序：时间窗口内每个粒度 bucket 都返回一个点，无数据的 bucket 补零（LockCount=0, MonitorLoopCount=0），前端可直接绘制连续趋势图。粒度自动按时间跨度 deltaMs = EndTime - StartTime 决定（右开上界判定）：deltaMs≤5min→SECONDS(1s)，deltaMs≤1h→MINUTES(1min)，deltaMs≤3h→FIVE_MINUTES(5min)，deltaMs≤6h→TEN_MINUTES(10min)，deltaMs≤12h→FIFTEEN_MINUTES(15min)，deltaMs≤24h→THIRTY_MINUTES(30min)，deltaMs>24h→HOUR(1h)。底层走 Druid timeseries 原生聚合，服务端完成聚合，适合高频前端刷新。
    */
-  async CancelDBAutonomyAction(
-    req: CancelDBAutonomyActionRequest,
-    cb?: (error: string, rep: CancelDBAutonomyActionResponse) => void
-  ): Promise<CancelDBAutonomyActionResponse> {
-    return this.request("CancelDBAutonomyAction", req, cb)
+  async DescribeBlockingTrend(
+    req: DescribeBlockingTrendRequest,
+    cb?: (error: string, rep: DescribeBlockingTrendResponse) => void
+  ): Promise<DescribeBlockingTrendResponse> {
+    return this.request("DescribeBlockingTrend", req, cb)
   }
 
   /**
@@ -610,6 +631,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRedisBigKeyAnalysisTaskResponse) => void
   ): Promise<CreateRedisBigKeyAnalysisTaskResponse> {
     return this.request("CreateRedisBigKeyAnalysisTask", req, cb)
+  }
+
+  /**
+   * 根据指定快照 token 查询该快照时刻的完整阻塞树（多层嵌套，根节点为头 blocker，支持多叉/多层展开）。支持两种定位方式，任选其一：(1) 优先 MonitorLoop（精确，lock monitor 一次扫描快照的唯一标识），可从 DescribeBlockingTimeRange / DescribeBlockingLogs / DescribeBlockingTrend 返回获取；(2) 兑底 BlockingTime（近似，任意阻塞时间点），后端会在该时间点±1分钟范围内找到最接近的 MonitorLoop 再下钻其阻塞树。当 MonitorLoop 不为空时优先采用；为空时回退使用 BlockingTime；两者都为空则返回参数错误。一个 MonitorLoop 可包含多棵独立阻塞树（若该快照内存在多组互不相干的阻塞链路）。对标 dbaas-pfs 的 DescribeLockTree。
+   */
+  async DescribeBlockingLockTree(
+    req: DescribeBlockingLockTreeRequest,
+    cb?: (error: string, rep: DescribeBlockingLockTreeResponse) => void
+  ): Promise<DescribeBlockingLockTreeResponse> {
+    return this.request("DescribeBlockingLockTree", req, cb)
   }
 
   /**
@@ -760,6 +791,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAgentSwitchResponse) => void
   ): Promise<UpdateAgentSwitchResponse> {
     return this.request("UpdateAgentSwitch", req, cb)
+  }
+
+  /**
+   * 表空间数据查询（融合接口，多产品统一入口）。按入参 TableSchema + TableName（PG 系额外需 TableCatalog）定位单张表/集合，返回该表的空间使用明细。支持产品：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）、sqlserver（SQL Server）、dcdb（TDSQL MySQL 版）、tdsql（TDSQL）、mariadb（云数据库 MariaDB）。返回值按产品隔离：MySQL 系列返回 MysqlTableSpaceData；PostgreSQL 返回 PostgresTableSpaceData；MongoDB 返回 MongodbTableSpaceData（含集合明细列表 SpaceSchemas 和外层 Timestamp）；SQL Server 返回 SqlServerTableSpaceData。注意：只读实例（CDB RO / RO 组 / CynosDB RO / TDSQL-C 集群 RO）不支持空间分析，调用将直接报错。
+   */
+  async DescribeTableSpaceDataV2(
+    req: DescribeTableSpaceDataV2Request,
+    cb?: (error: string, rep: DescribeTableSpaceDataV2Response) => void
+  ): Promise<DescribeTableSpaceDataV2Response> {
+    return this.request("DescribeTableSpaceDataV2", req, cb)
   }
 
   /**

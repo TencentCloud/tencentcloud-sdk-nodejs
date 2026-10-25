@@ -8379,31 +8379,33 @@ export interface DeleteCLSTopicResponse {
  */
 export interface SceneAigcVideoOutputConfig {
   /**
-   * 存储模式。取值有： <li>Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li>
-默认值：Temporary
+   * <p>存储模式。取值有： <li>Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li><br>默认值：Temporary</p><p>当使用角色场景时，不支持指定为 Permanent。</p>
    */
   StorageMode?: string
   /**
-   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   * <p>输出文件名，最长 64 个字符。缺省由系统指定生成文件名。</p>
    */
   MediaName?: string
   /**
-   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
-<li>默认值：0，表示其他分类。</li>
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。</p><li>默认值：0，表示其他分类。</li>
    */
   ClassId?: number
   /**
-   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式说明</a>。</p>
    */
   ExpireTime?: string
   /**
-   * 指定所生成视频的宽高比。输入格式为 W:H。仅生商品图场景有效。可选：16:9、9:16。
+   * <p>指定所生成视频的宽高比。输入格式为 W:H。</p><ul><li>当生商品图场景时，可选：16:9、9:16。</li><li>当角色场景时，可选：21:9、16:9、9:16、4:3、3:4、1:1。</li></ul>
    */
   AspectRatio?: string
   /**
-   * 生成视频时长。可选值4、6、8秒
+   * <p>生成视频时长。</p><ul><li>当使用生商品图场景时，可选值4、6、8秒。</li><li>当使用角色场景时，可选值为4到15秒。</li></ul>
    */
   Duration?: number
+  /**
+   * <p>分辨率。仅当角色场景时有效。取值如下：</p><ul><li>当 Model 是 character_scene_standard 时，支持 480p、720p、1080p、4K；</li><li>当 Model 是 character_scene_mini 时，支持 480p、720p；</li><li>当 Model 是 character_scene_fast 时，支持 720p。</li></ul>
+   */
+  Resolution?: string
 }
 
 /**
@@ -20665,6 +20667,25 @@ export interface ExtractTraceWatermarkTaskInput {
 }
 
 /**
+ * DescribeAigcUsageData返回参数结构体
+ */
+export interface DescribeAigcUsageDataResponse {
+  /**
+   * <p>AIGC统计数据。</p>
+   */
+  AigcUsageDataSet?: Array<AigcUsageDataItem>
+  /**
+   * <p>生文详细日志</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AigcTextDetails?: AigcTextDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Asr 文字涉及令人不适宜的信息
  */
 export interface AiReviewPoliticalAsrTaskOutput {
@@ -28169,22 +28190,17 @@ export interface QualityInspectItem {
 }
 
 /**
- * DescribeAigcUsageData返回参数结构体
+ * 角色场景配置
  */
-export interface DescribeAigcUsageDataResponse {
+export interface CharacterSceneConfig {
   /**
-   * <p>AIGC统计数据。</p>
+   * <p>模型。</p><p>枚举值：</p><ul><li>character_scene_standard： 标准。</li><li>character_scene_mini： 轻量。</li><li>character_scene_fast： 快速。</li></ul>
    */
-  AigcUsageDataSet?: Array<AigcUsageDataItem>
+  Model?: string
   /**
-   * <p>生文详细日志</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>提示词模式。</p><p>枚举值：</p><ul><li>Standard： 标准模式，自行填写提示词。</li><li>Dynamic： 动态模式，由大模型根据参考素材产生提示词。</li></ul><p>默认值：Standard</p>
    */
-  AigcTextDetails?: AigcTextDetail
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  PromptMode?: string
 }
 
 /**
@@ -29190,14 +29206,17 @@ export interface DescribeFileAttributesRequest {
  */
 export interface AigcVideoSceneInfo {
   /**
-   * AI生视频场景类型，可选值：
-- product_showcase： 产品360度展示。
+   * <p>AIGC 生视频场景类型。</p><p>枚举值：</p><ul><li>product_showcase：  产品360度展示。</li><li>character_scene： 角色场景。</li></ul>
    */
   Type: string
   /**
-   * 产品展示参数
+   * <p>产品展示参数配置。</p>
    */
   ProductShowcaseConfig?: ProductShowcaseConfig
+  /**
+   * <p>角色场景参数配置。</p>
+   */
+  CharacterSceneConfig?: CharacterSceneConfig
 }
 
 /**

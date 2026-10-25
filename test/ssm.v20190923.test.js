@@ -18,6 +18,16 @@ const client = new tencentcloud.ssm.v20190923.Client({
 })
 describe("ssm.v20190923.test.js", function () {
 
+it("ssm.v20190923.CreateService", async function () {
+    try {
+       const data = await client.CreateService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssm.v20190923.DescribeRotationHistory", async function () {
     try {
        const data = await client.DescribeRotationHistory({})
@@ -28,9 +38,9 @@ it("ssm.v20190923.DescribeRotationHistory", async function () {
     }
 })
 
-it("ssm.v20190923.RotateProductSecret", async function () {
+it("ssm.v20190923.DeleteSecret", async function () {
     try {
-       const data = await client.RotateProductSecret({})
+       const data = await client.DeleteSecret({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +48,9 @@ it("ssm.v20190923.RotateProductSecret", async function () {
     }
 })
 
-it("ssm.v20190923.DeleteSecret", async function () {
+it("ssm.v20190923.RotateProductSecret", async function () {
     try {
-       const data = await client.DeleteSecret({})
+       const data = await client.RotateProductSecret({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

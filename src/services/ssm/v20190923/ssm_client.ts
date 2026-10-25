@@ -34,13 +34,13 @@ import {
   DeleteSecretVersionRequest,
   SecretMetadata,
   ListSecretVersionIdsRequest,
-  DescribeRotationDetailRequest,
+  DisableSecretResponse,
   CreateSSHKeyPairSecretResponse,
   UpdateRotationStatusResponse,
   CreateSecretResponse,
   GetRegionsRequest,
   UpdateSecretResponse,
-  DisableSecretResponse,
+  DescribeRotationDetailRequest,
   Tag,
   ListSecretsRequest,
   UpdateDescriptionRequest,
@@ -51,7 +51,9 @@ import {
   DescribeAsyncRequestInfoResponse,
   RestoreSecretRequest,
   RotateProductSecretResponse,
+  CreateServiceResponse,
   VersionInfo,
+  CreateServiceRequest,
   TagFilter,
   PutSecretValueRequest,
   PutSecretValueResponse,
@@ -84,6 +86,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开通 ssm 服务接口
+   */
+  async CreateService(
+    req: CreateServiceRequest,
+    cb?: (error: string, rep: CreateServiceResponse) => void
+  ): Promise<CreateServiceResponse> {
+    return this.request("CreateService", req, cb)
+  }
+
+  /**
      * 查询凭据轮转历史版本。
 本接口仅适用于云产品凭据。
      */
@@ -95,6 +107,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除指定的凭据信息，可以通过RecoveryWindowInDays参数设置立即删除或者计划删除。对于计划删除的凭据，在删除日期到达之前状态为 PendingDelete，并可以通过RestoreSecret 进行恢复，超出指定删除日期之后会被彻底删除。您必须先通过 DisableSecret 停用凭据后才可以进行（计划）删除操作。
+   */
+  async DeleteSecret(
+    req: DeleteSecretRequest,
+    cb?: (error: string, rep: DeleteSecretResponse) => void
+  ): Promise<DeleteSecretResponse> {
+    return this.request("DeleteSecret", req, cb)
+  }
+
+  /**
      * 轮转云产品凭据或云API密钥对凭据。
 该接口仅适用于处于Enabled状态的云产品凭据或处于Enable状态的云API密钥对凭据，对于其他状态的云产品凭据或云API密钥对凭据或用户自定义凭据不适用。
      */
@@ -103,16 +125,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RotateProductSecretResponse) => void
   ): Promise<RotateProductSecretResponse> {
     return this.request("RotateProductSecret", req, cb)
-  }
-
-  /**
-   * 删除指定的凭据信息，可以通过RecoveryWindowInDays参数设置立即删除或者计划删除。对于计划删除的凭据，在删除日期到达之前状态为 PendingDelete，并可以通过RestoreSecret 进行恢复，超出指定删除日期之后会被彻底删除。您必须先通过 DisableSecret 停用凭据后才可以进行（计划）删除操作。
-   */
-  async DeleteSecret(
-    req: DeleteSecretRequest,
-    cb?: (error: string, rep: DeleteSecretResponse) => void
-  ): Promise<DeleteSecretResponse> {
-    return this.request("DeleteSecret", req, cb)
   }
 
   /**

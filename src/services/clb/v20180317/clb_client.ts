@@ -42,6 +42,7 @@ import {
   AssociatedModelRouterItem,
   DescribeTargetGroupInstanceStatusResponse,
   DescribeClassicalLBByInstanceIdResponse,
+  RedirectConfig,
   DeleteModelResponse,
   CreateBYOKNetworkResponse,
   ModifyServiceProviderModelAttributesResponse,

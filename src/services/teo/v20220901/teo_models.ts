@@ -1332,7 +1332,7 @@ export interface CreateRealtimeLogDeliveryTaskRequest {
    */
   TaskName: string
   /**
-   * <p>实时日志投递任务类型，取值有：<ul><li>cls: 推送到腾讯云 CLS；</li><li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li><li>s3：推送到 S3 兼容（兼容 SigV4 鉴权算法）的对象存储的地址，当 <code>LogType = web-attack</code> 时不支持该任务类型；</li><li>aws_s3：推送到 AWS S3 存储桶地址，使用 IAM 角色授权，免长期密钥，仅适用于 AWS 原生 S3；</li><li>log_analysis：推送到 EdgeOne 日志分析，仅当 <code>LogType = l7-access-logs</code> 或 <code>web-attack</code> 时支持。</li></ul></p>
+   * <p>实时日志投递任务类型，取值有：<ul><li>cls: 推送到腾讯云 CLS；</li><li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li><li>s3：推送到 S3 兼容（兼容 SigV4 鉴权算法）的对象存储的地址；</li><li>aws_s3：推送到 AWS S3 存储桶地址，使用 IAM 角色授权，免长期密钥，仅适用于 AWS 原生 S3；</li><li>log_analysis：推送到 EdgeOne 日志分析，仅当 <code>LogType = l7-access-logs</code> 或 <code>web-attack</code> 时支持。</li></ul></p>
    */
   TaskType: string
   /**

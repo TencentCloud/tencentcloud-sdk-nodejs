@@ -168,6 +168,16 @@ it("dbbrain.v20210527.DescribeRedisTopKeyPrefixList", async function () {
     }
 })
 
+it("dbbrain.v20210527.CancelDBAutonomyAction", async function () {
+    try {
+       const data = await client.CancelDBAutonomyAction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.ModifyAlarmPolicy", async function () {
     try {
        const data = await client.ModifyAlarmPolicy({})
@@ -198,9 +208,9 @@ it("dbbrain.v20210527.DescribeIndexRecommendAggregationSlowLogs", async function
     }
 })
 
-it("dbbrain.v20210527.CancelDBAutonomyAction", async function () {
+it("dbbrain.v20210527.DescribeBlockingTrend", async function () {
     try {
-       const data = await client.CancelDBAutonomyAction({})
+       const data = await client.DescribeBlockingTrend({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +311,16 @@ it("dbbrain.v20210527.DescribeIndexRecommendInfo", async function () {
 it("dbbrain.v20210527.CreateRedisBigKeyAnalysisTask", async function () {
     try {
        const data = await client.CreateRedisBigKeyAnalysisTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeBlockingLockTree", async function () {
+    try {
+       const data = await client.DescribeBlockingLockTree({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +471,16 @@ it("dbbrain.v20210527.DescribeRedisSlowLogTopSqls", async function () {
 it("dbbrain.v20210527.UpdateAgentSwitch", async function () {
     try {
        const data = await client.UpdateAgentSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeTableSpaceDataV2", async function () {
+    try {
+       const data = await client.DescribeTableSpaceDataV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -239,6 +239,14 @@ export interface ProcessParams {
    * <p>标注处理模式，预留字段</p>
    */
   Mode?: string
+  /**
+   * <p>标注档位</p>
+   */
+  Edition?: string
+  /**
+   * <p>通用扩展参数，json格式字符串</p>
+   */
+  ExtraParams?: string
 }
 
 /**
@@ -1060,6 +1068,10 @@ export interface Job {
    * <p>完成时间，Unix 时间戳（秒），未完成为 0</p>
    */
   FinishTime?: string
+  /**
+   * <p>任务下各状态处理项的数量分布，JSON 格式字符串</p>
+   */
+  TaskStatusCount?: string
 }
 
 /**

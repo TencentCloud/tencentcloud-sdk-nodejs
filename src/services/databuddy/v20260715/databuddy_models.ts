@@ -16,164 +16,61 @@
  */
 
 /**
- * 工作流列表项
+ * ListWorkflowRuns请求参数结构体
  */
-export interface WorkflowBrief {
+export interface ListWorkflowRunsRequest {
   /**
-   * <p>工作流名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
    */
-  WorkflowName?: string
+  WorkspaceId: string
   /**
-   * <p>工作流ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>分页页码，从 1 开始。非必填，默认 1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
+   */
+  PageSize?: number
+  /**
+   * <p>工作流ID，精确匹配。非必填，单值</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/1835/138002">ListWorkflows</a> 返回值 <code>Data</code></p>
    */
   WorkflowId?: string
   /**
-   * <p>描述</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作流名称关键字，对 WorkflowName 做模糊匹配。非必填，单值</p>
    */
-  Description?: string
+  WorkflowNameKeyword?: string
   /**
-   * <p>创建人UIN</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>运行创建时间下界，范围匹配（CreateTime &gt;= 本值），单位：毫秒时间戳。<br>非必填，单值，对应出参 WorkflowRun.CreateTime</p>
    */
-  CreateUserUin?: string
+  CreateStartTime?: string
   /**
-   * <p>工作流负责人用户名</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>运行创建时间上界，范围匹配（CreateTime &lt;= 本值），单位：毫秒时间戳。<br>非必填，单值，对应出参 WorkflowRun.CreateTime</p>
    */
-  OwnerUserName?: string
+  CreateEndTime?: string
   /**
-   * <p>工作流负责人UIN</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>运行状态，精确匹配。非必填，多选（多个值之间为 OR 关系）。运行状态。CREATE(&quot;初始化&quot;), QUEUED(&quot;等待中&quot;), PENDING(&quot;准备中&quot;), RUNNING(&quot;运行中&quot;), SKIPPED(&quot;跳过运行&quot;), SUCCESS(&quot;成功&quot;), FAILED(&quot;失败&quot;), TERMINATING(&quot;终止中&quot;), TERMINATED(&quot;终止&quot;), CANCELLED(&quot;被手动终止&quot;)等</p>
    */
-  OwnerUserUin?: string
+  RunStates?: Array<string>
   /**
-   * <p>工作流负责人展示名</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>错误码，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
    */
-  OwnerDisplayName?: string
+  ErrorCodeStrings?: Array<string>
   /**
-   * <p>创建时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>运行人UIN，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
    */
-  CreateTime?: string
+  RunUserUins?: Array<string>
   /**
-   * <p>更新时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>标签名称ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
    */
-  UpdateTime?: string
+  LabelKeyIds?: Array<string>
   /**
-   * <p>标签列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>标签值ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
    */
-  LabelList?: Array<LabelBrief>
+  LabelValueIds?: Array<string>
   /**
-   * <p>工作流调度配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>排序条件，多个之间按数组顺序表示优先级。非必填，默认按 CreateTime Desc。<br>可排序字段白名单：CreateTime、EndTime、RunCostTime</p>
    */
-  Trigger?: Array<WorkflowTriggerConfiguration>
-  /**
-   * <p>工作流运行人UIN</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserUin?: string
-  /**
-   * <p>工作流运行人用户名</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserName?: string
-  /**
-   * <p>工作流任务节点列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskList?: Array<WorkflowTaskNodeBrief>
-  /**
-   * <p>工作流运行情况列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowRunList?: Array<WorkflowRunBrief>
-  /**
-   * <p>资源组信息列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupInfoList?: Array<ResourceGroupInfo>
-  /**
-   * <p>授权权限类型<br>PERMISSION_TYPE_UNSPECIFIED：未指定权限<br>MANAGE : 管理权限：包含所有操作权限<br>RUN : 运行权限：可执行实体<br>VIEW : 查看权限：可查看实体内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Permission?: string
-  /**
-   * <p>工作流绑定的 Bundle 唯一标识，未绑定时为空</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleId?: string
-  /**
-   * <p>Bundle信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleInfo?: string
-  /**
-   * <p>Git配置ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GitConfigId?: string
-  /**
-   * <p>Git分支信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GitBranch?: string
-}
-
-/**
- * UpdateWorkspace请求参数结构体
- */
-export interface UpdateWorkspaceRequest {
-  /**
-   * <p>工作空间ID</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>工作空间名称，max_len=128</p>
-   */
-  WorkspaceName: string
-  /**
-   * <p>工作空间描述，max_len=300</p>
-   */
-  Description?: string
-}
-
-/**
- * CreateWorkspaceRole返回参数结构体
- */
-export interface CreateWorkspaceRoleResponse {
-  /**
-   * <p>创建工作空间角色返回</p>
-   */
-  Data?: CreateWorkspaceRoleResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * AddWorkspaceGroups请求参数结构体
- */
-export interface AddWorkspaceGroupsRequest {
-  /**
-   * <p>用户组ID，可通过 ListConsoleGroups 接口获取</p>
-   */
-  GroupIds: Array<string>
-  /**
-   * <p>工作空间ID</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>角色ID，可通过 ListWorkspaceRoles 接口获取</p>
-   */
-  RoleIds: Array<string>
+  OrderBys?: Array<OrderBy>
 }
 
 /**
@@ -184,66 +81,6 @@ export interface GetFolderRsp {
    * <p>文件夹信息</p>
    */
   Folder?: FileNode
-}
-
-/**
- * 任务依赖简要信息
- */
-export interface DependOnBrief {
-  /**
-   * 任务ID，可通过 ListWorkflowTasks 获取
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskId?: string
-  /**
-   * 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName?: string
-}
-
-/**
- * ListConsoleGroupUsers请求参数结构体
- */
-export interface ListConsoleGroupUsersRequest {
-  /**
-   * <p>用户组 ID，可通过 ListConsoleGroups 接口获取</p>
-   */
-  GroupId: string
-  /**
-   * <p>用户名称或 UIN 模糊匹配</p>
-   */
-  UserKeyword?: string
-  /**
-   * <p>通过 UIN 批量查询用户信息</p>
-   */
-  UserUins?: Array<string>
-  /**
-   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
-   */
-  OrderBys?: Array<OrderBy>
-  /**
-   * <p>页码，从1开始，默认1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小，默认10，最小10，最大100</p>
-   */
-  PageSize?: number
-}
-
-/**
- * DeleteFolder返回参数结构体
- */
-export interface DeleteFolderResponse {
-  /**
-   * <p>删除文件夹结果</p>
-   */
-  Data?: DeleteFolderRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -281,567 +118,90 @@ export interface ListWorkspaceGroupUsersRequest {
 }
 
 /**
- * 文件夹定位器
+ * 工作流完整配置
  */
-export interface FolderLocator {
+export interface Workflow {
   /**
-   * <p>节点id</p>
-   */
-  FolderId?: string
-  /**
-   * <p>节点path</p>
-   */
-  PathName?: string
-}
-
-/**
- * ListWorkspaceGroups返回参数结构体
- */
-export interface ListWorkspaceGroupsResponse {
-  /**
-   * <p>工作空间用户组列表</p>
-   */
-  Data?: ListWorkspaceGroupsRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ListConsoleGroups请求参数结构体
- */
-export interface ListConsoleGroupsRequest {
-  /**
-   * <p>页码，从1开始，默认1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小，默认10，最小10，最大100</p>
-   */
-  PageSize?: number
-  /**
-   * <p>通过用户组ID批量查询；用户组ID可通过 ListConsoleGroups 接口获取</p>
-   */
-  GroupIds?: Array<string>
-  /**
-   * <p>用户组名称模糊匹配</p>
-   */
-  GroupKeyword?: string
-  /**
-   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
-   */
-  OrderBys?: Array<OrderBy>
-}
-
-/**
- * 内嵌工作流任务运行列表选项（仅限 FOR_EACH 任务使用）
- */
-export interface InnerWorkflowTaskRunListOption {
-  /**
-   * <p>分页页码，从 1 开始。非必填，默认 1</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageSize?: number
-  /**
-   * <p>迭代运行状态，精确匹配。非必填，多选（多个值之间为 OR 关系）。</p><p>可填 SUCCESS / FAILED 等，具体参考本接口出参 InnerWorkflowTaskRunIteration.RunState 字段返回值。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunStates?: Array<string>
-}
-
-/**
- * RemoveWorkspaceGroups返回参数结构体
- */
-export interface RemoveWorkspaceGroupsResponse {
-  /**
-   * <p>移除工作空间用户组是否成功</p>
-   */
-  Data?: PlatformStatusRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 实体权限信息，用于在get/list接口中返回当前用户对实体的权限列表
- */
-export interface PermissionDetail {
-  /**
-   * 当前用户对该实体拥有的权限列表
-   */
-  Permissions?: Array<string>
-  /**
-   * catalog在工作空间上的权限信息（可选）。取值：WORKSPACE_READONLY（只读）或WORKSPACE_READWRITE（读写）
-   */
-  CatalogWorkspacePrivilege?: string
-  /**
-   * deny权限总列表（用户deny ∪ 角色deny ∪ 继承deny，已去重，已从Permissions中排除）
-   */
-  DenyPrivilegeList?: Array<string>
-}
-
-/**
- * UpdateConsoleUsers返回参数结构体
- */
-export interface UpdateConsoleUsersResponse {
-  /**
-   * <p>返回结果</p>
-   */
-  Data?: UpdateConsoleUsersRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ListWorkflowTaskRuns请求参数结构体
- */
-export interface ListWorkflowTaskRunsRequest {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>任务ID，可通过 ListWorkflowTasks 获取。非必填，精确匹配。与 WorkflowRunId 至少传一个：仅传 TaskId 时查询该任务的全部运行历史。</p>
-   */
-  TaskId?: string
-  /**
-   * <p>工作流运行ID，可通过 ListWorkflowRuns 获取。非必填，精确匹配。与 TaskId 至少传一个：仅传 WorkflowRunId 时查询该次工作流运行下的全部任务运行。</p>
-   */
-  WorkflowRunId?: string
-  /**
-   * <p>分页页码，从 1 开始。非必填，默认 1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
-   */
-  PageSize?: number
-}
-
-/**
- * 工作空间用户信息
- */
-export interface WorkspaceUserInfo {
-  /**
-   * <p>用户UIN</p>
-   */
-  UserUin?: string
-  /**
-   * <p>用户名</p>
-   */
-  UserName?: string
-  /**
-   * <p>昵称</p>
-   */
-  Nickname?: string
-  /**
-   * <p>角色列表</p>
-   */
-  Roles?: Array<RoleBasicInfo>
-  /**
-   * <p>用户来源，group：用户组、user：用户</p>
-   */
-  UserSource?: string
-  /**
-   * <p>创建时间，毫秒时间戳</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>更新时间，毫秒时间戳</p>
-   */
-  UpdateTime?: string
-  /**
-   * <p>是否主账号</p>
-   */
-  IsOwner?: boolean
-  /**
-   * <p>0: 普通用户 1: entraId用户</p>
-   */
-  UserTag?: number
-  /**
-   * <p>是否具有 admin 权限的子账号</p>
-   */
-  IsAdmin?: boolean
-  /**
-   * <p>合并后标签（用户直绑 + 用户组继承）</p>
-   */
-  Tags?: Array<UserTagInfo>
-}
-
-/**
- * 获取table列表响应
- */
-export interface ListTablesRsp {
-  /**
-   * tabl列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<TableInfo>
-  /**
-   * 下页分页token
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NextPageToken?: string
-}
-
-/**
- * 任务重试策略
- */
-export interface TaskRetryStrategy {
-  /**
-   * 最多重试次数，默认3
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxRetryTimes?: number
-  /**
-   * 重试之间等待时间，默认5
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RetryBetweenWaitTime?: number
-  /**
-   * 重试之间等待时间单位
-毫秒：MILLISECOND秒：SECOND分钟（默认）：MINUTE小时：HOUR
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RetryBetweenWaitTimeUnit?: string
-  /**
-   * 任务运行失败时重试开关，默认为true
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskRunFailureRetrySwitch?: boolean
-  /**
-   * 任务运行超时时重试开关，默认为false
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskRunTimeoutRetrySwitch?: boolean
-}
-
-/**
- * 文件存储
- */
-export interface FileStorage {
-  /**
-   * 存储类型
-   */
-  StorageType?: number
-  /**
-   * 存储路径
-   */
-  StoragePath?: string
-  /**
-   * 文件内容
-   */
-  Content?: string
-}
-
-/**
- * 计划调度时间配置
- */
-export interface ScheduledTimeConfig {
-  /**
-   * <p>调度时区，IANA 时区 ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScheduledTimeZone?: string
-  /**
-   * <p>调度生效开始时间</p><p>参数格式：毫秒时间戳（UTC）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime?: string
-  /**
-   * <p>调度生效结束时间</p><p>参数格式：毫秒时间戳（UTC）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * <p>周期类型</p><p>枚举值：</p><ul><li>DAY_CYCLE： 天</li><li>HOUR_CYCLE： 小时</li><li>MINUTE_CYCLE： 分钟</li><li>WEEK_CYCLE： 周</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CycleType?: string
-  /**
-   * <p>周期步长</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CycleNum?: number
-}
-
-/**
- * 数据目录实体结构
- */
-export interface Catalog {
-  /**
-   * <p>数据目录唯一id</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id?: string
-  /**
-   * <p>数据目录名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * <p>数据目录类型</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * <p>数据目录描述信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Comment?: string
-  /**
-   * <p>状态信息：注册中0，待测试1，连接成功2，连接失败3，删除中4，已删除5</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * <p>数据目录属性</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Properties?: Array<KVPair>
-  /**
-   * <p>操作人</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Operator?: string
-  /**
-   * <p>责任人信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetaOwner?: MetaOwner
-  /**
-   * <p>审计信息</p>
-   */
-  Audit?: Audit
-  /**
-   * <p>资产全局唯一ID</p>
-   */
-  AssetGuid?: string
-  /**
-   * <p>当前workspace权限级别，取值对应PermissionLevel，0-无权限，1-只读，2-读写</p>
-   */
-  CurrentWorkspacePermissionLevel?: number
-  /**
-   * <p>tccatalog属性中的tccatalog.identifier</p>
-   */
-  Identifier?: string
-  /**
-   * <p>当前用户对该实体的权限信息</p>
-   */
-  PermissionDetail?: PermissionDetail
-  /**
-   * <p>是否为外部数据目录（基于数据源连接创建的Catalog，如MYSQL、EMR_HIVE、TCHOUSE_D、POSTGRESQL、DLC等）。true:外部目录, false:内置目录（TABLE/MODEL/VOLUME）</p>
-   */
-  IsExternal?: boolean
-  /**
-   * <p>标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<CommonTagInfo>
-  /**
-   * <p>数据目录来源</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CatalogSource?: string
-  /**
-   * <p>连接侧数据目录名或数据库名（仅分析版三段式数据源有值，二段式数据源为空字符串）。Doris/StarRocks/TChouse-D 等 MySQL 内核三段式数据源：external catalog 名称；PostgreSQL/Tencent PG/GaussDB/Hologres 等 PG 内核三段式数据源：databaseName；MySQL 等二段式数据源：空字符串。注意：此字段仅分析版（CatalogSource=CONNECTION）有效，专业版（METALAKE）不填充。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConnectionCatalogName?: string
-}
-
-/**
- * 分桶分区策略
- */
-export interface BucketPartitioning {
-  /**
-   * 分桶字段
-   */
-  FiledNames: Array<string>
-  /**
-   * 分桶数
-   */
-  NumBuckets: string
-}
-
-/**
- * 工作流运行信息
- */
-export interface WorkflowRun {
-  /**
-   * <p>主账号ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppId?: string
-  /**
-   * <p>工作流名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowName?: string
-  /**
-   * <p>工作流ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowId?: string
-  /**
-   * <p>工作流运行ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowRunId?: string
-  /**
-   * <p>工作空间ID</p>
+   * <p>工作空间ID，可通过 ListWorkspaces 获取</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: string
   /**
-   * <p>触发方式，Scheduler、ManualTrigger、Event (参考SchedulerTriggerType)</p>
+   * <p>工作流基本信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TriggerType?: string
+  BaseInfo?: WorkflowBaseInfo
   /**
-   * <p>运行开始时间，单位：毫秒时间戳</p>
+   * <p>工作流调度配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunStartTime?: string
+  Trigger?: Array<WorkflowTriggerConfiguration>
   /**
-   * <p>pending 状态开始时间，单位：毫秒时间戳</p>
+   * <p>工作流参数列表 参数名必填且只能包含数字、大小写字母、空格、.$@#!%^&amp;*()-_+=&gt; 最长128个字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PendingStartTime?: string
+  ParamList?: Array<ParamInfo>
   /**
-   * <p>queue 状态开始时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QueueStartTime?: string
-  /**
-   * <p>运行结束时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunEndTime?: string
-  /**
-   * <p>终态时间，运行进入终态时都有值，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * <p>运行时长，单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunCostTime?: string
-  /**
-   * <p>并发排队花费时间，单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QueueCostTime?: string
-  /**
-   * <p>等待资源花费时间，单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PendingCostTime?: string
-  /**
-   * <p>运行状态。CREATE(&quot;初始化&quot;),     QUEUED(&quot;等待中&quot;),     PENDING(&quot;准备中&quot;),     RUNNING(&quot;运行中&quot;),     SKIPPED(&quot;跳过运行&quot;),     SUCCESS(&quot;成功&quot;),     FAILED(&quot;失败&quot;),     TERMINATING(&quot;终止中&quot;),     TERMINATED(&quot;终止&quot;),     CANCELLED(&quot;被手动终止&quot;)等</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunState?: string
-  /**
-   * <p>计算资源（任务的资源组ID集合）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupIds?: Array<string>
-  /**
-   * <p>运行用户UIN</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserUin?: string
-  /**
-   * <p>运行用户名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserName?: string
-  /**
-   * <p>错误码</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorCodeString?: string
-  /**
-   * <p>运行参数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowParams?: string
-  /**
-   * <p>工作流版本ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowVersionId?: string
-  /**
-   * <p>当前工作流是否支持重跑</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SupportRerun?: boolean
-  /**
-   * <p>工作流运行创建时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * <p>重跑次数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RerunTimes?: number
-  /**
-   * <p>运行的任务范围，任务ID列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SelectedTaskIds?: Array<string>
-  /**
-   * <p>资源组信息列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupInfoList?: Array<ResourceGroupInfo>
-  /**
-   * <p>标签列表</p>
+   * <p>标签 标签名必填且只能包含数字、大小写字母、空格、.$@#!%^&amp;*()-_+=&gt;'，最长128个字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelList?: Array<LabelBrief>
   /**
-   * <p>父工作流运行ID 【由嵌套工作流触发独有】</p>
+   * <p>工作流告警配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentWorkflowRunId?: string
+  Alarm?: AlarmBrief
   /**
-   * <p>父工作流任务运行ID 【由嵌套工作流触发独有】</p>
+   * <p>监控指标配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentWorkflowTaskRunId?: string
+  MonitorMetric?: MonitorMetricBrief
   /**
-   * <p>父工作流任务运行名称 【由嵌套工作流触发独有】</p>
+   * <p>工作流高级设置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentWorkflowTaskRunName?: string
+  AdvanceConfig?: WorkflowAdvanceConfig
   /**
-   * <p>授权权限类型<br>PERMISSION_TYPE_UNSPECIFIED：未指定权限<br>MANAGE : 管理权限：包含所有操作权限<br>RUN : 运行权限：可执行实体<br>VIEW : 查看权限：可查看实体内容</p>
+   * <p>工作流任务列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Permission?: string
+  TaskList?: Array<WorkflowTask>
   /**
-   * <p>工作流高级运行时用户填入的参数</p>
+   * <p>BundleId，可通过 Bundle 相关接口获取</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdvancedParameters?: Array<AdvancedParameter>
+  BundleId?: string
   /**
-   * <p>计划调度时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+   * <p>Bundle信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduledTime?: string
+  BundleInfo?: string
+  /**
+   * <p>GIT配置ID，对应GetWorkspaceConfig接口中的ConfigKey</p>    -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GitConfigId?: string
+  /**
+   * <p>Git分支信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GitBranch?: string
+}
+
+/**
+ * 获取数据库名称列表响应
+ */
+export interface ListSchemaNamesRsp {
+  /**
+   * 数据库名列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<NameIdentifier>
+  /**
+   * 下页分页token信息(base64编码，包含offset、snapshotId等)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextPageToken?: string
 }
 
 /**
@@ -898,292 +258,27 @@ export interface DeleteWorkflowResponse {
 }
 
 /**
- * GetWorkspace返回参数结构体
+ * 删除存储位置响应
  */
-export interface GetWorkspaceResponse {
+export interface DeleteLocationRsp {
   /**
-   * <p>工作空间详情</p>
+   * 是否成功删除
    */
-  Data?: GetWorkspaceRsp
+  Deleted?: boolean
+}
+
+/**
+ * GetLocation返回参数结构体
+ */
+export interface GetLocationResponse {
+  /**
+   * 返回结果
+   */
+  Data?: GetLocationRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ListConsoleUsers返回参数结构体
- */
-export interface ListConsoleUsersResponse {
-  /**
-   * <p>控制台用户列表</p>
-   */
-  Data?: ListConsoleUsersRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RemoveConsoleUsers返回参数结构体
- */
-export interface RemoveConsoleUsersResponse {
-  /**
-   * <p>批量移除控制台用户结果</p>
-   */
-  Data?: RemoveConsoleUsersRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetTables请求参数结构体
- */
-export interface GetTablesRequest {
-  /**
-   * <p>调用时所在workspace唯一id，必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>表的全名列表，格式为 catalogName.schemaName.tableName，必填，至少1条，最大20条</p>
-   */
-  FullNames: Array<string>
-  /**
-   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
-   */
-  FetchOption?: FetchOption
-  /**
-   * 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，要求所有FullNames属于同一catalog（分析版额外约束）；空/缺省→走专业版TcLake路径
-   */
-  ConnectionId?: string
-  /**
-   * 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。
-   */
-  CatalogSource?: string
-}
-
-/**
- * 监控指标配置
- */
-export interface MonitorMetricBrief {
-  /**
-   * 监控指标 ID，创建时无需传入，由服务端生成
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MonitorMetricId?: string
-  /**
-   * 告警的监控对象类型，如工作流、任务等，当前支持 1. WORKFLOW 2. TASK
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlarmMonitorType?: string
-  /**
-   * 监控指标列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Metrics?: Array<MonitorMetricItem>
-}
-
-/**
- * ListCatalogs返回参数结构体
- */
-export interface ListCatalogsResponse {
-  /**
-   * <p>操作结果</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: ListCatalogsRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 查询工作空间用户列表响应
- */
-export interface ListWorkspaceUsersRsp {
-  /**
-   * 用户列表
-   */
-  Items?: Array<WorkspaceUserInfo>
-  /**
-   * 当前页码
-   */
-  PageNumber?: number
-  /**
-   * 每页大小
-   */
-  PageSize?: number
-  /**
-   * 总记录数
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-   */
-  TotalPageNumber?: number
-  /**
-   * 扩展信息（连续翻页场景由服务端返回，下次翻页请求原样带上）
-   */
-  ExtendInfo?: string
-}
-
-/**
- * UpdateWorkspace返回参数结构体
- */
-export interface UpdateWorkspaceResponse {
-  /**
-   * <p>操作结果</p>
-   */
-  Data?: UpdateWorkspaceRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 通用bool返回
- */
-export interface PlatformStatusRsp {
-  /**
-   * 通用返回
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: boolean
-}
-
-/**
- * AddWorkspaceUsers返回参数结构体
- */
-export interface AddWorkspaceUsersResponse {
-  /**
-   * <p>结果</p>
-   */
-  Data?: PlatformStatusRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 内嵌工作流单次迭代运行信息
- */
-export interface InnerWorkflowTaskRunIteration {
-  /**
-   * <p>内嵌工作流运行ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowRunId?: string
-  /**
-   * <p>迭代序号</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IterationIndex?: string
-  /**
-   * <p>运行开始时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunStartTime?: string
-  /**
-   * <p>运行结束时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunEndTime?: string
-  /**
-   * <p>运行状态（参考工作流运行状态枚举）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunState?: string
-  /**
-   * <p>运行时长，单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunCostTime?: string
-  /**
-   * <p>运行参数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowParams?: string
-  /**
-   * <p>错误码</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorCodeString?: string
-  /**
-   * <p>内嵌工作流内部的任务运行</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerTaskRun?: InnerWorkflowTaskRunIterationBrief
-}
-
-/**
- * CreateCatalog请求参数结构体
- */
-export interface CreateCatalogRequest {
-  /**
-   * catalog名称
-   */
-  Name: string
-  /**
-   * catalog类型, 可选值TABLE、MODEL、VOLUME
-   */
-  Type: string
-  /**
-   * 工作空间唯一id
-   */
-  WorkspaceId: string
-  /**
-   * 描述
-   */
-  Comment?: string
-  /**
-   * connection 的 ID
-   */
-  ConnectionId?: string
-  /**
-   * 数据目录来源，可选（融合版新增字段），取值参考 CatalogSourceEnum：METALAKE（专业版）/ CONNECTION（分析版），不传时默认按 METALAKE 处理
-   */
-  CatalogSource?: string
-  /**
-   * 连接侧数据目录名或数据库名，三段式数据源必填，二段式数据源（如 MySQL）不填。Doris/StarRocks/TChouse-D 等 MySQL 内核三段式数据源填写 external catalog 名称；PostgreSQL/Tencent PG/GaussDB/Hologres 等 PG 内核三段式数据源填写 databaseName；MySQL 等二段式数据源不填。
-   */
-  ConnectionCatalogName?: string
-}
-
-/**
- * git检出规则
- */
-export interface SparseCheckoutConfig {
-  /**
-   * <p>是否启用稀疏检出</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Enabled?: boolean
-  /**
-   * <p>是否使用 cone 模式（推荐 true，按目录匹配更高效）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConeMode?: boolean
-  /**
-   * <p>稀疏检出路径列表（如 [&quot;src/module-a/&quot;, &quot;docs/&quot;]）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Patterns?: Array<string>
-}
-
-/**
- * 启动计算资源返回结果
- */
-export interface StartComputeRsp {
-  /**
-   * 操作是否成功
-   */
-  Status?: boolean
 }
 
 /**
@@ -1201,52 +296,6 @@ export interface DeleteWorkflowRequest {
 }
 
 /**
- * 工作空间信息
- */
-export interface WorkspaceInfo {
-  /**
-   * 工作空间ID
-   */
-  WorkspaceId?: string
-  /**
-   * 工作空间名称
-   */
-  WorkspaceName?: string
-  /**
-   * 工作空间描述
-   */
-  Description?: string
-  /**
-   * 工作空间地域（如 ap-guangzhou）
-   */
-  WorkspaceRegion?: string
-  /**
-   * 工作空间状态：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除
-   */
-  Status?: number
-  /**
-   * 失败原因（Status=2 创建失败时有值）
-   */
-  ErrorReason?: string
-  /**
-   * 创建者信息
-   */
-  Creator?: StandardUserInfo
-  /**
-   * 创建时间，毫秒时间戳
-   */
-  CreateTime?: string
-  /**
-   * 更新时间，毫秒时间戳
-   */
-  UpdateTime?: string
-  /**
-   * 当前用户是否拥有该工作空间的访问权限
-   */
-  HasAccess?: boolean
-}
-
-/**
  * 创建schema的响应
  */
 export interface CreateSchemaRsp {
@@ -1258,156 +307,38 @@ export interface CreateSchemaRsp {
 }
 
 /**
- * 列表分区
+ * 批量获取表元数据响应
  */
-export interface ListPartition {
+export interface GetTablesRsp {
   /**
-   * 分区名
+   * 表信息列表。注意：仅返回当前workspace有权限的catalog下的表，无权限的表会被静默跳过
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
-  /**
-   * 分区列表
-   */
-  List: Array<Literal>
-  /**
-   * 属性
-   */
-  Properties?: Array<KVPair>
+  Items?: Array<TableInfo>
 }
 
 /**
- * GetWorkspace请求参数结构体
+ * DeleteModel返回参数结构体
  */
-export interface GetWorkspaceRequest {
+export interface DeleteModelResponse {
   /**
-   * <p>工作空间ID</p>
+   * <p>删除结果</p>
    */
-  WorkspaceId: string
+  Data?: DeleteModelRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
- * 查询控制台用户组列表响应
+ * 创建工作空间响应
  */
-export interface ListConsoleGroupsRsp {
+export interface CreateWorkspaceRsp {
   /**
-   * 用户组列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 创建成功的工作空间ID
    */
-  Items?: Array<ConsoleGroupInfo>
-  /**
-   * 当前页码
-   */
-  PageNumber?: number
-  /**
-   * 每页大小
-   */
-  PageSize?: number
-  /**
-   * 总记录数
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-   */
-  TotalPageNumber?: number
-}
-
-/**
- * （本对象在TaskType内已废弃，统一使用TaskType.TaskTypePropertyList）Notebook 类型任务扩展
- */
-export interface TaskTypeNotebookExt {
-  /**
-   * <p>脚本来源。取值：SCRIPT_SOURCE_LOCAL（本地）/ SCRIPT_SOURCE_GIT（Git 仓库）/<br>SCRIPT_SOURCE_CFS（CFS 文件系统）/ SCRIPT_SOURCE_COS（COS 对象存储）/<br>SCRIPT_SOURCE_WORKSPACE（工作空间）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  Source?: string
-  /**
-   * <p>前端显示使用，对执行平台无意义</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  DisplayPath?: string
-  /**
-   * <p>Notebook 相对路径</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  NotebookPath?: string
-  /**
-   * <p>Notebook 绝对路径</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  NotebookAbsolutePath?: string
-}
-
-/**
- * 列表分区策略
- */
-export interface ListPartitioning {
-  /**
-   * 分区字段
-   */
-  FiledNames: Array<string>
-  /**
-   * 分区
-   */
-  Assignments: Array<ListPartition>
-}
-
-/**
- * 告警配置
- */
-export interface AlarmBrief {
-  /**
-   * 告警 ID，创建时无需传入，由服务端生成
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlarmId?: string
-  /**
-   * 告警的监控对象类型，如工作流、任务等，当前支持 1. WORKFLOW 2. TASK
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlarmMonitorType?: string
-  /**
-   * 告警组，最多 50 个
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlarmGroups?: Array<AlarmGroup>
-  /**
-   * 被跳过时免打扰，默认值 false
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DoNotDisturbWhenSkipped?: boolean
-  /**
-   * 被手动终止时免打扰，默认值 false
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DoNotDisturbWhenManuallyTerminated?: boolean
-  /**
-   * 最后一次重试前免打扰，默认值 false
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DoNotDisturbUntilTheLastRetry?: boolean
-}
-
-/**
- * 用户组脱敏规则，描述某个用户组对应的脱敏方法
- */
-export interface DataMaskGroup {
-  /**
-   * 工作组 ID，对应 WeData 用户组 ID，必填，字符串类型。示例值："17738042827013749"
-   */
-  GroupId: string
-  /**
-   * 脱敏方法（策略类型），必填，直接透传给 DLC。合法值：MASK_SHOW_FIRST_4（保留前四个字符）、MASK_SHOW_LAST_4（保留后四个字符）、MASK_HASH（哈希脱敏）、MASK_DATE_SHOW_YEAR（日期脱敏保留年份）、MASK_NULL（置为 NULL）、MASK_DEFAULT（默认值脱敏）
-   */
-  StrategyType: string
-  /**
-   * 用户组名称
-   */
-  GroupName?: string
+  WorkspaceId?: string
 }
 
 /**
@@ -1426,140 +357,24 @@ export interface RerunWorkflowRunResponse {
 }
 
 /**
- * ListWorkspaces请求参数结构体
+ * 标签
  */
-export interface ListWorkspacesRequest {
+export interface Tag {
   /**
-   * <p>工作空间ID精确匹配</p>
-   */
-  WorkspaceId?: string
-  /**
-   * <p>工作空间名称模糊匹配</p>
-   */
-  WorkspaceKeyword?: string
-  /**
-   * <p>工作空间状态过滤（多选）：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除</p>
-   */
-  StatusList?: Array<number | bigint>
-  /**
-   * <p>多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}]；传入单个即单字段排序，默认按创建时间降序</p>
-   */
-  OrderBys?: Array<OrderBy>
-  /**
-   * <p>页码，从1开始，默认1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小，默认10，最小10，最大100</p>
-   */
-  PageSize?: number
-  /**
-   * <p>工作空间地域过滤（多选），如 ap-guangzhou</p>
-   */
-  WorkspaceRegion?: Array<string>
-  /**
-   * <p>创建者UIN过滤（多选）</p>
-   */
-  Creator?: Array<string>
-}
-
-/**
- * 工作流列表项中的工作流任务节点简要信息
- */
-export interface WorkflowTaskNodeBrief {
-  /**
-   * <p>工作流ID</p>
+   * 名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId?: string
+  Name?: string
   /**
-   * <p>任务ID</p>
+   * 值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId?: string
+  Value?: string
   /**
-   * <p>任务名称</p>
+   * 标签类型，参考 LabelType 枚举：0=未知，1=治理标签，2=自定义标签，3=属性标签，4=脱敏标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskName?: string
-  /**
-   * <p>任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskTypeName?: string
-  /**
-   * <p>任务依赖列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DependOnList?: Array<DependOnBrief>
-  /**
-   * <p>任务资源组ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupId?: string
-  /**
-   * <p>任务资源组名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupName?: string
-  /**
-   * <p>任务X坐标</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LeftCoordinate?: number
-  /**
-   * <p>任务Y坐标</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopCoordinate?: number
-  /**
-   * <p>任务重试策略</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskRetryStrategy?: TaskRetryStrategy
-  /**
-   * <p>任务依赖运行条件</p><p>ALL_SUCCESS: 全部成功：所有上游依赖任务均已执行并成功<br>ONE_SUCCESS: 至少一个成功：至少有一个上游依赖任务成功<br>NONE_FAILED: 目前没有失败：没有依赖任务失败，并且至少有一个依赖任务在运行中<br>ALL_DONE: 全部完成：所有上游依赖任务均已执行并完成（无论成功或失败<br>ONE_FAILED: 至少一个失败：至少有一个上游依赖任务失败<br>ALL_FAILED: 全部失败：所有上游依赖任务都失败<br>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行<br>ALL_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行<br>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游<br>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行<br>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行<br>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行<br>ADVANCED:运行条件为高级模式时配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DependOnRunCondition?: string
-  /**
-   * <p>高级依赖配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AdvancedDependencyConfig?: AdvancedDependencyConfig
-  /**
-   * <p>内嵌工作流任务节点</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerTask?: WorkflowTaskNodeBrief
-}
-
-/**
- * 修改工作空间响应
- */
-export interface UpdateWorkspaceRsp {
-  /**
-   * 操作是否成功
-   */
-  Status?: boolean
-}
-
-/**
- * CreateWorkspaceRole请求参数结构体
- */
-export interface CreateWorkspaceRoleRequest {
-  /**
-   * <p>工作空间id</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>角色基础信息</p>
-   */
-  BasicInfo: RoleBasicInfo
-  /**
-   * <p>角色权限</p>
-   */
-  Permissions?: Array<RolePermission>
+  Type?: number
 }
 
 /**
@@ -1636,119 +451,70 @@ export interface CreateWorkflowRequest {
 }
 
 /**
- * ListFiles请求参数结构体
+ * ListViews返回参数结构体
  */
-export interface ListFilesRequest {
+export interface ListViewsResponse {
   /**
-   * <p>工作空间id</p>
+   * <p>操作结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListViewsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListVolumes请求参数结构体
+ */
+export interface ListVolumesRequest {
+  /**
+   * <p>数据目录名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>获取数量</p>
+   */
+  MaxResults: number
+  /**
+   * <p>调用时所在workspace唯一id</p>
    */
   WorkspaceId: string
   /**
-   * <p>父目录，不填默认查询根节点</p>
+   * <p>分页信息</p>
    */
-  Parent?: FolderLocator
+  PageToken?: string
   /**
-   * <p>按文件类型过滤</p>
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
-  FileTypes?: Array<string>
-  /**
-   * <p>文件名模糊匹配</p>
-   */
-  NameKeyword?: string
-  /**
-   * <p>按所有者UIN过滤，多值为或关系</p>
-   */
-  OwnerUserUins?: Array<string>
-  /**
-   * <p>是否只列出文件夹，默认 false</p>
-   */
-  OnlyFolder?: boolean
-  /**
-   * <p>排序字段列表，如创建时间 [{Name: &#39;CreateTime&#39;, Direction: &#39;DESC&#39;}]，文件名称 [{Name: &#39;Name&#39;, Direction: &#39;ASC&#39;}]</p>
-   */
-  OrderBys?: Array<OrderBy>
-  /**
-   * <p>页码，默认1，最小值1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页条数，默认10，最小值10，最大值100</p><p>取值范围：[10, 100]</p>
-   */
-  PageSize?: number
+  FetchOption?: FetchOption
 }
 
 /**
- * 工作流列表项的运行情况
+ * DeleteModel请求参数结构体
  */
-export interface WorkflowRunBrief {
+export interface DeleteModelRequest {
   /**
-   * 工作流运行ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>数据目录名称</p>
    */
-  WorkflowRunId?: string
+  CatalogName: string
   /**
-   * 运行开始时间，单位：毫秒时间戳
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>schema名称</p>
    */
-  RunStartTime?: string
+  SchemaName: string
   /**
-   * <p>运行状态。CREATE(&quot;初始化&quot;),     QUEUED(&quot;等待中&quot;),     PENDING(&quot;准备中&quot;),     RUNNING(&quot;运行中&quot;),     SKIPPED(&quot;跳过运行&quot;),     SUCCESS(&quot;成功&quot;),     FAILED(&quot;失败&quot;),     TERMINATING(&quot;终止中&quot;),     TERMINATED(&quot;终止&quot;),     CANCELLED(&quot;被手动终止&quot;)等</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>模型名称</p>
    */
-  RunState?: string
+  ModelName: string
   /**
-   * 运行错误码
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>调用时所在workspace唯一id</p>
    */
-  ErrorCodeString?: string
-}
-
-/**
- * 工作流调度高级配置。
- */
-export interface WorkflowTriggerAdvancedConfiguration {
-  /**
-   * <p>&lt;p&gt;该工作流下的所有任务重试模式，仅当TriggerMode为CONTINUE_RUN时有效。</p><p>枚举值：</p><ul><li>onFailure： 失败时自动重试</li><li>never： 从不重试</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskRetryMode?: string
-}
-
-/**
- * 索引结构
- */
-export interface Index {
-  /**
-   * 字段键值类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 字段名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FieldNames?: Array<string>
-  /**
-   * 字段键值类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IndexType?: string
-}
-
-/**
- * 批量异步操作的逐项结果
- */
-export interface AsyncActionRsp {
-  /**
-   * 多个操作项的结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ActionResults?: Array<RunActionBrief>
+  WorkspaceId: string
 }
 
 /**
@@ -1783,38 +549,6 @@ export interface TaskSchedulingParameterBrief {
 }
 
 /**
- * 创建工作空间响应
- */
-export interface CreateWorkspaceRsp {
-  /**
-   * 创建成功的工作空间ID
-   */
-  WorkspaceId?: string
-}
-
-/**
- * UpdateWorkflow请求参数结构体
- */
-export interface UpdateWorkflowRequest {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>待更新的工作流ID，可通过 ListWorkflows 获取。必填</p>
-   */
-  WorkflowId: string
-  /**
-   * <p>需要清空的字段名列表，用于将指定字段重置为空</p>
-   */
-  FieldToRemoveList?: Array<string>
-  /**
-   * <p>更新后的工作流配置，仅传入需要变更的部分即可</p>
-   */
-  NewSetting?: Workflow
-}
-
-/**
  * 查询工作空间用户组列表响应
  */
 export interface ListWorkspaceGroupsRsp {
@@ -1841,22 +575,6 @@ export interface ListWorkspaceGroupsRsp {
 }
 
 /**
- * 扩展信息键值对
- */
-export interface KVPair {
-  /**
-   * 键
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Key?: string
-  /**
-   * 值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
-}
-
-/**
  * 任务运行条件规则
  */
 export interface TaskRunConditionRule {
@@ -1875,42 +593,6 @@ export interface TaskRunConditionRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowedStates?: Array<string>
-}
-
-/**
- * 资源组信息
- */
-export interface ResourceGroupInfo {
-  /**
-   * <p>资源组ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupId?: string
-  /**
-   * <p>资源组名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupName?: string
-  /**
-   * <p>资源组状态</p><p>参数格式：0 // 未指定 1 // 待创建 2 // 创建中 3 // 运行中 4 // 已停止 5 // 停止中 6 // 启动中 7 // 更新中 8 // 删除中 9 // 已删除 10 // 用户主动启动 / 自动启动（有任务提交且自动启停开启） 11 // 可用: 仅存在于数据计算型 12 // 不可用: 仅存在于数据计算型 13 // 失败</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupStatus?: string
-}
-
-/**
- * 字段关联的字典维度信息，仅返回类型为DICT（字典维度）的维度关联
- */
-export interface DictDimensionInfo {
-  /**
-   * 关联的标准字典代码ID
-   */
-  DictCodeId?: string
-  /**
-   * 字典项列表（key-value映射）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DictItems?: Array<DictItem>
 }
 
 /**
@@ -1939,141 +621,51 @@ export interface UpdateConsoleGroupRsp {
 }
 
 /**
- * UnbindWorkflowBundleRsp
+ * CreateModelVersion请求参数结构体
  */
-export interface UnbindWorkflowBundleRsp {
+export interface CreateModelVersionRequest {
   /**
-   * 操作状态，true 表示成功
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>数据目录名称</p>
    */
-  Status?: boolean
-}
-
-/**
- * CreateFolder请求参数结构体
- */
-export interface CreateFolderRequest {
+  CatalogName: string
   /**
-   * <p>工作空间名称</p>
+   * <p>schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName: string
+  /**
+   * <p>地址</p>
+   */
+  Uri: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
    */
   WorkspaceId: string
   /**
-   * <p>文件夹名称</p>
+   * <p>别名列表</p>
    */
-  FolderName: string
+  Aliases?: Array<string>
   /**
-   * <p>文件夹类型</p><p>枚举值：</p><ul><li>FOLDER： 文件夹</li><li>GIT_FOLDER： git文件夹</li></ul>
+   * <p>描述</p>
    */
-  FolderType: string
+  Comment?: string
   /**
-   * <p>父节点</p>
+   * <p>扩展信息</p>
    */
-  ParentFolder?: FolderLocator
-  /**
-   * <p>git配置，FolderType=GIT_FOLDER 时必填</p>
-   */
-  GitConfig?: GitRepoConfig
+  Properties?: Array<KVPair>
 }
 
 /**
- * KillWorkflowRun返回参数结构体
+ * 查询存储位置详情响应
  */
-export interface KillWorkflowRunResponse {
+export interface GetLocationRsp {
   /**
-   * <p>终止工作流的运行响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 存储位置详情
    */
-  Data?: AsyncActionRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 获取schema列表响应
- */
-export interface ListSchemasRsp {
-  /**
-   * schema列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<Schema>
-  /**
-   * 下页分页token
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NextPageToken?: string
-}
-
-/**
- * DeleteFolder请求参数结构体
- */
-export interface DeleteFolderRequest {
-  /**
-   * <p>工作空间id</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>待删除的文件夹</p>
-   */
-  Folder: FolderLocator
-  /**
-   * <p>软删除还是从回收站硬删除</p><p>枚举值：</p><ul><li>false： 软删除到回收站</li><li>true： 从回收站硬删除</li></ul>
-   */
-  ForceDelete?: boolean
-}
-
-/**
- * 通用标签信息（用于查询展示场景），适用于表标签、字段标签等各类资产标签的轻量展示，供GetTable等接口返回使用
- */
-export interface CommonTagInfo {
-  /**
-   * 标签ID
-   */
-  LabelId?: string
-  /**
-   * 标签名称
-   */
-  LabelName?: string
-  /**
-   * 标签值ID，属性标签（LabelType=3）可为0
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelValueId?: string
-  /**
-   * 标签值，脱敏标签（LabelType=4）时可为空
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelValue?: string
-  /**
-   * 标签类型，取值参考LabelType枚举定义：1-治理标签，2-自定义标签，3-属性标签，4-脱敏标签
-   */
-  Type?: number
-  /**
-   * 标签是否已删除。true表示该LabelId在meta_biz_label中查不到记录，标签已被物理删除；false（默认）表示标签仍存在
-   */
-  Deleted?: boolean
-}
-
-/**
- * 添加控制台用户响应
- */
-export interface AddConsoleUsersRsp {
-  /**
-   * 操作是否成功
-   */
-  Status?: boolean
-}
-
-/**
- * RemoveConsoleUsers请求参数结构体
- */
-export interface RemoveConsoleUsersRequest {
-  /**
-   * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
-   */
-  UserUins: Array<string>
+  Location?: LocationInfo
 }
 
 /**
@@ -2084,140 +676,6 @@ export interface DeleteConsoleGroupsRsp {
    * 操作是否成功
    */
   Status?: boolean
-}
-
-/**
- * ListWorkflowRuns请求参数结构体
- */
-export interface ListWorkflowRunsRequest {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>分页页码，从 1 开始。非必填，默认 1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
-   */
-  PageSize?: number
-  /**
-   * <p>工作流ID，精确匹配。非必填，单值</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/1835/138002">ListWorkflows</a> 返回值 <code>Data</code></p>
-   */
-  WorkflowId?: string
-  /**
-   * <p>工作流名称关键字，对 WorkflowName 做模糊匹配。非必填，单值</p>
-   */
-  WorkflowNameKeyword?: string
-  /**
-   * <p>运行创建时间下界，范围匹配（CreateTime &gt;= 本值），单位：毫秒时间戳。<br>非必填，单值，对应出参 WorkflowRun.CreateTime</p>
-   */
-  CreateStartTime?: string
-  /**
-   * <p>运行创建时间上界，范围匹配（CreateTime &lt;= 本值），单位：毫秒时间戳。<br>非必填，单值，对应出参 WorkflowRun.CreateTime</p>
-   */
-  CreateEndTime?: string
-  /**
-   * <p>运行状态，精确匹配。非必填，多选（多个值之间为 OR 关系）。运行状态。CREATE(&quot;初始化&quot;), QUEUED(&quot;等待中&quot;), PENDING(&quot;准备中&quot;), RUNNING(&quot;运行中&quot;), SKIPPED(&quot;跳过运行&quot;), SUCCESS(&quot;成功&quot;), FAILED(&quot;失败&quot;), TERMINATING(&quot;终止中&quot;), TERMINATED(&quot;终止&quot;), CANCELLED(&quot;被手动终止&quot;)等</p>
-   */
-  RunStates?: Array<string>
-  /**
-   * <p>错误码，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  ErrorCodeStrings?: Array<string>
-  /**
-   * <p>运行人UIN，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  RunUserUins?: Array<string>
-  /**
-   * <p>标签名称ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  LabelKeyIds?: Array<string>
-  /**
-   * <p>标签值ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  LabelValueIds?: Array<string>
-  /**
-   * <p>排序条件，多个之间按数组顺序表示优先级。非必填，默认按 CreateTime Desc。<br>可排序字段白名单：CreateTime、EndTime、RunCostTime</p>
-   */
-  OrderBys?: Array<OrderBy>
-}
-
-/**
- * 工作流调度配置。
- */
-export interface WorkflowTriggerConfiguration {
-  /**
-   * <p>调度配置ID，创建时无需传入，由服务端生成</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TriggerId?: string
-  /**
-   * <p>调度状态 启动：START，暂停：PAUSE</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SchedulerStatus?: string
-  /**
-   * <p>触发方式，</p><ul><li>定时触发：TIME_TRIGGER</li><li>持续运行：CONTINUE_RUN</li></ul><p>注意：</p><ul><li>TIME_TRIGGER 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；</li><li>CONTINUE_RUN 模式下，AdvancedConfig必填；</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TriggerMode?: string
-  /**
-   * <p>调度时区</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SchedulerTimeZone?: string
-  /**
-   * <p>调度生效时间，单位：毫秒时间戳。必须小于 EndTime</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime?: string
-  /**
-   * <p>调度结束时间，单位：毫秒时间戳。必须大于 StartTime</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * <p>配置方式，常规：COMMON，CRON表达式：CRON_EXPRESSION</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConfigMode?: string
-  /**
-   * <p>周期类型：支持的类型为 ONEOFF_CYCLE: 一次性 YEAR_CYCLE: 年 MONTH_CYCLE: 月 WEEK_CYCLE: 周 DAY_CYCLE: 天<br>HOUR_CYCLE: 小时 MINUTE_CYCLE: 分钟 CRONTAB_CYCLE: crontab表达式类型</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CycleType?: string
-  /**
-   * <p>cron表达式</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CrontabExpression?: string
-  /**
-   * <p>Json格式，对账使用</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExtraInfo?: string
-  /**
-   * <p>高级配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AdvancedConfig?: WorkflowTriggerAdvancedConfiguration
-}
-
-/**
- * GetWorkflowTaskRun返回参数结构体
- */
-export interface GetWorkflowTaskRunResponse {
-  /**
-   * <p>查询任务运行详情响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: GetWorkflowTaskRunRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2235,70 +693,17 @@ export interface DeleteWorkspaceResponse {
 }
 
 /**
- * GetFile请求参数结构体
+ * GetModel返回参数结构体
  */
-export interface GetFileRequest {
+export interface GetModelResponse {
   /**
-   * <p>工作空间 ID。来源：ListWorkspaces 接口返回的 WorkspaceId</p>
+   * <p>获取模型结果</p>
    */
-  WorkspaceId: string
+  Data?: GetModelRsp
   /**
-   * <p>文件 ID。来源：CreateFile / ListFiles 接口返回的 FileId。与 FilePath 二选一</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FileId?: string
-  /**
-   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
-   */
-  FileType?: string
-  /**
-   * <p>是否返回文件内容。true 时 Storage.Content 返回 base64 内容，默认 false</p>
-   */
-  IncludeContent?: boolean
-  /**
-   * <p>文件版本 ID。来源：ListFileVersions 接口返回的 VersionId。不传则读取最新版本</p>
-   */
-  VersionId?: string
-  /**
-   * <p>文件完整路径，以 / 开头，如 /etl/daily/demo.ipynb。与 FileId 二选一</p>
-   */
-  FilePath?: string
-}
-
-/**
- * 工作流基本信息（入参用）
- */
-export interface WorkflowBaseInfo {
-  /**
-   * 工作流名称，长度不超过 1024
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowName?: string
-  /**
-   * 工作流ID，创建时无需传入，由服务端生成
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowId?: string
-  /**
-   * 工作流运行人UIN
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserUin?: string
-  /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * 工作流负责人用户名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnerUserName?: string
-  /**
-   * <p>创建人UIN。系统生成字段，仅出参返回，入参无需传入（传入不生效，服务端忽略且不报错）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  CreateUserUin?: string
+  RequestId?: string
 }
 
 /**
@@ -2444,6 +849,2543 @@ export interface TaskType {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimePropertyList?: Array<TaskTypeProperty>
+}
+
+/**
+ * GetFolder返回参数结构体
+ */
+export interface GetFolderResponse {
+  /**
+   * <p>文件夹详情结果</p>
+   */
+  Data?: GetFolderRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 工作流列表项中的工作流任务节点简要信息
+ */
+export interface WorkflowTaskNodeBrief {
+  /**
+   * <p>工作流ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * <p>任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * <p>任务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * <p>任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeName?: string
+  /**
+   * <p>任务依赖列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependOnList?: Array<DependOnBrief>
+  /**
+   * <p>任务资源组ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupId?: string
+  /**
+   * <p>任务资源组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupName?: string
+  /**
+   * <p>任务X坐标</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LeftCoordinate?: number
+  /**
+   * <p>任务Y坐标</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopCoordinate?: number
+  /**
+   * <p>任务重试策略</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskRetryStrategy?: TaskRetryStrategy
+  /**
+   * <p>任务依赖运行条件</p><p>ALL_SUCCESS: 全部成功：所有上游依赖任务均已执行并成功<br>ONE_SUCCESS: 至少一个成功：至少有一个上游依赖任务成功<br>NONE_FAILED: 目前没有失败：没有依赖任务失败，并且至少有一个依赖任务在运行中<br>ALL_DONE: 全部完成：所有上游依赖任务均已执行并完成（无论成功或失败<br>ONE_FAILED: 至少一个失败：至少有一个上游依赖任务失败<br>ALL_FAILED: 全部失败：所有上游依赖任务都失败<br>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行<br>ALL_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行<br>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游<br>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行<br>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行<br>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行<br>ADVANCED:运行条件为高级模式时配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependOnRunCondition?: string
+  /**
+   * <p>高级依赖配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdvancedDependencyConfig?: AdvancedDependencyConfig
+  /**
+   * <p>内嵌工作流任务节点</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerTask?: WorkflowTaskNodeBrief
+}
+
+/**
+ * CreateWorkflowRsp
+ */
+export interface CreateWorkflowRsp {
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+}
+
+/**
+ * OneFlow 透传的 Workspace 异步文件操作信息；作业状态由 Workspace 持久化和维护
+ */
+export interface AsyncOperation {
+  /**
+   * 是否异步执行；ZIP 解压创建时为 true
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAsync: boolean
+  /**
+   * Workspace 持久化的异步作业 ID，用于查询作业进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobId: string
+  /**
+   * 调用方生成的提交幂等与链路追踪标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperationId: string
+  /**
+   * 异步作业状态：0-未指定，1-已受理，2-解压中，3-回调处理中，4-成功，5-部分失败，6-失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: number
+}
+
+/**
+ * UpdateTable返回参数结构体
+ */
+export interface UpdateTableResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: UpdateTableRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询文件信息结果
+ */
+export interface ListFilesRsp {
+  /**
+   * <p>文件/文件夹节点列表</p>
+   */
+  Items?: Array<FileNode>
+  /**
+   * <p>当前页码</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页条数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总条数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPageNumber?: number
+}
+
+/**
+ * 查询工作流运行详情响应。
+ */
+export interface GetWorkflowRunRsp {
+  /**
+   * 工作流运行信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRun?: WorkflowRun
+}
+
+/**
+ * ListLocations请求参数结构体
+ */
+export interface ListLocationsRequest {
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>存储位置名匹配模式，支持SQL LIKE语法</p>
+   */
+  LocationNamePattern?: string
+  /**
+   * <p>是否基于快照分页</p>
+   */
+  SnapshotBased?: boolean
+  /**
+   * <p>快照ID</p>
+   */
+  SnapshotId?: string
+  /**
+   * <p>页码，从1开始，可选，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，取值范围 1~500</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * 获取数据目录详情的响应
+ */
+export interface GetCatalogRsp {
+  /**
+   * catalog详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Catalog?: Catalog
+}
+
+/**
+ * ListWorkflows返回参数结构体
+ */
+export interface ListWorkflowsResponse {
+  /**
+   * <p>查询工作流列表响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListWorkflowsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 创建数据目录的响应
+ */
+export interface CreateCatalogRsp {
+  /**
+   * 新创建的数据目录的id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogId?: string
+}
+
+/**
+ * 内嵌工作流迭代中的任务运行简要信息
+ */
+export interface InnerWorkflowTaskRunIterationBrief {
+  /**
+   * <p>任务运行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowTaskRunId?: string
+  /**
+   * <p>迭代序号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IterationIndex?: string
+  /**
+   * <p>运行开始时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunStartTime?: string
+  /**
+   * <p>运行结束时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunEndTime?: string
+  /**
+   * <p>运行状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunState?: string
+  /**
+   * <p>运行时长，单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunCostTime?: string
+  /**
+   * <p>运行参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskParams?: string
+  /**
+   * <p>错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeString?: string
+}
+
+/**
+ * UpdateFolder返回参数结构体
+ */
+export interface UpdateFolderResponse {
+  /**
+   * <p>更新文件夹结果</p>
+   */
+  Data?: UpdateFolderRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RerunWorkflowRun请求参数结构体
+ */
+export interface RerunWorkflowRunRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   */
+  WorkflowId: string
+  /**
+   * <p>工作流运行ID，可通过 ListWorkflowRuns 获取。必填</p>
+   */
+  WorkflowRunId: string
+  /**
+   * <p>运行类型。必填。取值：1 普通运行，2 高级运行</p>
+   */
+  RunType: number
+  /**
+   * <p>运行类型为高级运行时填写的自定义运行参数</p>
+   */
+  AdvancedParams?: Array<TaskSchedulingParameterBrief>
+  /**
+   * <p>本次需要重跑指定的任务ID集合，可通过 ListWorkflowTasks 获取，不传默认重跑该工作流下所有任务</p>
+   */
+  TaskIds?: Array<string>
+  /**
+   * <p>计划调度时间列表配置</p>
+   */
+  ScheduledTimeConfig?: ScheduledTimeConfig
+}
+
+/**
+ * 标签信息
+ */
+export interface LabelBrief {
+  /**
+   * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelKey?: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValue?: string
+  /**
+   * 标签名称ID，可通过标签相关接口获取
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelKeyId?: string
+  /**
+   * 标签值ID，可通过标签相关接口获取
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValueId?: string
+}
+
+/**
+ * DeleteTable返回参数结构体
+ */
+export interface DeleteTableResponse {
+  /**
+   * <p>操作结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DeleteTableRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 创建控制台用户组响应
+ */
+export interface CreateConsoleGroupRsp {
+  /**
+   * 创建成功的用户组 ID
+   */
+  GroupId?: string
+}
+
+/**
+ * 责任人
+ */
+export interface Owner {
+  /**
+   * 用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * 用户名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   *  0:USER, 1:GROUP
+   */
+  Type?: number
+}
+
+/**
+ * 模型版本信息
+ */
+export interface ModelVersionInfo {
+  /**
+   * 版本号
+   */
+  Version?: string
+  /**
+   * 模型版本uri
+   */
+  Uri?: string
+  /**
+   * 描述信息
+   */
+  Comment?: string
+  /**
+   * 扩展参数
+   */
+  Properties?: Array<KVPair>
+  /**
+   * 别名
+   */
+  Aliases?: Array<string>
+  /**
+   * 审计信息
+   */
+  Audit?: Audit
+  /**
+   * Catalog Name
+   */
+  CatalogName?: string
+  /**
+   * Schema Name
+   */
+  SchemaName?: string
+  /**
+   * Model Name
+   */
+  ModelName?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<AssetTagVote>
+  /**
+   * 资产全局唯一ID
+   */
+  AssetGuid?: string
+}
+
+/**
+ * 文件删除结果
+ */
+export interface DeleteFileResult {
+  /**
+   * <p>被删除的文件 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileId?: string
+  /**
+   * <p>删除是否成功</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: boolean
+}
+
+/**
+ * 单个操作项的执行结果。 由 RunWorkflow / RerunWorkflowRun / KillWorkflowRun 共用： RunWorkflow—— WorkflowId / WorkflowName 有值，WorkflowRunId 为空 RerunWorkflowRun —— WorkflowId / WorkflowName / WorkflowRunId 均有值 KillWorkflowRun  —— WorkflowId / WorkflowName / WorkflowRunId 均有值
+ */
+export interface RunActionBrief {
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 操作动作ID，用于追踪具体的执行动作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunActionId?: string
+  /**
+   * 失败错误信息，操作失败时返回具体的错误描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
+  /**
+   * 操作状态，true 表示成功，false 表示失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OpStatus?: boolean
+  /**
+   * 工作流运行ID。重跑 / 终止场景返回被操作的运行ID；运行工作流场景为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunId?: string
+}
+
+/**
+ * 获取视图名称列表响应
+ */
+export interface ListViewNamesRsp {
+  /**
+   * 视图名数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<NameIdentifier>
+  /**
+   * 下页分页token信息(base64编码，包含offset、snapshotId等)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextPageToken?: string
+}
+
+/**
+ * 查询工作空间用户组用户列表响应
+ */
+export interface ListWorkspaceGroupUsersRsp {
+  /**
+   * <p>用户列表</p>
+   */
+  Items?: Array<GroupUserInfo>
+  /**
+   * <p>当前页码</p><p>默认值：1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小</p><p>默认值：10</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总记录数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPageNumber?: number
+}
+
+/**
+ * GetWorkflowTaskRun请求参数结构体
+ */
+export interface GetWorkflowTaskRunRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>任务运行ID，可通过 ListWorkflowTaskRuns 获取。必填</p>
+   */
+  WorkflowTaskRunId: string
+  /**
+   * <p>内嵌工作流任务运行列表选项（仅限 FOR_EACH 任务使用）。非必填</p>
+   */
+  InnerWorkflowTaskRunListOption?: InnerWorkflowTaskRunListOption
+}
+
+/**
+ * AddWorkspaceUsers请求参数结构体
+ */
+export interface AddWorkspaceUsersRequest {
+  /**
+   * <p>用户ID</p>
+   */
+  UserUins: Array<string>
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>角色ID，可通过 ListWorkspaceRoles 接口获取</p>
+   */
+  RoleIds: Array<string>
+}
+
+/**
+ * 删除Schema的响应
+ */
+export interface DeleteSchemaRsp {
+  /**
+   * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: boolean
+}
+
+/**
+ * 字典项（key-value映射）
+ */
+export interface DictItem {
+  /**
+   * 字典键
+   */
+  Key?: string
+  /**
+   * 字典值
+   */
+  Value?: string
+}
+
+/**
+ * DeleteConsoleGroups请求参数结构体
+ */
+export interface DeleteConsoleGroupsRequest {
+  /**
+   * 要删除的用户组 ID 列表，单次最多100个；可通过 ListConsoleGroups 接口获取
+   */
+  GroupIds: Array<string>
+}
+
+/**
+ * 获取数据目录列表响应
+ */
+export interface ListCatalogsRsp {
+  /**
+   * 数据目录列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<Catalog>
+  /**
+   * 下页分页token
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextPageToken?: string
+}
+
+/**
+ * GetWorkflow请求参数结构体
+ */
+export interface GetWorkflowRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   */
+  WorkflowId: string
+}
+
+/**
+ * UpdateWorkspace返回参数结构体
+ */
+export interface UpdateWorkspaceResponse {
+  /**
+   * <p>操作结果</p>
+   */
+  Data?: UpdateWorkspaceRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateWorkspaceGroupsRoles返回参数结构体
+ */
+export interface UpdateWorkspaceGroupsRolesResponse {
+  /**
+   * 修改工作空间用户组角色是否成功
+   */
+  Data?: PlatformStatusRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateSchema返回参数结构体
+ */
+export interface UpdateSchemaResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: UpdateSchemaRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateFile请求参数结构体
+ */
+export interface CreateFileRequest {
+  /**
+   * <p>工作空间 ID。来源：ListWorkspaces 接口返回的 WorkspaceId</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>文件名，含后缀，最长 255 字节。不能以 . 或 .. 开头/结尾，不能含空格与控制字符</p>
+   */
+  FileName: string
+  /**
+   * <p>父文件夹路径，以 / 开头、末尾不带 /，根目录传 /。来源：ListFiles 接口返回的 Path</p>
+   */
+  ParentFolderPath?: string
+  /**
+   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
+   */
+  FileType?: string
+  /**
+   * <p>文件运行配置</p>
+   */
+  FileConfig?: FileConfig
+  /**
+   * <p>绑定的 BundleId。来源：ListBundles 接口返回的 BundleId</p>
+   */
+  BundleId?: string
+  /**
+   * <p>绑定的 BundleInfo，JSON 字符串</p>
+   */
+  BundleInfo?: string
+  /**
+   * <p>文件初始内容。不传则按FileType 生成默认内容</p>
+   */
+  Storage?: FileStorage
+  /**
+   * 是否将 Storage 中的 ZIP 文件异步解压创建，默认 false。true 时异步作业由 Workspace 负责全生命周期，响应仅通过 AsyncOperation 返回作业信息（FileId 为空）；作业进度查询由基础平台 WS 接口实现，不在本协议中定义。
+   */
+  ExtractArchive?: boolean
+}
+
+/**
+ * 修改表信息响应
+ */
+export interface UpdateTableRsp {
+  /**
+   * 更新后的表信息
+   */
+  Table?: TableInfo
+}
+
+/**
+ * ListCatalogs返回参数结构体
+ */
+export interface ListCatalogsResponse {
+  /**
+   * <p>操作结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListCatalogsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 角色权限
+ */
+export interface RolePermission {
+  /**
+   * <p>模块ID，须为当前租户已开通的功能模块（叶子节点）的模块ID（层级编码字符串，如 101=快速开始、109=工作流、116101103=工作空间管理_角色权限），非法值返回 InvalidParameterValue。模块清单获取方式：调用 ListWorkspaceModules 接口查询工作空间模块列表，取返回 Items[].ModuleId 字段（IsLeaf 为 true 的叶子节点）；也可通过控制台「工作空间设置-角色权限」页面查看</p>
+   */
+  ModuleId?: string
+  /**
+   * <p>模块访问权限，单值：R=只读，RW=读写，RWD=读写删除，N=无权限</p>
+   */
+  Permissions?: string
+}
+
+/**
+ * GetModelVersion返回参数结构体
+ */
+export interface GetModelVersionResponse {
+  /**
+   * <p>获取模型结果</p>
+   */
+  Data?: GetModelVersionRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListConsoleUsers请求参数结构体
+ */
+export interface ListConsoleUsersRequest {
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>用户名称与 UIN 模糊匹配</p>
+   */
+  UserKeyword?: string
+  /**
+   * <p>用于过滤角色关联的用户</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul><p>可通过 ListConsoleRoles 接口获取</p>
+   */
+  RoleIds?: Array<string>
+  /**
+   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+}
+
+/**
+ * UpdateModel返回参数结构体
+ */
+export interface UpdateModelResponse {
+  /**
+   * 返回结果
+   */
+  Data?: UpdateModelRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetView请求参数结构体
+ */
+export interface GetViewRequest {
+  /**
+   * <p>数据目录名</p>
+   */
+  CatalogName: string
+  /**
+   * <p>数据库名</p>
+   */
+  SchemaName: string
+  /**
+   * <p>View名称</p>
+   */
+  ViewName: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId?: string
+  /**
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   */
+  FetchOption?: FetchOption
+}
+
+/**
+ * 用户基础展示信息
+ */
+export interface StandardUserInfo {
+  /**
+   * 用户UIN
+   */
+  UserUin?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 昵称
+   */
+  Nickname?: string
+  /**
+   * 0: 普通用户 1: entraId用户
+   */
+  UserTag?: string
+}
+
+/**
+ * UpdateWorkflowRsp
+ */
+export interface UpdateWorkflowRsp {
+  /**
+   * 更新状态，true 表示成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: boolean
+}
+
+/**
+ * ListLocations返回参数结构体
+ */
+export interface ListLocationsResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: ListLocationsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetTables返回参数结构体
+ */
+export interface GetTablesResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: GetTablesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetSchema请求参数结构体
+ */
+export interface GetSchemaRequest {
+  /**
+   * <p>数据目录名</p>
+   */
+  CatalogName: string
+  /**
+   * <p>数据库名</p>
+   */
+  SchemaName: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   */
+  FetchOption?: FetchOption
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * Schema信息
+ */
+export interface Schema {
+  /**
+   * <p>schema名称</p>
+   */
+  Name: string
+  /**
+   * <p>描述。注意：此字段可能返回null，表示取不到有效值</p>
+   */
+  Comment?: string
+  /**
+   * <p>属性。注意：此字段可能返回null，表示取不到有效值</p>
+   */
+  Properties?: Array<KVPair>
+  /**
+   * <p>审计信息。注意：此字段可能返回null，表示取不到有效值</p>
+   */
+  Audit?: Audit
+  /**
+   * <p>owner信息</p>
+   */
+  MetaOwner?: MetaOwner
+  /**
+   * <p>资产全局唯一ID，通过WedataAssetUIDUtils.generateUID生成</p>
+   */
+  AssetGuid?: string
+  /**
+   * <p>当前用户对该schema的权限信息。注意：此字段可能返回null，请求中未开启FetchPermissions时不返回</p>
+   */
+  PermissionDetail?: PermissionDetail
+  /**
+   * <p>标签信息列表。注意：此字段可能返回null，请求中未开启FetchTags时不返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<CommonTagInfo>
+}
+
+/**
+ * UpdateFolder请求参数结构体
+ */
+export interface UpdateFolderRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>待更新文件夹</p>
+   */
+  Folder?: FolderLocator
+  /**
+   * <p>操作类型</p><p>枚举值：</p><ul><li>1： 重命名</li><li>2： 移动</li></ul>
+   */
+  OperationType?: string
+  /**
+   * <p>重命名后的文件名，OperationType = 1时生效</p>
+   */
+  FolderName?: string
+  /**
+   * <p>移动的目的文件夹，OperationType = 2时生效</p>
+   */
+  TargetParent?: FolderLocator
+}
+
+/**
+ * UpdateView请求参数结构体
+ */
+export interface UpdateViewRequest {
+  /**
+   * 数据目录名称，必填
+   */
+  CatalogName: string
+  /**
+   * 数据库名称，必填
+   */
+  SchemaName: string
+  /**
+   * View名，必填
+   */
+  ViewName: string
+  /**
+   * 调用时所在workspace唯一id，必填
+   */
+  WorkspaceId: string
+  /**
+   * 新名称，可选，为空表示不修改名称
+   */
+  NewName?: string
+  /**
+   * 新描述，可选，为空表示不修改注释
+   */
+  NewComment?: string
+}
+
+/**
+ * CreateCatalog返回参数结构体
+ */
+export interface CreateCatalogResponse {
+  /**
+   * <p>创建catalog响应</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CreateCatalogRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteConsoleGroups返回参数结构体
+ */
+export interface DeleteConsoleGroupsResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: DeleteConsoleGroupsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 内嵌工作流任务运行详情（仅限 FOR_EACH 任务）
+ */
+export interface InnerWorkflowTaskRun {
+  /**
+   * 当前页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber?: number
+  /**
+   * 迭代运行列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<InnerWorkflowTaskRunIteration>
+  /**
+   * 迭代次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IterationCount?: number
+  /**
+   * 失败次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailureCount?: number
+  /**
+   * 成功次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessCount?: number
+  /**
+   * 内嵌工作流ID，可通过 ListWorkflows 获取
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerWorkflowId?: string
+  /**
+   * 内嵌任务ID，可通过 ListWorkflowTasks 获取
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerTaskId?: string
+  /**
+   * 内嵌任务运行状态数量统计（实例业务枚举键值对列表）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerTaskRunBizEnumInfos?: Array<ScheduleBizEnumBrief>
+}
+
+/**
+ * UpdateWorkspaceGroupsRoles请求参数结构体
+ */
+export interface UpdateWorkspaceGroupsRolesRequest {
+  /**
+   * 用户组ID，可通过 ListWorkspaceGroups 接口获取
+   */
+  GroupIds: Array<string>
+  /**
+   * 工作空间ID
+   */
+  WorkspaceId: string
+  /**
+   * 角色ID，可通过 ListWorkspaceRoles 接口获取
+   */
+  RoleIds: Array<string>
+}
+
+/**
+ * DeleteVolume返回参数结构体
+ */
+export interface DeleteVolumeResponse {
+  /**
+   * <p>删除结果</p>
+   */
+  Data?: DeleteVolumeRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 更新工作空间角色结果
+ */
+export interface UpdateWorkspaceRoleResult {
+  /**
+   * 更新工作空间角色是否成功
+   */
+  Status?: boolean
+}
+
+/**
+ * 分区结构
+ */
+export interface Partitioning {
+  /**
+   * 转换策略
+   */
+  Strategy?: string
+  /**
+   * 分桶策略参数
+   */
+  NumBuckets?: number
+  /**
+   * 字段名称
+   */
+  FieldNames?: Array<string>
+  /**
+   * 策略参数
+   */
+  Width?: number
+  /**
+   * 字段名称
+   */
+  FieldName?: Array<string>
+  /**
+   * 按年分区策略
+   */
+  YearPartitioning?: SingleFieldPartitioning
+  /**
+   * 按月分区策略
+   */
+  MonthPartitioning?: SingleFieldPartitioning
+  /**
+   * 按天分区策略
+   */
+  DayPartitioning?: SingleFieldPartitioning
+  /**
+   * 按小时分区策略
+   */
+  HourPartitioning?: SingleFieldPartitioning
+  /**
+   * 按字段分区策略
+   */
+  IdentityPartitioning?: SingleFieldPartitioning
+  /**
+   * 列表分区策略
+   */
+  ListPartitioning?: ListPartitioning
+  /**
+   * 范围分区策略
+   */
+  RangePartitioning?: RangePartitioning
+  /**
+   * 分桶分区策略
+   */
+  BucketPartitioning?: BucketPartitioning
+  /**
+   * 截断分区策略
+   */
+  TruncatePartitioning?: TruncatePartitioning
+}
+
+/**
+ * DeleteFile请求参数结构体
+ */
+export interface DeleteFileRequest {
+  /**
+   * <p>工作空间 ID。来源：ListWorkspaces 接口返回的 WorkspaceId</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>文件 ID。来源：CreateFile / ListFiles / GetFile 接口返回的 FileId</p>
+   */
+  FileId: string
+  /**
+   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
+   */
+  FileType?: string
+}
+
+/**
+ * GetCatalog返回参数结构体
+ */
+export interface GetCatalogResponse {
+  /**
+   * <p>catalog详情</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: GetCatalogRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateFunction请求参数结构体
+ */
+export interface UpdateFunctionRequest {
+  /**
+   * 数据目录名称，必填
+   */
+  CatalogName: string
+  /**
+   * schema名称，必填
+   */
+  SchemaName: string
+  /**
+   * 函数名称，必填
+   */
+  FunctionName: string
+  /**
+   * 调用时所在workspace唯一id，必填
+   */
+  WorkspaceId: string
+  /**
+   * 新描述，可选，为空表示不修改注释
+   */
+  NewComment?: string
+}
+
+/**
+ * ListConsoleGroups返回参数结构体
+ */
+export interface ListConsoleGroupsResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: ListConsoleGroupsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 视图信息
+ */
+export interface ViewInfo {
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 字段信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<ColumnInfo>
+  /**
+   * 属性值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: Array<KVPair>
+  /**
+   * 编辑者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Audit?: Audit
+  /**
+   * owner信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaOwner?: MetaOwner
+  /**
+   * 资产全局唯一ID
+   */
+  AssetGuid?: string
+  /**
+   * 当前用户对该实体的权限信息
+   */
+  PermissionDetail?: PermissionDetail
+  /**
+   * 标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<CommonTagInfo>
+}
+
+/**
+ * DeleteLocation请求参数结构体
+ */
+export interface DeleteLocationRequest {
+  /**
+   * 存储位置名，必填
+   */
+  LocationName: string
+  /**
+   * 调用时所在workspace唯一id，必填
+   */
+  WorkspaceId: string
+}
+
+/**
+ * 查询工作空间列表响应
+ */
+export interface ListWorkspacesRsp {
+  /**
+   * <p>工作空间列表</p>
+   */
+  Items?: Array<WorkspaceInfo>
+  /**
+   * <p>当前页码</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总记录数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPageNumber?: number
+  /**
+   * <p>是否控制台管理员</p>
+   */
+  IsConsoleAdmin?: boolean
+}
+
+/**
+ * 范围分区
+ */
+export interface RangePartition {
+  /**
+   * 分区名
+   */
+  Name: string
+  /**
+   * 下界
+   */
+  Lower: Literal
+  /**
+   * 上界
+   */
+  Upper: Literal
+  /**
+   * 属性
+   */
+  Properties?: Array<KVPair>
+}
+
+/**
+ * DeleteSchema请求参数结构体
+ */
+export interface DeleteSchemaRequest {
+  /**
+   * <p>数据目录名</p>
+   */
+  CatalogName: string
+  /**
+   * <p>数据库名</p>
+   */
+  SchemaName: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误。通过ListConnections接口获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * UpdateConsoleUsers请求参数结构体
+ */
+export interface UpdateConsoleUsersRequest {
+  /**
+   * <p>用户 UIN 列表，单次最多100个</p>
+   */
+  UserUins: Array<string>
+  /**
+   * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul><p>可通过 ListConsoleRoles 接口获取</p>
+   */
+  RoleIds: Array<string>
+}
+
+/**
+ * GetWorkflowTaskRunRsp
+ */
+export interface GetWorkflowTaskRunRsp {
+  /**
+   * <p>任务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * <p>任务运行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowTaskRunId?: string
+  /**
+   * <p>运行状态。取值参考工作流任务运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunState?: string
+  /**
+   * <p>工作空间ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkspaceId?: string
+  /**
+   * <p>工作流ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * <p>工作流运行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunId?: string
+  /**
+   * <p>任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * <p>任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeName?: string
+  /**
+   * <p>任务版本ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskVersionId?: string
+  /**
+   * <p>触发类型</p><p>枚举值：</p><ul><li>Scheduler： 调度触发</li><li>Manual： 手动触发</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerType?: string
+  /**
+   * <p>所属资源组ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupId?: string
+  /**
+   * <p>错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeString?: string
+  /**
+   * <p>运行用户UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserUin?: string
+  /**
+   * <p>运行用户名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserName?: string
+  /**
+   * <p>创建人UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserUin?: string
+  /**
+   * <p>执行平台执行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobId?: string
+  /**
+   * <p>创建时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * <p>依赖任务完成时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependenceFinishedTime?: string
+  /**
+   * <p>运行开始时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunStartTime?: string
+  /**
+   * <p>运行结束时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunEndTime?: string
+  /**
+   * <p>运行时长，单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunCostTime?: string
+  /**
+   * <p>等待时长（依赖就绪到开始运行的等待耗时），单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaitTime?: string
+  /**
+   * <p>下发执行平台时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IssueTime?: string
+  /**
+   * <p>时区</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeZone?: string
+  /**
+   * <p>依赖上游任务ID列表。保留字段，暂时返回为[]</p><p>保留字段，暂时返回为[]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependOnList?: Array<string>
+  /**
+   * <p>运行参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunParams?: string
+  /**
+   * <p>任务扩展信息，包含脚本路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeExtensions?: string
+  /**
+   * <p>任务X坐标</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LeftCoordinate?: number
+  /**
+   * <p>任务Y坐标</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopCoordinate?: number
+  /**
+   * <p>重试次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryTimes?: number
+  /**
+   * <p>工作流名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * <p>重跑次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RerunTimes?: number
+  /**
+   * <p>是否最新一次运行</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLatestRun?: boolean
+  /**
+   * <p>资源组信息列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupInfoList?: Array<ResourceGroupInfo>
+  /**
+   * <p>错误消息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
+  /**
+   * <p>运行结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunResult?: string
+  /**
+   * <p>内嵌工作流任务运行详情（仅限 FOR_EACH 任务，其他任务类型不返回该字段）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerWorkflowTaskRun?: InnerWorkflowTaskRun
+  /**
+   * <p>计划调度时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduledTime?: string
+}
+
+/**
+ * 任务依赖简要信息
+ */
+export interface DependOnBrief {
+  /**
+   * 任务ID，可通过 ListWorkflowTasks 获取
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+}
+
+/**
+ * 文件夹定位器
+ */
+export interface FolderLocator {
+  /**
+   * <p>节点id</p>
+   */
+  FolderId?: string
+  /**
+   * <p>节点path</p>
+   */
+  PathName?: string
+}
+
+/**
+ * ListWorkspaceGroups返回参数结构体
+ */
+export interface ListWorkspaceGroupsResponse {
+  /**
+   * <p>工作空间用户组列表</p>
+   */
+  Data?: ListWorkspaceGroupsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateTableColumn请求参数结构体
+ */
+export interface UpdateTableColumnRequest {
+  /**
+   * <p>数据目录名称，必填</p>
+   */
+  CatalogName: string
+  /**
+   * <p>数据库名称，必填</p>
+   */
+  SchemaName: string
+  /**
+   * <p>表名，必填</p>
+   */
+  TableName: string
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>字段描述列表，必填</p>
+   */
+  Columns: Array<ColumnBrief>
+  /**
+   * <p>数据源连接ID，可选。分析版catalog不支持写操作，传入非空时返回错误。可通过 ListConnections 获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * 获取table列表响应
+ */
+export interface ListTablesRsp {
+  /**
+   * tabl列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<TableInfo>
+  /**
+   * 下页分页token
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextPageToken?: string
+}
+
+/**
+ * 文件存储
+ */
+export interface FileStorage {
+  /**
+   * 存储类型
+   */
+  StorageType?: number
+  /**
+   * 存储路径
+   */
+  StoragePath?: string
+  /**
+   * 文件内容
+   */
+  Content?: string
+}
+
+/**
+ * 修改数据卷信息响应
+ */
+export interface UpdateVolumeRsp {
+  /**
+   * 更新后的数据卷信息
+   */
+  Volume?: Volume
+}
+
+/**
+ * 监控指标配置
+ */
+export interface MonitorMetricBrief {
+  /**
+   * 监控指标 ID，创建时无需传入，由服务端生成
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorMetricId?: string
+  /**
+   * 告警的监控对象类型，如工作流、任务等，当前支持 1. WORKFLOW 2. TASK
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmMonitorType?: string
+  /**
+   * 监控指标列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metrics?: Array<MonitorMetricItem>
+}
+
+/**
+ * 参数键值对
+ */
+export interface ParamInfo {
+  /**
+   * 参数ID，创建时无需传入，由服务端生成
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamId?: string
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamKey?: string
+  /**
+   * 参数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamValue?: string
+}
+
+/**
+ * AddWorkspaceUsers返回参数结构体
+ */
+export interface AddWorkspaceUsersResponse {
+  /**
+   * <p>结果</p>
+   */
+  Data?: PlatformStatusRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateFunction返回参数结构体
+ */
+export interface UpdateFunctionResponse {
+  /**
+   * 返回结果
+   */
+  Data?: UpdateFunctionRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 工作空间信息
+ */
+export interface WorkspaceInfo {
+  /**
+   * 工作空间ID
+   */
+  WorkspaceId?: string
+  /**
+   * 工作空间名称
+   */
+  WorkspaceName?: string
+  /**
+   * 工作空间描述
+   */
+  Description?: string
+  /**
+   * 工作空间地域（如 ap-guangzhou）
+   */
+  WorkspaceRegion?: string
+  /**
+   * 工作空间状态：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除
+   */
+  Status?: number
+  /**
+   * 失败原因（Status=2 创建失败时有值）
+   */
+  ErrorReason?: string
+  /**
+   * 创建者信息
+   */
+  Creator?: StandardUserInfo
+  /**
+   * 创建时间，毫秒时间戳
+   */
+  CreateTime?: string
+  /**
+   * 更新时间，毫秒时间戳
+   */
+  UpdateTime?: string
+  /**
+   * 当前用户是否拥有该工作空间的访问权限
+   */
+  HasAccess?: boolean
+}
+
+/**
+ * ListWorkflowTaskRuns请求参数结构体
+ */
+export interface ListWorkflowTaskRunsRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>任务ID，可通过 ListWorkflowTasks 获取。非必填，精确匹配。与 WorkflowRunId 至少传一个：仅传 TaskId 时查询该任务的全部运行历史。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>工作流运行ID，可通过 ListWorkflowRuns 获取。非必填，精确匹配。与 TaskId 至少传一个：仅传 WorkflowRunId 时查询该次工作流运行下的全部任务运行。</p>
+   */
+  WorkflowRunId?: string
+  /**
+   * <p>分页页码，从 1 开始。非必填，默认 1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * 列表分区策略
+ */
+export interface ListPartitioning {
+  /**
+   * 分区字段
+   */
+  FiledNames: Array<string>
+  /**
+   * 分区
+   */
+  Assignments: Array<ListPartition>
+}
+
+/**
+ * 修改控制台用户响应
+ */
+export interface UpdateConsoleUsersRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
+}
+
+/**
+ * CreateModelVersion返回参数结构体
+ */
+export interface CreateModelVersionResponse {
+  /**
+   * <p>创建返回结果</p>
+   */
+  Data?: CreateModelVersionRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 工作流列表项的运行情况
+ */
+export interface WorkflowRunBrief {
+  /**
+   * 工作流运行ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunId?: string
+  /**
+   * 运行开始时间，单位：毫秒时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunStartTime?: string
+  /**
+   * <p>运行状态。CREATE(&quot;初始化&quot;),     QUEUED(&quot;等待中&quot;),     PENDING(&quot;准备中&quot;),     RUNNING(&quot;运行中&quot;),     SKIPPED(&quot;跳过运行&quot;),     SUCCESS(&quot;成功&quot;),     FAILED(&quot;失败&quot;),     TERMINATING(&quot;终止中&quot;),     TERMINATED(&quot;终止&quot;),     CANCELLED(&quot;被手动终止&quot;)等</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunState?: string
+  /**
+   * 运行错误码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeString?: string
+}
+
+/**
+ * catalog特征表详情
+ */
+export interface FeatureTableDetail {
+  /**
+   * <p>特征表主键字段列表</p>
+   */
+  PrimaryKeys?: Array<string>
+  /**
+   * <p>特征表时间戳字段名称</p>
+   */
+  TimestampField?: string
+  /**
+   * <p>在线特征表对应的来源表名称（离线表）</p>
+   */
+  SourceTableName?: string
+  /**
+   * <p>在线特征表关联的工作流ID</p>
+   */
+  WorkflowId?: string
+  /**
+   * <p>离线特征表对应生成的在线特征表名称</p>
+   */
+  OnlineTableName?: string
+  /**
+   * <p>离线特征表对应生成的在线特征表类型，取值：TENCENT_POSTGRESQL | REDIS），缺省 TENCENT_POSTGRESQL</p>
+   */
+  OnlineTableType?: string
+  /**
+   * <p>离线特征表对应生成的在线特征表ConnectionId</p>
+   */
+  ConnectionId?: string
+}
+
+/**
+ * 函数详情
+ */
+export interface FunctionInfo {
+  /**
+   * <p>函数名</p>
+   */
+  Name?: string
+  /**
+   * 函数类型，取值如JAVA、SCALA、PYTHON、SQL等
+   */
+  FunctionType?: string
+  /**
+   * 引擎类型，取值如SPARK、HIVE、PRESTO等
+   */
+  EngineType?: string
+  /**
+   * <p>类名</p>
+   */
+  ClassName?: string
+  /**
+   * <p>函数依赖的资源</p>
+   */
+  Resources?: Array<FunctionResource>
+  /**
+   * <p>描述</p>
+   */
+  Comment?: string
+  /**
+   * <p>属性</p>
+   */
+  Properties?: Array<KVPair>
+  /**
+   * <p>审计信息</p>
+   */
+  Audit?: Audit
+  /**
+   * <p>owner信息</p>
+   */
+  MetaOwner?: MetaOwner
+  /**
+   * <p>资产全局唯一ID</p>
+   */
+  AssetGuid?: string
+  /**
+   * <p>当前用户对该实体的权限信息</p>
+   */
+  PermissionDetail?: PermissionDetail
+  /**
+   * <p>标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回</p>
+   */
+  Tags?: Array<CommonTagInfo>
+}
+
+/**
+ * 控制台角色信息（对外标准版，与内部 Role 解耦）
+ */
+export interface ConsoleRoleInfo {
+  /**
+   * 角色基本信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BasicInfo?: RoleBasicInfo
+  /**
+   * 角色元信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaData?: RoleMetaData
+  /**
+   * 角色权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permissions?: Array<RolePermission>
+}
+
+/**
+ * 名称标识符，用于各层级（catalog/schema/table/view等）名称列表接口的返回条目
+ */
+export interface NameIdentifier {
+  /**
+   * <p>名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>命名空间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: Array<string>
+  /**
+   * <p>元数据来源，取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。响应体始终返回具体来源值，不会返回CATALOG_SOURCE_ALL。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogSource?: string
+  /**
+   * <p>TCLAKE Catalog取值：（注册中0，待测试1，连接成功2，连接失败3，删除中4，已删除5）<br>SETATS Catalog取值：（Creating=30, Available=31, Deleted=32, Scaling=33, Isolated=34, Failed=35，未知=0）</p>
+   */
+  Status?: string
+}
+
+/**
+ * ListSchemaNames返回参数结构体
+ */
+export interface ListSchemaNamesResponse {
+  /**
+   * <p>返回结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListSchemaNamesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 统一搜索返回结果
+ */
+export interface SearchResult {
+  /**
+   * <p>资产全名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullName?: string
+  /**
+   * <p>资产全局ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetGuid?: string
+  /**
+   * <p>各资产类别下的唯一ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetId?: string
+  /**
+   * <p>资产名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetName?: string
+  /**
+   * <p>资产类型，参见ListEntityTypeMetas返回的EntityType</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetType?: string
+  /**
+   * <p>用户活动</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserActivityInfo?: UserActivityInfo
+  /**
+   * <p>热度，值范围：[1,2,3,4]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Popularity?: string
+  /**
+   * <p>资产标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>责任人</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: Owner
+  /**
+   * <p>最近更新时间，毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifiedTime?: string
+  /**
+   * <p>描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * <p>工作空间ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkspaceId?: string
+  /**
+   * <p>工作空间文件夹路径（废弃）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkspaceFolderPath?: string
+  /**
+   * <p>高亮(废弃)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Highlighting?: Array<Highlighting>
+  /**
+   * <p>各类资产扩展信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: Array<KVPair>
+  /**
+   * <p>工作空间文件夹路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkspacePath?: string
+  /**
+   * <p>字段信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldInfo?: Array<FieldInfo>
+  /**
+   * <p>废弃</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SignalLevel?: string
+  /**
+   * <p>热度值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PopularityQuantity?: string
+  /**
+   * <p>高亮</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighlightingInfo?: HighlightingInfo
+  /**
+   * <p>字段标签列表，返回资产下所有字段上打的标签信息，用于展示字段级标签；每项包含 LabelId、LabelName、LabelType、FieldName、FieldType</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldTags?: Array<FieldTagInfo>
+  /**
+   * <p>资产别名列表。使用场景：仅指标、语义模型等业务资产支持多别名，其他资产类型返回空列表。前端可选择在资产名后面以【别名1、别名2】的形式展示</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Aliases?: Array<string>
+  /**
+   * <p>资产元数据来源。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。仅catalog类资产（CATALOG/SCHEMA/TABLE/VIEW/MODEL/VOLUME/FUNCTION/TABLE_COLUMN）返回该字段，非catalog类资产该字段为空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogSource?: string
+}
+
+/**
+ * 工作流基本信息（入参用）
+ */
+export interface WorkflowBaseInfo {
+  /**
+   * 工作流名称，长度不超过 1024
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 工作流ID，创建时无需传入，由服务端生成
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流运行人UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserUin?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 工作流负责人用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserName?: string
+  /**
+   * <p>创建人UIN。系统生成字段，仅出参返回，入参无需传入（传入不生效，服务端忽略且不报错）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  CreateUserUin?: string
+}
+
+/**
+ * 删除数据目录描述的响应
+ */
+export interface DeleteCatalogRsp {
+  /**
+   * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: boolean
+}
+
+/**
+ * GetFile返回参数结构体
+ */
+export interface GetFileResponse {
+  /**
+   * <p>返回结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: FileInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 范围分区策略
+ */
+export interface RangePartitioning {
+  /**
+   * 分区字段
+   */
+  FieldName: string
+  /**
+   * 分区
+   */
+  Assignments: Array<RangePartition>
+}
+
+/**
+ * 存储位置详情
+ */
+export interface LocationInfo {
+  /**
+   * 存储位置名
+   */
+  LocationName?: string
+  /**
+   * 存储位置URI
+   */
+  LocationUri?: string
+  /**
+   * 存储位置描述
+   */
+  Comment?: string
+  /**
+   * 存储位置属性
+   */
+  Properties?: Array<KVPair>
+  /**
+   * 审计信息
+   */
+  Audit?: Audit
+}
+
+/**
+ * ListConsoleGroupUsers返回参数结构体
+ */
+export interface ListConsoleGroupUsersResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: ListConsoleGroupUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddWorkspaceGroups返回参数结构体
+ */
+export interface AddWorkspaceGroupsResponse {
+  /**
+   * <p>添加结果</p>
+   */
+  Data?: PlatformStatusRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询工作空间详情响应
+ */
+export interface GetWorkspaceRsp {
+  /**
+   * 工作空间详情
+   */
+  WorkspaceInfo?: WorkspaceInfo
+}
+
+/**
+ * CreateConsoleGroup请求参数结构体
+ */
+export interface CreateConsoleGroupRequest {
+  /**
+   * <p>用户组名称</p>
+   */
+  GroupName: string
+  /**
+   * <p>用户组别名</p>
+   */
+  GroupNickname?: string
+  /**
+   * <p>用户组描述</p>
+   */
+  Description?: string
+}
+
+/**
+ * 获取schema详情的响应
+ */
+export interface GetSchemaRsp {
+  /**
+   * schema详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Schema?: Schema
+}
+
+/**
+ * 控制台用户信息（规范化，与内部 UserDetailInfo 解耦）
+ */
+export interface ConsoleUserInfo {
+  /**
+   * 用户 UIN
+   */
+  UserUin?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 昵称
+   */
+  Nickname?: string
+  /**
+   * 角色列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Roles?: Array<RoleBasicInfo>
+  /**
+   * 用户来源，group：用户组、user:用户
+   */
+  UserSource?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 是否主账号
+   */
+  IsOwner?: boolean
+  /**
+   * 0: 普通用户 1: entraId用户
+   */
+  UserTag?: number
+  /**
+   * 是否具有 admin 权限的子账号
+   */
+  IsAdmin?: boolean
+}
+
+/**
+ * UpdateTable请求参数结构体
+ */
+export interface UpdateTableRequest {
+  /**
+   * <p>数据目录名称，必填</p>
+   */
+  CatalogName: string
+  /**
+   * <p>数据库名称，必填</p>
+   */
+  SchemaName: string
+  /**
+   * <p>表名，必填</p>
+   */
+  TableName: string
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>新名称，可选，为空表示不修改名称</p>
+   */
+  NewName?: string
+  /**
+   * <p>新描述，可选，为空表示不修改注释</p>
+   */
+  NewComment?: string
+  /**
+   * <p>数据源连接ID，可选。分析版catalog不支持写操作，传入非空时返回错误。可通过 ListConnections 获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * 用户基本信息
+ */
+export interface UserInfo {
+  /**
+   * <p>uin</p>
+   */
+  UserUin?: string
+  /**
+   * <p>子用户名称</p>
+   */
+  UserName?: string
+  /**
+   * <p>子用户昵称</p>
+   */
+  Nickname?: string
+  /**
+   * <p>0: 普通用户 1: entraId用户</p>
+   */
+  UserTag?: string
 }
 
 /**
@@ -2653,72 +3595,289 @@ export interface WorkflowTaskRun {
 }
 
 /**
- * 批量获取表元数据响应
+ * ListFeatureTableResp返回
  */
-export interface GetTablesRsp {
+export interface ListFeatureTableResp {
   /**
-   * 表信息列表。注意：仅返回当前workspace有权限的catalog下的表，无权限的表会被静默跳过
+   * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items?: Array<TableInfo>
+  TotalCount?: string
+  /**
+   * 返回列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<FeatureTable>
+  /**
+   * 下一页token，为空表示没有更多数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextPageToken?: string
 }
 
 /**
- * ListWorkspaceUsers请求参数结构体
+ * 删除工作空间响应
  */
-export interface ListWorkspaceUsersRequest {
+export interface DeleteWorkspaceRsp {
   /**
-   * <p>工作空间ID</p>
+   * 操作是否成功
    */
-  WorkspaceId: string
-  /**
-   * <p>用户名称或 UIN 模糊匹配</p>
-   */
-  UserKeyword?: string
-  /**
-   * <p>角色ID列表，过滤角色关联的用户；可通过 ListWorkspaceRoles 接口获取</p>
-   */
-  RoleIds?: Array<string>
-  /**
-   * <p>用户UIN列表，按UIN精确筛选</p>
-   */
-  UserUins?: Array<string>
-  /**
-   * <p>排序字段列表，如 [{Name: CreateTime, Direction: DESC}]；传入单个即单字段排序，默认按创建时间降序</p>
-   */
-  OrderBys?: Array<OrderBy>
-  /**
-   * <p>页码，默认1，从1开始；小于1时按1处理</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页条数，默认10，取值范围为 [1,100]，越界时自动收敛到边界值</p>
-   */
-  PageSize?: number
-  /**
-   * <p>扩展信息（首次请求为空，翻页请求带响应中的ExtendInfo。连续翻页且item涉及权限过滤等场景，用于定位下次offset）</p>
-   */
-  ExtendInfo?: string
+  Status?: boolean
 }
 
 /**
- * GetFolder返回参数结构体
+ * 工作流列表项
  */
-export interface GetFolderResponse {
+export interface WorkflowBrief {
   /**
-   * <p>文件夹详情结果</p>
+   * <p>工作流名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: GetFolderRsp
+  WorkflowName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>工作流ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  WorkflowId?: string
+  /**
+   * <p>描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>创建人UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserUin?: string
+  /**
+   * <p>工作流负责人用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserName?: string
+  /**
+   * <p>工作流负责人UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserUin?: string
+  /**
+   * <p>工作流负责人展示名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerDisplayName?: string
+  /**
+   * <p>创建时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * <p>标签列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelList?: Array<LabelBrief>
+  /**
+   * <p>工作流调度配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Trigger?: Array<WorkflowTriggerConfiguration>
+  /**
+   * <p>工作流运行人UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserUin?: string
+  /**
+   * <p>工作流运行人用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserName?: string
+  /**
+   * <p>工作流任务节点列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskList?: Array<WorkflowTaskNodeBrief>
+  /**
+   * <p>工作流运行情况列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunList?: Array<WorkflowRunBrief>
+  /**
+   * <p>资源组信息列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupInfoList?: Array<ResourceGroupInfo>
+  /**
+   * <p>授权权限类型<br>PERMISSION_TYPE_UNSPECIFIED：未指定权限<br>MANAGE : 管理权限：包含所有操作权限<br>RUN : 运行权限：可执行实体<br>VIEW : 查看权限：可查看实体内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permission?: string
+  /**
+   * <p>工作流绑定的 Bundle 唯一标识，未绑定时为空</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleId?: string
+  /**
+   * <p>Bundle信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleInfo?: string
+  /**
+   * <p>Git配置ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GitConfigId?: string
+  /**
+   * <p>Git分支信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GitBranch?: string
 }
 
 /**
- * 删除数据目录描述的响应
+ * 索引结构
  */
-export interface DeleteCatalogRsp {
+export interface Index {
+  /**
+   * 字段键值类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 字段名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldNames?: Array<string>
+  /**
+   * 字段键值类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexType?: string
+}
+
+/**
+ * 工作空间用户信息
+ */
+export interface WorkspaceUserInfo {
+  /**
+   * <p>用户UIN</p>
+   */
+  UserUin?: string
+  /**
+   * <p>用户名</p>
+   */
+  UserName?: string
+  /**
+   * <p>昵称</p>
+   */
+  Nickname?: string
+  /**
+   * <p>角色列表</p>
+   */
+  Roles?: Array<RoleBasicInfo>
+  /**
+   * <p>用户来源，group：用户组、user：用户</p>
+   */
+  UserSource?: string
+  /**
+   * <p>创建时间，毫秒时间戳</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间，毫秒时间戳</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>是否主账号</p>
+   */
+  IsOwner?: boolean
+  /**
+   * <p>0: 普通用户 1: entraId用户</p>
+   */
+  UserTag?: number
+  /**
+   * <p>是否具有 admin 权限的子账号</p>
+   */
+  IsAdmin?: boolean
+  /**
+   * <p>合并后标签（用户直绑 + 用户组继承）</p>
+   */
+  Tags?: Array<UserTagInfo>
+}
+
+/**
+ * 修改存储位置响应
+ */
+export interface UpdateLocationRsp {
+  /**
+   * 修改后的存储位置详情
+   */
+  Location?: LocationInfo
+}
+
+/**
+ * 文件元数据
+ */
+export interface FileMeta {
+  /**
+   * <p>文件id</p>
+   */
+  FileId?: string
+  /**
+   * <p>文件/文件夹名称</p>
+   */
+  FileName?: string
+  /**
+   * <p>文件类型</p>
+   */
+  FileType?: string
+  /**
+   * <p>创建时间，毫秒秒级时间戳</p><p>参数格式：时间戳</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：时间戳字符串</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>acl权限类型</p>
+   */
+  AllowActions?: Array<string>
+  /**
+   * <p>是否收藏</p>
+   */
+  IsFavorite?: boolean
+  /**
+   * <p>文件path</p>
+   */
+  PathName?: string
+  /**
+   * <p>是否系统创建</p>
+   */
+  IsSystemGenerated?: boolean
+}
+
+/**
+ * 修改模型版本信息响应
+ */
+export interface UpdateModelVersionRsp {
+  /**
+   * 更新后的模型版本信息
+   */
+  ModelVersion?: ModelVersionInfo
+}
+
+/**
+ * 删除view的响应
+ */
+export interface DeleteViewRsp {
   /**
    * 操作结果
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2727,148 +3886,25 @@ export interface DeleteCatalogRsp {
 }
 
 /**
- * CreateWorkflowRsp
+ * 控制台用户组成员信息（对外标准版，与内部 GroupUserInfo 解耦）
  */
-export interface CreateWorkflowRsp {
+export interface ConsoleGroupUserInfo {
   /**
-   * 工作流ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户 UIN
    */
-  WorkflowId?: string
-}
-
-/**
- * GetFile返回参数结构体
- */
-export interface GetFileResponse {
+  UserUin?: string
   /**
-   * <p>返回结果</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户名
    */
-  Data?: FileInfo
+  UserName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 昵称
    */
-  RequestId?: string
-}
-
-/**
- * OneFlow 透传的 Workspace 异步文件操作信息；作业状态由 Workspace 持久化和维护
- */
-export interface AsyncOperation {
-  /**
-   * 是否异步执行；ZIP 解压创建时为 true
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsAsync: boolean
-  /**
-   * Workspace 持久化的异步作业 ID，用于查询作业进度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  JobId: string
-  /**
-   * 调用方生成的提交幂等与链路追踪标识
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OperationId: string
-  /**
-   * 异步作业状态：0-未指定，1-已受理，2-解压中，3-回调处理中，4-成功，5-部分失败，6-失败
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: number
-}
-
-/**
- * 创建脱敏策略时的策略信息
- */
-export interface DataMaskStrategyInfo {
-  /**
-   * 策略名称，必填，长度 1~128 字符，同一项目下唯一
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StrategyName: string
-  /**
-   * 用户组脱敏规则列表，必填，至少包含一条规则。每条规则描述某个用户组对应的脱敏方法
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Groups: Array<DataMaskGroup>
-  /**
-   * 策略类型，必填，直接透传给 DLC。合法值：MASK_SHOW_FIRST_4（保留前四个字符）、MASK_SHOW_LAST_4（保留后四个字符）、MASK_HASH（哈希脱敏）、MASK_DATE_SHOW_YEAR（日期脱敏保留年份）、MASK_NULL（置为 NULL）、MASK_DEFAULT（默认值脱敏）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StrategyType?: string
-  /**
-   * 策略描述，可选，最大 512 字符
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StrategyDesc?: string
-  /**
-   * 策略ID
-   */
-  StrategyId?: string
-  /**
-   * 该脱敏策略当前绑定的敏感标签列表。使用场景：表详情弹窗回显“此策略关联了哪些敏感标签”，前端可 hover 展示。数据源：catalog-manager 域 meta_label_mask_policy_rel JOIN meta_biz_label，按 policy_id 反查。未关联任何敏感标签时为空数组。前置条件：仅当所在 ColumnInfo.DataMaskStrategyInfo 非空时才有查询意义。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Labels?: Array<DataMaskLabelInfo>
-}
-
-/**
- * 查询文件信息结果
- */
-export interface ListFilesRsp {
-  /**
-   * <p>文件/文件夹节点列表</p>
-   */
-  Items?: Array<FileNode>
-  /**
-   * <p>当前页码</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页条数</p>
-   */
-  PageSize?: number
-  /**
-   * <p>总条数</p>
-   */
-  TotalCount?: number
-  /**
-   * <p>总页数</p>
-   */
-  TotalPageNumber?: number
-}
-
-/**
- * 范围分区策略
- */
-export interface RangePartitioning {
-  /**
-   * 分区字段
-   */
-  FieldName: string
-  /**
-   * 分区
-   */
-  Assignments: Array<RangePartition>
-}
-
-/**
- * 角色元数据
- */
-export interface RoleMetaData {
-  /**
-   * 创建者
-   */
-  Creator?: string
+  Nickname?: string
   /**
    * 创建时间
    */
   CreateTime?: string
-  /**
-   * 更新者
-   */
-  Updater?: string
   /**
    * 更新时间
    */
@@ -2876,14 +3912,1700 @@ export interface RoleMetaData {
 }
 
 /**
- * 查询工作流运行详情响应。
+ * UpdateConsoleGroup请求参数结构体
  */
-export interface GetWorkflowRunRsp {
+export interface UpdateConsoleGroupRequest {
   /**
-   * 工作流运行信息
+   * <p>用户组 ID，可通过 ListConsoleGroups 接口获取</p>
+   */
+  GroupId: string
+  /**
+   * <p>修改标识：USER_GROUP_OPER_TYPE_ADD_USER(1)=添加成员、USER_GROUP_OPER_TYPE_DELETE_USER(2)=删除成员、USER_GROUP_OPER_TYPE_BASIC_INFO(3)=基础信息（别名和描述）</p>
+   */
+  OperType: number
+  /**
+   * <p>用户组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>用户组别名</p>
+   */
+  GroupNickname?: string
+  /**
+   * <p>用户组描述</p>
+   */
+  Description?: string
+  /**
+   * <p>成员 UIN 列表（OperType 为添加/删除成员时使用），单次最多100个</p>
+   */
+  UserUins?: Array<string>
+}
+
+/**
+ * 修改函数信息响应
+ */
+export interface UpdateFunctionRsp {
+  /**
+   * 更新后的函数信息
+   */
+  Function?: FunctionInfo
+}
+
+/**
+ * GetWorkflow返回参数结构体
+ */
+export interface GetWorkflowResponse {
+  /**
+   * <p>获取工作流详细信息响应内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowRun?: WorkflowRun
+  Data?: GetWorkflowRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 用户/用户组标签维度信息（用户管理域独立结构，与通用 TagInfo 解耦，仅供用户/用户组标签接口使用）
+ */
+export interface UserTagInfo {
+  /**
+   * <p>标签维度ID。ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中必填，可通过 ListTags 接口出参 Items[].TagId 获取，也可通过 CreateTags 创建后获取；按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中无需传入；查询接口出参中回填。ID 不存在或已删除时接口报错 TagNotExist</p>
+   */
+  TagId?: string
+  /**
+   * <p>标签名称。按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中必填；ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中无需传入，服务端忽略；查询接口出参中回填</p>
+   */
+  TagName?: string
+  /**
+   * <p>该标签维度下绑定的标签值集合，元素结构见 TagValueInfo。ID 模式写接口中元素 TagValueId 必填；按名称模式接口中元素 TagValue 必填；查询接口出参中回填</p>
+   */
+  Values?: Array<TagValueInfo>
+}
+
+/**
+ * DeleteVolume请求参数结构体
+ */
+export interface DeleteVolumeRequest {
+  /**
+   * <p>数据目录名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>数据卷名称</p>
+   */
+  VolumeName: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+}
+
+/**
+ * 高级依赖配置
+ */
+export interface AdvancedDependencyConfig {
+  /**
+   * 逻辑运算符号OR / AND
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
+  /**
+   * 任务运行条件规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Conditions?: Array<TaskRunConditionRule>
+}
+
+/**
+ * 文件详情
+ */
+export interface FileInfo {
+  /**
+   * <p>主账号 AppId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: string
+  /**
+   * <p>工作空间 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkspaceId?: string
+  /**
+   * <p>文件 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileId?: string
+  /**
+   * <p>文件名，含后缀</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileType?: string
+  /**
+   * <p>文件在工作空间中的完整路径，以 / 开头，如 /etl/daily/demo.ipynb</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * <p>文件运行配置</p>
+   */
+  FileConfig?: FileConfig
+  /**
+   * <p>绑定的 BundleId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleId?: string
+  /**
+   * <p>绑定的 BundleInfo，JSON 字符串</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleInfo?: string
+  /**
+   * <p>文件状态。active=正常，deleted=已删除</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>文件负责人用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserName?: string
+  /**
+   * <p>创建人子账号 Uin</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserUin?: string
+  /**
+   * <p>最近更新人子账号 Uin</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateUserUin?: string
+  /**
+   * <p>创建时间，毫秒级时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>最近更新时间，毫秒级时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * <p>文件存储信息。仅当请求 IncludeContent=true 时返回内容</p>
+   */
+  Storage?: FileStorage
+  /**
+   * <p>当前调用方对该文件的权限点列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permissions?: string
+  /**
+   * <p>是否已发布</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseStatus?: boolean
+  /**
+   * <p>资源模式。1=分布式，2=单节点</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceMode?: number
+  /**
+   * <p>ZIP 异步创建时透传 Workspace 作业信息；普通同步创建或其他复用该返回结构的接口不设置该字段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncOperation?: AsyncOperation
+  /**
+   * <p>脚本版本ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+}
+
+/**
+ * UpdateModel请求参数结构体
+ */
+export interface UpdateModelRequest {
+  /**
+   * 目录名称，必填
+   */
+  CatalogName: string
+  /**
+   * 模式名称，必填
+   */
+  SchemaName: string
+  /**
+   * 模型名称，必填
+   */
+  ModelName: string
+  /**
+   * 调用时所在workspace唯一id，必填
+   */
+  WorkspaceId: string
+  /**
+   * 新名称，可选，为空表示不修改名称
+   */
+  NewName?: string
+  /**
+   * 新注释，可选，为空表示不修改注释
+   */
+  NewComment?: string
+}
+
+/**
+ * 表信息
+ */
+export interface TableInfo {
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 字段信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<ColumnInfo>
+  /**
+   * 属性值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: Array<KVPair>
+  /**
+   * 分区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Partitioning?: Array<Partitioning>
+  /**
+   * 索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Indexes?: Array<Index>
+  /**
+   * 编辑者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Audit?: Audit
+  /**
+   * 表版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableFormat?: string
+  /**
+   * owner信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaOwner?: MetaOwner
+  /**
+   * 资产全局唯一ID
+   */
+  AssetGuid?: string
+  /**
+   * 总文件数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilesCount?: string
+  /**
+   * 总数据量大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilesSize?: string
+  /**
+   * 表类型
+
+- Managed 内部
+- External 外部
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableType?: string
+  /**
+   * 特征表类型：Online-在线表 Offline-离线表 空字符串-非特征表
+   */
+  FeatureTableType?: string
+  /**
+   * 特征表详细信息，仅当FeatureTableType不为空时有值
+   */
+  FeatureTableDetail?: FeatureTableDetail
+  /**
+   * 当前用户对该实体的权限信息
+   */
+  PermissionDetail?: PermissionDetail
+  /**
+   * 表级标签列表，仅当请求中FetchOption.FetchTags=true时返回，默认不返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<CommonTagInfo>
+}
+
+/**
+ * ListSchemaNames请求参数结构体
+ */
+export interface ListSchemaNamesRequest {
+  /**
+   * <p>数据目录名，必填</p>
+   */
+  CatalogName: string
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>最大结果条数，可选，默认10</p>
+   */
+  MaxResults?: string
+  /**
+   * <p>分页token信息(base64编码，包含offset、snapshotId等)</p>
+   */
+  PageToken?: string
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，取值参考CatalogSourceEnum：METALAKE/CONNECTION/SETATS</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * CreateModel请求参数结构体
+ */
+export interface CreateModelRequest {
+  /**
+   * catalog 信息
+   */
+  CatalogName: string
+  /**
+   * schema 信息
+   */
+  SchemaName: string
+  /**
+   * 模型名称
+   */
+  ModelName: string
+  /**
+   * 调用时所在workspace唯一id
+   */
+  WorkspaceId: string
+  /**
+   * 描述信息
+   */
+  Comment?: string
+  /**
+   * 扩展参数
+   */
+  Properties?: Array<KVPair>
+}
+
+/**
+ * 更新文件夹回包
+ */
+export interface UpdateFolderRsp {
+  /**
+   * <p>更新文件夹结果，true为成功</p>
+   */
+  Status?: boolean
+}
+
+/**
+ * GetVolume返回参数结构体
+ */
+export interface GetVolumeResponse {
+  /**
+   * <p>获取volume详情</p>
+   */
+  Data?: GetVolumeRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 创建工作空间角色结果
+ */
+export interface CreateWorkspaceRoleResult {
+  /**
+   * 角色id
+   */
+  RoleId?: string
+  /**
+   * 创建工作空间角色是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: boolean
+}
+
+/**
+ * RunWorkflow返回参数结构体
+ */
+export interface RunWorkflowResponse {
+  /**
+   * <p>运行工作流响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: AsyncActionRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopCompute请求参数结构体
+ */
+export interface StopComputeRequest {
+  /**
+   * 工作空间 ID
+   */
+  WorkspaceId: string
+  /**
+   * 计算资源 ID，可通过 ListComputes 接口获取（返回字段 Items[].BasicInfo.ResourceId）。替代已废弃的 ResourceId；过渡期 ComputeResourceId 与 ResourceId 至少传一个，同时传时必须一致
+   */
+  ComputeResourceId?: string
+  /**
+   * [已废弃，请使用 ComputeResourceId] 计算资源 ID，可通过 ListComputes 接口获取（返回字段 Items[].BasicInfo.ResourceId）
+   */
+  ResourceId?: string
+}
+
+/**
+ * RemoveWorkspaceGroups请求参数结构体
+ */
+export interface RemoveWorkspaceGroupsRequest {
+  /**
+   * <p>用户组ID列表，可通过 ListWorkspaceGroups 接口获取</p>
+   */
+  GroupIds: Array<string>
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+}
+
+/**
+ * 高级运行参数（工作流高级运行时用户填入的参数）
+ */
+export interface AdvancedParameter {
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamKey?: string
+  /**
+   * 参数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamValue?: string
+}
+
+/**
+ * CreateVolume返回参数结构体
+ */
+export interface CreateVolumeResponse {
+  /**
+   * 创建返回数据卷信息
+   */
+  Data?: CreateVolumeRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCatalog请求参数结构体
+ */
+export interface DeleteCatalogRequest {
+  /**
+   * <p>数据目录名</p>
+   */
+  CatalogName: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * 创建模型返回数据
+ */
+export interface CreateModelRsp {
+  /**
+   * 模型信息
+   */
+  Model?: ModelInfo
+}
+
+/**
+ * 截断分区策略
+ */
+export interface TruncatePartitioning {
+  /**
+   * 字段名
+   */
+  FiledName: string
+  /**
+   * 截取长度
+   */
+  Width: string
+}
+
+/**
+ * 创建模型版本返回
+ */
+export interface CreateModelVersionRsp {
+  /**
+   * 创建成功
+   */
+  Created?: boolean
+}
+
+/**
+ * SearchAsset返回参数结构体
+ */
+export interface SearchAssetResponse {
+  /**
+   * <p>返回信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: SearchAssetRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 标签信息，入参时用于指定打标标签，出参时返回资产已打的标签（入参+出参共用）
+ */
+export interface TagInfo {
+  /**
+   * 标签ID（入参必填）
+   */
+  LabelId: string
+  /**
+   * 标签名称（入参必填）
+   */
+  LabelName: string
+  /**
+   * <p>标签类型（入参必填）</p><p>枚举值：</p><ul><li>1：GOVERNANCE_LABEL：治理标签（标签管理页手动创建）</li><li>2：CUSTOM_LABEL：自定义标签（打标时自动创建）</li><li>3：PROPERTY_LABEL：属性标签（Key-Value键值对）</li><li>4：DESENSITIZATION_LABEL：脱敏标签（与脱敏策略绑定）</li></ul>
+   */
+  Type: number
+  /**
+   * 标签值ID（可选）；属性标签可为0；LabelType=4（脱敏标签）时非必填
+   */
+  LabelValueId?: string
+  /**
+   * 标签值（可选）；LabelType=4（脱敏标签）时非必填
+   */
+  LabelValue?: string
+  /**
+   * 【仅出参，入参无需填写】标签是否已被物理删除（true=已删除）
+   */
+  IsDeleted?: boolean
+  /**
+   * 【仅入参，出参不返回】是否自动创建自定义标签（可选，默认 false）；true=当 LabelName 非空且标签不存在时，自动创建 LabelType=2（CUSTOM_LABEL）的自定义标签；false=仅使用已有标签打标，标签不存在时报错
+   */
+  CreateCustomLabel?: boolean
+}
+
+/**
+ * GetTable返回参数结构体
+ */
+export interface GetTableResponse {
+  /**
+   * <p>表信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: GetTableRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListConsoleRoles请求参数结构体
+ */
+export interface ListConsoleRolesRequest {
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>角色名称或描述模糊匹配</p>
+   */
+  RoleKeyword?: string
+}
+
+/**
+ * 获取数据目录名称列表响应
+ */
+export interface ListCatalogNamesRsp {
+  /**
+   * 数据目录名列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<NameIdentifier>
+  /**
+   * 下页分页token信息(base64编码，包含offset、snapshotId等)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextPageToken?: string
+}
+
+/**
+ * 用户对资产的操作信息
+ */
+export interface UserActivityInfo {
+  /**
+   * 是否收藏
+- true  是
+- false 否
+   */
+  IsFavorite: boolean
+  /**
+   * 上次查看时间
+   */
+  LastViewTime: string
+}
+
+/**
+ * 通用错误信息
+ */
+export interface CommonFailItem {
+  /**
+   * <p>uin或者groupId</p>
+   */
+  Item?: string
+  /**
+   * <p>错误信息</p>
+   */
+  FailReason?: string
+}
+
+/**
+ * 字段级标签信息，用于资产打标时指定字段维度的标签（入参+出参共用）
+ */
+export interface FieldTagInfo {
+  /**
+   * 字段名称（必填）；清除标记场景（LabelId=-1）下为待清除字段名
+   */
+  FieldName: string
+  /**
+   * <p>标签ID</p><p>特殊值：-1 表示「清除标记」，仅在 BatchAttachAssetTag 接口中生效：服务端会清除该 FieldName 下所有已有字段标签。使用 -1 时 FieldName 必填，其余字段可留空。</p>
+   */
+  LabelId?: string
+  /**
+   * 标签名称（可选）
+   */
+  LabelName?: string
+  /**
+   * <p>标签类型</p><p>枚举值：</p><ul><li>1：GOVERNANCE_LABEL：治理标签</li><li>2：CUSTOM_LABEL：自定义标签</li><li>3：PROPERTY_LABEL：属性标签</li><li>4：DESENSITIZATION_LABEL：脱敏标签</li></ul><p>字段打标规则：非脱敏标签（1/2/3）时 LabelValue 必填；脱敏标签（4）时 LabelValue 可为空</p>
+   */
+  LabelType?: number
+  /**
+   * 字段类型（可选），如 string、int、bigint 等
+   */
+  FieldType?: string
+  /**
+   * 标签值ID（可选）；非脱敏标签（LabelType!=4）建议填充；属性标签（LabelType=3）可为0；脱敏标签（LabelType=4）及清除标记（LabelId=-1）场景可留空
+   */
+  LabelValueId?: string
+  /**
+   * 标签值；非脱敏标签（LabelType!=4）必填，例如治理/自定义/属性标签均需携带业务语义值；脱敏标签（LabelType=4）及清除标记（LabelId=-1）场景可为空
+   */
+  LabelValue?: string
+}
+
+/**
+ * 修改视图信息响应
+ */
+export interface UpdateViewRsp {
+  /**
+   * 更新后的视图信息
+   */
+  View?: ViewInfo
+}
+
+/**
+ * 通用标签信息（用于查询展示场景），适用于表标签、字段标签等各类资产标签的轻量展示，供GetTable等接口返回使用
+ */
+export interface CommonTagInfo {
+  /**
+   * 标签ID
+   */
+  LabelId?: string
+  /**
+   * 标签名称
+   */
+  LabelName?: string
+  /**
+   * 标签值ID，属性标签（LabelType=3）可为0
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValueId?: string
+  /**
+   * 标签值，脱敏标签（LabelType=4）时可为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValue?: string
+  /**
+   * 标签类型，取值参考LabelType枚举定义：1-治理标签，2-自定义标签，3-属性标签，4-脱敏标签
+   */
+  Type?: number
+  /**
+   * 标签是否已删除。true表示该LabelId在meta_biz_label中查不到记录，标签已被物理删除；false（默认）表示标签仍存在
+   */
+  Deleted?: boolean
+}
+
+/**
+ * UpdateWorkspaceUsersRoles返回参数结构体
+ */
+export interface UpdateWorkspaceUsersRolesResponse {
+  /**
+   * <p>结果</p>
+   */
+  Data?: PlatformStatusRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 获取table详情的响应
+ */
+export interface GetTableRsp {
+  /**
+   * table详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Table?: TableInfo
+}
+
+/**
+ * ListConsoleRoles返回参数结构体
+ */
+export interface ListConsoleRolesResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: ListConsoleRolesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 获取模型版本结果
+ */
+export interface GetModelVersionRsp {
+  /**
+   * 模型详情
+   */
+  ModelVersion?: ModelVersionInfo
+}
+
+/**
+ * 删除table的响应
+ */
+export interface DeleteTableRsp {
+  /**
+   * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: boolean
+}
+
+/**
+ * CreateConsoleGroup返回参数结构体
+ */
+export interface CreateConsoleGroupResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: CreateConsoleGroupRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLocation返回参数结构体
+ */
+export interface DeleteLocationResponse {
+  /**
+   * 返回结果
+   */
+  Data?: DeleteLocationRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 字段信息
+ */
+export interface ColumnInfo {
+  /**
+   * 字段名称
+   */
+  Name: string
+  /**
+   * 字段类型
+   */
+  Type: string
+  /**
+   * 字段描述
+   */
+  Comment?: string
+  /**
+   * 字段设置
+   */
+  FieldSetting?: string
+  /**
+   * 是否为主键
+   */
+  IsPrimaryKey?: boolean
+  /**
+   * 字段策略
+   */
+  DataMaskStrategyInfo?: DataMaskStrategyInfo
+  /**
+   * 字段级标签列表，仅当请求中FetchOption.FetchTags=true时返回，默认不返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<CommonTagInfo>
+  /**
+   * 字段关联的字典维度信息，仅当请求中FetchOption.FetchDictDimensions=true时返回，默认不返回；若该字段未关联任何字典维度则为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DictDimension?: DictDimensionInfo
+}
+
+/**
+ * CreateWorkspaceRole返回参数结构体
+ */
+export interface CreateWorkspaceRoleResponse {
+  /**
+   * <p>创建工作空间角色返回</p>
+   */
+  Data?: CreateWorkspaceRoleResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddWorkspaceGroups请求参数结构体
+ */
+export interface AddWorkspaceGroupsRequest {
+  /**
+   * <p>用户组ID，可通过 ListConsoleGroups 接口获取</p>
+   */
+  GroupIds: Array<string>
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>角色ID，可通过 ListWorkspaceRoles 接口获取</p>
+   */
+  RoleIds: Array<string>
+}
+
+/**
+ * ListConsoleGroupUsers请求参数结构体
+ */
+export interface ListConsoleGroupUsersRequest {
+  /**
+   * <p>用户组 ID，可通过 ListConsoleGroups 接口获取</p>
+   */
+  GroupId: string
+  /**
+   * <p>用户名称或 UIN 模糊匹配</p>
+   */
+  UserKeyword?: string
+  /**
+   * <p>通过 UIN 批量查询用户信息</p>
+   */
+  UserUins?: Array<string>
+  /**
+   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大100</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * GetView返回参数结构体
+ */
+export interface GetViewResponse {
+  /**
+   * <p>view详情</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: GetViewRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveWorkspaceGroups返回参数结构体
+ */
+export interface RemoveWorkspaceGroupsResponse {
+  /**
+   * <p>移除工作空间用户组是否成功</p>
+   */
+  Data?: PlatformStatusRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateConsoleUsers返回参数结构体
+ */
+export interface UpdateConsoleUsersResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: UpdateConsoleUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListViewNames返回参数结构体
+ */
+export interface ListViewNamesResponse {
+  /**
+   * <p>返回结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListViewNamesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 删除模型结果
+ */
+export interface DeleteModelRsp {
+  /**
+   * 是否删除成功
+   */
+  Result?: boolean
+}
+
+/**
+ * CreateVolume请求参数结构体
+ */
+export interface CreateVolumeRequest {
+  /**
+   * catalog 信息
+   */
+  CatalogName: string
+  /**
+   * schema 信息
+   */
+  SchemaName: string
+  /**
+   * 数据卷名称
+   */
+  VolumeName: string
+  /**
+   * 调用时所在workspace唯一id
+   */
+  WorkspaceId: string
+  /**
+   * 描述信息
+   */
+  Comment?: string
+  /**
+   * 扩展参数
+   */
+  Properties?: Array<KVPair>
+  /**
+   * 存储位置
+   */
+  StorageLocation?: string
+  /**
+   * 数据卷类型
+   */
+  Type?: string
+}
+
+/**
+ * GetWorkspace返回参数结构体
+ */
+export interface GetWorkspaceResponse {
+  /**
+   * <p>工作空间详情</p>
+   */
+  Data?: GetWorkspaceRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveConsoleUsers返回参数结构体
+ */
+export interface RemoveConsoleUsersResponse {
+  /**
+   * <p>批量移除控制台用户结果</p>
+   */
+  Data?: RemoveConsoleUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetTables请求参数结构体
+ */
+export interface GetTablesRequest {
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>表的全名列表，格式为 catalogName.schemaName.tableName，必填，至少1条，最大20条</p>
+   */
+  FullNames: Array<string>
+  /**
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   */
+  FetchOption?: FetchOption
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，要求所有FullNames属于同一catalog（分析版额外约束）；空/缺省→走专业版TcLake路径。通过ListConnections接口获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * ListModels请求参数结构体
+ */
+export interface ListModelsRequest {
+  /**
+   * <p>数据目录名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>最大结果条数，默认10，取值1~10000</p>
+   */
+  MaxResults: number
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>分页信息</p>
+   */
+  PageToken?: string
+  /**
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   */
+  FetchOption?: FetchOption
+}
+
+/**
+ * 内嵌工作流单次迭代运行信息
+ */
+export interface InnerWorkflowTaskRunIteration {
+  /**
+   * <p>内嵌工作流运行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunId?: string
+  /**
+   * <p>迭代序号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IterationIndex?: string
+  /**
+   * <p>运行开始时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunStartTime?: string
+  /**
+   * <p>运行结束时间，单位：毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunEndTime?: string
+  /**
+   * <p>运行状态（参考工作流运行状态枚举）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunState?: string
+  /**
+   * <p>运行时长，单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunCostTime?: string
+  /**
+   * <p>运行参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowParams?: string
+  /**
+   * <p>错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeString?: string
+  /**
+   * <p>内嵌工作流内部的任务运行</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerTaskRun?: InnerWorkflowTaskRunIterationBrief
+}
+
+/**
+ * git检出规则
+ */
+export interface SparseCheckoutConfig {
+  /**
+   * <p>是否启用稀疏检出</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * <p>是否使用 cone 模式（推荐 true，按目录匹配更高效）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConeMode?: boolean
+  /**
+   * <p>稀疏检出路径列表（如 [&quot;src/module-a/&quot;, &quot;docs/&quot;]）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Patterns?: Array<string>
+}
+
+/**
+ * UpdateWorkspaceRole请求参数结构体
+ */
+export interface UpdateWorkspaceRoleRequest {
+  /**
+   * 工作空间ID
+   */
+  WorkspaceId: string
+  /**
+   * 角色信息
+   */
+  BasicInfo: RoleBasicInfo
+  /**
+   * 功能点权限
+   */
+  Permissions?: Array<RolePermission>
+}
+
+/**
+ * 修改模型信息响应
+ */
+export interface UpdateModelRsp {
+  /**
+   * 更新后的模型信息
+   */
+  Model?: ModelInfo
+}
+
+/**
+ * 列表分区
+ */
+export interface ListPartition {
+  /**
+   * 分区名
+   */
+  Name: string
+  /**
+   * 分区列表
+   */
+  List: Array<Literal>
+  /**
+   * 属性
+   */
+  Properties?: Array<KVPair>
+}
+
+/**
+ * GetWorkspace请求参数结构体
+ */
+export interface GetWorkspaceRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+}
+
+/**
+ * 查询控制台用户组列表响应
+ */
+export interface ListConsoleGroupsRsp {
+  /**
+   * 用户组列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ConsoleGroupInfo>
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber?: number
+}
+
+/**
+ * 获取模型结果
+ */
+export interface GetModelRsp {
+  /**
+   * 模型详情
+   */
+  Model?: ModelInfo
+}
+
+/**
+ * 统一搜索出参
+ */
+export interface SearchAssetRsp {
+  /**
+   * 结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<SearchResult>
+  /**
+   * 分页token，不为空时表示还有下一页数据，作为参数PageToken传递
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextPageToken?: string
+}
+
+/**
+ * ListFiles请求参数结构体
+ */
+export interface ListFilesRequest {
+  /**
+   * <p>工作空间id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>父目录，不填默认查询根节点</p>
+   */
+  Parent?: FolderLocator
+  /**
+   * <p>按文件类型过滤</p>
+   */
+  FileTypes?: Array<string>
+  /**
+   * <p>文件名模糊匹配</p>
+   */
+  NameKeyword?: string
+  /**
+   * <p>按所有者UIN过滤，多值为或关系</p>
+   */
+  OwnerUserUins?: Array<string>
+  /**
+   * <p>是否只列出文件夹，默认 false</p>
+   */
+  OnlyFolder?: boolean
+  /**
+   * <p>排序字段列表，如创建时间 [{Name: &#39;CreateTime&#39;, Direction: &#39;DESC&#39;}]，文件名称 [{Name: &#39;Name&#39;, Direction: &#39;ASC&#39;}]</p>
+   */
+  OrderBys?: Array<OrderBy>
+  /**
+   * <p>页码，默认1，最小值1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页条数，默认10，最小值10，最大值100</p><p>取值范围：[10, 100]</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * ListTableNames返回参数结构体
+ */
+export interface ListTableNamesResponse {
+  /**
+   * <p>返回结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListTableNamesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 批量异步操作的逐项结果
+ */
+export interface AsyncActionRsp {
+  /**
+   * 多个操作项的结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionResults?: Array<RunActionBrief>
+}
+
+/**
+ * CreateLocation返回参数结构体
+ */
+export interface CreateLocationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateWorkflow请求参数结构体
+ */
+export interface UpdateWorkflowRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>待更新的工作流ID，可通过 ListWorkflows 获取。必填</p>
+   */
+  WorkflowId: string
+  /**
+   * <p>需要清空的字段名列表，用于将指定字段重置为空</p>
+   */
+  FieldToRemoveList?: Array<string>
+  /**
+   * <p>更新后的工作流配置，仅传入需要变更的部分即可</p>
+   */
+  NewSetting?: Workflow
+}
+
+/**
+ * UpdateTableColumn返回参数结构体
+ */
+export interface UpdateTableColumnResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: UpdateTableColumnRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 字段关联的字典维度信息，仅返回类型为DICT（字典维度）的维度关联
+ */
+export interface DictDimensionInfo {
+  /**
+   * 关联的标准字典代码ID
+   */
+  DictCodeId?: string
+  /**
+   * 字典项列表（key-value映射）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DictItems?: Array<DictItem>
+}
+
+/**
+ * UpdateModelVersion请求参数结构体
+ */
+export interface UpdateModelVersionRequest {
+  /**
+   * <p>目录名称，必填</p>
+   */
+  CatalogName: string
+  /**
+   * <p>模式名称，必填</p>
+   */
+  SchemaName: string
+  /**
+   * <p>模型名称，必填</p>
+   */
+  ModelName: string
+  /**
+   * <p>模型版本号，必填</p>
+   */
+  ModelVersion: number
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>要添加的别名，可选</p>
+   */
+  AddedAliases?: Array<string>
+  /**
+   * <p>要移除的别名，可选</p>
+   */
+  RemovedAliases?: Array<string>
+  /**
+   * <p>新注释，可选，为空表示不修改注释</p>
+   */
+  NewComment?: string
+}
+
+/**
+ * UpdateLocation请求参数结构体
+ */
+export interface UpdateLocationRequest {
+  /**
+   * 存储位置名，必填
+   */
+  LocationName: string
+  /**
+   * 更新location的操作列表，必填
+   */
+  Updates: Array<LocationUpdate>
+  /**
+   * 调用时所在workspace唯一id，必填
+   */
+  WorkspaceId: string
+}
+
+/**
+ * KillWorkflowRun返回参数结构体
+ */
+export interface KillWorkflowRunResponse {
+  /**
+   * <p>终止工作流的运行响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: AsyncActionRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteFolder请求参数结构体
+ */
+export interface DeleteFolderRequest {
+  /**
+   * <p>工作空间id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>待删除的文件夹</p>
+   */
+  Folder: FolderLocator
+  /**
+   * <p>软删除还是从回收站硬删除</p><p>枚举值：</p><ul><li>false： 软删除到回收站</li><li>true： 从回收站硬删除</li></ul>
+   */
+  ForceDelete?: boolean
+}
+
+/**
+ * 模型列表返回
+ */
+export interface ListModelsRsp {
+  /**
+   * 模型列表
+   */
+  Items?: Array<ModelInfo>
+  /**
+   * 总数量
+   */
+  TotalCount?: string
+  /**
+   * 分页令牌
+   */
+  NextPageToken?: string
+}
+
+/**
+ * 添加控制台用户响应
+ */
+export interface AddConsoleUsersRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
+}
+
+/**
+ * RemoveConsoleUsers请求参数结构体
+ */
+export interface RemoveConsoleUsersRequest {
+  /**
+   * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
+   */
+  UserUins: Array<string>
+}
+
+/**
+ * 更新location的操作单元，通过 UpdateType 指定操作类型
+ */
+export interface LocationUpdate {
+  /**
+   * 更新类型，取值：modify_location_name、modify_location_comment、modify_location_properties
+   */
+  UpdateType: string
+  /**
+   * 新的备注，可选，UpdateType 为 modify_location_comment 时使用
+   */
+  NewComment?: string
+  /**
+   * 新增/修改的属性键值对列表，可选，UpdateType 为 modify_location_properties 时使用
+   */
+  SetProperties?: Array<KVPair>
+  /**
+   * 要移除的属性key列表，可选，UpdateType 为 modify_location_properties 时使用
+   */
+  RemoveProperties?: Array<string>
+  /**
+   * 新的名称，可选，UpdateType 为 modify_location_name 时使用
+   */
+  NewName?: string
+}
+
+/**
+ * GetFile请求参数结构体
+ */
+export interface GetFileRequest {
+  /**
+   * <p>工作空间 ID。来源：ListWorkspaces 接口返回的 WorkspaceId</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>文件 ID。来源：CreateFile / ListFiles 接口返回的 FileId。与 FilePath 二选一</p>
+   */
+  FileId?: string
+  /**
+   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
+   */
+  FileType?: string
+  /**
+   * <p>是否返回文件内容。true 时 Storage.Content 返回 base64 内容，默认 false</p>
+   */
+  IncludeContent?: boolean
+  /**
+   * <p>文件版本 ID。来源：ListCodeFileVersions 接口返回的 VersionId。不传则读取最新版本</p>
+   */
+  VersionId?: string
+  /**
+   * <p>文件完整路径，以 / 开头，如 /etl/daily/demo.ipynb。与 FileId 二选一</p>
+   */
+  FilePath?: string
+}
+
+/**
+ * UpdateWorkspace请求参数结构体
+ */
+export interface UpdateWorkspaceRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作空间名称，max_len=128</p>
+   */
+  WorkspaceName: string
+  /**
+   * <p>工作空间描述，max_len=300</p>
+   */
+  Description?: string
+}
+
+/**
+ * UpdateSchema请求参数结构体
+ */
+export interface UpdateSchemaRequest {
+  /**
+   * <p>数据目录名称，必填</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema名称，必填</p>
+   */
+  SchemaName: string
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>新描述，可选，为空表示不修改注释</p>
+   */
+  NewComment?: string
+  /**
+   * <p>数据源连接ID，可选。分析版catalog不支持写操作，传入非空时返回错误。可通过 ListConnections 获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
 }
 
 /**
@@ -2891,7 +5613,7 @@ export interface GetWorkflowRunRsp {
  */
 export interface DeleteSchemaResponse {
   /**
-   * 操作结果
+   * <p>操作结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DeleteSchemaRsp
@@ -2916,59 +5638,18 @@ export interface DeleteWorkspaceRoleResponse {
 }
 
 /**
- * 获取数据目录详情的响应
+ * ListCatalogNames返回参数结构体
  */
-export interface GetCatalogRsp {
-  /**
-   * catalog详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Catalog?: Catalog
-}
-
-/**
- * ListConsoleGroupUsers返回参数结构体
- */
-export interface ListConsoleGroupUsersResponse {
+export interface ListCatalogNamesResponse {
   /**
    * <p>返回结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: ListConsoleGroupUsersRsp
+  Data?: ListCatalogNamesRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 查询工作流任务运行列表响应。
- */
-export interface ListWorkflowTaskRunsRsp {
-  /**
-   * 当前页码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageNumber?: number
-  /**
-   * 每页大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageSize?: number
-  /**
-   * 总记录数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalPageNumber?: number
-  /**
-   * 任务运行历史列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<WorkflowTaskRun>
 }
 
 /**
@@ -2993,83 +5674,11 @@ export interface ScheduleBizEnumBrief {
 }
 
 /**
- * AddWorkspaceGroups返回参数结构体
- */
-export interface AddWorkspaceGroupsResponse {
-  /**
-   * <p>添加结果</p>
-   */
-  Data?: PlatformStatusRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 创建数据目录的响应
- */
-export interface CreateCatalogRsp {
-  /**
-   * 新创建的数据目录的id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CatalogId?: string
-}
-
-/**
- * 查询工作空间详情响应
- */
-export interface GetWorkspaceRsp {
-  /**
-   * 工作空间详情
-   */
-  WorkspaceInfo?: WorkspaceInfo
-}
-
-/**
- * GetSchema返回参数结构体
- */
-export interface GetSchemaResponse {
-  /**
-   * <p>schema详情</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: GetSchemaRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 标签值信息
- */
-export interface TagValueInfo {
-  /**
-   * <p>标签值ID。ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中必填，可通过 ListTags 接口出参 Items[].TagValues[].TagValueId 获取，也可通过 CreateTagValues 创建后获取；按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中无需传入；查询接口出参中回填。ID 不存在或已删除时接口报错 TagValueNotExist</p>
-   */
-  TagValueId?: string
-  /**
-   * <p>标签值内容。按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中必填；ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中无需传入，服务端忽略；查询接口出参中回填</p>
-   */
-  TagValue?: string
-  /**
-   * <p>标签来源，枚举值：0=未指定 1=用户直绑 2=用户组继承 3=两者都有。仅查询接口出参中返回；所有写接口均无需传入，服务端忽略</p>
-   */
-  Source?: number
-  /**
-   * <p>继承来源的用户组名称列表（标签来源 Source=1 用户直绑时为空）。仅查询接口出参中返回；所有写接口均无需传入，服务端忽略</p>
-   */
-  GroupNames?: Array<string>
-}
-
-/**
  * CreateSchema返回参数结构体
  */
 export interface CreateSchemaResponse {
   /**
-   * schema信息
+   * <p>schema信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CreateSchemaRsp
@@ -3091,99 +5700,6 @@ export interface CreateFolderResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 内嵌工作流迭代中的任务运行简要信息
- */
-export interface InnerWorkflowTaskRunIterationBrief {
-  /**
-   * <p>任务运行ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowTaskRunId?: string
-  /**
-   * <p>迭代序号</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IterationIndex?: string
-  /**
-   * <p>运行开始时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunStartTime?: string
-  /**
-   * <p>运行结束时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunEndTime?: string
-  /**
-   * <p>运行状态</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunState?: string
-  /**
-   * <p>运行时长，单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunCostTime?: string
-  /**
-   * <p>运行参数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskParams?: string
-  /**
-   * <p>错误码</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorCodeString?: string
-}
-
-/**
- * CreateConsoleGroup请求参数结构体
- */
-export interface CreateConsoleGroupRequest {
-  /**
-   * <p>用户组名称</p>
-   */
-  GroupName: string
-  /**
-   * <p>用户组别名</p>
-   */
-  GroupNickname?: string
-  /**
-   * <p>用户组描述</p>
-   */
-  Description?: string
-}
-
-/**
- * 批量移除控制台用户响应
- */
-export interface RemoveConsoleUsersRsp {
-  /**
-   * <p>请求已完成处理；即使部分失败也为 true，逐个结果以 SuccessUins/FailItems 为准</p>
-   */
-  Status?: boolean
-  /**
-   * <p>删除成功的用户 UIN 列表</p>
-   */
-  SuccessUins?: Array<string>
-  /**
-   * <p>失败项列表（Item 为用户 UIN，FailReason 为失败原因）</p>
-   */
-  FailItems?: Array<CommonFailItem>
-}
-
-/**
- * 获取schema详情的响应
- */
-export interface GetSchemaRsp {
-  /**
-   * schema详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Schema?: Schema
 }
 
 /**
@@ -3218,20 +5734,6 @@ export interface ListWorkflowsRsp {
 }
 
 /**
- * UpdateFolder返回参数结构体
- */
-export interface UpdateFolderResponse {
-  /**
-   * <p>更新文件夹结果</p>
-   */
-  Data?: UpdateFolderRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 脱敏策略绑定的敏感标签（精简视图）。相比通用 CommonTagInfo，仅保留策略视角下必要的三字段，避免序列化冗余。Type 固定为 4（DESENSITIZATION_LABEL 脱敏标签）
  */
 export interface DataMaskLabelInfo {
@@ -3254,39 +5756,29 @@ export interface DataMaskLabelInfo {
  */
 export interface DeleteTableRequest {
   /**
-   * 数据目录名
+   * <p>数据目录名</p>
    */
   CatalogName: string
   /**
-   * 数据库名
+   * <p>数据库名</p>
    */
   SchemaName: string
   /**
-   * 表名
+   * <p>表名</p>
    */
   TableName: string
   /**
-   * 调用时所在workspace唯一id
+   * <p>调用时所在workspace唯一id</p>
    */
   WorkspaceId?: string
   /**
-   * 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除表，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误
+   * <p>数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除表，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误。通过ListConnections接口获取</p>
    */
   ConnectionId?: string
   /**
-   * 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
    */
   CatalogSource?: string
-}
-
-/**
- * DeleteWorkspace请求参数结构体
- */
-export interface DeleteWorkspaceRequest {
-  /**
-   * <p>工作空间ID</p>
-   */
-  WorkspaceId: string
 }
 
 /**
@@ -3304,32 +5796,6 @@ export interface ListWorkspaceGroupUsersResponse {
 }
 
 /**
- * 标签信息
- */
-export interface LabelBrief {
-  /**
-   * 标签名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelKey?: string
-  /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelValue?: string
-  /**
-   * 标签名称ID，可通过标签相关接口获取
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelKeyId?: string
-  /**
-   * 标签值ID，可通过标签相关接口获取
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelValueId?: string
-}
-
-/**
  * DeleteWorkspaceRole请求参数结构体
  */
 export interface DeleteWorkspaceRoleRequest {
@@ -3341,54 +5807,6 @@ export interface DeleteWorkspaceRoleRequest {
    * 角色ID，可通过 ListWorkspaceRoles 接口获取
    */
   RoleId: string
-}
-
-/**
- * CreateSchema请求参数结构体
- */
-export interface CreateSchemaRequest {
-  /**
-   * catalog名称
-   */
-  CatalogName: string
-  /**
-   * schema名称
-   */
-  Name: string
-  /**
-   * 调用时所在workspace唯一id
-   */
-  WorkspaceId: string
-  /**
-   * 描述
-   */
-  Comment?: string
-  /**
-   * 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持创建schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误
-   */
-  ConnectionId?: string
-  /**
-   * 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。
-   */
-  CatalogSource?: string
-}
-
-/**
- * UpdateWorkspaceRole请求参数结构体
- */
-export interface UpdateWorkspaceRoleRequest {
-  /**
-   * 工作空间ID
-   */
-  WorkspaceId: string
-  /**
-   * 角色信息
-   */
-  BasicInfo: RoleBasicInfo
-  /**
-   * 功能点权限
-   */
-  Permissions?: Array<RolePermission>
 }
 
 /**
@@ -3406,60 +5824,9 @@ export interface AddConsoleUsersRequest {
 }
 
 /**
- * 创建控制台用户组响应
+ * ListViews请求参数结构体
  */
-export interface CreateConsoleGroupRsp {
-  /**
-   * 创建成功的用户组 ID
-   */
-  GroupId?: string
-}
-
-/**
- * 查询工作空间用户组用户列表响应
- */
-export interface ListWorkspaceGroupUsersRsp {
-  /**
-   * <p>用户列表</p>
-   */
-  Items?: Array<GroupUserInfo>
-  /**
-   * <p>当前页码</p><p>默认值：1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小</p><p>默认值：10</p>
-   */
-  PageSize?: number
-  /**
-   * <p>总记录数</p>
-   */
-  TotalCount?: number
-  /**
-   * <p>总页数</p>
-   */
-  TotalPageNumber?: number
-}
-
-/**
- * DeleteCatalog返回参数结构体
- */
-export interface DeleteCatalogResponse {
-  /**
-   * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: DeleteCatalogRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ListTables请求参数结构体
- */
-export interface ListTablesRequest {
+export interface ListViewsRequest {
   /**
    * <p>数据目录名</p>
    */
@@ -3473,7 +5840,7 @@ export interface ListTablesRequest {
    */
   WorkspaceId: string
   /**
-   * <p>最大结果条数</p>
+   * <p>最大结果条数，默认10</p>
    */
   MaxResults?: number
   /**
@@ -3485,23 +5852,531 @@ export interface ListTablesRequest {
    */
   FetchOption?: FetchOption
   /**
-   * 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径
+   * <p>数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。可通过 ListConnections 获取</p>
    */
   ConnectionId?: string
   /**
-   * 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
    */
   CatalogSource?: string
 }
 
 /**
- * 删除工作空间响应
+ * KillWorkflowRun请求参数结构体
  */
-export interface DeleteWorkspaceRsp {
+export interface KillWorkflowRunRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   */
+  WorkflowId: string
+  /**
+   * <p>待终止的工作流运行ID列表，可通过 ListWorkflowRuns 获取</p>
+   */
+  WorkflowRunIds?: Array<string>
+  /**
+   * <p>是否终止该工作流下所有未进入终态的运行。非必填，默认 false</p>
+   */
+  KillAllRuns?: boolean
+  /**
+   * <p>是否只终止处于等待中（Pending）状态的运行。非必填，默认 false</p>
+   */
+  OnlyKillPendingRuns?: boolean
+}
+
+/**
+ * 搜索命中的高亮
+ */
+export interface Highlighting {
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 描述
+   */
+  Comment?: string
+  /**
+   * 片段
+   */
+  TextFragments?: Array<Fragment>
+}
+
+/**
+ * ListWorkflowTaskRuns返回参数结构体
+ */
+export interface ListWorkflowTaskRunsResponse {
+  /**
+   * <p>查询工作流任务历史运行列表响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListWorkflowTaskRunsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 通用bool返回
+ */
+export interface PlatformStatusRsp {
+  /**
+   * 通用返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: boolean
+}
+
+/**
+ * GetLocation请求参数结构体
+ */
+export interface GetLocationRequest {
+  /**
+   * 存储位置名，必填
+   */
+  LocationName: string
+  /**
+   * 调用时所在workspace唯一id，必填
+   */
+  WorkspaceId: string
+}
+
+/**
+ * UnbindWorkflowBundleRsp
+ */
+export interface UnbindWorkflowBundleRsp {
+  /**
+   * 操作状态，true 表示成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: boolean
+}
+
+/**
+ * RunWorkflow请求参数结构体
+ */
+export interface RunWorkflowRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   */
+  WorkflowId: string
+  /**
+   * <p>运行类型。必填。取值：1 普通运行，2 高级运行</p>
+   */
+  RunType: number
+  /**
+   * <p>运行类型为高级运行时填写的自定义运行参数</p>
+   */
+  AdvancedParams?: Array<TaskSchedulingParameterBrief>
+  /**
+   * <p>本次需要运行指定的任务ID集合，可通过 ListWorkflowTasks 获取，不传默认运行该工作流下所有任务</p>
+   */
+  TaskIds?: Array<string>
+  /**
+   * <p>幂等令牌。非必填，相同令牌的重复请求只会触发一次运行</p>
+   */
+  IdempotencyToken?: string
+  /**
+   * <p>计划调度时间列表配置</p>
+   */
+  ScheduledTimeConfig?: ScheduledTimeConfig
+}
+
+/**
+ * GetModelVersion请求参数结构体
+ */
+export interface GetModelVersionRequest {
+  /**
+   * <p>数据目录名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName: string
+  /**
+   * <p>模型版本号</p>
+   */
+  ModelVersion: number
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+}
+
+/**
+ * 修改 schema 信息响应
+ */
+export interface UpdateSchemaRsp {
+  /**
+   * <p>更新后的 schema 信息</p>
+   */
+  Schema?: Schema
+}
+
+/**
+ * 字段简要信息，用于批量修改表字段描述时传入
+ */
+export interface ColumnBrief {
+  /**
+   * 字段名称
+   */
+  Name: string
+  /**
+   * 字段类型
+   */
+  Type?: string
+  /**
+   * 描述配置
+   */
+  Comment?: string
+}
+
+/**
+ * UpdateWorkspaceUsersRoles请求参数结构体
+ */
+export interface UpdateWorkspaceUsersRolesRequest {
+  /**
+   * <p>用户ID</p>
+   */
+  UserUins: Array<string>
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>角色ID，可通过 ListWorkspaceRoles 接口获取</p>
+   */
+  RoleIds: Array<string>
+}
+
+/**
+ * DeleteFile返回参数结构体
+ */
+export interface DeleteFileResponse {
+  /**
+   * <p>返回结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DeleteFileResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteView返回参数结构体
+ */
+export interface DeleteViewResponse {
+  /**
+   * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DeleteViewRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListWorkflowRunsRsp
+ */
+export interface ListWorkflowRunsRsp {
+  /**
+   * 当前页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber?: number
+  /**
+   * 工作流运行列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<WorkflowRun>
+  /**
+   * 工作流运行状态数量统计。
+统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizStateEnumInfos?: Array<ScheduleBizEnumBrief>
+  /**
+   * 工作流运行错误码数量统计。
+统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizErrorCodeEnumInfos?: Array<ScheduleBizEnumBrief>
+}
+
+/**
+ * 删除工作空间角色结果
+ */
+export interface DeleteWorkspaceRoleResult {
+  /**
+   * 删除工作空间角色是否成功
+   */
+  Status?: boolean
+}
+
+/**
+ * StopCompute返回参数结构体
+ */
+export interface StopComputeResponse {
+  /**
+   * 停止计算资源返回结果
+   */
+  Data?: StopComputeRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 角色基础信息
+ */
+export interface RoleBasicInfo {
+  /**
+   * <p>角色ID，可通过 ListWorkspaceRoles / ListConsoleRoles 接口获取；创建/更新角色时无需填写（由系统自动生成，创建成功后从响应 Data.RoleId 获取）</p>
+   */
+  Id?: string
+  /**
+   * <p>角色名称</p>
+   */
+  Name?: string
+  /**
+   * <p>角色描述</p>
+   */
+  Description?: string
+  /**
+   * <p>显示名称</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>角色类型：workspace=工作空间系统角色，workspace_custom=工作空间自定义角色，console=控制台角色；查询时返回，创建时无需填写（系统固定创建自定义角色）</p>
+   */
+  RoleType?: string
+  /**
+   * <p>角色来源（查询侧字段，创建时无需填写）：0=未指定，1=用户直绑，2=用户组继承，3=两者都有</p>
+   */
+  Source?: number
+  /**
+   * <p>继承来源的用户组名称列表（查询侧字段，创建时无需填写），Source=1 时为空</p>
+   */
+  GroupNames?: Array<string>
+}
+
+/**
+ * 停止计算资源返回结果
+ */
+export interface StopComputeRsp {
   /**
    * 操作是否成功
    */
   Status?: boolean
+}
+
+/**
+ * 函数资源
+ */
+export interface FunctionResource {
+  /**
+   * 资源类型，取值如file(文件)、jar(jar包)、archive(归档文件)等
+   */
+  ResourceType?: string
+  /**
+   * 资源路径
+   */
+  Uri?: string
+}
+
+/**
+ * 模型信息
+ */
+export interface ModelInfo {
+  /**
+   * <p>模型名称</p>
+   */
+  Name: string
+  /**
+   * <p>catalog信息</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema 信息</p>
+   */
+  SchemaName: string
+  /**
+   * <p>模型描述</p>
+   */
+  Comment?: string
+  /**
+   * <p>最新版本号</p>
+   */
+  LatestVersion?: string
+  /**
+   * <p>扩展数据</p>
+   */
+  Properties?: Array<KVPair>
+  /**
+   * <p>审计数据</p>
+   */
+  Audit?: Audit
+  /**
+   * <p>责任人信息</p>
+   */
+  MetaOwner?: MetaOwner
+  /**
+   * <p>id</p>
+   */
+  Id?: string
+  /**
+   * <p>资产全局唯一ID</p>
+   */
+  AssetGuid?: string
+  /**
+   * <p>当前用户对该实体的权限信息</p>
+   */
+  PermissionDetail?: PermissionDetail
+  /**
+   * <p>标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<CommonTagInfo>
+}
+
+/**
+ * UpdateWorkflow返回参数结构体
+ */
+export interface UpdateWorkflowResponse {
+  /**
+   * <p>更新工作流响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: UpdateWorkflowRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 内嵌工作流任务运行列表选项（仅限 FOR_EACH 任务使用）
+ */
+export interface InnerWorkflowTaskRunListOption {
+  /**
+   * <p>分页页码，从 1 开始。非必填，默认 1</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * <p>迭代运行状态，精确匹配。非必填，多选（多个值之间为 OR 关系）。</p><p>可填 SUCCESS / FAILED 等，具体参考本接口出参 InnerWorkflowTaskRunIteration.RunState 字段返回值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunStates?: Array<string>
+}
+
+/**
+ * 内嵌工作流任务简要信息（目前只有 FOR_EACH 工作流任务该字段才有值）
+ */
+export interface InnerWorkflowTaskBrief {
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeName?: string
+}
+
+/**
+ * 任务类型属性键值对
+ */
+export interface TaskTypeProperty {
+  /**
+   * <p>属性键名。用于TaskType内的入参时，若不传或为空，该属性项被服务端静默忽略（不报错），等同于该属性未配置。合法 PropertyKey 清单请参考TaskType中描述。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PropertyKey?: string
+  /**
+   * <p>属性值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PropertyValue?: string
+}
+
+/**
+ * ListTableNames请求参数结构体
+ */
+export interface ListTableNamesRequest {
+  /**
+   * <p>数据目录名，必填</p>
+   */
+  CatalogName: string
+  /**
+   * <p>数据库名，必填</p>
+   */
+  SchemaName: string
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>最大结果条数，可选，默认10</p>
+   */
+  MaxResults?: string
+  /**
+   * <p>分页token信息(base64编码，包含offset、snapshotId等)</p>
+   */
+  PageToken?: string
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，取值参考CatalogSourceEnum：METALAKE/CONNECTION/SETATS</p>
+   */
+  CatalogSource?: string
 }
 
 /**
@@ -3561,121 +6436,300 @@ export interface WorkflowBaseInfoDetail {
 }
 
 /**
- * ListTables返回参数结构体
+ * ListWorkflows请求参数结构体
  */
-export interface ListTablesResponse {
-  /**
-   * <p>操作结果</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: ListTablesRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * StopCompute请求参数结构体
- */
-export interface StopComputeRequest {
-  /**
-   * 工作空间 ID
-   */
-  WorkspaceId: string
-  /**
-   * 计算资源 ID，可通过 ListComputes 接口获取（返回字段 Items[].BasicInfo.ResourceId）。替代已废弃的 ResourceId；过渡期 ComputeResourceId 与 ResourceId 至少传一个，同时传时必须一致
-   */
-  ComputeResourceId?: string
-  /**
-   * [已废弃，请使用 ComputeResourceId] 计算资源 ID，可通过 ListComputes 接口获取（返回字段 Items[].BasicInfo.ResourceId）
-   */
-  ResourceId?: string
-}
-
-/**
- * KillWorkflowRun请求参数结构体
- */
-export interface KillWorkflowRunRequest {
+export interface ListWorkflowsRequest {
   /**
    * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
    */
   WorkspaceId: string
   /**
-   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   * <p>分页页码，从 1 开始。非必填，默认 1</p>
    */
-  WorkflowId: string
+  PageNumber?: number
   /**
-   * <p>待终止的工作流运行ID列表，可通过 ListWorkflowRuns 获取</p>
+   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
    */
-  WorkflowRunIds?: Array<string>
+  PageSize?: number
   /**
-   * <p>是否终止该工作流下所有未进入终态的运行。非必填，默认 false</p>
+   * <p>工作流名称关键字，对 WorkflowName 做模糊匹配。非必填，单值</p>
    */
-  KillAllRuns?: boolean
+  WorkflowNameKeyword?: string
   /**
-   * <p>是否只终止处于等待中（Pending）状态的运行。非必填，默认 false</p>
+   * <p>工作流名称，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
    */
-  OnlyKillPendingRuns?: boolean
+  WorkflowNames?: Array<string>
+  /**
+   * <p>工作流ID，精确匹配。非必填，多选（多个值之间为 OR 关系）</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/1835/138002">ListWorkflows</a> 返回值 <code>Data</code></p>
+   */
+  WorkflowIds?: Array<string>
+  /**
+   * <p>工作流运行人UIN，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  RunUserUins?: Array<string>
+  /**
+   * <p>标签名称ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  LabelKeyIds?: Array<string>
+  /**
+   * <p>标签值ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
+   */
+  LabelValueIds?: Array<string>
+  /**
+   * <p>快速筛选类型。非必填，单值，当前仅支持 MY_FAVORITE（我收藏的）</p>
+   */
+  QuickSelectionType?: string
+  /**
+   * <p>排序条件，多个之间按数组顺序表示优先级。非必填。可排序字段白名单：CreateTime</p>
+   */
+  OrderBys?: Array<OrderBy>
 }
 
 /**
- * GetCatalog请求参数结构体
+ * ListWorkflowRuns返回参数结构体
  */
-export interface GetCatalogRequest {
+export interface ListWorkflowRunsResponse {
   /**
-   * <p>数据目录名</p>
+   * <p>工作流运行列表响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListWorkflowRunsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListWorkspaceGroups请求参数结构体
+ */
+export interface ListWorkspaceGroupsRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>通过用户组ID批量查询；用户组ID可通过 ListWorkspaceGroups 接口获取</p>
+   */
+  GroupIds?: Array<string>
+  /**
+   * <p>用户组名称模糊匹配</p>
+   */
+  GroupKeyword?: string
+  /**
+   * <p>用于过滤角色关联的用户组；可通过 ListWorkspaceRoles 接口获取</p>
+   */
+  RoleIds?: Array<string>
+  /**
+   * <p>多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}]；传入单个即单字段排序，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+  /**
+   * <p>页码，从1开始，默认1；小于1时按1处理</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，取值范围为 [1,100]，越界时自动收敛到边界值</p>
+   */
+  PageSize?: number
+  /**
+   * <p>用户组类型筛选。取值为枚举数值的字符串形式："0"=控制台系统类型（包含全部user）、"1"=控制台自定义类型、"2"=工作空间系统类型（包含工作空间全部user）、"3"=工作空间自定义类型</p>
+   */
+  GroupType?: string
+}
+
+/**
+ * 创建模型返回数据
+ */
+export interface CreateVolumeRsp {
+  /**
+   * 数据卷信息
+   */
+  Volume?: Volume
+}
+
+/**
+ * 数据卷返回信息
+ */
+export interface ListVolumesRsp {
+  /**
+   * 数据卷信息
+   */
+  Items?: Array<Volume>
+  /**
+   * 总数据卷数量
+   */
+  TotalCount?: string
+  /**
+   * 分页信息
+   */
+  NextPageToken?: string
+}
+
+/**
+ * 修改表字段描述响应
+ */
+export interface UpdateTableColumnRsp {
+  /**
+   * 整体结果，true表示全部成功
+   */
+  Result?: boolean
+  /**
+   * 失败的字段列表（部分成功场景），全部成功时为空
+   */
+  FailedColumns?: Array<ColumnErrorMessages>
+}
+
+/**
+ * 排序字段
+ */
+export interface OrderBy {
+  /**
+   * 排序方向，Asc（升序）或 Desc（降序），大小写不敏感
+   */
+  Direction?: string
+  /**
+   * 排序字段名
+   */
+  Name?: string
+}
+
+/**
+ * 删除文件夹回包
+ */
+export interface DeleteFolderRsp {
+  /**
+   * <p>删除文件夹状态</p>
+   */
+  Status?: boolean
+}
+
+/**
+ * CreateLocation请求参数结构体
+ */
+export type CreateLocationRequest = null
+
+/**
+ * 工作流高级设置
+ */
+export interface WorkflowAdvanceConfig {
+  /**
+   * 排队模式，ON（默认）, OFF
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueuingMode?: string
+  /**
+   * 	
+默认值为1
+
+QueuingMode为ON时，MaxConcurrentNum 设置才生效；只能输入大于0的整数，输入非法值自动转换为1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxConcurrentNum?: number
+}
+
+/**
+ * 单个监控指标
+ */
+export interface MonitorMetricItem {
+  /**
+   * 监控指标类型,有三种类型：1. RUN_DURATION（运行时长）2. WAIT_DURATION（等待时长）3. COMPLETION_TIME（完成时间）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricType?: string
+  /**
+   * 警告阈值，单位为毫秒级别，对于COMPLETION_TIME:从当日时间点00:00起算
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WarningThreshold?: string
+  /**
+   * 超时阈值，单位为毫秒级别，对于COMPLETION_TIME:从当日时间点00:00起算
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeoutThreshold?: string
+}
+
+/**
+ * CreateWorkflow返回参数结构体
+ */
+export interface CreateWorkflowResponse {
+  /**
+   * <p>创建工作流响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CreateWorkflowRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetModel请求参数结构体
+ */
+export interface GetModelRequest {
+  /**
+   * <p>数据目录名称</p>
    */
   CatalogName: string
+  /**
+   * <p>schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName: string
   /**
    * <p>调用时所在workspace唯一id</p>
    */
   WorkspaceId: string
   /**
-   * <p>数据目录id</p>
-   */
-  CatalogId?: string
-  /**
    * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
   FetchOption?: FetchOption
-  /**
-   * <p>数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径</p>
-   */
-  ConnectionId?: string
-  /**
-   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
-   */
-  CatalogSource?: string
 }
 
 /**
- * ListWorkflowTaskRuns返回参数结构体
+ * 告警组
  */
-export interface ListWorkflowTaskRunsResponse {
+export interface AlarmGroup {
   /**
-   * <p>查询工作流任务历史运行列表响应内容</p>
+   * <p>通知渠道ID，可通过基础平台通知渠道相关接口获取</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: ListWorkflowTaskRunsRsp
+  ChannelId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>通知渠道名称，可以是用户组名称或邮箱地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  ChannelName?: string
+  /**
+   * <p>是否启用邮件渠道，默认值：false</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsEmailChannel?: boolean
+  /**
+   * <p>告警条件列表。取值：<br>START：启动<br>SUCCESS：成功<br>FAILURE：失败<br>MONITOR_INDICATOR_ALARM：监控指标告警</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmConditions?: Array<string>
+  /**
+   * <p>通知渠道类型。取值：0 未指定，1 Email，2 Webhook，3 Teams，4 Slack</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelType?: number
 }
 
 /**
- * AddConsoleUsers返回参数结构体
+ * DeleteWorkflowRsp
  */
-export interface AddConsoleUsersResponse {
+export interface DeleteWorkflowRsp {
   /**
-   * <p>返回结果</p>
+   * 删除状态，true 表示成功
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: AddConsoleUsersRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Status?: boolean
 }
 
 /**
@@ -3706,114 +6760,6 @@ export interface ListConsoleUsersRsp {
 }
 
 /**
- * 文件元数据
- */
-export interface FileMeta {
-  /**
-   * <p>文件id</p>
-   */
-  FileId?: string
-  /**
-   * <p>文件/文件夹名称</p>
-   */
-  FileName?: string
-  /**
-   * <p>文件类型</p>
-   */
-  FileType?: string
-  /**
-   * <p>创建时间，毫秒秒级时间戳</p><p>参数格式：时间戳</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>更新时间</p><p>参数格式：时间戳字符串</p>
-   */
-  UpdateTime?: string
-  /**
-   * <p>acl权限类型</p>
-   */
-  AllowActions?: Array<string>
-  /**
-   * <p>是否收藏</p>
-   */
-  IsFavorite?: boolean
-  /**
-   * <p>文件path</p>
-   */
-  PathName?: string
-  /**
-   * <p>是否系统创建</p>
-   */
-  IsSystemGenerated?: boolean
-}
-
-/**
- * 数值
- */
-export interface Literal {
-  /**
-   * 数值
-   */
-  Value: string
-  /**
-   * 类型
-   */
-  DataType: string
-}
-
-/**
- * catalog特征表详情
- */
-export interface FeatureTableDetail {
-  /**
-   * 特征表主键字段列表
-   */
-  PrimaryKeys?: Array<string>
-  /**
-   * 特征表时间戳字段名称
-   */
-  TimestampField?: string
-  /**
-   * 在线特征表对应的来源表名称（离线表）
-   */
-  SourceTableName?: string
-  /**
-   * 在线特征表关联的工作流ID
-   */
-  WorkflowId?: string
-  /**
-   * 离线特征表对应生成的在线特征表名称
-   */
-  OnlineTableName?: string
-}
-
-/**
- * 元数据责任人信息数据结构
- */
-export interface MetaOwner {
-  /**
-   * 元数据名称（全名）:catalog.schema.table
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FullName?: string
-  /**
-   * 所有者类型:User
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnerType?: string
-  /**
-   * 所有者:唯一标识(uin)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Owner?: string
-  /**
-   * 所有者名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnerName?: string
-}
-
-/**
  * 用户组用户信息
  */
 export interface GroupUserInfo {
@@ -3840,102 +6786,520 @@ export interface GroupUserInfo {
 }
 
 /**
- * 控制台角色信息（对外标准版，与内部 Role 解耦）
+ * 单字段分区
  */
-export interface ConsoleRoleInfo {
+export interface SingleFieldPartitioning {
   /**
-   * 角色基本信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分区字段
    */
-  BasicInfo?: RoleBasicInfo
-  /**
-   * 角色元信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetaData?: RoleMetaData
-  /**
-   * 角色权限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Permissions?: Array<RolePermission>
+  FieldName: string
 }
 
 /**
- * 控制台用户组成员信息（对外标准版，与内部 GroupUserInfo 解耦）
+ * ListWorkspaceUsers请求参数结构体
  */
-export interface ConsoleGroupUserInfo {
+export interface ListWorkspaceUsersRequest {
   /**
-   * 用户 UIN
+   * <p>工作空间ID</p>
    */
-  UserUin?: string
+  WorkspaceId: string
   /**
-   * 用户名
+   * <p>用户名称或 UIN 模糊匹配</p>
    */
-  UserName?: string
+  UserKeyword?: string
   /**
-   * 昵称
+   * <p>角色ID列表，过滤角色关联的用户；可通过 ListWorkspaceRoles 接口获取</p>
    */
-  Nickname?: string
+  RoleIds?: Array<string>
   /**
-   * 创建时间
+   * <p>用户UIN列表，按UIN精确筛选</p>
    */
-  CreateTime?: string
+  UserUins?: Array<string>
   /**
-   * 更新时间
+   * <p>排序字段列表，如 [{Name: CreateTime, Direction: DESC}]；传入单个即单字段排序，默认按创建时间降序</p>
    */
-  UpdateTime?: string
+  OrderBys?: Array<OrderBy>
+  /**
+   * <p>页码，默认1，从1开始；小于1时按1处理</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页条数，默认10，取值范围为 [1,100]，越界时自动收敛到边界值</p>
+   */
+  PageSize?: number
+  /**
+   * <p>扩展信息（首次请求为空，翻页请求带响应中的ExtendInfo。连续翻页且item涉及权限过滤等场景，用于定位下次offset）</p>
+   */
+  ExtendInfo?: string
 }
 
 /**
- * 文件删除结果
+ * UpdateFile返回参数结构体
  */
-export interface DeleteFileResult {
+export interface UpdateFileResponse {
   /**
-   * <p>被删除的文件 ID</p>
+   * <p>返回结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileId?: string
+  Data?: FileInfo
   /**
-   * <p>删除是否成功</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 创建文件夹回包
+ */
+export interface CreateFolderRsp {
+  /**
+   * <p>文件夹 ID</p>
+   */
+  FolderId?: string
+}
+
+/**
+ * StartCompute请求参数结构体
+ */
+export interface StartComputeRequest {
+  /**
+   * 工作空间 ID
+   */
+  WorkspaceId: string
+  /**
+   * 计算资源 ID，可通过 ListComputes 接口获取（返回字段 Items[].BasicInfo.ResourceId）。替代已废弃的 ResourceId；过渡期 ComputeResourceId 与 ResourceId 至少传一个，同时传时必须一致
+   */
+  ComputeResourceId?: string
+  /**
+   * [已废弃，请使用 ComputeResourceId] 计算资源 ID，可通过 ListComputes 接口获取（返回字段 Items[].BasicInfo.ResourceId）
+   */
+  ResourceId?: string
+}
+
+/**
+ * GetVolume请求参数结构体
+ */
+export interface GetVolumeRequest {
+  /**
+   * <p>数据目录名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>数据卷名称</p>
+   */
+  VolumeName: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   */
+  FetchOption?: FetchOption
+}
+
+/**
+ * DeleteFolder返回参数结构体
+ */
+export interface DeleteFolderResponse {
+  /**
+   * <p>删除文件夹结果</p>
+   */
+  Data?: DeleteFolderRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListConsoleGroups请求参数结构体
+ */
+export interface ListConsoleGroupsRequest {
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>通过用户组ID批量查询；用户组ID可通过 ListConsoleGroups 接口获取</p>
+   */
+  GroupIds?: Array<string>
+  /**
+   * <p>用户组名称模糊匹配</p>
+   */
+  GroupKeyword?: string
+  /**
+   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+}
+
+/**
+ * 任务重试策略
+ */
+export interface TaskRetryStrategy {
+  /**
+   * 最多重试次数，默认3
 注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxRetryTimes?: number
+  /**
+   * 重试之间等待时间，默认5
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryBetweenWaitTime?: number
+  /**
+   * 重试之间等待时间单位
+毫秒：MILLISECOND秒：SECOND分钟（默认）：MINUTE小时：HOUR
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryBetweenWaitTimeUnit?: string
+  /**
+   * 任务运行失败时重试开关，默认为true
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskRunFailureRetrySwitch?: boolean
+  /**
+   * 任务运行超时时重试开关，默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskRunTimeoutRetrySwitch?: boolean
+}
+
+/**
+ * 工作流调度高级配置。
+ */
+export interface WorkflowTriggerAdvancedConfiguration {
+  /**
+   * <p>&lt;p&gt;该工作流下的所有任务重试模式，仅当TriggerMode为CONTINUE_RUN时有效。</p><p>枚举值：</p><ul><li>onFailure： 失败时自动重试</li><li>never： 从不重试</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskRetryMode?: string
+}
+
+/**
+ * 分桶分区策略
+ */
+export interface BucketPartitioning {
+  /**
+   * 分桶字段
+   */
+  FiledNames: Array<string>
+  /**
+   * 分桶数
+   */
+  NumBuckets: string
+}
+
+/**
+ * 查询控制台角色列表响应
+ */
+export interface ListConsoleRolesRsp {
+  /**
+   * 角色列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ConsoleRoleInfo>
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+   */
+  PageSize?: number
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber?: number
+}
+
+/**
+ * ListConsoleUsers返回参数结构体
+ */
+export interface ListConsoleUsersResponse {
+  /**
+   * <p>控制台用户列表</p>
+   */
+  Data?: ListConsoleUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListWorkspaceUsers返回参数结构体
+ */
+export interface ListWorkspaceUsersResponse {
+  /**
+   * <p>查询工作空间用户列表响应</p>
+   */
+  Data?: ListWorkspaceUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 字段描述更新失败信息
+ */
+export interface ColumnErrorMessages {
+  /**
+   * 字段名称
+   */
+  Name?: string
+  /**
+   * 错误原因
+   */
+  ErrorMessage?: string
+}
+
+/**
+ * CreateCatalog请求参数结构体
+ */
+export interface CreateCatalogRequest {
+  /**
+   * <p>catalog名称</p>
+   */
+  Name: string
+  /**
+   * <p>catalog类型, 可选值TABLE、MODEL、VOLUME</p>
+   */
+  Type: string
+  /**
+   * <p>工作空间唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>描述</p>
+   */
+  Comment?: string
+  /**
+   * <p>connection 的 ID，通过ListConnections接口获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（融合版新增字段），取值参考 CatalogSourceEnum：METALAKE（专业版）/ CONNECTION（分析版），不传时默认按 METALAKE 处理</p>
+   */
+  CatalogSource?: string
+  /**
+   * <p>连接侧数据目录名或数据库名，三段式数据源必填，二段式数据源（如 MySQL）不填。Doris/StarRocks/TChouse-D 等 MySQL 内核三段式数据源填写 external catalog 名称；PostgreSQL/Tencent PG/GaussDB/Hologres 等 PG 内核三段式数据源填写 databaseName；MySQL 等二段式数据源不填。</p>
+   */
+  ConnectionCatalogName?: string
+}
+
+/**
+ * 启动计算资源返回结果
+ */
+export interface StartComputeRsp {
+  /**
+   * 操作是否成功
    */
   Status?: boolean
 }
 
 /**
- * 单个操作项的执行结果。 由 RunWorkflow / RerunWorkflowRun / KillWorkflowRun 共用： RunWorkflow—— WorkflowId / WorkflowName 有值，WorkflowRunId 为空 RerunWorkflowRun —— WorkflowId / WorkflowName / WorkflowRunId 均有值 KillWorkflowRun  —— WorkflowId / WorkflowName / WorkflowRunId 均有值
+ * 获取view列表响应
  */
-export interface RunActionBrief {
+export interface ListViewsRsp {
   /**
-   * 工作流ID
+   * view列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId?: string
+  Items?: Array<ViewInfo>
   /**
-   * 工作流名称
+   * 下页分页token
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowName?: string
+  NextPageToken?: string
+}
+
+/**
+ * 告警配置
+ */
+export interface AlarmBrief {
   /**
-   * 操作动作ID，用于追踪具体的执行动作
+   * 告警 ID，创建时无需传入，由服务端生成
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunActionId?: string
+  AlarmId?: string
   /**
-   * 失败错误信息，操作失败时返回具体的错误描述
+   * 告警的监控对象类型，如工作流、任务等，当前支持 1. WORKFLOW 2. TASK
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage?: string
+  AlarmMonitorType?: string
   /**
-   * 操作状态，true 表示成功，false 表示失败
+   * 告警组，最多 50 个
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OpStatus?: boolean
+  AlarmGroups?: Array<AlarmGroup>
   /**
-   * 工作流运行ID。重跑 / 终止场景返回被操作的运行ID；运行工作流场景为空
+   * 被跳过时免打扰，默认值 false
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowRunId?: string
+  DoNotDisturbWhenSkipped?: boolean
+  /**
+   * 被手动终止时免打扰，默认值 false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DoNotDisturbWhenManuallyTerminated?: boolean
+  /**
+   * 最后一次重试前免打扰，默认值 false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DoNotDisturbUntilTheLastRetry?: boolean
+}
+
+/**
+ * 用户组脱敏规则，描述某个用户组对应的脱敏方法
+ */
+export interface DataMaskGroup {
+  /**
+   * 工作组 ID，对应 WeData 用户组 ID，必填，字符串类型。示例值："17738042827013749"
+   */
+  GroupId: string
+  /**
+   * 脱敏方法（策略类型），必填，直接透传给 DLC。合法值：MASK_SHOW_FIRST_4（保留前四个字符）、MASK_SHOW_LAST_4（保留后四个字符）、MASK_HASH（哈希脱敏）、MASK_DATE_SHOW_YEAR（日期脱敏保留年份）、MASK_NULL（置为 NULL）、MASK_DEFAULT（默认值脱敏）
+   */
+  StrategyType: string
+  /**
+   * 用户组名称
+   */
+  GroupName?: string
+}
+
+/**
+ * SearchAsset请求参数结构体
+ */
+export interface SearchAssetRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>最大结果条数，默认30，可选30～50</p>
+   */
+  MaxResults?: number
+  /**
+   * <p>关键字</p>
+   */
+  Keyword?: string
+  /**
+   * <p>资产类型列表，类型参见ListEntityTypeMetas的返回</p>
+   */
+  AssetTypes?: Array<string>
+  /**
+   * <p>分页token信息，取上一页返回NextPageToken</p>
+   */
+  PageToken?: string
+  /**
+   * <p>按资产负责人检索</p><ul><li>my 我负责的(包含my时其他uin不生效)</li><li>uin 指定用户uin</li></ul>
+   */
+  Owner?: Array<string>
+  /**
+   * <p>标签IDs，可通过 ListTags 获取</p>
+   */
+  TagIds?: Array<number | bigint>
+  /**
+   * <p>标签值IDs，可通过 ListTags 获取</p>
+   */
+  TagValueIds?: Array<number | bigint>
+  /**
+   * <p>更新时间，13位时间戳</p>
+   */
+  ModifiedTime?: string
+  /**
+   * <p>数据目录列表</p>
+   */
+  CatalogNames?: Array<string>
+  /**
+   * <p>工作空间路径筛选(非catalog类资产)</p>
+   */
+  WorkspacePaths?: Array<string>
+  /**
+   * <p>是否开启混合搜索</p>
+   */
+  EnableHybridSearch?: boolean
+  /**
+   * <p>字段标签ID列表（可选）。使用场景：根据字段上打的标签检索资产（表），返回包含该字段标签的资产。与 TagIds 的区别：TagIds 是表级标签过滤，FieldTagIds 是字段级标签过滤。规格要求：int64 数组，最多支持 20 个标签 ID 同时过滤。可通过 ListTags 获取</p>
+   */
+  FieldTagIds?: Array<number | bigint>
+  /**
+   * <p>排序，为空时默认按相关度倒排序</p><p>Name:<br>PopularityQuantity 热度</p><p>Direction:<br>Desc 降序<br>Asc 升序</p>
+   */
+  OrderBys?: Array<OrderBy>
+}
+
+/**
+ * CreateWorkspaceRole请求参数结构体
+ */
+export interface CreateWorkspaceRoleRequest {
+  /**
+   * <p>工作空间id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>角色基础信息</p>
+   */
+  BasicInfo: RoleBasicInfo
+  /**
+   * <p>角色权限</p>
+   */
+  Permissions?: Array<RolePermission>
+}
+
+/**
+ * 统一搜索字段信息
+ */
+export interface FieldInfo {
+  /**
+   * <p>字段名称</p>
+   */
+  Name?: string
+  /**
+   * <p>字段描述</p>
+   */
+  Comment?: string
+  /**
+   * <p>字段类型</p>
+   */
+  Type?: string
+  /**
+   * <p>语言类型</p>
+   */
+  Lang?: string
+  /**
+   * <p>字段内容或代码片段</p>
+   */
+  Content?: string
+  /**
+   * <p>字段采样值</p>
+   */
+  SampleValues?: Array<string>
+}
+
+/**
+ * 删除模型结果
+ */
+export interface DeleteVolumeRsp {
+  /**
+   * 是否删除成功
+   */
+  Result?: boolean
 }
 
 /**
@@ -3960,43 +7324,498 @@ export interface FileOutputConf {
 }
 
 /**
- * RunWorkflow请求参数结构体
+ * 扩展信息键值对
  */
-export interface RunWorkflowRequest {
+export interface KVPair {
   /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   * 键
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkspaceId: string
+  Key?: string
   /**
-   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   * 值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId: string
-  /**
-   * <p>运行类型。必填。取值：1 普通运行，2 高级运行</p>
-   */
-  RunType: number
-  /**
-   * <p>运行类型为高级运行时填写的自定义运行参数</p>
-   */
-  AdvancedParams?: Array<TaskSchedulingParameterBrief>
-  /**
-   * <p>本次需要运行指定的任务ID集合，可通过 ListWorkflowTasks 获取，不传默认运行该工作流下所有任务</p>
-   */
-  TaskIds?: Array<string>
-  /**
-   * <p>幂等令牌。非必填，相同令牌的重复请求只会触发一次运行</p>
-   */
-  IdempotencyToken?: string
-  /**
-   * <p>计划调度时间列表配置</p>
-   */
-  ScheduledTimeConfig?: ScheduledTimeConfig
+  Value?: string
 }
 
 /**
- * ListWorkflowRunsRsp
+ * CreateFolder请求参数结构体
  */
-export interface ListWorkflowRunsRsp {
+export interface CreateFolderRequest {
+  /**
+   * <p>工作空间名称</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>文件夹名称</p>
+   */
+  FolderName: string
+  /**
+   * <p>文件夹类型</p><p>枚举值：</p><ul><li>FOLDER： 文件夹</li><li>GIT_FOLDER： git文件夹</li></ul>
+   */
+  FolderType: string
+  /**
+   * <p>父节点</p>
+   */
+  ParentFolder?: FolderLocator
+  /**
+   * <p>git配置，FolderType=GIT_FOLDER 时必填</p>
+   */
+  GitConfig?: GitRepoConfig
+}
+
+/**
+ * UpdateCatalog返回参数结构体
+ */
+export interface UpdateCatalogResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: UpdateCatalogRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListWorkspaces请求参数结构体
+ */
+export interface ListWorkspacesRequest {
+  /**
+   * <p>工作空间ID精确匹配</p>
+   */
+  WorkspaceId?: string
+  /**
+   * <p>工作空间名称模糊匹配</p>
+   */
+  WorkspaceKeyword?: string
+  /**
+   * <p>工作空间状态过滤（多选）：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除</p>
+   */
+  StatusList?: Array<number | bigint>
+  /**
+   * <p>多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}]；传入单个即单字段排序，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>工作空间地域过滤（多选），如 ap-guangzhou</p>
+   */
+  WorkspaceRegion?: Array<string>
+  /**
+   * <p>创建者UIN过滤（多选）</p>
+   */
+  Creator?: Array<string>
+}
+
+/**
+ * CreateWorkspace请求参数结构体
+ */
+export interface CreateWorkspaceRequest {
+  /**
+   * <p>工作空间名称，max_len=128</p>
+   */
+  WorkspaceName: string
+  /**
+   * <p>工作空间地域（如 ap-guangzhou），max_len=64</p>
+   */
+  WorkspaceRegion: string
+  /**
+   * <p>工作空间描述，max_len=300</p>
+   */
+  Description?: string
+}
+
+/**
+ * 高亮信息
+ */
+export interface HighlightingInfo {
+  /**
+   * <p>资产名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetName?: string
+  /**
+   * <p>资产全名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullName?: string
+  /**
+   * <p>描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * <p>代码片段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeFragments?: Array<Fragment>
+  /**
+   * <p>文本片段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextFragments?: Array<Fragment>
+  /**
+   * <p>标签(废弃)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagFragments?: Array<TagInfo>
+  /**
+   * <p>别名高亮片段列表。使用场景：资产别名命中关键词时，返回带 <em></em> 标签的高亮片段供前端渲染</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AliasFragments?: Array<string>
+}
+
+/**
+ * 工作流调度配置。
+ */
+export interface WorkflowTriggerConfiguration {
+  /**
+   * <p>调度配置ID，创建时无需传入，由服务端生成</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerId?: string
+  /**
+   * <p>调度状态 启动：START，暂停：PAUSE</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulerStatus?: string
+  /**
+   * <p>触发方式，</p><ul><li>定时触发：TIME_TRIGGER</li><li>持续运行：CONTINUE_RUN</li></ul><p>注意：</p><ul><li>TIME_TRIGGER 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；</li><li>CONTINUE_RUN 模式下，AdvancedConfig必填；</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerMode?: string
+  /**
+   * <p>调度时区</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulerTimeZone?: string
+  /**
+   * <p>调度生效时间，单位：毫秒时间戳。必须小于 EndTime</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * <p>调度结束时间，单位：毫秒时间戳。必须大于 StartTime</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * <p>配置方式，常规：COMMON，CRON表达式：CRON_EXPRESSION</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigMode?: string
+  /**
+   * <p>周期类型：支持的类型为 ONEOFF_CYCLE: 一次性 YEAR_CYCLE: 年 MONTH_CYCLE: 月 WEEK_CYCLE: 周 DAY_CYCLE: 天<br>HOUR_CYCLE: 小时 MINUTE_CYCLE: 分钟 CRONTAB_CYCLE: crontab表达式类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleType?: string
+  /**
+   * <p>cron表达式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CrontabExpression?: string
+  /**
+   * <p>Json格式，对账使用</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo?: string
+  /**
+   * <p>高级配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdvancedConfig?: WorkflowTriggerAdvancedConfiguration
+}
+
+/**
+ * 资产标签投票记录
+ */
+export interface AssetTagVote {
+  /**
+   * 主键ID
+   */
+  Id?: string
+  /**
+   * 资产类型，取值参考AssetType定义，如CATALOG、SCHEMA、TABLE、VIEW、MODEL、VOLUME、FUNCTION等
+   */
+  PropertyType?: string
+  /**
+   * 资产ID
+   */
+  PropertyId?: string
+  /**
+   * 标签ID
+   */
+  LabelId?: string
+  /**
+   * 标签名称
+   */
+  LabelName?: string
+  /**
+   * 标签值ID
+   */
+  LabelValueId?: string
+  /**
+   * 标签值
+   */
+  LabelValue?: string
+  /**
+   * 创建人
+   */
+  Creator?: string
+  /**
+   * 修改者
+   */
+  Modifier?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+   */
+  ModifiedTime?: string
+  /**
+   * 所有者账号
+   */
+  OwnerAccount?: string
+  /**
+   * 标签类型，取值：0=未知，1=治理标签，2=自定义标签，3=属性标签，4=脱敏标签
+   */
+  Type?: number
+  /**
+   * 是否删除
+   */
+  Deleted?: boolean
+}
+
+/**
+ * 数据目录实体结构
+ */
+export interface Catalog {
+  /**
+   * <p>数据目录唯一id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * <p>数据目录名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>数据目录类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * <p>数据目录描述信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * <p>状态信息：注册中0，待测试1，连接成功2，连接失败3，删除中4，已删除5</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>数据目录属性</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: Array<KVPair>
+  /**
+   * <p>操作人</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
+  /**
+   * <p>责任人信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaOwner?: MetaOwner
+  /**
+   * <p>审计信息</p>
+   */
+  Audit?: Audit
+  /**
+   * <p>资产全局唯一ID</p>
+   */
+  AssetGuid?: string
+  /**
+   * <p>当前workspace权限级别，取值对应PermissionLevel，0-无权限，1-只读，2-读写</p>
+   */
+  CurrentWorkspacePermissionLevel?: number
+  /**
+   * <p>tccatalog属性中的tccatalog.identifier</p>
+   */
+  Identifier?: string
+  /**
+   * <p>当前用户对该实体的权限信息</p>
+   */
+  PermissionDetail?: PermissionDetail
+  /**
+   * <p>是否为外部数据目录（基于数据源连接创建的Catalog，如MYSQL、EMR_HIVE、TCHOUSE_D、POSTGRESQL、DLC等）。true:外部目录, false:内置目录（TABLE/MODEL/VOLUME）</p>
+   */
+  IsExternal?: boolean
+  /**
+   * <p>标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<CommonTagInfo>
+  /**
+   * <p>数据目录来源</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogSource?: string
+  /**
+   * <p>连接侧数据目录名或数据库名（仅分析版三段式数据源有值，二段式数据源为空字符串）。Doris/StarRocks/TChouse-D 等 MySQL 内核三段式数据源：external catalog 名称；PostgreSQL/Tencent PG/GaussDB/Hologres 等 PG 内核三段式数据源：databaseName；MySQL 等二段式数据源：空字符串。注意：此字段仅分析版（CatalogSource=CONNECTION）有效，专业版（METALAKE）不填充。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectionCatalogName?: string
+}
+
+/**
+ * （本对象在TaskType内已废弃，统一使用TaskType.TaskTypePropertyList）Notebook 类型任务扩展
+ */
+export interface TaskTypeNotebookExt {
+  /**
+   * <p>脚本来源。取值：SCRIPT_SOURCE_LOCAL（本地）/ SCRIPT_SOURCE_GIT（Git 仓库）/<br>SCRIPT_SOURCE_CFS（CFS 文件系统）/ SCRIPT_SOURCE_COS（COS 对象存储）/<br>SCRIPT_SOURCE_WORKSPACE（工作空间）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Source?: string
+  /**
+   * <p>前端显示使用，对执行平台无意义</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  DisplayPath?: string
+  /**
+   * <p>Notebook 相对路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  NotebookPath?: string
+  /**
+   * <p>Notebook 绝对路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  NotebookAbsolutePath?: string
+}
+
+/**
+ * CreateModel返回参数结构体
+ */
+export interface CreateModelResponse {
+  /**
+   * 创建返回模型信息
+   */
+  Data?: CreateModelRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteView请求参数结构体
+ */
+export interface DeleteViewRequest {
+  /**
+   * 数据目录名
+   */
+  CatalogName: string
+  /**
+   * 数据库名
+   */
+  SchemaName: string
+  /**
+   * View名称
+   */
+  ViewName: string
+  /**
+   * 调用时所在workspace唯一id
+   */
+  WorkspaceId: string
+}
+
+/**
+ * 创建脱敏策略时的策略信息
+ */
+export interface DataMaskStrategyInfo {
+  /**
+   * 策略名称，必填，长度 1~128 字符，同一项目下唯一
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyName: string
+  /**
+   * 用户组脱敏规则列表，必填，至少包含一条规则。每条规则描述某个用户组对应的脱敏方法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Groups: Array<DataMaskGroup>
+  /**
+   * 策略类型，必填，直接透传给 DLC。合法值：MASK_SHOW_FIRST_4（保留前四个字符）、MASK_SHOW_LAST_4（保留后四个字符）、MASK_HASH（哈希脱敏）、MASK_DATE_SHOW_YEAR（日期脱敏保留年份）、MASK_NULL（置为 NULL）、MASK_DEFAULT（默认值脱敏）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyType?: string
+  /**
+   * 策略描述，可选，最大 512 字符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyDesc?: string
+  /**
+   * 策略ID
+   */
+  StrategyId?: string
+  /**
+   * 该脱敏策略当前绑定的敏感标签列表。使用场景：表详情弹窗回显“此策略关联了哪些敏感标签”，前端可 hover 展示。数据源：catalog-manager 域 meta_label_mask_policy_rel JOIN meta_biz_label，按 policy_id 反查。未关联任何敏感标签时为空数组。前置条件：仅当所在 ColumnInfo.DataMaskStrategyInfo 非空时才有查询意义。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Labels?: Array<DataMaskLabelInfo>
+}
+
+/**
+ * 角色元数据
+ */
+export interface RoleMetaData {
+  /**
+   * 创建者
+   */
+  Creator?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新者
+   */
+  Updater?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
+ * 查询工作流任务运行列表响应。
+ */
+export interface ListWorkflowTaskRunsRsp {
   /**
    * 当前页码
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4018,52 +7837,396 @@ export interface ListWorkflowRunsRsp {
    */
   TotalPageNumber?: number
   /**
-   * 工作流运行列表
+   * 任务运行历史列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items?: Array<WorkflowRun>
-  /**
-   * 工作流运行状态数量统计。
-统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BizStateEnumInfos?: Array<ScheduleBizEnumBrief>
-  /**
-   * 工作流运行错误码数量统计。
-统计口径为当前筛选条件下的全量数据，不受 PageNumber / PageSize 影响
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BizErrorCodeEnumInfos?: Array<ScheduleBizEnumBrief>
+  Items?: Array<WorkflowTaskRun>
 }
 
 /**
- * UpdateConsoleGroup请求参数结构体
+ * 分页查询存储位置列表响应
  */
-export interface UpdateConsoleGroupRequest {
+export interface ListLocationsRsp {
   /**
-   * <p>用户组 ID，可通过 ListConsoleGroups 接口获取</p>
+   * 存储位置详情列表
    */
-  GroupId: string
+  Locations?: Array<LocationInfo>
   /**
-   * <p>修改标识：USER_GROUP_OPER_TYPE_ADD_USER(1)=添加成员、USER_GROUP_OPER_TYPE_DELETE_USER(2)=删除成员、USER_GROUP_OPER_TYPE_BASIC_INFO(3)=基础信息（别名和描述）</p>
+   * 结果总条数
    */
-  OperType: number
+  TotalCount?: number
   /**
-   * <p>用户组名称</p>
+   * 快照ID
    */
-  GroupName?: string
+  SnapshotId?: string
+}
+
+/**
+ * ListVolumes返回参数结构体
+ */
+export interface ListVolumesResponse {
   /**
-   * <p>用户组别名</p>
+   * <p>接口返回信息</p>
    */
-  GroupNickname?: string
+  Data?: ListVolumesRsp
   /**
-   * <p>用户组描述</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Description?: string
+  RequestId?: string
+}
+
+/**
+ * GetSchema返回参数结构体
+ */
+export interface GetSchemaResponse {
   /**
-   * <p>成员 UIN 列表（OperType 为添加/删除成员时使用），单次最多100个</p>
+   * <p>schema详情</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserUins?: Array<string>
+  Data?: GetSchemaRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 标签值信息
+ */
+export interface TagValueInfo {
+  /**
+   * <p>标签值ID。ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中必填，可通过 ListTags 接口出参 Items[].TagValues[].TagValueId 获取，也可通过 CreateTagValues 创建后获取；按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中无需传入；查询接口出参中回填。ID 不存在或已删除时接口报错 TagValueNotExist</p>
+   */
+  TagValueId?: string
+  /**
+   * <p>标签值内容。按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中必填；ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中无需传入，服务端忽略；查询接口出参中回填</p>
+   */
+  TagValue?: string
+  /**
+   * <p>标签来源，枚举值：0=未指定 1=用户直绑 2=用户组继承 3=两者都有。仅查询接口出参中返回；所有写接口均无需传入，服务端忽略</p>
+   */
+  Source?: number
+  /**
+   * <p>继承来源的用户组名称列表（标签来源 Source=1 用户直绑时为空）。仅查询接口出参中返回；所有写接口均无需传入，服务端忽略</p>
+   */
+  GroupNames?: Array<string>
+}
+
+/**
+ * ListCatalogNames请求参数结构体
+ */
+export interface ListCatalogNamesRequest {
+  /**
+   * <p>workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>最大结果条数，可选，默认10</p>
+   */
+  MaxResults?: string
+  /**
+   * <p>分页token信息(base64编码，包含offset、snapshotId等)</p>
+   */
+  PageToken?: string
+  /**
+   * <p>catalog类型，参考CatalogType(当前支持：TABLE、MODEL、VOLUME)，可选，不填默认查询所有类型</p>
+   */
+  Types?: Array<string>
+  /**
+   * <p>数据目录来源筛选，取值参考CatalogSourceEnum(METALAKE/CONNECTION/SETATS)</p>
+   */
+  CatalogSources?: Array<string>
+}
+
+/**
+ * 批量移除控制台用户响应
+ */
+export interface RemoveConsoleUsersRsp {
+  /**
+   * <p>请求已完成处理；即使部分失败也为 true，逐个结果以 SuccessUins/FailItems 为准</p>
+   */
+  Status?: boolean
+  /**
+   * <p>删除成功的用户 UIN 列表</p>
+   */
+  SuccessUins?: Array<string>
+  /**
+   * <p>失败项列表（Item 为用户 UIN，FailReason 为失败原因）</p>
+   */
+  FailItems?: Array<CommonFailItem>
+}
+
+/**
+ * DeleteWorkspace请求参数结构体
+ */
+export interface DeleteWorkspaceRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+}
+
+/**
+ * StartCompute返回参数结构体
+ */
+export interface StartComputeResponse {
+  /**
+   * 启动计算资源返回结果
+   */
+  Data?: StartComputeRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSchema请求参数结构体
+ */
+export interface CreateSchemaRequest {
+  /**
+   * <p>catalog名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema名称</p>
+   */
+  Name: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>描述</p>
+   */
+  Comment?: string
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）。分析版catalog不支持创建schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误。通过ListConnections接口获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * ListTables返回参数结构体
+ */
+export interface ListTablesResponse {
+  /**
+   * <p>操作结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListTablesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCatalog请求参数结构体
+ */
+export interface UpdateCatalogRequest {
+  /**
+   * <p>数据目录名称，必填</p>
+   */
+  CatalogName: string
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>新描述，可选，为空表示不修改注释</p>
+   */
+  NewComment?: string
+  /**
+   * <p>数据源连接ID，可选。分析版catalog不支持写操作，传入非空时返回错误。</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * GetCatalog请求参数结构体
+ */
+export interface GetCatalogRequest {
+  /**
+   * <p>数据目录名</p>
+   */
+  CatalogName: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>数据目录id</p>
+   */
+  CatalogId?: string
+  /**
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   */
+  FetchOption?: FetchOption
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * 计划调度时间配置
+ */
+export interface ScheduledTimeConfig {
+  /**
+   * <p>调度时区，IANA 时区 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduledTimeZone?: string
+  /**
+   * <p>调度生效开始时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * <p>调度生效结束时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * <p>周期类型</p><p>枚举值：</p><ul><li>DAY_CYCLE： 天</li><li>HOUR_CYCLE： 小时</li><li>MINUTE_CYCLE： 分钟</li><li>WEEK_CYCLE： 周</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleType?: string
+  /**
+   * <p>周期步长</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleNum?: number
+}
+
+/**
+ * AddConsoleUsers返回参数结构体
+ */
+export interface AddConsoleUsersResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: AddConsoleUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListViewNames请求参数结构体
+ */
+export interface ListViewNamesRequest {
+  /**
+   * <p>数据目录名，必填</p>
+   */
+  CatalogName: string
+  /**
+   * <p>数据库名，必填</p>
+   */
+  SchemaName: string
+  /**
+   * <p>调用时所在workspace唯一id，必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>最大结果条数，可选，默认10</p>
+   */
+  MaxResults?: string
+  /**
+   * <p>分页token信息(base64编码，包含offset、snapshotId等)</p>
+   */
+  PageToken?: string
+  /**
+   * <p>数据源连接ID，可选（融合版新增字段）</p>
+   */
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，取值参考CatalogSourceEnum：METALAKE/CONNECTION/SETATS</p>
+   */
+  CatalogSource?: string
+}
+
+/**
+ * 数值
+ */
+export interface Literal {
+  /**
+   * 数值
+   */
+  Value: string
+  /**
+   * 类型
+   */
+  DataType: string
+}
+
+/**
+ * 元数据责任人信息数据结构
+ */
+export interface MetaOwner {
+  /**
+   * 元数据名称（全名）:catalog.schema.table
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullName?: string
+  /**
+   * 所有者类型:User
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerType?: string
+  /**
+   * 所有者:唯一标识(uin)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * 所有者名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerName?: string
+  /**
+   * 数据目录来源，取值参考 CatalogSourceEnum：METALAKE / CONNECTION / SETATS。ListMetaOwners 走新参数 Catalogs 查询时，按入参回填；走旧参数 FullNames 查询时，按请求顶层 CatalogSource 回填（默认 METALAKE）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogSource?: string
+}
+
+/**
+ * UnbindWorkflowBundle请求参数结构体
+ */
+export interface UnbindWorkflowBundleRequest {
+  /**
+   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
+   */
+  WorkflowId: string
+}
+
+/**
+ * 修改工作空间响应
+ */
+export interface UpdateWorkspaceRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
 }
 
 /**
@@ -4102,37 +8265,13 @@ export interface ConsoleGroupInfo {
 }
 
 /**
- * GetTable请求参数结构体
+ * 修改数据目录信息响应
  */
-export interface GetTableRequest {
+export interface UpdateCatalogRsp {
   /**
-   * <p>数据目录名</p>
+   * 是否成功
    */
-  CatalogName: string
-  /**
-   * <p>数据库名</p>
-   */
-  SchemaName: string
-  /**
-   * <p>表名</p>
-   */
-  TableName: string
-  /**
-   * <p>调用时所在workspace唯一id</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
-   */
-  FetchOption?: FetchOption
-  /**
-   * 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径
-   */
-  ConnectionId?: string
-  /**
-   * 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。
-   */
-  CatalogSource?: string
+  Result?: boolean
 }
 
 /**
@@ -4147,145 +8286,6 @@ export interface UpdateWorkspaceRoleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 查询控制台角色列表响应
- */
-export interface ListConsoleRolesRsp {
-  /**
-   * 角色列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<ConsoleRoleInfo>
-  /**
-   * 当前页码
-   */
-  PageNumber?: number
-  /**
-   * 每页大小
-   */
-  PageSize?: number
-  /**
-   * 总记录数
-   */
-  TotalCount?: number
-  /**
-   * 总页数
-   */
-  TotalPageNumber?: number
-}
-
-/**
- * 用户/用户组标签维度信息（用户管理域独立结构，与通用 TagInfo 解耦，仅供用户/用户组标签接口使用）
- */
-export interface UserTagInfo {
-  /**
-   * <p>标签维度ID。ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中必填，可通过 ListTags 接口出参 Items[].TagId 获取，也可通过 CreateTags 创建后获取；按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中无需传入；查询接口出参中回填。ID 不存在或已删除时接口报错 TagNotExist</p>
-   */
-  TagId?: string
-  /**
-   * <p>标签名称。按名称模式接口（AttachWorkspaceUserTags / DetachWorkspaceUserTags）中必填；ID 模式写接口（UpdateWorkspaceUsersTags / UpdateWorkspaceGroupsTags）中无需传入，服务端忽略；查询接口出参中回填</p>
-   */
-  TagName?: string
-  /**
-   * <p>该标签维度下绑定的标签值集合，元素结构见 TagValueInfo。ID 模式写接口中元素 TagValueId 必填；按名称模式接口中元素 TagValue 必填；查询接口出参中回填</p>
-   */
-  Values?: Array<TagValueInfo>
-}
-
-/**
- * UpdateWorkspaceUsersRoles请求参数结构体
- */
-export interface UpdateWorkspaceUsersRolesRequest {
-  /**
-   * <p>用户ID</p>
-   */
-  UserUins: Array<string>
-  /**
-   * <p>工作空间ID</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>角色ID，可通过 ListWorkspaceRoles 接口获取</p>
-   */
-  RoleIds: Array<string>
-}
-
-/**
- * GetWorkflow返回参数结构体
- */
-export interface GetWorkflowResponse {
-  /**
-   * <p>获取工作流详细信息响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: GetWorkflowRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetWorkflowTaskRun请求参数结构体
- */
-export interface GetWorkflowTaskRunRequest {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>任务运行ID，可通过 ListWorkflowTaskRuns 获取。必填</p>
-   */
-  WorkflowTaskRunId: string
-  /**
-   * <p>内嵌工作流任务运行列表选项（仅限 FOR_EACH 任务使用）。非必填</p>
-   */
-  InnerWorkflowTaskRunListOption?: InnerWorkflowTaskRunListOption
-}
-
-/**
- * DeleteFile返回参数结构体
- */
-export interface DeleteFileResponse {
-  /**
-   * <p>返回结果</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: DeleteFileResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 修改控制台用户响应
- */
-export interface UpdateConsoleUsersRsp {
-  /**
-   * 操作是否成功
-   */
-  Status?: boolean
-}
-
-/**
- * AddWorkspaceUsers请求参数结构体
- */
-export interface AddWorkspaceUsersRequest {
-  /**
-   * <p>用户ID</p>
-   */
-  UserUins: Array<string>
-  /**
-   * <p>工作空间ID</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>角色ID，可通过 ListWorkspaceRoles 接口获取</p>
-   */
-  RoleIds: Array<string>
 }
 
 /**
@@ -4399,13 +8399,13 @@ export interface WorkflowTask {
 }
 
 /**
- * ListWorkspaceUsers返回参数结构体
+ * UpdateModelVersion返回参数结构体
  */
-export interface ListWorkspaceUsersResponse {
+export interface UpdateModelVersionResponse {
   /**
-   * <p>查询工作空间用户列表响应</p>
+   * <p>返回结果</p>
    */
-  Data?: ListWorkspaceUsersRsp
+  Data?: UpdateModelVersionRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4413,109 +8413,13 @@ export interface ListWorkspaceUsersResponse {
 }
 
 /**
- * 删除Schema的响应
+ * UpdateLocation返回参数结构体
  */
-export interface DeleteSchemaRsp {
+export interface UpdateLocationResponse {
   /**
-   * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回结果
    */
-  Result?: boolean
-}
-
-/**
- * UpdateWorkspaceGroupsRoles请求参数结构体
- */
-export interface UpdateWorkspaceGroupsRolesRequest {
-  /**
-   * 用户组ID，可通过 ListWorkspaceGroups 接口获取
-   */
-  GroupIds: Array<string>
-  /**
-   * 工作空间ID
-   */
-  WorkspaceId: string
-  /**
-   * 角色ID，可通过 ListWorkspaceRoles 接口获取
-   */
-  RoleIds: Array<string>
-}
-
-/**
- * 字典项（key-value映射）
- */
-export interface DictItem {
-  /**
-   * 字典键
-   */
-  Key?: string
-  /**
-   * 字典值
-   */
-  Value?: string
-}
-
-/**
- * 高级依赖配置
- */
-export interface AdvancedDependencyConfig {
-  /**
-   * 逻辑运算符号OR / AND
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Operator?: string
-  /**
-   * 任务运行条件规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Conditions?: Array<TaskRunConditionRule>
-}
-
-/**
- * 停止计算资源返回结果
- */
-export interface StopComputeRsp {
-  /**
-   * 操作是否成功
-   */
-  Status?: boolean
-}
-
-/**
- * DeleteConsoleGroups请求参数结构体
- */
-export interface DeleteConsoleGroupsRequest {
-  /**
-   * 要删除的用户组 ID 列表，单次最多100个；可通过 ListConsoleGroups 接口获取
-   */
-  GroupIds: Array<string>
-}
-
-/**
- * 获取数据目录列表响应
- */
-export interface ListCatalogsRsp {
-  /**
-   * 数据目录列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<Catalog>
-  /**
-   * 下页分页token
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NextPageToken?: string
-}
-
-/**
- * UpdateWorkflow返回参数结构体
- */
-export interface UpdateWorkflowResponse {
-  /**
-   * <p>更新工作流响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: UpdateWorkflowRsp
+  Data?: UpdateLocationRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4523,161 +8427,184 @@ export interface UpdateWorkflowResponse {
 }
 
 /**
- * GetWorkflow请求参数结构体
+ * volume返回详情
  */
-export interface GetWorkflowRequest {
+export interface GetVolumeRsp {
   /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
+   * volume详情
    */
-  WorkspaceId: string
-  /**
-   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
-   */
-  WorkflowId: string
+  Volume?: Volume
 }
 
 /**
- * 文件详情
+ * 工作流运行信息
  */
-export interface FileInfo {
+export interface WorkflowRun {
   /**
-   * <p>主账号 AppId</p>
+   * <p>主账号ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
-   * <p>工作空间 ID</p>
+   * <p>工作流名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * <p>工作流ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * <p>工作流运行ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunId?: string
+  /**
+   * <p>工作空间ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: string
   /**
-   * <p>文件 ID</p>
+   * <p>触发方式，Scheduler、ManualTrigger、Event (参考SchedulerTriggerType)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileId?: string
+  TriggerType?: string
   /**
-   * <p>文件名，含后缀</p>
+   * <p>运行开始时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileName?: string
+  RunStartTime?: string
   /**
-   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
+   * <p>pending 状态开始时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileType?: string
+  PendingStartTime?: string
   /**
-   * <p>文件在工作空间中的完整路径，以 / 开头，如 /etl/daily/demo.ipynb</p>
+   * <p>queue 状态开始时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Path?: string
+  QueueStartTime?: string
   /**
-   * <p>文件运行配置</p>
-   */
-  FileConfig?: FileConfig
-  /**
-   * <p>绑定的 BundleId</p>
+   * <p>运行结束时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BundleId?: string
+  RunEndTime?: string
   /**
-   * <p>绑定的 BundleInfo，JSON 字符串</p>
+   * <p>终态时间，运行进入终态时都有值，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BundleInfo?: string
+  EndTime?: string
   /**
-   * <p>文件状态。active=正常，deleted=已删除</p>
+   * <p>运行时长，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: string
+  RunCostTime?: string
   /**
-   * <p>文件负责人用户名</p>
+   * <p>并发排队花费时间，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OwnerUserName?: string
+  QueueCostTime?: string
   /**
-   * <p>创建人子账号 Uin</p>
+   * <p>等待资源花费时间，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateUserUin?: string
+  PendingCostTime?: string
   /**
-   * <p>最近更新人子账号 Uin</p>
+   * <p>运行状态。CREATE(&quot;初始化&quot;),     QUEUED(&quot;等待中&quot;),     PENDING(&quot;准备中&quot;),     RUNNING(&quot;运行中&quot;),     SKIPPED(&quot;跳过运行&quot;),     SUCCESS(&quot;成功&quot;),     FAILED(&quot;失败&quot;),     TERMINATING(&quot;终止中&quot;),     TERMINATED(&quot;终止&quot;),     CANCELLED(&quot;被手动终止&quot;)等</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateUserUin?: string
+  RunState?: string
   /**
-   * <p>创建时间，毫秒级时间戳</p>
+   * <p>计算资源（任务的资源组ID集合）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupIds?: Array<string>
+  /**
+   * <p>运行用户UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserUin?: string
+  /**
+   * <p>运行用户名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunUserName?: string
+  /**
+   * <p>错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeString?: string
+  /**
+   * <p>运行参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowParams?: string
+  /**
+   * <p>工作流版本ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowVersionId?: string
+  /**
+   * <p>当前工作流是否支持重跑</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportRerun?: boolean
+  /**
+   * <p>工作流运行创建时间，单位：毫秒时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * <p>最近更新时间，毫秒级时间戳</p>
+   * <p>重跑次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime?: string
+  RerunTimes?: number
   /**
-   * <p>文件存储信息。仅当请求 IncludeContent=true 时返回内容</p>
-   */
-  Storage?: FileStorage
-  /**
-   * <p>当前调用方对该文件的权限点列表</p>
+   * <p>运行的任务范围，任务ID列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Permissions?: string
+  SelectedTaskIds?: Array<string>
   /**
-   * <p>是否已发布</p>
+   * <p>资源组信息列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseStatus?: boolean
+  ResourceGroupInfoList?: Array<ResourceGroupInfo>
   /**
-   * <p>资源模式。1=分布式，2=单节点</p>
+   * <p>标签列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceMode?: number
+  LabelList?: Array<LabelBrief>
   /**
-   * <p>ZIP 异步创建时透传 Workspace 作业信息；普通同步创建或其他复用该返回结构的接口不设置该字段</p>
+   * <p>父工作流运行ID 【由嵌套工作流触发独有】</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncOperation?: AsyncOperation
+  ParentWorkflowRunId?: string
   /**
-   * <p>脚本版本ID</p>
+   * <p>父工作流任务运行ID 【由嵌套工作流触发独有】</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionId?: string
-}
-
-/**
- * GetFolder请求参数结构体
- */
-export interface GetFolderRequest {
+  ParentWorkflowTaskRunId?: string
   /**
-   * <p>工作空间id</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>文件夹定位</p>
-   */
-  Folder: FolderLocator
-}
-
-/**
- * 内嵌工作流任务简要信息（目前只有 FOR_EACH 工作流任务该字段才有值）
- */
-export interface InnerWorkflowTaskBrief {
-  /**
-   * 任务ID
+   * <p>父工作流任务运行名称 【由嵌套工作流触发独有】</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId?: string
+  ParentWorkflowTaskRunName?: string
   /**
-   * 任务名称
+   * <p>授权权限类型<br>PERMISSION_TYPE_UNSPECIFIED：未指定权限<br>MANAGE : 管理权限：包含所有操作权限<br>RUN : 运行权限：可执行实体<br>VIEW : 查看权限：可查看实体内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskName?: string
+  Permission?: string
   /**
-   * 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述
+   * <p>工作流高级运行时用户填入的参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskTypeName?: string
+  AdvancedParameters?: Array<AdvancedParameter>
+  /**
+   * <p>计划调度时间</p><p>参数格式：毫秒时间戳（UTC）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduledTime?: string
 }
 
 /**
@@ -4720,189 +8647,38 @@ export interface FileNode {
 }
 
 /**
- * 更新文件夹回包
+ * 资源组信息
  */
-export interface UpdateFolderRsp {
+export interface ResourceGroupInfo {
   /**
-   * <p>更新文件夹结果，true为成功</p>
+   * <p>资源组ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: boolean
+  ResourceGroupId?: string
+  /**
+   * <p>资源组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupName?: string
+  /**
+   * <p>资源组状态</p><p>参数格式：0 // 未指定 1 // 待创建 2 // 创建中 3 // 运行中 4 // 已停止 5 // 停止中 6 // 启动中 7 // 更新中 8 // 删除中 9 // 已删除 10 // 用户主动启动 / 自动启动（有任务提交且自动启停开启） 11 // 可用: 仅存在于数据计算型 12 // 不可用: 仅存在于数据计算型 13 // 失败</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupStatus?: string
 }
 
 /**
- * 任务类型属性键值对
+ * GetFolder请求参数结构体
  */
-export interface TaskTypeProperty {
+export interface GetFolderRequest {
   /**
-   * <p>属性键名。用于TaskType内的入参时，若不传或为空，该属性项被服务端静默忽略（不报错），等同于该属性未配置。合法 PropertyKey 清单请参考TaskType中描述。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PropertyKey?: string
-  /**
-   * <p>属性值</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PropertyValue?: string
-}
-
-/**
- * 表信息
- */
-export interface TableInfo {
-  /**
-   * 表名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Comment?: string
-  /**
-   * 字段信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Columns?: Array<ColumnInfo>
-  /**
-   * 属性值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Properties?: Array<KVPair>
-  /**
-   * 分区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Partitioning?: Array<Partitioning>
-  /**
-   * 索引
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Indexes?: Array<Index>
-  /**
-   * 编辑者
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Audit?: Audit
-  /**
-   * 表版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TableFormat?: string
-  /**
-   * owner信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetaOwner?: MetaOwner
-  /**
-   * 资产全局唯一ID
-   */
-  AssetGuid?: string
-  /**
-   * 总文件数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FilesCount?: string
-  /**
-   * 总数据量大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FilesSize?: string
-  /**
-   * 表类型
-
-- Managed 内部
-- External 外部
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TableType?: string
-  /**
-   * 特征表类型：Online-在线表 Offline-离线表 空字符串-非特征表
-   */
-  FeatureTableType?: string
-  /**
-   * 特征表详细信息，仅当FeatureTableType不为空时有值
-   */
-  FeatureTableDetail?: FeatureTableDetail
-  /**
-   * 当前用户对该实体的权限信息
-   */
-  PermissionDetail?: PermissionDetail
-  /**
-   * 表级标签列表，仅当请求中FetchOption.FetchTags=true时返回，默认不返回
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<CommonTagInfo>
-}
-
-/**
- * UpdateWorkspaceGroupsRoles返回参数结构体
- */
-export interface UpdateWorkspaceGroupsRolesResponse {
-  /**
-   * 修改工作空间用户组角色是否成功
-   */
-  Data?: PlatformStatusRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateConsoleGroup返回参数结构体
- */
-export interface CreateConsoleGroupResponse {
-  /**
-   * <p>返回结果</p>
-   */
-  Data?: CreateConsoleGroupRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateFile请求参数结构体
- */
-export interface CreateFileRequest {
-  /**
-   * <p>工作空间 ID。来源：ListWorkspaces 接口返回的 WorkspaceId</p>
+   * <p>工作空间id</p>
    */
   WorkspaceId: string
   /**
-   * <p>文件名，含后缀，最长 255 字节。不能以 . 或 .. 开头/结尾，不能含空格与控制字符</p>
+   * <p>文件夹定位</p>
    */
-  FileName: string
-  /**
-   * <p>父文件夹路径，以 / 开头、末尾不带 /，根目录传 /。来源：ListFiles 接口返回的 Path</p>
-   */
-  ParentFolderPath?: string
-  /**
-   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
-   */
-  FileType?: string
-  /**
-   * <p>文件运行配置</p>
-   */
-  FileConfig?: FileConfig
-  /**
-   * <p>绑定的 BundleId。来源：ListBundles 接口返回的 BundleId</p>
-   */
-  BundleId?: string
-  /**
-   * <p>绑定的 BundleInfo，JSON 字符串</p>
-   */
-  BundleInfo?: string
-  /**
-   * <p>文件初始内容。不传则按FileType 生成默认内容</p>
-   */
-  Storage?: FileStorage
-  /**
-   * 是否将 Storage 中的 ZIP 文件异步解压创建，默认 false。true 时异步作业由 Workspace 负责全生命周期，响应仅通过 AsyncOperation 返回作业信息（FileId 为空）；作业进度查询由基础平台 WS 接口实现，不在本协议中定义。
-   */
-  ExtractArchive?: boolean
+  Folder: FolderLocator
 }
 
 /**
@@ -4970,89 +8746,18 @@ export interface GetWorkflowRunRequest {
 }
 
 /**
- * 用户基本信息
+ * ListFeatureTables返回参数结构体
  */
-export interface UserInfo {
+export interface ListFeatureTablesResponse {
   /**
-   * <p>uin</p>
+   * <p>返回信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserUin?: string
+  Data?: ListFeatureTableResp
   /**
-   * <p>子用户名称</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserName?: string
-  /**
-   * <p>子用户昵称</p>
-   */
-  Nickname?: string
-  /**
-   * <p>0: 普通用户 1: entraId用户</p>
-   */
-  UserTag?: string
-}
-
-/**
- * ListWorkflows请求参数结构体
- */
-export interface ListWorkflowsRequest {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>分页页码，从 1 开始。非必填，默认 1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小。非必填，默认 10，取值范围 [10, 200]</p>
-   */
-  PageSize?: number
-  /**
-   * <p>工作流名称关键字，对 WorkflowName 做模糊匹配。非必填，单值</p>
-   */
-  WorkflowNameKeyword?: string
-  /**
-   * <p>工作流名称，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  WorkflowNames?: Array<string>
-  /**
-   * <p>工作流ID，精确匹配。非必填，多选（多个值之间为 OR 关系）</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/1835/138002">ListWorkflows</a> 返回值 <code>Data</code></p>
-   */
-  WorkflowIds?: Array<string>
-  /**
-   * <p>工作流运行人UIN，精确匹配。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  RunUserUins?: Array<string>
-  /**
-   * <p>标签名称ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  LabelKeyIds?: Array<string>
-  /**
-   * <p>标签值ID，精确匹配，可通过标签相关接口获取。非必填，多选（多个值之间为 OR 关系）</p>
-   */
-  LabelValueIds?: Array<string>
-  /**
-   * <p>快速筛选类型。非必填，单值，当前仅支持 MY_FAVORITE（我收藏的）</p>
-   */
-  QuickSelectionType?: string
-  /**
-   * <p>排序条件，多个之间按数组顺序表示优先级。非必填。可排序字段白名单：CreateTime</p>
-   */
-  OrderBys?: Array<OrderBy>
-}
-
-/**
- * 角色权限
- */
-export interface RolePermission {
-  /**
-   * <p>模块ID，须为当前租户已开通的功能模块（叶子节点）的模块ID（层级编码字符串，如 101=快速开始、109=工作流、116101103=工作空间管理_角色权限），非法值返回 InvalidParameterValue。模块清单获取方式：调用 ListWorkspaceModules 接口查询工作空间模块列表，取返回 Items[].ModuleId 字段（IsLeaf 为 true 的叶子节点）；也可通过控制台「工作空间设置-角色权限」页面查看</p>
-   */
-  ModuleId?: string
-  /**
-   * <p>模块访问权限，单值：R=只读，RW=读写，RWD=读写删除，N=无权限</p>
-   */
-  Permissions?: string
+  RequestId?: string
 }
 
 /**
@@ -5150,200 +8855,57 @@ export interface FileConfig {
 }
 
 /**
- * 创建工作空间角色结果
+ * ListTables请求参数结构体
  */
-export interface CreateWorkspaceRoleResult {
+export interface ListTablesRequest {
   /**
-   * 角色id
+   * <p>数据目录名</p>
    */
-  RoleId?: string
+  CatalogName: string
   /**
-   * 创建工作空间角色是否成功
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>数据库名</p>
    */
-  Status?: boolean
-}
-
-/**
- * RunWorkflow返回参数结构体
- */
-export interface RunWorkflowResponse {
+  SchemaName: string
   /**
-   * <p>运行工作流响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: AsyncActionRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ListConsoleUsers请求参数结构体
- */
-export interface ListConsoleUsersRequest {
-  /**
-   * <p>页码，从1开始，默认1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小，默认10，最小10，最大100</p>
-   */
-  PageSize?: number
-  /**
-   * <p>用户名称与 UIN 模糊匹配</p>
-   */
-  UserKeyword?: string
-  /**
-   * <p>用于过滤角色关联的用户</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul><p>可通过 ListConsoleRoles 接口获取</p>
-   */
-  RoleIds?: Array<string>
-  /**
-   * <p>多字段排序，如 [{Name: &#39;CreateTime&#39;, Direction: &#39;Desc&#39;}, {Name: &#39;UserName&#39;, Direction: &#39;Asc&#39;}]，默认按创建时间降序</p>
-   */
-  OrderBys?: Array<OrderBy>
-}
-
-/**
- * ListWorkflowRuns返回参数结构体
- */
-export interface ListWorkflowRunsResponse {
-  /**
-   * <p>工作流运行列表响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: ListWorkflowRunsRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RemoveWorkspaceGroups请求参数结构体
- */
-export interface RemoveWorkspaceGroupsRequest {
-  /**
-   * <p>用户组ID列表，可通过 ListWorkspaceGroups 接口获取</p>
-   */
-  GroupIds: Array<string>
-  /**
-   * <p>工作空间ID</p>
-   */
-  WorkspaceId: string
-}
-
-/**
- * ListWorkspaceGroups请求参数结构体
- */
-export interface ListWorkspaceGroupsRequest {
-  /**
-   * <p>工作空间ID</p>
+   * <p>调用时所在workspace唯一id</p>
    */
   WorkspaceId: string
   /**
-   * <p>通过用户组ID批量查询；用户组ID可通过 ListWorkspaceGroups 接口获取</p>
+   * <p>最大结果条数</p>
    */
-  GroupIds?: Array<string>
+  MaxResults?: number
   /**
-   * <p>用户组名称模糊匹配</p>
+   * <p>分页token</p>
    */
-  GroupKeyword?: string
+  PageToken?: string
   /**
-   * <p>用于过滤角色关联的用户组；可通过 ListWorkspaceRoles 接口获取</p>
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
-  RoleIds?: Array<string>
+  FetchOption?: FetchOption
   /**
-   * <p>多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}]；传入单个即单字段排序，默认按创建时间降序</p>
+   * <p>数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取</p>
    */
-  OrderBys?: Array<OrderBy>
+  ConnectionId?: string
   /**
-   * <p>页码，从1开始，默认1；小于1时按1处理</p>
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
    */
-  PageNumber?: number
-  /**
-   * <p>每页大小，默认10，取值范围为 [1,100]，越界时自动收敛到边界值</p>
-   */
-  PageSize?: number
-  /**
-   * <p>用户组类型筛选。取值为枚举数值的字符串形式："0"=控制台系统类型（包含全部user）、"1"=控制台自定义类型、"2"=工作空间系统类型（包含工作空间全部user）、"3"=工作空间自定义类型</p>
-   */
-  GroupType?: string
+  CatalogSource?: string
 }
 
 /**
- * UnbindWorkflowBundle请求参数结构体
+ * 获取数据表名称列表响应
  */
-export interface UnbindWorkflowBundleRequest {
+export interface ListTableNamesRsp {
   /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
-   */
-  WorkflowId: string
-}
-
-/**
- * 高级运行参数（工作流高级运行时用户填入的参数）
- */
-export interface AdvancedParameter {
-  /**
-   * 参数名
+   * 数据表名数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamKey?: string
+  Items?: Array<NameIdentifier>
   /**
-   * 参数值
+   * 下页分页token信息(base64编码，包含offset、snapshotId等)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamValue?: string
-}
-
-/**
- * RerunWorkflowRun请求参数结构体
- */
-export interface RerunWorkflowRunRequest {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取。必填</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>工作流ID，可通过 ListWorkflows 获取。必填</p>
-   */
-  WorkflowId: string
-  /**
-   * <p>工作流运行ID，可通过 ListWorkflowRuns 获取。必填</p>
-   */
-  WorkflowRunId: string
-  /**
-   * <p>运行类型。必填。取值：1 普通运行，2 高级运行</p>
-   */
-  RunType: number
-  /**
-   * <p>运行类型为高级运行时填写的自定义运行参数</p>
-   */
-  AdvancedParams?: Array<TaskSchedulingParameterBrief>
-  /**
-   * <p>本次需要重跑指定的任务ID集合，可通过 ListWorkflowTasks 获取，不传默认重跑该工作流下所有任务</p>
-   */
-  TaskIds?: Array<string>
-  /**
-   * <p>计划调度时间列表配置</p>
-   */
-  ScheduledTimeConfig?: ScheduledTimeConfig
-}
-
-/**
- * 删除工作空间角色结果
- */
-export interface DeleteWorkspaceRoleResult {
-  /**
-   * 删除工作空间角色是否成功
-   */
-  Status?: boolean
+  NextPageToken?: string
 }
 
 /**
@@ -5361,371 +8923,97 @@ export interface UpdateConsoleGroupResponse {
 }
 
 /**
- * 用户基础展示信息
+ * UpdateVolume请求参数结构体
  */
-export interface StandardUserInfo {
+export interface UpdateVolumeRequest {
   /**
-   * 用户UIN
-   */
-  UserUin?: string
-  /**
-   * 用户名
-   */
-  UserName?: string
-  /**
-   * 昵称
-   */
-  Nickname?: string
-  /**
-   * 0: 普通用户 1: entraId用户
-   */
-  UserTag?: string
-}
-
-/**
- * 控制台用户信息（规范化，与内部 UserDetailInfo 解耦）
- */
-export interface ConsoleUserInfo {
-  /**
-   * 用户 UIN
-   */
-  UserUin?: string
-  /**
-   * 用户名
-   */
-  UserName?: string
-  /**
-   * 昵称
-   */
-  Nickname?: string
-  /**
-   * 角色列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Roles?: Array<RoleBasicInfo>
-  /**
-   * 用户来源，group：用户组、user:用户
-   */
-  UserSource?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 是否主账号
-   */
-  IsOwner?: boolean
-  /**
-   * 0: 普通用户 1: entraId用户
-   */
-  UserTag?: number
-  /**
-   * 是否具有 admin 权限的子账号
-   */
-  IsAdmin?: boolean
-}
-
-/**
- * UpdateWorkflowRsp
- */
-export interface UpdateWorkflowRsp {
-  /**
-   * 更新状态，true 表示成功
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: boolean
-}
-
-/**
- * StartCompute返回参数结构体
- */
-export interface StartComputeResponse {
-  /**
-   * 启动计算资源返回结果
-   */
-  Data?: StartComputeRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetTables返回参数结构体
- */
-export interface GetTablesResponse {
-  /**
-   * <p>返回结果</p>
-   */
-  Data?: GetTablesRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetSchema请求参数结构体
- */
-export interface GetSchemaRequest {
-  /**
-   * <p>数据目录名</p>
+   * 目录名称，必填
    */
   CatalogName: string
   /**
-   * <p>数据库名</p>
+   * 模式名称，必填
    */
   SchemaName: string
   /**
-   * <p>调用时所在workspace唯一id</p>
+   * 数据卷名称，必填
+   */
+  VolumeName: string
+  /**
+   * 调用时所在workspace唯一id，必填
    */
   WorkspaceId: string
   /**
-   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   * 新名称，可选，为空表示不修改名称
    */
-  FetchOption?: FetchOption
+  NewName?: string
   /**
-   * 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径
+   * 新注释，可选，为空表示不修改注释
    */
-  ConnectionId?: string
-  /**
-   * 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。
-   */
-  CatalogSource?: string
+  NewComment?: string
 }
 
 /**
- * 工作流完整配置
+ * ListFeatureTables请求参数结构体
  */
-export interface Workflow {
-  /**
-   * <p>工作空间ID，可通过 ListWorkspaces 获取</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkspaceId?: string
-  /**
-   * <p>工作流基本信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BaseInfo?: WorkflowBaseInfo
-  /**
-   * <p>工作流调度配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Trigger?: Array<WorkflowTriggerConfiguration>
-  /**
-   * <p>工作流参数列表 参数名必填且只能包含数字、大小写字母、空格、.$@#!%^&amp;*()-_+=&gt; 最长128个字符</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamList?: Array<ParamInfo>
-  /**
-   * <p>标签 标签名必填且只能包含数字、大小写字母、空格、.$@#!%^&amp;*()-_+=&gt;'，最长128个字符</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LabelList?: Array<LabelBrief>
-  /**
-   * <p>工作流告警配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Alarm?: AlarmBrief
-  /**
-   * <p>监控指标配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MonitorMetric?: MonitorMetricBrief
-  /**
-   * <p>工作流高级设置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AdvanceConfig?: WorkflowAdvanceConfig
-  /**
-   * <p>工作流任务列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskList?: Array<WorkflowTask>
-  /**
-   * <p>BundleId，可通过 Bundle 相关接口获取</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleId?: string
-  /**
-   * <p>Bundle信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleInfo?: string
-  /**
-   * <p>GIT配置ID，对应GetWorkspaceConfig接口中的ConfigKey</p>    -
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GitConfigId?: string
-  /**
-   * <p>Git分支信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GitBranch?: string
-}
-
-/**
- * DeleteCatalog请求参数结构体
- */
-export interface DeleteCatalogRequest {
-  /**
-   * 数据目录名
-   */
-  CatalogName: string
-  /**
-   * 调用时所在workspace唯一id
-   */
-  WorkspaceId: string
-  /**
-   * 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径
-   */
-  ConnectionId?: string
-  /**
-   * 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。
-   */
-  CatalogSource?: string
-}
-
-/**
- * Schema信息
- */
-export interface Schema {
-  /**
-   * <p>schema名称</p>
-   */
-  Name: string
-  /**
-   * <p>描述。注意：此字段可能返回null，表示取不到有效值</p>
-   */
-  Comment?: string
-  /**
-   * <p>属性。注意：此字段可能返回null，表示取不到有效值</p>
-   */
-  Properties?: Array<KVPair>
-  /**
-   * <p>审计信息。注意：此字段可能返回null，表示取不到有效值</p>
-   */
-  Audit?: Audit
-  /**
-   * <p>owner信息</p>
-   */
-  MetaOwner?: MetaOwner
-  /**
-   * <p>资产全局唯一ID，通过WedataAssetUIDUtils.generateUID生成</p>
-   */
-  AssetGuid?: string
-  /**
-   * <p>当前用户对该schema的权限信息。注意：此字段可能返回null，请求中未开启FetchPermissions时不返回</p>
-   */
-  PermissionDetail?: PermissionDetail
-  /**
-   * <p>标签信息列表。注意：此字段可能返回null，请求中未开启FetchTags时不返回</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<CommonTagInfo>
-}
-
-/**
- * 排序字段
- */
-export interface OrderBy {
-  /**
-   * 排序方向，Asc（升序）或 Desc（降序），大小写不敏感
-   */
-  Direction?: string
-  /**
-   * 排序字段名
-   */
-  Name?: string
-}
-
-/**
- * UpdateFolder请求参数结构体
- */
-export interface UpdateFolderRequest {
+export interface ListFeatureTablesRequest {
   /**
    * <p>工作空间ID</p>
    */
   WorkspaceId: string
   /**
-   * <p>待更新文件夹</p>
+   * <p>关键字</p>
    */
-  Folder?: FolderLocator
+  Keyword?: string
   /**
-   * <p>操作类型</p><p>枚举值：</p><ul><li>1： 重命名</li><li>2： 移动</li></ul>
+   * <p>Catalog目录列表</p>
    */
-  OperationType?: string
+  CatalogNames?: Array<string>
   /**
-   * <p>重命名后的文件名，OperationType = 1时生效</p>
+   * <p>标签列表</p>
    */
-  FolderName?: string
+  Tags?: Array<string>
   /**
-   * <p>移动的目的文件夹，OperationType = 2时生效</p>
+   * <p>我负责的</p>
    */
-  TargetParent?: FolderLocator
+  OwnerMe?: boolean
+  /**
+   * <p>最大结果条数，可选，取值1～50</p>
+   */
+  MaxResults?: number
+  /**
+   * <p>分页token信息(base64编码)，可选</p>
+   */
+  PageToken?: string
+  /**
+   * <p>排序，Name(CreateTime/ModifiedTime), Direction(Desc/Asc)</p>
+   */
+  OrderBys?: Array<OrderBy>
 }
 
 /**
- * 删除文件夹回包
+ * 代码片段
  */
-export interface DeleteFolderRsp {
+export interface Fragment {
   /**
-   * <p>删除文件夹状态</p>
+   * 字段名称
    */
-  Status?: boolean
-}
-
-/**
- * 截断分区策略
- */
-export interface TruncatePartitioning {
+  Name?: string
   /**
-   * 字段名
+   * 字段类型
    */
-  FiledName: string
+  Type?: string
   /**
-   * 截取长度
+   * 表字段描述
    */
-  Width: string
-}
-
-/**
- * DeleteTable返回参数结构体
- */
-export interface DeleteTableResponse {
+  Comment?: string
   /**
-   * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * 片段内容
    */
-  Data?: DeleteTableRsp
+  Content?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 片段语言
    */
-  RequestId?: string
-}
-
-/**
- * 工作流高级设置
- */
-export interface WorkflowAdvanceConfig {
-  /**
-   * 排队模式，ON（默认）, OFF
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QueuingMode?: string
-  /**
-   * 	
-默认值为1
-
-QueuingMode为ON时，MaxConcurrentNum 设置才生效；只能输入大于0的整数，输入非法值自动转换为1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxConcurrentNum?: number
+  Lang?: string
 }
 
 /**
@@ -5763,209 +9051,102 @@ export interface ListSchemasRequest {
 }
 
 /**
- * 参数键值对
+ * 数据卷信息
  */
-export interface ParamInfo {
+export interface Volume {
   /**
-   * 参数ID，创建时无需传入，由服务端生成
+   * <p>名称</p>
+   */
+  Name: string
+  /**
+   * <p>catalog信息</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema 信息</p>
+   */
+  SchemaName: string
+  /**
+   * <p>模型描述</p>
+   */
+  Comment?: string
+  /**
+   * <p>存储位置</p>
+   */
+  StorageLocation?: string
+  /**
+   * <p>扩展数据</p>
+   */
+  Properties?: Array<KVPair>
+  /**
+   * <p>审计数据</p>
+   */
+  Audit?: Audit
+  /**
+   * 数据卷类型，取值：MANAGED(内部管理)、EXTERNAL(外部存储)
+   */
+  Type?: string
+  /**
+   * <p>责任人信息</p>
+   */
+  MetaOwner?: MetaOwner
+  /**
+   * <p>资产全局唯一ID</p>
+   */
+  AssetGuid?: string
+  /**
+   * <p>当前用户对该实体的权限信息</p>
+   */
+  PermissionDetail?: PermissionDetail
+  /**
+   * <p>标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamId?: string
-  /**
-   * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamKey?: string
-  /**
-   * 参数值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamValue?: string
+  Tags?: Array<CommonTagInfo>
 }
 
 /**
- * CreateCatalog返回参数结构体
+ * 查询工作空间用户列表响应
  */
-export interface CreateCatalogResponse {
+export interface ListWorkspaceUsersRsp {
   /**
-   * 创建catalog响应
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户列表
    */
-  Data?: CreateCatalogRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteConsoleGroups返回参数结构体
- */
-export interface DeleteConsoleGroupsResponse {
-  /**
-   * <p>返回结果</p>
-   */
-  Data?: DeleteConsoleGroupsRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 内嵌工作流任务运行详情（仅限 FOR_EACH 任务）
- */
-export interface InnerWorkflowTaskRun {
+  Items?: Array<WorkspaceUserInfo>
   /**
    * 当前页码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总记录数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPageNumber?: number
   /**
-   * 迭代运行列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 扩展信息（连续翻页场景由服务端返回，下次翻页请求原样带上）
    */
-  Items?: Array<InnerWorkflowTaskRunIteration>
-  /**
-   * 迭代次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IterationCount?: number
-  /**
-   * 失败次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FailureCount?: number
-  /**
-   * 成功次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SuccessCount?: number
-  /**
-   * 内嵌工作流ID，可通过 ListWorkflows 获取
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerWorkflowId?: string
-  /**
-   * 内嵌任务ID，可通过 ListWorkflowTasks 获取
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerTaskId?: string
-  /**
-   * 内嵌任务运行状态数量统计（实例业务枚举键值对列表）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerTaskRunBizEnumInfos?: Array<ScheduleBizEnumBrief>
+  ExtendInfo?: string
 }
 
 /**
- * 单个监控指标
+ * UpdateView返回参数结构体
  */
-export interface MonitorMetricItem {
+export interface UpdateViewResponse {
   /**
-   * 监控指标类型,有三种类型：1. RUN_DURATION（运行时长）2. WAIT_DURATION（等待时长）3. COMPLETION_TIME（完成时间）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回结果
    */
-  MetricType?: string
-  /**
-   * 警告阈值，单位为毫秒级别，对于COMPLETION_TIME:从当日时间点00:00起算
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WarningThreshold?: string
-  /**
-   * 超时阈值，单位为毫秒级别，对于COMPLETION_TIME:从当日时间点00:00起算
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimeoutThreshold?: string
-}
-
-/**
- * GetTable返回参数结构体
- */
-export interface GetTableResponse {
-  /**
-   * <p>表信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: GetTableRsp
+  Data?: UpdateViewRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateWorkflow返回参数结构体
- */
-export interface CreateWorkflowResponse {
-  /**
-   * <p>创建工作流响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: CreateWorkflowRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteSchema请求参数结构体
- */
-export interface DeleteSchemaRequest {
-  /**
-   * 数据目录名
-   */
-  CatalogName: string
-  /**
-   * 数据库名
-   */
-  SchemaName: string
-  /**
-   * 调用时所在workspace唯一id
-   */
-  WorkspaceId: string
-  /**
-   * 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误
-   */
-  ConnectionId?: string
-  /**
-   * 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。
-   */
-  CatalogSource?: string
-}
-
-/**
- * ListConsoleRoles请求参数结构体
- */
-export interface ListConsoleRolesRequest {
-  /**
-   * <p>页码，从1开始，默认1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小，默认10，最小10，最大100</p>
-   */
-  PageSize?: number
-  /**
-   * <p>角色名称或描述模糊匹配</p>
-   */
-  RoleKeyword?: string
 }
 
 /**
@@ -6032,145 +9213,14 @@ export interface Audit {
 }
 
 /**
- * 分区结构
+ * DeleteCatalog返回参数结构体
  */
-export interface Partitioning {
+export interface DeleteCatalogResponse {
   /**
-   * 转换策略
-   */
-  Strategy?: string
-  /**
-   * 分桶策略参数
-   */
-  NumBuckets?: number
-  /**
-   * 字段名称
-   */
-  FieldNames?: Array<string>
-  /**
-   * 策略参数
-   */
-  Width?: number
-  /**
-   * 字段名称
-   */
-  FieldName?: Array<string>
-  /**
-   * 按年分区策略
-   */
-  YearPartitioning?: SingleFieldPartitioning
-  /**
-   * 按月分区策略
-   */
-  MonthPartitioning?: SingleFieldPartitioning
-  /**
-   * 按天分区策略
-   */
-  DayPartitioning?: SingleFieldPartitioning
-  /**
-   * 按小时分区策略
-   */
-  HourPartitioning?: SingleFieldPartitioning
-  /**
-   * 按字段分区策略
-   */
-  IdentityPartitioning?: SingleFieldPartitioning
-  /**
-   * 列表分区策略
-   */
-  ListPartitioning?: ListPartitioning
-  /**
-   * 范围分区策略
-   */
-  RangePartitioning?: RangePartitioning
-  /**
-   * 分桶分区策略
-   */
-  BucketPartitioning?: BucketPartitioning
-  /**
-   * 截断分区策略
-   */
-  TruncatePartitioning?: TruncatePartitioning
-}
-
-/**
- * 单字段分区
- */
-export interface SingleFieldPartitioning {
-  /**
-   * 分区字段
-   */
-  FieldName: string
-}
-
-/**
- * 告警组
- */
-export interface AlarmGroup {
-  /**
-   * <p>通知渠道ID，可通过基础平台通知渠道相关接口获取</p>
+   * <p>操作结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChannelId?: string
-  /**
-   * <p>通知渠道名称，可以是用户组名称或邮箱地址</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ChannelName?: string
-  /**
-   * <p>是否启用邮件渠道，默认值：false</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsEmailChannel?: boolean
-  /**
-   * <p>告警条件列表。取值：<br>START：启动<br>SUCCESS：成功<br>FAILURE：失败<br>MONITOR_INDICATOR_ALARM：监控指标告警</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlarmConditions?: Array<string>
-  /**
-   * <p>通知渠道类型。取值：0 未指定，1 Email，2 Webhook，3 Teams，4 Slack</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ChannelType?: number
-}
-
-/**
- * DeleteFile请求参数结构体
- */
-export interface DeleteFileRequest {
-  /**
-   * <p>工作空间 ID。来源：ListWorkspaces 接口返回的 WorkspaceId</p>
-   */
-  WorkspaceId: string
-  /**
-   * <p>文件 ID。来源：CreateFile / ListFiles / GetFile 接口返回的 FileId</p>
-   */
-  FileId: string
-  /**
-   * <p>文件类型。取值：FILE（普通文件/脚本）、NOTEBOOK_FILE（Notebook）、SQL_FILE（SQL文件）。对应 common/domain/entity.proto EntityType</p>
-   */
-  FileType?: string
-}
-
-/**
- * DeleteWorkflowRsp
- */
-export interface DeleteWorkflowRsp {
-  /**
-   * 删除状态，true 表示成功
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: boolean
-}
-
-/**
- * StopCompute返回参数结构体
- */
-export interface StopComputeResponse {
-  /**
-   * 停止计算资源返回结果
-   */
-  Data?: StopComputeRsp
+  Data?: DeleteCatalogRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6178,17 +9228,34 @@ export interface StopComputeResponse {
 }
 
 /**
- * 通用错误信息
+ * 获取schema列表响应
  */
-export interface CommonFailItem {
+export interface ListSchemasRsp {
   /**
-   * <p>uin或者groupId</p>
+   * schema列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Item?: string
+  Items?: Array<Schema>
   /**
-   * <p>错误信息</p>
+   * 下页分页token
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailReason?: string
+  NextPageToken?: string
+}
+
+/**
+ * GetWorkflowTaskRun返回参数结构体
+ */
+export interface GetWorkflowTaskRunResponse {
+  /**
+   * <p>查询任务运行详情响应内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: GetWorkflowTaskRunRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6206,28 +9273,21 @@ export interface ListWorkspacesResponse {
 }
 
 /**
- * GetCatalog返回参数结构体
+ * 实体权限信息，用于在get/list接口中返回当前用户对实体的权限列表
  */
-export interface GetCatalogResponse {
+export interface PermissionDetail {
   /**
-   * <p>catalog详情</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 当前用户对该实体拥有的权限列表
    */
-  Data?: GetCatalogRsp
+  Permissions?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * catalog在工作空间上的权限信息（可选）。取值：WORKSPACE_READONLY（只读）或WORKSPACE_READWRITE（读写）
    */
-  RequestId?: string
-}
-
-/**
- * 更新工作空间角色结果
- */
-export interface UpdateWorkspaceRoleResult {
+  CatalogWorkspacePrivilege?: string
   /**
-   * 更新工作空间角色是否成功
+   * deny权限总列表（用户deny ∪ 角色deny ∪ 继承deny，已去重，已从Permissions中排除）
    */
-  Status?: boolean
+  DenyPrivilegeList?: Array<string>
 }
 
 /**
@@ -6239,20 +9299,6 @@ export interface GetWorkflowRunResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: GetWorkflowRunRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ListConsoleGroups返回参数结构体
- */
-export interface ListConsoleGroupsResponse {
-  /**
-   * <p>返回结果</p>
-   */
-  Data?: ListConsoleGroupsRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6331,24 +9377,6 @@ export interface GetWorkflowRsp {
 }
 
 /**
- * CreateWorkspace请求参数结构体
- */
-export interface CreateWorkspaceRequest {
-  /**
-   * <p>工作空间名称，max_len=128</p>
-   */
-  WorkspaceName: string
-  /**
-   * <p>工作空间地域（如 ap-guangzhou），max_len=64</p>
-   */
-  WorkspaceRegion: string
-  /**
-   * <p>工作空间描述，max_len=300</p>
-   */
-  Description?: string
-}
-
-/**
  * 工作空间用户组信息
  */
 export interface WorkspaceGroupInfo {
@@ -6387,54 +9415,6 @@ export interface WorkspaceGroupInfo {
 }
 
 /**
- * 角色基础信息
- */
-export interface RoleBasicInfo {
-  /**
-   * <p>角色ID，可通过 ListWorkspaceRoles / ListConsoleRoles 接口获取；创建/更新角色时无需填写（由系统自动生成，创建成功后从响应 Data.RoleId 获取）</p>
-   */
-  Id?: string
-  /**
-   * <p>角色名称</p>
-   */
-  Name?: string
-  /**
-   * <p>角色描述</p>
-   */
-  Description?: string
-  /**
-   * <p>显示名称</p>
-   */
-  DisplayName?: string
-  /**
-   * <p>角色类型：workspace=工作空间系统角色，workspace_custom=工作空间自定义角色，console=控制台角色；查询时返回，创建时无需填写（系统固定创建自定义角色）</p>
-   */
-  RoleType?: string
-  /**
-   * <p>角色来源（查询侧字段，创建时无需填写）：0=未指定，1=用户直绑，2=用户组继承，3=两者都有</p>
-   */
-  Source?: number
-  /**
-   * <p>继承来源的用户组名称列表（查询侧字段，创建时无需填写），Source=1 时为空</p>
-   */
-  GroupNames?: Array<string>
-}
-
-/**
- * UpdateWorkspaceUsersRoles返回参数结构体
- */
-export interface UpdateWorkspaceUsersRolesResponse {
-  /**
-   * <p>结果</p>
-   */
-  Data?: PlatformStatusRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * git配置
  */
 export interface GitRepoConfig {
@@ -6458,24 +9438,13 @@ export interface GitRepoConfig {
 }
 
 /**
- * 获取table详情的响应
+ * ListModels返回参数结构体
  */
-export interface GetTableRsp {
+export interface ListModelsResponse {
   /**
-   * table详情
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>返回信息</p>
    */
-  Table?: TableInfo
-}
-
-/**
- * ListConsoleRoles返回参数结构体
- */
-export interface ListConsoleRolesResponse {
-  /**
-   * <p>返回结果</p>
-   */
-  Data?: ListConsoleRolesRsp
+  Data?: ListModelsRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6483,33 +9452,14 @@ export interface ListConsoleRolesResponse {
 }
 
 /**
- * 查询工作空间列表响应
+ * 获取view详情的响应
  */
-export interface ListWorkspacesRsp {
+export interface GetViewRsp {
   /**
-   * <p>工作空间列表</p>
+   * view详情
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items?: Array<WorkspaceInfo>
-  /**
-   * <p>当前页码</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小</p>
-   */
-  PageSize?: number
-  /**
-   * <p>总记录数</p>
-   */
-  TotalCount?: number
-  /**
-   * <p>总页数</p>
-   */
-  TotalPageNumber?: number
-  /**
-   * <p>是否控制台管理员</p>
-   */
-  IsConsoleAdmin?: boolean
+  View?: ViewInfo
 }
 
 /**
@@ -6527,14 +9477,13 @@ export interface CreateWorkspaceResponse {
 }
 
 /**
- * ListWorkflows返回参数结构体
+ * UpdateVolume返回参数结构体
  */
-export interface ListWorkflowsResponse {
+export interface UpdateVolumeResponse {
   /**
-   * <p>查询工作流列表响应内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回结果
    */
-  Data?: ListWorkflowsRsp
+  Data?: UpdateVolumeRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6542,332 +9491,89 @@ export interface ListWorkflowsResponse {
 }
 
 /**
- * UpdateFile返回参数结构体
+ * GetTable请求参数结构体
  */
-export interface UpdateFileResponse {
+export interface GetTableRequest {
   /**
-   * <p>返回结果</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>数据目录名</p>
    */
-  Data?: FileInfo
+  CatalogName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>数据库名</p>
    */
-  RequestId?: string
-}
-
-/**
- * 范围分区
- */
-export interface RangePartition {
+  SchemaName: string
   /**
-   * 分区名
+   * <p>表名</p>
    */
-  Name: string
+  TableName: string
   /**
-   * 下界
-   */
-  Lower: Literal
-  /**
-   * 上界
-   */
-  Upper: Literal
-  /**
-   * 属性
-   */
-  Properties?: Array<KVPair>
-}
-
-/**
- * 创建文件夹回包
- */
-export interface CreateFolderRsp {
-  /**
-   * <p>文件夹 ID</p>
-   */
-  FolderId?: string
-}
-
-/**
- * 删除table的响应
- */
-export interface DeleteTableRsp {
-  /**
-   * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Result?: boolean
-}
-
-/**
- * StartCompute请求参数结构体
- */
-export interface StartComputeRequest {
-  /**
-   * 工作空间 ID
+   * <p>调用时所在workspace唯一id</p>
    */
   WorkspaceId: string
   /**
-   * 计算资源 ID，可通过 ListComputes 接口获取（返回字段 Items[].BasicInfo.ResourceId）。替代已废弃的 ResourceId；过渡期 ComputeResourceId 与 ResourceId 至少传一个，同时传时必须一致
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
-  ComputeResourceId?: string
+  FetchOption?: FetchOption
   /**
-   * [已废弃，请使用 ComputeResourceId] 计算资源 ID，可通过 ListComputes 接口获取（返回字段 Items[].BasicInfo.ResourceId）
+   * <p>数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取</p>
    */
-  ResourceId?: string
+  ConnectionId?: string
+  /**
+   * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
+   */
+  CatalogSource?: string
 }
 
 /**
- * UpdateConsoleUsers请求参数结构体
+ * 特征表定义
  */
-export interface UpdateConsoleUsersRequest {
+export interface FeatureTable {
   /**
-   * <p>用户 UIN 列表，单次最多100个</p>
+   * 表名称
    */
-  UserUins: Array<string>
+  Name?: string
   /**
-   * <p>角色 ID 列表</p><p>枚举值：</p><ul><li>2001： 控制台管理员</li><li>2002： 控制台成员</li></ul><p>可通过 ListConsoleRoles 接口获取</p>
+   * 全称
    */
-  RoleIds: Array<string>
-}
-
-/**
- * 字段信息
- */
-export interface ColumnInfo {
+  FullName?: string
   /**
-   * 字段名称
-   */
-  Name: string
-  /**
-   * 字段类型
-   */
-  Type: string
-  /**
-   * 字段描述
+   * 资产描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
-   * 字段设置
-   */
-  FieldSetting?: string
-  /**
-   * 是否为主键
-   */
-  IsPrimaryKey?: boolean
-  /**
-   * 字段策略
-   */
-  DataMaskStrategyInfo?: DataMaskStrategyInfo
-  /**
-   * 字段级标签列表，仅当请求中FetchOption.FetchTags=true时返回，默认不返回
+   * 数据库名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags?: Array<CommonTagInfo>
+  DatabaseName?: string
   /**
-   * 字段关联的字典维度信息，仅当请求中FetchOption.FetchDictDimensions=true时返回，默认不返回；若该字段未关联任何字典维度则为空
+   * 修改时间，iso8601格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DictDimension?: DictDimensionInfo
-}
-
-/**
- * GetWorkflowTaskRunRsp
- */
-export interface GetWorkflowTaskRunRsp {
+  ModifiedTime?: string
   /**
-   * <p>任务名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName?: string
-  /**
-   * <p>任务运行ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowTaskRunId?: string
-  /**
-   * <p>运行状态。取值参考工作流任务运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunState?: string
-  /**
-   * <p>工作空间ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkspaceId?: string
-  /**
-   * <p>工作流ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowId?: string
-  /**
-   * <p>工作流运行ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowRunId?: string
-  /**
-   * <p>任务ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskId?: string
-  /**
-   * <p>任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskTypeName?: string
-  /**
-   * <p>任务版本ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskVersionId?: string
-  /**
-   * <p>触发类型</p><p>枚举值：</p><ul><li>Scheduler： 调度触发</li><li>Manual： 手动触发</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TriggerType?: string
-  /**
-   * <p>所属资源组ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupId?: string
-  /**
-   * <p>错误码</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorCodeString?: string
-  /**
-   * <p>运行用户UIN</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserUin?: string
-  /**
-   * <p>运行用户名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunUserName?: string
-  /**
-   * <p>创建人UIN</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateUserUin?: string
-  /**
-   * <p>执行平台执行ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  JobId?: string
-  /**
-   * <p>创建时间，单位：毫秒时间戳</p>
+   * 创建时间，iso8601格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * <p>更新时间，单位：毫秒时间戳</p>
+   * 标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime?: string
+  Tags?: Array<Tag>
   /**
-   * <p>依赖任务完成时间，单位：毫秒时间戳</p>
+   * 责任人
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DependenceFinishedTime?: string
+  Owner?: Owner
   /**
-   * <p>运行开始时间，单位：毫秒时间戳</p>
+   * 工作空间ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunStartTime?: string
+  WorkspaceId?: string
   /**
-   * <p>运行结束时间，单位：毫秒时间戳</p>
+   * 资产ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunEndTime?: string
-  /**
-   * <p>运行时长，单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunCostTime?: string
-  /**
-   * <p>等待时长（依赖就绪到开始运行的等待耗时），单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WaitTime?: string
-  /**
-   * <p>下发执行平台时间，单位：毫秒时间戳</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IssueTime?: string
-  /**
-   * <p>时区</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimeZone?: string
-  /**
-   * <p>依赖上游任务ID列表。保留字段，暂时返回为[]</p><p>保留字段，暂时返回为[]</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DependOnList?: Array<string>
-  /**
-   * <p>运行参数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunParams?: string
-  /**
-   * <p>任务扩展信息，包含脚本路径</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskTypeExtensions?: string
-  /**
-   * <p>任务X坐标</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LeftCoordinate?: number
-  /**
-   * <p>任务Y坐标</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopCoordinate?: number
-  /**
-   * <p>重试次数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RetryTimes?: number
-  /**
-   * <p>工作流名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowName?: string
-  /**
-   * <p>重跑次数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RerunTimes?: number
-  /**
-   * <p>是否最新一次运行</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsLatestRun?: boolean
-  /**
-   * <p>资源组信息列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupInfoList?: Array<ResourceGroupInfo>
-  /**
-   * <p>错误消息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorMessage?: string
-  /**
-   * <p>运行结果</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunResult?: string
-  /**
-   * <p>内嵌工作流任务运行详情（仅限 FOR_EACH 任务，其他任务类型不返回该字段）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerWorkflowTaskRun?: InnerWorkflowTaskRun
-  /**
-   * <p>计划调度时间</p><p>参数格式：毫秒时间戳（UTC）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScheduledTime?: string
+  AssetGuid?: string
 }

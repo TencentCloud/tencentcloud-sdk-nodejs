@@ -186,6 +186,24 @@ export interface GetGatewaySubDeviceListResponse {
 }
 
 /**
+ * UpdatePrivateCA请求参数结构体
+ */
+export interface UpdatePrivateCARequest {
+  /**
+   * <p>证书名称。</p>
+   */
+  CertName: string
+  /**
+   * <p>证书内容，PEM 格式文本，需为 CA 证书。</p>
+   */
+  CertText: string
+  /**
+   * <p>验证证书内容，PEM 格式文本。须由所上传的 CA 签发，且 CN 为 sha256(&quot;iothub_主账号Uin&quot;) 的小写十六进制值，用于验证您持有 CA 私钥。</p>
+   */
+  VerifyCertText: string
+}
+
+/**
  * DeleteStudioProduct返回参数结构体
  */
 export interface DeleteStudioProductResponse {
@@ -336,17 +354,13 @@ export interface CreateFreeCloudStorageResponse {
 }
 
 /**
- * DescribeTWeTalkProductConfig返回参数结构体
+ * DescribeProductCA请求参数结构体
  */
-export interface DescribeTWeTalkProductConfigResponse {
+export interface DescribeProductCARequest {
   /**
-   * 配置信息
+   * <p>产品ID。</p>
    */
-  Data?: TalkProductConfigInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ProductId: string
 }
 
 /**
@@ -423,6 +437,16 @@ export interface SeeObjectMetadataEntry {
  * ModifyPositionFence返回参数结构体
  */
 export interface ModifyPositionFenceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdatePrivateCA返回参数结构体
+ */
+export interface UpdatePrivateCAResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -703,6 +727,32 @@ export interface BatchUpdateFirmwareResponse {
 }
 
 /**
+ * TWeSee 直传对象概要信息
+ */
+export interface SeeObjectSummary {
+  /**
+   * <p>对象 Key</p>
+   */
+  Key?: string
+  /**
+   * <p>TWeSee 直传对象或目录的 COS URI</p>
+   */
+  COSURI?: string
+  /**
+   * <p>对象大小，单位：字节</p>
+   */
+  Size?: number
+  /**
+   * <p>对象的 ETag</p>
+   */
+  ETag?: string
+  /**
+   * <p>对象最后修改时间，秒级 UNIX 时间戳</p>
+   */
+  LastModified?: number
+}
+
+/**
  * DescribeActivateLicenseService返回参数结构体
  */
 export interface DescribeActivateLicenseServiceResponse {
@@ -744,6 +794,16 @@ export interface RenewTWeSeeSubscriptionRequest {
    * <p>自定义订单 ID</p>
    */
   CustomOrderId?: string
+}
+
+/**
+ * DeleteProductPrivateCA返回参数结构体
+ */
+export interface DeleteProductPrivateCAResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1359,7 +1419,7 @@ export interface CallDeviceActionAsyncRequest {
  */
 export interface CreateDeviceResponse {
   /**
-   * 设备参数描述。
+   * <p>设备参数描述。</p>
    */
   Data?: DeviceData
   /**
@@ -1373,37 +1433,41 @@ export interface CreateDeviceResponse {
  */
 export interface CreateDeviceRequest {
   /**
-   * 产品ID。
+   * <p>产品ID。</p>
    */
   ProductId: string
   /**
-   * 设备名称。命名规则：[a-zA-Z0-9:_-]{1,48}。
+   * <p>设备名称。命名规则：[a-zA-Z0-9:_-]{1,48}。</p>
    */
   DeviceName: string
   /**
-   * LoRaWAN 设备地址
+   * <p>LoRaWAN 设备地址</p>
    */
   DevAddr?: string
   /**
-   * LoRaWAN 应用密钥
+   * <p>LoRaWAN 应用密钥</p>
    */
   AppKey?: string
   /**
-   * LoRaWAN 设备唯一标识
+   * <p>LoRaWAN 设备唯一标识</p>
    */
   DevEUI?: string
   /**
-   * LoRaWAN 应用会话密钥
+   * <p>LoRaWAN 应用会话密钥</p>
    */
   AppSKey?: string
   /**
-   * LoRaWAN 网络会话密钥
+   * <p>LoRaWAN 网络会话密钥</p>
    */
   NwkSKey?: string
   /**
-   * 手动指定设备的PSK密钥
+   * <p>手动指定设备的PSK密钥</p>
    */
   DefinedPsk?: string
+  /**
+   * <p>设备证书。第三方CA证书认证的产品下必填；腾讯云CA证书产品传入会报错；非证书认证产品传入会被忽略</p>
+   */
+  TlsCrt?: string
 }
 
 /**
@@ -1796,6 +1860,20 @@ export interface TopicItem {
    * Topic权限 , 1上报  2下发
    */
   Privilege?: number
+}
+
+/**
+ * DescribeTWeTalkProductConfig返回参数结构体
+ */
+export interface DescribeTWeTalkProductConfigResponse {
+  /**
+   * 配置信息
+   */
+  Data?: TalkProductConfigInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2343,6 +2421,24 @@ export interface DescribeDeviceDataHistoryRequest {
    * 检索上下文
    */
   Context?: string
+}
+
+/**
+ * DescribePrivateCABindedProducts请求参数结构体
+ */
+export interface DescribePrivateCABindedProductsRequest {
+  /**
+   * <p>证书名称，长度 1~32 个字符。</p>
+   */
+  CertName: string
+  /**
+   * <p>分页偏移量。</p><p>取值范围：[0, 5000000]</p>
+   */
+  Offset: number
+  /**
+   * <p>单次返回的数量。</p><p>取值范围：[1, 200]</p>
+   */
+  Limit: number
 }
 
 /**
@@ -3019,25 +3115,25 @@ export interface GetTWeTalkActiveRecordListRequest {
 }
 
 /**
- * 设备的用户
+ * DescribeTWeSeeFace请求参数结构体
  */
-export interface DeviceUser {
+export interface DescribeTWeSeeFaceRequest {
   /**
-   * 用户ID
+   * 产品 ID
    */
-  UserId?: string
+  ProductId: string
   /**
-   * 用户角色 1所有者，0：其他分享者
+   * 设备名称
    */
-  Role?: number
+  DeviceName: string
   /**
-   * 家庭ID，所有者带该参数
+   * 人脸 ID
    */
-  FamilyId?: string
+  FaceId: string
   /**
-   * 家庭名称，所有者带该参数
+   * 通道 ID，默认值为 0
    */
-  FamilyName?: string
+  ChannelId?: number
 }
 
 /**
@@ -3217,6 +3313,24 @@ export interface InstanceDetail {
    * 最大在线设备数
    */
   MaxDeviceOnlineCount?: number
+}
+
+/**
+ * DescribeBindedProducts返回参数结构体
+ */
+export interface DescribeBindedProductsResponse {
+  /**
+   * 当前分页的子产品数组
+   */
+  Products?: Array<BindProductInfo>
+  /**
+   * 绑定的子产品总数量
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3471,29 +3585,21 @@ export interface DescribeDeviceFirmwaresRequest {
 }
 
 /**
- * 项目详情
+ * 子产品信息
  */
-export interface ProjectEntry {
+export interface PrivateCABindProductInfo {
   /**
-   * 项目ID
+   * <p>产品ID</p>
    */
-  ProjectId?: string
+  ProductId?: string
   /**
-   * 项目名称
+   * <p>产品名</p>
    */
-  ProjectName?: string
+  ProductName?: string
   /**
-   * 项目描述
-   */
-  ProjectDesc?: string
-  /**
-   * 创建时间，unix时间戳
+   * <p>产品创建时间</p><p>单位：秒</p>
    */
   CreateTime?: number
-  /**
-   * 更新时间，unix时间戳
-   */
-  UpdateTime?: number
 }
 
 /**
@@ -3906,13 +4012,13 @@ export interface InquireTWeSeeSubscriptionRenewPriceResponse {
 export type DescribeFreeCloudStorageNumRequest = null
 
 /**
- * 云存用户信息
+ * DescribePrivateCA请求参数结构体
  */
-export interface CloudStorageUserInfo {
+export interface DescribePrivateCARequest {
   /**
-   * 用户ID
+   * <p>证书名称。</p>
    */
-  UserId?: string
+  CertName: string
 }
 
 /**
@@ -3970,45 +4076,49 @@ export interface ModifyFenceBindRequest {
  */
 export interface CreateStudioProductRequest {
   /**
-   * 产品名称，名称不能和已经存在的产品名称重复。命名规则：[a-zA-Z0-9:_-]{1,32}
+   * <p>产品名称，名称不能和已经存在的产品名称重复。命名规则：[a-zA-Z0-9:_-]{1,32}</p>
    */
   ProductName: string
   /**
-   * 产品分组模板ID , ( 自定义模板填写1 , 控制台调用会使用预置的其他ID)
+   * <p>产品分组模板ID , ( 自定义模板填写1 , 控制台调用会使用预置的其他ID)</p>
    */
   CategoryId: number
   /**
-   * 产品类型 填写 ( 0 普通产品 ， 5 网关产品)
+   * <p>产品类型 填写 ( 0 普通产品 ， 5 网关产品)</p>
    */
   ProductType: number
   /**
-   * 加密类型 ，1表示证书认证，2表示密钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
+   * <p>设备认证方式 ，1表示证书认证，2表示密钥认证</p><p>枚举值：</p><ul><li>1： 证书认证(X.509证书认证)</li><li>2： 密钥认证</li></ul>
    */
   EncryptionType: string
   /**
-   * 连接类型 可以填写 wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh
+   * <p>连接类型 可以填写 wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh</p>
    */
   NetType: string
   /**
-   * 数据协议 (1 使用物模型 2 为自定义)
+   * <p>数据协议 (1 使用物模型，即使用腾讯云物联网开发平台制定的物模型协议 2 自定义透传，即用户自由定义MQTT协议Payload部分)</p>
    */
   DataProtocol: number
   /**
-   * 产品描述
+   * <p>产品描述</p>
    */
   ProductDesc: string
   /**
-   * 产品的项目ID
+   * <p>产品所在的项目ID，可从产品管理页的当前URL中获取project_id的值</p>
    */
   ProjectId: string
   /**
-   * 平均传输速率
+   * <p>平均传输速率</p>
    */
   Rate?: string
   /**
-   * 期限
+   * <p>期限</p>
    */
   Period?: string
+  /**
+   * <p>第三方CA证书名称。空/不传 = 腾讯云默认CA证书；非空 = 使用该证书（须为当前账号已上传的 CA，不存在会报错）</p>
+   */
+  PrivateCAName?: string
 }
 
 /**
@@ -4720,29 +4830,17 @@ export interface SeeCreateSubscriptionEntry {
 }
 
 /**
- * TWeSee 直传对象概要信息
+ * DirectBindDeviceInFamily返回参数结构体
  */
-export interface SeeObjectSummary {
+export interface DirectBindDeviceInFamilyResponse {
   /**
-   * <p>对象 Key</p>
+   * 返回设备信息
    */
-  Key?: string
+  AppDeviceInfo?: AppDeviceInfo
   /**
-   * <p>TWeSee 直传对象或目录的 COS URI</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  COSURI?: string
-  /**
-   * <p>对象大小，单位：字节</p>
-   */
-  Size?: number
-  /**
-   * <p>对象的 ETag</p>
-   */
-  ETag?: string
-  /**
-   * <p>对象最后修改时间，秒级 UNIX 时间戳</p>
-   */
-  LastModified?: number
+  RequestId?: string
 }
 
 /**
@@ -5287,6 +5385,16 @@ export interface BatchRenewTWeSeeSubscriptionRequest {
 }
 
 /**
+ * DeleteProductPrivateCA请求参数结构体
+ */
+export interface DeleteProductPrivateCARequest {
+  /**
+   * <p>产品ID</p>
+   */
+  ProductId: string
+}
+
+/**
  * DescribeTWeSeeDirectUploadInfo请求参数结构体
  */
 export interface DescribeTWeSeeDirectUploadInfoRequest {
@@ -5503,21 +5611,21 @@ export interface TalkLLMConfig {
 }
 
 /**
- * DescribeBindedProducts返回参数结构体
+ * CreatePrivateCA请求参数结构体
  */
-export interface DescribeBindedProductsResponse {
+export interface CreatePrivateCARequest {
   /**
-   * 当前分页的子产品数组
+   * <p>证书名称，长度 1~32 个字符。</p>
    */
-  Products?: Array<BindProductInfo>
+  CertName: string
   /**
-   * 绑定的子产品总数量
+   * <p>证书内容，PEM 格式文本，需为 CA 证书。</p>
    */
-  Total?: number
+  CertText: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>验证证书内容，PEM 格式文本。须由所上传的 CA 签发，且 CN 为 sha256(&quot;iothub_主账号Uin&quot;) 的小写十六进制值，用于验证您持有 CA 私钥。</p>
    */
-  RequestId?: string
+  VerifyCertText: string
 }
 
 /**
@@ -5816,25 +5924,25 @@ export interface DescribeInstanceResponse {
 }
 
 /**
- * DescribeTWeSeeFace请求参数结构体
+ * 设备的用户
  */
-export interface DescribeTWeSeeFaceRequest {
+export interface DeviceUser {
   /**
-   * 产品 ID
+   * 用户ID
    */
-  ProductId: string
+  UserId?: string
   /**
-   * 设备名称
+   * 用户角色 1所有者，0：其他分享者
    */
-  DeviceName: string
+  Role?: number
   /**
-   * 人脸 ID
+   * 家庭ID，所有者带该参数
    */
-  FaceId: string
+  FamilyId?: string
   /**
-   * 通道 ID，默认值为 0
+   * 家庭名称，所有者带该参数
    */
-  ChannelId?: number
+  FamilyName?: string
 }
 
 /**
@@ -5889,6 +5997,16 @@ export interface SeeEventIdFilterConfig {
    * <p>触发分析的时机</p><p>枚举值：</p><ul><li>end： 在云存事件结束时触发视频理解</li><li>start： 在云存事件开始时触发视频理解</li><li>image_and_video： 上传云存事件缩略图后触发图片理解，并且在云存事件结束时触发视频理解</li></ul><p>默认值：end</p>
    */
   TriggerAt?: string
+}
+
+/**
+ * 云存用户信息
+ */
+export interface CloudStorageUserInfo {
+  /**
+   * 用户ID
+   */
+  UserId?: string
 }
 
 /**
@@ -6678,6 +6796,11 @@ export interface PublishMessageResponse {
 }
 
 /**
+ * DescribePrivateCAs请求参数结构体
+ */
+export type DescribePrivateCAsRequest = null
+
+/**
  * 搜索关键词
  */
 export interface SearchKeyword {
@@ -7019,6 +7142,16 @@ export interface GetTWeTalkActiveStatusResponse {
 }
 
 /**
+ * DismissRoomByStrRoomIdFromTRTC返回参数结构体
+ */
+export interface DismissRoomByStrRoomIdFromTRTCResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudStorageTime请求参数结构体
  */
 export interface DescribeCloudStorageTimeRequest {
@@ -7305,6 +7438,16 @@ export interface DeleteDevicesResponse {
 }
 
 /**
+ * DeletePrivateCA返回参数结构体
+ */
+export interface DeletePrivateCAResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyStudioProduct返回参数结构体
  */
 export interface ModifyStudioProductResponse {
@@ -7365,9 +7508,9 @@ export interface DescribePackageConsumeTaskRequest {
 }
 
 /**
- * DismissRoomByStrRoomIdFromTRTC返回参数结构体
+ * CreatePrivateCA返回参数结构体
  */
-export interface DismissRoomByStrRoomIdFromTRTCResponse {
+export interface CreatePrivateCAResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9636,6 +9779,32 @@ export interface GenerateCloudStorageAIServiceTaskFileURLResponse {
 }
 
 /**
+ * 项目详情
+ */
+export interface ProjectEntry {
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
+  /**
+   * 项目名称
+   */
+  ProjectName?: string
+  /**
+   * 项目描述
+   */
+  ProjectDesc?: string
+  /**
+   * 创建时间，unix时间戳
+   */
+  CreateTime?: number
+  /**
+   * 更新时间，unix时间戳
+   */
+  UpdateTime?: number
+}
+
+/**
  * ChangeP2PRoute请求参数结构体
  */
 export interface ChangeP2PRouteRequest {
@@ -10044,21 +10213,41 @@ export interface OperateTWeSeeDirectUploadObjectResponse {
 }
 
 /**
- * ListOtaModules返回参数结构体
+ * X509证书信息
  */
-export interface ListOtaModulesResponse {
+export interface CertInfo {
   /**
-   * 固件总数
+   * <p>证书名称</p>
    */
-  TotalCount?: number
+  CertName: string
   /**
-   * 固件列表
+   * <p>证书序列号</p>
    */
-  Modules?: Array<OtaModuleInfo>
+  CertSN: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>证书颁发者名称（颁发机构的 CN）</p>
    */
-  RequestId?: string
+  IssuerName: string
+  /**
+   * <p>证书主题，即证书持有者信息</p>
+   */
+  Subject: string
+  /**
+   * <p>证书创建时间，Unix 时间戳，</p><p>单位：秒</p>
+   */
+  CreateTime: number
+  /**
+   * <p>证书生效时间，Unix 时间戳，</p><p>单位：秒</p>
+   */
+  EffectiveTime: number
+  /**
+   * <p>证书过期时间，Unix 时间戳，</p><p>单位：秒</p>
+   */
+  ExpireTime: number
+  /**
+   * <p>证书内容，PEM 格式文本</p>
+   */
+  CertText: string
 }
 
 /**
@@ -10380,6 +10569,20 @@ export interface LoRaGatewayItem {
    * 频点ID
    */
   FrequencyId?: string
+}
+
+/**
+ * DescribePrivateCAs返回参数结构体
+ */
+export interface DescribePrivateCAsResponse {
+  /**
+   * <p>产品绑定的 CA 证书信息列表。产品绑定了第三方 CA 时,返回该 CA 的证书信息;产品未绑定第三方 CA 时,返回平台默认 CA;产品未绑定 CA 时为空数组。</p>
+   */
+  CAs?: Array<CertInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11432,6 +11635,20 @@ export interface CloudStoragePackageInfo {
 }
 
 /**
+ * DescribeProductCA返回参数结构体
+ */
+export interface DescribeProductCAResponse {
+  /**
+   * <p>产品绑定的 CA 证书信息列表。产品绑定了第三方 CA 时,返回该 CA 的证书信息;产品未绑定第三方 CA 时,返回平台默认 CA;产品未绑定 CA 时为空数组。</p>
+   */
+  CAs?: Array<CertInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ProductId -> DeviceName
  */
 export interface DevicesItem {
@@ -11753,7 +11970,7 @@ export interface TransferCloudStorageResponse {
  */
 export interface CreateStudioProductResponse {
   /**
-   * 产品描述
+   * <p>产品描述</p>
    */
   Product?: ProductEntry
   /**
@@ -11958,6 +12175,16 @@ export interface ListEventHistoryRequest {
    * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
    */
   EventId?: string
+}
+
+/**
+ * UpdateProductPrivateCA返回参数结构体
+ */
+export interface UpdateProductPrivateCAResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12205,94 +12432,137 @@ export interface CreateTWeTalkProductConfigV2Response {
  */
 export interface ProductEntry {
   /**
-   * 产品ID
+   * <p>产品ID</p>
    */
   ProductId?: string
   /**
-   * 产品名称
+   * <p>产品名称</p>
    */
   ProductName?: string
   /**
-   * 产品分组模板ID
+   * <p>产品分组模板ID</p>
    */
   CategoryId?: number
   /**
-   * 加密类型。1表示证书认证，2表示密钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
+   * <p>加密类型。1表示证书认证，2表示密钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式</p>
    */
   EncryptionType?: string
   /**
-   * 连接类型。如：
-wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh
+   * <p>连接类型。如：<br>wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh</p>
    */
   NetType?: string
   /**
-   * 数据协议 (1 使用物模型 2 为自定义类型)
+   * <p>数据协议 (1 使用物模型 2 为自定义类型)</p>
    */
   DataProtocol?: number
   /**
-   * 产品描述
+   * <p>产品描述</p>
    */
   ProductDesc?: string
   /**
-   * 状态 如：all 全部, dev 开发中, audit 审核中 released 已发布
+   * <p>状态 如：all 全部, dev 开发中, audit 审核中 released 已发布</p>
    */
   DevStatus?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: number
   /**
-   * 区域
+   * <p>区域</p>
    */
   Region?: string
   /**
-   * 产品类型。如： 0 普通产品 ， 5 网关产品
+   * <p>产品类型。如： 0 普通产品 ， 5 网关产品</p>
    */
   ProductType?: number
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: string
   /**
-   * 产品ModuleId
+   * <p>产品ModuleId</p>
    */
   ModuleId?: number
   /**
-   * 是否使用脚本进行二进制转json功能 可以取值 true / false
+   * <p>是否使用脚本进行二进制转json功能 可以取值 true / false</p>
    */
   EnableProductScript?: string
   /**
-   * 创建人 UinId
+   * <p>创建人 UinId</p>
    */
   CreateUserId?: number
   /**
-   * 创建者昵称
+   * <p>创建者昵称</p>
    */
   CreatorNickName?: string
   /**
-   * 绑定策略（1：强踢；2：非强踢；0：表示无意义）
+   * <p>绑定策略（1：强踢；2：非强踢；0：表示无意义）</p>
    */
   BindStrategy?: number
   /**
-   * 设备数量
+   * <p>设备数量</p>
    */
   DeviceCount?: number
   /**
-   * 平均传输速率
+   * <p>平均传输速率</p>
    */
   Rate?: string
   /**
-   * 有效期
+   * <p>有效期</p>
    */
   Period?: string
   /**
-   * 互联互通标识
+   * <p>互联互通标识</p>
    */
   IsInterconnection?: number
+  /**
+   * <p>UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>AppID</p>
+   */
+  AppId?: number
+  /**
+   * <p>绑定的第三方CA名称；空 = 腾讯云CA证书</p>
+   */
+  PrivateCAName?: string
+  /**
+   * <p>true = 第三方CA</p>
+   */
+  IsPrivateCA?: boolean
+  /**
+   * <p>CA 证书名称</p>
+   */
+  CertName?: string
+  /**
+   * <p>证书序列号</p>
+   */
+  CertSN?: string
+  /**
+   * <p>颁发者</p>
+   */
+  IssuerName?: string
+  /**
+   * <p>证书主题</p>
+   */
+  Subject?: string
+  /**
+   * <p>生效时间（Unix 秒）</p><p>单位：秒</p>
+   */
+  EffectiveTime?: number
+  /**
+   * <p>过期时间（Unix 秒）</p><p>单位：秒</p>
+   */
+  ExpireTime?: number
+  /**
+   * <p>CA 证书 PEM 全文</p>
+   */
+  CertText?: string
 }
 
 /**
@@ -12997,6 +13267,20 @@ export interface CreateFenceBindRequest {
 }
 
 /**
+ * UpdateProductPrivateCA请求参数结构体
+ */
+export interface UpdateProductPrivateCARequest {
+  /**
+   * <p>产品ID。</p>
+   */
+  ProductId: string
+  /**
+   * <p>证书名称，长度 1~32 个字符。</p>
+   */
+  CertName: string
+}
+
+/**
  * Webhook工具配置列表
  */
 export interface TalkWebhookEndpoint {
@@ -13385,13 +13669,13 @@ export interface DeviceData {
 }
 
 /**
- * DirectBindDeviceInFamily返回参数结构体
+ * DescribePrivateCABindedProducts返回参数结构体
  */
-export interface DirectBindDeviceInFamilyResponse {
+export interface DescribePrivateCABindedProductsResponse {
   /**
-   * 返回设备信息
+   * <p>绑定了该 CA 证书的产品列表。</p>
    */
-  AppDeviceInfo?: AppDeviceInfo
+  Products?: Array<PrivateCABindProductInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14479,6 +14763,24 @@ export interface BatchUpdateFirmwareRequest {
 }
 
 /**
+ * ListOtaModules返回参数结构体
+ */
+export interface ListOtaModulesResponse {
+  /**
+   * 固件总数
+   */
+  TotalCount?: number
+  /**
+   * 固件列表
+   */
+  Modules?: Array<OtaModuleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * TWeSee 视频语义浓缩配置
  */
 export interface SeeCompHighlightConfig {
@@ -14703,6 +15005,20 @@ export interface DeleteTWeSeeFaceRequest {
 }
 
 /**
+ * DescribePrivateCA返回参数结构体
+ */
+export interface DescribePrivateCAResponse {
+  /**
+   * <p>CA 证书信息。</p>
+   */
+  CA?: CertInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * TWeSee 任务详情
  */
 export interface SeeTaskInfo {
@@ -14896,6 +15212,16 @@ export interface PurchaseImagePackageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeletePrivateCA请求参数结构体
+ */
+export interface DeletePrivateCARequest {
+  /**
+   * <p>证书名称。</p>
+   */
+  CertName: string
 }
 
 /**
