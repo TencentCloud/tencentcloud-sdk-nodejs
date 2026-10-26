@@ -106,6 +106,20 @@ export interface DestroyDBCustomClusterRequest {
 }
 
 /**
+ * DB Custom 资源任务状态信息。
+ */
+export interface TaskResourceStatus {
+  /**
+   * <p>资源ID。如节点ID dbcn-tnjzxz3n</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>Running： 运行中</li><li>Succeeded： 成功</li><li>Failed： 失败</li></ul>
+   */
+  Status?: string
+}
+
+/**
  * DescribeDBCustomClusterResources请求参数结构体
  */
 export interface DescribeDBCustomClusterResourcesRequest {
@@ -188,6 +202,10 @@ export interface SystemDisk {
    * <p>磁盘大小</p><p>单位：GiB</p>
    */
   DiskSize: number
+  /**
+   * <p>磁盘ID</p>
+   */
+  DiskId?: string
 }
 
 /**
@@ -796,6 +814,10 @@ export interface DescribeDBCustomTaskStatusResponse {
    * <p>任务 ID</p><p>枚举值：</p><ul><li>Running： 运行中</li><li>Succeeded： 成功</li><li>Failed： 失败</li></ul>
    */
   Status?: string
+  /**
+   * <p>任务所操作的每个资源的执行结果</p>
+   */
+  ResourceStatusSet?: Array<TaskResourceStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1572,6 +1594,22 @@ export interface DataDisk {
    * <p>磁盘名称</p><p>DataDisk 作为输入参数时，DiskName 无效。</p>
    */
   DiskName?: string
+  /**
+   * <p>数据盘是否加密</p><p>枚举值：</p><ul><li>false： 不加密</li><li>true： 加密</li></ul>
+   */
+  Encrypt?: boolean
+  /**
+   * <p>磁盘ID</p><p>入参限制：该参数目前仅用于 DescribeDBCustomNodes 等查询类接口的返回参数，不可用于 CreateDBCustomNodes 等写接口的入参。</p>
+   */
+  DiskId?: string
+  /**
+   * <p>数据盘快照ID</p><p>入参限制：选择的数据盘快照大小需小于数据盘大小</p>
+   */
+  SnapshotId?: string
+  /**
+   * <p>自定义的数据盘标识（如 data / log / backup）</p>
+   */
+  ClientDiskKey?: string
 }
 
 /**
@@ -2260,6 +2298,10 @@ export interface DBCustomNode {
    * <p>节点最新进行中的任务类型</p><p>枚举值：</p><ul><li>add-nodes-to-cluster： 添加节点到集群</li><li>remove-nodes-from-cluster： 从集群中移除节点</li><li>modify-nodes-attributes： 修改节点属性</li><li>modify-nodes-drg： 修改节点置放群组</li></ul>
    */
   LatestRunningTaskType?: string
+  /**
+   * <p>节点所属的业务类型</p><p>枚举值：</p><ul><li>sqlserver： 腾讯云 SQL Server 数据库实例 Custom 形态的节点</li></ul>
+   */
+  BusinessType?: string
 }
 
 /**

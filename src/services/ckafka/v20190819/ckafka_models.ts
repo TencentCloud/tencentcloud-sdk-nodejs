@@ -1983,50 +1983,54 @@ export interface CreateTopicResponse {
  */
 export interface KafkaConnectParam {
   /**
-   * Kafka连接源的实例资源, 非自建时必填，NetworkType=VPC时传clb实例id
+   * <p>Kafka连接源的实例资源, 非自建时必填，NetworkType=VPC时传clb实例id</p>
    */
   Resource?: string
   /**
-   * 是否为自建集群
+   * <p>是否为自建集群</p>
    */
   SelfBuilt?: boolean
   /**
-   * 是否更新到关联的Dip任务
+   * <p>是否更新到关联的Dip任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUpdate?: boolean
   /**
-   * Kafka连接的broker地址, NetworkType=PUBLIC公网时必填
+   * <p>Kafka连接的broker地址, NetworkType=PUBLIC公网时必填</p>
    */
   BrokerAddress?: string
   /**
-   * CKafka连接源的实例资源地域, 跨地域时必填
+   * <p>CKafka连接源的实例资源地域, 跨地域时必填</p>
    */
   Region?: string
   /**
-   * 网络类型：PUBLIC公网；VPC
+   * <p>网络类型：PUBLIC公网；VPC</p>
    */
   NetworkType?: string
   /**
-   * vpcId，NetworkType=VPC时必传
+   * <p>vpcId，NetworkType=VPC时必传</p>
    */
   UniqVpcId?: string
   /**
-   * vip，NetworkType=VPC时必传
+   * <p>vip，NetworkType=VPC时必传</p>
    */
   ServiceVip?: string
   /**
-   * 端口，NetworkType=VPC时必传
+   * <p>端口，NetworkType=VPC时必传</p>
    */
   Port?: number
   /**
-   * 跨云同步下需要客户传递唯一Id标志一组资源
+   * <p>跨云同步下需要客户传递唯一Id标志一组资源</p>
    */
   CrossNetResourceUniqueId?: string
   /**
-   * 跨云子网ID
+   * <p>跨云子网ID</p>
    */
   CrossNetVpcSubNetId?: string
+  /**
+   * <p>用户输入原始broker接入点地址</p>
+   */
+  OriginalBrokerAddresses?: string
 }
 
 /**
@@ -2162,11 +2166,11 @@ export interface CreateInstancePostData {
  */
 export interface DescModifyType {
   /**
-   * 变配类型
+   * <p>变配类型</p>
    */
   ModifyType?: number
   /**
-   * 是否迁移标志
+   * <p>是否迁移标志</p>
    */
   MigrateFlag?: boolean
 }
@@ -6772,6 +6776,14 @@ export interface CosParam {
    * <p>根据strptime 时间格式化的分区格式</p>
    */
   DirectoryTimeFormat?: string
+  /**
+   * <p>时间时区, 默认 UTC+08:00</p><p>参数格式：UTC+08:00</p>
+   */
+  Timezone?: string
+  /**
+   * <p>源数据解析格式</p><p>枚举值：</p><ul><li>JSON： JSON格式</li><li>Debezium： Debezium格式</li></ul>
+   */
+  SourceDataFormat?: string
 }
 
 /**

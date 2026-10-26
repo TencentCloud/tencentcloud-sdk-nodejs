@@ -79,6 +79,7 @@ import {
   CreateInstanceNewResponse,
   DescribeSqlApisRequest,
   ModifySecurityGroupsRequest,
+  SkippedPrivilegeItem,
   CreateInstanceNewRequest,
   UpdateCoolDownRequest,
   CoolDownPolicyInfo,

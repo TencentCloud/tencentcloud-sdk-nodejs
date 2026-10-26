@@ -46,10 +46,11 @@ import {
   DeletePolicyRuleRequest,
   DescribeFileSystemsRequest,
   CreateDataRepositoryTaskResponse,
-  UpdateFilesetRequest,
+  ManifestAttr,
   Tag,
   ModifyDataRepositoryBandwidthRequest,
   CreateDataRepositoryTaskRequest,
+  DescribeDataRepositoryTasksResponse,
   MappedBucket,
   CreateFilesetRequest,
   ClientNodeAttribute,
@@ -60,11 +61,12 @@ import {
   CreatePolicyRuleResponse,
   DescribePolicyRuleRequest,
   CreateFileSystemRequest,
+  DescribeDataRepositoryTasksRequest,
   DescribeLoadTaskResponse,
   DisablePolicyRuleRequest,
   DetachFileSystemBucketRequest,
   MountMultipleStorageFileSystemResponse,
-  ManifestAttr,
+  DataRepositoryTaskAttribute,
   DescribeCustomerClusterRequest,
   DescribeFilesetGeneralConfigResponse,
   CreateFilesetResponse,
@@ -133,6 +135,7 @@ import {
   ModifyDataRepositoryTaskStatusRequest,
   PolicyRuleTaskAttribute,
   DeleteCustomerClusterRequest,
+  UpdateFilesetRequest,
 } from "./goosefs_models"
 
 /**
@@ -142,6 +145,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("goosefs.tencentcloudapi.com", "2022-05-19", clientConfig)
+  }
+
+  /**
+   * 列出所有的数据流通任务
+   */
+  async DescribeDataRepositoryTasks(
+    req: DescribeDataRepositoryTasksRequest,
+    cb?: (error: string, rep: DescribeDataRepositoryTasksResponse) => void
+  ): Promise<DescribeDataRepositoryTasksResponse> {
+    return this.request("DescribeDataRepositoryTasks", req, cb)
   }
 
   /**

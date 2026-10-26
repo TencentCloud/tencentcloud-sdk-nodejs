@@ -70,6 +70,20 @@ export interface CompareCloudNativeAPIGatewayMCPToolVersionResponse {
 }
 
 /**
+ * BindCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface BindCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * 结果
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 密钥列表
  */
 export interface CNAPIGwSecretKeyList {
@@ -195,6 +209,20 @@ export interface CreateCloudNativeAPIGatewayMCPServerRequest {
    * <p>日志采集配置</p>
    */
   LogConfig?: AIGWLogConfig
+  /**
+   * <p>服务级参数改写规则</p>
+   */
+  ParamRewriteConfig?: AIGWMCPServerParamRewriteConfig
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPToolACL返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPToolACLResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -288,7 +316,7 @@ export interface AIGWLLMTokenUsageItem {
    */
   ConsumerName?: string
   /**
-   * <p>消费者组信息列表</p>
+   * <p>消费者当前直接所属组列表。网关版本不低于 3.9.8 时，从 Kong CP 当前目录补齐全部直接所属组的 ID、名称和 ConsumerGroupPath，不按 IsPrimary 筛选；无所属组为 []。更早版本保留原消费者组信息且省略路径。</p>
    */
   ConsumerGroups?: Array<AIGWConsumerGroupBrief>
   /**
@@ -327,6 +355,11 @@ export interface AIGWLLMTokenUsageItem {
    * <p>成本货币单位</p><p>枚举值：</p><ul><li>CNY： 人民币</li></ul><p>当前仅支持CNY</p>
    */
   Currency?: string
+  /**
+   * <p>按 Dimension 聚合的维度键值；未传 Dimension 的二维列表不使用此字段。</p><p>Key 顺序：</p><ul><li>SecretKey：SecretKeyId、SecretKeyName</li><li>Model：ModelName</li><li>ModelAPI：ModelAPIId、ModelAPIName</li><li>ModelService：ModelServiceId、ModelServiceName</li><li>Consumer：ConsumerId、ConsumerName、ConsumerGroupId、ConsumerGroupName、ConsumerGroupPath</li><li>ConsumerGroup 组行：ConsumerGroupId、ConsumerGroupName、MemberCount、ConsumerGroupPath</li></ul><p>3.9.8 起，消费者行的 ConsumerGroupId、ConsumerGroupName、ConsumerGroupPath 数组按同一下标对应，表示当前全部直接所属组，不按 IsPrimary 筛选；无所属组为 []。组行的 MemberCount 是当前节点及下属存在且未软删消费者的去重人数，不是历史活跃人数；人数已知为零时为 ["0"]，未知为 []。路径来自 Kong CP 当前目录，多父节点使用确定性展示路径；元数据缺失时名称回退 ID，路径为 []。更早版本保留原字段，省略 ConsumerGroupPath。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimensionList?: Array<AIGWLLMResourceDimension>
 }
 
 /**
@@ -397,6 +430,14 @@ export interface AIGWIntentRoute {
    * <p>规则</p>
    */
   Rules?: Array<AIGWIntentRouteRule>
+  /**
+   * <p>默认路由目标 DefaultModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  DefaultStandardModelName?: string
+  /**
+   * <p>执行意图识别的 IntentModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  IntentStandardModelName?: string
 }
 
 /**
@@ -484,29 +525,53 @@ export interface AIGWBasicCredentialConfig {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPToolVersionList请求参数结构体
+ * AI 网关 MCP Server OAuth2 验签配置
  */
-export interface DescribeCloudNativeAPIGatewayMCPToolVersionListRequest {
+export interface AIGWGatewayVerifyOAuthConfig {
   /**
-   * <p>网关实例 id</p>
+   * <p>令牌校验方式</p><p>枚举值：</p><ul><li>JWTJWKS： JWTJWKS</li><li>Introspection： Introspection</li></ul><p>切换方式后另一方式专属字段不生效</p>
    */
-  GatewayId: string
+  VerifyMethod: string
   /**
-   * <p>MCPserverId</p>
+   * <p>令牌签发者，校验 iss；VerifyMethod=JWTJWKS 时必填</p>
    */
-  ServerId: string
+  Issuer?: string
   /**
-   * <p>工具 id</p>
+   * <p>JWKS 地址</p><p>入参限制：VerifyMethod=JWTJWKS 时必填</p>
    */
-  ToolId: string
+  JwksUri?: string
   /**
-   * <p>分页查询limit</p>
+   * <p>校验 aud</p>
    */
-  Limit?: number
+  Audience?: string
   /**
-   * <p>分页查询偏移</p>
+   * <p>JWKS 缓存秒数，默认 3600，必须大于 0</p><p>默认值：3600</p>
    */
-  Offset?: number
+  JwksCacheTtl?: number
+  /**
+   * <p>令牌内省端点</p><p>入参限制：VerifyMethod=Introspection 时必填</p>
+   */
+  IntrospectionEndpoint?: string
+  /**
+   * <p>调用内省端点的 Client ID</p><p>入参限制：VerifyMethod=Introspection 时必填</p>
+   */
+  IntrospectionClientId?: string
+  /**
+   * <p>调用内省端点的 Client Secret</p><p>入参限制：VerifyMethod=Introspection 时必填</p><p>加密落库，查询时无论 Enable 状态均脱敏</p>
+   */
+  IntrospectionClientSecret?: string
+  /**
+   * <p>内省结果缓存秒数</p><p>默认值：60</p><p>0 表示不缓存</p>
+   */
+  IntrospectionCacheTtl?: number
+  /**
+   * <p>逗号分隔的 scope 白名单；令牌需命中其一，否则 401</p>
+   */
+  ScopeWhitelist?: string
+  /**
+   * <p>读取调用方令牌的 Header 名</p><p>默认值：Authorization</p>
+   */
+  TokenHeader?: string
 }
 
 /**
@@ -521,6 +586,11 @@ export interface AIGWConsumerGroupBrief {
    * <p>消费者组Id</p>
    */
   ConsumerGroupId?: string
+  /**
+   * <p>消费者组（组织节点）的当前展示路径，可选。TokenUsageList 在网关版本不低于 3.9.8 时，从 Kong CP 当前目录补齐，用于展示当前直接所属组的位置；多父节点使用确定性路径。更早版本、无可用路径或未补齐此元数据的接口可省略；前端缺省时回退 Name。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerGroupPath?: string
 }
 
 /**
@@ -612,25 +682,17 @@ export interface AIGWKVMatch {
 }
 
 /**
- * ModifyCloudNativeAPIGatewaySecretKey请求参数结构体
+ * AI 网关模型服务单次请求输入字符长度限制。只拒绝超限输入，不做截断。计量为整个请求 JSON 的 Unicode 字符数。
  */
-export interface ModifyCloudNativeAPIGatewaySecretKeyRequest {
+export interface AIGWLengthLimitConfig {
   /**
-   * 实例 ID
+   * <p>是否开启输入长度限制</p>
    */
-  GatewayId: string
+  EnableInputLimit?: boolean
   /**
-   * 密钥名字
+   * <p>最大输入长度字符数</p>
    */
-  Name: string
-  /**
-   * 密钥id
-   */
-  SecretKeyId: string
-  /**
-   * 描述,200字以内
-   */
-  Description?: string
+  MaxInputChars?: number
 }
 
 /**
@@ -690,25 +752,17 @@ export interface AIGWACLSubject {
 }
 
 /**
- * RemoveCloudNativeAPIGatewayConsumerGroupAuth请求参数结构体
+ * DescribeCloudNativeAPIGatewayMCPToolVersionList返回参数结构体
  */
-export interface RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest {
+export interface DescribeCloudNativeAPIGatewayMCPToolVersionListResponse {
   /**
-   * <p>网关实例id</p>
+   * <p>tool版本列表</p>
    */
-  GatewayId: string
+  Result?: AIGWMCPToolVersionList
   /**
-   * <p>授权资源类型。</p><p>枚举值：</p><ul><li>ModelAPI：模型 API</li><li>MCPServer：MCP Server</li></ul>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceType: string
-  /**
-   * <p>对应资源的 ID。</p><ul><li>ResourceType=ModelAPI 时是模型 API ID</li><li>ResourceType=MCPServer 时是 MCP Server ID</li></ul>
-   */
-  ResourceId: string
-  /**
-   * <p>消费者组 ID 列表（每个 ID 以 cg- 开头），长度 1-10。</p>
-   */
-  ConsumerGroupIds: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -723,6 +777,10 @@ export interface CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy {
    * <p>权重值</p>
    */
   Weight: number
+  /**
+   * <p>当前权重路由条目中 ModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -923,17 +981,25 @@ export interface CreateCloudNativeAPIGatewayConsumerGroupRequest {
    */
   GatewayId: string
   /**
-   * <p>消费者组名称，最长 60 字符。同一网关下唯一。</p>
+   * <p>消费者组名称，最长 60 字符。同一网关下唯一。</p><p>CustomOrganization 时非空、最大 255 字符；Legacy 原规则不变。</p>
    */
   Name: string
   /**
-   * <p>启用状态。</p><p>枚举值：</p><ul><li>Enable：启用</li><li>Disable：禁用</li></ul>
+   * <p>启用状态。</p><p>枚举值：</p><ul><li>Enable：启用</li><li>Disable：禁用</li></ul><p>CustomOrganization 时传 Active 或 Disabled；保持 Status 必填。Legacy 原 Enable/Disable 不变。</p>
    */
   Status: string
   /**
-   * <p>消费者组描述。最长 200 字符。</p>
+   * <p>消费者组描述。最长 200 字符。</p><p>CustomOrganization 时最大 500 字符；Legacy 原规则不变。</p>
    */
   Description?: string
+  /**
+   * <p>调用业务来源，可选 Legacy 或 CustomOrganization；省略或空串按 Legacy。Legacy 保持原行为，CustomOrganization 用于自定义组织架构。该字段不替代鉴权，不改变资源归属，不覆盖 RequestSource。来源保存在操作记录请求内容中。</p>
+   */
+  OperationSource?: string
+  /**
+   * <p>仅 CustomOrganization 使用。1–32 个当前网关自定义父部门 UUID，完整保留多父关系；省略时挂自定义根，空数组非法。不得使用同步部门或未归属组。Legacy 不使用此字段。</p>
+   */
+  ParentConsumerGroupIds?: Array<string>
 }
 
 /**
@@ -1060,6 +1126,18 @@ export interface CNAPIGwSecretKey {
    * <p>绑定了该模型密钥的消费者密钥列表</p>
    */
   BoundConsumerSecretKeys?: Array<AIGWSimpleSecretKey>
+  /**
+   * <p>可选返回字段，仅 IncludeCreationInfo=true 且 ResourceType=Consumer 时存在。凭证内容生成方式：System 自动生成、Custom 自定义、KMS。旧 GenerateType=AutoWithConsumer 映射为 System；其他值保持原 GenerateType，未知值由前端显示“未知”。不改写原 GenerateType。</p>
+   */
+  CredentialGenerateType?: string
+  /**
+   * <p>可选返回字段，仅 IncludeCreationInfo=true 且 ResourceType=Consumer 时存在。创建来源：Manual 手动新建、AutoWithConsumer 随消费者自动新建、Batch 批量新建。按持久化 BatchId 和原 GenerateType 判定，不按名称前缀猜测。</p>
+   */
+  CreationSource?: string
+  /**
+   * <p>可选返回字段，仅 IncludeCreationInfo=true 且 ResourceType=Consumer 时存在。批量创建填原批次 ID，非批量为空字符串。来源关联随密钥保留，不因批次结果过期而消失；此字段不表示批次结果或明文仍可读取。</p>
+   */
+  BatchId?: string
 }
 
 /**
@@ -1122,6 +1200,30 @@ export interface CNAPIGwConsumer {
    * <p>同步版本</p>
    */
   SyncedVersion?: string
+  /**
+   * <p>消费者展示名称；目录同步对象可与登录名不同。</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>消费者登录名称。</p>
+   */
+  UserName?: string
+  /**
+   * <p>目录消费者状态：active / disabled / soft_deleted。保留存量接口原始值，不转换为 AIGW 枚举。</p>
+   */
+  Status?: string
+  /**
+   * <p>消费者来源：manual / sync；保留目录隔离和同步对象只读规则。</p>
+   */
+  Origin?: string
+  /**
+   * <p>产生该消费者的同步源 ID；手工消费者可为空。</p>
+   */
+  SyncSourceId?: string
+  /**
+   * <p>对象在外部目录中的稳定标识；手工消费者可为空。</p>
+   */
+  ExternalId?: string
 }
 
 /**
@@ -1145,11 +1247,11 @@ export interface AIGWLogConfig {
    */
   ResponseLogPayloadMaxSize?: number
   /**
-   * <p>请求 payload access log 输出模式</p><p>枚举值：</p><ul><li>raw： access log 中 body 记录客户端原始请求</li><li>processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容</li></ul>
+   * <p>请求 payload access log 输出模式。MCP情况下不需要传入</p><p>枚举值：</p><ul><li>raw： access log 中 body 记录客户端原始请求</li><li>processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容</li></ul>
    */
   RequestLogPayloadMode?: string
   /**
-   * <p>上游原始 payload access log 输出模式</p><p>枚举值：</p><ul><li>raw： access log 中 body 记录客户端原始上游响应</li><li>processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容</li></ul>
+   * <p>上游原始 payload access log 输出模式。MCP情况下不需要传入</p><p>枚举值：</p><ul><li>raw： access log 中 body 记录客户端原始上游响应</li><li>processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容</li></ul>
    */
   ResponseLogPayloadMode?: string
   /**
@@ -1514,6 +1616,14 @@ export interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
    * <p>负载均衡配置</p>
    */
   LoadBalanceConfig?: AIGWLoadBalanceConfig
+  /**
+   * <p>智能负载均衡配置</p>
+   */
+  SmartBalance?: AIGWSmartBalanceConfig
+  /**
+   * <p>内容长度限制配置</p>
+   */
+  LengthLimitConfig?: AIGWLengthLimitConfig
 }
 
 /**
@@ -1618,6 +1728,18 @@ export interface CreateCloudNativeAPIGatewayLLMModelAPIRequest {
    * <p>敏感词路由配置</p>
    */
   SensitiveWordRoute?: AIGWSensitiveWordRoute
+  /**
+   * <p>请求优先级调度配置</p>
+   */
+  PriorityScheduleConfig?: AIGWPriorityScheduleConfig
+  /**
+   * <p>按请求体顶层 model 字段选择模型 API 的入口路由配置。传入对象即启用，ModelNames 须为非空列表；不传表示不启用。仅用于 Chat 场景下受支持的 POST 路由：openai 协议的 /v1/chat/completions、/v1/responses，或 anthropic 协议的 /v1/messages。公有云要求网关版本不低于 3.9.8，TCS 要求不低于 3.9.6。</p>
+   */
+  ModelNameRoute?: AIGWModelNameRoute
+  /**
+   * <p>单模型 API 的顶层标准模型名称。仅当 ListModelServiceId 包含一个模型服务且未配置 ModelServiceRoute 时可设置；多模型场景应在对应路由或降级条目中配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -1739,17 +1861,17 @@ export interface DescribeCloudNativeAPIGatewayMCPToolACLListRequest {
 }
 
 /**
- * 返回kong的服务和路由列表
+ * DescribeCloudNativeAPIGatewayAIQuota请求参数结构体
  */
-export interface KongServiceWithRoutes {
+export interface DescribeCloudNativeAPIGatewayAIQuotaRequest {
   /**
-   * 服务及路由列表
+   * <p>网关实例Id</p>
    */
-  ServiceList?: Array<KongServiceRoute>
+  GatewayId: string
   /**
-   * 总数
+   * <p>配额 id</p>
    */
-  TotalCount?: number
+  Id: string
 }
 
 /**
@@ -1952,6 +2074,30 @@ export interface CloudNativeAPIGatewayLLMModelAPI {
    * <p>消费者继承的模型范围</p>
    */
   ConsumerInheritModelScope?: AIGWConsumerModelScope
+  /**
+   * <p>消费者模型范围</p>
+   */
+  ConsumerDirectModelScopes?: Array<AIGWAuthModelScopeItem>
+  /**
+   * <p>消费者密钥模型范围</p>
+   */
+  SecretKeyModelScopes?: Array<AIGWAuthModelScopeItem>
+  /**
+   * <p>请求优先级配置</p>
+   */
+  PriorityScheduleConfig?: AIGWPriorityScheduleConfig
+  /**
+   * <p>模型API是否支持Playground调试</p>
+   */
+  PlaygroundAvailable?: boolean
+  /**
+   * <p>模型 API 当前配置的入口模型名路由规则，根据请求体顶层 model 字段匹配 ModelNames 中的名称或别名；未配置时不启用该入口路由规则。</p>
+   */
+  ModelNameRoute?: AIGWModelNameRoute
+  /**
+   * <p>单模型 API 当前配置的顶层标准模型名称，仅适用于其关联的 TIONE 模型服务；为空表示未配置。多模型场景的标准模型名称在各路由或降级条目中返回。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -1959,7 +2105,7 @@ export interface CloudNativeAPIGatewayLLMModelAPI {
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
   /**
-   * 网关 id。
+   * <p>网关 id。</p>
    */
   GatewayId: string
   /**
@@ -1990,32 +2136,28 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
    * <p>消费者 ID（以 consumer- 开头）。</p>
    */
   ConsumerId?: string
+  /**
+   * <p>密钥ID</p>
+   */
+  SecretKeyId?: string
 }
 
 /**
- * ModifyCloudNativeAPIGatewayMCPServerACL请求参数结构体
+ * AI 网关 MCP Server 参数改写规则
  */
-export interface ModifyCloudNativeAPIGatewayMCPServerACLRequest {
+export interface AIGWMCPServerParamRewriteRule {
   /**
-   * <p>网关实例ID</p>
+   * <p>操作方式</p>
    */
-  GatewayId: string
+  Operate: string
   /**
-   * <p>MCP服务ID</p>
+   * <p>键</p>
    */
-  ServerId: string
+  Key: string
   /**
-   * <p>ACL类型</p><p>枚举值：</p><ul><li>None： 不开启</li><li>Allow： 白名单</li><li>Deny： 黑名单</li></ul><p>默认值：None</p>
+   * <p>值</p>
    */
-  ACLType: string
-  /**
-   * <p>需要关联的消费者ID列表</p>
-   */
-  ACLConsumerIds?: Array<string>
-  /**
-   * <p>需要关联的消费者组ID列表</p>
-   */
-  ACLConsumerGroupIds?: Array<string>
+  Value?: string
 }
 
 /**
@@ -2081,13 +2223,62 @@ export interface AIGWQuota {
    */
   Source?: string
   /**
-   * <p>配额超限行为</p><p>枚举值：</p><ul><li>Reject： 拒绝请求</li><li>AllowOverage： 允许超支</li></ul>
+   * <p>配额超限行为</p><p>枚举值：</p><ul><li>Reject： 拒绝消费者请求</li><li>AllowOverage： 允许超限</li></ul>
    */
   ExceedAction?: string
   /**
    * <p>缓存是否计入限额</p><p>枚举值：</p><ul><li>Full： 全量计入</li><li>Exclude： 不计入网关缓存命中部分</li></ul>
    */
   CacheHitStat?: string
+  /**
+   * <p>超限百分比</p><p>默认值：0</p><p>Consumer 的超量百分比，指定模型服务配额默认为 0；ConsumerGroup 固定为 0。</p><p>举例：20，超出设置额度的20%，可用额度为（1+20%）*QuotaLimit。当SetExceedPercentage=true时，条件必选。</p>
+   */
+  ExceedPercentage?: number
+  /**
+   * <p>是否设置超限百分比</p><p>仅 Consumer 的 AllowOverage 场景可用，指定模型服务的配额必须为 false；ConsumerGroup 必须为 false。</p><p>枚举值：</p><ul><li>true： 设置超限百分比</li><li>false： 不设置超限百分比，即不设上限</li></ul><p>默认值：false</p><p>当ExceedAction=AllowOverage时，条件必选。</p>
+   */
+  SetExceedPercentage?: boolean
+  /**
+   * <p>Consumer粒度某资源对象的配额范围，支持：全部模型服务（all）、指定模型服务（specified）</p><p>枚举值：</p><ul><li>All： 全部</li><li>Specified： 指定</li></ul><p>默认值：All</p>
+   */
+  Scope?: string
+  /**
+   * <p>Consumer粒度配额的资源类型，如“模型服务”</p><p>枚举值：</p><ul><li>ModelService： 模型服务</li></ul><p>默认值：ModelService</p>
+   */
+  SubResourceType?: string
+  /**
+   * <p>Consumer粒度配额若支持指定子资源配额，则该项为子资源配额个数</p>
+   */
+  SubResourceCount?: number
+  /**
+   * <p>消费者组完整层级路径。仅 ResourceType=ConsumerGroup 返回，未知时为空字符串；Consumer 行省略。</p>
+   */
+  ConsumerGroupPath?: string
+  /**
+   * <p>消费者组是否有效。仅 ResourceType=ConsumerGroup 返回；组不存在或非 active 时为 false。与配额规则 Enabled 区分，字段省略与 false 含义不同。</p>
+   */
+  ConsumerGroupActive?: boolean
+  /**
+   * <p>兼容用量字段。Cost 为向下取整的整数元；TotalToken 单位为 token；RequestCount 单位为次。精确显示优先使用 UsedExact。</p> 仅支持用量查询的实际规则返回；旧 Consumer 网关和 DefaultPolicy 模板可省略。
+   */
+  Used?: number
+  /**
+   * <p>精确使用量。Cost 单位为元，保留 1e-7 元精度；TotalToken 单位为 token；RequestCount 单位为次。旧版插件不提供精确值时省略，调用方可回退使用 Used；该值已换算为业务单位，不要再除以 ValueScale。</p> 仅支持用量查询的实际规则返回；旧 Consumer 网关和 DefaultPolicy 模板可省略。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedExact?: number
+  /**
+   * <p>使用率</p> 仅支持用量查询的实际规则返回；旧 Consumer 网关和 DefaultPolicy 模板可省略。
+   */
+  UsageRate?: number
+  /**
+   * <p>预警级别</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Warning： 预警</li><li>NearLimit： 临近超限</li><li>Exceeded： 超限</li></ul> 仅支持用量查询的实际规则返回；旧 Consumer 网关和 DefaultPolicy 模板可省略。
+   */
+  AlarmLevel?: string
+  /**
+   * <p>关联消费者密钥数量。ConsumerGroup 规则固定为 0。</p>
+   */
+  SecretKeyCount?: number
 }
 
 /**
@@ -2183,6 +2374,10 @@ export interface CNAPIGwConsumerGroup {
    * <p>同步版本</p>
    */
   SyncedVersion?: string
+  /**
+   * <p>只读保留的组织部门外部标识，仅 SoftDeleted 对象返回；用于后续删除检查，不在基础信息页面展示。</p>
+   */
+  ExternalId?: string
 }
 
 /**
@@ -2295,6 +2490,20 @@ export interface AIGWBearerTokenCredentialConfig {
    * <p>Token凭证</p>
    */
   Token?: string
+}
+
+/**
+ * 配额规则中，某资源对象的指定子资源信息。如资源对象“模型服务”的“指定模型服务”的信息。当Scope=Specified 必填（1~50 项，msvc_id 不重复，QuotaLimit>0）；Scope=All 必须为空。
+ */
+export interface AIGWQuotaSubItem {
+  /**
+   * <p>子资源 ID（如：模型服务 ID）</p>
+   */
+  SubResourceId: string
+  /**
+   * <p>该子资源独立配额上限，必须 &gt; 0；单位与 QuotaType 对齐（Cost=元 TotalToken=tokens RequestCount=次）</p>
+   */
+  QuotaLimit?: number
 }
 
 /**
@@ -2437,97 +2646,28 @@ export interface AIGWIntentRouteRule {
    * <p>模型服务id</p>
    */
   ModelServiceId?: string
+  /**
+   * <p>意图ID</p>
+   */
+  IntentId?: string
+  /**
+   * <p>意图名称</p>
+   */
+  IntentName?: string
+  /**
+   * <p>当前意图路由规则中目标 ModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
- * 云原生网关路由信息
+ * 智能负载均衡配置，仅服务来源（ServiceSource，SourceId 非空）场景生效。
  */
-export interface KongRoutePreview {
+export interface AIGWSmartBalanceConfig {
   /**
-   * <p>服务ID</p>
+   * <p>负载均衡类型</p><p>枚举值：</p><ul><li>LeastRequests： 最少运行请求</li><li>LeastQueued： 最少排队请求</li><li>LeastTTFT： 最少TTFT</li><li>LeastTPOT： 最少TPOT</li></ul>
    */
-  ID: string
-  /**
-   * <p>服务名字</p>
-   */
-  Name?: string
-  /**
-   * <p>请求方法列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Methods?: Array<string>
-  /**
-   * <p>路由Paths列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Paths?: Array<string>
-  /**
-   * <p>路由Hosts列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Hosts?: Array<string>
-  /**
-   * <p>协议列表</p>
-   */
-  Protocols?: Array<string>
-  /**
-   * <p>是否保留Host头</p>
-   */
-  PreserveHost?: boolean
-  /**
-   * <p>HTTPS重定向状态码</p>
-   */
-  HttpsRedirectStatusCode?: number
-  /**
-   * <p>是否去除路径前缀</p>
-   */
-  StripPath?: boolean
-  /**
-   * <p>创建时间</p>
-   */
-  CreatedTime?: string
-  /**
-   * <p>强制转换 https</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  ForceHttps?: boolean
-  /**
-   * <p>服务名</p>
-   */
-  ServiceName?: string
-  /**
-   * <p>服务ID</p>
-   */
-  ServiceID?: string
-  /**
-   * <p>目的端口</p>
-   */
-  DestinationPorts?: Array<number | bigint>
-  /**
-   * <p>headers</p>
-   */
-  Headers?: Array<KVMapping>
-  /**
-   * <p>是否缓存请求body，默认true</p>
-   */
-  RequestBuffering?: boolean
-  /**
-   * <p>是否缓存响应body，默认true</p>
-   */
-  ResponseBuffering?: boolean
-  /**
-   * <p>正则优先级</p>
-   */
-  RegexPriority?: number
-  /**
-   * <p>querystring参数</p>
-   */
-  QueryStringParameters?: Array<KVMapping>
-  /**
-   * <p>路由来源</p>
-   */
-  RouteSource?: string
+  Algorithm?: string
 }
 
 /**
@@ -2652,13 +2792,94 @@ export interface AIGWQuotaList {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayMCPToolACL返回参数结构体
+ * 云原生网关路由信息
  */
-export interface ModifyCloudNativeAPIGatewayMCPToolACLResponse {
+export interface KongRoutePreview {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>服务ID</p>
    */
-  RequestId?: string
+  ID: string
+  /**
+   * <p>服务名字</p>
+   */
+  Name?: string
+  /**
+   * <p>请求方法列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Methods?: Array<string>
+  /**
+   * <p>路由Paths列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Paths?: Array<string>
+  /**
+   * <p>路由Hosts列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hosts?: Array<string>
+  /**
+   * <p>协议列表</p>
+   */
+  Protocols?: Array<string>
+  /**
+   * <p>是否保留Host头</p>
+   */
+  PreserveHost?: boolean
+  /**
+   * <p>HTTPS重定向状态码</p>
+   */
+  HttpsRedirectStatusCode?: number
+  /**
+   * <p>是否去除路径前缀</p>
+   */
+  StripPath?: boolean
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>强制转换 https</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ForceHttps?: boolean
+  /**
+   * <p>服务名</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceID?: string
+  /**
+   * <p>目的端口</p>
+   */
+  DestinationPorts?: Array<number | bigint>
+  /**
+   * <p>headers</p>
+   */
+  Headers?: Array<KVMapping>
+  /**
+   * <p>是否缓存请求body，默认true</p>
+   */
+  RequestBuffering?: boolean
+  /**
+   * <p>是否缓存响应body，默认true</p>
+   */
+  ResponseBuffering?: boolean
+  /**
+   * <p>正则优先级</p>
+   */
+  RegexPriority?: number
+  /**
+   * <p>querystring参数</p>
+   */
+  QueryStringParameters?: Array<KVMapping>
+  /**
+   * <p>路由来源</p>
+   */
+  RouteSource?: string
 }
 
 /**
@@ -2755,6 +2976,22 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 新建消费者时为消费者自动绑定API密钥时自动生成密钥的参数体。仅当 SecretBindType="AutoGenerate" 时必填，其他分支禁止携带，否则返回 InvalidParameterValue.CreateError。
+ */
+export interface AutoSecretKey {
+  /**
+   * <p>密钥名称，2-60 字符。</p><p>字符集与「密钥管理-新建密钥」一致（中英文、数字、下划线、短横线），禁止 -share 后缀，同网关内不可重名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * <p>密钥描述。长度 ≤ 200，可为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**
@@ -2872,6 +3109,20 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
 }
 
 /**
+ * AI网关成本报表列表维度信息
+ */
+export interface AIGWLLMResourceDimension {
+  /**
+   * <p>维度Key</p>
+   */
+  Key?: string
+  /**
+   * <p>维度值</p>
+   */
+  Values?: Array<string>
+}
+
+/**
  * DescribeCloudNativeAPIGatewaySecretKeyList请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
@@ -2907,6 +3158,10 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
    * <p>是否用于绑定场景。true 时返回可被绑定到指定资源的密钥。</p>
    */
   UseToBind?: boolean
+  /**
+   * <p>可选 Boolean，默认 false。仅传 true 且返回记录 ResourceType=Consumer 时，额外返回 CredentialGenerateType、CreationSource、BatchId；省略或 false 时不返回这三个字段，原字段和返回结构保持不变。此参数只控制展示字段，不控制 Filters 是否生效。</p>
+   */
+  IncludeCreationInfo?: boolean
 }
 
 /**
@@ -3010,6 +3265,32 @@ export interface DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayMCPToolVersionList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolVersionListRequest {
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
+  /**
+   * <p>分页查询limit</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页查询偏移</p>
+   */
+  Offset?: number
+}
+
+/**
  * 缓存感知路由候选模型服务
  */
 export interface AIGWCacheAwareRouteCandidate {
@@ -3072,25 +3353,29 @@ export interface ModifyCloudNativeAPIGatewayAIServiceSourceResponse {
 }
 
 /**
- * BindCloudNativeAPIGatewaySecretKey请求参数结构体
+ * AI网关LLM健康检查配置
  */
-export interface BindCloudNativeAPIGatewaySecretKeyRequest {
+export interface AIGWLLMHealthCheckSetting {
   /**
-   * 网关实例id
+   * <p>检查失败阈值</p>
    */
-  GatewayId: string
+  HealthCheckFailThreshold: number
   /**
-   * 资源类型
+   * <p>检查间隔</p>
    */
-  ResourceType: string
+  HealthCheckIntervalSecond: number
   /**
-   * 资源ID，当前最多支持一个
+   * <p>检查恢复阈值</p>
    */
-  ResourceIds: Array<string>
+  HealthCheckRecoverThreshold: number
   /**
-   * 密钥id
+   * <p>检查超时时间</p>
    */
-  SecretKeyId: string
+  HealthCheckTimeout: number
+  /**
+   * <p>检查路径</p>
+   */
+  HealthCheckPath?: string
 }
 
 /**
@@ -3428,7 +3713,7 @@ export interface AIGWQuotaDetail {
    */
   Source?: string
   /**
-   * <p>配额超限行为</p><p>枚举值：</p><ul><li>Reject： 拒绝请求</li><li>AllowOverage： 允许超支</li></ul>
+   * <p>配额超限行为</p><p>枚举值：</p><ul><li>Reject： 拒绝消费者请求</li><li>AllowOverage： 允许超限</li></ul>
    */
   ExceedAction?: string
   /**
@@ -3445,6 +3730,31 @@ export interface AIGWQuotaDetail {
    * <p>缓存是否计入限额</p><p>枚举值：</p><ul><li>Full： 全量计入</li><li>Exclude： 不计入网关缓存命中部分</li></ul>
    */
   CacheHitStat?: string
+  /**
+   * <p>是否设置超限百分比</p><p>仅 Consumer 的 AllowOverage 场景可用，指定模型服务的配额必须为 false；ConsumerGroup 必须为 false。</p><p>枚举值：</p><ul><li>true： 设置超限百分比</li><li>false： 不设置超限百分比，即不设上限</li></ul><p>默认值：false</p><p>当ExceedAction=AllowOverage时，条件必选。</p>
+   */
+  SetExceedPercentage?: boolean
+  /**
+   * <p>超限百分比</p><p>默认值：0</p><p>Consumer 的超量百分比，指定模型服务配额默认为 0；ConsumerGroup 固定为 0。</p><p>举例：20，超出设置额度的20%，可用额度为（1+20%）*QuotaLimit。当SetExceedPercentage=true时，条件必选。</p>
+   */
+  ExceedPercentage?: number
+  /**
+   * <p>精确使用量。Cost 单位为元，保留 1e-7 元精度；TotalToken 单位为 token；RequestCount 单位为次。旧版插件不提供精确值时省略，调用方可回退使用 Used；该值已换算为业务单位，不要再除以 ValueScale。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedExact?: number
+  /**
+   * <p>消费者组完整层级路径。仅 ResourceType=ConsumerGroup 返回，未知时为空字符串；Consumer 行省略。</p>
+   */
+  ConsumerGroupPath?: string
+  /**
+   * <p>消费者组是否有效。仅 ResourceType=ConsumerGroup 返回；组不存在或非 active 时为 false。与配额规则 Enabled 区分，字段省略与 false 含义不同。</p>
+   */
+  ConsumerGroupActive?: boolean
+  /**
+   * <p>配额规则中，某资源对象的指定子资源配额信息。如资源对象“模型服务”的“指定模型服务”的配额信息。</p>
+   */
+  SubResources?: Array<AIGWQuotaSubItem>
 }
 
 /**
@@ -3459,6 +3769,20 @@ export interface DescribeCloudNativeAPIGatewayMCPServerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 返回kong的服务和路由列表
+ */
+export interface KongServiceWithRoutes {
+  /**
+   * 服务及路由列表
+   */
+  ServiceList?: Array<KongServiceRoute>
+  /**
+   * 总数
+   */
+  TotalCount?: number
 }
 
 /**
@@ -3596,9 +3920,18 @@ export interface AIGWLLMTokenUsageStatisticsResult {
    */
   Currency?: string
   /**
-   * <p>查询时间范围内成本最高的消费者</p>
+   * <p>未传 Dimension 时返回原消费者排行；传入 Dimension 时为 []。ConsumerGroup 汇总不逐组拆分。</p>
    */
   TopConsumers?: Array<AIGWTopConsumersItem>
+  /**
+   * <p>查询时间范围内原始 total_tokens 累计</p>
+   */
+  TotalTokens?: number
+  /**
+   * <p>组织归属是否不完整。网关版本不低于 3.9.8，使用 ConsumerGroup 维度或 ConsumerGroupId / ConsumerGroupName 筛选时返回，其余请求省略。true 表示时间及业务筛选范围内存在组归属未知的日志；检查不受组筛选条件遮蔽，空结果也执行检查。组范围统计仅计入可归因日志。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgAttributionIncomplete?: boolean
 }
 
 /**
@@ -3621,6 +3954,22 @@ export interface CreateCloudNativeAPIGatewayConsumerRequest {
    * <p>消费者描述。最长 200 字符。</p>
    */
   Description?: string
+  /**
+   * <p>调用业务来源，可选 Legacy 或 CustomOrganization；省略或空串按 Legacy。Legacy 保持原行为，CustomOrganization 用于自定义组织架构。该字段不替代鉴权，不改变资源归属，不覆盖 RequestSource。来源保存在操作记录请求内容中。</p>
+   */
+  OperationSource?: string
+  /**
+   * <p>仅 CustomOrganization 使用 Active 或 Disabled，默认 Active。Legacy 不新增状态行为。</p>
+   */
+  Status?: string
+  /**
+   * <p>密钥关联方式，三选一枚举。不传时兼容老逻辑（等价于 None 或 Existing，取决于是否传 SecretKeyId）</p><p>枚举值：</p><ul><li>Existing： 选择已有密钥</li><li>AutoGenerate： 自动生成并关联密钥</li><li>None： 暂不关联密钥</li></ul><p>默认值：None</p>
+   */
+  SecretBindType?: string
+  /**
+   * <p>自动生成密钥的参数体。仅当 SecretBindType=&quot;AutoGenerate&quot; 时必填，其他分支禁止携带，否则返回 InvalidParameterValue.CreateError。</p>
+   */
+  AutoSecretKey?: AutoSecretKey
 }
 
 /**
@@ -3748,7 +4097,7 @@ export interface DeleteCloudNativeAPIGatewayMCPRouteRequest {
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
   /**
-   * 模型 API 列表。
+   * <p>模型 API 列表。</p>
    */
   Result?: ListCloudNativeAPIGatewayLLMModelAPI
   /**
@@ -3870,6 +4219,32 @@ export interface AIGWMCPRoute {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayMCPServerACL请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPServerACLRequest {
+  /**
+   * <p>网关实例ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP服务ID</p>
+   */
+  ServerId: string
+  /**
+   * <p>ACL类型</p><p>枚举值：</p><ul><li>None： 不开启</li><li>Allow： 白名单</li><li>Deny： 黑名单</li></ul><p>默认值：None</p>
+   */
+  ACLType: string
+  /**
+   * <p>需要关联的消费者ID列表</p>
+   */
+  ACLConsumerIds?: Array<string>
+  /**
+   * <p>需要关联的消费者组ID列表</p>
+   */
+  ACLConsumerGroupIds?: Array<string>
+}
+
+/**
  * 模型服务模型名称路由策略
  */
 export interface CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy {
@@ -3885,6 +4260,10 @@ export interface CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy {
    * <p>重写模型</p>
    */
   RewriteModelName?: string
+  /**
+   * <p>当前模型名称匹配路由条目中 ModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -3946,13 +4325,18 @@ export interface DescribeCloudNativeAPIGatewayMCPServerListResponse {
  */
 export interface AIGWLLMTokenUsageListResult {
   /**
-   * <p>Token用量明细返回结果列表</p>
+   * <p>网关版本不低于 3.9.8 且 Dimension=ConsumerGroup 时，未指定节点筛选则列出 Kong CP 当前目录的全部真实节点，包含同步、自定义、禁用及保留中的软删节点，排除合成展示节点。按当前名称、节点 UUID 升序，先分页节点再查询历史指标；无调用节点仍返回，Token 与请求数补零。节点指标包含历史下属，同一请求可计入多个组行，不能逐行相加作为网关总量。</p>
    */
   DataList?: Array<AIGWLLMTokenUsageItem>
   /**
-   * <p>结果总数</p>
+   * <p>筛选后的结果总数。新版 ConsumerGroup 查询为候选节点总数，包含无调用节点，不受 Limit / Offset 影响。</p>
    */
   TotalCount?: number
+  /**
+   * <p>组织归属是否不完整。网关版本不低于 3.9.8，使用 ConsumerGroup 维度或 ConsumerGroupId / ConsumerGroupName 筛选时返回，其余请求省略。true 表示时间及业务筛选范围内存在组归属未知的日志；检查不受组筛选条件遮蔽，空结果也执行检查。组范围统计仅计入可归因日志。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgAttributionIncomplete?: boolean
 }
 
 /**
@@ -4238,13 +4622,35 @@ export interface DescribeCloudNativeAPIGatewayAIQuotaListRequest {
    */
   Keyword?: string
   /**
-   * <p>过滤条件</p>
+   * 可选过滤条件，不同 Name 为 AND，同一 Values 为 OR。支持 ResourceType（单值 Consumer 或 ConsumerGroup，省略默认 Consumer）、ResourceId（资源 ID，1～100 项）、ConsumerId（仅 Consumer 可用）、Source（Manual / Default / DefaultPolicy）、QuotaId、QuotaType（RequestCount / TotalToken / Cost）、PeriodUnit（Day / Week / Month / Year / Unlimit）。Values 不得为空，QuotaId、QuotaType、PeriodUnit 各为 1～100 项。ConsumerGroup 使用 ResourceId，不使用 ConsumerId；不自动展开上下级。Source 省略时排除 DefaultPolicy。
    */
   Filters?: Array<Filter>
   /**
    * <p>配额预警级别</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Warning： 预警</li><li>NearLimit： 临近超限</li><li>Exceeded： 超限</li></ul>
    */
   AlarmLevels?: Array<string>
+}
+
+/**
+ * ModifyCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 密钥名字
+   */
+  Name: string
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
+  /**
+   * 描述,200字以内
+   */
+  Description?: string
 }
 
 /**
@@ -4406,17 +4812,35 @@ export interface AIGWLLMQuotaFallbackTrigger {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayAIQuota请求参数结构体
+ * RemoveCloudNativeAPIGatewayConsumerGroupAuth请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayAIQuotaRequest {
+export interface RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest {
   /**
-   * <p>网关实例Id</p>
+   * <p>网关实例id</p>
    */
   GatewayId: string
   /**
-   * <p>配额 id</p>
+   * <p>授权资源类型。</p><p>枚举值：</p><ul><li>ModelAPI：模型 API</li><li>MCPServer：MCP Server</li></ul>
    */
-  Id: string
+  ResourceType: string
+  /**
+   * <p>对应资源的 ID。</p><ul><li>ResourceType=ModelAPI 时是模型 API ID</li><li>ResourceType=MCPServer 时是 MCP Server ID</li></ul>
+   */
+  ResourceId: string
+  /**
+   * <p>消费者组 ID 列表（每个 ID 以 cg- 开头），长度 1-10。</p>
+   */
+  ConsumerGroupIds: Array<string>
+}
+
+/**
+ * AI网关入口按模型名称路由
+ */
+export interface AIGWModelNameRoute {
+  /**
+   * <p>模型名称和别名列表；对象存在即启用</p>
+   */
+  ModelNames?: Array<string>
 }
 
 /**
@@ -4431,6 +4855,10 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
    * <p>密钥id</p>
    */
   SecretKeyId: string
+  /**
+   * <p>可选 Boolean，默认 false。仅传 true 且返回记录 ResourceType=Consumer 时，额外返回 CredentialGenerateType、CreationSource、BatchId；省略或 false 时不返回这三个字段，原字段和返回结构保持不变。此参数只控制展示字段，不控制 Filters 是否生效。</p>
+   */
+  IncludeCreationInfo?: boolean
 }
 
 /**
@@ -4489,6 +4917,10 @@ export interface ModifyCloudNativeAPIGatewayMCPServerRequest {
    * <p>日志配置</p>
    */
   LogConfig?: AIGWLogConfig
+  /**
+   * <p>服务级参数改写配置</p>
+   */
+  ParamRewriteConfig?: AIGWMCPServerParamRewriteConfig
 }
 
 /**
@@ -4633,6 +5065,16 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyValueResponse {
 }
 
 /**
+ * AI 网关 HTTP 转 MCP 请求阶段参数改写配置
+ */
+export interface AIGWMCPServerRequestRewriteConfig {
+  /**
+   * <p>头部重写规则</p>
+   */
+  Headers?: Array<AIGWMCPServerParamRewriteRule>
+}
+
+/**
  * AI网关授权模型访问范围
  */
 export interface AIGWAuthModelScopeItem {
@@ -4681,9 +5123,13 @@ export interface DeleteCloudNativeAPIGatewayConsumerRequest {
    */
   GatewayId: string
   /**
-   * 消费者ID
+   * 消费者ID<p>CustomOrganization 仅允许手工/存量消费者，拒绝目录来源、非空 SyncSourceId、Public 和只读保留对象，即使原源已删除也不借此入口清理。删除复用原依赖检查及全归属/凭证/授权清理，Legacy 原行为不变。成功响应不新增 Result。</p>
    */
   ConsumerId: string
+  /**
+   * <p>调用业务来源，可选 Legacy 或 CustomOrganization；省略或空串按 Legacy。Legacy 保持原行为，CustomOrganization 用于自定义组织架构。该字段不替代鉴权，不改变资源归属，不覆盖 RequestSource。来源保存在操作记录请求内容中。</p>
+   */
+  OperationSource?: string
 }
 
 /**
@@ -4785,6 +5231,20 @@ export interface AIGWCustomDesensitizeRule {
    * <p>单条自定义规则是否启用</p>
    */
   Enabled: boolean
+}
+
+/**
+ * CreateCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface CreateCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * <p>创建结果。包含成功标识与新建资源 ID。</p>
+   */
+  Result?: CNAPIGwCreateCommonResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4982,17 +5442,13 @@ export interface AIGWQueryParamCredentialConfig {
 }
 
 /**
- * BindCloudNativeAPIGatewaySecretKey返回参数结构体
+ * 模型API请求优先级调度
  */
-export interface BindCloudNativeAPIGatewaySecretKeyResponse {
+export interface AIGWPriorityScheduleConfig {
   /**
-   * 结果
+   * <p>是否开启优先级调度</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
    */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Enabled?: boolean
 }
 
 /**
@@ -5185,6 +5641,14 @@ export interface CloudNativeAPIGatewayLLMModelService {
    * <p>健康检查配置</p>
    */
   HealthCheck?: AIGWLLMHealthCheckSetting
+  /**
+   * <p>内容长度限制配置</p>
+   */
+  LengthLimitConfig?: AIGWLengthLimitConfig
+  /**
+   * <p>智能负载均衡配置。</p>
+   */
+  SmartBalance?: AIGWSmartBalanceConfig
 }
 
 /**
@@ -5196,23 +5660,27 @@ export interface DeleteCloudNativeAPIGatewayConsumerGroupRequest {
    */
   GatewayId: string
   /**
-   * 消费者组ID
+   * 消费者组ID<p>CustomOrganization 时必须为当前网关自定义部门 UUID，保留系统节点、子部门、成员与授权/MCP 依赖检查。Legacy 原 cg-* 及已有 UUID 兼容行为不变。成功响应不新增 Result。</p>
    */
   ConsumerGroupId: string
+  /**
+   * <p>调用业务来源，可选 Legacy 或 CustomOrganization；省略或空串按 Legacy。Legacy 保持原行为，CustomOrganization 用于自定义组织架构。该字段不替代鉴权，不改变资源归属，不覆盖 RequestSource。来源保存在操作记录请求内容中。</p>
+   */
+  OperationSource?: string
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPToolVersionList返回参数结构体
+ * AI 网关 HTTP 转 MCP 参数改写配置
  */
-export interface DescribeCloudNativeAPIGatewayMCPToolVersionListResponse {
+export interface AIGWMCPServerParamRewriteConfig {
   /**
-   * <p>tool版本列表</p>
+   * <p>是否开启服务级参数重写</p>
    */
-  Result?: AIGWMCPToolVersionList
+  Enable?: boolean
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>服务级请求参数重写配置</p>
    */
-  RequestId?: string
+  Request?: AIGWMCPServerRequestRewriteConfig
 }
 
 /**
@@ -5365,29 +5833,25 @@ export interface DescribeCloudNativeAPIGatewayLLMTokenUsageListRequest {
 }
 
 /**
- * AI网关LLM健康检查配置
+ * BindCloudNativeAPIGatewaySecretKey请求参数结构体
  */
-export interface AIGWLLMHealthCheckSetting {
+export interface BindCloudNativeAPIGatewaySecretKeyRequest {
   /**
-   * <p>检查失败阈值</p>
+   * 网关实例id
    */
-  HealthCheckFailThreshold: number
+  GatewayId: string
   /**
-   * <p>检查间隔</p>
+   * 资源类型
    */
-  HealthCheckIntervalSecond: number
+  ResourceType: string
   /**
-   * <p>检查恢复阈值</p>
+   * 资源ID，当前最多支持一个
    */
-  HealthCheckRecoverThreshold: number
+  ResourceIds: Array<string>
   /**
-   * <p>检查超时时间</p>
+   * 密钥id
    */
-  HealthCheckTimeout: number
-  /**
-   * <p>检查路径</p>
-   */
-  HealthCheckPath?: string
+  SecretKeyId: string
 }
 
 /**
@@ -5534,6 +5998,10 @@ export interface AIGWSensitiveWordRoute {
    * <p>路由名称路由配置</p>
    */
   ModelNameConfig?: Array<CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy>
+  /**
+   * <p>敏感词路由单模型直选时的标准模型名称。仅在 Enabled=true、SelectedTypes 为空且 ModelServiceRefs 只有一个模型服务时可设置；使用 Weighted 或 ModelName 策略时应在相应配置条目中填写。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -5688,6 +6156,10 @@ export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
    * <p>负载均衡配置</p>
    */
   LoadBalanceConfig?: AIGWLoadBalanceConfig
+  /**
+   * <p>智能负载均衡配置</p>
+   */
+  SmartBalance?: AIGWSmartBalanceConfig
 }
 
 /**
@@ -5763,17 +6235,21 @@ export interface CreateCloudNativeAPIGatewayLLMModelAPIResponse {
 }
 
 /**
- * CreateCloudNativeAPIGatewaySecretKey返回参数结构体
+ * AI 网关 MCP Server 网关验签配置
  */
-export interface CreateCloudNativeAPIGatewaySecretKeyResponse {
+export interface AIGWGatewayVerifyConfig {
   /**
-   * <p>创建结果。包含成功标识与新建资源 ID。</p>
+   * <p>是否开启网关验签</p>
    */
-  Result?: CNAPIGwCreateCommonResult
+  Enable?: boolean
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>网关验签类型</p><p>枚举值：</p><ul><li>OAuth： OAuth2</li></ul>
    */
-  RequestId?: string
+  VerifyType?: string
+  /**
+   * <p>OAuth2验签配置</p>
+   */
+  OAuthConfig?: AIGWGatewayVerifyOAuthConfig
 }
 
 /**
@@ -5893,6 +6369,10 @@ export interface ModifyCloudNativeAPIGatewayLLMModelAPIRequest {
    */
   MatchHeaders?: Array<AIGWKVMatch>
   /**
+   * <p>按请求体顶层 model 字段匹配模型 API 的全量最终态配置。要保留现值必须提交完整对象；省略或 null 表示清空。</p>
+   */
+  ModelNameRoute?: AIGWModelNameRoute
+  /**
    * <p>是否启用跨服务 Fallback。</p>
    */
   EnableCrossServiceFallback?: boolean
@@ -5916,6 +6396,14 @@ export interface ModifyCloudNativeAPIGatewayLLMModelAPIRequest {
    * <p>敏感词路由配置</p>
    */
   SensitiveWordRoute?: AIGWSensitiveWordRoute
+  /**
+   * <p>请求优先级配置</p>
+   */
+  PriorityScheduleConfig?: AIGWPriorityScheduleConfig
+  /**
+   * <p>单模型 API 的顶层标准模型名称。不传保留原值，传空字符串清空，传非空字符串设置新值；仅单模型场景可设置。已配置顶层标准模型名时，需先清空该字段再切换多模型路由。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -6027,6 +6515,14 @@ export interface AIGWMCPServer {
    * <p>日志采集配置</p>
    */
   LogConfig?: AIGWLogConfig
+  /**
+   * <p>服务级参数重写规则</p>
+   */
+  ParamRewriteConfig?: AIGWMCPServerParamRewriteConfig
+  /**
+   * <p>网关验签配置</p>
+   */
+  GatewayVerifyConfig?: AIGWGatewayVerifyConfig
 }
 
 /**

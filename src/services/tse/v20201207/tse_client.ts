@@ -98,6 +98,7 @@ import {
   DescribeUpstreamHealthCheckConfigRequest,
   ModifyGovernanceServicesRequest,
   DescribeConfigFileReleasesResponse,
+  KongServiceRouteList,
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
   CreateGovernanceServicesRequest,
   CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
@@ -106,6 +107,7 @@ import {
   ModifyAutoScalerResourceStrategyRequest,
   UnbindAutoScalerResourceStrategyFromGroupsRequest,
   InternetConfig,
+  AIGWSimpleSecretKey,
   DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   ReleaseVersion,
   DeleteEngineResponse,
@@ -118,6 +120,7 @@ import {
   DeleteGovernanceLaneGroup,
   DescribeAutoScalerResourceStrategiesRequest,
   LimitRule,
+  AIGWModelNameRoute,
   RuleFilter,
   DeleteCloudNativeAPIGatewayCORSRequest,
   DeleteCloudNativeAPIGatewayConsumerRequest,
@@ -237,7 +240,7 @@ import {
   KongServiceLightPreview,
   DescribeNativeGatewayServerGroupsRequest,
   CloudNativeAPIGatewayConfig,
-  DescribePublicNetworkRequest,
+  ArgumentValue,
   DescribeGovernanceNamespacesResponse,
   DescribeConfigFilesByGroupRequest,
   DeleteGovernanceInstancesByHostResponse,
@@ -256,7 +259,7 @@ import {
   AIGWAuthModelScopeItem,
   SourceInstanceVpcInfo,
   ModifyConfigFileGroupResponse,
-  ArgumentValue,
+  DescribeAllConfigFileTemplatesRequest,
   BetaLabelMatchString,
   RateLimitResponse,
   RollbackConfigFileReleasesRequest,
@@ -306,6 +309,7 @@ import {
   DeleteGovernanceAliasesResponse,
   GovernanceService,
   DeleteAutoScalerResourceStrategyRequest,
+  DescribePublicNetworkRequest,
   DescribeCloudNativeAPIGatewayConsumerGroupRequest,
   CreateGovernanceInstancesResponse,
   DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
@@ -323,6 +327,7 @@ import {
   DescribeCloudNativeAPIGatewayPortsResponse,
   TSEGatewaySelector,
   DeleteGovernanceNamespacesRequest,
+  AIGWSmartBalanceConfig,
   DescribeCloudNativeAPIGatewayConfigResponse,
   AIGWOIDCCredentialConfig,
   CreateCloudNativeAPIGatewayConsumerGroupResponse,
@@ -378,6 +383,7 @@ import {
   AgentSkill,
   ModifyCloudNativeAPIGatewayConsumerGroupRequest,
   AIGWQueryParamCredentialConfig,
+  AIGWPriorityScheduleConfig,
   DescribeCloudNativeAPIGatewayCORSResponse,
   RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
   AIGWLatencyPriorityConfig,
@@ -413,7 +419,7 @@ import {
   CreateGovernanceAliasResponse,
   CloudNativeAPIGatewayNodeConfig,
   DeleteConfigFileGroupResponse,
-  KongServiceRouteList,
+  AIGWLengthLimitConfig,
   ConfigFilePublishInfo,
   DeleteCloudNativeAPIGatewayConsumerGroupRequest,
   DescribeCloudNativeAPIGatewayLLMModelServiceRequest,
@@ -460,6 +466,7 @@ import {
   DescribeGovernanceInstancesResponse,
   ListCloudNativeAPIGatewayLLMModelAPI,
   ModifyGovernanceNamespacesResponse,
+  AutoSecretKey,
   CreateConfigFileResponse,
   DescribeCloudNativeAPIGatewaysRequest,
   DescribeCloudNativeAPIGatewaySecretKeyListRequest,
@@ -539,7 +546,6 @@ import {
   DescribeWafProtectionResult,
   AIGWCAMCredentialConfig,
   CreateCloudNativeAPIGatewaySecretKeyResponse,
-  DescribeAllConfigFileTemplatesRequest,
 } from "./tse_models"
 
 /**
@@ -982,7 +988,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 LLM 模型 API 列表。
+   * 查询指定网关实例下的所有 LLM 模型 API 列表。支持按名称关键词模糊搜索、按过滤器筛选，以及分页查询。用于绑定场景时，可通过 ConsumerGroupId 和 UseToBind 参数筛选可绑定的模型 API。
    */
   async DescribeCloudNativeAPIGatewayLLMModelAPIs(
     req: DescribeCloudNativeAPIGatewayLLMModelAPIsRequest,

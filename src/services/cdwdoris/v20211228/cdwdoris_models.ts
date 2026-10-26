@@ -164,13 +164,17 @@ export interface ScaleOutInstanceResponse {
  */
 export interface ModifyUserPrivilegesV3Response {
   /**
-   * 错误信息，为空就是没有错误
+   * <p>错误信息，为空就是没有错误</p>
    */
   ErrorMsg?: string
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   InstanceId?: string
+  /**
+   * <p>因库/表已删除而被跳过的目标；ErrorMsg 为空时不代表失败，前端需弹窗提示</p>
+   */
+  SkippedItems?: SkippedPrivilegeItem
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -182,37 +186,45 @@ export interface ModifyUserPrivilegesV3Response {
  */
 export interface ModifyUserPrivilegesV3Request {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   InstanceId: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName: string
   /**
-   * 用户权限
+   * <p>用户权限</p>
    */
-  UserPrivileges: UpdateUserPrivileges
+  UserPrivileges?: UpdateUserPrivileges
   /**
-   * 用户链接来自的 IP
+   * <p>用户链接来自的 IP</p>
    */
   WhiteHost?: string
   /**
-   * 更新类型，默认0，1为更新绑定计算组，2为更新默认计算组
+   * <p>更新类型，默认0，1为更新绑定计算组，2为更新默认计算组，4 为 GrantPrivileges, RevokePrivileges 接口专用批量授权</p><p>枚举值：</p><ul><li>0： 默认</li><li>1： 更新绑定计算组</li><li>2： 更新默认计算组</li><li>4： GrantPrivileges, RevokePrivileges 接口专用批量授权</li></ul>
    */
   UpdateType?: number
   /**
-   * 需绑定计算组列表
+   * <p>需绑定计算组列表</p>
    */
   UpdateComputeGroups?: Array<string>
   /**
-   * 默认计算组
+   * <p>默认计算组</p>
    */
   DefaultComputeGroup?: string
   /**
-   * 0: 灵活场景 1: 固定场景
+   * <p>0: 灵活场景 1: 固定场景</p>
    */
   ComputeGroupType?: number
+  /**
+   * <p>本次新增授权的库表，仅 UpdateType=4 时生效</p>
+   */
+  GrantPrivileges?: UpdateUserPrivileges
+  /**
+   * <p>本次取消授权的库表，仅 UpdateType=4 时生效</p>
+   */
+  RevokePrivileges?: UpdateUserPrivileges
 }
 
 /**
@@ -1487,6 +1499,28 @@ export interface ModifySecurityGroupsRequest {
    * 修改后的安全组信息
    */
   ModifySecurityGroupIds?: Array<string>
+}
+
+/**
+ * 增量授权（UpdateType=4）时因库/表已被物理删除而被跳过的目标，后端已自动清理其残留权限，前端需弹窗提示用户
+ */
+export interface SkippedPrivilegeItem {
+  /**
+   * <p>数据目录（catalog）名称</p>
+   */
+  CatalogName?: string
+  /**
+   * <p>库名</p>
+   */
+  Database?: string
+  /**
+   * <p>表名；库级条目被跳过时该字段为空（Go 定义带 omitempty，为空时响应里整个字段不出现）</p>
+   */
+  Table?: string
+  /**
+   * <p>跳过原因，如 table not found, maybe already dropped、database not found, maybe already dropped、existence check failed, granting  skipped this round, please retry</p>
+   */
+  Reason?: string
 }
 
 /**

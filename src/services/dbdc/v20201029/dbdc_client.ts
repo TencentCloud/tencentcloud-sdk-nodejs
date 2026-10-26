@@ -22,6 +22,7 @@ import {
   DescribeDBCustomDisasterRecoverGroupQuotaRequest,
   DescribeDBCustomClusterDetailResponse,
   DestroyDBCustomClusterRequest,
+  TaskResourceStatus,
   DescribeDBCustomClusterResourcesRequest,
   ModifyInstanceNameRequest,
   DescribeDBCustomClusterNodeConfigResponse,

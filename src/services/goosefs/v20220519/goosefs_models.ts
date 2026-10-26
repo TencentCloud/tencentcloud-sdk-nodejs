@@ -557,29 +557,25 @@ export interface CreateDataRepositoryTaskResponse {
 }
 
 /**
- * UpdateFileset请求参数结构体
+ * 清单配置
  */
-export interface UpdateFilesetRequest {
+export interface ManifestAttr {
   /**
-   * 文件系统id
+   * <p>桶名字</p>
    */
-  FileSystemId: string
+  Bucket?: string
   /**
-   * Fileset id
+   * <p>目录前缀</p>
    */
-  FsetId: string
+  Prefix?: string
   /**
-   * 容量配额限定值
+   * <p>文件属性</p>
    */
-  QuotaSizeLimit?: string
+  Attributes?: Array<string>
   /**
-   * 文件数配额限定值
+   * <p>桶所在地域</p><p>桶所在的地域，可以不填，认为是实例所在地域</p>
    */
-  QuotaFilesLimit?: string
-  /**
-   * Fileset文件删除操作审计
-   */
-  AuditState?: string
+  Region?: string
 }
 
 /**
@@ -680,6 +676,24 @@ export interface CreateDataRepositoryTaskRequest {
    * <p>自定义数据源路径(暂时仅支持清单过滤使用)</p>
    */
   CustomSrcPath?: string
+}
+
+/**
+ * DescribeDataRepositoryTasks返回参数结构体
+ */
+export interface DescribeDataRepositoryTasksResponse {
+  /**
+   * 数据流通任务列表
+   */
+  DataRepositoryTaskList: Array<DataRepositoryTaskAttribute>
+  /**
+   * 任务总数
+   */
+  TotalCount: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -939,6 +953,24 @@ export interface CreateFileSystemRequest {
 }
 
 /**
+ * DescribeDataRepositoryTasks请求参数结构体
+ */
+export interface DescribeDataRepositoryTasksRequest {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+  /**
+   * 偏移量
+   */
+  Offset: number
+  /**
+   * 最大返回数量
+   */
+  Limit: number
+}
+
+/**
  * DescribeLoadTask返回参数结构体
  */
 export interface DescribeLoadTaskResponse {
@@ -991,25 +1023,116 @@ export interface MountMultipleStorageFileSystemResponse {
 }
 
 /**
- * 清单配置
+ * 数据流通任务属性
  */
-export interface ManifestAttr {
+export interface DataRepositoryTaskAttribute {
   /**
-   * <p>桶名字</p>
+   * <p>数据流通任务类型, FS_TO_COS(文件系统到COS Bucket),或者Bucket到文件系统(COS_TO_FS)</p>
+   */
+  TaskType?: string
+  /**
+   * <p>bucket名</p>
    */
   Bucket?: string
   /**
-   * <p>目录前缀</p>
+   * <p>bucket路径</p>
    */
-  Prefix?: string
+  TaskPath?: string
   /**
-   * <p>文件属性</p>
+   * <p>总的容量(单位Byte)</p>
    */
-  Attributes?: Array<string>
+  TotalCapacity?: number
   /**
-   * <p>桶所在地域</p><p>桶所在的地域，可以不填，认为是实例所在地域</p>
+   * <p>已完成的数据量(单位Byte)</p>
    */
-  Region?: string
+  FinishedCapacity?: number
+  /**
+   * <p>任务创建时间</p>
+   */
+  TaskCreateTime?: string
+  /**
+   * <p>任务开始执行时间</p>
+   */
+  TaskStartTime?: string
+  /**
+   * <p>任务结束时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskEndTime?: string
+  /**
+   * <p>INIT(任务初始化中) RUNNING(任务执行中) SUCCESS(任务已完成) FAIL(任务失败)</p>
+   */
+  TaskStatus?: string
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务名</p>
+   */
+  TaskName?: string
+  /**
+   * <p>任务失败原因</p>
+   */
+  TaskFailMsg?: string
+  /**
+   * <p>总共的文件个数</p>
+   */
+  TotalFileNumber?: number
+  /**
+   * <p>已完成的文件个数</p>
+   */
+  FinishedFileNumber?: number
+  /**
+   * <p>列表地址</p>
+   */
+  TextLocation?: string
+  /**
+   * <p>执行器类型</p>
+   */
+  RepositoryType?: string
+  /**
+   * <p>是否自定义路径</p>
+   * @deprecated
+   */
+  EnableDataFlowSubPath?: boolean
+  /**
+   * <p>自定义路径</p>
+   * @deprecated
+   */
+  DataFlowSubPath?: string
+  /**
+   * <p>是否支持自定义目的路径（沉降表示桶前缀，预热表示本地路径）</p>
+   */
+  EnableCustomDestPath?: boolean
+  /**
+   * <p>自定义目的路径（沉降表示桶前缀，预热表示本地路径）</p>
+   */
+  CustomDestPath?: string
+  /**
+   * <p>任务路径是否表示绝对路径（暂时仅支持沉降使用）</p>
+   */
+  IsTaskPathAbsolute?: boolean
+  /**
+   * <p>任务内容输出桶</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputBucket?: string
+  /**
+   * <p>任务内容输出桶前缀</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputPrefix?: string
+  /**
+   * <p>是否支持自定义数据源路径(暂时仅支持清单过滤使用)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableCustomSrcPath?: boolean
+  /**
+   * <p>自定义数据源路径(暂时仅支持清单过滤使用)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomSrcPath?: string
 }
 
 /**
@@ -2227,4 +2350,30 @@ export interface DeleteCustomerClusterRequest {
    * 客户端集群ID
    */
   ClusterId?: string
+}
+
+/**
+ * UpdateFileset请求参数结构体
+ */
+export interface UpdateFilesetRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+  /**
+   * Fileset id
+   */
+  FsetId: string
+  /**
+   * 容量配额限定值
+   */
+  QuotaSizeLimit?: string
+  /**
+   * 文件数配额限定值
+   */
+  QuotaFilesLimit?: string
+  /**
+   * Fileset文件删除操作审计
+   */
+  AuditState?: string
 }

@@ -177,6 +177,14 @@ export interface AIGWIntentRoute {
    * <p>规则</p>
    */
   Rules?: Array<AIGWIntentRouteRule>
+  /**
+   * <p>默认路由目标 DefaultModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  DefaultStandardModelName?: string
+  /**
+   * <p>执行意图识别的 IntentModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  IntentStandardModelName?: string
 }
 
 /**
@@ -198,13 +206,13 @@ export interface Metadata {
  */
 export interface AIGWBasicCredentialConfig {
   /**
-   * <p>用户名</p>
-   */
-  Username?: string
-  /**
    * <p>密码</p>
    */
   Password?: string
+  /**
+   * <p>用户名</p>
+   */
+  Username?: string
 }
 
 /**
@@ -222,11 +230,11 @@ export interface RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse {
  */
 export interface AIGWRerankMaxDocumentsConfig {
   /**
-   * <p>是否开启最大文档数限制</p><p>枚举值：</p><ul><li>true： 开启最大文档数限制</li><li>false： 关闭最大文档数限制</li></ul>
+   * <p>启用最大文档数限制</p>
    */
   EnableMaxDocuments: boolean
   /**
-   * <p>最大文档数限制</p><p>取值范围：[1, 5000]</p>
+   * <p>Rerank场景最大文档数限制</p>
    */
   MaxDocumentValue?: number
 }
@@ -329,13 +337,17 @@ export interface DeleteGovernanceLaneGroupsResponse {
  */
 export interface DeleteCloudNativeAPIGatewayResult {
   /**
-   * 云原生网关ID。
+   * <p>云原生网关ID。</p>
    */
-  GatewayId: string
+  GatewayId?: string
   /**
-   * 云原生网关状态。
+   * <p>云原生网关状态。</p>
    */
-  Status: string
+  Status?: string
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
 }
 
 /**
@@ -535,6 +547,14 @@ export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
    * <p>负载均衡配置</p>
    */
   LoadBalanceConfig?: AIGWLoadBalanceConfig
+  /**
+   * <p>内容长度限制配置</p>
+   */
+  LengthLimitConfig?: AIGWLengthLimitConfig
+  /**
+   * <p>智能负载均衡配置</p>
+   */
+  SmartBalance?: AIGWSmartBalanceConfig
 }
 
 /**
@@ -709,21 +729,21 @@ export interface CreateCloudNativeAPIGatewayServiceRequest {
  */
 export interface AIGWJWTCredentialConfig {
   /**
-   * <p>JWT 消费者标识，iss claim</p>
-   */
-  Key: string
-  /**
    * <p>签名算法，取值：HS256 HS384 HS512 RS256 RS384 RS512 ES256 ES384 ES512</p>
    */
   Algorithm: string
   /**
-   * <p>HS 对称密钥，仅 Algorithm 为 HS256/HS384/HS512 时必填；RS/ES* 时留空</p>
+   * <p>JWT 消费者标识，iss claim</p>
    */
-  Secret?: string
+  Key: string
   /**
    * <p>RS/ES PEM 格式公钥，仅 Algorithm 为 RS256/RS384/RS512/ES256/ES384/ES512 时必填；HS* 时留空</p>
    */
   RSAPublicKey?: string
+  /**
+   * <p>HS 对称密钥，仅 Algorithm 为 HS256/HS384/HS512 时必填；RS/ES* 时留空</p>
+   */
+  Secret?: string
 }
 
 /**
@@ -995,65 +1015,77 @@ export interface CreateCloudNativeAPIGatewayLLMModelAPIRequest {
    */
   GatewayId: string
   /**
-   * <p>AI 网关 LLM 模型 API 的唯一标识名称，格式规则：2-50 字符，支持中英文大小写、数字及分隔符（“-”、“_”)，不能以数字和分隔符开头，不能以分隔符结尾。</p>
+   * <p>模型 API 名称，最长 60 字符。同一网关下唯一。</p>
    */
   Name: string
   /**
-   * <p>选择业务场景,  选项：Chat（聊天）。</p>
+   * <p>业务场景。</p><p>枚举值：</p><ul><li>Chat：聊天</li><li>Image：图像（需要网关版本 ≥ 3.9.3）</li></ul>
    */
   SceneType: string
   /**
-   * <p>业务场景对应的请求协议，选项：OpenAI（目前只支持 OpenAI）。</p>
+   * <p>请求协议（小写）。当前仅支持：</p><ul><li>openai</li></ul>
    */
   RequestProtocol: string
   /**
-   * <p>初始化关联的模型服务列表。</p>
+   * <p>关联的模型服务 ID 列表，长度 1-10。</p><p>注：字段名建议改为 ModelServiceIds，当前保留用于兼容。</p>
    */
   ListModelServiceId: Array<string>
   /**
-   * <p>路由列表</p>
+   * <p>路由列表，至少 1 条。每条包含 Methods/Paths/Hosts 等 Kong 路由属性。</p>
    */
   RouteList: Array<DefaultKongRoute>
   /**
-   * <p>为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。</p>
+   * <p>统一前缀路径（可选）。例如 /v1/openai。</p>
    */
   BasePath?: string
   /**
-   * <p>模型 API 的相关描述。</p>
+   * <p>模型 API 描述。最长 200 字符。</p>
    */
   Description?: string
   /**
-   * <p>模型服务路由策略（是指如何路由到模型服务）</p>
+   * <p>多模型服务路由策略。ListModelServiceId 多于 1 项时必填。</p>
    */
   ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute
   /**
-   * <p>路由 Header 匹配规则</p>
+   * <p>Header 路由匹配规则。当前仅支持 Operator=exact。</p>
    */
   MatchHeaders?: Array<AIGWKVMatch>
   /**
-   * <p>跨服务 fallback 开关</p>
+   * <p>是否启用跨服务 Fallback。开启后需提供 CrossServiceFallbackConfig。</p>
    */
   EnableCrossServiceFallback?: boolean
   /**
-   * <p>跨服务 fallback 配置</p>
+   * <p>跨服务 Fallback 配置。EnableCrossServiceFallback=true 时必填。</p>
    */
   CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig
   /**
-   * <p>标签</p>
+   * <p>标签过滤策略。需要网关版本 ≥ 3.9.4。</p>
    */
   TagFilter?: AIGWTagFilter
   /**
-   * <p>模型 API 日志配置。未传时使用默认日志配置。</p>
+   * <p>日志输出配置（请求/响应 payload 落 LLM Log）。需要网关版本 ≥ 3.9.4。</p>
    */
   LogConfig?: AIGWLogConfig
   /**
-   * <p>Rerank场景最大文档数限制</p>
+   * <p>Rerank场景最大文档数高级配置</p>
    */
   MaxDocumentsConfig?: AIGWRerankMaxDocumentsConfig
   /**
    * <p>敏感词路由配置</p>
    */
   SensitiveWordRoute?: AIGWSensitiveWordRoute
+  /**
+   * <p>请求优先级调度配置</p>
+   */
+  PriorityScheduleConfig?: AIGWPriorityScheduleConfig
+  /**
+   * <p>按请求体顶层 model 字段选择模型 API 的入口路由配置。传入对象即启用，ModelNames 须为非空列表；不传表示不启用。仅用于 Chat 场景下受支持的 POST 路由：openai 协议的 /v1/chat/completions、/v1/responses，或 anthropic 协议的 /v1/messages。公有云要求网关版本不低于 3.9.8，TCS 要求不低于 3.9.6。</p>
+   */
+  ModelNameRoute?: AIGWModelNameRoute
+  /**
+   * <p>单模型 API 的顶层标准模型名称。仅当 ListModelServiceId 包含一个模型服务且未配置 ModelServiceRoute 时可设置；多模型场景应在对应路由或降级条目中配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -1101,6 +1133,22 @@ export interface DescribeCloudNativeAPIGatewayConsumerListRequest {
    * <p>资源ID</p>
    */
   ResourceId?: string
+  /**
+   * <p>消费者来源筛选：manual / sync（小写），与现有控制面校验一致。</p>
+   */
+  Origin?: string
+  /**
+   * <p>目录消费者状态筛选：active / disabled / soft_deleted（小写）。</p>
+   */
+  Status?: string
+  /**
+   * <p>仅查询指定同步源产生的消费者。</p>
+   */
+  SyncSourceId?: string
+  /**
+   * <p>仅查询不属于外部同步源的消费者；不能与 SyncSourceId 同时设置。</p>
+   */
+  WithoutSyncSource?: boolean
 }
 
 /**
@@ -1137,6 +1185,22 @@ export interface CreateCloudNativeAPIGatewayConsumerRequest {
    * <p>消费者描述。最长 200 字符。</p>
    */
   Description?: string
+  /**
+   * <p>密钥关联方式，三选一枚举。不传时兼容老逻辑（等价于 None 或 Existing，取决于是否传 SecretKeyId）。</p><p>枚举值：</p><ul><li>Existing： 选择已有密钥</li><li>AutoGenerate： 自动生成并关联密钥</li><li>None： 暂不关联密钥</li></ul><p>默认值：None</p>
+   */
+  SecretBindType?: string
+  /**
+   * <p>自动生成密钥的参数体。仅当 SecretBindType=&quot;AutoGenerate&quot; 时必填，其他分支禁止携带，否则返回 InvalidParameterValue.CreateError。</p>
+   */
+  AutoSecretKey?: AutoSecretKey
+  /**
+   * <p>调用业务来源，可选 Legacy 或 CustomOrganization；省略或空串按 Legacy。Legacy 保持原行为，CustomOrganization 用于自定义组织架构。该字段不替代鉴权，不改变资源归属，不覆盖 RequestSource。来源保存在操作记录请求内容中。</p>
+   */
+  OperationSource?: string
+  /**
+   * <p>仅 CustomOrganization 使用 Active 或 Disabled，默认 Active。Legacy 不新增状态行为。</p>
+   */
+  Status?: string
 }
 
 /**
@@ -1206,7 +1270,7 @@ export interface CloudNativeAPIGatewayLLMModelAPI {
    */
   ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute
   /**
-   * <p>无</p>
+   * <p>HTTP 请求头匹配规则，用于按请求头路由到不同模型服务。</p>
    */
   MatchHeaders?: Array<AIGWKVMatch>
   /**
@@ -1238,7 +1302,7 @@ export interface CloudNativeAPIGatewayLLMModelAPI {
    */
   ForwardDesensitizeConfig?: AIGWForwardDesensitizeConfig
   /**
-   * <p>Rerank场景最大文档数限制配置</p>
+   * <p>rerank documents 上限</p>
    */
   MaxDocumentsConfig?: AIGWRerankMaxDocumentsConfig
   /**
@@ -1246,13 +1310,37 @@ export interface CloudNativeAPIGatewayLLMModelAPI {
    */
   SensitiveWordRoute?: AIGWSensitiveWordRoute
   /**
-   * <p>消费者组的授权模型范围</p>
+   * <p>消费者组模型范围</p>
    */
   ConsumerGroupModelScopes?: Array<AIGWAuthModelScopeItem>
   /**
-   * <p>继承自消费者组的授权模型范围</p>
+   * <p>消费者继承的模型范围</p>
    */
   ConsumerInheritModelScope?: AIGWConsumerModelScope
+  /**
+   * <p>消费者密钥模型范围</p>
+   */
+  SecretKeyModelScopes?: Array<AIGWAuthModelScopeItem>
+  /**
+   * <p>模型API是否支持Playground调试</p>
+   */
+  PlaygroundAvailable?: boolean
+  /**
+   * <p>请求优先级配置</p>
+   */
+  PriorityScheduleConfig?: AIGWPriorityScheduleConfig
+  /**
+   * <p>消费者模型范围</p>
+   */
+  ConsumerDirectModelScopes?: Array<AIGWAuthModelScopeItem>
+  /**
+   * <p>模型 API 当前配置的入口模型名路由规则，根据请求体顶层 model 字段匹配 ModelNames 中的名称或别名；未配置时不启用该入口路由规则。</p>
+   */
+  ModelNameRoute?: AIGWModelNameRoute
+  /**
+   * <p>单模型 API 当前配置的顶层标准模型名称，仅适用于其关联的 TIONE 模型服务；为空表示未配置。多模型场景的标准模型名称在各路由或降级条目中返回。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -1568,6 +1656,18 @@ export interface AIGWIntentRouteRule {
    * <p>模型服务id</p>
    */
   ModelServiceId?: string
+  /**
+   * <p>意图ID</p>
+   */
+  IntentId?: string
+  /**
+   * <p>意图名称</p>
+   */
+  IntentName?: string
+  /**
+   * <p>当前意图路由规则中目标 ModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -1837,11 +1937,11 @@ export interface DescribeNacosServerInterfacesResponse {
  */
 export interface KVMapping {
   /**
-   * key
+   * 键值映射的键
    */
   Key?: string
   /**
-   * value
+   * 键值映射的值
    */
   Value?: string
 }
@@ -2116,7 +2216,7 @@ export interface AutoScalerBehavior {
  */
 export interface AIGWCacheAwareRouteConfig {
   /**
-   * <p>前缀缓存感知路由模型服务候选列表</p>
+   * <p>前缀缓存感知路由模型服务列表</p>
    */
   Candidates?: Array<AIGWCacheAwareRouteCandidate>
 }
@@ -2179,6 +2279,20 @@ export interface DescribeConfigFileReleasesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * kong服务路由列表
+ */
+export interface KongServiceRouteList {
+  /**
+   * 无
+   */
+  RouteList?: Array<KongRoutePreview>
+  /**
+   * 总数
+   */
+  TotalCount?: number
 }
 
 /**
@@ -2376,6 +2490,32 @@ export interface InternetConfig {
    * 备可用区
    */
   SlaveZoneId?: string
+}
+
+/**
+ * 简单密钥信息
+ */
+export interface AIGWSimpleSecretKey {
+  /**
+   * <p>密钥ID</p>
+   */
+  SecretKeyId?: string
+  /**
+   * <p>密钥名称</p>
+   */
+  Name?: string
+  /**
+   * <p>启用状态</p><p>枚举值：</p><ul><li>Enable： 启动</li><li>Disable： 禁用</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>密钥类型</p><p>枚举值：</p><ul><li>ApiKey： ApiKey类型</li></ul>
+   */
+  SecretType?: string
+  /**
+   * <p>创建时间</p><p>参数格式：2026-09-03 14:11:05</p>
+   */
+  CreateTime?: string
 }
 
 /**
@@ -2696,6 +2836,16 @@ export interface LimitRule {
 }
 
 /**
+ * AI网关入口按模型名称路由
+ */
+export interface AIGWModelNameRoute {
+  /**
+   * <p>用于入口路由匹配的模型名称或别名列表。配置 ModelNameRoute 时须提供 1-50 项，每项为 1-128 个 Unicode 字符的合法 UTF-8 字符串，不允许空值或重复项。按原始模型名称精确匹配，区分大小写，不自动去除首尾空白。</p>
+   */
+  ModelNames?: Array<string>
+}
+
+/**
  * 限流规则的Filter
  */
 export interface RuleFilter {
@@ -2747,6 +2897,10 @@ export interface DeleteCloudNativeAPIGatewayConsumerRequest {
    * 消费者ID
    */
   ConsumerId: string
+  /**
+   * <p>调用业务来源，可选 Legacy 或 CustomOrganization；省略或空串按 Legacy。Legacy 保持原行为，CustomOrganization 用于自定义组织架构。该字段不替代鉴权，不改变资源归属，不覆盖 RequestSource。来源保存在操作记录请求内容中。</p>
+   */
+  OperationSource?: string
 }
 
 /**
@@ -3119,11 +3273,11 @@ export interface CloudNativeAPIGatewayCanaryRuleCondition {
    */
   Delimiter?: string
   /**
-   * 全局配置 Id
+   * 网关全局配置 Id
    */
   GlobalConfigId?: string
   /**
-   * 全局配置名称
+   * 网关全局配置名称
    */
   GlobalConfigName?: string
 }
@@ -3184,6 +3338,10 @@ export interface AIGWOAuthCredentialConfig {
    * <p>OAuth2 client_secret</p>
    */
   ClientSecret: string
+  /**
+   * <p>OAuth2 授权回调地址</p>
+   */
+  RedirectURIs?: string
 }
 
 /**
@@ -3888,6 +4046,10 @@ export interface CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy {
    * <p>权重值</p>
    */
   Weight: number
+  /**
+   * <p>当前权重路由条目中 ModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -4113,29 +4275,31 @@ export interface ModifyNativeGatewayServiceSourceRequest {
  */
 export interface CNAPIGwSecretKey {
   /**
-   * <p>密钥id</p>
+   * <p>绑定数</p>
    */
-  SecretKeyId?: string
+  BindCount?: number
   /**
-   * <p>密钥名字</p>
+   * <p>是否可以绑定</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  CanBind?: boolean
   /**
-   * <p>密钥协议类型。</p>
+   * <p>创建时间</p>
    */
-  SecretType?: string
+  CreateTime?: string
   /**
-   * <p>状态。</p><p>枚举值：</p><ul><li>Enable： 启用</li><li>Disable： 禁用</li></ul>
+   * <p>描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: string
+  Description?: string
   /**
    * <p>密钥生成方式。</p><p>枚举值：</p><ul><li>System： 系统自动生成</li><li>Custom： 用户自定义</li><li>KMS： 使用 KMS 密钥</li></ul>
    */
   GenerateType?: string
   /**
-   * <p>密钥明文</p>
+   * <p>JWT凭证配置</p>
    */
-  SecretValue?: string
+  JWTCredentialConfig?: AIGWJWTCredentialConfig
   /**
    * <p>KMS凭证名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4147,37 +4311,15 @@ export interface CNAPIGwSecretKey {
    */
   KmsKeyVersion?: string
   /**
-   * <p>描述</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * <p>是否可以绑定</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CanBind?: boolean
-  /**
-   * <p>创建时间</p>
-   */
-  CreateTime?: string
-  /**
    * <p>修改时间</p>
    */
   ModifyTime?: string
   /**
-   * <p>绑定数</p>
+   * <p>密钥名字</p>
    */
-  BindCount?: number
+  Name?: string
   /**
-   * <p>密钥归属资源类型。</p><p>枚举值：</p><ul><li>Consumer： 消费者</li><li>ModelService： 模型服务</li></ul>
-   */
-  ResourceType?: string
-  /**
-   * <p>JWT凭证配置</p>
-   */
-  JWTCredentialConfig?: AIGWJWTCredentialConfig
-  /**
-   * <p>OAuth凭证配置</p>
+   * <p>OAuth2凭证配置</p>
    */
   OAuthCredentialConfig?: AIGWOAuthCredentialConfig
   /**
@@ -4185,9 +4327,41 @@ export interface CNAPIGwSecretKey {
    */
   OIDCCredentialConfig?: AIGWOIDCCredentialConfig
   /**
-   * <p>secret key provider方</p><p>枚举值：</p><ul><li>Dify： Dify</li></ul>
+   * <p>Agent 密钥类型</p>
    */
   Provider?: string
+  /**
+   * <p>密钥归属资源类型。</p><p>枚举值：</p><ul><li>Consumer： 消费者</li><li>ModelService： 模型服务</li></ul>
+   */
+  ResourceType?: string
+  /**
+   * <p>密钥id</p>
+   */
+  SecretKeyId?: string
+  /**
+   * <p>密钥协议类型。</p>
+   */
+  SecretType?: string
+  /**
+   * <p>密钥明文</p>
+   */
+  SecretValue?: string
+  /**
+   * <p>状态。</p><p>枚举值：</p><ul><li>Enable： 启用</li><li>Disable： 禁用</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>同步状态</p><p>枚举值：</p><ul><li>Fail： 失败</li><li>Success： 成功</li></ul>
+   */
+  SyncStatus?: string
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>Public： 公共</li><li>Private： 私有</li><li>SourceDeleted： 资源删除</li></ul>
+   */
+  SourceType?: string
+  /**
+   * <p>同步版本</p>
+   */
+  SyncedVersion?: string
   /**
    * <p>AK/SK凭证配置</p>
    */
@@ -4213,17 +4387,25 @@ export interface CNAPIGwSecretKey {
    */
   QueryParamCredentialConfig?: AIGWQueryParamCredentialConfig
   /**
-   * <p>同步状态</p>
+   * <p>该消费者密钥绑定的模型密钥列表</p>
    */
-  SyncStatus?: string
+  BoundModelSecretKeys?: Array<AIGWSimpleSecretKey>
   /**
-   * <p>来源类型</p>
+   * <p>绑定了该模型密钥的消费者密钥列表</p>
    */
-  SourceType?: string
+  BoundConsumerSecretKeys?: Array<AIGWSimpleSecretKey>
   /**
-   * <p>已同步版本</p>
+   * <p>可选返回字段，仅 IncludeCreationInfo=true 且 ResourceType=Consumer 时存在。凭证内容生成方式：System 自动生成、Custom 自定义、KMS。旧 GenerateType=AutoWithConsumer 映射为 System；其他值保持原 GenerateType，未知值由前端显示“未知”。不改写原 GenerateType。</p>
    */
-  SyncedVersion?: string
+  CredentialGenerateType?: string
+  /**
+   * <p>可选返回字段，仅 IncludeCreationInfo=true 且 ResourceType=Consumer 时存在。创建来源：Manual 手动新建、AutoWithConsumer 随消费者自动新建、Batch 批量新建。按持久化 BatchId 和原 GenerateType 判定，不按名称前缀猜测。</p>
+   */
+  CreationSource?: string
+  /**
+   * <p>可选返回字段，仅 IncludeCreationInfo=true 且 ResourceType=Consumer 时存在。批量创建填原批次 ID，非批量为空字符串。来源关联随密钥保留，不因批次结果过期而消失；此字段不表示批次结果或明文仍可读取。</p>
+   */
+  BatchId?: string
 }
 
 /**
@@ -4231,7 +4413,7 @@ export interface CNAPIGwSecretKey {
  */
 export interface ModifyCloudNativeAPIGatewayLLMModelAPIResponse {
   /**
-   * <p>是否成功</p>
+   * <p>是否成功。</p>
    */
   Result?: boolean
   /**
@@ -5604,21 +5786,24 @@ export interface CloudNativeAPIGatewayConfig {
 }
 
 /**
- * DescribePublicNetwork请求参数结构体
+ * 被调服务配置表达式
  */
-export interface DescribePublicNetworkRequest {
+export interface ArgumentValue {
   /**
-   * 云原生API网关实例ID。
+   * 表达式类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  Type: string
   /**
-   * 网关分组ID
+   * 匹配值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  Value: string
   /**
-   * 网络ID
+   * 值类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetworkId: string
+  ValueType: string
 }
 
 /**
@@ -5979,24 +6164,13 @@ export interface ModifyConfigFileGroupResponse {
 }
 
 /**
- * 被调服务配置表达式
+ * DescribeAllConfigFileTemplates请求参数结构体
  */
-export interface ArgumentValue {
+export interface DescribeAllConfigFileTemplatesRequest {
   /**
-   * 表达式类型
-注意：此字段可能返回 null，表示取不到有效值。
+   * TSE实例id
    */
-  Type: string
-  /**
-   * 匹配值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value: string
-  /**
-   * 值类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueType: string
+  InstanceId: string
 }
 
 /**
@@ -6321,6 +6495,14 @@ export interface CloudNativeAPIGatewayLLMModelService {
    * <p>健康检查配置</p>
    */
   HealthCheck?: AIGWLLMHealthCheckSetting
+  /**
+   * <p>内容长度限制配置</p>
+   */
+  LengthLimitConfig?: AIGWLengthLimitConfig
+  /**
+   * <p>智能负载均衡配置。</p>
+   */
+  SmartBalance?: AIGWSmartBalanceConfig
 }
 
 /**
@@ -6898,6 +7080,10 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
    * 密钥id
    */
   SecretKeyId: string
+  /**
+   * 指定从 AKSK 或 CAM 成对凭证中返回哪一半。取值：AccessKey（AKSK 返回 AccessKeyId，CAM 返回 SecretId）、SecretKey（AKSK 返回 SecretAccessKey，CAM 返回 SecretKey）。不传则保持原行为，仅返回 AccessKeyId 或 SecretId。
+   */
+  SecretValueType?: string
 }
 
 /**
@@ -7048,6 +7234,14 @@ export interface CreateCloudNativeAPIGatewayConsumerGroupRequest {
    * <p>消费者组描述。最长 200 字符。</p>
    */
   Description?: string
+  /**
+   * <p>调用业务来源，可选 Legacy 或 CustomOrganization；省略或空串按 Legacy。Legacy 保持原行为，CustomOrganization 用于自定义组织架构。该字段不替代鉴权，不改变资源归属，不覆盖 RequestSource。来源保存在操作记录请求内容中。</p>
+   */
+  OperationSource?: string
+  /**
+   * <p>仅 CustomOrganization 使用。1–32 个当前网关自定义父部门 UUID，完整保留多父关系；省略时挂自定义根，空数组非法。不得使用同步部门或未归属组。Legacy 不使用此字段。</p>
+   */
+  ParentConsumerGroupIds?: Array<string>
 }
 
 /**
@@ -7325,6 +7519,24 @@ export interface DeleteAutoScalerResourceStrategyRequest {
 }
 
 /**
+ * DescribePublicNetwork请求参数结构体
+ */
+export interface DescribePublicNetworkRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 网关分组ID
+   */
+  GroupId: string
+  /**
+   * 网络ID
+   */
+  NetworkId: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayConsumerGroup请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayConsumerGroupRequest {
@@ -7413,9 +7625,13 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
    */
   UseToBind?: boolean
   /**
-   * <p>消费者ID</p>
+   * <p>消费者 ID（以 consumer- 开头）。</p>
    */
   ConsumerId?: string
+  /**
+   * <p>密钥ID</p>
+   */
+  SecretKeyId?: string
 }
 
 /**
@@ -7461,13 +7677,13 @@ export interface CreateGovernanceLaneGroupsResponse {
  */
 export interface CNAPIGwCreateCommonResult {
   /**
-   * 是否成功
-   */
-  Success?: boolean
-  /**
    * 对应的id 值
    */
   ID?: string
+  /**
+   * 是否成功
+   */
+  Success?: boolean
 }
 
 /**
@@ -7495,11 +7711,11 @@ export interface CloudNativeAPIGatewayLLMModelServiceRoute {
    */
   LatencyPriorityConfig?: AIGWLatencyPriorityConfig
   /**
-   * <p>缓存感知路由配置（前缀缓存）</p>
+   * <p>前缀缓存感知路由</p>
    */
   CacheAwareRouteConfig?: AIGWCacheAwareRouteConfig
   /**
-   * <p>token 长度路由</p>
+   * <p>按请求 Token 长度选择模型服务的路由配置。</p>
    */
   TokenLengthRouteConfig?: AIGWTokenLengthRoute
 }
@@ -7683,6 +7899,16 @@ export interface DeleteGovernanceNamespacesRequest {
    * 命名空间信息。
    */
   GovernanceNamespaces: Array<GovernanceNamespaceInput>
+}
+
+/**
+ * 智能负载均衡配置，仅服务来源（ServiceSource，SourceId 非空）场景生效。
+ */
+export interface AIGWSmartBalanceConfig {
+  /**
+   * <p>负载均衡类型</p><p>枚举值：</p><ul><li>LeastRequests： 最少运行请求</li><li>LeastQueued： 最少排队请求</li><li>LeastTTFT： 最少TTFT</li><li>LeastTPOT： 最少TPOT</li></ul>
+   */
+  Algorithm?: string
 }
 
 /**
@@ -8784,6 +9010,16 @@ export interface AIGWQueryParamCredentialConfig {
 }
 
 /**
+ * 模型API请求优先级调度
+ */
+export interface AIGWPriorityScheduleConfig {
+  /**
+   * <p>是否开启优先级调度</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  Enabled?: boolean
+}
+
+/**
  * DescribeCloudNativeAPIGatewayCORS返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayCORSResponse {
@@ -8836,6 +9072,14 @@ export interface AIGWLatencyPriorityConfig {
    * <p>路由策略</p><p>枚举值：</p><ul><li>FastMode： 快速模式</li><li>BalanceMode： 均衡模式</li></ul>
    */
   RouteMode?: string
+  /**
+   * <p>网络延迟探测间隔</p><p>单位：毫秒</p>
+   */
+  ProbeIntervalMs?: number
+  /**
+   * <p>网络延迟探测超时时间</p><p>单位：毫秒</p>
+   */
+  ProbeTimeoutMs?: number
 }
 
 /**
@@ -9052,15 +9296,15 @@ export interface DescribePublicAddressConfigResponse {
  */
 export interface AIGWSensitiveWordRoute {
   /**
-   * <p>是否开启敏感词路由</p>
+   * <p>是否开启</p>
    */
   Enabled?: boolean
   /**
-   * <p>目标模型服务列表</p>
+   * <p>命中敏感词后的候选模型服务 ID 列表。Enabled=true 时必填，成员不得为空或重复；数量受网关模型服务绑定配额限制。</p>
    */
   ModelServiceRefs?: Array<string>
   /**
-   * <p>目标模型服务名，查询的时候会填充</p>
+   * <p>与 ModelServiceRefs 一一对应的模型服务名称列表，仅由查询接口返回；不作为请求路由配置。</p>
    */
   ModelServiceNames?: Array<string>
   /**
@@ -9072,9 +9316,13 @@ export interface AIGWSensitiveWordRoute {
    */
   WeightedConfig?: Array<CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy>
   /**
-   * <p>模型名称路由权重</p>
+   * <p>按请求模型名称匹配目标模型服务的路由配置，在 SelectedTypes=[ModelName] 时使用。</p>
    */
   ModelNameConfig?: Array<CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy>
+  /**
+   * <p>敏感词路由单模型直选时的标准模型名称。仅在 Enabled=true、SelectedTypes 为空且 ModelServiceRefs 只有一个模型服务时可设置；使用 Weighted 或 ModelName 策略时应在相应配置条目中填写。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -9607,17 +9855,17 @@ export interface DeleteConfigFileGroupResponse {
 }
 
 /**
- * kong服务路由列表
+ * AI 网关模型服务单次请求输入字符长度限制。只拒绝超限输入，不做截断。计量为整个请求 JSON 的 Unicode 字符数。
  */
-export interface KongServiceRouteList {
+export interface AIGWLengthLimitConfig {
   /**
-   * 无
+   * <p>是否开启输入限制</p>
    */
-  RouteList?: Array<KongRoutePreview>
+  EnableInputLimit?: boolean
   /**
-   * 总数
+   * <p>最大输入字符数</p>
    */
-  TotalCount?: number
+  MaxInputChars?: number
 }
 
 /**
@@ -9678,6 +9926,10 @@ export interface DeleteCloudNativeAPIGatewayConsumerGroupRequest {
    * 消费者组ID
    */
   ConsumerGroupId: string
+  /**
+   * <p>调用业务来源，可选 Legacy 或 CustomOrganization；省略或空串按 Legacy。Legacy 保持原行为，CustomOrganization 用于自定义组织架构。该字段不替代鉴权，不改变资源归属，不覆盖 RequestSource。来源保存在操作记录请求内容中。</p>
+   */
+  OperationSource?: string
 }
 
 /**
@@ -10045,6 +10297,14 @@ export interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
    * <p>负载均衡配置</p>
    */
   LoadBalanceConfig?: AIGWLoadBalanceConfig
+  /**
+   * <p>内容长度限制配置</p>
+   */
+  LengthLimitConfig?: AIGWLengthLimitConfig
+  /**
+   * <p>智能负载均衡配置</p>
+   */
+  SmartBalance?: AIGWSmartBalanceConfig
 }
 
 /**
@@ -10667,6 +10927,22 @@ export interface ModifyGovernanceNamespacesResponse {
 }
 
 /**
+ * 新建消费者时为消费者自动绑定API密钥时自动生成密钥的参数体。仅当 SecretBindType="AutoGenerate" 时必填，其他分支禁止携带，否则返回 InvalidParameterValue.CreateError。
+ */
+export interface AutoSecretKey {
+  /**
+   * <p>密钥名称，2-60 字符。</p><p>字符集与「密钥管理-新建密钥」一致（中英文、数字、下划线、短横线），禁止 -share 后缀，同网关内不可重名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * <p>密钥描述。长度 ≤ 200，可为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+}
+
+/**
  * CreateConfigFile返回参数结构体
  */
 export interface CreateConfigFileResponse {
@@ -10711,17 +10987,37 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
    */
   GatewayId: string
   /**
-   * <p>每页条数，范围 [1, 100]，默认 10。</p>
+   * <p>每页数量，最大20个</p>
    */
   Limit: number
   /**
-   * <p>起始位置，从 0 开始。</p>
+   * <p>起始值</p>
    */
   Offset: number
   /**
-   * <p>密钥归属资源类型。UseToBind=true 时必填。</p><p>枚举值：</p><ul><li>Consumer：消费者</li><li>ModelService：模型服务</li></ul>
+   * <p>资源类型：</p><ul><li>Consumer: 消费者</li><li>LLM: 模型服务</li></ul>
    */
   ResourceType?: string
+  /**
+   * <p>资源id</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>是否展示可以用于绑定信息,true/false</p>
+   */
+  UseToBind?: boolean
+  /**
+   * <p>Key 可选：</p><ul><li>SecretType:  密钥类型 ApiKey</li><li>GenerateType:  生成方式，例如 KMS</li><li>Status: 状态 Enable/Disable</li></ul>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>检索关键字</p>
+   */
+  Keyword?: string
+  /**
+   * <p>可选 Boolean，默认 false。仅传 true 且返回记录 ResourceType=Consumer 时，额外返回 CredentialGenerateType、CreationSource、BatchId；省略或 false 时不返回这三个字段，原字段和返回结构保持不变。此参数只控制展示字段，不控制 Filters 是否生效。</p>
+   */
+  IncludeCreationInfo?: boolean
 }
 
 /**
@@ -11164,7 +11460,7 @@ export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
  */
 export interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
   /**
-   * 灰度规则列表
+   * <p>灰度规则列表</p>
    */
   Result?: CloudAPIGatewayCanaryRuleList
   /**
@@ -11357,6 +11653,10 @@ export interface CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy {
    * <p>重写模型</p>
    */
   RewriteModelName?: string
+  /**
+   * <p>当前模型名称匹配路由条目中 ModelServiceId 对应的标准模型名称；为空表示未配置。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -11569,6 +11869,10 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
    * <p>密钥id</p>
    */
   SecretKeyId: string
+  /**
+   * <p>可选 Boolean，默认 false。仅传 true 且返回记录 ResourceType=Consumer 时，额外返回 CredentialGenerateType、CreationSource、BatchId；省略或 false 时不返回这三个字段，原字段和返回结构保持不变。此参数只控制展示字段，不控制 Filters 是否生效。</p>
+   */
+  IncludeCreationInfo?: boolean
 }
 
 /**
@@ -12299,25 +12603,37 @@ export interface DescribeConfigFileReleaseHistoriesResponse {
  */
 export interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
   /**
-   * 网关ID
+   * <p>网关ID</p>
    */
   GatewayId: string
   /**
-   * 服务 ID
+   * <p>服务 ID</p>
    */
   ServiceId: string
   /**
-   * 灰度规则类别 Standard｜Lane
+   * <p>灰度规则类别 Standard｜Lane</p>
    */
   RuleType?: string
   /**
-   * 列表数量
+   * <p>列表数量</p>
    */
   Limit?: number
   /**
-   * 列表offset
+   * <p>列表offset</p>
    */
   Offset?: number
+  /**
+   * <p>排序参数</p><p>枚举值：</p><ul><li>Priority： 优先级</li></ul>
+   */
+  OrderField?: string
+  /**
+   * <p>排序方式</p><p>枚举值：</p><ul><li>DESC： 降序</li><li>ASC： 升序</li></ul>
+   */
+  OrderType?: string
+  /**
+   * <p>过滤条件，多个过滤条件之间是与的关系，支持 Header,Query,Body,Cookie,System,Method,Path,ServiceID,ServiceName</p>
+   */
+  Filters?: Array<ListFilter>
 }
 
 /**
@@ -12419,53 +12735,65 @@ export interface ModifyCloudNativeAPIGatewayLLMModelAPIRequest {
    */
   ModelAPIId: string
   /**
-   * <p>修改模型 API 名称</p>
+   * <p>模型 API 名称，最长 60 字符。</p>
    */
   Name?: string
   /**
-   * <p>为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。</p>
+   * <p>统一前缀路径（可选）。例如 /v1/openai。</p>
    */
   BasePath?: string
   /**
-   * <p>模型 API 的相关描述。</p>
+   * <p>模型 API 描述。最长 200 字符。</p>
    */
   Description?: string
   /**
-   * <p>关联的模型服务列表（支持填多个模型服务）</p>
+   * <p>关联的模型服务 ID 列表，长度 1-10。</p>
    */
   ListModelServiceId?: Array<string>
   /**
-   * <p>模型服务路由策略（是指如何路由到模型服务）</p>
+   * <p>多模型服务路由策略。ListModelServiceId 多于 1 项时必填。</p>
    */
   ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute
   /**
-   * <p>headers 路由匹配</p>
+   * <p>Header 路由匹配规则。当前仅支持 Operator=exact。</p>
    */
   MatchHeaders?: Array<AIGWKVMatch>
   /**
-   * <p>跨服务 fallback</p>
+   * <p>按请求体顶层 model 字段匹配模型 API 的全量最终态配置。要保留现值必须提交完整对象；省略或 null 表示清空。</p>
+   */
+  ModelNameRoute?: AIGWModelNameRoute
+  /**
+   * <p>是否启用跨服务 Fallback。</p>
    */
   EnableCrossServiceFallback?: boolean
   /**
-   * <p>跨服务 fallback 配置</p>
+   * <p>跨服务 Fallback 配置。EnableCrossServiceFallback=true 时必填。</p>
    */
   CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig
   /**
-   * <p>标签</p>
+   * <p>标签过滤策略。需要网关版本 ≥ 3.9.4。</p>
    */
   TagFilter?: AIGWTagFilter
   /**
-   * <p>模型 API 日志配置</p>
+   * <p>日志输出配置。需要网关版本 ≥ 3.9.4。</p>
    */
   LogConfig?: AIGWLogConfig
   /**
-   * <p>Rerank场景最大文档数配置</p>
+   * <p>AI 网关Rerank场景最大文档数限制配置</p>
    */
   MaxDocumentsConfig?: AIGWRerankMaxDocumentsConfig
   /**
    * <p>敏感词路由配置</p>
    */
   SensitiveWordRoute?: AIGWSensitiveWordRoute
+  /**
+   * <p>请求优先级配置</p>
+   */
+  PriorityScheduleConfig?: AIGWPriorityScheduleConfig
+  /**
+   * <p>单模型 API 的顶层标准模型名称。不传保留原值，传空字符串清空，传非空字符串设置新值；仅单模型场景可设置。已配置顶层标准模型名时，需先清空该字段再切换多模型路由。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
+   */
+  StandardModelName?: string
 }
 
 /**
@@ -12530,14 +12858,4 @@ export interface CreateCloudNativeAPIGatewaySecretKeyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeAllConfigFileTemplates请求参数结构体
- */
-export interface DescribeAllConfigFileTemplatesRequest {
-  /**
-   * TSE实例id
-   */
-  InstanceId: string
 }

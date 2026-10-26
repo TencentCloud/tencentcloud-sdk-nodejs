@@ -6549,7 +6549,7 @@ export interface ClientIpPlaySumInfo {
  */
 export interface CreateLiveSnapshotTemplateResponse {
   /**
-   * 模板Id。
+   * <p>模板Id。</p>
    */
   TemplateId?: number
   /**
@@ -10318,57 +10318,63 @@ export interface DescribeLiveDomainsRequest {
  */
 export interface SnapshotTemplateInfo {
   /**
-   * 模板 ID。
+   * <p>模板 ID。</p>
    */
   TemplateId?: number
   /**
-   * 模板名称。
+   * <p>模板名称。</p>
    */
   TemplateName?: string
   /**
-   * 截图时间间隔，5-300秒。
+   * <p>截图时间间隔，5-300秒。</p>
    */
   SnapshotInterval?: number
   /**
-   * 截图宽度，范围：0-3000。 
-0：原始宽度并适配原始比例。
+   * <p>截图宽度，范围：0-3000。<br>0：原始宽度并适配原始比例。</p>
    */
   Width?: number
   /**
-   * 截图高度，范围：0-2000。
-0：原始高度并适配原始比例。
+   * <p>截图高度，范围：0-2000。<br>0：原始高度并适配原始比例。</p>
    */
   Height?: number
   /**
-   * 是否开启鉴黄，0：不开启，1：开启。
+   * <p>是否开启鉴黄，0：不开启，1：开启。</p>
    */
   PornFlag?: number
   /**
-   * Cos 应用 ID。
+   * <p>Cos 应用 ID。</p>
    */
   CosAppId?: number
   /**
-   * Cos Bucket名称。
+   * <p>Cos Bucket名称。</p>
    */
   CosBucket?: string
   /**
-   * Cos 地域。
+   * <p>Cos 地域。</p>
    */
   CosRegion?: string
   /**
-   * 模板描述。
+   * <p>模板描述。</p>
    */
   Description?: string
   /**
-   * Cos Bucket文件夹前缀。
+   * <p>Cos Bucket文件夹前缀。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CosPrefix?: string
   /**
-   * Cos 文件名称。
+   * <p>Cos 文件名称。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CosFileName?: string
+  /**
+   * <p>第三方存储时账号的SecretId</p>
+   */
+  CosSecretId?: string
+  /**
+   * <p>第三方存储时，账号的SecretKey</p><p>当查询时，该值返回为<code>******</code></p>
+   */
+  CosSecretKey?: string
 }
 
 /**
@@ -12829,60 +12835,51 @@ export interface DeleteLiveSmartEraseRuleResponse {
  */
 export interface ModifyLiveSnapshotTemplateRequest {
   /**
-   * 模板 ID。
+   * <p>模板 ID。</p>
    */
   TemplateId: number
   /**
-   * Cos 应用 ID。
-   **注：此参数现在须必选。**
+   * <p>Cos 应用 ID。<br><strong>注：此参数现在须必选。</strong></p>
    */
   CosAppId: number
   /**
-   * Cos Bucket名称。
-注：CosBucket参数值不能包含-[appid] 部分。
-**注：此参数现在须必选。**
+   * <p>Cos Bucket名称。<br>注：CosBucket参数值不能包含-[appid] 部分。<br><strong>注：此参数现在须必选。</strong></p>
    */
   CosBucket: string
   /**
-   * Cos 地域。
-   **注：此参数现在须必选。**
+   * <p>Cos 地域。<br><strong>注：此参数现在须必选。</strong></p>
    */
   CosRegion: string
   /**
-   * 模板名称。
-长度上限：255字节。
+   * <p>模板名称。<br>长度上限：255字节。</p>
    */
   TemplateName?: string
   /**
-   * 描述信息。
-长度上限：1024字节。
+   * <p>描述信息。<br>长度上限：1024字节。</p>
    */
   Description?: string
   /**
-   * 截图间隔，单位s，默认10s。
-范围： 5s ~ 300s。
+   * <p>截图间隔，单位s，默认10s。<br>范围： 5s ~ 300s。</p>
    */
   SnapshotInterval?: number
   /**
-   * 截图宽度。默认：0（原始宽）。
+   * <p>截图宽度。默认：0（原始宽）。</p>
    */
   Width?: number
   /**
-   * 截图高度。默认：0（原始高）。
+   * <p>截图高度。默认：0（原始高）。</p>
    */
   Height?: number
   /**
-   * 是否开启鉴黄，默认 0 。
-0：不开启。
-1：开启。
+   * <p>是否开启鉴黄，默认 0 。<br>0：不开启。<br>1：开启。</p>
    */
   PornFlag?: number
   /**
-   * Cos Bucket文件夹前缀。
+   * <p>Cos Bucket文件夹前缀。</p>
    */
   CosPrefix?: string
   /**
-   * Cos 文件名称。
+   * <p>Cos 文件名称。</p>
    */
   CosFileName?: string
 }
@@ -14672,61 +14669,47 @@ export interface BackupStreamDetailData {
  */
 export interface CreateLiveSnapshotTemplateRequest {
   /**
-   * 模板名称。
-长度上限：255字节。
-仅支持中文、英文、数字、_、-。
+   * <p>模板名称。<br>长度上限：255字节。<br>仅支持中文、英文、数字、_、-。</p>
    */
   TemplateName: string
   /**
-   * Cos 应用 ID。
+   * <p>Cos 应用 ID。</p>
    */
   CosAppId: number
   /**
-   * Cos Bucket名称。
-注：CosBucket参数值不能包含-[appid] 部分。
+   * <p>Cos Bucket名称。<br>注：CosBucket参数值不能包含-[appid] 部分。</p>
    */
   CosBucket: string
   /**
-   * Cos地区。
+   * <p>Cos地区。</p>
    */
   CosRegion: string
   /**
-   * 描述信息。
-长度上限：1024字节。
-仅支持中文、英文、数字、_、-。
+   * <p>描述信息。<br>长度上限：1024字节。<br>仅支持中文、英文、数字、_、-。</p>
    */
   Description?: string
   /**
-   * 截图间隔，单位s，默认10s。
-范围： 2s ~ 300s。
+   * <p>截图间隔，单位s，默认10s。<br>范围： 2s ~ 300s。</p>
    */
   SnapshotInterval?: number
   /**
-   * 截图宽度。默认：0（原始宽）。
-范围：0-3000 。
+   * <p>截图宽度。默认：0（原始宽）。<br>范围：0-3000 。</p>
    */
   Width?: number
   /**
-   * 截图高度。默认：0（原始高）。
-范围：0-2000 。
+   * <p>截图高度。默认：0（原始高）。<br>范围：0-2000 。</p>
    */
   Height?: number
   /**
-   * 是否开启鉴黄，0：不开启，1：开启。默认：0。
+   * <p>是否开启鉴黄，0：不开启，1：开启。默认：0。</p>
    */
   PornFlag?: number
   /**
-   * Cos Bucket文件夹前缀。
-如不传，实际按默认值
-/{Year}-{Month}-{Day}
-生效
+   * <p>Cos Bucket文件夹前缀。<br>如不传，实际按默认值<br>/{Year}-{Month}-{Day}<br>生效</p>
    */
   CosPrefix?: string
   /**
-   * Cos 文件名称。
-如不传，实际按默认值
-{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}
-生效
+   * <p>Cos 文件名称。<br>如不传，实际按默认值<br>{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}<br>生效</p>
    */
   CosFileName?: string
 }

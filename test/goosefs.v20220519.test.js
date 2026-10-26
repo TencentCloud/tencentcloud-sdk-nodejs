@@ -18,6 +18,16 @@ const client = new tencentcloud.goosefs.v20220519.Client({
 })
 describe("goosefs.v20220519.test.js", function () {
 
+it("goosefs.v20220519.DescribeDataRepositoryTasks", async function () {
+    try {
+       const data = await client.DescribeDataRepositoryTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.MountMultipleStorageFileSystem", async function () {
     try {
        const data = await client.MountMultipleStorageFileSystem({})

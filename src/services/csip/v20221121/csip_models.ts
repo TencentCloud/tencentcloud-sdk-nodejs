@@ -3960,6 +3960,10 @@ export interface ModifyVulScanPeriodicRequest {
    * <p>标签ID</p>
    */
   TagIds?: Array<number | bigint>
+  /**
+   * <p>优先使用腾讯云软件源</p>
+   */
+  PreferCloudSource?: boolean
 }
 
 /**

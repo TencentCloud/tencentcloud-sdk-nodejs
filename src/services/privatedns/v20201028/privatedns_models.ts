@@ -399,6 +399,16 @@ export interface CreateForwardRuleResponse {
 }
 
 /**
+ * PrivateDNS出站终端节点转发IP
+ */
+export interface EndpointService {
+  /**
+   * <p>子网剩余IP数</p>
+   */
+  SubnetLessIp?: number
+}
+
+/**
  * ModifyPrivateZoneVpc请求参数结构体
  */
 export interface ModifyPrivateZoneVpcRequest {
@@ -1114,19 +1124,63 @@ export interface DescribePrivateZoneListRequest {
 }
 
 /**
+ * 出站终端节点
+ */
+export interface OutboundEndpoint {
+  /**
+   * 出站终端节点ID
+   */
+  EndpointId?: string
+  /**
+   * 出站终端节点名
+   */
+  EndpointName?: string
+  /**
+   * 出站终端节点所属地域
+   */
+  Region?: string
+  /**
+   * tag标签
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * 出站终端节点信息
+仅在转发架构为 V2R的情况下返回
+   */
+  EndpointServiceSet?: Array<EndpointService>
+  /**
+   * 转发链接架构
+V2V: privatelink
+V2R: jnsgw
+   */
+  ForwardLinkArch?: string
+  /**
+   * 终端节点服务ID
+仅在转发架构为 V2V的情况下返回
+
+   */
+  EndPointServiceId?: string
+  /**
+   * 终端节点VIP列表
+仅在转发架构为 V2V的情况下返回
+   */
+  EndPointVipSet?: Array<string>
+}
+
+/**
  * DescribeExtendEndpointList请求参数结构体
  */
 export interface DescribeExtendEndpointListRequest {
   /**
-   * 分页偏移量，从0开始
+   * <p>分页偏移量，从0开始</p>
    */
   Offset?: number
   /**
-   * 分页限制数目， 最大100，默认20
+   * <p>分页限制数目， 最大100，默认20</p>
    */
   Limit?: number
   /**
-   * 过滤参数，支持EndpointName,EndpointId
+   * <p>过滤参数，支持EndpointName,EndpointId</p>
    */
   Filters?: Array<Filter>
 }
@@ -1799,6 +1853,14 @@ export interface DescribeForwardRuleListResponse {
  * DescribeExtendEndpointList返回参数结构体
  */
 export interface DescribeExtendEndpointListResponse {
+  /**
+   * <p>终端节点总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>终端节点列表</p>
+   */
+  OutboundEndpointSet?: Array<OutboundEndpoint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

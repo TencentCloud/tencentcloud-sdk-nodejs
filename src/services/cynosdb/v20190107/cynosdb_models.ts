@@ -485,7 +485,7 @@ export interface WillDeleteItem {
  */
 export interface TransferClusterZoneResponse {
   /**
-   * 异步任务id
+   * <p>异步任务id</p>
    */
   TaskId?: number
   /**
@@ -756,19 +756,19 @@ export interface DescribeLibraDBClustersResponse {
  */
 export interface InquirePriceMultiSpecRequest {
   /**
-   * 可用区,每个地域提供最佳实践
+   * <p>可用区,每个地域提供最佳实践</p>
    */
   Zone: string
   /**
-   * 实例购买类型，可选值为：PREPAID, POSTPAID, SERVERLESS
+   * <p>实例购买类型，可选值为：PREPAID, POSTPAID, SERVERLESS</p>
    */
   InstancePayMode: string
   /**
-   * 存储购买类型，可选值为：PREPAID, POSTPAID
+   * <p>存储购买类型，可选值为：PREPAID, POSTPAID</p>
    */
   StoragePayMode: string
   /**
-   * 商品规格
+   * <p>商品规格</p>
    */
   GoodsSpecs: Array<GoodsSpec>
 }
@@ -3949,7 +3949,7 @@ export interface InstanceCLSDeliveryInfo {
  */
 export interface InquirePriceMultiSpecResponse {
   /**
-   * 商品价格
+   * <p>商品价格</p>
    */
   GoodsPrice?: Array<GoodsPrice>
   /**
@@ -5234,6 +5234,20 @@ export interface AddClusterSlaveZoneResponse {
    * <p>异步FlowId</p>
    */
   FlowId?: number
+  /**
+   * <p>订单ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDealIds?: Array<string>
+  /**
+   * <p>订单名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealNames?: Array<string>
+  /**
+   * <p>交易ID</p>
+   */
+  TranId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16428,27 +16442,27 @@ expireTime-过期时间，packageUsedSpec-使用容量，packageTotalSpec-总存
  */
 export interface TransferClusterZoneRequest {
   /**
-   * 源集群Id
+   * <p>源集群Id</p>
    */
   ClusterId: string
   /**
-   * 目标可用区
+   * <p>目标可用区</p>
    */
   DstZone: string
   /**
-   * 跨可用区迁移主从数据延迟校验阈值，单位毫秒(ms)
+   * <p>跨可用区迁移主从数据延迟校验阈值，单位毫秒(ms)</p>
    */
   MaxLag: number
   /**
-   * Immediate:立即执行，InMaintain:时间窗口执行
+   * <p>Immediate:立即执行，InMaintain:时间窗口执行</p>
    */
   TransferType: string
   /**
-   * 多可用区备区
+   * <p>多可用区备区</p>
    */
   DstSlaveZone?: string
   /**
-   * proxy迁移的目标可用区信息
+   * <p>proxy迁移的目标可用区信息</p>
    */
   ProxyZones?: Array<ProxyZone>
 }
