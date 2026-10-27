@@ -828,7 +828,7 @@ export interface DescribeGlobalAcceleratorAccessLogRequest {
    */
   Offset?: number
   /**
-   * <p>返回数量。</p><p>取值范围：[0, 200]</p>
+   * <p>返回数量。</p><p>取值范围：[1, 200]</p>
    */
   Limit?: number
 }
@@ -986,21 +986,21 @@ export interface ModifyGlobalAcceleratorAclPolicyResponse {
 }
 
 /**
- * ModifyAccessLogStatus请求参数结构体
+ * CreateGlobalAcceleratorAclRule返回参数结构体
  */
-export interface ModifyAccessLogStatusRequest {
+export interface CreateGlobalAcceleratorAclRuleResponse {
   /**
-   * <p>日志唯一Id</p>
+   * 异步任务ID。
    */
-  LogPushTaskId: string
+  TaskId?: string
   /**
-   * <p>状态（启动START， 停止STOP）</p><p>枚举值：</p><ul><li>START： 启动</li><li>STOP： 停止</li></ul>
+   * ACL规则ID。
    */
-  Status: string
+  GlobalAcceleratorAclRuleIds?: Array<string>
   /**
-   * <p>全球加速实例ID。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GlobalAcceleratorId: string
+  RequestId?: string
 }
 
 /**
@@ -1052,7 +1052,7 @@ export interface DescribeForwardingRuleRequest {
    */
   Offset?: number
   /**
-   * <p>返回数量，默认为20，最大值为100。</p>
+   * <p>返回数量，默认为20，最大值为200。</p>
    */
   Limit?: number
   /**
@@ -1347,24 +1347,6 @@ export interface DeleteGlobalAcceleratorResponse {
    * 任务ID。
    */
   TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateGlobalAcceleratorAclRule返回参数结构体
- */
-export interface CreateGlobalAcceleratorAclRuleResponse {
-  /**
-   * 异步任务ID。
-   */
-  TaskId?: string
-  /**
-   * ACL规则ID。
-   */
-  GlobalAcceleratorAclRuleIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1988,6 +1970,28 @@ export interface DescribeTaskResultRequest {
 }
 
 /**
+ * 修改加速地域信息
+ */
+export interface ModifyAccelerateAreasInfo {
+  /**
+   * <p>加速地域</p>
+   */
+  AccelerateRegion: string
+  /**
+   * <p>带宽</p><p>单位：Mbps</p>
+   */
+  Bandwidth?: number
+  /**
+   * <p>公网质量类型</p><p>枚举值：</p><ul><li>BGP： BGP</li><li>QUALITY_BGP： 精品BGP</li><li>STATIC_IP： 三网</li></ul>
+   */
+  IspType?: string
+  /**
+   * <p>IP 地址协议</p><p>枚举值：</p><ul><li>IPv4： IPv4</li></ul>
+   */
+  IpVersion?: string
+}
+
+/**
  * ModifyGlobalAccelerator请求参数结构体
  */
 export interface ModifyGlobalAcceleratorRequest {
@@ -2241,6 +2245,24 @@ export interface ListenerSet {
 }
 
 /**
+ * ModifyAccessLogStatus请求参数结构体
+ */
+export interface ModifyAccessLogStatusRequest {
+  /**
+   * <p>日志唯一Id</p>
+   */
+  LogPushTaskId: string
+  /**
+   * <p>状态（启动START， 停止STOP）</p><p>枚举值：</p><ul><li>START： 启动</li><li>STOP： 停止</li></ul>
+   */
+  Status: string
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+}
+
+/**
  * DescribeGlobalAcceleratorAclRules返回参数结构体
  */
 export interface DescribeGlobalAcceleratorAclRulesResponse {
@@ -2347,7 +2369,7 @@ export interface CreateAccelerateAreasRequest {
   /**
    * <p>加速地域信息。一次最多创建10组加速地域。</p>
    */
-  AcceleratorAreas: Array<AcceleratorAreas>
+  AcceleratorAreas: Array<CreateAcceleratorAreasInfo>
 }
 
 /**
@@ -2386,6 +2408,28 @@ export interface ModifyGlobalAcceleratorAccessLogResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建加速地域信息
+ */
+export interface CreateAcceleratorAreasInfo {
+  /**
+   * <p>加速地域</p>
+   */
+  AccelerateRegion: string
+  /**
+   * <p>带宽</p><p>单位：Mbps</p>
+   */
+  Bandwidth: number
+  /**
+   * <p>公网质量类型</p><p>枚举值：</p><ul><li>BGP： BGP</li><li>QUALITY_BGP： 精品BGP</li><li>STATIC_IP： 三网</li></ul><p>默认值：BGP</p>
+   */
+  IspType?: string
+  /**
+   * <p>IP 地址协议</p><p>枚举值：</p><ul><li>IPv4： IPv4</li></ul><p>默认值：IPv4</p>
+   */
+  IpVersion?: string
 }
 
 /**
@@ -2463,7 +2507,7 @@ export interface ModifyAccelerateAreasRequest {
   /**
    * <p>加速地域信息。</p><p>入参限制：数组长度不能超过10。</p>
    */
-  AcceleratorAreas: Array<AcceleratorAreas>
+  AcceleratorAreas: Array<ModifyAccelerateAreasInfo>
 }
 
 /**
@@ -2523,7 +2567,7 @@ export interface DescribeForwardingPolicyRequest {
    */
   Offset?: number
   /**
-   * <p>返回数量，默认为20，最大值为100。</p>
+   * <p>返回数量，默认为20，最大值为200。</p>
    */
   Limit?: number
   /**

@@ -16,6 +16,24 @@
  */
 
 /**
+ * DescribeBannerAssetData请求参数结构体
+ */
+export interface DescribeBannerAssetDataRequest {
+  /**
+   * <p>漏洞情报ID</p>
+   */
+  VulId: string
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+}
+
+/**
  * DescribeFakeWechatOfficials返回参数结构体
  */
 export interface DescribeFakeWechatOfficialsResponse {
@@ -870,6 +888,20 @@ export interface DescribeDomainsResponse {
 }
 
 /**
+ * CreateSubDomain返回参数结构体
+ */
+export interface CreateSubDomainResponse {
+  /**
+   * <p>Id</p>
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 暗网详情
  */
 export interface DisplayDarkWeb {
@@ -913,6 +945,16 @@ export interface ModifySeedStatusResponse {
  * DeleteEnterprises返回参数结构体
  */
 export interface DeleteEnterprisesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCheck返回参数结构体
+ */
+export interface CreateCheckResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -976,13 +1018,17 @@ export interface DescribePortsResponse {
 }
 
 /**
- * DeleteWechatApplets请求参数结构体
+ * CreateSuspiciousAsset返回参数结构体
  */
-export interface DeleteWechatAppletsRequest {
+export interface CreateSuspiciousAssetResponse {
   /**
-   * ID列表
+   * Id
    */
-  Ids: Array<number | bigint>
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1527,13 +1573,35 @@ export interface DescribeVulsResponse {
 }
 
 /**
- * CreateSuspiciousAsset返回参数结构体
+ * DescribePocAssetData返回参数结构体
  */
-export interface CreateSuspiciousAssetResponse {
+export interface DescribePocAssetDataResponse {
   /**
-   * Id
+   * <p>数组</p>
    */
-  Id?: number
+  List?: Array<IntelligenceResult>
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGithubs返回参数结构体
+ */
+export interface DescribeGithubsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 数组
+   */
+  List?: Array<DisplayGithub>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1876,9 +1944,27 @@ export interface DescribeEnterprisesRequest {
 }
 
 /**
- * DescribeLeakageCodes请求参数结构体
+ * DescribeIntelligences请求参数结构体
  */
-export interface DescribeLeakageCodesRequest {
+export interface DescribeIntelligencesRequest {
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+}
+
+/**
+ * DescribeConfigs请求参数结构体
+ */
+export interface DescribeConfigsRequest {
   /**
    * 企业ID列表，可多选
    */
@@ -1935,6 +2021,44 @@ export interface DescribeLeakageCodesRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+  /**
+   * 支持按照响应长度排序，例如：+ContentLength或-ContentLength，+是递增，-是递减
+   */
+  OrderBy?: string
+}
+
+/**
+ * 漏洞情报扫描结果
+ */
+export interface IntelligenceResult {
+  /**
+   * <p>客户ID</p>
+   */
+  CustomerId?: number
+  /**
+   * <p>客户名称</p>
+   */
+  CustomerName?: string
+  /**
+   * <p>标题</p>
+   */
+  Title?: string
+  /**
+   * <p>指纹</p>
+   */
+  Banner?: string
+  /**
+   * <p>截图预览</p>
+   */
+  ScreenshotUrl?: string
+  /**
+   * <p>是否受影响</p>
+   */
+  IsAffected?: boolean
+  /**
+   * <p>网址</p>
+   */
+  Url?: string
 }
 
 /**
@@ -2199,6 +2323,25 @@ export interface CreateDomainResponse {
 }
 
 /**
+ * DescribeLeakageDatas返回参数结构体
+ */
+export interface DescribeLeakageDatasResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<DisplayLeakageData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteWechatOfficialAccounts请求参数结构体
  */
 export interface DeleteWechatOfficialAccountsRequest {
@@ -2377,9 +2520,9 @@ export interface DescribeGithubsRequest {
 }
 
 /**
- * DescribeConfigs请求参数结构体
+ * DescribeLeakageCodes请求参数结构体
  */
-export interface DescribeConfigsRequest {
+export interface DescribeLeakageCodesRequest {
   /**
    * 企业ID列表，可多选
    */
@@ -2436,10 +2579,6 @@ export interface DescribeConfigsRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
-  /**
-   * 支持按照响应长度排序，例如：+ContentLength或-ContentLength，+是递增，-是递减
-   */
-  OrderBy?: string
 }
 
 /**
@@ -2650,6 +2789,16 @@ export interface DisplayFakeApp {
    * 关停时间
    */
   ShutdownTime?: string
+}
+
+/**
+ * DescribeIntelligences返回参数结构体
+ */
+export interface DescribeIntelligencesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3385,6 +3534,20 @@ export interface IgnoreDataResponse {
 }
 
 /**
+ * CreateScan请求参数结构体
+ */
+export interface CreateScanRequest {
+  /**
+   * <p>漏洞情报ID</p>
+   */
+  VulId: string
+  /**
+   * <p>企业ID</p>
+   */
+  CustomerId?: number
+}
+
+/**
  * CreateWechatApplet返回参数结构体
  */
 export interface CreateWechatAppletResponse {
@@ -3684,24 +3847,6 @@ export interface DescribeLeakageEmailsRequest {
 }
 
 /**
- * DescribeGithubs返回参数结构体
- */
-export interface DescribeGithubsResponse {
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 数组
-   */
-  List?: Array<DisplayGithub>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateCustomer返回参数结构体
  */
 export interface CreateCustomerResponse {
@@ -3988,17 +4133,39 @@ export interface StopJobRecordResponse {
 }
 
 /**
- * CreateManage返回参数结构体
+ * DescribeJobRecords请求参数结构体
  */
-export interface CreateManageResponse {
+export interface DescribeJobRecordsRequest {
   /**
-   * Id
+   * 分页大小
    */
-  Id?: number
+  Limit?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分页偏移
    */
-  RequestId?: string
+  Offset?: number
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * 股权路径
+ */
+export interface Equity {
+  /**
+   * <p>企业ID</p>
+   */
+  EnterpriseUid?: string
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>持股比例</p>
+   */
+  ShareholdingRatio?: string
 }
 
 /**
@@ -4166,21 +4333,21 @@ export interface ModifySeedStatusRequest {
 }
 
 /**
- * 股权路径
+ * DescribePocAssetData请求参数结构体
  */
-export interface Equity {
+export interface DescribePocAssetDataRequest {
   /**
-   * <p>企业ID</p>
+   * <p>漏洞情报ID</p>
    */
-  EnterpriseUid?: string
+  VulId: string
   /**
-   * <p>名称</p>
+   * 分页大小
    */
-  Name?: string
+  Limit?: number
   /**
-   * <p>持股比例</p>
+   * 分页偏移
    */
-  ShareholdingRatio?: string
+  Offset?: number
 }
 
 /**
@@ -4448,6 +4615,24 @@ export interface DescribeVulsRequest {
 }
 
 /**
+ * DescribeBannerAssetData返回参数结构体
+ */
+export interface DescribeBannerAssetDataResponse {
+  /**
+   * <p>数组</p>
+   */
+  List?: Array<IntelligenceResult>
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateWechatOfficialAccount返回参数结构体
  */
 export interface CreateWechatOfficialAccountResponse {
@@ -4546,13 +4731,9 @@ export interface DisplayApiSec {
 }
 
 /**
- * CreateSubDomain返回参数结构体
+ * CreateScan返回参数结构体
  */
-export interface CreateSubDomainResponse {
-  /**
-   * <p>Id</p>
-   */
-  Id?: number
+export interface CreateScanResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4840,6 +5021,20 @@ export interface DisplayDomain {
 }
 
 /**
+ * CreateCheck请求参数结构体
+ */
+export interface CreateCheckRequest {
+  /**
+   * <p>漏洞情报ID</p>
+   */
+  VulId: string
+  /**
+   * <p>企业ID</p>
+   */
+  CustomerId?: number
+}
+
+/**
  * DescribeFakeMiniPrograms返回参数结构体
  */
 export interface DescribeFakeMiniProgramsResponse {
@@ -4913,22 +5108,13 @@ export interface DescribeWechatOfficialAccountsResponse {
 }
 
 /**
- * DescribeLeakageDatas返回参数结构体
+ * DeleteWechatApplets请求参数结构体
  */
-export interface DescribeLeakageDatasResponse {
+export interface DeleteWechatAppletsRequest {
   /**
-   * 总数
+   * ID列表
    */
-  Total?: number
-  /**
-   * 数组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  List?: Array<DisplayLeakageData>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -5226,21 +5412,17 @@ export interface DescribeApiSecsRequest {
 }
 
 /**
- * DescribeJobRecords请求参数结构体
+ * CreateManage返回参数结构体
  */
-export interface DescribeJobRecordsRequest {
+export interface CreateManageResponse {
   /**
-   * 分页大小
+   * Id
    */
-  Limit?: number
+  Id?: number
   /**
-   * 分页偏移
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-  /**
-   * 查询数组
-   */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**

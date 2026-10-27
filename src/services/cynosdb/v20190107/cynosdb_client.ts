@@ -253,6 +253,7 @@ import {
   StopCLSDeliveryResponse,
   CreateAuditLogFileResponse,
   PauseServerlessResponse,
+  CertDetail,
   DescribeInstanceDetailResponse,
   ProxyZoneStockInfo,
   GrantAccountPrivilegesResponse,

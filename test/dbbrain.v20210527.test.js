@@ -728,6 +728,16 @@ it("dbbrain.v20210527.DescribeProxyProcessStatistics", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeTopSpaceSchemasV2", async function () {
+    try {
+       const data = await client.DescribeTopSpaceSchemasV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeTopSpaceTablesV2", async function () {
     try {
        const data = await client.DescribeTopSpaceTablesV2({})

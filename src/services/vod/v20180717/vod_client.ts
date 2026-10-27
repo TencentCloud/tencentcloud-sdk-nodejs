@@ -63,6 +63,7 @@ import {
   ModifyDefaultStorageRegionRequest,
   ModifyEventConfigResponse,
   DeleteLLMComprehendTemplateRequest,
+  DNATask,
   AigcHunyuan3DOutputConfig,
   QualityInspectTaskOutput,
   QualityEnhanceTaskInput,
@@ -743,6 +744,7 @@ import {
   TrtcRecordInfo,
   AiTryOnConfig,
   DescribeReviewDetailsRequest,
+  SearchMediaBySemanticsAsync,
   ModifySubAppIdInfoResponse,
   AiReviewProhibitedAsrTaskInput,
   DeleteCLSTopicRequest,
@@ -887,6 +889,7 @@ import {
   InspectMediaQualityRequest,
   MPSSmartEraseTemplate,
   TransitionOperation,
+  DNATaskOutput,
   AiRecognitionTaskHeadTailResultInput,
   WatermarkConfigureInfo,
   AiAnalysisTaskFrameTagInput,
@@ -945,6 +948,7 @@ import {
   CreateCLSLogsetRequest,
   ExtractTraceWatermarkRequest,
   FaceRecognitionTask,
+  LLMComprehendDNA,
   DeleteVoiceRequest,
   DeleteAigcApiTokenResponse,
   ReviewAudioVideoTask,
@@ -3783,8 +3787,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用自然语言对媒体进行语义搜索。
-   */
+     * 使用自然语言对媒体进行语义搜索。
+仅支持文搜视频、文搜图、图搜图，图搜视频请使用SearchMediaBySemanticsAsync.
+     */
   async SearchMediaBySemantics(
     req: SearchMediaBySemanticsRequest,
     cb?: (error: string, rep: SearchMediaBySemanticsResponse) => void

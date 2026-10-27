@@ -1232,6 +1232,41 @@ export interface DeleteLLMComprehendTemplateRequest {
 }
 
 /**
+ * DNA查重估计任务信息。
+ */
+export interface DNATask {
+  /**
+   * <p>任务 ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>WAITING： 等待中</li><li>PROCESSING： 处理中</li><li>FINISH： 已完成</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>错误码，0 表示成功，其他值表示失败：</p><p>40000：输入参数不合法，请检查输入参数；<br>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；<br>70000：内部服务错误，建议重试。</p>
+   */
+  ErrCode?: number
+  /**
+   * <p>错误码，空字符串表示成功，其他值表示失败，取值请参考 <a href="https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">视频处理类错误码</a> 列表。</p>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>被检测的媒资 FileId。</p>
+   */
+  FileId?: string
+  /**
+   * <p>查重命中列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: Array<DNATaskOutput>
+}
+
+/**
  * AIGC 混元 3D 任务的输出媒体文件配置。
  */
 export interface AigcHunyuan3DOutputConfig {
@@ -5468,6 +5503,14 @@ export interface CreateKnowledgeBaseRequest {
    * <p>知识库描述。长度限制：最多256个字符。</p>
    */
   Description?: string
+  /**
+   * <p>知识库的索引类型</p><p>枚举值：</p><ul><li>Semantic： 语义索引</li><li>DNA： DNA 索引</li></ul><p>默认值：Semantic</p>
+   */
+  IndexType?: string
+  /**
+   * <p>允许入库的媒体类型</p><p>枚举值：</p><ul><li>Video： 视频</li><li>Image： 图片</li></ul><p>默认值：Video</p>
+   */
+  MediaType?: string
 }
 
 /**
@@ -7836,6 +7879,10 @@ export interface LLMComprehendTemplateItem {
    * <p>人脸识别解析配置</p>
    */
   FaceRecognition?: LLMComprehendFaceRecognition
+  /**
+   * <p>DNA解析配置</p>
+   */
+  DNA?: LLMComprehendDNA
   /**
    * <p>模板创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
@@ -13822,6 +13869,10 @@ export interface ModifyLLMComprehendTemplateRequest {
    * <p>人脸识别配置</p>
    */
   FaceRecognition?: LLMComprehendFaceRecognitionForUpdate
+  /**
+   * <p>DNA解析配置</p>
+   */
+  DNA?: LLMComprehendDNA
 }
 
 /**
@@ -17346,6 +17397,10 @@ export interface CreateLLMComprehendTemplateRequest {
    * <p>人脸识别配置</p>
    */
   FaceRecognition?: LLMComprehendFaceRecognition
+  /**
+   * <p>DNA解析配置</p>
+   */
+  DNA?: LLMComprehendDNA
 }
 
 /**
@@ -18778,6 +18833,41 @@ export interface DescribeReviewDetailsRequest {
 }
 
 /**
+ * 异步按语义搜索媒体任务信息
+ */
+export interface SearchMediaBySemanticsAsync {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li></p>
+   */
+  Status?: string
+  /**
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
+   */
+  ErrCode?: number
+  /**
+   * <p>扩展错误码。</p>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>本次查询文本（图片查询时为空）。</p>
+   */
+  QueryText?: string
+  /**
+   * <p>召回列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchResults?: Array<SemanticsSearchResult>
+}
+
+/**
  * ModifySubAppIdInfo返回参数结构体
  */
 export interface ModifySubAppIdInfoResponse {
@@ -19760,6 +19850,14 @@ export interface KnowledgeBaseInfo {
    * <p>知识库描述。</p>
    */
   Description?: string
+  /**
+   * <p>知识库的索引类型</p><p>枚举值：</p><ul><li>Semantic： 语义索引</li><li>DNA： DNA 索引</li></ul>
+   */
+  IndexType?: string
+  /**
+   * <p>允许入库的媒体类型</p><p>枚举值：</p><ul><li>Video： 视频</li><li>Image： 图片</li></ul>
+   */
+  MediaType?: string
   /**
    * <p>知识库状态。</p><p>枚举值：</p><ul><li>creating： 创建中</li><li>active： 正常</li><li>deleting： 删除中</li></ul>
    */
@@ -22605,6 +22703,40 @@ export interface TransitionOperation {
 }
 
 /**
+ * DNA查重任务输出。
+ */
+export interface DNATaskOutput {
+  /**
+   * <p>命中的参考媒资 FileId。</p>
+   */
+  RefFileId?: string
+  /**
+   * <p>查询媒资命中片段起始时间。</p><p>单位：秒</p>
+   */
+  QueryStartSec?: number
+  /**
+   * <p>查询媒资命中片段结束时间。</p><p>单位：秒</p>
+   */
+  QueryEndSec?: number
+  /**
+   * <p>参考媒资对应片段起始时间。</p><p>单位：秒</p>
+   */
+  RefStartSec?: number
+  /**
+   * <p>参考媒资对应片段结束时间。</p><p>单位：秒</p>
+   */
+  RefEndSec?: number
+  /**
+   * <p>匹配置信度。</p><p>取值范围：[0, 1]</p>
+   */
+  Confidence?: number
+  /**
+   * <p>变速比（1.0 表示原速，非 1 表示加速或者减速）。</p>
+   */
+  SpeedRatio?: number
+}
+
+/**
  * 视频片头片尾识别的输入。
  */
 export interface AiRecognitionTaskHeadTailResultInput {
@@ -23022,6 +23154,14 @@ export interface DescribeTaskDetailResponse {
    * <p>视频深度估算任务，仅当 TaskType 为VideoDepthEstimation，该字段有值。</p>
    */
   VideoDepthEstimationTask?: VideoDepthEstimationTask
+  /**
+   * <p>DNA查重任务，仅当TaskType为CreateDnaTask，该字段有值。</p>
+   */
+  DNATask?: DNATask
+  /**
+   * <p>异步按语义搜索媒体任务，仅当TaskType为SearchMediaBySemanticsAsync，该字段有值。</p>
+   */
+  SearchMediaBySemanticsAsync?: SearchMediaBySemanticsAsync
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23966,6 +24106,16 @@ export interface FaceRecognitionTask {
    * <p>输出文件信息</p>
    */
   OutputFile?: Array<FaceRecognitionOutputFileInfo>
+}
+
+/**
+ * 大模型解析DNA解析配置
+ */
+export interface LLMComprehendDNA {
+  /**
+   * <p>DNA解析任务开关</p><p>枚举值：</p><ul><li>ON： 开启DNA解析任务</li><li>OFF： 关闭DNA解析任务</li></ul><p>默认值：OFF</p>
+   */
+  Switch?: string
 }
 
 /**
@@ -29619,11 +29769,19 @@ export interface SearchMediaBySemanticsRequest {
    */
   SubAppId: number
   /**
-   * <p>需要进行搜索的内容</p>
+   * <p>需要进行搜索的文本内容。</p><p>入参限制：与 <code>FileId</code>、<code>Url</code> <strong>三选一且互斥</strong>。</p>
    */
-  Text: string
+  Text?: string
   /**
-   * <p>知识库ID，留空时将使用默认知识库</p>
+   * <p>需要进行搜索的图片FileId。</p><p>入参限制：必须是<strong>图片</strong>类型媒资，且与 <code>Text</code>、<code>Url</code> <strong>三选一且互斥</strong>。</p>
+   */
+  FileId?: string
+  /**
+   * <p>需要进行搜索的图片Url。 </p><p>入参限制：必须是<strong>图片</strong>Url，且与 <code>Text</code>、<code>FileId</code> <strong>三选一且互斥</strong>。</p>
+   */
+  Url?: string
+  /**
+   * <p>知识库ID，留空时将使用默认知识库。<br>当输入为图片时，必须选择MediaType=Image的知识库。</p>
    */
   KnowledgeBaseId?: string
   /**

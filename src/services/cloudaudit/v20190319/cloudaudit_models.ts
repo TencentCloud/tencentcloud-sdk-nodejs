@@ -95,6 +95,10 @@ export interface Storage {
    * <p>是否压缩。<br>1:压缩  2:不压缩</p>
    */
   Compress?: number
+  /**
+   * <p>CKAFKA路由信息</p>
+   */
+  CkafkaRoute?: string
 }
 
 /**

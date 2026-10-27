@@ -18991,7 +18991,7 @@ export interface TrackSelector {
  */
 export interface VideoRedrawTaskInfo {
   /**
-   * <p>转绘视频风格，如动漫、赛博朋克、水墨等</p>
+   * <p>转绘视频风格，如动漫、赛博朋克、水墨等</p><p>默认值：动漫风</p>
    */
   Style?: string
 }

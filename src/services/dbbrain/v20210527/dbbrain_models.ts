@@ -2846,27 +2846,32 @@ export interface DescribeBlockingLogsRequest {
 }
 
 /**
- * ModifyDiagDBInstanceConf请求参数结构体
+ * DescribeTopSpaceSchemasV2返回参数结构体
  */
-export interface ModifyDiagDBInstanceConfRequest {
+export interface DescribeTopSpaceSchemasV2Response {
   /**
-   * 实例配置，包括巡检、概览开关等。
+   * <p>MySQL/PG/TDSQL 系列产品库级空间对象列表。当产品为 mysql/cynosdb/tdsql/dcdb/mariadb/postgres 时返回。库级返回项中不包含 TableName/Engine 字段。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceConfs: InstanceConfs
+  MysqlObjects?: Array<MysqlSpaceObjectItem>
   /**
-   * 生效实例地域，固定为"All"，代表全地域。
+   * <p>PostgreSQL 产品库级空间对象列表。当产品为 postgres 时返回。字段语义与 MySQL 不同：使用 RelationSize / TableSize / IndexSize / TotalRelationSize / TableBloat 等 PG 特有指标。库级返回项中不包含 TableSchema/TableName 字段。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Regions: string
+  PostgresObjects?: Array<PostgresSpaceObjectItem>
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis。
+   * <p>MongoDB 产品库级空间对象列表。当产品为 mongodb 时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Product: string
+  MongodbObjects?: Array<MongoDBSchemaSpaceItem>
   /**
-   * 指定更改巡检状态的实例ID。
-可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
-
+   * <p>数据采集时间戳（秒）。</p>
    */
-  InstanceIds?: Array<string>
+  Timestamp?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4512,6 +4517,52 @@ export interface CloseAuditServiceResponse {
 }
 
 /**
+ * redis key的内存占用等信息。
+ */
+export interface RedisKeySpaceData {
+  /**
+   * key名。
+   */
+  Key?: string
+  /**
+   * key类型。
+   */
+  Type?: string
+  /**
+   * key编码方式。包括 int、string、linkedlist、hashtable、skiplist、zipmap、ziplist、intset、quicklist、listpack。
+   */
+  Encoding?: string
+  /**
+   * key过期时间戳（毫秒），0代表未设置过期时间。
+   */
+  ExpireTime?: number
+  /**
+   * key内存大小，单位Byte。
+   */
+  Length?: number
+  /**
+   * 元素个数。
+   */
+  ItemCount?: number
+  /**
+   * 最大元素长度。
+   */
+  MaxElementSize?: number
+  /**
+   * 平均元素长度。
+   */
+  AveElementSize?: number
+  /**
+   * 所属分片序号。
+   */
+  ShardId?: string
+  /**
+   * key所属数据库编号。
+   */
+  Db?: number
+}
+
+/**
  * UpdateDatabaseAutonomyStatus返回参数结构体
  */
 export interface UpdateDatabaseAutonomyStatusResponse {
@@ -5035,49 +5086,27 @@ export interface DescribeRedisCommandCostStatisticsResponse {
 }
 
 /**
- * redis key的内存占用等信息。
+ * ModifyDiagDBInstanceConf请求参数结构体
  */
-export interface RedisKeySpaceData {
+export interface ModifyDiagDBInstanceConfRequest {
   /**
-   * key名。
+   * 实例配置，包括巡检、概览开关等。
    */
-  Key?: string
+  InstanceConfs: InstanceConfs
   /**
-   * key类型。
+   * 生效实例地域，固定为"All"，代表全地域。
    */
-  Type?: string
+  Regions: string
   /**
-   * key编码方式。包括 int、string、linkedlist、hashtable、skiplist、zipmap、ziplist、intset、quicklist、listpack。
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis。
    */
-  Encoding?: string
+  Product: string
   /**
-   * key过期时间戳（毫秒），0代表未设置过期时间。
+   * 指定更改巡检状态的实例ID。
+可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+
    */
-  ExpireTime?: number
-  /**
-   * key内存大小，单位Byte。
-   */
-  Length?: number
-  /**
-   * 元素个数。
-   */
-  ItemCount?: number
-  /**
-   * 最大元素长度。
-   */
-  MaxElementSize?: number
-  /**
-   * 平均元素长度。
-   */
-  AveElementSize?: number
-  /**
-   * 所属分片序号。
-   */
-  ShardId?: string
-  /**
-   * key所属数据库编号。
-   */
-  Db?: number
+  InstanceIds?: Array<string>
 }
 
 /**
@@ -5868,6 +5897,32 @@ export interface DescribeAuditInstanceListRequest {
 }
 
 /**
+ * DescribeTopSpaceSchemasV2请求参数结构体
+ */
+export interface DescribeTopSpaceSchemasV2Request {
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>服务产品类型，支持值包括：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）、dcdb（TDSQL MySQL 版）、tdsql（TDSQL）、mariadb（云数据库 MariaDB）。</p>
+   */
+  Product: string
+  /**
+   * <p>查询日期，格式：yyyy-MM-dd。默认当天。</p>
+   */
+  Date?: string
+  /**
+   * <p>排序字段。MySQL/PG/TDSQL 系列支持：DataLength/IndexLength/TotalLength/DataFree/FragRatio/TableRows，默认 DataLength。MongoDB 支持：StorageSize/Size/AvgObjSize/Count/TotalIndexSize/DataFree，默认 StorageSize。</p>
+   */
+  SortBy?: string
+  /**
+   * <p>返回数量，默认20，最大100。</p>
+   */
+  Limit?: number
+}
+
+/**
  * DescribeRedisBigKeyAnalysisTasks请求参数结构体
  */
 export interface DescribeRedisBigKeyAnalysisTasksRequest {
@@ -5943,6 +5998,72 @@ export interface DescribeSecurityAuditLogExportTasksRequest {
    * 返回数量，默认20，最大值为100。
    */
   Limit?: number
+}
+
+/**
+ * MongoDB 产品库级空间对象项，描述单个数据库的空间使用统计信息。
+ */
+export interface MongoDBSchemaSpaceItem {
+  /**
+   * <p>数据库名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Db?: string
+  /**
+   * <p>数据采集时间戳（毫秒）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: number
+  /**
+   * <p>磁盘占用大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SizeOnDisk?: number
+  /**
+   * <p>库级数据大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * <p>库级平均文档大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvgObjSize?: number
+  /**
+   * <p>库级文档数量。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
+  /**
+   * <p>库级存储大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageSize?: number
+  /**
+   * <p>库级索引总大小（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalIndexSize?: number
+  /**
+   * <p>库级已分配未使用空间（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataFree?: number
+  /**
+   * <p>库级碎片率（百分比字符串）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragRatio?: string
+  /**
+   * <p>库级可复用文件空间（字节）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileReuseBytes?: number
+  /**
+   * <p>库空间占比（百分比字符串）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseRatio?: string
 }
 
 /**

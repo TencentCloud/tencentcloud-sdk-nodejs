@@ -218,41 +218,77 @@ export interface ModifyCompanyDirectoryConfigRequest {
  */
 export interface ModifyBusinessResourceRequest {
   /**
-   * 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位)
+   * <p>业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位)</p>
    */
   AreaId: number
   /**
-   * 业务资源协议类型,3：所有,2：UDP，1：TCP(只支持32位)
+   * <p>业务资源协议类型,3：所有,2：UDP，1：TCP(只支持32位)</p>
    */
   Protocol: number
   /**
-   * 业务资源名称，同一个资源模块下面不可重复
+   * <p>业务资源名称，同一个资源模块下面不可重复</p>
    */
   ServiceName: string
   /**
-   * 业务资源优先级 1-65535(只支持32位)
+   * <p>业务资源优先级 1-65535(只支持32位)</p>
    */
   Levels: number
   /**
-   * 业务资源类型:ip,domain,ip_section，对应ip、域名、ip段
+   * <p>业务资源类型:ip,domain,ip_section，对应ip、域名、ip段</p>
    */
   ServiceType: string
   /**
-   * 业务资源端口 all,1-65535
+   * <p>业务资源端口 all,1-65535</p>
    */
   ServicePort: string
   /**
-   * 修改业务资源的id(只支持32位)
+   * <p>修改业务资源的id(只支持32位)</p>
    */
   ServiceId: number
   /**
-   * 业务资源地址(ip、域名、ip段)
+   * <p>业务资源地址(ip、域名、ip段)</p>
    */
   ServiceAddress: string
   /**
-   * 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位)
+   * <p>是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位)</p>
    */
   DirectConn?: number
+  /**
+   * <p>连通性检查开关，0-关闭 1-开启，默认1(只支持32位)</p>
+   */
+  ConnectivityCheckSwitch?: number
+  /**
+   * <p>连通性检查测试间隔数值，最小为1，默认1(只支持32位)</p>
+   */
+  ConnectivityCheckInterval?: number
+  /**
+   * <p>连通性检查测试间隔单位 minutes/hours/days，默认hours</p>
+   */
+  ConnectivityCheckIntervalUnit?: string
+  /**
+   * <p>资源网络类型：1-内网资源 2-外网资源，默认1</p>
+   */
+  ServiceNetwork?: number
+  /**
+   * <p>是否启用L3网络：1-不启用 2-启用，默认1</p>
+   */
+  WireGuardTunnel?: number
+  /**
+   * <p>资源描述</p>
+   */
+  Description?: string
+  /**
+   * <p>URL审计开关：0-关闭 1-开启，默认0</p>
+   */
+  URLAuditState?: number
+  /**
+   * <p>URL审计证书ID列表，多个用分号分隔</p>
+   */
+  URLAuditId?: string
+  /**
+   * <p>URL审计路径，多个用分号分隔</p>
+   */
+  URLPath?: string
 }
 
 /**
@@ -867,7 +903,7 @@ export interface DescribeDeviceVirtualGroupsResponse {
  */
 export interface CreateBusinessResourceResponse {
   /**
-   * 创建业务资源响应的数据
+   * <p>创建业务资源响应的数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CreateBusinessResourceData
@@ -2131,37 +2167,77 @@ export interface ModifyBusinessResourceResponse {
  */
 export interface CreateBusinessResourceRequest {
   /**
-   * 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位)
+   * <p>业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位)</p>
    */
   AreaId: number
   /**
-   * 业务资源协议类型, 1:UDP, 2:TCP, 3:所有协议(只支持32位)
+   * <p>业务资源协议类型, 1:UDP, 2:TCP, 3:所有协议(只支持32位)</p>
    */
   Protocol: number
   /**
-   * 业务资源名称，同一个资源模块下面不可重复
+   * <p>业务资源名称，同一个资源模块下面不可重复</p>
    */
   ServiceName: string
   /**
-   * 业务资源类型:ip,domain,ip_section，对应ip、域名、ip段
+   * <p>业务资源类型:ip,domain,ip_section，对应ip、域名、ip段</p>
    */
   ServiceType: string
   /**
-   * 业务资源端口 all,1-65535
+   * <p>业务资源端口 all,1-65535</p>
    */
   ServicePort: string
   /**
-   * 业务资源优先级 1-65535(只支持32位)
+   * <p>业务资源优先级 1-65535(只支持32位)</p>
    */
   Levels: number
   /**
-   * 业务资源地址(ip、域名、ip段)
+   * <p>业务资源地址(ip、域名、ip段)</p>
    */
   ServiceAddress: string
   /**
-   * 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位)
+   * <p>是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位)</p>
    */
   DirectConn?: number
+  /**
+   * <p>连通性检查开关，0-关闭 1-开启，默认1(只支持32位)</p>
+   */
+  ConnectivityCheckSwitch?: number
+  /**
+   * <p>连通性检查测试间隔数值，最小为1，默认1(只支持32位)</p>
+   */
+  ConnectivityCheckInterval?: number
+  /**
+   * <p>连通性检查测试间隔单位 minutes/hours/days，默认hours</p>
+   */
+  ConnectivityCheckIntervalUnit?: string
+  /**
+   * <p>资源网络类型：1-内网资源 2-外网资源，默认1</p>
+   */
+  ServiceNetwork?: number
+  /**
+   * <p>是否启用L3网络：1-不启用 2-启用，默认1</p>
+   */
+  WireGuardTunnel?: number
+  /**
+   * <p>资源描述</p>
+   */
+  Description?: string
+  /**
+   * <p>URL审计开关：0-关闭 1-开启，默认0</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul>
+   */
+  URLAuditState?: number
+  /**
+   * <p>URL审计证书ID列表，多个用分号分隔</p>
+   */
+  URLAuditId?: string
+  /**
+   * <p>URL审计路径，多个用分号分隔</p>
+   */
+  URLPath?: string
+  /**
+   * <p>证书Id</p>
+   */
+  SSLCertId?: string
 }
 
 /**
@@ -2832,39 +2908,35 @@ export interface FilterGroup {
  */
 export interface DescribeBusinessResourcesRequest {
   /**
-   * 资源模块Id
-   */
-  AreaId?: number
-  /**
-   * 搜索的业务资源名称
-   */
-  ServiceName?: string
-  /**
-   * 获取业务资源列表的开始时间，时间格式：2006-01-02
-   */
-  StartTime?: string
-  /**
-   * 搜索关键字
-   */
-  Keywords?: string
-  /**
-   * 获取业务资源列表的结束时间，时间格式：2006-01-02
-   */
-  EndTime?: string
-  /**
-   * 滤条件、分页参数。分页内容不传，默认获取第1页，10条数据
-排序条件
-<li>CreateTime - string - 是否必填：否 - 排序支持：是 - 按业务资源创建时间排序。</li>
-<li>Levels - int - 是否必填：否 - 排序支持：是 - 按业务资源优先级排序。</li>
-<li>ReachableState - int - 是否必填：否 - 排序支持：是 - 按业务资源连通性排序(私有化版本不支持)。</li>
+   * <p>滤条件、分页参数。分页内容不传，默认获取第1页，10条数据<br>排序条件</p><li>CreateTime - string - 是否必填：否 - 排序支持：是 - 按业务资源创建时间排序。</li><li>Levels - int - 是否必填：否 - 排序支持：是 - 按业务资源优先级排序。</li><li>ReachableState - int - 是否必填：否 - 排序支持：是 - 按业务资源连通性排序(私有化版本不支持)。</li>
    */
   Condition?: Condition
   /**
-   * 资源类型
+   * <p>资源模块Id</p>
+   */
+  AreaId?: number
+  /**
+   * <p>服务名称</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>搜索关键字</p>
+   */
+  Keywords?: string
+  /**
+   * <p>获取业务资源列表的开始时间，时间格式：2006-01-02</p>
+   */
+  StartTime?: string
+  /**
+   * <p>获取业务资源列表的结束时间，时间格式：2006-01-02</p>
+   */
+  EndTime?: string
+  /**
+   * <p>资源类型</p>
    */
   AccessType?: string
   /**
-   * web资源前端地址
+   * <p>web资源前端地址</p>
    */
   FrontAddr?: string
 }
@@ -3192,10 +3264,10 @@ export interface SoftwareInformationData {
  */
 export interface DescribeBusinessResourcesResponse {
   /**
-   * 业务资源分页返回对象
+   * <p>业务资源分页返回对象</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: DescribeBusinessResourcePageRsp
+  Data?: DescribeBusinessResourcePageRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3207,15 +3279,15 @@ export interface DescribeBusinessResourcesResponse {
  */
 export interface DescribeBusinessResourcePageRsp {
   /**
-   * 业务资源列表数据对象集合
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<DescribeBusinessResourceData>
-  /**
    * 分页公共对象
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Page?: Paging
+  /**
+   * 业务资源列表数据对象集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DescribeBusinessResourceData>
 }
 
 /**

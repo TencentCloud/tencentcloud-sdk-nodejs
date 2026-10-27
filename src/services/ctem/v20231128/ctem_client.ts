@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeBannerAssetDataRequest,
   DescribeFakeWechatOfficialsResponse,
   CreateEnterpriseResponse,
   CreateAssetResponse,
@@ -44,12 +45,14 @@ import {
   CreateJobRecordResponse,
   DescribeCustomersResponse,
   DescribeDomainsResponse,
+  CreateSubDomainResponse,
   DisplayDarkWeb,
   ModifySeedStatusResponse,
   DeleteEnterprisesResponse,
+  CreateCheckResponse,
   CreateSeedsRequest,
   DescribePortsResponse,
-  DeleteWechatAppletsRequest,
+  CreateSuspiciousAssetResponse,
   DescribeSensitiveInfosResponse,
   DescribeConfigsResponse,
   CreateAppResponse,
@@ -69,7 +72,8 @@ import {
   DescribeSubDomainsRequest,
   DisplayFakeWebsite,
   DescribeVulsResponse,
-  CreateSuspiciousAssetResponse,
+  DescribePocAssetDataResponse,
+  DescribeGithubsResponse,
   DescribeLeakageEmailsResponse,
   CreateHttpRequest,
   DescribeAssetsResponse,
@@ -81,19 +85,22 @@ import {
   DisplaySensitiveInfo,
   ModifyLabelResponse,
   DescribeEnterprisesRequest,
-  DescribeLeakageCodesRequest,
+  DescribeIntelligencesRequest,
+  DescribeConfigsRequest,
+  IntelligenceResult,
   DeleteHttpsRequest,
   DisplayFakeMiniProgram,
   DisplayFakeWechatOfficial,
   CreateAppRequest,
   DisplayHttp,
   CreateDomainResponse,
+  DescribeLeakageDatasResponse,
   DeleteWechatOfficialAccountsRequest,
   DeleteSeedsResponse,
   DescribePortsRequest,
   DisplayWechatApplet,
   DescribeGithubsRequest,
-  DescribeConfigsRequest,
+  DescribeLeakageCodesRequest,
   DeleteSeedsRequest,
   CreateHttpResponse,
   DescribeSeedsRequest,
@@ -101,6 +108,7 @@ import {
   CreateSubDomainRequest,
   DescribeWechatOfficialAccountsRequest,
   DisplayFakeApp,
+  DescribeIntelligencesResponse,
   DescribeDarkWebsRequest,
   DescribeHttpsRequest,
   DescribeEnterprisesResponse,
@@ -119,6 +127,7 @@ import {
   CreatePortRequest,
   DescribeSuspiciousAssetsRequest,
   IgnoreDataResponse,
+  CreateScanRequest,
   CreateWechatAppletResponse,
   Filter,
   DisplayVul,
@@ -126,7 +135,6 @@ import {
   DescribeFakeAppsResponse,
   DisplayWeakPassword,
   DescribeLeakageEmailsRequest,
-  DescribeGithubsResponse,
   CreateCustomerResponse,
   CreateWechatOfficialAccountRequest,
   ScanPriorityDisplay,
@@ -137,32 +145,35 @@ import {
   DescribeWeakPasswordsRequest,
   DisplayPort,
   StopJobRecordResponse,
-  CreateManageResponse,
+  DescribeJobRecordsRequest,
+  Equity,
   DescribeFakeMiniProgramsRequest,
   CreateManageRequest,
   DisplayJobRecord,
   ModifySeedStatusRequest,
-  Equity,
+  DescribePocAssetDataRequest,
   CreateCustomerRequest,
   DeleteEnterprisesRequest,
   DescribeLeakageDatasRequest,
   DescribeJobRecordDetailsResponse,
   DeleteSubDomainsRequest,
   DescribeVulsRequest,
+  DescribeBannerAssetDataResponse,
   CreateWechatOfficialAccountResponse,
   DisplayGithub,
   DisplayApiSec,
-  CreateSubDomainResponse,
+  CreateScanResponse,
   DisplayToolCommon,
   DeleteAppsResponse,
   Customer,
   DisplayManage,
   DisplayDomain,
+  CreateCheckRequest,
   DescribeFakeMiniProgramsResponse,
   DescribeSubDomainsResponse,
   DescribeHttpsResponse,
   DescribeWechatOfficialAccountsResponse,
-  DescribeLeakageDatasResponse,
+  DeleteWechatAppletsRequest,
   DeleteWechatAppletsResponse,
   CreateSuspiciousAssetRequest,
   DescribeAppsResponse,
@@ -170,7 +181,7 @@ import {
   DescribeFakeWechatOfficialsRequest,
   DisplaySuspiciousAsset,
   DescribeApiSecsRequest,
-  DescribeJobRecordsRequest,
+  CreateManageResponse,
   DescribeLeakageCodesResponse,
   DescribeDomainsRequest,
   DisplaySeed,
@@ -419,13 +430,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看敏感信息泄露数据
+   * 实际受影响资产
    */
-  async DescribeSensitiveInfos(
-    req: DescribeSensitiveInfosRequest,
-    cb?: (error: string, rep: DescribeSensitiveInfosResponse) => void
-  ): Promise<DescribeSensitiveInfosResponse> {
-    return this.request("DescribeSensitiveInfos", req, cb)
+  async DescribePocAssetData(
+    req: DescribePocAssetDataRequest,
+    cb?: (error: string, rep: DescribePocAssetDataResponse) => void
+  ): Promise<DescribePocAssetDataResponse> {
+    return this.request("DescribePocAssetData", req, cb)
   }
 
   /**
@@ -479,13 +490,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除端口数据
+   * 添加主域名数据
    */
-  async DeletePorts(
-    req: DeletePortsRequest,
-    cb?: (error: string, rep: DeletePortsResponse) => void
-  ): Promise<DeletePortsResponse> {
-    return this.request("DeletePorts", req, cb)
+  async CreateDomain(
+    req: CreateDomainRequest,
+    cb?: (error: string, rep: CreateDomainResponse) => void
+  ): Promise<CreateDomainResponse> {
+    return this.request("CreateDomain", req, cb)
+  }
+
+  /**
+   * 扫描巡检
+   */
+  async CreateScan(
+    req: CreateScanRequest,
+    cb?: (error: string, rep: CreateScanResponse) => void
+  ): Promise<CreateScanResponse> {
+    return this.request("CreateScan", req, cb)
   }
 
   /**
@@ -619,6 +640,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 相关资产
+   */
+  async DescribeBannerAssetData(
+    req: DescribeBannerAssetDataRequest,
+    cb?: (error: string, rep: DescribeBannerAssetDataResponse) => void
+  ): Promise<DescribeBannerAssetDataResponse> {
+    return this.request("DescribeBannerAssetData", req, cb)
+  }
+
+  /**
    * 创建种子
    */
   async CreateSeeds(
@@ -689,13 +720,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加主域名数据
+   * 查看敏感信息泄露数据
    */
-  async CreateDomain(
-    req: CreateDomainRequest,
-    cb?: (error: string, rep: CreateDomainResponse) => void
-  ): Promise<CreateDomainResponse> {
-    return this.request("CreateDomain", req, cb)
+  async DescribeSensitiveInfos(
+    req: DescribeSensitiveInfosRequest,
+    cb?: (error: string, rep: DescribeSensitiveInfosResponse) => void
+  ): Promise<DescribeSensitiveInfosResponse> {
+    return this.request("DescribeSensitiveInfos", req, cb)
+  }
+
+  /**
+   * 查询情报列表
+   */
+  async DescribeIntelligences(
+    req: DescribeIntelligencesRequest,
+    cb?: (error: string, rep: DescribeIntelligencesResponse) => void
+  ): Promise<DescribeIntelligencesResponse> {
+    return this.request("DescribeIntelligences", req, cb)
+  }
+
+  /**
+   * 删除端口数据
+   */
+  async DeletePorts(
+    req: DeletePortsRequest,
+    cb?: (error: string, rep: DeletePortsResponse) => void
+  ): Promise<DeletePortsResponse> {
+    return this.request("DeletePorts", req, cb)
   }
 
   /**
@@ -786,6 +837,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWechatAppletsResponse) => void
   ): Promise<DescribeWechatAppletsResponse> {
     return this.request("DescribeWechatApplets", req, cb)
+  }
+
+  /**
+   * 检查修复状况
+   */
+  async CreateCheck(
+    req: CreateCheckRequest,
+    cb?: (error: string, rep: CreateCheckResponse) => void
+  ): Promise<CreateCheckResponse> {
+    return this.request("CreateCheck", req, cb)
   }
 
   /**

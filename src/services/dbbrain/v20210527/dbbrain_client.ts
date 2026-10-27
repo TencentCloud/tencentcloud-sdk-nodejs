@@ -109,7 +109,7 @@ import {
   TimeSlice,
   AuditLogFile,
   DescribeBlockingLogsRequest,
-  ModifyDiagDBInstanceConfRequest,
+  DescribeTopSpaceSchemasV2Response,
   DescribeSlowLogsResponse,
   TagInfo,
   AuditLogQueryFilter,
@@ -176,6 +176,7 @@ import {
   InstanceItem,
   AutonomyActionVo,
   CloseAuditServiceResponse,
+  RedisKeySpaceData,
   UpdateDatabaseAutonomyStatusResponse,
   DeleteRedisBigKeyAnalysisTasksResponse,
   CloseAuditServiceRequest,
@@ -192,7 +193,7 @@ import {
   HealthStatus,
   DescribeAllUserContactResponse,
   DescribeRedisCommandCostStatisticsResponse,
-  RedisKeySpaceData,
+  ModifyDiagDBInstanceConfRequest,
   CancelDBAutonomyEventResponse,
   MonitorMetric,
   ProfileInfo,
@@ -218,9 +219,11 @@ import {
   DescribeTopSpaceSchemasRequest,
   TemplateInfo,
   DescribeAuditInstanceListRequest,
+  DescribeTopSpaceSchemasV2Request,
   DescribeRedisBigKeyAnalysisTasksRequest,
   DescribeSqlFiltersRequest,
   DescribeSecurityAuditLogExportTasksRequest,
+  MongoDBSchemaSpaceItem,
   DescribeRedisUnExpiredKeyStatisticsRequest,
   DeleteSecurityAuditLogExportTasksRequest,
   CreateSchedulerMailProfileResponse,
@@ -1041,6 +1044,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProxyProcessStatisticsResponse) => void
   ): Promise<DescribeProxyProcessStatisticsResponse> {
     return this.request("DescribeProxyProcessStatistics", req, cb)
+  }
+
+  /**
+   * 库级空间 Top 对象查询（融合接口，多产品统一入口），按 SortBy 指定的排序字段返回实例内空间占用 Top N 的数据库。支持产品：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）、dcdb（TDSQL MySQL 版）、tdsql（TDSQL）、mariadb（云数据库 MariaDB）。返回值根据产品类型返回对应字段：MySQL 系列返回 MysqlObjects（库级返回项中不包含 TableName/Engine 字段），PostgreSQL 返回 PostgresObjects（PG 的 relation/bloat 字段与 MySQL 语义不同），MongoDB 返回 MongodbObjects。
+   */
+  async DescribeTopSpaceSchemasV2(
+    req: DescribeTopSpaceSchemasV2Request,
+    cb?: (error: string, rep: DescribeTopSpaceSchemasV2Response) => void
+  ): Promise<DescribeTopSpaceSchemasV2Response> {
+    return this.request("DescribeTopSpaceSchemasV2", req, cb)
   }
 
   /**

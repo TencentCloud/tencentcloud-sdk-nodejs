@@ -3668,13 +3668,21 @@ export interface RollBackClusterResponse {
  */
 export interface OpenSSLRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
+  /**
+   * <p>证书类型</p><p>枚举值：</p><ul><li>platform： 云端证书</li><li>custom： 自定义证书</li></ul><p>默认值：platform</p>
+   */
+  CertType?: string
+  /**
+   * <p>证书ID，CertType=custom 时必传</p>
+   */
+  CertId?: string
 }
 
 /**
@@ -4445,13 +4453,21 @@ export interface DescribeBinlogsRequest {
  */
 export interface DescribeSSLStatusResponse {
   /**
-   * yes-开启，no-关闭
+   * <p>yes-开启，no-关闭</p>
    */
   IsOpenSSL?: string
   /**
-   * 证书下载地址
+   * <p>证书下载地址</p>
    */
   DownloadUrl?: string
+  /**
+   * <p>证书类型</p><p>枚举值：</p><ul><li>platform： 云端证书</li><li>custom： 自定义证书</li></ul>
+   */
+  CertType?: string
+  /**
+   * <p>自定义证书详情，仅 CertType=custom 时有值。</p>
+   */
+  CertDetail?: CertDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6162,6 +6178,40 @@ export interface PauseServerlessResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 证书详情
+ */
+export interface CertDetail {
+  /**
+   * <p>证书ID</p>
+   */
+  CertId?: string
+  /**
+   * <p>证书备注名</p>
+   */
+  Alias?: string
+  /**
+   * <p>证书绑定的主域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>证书来源</p>
+   */
+  Source?: string
+  /**
+   * <p>有效期结束（秒级时间戳）</p><p>单位：秒</p>
+   */
+  EndTime?: number
+  /**
+   * <p>证书到期剩余天数</p>
+   */
+  RemainDays?: number
+  /**
+   * <p>证书状态，1为已通过</p>
+   */
+  CertStatus?: number
 }
 
 /**
@@ -13130,11 +13180,11 @@ export interface ClusterServerlessScalePlan {
  */
 export interface OpenSSLResponse {
   /**
-   * 任务流ID
+   * <p>任务流ID</p>
    */
   FlowId?: number
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId?: number
   /**
@@ -16810,11 +16860,11 @@ export interface SaleRegion {
  */
 export interface DescribeSSLStatusRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
 }

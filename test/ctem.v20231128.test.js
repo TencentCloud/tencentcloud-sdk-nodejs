@@ -248,9 +248,9 @@ it("ctem.v20231128.IgnoreData", async function () {
     }
 })
 
-it("ctem.v20231128.DescribeSensitiveInfos", async function () {
+it("ctem.v20231128.DescribePocAssetData", async function () {
     try {
-       const data = await client.DescribeSensitiveInfos({})
+       const data = await client.DescribePocAssetData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,19 @@ it("ctem.v20231128.DescribeLeakageEmails", async function () {
     }
 })
 
-it("ctem.v20231128.DeletePorts", async function () {
+it("ctem.v20231128.CreateDomain", async function () {
     try {
-       const data = await client.DeletePorts({})
+       const data = await client.CreateDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateScan", async function () {
+    try {
+       const data = await client.CreateScan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,6 +458,16 @@ it("ctem.v20231128.DeleteApps", async function () {
     }
 })
 
+it("ctem.v20231128.DescribeBannerAssetData", async function () {
+    try {
+       const data = await client.DescribeBannerAssetData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.CreateSeeds", async function () {
     try {
        const data = await client.CreateSeeds({})
@@ -518,9 +538,29 @@ it("ctem.v20231128.DescribeDarkWebs", async function () {
     }
 })
 
-it("ctem.v20231128.CreateDomain", async function () {
+it("ctem.v20231128.DescribeSensitiveInfos", async function () {
     try {
-       const data = await client.CreateDomain({})
+       const data = await client.DescribeSensitiveInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DescribeIntelligences", async function () {
+    try {
+       const data = await client.DescribeIntelligences({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeletePorts", async function () {
+    try {
+       const data = await client.DeletePorts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +651,16 @@ it("ctem.v20231128.DescribeWeakPasswords", async function () {
 it("ctem.v20231128.DescribeWechatApplets", async function () {
     try {
        const data = await client.DescribeWechatApplets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateCheck", async function () {
+    try {
+       const data = await client.CreateCheck({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

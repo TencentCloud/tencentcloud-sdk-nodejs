@@ -751,6 +751,32 @@ export interface DecryptResponse {
 }
 
 /**
+ * CreateKmsInstance请求参数结构体
+ */
+export interface CreateKmsInstanceRequest {
+  /**
+   * <p>实例付费类型(PREPAID)</p>
+   */
+  InstanceChargeType: string
+  /**
+   * <p>版本类型</p><p>枚举值：</p><ul><li>professional： 专业版</li></ul>
+   */
+  ProductVersion?: string
+  /**
+   * <p>预付费实例信息</p>
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+  /**
+   * <p>可重入客户端ID</p>
+   */
+  ClientToken?: string
+  /**
+   * <p>实例标签</p>
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * ListDataKeyDetail返回参数结构体
  */
 export interface ListDataKeyDetailResponse {
@@ -1258,6 +1284,20 @@ export interface DeleteWhiteBoxKeyRequest {
 }
 
 /**
+ * PostQuantumCryptoSign返回参数结构体
+ */
+export interface PostQuantumCryptoSignResponse {
+  /**
+   * 签名值，Base64编码。可使用 PostQuantumCryptoVerify接口对签名值进行验证。
+   */
+  Signature?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 算法的名称 和 标识
  */
 export interface AlgorithmInfo {
@@ -1310,13 +1350,13 @@ export interface ExclusiveHSM {
 }
 
 /**
- * CancelKeyDeletion请求参数结构体
+ * GetDataKeyCiphertextBlob请求参数结构体
  */
-export interface CancelKeyDeletionRequest {
+export interface GetDataKeyCiphertextBlobRequest {
   /**
-   * 需要被取消删除的CMK的唯一标志
+   * 数据密钥的唯一标志符
    */
-  KeyId: string
+  DataKeyId: string
   /**
    * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
    */
@@ -1593,13 +1633,13 @@ export interface GetDataKeyPlaintextRequest {
 }
 
 /**
- * GetDataKeyCiphertextBlob请求参数结构体
+ * CancelKeyDeletion请求参数结构体
  */
-export interface GetDataKeyCiphertextBlobRequest {
+export interface CancelKeyDeletionRequest {
   /**
-   * 数据密钥的唯一标志符
+   * 需要被取消删除的CMK的唯一标志
    */
-  DataKeyId: string
+  KeyId: string
   /**
    * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
    */
@@ -2111,21 +2151,21 @@ export interface CancelKeyArchiveResponse {
 }
 
 /**
- * GetPublicKey返回参数结构体
+ * CreateKmsInstance返回参数结构体
  */
-export interface GetPublicKeyResponse {
+export interface CreateKmsInstanceResponse {
   /**
-   * CMK的唯一标识。
+   * <p>实例ID</p>
    */
-  KeyId: string
+  InstanceId?: string
   /**
-   * 经过base64编码的公钥内容。
+   * <p>计费订单号</p>
    */
-  PublicKey: string
+  DealName?: string
   /**
-   * PEM格式的公钥内容。
+   * <p>计费冻结流水号</p>
    */
-  PublicKeyPem: string
+  BillId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2542,13 +2582,21 @@ export interface GetDataKeyCiphertextBlobResponse {
 }
 
 /**
- * PostQuantumCryptoSign返回参数结构体
+ * GetPublicKey返回参数结构体
  */
-export interface PostQuantumCryptoSignResponse {
+export interface GetPublicKeyResponse {
   /**
-   * 签名值，Base64编码。可使用 PostQuantumCryptoVerify接口对签名值进行验证。
+   * CMK的唯一标识。
    */
-  Signature?: string
+  KeyId: string
+  /**
+   * 经过base64编码的公钥内容。
+   */
+  PublicKey: string
+  /**
+   * PEM格式的公钥内容。
+   */
+  PublicKeyPem: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2698,6 +2746,20 @@ export interface DescribeKeyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 预付费计费信息
+ */
+export interface InstanceChargePrepaid {
+  /**
+   * <p>按月购买时长（1～100）月</p>
+   */
+  Period: number
+  /**
+   * <p>续费标记（0:用户未设置，1:自动续费 2:不自动续费）</p>
+   */
+  RenewFlag: number
 }
 
 /**

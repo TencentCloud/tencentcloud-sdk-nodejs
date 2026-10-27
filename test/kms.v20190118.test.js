@@ -108,6 +108,16 @@ it("kms.v20190118.GetPublicKey", async function () {
     }
 })
 
+it("kms.v20190118.UpdateKeyDescription", async function () {
+    try {
+       const data = await client.UpdateKeyDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.DisableKey", async function () {
     try {
        const data = await client.DisableKey({})
@@ -378,9 +388,9 @@ it("kms.v20190118.VerifyByAsymmetricKey", async function () {
     }
 })
 
-it("kms.v20190118.EnableDataKeys", async function () {
+it("kms.v20190118.DescribeDataKeys", async function () {
     try {
-       const data = await client.EnableDataKeys({})
+       const data = await client.DescribeDataKeys({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +468,9 @@ it("kms.v20190118.DisableDataKey", async function () {
     }
 })
 
-it("kms.v20190118.DescribeDataKeys", async function () {
+it("kms.v20190118.CreateKmsInstance", async function () {
     try {
-       const data = await client.DescribeDataKeys({})
+       const data = await client.CreateKmsInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +648,9 @@ it("kms.v20190118.DescribeWhiteBoxServiceStatus", async function () {
     }
 })
 
-it("kms.v20190118.UpdateKeyDescription", async function () {
+it("kms.v20190118.EnableDataKeys", async function () {
     try {
-       const data = await client.UpdateKeyDescription({})
+       const data = await client.EnableDataKeys({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

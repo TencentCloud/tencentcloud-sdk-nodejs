@@ -64,6 +64,7 @@ import {
   DescribeWhiteBoxKeyRequest,
   GetParametersForImportResponse,
   DecryptResponse,
+  CreateKmsInstanceRequest,
   ListDataKeyDetailResponse,
   CreateWhiteBoxKeyResponse,
   ImportKeyMaterialRequest,
@@ -87,11 +88,12 @@ import {
   ImportDataKeyRequest,
   ListKeyDetailRequest,
   DeleteWhiteBoxKeyRequest,
+  PostQuantumCryptoSignResponse,
   AlgorithmInfo,
   GetRegionsResponse,
   UpdateDataKeyDescriptionResponse,
   ExclusiveHSM,
-  CancelKeyDeletionRequest,
+  GetDataKeyCiphertextBlobRequest,
   EnableDataKeysResponse,
   GenerateDataKeyResponse,
   EnableDataKeysRequest,
@@ -106,7 +108,7 @@ import {
   ReEncryptResponse,
   EncryptResponse,
   GetDataKeyPlaintextRequest,
-  GetDataKeyCiphertextBlobRequest,
+  CancelKeyDeletionRequest,
   DeleteImportedKeyMaterialRequest,
   EnableKeyResponse,
   ImportDataKeyResponse,
@@ -125,7 +127,7 @@ import {
   DataKey,
   KeyMetadata,
   CancelKeyArchiveResponse,
-  GetPublicKeyResponse,
+  CreateKmsInstanceResponse,
   DecryptRequest,
   DescribeWhiteBoxKeyDetailsRequest,
   PostQuantumCryptoSignRequest,
@@ -155,7 +157,7 @@ import {
   EnableDataKeyRequest,
   BindCloudResourceRequest,
   GetDataKeyCiphertextBlobResponse,
-  PostQuantumCryptoSignResponse,
+  GetPublicKeyResponse,
   SignByAsymmetricKeyResponse,
   PostQuantumCryptoVerifyResponse,
   DescribeWhiteBoxDecryptKeyResponse,
@@ -166,6 +168,7 @@ import {
   UpdateKeyDescriptionRequest,
   UnbindCloudResourceResponse,
   DescribeKeyResponse,
+  InstanceChargePrepaid,
   CancelKeyArchiveRequest,
   Tag,
   DisableKeyRotationRequest,
@@ -269,6 +272,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetPublicKeyResponse) => void
   ): Promise<GetPublicKeyResponse> {
     return this.request("GetPublicKey", req, cb)
+  }
+
+  /**
+   * 该接口用于对指定的cmk修改描述信息。对于处于PendingDelete状态的CMK禁止修改。
+   */
+  async UpdateKeyDescription(
+    req: UpdateKeyDescriptionRequest,
+    cb?: (error: string, rep: UpdateKeyDescriptionResponse) => void
+  ): Promise<UpdateKeyDescriptionResponse> {
+    return this.request("UpdateKeyDescription", req, cb)
   }
 
   /**
@@ -543,13 +556,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量启用数据密钥
+   * 返回数据密钥属性信息列表
    */
-  async EnableDataKeys(
-    req: EnableDataKeysRequest,
-    cb?: (error: string, rep: EnableDataKeysResponse) => void
-  ): Promise<EnableDataKeysResponse> {
-    return this.request("EnableDataKeys", req, cb)
+  async DescribeDataKeys(
+    req: DescribeDataKeysRequest,
+    cb?: (error: string, rep: DescribeDataKeysResponse) => void
+  ): Promise<DescribeDataKeysResponse> {
+    return this.request("DescribeDataKeys", req, cb)
   }
 
   /**
@@ -623,13 +636,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 返回数据密钥属性信息列表
+   * 购买开通KMS服务
    */
-  async DescribeDataKeys(
-    req: DescribeDataKeysRequest,
-    cb?: (error: string, rep: DescribeDataKeysResponse) => void
-  ): Promise<DescribeDataKeysResponse> {
-    return this.request("DescribeDataKeys", req, cb)
+  async CreateKmsInstance(
+    req: CreateKmsInstanceRequest,
+    cb?: (error: string, rep: CreateKmsInstanceResponse) => void
+  ): Promise<CreateKmsInstanceResponse> {
+    return this.request("CreateKmsInstance", req, cb)
   }
 
   /**
@@ -803,13 +816,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于对指定的cmk修改描述信息。对于处于PendingDelete状态的CMK禁止修改。
+   * 批量启用数据密钥
    */
-  async UpdateKeyDescription(
-    req: UpdateKeyDescriptionRequest,
-    cb?: (error: string, rep: UpdateKeyDescriptionResponse) => void
-  ): Promise<UpdateKeyDescriptionResponse> {
-    return this.request("UpdateKeyDescription", req, cb)
+  async EnableDataKeys(
+    req: EnableDataKeysRequest,
+    cb?: (error: string, rep: EnableDataKeysResponse) => void
+  ): Promise<EnableDataKeysResponse> {
+    return this.request("EnableDataKeys", req, cb)
   }
 
   /**

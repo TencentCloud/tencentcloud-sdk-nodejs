@@ -1624,15 +1624,15 @@ export interface LogItems {
  */
 export interface GetAttackHistogramResponse {
   /**
-   * 统计详情
+   * <p>统计详情</p>
    */
   Data?: Array<LogHistogramInfo>
   /**
-   * 时间段大小
+   * <p>时间段大小</p><p>单位：秒</p>
    */
   Period?: number
   /**
-   * 统计的条目数
+   * <p>统计的条目数</p>
    */
   TotalCount?: number
   /**
@@ -15964,19 +15964,19 @@ export interface OwaspRule {
  */
 export interface GetAttackHistogramRequest {
   /**
-   * 查询的域名，所有域名使用all
+   * <p>查询的域名，所有域名使用all</p>
    */
   Domain: string
   /**
-   * 查询起始时间
+   * <p>查询起始时间</p>
    */
   StartTime: string
   /**
-   * 查询结束时间
+   * <p>查询结束时间</p>
    */
   EndTime: string
   /**
-   * Lucene语法
+   * <p>Lucene语法</p>
    */
   QueryString: string
 }

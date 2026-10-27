@@ -3877,6 +3877,16 @@ export interface SearchClsLogResponse {
 }
 
 /**
+ * 构建运行配置
+ */
+export interface BuildRunner {
+  /**
+   * <p>构建服务所需 CPU 规格</p>
+   */
+  Cpus?: number
+}
+
+/**
  * 清除任务详情
  */
 export interface HTTPServiceCachePurgeTask {
@@ -8182,7 +8192,7 @@ export interface CreateCloudAppRequest {
    */
   ServiceName: string
   /**
-   * <p>部署类型</p>
+   * <p>部署类型</p><p>枚举值：</p><ul><li>statis-hosting： 静态托管应用</li><li>custom： 自定义流水线</li></ul>
    */
   DeployType: string
   /**
@@ -8249,6 +8259,10 @@ export interface CreateCloudAppRequest {
    * <p>后置执行命令</p>
    */
   PostDeployCommand?: string
+  /**
+   * <p>流水线运行配置</p>
+   */
+  Runner?: BuildRunner
 }
 
 /**
