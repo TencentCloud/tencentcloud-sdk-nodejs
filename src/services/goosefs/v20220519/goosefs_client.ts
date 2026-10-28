@@ -31,6 +31,7 @@ import {
   DeleteFilesetResponse,
   ListLoadTasksResponse,
   UpdateLoadTaskPriorityResponse,
+  CreateUserQuotaRequest,
   DescribeFilesetGeneralConfigRequest,
   UpdateLoadTaskPriorityRequest,
   DescribeFilesetsResponse,
@@ -56,6 +57,7 @@ import {
   ClientNodeAttribute,
   DescribeClusterRoleTokenRequest,
   MountMultipleStorageFileSystemRequest,
+  DeleteUserQuotaRequest,
   DescribeLoadTaskRequest,
   DescribeFileSystemBucketsRequest,
   CreatePolicyRuleResponse,
@@ -67,14 +69,16 @@ import {
   DetachFileSystemBucketRequest,
   MountMultipleStorageFileSystemResponse,
   DataRepositoryTaskAttribute,
+  DescribeUserQuotaResponse,
   DescribeCustomerClusterRequest,
   DescribeFilesetGeneralConfigResponse,
   CreateFilesetResponse,
   QueryCrossVpcSubnetSupportForClientNodeResponse,
-  FSAttribute,
+  DeleteUserQuotaResponse,
+  AddCrossVpcSubnetSupportForClientNodeResponse,
   DeleteCrossVpcSubnetSupportForClientNodeResponse,
   BatchAddClientNodesRequest,
-  BuildClientNodeMountCommandResponse,
+  ListLoadTasksRequest,
   CreateLoadTaskRequest,
   LoadTaskCreationAttrs,
   CancelPolicyRuleExecuteRecordRequest,
@@ -82,11 +86,13 @@ import {
   ModifyDataRepositoryTaskStatusResponse,
   ExpandCapacityResponse,
   DeleteFilesetRequest,
-  AddCrossVpcSubnetSupportForClientNodeResponse,
+  FSAttribute,
   QueryClientNodeMountCommandRequest,
   DescribeClusterRoleTokenResponse,
+  DescribeUserQuotaRequest,
   GooseFSxBuildElement,
   AddCrossVpcSubnetSupportForClientNodeRequest,
+  UpdateUserQuotaResponse,
   SubnetInfo,
   CancelPolicyRuleExecuteRecordResponse,
   CancelLoadTaskResponse,
@@ -95,7 +101,9 @@ import {
   DeleteFileSystemResponse,
   ClientToken,
   QueryDataRepositoryBandwidthResponse,
+  CreateUserQuotaResponse,
   QueryDataRepositoryBandwidthRequest,
+  UserQuotaInfo,
   DescribeClientNodesResponse,
   ExecutePeriodAttribute,
   DescribeDataRepositoryTaskStatusRequest,
@@ -104,7 +112,7 @@ import {
   DescribeFileSystemBucketsResponse,
   DescribeClientNodesRequest,
   DescribeClusterClientTokenRequest,
-  ListLoadTasksRequest,
+  BuildClientNodeMountCommandResponse,
   DescribeClusterClientTokenResponse,
   CreateFileSystemResponse,
   GooseFSxAttribute,
@@ -119,6 +127,7 @@ import {
   DeleteCrossVpcSubnetSupportForClientNodeRequest,
   DeletePolicyRuleResponse,
   AttachFileSystemBucketResponse,
+  UpdateUserQuotaRequest,
   BuildClientNodeMountCommandRequest,
   ExecutionPlan,
   BuildCustomerClusterRequest,
@@ -248,6 +257,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建用户配额
+   */
+  async CreateUserQuota(
+    req: CreateUserQuotaRequest,
+    cb?: (error: string, rep: CreateUserQuotaResponse) => void
+  ): Promise<CreateUserQuotaResponse> {
+    return this.request("CreateUserQuota", req, cb)
+  }
+
+  /**
    * 修改数据流动带宽
    */
   async ModifyDataRepositoryBandwidth(
@@ -305,6 +324,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFilesetGeneralConfigResponse) => void
   ): Promise<DescribeFilesetGeneralConfigResponse> {
     return this.request("DescribeFilesetGeneralConfig", req, cb)
+  }
+
+  /**
+   * 创建数据流通任务,包括从将文件系统的数据上传到存储桶下, 以及从存储桶下载到文件系统里。
+   */
+  async CreateDataRepositoryTask(
+    req: CreateDataRepositoryTaskRequest,
+    cb?: (error: string, rep: CreateDataRepositoryTaskResponse) => void
+  ): Promise<CreateDataRepositoryTaskResponse> {
+    return this.request("CreateDataRepositoryTask", req, cb)
   }
 
   /**
@@ -408,6 +437,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户配额
+   */
+  async UpdateUserQuota(
+    req: UpdateUserQuotaRequest,
+    cb?: (error: string, rep: UpdateUserQuotaResponse) => void
+  ): Promise<UpdateUserQuotaResponse> {
+    return this.request("UpdateUserQuota", req, cb)
+  }
+
+  /**
    * GooseFS 预热相关接口，用于下发，列出，查询，修改预热任务。用于元数据预热、数据预热场景。 注意，该接口需要 GooseFS 集群版本 ≥ 1.5.1。
    */
   async CreateLoadTask(
@@ -478,13 +517,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建数据流通任务,包括从将文件系统的数据上传到存储桶下, 以及从存储桶下载到文件系统里。
+   * 删除用户配额
    */
-  async CreateDataRepositoryTask(
-    req: CreateDataRepositoryTaskRequest,
-    cb?: (error: string, rep: CreateDataRepositoryTaskResponse) => void
-  ): Promise<CreateDataRepositoryTaskResponse> {
-    return this.request("CreateDataRepositoryTask", req, cb)
+  async DeleteUserQuota(
+    req: DeleteUserQuotaRequest,
+    cb?: (error: string, rep: DeleteUserQuotaResponse) => void
+  ): Promise<DeleteUserQuotaResponse> {
+    return this.request("DeleteUserQuota", req, cb)
   }
 
   /**
@@ -515,6 +554,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddCrossVpcSubnetSupportForClientNodeResponse) => void
   ): Promise<AddCrossVpcSubnetSupportForClientNodeResponse> {
     return this.request("AddCrossVpcSubnetSupportForClientNode", req, cb)
+  }
+
+  /**
+   * 查询用户配额
+   */
+  async DescribeUserQuota(
+    req: DescribeUserQuotaRequest,
+    cb?: (error: string, rep: DescribeUserQuotaResponse) => void
+  ): Promise<DescribeUserQuotaResponse> {
+    return this.request("DescribeUserQuota", req, cb)
   }
 
   /**

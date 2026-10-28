@@ -1948,6 +1948,10 @@ export interface DescribeEnterprisesRequest {
  */
 export interface DescribeIntelligencesRequest {
   /**
+   * <p>企业ID</p>
+   */
+  CustomerId?: number
+  /**
    * 查询数组
    */
   Filters?: Array<Filter>
@@ -1959,6 +1963,10 @@ export interface DescribeIntelligencesRequest {
    * 分页偏移
    */
   Offset?: number
+  /**
+   * <p>是否筛选有效情报</p>
+   */
+  IsActual?: boolean
 }
 
 /**
@@ -2306,6 +2314,68 @@ export interface DisplayHttp {
    * <p>可用性标签：解析已失效/端口连接超时/网站请求超时/服务错误（5xx）/高延迟（非宕机）</p>
    */
   AvailabilityTag?: string
+}
+
+/**
+ * 漏洞情报详情
+ */
+export interface IntelligenceDesc {
+  /**
+   * <p>情报ID</p>
+   */
+  VulId?: string
+  /**
+   * <p>情报名称</p>
+   */
+  VulName?: string
+  /**
+   * <p>情报概述</p>
+   */
+  VulOverview?: string
+  /**
+   * <p>录入时间</p>
+   */
+  InsertTime?: string
+  /**
+   * <p>漏洞风险等级 1：低风险，2：中风险，3：高风险</p>
+   */
+  RiskLevel?: number
+  /**
+   * <p>标签</p>
+   */
+  Tags?: string
+  /**
+   * <p>关联组件</p>
+   */
+  VulComponents?: string
+  /**
+   * <p>相关指纹数量</p>
+   */
+  BannerCount?: number
+  /**
+   * <p>漏洞资产数量</p>
+   */
+  VulAssetCount?: number
+  /**
+   * <p>最新任务状态:todo/doing/done，如果为空表示没有任务</p>
+   */
+  LastTaskStatus?: string
+  /**
+   * <p>任务id</p>
+   */
+  LastTaskInstanceId?: string
+  /**
+   * <p>xscan指纹插件id</p>
+   */
+  XscanBannerPluginId?: string
+  /**
+   * <p>xscan poc插件id</p>
+   */
+  XscanPocPluginId?: string
+  /**
+   * <p>上一次扫描时间</p>
+   */
+  LastScanTime?: string
 }
 
 /**
@@ -2795,6 +2865,14 @@ export interface DisplayFakeApp {
  * DescribeIntelligences返回参数结构体
  */
 export interface DescribeIntelligencesResponse {
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * <p>数组</p>
+   */
+  List?: Array<IntelligenceDesc>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3567,10 +3645,12 @@ export interface CreateWechatAppletResponse {
 export interface Filter {
   /**
    * 要搜索的字段
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 目标值列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
 }

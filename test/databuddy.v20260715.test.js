@@ -188,6 +188,16 @@ it("databuddy.v20260715.ListWorkspaceUsers", async function () {
     }
 })
 
+it("databuddy.v20260715.RemoveWorkspaceUsers", async function () {
+    try {
+       const data = await client.RemoveWorkspaceUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.UpdateFile", async function () {
     try {
        const data = await client.UpdateFile({})
@@ -488,6 +498,16 @@ it("databuddy.v20260715.DeleteWorkspace", async function () {
     }
 })
 
+it("databuddy.v20260715.UpdateWorkspaceUsersTags", async function () {
+    try {
+       const data = await client.UpdateWorkspaceUsersTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.UpdateWorkflow", async function () {
     try {
        const data = await client.UpdateWorkflow({})
@@ -741,6 +761,16 @@ it("databuddy.v20260715.DeleteWorkspaceRole", async function () {
 it("databuddy.v20260715.ListSchemaNames", async function () {
     try {
        const data = await client.ListSchemaNames({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.UpdateWorkspaceGroupsTags", async function () {
+    try {
+       const data = await client.UpdateWorkspaceGroupsTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

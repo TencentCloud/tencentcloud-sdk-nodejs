@@ -930,40 +930,6 @@ export interface TransferTWeCallDeviceResponse {
 }
 
 /**
- * 会话配置信息。
- */
-export interface TalkConversationConfigInfo {
-  /**
-   * 会话超时（秒）
-   */
-  SessionTimeout?: number
-  /**
-   * 允许打断
-   */
-  InterruptionEnabled?: boolean
-  /**
-   * 最大上下文
-   */
-  MaxContextTokens?: number
-  /**
-   * 空闲检测配置
-   */
-  IdleDetection?: TalkIdleDetectionConfigInfo
-  /**
-   * 是否启用情绪识别
-   */
-  EmotionEnabled?: boolean
-  /**
-   * 是否启用语义vad
-   */
-  SemanticVADEnabled?: boolean
-  /**
-   * 是否启用噪声过滤
-   */
-  NoiseFilterEnabled?: boolean
-}
-
-/**
  * DescribeTWeSeeDirectUploadInfo返回参数结构体
  */
 export interface DescribeTWeSeeDirectUploadInfoResponse {
@@ -987,28 +953,6 @@ export interface DescribeTWeSeeDirectUploadInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * GetTWeTalkProductConfigList请求参数结构体
- */
-export interface GetTWeTalkProductConfigListRequest {
-  /**
-   * 产品ID
-   */
-  ProductId?: string
-  /**
-   * 	支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
-  /**
-   * 页码
-   */
-  Offset?: number
-  /**
-   * 偏移量，10-100
-   */
-  Limit?: number
 }
 
 /**
@@ -1511,20 +1455,6 @@ export interface DescribeFirmwareTasksRequest {
 }
 
 /**
- * 空闲检测配置信息。
- */
-export interface IdleResponseInfo {
-  /**
-   * 重试次数（1-3）
-   */
-  RetryCount?: number
-  /**
-   * 响应信息
-   */
-  Message?: string
-}
-
-/**
  * DescribeDevice返回参数结构体
  */
 export interface DescribeDeviceResponse {
@@ -1860,20 +1790,6 @@ export interface TopicItem {
    * Topic权限 , 1上报  2下发
    */
   Privilege?: number
-}
-
-/**
- * DescribeTWeTalkProductConfig返回参数结构体
- */
-export interface DescribeTWeTalkProductConfigResponse {
-  /**
-   * 配置信息
-   */
-  Data?: TalkProductConfigInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2645,24 +2561,6 @@ export interface DescribeDeviceBindGatewayRequest {
    * 设备名
    */
   DeviceName: string
-}
-
-/**
- * GetTWeTalkProductConfigListV2返回参数结构体
- */
-export interface GetTWeTalkProductConfigListV2Response {
-  /**
-   * 配置信息
-   */
-  Data?: Array<TalkProductConfigV2Info>
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -3703,28 +3601,6 @@ export interface UnbindDevicesRequest {
 }
 
 /**
- * PublishBroadcastMessage请求参数结构体
- */
-export interface PublishBroadcastMessageRequest {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 消息内容
-   */
-  Payload: string
-  /**
-   * 消息质量等级
-   */
-  Qos: number
-  /**
-   * ayload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
-   */
-  PayloadEncoding?: string
-}
-
-/**
  * DeleteCloudStorageEvent返回参数结构体
  */
 export interface DeleteCloudStorageEventResponse {
@@ -4182,44 +4058,6 @@ export interface FenceAlarmPoint {
 }
 
 /**
- * UploadFirmware请求参数结构体
- */
-export interface UploadFirmwareRequest {
-  /**
-   * 产品ID
-   */
-  ProductID: string
-  /**
-   * 固件版本号
-   */
-  FirmwareVersion: string
-  /**
-   * 固件的MD5值
-   */
-  Md5sum: string
-  /**
-   * 固件的大小
-   */
-  FileSize: number
-  /**
-   * 固件名称
-   */
-  FirmwareName?: string
-  /**
-   * 固件描述
-   */
-  FirmwareDescription?: string
-  /**
-   * 固件升级模块；可选值 mcu|moudule
-   */
-  FwType?: string
-  /**
-   * 固件用户自定义配置信息
-   */
-  FirmwareUserDefined?: string
-}
-
-/**
  * DescribeFirmware请求参数结构体
  */
 export interface DescribeFirmwareRequest {
@@ -4300,9 +4138,9 @@ export interface RevokeBindUserDeviceRequest {
 }
 
 /**
- * ModifyTWeTalkProductConfigV2返回参数结构体
+ * UpdateProductPrivateCA返回参数结构体
  */
-export interface ModifyTWeTalkProductConfigV2Response {
+export interface UpdateProductPrivateCAResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4419,24 +4257,6 @@ export interface VodCloudStorageEvent {
    * <p>是否为图片事件</p><p>枚举值：</p><ul><li>true： 图片事件</li><li>false： 视频事件</li></ul>
    */
   IsStaticEvent?: boolean
-}
-
-/**
- * DeleteTWeTalkProductConfigV2请求参数结构体
- */
-export interface DeleteTWeTalkProductConfigV2Request {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
 }
 
 /**
@@ -4625,16 +4445,6 @@ export interface DescribeLoRaFrequencyRequest {
    * 频点唯一ID
    */
   FreqId?: string
-}
-
-/**
- * ModifyTWeTalkProductConfig返回参数结构体
- */
-export interface ModifyTWeTalkProductConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5104,36 +4914,6 @@ export interface UnbindProductsRequest {
 }
 
 /**
- * GetTWeTalkProductConfigListV2请求参数结构体
- */
-export interface GetTWeTalkProductConfigListV2Request {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
-  /**
-   * 是否脱敏
-   */
-  IncludeCredentials?: boolean
-  /**
-   * 页码
-   */
-  Offset?: number
-  /**
-   * 每页数据大小， 10-100
-   */
-  Limit?: number
-}
-
-/**
  * CreateCloudStorageAIService请求参数结构体
  */
 export interface CreateCloudStorageAIServiceRequest {
@@ -5480,28 +5260,6 @@ export interface ListTWeSeeCallbackResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 空闲检测信息。
- */
-export interface TalkIdleDetectionConfigInfo {
-  /**
-   * 是否启用
-   */
-  Enabled?: boolean
-  /**
-   * 用户沉默多少秒后触发空闲回调
-   */
-  TimeoutSeconds?: number
-  /**
-   * 最大重试次数（1-3）
-   */
-  MaxRetries?: number
-  /**
-   * 空闲响应
-   */
-  IdleResponses?: Array<IdleResponseInfo>
 }
 
 /**
@@ -5868,48 +5626,6 @@ export interface InquireTWeSeeSubscriptionCreatePriceResponse {
 }
 
 /**
- * CreateTWeTalkProductConfigV2请求参数结构体
- */
-export interface CreateTWeTalkProductConfigV2Request {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
-  /**
-   * 名称
-   */
-  ConfigName?: string
-  /**
-   * 系统基础配置，当需要使用系统三段式配置时配置。
-   */
-  BasicConfig?: TalkBasicConfigInfo
-  /**
-   * 自定义语音识别配置
-   */
-  STTConfig?: TalkSTTConfigInfo
-  /**
-   * 自定义大模型配置
-   */
-  LLMConfig?: TalkLLMConfigInfo
-  /**
-   * 语音合成配置
-   */
-  TTSConfig?: TalkTTSConfigInfo
-  /**
-   * 会话配置
-   */
-  ConversationConfig?: TalkConversationConfigInfo
-}
-
-/**
  * DescribeInstance返回参数结构体
  */
 export interface DescribeInstanceResponse {
@@ -6166,60 +5882,6 @@ pushResult 是表示发送结果，其中 0 表示成功， 23101 表示设备�
 }
 
 /**
- * LLM配置信息。
- */
-export interface TalkLLMConfigInfo {
-  /**
-   * 支持的LLM类型，openai-OPENAI格式。
-   */
-  LLMType?: string
-  /**
-   * 是否开启
-   */
-  Enabled?: boolean
-  /**
-   * 模型
-   */
-  Model?: string
-  /**
-   * 是否开启
-   */
-  Streaming?: boolean
-  /**
-   * 配置信息JSON字符串，根据`LLMType`进行不同的值匹配。例如`LLMType`是`openai`，`Config`值是`{\"ApiKey\":\"sk-09***\",\"ApiUrl\":\"base_url\",\"SystemPrompt\":\"你是一个语音助手\",\"Timeout\":30,\"History\":0,\"MetaInfo\":{\"productID\":\"test\"}}`
-
-## openai
-```
-{
-   "ApiKey": "sk-XXXXXXXXXXXX",
-   "ApiUrl": "https://api.openai.com/v1",
-   "SystemPrompt": "一个小小助手",
-  "Timeout":20,
-  "History":10,
-  "MetaInfo":{}
-}
-```
-   */
-  Config?: string
-  /**
-   * 温度
-   */
-  Temperature?: number
-  /**
-   * 最大token数
-   */
-  MaxTokens?: number
-  /**
-   * topP
-   */
-  TopP?: number
-  /**
-   * 工具ID列表
-   */
-  Tools?: Array<string>
-}
-
-/**
  * 设备事件的搜索结果项
  */
 export interface EventHistoryItem {
@@ -6321,16 +5983,6 @@ export interface CreatePositionSpaceResponse {
    * 空间Id
    */
   SpaceId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateTWeTalkProductConfig返回参数结构体
- */
-export interface CreateTWeTalkProductConfigResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6999,24 +6651,6 @@ export interface SeeDeleteTaskCondition {
    * <p>条件值列表。同一条件内的多个值之间为 OR 关系，至少传入一个非空值。</p>
    */
   Values: Array<string>
-}
-
-/**
- * GetTWeTalkProductConfigList返回参数结构体
- */
-export interface GetTWeTalkProductConfigListResponse {
-  /**
-   * 配置信息列表
-   */
-  Data?: Array<TalkProductConfigInfo>
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7962,40 +7596,6 @@ export interface DeletePositionFenceResponse {
 }
 
 /**
- * Talk配置信息描述。
- */
-export interface TalkProductConfigInfo {
-  /**
-   * 产品ID
-   */
-  ProductId?: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
-  /**
-   *  系统提示词
-   */
-  SystemPrompt?: string
-  /**
-   * 欢迎语
-   */
-  GreetingMessage?: string
-  /**
-   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
-   */
-  VoiceType?: number
-  /**
-   * 创建时间
-   */
-  CreateTime?: number
-  /**
-   * 更新时间
-   */
-  UpdateTime?: number
-}
-
-/**
  * DestroyTWeSeeSubscription请求参数结构体
  */
 export interface DestroyTWeSeeSubscriptionRequest {
@@ -8273,100 +7873,6 @@ export interface StopPackageUsageReportRequest {
    * <p>备注（可选）</p>
    */
   Remark?: string
-}
-
-/**
- * TTS配置信息。
- */
-export interface TalkTTSConfigInfo {
-  /**
-   * 支持的LLM类型，支持tencent-腾讯；azure-亚马逊；volcengine-火山引擎；elevenlabs-ELEVENLABS；minimax-MINIMAX；cartesia-CARTESIA；aliyun-阿里；系统默认-tencent。
-   */
-  TTSType?: string
-  /**
-   * 是否开启
-   */
-  Enabled?: boolean
-  /**
-   * 配置信息JSON字符串，根据`TTSType`进行不同的值匹配。例如`TTSType`是`tencent`，`Config`值是`{\"AppId\":123456,\"SecretId\":\"secretId*****\",\"SecretKey\":\"SecretKey****\",\"VoiceType\":10001}`
-
-## tencent
-```
-{
-   "AppId": 100203,
-   "SecretId": "XXXX",
-   "SecretKey": "XXXXX",
-  "VoiceType":123456
-}
-```
-
-## azure
-```
-{
-   "SubscriptionKey": 100203,
-   "Region": "ch-zn",
-   "VoiceName": "XXXXX",
-  "Language":"zh"
-}
-```
-## elevenlabs
-```
-{
-   "ModelId": 100203,
-   "VoiceId": "ch-zn",
-   "ApiKey": "XXXXX"
-}
-```
-## minimax
-```
-{  
-  "Model":"xxxx",
-   "ApiUrl": "346w34",
-   "ApiKey": "xxx",
-   "GroupId": "ion",
-  "VoiceType":"xioawei"
-}
-```
-## cartesia
-```
-{  
-  "Model":"xxxx",
-   "ApiKey": "xxx",
-  "VoiceId":"xioawei"
-}
-```
-## aliyun
-```
-{
-   "VoiceType": 100203,
-   "RegionId": "XXXX",
-   "ApiKey": "XXXXX"
-}
-```
-## volcengine
-```
-{
-   "AppId": "346w34",
-   "AccessToken": "xxx",
-   "ResourceId": "volc.bigasr.sauc.duration",
-  "VoiceType":"xioawei"
-}
-```
-
-   */
-  Config?: string
-  /**
-   * 温度
-   */
-  Speed?: number
-  /**
-   * 最大token数
-   */
-  Volume?: number
-  /**
-   * PITCH
-   */
-  Pitch?: number
 }
 
 /**
@@ -8728,55 +8234,6 @@ export interface ControlDeviceDataRequest {
 }
 
 /**
- * STT配置信息。
- */
-export interface TalkSTTConfigInfo {
-  /**
-   * 支持的STT类型，tencent-腾讯；azure-亚马逊；deepgram-Deepgram;系统默认-tencent。
-   */
-  STTType?: string
-  /**
-   * 是否开启
-   */
-  Enabled?: boolean
-  /**
-   * 配置信息JSON字符串，根据STTType进行不同的值匹配。例如`STTType`是`tencent`，`Config`值是`{\"AppId\":123456,\"SecretId\":\"secretId*****\",\"SecretKey\":\"SecretKey****\",\"EngineType\":\"16k_zh\"}`
-
-## tencent
-```
-{
-  "AppId": 123456,
-  "SecretId": "secretId*****",
-  "SecretKey": "SecretKey****",
-  "EngineType": "16k_zh"
-}
-```
-
-## azure
-```
-{
-  "Region": "",
-  "EndpointId": "id",
-  "Language": "zh-CN",
-  "SubscriptionKey": "*****"
-}
-```
-
-## deepgram
-```
-{
-  "Model": "nova-2",
-  "Language": "zh",
-   "BaseUrl":"http://www.deepgram.com",
-  "ApiKey": "SecretKey****"
-}
-```
-
-   */
-  Config?: string
-}
-
-/**
  * ListFirmwares返回参数结构体
  */
 export interface ListFirmwaresResponse {
@@ -9070,36 +8527,6 @@ export interface DescribeTWeSeePostPaidServiceRequest {
 }
 
 /**
- * ModifyTWeTalkProductConfig请求参数结构体
- */
-export interface ModifyTWeTalkProductConfigRequest {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 系统提示词
-   */
-  SystemPrompt?: string
-  /**
-   * 欢迎语
-   */
-  GreetingMessage?: string
-  /**
-   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
-   */
-  VoiceType?: number
-  /**
-   * 复刻音色
-   */
-  FastVoiceType?: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
-}
-
-/**
  * DescribeVodCloudStorageDate请求参数结构体
  */
 export interface DescribeVodCloudStorageDateRequest {
@@ -9255,33 +8682,21 @@ export interface ModifyCloudStorageAIServiceRequest {
 }
 
 /**
- * DescribeTWeSeeConfig返回参数结构体
+ * GenerateSignedVideoURL请求参数结构体
  */
-export interface DescribeTWeSeeConfigResponse {
+export interface GenerateSignedVideoURLRequest {
   /**
-   * 是否开启视频摘要
+   * 视频播放原始URL地址
    */
-  EnableSummary?: boolean
+  VideoURL: string
   /**
-   * 是否开启视频搜索
+   * 播放链接过期时间（时间戳，单位秒）
    */
-  EnableSearch?: boolean
+  ExpireTime: number
   /**
-   * 配置参数
+   * 通道ID 非NVR设备不填 NVR设备必填 默认为无
    */
-  Config?: string
-  /**
-   * 摘要配置参数
-   */
-  SummaryConfig?: VisionSummaryConfig
-  /**
-   * 云存事件 ID 过滤规则配置项
-   */
-  EventIdFilterConfig?: SeeEventIdFilterConfig
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ChannelId?: number
 }
 
 /**
@@ -10682,28 +10097,6 @@ export interface InvokeVideosKeywordsAnalyzerResponse {
 }
 
 /**
- * DescribeTWeTalkProductConfigV2请求参数结构体
- */
-export interface DescribeTWeTalkProductConfigV2Request {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
-  /**
-   * 是否脱敏
-   */
-  IncludeCredentials?: boolean
-}
-
-/**
  * 激活码统计信息。
  */
 export interface LicenseOverview {
@@ -11168,36 +10561,6 @@ export interface TargetInfo {
 }
 
 /**
- * CreateTWeTalkProductConfig请求参数结构体
- */
-export interface CreateTWeTalkProductConfigRequest {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 系统提示词
-   */
-  SystemPrompt: string
-  /**
-   * 欢迎语
-   */
-  GreetingMessage: string
-  /**
-   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
-   */
-  VoiceType?: number
-  /**
-   * 复刻音色
-   */
-  FastVoiceType?: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
-}
-
-/**
  * BindDevices返回参数结构体
  */
 export interface BindDevicesResponse {
@@ -11350,17 +10713,25 @@ export interface CreateTRTCSignaturesWithRoomIdResponse {
 }
 
 /**
- * DescribeTWeTalkProductConfigV2返回参数结构体
+ * PublishBroadcastMessage请求参数结构体
  */
-export interface DescribeTWeTalkProductConfigV2Response {
+export interface PublishBroadcastMessageRequest {
   /**
-   * 配置信息
+   * 产品ID
    */
-  Data?: TalkProductConfigV2Info
+  ProductId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 消息内容
    */
-  RequestId?: string
+  Payload: string
+  /**
+   * 消息质量等级
+   */
+  Qos: number
+  /**
+   * ayload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
+   */
+  PayloadEncoding?: string
 }
 
 /**
@@ -11681,68 +11052,6 @@ export interface SeeCreateSubscriptionResult {
 }
 
 /**
- * twetalk连接配置信息。
- */
-export interface TalkProductConfigV2Info {
-  /**
-   * UIN
-   */
-  Uin?: number
-  /**
-   * APPID
-   */
-  AppId?: number
-  /**
-   * 产品ID
-   */
-  ProductId?: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 配置名称
-   */
-  ConfigName?: string
-  /**
-   * 语言，默认zh；zh-中文；en-英文
-   */
-  TargetLanguage?: string
-  /**
-   * 基础配置
-   */
-  BasicConfig?: TalkBasicConfigInfo
-  /**
-   * 语音识别配置
-   */
-  STTConfig?: TalkSTTConfigInfo
-  /**
-   * 大模型配置
-   */
-  LLMConfig?: TalkLLMConfigInfo
-  /**
-   * 语音合成配置
-   */
-  TTSConfig?: TalkTTSConfigInfo
-  /**
-   * 会话配置
-   */
-  ConversationConfig?: TalkConversationConfigInfo
-  /**
-   * 版本号
-   */
-  Version?: number
-  /**
-   * 创建时间，秒级时间戳
-   */
-  CreateTime?: number
-  /**
-   * 更新时间，秒级时间戳
-   */
-  UpdateTime?: number
-}
-
-/**
  * 升级包类型详细信息
  */
 export interface OtaModuleInfo {
@@ -11817,9 +11126,29 @@ export interface CloudStorageAIServiceTaskFileInfo {
 }
 
 /**
- * DeleteTWeTalkProductConfigV2返回参数结构体
+ * DescribeTWeSeeConfig返回参数结构体
  */
-export interface DeleteTWeTalkProductConfigV2Response {
+export interface DescribeTWeSeeConfigResponse {
+  /**
+   * 是否开启视频摘要
+   */
+  EnableSummary?: boolean
+  /**
+   * 是否开启视频搜索
+   */
+  EnableSearch?: boolean
+  /**
+   * 配置参数
+   */
+  Config?: string
+  /**
+   * 摘要配置参数
+   */
+  SummaryConfig?: VisionSummaryConfig
+  /**
+   * 云存事件 ID 过滤规则配置项
+   */
+  EventIdFilterConfig?: SeeEventIdFilterConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11977,28 +11306,6 @@ export interface CreateStudioProductResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 基础配置信息。
- */
-export interface TalkBasicConfigInfo {
-  /**
-   * 系统提示词
-   */
-  SystemPrompt?: string
-  /**
-   * 欢迎语，支持多个欢迎语随机切换，格式：字符串数组，JSON字符串。
-   */
-  GreetingMessage?: string
-  /**
-   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
-   */
-  DefaultVoiceType?: number
-  /**
-   * 复刻音色ID，当不为空时，DefaultVoiceType为200000000
-   */
-  FastVoiceType?: string
 }
 
 /**
@@ -12175,16 +11482,6 @@ export interface ListEventHistoryRequest {
    * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
    */
   EventId?: string
-}
-
-/**
- * UpdateProductPrivateCA返回参数结构体
- */
-export interface UpdateProductPrivateCAResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -12418,13 +11715,25 @@ export interface VisionDetectedObject {
 }
 
 /**
- * CreateTWeTalkProductConfigV2返回参数结构体
+ * DeviceData
  */
-export interface CreateTWeTalkProductConfigV2Response {
+export interface DeviceData {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数。
    */
-  RequestId?: string
+  DeviceCert?: string
+  /**
+   * 设备名称。
+   */
+  DeviceName?: string
+  /**
+   * 设备私钥，用于 TLS 建立链接时校验客户端身份，腾讯云后台不保存，请妥善保管。采用非对称加密时返回该参数。
+   */
+  DevicePrivateKey?: string
+  /**
+   * 对称加密密钥，base64编码。采用对称加密时返回该参数。
+   */
+  DevicePsk?: string
 }
 
 /**
@@ -13389,17 +12698,41 @@ export interface TalkActivationStatusInfo {
 }
 
 /**
- * DescribeTWeTalkProductConfig请求参数结构体
+ * UploadFirmware请求参数结构体
  */
-export interface DescribeTWeTalkProductConfigRequest {
+export interface UploadFirmwareRequest {
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductID: string
   /**
-   * 支持的语言，zh-中文；en-英文；默认zh
+   * 固件版本号
    */
-  TargetLanguage?: string
+  FirmwareVersion: string
+  /**
+   * 固件的MD5值
+   */
+  Md5sum: string
+  /**
+   * 固件的大小
+   */
+  FileSize: number
+  /**
+   * 固件名称
+   */
+  FirmwareName?: string
+  /**
+   * 固件描述
+   */
+  FirmwareDescription?: string
+  /**
+   * 固件升级模块；可选值 mcu|moudule
+   */
+  FwType?: string
+  /**
+   * 固件用户自定义配置信息
+   */
+  FirmwareUserDefined?: string
 }
 
 /**
@@ -13644,28 +12977,6 @@ export interface GetTWeTalkActiveStatusRequest {
    * 设备列表， 产品ID_设备名称
    */
   DeviceIds?: Array<string>
-}
-
-/**
- * DeviceData
- */
-export interface DeviceData {
-  /**
-   * 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数。
-   */
-  DeviceCert?: string
-  /**
-   * 设备名称。
-   */
-  DeviceName?: string
-  /**
-   * 设备私钥，用于 TLS 建立链接时校验客户端身份，腾讯云后台不保存，请妥善保管。采用非对称加密时返回该参数。
-   */
-  DevicePrivateKey?: string
-  /**
-   * 对称加密密钥，base64编码。采用对称加密时返回该参数。
-   */
-  DevicePsk?: string
 }
 
 /**
@@ -13977,24 +13288,6 @@ export interface PositionSpaceInfo {
    * 用户自定义地图缩放
    */
   Zoom?: number
-}
-
-/**
- * GenerateSignedVideoURL请求参数结构体
- */
-export interface GenerateSignedVideoURLRequest {
-  /**
-   * 视频播放原始URL地址
-   */
-  VideoURL: string
-  /**
-   * 播放链接过期时间（时间戳，单位秒）
-   */
-  ExpireTime: number
-  /**
-   * 通道ID 非NVR设备不填 NVR设备必填 默认为无
-   */
-  ChannelId?: number
 }
 
 /**
@@ -15242,48 +14535,6 @@ export interface ModifyModelDefinitionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyTWeTalkProductConfigV2请求参数结构体
- */
-export interface ModifyTWeTalkProductConfigV2Request {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
-  /**
-   * 名称
-   */
-  ConfigName?: string
-  /**
-   * 系统基础配置，当需要使用系统三段式配置时配置。
-   */
-  BasicConfig?: TalkBasicConfigInfo
-  /**
-   * 自定义语音识别配置
-   */
-  STTConfig?: TalkSTTConfigInfo
-  /**
-   * 自定义大模型配置
-   */
-  LLMConfig?: TalkLLMConfigInfo
-  /**
-   * 语音合成配置
-   */
-  TTSConfig?: TalkTTSConfigInfo
-  /**
-   * 会话配置
-   */
-  ConversationConfig?: TalkConversationConfigInfo
 }
 
 /**

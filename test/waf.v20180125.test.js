@@ -738,6 +738,16 @@ it("waf.v20180125.ModifyHostStatus", async function () {
     }
 })
 
+it("waf.v20180125.ModifyCustomWhiteRule", async function () {
+    try {
+       const data = await client.ModifyCustomWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.AddBatchCustomWhiteRule", async function () {
     try {
        const data = await client.AddBatchCustomWhiteRule({})
@@ -938,9 +948,9 @@ it("waf.v20180125.EnableClientMsg", async function () {
     }
 })
 
-it("waf.v20180125.ModifyCustomWhiteRule", async function () {
+it("waf.v20180125.DestroyPostCKafkaFlow", async function () {
     try {
-       const data = await client.ModifyCustomWhiteRule({})
+       const data = await client.DestroyPostCKafkaFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1828,9 +1838,9 @@ it("waf.v20180125.ModifyAntiInfoLeakRuleStatus", async function () {
     }
 })
 
-it("waf.v20180125.DestroyPostCKafkaFlow", async function () {
+it("waf.v20180125.DeleteLLMSdkAccess", async function () {
     try {
-       const data = await client.DestroyPostCKafkaFlow({})
+       const data = await client.DeleteLLMSdkAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

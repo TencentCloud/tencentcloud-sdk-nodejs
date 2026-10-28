@@ -1093,17 +1093,13 @@ export interface DeleteCustomWhiteRuleResponse {
 }
 
 /**
- * ModifyHostMode返回参数结构体
+ * DeleteLLMSdkAccess请求参数结构体
  */
-export interface ModifyHostModeResponse {
+export interface DeleteLLMSdkAccessRequest {
   /**
-   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+   * 要删除的应用id
    */
-  Success?: ResponseCode
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Domain: string
 }
 
 /**
@@ -8094,33 +8090,13 @@ export interface ScanIpInfo {
 }
 
 /**
- * ModifyLLMWafProtectRule请求参数结构体
+ * DeleteLLMSdkAccess返回参数结构体
  */
-export interface ModifyLLMWafProtectRuleRequest {
+export interface DeleteLLMSdkAccessResponse {
   /**
-   * <p>服务ID</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ServiceId: string
-  /**
-   * <p>要修改的规则id列表</p>
-   */
-  RuleIds: Array<string>
-  /**
-   * <p>规则动作</p>
-   */
-  RuleAction?: string
-  /**
-   * <p>开关</p>
-   */
-  Status?: number
-  /**
-   * <p>实例id</p>
-   */
-  InstanceId?: string
-  /**
-   * <p>检测方向：1是入向，2是出向，3是入向和出向都检测</p>
-   */
-  Direction?: number
+  RequestId?: string
 }
 
 /**
@@ -10450,6 +10426,20 @@ export interface DescribeUserLevelResponse {
    * 300:正常 400:严格
    */
   Level?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyHostMode返回参数结构体
+ */
+export interface ModifyHostModeResponse {
+  /**
+   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+   */
+  Success?: ResponseCode
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13524,6 +13514,20 @@ export interface DescribeAccessFastAnalysisResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * skills检测命中规则名录
+ */
+export interface SkillRuleCatalogItem {
+  /**
+   * <p>规则分类标识（如 static_analysis、ai_analysis）</p>
+   */
+  Key?: string
+  /**
+   * <p>规则分类中文名称</p>
+   */
+  Value?: string
 }
 
 /**
@@ -17531,17 +17535,33 @@ export interface ModifyOwaspWhiteRuleResponse {
 }
 
 /**
- * skills检测命中规则名录
+ * ModifyLLMWafProtectRule请求参数结构体
  */
-export interface SkillRuleCatalogItem {
+export interface ModifyLLMWafProtectRuleRequest {
   /**
-   * <p>规则分类标识（如 static_analysis、ai_analysis）</p>
+   * <p>服务ID</p>
    */
-  Key?: string
+  ServiceId: string
   /**
-   * <p>规则分类中文名称</p>
+   * <p>要修改的规则id列表</p>
    */
-  Value?: string
+  RuleIds: Array<string>
+  /**
+   * <p>规则动作</p>
+   */
+  RuleAction?: string
+  /**
+   * <p>开关</p>
+   */
+  Status?: number
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>检测方向：1是入向，2是出向，3是入向和出向都检测</p>
+   */
+  Direction?: number
 }
 
 /**

@@ -118,6 +118,16 @@ it("goosefs.v20220519.DescribeLoadTask", async function () {
     }
 })
 
+it("goosefs.v20220519.CreateUserQuota", async function () {
+    try {
+       const data = await client.CreateUserQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.ModifyDataRepositoryBandwidth", async function () {
     try {
        const data = await client.ModifyDataRepositoryBandwidth({})
@@ -171,6 +181,16 @@ it("goosefs.v20220519.DescribePolicyRuleExecuteRecord", async function () {
 it("goosefs.v20220519.DescribeFilesetGeneralConfig", async function () {
     try {
        const data = await client.DescribeFilesetGeneralConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.CreateDataRepositoryTask", async function () {
+    try {
+       const data = await client.CreateDataRepositoryTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +298,16 @@ it("goosefs.v20220519.DescribeClientNodes", async function () {
     }
 })
 
+it("goosefs.v20220519.UpdateUserQuota", async function () {
+    try {
+       const data = await client.UpdateUserQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.CreateLoadTask", async function () {
     try {
        const data = await client.CreateLoadTask({})
@@ -348,9 +378,9 @@ it("goosefs.v20220519.DescribeClusterRoleToken", async function () {
     }
 })
 
-it("goosefs.v20220519.CreateDataRepositoryTask", async function () {
+it("goosefs.v20220519.DeleteUserQuota", async function () {
     try {
-       const data = await client.CreateDataRepositoryTask({})
+       const data = await client.DeleteUserQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +411,16 @@ it("goosefs.v20220519.DetachFileSystemBucket", async function () {
 it("goosefs.v20220519.AddCrossVpcSubnetSupportForClientNode", async function () {
     try {
        const data = await client.AddCrossVpcSubnetSupportForClientNode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.DescribeUserQuota", async function () {
+    try {
+       const data = await client.DescribeUserQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

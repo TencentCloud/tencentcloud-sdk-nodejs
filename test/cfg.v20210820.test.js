@@ -18,6 +18,16 @@ const client = new tencentcloud.cfg.v20210820.Client({
 })
 describe("cfg.v20210820.test.js", function () {
 
+it("cfg.v20210820.DescribeInstanceAgentList", async function () {
+    try {
+       const data = await client.DescribeInstanceAgentList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfg.v20210820.DescribeObjectTypeList", async function () {
     try {
        const data = await client.DescribeObjectTypeList({})
@@ -48,6 +58,16 @@ it("cfg.v20210820.CreateTaskFromMultiAction", async function () {
     }
 })
 
+it("cfg.v20210820.UninstallAgentOpenApi", async function () {
+    try {
+       const data = await client.UninstallAgentOpenApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfg.v20210820.ExecuteTaskInstance", async function () {
     try {
        const data = await client.ExecuteTaskInstance({})
@@ -71,6 +91,16 @@ it("cfg.v20210820.DescribeTemplateList", async function () {
 it("cfg.v20210820.ModifyTaskRunStatus", async function () {
     try {
        const data = await client.ModifyTaskRunStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfg.v20210820.InstallAgentOpenApi", async function () {
+    try {
+       const data = await client.InstallAgentOpenApi({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

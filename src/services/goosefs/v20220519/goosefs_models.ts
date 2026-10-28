@@ -270,6 +270,32 @@ export interface UpdateLoadTaskPriorityResponse {
 }
 
 /**
+ * CreateUserQuota请求参数结构体
+ */
+export interface CreateUserQuotaRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+  /**
+   * 配额类型，UID或GID
+   */
+  QuotaType: string
+  /**
+   * 配额对象名称，对应UID或者GID的值
+   */
+  QuotaObjectName: string
+  /**
+   * 容量配额（需带单位G）
+   */
+  QuotaSizeLimit?: string
+  /**
+   * 文件数配额
+   */
+  QuotaFilesLimit?: string
+}
+
+/**
  * DescribeFilesetGeneralConfig请求参数结构体
  */
 export interface DescribeFilesetGeneralConfigRequest {
@@ -850,6 +876,20 @@ export interface MountMultipleStorageFileSystemRequest {
 }
 
 /**
+ * DeleteUserQuota请求参数结构体
+ */
+export interface DeleteUserQuotaRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+  /**
+   * 配额id
+   */
+  QuotaId: string
+}
+
+/**
  * DescribeLoadTask请求参数结构体
  */
 export interface DescribeLoadTaskRequest {
@@ -1136,6 +1176,20 @@ export interface DataRepositoryTaskAttribute {
 }
 
 /**
+ * DescribeUserQuota返回参数结构体
+ */
+export interface DescribeUserQuotaResponse {
+  /**
+   * <p>配额信息列表</p>
+   */
+  QuotaList?: Array<UserQuotaInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCustomerCluster请求参数结构体
  */
 export interface DescribeCustomerClusterRequest {
@@ -1192,61 +1246,23 @@ export interface QueryCrossVpcSubnetSupportForClientNodeResponse {
 }
 
 /**
- * 文件系统属性
+ * DeleteUserQuota返回参数结构体
  */
-export interface FSAttribute {
+export interface DeleteUserQuotaResponse {
   /**
-   * 文件系统类型, 可填goosefs和goosefsx
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type?: string
+  RequestId?: string
+}
+
+/**
+ * AddCrossVpcSubnetSupportForClientNode返回参数结构体
+ */
+export interface AddCrossVpcSubnetSupportForClientNodeResponse {
   /**
-   * 文件系统ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FileSystemId?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * GooseFSx文件系统属性
-   */
-  GooseFSxAttribute?: GooseFSxAttribute
-  /**
-   * 文件系统状态 ACTIVE(运行中), CREATING(创建中), DESTROYING(销毁中), FAIL(创建失败),EXPANDING(扩容中),PROBING(容灾中)
-   */
-  Status?: string
-  /**
-   * 文件系统名
-   */
-  Name?: string
-  /**
-   * 文件系统备注描述
-   */
-  Description?: string
-  /**
-   * vpc ID
-   */
-  VpcId?: string
-  /**
-   * 子网ID
-   */
-  SubnetId?: string
-  /**
-   * 子网所在的可用区
-   */
-  Zone?: string
-  /**
-   * Tag数组
-   */
-  Tag?: Array<Tag>
-  /**
-   * 更新属性时间
-   */
-  ModifyTime?: string
-  /**
-   * 文件系统付费信息
-   */
-  ChargeAttribute?: ChargeAttribute
+  RequestId?: string
 }
 
 /**
@@ -1282,17 +1298,37 @@ export interface BatchAddClientNodesRequest {
 }
 
 /**
- * BuildClientNodeMountCommand返回参数结构体
+ * ListLoadTasks请求参数结构体
  */
-export interface BuildClientNodeMountCommandResponse {
+export interface ListLoadTasksRequest {
   /**
-   * <p>挂载命令</p>
+   * 集群 ID
    */
-  Command?: string
+  ClusterId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 偏移量
    */
-  RequestId?: string
+  Offset: number
+  /**
+   * 偏移量
+   */
+  Limit: number
+  /**
+   * 任务创建起始时间戳，默认为3天前：当前时间戳-86400*3
+   */
+  StartTimestamp?: number
+  /**
+   * 任务变更时间戳
+   */
+  EndTimestamp?: number
+  /**
+   * 筛选任务状态，枚举Waiting,Running,Canceled,Completed。默认返回所有任务
+   */
+  State?: string
+  /**
+   * 筛选优先级任务，默认返回所有任务
+   */
+  Priority?: number
 }
 
 /**
@@ -1406,13 +1442,61 @@ export interface DeleteFilesetRequest {
 }
 
 /**
- * AddCrossVpcSubnetSupportForClientNode返回参数结构体
+ * 文件系统属性
  */
-export interface AddCrossVpcSubnetSupportForClientNodeResponse {
+export interface FSAttribute {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 文件系统类型, 可填goosefs和goosefsx
    */
-  RequestId?: string
+  Type?: string
+  /**
+   * 文件系统ID
+   */
+  FileSystemId?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * GooseFSx文件系统属性
+   */
+  GooseFSxAttribute?: GooseFSxAttribute
+  /**
+   * 文件系统状态 ACTIVE(运行中), CREATING(创建中), DESTROYING(销毁中), FAIL(创建失败),EXPANDING(扩容中),PROBING(容灾中)
+   */
+  Status?: string
+  /**
+   * 文件系统名
+   */
+  Name?: string
+  /**
+   * 文件系统备注描述
+   */
+  Description?: string
+  /**
+   * vpc ID
+   */
+  VpcId?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 子网所在的可用区
+   */
+  Zone?: string
+  /**
+   * Tag数组
+   */
+  Tag?: Array<Tag>
+  /**
+   * 更新属性时间
+   */
+  ModifyTime?: string
+  /**
+   * 文件系统付费信息
+   */
+  ChargeAttribute?: ChargeAttribute
 }
 
 /**
@@ -1448,6 +1532,28 @@ export interface DescribeClusterRoleTokenResponse {
 }
 
 /**
+ * DescribeUserQuota请求参数结构体
+ */
+export interface DescribeUserQuotaRequest {
+  /**
+   * <p>文件系统id</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>QuotaId列表</p>
+   */
+  QuotaIds?: Array<string>
+  /**
+   * <p>配额类型</p>
+   */
+  QuotaType?: string
+  /**
+   * <p>配额对象名称列表</p>
+   */
+  QuotaObjectNames?: Array<string>
+}
+
+/**
  * GooseFSx创建时候的属性
  */
 export interface GooseFSxBuildElement {
@@ -1478,6 +1584,16 @@ export interface AddCrossVpcSubnetSupportForClientNodeRequest {
    * 子网信息
    */
   SubnetInfo: SubnetInfo
+}
+
+/**
+ * UpdateUserQuota返回参数结构体
+ */
+export interface UpdateUserQuotaResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1609,6 +1725,20 @@ export interface QueryDataRepositoryBandwidthResponse {
 }
 
 /**
+ * CreateUserQuota返回参数结构体
+ */
+export interface CreateUserQuotaResponse {
+  /**
+   * 配额id
+   */
+  QuotaId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryDataRepositoryBandwidth请求参数结构体
  */
 export interface QueryDataRepositoryBandwidthRequest {
@@ -1616,6 +1746,60 @@ export interface QueryDataRepositoryBandwidthRequest {
    * 文件系统ID
    */
   FileSystemId: string
+}
+
+/**
+ * 用户配额信息
+ */
+export interface UserQuotaInfo {
+  /**
+   * 配额id
+   */
+  QuotaId?: string
+  /**
+   * 配额类型
+   */
+  QuotaType?: string
+  /**
+   * 配额对象名称，对应UID/GID的值
+   */
+  QuotaObjectName?: string
+  /**
+   * 容量配额限定值
+   */
+  QuotaSizeLimit?: string
+  /**
+   * 已使用容量配额
+   */
+  QuotaSizeUsed?: string
+  /**
+   * 容量配额使用占比
+   */
+  QuotaSizeUsedPercent?: string
+  /**
+   * 文件数配额限定值
+   */
+  QuotaFilesLimit?: string
+  /**
+   * 已使用文件数配额
+   */
+  QuotaFilesUsed?: string
+  /**
+   * 文件数配额使用占比
+   */
+  QuotaFilesUsedPercent?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+   */
+  ModifyTime?: string
+  /**
+   * 配额状态：creating 配置中 active 已生效 modify 修改中
+   */
+  Status?: string
 }
 
 /**
@@ -1731,37 +1915,17 @@ export interface DescribeClusterClientTokenRequest {
 }
 
 /**
- * ListLoadTasks请求参数结构体
+ * BuildClientNodeMountCommand返回参数结构体
  */
-export interface ListLoadTasksRequest {
+export interface BuildClientNodeMountCommandResponse {
   /**
-   * 集群 ID
+   * <p>挂载命令</p>
    */
-  ClusterId: string
+  Command?: string
   /**
-   * 偏移量
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset: number
-  /**
-   * 偏移量
-   */
-  Limit: number
-  /**
-   * 任务创建起始时间戳，默认为3天前：当前时间戳-86400*3
-   */
-  StartTimestamp?: number
-  /**
-   * 任务变更时间戳
-   */
-  EndTimestamp?: number
-  /**
-   * 筛选任务状态，枚举Waiting,Running,Canceled,Completed。默认返回所有任务
-   */
-  State?: string
-  /**
-   * 筛选优先级任务，默认返回所有任务
-   */
-  Priority?: number
+  RequestId?: string
 }
 
 /**
@@ -1974,6 +2138,28 @@ export interface AttachFileSystemBucketResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateUserQuota请求参数结构体
+ */
+export interface UpdateUserQuotaRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+  /**
+   * 配额id
+   */
+  QuotaId: string
+  /**
+   * 容量配额限定值
+   */
+  QuotaSizeLimit?: string
+  /**
+   * 文件数配额限定值
+   */
+  QuotaFilesLimit?: string
 }
 
 /**

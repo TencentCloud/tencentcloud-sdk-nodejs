@@ -3139,6 +3139,16 @@ export interface DescribePersonCertificateRequest {
 }
 
 /**
+ * 合同对比查询结果过滤项配置列表
+ */
+export interface FormatConfigs {
+  /**
+   * <p>合同对比结果过滤项</p><p>枚举值：</p><ul><li>1： 标点符号</li><li>2： 页眉页脚（包含页码）</li><li>3： 目录</li><li>4： 印章</li><li>5： 序号</li><li>6： 水印</li><li>7： 下划线</li></ul>
+   */
+  Values: Array<number | bigint>
+}
+
+/**
  * 合同对比差异结果详情。
  */
 export interface ComparisonDetail {
@@ -7395,8 +7405,7 @@ export interface CreateFlowOption {
  */
 export interface DescribeContractDiffTaskWebUrlResponse {
   /**
-   * 合同对比嵌入式web页面链接，有效期：5分钟
-链接仅能使用一次
+   * <p>合同对比嵌入式web页面链接，有效期：5分钟<br>链接仅能使用一次</p>
    */
   WebUrl?: string
   /**
@@ -12664,7 +12673,7 @@ export interface CreateModifyAdminAuthorizationUrlRequest {
  */
 export interface ApproverInfo {
   /**
-   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: </p><p><strong>0</strong>：企业</p><p> <strong>1</strong>：个人</p><p> <strong>3</strong>：企业“授权签”注：<code>类型为3（企业“授权签”）时，此接口会默认完成该签署方的签署。“授权签”仅进行盖章操作，不能“授权签”名。</code></p><p> <strong>7</strong>: 个人“授权签”，适用于个人“授权签”场景。注: <code>个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。</code> </p><p><strong>8</strong>：本方企业 PIN 码授权，注：<code>使用前需先完成员工PIN码授权</code> </p><p><strong>9</strong>：他方企业 PIN 码授权，注：<code>使用前需先完成合作方企业PIN码授权</code></p><p> <strong>10</strong>: 个人 PIN 码授权，适用于个人“授权签”场景。注: <code>个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。</code></p>
+   * <p>在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: </p><p><strong>0</strong>：企业</p><p> <strong>1</strong>：个人</p><p> <strong>3</strong>：企业“授权签”注：<code>类型为3（企业“授权签”）时，此接口会默认完成该签署方的签署。“授权签”仅进行盖章操作，不能“授权签”名。</code>  <font color="red">后续会下掉此种类型，请迁移到8或9</font></p><p> <strong>7</strong>: 个人“授权签”，适用于个人“授权签”场景。注: <code>个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。</code> <font color="red">后续会下掉此种类型，请迁移到10</font></p><p><strong>8</strong>：本方企业 PIN 码授权，注：<code>使用前需先完成员工PIN码授权</code> </p><p><strong>9</strong>：他方企业 PIN 码授权，注：<code>使用前需先完成合作方企业PIN码授权</code></p><p> <strong>10</strong>: 个人 PIN 码授权，适用于个人“授权签”场景。注: <code>个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。</code></p>
    */
   ApproverType: number
   /**
@@ -13100,15 +13109,17 @@ export interface ModifyApplicationCallbackInfoRequest {
  */
 export interface DescribeContractDiffTaskWebUrlRequest {
   /**
-   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
-
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * <p>执行本接口操作的员工信息。使用此接口时，必须填写userId。</p><p>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
    */
   Operator: UserInfo
   /**
-   * 合同对比任务ID，该参数通过调用接口<a href="https://qian.tencent.com/developers/companyApis/embedPages/CreateContractDiffTaskWebUrl" target="_blank">创建合同对比web页面</a>获取。
+   * <p>合同对比任务ID，该参数通过调用接口<a href="https://qian.tencent.com/developers/companyApis/embedPages/CreateContractDiffTaskWebUrl" target="_blank">创建合同对比web页面</a>获取。</p>
    */
   TaskId: string
+  /**
+   * <p>过滤项列表，获取合同对比结果根据此过滤项列表进行过滤展示。<br>注：</p><ul><li>参数不传，默认根据该用户的过滤项配置进行展示。</li><li>参数传空数组，不过滤合同对比结果。</li><li>参数传过滤项列表，根据过滤项列表对合同对比结果进行过滤展示。</li></ul>
+   */
+  FormatConfigs?: FormatConfigs
 }
 
 /**

@@ -57,7 +57,7 @@ import {
   GenerateDealsAndPayNewRequest,
   QueryClientMsgRequest,
   DeleteCustomWhiteRuleResponse,
-  ModifyHostModeResponse,
+  DeleteLLMSdkAccessRequest,
   ModifyBotSceneStatusResponse,
   DescribeAreaBanAreasResponse,
   ConditionInfo,
@@ -326,7 +326,7 @@ import {
   GoodNews,
   ModifyBotSceneUCBRuleRequest,
   ScanIpInfo,
-  ModifyLLMWafProtectRuleRequest,
+  DeleteLLMSdkAccessResponse,
   DescribeUserSignatureRuleRequest,
   DeleteOwaspRuleStatusResponse,
   ModifyProtectionStatusResponse,
@@ -420,6 +420,7 @@ import {
   CreateAreaBanRuleRequest,
   Area,
   DescribeUserLevelResponse,
+  ModifyHostModeResponse,
   IpAccessControlParam,
   IntentContent,
   TokenValidation,
@@ -512,6 +513,7 @@ import {
   LLMPkg,
   DescribeTopAttackDomainRequest,
   DescribeAccessFastAnalysisResponse,
+  SkillRuleCatalogItem,
   DescribeProtectGroupResponse,
   ModifyDomainIpv6StatusResponse,
   UploadSkillSecScanResponse,
@@ -648,7 +650,7 @@ import {
   DescribeLLMWafProtectRulesRequest,
   LimitHeader,
   ModifyOwaspWhiteRuleResponse,
-  SkillRuleCatalogItem,
+  ModifyLLMWafProtectRuleRequest,
   ModifyBotIdRuleResponse,
   ModifyApiSecEventChangeResponse,
   CreateAccessExportResponse,
@@ -1466,6 +1468,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 编辑精准白名单
+   */
+  async ModifyCustomWhiteRule(
+    req: ModifyCustomWhiteRuleRequest,
+    cb?: (error: string, rep: ModifyCustomWhiteRuleResponse) => void
+  ): Promise<ModifyCustomWhiteRuleResponse> {
+    return this.request("ModifyCustomWhiteRule", req, cb)
+  }
+
+  /**
    * 增加批量精准白名单规则
    */
   async AddBatchCustomWhiteRule(
@@ -1666,13 +1678,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑精准白名单
+   * 销毁CKafka投递流任务
    */
-  async ModifyCustomWhiteRule(
-    req: ModifyCustomWhiteRuleRequest,
-    cb?: (error: string, rep: ModifyCustomWhiteRuleResponse) => void
-  ): Promise<ModifyCustomWhiteRuleResponse> {
-    return this.request("ModifyCustomWhiteRule", req, cb)
+  async DestroyPostCKafkaFlow(
+    req: DestroyPostCKafkaFlowRequest,
+    cb?: (error: string, rep: DestroyPostCKafkaFlowResponse) => void
+  ): Promise<DestroyPostCKafkaFlowResponse> {
+    return this.request("DestroyPostCKafkaFlow", req, cb)
   }
 
   /**
@@ -2569,13 +2581,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁CKafka投递流任务
+   * llmwaf-sdk删除接入配置接口
    */
-  async DestroyPostCKafkaFlow(
-    req: DestroyPostCKafkaFlowRequest,
-    cb?: (error: string, rep: DestroyPostCKafkaFlowResponse) => void
-  ): Promise<DestroyPostCKafkaFlowResponse> {
-    return this.request("DestroyPostCKafkaFlow", req, cb)
+  async DeleteLLMSdkAccess(
+    req: DeleteLLMSdkAccessRequest,
+    cb?: (error: string, rep: DeleteLLMSdkAccessResponse) => void
+  ): Promise<DeleteLLMSdkAccessResponse> {
+    return this.request("DeleteLLMSdkAccess", req, cb)
   }
 
   /**

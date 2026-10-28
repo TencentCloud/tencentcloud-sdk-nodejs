@@ -26,6 +26,21 @@ export interface DescribeTaskRequest {
 }
 
 /**
+ * UninstallAgentOpenApi返回参数结构体
+ */
+export interface UninstallAgentOpenApiResponse {
+  /**
+   * <p>提示用户状态不正确无法安装字段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeActionFieldConfigList请求参数结构体
  */
 export interface DescribeActionFieldConfigListRequest {
@@ -130,6 +145,20 @@ export interface TaskGroupAction {
 }
 
 /**
+ * UninstallAgentOpenApi请求参数结构体
+ */
+export interface UninstallAgentOpenApiRequest {
+  /**
+   * <p>1: CVM<br>2: TKE</p>
+   */
+  InstanceType: number
+  /**
+   * <p>需要卸载的instance_id</p>
+   */
+  InstanceIds: Array<string>
+}
+
+/**
  * 应用性能监控产品中应用信息
  */
 export interface ApmServiceInfo {
@@ -166,41 +195,51 @@ export interface TaskGroupInstancesExecuteRules {
 }
 
 /**
- * CreateTaskFromAction请求参数结构体
+ * InstallAgentOpenApi请求参数结构体
  */
-export interface CreateTaskFromActionRequest {
+export interface InstallAgentOpenApiRequest {
   /**
-   * 动作ID，可从动作列表接口DescribeActionLibraryList获取
+   * <p>1:CVM<br>2:TKE</p>
    */
-  TaskActionId: number
+  InstanceType: number
   /**
-   * 参与演练的实例ID
+   * <p>安装探针实例列表</p>
    */
-  TaskInstances: Array<string>
+  InstanceIds: Array<string>
+}
+
+/**
+ * 从经验模板创建演练时需要配置的任务参数
+ */
+export interface TaskConfig {
   /**
-   * 演练名称，不填则默认取动作名称
+   * 动作组配置，需要保证配置个数和经验中的动作组个数一致
+   */
+  TaskGroupsConfig: Array<TaskGroupConfig>
+  /**
+   * 更改后的演练名称，不填则默认取经验名称
    */
   TaskTitle?: string
   /**
-   * 演练描述，不填则默认取动作描述
+   * 更改后的演练描述，不填则默认取经验描述
    */
   TaskDescription?: string
   /**
-   * 动作通用参数，需要json序列化传入，可以从动作详情接口DescribeActionFieldConfigList获取，不填默认使用动作默认参数
+   * 演练执行模式：1----手工执行/ 2 ---自动执行，不填则默认取经验执行模式
    */
-  TaskActionGeneralConfiguration?: string
+  TaskMode?: number
   /**
-   * 动作自定义参数，需要json序列化传入，可以从动作详情接口DescribeActionFieldConfigList获取，不填默认使用动作默认参数，注意：必填参数，是没有默认值的 ，务必保证传入有效值
-   */
-  TaskActionCustomConfiguration?: string
-  /**
-   * 演练自动暂停时间，单位分钟, 不填则默认为60
+   * 演练自动暂停时间，单位分钟, 不填则默认取经验自动暂停时间
    */
   TaskPauseDuration?: number
   /**
-   * 标签列表
+   * 演练标签信息，不填则默认取经验标签
    */
-  TaskTags?: Array<TagWithCreate>
+  Tags?: Array<TagWithCreate>
+  /**
+   * 护栏处理方式，1--顺序回滚，2--演练暂停
+   */
+  PolicyDealType?: number
 }
 
 /**
@@ -302,13 +341,21 @@ export interface TaskGroup {
 }
 
 /**
- * ExecuteTask返回参数结构体
+ * DescribeTaskExecuteLogs请求参数结构体
  */
-export interface ExecuteTaskResponse {
+export interface DescribeTaskExecuteLogsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
    */
-  RequestId?: string
+  TaskId: number
+  /**
+   * 返回的内容行数
+   */
+  Limit: number
+  /**
+   * 日志起始的行数。
+   */
+  Offset: number
 }
 
 /**
@@ -573,6 +620,44 @@ export interface Template {
 }
 
 /**
+ * CreateTaskFromAction请求参数结构体
+ */
+export interface CreateTaskFromActionRequest {
+  /**
+   * 动作ID，可从动作列表接口DescribeActionLibraryList获取
+   */
+  TaskActionId: number
+  /**
+   * 参与演练的实例ID
+   */
+  TaskInstances: Array<string>
+  /**
+   * 演练名称，不填则默认取动作名称
+   */
+  TaskTitle?: string
+  /**
+   * 演练描述，不填则默认取动作描述
+   */
+  TaskDescription?: string
+  /**
+   * 动作通用参数，需要json序列化传入，可以从动作详情接口DescribeActionFieldConfigList获取，不填默认使用动作默认参数
+   */
+  TaskActionGeneralConfiguration?: string
+  /**
+   * 动作自定义参数，需要json序列化传入，可以从动作详情接口DescribeActionFieldConfigList获取，不填默认使用动作默认参数，注意：必填参数，是没有默认值的 ，务必保证传入有效值
+   */
+  TaskActionCustomConfiguration?: string
+  /**
+   * 演练自动暂停时间，单位分钟, 不填则默认为60
+   */
+  TaskPauseDuration?: number
+  /**
+   * 标签列表
+   */
+  TaskTags?: Array<TagWithCreate>
+}
+
+/**
  * DescribeObjectTypeList返回参数结构体
  */
 export interface DescribeObjectTypeListResponse {
@@ -584,24 +669,6 @@ export interface DescribeObjectTypeListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeTaskExecuteLogs请求参数结构体
- */
-export interface DescribeTaskExecuteLogsRequest {
-  /**
-   * 任务ID
-   */
-  TaskId: number
-  /**
-   * 返回的内容行数
-   */
-  Limit: number
-  /**
-   * 日志起始的行数。
-   */
-  Offset: number
 }
 
 /**
@@ -791,21 +858,21 @@ export interface ExecuteTaskInstanceRequest {
 }
 
 /**
- * 演练动作组简易配置
+ * DescribeInstanceAgentList返回参数结构体
  */
-export interface TaskGroupForAction {
+export interface DescribeInstanceAgentListResponse {
   /**
-   * 动作ID
+   * <p>返回InstnaceAgent详情</p>
    */
-  TaskActionId?: number
+  InstanceAgent?: Array<InstanceAgent>
   /**
-   * {"ActionTimeout":1800}
+   * <p>总条目数</p>
    */
-  TaskActionGeneralConfiguration?: string
+  TotalCount?: number
   /**
-   * {"ip": "0.0.0.0"}
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskActionCustomConfiguration?: string
+  RequestId?: string
 }
 
 /**
@@ -949,17 +1016,30 @@ export interface DescribeTemplateListRequest {
 }
 
 /**
- * 展示标签列表
+ * 添加探针入参
  */
-export interface TagWithDescribe {
+export interface InstanceAgentItem {
   /**
-   * 标签键
+   * <p>添加参数Key的名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKey: string
+  Name?: string
   /**
-   * 标签值
+   * <p>添加参数的Value</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagValue: string
+  Value?: string
+}
+
+/**
+ * 添加探针的参数
+ */
+export interface InstanceAgent {
+  /**
+   * 添加InstanceAgent的参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceAgentItem?: Array<InstanceAgentItem>
 }
 
 /**
@@ -1246,6 +1326,20 @@ export interface Task {
 }
 
 /**
+ * 展示标签列表
+ */
+export interface TagWithDescribe {
+  /**
+   * 标签键
+   */
+  TagKey: string
+  /**
+   * 标签值
+   */
+  TagValue: string
+}
+
+/**
  * 演练人员组织
  */
 export interface TaskOrg {
@@ -1257,6 +1351,46 @@ export interface TaskOrg {
    * 负责人
    */
   TaskOperator?: string
+}
+
+/**
+ * DescribeInstanceAgentList请求参数结构体
+ */
+export interface DescribeInstanceAgentListRequest {
+  /**
+   * <p>1:CVM<br>2.TKE</p>
+   */
+  InstanceType: number
+  /**
+   * <p>筛选条件</p>
+   */
+  Filters?: Array<AgentFilter>
+  /**
+   * <p>页数</p>
+   */
+  Page?: number
+  /**
+   * <p>每页大小</p>
+   */
+  PageSize?: number
+  /**
+   * <p>查询探针场景</p>
+   */
+  AgentScene?: number
+}
+
+/**
+ * 筛选符合条件的Agent
+ */
+export interface AgentFilter {
+  /**
+   * 查询key
+   */
+  Name?: string
+  /**
+   * 查询value
+   */
+  Value?: Array<string>
 }
 
 /**
@@ -1386,40 +1520,6 @@ export interface TriggerPolicyRequest {
 }
 
 /**
- * 从经验模板创建演练时需要配置的任务参数
- */
-export interface TaskConfig {
-  /**
-   * 动作组配置，需要保证配置个数和经验中的动作组个数一致
-   */
-  TaskGroupsConfig: Array<TaskGroupConfig>
-  /**
-   * 更改后的演练名称，不填则默认取经验名称
-   */
-  TaskTitle?: string
-  /**
-   * 更改后的演练描述，不填则默认取经验描述
-   */
-  TaskDescription?: string
-  /**
-   * 演练执行模式：1----手工执行/ 2 ---自动执行，不填则默认取经验执行模式
-   */
-  TaskMode?: number
-  /**
-   * 演练自动暂停时间，单位分钟, 不填则默认取经验自动暂停时间
-   */
-  TaskPauseDuration?: number
-  /**
-   * 演练标签信息，不填则默认取经验标签
-   */
-  Tags?: Array<TagWithCreate>
-  /**
-   * 护栏处理方式，1--顺序回滚，2--演练暂停
-   */
-  PolicyDealType?: number
-}
-
-/**
  * TriggerPolicy返回参数结构体
  */
 export interface TriggerPolicyResponse {
@@ -1431,6 +1531,21 @@ export interface TriggerPolicyResponse {
    * 是否触发成功
    */
   Success?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InstallAgentOpenApi返回参数结构体
+ */
+export interface InstallAgentOpenApiResponse {
+  /**
+   * <p>状态异常提示用户</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1545,6 +1660,16 @@ export interface ObjectTypeJsonParse {
    * 节点ID
    */
   InstanceId?: string
+}
+
+/**
+ * ExecuteTask返回参数结构体
+ */
+export interface ExecuteTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2003,6 +2128,24 @@ export interface CreateTaskFromActionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 演练动作组简易配置
+ */
+export interface TaskGroupForAction {
+  /**
+   * 动作ID
+   */
+  TaskActionId?: number
+  /**
+   * {"ActionTimeout":1800}
+   */
+  TaskActionGeneralConfiguration?: string
+  /**
+   * {"ip": "0.0.0.0"}
+   */
+  TaskActionCustomConfiguration?: string
 }
 
 /**

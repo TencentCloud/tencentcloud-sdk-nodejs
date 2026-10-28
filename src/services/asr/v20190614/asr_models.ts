@@ -757,13 +757,21 @@ export interface VoicePrintUpdateRequest {
  */
 export interface SpeakerRoleInfo {
   /**
-   * 音频url地址，建议不超过30秒，最大45秒
+   * <p>音频url地址，建议不超过30秒，最大45秒</p>
    */
-  RoleAudioUrl: string
+  RoleAudioUrl?: string
   /**
-   * 不超过30字节
+   * <p>不超过30字节</p>
    */
-  RoleName: string
+  RoleName?: string
+  /**
+   * <p>声纹 ID（V2 版本使用），注意：</p><ul><li>传入未注册或不属于本 AppId 的声纹 ID，该 ID 会被跳过（不报错，相当于没有传入这个说话人信息）</li></ul>
+   */
+  VoicePrintId?: string
+  /**
+   * <p>角色昵称（V2 版本使用），注意：</p><ul><li>传空字符串或者不传入则使用声纹注册时指定的角色名</li><li>否则将覆盖声纹注册时指定的角色名</li><li>角色名不超过 30 字节，仅支持字母、数字、下划线和中文。</li><li>这里指定的角色名只影响本次识别，不影响声纹库中注册的角色名</li></ul>
+   */
+  SpeakerNick?: string
 }
 
 /**

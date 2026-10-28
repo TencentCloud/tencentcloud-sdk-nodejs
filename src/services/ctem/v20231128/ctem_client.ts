@@ -93,6 +93,7 @@ import {
   DisplayFakeWechatOfficial,
   CreateAppRequest,
   DisplayHttp,
+  IntelligenceDesc,
   CreateDomainResponse,
   DescribeLeakageDatasResponse,
   DeleteWechatOfficialAccountsRequest,

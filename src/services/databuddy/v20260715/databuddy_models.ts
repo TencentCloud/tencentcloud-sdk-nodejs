@@ -189,6 +189,20 @@ export interface Workflow {
 }
 
 /**
+ * UpdateWorkspaceGroupsTags返回参数结构体
+ */
+export interface UpdateWorkspaceGroupsTagsResponse {
+  /**
+   * <p>修改工作空间用户组标签响应</p>
+   */
+  Data?: UpdateWorkspaceGroupsTagsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 获取数据库名称列表响应
  */
 export interface ListSchemaNamesRsp {
@@ -1437,6 +1451,16 @@ export interface AddWorkspaceUsersRequest {
 }
 
 /**
+ * 修改工作空间用户标签响应
+ */
+export interface UpdateWorkspaceUsersTagsRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
+}
+
+/**
  * 删除Schema的响应
  */
 export interface DeleteSchemaRsp {
@@ -1996,6 +2020,24 @@ export interface UpdateWorkspaceGroupsRolesRequest {
    * 角色ID，可通过 ListWorkspaceRoles 接口获取
    */
   RoleIds: Array<string>
+}
+
+/**
+ * 批量移除工作空间用户响应
+ */
+export interface RemoveWorkspaceUsersRsp {
+  /**
+   * <p>请求已完成处理；即使部分失败也为 true，逐个结果以 SuccessUins/FailItems 为准</p>
+   */
+  Status?: boolean
+  /**
+   * <p>移除成功的用户 UIN 列表</p>
+   */
+  SuccessUins?: Array<string>
+  /**
+   * <p>失败项列表（Item 为用户 UIN，FailReason 为失败原因）</p>
+   */
+  FailItems?: Array<CommonFailItem>
 }
 
 /**
@@ -2636,6 +2678,24 @@ export interface UpdateVolumeRsp {
 }
 
 /**
+ * UpdateWorkspaceUsersTags请求参数结构体
+ */
+export interface UpdateWorkspaceUsersTagsRequest {
+  /**
+   * <p>必填，用户UIN列表，单次最多100个</p>
+   */
+  UserUins: Array<string>
+  /**
+   * <p>必填，工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>待更新的标签集合（标签维度及标签值通过 ID 指定），覆盖更新语义：传入后将被覆盖为目标用户的全部直绑标签，不传或传空数组则清空目标用户的所有直绑标签。每个元素中 TagId 必填，Values[].TagValueId 必填；传入的 TagValue、Source、GroupNames 服务端不读取，无需传入。标签维度与标签值可先通过 CreateTags / CreateTagValues 创建，再通过 ListTags 获取 ID（TagId 取 Items[].TagId，TagValueId 取 Items[].TagValues[].TagValueId）。</p>
+   */
+  Tags?: Array<UserTagInfo>
+}
+
+/**
  * 监控指标配置
  */
 export interface MonitorMetricBrief {
@@ -3172,6 +3232,16 @@ export interface GetFileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 修改工作空间用户组标签响应
+ */
+export interface UpdateWorkspaceGroupsTagsRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
 }
 
 /**
@@ -4414,6 +4484,24 @@ export interface AdvancedParameter {
 }
 
 /**
+ * UpdateWorkspaceGroupsTags请求参数结构体
+ */
+export interface UpdateWorkspaceGroupsTagsRequest {
+  /**
+   * <p>必填，用户组ID列表，单次最多100个；可通过 ListWorkspaceGroups 接口获取</p>
+   */
+  GroupIds: Array<string>
+  /**
+   * <p>必填，工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>标签列表，覆盖写用户组的标签；传即覆盖更新，不传或为空则清除全部标签</p>
+   */
+  Tags?: Array<UserTagInfo>
+}
+
+/**
  * CreateVolume返回参数结构体
  */
 export interface CreateVolumeResponse {
@@ -4471,6 +4559,20 @@ export interface TruncatePartitioning {
    * 截取长度
    */
   Width: string
+}
+
+/**
+ * UpdateWorkspaceUsersTags返回参数结构体
+ */
+export interface UpdateWorkspaceUsersTagsResponse {
+  /**
+   * <p>修改工作空间用户标签响应</p>
+   */
+  Data?: UpdateWorkspaceUsersTagsRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5035,6 +5137,20 @@ export interface GetTablesRequest {
    * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
    */
   CatalogSource?: string
+}
+
+/**
+ * RemoveWorkspaceUsers返回参数结构体
+ */
+export interface RemoveWorkspaceUsersResponse {
+  /**
+   * <p>批量移除工作空间用户结果</p>
+   */
+  Data?: RemoveWorkspaceUsersRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9488,6 +9604,20 @@ export interface UpdateVolumeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RemoveWorkspaceUsers请求参数结构体
+ */
+export interface RemoveWorkspaceUsersRequest {
+  /**
+   * <p>必填，待移除的用户 UIN 列表，用户 UIN 可通过 ListWorkspaceUsers 接口获取，单次最多10个</p>
+   */
+  UserUins: Array<string>
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
 }
 
 /**

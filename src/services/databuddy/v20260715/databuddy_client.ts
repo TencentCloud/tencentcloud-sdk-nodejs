@@ -22,6 +22,7 @@ import {
   GetFolderRsp,
   ListWorkspaceGroupUsersRequest,
   Workflow,
+  UpdateWorkspaceGroupsTagsResponse,
   ListSchemaNamesRsp,
   FetchOption,
   DeleteWorkflowResponse,
@@ -76,6 +77,7 @@ import {
   ListWorkspaceGroupUsersRsp,
   GetWorkflowTaskRunRequest,
   AddWorkspaceUsersRequest,
+  UpdateWorkspaceUsersTagsRsp,
   DeleteSchemaRsp,
   DictItem,
   DeleteConsoleGroupsRequest,
@@ -104,6 +106,7 @@ import {
   DeleteConsoleGroupsResponse,
   InnerWorkflowTaskRun,
   UpdateWorkspaceGroupsRolesRequest,
+  RemoveWorkspaceUsersRsp,
   DeleteVolumeResponse,
   UpdateWorkspaceRoleResult,
   Partitioning,
@@ -125,6 +128,7 @@ import {
   ListTablesRsp,
   FileStorage,
   UpdateVolumeRsp,
+  UpdateWorkspaceUsersTagsRequest,
   MonitorMetricBrief,
   ParamInfo,
   AddWorkspaceUsersResponse,
@@ -144,6 +148,7 @@ import {
   WorkflowBaseInfo,
   DeleteCatalogRsp,
   GetFileResponse,
+  UpdateWorkspaceGroupsTagsRsp,
   RangePartitioning,
   LocationInfo,
   ListConsoleGroupUsersResponse,
@@ -183,10 +188,12 @@ import {
   StopComputeRequest,
   RemoveWorkspaceGroupsRequest,
   AdvancedParameter,
+  UpdateWorkspaceGroupsTagsRequest,
   CreateVolumeResponse,
   DeleteCatalogRequest,
   CreateModelRsp,
   TruncatePartitioning,
+  UpdateWorkspaceUsersTagsResponse,
   CreateModelVersionRsp,
   SearchAssetResponse,
   TagInfo,
@@ -218,6 +225,7 @@ import {
   GetWorkspaceResponse,
   RemoveConsoleUsersResponse,
   GetTablesRequest,
+  RemoveWorkspaceUsersResponse,
   ListModelsRequest,
   InnerWorkflowTaskRunIteration,
   SparseCheckoutConfig,
@@ -403,6 +411,7 @@ import {
   GetViewRsp,
   CreateWorkspaceResponse,
   UpdateVolumeResponse,
+  RemoveWorkspaceUsersRequest,
   GetTableRequest,
   FeatureTable,
 } from "./databuddy_models"
@@ -587,6 +596,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWorkspaceUsersResponse) => void
   ): Promise<ListWorkspaceUsersResponse> {
     return this.request("ListWorkspaceUsers", req, cb)
+  }
+
+  /**
+   * <p>批量移除工作空间用户（单次最多10个；单个 UIN 失败不影响其他 UIN 移除，成败以 SuccessUins/FailItems 为准）</p>
+   */
+  async RemoveWorkspaceUsers(
+    req: RemoveWorkspaceUsersRequest,
+    cb?: (error: string, rep: RemoveWorkspaceUsersResponse) => void
+  ): Promise<RemoveWorkspaceUsersResponse> {
+    return this.request("RemoveWorkspaceUsers", req, cb)
   }
 
   /**
@@ -924,6 +943,21 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 修改工作空间用户标签
+本接口为整体覆盖式修改：每次调用以请求中的 Tags 为准，替换指定用户的全部直绑标签，而非增量追加。
+1、传入 Tags（含 TagId/TagValueId）：替换为该批标签
+2、不传 Tags 或传入空数组（"Tags": []）：将清除 UserUins 中所有用户的全部直绑标签，且操作不可逆，请谨慎调用
+3、多个用户将共享同一批 Tags；仅修改单个用户时，UserUins 请只传该用户
+4、仅清除用户直绑（Source=1）的标签，用户从用户组继承的标签（Source=2）不受影响
+     */
+  async UpdateWorkspaceUsersTags(
+    req: UpdateWorkspaceUsersTagsRequest,
+    cb?: (error: string, rep: UpdateWorkspaceUsersTagsResponse) => void
+  ): Promise<UpdateWorkspaceUsersTagsResponse> {
+    return this.request("UpdateWorkspaceUsersTags", req, cb)
+  }
+
+  /**
    * 更新工作流
    */
   async UpdateWorkflow(
@@ -1206,6 +1240,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListSchemaNamesResponse) => void
   ): Promise<ListSchemaNamesResponse> {
     return this.request("ListSchemaNames", req, cb)
+  }
+
+  /**
+   * 修改工作空间用户组标签
+   */
+  async UpdateWorkspaceGroupsTags(
+    req: UpdateWorkspaceGroupsTagsRequest,
+    cb?: (error: string, rep: UpdateWorkspaceGroupsTagsResponse) => void
+  ): Promise<UpdateWorkspaceGroupsTagsResponse> {
+    return this.request("UpdateWorkspaceGroupsTags", req, cb)
   }
 
   /**

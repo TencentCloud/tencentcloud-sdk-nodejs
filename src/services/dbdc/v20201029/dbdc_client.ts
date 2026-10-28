@@ -29,10 +29,13 @@ import {
   DescribeInstancesResponse,
   DeleteDBCustomDisasterRecoverGroupsResponse,
   SystemDisk,
+  ResizeDBCustomNodeDiskResponse,
+  StartDBCustomNodesResponse,
   DBCustomNodeTypeInfo,
   ModifyInstanceNameResponse,
   DescribeDBCustomClusterNodeConfigRequest,
   DescribeDBCustomDisasterRecoverGroupQuotaResponse,
+  StopDBCustomNodesResponse,
   ModifyDBCustomNodeAttributesResponse,
   CreateDBCustomClusterResponse,
   DescribeDBCustomImagesRequest,
@@ -41,6 +44,7 @@ import {
   DBCustomClusterNodeResource,
   CreateDBCustomClusterRequest,
   DescribeInstanceListResponse,
+  ModifyDBCustomNodeTypeRequest,
   DescribeDBCustomDisasterRecoverGroupsRequest,
   ModifyDBCustomNodeSecurityGroupsResponse,
   Label,
@@ -59,6 +63,7 @@ import {
   ModifyDBCustomClusterTagsRequest,
   DescribeDBCustomTaskStatusResponse,
   ModifyDBCustomNodeTagsRequest,
+  StopDBCustomNodesRequest,
   DescribeInstanceDetailResponse,
   ModifyDBCustomClusterNodeConfigResponse,
   CreateDBCustomDisasterRecoverGroupRequest,
@@ -73,7 +78,7 @@ import {
   CheckRoleAuthorizedRequest,
   ModifyDBCustomNodesDisasterRecoverGroupRequest,
   CreateDBCustomNodesRequest,
-  RenewDBCustomNodeResponse,
+  RebootDBCustomNodesRequest,
   DescribeDBCustomImagesResponse,
   ModifyDBCustomNodeTagsResponse,
   InstanceExpand,
@@ -105,10 +110,15 @@ import {
   Filter,
   IsolateDBCustomNodeResponse,
   DBCustomClusterNodeConfig,
+  ResizeDBCustomNodeDiskRequest,
   MetaResource,
   DBCustomNode,
   ModifyDBCustomDisasterRecoverGroupAttributeRequest,
+  ModifyDBCustomNodeTypeResponse,
+  ResetDBCustomNodeRequest,
+  RenewDBCustomNodeResponse,
   DBCustomClusterNode,
+  StartDBCustomNodesRequest,
   DescribeDBCustomNodeSecurityGroupsResponse,
   DestroyDBCustomNodeResponse,
   DescribeDBCustomTaskStatusRequest,
@@ -120,6 +130,7 @@ import {
   CreateDBCustomDisasterRecoverGroupResponse,
   DescribeDBInstancesResponse,
   CreateDBCustomNodesResponse,
+  RebootDBCustomNodesResponse,
   DescribeDBCustomNodeSecurityGroupsRequest,
   DescribeDBCustomClusterNodesResponse,
   DescribeInstanceDetailRequest,
@@ -135,6 +146,7 @@ import {
   ModifyDBCustomNodeSecurityGroupsRequest,
   PolicyRule,
   InstanceDetail,
+  ResetDBCustomNodeResponse,
 } from "./dbdc_models"
 
 /**
@@ -287,6 +299,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（StopDBCustomNodes）用于关机 DB Custom 节点。
+   */
+  async StopDBCustomNodes(
+    req: StopDBCustomNodesRequest,
+    cb?: (error: string, rep: StopDBCustomNodesResponse) => void
+  ): Promise<StopDBCustomNodesResponse> {
+    return this.request("StopDBCustomNodes", req, cb)
+  }
+
+  /**
    * 该接口(DescribeDBCustomRegions) 用于查询 DB Custom 支持的地域列表。
    */
   async DescribeDBCustomRegions(
@@ -427,6 +449,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（RebootDBCustomNodes）用于重启 DB Custom 节点。
+   */
+  async RebootDBCustomNodes(
+    req: RebootDBCustomNodesRequest,
+    cb?: (error: string, rep: RebootDBCustomNodesResponse) => void
+  ): Promise<RebootDBCustomNodesResponse> {
+    return this.request("RebootDBCustomNodes", req, cb)
+  }
+
+  /**
    * 该接口（RemoveNodesFromDBCustomCluster）用于从 DB Custom 集群移出节点。
    */
   async RemoveNodesFromDBCustomCluster(
@@ -437,6 +469,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 该接口（ModifyDBCustomNodeType）用于修改 DB Custom 节点配置。
+修改节点配置过程中会重启节点。
+     */
+  async ModifyDBCustomNodeType(
+    req: ModifyDBCustomNodeTypeRequest,
+    cb?: (error: string, rep: ModifyDBCustomNodeTypeResponse) => void
+  ): Promise<ModifyDBCustomNodeTypeResponse> {
+    return this.request("ModifyDBCustomNodeType", req, cb)
+  }
+
+  /**
    * 该接口（ModifyDBCustomDisasterRecoverGroupTags）用于修改 DB Custom 置放群组绑定的标签。
    */
   async ModifyDBCustomDisasterRecoverGroupTags(
@@ -444,6 +487,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBCustomDisasterRecoverGroupTagsResponse) => void
   ): Promise<ModifyDBCustomDisasterRecoverGroupTagsResponse> {
     return this.request("ModifyDBCustomDisasterRecoverGroupTags", req, cb)
+  }
+
+  /**
+   * 该接口（ResizeDBCustomNodeDisk）用于调整 DB Custom 节点磁盘容量。
+   */
+  async ResizeDBCustomNodeDisk(
+    req: ResizeDBCustomNodeDiskRequest,
+    cb?: (error: string, rep: ResizeDBCustomNodeDiskResponse) => void
+  ): Promise<ResizeDBCustomNodeDiskResponse> {
+    return this.request("ResizeDBCustomNodeDisk", req, cb)
   }
 
   /**
@@ -474,6 +527,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBCustomClusterKubeconfigResponse) => void
   ): Promise<DescribeDBCustomClusterKubeconfigResponse> {
     return this.request("DescribeDBCustomClusterKubeconfig", req, cb)
+  }
+
+  /**
+   * 该接口（ResetDBCustomNode）用于重装 DB Custom 节点的操作系统。
+   */
+  async ResetDBCustomNode(
+    req: ResetDBCustomNodeRequest,
+    cb?: (error: string, rep: ResetDBCustomNodeResponse) => void
+  ): Promise<ResetDBCustomNodeResponse> {
+    return this.request("ResetDBCustomNode", req, cb)
   }
 
   /**
@@ -564,6 +627,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBCustomNodeTagsResponse) => void
   ): Promise<ModifyDBCustomNodeTagsResponse> {
     return this.request("ModifyDBCustomNodeTags", req, cb)
+  }
+
+  /**
+   * 该接口（StartDBCustomNodes）用于开机 DB Custom 节点。
+   */
+  async StartDBCustomNodes(
+    req: StartDBCustomNodesRequest,
+    cb?: (error: string, rep: StartDBCustomNodesResponse) => void
+  ): Promise<StartDBCustomNodesResponse> {
+    return this.request("StartDBCustomNodes", req, cb)
   }
 
   /**

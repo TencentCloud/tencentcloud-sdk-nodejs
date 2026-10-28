@@ -158,6 +158,16 @@ it("dbdc.v20201029.DestroyDBCustomCluster", async function () {
     }
 })
 
+it("dbdc.v20201029.StopDBCustomNodes", async function () {
+    try {
+       const data = await client.StopDBCustomNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbdc.v20201029.DescribeDBCustomRegions", async function () {
     try {
        const data = await client.DescribeDBCustomRegions({})
@@ -298,6 +308,16 @@ it("dbdc.v20201029.DeleteDBCustomNodesDisasterRecoverGroup", async function () {
     }
 })
 
+it("dbdc.v20201029.RebootDBCustomNodes", async function () {
+    try {
+       const data = await client.RebootDBCustomNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbdc.v20201029.RemoveNodesFromDBCustomCluster", async function () {
     try {
        const data = await client.RemoveNodesFromDBCustomCluster({})
@@ -308,9 +328,29 @@ it("dbdc.v20201029.RemoveNodesFromDBCustomCluster", async function () {
     }
 })
 
+it("dbdc.v20201029.ModifyDBCustomNodeType", async function () {
+    try {
+       const data = await client.ModifyDBCustomNodeType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbdc.v20201029.ModifyDBCustomDisasterRecoverGroupTags", async function () {
     try {
        const data = await client.ModifyDBCustomDisasterRecoverGroupTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbdc.v20201029.ResizeDBCustomNodeDisk", async function () {
+    try {
+       const data = await client.ResizeDBCustomNodeDisk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +381,16 @@ it("dbdc.v20201029.ModifyDBCustomDisasterRecoverGroupAttribute", async function 
 it("dbdc.v20201029.DescribeDBCustomClusterKubeconfig", async function () {
     try {
        const data = await client.DescribeDBCustomClusterKubeconfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbdc.v20201029.ResetDBCustomNode", async function () {
+    try {
+       const data = await client.ResetDBCustomNode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +481,16 @@ it("dbdc.v20201029.CheckRoleAuthorized", async function () {
 it("dbdc.v20201029.ModifyDBCustomNodeTags", async function () {
     try {
        const data = await client.ModifyDBCustomNodeTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbdc.v20201029.StartDBCustomNodes", async function () {
+    try {
+       const data = await client.StartDBCustomNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

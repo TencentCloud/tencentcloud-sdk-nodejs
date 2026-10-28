@@ -19,21 +19,24 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeTaskRequest,
+  UninstallAgentOpenApiResponse,
   DescribeActionFieldConfigListRequest,
   TaskGroupAction,
+  UninstallAgentOpenApiRequest,
   ApmServiceInfo,
   TaskGroupInstancesExecuteRules,
-  CreateTaskFromActionRequest,
+  InstallAgentOpenApiRequest,
+  TaskConfig,
   DeleteTaskRequest,
   DescribeActionLibraryListRequest,
   TaskGroup,
-  ExecuteTaskResponse,
+  DescribeTaskExecuteLogsRequest,
   DescribeActionFieldConfigListResponse,
   ActionFieldConfigDetail,
   TemplateGroupAction,
   Template,
+  CreateTaskFromActionRequest,
   DescribeObjectTypeListResponse,
-  DescribeTaskExecuteLogsRequest,
   ModifyTaskRunStatusRequest,
   DescribeTemplateResponse,
   DescribePolicy,
@@ -43,14 +46,15 @@ import {
   ModifyTaskRunStatusResponse,
   DescribeTemplateRequest,
   ExecuteTaskInstanceRequest,
-  TaskGroupForAction,
+  DescribeInstanceAgentListResponse,
   ExecuteTaskRequest,
   DescribeTaskListResponse,
   ResourceOffline,
   DescribeTemplateListResponse,
   TaskMonitor,
   DescribeTemplateListRequest,
-  TagWithDescribe,
+  InstanceAgentItem,
+  InstanceAgent,
   DescribeObjectTypeListRequest,
   DescribeTaskPolicyTriggerLogResponse,
   CreateTaskFromTemplateResponse,
@@ -58,16 +62,20 @@ import {
   ObjectType,
   DescribeTaskPolicyTriggerLogRequest,
   Task,
+  TagWithDescribe,
   TaskOrg,
+  DescribeInstanceAgentListRequest,
+  AgentFilter,
   TaskReportInfo,
   CreateTaskFromTemplateRequest,
   CreateTaskFromMultiActionRequest,
   TriggerPolicyRequest,
-  TaskConfig,
   TriggerPolicyResponse,
+  InstallAgentOpenApiResponse,
   DescribeTaskListRequest,
   DescribeActionLibraryListResponse,
   ObjectTypeJsonParse,
+  ExecuteTaskResponse,
   TaskListItem,
   ExecuteTaskInstanceResponse,
   DescribeTaskExecuteLogsResponse,
@@ -82,6 +90,7 @@ import {
   CreateTaskFromMultiActionResponse,
   DescribeTaskResponse,
   CreateTaskFromActionResponse,
+  TaskGroupForAction,
   TemplateListItem,
   TagWithCreate,
   ObjectTypeConfigFields,
@@ -95,6 +104,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cfg.tencentcloudapi.com", "2021-08-20", clientConfig)
+  }
+
+  /**
+   * 查询探针列表，换为OTeam探针版本
+   */
+  async DescribeInstanceAgentList(
+    req: DescribeInstanceAgentListRequest,
+    cb?: (error: string, rep: DescribeInstanceAgentListResponse) => void
+  ): Promise<DescribeInstanceAgentListResponse> {
+    return this.request("DescribeInstanceAgentList", req, cb)
   }
 
   /**
@@ -128,6 +147,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 卸载探针
+   */
+  async UninstallAgentOpenApi(
+    req: UninstallAgentOpenApiRequest,
+    cb?: (error: string, rep: UninstallAgentOpenApiResponse) => void
+  ): Promise<UninstallAgentOpenApiResponse> {
+    return this.request("UninstallAgentOpenApi", req, cb)
+  }
+
+  /**
    * 触发混沌演练任务的动作，对于实例进行演练操作
    */
   async ExecuteTaskInstance(
@@ -155,6 +184,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTaskRunStatusResponse) => void
   ): Promise<ModifyTaskRunStatusResponse> {
     return this.request("ModifyTaskRunStatus", req, cb)
+  }
+
+  /**
+   * 安装探针接口
+   */
+  async InstallAgentOpenApi(
+    req: InstallAgentOpenApiRequest,
+    cb?: (error: string, rep: InstallAgentOpenApiResponse) => void
+  ): Promise<InstallAgentOpenApiResponse> {
+    return this.request("InstallAgentOpenApi", req, cb)
   }
 
   /**

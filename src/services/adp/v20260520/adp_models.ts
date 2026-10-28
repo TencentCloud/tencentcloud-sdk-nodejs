@@ -12271,21 +12271,29 @@ export interface InputBoxConfig {
  */
 export interface Space {
   /**
-   * 空间id
+   * <p>空间id</p>
    */
   SpaceId?: string
   /**
-   * 空间名称
+   * <p>空间名称</p>
    */
   Name?: string
   /**
-   * 空间描述
+   * <p>空间描述</p>
    */
   Description?: string
   /**
-   * 空间权限
+   * <p>空间权限</p>
    */
   PermissionIdList?: Array<string>
+  /**
+   * <p>创建时间</p><p>参数格式：秒时间戳</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：秒时间戳</p>
+   */
+  UpdateTime?: string
 }
 
 /**

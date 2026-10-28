@@ -209,6 +209,36 @@ export interface SystemDisk {
 }
 
 /**
+ * ResizeDBCustomNodeDisk返回参数结构体
+ */
+export interface ResizeDBCustomNodeDiskResponse {
+  /**
+   * <p>调整节点磁盘容量的任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartDBCustomNodes返回参数结构体
+ */
+export interface StartDBCustomNodesResponse {
+  /**
+   * <p>任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DB Custom 节点机型信息。
  */
 export interface DBCustomNodeTypeInfo {
@@ -286,6 +316,21 @@ export interface DescribeDBCustomDisasterRecoverGroupQuotaResponse {
    * <p>物理机类型置放群组内节点的配额数</p>
    */
   NodeInHostGroupQuota?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopDBCustomNodes返回参数结构体
+ */
+export interface StopDBCustomNodesResponse {
+  /**
+   * <p>任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -460,6 +505,20 @@ export interface DescribeInstanceListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDBCustomNodeType请求参数结构体
+ */
+export interface ModifyDBCustomNodeTypeRequest {
+  /**
+   * <p>节点ID</p>
+   */
+  NodeId: string
+  /**
+   * <p>节点机型</p>
+   */
+  NodeType: string
 }
 
 /**
@@ -840,6 +899,20 @@ export interface ModifyDBCustomNodeTagsRequest {
    * <p>需要解关联的标签Key</p><p>本接口中 AddTags 和 DeleteTagKeys 二者必须存在其一，且二者不能包含相同的标签键。</p>
    */
   DeleteTagKeys?: Array<string>
+}
+
+/**
+ * StopDBCustomNodes请求参数结构体
+ */
+export interface StopDBCustomNodesRequest {
+  /**
+   * <p>节点 ID 列表</p><p>入参限制：最多支持 100 个</p>
+   */
+  NodeIds: Array<string>
+  /**
+   * <p>关机类型</p><p>枚举值：</p><ul><li>SOFT： 软关机</li><li>HARD： 硬关机</li><li>SOFT_FIRST： 优先软关机，失败再执行硬关机</li></ul><p>默认值：SOFT</p>
+   */
+  StopType?: string
 }
 
 /**
@@ -1427,13 +1500,17 @@ export interface CreateDBCustomNodesRequest {
 }
 
 /**
- * RenewDBCustomNode返回参数结构体
+ * RebootDBCustomNodes请求参数结构体
  */
-export interface RenewDBCustomNodeResponse {
+export interface RebootDBCustomNodesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>节点 ID 列表</p><p>入参限制：最多支持 100 个</p>
    */
-  RequestId?: string
+  NodeIds: Array<string>
+  /**
+   * <p>关机类型</p><p>枚举值：</p><ul><li>SOFT： 软关机</li><li>HARD： 硬关机</li><li>SOFT_FIRST： 优先软关机，失败再执行硬关机</li></ul><p>默认值：SOFT</p>
+   */
+  StopType?: string
 }
 
 /**
@@ -2153,6 +2230,24 @@ export interface DBCustomClusterNodeConfig {
 }
 
 /**
+ * ResizeDBCustomNodeDisk请求参数结构体
+ */
+export interface ResizeDBCustomNodeDiskRequest {
+  /**
+   * <p>节点ID</p>
+   */
+  NodeId: string
+  /**
+   * <p>节点磁盘ID</p>
+   */
+  DiskId: string
+  /**
+   * <p>调整后的磁盘容量大小</p><p>单位：GB</p><p>必须大于当前硬盘大小。系统盘小于2048，数据盘小于32000</p>
+   */
+  DiskSize: number
+}
+
+/**
  * 资源信息。
  */
 export interface MetaResource {
@@ -2323,6 +2418,53 @@ export interface ModifyDBCustomDisasterRecoverGroupAttributeRequest {
 }
 
 /**
+ * ModifyDBCustomNodeType返回参数结构体
+ */
+export interface ModifyDBCustomNodeTypeResponse {
+  /**
+   * <p>修改节点配置的任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResetDBCustomNode请求参数结构体
+ */
+export interface ResetDBCustomNodeRequest {
+  /**
+   * <p>节点ID</p><p>参数格式：dbcn-hq98qjym</p>
+   */
+  NodeId: string
+  /**
+   * <p>实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。</p><p>入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。</p>
+   */
+  LoginSettings: LoginSettings
+  /**
+   * <p>重设的操作系统镜像ID</p><p>取值参考：可通过&quot;DescribeDBCustomImages&quot;接口获取支持的镜像。</p>
+   */
+  ImageId?: string
+  /**
+   * <p>重装系统时，可以指定修改节点的主机名。</p><p>入参限制：- 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。</p><ul><li>Windows ：主机名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。</li><li>Linux：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。</li></ul><p>注意：节点在没有加入到集群之前才支持修改主机 HostName。</p>
+   */
+  HostName?: string
+}
+
+/**
+ * RenewDBCustomNode返回参数结构体
+ */
+export interface RenewDBCustomNodeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DB Custom 集群节点信息。
  */
 export interface DBCustomClusterNode {
@@ -2373,6 +2515,16 @@ export interface DBCustomClusterNode {
    * <p>节点最新进行中的任务类型</p><p>枚举值：</p><ul><li>add-nodes-to-cluster： 添加节点到集群</li><li>remove-nodes-from-cluster： 从集群中移除节点</li><li>modify-nodes-attributes： 修改节点属性</li><li>modify-nodes-drg： 修改节点置放群组</li></ul>
    */
   LatestRunningTaskType?: string
+}
+
+/**
+ * StartDBCustomNodes请求参数结构体
+ */
+export interface StartDBCustomNodesRequest {
+  /**
+   * <p>节点 ID 列表</p><p>入参限制：最多支持 100 个</p>
+   */
+  NodeIds: Array<string>
 }
 
 /**
@@ -2547,6 +2699,21 @@ export interface CreateDBCustomNodesResponse {
   NodeIds?: Array<string>
   /**
    * <p>创建节点的任务ID</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RebootDBCustomNodes返回参数结构体
+ */
+export interface RebootDBCustomNodesResponse {
+  /**
+   * <p>任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: number
   /**
@@ -2953,4 +3120,19 @@ export interface InstanceDetail {
    * 集群设备详情
    */
   InstanceDeviceInfos?: Array<InstanceDeviceInfo>
+}
+
+/**
+ * ResetDBCustomNode返回参数结构体
+ */
+export interface ResetDBCustomNodeResponse {
+  /**
+   * <p>任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
