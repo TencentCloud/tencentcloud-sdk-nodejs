@@ -3531,6 +3531,20 @@ export interface CreateCustomLoginKeyRequest {
 }
 
 /**
+ * EnablePGDocumentExt返回参数结构体
+ */
+export interface EnablePGDocumentExtResponse {
+  /**
+   * <p>是否开启成功标记</p><p>枚举值：</p><ul><li>true： 开启成功</li><li>false： 开启失败</li></ul>
+   */
+  Enabled?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCreateMySQLResult请求参数结构体
  */
 export interface DescribeCreateMySQLResultRequest {
@@ -8525,6 +8539,16 @@ export interface MigrationSummary {
    * <p>migration 创建时间</p><p>deprecated</p>
    */
   CreatedBy?: string
+}
+
+/**
+ * EnablePGDocumentExt请求参数结构体
+ */
+export interface EnablePGDocumentExtRequest {
+  /**
+   * <p>环境 id，租户级标识信息，开通环境时产生，全局唯一</p><p>参数格式：用户自定义小写英文命名 + 随机雪花字符</p>
+   */
+  EnvId: string
 }
 
 /**

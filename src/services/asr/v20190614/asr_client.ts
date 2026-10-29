@@ -56,6 +56,7 @@ import {
   VoicePrintCountData,
   VoicePrintUpdateRequest,
   SpeakerRoleInfo,
+  LlmResult,
   DeleteAsrVocabRequest,
   UpdateAsrVocabRequest,
   CreateAsrVocabResponse,

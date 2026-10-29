@@ -243,6 +243,10 @@ export interface TaskStatus {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioDuration?: number
+  /**
+   * 大模型后处理结果
+   */
+  LlmResults?: Array<LlmResult>
 }
 
 /**
@@ -611,7 +615,7 @@ export interface GetAsrVocabRequest {
  */
 export interface DescribeTaskStatusResponse {
   /**
-   * 录音文件识别的请求返回结果。
+   * <p>录音文件识别的请求返回结果。</p>
    */
   Data?: TaskStatus
   /**
@@ -757,21 +761,39 @@ export interface VoicePrintUpdateRequest {
  */
 export interface SpeakerRoleInfo {
   /**
-   * <p>音频url地址，建议不超过30秒，最大45秒</p>
+   * <p>音频url地址，建议不超过30秒，最大45秒（配合RoleName字段一起使用，仅限16k_zh_en、16k_zh_en_2.0引擎）</p>
    */
   RoleAudioUrl?: string
   /**
-   * <p>不超过30字节</p>
+   * <p>不超过30字节（配合RoleAudioUrl字段一起使用，仅限16k_zh_en、16k_zh_en_2.0引擎）</p>
    */
   RoleName?: string
   /**
-   * <p>声纹 ID（V2 版本使用），注意：</p><ul><li>传入未注册或不属于本 AppId 的声纹 ID，该 ID 会被跳过（不报错，相当于没有传入这个说话人信息）</li></ul>
+   * <p>声纹 ID（与SpeakerNick配合使用，仅限16k_zh_en_meeting引擎支持），注意：- 传入未注册或不属于本 AppId 的声纹 ID，该 ID 会被跳过（不报错，相当于没有传入这个说话人信息）</p>
    */
   VoicePrintId?: string
   /**
-   * <p>角色昵称（V2 版本使用），注意：</p><ul><li>传空字符串或者不传入则使用声纹注册时指定的角色名</li><li>否则将覆盖声纹注册时指定的角色名</li><li>角色名不超过 30 字节，仅支持字母、数字、下划线和中文。</li><li>这里指定的角色名只影响本次识别，不影响声纹库中注册的角色名</li></ul>
+   * <p>角色昵称（与VoicePrintId配合使用，仅限16k_zh_en_meeting引擎支持），注意：- 传空字符串或者不传入则使用声纹注册时指定的角色名- 否则将覆盖声纹注册时指定的角色名- 角色名不超过 30 字节，仅支持字母、数字、下划线和中文。- 这里指定的角色名只影响本次识别，不影响声纹库中注册的角色名</p>
    */
   SpeakerNick?: string
+}
+
+/**
+ * 一个能力的名字和结果
+ */
+export interface LlmResult {
+  /**
+   * <p>能力名</p>
+   */
+  Feature?: string
+  /**
+   * <p>结果</p>
+   */
+  Result?: string
+  /**
+   * <p>这个能力是否成功得到结果</p>
+   */
+  Success?: boolean
 }
 
 /**
@@ -1065,7 +1087,7 @@ export interface CreateRecTaskRequest {
    */
   ChannelNum: number
   /**
-   * <p>识别结果返回样式<br>0：基础识别结果（仅包含有效人声时间戳，无词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>）；<br>1：基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值，<strong>不含标点</strong>）；<br>2：基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值和标点）；<br>3：基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值和标点），且识别结果按标点符号分段，<strong>适用字幕场景</strong>；<br>4：<strong>【增值付费功能】</strong>基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值和标点），且识别结果按nlp语义分段，<strong>适用会议、庭审记录转写等场景</strong>，仅支持8k_zh/16k_zh引擎<br>5：<strong>【增值付费功能】</strong>基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值和标点），并输出口语转书面语转写结果，该结果去除语气词、重复词、精简冗余表达，并修正发言人口误，实现口语转书面语的效果，<strong>适用于线上、线下会议直接总结为书面会议纪要的场景</strong>，仅支持8k_zh/16k_zh引擎</p><p>注意：<br>以下引擎仅支持参数值设置为0：16k_multi_lang、16k_ja、16k_ko、16k_vi、16k_ms、16k_id、16k_fil、16k_th、16k_pt、16k_tr、16k_ar、16k_es、16k_hi、16k_fr、16k_zh_medical、16k_de<br>如果传入参数值4，需确保账号已购买<a href="https://cloud.tencent.com/document/product/1093/35686#97ae4aa0-29a0-4066-9f07-ccaf8856a16b">语义分段资源包</a>，或账号开启后付费；<strong>若当前账号已开启后付费功能，并传入参数值4，将<a href="https://cloud.tencent.com/document/product/1093/35686#d912167d-ffd5-41a9-8b1c-2e89845a6852">自动计费</a></strong><br>如果传入参数值5，需确保账号已购买<a href="https://cloud.tencent.com/document/product/1093/35686#97ae4aa0-29a0-4066-9f07-ccaf8856a16b">口语转书面语资源包</a>，或账号开启后付费；<strong>若当前账号已开启后付费功能，并传入参数值5，将自动计费<a href="https://cloud.tencent.com/document/product/1093/35686#d912167d-ffd5-41a9-8b1c-2e89845a6852">自动计费</a></strong></p>
+   * <p>识别结果返回样式<br>0：基础识别结果（仅包含有效人声时间戳，无词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>）；<br>1：基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值，<strong>不含标点</strong>）；<br>2：基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值和标点）；<br>3：基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值和标点），且识别结果按标点符号分段，<strong>适用字幕场景</strong>；<br>4：<strong>【增值付费功能】</strong>基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值和标点），且识别结果按nlp语义分段，<strong>适用会议、庭审记录转写等场景</strong>，仅支持8k_zh/16k_zh引擎；<br>5：<strong>【增值付费功能】</strong>基础识别结果之上，增加词粒度的<a href="https://cloud.tencent.com/document/api/1093/37824#SentenceDetail">详细识别结果</a>（包含词级别时间戳、语速值和标点），并输出口语转书面语转写结果，该结果去除语气词、重复词、精简冗余表达，并修正发言人口误，实现口语转书面语的效果，<strong>适用于线上、线下会议直接总结为书面会议纪要的场景</strong>，仅支持8k_zh/16k_zh引擎；<br>7:<strong>【增值付费功能】</strong>基础识别结果之上，增加大模型后处理功能，支持章节摘要、全文总结、待办事项、角色识别、方言转普通话、司乘角色分离六个功能点。<br>注意：<br>以下引擎仅支持参数值设置为0：16k_multi_lang、16k_ja、16k_ko、16k_vi、16k_ms、16k_id、16k_fil、16k_th、16k_pt、16k_tr、16k_ar、16k_es、16k_hi、16k_fr、16k_zh_medical、16k_de<br>如果传入参数值4，需确保账号已购买<a href="https://cloud.tencent.com/document/product/1093/35686#97ae4aa0-29a0-4066-9f07-ccaf8856a16b">语义分段资源包</a>，或账号开启后付费；<strong>若当前账号已开启后付费功能，并传入参数值4，将<a href="https://cloud.tencent.com/document/product/1093/35686#d912167d-ffd5-41a9-8b1c-2e89845a6852">自动计费</a></strong><br>如果传入参数值5，需确保账号已购买<a href="https://cloud.tencent.com/document/product/1093/35686#97ae4aa0-29a0-4066-9f07-ccaf8856a16b">口语转书面语资源包</a>，或账号开启后付费；<strong>若当前账号已开启后付费功能，并传入参数值5，将<a href="https://cloud.tencent.com/document/product/1093/35686#d912167d-ffd5-41a9-8b1c-2e89845a6852">自动计费</a></strong><br>如果传入参数值7，需确保账号已开启后付费；<strong>若当前账号已开启后付费功能，并传入参数值7，配合设置Extra中LlmFeatures参数，将根据实际使用的功能点<a href="https://cloud.tencent.com/document/product/1093/35686#d912167d-ffd5-41a9-8b1c-2e89845a6852">计费</a>，如同时使用多项功能，将叠加计费</strong></p>
    */
   ResTextFormat: number
   /**
@@ -1138,7 +1160,7 @@ export interface CreateRecTaskRequest {
    */
   SentenceMaxLength?: number
   /**
-   * <p>传入额外参数，默认为空字符串，如果传入必须是合法的 JSON 字符串。可用字段有：</p><p>Domain：提升特定领域识别效果</p><ul><li>0：不开启</li><li>1：科技领域</li><li>2：电影领域</li><li>3：歌曲领域</li></ul><p>默认值为0</p><p>示例： {&quot;Domain&quot;:3}<br>增强歌曲领域识别效果</p>
+   * <p>传入额外参数，默认为空字符串，如果传入必须是合法的 JSON 字符串，用于开启增值能力，目前支持的能力有：</p><ol><li>领域增强：提升特定领域的识别效果</li><li>大模型后处理：支持Abstract（章节摘要）、Summary（全文总结）、TodoList（待办事项）、RoleIdentify（角色识别）、DialectTranslation（方言转普通话）、RideshareSep（司乘角色分离）六个功能点</li></ol><p>下面是每个能力的详细使用说明：</p><p><strong>领域增强Domain</strong>：提升特定领域识别效果</p><ul><li>0：不开启</li><li>1：科技领域</li><li>2：电影领域</li><li>3：歌曲领域<br>默认值为0</li></ul><p><strong>大模型后处理LlmFeatures</strong>：支持Abstract（章节摘要）、Summary（全文总结）、TodoList（待办事项）、RoleIdentify（角色识别）、DialectTranslation（方言转普通话）、RideshareSep（司乘角色分离）六个功能点<br>可填入需要调用的能力，如果一次使用多个功能，用英文逗号隔开，支持功能如下：</p><ul><li><p>Abstract：章节摘要</p></li><li><p>Summary：全文总结</p></li><li><p>TodoList：待办事项</p></li><li><p>RoleIdentify：角色识别</p></li><li><p>DialectTranslation：方言转普通话</p></li><li><p>RideshareSep：司乘角色分离</p></li></ul><p>注意：不同能力可以组合使用。比如如果同时开启科技领域增强，并使用大模型后处理做待办提取，Extra 参数可以是：<br>Extra: {“Domain”: 1, “LlmFeatures”: “TodoList，Summary&quot;}</p>
    */
   Extra?: string
   /**
@@ -1154,7 +1176,7 @@ export interface CreateRecTaskRequest {
    */
   ReplaceTextId?: string
   /**
-   * <p>开启角色分离能力配合SpeakerDiarization: 3 使用，ASR增值服务，<strong>仅可传入一组声纹信息</strong>进行角色认证，仅支持16k_zh_en_2.0和16k_zh_en引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及RoleAudioUrl和RoleName两个参数。 RoleAudioUrl：需要认证角色的声纹音频地址，建议30s内的纯净人声，最长不能超过45s。 RoleName：需要认证角色的名称，若匹配成功，会替换话者分离中的SpeakerID。 示例： &quot;{"EngineModelType":"16k_zh_en","ChannelNum":1,"ResTextFormat":1,"SourceType":0,"Url":"需要进行ASR识别的音频链接","SpeakerDiarization":3,"SpeakerRoles":[{"RoleAudioUrl":"需要认证角色的声纹音频地址","RoleName":"需要认证角色的名称"}]}&quot;</p>
+   * <p>开启角色分离能力配合SpeakerDiarization: 3 使用。</p><p>ASR增值服务，<br>使用方式一：<strong>仅可传入一个声纹信息</strong>进行角色认证，仅支持16k_zh_en_2.0和16k_zh_en引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及RoleAudioUrl和RoleName两个参数。 RoleAudioUrl：需要认证角色的声纹音频地址，建议30s内的纯净人声，最长不能超过45s。 RoleName：需要认证角色的名称，若匹配成功，会替换话者分离中的SpeakerID。<br>使用方式二：<strong>可传入一组声纹信息</strong>进行角色认证，仅支持16k_zh_en_meeting引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及VoicePrintId和SpeakerNick两个参数。 VoicePrintId：需要认证角色的声纹ID（需提前进行<a href="https://cloud.tencent.com/document/product/1093/94483">说话人注册</a>），建议30s的纯净人声，最长不能超过45s，有效人声不得低于1s。 SpeakerNick：需要认证角色的名称，会替换话者分离中的SpeakerID，如不传则复用说话人注册时的名称。</p><p> 示例： &quot;{"EngineModelType":"16k_zh_en","ChannelNum":1,"ResTextFormat":1,"SourceType":0,"Url":"需要进行ASR识别的音频链接","SpeakerDiarization":3,"SpeakerRoles":[{"RoleAudioUrl":"需要认证角色的声纹音频地址","RoleName":"需要认证角色的名称"}]}&quot;</p>
    */
   SpeakerRoles?: Array<SpeakerRoleInfo>
 }
@@ -1373,8 +1395,7 @@ export interface GetModelInfoResponse {
  */
 export interface DescribeTaskStatusRequest {
   /**
-   * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
-   **注意：TaskId有效期为24小时，超过24小时的TaskId请不要再查询。**
+   * <p>从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。<br><strong>注意：TaskId有效期为24小时，超过24小时的TaskId请不要再查询。</strong></p>
    */
   TaskId: number
 }

@@ -158,6 +158,7 @@ import {
   DescribeResourcePermissionResult,
   ResetPGAccountPasswordResponse,
   CreateCustomLoginKeyRequest,
+  EnablePGDocumentExtResponse,
   DescribeCreateMySQLResultRequest,
   DescribeBillingInfoRequest,
   HTTPServiceRouteQPSPolicy,
@@ -365,6 +366,7 @@ import {
   ListFunctionsRequest,
   VerifyHTTPServiceRouteRequest,
   MigrationSummary,
+  EnablePGDocumentExtRequest,
   DeleteFunctionResponse,
   DestroyEnvRequest,
   DestroyEnvResponse,
@@ -1017,13 +1019,14 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 本接口（DescribeMySQLTaskStatus）用于查询Mysql任务状态。
-   */
-  async DescribeMySQLTaskStatus(
-    req: DescribeMySQLTaskStatusRequest,
-    cb?: (error: string, rep: DescribeMySQLTaskStatusResponse) => void
-  ): Promise<DescribeMySQLTaskStatusResponse> {
-    return this.request("DescribeMySQLTaskStatus", req, cb)
+     * 当前环境下开启 Postgresql 数据库文档插件能力，开启后会在指定  EnvId 的 PostgreSQL 实例下自动生成  pgdoc schema 以提供文档能力，不会额外产生费用，可以云开发控制或云 API 开启使用。
+当前支持地域已环境开通时所在地域为准。
+     */
+  async EnablePGDocumentExt(
+    req: EnablePGDocumentExtRequest,
+    cb?: (error: string, rep: EnablePGDocumentExtResponse) => void
+  ): Promise<EnablePGDocumentExtResponse> {
+    return this.request("EnablePGDocumentExt", req, cb)
   }
 
   /**
@@ -1258,13 +1261,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 本接口（PushPGUserMigrations）用于批量应用Migrations。
+   * 本接口（DescribeMySQLTaskStatus）用于查询Mysql任务状态。
    */
-  async PushPGUserMigrations(
-    req: PushPGUserMigrationsRequest,
-    cb?: (error: string, rep: PushPGUserMigrationsResponse) => void
-  ): Promise<PushPGUserMigrationsResponse> {
-    return this.request("PushPGUserMigrations", req, cb)
+  async DescribeMySQLTaskStatus(
+    req: DescribeMySQLTaskStatusRequest,
+    cb?: (error: string, rep: DescribeMySQLTaskStatusResponse) => void
+  ): Promise<DescribeMySQLTaskStatusResponse> {
+    return this.request("DescribeMySQLTaskStatus", req, cb)
   }
 
   /**
@@ -1612,6 +1615,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: PreviewPGUserMigrationsResponse) => void
   ): Promise<PreviewPGUserMigrationsResponse> {
     return this.request("PreviewPGUserMigrations", req, cb)
+  }
+
+  /**
+   * 本接口（PushPGUserMigrations）用于批量应用Migrations。
+   */
+  async PushPGUserMigrations(
+    req: PushPGUserMigrationsRequest,
+    cb?: (error: string, rep: PushPGUserMigrationsResponse) => void
+  ): Promise<PushPGUserMigrationsResponse> {
+    return this.request("PushPGUserMigrations", req, cb)
   }
 
   /**
