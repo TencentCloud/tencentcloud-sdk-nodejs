@@ -1277,13 +1277,21 @@ export interface DeleteAgentResponse {
 }
 
 /**
- * ModifyConversation返回参数结构体
+ * CreateSSEToken请求参数结构体
  */
-export interface ModifyConversationResponse {
+export interface CreateSSETokenRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>主用户Uin</p>
    */
-  RequestId?: string
+  LoginUin?: string
+  /**
+   * <p>子用户Uin</p>
+   */
+  LoginSubAccountUin?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
 }
 
 /**
@@ -4017,6 +4025,16 @@ export interface AgentPlugin {
    * <p>插件鉴权配置状态</p><p>枚举值：</p><ul><li>0： 不需要授权</li><li>1： 未配置</li><li>2： 已配置</li></ul>
    */
   AuthConfigStatus?: number
+}
+
+/**
+ * ModifyConversation返回参数结构体
+ */
+export interface ModifyConversationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12520,6 +12538,20 @@ export interface RerankConfig {
    * <p>模型名称</p>
    */
   ModelName?: string
+}
+
+/**
+ * CreateSSEToken返回参数结构体
+ */
+export interface CreateSSETokenResponse {
+  /**
+   * <p>SSE 鉴权 Token</p>
+   */
+  Token?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

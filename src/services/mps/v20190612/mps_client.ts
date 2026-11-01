@@ -915,6 +915,7 @@ import {
   AsrHotWordsConfigure,
   ImageAreaBoxInfo,
   DocToVideoBackgroundInfo,
+  CloneViralReference,
   LiveStreamAiReviewResultItem,
   DescribeVideoSearchTaskDetailRequest,
   CreateInputRTPSettings,

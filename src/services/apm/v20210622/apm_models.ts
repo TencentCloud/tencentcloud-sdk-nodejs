@@ -2465,6 +2465,10 @@ export interface DescribeSpanTreeByIDRequest {
    * <p>是否开启云资源关联</p>
    */
   EnableResourceLink?: boolean
+  /**
+   * <p>字符串数组，tagstag里面的key</p>
+   */
+  FilterTagKeys?: Array<string>
 }
 
 /**

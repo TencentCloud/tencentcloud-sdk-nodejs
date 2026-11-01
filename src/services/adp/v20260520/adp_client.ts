@@ -73,7 +73,7 @@ import {
   CreatePluginRequest,
   ThinkModel,
   DeleteAgentResponse,
-  ModifyConversationResponse,
+  CreateSSETokenRequest,
   DescribeWorkflowRunSummaryListRequest,
   RetryReleaseRequest,
   AppConfig,
@@ -197,6 +197,7 @@ import {
   WorkflowRunMetadata,
   KBModelConfig,
   AgentPlugin,
+  ModifyConversationResponse,
   SimilarQuestionModifySpec,
   SearchBilling,
   DeleteQAListResponse,
@@ -590,6 +591,7 @@ import {
   AppTriggerParamBinding,
   PluginConfig,
   RerankConfig,
+  CreateSSETokenResponse,
   ConcurrencyLimitDetail,
   CreateMsgRecordCategoryRequest,
   DescribeAppStatisticsOverviewResponse,
@@ -786,6 +788,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWorkflowRunSummaryListResponse) => void
   ): Promise<DescribeWorkflowRunSummaryListResponse> {
     return this.request("DescribeWorkflowRunSummaryList", req, cb)
+  }
+
+  /**
+   * 创建 SSE Token
+   */
+  async CreateSSEToken(
+    req: CreateSSETokenRequest,
+    cb?: (error: string, rep: CreateSSETokenResponse) => void
+  ): Promise<CreateSSETokenResponse> {
+    return this.request("CreateSSEToken", req, cb)
   }
 
   /**

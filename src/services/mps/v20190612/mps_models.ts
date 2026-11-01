@@ -935,6 +935,10 @@ export interface CloneViralRequest {
    */
   VideoUrl: string
   /**
+   * <p>处理类型</p><p>枚举值：</p><ul><li>script ： 脚本级爆款复刻</li><li>motion： 动作级爆款复刻</li><li>depth： 深度估计</li></ul>
+   */
+  Mode?: string
+  /**
    * <p>产品信息。除深度提取外，其他模式必填</p>
    */
   Product?: CloneViralProduct
@@ -954,6 +958,10 @@ export interface CloneViralRequest {
    * <p>输出相关参数</p>
    */
   Output?: CloneViralOutputOption
+  /**
+   * <p>其他参考素材（如背景、服装）</p>
+   */
+  Reference?: CloneViralReference
 }
 
 /**
@@ -4110,6 +4118,10 @@ export interface CloneViralAIGC {
    * <p>模式。flagship（高级版，默认）、standard（标准版）、depthcrafter(深度提取)</p>
    */
   ModelTier?: string
+  /**
+   * <p>深度估计结果是否含音频， 默认不含</p>
+   */
+  DepthWithAudio?: boolean
 }
 
 /**
@@ -21707,6 +21719,10 @@ export interface CloneViralPersona {
    * <p>体型。slim / standard / athletic / chubby</p>
    */
   BodyType?: string
+  /**
+   * <p>人物图片</p>
+   */
+  Images?: Array<string>
 }
 
 /**
@@ -22641,6 +22657,20 @@ export interface DocToVideoBackgroundInfo {
    * <p>用于生成视频的背景图片 URL。</p>
    */
   ImageUrl?: string
+}
+
+/**
+ * 动作级补充素材：服饰套装 / 背景
+ */
+export interface CloneViralReference {
+  /**
+   * <p>服饰套装参考图，多套按视频中的分段换装</p>
+   */
+  Outfits?: Array<string>
+  /**
+   * <p>背景/场景参考图</p>
+   */
+  Backgrounds?: Array<string>
 }
 
 /**

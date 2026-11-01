@@ -178,6 +178,16 @@ it("adp.v20260520.DescribeWorkflowRunSummaryList", async function () {
     }
 })
 
+it("adp.v20260520.CreateSSEToken", async function () {
+    try {
+       const data = await client.CreateSSEToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DeleteMsgRecordCategory", async function () {
     try {
        const data = await client.DeleteMsgRecordCategory({})

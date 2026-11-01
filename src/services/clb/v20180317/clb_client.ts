@@ -282,6 +282,7 @@ import {
   RegisterTargetGroupInstancesResponse,
   ClassicalTargetInfo,
   ZoneInfo,
+  UpstreamRolloutOperation,
   InquiryPriceCreateLoadBalancerRequest,
   ChatCompletionsResponse,
   DescribeClassicalLBTargetsRequest,
