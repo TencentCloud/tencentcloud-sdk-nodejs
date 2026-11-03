@@ -88,6 +88,26 @@ it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServerACL", async function () {
     }
 })
 
+it("cngw.v20230418.DescribeAIGWCustomGuardrailBindableResources", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailBindableResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DescribeAIGWCustomGuardrailHits", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailHits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayAIQuotaList", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayAIQuotaList({})
@@ -121,6 +141,16 @@ it("cngw.v20230418.RemoveCloudNativeAPIGatewayConsumerGroupAuth", async function
 it("cngw.v20230418.DeleteCloudNativeAPIGatewayMCPTool", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayMCPTool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DeleteAIGWCustomGuardrailPolicy", async function () {
+    try {
+       const data = await client.DeleteAIGWCustomGuardrailPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +258,9 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayConsumerGroup", async function (
     }
 })
 
-it("cngw.v20230418.RemoveCloudNativeAPIGatewayConsumerInGroup", async function () {
+it("cngw.v20230418.ExportAIGWCustomGuardrailHits", async function () {
     try {
-       const data = await client.RemoveCloudNativeAPIGatewayConsumerInGroup({})
+       const data = await client.ExportAIGWCustomGuardrailHits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +328,16 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMModelAPIs", async function ()
     }
 })
 
+it("cngw.v20230418.DescribeAIGWCustomGuardrailPolicyList", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailPolicyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPRouteList", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayMCPRouteList({})
@@ -341,6 +381,16 @@ it("cngw.v20230418.DescribeCNGWServicesWithRoutes", async function () {
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayAIServiceSourceList", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayAIServiceSourceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.ModifyAIGWCustomGuardrailPolicy", async function () {
+    try {
+       const data = await client.ModifyAIGWCustomGuardrailPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +488,9 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics", async 
     }
 })
 
-it("cngw.v20230418.RollbackCloudNativeAPIGatewayMCPToolVersion", async function () {
+it("cngw.v20230418.RemoveCloudNativeAPIGatewayConsumerInGroup", async function () {
     try {
-       const data = await client.RollbackCloudNativeAPIGatewayMCPToolVersion({})
+       const data = await client.RemoveCloudNativeAPIGatewayConsumerInGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +501,16 @@ it("cngw.v20230418.RollbackCloudNativeAPIGatewayMCPToolVersion", async function 
 it("cngw.v20230418.CreateCloudNativeAPIGatewayConsumerGroup", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGatewayConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DeleteCloudNativeAPIGatewayIPRestriction", async function () {
+    try {
+       const data = await client.DeleteCloudNativeAPIGatewayIPRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +538,49 @@ it("cngw.v20230418.CreateCloudNativeAPIGatewayMCPRoute", async function () {
     }
 })
 
+it("cngw.v20230418.CreateAIGWCustomGuardrailPolicy", async function () {
+    try {
+       const data = await client.CreateAIGWCustomGuardrailPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.CreateOrModifyCloudNativeAPIGatewayIPRestriction", async function () {
+    try {
+       const data = await client.CreateOrModifyCloudNativeAPIGatewayIPRestriction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DescribeAIGWCustomGuardrailCapabilities", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailCapabilities({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.CreateCloudNativeAPIGatewayMCPTool", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGatewayMCPTool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayIPRestriction", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayIPRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,6 +618,16 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewaySecretKeyList", async function (
     }
 })
 
+it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServerStatus", async function () {
+    try {
+       const data = await client.ModifyCloudNativeAPIGatewayMCPServerStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServerAuth", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayMCPServerAuth({})
@@ -538,9 +648,9 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewaySecretKeyValue", async function 
     }
 })
 
-it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServerStatus", async function () {
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolList", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayMCPServerStatus({})
+       const data = await client.DescribeCloudNativeAPIGatewayMCPToolList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +698,9 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMTokenUsageList", async functi
     }
 })
 
-it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolList", async function () {
+it("cngw.v20230418.DescribeAIGWCustomGuardrailPolicy", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewayMCPToolList({})
+       const data = await client.DescribeAIGWCustomGuardrailPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +761,16 @@ it("cngw.v20230418.CompareCloudNativeAPIGatewayMCPToolVersion", async function (
 it("cngw.v20230418.BindCloudNativeAPIGatewaySecretKey", async function () {
     try {
        const data = await client.BindCloudNativeAPIGatewaySecretKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.RollbackCloudNativeAPIGatewayMCPToolVersion", async function () {
+    try {
+       const data = await client.RollbackCloudNativeAPIGatewayMCPToolVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

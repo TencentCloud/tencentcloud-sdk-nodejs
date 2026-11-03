@@ -281,6 +281,7 @@ import {
   DescribeMetaDBInfoRequest,
   UserManagerUserBriefInfo,
   Placement,
+  McpPasswordInfo,
   ComponentDeployInfo,
   DescribeUsersForUserManagerRequest,
   ConfigSetInfo,

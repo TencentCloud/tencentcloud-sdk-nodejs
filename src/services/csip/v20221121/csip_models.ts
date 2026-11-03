@@ -1632,6 +1632,10 @@ export interface ImageVirusWhitelist {
    * <p>木马白名单名</p>
    */
   Name?: string
+  /**
+   * <p>白名单Md5</p>
+   */
+  Md5?: string
 }
 
 /**
@@ -2712,6 +2716,16 @@ export interface BaselinePolicyBrief {
    * <p>是否为系统内置策略。true 是，false 否（用户自定义策略）。</p>
    */
   IsSystem?: boolean
+}
+
+/**
+ * 容器安全模块自动扩容配置
+ */
+export interface ContainerAutoScaleConfig {
+  /**
+   * <p>容器自动扩容开关</p><p>枚举值：</p><ul><li>OFF： 关</li><li>ON： 开</li></ul>
+   */
+  Switch?: string
 }
 
 /**
@@ -4440,6 +4454,14 @@ export interface ImageLayer {
    * <p>镜像层创建时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
    */
   LayerCreateTime?: string
+  /**
+   * <p>敏感文件数</p>
+   */
+  SecretFileCnt?: number
+  /**
+   * <p>构建风险数</p>
+   */
+  BuildRiskCnt?: number
 }
 
 /**
@@ -5410,6 +5432,14 @@ export interface AssetComponent {
    * <p>影响镜像数</p>
    */
   AffectedImageCount?: number
+  /**
+   * <p>影响仓库镜像数</p>
+   */
+  AffectedRegistryImageCount?: number
+  /**
+   * <p>影响CICD镜像数</p>
+   */
+  AffectedCICDImageCount?: number
 }
 
 /**
@@ -9023,6 +9053,42 @@ export interface ImageAssetInfo {
    * <p>最近扫描任务Id</p>
    */
   ScanTaskId?: number
+  /**
+   * <p>CICD名</p>
+   */
+  CICDName?: string
+  /**
+   * <p>CICD Id</p>
+   */
+  CICDId?: number
+  /**
+   * <p>是否是CICD镜像</p>
+   */
+  IsCICD?: number
+  /**
+   * <p>敏感文件数</p>
+   */
+  SecretFileCnt?: number
+  /**
+   * <p>构建风险数</p>
+   */
+  BuildRiskCnt?: number
+  /**
+   * <p>高危敏感文件数</p>
+   */
+  HighLevelSecretFileCnt?: number
+  /**
+   * <p>严重敏感文件数</p>
+   */
+  CriticalLevelSecretFileCnt?: number
+  /**
+   * <p>高危构建风险数</p>
+   */
+  HighLevelBuildRiskCnt?: number
+  /**
+   * <p>严重构建风险数</p>
+   */
+  CriticalLevelBuildRiskCnt?: number
 }
 
 /**
@@ -10288,6 +10354,14 @@ export interface IaCFile {
    * <p>扫描失败类型(0:无失败, 1:检测超时, 2:文件格式解析失败, 3:检测失败)</p>
    */
   FailType?: number
+  /**
+   * <p>扫描失败原因</p>
+   */
+  FailReason?: string
+  /**
+   * <p>扫描失败解决方案</p>
+   */
+  FailSolution?: string
 }
 
 /**
@@ -15760,21 +15834,21 @@ export interface IpAssetListVO {
  */
 export interface HostAutoScaleConfig {
   /**
-   * 主机自动扩容开关
-枚举值：
-ON：开启
-OFF：关闭
-补充说明：不传则不修改；映射底层自动加购开关 auto_repurchase_switch
+   * <p>主机自动扩容开关<br>枚举值：<br>ON：开启<br>OFF：关闭<br>补充说明：不传则不修改；映射底层自动加购开关 auto_repurchase_switch</p>
    */
   Switch?: string
   /**
-   * 扩容版本
-枚举值：
-PRO：专业版
-ULTIMATE：旗舰版
-补充说明：不传则不修改
+   * <p>扩容版本<br>枚举值：<br>PRO：专业版<br>ULTIMATE：旗舰版<br>补充说明：不传则不修改</p>
    */
   ProtectType?: string
+  /**
+   * <p>扩容资产范围</p><p>枚举值：</p><ul><li>ALL： 全部资产</li><li>BY_TAG： 按标签扩容</li></ul>
+   */
+  AssetRange?: string
+  /**
+   * <p>标签ID列表</p>
+   */
+  TagIds?: Array<number | bigint>
 }
 
 /**
@@ -15845,7 +15919,7 @@ export interface DescribeBaselineAggregatedItemListRequest {
    */
   MemberId?: Array<string>
   /**
-   * <p>通用过滤条件。支持的 Name：ResultStatus（结果状态 PASS/NOT_PASS/CHECKING/CHECK_FAILED/NOT_INVOLVED）、Name（检测项名称，模糊搜索）、RiskLevel（风险等级 CRITICAL/HIGH/MEDIUM/LOW）、PolicyName（所属基线/策略名称，模糊搜索）。</p>
+   * <p>通用过滤条件。支持的 Name：<br>ResultStatus（结果状态 PASS/NOT_PASS/CHECKING/CHECK_FAILED/NOT_INVOLVED）<br>Name（检测项名称，模糊搜索）<br>RiskLevel（风险等级 CRITICAL/HIGH/MEDIUM/LOW）<br>ClusterCaMD5（集群CaMD5，精准搜索）<br>ClusterId（集群Id，精准搜索）</p>
    */
   Filters?: Array<Filters>
   /**
@@ -16219,7 +16293,7 @@ export interface DescribeBaselineItemRiskListRequest {
    */
   MemberId?: Array<string>
   /**
-   * <p>通用过滤条件。支持的 Name：ResultStatus（通过状态，Values: PASS/NOT_PASS）、AssetName（资产名称/ID，模糊搜索）、IP（IP地址，模糊搜索）、Tag（资产标签，模糊搜索）。</p>
+   * <p>通用过滤条件。支持的 Name：<br>ResultStatus（通过状态，Values: PASS/NOT_PASS）<br>AssetName（资产名称/ID，模糊搜索）<br>IP（IP地址，模糊搜索）<br>Tag（资产标签，模糊搜索）<br>ClusterCaMD5 (集群ca-md5,精确匹配)<br>ClusterId (集群Id,精确匹配)</p>
    */
   Filters?: Array<Filters>
   /**
@@ -22951,7 +23025,7 @@ export interface DescribeMalwareTimingScanSettingResponse {
    */
   DoClean?: number
   /**
-   * <p>防护模式 0 标准 1 重保</p>
+   * <p>防护模式 0 标准 1 重保  2-自定义隔离</p>
    */
   ProtectMode?: number
   /**
@@ -22986,6 +23060,14 @@ export interface DescribeMalwareTimingScanSettingResponse {
    * <p>超时时长（秒）</p>
    */
   Timeout?: number
+  /**
+   * <p>自定义隔离模式已保存的告警类型Code列表</p>
+   */
+  QuaraTypes?: Array<string>
+  /**
+   * <p>告警类型字典（灰度规则下发，供前端渲染勾选项）</p>
+   */
+  QuaraTypeDict?: Array<QuaraTypeDictItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23298,6 +23380,18 @@ export interface ImageVirus {
    * <p>木马类型</p>
    */
   VirusType?: string
+  /**
+   * <p>影响镜像数</p>
+   */
+  AffectedImageCount?: number
+  /**
+   * <p>影响仓库镜像数</p>
+   */
+  AffectedRegistryImageCount?: number
+  /**
+   * <p>影响CICD镜像数</p>
+   */
+  AffectedCICDImageCount?: number
 }
 
 /**
@@ -24531,6 +24625,14 @@ export interface ImageAssetDetail {
    * <p>严重敏感信息数</p>
    */
   CriticalLevelSensitiveCnt?: number
+  /**
+   * <p>敏感文件数</p>
+   */
+  SecretFileCnt?: number
+  /**
+   * <p>构建风险数</p>
+   */
+  BuildRiskCnt?: number
 }
 
 /**
@@ -24626,7 +24728,7 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    */
   DoClean?: number
   /**
-   * <p>防护模式 0 标准 1重保</p>
+   * <p>防护模式 0 标准 1重保  2-自定义隔离</p>
    */
   ProtectMode?: number
   /**
@@ -24661,6 +24763,10 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    * <p>超时时长（秒）</p>
    */
   Timeout?: number
+  /**
+   * <p>自定义隔离模式的告警类型Code列表（ProtectMode=2时必填，Code取自Describe返回的QuaraTypeDict）</p>
+   */
+  QuaraTypes?: Array<string>
 }
 
 /**
@@ -25693,7 +25799,7 @@ export interface EDRRule {
    */
   Description?: string
   /**
-   * <p>内容类型 / Content Type: md5-文件MD5/File MD5, cmdline-命令行/Command Line, dns-DNS, ip_inbound-入站IP/Inbound IP, ip_outbound-出站IP/Outbound IP, custom_file-自定义文件/Custom File, process_network-进程网络/Process Network</p>
+   * <p>内容类型 / Content Type: md5-文件MD5/File MD5, cmdline-命令行/Command Line, dns-DNS, ip_inbound-入站IP/Inbound IP, ip_outbound-出站IP/Outbound IP, custom_file-自定义文件/Custom File, process_network-进程网络/Process Network, k8s_api-K8s API/K8s API</p><p>枚举值：</p><ul><li>md5-文件MD5： File MD5</li></ul>
    */
   ContentType?: string
   /**
@@ -25828,6 +25934,10 @@ export interface EDRRule {
    * <p>文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或）</p>
    */
   FileOperationRules?: RuleContentFileOperation
+  /**
+   * <p>K8s API 规则，ContentType=k8s_api 的自定义规则填充</p>
+   */
+  K8sApiRule?: RuleContentK8sAPI
 }
 
 /**
@@ -29439,6 +29549,56 @@ export interface DescribeSandboxDLPSystemRuleListRequest {
 RuleName：按规则名称模糊搜索
    */
   Filters?: Array<Filters>
+}
+
+/**
+ * EDR K8s API 异常请求规则内容。
+ */
+export interface RuleContentK8sAPI {
+  /**
+   * <p>请求资源</p>
+   */
+  RequestURI?: string
+  /**
+   * <p>操作类型</p>
+   */
+  Verb?: string
+  /**
+   * <p>发起请求用户</p>
+   */
+  RequestUser?: string
+  /**
+   * <p>用户代理</p>
+   */
+  UserAgent?: string
+  /**
+   * <p>来源 IP</p>
+   */
+  SourceIPS?: string
+  /**
+   * <p>响应状态码</p>
+   */
+  ResponseStatusCode?: string
+  /**
+   * <p>请求数据</p>
+   */
+  RequestObject?: string
+  /**
+   * <p>响应数据</p>
+   */
+  ResponseObject?: string
+  /**
+   * <p>挂载宿主机目录</p>
+   */
+  MountHostDir?: string
+  /**
+   * <p>Pod 名称或 IP</p>
+   */
+  PodNameIP?: string
+  /**
+   * <p>审计日志 ID</p>
+   */
+  AuditID?: string
 }
 
 /**
@@ -33359,6 +33519,28 @@ export interface DeleteDspmShareUserDataRequest {
    * 用户appid
    */
   DeleteDataAppId: number
+}
+
+/**
+ * 自定义隔离模式的告警类型字典条目（灰度规则系统下发）
+ */
+export interface QuaraTypeDictItem {
+  /**
+   * <p>告警类型标识，与 QuaraTypes 取值一致</p>
+   */
+  Code?: string
+  /**
+   * <p>展示类型名</p>
+   */
+  Name?: string
+  /**
+   * <p>是否推荐隔离</p>
+   */
+  Recommend?: boolean
+  /**
+   * <p>描述和建议</p>
+   */
+  Desc?: string
 }
 
 /**
@@ -37605,10 +37787,13 @@ export interface DescribeCosObjectScanTaskRequest {
  */
 export interface ModifyPayConfigRequest {
   /**
-   * 主机安全模块自动扩容配置
-补充说明：不传则不修改主机配置；本期至少需传本模块。后续可扩展 ContainerConfig / AIAgentConfig 命名模块字段
+   * <p>主机安全模块自动扩容配置<br>补充说明：不传则不修改主机配置；本期至少需传本模块。后续可扩展 ContainerConfig / AIAgentConfig 命名模块字段</p>
    */
   HostConfig?: HostAutoScaleConfig
+  /**
+   * <p>容器安全模块自动扩容配置，不传则不修改</p>
+   */
+  ContainerConfig?: ContainerAutoScaleConfig
 }
 
 /**
@@ -41035,6 +41220,14 @@ export interface ClusterListItem {
    * <p>标签修改信息</p>
    */
   TagModifyInfo?: AssetTagModifyAssetItem
+  /**
+   * <p>集群普通节点数</p>
+   */
+  NormalNodeCount?: number
+  /**
+   * <p>审计日志开关失败信息，只在 AuditLogSwitchStatus 为 2（开启失败）或 3（关闭失败）时非空。</p>
+   */
+  AuditLogFailedInfo?: string
 }
 
 /**
@@ -41480,6 +41673,14 @@ export interface ImageSensitiveInfo {
    * <p>镜像层序号</p>
    */
   LayerIndex?: number
+  /**
+   * <p>影响仓库镜像数</p>
+   */
+  AffectedRegistryImageCount?: number
+  /**
+   * <p>影响CICD镜像数</p>
+   */
+  AffectedCICDImageCount?: number
 }
 
 /**
@@ -44112,6 +44313,10 @@ export interface DescribeClusterSummaryResponse {
    */
   UnboundUltimateNodeCount?: number
   /**
+   * <p>普通节点总数</p>
+   */
+  NormalNodeCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -44919,7 +45124,7 @@ export interface ModifyEDRRuleRequest {
    */
   Name?: string
   /**
-   * <p>内容类型 / Content Type: md5-文件MD5/File MD5, cmdline-命令行/Command Line, dns-DNS, ip_inbound-入站IP/Inbound IP, ip_outbound-出站IP/Outbound IP, custom_file-自定义文件/Custom File, process_network-进程网络/Process Network</p>
+   * <p>内容类型 / Content Type: md5-文件MD5/File MD5, cmdline-命令行/Command Line, dns-DNS, ip_inbound-入站IP/Inbound IP, ip_outbound-出站IP/Outbound IP, custom_file-自定义文件/Custom File, process_network-进程网络/Process Network,k8s_api-K8s API/K8s API</p><p>枚举值：</p><ul><li>md5-文件MD5： File MD5</li></ul>
    */
   ContentType?: string
   /**
@@ -45022,6 +45227,10 @@ export interface ModifyEDRRuleRequest {
    * <p>文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或）</p>
    */
   FileOperationRules?: RuleContentFileOperation
+  /**
+   * <p>ContentType=k8s_api 时传入的 K8s API 规则，各非空字段的值需要 Base64 编码，k8s_api 规则只按集群生效</p>
+   */
+  K8sApiRule?: RuleContentK8sAPI
 }
 
 /**
@@ -45612,7 +45821,7 @@ export interface EdrAlertDetail {
    */
   AlertId?: string
   /**
-   * <p>告警大类（英文枚举：VIRUS_TROJAN/ABNORMAL_LOGIN/HOST_BEHAVIOR/NETWORK_BEHAVIOR/LINK_ENGINE）</p>
+   * <p>告警大类（英文枚举：VIRUS_TROJAN/ABNORMAL_LOGIN/HOST_BEHAVIOR/NETWORK_BEHAVIOR/LINK_ENGINE/K8S_API）</p>
    */
   AlertCategory?: string
   /**
@@ -45672,7 +45881,7 @@ export interface EdrAlertDetail {
    */
   ContainerId?: string
   /**
-   * <p>集群ID（保留字段，恒为空串）</p>
+   * <p>集群ID。容器告警和 K8s API 异常请求告警有值</p>
    */
   ClusterId?: string
   /**
@@ -45688,7 +45897,7 @@ export interface EdrAlertDetail {
    */
   RuleName?: string
   /**
-   * <p>内容类型: md5/cmdline/dns/ip_inbound/ip_outbound/custom_file/process_network</p>
+   * <p>内容类型: md5/cmdline/dns/ip_inbound/ip_outbound/custom_file/process_network/k8s_api</p><p>枚举值：</p><ul><li>k8s_api： k8s api告警类型</li></ul>
    */
   ContentType?: string
   /**
@@ -47774,6 +47983,14 @@ export interface ImageVulSummary {
    * <p>记录id</p>
    */
   ID?: number
+  /**
+   * <p>影响仓库镜像数</p>
+   */
+  AffectedRegistryImageCount?: number
+  /**
+   * <p>影响CICD镜像数</p>
+   */
+  AffectedCICDImageCount?: number
 }
 
 /**
@@ -50103,6 +50320,30 @@ export interface DescribeImageRegistryAssetOverviewResponse {
    * <p>试用配额</p>
    */
   TrialQuota?: number
+  /**
+   * <p>有风险的镜像数</p>
+   */
+  RiskImageCnt?: number
+  /**
+   * <p>CICD镜像数</p>
+   */
+  CICDImageCnt?: number
+  /**
+   * <p>CICD已扫描镜数</p>
+   */
+  CICDImageScannedCnt?: number
+  /**
+   * <p>有风险的CICD镜像数</p>
+   */
+  RiskCICDImageCnt?: number
+  /**
+   * <p>敏感文件数</p>
+   */
+  SecretFileCnt?: number
+  /**
+   * <p>构建风险数</p>
+   */
+  BuildRiskCnt?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

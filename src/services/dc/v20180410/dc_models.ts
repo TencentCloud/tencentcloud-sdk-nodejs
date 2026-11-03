@@ -1427,9 +1427,13 @@ export interface BFDInfo {
  */
 export interface DeleteDirectConnectRequest {
   /**
-   * 物理专线的ID。
+   * <p>物理专线的ID。</p>
    */
   DirectConnectId: string
+  /**
+   * <p>预计裁撤时间</p>
+   */
+  PlannedRepealDate?: string
 }
 
 /**

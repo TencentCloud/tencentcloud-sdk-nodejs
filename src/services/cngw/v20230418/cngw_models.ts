@@ -98,9 +98,13 @@ export interface CNAPIGwSecretKeyList {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayConsumerGroup返回参数结构体
+ * DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics返回参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
+export interface DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse {
+  /**
+   * <p>请求结果</p>
+   */
+  Result?: AIGWLLMTokenUsageStatisticsResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -108,17 +112,52 @@ export interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayLLMModelServices返回参数结构体
+ * DescribeCloudNativeAPIGatewayLLMModelServices请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayLLMModelServicesResponse {
+export interface DescribeCloudNativeAPIGatewayLLMModelServicesRequest {
   /**
-   * <p>模型服务列表。</p>
+   * <p>网关 id。</p>
    */
-  Result?: ListCloudNativeAPIGatewayLLMModelService
+  GatewayId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>返回数量，默认为 10，最大值为 1000。</p>
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * <p>偏移量，默认为 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤条件，多个过滤条件之间是“与”的关系，支持 Name</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>通过模型 API 筛选模型服务</p>
+   */
+  ModelAPIId?: string
+  /**
+   * <p>通过密匙查询绑定的模型服务</p>
+   */
+  SecretKeyId?: string
+  /**
+   * <p>搜索关键词，模糊匹配 name 和 description</p>
+   */
+  Keyword?: string
+}
+
+/**
+ * 自定义安全护栏生效范围
+ */
+export interface CustomGuardrailScopeInput {
+  /**
+   * <p>绑定方式：resource 显式指定业务资源；global 覆盖网关中当前支持的业务资源，由平台关联到其 Kong Route，并随受支持的资源变更协调绑定。不是创建一个独立的 Kong global 插件。相同 Route 不能同时被多个自定义护栏策略占用。</p>
+   */
+  BindType: string
+  /**
+   * <p>BindType=resource 时必填，1～200 个资源，ResourceType/ResourceId 组合不得重复；global 时不应填写资源或传 []。Modify 传入 Scope 时替换整个范围，不是增量追加。暂不纳入 Dify/Custom Agent 和 Legacy SSE MCP。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resources?: Array<CustomGuardrailResourceRefInput>
 }
 
 /**
@@ -132,17 +171,21 @@ export interface DeleteCloudNativeAPIGatewayMCPToolResponse {
 }
 
 /**
- * RollbackCloudNativeAPIGatewayMCPToolVersion返回参数结构体
+ * 查询自定义安全护栏命中记录结果
  */
-export interface RollbackCloudNativeAPIGatewayMCPToolVersionResponse {
+export interface DescribeAIGWCustomGuardrailHitsResult {
   /**
-   * <p>操作结果</p>
+   * <p>时间范围和过滤条件内匹配的审核日志总数，分页前统计；不再限定为最多 1000 条。日志异常条目可能无法解析为 Hits。</p>
    */
-  Result?: boolean
+  TotalCount?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>当前页审核记录，按时间倒序；同一业务请求的多次送审会产生多条记录，不能直接把条数当业务请求数。</p>
    */
-  RequestId?: string
+  Hits?: Array<CustomGuardrailHit>
+  /**
+   * <p>兼容字段，当前分页查询返回 false；用 Offset、Limit、TotalCount 翻页。1000 条限制只适用于导出接口。</p>
+   */
+  Truncated?: boolean
 }
 
 /**
@@ -240,17 +283,45 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyListResponse {
 }
 
 /**
- * DeleteCloudNativeAPIGatewaySecretKey请求参数结构体
+ * 自定义安全护栏到 Kong Route 的运行态投影
  */
-export interface DeleteCloudNativeAPIGatewaySecretKeyRequest {
+export interface CustomGuardrailPolicyBinding {
   /**
-   * 网关ID
+   * <p>业务资源类型</p>
    */
-  GatewayId: string
+  ResourceType?: string
   /**
-   * 密钥id
+   * <p>业务资源 ID</p>
    */
-  SecretKeyId: string
+  ResourceId?: string
+  /**
+   * <p>业务资源名称</p>
+   */
+  ResourceName?: string
+  /**
+   * <p>资源访问路径</p>
+   */
+  Path?: string
+  /**
+   * <p>数据面解析协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>底层 Kong Route ID</p>
+   */
+  RouteId?: string
+  /**
+   * <p>绑定 Route 上的 cngw-ai-custom-guardrail 插件实例 ID；未投影、禁用或同步失败时可能不存在。</p>
+   */
+  PluginId?: string
+  /**
+   * <p>同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。</p>
+   */
+  SyncStatus?: string
+  /**
+   * <p>最近一次同步错误摘要</p>
+   */
+  SyncError?: string
 }
 
 /**
@@ -411,6 +482,70 @@ export interface AIGWRedisConfig {
 }
 
 /**
+ * 自定义安全护栏处理行为配置
+ */
+export interface CustomGuardrailBehaviorConfigInput {
+  /**
+   * <p>必填，仅允许 input（仅输入）或 both（输入加输出），与控制台一致；不允许 output、空值或省略。送审包方向使用 request/response。</p>
+   */
+  Direction: string
+  /**
+   * <p>必填，observe 只观察记录，block 执行命中阻断或符合条件的输出替换。不再自动补默认值。审核异常另由 FailureMode 处理。</p>
+   */
+  HandleAction: string
+  /**
+   * <p>必填整数，50～5000 毫秒，0 无效且不再代表默认值。控制台初始显示 500，但 API 调用方仍须传入。这是每次审核 HTTP 调用的超时，不是整个模型生成或 SSE 连接时长。</p>
+   */
+  TimeoutMs: number
+  /**
+   * <p>必填，open 为异常时尝试放行（存在未审核内容放行风险），closed 为异常时拦截；不得省略或为空。不改变正常命中结论，open 不能绕过所有 Relay 安全或生命周期错误。</p>
+   */
+  FailureMode: string
+}
+
+/**
+ * 查询自定义安全护栏能力结果
+ */
+export interface DescribeAIGWCustomGuardrailCapabilitiesResult {
+  /**
+   * <p>支持该能力的最低网关版本，当前为 3.9.6</p>
+   */
+  MinGatewayVersion?: string
+  /**
+   * <p>支持绑定的业务资源类型</p>
+   */
+  SupportedResourceTypes?: Array<string>
+  /**
+   * <p>当前控制面允许绑定的协议分类，以返回值为准；不表示每种协议变体均可用。目前不开放 Dify、Custom Agent、Legacy SSE MCP。</p>
+   */
+  SupportedProtocols?: Array<string>
+  /**
+   * <p>当前允许配置的审核方向，仅 input（仅输入）和 both（输入加输出）。</p>
+   */
+  SupportedDirections?: Array<string>
+  /**
+   * <p>是否支持流式请求与响应审核</p>
+   */
+  SupportsStreaming?: boolean
+  /**
+   * <p>是否支持自定义审核响应字段映射</p>
+   */
+  SupportsFieldMapping?: boolean
+  /**
+   * <p>系统默认拦截提示</p>
+   */
+  DefaultBlockMessage?: string
+  /**
+   * <p>拦截提示最大字符数</p>
+   */
+  MaxBlockMessageLength?: number
+  /**
+   * <p>控制面公布的能力限制/默认值，不是当前请求可修改的配置对象，也不是逐个 DP 实时读取值。窗口大小、并发审核数等未作为策略 API 入参开放。</p>
+   */
+  Limits?: CustomGuardrailCapabilityLimits
+}
+
+/**
  * AI 网关意图路由配置
  */
 export interface AIGWIntentRoute {
@@ -469,21 +604,21 @@ export interface AIGWFallbackServiceItem {
 }
 
 /**
- * DescribeCloudNativeAPIGatewaySecretKeyValue请求参数结构体
+ * DeleteCloudNativeAPIGatewayIPRestriction请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
+export interface DeleteCloudNativeAPIGatewayIPRestrictionRequest {
   /**
-   * 实例 ID
+   * 网关ID
    */
   GatewayId: string
   /**
-   * 密钥id
+   * 路由或服务的id
    */
-  SecretKeyId: string
+  SourceId: string
   /**
-   * 指定从 AKSK 或 CAM 成对凭证中返回哪一半。取值：AccessKey（AKSK 返回 AccessKeyId，CAM 返回 SecretId）、SecretKey（AKSK 返回 SecretAccessKey，CAM 返回 SecretKey）。不传则保持原行为，仅返回 AccessKeyId 或 SecretId。
+   * 访问控制插件绑定的资源类型：route|service
    */
-  SecretValueType?: string
+  SourceType: string
 }
 
 /**
@@ -522,6 +657,20 @@ export interface AIGWBasicCredentialConfig {
    * <p>用户名</p>
    */
   Username?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayAIQuota请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayAIQuotaRequest {
+  /**
+   * <p>网关实例Id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>配额 id</p>
+   */
+  Id: string
 }
 
 /**
@@ -948,9 +1097,23 @@ export interface DescribeCloudNativeAPIGatewayMCPServerListRequest {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayMCPServerAuth返回参数结构体
+ * DescribeAIGWCustomGuardrailPolicy返回参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayMCPServerAuthResponse {
+export interface DescribeAIGWCustomGuardrailPolicyResponse {
+  /**
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
+   */
+  Result?: DescribeAIGWCustomGuardrailPolicyResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayConsumerGroup返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1155,6 +1318,71 @@ export interface ModifyCloudNativeAPIGatewayLLMModelAPIResponse {
 }
 
 /**
+ * DescribeAIGWCustomGuardrailBindableResources返回参数结构体
+ */
+export interface DescribeAIGWCustomGuardrailBindableResourcesResponse {
+  /**
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
+   */
+  Result?: DescribeAIGWCustomGuardrailBindableResourcesResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 自定义安全护栏过滤与采样配置
+ */
+export interface CustomGuardrailFilterConfigInput {
+  /**
+   * <p>请求方向的流式筛选：all 全部（创建默认）、streaming 流式、non_streaming 非流式。依据请求的流式意图/协议识别；无法可靠判别时保守保留送审资格，不应依赖该字段实现强隔离。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestStreamMode?: string
+  /**
+   * <p>响应方向的流式筛选：all 全部（创建默认）、streaming 仅流式、non_streaming 仅非流式。开启输出审核并选择 streaming 可用于 SSE 响应审核。此字段不设置窗口大小或分片步长。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseStreamMode?: string
+  /**
+   * <p>请求送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤；非空时按 KeywordMatchMode 满足条件才送审，不是本地违禁词阻断列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestKeywords?: Array<string>
+  /**
+   * <p>响应送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤。流式审核按增量审核单元执行筛选，不代表等待完整响应后统一判断。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseKeywords?: Array<string>
+  /**
+   * <p>关键词匹配方式：any 任一关键词命中（创建默认）；all 所有关键词命中。按文本字面子串匹配，不是正则表达式。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeywordMatchMode?: string
+  /**
+   * <p>关键词匹配是否区分大小写，创建默认 false。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeywordCaseSensitive?: boolean
+  /**
+   * <p>是否启用送审采样，创建默认 false（不按采样率跳过）。采样与方向、流式、关键词过滤叠加；开启低比例采样会使未抽中的内容不送审。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SamplingEnabled?: boolean
+  /**
+   * <p>请求送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。0 不抽取，1 全量，0.1 表示 10%，不是填写整数 10。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestSamplingRate?: number
+  /**
+   * <p>响应送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。同一请求响应流保持一致的采样选择，不是对每个 SSE 网络 chunk 独立抽样。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseSamplingRate?: number
+}
+
+/**
  * 消费者结构
  */
 export interface CNAPIGwConsumer {
@@ -1322,6 +1550,50 @@ export interface CNAPIGwAIServiceSourceInfo {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayMCPToolACL请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPToolACLRequest {
+  /**
+   * <p>网关实例ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP服务ID</p>
+   */
+  ServerId: string
+  /**
+   * <p>MCP工具ID</p>
+   */
+  ToolId: string
+  /**
+   * <p>鉴权类型</p><p>枚举值：</p><ul><li>None： 继承server鉴权类型</li><li>Allow： 白名单</li><li>Deny： 黑名单</li></ul>
+   */
+  ACLType: string
+  /**
+   * <p>需要关联的消费者ID列表</p>
+   */
+  ACLConsumerIds?: Array<string>
+  /**
+   * <p>需要关联的消费者组ID列表</p>
+   */
+  ACLConsumerGroupIds?: Array<string>
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPServer返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPServerResponse {
+  /**
+   * <p>mcp server详情</p>
+   */
+  Result?: AIGWMCPServer
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MCP Server 列表
  */
 export interface AIGWMCPServerList {
@@ -1366,6 +1638,42 @@ export interface DescribeCloudNativeAPIGatewayLLMModelServiceResponse {
    * <p>模型服务。</p>
    */
   Result?: CloudNativeAPIGatewayLLMModelService
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 导出自定义安全护栏命中记录结果
+ */
+export interface ExportAIGWCustomGuardrailHitsResult {
+  /**
+   * <p>实际导出格式</p>
+   */
+  Format?: string
+  /**
+   * <p>实际编码进导出内容的审核记录数，最多 1000。</p>
+   */
+  RowCount?: number
+  /**
+   * <p>是否达到单次最多 1000 条的导出截断条件；true 时可能还有更多记录，可缩小时间范围后分别导出。</p>
+   */
+  Truncated?: boolean
+  /**
+   * <p>CSV/JSON 文件内容的 Base64 编码字符串，需 Base64 解码后保存，不是下载 URL。</p>
+   */
+  Content?: string
+}
+
+/**
+ * DescribeAIGWCustomGuardrailHits返回参数结构体
+ */
+export interface DescribeAIGWCustomGuardrailHitsResponse {
+  /**
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
+   */
+  Result?: DescribeAIGWCustomGuardrailHitsResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1478,6 +1786,20 @@ export interface AIGWHeaderRule {
    * <p>Header匹配的值</p>
    */
   Value: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayLLMModelServices返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelServicesResponse {
+  /**
+   * <p>模型服务列表。</p>
+   */
+  Result?: ListCloudNativeAPIGatewayLLMModelService
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1627,37 +1949,73 @@ export interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayLLMModelServices请求参数结构体
+ * 查询自定义安全护栏策略详情结果
  */
-export interface DescribeCloudNativeAPIGatewayLLMModelServicesRequest {
+export interface DescribeAIGWCustomGuardrailPolicyResult {
   /**
-   * <p>网关 id。</p>
+   * <p>策略 ID</p>
    */
-  GatewayId: string
+  PolicyId?: string
   /**
-   * <p>返回数量，默认为 10，最大值为 1000。</p>
+   * <p>策略名称</p>
    */
-  Limit?: number
+  Name?: string
   /**
-   * <p>偏移量，默认为 0。</p>
+   * <p>策略描述</p>
    */
-  Offset?: number
+  Description?: string
   /**
-   * <p>过滤条件，多个过滤条件之间是“与”的关系，支持 Name</p>
+   * <p>策略期望启用状态；实际生效还需检查 EffectiveEnabled 和 SyncStatus。</p>
    */
-  Filters?: Array<Filter>
+  Enabled?: boolean
   /**
-   * <p>通过模型 API 筛选模型服务</p>
+   * <p>当前控制面计算值：Enabled=true 且 SyncStatus=synced 时为 true。不代表一次真实业务请求已通过审核，也不替代 DP 同步/链路验证。</p>
    */
-  ModelAPIId?: string
+  EffectiveEnabled?: boolean
   /**
-   * <p>通过密匙查询绑定的模型服务</p>
+   * <p>审核服务配置</p>
    */
-  SecretKeyId?: string
+  ServiceConfig?: CustomGuardrailServiceConfig
   /**
-   * <p>搜索关键词，模糊匹配 name 和 description</p>
+   * <p>审核引擎鉴权的脱敏视图，仅返回鉴权类型、Header 名和密钥存在状态，不返回 ApiKey。</p>
    */
-  Keyword?: string
+  AuthConfig?: CustomGuardrailAuthConfig
+  /**
+   * <p>审核响应判定配置</p>
+   */
+  DecisionConfig?: CustomGuardrailDecisionConfig
+  /**
+   * <p>处理行为配置</p>
+   */
+  BehaviorConfig?: CustomGuardrailBehaviorConfig
+  /**
+   * <p>过滤与采样配置</p>
+   */
+  FilterConfig?: CustomGuardrailFilterConfig
+  /**
+   * <p>生效范围</p>
+   */
+  Scope?: CustomGuardrailScope
+  /**
+   * <p>业务资源到 Kong Route 的绑定及插件投影信息，一个业务资源可能对应多个 Route。</p>
+   */
+  Bindings?: Array<CustomGuardrailPolicyBinding>
+  /**
+   * <p>同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。</p>
+   */
+  SyncStatus?: string
+  /**
+   * <p>配置同步错误摘要，无错误时可能省略。</p>
+   */
+  SyncError?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>最后修改时间</p>
+   */
+  ModificationTime?: string
 }
 
 /**
@@ -1835,43 +2193,27 @@ export interface DescribeCloudNativeAPIGatewayConsumerGroupRequest {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPToolACLList请求参数结构体
+ * DescribeAIGWCustomGuardrailCapabilities返回参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayMCPToolACLListRequest {
+export interface DescribeAIGWCustomGuardrailCapabilitiesResponse {
   /**
-   * <p>网关实例ID</p>
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
    */
-  GatewayId: string
+  Result?: DescribeAIGWCustomGuardrailCapabilitiesResult
   /**
-   * <p>MCP 服务ID</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ServerId: string
-  /**
-   * <p>分页大小</p>
-   */
-  Limit: number
-  /**
-   * <p>分页偏移</p>
-   */
-  Offset: number
-  /**
-   * <p>搜索关键词</p>
-   */
-  Keyword?: string
+  RequestId?: string
 }
 
 /**
- * DescribeCloudNativeAPIGatewayAIQuota请求参数结构体
+ * CreateOrModifyCloudNativeAPIGatewayIPRestriction返回参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayAIQuotaRequest {
+export interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse {
   /**
-   * <p>网关实例Id</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GatewayId: string
-  /**
-   * <p>配额 id</p>
-   */
-  Id: string
+  RequestId?: string
 }
 
 /**
@@ -2399,6 +2741,85 @@ export interface CreateCloudNativeAPIGatewayLLMModelServiceResponse {
 }
 
 /**
+ * 自定义安全护栏审核服务配置
+ */
+export interface CustomGuardrailServiceConfigInput {
+  /**
+   * <p>审核服务地址来源，必须显式选择 service（已有服务）或 manual（手动 URL）；不得省略、为空或 null。service 时 ServiceId 必填，manual 时 Endpoint 必填，两种地址互斥。</p>
+   */
+  AddressMode: string
+  /**
+   * <p>AddressMode=service 时必填。填写审核引擎对应的 Kong Service ID，不是被审核的模型 API、MCP Server 或 Agent API ID。按该服务的 protocol、host、port、path 拼出审核 URL；直接请求该 URL，不是经过该服务的网关 Route，也不会自动继承其 Route 插件或业务鉴权。manual 模式不得填写。</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>AddressMode=manual 时必填，审核引擎接受 POST 的 HTTP/HTTPS 完整 URL，例如 https://audit.example.com/v2/audit；路径以实际引擎为准，不会自动补 /v2/audit。service 模式不得填写。请填写 URL 原文，不要粘贴 Markdown 链接。</p>
+   */
+  Endpoint?: string
+  /**
+   * <p>是否校验审核引擎 HTTPS 证书，创建默认 true；仅影响审核 HTTP 调用，不是客户端访问网关的 TLS 设置。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SSLVerify?: boolean
+  /**
+   * <p>是否把原业务请求的完整 Query 字符串写入送审包，创建默认 false。开启可能把 Query 中的凭据或个人信息传给审核服务，须确认接收方可信；不是审核服务 URL 自身的 Query 开关。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryPassthroughEnabled?: boolean
+  /**
+   * <p>允许额外写入送审包的原始 HTTP Header 名称，最多 64 项，每项最长 128 字节；名称不区分大小写，默认 []。内置保留 content-type、accept、mcp-protocol-version、a2a-version；Authorization、Cookie、API Key、MCP 会话标识和内部 Relay 等受限头不会因加入本列表而放行。审核服务自身的鉴权请使用 AuthConfig。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeaderAllowList?: Array<string>
+}
+
+/**
+ * 可绑定自定义安全护栏的业务资源
+ */
+export interface CustomGuardrailBindableResource {
+  /**
+   * <p>业务资源类型</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>业务资源 ID</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>业务资源名称</p>
+   */
+  ResourceName?: string
+  /**
+   * <p>业务资源访问路径</p>
+   */
+  Path?: string
+  /**
+   * <p>数据面解析协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>该业务资源对应的全部 Kong Route ID，仅用于关联/排查；创建 Scope.Resources 时仍填业务 ResourceId。</p>
+   */
+  RouteIds?: Array<string>
+  /**
+   * <p>对应任一 Route 是否被其他自定义护栏策略占用；查询时传 PolicyId 可排除自身占用。</p>
+   */
+  Occupied?: boolean
+  /**
+   * <p>占用策略的可读名称及 ID，格式为 策略名称 (策略ID)，多个以逗号分隔；名称不可用时回退 ID，不应按此展示字段解析策略主键。</p>
+   */
+  OccupiedBy?: string
+  /**
+   * <p>资源当前是否可解析为受支持的绑定目标；与 Occupied 独立，选择时同时检查 Supported=true 且 Occupied=false。</p>
+   */
+  Supported?: boolean
+  /**
+   * <p>不支持绑定的原因</p>
+   */
+  UnsupportedReason?: string
+}
+
+/**
  * AI 网关 MCP Server ACL 配置详情
  */
 export interface AIGWMCPServerACLResult {
@@ -2421,29 +2842,75 @@ export interface AIGWMCPServerACLResult {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayConsumer请求参数结构体
+ * 自定义安全护栏能力限制
  */
-export interface ModifyCloudNativeAPIGatewayConsumerRequest {
+export interface CustomGuardrailCapabilityLimits {
   /**
-   * <p>网关实例id</p>
+   * <p>Header 白名单最大条数。</p>
    */
-  GatewayId: string
+  MaxHeaderAllowList?: number
   /**
-   * <p>消费者 ID。</p>
+   * <p>单方向关键词最大条数。</p>
    */
-  ConsumerId: string
+  MaxKeywordsPerDirection?: number
   /**
-   * <p>消费者名称，最长 60 字符。</p>
+   * <p>直接内联送审的 Body 上限，单位字节。</p>
    */
-  Name: string
+  InlineBodyBytes?: number
   /**
-   * <p>消费者优先级</p><p>枚举值：</p><ul><li>High： 高优</li><li>Medium： 中优</li><li>Low： 低优</li></ul>
+   * <p>可接受的请求 Body 上限，单位字节。</p>
    */
-  Priority?: string
+  MaxAcceptedBodyBytes?: number
   /**
-   * <p>消费者描述。最长 200 字符。</p>
+   * <p>超大请求 Body 默认分片大小，单位字节。</p>
    */
-  Description?: string
+  TransferChunkBytes?: number
+  /**
+   * <p>超大请求 Body 最大分片大小，单位字节。</p>
+   */
+  MaxTransferChunkBytes?: number
+  /**
+   * <p>分片传输目标最大分片数。</p>
+   */
+  TransferTargetMaxChunks?: number
+  /**
+   * <p>普通响应审核最大 Body 大小，单位字节。</p>
+   */
+  MaxResponseBodyBytes?: number
+  /**
+   * <p>单个流式事件最大字节数，单位字节。</p>
+   */
+  MaxStreamEventBytes?: number
+  /**
+   * <p>单数据面实例 Stream Relay 默认并发槽位。</p>
+   */
+  StreamRelayMaxConcurrentRequests?: number
+  /**
+   * <p>审核超时最小值，单位毫秒。</p>
+   */
+  MinTimeoutMs?: number
+  /**
+   * <p>审核超时最大值，单位毫秒。</p>
+   */
+  MaxTimeoutMs?: number
+  /**
+   * <p>审核超时默认值，单位毫秒。</p>
+   */
+  DefaultTimeoutMs?: number
+}
+
+/**
+ * DescribeAIGWCustomGuardrailPolicyList返回参数结构体
+ */
+export interface DescribeAIGWCustomGuardrailPolicyListResponse {
+  /**
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
+   */
+  Result?: DescribeAIGWCustomGuardrailPolicyListResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2454,6 +2921,16 @@ export interface DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse {
    * <p>导入任务的进度</p>
    */
   Result?: CNAPIGwMCPToolImportTaskResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayConsumer返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2568,6 +3045,32 @@ export interface AIGWMCPServerAuthResult {
    * <p>OIDC认证配置</p>
    */
   OIDCAuthConfig?: AIGWOIDCAuthPluginConfig
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPToolACLList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolACLListRequest {
+  /**
+   * <p>网关实例ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP 服务ID</p>
+   */
+  ServerId: string
+  /**
+   * <p>分页大小</p>
+   */
+  Limit: number
+  /**
+   * <p>分页偏移</p>
+   */
+  Offset: number
+  /**
+   * <p>搜索关键词</p>
+   */
+  Keyword?: string
 }
 
 /**
@@ -2735,6 +3238,24 @@ export interface DeleteCloudNativeAPIGatewayLLMModelAPIRequest {
 }
 
 /**
+ * 自定义安全护栏鉴权配置；不返回 API Key 明文
+ */
+export interface CustomGuardrailAuthConfig {
+  /**
+   * <p>网关访问审核引擎的鉴权方式：none 无鉴权（创建默认值）；api_key 在指定 HTTP Header 中发送凭据。与客户端访问 AI 网关时使用的鉴权相互独立。none 模式不应携带 HeaderName 或 ApiKey。</p>
+   */
+  AuthType?: string
+  /**
+   * <p>api_key 模式的鉴权 Header 名，例如 X-Audit-Key 或 Authorization。需为有效 Header 名；不能使用 Content-Type、Accept 或 x-cngw-audit- 前缀的保留名称。不建议使用 Host、Content-Length 等会影响 HTTP 协议语义的头。</p>
+   */
+  HeaderName?: string
+  /**
+   * <p>只读：是否已保存审核引擎鉴权密钥。不会返回密钥本身；修改时无需回传此字段。</p>
+   */
+  HasApiKey?: boolean
+}
+
+/**
  * LLM 模型 API 列表
  */
 export interface ListCloudNativeAPIGatewayLLMModelAPI {
@@ -2749,17 +3270,19 @@ export interface ListCloudNativeAPIGatewayLLMModelAPI {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayLLMModelService返回参数结构体
+ * 自定义安全护栏审核记录过滤条件
  */
-export interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
+export interface CustomGuardrailHitFilter {
   /**
-   * <p>是否成功。</p>
+   * <p>支持 PolicyId、Direction、Decision、EffectiveAction、ResourceType、ResourceId、Protocol、RouteId、RequestId、ErrorCode。Direction 使用 request/response；Protocol 应使用实际审核日志中的协议名，如 mcp-streamable-http。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result?: boolean
+  Name: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>每个过滤项仅支持一个非空字符串值，不支持同一项多值 OR；不同过滤项之间为 AND。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Values: Array<string>
 }
 
 /**
@@ -2951,17 +3474,21 @@ export interface CreateCloudNativeAPIGatewayConsumerGroupResponse {
 }
 
 /**
- * UpdateCloudNativeAPIGatewayMCPTools返回参数结构体
+ * DescribeCloudNativeAPIGatewayIPRestriction请求参数结构体
  */
-export interface UpdateCloudNativeAPIGatewayMCPToolsResponse {
+export interface DescribeCloudNativeAPIGatewayIPRestrictionRequest {
   /**
-   * <p>导入任务的ID</p>
+   * 网关ID
    */
-  Result?: string
+  GatewayId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 路由或服务的id
    */
-  RequestId?: string
+  SourceId: string
+  /**
+   * 访问控制插件绑定的资源类型：route|service
+   */
+  SourceType: string
 }
 
 /**
@@ -3009,17 +3536,25 @@ export interface ModifyCloudNativeAPIGatewayMCPServerStatusResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPToolVersion返回参数结构体
+ * 自定义安全护栏资源同步失败信息
  */
-export interface DescribeCloudNativeAPIGatewayMCPToolVersionResponse {
+export interface CustomGuardrailSyncFailure {
   /**
-   * <p>tool版本的json snapshot</p>
+   * <p>资源类型；策略级错误时为 policy</p>
    */
-  Result?: string
+  ResourceType?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>资源 ID</p>
    */
-  RequestId?: string
+  ResourceId?: string
+  /**
+   * <p>底层 Kong Route ID</p>
+   */
+  RouteId?: string
+  /**
+   * <p>错误摘要</p>
+   */
+  Error?: string
 }
 
 /**
@@ -3109,6 +3644,28 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
 }
 
 /**
+ * 自定义审核响应字段映射
+ */
+export interface CustomGuardrailFieldMappingInput {
+  /**
+   * <p>必填。命中字段的点分隔对象路径，例如 decision 或 result.blocked；不支持数组下标、JSONPath 或通配符。</p>
+   */
+  HitFieldPath: string
+  /**
+   * <p>必填，API 类型为 string。可填写 JSON 字符串、数字或布尔标量文本，也接受 block 等非空普通文本并规范化为 JSON 字符串。示例：block 或 "block" 匹配字符串，true 匹配布尔值，0 匹配数字。null、对象、数组和空白文本不支持；类型不同不视为普通未命中。</p>
+   */
+  HitValue: string
+  /**
+   * <p>BlockMessageMode=response 时必填，例如 message 或 result.message；读取结果应为 1～512 字符的字符串，否则使用兜底文案。</p>
+   */
+  MessageFieldPath?: string
+  /**
+   * <p>RewriteEnabled=true 时必填，例如 content.body；仅输出审核读取。字段存在即优先 replace，与命中值是否相等无关。JSON 替换值应是完整业务 JSON；SSE 必须是以空行结束的完整事件文本，替换当前未发送的 event_batch，不是整个流或某个 TCP chunk。输入不替换。</p>
+   */
+  RewriteFieldPath?: string
+}
+
+/**
  * AI网关成本报表列表维度信息
  */
 export interface AIGWLLMResourceDimension {
@@ -3123,45 +3680,25 @@ export interface AIGWLLMResourceDimension {
 }
 
 /**
- * DescribeCloudNativeAPIGatewaySecretKeyList请求参数结构体
+ * 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。
  */
-export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
+export interface CustomGuardrailAuthConfigPatch {
   /**
-   * <p>实例 ID</p>
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。审核引擎鉴权方式，必须显式选择 none（无鉴权）或 api_key（Header 密钥）；无鉴权也必须填写 none，不再自动补齐。api_key 时 HeaderName 和 ApiKey 必填；与客户端访问网关的鉴权独立。</p>
    */
-  GatewayId: string
+  AuthType?: string
   /**
-   * <p>每页条数，范围 [1, 100]，默认 10。</p>
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。AuthType=api_key 时必填的有效 HTTP Header 名，例如 X-Audit-Key 或 Authorization；禁止协议保留头。AuthType=none 时不得填写。</p>
    */
-  Limit: number
+  HeaderName?: string
   /**
-   * <p>起始位置，从 0 开始。</p>
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。AuthType=api_key 时必填，作为 Header 完整值原样发送；如需 Bearer，调用方自行填写前缀。修改时省略可沿用已保存密钥；不能用 HasApiKey 代替真实密钥。</p>
    */
-  Offset: number
+  ApiKey?: string
   /**
-   * <p>过滤条件。支持的 Name：Status / GenerateType / SecretType。</p>
+   * <p>true 表示清除已保存密钥，不能与 ApiKey 同时传入。仅传 ClearApiKey=true 时同时切换为 none 并清空鉴权 Header；也可通过 AuthType=none 清除既有密钥。</p><p>修改时省略本字段保留原值。</p>
    */
-  Filters?: Array<Filter>
-  /**
-   * <p>模糊匹配密钥名称。</p>
-   */
-  Keyword?: string
-  /**
-   * <p>对应资源的 ID（消费者 ID 或模型服务 ID）。</p>
-   */
-  ResourceId?: string
-  /**
-   * <p>密钥归属资源类型。UseToBind=true 时必填。</p><p>枚举值：</p><ul><li>Consumer：消费者</li><li>ModelService：模型服务</li></ul>
-   */
-  ResourceType?: string
-  /**
-   * <p>是否用于绑定场景。true 时返回可被绑定到指定资源的密钥。</p>
-   */
-  UseToBind?: boolean
-  /**
-   * <p>可选 Boolean，默认 false。仅传 true 且返回记录 ResourceType=Consumer 时，额外返回 CredentialGenerateType、CreationSource、BatchId；省略或 false 时不返回这三个字段，原字段和返回结构保持不变。此参数只控制展示字段，不控制 Filters 是否生效。</p>
-   */
-  IncludeCreationInfo?: boolean
+  ClearApiKey?: boolean
 }
 
 /**
@@ -3179,9 +3716,87 @@ export interface KVMapping {
 }
 
 /**
+ * 自定义安全护栏过滤与采样配置
+ */
+export interface CustomGuardrailFilterConfig {
+  /**
+   * <p>请求方向的流式筛选：all 全部（创建默认）、streaming 流式、non_streaming 非流式。依据请求的流式意图/协议识别；无法可靠判别时保守保留送审资格，不应依赖该字段实现强隔离。</p>
+   */
+  RequestStreamMode?: string
+  /**
+   * <p>响应方向的流式筛选：all 全部（创建默认）、streaming 仅流式、non_streaming 仅非流式。开启输出审核并选择 streaming 可用于 SSE 响应审核。此字段不设置窗口大小或分片步长。</p>
+   */
+  ResponseStreamMode?: string
+  /**
+   * <p>请求送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤；非空时按 KeywordMatchMode 满足条件才送审，不是本地违禁词阻断列表。</p>
+   */
+  RequestKeywords?: Array<string>
+  /**
+   * <p>响应送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤。流式审核按增量审核单元执行筛选，不代表等待完整响应后统一判断。</p>
+   */
+  ResponseKeywords?: Array<string>
+  /**
+   * <p>关键词匹配方式：any 任一关键词命中（创建默认）；all 所有关键词命中。按文本字面子串匹配，不是正则表达式。</p>
+   */
+  KeywordMatchMode?: string
+  /**
+   * <p>关键词匹配是否区分大小写，创建默认 false。</p>
+   */
+  KeywordCaseSensitive?: boolean
+  /**
+   * <p>是否启用送审采样，创建默认 false（不按采样率跳过）。采样与方向、流式、关键词过滤叠加；开启低比例采样会使未抽中的内容不送审。</p>
+   */
+  SamplingEnabled?: boolean
+  /**
+   * <p>请求送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。0 不抽取，1 全量，0.1 表示 10%，不是填写整数 10。</p>
+   */
+  RequestSamplingRate?: number
+  /**
+   * <p>响应送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。同一请求响应流保持一致的采样选择，不是对每个 SSE 网络 chunk 独立抽样。</p>
+   */
+  ResponseSamplingRate?: number
+}
+
+/**
+ * 自定义安全护栏处理行为配置
+ */
+export interface CustomGuardrailBehaviorConfig {
+  /**
+   * <p>审核方向：input 只审核业务请求，output 只审核业务响应，both 两者均审核；创建默认 input。送审包及审核日志使用 request/response 表示方向，不使用 input/output。</p>
+   */
+  Direction?: string
+  /**
+   * <p>命中后的处理：block 执行阻断或符合条件的输出替换；observe 仅观察记录命中，不执行命中阻断或替换。创建默认 block。审核调用异常另由 FailureMode 处理，不应把 observe 当作所有故障无条件放行。</p>
+   */
+  HandleAction?: string
+  /**
+   * <p>审核调用超时，单位毫秒，范围 50～5000，创建默认 500。不是整个模型生成/SSE 连接的总时长限制；流式多批次分别发生审核 HTTP 调用。应按引擎网络及处理耗时设置，示例中的 5000 是显式测试值，不是默认值。</p>
+   */
+  TimeoutMs?: number
+  /**
+   * <p>审核失败时的策略：open 尝试失败放行（创建默认值，有内容未审核即放行风险）；closed 失败关闭。此项处理网络、超时、响应契约等异常，不改变正常 block 判定。open 不能绕过所有 Relay 安全/生命周期错误，也不保证已派发业务请求可安全重放。</p>
+   */
+  FailureMode?: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayMCPRoute返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayMCPRouteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPToolStatus返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPToolStatusResponse {
+  /**
+   * <p>创建结果</p>
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3251,6 +3866,34 @@ export interface AIGWTokenLengthRoute {
 }
 
 /**
+ * 自定义安全护栏业务资源引用
+ */
+export interface CustomGuardrailResourceRef {
+  /**
+   * <p>被审核的业务资源类型：model_api 模型 API；mcp_server MCP Server（当前支持 Streamable HTTP）；agent_api Agent API（当前支持 A2A）。</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>上述类型的管控业务资源 ID，可从 DescribeAIGWCustomGuardrailBindableResources 获取；不是审核引擎 ServiceId，也不是 Kong RouteId。请原样使用接口返回 ID。</p>
+   */
+  ResourceId?: string
+}
+
+/**
+ * 列表过滤条件，模糊匹配
+ */
+export interface ListFilter {
+  /**
+   * 过滤字段
+   */
+  Key?: string
+  /**
+   * 过滤值
+   */
+  Value?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayMCPToolsFromFile返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse {
@@ -3265,29 +3908,61 @@ export interface DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPToolVersionList请求参数结构体
+ * 查询云原生网关访问控制配置出参
  */
-export interface DescribeCloudNativeAPIGatewayMCPToolVersionListRequest {
+export interface DescribeKongIpRestrictionResult {
   /**
-   * <p>网关实例 id</p>
+   * cidr｜ip
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  AddressList?: Array<string>
   /**
-   * <p>MCPserverId</p>
+   * 是否启用插件
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServerId: string
+  Enabled?: boolean
   /**
-   * <p>工具 id</p>
+   * 访问控制类型：whiteList｜blackList
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ToolId: string
+  RestrictionType?: string
   /**
-   * <p>分页查询limit</p>
+   * 路由或服务的id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
+  SourceId?: string
   /**
-   * <p>分页查询偏移</p>
+   * 访问控制插件绑定的资源类型：route | service
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  SourceType?: string
+}
+
+/**
+ * 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。
+ */
+export interface CustomGuardrailDecisionConfigPatch {
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。仅支持 field_mapping（自定义字段映射），必须显式填写；不允许 standard_v2、空字符串或 null。只决定如何解析审核响应，网关送审请求仍使用统一 Schema 2.0 封装。</p>
+   */
+  ContractMode?: string
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必须显式填写 default 或 response。default 使用 BlockMessage；response 使用 FieldMapping.MessageFieldPath 读取提示，值缺失或不合法时回退默认文案。default 时 BlockMessage 必填，response 时 MessageFieldPath 必填。</p>
+   */
+  BlockMessageMode?: string
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。默认/兜底拦截提示，长度 1～512 字符，不是替换 Body。BlockMessageMode=default 时必填且不能为空白；创建/草稿测试使用 response 模式时可省略，后端补充系统兜底提示。修改时省略保留原值，显式空值不用于清空文案。</p>
+   */
+  BlockMessage?: string
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。是否允许输出内容替换，省略为 false。开启且配置 RewriteFieldPath 后，输出审核响应只要存在该字段就优先 replace，不要求 HitFieldPath/HitValue 命中，也不要求引擎 decision=replace；替换字段不存在才按命中规则处理。输入永不替换；observe 只记录、不阻断或替换。非法替换正文是审核异常。流式仅替换当前未发送批次，不可撤回已发送内容。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RewriteEnabled?: boolean
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。自定义模式必填的响应字段映射。HitFieldPath 和 HitValue 必填。输出启用替换且替换字段存在时优先 replace；否则要求命中字段存在且为有效同类型标量，值相等时 block，不相等时 allow。缺失或非法命中字段属于无效审核响应，不能等同于安全放行。</p>
+   */
+  FieldMapping?: CustomGuardrailFieldMappingPatch
 }
 
 /**
@@ -3379,6 +4054,36 @@ export interface AIGWLLMHealthCheckSetting {
 }
 
 /**
+ * 自定义安全护栏审核服务配置
+ */
+export interface CustomGuardrailServiceConfig {
+  /**
+   * <p>审核服务地址来源：manual 手动填写完整 URL，service 引用本网关服务管理中的 Kong Service。二者互斥；创建时按接口要求显式传入。</p>
+   */
+  AddressMode?: string
+  /**
+   * <p>AddressMode=service 时必填。填写审核引擎对应的 Kong Service ID，不是被审核的模型 API、MCP Server 或 Agent API ID。按该服务的 protocol、host、port、path 拼出审核 URL；直接请求该 URL，不是经过该服务的网关 Route，也不会自动继承其 Route 插件或业务鉴权。manual 模式不得填写。</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>AddressMode=manual 时必填，审核引擎接受 POST 的 HTTP/HTTPS 完整 URL，例如 https://audit.example.com/v2/audit；路径以实际引擎为准，不会自动补 /v2/audit。service 模式不得填写。请填写 URL 原文，不要粘贴 Markdown 链接。</p>
+   */
+  Endpoint?: string
+  /**
+   * <p>是否校验审核引擎 HTTPS 证书，创建默认 true；仅影响审核 HTTP 调用，不是客户端访问网关的 TLS 设置。</p>
+   */
+  SSLVerify?: boolean
+  /**
+   * <p>是否把原业务请求的完整 Query 字符串写入送审包，创建默认 false。开启可能把 Query 中的凭据或个人信息传给审核服务，须确认接收方可信；不是审核服务 URL 自身的 Query 开关。</p>
+   */
+  QueryPassthroughEnabled?: boolean
+  /**
+   * <p>允许额外写入送审包的原始 HTTP Header 名称，最多 64 项，每项最长 128 字节；名称不区分大小写，默认 []。内置保留 content-type、accept、mcp-protocol-version、a2a-version；Authorization、Cookie、API Key、MCP 会话标识和内部 Relay 等受限头不会因加入本列表而放行。审核服务自身的鉴权请使用 AuthConfig。</p>
+   */
+  HeaderAllowList?: Array<string>
+}
+
+/**
  * DescribeCloudNativeAPIGatewayAIQuota返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayAIQuotaResponse {
@@ -3429,25 +4134,32 @@ export interface ModifyCloudNativeAPIGatewayMCPServerACLResponse {
 }
 
 /**
- * RollbackCloudNativeAPIGatewayMCPToolVersion请求参数结构体
+ * DescribeAIGWCustomGuardrailPolicy请求参数结构体
  */
-export interface RollbackCloudNativeAPIGatewayMCPToolVersionRequest {
+export interface DescribeAIGWCustomGuardrailPolicyRequest {
   /**
-   * <p>网关实例 id</p>
+   * <p>网关实例 ID</p>
    */
   GatewayId: string
   /**
-   * <p>MCPserverId</p>
+   * <p>策略 ID</p>
    */
-  ServerId: string
+  PolicyId: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayIPRestriction返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayIPRestrictionResponse {
   /**
-   * <p>工具 id</p>
+   * 出参
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ToolId: string
+  Result?: DescribeKongIpRestrictionResult
   /**
-   * <p>mcp tool版本</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ToolVersion: string
+  RequestId?: string
 }
 
 /**
@@ -3484,6 +4196,66 @@ export interface DeleteCloudNativeAPIGatewayMCPServerRequest {
    * <p>MCP服务ID</p>
    */
   ServerId: string
+}
+
+/**
+ * DeleteAIGWCustomGuardrailPolicy返回参数结构体
+ */
+export interface DeleteAIGWCustomGuardrailPolicyResponse {
+  /**
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
+   */
+  Result?: DeleteAIGWCustomGuardrailPolicyResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAIGWCustomGuardrailPolicy请求参数结构体
+ */
+export interface CreateAIGWCustomGuardrailPolicyRequest {
+  /**
+   * <p>网关实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>策略名称，同一网关内唯一，长度 1～64</p>
+   */
+  Name: string
+  /**
+   * <p>审核服务配置</p>
+   */
+  ServiceConfig: CustomGuardrailServiceConfigInput
+  /**
+   * <p>审核响应判定配置</p>
+   */
+  DecisionConfig: CustomGuardrailDecisionConfigInput
+  /**
+   * <p>资源绑定范围，global 或 resource。修改时传入的是新的完整范围，不是增量追加。</p>
+   */
+  Scope: CustomGuardrailScopeInput
+  /**
+   * <p>必填，必须显式选择鉴权类型；无鉴权填写 {"AuthType":"none"}。</p>
+   */
+  AuthConfig: CustomGuardrailAuthConfigInput
+  /**
+   * <p>必填，Direction、HandleAction、TimeoutMs、FailureMode 四项均须显式填写。</p>
+   */
+  BehaviorConfig: CustomGuardrailBehaviorConfigInput
+  /**
+   * <p>策略描述，最长 200</p>
+   */
+  Description?: string
+  /**
+   * <p>是否启用策略，默认 true</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>过滤与采样配置</p>
+   */
+  FilterConfig?: CustomGuardrailFilterConfigInput
 }
 
 /**
@@ -3529,13 +4301,51 @@ export interface KongTarget {
 }
 
 /**
- * DeleteCloudNativeAPIGatewaySecretKey返回参数结构体
+ * ModifyCloudNativeAPIGatewayMCPServerACL请求参数结构体
  */
-export interface DeleteCloudNativeAPIGatewaySecretKeyResponse {
+export interface ModifyCloudNativeAPIGatewayMCPServerACLRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>网关实例ID</p>
    */
-  RequestId?: string
+  GatewayId: string
+  /**
+   * <p>MCP服务ID</p>
+   */
+  ServerId: string
+  /**
+   * <p>ACL类型</p><p>枚举值：</p><ul><li>None： 不开启</li><li>Allow： 白名单</li><li>Deny： 黑名单</li></ul><p>默认值：None</p>
+   */
+  ACLType: string
+  /**
+   * <p>需要关联的消费者ID列表</p>
+   */
+  ACLConsumerIds?: Array<string>
+  /**
+   * <p>需要关联的消费者组ID列表</p>
+   */
+  ACLConsumerGroupIds?: Array<string>
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayMCPToolVersion请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayMCPToolVersionRequest {
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
+  /**
+   * <p>mcp tool版本</p>
+   */
+  ToolVersion: string
 }
 
 /**
@@ -3580,6 +4390,28 @@ export interface DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest {
    * <p>传入 Dimension 时支持：SecretKeyId、SecretKeyName、ModelName、ModelAPIId、ModelAPIName、ModelServiceId、ModelServiceName、ConsumerId、ConsumerName、ConsumerGroupId、ConsumerGroupName。</p><p>网关版本不低于 3.9.8 时，所有支持的 Dimension（包括可选 Dimension 未传）均支持 ConsumerGroupId、ConsumerGroupName，按请求发生时的消费者组及全部下属归属筛选历史日志，仅支持 CLS；不按当前组成员重算历史。ConsumerGroupId 必须为 UUID，允许显式查询已删除节点历史；ConsumerGroupName 从 Kong CP 当前目录按名称子串解析，包含同步、自定义、禁用及保留中的软删节点。同名节点保留各自身份。OrganizationNodeId / OrganizationNodeName 已移除，旧名称返回 InvalidParameterValue。</p><p>最多 10 项，Name 不重复；新版组筛选的每项 Values 为 1～50 个非空字符串，同项多个值为 OR。名称无匹配返回空结果。</p><p>未传 Dimension 时支持 ConsumerId、ConsumerGroupId、ConsumerGroupName；更早版本该模式仍仅支持 ConsumerId、ConsumerGroupId。更早版本组筛选保留当前成员算法。</p><p>组 ID 与组名称分别生成历史日志条件并做 AND；日志同时属于不同组时仍可匹配，不能预先对节点 ID 求交。同一请求只计一次。每个名称筛选最多展开 50 个节点，超过返回 InvalidParameterValue。</p>
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * RollbackCloudNativeAPIGatewayMCPToolVersion请求参数结构体
+ */
+export interface RollbackCloudNativeAPIGatewayMCPToolVersionRequest {
+  /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCPserverId</p>
+   */
+  ServerId: string
+  /**
+   * <p>工具 id</p>
+   */
+  ToolId: string
+  /**
+   * <p>mcp tool版本</p>
+   */
+  ToolVersion: string
 }
 
 /**
@@ -3762,17 +4594,33 @@ export interface AIGWQuotaDetail {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPServer返回参数结构体
+ * DescribeAIGWCustomGuardrailBindableResources请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayMCPServerResponse {
+export interface DescribeAIGWCustomGuardrailBindableResourcesRequest {
   /**
-   * <p>mcp server详情</p>
+   * <p>网关实例 ID</p>
    */
-  Result?: AIGWMCPServer
+  GatewayId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>资源类型：model_api、mcp_server 或 agent_api</p>
    */
-  RequestId?: string
+  ResourceType: string
+  /**
+   * <p>当前策略 ID；用于排除自身占用</p>
+   */
+  PolicyId?: string
+  /**
+   * <p>按资源名称或路径模糊搜索</p>
+   */
+  Keyword?: string
+  /**
+   * <p>分页偏移量，最小 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>单页数量，范围 1～100，默认 20</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -3800,33 +4648,51 @@ export interface AIGWCacheAwareRouteConfig {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayMCPToolACL请求参数结构体
+ * 自定义审核响应字段映射
  */
-export interface ModifyCloudNativeAPIGatewayMCPToolACLRequest {
+export interface CustomGuardrailFieldMapping {
   /**
-   * <p>网关实例ID</p>
+   * <p>必填。命中字段的点分隔对象路径，例如 decision 或 result.blocked；不支持数组下标、JSONPath 或通配符。</p>
+   */
+  HitFieldPath?: string
+  /**
+   * <p>必填，API 类型为 string。可填写 JSON 字符串、数字或布尔标量文本，也接受 block 等非空普通文本并规范化为 JSON 字符串。示例：block 或 "block" 匹配字符串，true 匹配布尔值，0 匹配数字。null、对象、数组和空白文本不支持；类型不同不视为普通未命中。</p>
+   */
+  HitValue?: string
+  /**
+   * <p>BlockMessageMode=response 时必填，例如 message 或 result.message；读取结果应为 1～512 字符的字符串，否则使用兜底文案。</p>
+   */
+  MessageFieldPath?: string
+  /**
+   * <p>RewriteEnabled=true 时必填，例如 content.body；仅输出审核读取。字段存在即优先 replace，与命中值是否相等无关。JSON 替换值应是完整业务 JSON；SSE 必须是以空行结束的完整事件文本，替换当前未发送的 event_batch，不是整个流或某个 TCP chunk。输入不替换。</p>
+   */
+  RewriteFieldPath?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPToolVersionList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolVersionListRequest {
+  /**
+   * <p>网关实例 id</p>
    */
   GatewayId: string
   /**
-   * <p>MCP服务ID</p>
+   * <p>MCPserverId</p>
    */
   ServerId: string
   /**
-   * <p>MCP工具ID</p>
+   * <p>工具 id</p>
    */
   ToolId: string
   /**
-   * <p>鉴权类型</p><p>枚举值：</p><ul><li>None： 继承server鉴权类型</li><li>Allow： 白名单</li><li>Deny： 黑名单</li></ul>
+   * <p>分页查询limit</p>
    */
-  ACLType: string
+  Limit?: number
   /**
-   * <p>需要关联的消费者ID列表</p>
+   * <p>分页查询偏移</p>
    */
-  ACLConsumerIds?: Array<string>
-  /**
-   * <p>需要关联的消费者组ID列表</p>
-   */
-  ACLConsumerGroupIds?: Array<string>
+  Offset?: number
 }
 
 /**
@@ -4005,27 +4871,96 @@ export interface ModifyCloudNativeAPIGatewayMCPToolResponse {
 }
 
 /**
- * 列表过滤条件，模糊匹配
+ * 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。
  */
-export interface ListFilter {
+export interface CustomGuardrailServiceConfigPatch {
   /**
-   * 过滤字段
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。审核服务地址来源，必须显式选择 service（已有服务）或 manual（手动 URL）；不得省略、为空或 null。service 时 ServiceId 必填，manual 时 Endpoint 必填，两种地址互斥。</p>
    */
-  Key?: string
+  AddressMode?: string
   /**
-   * 过滤值
+   * <p>AddressMode=service 时必填。填写审核引擎对应的 Kong Service ID，不是被审核的模型 API、MCP Server 或 Agent API ID。按该服务的 protocol、host、port、path 拼出审核 URL；直接请求该 URL，不是经过该服务的网关 Route，也不会自动继承其 Route 插件或业务鉴权。manual 模式不得填写。</p><p>修改时省略本字段保留原值。</p>
    */
-  Value?: string
+  ServiceId?: string
+  /**
+   * <p>AddressMode=manual 时必填，审核引擎接受 POST 的 HTTP/HTTPS 完整 URL，例如 https://audit.example.com/v2/audit；路径以实际引擎为准，不会自动补 /v2/audit。service 模式不得填写。请填写 URL 原文，不要粘贴 Markdown 链接。</p><p>修改时省略本字段保留原值。</p>
+   */
+  Endpoint?: string
+  /**
+   * <p>是否校验审核引擎 HTTPS 证书，创建默认 true；仅影响审核 HTTP 调用，不是客户端访问网关的 TLS 设置。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SSLVerify?: boolean
+  /**
+   * <p>是否把原业务请求的完整 Query 字符串写入送审包，创建默认 false。开启可能把 Query 中的凭据或个人信息传给审核服务，须确认接收方可信；不是审核服务 URL 自身的 Query 开关。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryPassthroughEnabled?: boolean
+  /**
+   * <p>允许额外写入送审包的原始 HTTP Header 名称，最多 64 项，每项最长 128 字节；名称不区分大小写，默认 []。内置保留 content-type、accept、mcp-protocol-version、a2a-version；Authorization、Cookie、API Key、MCP 会话标识和内部 Relay 等受限头不会因加入本列表而放行。审核服务自身的鉴权请使用 AuthConfig。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeaderAllowList?: Array<string>
 }
 
 /**
- * RemoveCloudNativeAPIGatewayConsumerInGroup返回参数结构体
+ * DeleteCloudNativeAPIGatewayMCPRoute请求参数结构体
  */
-export interface RemoveCloudNativeAPIGatewayConsumerInGroupResponse {
+export interface DeleteCloudNativeAPIGatewayMCPRouteRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>网关ID</p>
    */
-  RequestId?: string
+  GatewayId: string
+  /**
+   * <p>路由ID</p>
+   */
+  RouteId: string
+  /**
+   * <p>MCP Server ID</p>
+   */
+  ServerId: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewaySecretKeyList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
+  /**
+   * <p>实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>每页条数，范围 [1, 100]，默认 10。</p>
+   */
+  Limit: number
+  /**
+   * <p>起始位置，从 0 开始。</p>
+   */
+  Offset: number
+  /**
+   * <p>过滤条件。支持的 Name：Status / GenerateType / SecretType。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>模糊匹配密钥名称。</p>
+   */
+  Keyword?: string
+  /**
+   * <p>对应资源的 ID（消费者 ID 或模型服务 ID）。</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>密钥归属资源类型。UseToBind=true 时必填。</p><p>枚举值：</p><ul><li>Consumer：消费者</li><li>ModelService：模型服务</li></ul>
+   */
+  ResourceType?: string
+  /**
+   * <p>是否用于绑定场景。true 时返回可被绑定到指定资源的密钥。</p>
+   */
+  UseToBind?: boolean
+  /**
+   * <p>可选 Boolean，默认 false。仅传 true 且返回记录 ResourceType=Consumer 时，额外返回 CredentialGenerateType、CreationSource、BatchId；省略或 false 时不返回这三个字段，原字段和返回结构保持不变。此参数只控制展示字段，不控制 Filters 是否生效。</p>
+   */
+  IncludeCreationInfo?: boolean
 }
 
 /**
@@ -4047,6 +4982,24 @@ export interface AIGWCrossServiceFallbackConfig {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * <p>实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>密钥id</p>
+   */
+  SecretKeyId: string
+  /**
+   * <p>可选 Boolean，默认 false。仅传 true 且返回记录 ResourceType=Consumer 时，额外返回 CredentialGenerateType、CreationSource、BatchId；省略或 false 时不返回这三个字段，原字段和返回结构保持不变。此参数只控制展示字段，不控制 Filters 是否生效。</p>
+   */
+  IncludeCreationInfo?: boolean
+}
+
+/**
  * AI网关Upstream TLS配置
  */
 export interface AIGWUpstreamTLSConfig {
@@ -4065,6 +5018,57 @@ export interface AIGWUpstreamTLSConfig {
 }
 
 /**
+ * 自定义安全护栏过滤与采样局部更新配置。仅更新显式传入的字段；省略字段保留原值，文中默认值指创建时默认值，不表示修改时重置。
+ */
+export interface CustomGuardrailFilterConfigPatch {
+  /**
+   * <p>请求方向的流式筛选：all 全部（创建默认）、streaming 流式、non_streaming 非流式。依据请求的流式意图/协议识别；无法可靠判别时保守保留送审资格，不应依赖该字段实现强隔离。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestStreamMode?: string
+  /**
+   * <p>响应方向的流式筛选：all 全部（创建默认）、streaming 仅流式、non_streaming 仅非流式。开启输出审核并选择 streaming 可用于 SSE 响应审核。此字段不设置窗口大小或分片步长。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseStreamMode?: string
+  /**
+   * <p>请求送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤；非空时按 KeywordMatchMode 满足条件才送审，不是本地违禁词阻断列表。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestKeywords?: Array<string>
+  /**
+   * <p>响应送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤。流式审核按增量审核单元执行筛选，不代表等待完整响应后统一判断。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseKeywords?: Array<string>
+  /**
+   * <p>关键词匹配方式：any 任一关键词命中（创建默认）；all 所有关键词命中。按文本字面子串匹配，不是正则表达式。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeywordMatchMode?: string
+  /**
+   * <p>关键词匹配是否区分大小写，创建默认 false。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeywordCaseSensitive?: boolean
+  /**
+   * <p>是否启用送审采样，创建默认 false（不按采样率跳过）。采样与方向、流式、关键词过滤叠加；开启低比例采样会使未抽中的内容不送审。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SamplingEnabled?: boolean
+  /**
+   * <p>请求送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。0 不抽取，1 全量，0.1 表示 10%，不是填写整数 10。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestSamplingRate?: number
+  /**
+   * <p>响应送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。同一请求响应流保持一致的采样选择，不是对每个 SSE 网络 chunk 独立抽样。</p><p>修改时省略本字段保留原值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseSamplingRate?: number
+}
+
+/**
  * AI网关消费者模型范围
  */
 export interface AIGWConsumerModelScope {
@@ -4079,21 +5083,47 @@ export interface AIGWConsumerModelScope {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayMCPRoute请求参数结构体
+ * 修改自定义安全护栏策略结果
  */
-export interface DeleteCloudNativeAPIGatewayMCPRouteRequest {
+export interface ModifyAIGWCustomGuardrailPolicyResult {
   /**
-   * <p>网关ID</p>
+   * <p>本次配置同步是否全部成功。即使云 API 未返回 Response.Error，仍须检查此值、SyncStatus 和 FailedResources。</p>
    */
-  GatewayId: string
+  Success?: boolean
   /**
-   * <p>路由ID</p>
+   * <p>变更后的策略</p>
    */
-  RouteId: string
+  Policy?: CustomGuardrailPolicy
   /**
-   * <p>MCP Server ID</p>
+   * <p>本次同步成功的业务资源引用；Modify 返回的不是严格的新增差集。</p>
    */
-  ServerId: string
+  AddedResources?: Array<CustomGuardrailResourceRef>
+  /**
+   * <p>与修改前相比移除的 Route 绑定数量；一个业务资源可有多条 Route，因此不等于业务资源数量。</p>
+   */
+  RemovedCount?: number
+  /**
+   * <p>失败资源及原因；非空表示配置同步仍需处理，不要因 HTTP 200 判定全部成功。</p>
+   */
+  FailedResources?: Array<CustomGuardrailSyncFailure>
+  /**
+   * <p>同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。</p>
+   */
+  SyncStatus?: string
+}
+
+/**
+ * 自定义安全护栏生效范围
+ */
+export interface CustomGuardrailScope {
+  /**
+   * <p>绑定方式：resource 显式指定业务资源；global 覆盖网关中当前支持的业务资源，由平台关联到其 Kong Route，并随受支持的资源变更协调绑定。不是创建一个独立的 Kong global 插件。相同 Route 不能同时被多个自定义护栏策略占用。</p>
+   */
+  BindType?: string
+  /**
+   * <p>BindType=resource 时必填，1～200 个资源，ResourceType/ResourceId 组合不得重复；global 时不应填写资源或传 []。Modify 传入 Scope 时替换整个范围，不是增量追加。暂不纳入 Dify/Custom Agent 和 Legacy SSE MCP。</p>
+   */
+  Resources?: Array<CustomGuardrailResourceRef>
 }
 
 /**
@@ -4134,6 +5164,20 @@ export interface CompareCloudNativeAPIGatewayMCPToolVersionRequest {
    * <p>工具 id</p>
    */
   ToolId: string
+}
+
+/**
+ * UpdateCloudNativeAPIGatewayMCPTools返回参数结构体
+ */
+export interface UpdateCloudNativeAPIGatewayMCPToolsResponse {
+  /**
+   * <p>导入任务的ID</p>
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4223,29 +5267,17 @@ export interface AIGWMCPRoute {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayMCPServerACL请求参数结构体
+ * 自定义安全护栏业务资源引用
  */
-export interface ModifyCloudNativeAPIGatewayMCPServerACLRequest {
+export interface CustomGuardrailResourceRefInput {
   /**
-   * <p>网关实例ID</p>
+   * <p>被审核的业务资源类型：model_api 模型 API；mcp_server MCP Server（当前支持 Streamable HTTP）；agent_api Agent API（当前支持 A2A）。</p>
    */
-  GatewayId: string
+  ResourceType: string
   /**
-   * <p>MCP服务ID</p>
+   * <p>上述类型的管控业务资源 ID，可从 DescribeAIGWCustomGuardrailBindableResources 获取；不是审核引擎 ServiceId，也不是 Kong RouteId。请原样使用接口返回 ID。</p>
    */
-  ServerId: string
-  /**
-   * <p>ACL类型</p><p>枚举值：</p><ul><li>None： 不开启</li><li>Allow： 白名单</li><li>Deny： 黑名单</li></ul><p>默认值：None</p>
-   */
-  ACLType: string
-  /**
-   * <p>需要关联的消费者ID列表</p>
-   */
-  ACLConsumerIds?: Array<string>
-  /**
-   * <p>需要关联的消费者组ID列表</p>
-   */
-  ACLConsumerGroupIds?: Array<string>
+  ResourceId: string
 }
 
 /**
@@ -4285,6 +5317,76 @@ export interface DeleteCloudNativeAPIGatewayLLMModelAPIResponse {
 }
 
 /**
+ * 自定义安全护栏策略
+ */
+export interface CustomGuardrailPolicy {
+  /**
+   * <p>策略 ID</p>
+   */
+  PolicyId?: string
+  /**
+   * <p>策略名称</p>
+   */
+  Name?: string
+  /**
+   * <p>策略描述</p>
+   */
+  Description?: string
+  /**
+   * <p>策略期望启用状态；实际生效还需检查 EffectiveEnabled 和 SyncStatus。</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>当前控制面计算值：Enabled=true 且 SyncStatus=synced 时为 true。不代表一次真实业务请求已通过审核，也不替代 DP 同步/链路验证。</p>
+   */
+  EffectiveEnabled?: boolean
+  /**
+   * <p>审核服务配置</p>
+   */
+  ServiceConfig?: CustomGuardrailServiceConfig
+  /**
+   * <p>审核引擎鉴权的脱敏视图，仅返回鉴权类型、Header 名和密钥存在状态，不返回 ApiKey。</p>
+   */
+  AuthConfig?: CustomGuardrailAuthConfig
+  /**
+   * <p>审核响应判定配置</p>
+   */
+  DecisionConfig?: CustomGuardrailDecisionConfig
+  /**
+   * <p>处理行为配置</p>
+   */
+  BehaviorConfig?: CustomGuardrailBehaviorConfig
+  /**
+   * <p>过滤与采样配置</p>
+   */
+  FilterConfig?: CustomGuardrailFilterConfig
+  /**
+   * <p>生效范围</p>
+   */
+  Scope?: CustomGuardrailScope
+  /**
+   * <p>业务资源到 Kong Route 的绑定及插件投影信息，一个业务资源可能对应多个 Route。</p>
+   */
+  Bindings?: Array<CustomGuardrailPolicyBinding>
+  /**
+   * <p>同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。</p>
+   */
+  SyncStatus?: string
+  /**
+   * <p>配置同步错误摘要，无错误时可能省略。</p>
+   */
+  SyncError?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>最后修改时间</p>
+   */
+  ModificationTime?: string
+}
+
+/**
  * 简单密钥信息
  */
 export interface AIGWSimpleSecretKey {
@@ -4308,6 +5410,20 @@ export interface AIGWSimpleSecretKey {
    * <p>创建时间</p><p>参数格式：2026-09-03 14:11:05</p>
    */
   CreateTime?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPServerAuth请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPServerAuthRequest {
+  /**
+   * <p>网关实例ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP服务ID</p>
+   */
+  ServerId: string
 }
 
 /**
@@ -4344,6 +5460,20 @@ export interface AIGWLLMTokenUsageListResult {
 }
 
 /**
+ * ModifyAIGWCustomGuardrailPolicy返回参数结构体
+ */
+export interface ModifyAIGWCustomGuardrailPolicyResponse {
+  /**
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
+   */
+  Result?: ModifyAIGWCustomGuardrailPolicyResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayMCPServerAuth返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayMCPServerAuthResponse {
@@ -4355,6 +5485,16 @@ export interface DescribeCloudNativeAPIGatewayMCPServerAuthResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAIGWCustomGuardrailCapabilities请求参数结构体
+ */
+export interface DescribeAIGWCustomGuardrailCapabilitiesRequest {
+  /**
+   * <p>网关实例 ID</p>
+   */
+  GatewayId: string
 }
 
 /**
@@ -4592,17 +5732,33 @@ export interface AIGWMCPToolACLItem {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics返回参数结构体
+ * CreateOrModifyCloudNativeAPIGatewayIPRestriction请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse {
+export interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest {
   /**
-   * <p>请求结果</p>
+   * cidr｜ip
    */
-  Result?: AIGWLLMTokenUsageStatisticsResult
+  AddressList: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否启用插件
    */
-  RequestId?: string
+  Enabled: boolean
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 访问控制类型：whiteList｜blackList
+   */
+  RestrictionType: string
+  /**
+   * 路由或服务的id
+   */
+  SourceId: string
+  /**
+   * 访问控制插件绑定的资源类型：route|service
+   */
+  SourceType: string
 }
 
 /**
@@ -4636,25 +5792,17 @@ export interface DescribeCloudNativeAPIGatewayAIQuotaListRequest {
 }
 
 /**
- * ModifyCloudNativeAPIGatewaySecretKey请求参数结构体
+ * DeleteCloudNativeAPIGatewayLLMModelService返回参数结构体
  */
-export interface ModifyCloudNativeAPIGatewaySecretKeyRequest {
+export interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
   /**
-   * 实例 ID
+   * <p>是否成功。</p>
    */
-  GatewayId: string
+  Result?: boolean
   /**
-   * 密钥名字
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-  /**
-   * 密钥id
-   */
-  SecretKeyId: string
-  /**
-   * 描述,200字以内
-   */
-  Description?: string
+  RequestId?: string
 }
 
 /**
@@ -4733,6 +5881,82 @@ export interface DescribeCloudNativeAPIGatewayAIServiceSourceListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPServer请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPServerRequest {
+  /**
+   * <p>实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>展示名字</p>
+   */
+  DisplayName: string
+  /**
+   * <p>服务 id</p>
+   */
+  ServerId: string
+  /**
+   * <p>后端类型</p><p>枚举值：</p><ul><li>MCPRegistry： mcp 注册中心</li><li>Registry： 普通注册中心</li><li>HostIP： 域名或ip</li><li>VirtualMCPServer： 虚拟MCPServer</li><li>DNS： 私有域名</li><li>Kubernetes： Kubernetes服务</li></ul>
+   */
+  UpstreamType: string
+  /**
+   * <p>超时时间，单位ms，最大60000</p>
+   */
+  Timeout?: number
+  /**
+   * <p>重试次数，最大3次</p>
+   */
+  RetryCount?: number
+  /**
+   * <p>注册中心来源信息</p>
+   */
+  UpstreamInfo?: AIGWMCPUpstreamInfo
+  /**
+   * <p>会话配置</p>
+   */
+  SessionConfig?: AIGWMCPSessionConfig
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>是否启用健康检查</p>
+   */
+  EnableHealthCheck?: boolean
+  /**
+   * <p>健康检查配置</p>
+   */
+  HealthCheck?: AIGWHealthCheckSetting
+  /**
+   * <p>是否开启保留原Host功能</p>
+   */
+  PreserveHost?: boolean
+  /**
+   * <p>日志配置</p>
+   */
+  LogConfig?: AIGWLogConfig
+  /**
+   * <p>服务级参数改写配置</p>
+   */
+  ParamRewriteConfig?: AIGWMCPServerParamRewriteConfig
+}
+
+/**
+ * 查询自定义安全护栏策略列表结果
+ */
+export interface DescribeAIGWCustomGuardrailPolicyListResult {
+  /**
+   * <p>符合条件的策略总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>策略列表</p>
+   */
+  DataList?: Array<CustomGuardrailPolicy>
 }
 
 /**
@@ -4848,83 +6072,137 @@ export interface AIGWModelNameRoute {
 }
 
 /**
- * DescribeCloudNativeAPIGatewaySecretKey请求参数结构体
+ * 自定义安全护栏审核记录
  */
-export interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
+export interface CustomGuardrailHit {
   /**
-   * <p>实例 ID</p>
+   * <p>业务网关请求 ID；不是本次云 API 响应的 RequestId。流式同一业务请求可产生多条审核记录。</p>
    */
-  GatewayId: string
+  RequestId?: string
   /**
-   * <p>密钥id</p>
+   * <p>审核记录 Unix 毫秒级时间戳；注意查询入参 StartTime/EndTime 为秒级。</p>
    */
-  SecretKeyId: string
+  Timestamp?: number
   /**
-   * <p>可选 Boolean，默认 false。仅传 true 且返回记录 ResourceType=Consumer 时，额外返回 CredentialGenerateType、CreationSource、BatchId；省略或 false 时不返回这三个字段，原字段和返回结构保持不变。此参数只控制展示字段，不控制 Filters 是否生效。</p>
+   * <p>网关实例 ID</p>
    */
-  IncludeCreationInfo?: boolean
+  GatewayId?: string
+  /**
+   * <p>策略 ID</p>
+   */
+  PolicyId?: string
+  /**
+   * <p>策略名称</p>
+   */
+  PolicyName?: string
+  /**
+   * <p>业务资源类型</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>业务资源 ID</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>Kong Route ID</p>
+   */
+  RouteId?: string
+  /**
+   * <p>业务协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>审核方向：request 或 response</p>
+   */
+  Direction?: string
+  /**
+   * <p>是否为流式审核</p>
+   */
+  Streaming?: boolean
+  /**
+   * <p>该审核单元是否标记为最终单元；不是是否命中/是否连接正常结束的判断依据。</p>
+   */
+  Final?: boolean
+  /**
+   * <p>归一化后的审核判定，可能为 allow、block、replace、error；不是原始自定义字段的任意值。观察模式仍可记录命中判定。</p>
+   */
+  Decision?: string
+  /**
+   * <p>策略配置动作</p>
+   */
+  ConfiguredAction?: string
+  /**
+   * <p>该审核记录的策略处理结果，如 allow、block、replace、error。需与 Decision、ConfiguredAction、ErrorCode 联合分析；记录不等于客户端已成功收到全部响应。</p>
+   */
+  EffectiveAction?: string
+  /**
+   * <p>内容是否被改写</p>
+   */
+  Rewritten?: boolean
+  /**
+   * <p>请求或响应是否被拦截</p>
+   */
+  Blocked?: boolean
+  /**
+   * <p>本审核记录是否因失败放行发生降级；为 true 时不能认为内容已经审核通过。</p>
+   */
+  Downgraded?: boolean
+  /**
+   * <p>审核服务 HTTP 状态码</p>
+   */
+  ProviderStatusCode?: number
+  /**
+   * <p>该审核调用耗时，单位毫秒，可含小数；不是完整模型请求时长或客户端首字延迟。</p>
+   */
+  LatencyMs?: number
+  /**
+   * <p>稳定错误码</p>
+   */
+  ErrorCode?: string
+  /**
+   * <p>审核原因或错误摘要</p>
+   */
+  Reason?: string
 }
 
 /**
- * ModifyCloudNativeAPIGatewayMCPServer请求参数结构体
+ * 自定义安全护栏审核服务鉴权配置
  */
-export interface ModifyCloudNativeAPIGatewayMCPServerRequest {
+export interface CustomGuardrailAuthConfigInput {
   /**
-   * <p>实例 ID</p>
+   * <p>审核引擎鉴权方式，必须显式选择 none（无鉴权）或 api_key（Header 密钥）；无鉴权也必须填写 none，不再自动补齐。api_key 时 HeaderName 和 ApiKey 必填；与客户端访问网关的鉴权独立。</p>
    */
-  GatewayId: string
+  AuthType: string
   /**
-   * <p>展示名字</p>
+   * <p>AuthType=api_key 时必填的有效 HTTP Header 名，例如 X-Audit-Key 或 Authorization；禁止协议保留头。AuthType=none 时不得填写。</p>
    */
-  DisplayName: string
+  HeaderName?: string
   /**
-   * <p>服务 id</p>
+   * <p>AuthType=api_key 时必填，作为 Header 完整值原样发送；如需 Bearer，调用方自行填写前缀。修改时省略可沿用已保存密钥；不能用 HasApiKey 代替真实密钥。</p>
    */
-  ServerId: string
+  ApiKey?: string
+}
+
+/**
+ * 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。
+ */
+export interface CustomGuardrailFieldMappingPatch {
   /**
-   * <p>后端类型</p><p>枚举值：</p><ul><li>MCPRegistry： mcp 注册中心</li><li>Registry： 普通注册中心</li><li>HostIP： 域名或ip</li><li>VirtualMCPServer： 虚拟MCPServer</li><li>DNS： 私有域名</li><li>Kubernetes： Kubernetes服务</li></ul>
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填。命中字段的点分隔对象路径，例如 decision 或 result.blocked；不支持数组下标、JSONPath 或通配符。</p>
    */
-  UpstreamType: string
+  HitFieldPath?: string
   /**
-   * <p>超时时间，单位ms，最大60000</p>
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填，API 类型为 string。可填写 JSON 字符串、数字或布尔标量文本，也接受 block 等非空普通文本并规范化为 JSON 字符串。示例：block 或 "block" 匹配字符串，true 匹配布尔值，0 匹配数字。null、对象、数组和空白文本不支持；类型不同不视为普通未命中。</p>
    */
-  Timeout?: number
+  HitValue?: string
   /**
-   * <p>重试次数，最大3次</p>
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。BlockMessageMode=response 时必填，例如 message 或 result.message；读取结果应为 1～512 字符的字符串，否则使用兜底文案。</p>
    */
-  RetryCount?: number
+  MessageFieldPath?: string
   /**
-   * <p>注册中心来源信息</p>
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。RewriteEnabled=true 时必填，例如 content.body；仅输出审核读取。字段存在即优先 replace，与命中值是否相等无关。JSON 替换值应是完整业务 JSON；SSE 必须是以空行结束的完整事件文本，替换当前未发送的 event_batch，不是整个流或某个 TCP chunk。输入不替换。</p>
    */
-  UpstreamInfo?: AIGWMCPUpstreamInfo
-  /**
-   * <p>会话配置</p>
-   */
-  SessionConfig?: AIGWMCPSessionConfig
-  /**
-   * <p>描述</p>
-   */
-  Description?: string
-  /**
-   * <p>是否启用健康检查</p>
-   */
-  EnableHealthCheck?: boolean
-  /**
-   * <p>健康检查配置</p>
-   */
-  HealthCheck?: AIGWHealthCheckSetting
-  /**
-   * <p>是否开启保留原Host功能</p>
-   */
-  PreserveHost?: boolean
-  /**
-   * <p>日志配置</p>
-   */
-  LogConfig?: AIGWLogConfig
-  /**
-   * <p>服务级参数改写配置</p>
-   */
-  ParamRewriteConfig?: AIGWMCPServerParamRewriteConfig
+  RewriteFieldPath?: string
 }
 
 /**
@@ -5079,6 +6357,20 @@ export interface AIGWMCPServerRequestRewriteConfig {
 }
 
 /**
+ * ExportAIGWCustomGuardrailHits返回参数结构体
+ */
+export interface ExportAIGWCustomGuardrailHitsResponse {
+  /**
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
+   */
+  Result?: ExportAIGWCustomGuardrailHitsResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AI网关授权模型访问范围
  */
 export interface AIGWAuthModelScopeItem {
@@ -5119,6 +6411,33 @@ export interface AIGWMCPRouteCheckResult {
 }
 
 /**
+ * 自定义安全护栏审核响应判定配置
+ */
+export interface CustomGuardrailDecisionConfigInput {
+  /**
+   * <p>仅支持 field_mapping（自定义字段映射），必须显式填写；不允许 standard_v2、空字符串或 null。只决定如何解析审核响应，网关送审请求仍使用统一 Schema 2.0 封装。</p>
+   */
+  ContractMode: string
+  /**
+   * <p>必须显式填写 default 或 response。default 使用 BlockMessage；response 使用 FieldMapping.MessageFieldPath 读取提示，值缺失或不合法时回退默认文案。default 时 BlockMessage 必填，response 时 MessageFieldPath 必填。</p>
+   */
+  BlockMessageMode: string
+  /**
+   * <p>自定义模式必填的响应字段映射。HitFieldPath 和 HitValue 必填。输出启用替换且替换字段存在时优先 replace；否则要求命中字段存在且为有效同类型标量，值相等时 block，不相等时 allow。缺失或非法命中字段属于无效审核响应，不能等同于安全放行。</p>
+   */
+  FieldMapping: CustomGuardrailFieldMappingInput
+  /**
+   * <p>默认/兜底拦截提示，长度 1～512 字符，不是替换 Body。BlockMessageMode=default 时必填且不能为空白；创建/草稿测试使用 response 模式时可省略，后端补充系统兜底提示。修改时省略保留原值，显式空值不用于清空文案。</p>
+   */
+  BlockMessage?: string
+  /**
+   * <p>是否允许输出内容替换，省略为 false。开启且配置 RewriteFieldPath 后，输出审核响应只要存在该字段就优先 replace，不要求 HitFieldPath/HitValue 命中，也不要求引擎 decision=replace；替换字段不存在才按命中规则处理。输入永不替换；observe 只记录、不阻断或替换。非法替换正文是审核异常。流式仅替换当前未发送批次，不可撤回已发送内容。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RewriteEnabled?: boolean
+}
+
+/**
  * DeleteCloudNativeAPIGatewayConsumer请求参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayConsumerRequest {
@@ -5147,17 +6466,51 @@ export interface CloudNativeAPIGatewayLLMModelFallbackRule {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayMCPToolStatus返回参数结构体
+ * ExportAIGWCustomGuardrailHits请求参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayMCPToolStatusResponse {
+export interface ExportAIGWCustomGuardrailHitsRequest {
   /**
-   * <p>创建结果</p>
+   * <p>网关实例 ID</p>
    */
-  Result?: boolean
+  GatewayId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>导出起始时间，Unix 秒级时间戳</p>
    */
-  RequestId?: string
+  StartTime: number
+  /**
+   * <p>导出结束时间，Unix 秒级时间戳</p>
+   */
+  EndTime: number
+  /**
+   * <p>审核记录过滤条件</p>
+   */
+  Filters?: Array<CustomGuardrailHitFilter>
+  /**
+   * <p>导出格式：csv 或 json；默认 csv</p>
+   */
+  Format?: string
+}
+
+/**
+ * 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。
+ */
+export interface CustomGuardrailBehaviorConfigPatch {
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填，仅允许 input（仅输入）或 both（输入加输出），与控制台一致；不允许 output、空值或省略。送审包方向使用 request/response。</p>
+   */
+  Direction?: string
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填，observe 只观察记录，block 执行命中阻断或符合条件的输出替换。不再自动补默认值。审核异常另由 FailureMode 处理。</p>
+   */
+  HandleAction?: string
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填整数，50～5000 毫秒，0 无效且不再代表默认值。控制台初始显示 500，但 API 调用方仍须传入。这是每次审核 HTTP 调用的超时，不是整个模型生成或 SSE 连接时长。</p>
+   */
+  TimeoutMs?: number
+  /**
+   * <p>局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填，open 为异常时尝试放行（存在未审核内容放行风险），closed 为异常时拦截；不得省略或为空。不改变正常命中结论，open 不能绕过所有 Relay 安全或生命周期错误。</p>
+   */
+  FailureMode?: string
 }
 
 /**
@@ -5238,6 +6591,32 @@ export interface AIGWCustomDesensitizeRule {
 }
 
 /**
+ * 创建自定义安全护栏策略结果
+ */
+export interface CreateAIGWCustomGuardrailPolicyResult {
+  /**
+   * <p>本次配置同步是否全部成功。即使云 API 未返回 Response.Error，仍须检查此值、SyncStatus 和 FailedResources。</p>
+   */
+  Success?: boolean
+  /**
+   * <p>新建策略 ID</p>
+   */
+  PolicyId?: string
+  /**
+   * <p>本次同步成功的业务资源引用；Modify 返回的不是严格的新增差集。</p>
+   */
+  AddedResources?: Array<CustomGuardrailResourceRef>
+  /**
+   * <p>失败资源及原因；非空表示配置同步仍需处理，不要因 HTTP 200 判定全部成功。</p>
+   */
+  FailedResources?: Array<CustomGuardrailSyncFailure>
+  /**
+   * <p>同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。</p>
+   */
+  SyncStatus?: string
+}
+
+/**
  * CreateCloudNativeAPIGatewaySecretKey返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewaySecretKeyResponse {
@@ -5274,6 +6653,16 @@ export interface KongServiceRoute {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MCP Tool 列表
  */
 export interface CNAPIGwMCPToolList {
@@ -5285,6 +6674,82 @@ export interface CNAPIGwMCPToolList {
    * <p>总数</p>
    */
   TotalCount?: number
+}
+
+/**
+ * ModifyAIGWCustomGuardrailPolicy请求参数结构体
+ */
+export interface ModifyAIGWCustomGuardrailPolicyRequest {
+  /**
+   * <p>网关实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>策略 ID</p>
+   */
+  PolicyId: string
+  /**
+   * <p>策略名称，长度 1～64</p>
+   */
+  Name?: string
+  /**
+   * <p>策略描述，最长 200；传空字符串可清空</p>
+   */
+  Description?: string
+  /**
+   * <p>是否启用策略</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>审核服务局部更新配置</p>
+   */
+  ServiceConfig?: CustomGuardrailServiceConfigPatch
+  /**
+   * <p>审核服务鉴权局部更新配置</p>
+   */
+  AuthConfig?: CustomGuardrailAuthConfigPatch
+  /**
+   * <p>审核响应判定局部更新配置</p>
+   */
+  DecisionConfig?: CustomGuardrailDecisionConfigPatch
+  /**
+   * <p>处理行为局部更新配置</p>
+   */
+  BehaviorConfig?: CustomGuardrailBehaviorConfigPatch
+  /**
+   * <p>过滤与采样局部更新配置</p>
+   */
+  FilterConfig?: CustomGuardrailFilterConfigPatch
+  /**
+   * <p>资源绑定范围，global 或 resource。修改时传入的是新的完整范围，不是增量追加。</p>
+   */
+  Scope?: CustomGuardrailScopeInput
+}
+
+/**
+ * DescribeAIGWCustomGuardrailPolicyList请求参数结构体
+ */
+export interface DescribeAIGWCustomGuardrailPolicyListRequest {
+  /**
+   * <p>网关实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>单页数量，范围 1～100</p>
+   */
+  Limit: number
+  /**
+   * <p>按策略名称或描述模糊搜索</p>
+   */
+  Keyword?: string
+  /**
+   * <p>策略过滤条件</p>
+   */
+  Filters?: Array<CustomGuardrailPolicyFilter>
+  /**
+   * <p>分页偏移量，最小 0</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -5338,6 +6803,20 @@ export interface CreateCloudNativeAPIGatewayAIServiceSourceRequest {
 }
 
 /**
+ * 删除自定义安全护栏策略结果
+ */
+export interface DeleteAIGWCustomGuardrailPolicyResult {
+  /**
+   * <p>是否完成插件投影清理并删除策略。false 时策略保留供重试，应检查 FailedResources。</p>
+   */
+  Success?: boolean
+  /**
+   * <p>投影清理失败的业务资源</p>
+   */
+  FailedResources?: Array<CustomGuardrailSyncFailure>
+}
+
+/**
  * AI 网关Token长度路由规则
  */
 export interface AIGWTokenLengthRouteRule {
@@ -5371,6 +6850,52 @@ export interface AIGWOAuthCredentialConfig {
    * <p>OAuth2 授权回调地址</p>
    */
   RedirectURIs?: string
+}
+
+/**
+ * CreateAIGWCustomGuardrailPolicy返回参数结构体
+ */
+export interface CreateAIGWCustomGuardrailPolicyResponse {
+  /**
+   * <p>接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。</p>
+   */
+  Result?: CreateAIGWCustomGuardrailPolicyResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewaySecretKeyValue请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
+  /**
+   * 指定从 AKSK 或 CAM 成对凭证中返回哪一半。取值：AccessKey（AKSK 返回 AccessKeyId，CAM 返回 SecretId）、SecretKey（AKSK 返回 SecretAccessKey，CAM 返回 SecretKey）。不传则保持原行为，仅返回 AccessKeyId 或 SecretId。
+   */
+  SecretValueType?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPToolVersion返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolVersionResponse {
+  /**
+   * <p>tool版本的json snapshot</p>
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5716,6 +7241,20 @@ export interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
 }
 
 /**
+ * RollbackCloudNativeAPIGatewayMCPToolVersion返回参数结构体
+ */
+export interface RollbackCloudNativeAPIGatewayMCPToolVersionResponse {
+  /**
+   * <p>操作结果</p>
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckCloudNativeAPIGatewayMCPToolVersionExist返回参数结构体
  */
 export interface CheckCloudNativeAPIGatewayMCPToolVersionExistResponse {
@@ -5804,6 +7343,20 @@ export interface DescribeCloudNativeAPIGatewayMCPServerRequest {
    * <p>MCP服务ID</p>
    */
   ServerId: string
+}
+
+/**
+ * 查询自定义安全护栏可绑定资源结果
+ */
+export interface DescribeAIGWCustomGuardrailBindableResourcesResult {
+  /**
+   * <p>符合条件的资源总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>可绑定资源列表</p>
+   */
+  DataList?: Array<CustomGuardrailBindableResource>
 }
 
 /**
@@ -5943,13 +7496,59 @@ export interface AIGWLLMModelServiceSubRoute {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayConsumer返回参数结构体
+ * DescribeAIGWCustomGuardrailHits请求参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayConsumerResponse {
+export interface DescribeAIGWCustomGuardrailHitsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>网关实例 ID</p>
    */
-  RequestId?: string
+  GatewayId: string
+  /**
+   * <p>查询起始时间，Unix 秒级时间戳</p>
+   */
+  StartTime: number
+  /**
+   * <p>查询结束时间，Unix 秒级时间戳</p>
+   */
+  EndTime: number
+  /**
+   * <p>分页偏移量，最小 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>单页数量，范围 1～100，默认 20</p>
+   */
+  Limit?: number
+  /**
+   * <p>审核记录过滤条件</p>
+   */
+  Filters?: Array<CustomGuardrailHitFilter>
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayConsumer请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerRequest {
+  /**
+   * <p>网关实例id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>消费者 ID。</p>
+   */
+  ConsumerId: string
+  /**
+   * <p>消费者名称，最长 60 字符。</p>
+   */
+  Name: string
+  /**
+   * <p>消费者优先级</p><p>枚举值：</p><ul><li>High： 高优</li><li>Medium： 中优</li><li>Low： 低优</li></ul>
+   */
+  Priority?: string
+  /**
+   * <p>消费者描述。最长 200 字符。</p>
+   */
+  Description?: string
 }
 
 /**
@@ -6175,6 +7774,32 @@ export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
 }
 
 /**
+ * 自定义安全护栏审核响应判定配置
+ */
+export interface CustomGuardrailDecisionConfig {
+  /**
+   * <p>已保存的判定模式。新配置仅支持 field_mapping；存量策略可能返回 standard_v2，查询、删除或停用不要求迁移，修改判定配置或重新启用前必须迁移。</p>
+   */
+  ContractMode?: string
+  /**
+   * <p>必须显式填写 default 或 response。default 使用 BlockMessage；response 使用 FieldMapping.MessageFieldPath 读取提示，值缺失或不合法时回退默认文案。default 时 BlockMessage 必填，response 时 MessageFieldPath 必填。</p>
+   */
+  BlockMessageMode?: string
+  /**
+   * <p>本策略默认/兜底拦截提示，最长 512 个字符。未配置或为空时使用系统按请求语言选择的默认提示；不是替换后的业务响应 Body。</p>
+   */
+  BlockMessage?: string
+  /**
+   * <p>是否允许输出内容替换，省略为 false。开启且配置 RewriteFieldPath 后，输出审核响应只要存在该字段就优先 replace，不要求 HitFieldPath/HitValue 命中，也不要求引擎 decision=replace；替换字段不存在才按命中规则处理。输入永不替换；observe 只记录、不阻断或替换。非法替换正文是审核异常。流式仅替换当前未发送批次，不可撤回已发送内容。</p>
+   */
+  RewriteEnabled?: boolean
+  /**
+   * <p>自定义模式必填的响应字段映射。HitFieldPath 和 HitValue 必填。输出启用替换且替换字段存在时优先 replace；否则要求命中字段存在且为有效同类型标量，值相等时 block，不相等时 allow。缺失或非法命中字段属于无效审核响应，不能等同于安全放行。</p>
+   */
+  FieldMapping?: CustomGuardrailFieldMapping
+}
+
+/**
  * DeleteCloudNativeAPIGatewayAIServiceSource请求参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayAIServiceSourceRequest {
@@ -6207,25 +7832,19 @@ export interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayMCPToolVersion请求参数结构体
+ * 自定义安全护栏策略列表过滤条件
  */
-export interface DeleteCloudNativeAPIGatewayMCPToolVersionRequest {
+export interface CustomGuardrailPolicyFilter {
   /**
-   * <p>网关实例 id</p>
+   * <p>过滤字段：Enabled、Direction、HandleAction、BindType、SyncStatus；名称区分大小写。Direction 使用 input/output/both。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  Name: string
   /**
-   * <p>MCPserverId</p>
+   * <p>至少一个字符串值；同一过滤项内多个值为 OR，不同过滤项之间为 AND。例如 Enabled 的值为字符串 "true"，不是布尔值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServerId: string
-  /**
-   * <p>工具 id</p>
-   */
-  ToolId: string
-  /**
-   * <p>mcp tool版本</p>
-   */
-  ToolVersion: string
+  Values: Array<string>
 }
 
 /**
@@ -6240,6 +7859,16 @@ export interface CreateCloudNativeAPIGatewayLLMModelAPIResponse {
    * <p>模型 API ID，全局唯一标识。</p>
    */
   ModelAPIId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveCloudNativeAPIGatewayConsumerInGroup返回参数结构体
+ */
+export interface RemoveCloudNativeAPIGatewayConsumerInGroupResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6265,17 +7894,17 @@ export interface AIGWGatewayVerifyConfig {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayMCPServerAuth请求参数结构体
+ * DeleteCloudNativeAPIGatewaySecretKey请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayMCPServerAuthRequest {
+export interface DeleteCloudNativeAPIGatewaySecretKeyRequest {
   /**
-   * <p>网关实例ID</p>
+   * 网关ID
    */
   GatewayId: string
   /**
-   * <p>MCP服务ID</p>
+   * 密钥id
    */
-  ServerId: string
+  SecretKeyId: string
 }
 
 /**
@@ -6307,6 +7936,16 @@ export interface DeleteCloudNativeAPIGatewayLLMModelServiceRequest {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewayIPRestriction返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayIPRestrictionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayMCPToolImportTask请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest {
@@ -6318,6 +7957,20 @@ export interface DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest {
    * <p>MCP Server ID</p>
    */
   MCPServerId: string
+}
+
+/**
+ * DeleteAIGWCustomGuardrailPolicy请求参数结构体
+ */
+export interface DeleteAIGWCustomGuardrailPolicyRequest {
+  /**
+   * <p>网关实例 ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>策略 ID</p>
+   */
+  PolicyId: string
 }
 
 /**
@@ -6416,6 +8069,16 @@ export interface ModifyCloudNativeAPIGatewayLLMModelAPIRequest {
    * <p>单模型 API 的顶层标准模型名称。不传保留原值，传空字符串清空，传非空字符串设置新值；仅单模型场景可设置。已配置顶层标准模型名时，需先清空该字段再切换多模型路由。仅对应 TIONE 模型服务时可配置。非空值最长 256 字节，支持中文、英文、数字、下划线和短横线，须以中文、英文或数字开头。同一网关内不同模型 API 不得使用相同的标准模型名称；同一模型 API 内同一模型服务在多处配置时须保持一致。</p>
    */
   StandardModelName?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPServerAuth返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPServerAuthResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6549,4 +8212,26 @@ export interface DescribeCloudNativeAPIGatewayLLMTokenUsageListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 密钥名字
+   */
+  Name: string
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
+  /**
+   * 描述,200字以内
+   */
+  Description?: string
 }

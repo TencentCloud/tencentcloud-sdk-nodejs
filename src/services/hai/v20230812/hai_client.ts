@@ -65,6 +65,7 @@ import {
   DescribeInstanceNetworkStatusRequest,
   MuskPromptInfo,
   InquirePriceRunInstancesRequest,
+  RoleStatusInfo,
   EnvParam,
   GetServicePodLogsResponse,
   DeleteServiceResponse,

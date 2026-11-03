@@ -739,19 +739,19 @@ export interface PushTrainingMetricsRequest {
  */
 export interface Filter {
   /**
-   * 过滤字段名称
+   * <p>过滤字段名称</p>
    */
   Name?: string
   /**
-   * 过滤字段取值
+   * <p>过滤字段取值</p>
    */
   Values?: Array<string>
   /**
-   * 是否开启反向查询
+   * <p>是否开启反向查询</p>
    */
   Negative?: boolean
   /**
-   * 是否开启模糊匹配
+   * <p>是否开启模糊匹配</p>
    */
   Fuzzy?: boolean
 }

@@ -26,82 +26,6 @@ export interface DeleteAgentRequest {
 }
 
 /**
- * DescribeAgent返回参数结构体
- */
-export interface DescribeAgentResponse {
-  /**
-   * Agent 业务 ID
-   */
-  AgentId?: string
-  /**
-   * Agent 名称
-   */
-  AgentName?: string
-  /**
-   * Agent 描述
-   */
-  Description?: string
-  /**
-   * 头像 URL
-   */
-  AvatarUrl?: string
-  /**
-   * 是否调试 Agent
-   */
-  IsDebug?: boolean
-  /**
-   * 创建时间（RFC3339）
-   */
-  CreatedTime?: string
-  /**
-   * 更新时间（RFC3339）
-   */
-  ModifiedTime?: string
-  /**
-   * 当前活跃 session 数（ACTIVE/CREATING/MIGRATING，未软删）；仅 DescribeAgent 读路径填充，写路径回显不下发
-   */
-  ActiveSessionCount?: number
-  /**
-   * 流量路由配置（VersionId 恒为字符串，防 JS 精度丢失）
-   */
-  RoutingSet?: Array<RoutingItem>
-  /**
-   * A2A 对外互通配置与注册态（只读回显；原四个平铺字段收进结构）
-   */
-  A2AConfig?: A2AConfig
-  /**
-   * 绑定的 OneID 企业账号 ID。允许为空：未绑定的存量与新建 Agent 该字段缺省，绑定后回显绑定值
-   */
-  AccountId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeExpertList请求参数结构体
- */
-export interface DescribeExpertListRequest {
-  /**
-   * <p>专家来源，必填：BUILTIN（内置）/ CUSTOM（自建）</p>
-   */
-  Source: string
-  /**
-   * <p>标准过滤条件：ExpertId（精确，多值 OR，携带即按 ID 批量查询，忽略分页）/ Keyword（模糊）/ PublishStatus（DRAFT、PUBLISHED、ALL，仅 CUSTOM）/ ExpertType（AGENT 普通专家、TEAM 专家团）。ExpertType 只允许一个过滤条件且 Values 必须仅含一个值，不传则不增加形态过滤；可与 ExpertId 组合取交集，分页总数 TotalCount 为过滤后的匹配数。专家选择列表建议传 {&quot;Name&quot;:&quot;ExpertType&quot;,&quot;Values&quot;:[&quot;AGENT&quot;]}。CAPI 的 CUSTOM 目录仅有普通专家，按 TEAM 过滤返回空集。</p>
-   */
-  Filters?: Array<Filter>
-  /**
-   * <p>偏移量，从 0 开始，默认 0（按 ID 批量查询时忽略）</p>
-   */
-  Offset?: number
-  /**
-   * <p>每页数量，默认 20，最大 200（按 ID 批量查询时忽略）</p>
-   */
-  Limit?: number
-}
-
-/**
  * A2A skill 列表项（出参用，来自 A2A card 解析结果）
  */
 export interface A2ASkillItem {
@@ -120,24 +44,6 @@ export interface A2ASkillItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
-}
-
-/**
- * DescribeMessageEventList返回参数结构体
- */
-export interface DescribeMessageEventListResponse {
-  /**
-   * <p>消息事件列表</p>
-   */
-  MessageEventSet?: Array<MessageEvent>
-  /**
-   * <p>符合过滤条件的事件总数</p>
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -232,97 +138,19 @@ export interface AgentItem {
 }
 
 /**
- * UnbindExternalAgent请求参数结构体
+ * 任务关联的 Agent 配置
  */
-export interface UnbindExternalAgentRequest {
+export interface AgentConfig {
   /**
-   * TMA managed agent 业务 ID
+   * <p>执行 Prompt（必填）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AgentId: string
+  Prompt?: string
   /**
-   * 已绑定的外部 A2A agent ID
-   */
-  A2AAgentId?: string
-  /**
-   * 绑定记录 ID（自增 ID 字符串）
-   */
-  BindingId?: string
-  /**
-   * 版本 ID
-   */
-  VersionId?: string
-}
-
-/**
- * DescribeBuiltinModelList返回参数结构体
- */
-export interface DescribeBuiltinModelListResponse {
-  /**
-   * 总数
-   */
-  TotalCount?: number
-  /**
-   * 内置模型列表（分页后）
-   */
-  BuiltinModelSet?: Array<BuiltinModel>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateAgentVersion返回参数结构体
- */
-export interface CreateAgentVersionResponse {
-  /**
-   * <p>版本 ID</p>
-   */
-  VersionId?: string
-  /**
-   * <p>Agent 业务 ID</p>
+   * <p>Agent 唯一标识（引用 CreateAgent 创建的 Managed Agent，必填）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentId?: string
-  /**
-   * <p>版本名称</p>
-   */
-  VersionName?: string
-  /**
-   * <p>版本类型：DEFAULT / TEST / PROD</p>
-   */
-  VersionType?: string
-  /**
-   * <p>版本变更说明</p>
-   */
-  Description?: string
-  /**
-   * <p>模型标识</p>
-   */
-  Model?: string
-  /**
-   * <p>Manifest v2.0 精简 manifest 原文（JSON 字符串）</p>
-   */
-  Manifest?: string
-  /**
-   * <p>版本状态：DRAFT / ENABLED / DISABLED</p>
-   */
-  Status?: string
-  /**
-   * <p>创建时间</p>
-   */
-  CreatedTime?: string
-  /**
-   * <p>更新时间</p>
-   */
-  ModifiedTime?: string
-  /**
-   * <p>绑定的沙箱模板 ID；未绑定时为空，创建会话沙箱使用系统默认模板。</p>
-   */
-  SandboxTemplateId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -375,165 +203,6 @@ export interface DescribeExternalAgentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyAgentVersion返回参数结构体
- */
-export interface ModifyAgentVersionResponse {
-  /**
-   * 版本 ID
-   */
-  VersionId?: string
-  /**
-   * Agent 业务 ID
-   */
-  AgentId?: string
-  /**
-   * 版本名称
-   */
-  VersionName?: string
-  /**
-   * 版本类型：DEFAULT / TEST / PROD
-   */
-  VersionType?: string
-  /**
-   * 版本变更说明
-   */
-  Description?: string
-  /**
-   * 模型标识
-   */
-  Model?: string
-  /**
-   * Manifest v2.0 精简 manifest 原文（JSON 字符串）
-   */
-  Manifest?: string
-  /**
-   * 版本状态：DRAFT / ENABLED / DISABLED
-   */
-  Status?: string
-  /**
-   * 创建时间
-   */
-  CreatedTime?: string
-  /**
-   * 更新时间
-   */
-  ModifiedTime?: string
-  /**
-   * 绑定的沙箱模板 ID；未绑定时为空，创建会话沙箱使用系统默认模板。
-   */
-  SandboxTemplateId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * BindExternalAgent返回参数结构体
- */
-export interface BindExternalAgentResponse {
-  /**
-   * 操作结果状态（大写枚举）：BOUND=已绑定 / UNBOUND=已解绑
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 绑定记录 ID（自增 ID 字符串）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BindingId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 全局技能计数
- */
-export interface SkillCounts {
-  /**
-   * 内置技能数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Builtin?: number
-  /**
-   * 自建技能数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Custom?: number
-  /**
-   * 总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
-}
-
-/**
- * BindExternalAgent请求参数结构体
- */
-export interface BindExternalAgentRequest {
-  /**
-   * TMA managed agent 业务 ID（CloudAgentID）
-   */
-  AgentId: string
-  /**
-   * 已注册的外部 A2A agent ID
-   */
-  A2AAgentId: string
-  /**
-   * 版本 ID
-   */
-  VersionId?: string
-}
-
-/**
- * ModifyAgentRouting请求参数结构体
- */
-export interface ModifyAgentRoutingRequest {
-  /**
-   * Agent 业务 ID
-   */
-  AgentId: string
-  /**
-   * 路由配置，覆盖式写入（与出参 AgentInfo.RoutingSet 命名对齐）
-   */
-  RoutingSet: Array<RoutingItem>
-}
-
-/**
- * DescribeExternalAgentList返回参数结构体
- */
-export interface DescribeExternalAgentListResponse {
-  /**
-   * 符合条件的外部 Agent 总数
-   */
-  TotalCount?: number
-  /**
-   * 外部 Agent 集合（可见卡片全集 ∪ URL 直连型存量 binding 的合并视图）
-   */
-  ExternalAgentSet?: Array<ExternalAgentInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeExternalAgent请求参数结构体
- */
-export interface DescribeExternalAgentRequest {
-  /**
-   * <p>TMA managed agent 业务 ID（CloudAgentID）</p>
-   */
-  AgentId: string
-  /**
-   * <p>已绑定的外部 A2A agent ID</p>
-   */
-  A2AAgentId: string
 }
 
 /**
@@ -597,76 +266,6 @@ export interface ModifyAgentVersionRequest {
 }
 
 /**
- * CreateAgent请求参数结构体
- */
-export interface CreateAgentRequest {
-  /**
-   * Agent 名称
-   */
-  AgentName: string
-  /**
-   * Agent 描述
-   */
-  Description?: string
-  /**
-   * 头像 URL
-   */
-  AvatarUrl?: string
-  /**
-   * 模型标识
-   */
-  Model?: string
-  /**
-   * Manifest v2.0 原文（JSON 字符串），作为 default 版本初始内容。ConnectorSet 非空时 Manifest 不可为空，否则返回 InvalidParameter
-   */
-  Manifest?: string
-  /**
-   * 该 Agent 最终绑定的连接器集合（全量覆盖语义）：缺省 = 不绑定连接器；非空 = 物化为 manifest v2 mcp_servers 网关条目。ConnectorSet 非空时 Manifest 不可为空，否则返回 InvalidParameter
-   */
-  ConnectorSet?: Array<ConnectorRefInput>
-  /**
-   * 绑定的 OneID 企业账号 ID。非空时必须是当前主账号已在企业授权表（t_managed_agent_enterprise_authorization）中授权的租户，否则返回 UnauthorizedOperation.AccountNotAuthorized。绑定后不可修改。TrimSpace 后长度 1~64 字符
-   */
-  AccountId?: string
-}
-
-/**
- * DescribeAgentVersion请求参数结构体
- */
-export interface DescribeAgentVersionRequest {
-  /**
-   * <p>Agent 业务 ID</p>
-   */
-  AgentId: string
-  /**
-   * <p>版本 ID</p>
-   */
-  VersionId: string
-}
-
-/**
- * ModifyAgent请求参数结构体
- */
-export interface ModifyAgentRequest {
-  /**
-   * Agent 业务 ID
-   */
-  AgentId: string
-  /**
-   * Agent 名称（可选，仅传递需要更新的字段）
-   */
-  AgentName?: string
-  /**
-   * Agent 描述（可选）
-   */
-  Description?: string
-  /**
-   * 头像 URL（可选）
-   */
-  AvatarUrl?: string
-}
-
-/**
  * DescribeAgentSession返回参数结构体
  */
 export interface DescribeAgentSessionResponse {
@@ -725,321 +324,29 @@ export interface DescribeAgentSessionResponse {
 }
 
 /**
- * CreateAgent返回参数结构体
+ * Token用量
  */
-export interface CreateAgentResponse {
+export interface TokenUsage {
   /**
-   * Agent 业务 ID
-   */
-  AgentId?: string
-  /**
-   * Agent 名称
-   */
-  AgentName?: string
-  /**
-   * Agent 描述
-   */
-  Description?: string
-  /**
-   * 头像 URL
-   */
-  AvatarUrl?: string
-  /**
-   * 是否调试 Agent
-   */
-  IsDebug?: boolean
-  /**
-   * 创建时间（RFC3339）
-   */
-  CreatedTime?: string
-  /**
-   * 更新时间（RFC3339）
-   */
-  ModifiedTime?: string
-  /**
-   * 流量路由配置（VersionId 恒为字符串，防 JS 精度丢失）
-   */
-  RoutingSet?: Array<RoutingItem>
-  /**
-   * A2A 对外互通配置与注册态（只读回显；原四个平铺字段收进结构）
-   */
-  A2AConfig?: A2AConfig
-  /**
-   * 绑定的 OneID 企业账号 ID。允许为空：未绑定的存量与新建 Agent 该字段缺省，绑定后回显绑定值
-   */
-  AccountId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAgentSession请求参数结构体
- */
-export interface DescribeAgentSessionRequest {
-  /**
-   * 会话 ID
-   */
-  SessionId: string
-}
-
-/**
- * UnbindExternalAgent返回参数结构体
- */
-export interface UnbindExternalAgentResponse {
-  /**
-   * 操作结果状态（大写枚举）：BOUND=已绑定 / UNBOUND=已解绑
+   * <p>输入Token</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: string
+  InputTokens?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeSkillList请求参数结构体
- */
-export interface DescribeSkillListRequest {
-  /**
-   * 技能来源，必填：BUILTIN（内置）/ CUSTOM（自建）/ AUTHORIZED（企业授权）。数据通路判别，非筛选条件
-   */
-  Source: string
-  /**
-   * 标准过滤条件：SkillId（精确，多值 OR ≤100，携带即按 ID 批量查询）/ Keyword（模糊）/ PublishStatus（DRAFT/PUBLISHED/ALL）/ Status（ENABLED/DISABLED/ALL）
-   */
-  Filters?: Array<Filter>
-  /**
-   * 偏移量，默认 0（按 ID 批量查询时忽略）
-   */
-  Offset?: number
-  /**
-   * 每页数量，默认 20，最大 200（按 ID 批量查询时忽略）
-   */
-  Limit?: number
-  /**
-   * 授权方企业账号标识；仅 Source=AUTHORIZED 时生效。不传则由后端用 Uin 推导全部已授权范围；未携带 SkillId 的分页查询必传
-   */
-  AccountId?: string
-  /**
-   * 仅 Source=AUTHORIZED 时生效。Agent 绑定了 OneID 租户时，授权集合强制收窄到绑定租户；显式传入的 AccountId 必须等于绑定值，否则请求被拒绝。绑定 Agent 的分页查询可不传 AccountId（服务端按绑定值收窄到单一授权方）
-   */
-  AgentId?: string
-}
-
-/**
- * DescribeAgentSessionList返回参数结构体
- */
-export interface DescribeAgentSessionListResponse {
-  /**
-   * 总数
-   */
-  TotalCount?: number
-  /**
-   * 会话列表
-   */
-  SessionSet?: Array<SessionItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeConnectorList返回参数结构体
- */
-export interface DescribeConnectorListResponse {
-  /**
-   * 符合条件的连接器总数
-   */
-  TotalCount?: number
-  /**
-   * 连接器列表（分页后）；连接器挂调用方主账号 UIN 下，不挂 OneID 企业
-   */
-  ConnectorSet?: Array<ConnectorInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAgentList返回参数结构体
- */
-export interface DescribeAgentListResponse {
-  /**
-   * 符合条件的 Agent 总数
-   */
-  TotalCount?: number
-  /**
-   * Agent 列表（分页后）；元素含 A2A / 公网 API 访问开关与地址、创建人 UIN、绑定的企业账号 ID
-   */
-  AgentSet?: Array<AgentItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateAgentSession返回参数结构体
- */
-export interface CreateAgentSessionResponse {
-  /**
-   * <p>会话 ID</p>
-   */
-  SessionId?: string
-  /**
-   * <p>可用的聊天接入点列表（当前仅含一个 PUBLIC 公网接入点；空数组 = 无可用接入点）</p>
-   */
-  EndpointSet?: Array<ChatEndpoint>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 消息内容
- */
-export interface MessageEventMessage {
-  /**
-   * <p>文本内容</p>
+   * <p>输出Token</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content?: string
+  OutputTokens?: number
   /**
-   * <p>Token用量</p>
+   * <p>总Token</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TokenUsage?: TokenUsage
-}
-
-/**
- * 外部 Agent 列表/详情项
- */
-export interface ExternalAgentInfo {
+  TotalTokens?: number
   /**
-   * 外部 A2A agent ID
+   * <p>统计口径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  A2AAgentId?: string
-  /**
-   * 外部 Agent 名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * 外部 A2A Server URL
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Endpoint?: string
-  /**
-   * 绑定记录 ID（已绑定时返回）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BindingId?: string
-  /**
-   * 是否已绑定到当前 Agent
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Bound?: boolean
-  /**
-   * 头像地址（取自 provider card 的 iconUrl）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IconUrl?: string
-  /**
-   * 外部 agent card 声明的版本号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  A2AVersion?: string
-  /**
-   * 子 Agent 的最新版本名，返回版本存储名（default / test-N / prod-N），非 V1/V2 展示名。取值规则：有正式版本（prod）时取最新 prod，否则取最新 test，再否则取 default。仅企业 Agent 来源返回（其 A2AVersion 恒为 default）；其他来源或查询失败时不返回。注意：不代表 A2A 调用时实际执行的版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LatestVersionName?: string
-  /**
-   * A2A card skills 集合
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  A2ASkillSet?: Array<A2ASkillItem>
-}
-
-/**
- * A2A skill 录入项（注册外部 Agent 时传入）
- */
-export interface A2ASkillInput {
-  /**
-   * <p>A2A skill ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  A2ASkillId?: string
-  /**
-   * <p>skill 名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * <p>skill 描述</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * <p>标签</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<string>
-  /**
-   * <p>示例</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Examples?: Array<string>
-}
-
-/**
- * 聊天接入点。EndpointType 现在就引入枚举：当前仅返回一个 PUBLIC 元素，将来新增私网端点与 VPC 属性为纯增量。
- */
-export interface ChatEndpoint {
-  /**
-   * 接入点类型：PUBLIC（公网）/ PRIVATE（私网，预留）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndpointType?: string
-  /**
-   * 接入点地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Url?: string
-}
-
-/**
- * DescribeBuiltinModelList请求参数结构体
- */
-export interface DescribeBuiltinModelListRequest {
-  /**
-   * 偏移量，从 0 开始
-   */
-  Offset?: number
-  /**
-   * 返回数量，缺省为 20，最大 100
-   */
-  Limit?: number
-  /**
-   * 过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系
-   */
-  Filters?: Array<Filter>
-  /**
-   * OneID 企业账号 ID，可选。传入时拉取该账号对应企业的模型（要求当前主账号 UIN 已授权该账号），不传时使用服务配置的企业 ID
-   */
-  AccountId?: string
+  Scope?: string
 }
 
 /**
@@ -1122,177 +429,6 @@ export interface ConnectorInfo {
 }
 
 /**
- * CreateAgentSession请求参数结构体
- */
-export interface CreateAgentSessionRequest {
-  /**
-   * <p>Agent 业务 ID</p>
-   */
-  AgentId: string
-  /**
-   * <p>指定版本 ID（可选）。非空且合法时固定使用该版本，跳过 routing_config 权重挑选；指定版本需归属同一 Agent 且未被废弃</p>
-   */
-  VersionId?: string
-}
-
-/**
- * CreateAgentVersionFromSource请求参数结构体
- */
-export interface CreateAgentVersionFromSourceRequest {
-  /**
-   * <p>Agent 业务 ID</p>
-   */
-  AgentId: string
-  /**
-   * <p>源版本 ID，同 Agent 下未 DISABLED 的任意版本</p>
-   */
-  SourceVersionId: string
-  /**
-   * <p>可选，覆盖源版本的 Model</p>
-   */
-  Model?: string
-  /**
-   * <p>可选，覆盖源版本的 Description</p>
-   */
-  Description?: string
-  /**
-   * <p>可选，完整 v2.0 manifest JSON 字符串；传入则整体覆盖源版本 manifest</p>
-   */
-  Manifest?: string
-  /**
-   * <p>沙箱模板 ID。可选，patch 语义：null 沿用源版本绑定的模板；空串解绑（恢复系统默认模板）；非空时模板须属于当前企业且可用（未删除、状态正常）。</p>
-   */
-  SandboxTemplateId?: string
-}
-
-/**
- * DescribeAgentVersionList返回参数结构体
- */
-export interface DescribeAgentVersionListResponse {
-  /**
-   * <p>总数</p>
-   */
-  TotalCount?: number
-  /**
-   * <p>版本列表（原 VersionSet；集合名带实体前缀以区分 Skill 版本接口的同名字段）</p>
-   */
-  AgentVersionSet?: Array<AgentVersionItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeExternalAgentList请求参数结构体
- */
-export interface DescribeExternalAgentListRequest {
-  /**
-   * Agent 业务 ID（必填：绑定状态的归属主体）
-   */
-  AgentId: string
-  /**
-   * 标准过滤条件，支持的 Name：Bound（BOUND=仅已绑定 / UNBOUND=仅未绑定 / ALL=全部，缺省 ALL）
-   */
-  Filters?: Array<Filter>
-  /**
-   * 偏移量，从 0 开始，默认 0
-   */
-  Offset?: number
-  /**
-   * 每页数量，默认 20，最大 200
-   */
-  Limit?: number
-  /**
-   * 外部 Agent 列表查询关键字
-   */
-  DescribeExternalAgentList?: string
-  /**
-   * 版本 ID
-   */
-  VersionId?: string
-}
-
-/**
- * ModifyAgentA2AConfig请求参数结构体
- */
-export interface ModifyAgentA2AConfigRequest {
-  /**
-   * <p>Agent 业务 ID</p>
-   */
-  AgentId: string
-  /**
-   * <p>Agent 级唯一 A2A 开关</p>
-   */
-  A2AEnabled?: boolean
-  /**
-   * <p>A2A 技能集合（原 A2ASkills）</p>
-   */
-  A2ASkillSet?: Array<A2ASkillInput>
-}
-
-/**
- * Agent 版本列表项（原 AgentVersionSummary / AgentVersionBrief 合并，字段取并集）
- */
-export interface AgentVersionItem {
-  /**
-   * 版本 ID（雪花算法生成的数字字符串，唯一标识）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionId?: string
-  /**
-   * 版本名称，形如 default / test-N / prod-N（N 为同类型版本的自增序号）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionName?: string
-  /**
-   * 版本类型（服务端按 VersionName 派生）：DEFAULT（默认版本，可编辑）/ TEST（测试版本，可编辑）/ PROD（生产版本，内容冻结）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionType?: string
-  /**
-   * 版本绑定的模型标识；未设置时缺省
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Model?: string
-  /**
-   * 版本运行时使用的沙箱模板业务 ID；空字符串表示使用默认沙箱
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SandboxTemplateId?: string
-  /**
-   * 版本状态：DRAFT（草稿）/ ENABLED（已启用）/ DISABLED（已停用）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * <p>该版本累计承接的会话总数（历史累计值，只增不减）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SessionCount?: number
-  /**
-   * 创建时间，RFC3339 UTC 格式（如 2026-08-01T10:00:00Z）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreatedTime?: string
-  /**
-   * 更新时间，RFC3339 UTC 格式（如 2026-08-10T15:30:00Z）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifiedTime?: string
-}
-
-/**
- * DescribeUserAccessToken返回参数结构体
- */
-export interface DescribeUserAccessTokenResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateAgentVersionFromSource返回参数结构体
  */
 export interface CreateAgentVersionFromSourceResponse {
@@ -1347,6 +483,704 @@ export interface CreateAgentVersionFromSourceResponse {
 }
 
 /**
+ * 工具调用
+ */
+export interface MessageEventToolCall {
+  /**
+   * <p>调用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToolCallId?: string
+  /**
+   * <p>工具名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToolName?: string
+  /**
+   * <p>状态 PENDING/IN_PROGRESS/SUCCEEDED/FAILED</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>工具调用Input（已递归脱敏，JSON 字符串）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: string
+  /**
+   * <p>工具调用Output（已递归脱敏，JSON 字符串）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: string
+  /**
+   * <p>结束时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndedAt?: string
+  /**
+   * <p>耗时毫秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DurationMs?: number
+  /**
+   * <p>调用开始时间（RFC3339 格式）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartedAt?: string
+  /**
+   * 本次调用对应的业务专家 ID。
+   */
+  ExpertId?: string
+  /**
+   * 本次调用对应的专家名称。
+   */
+  ExpertName?: string
+  /**
+   * 执行时解析到的专家资源版本。
+   */
+  ExpertVersion?: string
+  /**
+   * CBC 子代理执行实例 ID，可用于查询该次专家调用的消息事件。
+   */
+  SubAgentId?: string
+  /**
+   * CBC 子代理定义名称。
+   */
+  SubAgentName?: string
+  /**
+   * 父会话中触发本次子代理执行的工具调用 ID。
+   */
+  ParentToolCallId?: string
+}
+
+/**
+ * DescribeScheduledTask请求参数结构体
+ */
+export interface DescribeScheduledTaskRequest {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId: string
+}
+
+/**
+ * 消息事件
+ */
+export interface MessageEvent {
+  /**
+   * <p>序号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sequence?: number
+  /**
+   * <p>类型 USER/TOOL/ASSISTANT</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventType?: string
+  /**
+   * <p>发生时间 ISO8601</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OccurredAt?: string
+  /**
+   * <p>消息内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: MessageEventMessage
+  /**
+   * <p>工具调用</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToolCall?: MessageEventToolCall
+}
+
+/**
+ * DescribeAgent请求参数结构体
+ */
+export interface DescribeAgentRequest {
+  /**
+   * <p>Agent 业务 ID</p>
+   */
+  AgentId: string
+}
+
+/**
+ * TriggerScheduledTask请求参数结构体
+ */
+export interface TriggerScheduledTaskRequest {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId: string
+  /**
+   * <p>覆盖 Prompt，为空则使用任务原 Prompt</p>
+   */
+  OverridePrompt?: string
+}
+
+/**
+ * 会话列表项
+ */
+export interface SessionItem {
+  /**
+   * 会话 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: string
+  /**
+   * 会话名称（AI 生成标题或用户改名；缺失时为空）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionName?: string
+  /**
+   * Agent 业务 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentId?: string
+  /**
+   * Agent 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentName?: string
+  /**
+   * 会话使用的版本名称（与 VersionId 区分：此为版本名，非 ID；原 AgentVersion）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionName?: string
+  /**
+   * 会话使用的 Agent 版本 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * 会话状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 创建者 Uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
+  /**
+   * 会话来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: string
+  /**
+   * 创建时间（RFC3339）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间（RFC3339）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifiedTime?: string
+}
+
+/**
+ * DescribeAgentVersionList请求参数结构体
+ */
+export interface DescribeAgentVersionListRequest {
+  /**
+   * <p>Agent 业务 ID</p>
+   */
+  AgentId: string
+  /**
+   * <p>偏移量，从 0 开始</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，缺省为 20，最大 100</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系</p>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * Skill 列表项（按列表页展示裁剪：名称/版本/描述/状态/操作五列 + 编排所需的 Source 与 DownloadUrl）
+ */
+export interface SkillItem {
+  /**
+   * 技能来源：BUILTIN（内置）/ CUSTOM（自建）/ AUTHORIZED（企业授权）
+   */
+  Source?: string
+  /**
+   * <p>slug（仅 custom 返回）</p>
+   */
+  Name?: string
+  /**
+   * <p>展示名</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>图标 URL</p>
+   */
+  Icon?: string
+  /**
+   * <p>是否启用</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>下载 URL</p>
+   */
+  DownloadUrl?: string
+  /**
+   * <p>技能标识</p>
+   */
+  SkillId?: string
+  /**
+   * <p>当前生效版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkillVersion?: string
+  /**
+   * 创建时间，RFC3339 UTC 格式（如 2026-08-11T09:23:10Z）
+   */
+  CreateTime?: string
+  /**
+   * 更新时间，RFC3339 UTC 格式（如 2026-09-15T06:51:26Z）
+   */
+  UpdateTime?: string
+}
+
+/**
+ * 连接器引用入参
+ */
+export interface ConnectorRefInput {
+  /**
+   * connector 主表 ID（雪花 ID 数字串）
+   */
+  ConnectorId?: string
+}
+
+/**
+ * DescribeExpertList请求参数结构体
+ */
+export interface DescribeExpertListRequest {
+  /**
+   * <p>专家来源，必填：BUILTIN（内置）/ CUSTOM（自建）</p>
+   */
+  Source: string
+  /**
+   * <p>标准过滤条件：ExpertId（精确，多值 OR，携带即按 ID 批量查询，忽略分页）/ Keyword（模糊）/ PublishStatus（DRAFT、PUBLISHED、ALL，仅 CUSTOM）/ ExpertType（AGENT 普通专家、TEAM 专家团）。ExpertType 只允许一个过滤条件且 Values 必须仅含一个值，不传则不增加形态过滤；可与 ExpertId 组合取交集，分页总数 TotalCount 为过滤后的匹配数。专家选择列表建议传 {&quot;Name&quot;:&quot;ExpertType&quot;,&quot;Values&quot;:[&quot;AGENT&quot;]}。CAPI 的 CUSTOM 目录仅有普通专家，按 TEAM 过滤返回空集。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移量，从 0 开始，默认 0（按 ID 批量查询时忽略）</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页数量，默认 20，最大 200（按 ID 批量查询时忽略）</p>
+   */
+  Limit?: number
+}
+
+/**
+ * DescribeScheduledTaskLog请求参数结构体
+ */
+export interface DescribeScheduledTaskLogRequest {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId: string
+  /**
+   * <p>执行日志 ID</p>
+   */
+  LogId: string
+}
+
+/**
+ * DescribeAgentVersion返回参数结构体
+ */
+export interface DescribeAgentVersionResponse {
+  /**
+   * <p>版本 ID</p>
+   */
+  VersionId?: string
+  /**
+   * <p>Agent 业务 ID</p>
+   */
+  AgentId?: string
+  /**
+   * <p>版本名称</p>
+   */
+  VersionName?: string
+  /**
+   * <p>版本类型：DEFAULT / TEST / PROD</p>
+   */
+  VersionType?: string
+  /**
+   * <p>版本变更说明</p>
+   */
+  Description?: string
+  /**
+   * <p>模型标识</p>
+   */
+  Model?: string
+  /**
+   * <p>Manifest v2.0 精简 manifest 原文（JSON 字符串）</p>
+   */
+  Manifest?: string
+  /**
+   * <p>版本状态：DRAFT / ENABLED / DISABLED</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  ModifiedTime?: string
+  /**
+   * <p>绑定的沙箱模板 ID；未绑定时为空，创建会话沙箱使用系统默认模板。</p>
+   */
+  SandboxTemplateId?: string
+  /**
+   * <p>该版本累计承接的会话总数（历史累计值，只增不减）</p>
+   */
+  SessionCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteScheduledTask返回参数结构体
+ */
+export interface DeleteScheduledTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAgentVersion返回参数结构体
+ */
+export interface ModifyAgentVersionResponse {
+  /**
+   * 版本 ID
+   */
+  VersionId?: string
+  /**
+   * Agent 业务 ID
+   */
+  AgentId?: string
+  /**
+   * 版本名称
+   */
+  VersionName?: string
+  /**
+   * 版本类型：DEFAULT / TEST / PROD
+   */
+  VersionType?: string
+  /**
+   * 版本变更说明
+   */
+  Description?: string
+  /**
+   * 模型标识
+   */
+  Model?: string
+  /**
+   * Manifest v2.0 精简 manifest 原文（JSON 字符串）
+   */
+  Manifest?: string
+  /**
+   * 版本状态：DRAFT / ENABLED / DISABLED
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间
+   */
+  ModifiedTime?: string
+  /**
+   * 绑定的沙箱模板 ID；未绑定时为空，创建会话沙箱使用系统默认模板。
+   */
+  SandboxTemplateId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 全局技能计数
+ */
+export interface SkillCounts {
+  /**
+   * 内置技能数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Builtin?: number
+  /**
+   * 自建技能数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Custom?: number
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+}
+
+/**
+ * DescribeExternalAgent请求参数结构体
+ */
+export interface DescribeExternalAgentRequest {
+  /**
+   * <p>TMA managed agent 业务 ID（CloudAgentID）</p>
+   */
+  AgentId: string
+  /**
+   * <p>已绑定的外部 A2A agent ID</p>
+   */
+  A2AAgentId: string
+}
+
+/**
+ * CreateAgent请求参数结构体
+ */
+export interface CreateAgentRequest {
+  /**
+   * Agent 名称
+   */
+  AgentName: string
+  /**
+   * Agent 描述
+   */
+  Description?: string
+  /**
+   * 头像 URL
+   */
+  AvatarUrl?: string
+  /**
+   * 模型标识
+   */
+  Model?: string
+  /**
+   * Manifest v2.0 原文（JSON 字符串），作为 default 版本初始内容。ConnectorSet 非空时 Manifest 不可为空，否则返回 InvalidParameter
+   */
+  Manifest?: string
+  /**
+   * 该 Agent 最终绑定的连接器集合（全量覆盖语义）：缺省 = 不绑定连接器；非空 = 物化为 manifest v2 mcp_servers 网关条目。ConnectorSet 非空时 Manifest 不可为空，否则返回 InvalidParameter
+   */
+  ConnectorSet?: Array<ConnectorRefInput>
+  /**
+   * 绑定的 OneID 企业账号 ID。非空时必须是当前主账号已在企业授权表（t_managed_agent_enterprise_authorization）中授权的租户，否则返回 UnauthorizedOperation.AccountNotAuthorized。绑定后不可修改。TrimSpace 后长度 1~64 字符
+   */
+  AccountId?: string
+}
+
+/**
+ * DescribeAgentVersionList返回参数结构体
+ */
+export interface DescribeAgentVersionListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>版本列表（原 VersionSet；集合名带实体前缀以区分 Skill 版本接口的同名字段）</p>
+   */
+  AgentVersionSet?: Array<AgentVersionItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeConnectorList返回参数结构体
+ */
+export interface DescribeConnectorListResponse {
+  /**
+   * 符合条件的连接器总数
+   */
+  TotalCount?: number
+  /**
+   * 连接器列表（分页后）；连接器挂调用方主账号 UIN 下，不挂 OneID 企业
+   */
+  ConnectorSet?: Array<ConnectorInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAgentRouting请求参数结构体
+ */
+export interface ModifyAgentRoutingRequest {
+  /**
+   * Agent 业务 ID
+   */
+  AgentId: string
+  /**
+   * 路由配置，覆盖式写入（与出参 AgentInfo.RoutingSet 命名对齐）
+   */
+  RoutingSet: Array<RoutingItem>
+}
+
+/**
+ * 聊天接入点。EndpointType 现在就引入枚举：当前仅返回一个 PUBLIC 元素，将来新增私网端点与 VPC 属性为纯增量。
+ */
+export interface ChatEndpoint {
+  /**
+   * 接入点类型：PUBLIC（公网）/ PRIVATE（私网，预留）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointType?: string
+  /**
+   * 接入点地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+}
+
+/**
+ * DescribeSkillList请求参数结构体
+ */
+export interface DescribeSkillListRequest {
+  /**
+   * 技能来源，必填：BUILTIN（内置）/ CUSTOM（自建）/ AUTHORIZED（企业授权）。数据通路判别，非筛选条件
+   */
+  Source: string
+  /**
+   * 标准过滤条件：SkillId（精确，多值 OR ≤100，携带即按 ID 批量查询）/ Keyword（模糊）/ PublishStatus（DRAFT/PUBLISHED/ALL）/ Status（ENABLED/DISABLED/ALL）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认 0（按 ID 批量查询时忽略）
+   */
+  Offset?: number
+  /**
+   * 每页数量，默认 20，最大 200（按 ID 批量查询时忽略）
+   */
+  Limit?: number
+  /**
+   * 授权方企业账号标识；仅 Source=AUTHORIZED 时生效。不传则由后端用 Uin 推导全部已授权范围；未携带 SkillId 的分页查询必传
+   */
+  AccountId?: string
+  /**
+   * 仅 Source=AUTHORIZED 时生效。Agent 绑定了 OneID 租户时，授权集合强制收窄到绑定租户；显式传入的 AccountId 必须等于绑定值，否则请求被拒绝。绑定 Agent 的分页查询可不传 AccountId（服务端按绑定值收窄到单一授权方）
+   */
+  AgentId?: string
+}
+
+/**
+ * CreateScheduledTask请求参数结构体
+ */
+export interface CreateScheduledTaskRequest {
+  /**
+   * <p>任务名称</p>
+   */
+  TaskName: string
+  /**
+   * <p>任务关联的 Agent 配置</p>
+   */
+  AgentConfig: AgentConfig
+  /**
+   * <p>Cron 表达式</p>
+   */
+  CronExpr: string
+  /**
+   * <p>任务描述</p>
+   */
+  Description?: string
+  /**
+   * <p>调度类型：CRON（按 Cron 周期执行，默认）或 ONCE（单次执行）</p>
+   */
+  FrequencyType?: string
+  /**
+   * <p>生效日期开始时间（YYYY-MM-DD 格式），可选，不传时不限制开始时间</p>
+   */
+  EffectiveStart?: string
+  /**
+   * <p>生效日期结束时间（YYYY-MM-DD 格式），可选，不传时不限制结束时间</p>
+   */
+  EffectiveEnd?: string
+  /**
+   * <p>投递目标集合（BOT_CHANNEL / WEBHOOK 可并存）</p>
+   */
+  DeliveryTargetSet?: Array<DeliveryTarget>
+}
+
+/**
+ * DescribeExternalAgentList请求参数结构体
+ */
+export interface DescribeExternalAgentListRequest {
+  /**
+   * Agent 业务 ID（必填：绑定状态的归属主体）
+   */
+  AgentId: string
+  /**
+   * 标准过滤条件，支持的 Name：Bound（BOUND=仅已绑定 / UNBOUND=仅未绑定 / ALL=全部，缺省 ALL）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，从 0 开始，默认 0
+   */
+  Offset?: number
+  /**
+   * 每页数量，默认 20，最大 200
+   */
+  Limit?: number
+  /**
+   * 外部 Agent 列表查询关键字
+   */
+  DescribeExternalAgentList?: string
+  /**
+   * 版本 ID
+   */
+  VersionId?: string
+}
+
+/**
+ * DescribeScheduledTaskList返回参数结构体
+ */
+export interface DescribeScheduledTaskListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>任务列表（分页后）</p>
+   */
+  ScheduledTaskSet?: Array<ScheduledTaskSummary>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUserAccessToken返回参数结构体
+ */
+export interface DescribeUserAccessTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAgentList请求参数结构体
  */
 export interface DescribeAgentListRequest {
@@ -1370,6 +1204,656 @@ export interface DescribeAgentListRequest {
    * 排序方向：ASC / DESC
    */
   SortDirection?: string
+}
+
+/**
+ * 定时任务执行日志列表项
+ */
+export interface ScheduledTaskLogSummary {
+  /**
+   * <p>执行日志 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogId?: string
+  /**
+   * <p>任务唯一标识</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskKey?: string
+  /**
+   * <p>触发类型：MANUAL（手动）/ CRON（定时）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerType?: string
+  /**
+   * <p>执行状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>开始时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * <p>执行时长（毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DurationMs?: number
+  /**
+   * <p>投递状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliveryStatus?: string
+  /**
+   * <p>关联会话 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: string
+  /**
+   * <p>失败原因</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
+  /**
+   * <p>会话名称（AgentOS 侧生成的 AI 标题 / 用户改名）；缺失时为空，调用方可兜底展示 SessionId 后缀</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionName?: string
+  /**
+   * <p>执行结果预览（前 50 字符），仅用于列表页展示；完整结果请调用 DescribeScheduledTaskLog</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: string
+}
+
+/**
+ * DescribeConnectorList请求参数结构体
+ */
+export interface DescribeConnectorListRequest {
+  /**
+   * 过滤条件数组，多个 Filter 之间为 AND 关系。支持 Name：Name（名称模糊匹配）/ Status（ACTIVE / DISABLED）/ Source（ENTERPRISE_AGENT / ASSISTANT）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 已废弃：服务端不再读取，请使用 Offset/Limit。字段保留仅为过渡兼容，后续下线
+   */
+  PageNumber?: number
+  /**
+   * 已废弃：服务端不再读取，请使用 Offset/Limit。字段保留仅为过渡兼容，后续下线
+   */
+  PageSize?: number
+  /**
+   * 偏移量，0 基准，缺省 0（标准 CAPI 分页参数）
+   */
+  Offset?: number
+  /**
+   * 每页数量，取值 1-100，缺省 20（标准 CAPI 分页参数）
+   */
+  Limit?: number
+}
+
+/**
+ * DescribeExternalAgentList返回参数结构体
+ */
+export interface DescribeExternalAgentListResponse {
+  /**
+   * 符合条件的外部 Agent 总数
+   */
+  TotalCount?: number
+  /**
+   * 外部 Agent 集合（可见卡片全集 ∪ URL 直连型存量 binding 的合并视图）
+   */
+  ExternalAgentSet?: Array<ExternalAgentInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAgentVersion请求参数结构体
+ */
+export interface DescribeAgentVersionRequest {
+  /**
+   * <p>Agent 业务 ID</p>
+   */
+  AgentId: string
+  /**
+   * <p>版本 ID</p>
+   */
+  VersionId: string
+}
+
+/**
+ * MigrateAgentSession返回参数结构体
+ */
+export interface MigrateAgentSessionResponse {
+  /**
+   * <p>会话 ID（回显原值，保持不变）</p>
+   */
+  SessionId?: string
+  /**
+   * <p>迁移后的会话状态</p>
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeScheduledTaskList请求参数结构体
+ */
+export interface DescribeScheduledTaskListRequest {
+  /**
+   * <p>偏移量，从 0 开始</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，缺省为 20，最大 100</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系。支持的 Filter.Name：TaskName（模糊）、Status（精确 0/1）、AgentId（精确）</p>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * TriggerScheduledTask返回参数结构体
+ */
+export interface TriggerScheduledTaskResponse {
+  /**
+   * <p>本次触发产生的执行日志 ID</p>
+   */
+  LogId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeScheduledTask返回参数结构体
+ */
+export interface DescribeScheduledTaskResponse {
+  /**
+   * <p>任务 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * <p>任务唯一标识</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskKey?: string
+  /**
+   * <p>任务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * <p>任务描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>关联 Agent ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentId?: string
+  /**
+   * <p>Cron 表达式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronExpr?: string
+  /**
+   * <p>任务状态：ACTIVE（启用）/ PAUSED（暂停）/ DISABLED（停用）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>最近执行时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastRunTime?: string
+  /**
+   * <p>下次执行时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextRunTime?: string
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: string
+  /**
+   * <p>更新时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifiedTime?: string
+  /**
+   * <p>任务 Agent 配置（Prompt/Model/AgentId）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentConfig?: AgentConfig
+  /**
+   * <p>生效日期开始时间（YYYY-MM-DD 格式），不传时不限制开始时间</p>
+   */
+  EffectiveStart?: string
+  /**
+   * <p>生效日期结束时间（YYYY-MM-DD 格式），不传时不限制结束时间</p>
+   */
+  EffectiveEnd?: string
+  /**
+   * <p>投递目标集合（BOT_CHANNEL / WEBHOOK 可并存）</p>
+   */
+  DeliveryTargetSet?: Array<DeliveryTarget>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 定时任务执行聚合统计
+ */
+export interface ScheduledTaskLogStats {
+  /**
+   * <p>总执行次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * <p>成功次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessCount?: number
+  /**
+   * <p>失败次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedCount?: number
+  /**
+   * <p>平均执行时长（毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvgDurationMs?: number
+}
+
+/**
+ * ModifyScheduledTask请求参数结构体
+ */
+export interface ModifyScheduledTaskRequest {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId: string
+  /**
+   * <p>任务名称</p>
+   */
+  TaskName?: string
+  /**
+   * <p>任务描述</p>
+   */
+  Description?: string
+  /**
+   * <p>任务关联的 Agent 配置</p>
+   */
+  AgentConfig?: AgentConfig
+  /**
+   * <p>Cron 表达式</p>
+   */
+  CronExpr?: string
+  /**
+   * <p>任务状态：ACTIVE（启用）/ PAUSED（暂停）/ DISABLED（停用）</p>
+   */
+  Status?: string
+  /**
+   * <p>生效日期开始时间（YYYY-MM-DD 格式），传空串清除，不传保持原值</p>
+   */
+  EffectiveStart?: string
+  /**
+   * <p>生效日期结束时间（YYYY-MM-DD 格式），传空串清除，不传保持原值</p>
+   */
+  EffectiveEnd?: string
+  /**
+   * <p>投递目标集合（部分更新时整体替换）</p>
+   */
+  DeliveryTargetSet?: Array<DeliveryTarget>
+}
+
+/**
+ * DescribeAgentSessionList返回参数结构体
+ */
+export interface DescribeAgentSessionListResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 会话列表
+   */
+  SessionSet?: Array<SessionItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindExternalAgent请求参数结构体
+ */
+export interface UnbindExternalAgentRequest {
+  /**
+   * TMA managed agent 业务 ID
+   */
+  AgentId: string
+  /**
+   * 已绑定的外部 A2A agent ID
+   */
+  A2AAgentId?: string
+  /**
+   * 绑定记录 ID（自增 ID 字符串）
+   */
+  BindingId?: string
+  /**
+   * 版本 ID
+   */
+  VersionId?: string
+}
+
+/**
+ * DescribeBuiltinModelList返回参数结构体
+ */
+export interface DescribeBuiltinModelListResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 内置模型列表（分页后）
+   */
+  BuiltinModelSet?: Array<BuiltinModel>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BindExternalAgent返回参数结构体
+ */
+export interface BindExternalAgentResponse {
+  /**
+   * 操作结果状态（大写枚举）：BOUND=已绑定 / UNBOUND=已解绑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 绑定记录 ID（自增 ID 字符串）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindingId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 投递目标
+ */
+export interface DeliveryTarget {
+  /**
+   * <p>投递类型：BOT_CHANNEL（IM 渠道投递）或 WEBHOOK（自定义回调）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * <p>是否启用此投递目标</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * <p>投递配置，按 Type 不同</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Options?: TargetOptions
+}
+
+/**
+ * Agent 的 A2A 对外互通配置与注册态
+ */
+export interface A2AConfig {
+  /**
+   * Agent 级唯一 A2A 开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2AEnabled?: boolean
+  /**
+   * 对外 A2A handle（已注册时；仅 DescribeAgent / ModifyAgentA2AConfig 填充）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2APublicRef?: string
+  /**
+   * 对外 A2A card 发现地址（已注册时）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2AEndpoint?: string
+  /**
+   * 注册状态：DRAFT / REGISTERED / DISABLED / NONE / UNKNOWN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2AStatus?: string
+}
+
+/**
+ * DescribeScheduledTaskLogList请求参数结构体
+ */
+export interface DescribeScheduledTaskLogListRequest {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId: string
+  /**
+   * <p>偏移量，从 0 开始</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，缺省为 20，最大 100</p>
+   */
+  Limit?: number
+  /**
+   * <p>是否返回聚合统计（Stats）</p>
+   */
+  WithStats?: boolean
+  /**
+   * <p>过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系</p>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DeleteScheduledTask请求参数结构体
+ */
+export interface DeleteScheduledTaskRequest {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId: string
+}
+
+/**
+ * ModifyScheduledTask返回参数结构体
+ */
+export interface ModifyScheduledTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAgent请求参数结构体
+ */
+export interface ModifyAgentRequest {
+  /**
+   * Agent 业务 ID
+   */
+  AgentId: string
+  /**
+   * Agent 名称（可选，仅传递需要更新的字段）
+   */
+  AgentName?: string
+  /**
+   * Agent 描述（可选）
+   */
+  Description?: string
+  /**
+   * 头像 URL（可选）
+   */
+  AvatarUrl?: string
+}
+
+/**
+ * A2A skill 录入项（注册外部 Agent 时传入）
+ */
+export interface A2ASkillInput {
+  /**
+   * <p>A2A skill ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2ASkillId?: string
+  /**
+   * <p>skill 名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>skill 描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<string>
+  /**
+   * <p>示例</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Examples?: Array<string>
+}
+
+/**
+ * BindExternalAgent请求参数结构体
+ */
+export interface BindExternalAgentRequest {
+  /**
+   * TMA managed agent 业务 ID（CloudAgentID）
+   */
+  AgentId: string
+  /**
+   * 已注册的外部 A2A agent ID
+   */
+  A2AAgentId: string
+  /**
+   * 版本 ID
+   */
+  VersionId?: string
+}
+
+/**
+ * 外部 Agent 列表/详情项
+ */
+export interface ExternalAgentInfo {
+  /**
+   * 外部 A2A agent ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2AAgentId?: string
+  /**
+   * 外部 Agent 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 外部 A2A Server URL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoint?: string
+  /**
+   * 绑定记录 ID（已绑定时返回）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindingId?: string
+  /**
+   * 是否已绑定到当前 Agent
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bound?: boolean
+  /**
+   * 头像地址（取自 provider card 的 iconUrl）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IconUrl?: string
+  /**
+   * 外部 agent card 声明的版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2AVersion?: string
+  /**
+   * 子 Agent 的最新版本名，返回版本存储名（default / test-N / prod-N），非 V1/V2 展示名。取值规则：有正式版本（prod）时取最新 prod，否则取最新 test，再否则取 default。仅企业 Agent 来源返回（其 A2AVersion 恒为 default）；其他来源或查询失败时不返回。注意：不代表 A2A 调用时实际执行的版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestVersionName?: string
+  /**
+   * A2A card skills 集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2ASkillSet?: Array<A2ASkillItem>
+}
+
+/**
+ * DescribeAgentList返回参数结构体
+ */
+export interface DescribeAgentListResponse {
+  /**
+   * 符合条件的 Agent 总数
+   */
+  TotalCount?: number
+  /**
+   * Agent 列表（分页后）；元素含 A2A / 公网 API 访问开关与地址、创建人 UIN、绑定的企业账号 ID
+   */
+  AgentSet?: Array<AgentItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAgent返回参数结构体
+ */
+export interface DeleteAgentResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1416,32 +1900,6 @@ export interface ModifyAgentA2AConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * Token用量
- */
-export interface TokenUsage {
-  /**
-   * <p>输入Token</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InputTokens?: number
-  /**
-   * <p>输出Token</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputTokens?: number
-  /**
-   * <p>总Token</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalTokens?: number
-  /**
-   * <p>统计口径</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Scope?: string
 }
 
 /**
@@ -1561,205 +2019,9 @@ export interface BuiltinModel {
 }
 
 /**
- * DescribeConnectorList请求参数结构体
- */
-export interface DescribeConnectorListRequest {
-  /**
-   * 过滤条件数组，多个 Filter 之间为 AND 关系。支持 Name：Name（名称模糊匹配）/ Status（ACTIVE / DISABLED）/ Source（ENTERPRISE_AGENT / ASSISTANT）
-   */
-  Filters?: Array<Filter>
-  /**
-   * 已废弃：服务端不再读取，请使用 Offset/Limit。字段保留仅为过渡兼容，后续下线
-   */
-  PageNumber?: number
-  /**
-   * 已废弃：服务端不再读取，请使用 Offset/Limit。字段保留仅为过渡兼容，后续下线
-   */
-  PageSize?: number
-  /**
-   * 偏移量，0 基准，缺省 0（标准 CAPI 分页参数）
-   */
-  Offset?: number
-  /**
-   * 每页数量，取值 1-100，缺省 20（标准 CAPI 分页参数）
-   */
-  Limit?: number
-}
-
-/**
- * 路由项
- */
-export interface RoutingItem {
-  /**
-   * 版本 ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionId?: string
-  /**
-   * 权重，(0, 1] 之间的浮点百分比
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Weight?: number
-}
-
-/**
- * 工具调用
- */
-export interface MessageEventToolCall {
-  /**
-   * <p>调用ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ToolCallId?: string
-  /**
-   * <p>工具名</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ToolName?: string
-  /**
-   * <p>状态 PENDING/IN_PROGRESS/SUCCEEDED/FAILED</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * <p>工具调用Input（已递归脱敏，JSON 字符串）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Input?: string
-  /**
-   * <p>工具调用Output（已递归脱敏，JSON 字符串）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: string
-  /**
-   * <p>结束时间</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndedAt?: string
-  /**
-   * <p>耗时毫秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DurationMs?: number
-  /**
-   * <p>调用开始时间（RFC3339 格式）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartedAt?: string
-  /**
-   * 本次调用对应的业务专家 ID。
-   */
-  ExpertId?: string
-  /**
-   * 本次调用对应的专家名称。
-   */
-  ExpertName?: string
-  /**
-   * 执行时解析到的专家资源版本。
-   */
-  ExpertVersion?: string
-  /**
-   * CBC 子代理执行实例 ID，可用于查询该次专家调用的消息事件。
-   */
-  SubAgentId?: string
-  /**
-   * CBC 子代理定义名称。
-   */
-  SubAgentName?: string
-  /**
-   * 父会话中触发本次子代理执行的工具调用 ID。
-   */
-  ParentToolCallId?: string
-}
-
-/**
- * DescribeAgentVersion返回参数结构体
- */
-export interface DescribeAgentVersionResponse {
-  /**
-   * <p>版本 ID</p>
-   */
-  VersionId?: string
-  /**
-   * <p>Agent 业务 ID</p>
-   */
-  AgentId?: string
-  /**
-   * <p>版本名称</p>
-   */
-  VersionName?: string
-  /**
-   * <p>版本类型：DEFAULT / TEST / PROD</p>
-   */
-  VersionType?: string
-  /**
-   * <p>版本变更说明</p>
-   */
-  Description?: string
-  /**
-   * <p>模型标识</p>
-   */
-  Model?: string
-  /**
-   * <p>Manifest v2.0 精简 manifest 原文（JSON 字符串）</p>
-   */
-  Manifest?: string
-  /**
-   * <p>版本状态：DRAFT / ENABLED / DISABLED</p>
-   */
-  Status?: string
-  /**
-   * <p>创建时间</p>
-   */
-  CreatedTime?: string
-  /**
-   * <p>更新时间</p>
-   */
-  ModifiedTime?: string
-  /**
-   * <p>绑定的沙箱模板 ID；未绑定时为空，创建会话沙箱使用系统默认模板。</p>
-   */
-  SandboxTemplateId?: string
-  /**
-   * <p>该版本累计承接的会话总数（历史累计值，只增不减）</p>
-   */
-  SessionCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeUserAccessToken请求参数结构体
  */
 export type DescribeUserAccessTokenRequest = null
-
-/**
- * Agent 的 A2A 对外互通配置与注册态
- */
-export interface A2AConfig {
-  /**
-   * Agent 级唯一 A2A 开关
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  A2AEnabled?: boolean
-  /**
-   * 对外 A2A handle（已注册时；仅 DescribeAgent / ModifyAgentA2AConfig 填充）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  A2APublicRef?: string
-  /**
-   * 对外 A2A card 发现地址（已注册时）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  A2AEndpoint?: string
-  /**
-   * 注册状态：DRAFT / REGISTERED / DISABLED / NONE / UNKNOWN
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  A2AStatus?: string
-}
 
 /**
  * DescribeAgentSessionList请求参数结构体
@@ -1785,65 +2047,6 @@ export interface DescribeAgentSessionListRequest {
    * 过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系
    */
   Filters?: Array<Filter>
-}
-
-/**
- * 消息事件
- */
-export interface MessageEvent {
-  /**
-   * <p>序号</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Sequence?: number
-  /**
-   * <p>类型 USER/TOOL/ASSISTANT</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EventType?: string
-  /**
-   * <p>发生时间 ISO8601</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OccurredAt?: string
-  /**
-   * <p>消息内容</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message?: MessageEventMessage
-  /**
-   * <p>工具调用</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ToolCall?: MessageEventToolCall
-}
-
-/**
- * MigrateAgentSession返回参数结构体
- */
-export interface MigrateAgentSessionResponse {
-  /**
-   * <p>会话 ID（回显原值，保持不变）</p>
-   */
-  SessionId?: string
-  /**
-   * <p>迁移后的会话状态</p>
-   */
-  Status?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteAgent返回参数结构体
- */
-export interface DeleteAgentResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1895,13 +2098,608 @@ export interface ExpertItem {
 }
 
 /**
- * DescribeAgent请求参数结构体
+ * DescribeExpertList返回参数结构体
  */
-export interface DescribeAgentRequest {
+export interface DescribeExpertListResponse {
+  /**
+   * <p>符合条件的专家总数（按 ID 批量时为实际命中数）</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>专家列表</p>
+   */
+  ExpertSet?: Array<ExpertItem>
+  /**
+   * <p>全局计数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Counts?: ExpertCounts
+  /**
+   * <p>Agent 可绑定的专家数量上限，当前默认值为 5。</p>
+   */
+  MaxBindings?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 自定义请求头键值对
+ */
+export interface Header {
+  /**
+   * <p>请求头名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * <p>请求头值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
+ * MigrateAgentSession请求参数结构体
+ */
+export interface MigrateAgentSessionRequest {
+  /**
+   * <p>待迁移的会话 ID（必填）</p>
+   */
+  SessionId: string
+  /**
+   * <p>目标 Agent 业务 ID（必填），必须与 Session 原 Agent 相同</p>
+   */
+  AgentId: string
+  /**
+   * <p>目标版本 ID（必填，字符串形式）。需归属同一 Agent 且未被废弃</p>
+   */
+  TargetVersionId: string
+}
+
+/**
+ * DescribeAgent返回参数结构体
+ */
+export interface DescribeAgentResponse {
+  /**
+   * Agent 业务 ID
+   */
+  AgentId?: string
+  /**
+   * Agent 名称
+   */
+  AgentName?: string
+  /**
+   * Agent 描述
+   */
+  Description?: string
+  /**
+   * 头像 URL
+   */
+  AvatarUrl?: string
+  /**
+   * 是否调试 Agent
+   */
+  IsDebug?: boolean
+  /**
+   * 创建时间（RFC3339）
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间（RFC3339）
+   */
+  ModifiedTime?: string
+  /**
+   * 当前活跃 session 数（ACTIVE/CREATING/MIGRATING，未软删）；仅 DescribeAgent 读路径填充，写路径回显不下发
+   */
+  ActiveSessionCount?: number
+  /**
+   * 流量路由配置（VersionId 恒为字符串，防 JS 精度丢失）
+   */
+  RoutingSet?: Array<RoutingItem>
+  /**
+   * A2A 对外互通配置与注册态（只读回显；原四个平铺字段收进结构）
+   */
+  A2AConfig?: A2AConfig
+  /**
+   * 绑定的 OneID 企业账号 ID。允许为空：未绑定的存量与新建 Agent 该字段缺省，绑定后回显绑定值
+   */
+  AccountId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMessageEventList返回参数结构体
+ */
+export interface DescribeMessageEventListResponse {
+  /**
+   * <p>消息事件列表</p>
+   */
+  MessageEventSet?: Array<MessageEvent>
+  /**
+   * <p>符合过滤条件的事件总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAgentVersion返回参数结构体
+ */
+export interface CreateAgentVersionResponse {
+  /**
+   * <p>版本 ID</p>
+   */
+  VersionId?: string
+  /**
+   * <p>Agent 业务 ID</p>
+   */
+  AgentId?: string
+  /**
+   * <p>版本名称</p>
+   */
+  VersionName?: string
+  /**
+   * <p>版本类型：DEFAULT / TEST / PROD</p>
+   */
+  VersionType?: string
+  /**
+   * <p>版本变更说明</p>
+   */
+  Description?: string
+  /**
+   * <p>模型标识</p>
+   */
+  Model?: string
+  /**
+   * <p>Manifest v2.0 精简 manifest 原文（JSON 字符串）</p>
+   */
+  Manifest?: string
+  /**
+   * <p>版本状态：DRAFT / ENABLED / DISABLED</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  ModifiedTime?: string
+  /**
+   * <p>绑定的沙箱模板 ID；未绑定时为空，创建会话沙箱使用系统默认模板。</p>
+   */
+  SandboxTemplateId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 投递目标配置，按 Type 选用不同字段组
+ */
+export interface TargetOptions {
+  /**
+   * <p>渠道类型（BOT_CHANNEL 必填）：FEISHU / DINGTALK / QQ / WECOM_NEW / WECOM_AIBOT / WECHAT_KF</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelType?: string
+  /**
+   * <p>渠道标识（BOT_CHANNEL 必填）：飞书 appId / 钉钉 appKey / QQ appId / 企微 corpId:agentId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelId?: string
+  /**
+   * <p>回调 URL（WEBHOOK 必填）：仅允许 http/https，禁止内网地址（SSRF 防护）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * <p>自定义请求头列表，与默认 Content-Type: application/json 合并</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Headers?: Array<Header>
+  /**
+   * <p>HMAC-SHA256 签名密钥（WEBHOOK 可选）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Secret?: string
+  /**
+   * <p>接收目标 ID 集合（群 ID / 用户 ID / 频道 ID），BOT_CHANNEL 模式必填，至少一个</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecipientIdSet?: Array<string>
+}
+
+/**
+ * CreateAgent返回参数结构体
+ */
+export interface CreateAgentResponse {
+  /**
+   * Agent 业务 ID
+   */
+  AgentId?: string
+  /**
+   * Agent 名称
+   */
+  AgentName?: string
+  /**
+   * Agent 描述
+   */
+  Description?: string
+  /**
+   * 头像 URL
+   */
+  AvatarUrl?: string
+  /**
+   * 是否调试 Agent
+   */
+  IsDebug?: boolean
+  /**
+   * 创建时间（RFC3339）
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间（RFC3339）
+   */
+  ModifiedTime?: string
+  /**
+   * 流量路由配置（VersionId 恒为字符串，防 JS 精度丢失）
+   */
+  RoutingSet?: Array<RoutingItem>
+  /**
+   * A2A 对外互通配置与注册态（只读回显；原四个平铺字段收进结构）
+   */
+  A2AConfig?: A2AConfig
+  /**
+   * 绑定的 OneID 企业账号 ID。允许为空：未绑定的存量与新建 Agent 该字段缺省，绑定后回显绑定值
+   */
+  AccountId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAgentSession请求参数结构体
+ */
+export interface DescribeAgentSessionRequest {
+  /**
+   * 会话 ID
+   */
+  SessionId: string
+}
+
+/**
+ * 路由项
+ */
+export interface RoutingItem {
+  /**
+   * 版本 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * 权重，(0, 1] 之间的浮点百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+}
+
+/**
+ * CreateAgentSession返回参数结构体
+ */
+export interface CreateAgentSessionResponse {
+  /**
+   * <p>会话 ID</p>
+   */
+  SessionId?: string
+  /**
+   * <p>可用的聊天接入点列表（当前仅含一个 PUBLIC 公网接入点；空数组 = 无可用接入点）</p>
+   */
+  EndpointSet?: Array<ChatEndpoint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 消息内容
+ */
+export interface MessageEventMessage {
+  /**
+   * <p>文本内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * <p>Token用量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TokenUsage?: TokenUsage
+}
+
+/**
+ * DescribeScheduledTaskLogList返回参数结构体
+ */
+export interface DescribeScheduledTaskLogListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>执行日志列表（分页后）</p>
+   */
+  ScheduledTaskLogSet?: Array<ScheduledTaskLogSummary>
+  /**
+   * <p>聚合统计（WithStats=true 时返回）</p>
+   */
+  Stats?: ScheduledTaskLogStats
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAgentA2AConfig请求参数结构体
+ */
+export interface ModifyAgentA2AConfigRequest {
   /**
    * <p>Agent 业务 ID</p>
    */
   AgentId: string
+  /**
+   * <p>Agent 级唯一 A2A 开关</p>
+   */
+  A2AEnabled?: boolean
+  /**
+   * <p>A2A 技能集合（原 A2ASkills）</p>
+   */
+  A2ASkillSet?: Array<A2ASkillInput>
+}
+
+/**
+ * CreateAgentSession请求参数结构体
+ */
+export interface CreateAgentSessionRequest {
+  /**
+   * <p>Agent 业务 ID</p>
+   */
+  AgentId: string
+  /**
+   * <p>指定版本 ID（可选）。非空且合法时固定使用该版本，跳过 routing_config 权重挑选；指定版本需归属同一 Agent 且未被废弃</p>
+   */
+  VersionId?: string
+}
+
+/**
+ * CreateAgentVersionFromSource请求参数结构体
+ */
+export interface CreateAgentVersionFromSourceRequest {
+  /**
+   * <p>Agent 业务 ID</p>
+   */
+  AgentId: string
+  /**
+   * <p>源版本 ID，同 Agent 下未 DISABLED 的任意版本</p>
+   */
+  SourceVersionId: string
+  /**
+   * <p>可选，覆盖源版本的 Model</p>
+   */
+  Model?: string
+  /**
+   * <p>可选，覆盖源版本的 Description</p>
+   */
+  Description?: string
+  /**
+   * <p>可选，完整 v2.0 manifest JSON 字符串；传入则整体覆盖源版本 manifest</p>
+   */
+  Manifest?: string
+  /**
+   * <p>沙箱模板 ID。可选，patch 语义：null 沿用源版本绑定的模板；空串解绑（恢复系统默认模板）；非空时模板须属于当前企业且可用（未删除、状态正常）。</p>
+   */
+  SandboxTemplateId?: string
+}
+
+/**
+ * Agent 版本列表项（原 AgentVersionSummary / AgentVersionBrief 合并，字段取并集）
+ */
+export interface AgentVersionItem {
+  /**
+   * 版本 ID（雪花算法生成的数字字符串，唯一标识）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * 版本名称，形如 default / test-N / prod-N（N 为同类型版本的自增序号）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionName?: string
+  /**
+   * 版本类型（服务端按 VersionName 派生）：DEFAULT（默认版本，可编辑）/ TEST（测试版本，可编辑）/ PROD（生产版本，内容冻结）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionType?: string
+  /**
+   * 版本绑定的模型标识；未设置时缺省
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Model?: string
+  /**
+   * 版本运行时使用的沙箱模板业务 ID；空字符串表示使用默认沙箱
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SandboxTemplateId?: string
+  /**
+   * 版本状态：DRAFT（草稿）/ ENABLED（已启用）/ DISABLED（已停用）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>该版本累计承接的会话总数（历史累计值，只增不减）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionCount?: number
+  /**
+   * 创建时间，RFC3339 UTC 格式（如 2026-08-01T10:00:00Z）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间，RFC3339 UTC 格式（如 2026-08-10T15:30:00Z）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifiedTime?: string
+}
+
+/**
+ * DescribeBuiltinModelList请求参数结构体
+ */
+export interface DescribeBuiltinModelListRequest {
+  /**
+   * 偏移量，从 0 开始
+   */
+  Offset?: number
+  /**
+   * 返回数量，缺省为 20，最大 100
+   */
+  Limit?: number
+  /**
+   * 过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系
+   */
+  Filters?: Array<Filter>
+  /**
+   * OneID 企业账号 ID，可选。传入时拉取该账号对应企业的模型（要求当前主账号 UIN 已授权该账号），不传时使用服务配置的企业 ID
+   */
+  AccountId?: string
+}
+
+/**
+ * DescribeScheduledTaskLog返回参数结构体
+ */
+export interface DescribeScheduledTaskLogResponse {
+  /**
+   * <p>执行日志 ID</p>
+   */
+  LogId?: string
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务唯一标识</p>
+   */
+  TaskKey?: string
+  /**
+   * <p>关联会话 ID</p>
+   */
+  SessionId?: string
+  /**
+   * <p>触发类型：MANUAL（手动）/ CRON（定时）</p>
+   */
+  TriggerType?: string
+  /**
+   * <p>执行状态</p>
+   */
+  Status?: string
+  /**
+   * <p>本次执行 Prompt</p>
+   */
+  Prompt?: string
+  /**
+   * <p>执行输出内容（完整结果；列表接口 DescribeScheduledTaskLogList 仅返回前 50 字符预览）</p>
+   */
+  Result?: string
+  /**
+   * <p>开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>执行时长（毫秒）</p>
+   */
+  DurationMs?: number
+  /**
+   * <p>投递状态</p>
+   */
+  DeliveryStatus?: string
+  /**
+   * <p>投递错误信息</p>
+   */
+  DeliveryError?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>失败原因</p>
+   */
+  ErrorMessage?: string
+  /**
+   * <p>会话名称（AgentOS 侧生成的 AI 标题 / 用户改名）；缺失时为空，调用方可兜底展示 SessionId 后缀</p>
+   */
+  SessionName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindExternalAgent返回参数结构体
+ */
+export interface UnbindExternalAgentResponse {
+  /**
+   * 操作结果状态（大写枚举）：BOUND=已绑定 / UNBOUND=已解绑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateScheduledTask返回参数结构体
+ */
+export interface CreateScheduledTaskResponse {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务唯一标识</p>
+   */
+  TaskKey?: string
+  /**
+   * <p>任务状态：ACTIVE（启用）/ PAUSED（暂停）/ DISABLED（停用）</p>
+   */
+  Status?: string
+  /**
+   * <p>下次执行时间</p>
+   */
+  NextRunTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1958,91 +2756,59 @@ export interface DescribeMessageEventListRequest {
 }
 
 /**
- * 会话列表项
+ * 定时任务列表项
  */
-export interface SessionItem {
+export interface ScheduledTaskSummary {
   /**
-   * 会话 ID
+   * <p>任务 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SessionId?: string
+  TaskId?: string
   /**
-   * 会话名称（AI 生成标题或用户改名；缺失时为空）
+   * <p>任务唯一标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SessionName?: string
+  TaskKey?: string
   /**
-   * Agent 业务 ID
+   * <p>任务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * <p>关联 Agent ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentId?: string
   /**
-   * Agent 名称
+   * <p>Cron 表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AgentName?: string
+  CronExpr?: string
   /**
-   * 会话使用的版本名称（与 VersionId 区分：此为版本名，非 ID；原 AgentVersion）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionName?: string
-  /**
-   * 会话使用的 Agent 版本 ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionId?: string
-  /**
-   * 会话状态
+   * <p>任务状态：ACTIVE（启用）/ PAUSED（暂停）/ DISABLED（停用）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 创建者 Uin
+   * <p>最近执行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Creator?: string
+  LastRunTime?: string
   /**
-   * 会话来源
+   * <p>下次执行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Source?: string
+  NextRunTime?: string
   /**
-   * 创建时间（RFC3339）
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
-   * 更新时间（RFC3339）
+   * <p>任务 Agent 配置（Prompt/Model/AgentId）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifiedTime?: string
-}
-
-/**
- * DescribeExpertList返回参数结构体
- */
-export interface DescribeExpertListResponse {
-  /**
-   * <p>符合条件的专家总数（按 ID 批量时为实际命中数）</p>
-   */
-  TotalCount?: number
-  /**
-   * <p>专家列表</p>
-   */
-  ExpertSet?: Array<ExpertItem>
-  /**
-   * <p>全局计数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Counts?: ExpertCounts
-  /**
-   * <p>Agent 可绑定的专家数量上限，当前默认值为 5。</p>
-   */
-  MaxBindings?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AgentConfig?: AgentConfig
 }
 
 /**
@@ -2064,89 +2830,6 @@ export interface ExpertCounts {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
-}
-
-/**
- * DescribeAgentVersionList请求参数结构体
- */
-export interface DescribeAgentVersionListRequest {
-  /**
-   * <p>Agent 业务 ID</p>
-   */
-  AgentId: string
-  /**
-   * <p>偏移量，从 0 开始</p>
-   */
-  Offset?: number
-  /**
-   * <p>返回数量，缺省为 20，最大 100</p>
-   */
-  Limit?: number
-  /**
-   * <p>过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系</p>
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * Skill 列表项（按列表页展示裁剪：名称/版本/描述/状态/操作五列 + 编排所需的 Source 与 DownloadUrl）
- */
-export interface SkillItem {
-  /**
-   * 技能来源：BUILTIN（内置）/ CUSTOM（自建）/ AUTHORIZED（企业授权）
-   */
-  Source?: string
-  /**
-   * <p>slug（仅 custom 返回）</p>
-   */
-  Name?: string
-  /**
-   * <p>展示名</p>
-   */
-  DisplayName?: string
-  /**
-   * <p>描述</p>
-   */
-  Description?: string
-  /**
-   * <p>图标 URL</p>
-   */
-  Icon?: string
-  /**
-   * <p>是否启用</p>
-   */
-  Enabled?: boolean
-  /**
-   * <p>下载 URL</p>
-   */
-  DownloadUrl?: string
-  /**
-   * <p>技能标识</p>
-   */
-  SkillId?: string
-  /**
-   * <p>当前生效版本号</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SkillVersion?: string
-  /**
-   * 创建时间，RFC3339 UTC 格式（如 2026-08-11T09:23:10Z）
-   */
-  CreateTime?: string
-  /**
-   * 更新时间，RFC3339 UTC 格式（如 2026-09-15T06:51:26Z）
-   */
-  UpdateTime?: string
-}
-
-/**
- * 连接器引用入参
- */
-export interface ConnectorRefInput {
-  /**
-   * connector 主表 ID（雪花 ID 数字串）
-   */
-  ConnectorId?: string
 }
 
 /**
@@ -2247,22 +2930,4 @@ export interface ModifyAgentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * MigrateAgentSession请求参数结构体
- */
-export interface MigrateAgentSessionRequest {
-  /**
-   * <p>待迁移的会话 ID（必填）</p>
-   */
-  SessionId: string
-  /**
-   * <p>目标 Agent 业务 ID（必填），必须与 Session 原 Agent 相同</p>
-   */
-  AgentId: string
-  /**
-   * <p>目标版本 ID（必填，字符串形式）。需归属同一 Agent 且未被废弃</p>
-   */
-  TargetVersionId: string
 }

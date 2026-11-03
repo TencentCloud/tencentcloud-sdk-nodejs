@@ -1099,6 +1099,7 @@ import {
   CreateBaselineStrategyResponse,
   DescribeRaspEventDetailTCSSRequest,
   ExportAssetCoreModuleListResponse,
+  QuaraTypeDictItem,
   ModifyMachineAutoClearConfigResponse,
   ModifyLogStorageConfigResponse,
   DescribeHistoryAccountsResponse,

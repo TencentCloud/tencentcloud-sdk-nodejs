@@ -23,25 +23,29 @@ import {
   CompareCloudNativeAPIGatewayMCPToolVersionResponse,
   BindCloudNativeAPIGatewaySecretKeyResponse,
   CNAPIGwSecretKeyList,
-  ModifyCloudNativeAPIGatewayConsumerGroupResponse,
-  DescribeCloudNativeAPIGatewayLLMModelServicesResponse,
+  DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse,
+  DescribeCloudNativeAPIGatewayLLMModelServicesRequest,
+  CustomGuardrailScopeInput,
   DeleteCloudNativeAPIGatewayMCPToolResponse,
-  RollbackCloudNativeAPIGatewayMCPToolVersionResponse,
+  DescribeAIGWCustomGuardrailHitsResult,
   CreateCloudNativeAPIGatewayMCPServerRequest,
   ModifyCloudNativeAPIGatewayMCPToolACLResponse,
   DescribeCloudNativeAPIGatewaySecretKeyListResponse,
-  DeleteCloudNativeAPIGatewaySecretKeyRequest,
+  CustomGuardrailPolicyBinding,
   AIGWMCPUpstreamInfo,
   AIGWLLMTokenUsageItem,
   DeleteCloudNativeAPIGatewayMCPToolRequest,
   AIGWRedisConfig,
+  CustomGuardrailBehaviorConfigInput,
+  DescribeAIGWCustomGuardrailCapabilitiesResult,
   AIGWIntentRoute,
   Filter,
   AIGWFallbackServiceItem,
-  DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
+  DeleteCloudNativeAPIGatewayIPRestrictionRequest,
   AIGWLatencyPriorityRouteRule,
   AIGWChangeSummary,
   AIGWBasicCredentialConfig,
+  DescribeCloudNativeAPIGatewayAIQuotaRequest,
   AIGWGatewayVerifyOAuthConfig,
   AIGWConsumerGroupBrief,
   DeleteCloudNativeAPIGatewayConsumerResponse,
@@ -67,31 +71,39 @@ import {
   CloudNativeAPIGatewayLLMModelParamCheckInfo,
   DescribeCloudNativeAPIGatewayMCPToolACLListResponse,
   DescribeCloudNativeAPIGatewayMCPServerListRequest,
-  ModifyCloudNativeAPIGatewayMCPServerAuthResponse,
+  DescribeAIGWCustomGuardrailPolicyResponse,
+  ModifyCloudNativeAPIGatewayConsumerGroupResponse,
   ModifyCloudNativeAPIGatewayMCPRouteStatusResponse,
   CreateCloudNativeAPIGatewayConsumerGroupRequest,
   CNAPIGwSecretKey,
   ModifyCloudNativeAPIGatewayLLMModelAPIResponse,
+  DescribeAIGWCustomGuardrailBindableResourcesResponse,
+  CustomGuardrailFilterConfigInput,
   CNAPIGwConsumer,
   AIGWLogConfig,
   KongServicePreview,
   CNAPIGwAIServiceSourceInfo,
+  ModifyCloudNativeAPIGatewayMCPToolACLRequest,
+  DescribeCloudNativeAPIGatewayMCPServerResponse,
   AIGWMCPServerList,
   AIGWJWTCredentialConfig,
   DescribeCloudNativeAPIGatewayLLMModelServiceResponse,
+  ExportAIGWCustomGuardrailHitsResult,
+  DescribeAIGWCustomGuardrailHitsResponse,
   AIGWOIDCAuthPluginConfig,
   AIGWTopConsumersItem,
   RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
   AIGWHeaderRule,
+  DescribeCloudNativeAPIGatewayLLMModelServicesResponse,
   CreateCloudNativeAPIGatewayLLMModelServiceRequest,
-  DescribeCloudNativeAPIGatewayLLMModelServicesRequest,
+  DescribeAIGWCustomGuardrailPolicyResult,
   CreateCloudNativeAPIGatewayLLMModelAPIRequest,
   AIGWCustomHeaderCredentialConfig,
   CNAPIGwMCPToolParam,
   AIGWOAuthAuthPluginConfig,
   DescribeCloudNativeAPIGatewayConsumerGroupRequest,
-  DescribeCloudNativeAPIGatewayMCPToolACLListRequest,
-  DescribeCloudNativeAPIGatewayAIQuotaRequest,
+  DescribeAIGWCustomGuardrailCapabilitiesResponse,
+  CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse,
   AIGWJWTAuthPluginConfig,
   CNAPIGwMCPToolImportTaskResult,
   DescribeCNGWServicesWithRoutesResponse,
@@ -104,9 +116,13 @@ import {
   CloudNativeAPIGatewayLLMModelServiceRoute,
   CNAPIGwConsumerGroup,
   CreateCloudNativeAPIGatewayLLMModelServiceResponse,
+  CustomGuardrailServiceConfigInput,
+  CustomGuardrailBindableResource,
   AIGWMCPServerACLResult,
-  ModifyCloudNativeAPIGatewayConsumerRequest,
+  CustomGuardrailCapabilityLimits,
+  DescribeAIGWCustomGuardrailPolicyListResponse,
   DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse,
+  ModifyCloudNativeAPIGatewayConsumerResponse,
   AIGWLogDesensitizeConfig,
   AIGWBearerTokenCredentialConfig,
   AIGWQuotaSubItem,
@@ -114,6 +130,7 @@ import {
   DescribeCloudNativeAPIGatewayConsumerResponse,
   AIGWMCPSessionConfig,
   AIGWMCPServerAuthResult,
+  DescribeCloudNativeAPIGatewayMCPToolACLListRequest,
   DeleteCloudNativeAPIGatewayMCPToolVersionResponse,
   DescribeCloudNativeAPIGatewayMCPToolListRequest,
   DeleteCloudNativeAPIGatewayMCPServerResponse,
@@ -122,8 +139,9 @@ import {
   AIGWSmartBalanceConfig,
   ModifyCloudNativeAPIGatewayMCPToolRequest,
   DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
+  CustomGuardrailAuthConfig,
   ListCloudNativeAPIGatewayLLMModelAPI,
-  DeleteCloudNativeAPIGatewayLLMModelServiceResponse,
+  CustomGuardrailHitFilter,
   DescribeCloudNativeAPIGatewayMCPRouteListResponse,
   AIGWQuotaList,
   KongRoutePreview,
@@ -131,43 +149,57 @@ import {
   AIGWOIDCCredentialConfig,
   AIGWLoadBalanceConfig,
   CreateCloudNativeAPIGatewayConsumerGroupResponse,
-  UpdateCloudNativeAPIGatewayMCPToolsResponse,
+  DescribeCloudNativeAPIGatewayIPRestrictionRequest,
   DescribeCloudNativeAPIGatewayLLMModelAPIResponse,
   AutoSecretKey,
   ModifyCloudNativeAPIGatewayMCPServerStatusResponse,
-  DescribeCloudNativeAPIGatewayMCPToolVersionResponse,
+  CustomGuardrailSyncFailure,
   AIGWMCPUpstreamInfoDetail,
   AIGWMCPRouteListResult,
   DescribeCloudNativeAPIGatewayLLMModelAPIRequest,
+  CustomGuardrailFieldMappingInput,
   AIGWLLMResourceDimension,
-  DescribeCloudNativeAPIGatewaySecretKeyListRequest,
+  CustomGuardrailAuthConfigPatch,
   KVMapping,
+  CustomGuardrailFilterConfig,
+  CustomGuardrailBehaviorConfig,
   ModifyCloudNativeAPIGatewayMCPRouteResponse,
+  ModifyCloudNativeAPIGatewayMCPToolStatusResponse,
   AIGWMCPToolVersion,
   CNAPIGwAIServiceSourceAuth,
   AIGWTokenLengthRoute,
+  CustomGuardrailResourceRef,
+  ListFilter,
   DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse,
-  DescribeCloudNativeAPIGatewayMCPToolVersionListRequest,
+  DescribeKongIpRestrictionResult,
+  CustomGuardrailDecisionConfigPatch,
   AIGWCacheAwareRouteCandidate,
   CNAPIGwAIServiceSource,
   ModifyCloudNativeAPIGatewayAIServiceSourceResponse,
   AIGWLLMHealthCheckSetting,
+  CustomGuardrailServiceConfig,
   DescribeCloudNativeAPIGatewayAIQuotaResponse,
   DescribeCloudNativeAPIGatewayAIServiceSourceListRequest,
   ModifyCloudNativeAPIGatewayMCPServerACLResponse,
-  RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
+  DescribeAIGWCustomGuardrailPolicyRequest,
+  DescribeCloudNativeAPIGatewayIPRestrictionResponse,
   DescribeCloudNativeAPIGatewayMCPToolVersionRequest,
   DeleteCloudNativeAPIGatewayMCPServerRequest,
+  DeleteAIGWCustomGuardrailPolicyResponse,
+  CreateAIGWCustomGuardrailPolicyRequest,
   KongTarget,
-  DeleteCloudNativeAPIGatewaySecretKeyResponse,
+  ModifyCloudNativeAPIGatewayMCPServerACLRequest,
+  DeleteCloudNativeAPIGatewayMCPToolVersionRequest,
   DescribeCloudNativeAPIGatewayMCPToolRequest,
   DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest,
+  RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
   CreateCloudNativeAPIGatewaySecretKeyRequest,
   AIGWQuotaDetail,
-  DescribeCloudNativeAPIGatewayMCPServerResponse,
+  DescribeAIGWCustomGuardrailBindableResourcesRequest,
   KongServiceWithRoutes,
   AIGWCacheAwareRouteConfig,
-  ModifyCloudNativeAPIGatewayMCPToolACLRequest,
+  CustomGuardrailFieldMapping,
+  DescribeCloudNativeAPIGatewayMCPToolVersionListRequest,
   CreateCloudNativeAPIGatewayMCPServerResponse,
   UpdateCloudNativeAPIGatewayMCPToolsRequest,
   AIGWHealthCheckSetting,
@@ -175,68 +207,91 @@ import {
   CreateCloudNativeAPIGatewayConsumerRequest,
   ModifyCloudNativeAPIGatewayMCPServerStatusRequest,
   ModifyCloudNativeAPIGatewayMCPToolResponse,
-  ListFilter,
-  RemoveCloudNativeAPIGatewayConsumerInGroupResponse,
-  AIGWCrossServiceFallbackConfig,
-  AIGWUpstreamTLSConfig,
-  AIGWConsumerModelScope,
+  CustomGuardrailServiceConfigPatch,
   DeleteCloudNativeAPIGatewayMCPRouteRequest,
+  DescribeCloudNativeAPIGatewaySecretKeyListRequest,
+  AIGWCrossServiceFallbackConfig,
+  DescribeCloudNativeAPIGatewaySecretKeyRequest,
+  AIGWUpstreamTLSConfig,
+  CustomGuardrailFilterConfigPatch,
+  AIGWConsumerModelScope,
+  ModifyAIGWCustomGuardrailPolicyResult,
+  CustomGuardrailScope,
   DescribeCloudNativeAPIGatewayLLMModelAPIsResponse,
   CompareCloudNativeAPIGatewayMCPToolVersionRequest,
+  UpdateCloudNativeAPIGatewayMCPToolsResponse,
   AddCloudNativeAPIGatewayConsumerInGroupRequest,
   CreateCloudNativeAPIGatewayConsumerResponse,
   AIGWMCPRoute,
-  ModifyCloudNativeAPIGatewayMCPServerACLRequest,
+  CustomGuardrailResourceRefInput,
   CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy,
   DeleteCloudNativeAPIGatewayLLMModelAPIResponse,
+  CustomGuardrailPolicy,
   AIGWSimpleSecretKey,
+  DescribeCloudNativeAPIGatewayMCPServerAuthRequest,
   DescribeCloudNativeAPIGatewayMCPServerListResponse,
   AIGWLLMTokenUsageListResult,
+  ModifyAIGWCustomGuardrailPolicyResponse,
   DescribeCloudNativeAPIGatewayMCPServerAuthResponse,
+  DescribeAIGWCustomGuardrailCapabilitiesRequest,
   CNAPIGwMCPToolImportResult,
   ModifyCloudNativeAPIGatewayMCPRouteRequest,
   CNAPIGwMCPToolPreview,
   CNAPIGwMCPTool,
   ModifyCloudNativeAPIGatewayAIServiceSourceRequest,
   AIGWMCPToolACLItem,
-  DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse,
+  CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest,
   DescribeCloudNativeAPIGatewayAIQuotaListRequest,
-  ModifyCloudNativeAPIGatewaySecretKeyRequest,
+  DeleteCloudNativeAPIGatewayLLMModelServiceResponse,
   ListCloudNativeAPIGatewayLLMModelService,
   DescribeCNGWServicesWithRoutesRequest,
   DescribeCloudNativeAPIGatewaySecretKeyResponse,
   DescribeCloudNativeAPIGatewayMCPServerACLResponse,
   DescribeCloudNativeAPIGatewayAIServiceSourceListResponse,
+  ModifyCloudNativeAPIGatewayMCPServerRequest,
+  DescribeAIGWCustomGuardrailPolicyListResult,
   DescribeCloudNativeAPIGatewayMCPRouteListRequest,
   ModifyCloudNativeAPIGatewayMCPServerResponse,
   CheckCloudNativeAPIGatewayMCPRouteMatchRequest,
   AIGWLLMQuotaFallbackTrigger,
   RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
   AIGWModelNameRoute,
-  DescribeCloudNativeAPIGatewaySecretKeyRequest,
-  ModifyCloudNativeAPIGatewayMCPServerRequest,
+  CustomGuardrailHit,
+  CustomGuardrailAuthConfigInput,
+  CustomGuardrailFieldMappingPatch,
   AIGWMCPToolACLListResult,
   AddCloudNativeAPIGatewayConsumerGroupAuthResponse,
   KongUpstreamInfo,
   DescribeCloudNativeAPIGatewaySecretKeyValueResponse,
   AIGWMCPServerRequestRewriteConfig,
+  ExportAIGWCustomGuardrailHitsResponse,
   AIGWAuthModelScopeItem,
   AIGWMCPRouteCheckResult,
+  CustomGuardrailDecisionConfigInput,
   DeleteCloudNativeAPIGatewayConsumerRequest,
   CloudNativeAPIGatewayLLMModelFallbackRule,
-  ModifyCloudNativeAPIGatewayMCPToolStatusResponse,
+  ExportAIGWCustomGuardrailHitsRequest,
+  CustomGuardrailBehaviorConfigPatch,
   CreateCloudNativeAPIGatewayMCPRouteResponse,
   ModifyCloudNativeAPIGatewayMCPRouteStatusRequest,
   AIGWLLMQuotaLimit,
   AIGWCustomDesensitizeRule,
+  CreateAIGWCustomGuardrailPolicyResult,
   CreateCloudNativeAPIGatewaySecretKeyResponse,
   KongServiceRoute,
+  DeleteCloudNativeAPIGatewaySecretKeyResponse,
   CNAPIGwMCPToolList,
+  ModifyAIGWCustomGuardrailPolicyRequest,
+  DescribeAIGWCustomGuardrailPolicyListRequest,
   DeleteCloudNativeAPIGatewayAIServiceSourceResponse,
   UnbindCloudNativeAPIGatewaySecretKeyResponse,
   CreateCloudNativeAPIGatewayAIServiceSourceRequest,
+  DeleteAIGWCustomGuardrailPolicyResult,
   AIGWTokenLengthRouteRule,
   AIGWOAuthCredentialConfig,
+  CreateAIGWCustomGuardrailPolicyResponse,
+  DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
+  DescribeCloudNativeAPIGatewayMCPToolVersionResponse,
   ModifyCloudNativeAPIGatewayConsumerGroupRequest,
   DeleteCloudNativeAPIGatewayMCPRouteResponse,
   UnbindCloudNativeAPIGatewaySecretKeyRequest,
@@ -248,38 +303,47 @@ import {
   AIGWMCPServerParamRewriteConfig,
   AIGWMCPToolVersionList,
   DescribeCloudNativeAPIGatewayConsumerGroupResponse,
+  RollbackCloudNativeAPIGatewayMCPToolVersionResponse,
   CheckCloudNativeAPIGatewayMCPToolVersionExistResponse,
   CheckCloudNativeAPIGatewayMCPRouteMatchResponse,
   AIGWLatencyPriorityConfig,
   ModifyCloudNativeAPIGatewayMCPServerAuthRequest,
   DescribeCloudNativeAPIGatewayMCPServerRequest,
+  DescribeAIGWCustomGuardrailBindableResourcesResult,
   DescribeCloudNativeAPIGatewayLLMTokenUsageListRequest,
   BindCloudNativeAPIGatewaySecretKeyRequest,
   ModifyCloudNativeAPIGatewayMCPToolStatusRequest,
   AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
   DescribeCloudNativeAPIGatewayAIQuotaListResponse,
   AIGWLLMModelServiceSubRoute,
-  ModifyCloudNativeAPIGatewayConsumerResponse,
+  DescribeAIGWCustomGuardrailHitsRequest,
+  ModifyCloudNativeAPIGatewayConsumerRequest,
   AIGWForwardDesensitizeConfig,
   AIGWSensitiveWordRoute,
   AIGWAKSKCredentialConfig,
   CreateCloudNativeAPIGatewayMCPToolResponse,
   ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
+  CustomGuardrailDecisionConfig,
   DeleteCloudNativeAPIGatewayAIServiceSourceRequest,
   ModifyCloudNativeAPIGatewayLLMModelServiceResponse,
-  DeleteCloudNativeAPIGatewayMCPToolVersionRequest,
+  CustomGuardrailPolicyFilter,
   CreateCloudNativeAPIGatewayLLMModelAPIResponse,
+  RemoveCloudNativeAPIGatewayConsumerInGroupResponse,
   AIGWGatewayVerifyConfig,
-  DescribeCloudNativeAPIGatewayMCPServerAuthRequest,
+  DeleteCloudNativeAPIGatewaySecretKeyRequest,
   CreateCloudNativeAPIGatewayAIServiceSourceResponse,
   DeleteCloudNativeAPIGatewayLLMModelServiceRequest,
+  DeleteCloudNativeAPIGatewayIPRestrictionResponse,
   DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest,
+  DeleteAIGWCustomGuardrailPolicyRequest,
   DeleteCloudNativeAPIGatewayConsumerGroupResponse,
   DescribeCloudNativeAPIGatewayMCPServerACLRequest,
   ModifyCloudNativeAPIGatewayLLMModelAPIRequest,
+  ModifyCloudNativeAPIGatewayMCPServerAuthResponse,
   AIGWCAMCredentialConfig,
   AIGWMCPServer,
   DescribeCloudNativeAPIGatewayLLMTokenUsageListResponse,
+  ModifyCloudNativeAPIGatewaySecretKeyRequest,
 } from "./cngw_models"
 
 /**
@@ -345,7 +409,7 @@ export class Client extends AbstractClient {
 
   /**
      * 创建消费者密钥。
-【消费者批量自动分配 API Key｜修改：内部并发/配额逻辑，字段不变】消费者密钥单条创建在事务中使用与批量预留相同的实例写锁，配额检查使用当前锁定读，避免单条与批量并发绕过配额。仍是单条创建；原 GenerateType、请求字段、既有配额错误语义及 Result.Success/ID 不变，不增加 ConsumerIds/ClientToken。 完整接口清单与逐项说明：https://iwiki.woa.com/p/4042678235（第 2、2.4 节）。
+【消费者批量自动分配 API Key｜修改：内部并发/配额逻辑，字段不变】消费者密钥单条创建在事务中使用与批量预留相同的实例写锁，配额检查使用当前锁定读，避免单条与批量并发绕过配额。仍是单条创建；原 GenerateType、请求字段、既有配额错误语义及 Result.Success/ID 不变，不增加 ConsumerIds/ClientToken。
      */
   async CreateCloudNativeAPIGatewaySecretKey(
     req: CreateCloudNativeAPIGatewaySecretKeyRequest,
@@ -362,6 +426,30 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerACLResponse) => void
   ): Promise<ModifyCloudNativeAPIGatewayMCPServerACLResponse> {
     return this.request("ModifyCloudNativeAPIGatewayMCPServerACL", req, cb)
+  }
+
+  /**
+     * 按一种业务资源类型分页查询绑定候选及 Route 占用情况。编辑策略时传 PolicyId 排除自身占用，选择时同时检查 Supported 和 Occupied。当前屏蔽的 Dify/Custom Agent、Legacy SSE MCP 不进入可绑定列表。创建策略时使用 ResourceId，不使用 RouteIds。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailBindableResources(
+    req: DescribeAIGWCustomGuardrailBindableResourcesRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailBindableResourcesResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailBindableResourcesResponse> {
+    return this.request("DescribeAIGWCustomGuardrailBindableResources", req, cb)
+  }
+
+  /**
+     * 从网关 RuntimeEventLog 对应 CLS 主题分页查询审核记录，调用前需开启日志投递。按时间倒序返回，查询时间入参为 Unix 秒，记录 Timestamp 为 Unix 毫秒；同一流式业务请求可有多次审核记录。当前查询无导出接口的 1000 条截断限制，使用 Offset/Limit 翻页。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailHits(
+    req: DescribeAIGWCustomGuardrailHitsRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailHitsResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailHitsResponse> {
+    return this.request("DescribeAIGWCustomGuardrailHits", req, cb)
   }
 
   /**
@@ -404,6 +492,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPToolResponse) => void
   ): Promise<DeleteCloudNativeAPIGatewayMCPToolResponse> {
     return this.request("DeleteCloudNativeAPIGatewayMCPTool", req, cb)
+  }
+
+  /**
+     * 先清理该策略的 Route 插件投影，再删除策略和绑定。清理失败返回 Result.Success=false，保留策略供排障后重试；不删除绑定的模型、MCP、Agent 或审核引擎服务。网关需满足最低版本 3.9.6，且已安装、启用并加载 cngw-ai-custom-guardrail。创建、修改、删除要求网关处于稳定 Running 状态，升级/回滚/撤销升级期间不能修改策略。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DeleteAIGWCustomGuardrailPolicy(
+    req: DeleteAIGWCustomGuardrailPolicyRequest,
+    cb?: (error: string, rep: DeleteAIGWCustomGuardrailPolicyResponse) => void
+  ): Promise<DeleteAIGWCustomGuardrailPolicyResponse> {
+    return this.request("DeleteAIGWCustomGuardrailPolicy", req, cb)
   }
 
   /**
@@ -509,13 +609,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将消费者从消费者组移除。
-   */
-  async RemoveCloudNativeAPIGatewayConsumerInGroup(
-    req: RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
-    cb?: (error: string, rep: RemoveCloudNativeAPIGatewayConsumerInGroupResponse) => void
-  ): Promise<RemoveCloudNativeAPIGatewayConsumerInGroupResponse> {
-    return this.request("RemoveCloudNativeAPIGatewayConsumerInGroup", req, cb)
+     * 从 RuntimeEventLog 对应 CLS 主题同步导出审核记录，需先开启投递。单次最多 1000 条，可选择 csv（默认）或 json；Result.Content 是 Base64 编码文件内容，不是下载链接。Truncated=true 时可能还有更多记录，请缩小时间范围分别导出。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async ExportAIGWCustomGuardrailHits(
+    req: ExportAIGWCustomGuardrailHitsRequest,
+    cb?: (error: string, rep: ExportAIGWCustomGuardrailHitsResponse) => void
+  ): Promise<ExportAIGWCustomGuardrailHitsResponse> {
+    return this.request("ExportAIGWCustomGuardrailHits", req, cb)
   }
 
   /**
@@ -549,7 +651,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 LLM 模型服务。同一网关下 Name 唯一。
+   * 创建指定网关实例内的 LLM 模型服务。同一网关下 Name 唯一。可为明确请求 gzip 的供应商选择是否关闭上游压缩协商。
    */
   async CreateCloudNativeAPIGatewayLLMModelService(
     req: CreateCloudNativeAPIGatewayLLMModelServiceRequest,
@@ -576,6 +678,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelAPIsResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayLLMModelAPIsResponse> {
     return this.request("DescribeCloudNativeAPIGatewayLLMModelAPIs", req, cb)
+  }
+
+  /**
+     * 按网关分页查询策略；Limit 必填，范围 1～100，Offset 默认 0。支持名称/描述搜索及配置过滤；同项多值 OR，不同过滤项 AND。Result.DataList 为策略数组。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailPolicyList(
+    req: DescribeAIGWCustomGuardrailPolicyListRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailPolicyListResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailPolicyListResponse> {
+    return this.request("DescribeAIGWCustomGuardrailPolicyList", req, cb)
   }
 
   /**
@@ -629,6 +743,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 局部修改已有策略并重新同步。省略字段保留原值，显式 false/0/[] 与省略不同；数组按整体替换，Scope 传入时替换完整范围。切换 AddressMode 时会自动清除未显式传入的另一模式地址字段；AuthType=none 会清除已有密钥并默认清空 HeaderName。请检查 Result.Success 和 FailedResources。网关需满足最低版本 3.9.6，且已安装、启用并加载 cngw-ai-custom-guardrail。创建、修改、删除要求网关处于稳定 Running 状态，升级/回滚/撤销升级期间不能修改策略。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+
+输入约束：新配置只接受 field_mapping，不再默认为 standard_v2。创建时鉴权和检测行为必须完整填写；修改为 PATCH，省略保留，显式空值不补默认值。存量 standard_v2 策略仍可查询、删除或直接停用；修改其判定配置或重新启用前需迁移到 field_mapping。条件必填由后端按完整配置校验，非法配置不写库、不下发。
+     */
+  async ModifyAIGWCustomGuardrailPolicy(
+    req: ModifyAIGWCustomGuardrailPolicyRequest,
+    cb?: (error: string, rep: ModifyAIGWCustomGuardrailPolicyResponse) => void
+  ): Promise<ModifyAIGWCustomGuardrailPolicyResponse> {
+    return this.request("ModifyAIGWCustomGuardrailPolicy", req, cb)
+  }
+
+  /**
    * AI网关查询MCP服务列表
    */
   async DescribeCloudNativeAPIGatewayMCPServerList(
@@ -660,7 +788,7 @@ export class Client extends AbstractClient {
 
   /**
      * 删除消费者密钥（被绑定时需先解绑）。
-【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，删除返回 OperationDenied.BatchKeyPending。完成后仍执行原绑定/依赖删除检查；原 GatewayId/SecretKeyId 不变，成功不新增业务 Result。删除已生成密钥不改写批次历史成功，后续批次明文读取返回逐项 ResourceNotFound.SecretKey。 完整接口清单与逐项说明：https://iwiki.woa.com/p/4042678235（第 2、2.4 节）。
+【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，删除返回 OperationDenied.BatchKeyPending。完成后仍执行原绑定/依赖删除检查；原 GatewayId/SecretKeyId 不变，成功不新增业务 Result。删除已生成密钥不改写批次历史成功，后续批次明文读取返回逐项 ResourceNotFound.SecretKey。
      */
   async DeleteCloudNativeAPIGatewaySecretKey(
     req: DeleteCloudNativeAPIGatewaySecretKeyRequest,
@@ -671,7 +799,7 @@ export class Client extends AbstractClient {
 
   /**
      * 解绑密钥
-【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，解绑返回 OperationDenied.BatchKeyPending。完成后继续原解绑；原 GatewayId/SecretKeyId/ResourceType/ResourceIds 不变，成功不新增业务 Result。解绑不改写批次历史成功，后续批次明文读取返回逐项 OperationDenied.BindingChanged。 完整接口清单与逐项说明：https://iwiki.woa.com/p/4042678235（第 2、2.4 节）。
+【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，解绑返回 OperationDenied.BatchKeyPending。完成后继续原解绑；原 GatewayId/SecretKeyId/ResourceType/ResourceIds 不变，成功不新增业务 Result。解绑不改写批次历史成功，后续批次明文读取返回逐项 OperationDenied.BindingChanged。
      */
   async UnbindCloudNativeAPIGatewaySecretKey(
     req: UnbindCloudNativeAPIGatewaySecretKeyRequest,
@@ -721,13 +849,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生智能网关MCP Tool
+   * 将消费者从消费者组移除。
    */
-  async RollbackCloudNativeAPIGatewayMCPToolVersion(
-    req: RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
-    cb?: (error: string, rep: RollbackCloudNativeAPIGatewayMCPToolVersionResponse) => void
-  ): Promise<RollbackCloudNativeAPIGatewayMCPToolVersionResponse> {
-    return this.request("RollbackCloudNativeAPIGatewayMCPToolVersion", req, cb)
+  async RemoveCloudNativeAPIGatewayConsumerInGroup(
+    req: RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
+    cb?: (error: string, rep: RemoveCloudNativeAPIGatewayConsumerInGroupResponse) => void
+  ): Promise<RemoveCloudNativeAPIGatewayConsumerInGroupResponse> {
+    return this.request("RemoveCloudNativeAPIGatewayConsumerInGroup", req, cb)
   }
 
   /**
@@ -738,6 +866,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayConsumerGroupResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayConsumerGroupResponse> {
     return this.request("CreateCloudNativeAPIGatewayConsumerGroup", req, cb)
+  }
+
+  /**
+   * 删除云原生网关访问控制
+   */
+  async DeleteCloudNativeAPIGatewayIPRestriction(
+    req: DeleteCloudNativeAPIGatewayIPRestrictionRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayIPRestrictionResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayIPRestrictionResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayIPRestriction", req, cb)
   }
 
   /**
@@ -761,6 +899,42 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 创建自定义外部审核策略，并把资源绑定配置同步到 Kong Route。建议先调用 DescribeAIGWCustomGuardrailCapabilities、DescribeAIGWCustomGuardrailBindableResources 和 TestAIGWCustomGuardrailPolicy。支持模型 API、MCP Streamable HTTP、A2A Agent API；当前不开放 Dify、Custom Agent、Legacy SSE MCP。请检查 Result.Success、SyncStatus、FailedResources；部分同步失败不等于策略未创建，应按返回 PolicyId 查询并处理，避免重复创建。网关需满足最低版本 3.9.6，且已安装、启用并加载 cngw-ai-custom-guardrail。创建、修改、删除要求网关处于稳定 Running 状态，升级/回滚/撤销升级期间不能修改策略。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+
+输入约束：新配置只接受 field_mapping，不再默认为 standard_v2。创建时鉴权和检测行为必须完整填写；修改为 PATCH，省略保留，显式空值不补默认值。存量 standard_v2 策略仍可查询、删除或直接停用；修改其判定配置或重新启用前需迁移到 field_mapping。条件必填由后端按完整配置校验，非法配置不写库、不下发。
+     */
+  async CreateAIGWCustomGuardrailPolicy(
+    req: CreateAIGWCustomGuardrailPolicyRequest,
+    cb?: (error: string, rep: CreateAIGWCustomGuardrailPolicyResponse) => void
+  ): Promise<CreateAIGWCustomGuardrailPolicyResponse> {
+    return this.request("CreateAIGWCustomGuardrailPolicy", req, cb)
+  }
+
+  /**
+   * 创建或编辑云原生网关访问控制
+   */
+  async CreateOrModifyCloudNativeAPIGatewayIPRestriction(
+    req: CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest,
+    cb?: (error: string, rep: CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse) => void
+  ): Promise<CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse> {
+    return this.request("CreateOrModifyCloudNativeAPIGatewayIPRestriction", req, cb)
+  }
+
+  /**
+     * 查询当前控制面支持的协议分类、业务资源类型、审核方向及限制。会校验网关版本和插件可用性。Limits 是能力说明，不等于创建/修改策略可配置的字段，也不是逐个数据面实例的实时状态。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailCapabilities(
+    req: DescribeAIGWCustomGuardrailCapabilitiesRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailCapabilitiesResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailCapabilitiesResponse> {
+    return this.request("DescribeAIGWCustomGuardrailCapabilities", req, cb)
+  }
+
+  /**
    * 创建AI网关MCP Tool
    */
   async CreateCloudNativeAPIGatewayMCPTool(
@@ -768,6 +942,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayMCPToolResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayMCPToolResponse> {
     return this.request("CreateCloudNativeAPIGatewayMCPTool", req, cb)
+  }
+
+  /**
+   * 查询云原生网关访问控制
+   */
+  async DescribeCloudNativeAPIGatewayIPRestriction(
+    req: DescribeCloudNativeAPIGatewayIPRestrictionRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayIPRestrictionResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayIPRestrictionResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayIPRestriction", req, cb)
   }
 
   /**
@@ -792,14 +976,24 @@ export class Client extends AbstractClient {
 
   /**
      * 查询密钥列表。
-普通版批量新建密钥的生成来源扩展：新页面按需 IncludeCreationInfo=true，省略/false 保持原响应字段。原 GenerateType 不新增 Batch；批量记录仍为 System。协议：https://iwiki.woa.com/p/4042678235。
-【消费者批量自动分配 API Key｜修改：可选参数、可选出参及筛选】增加可选 IncludeCreationInfo（默认 false）。仅 true 且 ResourceType=Consumer 时在原 Result.SecretKeys[] 增加 CredentialGenerateType、CreationSource、BatchId 三个非必返字段；Result.TotalCount/SecretKeys 结构不变。Filters 新增 CredentialGenerateType、CreationSource，先过滤后计数分页，与是否返回来源字段独立；保留原 GenerateType 枚举和原分页上限。 完整接口清单与逐项说明：https://iwiki.woa.com/p/4042678235（第 2、2.4 节）。
+普通版批量新建密钥的生成来源扩展：新页面按需 IncludeCreationInfo=true，省略/false 保持原响应字段。原 GenerateType 不新增 Batch；批量记录仍为 System。
+【消费者批量自动分配 API Key｜修改：可选参数、可选出参及筛选】增加可选 IncludeCreationInfo（默认 false）。仅 true 且 ResourceType=Consumer 时在原 Result.SecretKeys[] 增加 CredentialGenerateType、CreationSource、BatchId 三个非必返字段；Result.TotalCount/SecretKeys 结构不变。Filters 新增 CredentialGenerateType、CreationSource，先过滤后计数分页，与是否返回来源字段独立；保留原 GenerateType 枚举和原分页上限。
      */
   async DescribeCloudNativeAPIGatewaySecretKeyList(
     req: DescribeCloudNativeAPIGatewaySecretKeyListRequest,
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyListResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewaySecretKeyListResponse> {
     return this.request("DescribeCloudNativeAPIGatewaySecretKeyList", req, cb)
+  }
+
+  /**
+   * 创建AI 网关MCP Server
+   */
+  async ModifyCloudNativeAPIGatewayMCPServerStatus(
+    req: ModifyCloudNativeAPIGatewayMCPServerStatusRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerStatusResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPServerStatusResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPServerStatus", req, cb)
   }
 
   /**
@@ -823,13 +1017,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建AI 网关MCP Server
+   * 查询 AI 网关MCP Tool 列表
    */
-  async ModifyCloudNativeAPIGatewayMCPServerStatus(
-    req: ModifyCloudNativeAPIGatewayMCPServerStatusRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerStatusResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPServerStatusResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPServerStatus", req, cb)
+  async DescribeCloudNativeAPIGatewayMCPToolList(
+    req: DescribeCloudNativeAPIGatewayMCPToolListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolList", req, cb)
   }
 
   /**
@@ -854,7 +1048,7 @@ export class Client extends AbstractClient {
 
   /**
      * 修改AI网关密钥
-【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，编辑返回 OperationDenied.BatchKeyPending，提示等待批次完成。其他情况继续原编辑校验和行为；原 GatewayId/SecretKeyId/Name/Description 不变，成功不新增业务 Result。 完整接口清单与逐项说明：https://iwiki.woa.com/p/4042678235（第 2、2.4 节）。
+【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，编辑返回 OperationDenied.BatchKeyPending，提示等待批次完成。其他情况继续原编辑校验和行为；原 GatewayId/SecretKeyId/Name/Description 不变，成功不新增业务 Result。
      */
   async ModifyCloudNativeAPIGatewaySecretKey(
     req: ModifyCloudNativeAPIGatewaySecretKeyRequest,
@@ -874,13 +1068,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 AI 网关MCP Tool 列表
-   */
-  async DescribeCloudNativeAPIGatewayMCPToolList(
-    req: DescribeCloudNativeAPIGatewayMCPToolListRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolListResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPToolListResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPToolList", req, cb)
+     * 查询已有策略、脱敏鉴权配置、资源绑定与配置同步状态。Result 本身就是策略对象，不是 Result.Policy。密钥不返回明文，编辑时省略 ApiKey 即可保留。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailPolicy(
+    req: DescribeAIGWCustomGuardrailPolicyRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailPolicyResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailPolicyResponse> {
+    return this.request("DescribeAIGWCustomGuardrailPolicy", req, cb)
   }
 
   /**
@@ -907,8 +1103,8 @@ export class Client extends AbstractClient {
 
   /**
      * 查询密钥详情（SecretValue 字段会被掩码）。
-普通版批量新建密钥的生成来源扩展：新页面按需 IncludeCreationInfo=true，省略/false 保持原响应字段。原 GenerateType 不新增 Batch；批量记录仍为 System。协议：https://iwiki.woa.com/p/4042678235。
-【消费者批量自动分配 API Key｜修改：可选参数及可选出参】增加可选 IncludeCreationInfo（默认 false）。仅 true 且 ResourceType=Consumer 时在原 Result 增加 CredentialGenerateType、CreationSource、BatchId 三个非必返字段；省略/false 保持旧响应。原字段、SecretValue 脱敏和单条详情结构不变。 完整接口清单与逐项说明：https://iwiki.woa.com/p/4042678235（第 2、2.4 节）。
+普通版批量新建密钥的生成来源扩展：新页面按需 IncludeCreationInfo=true，省略/false 保持原响应字段。原 GenerateType 不新增 Batch；批量记录仍为 System。
+【消费者批量自动分配 API Key｜修改：可选参数及可选出参】增加可选 IncludeCreationInfo（默认 false）。仅 true 且 ResourceType=Consumer 时在原 Result 增加 CredentialGenerateType、CreationSource、BatchId 三个非必返字段；省略/false 保持旧响应。原字段、SecretValue 脱敏和单条详情结构不变。
      */
   async DescribeCloudNativeAPIGatewaySecretKey(
     req: DescribeCloudNativeAPIGatewaySecretKeyRequest,
@@ -939,13 +1135,23 @@ export class Client extends AbstractClient {
 
   /**
      * 添加密钥与资源的引用关系接口
-【消费者批量自动分配 API Key｜修改：内部并发/配额逻辑，字段不变】ResourceType=Consumer 时与批量预留共用实例写锁，单消费者绑定配额使用当前锁定读。仍按原 SecretKeyId、ResourceIds 绑定；消费者目标最多一个，单密钥不能同时绑定多个消费者，成功仍返回 Result=true。此入口不新增 OperationDenied.BatchKeyPending；该错误属于下述四个变更入口的保护逻辑。 完整接口清单与逐项说明：https://iwiki.woa.com/p/4042678235（第 2、2.4 节）。
+【消费者批量自动分配 API Key｜修改：内部并发/配额逻辑，字段不变】ResourceType=Consumer 时与批量预留共用实例写锁，单消费者绑定配额使用当前锁定读。仍按原 SecretKeyId、ResourceIds 绑定；消费者目标最多一个，单密钥不能同时绑定多个消费者，成功仍返回 Result=true。此入口不新增 OperationDenied.BatchKeyPending；该错误属于下述四个变更入口的保护逻辑。
      */
   async BindCloudNativeAPIGatewaySecretKey(
     req: BindCloudNativeAPIGatewaySecretKeyRequest,
     cb?: (error: string, rep: BindCloudNativeAPIGatewaySecretKeyResponse) => void
   ): Promise<BindCloudNativeAPIGatewaySecretKeyResponse> {
     return this.request("BindCloudNativeAPIGatewaySecretKey", req, cb)
+  }
+
+  /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async RollbackCloudNativeAPIGatewayMCPToolVersion(
+    req: RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
+    cb?: (error: string, rep: RollbackCloudNativeAPIGatewayMCPToolVersionResponse) => void
+  ): Promise<RollbackCloudNativeAPIGatewayMCPToolVersionResponse> {
+    return this.request("RollbackCloudNativeAPIGatewayMCPToolVersion", req, cb)
   }
 
   /**

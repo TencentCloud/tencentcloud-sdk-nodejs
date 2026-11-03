@@ -680,6 +680,10 @@ export interface GetLocationRsp {
    * 存储位置详情
    */
   Location?: LocationInfo
+  /**
+   * COS 文件事件订阅明细（未订阅时为空）
+   */
+  FileEventSubscription?: CosEventSubscription
 }
 
 /**
@@ -1055,7 +1059,7 @@ export interface ListLocationsRequest {
    */
   SnapshotBased?: boolean
   /**
-   * <p>快照ID</p>
+   * <p>快照ID，首次查询时不传，后续传入上一次 ListLocations 响应返回的 SnapshotId</p>
    */
   SnapshotId?: string
   /**
@@ -1226,18 +1230,13 @@ export interface LabelBrief {
 }
 
 /**
- * DeleteTable返回参数结构体
+ * CreateLocation请求参数结构体
  */
-export interface DeleteTableResponse {
+export interface CreateLocationRequest {
   /**
-   * <p>操作结果</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * COS 文件事件订阅配置，可选；不设置时不订阅（仅 COS 类型 Location 生效）。设置时先订阅 COS 桶事件投递到 CKafka 再创建 Location，创建失败自动回滚退订
    */
-  Data?: DeleteTableRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  FileEventSubscription?: CosEventSubscription
 }
 
 /**
@@ -3890,6 +3889,10 @@ export interface UpdateLocationRsp {
    * 修改后的存储位置详情
    */
   Location?: LocationInfo
+  /**
+   * COS 文件事件订阅明细（未订阅时为空）
+   */
+  FileEventSubscription?: CosEventSubscription
 }
 
 /**
@@ -5540,13 +5543,17 @@ export interface UpdateLocationRequest {
    */
   LocationName: string
   /**
-   * 更新location的操作列表，必填
+   * 更新location的操作列表，必填。通过 UpdateType 指定操作类型，支持的 UpdateType：modify_location_name（修改名称）、modify_location_comment（修改描述）、modify_location_properties（修改属性）、modify_file_event_subscription（操作COS文件事件订阅开关）
    */
   Updates: Array<LocationUpdate>
   /**
    * 调用时所在workspace唯一id，必填
    */
   WorkspaceId: string
+  /**
+   * COS 文件事件订阅配置，可选；不设置时不改动现有订阅（仅 COS 类型 Location 生效）。设置时：先按新配置重新订阅（同桶覆盖写，幂等），再修改 Location 元数据。与 Updates 中的 modify_file_event_subscription 配合表达开关操作：Updates 含该类型且本字段有值=开启/编辑订阅；Updates 含该类型且本字段未设置=关闭订阅；Updates 不含该类型时维持默认语义（不设置不动、设置覆盖）
+   */
+  FileEventSubscription?: CosEventSubscription
 }
 
 /**
@@ -5625,7 +5632,7 @@ export interface RemoveConsoleUsersRequest {
  */
 export interface LocationUpdate {
   /**
-   * 更新类型，取值：modify_location_name、modify_location_comment、modify_location_properties
+   * 更新类型，取值：modify_location_name、modify_location_comment、modify_location_properties、modify_file_event_subscription（操作COS文件事件订阅，WeData侧联动不透传TCLake；配合请求顶层FileEventSubscription字段：有值=开启/编辑订阅，未设置=关闭订阅）
    */
   UpdateType: string
   /**
@@ -6262,6 +6269,20 @@ export interface DeleteWorkspaceRoleResult {
 }
 
 /**
+ * 列表条目：存储位置与其 COS 文件事件订阅平铺（前端无需二次取值/匹配）
+ */
+export interface ListLocationItem {
+  /**
+   * 存储位置详情
+   */
+  Location?: LocationInfo
+  /**
+   * COS 文件事件订阅明细（未订阅时为空，非空即已订阅）
+   */
+  FileEventSubscription?: CosEventSubscription
+}
+
+/**
  * StopCompute返回参数结构体
  */
 export interface StopComputeResponse {
@@ -6721,9 +6742,19 @@ export interface DeleteFolderRsp {
 }
 
 /**
- * CreateLocation请求参数结构体
+ * DeleteTable返回参数结构体
  */
-export type CreateLocationRequest = null
+export interface DeleteTableResponse {
+  /**
+   * <p>操作结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DeleteTableRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 工作流高级设置
@@ -7964,7 +7995,7 @@ export interface ListWorkflowTaskRunsRsp {
  */
 export interface ListLocationsRsp {
   /**
-   * 存储位置详情列表
+   * 存储位置详情列表（Deprecated: 请使用 Items，平铺含订阅状态；前端切换完成后移除）
    */
   Locations?: Array<LocationInfo>
   /**
@@ -7975,6 +8006,10 @@ export interface ListLocationsRsp {
    * 快照ID
    */
   SnapshotId?: string
+  /**
+   * 存储位置 + 订阅平铺列表（与 Locations 同序同长，前端优先使用本字段）；订阅状态判断：FileEventSubscription 非空即已开启
+   */
+  Items?: Array<ListLocationItem>
 }
 
 /**
@@ -8874,6 +8909,28 @@ export interface ListFeatureTablesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * COS 文件事件订阅配置（Location 与 COS 桶事件投递 CKafka 的联动）
+ */
+export interface CosEventSubscription {
+  /**
+   * CKafka 实例 ID，例如 ckafka-xxxxxxxx（订阅时必填）
+   */
+  InstanceId: string
+  /**
+   * CKafka 主题名称（订阅时必填）
+   */
+  TopicName: string
+  /**
+   * 服务角色名称，例如 COSNotifyRole（订阅时必填；服务端按当前租户拼接完整 ARN）
+   */
+  RoleArn: string
+  /**
+   * COS 存储桶所在地域，例如 ap-guangzhou（订阅时必填；过渡方案，后续可能改为服务端自动解析并移除）
+   */
+  Region: string
 }
 
 /**

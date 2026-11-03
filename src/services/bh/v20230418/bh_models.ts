@@ -298,97 +298,109 @@ export interface DeleteUserDirectoryRequest {
  */
 export interface ChangePwdTaskInfo {
   /**
-   * id
+   * <p>id</p>
    */
   Id?: number
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   OperationId?: string
   /**
-   * 任务名
+   * <p>任务名</p>
    */
   TaskName?: string
   /**
-   * 所属部门信息
+   * <p>所属部门信息</p>
    */
   Department?: Department
   /**
-   * 改密方式。1：使用执行账号。2：修改自身密码
+   * <p>改密方式。1：使用执行账号。2：修改自身密码</p>
    */
   ChangeMethod?: number
   /**
-   * 执行账号
+   * <p>执行账号</p>
    */
   RunAccount?: string
   /**
-   * 密码生成策略
+   * <p>密码生成策略</p>
    */
   AuthGenerationStrategy?: number
   /**
-   * 密码长度
+   * <p>密码长度</p>
    */
   PasswordLength?: number
   /**
-   * 包含小写字母
+   * <p>包含小写字母</p>
    */
   SmallLetter?: number
   /**
-   * 包含大写字母
+   * <p>包含大写字母</p>
    */
   BigLetter?: number
   /**
-   * 包含数字
+   * <p>包含数字</p>
    */
   Digit?: number
   /**
-   * 包含的特殊字符，入参base64
+   * <p>包含的特殊字符，入参base64</p>
    */
   Symbol?: string
   /**
-   * 改密完成通知。0-通知，1-不通知
+   * <p>改密完成通知。0-通知，1-不通知</p>
    */
   CompleteNotify?: number
   /**
-   * 通知人邮箱
+   * <p>通知人邮箱</p>
    */
   NotifyEmails?: Array<string>
   /**
-   * 加密附件密码
+   * <p>加密附件密码</p>
    */
   FilePassword?: string
   /**
-   * 需要改密的账户
+   * <p>需要改密的账户</p>
    */
   AccountSet?: Array<string>
   /**
-   * 需要改密的主机
+   * <p>需要改密的主机</p>
    */
   DeviceSet?: Array<Device>
   /**
-   * 任务类型：4手动，5自动
+   * <p>任务类型：4手动，5自动</p>
    */
   Type?: number
   /**
-   * 周期
+   * <p>周期</p>
    */
   Period?: number
   /**
-   * 首次执行时间
+   * <p>首次执行时间</p>
    */
   FirstTime?: string
   /**
-   * 下次执行时间
+   * <p>下次执行时间</p>
    */
   NextTime?: string
   /**
-   * 上次执行时间
+   * <p>上次执行时间</p>
    */
   LastTime?: string
   /**
-   * 改密任务状态，0-待执行，1-执行完成，2-执行失败，3-执行中，4-执行超时
+   * <p>改密任务状态，0-待执行，1-执行完成，2-执行失败，3-执行中，4-执行超时</p>
    */
   Status?: number
+  /**
+   * <p>改密任务类别</p><p>枚举值：</p><ul><li>0： Linux 类型改密任务</li><li>1： Windows 类型改密任务</li></ul><p>默认值：0</p>
+   */
+  Category?: number
+  /**
+   * <p>改密任务协议类型</p><p>枚举值：</p><ul><li>0： 未定义，Linux 改密任务类型默认值</li><li>1： Windows OpenSSH 协议</li></ul><p>默认值：0</p>
+   */
+  Protocol?: number
+  /**
+   * <p>改密协议端口号. Linux 改密协议类型端口号值为0</p><p>默认值：0</p>
+   */
+  Port?: number
 }
 
 /**
@@ -396,7 +408,7 @@ export interface ChangePwdTaskInfo {
  */
 export interface CreateChangePwdTaskResponse {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   OperationId?: string
   /**
@@ -3398,89 +3410,101 @@ export interface ModifyLDAPSettingRequest {
  */
 export interface ModifyChangePwdTaskRequest {
   /**
-   * 改密任务id
+   * <p>改密任务id</p>
    */
   OperationId: string
   /**
-   * 改密资产id列表
+   * <p>改密资产id列表</p>
    */
   DeviceIdSet: Array<number | bigint>
   /**
-   * 改密资产的账号列表
+   * <p>改密资产的账号列表</p>
    */
   AccountSet: Array<string>
   /**
-   * 修改类型：1：修改任务信息  2：关联任务资产账号
+   * <p>修改类型：1：修改任务信息  2：关联任务资产账号</p>
    */
   ModifyType: number
   /**
-   * 改密方式。1：使用执行账号修改密码；2：修改自身密码
+   * <p>改密方式。1：使用执行账号修改密码；2：修改自身密码</p>
    */
   ChangeMethod: number
   /**
-   * 密码生成方式。 1:自动生成相同密码 2:自动生成不同密码 3:手动指定相同密码
+   * <p>密码生成方式。 1:自动生成相同密码 2:自动生成不同密码 3:手动指定相同密码</p>
    */
   AuthGenerationStrategy: number
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName?: string
   /**
-   * 所属部门ID，"1,2,3"
+   * <p>所属部门ID，&quot;1,2,3&quot;</p>
    */
   DepartmentId?: string
   /**
-   * 任务的执行账号
+   * <p>任务的执行账号</p>
    */
   RunAccount?: string
   /**
-   * 密码，手动指定密码时必传。
+   * <p>密码，手动指定密码时必传。</p>
    */
   Password?: string
   /**
-   * 密码限制长度，自动生成密码必传。
+   * <p>密码限制长度，自动生成密码必传。</p>
    */
   PasswordLength?: number
   /**
-   * 密码包含小写字母，0：否，1：是。
+   * <p>密码包含小写字母，0：否，1：是。</p>
    */
   SmallLetter?: number
   /**
-   * 密码包含大写字母，0：否，1：是。
+   * <p>密码包含大写字母，0：否，1：是。</p>
    */
   BigLetter?: number
   /**
-   * 密码包含数字，0：否，1：是。
+   * <p>密码包含数字，0：否，1：是。</p>
    */
   Digit?: number
   /**
-   * 密码包含的特殊字符（base64编码），包含：^[-_#();%~!+=]*$
+   * <p>密码包含的特殊字符（base64编码），包含：^[-_#();%~!+=]*$</p>
    */
   Symbol?: string
   /**
-   * 改密完成通知。0：不通知 1：通知
+   * <p>改密完成通知。0：不通知 1：通知</p>
    */
   CompleteNotify?: number
   /**
-   * 通知邮箱
+   * <p>通知邮箱</p>
    */
   NotifyEmails?: Array<string>
   /**
-   * 加密压缩文件密码
+   * <p>加密压缩文件密码</p>
    */
   FilePassword?: string
   /**
-   * 任务类型， 4：手工执行  5：周期自动执行
+   * <p>任务类型， 4：手工执行  5：周期自动执行</p>
    */
   Type?: number
   /**
-   * 周期任务周期，单位天（大于等于 1，小于等于 365）
+   * <p>周期任务周期，单位天（大于等于 1，小于等于 365）</p>
    */
   Period?: number
   /**
-   * 周期任务首次执行时间
+   * <p>周期任务首次执行时间</p>
    */
   FirstTime?: string
+  /**
+   * <p>改密任务类别</p><p>枚举值：</p><ul><li>0： Linux 类型改密任务</li><li>1： Windows 类型改密任务</li></ul><p>默认值：0</p>
+   */
+  Category?: number
+  /**
+   * <p>改密任务协议类型</p><p>枚举值：</p><ul><li>0： 未定义，Linux 改密任务类型默认值</li><li>1： Windows OpenSSH 协议</li></ul><p>默认值：0</p>
+   */
+  Protocol?: number
+  /**
+   * <p>改密协议端口号，Linux 改密类型协议端口号需设置为0</p><p>取值范围：[0, 65535]</p><p>默认值：0</p>
+   */
+  Port?: number
 }
 
 /**
@@ -5372,41 +5396,45 @@ export interface ModifyUserGroupRequest {
  */
 export interface TaskResult {
   /**
-   * 运维任务结果日志ID
+   * <p>运维任务结果日志ID</p>
    */
   Id?: string
   /**
-   * 运维任务ID
+   * <p>运维任务ID</p>
    */
   OperationId?: string
   /**
-   * 运维任务名称
+   * <p>运维任务名称</p>
    */
   Name?: string
   /**
-   * 执行任务来源IP
+   * <p>执行任务来源IP</p>
    */
   FromIp?: string
   /**
-   * 运维任务所属用户
+   * <p>运维任务所属用户</p>
    */
   UserName?: string
   /**
-   * 运维任务所属用户的姓名
+   * <p>运维任务所属用户的姓名</p>
    */
   RealName?: string
   /**
-   * 运维任务执行状态 1 - 执行中，2 - 成功，3 - 失败，4 - 部分失败
+   * <p>运维任务执行状态 1 - 执行中，2 - 成功，3 - 失败，4 - 部分失败</p>
    */
   Status?: number
   /**
-   * 运维任务开始时间
+   * <p>运维任务开始时间</p>
    */
   StartTime?: string
   /**
-   * 运维任务结束时间
+   * <p>运维任务结束时间</p>
    */
   EndTime?: string
+  /**
+   * <p>任务类别</p><p>枚举值：</p><ul><li>0： Linux 类型任务（默认类型）</li><li>1： Windows 类型任务</li></ul><p>默认值：0</p>
+   */
+  Category?: number
 }
 
 /**
@@ -5414,82 +5442,93 @@ export interface TaskResult {
  */
 export interface CreateChangePwdTaskRequest {
   /**
-   * 任务名
+   * <p>任务名</p>
    */
   TaskName: string
   /**
-   * 资产id数组
+   * <p>资产id数组</p>
    */
   DeviceIdSet: Array<number | bigint>
   /**
-   * 修改的账户数组
+   * <p>修改的账户数组</p>
    */
   AccountSet: Array<string>
   /**
-   * 改密方式。1：使用执行账号修改密码；2：修改自身密码
+   * <p>改密方式。1：使用执行账号修改密码；2：修改自身密码</p>
    */
   ChangeMethod: number
   /**
-   * 认证生成方式。 1:自动生成相同密码 2:自动生成不同密码 3:手动指定相同密码
+   * <p>认证生成方式。 1:自动生成相同密码 2:自动生成不同密码 3:手动指定相同密码</p>
    */
   AuthGenerationStrategy: number
   /**
-   * 执行账号
+   * <p>执行账号</p>
    */
   RunAccount?: string
   /**
-   * 手动指定密码时必传
+   * <p>手动指定密码时必传</p>
    */
   Password?: string
   /**
-   * 密码限制长度，长度大于 12 位
+   * <p>密码限制长度，长度大于 12 位</p>
    */
   PasswordLength?: number
   /**
-   * 密码包含小写字母。0：否，1：是
+   * <p>密码包含小写字母。0：否，1：是</p>
    */
   SmallLetter?: number
   /**
-   * 密码包含大写字母。0：否，1：是
+   * <p>密码包含大写字母。0：否，1：是</p>
    */
   BigLetter?: number
   /**
-   * 密码包含数字。0：否，1：是
+   * <p>密码包含数字。0：否，1：是</p>
    */
   Digit?: number
   /**
-   * 密码包含的特殊字符（base64编码），包含：^[-_#();%~!+=]*$
+   * <p>密码包含的特殊字符（base64编码），包含：^[-_#();%~!+=]*$</p>
    */
   Symbol?: string
   /**
-   * 改密完成通知。0：不通知 
-  1：通知
+   * <p>改密完成通知。0：不通知<br>  1：通知</p>
    */
   CompleteNotify?: number
   /**
-   * 通知邮箱
+   * <p>通知邮箱</p>
    */
   NotifyEmails?: Array<string>
   /**
-   * 加密压缩文件密码
+   * <p>加密压缩文件密码</p>
    */
   FilePassword?: string
   /**
-   * 所属部门id。“1.2.3”
+   * <p>所属部门id。“1.2.3”</p>
    */
   DepartmentId?: string
   /**
-   * 任务类型  4-手工执行  5-周期自动执行
+   * <p>任务类型  4-手工执行  5-周期自动执行</p>
    */
   Type?: number
   /**
-   * 执行周期，单位天（大于等于 1，小于等于 365）
+   * <p>执行周期，单位天（大于等于 1，小于等于 365）</p>
    */
   Period?: number
   /**
-   * 周期任务首次执行时间
+   * <p>周期任务首次执行时间</p>
    */
   FirstTime?: string
+  /**
+   * <p>改密任务类别</p><p>枚举值：</p><ul><li>0： Linux 类型改密任务</li><li>1： Windows 类型改密任务</li></ul><p>默认值：0</p>
+   */
+  Category?: number
+  /**
+   * <p>改密任务协议类型</p><p>枚举值：</p><ul><li>0： 未定义，Linux改密任务类型默认值</li><li>1： Windows OpenSSH 协议</li></ul><p>默认值：0</p>
+   */
+  Protocol?: number
+  /**
+   * <p>改密协议端口号. Linux 改密类型协议端口号需设置为0</p><p>取值范围：[0, 65535]</p><p>默认值：0</p>
+   */
+  Port?: number
 }
 
 /**

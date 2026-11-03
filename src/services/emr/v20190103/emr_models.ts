@@ -5702,11 +5702,11 @@ export interface DeleteAutoScaleStrategyRequest {
  */
 export interface DescribeInstancesListResponse {
   /**
-   * 符合条件的实例总数。
+   * <p>符合条件的实例总数。</p>
    */
   TotalCnt?: number
   /**
-   * 集群实例列表
+   * <p>集群实例列表</p>
    */
   InstancesList?: Array<EmrListInstance>
   /**
@@ -7173,135 +7173,147 @@ export interface DescribeDynamicInstanceListResponse {
  */
 export interface EmrListInstance {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 常见状态描述：集群生产中,集群运行中,集群创建中,集群已关闭,集群已删除
+   * <p>常见状态描述：集群生产中,集群运行中,集群创建中,集群已关闭,集群已删除</p>
    */
   StatusDesc?: string
   /**
-   * 集群名字
+   * <p>集群名字</p>
    */
   ClusterName?: string
   /**
-   * 集群地域
+   * <p>集群地域</p>
    */
   ZoneId?: number
   /**
-   * 用户APPID
+   * <p>用户APPID</p>
    */
   AppId?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   AddTime?: string
   /**
-   * 运行时间
+   * <p>运行时间</p>
    */
   RunTime?: string
   /**
-   * 集群IP
+   * <p>集群IP</p>
    */
   MasterIp?: string
   /**
-   * 集群版本
+   * <p>集群版本</p>
    */
   EmrVersion?: string
   /**
-   * 集群计费类型
+   * <p>集群计费类型</p>
    */
   ChargeType?: number
   /**
-   * emr ID
+   * <p>emr ID</p>
    */
   Id?: number
   /**
-   * 产品ID
+   * <p>产品ID</p>
    */
   ProductId?: number
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: number
   /**
-   * 区域
+   * <p>区域</p>
    */
   RegionId?: number
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: number
   /**
-   * 网络ID
+   * <p>网络ID</p>
    */
   VpcId?: number
   /**
-   * 地区
+   * <p>地区</p>
    */
   Zone?: string
   /**
-   * 状态码, 取值为-2(集群已删除), -1(集群已关闭), 0(集群生产中), 2(集群运行中), 3(集群创建中)
+   * <p>状态码, 取值为-2(集群已删除), -1(集群已关闭), 0(集群生产中), 2(集群运行中), 3(集群创建中)</p>
    */
   Status?: number
   /**
-   * 实例标签
+   * <p>实例标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 告警信息
+   * <p>告警信息</p>
    */
   AlarmInfo?: string
   /**
-   * 是否是woodpecker集群
+   * <p>是否是woodpecker集群</p>
    */
   IsWoodpeckerCluster?: number
   /**
-   * Vpc中文
+   * <p>Vpc中文</p>
    */
   VpcName?: string
   /**
-   * 子网中文
+   * <p>子网中文</p>
    */
   SubnetName?: string
   /**
-   * 字符串VpcId
+   * <p>字符串VpcId</p>
    */
   UniqVpcId?: string
   /**
-   * 字符串子网
+   * <p>字符串子网</p>
    */
   UniqSubnetId?: string
   /**
-   * 集群类型
+   * <p>集群类型</p>
    */
   ClusterClass?: string
   /**
-   * 是否为跨AZ集群
+   * <p>是否为跨AZ集群</p>
    */
   IsMultiZoneCluster?: boolean
   /**
-   * 是否手戳集群
+   * <p>是否手戳集群</p>
    */
   IsHandsCluster?: boolean
   /**
-   * 体外客户端组件信息
+   * <p>体外客户端组件信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OutSideSoftInfo?: Array<SoftDependInfo>
   /**
-   * 当前集群的应用场景是否支持体外客户端
+   * <p>当前集群的应用场景是否支持体外客户端</p>
    */
   IsSupportOutsideCluster?: boolean
   /**
-   * 是否专有集群场景集群
+   * <p>是否专有集群场景集群</p>
    */
   IsDedicatedCluster?: boolean
   /**
-   * 集群支持克隆
+   * <p>集群支持克隆</p>
    */
   IsSupportClone?: boolean
+  /**
+   * <p>集群包含的组件</p>
+   */
+  Soft?: Array<string>
+  /**
+   * <p>是否开启了实例保护</p>
+   */
+  IsTerminateProtection?: boolean
+  /**
+   * <p>mcp密码信息</p>
+   */
+  McpPasswordInfo?: McpPasswordInfo
 }
 
 /**
@@ -7775,6 +7787,20 @@ export interface Placement {
    * 实例所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
    */
   ProjectId?: number
+}
+
+/**
+ * mcp是否需要密码
+ */
+export interface McpPasswordInfo {
+  /**
+   * <p>hive是否需要密码</p>
+   */
+  HivePasswordRequired?: boolean
+  /**
+   * <p>trino是否需要密码</p>
+   */
+  TrinoPasswordRequired?: boolean
 }
 
 /**
@@ -8578,34 +8604,37 @@ export interface DescribeNodeDataDisksResponse {
  */
 export interface DescribeInstancesListRequest {
   /**
-   * 集群筛选策略。取值范围：<li>clusterList：表示查询除了已销毁集群之外的集群列表。</li><li>monitorManage：表示查询除了已销毁、创建中以及创建失败的集群之外的集群列表。</li><li>cloudHardwareManage/componentManage：目前这两个取值为预留取值，暂时和monitorManage表示同样的含义。</li>
+   * <p>集群筛选策略。取值范围：<li>clusterList：表示查询除了已销毁集群之外的集群列表。</li><li>monitorManage：表示查询除了已销毁、创建中以及创建失败的集群之外的集群列表。</li><li>cloudHardwareManage/componentManage：目前这两个取值为预留取值，暂时和monitorManage表示同样的含义。</li></p>
    */
   DisplayStrategy: string
   /**
-   * 页编号，默认值为0，表示第一页。
+   * <p>页编号，默认值为0，表示第一页。</p>
    */
   Offset?: number
   /**
-   * 每页返回数量，默认值为100，最大值为100。
-如果limit和offset都为0，则查询全部记录；
+   * <p>每页返回数量，默认值为100，最大值为100。<br>如果limit和offset都为0，则查询全部记录；</p>
    */
   Limit?: number
   /**
-   * 排序字段。取值范围：<li>clusterId：表示按照实例ID排序。</li><li>addTime：表示按照实例创建时间排序。</li><li>status：表示按照实例的状态码排序。</li>
+   * <p>排序字段。取值范围：<li>clusterId：表示按照实例ID排序。</li><li>addTime：表示按照实例创建时间排序。</li><li>status：表示按照实例的状态码排序。</li></p>
    */
   OrderField?: string
   /**
-   * 按照OrderField升序或者降序进行排序。取值范围：<li>0：表示升序。</li><li>1：表示降序。</li>默认值为0。
+   * <p>按照OrderField升序或者降序进行排序。取值范围：<li>0：表示升序。</li><li>1：表示降序。</li>默认值为0。</p>
    */
   Asc?: number
   /**
-   * 自定义查询过滤器。示例：<li>根据ClusterId过滤实例：[{"Name":"ClusterId","Values":["emr-xxxxxxxx"]}]</li><li>根据clusterName过滤实例：[{"Name": "ClusterName","Values": ["cluster_name"]}]</li><li>根据ClusterStatus过滤实例：[{"Name": "ClusterStatus","Values": ["2"]}]</li>
+   * <p>自定义查询过滤器。示例：<li>根据ClusterId过滤实例：[{&quot;Name&quot;:&quot;ClusterId&quot;,&quot;Values&quot;:[&quot;emr-xxxxxxxx&quot;]}]</li><li>根据clusterName过滤实例：[{&quot;Name&quot;: &quot;ClusterName&quot;,&quot;Values&quot;: [&quot;cluster_name&quot;]}]</li><li>根据ClusterStatus过滤实例：[{&quot;Name&quot;: &quot;ClusterStatus&quot;,&quot;Values&quot;: [&quot;2&quot;]}]</li></p>
    */
   Filters?: Array<Filters>
   /**
-   * 默认0为普通集群，2为tke集群
+   * <p>默认0为普通集群，2为tke集群</p>
    */
   ClusterType?: number
+  /**
+   * <p>是否返回需要密码信息</p>
+   */
+  NeedMcpPasswordInfo?: boolean
 }
 
 /**

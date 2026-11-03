@@ -38,9 +38,9 @@ it("workbuddyenterprise.v20260709.UnbindExternalAgent", async function () {
     }
 })
 
-it("workbuddyenterprise.v20260709.DescribeAgentSession", async function () {
+it("workbuddyenterprise.v20260709.DescribeAgentVersionList", async function () {
     try {
-       const data = await client.DescribeAgentSession({})
+       const data = await client.DescribeAgentVersionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("workbuddyenterprise.v20260709.DescribeAgentSession", async function () {
     }
 })
 
-it("workbuddyenterprise.v20260709.ModifyAgentA2AConfig", async function () {
+it("workbuddyenterprise.v20260709.DescribeScheduledTaskLog", async function () {
     try {
-       const data = await client.ModifyAgentA2AConfig({})
+       const data = await client.DescribeScheduledTaskLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,9 @@ it("workbuddyenterprise.v20260709.ModifyAgentA2AConfig", async function () {
     }
 })
 
-it("workbuddyenterprise.v20260709.DescribeAgentVersion", async function () {
+it("workbuddyenterprise.v20260709.DescribeScheduledTask", async function () {
     try {
-       const data = await client.DescribeAgentVersion({})
+       const data = await client.DescribeScheduledTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("workbuddyenterprise.v20260709.DescribeExternalAgentList", async function () 
     }
 })
 
-it("workbuddyenterprise.v20260709.DescribeAgentVersionList", async function () {
+it("workbuddyenterprise.v20260709.DescribeAgentSession", async function () {
     try {
-       const data = await client.DescribeAgentVersionList({})
+       const data = await client.DescribeAgentSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +168,16 @@ it("workbuddyenterprise.v20260709.CreateAgent", async function () {
     }
 })
 
+it("workbuddyenterprise.v20260709.ModifyScheduledTask", async function () {
+    try {
+       const data = await client.ModifyScheduledTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("workbuddyenterprise.v20260709.CreateAgentVersionFromSource", async function () {
     try {
        const data = await client.CreateAgentVersionFromSource({})
@@ -178,9 +188,19 @@ it("workbuddyenterprise.v20260709.CreateAgentVersionFromSource", async function 
     }
 })
 
-it("workbuddyenterprise.v20260709.ModifyAgentVersion", async function () {
+it("workbuddyenterprise.v20260709.ModifyAgentA2AConfig", async function () {
     try {
-       const data = await client.ModifyAgentVersion({})
+       const data = await client.ModifyAgentA2AConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("workbuddyenterprise.v20260709.DescribeScheduledTaskList", async function () {
+    try {
+       const data = await client.DescribeScheduledTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +218,39 @@ it("workbuddyenterprise.v20260709.BindExternalAgent", async function () {
     }
 })
 
+it("workbuddyenterprise.v20260709.CreateAgentVersion", async function () {
+    try {
+       const data = await client.CreateAgentVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("workbuddyenterprise.v20260709.DescribeExternalAgent", async function () {
     try {
        const data = await client.DescribeExternalAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("workbuddyenterprise.v20260709.DescribeAgentVersion", async function () {
+    try {
+       const data = await client.DescribeAgentVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("workbuddyenterprise.v20260709.TriggerScheduledTask", async function () {
+    try {
+       const data = await client.TriggerScheduledTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +278,29 @@ it("workbuddyenterprise.v20260709.DescribeMessageEventList", async function () {
     }
 })
 
+it("workbuddyenterprise.v20260709.ModifyAgentVersion", async function () {
+    try {
+       const data = await client.ModifyAgentVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("workbuddyenterprise.v20260709.DescribeAgent", async function () {
     try {
        const data = await client.DescribeAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("workbuddyenterprise.v20260709.DescribeScheduledTaskLogList", async function () {
+    try {
+       const data = await client.DescribeScheduledTaskLogList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +328,19 @@ it("workbuddyenterprise.v20260709.DeleteAgent", async function () {
     }
 })
 
-it("workbuddyenterprise.v20260709.CreateAgentVersion", async function () {
+it("workbuddyenterprise.v20260709.DeleteScheduledTask", async function () {
     try {
-       const data = await client.CreateAgentVersion({})
+       const data = await client.DeleteScheduledTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("workbuddyenterprise.v20260709.CreateScheduledTask", async function () {
+    try {
+       const data = await client.CreateScheduledTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

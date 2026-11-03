@@ -58,6 +58,16 @@ it("ssl.v20191205.CancelAuditCertificate", async function () {
     }
 })
 
+it("ssl.v20191205.DescribePackages", async function () {
+    try {
+       const data = await client.DescribePackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DescribeHostTkeInstanceList", async function () {
     try {
        const data = await client.DescribeHostTkeInstanceList({})
@@ -138,9 +148,9 @@ it("ssl.v20191205.CertificateInfoSubmit", async function () {
     }
 })
 
-it("ssl.v20191205.DescribeDownloadCertificateUrl", async function () {
+it("ssl.v20191205.BatchDeleteCSR", async function () {
     try {
-       const data = await client.DescribeDownloadCertificateUrl({})
+       const data = await client.BatchDeleteCSR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +178,9 @@ it("ssl.v20191205.SubmitAuditManager", async function () {
     }
 })
 
-it("ssl.v20191205.DescribePackages", async function () {
+it("ssl.v20191205.DescribeCSRSet", async function () {
     try {
-       const data = await client.DescribePackages({})
+       const data = await client.DescribeCSRSet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +191,16 @@ it("ssl.v20191205.DescribePackages", async function () {
 it("ssl.v20191205.SubmitCertificateInformation", async function () {
     try {
        const data = await client.SubmitCertificateInformation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeCSR", async function () {
+    try {
+       const data = await client.DescribeCSR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +258,9 @@ it("ssl.v20191205.DescribeHostClbInstanceList", async function () {
     }
 })
 
-it("ssl.v20191205.DescribeHostTeoInstanceList", async function () {
+it("ssl.v20191205.CreateCSR", async function () {
     try {
-       const data = await client.DescribeHostTeoInstanceList({})
+       const data = await client.CreateCSR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,6 +341,16 @@ it("ssl.v20191205.UpdateCertificateInstance", async function () {
 it("ssl.v20191205.UploadCertificate", async function () {
     try {
        const data = await client.UploadCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.ModifyCSR", async function () {
+    try {
+       const data = await client.ModifyCSR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +451,16 @@ it("ssl.v20191205.UploadRevokeLetter", async function () {
 it("ssl.v20191205.DescribeHostDeployRecordDetail", async function () {
     try {
        const data = await client.DescribeHostDeployRecordDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.ReplaceCertificate", async function () {
+    try {
+       const data = await client.ReplaceCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +678,9 @@ it("ssl.v20191205.ModifyCertificatesExpiringNotificationSwitch", async function 
     }
 })
 
-it("ssl.v20191205.ReplaceCertificate", async function () {
+it("ssl.v20191205.DescribeHostTeoInstanceList", async function () {
     try {
-       const data = await client.ReplaceCertificate({})
+       const data = await client.DescribeHostTeoInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,6 +731,16 @@ it("ssl.v20191205.DescribeCertificateBindResourceTaskDetail", async function () 
 it("ssl.v20191205.ModifyCertificateResubmit", async function () {
     try {
        const data = await client.ModifyCertificateResubmit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeDownloadCertificateUrl", async function () {
+    try {
+       const data = await client.DescribeDownloadCertificateUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -19,78 +19,101 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DeleteAgentRequest,
-  DescribeAgentResponse,
-  DescribeExpertListRequest,
   A2ASkillItem,
-  DescribeMessageEventListResponse,
   AgentItem,
-  UnbindExternalAgentRequest,
-  DescribeBuiltinModelListResponse,
-  CreateAgentVersionResponse,
+  AgentConfig,
   DescribeExternalAgentResponse,
-  ModifyAgentVersionResponse,
-  BindExternalAgentResponse,
-  SkillCounts,
-  BindExternalAgentRequest,
-  ModifyAgentRoutingRequest,
-  DescribeExternalAgentListResponse,
-  DescribeExternalAgentRequest,
   CreateAgentVersionRequest,
   ModifyAgentVersionRequest,
-  CreateAgentRequest,
-  DescribeAgentVersionRequest,
-  ModifyAgentRequest,
   DescribeAgentSessionResponse,
-  CreateAgentResponse,
-  DescribeAgentSessionRequest,
-  UnbindExternalAgentResponse,
-  DescribeSkillListRequest,
-  DescribeAgentSessionListResponse,
-  DescribeConnectorListResponse,
-  DescribeAgentListResponse,
-  CreateAgentSessionResponse,
-  MessageEventMessage,
-  ExternalAgentInfo,
-  A2ASkillInput,
-  ChatEndpoint,
-  DescribeBuiltinModelListRequest,
-  ConnectorInfo,
-  CreateAgentSessionRequest,
-  CreateAgentVersionFromSourceRequest,
-  DescribeAgentVersionListResponse,
-  DescribeExternalAgentListRequest,
-  ModifyAgentA2AConfigRequest,
-  AgentVersionItem,
-  DescribeUserAccessTokenResponse,
-  CreateAgentVersionFromSourceResponse,
-  DescribeAgentListRequest,
-  ModifyAgentA2AConfigResponse,
   TokenUsage,
-  Filter,
-  BuiltinModel,
-  DescribeConnectorListRequest,
-  RoutingItem,
+  ConnectorInfo,
+  CreateAgentVersionFromSourceResponse,
   MessageEventToolCall,
-  DescribeAgentVersionResponse,
-  DescribeUserAccessTokenRequest,
-  A2AConfig,
-  DescribeAgentSessionListRequest,
+  DescribeScheduledTaskRequest,
   MessageEvent,
-  MigrateAgentSessionResponse,
-  DeleteAgentResponse,
-  ExpertItem,
   DescribeAgentRequest,
-  DescribeSkillListResponse,
-  DescribeMessageEventListRequest,
+  TriggerScheduledTaskRequest,
   SessionItem,
-  DescribeExpertListResponse,
-  ExpertCounts,
   DescribeAgentVersionListRequest,
   SkillItem,
   ConnectorRefInput,
+  DescribeExpertListRequest,
+  DescribeScheduledTaskLogRequest,
+  DescribeAgentVersionResponse,
+  DeleteScheduledTaskResponse,
+  ModifyAgentVersionResponse,
+  SkillCounts,
+  DescribeExternalAgentRequest,
+  CreateAgentRequest,
+  DescribeAgentVersionListResponse,
+  DescribeConnectorListResponse,
+  ModifyAgentRoutingRequest,
+  ChatEndpoint,
+  DescribeSkillListRequest,
+  CreateScheduledTaskRequest,
+  DescribeExternalAgentListRequest,
+  DescribeScheduledTaskListResponse,
+  DescribeUserAccessTokenResponse,
+  DescribeAgentListRequest,
+  ScheduledTaskLogSummary,
+  DescribeConnectorListRequest,
+  DescribeExternalAgentListResponse,
+  DescribeAgentVersionRequest,
+  MigrateAgentSessionResponse,
+  DescribeScheduledTaskListRequest,
+  TriggerScheduledTaskResponse,
+  DescribeScheduledTaskResponse,
+  ScheduledTaskLogStats,
+  ModifyScheduledTaskRequest,
+  DescribeAgentSessionListResponse,
+  UnbindExternalAgentRequest,
+  DescribeBuiltinModelListResponse,
+  BindExternalAgentResponse,
+  DeliveryTarget,
+  A2AConfig,
+  DescribeScheduledTaskLogListRequest,
+  DeleteScheduledTaskRequest,
+  ModifyScheduledTaskResponse,
+  ModifyAgentRequest,
+  A2ASkillInput,
+  BindExternalAgentRequest,
+  ExternalAgentInfo,
+  DescribeAgentListResponse,
+  DeleteAgentResponse,
+  ModifyAgentA2AConfigResponse,
+  Filter,
+  BuiltinModel,
+  DescribeUserAccessTokenRequest,
+  DescribeAgentSessionListRequest,
+  ExpertItem,
+  DescribeExpertListResponse,
+  Header,
+  MigrateAgentSessionRequest,
+  DescribeAgentResponse,
+  DescribeMessageEventListResponse,
+  CreateAgentVersionResponse,
+  TargetOptions,
+  CreateAgentResponse,
+  DescribeAgentSessionRequest,
+  RoutingItem,
+  CreateAgentSessionResponse,
+  MessageEventMessage,
+  DescribeScheduledTaskLogListResponse,
+  ModifyAgentA2AConfigRequest,
+  CreateAgentSessionRequest,
+  CreateAgentVersionFromSourceRequest,
+  AgentVersionItem,
+  DescribeBuiltinModelListRequest,
+  DescribeScheduledTaskLogResponse,
+  UnbindExternalAgentResponse,
+  CreateScheduledTaskResponse,
+  DescribeSkillListResponse,
+  DescribeMessageEventListRequest,
+  ScheduledTaskSummary,
+  ExpertCounts,
   ModifyAgentRoutingResponse,
   ModifyAgentResponse,
-  MigrateAgentSessionRequest,
 } from "./workbuddyenterprise_models"
 
 /**
@@ -123,33 +146,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个 Agent 会话详情：返回会话基础信息（会话名称 / Agent / 版本 / 状态 / 来源 / 发起人）与可用的聊天接入点列表（EndpointSet）。数据面鉴权走 DescribeUserAccessToken 的用户级访问令牌。
+   * 查询指定 Agent 下的版本列表，支持分页和版本类型过滤。
    */
-  async DescribeAgentSession(
-    req: DescribeAgentSessionRequest,
-    cb?: (error: string, rep: DescribeAgentSessionResponse) => void
-  ): Promise<DescribeAgentSessionResponse> {
-    return this.request("DescribeAgentSession", req, cb)
+  async DescribeAgentVersionList(
+    req: DescribeAgentVersionListRequest,
+    cb?: (error: string, rep: DescribeAgentVersionListResponse) => void
+  ): Promise<DescribeAgentVersionListResponse> {
+    return this.request("DescribeAgentVersionList", req, cb)
   }
 
   /**
-   * 修改 Agent 的 A2A 配置。A2AEnabled 是 Agent 级唯一开关，与具体版本和流量分发策略无关。
+   * 查询单条自动化任务执行日志的详细信息。
    */
-  async ModifyAgentA2AConfig(
-    req: ModifyAgentA2AConfigRequest,
-    cb?: (error: string, rep: ModifyAgentA2AConfigResponse) => void
-  ): Promise<ModifyAgentA2AConfigResponse> {
-    return this.request("ModifyAgentA2AConfig", req, cb)
+  async DescribeScheduledTaskLog(
+    req: DescribeScheduledTaskLogRequest,
+    cb?: (error: string, rep: DescribeScheduledTaskLogResponse) => void
+  ): Promise<DescribeScheduledTaskLogResponse> {
+    return this.request("DescribeScheduledTaskLog", req, cb)
   }
 
   /**
-   * 查询单个版本的详细信息，包括 Manifest、Model、状态等。
+   * 查询单个自动化任务的详细信息。
    */
-  async DescribeAgentVersion(
-    req: DescribeAgentVersionRequest,
-    cb?: (error: string, rep: DescribeAgentVersionResponse) => void
-  ): Promise<DescribeAgentVersionResponse> {
-    return this.request("DescribeAgentVersion", req, cb)
+  async DescribeScheduledTask(
+    req: DescribeScheduledTaskRequest,
+    cb?: (error: string, rep: DescribeScheduledTaskResponse) => void
+  ): Promise<DescribeScheduledTaskResponse> {
+    return this.request("DescribeScheduledTask", req, cb)
   }
 
   /**
@@ -163,13 +186,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定 Agent 下的版本列表，支持分页和版本类型过滤。
+   * 查询单个 Agent 会话详情：返回会话基础信息（会话名称 / Agent / 版本 / 状态 / 来源 / 发起人）与可用的聊天接入点列表（EndpointSet）。数据面鉴权走 DescribeUserAccessToken 的用户级访问令牌。
    */
-  async DescribeAgentVersionList(
-    req: DescribeAgentVersionListRequest,
-    cb?: (error: string, rep: DescribeAgentVersionListResponse) => void
-  ): Promise<DescribeAgentVersionListResponse> {
-    return this.request("DescribeAgentVersionList", req, cb)
+  async DescribeAgentSession(
+    req: DescribeAgentSessionRequest,
+    cb?: (error: string, rep: DescribeAgentSessionResponse) => void
+  ): Promise<DescribeAgentSessionResponse> {
+    return this.request("DescribeAgentSession", req, cb)
   }
 
   /**
@@ -253,6 +276,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 部分更新自动化任务配置（Patch 语义：仅传递需要更新的字段），支持启停状态切换。
+   */
+  async ModifyScheduledTask(
+    req: ModifyScheduledTaskRequest,
+    cb?: (error: string, rep: ModifyScheduledTaskResponse) => void
+  ): Promise<ModifyScheduledTaskResponse> {
+    return this.request("ModifyScheduledTask", req, cb)
+  }
+
+  /**
    * 基于源版本创建新版本：Manifest / Model / Description 传入即整体覆盖，未传则沿用源版本。
    */
   async CreateAgentVersionFromSource(
@@ -263,13 +296,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 原地更新 default 或 test 版本的 Manifest / Model / Description / SandboxTemplateId / ConnectorSet（prod 版本冻结不可修改），五个可选字段至少提供一个。ConnectorSet 为全量覆盖语义：缺省表示不改动连接器绑定；空数组表示解绑全部连接器。
+   * 修改 Agent 的 A2A 配置。A2AEnabled 是 Agent 级唯一开关，与具体版本和流量分发策略无关。
    */
-  async ModifyAgentVersion(
-    req: ModifyAgentVersionRequest,
-    cb?: (error: string, rep: ModifyAgentVersionResponse) => void
-  ): Promise<ModifyAgentVersionResponse> {
-    return this.request("ModifyAgentVersion", req, cb)
+  async ModifyAgentA2AConfig(
+    req: ModifyAgentA2AConfigRequest,
+    cb?: (error: string, rep: ModifyAgentA2AConfigResponse) => void
+  ): Promise<ModifyAgentA2AConfigResponse> {
+    return this.request("ModifyAgentA2AConfig", req, cb)
+  }
+
+  /**
+   * 分页查询自动化任务列表，支持按任务名称、状态、Agent 过滤。
+   */
+  async DescribeScheduledTaskList(
+    req: DescribeScheduledTaskListRequest,
+    cb?: (error: string, rep: DescribeScheduledTaskListResponse) => void
+  ): Promise<DescribeScheduledTaskListResponse> {
+    return this.request("DescribeScheduledTaskList", req, cb)
   }
 
   /**
@@ -283,6 +326,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 完全新建版本：外部准备完整 Manifest 后直接传入，不引用任何已有版本。
+   */
+  async CreateAgentVersion(
+    req: CreateAgentVersionRequest,
+    cb?: (error: string, rep: CreateAgentVersionResponse) => void
+  ): Promise<CreateAgentVersionResponse> {
+    return this.request("CreateAgentVersion", req, cb)
+  }
+
+  /**
    * 查询某 managed agent 绑定的单个外部 agent 详情
    */
   async DescribeExternalAgent(
@@ -290,6 +343,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExternalAgentResponse) => void
   ): Promise<DescribeExternalAgentResponse> {
     return this.request("DescribeExternalAgent", req, cb)
+  }
+
+  /**
+   * 查询单个版本的详细信息，包括 Manifest、Model、状态等。
+   */
+  async DescribeAgentVersion(
+    req: DescribeAgentVersionRequest,
+    cb?: (error: string, rep: DescribeAgentVersionResponse) => void
+  ): Promise<DescribeAgentVersionResponse> {
+    return this.request("DescribeAgentVersion", req, cb)
+  }
+
+  /**
+   * 手动触发一次自动化任务执行，返回执行日志 ID。
+   */
+  async TriggerScheduledTask(
+    req: TriggerScheduledTaskRequest,
+    cb?: (error: string, rep: TriggerScheduledTaskResponse) => void
+  ): Promise<TriggerScheduledTaskResponse> {
+    return this.request("TriggerScheduledTask", req, cb)
   }
 
   /**
@@ -313,6 +386,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 原地更新 default 或 test 版本的 Manifest / Model / Description / SandboxTemplateId / ConnectorSet（prod 版本冻结不可修改），五个可选字段至少提供一个。ConnectorSet 为全量覆盖语义：缺省表示不改动连接器绑定；空数组表示解绑全部连接器。
+   */
+  async ModifyAgentVersion(
+    req: ModifyAgentVersionRequest,
+    cb?: (error: string, rep: ModifyAgentVersionResponse) => void
+  ): Promise<ModifyAgentVersionResponse> {
+    return this.request("ModifyAgentVersion", req, cb)
+  }
+
+  /**
    * 查询单个 Agent 的详细信息，包括基础配置和路由配置。
    */
   async DescribeAgent(
@@ -320,6 +403,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentResponse) => void
   ): Promise<DescribeAgentResponse> {
     return this.request("DescribeAgent", req, cb)
+  }
+
+  /**
+   * 分页查询自动化任务执行日志列表，支持状态和时间范围过滤，可选返回聚合统计。
+   */
+  async DescribeScheduledTaskLogList(
+    req: DescribeScheduledTaskLogListRequest,
+    cb?: (error: string, rep: DescribeScheduledTaskLogListResponse) => void
+  ): Promise<DescribeScheduledTaskLogListResponse> {
+    return this.request("DescribeScheduledTaskLogList", req, cb)
   }
 
   /**
@@ -343,13 +436,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 完全新建版本：外部准备完整 Manifest 后直接传入，不引用任何已有版本。
+   * 删除指定的自动化任务。删除后不可恢复。
    */
-  async CreateAgentVersion(
-    req: CreateAgentVersionRequest,
-    cb?: (error: string, rep: CreateAgentVersionResponse) => void
-  ): Promise<CreateAgentVersionResponse> {
-    return this.request("CreateAgentVersion", req, cb)
+  async DeleteScheduledTask(
+    req: DeleteScheduledTaskRequest,
+    cb?: (error: string, rep: DeleteScheduledTaskResponse) => void
+  ): Promise<DeleteScheduledTaskResponse> {
+    return this.request("DeleteScheduledTask", req, cb)
+  }
+
+  /**
+   * 创建自动化任务。AgentConfig 由上游传入，managed-agent 仅做协议透传。
+   */
+  async CreateScheduledTask(
+    req: CreateScheduledTaskRequest,
+    cb?: (error: string, rep: CreateScheduledTaskResponse) => void
+  ): Promise<CreateScheduledTaskResponse> {
+    return this.request("CreateScheduledTask", req, cb)
   }
 
   /**

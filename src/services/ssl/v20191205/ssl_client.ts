@@ -41,10 +41,11 @@ import {
   VerifyManagerResponse,
   DescribeCertificateDetailRequest,
   TkeNameSpaceDetail,
-  CreateCertificateBindResourceSyncTaskResponse,
+  DescribeCertificateResponse,
   TkeInstanceList,
   DescribeDeployedResourcesRequest,
   UploadCertificateRequest,
+  CreateCertificateByPackageRequest,
   TCBHostInstance,
   UploadRevokeLetterRequest,
   ClbListener,
@@ -56,25 +57,30 @@ import {
   DvAuths,
   ModifyCertificateAliasRequest,
   DescribeManagerDetailRequest,
+  BatchDeleteCSRRequest,
   ClbListenerRule,
   LighthouseInstanceDetail,
-  SubmitCertificateInformationRequest,
+  ModifyCSRRequest,
   UploadUpdateRecordInfo,
   DescribeCertificateOperateLogsRequest,
   CancelCertificateOrderResponse,
+  DescribeCSRSetRequest,
+  SubmitCertificateInformationRequest,
   ModifyCertificatesExpiringNotificationSwitchResponse,
   UploadUpdateCertificateInstanceRequest,
   PackageInfo,
+  DescribeCSRSetResponse,
   DescribeHostLiveInstanceListRequest,
   DescribeHostDdosInstanceListResponse,
   UpdateRecordDetails,
+  DescribeCSRRequest,
   DeployCertificateRecordRetryRequest,
   ModifyCertificateResubmitRequest,
   SupportDownloadType,
-  DescribeCertificateResponse,
   DownloadCertificateRequest,
   UploadUpdateCertificateRecordRollbackRequest,
   DescribeHostTkeInstanceListResponse,
+  ModifyCSRResponse,
   DescribeCertificateBindResourceTaskResultRequest,
   UpdateRecordDetail,
   BindResourceResult,
@@ -117,6 +123,7 @@ import {
   DescribeCertificatesResponse,
   CommitCertificateInformationResponse,
   DeleteManagerResponse,
+  TkeInstanceDetail,
   RootCertificates,
   SubmitAuditManagerRequest,
   UploadCertificateResponse,
@@ -132,11 +139,13 @@ import {
   DescribeHostClbInstanceListResponse,
   RevokeCertificateRequest,
   PreAuditInfo,
+  CreateCertificateBindResourceSyncTaskResponse,
   DescribeManagerDetailResponse,
-  ModifyCertificateProjectRequest,
+  CreateCSRResponse,
   Certificate,
-  CreateCertificateByPackageRequest,
+  BatchDeleteCSRResponse,
   CommitCertificateInformationRequest,
+  CSRItem,
   DeleteTaskResult,
   DescribeHostDeployRecordDetailRequest,
   UpdateCertificateInstanceRequest,
@@ -153,6 +162,7 @@ import {
   DeleteCertificateResponse,
   RevokeCertificateResponse,
   DeployedResources,
+  CreateCSRRequest,
   DeployRecord,
   DescribePackagesRequest,
   UploadUpdateCertificateRecordRetryResponse,
@@ -179,7 +189,7 @@ import {
   TSEInstanceDetail,
   DescribeDownloadCertificateUrlRequest,
   SubmittedData,
-  DeployCertificateRecordRollbackResponse,
+  DescribeCompaniesRequest,
   TCBInstanceList,
   DescribeHostCosInstanceListRequest,
   DescribeHostCdnInstanceListResponse,
@@ -217,10 +227,11 @@ import {
   ProjectInfo,
   DescribeHostTeoInstanceListRequest,
   BindResourceRegionResult,
-  TkeInstanceDetail,
+  ModifyCertificateProjectRequest,
   UploadConfirmLetterRequest,
   SubmitCertificateInformationResponse,
   TCBEnvironments,
+  DescribeCSRResponse,
   CertificateInfoSubmitRequest,
   ClbInstanceList,
   UpdateCertificateRecordRetryResponse,
@@ -229,7 +240,7 @@ import {
   CheckCertificateChainRequest,
   CheckCertificateExistRequest,
   SCFInstanceList,
-  DescribeCompaniesRequest,
+  DeployCertificateRecordRollbackResponse,
   ManagerStatusInfo,
   CancelAuditCertificateResponse,
   DeployRecordInfo,
@@ -291,6 +302,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CancelAuditCertificateResponse) => void
   ): Promise<CancelAuditCertificateResponse> {
     return this.request("CancelAuditCertificate", req, cb)
+  }
+
+  /**
+   * 获得权益包列表
+   */
+  async DescribePackages(
+    req: DescribePackagesRequest,
+    cb?: (error: string, rep: DescribePackagesResponse) => void
+  ): Promise<DescribePackagesResponse> {
+    return this.request("DescribePackages", req, cb)
   }
 
   /**
@@ -374,13 +395,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取下载证书链接
+   * 批量删除CSR
    */
-  async DescribeDownloadCertificateUrl(
-    req: DescribeDownloadCertificateUrlRequest,
-    cb?: (error: string, rep: DescribeDownloadCertificateUrlResponse) => void
-  ): Promise<DescribeDownloadCertificateUrlResponse> {
-    return this.request("DescribeDownloadCertificateUrl", req, cb)
+  async BatchDeleteCSR(
+    req: BatchDeleteCSRRequest,
+    cb?: (error: string, rep: BatchDeleteCSRResponse) => void
+  ): Promise<BatchDeleteCSRResponse> {
+    return this.request("BatchDeleteCSR", req, cb)
   }
 
   /**
@@ -411,13 +432,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获得权益包列表
+   * 查询CSR列表
    */
-  async DescribePackages(
-    req: DescribePackagesRequest,
-    cb?: (error: string, rep: DescribePackagesResponse) => void
-  ): Promise<DescribePackagesResponse> {
-    return this.request("DescribePackages", req, cb)
+  async DescribeCSRSet(
+    req: DescribeCSRSetRequest,
+    cb?: (error: string, rep: DescribeCSRSetResponse) => void
+  ): Promise<DescribeCSRSetResponse> {
+    return this.request("DescribeCSRSet", req, cb)
   }
 
   /**
@@ -428,6 +449,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitCertificateInformationResponse) => void
   ): Promise<SubmitCertificateInformationResponse> {
     return this.request("SubmitCertificateInformation", req, cb)
+  }
+
+  /**
+   * 查询CSR详情
+   */
+  async DescribeCSR(
+    req: DescribeCSRRequest,
+    cb?: (error: string, rep: DescribeCSRResponse) => void
+  ): Promise<DescribeCSRResponse> {
+    return this.request("DescribeCSR", req, cb)
   }
 
   /**
@@ -481,13 +512,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询证书EdgeOne云资源部署实例列表
+   * 创建CSR
    */
-  async DescribeHostTeoInstanceList(
-    req: DescribeHostTeoInstanceListRequest,
-    cb?: (error: string, rep: DescribeHostTeoInstanceListResponse) => void
-  ): Promise<DescribeHostTeoInstanceListResponse> {
-    return this.request("DescribeHostTeoInstanceList", req, cb)
+  async CreateCSR(
+    req: CreateCSRRequest,
+    cb?: (error: string, rep: CreateCSRResponse) => void
+  ): Promise<CreateCSRResponse> {
+    return this.request("CreateCSR", req, cb)
   }
 
   /**
@@ -568,6 +599,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadCertificateResponse) => void
   ): Promise<UploadCertificateResponse> {
     return this.request("UploadCertificate", req, cb)
+  }
+
+  /**
+   * 修改CSR信息
+   */
+  async ModifyCSR(
+    req: ModifyCSRRequest,
+    cb?: (error: string, rep: ModifyCSRResponse) => void
+  ): Promise<ModifyCSRResponse> {
+    return this.request("ModifyCSR", req, cb)
   }
 
   /**
@@ -668,6 +709,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHostDeployRecordDetailResponse) => void
   ): Promise<DescribeHostDeployRecordDetailResponse> {
     return this.request("DescribeHostDeployRecordDetail", req, cb)
+  }
+
+  /**
+   * 本接口（ReplaceCertificate）用于重颁发证书。已申请的免费证书仅支持 RSA 算法、密钥对参数为2048的证书重颁发，并且目前仅支持1次重颁发。
+   */
+  async ReplaceCertificate(
+    req: ReplaceCertificateRequest,
+    cb?: (error: string, rep: ReplaceCertificateResponse) => void
+  ): Promise<ReplaceCertificateResponse> {
+    return this.request("ReplaceCertificate", req, cb)
   }
 
   /**
@@ -881,13 +932,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ReplaceCertificate）用于重颁发证书。已申请的免费证书仅支持 RSA 算法、密钥对参数为2048的证书重颁发，并且目前仅支持1次重颁发。
+   * 查询证书EdgeOne云资源部署实例列表
    */
-  async ReplaceCertificate(
-    req: ReplaceCertificateRequest,
-    cb?: (error: string, rep: ReplaceCertificateResponse) => void
-  ): Promise<ReplaceCertificateResponse> {
-    return this.request("ReplaceCertificate", req, cb)
+  async DescribeHostTeoInstanceList(
+    req: DescribeHostTeoInstanceListRequest,
+    cb?: (error: string, rep: DescribeHostTeoInstanceListResponse) => void
+  ): Promise<DescribeHostTeoInstanceListResponse> {
+    return this.request("DescribeHostTeoInstanceList", req, cb)
   }
 
   /**
@@ -938,5 +989,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCertificateResubmitResponse) => void
   ): Promise<ModifyCertificateResubmitResponse> {
     return this.request("ModifyCertificateResubmit", req, cb)
+  }
+
+  /**
+   * 获取下载证书链接
+   */
+  async DescribeDownloadCertificateUrl(
+    req: DescribeDownloadCertificateUrlRequest,
+    cb?: (error: string, rep: DescribeDownloadCertificateUrlResponse) => void
+  ): Promise<DescribeDownloadCertificateUrlResponse> {
+    return this.request("DescribeDownloadCertificateUrl", req, cb)
   }
 }

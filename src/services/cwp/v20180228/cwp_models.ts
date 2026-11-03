@@ -2912,7 +2912,7 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    */
   EnableMemShellScan?: number
   /**
-   * <p>防护模式 0 标准 1重保</p>
+   * <p>防护模式 0 标准 1重保 2自定义隔离</p>
    */
   ProtectMode?: number
   /**
@@ -2931,6 +2931,10 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    * <p>产品类型 0-主机安全(默认) 1-安全中心</p>
    */
   ProductType?: number
+  /**
+   * <p>自定义隔离模式的告警类型Code列表（ProtectMode=2时必填，Code取自Describe返回的QuaraTypeDict）</p>
+   */
+  QuaraTypes?: Array<string>
 }
 
 /**
@@ -23262,7 +23266,7 @@ export interface DescribeMalwareTimingScanSettingResponse {
    */
   EnableMemShellScan?: number
   /**
-   * <p>防护模式 0 标准 1 重保</p>
+   * <p>防护模式 0 标准 1 重保 2自定义隔离</p>
    */
   ProtectMode?: number
   /**
@@ -23281,6 +23285,14 @@ export interface DescribeMalwareTimingScanSettingResponse {
    * <p>用户选择的隔离范围，0：默认全隔离 1：用户自选</p>
    */
   QuaraScope?: number
+  /**
+   * <p>自定义隔离模式已保存的告警类型Code列表</p>
+   */
+  QuaraTypes?: Array<string>
+  /**
+   * <p>告警类型字典（灰度规则下发，供前端渲染勾选项）</p>
+   */
+  QuaraTypeDict?: Array<QuaraTypeDictItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26523,6 +26535,28 @@ export interface ExportAssetCoreModuleListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自定义隔离模式的告警类型字典条目（灰度规则系统下发）
+ */
+export interface QuaraTypeDictItem {
+  /**
+   * <p>告警类型标识，与 QuaraTypes 取值一致</p>
+   */
+  Code?: string
+  /**
+   * <p>展示类型名</p>
+   */
+  Name?: string
+  /**
+   * <p>是否推荐隔离</p>
+   */
+  Recommend?: boolean
+  /**
+   * <p>描述和建议</p>
+   */
+  Desc?: string
 }
 
 /**

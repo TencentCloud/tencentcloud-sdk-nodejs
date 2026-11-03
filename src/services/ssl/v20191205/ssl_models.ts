@@ -702,6 +702,10 @@ export interface Certificates {
    * <p>当前订阅服务下已经签发未过期的证书数量</p>
    */
   CertServiceValidCertificateCount?: number
+  /**
+   * <p>是否可重新提交。</p><p>默认值：false</p>
+   */
+  ResubmitAble?: boolean
 }
 
 /**
@@ -953,13 +957,193 @@ export interface TkeNameSpaceDetail {
 }
 
 /**
- * CreateCertificateBindResourceSyncTask返回参数结构体
+ * DescribeCertificate返回参数结构体
  */
-export interface CreateCertificateBindResourceSyncTaskResponse {
+export interface DescribeCertificateResponse {
   /**
-   * 证书关联云资源异步任务ID列表
+   * <p>用户 UIN。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertTaskIds?: Array<CertTaskId>
+  OwnerUin?: string
+  /**
+   * <p>项目 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * <p>证书来源：<br>trustasia：亚洲诚信，<br>upload：用户上传。<br>wosign：沃通<br>sheca：上海CA</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  From?: string
+  /**
+   * <p>证书类型：CA = 客户端证书，SVR = 服务器证书。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateType?: string
+  /**
+   * <p>证书套餐类型：<br>null：用户上传证书（没有套餐类型），<br>2：TrustAsia TLS RSA CA，<br>3：SecureSite 增强型企业版（EV Pro），<br>4：SecureSite 增强型（EV），<br>5：SecureSite 企业型专业版（OV Pro），<br>6：SecureSite 企业型（OV），<br>7：SecureSite 企业型（OV）通配符，<br>8：Geotrust 增强型（EV），<br>9：Geotrust 企业型（OV），<br>10：Geotrust 企业型（OV）通配符，<br>11：TrustAsia 域名型多域名 SSL 证书，<br>12：TrustAsia 域名型（DV）通配符，<br>13：TrustAsia 企业型通配符（OV）SSL 证书（D3），<br>14：TrustAsia 企业型（OV）SSL 证书（D3），<br>15：TrustAsia 企业型多域名 （OV）SSL 证书（D3），<br>16：TrustAsia 增强型 （EV）SSL 证书（D3），<br>17：TrustAsia 增强型多域名（EV）SSL 证书（D3），<br>18：GlobalSign 企业型（OV）SSL 证书，<br>19：GlobalSign 企业型通配符 （OV）SSL 证书，<br>20：GlobalSign 增强型 （EV）SSL 证书，<br>21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3），<br>22：GlobalSign 企业型多域名（OV）SSL 证书，<br>23：GlobalSign 企业型通配符多域名（OV）SSL 证书，<br>24：GlobalSign 增强型多域名（EV）SSL 证书，<br>25：Wotrus 域名型证书，<br>26：Wotrus 域名型多域名证书，<br>27：Wotrus 域名型通配符证书，<br>28：Wotrus 企业型证书，<br>29：Wotrus 企业型多域名证书，<br>30：Wotrus 企业型通配符证书，<br>31：Wotrus 增强型证书，<br>32：Wotrus 增强型多域名证书，<br>33：WoTrus-国密域名型证书，<br>34：WoTrus-国密域名型证书（多域名），<br>35：WoTrus-国密域名型证书（通配符），<br>37：WoTrus-国密企业型证书，<br>38：WoTrus-国密企业型证书（多域名），<br>39：WoTrus-国密企业型证书（通配符），<br>40：WoTrus-国密增强型证书，<br>41：WoTrus-国密增强型证书（多域名），<br>42：TrustAsia-域名型证书（通配符多域名），<br>43：DNSPod-企业型(OV)SSL证书<br>44：DNSPod-企业型(OV)通配符SSL证书<br>45：DNSPod-企业型(OV)多域名SSL证书<br>46：DNSPod-增强型(EV)SSL证书<br>47：DNSPod-增强型(EV)多域名SSL证书<br>48：DNSPod-域名型(DV)SSL证书<br>49：DNSPod-域名型(DV)通配符SSL证书<br>50：DNSPod-域名型(DV)多域名SSL证书<br>51：DNSPod（国密）-企业型(OV)SSL证书<br>52：DNSPod（国密）-企业型(OV)通配符SSL证书<br>53：DNSPod（国密）-企业型(OV)多域名SSL证书<br>54：DNSPod（国密）-域名型(DV)SSL证书<br>55：DNSPod（国密）-域名型(DV)通配符SSL证书<br>56：DNSPod（国密）-域名型(DV)多域名SSL证书<br>57：SecureSite 企业型专业版多域名(OV Pro)<br>58：SecureSite 企业型多域名(OV)<br>59：SecureSite 增强型专业版多域名(EV Pro)<br>60：SecureSite 增强型多域名(EV)<br>61：Geotrust 增强型多域名(EV)<br>75：SecureSite 企业型(OV)<br>76：SecureSite 企业型(OV)通配符<br>77：SecureSite 增强型(EV)<br>78：Geotrust 企业型(OV)<br>79：Geotrust 企业型(OV)通配符<br>80：Geotrust 增强型(EV)<br>81：GlobalSign 企业型（OV）SSL证书<br>82：GlobalSign 企业型通配符 （OV）SSL证书<br>83：TrustAsia C1 DV Free<br>85：GlobalSign 增强型 （EV）SSL证书<br>88：GlobalSign 企业型通配符多域名 （OV）SSL证书<br>89：GlobalSign 企业型多域名 （OV）SSL证书<br>90：GlobalSign 增强型多域名（EV） SSL证书<br>91：Geotrust 增强型多域名(EV)<br>92：SecureSite 企业型专业版多域名(OV Pro)<br>93：SecureSite 企业型多域名(OV)<br>94：SecureSite 增强型专业版多域名(EV Pro)<br>95：SecureSite 增强型多域名(EV)<br>96：SecureSite 增强型专业版(EV Pro)<br>97：SecureSite 企业型专业版(OV Pro)<br>98：CFCA 企业型(OV)SSL证书<br>99：CFCA 企业型多域名(OV)SSL证书<br>100：CFCA 企业型通配符(OV)SSL证书<br>101：CFCA 增强型(EV)SSL证书</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageType?: string
+  /**
+   * <p>证书产品名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductZhName?: string
+  /**
+   * <p>域名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * <p>备注名称。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Alias?: string
+  /**
+   * <p>证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 自动添加DNS记录，5 = 企业证书，待提交资料，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。14 = 证书已退款。 15 = 证书迁移中</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * <p>状态信息。 取值范围：<br>//通用状态信息<br>1、PRE-REVIEWING：预审核中<br>2、LEGAL-REVIEWING：法务审核中<br>3、CA-REVIEWING：CA审核中<br>4、PENDING-DCV：域名验证中<br>5、WAIT-ISSUE：等待签发（域名验证已通过）<br>//证书审核失败状态信息<br>1、订单审核失败<br>2、CA审核失败，域名未通过安全审查<br>3、域名验证超时，订单自动关闭，请您重新进行证书申请<br>4、证书资料未通过证书CA机构审核，审核人员会致电您证书预留的联系方式，请您留意来电。后续可通过“修改资料”重新提交资料<br>待持续完善</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusMsg?: string
+  /**
+   * <p>验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，DNS_PROXY = DNS代理验证。FILE_PROXY = 文件代理验证</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyType?: string
+  /**
+   * <p>漏洞扫描状态。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulnerabilityStatus?: string
+  /**
+   * <p>证书生效时间。时区为GMT+8:00</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertBeginTime?: string
+  /**
+   * <p>证书失效时间。时区为GMT+8:00</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertEndTime?: string
+  /**
+   * <p>证书有效期：单位(月)。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValidityPeriod?: string
+  /**
+   * <p>申请时间。时区为GMT+8:00</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InsertTime?: string
+  /**
+   * <p>订单 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrderId?: string
+  /**
+   * <p>证书扩展信息。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateExtra?: CertificateExtra
+  /**
+   * <p>DV 认证信息。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DvAuthDetail?: DvAuthDetail
+  /**
+   * <p>漏洞扫描评估报告。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulnerabilityReport?: string
+  /**
+   * <p>证书 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateId?: string
+  /**
+   * <p>证书类型名称。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageTypeName?: string
+  /**
+   * <p>状态描述。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusName?: string
+  /**
+   * <p>证书包含的多个域名（包含主域名）。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubjectAltName?: Array<string>
+  /**
+   * <p>是否为 VIP 客户。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsVip?: boolean
+  /**
+   * <p>是否为泛域名证书。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsWildcard?: boolean
+  /**
+   * <p>是否为 DV 版证书。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDv?: boolean
+  /**
+   * <p>是否启用了漏洞扫描功能。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsVulnerability?: boolean
+  /**
+   * <p>是否可重颁发证书。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewAble?: boolean
+  /**
+   * <p>提交的资料信息。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubmittedData?: SubmittedData
+  /**
+   * <p>是否可部署。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deployable?: boolean
+  /**
+   * <p>标签列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tags>
+  /**
+   * <p>CA证书的所有加密方式。仅证书类型CertificateType为CA有效</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CAEncryptAlgorithms?: Array<string>
+  /**
+   * <p>CA证书的所有通用名称。仅证书类型CertificateType为CA有效</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CACommonNames?: Array<string>
+  /**
+   * <p>CA证书所有的到期时间。仅证书类型CertificateType为CA有效，时区为GMT+8:00</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CAEndTimes?: Array<string>
+  /**
+   * <p>DV证书吊销验证值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DvRevokeAuthDetail?: Array<DvAuths>
+  /**
+   * <p>是否可重新提交。</p><p>默认值：false</p>
+   */
+  ResubmitAble?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1044,6 +1228,206 @@ export interface UploadCertificateRequest {
    * 私钥密码
    */
   KeyPassword?: string
+}
+
+/**
+ * CreateCertificateByPackage请求参数结构体
+ */
+export interface CreateCertificateByPackageRequest {
+  /**
+   * 证书产品PID，以下是对每个PID及其对应的证书文字说明：
+1. 1022451 - CFCA-增强型(EV)SSL证书
+2. 1022449 - CFCA-企业型(OV) SSL证书(通配符)
+3. 1022447 - CFCA-企业型(OV)SSL证书
+4. 1014028 - DNSPod亚信国密-企业型(OV)通配符证书
+5. 1014030 - DNSPod亚信国密-企业型(OV)多域名证书
+6. 1014026 - DNSPod亚信国密-企业型(OV)证书
+7. 1014022 - DNSPod亚信国密-域名型(DV)通配符证书
+8. 1014024 - DNSPod亚信国密-域名型(DV)多域名证书
+9. 1014020 - DNSPod亚信国密-域名型(DV)证书
+10. 1013949 - DNSPod SSL 域名型SSL证书(C1)
+11. 1013953 - DNSPod SSL域名型多域名SSL证书(C1)
+12. 1013951 - DNSPod-SSL域名型DV（泛域名）
+13. 1013955 - DNSPod 企业型SSL证书(C1)
+14. 1013959 - DNSPod 企业型多域名SSL证书(C1)
+15. 1013957 - DNSPod 企业型通配符SSL证书(C1)
+16. 1013961 - DNSPod 增强型 SSL 证书(C1)
+17. 1013963 - DNSPod 增强型多域名SSL证书(C1)
+18. 1005919 - TrustAsia-域名型DV（通配符多域名）
+19. 1013882 - SecureSite-增强型专业版EVPro（多域名）
+20. 1018559 - SecureSite-增强型专业版EVPro（单域名）
+21. 1013910 - GlobalSign-增强型EV（多域名）
+22. 1013904 - GlobalSign-增强型EV（单域名）
+23. 1013898 - TrustAsia-增强型EV（多域名）
+24. 1013888 - TrustAsia-增强型EV（单域名）
+25. 1013886 - GeoTrust-增强型EV（多域名）
+26. 1018529 - GeoTrust-增强型EV（单域名）
+27. 1013880 - SecureSite-增强型EV（多域名）
+28. 1018557 - SecureSite-增强型EV（单域名）
+29. 1018586 - TrustAsia-域名型DV（泛域名）
+30. 1018584 - TrustAsia-域名型DV（多域名）
+31. 1013878 - SecureSite-企业型专业版OV Pro（多域名）
+32. 1018582 - SecureSite-企业型专业版OV Pro（单域名）
+33. 1013908 - GlobalSign-企业型OV（通配符多域名）
+34. 1013902 - GlobalSign-企业型OV（泛域名）
+35. 1013906 - GlobalSign-企业型OV（多域名）
+36. 1013900 - GlobalSign-企业型OV（单域名）
+37. 1013896 - TrustAsia-企业型OV（通配符多域名）
+38. 1013892 - TrustAsia-企业型OV（泛域名）
+39. 1013894 - TrustAsia-企业型OV（多域名）
+40. 1013890 - TrustAsia-企业型OV（单域名）
+41. 1004360 - GeoTrust-企业型OV（泛域名）
+42. 1013884 - GeoTrust-企业型OV（单域名）
+43. 1013874 - SecureSite-企业型OV（泛域名）
+44. 1013876 - SecureSite-企业型OV（多域名）
+45. 1018580 - SecureSite-企业型OV（单域名）
+46. 1004460 - DNSPod-国密增强型证书（多域名）
+47. 1004458 - DNSPod-国密增强型证书
+48. 1004370 - DNSPod-国密企业型证书（通配符）
+49. 1004368 - DNSPod-国密企业型证书（多域名）
+50. 1004366 - DNSPod-国密企业型证书
+51. 1004362 - DNSPod-国密域名型证书（通配符）
+52. 1004364 - DNSPod-国密域名型证书（多域名）
+53. 1004358 - DNSPod-国密域名型证书
+54. 1004456 - WoTrus-增强型证书（多域名）
+55. 1004454 - WoTrus-增强型证书
+56. 1004168 - WoTrus-企业型证书（通配符）
+57. 1004166 - WoTrus-企业型证书（多域名）
+58. 1004164 - WoTrus-企业型证书
+59. 1004159 - WoTrus-域名型证书（通配符）
+60. 1004161 - WoTrus-域名型证书（多域名）
+61. 1004157 - WoTrus-域名型证书
+   */
+  ProductPid: number
+  /**
+   * 要消耗的权益包ID。
+   */
+  PackageIds: Array<string>
+  /**
+   * 证书域名数量。
+   */
+  DomainCount: string
+  /**
+   * 多年期证书年限。
+   */
+  Period: number
+  /**
+   * 要续费的原证书ID（续费时填写）。
+   */
+  OldCertificateId?: string
+  /**
+   * 续费时CSR生成方式（original、upload、online）。
+   */
+  RenewGenCsrMethod?: string
+  /**
+   * 续费时选择上传CSR时填写CSR。
+   */
+  RenewCsr?: string
+  /**
+   * 续费证书CSR的算法类型：RSA,ECC,SM2
+   */
+  RenewAlgorithmType?: string
+  /**
+   * 续费证书CSR的算法参数:2048,4096,prime256v1
+   */
+  RenewAlgorithmParam?: string
+  /**
+   * 项目ID。
+   */
+  ProjectId?: number
+  /**
+   * 标签。
+   */
+  Tags?: Array<Tags>
+  /**
+   * 续费证书的私钥密码。
+   */
+  RenewKeyPass?: string
+  /**
+   * 批量购买证书时预填写的域名。
+   */
+  DomainNames?: string
+  /**
+   * 批量购买证书数量。
+   */
+  CertificateCount?: number
+  /**
+   * 预填写的管理人ID。
+   */
+  ManagerId?: number
+  /**
+   * 预填写的公司ID。
+   */
+  CompanyId?: number
+  /**
+   * 验证方式
+   */
+  VerifyType?: string
+  /**
+   * 询价参数，以下是对每个询价参数及其对应的证书文字说明：
+1. sv_ssl_cost_cfca_ca_ev - CFCA-增强型(EV)SSL证书
+2. sv_ssl_cost_cfca_ca_ovwildcard - CFCA-企业型(OV) SSL证书(通配符)
+3. sv_ssl_cost_cfca_ca_ov - CFCA-企业型(OV)SSL证书
+4. sv_ssl_cost_dnspod_ca_sm2_ovwildcard - DNSPod亚信国密-企业型(OV)通配符证书
+5. sv_ssl_cost_dnspod_ca_sm2_ovmultidomain - DNSPod亚信国密-企业型(OV)多域名证书
+6. sv_ssl_cost_dnspod_ca_sm2_ov - DNSPod亚信国密-企业型(OV)证书
+7. sv_ssl_cost_dnspod_ca_sm2_dvwildcard - DNSPod亚信国密-域名型(DV)通配符证书
+8. sv_ssl_cost_dnspod_ca_sm2_dvmultidomain - DNSPod亚信国密-域名型(DV)多域名证书
+9. sv_ssl_cost_dnspod_ca_sm2_dv - DNSPod亚信国密-域名型(DV)证书
+10. sv_ssl_cost_dnspod_ca_dv - DNSPod SSL 域名型SSL证书(C1)
+11. sv_ssl_cost_dnspod_ca_dvmultidomain - DNSPod SSL域名型多域名SSL证书(C1)
+12. sv_ssl_cost_dnspod_ca_dvwildcard - DNSPod-SSL域名型DV（泛域名）
+13. sv_ssl_cost_dnspod_ca_ov - DNSPod 企业型SSL证书(C1)
+14. sv_ssl_cost_dnspod_ca_ovmultidomain - DNSPod 企业型多域名SSL证书(C1)
+15. sv_ssl_cost_dnspod_ca_ovwildcard - DNSPod 企业型通配符SSL证书(C1)
+16. sv_ssl_cost_dnspod_ca_ev - DNSPod 增强型 SSL 证书(C1)
+17. sv_ssl_cost_dnspod_ca_evmultidomain - DNSPod 增强型多域名SSL证书(C1)
+18. sv_ssl_cost_trustasia_dvwildcardmulti - TrustAsia-域名型DV（通配符多域名）
+19. sv_ssl_cost_securesiteevpromul_sh - SecureSite-增强型专业版EVPro（多域名）
+20. sv_ssl_cost_symantec_evpro - SecureSite-增强型专业版EVPro（单域名）
+21. sv_ssl_cost_globalsign_ev_mul_sh - GlobalSign-增强型EV（多域名）
+22. sv_ssl_cost_globalsign_ev - GlobalSign-增强型EV（单域名）
+23. sv_ssl_cost_trustasia_evmultidomain - TrustAsia-增强型EV（多域名）
+24. sv_ssl_cost_trustasia_ev - TrustAsia-增强型EV（单域名）
+25. sv_ssl_cost_geotrust_evmultidomain - GeoTrust-增强型EV（多域名）
+26. sv_ssl_cost_geotrust_ev - GeoTrust-增强型EV（单域名）
+27. sv_ssl_cost_symantec_evmultidomain - SecureSite-增强型EV（多域名）
+28. sv_ssl_cost_symantec_ev - SecureSite-增强型EV（单域名）
+29. sv_ssl_cost_trustasia_dvwildcard - TrustAsia-域名型DV（泛域名）
+30. sv_ssl_cost_trustasia_dvmultidomain - TrustAsia-域名型DV（多域名）
+31. sv_ssl_cost_symantec_ovpromultidomain - SecureSite-企业型专业版OV Pro（多域名）
+32. sv_ssl_cost_symantec_ovpro - SecureSite-企业型专业版OV Pro（单域名）
+33. sv_ssl_cost_globalsign_ovwildcardmulti - GlobalSign-企业型OV（通配符多域名）
+34. sv_ssl_cost_globalsign_ovwildcard - GlobalSign-企业型OV（泛域名）
+35. sv_ssl_cost_globalsign_ovmultidomain - GlobalSign-企业型OV（多域名）
+36. sv_ssl_cost_globalsign_ov - GlobalSign-企业型OV（单域名）
+37. sv_ssl_cost_trustasia_ovwildcardmulti - TrustAsia-企业型OV（通配符多域名）
+38. sv_ssl_cost_trustasia_ovwildcard - TrustAsia-企业型OV（泛域名）
+39. sv_ssl_cost_trustasia_ovmultidomain - TrustAsia-企业型OV（多域名）
+40. sv_ssl_cost_trustasia_ov - TrustAsia-企业型OV（单域名）
+41. sv_ssl_cost_geotrust_ovwildcard - GeoTrust-企业型OV（泛域名）
+42. sv_ssl_cost_geotrust_ov - GeoTrust-企业型OV（单域名）
+43. sv_ssl_cost_symantec_ovwildcard - SecureSite-企业型OV（泛域名）
+44. sv_ssl_cost_symantec_ovmultidomain - SecureSite-企业型OV（多域名）
+45. sv_ssl_cost_symantec_ov - SecureSite-企业型OV（单域名）
+46. sv_ssl_cost_dnspod_evmultidomain - DNSPod-国密增强型证书（多域名）
+47. sv_ssl_cost_dnspod_ev - DNSPod-国密增强型证书
+48. sv_ssl_cost_dnspod_ovwildcard - DNSPod-国密企业型证书（通配符）
+49. sv_ssl_cost_dnspod_ovmultidomain - DNSPod-国密企业型证书（多域名）
+50. sv_ssl_cost_dnspod_ov - DNSPod-国密企业型证书
+51. sv_ssl_cost_dnspod_dvwildcard - DNSPod-国密域名型证书（通配符）
+52. sv_ssl_cost_dnspod_dvmultidomain - DNSPod-国密域名型证书（多域名）
+53. sv_ssl_cost_dnspod_dv - DNSPod-国密域名型证书
+54. sv_ssl_cost_wotrus_evmultidomain - WoTrus-增强型证书（多域名）
+55. sv_ssl_cost_wotrus_ev - WoTrus-增强型证书
+56. sv_ssl_cost_wotrus_ovwildcard - WoTrus-企业型证书（通配符）
+57. sv_ssl_cost_wotrus_ovmultidomain - WoTrus-企业型证书（多域名）
+58. sv_ssl_cost_wotrus_ov - WoTrus-企业型证书
+59. sv_ssl_cost_wotrus_dvwildcard - WoTrus-域名型证书（通配符）
+60. sv_ssl_cost_wotrus_dvmultidomain - WoTrus-域名型证书（多域名）
+61. sv_ssl_cost_wotrus_dv - WoTrus-域名型证书
+   */
+  PriceKey?: string
 }
 
 /**
@@ -1314,6 +1698,16 @@ export interface DescribeManagerDetailRequest {
 }
 
 /**
+ * BatchDeleteCSR请求参数结构体
+ */
+export interface BatchDeleteCSRRequest {
+  /**
+   * 要删除的CSR Id标识。最多100个
+   */
+  CSRIds: Array<number | bigint>
+}
+
+/**
  * CLB监听器规则
  */
 export interface ClbListenerRule {
@@ -1363,6 +1757,156 @@ export interface LighthouseInstanceDetail {
    * 可选择域名
    */
   Domain?: Array<string>
+}
+
+/**
+ * ModifyCSR请求参数结构体
+ */
+export interface ModifyCSRRequest {
+  /**
+   * <p>CSR ID标识</p>
+   */
+  CSRId: number
+  /**
+   * <p>是否生成CSR内容。生成CSR内容后，此CSR记录不再支持修改</p>
+   */
+  Generate: boolean
+  /**
+   * <p>域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>企业/单位名称</p>
+   */
+  Organization?: string
+  /**
+   * <p>部门</p>
+   */
+  Department?: string
+  /**
+   * <p>邮箱</p>
+   */
+  Email?: string
+  /**
+   * <p>省份</p>
+   */
+  Province?: string
+  /**
+   * <p>城市</p>
+   */
+  City?: string
+  /**
+   * <p>国家</p>
+   */
+  Country?: string
+  /**
+   * <p>加密算法，支持 RSA及ECC。</p>
+   */
+  EncryptAlgo?: string
+  /**
+   * <p>密钥参数，RSA仅支持2048，4096。ECC仅支持prime256v1</p>
+   */
+  KeyParameter?: string
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>私钥密码</p>
+   */
+  KeyPassword?: string
+  /**
+   * <p>SAN域名</p>
+   */
+  SubjectAltName?: Array<string>
+}
+
+/**
+ * 部署记录列表信息
+ */
+export interface UploadUpdateRecordInfo {
+  /**
+   * 记录ID
+   */
+  Id?: number
+  /**
+   * 原证书ID
+   */
+  OldCertId?: string
+  /**
+   * 部署资源类型列表
+   */
+  ResourceTypes?: Array<string>
+  /**
+   * 部署状态
+   */
+  Status?: number
+  /**
+   * 部署时间
+   */
+  CreateTime?: string
+  /**
+   * 最后一次更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
+ * DescribeCertificateOperateLogs请求参数结构体
+ */
+export interface DescribeCertificateOperateLogsRequest {
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 请求日志数量，默认为20, 最大值为1000，如超过1000按照1000处理。
+   */
+  Limit?: number
+  /**
+   * 开始时间，默认15天前。
+   */
+  StartTime?: string
+  /**
+   * 结束时间，默认现在时间。
+   */
+  EndTime?: string
+}
+
+/**
+ * CancelCertificateOrder返回参数结构体
+ */
+export interface CancelCertificateOrderResponse {
+  /**
+   * 取消订单成功的证书 ID。
+   */
+  CertificateId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCSRSet请求参数结构体
+ */
+export interface DescribeCSRSetRequest {
+  /**
+   * 每页数量，默认10。最大100
+   */
+  Limit?: number
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+  /**
+   * 使用域名过滤。
+   */
+  Domain?: string
+  /**
+   * 使用加密算法过滤
+   */
+  EncryptAlgo?: string
 }
 
 /**
@@ -1483,72 +2027,6 @@ parse：自行生成CSR和私钥， 并通过上传CSR申请证书
 }
 
 /**
- * 部署记录列表信息
- */
-export interface UploadUpdateRecordInfo {
-  /**
-   * 记录ID
-   */
-  Id?: number
-  /**
-   * 原证书ID
-   */
-  OldCertId?: string
-  /**
-   * 部署资源类型列表
-   */
-  ResourceTypes?: Array<string>
-  /**
-   * 部署状态
-   */
-  Status?: number
-  /**
-   * 部署时间
-   */
-  CreateTime?: string
-  /**
-   * 最后一次更新时间
-   */
-  UpdateTime?: string
-}
-
-/**
- * DescribeCertificateOperateLogs请求参数结构体
- */
-export interface DescribeCertificateOperateLogsRequest {
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 请求日志数量，默认为20, 最大值为1000，如超过1000按照1000处理。
-   */
-  Limit?: number
-  /**
-   * 开始时间，默认15天前。
-   */
-  StartTime?: string
-  /**
-   * 结束时间，默认现在时间。
-   */
-  EndTime?: string
-}
-
-/**
- * CancelCertificateOrder返回参数结构体
- */
-export interface CancelCertificateOrderResponse {
-  /**
-   * 取消订单成功的证书 ID。
-   */
-  CertificateId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyCertificatesExpiringNotificationSwitch返回参数结构体
  */
 export interface ModifyCertificatesExpiringNotificationSwitchResponse {
@@ -1645,6 +2123,24 @@ export interface PackageInfo {
 }
 
 /**
+ * DescribeCSRSet返回参数结构体
+ */
+export interface DescribeCSRSetResponse {
+  /**
+   * 总数量。
+   */
+  Total?: number
+  /**
+   * 列表。
+   */
+  Set?: Array<CSRItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeHostLiveInstanceList请求参数结构体
  */
 export interface DescribeHostLiveInstanceListRequest {
@@ -1720,6 +2216,16 @@ export interface UpdateRecordDetails {
 }
 
 /**
+ * DescribeCSR请求参数结构体
+ */
+export interface DescribeCSRRequest {
+  /**
+   * <p>CSR ID标识</p>
+   */
+  CSRId: number
+}
+
+/**
  * DeployCertificateRecordRetry请求参数结构体
  */
 export interface DeployCertificateRecordRetryRequest {
@@ -1778,296 +2284,6 @@ export interface SupportDownloadType {
 }
 
 /**
- * DescribeCertificate返回参数结构体
- */
-export interface DescribeCertificateResponse {
-  /**
-   * 用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnerUin?: string
-  /**
-   * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectId?: string
-  /**
-   * 证书来源：
-trustasia：亚洲诚信，
-upload：用户上传。
-wosign：沃通
-sheca：上海CA
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  From?: string
-  /**
-   * 证书类型：CA = 客户端证书，SVR = 服务器证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateType?: string
-  /**
-   * 证书套餐类型：
-null：用户上传证书（没有套餐类型），
-2：TrustAsia TLS RSA CA， 
-3：SecureSite 增强型企业版（EV Pro）， 
-4：SecureSite 增强型（EV）， 
-5：SecureSite 企业型专业版（OV Pro），
-6：SecureSite 企业型（OV）， 
-7：SecureSite 企业型（OV）通配符， 
-8：Geotrust 增强型（EV）， 
-9：Geotrust 企业型（OV）， 
-10：Geotrust 企业型（OV）通配符， 
-11：TrustAsia 域名型多域名 SSL 证书， 
-12：TrustAsia 域名型（DV）通配符， 
-13：TrustAsia 企业型通配符（OV）SSL 证书（D3）， 
-14：TrustAsia 企业型（OV）SSL 证书（D3）， 
-15：TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 
-16：TrustAsia 增强型 （EV）SSL 证书（D3）， 
-17：TrustAsia 增强型多域名（EV）SSL 证书（D3）， 
-18：GlobalSign 企业型（OV）SSL 证书， 
-19：GlobalSign 企业型通配符 （OV）SSL 证书， 
-20：GlobalSign 增强型 （EV）SSL 证书， 
-21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 
-22：GlobalSign 企业型多域名（OV）SSL 证书， 
-23：GlobalSign 企业型通配符多域名（OV）SSL 证书，
-24：GlobalSign 增强型多域名（EV）SSL 证书，
-25：Wotrus 域名型证书，
-26：Wotrus 域名型多域名证书，
-27：Wotrus 域名型通配符证书，
-28：Wotrus 企业型证书，
-29：Wotrus 企业型多域名证书，
-30：Wotrus 企业型通配符证书，
-31：Wotrus 增强型证书，
-32：Wotrus 增强型多域名证书，
-33：WoTrus-国密域名型证书，
-34：WoTrus-国密域名型证书（多域名），
-35：WoTrus-国密域名型证书（通配符），
-37：WoTrus-国密企业型证书，
-38：WoTrus-国密企业型证书（多域名），
-39：WoTrus-国密企业型证书（通配符），
-40：WoTrus-国密增强型证书，
-41：WoTrus-国密增强型证书（多域名），
-42：TrustAsia-域名型证书（通配符多域名），
-43：DNSPod-企业型(OV)SSL证书
-44：DNSPod-企业型(OV)通配符SSL证书
-45：DNSPod-企业型(OV)多域名SSL证书
-46：DNSPod-增强型(EV)SSL证书
-47：DNSPod-增强型(EV)多域名SSL证书
-48：DNSPod-域名型(DV)SSL证书
-49：DNSPod-域名型(DV)通配符SSL证书
-50：DNSPod-域名型(DV)多域名SSL证书
-51：DNSPod（国密）-企业型(OV)SSL证书
-52：DNSPod（国密）-企业型(OV)通配符SSL证书
-53：DNSPod（国密）-企业型(OV)多域名SSL证书
-54：DNSPod（国密）-域名型(DV)SSL证书
-55：DNSPod（国密）-域名型(DV)通配符SSL证书
-56：DNSPod（国密）-域名型(DV)多域名SSL证书
-57：SecureSite 企业型专业版多域名(OV Pro)
-58：SecureSite 企业型多域名(OV)
-59：SecureSite 增强型专业版多域名(EV Pro)
-60：SecureSite 增强型多域名(EV)
-61：Geotrust 增强型多域名(EV)
-75：SecureSite 企业型(OV)
-76：SecureSite 企业型(OV)通配符
-77：SecureSite 增强型(EV)
-78：Geotrust 企业型(OV)
-79：Geotrust 企业型(OV)通配符
-80：Geotrust 增强型(EV)
-81：GlobalSign 企业型（OV）SSL证书
-82：GlobalSign 企业型通配符 （OV）SSL证书
-83：TrustAsia C1 DV Free
-85：GlobalSign 增强型 （EV）SSL证书
-88：GlobalSign 企业型通配符多域名 （OV）SSL证书
-89：GlobalSign 企业型多域名 （OV）SSL证书
-90：GlobalSign 增强型多域名（EV） SSL证书
-91：Geotrust 增强型多域名(EV)
-92：SecureSite 企业型专业版多域名(OV Pro)
-93：SecureSite 企业型多域名(OV)
-94：SecureSite 增强型专业版多域名(EV Pro)
-95：SecureSite 增强型多域名(EV)
-96：SecureSite 增强型专业版(EV Pro)
-97：SecureSite 企业型专业版(OV Pro)
-98：CFCA 企业型(OV)SSL证书
-99：CFCA 企业型多域名(OV)SSL证书
-100：CFCA 企业型通配符(OV)SSL证书
-101：CFCA 增强型(EV)SSL证书
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageType?: string
-  /**
-   * 证书产品名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductZhName?: string
-  /**
-   * 域名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domain?: string
-  /**
-   * 备注名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Alias?: string
-  /**
-   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 自动添加DNS记录，5 = 企业证书，待提交资料，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。14 = 证书已退款。 15 = 证书迁移中
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 状态信息。 取值范围：
-//通用状态信息
-1、PRE-REVIEWING：预审核中
-2、LEGAL-REVIEWING：法务审核中
-3、CA-REVIEWING：CA审核中
-4、PENDING-DCV：域名验证中
-5、WAIT-ISSUE：等待签发（域名验证已通过）
-//证书审核失败状态信息
-1、订单审核失败
-2、CA审核失败，域名未通过安全审查
-3、域名验证超时，订单自动关闭，请您重新进行证书申请
-4、证书资料未通过证书CA机构审核，审核人员会致电您证书预留的联系方式，请您留意来电。后续可通过“修改资料”重新提交资料
-待持续完善
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusMsg?: string
-  /**
-   * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，DNS_PROXY = DNS代理验证。FILE_PROXY = 文件代理验证
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VerifyType?: string
-  /**
-   * 漏洞扫描状态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VulnerabilityStatus?: string
-  /**
-   * 证书生效时间。时区为GMT+8:00
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertBeginTime?: string
-  /**
-   * 证书失效时间。时区为GMT+8:00
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertEndTime?: string
-  /**
-   * 证书有效期：单位(月)。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValidityPeriod?: string
-  /**
-   * 申请时间。时区为GMT+8:00
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InsertTime?: string
-  /**
-   * 订单 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrderId?: string
-  /**
-   * 证书扩展信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateExtra?: CertificateExtra
-  /**
-   * DV 认证信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DvAuthDetail?: DvAuthDetail
-  /**
-   * 漏洞扫描评估报告。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VulnerabilityReport?: string
-  /**
-   * 证书 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateId?: string
-  /**
-   * 证书类型名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageTypeName?: string
-  /**
-   * 状态描述。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusName?: string
-  /**
-   * 证书包含的多个域名（包含主域名）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubjectAltName?: Array<string>
-  /**
-   * 是否为 VIP 客户。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsVip?: boolean
-  /**
-   * 是否为泛域名证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsWildcard?: boolean
-  /**
-   * 是否为 DV 版证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsDv?: boolean
-  /**
-   * 是否启用了漏洞扫描功能。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsVulnerability?: boolean
-  /**
-   * 是否可重颁发证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RenewAble?: boolean
-  /**
-   * 提交的资料信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubmittedData?: SubmittedData
-  /**
-   * 是否可部署。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Deployable?: boolean
-  /**
-   * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tags>
-  /**
-   * CA证书的所有加密方式。仅证书类型CertificateType为CA有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CAEncryptAlgorithms?: Array<string>
-  /**
-   * CA证书的所有通用名称。仅证书类型CertificateType为CA有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CACommonNames?: Array<string>
-  /**
-   * CA证书所有的到期时间。仅证书类型CertificateType为CA有效，时区为GMT+8:00
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CAEndTimes?: Array<string>
-  /**
-   * DV证书吊销验证值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DvRevokeAuthDetail?: Array<DvAuths>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DownloadCertificate请求参数结构体
  */
 export interface DownloadCertificateRequest {
@@ -2111,6 +2327,20 @@ export interface DescribeHostTkeInstanceListResponse {
    * 当前缓存读取时间
    */
   AsyncCacheTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCSR返回参数结构体
+ */
+export interface ModifyCSRResponse {
+  /**
+   * <p>CSR ID标识</p>
+   */
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3152,6 +3382,32 @@ export interface DeleteManagerResponse {
 }
 
 /**
+ * tke实例详情
+ */
+export interface TkeInstanceDetail {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群命名空间列表
+   */
+  NamespaceList?: Array<TkeNameSpaceDetail>
+  /**
+   * 集群类型
+   */
+  ClusterType?: string
+  /**
+   * 集群版本
+   */
+  ClusterVersion?: string
+}
+
+/**
  * 根证书
  */
 export interface RootCertificates {
@@ -3504,6 +3760,20 @@ export interface PreAuditInfo {
 }
 
 /**
+ * CreateCertificateBindResourceSyncTask返回参数结构体
+ */
+export interface CreateCertificateBindResourceSyncTaskResponse {
+  /**
+   * 证书关联云资源异步任务ID列表
+   */
+  CertTaskIds?: Array<CertTaskId>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeManagerDetail返回参数结构体
  */
 export interface DescribeManagerDetailResponse {
@@ -3609,17 +3879,17 @@ export interface DescribeManagerDetailResponse {
 }
 
 /**
- * ModifyCertificateProject请求参数结构体
+ * CreateCSR返回参数结构体
  */
-export interface ModifyCertificateProjectRequest {
+export interface CreateCSRResponse {
   /**
-   * 需要修改所属项目的证书 ID 集合，最多100个证书。
+   * <p>CSR ID标识</p>
    */
-  CertificateIdList: Array<string>
+  Id?: number
   /**
-   * 项目 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ProjectId: number
+  RequestId?: string
 }
 
 /**
@@ -3645,203 +3915,17 @@ export interface Certificate {
 }
 
 /**
- * CreateCertificateByPackage请求参数结构体
+ * BatchDeleteCSR返回参数结构体
  */
-export interface CreateCertificateByPackageRequest {
+export interface BatchDeleteCSRResponse {
   /**
-   * 证书产品PID，以下是对每个PID及其对应的证书文字说明：
-1. 1022451 - CFCA-增强型(EV)SSL证书
-2. 1022449 - CFCA-企业型(OV) SSL证书(通配符)
-3. 1022447 - CFCA-企业型(OV)SSL证书
-4. 1014028 - DNSPod亚信国密-企业型(OV)通配符证书
-5. 1014030 - DNSPod亚信国密-企业型(OV)多域名证书
-6. 1014026 - DNSPod亚信国密-企业型(OV)证书
-7. 1014022 - DNSPod亚信国密-域名型(DV)通配符证书
-8. 1014024 - DNSPod亚信国密-域名型(DV)多域名证书
-9. 1014020 - DNSPod亚信国密-域名型(DV)证书
-10. 1013949 - DNSPod SSL 域名型SSL证书(C1)
-11. 1013953 - DNSPod SSL域名型多域名SSL证书(C1)
-12. 1013951 - DNSPod-SSL域名型DV（泛域名）
-13. 1013955 - DNSPod 企业型SSL证书(C1)
-14. 1013959 - DNSPod 企业型多域名SSL证书(C1)
-15. 1013957 - DNSPod 企业型通配符SSL证书(C1)
-16. 1013961 - DNSPod 增强型 SSL 证书(C1)
-17. 1013963 - DNSPod 增强型多域名SSL证书(C1)
-18. 1005919 - TrustAsia-域名型DV（通配符多域名）
-19. 1013882 - SecureSite-增强型专业版EVPro（多域名）
-20. 1018559 - SecureSite-增强型专业版EVPro（单域名）
-21. 1013910 - GlobalSign-增强型EV（多域名）
-22. 1013904 - GlobalSign-增强型EV（单域名）
-23. 1013898 - TrustAsia-增强型EV（多域名）
-24. 1013888 - TrustAsia-增强型EV（单域名）
-25. 1013886 - GeoTrust-增强型EV（多域名）
-26. 1018529 - GeoTrust-增强型EV（单域名）
-27. 1013880 - SecureSite-增强型EV（多域名）
-28. 1018557 - SecureSite-增强型EV（单域名）
-29. 1018586 - TrustAsia-域名型DV（泛域名）
-30. 1018584 - TrustAsia-域名型DV（多域名）
-31. 1013878 - SecureSite-企业型专业版OV Pro（多域名）
-32. 1018582 - SecureSite-企业型专业版OV Pro（单域名）
-33. 1013908 - GlobalSign-企业型OV（通配符多域名）
-34. 1013902 - GlobalSign-企业型OV（泛域名）
-35. 1013906 - GlobalSign-企业型OV（多域名）
-36. 1013900 - GlobalSign-企业型OV（单域名）
-37. 1013896 - TrustAsia-企业型OV（通配符多域名）
-38. 1013892 - TrustAsia-企业型OV（泛域名）
-39. 1013894 - TrustAsia-企业型OV（多域名）
-40. 1013890 - TrustAsia-企业型OV（单域名）
-41. 1004360 - GeoTrust-企业型OV（泛域名）
-42. 1013884 - GeoTrust-企业型OV（单域名）
-43. 1013874 - SecureSite-企业型OV（泛域名）
-44. 1013876 - SecureSite-企业型OV（多域名）
-45. 1018580 - SecureSite-企业型OV（单域名）
-46. 1004460 - DNSPod-国密增强型证书（多域名）
-47. 1004458 - DNSPod-国密增强型证书
-48. 1004370 - DNSPod-国密企业型证书（通配符）
-49. 1004368 - DNSPod-国密企业型证书（多域名）
-50. 1004366 - DNSPod-国密企业型证书
-51. 1004362 - DNSPod-国密域名型证书（通配符）
-52. 1004364 - DNSPod-国密域名型证书（多域名）
-53. 1004358 - DNSPod-国密域名型证书
-54. 1004456 - WoTrus-增强型证书（多域名）
-55. 1004454 - WoTrus-增强型证书
-56. 1004168 - WoTrus-企业型证书（通配符）
-57. 1004166 - WoTrus-企业型证书（多域名）
-58. 1004164 - WoTrus-企业型证书
-59. 1004159 - WoTrus-域名型证书（通配符）
-60. 1004161 - WoTrus-域名型证书（多域名）
-61. 1004157 - WoTrus-域名型证书
+   * 成功删除的CSR ID 标识
    */
-  ProductPid: number
+  Success?: Array<number | bigint>
   /**
-   * 要消耗的权益包ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PackageIds: Array<string>
-  /**
-   * 证书域名数量。
-   */
-  DomainCount: string
-  /**
-   * 多年期证书年限。
-   */
-  Period: number
-  /**
-   * 要续费的原证书ID（续费时填写）。
-   */
-  OldCertificateId?: string
-  /**
-   * 续费时CSR生成方式（original、upload、online）。
-   */
-  RenewGenCsrMethod?: string
-  /**
-   * 续费时选择上传CSR时填写CSR。
-   */
-  RenewCsr?: string
-  /**
-   * 续费证书CSR的算法类型：RSA,ECC,SM2
-   */
-  RenewAlgorithmType?: string
-  /**
-   * 续费证书CSR的算法参数:2048,4096,prime256v1
-   */
-  RenewAlgorithmParam?: string
-  /**
-   * 项目ID。
-   */
-  ProjectId?: number
-  /**
-   * 标签。
-   */
-  Tags?: Array<Tags>
-  /**
-   * 续费证书的私钥密码。
-   */
-  RenewKeyPass?: string
-  /**
-   * 批量购买证书时预填写的域名。
-   */
-  DomainNames?: string
-  /**
-   * 批量购买证书数量。
-   */
-  CertificateCount?: number
-  /**
-   * 预填写的管理人ID。
-   */
-  ManagerId?: number
-  /**
-   * 预填写的公司ID。
-   */
-  CompanyId?: number
-  /**
-   * 验证方式
-   */
-  VerifyType?: string
-  /**
-   * 询价参数，以下是对每个询价参数及其对应的证书文字说明：
-1. sv_ssl_cost_cfca_ca_ev - CFCA-增强型(EV)SSL证书
-2. sv_ssl_cost_cfca_ca_ovwildcard - CFCA-企业型(OV) SSL证书(通配符)
-3. sv_ssl_cost_cfca_ca_ov - CFCA-企业型(OV)SSL证书
-4. sv_ssl_cost_dnspod_ca_sm2_ovwildcard - DNSPod亚信国密-企业型(OV)通配符证书
-5. sv_ssl_cost_dnspod_ca_sm2_ovmultidomain - DNSPod亚信国密-企业型(OV)多域名证书
-6. sv_ssl_cost_dnspod_ca_sm2_ov - DNSPod亚信国密-企业型(OV)证书
-7. sv_ssl_cost_dnspod_ca_sm2_dvwildcard - DNSPod亚信国密-域名型(DV)通配符证书
-8. sv_ssl_cost_dnspod_ca_sm2_dvmultidomain - DNSPod亚信国密-域名型(DV)多域名证书
-9. sv_ssl_cost_dnspod_ca_sm2_dv - DNSPod亚信国密-域名型(DV)证书
-10. sv_ssl_cost_dnspod_ca_dv - DNSPod SSL 域名型SSL证书(C1)
-11. sv_ssl_cost_dnspod_ca_dvmultidomain - DNSPod SSL域名型多域名SSL证书(C1)
-12. sv_ssl_cost_dnspod_ca_dvwildcard - DNSPod-SSL域名型DV（泛域名）
-13. sv_ssl_cost_dnspod_ca_ov - DNSPod 企业型SSL证书(C1)
-14. sv_ssl_cost_dnspod_ca_ovmultidomain - DNSPod 企业型多域名SSL证书(C1)
-15. sv_ssl_cost_dnspod_ca_ovwildcard - DNSPod 企业型通配符SSL证书(C1)
-16. sv_ssl_cost_dnspod_ca_ev - DNSPod 增强型 SSL 证书(C1)
-17. sv_ssl_cost_dnspod_ca_evmultidomain - DNSPod 增强型多域名SSL证书(C1)
-18. sv_ssl_cost_trustasia_dvwildcardmulti - TrustAsia-域名型DV（通配符多域名）
-19. sv_ssl_cost_securesiteevpromul_sh - SecureSite-增强型专业版EVPro（多域名）
-20. sv_ssl_cost_symantec_evpro - SecureSite-增强型专业版EVPro（单域名）
-21. sv_ssl_cost_globalsign_ev_mul_sh - GlobalSign-增强型EV（多域名）
-22. sv_ssl_cost_globalsign_ev - GlobalSign-增强型EV（单域名）
-23. sv_ssl_cost_trustasia_evmultidomain - TrustAsia-增强型EV（多域名）
-24. sv_ssl_cost_trustasia_ev - TrustAsia-增强型EV（单域名）
-25. sv_ssl_cost_geotrust_evmultidomain - GeoTrust-增强型EV（多域名）
-26. sv_ssl_cost_geotrust_ev - GeoTrust-增强型EV（单域名）
-27. sv_ssl_cost_symantec_evmultidomain - SecureSite-增强型EV（多域名）
-28. sv_ssl_cost_symantec_ev - SecureSite-增强型EV（单域名）
-29. sv_ssl_cost_trustasia_dvwildcard - TrustAsia-域名型DV（泛域名）
-30. sv_ssl_cost_trustasia_dvmultidomain - TrustAsia-域名型DV（多域名）
-31. sv_ssl_cost_symantec_ovpromultidomain - SecureSite-企业型专业版OV Pro（多域名）
-32. sv_ssl_cost_symantec_ovpro - SecureSite-企业型专业版OV Pro（单域名）
-33. sv_ssl_cost_globalsign_ovwildcardmulti - GlobalSign-企业型OV（通配符多域名）
-34. sv_ssl_cost_globalsign_ovwildcard - GlobalSign-企业型OV（泛域名）
-35. sv_ssl_cost_globalsign_ovmultidomain - GlobalSign-企业型OV（多域名）
-36. sv_ssl_cost_globalsign_ov - GlobalSign-企业型OV（单域名）
-37. sv_ssl_cost_trustasia_ovwildcardmulti - TrustAsia-企业型OV（通配符多域名）
-38. sv_ssl_cost_trustasia_ovwildcard - TrustAsia-企业型OV（泛域名）
-39. sv_ssl_cost_trustasia_ovmultidomain - TrustAsia-企业型OV（多域名）
-40. sv_ssl_cost_trustasia_ov - TrustAsia-企业型OV（单域名）
-41. sv_ssl_cost_geotrust_ovwildcard - GeoTrust-企业型OV（泛域名）
-42. sv_ssl_cost_geotrust_ov - GeoTrust-企业型OV（单域名）
-43. sv_ssl_cost_symantec_ovwildcard - SecureSite-企业型OV（泛域名）
-44. sv_ssl_cost_symantec_ovmultidomain - SecureSite-企业型OV（多域名）
-45. sv_ssl_cost_symantec_ov - SecureSite-企业型OV（单域名）
-46. sv_ssl_cost_dnspod_evmultidomain - DNSPod-国密增强型证书（多域名）
-47. sv_ssl_cost_dnspod_ev - DNSPod-国密增强型证书
-48. sv_ssl_cost_dnspod_ovwildcard - DNSPod-国密企业型证书（通配符）
-49. sv_ssl_cost_dnspod_ovmultidomain - DNSPod-国密企业型证书（多域名）
-50. sv_ssl_cost_dnspod_ov - DNSPod-国密企业型证书
-51. sv_ssl_cost_dnspod_dvwildcard - DNSPod-国密域名型证书（通配符）
-52. sv_ssl_cost_dnspod_dvmultidomain - DNSPod-国密域名型证书（多域名）
-53. sv_ssl_cost_dnspod_dv - DNSPod-国密域名型证书
-54. sv_ssl_cost_wotrus_evmultidomain - WoTrus-增强型证书（多域名）
-55. sv_ssl_cost_wotrus_ev - WoTrus-增强型证书
-56. sv_ssl_cost_wotrus_ovwildcard - WoTrus-企业型证书（通配符）
-57. sv_ssl_cost_wotrus_ovmultidomain - WoTrus-企业型证书（多域名）
-58. sv_ssl_cost_wotrus_ov - WoTrus-企业型证书
-59. sv_ssl_cost_wotrus_dvwildcard - WoTrus-域名型证书（通配符）
-60. sv_ssl_cost_wotrus_dvmultidomain - WoTrus-域名型证书（多域名）
-61. sv_ssl_cost_wotrus_dv - WoTrus-域名型证书
-   */
-  PriceKey?: string
+  RequestId?: string
 }
 
 /**
@@ -3859,6 +3943,76 @@ DNS：手动添加域名DNS验证，需用户手动去域名解析服务商添�
 FILE：手动添加域名文件验证。 需要用户手动在域名站点根目录添加指定路径文件进行文件验证， http&https任一通过即可；且域名站点需海外CA机构能访问， 具体访问白名单为：64.78.193.238，216.168.247.9，216.168.249.9，54.189.196.217
    */
   VerifyType?: string
+}
+
+/**
+ * CSR详情
+ */
+export interface CSRItem {
+  /**
+   * <p>CSR Id标识</p>
+   */
+  Id?: number
+  /**
+   * <p>账号</p>
+   */
+  OwnerUin?: string
+  /**
+   * <p>域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>企业/单位名称</p>
+   */
+  Organization?: string
+  /**
+   * <p>部门</p>
+   */
+  Department?: string
+  /**
+   * <p>邮箱</p>
+   */
+  Email?: string
+  /**
+   * <p>省份</p>
+   */
+  Province?: string
+  /**
+   * <p>城市</p>
+   */
+  City?: string
+  /**
+   * <p>国家</p>
+   */
+  Country?: string
+  /**
+   * <p>备注</p>
+   */
+  Remarks?: string
+  /**
+   * <p>状态</p>
+   */
+  Status?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>算法</p>
+   */
+  EncryptAlgo?: string
+  /**
+   * <p>算法参数</p>
+   */
+  KeyParameter?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<Tags>
+  /**
+   * <p>SAN域名</p>
+   */
+  SubjectAltName?: Array<string>
 }
 
 /**
@@ -4240,6 +4394,68 @@ export interface DeployedResources {
 }
 
 /**
+ * CreateCSR请求参数结构体
+ */
+export interface CreateCSRRequest {
+  /**
+   * <p>域名</p>
+   */
+  Domain: string
+  /**
+   * <p>企业/单位名称</p>
+   */
+  Organization: string
+  /**
+   * <p>部门</p>
+   */
+  Department: string
+  /**
+   * <p>邮箱</p>
+   */
+  Email: string
+  /**
+   * <p>省份</p>
+   */
+  Province: string
+  /**
+   * <p>城市</p>
+   */
+  City: string
+  /**
+   * <p>符合ISO 3166 标准的国家或地域代码。如:CN、US</p>
+   */
+  Country: string
+  /**
+   * <p>加密算法，支持 RSA及ECC。</p>
+   */
+  EncryptAlgo: string
+  /**
+   * <p>密钥参数，RSA仅支持2048，4096。ECC仅支持prime256v1</p>
+   */
+  KeyParameter: string
+  /**
+   * <p>是否生成CSR内容。生成CSR内容后，此CSR记录不再支持修改</p>
+   */
+  Generate: boolean
+  /**
+   * <p>私钥密码</p>
+   */
+  KeyPassword?: string
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<Tags>
+  /**
+   * <p>SAN域名</p>
+   */
+  SubjectAltName?: Array<string>
+}
+
+/**
  * 托管记录
  */
 export interface DeployRecord {
@@ -4331,7 +4547,7 @@ export interface UploadUpdateCertificateRecordRetryResponse {
  */
 export interface DescribeCertificateRequest {
   /**
-   * 证书 ID。
+   * <p>证书 ID。</p>
    */
   CertificateId: string
 }
@@ -4878,17 +5094,21 @@ export interface SubmittedData {
 }
 
 /**
- * DeployCertificateRecordRollback返回参数结构体
+ * DescribeCompanies请求参数结构体
  */
-export interface DeployCertificateRecordRollbackResponse {
+export interface DescribeCompaniesRequest {
   /**
-   * 回滚部署记录ID
+   * 分页偏移量，默认值为0.
    */
-  DeployRecordId?: number
+  Offset?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分页每页限制数，默认值为0，最大值1000.
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * 公司ID
+   */
+  CompanyId?: number
 }
 
 /**
@@ -5851,6 +6071,10 @@ export interface DescribeCertificateDetailResponse {
    */
   HostingStatus?: number
   /**
+   * <p>是否可重新提交。</p>
+   */
+  ResubmitAble?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6009,29 +6233,17 @@ export interface BindResourceRegionResult {
 }
 
 /**
- * tke实例详情
+ * ModifyCertificateProject请求参数结构体
  */
-export interface TkeInstanceDetail {
+export interface ModifyCertificateProjectRequest {
   /**
-   * 集群ID
+   * 需要修改所属项目的证书 ID 集合，最多100个证书。
    */
-  ClusterId?: string
+  CertificateIdList: Array<string>
   /**
-   * 集群名称
+   * 项目 ID。
    */
-  ClusterName?: string
-  /**
-   * 集群命名空间列表
-   */
-  NamespaceList?: Array<TkeNameSpaceDetail>
-  /**
-   * 集群类型
-   */
-  ClusterType?: string
-  /**
-   * 集群版本
-   */
-  ClusterVersion?: string
+  ProjectId: number
 }
 
 /**
@@ -6081,6 +6293,91 @@ export interface TCBEnvironments {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostService?: TCBHostService
+}
+
+/**
+ * DescribeCSR返回参数结构体
+ */
+export interface DescribeCSRResponse {
+  /**
+   * <p>CSR Id标识</p>
+   */
+  Id?: number
+  /**
+   * <p>账号</p>
+   */
+  OwnerUin?: string
+  /**
+   * <p>域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>企业/单位名称</p>
+   */
+  Organization?: string
+  /**
+   * <p>部门</p>
+   */
+  Department?: string
+  /**
+   * <p>邮箱</p>
+   */
+  Email?: string
+  /**
+   * <p>省份</p>
+   */
+  Province?: string
+  /**
+   * <p>城市</p>
+   */
+  City?: string
+  /**
+   * <p>国家</p>
+   */
+  Country?: string
+  /**
+   * <p>密钥算法</p>
+   */
+  EncryptAlgo?: string
+  /**
+   * <p>算法参数</p>
+   */
+  KeyParameter?: string
+  /**
+   * <p>备注</p>
+   */
+  Remarks?: string
+  /**
+   * <p>状态</p>
+   */
+  Status?: number
+  /**
+   * <p>私钥密码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyPassword?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>CSR内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CSR?: string
+  /**
+   * <p>私钥内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateKey?: string
+  /**
+   * <p>SAN域名</p>
+   */
+  SubjectAltName?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6393,21 +6690,17 @@ export interface SCFInstanceList {
 }
 
 /**
- * DescribeCompanies请求参数结构体
+ * DeployCertificateRecordRollback返回参数结构体
  */
-export interface DescribeCompaniesRequest {
+export interface DeployCertificateRecordRollbackResponse {
   /**
-   * 分页偏移量，默认值为0.
+   * 回滚部署记录ID
    */
-  Offset?: number
+  DeployRecordId?: number
   /**
-   * 分页每页限制数，默认值为0，最大值1000.
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 公司ID
-   */
-  CompanyId?: number
+  RequestId?: string
 }
 
 /**

@@ -67,7 +67,7 @@ import {
   UpdateFolderResponse,
   RerunWorkflowRunRequest,
   LabelBrief,
-  DeleteTableResponse,
+  CreateLocationRequest,
   CreateConsoleGroupRsp,
   Owner,
   ModelVersionInfo,
@@ -282,6 +282,7 @@ import {
   DeleteViewResponse,
   ListWorkflowRunsRsp,
   DeleteWorkspaceRoleResult,
+  ListLocationItem,
   StopComputeResponse,
   RoleBasicInfo,
   StopComputeRsp,
@@ -301,7 +302,7 @@ import {
   UpdateTableColumnRsp,
   OrderBy,
   DeleteFolderRsp,
-  CreateLocationRequest,
+  DeleteTableResponse,
   WorkflowAdvanceConfig,
   MonitorMetricItem,
   CreateWorkflowResponse,
@@ -384,6 +385,7 @@ import {
   UpdateFileRequest,
   GetWorkflowRunRequest,
   ListFeatureTablesResponse,
+  CosEventSubscription,
   ListCatalogsRequest,
   FileConfig,
   ListTablesRequest,
@@ -892,7 +894,7 @@ export class Client extends AbstractClient {
 使用场景：在数据湖仓库中创建新的存储位置
      */
   async CreateLocation(
-    req?: CreateLocationRequest,
+    req: CreateLocationRequest,
     cb?: (error: string, rep: CreateLocationResponse) => void
   ): Promise<CreateLocationResponse> {
     return this.request("CreateLocation", req, cb)

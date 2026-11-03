@@ -88,23 +88,23 @@ export interface DispatchStrategyRequest {
  */
 export interface DescribeStrategiesRequest {
   /**
-   * 产品类型
+   * <p>产品类型</p>
    */
   Product?: string
   /**
-   * 执行区域：pre是前区，post 是后区
+   * <p>执行区域：pre是前区，post 是后区</p>
    */
   ExecArea?: string
   /**
-   * 筛选条件
+   * <p>筛选条件</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 条数限制
+   * <p>条数限制</p>
    */
   Limit?: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
 }
@@ -421,6 +421,11 @@ export interface OrganMemberItem {
    */
   CfwSharerAppId?: string
   /**
+   * <p>共享者MemberId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CfwSharerMemberId?: string
+  /**
    * <p>云防火墙计费实例 ID，非空表示已购买云防火墙</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -455,6 +460,10 @@ export interface OrganMemberItem {
    * <p>是否是后付费云防版本</p><p>枚举值：</p><ul><li>1： 后付费</li><li>0： 非后付费</li><li>-1： 未知</li></ul>
    */
   IsCfwPostPay?: number
+  /**
+   * <p>企业安全组免费额度领取态：0-未领用，1-已领用（永久领取态）</p>
+   */
+  SgFreeClaimed?: number
 }
 
 /**
@@ -462,7 +471,7 @@ export interface OrganMemberItem {
  */
 export interface DescribeStrategyResponse {
   /**
-   * 策略详情
+   * <p>策略详情</p>
    */
   Strategy?: StrategyResp
   /**
@@ -510,11 +519,11 @@ export interface DescribeEdgeAclRulesRequest {
  */
 export interface DescribeStrategiesResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
-   * 策略列表
+   * <p>策略列表</p>
    */
   Strategies?: Array<StrategyResp>
   /**
@@ -740,7 +749,7 @@ export interface DescribeSecurityGroupRuleRequest {
  */
 export interface DescribeStrategyRequest {
   /**
-   * 策略Id
+   * <p>策略Id</p>
    */
   StrategyId?: string
 }
@@ -840,67 +849,71 @@ export interface ModifyEdgeAclRuleSequenceRequest {
  */
 export interface StrategyResp {
   /**
-   * 策略Id
+   * <p>策略Id</p>
    */
   StrategyId?: string
   /**
-   * 规则组Id
+   * <p>规则组Id</p>
    */
   GroupId?: string
   /**
-   * 规则组名称
+   * <p>产品类型</p>
+   */
+  Product?: string
+  /**
+   * <p>规则组名称</p>
    */
   GroupName?: string
   /**
-   * 规则数
+   * <p>规则数</p>
    */
   RuleCount?: number
   /**
-   * 策略状态
+   * <p>策略状态</p>
    */
   RuleStatus?: number
   /**
-   * 下发账号
+   * <p>下发账号</p>
    */
   ReceiveAccount?: Array<ReceiveAccount>
   /**
-   * 优先级
+   * <p>优先级</p>
    */
   Sequence?: number
   /**
-   * 下发失败原因
+   * <p>下发失败原因</p>
    */
   ErrMsg?: string
   /**
-   * 下发失败原因类型
+   * <p>下发失败原因类型</p>
    */
   ErrorType?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 创建人
+   * <p>创建人</p>
    */
   CreateBy?: string
   /**
-   * 更新人
+   * <p>更新人</p>
    */
   UpdateBy?: string
   /**
-   * 执行区域
+   * <p>执行区域</p>
    */
   ExecArea?: string
   /**
-   * 创建人名称
+   * <p>创建人名称</p>
    */
   CreateName?: string
   /**
-   * 更新人名称
+   * <p>更新人名称</p>
    */
   UpdateName?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
 }
@@ -986,11 +999,11 @@ export interface ModifyAccountGroupRequest {
  */
 export interface DescribeOrganMembersResponse {
   /**
-   * 集团成员总数
+   * <p>集团成员总数</p>
    */
   TotalCount?: number
   /**
-   * 集团成员列表
+   * <p>集团成员列表</p>
    */
   Members?: Array<OrganMemberItem>
   /**
@@ -1415,17 +1428,17 @@ export interface VpcAclRule {
  */
 export interface CommonFilter {
   /**
-   * 筛选字段名
+   * <p>筛选字段名。支持：SecurityGroupId、FwGroupId、IP（IP地址模糊搜索）、InstanceName（实例名称模糊搜索）、VpcId（VPC ID精确搜索）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 筛选值列表
+   * <p>筛选值列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
   /**
-   * 操作类型：1=精确匹配，7=in，9=模糊匹配
+   * <p>操作类型。1=等于，7=in，9=模糊匹配</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperatorType?: number
@@ -2110,23 +2123,23 @@ export interface ModifySecurityGroupRuleResponse {
  */
 export interface DescribeOrganMembersRequest {
   /**
-   * 搜索过滤条件列表，支持按成员 ID、账号名称、身份、纳管状态等字段筛选
+   * <p>搜索过滤条件列表，支持按成员 ID、账号名称、身份、纳管状态等字段筛选</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 分页大小，默认 20
+   * <p>分页大小，默认 20</p>
    */
   Limit?: number
   /**
-   * 分页偏移量，默认 0
+   * <p>分页偏移量，默认 0</p>
    */
   Offset?: number
   /**
-   * 排序字段，如 MemberCreateTime
+   * <p>排序字段，如 MemberCreateTime</p>
    */
   By?: string
   /**
-   * 排序方式：asc 升序，desc 降序
+   * <p>排序方式：asc 升序，desc 降序</p>
    */
   Order?: string
 }

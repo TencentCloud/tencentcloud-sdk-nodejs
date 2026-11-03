@@ -1890,19 +1890,19 @@ export interface DescribeAuditRuleWithInstanceIdsRequest {
  */
 export interface DescribeClusterDatabasesResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   TotalCount?: number
   /**
-   * 分页偏移
+   * <p>分页偏移</p>
    */
   Offset?: number
   /**
-   * 数据库列表
+   * <p>数据库列表</p>
    */
   Databases?: Array<string>
   /**
-   * 分页限制数
+   * <p>分页限制数</p>
    */
   Limit?: number
   /**
@@ -8929,15 +8929,19 @@ export interface DisassociateSecurityGroupsResponse {
  */
 export interface DescribeClusterDatabasesRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId: string
   /**
-   * 分页偏移
+   * <p>DB库名（支持模糊匹配）</p>
+   */
+  FuzzyDBNames?: Array<string>
+  /**
+   * <p>分页偏移</p>
    */
   Offset?: number
   /**
-   * 分页限制数量
+   * <p>分页限制数量</p>
    */
   Limit?: number
 }
@@ -10623,7 +10627,7 @@ export interface RenewClustersRequest {
  */
 export interface OpenClusterReadOnlyInstanceGroupAccessResponse {
   /**
-   * 开启流程ID
+   * <p>开启流程ID</p>
    */
   FlowId?: number
   /**
@@ -11434,15 +11438,15 @@ export interface DescribeResourcePackageSaleSpecResponse {
  */
 export interface OpenClusterReadOnlyInstanceGroupAccessRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   Port: string
   /**
-   * 安全组ID
+   * <p>安全组ID</p>
    */
   SecurityGroupIds?: Array<string>
 }

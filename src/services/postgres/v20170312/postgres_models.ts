@@ -1243,35 +1243,35 @@ export interface ModifyBackupDownloadRestrictionRequest {
  */
 export interface DBInstanceNetInfo {
   /**
-   * DNS域名
+   * <p>DNS域名</p>
    */
   Address?: string
   /**
-   * IP地址
+   * <p>IP地址</p>
    */
   Ip?: string
   /**
-   * 连接Port地址
+   * <p>连接Port地址</p>
    */
   Port?: number
   /**
-   * 网络类型，1、inner（基础网络内网地址）；2、private（私有网络内网地址）；3、public（基础网络或私有网络的外网地址）；
+   * <p>网络类型，1、inner（基础网络内网地址）；2、private（私有网络内网地址）；3、public（基础网络或私有网络的外网地址）；</p>
    */
   NetType?: string
   /**
-   * 网络连接状态，1、initing（未开通）；2、opened（已开通）；3、closed（已关闭）；4、opening（开通中）；5、closing（关闭中）；
+   * <p>网络连接状态，1、initing（未开通）；2、opened（已开通）；3、closed（已关闭）；4、opening（开通中）；5、closing（关闭中）；</p>
    */
   Status?: string
   /**
-   * 私有网络ID
+   * <p>私有网络ID</p>
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: string
   /**
-   * 连接数据库的协议类型，当前支持：postgresql、mssql（MSSQL兼容语法）
+   * <p>连接数据库的协议类型，当前支持：postgresql、mssql（MSSQL兼容语法）</p>
    */
   ProtocolType?: string
 }
@@ -4226,25 +4226,24 @@ export interface CreateDBProxyResponse {
  */
 export interface InquiryPriceUpgradeDBInstanceRequest {
   /**
-   * 实例的磁盘大小，单位GB
+   * <p>实例的磁盘大小，单位GB</p>
    */
   Storage: number
   /**
-   * 实例的内存大小，单位GB
+   * <p>实例的内存大小，单位GB</p>
    */
   Memory: number
   /**
-   * 实例ID，形如postgres-hez4fh0v。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID，形如postgres-hez4fh0v。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
   /**
-   * 实例计费类型。
+   * <p>实例计费类型。</p>
    * @deprecated
    */
   InstanceChargeType?: string
   /**
-   * 实例的Cpu大小，单位Core。
-不传入此参数时，默认根据Memory确定的售卖规格所对应的Cpu进行设置。如Memory为2，支持的售卖规格有1核2GiB，则不传入Cpu时，Cpu默认为1。
+   * <p>实例的Cpu大小，单位Core。<br>不传入此参数时，默认根据Memory确定的售卖规格所对应的Cpu进行设置。如Memory为2，支持的售卖规格有1核2GiB，则不传入Cpu时，Cpu默认为1。</p>
    */
   Cpu?: number
 }
@@ -6185,15 +6184,15 @@ export interface OpenPostgRESTServiceRequest {
  */
 export interface InquiryPriceUpgradeDBInstanceResponse {
   /**
-   * 刊例价费用
+   * <p>刊例价费用</p>
    */
   OriginalPrice?: number
   /**
-   * 折后实际付款金额
+   * <p>折后实际付款金额</p>
    */
   Price?: number
   /**
-   * 币种。例如，CNY：人民币。
+   * <p>币种。例如，CNY：人民币。</p>
    */
   Currency?: string
   /**

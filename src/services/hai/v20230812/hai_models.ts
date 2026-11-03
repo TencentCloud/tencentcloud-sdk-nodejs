@@ -365,6 +365,10 @@ export interface ServiceDetail {
    */
   HyperParam?: HyperParam
   /**
+   * <p>角色状态</p>
+   */
+  RoleStatuses?: Array<RoleStatusInfo>
+  /**
    * <p>安全类型</p>
    */
   SecurityType?: string
@@ -1031,6 +1035,48 @@ export interface InquirePriceRunInstancesRequest {
    * 预付费参数
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
+}
+
+/**
+ * 角色状态信息
+ */
+export interface RoleStatusInfo {
+  /**
+   *
+   */
+  RoleName?: string
+  /**
+   *
+   */
+  WorkloadType?: string
+  /**
+   *
+   */
+  WorkloadName?: string
+  /**
+   *
+   */
+  RunningReplicas?: number
+  /**
+   *
+   */
+  TargetReplicas?: number
+  /**
+   *
+   */
+  ContainerCount?: number
+  /**
+   *
+   */
+  State?: string
+  /**
+   *
+   */
+  LastObservedTime?: string
+  /**
+   *
+   */
+  Role?: string
 }
 
 /**

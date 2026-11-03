@@ -58,6 +58,16 @@ it("tse.v20201207.UpdateEngineInternetAccess", async function () {
     }
 })
 
+it("tse.v20201207.DescribeAIGWCustomGuardrailBindableResources", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailBindableResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeCloudNativeAPIGatewayServiceRateLimit", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayServiceRateLimit({})
@@ -238,9 +248,29 @@ it("tse.v20201207.DescribeZookeeperReplicas", async function () {
     }
 })
 
+it("tse.v20201207.CreateAIGWCustomGuardrailPolicy", async function () {
+    try {
+       const data = await client.CreateAIGWCustomGuardrailPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DeleteGovernanceInstances", async function () {
     try {
        const data = await client.DeleteGovernanceInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeAIGWCustomGuardrailCapabilities", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailCapabilities({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +358,16 @@ it("tse.v20201207.DeleteCloudNativeAPIGatewayCertificate", async function () {
     }
 })
 
+it("tse.v20201207.DescribeAIGWCustomGuardrailPolicy", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeGovernanceServiceContracts", async function () {
     try {
        const data = await client.DescribeGovernanceServiceContracts({})
@@ -381,6 +421,16 @@ it("tse.v20201207.DescribePublicNetwork", async function () {
 it("tse.v20201207.DeleteCloudNativeAPIGatewayServiceRateLimit", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayServiceRateLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DeleteAIGWCustomGuardrailPolicy", async function () {
+    try {
+       const data = await client.DeleteAIGWCustomGuardrailPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,16 +591,6 @@ it("tse.v20201207.CloseWafProtection", async function () {
 it("tse.v20201207.CreateCloudNativeAPIGateway", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGateway({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tse.v20201207.DeleteGovernanceAliases", async function () {
-    try {
-       const data = await client.DeleteGovernanceAliases({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -928,6 +968,16 @@ it("tse.v20201207.DescribeGovernanceServices", async function () {
     }
 })
 
+it("tse.v20201207.DescribeAIGWCustomGuardrailPolicyList", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailPolicyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DeleteCloudNativeAPIGatewayCanaryRule", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayCanaryRule({})
@@ -1078,6 +1128,16 @@ it("tse.v20201207.CreateGovernanceNamespaces", async function () {
     }
 })
 
+it("tse.v20201207.DescribeCloudNativeAPIGatewaySecretKey", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewaySecretKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.AddCloudNativeAPIGatewayConsumerInGroup", async function () {
     try {
        const data = await client.AddCloudNativeAPIGatewayConsumerInGroup({})
@@ -1168,9 +1228,9 @@ it("tse.v20201207.DeleteCloudNativeAPIGatewayLLMModelService", async function ()
     }
 })
 
-it("tse.v20201207.DescribeCloudNativeAPIGatewaySecretKey", async function () {
+it("tse.v20201207.DeleteGovernanceAliases", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewaySecretKey({})
+       const data = await client.DeleteGovernanceAliases({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1251,6 +1311,16 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayConsumer", async function () {
 it("tse.v20201207.DescribeCloudNativeAPIGatewayUpstream", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayUpstream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeAIGWCustomGuardrailHits", async function () {
+    try {
+       const data = await client.DescribeAIGWCustomGuardrailHits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1378,6 +1448,16 @@ it("tse.v20201207.DeleteCloudNativeAPIGatewayService", async function () {
     }
 })
 
+it("tse.v20201207.ExportAIGWCustomGuardrailHits", async function () {
+    try {
+       const data = await client.ExportAIGWCustomGuardrailHits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeCloudNativeAPIGatewayRoutes", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayRoutes({})
@@ -1441,6 +1521,16 @@ it("tse.v20201207.ModifyCloudNativeAPIGatewayConsumer", async function () {
 it("tse.v20201207.DescribeCNGWServicesWithRoutes", async function () {
     try {
        const data = await client.DescribeCNGWServicesWithRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.ModifyAIGWCustomGuardrailPolicy", async function () {
+    try {
+       const data = await client.ModifyAIGWCustomGuardrailPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

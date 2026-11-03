@@ -966,37 +966,41 @@ export interface CreateCheckResponse {
  */
 export interface CreateSeedsRequest {
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
   CustomerId: number
   /**
-   * ip种子数组
+   * <p>ip种子数组</p>
    */
   Ips?: Array<string>
   /**
-   * icon种子数组
+   * <p>icon种子数组</p>
    */
   Icons?: Array<string>
   /**
-   * 主域名种子数组
+   * <p>主域名种子数组</p>
    */
   Domains?: Array<string>
   /**
-   * title种子数组
+   * <p>title种子数组</p>
    */
   Titles?: Array<string>
   /**
-   * 子域名种子数组
+   * <p>子域名种子数组</p>
    */
   SubDomains?: Array<string>
   /**
-   * 关键词种子数组
+   * <p>关键词种子数组</p>
    */
   Keywords?: Array<string>
   /**
-   * 母公司种子数组
+   * <p>母公司种子数组</p>
    */
   ParentCompanies?: Array<string>
+  /**
+   * <p>关键词用途：leakage_code代码泄露/leakage_data其他泄露/wechat_applet微信小程序/wechat_official_account微信公众号，不填=全部用途</p>
+   */
+  KeywordPurposes?: Array<string>
 }
 
 /**
@@ -5587,38 +5591,42 @@ export interface DescribeDomainsRequest {
  */
 export interface DisplaySeed {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
   CustomerId?: number
   /**
-   * 分类，包括：domain(主域名)、icon(图标)、ip(IP)、
-keyword(关键词)、parent_company(母公司)、sub_domain(子域名)、title(标题)
+   * <p>分类，包括：domain(主域名)、icon(图标)、ip(IP)、<br>keyword(关键词)、parent_company(母公司)、sub_domain(子域名)、title(标题)</p>
    */
   Category?: string
   /**
-   * 值
+   * <p>值</p>
    */
   Value?: string
   /**
-   * md5值
+   * <p>md5值</p>
    */
   Md5?: string
   /**
-   * 来源
+   * <p>来源</p>
    */
   Source?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateAt?: string
   /**
-   * 是否可信
+   * <p>是否可信</p>
    */
   IsValid?: boolean
+  /**
+   * <p>关键词用途，可多选：leakage_code代码泄露/leakage_data其他泄露/wechat_applet微信小程序/wechat_official_account微信公众号；不填=全部用途</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Purposes?: Array<string>
 }
 
 /**

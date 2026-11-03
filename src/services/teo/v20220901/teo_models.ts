@@ -10435,7 +10435,7 @@ export interface InferenceContainerConfigForModify {
    */
   StartupCommand?: string
   /**
-   * <p>容器运行时的环境变量。最多支持 10 个变量。</p>
+   * <p>容器运行时的环境变量。最多支持 50 个变量。</p>
    */
   EnvironmentVariables?: Array<InferenceEnvironmentVariable>
 }
@@ -17405,7 +17405,7 @@ export interface ModifyMultiPathGatewaySecretKeyResponse {
  */
 export interface DescribeMultiPathGatewaySecretKeyRequest {
   /**
-   * 站点 ID。
+   * <p>站点 ID。</p>
    */
   ZoneId: string
 }
@@ -17701,7 +17701,7 @@ export interface InferenceContainerConfig {
    */
   StartupCommand?: string
   /**
-   * <p>容器运行时的环境变量。最多支持 10 个变量。</p>
+   * <p>容器运行时的环境变量。最多支持 50 个变量。</p>
    */
   EnvironmentVariables?: Array<InferenceEnvironmentVariable>
 }
@@ -18817,7 +18817,7 @@ export interface SecurityTemplateBinding {
  */
 export interface DescribeMultiPathGatewaySecretKeyResponse {
   /**
-   * 接入密钥。
+   * <p>接入密钥。</p>
    */
   SecretKey?: string
   /**
