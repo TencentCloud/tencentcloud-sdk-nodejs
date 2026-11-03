@@ -144,7 +144,7 @@ import {
   ListInferenceModelsResponse,
   RayJobEventItem,
   CreateDMSTableRequest,
-  ModifySparkAppResponse,
+  GetRayServeEventRequest,
   CreatePartitionRequest,
   DMSTable,
   CreateSparkSubmitTaskResponse,
@@ -186,6 +186,7 @@ import {
   CheckQueueNameRequest,
   DataGovernPolicy,
   ListServiceApiKeysRequest,
+  DescribeScriptsRequest,
   DescribePartitionsRequest,
   CreateWorkGroupResponse,
   DescribeFlowDetailListResponse,
@@ -193,6 +194,7 @@ import {
   DescribeWorkGroupInfoResponse,
   DescribeTablesRequest,
   StartLabResponse,
+  ModifySparkAppResponse,
   CreateStoreLocationRequest,
   CheckApiKeyNameResponse,
   DescribeLakeFsInfoResponse,
@@ -298,8 +300,9 @@ import {
   DLCCatalogAccess,
   ModifyUserResponse,
   DeleteScriptResponse,
-  Task,
+  ListStoragesRequest,
   DataEngineConfigInstanceInfo,
+  COSBucketInfo,
   CrontabResumeSuspendStrategy,
   DescribeStandardEngineResourceGroupConfigInfoRequest,
   TableExpirationPolicy,
@@ -307,6 +310,7 @@ import {
   CustomConfig,
   NotebookSessions,
   SparkSessionBatchLogOperate,
+  SubmitRayJobRequest,
   CreateNotebookSessionStatementSupportBatchSQLRequest,
   UpgradeDataEngineImageResponse,
   DetachWorkGroupPolicyResponse,
@@ -326,6 +330,7 @@ import {
   DorisConnection,
   CreateModelVersionResponse,
   PauseStandardEngineResourceGroupsResponse,
+  CFSTurboFileSystemInfo,
   DescribeSaleRegionsResponse,
   ModifyLabPriorityResponse,
   DeleteStandardEngineResourceGroupRequest,
@@ -445,6 +450,7 @@ import {
   GetJobSpecResponse,
   ListLabsRequest,
   KafkaInfo,
+  SubmitRayJobResponse,
   ListTrainingJobInstanceRequest,
   FavorInfo,
   StopInferenceServiceResponse,
@@ -531,6 +537,7 @@ import {
   DeleteDataEngineResponse,
   ReplicaInfo,
   DescribePartitionQueuesRequest,
+  ListStoragesResponse,
   CosPermission,
   GetResourceConfigResponse,
   LockComponentInfo,
@@ -731,6 +738,8 @@ import {
   DataEngineImageVersion,
   ListModelVersionsResponse,
   ListInferenceEnginesRequest,
+  Task,
+  GetRayServeEventResponse,
   ModifyPartitionDescriptionResponse,
   UpdateClusterGroupResponse,
   MysqlInfo,
@@ -740,7 +749,7 @@ import {
   CreateResourceConfigRequest,
   StatementInformation,
   GetInferenceModelResponse,
-  DeleteResourceConfigResponse,
+  CreateUserRoleResponse,
   DeleteThirdPartyAccessUserResponse,
   ImportExternalClusterResponse,
   DescribeSaleResourceInfoResponse,
@@ -778,6 +787,7 @@ import {
   LockMetaDataRequest,
   SQLTask,
   NetWork,
+  GooseFSClustersInfo,
   ListExampleDifficultiesResponse,
   AttachUserPolicyResponse,
   CreateDMSDatabaseRequest,
@@ -830,7 +840,7 @@ import {
   GetRayClusterPodsResponse,
   DescribeStandardEngineResourceGroupsResponse,
   ListResourceConfigsResponse,
-  CreateUserRoleResponse,
+  DeleteResourceConfigResponse,
   DescribeTaskLogResponse,
   DescribeTasksResponse,
   DropDMSPartitionsRequest,
@@ -910,7 +920,7 @@ import {
   DescribeWorkGroupsResponse,
   SparkJobInfo,
   StopDeploymentRequest,
-  DescribeScriptsRequest,
+  CFSFileSystemInfo,
   ViewBaseInfo,
   DescribeSparkAppJobResponse,
   HiveTablePartition,
@@ -1126,6 +1136,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWorkGroupInfoResponse) => void
   ): Promise<DescribeWorkGroupInfoResponse> {
     return this.request("DescribeWorkGroupInfo", req, cb)
+  }
+
+  /**
+   * 通过 ResourceManager 调用 CLS SearchLog API 查询 RayServe 部署相关事件日志。不返回总数，使用 Context 进行翻页，ListOver 标识是否还有更多数据。
+   */
+  async GetRayServeEvent(
+    req: GetRayServeEventRequest,
+    cb?: (error: string, rep: GetRayServeEventResponse) => void
+  ): Promise<GetRayServeEventResponse> {
+    return this.request("GetRayServeEvent", req, cb)
   }
 
   /**
@@ -2161,6 +2181,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: ListInferenceEnginesResponse) => void
   ): Promise<ListInferenceEnginesResponse> {
     return this.request("ListInferenceEngines", req, cb)
+  }
+
+  /**
+   * 提交新的Ray任务到指定集群
+   */
+  async SubmitRayJob(
+    req: SubmitRayJobRequest,
+    cb?: (error: string, rep: SubmitRayJobResponse) => void
+  ): Promise<SubmitRayJobResponse> {
+    return this.request("SubmitRayJob", req, cb)
   }
 
   /**
@@ -4351,6 +4381,16 @@ RunID, ExperimentID 对应MLflow 实验追踪用的参数 RunID, ExperimentID
     cb?: (error: string, rep: CreateMlflowServerResponse) => void
   ): Promise<CreateMlflowServerResponse> {
     return this.request("CreateMlflowServer", req, cb)
+  }
+
+  /**
+   * 根据集群ID列出所有Ray任务
+   */
+  async ListStorages(
+    req: ListStoragesRequest,
+    cb?: (error: string, rep: ListStoragesResponse) => void
+  ): Promise<ListStoragesResponse> {
+    return this.request("ListStorages", req, cb)
   }
 
   /**

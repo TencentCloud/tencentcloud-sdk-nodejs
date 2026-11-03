@@ -524,9 +524,17 @@ export interface DescribeVersionDetailRequest {
 }
 
 /**
- * StopVersionInstance返回参数结构体
+ * InitializeCloudRunResource返回参数结构体
  */
-export interface StopVersionInstanceResponse {
+export interface InitializeCloudRunResourceResponse {
+  /**
+   * <p>环境Id</p>
+   */
+  EnvId?: string
+  /**
+   * <p>后付费订单号</p>
+   */
+  TranId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -591,6 +599,36 @@ export interface ServerBaseInfo {
    * <p>创建时间</p>
    */
   CreateTime?: string
+}
+
+/**
+ * InitializeCloudRunResource请求参数结构体
+ */
+export interface InitializeCloudRunResourceRequest {
+  /**
+   * <p>tcbr,run,weda,baas</p>
+   */
+  EnvType: string
+  /**
+   * <p>环境ID 云开发平台必填</p>
+   */
+  EnvId: string
+  /**
+   * <p>私有网络Id</p>
+   */
+  VpcId?: string
+  /**
+   * <p>子网列表</p>
+   */
+  SubNetIds?: Array<string>
+  /**
+   * <p>来源：wechat | cloud | weda</p>
+   */
+  Source?: string
+  /**
+   * <p>渠道：wechat | cloud | weda</p>
+   */
+  Channel?: string
 }
 
 /**
@@ -817,6 +855,16 @@ export interface VolumeConf {
    * <p>CFS 实例 ID</p>
    */
   InstanceId?: string
+}
+
+/**
+ * StopVersionInstance返回参数结构体
+ */
+export interface StopVersionInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

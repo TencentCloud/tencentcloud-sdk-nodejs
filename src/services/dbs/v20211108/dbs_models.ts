@@ -333,7 +333,7 @@ export interface CreateBackupPlanResponse {
    */
   OrderId?: string
   /**
-   * 资源ID。
+   * 备份计划 ID 列表。单次最多返回 10 个。
    */
   BackupPlanIds?: Array<string>
   /**

@@ -35,9 +35,10 @@ import {
   TaskStepInfo,
   VersionPodInstance,
   DescribeVersionDetailRequest,
-  StopVersionInstanceResponse,
+  InitializeCloudRunResourceResponse,
   DescribeCloudRunEnvsResponse,
   ServerBaseInfo,
+  InitializeCloudRunResourceRequest,
   DescribeCloudRunEnvsRequest,
   ReleaseGrayResponse,
   DescribeCloudRunProcessLogResponse,
@@ -47,6 +48,7 @@ import {
   DeployParam,
   DiffConfigItem,
   VolumeConf,
+  StopVersionInstanceResponse,
   SubmitServerRollbackResponse,
   SubmitServerConfigChangeDiffResponse,
   Tag,
@@ -308,6 +310,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartVersionInstanceResponse) => void
   ): Promise<StartVersionInstanceResponse> {
     return this.request("StartVersionInstance", req, cb)
+  }
+
+  /**
+   * 创建云托管环境，并开通资源。
+   */
+  async InitializeCloudRunResource(
+    req: InitializeCloudRunResourceRequest,
+    cb?: (error: string, rep: InitializeCloudRunResourceResponse) => void
+  ): Promise<InitializeCloudRunResourceResponse> {
+    return this.request("InitializeCloudRunResource", req, cb)
   }
 
   /**

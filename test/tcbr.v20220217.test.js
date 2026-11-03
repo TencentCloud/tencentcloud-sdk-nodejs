@@ -218,6 +218,16 @@ it("tcbr.v20220217.StartVersionInstance", async function () {
     }
 })
 
+it("tcbr.v20220217.InitializeCloudRunResource", async function () {
+    try {
+       const data = await client.InitializeCloudRunResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcbr.v20220217.DescribeCloudRunDeployRecord", async function () {
     try {
        const data = await client.DescribeCloudRunDeployRecord({})

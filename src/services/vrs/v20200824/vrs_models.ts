@@ -146,7 +146,7 @@ export interface CancelVRSTaskResponse {
  */
 export interface CreateVRSTaskResponse {
   /**
-   * 创建任务结果
+   * <p>创建任务结果</p>
    */
   Data?: CreateVRSTaskRespData
   /**
@@ -326,64 +326,57 @@ export interface DownloadVRSModelRsp {
  */
 export interface CreateVRSTaskRequest {
   /**
-   * 唯一请求 ID
+   * <p>唯一请求 ID</p>
    */
   SessionId: string
   /**
-   * 音色名称
+   * <p>音色名称</p>
    */
   VoiceName: string
   /**
-   * 音色性别:
-
-1-male
-
-2-female
+   * <p>音色性别:</p><p>1-male</p><p>2-female</p>
    */
   VoiceGender: number
   /**
-   * 语言类型：
-
-1-中文
+   * <p>语言类型：</p><p>1-中文</p>
    */
   VoiceLanguage: number
   /**
-   * 音频ID集合。（一句话声音复刻仅需填写一个音质检测接口返回的AudioId）
+   * <p>音频ID集合。（一句话声音复刻仅需填写一个音质检测接口返回的AudioId）</p>
    */
   AudioIdList: Array<string>
   /**
-   * 音频采样率：
-
-16000：16k
+   * <p>音频采样率：</p><p>16000：16k</p>
    */
   SampleRate?: number
   /**
-   * 音频格式，音频类型(wav,mp3,aac,m4a)
+   * <p>音频格式，音频类型(wav,mp3,aac,m4a)</p>
    */
   Codec?: string
   /**
-   * 回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。（注意：回调方式暂不支持一句话版声音复刻）
-回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{"TaskId":"xxxxxxxxxxxxxx","Status":2,"StatusStr":"success","VoiceType":xxxxx,"ErrorMsg":""}
+   * <p>回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。（注意：回调方式暂不支持一句话版声音复刻）<br>回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{&quot;TaskId&quot;:&quot;xxxxxxxxxxxxxx&quot;,&quot;Status&quot;:2,&quot;StatusStr&quot;:&quot;success&quot;,&quot;VoiceType&quot;:xxxxx,&quot;ErrorMsg&quot;:&quot;&quot;}</p>
    */
   CallbackUrl?: string
   /**
-   * 模型类型 1:在线 2:离线  默认为1
+   * <p>模型类型 1:在线 2:离线  默认为1</p>
    */
   ModelType?: number
   /**
-   * 复刻类型。
-5 - 一句话声音复刻。
+   * <p>复刻类型。<br>5 - 一句话声音复刻。</p>
    */
   TaskType?: number
   /**
-   * 校验音频ID。（仅基础版声音复刻使用）
+   * <p>校验音频ID。（仅基础版声音复刻使用）</p>
    */
   VPRAudioId?: string
   /**
-   * 是否开启语音增强，0 - 关闭，1 - 开启 。默认关闭
-语音增强仅适用于一句话复刻场景
+   * <p>是否开启语音增强，0 - 关闭，1 - 开启 。默认关闭<br>语音增强仅适用于一句话复刻场景</p>
    */
   EnableVoiceEnhance?: number
+  /**
+   * <p>模型引擎，可选值：</p><ul><li><p>WXZL（默认）</p></li><li><p>YTLX_V2（新版）</p></li></ul><p>示例：YTLX_V2</p>
+   */
+  EngineType?: string
 }
 
 /**

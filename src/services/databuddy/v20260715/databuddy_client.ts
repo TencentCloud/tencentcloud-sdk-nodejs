@@ -188,6 +188,7 @@ import {
   StopComputeRequest,
   RemoveWorkspaceGroupsRequest,
   AdvancedParameter,
+  ListWorkspaceRolesRequest,
   UpdateWorkspaceGroupsTagsRequest,
   CreateVolumeResponse,
   DeleteCatalogRequest,
@@ -208,6 +209,7 @@ import {
   UpdateWorkspaceUsersRolesResponse,
   GetTableRsp,
   ListConsoleRolesResponse,
+  ListWorkspaceRolesResponse,
   GetModelVersionRsp,
   DeleteTableRsp,
   CreateConsoleGroupResponse,
@@ -216,6 +218,7 @@ import {
   CreateWorkspaceRoleResponse,
   AddWorkspaceGroupsRequest,
   ListConsoleGroupUsersRequest,
+  Role,
   GetViewResponse,
   RemoveWorkspaceGroupsResponse,
   UpdateConsoleUsersResponse,
@@ -252,6 +255,7 @@ import {
   RemoveConsoleUsersRequest,
   LocationUpdate,
   GetFileRequest,
+  ListWorkspaceRolesRsp,
   UpdateWorkspaceRequest,
   UpdateSchemaRequest,
   DeleteSchemaResponse,
@@ -1379,6 +1383,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkspaceResponse) => void
   ): Promise<CreateWorkspaceResponse> {
     return this.request("CreateWorkspace", req, cb)
+  }
+
+  /**
+   * 查询工作空间角色列表
+   */
+  async ListWorkspaceRoles(
+    req: ListWorkspaceRolesRequest,
+    cb?: (error: string, rep: ListWorkspaceRolesResponse) => void
+  ): Promise<ListWorkspaceRolesResponse> {
+    return this.request("ListWorkspaceRoles", req, cb)
   }
 
   /**

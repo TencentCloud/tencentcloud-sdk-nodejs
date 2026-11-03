@@ -324,6 +324,11 @@ export interface DescribeAgentSessionResponse {
 }
 
 /**
+ * DeleteSessionArtifactList请求参数结构体
+ */
+export type DeleteSessionArtifactListRequest = null
+
+/**
  * Token用量
  */
 export interface TokenUsage {
@@ -679,6 +684,16 @@ export interface SessionItem {
 }
 
 /**
+ * DescribeSessionArtifactList返回参数结构体
+ */
+export interface DescribeSessionArtifactListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAgentVersionList请求参数结构体
  */
 export interface DescribeAgentVersionListRequest {
@@ -989,17 +1004,9 @@ export interface CreateAgentRequest {
 }
 
 /**
- * DescribeAgentVersionList返回参数结构体
+ * DescribeSessionArtifactDownloadUrl返回参数结构体
  */
-export interface DescribeAgentVersionListResponse {
-  /**
-   * <p>总数</p>
-   */
-  TotalCount?: number
-  /**
-   * <p>版本列表（原 VersionSet；集合名带实体前缀以区分 Skill 版本接口的同名字段）</p>
-   */
-  AgentVersionSet?: Array<AgentVersionItem>
+export interface DescribeSessionArtifactDownloadUrlResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1052,6 +1059,16 @@ export interface ChatEndpoint {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
+}
+
+/**
+ * DeleteSessionArtifactList返回参数结构体
+ */
+export interface DeleteSessionArtifactListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2141,6 +2158,11 @@ export interface Header {
 }
 
 /**
+ * DescribeSessionArtifactDownloadUrl请求参数结构体
+ */
+export type DescribeSessionArtifactDownloadUrlRequest = null
+
+/**
  * MigrateAgentSession请求参数结构体
  */
 export interface MigrateAgentSessionRequest {
@@ -2319,6 +2341,11 @@ export interface TargetOptions {
    */
   RecipientIdSet?: Array<string>
 }
+
+/**
+ * DescribeSessionArtifactList请求参数结构体
+ */
+export type DescribeSessionArtifactListRequest = null
 
 /**
  * CreateAgent返回参数结构体
@@ -2512,6 +2539,24 @@ export interface CreateAgentVersionFromSourceRequest {
    * <p>沙箱模板 ID。可选，patch 语义：null 沿用源版本绑定的模板；空串解绑（恢复系统默认模板）；非空时模板须属于当前企业且可用（未删除、状态正常）。</p>
    */
   SandboxTemplateId?: string
+}
+
+/**
+ * DescribeAgentVersionList返回参数结构体
+ */
+export interface DescribeAgentVersionListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>版本列表（原 VersionSet；集合名带实体前缀以区分 Skill 版本接口的同名字段）</p>
+   */
+  AgentVersionSet?: Array<AgentVersionItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

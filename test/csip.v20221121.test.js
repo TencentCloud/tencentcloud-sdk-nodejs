@@ -258,6 +258,16 @@ it("csip.v20221121.DescribeRiskItemList", async function () {
     }
 })
 
+it("csip.v20221121.DescribeLoginWhiteCustomListEDR", async function () {
+    try {
+       const data = await client.DescribeLoginWhiteCustomListEDR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeNotifyAgentOfflineDuration", async function () {
     try {
        const data = await client.DescribeNotifyAgentOfflineDuration({})
@@ -571,6 +581,16 @@ it("csip.v20221121.DescribeAgentRunPolicy", async function () {
 it("csip.v20221121.DescribeExposureTrend", async function () {
     try {
        const data = await client.DescribeExposureTrend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DeleteLoginWhiteLearnEDR", async function () {
+    try {
+       const data = await client.DeleteLoginWhiteLearnEDR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1821,6 +1841,16 @@ it("csip.v20221121.DescribeCosObjectScanTask", async function () {
 it("csip.v20221121.DescribeNICAssets", async function () {
     try {
        const data = await client.DescribeNICAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeEdrMalwareFile", async function () {
+    try {
+       const data = await client.DescribeEdrMalwareFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -4138,6 +4168,16 @@ it("csip.v20221121.CreateDspmRiskStrategy", async function () {
     }
 })
 
+it("csip.v20221121.ModifyLoginWhiteLearnEDR", async function () {
+    try {
+       const data = await client.ModifyLoginWhiteLearnEDR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeUserDspmInfoList", async function () {
     try {
        const data = await client.DescribeUserDspmInfoList({})
@@ -5128,6 +5168,16 @@ it("csip.v20221121.DescribeTopAttackInfo", async function () {
     }
 })
 
+it("csip.v20221121.DescribeLoginWhiteLearnListEDR", async function () {
+    try {
+       const data = await client.DescribeLoginWhiteLearnListEDR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.CreateImageRegistryTimedScanTaskConfig", async function () {
     try {
        const data = await client.CreateImageRegistryTimedScanTaskConfig({})
@@ -5681,6 +5731,16 @@ it("csip.v20221121.DescribeCosBucketBillingInfo", async function () {
 it("csip.v20221121.DescribeTaskLogURL", async function () {
     try {
        const data = await client.DescribeTaskLogURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DeleteLoginWhiteCustomEDR", async function () {
+    try {
+       const data = await client.DeleteLoginWhiteCustomEDR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -6821,6 +6881,16 @@ it("csip.v20221121.CreateComplianceRiskExportJob", async function () {
 it("csip.v20221121.DeleteDspmRestoreLogList", async function () {
     try {
        const data = await client.DeleteDspmRestoreLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyLoginWhiteCustomEDR", async function () {
+    try {
+       const data = await client.ModifyLoginWhiteCustomEDR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

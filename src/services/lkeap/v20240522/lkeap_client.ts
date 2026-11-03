@@ -29,6 +29,7 @@ import {
   Choice,
   GetCharacterUsageRequest,
   ReconstructDocumentSSEConfig,
+  TaskErrInfo,
   DocumentUsage,
   SearchResult,
   GetReconstructDocumentResultResponse,

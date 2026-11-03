@@ -26,6 +26,7 @@ import {
   CreateAgentVersionRequest,
   ModifyAgentVersionRequest,
   DescribeAgentSessionResponse,
+  DeleteSessionArtifactListRequest,
   TokenUsage,
   ConnectorInfo,
   CreateAgentVersionFromSourceResponse,
@@ -35,6 +36,7 @@ import {
   DescribeAgentRequest,
   TriggerScheduledTaskRequest,
   SessionItem,
+  DescribeSessionArtifactListResponse,
   DescribeAgentVersionListRequest,
   SkillItem,
   ConnectorRefInput,
@@ -46,10 +48,11 @@ import {
   SkillCounts,
   DescribeExternalAgentRequest,
   CreateAgentRequest,
-  DescribeAgentVersionListResponse,
+  DescribeSessionArtifactDownloadUrlResponse,
   DescribeConnectorListResponse,
   ModifyAgentRoutingRequest,
   ChatEndpoint,
+  DeleteSessionArtifactListResponse,
   DescribeSkillListRequest,
   CreateScheduledTaskRequest,
   DescribeExternalAgentListRequest,
@@ -89,11 +92,13 @@ import {
   ExpertItem,
   DescribeExpertListResponse,
   Header,
+  DescribeSessionArtifactDownloadUrlRequest,
   MigrateAgentSessionRequest,
   DescribeAgentResponse,
   DescribeMessageEventListResponse,
   CreateAgentVersionResponse,
   TargetOptions,
+  DescribeSessionArtifactListRequest,
   CreateAgentResponse,
   DescribeAgentSessionRequest,
   RoutingItem,
@@ -103,6 +108,7 @@ import {
   ModifyAgentA2AConfigRequest,
   CreateAgentSessionRequest,
   CreateAgentVersionFromSourceRequest,
+  DescribeAgentVersionListResponse,
   AgentVersionItem,
   DescribeBuiltinModelListRequest,
   DescribeScheduledTaskLogResponse,
@@ -203,6 +209,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MigrateAgentSessionResponse) => void
   ): Promise<MigrateAgentSessionResponse> {
     return this.request("MigrateAgentSession", req, cb)
+  }
+
+  /**
+   * 删除指定的物料，删除后不可恢复。
+   */
+  async DeleteSessionArtifactList(
+    req?: DeleteSessionArtifactListRequest,
+    cb?: (error: string, rep: DeleteSessionArtifactListResponse) => void
+  ): Promise<DeleteSessionArtifactListResponse> {
+    return this.request("DeleteSessionArtifactList", req, cb)
   }
 
   /**
@@ -336,6 +352,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 分页查询会话物料列表。
+   */
+  async DescribeSessionArtifactList(
+    req?: DescribeSessionArtifactListRequest,
+    cb?: (error: string, rep: DescribeSessionArtifactListResponse) => void
+  ): Promise<DescribeSessionArtifactListResponse> {
+    return this.request("DescribeSessionArtifactList", req, cb)
+  }
+
+  /**
    * 查询某 managed agent 绑定的单个外部 agent 详情
    */
   async DescribeExternalAgent(
@@ -373,6 +399,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAgentSessionResponse) => void
   ): Promise<CreateAgentSessionResponse> {
     return this.request("CreateAgentSession", req, cb)
+  }
+
+  /**
+   * 获取会话物料下载链接。
+   */
+  async DescribeSessionArtifactDownloadUrl(
+    req?: DescribeSessionArtifactDownloadUrlRequest,
+    cb?: (error: string, rep: DescribeSessionArtifactDownloadUrlResponse) => void
+  ): Promise<DescribeSessionArtifactDownloadUrlResponse> {
+    return this.request("DescribeSessionArtifactDownloadUrl", req, cb)
   }
 
   /**

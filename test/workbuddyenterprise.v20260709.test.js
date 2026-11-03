@@ -98,6 +98,16 @@ it("workbuddyenterprise.v20260709.MigrateAgentSession", async function () {
     }
 })
 
+it("workbuddyenterprise.v20260709.DeleteSessionArtifactList", async function () {
+    try {
+       const data = await client.DeleteSessionArtifactList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("workbuddyenterprise.v20260709.ModifyAgentRouting", async function () {
     try {
        const data = await client.ModifyAgentRouting({})
@@ -228,6 +238,16 @@ it("workbuddyenterprise.v20260709.CreateAgentVersion", async function () {
     }
 })
 
+it("workbuddyenterprise.v20260709.DescribeSessionArtifactList", async function () {
+    try {
+       const data = await client.DescribeSessionArtifactList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("workbuddyenterprise.v20260709.DescribeExternalAgent", async function () {
     try {
        const data = await client.DescribeExternalAgent({})
@@ -261,6 +281,16 @@ it("workbuddyenterprise.v20260709.TriggerScheduledTask", async function () {
 it("workbuddyenterprise.v20260709.CreateAgentSession", async function () {
     try {
        const data = await client.CreateAgentSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("workbuddyenterprise.v20260709.DescribeSessionArtifactDownloadUrl", async function () {
+    try {
+       const data = await client.DescribeSessionArtifactDownloadUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

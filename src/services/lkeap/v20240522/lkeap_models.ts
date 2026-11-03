@@ -183,8 +183,7 @@ export interface GetEmbeddingRequest {
  */
 export interface GetReconstructDocumentResultRequest {
   /**
-   * 说明：解析任务ID
-备注：仅支持单个任务ID
+   * <p>说明：解析任务ID<br>备注：仅支持单个任务ID</p>
    */
   TaskId: string
 }
@@ -281,6 +280,11 @@ export interface ReconstructDocumentSSEConfig {
 }
 
 /**
+ * 文档解析/拆分任务失败原因
+ */
+export type TaskErrInfo = null
+
+/**
  * 文档拆分任务的用量
  */
 export interface DocumentUsage {
@@ -358,30 +362,30 @@ export interface SearchResult {
  */
 export interface GetReconstructDocumentResultResponse {
   /**
-   * 任务状态。
-- `Success`：执行完成
-- `Processing`：执行中
--  `Pause`: 暂停
--  `Failed`：执行失败
--  `WaitExecute`：等待执行
+   * <p>任务状态。</p><ul><li><code>Success</code>：执行完成</li><li><code>Processing</code>：执行中</li><li><code>Pause</code>: 暂停</li><li><code>Failed</code>：执行失败</li><li><code>WaitExecute</code>：等待执行</li></ul>
    */
   Status?: string
   /**
-   * 解析结果的临时下载地址。文件类型为zip压缩包，下载链接有效期30分钟
+   * <p>解析结果的临时下载地址。文件类型为zip压缩包，下载链接有效期30分钟</p>
    */
   DocumentRecognizeResultUrl?: string
   /**
-   * 文档解析失败的页码
+   * <p>文档解析失败的页码</p>
    */
   FailedPages?: Array<ReconstructDocumentFailedPage>
   /**
-   * 文档拆分任务的用量
+   * <p>文档拆分任务的用量</p>
    */
   Usage?: DocumentUsage
   /**
-   * 文档解析任务失败错误信息，当文档解析任务失败会返回具体的错误信息
+   * <p>文档解析任务失败错误信息，当文档解析任务失败会返回具体的错误信息</p>
+   * @deprecated
    */
   Error?: ErrorInfo
+  /**
+   * <p>文档解析任务失败错误信息，当文档解析任务失败会返回具体的错误信息</p>
+   */
+  TaskErrInfo?: TaskErrInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

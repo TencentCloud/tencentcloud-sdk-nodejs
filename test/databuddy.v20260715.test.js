@@ -888,6 +888,16 @@ it("databuddy.v20260715.CreateWorkspace", async function () {
     }
 })
 
+it("databuddy.v20260715.ListWorkspaceRoles", async function () {
+    try {
+       const data = await client.ListWorkspaceRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.DeleteVolume", async function () {
     try {
        const data = await client.DeleteVolume({})

@@ -1955,6 +1955,34 @@ export interface QualityEnhanceTask {
 }
 
 /**
+ * 小程序音视频审核概要元信息
+ */
+export interface MediaMiniProgramReviewElem {
+  /**
+   * 音视频审核类型。 
+<li>Porn：画面涉及令人反感的信息，</li>
+<li>Porn.Ocr：文字涉及令人反感的信息，</li>
+<li>Porn.Asr：声音涉及令人反感的信息，</li>
+<li>Terrorism：画面涉及令人不安全的信息，</li>
+<li>Political：画面涉及令人不适宜的信息，</li>
+<li>Political.Ocr：文字涉及令人不适宜的信息，</li>
+<li>Political.Asr：声音涉及令人不适宜的信息。</li>
+   */
+  Type?: string
+  /**
+   * 音视频审核意见。
+<li>pass：确认正常，</li>
+<li>block：确认违规，</li>
+<li>review：疑似违规。</li>
+   */
+  Suggestion?: string
+  /**
+   * 音视频审核结果置信度。取值 0~100。
+   */
+  Confidence?: number
+}
+
+/**
  * AI 样本管理，关键词输出信息。
  */
 export interface AiSampleWord {
@@ -4473,6 +4501,10 @@ export interface VideoDepthEstimationOutputConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
+  /**
+   * <p>是否保留原视频音频，默认不保留原视频音频。</p><p>枚举值：</p><ul><li>ON： 保留音频</li><li>OFF： 不保留音频</li></ul>
+   */
+  KeepAudio?: string
 }
 
 /**
@@ -6216,31 +6248,25 @@ export interface AigcAudioTaskInput {
 }
 
 /**
- * 小程序音视频审核概要元信息
+ * AIGC 单模型配额与用量信息。
  */
-export interface MediaMiniProgramReviewElem {
+export interface AigcModelQuotaWithUsage {
   /**
-   * 音视频审核类型。 
-<li>Porn：画面涉及令人反感的信息，</li>
-<li>Porn.Ocr：文字涉及令人反感的信息，</li>
-<li>Porn.Asr：声音涉及令人反感的信息，</li>
-<li>Terrorism：画面涉及令人不安全的信息，</li>
-<li>Political：画面涉及令人不适宜的信息，</li>
-<li>Political.Ocr：文字涉及令人不适宜的信息，</li>
-<li>Political.Asr：声音涉及令人不适宜的信息。</li>
+   * <p>模型名称。</p>
    */
-  Type?: string
+  ModelName?: string
   /**
-   * 音视频审核意见。
-<li>pass：确认正常，</li>
-<li>block：确认违规，</li>
-<li>review：疑似违规。</li>
+   * <p>模型版本。</p>
    */
-  Suggestion?: string
+  ModelVersion?: string
   /**
-   * 音视频审核结果置信度。取值 0~100。
+   * <p>任务的配额数。</p><p>单位：张/秒。</p><ul><li>当 QuotaType 为 Image 时，单位为张；</li><li>当 QuotaType 为 Video 时，单位为秒；</li></ul>
    */
-  Confidence?: number
+  QuotaLimit?: number
+  /**
+   * <p>已经使用的用量数</p><p>单位：</p><ul><li>当QuotaLimit=Image时，单位为张</li><li>当QuotaLimit=Video时，单位为秒</li></ul>
+   */
+  Usage?: number
 }
 
 /**
@@ -8450,7 +8476,7 @@ export interface SceneAigcVideoOutputConfig {
    */
   Duration?: number
   /**
-   * <p>分辨率。仅当角色场景时有效。取值如下：</p><ul><li>当 Model 是 character_scene_standard 时，支持 480p、720p、1080p、4K；</li><li>当 Model 是 character_scene_mini 时，支持 480p、720p；</li><li>当 Model 是 character_scene_fast 时，支持 720p。</li></ul>
+   * <p>分辨率。仅当角色场景时有效。取值如下：</p><ul><li>当 Model 是 character_scene_standard 时，支持 480P、720P、1080P、4K；</li><li>当 Model 是 character_scene_mini 时，支持 480P、720P；</li><li>当 Model 是 character_scene_fast 时，支持 720P。</li></ul>
    */
   Resolution?: string
 }
@@ -12855,6 +12881,22 @@ export interface CreateAigcQuotaRequest {
    * <p>仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken</p>
    */
   ApiToken?: string
+  /**
+   * <p>配额重置周期。</p><p>枚举值：</p><ul><li>Day： 每天重置。</li><li>Month： 每月指定日期重置。</li><li>Total： 永不重置，QuotaLimit参数即为总额度。</li></ul>
+   */
+  QuotaPeriod?: string
+  /**
+   * <p>每月配额的重置日期，仅QuotaPeriod=Month时有效。</p><p>如果当月无所选日期时，顺延至次月 1 日 00:00 重置。</p>
+   */
+  ResetDay?: number
+  /**
+   * <p>是否开启按单个模型设置配额</p><p>枚举值：</p><ul><li>ON： 打开</li><li>OFF： 关闭</li></ul>
+   */
+  ModelQuotaSwitch?: string
+  /**
+   * <p>按单个模型设置的配额，仅ModelQuotaSwitch=ON时有效。</p>
+   */
+  ModelQuotas?: Array<AigcModelQuota>
 }
 
 /**
@@ -17486,6 +17528,24 @@ export interface AiAnalysisTaskInput {
    * 视频内容分析模板 ID。
    */
   Definition: number
+}
+
+/**
+ * AIGC 单配额模型。
+ */
+export interface AigcModelQuota {
+  /**
+   * <p>模型名称。</p>
+   */
+  ModelName: string
+  /**
+   * <p>任务的配额数。</p><p>单位：张/秒。</p><ul><li>当 QuotaType 为 Image 时，单位为张；</li><li>当 QuotaType 为 Video 时，单位为秒；</li></ul>
+   */
+  QuotaLimit: number
+  /**
+   * <p>模型版本。</p>
+   */
+  ModelVersion?: string
 }
 
 /**
@@ -23564,6 +23624,22 @@ export interface AigcQuotaItem {
    * <p>已经使用的用量数</p><p>单位：</p><ul><li>当QuotaLimit=Image时，单位为张</li><li>当QuotaLimit=Video时，单位为秒</li><li>当QuotaLimit=Text时，单位为token</li></ul>
    */
   Usage?: number
+  /**
+   * <p>配额重置周期。</p><p>枚举值：</p><ul><li>Day： 每天重置。</li><li>Month： 每月指定日期重置。</li><li>Total： 永不重置，QuotaLimit参数即为总额度。</li></ul>
+   */
+  QuotaPeriod?: string
+  /**
+   * <p>每月配额的重置日期，仅QuotaPeriod=Month时有效。</p><p>如果当月无所选日期时，顺延至次月 1 日 00:00 重置。</p>
+   */
+  ResetDay?: number
+  /**
+   * <p>是否开启按单个模型设置配额</p><p>枚举值：</p><ul><li>ON： 打开</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p>
+   */
+  ModelQuotaSwitch?: string
+  /**
+   * <p>按单个模型设置的配额，仅ModelQuotaSwitch=ON时有效。</p>
+   */
+  ModelQuotas?: Array<AigcModelQuotaWithUsage>
 }
 
 /**
@@ -26333,6 +26409,22 @@ export interface ModifyAigcQuotaRequest {
    * <p>仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken</p>
    */
   ApiToken?: string
+  /**
+   * <p>配额重置周期。</p><p>枚举值：</p><ul><li>Day： 每天重置。</li><li>Month： 每月指定日期重置。</li><li>Total： 永不重置，QuotaLimit参数即为总额度。</li></ul>
+   */
+  QuotaPeriod?: string
+  /**
+   * <p>每月配额的重置日期，仅QuotaPeriod=Month时有效。</p><p>如果当月无所选日期时，顺延至次月 1 日 00:00 重置。</p>
+   */
+  ResetDay?: number
+  /**
+   * <p>是否开启按单个模型设置配额</p><p>枚举值：</p><ul><li>ON： 打开</li><li>OFF： 关闭</li></ul>
+   */
+  ModelQuotaSwitch?: string
+  /**
+   * <p>按单个模型设置的配额，仅ModelQuotaSwitch=ON时有效。</p>
+   */
+  ModelQuotas?: Array<AigcModelQuota>
 }
 
 /**

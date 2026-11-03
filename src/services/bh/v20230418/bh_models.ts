@@ -3653,6 +3653,14 @@ export interface SearchTaskResultRequest {
    * <p>分页的页内记录数，默认为20，最大200</p>
    */
   Limit?: number
+  /**
+   * <p>任务类别</p><p>枚举值：</p><ul><li>0： Linux 类型任务</li><li>1： Windows 类型任务</li></ul>
+   */
+  Category?: Array<number | bigint>
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>1： 执行中</li><li>2： 成功</li><li>3： 失败</li><li>4： 部分成功</li></ul>
+   */
+  Status?: Array<number | bigint>
 }
 
 /**

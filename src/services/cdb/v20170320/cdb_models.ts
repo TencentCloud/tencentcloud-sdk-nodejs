@@ -371,9 +371,17 @@ export interface DescribeTablesResponse {
 }
 
 /**
- * ModifyBackupDownloadRestriction返回参数结构体
+ * DescribeProjectSecurityGroups返回参数结构体
  */
-export interface ModifyBackupDownloadRestrictionResponse {
+export interface DescribeProjectSecurityGroupsResponse {
+  /**
+   * 安全组详情。
+   */
+  Groups?: Array<SecurityGroup>
+  /**
+   * 安全组规则数量。
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3176,6 +3184,32 @@ export interface ModifyBackupDownloadRestrictionRequest {
 }
 
 /**
+ * 权限组
+ */
+export interface PrivilegeGroup {
+  /**
+   * 全局权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GlobalPrivileges?: Array<string>
+  /**
+   * 数据库权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabasePrivileges?: Array<DatabasePrivilege>
+  /**
+   * 表权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TablePrivileges?: Array<TablePrivilege>
+  /**
+   * 列权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnPrivileges?: Array<ColumnPrivilege>
+}
+
+/**
  * CreateParamTemplate返回参数结构体
  */
 export interface CreateParamTemplateResponse {
@@ -4871,6 +4905,10 @@ export interface DeleteAccountsRequest {
    * <p>云数据库账号。</p>
    */
   Accounts?: Array<Account>
+  /**
+   * <p>待删除账号的完整信息。</p>
+   */
+  DeleteAccounts?: Array<DeleteDBAccount>
 }
 
 /**
@@ -6413,6 +6451,10 @@ export interface CreateAccountsRequest {
    * <p>新账户最大可用连接数，默认值为10240，最大可设置值为10240。</p>
    */
   MaxUserConnections?: number
+  /**
+   * <p>创建账号时的完整信息</p>
+   */
+  CreateAccounts?: Array<CreateDBAccount>
 }
 
 /**
@@ -8642,6 +8684,32 @@ export interface OpenWanServiceResponse {
 }
 
 /**
+ * 删除账号信息
+ */
+export interface DeleteDBAccount {
+  /**
+   * <p>用户名</p>
+   */
+  User?: string
+  /**
+   * <p>主机名</p>
+   */
+  Host?: string
+  /**
+   * <p>凭据名称</p>
+   */
+  SecretName?: string
+  /**
+   * <p>保留时间，0表示立即删除(最大30天)</p>
+   */
+  RecoveryWindowInDays?: number
+  /**
+   * <p>删除模式</p><p>枚举值：</p><ul><li>0： 仅删除凭据</li><li>1： 删除凭据+账号</li></ul>
+   */
+  DeleteMode?: number
+}
+
+/**
  * CheckMigrateCluster请求参数结构体
  */
 export interface CheckMigrateClusterRequest {
@@ -9863,17 +9931,9 @@ export interface DeleteBackupResponse {
 }
 
 /**
- * DescribeProjectSecurityGroups返回参数结构体
+ * ModifyBackupDownloadRestriction返回参数结构体
  */
-export interface DescribeProjectSecurityGroupsResponse {
-  /**
-   * 安全组详情。
-   */
-  Groups?: Array<SecurityGroup>
-  /**
-   * 安全组规则数量。
-   */
-  TotalCount?: number
+export interface ModifyBackupDownloadRestrictionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10097,6 +10157,24 @@ export interface DescribeBinlogBackupOverviewRequest {
    * 需要查询日志备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。
    */
   Product: string
+}
+
+/**
+ * 创建账号信息
+ */
+export interface CreateDBAccount {
+  /**
+   * <p>账号名称</p>
+   */
+  User?: string
+  /**
+   * <p>主机名</p>
+   */
+  Host?: string
+  /**
+   * <p>开始SSM托管的相关信息</p>
+   */
+  SSMInfos?: SSMCreateAccountInfos
 }
 
 /**
@@ -10463,6 +10541,57 @@ export interface ColumnPrivilege {
    * 权限信息
    */
   Privileges: Array<string>
+}
+
+/**
+ * 创建SSM账号相关信息
+ */
+export interface SSMCreateAccountInfos {
+  /**
+   * <p>是否开启SSM托管</p><p>枚举值：</p><ul><li>true： 开启托管</li><li>false： 不开启托管</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsOpenSSM?: boolean
+  /**
+   * <p>是否创建轮转账号</p><p>枚举值：</p><ul><li>true： 创建轮转账号</li><li>false： 创建非轮转账号</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsRotationAccount?: boolean
+  /**
+   * <p>凭据名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretName?: string
+  /**
+   * <p>KMS CMK ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKeyId?: string
+  /**
+   * <p>密钥类型</p><p>枚举值：</p><ul><li>0： KMS密码</li><li>1： 软件密钥</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptType?: number
+  /**
+   * <p>是否开启轮转</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableRotation?: boolean
+  /**
+   * <p>轮转周期</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RotationFrequency?: number
+  /**
+   * <p>权限列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivilegesList?: PrivilegeGroup
+  /**
+   * <p>独享版 KMS 集群 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsHsmClusterId?: string
 }
 
 /**

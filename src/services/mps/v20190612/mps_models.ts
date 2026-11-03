@@ -904,26 +904,33 @@ export interface CustomVariable {
  */
 export interface AiAnalysisTaskReelOutput {
   /**
-   * 解说视频路径。
+   * <p>解说视频路径。</p>
    */
   VideoPath?: string
   /**
-   * 解说视频路径列表。
-
-**注意**：
-1. 当返回一个文件时，`VideoPath `返回一个文件路径，`VideoPaths `也会填充同样路径的一个元素。
-2. 当返回多个文件时，`VideoPath `返回为空字符串，`VideoPaths `返回多文件路径列表。
+   * <p>解说视频路径列表。</p><p><strong>注意</strong>：</p><ol><li>当返回一个文件时，<code>VideoPath</code>返回一个文件路径，<code>VideoPaths</code>也会填充同样路径的一个元素。</li><li>当返回多个文件时，<code>VideoPath</code>返回为空字符串，<code>VideoPaths</code>返回多文件路径列表。</li></ol>
    */
   VideoPaths?: Array<string>
   /**
-   * 脚本文件路径
-
+   * <p>脚本文件路径</p>
    */
   ScriptPath?: string
   /**
-   * 解说视频存储位置。
+   * <p>多个脚本文件路径</p>
+   */
+  ScriptPaths?: Array<string>
+  /**
+   * <p>解说视频存储位置。</p>
    */
   OutputStorage?: TaskOutputStorage
+  /**
+   * <p>输出视频字幕文件</p>
+   */
+  OutputSubtitlePath?: string
+  /**
+   * <p>多个输出视频字幕文件，与输出的VideoPaths对应</p>
+   */
+  OutputSubtitlePaths?: Array<string>
 }
 
 /**

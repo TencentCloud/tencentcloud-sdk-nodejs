@@ -3820,13 +3820,37 @@ export interface CreateDMSTableRequest {
 }
 
 /**
- * ModifySparkApp返回参数结构体
+ * GetRayServeEvent请求参数结构体
  */
-export interface ModifySparkAppResponse {
+export interface GetRayServeEventRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>DeploymentId</p>
    */
-  RequestId?: string
+  Id: string
+  /**
+   * <p>开始时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>结束时间（毫秒时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+  /**
+   * <p>翻页上下文，首次查询不传，后续翻页传入上一次返回的 Context 值</p>
+   */
+  Context?: string
+  /**
+   * <p>分页大小</p>
+   */
+  PageSize?: number
+  /**
+   * <p>事件类型过滤，仅允许 ASCII 字母（如 Normal、Warning）</p>
+   */
+  EventType?: string
 }
 
 /**
@@ -5320,6 +5344,34 @@ export interface ListServiceApiKeysRequest {
 }
 
 /**
+ * DescribeScripts请求参数结构体
+ */
+export interface DescribeScriptsRequest {
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 按字段排序，支持如下字段类型，update-time
+   */
+  SortBy?: string
+  /**
+   * 排序方式，desc表示正序，asc表示反序，默认asc
+   */
+  Sorting?: string
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为其一
+script-id - String - （过滤条件）script-id取值形如：157de0d1-26b4-4df2-a2d0-b64afc406c25。
+script-name-keyword - String - （过滤条件）数据表名称,形如：script-test。
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribePartitions请求参数结构体
  */
 export interface DescribePartitionsRequest {
@@ -5611,6 +5663,16 @@ export interface StartLabResponse {
    * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
    */
   NetworkConfig?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySparkApp返回参数结构体
+ */
+export interface ModifySparkAppResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8066,17 +8128,13 @@ export interface DeleteScriptResponse {
 }
 
 /**
- * 任务类型，任务如SQL查询等。
+ * ListStorages请求参数结构体
  */
-export interface Task {
+export interface ListStoragesRequest {
   /**
-   * SQL查询任务
+   * <p>存储类型筛选：CFS / CFSTurbo / COS / GooseFS；不填表示查询所有类型</p><p>枚举值：</p><ul><li>CFS： CFS 文件.</li><li>CFSTurbo： CFS Turbo 文件.</li><li>COS ： COS Bucket.</li><li>GooseFS： GooseFS .</li></ul>
    */
-  SQLTask?: SQLTask
-  /**
-   * Spark SQL查询任务
-   */
-  SparkSQLTask?: SQLTask
+  StorageType?: string
 }
 
 /**
@@ -8095,6 +8153,16 @@ export interface DataEngineConfigInstanceInfo {
    * 作业集群资源参数配置模板
    */
   SessionResourceTemplate?: SessionResourceTemplate
+}
+
+/**
+ * COS详情
+ */
+export interface COSBucketInfo {
+  /**
+   * <p>COS桶名称</p>
+   */
+  Name?: string
 }
 
 /**
@@ -8282,6 +8350,76 @@ export interface SparkSessionBatchLogOperate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Supplement?: Array<KVPair>
+}
+
+/**
+ * SubmitRayJob请求参数结构体
+ */
+export interface SubmitRayJobRequest {
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint: string
+  /**
+   * <p>资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>任务名称</p>
+   */
+  JobName?: string
+  /**
+   * <p>运行时环境</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>镜像名称</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>资源配置</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>目录</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>高级参数，JSON 字符串（透传到 Neutrino）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>计算组ID；与 ClusterId 互斥。组成员展开为候选集群后由 neutrino 侧路由</p>
+   */
+  GroupId?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>用户网络配置 JSON 字符串</p>
+   */
+  NetworkConfig?: string
 }
 
 /**
@@ -8652,6 +8790,16 @@ export interface PauseStandardEngineResourceGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CFS Turbo 文件系统信息（仅包含可用状态的文件系统）
+ */
+export interface CFSTurboFileSystemInfo {
+  /**
+   * <p>CFS Turbo ID</p>
+   */
+  FileSystemId?: string
 }
 
 /**
@@ -12116,6 +12264,104 @@ export interface KafkaInfo {
 }
 
 /**
+ * SubmitRayJob返回参数结构体
+ */
+export interface SubmitRayJobResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  Id?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>任务状态</p>
+   */
+  Status?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>任务名称</p>
+   */
+  JobName?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>运行时间(ms)</p>
+   */
+  RunningTime?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>高级参数，JSON 字符串（透传到 Neutrino）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>业务来源标识（调用上下文）</p>
+   */
+  JobSource?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListTrainingJobInstance请求参数结构体
  */
 export interface ListTrainingJobInstanceRequest {
@@ -15085,6 +15331,32 @@ export interface DescribePartitionQueuesRequest {
    * 是否返回队列实时余量（ResourceQuotas），默认 false 不返回。余量需实时查询 Prometheus，仅在需要时透传 true。Used 为计费 spec 口径（队列内业务容器 Pod limits，经 kube_pod_labels 队列过滤），依赖 kube_pod_labels 指标采集
    */
   ShowResourceQuotas?: boolean
+}
+
+/**
+ * ListStorages返回参数结构体
+ */
+export interface ListStoragesResponse {
+  /**
+   * <p>CFS列表</p>
+   */
+  CFSFileSystems?: Array<CFSFileSystemInfo>
+  /**
+   * <p>COS列表</p>
+   */
+  COSBuckets?: Array<COSBucketInfo>
+  /**
+   * <p>CFS Turbo 文件系统列表</p>
+   */
+  CFSTurboFileSystems?: Array<CFSTurboFileSystemInfo>
+  /**
+   * <p>GooseFS 集群列表（状态为 ACTIVE 的可用集群）</p>
+   */
+  GooseFSClusters?: Array<GooseFSClustersInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -21309,6 +21581,50 @@ export interface ListInferenceEnginesRequest {
 }
 
 /**
+ * 任务类型，任务如SQL查询等。
+ */
+export interface Task {
+  /**
+   * SQL查询任务
+   */
+  SQLTask?: SQLTask
+  /**
+   * Spark SQL查询任务
+   */
+  SparkSQLTask?: SQLTask
+}
+
+/**
+ * GetRayServeEvent返回参数结构体
+ */
+export interface GetRayServeEventResponse {
+  /**
+   * <p>翻页上下文，下一次分页请求时传入此值</p>
+   */
+  Context?: string
+  /**
+   * <p>是否已经返回所有符合条件的日志，true 表示已全部返回</p>
+   */
+  ListOver?: boolean
+  /**
+   * <p>事件列表</p>
+   */
+  Events?: Array<RayJobEventItem>
+  /**
+   * <p>事件开始时间</p><p>单位：毫秒</p>
+   */
+  StartTime?: number
+  /**
+   * <p>事件结束时间</p><p>单位：毫秒</p>
+   */
+  EndTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPartitionDescription返回参数结构体
  */
 export interface ModifyPartitionDescriptionResponse {
@@ -21700,9 +22016,9 @@ export interface GetInferenceModelResponse {
 }
 
 /**
- * DeleteResourceConfig返回参数结构体
+ * CreateUserRole返回参数结构体
  */
-export interface DeleteResourceConfigResponse {
+export interface CreateUserRoleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23419,6 +23735,32 @@ export interface NetWork {
 }
 
 /**
+ * goosefs返回参数
+ */
+export interface GooseFSClustersInfo {
+  /**
+   * <p>集群 ID，形如 g_cvm_xxx</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>所属子网 ID</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>可用区</p>
+   */
+  Zone?: string
+  /**
+   * <p>Master RPC 地址，多个地址用英文逗号拼接，例如 &quot;10.0.1.10:19998,10.0.1.11:19998&quot;，供 CSI 驱动连接用</p>
+   */
+  MasterRPCAddress?: string
+}
+
+/**
  * ListExampleDifficulties返回参数结构体
  */
 export interface ListExampleDifficultiesResponse {
@@ -24928,9 +25270,9 @@ export interface ListResourceConfigsResponse {
 }
 
 /**
- * CreateUserRole返回参数结构体
+ * DeleteResourceConfig返回参数结构体
  */
-export interface CreateUserRoleResponse {
+export interface DeleteResourceConfigResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -27506,31 +27848,13 @@ export interface StopDeploymentRequest {
 }
 
 /**
- * DescribeScripts请求参数结构体
+ * CFS详情
  */
-export interface DescribeScriptsRequest {
+export interface CFSFileSystemInfo {
   /**
-   * 返回数量，默认为10，最大值为100。
+   * <p>文件系统ID</p>
    */
-  Limit?: number
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 按字段排序，支持如下字段类型，update-time
-   */
-  SortBy?: string
-  /**
-   * 排序方式，desc表示正序，asc表示反序，默认asc
-   */
-  Sorting?: string
-  /**
-   * 过滤条件，如下支持的过滤类型，传参Name应为其一
-script-id - String - （过滤条件）script-id取值形如：157de0d1-26b4-4df2-a2d0-b64afc406c25。
-script-name-keyword - String - （过滤条件）数据表名称,形如：script-test。
-   */
-  Filters?: Array<Filter>
+  FileSystemId?: string
 }
 
 /**

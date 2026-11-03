@@ -4639,142 +4639,21 @@ export interface DescribeVulScanTaskDetailResponse {
 }
 
 /**
- * 资产视角的漏洞风险对象
+ * DeleteLoginWhiteCustomEDR返回参数结构体
  */
-export interface AssetViewVULRisk {
+export interface DeleteLoginWhiteCustomEDRResponse {
   /**
-   * 影响资产
+   * <p>删除的规则条数</p>
    */
-  AffectAsset?: string
+  DeletedCount?: number
   /**
-   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
-
+   * <p>删除失败的账号 AppId 列表；仅当全部失败时才返回错误</p>
    */
-  Level?: string
+  FailedAppIds?: Array<number | bigint>
   /**
-   * 资产类型
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceType?: string
-  /**
-   * 组件
-   */
-  Component?: string
-  /**
-   * 服务
-   */
-  Service?: string
-  /**
-   * 最近识别时间
-   */
-  RecentTime?: string
-  /**
-   * 首次识别时间
-   */
-  FirstTime?: string
-  /**
-   * 状态，0未处理、1已处置、2已忽略
-   */
-  Status?: number
-  /**
-   * 风险ID
-   */
-  Id?: string
-  /**
-   * 前端索引
-   */
-  Index?: string
-  /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 实例名
-   */
-  InstanceName?: string
-  /**
-   * 用户appid
-   */
-  AppId?: string
-  /**
-   * 用户昵称
-   */
-  Nick?: string
-  /**
-   * 用户uin
-   */
-  Uin?: string
-  /**
-   * 漏洞类型
-   */
-  VULType?: string
-  /**
-   * 端口
-   */
-  Port?: string
-  /**
-   * 漏洞描述
-   */
-  Describe?: string
-  /**
-   * 漏洞影响组件
-   */
-  AppName?: string
-  /**
-   * 技术参考
-   */
-  References?: string
-  /**
-   * 漏洞影响版本
-   */
-  AppVersion?: string
-  /**
-   * 风险点
-   */
-  VULURL?: string
-  /**
-   * 漏洞名称
-   */
-  VULName?: string
-  /**
-   * cve
-   */
-  CVE?: string
-  /**
-   * 修复方案
-   */
-  Fix?: string
-  /**
-   * pocid
-   */
-  POCId?: string
-  /**
-   * 扫描来源
-   */
-  From?: string
-  /**
-   * 主机版本
-   */
-  CWPVersion?: number
-  /**
-   * 是否支持修复
-   */
-  IsSupportRepair?: boolean
-  /**
-   * 是否支持扫描
-   */
-  IsSupportDetect?: boolean
-  /**
-   * 实例uuid
-   */
-  InstanceUUID?: string
-  /**
-   * 攻击载荷
-   */
-  Payload?: string
-  /**
-   * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
-   */
-  EMGCVulType?: number
+  RequestId?: string
 }
 
 /**
@@ -10844,6 +10723,24 @@ export interface DescribeClbListenerRulesResponse {
 }
 
 /**
+ * dspm数据识别级别信息
+ */
+export interface DspmIdentifyLevelItem {
+  /**
+   * <p>级别名称</p>
+   */
+  LevelName: string
+  /**
+   * <p>级别风险程度（从低到高）</p><p>取值范围：[1, 10]</p><p>单位：程度</p>
+   */
+  LevelScore: number
+  /**
+   * <p>级别id</p>
+   */
+  LevelId?: number
+}
+
+/**
  * CreateDspmIdentifyComplianceGroupCopy请求参数结构体
  */
 export interface CreateDspmIdentifyComplianceGroupCopyRequest {
@@ -12271,6 +12168,24 @@ export interface DescribeBaselineFixRecordListResponse {
 }
 
 /**
+ * DescribeLoginWhiteCustomListEDR返回参数结构体
+ */
+export interface DescribeLoginWhiteCustomListEDRResponse {
+  /**
+   * <p>符合筛选条件的规则总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>自定义白名单规则列表（Type 恒为 Custom），为空时返回 []</p>
+   */
+  List?: Array<LoginWhiteItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 集群容器列表项
  */
 export interface ClusterContainerListItem {
@@ -13053,6 +12968,16 @@ export interface DescribeRaspLicenseListRequest {
 - LatestUpdateTime 最近更新时间
    */
   By?: string
+}
+
+/**
+ * DescribeAssetLastSyncTime请求参数结构体
+ */
+export interface DescribeAssetLastSyncTimeRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -14516,25 +14441,33 @@ export interface VerifyDspmAssetLoginCodeResponse {
 }
 
 /**
- * 即将到期产品
+ * DeleteLoginWhiteLearnEDR请求参数结构体
  */
-export interface ExpiringProduct {
+export interface DeleteLoginWhiteLearnEDRRequest {
   /**
-   * <p>产品ID</p>
+   * <p>集团账号的成员id</p>
    */
-  ProductId?: string
+  MemberId?: Array<string>
   /**
-   * <p>产品名称</p>
+   * <p>显式勾选的规则ID列表，最多 1000 个；与 SelectAll 二选一</p>
    */
-  ProductName?: string
+  Ids?: Array<number | bigint>
   /**
-   * <p>距到期天数<br>单位：天</p>
+   * <p>是否跨页全选：true-删除符合 Filters 的全部规则（此时 Filters 必填） false-仅删除 Ids</p>
    */
-  DaysToExpire?: number
+  SelectAll?: boolean
   /**
-   * <p>到期时间</p>
+   * <p>多账号目标账号 AppId 列表，最多 1000 个；为空表示仅当前账号；传入但全部无权限时返回 InvalidParameter</p>
    */
-  ExpireTime?: string
+  TargetAppIDs?: Array<number | bigint>
+  /**
+   * <p>排除的规则ID列表</p>
+   */
+  ExcludeIds?: Array<number | bigint>
+  /**
+   * <p>全选条件下的筛选条件</p>
+   */
+  Filters?: Array<EDRFilter>
 }
 
 /**
@@ -19217,21 +19150,33 @@ export interface ModifyBruteAttackRulesRequest {
 }
 
 /**
- * dspm数据识别级别信息
+ * DeleteLoginWhiteCustomEDR请求参数结构体
  */
-export interface DspmIdentifyLevelItem {
+export interface DeleteLoginWhiteCustomEDRRequest {
   /**
-   * <p>级别名称</p>
+   * <p>集团账号的成员id</p>
    */
-  LevelName: string
+  MemberId?: Array<string>
   /**
-   * <p>级别风险程度（从低到高）</p><p>取值范围：[1, 10]</p><p>单位：程度</p>
+   * <p>显式勾选的规则ID列表，最多 1000 个；与 SelectAll 二选一</p>
    */
-  LevelScore: number
+  Ids?: Array<number | bigint>
   /**
-   * <p>级别id</p>
+   * <p>是否跨页全选：true-删除符合 Filters 的全部规则（此时 Filters 必填） false-仅删除 Ids</p>
    */
-  LevelId?: number
+  SelectAll?: boolean
+  /**
+   * <p>多账号目标账号 AppId 列表，最多 1000 个；为空表示仅当前账号；传入但全部无权限时返回 InvalidParameter</p>
+   */
+  TargetAppIDs?: Array<number | bigint>
+  /**
+   * <p>排除的规则ID列表，最多1000个</p>
+   */
+  ExcludeIds?: Array<number | bigint>
+  /**
+   * <p>全选条件下的筛选条件</p>
+   */
+  Filters?: Array<EDRFilter>
 }
 
 /**
@@ -19669,13 +19614,33 @@ export interface DescribeVulFixableMachineListResponse {
 }
 
 /**
- * DescribeAssetLastSyncTime请求参数结构体
+ * DescribeLoginWhiteLearnListEDR请求参数结构体
  */
-export interface DescribeAssetLastSyncTimeRequest {
+export interface DescribeLoginWhiteLearnListEDRRequest {
   /**
    * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
+  /**
+   * <p>过滤条件数组（多个 Filter 间为 AND 关系）。支持 Name：Keyword 或 Location（常用登录地模糊）、Remark、ModifyBeginTime、ModifyEndTime（时间格式 2006-01-02 15:04:05）；未知 Name 忽略不报错</p>
+   */
+  Filters?: Array<EDRFilter>
+  /**
+   * <p>分页大小，默认 10，上限 100；传 0 或大于 100 时按默认/上限返回</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移，默认 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方向：ASC-正序 DESC-倒序（大小写不敏感），默认 DESC</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段：CreateTime-创建时间 ModifyTime-修改时间，默认 ModifyTime；传非法值返回 InvalidParameter</p>
+   */
+  By?: string
 }
 
 /**
@@ -24266,6 +24231,48 @@ export interface DescribeSandboxLLMAuditRuleListRequest {
 }
 
 /**
+ * ModifyLoginWhiteLearnEDR请求参数结构体
+ */
+export interface ModifyLoginWhiteLearnEDRRequest {
+  /**
+   * <p>规则ID；自学习为规则组ID（组内最小行ID）</p>
+   */
+  Id: number
+  /**
+   * <p>常用登录地列表，必填，1-200 个；为自学习规则唯一的内容维度</p>
+   */
+  Places: Array<LoginWhitePlaceInput>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>规则所属账号 AppId（取列表出参 AppId）；为空取当前账号；非当前账号需通过归属校验</p>
+   */
+  RuleAppId?: number
+  /**
+   * <p>备注，最长 255 字符</p>
+   */
+  Remark?: string
+  /**
+   * <p>生效资产范围：0-指定主机（主机或标签命中） 1-全部主机</p>
+   */
+  Scope?: number
+  /**
+   * <p>指定主机（实例ID 形态）列表，最多 10000 项；服务端经 idmap 翻译为 QUUID 后与 QUUIDSWithAppId 合并去重</p>
+   */
+  InstanceIDsWithAppId?: Array<InstanceIDWithAppIdItem>
+  /**
+   * <p>剔除主机（实例ID 形态）列表，最多 10000 项</p>
+   */
+  ExcludeInstanceIDsWithAppId?: Array<InstanceIDWithAppIdItem>
+  /**
+   * <p>安全中心标签ID列表，最多 100 个；Scope=0 时与主机为或关系；自学习白名单不支持按标签生效（传非空将被拒绝）</p>
+   */
+  TagIDs?: Array<string>
+}
+
+/**
  * DescribeDspmAssetAccountIdentify请求参数结构体
  */
 export interface DescribeDspmAssetAccountIdentifyRequest {
@@ -27817,6 +27824,24 @@ export interface DescribeMachineClearHistoryRequest {
 }
 
 /**
+ * ModifyAssetTags返回参数结构体
+ */
+export interface ModifyAssetTagsResponse {
+  /**
+   * 状态码
+   */
+  Code?: string
+  /**
+   * 信息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRiskRules返回参数结构体
  */
 export interface DescribeRiskRulesResponse {
@@ -29277,6 +29302,24 @@ export interface DescribeWebhookPolicyListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 常用登录地（入参）
+ */
+export interface LoginWhitePlaceInput {
+  /**
+   * <p>国家ID，当前仅支持国内：1</p>
+   */
+  CountryId?: number
+  /**
+   * <p>省份ID；99999 表示全部省份</p>
+   */
+  ProvinceId?: number
+  /**
+   * <p>城市ID；99999 表示全部城市</p>
+   */
+  CityId?: number
 }
 
 /**
@@ -32684,6 +32727,20 @@ export interface BatchModifyBaselinePolicyRequest {
 }
 
 /**
+ * ModifyLoginWhiteCustomEDR返回参数结构体
+ */
+export interface ModifyLoginWhiteCustomEDRResponse {
+  /**
+   * <p>失败的账号</p>
+   */
+  FailedAppIds?: Array<number | bigint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * dspm数据识别模板数据项关联关系
  */
 export interface DspmIdentifyComplianceRuleRelation {
@@ -34344,6 +34401,227 @@ export interface AssetViewCFGRisk {
    * 当资产类型为LBL的时候，展示该字段，方便定位具体的LB
    */
   ClbId?: string
+}
+
+/**
+ * 资产视角的漏洞风险对象
+ */
+export interface AssetViewVULRisk {
+  /**
+   * 影响资产
+   */
+  AffectAsset?: string
+  /**
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+
+   */
+  Level?: string
+  /**
+   * 资产类型
+   */
+  InstanceType?: string
+  /**
+   * 组件
+   */
+  Component?: string
+  /**
+   * 服务
+   */
+  Service?: string
+  /**
+   * 最近识别时间
+   */
+  RecentTime?: string
+  /**
+   * 首次识别时间
+   */
+  FirstTime?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略
+   */
+  Status?: number
+  /**
+   * 风险ID
+   */
+  Id?: string
+  /**
+   * 前端索引
+   */
+  Index?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户昵称
+   */
+  Nick?: string
+  /**
+   * 用户uin
+   */
+  Uin?: string
+  /**
+   * 漏洞类型
+   */
+  VULType?: string
+  /**
+   * 端口
+   */
+  Port?: string
+  /**
+   * 漏洞描述
+   */
+  Describe?: string
+  /**
+   * 漏洞影响组件
+   */
+  AppName?: string
+  /**
+   * 技术参考
+   */
+  References?: string
+  /**
+   * 漏洞影响版本
+   */
+  AppVersion?: string
+  /**
+   * 风险点
+   */
+  VULURL?: string
+  /**
+   * 漏洞名称
+   */
+  VULName?: string
+  /**
+   * cve
+   */
+  CVE?: string
+  /**
+   * 修复方案
+   */
+  Fix?: string
+  /**
+   * pocid
+   */
+  POCId?: string
+  /**
+   * 扫描来源
+   */
+  From?: string
+  /**
+   * 主机版本
+   */
+  CWPVersion?: number
+  /**
+   * 是否支持修复
+   */
+  IsSupportRepair?: boolean
+  /**
+   * 是否支持扫描
+   */
+  IsSupportDetect?: boolean
+  /**
+   * 实例uuid
+   */
+  InstanceUUID?: string
+  /**
+   * 攻击载荷
+   */
+  Payload?: string
+  /**
+   * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
+   */
+  EMGCVulType?: number
+}
+
+/**
+ * 异常登录白名单规则项（自定义与自学习共用，以 Type 区分）
+ */
+export interface LoginWhiteItem {
+  /**
+   * <p>白名单类型：Custom-自定义白名单 Learn-自学习白名单</p>
+   */
+  Type?: string
+  /**
+   * <p>规则所属账号 AppId，多账号场景下用于区分与后续编辑定位</p>
+   */
+  AppId?: number
+  /**
+   * <p>规则ID；自学习为规则组ID（组内最小行ID）</p>
+   */
+  Id?: number
+  /**
+   * <p>登录源IP（逗号分隔）；自学习白名单恒为空</p>
+   */
+  SrcIp?: string
+  /**
+   * <p>登录用户名（逗号分隔）；自学习白名单恒为空</p>
+   */
+  UserName?: string
+  /**
+   * <p>登录时段起始 HH:MM；自学习白名单恒为空</p>
+   */
+  StartTime?: string
+  /**
+   * <p>登录时段结束 HH:MM；自学习白名单恒为空</p>
+   */
+  EndTime?: string
+  /**
+   * <p>常用登录地列表</p>
+   */
+  Places?: Array<LoginWhitePlace>
+  /**
+   * <p>常用登录地展示文案（逗号分隔），供列表直接展示</p>
+   */
+  Locations?: string
+  /**
+   * <p>生效资产范围：0-指定主机（主机或标签命中） 1-全部主机</p>
+   */
+  Scope?: number
+  /**
+   * <p>生效主机 QUUID 列表（与 InstanceIDs 一一对应）</p>
+   */
+  QUUIDS?: Array<string>
+  /**
+   * <p>生效主机实例ID列表（与 QUUIDS 一一对应）</p>
+   */
+  InstanceIDs?: Array<string>
+  /**
+   * <p>剔除主机 QUUID 列表</p>
+   */
+  ExcludeQUUIDS?: Array<string>
+  /**
+   * <p>剔除主机实例ID列表</p>
+   */
+  ExcludeInstanceIDs?: Array<string>
+  /**
+   * <p>生效标签详情列表</p>
+   */
+  TagItems?: Array<EDRRuleTagItem>
+  /**
+   * <p>主机数：自定义为指定主机数（Scope=1 时为 0，前端展示全部主机）；自学习为组内去重主机数</p>
+   */
+  HostCount?: number
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>创建时间，格式 2006-01-02 15:04:05</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>最近修改时间，格式 2006-01-02 15:04:05</p>
+   */
+  ModifyTime?: string
 }
 
 /**
@@ -36087,6 +36365,36 @@ export interface LogDynamicIndex {
    * <p>状态</p>
    */
   Status?: boolean
+}
+
+/**
+ * DescribeLoginWhiteCustomListEDR请求参数结构体
+ */
+export interface DescribeLoginWhiteCustomListEDRRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>过滤条件数组（多个 Filter 间为 AND 关系）。支持 Name：Keyword（SrcIp/UserName/Locations/Remark 模糊）、SrcIp、UserName、Location、Remark、ModifyBeginTime、ModifyEndTime（时间格式 2006-01-02 15:04:05）；未知 Name 忽略不报错</p>
+   */
+  Filters?: Array<EDRFilter>
+  /**
+   * <p>分页大小，默认 10，上限 100；传 0 或大于 100 时按默认/上限返回</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移，默认 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方向：ASC-正序 DESC-倒序（大小写不敏感），默认 DESC</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段：CreateTime-创建时间 ModifyTime-修改时间，默认 ModifyTime；传非法值返回 InvalidParameter</p>
+   */
+  By?: string
 }
 
 /**
@@ -41852,6 +42160,28 @@ export interface DeleteAssetTagRequest {
 }
 
 /**
+ * 即将到期产品
+ */
+export interface ExpiringProduct {
+  /**
+   * <p>产品ID</p>
+   */
+  ProductId?: string
+  /**
+   * <p>产品名称</p>
+   */
+  ProductName?: string
+  /**
+   * <p>距到期天数<br>单位：天</p>
+   */
+  DaysToExpire?: number
+  /**
+   * <p>到期时间</p>
+   */
+  ExpireTime?: string
+}
+
+/**
  * DescribeDspmLogDeliveryType请求参数结构体
  */
 export interface DescribeDspmLogDeliveryTypeRequest {
@@ -42693,6 +43023,16 @@ export interface DescribeDspmAssetSupportedPrivilegesRequest {
  * ModifySandboxDLPRuleStatus返回参数结构体
  */
 export interface ModifySandboxDLPRuleStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLoginWhiteLearnEDR返回参数结构体
+ */
+export interface ModifyLoginWhiteLearnEDRResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -44425,6 +44765,68 @@ export interface DescribeSandboxLLMAuditAlertListResponse {
 }
 
 /**
+ * ModifyLoginWhiteCustomEDR请求参数结构体
+ */
+export interface ModifyLoginWhiteCustomEDRRequest {
+  /**
+   * <p>规则ID；自学习为规则组ID（组内最小行ID）</p>
+   */
+  Id?: number
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>登录源IP，多个以逗号分隔；支持单个IP、区间(a-b)、CIDR，支持 IPv4 与 IPv6；最长 2048 字符</p>
+   */
+  SrcIp?: string
+  /**
+   * <p>登录用户名，多个以逗号分隔；最长 1024 字符</p>
+   */
+  UserName?: string
+  /**
+   * <p>登录时段起始 HH:MM；与 EndTime 必须同时填写或同时为空</p>
+   */
+  StartTime?: string
+  /**
+   * <p>登录时段结束 HH:MM；与 StartTime 必须同时填写或同时为空</p>
+   */
+  EndTime?: string
+  /**
+   * <p>常用登录地列表，最多 200 个；ProvinceId/CityId 传 99999 表示全部省份/全部城市</p>
+   */
+  Places?: Array<LoginWhitePlaceInput>
+  /**
+   * <p>备注，最长 255 字符</p>
+   */
+  Remark?: string
+  /**
+   * <p>生效资产范围：0-指定主机（主机或标签命中） 1-全部主机</p>
+   */
+  Scope?: number
+  /**
+   * <p>指定主机（实例ID 形态）列表，最多 10000 项；服务端经 idmap 翻译为 QUUID 后与 QUUIDSWithAppId 合并去重</p>
+   */
+  InstanceIDsWithAppId?: Array<InstanceIDWithAppIdItem>
+  /**
+   * <p>剔除主机（实例ID 形态）列表，最多 10000 项</p>
+   */
+  ExcludeInstanceIDsWithAppId?: Array<InstanceIDWithAppIdItem>
+  /**
+   * <p>安全中心标签ID列表，最多 100 个；Scope=0 时与主机为或关系；自学习白名单不支持按标签生效（传非空将被拒绝）</p>
+   */
+  TagIDs?: Array<string>
+  /**
+   * <p>目标appid</p>
+   */
+  TargetAppIDs?: Array<number | bigint>
+  /**
+   * <p>是否加白历史告警</p>
+   */
+  DealOldEvents?: number
+}
+
+/**
  * DescribeNotifySettingAlert请求参数结构体
  */
 export type DescribeNotifySettingAlertRequest = null
@@ -44598,6 +45000,24 @@ export interface DescribeImageRegistryTimedScanTaskPreviewRequest {
 }
 
 /**
+ * DescribeEdrMalwareFile返回参数结构体
+ */
+export interface DescribeEdrMalwareFileResponse {
+  /**
+   * <p>样本下载链接。公有云为 COS 预签名 URL（1 小时过期）；非公有云且导出开关打开时为 data:application/octet-stream;base64,&lt;zip 的 base64&gt;</p>
+   */
+  FileUrl?: string
+  /**
+   * <p>导出文件名，形如 &lt;name&gt;.zip；仅非公有云 base64 分支返回，其余场景不返回该字段</p>
+   */
+  FileName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDspmAccessRecord返回参数结构体
  */
 export interface DescribeDspmAccessRecordResponse {
@@ -44702,6 +45122,24 @@ export interface OrderDetail {
  * CreateImageVirusWhitelist返回参数结构体
  */
 export interface CreateImageVirusWhitelistResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLoginWhiteLearnEDR返回参数结构体
+ */
+export interface DeleteLoginWhiteLearnEDRResponse {
+  /**
+   * <p>删除的主机记录行数（一个规则组可能含多行，与自定义白名单接口按规则条数统计的口径不同）</p>
+   */
+  DeletedCount?: number
+  /**
+   * <p>删除失败的账号 AppId 列表；仅当全部失败时才返回错误</p>
+   */
+  FailedAppIds?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -44885,21 +45323,21 @@ export interface DescribeAILinkSettingRequest {
 }
 
 /**
- * ModifyAssetTags返回参数结构体
+ * DescribeEdrMalwareFile请求参数结构体
  */
-export interface ModifyAssetTagsResponse {
+export interface DescribeEdrMalwareFileRequest {
   /**
-   * 状态码
+   * <p>EDR 告警唯一标识，必填，最长 34 字符</p>
    */
-  Code?: string
+  AlertId: string
   /**
-   * 信息
+   * <p>集团账号的成员id</p>
    */
-  Message?: string
+  MemberId?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>告警所属账号 AppId（跨账号场景由前端透传成员 AppId）；为 0 或省略时回退为登录账号 AppId</p>
    */
-  RequestId?: string
+  TargetAppId?: number
 }
 
 /**
@@ -47525,6 +47963,28 @@ export interface CommandPluginState {
  * EnableAISchedule返回参数结构体
  */
 export interface EnableAIScheduleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLoginWhiteLearnListEDR返回参数结构体
+ */
+export interface DescribeLoginWhiteLearnListEDRResponse {
+  /**
+   * <p>规则组总数（按 AppId + 常用登录地聚合）</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>自学习白名单规则组列表（Type 恒为 Learn），为空时返回 []</p>
+   */
+  List?: Array<LoginWhiteItem>
+  /**
+   * <p>自学习白名单开关状态；多账号时取当前账号，供前端空态提示前往开启</p>
+   */
+  AutoLearnEnable?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -54024,6 +54484,28 @@ export interface AccessKeyWhiteList {
    * 绑定策略id列表，为空代表全局生效
    */
   AlarmPolicyID?: Array<number | bigint>
+}
+
+/**
+ * 常用登录地（出参）
+ */
+export interface LoginWhitePlace {
+  /**
+   * <p>国家ID</p>
+   */
+  CountryId?: number
+  /**
+   * <p>省份ID；99999 表示全部省份</p>
+   */
+  ProvinceId?: number
+  /**
+   * <p>城市ID；99999 表示全部城市</p>
+   */
+  CityId?: number
+  /**
+   * <p>地点展示文案，服务端按 Language 生成，如 中国-广东-深圳</p>
+   */
+  Location?: string
 }
 
 /**

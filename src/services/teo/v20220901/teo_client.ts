@@ -861,6 +861,7 @@ import {
   SecurityWeightedAction,
   ModifyMultiPathGatewayLineResponse,
   DescribeDefaultCertificatesResponse,
+  SemanticAnalysisRules,
   CreateOriginGroupResponse,
   CreateMultiPathGatewayLineRequest,
   IPGroupReference,

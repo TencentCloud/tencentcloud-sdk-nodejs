@@ -1720,7 +1720,7 @@ export interface GetViewRequest {
   /**
    * <p>调用时所在workspace唯一id</p>
    */
-  WorkspaceId?: string
+  WorkspaceId: string
   /**
    * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
    */
@@ -4487,6 +4487,28 @@ export interface AdvancedParameter {
 }
 
 /**
+ * ListWorkspaceRoles请求参数结构体
+ */
+export interface ListWorkspaceRolesRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>关键字，支持按角色名称模糊搜索</p>
+   */
+  NameKeyword?: string
+  /**
+   * <p>页码，从1开始，默认1</p><p>默认值：1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，取值范围为 [1,100]，越界时自动收敛到边界值</p><p>默认值：10</p>
+   */
+  PageSize?: number
+}
+
+/**
  * UpdateWorkspaceGroupsTags请求参数结构体
  */
 export interface UpdateWorkspaceGroupsTagsRequest {
@@ -4832,6 +4854,20 @@ export interface ListConsoleRolesResponse {
 }
 
 /**
+ * ListWorkspaceRoles返回参数结构体
+ */
+export interface ListWorkspaceRolesResponse {
+  /**
+   * <p>工作空间角色结果</p>
+   */
+  Data?: ListWorkspaceRolesRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 获取模型版本结果
  */
 export interface GetModelVersionRsp {
@@ -4980,6 +5016,20 @@ export interface ListConsoleGroupUsersRequest {
    * <p>每页大小，默认10，最小10，最大100</p>
    */
   PageSize?: number
+}
+
+/**
+ * 角色完整信息
+ */
+export interface Role {
+  /**
+   * <p>角色基本信息</p>
+   */
+  BasicInfo?: RoleBasicInfo
+  /**
+   * <p>角色权限</p>
+   */
+  Permissions?: Array<RolePermission>
 }
 
 /**
@@ -5684,6 +5734,32 @@ export interface GetFileRequest {
 }
 
 /**
+ * 查询工作空间角色列表
+ */
+export interface ListWorkspaceRolesRsp {
+  /**
+   * <p>角色列表</p>
+   */
+  Items?: Array<Role>
+  /**
+   * <p>当前页码</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总记录数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPageNumber?: number
+}
+
+/**
  * UpdateWorkspace请求参数结构体
  */
 export interface UpdateWorkspaceRequest {
@@ -5893,7 +5969,7 @@ export interface DeleteTableRequest {
   /**
    * <p>调用时所在workspace唯一id</p>
    */
-  WorkspaceId?: string
+  WorkspaceId: string
   /**
    * <p>数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除表，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误。通过ListConnections接口获取</p>
    */
@@ -8215,7 +8291,7 @@ export interface GetCatalogRequest {
    */
   WorkspaceId: string
   /**
-   * <p>数据目录id</p>
+   * <p>数据目录id，通过ListCatalogs接口获取</p>
    */
   CatalogId?: string
   /**

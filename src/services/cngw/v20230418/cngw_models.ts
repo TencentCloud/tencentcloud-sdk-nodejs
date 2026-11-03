@@ -20,9 +20,29 @@
  */
 export interface CreateCloudNativeAPIGatewayMCPToolRequest {
   /**
+   * <p>网关实例 id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>MCP Server Id</p>
+   */
+  ServerId: string
+  /**
    * <p>内容类型</p>
    */
   ContentType: string
+  /**
+   * <p>名字</p>
+   */
+  Name: string
+  /**
+   * <p>方法</p><p>枚举值：</p><ul><li>GET： GET</li><li>POST： POST</li><li>PUT： PUT</li><li>DELETE： DELETE</li><li>PATCH： PATCH</li></ul>
+   */
+  Method: string
+  /**
+   * <p>路径</p>
+   */
+  Path: string
   /**
    * <p>展示名字</p>
    */
@@ -31,6 +51,14 @@ export interface CreateCloudNativeAPIGatewayMCPToolRequest {
    * <p>服务 id</p>
    */
   ServiceId?: string
+  /**
+   * <p>输入</p>
+   */
+  InputParams?: Array<CNAPIGwMCPToolParam>
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
 }
 
 /**

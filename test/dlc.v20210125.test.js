@@ -88,6 +88,16 @@ it("dlc.v20210125.DescribeWorkGroupInfo", async function () {
     }
 })
 
+it("dlc.v20210125.GetRayServeEvent", async function () {
+    try {
+       const data = await client.GetRayServeEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteWorkGroup", async function () {
     try {
        const data = await client.DeleteWorkGroup({})
@@ -1111,6 +1121,16 @@ it("dlc.v20210125.StopMlflowServer", async function () {
 it("dlc.v20210125.ListInferenceEngines", async function () {
     try {
        const data = await client.ListInferenceEngines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.SubmitRayJob", async function () {
+    try {
+       const data = await client.SubmitRayJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3301,6 +3321,16 @@ it("dlc.v20210125.DeleteInferenceService", async function () {
 it("dlc.v20210125.CreateMlflowServer", async function () {
     try {
        const data = await client.CreateMlflowServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ListStorages", async function () {
+    try {
+       const data = await client.ListStorages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
