@@ -4158,7 +4158,7 @@ export interface ChannelDescribeOrganizationSealsRequest {
    */
   SealTypes?: Array<string>
   /**
-   * <p>需查询的印章状态列表。</p><ul> <li>空，()仅查询启用状态的印章；</li> <li><strong>ALL</strong>，查询所有状态的印章；</li> <li><strong>CHECKING</strong>，查询待审核的印章；</li> <li><strong>SUCCESS</strong>，查询启用状态的印章；</li> <li><strong>FAIL</strong>，查询印章审核拒绝的印章；</li> <li><strong>DISABLE</strong>，查询已停用的印章；</li> <li><strong>STOPPED</strong>，查询已终止的印章；</li> <li><strong>VOID</strong>，查询已作废的印章；</li> <li><strong>INVALID</strong>，查询已失效的印章。</li> </ul>
+   * <p>需查询的印章状态数组。默认为空，仅查询启用状态的印章</p><p>枚举值：</p><ul><li>ALL： 所有状态</li><li>CHECKING： 待审核</li><li>CHECKING-SADM： 待超管审核</li><li>SUCCESS： 启用状态</li><li>FAIL： 审核拒绝</li><li>DISABLE： 已停用</li><li>STOPPED： 已终止</li><li>VOID： 已作废</li><li>INVALID： 已失效</li></ul>
    */
   SealStatuses?: Array<string>
 }
@@ -7660,11 +7660,11 @@ export interface ChannelCreateBatchSignUrlRequest {
  */
 export interface ChannelUpdateSealStatusResponse {
   /**
-   * 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。
+   * <p>人脸验证操作人链接，用法可以参考&quot;<a href="https://qian.tencent.com/developers/company/openwxminiprogram/">跳转电子签小程序配置</a>&quot;，默认为空。</p>
    */
   SealOperatorVerifyPath?: string
   /**
-   * 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。
+   * <p>人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。</p>
    */
   SealOperatorVerifyQrcodeUrl?: string
   /**
@@ -7911,29 +7911,28 @@ export interface ModifyFlowDeadlineRequest {
  */
 export interface ChannelUpdateSealStatusRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p>
    */
   Agent: Agent
   /**
-   * 印章状态，目前支持传入以下类型：
-<ul><li>DISABLE-停用印章</li></ul>
+   * <p>印章状态，目前支持传入以下类型：</p><ul><li>ENABLE-启用印章</li><li>DISABLE-停用印章</li></ul>
    */
   Status: string
   /**
-   * 印章ID
+   * <p>印章ID</p>
    */
   SealId: string
   /**
-   * 更新印章状态原因说明
+   * <p>更新印章状态原因说明</p>
    */
   Reason?: string
   /**
-   * 操作者的信息
+   * <p>操作者的信息</p>
    * @deprecated
    */
   Operator?: UserInfo
   /**
-   * 个性化配置字段，默认不传。
+   * <p>个性化配置字段，默认不传。</p>
    */
   Options?: Array<Option>
 }
@@ -8283,65 +8282,59 @@ export interface CreateBatchAdminChangeInvitationsRequest {
  */
 export interface OccupiedSeal {
   /**
-   * 电子印章编号
+   * <p>电子印章编号</p>
    */
   SealId?: string
   /**
-   * 电子印章名称
+   * <p>电子印章名称</p>
    */
   SealName?: string
   /**
-   * 电子印章授权时间戳，单位秒
+   * <p>电子印章授权时间戳，单位秒</p>
    */
   CreateOn?: number
   /**
-   * 电子印章授权人，电子签的UserId
+   * <p>电子印章授权人，电子签的UserId</p>
    */
   Creator?: string
   /**
-   * 电子印章策略Id
+   * <p>电子印章策略Id</p>
    */
   SealPolicyId?: string
   /**
-   * 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止）
+   * <p>印章状态</p><p>枚举值：</p><ul><li>CHECKING： 待审核</li><li>CHECKING-SADM： 待超管审核</li><li>SUCCESS： 启用状态</li><li>FAIL： 审核拒绝</li><li>DISABLE： 已停用</li><li>STOPPED： 已终止</li><li>VOID： 已作废</li><li>INVALID： 已失效</li></ul>
    */
   SealStatus?: string
   /**
-   * 审核失败原因
+   * <p>审核失败原因</p>
    */
   FailReason?: string
   /**
-   * 印章图片url，5分钟内有效
+   * <p>印章图片url，5分钟内有效</p>
    */
   Url?: string
   /**
-   * 电子印章类型 , 可选类型如下: 
-<ul><li>**OFFICIAL**: (默认)公章</li>
-<li>**CONTRACT**: 合同专用章;</li>
-<li>**FINANCE**: 财务专用章;</li>
-<li>**PERSONNEL**: 人事专用章</li>
-<li>**INVOICE**: 发票专用章</li>
-</ul>
+   * <p>电子印章类型 , 可选类型如下: </p><ul><li>**OFFICIAL**: (默认)公章</li><li>**CONTRACT**: 合同专用章;</li><li>**FINANCE**: 财务专用章;</li><li>**PERSONNEL**: 人事专用章</li><li>**INVOICE**: 发票专用章</li></ul>
    */
   SealType?: string
   /**
-   * 用印申请是否为永久授权
+   * <p>用印申请是否为永久授权</p>
    */
   IsAllTime?: boolean
   /**
-   * 授权人列表
+   * <p>授权人列表</p>
    */
   AuthorizedUsers?: Array<AuthorizedUser>
   /**
-   * 印章的真实宽度，单位毫米
+   * <p>印章的真实宽度，单位毫米</p>
    */
   RealWidth?: number
   /**
-   * 印章的真实高度，单位毫米
+   * <p>印章的真实高度，单位毫米</p>
    */
   RealHeight?: number
   /**
-   * 印章描述
+   * <p>印章描述</p>
    */
   SealDescription?: string
 }

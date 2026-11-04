@@ -6605,27 +6605,27 @@ export interface DescribeRuleOverviewResponse {
  */
 export interface CreateAlertCenterRuleAsyncRequest {
   /**
-   * <p>必填的告警方向：0 出向，1 入向，3 内网。用于 HandleIpList 中 IP 目标的处置方向；其它目标也必须传上述有效值。从 DescribeCfwAlerts 复制方向时，将 alerts[].direction 的 outbound、inbound、lateral 分别转换为 JSON 整数 0、1、3。</p>
+   * <p>当前日志方向： 0 出向 1 入向</p>
    */
   AlertDirection: number
   /**
-   * <p>必填的处置生效方向。支持空字符串、0（互联网出向）、1（互联网入向）、0,1/1,0（互联网双向）、3（内网访问）、5（内网访问源）、6（内网访问目的）及 5,6/6,5。空字符串表示按告警原方向处置；同一 IP 的已有规则方向会与本次方向合并。</p>
+   * <p>处置方向： 0出向 1入向 0,1出入向 3内网</p>
    */
   HandleDirection: string
   /**
-   * <p>处置有效期：1 表示 1 天，7 表示 7 天，-2 表示永久。</p>
+   * <p>处置时间<br>1  1天<br>7   7天<br>-2 永久</p>
    */
   HandleTime: number
   /**
-   * <p>必填的处置类型：1 按 HandleIdList 或 HandleEventIdList 封禁，2 按 HandleIdList、HandleEventIdList 或 BlockDomain 加白，3 按 HandleIpList 加白 IP，4 按 HandleIpList 封禁 IP，5 将 HandleIdList 或 HandleEventIdList 对应的安全基线告警地址加入指定方向的安全基线列表，8 按 HandleEventIdList 关联资产或 AssetIdList 新增隔离。五类目标至少提供一类；HandleType=8 未能从事件解析出资产时必须提供 AssetIdList。IsolateType 和 WhiteIpList 仅用于类型 8。</p>
+   * <p>处置类型<br>当HandleIdList 不为空时：1封禁 2放通<br>当HandleIpList 不为空时：3放通 4封禁</p>
    */
   HandleType: number
   /**
-   * <p>资产隔离目标列表，可省略；仅 HandleType=8 使用。直接按资产隔离时，调用 DescribeCfwAssets，传 AssetType=host 和目标 InstanceId，解析返回结果；仅在唯一 assets[].instance_id 与目标完全相等时将其写入本字段，不使用资产名称。</p>
+   * <p>隔离资产列表</p>
    */
   AssetIdList?: Array<string>
   /**
-   * <p>域名加白目标，传合法域名；HandleType 必须为 2，并同时传 TargetEventIdList。</p>
+   * <p>封禁域名-保留字段</p>
    */
   BlockDomain?: string
   /**
@@ -6633,37 +6633,41 @@ export interface CreateAlertCenterRuleAsyncRequest {
    */
   CfwAiAgentOperationSource?: string
   /**
-   * <p>可选处置说明，最多 50 个 Unicode 字符。</p>
+   * <p>处置描述</p>
    */
   HandleComment?: string
   /**
-   * <p>告警事件 ID 列表，可省略。通过 DescribeCfwAlerts 获取，返回 alerts[].current_event_id 时使用该值，否则使用 alerts[].event_id。事件对应的告警日志会与 HandleIdList 合并后参与处置。</p>
+   * <p>处置对象,事件ID列表，  IdLists,IpList,EventIdList三选一</p>
    */
   HandleEventIdList?: Array<string>
   /**
-   * <p>告警日志 ID 列表，可省略；可与 HandleEventIdList 同时使用。调用 DescribeLogs，传 Index=rule_threatinfo 和目标日志的查询条件，解析返回结果，仅使用目标记录的 log_id。告警事件 ID 使用 HandleEventIdList。</p>
+   * <p>处置对象,ID列表，  IdLists,IpList,EventIdList三选一</p>
    */
   HandleIdList?: Array<string>
   /**
-   * <p>IP 处置目标列表，每项必须是有效 IP 地址。HandleType=3 表示加白，HandleType=4 表示封禁；可使用 DescribeCfwAlerts 返回的 alerts[].src_ip_list 或 alerts[].dst_ip_list。</p>
+   * <p>处置对象,IP列表，  IdLists,IpList,EventIdList三选一</p>
    */
   HandleIpList?: Array<string>
   /**
-   * <p>处置原因，可省略：0 未指定原因，1 重复，2 误报，3 紧急加白；主要用于加白记录。</p>
+   * <p>放通原因:<br>0默认 1重复 2误报 3紧急放通</p>
    */
   IgnoreReason?: number
   /**
-   * <p>隔离范围数组，可省略：1 互联网入站，2 互联网出站，4 内网访问。仅 HandleType=8 使用；组合多个范围时传入对应值且不要重复，重复值会改变最终隔离范围。</p>
+   * <p>隔离类型 1 互联网入站 2 互联网出站 4 内网访问</p>
    */
   IsolateType?: Array<number | bigint>
   /**
-   * <p>处置关联的来源事件 ID 列表，仅用于 HandleIpList 或 BlockDomain。BlockDomain 处置时必填，HandleIpList 处置时可省略；通过 DescribeCfwAlerts 获取，返回 alerts[].current_event_id 时使用该值，否则使用 alerts[].event_id。</p>
+   * <p>处置HandleIpList，属于的告警事件ID</p>
    */
   TargetEventIdList?: Array<string>
   /**
-   * <p>隔离后仍允许通信的 IPv4 地址列表，仅 HandleType=8 使用。可省略或传空数组；非空时每项必须是有效 IPv4 地址。</p>
+   * <p>加白IP列表 隔离时放通的ip列表</p>
    */
   WhiteIpList?: Array<string>
+  /**
+   * <p>排除列表</p>
+   */
+  ExcludeIdList?: Array<string>
 }
 
 /**
@@ -9666,15 +9670,15 @@ export interface DeleteNatFwDnatRuleRequest {
  */
 export interface CreateAlertCenterRuleAsyncResponse {
   /**
-   * 请求返回码，0 表示已进入异步处理；处理进度见 Status。
+   * <p>返回状态码：<br>0 成功<br>非0 失败</p>
    */
   ReturnCode?: number
   /**
-   * 与 ReturnCode 对应的结果信息，成功时为 success。
+   * <p>返回信息：<br>success 成功<br>其他</p>
    */
   ReturnMsg?: string
   /**
-   * 异步处理状态：1 表示处理中，使用完全相同的请求参数继续查询；修改参数会发起新的操作。0 表示处理结束，处置结果通过对应查询接口获取。
+   * <p>处置状态码：0  处置成功 1处置中  -1 通用错误，不用处理-3 表示重复，需重新刷新列表其他</p>
    */
   Status?: number
   /**

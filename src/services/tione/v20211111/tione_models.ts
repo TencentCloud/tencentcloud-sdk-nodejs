@@ -258,61 +258,25 @@ export interface DescribePresetImageListRequest {
 }
 
 /**
- * DescribeLogs请求参数结构体
+ * 访问规则
  */
-export interface DescribeLogsRequest {
+export interface AccessRule {
   /**
-   * <p>服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测<br>枚举值：</p><ul><li>TRAIN</li><li>NOTEBOOK</li><li>INFER</li><li>BATCH</li></ul>
+   * <p>模块</p>
    */
-  Service: string
+  Module?: string
   /**
-   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   * <p>功能权限点</p>
    */
-  TiProjectId?: string
+  ActionType?: Array<string>
   /**
-   * <p>日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时</p>
+   * <p>数据权限点</p>
    */
-  StartTime?: string
+  DataActionType?: Array<string>
   /**
-   * <p>日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间</p>
+   * <p>功能权限点名称</p>
    */
-  EndTime?: string
-  /**
-   * <p>日志查询条数，默认值100，最大值1000</p>
-   */
-  Limit?: number
-  /**
-   * <p>服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：</p><ul><li>Service类型为TRAIN：<br>调用<a href="/document/product/851/75089">DescribeTrainingTask接口</a>查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId</li><li>Service类型为NOTEBOOK：<br>调用<a href="/document/product/851/95662">DescribeNotebook接口</a>查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName</li><li>Service类型为INFER：<br>调用<a href="/document/product/851/82285">DescribeModelServiceGroup接口</a>查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId</li><li>Service类型为BATCH：<br>调用<a href="/document/product/851/80180">DescribeBatchTask接口</a>查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId</li></ul>
-   */
-  ServiceId?: string
-  /**
-   * <p>Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：</p><ul><li>Service类型为TRAIN：<br>调用<a href="/document/product/851/75088">DescribeTrainingTaskPods接口</a>查询训练任务pod列表，PodName为接口返回值中Response.PodNames</li><li>Service类型为NOTEBOOK：<br>调用<a href="/document/product/851/95662">DescribeNotebook接口</a>查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName</li><li>Service类型为INFER：<br>调用<a href="/document/product/851/82287">DescribeModelService接口</a>查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos</li><li>Service类型为BATCH：<br>调用<a href="/document/product/851/80180">DescribeBatchTask接口</a>查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList<br>注：支持结尾通配符*</li></ul>
-   */
-  PodName?: string
-  /**
-   * <p>排序方向（可选值为ASC, DESC ），默认为DESC</p>
-   */
-  Order?: string
-  /**
-   * <p>按哪个字段排序（可选值为Timestamp），默认值为Timestamp</p>
-   */
-  OrderField?: string
-  /**
-   * <p>日志查询上下文，查询下一页的时候需要回传这个字段，该字段来自本接口的返回</p>
-   */
-  Context?: string
-  /**
-   * <p>过滤条件<br>注意: </p><ol><li>Filter.Name：目前只支持Key（也就是按关键字过滤日志）</li><li>Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足</li><li>Filter. Negative和Filter. Fuzzy没有使用</li></ol>
-   */
-  Filters?: Array<Filter>
-  /**
-   * <p>使用OFFSET分页查询时，指定返回的数据偏移量，默认为0</p>
-   */
-  Offset?: number
-  /**
-   * <p>日志类别</p><p>枚举值：</p><ul><li>stdout： stdout</li><li>stderr： stderr</li></ul><p>默认值：&quot;&quot;</p>
-   */
-  LogStream?: string
+  ActionTypeName?: Array<string>
 }
 
 /**
@@ -635,6 +599,20 @@ export interface ModifyServiceGroupWeightsResponse {
 }
 
 /**
+ * 定时的事务和行为
+ */
+export interface ScheduledAction {
+  /**
+   * 是否要定时停止服务，true or false。true 则 ScheduleStopTime 必填， false 则 ScheduleStopTime 不生效
+   */
+  ScheduleStop?: boolean
+  /**
+   * 要执行定时停止的时间，格式：“2022-01-26T19:46:22+08:00”
+   */
+  ScheduleStopTime?: string
+}
+
+/**
  * 大模型生成Token统计
  */
 export interface Usage {
@@ -757,21 +735,13 @@ export interface Filter {
 }
 
 /**
- * 训练诊断工具配置
+ * ModifyWorkspaceMembers返回参数结构体
  */
-export interface TrainToolConfig {
+export interface ModifyWorkspaceMembersResponse {
   /**
-   * <p>是否开启 Hang 检测</p><p>默认值：false</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnableHangMonitor?: boolean
-  /**
-   * <p>Hang 检测的节点列表</p>
-   */
-  HangMonitorNodes?: Array<string>
-  /**
-   * <p>Hang 超时时间</p><p>取值范围：[1, 14400]</p><p>单位：分</p>
-   */
-  LogHangTimeoutInMinute?: number
+  RequestId?: string
 }
 
 /**
@@ -819,6 +789,116 @@ export interface CreateDatasetResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLogs请求参数结构体
+ */
+export interface DescribeLogsRequest {
+  /**
+   * <p>服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测<br>枚举值：</p><ul><li>TRAIN</li><li>NOTEBOOK</li><li>INFER</li><li>BATCH</li></ul>
+   */
+  Service: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时</p>
+   */
+  StartTime?: string
+  /**
+   * <p>日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>日志查询条数，默认值100，最大值1000</p>
+   */
+  Limit?: number
+  /**
+   * <p>服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：</p><ul><li>Service类型为TRAIN：<br>调用<a href="/document/product/851/75089">DescribeTrainingTask接口</a>查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId</li><li>Service类型为NOTEBOOK：<br>调用<a href="/document/product/851/95662">DescribeNotebook接口</a>查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName</li><li>Service类型为INFER：<br>调用<a href="/document/product/851/82285">DescribeModelServiceGroup接口</a>查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId</li><li>Service类型为BATCH：<br>调用<a href="/document/product/851/80180">DescribeBatchTask接口</a>查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId</li></ul>
+   */
+  ServiceId?: string
+  /**
+   * <p>Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：</p><ul><li>Service类型为TRAIN：<br>调用<a href="/document/product/851/75088">DescribeTrainingTaskPods接口</a>查询训练任务pod列表，PodName为接口返回值中Response.PodNames</li><li>Service类型为NOTEBOOK：<br>调用<a href="/document/product/851/95662">DescribeNotebook接口</a>查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName</li><li>Service类型为INFER：<br>调用<a href="/document/product/851/82287">DescribeModelService接口</a>查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos</li><li>Service类型为BATCH：<br>调用<a href="/document/product/851/80180">DescribeBatchTask接口</a>查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList<br>注：支持结尾通配符*</li></ul>
+   */
+  PodName?: string
+  /**
+   * <p>排序方向（可选值为ASC, DESC ），默认为DESC</p>
+   */
+  Order?: string
+  /**
+   * <p>按哪个字段排序（可选值为Timestamp），默认值为Timestamp</p>
+   */
+  OrderField?: string
+  /**
+   * <p>日志查询上下文，查询下一页的时候需要回传这个字段，该字段来自本接口的返回</p>
+   */
+  Context?: string
+  /**
+   * <p>过滤条件<br>注意: </p><ol><li>Filter.Name：目前只支持Key（也就是按关键字过滤日志）</li><li>Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足</li><li>Filter. Negative和Filter. Fuzzy没有使用</li></ol>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>使用OFFSET分页查询时，指定返回的数据偏移量，默认为0</p>
+   */
+  Offset?: number
+  /**
+   * <p>日志类别</p><p>枚举值：</p><ul><li>stdout： stdout</li><li>stderr： stderr</li></ul><p>默认值：&quot;&quot;</p>
+   */
+  LogStream?: string
+}
+
+/**
+ * 设备对应的镜像信息
+ */
+export interface DeviceImageInfo {
+  /**
+   * 设备类型, 支持GPU等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceType?: string
+  /**
+   * 镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageInfo?: ImageInfo
+}
+
+/**
+ * ModifyRole返回参数结构体
+ */
+export interface ModifyRoleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 跨租户弹性网卡下Pod调用信息
+ */
+export interface CrossTenantENIInfo {
+  /**
+   * Pod IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrimaryIP?: string
+  /**
+   * Pod Port
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: string
+}
+
+/**
+ * 编码后的启动命令信息
+ */
+export interface EncodedStartCmdInfo {
+  /**
+   * 任务的启动命令，以base64格式输入，注意转换时需要完整输入{"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""}
+   */
+  StartCmdInfo?: string
 }
 
 /**
@@ -1020,89 +1100,6 @@ export interface Service {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceSupplyAttribute?: ResourceSupplyAttribute
-}
-
-/**
- * 设备对应的镜像信息
- */
-export interface DeviceImageInfo {
-  /**
-   * 设备类型, 支持GPU等
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeviceType?: string
-  /**
-   * 镜像信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImageInfo?: ImageInfo
-}
-
-/**
- * 跨租户弹性网卡下Pod调用信息
- */
-export interface CrossTenantENIInfo {
-  /**
-   * Pod IP
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrimaryIP?: string
-  /**
-   * Pod Port
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port?: string
-}
-
-/**
- * 模型专业参数
- */
-export interface HyperParameter {
-  /**
-   * 最大nnz数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxNNZ?: string
-  /**
-   * slot数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SlotNum?: string
-  /**
-   * gpu cache 使用率
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CpuCachePercentage?: string
-  /**
-   * cpu cache 使用率
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GpuCachePercentage?: string
-  /**
-   * 是否开启分布式模式(true/false)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableDistributed?: string
-  /**
-   * TORCH_SCRIPT、MMDETECTION、DETECTRON2、HUGGINGFACE格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为3
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MinBlockSizePt?: string
-  /**
-   * FROZEN_GRAPH、SAVED_MODEL格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为10
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MinBlockSizeTf?: string
-  /**
-   * Stable Diffusion 模型优化参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PipelineArgs?: string
-  /**
-   * Stable Diffusion 模型优化参数，控制Lora模型的影响效果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoraScale?: string
 }
 
 /**
@@ -1340,29 +1337,13 @@ export interface ModifyNotebookTagsResponse {
 }
 
 /**
- * UpdateDataSource请求参数结构体
+ * DescribeWorkspaceQuotas返回参数结构体
  */
-export interface UpdateDataSourceRequest {
+export interface DescribeWorkspaceQuotasResponse {
   /**
-   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TiProjectId?: string
-  /**
-   * 数据源ID
-   */
-  Id?: string
-  /**
-   * 数据源名称
-   */
-  Name?: string
-  /**
-   * 数据源权限，取值有RW RO
-   */
-  Permission?: string
-  /**
-   * 数据源挂载配置
-   */
-  MountConfigure?: MountConfigureInfo
+  RequestId?: string
 }
 
 /**
@@ -1494,21 +1475,51 @@ export interface DescribeBillingResourceGroupsResponse {
 }
 
 /**
- * DescribeTrainingTask请求参数结构体
+ * DescribeSubAccountLinuxUserInfos请求参数结构体
  */
-export interface DescribeTrainingTaskRequest {
-  /**
-   * 训练任务ID
-   */
-  Id: string
+export interface DescribeSubAccountLinuxUserInfosRequest {
   /**
    * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
-   * 训练任务实例ID
+   * 分页偏移量（0 表示全量）
    */
-  InstanceId?: string
+  Offset?: number
+  /**
+   * 每页数量（0 表示全量）
+   */
+  Limit?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * UpdateDataSource请求参数结构体
+ */
+export interface UpdateDataSourceRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * 数据源ID
+   */
+  Id?: string
+  /**
+   * 数据源名称
+   */
+  Name?: string
+  /**
+   * 数据源权限，取值有RW RO
+   */
+  Permission?: string
+  /**
+   * 数据源挂载配置
+   */
+  MountConfigure?: MountConfigureInfo
 }
 
 /**
@@ -1670,14 +1681,62 @@ export interface OperatorInfo {
 }
 
 /**
- * 默认Nginx网关结构
+ * DeleteModelService返回参数结构体
  */
-export interface DefaultNginxGatewayCallInfo {
+export interface DeleteModelServiceResponse {
   /**
-   * host
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 工作负载的状态
+ */
+export interface WorkloadStatus {
+  /**
+   * 当前实例数
+   */
+  Replicas: number
+  /**
+   * 更新的实例数
+   */
+  UpdatedReplicas: number
+  /**
+   * 就绪的实例数
+   */
+  ReadyReplicas: number
+  /**
+   * 可用的实例数
+   */
+  AvailableReplicas: number
+  /**
+   * 不可用的实例数
+   */
+  UnavailableReplicas: number
+  /**
+   * Normal	正常运行中
+Abnormal	服务异常，例如容器启动失败等
+Waiting	服务等待中，例如容器下载镜像过程等
+Stopped   已停止 
+Pending 启动中
+Stopping 停止中
+   */
+  Status: string
+  /**
+   * 工作负载的状况信息
+   * @deprecated
+   */
+  StatefulSetCondition?: Array<StatefulSetCondition>
+  /**
+   * 工作负载历史的状况信息
+   */
+  Conditions?: Array<StatefulSetCondition>
+  /**
+   * 状态异常时，展示原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Host?: string
+  Reason?: string
 }
 
 /**
@@ -2131,33 +2190,13 @@ export interface ChatCompletionRequest {
 }
 
 /**
- * 智能路由完整对象（挂在 ServiceGroup 的 44 号）
+ * DescribeAccessRules请求参数结构体
  */
-export interface SmartRouter {
+export interface DescribeAccessRulesRequest {
   /**
-   * 智能路由开关状态（true=已开启，false=未开启/已停止）
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
-  Enabled?: boolean
-  /**
-   * 绑定的服务组 ID（一对一）
-   */
-  ServiceGroupId?: string
-  /**
-   * 组件列表（gateway + scheduler；repeated 为未来扩展预留）
-   */
-  ComponentList?: Array<SmartRouterComponent>
-  /**
-   * 创建人
-   */
-  Creator?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
+  TiProjectId?: string
 }
 
 /**
@@ -2171,140 +2210,17 @@ export interface CreateMountLimitResponse {
 }
 
 /**
- * 出参类型
+ * DescribeBillingSpecsPrice返回参数结构体
  */
-export interface TrainingTaskSetItem {
+export interface DescribeBillingSpecsPriceResponse {
   /**
-   * <p>训练任务ID</p>
+   * 计费项价格，支持批量返回
    */
-  Id?: string
+  SpecsPrice?: Array<SpecPrice>
   /**
-   * <p>训练任务名称</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * <p>框架名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FrameworkName?: string
-  /**
-   * <p>训练框架版本</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FrameworkVersion?: string
-  /**
-   * <p>框架运行环境</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FrameworkEnvironment?: string
-  /**
-   * <p>计费模式</p>
-   */
-  ChargeType?: string
-  /**
-   * <p>计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中</p>
-   */
-  ChargeStatus?: string
-  /**
-   * <p>预付费专用资源组</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupId?: string
-  /**
-   * <p>资源配置</p>
-   */
-  ResourceConfigInfos?: Array<ResourceConfigInfo>
-  /**
-   * <p>训练模式eg：PS_WORKER、DDP、MPI、HOROVOD</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrainingMode?: string
-  /**
-   * <p>任务状态</p><p>枚举值：</p><ul><li>SUBMITTING： 提交中</li><li>PENDING： 排队中</li><li>STARTING： 启动中</li><li>RUNNING： 运行中</li><li>STOPPING： 停止中</li><li>STOPPED： 已停止</li><li>FAILED： 异常</li><li>SUCCEED： 已完成</li><li>SUBMIT_FAILED： 提交失败</li></ul>
-   */
-  Status?: string
-  /**
-   * <p>运行时长</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuntimeInSeconds?: number
-  /**
-   * <p>创建时间</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>训练开始时间</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime?: string
-  /**
-   * <p>训练结束时间</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * <p>训练输出</p>
-   */
-  Output?: CosPathInfo
-  /**
-   * <p>失败原因</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FailureReason?: string
-  /**
-   * <p>更新时间</p>
-   */
-  UpdateTime?: string
-  /**
-   * <p>计费金额信息，eg：2.00元/小时 (按量计费)</p>
-   */
-  BillingInfo?: string
-  /**
-   * <p>预付费专用资源组名称</p>
-   */
-  ResourceGroupName?: string
-  /**
-   * <p>自定义镜像信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImageInfo?: ImageInfo
-  /**
-   * <p>任务信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message?: string
-  /**
-   * <p>标签配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * <p>回调地址</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CallbackUrl?: string
-  /**
-   * <p>任务subUin信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubUin?: string
-  /**
-   * <p>任务创建者名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubUinName?: string
-  /**
-   * <p>任务AppId</p>
-   */
-  AppId?: string
-  /**
-   * <p>环境变量</p>
-   */
-  Envs?: Array<EnvVar>
-  /**
-   * <p>操作者信息</p>
-   */
-  LatestOperatorInfo?: OperatorInfo
+  RequestId?: string
 }
 
 /**
@@ -2473,6 +2389,22 @@ export interface DataPoint {
 }
 
 /**
+ * gpu 详情
+ */
+export interface GpuDetail {
+  /**
+   * GPU 显卡类型；枚举值: V100 A100 T4
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * GPU 显卡数；单位为1/100卡，比如100代表1卡
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: number
+}
+
+/**
  * DescribeNotebook返回参数结构体
  */
 export interface DescribeNotebookResponse {
@@ -2638,17 +2570,17 @@ EXIST：导入现有版本
 }
 
 /**
- * 表格数据集表头信息
+ * DescribeTrainingModelVersions返回参数结构体
  */
-export interface SchemaInfo {
+export interface DescribeTrainingModelVersionsResponse {
   /**
-   * 长度30字符内
+   * <p>模型版本列表</p>
    */
-  Name: string
+  TrainingModelVersions?: Array<TrainingModelVersionDTO>
   /**
-   * 数据类型
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: string
+  RequestId?: string
 }
 
 /**
@@ -2713,6 +2645,47 @@ export interface Event {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceName: string
+}
+
+/**
+ * 智能路由组件（运行时视图，对齐 ModelService.RoleSpec + ServiceInfo.Status）
+ */
+export interface SmartRouterComponent {
+  /**
+   * <p>组件名称：{ServiceGroupId}-gateway / {ServiceGroupId}-scheduler</p>
+   */
+  Name?: string
+  /**
+   * <p>组件类型：&quot;Gateway&quot; / &quot;Scheduler&quot;</p>
+   */
+  Type?: string
+  /**
+   * <p>组件镜像（从 K8s Deployment 实时查询）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageInfo?: ImageInfo
+  /**
+   * <p>期望配置（Replicas/Cpu/Memory/Env）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceConfig?: SmartRouterResourceConfig
+  /**
+   * <p>组件状态：CREATING 创建中 / CREATE_FAILED 创建失败 / Normal 正常运行中 / Stopped 已停止 / Stopping 停止中 / Abnormal 异常 / Pending 启动中 / Waiting 就绪中</p>
+   */
+  Status?: string
+  /**
+   * <p>资源规格（查询时回显用户创建/修改时的资源选择）。公有云场景展示：ChargeType / Zone / ResourceSupplyAttribute；内网版场景展示：QueueId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceSpec?: SmartRouterResourceSpec
+  /**
+   * <p>业务状态（组件级计费状态，Gateway/Scheduler 独立判定）：Billing 计费中 / Normal 正常（未计费或已停止计费）/ WhitelistUsing 白名单使用中（免计费）</p>
+   */
+  BusinessStatus?: string
+  /**
+   * <p>费用信息（组件级计费明细 JSON 字符串，格式与 Service.BillingInfo 一致，前端可复用同一渲染逻辑）</p>
+   */
+  BillingInfo?: string
 }
 
 /**
@@ -2797,6 +2770,70 @@ export interface Spec {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CategoryId?: string
+}
+
+/**
+ * 智能路由完整对象（挂在 ServiceGroup 的 44 号）
+ */
+export interface SmartRouter {
+  /**
+   * 智能路由开关状态（true=已开启，false=未开启/已停止）
+   */
+  Enabled?: boolean
+  /**
+   * 绑定的服务组 ID（一对一）
+   */
+  ServiceGroupId?: string
+  /**
+   * 组件列表（gateway + scheduler；repeated 为未来扩展预留）
+   */
+  ComponentList?: Array<SmartRouterComponent>
+  /**
+   * 创建人
+   */
+  Creator?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
+ * DescribeRoles请求参数结构体
+ */
+export interface DescribeRolesRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移值</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>排序方式</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段</p>
+   */
+  OrderField?: string
+  /**
+   * <p>是否返回绑定的用户数</p>
+   */
+  WithUserCount?: boolean
 }
 
 /**
@@ -3126,6 +3163,24 @@ export interface HorizontalPodAutoscaler {
 }
 
 /**
+ * DescribeWorkspaceMembers返回参数结构体
+ */
+export interface DescribeWorkspaceMembersResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>用户列表</p>
+   */
+  Members?: Array<UserRoleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTrainingModel返回参数结构体
  */
 export interface CreateTrainingModelResponse {
@@ -3261,17 +3316,39 @@ export interface ExposePortConfig {
 }
 
 /**
- * 键值对
+ * DescribeRoles返回参数结构体
  */
-export interface Option {
+export interface DescribeRolesResponse {
   /**
-   * <p>指标名</p>
+   * <p>总数</p>
    */
-  Name: string
+  TotalCount?: number
   /**
-   * <p>指标值</p>
+   * <p>角色列表</p>
    */
-  Value: number
+  Roles?: Array<RoleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyModelServiceAuthorization请求参数结构体
+ */
+export interface ModifyModelServiceAuthorizationRequest {
+  /**
+   * 服务组Id
+   */
+  ServiceGroupId: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * 是否开启鉴权,true表示开启
+   */
+  AuthorizationEnable?: boolean
 }
 
 /**
@@ -3328,6 +3405,16 @@ export interface ImageSecret {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretId?: string
+}
+
+/**
+ * DescribeWorkspaceQuotaUsage请求参数结构体
+ */
+export interface DescribeWorkspaceQuotaUsageRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -3409,13 +3496,25 @@ export interface ModifyModelServiceAuthTokenRequest {
 }
 
 /**
- * 服务的调度策略配置
+ * ModifyRole请求参数结构体
  */
-export interface SchedulingPolicy {
+export interface ModifyRoleRequest {
   /**
-   * 是否启用了跨资源组调度开关
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
-  CrossResourceGroupScheduling?: boolean
+  TiProjectId?: string
+  /**
+   * <p>角色ID</p>
+   */
+  RoleId?: string
+  /**
+   * <p>角色名称</p>
+   */
+  RoleName?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
 }
 
 /**
@@ -3567,6 +3666,16 @@ export interface LogIdentity {
 }
 
 /**
+ * 服务的调度策略配置
+ */
+export interface SchedulingPolicy {
+  /**
+   * 是否启用了跨资源组调度开关
+   */
+  CrossResourceGroupScheduling?: boolean
+}
+
+/**
  * 挂载的实例列表
  */
 export interface MountInstanceInfo {
@@ -3637,6 +3746,32 @@ export interface DescribeDatasetsRequest {
    * <p>是否返回CFS详情。</p>
    */
   CFSDetail?: boolean
+}
+
+/**
+ * 工作空间任务信息
+ */
+export interface WorkspaceTaskInfo {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务名称</p>
+   */
+  TaskName?: string
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>任务类型</p>
+   */
+  ResourceTaskType?: string
+  /**
+   * <p>任务所属资源组</p>
+   */
+  ResourceGroupId?: string
 }
 
 /**
@@ -3837,27 +3972,88 @@ export interface TrainParam {
 export type DescribeInferTemplatesRequest = null
 
 /**
- * ModifyModelServiceAuthorization请求参数结构体
+ * DescribeWorkspace返回参数结构体
  */
-export interface ModifyModelServiceAuthorizationRequest {
+export interface DescribeWorkspaceResponse {
   /**
-   * 服务组Id
-   */
-  ServiceGroupId: string
-  /**
-   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   * <p>项目ID</p>
    */
   TiProjectId?: string
   /**
-   * 是否开启鉴权,true表示开启
+   * <p>名称</p>
    */
-  AuthorizationEnable?: boolean
+  Name?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>运行中的任务信息</p>
+   */
+  RunningTasks?: Array<WorkspaceTaskInfo>
+  /**
+   * <p>空间创建人信息</p>
+   */
+  Creator?: UserBriefInfo
+  /**
+   * <p>当前空间拥有的角色信息</p>
+   */
+  OwnedRoles?: Array<RoleBriefInfo>
+  /**
+   * <p>空间成员信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemberInfo?: MemberInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 训练诊断工具配置
+ */
+export interface TrainToolConfig {
+  /**
+   * <p>是否开启 Hang 检测</p><p>默认值：false</p>
+   */
+  EnableHangMonitor?: boolean
+  /**
+   * <p>Hang 检测的节点列表</p>
+   */
+  HangMonitorNodes?: Array<string>
+  /**
+   * <p>Hang 超时时间</p><p>取值范围：[1, 14400]</p><p>单位：分</p>
+   */
+  LogHangTimeoutInMinute?: number
 }
 
 /**
  * DeleteModelServiceGroup返回参数结构体
  */
 export interface DeleteModelServiceGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRoleUsers返回参数结构体
+ */
+export interface DescribeRoleUsersResponse {
+  /**
+   * <p>符合过滤条件的用户总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>用户列表</p>
+   */
+  Users?: Array<UserRoleInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3983,33 +4179,21 @@ export interface PresetImageInfo {
 }
 
 /**
- * gpu 详情
+ * DescribeTrainingTask请求参数结构体
  */
-export interface GpuDetail {
+export interface DescribeTrainingTaskRequest {
   /**
-   * GPU 显卡类型；枚举值: V100 A100 T4
-注意：此字段可能返回 null，表示取不到有效值。
+   * 训练任务ID
    */
-  Name?: string
+  Id: string
   /**
-   * GPU 显卡数；单位为1/100卡，比如100代表1卡
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
-  Value?: number
-}
-
-/**
- * CreateExport返回参数结构体
- */
-export interface CreateExportResponse {
+  TiProjectId?: string
   /**
-   * 日志下载任务的ID
+   * 训练任务实例ID
    */
-  ExportId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId?: string
 }
 
 /**
@@ -4092,6 +4276,20 @@ export interface PrivateLinkInfo {
    * <p>子用户名称</p>
    */
   SubUinName?: string
+}
+
+/**
+ * DeleteRole请求参数结构体
+ */
+export interface DeleteRoleRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>角色ID</p>
+   */
+  RoleId?: string
 }
 
 /**
@@ -4481,13 +4679,37 @@ export interface SubAccountInfo {
 }
 
 /**
- * UpdateSubAccountLinuxUserInfo返回参数结构体
+ * 资源级权限记录
  */
-export interface UpdateSubAccountLinuxUserInfoResponse {
+export interface ResourcePermission {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>资源类型</p>
    */
-  RequestId?: string
+  ResourceType?: string
+  /**
+   * <p>资源ID</p>
+   */
+  Id?: string
+  /**
+   * <p>权限值</p>
+   */
+  Permission?: string
+  /**
+   * <p>资源名称</p>
+   */
+  Name?: string
+  /**
+   * <p>创建者子账号</p>
+   */
+  SubUin?: string
+  /**
+   * <p>创建者昵称</p>
+   */
+  SubUinName?: string
+  /**
+   * <p>数据源简要信息</p>
+   */
+  DataSourceBrief?: DataSourceBrief
 }
 
 /**
@@ -4752,6 +4974,143 @@ export interface ServiceInfo {
 }
 
 /**
+ * 出参类型
+ */
+export interface TrainingTaskSetItem {
+  /**
+   * <p>训练任务ID</p>
+   */
+  Id?: string
+  /**
+   * <p>训练任务名称</p>
+   */
+  Name?: string
+  /**
+   * <p>框架名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrameworkName?: string
+  /**
+   * <p>训练框架版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrameworkVersion?: string
+  /**
+   * <p>框架运行环境</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrameworkEnvironment?: string
+  /**
+   * <p>计费模式</p>
+   */
+  ChargeType?: string
+  /**
+   * <p>计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中</p>
+   */
+  ChargeStatus?: string
+  /**
+   * <p>预付费专用资源组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupId?: string
+  /**
+   * <p>资源配置</p>
+   */
+  ResourceConfigInfos?: Array<ResourceConfigInfo>
+  /**
+   * <p>训练模式eg：PS_WORKER、DDP、MPI、HOROVOD</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainingMode?: string
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>SUBMITTING： 提交中</li><li>PENDING： 排队中</li><li>STARTING： 启动中</li><li>RUNNING： 运行中</li><li>STOPPING： 停止中</li><li>STOPPED： 已停止</li><li>FAILED： 异常</li><li>SUCCEED： 已完成</li><li>SUBMIT_FAILED： 提交失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>运行时长</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuntimeInSeconds?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>训练开始时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * <p>训练结束时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * <p>训练输出</p>
+   */
+  Output?: CosPathInfo
+  /**
+   * <p>失败原因</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailureReason?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>计费金额信息，eg：2.00元/小时 (按量计费)</p>
+   */
+  BillingInfo?: string
+  /**
+   * <p>预付费专用资源组名称</p>
+   */
+  ResourceGroupName?: string
+  /**
+   * <p>自定义镜像信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageInfo?: ImageInfo
+  /**
+   * <p>任务信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * <p>标签配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>回调地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CallbackUrl?: string
+  /**
+   * <p>任务subUin信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUin?: string
+  /**
+   * <p>任务创建者名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUinName?: string
+  /**
+   * <p>任务AppId</p>
+   */
+  AppId?: string
+  /**
+   * <p>环境变量</p>
+   */
+  Envs?: Array<EnvVar>
+  /**
+   * <p>操作者信息</p>
+   */
+  LatestOperatorInfo?: OperatorInfo
+}
+
+/**
  * StopNotebook返回参数结构体
  */
 export interface StopNotebookResponse {
@@ -4759,6 +5118,28 @@ export interface StopNotebookResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyUserGrant请求参数结构体
+ */
+export interface ModifyUserGrantRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>用户列表</p>
+   */
+  SubUins?: Array<string>
+  /**
+   * <p>角色列表</p>
+   */
+  RoleIds?: Array<string>
+  /**
+   * <p>授权类型</p>
+   */
+  Grant?: string
 }
 
 /**
@@ -4802,6 +5183,38 @@ export interface ModifyModelServiceAuthTokenResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyWorkspaceMembers请求参数结构体
+ */
+export interface ModifyWorkspaceMembersRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+}
+
+/**
+ * 计费项询价结果
+ */
+export interface SpecPrice {
+  /**
+   * 计费项名称
+   */
+  SpecName?: string
+  /**
+   * 原价，单位：分。最大值42亿，超过则返回0
+   */
+  TotalCost?: number
+  /**
+   * 优惠后的价格，单位：分
+   */
+  RealTotalCost?: number
+  /**
+   * 计费项数量
+   */
+  SpecCount?: number
 }
 
 /**
@@ -4859,6 +5272,28 @@ export interface DeleteModelServiceAuthTokenRequest {
    * <p>token 值</p>
    */
   AuthTokenValue?: string
+}
+
+/**
+ * ModifyRoleUserGrant请求参数结构体
+ */
+export interface ModifyRoleUserGrantRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>角色ID列表</p>
+   */
+  RoleIds?: Array<string>
+  /**
+   * <p>用户UIN列表</p>
+   */
+  SubUins?: Array<string>
+  /**
+   * <p>授权方式</p>
+   */
+  Grant?: string
 }
 
 /**
@@ -5034,6 +5469,16 @@ export interface StorageExtraConf {
 }
 
 /**
+ * DescribeWorkspaceQuotaUsage返回参数结构体
+ */
+export interface DescribeWorkspaceQuotaUsageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyNotebook返回参数结构体
  */
 export interface ModifyNotebookResponse {
@@ -5041,6 +5486,22 @@ export interface ModifyNotebookResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 空间成员信息
+ */
+export interface MemberInfo {
+  /**
+   * <p>超管成员列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuperAdmins?: Array<UserBriefInfo>
+  /**
+   * <p>空间内管理员列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Admins?: Array<UserBriefInfo>
 }
 
 /**
@@ -5407,25 +5868,26 @@ export interface DescribeAnnotatedTaskListResponse {
 }
 
 /**
- * 计费项询价结果
+ * ModifyRoleAccessRules请求参数结构体
  */
-export interface SpecPrice {
+export type ModifyRoleAccessRulesRequest = null
+
+/**
+ * DescribeWorkspace请求参数结构体
+ */
+export interface DescribeWorkspaceRequest {
   /**
-   * 计费项名称
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
-  SpecName?: string
+  TiProjectId?: string
   /**
-   * 原价，单位：分。最大值42亿，超过则返回0
+   * <p>是否包含运行中的任务</p>
    */
-  TotalCost?: number
+  WithRunningTasks?: boolean
   /**
-   * 优惠后的价格，单位：分
+   * <p>是否包含有管理权限的人员信息</p>
    */
-  RealTotalCost?: number
-  /**
-   * 计费项数量
-   */
-  SpecCount?: number
+  WithMembers?: boolean
 }
 
 /**
@@ -5989,6 +6451,57 @@ export interface ResourceInfo {
 }
 
 /**
+ * ModifyRoleUserGrant返回参数结构体
+ */
+export interface ModifyRoleUserGrantResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 任务建模Pod信息
+ */
+export interface PodInfo {
+  /**
+   * pod名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * pod的IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IP?: string
+  /**
+   * pod状态。eg：SUBMITTING提交中、PENDING排队中、RUNNING运行中、SUCCEEDED已完成、FAILED异常、TERMINATING停止中、TERMINATED已停止
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * pod启动时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * pod结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * pod资源配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceConfigInfo?: ResourceConfigInfo
+  /**
+   * Pod所属任务的SubUin信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUin?: string
+}
+
+/**
  * 资源信息
  */
 export interface GroupResource {
@@ -6059,17 +6572,54 @@ export interface DataSetConfig {
 }
 
 /**
- * 定时的事务和行为
+ * 模型专业参数
  */
-export interface ScheduledAction {
+export interface HyperParameter {
   /**
-   * 是否要定时停止服务，true or false。true 则 ScheduleStopTime 必填， false 则 ScheduleStopTime 不生效
+   * 最大nnz数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduleStop?: boolean
+  MaxNNZ?: string
   /**
-   * 要执行定时停止的时间，格式：“2022-01-26T19:46:22+08:00”
+   * slot数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduleStopTime?: string
+  SlotNum?: string
+  /**
+   * gpu cache 使用率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuCachePercentage?: string
+  /**
+   * cpu cache 使用率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuCachePercentage?: string
+  /**
+   * 是否开启分布式模式(true/false)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableDistributed?: string
+  /**
+   * TORCH_SCRIPT、MMDETECTION、DETECTRON2、HUGGINGFACE格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为3
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinBlockSizePt?: string
+  /**
+   * FROZEN_GRAPH、SAVED_MODEL格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为10
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinBlockSizeTf?: string
+  /**
+   * Stable Diffusion 模型优化参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PipelineArgs?: string
+  /**
+   * Stable Diffusion 模型优化参数，控制Lora模型的影响效果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoraScale?: string
 }
 
 /**
@@ -6121,6 +6671,20 @@ export interface CamTag {
 }
 
 /**
+ * DeleteDataset返回参数结构体
+ */
+export interface DeleteDatasetResponse {
+  /**
+   * <p>删除的datasetId</p>
+   */
+  DatasetId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteNotebook返回参数结构体
  */
 export interface DeleteNotebookResponse {
@@ -6131,17 +6695,71 @@ export interface DeleteNotebookResponse {
 }
 
 /**
- * DeleteTrainingTask请求参数结构体
+ * DeleteRole返回参数结构体
  */
-export interface DeleteTrainingTaskRequest {
+export interface DeleteRoleResponse {
   /**
-   * 训练任务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: string
+  RequestId?: string
+}
+
+/**
+ * DescribeModelServiceHotUpdated请求参数结构体
+ */
+export interface DescribeModelServiceHotUpdatedRequest {
   /**
-   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   * 镜像信息，配置服务运行所需的镜像地址等信息
    */
-  TiProjectId?: string
+  ImageInfo: ImageInfo
+  /**
+   * 模型信息，需要挂载模型时填写
+   */
+  ModelInfo?: ModelInfo
+  /**
+   * 挂载信息
+   */
+  VolumeMount?: VolumeMount
+}
+
+/**
+ * 指标数据
+ */
+export interface MetricData {
+  /**
+   * 训练任务id
+   */
+  TaskId: string
+  /**
+   * 时间戳.unix timestamp,单位为秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: number
+  /**
+   * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 本次上报数据所处的训练周期数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Epoch?: number
+  /**
+   * 本次上报数据所处的训练迭代次数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Step?: number
+  /**
+   * 训练停止所需的迭代总数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalSteps?: number
+  /**
+   * 数据点。数组元素为不同指标的数据。数组长度不超过10。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Points?: Array<DataPoint>
 }
 
 /**
@@ -6403,21 +7021,47 @@ export interface NotebookDetail {
 }
 
 /**
- * DescribeBillingResourceInstanceRunningJobs请求参数结构体
+ * 表格数据集表头信息
  */
-export interface DescribeBillingResourceInstanceRunningJobsRequest {
+export interface SchemaInfo {
   /**
-   * 资源组id
+   * 长度30字符内
    */
-  ResourceGroupId: string
+  Name: string
   /**
-   * 资源组节点id
+   * 数据类型
    */
-  ResourceInstanceId: string
+  Type: string
+}
+
+/**
+ * DescribeAccessRules返回参数结构体
+ */
+export interface DescribeAccessRulesResponse {
   /**
-   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   * <p>当前用户有哪些权限</p>
    */
-  TiProjectId?: string
+  AccessRules?: Array<AccessRule>
+  /**
+   * <p>权限点全量集合</p>
+   */
+  FullAccessRules?: Array<AccessRule>
+  /**
+   * <p>当前用户拥有的空间外角色</p>
+   */
+  GlobalRoles?: Array<string>
+  /**
+   * <p>当前用户可见的空间列表</p>
+   */
+  Workspaces?: Array<Workspace>
+  /**
+   * <p>当前用户有哪些空间外权限</p>
+   */
+  OutsideAccessRules?: Array<AccessRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6436,44 +7080,25 @@ export interface ModifyModelServiceResponse {
 }
 
 /**
- * 任务建模Pod信息
+ * 数据源简要信息
  */
-export interface PodInfo {
+export interface DataSourceBrief {
   /**
-   * pod名
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>存储实例ID</p>
    */
-  Name?: string
+  StorageId?: string
   /**
-   * pod的IP
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>存储实例名称</p>
    */
-  IP?: string
+  StorageName?: string
   /**
-   * pod状态。eg：SUBMITTING提交中、PENDING排队中、RUNNING运行中、SUCCEEDED已完成、FAILED异常、TERMINATING停止中、TERMINATED已停止
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>存储目录</p>
    */
-  Status?: string
+  WorkDir?: string
   /**
-   * pod启动时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>数据源读写权限，RW/RO</p>
    */
-  StartTime?: string
-  /**
-   * pod结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * pod资源配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceConfigInfo?: ResourceConfigInfo
-  /**
-   * Pod所属任务的SubUin信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubUin?: string
+  Permission?: string
 }
 
 /**
@@ -6863,6 +7488,22 @@ export interface ServiceLimit {
 }
 
 /**
+ * 角色简要信息
+ */
+export interface RoleBriefInfo {
+  /**
+   * <p>角色id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleId?: string
+  /**
+   * <p>角色名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleName?: string
+}
+
+/**
  * DescribeModelServiceGroup返回参数结构体
  */
 export interface DescribeModelServiceGroupResponse {
@@ -7202,6 +7843,22 @@ export interface PublicAlgoVersion {
 }
 
 /**
+ * 用户简要信息
+ */
+export interface UserBriefInfo {
+  /**
+   * <p>子用户uin</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUin?: string
+  /**
+   * <p>子用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUinName?: string
+}
+
+/**
  * 共享弹性网卡信息
  */
 export interface ServiceEIPInfo {
@@ -7241,13 +7898,17 @@ export interface DescribeTrainingTasksResponse {
 }
 
 /**
- * UpdateMountLimit返回参数结构体
+ * DescribeRoleUsers请求参数结构体
  */
-export interface UpdateMountLimitResponse {
+export interface DescribeRoleUsersRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>角色ID</p>
    */
-  RequestId?: string
+  RoleId: string
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -7291,17 +7952,59 @@ export interface Container {
 }
 
 /**
- * DeleteDataset返回参数结构体
+ * ModifyUserGrant返回参数结构体
  */
-export interface DeleteDatasetResponse {
-  /**
-   * <p>删除的datasetId</p>
-   */
-  DatasetId?: string
+export interface ModifyUserGrantResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateSubAccountLinuxUserInfo返回参数结构体
+ */
+export interface UpdateSubAccountLinuxUserInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateRole返回参数结构体
+ */
+export interface CreateRoleResponse {
+  /**
+   * <p>角色ID</p>
+   */
+  RoleId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 用户+角色信息
+ */
+export interface UserRoleInfo {
+  /**
+   * <p>子账号</p>
+   */
+  SubUin?: string
+  /**
+   * <p>名称</p>
+   */
+  NickName?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>角色列表</p>
+   */
+  Roles?: Array<RoleInfo>
 }
 
 /**
@@ -7793,27 +8496,61 @@ export interface DescribeLogsResponse {
 }
 
 /**
- * 编码后的启动命令信息
+ * DeleteTrainingTask请求参数结构体
  */
-export interface EncodedStartCmdInfo {
+export interface DeleteTrainingTaskRequest {
   /**
-   * 任务的启动命令，以base64格式输入，注意转换时需要完整输入{"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""}
-   */
-  StartCmdInfo?: string
-}
-
-/**
- * StopNotebook请求参数结构体
- */
-export interface StopNotebookRequest {
-  /**
-   * notebook id
+   * 训练任务ID
    */
   Id: string
   /**
    * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
+}
+
+/**
+ * 键值对
+ */
+export interface Option {
+  /**
+   * <p>指标名</p>
+   */
+  Name: string
+  /**
+   * <p>指标值</p>
+   */
+  Value: number
+}
+
+/**
+ * 角色信息
+ */
+export interface RoleInfo {
+  /**
+   * <p>角色ID</p>
+   */
+  RoleId?: string
+  /**
+   * <p>名称</p>
+   */
+  RoleName?: string
+  /**
+   * <p>角色类型。&quot;SYSTEM&quot; 内置角色，&quot;CUSTOMER&quot; 自定义角色</p>
+   */
+  RoleType?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>绑定的用户数</p>
+   */
+  UserCount?: number
 }
 
 /**
@@ -8126,7 +8863,7 @@ export interface DescribeBillingResourceGroupRequest {
    */
   ResourceGroupId: string
   /**
-   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
@@ -8188,25 +8925,21 @@ export interface SSHConfig {
 }
 
 /**
- * DescribeSubAccountLinuxUserInfos请求参数结构体
+ * CreateRole请求参数结构体
  */
-export interface DescribeSubAccountLinuxUserInfosRequest {
+export interface CreateRoleRequest {
   /**
    * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
   TiProjectId?: string
   /**
-   * 分页偏移量（0 表示全量）
+   * <p>角色名称</p>
    */
-  Offset?: number
+  RoleName?: string
   /**
-   * 每页数量（0 表示全量）
+   * <p>角色备注</p>
    */
-  Limit?: number
-  /**
-   * 过滤条件
-   */
-  Filters?: Array<Filter>
+  Description?: string
 }
 
 /**
@@ -8250,6 +8983,40 @@ export interface GooseFSx {
 }
 
 /**
+ * DescribeWorkspaceMembers请求参数结构体
+ */
+export interface DescribeWorkspaceMembersRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>排序字段</p>
+   */
+  OrderField?: string
+  /**
+   * <p>排序方式</p>
+   */
+  Order?: string
+  /**
+   * <p>是否包含角色信息</p>
+   */
+  WithRoles?: boolean
+}
+
+/**
  * 聚合后的公共算法版本
  */
 export interface AggregatePublicAlgoVersion {
@@ -8280,17 +9047,43 @@ export interface DescribeTrainingTaskPodsRequest {
 }
 
 /**
- * DescribeTrainingModelVersions返回参数结构体
+ * UpdateMountLimit返回参数结构体
  */
-export interface DescribeTrainingModelVersionsResponse {
-  /**
-   * <p>模型版本列表</p>
-   */
-  TrainingModelVersions?: Array<TrainingModelVersionDTO>
+export interface UpdateMountLimitResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRole请求参数结构体
+ */
+export interface DescribeRoleRequest {
+  /**
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>角色ID</p>
+   */
+  RoleId?: string
+  /**
+   * <p>资源类型</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>偏移值</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -8852,21 +9645,21 @@ export interface DeleteTrainingModelRequest {
 }
 
 /**
- * DescribeModelServiceHotUpdated请求参数结构体
+ * DescribeBillingResourceInstanceRunningJobs请求参数结构体
  */
-export interface DescribeModelServiceHotUpdatedRequest {
+export interface DescribeBillingResourceInstanceRunningJobsRequest {
   /**
-   * 镜像信息，配置服务运行所需的镜像地址等信息
+   * 资源组id
    */
-  ImageInfo: ImageInfo
+  ResourceGroupId: string
   /**
-   * 模型信息，需要挂载模型时填写
+   * 资源组节点id
    */
-  ModelInfo?: ModelInfo
+  ResourceInstanceId: string
   /**
-   * 挂载信息
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
-  VolumeMount?: VolumeMount
+  TiProjectId?: string
 }
 
 /**
@@ -8992,44 +9785,23 @@ export interface DescribePlatformImagesRequest {
 }
 
 /**
- * 智能路由组件（运行时视图，对齐 ModelService.RoleSpec + ServiceInfo.Status）
+ * ModifyRoleAccessRules返回参数结构体
  */
-export interface SmartRouterComponent {
+export interface ModifyRoleAccessRulesResponse {
   /**
-   * <p>组件名称：{ServiceGroupId}-gateway / {ServiceGroupId}-scheduler</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeWorkspaceQuotas请求参数结构体
+ */
+export interface DescribeWorkspaceQuotasRequest {
   /**
-   * <p>组件类型：&quot;Gateway&quot; / &quot;Scheduler&quot;</p>
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
-  Type?: string
-  /**
-   * <p>组件镜像（从 K8s Deployment 实时查询）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImageInfo?: ImageInfo
-  /**
-   * <p>期望配置（Replicas/Cpu/Memory/Env）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceConfig?: SmartRouterResourceConfig
-  /**
-   * <p>组件状态：CREATING 创建中 / CREATE_FAILED 创建失败 / Normal 正常运行中 / Stopped 已停止 / Stopping 停止中 / Abnormal 异常 / Pending 启动中 / Waiting 就绪中</p>
-   */
-  Status?: string
-  /**
-   * <p>资源规格（查询时回显用户创建/修改时的资源选择）。公有云场景展示：ChargeType / Zone / ResourceSupplyAttribute；内网版场景展示：QueueId</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceSpec?: SmartRouterResourceSpec
-  /**
-   * <p>业务状态（组件级计费状态，Gateway/Scheduler 独立判定）：Billing 计费中 / Normal 正常（未计费或已停止计费）/ WhitelistUsing 白名单使用中（免计费）</p>
-   */
-  BusinessStatus?: string
-  /**
-   * <p>费用信息（组件级计费明细 JSON 字符串，格式与 Service.BillingInfo 一致，前端可复用同一渲染逻辑）</p>
-   */
-  BillingInfo?: string
+  TiProjectId?: string
 }
 
 /**
@@ -9063,53 +9835,56 @@ export interface Probe {
 }
 
 /**
- * DeleteModelService返回参数结构体
+ * 默认Nginx网关结构
  */
-export interface DeleteModelServiceResponse {
+export interface DefaultNginxGatewayCallInfo {
+  /**
+   * host
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+}
+
+/**
+ * DescribeRole返回参数结构体
+ */
+export interface DescribeRoleResponse {
+  /**
+   * <p>角色ID</p>
+   */
+  RoleId?: string
+  /**
+   * <p>角色名称</p>
+   */
+  RoleName?: string
+  /**
+   * <p>角色类型</p>
+   */
+  RoleType?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>权限规则列表</p>
+   */
+  AccessRules?: Array<AccessRule>
+  /**
+   * <p>资源级权限列表</p>
+   */
+  ResourcePermissions?: Array<ResourcePermission>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 指标数据
- */
-export interface MetricData {
-  /**
-   * 训练任务id
-   */
-  TaskId: string
-  /**
-   * 时间戳.unix timestamp,单位为秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Timestamp?: number
-  /**
-   * 用户uin
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Uin?: string
-  /**
-   * 本次上报数据所处的训练周期数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Epoch?: number
-  /**
-   * 本次上报数据所处的训练迭代次数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Step?: number
-  /**
-   * 训练停止所需的迭代总数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalSteps?: number
-  /**
-   * 数据点。数组元素为不同指标的数据。数组长度不超过10。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Points?: Array<DataPoint>
 }
 
 /**
@@ -9131,13 +9906,13 @@ export interface DeleteTrainingModelVersionRequest {
 }
 
 /**
- * DescribeBillingSpecsPrice返回参数结构体
+ * CreateExport返回参数结构体
  */
-export interface DescribeBillingSpecsPriceResponse {
+export interface CreateExportResponse {
   /**
-   * 计费项价格，支持批量返回
+   * 日志下载任务的ID
    */
-  SpecsPrice?: Array<SpecPrice>
+  ExportId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9177,52 +9952,17 @@ export interface DescribeTrainingModelVersionResponse {
 }
 
 /**
- * 工作负载的状态
+ * StopNotebook请求参数结构体
  */
-export interface WorkloadStatus {
+export interface StopNotebookRequest {
   /**
-   * 当前实例数
+   * notebook id
    */
-  Replicas: number
+  Id: string
   /**
-   * 更新的实例数
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
-  UpdatedReplicas: number
-  /**
-   * 就绪的实例数
-   */
-  ReadyReplicas: number
-  /**
-   * 可用的实例数
-   */
-  AvailableReplicas: number
-  /**
-   * 不可用的实例数
-   */
-  UnavailableReplicas: number
-  /**
-   * Normal	正常运行中
-Abnormal	服务异常，例如容器启动失败等
-Waiting	服务等待中，例如容器下载镜像过程等
-Stopped   已停止 
-Pending 启动中
-Stopping 停止中
-   */
-  Status: string
-  /**
-   * 工作负载的状况信息
-   * @deprecated
-   */
-  StatefulSetCondition?: Array<StatefulSetCondition>
-  /**
-   * 工作负载历史的状况信息
-   */
-  Conditions?: Array<StatefulSetCondition>
-  /**
-   * 状态异常时，展示原因
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Reason?: string
+  TiProjectId?: string
 }
 
 /**

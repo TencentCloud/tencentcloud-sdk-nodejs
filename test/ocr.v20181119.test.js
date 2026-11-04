@@ -138,6 +138,16 @@ it("ocr.v20181119.QrcodeOCR", async function () {
     }
 })
 
+it("ocr.v20181119.GenerateVLEmbedding", async function () {
+    try {
+       const data = await client.GenerateVLEmbedding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.RecognizeTableAccurateOCR", async function () {
     try {
        const data = await client.RecognizeTableAccurateOCR({})
@@ -291,6 +301,16 @@ it("ocr.v20181119.SubmitExtractDocAgentJob", async function () {
 it("ocr.v20181119.TrainTicketOCR", async function () {
     try {
        const data = await client.TrainTicketOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.GenerateTextEmbedding", async function () {
+    try {
+       const data = await client.GenerateTextEmbedding({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

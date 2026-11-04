@@ -1176,6 +1176,14 @@ export interface DBEngineInfo {
    * <p>是否支持Serverless模式</p>
    */
   IsSupportServerless?: boolean
+  /**
+   * <p>是否支持透明加密</p>
+   */
+  IsSupportTDE?: boolean
+  /**
+   * <p>是否支持密码复杂度</p>
+   */
+  IsSupportPasswordComplexity?: boolean
 }
 
 /**
@@ -3378,6 +3386,11 @@ export interface SlowLogData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Explain?: Array<Explain>
+  /**
+   * <p>执行计划树</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExplainTree?: string
 }
 
 /**

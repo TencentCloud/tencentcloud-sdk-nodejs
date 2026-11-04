@@ -822,6 +822,72 @@ export interface GetModelResponse {
 | CodeFileId     | 代码文件ID           | Source 为 5 时，需从工作空间文件选择组件获取所选文件/文件夹对应的ID | Source 为 5 时，必填 |
 | WorkspaceEntryType | 工作空间入口类型 | Source 为 5 时，所选工作空间条目的类型：FILE（文件）/ FOLDER（文件夹），由前端选择器随选择目标自动写入 | Source 为 5 时，必填 |
 
+### 10. DEPENDENCY_SENSOR（依赖检查）任务类型
+
+#### 属性配置
+
+| 属性键                      | 属性名称       | 描述                                                       | 是否必需 |
+| --------------------------- | -------------- | ---------------------------------------------------------- | -------- |
+| checkIntervalSeconds        | 检查间隔（秒） | 轮询检查间隔，数字字符串，取值 5~600，缺省默认 10          | 否       |
+| workflowDependencyCondition | 依赖工作流配置 | 依赖条件 JSON 字符串，结构见下方说明                       | 是       |
+
+> 说明：
+> 1. 属性键大小写敏感，仅允许以上两个 key，不允许重复或出现未知 key。
+> 2. 该任务类型不支持 `RuntimePropertyList`，传入会报错。
+
+#### workflowDependencyCondition 结构
+
+```json
+{
+  "condition": {
+    "dependencies": [
+      {
+        "workflowId": "被依赖工作流ID",
+        "workflowName": "工作流名称",
+        "taskIds": [],
+        "timeOffsetExpression": "${yyyyMMdd-1d}",
+        "expectedState": "SUCCESS",
+        "logicalRelWithPre": "and"
+      }
+    ]
+  }
+}
+```
+
+| 字段                 | 是否必需               | 描述                                                                 |
+| -------------------- | ---------------------- | -------------------------------------------------------------------- |
+| dependencies         | 是                     | 依赖项列表，1~20 项                                                  |
+| workflowId           | 是                     | 被依赖工作流 ID，不能等于当前工作流自身 ID                           |
+| workflowName         | 否                     | 工作流名称快照，仅用于回显，读取时以最新名称覆盖                     |
+| taskIds              | 否                     | 本期必须为空数组（表示依赖整个工作流），传非空值会被忽略             |
+| timeOffsetExpression | 是                     | 时间偏移表达式，格式见下                                             |
+| expectedState        | 是                     | 期望上游状态，本期仅支持 `SUCCESS`                                   |
+| logicalRelWithPre    | 首项可空，其余项必填   | 与前一项的逻辑关系，本期仅支持 `and`                                 |
+
+**timeOffsetExpression 格式**：`${基础格式[±N单位]}`
+
+- 基础格式：`yyyy` / `yyyyMM` / `yyyyMMdd` / `yyyyMMddHH` / `yyyyMMddHHmm` / `yyyyMMddHHmmss`
+- 偏移单位（大小写敏感）：`y`（年）/ `M`（月）/ `w`（周）/ `d`（天）/ `H`（时）/ `m`（分）/ `s`（秒）
+- 不允许包含空格
+- 示例：`${yyyyMMdd}`、`${yyyyMMdd-1d}`、`${yyyyMM+1y}`
+
+### 11. JAR（Spark Jar）任务类型
+
+#### 属性配置
+
+| 属性键       | 属性名称     | 描述                                                                                         | 是否必需 |
+| ------------ | ------------ | -------------------------------------------------------------------------------------------- | -------- |
+| Source       | 来源         | 只支持填 5，表示来源为工作空间                                                               | 是       |
+| SourcePath   | Jar 文件路径 | 工作空间中 Jar 文件的完整路径，必须以 `.jar` 结尾（不区分大小写）                            | 是       |
+| MainClass    | 主类         | 作业入口类全限定名，如 `com.example.JobMain`，长度 1~128                                     | 是       |
+| ProgramArgs  | 程序参数     | 传给 main 方法的参数，单个字符串，多个参数以空格分隔，长度不超过 65536，支持 `${}` 参数      | 否       |
+| EngineConfig | 引擎参数     | Spark 参数（SparkConfig，最多 100 项，key 唯一）及数据访问策略（RoleArn，数字字符串）        | 否       |
+
+> 说明：
+> 1. 仅支持作业集群（DATA_COMPUTE），不支持交互式集群。
+> 2. 资源配置通过 `RuntimePropertyList` 传入，参见下方 RuntimePropertyList 说明（ResourceMode、ExecutorCU 等）。
+
+
 ### RuntimePropertyList
 <p>任务运行参数列表，用于配置任务运行时的计算资源，与 TaskTypePropertyList（任务扩展属性）区分：TaskTypePropertyList 承载任务自身的业务配置（如脚本来源、路径等），RuntimePropertyList 承载任务运行时的资源配置（如资源模式、CU规格、Executor数量等）。</p>
 <p>主要适用于需要配置计算资源的任务类型（如 NOTEBOOK、PYTHON）。</p>
@@ -2552,6 +2618,11 @@ export interface GetWorkflowTaskRunRsp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduledTime?: string
+  /**
+   * <p>工作流调度文件到达方式配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileArrivalConfig?: FileArrivalConfig
 }
 
 /**
@@ -3661,6 +3732,11 @@ export interface WorkflowTaskRun {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduledTime?: string
+  /**
+   * <p>工作流调度文件到达方式配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileArrivalConfig?: FileArrivalConfig
 }
 
 /**
@@ -6501,7 +6577,7 @@ export interface UpdateWorkflowResponse {
 }
 
 /**
- * 内嵌工作流任务运行列表选项（仅限 FOR_EACH 任务使用）
+ * <p>嵌套工作流任务运行的查询选项。<br>PageNumber：页码，从 1 开始<br>PageSize：每页数量，最大 200<br>RunStates：按运行状态过滤，如 ["SUCCESS"]</p>
  */
 export interface InnerWorkflowTaskRunListOption {
   /**
@@ -7763,6 +7839,11 @@ export interface WorkflowTriggerConfiguration {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedConfig?: WorkflowTriggerAdvancedConfiguration
+  /**
+   * <p>工作流调度文件到达方式配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileArrivalConfig?: FileArrivalConfig
 }
 
 /**
@@ -8654,6 +8735,47 @@ export interface UpdateLocationResponse {
 }
 
 /**
+ * 文件到达触发信息
+ */
+export interface FileArrivalConfig {
+  /**
+   * <p>运行命中的文件所在COS桶名</p><p>举例：dlc-sh-store-139153****</p><p>入参不填，如果填写则忽略；</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosBucket?: string
+  /**
+   * <p>运行命中的文件所在COS地域</p><p>举例：ap-shanghai</p><p>入参不填，如果填写则忽略；</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosRegion?: string
+  /**
+   * <p>文件存储路径</p><p>举例：cosn://dlc-sh-store-139153**** /test/</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileStoragePath?: string
+  /**
+   * <p>文件名匹配规则</p><p>举例：</p><ul><li>空: 当前监听范围内的全部文件</li><li><code>*.csv: 任意以 .csv 结尾的文件名</code></li><li><code>orders_*.csv: orders_ 开头且以 .csv 结尾的文件名</code></li><li>orders.csv: 精确匹配 orders.csv</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileNamePattern?: string
+  /**
+   * <p>是否包含子目录</p><p>默认值：false</p><p>是否递归匹配子目录，默认 false</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Recursive?: boolean
+  /**
+   * <p>最小触发间隔时间</p><p>参数格式：数字</p><p>默认值：300</p><p>单位：秒；默认 300秒（5 分钟）；60-86400 秒（1–1440 分钟）；两次触发之间的最小间隔。期间内到达的文件，需等待该时间结束后才会触发运行。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinTriggerIntervalTime?: string
+  /**
+   * <p>批次等待时间</p><p>参数格式：数字</p><p>默认值：120</p><p>单位：秒；默认 120秒（2 分钟）；60-3600 秒（1–60 分钟）；文件到达后等待该时长才触发运行。若等待期间再次有新文件到达，则重新开始计时。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BatchWaitTime?: string
+}
+
+/**
  * volume返回详情
  */
 export interface GetVolumeRsp {
@@ -8832,6 +8954,11 @@ export interface WorkflowRun {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduledTime?: string
+  /**
+   * <p>工作流调度文件到达方式配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileArrivalConfig?: FileArrivalConfig
 }
 
 /**

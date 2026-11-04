@@ -381,6 +381,7 @@ import {
   WorkflowTask,
   UpdateModelVersionResponse,
   UpdateLocationResponse,
+  FileArrivalConfig,
   GetVolumeRsp,
   WorkflowRun,
   FileNode,

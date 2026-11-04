@@ -113,6 +113,7 @@ import {
   CopyPair,
   DescribeDisasterRecoverySupportRegionResponse,
   DrilledResourceStatus,
+  BackupResourceInfo,
   ReportJobProgressResponse,
   FileBackupOverview,
   PlanInfo,
@@ -162,6 +163,7 @@ import {
   DeleteCopyPairsRequest,
   DeleteSecurityGroupMappingRequest,
   CreateInstanceModel,
+  FileInfo,
   DrillPair,
   DescribeDisasterRecoveryOverviewRequest,
   ModifyAutoBackupPolicyAttributeRequest,
@@ -369,7 +371,7 @@ export class Client extends AbstractClient {
    * 本接口用来浏览已有备份目录/文件内容
    */
   async DescribeFileBackupObjects(
-    req?: DescribeFileBackupObjectsRequest,
+    req: DescribeFileBackupObjectsRequest,
     cb?: (error: string, rep: DescribeFileBackupObjectsResponse) => void
   ): Promise<DescribeFileBackupObjectsResponse> {
     return this.request("DescribeFileBackupObjects", req, cb)
@@ -646,7 +648,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建恢复任务
+   * 创建恢复任务。
    */
   async CreateFileRestoreTask(
     req: CreateFileRestoreTaskRequest,
@@ -749,7 +751,7 @@ export class Client extends AbstractClient {
    * 将实例绑定到备份策略上
    */
   async BindAutoBackupPolicy(
-    req?: BindAutoBackupPolicyRequest,
+    req: BindAutoBackupPolicyRequest,
     cb?: (error: string, rep: BindAutoBackupPolicyResponse) => void
   ): Promise<BindAutoBackupPolicyResponse> {
     return this.request("BindAutoBackupPolicy", req, cb)

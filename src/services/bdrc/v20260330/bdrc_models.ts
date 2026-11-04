@@ -62,25 +62,29 @@ export interface BackupDetail {
  */
 export interface DescribeFileBackupPlansRequest {
   /**
-   * 偏移量，默认0
+   * <p>偏移量，默认0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大500
+   * <p>返回数量，默认20，最大100</p>
    */
   Limit?: number
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li><li>CreatedTime： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 过滤条件。支持: instance-id, plan-id, plan-name, status, auto-backup-policy-id
+   * <p>过滤条件。支持: instance-id, plan-id, plan-name, status, auto-backup-policy-id</p>
    */
   Filters?: Array<FilterModel>
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>CVM_AGENT： CVM 文件备份</li><li>CFS_AGENT： 文件系统备份</li><li>COS_AGENT： COS备份</li></ul><p>默认值：CVM_AGENT</p>
+   */
+  ResourceType?: string
 }
 
 /**
@@ -106,7 +110,7 @@ export interface DescribeCopyPairsRequest {
    */
   CopyPairIds?: Array<string>
   /**
-   * <p>过滤条件，详见过滤条件表。支持的Name：disaster-recovery-site-pair-id、target-resource-id、source-resource-id、copy-pair-id、copy-pair-name</p>
+   * <p>过滤条件。支持的Name：disaster-recovery-site-pair-id、target-resource-id、source-resource-id、copy-pair-id、copy-pair-name</p>
    */
   Filters?: Array<FilterModel>
   /**
@@ -291,11 +295,11 @@ export interface BackupPlan {
  */
 export interface FilterModel {
   /**
-   * 过滤器名
+   * 过滤器名，此参数必填。
    */
   Name?: string
   /**
-   * 过滤器值
+   * 过滤器值，此参数必填。
    */
   Values?: Array<string>
 }
@@ -347,7 +351,7 @@ export interface RunCopyPairTasksRequest {
  */
 export interface DeleteFileBackupPlansRequest {
   /**
-   * 备份点 ID 列表
+   * <p>备份计划 ID 列表</p>
    */
   PlanIds: Array<string>
 }
@@ -371,27 +375,27 @@ export interface CommonBackupPoint {
  */
 export interface DescribeBackupVaultsRequest {
   /**
-   * 备份库ID列表
+   * <p>备份库ID列表</p>
    */
   VaultIds?: Array<string>
   /**
-   * 过滤条件，支持instance-id和auto-backup-policy-id
+   * <p>过滤条件，支持vault-id、vault-name、status</p>
    */
   Filters?: Array<FilterModel>
   /**
-   * 偏移量，默认0
+   * <p>偏移量，默认0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大1000
+   * <p>返回数量，默认20，最大100</p><p>取值范围：[1, 100]</p>
    */
   Limit?: number
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
 }
@@ -401,43 +405,43 @@ export interface DescribeBackupVaultsRequest {
  */
 export interface CreateAutoBackupPolicyRequest {
   /**
-   * 定期备份的执行策略。
+   * <p>定期备份的执行策略。</p>
    */
   Policy: Array<Policy>
   /**
-   * 通过该定期备份策略创建的备份是否永久保留。false表示非永久保留，true表示永久保留，默认为false。
+   * <p>通过该定期备份策略创建的备份是否永久保留。false表示非永久保留，true表示永久保留，默认为false。</p>
    */
   IsPermanent?: boolean
   /**
-   * 定期备份策略的名称。
+   * <p>定期备份策略的名称。</p>
    */
   AutoBackupPolicyName?: string
   /**
-   * 是否激活定期备份策略。
+   * <p>是否激活定期备份策略。</p>
    */
   IsActivated?: boolean
   /**
-   * 通过定期备份策略创建出的备份保留时间。
+   * <p>通过定期备份策略创建出的备份保留时间。本参数与 RetentionMonths、RetentionAmount 互斥，不可同时传入。当 IsPermanent 为 false 或不传时，RetentionDays / RetentionMonths / RetentionAmount / AdvancedRetentionPolicy 必须传入至少一项有效值。</p>
    */
   RetentionDays?: number
   /**
-   * 该定期备份策略创建的备份可以保留的月数，该参数不可与IsPermanent/RetentionDays参数冲突。
+   * <p>该定期备份策略创建的备份可以保留的月数。本参数与 RetentionDays、RetentionAmount 互斥，不可同时传入。当 IsPermanent 为 false 或不传时，RetentionDays / RetentionMonths / RetentionAmount / AdvancedRetentionPolicy 必须传入至少一项有效值。</p>
    */
   RetentionMonths?: number
   /**
-   * 通过该定期备份策略最多保留的备份个数，超过该个数限制后自动删除最先创建的备份，该参数不可与IsPermanent参数冲突。
+   * <p>通过该定期备份策略最多保留的备份个数，超过该个数限制后自动删除最先创建的备份。本参数与 RetentionDays、RetentionMonths互斥，不可同时传入。当 IsPermanent 为 false 或不传时，RetentionDays / RetentionMonths / RetentionAmount / AdvancedRetentionPolicy 必须传入至少一项有效值。</p>
    */
   RetentionAmount?: number
   /**
-   * 备份存储类型。COMMON表示走普通模式（不需要备份库），VAULT表示走备份库（必须关联一个备份库）。默认为COMMON
+   * <p>备份存储类型。COMMON表示走普通模式（不需要备份库），VAULT表示走备份库（必须关联一个备份库）。默认为COMMON</p>
    */
   StorageType?: string
   /**
-   * 备份库ID，创建agent备份策略时必须指定。当StorageType为VAULT时必传。
+   * <p>备份库ID，创建agent备份策略时必须指定。当StorageType为VAULT时必传。</p>
    */
   VaultId?: string
   /**
-   * 定期备份高级保留策略，该参数不可与IsPermanent参数冲突。
+   * <p>定期备份高级保留策略，该参数不可与 IsPermanent 参数冲突。当 IsPermanent 为 false 或不传、且未传入 RetentionDays / RetentionMonths / RetentionAmount 时，必须传入本参数。</p>
    */
   AdvancedRetentionPolicy?: AdvancedRetentionPolicy
 }
@@ -765,50 +769,60 @@ export interface DescribeDisasterRecoverySitePairsDeniedActionsResponse {
  */
 export interface ProtectInstance {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 客户端ID
+   * <p>客户端ID</p>
    */
   AgentId?: string
   /**
-   * 客户端版本
+   * <p>客户端版本</p>
    */
   AgentVersion?: string
   /**
-   * 客户端状态
+   * <p>客户端状态</p>
    */
   AgentStatus?: string
   /**
-   * 最后心跳时间
+   * <p>最后心跳时间</p>
    */
   LastHeartbeatTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * 最新备份点中记录的 CVM 基础信息
+   * <p>最新备份点中记录的 CVM 基础信息</p>
    */
   ExtraInfo?: string
   /**
-   * 该实例可用备份点数量
+   * <p>该实例可用备份点数量</p>
    */
   BackupCount?: number
   /**
-   * 实例名称
+   * <p>实例名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
-   * 最近一次备份时间
+   * <p>最近一次备份时间</p>
    */
   LatestBackupTime?: string
   /**
-   * 离线原因
+   * <p>离线原因</p>
    */
   OfflineReason?: string
+  /**
+   * <p>备份数据量，单位为字节</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupSize?: number
+  /**
+   * <p>产品存储类型</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductType?: string
 }
 
 /**
@@ -838,25 +852,29 @@ export interface DeleteDrillPairsRequest {
  */
 export interface DescribeFileRestoreTasksRequest {
   /**
-   * 过滤条件。支持: backup-id, task-id, instance-id, "         "target-instance-id, status
+   * <p>过滤条件。支持: backup-id, task-id, instance-id, &quot;         &quot;target-instance-id, status</p>
    */
   Filters?: Array<FilterModel>
   /**
-   * 偏移量，默认0
+   * <p>偏移量，默认0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大500
+   * <p>返回数量，默认20，最大100</p>
    */
   Limit?: number
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li><li>CreatedTime： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>CVM_AGENT： CVM 文件备份</li><li>CFS_AGENT： 文件系统备份</li><li>COS_AGENT： COS备份</li></ul><p>默认值：CVM_AGENT</p>
+   */
+  ResourceType?: string
 }
 
 /**
@@ -876,11 +894,11 @@ export interface DescribeBackupPlansRequest {
    */
   Limit?: number
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
 }
@@ -920,11 +938,11 @@ export interface DescribeBackupGroupsRequest {
    */
   Limit?: number
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 排序字段。目前支持CREATE_TIME。
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
 }
@@ -934,23 +952,23 @@ export interface DescribeBackupGroupsRequest {
  */
 export interface DescribeBackupGroupRollbackTasksRequest {
   /**
-   * 过滤条件，支持恢复任务ID（task-id）、备份组ID（backup-group-id）、源实例ID（source-instance-id）、目标实例ID（target-instance-id）、恢复状态（status）和回滚类型（rollback-type）过滤
+   * <p>过滤条件，支持恢复任务ID（task-id）、备份组ID（backup-group-id）、源实例ID（source-instance-id）、目标实例ID（target-instance-id）、恢复状态（status）和回滚类型（rollback-type）过滤</p>
    */
   Filters?: Array<FilterModel>
   /**
-   * 偏移量，默认0
+   * <p>偏移量，默认0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大1000
+   * <p>返回数量，默认20，最大1000</p>
    */
   Limit?: number
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
 }
@@ -980,43 +998,51 @@ export interface DescribeFileBackupsDeniedActionsRequest {
  */
 export interface ModifyFileBackupPlanRequest {
   /**
-   * 备份计划ID
+   * <p>备份计划ID，此参数必填。</p>
    */
   PlanId?: string
   /**
-   * 备份策略ID
+   * <p>备份策略ID</p>
    * @deprecated
    */
   PolicyId?: string
   /**
-   * 计划名称
+   * <p>计划名称</p>
    */
   PlanName?: string
   /**
-   * 备份路径列表，1~20 个
+   * <p>备份路径列表，1~20 个</p>
    */
   BackupPaths?: Array<string>
   /**
-   * 包含文件类型，0~20 个
+   * <p>包含文件类型，0~20 个</p>
    */
   IncludeFileTypes?: Array<string>
   /**
-   * 排除文件路径列表，0~20 个
+   * <p>排除文件路径列表，0~20 个</p>
    */
   ExcludePatterns?: Array<string>
   /**
-   * 是否排除系统目录
+   * <p>是否排除系统目录</p>
    */
   ExcludeSystemDirectories?: boolean
   /**
-   * 备份库ID
+   * <p>备份库ID</p>
    * @deprecated
    */
   BackupStorageId?: string
   /**
-   * 计划状态，可选值：normal（正常）、paused（暂停）
+   * <p>计划状态，可选值：normal（正常）、paused（暂停）</p>
    */
   Status?: string
+  /**
+   * <p>是否备份对象ACL（仅COS备份支持）</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  EnableObjectAcl?: boolean
+  /**
+   * <p>是否备份对象标签（仅COS备份支持）</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  EnableObjectTags?: boolean
 }
 
 /**
@@ -1280,23 +1306,23 @@ export interface RunInstancesWithBackupGroupResponse {
  */
 export interface DescribeAutoBackupPoliciesRequest {
   /**
-   * 过滤条件。支持以下过滤条件：\n"              "auto-backup-policy-id - 定期快照策略ID，如asp-xxx。\n"              "auto-backup-policy-state - 定期快照策略状态。\n"              "auto-backup-policy-name - 定期快照策略名称，支持模糊匹配。\n"              "tag - 按标签键值对过滤，需包含Key和/或Value。\n"              "tag-key - 按标签键过滤。\n"              "tag-value - 按标签值过滤。\n"              "tag:tag-key - 按指定标签键的标签值过滤。\n"              "vault-id - 备份库ID过滤。\n"              "storage-type - 存储类型过滤"              "（COMMON：普通模式，VAULT：备份库模式）。
+   * <p>过滤条件，支持以下Name：</p><ul><li>auto-backup-policy-id - 按定期备份策略ID过滤，如abp-xxx。</li><li>auto-backup-policy-state - 按定期备份策略状态过滤，如NORMAL。</li><li>auto-backup-policy-name - 按定期备份策略名称过滤，支持模糊匹配。</li><li>tag - 按标签键值对过滤，需包含Key和/或Value。</li><li>tag-key - 按标签键过滤。</li><li>tag-value - 按标签值过滤。</li><li>tag:tag-key - 按指定标签键的标签值过滤。</li><li>vault-id - 按备份库ID过滤。</li><li>storage-type - 按存储类型过滤：COMMON（普通模式）、VAULT（备份库模式）。</li></ul>
    */
   Filters?: Array<FilterModel>
   /**
-   * 偏移量，默认0
+   * <p>偏移量，默认0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大1000
+   * <p>返回数量，默认20，最大1000</p>
    */
   Limit?: number
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
 }
@@ -1342,130 +1368,146 @@ export interface DeleteBackupGroupsResponse {
  */
 export interface BackupInfo {
   /**
-   * 备份点ID
+   * <p>备份点ID</p>
    */
   BackupId?: string
   /**
-   * 备份名称
+   * <p>备份名称</p>
    */
   BackupName?: string
   /**
-   * 所属计划ID
+   * <p>所属计划ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PlanId?: string
   /**
-   * 策略ID
+   * <p>策略ID</p>
    */
   AspInstanceId?: string
   /**
-   * 资源ID
+   * <p>资源ID</p>
    */
   ResourceId?: string
   /**
-   * 备份状态，取值如下：
-0 备份完成
-1 创建中（备份进行中）
-2 部分成功（指定的备份路径中部分目录不存在）
-3 恢复中（该备份点正在被恢复任务使用）
-92  已取消
-98 创建失败
-99 已删除
-100 删除中
-
+   * <p>备份状态，取值如下：<br>0 备份完成<br>1 创建中（备份进行中）<br>2 部分成功（指定的备份路径中部分目录不存在）<br>3 恢复中（该备份点正在被恢复任务使用）<br>92  已取消<br>98 创建失败<br>99 已删除<br>100 删除中</p>
    */
   Status?: number
   /**
-   * 备份路径
+   * <p>备份路径</p>
    */
   BackupPaths?: Array<string>
   /**
-   * 包含文件类型
+   * <p>包含文件类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeFileTypes?: Array<string>
   /**
-   * 排除路径
+   * <p>排除路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExcludePatterns?: Array<string>
   /**
-   * 是否排除系统目录
+   * <p>是否排除系统目录</p>
    */
   ExcludeSystemDirectories?: boolean
   /**
-   * 备份库ID
+   * <p>备份库ID</p>
    */
   VaultId?: string
   /**
-   * 扫描文件数
+   * <p>扫描文件数</p>
    */
   ScannedFileCount?: number
   /**
-   * 扫描大小(字节)
+   * <p>扫描大小(字节)</p>
    */
   ScannedSize?: number
   /**
-   * 扫描大小(格式化)
+   * <p>扫描大小(格式化)</p>
    */
   ScannedSizeFormatted?: string
   /**
-   * 已备份文件数量
+   * <p>已备份文件数量</p>
    */
   BackupFileCount?: number
   /**
-   * 已备份大小(字节)
+   * <p>已备份大小(字节)</p>
    */
   BackupSize?: number
   /**
-   * 已备份大小(格式化)
+   * <p>已备份大小(格式化)</p>
    */
   BackupSizeFormatted?: string
   /**
-   * 备份进度(0-100)
+   * <p>备份进度(0-100)</p>
    */
   Progress?: number
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   JobId?: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * 是否为永久保留
+   * <p>是否为永久保留</p>
    */
   IsPermanent?: boolean
   /**
-   * 到期时间
+   * <p>到期时间</p>
    */
   Deadline?: string
   /**
-   * 不存在的路径信息
+   * <p>不存在的路径信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NonExistSourcePaths?: Array<string>
   /**
-   * 备份失败原因
+   * <p>备份失败原因</p>
    */
   FailReason?: string
   /**
-   * 备份所属AppId
+   * <p>备份所属AppId</p>
    */
   AppId?: number
   /**
-   * 备份类型
+   * <p>备份类型</p>
    */
   ResourceType?: string
+  /**
+   * <p>cos备份场景使用，标识是否清单生成中</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsInventoryPending?: boolean
+  /**
+   * <p>是否备份对象ACL（仅COS备份支持）</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableObjectAcl?: boolean
+  /**
+   * <p>是否备份对象标签（仅COS备份支持）</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableObjectTags?: boolean
+  /**
+   * <p>云上资源ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CloudResourceId?: string
+  /**
+   * <p>产品存储类型</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductType?: string
 }
 
 /**
@@ -1537,7 +1579,7 @@ export interface DrillPairDeniedAction {
  */
 export interface CreateFileBackupResponse {
   /**
-   * 备份Id
+   * <p>备份Id</p>
    */
   BackupId?: string
   /**
@@ -1561,39 +1603,44 @@ export interface ApplyBackupGroupResponse {
  */
 export interface BackupInstance {
   /**
-   * 实例绑定的定期备份策略列表。
+   * <p>实例绑定的定期备份策略列表。</p>
    */
   AutoBackupPolicyIdSet?: Array<string>
   /**
-   * 实例ID。
+   * <p>实例ID。</p>
    */
   InstanceId?: string
   /**
-   * 用户AppId。
+   * <p>用户AppId。</p>
    */
   AppId?: number
   /**
-   * 实例最新备份时间。
+   * <p>实例最新备份时间。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestBackupTime?: string
   /**
-   * 实例的备份组ID列表。
+   * <p>实例的备份组ID列表。</p>
    */
   BackupGroupIdSet?: Array<string>
   /**
-   * 修改时间。
+   * <p>修改时间。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
+  /**
+   * <p>备份数据量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupSizeMb?: number
 }
 
 /**
@@ -1601,25 +1648,29 @@ export interface BackupInstance {
  */
 export interface DescribeFileBackupsRequest {
   /**
-   * 偏移量，默认0
+   * <p>偏移量，默认0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大500
+   * <p>返回数量，默认20，最大100</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
    */
   Limit?: number
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CreatedTime： 创建时间</li><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>DESC： 降序排序</li><li>ASC： 升序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 过滤条件。支持: backup-id, plan-id, instance-id, status, backup-type, auto-backup-policy-id
+   * <p>过滤条件。支持: backup-id, plan-id, instance-id, status, backup-type, auto-backup-policy-id</p>
    */
   Filters?: Array<FilterModel>
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>CVM_AGENT： CVM文件备份</li><li>CFS_AGENT： 文件系统备份</li><li>COS_AGENT： COS备份</li></ul><p>默认值：CVM_AGENT</p>
+   */
+  ResourceType?: string
 }
 
 /**
@@ -1627,11 +1678,11 @@ export interface DescribeFileBackupsRequest {
  */
 export interface DescribeBackupInstancesResponse {
   /**
-   * 符合条件的受保护实例总数量
+   * <p>符合条件的受保护实例总数量</p>
    */
   TotalCount?: number
   /**
-   * 符合条件的受保护实例详情
+   * <p>符合条件的受保护实例详情</p>
    */
   BackupInstanceSet?: Array<BackupInstance>
   /**
@@ -1705,7 +1756,36 @@ export interface DescribeCommonBackupPointsRequest {
 /**
  * DescribeFileBackupObjects请求参数结构体
  */
-export type DescribeFileBackupObjectsRequest = null
+export interface DescribeFileBackupObjectsRequest {
+  /**
+   * <p>备份实例ID</p>
+   */
+  BackupId: string
+  /**
+   * <p>浏览路径</p>
+   */
+  Path?: string
+  /**
+   * <p>偏移量，默认0</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，默认50，最大1000</p>
+   */
+  Limit?: number
+  /**
+   * <p>排序字段</p><p>枚举值：</p><ul><li>name： 文件名称</li></ul><p>默认值：name</p>
+   */
+  OrderField?: string
+  /**
+   * <p>排序方式</p><p>枚举值：</p><ul><li>asc： 升序排序</li><li>desc： 降序排序</li></ul><p>默认值：asc</p>
+   */
+  Order?: string
+  /**
+   * <p>返回模式</p><p>枚举值：</p><ul><li>all： 返回目录和文件</li><li>dir： 仅返回目录</li><li>file： 仅返回文件（含符号连接）</li></ul>
+   */
+  ObjectType?: string
+}
 
 /**
  * CreateDisasterRecoverySitePair请求参数结构体
@@ -1881,41 +1961,53 @@ export interface CopyPairDeniedAction {
  */
 export interface CreateFileBackupRequest {
   /**
-   * 资源ID列表
+   * <p>资源ID列表</p>
    */
   ResourceId: string
   /**
-   * 计划ID
+   * <p>计划ID</p>
    */
   PlanId?: string
   /**
-   * 备份路径列表，1~20 个
+   * <p>备份路径列表，1~20 个</p>
    */
   BackupPaths?: Array<string>
   /**
-   * 包含文件类型，0~20 个
+   * <p>包含文件类型，0~20 个</p>
    */
   IncludeFileTypes?: Array<string>
   /**
-   * 排除文件路径列表，0~20 个
+   * <p>排除文件路径列表，0~20 个</p>
    */
   ExcludePatterns?: Array<string>
   /**
-   * 是否排除系统目录
+   * <p>是否排除系统目录</p>
    */
   ExcludeSystemDirectories?: boolean
   /**
-   * 备份库ID
+   * <p>备份库ID，此参数必填。</p>
    */
   BackupStorageId?: string
   /**
-   * 备份到期时间
+   * <p>备份到期时间</p>
    */
   Deadline?: string
   /**
-   * 备份名称
+   * <p>备份名称</p>
    */
   BackupName?: string
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>CVM_AGENT： CVM文件备份</li><li>CFS_AGENT： 文件系统备份</li><li>COS_AGENT： COS备份</li></ul><p>默认值：CVM_AGENT</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>是否备份对象ACL（仅COS备份支持）</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul><p>默认值：false</p>
+   */
+  EnableObjectAcl?: boolean
+  /**
+   * <p>是否备份对象标签（仅COS备份支持）</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul><p>默认值：false</p>
+   */
+  EnableObjectTags?: boolean
 }
 
 /**
@@ -1923,7 +2015,15 @@ export interface CreateFileBackupRequest {
  */
 export interface DescribeFileBackupObjectsResponse {
   /**
-   * 当前路径下包含的目录及文件总数
+   * <p>当前路径下包含的目录信息</p>
+   */
+  DirList?: Array<FileInfo>
+  /**
+   * <p>当前路径下包含的文件信息</p>
+   */
+  FileList?: Array<FileInfo>
+  /**
+   * <p>当前路径下包含的目录及文件总数</p>
    */
   TotalCount?: number
   /**
@@ -1937,11 +2037,11 @@ export interface DescribeFileBackupObjectsResponse {
  */
 export interface DescribeFileRestoreTasksResponse {
   /**
-   * 符合条件的总数量。
+   * <p>符合条件的总数量。</p>
    */
   TotalCount?: number
   /**
-   * 恢复任务列表详情。
+   * <p>恢复任务列表详情。</p>
    */
   RestoreTaskSet?: Array<RestoreTask>
   /**
@@ -1955,11 +2055,11 @@ export interface DescribeFileRestoreTasksResponse {
  */
 export interface DescribeFileBackupPlansResponse {
   /**
-   * 符合条件的计划总数量
+   * <p>符合条件的计划总数量</p>
    */
   TotalCount?: number
   /**
-   * 符合条件的计划详情
+   * <p>符合条件的计划详情</p>
    */
   PlanSet?: Array<PlanInfo>
   /**
@@ -2062,11 +2162,11 @@ export interface ModifyDrillPairAttributeResponse {
  */
 export interface DescribeBackupVaultsResponse {
   /**
-   * 符合条件的总数量。
+   * <p>符合条件的总数量。</p>
    */
   TotalCount?: number
   /**
-   * 备份库列表详情。
+   * <p>备份库列表详情。</p>
    */
   BackupVaultSet?: Array<BackupVault>
   /**
@@ -2309,6 +2409,20 @@ export interface DrilledResourceStatus {
 }
 
 /**
+ * 文件备份资源
+ */
+export interface BackupResourceInfo {
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>CVM_AGENT： CVM文件备份</li><li>COS_AGENT： COS备份</li><li>CFS_AGENT： CFS文件备份</li><li>INSTANCE： CVM整机备份</li></ul>
+   */
+  ResourceType?: string
+  /**
+   * <p>资源ID</p>
+   */
+  ResourceIds?: Array<string>
+}
+
+/**
  * ReportJobProgress返回参数结构体
  */
 export interface ReportJobProgressResponse {
@@ -2323,31 +2437,31 @@ export interface ReportJobProgressResponse {
  */
 export interface FileBackupOverview {
   /**
-   * 整机备份点总数
+   * <p>备份点总数</p>
    */
   BackupCount?: number
   /**
-   * 创建中数量
+   * <p>创建中数量</p>
    */
   CreatingBackupCount?: number
   /**
-   * 失败数量
+   * <p>失败数量</p>
    */
   FailedBackupCount?: number
   /**
-   * 已完成数量
+   * <p>已完成数量</p>
    */
   SuccessBackupCount?: number
   /**
-   * 恢复中的总数量
+   * <p>恢复中的总数量</p>
    */
   RestoringBackupCount?: number
   /**
-   * 整机备份总容量
+   * <p>备份总容量</p>
    */
   BackupSizeMb?: number
   /**
-   * 受保护 CVM 资源数
+   * <p>受保护资源数</p>
    */
   BackupResourceCount?: number
 }
@@ -2357,80 +2471,95 @@ export interface FileBackupOverview {
  */
 export interface PlanInfo {
   /**
-   * 备份计划ID
+   * <p>备份计划ID</p>
    */
   PlanId?: string
   /**
-   * 计划关联的实例ID
+   * <p>计划关联的实例ID</p>
    */
   ResourceIds?: Array<string>
   /**
-   * 计划名称
+   * <p>计划名称</p>
    */
   PlanName?: string
   /**
-   * 备份路径列表，1~20 个
+   * <p>备份路径列表，1~20 个</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupPaths?: Array<string>
   /**
-   * 包含文件类型，0~20 个
+   * <p>包含文件类型，0~20 个</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeFileTypes?: Array<string>
   /**
-   * 排除文件路径列表，0~20 个
+   * <p>排除文件路径列表，0~20 个</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExcludePatterns?: Array<string>
   /**
-   * 是否排除系统目录
+   * <p>是否排除系统目录</p>
    */
   ExcludeSystemDirectories?: boolean
   /**
-   * 备份库ID
+   * <p>备份库ID</p>
    */
   VaultId?: string
   /**
-   * 备份计划状态
+   * <p>备份计划状态</p>
    */
   Status?: string
   /**
-   * 策略ID
+   * <p>策略ID</p>
    */
   AspId?: string
   /**
-   * 策略名称
+   * <p>策略名称</p>
    */
   AspName?: string
   /**
-   * 策略详情
+   * <p>策略详情</p>
    */
   AspPolicy?: AspInfo
   /**
-   * 最近一次执行时间
+   * <p>最近一次执行时间</p>
    */
   LastExecuteTime?: string
   /**
-   * 下次触发时间
+   * <p>下次触发时间</p>
    */
   NextTriggerTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * 最近一次执行错误信息
+   * <p>最近一次执行错误信息</p>
    */
   LastTriggerError?: string
   /**
-   * 备份数量
+   * <p>备份数量</p>
    */
   BackupCount?: number
   /**
-   * 流控信息
+   * <p>流控信息</p>
    */
   FlowControlSettings?: Array<FlowControlRule>
+  /**
+   * <p>是否备份对象ACL（仅COS备份支持）</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableObjectAcl?: boolean
+  /**
+   * <p>是否备份对象标签（仅COS备份支持）</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableObjectTags?: boolean
+  /**
+   * <p>产品存储类型</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductType?: string
 }
 
 /**
@@ -2446,18 +2575,27 @@ export interface DeleteFileBackupsResponse {
 /**
  * BindAutoBackupPolicy请求参数结构体
  */
-export type BindAutoBackupPolicyRequest = null
+export interface BindAutoBackupPolicyRequest {
+  /**
+   * <p>备份策略ID</p>
+   */
+  AutoBackupPolicyId: string
+  /**
+   * <p>实例ID列表</p>
+   */
+  InstanceIds?: Array<string>
+}
 
 /**
  * DescribeDisasterRecoverySitePairs返回参数结构体
  */
 export interface DescribeDisasterRecoverySitePairsResponse {
   /**
-   * 有效的容灾策略数量。
+   * <p>有效的容灾策略数量。</p>
    */
   TotalCount?: number
   /**
-   * 容灾策略列表。
+   * <p>容灾策略列表。</p>
    */
   SitePairSet?: Array<SitePair>
   /**
@@ -2497,7 +2635,7 @@ export interface CreateFileBackupPlanRequest {
    */
   PlanName?: string
   /**
-   * <p>实例配置列表，[1,20]</p>
+   * <p>实例配置列表，1~20 项，此参数必填。</p>
    */
   Resources?: Array<ResourcePlan>
   /**
@@ -2599,21 +2737,31 @@ export interface EnhancedService {
  */
 export interface ProtectedResourceOverview {
   /**
-   * 受保护资源总数
+   * <p>受保护资源总数</p>
    */
   TotalProtectedCount?: number
   /**
-   * 总资源数
+   * <p>总资源数</p>
    */
   TotalResourceCount?: number
   /**
-   * CVM 受保护统计
+   * <p>CVM整机备份受保护统计</p>
    */
   Cvm?: ResourceProtectStat
   /**
-   * CFS 受保护统计
+   * <p>CVM文件备份受保护统计</p>
    */
   CFS?: ResourceProtectStat
+  /**
+   * <p>CFS文件备份受保护统计</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CFSAgent?: ResourceProtectStat
+  /**
+   * <p>COS备份受保护统计</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  COSAgent?: ResourceProtectStat
 }
 
 /**
@@ -2729,11 +2877,11 @@ export interface DescribeDisasterRecoveryOverviewResponse {
  */
 export interface DescribeAutoBackupPoliciesResponse {
   /**
-   * 符合条件的总数量。
+   * <p>符合条件的总数量。</p>
    */
   TotalCount?: number
   /**
-   * 备份策略列表详情。
+   * <p>备份策略列表详情。</p>
    */
   AutoBackupPolicySet?: Array<AutoBackupPolicy>
   /**
@@ -2747,7 +2895,23 @@ export interface DescribeAutoBackupPoliciesResponse {
  */
 export interface CreateFileRestoreTaskRequest {
   /**
-   * 冲突处理策略：skip-跳过/"         "overwrite-覆盖/newer-保留较新的版本/"         "if_changed-内容变化时覆盖，默认overwrite
+   * <p>待恢复的备份ID</p>
+   */
+  BackupId: string
+  /**
+   * <p>目标实例ID</p>
+   */
+  TargetResourceId: string
+  /**
+   * <ol><li>恢复路径列表（1-500项）；2. CVM和CFS文件备份不传则使用备份点中所有路径，COS备份该参数必填；3. 必须是绝对路径；</li></ol>
+   */
+  RestorePaths?: Array<string>
+  /**
+   * <p>目标位置</p><ol><li>不传则恢复到原始路径</li><li>cos恢复时不能以【/】开头</li></ol>
+   */
+  TargetLocation?: string
+  /**
+   * <p>冲突处理策略：skip-跳过/&quot;         &quot;overwrite-覆盖/newer-保留较新的版本/&quot;         &quot;if_changed-内容变化时覆盖，默认overwrite</p>
    */
   ConflictStrategy?: string
 }
@@ -2842,31 +3006,31 @@ export interface DeniedAction {
  */
 export interface DescribeDisasterRecoveryProtectGroupsRequest {
   /**
-   * 要查询的容灾保护组产品类型，枚举值：DISK / INSTANCE / CFS。
+   * <p>要查询的容灾保护组产品类型，枚举值：DISK / INSTANCE / CFS。</p>
    */
   ProtectGroupType: string
   /**
-   * 要查询的容灾保护组ID列表。
+   * <p>要查询的容灾保护组ID列表。</p>
    */
   ProtectGroupIds?: Array<string>
   /**
-   * 过滤条件（过滤项由 core handler 定义，如 disaster-recovery-protect-group-id 等）。
+   * <p>过滤条件（过滤项由 core handler 定义，如 disaster-recovery-protect-group-id 等）。</p>
    */
   Filters?: Array<FilterModel>
   /**
-   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
+   * <p>偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。
+   * <p>返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。</p>
    */
   Limit?: number
   /**
-   * 输出结果按升序还是降序
+   * <p>输出结果按升序还是降序</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 输出结果的排序字段
+   * <p>输出结果的排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
 }
@@ -2957,29 +3121,37 @@ export interface StopCopyPairTasksResponse {
  */
 export interface ResourcePlan {
   /**
-   * 云服务器实例 ID
+   * <p>云服务器实例 ID</p>
    */
   ResourceId: string
   /**
-   * 备份路径，[0,20]
+   * <p>备份路径，[0,20]</p>
    */
   BackupPaths?: Array<string>
   /**
-   * 包含文件类型，[0,20]
+   * <p>包含文件类型，[0,20]</p>
    */
   IncludeFileTypes?: Array<string>
   /**
-   * 排除路径，[0,20]
+   * <p>排除路径，[0,20]</p>
    */
   ExcludePatterns?: Array<string>
   /**
-   * 是否排除系统目录
+   * <p>是否排除系统目录</p>
    */
   ExcludeSystemDirectories?: boolean
   /**
-   * 是否立即触发全量备份
+   * <p>是否立即触发全量备份</p>
    */
   ExecuteImmediately?: boolean
+  /**
+   * <p>cos备份是否备份ACL</p>
+   */
+  EnableObjectAcl?: boolean
+  /**
+   * <p>cos备份是否备份tag</p>
+   */
+  EnableObjectTags?: boolean
 }
 
 /**
@@ -3103,86 +3275,91 @@ export interface DescribeBackupVaultsDeniedActionsResponse {
  */
 export interface AutoBackupPolicy {
   /**
-   * 定期备份策略是否激活。
+   * <p>定期备份策略是否激活。</p>
    */
   IsActivated?: boolean
   /**
-   * 使用该定期备份策略创建出来的备份是否永久保留。
+   * <p>使用该定期备份策略创建出来的备份是否永久保留。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPermanent?: boolean
   /**
-   * 使用该定期备份策略创建出来的备份是否永久保留。
+   * <p>使用该定期备份策略创建出来的备份是否永久保留。</p>
    */
   NextTriggerTime?: string
   /**
-   * NORMAL
+   * <p>NORMAL</p>
    */
   AutoBackupPolicyState?: string
   /**
-   * 备份策略的名称。
+   * <p>备份策略的名称。</p>
    */
   AutoBackupPolicyName?: string
   /**
-   * 定期备份的执行策略。
+   * <p>定期备份的执行策略。</p>
    */
   Policy?: Array<Policy>
   /**
-   * 备份策略ID。
+   * <p>备份策略ID。</p>
    */
   AutoBackupPolicyId?: string
   /**
-   * 备份策略的创建时间。
+   * <p>备份策略的创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 使用该定期备份策略创建出来的备份保留天数。
+   * <p>使用该定期备份策略创建出来的备份保留天数。</p>
    */
   RetentionDays?: number
   /**
-   * 用户AppId。
+   * <p>用户AppId。</p>
    */
   AppId?: number
   /**
-   * 定期备份策略绑定的实例ID列表。
+   * <p>定期备份策略绑定的实例ID列表。</p>
    */
   InstanceIdSet?: Array<string>
   /**
-   * 该定期快照创建的快照最大保留月数
+   * <p>使用该定期备份策略创建的备份最大保留月数</p>
    */
   RetentionMonths?: number
   /**
-   * 该定期快照创建的快照最大保留数量
+   * <p>使用该定期备份策略创建的备份最大保留数量</p>
    */
   RetentionAmount?: number
   /**
-   * 创建人。
+   * <p>创建人。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountName?: string
   /**
-   * 主账号uin。
+   * <p>主账号uin。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountUin?: string
   /**
-   * 子账号uin。
+   * <p>子账号uin。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubAccountUin?: string
   /**
-   * 策略存储类型
+   * <p>策略存储类型</p>
    */
   StorageType?: string
   /**
-   * 备份库ID
+   * <p>备份库ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VaultId?: string
   /**
-   * 高级保留策略
+   * <p>高级保留策略</p>
    */
   AdvancedRetentionPolicy?: AdvancedRetentionPolicy
+  /**
+   * <p>备份资源信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupResourceInfos?: Array<BackupResourceInfo>
 }
 
 /**
@@ -3276,6 +3453,10 @@ export interface RestoreTask {
  */
 export interface CreateFileRestoreTaskResponse {
   /**
+   * <p>恢复任务ID</p>
+   */
+  TaskId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3300,7 +3481,7 @@ export interface ModifyDrillPairAttributeRequest {
  */
 export interface CreateAutoBackupPolicyResponse {
   /**
-   * 定期备份策略ID。
+   * <p>定期备份策略ID。</p>
    */
   AutoBackupPolicyId?: string
   /**
@@ -3314,11 +3495,11 @@ export interface CreateAutoBackupPolicyResponse {
  */
 export interface DescribeDisasterRecoveryProtectGroupsResponse {
   /**
-   * 符合条件的容灾保护组总数
+   * <p>符合条件的容灾保护组总数</p>
    */
   TotalCount?: number
   /**
-   * 容灾保护组列表
+   * <p>容灾保护组列表</p>
    */
   ProtectGroupSet?: Array<ProtectGroup>
   /**
@@ -3336,7 +3517,7 @@ export interface DescribeSecurityGroupMappingsRequest {
    */
   SitePairId: string
   /**
-   * 过滤条件，详见过滤条件表。支持的Name：src-security-group-id、target-security-group-id
+   * 过滤条件。支持的Name：src-security-group-id、target-security-group-id
    */
   Filters?: Array<FilterModel>
   /**
@@ -3495,6 +3676,32 @@ export interface CreateInstanceModel {
    * 容灾演练的恢复时间点，仅 CreateInstanceDrillPairs 场景生效
    */
   RecoveryTime?: string
+}
+
+/**
+ * 文件信息
+ */
+export interface FileInfo {
+  /**
+   * 文件名称
+   */
+  Path?: string
+  /**
+   * 文件大小，单位是Bytes
+   */
+  Size?: number
+  /**
+   * 文件mtime
+   */
+  ModifyTime?: number
+  /**
+   * 文件ctime
+   */
+  ChangeTime?: number
+  /**
+   * 文件类型。取值包含"dir"、"file"、"symlink"
+   */
+  Type?: string
 }
 
 /**
@@ -3685,31 +3892,31 @@ export interface DeleteCopyPairsResponse {
  */
 export interface DescribeDisasterRecoverySitePairsRequest {
   /**
-   * 要查询的容灾策略产品类型。取值范围：DISK / INSTANCE / CFS。
+   * <p>要查询的容灾策略产品类型。取值范围：INSTANCE 。</p><p>枚举值：</p><ul><li>INSTANCE： CVM站点对</li></ul>
    */
   SitePairType: string
   /**
-   * 要查询的容灾策略ID列表。
+   * <p>要查询的容灾策略ID列表。</p>
    */
   SitePairIds?: Array<string>
   /**
-   * 过滤条件，详见定期快照过滤条件表。
+   * <p>过滤条件，详见定期快照过滤条件表。</p>
    */
   Filters?: Array<FilterModel>
   /**
-   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
+   * <p>偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。
+   * <p>返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。</p>
    */
   Limit?: number
   /**
-   * 输出结果按升序还是降序，DESC表示降序，ASC表示升序
+   * <p>输出结果按升序还是降序，DESC表示降序，ASC表示升序</p>
    */
   Order?: string
   /**
-   * 输出结果的排序字段
+   * <p>输出结果的排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
 }
@@ -3864,23 +4071,23 @@ export interface ModifyBackupAttributeRequest {
  */
 export interface DescribeBackupInstancesRequest {
   /**
-   * 过滤条件。;instance-id - Array of String - 是否必填：否 -（过滤条件）按实例ID过滤。;auto-backup-policy-id - Array of String - 是否必填：否 -（过滤条件）按照实例绑定的定期备份策略过滤。;auto-backup-policy-name - Array of String - 是否必填：否 -（过滤条件）按照云硬盘绑定的定期备份策略名称过滤。
+   * <p>过滤条件。;instance-id - Array of String - 是否必填：否 -（过滤条件）按实例ID过滤。;auto-backup-policy-id - Array of String - 是否必填：否 -（过滤条件）按照实例绑定的定期备份策略过滤。;auto-backup-policy-name - Array of String - 是否必填：否 -（过滤条件）按照云硬盘绑定的定期备份策略名称过滤。</p>
    */
   Filters?: Array<FilterModel>
   /**
-   * 偏移量，默认0
+   * <p>偏移量，默认0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大500
+   * <p>返回数量，默认20，最大500</p>
    */
   Limit?: number
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
 }
@@ -3924,11 +4131,11 @@ export interface ModifyProtectGroupAttributeRequest {
  */
 export interface DescribeProtectedInstancesResponse {
   /**
-   * 符合条件的受保护实例总数量
+   * <p>符合条件的受保护实例总数量</p>
    */
   TotalCount?: number
   /**
-   * 符合条件的受保护实例详情
+   * <p>符合条件的受保护实例详情</p>
    */
   InstanceSet?: Array<ProtectInstance>
   /**
@@ -4202,7 +4409,7 @@ export interface DescribeDrillPairsRequest {
    */
   DrillPairIds?: Array<string>
   /**
-   * 过滤条件，详见定期快照过滤条件表。
+   * 过滤条件。
    */
   Filters?: Array<FilterModel>
   /**
@@ -4537,11 +4744,11 @@ export interface RunFailoverCopyPairsRequest {
  */
 export interface DescribeFileBackupsResponse {
   /**
-   * 符合条件的备份点总数量
+   * <p>符合条件的备份点总数量</p>
    */
   TotalCount?: number
   /**
-   * 符合条件的备份点详情
+   * <p>符合条件的备份点详情</p>
    */
   BackupSet?: Array<BackupInfo>
   /**
@@ -4679,11 +4886,11 @@ export interface DisasterRecoveryOverview {
  */
 export interface DescribeBackupGroupRollbackTasksResponse {
   /**
-   * 符合条件的总数量。
+   * <p>符合条件的总数量。</p>
    */
   TotalCount?: number
   /**
-   * 备份组恢复详情。
+   * <p>备份组恢复详情。</p>
    */
   RollbackTaskSet?: Array<BackupGroupRollbackTask>
   /**
@@ -4848,7 +5055,7 @@ export interface DescribeBackupOverviewGeneralResponse {
    */
   InstanceBackupOverview?: InstanceBackupOverview
   /**
-   * <p>文件备份概览数据</p>
+   * <p>CVM文件备份概览数据</p>
    */
   FileBackupOverview?: FileBackupOverview
   /**
@@ -4863,6 +5070,14 @@ export interface DescribeBackupOverviewGeneralResponse {
    * <p>受保护资源概览</p>
    */
   ProtectedResourceOverview?: ProtectedResourceOverview
+  /**
+   * <p>CFS文件备份概览数据</p>
+   */
+  CFSAgentBackupOverview?: FileBackupOverview
+  /**
+   * <p>COS备份概览数据</p>
+   */
+  COSAgentBackupOverview?: FileBackupOverview
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4961,23 +5176,23 @@ export interface InternetAccessible {
  */
 export interface DescribeProtectedInstancesRequest {
   /**
-   * 偏移量，默认0
+   * <p>偏移量，默认0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大500
+   * <p>返回数量，默认20，最大100</p>
    */
   Limit?: number
   /**
-   * 排序字段
+   * <p>排序字段</p><p>枚举值：</p><ul><li>CREATE_TIME： 创建时间</li><li>CreatedTime： 创建时间</li></ul><p>默认值：CREATE_TIME</p>
    */
   OrderField?: string
   /**
-   * 排序方式
+   * <p>排序方式</p><p>枚举值：</p><ul><li>ASC： 升序排序</li><li>DESC： 降序排序</li></ul><p>默认值：DESC</p>
    */
   Order?: string
   /**
-   * 过滤条件。支持: instance-id, agent-status
+   * <p>过滤条件。支持: instance-id, agent-status</p>
    */
   Filters?: Array<FilterModel>
 }

@@ -241,6 +241,20 @@ export interface DescribePreCacheImageTaskRequest {
 }
 
 /**
+ * 资产版本支持的 Harness 引擎与具体版本。HarnessEngine 和 HarnessEngineVersion 原样使用 DescribeHarnessEngineList 返回的选项，两个字段共同确定兼容性。
+ */
+export interface HarnessVersionReference {
+  /**
+   * <p>Harness 引擎标识，原样使用 DescribeHarnessEngineList 返回的 HarnessEngine，例如 pi。</p><p>参数格式：必填，1 至 128 字符，区分大小写，不含空白、通配符或范围表达式。与同一对象的 HarnessEngineVersion 共同标识支持的版本。</p>
+   */
+  HarnessEngine: string
+  /**
+   * <p>Harness 引擎的具体版本，原样使用 DescribeHarnessEngineList 返回的 HarnessEngineVersion，例如 1.3.0。</p><p>参数格式：必填，1 至 128 字符，区分大小写，不含空白、通配符或版本范围。必须与同一个对象的 HarnessEngine 精确匹配；不能只比较版本号，也不自行拼接标识。</p>
+   */
+  HarnessEngineVersion: string
+}
+
+/**
  * Registry Record 对象。Record 只保存元数据；协议描述符与内容状态请通过 Version 相关接口获取。
  */
 export interface CloudRecord {
@@ -598,7 +612,7 @@ export interface AcquireSandboxInstanceTokenRequest {
 }
 
 /**
- * Record 的一个不可变 Version 快照；记录了描述符、来源配置与审批状态。
+ * Record 的版本信息，包含不可变描述符、来源配置与审批状态。DescribeRegistryRecordVersionList 另返回所属 Record 当前的 Name、Description、DescriptorType 展示投影；这些展示字段不属于版本快照，其他接口可不返回。
  */
 export interface CloudRecordVersion {
   /**
@@ -697,7 +711,7 @@ export interface CloudRecordVersion {
    */
   ApprovalActions?: Array<CloudVersionApprovalAction>
   /**
-   * <p>TAR 内容成功校验、完成物化并进入 READY 的时间；MANUAL / URL_IMPORT 或尚未 READY 的 TAR_PACKAGE 均为空。</p>
+   * <p>文件内容就绪时间，UTC RFC3339 格式。</p><p>仅 TAR_PACKAGE 或 FILE 来源且 ContentStatus=READY 的版本返回；其他来源或未就绪文件为空。Skill 沿用现有 TAR 内容校验机制，Plugin 仅确认文件大小和完整性。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentReadyTime?: string
@@ -711,6 +725,26 @@ export interface CloudRecordVersion {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelSet?: Array<string>
+  /**
+   * <p>该资产版本支持的 Harness 引擎与具体版本对象列表。</p><p>参数格式：元素为 HarnessVersionReference，包含必填的 HarnessEngine 和 HarnessEngineVersion，原样使用 DescribeHarnessEngineList 返回值；每个字段 1 至 128 字符，最多 128 项，按二元组区分大小写去重。不使用拼接标识、通配符或版本范围。</p><p>默认值：[]</p><p>随版本创建，不继承。省略或空列表表示未声明，不代表支持所有 Harness。旧字符串快照按未声明返回 []，不推断引擎，不匹配兼容筛选。supported_harness_engine 和 supported_harness_version 必须同时传入并精确匹配同一个对象；Managed Harness 按目标引擎与版本二元组校验。</p>
+   */
+  SupportedHarnessVersions?: Array<HarnessVersionReference>
+  /**
+   * <p>版本元数据的 Name/Value 对象数组。</p><p>参数格式：每项仅包含必填的 Name、Value 两个字符串字段。Name 非空、小写且数组内唯一，不自动转换；重复 Name 即使 Value 相同也返回 InvalidParameter。Value 允许空字符串，保留大小写；不接受嵌套对象、数组或非字符串值。</p><p>默认值：空数组 []。创建新版本时省略或 [] 均为空，不继承；null、JSON 字符串和原生对象非法。响应按 Name 升序返回，旧 SQL NULL 归一为 []。服务内部使用 map[string]string，数据库 JSON 列保存对象。publisher 表示发布者展示名称；metadata.&lt;key&gt; 按完整小写名称精确筛选，规则不变。</p>
+   */
+  Metadata?: Array<MetadataEntry>
+  /**
+   * <p>所属 Record 当前的名称。仅 DescribeRegistryRecordVersionList 在普通模式和市场模式中返回，用于卡片展示。</p><p>展示投影不保存到不可变版本快照；其他返回版本信息的接口可不包含此字段。</p>
+   */
+  Name?: string
+  /**
+   * <p>所属 Record 当前的描述。仅 DescribeRegistryRecordVersionList 在普通模式和市场模式中返回，允许为空字符串。</p><p>Record 描述更新后，列表查询同步反映新值，包括空字符串；固定 VersionId、Descriptors 和其他版本内容不变。其他返回版本信息的接口可不包含此字段。</p>
+   */
+  Description?: string
+  /**
+   * <p>所属 Record 的底层资产类型。仅 DescribeRegistryRecordVersionList 在普通模式和市场模式中返回，用于卡片展示及 descriptor_type 筛选。</p><p>取值包括 MCP、A2A、AGUI、CUSTOM、AGENT_SKILLS 和 PLUGIN。不新增 Kind 或 TOOL 类型；此展示投影不保存到版本快照，其他返回版本信息的接口可不包含此字段。</p>
+   */
+  DescriptorType?: string
 }
 
 /**
@@ -1070,7 +1104,7 @@ export interface DescribeSessionSpacesResponse {
  */
 export interface DescribeRegistryRecordVersionListResponse {
   /**
-   * <p>Version 对象数组。</p>
+   * <p>筛选和分页后的版本数组。普通模式指定 RecordId 时按 Revision 降序，普通跨 Record 查询与市场查询均按 CreateTime 降序、VersionId 升序。</p><p>市场模式只返回公开字段。支持此版本契约的后端返回 SupportedHarnessVersions 和 Metadata 数组，未设置时返回空数组。Metadata 的每项由字符串 Name 和 Value 组成。无匹配时返回空数组。</p>
    */
   VersionSet?: Array<CloudRecordVersion>
   /**
@@ -1120,13 +1154,13 @@ export interface DescribePreCacheImageListRequest {
  */
 export interface DescribeRegistryRecordVersionListRequest {
   /**
-   * <p>父 Registry ID。</p>
+   * <p>父 Registry ID，与 RecordId 同时省略或为空字符串时使用市场查询；两者均非空时使用普通查询。</p><p>市场查询仅返回服务端 marketplace.registry_ids 配置来源的未删除资产的 APPROVED 版本；文件还需 READY 且制品可用。普通查询保持 AppID 隔离和原 CAM 权限，即使显式指定官方 Registry 也按普通权限处理。仅一个 ID 非空返回 InvalidParameter。</p>
    */
   RegistryId: string
   /**
-   * <p>Record ID。</p>
+   * <p>Record ID。市场和普通 Registry 查询均可省略，提供时仅查询该 Record 的版本。</p><p>省略时查询 RegistryId 所选范围内的可读版本。查询各 Record 的稳定版本时显式传 Filters 的 label=stable。</p>
    */
-  RecordId: string
+  RecordId?: string
   /**
    * <p>分页起始偏移，默认 0。</p>
    */
@@ -1136,7 +1170,7 @@ export interface DescribeRegistryRecordVersionListRequest {
    */
   Limit?: number
   /**
-   * <p>过滤条件。支持：status（按 Version 状态：PREPARING/PENDING_APPROVAL/APPROVED/REJECTED/CANCELED，多值 OR）、source_type（按内容来源：MANUAL/URL_IMPORT/TAR_PACKAGE，多值 OR）。</p>
+   * <p>过滤条件。两种模式默认支持 label、search、descriptor_type、supported_harness_engine、supported_harness_version、metadata. 前缀、status、source_type；record_id 和 version_id 仅支持市场模式。</p><p>同 key 多值 OR，不同 key AND。supported_harness_engine 与 supported_harness_version 必须同时提供，分别对 HarnessEngine 和 HarnessEngineVersion 区分大小写精确匹配，并命中 SupportedHarnessVersions 中同一个对象；禁止跨元素组合，未声明兼容性时不匹配，只提供其中一个返回 InvalidParameter.Filters。search 仅允许单个关键词，匹配 Record 名称或描述；label 匹配当前绑定版本。metadata. 后完整小写文本作为顶层 key，按字符串值精确匹配，不解析嵌套路径。status 支持 PREPARING/PENDING_APPROVAL/APPROVED/REJECTED/CANCELED；source_type 支持 MANUAL/URL_IMPORT/TAR_PACKAGE/FILE。未知或重复 key、空 Values、非法值拒绝。无 Filters 不默认 stable，市场默认浏览显式传 label=stable；筛选不能扩大可读范围。</p>
    */
   Filters?: Array<CloudFilter>
 }
@@ -2808,6 +2842,20 @@ export interface AgentBucketStorageSource {
 }
 
 /**
+ * 版本元数据的字符串名称和值。Name 必须非空、小写且在同一 Metadata 数组内唯一；重复名称不允许覆盖。
+ */
+export interface MetadataEntry {
+  /**
+   * <p>元数据名称。</p><p>参数格式：非空小写字符串，同一 Metadata 数组内唯一，不自动转换大小写。重复名称返回 InvalidParameter，即使 Value 相同也拒绝。</p>
+   */
+  Name: string
+  /**
+   * <p>元数据的字符串值。</p><p>参数格式：允许空字符串，保留大小写，不支持嵌套对象、数组、数字、布尔值或 null。publisher 的 Value 为发布者展示名称。</p>
+   */
+  Value: string
+}
+
+/**
  * DeletePreCacheImage请求参数结构体
  */
 export interface DeletePreCacheImageRequest {
@@ -3014,7 +3062,7 @@ export interface SandboxInstance {
    */
   ToolName: string
   /**
-   * <p>实例状态：STARTING（启动中）、RUNNING（运行中）、STOPPING（停止中）、STOPPED（已停止）、STOP_FAILED（停止失败）、FAILED（失败状态）</p>
+   * <p>实例状态：STARTING（启动中）、RUNNING（运行中）、STOPPING（停止中）、STOPPED（已停止）、STOP_FAILED（停止失败）、FAILED（失败状态）、RESIZING（规格配置更新中）</p><p>枚举值：</p><ul><li>STARTING： 启动中</li><li>RUNNING： 运行中</li><li>STOPPING： 停止中</li><li>STOPPED： 已停止</li><li>STOP_FAILED： 停止失败</li><li>FAILED： 失败状态</li><li>RESIZING： 规格配置更新中</li></ul>
    */
   Status: string
   /**

@@ -1709,76 +1709,80 @@ export interface UpdateTestXMagicResponse {
  */
 export interface ApplicationInfo {
   /**
-   * 应用名称
+   * <p>应用名称</p>
    */
   AppName?: string
   /**
-   * Ios应用的唯一标识
+   * <p>Ios应用的唯一标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleId?: string
   /**
-   * 应用类型，formal： 正式应用，test：测试应用
+   * <p>应用类型，formal： 正式应用，test：测试应用</p>
    */
   AppType?: string
   /**
-   * license数组
+   * <p>license数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Licenses?: Array<License>
   /**
-   * license 秘钥
+   * <p>license 秘钥</p>
    */
   LicenseKey?: string
   /**
-   * 安卓应用的唯一标识
+   * <p>安卓应用的唯一标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageName?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedAt?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdatedAt?: string
   /**
-   * 用户应用Id
+   * <p>用户应用Id</p>
    */
   ApplicationId?: number
   /**
-   * 视立方下载license的url
+   * <p>视立方下载license的url</p>
    */
   LicenseUrl?: string
   /**
-   * 优图美视信息列表
+   * <p>优图美视信息列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   XMagics?: Array<XMagicInfo>
   /**
-   * Mac  进程名
+   * <p>Mac  进程名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MacBundleId?: string
   /**
-   * windows 进程名
+   * <p>windows 进程名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WinProcessName?: string
   /**
-   * web端Domain列表
+   * <p>web端Domain列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DomainList?: Array<string>
   /**
-   * 账号AppId
+   * <p>账号AppId</p>
    */
   AppId?: string
   /**
-   * 扩展包名数量上限
+   * <p>扩展包名数量上限</p>
    */
   NameLimit?: number
+  /**
+   * <p>linux 进程名</p>
+   */
+  LinuxProcessName?: string
 }
 
 /**

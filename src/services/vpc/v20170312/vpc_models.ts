@@ -17903,9 +17903,13 @@ export interface DirectConnectGatewayCcnRoute {
  */
 export interface DeleteHaVipRequest {
   /**
-   * `HAVIP`唯一`ID`，形如：`havip-9o233uri`。
+   * <p><code>HAVIP</code>唯一<code>ID</code>，形如：<code>havip-9o233uri</code>。</p>
    */
   HaVipId: string
+  /**
+   * <p>忽略删除保护。</p>
+   */
+  SkipTerminationProtection?: boolean
 }
 
 /**
@@ -19821,13 +19825,21 @@ export interface ModifyTemplateMemberResponse {
  */
 export interface ModifyHaVipAttributeRequest {
   /**
-   * `HAVIP`唯一`ID`，形如：`havip-9o233uri`。
+   * <p><code>HAVIP</code>唯一<code>ID</code>，形如：<code>havip-9o233uri</code>。</p>
    */
   HaVipId: string
   /**
-   * `HAVIP`名称，可任意命名，但不得超过60个字符。
+   * <p><code>HAVIP</code>名称，可任意命名，但不得超过60个字符。</p>
    */
   HaVipName?: string
+  /**
+   * <p>删除保护。</p>
+   */
+  TerminationProtection?: boolean
+  /**
+   * <p>流量保护。</p>
+   */
+  TrafficProtection?: boolean
 }
 
 /**

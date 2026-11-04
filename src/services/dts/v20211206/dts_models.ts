@@ -3454,29 +3454,33 @@ export interface SubscribeCheckStepInfo {
  */
 export interface MigrateDBItem {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 实例Vip
+   * <p>实例Vip</p>
    */
   Vip?: string
   /**
-   * 实例Vport
+   * <p>实例Vport</p>
    */
   Vport?: number
   /**
-   * 是否可以作为迁移对象，1-可以，0-不可以
+   * <p>是否可以作为迁移对象，1-可以，0-不可以</p>
    */
   Usable?: number
   /**
-   * 不可以作为迁移对象的原因
+   * <p>不可以作为迁移对象的原因</p>
    */
   Hint?: string
+  /**
+   * <p>硬盘类型，仅Postgresql适用</p><p>枚举值：</p><ul><li>PHYSICAL_LOCAL_SSD： 本地SSD</li><li>CLOUD_PREMIUM： 高性能云硬盘</li><li>CLOUD_SSD： SSD云硬盘</li><li>CLOUD_HSSD： 增强型SSD云硬盘</li></ul>
+   */
+  StorageType?: string
 }
 
 /**
@@ -3598,10 +3602,13 @@ export interface ModifyCompareTaskRequest {
  */
 export interface StopMigrateJobRequest {
   /**
-   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
-
+   * <p>数据迁移任务ID，可通过<a href="https://cloud.tencent.com/document/product/571/82084">DescribeMigrationJobs</a>接口获取。</p>
    */
   JobId: string
+  /**
+   * <p>任务结束时是否强制迁移高级对象，仅PG适用</p><p>枚举值：</p><ul><li>yes： 是</li><li>no： 否</li></ul>
+   */
+  MigrateAdvancedObject?: string
 }
 
 /**

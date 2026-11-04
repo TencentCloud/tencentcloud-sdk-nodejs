@@ -4609,6 +4609,102 @@ export interface FinancialBillItem {
 }
 
 /**
+ * VerifyOfdVatInvoiceOCR返回参数结构体
+ */
+export interface VerifyOfdVatInvoiceOCRResponse {
+  /**
+   * 发票类型
+026:增值税电子普通发票
+028:增值税电子专用发票
+010:电子发票（普通发票）
+020:电子发票（增值税专用发票）
+030:电子发票（铁路电子客票）
+040:电子发票（航空运输电子客票行程单）
+   */
+  Type?: string
+  /**
+   * 发票代码
+   */
+  InvoiceCode?: string
+  /**
+   * 发票号码
+   */
+  InvoiceNumber?: string
+  /**
+   * 开票日期
+   */
+  IssueDate?: string
+  /**
+   * 验证码
+   */
+  InvoiceCheckCode?: string
+  /**
+   * 机器编号
+   */
+  MachineNumber?: string
+  /**
+   * 密码区
+   */
+  TaxControlCode?: string
+  /**
+   * 购买方
+   */
+  Buyer?: VatInvoiceUserInfo
+  /**
+   * 销售方
+   */
+  Seller?: VatInvoiceUserInfo
+  /**
+   * 价税合计
+   */
+  TaxInclusiveTotalAmount?: string
+  /**
+   * 开票人
+   */
+  InvoiceClerk?: string
+  /**
+   * 收款人
+   */
+  Payee?: string
+  /**
+   * 复核人
+   */
+  Checker?: string
+  /**
+   * 税额
+   */
+  TaxTotalAmount?: string
+  /**
+   * 不含税金额
+   */
+  TaxExclusiveTotalAmount?: string
+  /**
+   * 备注
+   */
+  Note?: string
+  /**
+   * 货物或服务清单
+   */
+  GoodsInfos?: Array<VatInvoiceGoodsInfo>
+  /**
+   * 航空运输电子客票行程单信息
+   */
+  AirTicketInfo?: AirTicketInfo
+  /**
+   * 铁路电子客票
+   */
+  RailwayTicketInfo?: RailwayTicketInfo
+  /**
+   * 发票标题
+   */
+  InvoiceTitle?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 购物小票
  */
 export interface ShoppingReceipt {
@@ -4761,6 +4857,41 @@ export interface TextDetectRequest {
 }
 
 /**
+ * SealOCR返回参数结构体
+ */
+export interface SealOCRResponse {
+  /**
+   * 印章内容
+   */
+  SealBody?: string
+  /**
+   * 印章坐标
+   */
+  Location?: Rect
+  /**
+   * 其它文本内容
+   */
+  OtherTexts?: Array<string>
+  /**
+   * 全部印章信息
+   */
+  SealInfos?: Array<SealInfo>
+  /**
+   * 印章类型，表示为：
+圆形印章：0
+椭圆形印章：1
+方形印章：2
+菱形印章：3
+三角形印章：4
+   */
+  SealShape?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RecognizeThaiIDCardOCR请求参数结构体
  */
 export interface RecognizeThaiIDCardOCRRequest {
@@ -4784,6 +4915,68 @@ export interface RecognizeThaiIDCardOCRRequest {
    * <p>图片开关。默认为false，不返回泰国身份证头像照片的base64编码。<br>设置为true时，返回旋转矫正后的泰国身份证头像照片的base64编码</p>
    */
   CropPortrait?: boolean
+}
+
+/**
+ * 轮船票
+ */
+export interface ShippingInvoice {
+  /**
+   * 发票名称
+   */
+  Title?: string
+  /**
+   * 是否存在二维码（1：有，0：无）
+   */
+  QRCodeMark?: number
+  /**
+   * 发票代码
+   */
+  Code?: string
+  /**
+   * 发票号码
+   */
+  Number?: string
+  /**
+   * 姓名
+   */
+  UserName?: string
+  /**
+   * 日期
+   */
+  Date?: string
+  /**
+   * 时间
+   */
+  Time?: string
+  /**
+   * 出发车站
+   */
+  StationGetOn?: string
+  /**
+   * 到达车站
+   */
+  StationGetOff?: string
+  /**
+   * 票价
+   */
+  Total?: string
+  /**
+   * 发票消费类型
+   */
+  Kind?: string
+  /**
+   * 省
+   */
+  Province?: string
+  /**
+   * 市
+   */
+  City?: string
+  /**
+   * 币种
+   */
+  CurrencyCode?: string
 }
 
 /**
@@ -5286,6 +5479,28 @@ export interface PassportRecognizeInfos {
    * <p>出生地（护照信息页识别结果）</p>
    */
   BirthPlace?: string
+}
+
+/**
+ * GenerateVLEmbedding返回参数结构体
+ */
+export interface GenerateVLEmbeddingResponse {
+  /**
+   * <p>向量化结果列表。单条图文混合输入可能返回多个向量。</p>
+   */
+  Data?: Array<EmbeddingObject>
+  /**
+   * <p>输入 Token 数，多模态场景含图像、视频折算的 Token。</p>
+   */
+  InputTokens?: number
+  /**
+   * <p>总 Token 数。</p>
+   */
+  TotalTokens?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5916,6 +6131,28 @@ export interface SubmitMarkEssayAgentJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述用户提供的出参结构的模板
+ */
+export interface SchemaList {
+  /**
+   * <p>自定义需提取的字段名称。注：若需提取多个字段，可定义多个KeyName。</p>
+   */
+  KeyName?: string
+  /**
+   * <p>字段类型。</p><p>枚举值：</p><ul><li>0： 表示KeyName为简单字段（如姓名、性别等）。</li><li>1： 表示KeyName为数组对象（如工作经历、教育经历列表）。</li></ul>
+   */
+  KeyType?: number
+  /**
+   * <p>补充提取字段的描述。</p>
+   */
+  KeyPrompt?: string
+  /**
+   * <p>嵌套SchemaList结构，最多支持嵌套三层。注：仅当KeyType=1时生效。</p>
+   */
+  SubItems?: Array<SchemaList>
 }
 
 /**
@@ -6758,25 +6995,21 @@ export interface CarInvoiceInfo {
 }
 
 /**
- * 描述用户提供的出参结构的模板
+ * RecognizeGeneralInvoice返回参数结构体
  */
-export interface SchemaList {
+export interface RecognizeGeneralInvoiceResponse {
   /**
-   * <p>自定义需提取的字段名称。注：若需提取多个字段，可定义多个KeyName。</p>
+   * 混贴票据识别结果，具体内容请点击左侧链接。
    */
-  KeyName?: string
+  MixedInvoiceItems?: Array<InvoiceItem>
   /**
-   * <p>字段类型。</p><p>枚举值：</p><ul><li>0： 表示KeyName为简单字段（如姓名、性别等）。</li><li>1： 表示KeyName为数组对象（如工作经历、教育经历列表）。</li></ul>
+   * PDF文件总页码
    */
-  KeyType?: number
+  TotalPDFCount?: number
   /**
-   * <p>补充提取字段的描述。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  KeyPrompt?: string
-  /**
-   * <p>嵌套SchemaList结构，最多支持嵌套三层。注：仅当KeyType=1时生效。</p>
-   */
-  SubItems?: Array<SchemaList>
+  RequestId?: string
 }
 
 /**
@@ -6982,99 +7215,25 @@ GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
 }
 
 /**
- * VerifyOfdVatInvoiceOCR返回参数结构体
+ * GenerateTextEmbedding请求参数结构体
  */
-export interface VerifyOfdVatInvoiceOCRResponse {
+export interface GenerateTextEmbeddingRequest {
   /**
-   * 发票类型
-026:增值税电子普通发票
-028:增值税电子专用发票
-010:电子发票（普通发票）
-020:电子发票（增值税专用发票）
-030:电子发票（铁路电子客票）
-040:电子发票（航空运输电子客票行程单）
+   * <p>选择生成向量的模型（不同模型计费单价不同）。取值：</p><ul><li>0：text-embedding-0.6b</li><li>1：text-embedding-4b</li></ul>
    */
-  Type?: string
+  Model: string
   /**
-   * 发票代码
+   * <p>输入文本列表。单次最多 7 条，单条不超过 2000 字符。</p>
    */
-  InvoiceCode?: string
+  Inputs: Array<string>
   /**
-   * 发票号码
+   * <p>文本向量化类型。取值：</p><ul><li>query：查询文本，用于检索场景的查询侧</li><li>document：文档文本，用于检索场景的文档侧</li></ul><p>默认为 document</p>
    */
-  InvoiceNumber?: string
+  TextType?: string
   /**
-   * 开票日期
+   * <p>自定义任务指令词，用于指定向量化任务。最大 2000 字符。不传时按 TextType 使用系统默认指令词。</p>
    */
-  IssueDate?: string
-  /**
-   * 验证码
-   */
-  InvoiceCheckCode?: string
-  /**
-   * 机器编号
-   */
-  MachineNumber?: string
-  /**
-   * 密码区
-   */
-  TaxControlCode?: string
-  /**
-   * 购买方
-   */
-  Buyer?: VatInvoiceUserInfo
-  /**
-   * 销售方
-   */
-  Seller?: VatInvoiceUserInfo
-  /**
-   * 价税合计
-   */
-  TaxInclusiveTotalAmount?: string
-  /**
-   * 开票人
-   */
-  InvoiceClerk?: string
-  /**
-   * 收款人
-   */
-  Payee?: string
-  /**
-   * 复核人
-   */
-  Checker?: string
-  /**
-   * 税额
-   */
-  TaxTotalAmount?: string
-  /**
-   * 不含税金额
-   */
-  TaxExclusiveTotalAmount?: string
-  /**
-   * 备注
-   */
-  Note?: string
-  /**
-   * 货物或服务清单
-   */
-  GoodsInfos?: Array<VatInvoiceGoodsInfo>
-  /**
-   * 航空运输电子客票行程单信息
-   */
-  AirTicketInfo?: AirTicketInfo
-  /**
-   * 铁路电子客票
-   */
-  RailwayTicketInfo?: RailwayTicketInfo
-  /**
-   * 发票标题
-   */
-  InvoiceTitle?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Instruction?: string
 }
 
 /**
@@ -7942,38 +8101,33 @@ export interface Coord {
 }
 
 /**
- * SealOCR返回参数结构体
+ * GenerateVLEmbedding请求参数结构体
  */
-export interface SealOCRResponse {
+export interface GenerateVLEmbeddingRequest {
   /**
-   * 印章内容
+   * <p>选择生成向量的模型。取值：</p><ul><li>0：vl-embedding-4b</li><li>1：vl-embedding-8b</li><li>2：vl-embedding-2b</li></ul>
    */
-  SealBody?: string
+  Model: string
   /**
-   * 印章坐标
+   * <p>内容类型标识。取值：</p><ul><li>1：文本</li><li>2：图像 URL</li><li>3：视频 URL</li><li>4：图文混合</li></ul>
    */
-  Location?: Rect
+  Type: string
   /**
-   * 其它文本内容
+   * <p>文本内容。仅当 Type 为 1 或 4 时必填，单条文本不超过 2000 字符。</p>
    */
-  OtherTexts?: Array<string>
+  Text?: string
   /**
-   * 全部印章信息
+   * <p>图像地址，支持公网 http/https 链接或 base64 内容。仅当 Type 为 2 或 4 时必填。</p>
    */
-  SealInfos?: Array<SealInfo>
+  ImageUrl?: string
   /**
-   * 印章类型，表示为：
-圆形印章：0
-椭圆形印章：1
-方形印章：2
-菱形印章：3
-三角形印章：4
+   * <p>视频地址，支持公网 http/https 链接或 base64 内容。仅当 Type 为 3 时必填。</p>
    */
-  SealShape?: string
+  VideoUrl?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>检索场景，未传入该参数时将自动匹配。取值：</p><ul><li>0：自动匹配</li><li>1：图搜图（找同款、相似图），仅 Type 为 2 或 4 时可用</li><li>2：图文搜图（图 + 问题），仅 Type 为 4 时可用</li><li>3：文搜图（纯文本搜图），仅 Type 为 1 或 4 时可用</li><li>4：文搜视频（纯文本搜视频），仅 Type 为 1 或 4 时可用</li><li>5：图搜视频、图文搜视频，仅 Type 为 2 或 4 时可用</li></ul>
    */
-  RequestId?: string
+  SearchMode?: string
 }
 
 /**
@@ -8603,65 +8757,17 @@ No：不识别其他类型发票
 }
 
 /**
- * 轮船票
+ * 文本向量化结果
  */
-export interface ShippingInvoice {
+export interface EmbeddingObject {
   /**
-   * 发票名称
+   * 输入文本在 Inputs 列表中的索引，从 0 开始。
    */
-  Title?: string
+  Index?: number
   /**
-   * 是否存在二维码（1：有，0：无）
+   * 向量化结果，维度由所选模型决定。
    */
-  QRCodeMark?: number
-  /**
-   * 发票代码
-   */
-  Code?: string
-  /**
-   * 发票号码
-   */
-  Number?: string
-  /**
-   * 姓名
-   */
-  UserName?: string
-  /**
-   * 日期
-   */
-  Date?: string
-  /**
-   * 时间
-   */
-  Time?: string
-  /**
-   * 出发车站
-   */
-  StationGetOn?: string
-  /**
-   * 到达车站
-   */
-  StationGetOff?: string
-  /**
-   * 票价
-   */
-  Total?: string
-  /**
-   * 发票消费类型
-   */
-  Kind?: string
-  /**
-   * 省
-   */
-  Province?: string
-  /**
-   * 市
-   */
-  City?: string
-  /**
-   * 币种
-   */
-  CurrencyCode?: string
+  Embedding?: Array<number>
 }
 
 /**
@@ -9009,17 +9115,21 @@ export interface ImageSize {
 }
 
 /**
- * RecognizeGeneralInvoice返回参数结构体
+ * GenerateTextEmbedding返回参数结构体
  */
-export interface RecognizeGeneralInvoiceResponse {
+export interface GenerateTextEmbeddingResponse {
   /**
-   * 混贴票据识别结果，具体内容请点击左侧链接。
+   * <p>向量化结果列表。顺序与输入 Inputs 列表一一对应。</p>
    */
-  MixedInvoiceItems?: Array<InvoiceItem>
+  Data?: Array<EmbeddingObject>
   /**
-   * PDF文件总页码
+   * <p>输入 Token 数。</p>
    */
-  TotalPDFCount?: number
+  InputTokens?: number
+  /**
+   * <p>总 Token 数。</p>
+   */
+  TotalTokens?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

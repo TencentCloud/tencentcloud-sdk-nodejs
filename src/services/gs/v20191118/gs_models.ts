@@ -96,6 +96,28 @@ export interface FetchAndroidInstancesLogsResponse {
 }
 
 /**
+ * UploadFileToAndroidInstances请求参数结构体
+ */
+export interface UploadFileToAndroidInstancesRequest {
+  /**
+   * 安卓实例 ID 列表
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 文件下载 URL
+   */
+  FileURL: string
+  /**
+   * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
+   */
+  DestinationDirectory?: string
+  /**
+   * 目标文件名
+   */
+  DestinationFileName?: string
+}
+
+/**
  * 安卓实例宿主机任务信息
  */
 export interface AndroidInstanceHostTask {
@@ -547,6 +569,16 @@ export interface BackUpAndroidInstanceToStorageRequest {
 }
 
 /**
+ * CreateAndroidInstanceMCPToken返回参数结构体
+ */
+export interface CreateAndroidInstanceMCPTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAndroidInstancesProperties请求参数结构体
  */
 export interface ModifyAndroidInstancesPropertiesRequest {
@@ -815,25 +847,29 @@ export interface ResetAndroidInstancesRequest {
 }
 
 /**
- * UploadFileToAndroidInstances请求参数结构体
+ * FetchAndroidInstancesLogs请求参数结构体
  */
-export interface UploadFileToAndroidInstancesRequest {
+export interface FetchAndroidInstancesLogsRequest {
   /**
    * 安卓实例 ID 列表
    */
   AndroidInstanceIds: Array<string>
   /**
-   * 文件下载 URL
+   * cos 桶名称
    */
-  FileURL: string
+  BucketName: string
   /**
-   * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
+   * cos 桶区域
    */
-  DestinationDirectory?: string
+  BucketRegion: string
   /**
-   * 目标文件名
+   * cos 桶目录，默认为 /log/
    */
-  DestinationFileName?: string
+  BucketDirectory?: string
+  /**
+   * 下载最近几天的日志，默认值为 1
+   */
+  RecentDays?: number
 }
 
 /**
@@ -1257,6 +1293,11 @@ export interface ImportAndroidInstanceImageResponse {
 }
 
 /**
+ * RenewAndroidInstanceMCPToken请求参数结构体
+ */
+export type RenewAndroidInstanceMCPTokenRequest = null
+
+/**
  * DeleteAndroidInstanceLabel请求参数结构体
  */
 export interface DeleteAndroidInstanceLabelRequest {
@@ -1585,6 +1626,11 @@ export interface DeleteAndroidInstanceBackupsRequest {
 }
 
 /**
+ * CreateAndroidInstanceMCPToken请求参数结构体
+ */
+export type CreateAndroidInstanceMCPTokenRequest = null
+
+/**
  * CreateAndroidInstancesScreenshot返回参数结构体
  */
 export interface CreateAndroidInstancesScreenshotResponse {
@@ -1792,6 +1838,16 @@ export interface ConnectAndroidInstanceResponse {
    * 服务端session信息
    */
   ServerSession?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAndroidInstanceMCPTokens返回参数结构体
+ */
+export interface DescribeAndroidInstanceMCPTokensResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2535,6 +2591,11 @@ AndroidVersion：安卓版本
 }
 
 /**
+ * DescribeAndroidInstanceMCPTokens请求参数结构体
+ */
+export type DescribeAndroidInstanceMCPTokensRequest = null
+
+/**
  * 安卓实例任务状态信息
  */
 export interface AndroidInstanceTaskStatus {
@@ -2630,13 +2691,9 @@ export interface DisableAndroidInstancesAppResponse {
 }
 
 /**
- * CreateAndroidInstances返回参数结构体
+ * DeleteAndroidInstanceMCPToken返回参数结构体
  */
-export interface CreateAndroidInstancesResponse {
-  /**
-   * 安卓实例 ID 列表
-   */
-  AndroidInstanceIds?: Array<string>
+export interface DeleteAndroidInstanceMCPTokenResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2986,6 +3043,20 @@ export interface CreateAndroidInstanceLabelResponse {
 }
 
 /**
+ * BackUpAndroidInstanceToStorage返回参数结构体
+ */
+export interface BackUpAndroidInstanceToStorageResponse {
+  /**
+   * 实例任务 ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartPublishStream返回参数结构体
  */
 export interface StartPublishStreamResponse {
@@ -3043,6 +3114,16 @@ export interface DescribeAndroidInstanceAppsRequest {
    * 实例ID
    */
   AndroidInstanceId: string
+}
+
+/**
+ * RenewAndroidInstanceMCPToken返回参数结构体
+ */
+export interface RenewAndroidInstanceMCPTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3273,29 +3354,17 @@ export interface CreateAndroidAppVersionResponse {
 }
 
 /**
- * FetchAndroidInstancesLogs请求参数结构体
+ * CreateAndroidInstances返回参数结构体
  */
-export interface FetchAndroidInstancesLogsRequest {
+export interface CreateAndroidInstancesResponse {
   /**
    * 安卓实例 ID 列表
    */
-  AndroidInstanceIds: Array<string>
+  AndroidInstanceIds?: Array<string>
   /**
-   * cos 桶名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BucketName: string
-  /**
-   * cos 桶区域
-   */
-  BucketRegion: string
-  /**
-   * cos 桶目录，默认为 /log/
-   */
-  BucketDirectory?: string
-  /**
-   * 下载最近几天的日志，默认值为 1
-   */
-  RecentDays?: number
+  RequestId?: string
 }
 
 /**
@@ -3309,18 +3378,9 @@ export interface DeleteAndroidInstanceBackupFilesResponse {
 }
 
 /**
- * BackUpAndroidInstanceToStorage返回参数结构体
+ * DeleteAndroidInstanceMCPToken请求参数结构体
  */
-export interface BackUpAndroidInstanceToStorageResponse {
-  /**
-   * 实例任务 ID
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DeleteAndroidInstanceMCPTokenRequest = null
 
 /**
  * CreateAndroidInstanceSSH请求参数结构体

@@ -3216,13 +3216,29 @@ export interface RunJobSpecResponse {
    */
   Id?: string
   /**
+   * <p>所属集群ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
    * <p>所属资源分区ID</p>
    */
   ResourcePartitionId?: string
   /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
    * <p>所属队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>Ray Submission ID</p>
+   */
+  SubmissionId?: string
   /**
    * <p>任务状态</p>
    */
@@ -3248,13 +3264,25 @@ export interface RunJobSpecResponse {
    */
   SubAccountUin?: string
   /**
+   * <p>历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
    * <p>运行时间(ms)</p>
    */
   RunningTime?: number
   /**
+   * <p>完成时间</p>
+   */
+  FinishTime?: number
+  /**
    * <p>创建时间</p>
    */
   CreateTime?: number
+  /**
+   * <p>失败原因/错误信息</p>
+   */
+  ErrorMessage?: string
   /**
    * <p>运行时环境配置(JSON)</p>
    */
@@ -5592,6 +5620,10 @@ export interface StartLabResponse {
    */
   CreateTime?: number
   /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
    * <p>所属集群组名称</p>
    */
   GroupName?: string
@@ -5636,6 +5668,14 @@ export interface StartLabResponse {
    */
   StartTime?: number
   /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>删除时间</p>
+   */
+  DeleteTime?: number
+  /**
    * <p>标签列表（TagKey-TagValue）</p>
    */
   Tags?: Array<Tag>
@@ -5647,6 +5687,14 @@ export interface StartLabResponse {
    * <p>是否开启token认证</p>
    */
   EnableToken?: boolean
+  /**
+   * <p>Token 认证密钥（开启 token 认证时由系统生成）</p>
+   */
+  Token?: string
+  /**
+   * <p>弹性伸缩配置（JSON）</p>
+   */
+  AutoscalerOptions?: string
   /**
    * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
@@ -8361,6 +8409,10 @@ export interface SubmitRayJobRequest {
    */
   Entrypoint: string
   /**
+   * <p>集群ID</p>
+   */
+  ClusterId?: string
+  /**
    * <p>资源分区ID</p>
    */
   ResourcePartitionId?: string
@@ -8409,6 +8461,10 @@ export interface SubmitRayJobRequest {
    */
   GroupId?: string
   /**
+   * <p>集群分派策略，本期仅支持 RANDOM；大小写不敏感</p>
+   */
+  DispatchStrategy?: string
+  /**
    * <p>作业优先级（1-9，数字越大优先级越高）</p>
    */
   Priority?: number
@@ -8416,6 +8472,30 @@ export interface SubmitRayJobRequest {
    * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>作业包 URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
+   * <p>业务来源标识，只为调用上下文，不落盘 JobSpec</p>
+   */
+  JobSource?: string
+  /**
+   * <p>外部工作流引擎业务键 flowId</p>
+   */
+  FlowId?: string
+  /**
+   * <p>外部工作流引擎业务键 executionId</p>
+   */
+  ExecutionId?: string
   /**
    * <p>用户网络配置 JSON 字符串</p>
    */
@@ -10487,6 +10567,14 @@ export interface GetLabDetailResponse {
    */
   StatusMessage?: string
   /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
    * <p>资源配置(JSON)</p>
    */
   ResourceConfig?: string
@@ -10542,6 +10630,14 @@ export interface GetLabDetailResponse {
    * <p>是否开启token认证</p>
    */
   EnableToken?: boolean
+  /**
+   * <p>Token 认证密钥（开启 token 认证时由系统生成）</p>
+   */
+  Token?: string
+  /**
+   * <p>弹性伸缩配置（JSON）</p>
+   */
+  AutoscalerOptions?: string
   /**
    * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
@@ -11595,19 +11691,23 @@ export interface DescribeMlflowServerPodsRequest {
  */
 export interface ListRayClusterJobsResponse {
   /**
-   * 当前页码（从1开始）
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
    */
   Page?: number
   /**
-   * 每页数量
+   * <p>每页数量</p>
    */
   PageSize?: number
   /**
-   * 总页数
+   * <p>总页数</p>
    */
   TotalPages?: number
   /**
-   * 该集群下的Ray作业列表
+   * <p>该集群下的Ray作业列表</p>
    */
   Items?: Array<RayJobSubmitEntity>
   /**
@@ -12272,13 +12372,25 @@ export interface SubmitRayJobResponse {
    */
   Id?: string
   /**
+   * <p>所属集群ID</p>
+   */
+  ClusterId?: string
+  /**
    * <p>所属资源分区ID</p>
    */
   ResourcePartitionId?: string
   /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
    * <p>所属队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>Ray Submission ID</p>
+   */
+  SubmissionId?: string
   /**
    * <p>任务状态</p>
    */
@@ -12304,13 +12416,29 @@ export interface SubmitRayJobResponse {
    */
   SubAccountUin?: string
   /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
    * <p>运行时间(ms)</p>
    */
   RunningTime?: number
   /**
+   * <p>完成时间</p>
+   */
+  FinishTime?: number
+  /**
    * <p>创建时间</p>
    */
   CreateTime?: number
+  /**
+   * <p>失败原因/错误信息</p>
+   */
+  ErrorMessage?: string
   /**
    * <p>运行时环境配置(JSON)</p>
    */
@@ -12335,6 +12463,14 @@ export interface SubmitRayJobResponse {
    * <p>弹性伸缩配置(JSON)</p>
    */
   AutoscalerOptions?: string
+  /**
+   * <p>来源配置ID</p>
+   */
+  SpecId?: string
+  /**
+   * <p>来源配置名称</p>
+   */
+  SpecName?: string
   /**
    * <p>高级参数，JSON 字符串（透传到 Neutrino）</p>
    */
@@ -13402,9 +13538,29 @@ export interface UpdateLabResponse {
    */
   Uin?: string
   /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
    * <p>集群状态</p>
    */
   Status?: string
+  /**
+   * <p>状态详情/错误信息</p>
+   */
+  StatusMessage?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
   /**
    * <p>计算组 ID</p>
    */
@@ -13422,13 +13578,41 @@ export interface UpdateLabResponse {
    */
   Image?: string
   /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
    * <p>镜像拉取策略</p>
    */
   ImagePullPolicy?: string
   /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
+  /**
    * <p>优先级（1-9，数字越大优先级越高）</p>
    */
   Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>删除时间</p>
+   */
+  DeleteTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
   /**
    * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
    */
@@ -13437,6 +13621,14 @@ export interface UpdateLabResponse {
    * <p>是否开启token认证</p>
    */
   EnableToken?: boolean
+  /**
+   * <p>Token 认证密钥（开启 token 认证时由系统生成）</p>
+   */
+  Token?: string
+  /**
+   * <p>弹性伸缩配置（JSON）</p>
+   */
+  AutoscalerOptions?: string
   /**
    * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
@@ -15476,6 +15668,10 @@ export interface GetRayJobResponse {
    */
   Id?: string
   /**
+   * <p>所属集群ID</p>
+   */
+  ClusterId?: string
+  /**
    * <p>所属资源分区ID</p>
    */
   ResourcePartitionId?: string
@@ -15491,6 +15687,10 @@ export interface GetRayJobResponse {
    * <p>所属队列别名</p>
    */
   QueueAlias?: string
+  /**
+   * <p>Ray Submission ID</p>
+   */
+  SubmissionId?: string
   /**
    * <p>任务状态</p>
    */
@@ -15515,6 +15715,10 @@ export interface GetRayJobResponse {
    * <p>创建账号</p>
    */
   SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
   /**
    * <p>历史记录链接</p>
    */
@@ -17066,6 +17270,10 @@ export interface CreateUserResponse {
  */
 export interface UpdateLabRequest {
   /**
+   * <p>数据实验室ID</p>
+   */
+  Id: string
+  /**
    * <p>数据实验室名称</p>
    */
   Name: string
@@ -17086,9 +17294,17 @@ export interface UpdateLabRequest {
    */
   ImagePullPolicy?: string
   /**
+   * <p>资源配置</p>
+   */
+  ResourceConfig?: string
+  /**
    * <p>资源配置ID</p>
    */
   ResourceConfigId?: string
+  /**
+   * <p>存储卷和挂载卷配置</p>
+   */
+  Catalog?: string
   /**
    * <p>计算组 ID</p>
    */
@@ -17102,6 +17318,10 @@ export interface UpdateLabRequest {
    */
   Queue?: string
   /**
+   * <p>服务类型列表(VSCODE, JUPYTER, WEBSHELL)，不填则使用默认配置</p>
+   */
+  ServiceTypes?: Array<string>
+  /**
    * <p>案例ID，当 startMode=EXAMPLE 时必填</p>
    */
   ExampleId?: string
@@ -17113,6 +17333,10 @@ export interface UpdateLabRequest {
    * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
    */
   LabImagePullPolicy?: string
+  /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
   /**
    * <p>优先级（1-9，数字越大优先级越高）</p>
    */
@@ -17129,6 +17353,10 @@ export interface UpdateLabRequest {
    * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
    */
   PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>弹性伸缩配置（JSON）</p>
+   */
+  AutoscalerOptions?: string
   /**
    * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
@@ -22804,6 +23032,10 @@ export interface CopyJobSpecResponse {
    */
   JobPackageName?: string
   /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
    * <p>应用ID</p>
    */
   AppId?: number
@@ -22811,6 +23043,14 @@ export interface CopyJobSpecResponse {
    * <p>创建者UIN</p>
    */
   Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
   /**
    * <p>创建时间</p>
    */
@@ -23077,6 +23317,10 @@ export interface UpdateRayJobPriorityResponse {
    */
   Id?: string
   /**
+   * <p>所属集群ID</p>
+   */
+  ClusterId?: string
+  /**
    * <p>所属资源分区ID</p>
    */
   ResourcePartitionId?: string
@@ -23088,6 +23332,10 @@ export interface UpdateRayJobPriorityResponse {
    * <p>所属队列名称</p>
    */
   Queue?: string
+  /**
+   * <p>Ray Submission ID</p>
+   */
+  SubmissionId?: string
   /**
    * <p>任务状态</p>
    */
@@ -23113,6 +23361,10 @@ export interface UpdateRayJobPriorityResponse {
    */
   SubAccountUin?: string
   /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
    * <p>历史记录链接</p>
    */
   HistoryUrl?: string
@@ -23128,6 +23380,14 @@ export interface UpdateRayJobPriorityResponse {
    * <p>创建时间</p>
    */
   CreateTime?: number
+  /**
+   * <p>失败原因/错误信息</p>
+   */
+  ErrorMessage?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
   /**
    * <p>镜像地址</p>
    */
@@ -23145,9 +23405,21 @@ export interface UpdateRayJobPriorityResponse {
    */
   ImagePullPolicy?: string
   /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
    * <p>来源配置ID</p>
    */
   SpecId?: string
+  /**
+   * <p>来源配置名称</p>
+   */
+  SpecName?: string
+  /**
+   * <p>高级参数，JSON 字符串</p>
+   */
+  AdvancedOptions?: string
   /**
    * <p>作业优先级（1-9，数字越大优先级越高）</p>
    */
@@ -23160,6 +23432,10 @@ export interface UpdateRayJobPriorityResponse {
    * <p>业务来源标识（调用上下文，长度上限 64，禁止控制字符）</p>
    */
   JobSource?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23556,6 +23832,10 @@ export interface UpdateJobSpecPriorityResponse {
    */
   DispatchStrategy?: string
   /**
+   * <p>作业提交目标：GROUP（按计算组分派）/ CLUSTER（指定集群）/ SERVERLESS（按 Serverless 拉起）</p>
+   */
+  SubmissionTarget?: string
+  /**
    * <p>作业包URL</p>
    */
   JobPackage?: string
@@ -23605,9 +23885,21 @@ export interface UpdateJobSpecPriorityResponse {
    */
   Tags?: Array<Tag>
   /**
+   * <p>计算组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
    * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺时按 Local 处理</p>
    */
   JobPackageSource?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26480,19 +26772,23 @@ export interface GenerateCreateMangedTableSqlResponse {
  */
 export interface ListRayJobsResponse {
   /**
-   * 当前页码（从1开始）
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
    */
   Page?: number
   /**
-   * 页数
+   * <p>页数</p>
    */
   PageSize?: number
   /**
-   * 总页数
+   * <p>总页数</p>
    */
   TotalPages?: number
   /**
-   * ray作业列表
+   * <p>ray作业列表</p>
    */
   Items?: Array<RayJobSubmitEntity>
   /**
@@ -27068,6 +27364,10 @@ export interface CreateLabResponse {
    */
   CreateTime?: number
   /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
    * <p>计算组 ID</p>
    */
   GroupId?: string
@@ -27100,6 +27400,18 @@ export interface CreateLabResponse {
    */
   Priority?: number
   /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>删除时间</p>
+   */
+  DeleteTime?: number
+  /**
    * <p>标签列表（TagKey-TagValue）</p>
    */
   Tags?: Array<Tag>
@@ -27111,6 +27423,14 @@ export interface CreateLabResponse {
    * <p>是否开启token认证</p>
    */
   EnableToken?: boolean
+  /**
+   * <p>Token 认证密钥（开启 token 认证时由系统生成）</p>
+   */
+  Token?: string
+  /**
+   * <p>弹性伸缩配置（JSON）</p>
+   */
+  AutoscalerOptions?: string
   /**
    * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
@@ -27179,27 +27499,27 @@ export interface CheckServiceNameRequest {
  */
 export interface ListRayJobsRequest {
   /**
-   * 当前页码（从1开始）
+   * <p>当前页码（从1开始）</p>
    */
   Page?: number
   /**
-   * 页数
+   * <p>页数</p>
    */
   PageSize?: number
   /**
-   * 过滤条件列表（列表的字段名称）
+   * <p>过滤条件列表（列表的字段名称）</p>
    */
   Filters?: Array<Filter>
   /**
-   * 提交时间起始过滤-时间戳（毫秒，可选）
+   * <p>提交时间起始过滤-时间戳（毫秒，可选）</p>
    */
   StartTime?: number
   /**
-   * 提交时间截止过滤-时间戳（毫秒，可选）
+   * <p>提交时间截止过滤-时间戳（毫秒，可选）</p>
    */
   EndTime?: number
   /**
-   * 排序字段列表（列表字段）
+   * <p>排序字段列表（列表字段）</p>
    */
   SortFields?: Array<SortField>
 }
@@ -27325,31 +27645,31 @@ export interface LaunchStandardEngineResourceGroupsRequest {
  */
 export interface ListRayClusterJobsRequest {
   /**
-   * 集群ID（必填）
+   * <p>集群ID（必填）</p>
    */
   ClusterId: string
   /**
-   * 当前页码（从1开始）
+   * <p>当前页码（从1开始）</p>
    */
   Page?: number
   /**
-   * 每页数量
+   * <p>每页数量</p>
    */
   PageSize?: number
   /**
-   * 额外过滤条件（ClusterId 已由外层单独传入，无需再在此处指定）
+   * <p>额外过滤条件（ClusterId 已由外层单独传入，无需再在此处指定）</p>
    */
   Filters?: Array<Filter>
   /**
-   * 提交时间起始过滤-时间戳（毫秒，可选）
+   * <p>提交时间起始过滤-时间戳（毫秒，可选）</p>
    */
   StartTime?: number
   /**
-   * 提交时间截止过滤-时间戳（毫秒，可选）
+   * <p>提交时间截止过滤-时间戳（毫秒，可选）</p>
    */
   EndTime?: number
   /**
-   * 排序字段列表
+   * <p>排序字段列表</p>
    */
   SortFields?: Array<SortField>
 }
@@ -29915,6 +30235,10 @@ export interface StopLabResponse {
    */
   ExampleId?: string
   /**
+   * <p>代码包/工程归档地址</p>
+   */
+  CodeArchiveUrl?: string
+  /**
    * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
    */
   Services?: Array<TypeKVPair>
@@ -29922,6 +30246,10 @@ export interface StopLabResponse {
    * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
    */
   LabImage?: string
+  /**
+   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  LabImagePullPolicy?: string
   /**
    * <p>集群ID</p>
    */
@@ -29934,6 +30262,10 @@ export interface StopLabResponse {
    * <p>集群名称</p>
    */
   Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
   /**
    * <p>所属资源分区ID</p>
    */
@@ -29963,13 +30295,33 @@ export interface StopLabResponse {
    */
   Status?: string
   /**
+   * <p>状态详情/错误信息</p>
+   */
+  StatusMessage?: string
+  /**
    * <p>创建时间</p>
    */
   CreateTime?: number
   /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
    * <p>资源配置(JSON)</p>
    */
   ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
   /**
    * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
    */
@@ -29983,6 +30335,10 @@ export interface StopLabResponse {
    */
   HistoryUrl?: string
   /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
    * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
    */
   AdvancedOptions?: string
@@ -29994,6 +30350,14 @@ export interface StopLabResponse {
    * <p>启动时间（最近一次启动）</p>
    */
   StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>删除时间</p>
+   */
+  DeleteTime?: number
   /**
    * <p>标签列表（TagKey-TagValue）</p>
    */
@@ -30010,6 +30374,10 @@ export interface StopLabResponse {
    * <p>Token 认证密钥（开启 token 认证时由系统生成）</p>
    */
   Token?: string
+  /**
+   * <p>弹性伸缩配置（JSON）</p>
+   */
+  AutoscalerOptions?: string
   /**
    * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
@@ -30546,6 +30914,10 @@ export interface CreateLabRequest {
    * <p>是否开启token认证</p>
    */
   EnableToken?: boolean
+  /**
+   * <p>弹性伸缩配置（JSON）</p>
+   */
+  AutoscalerOptions?: string
   /**
    * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
