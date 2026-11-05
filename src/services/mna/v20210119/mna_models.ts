@@ -524,31 +524,31 @@ export interface GetApplicationResponse {
  */
 export interface GetActiveDeviceCountResponse {
   /**
-   * 激活设备统计
+   * <p>激活设备统计</p>
    */
   ActiveDeviceList?: Array<ActiveDeviceList>
   /**
-   * 查询粒度，0:day, 1:week, 2:month, 不传默认为day
+   * <p>查询粒度，0:day, 1:week, 2:month, 不传默认为day</p>
    */
   Period?: number
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
   /**
-   * 设备组
+   * <p>设备组</p>
    */
   DevGroup?: string
   /**
-   * license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权
+   * <p>license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权</p>
    */
   LicenseType?: string
   /**
-   * 租户ID
+   * <p>租户ID</p>
    */
   AppId?: string
   /**
@@ -1891,7 +1891,7 @@ export interface ActivateHardware {
  */
 export interface DownloadActiveDeviceCountResponse {
   /**
-   * URL地址
+   * <p>URL地址</p>
    */
   FilePath?: string
   /**
@@ -2338,23 +2338,27 @@ DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。
  */
 export interface DownloadActiveDeviceCountRequest {
   /**
-   * 查询粒度。0:day, 1:week, 2:month, 不传默认为day
+   * <p>查询粒度。0:day, 1:week, 2:month, 不传默认为day</p>
    */
   Period?: number
   /**
-   * 开始时间。单位秒
+   * <p>开始时间。单位秒</p>
    */
   StartTime?: number
   /**
-   * 结束时间。单位秒
+   * <p>结束时间。单位秒</p>
    */
   EndTime?: number
   /**
-   * 设备组, 不传查询全部
+   * <p>设备组, 不传查询全部</p>
    */
   DevGroup?: string
   /**
-   * license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权
+   * <p>应用ID，指控制台上设备管理中的动态设备应用ID，不传查询全部。</p>
+   */
+  ApplicationId?: string
+  /**
+   * <p>license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权</p>
    */
   LicenseType?: number
 }
@@ -2943,23 +2947,27 @@ export interface GetDevicePayModeResponse {
  */
 export interface GetActiveDeviceCountRequest {
   /**
-   * 查询粒度。0:day, 1:week, 2:month, 不传默认为day
+   * <p>查询粒度。0:day, 1:week, 2:month, 不传默认为day</p>
    */
   Period?: number
   /**
-   * 开始时间。单位秒
+   * <p>开始时间。单位秒</p>
    */
   StartTime?: number
   /**
-   * 结束时间。单位秒
+   * <p>结束时间。单位秒</p>
    */
   EndTime?: number
   /**
-   * 设备组, 不传查询全部
+   * <p>设备组, 不传查询全部</p>
    */
   DevGroup?: string
   /**
-   * license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权
+   * <p>应用ID，指控制台上设备管理中的动态设备应用ID，不传查询全部。</p>
+   */
+  ApplicationId?: string
+  /**
+   * <p>license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权</p>
    */
   LicenseType?: number
 }

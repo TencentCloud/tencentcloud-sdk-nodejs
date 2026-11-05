@@ -348,9 +348,9 @@ it("cynosdb.v20190107.InquirePriceModify", async function () {
     }
 })
 
-it("cynosdb.v20190107.SwitchProxyVpc", async function () {
+it("cynosdb.v20190107.SetInstanceServerlessQuota", async function () {
     try {
-       const data = await client.SwitchProxyVpc({})
+       const data = await client.SetInstanceServerlessQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1458,6 +1458,16 @@ it("cynosdb.v20190107.DescribeInstanceCLSLogDelivery", async function () {
     }
 })
 
+it("cynosdb.v20190107.SwitchProxyVpc", async function () {
+    try {
+       const data = await client.SwitchProxyVpc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyClusterLevel", async function () {
     try {
        const data = await client.ModifyClusterLevel({})
@@ -1888,9 +1898,9 @@ it("cynosdb.v20190107.CalculateBackupSaveSecExpires", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyClusterGlobalEncryption", async function () {
+it("cynosdb.v20190107.DescribeInstanceServerlessQuota", async function () {
     try {
-       const data = await client.ModifyClusterGlobalEncryption({})
+       const data = await client.DescribeInstanceServerlessQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2311,6 +2321,16 @@ it("cynosdb.v20190107.DescribeAccountAllGrantPrivileges", async function () {
 it("cynosdb.v20190107.OpenReadOnlyInstanceExclusiveAccess", async function () {
     try {
        const data = await client.OpenReadOnlyInstanceExclusiveAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyClusterGlobalEncryption", async function () {
+    try {
+       const data = await client.ModifyClusterGlobalEncryption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

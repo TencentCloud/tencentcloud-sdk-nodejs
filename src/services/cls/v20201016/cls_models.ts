@@ -4025,15 +4025,15 @@ name按照【配置名称】进行过滤。类型：String 必选：否
  */
 export interface ModifyLogsetRequest {
   /**
-   * 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
+   * <p>日志集Id。通过 <a href="https://cloud.tencent.com/document/product/614/58624">获取日志集列表</a>获取日志集Id。</p>
    */
   LogsetId: string
   /**
-   * 日志集名字。- 最大支持255个字符。不支持`|`字符。
+   * <p>日志集名字。- 最大支持255个字符。不支持&quot;|&quot;字符。</p>
    */
   LogsetName?: string
   /**
-   * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
+   * <p>日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。</p>
    */
   Tags?: Array<Tag>
 }
@@ -11379,7 +11379,7 @@ export interface ModifyTopicResponse {
  */
 export interface CreateConfigRequest {
   /**
-   * <p>采集配置名称</p><ul><li>名称种不得包含特殊字符｜</li><li>名称最长255字符，超过截断</li></ul>
+   * <p>采集配置名称- 名称中不得包含特殊字符&quot;|&quot;</p><p>名称最长255字符，超过截断</p>
    */
   Name: string
   /**

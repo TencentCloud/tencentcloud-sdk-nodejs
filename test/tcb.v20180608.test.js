@@ -528,9 +528,9 @@ it("tcb.v20180608.DescribeSafeRule", async function () {
     }
 })
 
-it("tcb.v20180608.EnablePGDocumentExt", async function () {
+it("tcb.v20180608.DescribeMySQLTaskStatus", async function () {
     try {
-       const data = await client.EnablePGDocumentExt({})
+       const data = await client.DescribeMySQLTaskStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +728,9 @@ it("tcb.v20180608.DescribeCloudAppList", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeMySQLTaskStatus", async function () {
+it("tcb.v20180608.EnablePGDocumentExt", async function () {
     try {
-       const data = await client.DescribeMySQLTaskStatus({})
+       const data = await client.EnablePGDocumentExt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1271,6 +1271,16 @@ it("tcb.v20180608.ModifyProvider", async function () {
 it("tcb.v20180608.ExecutePGSql", async function () {
     try {
        const data = await client.ExecutePGSql({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeEnvInfo", async function () {
+    try {
+       const data = await client.DescribeEnvInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

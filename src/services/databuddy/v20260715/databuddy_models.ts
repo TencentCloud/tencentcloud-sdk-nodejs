@@ -5584,7 +5584,7 @@ export interface UpdateWorkflowRequest {
    */
   WorkflowId: string
   /**
-   * <p>需要清空的字段名列表，用于将指定字段重置为空</p>
+   * <p>需要清空的字段名列表，用于将指定字段重置为空。每项为斜杠分隔的字段路径（如 /BaseInfo/Description、/ParamList:[参数ID]），路径段与 NewSetting 字段名一致；列表字段用 字段名:[主键值] 定位单个元素、不带 [] 表示清空整个列表；workflowId、workspaceId、baseInfo 等标识类受保护字段不可删除，路径无效或未命中将返回 InvalidParameterValue 报错。</p>
    */
   FieldToRemoveList?: Array<string>
   /**
@@ -8615,52 +8615,52 @@ export interface ListFilesResponse {
  */
 export interface WorkflowTask {
   /**
-   * 任务参数
+   * <p>任务参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamList?: Array<ParamInfo>
   /**
-   * 任务依赖
+   * <p>任务依赖</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependOnList?: Array<DependOnBrief>
   /**
-   * 任务ID，创建时无需传入，由服务端生成
+   * <p>任务ID，创建时无需传入，由服务端生成</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
-   * 任务类型
+   * <p>任务类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: TaskType
   /**
-   * 资源组ID，可通过资源组相关接口获取
+   * <p>计算资源组ID，计算资源取值通过 ListComputeResourceOptions 接口获取，入参 ResourceTypes 需按任务类型传值：DATA_INTEGRATION 传 [1]（平台集群），PYTHON/NOTEBOOK/RAY_JOB/DATA_QUALITY/IF_ELSE 传 [2]（作业集群），SQL 传 [2,3]（交互式+作业集群），其余任务类型无需填写本字段。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 任务描述
+   * <p>任务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 任务告警
+   * <p>任务告警</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Alarm?: AlarmBrief
   /**
-   * 监控指标
+   * <p>监控指标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorMetric?: MonitorMetricBrief
   /**
-   * 任务重试策略
+   * <p>任务重试策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskRetryStrategy?: TaskRetryStrategy
@@ -8670,12 +8670,12 @@ export interface WorkflowTask {
    */
   DependOnRunCondition?: string
   /**
-   * 任务X坐标
+   * <p>任务X坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LeftCoordinate?: number
   /**
-   * 任务Y坐标
+   * <p>任务Y坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopCoordinate?: number

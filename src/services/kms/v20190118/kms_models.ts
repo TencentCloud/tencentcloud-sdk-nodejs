@@ -102,27 +102,27 @@ export interface DescribeWhiteBoxKeyDetailsResponse {
  */
 export interface CreateKeyRequest {
   /**
-   * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字。以 kms- 作为前缀的用于云产品使用，Alias 不可重复。
+   * <p>作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字。以 kms- 作为前缀的用于云产品使用，Alias 不可重复。</p>
    */
   Alias: string
   /**
-   * CMK 的描述，最大1024字节
+   * <p>CMK 的描述，最大1024字节</p>
    */
   Description?: string
   /**
-   * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥，“ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECDSA384”表示创建用于签名验签的 ECDSA384 非对称密钥。完整的密钥用途与算法支持列表可通过 ListAlgorithms 接口获取。
+   * <p>指定key的用途，默认为  &quot;ENCRYPT_DECRYPT&quot; 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_RSA_3072”表示创建用于加解密的RSA3072非对称密钥，“ASYMMETRIC_DECRYPT_RSA_4096”表示创建用于加解密的RSA4096非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥，“ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥，“ASYMMETRIC_SIGN_VERIFY_RSA_3072” 表示创建用于签名验签的RSA_3072非对称密钥，<br>“ASYMMETRIC_SIGN_VERIFY_RSA_4096” 表示创建用于签名验签的RSA_4096非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECDSA384”表示创建用于签名验签的 ECDSA384 非对称密钥。完整的密钥用途与算法支持列表可通过 ListAlgorithms 接口获取。</p>
    */
   KeyUsage?: string
   /**
-   * 指定key类型，默认为1，1表示默认类型，由KMS创建CMK密钥，2 表示EXTERNAL 类型，该类型需要用户导入密钥材料，参考 GetParametersForImport 和 ImportKeyMaterial 接口
+   * <p>指定key类型，默认为1，1表示默认类型，由KMS创建CMK密钥，2 表示EXTERNAL 类型，该类型需要用户导入密钥材料，参考 GetParametersForImport 和 ImportKeyMaterial 接口</p>
    */
   Type?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+   * <p>KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。</p>
    */
   HsmClusterId?: string
 }
@@ -672,7 +672,7 @@ export interface ArchiveKeyResponse {
  */
 export interface VerifyByAsymmetricKeyResponse {
   /**
-   * 签名是否有效。true：签名有效，false：签名无效。
+   * <p>签名是否有效。true：签名有效，false：签名无效。</p>
    */
   SignatureValid?: boolean
   /**
@@ -1157,23 +1157,23 @@ export interface DataKeyMetadata {
  */
 export interface VerifyByAsymmetricKeyRequest {
   /**
-   * 密钥的唯一标识
+   * <p>密钥的唯一标识</p>
    */
   KeyId: string
   /**
-   * 签名值，通过调用KMS签名接口生成
+   * <p>签名值，通过调用KMS签名接口生成</p>
    */
   SignatureValue: string
   /**
-   * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，则消息摘要长度（Base64编码前的长度）必须等于32字节
+   * <p>消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，则消息摘要长度（Base64编码前的长度）必须等于32字节</p>
    */
   Message: string
   /**
-   * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
+   * <p>签名算法，支持的算法：SM2DSA，ECC_P256_R1，ECDSA384_SHA384，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256，RSA_PSS_SHA_384，RSA_PKCS1_SHA_384，RSA_PSS_SHA_512，RSA_PKCS1_SHA_512 等。更多支持的算法可通过 ListAlgorithms 接口进行查询</p>
    */
   Algorithm: string
   /**
-   * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+   * <p>消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。</p>
    */
   MessageType?: string
 }
@@ -1529,39 +1529,39 @@ export interface GetParametersForImportRequest {
  */
 export interface CreateKeyResponse {
   /**
-   * CMK的全局唯一标识符
+   * <p>CMK的全局唯一标识符</p>
    */
   KeyId?: string
   /**
-   * 作为密钥更容易辨识，更容易被人看懂的别名
+   * <p>作为密钥更容易辨识，更容易被人看懂的别名</p>
    */
   Alias?: string
   /**
-   * 密钥创建时间，unix时间戳
+   * <p>密钥创建时间，unix时间戳</p>
    */
   CreateTime?: number
   /**
-   * CMK的描述
+   * <p>CMK的描述</p>
    */
   Description?: string
   /**
-   * CMK的状态
+   * <p>CMK的状态</p>
    */
   KeyState?: string
   /**
-   * CMK的用途
+   * <p>CMK的用途</p>
    */
   KeyUsage?: string
   /**
-   * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
+   * <p>标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误</p>
    */
   TagCode?: number
   /**
-   * 标签操作的返回信息
+   * <p>标签操作的返回信息</p>
    */
   TagMsg?: string
   /**
-   * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+   * <p>HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）</p>
    */
   HsmClusterId?: string
   /**
@@ -2367,19 +2367,19 @@ export interface EnableKeysResponse {
  */
 export interface SignByAsymmetricKeyRequest {
   /**
-   * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
+   * <p>签名算法，支持的算法：SM2DSA，ECC_P256_R1，ECDSA384_SHA384，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256，RSA_PSS_SHA_384，RSA_PKCS1_SHA_384，RSA_PSS_SHA_512，RSA_PKCS1_SHA_512 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。</p>
    */
   Algorithm: string
   /**
-   * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，消息摘要长度（Base64编码前的长度）必须等于32字节
+   * <p>消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，消息摘要长度（Base64编码前的长度）必须等于32字节</p>
    */
   Message: string
   /**
-   * 密钥的唯一标识
+   * <p>密钥的唯一标识</p>
    */
   KeyId: string
   /**
-   * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+   * <p>消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。</p>
    */
   MessageType?: string
 }
@@ -2608,7 +2608,7 @@ export interface GetPublicKeyResponse {
  */
 export interface SignByAsymmetricKeyResponse {
   /**
-   * 签名，Base64编码
+   * <p>签名，Base64编码</p>
    */
   Signature?: string
   /**

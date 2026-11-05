@@ -1342,6 +1342,38 @@ export interface TrainingTuningParams {
    * <p>vLLM GPU memory utilization，默认 0.5</p>
    */
   GpuMemoryUtilization?: number
+  /**
+   * <p>Actor Token 上限 / GPU</p>
+   */
+  PPOMaxTokenLenPerGpu?: number
+  /**
+   * <p>LogProb Token 上限 / GPU</p>
+   */
+  LogProbMaxTokenLenPerGpu?: number
+  /**
+   * <p>Actor 参数 Offload</p>
+   */
+  ActorParamOffload?: boolean
+  /**
+   * <p>优化器 Offload</p>
+   */
+  ActorOptimizerOffload?: boolean
+  /**
+   * <p>Ref 参数 Offload</p>
+   */
+  RefParamOffload?: boolean
+  /**
+   * <p>Actor Micro Batch / GPU</p>
+   */
+  PPOMicroBatchSizePerGpu?: number
+  /**
+   * <p>LogProb Micro Batch / GPU</p>
+   */
+  RollOutLogProbMicroBatchSizePerGpu?: number
+  /**
+   * <p>直接追加为命令行 override，优先级最高</p>
+   */
+  GRPORawOverrides?: string
 }
 
 /**
@@ -1729,6 +1761,18 @@ export interface AddDeploymentRequest {
    * <p>NetworkConfig</p>
    */
   NetworkConfig?: string
+  /**
+   * <p>可选：创建时一并挂载的 LoRA 模型版本（首次启动即生效）</p>
+   */
+  LoraBindings?: Array<LoraAdapterBinding>
+  /**
+   * <p>用户上传代码包的原始文件名（详情页「代码引用」回显用）</p>
+   */
+  CodePackageOriginalName?: string
+  /**
+   * <p>代码包 URI（Git URL / COS URI）</p>
+   */
+  CodePackageUri?: string
 }
 
 /**
@@ -2044,6 +2088,10 @@ export interface CreateInferenceServiceRequest {
    * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
    */
   NetworkConfig?: string
+  /**
+   * <p>可选：创建时一并挂载的 LoRA 模型版本（首次启动即生效）</p>
+   */
+  LoraBindings?: Array<LoraAdapterBinding>
 }
 
 /**
@@ -2401,6 +2449,18 @@ export interface CreateModelVersionRequest {
    * <p>模型上传路径类型</p><p>枚举值：</p><ul><li>LOCAL： 本地上传</li><li>CFS： CFS上传</li><li>COS： COS上传</li><li>CFSTurbo： CFSTurbo上传</li><li>GooseFS： GooseFS上传</li></ul><p>选择cos、cfs、cfstrubo则必须要传storageuri，选择local时不能传递goosefsconfig</p>
    */
   StorageType?: string
+  /**
+   * <p>模型来源标识（可选；有 RegisterMeta 时必填；须与模型现有来源一致）</p>
+   */
+  ModelSource?: string
+  /**
+   * <p>注册元信息（仅注册语义创建的版本有值，与创建请求 RegisterMeta 结构一致）</p>
+   */
+  RegisterMeta?: RegisterMeta
+  /**
+   * <p>产物文件树（可选，仅注册语义下有意义；结构同 GetModelFiles 响应 FileNode）</p>
+   */
+  FileList?: Array<FileNode>
 }
 
 /**
@@ -4160,6 +4220,34 @@ export interface InferenceModelInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceTags?: Array<Tag>
+  /**
+   * <p>模型来源标识（如 train-checkpoint=训练 Checkpoint 注册；空=普通上传等无注册元信息链路）</p>
+   */
+  ModelSource?: string
+  /**
+   * <p>模型类别：Base=普通（基座）模型；LoRA=LoRA Adapter 系列（各版本为 Adapter）</p>
+   */
+  ModelCategory?: string
+  /**
+   * <p>LoRA 基座模型 UID（仅 ModelCategory=LoRA 时有值）</p>
+   */
+  BaseModelUid?: string
+  /**
+   * <p>最新版本的全局唯一标识（VersionUid）。CreateInferenceModel 返回时即初始版本的 VersionUid</p>
+   */
+  LatestVersionUid?: string
+  /**
+   * <p>LoRA 基座模型版本 UID（仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersionUid?: string
+  /**
+   * <p>LoRA 基座模型名称（仅 ModelCategory=LoRA 且基座存在时有值；列表展示「基座模型及版本」用）</p>
+   */
+  BaseModelName?: string
+  /**
+   * <p>LoRA 基座模型版本号（如 v2；仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersion?: string
 }
 
 /**
@@ -5041,6 +5129,10 @@ export interface CreateBenchmarkTaskRequest {
    * <p>评测容器计费项规格倍数</p>
    */
   Spec?: number
+  /**
+   * <p>评测路由模型（可选）：基座或 &quot;&lt;基座&gt;:&lt;LoRA Adapter 别名&gt;&quot;，不传默认压测基座</p>
+   */
+  ModelIdentifier?: string
 }
 
 /**
@@ -6210,6 +6302,30 @@ export interface CreateInferenceModelRequest {
    * <p>模型上传来源类型</p><p>枚举值：</p><ul><li>Local： 本地上传</li><li>COS： COS上传</li><li>CFS： CFS上传</li><li>CFSTurbo： CFSTurbo上传</li><li>GooseFS： GooseFS上传</li></ul>
    */
   StorageType?: string
+  /**
+   * <p>模型来源标识（如 train-checkpoint=训练 Checkpoint 注册；空=普通上传等无注册元信息链路）</p>
+   */
+  ModelSource?: string
+  /**
+   * <p>注册元信息（携带即注册语义：storageUri 为训练产物根，零拷贝引用）</p>
+   */
+  RegisterMeta?: RegisterMeta
+  /**
+   * <p>产物文件树（可选，仅注册语义下有意义；结构同 GetModelFiles 响应 FileNode）</p>
+   */
+  FileList?: Array<FileNode>
+  /**
+   * <p>LoRA 基座模型 UID（仅 ModelCategory=LoRA 时有值）</p>
+   */
+  BaseModelUid?: string
+  /**
+   * <p>LoRA 基座模型版本 UID（仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersionUid?: string
+  /**
+   * <p>模型类别：Base=普通（基座）模型；LoRA=LoRA Adapter 系列（各版本为 Adapter）</p>
+   */
+  ModelCategory?: string
 }
 
 /**
@@ -7325,6 +7441,36 @@ export interface LinkedServiceInfo {
 }
 
 /**
+ * 单个 LoRA Adapter（LoRA 模型版本）绑定项.
+ */
+export interface LoraItem {
+  /**
+   * <p>模型版本 UID</p>
+   */
+  ModelVersionUid?: string
+  /**
+   * <p>模型 UID</p>
+   */
+  ModelUid?: string
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+  /**
+   * <p>模型版本</p>
+   */
+  Version?: string
+  /**
+   * <p>别名</p>
+   */
+  Alias?: string
+  /**
+   * <p>Lora Rank</p>
+   */
+  AdapterRank?: number
+}
+
+/**
  * UpdateUserDataEngineConfig请求参数结构体
  */
 export interface UpdateUserDataEngineConfigRequest {
@@ -8176,6 +8322,24 @@ export interface DeleteScriptResponse {
 }
 
 /**
+ * 注册元信息（携带即注册语义：storageUri 为训练产物根，零拷贝引用）
+ */
+export interface RegisterMeta {
+  /**
+   * <p>Checkpoint 子路径不能为空</p>
+   */
+  CheckpointSubPath?: string
+  /**
+   * <p>来源训练实例标识（接入方自定义语义，可选）</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>接入方扩展键值列表（原样落库，平台不解释）</p>
+   */
+  Extras?: Array<KVPair>
+}
+
+/**
  * ListStorages请求参数结构体
  */
 export interface ListStoragesRequest {
@@ -8852,6 +9016,22 @@ export interface CreateModelVersionResponse {
    */
   UseCustomStorage?: boolean
   /**
+   * <p>注册元信息（仅注册语义创建的版本有值，与创建请求 RegisterMeta 结构一致）</p>
+   */
+  RegisterMeta?: RegisterMeta
+  /**
+   * <p>版本业务唯一标识；LoRA 模型版本挂载到部署时以此引用</p>
+   */
+  VersionUid?: string
+  /**
+   * <p>LoRA Adapter 元信息（仅 LoRA 模型版本有值，解析自 adapter_config.json）</p>
+   */
+  LoraMeta?: LoraVersionMeta
+  /**
+   * <p>LoRA pool 异步导入状态（Importing/Ready/Failed；NULL=就绪），未就绪不能挂载</p>
+   */
+  PoolImportStatus?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9272,6 +9452,16 @@ export interface SubmitTrainingJobRequest {
    * <p>用户网络配置(JSON，跨租户 ENI 等)</p>
    */
   NetworkConfig?: string
+}
+
+/**
+ * 创建 RayServe 推理服务时一并挂载的 LoRA 模型版本
+ */
+export interface LoraAdapterBinding {
+  /**
+   * <p>LoRA 模型版本 UID（ListModelVersions 返回的 VersionUid；该模型须以部署基座为 BaseModelUid）</p>
+   */
+  ModelVersionUid: string
 }
 
 /**
@@ -9942,6 +10132,14 @@ export interface TrainingJobInstance {
    */
   Creator?: string
   /**
+   * <p>子账号 UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子账号名称</p>
+   */
+  SubAccountName?: string
+  /**
    * <p>创建时间（毫秒时间戳）</p>
    */
   CreateTime?: number
@@ -10033,6 +10231,14 @@ export interface TrainingJobInstance {
    * <p>创建实例时的断点续训意图声明快照（仅详情返回）</p>
    */
   ResumeTraining?: boolean
+  /**
+   * <p>自定义网络配置</p>
+   */
+  NetworkConfig?: string
+  /**
+   * <p>断点续训来源实例 ID（仅续训产生的实例有值，仅详情返回）</p>
+   */
+  ResumeSourceInstanceId?: string
 }
 
 /**
@@ -10201,6 +10407,30 @@ export interface UpdateDeploymentRequest {
    * <p>是否启用弹性伸缩</p>
    */
   AutoscalingEnabled?: boolean
+  /**
+   * <p>代码包 URI（可选，未传时从 primary deployment 继承）</p>
+   */
+  CodePackageUri?: string
+  /**
+   * <p>代码包原始文件名（可选，详情页「代码引用」回显用，仅记录不参与业务逻辑）</p>
+   */
+  CodePackageOriginalName?: string
+  /**
+   * <p>CR / PodSpec overrides JSON（可选）</p>
+   */
+  CrOverrides?: string
+  /**
+   * <p>Head 节点高可用开关（可选，不传或 true 为开启，仅 false 为关闭；与当前值不同会触发服务重建）</p>
+   */
+  HeadHighAvailabilityEnabled?: boolean
+  /**
+   * <p>可选：创建时一并挂载的 LoRA 模型版本（首次启动即生效）</p>
+   */
+  LoraBindings?: Array<LoraAdapterBinding>
+  /**
+   * <p>ray runtime env 字段</p>
+   */
+  RuntimeEnv?: string
 }
 
 /**
@@ -11114,6 +11344,10 @@ export interface RestartDeploymentResponse {
    */
   ResourcePartitionName?: string
   /**
+   * <p>部署当前挂载的 LoRA 模型版本列表。</p>
+   */
+  LoraBindings?: Array<LoraItem>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11541,6 +11775,34 @@ export interface UpdateInferenceModelResponse {
    */
   ResourceTags?: Array<Tag>
   /**
+   * <p>模型类别：Base=普通（基座）模型；LoRA=LoRA Adapter 系列（各版本为 Adapter）</p>
+   */
+  ModelCategory?: string
+  /**
+   * <p>LoRA 基座模型 UID（仅 ModelCategory=LoRA 时有值）</p>
+   */
+  BaseModelUid?: string
+  /**
+   * <p>最新版本的全局唯一标识（VersionUid）。CreateInferenceModel 返回时即初始版本的 VersionUid</p>
+   */
+  LatestVersionUid?: string
+  /**
+   * <p>LoRA 基座模型版本 UID（仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersionUid?: string
+  /**
+   * <p>LoRA 基座模型名称（仅 ModelCategory=LoRA 且基座存在时有值；列表展示「基座模型及版本」用）</p>
+   */
+  BaseModelName?: string
+  /**
+   * <p>LoRA 基座模型版本号（如 v2；仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersion?: string
+  /**
+   * <p>模型来源标识（可选；有 RegisterMeta 时必填，须在平台值域登记表内）</p>
+   */
+  ModelSource?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11602,6 +11864,10 @@ export interface DescribeTrainingCheckpointsResponse {
    * <p>存储路径（COS 桶路径或 CFS/GooseFSx 挂载路径）</p>
    */
   StoragePath?: string
+  /**
+   * <p>训练产物根的完整存储 URI（注册推理模型用，如 cos://bucket/path/、cfs://fs-id/path/）；作为 CreateInferenceModel / CreateModelVersion 的 StorageUri 传回（配合 UseCustomStorage=true）</p>
+   */
+  ArtifactRootUri?: string
   /**
    * <p>错误或提示信息（仅在请求异常时有值）</p>
    */
@@ -15900,6 +16166,10 @@ export interface RerunBenchmarkTaskResponse {
    */
   DeploymentResources?: Array<DeploymentResourceInfo>
   /**
+   * <p>评测路由模型（可选）：基座或 &quot;&lt;基座&gt;:&lt;LoRA Adapter 别名&gt;&quot;，不传默认压测基座</p>
+   */
+  ModelIdentifier?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -17173,6 +17443,10 @@ export interface ResumeTrainingJobInstanceRequest {
    * <p>训练实例ID</p>
    */
   InstanceId?: string
+  /**
+   * <p>续训指定的源 checkpoint 子目录（相对源实例 checkpoint 根；空 = 自动选最新）</p>
+   */
+  ResumeCheckpointSubDir?: string
 }
 
 /**
@@ -18488,6 +18762,10 @@ export interface StopBenchmarkTaskResponse {
    * <p>发生错误时的错误信息</p>
    */
   ErrorMessage?: string
+  /**
+   * <p>评测路由模型（可选）：基座或 &quot;&lt;基座&gt;:&lt;LoRA Adapter 别名&gt;&quot;，不传默认压测基座</p>
+   */
+  ModelIdentifier?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19870,6 +20148,14 @@ export interface MlFlowServerInfo {
    */
   StorageMode?: string
   /**
+   * <p>启动参数（用户自定义；null = 默认命令，编辑弹窗预填用）</p>
+   */
+  ServerArgs?: string
+  /**
+   * <p>描述信息（纯文本；null = 未填写）</p>
+   */
+  Description?: string
+  /**
    * <p>应用 ID</p>
    */
   AppId?: number
@@ -19877,6 +20163,14 @@ export interface MlFlowServerInfo {
    * <p>创建者 UIN</p>
    */
   Uin?: string
+  /**
+   * <p>创建人子账号 UIN（实际提交者，存量数据可能为空）</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建人子账号名称（CAM 动态回填，非持久化；查询失败时为空）</p>
+   */
+  SubAccountName?: string
   /**
    * <p>创建时间（epoch 毫秒）</p><p>单位：毫秒</p>
    */
@@ -19894,6 +20188,26 @@ export interface MlFlowServerInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * <p>最近一次成功探测 Deployment 的时间（epoch millis，Neutrino 透传）；NULL=尚未成功探测过。</p>
+   */
+  LastProbeSuccessTime?: number
+  /**
+   * <p>最近一次成功探测后的连续失败次数（&gt;0 表示当前 Status 可能过期）</p>
+   */
+  ConsecutiveProbeFailures?: number
+  /**
+   * <p>最近一次探测失败原因（Neutrino 透传，仅诊断展示）</p>
+   */
+  LastProbeError?: string
+  /**
+   * <p>关联训练实例总数（ray-nexus 侧统计，仅 ListMlflowServers 返回；详情/监控请用 QueryMlFlowServerInstanceStats）</p>
+   */
+  TotalInstanceCount?: number
+  /**
+   * <p>关联的运行中（RUNNING）训练实例数（仅 ListMlflowServers 返回；详情/监控请用 QueryMlflowServerInstanceStats）</p>
+   */
+  RunningInstanceCount?: number
 }
 
 /**
@@ -20501,6 +20815,10 @@ export interface StopDeploymentResponse {
    * <p>资源分区名称</p>
    */
   ResourcePartitionName?: string
+  /**
+   * <p>部署当前挂载的 LoRA 模型版本列表。</p>
+   */
+  LoraBindings?: Array<LoraItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21273,6 +21591,21 @@ export interface AddDeploymentResponse {
    */
   AutoscalingEnabled?: boolean
   /**
+   * <p>最小副本数（自动伸缩时使用）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinReplicas?: number
+  /**
+   * <p>最大副本数（自动伸缩时使用）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxReplicas?: number
+  /**
+   * <p>弹性伸缩配置（JSON 字符串）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoscalerOptions?: string
+  /**
    * <p>模型存储配置（Catalog JSON，记录模型 COS 挂载信息）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -21303,6 +21636,11 @@ export interface AddDeploymentResponse {
    */
   NeutrinoServeId?: string
   /**
+   * <p>Ray Dashboard 访问地址（通过 Ingress 代理，仅 Running 状态的部署有值）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RayDashboardUrl?: string
+  /**
    * <p>资源分区 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -21328,6 +21666,18 @@ export interface AddDeploymentResponse {
    * <p>高级参数</p>
    */
   AdvancedOptions?: string
+  /**
+   * <p>用户代码包 URL</p>
+   */
+  CodePackageUri?: string
+  /**
+   * <p>用户上传代码包的原始文件名</p>
+   */
+  CodePackageOriginalName?: string
+  /**
+   * <p>部署当前挂载的 LoRA 模型版本列表。</p>
+   */
+  LoraBindings?: Array<LoraItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -22077,6 +22427,10 @@ export interface CreateBenchmarkTaskResponse {
    */
   Resources?: BenchmarkResourceInfo
   /**
+   * <p>&lt;基座&gt;:&lt;LoRA Adapter 别名&gt;</p>
+   */
+  ModelIdentifier?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -22237,6 +22591,34 @@ export interface GetInferenceModelResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceTags?: Array<Tag>
+  /**
+   * <p>模型类别：Base=普通（基座）模型；LoRA=LoRA Adapter 系列（各版本为 Adapter）</p>
+   */
+  ModelCategory?: string
+  /**
+   * <p>LoRA 基座模型 UID（仅 ModelCategory=LoRA 时有值）</p>
+   */
+  BaseModelUid?: string
+  /**
+   * <p>最新版本的全局唯一标识（VersionUid）。CreateInferenceModel 返回时即初始版本的 VersionUid</p>
+   */
+  LatestVersionUid?: string
+  /**
+   * <p>LoRA 基座模型版本 UID（仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersionUid?: string
+  /**
+   * <p>LoRA 基座模型名称（仅 ModelCategory=LoRA 且基座存在时有值；列表展示「基座模型及版本」用）</p>
+   */
+  BaseModelName?: string
+  /**
+   * <p>LoRA 基座模型版本号（如 v2；仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersion?: string
+  /**
+   * <p>模型来源标识（如 train-checkpoint=训练 Checkpoint 注册；空=普通上传等无注册元信息链路）</p>
+   */
+  ModelSource?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26274,6 +26656,34 @@ export interface CreateInferenceModelResponse {
    */
   ResourceTags?: Array<Tag>
   /**
+   * <p>模型来源标识（如 train-checkpoint=训练 Checkpoint 注册；空=普通上传等无注册元信息链路）</p>
+   */
+  ModelSource?: string
+  /**
+   * <p>模型类别：Base=普通（基座）模型；LoRA=LoRA Adapter 系列（各版本为 Adapter）</p>
+   */
+  ModelCategory?: string
+  /**
+   * <p>LoRA 基座模型 UID（仅 ModelCategory=LoRA 时有值）</p>
+   */
+  BaseModelUid?: string
+  /**
+   * <p>最新版本的全局唯一标识（VersionUid）。CreateInferenceModel 返回时即初始版本的 VersionUid</p>
+   */
+  LatestVersionUid?: string
+  /**
+   * <p>LoRA 基座模型版本 UID（仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersionUid?: string
+  /**
+   * <p>LoRA 基座模型名称（仅 ModelCategory=LoRA 且基座存在时有值；列表展示「基座模型及版本」用）</p>
+   */
+  BaseModelName?: string
+  /**
+   * <p>LoRA 基座模型版本号（如 v2；仅 ModelCategory=LoRA 且创建时指定了基座版本时有值）</p>
+   */
+  BaseModelVersion?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -28328,9 +28738,17 @@ export interface CreateMlflowServerRequest {
    */
   ResourceConfig?: MlFlowResourceConfig
   /**
+   * <p>启动参数（可选，单个字符串，如 &quot;--workers 4&quot;）；分词后追加在平台固定命令之后，下次 start 时生效。平台保留参数（--host/--port/--backend-store-uri 等）不允许指定；不传或空白为默认命令</p>
+   */
+  ServerArgs?: string
+  /**
    * <p>标签列表（TagKey-TagValue），用于将 MLflow Server 与腾讯云标签系统中的标签绑定</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>描述信息（可选，纯文本，不允许换行，最长 1024）；不传或空白为未填写</p>
+   */
+  Description?: string
 }
 
 /**
@@ -29027,6 +29445,44 @@ export interface DescribeStoreLocationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LoRA Adapter 元信息
+ */
+export interface LoraVersionMeta {
+  /**
+   * <p>Lora Rank</p>
+   */
+  Rank?: number
+  /**
+   * <p>Lora Alpha</p>
+   */
+  Alpha?: number
+  /**
+   * <p>LoRA dropout</p>
+   */
+  Dropout?: number
+  /**
+   * <p>注入的目标模块</p>
+   */
+  TargetModules?: Array<string>
+  /**
+   * <p>PEFT 类型（如 LORA）</p>
+   */
+  PEFTType?: string
+  /**
+   * <p>任务类型（如 CAUSAL_LM）</p>
+   */
+  TaskType?: string
+  /**
+   * <p>训练时声明的基座名称或路径（base_model_name_or_path）</p>
+   */
+  BaseModelNameOrPath?: string
+  /**
+   * <p>最大 rank（含 rank_pattern 分模块 rank；仅当其大于 Rank 时返回）</p>
+   */
+  MaxRank?: number
 }
 
 /**
@@ -30053,6 +30509,10 @@ export interface UpdateDeploymentResponse {
    * <p>高级参数</p>
    */
   AdvancedOptions?: string
+  /**
+   * <p>部署当前挂载的 LoRA 模型版本列表。</p>
+   */
+  LoraBindings?: Array<LoraItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

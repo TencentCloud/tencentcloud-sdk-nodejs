@@ -762,6 +762,7 @@ import {
   EdrAlertTagItem,
   DescribeSecurityScoreOverviewResponse,
   DescribeExposeAssetCategoryRequest,
+  VulFixableMachineAction,
   BaselinePolicy,
   DescribeImageRegistryNamespaceListResponse,
   AssetDetailItem,

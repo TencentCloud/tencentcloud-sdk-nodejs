@@ -606,51 +606,63 @@ export interface AddUserGroupMembersRequest {
  */
 export interface CreateResourceRequest {
   /**
-   * 部署region
+   * <p>部署region</p>
    */
   DeployRegion: string
   /**
-   * 部署堡垒机的VpcId
+   * <p>部署堡垒机的VpcId</p>
    */
   VpcId: string
   /**
-   * 部署堡垒机的SubnetId
+   * <p>部署堡垒机的SubnetId</p>
    */
   SubnetId: string
   /**
-   * 资源类型。取值:standard/pro
+   * <p>资源类型。取值:standard/pro</p>
    */
   ResourceEdition: string
   /**
-   * 资源节点数
+   * <p>资源节点数</p>
    */
   ResourceNode: number
   /**
-   * 计费周期
+   * <p>计费周期</p>
    */
   TimeUnit: string
   /**
-   * 计费时长
+   * <p>计费时长</p>
    */
   TimeSpan: number
   /**
-   * 计费模式 1预付费
+   * <p>计费模式 1预付费</p>
    */
   PayMode: number
   /**
-   * 自动续费
+   * <p>自动续费</p>
    */
   AutoRenewFlag: number
   /**
-   * 部署zone
+   * <p>零信任堡垒机功能包</p><p>枚举值：</p><ul><li>0： 不开通</li><li>1： 付费版（含 20 用户 / 10Mbps 带宽）</li></ul>
+   */
+  IOAResource?: number
+  /**
+   * <p>零信任用户扩展包，1 个 = 20 用户</p><p>取值范围：[0, 999]</p>
+   */
+  PackageIOAUserCount?: number
+  /**
+   * <p>零信任带宽扩展包，1 个 = 4Mbps</p><p>取值范围：[0, 509]</p>
+   */
+  PackageIOABandwidth?: number
+  /**
+   * <p>部署zone</p>
    */
   DeployZone?: string
   /**
-   * 0非试用版，1试用版
+   * <p>0非试用版，1试用版</p>
    */
   Trial?: number
   /**
-   * 是否共享clb，0：不共享，1：共享
+   * <p>是否共享clb</p><p>枚举值：</p><ul><li>0： 不共享</li><li>1： 共享</li></ul><p>默认值：0</p><p>公有云传0</p>
    */
   ShareClb?: number
 }
@@ -2924,7 +2936,7 @@ export interface PasswordSetting {
  */
 export interface CreateResourceResponse {
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   ResourceId?: string
   /**
@@ -2938,38 +2950,50 @@ export interface CreateResourceResponse {
  */
 export interface ModifyResourceRequest {
   /**
-   * 需要开通服务的资源ID
+   * <p>需要开通服务的资源ID</p>
    */
   ResourceId: string
   /**
-   * 状态
+   * <p>状态</p>
    * @deprecated
    */
   Status?: string
   /**
-   * 实例版本
+   * <p>实例版本</p>
    */
   ResourceEdition?: string
   /**
-   * 资源节点数
+   * <p>资源节点数</p>
    */
   ResourceNode?: number
   /**
-   * 自动续费
+   * <p>自动续费</p>
    */
   AutoRenewFlag?: number
   /**
-   * 带宽扩展包个数(4M)
+   * <p>带宽扩展包个数(4M)</p>
    */
   PackageBandwidth?: number
   /**
-   * 授权点数扩展包个数(50点)
+   * <p>授权点数扩展包个数(50点)</p>
    */
   PackageNode?: number
   /**
-   * 日志投递
+   * <p>日志投递</p>
    */
   LogDelivery?: number
+  /**
+   * <p>零信任堡垒机功能包</p><p>枚举值：</p><ul><li>0： 不开通</li><li>1： 付费版（含 20 用户 / 10Mbps 带宽）</li></ul><p>默认值：0</p>
+   */
+  IOAResource?: number
+  /**
+   * <p>零信任用户扩展包，1 个 = 20 用户</p><p>取值范围：[0, 999]</p>
+   */
+  PackageIOAUserCount?: number
+  /**
+   * <p>零信任带宽扩展包，1 个 = 4Mbps</p><p>取值范围：[0, 509]</p>
+   */
+  PackageIOABandwidth?: number
 }
 
 /**

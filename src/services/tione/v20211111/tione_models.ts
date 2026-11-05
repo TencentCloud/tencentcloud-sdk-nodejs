@@ -3085,6 +3085,14 @@ export interface CreateNotebookRequest {
    * <p>描述</p>
    */
   Description?: string
+  /**
+   * <p>资源供应属性</p>
+   */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute
+  /**
+   * <p>队列ID</p>
+   */
+  Queues?: Array<string>
 }
 
 /**
@@ -5987,6 +5995,10 @@ export interface SmartRouterResourceSpec {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceSupplyAttribute?: ResourceSupplyAttribute
+  /**
+   * <p>资源组类型（output only，查询时回显供前端区分资源组表单）。枚举值：NORMAL（托管资源组）/ SW（纳管资源组）。按量计费（ChargeType=POSTPAID_BY_HOUR）时为空；写入时仍以查询到的资源组实际类型为准，调用方无需传入</p>
+   */
+  ResourceGroupSWType?: string
 }
 
 /**

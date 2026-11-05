@@ -20,10 +20,6 @@
  */
 export interface CreateDBInstancesRequest {
   /**
-   * <p>创建实例区域</p>
-   */
-  Zone: string
-  /**
    * <p>字符型vpcid</p>
    */
   VpcId: string
@@ -51,6 +47,10 @@ export interface CreateDBInstancesRequest {
    * <p>创建实例个数，上限为10</p>
    */
   InstanceCount: number
+  /**
+   * <p>创建实例区域</p>
+   */
+  Zone: string
   /**
    * <p>全能型副本数量</p>
    */
@@ -159,6 +159,10 @@ export interface CreateDBInstancesRequest {
    * <p>SVLS 实例的自动变配相关限制</p><p>入参限制：传入时 AutoScaleConfig 参数不再生效</p>
    */
   AutoScaleConfigs?: Array<AutoScalingConfig>
+  /**
+   * <p>密码复杂度</p>
+   */
+  PasswordComplexity?: PasswordComplexity
 }
 
 /**
@@ -787,6 +791,10 @@ export interface StorageNodeSpec {
  * DescribeDBCharsets返回参数结构体
  */
 export interface DescribeDBCharsetsResponse {
+  /**
+   * <p>字符集与排序规则对应列表</p>
+   */
+  CharsetCollations?: Array<CharsetCollationItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1849,6 +1857,14 @@ export interface DescribeDBInstanceDetailResponse {
    * <p>serverless自动变配配置</p>
    */
   AutoScaleConfigs?: Array<AutoScalingConfig>
+  /**
+   * <p>SSL开启状态</p>
+   */
+  SSLStatus?: string
+  /**
+   * <p>字符集的排序规则</p>
+   */
+  Collation?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3048,6 +3064,24 @@ export interface InstanceInfo {
 }
 
 /**
+ * 字符集与排序规则联动清单
+ */
+export interface CharsetCollationItem {
+  /**
+   * <p>字符集</p>
+   */
+  CharsetName?: string
+  /**
+   * <p>排序规则</p>
+   */
+  Collations?: Array<string>
+  /**
+   * <p>默认的排序规则</p>
+   */
+  DefaultCollation?: string
+}
+
+/**
  * 数据库账号信息
  */
 export interface User {
@@ -3256,6 +3290,37 @@ export interface BackupMethodStatisticsModel {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalSize?: number
+}
+
+/**
+ * 密码复杂度
+ */
+export interface PasswordComplexity {
+  /**
+   * <p>是否开启密码复杂度</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable: boolean
+  /**
+   * <p>大写和小写字符的最小长度</p><p>取值范围：[1, 16]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MixedCaseCount?: number
+  /**
+   * <p>数字字符的最小长度</p><p>取值范围：[1, 16]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumberCount?: number
+  /**
+   * <p>特殊字符的最小长度</p><p>取值范围：[1, 16]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecialCharCount?: number
+  /**
+   * <p>密码的最小长度</p><p>取值范围：[8, 64]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Length?: number
 }
 
 /**
@@ -3765,6 +3830,10 @@ export interface DescribeSpecsRequest {
    * <p>可用区组合列表</p>
    */
   Zones?: Array<string>
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
 }
 
 /**
@@ -4295,6 +4364,10 @@ export interface ResetDbaAdminPrivilegesRequest {
    * <p>实例id</p>
    */
   InstanceId: string
+  /**
+   * <p>DbaAdmin的host</p>
+   */
+  Host?: string
 }
 
 /**

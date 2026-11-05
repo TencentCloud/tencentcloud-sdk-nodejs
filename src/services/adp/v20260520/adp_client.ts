@@ -380,6 +380,7 @@ import {
   ConsumptionUsage,
   AppTriggerPromptExecuteConfig,
   DeleteSkillShareResponse,
+  A2AConfig,
   ModifyCategoryResponse,
   WorkflowRunSummary,
   ReleaseSummary,

@@ -809,6 +809,7 @@ import {
   BotManagementLite,
   IPWhitelist,
   DescribeSharedCNAMERequest,
+  AccessURLRedirectPort,
   ModifyZoneRequest,
   ModifyL7AccSettingRequest,
   ModifyFunctionRulePriorityResponse,

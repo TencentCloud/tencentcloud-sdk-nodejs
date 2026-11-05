@@ -712,25 +712,17 @@ export interface DescribeProxiesResponse {
 }
 
 /**
- * DescribeClusterDetailDatabases请求参数结构体
+ * DescribeInstanceServerlessQuota请求参数结构体
  */
-export interface DescribeClusterDetailDatabasesRequest {
+export interface DescribeInstanceServerlessQuotaRequest {
   /**
    * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * <p>偏移量，默认0</p>
+   * <p>实例类型</p><p>枚举值：</p><ul><li>rw： 读写</li><li>ro： 只读</li></ul>
    */
-  Offset?: number
-  /**
-   * <p>返回数量，默认20,最大100</p>
-   */
-  Limit?: number
-  /**
-   * <p>数据库名称，通过该字段进行子串匹配</p>
-   */
-  DbName?: string
+  InstanceType?: string
 }
 
 /**
@@ -1496,6 +1488,28 @@ export interface UpgradeProxyRequest {
 }
 
 /**
+ * DescribeClusterDetailDatabases请求参数结构体
+ */
+export interface DescribeClusterDetailDatabasesRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId: string
+  /**
+   * <p>偏移量，默认0</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，默认20,最大100</p>
+   */
+  Limit?: number
+  /**
+   * <p>数据库名称，通过该字段进行子串匹配</p>
+   */
+  DbName?: string
+}
+
+/**
  * DescribeBinlogDownloadUrl返回参数结构体
  */
 export interface DescribeBinlogDownloadUrlResponse {
@@ -1839,6 +1853,10 @@ export interface CynosdbInstance {
    * <p>实例当前所在可用区</p>
    */
   RealZone?: string
+  /**
+   * <p>实例Serverless弹性信息</p>
+   */
+  ServerlessQuotaInfo?: InstanceServerlessQuotaInfo
 }
 
 /**
@@ -3125,33 +3143,21 @@ export interface ProxyGroupRwInfo {
 }
 
 /**
- * DescribeProxyNodes请求参数结构体
+ * 集群serverless弹性配置
  */
-export interface DescribeProxyNodesRequest {
+export interface ClusterServerlessQuotaConfig {
   /**
-   * 返回数量，默认为 20，最大值为 100
+   * <p>实例类型</p><p>枚举值：</p><ul><li>rw： 读写</li><li>ro： 只读</li></ul>
    */
-  Limit?: number
+  InstanceType?: string
   /**
-   * 记录偏移量，默认值为0
+   * <p>实例Serverless弹性CCU上限</p>
    */
-  Offset?: number
+  MaxCcu?: number
   /**
-   * 排序字段，取值范围：
-<li> CREATETIME：创建时间</li>
-<li> PERIODENDTIME：过期时间</li>
+   * <p>实例Serverless弹性状态</p><p>枚举值：</p><ul><li>opening： 开启中</li><li>opened： 已开启</li><li>closing： 关闭中</li><li>closed： 已关闭</li></ul>
    */
-  OrderBy?: string
-  /**
-   * 排序类型，取值范围：
-<li> ASC：升序排序 </li>
-<li> DESC：降序排序 </li>
-   */
-  OrderByType?: string
-  /**
-   * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。目前支持的搜索字段：Status、ProxyNodeId、ClusterId、OssProxyNodeName。
-   */
-  Filters?: Array<QueryFilter>
+  Status?: string
 }
 
 /**
@@ -3537,6 +3543,10 @@ export interface CreateClustersRequest {
    * <p>半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。</p><p>取值范围：[1000, 4294967295]</p><p>单位：毫秒</p><p>默认值：10000</p>
    */
   SemiSyncTimeout?: number
+  /**
+   * <p>集群实例Serverless弹性配置</p>
+   */
+  ServerlessQuotaConfigs?: Array<ServerlessQuotaConfig>
 }
 
 /**
@@ -6315,6 +6325,24 @@ export interface DescribeClusterServerlessScalePlansResponse {
 }
 
 /**
+ * serverless弹性配额
+ */
+export interface ServerlessQuotaConfig {
+  /**
+   * <p>实例类型</p><p>枚举值：</p><ul><li>rw： 读写</li><li>ro： 只读</li></ul>
+   */
+  InstanceType: string
+  /**
+   * <p>最大CCU</p>
+   */
+  MaxCcu?: number
+  /**
+   * <p>开关</p>
+   */
+  Enabled?: boolean
+}
+
+/**
  * CreateResourcePackage返回参数结构体
  */
 export interface CreateResourcePackageResponse {
@@ -7893,6 +7921,24 @@ export interface RestartInstanceResponse {
 }
 
 /**
+ * DescribeInstanceServerlessQuota返回参数结构体
+ */
+export interface DescribeInstanceServerlessQuotaResponse {
+  /**
+   * <p>集群实例Serveless弹性配置</p>
+   */
+  QuotaConfigs?: Array<ClusterServerlessQuotaConfig>
+  /**
+   * <p>集群实例Serverless弹性状态</p>
+   */
+  InstanceQuotas?: Array<InstanceServerlessQuotaInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBinlogSaveDays请求参数结构体
  */
 export interface DescribeBinlogSaveDaysRequest {
@@ -8046,6 +8092,32 @@ export interface AddInstancesRequest {
    * <p>proxy同步升级</p>
    */
   UpgradeProxy?: UpgradeProxy
+}
+
+/**
+ * 实例serverless弹性配置详情
+ */
+export interface InstanceServerlessQuotaInfo {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>实例类型</p><p>枚举值：</p><ul><li>rw： 读写</li><li>ro： 只读</li></ul>
+   */
+  InstanceType?: string
+  /**
+   * <p>最大CCU规格</p>
+   */
+  MaxCcu?: number
+  /**
+   * <p>实例Serverless弹性开启状态</p><p>枚举值：</p><ul><li>opening： 开启中</li><li>opened： 已开启</li><li>closing： 关闭中</li><li>closed： 已关闭</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>开启Serverless弹性的时间</p>
+   */
+  EnableTime?: string
 }
 
 /**
@@ -8222,6 +8294,10 @@ export interface CynosdbInstanceDetail {
    * <p>存储版本</p><p>枚举值：</p><ul><li>1.0： 1.0版本存储</li><li>2.0： 2.0版本存储</li></ul>
    */
   StorageVersion?: string
+  /**
+   * <p>实例Serverless弹性信息</p>
+   */
+  ServerlessQuotaInfo?: InstanceServerlessQuotaInfo
 }
 
 /**
@@ -10237,6 +10313,20 @@ export interface ExportInstanceSlowQueriesResponse {
 }
 
 /**
+ * SetInstanceServerlessQuota请求参数结构体
+ */
+export interface SetInstanceServerlessQuotaRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId: string
+  /**
+   * <p>实例SLS规格配置</p>
+   */
+  ServerlessQuotaConfigs?: Array<ServerlessQuotaConfig>
+}
+
+/**
  * SwitchClusterZone请求参数结构体
  */
 export interface SwitchClusterZoneRequest {
@@ -10584,6 +10674,20 @@ export interface BizTaskInfo {
    * <p>AI优化器任务信息</p>
    */
   AIOptimizerTaskData?: AIOptimizerTaskData
+}
+
+/**
+ * SetInstanceServerlessQuota返回参数结构体
+ */
+export interface SetInstanceServerlessQuotaResponse {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11807,6 +11911,36 @@ export interface PauseServerlessRequest {
    * 是否强制暂停，忽略当前的用户链接  0:不强制  1:强制， 默认为1
    */
   ForcePause?: number
+}
+
+/**
+ * DescribeProxyNodes请求参数结构体
+ */
+export interface DescribeProxyNodesRequest {
+  /**
+   * 返回数量，默认为 20，最大值为 100
+   */
+  Limit?: number
+  /**
+   * 记录偏移量，默认值为0
+   */
+  Offset?: number
+  /**
+   * 排序字段，取值范围：
+<li> CREATETIME：创建时间</li>
+<li> PERIODENDTIME：过期时间</li>
+   */
+  OrderBy?: string
+  /**
+   * 排序类型，取值范围：
+<li> ASC：升序排序 </li>
+<li> DESC：降序排序 </li>
+   */
+  OrderByType?: string
+  /**
+   * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。目前支持的搜索字段：Status、ProxyNodeId、ClusterId、OssProxyNodeName。
+   */
+  Filters?: Array<QueryFilter>
 }
 
 /**
@@ -13884,6 +14018,10 @@ export interface ClusterInstanceDetail {
    * <p>serverless实例子状态</p>
    */
   ServerlessStatus?: string
+  /**
+   * <p>实例Serverless弹性配置信息</p>
+   */
+  ServerlessQuotaInfo?: InstanceServerlessQuotaInfo
   /**
    * <p>AI优化器状态</p>
    */

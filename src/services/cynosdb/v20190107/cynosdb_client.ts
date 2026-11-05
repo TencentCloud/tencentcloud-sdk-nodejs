@@ -51,7 +51,7 @@ import {
   DescribeVaultBackupClusterInfoResponse,
   DescribeSlaveZonesResponse,
   DescribeProxiesResponse,
-  DescribeClusterDetailDatabasesRequest,
+  DescribeInstanceServerlessQuotaRequest,
   DescribeLibraDBClustersResponse,
   InquirePriceMultiSpecRequest,
   RollbackRoGroupInfo,
@@ -84,6 +84,7 @@ import {
   ModifyBackupNameResponse,
   BackupFileInfo,
   UpgradeProxyRequest,
+  DescribeClusterDetailDatabasesRequest,
   DescribeBinlogDownloadUrlResponse,
   DescribeLibraDBInstanceSpecsResponse,
   SparseBackupConfig,
@@ -137,7 +138,7 @@ import {
   DescribeChangedParamsAfterUpgradeResponse,
   ModifyServerlessStrategyResponse,
   ProxyGroupRwInfo,
-  DescribeProxyNodesRequest,
+  ClusterServerlessQuotaConfig,
   DescribeAuditLogsRequest,
   InquirePriceCreateResponse,
   DescribeClusterReadOnlyRequest,
@@ -260,6 +261,7 @@ import {
   DeleteAccountsResponse,
   RenewLibraDBClustersRequest,
   DescribeClusterServerlessScalePlansResponse,
+  ServerlessQuotaConfig,
   CreateResourcePackageResponse,
   ModifyBinlogConfigRequest,
   ModifyLibraDBClusterNameResponse,
@@ -324,11 +326,13 @@ import {
   AutoMapRule,
   SwitchProxyVpcRequest,
   RestartInstanceResponse,
+  DescribeInstanceServerlessQuotaResponse,
   DescribeBinlogSaveDaysRequest,
   DescribeClusterTransparentEncryptInfoResponse,
   ActivateInstanceResponse,
   IsolateClusterRequest,
   AddInstancesRequest,
+  InstanceServerlessQuotaInfo,
   ModifyVaultResponse,
   CynosdbInstanceDetail,
   DescribeBackupDownloadRestrictionRequest,
@@ -414,12 +418,14 @@ import {
   CreateAccountsRequest,
   DeleteAuditRuleTemplatesRequest,
   ExportInstanceSlowQueriesResponse,
+  SetInstanceServerlessQuotaRequest,
   SwitchClusterZoneRequest,
   DescribeLibraDBClusterAutoMapRuleResponse,
   Ability,
   GdnTaskInfo,
   InquirePriceModifyRequest,
   BizTaskInfo,
+  SetInstanceServerlessQuotaResponse,
   RemoveClusterSlaveZoneResponse,
   RenewClustersRequest,
   OpenClusterReadOnlyInstanceGroupAccessResponse,
@@ -470,6 +476,7 @@ import {
   CreateAuditRuleTemplateRequest,
   ModifyClusterLevelResponse,
   PauseServerlessRequest,
+  DescribeProxyNodesRequest,
   DescribeBinlogListByVaultResponse,
   CynosdbCluster,
   DataSourceItem,
@@ -1032,13 +1039,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SwitchProxyVpc）用于更换数据库代理vpc。
+   * 将普通集群转换为Serverless集群
    */
-  async SwitchProxyVpc(
-    req: SwitchProxyVpcRequest,
-    cb?: (error: string, rep: SwitchProxyVpcResponse) => void
-  ): Promise<SwitchProxyVpcResponse> {
-    return this.request("SwitchProxyVpc", req, cb)
+  async SetInstanceServerlessQuota(
+    req: SetInstanceServerlessQuotaRequest,
+    cb?: (error: string, rep: SetInstanceServerlessQuotaResponse) => void
+  ): Promise<SetInstanceServerlessQuotaResponse> {
+    return this.request("SetInstanceServerlessQuota", req, cb)
   }
 
   /**
@@ -2142,6 +2149,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（SwitchProxyVpc）用于更换数据库代理vpc。
+   */
+  async SwitchProxyVpc(
+    req: SwitchProxyVpcRequest,
+    cb?: (error: string, rep: SwitchProxyVpcResponse) => void
+  ): Promise<SwitchProxyVpcResponse> {
+    return this.request("SwitchProxyVpc", req, cb)
+  }
+
+  /**
    * 修改集群级别
    */
   async ModifyClusterLevel(
@@ -2572,13 +2589,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开关全局加密
+   * 查询集群设置的serverless弹性配置
    */
-  async ModifyClusterGlobalEncryption(
-    req: ModifyClusterGlobalEncryptionRequest,
-    cb?: (error: string, rep: ModifyClusterGlobalEncryptionResponse) => void
-  ): Promise<ModifyClusterGlobalEncryptionResponse> {
-    return this.request("ModifyClusterGlobalEncryption", req, cb)
+  async DescribeInstanceServerlessQuota(
+    req: DescribeInstanceServerlessQuotaRequest,
+    cb?: (error: string, rep: DescribeInstanceServerlessQuotaResponse) => void
+  ): Promise<DescribeInstanceServerlessQuotaResponse> {
+    return this.request("DescribeInstanceServerlessQuota", req, cb)
   }
 
   /**
@@ -2999,6 +3016,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenReadOnlyInstanceExclusiveAccessResponse) => void
   ): Promise<OpenReadOnlyInstanceExclusiveAccessResponse> {
     return this.request("OpenReadOnlyInstanceExclusiveAccess", req, cb)
+  }
+
+  /**
+   * 开关全局加密
+   */
+  async ModifyClusterGlobalEncryption(
+    req: ModifyClusterGlobalEncryptionRequest,
+    cb?: (error: string, rep: ModifyClusterGlobalEncryptionResponse) => void
+  ): Promise<ModifyClusterGlobalEncryptionResponse> {
+    return this.request("ModifyClusterGlobalEncryption", req, cb)
   }
 
   /**

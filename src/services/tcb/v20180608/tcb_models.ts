@@ -1634,24 +1634,19 @@ export interface PreviewPGUserMigrationsRequest {
  */
 export interface DatabasesInfo {
   /**
-   * 数据库唯一标识
+   * <p>数据库唯一标识</p>
    */
   InstanceId?: string
   /**
-   * 状态。包含以下取值：
-<li>INITIALIZING：资源初始化中</li>
-<li>RUNNING：运行中，可正常使用的状态</li>
-<li>UNUSABLE：禁用，不可用</li>
-<li>OVERDUE：资源过期</li>
+   * <p>状态。包含以下取值：</p><li>INITIALIZING：资源初始化中</li><li>RUNNING：运行中，可正常使用的状态</li><li>UNUSABLE：禁用，不可用</li><li>OVERDUE：资源过期</li>
    */
   Status?: string
   /**
-   * 所属地域。
-当前支持ap-shanghai
+   * <p>所属地域。<br>当前支持ap-shanghai</p>
    */
   Region?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
 }
@@ -5022,6 +5017,11 @@ EMAIL：邮箱登录
 }
 
 /**
+ * DescribeEnvInfo请求参数结构体
+ */
+export type DescribeEnvInfoRequest = null
+
+/**
  * 自定义短信服务商模板配置
  */
 export interface SMSProviderTemplateConfig {
@@ -6799,6 +6799,16 @@ export interface CreateAIModelRequest {
    * <p>模型密钥</p>
    */
   Secret?: AIModelSecret
+}
+
+/**
+ * DescribeEnvInfo返回参数结构体
+ */
+export interface DescribeEnvInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

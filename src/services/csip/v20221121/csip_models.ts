@@ -1204,6 +1204,10 @@ export interface VPRExplainDimensionItem {
    * <p>标签描述</p>
    */
   Remark?: string
+  /**
+   * <p>危害等级</p><p>枚举值：</p><ul><li>LOW： 低危</li><li>MEDIUM： 中危</li><li>HIGH： 高危</li><li>CRITICAL： 严重</li></ul>
+   */
+  Level?: string
 }
 
 /**
@@ -1859,7 +1863,7 @@ export interface VulFixSummaryItem {
    */
   NeedReboot?: boolean
   /**
-   * <p>是否支持一键修复true-支持 false-不支持</p>
+   * <p>是否支持一键修复</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
    */
   FixSwitch?: boolean
 }
@@ -2950,6 +2954,18 @@ false：未收录
    * <p>漏洞影响产品</p>
    */
   AffectVendorProduct?: Array<VulVendorProduct>
+  /**
+   * <p>VPR暴露面信息</p>
+   */
+  VPRExplainInfo?: VPRExplainInfo
+  /**
+   * <p>最近扫描任务id(应急漏洞)</p>
+   */
+  ScanTaskId?: number
+  /**
+   * <p>影响资产数(应急漏洞)</p>
+   */
+  AffectAsset?: number
 }
 
 /**
@@ -5873,6 +5889,14 @@ export interface HostVulRisk {
    * <p>漏洞详细信息</p>
    */
   VulDetail?: VulDetailInfo
+  /**
+   * <p>修复任务ID</p>
+   */
+  FixTaskId?: string
+  /**
+   * <p>当前用户可见范围内存在至少一台支持自动修复的主机时为 1，否则为 0</p><p>单位：1</p>
+   */
+  SupportAutoFix?: number
 }
 
 /**
@@ -12295,59 +12319,89 @@ export interface TaskAdvanceCFG {
  */
 export interface KBUpdateMachineItem {
   /**
-   * <p>KB补丁ID</p>
+   * KB补丁ID
    */
   KBId?: number
   /**
-   * <p>主机实例ID</p>
+   * 主机实例ID
    */
   InstanceId?: string
   /**
-   * <p>主机名称</p>
+   * 主机名称
    */
   MachineName?: string
   /**
-   * <p>主机IP</p>
+   * 主机IP
    */
   MachineIp?: string
   /**
-   * <p>公网IP</p>
+   * 公网IP
    */
   PublicIp?: string
   /**
-   * <p>操作系统名称</p>
+   * 操作系统名称
    */
   OsName?: string
   /**
-   * <p>主机在线状态<br>枚举值：<br>ONLINE：在线<br>OFFLINE：离线</p>
+   * 主机在线状态
+枚举值：
+ONLINE：在线
+OFFLINE：离线
    */
   MachineStatus?: string
   /**
-   * <p>是否支持自动更新补丁<br>枚举值：<br>0：不支持<br>1：支持</p>
+   * 主机运行状态
+枚举值：
+RUNNING：运行中
+STOPPED：已停止
+EXPIRED：待回收
+   */
+  HostStatus?: string
+  /**
+   * 是否支持自动更新补丁
+枚举值：
+0：不支持
+1：支持
    */
   SupportAutoFix?: number
   /**
-   * <p>当前修复状态<br>枚举值：<br>0：未修复<br>1：修复中<br>2：修复失败<br>3：修复成功<br>4：修复超时</p>
+   * 当前修复状态
+枚举值：
+0：未修复
+1：修复中
+2：修复失败
+3：修复成功
+4：修复超时
    */
   FixStatus?: number
   /**
-   * <p>最近一次修复时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
+   * 最近一次修复时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
    */
   LatestFixTime?: string
   /**
-   * <p>不可修复原因，SupportAutoFix为0时返回</p>
+   * 不可修复原因，SupportAutoFix为0时返回
    */
   NotFixableReason?: string
   /**
-   * <p>资产标签列表</p>
+   * 不可修复原因关联动作，SupportAutoFix为0且存在可引导动作时返回
+   */
+  NotFixableAction?: VulFixableMachineAction
+  /**
+   * 资产标签列表
    */
   TagItems?: Array<MiniTagItem>
   /**
-   * <p>所属账号AppId</p>
+   * 所属账号AppId
    */
   AppId?: number
   /**
-   * <p>付费版本信息<br>枚举值：<br>BASIC：基础版<br>PRO：专业版<br>ULTIMATE：旗舰版</p>
+   * 付费版本信息
+枚举值：
+BASIC：基础版
+PRO：专业版
+ULTIMATE：旗舰版
+PRO_LH：轻量版
    */
   PayVersion?: string
 }
@@ -18732,6 +18786,23 @@ export interface DescribeExposeAssetCategoryRequest {
 }
 
 /**
+ * 不可修复原因关联动作
+ */
+export interface VulFixableMachineAction {
+  /**
+   * 动作类型
+枚举值：
+UPGRADE_PROTECTION：升级防护
+REINSTALL_CLIENT：重新安装客户端
+   */
+  ActionType?: string
+  /**
+   * 动作按钮文案
+   */
+  ActionText?: string
+}
+
+/**
  * 基线策略
  */
 export interface BaselinePolicy {
@@ -20043,6 +20114,10 @@ export interface VulFixableMachineItem {
    */
   MachineStatus?: string
   /**
+   * <p>主机运行状态</p><p>枚举值：</p><ul><li>RUNNING： 运行中</li><li>STOPPED： 已停止</li><li>EXPIRED： 待回收</li></ul>
+   */
+  HostStatus?: string
+  /**
    * <p>是否支持自动修复<br>枚举值：<br>0：不支持<br>1：支持</p>
    */
   SupportAutoFix?: number
@@ -20058,6 +20133,14 @@ export interface VulFixableMachineItem {
    * <p>不可修复原因，SupportAutoFix为0时返回</p>
    */
   NotFixableReason?: string
+  /**
+   * <p>不可修复原因码，SupportAutoFix为0时返回<br>枚举值：<br>BASIC_VERSION：基础版主机不支持一键修复<br>HOST_STOPPED：主机已关机<br>CLIENT_OFFLINE：主机防护客户端已离线<br>PATCH_UNAVAILABLE：官方已停止发布该系统版本的安全补丁<br>SOURCE_COMPILED：源码编译安装，不支持一键修复</p>
+   */
+  NotFixableReasonCode?: string
+  /**
+   * <p>不可修复原因关联动作，SupportAutoFix为0且存在可引导动作时返回</p>
+   */
+  NotFixableAction?: VulFixableMachineAction
   /**
    * <p>修复命令列表，SupportAutoFix为1时返回</p>
    */
@@ -29391,7 +29474,7 @@ export interface VulHostBriefInfo {
    */
   PrivateIP?: string
   /**
-   * <p>防护版本<br>枚举值：<br>NONE：无防护<br>BASIC：基础版<br>PRO：专业版<br>ULTIMATE：旗舰版<br>PRO_LH：轻量版</p>
+   * <p>防护版本枚举值 BASIC：基础版PRO：专业版ULTIMATE：旗舰版PRO_LH：轻量版</p>
    */
   DefendVersion?: string
   /**
@@ -29403,7 +29486,7 @@ export interface VulHostBriefInfo {
    */
   Account?: AccountBriefInfo
   /**
-   * <p>云主机实例状态<br>枚举值：<br>RUNNING：运行中<br>STOPPED：已停止<br>UNKNOWN：未知</p>
+   * <p>云主机实例状态</p><p>枚举值：</p><ul><li>RUNNING： 运行中</li><li>STOPPED： 已停止</li><li>EXPIRED： 待回收</li></ul>
    */
   InstanceStatus?: string
   /**
@@ -29426,6 +29509,10 @@ export interface VulHostBriefInfo {
    * <p>云上标签列表（云资产侧 Tag）</p>
    */
   CloudTag?: Array<Tag>
+  /**
+   * <p>VPR评级解释卡片</p>
+   */
+  VPRExplainInfo?: VPRExplainInfo
 }
 
 /**
@@ -33239,7 +33326,7 @@ export interface HostKBRisk {
    */
   EffectHostCount?: number
   /**
-   * <p>最近扫描时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ</p>
+   * <p>最近扫描时间<br>参数格式：YYYY-MM-DD HH:mm:ss</p>
    */
   LatestScanTime?: string
   /**
@@ -33250,6 +33337,14 @@ export interface HostKBRisk {
    * <p>修复状态<br>枚举值：<br>PENDING：待修复<br>SCANNING：扫描中<br>FIXED：已修复<br>IGNORED：已加白<br>FIXING：修复中<br>FIX_FAILED：修复失败</p>
    */
   RiskStatus?: string
+  /**
+   * <p>是否最新补丁</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  IsNew?: boolean
+  /**
+   * <p>修复任务id</p>
+   */
+  FixTaskId?: string
 }
 
 /**
@@ -51632,6 +51727,22 @@ export interface VulFixTaskDetailItem {
    */
   ExceptionMessage?: string
   /**
+   * <p>结构化错误码（如 VF-INS-002、VF-AG-013）</p>
+   */
+  ErrorCode?: string
+  /**
+   * <p>结构化失败原因</p>
+   */
+  ErrorReason?: string
+  /**
+   * <p>结构化解决方案</p>
+   */
+  ErrorSolution?: string
+  /**
+   * <p>原始错误信息（不做翻译）</p>
+   */
+  RawErrorMessage?: string
+  /**
    * <p>修复启动时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
    */
   StartTime?: string
@@ -51651,6 +51762,14 @@ export interface VulFixTaskDetailItem {
    * <p>快照创建失败原因（当 SnapshotStatus=3 时有值）</p>
    */
   SnapshotFailReason?: string
+  /**
+   * <p>机器类型</p><p>枚举值：</p><ul><li>CVM： 腾讯云cvm</li><li>Other： 混合云机器</li></ul>
+   */
+  MachineType?: string
+  /**
+   * <p>快照是否复用</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  SnapshotReused?: boolean
 }
 
 /**
@@ -52713,6 +52832,10 @@ export interface VulFixedItem {
    * <p>VPR评级依据</p>
    */
   VPRExplainInfo?: VPRExplainInfo
+  /**
+   * <p>修复方式：AUTO_FIX-一键修复 MANUAL_FIX-手动修复 </p>
+   */
+  RepairMethod?: string
 }
 
 /**

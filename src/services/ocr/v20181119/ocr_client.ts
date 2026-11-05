@@ -55,7 +55,7 @@ import {
   TextDetectionEn,
   ElectronicFlightTicketFull,
   ClassifyStoreNameRequest,
-  Rect,
+  QueryEnterpriseBasicInfoRequest,
   CustomsPaymentReceipt,
   SingleInvoiceInfo,
   RideHailingDriverLicenseOCRResponse,
@@ -64,6 +64,7 @@ import {
   VatInvoiceItem,
   VehicleRegCertInfo,
   IDCardOCRResponse,
+  QueryEnterpriseBasicInfoResponse,
   FlightItem,
   Value,
   EnterpriseLicenseOCRResponse,
@@ -78,6 +79,7 @@ import {
   TextDetection,
   RecognizeTableOCRResponse,
   VerifyBizLicenseEnterprise3Response,
+  VehicleLicenseOCRRequest,
   QrcodeOCRResponse,
   CustomsDeclaration,
   WaybillObj,
@@ -87,7 +89,7 @@ import {
   VatElectronicItemInfo,
   WordPolygon,
   EnglishOCRRequest,
-  VehicleLicenseOCRRequest,
+  SubmitQuestionSplitJobRequest,
   QuestionSplitOCRResponse,
   TableOCRResponse,
   RecognizeStoreNameRequest,
@@ -304,7 +306,7 @@ import {
   TextDetectResponse,
   CandWord,
   TollInvoice,
-  SubmitQuestionSplitJobRequest,
+  Rect,
   EnterpriseLicenseInfo,
   QrcodeOCRRequest,
   IDCardResult,
@@ -354,162 +356,39 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 产品规划
+     * 题目识别是教育的基础OCR识别能力。可支持扫描、拍照场景的单题题目识别。接口支持印刷体文本、手写体文本及公式的OCR识别和坐标返回，此外，接口还可对题目中的配图位置进行检测并返回坐标位置。适用于智能批改等场景的题目内容识别作为检索输入。
 
-文本图像增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度。
-
-默认接口请求频率限制：10次/秒。
+默认接口请求频率限制：2次/秒。
      */
-  async ImageEnhancement(
-    req: ImageEnhancementRequest,
-    cb?: (error: string, rep: ImageEnhancementResponse) => void
-  ): Promise<ImageEnhancementResponse> {
-    return this.request("ImageEnhancement", req, cb)
+  async QuestionOCR(
+    req: QuestionOCRRequest,
+    cb?: (error: string, rep: QuestionOCRResponse) => void
+  ): Promise<QuestionOCRResponse> {
+    return this.request("QuestionOCR", req, cb)
   }
 
   /**
-     * 试卷切题识别可将整页练习册、试卷或教辅中的题目进行自动切题，并识别出其中的文字内容和坐标位置，新接入客户请注意UseNewModel选择。如果涉及多页试卷录入和单题跨页/跨栏问题可以选择使用[异步试卷切题（提交任务）](https://cloud.tencent.com/document/product/866/137427)
+     * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
 
 默认接口请求频率限制：5次/秒。
      */
-  async QuestionSplitOCR(
-    req: QuestionSplitOCRRequest,
-    cb?: (error: string, rep: QuestionSplitOCRResponse) => void
-  ): Promise<QuestionSplitOCRResponse> {
-    return this.request("QuestionSplitOCR", req, cb)
+  async TextDetect(
+    req: TextDetectRequest,
+    cb?: (error: string, rep: TextDetectResponse) => void
+  ): Promise<TextDetectResponse> {
+    return this.request("TextDetect", req, cb)
   }
 
   /**
-   * 支持对输入图的内容进行判断、分类以及总结；支持用户对通用文字识别输出结构进行自定义。
-   */
-  async RecognizeAgent(
-    req: RecognizeAgentRequest,
-    cb?: (error: string, rep: RecognizeAgentResponse) => void
-  ): Promise<RecognizeAgentResponse> {
-    return this.request("RecognizeAgent", req, cb)
-  }
-
-  /**
-     * 本接口支持智能化识别各类企业登记证书、许可证书、企业执照、三证合一类证书，结构化输出统一社会信用代码、公司名称、法定代表人、公司地址、注册资金、企业类型、经营范围、成立日期、有效期、开办资金、经费来源、举办单位等关键字段。
+     * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
 
 默认接口请求频率限制：5次/秒。
      */
-  async EnterpriseLicenseOCR(
-    req: EnterpriseLicenseOCRRequest,
-    cb?: (error: string, rep: EnterpriseLicenseOCRResponse) => void
-  ): Promise<EnterpriseLicenseOCRResponse> {
-    return this.request("EnterpriseLicenseOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持中英文名片各字段的自动定位与识别，包含姓名、电话、手机号、邮箱、公司、部门、职位、网址、地址、QQ、微信、MSN等。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async BusinessCardOCR(
-    req: BusinessCardOCRRequest,
-    cb?: (error: string, rep: BusinessCardOCRResponse) => void
-  ): Promise<BusinessCardOCRResponse> {
-    return this.request("BusinessCardOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
-
-另外，本接口还支持多种扩展能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备7种告警功能，如下表所示。
-
-重要提醒：本产品告警功能依托AI检测技术，不可作为审核的唯一依据，应用前请做好效果测试。
-
-
-<table style="width:650px">
-      <thead>
-        <tr>
-       <th width="150">扩展能力</th>
-          <th width="500">能力项</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td rowspan="2">裁剪功能</td>
-          <td>身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）</td>
-        </tr>
-        <tr>
-          <td>人像照片裁剪（自动抠取身份证头像区域）</td>
-        </tr>
-        <tr>
-          <td rowspan="9">告警功能</td>
-        </tr>
-        <tr>
-         <td>身份证有效日期不合法告警</td>
-        </tr> 
-        <tr>
-         <td>身份证边框不完整告警</td>
-        </tr>
-        <tr>
-          <td>身份证复印件告警</td>
-        </tr>
-        <tr>
-          <td>身份证翻拍告警</td>
-        </tr>
-          <tr>
-          <td>身份证框内遮挡告警</td>
-        </tr>
-         <tr>
-          <td>临时身份证告警</td>
-        </tr>
-         <tr>
-          <td>身份证疑似存在PS痕迹告警</td>
-        </tr>
-          <tr>
-          <td>图片模糊告警（可根据图片质量分数判断）</td>
-        </tr>
-      </tbody>
-    </table>
-
-默认接口请求频率限制：20次/秒。
-     */
-  async IDCardOCR(
-    req: IDCardOCRRequest,
-    cb?: (error: string, rep: IDCardOCRResponse) => void
-  ): Promise<IDCardOCRResponse> {
-    return this.request("IDCardOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持马来西亚身份证识别，识别字段包括身份证号、姓名、性别、地址；具备身份证人像照片的裁剪功能和翻拍、复印件告警功能。
-本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-     */
-  async MLIDCardOCR(
-    req: MLIDCardOCRRequest,
-    cb?: (error: string, rep: MLIDCardOCRResponse) => void
-  ): Promise<MLIDCardOCRResponse> {
-    return this.request("MLIDCardOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、全电发票、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票、通用机打电子发票（广东和浙江）。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async VatInvoiceVerifyNew(
-    req: VatInvoiceVerifyNewRequest,
-    cb?: (error: string, rep: VatInvoiceVerifyNewResponse) => void
-  ): Promise<VatInvoiceVerifyNewResponse> {
-    return this.request("VatInvoiceVerifyNew", req, cb)
-  }
-
-  /**
-     * <b>此接口为护照识别（中国大陆地区护照）的旧版本服务，不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/37657">护照识别（多国多地区护照）</a>。</b>
-
-本接口支持中国大陆地区护照个人资料页多个字段的检测与识别。已支持字段包括英文姓名、中文姓名、国家码、护照号、出生地、出生日期、国籍英文、性别英文、有效期、签发地点英文、签发日期、持证人签名、护照机读码（MRZ码）等。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async PassportOCR(
-    req: PassportOCRRequest,
-    cb?: (error: string, rep: PassportOCRResponse) => void
-  ): Promise<PassportOCRResponse> {
-    return this.request("PassportOCR", req, cb)
+  async QrcodeOCR(
+    req: QrcodeOCRRequest,
+    cb?: (error: string, rep: QrcodeOCRResponse) => void
+  ): Promise<QrcodeOCRResponse> {
+    return this.request("QrcodeOCR", req, cb)
   }
 
   /**
@@ -528,53 +407,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GeneralAccurateOCRResponse) => void
   ): Promise<GeneralAccurateOCRResponse> {
     return this.request("GeneralAccurateOCR", req, cb)
-  }
-
-  /**
-     * 提供比对校验企业名称、统一社会信用代码、法人姓名、注册登记证件号码一致性的服务，助力快速核验企业资质。
-注意：
-存在个别特殊情况下核验结果不准确，请选用前知悉；
-按周更新企业信息变更情况，如遇到未及时更新的情况，可联系在线客服转产品团队进行人工处理。
-     */
-  async VerifyBizLicenseEnterprise4(
-    req: VerifyBizLicenseEnterprise4Request,
-    cb?: (error: string, rep: VerifyBizLicenseEnterprise4Response) => void
-  ): Promise<VerifyBizLicenseEnterprise4Response> {
-    return this.request("VerifyBizLicenseEnterprise4", req, cb)
-  }
-
-  /**
-     * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async QrcodeOCR(
-    req: QrcodeOCRRequest,
-    cb?: (error: string, rep: QrcodeOCRResponse) => void
-  ): Promise<QrcodeOCRResponse> {
-    return this.request("QrcodeOCR", req, cb)
-  }
-
-  /**
-   * 本接口基于多模态向量模型，支持文本、图片、视频及图文混合输入并转换为向量，可用于跨模态检索、RAG 召回、相似度计算与聚类分析等场景。
-   */
-  async GenerateVLEmbedding(
-    req: GenerateVLEmbeddingRequest,
-    cb?: (error: string, rep: GenerateVLEmbeddingResponse) => void
-  ): Promise<GenerateVLEmbeddingResponse> {
-    return this.request("GenerateVLEmbedding", req, cb)
-  }
-
-  /**
-     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。
-
-默认接口请求频率限制：2次/秒。
-     */
-  async RecognizeTableAccurateOCR(
-    req: RecognizeTableAccurateOCRRequest,
-    cb?: (error: string, rep: RecognizeTableAccurateOCRResponse) => void
-  ): Promise<RecognizeTableAccurateOCRResponse> {
-    return this.request("RecognizeTableAccurateOCR", req, cb)
   }
 
   /**
@@ -642,28 +474,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持多张、多类型票据的混合检测和自动分类，返回对应票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票、酒店账单、客运限额发票、购物小票、完税证明共15种票据。
-默认接口请求频率限制：5次/秒。
-     */
-  async MixedInvoiceDetect(
-    req: MixedInvoiceDetectRequest,
-    cb?: (error: string, rep: MixedInvoiceDetectResponse) => void
-  ): Promise<MixedInvoiceDetectResponse> {
-    return this.request("MixedInvoiceDetect", req, cb)
-  }
-
-  /**
-     * 本接口支持图片内车辆识别代号（VIN）的检测和识别。
-默认接口请求频率限制：10次/秒。
-     */
-  async VinOCR(
-    req: VinOCRRequest,
-    cb?: (error: string, rep: VinOCRResponse) => void
-  ): Promise<VinOCRResponse> {
-    return this.request("VinOCR", req, cb)
-  }
-
-  /**
      * 本接口用于识别门头照文字识别结果以及对应分类标签信息
 默认接口请求频率限制：1次/秒
      */
@@ -700,27 +510,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用于试题批改Agent查询任务。主要面向K12的试题批改产品，支持整卷/单题端到端（试卷切题+题目批改+手写坐标回显）处理，主要聚焦的场景包括试题批改（含手写答案）、试题解析（不含手写答案），其中低年级算式批改效果比线上[数学作业批改](https://cloud.tencent.com/document/product/1004)效果更好。精准输出题目、正误判定、答案对比、错误及知识点等结构化评估结果。
+     * 本接口支持火车票全字段的识别，包括编号、出发站、到达站、出发时间、车次、座位号、姓名、票价、席别、身份证号、发票消费类型、序列号、加收票价、手续费、大写金额、售票站、原票价、发票类型、收据号码、是否仅供报销使用等字段的识别。
 
-默认接口请求并发限制：10张/分钟。
+默认接口请求频率限制：5次/秒。
      */
-  async DescribeQuestionMarkAgentJob(
-    req: DescribeQuestionMarkAgentJobRequest,
-    cb?: (error: string, rep: DescribeQuestionMarkAgentJobResponse) => void
-  ): Promise<DescribeQuestionMarkAgentJobResponse> {
-    return this.request("DescribeQuestionMarkAgentJob", req, cb)
-  }
-
-  /**
-     * 本接口支持图片中整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，识别速度更快。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async GeneralFastOCR(
-    req: GeneralFastOCRRequest,
-    cb?: (error: string, rep: GeneralFastOCRResponse) => void
-  ): Promise<GeneralFastOCRResponse> {
-    return this.request("GeneralFastOCR", req, cb)
+  async TrainTicketOCR(
+    req: TrainTicketOCRRequest,
+    cb?: (error: string, rep: TrainTicketOCRResponse) => void
+  ): Promise<TrainTicketOCRResponse> {
+    return this.request("TrainTicketOCR", req, cb)
   }
 
   /**
@@ -738,97 +536,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持快速精准识别营业执照上的字段，包括统一社会信用代码、公司名称、主体类型、法定代表人、注册资本、组成形式、成立日期、营业期限和经营范围等字段。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async BizLicenseOCR(
-    req: BizLicenseOCRRequest,
-    cb?: (error: string, rep: BizLicenseOCRResponse) => void
-  ): Promise<BizLicenseOCRResponse> {
-    return this.request("BizLicenseOCR", req, cb)
-  }
-
-  /**
-     * <b>此接口为通用手写体识别的旧版本服务，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/34937">通用印刷体识别(高精度)识别服务</a>。</b>
-
-本接口支持图片内手写体文字的检测和识别，针对手写字体无规则、字迹潦草、模糊等特点进行了识别能力的增强。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async GeneralHandwritingOCR(
-    req: GeneralHandwritingOCRRequest,
-    cb?: (error: string, rep: GeneralHandwritingOCRResponse) => void
-  ): Promise<GeneralHandwritingOCRResponse> {
-    return this.request("GeneralHandwritingOCR", req, cb)
-  }
-
-  /**
-     * 题目识别是教育的基础OCR识别能力。可支持扫描、拍照场景的单题题目识别。接口支持印刷体文本、手写体文本及公式的OCR识别和坐标返回，此外，接口还可对题目中的配图位置进行检测并返回坐标位置。适用于智能批改等场景的题目内容识别作为检索输入。
-
-默认接口请求频率限制：2次/秒。
-     */
-  async QuestionOCR(
-    req: QuestionOCRRequest,
-    cb?: (error: string, rep: QuestionOCRResponse) => void
-  ): Promise<QuestionOCRResponse> {
-    return this.request("QuestionOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持识别并提取制式卡证、票据、表单等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。点击[立即体验](https://ocrdemo.cloud.tencent.com/?action=ExtractDocBasic)。
-
-接口别名：SmartStructuralOCRV2
-
-默认接口请求频率限制：5次/秒。
-     */
-  async ExtractDocBasic(
-    req: ExtractDocBasicRequest,
-    cb?: (error: string, rep: ExtractDocBasicResponse) => void
-  ): Promise<ExtractDocBasicResponse> {
-    return this.request("ExtractDocBasic", req, cb)
-  }
-
-  /**
-   * 模型参数更大，速度更慢。推荐场景：可以接受异步（超过30s返回），样本输入输出token大于2000，长文本类文档建议用异步模型。需要 SubmitExtractDocAgentJob（提交任务）、DescribeExtractDocAgentJob（查询任务）两个接口配套使用，计费发生在提交任务后。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
+   * 提供针对特定场景（如商户门头照、车牌等）图片的PS篡改、AIGC合成、图片质量检测能力，可应用于业务流程中对特定场景图片真实性、有效性校验的场景。
    */
-  async SubmitExtractDocAgentJob(
-    req: SubmitExtractDocAgentJobRequest,
-    cb?: (error: string, rep: SubmitExtractDocAgentJobResponse) => void
-  ): Promise<SubmitExtractDocAgentJobResponse> {
-    return this.request("SubmitExtractDocAgentJob", req, cb)
-  }
-
-  /**
-     * 本接口支持火车票全字段的识别，包括编号、出发站、到达站、出发时间、车次、座位号、姓名、票价、席别、身份证号、发票消费类型、序列号、加收票价、手续费、大写金额、售票站、原票价、发票类型、收据号码、是否仅供报销使用等字段的识别。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async TrainTicketOCR(
-    req: TrainTicketOCRRequest,
-    cb?: (error: string, rep: TrainTicketOCRResponse) => void
-  ): Promise<TrainTicketOCRResponse> {
-    return this.request("TrainTicketOCR", req, cb)
-  }
-
-  /**
-   * 本接口调用文本向量模型，将文本转换为数值表示的向量，可用于文本检索、RAG 召回、相似度计算等场景。
-   */
-  async GenerateTextEmbedding(
-    req: GenerateTextEmbeddingRequest,
-    cb?: (error: string, rep: GenerateTextEmbeddingResponse) => void
-  ): Promise<GenerateTextEmbeddingResponse> {
-    return this.request("GenerateTextEmbedding", req, cb)
-  }
-
-  /**
-   * 获取ocr结果
-   */
-  async GetOCRResult(
-    req: GetOCRResultRequest,
-    cb?: (error: string, rep: GetOCRResultResponse) => void
-  ): Promise<GetOCRResultResponse> {
-    return this.request("GetOCRResult", req, cb)
+  async VerifyScenePhoto(
+    req: VerifyScenePhotoRequest,
+    cb?: (error: string, rep: VerifyScenePhotoResponse) => void
+  ): Promise<VerifyScenePhotoResponse> {
+    return this.request("VerifyScenePhoto", req, cb)
   }
 
   /**
@@ -844,141 +558,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供针对特定场景（如商户门头照、车牌等）图片的PS篡改、AIGC合成、图片质量检测能力，可应用于业务流程中对特定场景图片真实性、有效性校验的场景。
-   */
-  async VerifyScenePhoto(
-    req: VerifyScenePhotoRequest,
-    cb?: (error: string, rep: VerifyScenePhotoResponse) => void
-  ): Promise<VerifyScenePhotoResponse> {
-    return this.request("VerifyScenePhoto", req, cb)
-  }
-
-  /**
-     * 本接口支持增值税专用发票、增值税普通发票、增值税电子专票、增值税电子普票、电子发票（普通发票）、电子发票（增值税专用发票）全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段，点击[立即试用](https://cloud.tencent.com/product/ocr)。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async VatInvoiceOCR(
-    req: VatInvoiceOCRRequest,
-    cb?: (error: string, rep: VatInvoiceOCRResponse) => void
-  ): Promise<VatInvoiceOCRResponse> {
-    return this.request("VatInvoiceOCR", req, cb)
-  }
-
-  /**
-     * 模型参数更小，速度更快。推荐场景：实时性要求高（30s以内）并且样本输入输出token2000以内，建议用实时模型。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
-
-默认接口请求频率限制：5次/秒。
-     */
-  async ExtractDocAgent(
-    req: ExtractDocAgentRequest,
-    cb?: (error: string, rep: ExtractDocAgentResponse) => void
-  ): Promise<ExtractDocAgentResponse> {
-    return this.request("ExtractDocAgent", req, cb)
-  }
-
-  /**
-     * 支持通用证照的有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能，支持通用证照的ps伪造检测，可以应用于各种证件信息有效性校验场景。
-
-重要提醒：本产品依托AI检测技术，不可作为审核的唯一依据，应用前请做好效果测试。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async RecognizeGeneralCardWarn(
-    req: RecognizeGeneralCardWarnRequest,
-    cb?: (error: string, rep: RecognizeGeneralCardWarnResponse) => void
-  ): Promise<RecognizeGeneralCardWarnResponse> {
-    return this.request("RecognizeGeneralCardWarn", req, cb)
-  }
-
-  /**
-   * 本接口支持OFD格式的增值税电子普通发票、增值税电子专用发票、电子发票（普通发票）、电子发票（增值税专用发票）、电子发票（铁路电子客票）、电子发票（航空运输电子客票行程单）识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
-   */
-  async VerifyOfdVatInvoiceOCR(
-    req: VerifyOfdVatInvoiceOCRRequest,
-    cb?: (error: string, rep: VerifyOfdVatInvoiceOCRResponse) => void
-  ): Promise<VerifyOfdVatInvoiceOCRResponse> {
-    return this.request("VerifyOfdVatInvoiceOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async WaybillOCR(
-    req: WaybillOCRRequest,
-    cb?: (error: string, rep: WaybillOCRResponse) => void
-  ): Promise<WaybillOCRResponse> {
-    return this.request("WaybillOCR", req, cb)
-  }
-
-  /**
-     * **建议您使用识别效果更好的[通用文字识别（高精度版](https://cloud.tencent.com/document/product/866/34937 )）**
-本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语21种语言，且各种语言均支持与英文混合的文字识别。
-
-适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
-
-产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
-
-通用印刷体识别不同版本的差异如下：
-<table style="width:715px">
-      <thead>
-        <tr>
-          <th style="width:150px"></th>
-          <th style="width:250px">【荐】通用印刷体识别</th>
-          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td> 适用场景</td>
-          <td>适用于所有通用场景的印刷体识别</td>
-          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
-        </tr>
-        <tr>
-          <td>识别准确率</td>
-          <td>96%</td>
-          <td>99%</td>
-        </tr>
-        <tr>
-          <td>价格</td>
-          <td>低</td>
-          <td>中</td>
-        </tr>
-        <tr>
-          <td>支持的语言</td>
-          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语</td>
-          <td>中文、英文、中英文、泰语、印尼语、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、哈萨克语、藏语、阿拉伯语、维吾尔语、捷克语、希腊语、希伯来语、克罗地亚语、波兰语、罗马尼亚语、斯洛伐克语、斯洛文尼亚语、土耳其语、保加利亚语、爱沙尼亚语、拉脱维亚语、立陶宛语、乌尔都文、塞尔维亚文、欧西坦文、毛利文、阿尔巴尼亚文、斯瓦希里文、乌兹别克文、乌克兰文、阿巴扎文、南非荷兰文、威尔士文、冰岛文、库尔德文、达尔瓦文、因古什文、拉克文、莱兹甘文、塔巴萨兰文、沙特阿拉伯文、阿瓦尔文、阿迪赫文、印度-古吉拉特语、印度-印地语、印度-孟加拉语、印度-卡纳达语、印度-马拉亚拉姆语、印度-马拉地语、印度-旁遮普语、印度-泰米尔语、印度-泰卢固语、阿塞拜疆语、波斯尼亚语、加泰罗尼亚语、卢森堡语、马耳他语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语、尼泊尔语、尼瓦尔语、梵语、马其顿语、柯尔克孜语、车臣语、鞑靼语、加利西亚语、马达加斯加语、老挝、巴什基尔文、马里文、奥塞梯文、布里亚特文、楚瓦什文、萨达里文、马加希文、约鲁巴文、巴利文、博杰普尔文、迈蒂利文、孔卡尼文、比哈尔文</td>
-        </tr>
-        <tr>
-          <td>自动语言检测</td>
-          <td>支持</td>
-          <td>中英文支持；其他语种需要调整输入参数</td>
-        </tr>
-        <tr>
-          <td>返回文本行坐标</td>
-          <td>支持</td>
-          <td>支持</td>
-        </tr>
-        <tr>
-          <td>自动旋转纠正</td>
-          <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，返回角度信息</td>
-        </tr>
-      </tbody>
-    </table>
-
-默认接口请求频率限制：20次/秒。
-     */
-  async GeneralBasicOCR(
-    req: GeneralBasicOCRRequest,
-    cb?: (error: string, rep: GeneralBasicOCRResponse) => void
-  ): Promise<GeneralBasicOCRResponse> {
-    return this.request("GeneralBasicOCR", req, cb)
-  }
-
-  /**
      * 本接口支持对卡式港澳台通行证的识别，包括签发地点、签发机关、有效期限、性别、出生日期、英文姓名、姓名、证件号等字段。
 
 默认接口请求频率限制：10次/秒。
@@ -988,383 +567,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PermitOCRResponse) => void
   ): Promise<PermitOCRResponse> {
     return this.request("PermitOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持中英文图片/ PDF内常规表格、无线表格、多表格的检测和识别，支持日文有线表格识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async RecognizeTableOCR(
-    req: RecognizeTableOCRRequest,
-    cb?: (error: string, rep: RecognizeTableOCRResponse) => void
-  ): Promise<RecognizeTableOCRResponse> {
-    return this.request("RecognizeTableOCR", req, cb)
-  }
-
-  /**
-     * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async TextDetect(
-    req: TextDetectRequest,
-    cb?: (error: string, rep: TextDetectResponse) => void
-  ): Promise<TextDetectResponse> {
-    return this.request("TextDetect", req, cb)
-  }
-
-  /**
-     * 本接口专为教育场景设计，可高精度识别中英文手写字符，智能分栏并按阅读顺序分割内容，自动过滤手写与印刷体混排干扰，精准返回词、行、段落及标题的文本与坐标信息。点击[立即体验](https://ocrdemo.cloud.tencent.com/)。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async HandwritingEssayOCR(
-    req: HandwritingEssayOCRRequest,
-    cb?: (error: string, rep: HandwritingEssayOCRResponse) => void
-  ): Promise<HandwritingEssayOCRResponse> {
-    return this.request("HandwritingEssayOCR", req, cb)
-  }
-
-  /**
-   * 基于知识引擎精调模型技术的 Rerank 模型，支持对多路召回的结果进行重排序，根据查询内容与文档切片内容的相关性，按顺序返回每一条文档内容与查询内容的相关性分数。
-   */
-  async RunRerank(
-    req: RunRerankRequest,
-    cb?: (error: string, rep: RunRerankResponse) => void
-  ): Promise<RunRerankResponse> {
-    return this.request("RunRerank", req, cb)
-  }
-
-  /**
-     * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async SmartStructuralOCR(
-    req: SmartStructuralOCRRequest,
-    cb?: (error: string, rep: SmartStructuralOCRResponse) => void
-  ): Promise<SmartStructuralOCRResponse> {
-    return this.request("SmartStructuralOCR", req, cb)
-  }
-
-  /**
-     * 图像切边矫正增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度，可以作为所有识别场景的图像预处理原子能力，从而提升识别效果。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async CropEnhanceImageOCR(
-    req: CropEnhanceImageOCRRequest,
-    cb?: (error: string, rep: CropEnhanceImageOCRResponse) => void
-  ): Promise<CropEnhanceImageOCRResponse> {
-    return this.request("CropEnhanceImageOCR", req, cb)
-  }
-
-  /**
-     * 用于试题批改Agent提交任务。主要面向K12的试题批改产品，支持整卷/单题端到端（试卷切题+题目批改+手写坐标回显）处理，主要聚焦的场景包括试题批改（含手写答案）、试题解析（不含手写答案），其中低年级算式批改效果比线上[数学作业批改](https://cloud.tencent.com/document/product/1004)效果更好。精准输出题目、正误判定、答案对比、错误及知识点等结构化评估结果。
-
-默认接口请求并发限制：10张/分钟。
-     */
-  async SubmitQuestionMarkAgentJob(
-    req: SubmitQuestionMarkAgentJobRequest,
-    cb?: (error: string, rep: SubmitQuestionMarkAgentJobResponse) => void
-  ): Promise<SubmitQuestionMarkAgentJobResponse> {
-    return this.request("SubmitQuestionMarkAgentJob", req, cb)
-  }
-
-  /**
-     * 本接口支持行驶证主页和副页所有字段的自动定位与识别。
-
-行驶证主页：车牌号码、车辆类型、所有人、住址、使用性质、品牌型号、识别代码、发动机号、注册日期、发证日期、发证单位。
-
-行驶证副页：号牌号码、档案编号、核定载人数、总质量、整备质量、核定载质量、外廓尺寸、准牵引总质量、备注、检验记录。
-
-另外，本接口还支持复印件、翻拍告警功能。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async VehicleLicenseOCR(
-    req: VehicleLicenseOCRRequest,
-    cb?: (error: string, rep: VehicleLicenseOCRResponse) => void
-  ): Promise<VehicleLicenseOCRResponse> {
-    return this.request("VehicleLicenseOCR", req, cb)
-  }
-
-  /**
-     * <b>此接口为表格识别的旧版本服务，不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/49525">新版表格识别</a>。</b>
-
-本接口支持图片内表格文档的检测和识别，返回每个单元格的文字内容，支持将识别结果保存为 Excel 格式。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async TableOCR(
-    req: TableOCRRequest,
-    cb?: (error: string, rep: TableOCRResponse) => void
-  ): Promise<TableOCRResponse> {
-    return this.request("TableOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持网约车驾驶证关键字段的识别，包括姓名、证号、起始日期、截止日期、发证日期。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async RideHailingDriverLicenseOCR(
-    req: RideHailingDriverLicenseOCRRequest,
-    cb?: (error: string, rep: RideHailingDriverLicenseOCRResponse) => void
-  ): Promise<RideHailingDriverLicenseOCRResponse> {
-    return this.request("RideHailingDriverLicenseOCR", req, cb)
-  }
-
-  /**
-     * 用于作文批改Agent查询任务。基于业界领先的千亿参数多模态大模型技术，提供中英文手写作文的精准批改端到端服务。核心功能涵盖错别字智能识别、好词好句点评、错句纠错，并能够在原文中定位至具体段落与字符位置，同时提供详细的修改建议与优化内容。此能力是作业批改场景中的核心模块。
-
-默认接口请求并发限制：2次/分钟。
-     */
-  async DescribeMarkEssayAgentJob(
-    req: DescribeMarkEssayAgentJobRequest,
-    cb?: (error: string, rep: DescribeMarkEssayAgentJobResponse) => void
-  ): Promise<DescribeMarkEssayAgentJobResponse> {
-    return this.request("DescribeMarkEssayAgentJob", req, cb)
-  }
-
-  /**
-     * 本接口支持作业算式题目的自动识别和判分，目前覆盖 K12 学力范围内的 11 种题型，包括加减乘除四则、加减乘除已知结果求运算因子、判断大小、约等于估算、带余数除法、分数四则运算、单位换算、竖式加减法、竖式乘除法、脱式计算和解方程，平均识别精度达到93%以上。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async ArithmeticOCR(
-    req: ArithmeticOCRRequest,
-    cb?: (error: string, rep: ArithmeticOCRResponse) => void
-  ): Promise<ArithmeticOCRResponse> {
-    return this.request("ArithmeticOCR", req, cb)
-  }
-
-  /**
-   * 异步试卷切题识别可将整页练习册、试卷或教辅中的题目进行自动切题，并识别出其中的文字内容和坐标位置，是试卷切题的接口补充。主要解决试卷录题这类多页场景、单题跨页场景。需要 SubmitQuestionSplitOCRJob（提交任务）、DescribeQuestionSplitOCRJob（查询任务）两个接口配套使用，计费发生在提交任务后。
-   */
-  async DescribeQuestionSplitJob(
-    req: DescribeQuestionSplitJobRequest,
-    cb?: (error: string, rep: DescribeQuestionSplitJobResponse) => void
-  ): Promise<DescribeQuestionSplitJobResponse> {
-    return this.request("DescribeQuestionSplitJob", req, cb)
-  }
-
-  /**
-     * 本接口支持不动产权证关键字段的识别，包括使用期限、面积、用途、权利性质、权利类型、坐落、共有情况、权利人、权利其他状况等。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async EstateCertOCR(
-    req: EstateCertOCRRequest,
-    cb?: (error: string, rep: EstateCertOCRResponse) => void
-  ): Promise<EstateCertOCRResponse> {
-    return this.request("EstateCertOCR", req, cb)
-  }
-
-  /**
-     * 支持身份证、护照、名片、银行卡、行驶证、驾驶证、港澳台通行证、户口本、港澳台来往内地通行证、港澳台居住证、不动产证、营业执照的智能分类。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async ClassifyDetectOCR(
-    req: ClassifyDetectOCRRequest,
-    cb?: (error: string, rep: ClassifyDetectOCRResponse) => void
-  ): Promise<ClassifyDetectOCRResponse> {
-    return this.request("ClassifyDetectOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持识别并提取场景复杂、版式多等结构化场景的字段信息。重点场景包括：金融、医疗、交通、出行、保险。点击[立即体验](https://ocrdemo.cloud.tencent.com/?action=ExtractDocMulti)。
-
-接口别名：SmartStructuralPro
-
-默认接口请求频率限制：5次/秒。
-     */
-  async ExtractDocMulti(
-    req: ExtractDocMultiRequest,
-    cb?: (error: string, rep: ExtractDocMultiResponse) => void
-  ): Promise<ExtractDocMultiResponse> {
-    return this.request("ExtractDocMulti", req, cb)
-  }
-
-  /**
-     * 本接口支持各类印章主体内容、印章其他内容及形状识别，支持单图多印章识别，包括发票章、财务章等，适用于公文票据等场景。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async SealOCR(
-    req: SealOCRRequest,
-    cb?: (error: string, rep: SealOCRResponse) => void
-  ): Promise<SealOCRResponse> {
-    return this.request("SealOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持解析多种类型的文档文件（PDF、Word、PPT、Excel、Markdown、TXT、图片、WPS），返回解析后的结果文件下载地址（zip压缩包，包含markdown、json和图片）。
-
-支持的文件大小：PDF/Word/PPT支持150M且300页以内、Excel支持10M以内、TXT支持10M以内、图片文件支持30M以内。
-
-默认接口请求频率限制：5 页并发（注：可同时解析5页，且同步和异步接口共享并发资源，支持增购并发）。
-     */
-  async MultimodalDocParse(
-    req: MultimodalDocParseRequest,
-    cb?: (error: string, rep: MultimodalDocParseResponse) => void
-  ): Promise<MultimodalDocParseResponse> {
-    return this.request("MultimodalDocParse", req, cb)
-  }
-
-  /**
-     * 本接口用于识别门头照分类标签信息
-默认接口请求频率限制：1次/秒
-     */
-  async ClassifyStoreName(
-    req: ClassifyStoreNameRequest,
-    cb?: (error: string, rep: ClassifyStoreNameResponse) => void
-  ): Promise<ClassifyStoreNameResponse> {
-    return this.request("ClassifyStoreName", req, cb)
-  }
-
-  /**
-     * 本接口支持银行回单全字段的识别，包括付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async BankSlipOCR(
-    req: BankSlipOCRRequest,
-    cb?: (error: string, rep: BankSlipOCRResponse) => void
-  ): Promise<BankSlipOCRResponse> {
-    return this.request("BankSlipOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持图像整体文字的检测和识别。支持中文、英文、中英文、数字和特殊字符号的识别，并返回文字框位置和文字内容。
-
-适用于快速文本识别场景。
-
-产品优势：与通用印刷体识别接口相比，精简版虽然在准确率和召回率上有一定损失，但价格更加优惠。
-
-通用印刷体识别不同版本的差异如下：
-<table style="width:715px">
-      <thead>
-        <tr>
-          <th style="width:150px"></th>
-          <th >通用印刷体识别（精简版）</th>
-          <th style="width:200px"><a href="https://cloud.tencent.com/document/product/866/33526">【荐】通用印刷体识别</a></th>
-          <th><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td> 适用场景</td>
-          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
-          <td>适用于所有通用场景的印刷体识别</td>
-          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
-        </tr>
-        <tr>
-          <td>识别准确率</td>
-          <td>91%</td>
-          <td>96%</td>
-          <td>99%</td>
-        </tr>
-        <tr>
-          <td>价格</td>
-          <td>低</td>
-          <td>中</td>
-          <td>高</td>
-        </tr>
-        <tr>
-          <td>支持的语言</td>
-          <td>中文、英文、中英文</td>
-          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>  
-          <td>中文、英文、中英文</td>
-        </tr>
-        <tr>
-          <td>自动语言检测</td>
-          <td>支持</td>
-          <td>支持</td>  
-          <td>支持</td>
-        </tr>
-        <tr>
-          <td>返回文本行坐标</td>
-          <td>支持</td>
-          <td>支持</td>
-          <td>支持</td>
-        </tr>
-        <tr>
-          <td>自动旋转纠正</td>
-          <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，返回角度信息</td>
-        </tr>
-      </tbody>
-    </table>
-
-默认接口请求频率限制：10次/秒。
-     */
-  async GeneralEfficientOCR(
-    req: GeneralEfficientOCRRequest,
-    cb?: (error: string, rep: GeneralEfficientOCRResponse) => void
-  ): Promise<GeneralEfficientOCRResponse> {
-    return this.request("GeneralEfficientOCR", req, cb)
-  }
-
-  /**
-     * 支持广告商品图片内文字的检测和识别，返回文本框位置与文字内容。支持中英文、横排、竖排以及倾斜场景文字识别，支持90度、180度、270度翻转以及倾斜场景文字识别，具有较高召回率和准确率。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async AdvertiseOCR(
-    req: AdvertiseOCRRequest,
-    cb?: (error: string, rep: AdvertiseOCRResponse) => void
-  ): Promise<AdvertiseOCRResponse> {
-    return this.request("AdvertiseOCR", req, cb)
-  }
-
-  /**
-   * 模型参数更大，速度更慢。推荐场景：可以接受异步（超过30s返回），样本输入输出token大于2000，长文本类文档建议用异步模型。需要 SubmitExtractDocAgentJob（提交任务）、DescribeExtractDocAgentJob（查询任务）两个接口配套使用，计费发生在提交任务后。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
-   */
-  async DescribeExtractDocAgentJob(
-    req: DescribeExtractDocAgentJobRequest,
-    cb?: (error: string, rep: DescribeExtractDocAgentJobResponse) => void
-  ): Promise<DescribeExtractDocAgentJobResponse> {
-    return this.request("DescribeExtractDocAgentJob", req, cb)
-  }
-
-  /**
-     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async VehicleRegCertOCR(
-    req: VehicleRegCertOCRRequest,
-    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
-  ): Promise<VehicleRegCertOCRResponse> {
-    return this.request("VehicleRegCertOCR", req, cb)
-  }
-
-  /**
-     * 试卷切题（仅检测）可将整页练习册、试卷或教辅中的题目进行自动切题，返回试题边框的坐标位置。新客户请注意UseNewMode的选择。
-
-默认接口请求频率限制：2次/秒。
-     */
-  async QuestionSplitLayoutOCR(
-    req: QuestionSplitLayoutOCRRequest,
-    cb?: (error: string, rep: QuestionSplitLayoutOCRResponse) => void
-  ): Promise<QuestionSplitLayoutOCRResponse> {
-    return this.request("QuestionSplitLayoutOCR", req, cb)
-  }
-
-  /**
-     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async RecognizeMedicalInvoiceOCR(
-    req: RecognizeMedicalInvoiceOCRRequest,
-    cb?: (error: string, rep: RecognizeMedicalInvoiceOCRResponse) => void
-  ): Promise<RecognizeMedicalInvoiceOCRResponse> {
-    return this.request("RecognizeMedicalInvoiceOCR", req, cb)
   }
 
   /**
@@ -1380,142 +582,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+     * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
 
 默认接口请求频率限制：5次/秒。
      */
-  async ResidenceBookletOCR(
-    req: ResidenceBookletOCRRequest,
-    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
-  ): Promise<ResidenceBookletOCRResponse> {
-    return this.request("ResidenceBookletOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持对中国大陆主流银行卡正反面关键字段的检测与识别，包括卡号、卡类型、卡名字、银行信息、有效期。支持竖排异形卡识别、多角度旋转图片识别。支持对复印件、翻拍件、边框遮挡的银行卡进行告警，可应用于各种银行卡信息有效性校验场景，如金融行业身份认证、第三方支付绑卡等场景。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async BankCardOCR(
-    req: BankCardOCRRequest,
-    cb?: (error: string, rep: BankCardOCRResponse) => void
-  ): Promise<BankCardOCRResponse> {
-    return this.request("BankCardOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持机动车销售统一发票和二手车销售统一发票的识别，包括发票号码、发票代码、合计金额、合计税额等二十多个字段。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async CarInvoiceOCR(
-    req: CarInvoiceOCRRequest,
-    cb?: (error: string, rep: CarInvoiceOCRResponse) => void
-  ): Promise<CarInvoiceOCRResponse> {
-    return this.request("CarInvoiceOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持驾驶证主页和副页所有字段的自动定位与识别，重点字段的识别准确度达到99%以上。
-
-驾驶证主页：包括证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限、发证单位
-
-驾驶证副页：包括证号、姓名、档案编号、记录。
-
-另外，本接口还支持复印件、翻拍告警功能。同时支持识别交管12123 APP发放的电子驾驶证正页。
-
-电子驾驶证正页：包括证号、姓名、性别、国籍、出生日期、初次领证日期、准驾车型、有效期开始时间、有效期截止时间、档案编号、状态、累积记分。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async DriverLicenseOCR(
-    req: DriverLicenseOCRRequest,
-    cb?: (error: string, rep: DriverLicenseOCRResponse) => void
-  ): Promise<DriverLicenseOCRResponse> {
-    return this.request("DriverLicenseOCR", req, cb)
-  }
-
-  /**
-     * 智能识别并结构化港澳台通行证及来往内地通行证正面全部字段，包含中文姓名、英文姓名、性别、出生日期、签发机关、有效期限、证件号、签发地点、签发次数、证件类别。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async MainlandPermitOCR(
-    req: MainlandPermitOCRRequest,
-    cb?: (error: string, rep: MainlandPermitOCRResponse) => void
-  ): Promise<MainlandPermitOCRResponse> {
-    return this.request("MainlandPermitOCR", req, cb)
-  }
-
-  /**
-     * 本功能可自动清除试卷图片中的手写与批改痕迹，并输出洁净的空白试卷。也可以配合集成图像切边矫正技术，能自动定位、拉平试卷区域，从而在最优预处理基础上实现更佳的擦除效果。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async EraseHandwrittenImageOCR(
-    req: EraseHandwrittenImageOCRRequest,
-    cb?: (error: string, rep: EraseHandwrittenImageOCRResponse) => void
-  ): Promise<EraseHandwrittenImageOCRResponse> {
-    return this.request("EraseHandwrittenImageOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持对中国大陆机动车车牌的自动定位和识别，返回地域编号和车牌号码与车牌颜色信息。 
-
-默认接口请求频率限制：10次/秒。
-     */
-  async LicensePlateOCR(
-    req: LicensePlateOCRRequest,
-    cb?: (error: string, rep: LicensePlateOCRResponse) => void
-  ): Promise<LicensePlateOCRResponse> {
-    return this.request("LicensePlateOCR", req, cb)
-  }
-
-  /**
-   * 提供针对卡证（如身份证、营业执照等）图片的PS篡改、AIGC合成、图片质量检测能力，可应用于业务流程中对卡证图片真实性、有效性校验的场景。
-   */
-  async VerifyGeneralCardWarn(
-    req: VerifyGeneralCardWarnRequest,
-    cb?: (error: string, rep: VerifyGeneralCardWarnResponse) => void
-  ): Promise<VerifyGeneralCardWarnResponse> {
-    return this.request("VerifyGeneralCardWarn", req, cb)
-  }
-
-  /**
-   * 获取ocr的token值
-   */
-  async GetOCRToken(
-    req: GetOCRTokenRequest,
-    cb?: (error: string, rep: GetOCRTokenResponse) => void
-  ): Promise<GetOCRTokenResponse> {
-    return this.request("GetOCRToken", req, cb)
-  }
-
-  /**
-     * 本接口为异步多模态文档解析的任务提交接口，支持解析多种类型的文档文件（PDF、Word、PPT、Excel、Markdown、TXT、图片、WPS），服务端异步执行解析任务，提交后返回任务唯一 ID，可通过「异步多模态文档解析（查询任务）」接口获取最终解析结果。需要 SubmitMultimodalDocParseJob（创建任务）、DescribeMultimodalDocParseJob（查询任务）两个接口配套使用，计费发生在提交任务后。
-
-查询任务接口文档地址[：https://cloud.tencent.com/document/product/866/139313](https://cloud.tencent.com/document/product/866/139313)
-
-默认接口请求频率限制：5 页并发（注：可同时解析5页，且同步和异步接口共享并发资源，支持增购并发）。
-     */
-  async SubmitMultimodalDocParseJob(
-    req: SubmitMultimodalDocParseJobRequest,
-    cb?: (error: string, rep: SubmitMultimodalDocParseJobResponse) => void
-  ): Promise<SubmitMultimodalDocParseJobResponse> {
-    return this.request("SubmitMultimodalDocParseJob", req, cb)
-  }
-
-  /**
-     * 提供比对核验企业名称、统一社会信用代码、法人姓名（可选）一致性的服务，助力快速核验企业资质。
-注意：
-存在个别特殊情况下核验结果不准确，请选用前知悉；
-按周更新企业信息变更情况，如遇到未及时更新的情况，可联系在线客服转产品团队进行人工处理。
-     */
-  async VerifyBizLicenseEnterprise3(
-    req: VerifyBizLicenseEnterprise3Request,
-    cb?: (error: string, rep: VerifyBizLicenseEnterprise3Response) => void
-  ): Promise<VerifyBizLicenseEnterprise3Response> {
-    return this.request("VerifyBizLicenseEnterprise3", req, cb)
+  async SmartStructuralOCR(
+    req: SmartStructuralOCRRequest,
+    cb?: (error: string, rep: SmartStructuralOCRResponse) => void
+  ): Promise<SmartStructuralOCRResponse> {
+    return this.request("SmartStructuralOCR", req, cb)
   }
 
   /**
@@ -1531,41 +606,72 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
-
-默认接口请求频率限制：5次/秒。
+     * 本接口用于识别门头照分类标签信息
+默认接口请求频率限制：1次/秒
      */
-  async MixedInvoiceOCR(
-    req: MixedInvoiceOCRRequest,
-    cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
-  ): Promise<MixedInvoiceOCRResponse> {
-    return this.request("MixedInvoiceOCR", req, cb)
+  async ClassifyStoreName(
+    req: ClassifyStoreNameRequest,
+    cb?: (error: string, rep: ClassifyStoreNameResponse) => void
+  ): Promise<ClassifyStoreNameResponse> {
+    return this.request("ClassifyStoreName", req, cb)
   }
 
   /**
-     * 用于查询异步多模态文档解析任务的执行状态与结果，任务执行成功时返回解析结果包的下载地址，任务执行失败时返回对应错误信息。需要 SubmitMultimodalDocParseJob（创建任务）、DescribeMultimodalDocParseJob（查询任务）两个接口配套使用，计费发生在提交任务后。
-
-创建任务接口文档地址[：https://cloud.tencent.com/document/product/866/139312](https://cloud.tencent.com/document/product/866/139312)
-
-默认接口请求频率限制：5 页并发（注：可同时解析5页，且同步和异步接口共享并发资源，支持增购并发）。
-     */
-  async DescribeMultimodalDocParseJob(
-    req: DescribeMultimodalDocParseJobRequest,
-    cb?: (error: string, rep: DescribeMultimodalDocParseJobResponse) => void
-  ): Promise<DescribeMultimodalDocParseJobResponse> {
-    return this.request("DescribeMultimodalDocParseJob", req, cb)
+   * 模型参数更大，速度更慢。推荐场景：可以接受异步（超过30s返回），样本输入输出token大于2000，长文本类文档建议用异步模型。需要 SubmitExtractDocAgentJob（提交任务）、DescribeExtractDocAgentJob（查询任务）两个接口配套使用，计费发生在提交任务后。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
+   */
+  async DescribeExtractDocAgentJob(
+    req: DescribeExtractDocAgentJobRequest,
+    cb?: (error: string, rep: DescribeExtractDocAgentJobResponse) => void
+  ): Promise<DescribeExtractDocAgentJobResponse> {
+    return this.request("DescribeExtractDocAgentJob", req, cb)
   }
 
   /**
-     * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
+     * 用于试题批改Agent提交任务。主要面向K12的试题批改产品，支持整卷/单题端到端（试卷切题+题目批改+手写坐标回显）处理，主要聚焦的场景包括试题批改（含手写答案）、试题解析（不含手写答案），其中低年级算式批改效果比线上[数学作业批改](https://cloud.tencent.com/document/product/1004)效果更好。精准输出题目、正误判定、答案对比、错误及知识点等结构化评估结果。
+
+默认接口请求并发限制：10张/分钟。
+     */
+  async SubmitQuestionMarkAgentJob(
+    req: SubmitQuestionMarkAgentJobRequest,
+    cb?: (error: string, rep: SubmitQuestionMarkAgentJobResponse) => void
+  ): Promise<SubmitQuestionMarkAgentJobResponse> {
+    return this.request("SubmitQuestionMarkAgentJob", req, cb)
+  }
+
+  /**
+     * 本接口支持网约车驾驶证关键字段的识别，包括姓名、证号、起始日期、截止日期、发证日期。
 
 默认接口请求频率限制：5次/秒。
      */
-  async RideHailingTransportLicenseOCR(
-    req: RideHailingTransportLicenseOCRRequest,
-    cb?: (error: string, rep: RideHailingTransportLicenseOCRResponse) => void
-  ): Promise<RideHailingTransportLicenseOCRResponse> {
-    return this.request("RideHailingTransportLicenseOCR", req, cb)
+  async RideHailingDriverLicenseOCR(
+    req: RideHailingDriverLicenseOCRRequest,
+    cb?: (error: string, rep: RideHailingDriverLicenseOCRResponse) => void
+  ): Promise<RideHailingDriverLicenseOCRResponse> {
+    return this.request("RideHailingDriverLicenseOCR", req, cb)
+  }
+
+  /**
+     * 智能识别并结构化港澳台通行证及来往内地通行证正面全部字段，包含中文姓名、英文姓名、性别、出生日期、签发机关、有效期限、证件号、签发地点、签发次数、证件类别。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async MainlandPermitOCR(
+    req: MainlandPermitOCRRequest,
+    cb?: (error: string, rep: MainlandPermitOCRResponse) => void
+  ): Promise<MainlandPermitOCRResponse> {
+    return this.request("MainlandPermitOCR", req, cb)
+  }
+
+  /**
+     * 图像切边矫正增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度，可以作为所有识别场景的图像预处理原子能力，从而提升识别效果。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async CropEnhanceImageOCR(
+    req: CropEnhanceImageOCRRequest,
+    cb?: (error: string, rep: CropEnhanceImageOCRResponse) => void
+  ): Promise<CropEnhanceImageOCRResponse> {
+    return this.request("CropEnhanceImageOCR", req, cb)
   }
 
   /**
@@ -1798,6 +904,523 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、全电发票、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票、通用机打电子发票（广东和浙江）。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async VatInvoiceVerifyNew(
+    req: VatInvoiceVerifyNewRequest,
+    cb?: (error: string, rep: VatInvoiceVerifyNewResponse) => void
+  ): Promise<VatInvoiceVerifyNewResponse> {
+    return this.request("VatInvoiceVerifyNew", req, cb)
+  }
+
+  /**
+   * 本接口基于多模态向量模型，支持文本、图片、视频及图文混合输入并转换为向量，可用于跨模态检索、RAG 召回、相似度计算与聚类分析等场景。
+   */
+  async GenerateVLEmbedding(
+    req: GenerateVLEmbeddingRequest,
+    cb?: (error: string, rep: GenerateVLEmbeddingResponse) => void
+  ): Promise<GenerateVLEmbeddingResponse> {
+    return this.request("GenerateVLEmbedding", req, cb)
+  }
+
+  /**
+     * 本接口支持图片内车辆识别代号（VIN）的检测和识别。
+默认接口请求频率限制：10次/秒。
+     */
+  async VinOCR(
+    req: VinOCRRequest,
+    cb?: (error: string, rep: VinOCRResponse) => void
+  ): Promise<VinOCRResponse> {
+    return this.request("VinOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持行驶证主页和副页所有字段的自动定位与识别。
+
+行驶证主页：车牌号码、车辆类型、所有人、住址、使用性质、品牌型号、识别代码、发动机号、注册日期、发证日期、发证单位。
+
+行驶证副页：号牌号码、档案编号、核定载人数、总质量、整备质量、核定载质量、外廓尺寸、准牵引总质量、备注、检验记录。
+
+另外，本接口还支持复印件、翻拍告警功能。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async VehicleLicenseOCR(
+    req: VehicleLicenseOCRRequest,
+    cb?: (error: string, rep: VehicleLicenseOCRResponse) => void
+  ): Promise<VehicleLicenseOCRResponse> {
+    return this.request("VehicleLicenseOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持快速精准识别营业执照上的字段，包括统一社会信用代码、公司名称、主体类型、法定代表人、注册资本、组成形式、成立日期、营业期限和经营范围等字段。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async BizLicenseOCR(
+    req: BizLicenseOCRRequest,
+    cb?: (error: string, rep: BizLicenseOCRResponse) => void
+  ): Promise<BizLicenseOCRResponse> {
+    return this.request("BizLicenseOCR", req, cb)
+  }
+
+  /**
+     * 支持通用证照的有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能，支持通用证照的ps伪造检测，可以应用于各种证件信息有效性校验场景。
+
+重要提醒：本产品依托AI检测技术，不可作为审核的唯一依据，应用前请做好效果测试。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async RecognizeGeneralCardWarn(
+    req: RecognizeGeneralCardWarnRequest,
+    cb?: (error: string, rep: RecognizeGeneralCardWarnResponse) => void
+  ): Promise<RecognizeGeneralCardWarnResponse> {
+    return this.request("RecognizeGeneralCardWarn", req, cb)
+  }
+
+  /**
+     * **建议您使用识别效果更好的[通用文字识别（高精度版](https://cloud.tencent.com/document/product/866/34937 )）**
+本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语21种语言，且各种语言均支持与英文混合的文字识别。
+
+适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
+
+产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
+
+通用印刷体识别不同版本的差异如下：
+<table style="width:715px">
+      <thead>
+        <tr>
+          <th style="width:150px"></th>
+          <th style="width:250px">【荐】通用印刷体识别</th>
+          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> 适用场景</td>
+          <td>适用于所有通用场景的印刷体识别</td>
+          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
+        </tr>
+        <tr>
+          <td>识别准确率</td>
+          <td>96%</td>
+          <td>99%</td>
+        </tr>
+        <tr>
+          <td>价格</td>
+          <td>低</td>
+          <td>中</td>
+        </tr>
+        <tr>
+          <td>支持的语言</td>
+          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语</td>
+          <td>中文、英文、中英文、泰语、印尼语、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、哈萨克语、藏语、阿拉伯语、维吾尔语、捷克语、希腊语、希伯来语、克罗地亚语、波兰语、罗马尼亚语、斯洛伐克语、斯洛文尼亚语、土耳其语、保加利亚语、爱沙尼亚语、拉脱维亚语、立陶宛语、乌尔都文、塞尔维亚文、欧西坦文、毛利文、阿尔巴尼亚文、斯瓦希里文、乌兹别克文、乌克兰文、阿巴扎文、南非荷兰文、威尔士文、冰岛文、库尔德文、达尔瓦文、因古什文、拉克文、莱兹甘文、塔巴萨兰文、沙特阿拉伯文、阿瓦尔文、阿迪赫文、印度-古吉拉特语、印度-印地语、印度-孟加拉语、印度-卡纳达语、印度-马拉亚拉姆语、印度-马拉地语、印度-旁遮普语、印度-泰米尔语、印度-泰卢固语、阿塞拜疆语、波斯尼亚语、加泰罗尼亚语、卢森堡语、马耳他语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语、尼泊尔语、尼瓦尔语、梵语、马其顿语、柯尔克孜语、车臣语、鞑靼语、加利西亚语、马达加斯加语、老挝、巴什基尔文、马里文、奥塞梯文、布里亚特文、楚瓦什文、萨达里文、马加希文、约鲁巴文、巴利文、博杰普尔文、迈蒂利文、孔卡尼文、比哈尔文</td>
+        </tr>
+        <tr>
+          <td>自动语言检测</td>
+          <td>支持</td>
+          <td>中英文支持；其他语种需要调整输入参数</td>
+        </tr>
+        <tr>
+          <td>返回文本行坐标</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>自动旋转纠正</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+        </tr>
+      </tbody>
+    </table>
+
+默认接口请求频率限制：20次/秒。
+     */
+  async GeneralBasicOCR(
+    req: GeneralBasicOCRRequest,
+    cb?: (error: string, rep: GeneralBasicOCRResponse) => void
+  ): Promise<GeneralBasicOCRResponse> {
+    return this.request("GeneralBasicOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async MixedInvoiceOCR(
+    req: MixedInvoiceOCRRequest,
+    cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
+  ): Promise<MixedInvoiceOCRResponse> {
+    return this.request("MixedInvoiceOCR", req, cb)
+  }
+
+  /**
+     * <b>此接口为表格识别的旧版本服务，不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/49525">新版表格识别</a>。</b>
+
+本接口支持图片内表格文档的检测和识别，返回每个单元格的文字内容，支持将识别结果保存为 Excel 格式。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async TableOCR(
+    req: TableOCRRequest,
+    cb?: (error: string, rep: TableOCRResponse) => void
+  ): Promise<TableOCRResponse> {
+    return this.request("TableOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持作业算式题目的自动识别和判分，目前覆盖 K12 学力范围内的 11 种题型，包括加减乘除四则、加减乘除已知结果求运算因子、判断大小、约等于估算、带余数除法、分数四则运算、单位换算、竖式加减法、竖式乘除法、脱式计算和解方程，平均识别精度达到93%以上。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async ArithmeticOCR(
+    req: ArithmeticOCRRequest,
+    cb?: (error: string, rep: ArithmeticOCRResponse) => void
+  ): Promise<ArithmeticOCRResponse> {
+    return this.request("ArithmeticOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持不动产权证关键字段的识别，包括使用期限、面积、用途、权利性质、权利类型、坐落、共有情况、权利人、权利其他状况等。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async EstateCertOCR(
+    req: EstateCertOCRRequest,
+    cb?: (error: string, rep: EstateCertOCRResponse) => void
+  ): Promise<EstateCertOCRResponse> {
+    return this.request("EstateCertOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持对中国大陆主流银行卡正反面关键字段的检测与识别，包括卡号、卡类型、卡名字、银行信息、有效期。支持竖排异形卡识别、多角度旋转图片识别。支持对复印件、翻拍件、边框遮挡的银行卡进行告警，可应用于各种银行卡信息有效性校验场景，如金融行业身份认证、第三方支付绑卡等场景。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async BankCardOCR(
+    req: BankCardOCRRequest,
+    cb?: (error: string, rep: BankCardOCRResponse) => void
+  ): Promise<BankCardOCRResponse> {
+    return this.request("BankCardOCR", req, cb)
+  }
+
+  /**
+     * 本功能可自动清除试卷图片中的手写与批改痕迹，并输出洁净的空白试卷。也可以配合集成图像切边矫正技术，能自动定位、拉平试卷区域，从而在最优预处理基础上实现更佳的擦除效果。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async EraseHandwrittenImageOCR(
+    req: EraseHandwrittenImageOCRRequest,
+    cb?: (error: string, rep: EraseHandwrittenImageOCRResponse) => void
+  ): Promise<EraseHandwrittenImageOCRResponse> {
+    return this.request("EraseHandwrittenImageOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持对中国大陆机动车车牌的自动定位和识别，返回地域编号和车牌号码与车牌颜色信息。 
+
+默认接口请求频率限制：10次/秒。
+     */
+  async LicensePlateOCR(
+    req: LicensePlateOCRRequest,
+    cb?: (error: string, rep: LicensePlateOCRResponse) => void
+  ): Promise<LicensePlateOCRResponse> {
+    return this.request("LicensePlateOCR", req, cb)
+  }
+
+  /**
+   * 获取ocr的token值
+   */
+  async GetOCRToken(
+    req: GetOCRTokenRequest,
+    cb?: (error: string, rep: GetOCRTokenResponse) => void
+  ): Promise<GetOCRTokenResponse> {
+    return this.request("GetOCRToken", req, cb)
+  }
+
+  /**
+     * 本接口为异步多模态文档解析的任务提交接口，支持解析多种类型的文档文件（PDF、Word、PPT、Excel、Markdown、TXT、图片、WPS），服务端异步执行解析任务，提交后返回任务唯一 ID，可通过「异步多模态文档解析（查询任务）」接口获取最终解析结果。需要 SubmitMultimodalDocParseJob（创建任务）、DescribeMultimodalDocParseJob（查询任务）两个接口配套使用，计费发生在提交任务后。
+
+查询任务接口文档地址[：https://cloud.tencent.com/document/product/866/139313](https://cloud.tencent.com/document/product/866/139313)
+
+默认接口请求频率限制：5 页并发（注：可同时解析5页，且同步和异步接口共享并发资源，支持增购并发）。
+     */
+  async SubmitMultimodalDocParseJob(
+    req: SubmitMultimodalDocParseJobRequest,
+    cb?: (error: string, rep: SubmitMultimodalDocParseJobResponse) => void
+  ): Promise<SubmitMultimodalDocParseJobResponse> {
+    return this.request("SubmitMultimodalDocParseJob", req, cb)
+  }
+
+  /**
+     * 用于查询异步多模态文档解析任务的执行状态与结果，任务执行成功时返回解析结果包的下载地址，任务执行失败时返回对应错误信息。需要 SubmitMultimodalDocParseJob（创建任务）、DescribeMultimodalDocParseJob（查询任务）两个接口配套使用，计费发生在提交任务后。
+
+创建任务接口文档地址[：https://cloud.tencent.com/document/product/866/139312](https://cloud.tencent.com/document/product/866/139312)
+
+默认接口请求频率限制：5 页并发（注：可同时解析5页，且同步和异步接口共享并发资源，支持增购并发）。
+     */
+  async DescribeMultimodalDocParseJob(
+    req: DescribeMultimodalDocParseJobRequest,
+    cb?: (error: string, rep: DescribeMultimodalDocParseJobResponse) => void
+  ): Promise<DescribeMultimodalDocParseJobResponse> {
+    return this.request("DescribeMultimodalDocParseJob", req, cb)
+  }
+
+  /**
+   * 支持对输入图的内容进行判断、分类以及总结；支持用户对通用文字识别输出结构进行自定义。
+   */
+  async RecognizeAgent(
+    req: RecognizeAgentRequest,
+    cb?: (error: string, rep: RecognizeAgentResponse) => void
+  ): Promise<RecognizeAgentResponse> {
+    return this.request("RecognizeAgent", req, cb)
+  }
+
+  /**
+     * 本接口支持智能化识别各类企业登记证书、许可证书、企业执照、三证合一类证书，结构化输出统一社会信用代码、公司名称、法定代表人、公司地址、注册资金、企业类型、经营范围、成立日期、有效期、开办资金、经费来源、举办单位等关键字段。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async EnterpriseLicenseOCR(
+    req: EnterpriseLicenseOCRRequest,
+    cb?: (error: string, rep: EnterpriseLicenseOCRResponse) => void
+  ): Promise<EnterpriseLicenseOCRResponse> {
+    return this.request("EnterpriseLicenseOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持中英文名片各字段的自动定位与识别，包含姓名、电话、手机号、邮箱、公司、部门、职位、网址、地址、QQ、微信、MSN等。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async BusinessCardOCR(
+    req: BusinessCardOCRRequest,
+    cb?: (error: string, rep: BusinessCardOCRResponse) => void
+  ): Promise<BusinessCardOCRResponse> {
+    return this.request("BusinessCardOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
+
+另外，本接口还支持多种扩展能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备7种告警功能，如下表所示。
+
+重要提醒：本产品告警功能依托AI检测技术，不可作为审核的唯一依据，应用前请做好效果测试。
+
+
+<table style="width:650px">
+      <thead>
+        <tr>
+       <th width="150">扩展能力</th>
+          <th width="500">能力项</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">裁剪功能</td>
+          <td>身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）</td>
+        </tr>
+        <tr>
+          <td>人像照片裁剪（自动抠取身份证头像区域）</td>
+        </tr>
+        <tr>
+          <td rowspan="9">告警功能</td>
+        </tr>
+        <tr>
+         <td>身份证有效日期不合法告警</td>
+        </tr> 
+        <tr>
+         <td>身份证边框不完整告警</td>
+        </tr>
+        <tr>
+          <td>身份证复印件告警</td>
+        </tr>
+        <tr>
+          <td>身份证翻拍告警</td>
+        </tr>
+          <tr>
+          <td>身份证框内遮挡告警</td>
+        </tr>
+         <tr>
+          <td>临时身份证告警</td>
+        </tr>
+         <tr>
+          <td>身份证疑似存在PS痕迹告警</td>
+        </tr>
+          <tr>
+          <td>图片模糊告警（可根据图片质量分数判断）</td>
+        </tr>
+      </tbody>
+    </table>
+
+默认接口请求频率限制：20次/秒。
+     */
+  async IDCardOCR(
+    req: IDCardOCRRequest,
+    cb?: (error: string, rep: IDCardOCRResponse) => void
+  ): Promise<IDCardOCRResponse> {
+    return this.request("IDCardOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。
+
+默认接口请求频率限制：2次/秒。
+     */
+  async RecognizeTableAccurateOCR(
+    req: RecognizeTableAccurateOCRRequest,
+    cb?: (error: string, rep: RecognizeTableAccurateOCRResponse) => void
+  ): Promise<RecognizeTableAccurateOCRResponse> {
+    return this.request("RecognizeTableAccurateOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持多张、多类型票据的混合检测和自动分类，返回对应票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票、酒店账单、客运限额发票、购物小票、完税证明共15种票据。
+默认接口请求频率限制：5次/秒。
+     */
+  async MixedInvoiceDetect(
+    req: MixedInvoiceDetectRequest,
+    cb?: (error: string, rep: MixedInvoiceDetectResponse) => void
+  ): Promise<MixedInvoiceDetectResponse> {
+    return this.request("MixedInvoiceDetect", req, cb)
+  }
+
+  /**
+     * 用于试题批改Agent查询任务。主要面向K12的试题批改产品，支持整卷/单题端到端（试卷切题+题目批改+手写坐标回显）处理，主要聚焦的场景包括试题批改（含手写答案）、试题解析（不含手写答案），其中低年级算式批改效果比线上[数学作业批改](https://cloud.tencent.com/document/product/1004)效果更好。精准输出题目、正误判定、答案对比、错误及知识点等结构化评估结果。
+
+默认接口请求并发限制：10张/分钟。
+     */
+  async DescribeQuestionMarkAgentJob(
+    req: DescribeQuestionMarkAgentJobRequest,
+    cb?: (error: string, rep: DescribeQuestionMarkAgentJobResponse) => void
+  ): Promise<DescribeQuestionMarkAgentJobResponse> {
+    return this.request("DescribeQuestionMarkAgentJob", req, cb)
+  }
+
+  /**
+     * <b>此接口为通用手写体识别的旧版本服务，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/34937">通用印刷体识别(高精度)识别服务</a>。</b>
+
+本接口支持图片内手写体文字的检测和识别，针对手写字体无规则、字迹潦草、模糊等特点进行了识别能力的增强。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async GeneralHandwritingOCR(
+    req: GeneralHandwritingOCRRequest,
+    cb?: (error: string, rep: GeneralHandwritingOCRResponse) => void
+  ): Promise<GeneralHandwritingOCRResponse> {
+    return this.request("GeneralHandwritingOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持识别并提取制式卡证、票据、表单等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。点击[立即体验](https://ocrdemo.cloud.tencent.com/?action=ExtractDocBasic)。
+
+接口别名：SmartStructuralOCRV2
+
+默认接口请求频率限制：5次/秒。
+     */
+  async ExtractDocBasic(
+    req: ExtractDocBasicRequest,
+    cb?: (error: string, rep: ExtractDocBasicResponse) => void
+  ): Promise<ExtractDocBasicResponse> {
+    return this.request("ExtractDocBasic", req, cb)
+  }
+
+  /**
+   * 本接口调用文本向量模型，将文本转换为数值表示的向量，可用于文本检索、RAG 召回、相似度计算等场景。
+   */
+  async GenerateTextEmbedding(
+    req: GenerateTextEmbeddingRequest,
+    cb?: (error: string, rep: GenerateTextEmbeddingResponse) => void
+  ): Promise<GenerateTextEmbeddingResponse> {
+    return this.request("GenerateTextEmbedding", req, cb)
+  }
+
+  /**
+   * 获取ocr结果
+   */
+  async GetOCRResult(
+    req: GetOCRResultRequest,
+    cb?: (error: string, rep: GetOCRResultResponse) => void
+  ): Promise<GetOCRResultResponse> {
+    return this.request("GetOCRResult", req, cb)
+  }
+
+  /**
+     * 本接口支持中英文图片/ PDF内常规表格、无线表格、多表格的检测和识别，支持日文有线表格识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async RecognizeTableOCR(
+    req: RecognizeTableOCRRequest,
+    cb?: (error: string, rep: RecognizeTableOCRResponse) => void
+  ): Promise<RecognizeTableOCRResponse> {
+    return this.request("RecognizeTableOCR", req, cb)
+  }
+
+  /**
+     * 模型参数更小，速度更快。推荐场景：实时性要求高（30s以内）并且样本输入输出token2000以内，建议用实时模型。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
+
+默认接口请求频率限制：5次/秒。
+     */
+  async ExtractDocAgent(
+    req: ExtractDocAgentRequest,
+    cb?: (error: string, rep: ExtractDocAgentResponse) => void
+  ): Promise<ExtractDocAgentResponse> {
+    return this.request("ExtractDocAgent", req, cb)
+  }
+
+  /**
+     * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async WaybillOCR(
+    req: WaybillOCRRequest,
+    cb?: (error: string, rep: WaybillOCRResponse) => void
+  ): Promise<WaybillOCRResponse> {
+    return this.request("WaybillOCR", req, cb)
+  }
+
+  /**
+     * 本接口专为教育场景设计，可高精度识别中英文手写字符，智能分栏并按阅读顺序分割内容，自动过滤手写与印刷体混排干扰，精准返回词、行、段落及标题的文本与坐标信息。点击[立即体验](https://ocrdemo.cloud.tencent.com/)。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async HandwritingEssayOCR(
+    req: HandwritingEssayOCRRequest,
+    cb?: (error: string, rep: HandwritingEssayOCRResponse) => void
+  ): Promise<HandwritingEssayOCRResponse> {
+    return this.request("HandwritingEssayOCR", req, cb)
+  }
+
+  /**
+     * 用于作文批改Agent查询任务。基于业界领先的千亿参数多模态大模型技术，提供中英文手写作文的精准批改端到端服务。核心功能涵盖错别字智能识别、好词好句点评、错句纠错，并能够在原文中定位至具体段落与字符位置，同时提供详细的修改建议与优化内容。此能力是作业批改场景中的核心模块。
+
+默认接口请求并发限制：2次/分钟。
+     */
+  async DescribeMarkEssayAgentJob(
+    req: DescribeMarkEssayAgentJobRequest,
+    cb?: (error: string, rep: DescribeMarkEssayAgentJobResponse) => void
+  ): Promise<DescribeMarkEssayAgentJobResponse> {
+    return this.request("DescribeMarkEssayAgentJob", req, cb)
+  }
+
+  /**
+     * 支持身份证、护照、名片、银行卡、行驶证、驾驶证、港澳台通行证、户口本、港澳台来往内地通行证、港澳台居住证、不动产证、营业执照的智能分类。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async ClassifyDetectOCR(
+    req: ClassifyDetectOCRRequest,
+    cb?: (error: string, rep: ClassifyDetectOCRResponse) => void
+  ): Promise<ClassifyDetectOCRResponse> {
+    return this.request("ClassifyDetectOCR", req, cb)
+  }
+
+  /**
      * 接口下线
 
 公式识别是教育的基础OCR识别能力，可支持理科（数学、物理、化学、生物）的印刷体和手写体的公式识别。
@@ -1809,5 +1432,394 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeFormulaOCRResponse) => void
   ): Promise<RecognizeFormulaOCRResponse> {
     return this.request("RecognizeFormulaOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持各类印章主体内容、印章其他内容及形状识别，支持单图多印章识别，包括发票章、财务章等，适用于公文票据等场景。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async SealOCR(
+    req: SealOCRRequest,
+    cb?: (error: string, rep: SealOCRResponse) => void
+  ): Promise<SealOCRResponse> {
+    return this.request("SealOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持解析多种类型的文档文件（PDF、Word、PPT、Excel、Markdown、TXT、图片、WPS），返回解析后的结果文件下载地址（zip压缩包，包含markdown、json和图片）。
+
+支持的文件大小：PDF/Word/PPT支持150M且300页以内、Excel支持10M以内、TXT支持10M以内、图片文件支持30M以内。
+
+默认接口请求频率限制：5 页并发（注：可同时解析5页，且同步和异步接口共享并发资源，支持增购并发）。
+     */
+  async MultimodalDocParse(
+    req: MultimodalDocParseRequest,
+    cb?: (error: string, rep: MultimodalDocParseResponse) => void
+  ): Promise<MultimodalDocParseResponse> {
+    return this.request("MultimodalDocParse", req, cb)
+  }
+
+  /**
+     * 本接口支持银行回单全字段的识别，包括付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async BankSlipOCR(
+    req: BankSlipOCRRequest,
+    cb?: (error: string, rep: BankSlipOCRResponse) => void
+  ): Promise<BankSlipOCRResponse> {
+    return this.request("BankSlipOCR", req, cb)
+  }
+
+  /**
+   * 提供针对卡证（如身份证、营业执照等）图片的PS篡改、AIGC合成、图片质量检测能力，可应用于业务流程中对卡证图片真实性、有效性校验的场景。
+   */
+  async VerifyGeneralCardWarn(
+    req: VerifyGeneralCardWarnRequest,
+    cb?: (error: string, rep: VerifyGeneralCardWarnResponse) => void
+  ): Promise<VerifyGeneralCardWarnResponse> {
+    return this.request("VerifyGeneralCardWarn", req, cb)
+  }
+
+  /**
+     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async ResidenceBookletOCR(
+    req: ResidenceBookletOCRRequest,
+    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
+  ): Promise<ResidenceBookletOCRResponse> {
+    return this.request("ResidenceBookletOCR", req, cb)
+  }
+
+  /**
+     * 试卷切题（仅检测）可将整页练习册、试卷或教辅中的题目进行自动切题，返回试题边框的坐标位置。新客户请注意UseNewMode的选择。
+
+默认接口请求频率限制：2次/秒。
+     */
+  async QuestionSplitLayoutOCR(
+    req: QuestionSplitLayoutOCRRequest,
+    cb?: (error: string, rep: QuestionSplitLayoutOCRResponse) => void
+  ): Promise<QuestionSplitLayoutOCRResponse> {
+    return this.request("QuestionSplitLayoutOCR", req, cb)
+  }
+
+  /**
+   * 模型参数更大，速度更慢。推荐场景：可以接受异步（超过30s返回），样本输入输出token大于2000，长文本类文档建议用异步模型。需要 SubmitExtractDocAgentJob（提交任务）、DescribeExtractDocAgentJob（查询任务）两个接口配套使用，计费发生在提交任务后。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
+   */
+  async SubmitExtractDocAgentJob(
+    req: SubmitExtractDocAgentJobRequest,
+    cb?: (error: string, rep: SubmitExtractDocAgentJobResponse) => void
+  ): Promise<SubmitExtractDocAgentJobResponse> {
+    return this.request("SubmitExtractDocAgentJob", req, cb)
+  }
+
+  /**
+   * 本接口支持OFD格式的增值税电子普通发票、增值税电子专用发票、电子发票（普通发票）、电子发票（增值税专用发票）、电子发票（铁路电子客票）、电子发票（航空运输电子客票行程单）识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
+   */
+  async VerifyOfdVatInvoiceOCR(
+    req: VerifyOfdVatInvoiceOCRRequest,
+    cb?: (error: string, rep: VerifyOfdVatInvoiceOCRResponse) => void
+  ): Promise<VerifyOfdVatInvoiceOCRResponse> {
+    return this.request("VerifyOfdVatInvoiceOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持驾驶证主页和副页所有字段的自动定位与识别，重点字段的识别准确度达到99%以上。
+
+驾驶证主页：包括证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限、发证单位
+
+驾驶证副页：包括证号、姓名、档案编号、记录。
+
+另外，本接口还支持复印件、翻拍告警功能。同时支持识别交管12123 APP发放的电子驾驶证正页。
+
+电子驾驶证正页：包括证号、姓名、性别、国籍、出生日期、初次领证日期、准驾车型、有效期开始时间、有效期截止时间、档案编号、状态、累积记分。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async DriverLicenseOCR(
+    req: DriverLicenseOCRRequest,
+    cb?: (error: string, rep: DriverLicenseOCRResponse) => void
+  ): Promise<DriverLicenseOCRResponse> {
+    return this.request("DriverLicenseOCR", req, cb)
+  }
+
+  /**
+     * 提供比对核验企业名称、统一社会信用代码、法人姓名（可选）一致性的服务，助力快速核验企业资质。
+注意：
+存在个别特殊情况下核验结果不准确，请选用前知悉；
+按周更新企业信息变更情况，如遇到未及时更新的情况，可联系在线客服转产品团队进行人工处理。
+     */
+  async VerifyBizLicenseEnterprise3(
+    req: VerifyBizLicenseEnterprise3Request,
+    cb?: (error: string, rep: VerifyBizLicenseEnterprise3Response) => void
+  ): Promise<VerifyBizLicenseEnterprise3Response> {
+    return this.request("VerifyBizLicenseEnterprise3", req, cb)
+  }
+
+  /**
+     * 提供比对校验企业名称、统一社会信用代码、法人姓名、注册登记证件号码一致性的服务，助力快速核验企业资质。
+注意：
+存在个别特殊情况下核验结果不准确，请选用前知悉；
+按周更新企业信息变更情况，如遇到未及时更新的情况，可联系在线客服转产品团队进行人工处理。
+     */
+  async VerifyBizLicenseEnterprise4(
+    req: VerifyBizLicenseEnterprise4Request,
+    cb?: (error: string, rep: VerifyBizLicenseEnterprise4Response) => void
+  ): Promise<VerifyBizLicenseEnterprise4Response> {
+    return this.request("VerifyBizLicenseEnterprise4", req, cb)
+  }
+
+  /**
+     * 产品规划
+
+文本图像增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async ImageEnhancement(
+    req: ImageEnhancementRequest,
+    cb?: (error: string, rep: ImageEnhancementResponse) => void
+  ): Promise<ImageEnhancementResponse> {
+    return this.request("ImageEnhancement", req, cb)
+  }
+
+  /**
+     * 试卷切题识别可将整页练习册、试卷或教辅中的题目进行自动切题，并识别出其中的文字内容和坐标位置，新接入客户请注意UseNewModel选择。如果涉及多页试卷录入和单题跨页/跨栏问题可以选择使用[异步试卷切题（提交任务）](https://cloud.tencent.com/document/product/866/137427)
+
+默认接口请求频率限制：5次/秒。
+     */
+  async QuestionSplitOCR(
+    req: QuestionSplitOCRRequest,
+    cb?: (error: string, rep: QuestionSplitOCRResponse) => void
+  ): Promise<QuestionSplitOCRResponse> {
+    return this.request("QuestionSplitOCR", req, cb)
+  }
+
+  /**
+   * 本接口用于查询企业基本信息。输入企业名称或统一社会信用代码，返回企业名称、统一社会信用代码、法定代表人、登记机关、经营期限、经营状态、经营范围、注册地址、主体类型、成立日期、核准日期、行政区划等企业登记信息。部分出参可能无法查得，具体以实际查询结果为准。
+   */
+  async QueryEnterpriseBasicInfo(
+    req: QueryEnterpriseBasicInfoRequest,
+    cb?: (error: string, rep: QueryEnterpriseBasicInfoResponse) => void
+  ): Promise<QueryEnterpriseBasicInfoResponse> {
+    return this.request("QueryEnterpriseBasicInfo", req, cb)
+  }
+
+  /**
+     * 本接口支持马来西亚身份证识别，识别字段包括身份证号、姓名、性别、地址；具备身份证人像照片的裁剪功能和翻拍、复印件告警功能。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+     */
+  async MLIDCardOCR(
+    req: MLIDCardOCRRequest,
+    cb?: (error: string, rep: MLIDCardOCRResponse) => void
+  ): Promise<MLIDCardOCRResponse> {
+    return this.request("MLIDCardOCR", req, cb)
+  }
+
+  /**
+     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async RecognizeMedicalInvoiceOCR(
+    req: RecognizeMedicalInvoiceOCRRequest,
+    cb?: (error: string, rep: RecognizeMedicalInvoiceOCRResponse) => void
+  ): Promise<RecognizeMedicalInvoiceOCRResponse> {
+    return this.request("RecognizeMedicalInvoiceOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持图片中整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，识别速度更快。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async GeneralFastOCR(
+    req: GeneralFastOCRRequest,
+    cb?: (error: string, rep: GeneralFastOCRResponse) => void
+  ): Promise<GeneralFastOCRResponse> {
+    return this.request("GeneralFastOCR", req, cb)
+  }
+
+  /**
+   * 基于知识引擎精调模型技术的 Rerank 模型，支持对多路召回的结果进行重排序，根据查询内容与文档切片内容的相关性，按顺序返回每一条文档内容与查询内容的相关性分数。
+   */
+  async RunRerank(
+    req: RunRerankRequest,
+    cb?: (error: string, rep: RunRerankResponse) => void
+  ): Promise<RunRerankResponse> {
+    return this.request("RunRerank", req, cb)
+  }
+
+  /**
+     * 本接口支持增值税专用发票、增值税普通发票、增值税电子专票、增值税电子普票、电子发票（普通发票）、电子发票（增值税专用发票）全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段，点击[立即试用](https://cloud.tencent.com/product/ocr)。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async VatInvoiceOCR(
+    req: VatInvoiceOCRRequest,
+    cb?: (error: string, rep: VatInvoiceOCRResponse) => void
+  ): Promise<VatInvoiceOCRResponse> {
+    return this.request("VatInvoiceOCR", req, cb)
+  }
+
+  /**
+   * 异步试卷切题识别可将整页练习册、试卷或教辅中的题目进行自动切题，并识别出其中的文字内容和坐标位置，是试卷切题的接口补充。主要解决试卷录题这类多页场景、单题跨页场景。需要 SubmitQuestionSplitOCRJob（提交任务）、DescribeQuestionSplitOCRJob（查询任务）两个接口配套使用，计费发生在提交任务后。
+   */
+  async DescribeQuestionSplitJob(
+    req: DescribeQuestionSplitJobRequest,
+    cb?: (error: string, rep: DescribeQuestionSplitJobResponse) => void
+  ): Promise<DescribeQuestionSplitJobResponse> {
+    return this.request("DescribeQuestionSplitJob", req, cb)
+  }
+
+  /**
+     * 本接口支持识别并提取场景复杂、版式多等结构化场景的字段信息。重点场景包括：金融、医疗、交通、出行、保险。点击[立即体验](https://ocrdemo.cloud.tencent.com/?action=ExtractDocMulti)。
+
+接口别名：SmartStructuralPro
+
+默认接口请求频率限制：5次/秒。
+     */
+  async ExtractDocMulti(
+    req: ExtractDocMultiRequest,
+    cb?: (error: string, rep: ExtractDocMultiResponse) => void
+  ): Promise<ExtractDocMultiResponse> {
+    return this.request("ExtractDocMulti", req, cb)
+  }
+
+  /**
+     * 本接口支持图像整体文字的检测和识别。支持中文、英文、中英文、数字和特殊字符号的识别，并返回文字框位置和文字内容。
+
+适用于快速文本识别场景。
+
+产品优势：与通用印刷体识别接口相比，精简版虽然在准确率和召回率上有一定损失，但价格更加优惠。
+
+通用印刷体识别不同版本的差异如下：
+<table style="width:715px">
+      <thead>
+        <tr>
+          <th style="width:150px"></th>
+          <th >通用印刷体识别（精简版）</th>
+          <th style="width:200px"><a href="https://cloud.tencent.com/document/product/866/33526">【荐】通用印刷体识别</a></th>
+          <th><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> 适用场景</td>
+          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
+          <td>适用于所有通用场景的印刷体识别</td>
+          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
+        </tr>
+        <tr>
+          <td>识别准确率</td>
+          <td>91%</td>
+          <td>96%</td>
+          <td>99%</td>
+        </tr>
+        <tr>
+          <td>价格</td>
+          <td>低</td>
+          <td>中</td>
+          <td>高</td>
+        </tr>
+        <tr>
+          <td>支持的语言</td>
+          <td>中文、英文、中英文</td>
+          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>  
+          <td>中文、英文、中英文</td>
+        </tr>
+        <tr>
+          <td>自动语言检测</td>
+          <td>支持</td>
+          <td>支持</td>  
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>返回文本行坐标</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>自动旋转纠正</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+        </tr>
+      </tbody>
+    </table>
+
+默认接口请求频率限制：10次/秒。
+     */
+  async GeneralEfficientOCR(
+    req: GeneralEfficientOCRRequest,
+    cb?: (error: string, rep: GeneralEfficientOCRResponse) => void
+  ): Promise<GeneralEfficientOCRResponse> {
+    return this.request("GeneralEfficientOCR", req, cb)
+  }
+
+  /**
+     * 支持广告商品图片内文字的检测和识别，返回文本框位置与文字内容。支持中英文、横排、竖排以及倾斜场景文字识别，支持90度、180度、270度翻转以及倾斜场景文字识别，具有较高召回率和准确率。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async AdvertiseOCR(
+    req: AdvertiseOCRRequest,
+    cb?: (error: string, rep: AdvertiseOCRResponse) => void
+  ): Promise<AdvertiseOCRResponse> {
+    return this.request("AdvertiseOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async VehicleRegCertOCR(
+    req: VehicleRegCertOCRRequest,
+    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
+  ): Promise<VehicleRegCertOCRResponse> {
+    return this.request("VehicleRegCertOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持机动车销售统一发票和二手车销售统一发票的识别，包括发票号码、发票代码、合计金额、合计税额等二十多个字段。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async CarInvoiceOCR(
+    req: CarInvoiceOCRRequest,
+    cb?: (error: string, rep: CarInvoiceOCRResponse) => void
+  ): Promise<CarInvoiceOCRResponse> {
+    return this.request("CarInvoiceOCR", req, cb)
+  }
+
+  /**
+     * <b>此接口为护照识别（中国大陆地区护照）的旧版本服务，不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/37657">护照识别（多国多地区护照）</a>。</b>
+
+本接口支持中国大陆地区护照个人资料页多个字段的检测与识别。已支持字段包括英文姓名、中文姓名、国家码、护照号、出生地、出生日期、国籍英文、性别英文、有效期、签发地点英文、签发日期、持证人签名、护照机读码（MRZ码）等。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async PassportOCR(
+    req: PassportOCRRequest,
+    cb?: (error: string, rep: PassportOCRResponse) => void
+  ): Promise<PassportOCRResponse> {
+    return this.request("PassportOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async RideHailingTransportLicenseOCR(
+    req: RideHailingTransportLicenseOCRRequest,
+    cb?: (error: string, rep: RideHailingTransportLicenseOCRResponse) => void
+  ): Promise<RideHailingTransportLicenseOCRResponse> {
+    return this.request("RideHailingTransportLicenseOCR", req, cb)
   }
 }

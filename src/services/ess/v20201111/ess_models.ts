@@ -246,7 +246,7 @@ export interface DisableUserAutoSignRequest {
    */
   Operator: UserInfo
   /**
-   * <p>“授权签”使用的场景值, 可以选择的场景值如下:<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong> :  电子处方场景</li><li> <strong>OTHER</strong> :  通用场景</li></ul></p>
+   * <p>“授权签”使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景<strong>（需要联系客户经理添加白名单才能使用）</strong></li><li>OTHER： 通用场景</li></ul>
    */
   SceneKey: string
   /**
@@ -2607,7 +2607,7 @@ export interface CreateUserAutoSignEnableUrlRequest {
    */
   Operator: UserInfo
   /**
-   * <p>“授权签”使用的场景值, 可以选择的场景值如下:<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong> :  电子处方场景</li><li> <strong>OTHER</strong> :  通用场景</li></ul></p>
+   * <p>“授权签”使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li><p>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景<strong>（需要联系客户经理添加白名单才能使用）</strong></p></li><li><p>OTHER： 通用场景</p></li></ul>
    */
   SceneKey: string
   /**
@@ -3133,7 +3133,7 @@ export interface DescribePersonCertificateRequest {
    */
   Agent?: Agent
   /**
-   * <p>证书使用场景，可以选择的场景值如下:</p><ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   * <p>证书使用场景，可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景</li><li>OTHER： 通用场景<strong>（需要联系客户经理添加白名单才能使用）</strong></li></ul>
    */
   SceneKey?: string
 }
@@ -5462,7 +5462,7 @@ export interface CreatePersonAuthCertificateImageRequest {
    */
   Agent?: Agent
   /**
-   * <p>“授权签”使用的场景值, 可以选择的场景值如下:<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong> :  电子处方场景</li><li> <strong>OTHER</strong> :  通用场景</li></ul>注: <code>不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN</code></p>
+   * <p>“授权签”使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景</li><li>OTHER： 通用场景<strong>（需要联系客户经理添加白名单才能使用）</strong></li></ul><p>注: <code>不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN</code></p>
    */
   SceneKey?: string
 }
@@ -10345,7 +10345,7 @@ export interface DescribeUserAutoSignStatusRequest {
    */
   Operator: UserInfo
   /**
-   * <p>“授权签”使用的场景值, 可以选择的场景值如下:<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong> :  电子处方场景</li><li> <strong>OTHER</strong> :  通用场景</li></ul></p>
+   * <p>“授权签”使用的场景值, 可以选择的场景值如下:<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong> :  电子处方场景</li><li> <strong>OTHER</strong> :  通用场景</li></ul></p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景<strong>（需要联系客户经理添加白名单才能使用）</strong></li><li>OTHER： 通用场景</li></ul>
    */
   SceneKey: string
   /**
@@ -11813,7 +11813,7 @@ export interface CreateUserAutoSignSealUrlRequest {
    */
   Operator: UserInfo
   /**
-   * <p>“授权签”使用的场景值, 可以选择的场景值如下:<ul><li> <strong>E_PRESCRIPTION_AUTO_SIGN</strong> :  电子处方场景</li><li> <strong>OTHER</strong> :  通用场景</li></ul></p>
+   * <p>“授权签”使用的场景值, 可以选择的场景值如下:</p><p>枚举值：</p><ul><li>E_PRESCRIPTION_AUTO_SIGN： 电子处方场景<strong>（需要联系客户经理添加白名单才能使用）</strong></li><li>OTHER： 通用场景</li></ul>
    */
   SceneKey: string
   /**

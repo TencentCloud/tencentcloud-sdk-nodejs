@@ -297,6 +297,48 @@ export interface AppendDocument {
 }
 
 /**
+ * 会话的归属与保存状态
+ */
+export interface SessionTargetInfo {
+  /**
+   * <p>targetID</p>
+   */
+  TargetId?: string
+  /**
+   * <p>targetType</p>
+   */
+  TargetType?: string
+  /**
+   * <p>target名称</p>
+   */
+  TargetName?: string
+  /**
+   * <p>资源名称</p>
+   */
+  Source?: string
+  /**
+   * <p>最后活跃时间</p><p>参数格式：2026-11-05 14:30:00</p>
+   */
+  LastInteractionTime?: string
+  /**
+   * <p>上下文</p>
+   */
+  SurfaceContext?: SurfaceContext
+  /**
+   * <p>是否保存</p>
+   */
+  Saved?: boolean
+  /**
+   * <p>保存时间</p>
+   */
+  SavedAt?: string
+  /**
+   * <p>是否删除</p>
+   */
+  Deleted?: boolean
+}
+
+/**
  * QueryChunkList返回参数结构体
  */
 export interface QueryChunkListResponse {
@@ -426,6 +468,16 @@ export interface StopChatAIRequest {
    * 实例ID
    */
   InstanceId?: string
+}
+
+/**
+ * 前端宿主环境上下文
+ */
+export interface SurfaceContext {
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
 }
 
 /**
@@ -675,11 +727,11 @@ export interface ModifyChunkResponse {
  */
 export interface DeleteDataAgentSessionResponse {
   /**
-   * 删除的会话ID
+   * <p>删除的会话ID</p>
    */
   SessionId?: string
   /**
-   * 删除的会话ID列表
+   * <p>删除的会话ID列表</p>
    */
   SessionIds?: Array<string>
   /**
@@ -712,6 +764,10 @@ export interface QueryUserSessionDetailResponse {
    * <p>运行中的聊天请求, 返回为json字符串</p>
    */
   RunRecord?: string
+  /**
+   * <p>会话归属信息</p>
+   */
+  SessionTargetInfo?: SessionTargetInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1225,6 +1281,10 @@ export interface QueryUserSessionDetailRequest {
    * <p>实例id</p>
    */
   InstanceId?: string
+  /**
+   * <p>上下文</p>
+   */
+  SurfaceContext?: SurfaceContext
 }
 
 /**
@@ -1246,17 +1306,21 @@ export interface ModifyKnowledgeBaseResponse {
  */
 export interface DeleteDataAgentSessionRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 会话ID
+   * <p>会话ID</p>
    */
   SessionId?: string
   /**
-   * 批量删除 会话id 列表
+   * <p>批量删除 会话id 列表</p>
    */
   SessionIds?: Array<string>
+  /**
+   * <p>上下文</p>
+   */
+  SurfaceContext?: SurfaceContext
 }
 
 /**

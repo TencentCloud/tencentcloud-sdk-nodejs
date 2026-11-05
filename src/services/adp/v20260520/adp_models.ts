@@ -4397,6 +4397,11 @@ export interface App {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileVolumeMountList?: Array<FileVolumeMount>
+  /**
+   * <p>A2A配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2AConfig?: A2AConfig
 }
 
 /**
@@ -7608,6 +7613,10 @@ export interface CreateReleaseRequest {
    * <p>portal配置</p>
    */
   PortalShareConfig?: PortalShareConfig
+  /**
+   * <p>A2A配置</p>
+   */
+  A2AConfig?: A2AConfig
 }
 
 /**
@@ -8163,6 +8172,16 @@ export interface DeleteSkillShareResponse {
 }
 
 /**
+ * A2AConfig
+ */
+export interface A2AConfig {
+  /**
+   * <p>企业共享开关</p>
+   */
+  Enabled?: boolean
+}
+
+/**
  * ModifyCategory返回参数结构体
  */
 export interface ModifyCategoryResponse {
@@ -8237,6 +8256,11 @@ export interface ReleaseSummary {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PortalShareConfig?: PortalShareConfig
+  /**
+   * <p>A2A配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  A2AConfig?: A2AConfig
 }
 
 /**
@@ -8773,7 +8797,7 @@ export interface ConversationFileCollection {
  */
 export interface AgentInput {
   /**
-   * <p>输入来源类型：0 用户输入，3 自定义变量（API参数）</p>
+   * <p>输入来源类型</p><p>枚举值：</p><ul><li>1： 用户输入</li><li>2： 系统变量</li><li>3： 自定义变量（API参数）</li><li>4： 环境变量</li><li>5： 应用变量</li><li>6： 工具参数</li></ul>
    */
   InputType?: number
   /**
@@ -11770,7 +11794,7 @@ export interface DescribeAppRequest {
    */
   Domain?: number
   /**
-   * <p>字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置), FileVolumeMountList(云盘挂载列表)</p>
+   * <p>字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置), FileVolumeMountList(云盘挂载列表), A2AConfig(A2A启用配置)</p>
    */
   FieldMask?: FieldMask
   /**

@@ -43,6 +43,7 @@ import {
   CopyPersonResponse,
   GroupCandidate,
   DeleteFaceResponse,
+  Encryption,
   DeletePersonRequest,
   DeleteFaceRequest,
   ModifyGroupRequest,

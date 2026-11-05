@@ -2577,6 +2577,10 @@ export interface PreCacheImage {
    */
   CachedImageSizeBytes?: number
   /**
+   * <p>镜像预热完成时间</p>
+   */
+  ReadyTime?: string
+  /**
    * <p>该预热镜像最近一次被沙箱实例使用时间</p>
    */
   LastUsedTime?: string
@@ -3426,6 +3430,10 @@ export interface DescribePreCacheImageTaskResponse {
    * <p>镜像预热存储大小</p><p>单位：Byte</p>
    */
   CachedImageSizeBytes?: number
+  /**
+   * <p>镜像预热完成时间</p>
+   */
+  ReadyTime?: string
   /**
    * <p>该预热镜像最近一次被沙箱实例使用时间</p>
    */

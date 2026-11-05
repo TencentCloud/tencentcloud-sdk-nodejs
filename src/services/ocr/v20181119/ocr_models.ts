@@ -1260,25 +1260,17 @@ export interface ClassifyStoreNameRequest {
 }
 
 /**
- * 矩形坐标
+ * QueryEnterpriseBasicInfo请求参数结构体
  */
-export interface Rect {
+export interface QueryEnterpriseBasicInfoRequest {
   /**
-   * <p>左上角x</p>
+   * <p>统一社会信用代码。CreditCode、EntName 必须提供一个，如果都提供，只使用 CreditCode。</p>
    */
-  X?: number
+  CreditCode?: string
   /**
-   * <p>左上角y</p>
+   * <p>企业名称。CreditCode、EntName 必须提供一个，如果都提供，只使用 CreditCode。</p>
    */
-  Y?: number
-  /**
-   * <p>宽度</p><p>单位：px</p>
-   */
-  Width?: number
-  /**
-   * <p>高度</p><p>单位：px</p>
-   */
-  Height?: number
+  EntName?: string
 }
 
 /**
@@ -1545,6 +1537,136 @@ export interface IDCardOCRResponse {
    * <p>反光点覆盖区域详情结果，具体内容请点击左侧链接</p>
    */
   ReflectDetailInfos?: Array<ReflectDetailInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryEnterpriseBasicInfo返回参数结构体
+ */
+export interface QueryEnterpriseBasicInfoResponse {
+  /**
+   * <p>请求状态。<br>枚举值：<br>0：成功，计费；<br>1：系统异常，不计费；<br>2：查询无结果，不计费。</p>
+   */
+  StatusCode?: number
+  /**
+   * <p>统一社会信用代码。</p>
+   */
+  CreditCode?: string
+  /**
+   * <p>企业名称。</p>
+   */
+  EntName?: string
+  /**
+   * <p>主体类型。</p>
+   */
+  Type?: string
+  /**
+   * <p>法人代表。</p>
+   */
+  LrName?: string
+  /**
+   * <p>注册资本。</p>
+   */
+  Capital?: string
+  /**
+   * <p>企业登记住所或注册地址。</p>
+   */
+  Address?: string
+  /**
+   * <p>经营范围。</p>
+   */
+  Business?: string
+  /**
+   * <p>登记机关。</p>
+   */
+  RegistrationAuthority?: string
+  /**
+   * <p>经营状态（标准化），枚举值：<br>1：开业（在营）；<br>2：迁出；<br>3：注销；<br>4：吊销；<br>5：撤销；<br>6：停业；<br>7：撤销登记；<br>0：其他；/：无法查询。</p>
+   */
+  OperatingStatus?: string
+  /**
+   * <p>经营状态（原始值）。</p>
+   */
+  RawOperatingStatus?: string
+  /**
+   * <p>成立日期。</p>
+   */
+  SetDate?: string
+  /**
+   * <p>营业期限：一般包括营业开始时间和结束时间<br>参数格式：yyyy-MM-dd/yyyy-MM-dd<br>无固定期限的格式为：yyyy-MM-dd/<br>部分企业历史数据可能为空，将返回：/<br>无法查询，将返回：/</p>
+   */
+  OperatingPeriod?: string
+  /**
+   * <p>核准日期。</p>
+   */
+  ApprovalDate?: string
+  /**
+   * <p>所在省份。</p>
+   */
+  Province?: string
+  /**
+   * <p>所在省份的行政区划代码。</p>
+   */
+  ProvinceCode?: string
+  /**
+   * <p>所在城市。</p>
+   */
+  City?: string
+  /**
+   * <p>所在城市的行政区划代码。</p>
+   */
+  CityCode?: string
+  /**
+   * <p>所在区县。</p>
+   */
+  District?: string
+  /**
+   * <p>所在区县的行政区划代码。</p>
+   */
+  DistrictCode?: string
+  /**
+   * <p>注册资本币种。</p>
+   */
+  CapitalCurrency?: string
+  /**
+   * <p>组织机构代码。</p>
+   */
+  OrganizationCode?: string
+  /**
+   * <p>企业英文名称。</p>
+   */
+  EnglishName?: string
+  /**
+   * <p>企业曾用名列表。</p>
+   */
+  FormerNames?: Array<string>
+  /**
+   * <p>原注册号。</p>
+   */
+  OriginalRegNum?: string
+  /**
+   * <p>实收资本。</p>
+   */
+  PaidInCapital?: string
+  /**
+   * <p>吊销日期。</p>
+   */
+  RevokeDate?: string
+  /**
+   * <p>吊销原因。</p>
+   */
+  RevokeReason?: string
+  /**
+   * <p>注销日期。</p>
+   */
+  CancellationDate?: string
+  /**
+   * <p>注销原因。</p>
+   */
+  CancellationReason?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1968,6 +2090,33 @@ export interface VerifyBizLicenseEnterprise3Response {
 }
 
 /**
+ * VehicleLicenseOCR请求参数结构体
+ */
+export interface VehicleLicenseOCRRequest {
+  /**
+   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   */
+  ImageUrl?: string
+  /**
+   * FRONT 为行驶证主页正面（有红色印章的一面），
+BACK 为行驶证副页正面（有号码号牌的一面），
+DOUBLE 为行驶证主页正面和副页正面。
+默认值为：FRONT。
+   */
+  CardSide?: string
+  /**
+   * FRONT为行驶证主页正面（有红色印章的一面），BACK 为拖拉机行驶证副页正面识别
+   */
+  TractorCardSide?: string
+}
+
+/**
  * QrcodeOCR返回参数结构体
  */
 export interface QrcodeOCRResponse {
@@ -2273,30 +2422,25 @@ export interface EnglishOCRRequest {
 }
 
 /**
- * VehicleLicenseOCR请求参数结构体
+ * SubmitQuestionSplitJob请求参数结构体
  */
-export interface VehicleLicenseOCRRequest {
+export interface SubmitQuestionSplitJobRequest {
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>批量ImageUrl图片入口。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p><p>入参限制：要求pdf只能有一个url或base64</p>
    */
-  ImageBase64?: string
+  ImageUrlList?: Array<string>
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
-建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * <p>批量base64图片入口。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p><p>入参限制：要求pdf只能有一个url或base64</p>
    */
-  ImageUrl?: string
+  ImageBase64List?: Array<string>
   /**
-   * FRONT 为行驶证主页正面（有红色印章的一面），
-BACK 为行驶证副页正面（有号码号牌的一面），
-DOUBLE 为行驶证主页正面和副页正面。
-默认值为：FRONT。
+   * <p>选择切题模型</p><p>枚举值：</p><ul><li>youtu_crop： 轻量化切题模型，运算速度更快，适合常规切题</li></ul><p>默认值：youtu_crop</p>
    */
-  CardSide?: string
+  ModelType?: string
   /**
-   * FRONT为行驶证主页正面（有红色印章的一面），BACK 为拖拉机行驶证副页正面识别
+   * <p>是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-&gt; ReturnImageUr中l,默认为false不开启</p>
    */
-  TractorCardSide?: string
+  EnableImageCrop?: boolean
 }
 
 /**
@@ -10680,25 +10824,25 @@ export interface TollInvoice {
 }
 
 /**
- * SubmitQuestionSplitJob请求参数结构体
+ * 矩形坐标
  */
-export interface SubmitQuestionSplitJobRequest {
+export interface Rect {
   /**
-   * <p>批量ImageUrl图片入口。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p><p>入参限制：要求pdf只能有一个url或base64</p>
+   * <p>左上角x</p>
    */
-  ImageUrlList?: Array<string>
+  X?: number
   /**
-   * <p>批量base64图片入口。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p><p>入参限制：要求pdf只能有一个url或base64</p>
+   * <p>左上角y</p>
    */
-  ImageBase64List?: Array<string>
+  Y?: number
   /**
-   * <p>选择切题模型</p><p>枚举值：</p><ul><li>youtu_crop： 轻量化切题模型，运算速度更快，适合常规切题</li></ul><p>默认值：youtu_crop</p>
+   * <p>宽度</p><p>单位：px</p>
    */
-  ModelType?: string
+  Width?: number
   /**
-   * <p>是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-&gt; ReturnImageUr中l,默认为false不开启</p>
+   * <p>高度</p><p>单位：px</p>
    */
-  EnableImageCrop?: boolean
+  Height?: number
 }
 
 /**
