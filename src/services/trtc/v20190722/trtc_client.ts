@@ -20,7 +20,6 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeAsyncTextToSpeechRequest,
   ModifyCloudSliceTaskResponse,
-  TimeValue,
   DescribeCloudModerationResponse,
   StartStreamIngestResponse,
   AgentConfig,
@@ -28,6 +27,7 @@ import {
   LiveModerationParams,
   CreatePictureRequest,
   SubscribeModerationUserIds,
+  VoiceConversationTTSConfig,
   AudioEncodeParams,
   DeleteRecognizeVocabV3Request,
   GetRecognizeVocabListV3Response,
@@ -35,25 +35,29 @@ import {
   MixLayout,
   McuVideoParams,
   DescribeTRTCRealTimeScaleDataRequest,
-  StartAIConversationResponse,
+  RegisterTRTCVoicePrintResponse,
   STTConfig,
   Voice,
   DescribeTRTCMarketScaleDataRequest,
   McuLayoutVolume,
   VoiceCloneRequest,
+  VoiceConversationInvokeTTS,
+  StopPublishCdnStreamResponse,
   SliceParams,
   DescribeUserEventRequest,
   DeleteCloudModerationRequest,
   CreateLiveStreamModerationRequest,
-  CreateCloudSliceTaskRequest,
+  DescribeVoiceConversationRequest,
+  VerifyTRTCVoicePrintResponse,
   McuBackgroundCustomRender,
+  VoiceConversationHistoryContent,
   AsyncTextToSpeechRequest,
   DescribeTrtcRoomUsageResponse,
-  TRTCDataResp,
+  DescribeTRTCVoicePrintResponse,
   RegisterVoicePrintRequest,
   TranscriptionUserInfoParams,
   AbnormalEvent,
-  DeleteCloudSliceTaskRequest,
+  DescribeScaleInfoResponse,
   ScaleInfomation,
   AgentParams,
   ControlAIConversationResponse,
@@ -65,7 +69,7 @@ import {
   VideoEncode,
   DeleteRecognizeVocabV3Response,
   StopMCUMixTranscodeByStrRoomIdResponse,
-  PictureInfo,
+  ModifyCloudSliceTaskRequest,
   DescribeCallDetailInfoRequest,
   CreateCloudModerationResponse,
   DescribeTRTCSegmentModerationUsageRequest,
@@ -74,11 +78,16 @@ import {
   McuTencentVod,
   RegisterVoicePrintResponse,
   SourceInfo,
+  UpdateTRTCVoicePrintResponse,
   ModifyPictureRequest,
   WebRecordVideoParams,
+  TRTCVoicePrintItem,
+  VoiceConversationS2SConfig,
   DescribeWebRecordResponse,
   DescribeCloudTranscriptionResponse,
+  VoicePrintInfo,
   DescribeUserInfoRequest,
+  TranscriptionParams,
   DeleteCloudModerationResponse,
   AgoraParam,
   DescribeRelayUsageRequest,
@@ -90,27 +99,30 @@ import {
   DescribeAsyncTextToSpeechResponse,
   TranslationParam,
   CloudStorage,
-  ServerPushText,
+  McuFeedBackRoomParams,
   DescribeTrtcUsageResponse,
   StopAITranscriptionRequest,
-  SetVocabStateV3Response,
+  TimeValue,
   CreateCloudRecordingResponse,
+  VoiceConversationMcpServer,
   RemoveUserRequest,
   DescribeWebRecordRequest,
   AmbientSound,
   CreateRecognizeVocabV3Request,
   DescribeRecordStatisticRequest,
-  DescribeRoomInfoRequest,
+  BatchDeleteTRTCVoicePrintRequest,
   StorageParams,
   CloudVod,
   CloudSliceStorage,
-  DescribeTRTCMarketScaleMetricDataResponse,
+  EncodeParams,
+  WaterMark,
   EmulateMobileParams,
   PronunciationDict,
   DescribeCallDetailInfoResponse,
   DescribeTRTCRealTimeQualityDataResponse,
   McuCustomCrop,
   DescribeTRTCAIRecognitionUsageResponse,
+  TTSConfig,
   DescribeMixTranscodingUsageRequest,
   DescribeTRTCRealTimeQualityDataRequest,
   DescribeStreamIngestResponse,
@@ -119,9 +131,10 @@ import {
   DescribeTRTCMarketQualityDataResponse,
   DescribeVoicePrintResponse,
   SmallVideoLayoutParams,
-  VoicePrintInfo,
+  StartWebRecordResponse,
   StorageFile,
   SubscribeStreamUserIds,
+  DeleteVoiceConversationRequest,
   WaterMarkImage,
   McuUserInfoParams,
   UserMediaStream,
@@ -132,6 +145,7 @@ import {
   StartWebRecordRequest,
   RecordParams,
   DescribeAITranscriptionRequest,
+  UpdateTRTCVoicePrintRequest,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
   DescribeAIConversationResponse,
   AudioFormat,
@@ -140,6 +154,7 @@ import {
   DescribeUserInfoResponse,
   GetRecognizeVocabV3Response,
   RemoveUserByStrRoomIdResponse,
+  VoiceConversationVisionConfig,
   DescribeVoicePrintRequest,
   UpdateStreamIngestResponse,
   StartMCUMixTranscodeRequest,
@@ -151,7 +166,6 @@ import {
   StartMCUMixTranscodeByStrRoomIdResponse,
   TrtcUsage,
   DeleteCloudSliceTaskResponse,
-  DescribeTRTCMarketScaleMetricDataRequest,
   DescribeRelayUsageResponse,
   StartStreamIngestRequest,
   TextToSpeechSSEResponse,
@@ -160,23 +174,26 @@ import {
   ModerationSupplierParam,
   DescribeRecordingUsageRequest,
   ModifyPictureResponse,
-  WaterMark,
+  ControlVoiceConversationResponse,
+  RowValues,
   McuStorageParams,
-  DescribeScaleInfoResponse,
+  DeleteCloudSliceTaskRequest,
   WordItem,
   MixLayoutParams,
-  ModifyCloudSliceTaskRequest,
+  DescribeRoomInfoRequest,
   StopMCUMixTranscodeResponse,
   VoicePrint,
   HotWord,
   CreateAudioModerationSyncResponse,
   DescribeMixTranscodingUsageResponse,
   AsrParam,
-  McuFeedBackRoomParams,
-  SdkAppIdRecordUsage,
+  DeleteTRTCVoicePrintResponse,
+  SetVocabStateV3Response,
+  VoiceConversationInvokeLLM,
   Input,
+  DeleteVoiceConversationResponse,
   AudioEncode,
-  LayoutParams,
+  DescribeCloudRecordingResponse,
   ModerationCheckDetail,
   TTSVoice,
   WaterMarkChar,
@@ -184,18 +201,20 @@ import {
   DeleteLiveStreamModerationRequest,
   DescribeUnusualEventRequest,
   GetRecognizeVocabV3Request,
+  ModifyVoiceConversationRequest,
   DescribeCloudRecordingRequest,
   TencentVod,
   DeleteVoicePrintResponse,
   UsageList,
-  StartWebRecordResponse,
+  DeleteTRTCVoicePrintRequest,
   CreateAudioModerationSyncRequest,
   TRTCDataResult,
-  DescribeCloudRecordingResponse,
+  CreateCloudSliceTaskRequest,
   ModifyCloudModerationRequest,
   RecordUsage,
   CreateCloudRecordingRequest,
   OutputParams,
+  VoiceConversationDialogConfig,
   DeleteCloudRecordingResponse,
   PresetLayoutConfig,
   StartAITranscriptionRequest,
@@ -206,12 +225,13 @@ import {
   StartAIConversationRequest,
   DeletePictureResponse,
   ModifyCloudRecordingRequest,
-  StopAIConversationResponse,
+  VerifyTRTCVoicePrintRequest,
+  CreateVoiceConversationRequest,
   CreateLiveStreamModerationResponse,
   DescribeAIConversationRequest,
   McuAudioParams,
-  RowValues,
-  TranscriptionParam,
+  PictureInfo,
+  DescribeTRTCVoicePrintRequest,
   OneSdkAppIdTranscodeTimeUsagesInfo,
   DismissRoomByStrRoomIdRequest,
   DescribeCloudTranscriptionRequest,
@@ -220,6 +240,7 @@ import {
   DescribeTrtcMcuTranscodeTimeResponse,
   DeleteCloudRecordingRequest,
   DescribePictureRequest,
+  ControlVoiceConversationRequest,
   TTSParam,
   DownloadRecognizeVocabV3Request,
   ModifyCloudModerationResponse,
@@ -227,24 +248,27 @@ import {
   DescribeLiveStreamModerationRequest,
   VideoParams,
   DescribeTRTCSegmentModerationUsageResponse,
+  VoiceConversationConfig,
+  VoiceConversationLLMConfig,
   DescribePictureResponse,
   DescribeTrtcRoomUsageRequest,
   TextToSpeechResponse,
   CreateCloudModerationRequest,
   StopStreamIngestRequest,
   DescribeTrtcMcuTranscodeTimeRequest,
+  VoiceConversationHistoryMessage,
   StopStreamIngestResponse,
   UserInformation,
   AudioSegments,
   DescribeScaleInfoRequest,
   ControlAIConversationRequest,
   DismissRoomByStrRoomIdResponse,
-  StopPublishCdnStreamResponse,
+  SingleSubscribeParams,
   StopPublishCdnStreamRequest,
   DescribeUnusualEventResponse,
   ModifyCloudRecordingResponse,
   Vocab,
-  SingleSubscribeParams,
+  BatchDeleteTRTCVoicePrintResponse,
   CreateCloudTranscriptionRequest,
   AsyncTextToSpeechResponse,
   GetRecognizeVocabListV3Request,
@@ -252,6 +276,7 @@ import {
   DescribeCloudSliceTaskRequest,
   StartMCUMixTranscodeByStrRoomIdRequest,
   SetVocabStateV3Request,
+  RegisterTRTCVoicePrintRequest,
   MixUserInfo,
   DescribeTRTCMarketQualityDataRequest,
   DescribeTRTCRealTimeScaleDataResponse,
@@ -259,48 +284,56 @@ import {
   UpdatePublishCdnStreamRequest,
   InvokeLLM,
   SliceStorageParams,
+  VoicePrintBatchDeleteResult,
   DescribeTRTCDedicatedCloudAccUsageRequest,
+  ModifyVoiceConversationResponse,
+  KeyValueItem,
   VoiceCloneResponse,
   TurnDetection,
   UpdateStreamIngestRequest,
-  TextToSpeechSSERequest,
+  StartAIConversationResponse,
   StopWebRecordResponse,
   TermPair,
   DeletePictureRequest,
-  StopWebRecordRequest,
+  StopAIConversationResponse,
   McuSeiParams,
+  CreateVoiceConversationResponse,
   UpdateVoicePrintRequest,
   StartPublishCdnStreamRequest,
   EventMessage,
   UpdateAIConversationRequest,
   UpdatePublishCdnStreamResponse,
   McuWaterMarkText,
-  TranscriptionParams,
+  DescribeVoiceConversationResponse,
   SeriesInfos,
   RemoveUserByStrRoomIdRequest,
   WaterMarkTimestamp,
   UpdateRecognizeVocabV3Response,
+  TranscriptionParam,
   UpdateRecognizeVocabV3Request,
   MaxVideoUser,
+  LayoutParams,
+  TextToSpeechSSERequest,
   TextToSpeechRequest,
   DescribeStreamIngestRequest,
+  VoiceConversationSTTConfig,
   ImageLocation,
   UpdateVoicePrintResponse,
-  TTSConfig,
-  EncodeParams,
+  StopWebRecordRequest,
+  SdkAppIdRecordUsage,
   DownloadRecognizeVocabV3Response,
   DescribeTRTCDedicatedCloudAccUsageResponse,
   McuPublishCdnParam,
   DescribeTRTCAIRecognitionUsageRequest,
   AudioParams,
   StopAITranscriptionResponse,
-  SeriesInfo,
   CreateRecognizeVocabV3Response,
   McuCloudVod,
   StopMCUMixTranscodeRequest,
   DescribeCloudModerationRequest,
   PublishCdnParams,
   DescribeAITranscriptionResponse,
+  ServerPushText,
   McuWaterMarkParams,
   AbnormalExperience,
   DescribeCloudSliceTaskResponse,
@@ -318,6 +351,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("trtc.tencentcloudapi.com", "2019-07-22", clientConfig)
+  }
+
+  /**
+   * 成功开启对话后，可以使用此接口来停止对话任务。
+   */
+  async DeleteVoiceConversation(
+    req: DeleteVoiceConversationRequest,
+    cb?: (error: string, rep: DeleteVoiceConversationResponse) => void
+  ): Promise<DeleteVoiceConversationResponse> {
+    return this.request("DeleteVoiceConversation", req, cb)
   }
 
   /**
@@ -593,6 +636,21 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
+     * 接口说明：
+对给定 VoiceprintId 做 1:1 声纹验证，返回相似度分值与服务端判决结果。
+
+• 音频要求同 VoiceprintEnroll：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后 ≤ 2MB；PCM 裸数据 10s ≤ 时长 ≤ 45s。
+• 阈值判决完全由服务端裁定（默认 60 分），Score 为字符串保留两位小数，Decision 为 0/1。
+• 不消费声纹配额、不改动底库，仅做比对。
+     */
+  async VerifyTRTCVoicePrint(
+    req: VerifyTRTCVoicePrintRequest,
+    cb?: (error: string, rep: VerifyTRTCVoicePrintResponse) => void
+  ): Promise<VerifyTRTCVoicePrintResponse> {
+    return this.request("VerifyTRTCVoicePrint", req, cb)
+  }
+
+  /**
      * 接口说明：  
 启动一个混流转推任务，将  TRTC 房间的多路音视频流混成一路音视频流，编码后推到直播 CDN 或者回推到 TRTC 房间。也支持不转码直接转推 TRTC 房间的单路流。启动成功后，会返回一个 SdkAppid 维度唯一的任务 Id（TaskId）。您需要保存该 TaskId，后续需要依赖此 TaskId 更新和结束任务。可以参考文档： [功能说明](https://cloud.tencent.com/document/product/647/84721#b9a855f4-e38c-4616-9b07-fc44e0e8282a) 和 [常见问题](https://cloud.tencent.com/document/product/647/62620)
 需要注意的是，TaskId调用时效性是30天，从成功启动转推并获得任务ID后开始计算，超时后无法调用更新和停止等接口，但是转推任务不会停止。最终任务会等所有参与混流转推的主播离开TRTC房间或切换成观众，并且超过MaxIdleTime时长后，自动停止。
@@ -697,6 +755,9 @@ MCU 混流转码费用，请参考文档：[云端混流转码计费说明](http
   /**
      * 通过此接口可以发起 WEB 页面录制任务，在接口参数中指定录制 URL，录制分辨率，录制结果存储等参数。
 因为参数或API逻辑问题会立即返回结果。而因为页面问题，如页面无法访问，会在回调中返回结果，请关注。
+
+> ⚠️注意：
+页面录制服务当前为受限功能，使用前需进行加白申请。请 [提交工单](https://console.cloud.tencent.com/workorder/category?source=1)，审批通过后即可正常使用。
      */
   async StartWebRecord(
     req: StartWebRecordRequest,
@@ -713,6 +774,17 @@ MCU 混流转码费用，请参考文档：[云端混流转码计费说明](http
     cb?: (error: string, rep: StopWebRecordResponse) => void
   ): Promise<StopWebRecordResponse> {
     return this.request("StopWebRecord", req, cb)
+  }
+
+  /**
+     * 接口说明：
+用户通过本接口进行热词表的更新。
+     */
+  async UpdateRecognizeVocabV3(
+    req: UpdateRecognizeVocabV3Request,
+    cb?: (error: string, rep: UpdateRecognizeVocabV3Response) => void
+  ): Promise<UpdateRecognizeVocabV3Response> {
+    return this.request("UpdateRecognizeVocabV3", req, cb)
   }
 
   /**
@@ -808,6 +880,20 @@ MCU 混流转码费用，请参考文档：[云端混流转码计费说明](http
   }
 
   /**
+     * 接口说明：
+按 VoicePrintId 覆盖式更新声纹音频，VoicePrintId 保持不变，只替换底层音频与声纹向量。
+
+• 音频要求同 RegisterTRTCVoicePrint：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后 ≤ 2MB；PCM 裸数据 10s ≤ 时长 ≤ 45s。
+• 按 (AppId, SdkAppId, VoiceprintId) 做数据隔离，仅允许更新自己账号下的声纹。
+     */
+  async UpdateTRTCVoicePrint(
+    req: UpdateTRTCVoicePrintRequest,
+    cb?: (error: string, rep: UpdateTRTCVoicePrintResponse) => void
+  ): Promise<UpdateTRTCVoicePrintResponse> {
+    return this.request("UpdateTRTCVoicePrint", req, cb)
+  }
+
+  /**
      * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
 -视频卡顿率
 -音频卡顿率
@@ -879,14 +965,15 @@ MCU 混流转码费用，请参考文档：[云端混流转码计费说明](http
   }
 
   /**
-     * 接口说明：
-用户通过本接口进行热词表的更新。
+     * 启动AI对话任务，AI通道机器人进入TRTC房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
+
+TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
      */
-  async UpdateRecognizeVocabV3(
-    req: UpdateRecognizeVocabV3Request,
-    cb?: (error: string, rep: UpdateRecognizeVocabV3Response) => void
-  ): Promise<UpdateRecognizeVocabV3Response> {
-    return this.request("UpdateRecognizeVocabV3", req, cb)
+  async StartAIConversation(
+    req: StartAIConversationRequest,
+    cb?: (error: string, rep: StartAIConversationResponse) => void
+  ): Promise<StartAIConversationResponse> {
+    return this.request("StartAIConversation", req, cb)
   }
 
   /**
@@ -919,18 +1006,6 @@ MCU 混流转码费用，请参考文档：[云端混流转码计费说明](http
     cb?: (error: string, rep: TextToSpeechResponse) => void
   ): Promise<TextToSpeechResponse> {
     return this.request("TextToSpeech", req, cb)
-  }
-
-  /**
-     * 启动AI对话任务，AI通道机器人进入TRTC房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
-
-TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
-     */
-  async StartAIConversation(
-    req: StartAIConversationRequest,
-    cb?: (error: string, rep: StartAIConversationResponse) => void
-  ): Promise<StartAIConversationResponse> {
-    return this.request("StartAIConversation", req, cb)
   }
 
   /**
@@ -967,6 +1042,41 @@ TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即�
   }
 
   /**
+   * 成功开启对话后，可以使用此接口来查询对话状态。仅在对话任务进行时有效，对话退出后查询将会返回错误。
+   */
+  async DescribeVoiceConversation(
+    req: DescribeVoiceConversationRequest,
+    cb?: (error: string, rep: DescribeVoiceConversationResponse) => void
+  ): Promise<DescribeVoiceConversationResponse> {
+    return this.request("DescribeVoiceConversation", req, cb)
+  }
+
+  /**
+     * 接口说明：
+批量软删除声纹，单次最多 50 个 VoiceprintId，请求内自动去重。
+
+• 按 (AppId, SdkAppId, VoiceprintId) 做数据隔离，跨租户 ID 会被当作 VoiceprintNotFound 失败项返回。
+• 成功项返回 VoiceprintId，失败项返回 VoiceprintId + ErrorCode + ErrorMessage。
+• 已删除的声纹再次批量删除会计入 FailCount（错误码 FailedOperation.VoiceprintNotFound）。
+     */
+  async BatchDeleteTRTCVoicePrint(
+    req: BatchDeleteTRTCVoicePrintRequest,
+    cb?: (error: string, rep: BatchDeleteTRTCVoicePrintResponse) => void
+  ): Promise<BatchDeleteTRTCVoicePrintResponse> {
+    return this.request("BatchDeleteTRTCVoicePrint", req, cb)
+  }
+
+  /**
+   * 成功开启对话后，可以使用此接口来修改对话任务配置。
+   */
+  async ModifyVoiceConversation(
+    req: ModifyVoiceConversationRequest,
+    cb?: (error: string, rep: ModifyVoiceConversationResponse) => void
+  ): Promise<ModifyVoiceConversationResponse> {
+    return this.request("ModifyVoiceConversation", req, cb)
+  }
+
+  /**
      * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
 userCount：通话人数，
 roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
@@ -981,6 +1091,21 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: DescribeTRTCMarketScaleDataResponse) => void
   ): Promise<DescribeTRTCMarketScaleDataResponse> {
     return this.request("DescribeTRTCMarketScaleData", req, cb)
+  }
+
+  /**
+     * 接口说明：
+按 VoiceprintId 软删除声纹。
+
+• 按 (AppId, SdkAppId, VoiceprintId) 做数据隔离，跨租户 ID 返回 VoiceprintNotFound。
+• 重复删除幂等：对已删除的声纹再次调用仍返回成功。
+• 底层 COS 音频由后台异步清理，删除接口不等待其完成。
+     */
+  async DeleteTRTCVoicePrint(
+    req: DeleteTRTCVoicePrintRequest,
+    cb?: (error: string, rep: DeleteTRTCVoicePrintResponse) => void
+  ): Promise<DeleteTRTCVoicePrintResponse> {
+    return this.request("DeleteTRTCVoicePrint", req, cb)
   }
 
   /**
@@ -1179,22 +1304,53 @@ networkDelay ：网络延迟率。
   }
 
   /**
-     * 云监控monitor接口已下线，trtc同步下线接口
+     * 接口说明：
+用户通过本接口注册一条声纹，后续可用于声纹 1:1 验证。
 
-查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
-userCount：通话人数，
-roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
-peakCurrentChannels：峰值同时在线频道数。
-peakCurrentUsers：峰值同时在线人数。
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
-2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+• 音频要求：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后 ≤ 2MB；PCM 裸数据 10s ≤ 时长 ≤ 45s。
+• 同一 (AppId, SdkAppId, SpeakerId) 重复注册时走 Upsert 语义：旧记录软删 + 新建一行，返回新的 VoiceprintId。业务方需以本次返回的 VoiceprintId 为准更新自己的映射。
+• 单账号声纹数量有上限（由七彩石配置，默认每 (AppId, SdkAppId) 维度限量），达到上限时返回 LimitExceeded.VoiceprintFull；覆盖场景净增为 0，不受上限影响。
      */
-  async DescribeTRTCMarketScaleMetricData(
-    req: DescribeTRTCMarketScaleMetricDataRequest,
-    cb?: (error: string, rep: DescribeTRTCMarketScaleMetricDataResponse) => void
-  ): Promise<DescribeTRTCMarketScaleMetricDataResponse> {
-    return this.request("DescribeTRTCMarketScaleMetricData", req, cb)
+  async RegisterTRTCVoicePrint(
+    req: RegisterTRTCVoicePrintRequest,
+    cb?: (error: string, rep: RegisterTRTCVoicePrintResponse) => void
+  ): Promise<RegisterTRTCVoicePrintResponse> {
+    return this.request("RegisterTRTCVoicePrint", req, cb)
+  }
+
+  /**
+   * 创建AI对话任务。
+   */
+  async CreateVoiceConversation(
+    req: CreateVoiceConversationRequest,
+    cb?: (error: string, rep: CreateVoiceConversationResponse) => void
+  ): Promise<CreateVoiceConversationResponse> {
+    return this.request("CreateVoiceConversation", req, cb)
+  }
+
+  /**
+     * 接口说明：
+分页查询当前 (AppId, SdkAppId) 下的声纹列表。
+
+• Offset/Limit 可选，默认从 0 起取 20 条，Limit 最大 100。
+• TotalCount 为活跃状态声纹总数，用于分页控件计算总页数。
+• 仅返回业务可见字段（VoiceprintId / SpeakerId / CreateTime / UpdateTime），不暴露内部 COS 路径。
+     */
+  async DescribeTRTCVoicePrint(
+    req: DescribeTRTCVoicePrintRequest,
+    cb?: (error: string, rep: DescribeTRTCVoicePrintResponse) => void
+  ): Promise<DescribeTRTCVoicePrintResponse> {
+    return this.request("DescribeTRTCVoicePrint", req, cb)
+  }
+
+  /**
+   * 成功开启对话后，可以使用此接口来控制任务。
+   */
+  async ControlVoiceConversation(
+    req: ControlVoiceConversationRequest,
+    cb?: (error: string, rep: ControlVoiceConversationResponse) => void
+  ): Promise<ControlVoiceConversationResponse> {
+    return this.request("ControlVoiceConversation", req, cb)
   }
 
   /**

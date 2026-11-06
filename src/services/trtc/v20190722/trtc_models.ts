@@ -40,20 +40,6 @@ export interface ModifyCloudSliceTaskResponse {
 }
 
 /**
- * 返回的质量数据，时间:值
- */
-export interface TimeValue {
-  /**
-   * 时间，unix时间戳（1590065877s)
-   */
-  Time?: number
-  /**
-   * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
-   */
-  Value?: number
-}
-
-/**
  * DescribeCloudModeration返回参数结构体
  */
 export interface DescribeCloudModerationResponse {
@@ -275,6 +261,20 @@ export interface SubscribeModerationUserIds {
 }
 
 /**
+ * 对话任务的TTS配置。
+ */
+export interface VoiceConversationTTSConfig {
+  /**
+   * <p>TTS 提供厂商，例如trtc。</p>
+   */
+  Provider: string
+  /**
+   * <p>厂商专属参数，JSON 序列化后的字符串。</p>
+   */
+  Params: string
+}
+
+/**
  * 音频转码参数
  */
 export interface AudioEncodeParams {
@@ -384,51 +384,43 @@ export interface McuRecordParams {
  */
 export interface MixLayout {
   /**
-   * 画布上该画面左上角的 y 轴坐标，取值范围 [0, 1920]，不能超过画布的高。
+   * <p>画布上该画面左上角的 y 轴坐标，取值范围 [0, 1920]，不能超过画布的高。</p>
    */
   Top: number
   /**
-   * 画布上该画面左上角的 x 轴坐标，取值范围 [0, 1920]，不能超过画布的宽。
+   * <p>画布上该画面左上角的 x 轴坐标，取值范围 [0, 1920]，不能超过画布的宽。</p>
    */
   Left: number
   /**
-   * 画布上该画面宽度的相对值，取值范围 [0, 1920]，与Left相加不应超过画布的宽。
+   * <p>画布上该画面宽度的相对值，取值范围 [0, 1920]，与Left相加不应超过画布的宽。</p>
    */
   Width: number
   /**
-   * 画布上该画面高度的相对值，取值范围 [0, 1920]，与Top相加不应超过画布的高。
+   * <p>画布上该画面高度的相对值，取值范围 [0, 1920]，与Top相加不应超过画布的高。</p>
    */
   Height: number
   /**
-   * 字符串内容为待显示在该画面的主播对应的UserId，如果不指定，会按照主播加入房间的顺序匹配。
+   * <p>字符串内容为待显示在该画面的主播对应的UserId，如果不指定，会按照主播加入房间的顺序匹配。</p>
    */
   UserId?: string
   /**
-   * 画布的透明度值，取值范围[0, 255]。0表示不透明，255表示全透明。默认值为0。
+   * <p>画布的透明度值，取值范围[0, 255]。0表示不透明，255表示全透明。默认值为0。</p>
    */
   Alpha?: number
   /**
-   * 0 ：拉伸模式，这个模式下整个视频内容会全部显示，并填满子画面，在源视频和目的视频宽高比不一致的时候，画面不会缺少内容，但是画面可能产生形变；
-
-1 ：剪裁模式（默认），这个模式下会严格按照目的视频的宽高比对源视频剪裁之后再拉伸，并填满子画面画布，在源视频和目的视频宽高比不一致的时候，画面保持不变形，但是会被剪裁；
-
-2 ：填黑模式，这个模式下会严格保持源视频的宽高比进行等比缩放，在源视频和目的视频宽高比不一致的时候，画面的上下侧边缘或者左右侧边缘会露出子画面画布的背景；
-
-3 ：智能拉伸模式，这个模式类似剪裁模式，区别是在源视频和目的视频宽高比不一致的时候，限制了最大剪裁比例为画面的宽度或者高度的20%；
+   * <p>画布上该画面的渲染模式</p><p>枚举值：</p><ul><li>0： 拉伸模式，这个模式下整个视频内容会全部显示，并填满子画面，在源视频和目的视频宽高比不一致的时候，画面不会缺少内容，但是画面可能产生形变；</li><li>1： 剪裁模式（默认），这个模式下会严格按照目的视频的宽高比对源视频剪裁之后再拉伸，并填满子画面画布，在源视频和目的视频宽高比不一致的时候，画面保持不变形，但是会被剪裁；</li><li>2： 填黑模式，这个模式下会严格保持源视频的宽高比进行等比缩放，在源视频和目的视频宽高比不一致的时候，画面的上下侧边缘或者左右侧边缘会露出子画面画布的背景；</li><li>3： 智能拉伸模式，这个模式类似剪裁模式，区别是在源视频和目的视频宽高比不一致的时候，限制了最大剪裁比例为画面的宽度或者高度的20%；</li></ul>
    */
   RenderMode?: number
   /**
-   * 对应订阅流的主辅路标识：
-0：主流（默认）；
-1：辅流；
+   * <p>对应订阅流的主辅路标识：<br>0：主流（默认）；<br>1：辅流；</p>
    */
   MediaId?: number
   /**
-   * 该画布的图层顺序, 这个值越小表示图层越靠后。默认值为0。
+   * <p>该画布的图层顺序, 这个值越小表示图层越靠后。默认值为0。</p>
    */
   ImageLayer?: number
   /**
-   * 图片的url地址， 只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '='
+   * <p>图片的url地址， 只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 &#39;-&#39;, &#39;.&#39;, &#39;_&#39;, &#39;~&#39;, &#39;:&#39;, &#39;/&#39;, &#39;?&#39;, &#39;#&#39;, &#39;[&#39;, &#39;]&#39; &#39;@&#39;, &#39;!&#39;, &#39;&amp;&#39;, &#39;(&#39;, &#39;)&#39;, &#39;*&#39;, &#39;+&#39;, &#39;,&#39;, &#39;%&#39;, &#39;=&#39;</p>
    */
   SubBackgroundImage?: string
 }
@@ -496,13 +488,29 @@ export interface DescribeTRTCRealTimeScaleDataRequest {
 }
 
 /**
- * StartAIConversation返回参数结构体
+ * RegisterTRTCVoicePrint返回参数结构体
  */
-export interface StartAIConversationResponse {
+export interface RegisterTRTCVoicePrintResponse {
   /**
-   * 用于唯一标识对话任务。
+   * 本次注册生成的声纹 ID，后续 Update/Delete/Verify 均以此为准
    */
-  TaskId?: string
+  VoicePrintId?: string
+  /**
+   * 回显的业务方 SpeakerId
+   */
+  SpeakerId?: string
+  /**
+   * 本次注册音频中有效人声时长（秒）
+   */
+  EffectiveAudioDuration?: number
+  /**
+   * 音频信噪比（dB），由声纹服务端评估给出
+   */
+  SNR?: number
+  /**
+   * 结果描述，成功时为 voiceprint enrolled successfully
+   */
+  Message?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -652,6 +660,34 @@ export interface VoiceCloneRequest {
 }
 
 /**
+ * 调用服务端主动发起请求到TTS
+ */
+export interface VoiceConversationInvokeTTS {
+  /**
+   * <p>注入的内容。</p>
+   */
+  Content: string
+  /**
+   * <p>优先级。如果不处于对话中则将注入的内容送给TTS，否则由优先级决定。</p><p>枚举值：</p><ul><li>0： 高优先级，打断当前对话，并清空等待队列将注入的内容送给TTS。</li><li>1： 中优先级，不会打断当前对话，清空等待队列将注入的内容排队。如果不处于对话中则将注入的内容排队。</li><li>2： 低优先级，丢弃注入的内容。</li></ul><p>默认值：0</p><p>InvokeLLM和InvokeTTS的任务队列是同一队列，最多支持一个Invoke事件排队。</p>
+   */
+  Priority?: number
+}
+
+/**
+ * StopPublishCdnStream返回参数结构体
+ */
+export interface StopPublishCdnStreamResponse {
+  /**
+   * 转推任务唯一的String Id
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云端切片的控制参数。
  */
 export interface SliceParams {
@@ -773,45 +809,51 @@ export interface CreateLiveStreamModerationRequest {
 }
 
 /**
- * CreateCloudSliceTask请求参数结构体
+ * DescribeVoiceConversation请求参数结构体
  */
-export interface CreateCloudSliceTaskRequest {
+export interface DescribeVoiceConversationRequest {
   /**
-   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和TRTC的房间所对应的SdkAppId相同。
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#sdkappid">SdkAppId</a>，和对话的房间所对应的SdkAppId相同。</p>
    */
   SdkAppId: number
   /**
-   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，为TRTC房间所对应的RoomId。
+   * <p>对话任务的唯一Id，在启动对话成功后会返回。</p>
    */
-  RoomId: string
+  TaskId: string
   /**
-   * 机器人的UserId，用于进房发起切片任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。
+   * <p>查询任务状态</p><p>枚举值：</p><ul><li>0： 不查询对话上下文历史</li><li>1： 查询对话上下文历史</li></ul><p>默认值：0</p>
    */
-  UserId: string
+  DescribeType?: number
+}
+
+/**
+ * VerifyTRTCVoicePrint返回参数结构体
+ */
+export interface VerifyTRTCVoicePrintResponse {
   /**
-   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。
+   * 被验证的目标声纹 ID
    */
-  UserSig: string
+  VoicePrintId?: string
   /**
-   * 云端切片控制参数。
+   * 注册时写入的业务方 SpeakerId（以服务端记录为准）
    */
-  SliceParams: SliceParams
+  SpeakerId?: string
   /**
-   * 云端切片文件上传到云存储的参数
+   * 相似度分值（字符串形式，保留两位小数，范围约 0~100，越大越相似）
    */
-  SliceStorageParams: SliceStorageParams
+  Score?: string
   /**
-   * TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1
+   * 服务端阈值判决结果，0=不通过，1=通过（默认阈值 60 分，由服务端统一维护）
    */
-  RoomIdType?: number
+  Decision?: number
   /**
-   * 接口可以调用的时效性，从成功开启录制并获得任务ID后开始计算，超时后无法调用查询、更新和停止等接口，但是录制任务不会停止。 参数的单位是小时，默认72小时（3天），最大可设置720小时（30天），最小设置6小时。举例说明：如果不设置该参数，那么开始录制成功后，查询、更新和停止录制的调用时效为72个小时。 示例值：24
+   * 结果描述，成功时为 voiceprint verify success
    */
-  ResourceExpiredHour?: number
+  Message?: string
   /**
-   * TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。 示例值：eJw1jcEKgkAURX9FZlvY****fL9rfNX4_
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PrivateMapKey?: string
+  RequestId?: string
 }
 
 /**
@@ -830,6 +872,20 @@ export interface McuBackgroundCustomRender {
    * 自定义渲染画面的圆角半径，单位为像素值，不能超过渲染画面Width和Height最小值的一半，不指定默认为0，表示直角。
    */
   Radius?: number
+}
+
+/**
+ * 历史对话内容。
+ */
+export interface VoiceConversationHistoryContent {
+  /**
+   * <p>对话角色。</p>
+   */
+  Role?: string
+  /**
+   * <p>对话内容。</p>
+   */
+  Content?: string
 }
 
 /**
@@ -885,24 +941,25 @@ export interface DescribeTrtcRoomUsageResponse {
 }
 
 /**
- * TRTC数据大盘/实时监控 API接口数据出参
+ * DescribeTRTCVoicePrint返回参数结构体
  */
-export interface TRTCDataResp {
+export interface DescribeTRTCVoicePrintResponse {
   /**
-   * StatementID值，监控仪表盘下固定为0。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 当前 (AppId, SdkAppId) 下的声纹总数（仅计活跃状态）
    */
-  StatementID: number
+  TotalCount?: number
   /**
-   * 查询结果数据，以Columns-Values形式返回。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 声纹条目列表，元素为 TRTCVoicePrintItem 结构：{ VoicePrintId:string, SpeakerId:string, CreateTime:string(ISO8601), UpdateTime:string(ISO8601) }。
    */
-  Series: Array<SeriesInfo>
+  VoicePrintList?: Array<TRTCVoicePrintItem>
   /**
-   * Total值，监控仪表盘功能下固定为1。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 结果描述，成功时为 query voiceprint list successfully
    */
-  Total: number
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -936,7 +993,7 @@ export interface RegisterVoicePrintRequest {
  */
 export interface TranscriptionUserInfoParams {
   /**
-   * 用户ID。
+   * <p>用户ID。</p>
    */
   UserId: string
 }
@@ -956,17 +1013,21 @@ export interface AbnormalEvent {
 }
 
 /**
- * DeleteCloudSliceTask请求参数结构体
+ * DescribeScaleInfo返回参数结构体
  */
-export interface DeleteCloudSliceTaskRequest {
+export interface DescribeScaleInfoResponse {
   /**
-   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
+   * 返回的数据条数
    */
-  SdkAppId: number
+  Total?: number
   /**
-   * 切片任务的唯一Id，在启动切片任务成功后会返回。
+   * 返回的数据
    */
-  TaskId: string
+  ScaleList?: Array<ScaleInfomation>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1136,33 +1197,21 @@ export interface StopMCUMixTranscodeByStrRoomIdResponse {
 }
 
 /**
- * 图片列表信息
+ * ModifyCloudSliceTask请求参数结构体
  */
-export interface PictureInfo {
+export interface ModifyCloudSliceTaskRequest {
   /**
-   * 图片长度
+   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
    */
-  Height?: number
+  SdkAppId: number
   /**
-   * 图片宽度
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
    */
-  Width?: number
+  TaskId: string
   /**
-   * 显示位置x轴方向
+   * 指定订阅流白名单或者黑名单。
    */
-  XPosition?: number
-  /**
-   * 显示位置y轴方向
-   */
-  YPosition?: number
-  /**
-   * 应用id
-   */
-  SdkAppId?: number
-  /**
-   * 图片id
-   */
-  PictureId?: number
+  SubscribeStreamUserIds?: SubscribeStreamUserIds
 }
 
 /**
@@ -1373,6 +1422,32 @@ export interface SourceInfo {
 }
 
 /**
+ * UpdateTRTCVoicePrint返回参数结构体
+ */
+export interface UpdateTRTCVoicePrintResponse {
+  /**
+   * 声纹 ID（更新前后保持不变）
+   */
+  VoicePrintId?: string
+  /**
+   * 本次更新音频中有效人声时长（秒）
+   */
+  EffectiveAudioDuration?: number
+  /**
+   * 音频信噪比（dB），由声纹服务端评估给出
+   */
+  SNR?: number
+  /**
+   * 结果描述，成功时为 voiceprint updated successfully
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPicture请求参数结构体
  */
 export interface ModifyPictureRequest {
@@ -1428,6 +1503,50 @@ Hls 格式录制此参数不生效。
 }
 
 /**
+ * VoicePrintList 接口出参 VoicePrintSet 的元素类型
+ */
+export interface TRTCVoicePrintItem {
+  /**
+   * 声纹 ID，36 位 UUID（含连字符）。对 (AppId, SdkAppId) 维度内唯一。
+示例值：59d83c76-8f4e-4a1b-9c2d-0e7f8a6b5c4d
+   */
+  VoicePrintId?: string
+  /**
+   * 业务方自定义的说话人标识，长度不超过 128 字节，由客户在注册声纹时传入。同一 SpeakerId 可对应多条声纹。
+示例值：user_12345
+   */
+  SpeakerId?: string
+  /**
+   * 声纹注册时间，ISO8601 格式，UTC 时区。
+示例值：2025-04-24T10:20:30Z
+   */
+  CreateTime?: string
+  /**
+   * 声纹最近一次更新时间，ISO8601 格式，UTC 时区。未被更新过时等于 CreateTime。
+示例值：2025-04-24T10:20:30Z
+   */
+  UpdateTime?: string
+}
+
+/**
+ * AI对话任务端到端语音大模型的配置参数。
+ */
+export interface VoiceConversationS2SConfig {
+  /**
+   * <p>S2S 厂商标识，例如&quot;tencent&quot;。</p>
+   */
+  Provider: string
+  /**
+   * <p>厂商专属参数，JSON 序列化后的字符串。</p>
+   */
+  Params: string
+  /**
+   * <p>主播首次进房主动播报的欢迎语，主播退房后再次进房也会播报。</p>
+   */
+  WelcomeMessage?: string
+}
+
+/**
  * DescribeWebRecord返回参数结构体
  */
 export interface DescribeWebRecordResponse {
@@ -1472,11 +1591,49 @@ export interface DescribeCloudTranscriptionResponse {
 }
 
 /**
+ * 声纹查询数据
+ */
+export interface VoicePrintInfo {
+  /**
+   * 声纹ID
+   */
+  VoicePrintId?: string
+  /**
+   * 应用id
+   */
+  AppId?: number
+  /**
+   * 和声纹绑定的MetaInfo
+   */
+  VoicePrintMetaInfo?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 音频格式,当前只有0(代表wav)
+   */
+  AudioFormat?: number
+  /**
+   * 音频名称
+   */
+  AudioName?: string
+  /**
+   * 请求毫秒时间戳
+   */
+  ReqTimestamp?: number
+}
+
+/**
  * DescribeUserInfo请求参数结构体
  */
 export interface DescribeUserInfoRequest {
   /**
-   * 通话 ID（唯一标识一次通话）： SdkAppId_RoomId（房间号）_ CreateTime（房间创建时间，unix时间戳，单位为s）例：1400xxxxxx_218695_1590065777。通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。
+   * 通话 ID（唯一标识一次通话）， 需通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。
    */
   CommId: string
   /**
@@ -1507,6 +1664,56 @@ export interface DescribeUserInfoRequest {
 范围：[1，100]。
    */
   PageSize?: number
+}
+
+/**
+ * AI转录参数
+ */
+export interface TranscriptionParams {
+  /**
+   * 转录机器人的UserId，用于进房发起转录任务。【注意】这个UserId不能与当前房间内的主播观众[UserId](https://cloud.tencent.com/document/product/647/46351#userid)重复。如果一个房间发起多个转录任务时，机器人的userid也不能相互重复，否则会中断前一个任务。需要保证转录机器人UserId在房间内唯一。
+   */
+  UserId: string
+  /**
+   * 转录机器人UserId对应的校验签名，即UserId和UserSig相当于转录机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+   */
+  UserSig: string
+  /**
+   * IM[管理员账户](
+https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98)，如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。
+   * @deprecated
+   */
+  IMAdminUserId?: string
+  /**
+   * IM管理员账户生成的签名，用于向特定群组发送消息。如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。必须和IM管理员的UserId一起填写。
+   * @deprecated
+   */
+  IMAdminUserSig?: string
+  /**
+   * 房间内推流用户全部退出后超过MaxIdleTime秒，后台自动关闭转录任务，默认值是60s。
+   */
+  MaxIdleTime?: number
+  /**
+   * 1表示机器人只订阅单个人的流，0表示机器人订阅整个房间的流，如果不填默认订阅整个房间的流。
+   */
+  TranscriptionMode?: number
+  /**
+   * TranscriptionMode为1时必填，机器人只会拉该userid的流，忽略房间里其他用户。
+   */
+  TargetUserId?: string
+  /**
+   * 机器人订阅的用户列表
+仅 TranscriptionMode 为 1或者 TranscriptionMode 为无限上麦模式支持传入多个用户列表
+   */
+  TargetUserIdList?: Array<string>
+  /**
+   * 声纹配置
+   */
+  VoicePrint?: VoicePrint
+  /**
+   * 语义断句检测
+   */
+  TurnDetection?: TurnDetection
 }
 
 /**
@@ -1733,52 +1940,25 @@ export interface CloudStorage {
 }
 
 /**
- * 服务端控制AI对话机器人播报指定文本
+ * 回推房间参数。
  */
-export interface ServerPushText {
+export interface McuFeedBackRoomParams {
   /**
-   * 服务端推送播报文本
+   * <p>回推房间的RoomId。</p>
    */
-  Text?: string
+  RoomId: string
   /**
-   * 是否允许该文本打断机器人说话
+   * <p>房间类型，必须和回推房间所对应的RoomId类型相同，0为整形房间号，1为字符串房间号。</p>
    */
-  Interrupt?: boolean
+  RoomIdType: number
   /**
-   * 播报完文本后，是否自动关闭对话任务
+   * <p>回推房间使用的UserId(https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。</p>
    */
-  StopAfterPlay?: boolean
+  UserId: string
   /**
-   * 服务端推送播报音频
-    格式说明：音频必须为单声道，采样率必须跟对应TTS的采样率保持一致，编码为Base64字符串。
-    输入规则：当提供Audio字段时，将不接受Text字段的输入。系统将直接播放Audio字段中的音频内容。
+   * <p>回推房间UserId对应的用户签名，相当于登录密码，具体计算方法请参考TRTC计算<a href="https://cloud.tencent.com/document/product/647/45910#UserSig">UserSig</a>的方案。</p>
    */
-  Audio?: string
-  /**
-   * 默认为0，仅在Interrupt为false时有效
-- 0表示当前有交互发生时，会丢弃Interrupt为false的消息
-- 1表示当前有交互发生时，不会丢弃Interrupt为false的消息，而是缓存下来，等待当前交互结束后，再去处理
-
-注意：DropMode为1时，允许缓存多个消息，如果后续出现了打断，缓存的消息会被清空
-   */
-  DropMode?: number
-  /**
-   * ServerPushText消息的优先级，0表示可被打断，1表示不会被打断。**目前仅支持传入0，如果需要传入1，请提工单联系我们添加权限。**
-注意：在接收到Priority=1的消息后，后续其他任何消息都会被忽略（包括Priority=1的消息），直到Priority=1的消息处理结束。该字段可与Interrupt、DropMode字段配合使用。
-例子：
-- Priority=1、Interrupt=true，会打断现有交互，立刻播报，播报过程中不会被打断
-- Priority=1、Interrupt=false、DropMode=1，会等待当前交互结束，再进行播报，播报过程中不会被打断
-
-   */
-  Priority?: number
-  /**
-   * 是否将文本加入到llm历史上下文中
-   */
-  AddHistory?: boolean
-  /**
-   * 如果填写，会和字幕绑定发送到端上，注意确保内容为json字符串
-   */
-  MetaInfo?: string
+  UserSig: string
 }
 
 /**
@@ -1810,17 +1990,17 @@ export interface StopAITranscriptionRequest {
 }
 
 /**
- * SetVocabStateV3返回参数结构体
+ * 返回的质量数据，时间:值
  */
-export interface SetVocabStateV3Response {
+export interface TimeValue {
   /**
-   * <p>词表 id</p>
+   * 时间，unix时间戳（1590065877s)
    */
-  VocabId?: string
+  Time?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
    */
-  RequestId?: string
+  Value?: number
 }
 
 /**
@@ -1835,6 +2015,32 @@ export interface CreateCloudRecordingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Mcp Sever参数。
+ */
+export interface VoiceConversationMcpServer {
+  /**
+   * <p>mcp唯一标识符。</p>
+   */
+  Name?: string
+  /**
+   * <p>接入地址。</p>
+   */
+  Url?: string
+  /**
+   * <p>请求超时，单位ms，默认 5000。待确认范围。</p><p>单位：毫秒。</p>
+   */
+  Timeout?: number
+  /**
+   * <p>自定义请求header，用于填写鉴权等信息。</p>
+   */
+  Headers?: Array<KeyValueItem>
+  /**
+   * <p>工具使用白名单。</p>
+   */
+  ToolList?: Array<string>
 }
 
 /**
@@ -1937,36 +2143,17 @@ export interface DescribeRecordStatisticRequest {
 }
 
 /**
- * DescribeRoomInfo请求参数结构体
+ * BatchDeleteTRTCVoicePrint请求参数结构体
  */
-export interface DescribeRoomInfoRequest {
+export interface BatchDeleteTRTCVoicePrintRequest {
   /**
-   * 用户SdkAppId（如：1400xxxxxx）
+   * 待批量删除的声纹 ID 列表，最多 50 个；请求内自动去重；按 (AppId, SdkAppId, VoicePrintId) 做数据隔离
    */
-  SdkAppId: number
+  VoicePrintIds: Array<string>
   /**
-   * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）注意：最大支持查询14天内的数据
+   * SdkappId
    */
-  StartTime: number
-  /**
-   * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
-注意：与StartTime间隔时间不超过24小时。
-   */
-  EndTime: number
-  /**
-   * 房间号（如：223)
-   */
-  RoomId?: string
-  /**
-   * 当前页数，默认为0，
-注意：PageNumber和PageSize 其中一个不填均默认返回10条数据。
-   */
-  PageNumber?: number
-  /**
-   * 每页个数，默认为10，
-范围：[1，100]
-   */
-  PageSize?: number
+  SdkAppId: string
 }
 
 /**
@@ -2036,18 +2223,86 @@ AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using
 }
 
 /**
- * DescribeTRTCMarketScaleMetricData返回参数结构体
+ * MCU混流输出流编码参数
  */
-export interface DescribeTRTCMarketScaleMetricDataResponse {
+export interface EncodeParams {
   /**
-   * TRTC监控数据出参
-注意：此字段可能返回 null，表示取不到有效值。
+   * 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
    */
-  Data: TRTCDataResp
+  AudioSampleRate: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 混流-输出流音频码率。取值范围[8,500]，单位为kbps。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
    */
-  RequestId?: string
+  AudioBitrate: number
+  /**
+   * 混流-输出流音频声道数，取值范围[1,2]，1表示混流输出音频为单声道，2表示混流输出音频为双声道。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
+   */
+  AudioChannels: number
+  /**
+   * 混流-输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
+   */
+  VideoWidth?: number
+  /**
+   * 混流-输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
+   */
+  VideoHeight?: number
+  /**
+   * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
+   */
+  VideoBitrate?: number
+  /**
+   * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
+   */
+  VideoFramerate?: number
+  /**
+   * 混流-输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
+   */
+  VideoGop?: number
+  /**
+   * 混流-输出流背景色，取值是十进制整数。常用的颜色有：
+红色：0xff0000，对应的十进制整数是16724736。
+黄色：0xffff00。对应的十进制整数是16776960。
+绿色：0x33cc00。对应的十进制整数是3394560。
+蓝色：0x0066ff。对应的十进制整数是26367。
+黑色：0x000000。对应的十进制整数是0。
+白色：0xFFFFFF。对应的十进制整数是16777215。
+灰色：0x999999。对应的十进制整数是10066329。
+   */
+  BackgroundColor?: number
+  /**
+   * 混流-输出流背景图片，取值为实时音视频控制台上传的图片ID。
+   */
+  BackgroundImageId?: number
+  /**
+   * 混流-输出流音频编码类型，取值范围[0,1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
+   */
+  AudioCodec?: number
+  /**
+   * 混流-输出流背景图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。BackgroundImageUrl和BackgroundImageId参数都填时，以BackgroundImageUrl为准。图片大小限制不超过2MB。
+   */
+  BackgroundImageUrl?: string
+}
+
+/**
+ * 水印布局参数
+ */
+export interface WaterMark {
+  /**
+   * 水印类型，0为图片（默认），1为文字，2为时间戳。
+   */
+  WaterMarkType?: number
+  /**
+   * 水印为图片时的参数列表，水印为图片时校验必填。
+   */
+  WaterMarkImage?: WaterMarkImage
+  /**
+   * 水印为文字时的参数列表，水印为文字时校验必填。
+   */
+  WaterMarkChar?: WaterMarkChar
+  /**
+   * 水印为时间戳时的参数列表，水印为时间戳时校验必填。
+   */
+  WaterMarkTimestamp?: WaterMarkTimestamp
 }
 
 /**
@@ -2161,6 +2416,28 @@ export interface DescribeTRTCAIRecognitionUsageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TTS相关配置
+ */
+export interface TTSConfig {
+  /**
+   * 音色ID
+   */
+  VoiceId: string
+  /**
+   * TTS 的模型，默认是：flow_01_turbo, 可选: [ flow_01_turbo, flow_01_ex]
+   */
+  Model?: string
+  /**
+   * 语速，范围 0.5-2.0，默认 1.0
+   */
+  Speed?: number
+  /**
+   * (0, 10] 默认值1.0
+   */
+  Volume?: number
 }
 
 /**
@@ -2313,41 +2590,17 @@ export interface SmallVideoLayoutParams {
 }
 
 /**
- * 声纹查询数据
+ * StartWebRecord返回参数结构体
  */
-export interface VoicePrintInfo {
+export interface StartWebRecordResponse {
   /**
-   * 声纹ID
+   * <p>录制任务的唯一Id</p>
    */
-  VoicePrintId?: string
+  TaskId?: string
   /**
-   * 应用id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppId?: number
-  /**
-   * 和声纹绑定的MetaInfo
-   */
-  VoicePrintMetaInfo?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 音频格式,当前只有0(代表wav)
-   */
-  AudioFormat?: number
-  /**
-   * 音频名称
-   */
-  AudioName?: string
-  /**
-   * 请求毫秒时间戳
-   */
-  ReqTimestamp?: number
+  RequestId?: string
 }
 
 /**
@@ -2397,6 +2650,20 @@ export interface SubscribeStreamUserIds {
    * 订阅视频流黑名单，指定不订阅哪几个UserId的视频流，例如["1", "2", "3"], 代表不订阅UserId  1，2，3的视频流；["1.*$"], 代表不订阅UserId前缀为1的视频流。默认不填订阅房间内所有视频流，订阅列表用户数不超过32。
    */
   UnSubscribeVideoUserIds?: Array<string>
+}
+
+/**
+ * DeleteVoiceConversation请求参数结构体
+ */
+export interface DeleteVoiceConversationRequest {
+  /**
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#sdkappid">SdkAppId</a>，和对话的房间所对应的SdkAppId相同。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>对话任务的唯一Id，在启动对话成功后会返回。</p>
+   */
+  TaskId: string
 }
 
 /**
@@ -2653,6 +2920,28 @@ export interface DescribeAITranscriptionRequest {
 }
 
 /**
+ * UpdateTRTCVoicePrint请求参数结构体
+ */
+export interface UpdateTRTCVoicePrintRequest {
+  /**
+   * 待更新的声纹 ID（由 RegisterTRTCVoicePrint 返回）。更新采用覆盖模式——只保留一条最新音频，VoicePrintId 保持不变。
+   */
+  VoicePrintId: string
+  /**
+   * 新的音频数据的 Base64 字符串。要求与 RegisterTRTCVoicePrint一致：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后 ≤ 2MB；PCM 裸数据 10s ≤ 时长 ≤ 45s。
+   */
+  Data: string
+  /**
+   * SdkAppId
+   */
+  SdkAppId: string
+  /**
+   * 音频格式，可选 pcm 或 wav，大小写不敏感，不传默认为 pcm
+   */
+  AudioFormat?: string
+}
+
+/**
  * 查询旁路转码计费时长。
 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
  */
@@ -2871,6 +3160,24 @@ export interface RemoveUserByStrRoomIdResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI对话视觉理解相关的参数配置。
+ */
+export interface VoiceConversationVisionConfig {
+  /**
+   * <p>是否启用视觉理解。</p>
+   */
+  Enable: boolean
+  /**
+   * <p>存储类型。</p><p>枚举值：</p><ul><li>0： 不存储。</li><li>1： 指定云存储，这种情况下CloudStorage参数必填。</li></ul><p>默认值：0</p>
+   */
+  StorageType?: number
+  /**
+   * <p>第三方云存储归档配置。配置后，后台将从 SDK 收到的 I 帧自动上传至指定云存储桶进行持久化保存。</p>
+   */
+  CloudStorage?: CloudStorage
 }
 
 /**
@@ -3099,30 +3406,6 @@ export interface DeleteCloudSliceTaskResponse {
 }
 
 /**
- * DescribeTRTCMarketScaleMetricData请求参数结构体
- */
-export interface DescribeTRTCMarketScaleMetricDataRequest {
-  /**
-   * 用户SdkAppId
-   */
-  SdkAppId: string
-  /**
-   * 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天）
-   */
-  StartTime: string
-  /**
-   * 查询结束时间，格式为YYYY-MM-DD。
-   */
-  EndTime: string
-  /**
-   * 返回数据的粒度，支持设为以下值：
-d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。
-h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。
-   */
-  Period: string
-}
-
-/**
  * DescribeRelayUsage返回参数结构体
  */
 export interface DescribeRelayUsageResponse {
@@ -3342,25 +3625,32 @@ export interface ModifyPictureResponse {
 }
 
 /**
- * 水印布局参数
+ * ControlVoiceConversation返回参数结构体
  */
-export interface WaterMark {
+export interface ControlVoiceConversationResponse {
   /**
-   * 水印类型，0为图片（默认），1为文字，2为时间戳。
+   * <p>对话任务的唯一Id。</p>
    */
-  WaterMarkType?: number
+  TaskId?: string
   /**
-   * 水印为图片时的参数列表，水印为图片时校验必填。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  WaterMarkImage?: WaterMarkImage
+  RequestId?: string
+}
+
+/**
+ * SeriesInfo类型的二维数组
+ */
+export interface RowValues {
   /**
-   * 水印为文字时的参数列表，水印为文字时校验必填。
+   * 数据值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WaterMarkChar?: WaterMarkChar
+  RowValue?: Array<number | bigint>
   /**
-   * 水印为时间戳时的参数列表，水印为时间戳时校验必填。
+   * 数据值
    */
-  WaterMarkTimestamp?: WaterMarkTimestamp
+  RowValueFloat?: Array<number>
 }
 
 /**
@@ -3378,21 +3668,17 @@ export interface McuStorageParams {
 }
 
 /**
- * DescribeScaleInfo返回参数结构体
+ * DeleteCloudSliceTask请求参数结构体
  */
-export interface DescribeScaleInfoResponse {
+export interface DeleteCloudSliceTaskRequest {
   /**
-   * 返回的数据条数
+   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
    */
-  Total?: number
+  SdkAppId: number
   /**
-   * 返回的数据
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
    */
-  ScaleList?: Array<ScaleInfomation>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TaskId: string
 }
 
 /**
@@ -3495,21 +3781,36 @@ export interface MixLayoutParams {
 }
 
 /**
- * ModifyCloudSliceTask请求参数结构体
+ * DescribeRoomInfo请求参数结构体
  */
-export interface ModifyCloudSliceTaskRequest {
+export interface DescribeRoomInfoRequest {
   /**
-   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
+   * 用户SdkAppId（如：1400xxxxxx）
    */
   SdkAppId: number
   /**
-   * 切片任务的唯一Id，在启动切片任务成功后会返回。
+   * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）注意：最大支持查询14天内的数据
    */
-  TaskId: string
+  StartTime: number
   /**
-   * 指定订阅流白名单或者黑名单。
+   * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
+注意：与StartTime间隔时间不超过24小时。
    */
-  SubscribeStreamUserIds?: SubscribeStreamUserIds
+  EndTime: number
+  /**
+   * 房间号（如：223)
+   */
+  RoomId?: string
+  /**
+   * 当前页数，默认为0，
+注意：PageNumber和PageSize 其中一个不填均默认返回10条数据。
+   */
+  PageNumber?: number
+  /**
+   * 每页个数，默认为10，
+范围：[1，100]
+   */
+  PageSize?: number
 }
 
 /**
@@ -3665,39 +3966,49 @@ export interface AsrParam {
 }
 
 /**
- * 回推房间参数。
+ * DeleteTRTCVoicePrint返回参数结构体
  */
-export interface McuFeedBackRoomParams {
+export interface DeleteTRTCVoicePrintResponse {
   /**
-   * <p>回推房间的RoomId。</p>
+   * 已删除的声纹 ID（回显，便于调用方核对）
    */
-  RoomId: string
+  VoicePrintId?: string
   /**
-   * <p>房间类型，必须和回推房间所对应的RoomId类型相同，0为整形房间号，1为字符串房间号。</p>
+   * 结果描述，成功时为 voiceprint deleted successfully
    */
-  RoomIdType: number
+  Message?: string
   /**
-   * <p>回推房间使用的UserId(https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserId: string
-  /**
-   * <p>回推房间UserId对应的用户签名，相当于登录密码，具体计算方法请参考TRTC计算<a href="https://cloud.tencent.com/document/product/647/45910#UserSig">UserSig</a>的方案。</p>
-   */
-  UserSig: string
+  RequestId?: string
 }
 
 /**
- * SdkAppId级别录制时长数据。
+ * SetVocabStateV3返回参数结构体
  */
-export interface SdkAppIdRecordUsage {
+export interface SetVocabStateV3Response {
   /**
-   * SdkAppId的值。
+   * <p>词表 id</p>
    */
-  SdkAppId?: string
+  VocabId?: string
   /**
-   * 统计的时间点数据。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Usages?: Array<RecordUsage>
+  RequestId?: string
+}
+
+/**
+ * 调用服务端主动发起请求到LLM
+ */
+export interface VoiceConversationInvokeLLM {
+  /**
+   * <p>注入的内容。</p>
+   */
+  Content: string
+  /**
+   * <p>优先级。如果不处于对话中则将注入的内容送给LLM，否则由优先级决定。</p><p>枚举值：</p><ul><li>0： 高优先级，打断当前对话，并清空等待队列将注入的内容送给LLM。</li><li>1： 中优先级，不会打断当前对话，清空等待队列将注入的内容排队。如果不处于对话中则将注入的内容排队。</li><li>2： 低优先级，丢弃注入的内容。</li></ul><p>默认值：0</p><p>InvokeLLM和InvokeTTS的任务队列是同一队列，最多支持一个Invoke事件排队。</p>
+   */
+  Priority?: number
 }
 
 /**
@@ -3716,6 +4027,20 @@ export interface Input {
    * <p>声网拉流进房参数</p>
    */
   AgoraParam?: AgoraParam
+}
+
+/**
+ * DeleteVoiceConversation返回参数结构体
+ */
+export interface DeleteVoiceConversationResponse {
+  /**
+   * <p>对话任务的唯一Id。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3741,53 +4066,32 @@ export interface AudioEncode {
 }
 
 /**
- * MCU混流布局参数
+ * DescribeCloudRecording返回参数结构体
  */
-export interface LayoutParams {
+export interface DescribeCloudRecordingResponse {
   /**
-   * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
+   * 录制任务的唯一Id。
    */
-  Template?: number
+  TaskId?: string
   /**
-   * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
+   * 云端录制任务的状态信息。
+Idle：表示当前录制任务空闲中
+InProgress：表示当前录制任务正在进行中。
+Exited：表示当前录制任务正在退出的过程中。
    */
-  MainVideoUserId?: string
+  Status?: string
   /**
-   * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
+   * 录制文件信息。
    */
-  MainVideoStreamType?: number
+  StorageFileList?: Array<StorageFile>
   /**
-   * 画中画模板中有效，代表小画面的布局参数。
+   * 转推录制任务发起时所填，标识一次录制
    */
-  SmallVideoLayoutParams?: SmallVideoLayoutParams
+  RecorderKey?: string
   /**
-   * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MainVideoRightAlign?: number
-  /**
-   * 指定混视频的用户ID列表。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。悬浮模板、九宫格、屏幕分享模板有效，最多可设置16个用户。
-   */
-  MixVideoUids?: Array<string>
-  /**
-   * 自定义模板中有效，指定用户视频在混合画面中的位置。
-   */
-  PresetLayoutConfig?: Array<PresetLayoutConfig>
-  /**
-   * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
-   */
-  PlaceHolderMode?: number
-  /**
-   * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
-   */
-  PureAudioHoldPlaceMode?: number
-  /**
-   * 水印参数。
-   */
-  WaterMarkParams?: WaterMarkParams
-  /**
-   * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
-   */
-  RenderMode?: number
+  RequestId?: string
 }
 
 /**
@@ -3976,6 +4280,36 @@ export interface GetRecognizeVocabV3Request {
 }
 
 /**
+ * ModifyVoiceConversation请求参数结构体
+ */
+export interface ModifyVoiceConversationRequest {
+  /**
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#sdkappid">SdkAppId</a>，和对话的房间所对应的SdkAppId相同。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>对话任务的唯一Id，在启动对话成功后会返回。</p>
+   */
+  TaskId: string
+  /**
+   * <p>需要保证同一个任务，每次更新请求中的SequenceNumber递增，防止请求乱序。</p>
+   */
+  SequenceNumber: number
+  /**
+   * <p>大模型配置。<strong>仅 <code>Cascade</code> 模式生效</strong>；<code>S2S</code> 模式报错。</p>
+   */
+  LLMConfig?: VoiceConversationLLMConfig
+  /**
+   * <p>端到端语音大模型配置。仅 <strong><code>S2S</code> 模式</strong>生效；<code>Cascade</code> 报错。</p>
+   */
+  S2SConfig?: VoiceConversationS2SConfig
+  /**
+   * <p>对话控制配置。<strong>仅 <code>Cascade</code> 模式生效</strong>。</p>
+   */
+  DialogConfig?: VoiceConversationDialogConfig
+}
+
+/**
  * DescribeCloudRecording请求参数结构体
  */
 export interface DescribeCloudRecordingRequest {
@@ -4062,17 +4396,17 @@ export interface UsageList {
 }
 
 /**
- * StartWebRecord返回参数结构体
+ * DeleteTRTCVoicePrint请求参数结构体
  */
-export interface StartWebRecordResponse {
+export interface DeleteTRTCVoicePrintRequest {
   /**
-   * <p>录制任务的唯一Id</p>
+   * 待删除的声纹 ID（由 RegisterTRTCVoicePrint返回）。删除为软删，按 (AppId, SdkAppId, VoicePrintId) 做数据隔离。
    */
-  TaskId?: string
+  VoicePrintId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * SdkappId
    */
-  RequestId?: string
+  SdkAppId: string
 }
 
 /**
@@ -4131,32 +4465,45 @@ export interface TRTCDataResult {
 }
 
 /**
- * DescribeCloudRecording返回参数结构体
+ * CreateCloudSliceTask请求参数结构体
  */
-export interface DescribeCloudRecordingResponse {
+export interface CreateCloudSliceTaskRequest {
   /**
-   * 录制任务的唯一Id。
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和TRTC的房间所对应的SdkAppId相同。
    */
-  TaskId?: string
+  SdkAppId: number
   /**
-   * 云端录制任务的状态信息。
-Idle：表示当前录制任务空闲中
-InProgress：表示当前录制任务正在进行中。
-Exited：表示当前录制任务正在退出的过程中。
+   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，为TRTC房间所对应的RoomId。
    */
-  Status?: string
+  RoomId: string
   /**
-   * 录制文件信息。
+   * 机器人的UserId，用于进房发起切片任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。
    */
-  StorageFileList?: Array<StorageFile>
+  UserId: string
   /**
-   * 转推录制任务发起时所填，标识一次录制
+   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。
    */
-  RecorderKey?: string
+  UserSig: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 云端切片控制参数。
    */
-  RequestId?: string
+  SliceParams: SliceParams
+  /**
+   * 云端切片文件上传到云存储的参数
+   */
+  SliceStorageParams: SliceStorageParams
+  /**
+   * TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1
+   */
+  RoomIdType?: number
+  /**
+   * 接口可以调用的时效性，从成功开启录制并获得任务ID后开始计算，超时后无法调用查询、更新和停止等接口，但是录制任务不会停止。 参数的单位是小时，默认72小时（3天），最大可设置720小时（30天），最小设置6小时。举例说明：如果不设置该参数，那么开始录制成功后，查询、更新和停止录制的调用时效为72个小时。 示例值：24
+   */
+  ResourceExpiredHour?: number
+  /**
+   * TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。 示例值：eJw1jcEKgkAURX9FZlvY****fL9rfNX4_
+   */
+  PrivateMapKey?: string
 }
 
 /**
@@ -4280,6 +4627,36 @@ export interface OutputParams {
    * 取值范围[0,1]，填0无实际含义; 填1：指定录制文件格式为mp3。此参数不建议使用，建议在实时音视频控制台配置纯音频录制模板。
    */
   RecordAudioOnly?: number
+}
+
+/**
+ * AI对话相关配置。
+ */
+export interface VoiceConversationDialogConfig {
+  /**
+   * <p>打断模式。</p><p>枚举值：</p><ul><li>0： 自动打断（ASR 出文本打断 TTS，配合InterruptSpeechDuration 使用，默认）</li><li>1： 手动打断（仅服务端/客户端接口 Interrupt 命令打断）</li><li>2： 关键词打断</li></ul>
+   */
+  InterruptMode?: number
+  /**
+   * <p>自动打断的最小用户语音持续时长（毫秒），默认 200</p><p>单位：毫秒</p>
+   */
+  InterruptSpeechDuration?: number
+  /**
+   * <p>预设的关键词，关键词打断，适用于需要用户明确表达意图才能打断的场景。最多支持128个关键词，InterruptMode 为2时生效，</p>
+   */
+  InterruptKeywords?: Array<string>
+  /**
+   * <p>用户静音多久后 Bot 主动追问，范围 0~300，0 表示关闭（默认）。</p><p>单位：秒</p>
+   */
+  SilenceFollowUp?: number
+  /**
+   * <p>主动追问的文本。</p>
+   */
+  SilenceFollowUpText?: string
+  /**
+   * <p>主播首次进房主动播报的欢迎语，主播退房后再次进房也会播报。</p>
+   */
+  WelcomeMessage?: string
 }
 
 /**
@@ -4612,13 +4989,75 @@ export interface ModifyCloudRecordingRequest {
 }
 
 /**
- * StopAIConversation返回参数结构体
+ * VerifyTRTCVoicePrint请求参数结构体
  */
-export interface StopAIConversationResponse {
+export interface VerifyTRTCVoicePrintRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 待验证的目标声纹 ID（由 RegisterTRTCVoicePrint 返回）。按 (AppId, SdkAppId, VoicePrintId) 做数据隔离。
    */
-  RequestId?: string
+  VoicePrintId: string
+  /**
+   * 待验证音频数据的 Base64 字符串。要求：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后 ≤ 2MB；PCM 裸数据 10s ≤ 时长 ≤ 45s。
+   */
+  Data: string
+  /**
+   * SdkAppId
+   */
+  SdkAppId: string
+  /**
+   * 音频格式，可选 pcm 或 wav，大小写不敏感，不传默认为 pcm
+   */
+  AudioFormat?: string
+}
+
+/**
+ * CreateVoiceConversation请求参数结构体
+ */
+export interface CreateVoiceConversationRequest {
+  /**
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#sdkappid">SdkAppId</a>，和对话的房间所对应的SdkAppId相同。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#roomid">RoomId</a>，对话的TRTC房间所对应的RoomId。注：房间号类型默认为整型，若房间号类型为字符串，请通过RoomIdType指定。</p>
+   */
+  RoomId: string
+  /**
+   * <p>房间信息RoomType，必须和对话的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。</p><p>枚举值：</p><ul><li>0： 数字房间号</li><li>1： 字符串房间号</li></ul><p>默认值：0</p>
+   */
+  RoomIdType: number
+  /**
+   * <p>对话机器人相关配置。</p>
+   */
+  AgentConfig: VoiceConversationConfig
+  /**
+   * <p>对话链路模式：<code>Cascade</code>（默认，三段式）/ <code>S2S</code>（端到端语音大模型）。</p><p>枚举值：</p><ul><li>Cascade： 默认，三段式</li><li>S2S： 端到端语音大模型</li></ul><p>默认值：Cascade</p>
+   */
+  ConversationMode?: string
+  /**
+   * <p>端到端语音大模型配置。<strong>仅 <code>S2S</code> 模式必填</strong>；<code>Cascade</code> 模式忽略。</p>
+   */
+  S2SConfig?: VoiceConversationS2SConfig
+  /**
+   * <p>语音识别配置。<strong>仅 <code>Cascade</code> 模式必填</strong>；<code>S2S</code> 模式忽略。</p>
+   */
+  STTConfig?: VoiceConversationSTTConfig
+  /**
+   * <p>大模型配置。<strong>仅 <code>Cascade</code> 模式必填</strong>；<code>S2S</code> 模式忽略。</p>
+   */
+  LLMConfig?: VoiceConversationLLMConfig
+  /**
+   * <p>语音合成配置。<strong>仅 <code>Cascade</code> 模式必填</strong>；<code>S2S</code> 模式忽略。</p>
+   */
+  TTSConfig?: VoiceConversationTTSConfig
+  /**
+   * <p>对话控制配置，<code>S2S</code> 模式不支持填写该参数。</p>
+   */
+  DialogConfig?: VoiceConversationDialogConfig
+  /**
+   * <p>视觉理解配置，<code>S2S</code> 模式不支持填写该参数。</p>
+   */
+  VisionConfig?: VoiceConversationVisionConfig
 }
 
 /**
@@ -4675,48 +5114,51 @@ export interface McuAudioParams {
 }
 
 /**
- * SeriesInfo类型的二维数组
+ * 图片列表信息
  */
-export interface RowValues {
+export interface PictureInfo {
   /**
-   * 数据值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片长度
    */
-  RowValue?: Array<number | bigint>
+  Height?: number
   /**
-   * 数据值
+   * 图片宽度
    */
-  RowValueFloat?: Array<number>
+  Width?: number
+  /**
+   * 显示位置x轴方向
+   */
+  XPosition?: number
+  /**
+   * 显示位置y轴方向
+   */
+  YPosition?: number
+  /**
+   * 应用id
+   */
+  SdkAppId?: number
+  /**
+   * 图片id
+   */
+  PictureId?: number
 }
 
 /**
- * 转录服务加入TRTC房间的参数。
+ * DescribeTRTCVoicePrint请求参数结构体
  */
-export interface TranscriptionParam {
+export interface DescribeTRTCVoicePrintRequest {
   /**
-   * <p>转录服务在TRTC房间使用的<a href="https://cloud.tencent.com/document/product/647/46351#userid">UserId</a>，注意这个userId不能与其他TRTC或者转录服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。</p>
+   * SdkappId
    */
-  UserId: string
+  SdkAppId: string
   /**
-   * <p>转录服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算<a href="https://cloud.tencent.com/document/product/647/45910#UserSig">UserSig</a>的方案。</p>
+   * 分页起始偏移，0 或不传表示从第一条开始
    */
-  UserSig: string
+  Offset?: number
   /**
-   * <p>转录用户白名单，开始服务时，为空或不填表示转录所有主播音频，填具体值表示转录指定主播音频。<br>使用黑白名单时，同一个用户同时在黑白名单时，以黑名单为主。</p>
+   * 每页返回数量，默认 20，最大 100；超过最大值会被截断到 100
    */
-  SubscribeList?: Array<TranscriptionUserInfoParams>
-  /**
-   * <p>转录用户黑名单，为空或不填表示无黑名单，填具体值表示不转录指定主播音频。<br>同一个用户同时在黑白名单时，以黑名单为主。</p>
-   */
-  UnSubscribeList?: Array<TranscriptionUserInfoParams>
-  /**
-   * <p>所有参与转录的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止转录任务，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。</p>
-   */
-  MaxIdleTime?: number
-  /**
-   * <p>自定义数据模式： 0表示不开启自定义数据，1表示开启自定义数据。<br>不填默认为0，表示不开启自定义数据。</p>
-   */
-  SendCustomMode?: number
+  Limit?: number
 }
 
 /**
@@ -4838,6 +5280,32 @@ export interface DescribePictureRequest {
    * 页码，不填时默认为1
    */
   PageNo?: number
+}
+
+/**
+ * ControlVoiceConversation请求参数结构体
+ */
+export interface ControlVoiceConversationRequest {
+  /**
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#sdkappid">SdkAppId</a>，和对话的房间所对应的SdkAppId相同。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>对话任务的唯一Id，在启动对话成功后会返回。</p>
+   */
+  TaskId: string
+  /**
+   * <p>控制指令。</p><p>枚举值：</p><ul><li>&quot;Interrupt&quot;： 强制打断</li><li>&quot;invokellm&quot;： 文本注入 LLM：向当前对话上下文注入一段文本，触发一轮 LLM 回复。<code>S2S</code>模式不支持该指令</li><li>invoketts： 文本注入TTS：向当前TTS注入文本，触发TTS播报。<code>S2S</code>模式不支持该指令</li></ul>
+   */
+  Command: string
+  /**
+   * <p>注入LLM的配置，<code>Command=invokellm</code> 时必填</p>
+   */
+  InvokeLLM?: VoiceConversationInvokeLLM
+  /**
+   * <p>注入TTS的配置，<code>Command=invoketts</code> 时必填</p>
+   */
+  InvokeTTS?: VoiceConversationInvokeTTS
 }
 
 /**
@@ -4971,6 +5439,118 @@ export interface DescribeTRTCSegmentModerationUsageResponse {
 }
 
 /**
+ * AI对话的任务参数。
+ */
+export interface VoiceConversationConfig {
+  /**
+   * <p>对话服务在TRTC房间使用的<a href="https://cloud.tencent.com/document/product/647/46351#userid">UserId</a>，注意这个userId不能与其他TRTC或者对话服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。</p>
+   */
+  UserId: string
+  /**
+   * <p>对话服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算<a href="https://cloud.tencent.com/document/product/647/45910#UserSig">UserSig</a>的方案。</p>
+   */
+  UserSig: string
+  /**
+   * <p>对话服务订阅的主播名，订阅指定真实用户的音频，只能填写一个订阅主播。</p>
+   */
+  TargetUserId: Array<string>
+  /**
+   * <p>回推机器人参数。</p>
+   */
+  TTSPushRoomParams: TranscriptionUserInfoParams
+  /**
+   * <p>参与对话的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止对话任务，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。</p><p>单位：秒</p>
+   */
+  MaxIdleTime?: number
+  /**
+   * <p>用于过滤LLM返回内容，不播放括号中的内容。1：中文括号（）2：英文括号() 3：中文方括号【】4：英文方括号[] 5：英文花括号{} 。默认值为空，表示不进行过滤。 示例值：1取值范围：[1, 5]。S2S 模式不支持填写该参数。</p>
+   */
+  FilterBracketsContent?: Array<number | bigint>
+  /**
+   * <p>字幕显示模式。S2S 模式不支持填写该参数。</p><p>枚举值：</p><ul><li>0： 尽快显示</li><li>1： 句子级别实时显示</li></ul>
+   */
+  SubtitleMode?: number
+  /**
+   * <p>控制新一轮对话的触发方式，默认为&quot;auto&quot;。S2S 模式不支持填写该参数。</p><p>枚举值：</p><ul><li>&quot;auto&quot;： 后台自动识别断句触发LLM(基于静音时长)</li></ul>
+   */
+  TurnDetectionMode?: string
+}
+
+/**
+ * AI对话的LLM参数配置
+ */
+export interface VoiceConversationLLMConfig {
+  /**
+   * <p>LLM 协议类型，如openai（OpenAI 兼容协议）。</p>
+   */
+  LLMType: string
+  /**
+   * <p>模型名，如 gpt-4o-mini</p>
+   */
+  Model: string
+  /**
+   * <p>OpenAI 协议兼容的 endpoint。</p>
+   */
+  APIUrl?: string
+  /**
+   * <p>厂商 API Key。</p>
+   */
+  APIKey?: string
+  /**
+   * <p>系统提示词。</p>
+   */
+  SystemPrompt?: string
+  /**
+   * <p>LLM 调用失败后，使用此文本生成 TTS音频。</p>
+   */
+  FailureMessage?: string
+  /**
+   * <p>单次回复最大 Token 数，0=不限制，默认值为0。注意：如果模型输出token数量大于设置的MaxTokens的值，会截断回复内容。</p>
+   */
+  MaxTokens?: number
+  /**
+   * <p>是否开启思考模式（需结合提供厂商具体使用）。注意：开启思考模式会占用输出token数。</p>
+   */
+  ThinkingMode?: boolean
+  /**
+   * <p>LLM 中缓存的对话轮次数量，范围 0~50。建议值[10, 30]。注意：指定轮次上下文的总 token 数不能超过 LLM 支持的上限。</p>
+   */
+  MaxHistory?: number
+  /**
+   * <p>MCP 工具调用最大轮次，范围 0~50，默认 10。</p>
+   */
+  MaxToolRound?: number
+  /**
+   * <p>单次请求的超时事件（毫秒），范围 1000~60000，默认 10000。</p><p>单位：毫秒</p>
+   */
+  Timeout?: number
+  /**
+   * <p>采样温度，范围 0.0~2.0，默认 1.0。</p>
+   */
+  Temperature?: number
+  /**
+   * <p>采样概率，范围 0.0~1.0，默认 1.0。</p>
+   */
+  TopP?: number
+  /**
+   * <p>Mcp Server参数。</p>
+   */
+  McpServer?: VoiceConversationMcpServer
+  /**
+   * <p>自定义 HTTP 请求头。</p>
+   */
+  CustomHeaders?: Array<KeyValueItem>
+  /**
+   * <p>各厂商独有的扩展参数（如 DeepSeek 的<code>reasoning_effort</code>、混元的 <code>enable_enhancement</code> 等）。</p>
+   */
+  CustomFields?: Array<KeyValueItem>
+  /**
+   * <p>初始历史消息，每项为 <code>{&quot;Role&quot;: &quot;user&quot;/&quot;assistant&quot;/&quot;system&quot;, &quot;Content&quot;: &quot;xxx&quot;}</code>这种格式。</p>
+   */
+  HistoryMessages?: Array<VoiceConversationHistoryMessage>
+}
+
+/**
  * DescribePicture返回参数结构体
  */
 export interface DescribePictureResponse {
@@ -5064,6 +5644,10 @@ export interface CreateCloudModerationRequest {
    * <p>任务ID可以调用的时效性，从成功开启任务并获得TaskID后开始计算，超时后无法调用查询、更新和停止等接口，但是切片任务不会停止。 参数的单位是小时，默认24小时（1天），最大可设置72小时（3天），最小设置6小时。举例说明：如果不设置该参数，那么开始切片成功后，查询、更新和停止切片的调用时效为24个小时。</p>
    */
   ResourceExpiredHour?: number
+  /**
+   * <p>客户自定义扩展字段，服务端完全不解析，只做透传，在事件回调中原样返回</p><p>入参限制：总字符数≤4KB</p>
+   */
+  Extra?: string
 }
 
 /**
@@ -5097,6 +5681,20 @@ export interface DescribeTrtcMcuTranscodeTimeRequest {
    * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
    */
   SdkAppId?: number
+}
+
+/**
+ * AI对话历史消息。
+ */
+export interface VoiceConversationHistoryMessage {
+  /**
+   * <p>对话角色，如&quot;user&quot;、&quot;assistant&quot;、&quot;system&quot;等。</p>
+   */
+  Role: string
+  /**
+   * <p>对话内容。</p>
+   */
+  Content: string
 }
 
 /**
@@ -5218,17 +5816,13 @@ export interface DismissRoomByStrRoomIdResponse {
 }
 
 /**
- * StopPublishCdnStream返回参数结构体
+ * 单流旁路转推的用户上行信息。
  */
-export interface StopPublishCdnStreamResponse {
+export interface SingleSubscribeParams {
   /**
-   * 转推任务唯一的String Id
+   * 用户媒体流参数。
    */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  UserMediaStream: UserMediaStream
 }
 
 /**
@@ -5319,13 +5913,29 @@ export interface Vocab {
 }
 
 /**
- * 单流旁路转推的用户上行信息。
+ * BatchDeleteTRTCVoicePrint返回参数结构体
  */
-export interface SingleSubscribeParams {
+export interface BatchDeleteTRTCVoicePrintResponse {
   /**
-   * 用户媒体流参数。
+   * 成功删除的声纹数量（按数据库实际删除行数统计）
    */
-  UserMediaStream: UserMediaStream
+  SuccessCount?: number
+  /**
+   * 失败的声纹数量（通常是因为声纹不存在）
+   */
+  FailCount?: number
+  /**
+   * 每个 VoicePrintId 的处理结果列表，元素为 VoicePrintBatchDeleteResult结构：{ VoiceprintId:string, ErrorCode:string, ErrorMessage:string }，成功项仅返回 VoiceprintId，失败项带 ErrorCode/ErrorMessage。
+   */
+  Results?: Array<VoicePrintBatchDeleteResult>
+  /**
+   * 结果描述，成功时为 batch delete completed: X succeeded, Y failed
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5499,6 +6109,28 @@ export interface SetVocabStateV3Request {
 }
 
 /**
+ * RegisterTRTCVoicePrint请求参数结构体
+ */
+export interface RegisterTRTCVoicePrintRequest {
+  /**
+   * 业务方自定义的说话人唯一标识，同一 (AppId, SdkAppId, SpeakerId) 重复调用会覆盖旧声纹（软删旧记录 + 新建一行，返回新的 VoicePrintId）
+   */
+  SpeakerId: string
+  /**
+   * 音频数据的 Base64 字符串。要求：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后大小 ≤ 2MB；PCM 裸数据时长 10s ≤ 时长 ≤ 45s（WAV 去掉 header 后按相同标准校验）
+   */
+  Data: string
+  /**
+   * SdkAppId
+   */
+  SdkAppId: string
+  /**
+   * 音频格式，可选 pcm 或 wav，大小写不敏感，不传默认为 pcm
+   */
+  AudioFormat?: string
+}
+
+/**
  * TRTC用户参数。
  */
 export interface MixUserInfo {
@@ -5646,6 +6278,24 @@ export interface SliceStorageParams {
 }
 
 /**
+ * 批量删除逐项结果（VoicePrintBatchDelete 出参 Results 元素）
+ */
+export interface VoicePrintBatchDeleteResult {
+  /**
+   * <p>本项对应的声纹 ID。成功项与失败项均会返回。<br>示例值：59d83c76-8f4e-4a1b-9c2d-0e7f8a6b5c4d</p>
+   */
+  VoicePrintId?: string
+  /**
+   * <p>本项失败时的错误码，成功项为空。常见值：FailedOperation.VoicePrintNotFound（声纹不存在或已删除）、InvalidParameterValue.InvalidVoicePrintId（ID 格式非法）。<br>示例值：FailedOperation.VoicePrintNotFound</p>
+   */
+  ErrorCode?: string
+  /**
+   * <p>本项失败时的错误描述，成功项为空。<br>示例值：voiceprint not found</p>
+   */
+  ErrorMessage?: string
+}
+
+/**
  * DescribeTRTCDedicatedCloudAccUsage请求参数结构体
  */
 export interface DescribeTRTCDedicatedCloudAccUsageRequest {
@@ -5661,6 +6311,34 @@ export interface DescribeTRTCDedicatedCloudAccUsageRequest {
    * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
    */
   SdkAppId?: number
+}
+
+/**
+ * ModifyVoiceConversation返回参数结构体
+ */
+export interface ModifyVoiceConversationResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * LLM自定义数据结构
+ */
+export interface KeyValueItem {
+  /**
+   * <p>Key</p>
+   */
+  Key: string
+  /**
+   * <p>Value</p>
+   */
+  Value: string
 }
 
 /**
@@ -5739,50 +6417,17 @@ export interface UpdateStreamIngestRequest {
 }
 
 /**
- * TextToSpeechSSE请求参数结构体
+ * StartAIConversation返回参数结构体
  */
-export interface TextToSpeechSSERequest {
+export interface StartAIConversationResponse {
   /**
-   * <p>需要转语音的文字内容，最大支持20000字符</p>
+   * 用于唯一标识对话任务。
    */
-  Text: string
+  TaskId?: string
   /**
-   * <p>文本转语音的声音配置</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Voice: Voice
-  /**
-   * <p>TRTC的SdkAppId</p>
-   */
-  SdkAppId: number
-  /**
-   * <p>文本转语音的输出音频的格式</p>
-   */
-  AudioFormat?: AudioFormat
-  /**
-   * <p>TTS的API密钥</p>
-   * @deprecated
-   */
-  APIKey?: string
-  /**
-   * <p>TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： 高性价比模型，兼顾效果和成本</li><li>flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优</li></ul>
-   */
-  Model?: string
-  /**
-   * <p>需要合成的语言，默认为空，表示自动识别</p><p>flow_02_turbo支持以下语言：</p><ul><li>zh：中文</li><li>en：英文</li><li>ja：日语</li><li>ko：韩语</li><li>yue：粤语</li><li>ms：马来语</li><li>ar：阿拉伯语</li><li>id：印尼语</li><li>th：泰语</li><li>vi：越南语</li></ul><p>flow_01_ex支持以下语言：</p><ul><li>zh：中文（简体） (Chinese Simplified)</li><li>zh-tw：中文（繁体） (Chinese Traditional)</li><li>en：英语 (English)</li><li>ja：日语 (Japanese)</li><li>ko：韩语 (Korean)</li><li>ms：马来语 (Malay)</li><li>yue：粤语 (Cantonese)</li><li>ar：阿拉伯语 (Arabic)</li><li>ru：俄语 (Russian)</li><li>es：西班牙语 (Spanish)</li><li>fr：法语 (French)</li><li>pt：葡萄牙语 (Portuguese)</li><li>de：德语 (German)</li><li>tr：土耳其语 (Turkish)</li><li>nl：荷兰语 (Dutch)</li><li>uk：乌克兰语 (Ukrainian)</li><li>vi：越南语 (Vietnamese)</li><li>id：印尼语 (Indonesian)</li><li>it：意大利语 (Italian)</li><li>th：泰语 (Thai)</li><li>pl：波兰语 (Polish)</li><li>ro：罗马尼亚语 (Romanian)</li><li>el：希腊语 (Greek)</li><li>cs：捷克语 (Czech)</li><li>fi：芬兰语 (Finnish)</li><li>hi：印地语 (Hindi)</li><li>bg：保加利亚语 (Bulgarian)</li><li>da：丹麦语 (Danish)</li><li>he：希伯来语 (Hebrew)</li><li>fa：波斯语（法尔西语） (Persian)</li><li>sk：斯洛伐克语 (Slovak)</li><li>sv：瑞典语 (Swedish)</li><li>hr：克罗地亚语 (Croatian)</li><li>tl：菲律宾语（他加禄语） (Filipino)</li><li>hu：匈牙利语 (Hungarian)</li><li>no：挪威语 (Norwegian)</li><li>sl：斯洛文尼亚语 (Slovenian)</li><li>ca：加泰罗尼亚语 (Catalan)</li><li>nn：新挪威语 (Nynorsk)</li><li>ta：泰米尔语 (Tamil)</li><li>af：南非荷兰语 (Afrikaans)</li></ul>
-   */
-  Language?: string
-  /**
-   * <p>多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。</p>
-   */
-  PronunciationDict?: Array<PronunciationDict>
-  /**
-   * <p>字幕级别</p><p>枚举值：</p><ul><li>0： 无字幕</li><li>1： 句子级别字幕</li><li>2： 词级别字幕，目前只有flow_01_ex支持</li></ul><p>默认值：0</p>
-   */
-  AlignmentMode?: number
-  /**
-   * <p>json字符串，用于拓展用法</p>
-   */
-  ExtraParams?: string
+  RequestId?: string
 }
 
 /**
@@ -5824,13 +6469,13 @@ export interface DeletePictureRequest {
 }
 
 /**
- * StopWebRecord请求参数结构体
+ * StopAIConversation返回参数结构体
  */
-export interface StopWebRecordRequest {
+export interface StopAIConversationResponse {
   /**
-   * <p>需要停止的任务Id</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId: string
+  RequestId?: string
 }
 
 /**
@@ -5845,6 +6490,20 @@ export interface McuSeiParams {
    * 透传SEI
    */
   PassThrough?: McuPassThrough
+}
+
+/**
+ * CreateVoiceConversation返回参数结构体
+ */
+export interface CreateVoiceConversationResponse {
+  /**
+   * <p>用于唯一标识对话任务，由腾讯云服务端生成，后续查询、控制等请求都需要携带TaskID参数。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6052,53 +6711,29 @@ export interface McuWaterMarkText {
 }
 
 /**
- * AI转录参数
+ * DescribeVoiceConversation返回参数结构体
  */
-export interface TranscriptionParams {
+export interface DescribeVoiceConversationResponse {
   /**
-   * 转录机器人的UserId，用于进房发起转录任务。【注意】这个UserId不能与当前房间内的主播观众[UserId](https://cloud.tencent.com/document/product/647/46351#userid)重复。如果一个房间发起多个转录任务时，机器人的userid也不能相互重复，否则会中断前一个任务。需要保证转录机器人UserId在房间内唯一。
+   * <p>任务启动时间</p><p>单位：毫秒</p>
    */
-  UserId: string
+  StartTime?: number
   /**
-   * 转录机器人UserId对应的校验签名，即UserId和UserSig相当于转录机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+   * <p>转录任务状态。</p><p>枚举值：</p><ul><li>Idle： 表示当前转录任务空闲中 </li><li>InProgress： 表示当前转录任务正在进行中</li><li>Exited： 表示当前转录任务正在退出的过程中</li></ul>
    */
-  UserSig: string
+  Status?: string
   /**
-   * IM[管理员账户](
-https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98)，如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。
-   * @deprecated
+   * <p>转录任务的唯一Id。</p>
    */
-  IMAdminUserId?: string
+  TaskId?: string
   /**
-   * IM管理员账户生成的签名，用于向特定群组发送消息。如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。必须和IM管理员的UserId一起填写。
-   * @deprecated
+   * <p>历史对话信息。</p>
    */
-  IMAdminUserSig?: string
+  HistoryContents?: Array<VoiceConversationHistoryContent>
   /**
-   * 房间内推流用户全部退出后超过MaxIdleTime秒，后台自动关闭转录任务，默认值是60s。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MaxIdleTime?: number
-  /**
-   * 1表示机器人只订阅单个人的流，0表示机器人订阅整个房间的流，如果不填默认订阅整个房间的流。
-   */
-  TranscriptionMode?: number
-  /**
-   * TranscriptionMode为1时必填，机器人只会拉该userid的流，忽略房间里其他用户。
-   */
-  TargetUserId?: string
-  /**
-   * 机器人订阅的用户列表
-仅 TranscriptionMode 为 1或者 TranscriptionMode 为无限上麦模式支持传入多个用户列表
-   */
-  TargetUserIdList?: Array<string>
-  /**
-   * 声纹配置
-   */
-  VoicePrint?: VoicePrint
-  /**
-   * 语义断句检测
-   */
-  TurnDetection?: TurnDetection
+  RequestId?: string
 }
 
 /**
@@ -6170,6 +6805,36 @@ export interface UpdateRecognizeVocabV3Response {
 }
 
 /**
+ * 转录服务加入TRTC房间的参数。
+ */
+export interface TranscriptionParam {
+  /**
+   * <p>转录服务在TRTC房间使用的<a href="https://cloud.tencent.com/document/product/647/46351#userid">UserId</a>，注意这个userId不能与其他TRTC或者转录服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。</p>
+   */
+  UserId: string
+  /**
+   * <p>转录服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算<a href="https://cloud.tencent.com/document/product/647/45910#UserSig">UserSig</a>的方案。</p>
+   */
+  UserSig: string
+  /**
+   * <p>转录用户白名单，开始服务时，为空或不填表示转录所有主播音频，填具体值表示转录指定主播音频。<br>使用黑白名单时，同一个用户同时在黑白名单时，以黑名单为主。</p>
+   */
+  SubscribeList?: Array<TranscriptionUserInfoParams>
+  /**
+   * <p>转录用户黑名单，为空或不填表示无黑名单，填具体值表示不转录指定主播音频。<br>同一个用户同时在黑白名单时，以黑名单为主。</p>
+   */
+  UnSubscribeList?: Array<TranscriptionUserInfoParams>
+  /**
+   * <p>所有参与转录的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止转录任务，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。</p>
+   */
+  MaxIdleTime?: number
+  /**
+   * <p>自定义数据模式： 0表示不开启自定义数据，1表示开启自定义数据。<br>不填默认为0，表示不开启自定义数据。</p>
+   */
+  SendCustomMode?: number
+}
+
+/**
  * UpdateRecognizeVocabV3请求参数结构体
  */
 export interface UpdateRecognizeVocabV3Request {
@@ -6207,6 +6872,103 @@ export interface MaxVideoUser {
    * 用户媒体流参数。
    */
   UserMediaStream: UserMediaStream
+}
+
+/**
+ * MCU混流布局参数
+ */
+export interface LayoutParams {
+  /**
+   * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
+   */
+  Template?: number
+  /**
+   * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
+   */
+  MainVideoUserId?: string
+  /**
+   * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
+   */
+  MainVideoStreamType?: number
+  /**
+   * 画中画模板中有效，代表小画面的布局参数。
+   */
+  SmallVideoLayoutParams?: SmallVideoLayoutParams
+  /**
+   * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
+   */
+  MainVideoRightAlign?: number
+  /**
+   * 指定混视频的用户ID列表。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。悬浮模板、九宫格、屏幕分享模板有效，最多可设置16个用户。
+   */
+  MixVideoUids?: Array<string>
+  /**
+   * 自定义模板中有效，指定用户视频在混合画面中的位置。
+   */
+  PresetLayoutConfig?: Array<PresetLayoutConfig>
+  /**
+   * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
+   */
+  PlaceHolderMode?: number
+  /**
+   * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
+   */
+  PureAudioHoldPlaceMode?: number
+  /**
+   * 水印参数。
+   */
+  WaterMarkParams?: WaterMarkParams
+  /**
+   * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
+   */
+  RenderMode?: number
+}
+
+/**
+ * TextToSpeechSSE请求参数结构体
+ */
+export interface TextToSpeechSSERequest {
+  /**
+   * <p>需要转语音的文字内容，最大支持20000字符</p>
+   */
+  Text: string
+  /**
+   * <p>文本转语音的声音配置</p>
+   */
+  Voice: Voice
+  /**
+   * <p>TRTC的SdkAppId</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>文本转语音的输出音频的格式</p>
+   */
+  AudioFormat?: AudioFormat
+  /**
+   * <p>TTS的API密钥</p>
+   * @deprecated
+   */
+  APIKey?: string
+  /**
+   * <p>TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： 高性价比模型，兼顾效果和成本</li><li>flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优</li></ul>
+   */
+  Model?: string
+  /**
+   * <p>需要合成的语言，默认为空，表示自动识别</p><p>flow_02_turbo支持以下语言：</p><ul><li>zh：中文</li><li>en：英文</li><li>ja：日语</li><li>ko：韩语</li><li>yue：粤语</li><li>ms：马来语</li><li>ar：阿拉伯语</li><li>id：印尼语</li><li>th：泰语</li><li>vi：越南语</li></ul><p>flow_01_ex支持以下语言：</p><ul><li>zh：中文（简体） (Chinese Simplified)</li><li>zh-tw：中文（繁体） (Chinese Traditional)</li><li>en：英语 (English)</li><li>ja：日语 (Japanese)</li><li>ko：韩语 (Korean)</li><li>ms：马来语 (Malay)</li><li>yue：粤语 (Cantonese)</li><li>ar：阿拉伯语 (Arabic)</li><li>ru：俄语 (Russian)</li><li>es：西班牙语 (Spanish)</li><li>fr：法语 (French)</li><li>pt：葡萄牙语 (Portuguese)</li><li>de：德语 (German)</li><li>tr：土耳其语 (Turkish)</li><li>nl：荷兰语 (Dutch)</li><li>uk：乌克兰语 (Ukrainian)</li><li>vi：越南语 (Vietnamese)</li><li>id：印尼语 (Indonesian)</li><li>it：意大利语 (Italian)</li><li>th：泰语 (Thai)</li><li>pl：波兰语 (Polish)</li><li>ro：罗马尼亚语 (Romanian)</li><li>el：希腊语 (Greek)</li><li>cs：捷克语 (Czech)</li><li>fi：芬兰语 (Finnish)</li><li>hi：印地语 (Hindi)</li><li>bg：保加利亚语 (Bulgarian)</li><li>da：丹麦语 (Danish)</li><li>he：希伯来语 (Hebrew)</li><li>fa：波斯语（法尔西语） (Persian)</li><li>sk：斯洛伐克语 (Slovak)</li><li>sv：瑞典语 (Swedish)</li><li>hr：克罗地亚语 (Croatian)</li><li>tl：菲律宾语（他加禄语） (Filipino)</li><li>hu：匈牙利语 (Hungarian)</li><li>no：挪威语 (Norwegian)</li><li>sl：斯洛文尼亚语 (Slovenian)</li><li>ca：加泰罗尼亚语 (Catalan)</li><li>nn：新挪威语 (Nynorsk)</li><li>ta：泰米尔语 (Tamil)</li><li>af：南非荷兰语 (Afrikaans)</li></ul>
+   */
+  Language?: string
+  /**
+   * <p>多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。</p>
+   */
+  PronunciationDict?: Array<PronunciationDict>
+  /**
+   * <p>字幕级别</p><p>枚举值：</p><ul><li>0： 无字幕</li><li>1： 句子级别字幕</li><li>2： 词级别字幕，目前只有flow_01_ex支持</li></ul><p>默认值：0</p>
+   */
+  AlignmentMode?: number
+  /**
+   * <p>json字符串，用于拓展用法</p>
+   */
+  ExtraParams?: string
 }
 
 /**
@@ -6271,6 +7033,20 @@ export interface DescribeStreamIngestRequest {
 }
 
 /**
+ * AI对话任务的STT配置参数
+ */
+export interface VoiceConversationSTTConfig {
+  /**
+   * <p>ASR 提供方：trtc（腾讯自研）或第三方厂商名称（如 azure）。</p>
+   */
+  Provider: string
+  /**
+   * <p>ASR厂商专属参数，填写JSON 序列化后的字符串。</p>
+   */
+  Params: string
+}
+
+/**
  * 图片坐标
  */
 export interface ImageLocation {
@@ -6295,86 +7071,27 @@ export interface UpdateVoicePrintResponse {
 }
 
 /**
- * TTS相关配置
+ * StopWebRecord请求参数结构体
  */
-export interface TTSConfig {
+export interface StopWebRecordRequest {
   /**
-   * 音色ID
+   * <p>需要停止的任务Id</p>
    */
-  VoiceId: string
-  /**
-   * TTS 的模型，默认是：flow_01_turbo, 可选: [ flow_01_turbo, flow_01_ex]
-   */
-  Model?: string
-  /**
-   * 语速，范围 0.5-2.0，默认 1.0
-   */
-  Speed?: number
-  /**
-   * (0, 10] 默认值1.0
-   */
-  Volume?: number
+  TaskId: string
 }
 
 /**
- * MCU混流输出流编码参数
+ * SdkAppId级别录制时长数据。
  */
-export interface EncodeParams {
+export interface SdkAppIdRecordUsage {
   /**
-   * 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
+   * SdkAppId的值。
    */
-  AudioSampleRate: number
+  SdkAppId?: string
   /**
-   * 混流-输出流音频码率。取值范围[8,500]，单位为kbps。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
+   * 统计的时间点数据。
    */
-  AudioBitrate: number
-  /**
-   * 混流-输出流音频声道数，取值范围[1,2]，1表示混流输出音频为单声道，2表示混流输出音频为双声道。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
-   */
-  AudioChannels: number
-  /**
-   * 混流-输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
-   */
-  VideoWidth?: number
-  /**
-   * 混流-输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
-   */
-  VideoHeight?: number
-  /**
-   * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
-   */
-  VideoBitrate?: number
-  /**
-   * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
-   */
-  VideoFramerate?: number
-  /**
-   * 混流-输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
-   */
-  VideoGop?: number
-  /**
-   * 混流-输出流背景色，取值是十进制整数。常用的颜色有：
-红色：0xff0000，对应的十进制整数是16724736。
-黄色：0xffff00。对应的十进制整数是16776960。
-绿色：0x33cc00。对应的十进制整数是3394560。
-蓝色：0x0066ff。对应的十进制整数是26367。
-黑色：0x000000。对应的十进制整数是0。
-白色：0xFFFFFF。对应的十进制整数是16777215。
-灰色：0x999999。对应的十进制整数是10066329。
-   */
-  BackgroundColor?: number
-  /**
-   * 混流-输出流背景图片，取值为实时音视频控制台上传的图片ID。
-   */
-  BackgroundImageId?: number
-  /**
-   * 混流-输出流音频编码类型，取值范围[0,1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
-   */
-  AudioCodec?: number
-  /**
-   * 混流-输出流背景图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。BackgroundImageUrl和BackgroundImageId参数都填时，以BackgroundImageUrl为准。图片大小限制不超过2MB。
-   */
-  BackgroundImageUrl?: string
+  Usages?: Array<RecordUsage>
 }
 
 /**
@@ -6487,22 +7204,6 @@ export interface StopAITranscriptionResponse {
 }
 
 /**
- * SeriesInfo类型
- */
-export interface SeriesInfo {
-  /**
-   * 数据列
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Columns: Array<string>
-  /**
-   * 数据值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Values: Array<number | bigint>
-}
-
-/**
  * CreateRecognizeVocabV3返回参数结构体
  */
 export interface CreateRecognizeVocabV3Response {
@@ -6597,6 +7298,55 @@ export interface DescribeAITranscriptionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务端控制AI对话机器人播报指定文本
+ */
+export interface ServerPushText {
+  /**
+   * 服务端推送播报文本
+   */
+  Text?: string
+  /**
+   * 是否允许该文本打断机器人说话
+   */
+  Interrupt?: boolean
+  /**
+   * 播报完文本后，是否自动关闭对话任务
+   */
+  StopAfterPlay?: boolean
+  /**
+   * 服务端推送播报音频
+    格式说明：音频必须为单声道，采样率必须跟对应TTS的采样率保持一致，编码为Base64字符串。
+    输入规则：当提供Audio字段时，将不接受Text字段的输入。系统将直接播放Audio字段中的音频内容。
+   */
+  Audio?: string
+  /**
+   * 默认为0，仅在Interrupt为false时有效
+- 0表示当前有交互发生时，会丢弃Interrupt为false的消息
+- 1表示当前有交互发生时，不会丢弃Interrupt为false的消息，而是缓存下来，等待当前交互结束后，再去处理
+
+注意：DropMode为1时，允许缓存多个消息，如果后续出现了打断，缓存的消息会被清空
+   */
+  DropMode?: number
+  /**
+   * ServerPushText消息的优先级，0表示可被打断，1表示不会被打断。**目前仅支持传入0，如果需要传入1，请提工单联系我们添加权限。**
+注意：在接收到Priority=1的消息后，后续其他任何消息都会被忽略（包括Priority=1的消息），直到Priority=1的消息处理结束。该字段可与Interrupt、DropMode字段配合使用。
+例子：
+- Priority=1、Interrupt=true，会打断现有交互，立刻播报，播报过程中不会被打断
+- Priority=1、Interrupt=false、DropMode=1，会等待当前交互结束，再进行播报，播报过程中不会被打断
+
+   */
+  Priority?: number
+  /**
+   * 是否将文本加入到llm历史上下文中
+   */
+  AddHistory?: boolean
+  /**
+   * 如果填写，会和字幕绑定发送到端上，注意确保内容为json字符串
+   */
+  MetaInfo?: string
 }
 
 /**
