@@ -998,4 +998,14 @@ it("iss.v20230517.ControlRecordTimeline", async function () {
     }
 })
 
+it("iss.v20230517.ListVLPlanResults", async function () {
+    try {
+       const data = await client.ListVLPlanResults({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

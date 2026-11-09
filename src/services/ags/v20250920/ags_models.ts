@@ -238,6 +238,10 @@ export interface DescribePreCacheImageTaskRequest {
    * <p>镜像预热ID，只能ID或三元组（Image、ImageDigest、ImageRegistrytype）二选一查询</p>
    */
   PreCacheImageId?: string
+  /**
+   * <p>镜像预热类型</p><p>枚举值：</p><ul><li>image： 镜像预热</li><li>image_volume： 镜像卷预热</li></ul><p>默认值：image</p>
+   */
+  PreCacheType?: string
 }
 
 /**
@@ -875,6 +879,10 @@ export interface ResourceConfiguration {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Storage?: string
+  /**
+   * <p>关联的GPU资源组ID</p>
+   */
+  GPUResourceGroupId?: string
 }
 
 /**
@@ -3015,6 +3023,10 @@ export interface StartSandboxInstanceRequest {
    * <p>沙箱元数据</p>
    */
   Metadata?: Array<MetadataVar>
+  /**
+   * <p>实例启动模式。DEFAULT：使用原有同步创建流程，为默认值；WAIT_UNTIL_HEALTHY：使用持久化后台创建流程，受理后可能返回 STARTING，需查询实例状态确认最终结果。</p>
+   */
+  StartMode?: string
 }
 
 /**

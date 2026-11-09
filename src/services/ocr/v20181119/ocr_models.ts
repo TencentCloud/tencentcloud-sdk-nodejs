@@ -8089,7 +8089,7 @@ export interface SingleInvoiceItem {
  */
 export interface DescribeExtractDocAgentJobRequest {
   /**
-   * 任务唯一ID。由服务端生成。
+   * <p>任务唯一ID。由服务端生成。</p>
    */
   JobId?: string
 }
@@ -8948,29 +8948,33 @@ export interface TableDetectInfo {
  */
 export interface DescribeExtractDocAgentJobResponse {
   /**
-   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。
+   * <p>图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。</p>
    */
   Angle?: number
   /**
-   * 配置结构化文本信息。
+   * <p>配置结构化文本信息。AgentType为0按照这个结构返回</p>
    */
   StructuralList?: Array<GroupInfo>
   /**
-   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
+   * <p>任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。</p>
    */
   ErrorCode?: string
   /**
-   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
+   * <p>任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。</p>
    */
   ErrorMessage?: string
   /**
-   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   * <p>任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功</p>
    */
   JobStatus?: string
   /**
-   * 思考过程
+   * <p>思考过程</p>
    */
   ThoughtContent?: string
+  /**
+   * <p>定制的json结构字符串，主要用于快速定制输出的agent输出结构。推荐用于POC场景</p>
+   */
+  AgentResultJson?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10998,6 +11002,10 @@ export interface SubmitExtractDocAgentJobRequest {
    * <p>model_hunyuan:选择混元底座视觉大模型精调抽取任务  model_youtu：选择优图底座多模态大模型精调抽取任务</p>
    */
   ModelConfig?: string
+  /**
+   * <p>agent支持的类型枚举,不同类型输出结果不一样，默认为0</p><p>0:表示标准抽取Agent</p><p>1:表示合同协议分类+抽取+审核Agent</p>
+   */
+  AgentType?: number
 }
 
 /**

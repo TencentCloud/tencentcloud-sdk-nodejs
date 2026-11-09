@@ -55,9 +55,11 @@ import {
   ModifyApiKeyInfoResponse,
   DeleteGlossaryRequest,
   DescribeGlossaryEntriesRequest,
+  ModifyApiKeyBindingsResponse,
   DescribeTokenPlanApiKeyRequest,
   DeleteApiKeyResponse,
   ModifyGlossaryEntryInput,
+  ModifyApiKeyBindingsRequest,
   CreateEndpointResponse,
   DescribeTokenPlanApiKeyListRequest,
   DescribeGlossariesRequest,
@@ -344,6 +346,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApiKeyStatusResponse) => void
   ): Promise<ModifyApiKeyStatusResponse> {
     return this.request("ModifyApiKeyStatus", req, cb)
+  }
+
+  /**
+     * 更新 API 密钥绑定。
+
+更新 API 密钥的绑定关系和绑定类型。BindType 为 all 时 Bindings 必须为空，BindType含 custom 时 Bindings 为绑定列表。
+     */
+  async ModifyApiKeyBindings(
+    req: ModifyApiKeyBindingsRequest,
+    cb?: (error: string, rep: ModifyApiKeyBindingsResponse) => void
+  ): Promise<ModifyApiKeyBindingsResponse> {
+    return this.request("ModifyApiKeyBindings", req, cb)
   }
 
   /**

@@ -26,6 +26,7 @@ import {
   BackupMethodStatisticsOutPut,
   DescribeDatabasesRequest,
   DescribeDBParametersRequest,
+  ModifyDBInstanceRequest,
   ModifyInstanceNetworkResponse,
   ModifyInstanceSSLStatusResponse,
   DescribeDBEnginesRequest,
@@ -148,6 +149,7 @@ import {
   DescribeFlowRequest,
   ModifyDBSBackupSetCommentResponse,
   AutoScalingConfig,
+  ModifyDBInstanceResponse,
   DatabaseProcedure,
   DescribeDBEnginesResponse,
   ModifyAutoRenewFlagRequest,
@@ -709,6 +711,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowTypesResponse) => void
   ): Promise<DescribeFlowTypesResponse> {
     return this.request("DescribeFlowTypes", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstance）提供通用变配实例功能，合并纵向变配（UpgradeInstance）和横向变配（ExpandInstance）的能力，支持CPU/内存/磁盘/节点数/可用区/存储类型的复合变更。支持DryRun预检查模式，可在不实际执行变配的情况下获取变配计划。
+   */
+  async ModifyDBInstance(
+    req: ModifyDBInstanceRequest,
+    cb?: (error: string, rep: ModifyDBInstanceResponse) => void
+  ): Promise<ModifyDBInstanceResponse> {
+    return this.request("ModifyDBInstance", req, cb)
   }
 
   /**

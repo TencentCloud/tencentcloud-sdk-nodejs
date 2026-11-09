@@ -573,6 +573,14 @@ export interface BackUpAndroidInstanceToStorageRequest {
  */
 export interface CreateAndroidInstanceMCPTokenResponse {
   /**
+   * <p>内部 ID，格式 k_ + 16 位 hex</p>
+   */
+  TokenId?: string
+  /**
+   * <p>明文 token，格式 mcpk_ + 48 位 hex。服务端只存 sha256，只返回这一次</p>
+   */
+  Token?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -844,6 +852,16 @@ export interface ResetAndroidInstancesRequest {
    * <p>重置模式。在 AndroidInstanceImageId 不为空时才生效。</p><p>CleanData：默认选项，清理系统属性和用户数据<br>KeepSystemProperties：只保留系统属性<br>KeepData: 保留系统属性和用户数据</p>
    */
   Mode?: string
+}
+
+/**
+ * TrylockWorker返回参数结构体
+ */
+export interface TrylockWorkerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1295,7 +1313,16 @@ export interface ImportAndroidInstanceImageResponse {
 /**
  * RenewAndroidInstanceMCPToken请求参数结构体
  */
-export type RenewAndroidInstanceMCPTokenRequest = null
+export interface RenewAndroidInstanceMCPTokenRequest {
+  /**
+   * <p>内部 ID，格式 k_ + 16 位 hex</p>
+   */
+  TokenId: string
+  /**
+   * <p>有效期（秒），必须大于 0</p><p>单位：秒</p>
+   */
+  ExpireSeconds: number
+}
 
 /**
  * DeleteAndroidInstanceLabel请求参数结构体
@@ -1628,7 +1655,24 @@ export interface DeleteAndroidInstanceBackupsRequest {
 /**
  * CreateAndroidInstanceMCPToken请求参数结构体
  */
-export type CreateAndroidInstanceMCPTokenRequest = null
+export interface CreateAndroidInstanceMCPTokenRequest {
+  /**
+   * <p>ROOT / USER（大小写敏感），默认 USER。ROOT 可访问该 AppId 下全部实例</p><p>枚举值：</p><ul><li>ROOT： 可访问该 AppId 下全部实例</li><li>USER： 可访问本角色实例白名单内的实例</li></ul><p>默认值：USER</p>
+   */
+  Role?: string
+  /**
+   * <p>有效期（秒）；0 或不传表示永不过期（负值等同不过期）</p>
+   */
+  ExpireSeconds?: number
+  /**
+   * <p>备注名</p>
+   */
+  TokenName?: string
+  /**
+   * <p>USER 角色可访问的实例白名单</p>
+   */
+  AllowedInstanceIds?: Array<string>
+}
 
 /**
  * CreateAndroidInstancesScreenshot返回参数结构体
@@ -1848,6 +1892,15 @@ export interface ConnectAndroidInstanceResponse {
  * DescribeAndroidInstanceMCPTokens返回参数结构体
  */
 export interface DescribeAndroidInstanceMCPTokensResponse {
+  /**
+   * <p>Token列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tokens?: Array<AndroidInstanceMCPToken>
+  /**
+   * <p>Token总数</p><p>单位：个</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2357,13 +2410,38 @@ export interface DescribeAndroidInstancesByAppsRequest {
 }
 
 /**
- * TrylockWorker返回参数结构体
+ * 安卓实例MCP Token
  */
-export interface TrylockWorkerResponse {
+export interface AndroidInstanceMCPToken {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>内部 ID，格式 k_ + 16 位 hex</p>
    */
-  RequestId?: string
+  TokenId?: string
+  /**
+   * <p>ROOT / USER（大小写敏感），默认 USER。ROOT 可访问该 AppId 下全部实例</p>
+   */
+  Role?: string
+  /**
+   * <p>备注名</p>
+   */
+  TokenName?: string
+  /**
+   * <p>USER 角色可访问的实例白名单</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowedInstanceIds?: Array<string>
+  /**
+   * <p>创建时间</p><p>参数格式：ISO8601 字符串；</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>过期时间</p><p>参数格式：ISO8601 字符串；永不过期时为空串</p>
+   */
+  ExpiresTime?: string
+  /**
+   * <p>或 EXPIRED；EXPIRED 由 ExpiresTime 推导。已删除的不出现在列表里</p><p>枚举值：</p><ul><li>ACTIVE： 正常可用的</li><li>EXPIRED： 过期的</li></ul>
+   */
+  Status?: string
 }
 
 /**
@@ -2593,7 +2671,16 @@ AndroidVersion：安卓版本
 /**
  * DescribeAndroidInstanceMCPTokens请求参数结构体
  */
-export type DescribeAndroidInstanceMCPTokensRequest = null
+export interface DescribeAndroidInstanceMCPTokensRequest {
+  /**
+   * <p>偏移量，默认为 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>本次请求单次返回数据条数，用于分页控制</p><p>取值范围：[0, 100]</p><p>默认值：10</p>
+   */
+  Limit?: number
+}
 
 /**
  * 安卓实例任务状态信息
@@ -3121,6 +3208,10 @@ export interface DescribeAndroidInstanceAppsRequest {
  */
 export interface RenewAndroidInstanceMCPTokenResponse {
   /**
+   * <p>过期时间，ISO8601 字符串；token 永不过期时为空串</p>
+   */
+  ExpiresTime?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3380,7 +3471,12 @@ export interface DeleteAndroidInstanceBackupFilesResponse {
 /**
  * DeleteAndroidInstanceMCPToken请求参数结构体
  */
-export type DeleteAndroidInstanceMCPTokenRequest = null
+export interface DeleteAndroidInstanceMCPTokenRequest {
+  /**
+   * <p>内部 ID，格式 k_ + 16 位 hex</p>
+   */
+  TokenId: string
+}
 
 /**
  * CreateAndroidInstanceSSH请求参数结构体

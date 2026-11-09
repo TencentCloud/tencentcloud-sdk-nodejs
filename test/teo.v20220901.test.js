@@ -788,6 +788,16 @@ it("teo.v20220901.OperateInferenceService", async function () {
     }
 })
 
+it("teo.v20220901.DescribeTopFunctionAnalysisData", async function () {
+    try {
+       const data = await client.DescribeTopFunctionAnalysisData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyDnsRecords", async function () {
     try {
        const data = await client.ModifyDnsRecords({})
@@ -2371,6 +2381,16 @@ it("teo.v20220901.EdgeKVPut", async function () {
 it("teo.v20220901.DescribeInferenceServiceDeploymentLogs", async function () {
     try {
        const data = await client.DescribeInferenceServiceDeploymentLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeTimingFunctionAnalysisData", async function () {
+    try {
+       const data = await client.DescribeTimingFunctionAnalysisData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

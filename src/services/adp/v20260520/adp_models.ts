@@ -5125,7 +5125,7 @@ export interface SkillProfile {
  */
 export interface DescribeMetricOverviewListRequest {
   /**
-   * <p>看板域，必填，决定返回哪个域的 KPI 数据</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>平台功能用量</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）</td></tr></tbody></table>
+   * <p>看板域，必填，决定返回哪个域的 KPI 数据</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>模型用量</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>插件用量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>平台功能用量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>模型并发超限（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>知识库容量（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>用量汇总（预留，暂不支持）</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>资源消耗（计费明细）（预留，暂不支持）</td></tr></tbody></table>
    */
   ResourceType: number
   /**
@@ -5140,6 +5140,10 @@ export interface DescribeMetricOverviewListRequest {
    * <p>扩展过滤（resource_type=MODEL）。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：model_name（模型名）、user_id（用户ID）、space_id（空间ID）、resource_id/source_id（来源ID）、metric_source_type（METRIC_SOURCE_TYPE_* 枚举名或整数）</p>
    */
   FilterList?: Array<Filter>
+  /**
+   * <p>空间 ID，用于服务端校验当前用户的空间权限；空间或应用视图需传入，企业视图可不传。VIEW_TYPE_SPACE 时应与 ViewScope.ScopeId 一致，VIEW_TYPE_APP 时须校验应用归属该空间；与 FilterList 的 space_id 同传须一致。服务端不得仅凭请求中的 SpaceId 授权</p>
+   */
+  SpaceId?: string
 }
 
 /**
@@ -5829,6 +5833,10 @@ export interface DescribeUsageDetailListRequest {
    * <p>每页数量，最大 100</p>
    */
   PageSize?: number
+  /**
+   * <p>空间 ID；空间或应用视图必传，由服务端校验空间权限</p>
+   */
+  SpaceId?: string
 }
 
 /**
@@ -6114,6 +6122,10 @@ export interface UsageDetail {
    * <p>调用来源</p>
    */
   CallSource?: CallSource
+  /**
+   * <p>MODEL 类型的文档解析明细</p>
+   */
+  DocumentParse?: DocumentParseUsageDetail
   /**
    * <p>计量 ID，用于对账/回溯</p>
    */
@@ -6517,6 +6529,10 @@ export interface ModelUsageSummary {
    */
   CallCount?: number
   /**
+   * <p>模型消耗 PU 总量（聚合维度内的 PU 消耗之和）</p>
+   */
+  ConsumptionPU?: number
+  /**
    * <p>是否默认知识库</p>
    */
   IsDefaultKB?: boolean
@@ -6528,10 +6544,6 @@ export interface ModelUsageSummary {
    * <p>MODEL 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_* /cache_*），label 为空表示 total_tokens；unit=PAGE_COUNT 表示模型消耗页数</p>
    */
   ResourceConsumptionList?: Array<ResourceConsumption>
-  /**
-   * <p>模型消耗 PU 总量（聚合维度内的 PU 消耗之和）</p>
-   */
-  ConsumptionPU?: number
 }
 
 /**
@@ -6974,9 +6986,21 @@ export interface AgentModelConfig {
  */
 export interface ModelUsageDetail {
   /**
+   * <p>API Key 别名或脱敏值；禁止返回明文密钥</p>
+   */
+  ApiKeyDisplay?: string
+  /**
+   * <p>计费方式；非模型 API 或历史数据可为未指定；后付费不产生 PU</p>
+   */
+  BillingType?: number
+  /**
    * <p>调用类型，来源于计费 scene_billing（与 filter.call_type 对应）</p>
    */
   CallType?: string
+  /**
+   * <p>本次调用消耗 PU 量</p>
+   */
+  ConsumptionPU?: number
   /**
    * <p>是否默认知识库，仅ResourceType=5（知识库容量）业务下有意义</p>
    */
@@ -6989,10 +7013,6 @@ export interface ModelUsageDetail {
    * <p>MODEL 域单次调用的消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_* /cache_*），label 为空表示 total_tokens；unit=PAGE_COUNT 表示模型消耗页数</p>
    */
   ResourceConsumptionList?: Array<ResourceConsumption>
-  /**
-   * <p>本次调用消耗 PU 量</p>
-   */
-  ConsumptionPU?: number
 }
 
 /**
@@ -8111,6 +8131,18 @@ export interface DescribeMsgRecordCategoryListRequest {
  * 调用来源
  */
 export interface CallSource {
+  /**
+   * <p>环境 UUID（来源于上报字段 channel_uuid）；公有云可为空，不能用 deployment_type 替代</p>
+   */
+  DeploymentUuid?: string
+  /**
+   * <p>空间 ID</p>
+   */
+  SpaceId?: string
+  /**
+   * <p>空间名称；空间不存在或查询失败时为空</p>
+   */
+  SpaceName?: string
   /**
    * <p>调用主体 ID，含义由 subject_type 决定（如 app_id、kb_id 等）</p>
    */
@@ -9820,6 +9852,36 @@ export interface DescribeAgentReleasePreviewListResponse {
 }
 
 /**
+ * 文档解析单次调用明细
+ */
+export interface DocumentParseUsageDetail {
+  /**
+   * <p>应用 ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>消耗资源数（PU）</p>
+   */
+  ConsumptionPu?: number
+  /**
+   * <p>文档 ID</p>
+   */
+  DocId?: string
+  /**
+   * <p>文档解析方式：离线文档解析、实时文档解析。上报值 OfflineUpload 对应离线文档解析；RealtimeUpload、RealTimeDocParse 对应实时文档解析</p>
+   */
+  DocUsageMethod?: string
+  /**
+   * <p>知识库 ID</p>
+   */
+  KbId?: string
+  /**
+   * <p>解析页数</p>
+   */
+  ParsedPageCount?: string
+}
+
+/**
  * DescribeSkillSummaryList返回参数结构体
  */
 export interface DescribeSkillSummaryListResponse {
@@ -10074,6 +10136,10 @@ export interface DescribeUsageSummaryListRequest {
    * <p>每页数量，最大 100</p>
    */
   PageSize?: number
+  /**
+   * <p>空间 ID，空间或应用视图必传；服务端据登录态校验空间权限</p>
+   */
+  SpaceId?: string
 }
 
 /**
@@ -12689,15 +12755,15 @@ export interface AgentPluginParameter {
  */
 export interface PluginUsageDetail {
   /**
-   * <p>插件名称</p>
+   * <p>连接器与工具名称</p>
    */
   PluginName?: string
   /**
-   * <p>PLUGIN 域单次调用的消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_*），label 为空表示 total_tokens</p>
+   * <p>插件单次调用计量：TOKEN 总量用 total_tokens（兼容空 Label），输入/输出用 input/output；其余消耗量按 Unit 区分，PU 的 Label 为 total_pu</p>
    */
   ResourceConsumptionList?: Array<ResourceConsumption>
   /**
-   * <p>插件工具名（tool_name）</p>
+   * <p>工具名称</p>
    */
   ToolName?: string
 }

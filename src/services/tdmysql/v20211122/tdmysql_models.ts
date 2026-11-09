@@ -293,6 +293,60 @@ export interface DescribeDBParametersRequest {
 }
 
 /**
+ * ModifyDBInstance请求参数结构体
+ */
+export interface ModifyDBInstanceRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>是否仅做预检查，不实际执行变配。true: 仅返回变配计划和预检查结果；false: 实际执行变配（默认）</p>
+   */
+  DryRun: boolean
+  /**
+   * <p>对等节点CPU核数，不传则保持当前值不变</p>
+   */
+  HybridNodeCpu?: number
+  /**
+   * <p>对等节点内存大小，单位GB，不传则保持当前值不变</p>
+   */
+  HybridNodeMem?: number
+  /**
+   * <p>对等节点数量，不传则保持当前值不变</p>
+   */
+  HybridNodeNum?: number
+  /**
+   * <p>对等节点磁盘容量，单位GB，不传则保持当前值不变</p>
+   */
+  Disk?: number
+  /**
+   * <p>存储类型，可选值：CLOUD_HSSD（增强型SSD云硬盘）、CLOUD_TCS（本地盘）、CLOUD_BSSD（通用型SSD云硬盘），不传则保持当前值不变</p>
+   */
+  StorageType?: string
+  /**
+   * <p>规格编码，如 4c8g、16c32g 等</p>
+   */
+  SpecCode?: string
+  /**
+   * <p>目标可用区列表，不传则保持当前值不变</p>
+   */
+  Zones?: Array<string>
+  /**
+   * <p>可用区模式，1: 单可用区，3: 多可用区主AZ模式</p>
+   */
+  AZMode?: number
+  /**
+   * <p>主可用区，AZMode传3时生效</p>
+   */
+  PrimaryAZ?: string
+  /**
+   * <p>全功能型副本数，取值范围1-3</p>
+   */
+  FullReplications?: number
+}
+
+/**
  * ModifyInstanceNetwork返回参数结构体
  */
 export interface ModifyInstanceNetworkResponse {
@@ -3714,6 +3768,41 @@ export interface AutoScalingConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Step?: number
+}
+
+/**
+ * ModifyDBInstance返回参数结构体
+ */
+export interface ModifyDBInstanceResponse {
+  /**
+   * <p>异步任务ID，DryRun=false时返回。根据此ID可以调用查询任务接口获取任务状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * <p>订单号，预付费场景下返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealName?: string
+  /**
+   * <p>是否原地变配，DryRun=true时返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsInPlaceModification?: boolean
+  /**
+   * <p>是否迁移变配，DryRun=true时返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsMigrateModification?: boolean
+  /**
+   * <p>变配计划描述，DryRun=true时返回，描述将执行的变配子流程编排</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyPlan?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

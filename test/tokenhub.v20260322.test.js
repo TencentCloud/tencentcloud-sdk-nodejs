@@ -188,6 +188,16 @@ it("tokenhub.v20260322.ModifyApiKeyStatus", async function () {
     }
 })
 
+it("tokenhub.v20260322.ModifyApiKeyBindings", async function () {
+    try {
+       const data = await client.ModifyApiKeyBindings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.UpgradeTokenPlanTeamOrder", async function () {
     try {
        const data = await client.UpgradeTokenPlanTeamOrder({})

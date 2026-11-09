@@ -810,6 +810,16 @@ export interface DescribeGlossaryEntriesRequest {
 }
 
 /**
+ * ModifyApiKeyBindings返回参数结构体
+ */
+export interface ModifyApiKeyBindingsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTokenPlanApiKey请求参数结构体
  */
 export interface DescribeTokenPlanApiKeyRequest {
@@ -845,6 +855,28 @@ export interface ModifyGlossaryEntryInput {
    * 目标语言术语。最大 1000 字符。不传则保持不变。
    */
   TargetTerm?: string
+}
+
+/**
+ * ModifyApiKeyBindings请求参数结构体
+ */
+export interface ModifyApiKeyBindingsRequest {
+  /**
+   * <p>API 密钥 ID。</p>
+   */
+  ApiKeyId: string
+  /**
+   * <p>平台类型。取值：maas。</p>
+   */
+  Platform: string
+  /**
+   * <p>绑定类型。取值：all（全部模型和接入点）、model_custom_endpoint_custom（自定义模型+自定义接入点）。</p><p>枚举值：</p><ul><li>model_custom_endpoint_custom： 自定义模型+自定义接入点</li></ul>
+   */
+  BindType: string
+  /**
+   * <p>修改后的apikey的模型或服务绑定列表</p>
+   */
+  Bindings?: Array<BindingItem>
 }
 
 /**

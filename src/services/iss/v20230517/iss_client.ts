@@ -196,6 +196,7 @@ import {
   DescribeDomainRegionRequest,
   AddRecordTemplateRequest,
   DescribeRecordFileRequest,
+  VLPlanResultInfo,
   TaskData,
   RecordSliceInfo,
   QueryForbidPlayChannelListResponse,
@@ -252,6 +253,7 @@ import {
   ListVideoDownloadTaskRequest,
   ListVideoSnapshotTemplateResponse,
   DeleteRecordBackupTemplateRequest,
+  ListVLPlanResultsResponse,
   RecordRetrieveTaskDetailsInfo,
   DescribeStreamAuthResponse,
   DescribeVideoBitRateList,
@@ -296,6 +298,7 @@ import {
   DeleteVideoSnapshotTemplateRequest,
   BatchAddVideoSnapshotConfigChannelResponse,
   UpdateRecordBackupTemplateData,
+  ListVLPlanResultsRequest,
   BatchOperateDeviceResponse,
   ListVLTemplatesResponse,
   AddDeviceData,
@@ -1292,5 +1295,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ControlRecordTimelineResponse) => void
   ): Promise<ControlRecordTimelineResponse> {
     return this.request("ControlRecordTimeline", req, cb)
+  }
+
+  /**
+   * 获取视觉理解计划结果列表
+   */
+  async ListVLPlanResults(
+    req: ListVLPlanResultsRequest,
+    cb?: (error: string, rep: ListVLPlanResultsResponse) => void
+  ): Promise<ListVLPlanResultsResponse> {
+    return this.request("ListVLPlanResults", req, cb)
   }
 }

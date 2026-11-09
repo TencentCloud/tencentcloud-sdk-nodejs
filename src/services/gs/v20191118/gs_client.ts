@@ -67,6 +67,7 @@ import {
   DescribeAndroidInstanceAppsResponse,
   CreateAndroidInstanceWebShellRequest,
   ResetAndroidInstancesRequest,
+  TrylockWorkerResponse,
   FetchAndroidInstancesLogsRequest,
   DisconnectAndroidInstanceAcceleratorResponse,
   CleanAndroidInstancesAppDataRequest,
@@ -158,7 +159,7 @@ import {
   DescribeAndroidAppsRequest,
   StopGameRequest,
   DescribeAndroidInstancesByAppsRequest,
-  TrylockWorkerResponse,
+  AndroidInstanceMCPToken,
   S3Options,
   DescribeAndroidInstancesAppBlacklistRequest,
   CreateAndroidInstancesAccessTokenResponse,
@@ -313,7 +314,7 @@ export class Client extends AbstractClient {
    * 创建安卓实例MCP token
    */
   async CreateAndroidInstanceMCPToken(
-    req?: CreateAndroidInstanceMCPTokenRequest,
+    req: CreateAndroidInstanceMCPTokenRequest,
     cb?: (error: string, rep: CreateAndroidInstanceMCPTokenResponse) => void
   ): Promise<CreateAndroidInstanceMCPTokenResponse> {
     return this.request("CreateAndroidInstanceMCPToken", req, cb)
@@ -483,7 +484,7 @@ export class Client extends AbstractClient {
    * 删除安卓实例 MCP token
    */
   async DeleteAndroidInstanceMCPToken(
-    req?: DeleteAndroidInstanceMCPTokenRequest,
+    req: DeleteAndroidInstanceMCPTokenRequest,
     cb?: (error: string, rep: DeleteAndroidInstanceMCPTokenResponse) => void
   ): Promise<DeleteAndroidInstanceMCPTokenResponse> {
     return this.request("DeleteAndroidInstanceMCPToken", req, cb)
@@ -847,7 +848,7 @@ export class Client extends AbstractClient {
    * 查询安卓实例MCP Token
    */
   async DescribeAndroidInstanceMCPTokens(
-    req?: DescribeAndroidInstanceMCPTokensRequest,
+    req: DescribeAndroidInstanceMCPTokensRequest,
     cb?: (error: string, rep: DescribeAndroidInstanceMCPTokensResponse) => void
   ): Promise<DescribeAndroidInstanceMCPTokensResponse> {
     return this.request("DescribeAndroidInstanceMCPTokens", req, cb)
@@ -897,7 +898,7 @@ export class Client extends AbstractClient {
    * 续期安卓实例 MCP token
    */
   async RenewAndroidInstanceMCPToken(
-    req?: RenewAndroidInstanceMCPTokenRequest,
+    req: RenewAndroidInstanceMCPTokenRequest,
     cb?: (error: string, rep: RenewAndroidInstanceMCPTokenResponse) => void
   ): Promise<RenewAndroidInstanceMCPTokenResponse> {
     return this.request("RenewAndroidInstanceMCPToken", req, cb)

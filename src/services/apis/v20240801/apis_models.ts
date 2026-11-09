@@ -514,49 +514,53 @@ export interface BindMcpSecurityRuleDTO {
  */
 export interface AgentAppMcpServerVO {
   /**
-   * 绑定ID
+   * <p>绑定ID</p>
    */
   ID?: string
   /**
-   * 需要认证
+   * <p>需要认证</p>
    */
   NeedAuth?: boolean
   /**
-   * 凭据ID
+   * <p>凭据ID</p>
    */
   AgentCredentialID?: string
   /**
-   * 凭据详情
+   * <p>凭据详情</p>
    */
   AgentCredentialVO?: DescribeAgentCredentialResp
   /**
-   * mcp详情
+   * <p>mcp详情</p>
    */
   McpServerVO?: DescribeMcpServerResponseVO
   /**
-   * 关联时间
+   * <p>关联时间</p>
    */
   RelateTime?: string
   /**
-   * 应用为OAuth2认证时，sse模式请求mcp时的资源标识
+   * <p>应用为OAuth2认证时，sse模式请求mcp时的资源标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SSEResourceIdentifier?: string
   /**
-   * 应用为OAuth2认证时，streamable模式请求mcp时的资源标识
+   * <p>应用为OAuth2认证时，streamable模式请求mcp时的资源标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamableResourceIdentifier?: string
   /**
-   * 应用ID
+   * <p>应用ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentAppID?: string
   /**
-   * mcp ID
+   * <p>mcp ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   McpServerID?: string
+  /**
+   * <p>应用</p>
+   */
+  AgentAppVO?: DescribeAgentAppResp
 }
 
 /**
@@ -3904,6 +3908,10 @@ export interface AgentAppServiceVO {
    * <p>凭据详情</p>
    */
   AgentCredentialVO?: DescribeAgentCredentialResp
+  /**
+   * <p>应用</p>
+   */
+  AgentAppVO?: DescribeAgentAppResp
 }
 
 /**

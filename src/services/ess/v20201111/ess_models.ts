@@ -805,21 +805,29 @@ export interface DetectInfoVideoData {
  */
 export interface ContractReviewWebUrlOption {
   /**
-   * 禁用暂存。 默认 false，设置为 true 会隐藏界面上的临时保存按钮
+   * <p>禁用暂存。 默认 false，设置为 true 会隐藏界面上的临时保存按钮</p>
    */
   DisableTemporaryStore?: boolean
   /**
-   * 禁用导出。默认 false，设置为 true 会隐藏界面上的导出按钮
+   * <p>禁用导出。默认 false，设置为 true 会隐藏界面上的导出按钮</p>
    */
   DisableExport?: boolean
   /**
-   * 禁用重新审查。默认 false，设置为 true 会隐藏界面上的重新审查按钮
+   * <p>禁用重新审查。默认 false，设置为 true 会隐藏界面上的重新审查按钮</p>
    */
   DisableReviewAgain?: boolean
   /**
-   * 禁用二维码分享。默认 false，设置为 true 会隐藏界面上的分享二维码
+   * <p>禁用二维码分享。默认 false，设置为 true 会隐藏界面上的分享二维码</p>
    */
   DisableWxQrcode?: boolean
+  /**
+   * <p>禁用忽略风险。默认false，设置为true，会根据用户合同审查忽略风险权限点决定是否禁用忽略选项。</p>
+   */
+  DisableIgnoreRisk?: boolean
+  /**
+   * <p>关闭原文修改。默认false，设置为true，根据用户合同审查修订操作权限点决定能否修改、一键修订原文。</p>
+   */
+  DisableRevisedRisk?: boolean
 }
 
 /**

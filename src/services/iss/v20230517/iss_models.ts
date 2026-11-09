@@ -3678,6 +3678,68 @@ export interface DescribeRecordFileRequest {
 }
 
 /**
+ * 视觉理解计划结果信息
+ */
+export interface VLPlanResultInfo {
+  /**
+   * <p>分析结果 ID</p>
+   */
+  VLPlanResultId?: string
+  /**
+   * <p>所属分析计划 ID</p>
+   */
+  VLPlanId?: string
+  /**
+   * <p>计划名称</p>
+   */
+  VLPlanName?: string
+  /**
+   * <p>通道 ID</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>通道名称</p>
+   */
+  ChannelName?: string
+  /**
+   * <p>分析模式：image=图片模式，video=视频模式（预留）</p>
+   */
+  AnalysisMode?: string
+  /**
+   * <p>分析时间戳（秒）</p>
+   */
+  VLResultTimestamp?: number
+  /**
+   * <p>截图时间戳</p>
+   */
+  SnapshotTimestamp?: number
+  /**
+   * <p>视频开始时间戳</p>
+   */
+  VideoStartTimestamp?: number
+  /**
+   * <p>视频结束时间戳</p>
+   */
+  VideoEndTimestamp?: number
+  /**
+   * <p>视频模式计费帧数</p>
+   */
+  BilledFrameCount?: number
+  /**
+   * <p>AI 分析结果内容（JSON 字符串）</p>
+   */
+  Content?: string
+  /**
+   * <p>创建时间，格式 2006-01-02 15:04:05</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>更新时间，格式 2006-01-02 15:04:05</p>
+   */
+  UpdatedAt?: string
+}
+
+/**
  * 查询复杂任务详情返回结果
  */
 export interface TaskData {
@@ -4803,6 +4865,24 @@ export interface DeleteRecordBackupTemplateRequest {
 }
 
 /**
+ * ListVLPlanResults返回参数结构体
+ */
+export interface ListVLPlanResultsResponse {
+  /**
+   * <p>结果列表</p>
+   */
+  Data?: Array<VLPlanResultInfo>
+  /**
+   * <p>总数量</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 录像取回任务详情基础信息
  */
 export interface RecordRetrieveTaskDetailsInfo {
@@ -5622,6 +5702,40 @@ export interface UpdateRecordBackupTemplateData {
    * <p>周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像</p>
    */
   DayOffset?: number
+}
+
+/**
+ * ListVLPlanResults请求参数结构体
+ */
+export interface ListVLPlanResultsRequest {
+  /**
+   * <p>开始时间戳（秒），不早于 30 天前</p>
+   */
+  Start: number
+  /**
+   * <p>结束时间戳（秒），不超过当前时间，时间范围不超过 30 天</p>
+   */
+  End: number
+  /**
+   * <p>分析计划 ID，不传则查询所有计划的结果</p>
+   */
+  VLPlanId?: string
+  /**
+   * <p>通道 ID 列表，支持多值（英文逗号分隔），不传则查询所有通道的结果</p>
+   */
+  ChannelIds?: Array<string>
+  /**
+   * <p>页码，默认 1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认 20，最大 200</p>
+   */
+  PageSize?: number
+  /**
+   * <p>分析模式</p><p>枚举值：</p><ul><li>image： 图片模式</li><li>video： 视频模式</li></ul>
+   */
+  AnalysisMode?: string
 }
 
 /**

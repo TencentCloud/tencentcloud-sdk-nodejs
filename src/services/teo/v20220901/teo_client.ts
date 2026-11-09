@@ -48,6 +48,7 @@ import {
   DescribeSecurityClientAttesterResponse,
   CustomVariable,
   MultiPathGatewayOriginACLInfo,
+  DescribeTimingFunctionAnalysisDataResponse,
   HeaderAction,
   ModifyEdgeKVNamespaceRequest,
   PrepaidPlanParam,
@@ -302,6 +303,7 @@ import {
   CustomAction,
   CreatePurgeTaskResponse,
   DeleteApplicationProxyRuleResponse,
+  DescribeTopFunctionAnalysisDataRequest,
   URLPath,
   DeleteAccelerationDomainsResponse,
   ExceptionRules,
@@ -391,6 +393,7 @@ import {
   RuleCondition,
   DescribeOverviewL7DataResponse,
   DescribeSecurityPolicyRequest,
+  DescribeTimingFunctionAnalysisDataRequest,
   DescribeEnvironmentsResponse,
   CacheParameters,
   OriginAuthenticationRequestProperties,
@@ -690,7 +693,7 @@ import {
   ComplianceRestriction,
   DeleteSecurityJSInjectionRuleRequest,
   BotConfig,
-  ModifyFunctionComponentBindingsRequest,
+  DescribeTopFunctionAnalysisDataResponse,
   WebSecurity,
   NSDetail,
   EnableOriginACLRequest,
@@ -787,6 +790,7 @@ import {
   DescribeMultiPathGatewaySecretKeyRequest,
   DDoSBlockData,
   IPSSLSetting,
+  ModifyFunctionComponentBindingsRequest,
   ModifyZoneCustomVariablesRequest,
   DescribeContentQuotaRequest,
   DescribeAvailableOriginACLFamilyRequest,
@@ -1733,6 +1737,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: OperateInferenceServiceResponse) => void
   ): Promise<OperateInferenceServiceResponse> {
     return this.request("OperateInferenceService", req, cb)
+  }
+
+  /**
+   * 本接口用于查询边缘函数按照指定维度的 topN 数据。请注意本接口查询数据有 10 分钟左右延迟，建议拉取当前时间 10 分钟以前的数据。
+   */
+  async DescribeTopFunctionAnalysisData(
+    req: DescribeTopFunctionAnalysisDataRequest,
+    cb?: (error: string, rep: DescribeTopFunctionAnalysisDataResponse) => void
+  ): Promise<DescribeTopFunctionAnalysisDataResponse> {
+    return this.request("DescribeTopFunctionAnalysisData", req, cb)
   }
 
   /**
@@ -3400,6 +3414,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeInferenceServiceDeploymentLogsResponse) => void
   ): Promise<DescribeInferenceServiceDeploymentLogsResponse> {
     return this.request("DescribeInferenceServiceDeploymentLogs", req, cb)
+  }
+
+  /**
+   * 本接口查询边缘函数分析的时序数据。请注意本接口查询数据有 10 分钟左右延迟，建议拉取当前时间 10 分钟以前的数据。
+   */
+  async DescribeTimingFunctionAnalysisData(
+    req: DescribeTimingFunctionAnalysisDataRequest,
+    cb?: (error: string, rep: DescribeTimingFunctionAnalysisDataResponse) => void
+  ): Promise<DescribeTimingFunctionAnalysisDataResponse> {
+    return this.request("DescribeTimingFunctionAnalysisData", req, cb)
   }
 
   /**

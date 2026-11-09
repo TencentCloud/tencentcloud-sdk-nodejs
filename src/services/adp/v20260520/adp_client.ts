@@ -456,6 +456,7 @@ import {
   DescribePluginResponse,
   ClawAgentChannelContextTimeoutConfig,
   DescribeAgentReleasePreviewListResponse,
+  DocumentParseUsageDetail,
   DescribeSkillSummaryListResponse,
   DescribeConversationMessageListRequest,
   DescribeKBResponse,

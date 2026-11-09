@@ -645,6 +645,24 @@ export interface MultiPathGatewayOriginACLInfo {
 }
 
 /**
+ * DescribeTimingFunctionAnalysisData返回参数结构体
+ */
+export interface DescribeTimingFunctionAnalysisDataResponse {
+  /**
+   * <p>查询结果的总条数。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>时序数据列表。</p>
+   */
+  Data?: Array<TimingDataRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * HTTP 头部设置规则。
  */
 export interface HeaderAction {
@@ -6331,6 +6349,44 @@ export interface DeleteApplicationProxyRuleResponse {
 }
 
 /**
+ * DescribeTopFunctionAnalysisData请求参数结构体
+ */
+export interface DescribeTopFunctionAnalysisDataRequest {
+  /**
+   * <p>站点 ID 集合，至少填入1个站点 ID。</p>
+   */
+  ZoneIds: Array<string>
+  /**
+   * <p>开始时间。</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间。查询时间范围（<code>EndTime</code> - <code>StartTime</code>）需小于等于 7 天。</p>
+   */
+  EndTime: string
+  /**
+   * <p>查询的指标，取值有：</p><li>function_requestCount_functionResult: 按照执行结果的维度统计边缘函数的请求数；</li><li>function_requestCount_functionName: 按照函数名称的维度统计边缘函数的请求数；</li><li>function_requestCount_domain: 按照域名的维度统计边缘函数的请求数。</li>
+   */
+  MetricName: string
+  /**
+   * <p>查询前多少个 top 数据，最大值为1000。不填默认为10，表示查询 top10 的数据。</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件，Filters.Value 的集合数量上限为20，详细的过滤条件 Key 值如下：</p><li>domain：按照子域名进行过滤，示例值： www.example.com。</li><li>function-name：按照边缘函数名称进行过滤，示例值： test051301-zone-2r2fdoxxxx-130000000。</li><li>function-result：按照边缘函数执行结果进行过滤。对应 Value 的可选项如下：<br>   success：成功；<br>   fail：失败。</li>
+   */
+  Filters?: Array<QueryCondition>
+  /**
+   * <p>查询时间粒度，取值有：</p><li>min: 1分钟；</li><li>5min: 5分钟；</li><li>hour: 1小时；</li><li>day: 1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。
+   */
+  Interval?: string
+  /**
+   * <p>数据归属地区，取值有：</p><li>overseas：全球（除中国大陆地区）数据；</li><li>mainland：中国大陆地区数据；</li><li>global：全球数据。</li>不填默认取值为global。
+   */
+  Area?: string
+}
+
+/**
  * 访问 URL 重定向路径配置参数。
  */
 export interface URLPath {
@@ -8451,6 +8507,40 @@ export interface DescribeSecurityPolicyRequest {
    * 指定域名。当 Entity 参数值为 Host 时，使用本参数指定的域名级策略查询域名配置，例如：使用 www.example.com ，配置该域名的域名级策略。
    */
   Host?: string
+}
+
+/**
+ * DescribeTimingFunctionAnalysisData请求参数结构体
+ */
+export interface DescribeTimingFunctionAnalysisDataRequest {
+  /**
+   * <p>站点 ID 集合，至少填入1个站点 ID。</p>
+   */
+  ZoneIds: Array<string>
+  /**
+   * <p>开始时间。</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间。查询时间范围（<code>EndTime</code> - <code>StartTime</code>）需小于等于 7 天。</p>
+   */
+  EndTime: string
+  /**
+   * <p>指标列表，取值有:</p><li>function_requestCount: 边缘函数请求数，为累计值；</li><li>function_cpuCostTime: 边缘函数执行的平均 CPU 耗时，单位为微秒；</li><li>function_wallClockTime: 边缘函数执行的平均墙上时钟耗时，单位为微秒。</li>
+   */
+  MetricNames: Array<string>
+  /**
+   * <p>查询时间粒度，取值有：</p><li>min: 1分钟；</li><li>5min: 5分钟；</li><li>hour: 1小时；</li><li>day: 1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。
+   */
+  Interval?: string
+  /**
+   * <p>过滤条件，Filters.Value 的集合数量上限为20，详细的过滤条件 Key 值如下：</p><li>domain：按照子域名进行过滤，示例值： www.example.com。</li><li>function-name：按照边缘函数名称进行过滤，示例值： test051301-zone-2r2fdoxxxx-130000000。</li><li>function-result：按照边缘函数执行结果进行过滤。对应 Value 的可选项如下：<br>   success：成功；<br>   fail：失败。</li>
+   */
+  Filters?: Array<QueryCondition>
+  /**
+   * <p>数据归属地区，取值有：</p><li>overseas：全球（除中国大陆地区）数据；</li><li>mainland：中国大陆地区数据；</li><li>global：全球数据。</li>不填默认取值为 global。
+   */
+  Area?: string
 }
 
 /**
@@ -15261,30 +15351,21 @@ export interface BotConfig {
 }
 
 /**
- * ModifyFunctionComponentBindings请求参数结构体
+ * DescribeTopFunctionAnalysisData返回参数结构体
  */
-export interface ModifyFunctionComponentBindingsRequest {
+export interface DescribeTopFunctionAnalysisDataResponse {
   /**
-   * 站点 ID。
+   * <p>查询结果的总条数。</p>
    */
-  ZoneId: string
+  TotalCount?: number
   /**
-   * 函数 ID。
+   * <p>按照 MetricName 指定统计维度的前 topN 数据列表。</p>
    */
-  FunctionId: string
+  Data?: Array<TopDataRecord>
   /**
-   * 操作类型，取值有：
-<li>bind：绑定组件；</li>
-<li>bind-override：绑定组件。若绑定已存在则为重绑定行为，否则为绑定行为；</li>
-<li>unbind：解绑组件；</li>
-<li>rebind：重置绑定关系。清空所有现有绑定，并设置为传入的绑定列表。若传入空列表，则清空所有绑定。</li>
-
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Operation: string
-  /**
-   * 操作的函数组件绑定列表。当 Operation 为 rebind 且传入空列表时，表示清空所有绑定。
-   */
-  FunctionComponentBindings: Array<FunctionComponentBinding>
+  RequestId?: string
 }
 
 /**
@@ -17441,6 +17522,33 @@ export interface IPSSLSetting {
    * 要绑定的IP SSL的所属域名。
    */
   AssociatedDomain: string
+}
+
+/**
+ * ModifyFunctionComponentBindings请求参数结构体
+ */
+export interface ModifyFunctionComponentBindingsRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 操作类型，取值有：
+<li>bind：绑定组件；</li>
+<li>bind-override：绑定组件。若绑定已存在则为重绑定行为，否则为绑定行为；</li>
+<li>unbind：解绑组件；</li>
+<li>rebind：重置绑定关系。清空所有现有绑定，并设置为传入的绑定列表。若传入空列表，则清空所有绑定。</li>
+
+   */
+  Operation: string
+  /**
+   * 操作的函数组件绑定列表。当 Operation 为 rebind 且传入空列表时，表示清空所有绑定。
+   */
+  FunctionComponentBindings: Array<FunctionComponentBinding>
 }
 
 /**

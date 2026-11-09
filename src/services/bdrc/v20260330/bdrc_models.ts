@@ -233,11 +233,11 @@ export interface RunSecurityServiceEnabled {
  */
 export interface ModifyCopyPairAttributeRequest {
   /**
-   * <p>要修改属性的复制对id</p>
+   * <p>要修改属性的复制对ID</p>
    */
   CopyPairId: string
   /**
-   * <p>要修改的复制对类型，可选值：DISK、INSTANCE、CFS，默认 INSTANCE</p>
+   * <p>要修改的复制对类型，可选值：INSTANCE。</p><p>枚举值：</p><ul><li>INSTANCE： CVM复制对</li></ul>
    */
   CopyPairType?: string
   /**
@@ -248,6 +248,22 @@ export interface ModifyCopyPairAttributeRequest {
    * <p>容灾端实例类型（仅容灾端CVM未创建时可修改）</p>
    */
   InstanceType?: string
+  /**
+   * <p>容灾端实例VPC IP（仅容灾端CVM未创建时可修改）</p>
+   */
+  PrivateIpAddress?: string
+  /**
+   * <p>是否使用默认IP，与PrivateIpAddress互斥，不能同时使用（仅容灾端CVM未创建时可修改）</p>
+   */
+  UseDefaultPrivateIp?: boolean
+  /**
+   * <p>实例登录设置，需要修改的时候才传（仅容灾端CVM未创建时可修改）</p>
+   */
+  LoginSettings?: LoginSettings
+  /**
+   * <p>是否自动生成密码，与LoginSettings互斥，不能同时使用（仅容灾端CVM未创建时可修改）</p>
+   */
+  UseDefaultPassword?: boolean
 }
 
 /**
@@ -4471,7 +4487,7 @@ export interface SecurityGroupMapping {
  */
 export interface RunFailoverCopyPairsResponse {
   /**
-   * 故障切换任务ID
+   * <p>故障切换任务ID</p>
    */
   TaskId?: number
   /**
@@ -4726,17 +4742,21 @@ export interface SupportRegionInfo {
  */
 export interface RunFailoverCopyPairsRequest {
   /**
-   * 复制对ID列表
+   * <p>复制对ID列表</p>
    */
   CopyPairIds: Array<string>
   /**
-   * 复制对类型，枚举值：DISK / INSTANCE / CFS。
+   * <p>复制对类型，枚举值：INSTANCE。</p><p>枚举值：</p><ul><li>INSTANCE： CVM复制对</li></ul>
    */
   CopyPairType: string
   /**
-   * 切换类型，支持WAIT和NOW
+   * <p>切换类型，支持WAIT和NOW</p>
    */
   FailoverType: string
+  /**
+   * <p>故障切换成功后是否自动关机生产端实例，默认为true</p>
+   */
+  StopSourceInstance?: boolean
 }
 
 /**

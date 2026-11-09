@@ -538,6 +538,16 @@ it("tdmysql.v20211122.DescribeFlowTypes", async function () {
     }
 })
 
+it("tdmysql.v20211122.ModifyDBInstance", async function () {
+    try {
+       const data = await client.ModifyDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmysql.v20211122.DescribeDBInstanceDetail", async function () {
     try {
        const data = await client.DescribeDBInstanceDetail({})
