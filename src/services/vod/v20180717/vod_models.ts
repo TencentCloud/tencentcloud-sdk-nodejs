@@ -4600,7 +4600,7 @@ export interface CreateProcedureTemplateRequest {
    */
   MediaProcessTask?: MediaProcessTaskInput
   /**
-   * <p>AI 内容审核类型任务参数 *。<br><font color="red">*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font></p>
+   * <p>AI 内容审核类型任务参数 *。<font color="red">*该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font></p>
    */
   AiContentReviewTask?: AiContentReviewTaskInput
   /**

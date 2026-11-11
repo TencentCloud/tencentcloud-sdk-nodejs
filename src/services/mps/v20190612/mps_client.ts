@@ -40,7 +40,7 @@ import {
   SvgWatermarkInput,
   AliasValueConf,
   CreateTranscodeTemplateRequest,
-  ProcessLiveStreamResponse,
+  ModelChatResponseMessage,
   FlowMediaVideo,
   LiveStreamAiQualityControlResultInfo,
   CreateOutputSRTSettings,
@@ -103,7 +103,7 @@ import {
   ModifyAIAnalysisTemplateRequest,
   SmartSubtitlesResult,
   AiSampleWord,
-  OverrideTranscodeParameter,
+  ModelChatInputImage,
   PoliticalOcrReviewTemplateInfo,
   CreateImageSpriteTemplateRequest,
   AigcAudioReferenceAudioInfo,
@@ -126,6 +126,7 @@ import {
   ActivateStreamPackageResponse,
   StartStreamLinkFlowResponse,
   DescribeStreamLinkFlowStatisticsResponse,
+  TextWatermarkTemplateInput,
   AiReviewPoliticalTaskInput,
   ModifyContentReviewTemplateResponse,
   ModifyScheduleRequest,
@@ -178,7 +179,8 @@ import {
   CreateInputRTMPPullSettings,
   TerrorismImgReviewTemplateInfoForUpdate,
   FailOverOption,
-  ModifyStreamLinkFlowRequest,
+  AudioSRConfig,
+  RawImageWatermarkInput,
   CloneViralAIGC,
   ViewImage,
   DescribeImageSpriteTemplatesRequest,
@@ -212,9 +214,10 @@ import {
   MediaAiAnalysisCoverItem,
   CosInputInfo,
   CreateScheduleResponse,
-  TagConfigureInfo,
+  ModelChatCompletionUsage,
   LinearAssemblyProgramInfo,
   AiRecognitionTaskOcrWordsResultOutput,
+  RemoveBlindWatermarkConfig,
   ModifyLiveRecordTemplateResponse,
   AiParagraphInfo,
   AudioSeparateConfig,
@@ -241,6 +244,7 @@ import {
   DisassociateSecurityGroupResponse,
   AiRecognitionTaskOcrFullTextResultOutput,
   AiAnalysisTaskHighlightResult,
+  ProcessLiveStreamResponse,
   ComposeTransitionOperation,
   CreateAigcVideoTaskResponse,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
@@ -264,7 +268,7 @@ import {
   ModifyTranscodeTemplateRequest,
   ModifyStreamLinkOutputInfoRequest,
   OverrideEraseParameter,
-  TextWatermarkTemplateInput,
+  ModifyAdaptiveDynamicStreamingTemplateRequest,
   ModifyAIAnalysisTemplateResponse,
   DescribeWordSamplesResponse,
   UpdateProjectRequest,
@@ -314,6 +318,7 @@ import {
   DubbingTranslateConfig,
   ImageEraseConfig,
   CreateWordSamplesRequest,
+  DescribeModelChatTaskResponse,
   CreateQualityControlTemplateRequest,
   SmartEraseWatermarkConfig,
   CreateStreamPackageSourceRequest,
@@ -338,6 +343,7 @@ import {
   LiveSmartSubtitleResult,
   ModifyStreamPackageSSAIChannelResponse,
   LLMDetectionIssue,
+  ModelChatUrlInputInfo,
   ProhibitedAsrReviewTemplateInfoForUpdate,
   AiAnalysisTaskCutoutInput,
   ModifyAnimatedGraphicsTemplateResponse,
@@ -426,17 +432,19 @@ import {
   MediaProcessTaskResult,
   DeleteStreamPackageLinearAssemblyChannelRequest,
   ScheduleQualityControlTaskResult,
+  ModelChatContentPart,
   SubtitlePosition,
   DeleteQualityControlTemplateRequest,
   UsageDetail,
   ColorEnhanceConfig,
+  ModelChatMediaInputInfo,
   DescribeOutputRTPSettings,
   ComposeAudioItem,
   AiReviewPornOcrTaskInput,
   LiveScheduleTask,
   AiAnalysisTaskFrameTagOutput,
   AiAnalysisTaskDubbingOutput,
-  ModifyAdaptiveDynamicStreamingTemplateRequest,
+  CreateModelChatTaskRequest,
   MediaAnimatedGraphicsItem,
   BeautyConfig,
   DescribeQualityControlTemplatesRequest,
@@ -520,8 +528,8 @@ import {
   DiffusionEnhanceV2Config,
   SpliceInsertInfo,
   SourceTag,
-  RecognizeMediaForZhiXueResponse,
-  EmbeddingDataRequest,
+  ModelChatInputAudio,
+  DescribeModelChatTaskRequest,
   AiSamplePerson,
   FlowStatistics,
   BatchSmartSubtitlesResult,
@@ -598,7 +606,7 @@ import {
   ComposeMediaConfig,
   LiveStreamAiReviewImagePoliticalResult,
   PatternConfig,
-  RawImageWatermarkInput,
+  ModelChatTaskNotifyConfig,
   DeleteAIAnalysisTemplateResponse,
   DubbingOutputConfig,
   CreateQualityControlTemplateResponse,
@@ -615,6 +623,7 @@ import {
   ModifyAsrHotwordsRequest,
   BatchStartStreamLinkFlowResponse,
   DisassociateSecurityGroupRequest,
+  RecognizeMediaForZhiXueResponse,
   ProhibitedConfigureInfo,
   CreateProcessImageTemplateRequest,
   StopStreamLinkFlowRequest,
@@ -622,6 +631,7 @@ import {
   AiReviewTerrorismOcrTaskOutput,
   DescribeAsrHotwordsListResponse,
   AiAnalysisResult,
+  SubtitleShadowConfig,
   DeleteVoiceResponse,
   BlindWatermarkInput,
   DescribeBlindWatermarkTemplatesResponse,
@@ -636,7 +646,7 @@ import {
   CreateProjectRequest,
   FlowVideo,
   AiRecognitionTaskOcrWordsResultItem,
-  UpdateSmartErasePrivacyConfig,
+  ModelChatInputVideo,
   AiAnalysisTaskReelResult,
   ProcessImageRequest,
   DeleteSampleSnapshotTemplateResponse,
@@ -648,7 +658,9 @@ import {
   DeleteSubtitleEmbedTemplateRequest,
   AiRecognitionTaskObjectResultInput,
   PlaybackInfoReq,
+  ModelChatInputFile,
   RecipeItem,
+  UpdateSmartErasePrivacyConfig,
   AiReviewTaskTerrorismResult,
   DescribeOutput,
   LiveStreamAiReviewVoicePornResult,
@@ -732,7 +744,7 @@ import {
   AiReviewTaskPornResult,
   AiRecognitionTaskObjectResultOutput,
   AiAnalysisTaskDelLogoOutput,
-  SubtitleShadowConfig,
+  SpatialAudioConfig,
   DescribeBatchTaskDetailRequest,
   DescribeUsageDataResponse,
   AiReviewProhibitedAsrTaskOutput,
@@ -759,7 +771,7 @@ import {
   ModifyAIRecognitionTemplateRequest,
   DocToVideoInput,
   ParseNotificationResponse,
-  RemoveBlindWatermarkConfig,
+  ModelChatDataInputInfo,
   ComposeImageOperation,
   CreateSampleSnapshotTemplateResponse,
   ParseLiveStreamProcessNotificationRequest,
@@ -769,7 +781,7 @@ import {
   VideoRedrawTaskInfo,
   ActivityResult,
   DescribeAsrHotwordsResponse,
-  TextToSpeechAsyncRequest,
+  ModelChatMessageItem,
   DescribeInputHLSPullSettings,
   CreateSubtitleEmbedTemplateResponse,
   ImageTaskInfo,
@@ -793,8 +805,10 @@ import {
   TEHDConfigForUpdate,
   VoiceUpdateFields,
   DescribeStreamPackageSourceResponse,
+  EmbeddingDataRequest,
   WithdrawsWatermarkRequest,
   DeleteStreamLinkOutputRequest,
+  OverrideTranscodeParameter,
   ModifyPersonSampleRequest,
   AigcVideoReferenceVideoInfo,
   AigcVideoReferenceSubjectInfo,
@@ -904,6 +918,7 @@ import {
   AiRecognitionTaskFaceResultInput,
   EditMediaRequest,
   AiReviewPoliticalTaskOutput,
+  ModifyStreamLinkFlowRequest,
   AiReviewTaskPoliticalResult,
   SelectingSubtitleAreasConfig,
   BeautyEffectItemConfig,
@@ -930,6 +945,7 @@ import {
   SnapshotByTimeOffsetTemplate,
   DeleteSnapshotByTimeOffsetTemplateResponse,
   ProhibitedOcrReviewTemplateInfoForUpdate,
+  ModelChatCompletionChoice,
   DescribeTasksRequest,
   FaceConfigureInfoForUpdate,
   CreateTranscodeTemplateResponse,
@@ -946,6 +962,7 @@ import {
   ProcessLiveStreamRequest,
   AiAnalysisTaskHorizontalToVerticalOutput,
   DescribeSmartEraseTemplatesResponse,
+  CreateModelChatTaskResponse,
   TimeSpotCheck,
   AiReviewProhibitedOcrTaskInput,
   DeleteWatermarkTemplateRequest,
@@ -1030,6 +1047,7 @@ import {
   ActivateSSAIResponse,
   DescribeAIAnalysisTemplatesResponse,
   AigcVideoExtraParam,
+  TagConfigureInfo,
   CloneVoiceRequest,
   AiRecognitionTaskAsrWordsResult,
   DescribeAigcVideoTaskRequest,
@@ -1118,6 +1136,7 @@ import {
   ComposeAudioOperation,
   CreateSmartSubtitleTemplateResponse,
   TimeShiftInfo,
+  TextToSpeechAsyncRequest,
   LiveStreamAiAnalysisResultItem,
   AiRecognitionTaskTransTextResult,
   SubtitleResult,
@@ -1499,6 +1518,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于修改关键词的应用场景、标签，关键词本身不可修改，如需修改，可删除重建。
+   */
+  async ModifyWordSample(
+    req: ModifyWordSampleRequest,
+    cb?: (error: string, rep: ModifyWordSampleResponse) => void
+  ): Promise<ModifyWordSampleResponse> {
+    return this.request("ModifyWordSample", req, cb)
+  }
+
+  /**
    * 获取直播录制模板
    */
   async DescribeLiveRecordTemplates(
@@ -1718,6 +1747,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateProjectResponse) => void
   ): Promise<UpdateProjectResponse> {
     return this.request("UpdateProject", req, cb)
+  }
+
+  /**
+   * 修改广告插入配置。
+   */
+  async ModifyStreamPackageSSAIChannel(
+    req: ModifyStreamPackageSSAIChannelRequest,
+    cb?: (error: string, rep: ModifyStreamPackageSSAIChannelResponse) => void
+  ): Promise<ModifyStreamPackageSSAIChannelResponse> {
+    return this.request("ModifyStreamPackageSSAIChannel", req, cb)
   }
 
   /**
@@ -1964,13 +2003,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于修改关键词的应用场景、标签，关键词本身不可修改，如需修改，可删除重建。
+   * 提交异步多模态理解任务，返回 TaskId
    */
-  async ModifyWordSample(
-    req: ModifyWordSampleRequest,
-    cb?: (error: string, rep: ModifyWordSampleResponse) => void
-  ): Promise<ModifyWordSampleResponse> {
-    return this.request("ModifyWordSample", req, cb)
+  async CreateModelChatTask(
+    req: CreateModelChatTaskRequest,
+    cb?: (error: string, rep: CreateModelChatTaskResponse) => void
+  ): Promise<CreateModelChatTaskResponse> {
+    return this.request("CreateModelChatTask", req, cb)
   }
 
   /**
@@ -3174,13 +3213,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改广告插入配置。
+   * 按 TaskId 查询多模态理解任务结果
    */
-  async ModifyStreamPackageSSAIChannel(
-    req: ModifyStreamPackageSSAIChannelRequest,
-    cb?: (error: string, rep: ModifyStreamPackageSSAIChannelResponse) => void
-  ): Promise<ModifyStreamPackageSSAIChannelResponse> {
-    return this.request("ModifyStreamPackageSSAIChannel", req, cb)
+  async DescribeModelChatTask(
+    req: DescribeModelChatTaskRequest,
+    cb?: (error: string, rep: DescribeModelChatTaskResponse) => void
+  ): Promise<DescribeModelChatTaskResponse> {
+    return this.request("DescribeModelChatTask", req, cb)
   }
 
   /**

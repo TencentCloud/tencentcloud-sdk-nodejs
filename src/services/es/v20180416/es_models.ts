@@ -736,85 +736,117 @@ export interface DescribeInstanceLogsResponse {
  */
 export interface IndexMetaField {
   /**
-   * 索引类型
+   * <p>索引类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexType?: string
   /**
-   * 索引名
+   * <p>索引名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexName?: string
   /**
-   * 索引元数据JSON
+   * <p>索引元数据JSON</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexMetaJson?: string
   /**
-   * 索引状态
+   * <p>索引状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexStatus?: string
   /**
-   * 索引存储大小，单位Byte
+   * <p>索引存储大小，单位Byte</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexStorage?: number
   /**
-   * 索引创建时间
+   * <p>索引创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexCreateTime?: string
   /**
-   * 后备索引
+   * <p>后备索引</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackingIndices?: Array<BackingIndexMetaField>
   /**
-   * 索引所属集群ID
+   * <p>索引所属集群ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
-   * 索引所属集群名
+   * <p>索引所属集群名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
   /**
-   * 索引所属集群版本
+   * <p>索引所属集群版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterVersion?: string
   /**
-   * 索引生命周期字段
+   * <p>索引生命周期字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexPolicyField?: IndexPolicyField
   /**
-   * 索引自治字段
+   * <p>索引自治字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexOptionsField?: IndexOptionsField
   /**
-   * 索引配置字段
+   * <p>索引配置字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexSettingsField?: IndexSettingsField
   /**
-   * 索引别名字段
+   * <p>索引别名字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexAliasesField?: Array<string>
   /**
-   * 索引所属集群APP ID
+   * <p>索引所属集群APP ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
-   * 索引文档数
+   * <p>索引文档数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexDocs?: number
+  /**
+   * <p>当前字段数</p>
+   */
+  FieldCount?: number
+  /**
+   * <p>当前上限</p>
+   */
+  FieldLimit?: number
+  /**
+   * <p>使用率</p>
+   */
+  FieldUsageRatio?: string
+  /**
+   * <p>占用分片数</p>
+   */
+  OccupiedShards?: number
+  /**
+   * <p>索引开启状态</p>
+   */
+  IndexOpenStatus?: string
+  /**
+   * <p>索引字段数硬上限</p>
+   */
+  FieldLimitHardCap?: number
+  /**
+   * <p>上限可调整最小值</p>
+   */
+  FieldLimitMin?: number
+  /**
+   * <p>剩余调整次数</p>
+   */
+  FieldAutoAdjustRemaining?: number
 }
 
 /**
@@ -2081,44 +2113,46 @@ export interface DescribeAutoBackUpStrategyRequest {
 }
 
 /**
- * 无
+ * DescribeLogstashInstanceLogs请求参数结构体
  */
-export interface CosSnapShotInfo {
+export interface DescribeLogstashInstanceLogsRequest {
   /**
-   * cos 桶名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID
    */
-  CosBucket?: string
+  InstanceId: string
   /**
-   * base path
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志类型，默认值为1
+<li>1, 主日志</li>
+<li>2, 慢日志</li>
+<li>3, GC日志</li>
    */
-  BasePath?: string
+  LogType?: number
   /**
-   * 快照名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 搜索词，支持LUCENE语法，如 level:WARN、ip:1.1.1.1、message:test-index等
    */
-  SnapshotName?: string
+  SearchKey?: string
   /**
-   * 状态
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志开始时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
    */
-  State?: string
+  StartTime?: string
   /**
-   * 快照版本
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志结束时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
    */
-  Version?: string
+  EndTime?: string
   /**
-   * 普通[{"DataStreamName":"ilm-history-5","Is索引信息列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页起始值, 默认值为0
    */
-  CommonIndexArr?: Array<CommonIndexInfo>
+  Offset?: number
   /**
-   * 自治索引信息列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页大小，默认值为100，最大值100
    */
-  DataStreamArr?: Array<DataStreamInfo>
+  Limit?: number
+  /**
+   * 时间排序方式，默认值为0
+<li>0, 降序</li>
+<li>1, 升序</li>
+   */
+  OrderByType?: number
 }
 
 /**
@@ -2137,13 +2171,25 @@ export interface DescribeIndexMetaResponse {
 }
 
 /**
- * DescribeLogstashViews请求参数结构体
+ * 批量索引操作的逐项结果，用于 DeleteIndex（批量删除）和 ModifyIndexStatus（批量关闭/打开索引）的返回值。
  */
-export interface DescribeLogstashViewsRequest {
+export interface BatchIndexResult {
   /**
-   * longstash集群ID
+   * <p>索引名</p>
    */
-  LogstashInstanceId: string
+  IndexName?: string
+  /**
+   * <p>该项是否成功</p>
+   */
+  Success?: boolean
+  /**
+   * <p>失败时的错误码，成功时不返回</p>
+   */
+  ErrCode?: number
+  /**
+   * <p>失败时的错误信息，成功时不返回</p>
+   */
+  ErrMsg?: string
 }
 
 /**
@@ -3246,7 +3292,7 @@ export interface LogstashZoneResource {
  */
 export interface UpdateInstanceResponse {
   /**
-   * 订单号
+   * <p>订单号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealName?: string
@@ -3302,6 +3348,10 @@ export interface DeleteIndexRequest {
    * <p>索引生命阶段</p>
    */
   IndexPhrase?: string
+  /**
+   * <p>索引列表</p>
+   */
+  IndexNames?: Array<string>
 }
 
 /**
@@ -3333,12 +3383,12 @@ export interface ModifyAutoBackUpStrategyResponse {
  */
 export interface DescribeIndexListResponse {
   /**
-   * 索引元数据字段
+   * <p>索引元数据字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexMetaFields?: Array<IndexMetaField>
   /**
-   * 查询总数
+   * <p>查询总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
@@ -4141,45 +4191,49 @@ export interface UpgradeLicenseRequest {
  */
 export interface DescribeIndexListRequest {
   /**
-   * 索引类型。auto：自治索引；normal：普通索引
+   * <p>索引类型。auto：自治索引；normal：普通索引</p>
    */
   IndexType: string
   /**
-   * ES集群ID
+   * <p>ES集群ID</p>
    */
   InstanceId?: string
   /**
-   * 索引名，若填空则获取所有索引
+   * <p>索引名，若填空则获取所有索引</p>
    */
   IndexName?: string
   /**
-   * 集群访问用户名
+   * <p>集群访问用户名</p>
    */
   Username?: string
   /**
-   * 集群访问密码
+   * <p>集群访问密码</p>
    */
   Password?: string
   /**
-   * 分页起始位置
+   * <p>分页起始位置</p>
    */
   Offset?: number
   /**
-   * 一页展示数量
+   * <p>一页展示数量</p>
    */
   Limit?: number
   /**
-   * 排序字段，支持索引名：IndexName、索引存储量：IndexStorage、索引创建时间：IndexCreateTime
+   * <p>排序字段，支持索引名：IndexName、索引存储量：IndexStorage、索引创建时间：IndexCreateTime</p>
    */
   OrderBy?: string
   /**
-   * 过滤索引状态
+   * <p>过滤索引状态</p>
    */
   IndexStatusList?: Array<string>
   /**
-   * 排序顺序，支持asc、desc，默认为desc 数据格式"asc","desc"
+   * <p>排序顺序，支持asc、desc，默认为desc 数据格式&quot;asc&quot;,&quot;desc&quot;</p>
    */
   Order?: string
+  /**
+   * <p>索引名称过滤列表。仅返回列表中指定的索引，常用于事件中心跳转时筛选受影响的索引；不填返回全部索引。单次最多支持100个索引名称。</p>
+   */
+  FilterIndexNames?: Array<string>
 }
 
 /**
@@ -5199,6 +5253,22 @@ export interface CollectorConfigInfo {
  */
 export interface DeleteIndexResponse {
   /**
+   * <p>索引数量</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>成功数量</p>
+   */
+  SuccessCount?: number
+  /**
+   * <p>失败数量</p>
+   */
+  FailedCount?: number
+  /**
+   * <p>无</p>
+   */
+  Results?: Array<BatchIndexResult>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5773,6 +5843,16 @@ export interface PodLabel {
    * 标签值，支持大小写字母、数字、以及-_./，最多支持63个字符
    */
   LabelValue: string
+}
+
+/**
+ * DescribeLogstashViews请求参数结构体
+ */
+export interface DescribeLogstashViewsRequest {
+  /**
+   * longstash集群ID
+   */
+  LogstashInstanceId: string
 }
 
 /**
@@ -6502,6 +6582,10 @@ export interface EventDataInfoOverview {
    * <p>事件范围</p><p>枚举值：</p><ul><li>0： 实例级</li><li>1： 账号级</li></ul>
    */
   EventScope?: number
+  /**
+   * <p>展开详情</p>
+   */
+  ExpandDetail?: string
 }
 
 /**
@@ -7025,20 +7109,28 @@ export interface IpTimePair {
  */
 export interface IndexSettingsField {
   /**
-   * 索引主分片数
+   * <p>索引主分片数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NumberOfShards?: string
   /**
-   * 索引副本分片数
+   * <p>索引副本分片数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NumberOfReplicas?: string
   /**
-   * 索引刷新频率
+   * <p>索引刷新频率</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RefreshInterval?: string
+  /**
+   * <p>动态字段识别开关</p>
+   */
+  Dynamic?: string
+  /**
+   * <p>索引字段数上限</p>
+   */
+  TotalFieldsLimit?: string
 }
 
 /**
@@ -7356,214 +7448,197 @@ export interface ModifyEsVipSecurityGroupResponse {
  */
 export interface UpdateInstanceRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
+   * <p>实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）</p>
    */
   InstanceName?: string
   /**
-   * 已废弃请使用NodeInfoList
-节点个数（2-50个）
+   * <p>已废弃请使用NodeInfoList<br>节点个数（2-50个）</p>
    */
   NodeNum?: number
   /**
-   * ES配置项（JSON格式字符串）
+   * <p>ES配置项（JSON格式字符串）</p>
    */
   EsConfig?: string
   /**
-   * 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
+   * <p>默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&amp;^*+=_:;,.?]的特殊符号）</p>
    */
   Password?: string
   /**
-   * 可视化组件（Kibana、Cerebro）的公网访问策略
+   * <p>可视化组件（Kibana、Cerebro）的公网访问策略</p>
    */
   EsAcl?: EsAcl
   /**
-   * 已废弃请使用NodeInfoList
-磁盘大小（单位GB）
+   * <p>已废弃请使用NodeInfoList<br>磁盘大小（单位GB）</p>
    */
   DiskSize?: number
   /**
-   * 已废弃请使用NodeInfoList
-节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>已废弃请使用NodeInfoList<br>节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
    */
   NodeType?: string
   /**
-   * 已废弃请使用NodeInfoList
-专用主节点个数（只支持3个或5个）
+   * <p>已废弃请使用NodeInfoList<br>专用主节点个数（只支持3个或5个）</p>
    */
   MasterNodeNum?: number
   /**
-   * 已废弃请使用NodeInfoList
-专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>已废弃请使用NodeInfoList<br>专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
    */
   MasterNodeType?: string
   /**
-   * 已废弃请使用NodeInfoList
-专用主节点磁盘大小（单位GB系统默认配置为50GB,暂不支持自定义）
+   * <p>已废弃请使用NodeInfoList<br>专用主节点磁盘大小（单位GB系统默认配置为50GB,暂不支持自定义）</p>
    */
   MasterNodeDiskSize?: number
   /**
-   * 更新配置时是否强制重启<li>true强制重启</li><li>false不强制重启</li>当前仅更新EsConfig时需要设置，默认值为false
+   * <p>更新配置时是否强制重启<li>true强制重启</li><li>false不强制重启</li>当前仅更新EsConfig时需要设置，默认值为false</p>
    */
   ForceRestart?: boolean
   /**
-   * COS自动备份信息
+   * <p>COS自动备份信息</p>
    */
   CosBackup?: CosBackup
   /**
-   * 节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括<li>修改一种节点的个数</li><li>修改一种节点的节点规格及磁盘大小</li><li>增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）</li>上述操作一次只能进行一种，且磁盘类型不支持修改
+   * <p>节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括<li>修改一种节点的个数</li><li>修改一种节点的节点规格及磁盘大小</li><li>增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）</li>上述操作一次只能进行一种，且磁盘类型不支持修改</p>
    */
   NodeInfoList?: Array<NodeInfo>
   /**
-   * ES集群公网访问状态
-OPEN 开启
-CLOSE 关闭
+   * <p>ES集群公网访问状态<br>OPEN 开启<br>CLOSE 关闭</p>
    */
   PublicAccess?: string
   /**
-   * 公网访问控制列表
+   * <p>公网访问控制列表</p>
    */
   EsPublicAcl?: EsPublicAcl
   /**
-   * Kibana公网访问状态
-OPEN 开启
-CLOSE 关闭
+   * <p>Kibana公网访问状态<br>OPEN 开启<br>CLOSE 关闭</p>
    */
   KibanaPublicAccess?: string
   /**
-   * Kibana内网访问状态
-OPEN 开启
-CLOSE 关闭
+   * <p>Kibana内网访问状态<br>OPEN 开启<br>CLOSE 关闭</p>
    */
   KibanaPrivateAccess?: string
   /**
-   * ES 6.8及以上版本基础版开启或关闭用户认证
+   * <p>ES 6.8及以上版本基础版开启或关闭用户认证</p>
    */
   BasicSecurityType?: number
   /**
-   * Kibana内网端口
+   * <p>Kibana内网端口</p>
    */
   KibanaPrivatePort?: number
   /**
-   * 0: 蓝绿变更方式扩容，集群不重启 （默认） 1: 磁盘解挂载扩容，集群滚动重启
+   * <p>0: 蓝绿变更方式扩容，集群不重启 （默认） 1: 磁盘解挂载扩容，集群滚动重启</p>
    */
   ScaleType?: number
   /**
-   * 多可用区部署
+   * <p>多可用区部署</p>
    */
   MultiZoneInfo?: Array<ZoneDetail>
   /**
-   * 场景化模板类型 -1：不启用 1：通用 2：日志 3：搜索
+   * <p>场景化模板类型 -1：不启用 1：通用 2：日志 3：搜索</p>
    */
   SceneType?: number
   /**
-   * Kibana配置项（JSON格式字符串）
+   * <p>Kibana配置项（JSON格式字符串）</p>
    */
   KibanaConfig?: string
   /**
-   * 可视化节点配置
+   * <p>可视化节点配置</p>
    */
   WebNodeTypeInfo?: WebNodeTypeInfo
   /**
-   * 切换到新网络架构
+   * <p>切换到新网络架构</p>
    */
   SwitchPrivateLink?: string
   /**
-   * 启用Cerebro
+   * <p>启用Cerebro</p>
    */
   EnableCerebro?: boolean
   /**
-   * Cerebro公网访问状态
-OPEN 开启
-CLOSE 关闭
+   * <p>Cerebro公网访问状态<br>OPEN 开启<br>CLOSE 关闭</p>
    */
   CerebroPublicAccess?: string
   /**
-   * Cerebro内网访问状态
-OPEN 开启
-CLOSE 关闭
+   * <p>Cerebro内网访问状态<br>OPEN 开启<br>CLOSE 关闭</p>
    */
   CerebroPrivateAccess?: string
   /**
-   * 新增或修改的配置组信息
+   * <p>新增或修改的配置组信息</p>
    */
   EsConfigSet?: EsConfigSetInfo
   /**
-   * 可维护时间段
+   * <p>可维护时间段</p>
    */
   OperationDuration?: OperationDurationUpdated
   /**
-   * 是否开启Alerting 外网告警输出：
-OPEN 开启
-CLOSE 关闭
+   * <p>是否开启Alerting 外网告警输出：<br>OPEN 开启<br>CLOSE 关闭</p>
    */
   KibanaAlteringPublicAccess?: string
   /**
-   * kibana内网自定义域名
+   * <p>kibana内网自定义域名</p>
    */
   KibanaPrivateDomain?: string
   /**
-   * cerebro内网自定义域名
+   * <p>cerebro内网自定义域名</p>
    */
   CerebroPrivateDomain?: string
   /**
-   * 变更为https集群，默认是http
+   * <p>变更为https集群，默认是http</p>
    */
   Protocol?: string
   /**
-   * 节点出站访问详细信息
-
+   * <p>节点出站访问详细信息</p>
    */
   OutboundPublicAcls?: Array<OutboundPublicAcl>
   /**
-   * 节点出站访问操作
-OPEN 开启
-CLOSE 关闭
+   * <p>节点出站访问操作<br>OPEN 开启<br>CLOSE 关闭</p>
    */
   OutboundPublicAccess?: string
   /**
-   * cvm延迟上架参数
+   * <p>cvm延迟上架参数</p>
    */
   CvmDelayOnlineTime?: number
   /**
-   * 分片迁移并发数
+   * <p>分片迁移并发数</p>
    */
   ShardAllocationConcurrents?: number
   /**
-   * 分片迁移并发速度
+   * <p>分片迁移并发速度</p>
    */
   ShardAllocationBytes?: number
   /**
-   * 读写分离模式：-1-不开启，1-本地读写分离，2-远端读写分离
+   * <p>读写分离模式：-1-不开启，1-本地读写分离，2-远端读写分离</p>
    */
   ReadWriteMode?: number
   /**
-   * 是否开启置放群组异步任务
+   * <p>是否开启置放群组异步任务</p>
    */
   EnableScheduleRecoverGroup?: boolean
   /**
-   * 置放群组异步任务可维护时间段
+   * <p>置放群组异步任务可维护时间段</p>
    */
   EnableScheduleOperationDuration?: EnableScheduleOperationDuration
   /**
-   * 开启集群保护：OPEN-开启，CLOSE-关闭
+   * <p>开启集群保护：OPEN-开启，CLOSE-关闭</p>
    */
   EnableDestroyProtection?: string
   /**
-   * 自动扩盘参数
+   * <p>自动扩盘参数</p>
    */
   AutoScaleDiskInfoList?: Array<AutoScaleDiskInfo>
   /**
-   * 自动扩盘删除参数
+   * <p>自动扩盘删除参数</p>
    */
   AutoScaleDiskDeleteNodeTypeList?: Array<string>
   /**
-   * 其他附加配置，jvm或者yml
+   * <p>其他附加配置，jvm或者yml</p>
    */
   OtherConfig?: OtherConfig
+  /**
+   * <p>滚动升降配时是否等待集群恢复Green再滚动下一个节点</p>
+   */
+  WaitGreen?: string
 }
 
 /**
@@ -7808,46 +7883,44 @@ export interface DiSourceCvm {
 }
 
 /**
- * DescribeLogstashInstanceLogs请求参数结构体
+ * 无
  */
-export interface DescribeLogstashInstanceLogsRequest {
+export interface CosSnapShotInfo {
   /**
-   * 实例ID
+   * cos 桶名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  CosBucket?: string
   /**
-   * 日志类型，默认值为1
-<li>1, 主日志</li>
-<li>2, 慢日志</li>
-<li>3, GC日志</li>
+   * base path
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogType?: number
+  BasePath?: string
   /**
-   * 搜索词，支持LUCENE语法，如 level:WARN、ip:1.1.1.1、message:test-index等
+   * 快照名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SearchKey?: string
+  SnapshotName?: string
   /**
-   * 日志开始时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime?: string
+  State?: string
   /**
-   * 日志结束时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+   * 快照版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime?: string
+  Version?: string
   /**
-   * 分页起始值, 默认值为0
+   * 普通[{"DataStreamName":"ilm-history-5","Is索引信息列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  CommonIndexArr?: Array<CommonIndexInfo>
   /**
-   * 分页大小，默认值为100，最大值100
+   * 自治索引信息列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
-  /**
-   * 时间排序方式，默认值为0
-<li>0, 降序</li>
-<li>1, 升序</li>
-   */
-  OrderByType?: number
+  DataStreamArr?: Array<DataStreamInfo>
 }
 
 /**

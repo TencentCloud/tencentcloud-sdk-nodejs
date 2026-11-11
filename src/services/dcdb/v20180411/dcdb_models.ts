@@ -3308,6 +3308,14 @@ export interface UpgradeDedicatedDCDBInstanceRequest {
    * <p>多个分片同时发起扩容，并发切换中的切换时间间隔，即当前分片切换开始时间和下一个分片的切换开始时间间隔，不传默认为1。</p><p>取值范围：[1, 180]</p><p>单位：秒</p>
    */
   SwitchInterval?: number
+  /**
+   * <p>主节点所在机器，类似svr-xxx</p>
+   */
+  MasterHostId?: string
+  /**
+   * <p>备节点所在机器，类似[svr-xxx1,svr-xxx2]</p>
+   */
+  SlaveHostIds?: Array<string>
 }
 
 /**

@@ -1836,61 +1836,73 @@ export interface VolumeInfo {
  */
 export interface HPCCluster {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name?: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 调度器
+   * <p>调度器</p>
    */
   Scheduler?: string
   /**
-   * VPC ID
+   * <p>VPC ID</p>
    */
   VPCId?: string
   /**
-   * 节点数量
+   * <p>节点数量</p>
    */
   NodeCount?: number
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tags?: Array<Tag>
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 集群类型
+   * <p>集群类型</p>
    */
   Type?: string
   /**
-   * 系统名称
+   * <p>系统名称</p>
    */
   OsName?: string
   /**
-   * 调度器版本
+   * <p>调度器版本</p>
    */
   SchedulerVersion?: string
   /**
-   * 集群VPC CIDR
+   * <p>集群VPC CIDR</p>
    */
   VPCCIDRBlock?: string
   /**
-   * 集群确认交付截止日期
+   * <p>集群确认交付截止日期</p>
    */
   ConfirmDeadline?: string
+  /**
+   * <p>状态原因</p>
+   */
+  StatusReason?: string
+  /**
+   * <p>隔离时间</p>
+   */
+  IsolateTime?: string
+  /**
+   * <p>消息</p>
+   */
+  Message?: string
 }
 
 /**
@@ -2817,6 +2829,10 @@ export interface HPCNode {
    * <p>节点状态。取值范围：<br>IDLE 空闲<br>DOWN 节点下线<br>MIXED 节点部分使用<br>ALLOC  节点完全分配<br>DRAIN 排空，不接受新任务</p>
    */
   Status?: string
+  /**
+   * <p>是否存量节点</p>
+   */
+  IsExistingNode?: boolean
 }
 
 /**

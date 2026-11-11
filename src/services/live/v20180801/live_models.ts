@@ -4205,6 +4205,24 @@ export interface DescribeLivePlayAuthKeyRequest {
 }
 
 /**
+ * SwitchAvatarEditingScene请求参数结构体
+ */
+export interface SwitchAvatarEditingSceneRequest {
+  /**
+   * <p>通道ID，通常是待编辑的直播流的源ID</p>
+   */
+  ChannelId: string
+  /**
+   * <p>支持的编辑类型</p><p>枚举值：</p><ul><li>style_transfer： 整体风格迁移</li><li>virtual_tryon： 虚拟试穿</li><li>subject_replacement： 主体替换</li><li>background_replacement： 背景替换</li></ul>
+   */
+  EditingType?: string
+  /**
+   * <p>各种编辑场景的参考图</p>
+   */
+  ImageUrl?: string
+}
+
+/**
  * HTTP返回码数据信息
  */
 export interface HttpCodeValue {
@@ -4530,6 +4548,28 @@ export interface DescribeAIGCTaskStatusRequest {
    * <p>任务ID</p>
    */
   TaskId: string
+}
+
+/**
+ * CreateAvatarEditingLive返回参数结构体
+ */
+export interface CreateAvatarEditingLiveResponse {
+  /**
+   * <p>实时编辑会话ID</p>
+   */
+  LiveId?: string
+  /**
+   * <p>实时编辑会话的状态</p><p>枚举值：</p><ul><li>waiting： 等待中</li><li>on_live： 直播中</li><li>ending： 结束中</li><li>ended： 已结束</li><li>prepared： 准备中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>通道ID，这里是待编辑的直播流的源ID</p>
+   */
+  ChannelId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7618,6 +7658,16 @@ export interface DescribeLiveStreamMonitorRequest {
 export type DescribeLiveSnapshotRulesRequest = null
 
 /**
+ * StopAvatarEditingLive请求参数结构体
+ */
+export interface StopAvatarEditingLiveRequest {
+  /**
+   * <p>通道ID，通常是待编辑的直播流的源ID</p>
+   */
+  ChannelId: string
+}
+
+/**
  * SwitchCasterToEmergency请求参数结构体
  */
 export interface SwitchCasterToEmergencyRequest {
@@ -8066,6 +8116,24 @@ export interface DeleteLiveSnapshotTemplateRequest {
 2. 可以从接口 [DescribeLiveSnapshotTemplates](/document/product/267/32619) 中查询已创建的截图模板列表。
    */
   TemplateId: number
+}
+
+/**
+ * StopAvatarEditingLive返回参数结构体
+ */
+export interface StopAvatarEditingLiveResponse {
+  /**
+   * <p>通道ID，通常是待编辑的直播流的源ID</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>实时编辑会话ID</p>
+   */
+  LiveId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8537,6 +8605,16 @@ export interface DeleteLiveAvatarScriptResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAvatarEditingLive请求参数结构体
+ */
+export interface DescribeAvatarEditingLiveRequest {
+  /**
+   * <p>通道ID，通常是待编辑的直播流的源ID</p>
+   */
+  ChannelId: string
 }
 
 /**
@@ -10385,6 +10463,52 @@ export interface DescribeLiveTimeShiftBillInfoListResponse {
    * 时移计费明细数据。
    */
   DataInfoList?: Array<TimeShiftBillData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAvatarEditingLive返回参数结构体
+ */
+export interface DescribeAvatarEditingLiveResponse {
+  /**
+   * <p>通道ID，通常是待编辑的直播流的源ID</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>实时编辑会话ID</p>
+   */
+  LiveId?: string
+  /**
+   * <p>实时编辑会话的状态</p><p>枚举值：</p><ul><li>waiting： 等待中</li><li>on_live： 直播中</li><li>ending： 结束中</li><li>ended： 已结束</li><li>prepared： 准备中</li><li>not_exist： 不存在</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>内部模块会话状态</p>
+   */
+  Phase?: string
+  /**
+   * <p>输出Mode</p>
+   */
+  CallMode?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>开播时刻</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间，如果还没结束则该值为0</p>
+   */
+  EndTime?: string
+  /**
+   * <p>跟踪ID，用于查日志</p>
+   */
+  TraceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14778,6 +14902,24 @@ export interface ModifyLiveCallbackTemplateRequest {
 }
 
 /**
+ * SwitchAvatarEditingScene返回参数结构体
+ */
+export interface SwitchAvatarEditingSceneResponse {
+  /**
+   * <p>通道ID，通常是待编辑的直播流的源ID</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>实时编辑会话ID</p>
+   */
+  LiveId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCasterLayoutInfo返回参数结构体
  */
 export interface DeleteCasterLayoutInfoResponse {
@@ -14821,6 +14963,24 @@ export interface RemuxStatisticsDataInfo {
    * <p>频道Id</p>
    */
   ChannelId?: string
+}
+
+/**
+ * CreateAvatarEditingLive请求参数结构体
+ */
+export interface CreateAvatarEditingLiveRequest {
+  /**
+   * <p>通道ID，这里是待编辑的直播流的源ID</p>
+   */
+  ChannelId: string
+  /**
+   * <p>各种编辑场景的参考图</p>
+   */
+  ImageUrl: string
+  /**
+   * <p>支持的编辑类型</p><p>枚举值：</p><ul><li>style_transfer： 整体风格迁移</li><li>virtual_tryon： 虚拟试穿</li><li>subject_replacement： 主体替换</li><li>background_replacement： 背景替换</li></ul><p>默认值：style_transfer</p>
+   */
+  EditingType?: string
 }
 
 /**

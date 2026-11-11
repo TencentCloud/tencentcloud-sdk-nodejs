@@ -835,7 +835,7 @@ export interface ProtectInstance {
    */
   BackupSize?: number
   /**
-   * <p>产品存储类型</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li></ul>
+   * <p>产品存储类型。CFS 资源返回文件系统存储类型；非 CFS 资源无存储类型，返回资源类型标识。</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li><li>CVM_AGENT： CVM 资源（非 CFS 资源时返回）</li><li>COS_AGENT： COS 资源（非 CFS 资源时返回）</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductType?: string
@@ -1520,10 +1520,20 @@ export interface BackupInfo {
    */
   CloudResourceId?: string
   /**
-   * <p>产品存储类型</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li></ul>
+   * <p>产品存储类型。CFS 资源返回文件系统存储类型；非 CFS 资源无存储类型，返回资源类型标识。</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li><li>CVM_AGENT： CVM 资源（非 CFS 资源时返回）</li><li>COS_AGENT： COS 资源（非 CFS 资源时返回）</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductType?: string
+  /**
+   * <p>备份完成量</p><p>单位：MB</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupCompletedSize?: number
+  /**
+   * <p>备份完成量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupCompletedSizeFormatted?: string
 }
 
 /**
@@ -2089,78 +2099,88 @@ export interface DescribeFileBackupPlansResponse {
  */
 export interface BackupGroup {
   /**
-   * 备份组ID。
+   * <p>备份组ID。</p>
    */
   BackupGroupId?: string
   /**
-   * 备份组创建进度。
+   * <p>备份组创建进度。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Percent?: number
   /**
-   * 备份和云盘绑定关系
+   * <p>备份和云盘绑定关系</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupBindDisk?: Array<ApplyDisk>
   /**
-   * 备份组名称。
+   * <p>备份组名称。</p>
    */
   BackupGroupName?: string
   /**
-   * 备份组状态。NORMAL: 正常；CREATING: 创建中；ROLLBACKING: 回滚中
+   * <p>备份组状态。NORMAL: 正常；CREATING: 创建中；ROLLBACKING: 回滚中</p>
    */
   BackupGroupState?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 用户AppId。
+   * <p>用户AppId。</p>
    */
   AppId?: number
   /**
-   * 是否为永久备份组。
+   * <p>是否为永久备份组。</p>
    */
   IsPermanent?: boolean
   /**
-   * 备份组的到期时间。如果为永久备份组，则取值为null。
+   * <p>备份组的到期时间。如果为永久备份组，则取值为null。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeadlineTime?: string
   /**
-   * 创建备份组的实例ID。
+   * <p>创建备份组的实例ID。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
-   * 创建备份组时刻实例的详情。
+   * <p>创建备份组时刻实例的详情。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceDetails?: string
   /**
-   * 创建人名称。
+   * <p>创建人名称。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountName?: string
   /**
-   * 主账号uin。
+   * <p>主账号uin。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountUin?: string
   /**
-   * 创建备份的子账号uin。
+   * <p>创建备份的子账号uin。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubAccountUin?: string
   /**
-   * 创建当前备份的定期备份策略ID，为null则为手动创建的备份。
+   * <p>创建当前备份的定期备份策略ID，为null则为手动创建的备份。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoBackupPolicyId?: string
+  /**
+   * <p>开始时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
 }
 
 /**
@@ -2572,7 +2592,7 @@ export interface PlanInfo {
    */
   EnableObjectTags?: boolean
   /**
-   * <p>产品存储类型</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li></ul>
+   * <p>产品存储类型。CFS 资源返回文件系统存储类型；非 CFS 资源无存储类型，返回资源类型标识。</p><p>枚举值：</p><ul><li>SD： 文件系统通用标准型存储</li><li>HP： 文件系统通用性能性存储</li><li>TB： 文件系统Turbo标准型存储</li><li>TP： 文件系统Turbo性能型存储</li><li>THP： 文件系统Turbo吞吐型存储</li><li>CVM_AGENT： CVM 资源（非 CFS 资源时返回）</li><li>COS_AGENT： COS 资源（非 CFS 资源时返回）</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductType?: string
@@ -3383,85 +3403,100 @@ export interface AutoBackupPolicy {
  */
 export interface RestoreTask {
   /**
-   * 恢复任务 ID
+   * <p>恢复任务 ID</p>
    */
   TaskId?: string
   /**
-   * 关联备份点 ID
+   * <p>关联备份点 ID</p>
    */
   BackupId?: string
   /**
-   * 源实例 ID
+   * <p>源实例 ID</p>
    */
   ResourceId?: string
   /**
-   * 目标实例 ID
+   * <p>目标实例 ID</p>
    */
   TargetResourceId?: string
   /**
-   * 恢复路径列表
+   * <p>恢复路径列表</p>
    */
   RestorePaths?: Array<string>
   /**
-   * 目标恢复位置
+   * <p>目标恢复位置</p>
    */
   TargetLocation?: string
   /**
-   * 任务状态
+   * <p>任务状态</p>
    */
   Status?: string
   /**
-   * 需恢复文件总数
+   * <p>需恢复文件总数</p>
    */
   TotalFileCount?: number
   /**
-   * 需恢复数据总量（字节）
+   * <p>需恢复数据总量（字节）</p>
    */
   TotalSize?: number
   /**
-   * 需恢复数据总量（格式化，如 "1.5 GB"）
+   * <p>需恢复数据总量（格式化：1024 进制，保留两位小数，单位 B/KiB/MiB/GiB/TiB/PiB，如 &quot;1.50 GiB&quot;）</p>
    */
   TotalSizeFormatted?: string
   /**
-   * 已恢复文件数
+   * <p>已恢复文件数</p>
    */
   RestoreFileCount?: number
   /**
-   * 已恢复数据量（字节）
+   * <p>已恢复数据量（字节）</p>
    */
   RestoreSize?: number
   /**
-   * 已恢复数据量（格式化）
+   * <p>已恢复数据量（格式化，口径同 TotalSizeFormatted，如 &quot;512.00 MiB&quot;）</p>
    */
   RestoreSizeFormatted?: string
   /**
-   * 恢复进度（0-100）
+   * <p>恢复进度（0-100）</p>
    */
   Progress?: number
   /**
-   * 关联 Job ID
+   * <p>关联 Job ID</p>
    */
   JobId?: string
   /**
-   * 任务开始时间（ISO 格式）
+   * <p>任务开始时间（ISO 格式）</p>
    */
   StartTime?: string
   /**
-   * 任务结束时间
+   * <p>任务结束时间</p>
    */
   EndTime?: string
   /**
-   * 任务创建时间
+   * <p>任务创建时间</p>
    */
   CreatedTime?: string
   /**
-   * 恢复任务失败原因
+   * <p>恢复任务失败原因</p>
    */
   FailReason?: string
   /**
-   * 冲突处理策略：skip-跳过/overwrite-覆盖/newer-保留最新版本/if_changed-内容变化时覆盖
+   * <p>冲突处理策略：skip-跳过/overwrite-覆盖/newer-保留最新版本/if_changed-内容变化时覆盖</p>
    */
   ConflictStrategy?: string
+  /**
+   * <p>是否为原路径恢复</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsOriginalPath?: boolean
+  /**
+   * <p>源端腾讯云资源ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CloudResourceId?: string
+  /**
+   * <p>目标端腾讯云资源ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetCloudResourceId?: string
 }
 
 /**
@@ -3699,7 +3734,7 @@ export interface CreateInstanceModel {
  */
 export interface FileInfo {
   /**
-   * 文件名称
+   * 完整路径：浏览路径 + "/" + 名称（浏览根目录时为 "/名称"）
    */
   Path?: string
   /**

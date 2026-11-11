@@ -98,6 +98,16 @@ it("redis.v20180412.ChangeReplicaToMaster", async function () {
     }
 })
 
+it("redis.v20180412.DescribeModules", async function () {
+    try {
+       const data = await client.DescribeModules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeInstanceMonitorTopNCmd", async function () {
     try {
        const data = await client.DescribeInstanceMonitorTopNCmd({})
@@ -521,6 +531,16 @@ it("redis.v20180412.InquiryPriceCreateInstance", async function () {
 it("redis.v20180412.ModifyReplicationGroup", async function () {
     try {
        const data = await client.ModifyReplicationGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.UpdateSSLCert", async function () {
+    try {
+       const data = await client.UpdateSSLCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1018,6 +1038,16 @@ it("redis.v20180412.ModifyMaintenanceWindow", async function () {
     }
 })
 
+it("redis.v20180412.ModifyValkeyModule", async function () {
+    try {
+       const data = await client.ModifyValkeyModule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.CreateExportTask", async function () {
     try {
        const data = await client.CreateExportTask({})
@@ -1058,6 +1088,16 @@ it("redis.v20180412.RestoreInstance", async function () {
     }
 })
 
+it("redis.v20180412.ModifyModule", async function () {
+    try {
+       const data = await client.ModifyModule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
@@ -1068,9 +1108,9 @@ it("redis.v20180412.DescribeInstances", async function () {
     }
 })
 
-it("redis.v20180412.RemoveReplicationGroup", async function () {
+it("redis.v20180412.ModifySSLEncryptionMode", async function () {
     try {
-       const data = await client.RemoveReplicationGroup({})
+       const data = await client.ModifySSLEncryptionMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1181,6 +1221,16 @@ it("redis.v20180412.ModifyDBInstanceSecurityGroups", async function () {
 it("redis.v20180412.ChangeMasterInstance", async function () {
     try {
        const data = await client.ChangeMasterInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.RemoveReplicationGroup", async function () {
+    try {
+       const data = await client.RemoveReplicationGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

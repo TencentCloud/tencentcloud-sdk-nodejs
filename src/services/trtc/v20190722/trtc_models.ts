@@ -1081,13 +1081,33 @@ export interface ControlAIConversationResponse {
 }
 
 /**
- * ai对话需要透传给客户端的数据
+ * ModifyCloudTranscription请求参数结构体
  */
-export interface TransparentData {
+export interface ModifyCloudTranscriptionRequest {
   /**
-   * <p>透传给客户端的信息</p>
+   * <p>TRTC的SdkAppId，和转录的房间所对应的SdkAppId相同。</p>
    */
-  Data: string
+  SdkAppId: number
+  /**
+   * <p>转录任务的唯一Id，在启动转录成功后会返回。</p>
+   */
+  TaskId: string
+  /**
+   * <p>客户保证同一个任务，每次更新请求中的SequenceNumber递增，防止请求乱序。</p>
+   */
+  SequenceNumber: number
+  /**
+   * <p>转录订阅用户信息，包括白名单和黑名单。</p>
+   */
+  SubscribeUserInfo?: TranscriptionSubscribeParam
+  /**
+   * <p>转录服务翻译使用的参数。</p>
+   */
+  TranslationParam?: TranslationParam
+  /**
+   * <p>转录服务TTS使用的参数。</p>
+   */
+  TTSParam?: Array<TTSParam>
 }
 
 /**
@@ -1987,6 +2007,20 @@ export interface StopAITranscriptionRequest {
    * 唯一标识转录任务。
    */
   TaskId: string
+}
+
+/**
+ * ModifyCloudTranscription返回参数结构体
+ */
+export interface ModifyCloudTranscriptionResponse {
+  /**
+   * <p>转录服务分配的任务 ID。任务 ID 是对一次转录生命周期过程的唯一标识，结束转录时会失去意义。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3406,6 +3440,16 @@ export interface DeleteCloudSliceTaskResponse {
 }
 
 /**
+ * ai对话需要透传给客户端的数据
+ */
+export interface TransparentData {
+  /**
+   * <p>透传给客户端的信息</p>
+   */
+  Data: string
+}
+
+/**
  * DescribeRelayUsage返回参数结构体
  */
 export interface DescribeRelayUsageResponse {
@@ -4627,6 +4671,20 @@ export interface OutputParams {
    * 取值范围[0,1]，填0无实际含义; 填1：指定录制文件格式为mp3。此参数不建议使用，建议在实时音视频控制台配置纯音频录制模板。
    */
   RecordAudioOnly?: number
+}
+
+/**
+ * 转录服务订阅用户参数
+ */
+export interface TranscriptionSubscribeParam {
+  /**
+   * <p>转录用户白名单，为空或不填表示转录所有主播音频，填具体值表示转录指定主播音频。 使用黑白名单时，同一个用户同时在黑白名单时，以黑名单为主。</p>
+   */
+  SubscribeList?: Array<TranscriptionUserInfoParams>
+  /**
+   * <p>转录用户黑名单，为空或不填表示无黑名单，填具体值表示不转录指定主播音频。 同一个用户同时在黑白名单时，以黑名单为主。</p>
+   */
+  UnSubscribeList?: Array<TranscriptionUserInfoParams>
 }
 
 /**

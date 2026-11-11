@@ -109,6 +109,7 @@ import {
   DescribeSessionsResponse,
   DescribeDeploymentListRequest,
   DescribeRegistryAuditLogListRequest,
+  EventItem,
   PauseSandboxInstanceRequest,
   DescribeRegistryRecordListResponse,
   CloudAuditLog,
@@ -170,6 +171,7 @@ import {
   DescribePreCacheImageTaskResponse,
   DeleteRegistryRecordResponse,
   CreateRegistryRecordRequest,
+  DescribeEventCenterEventsResponse,
   ModifySessionResponse,
   UpdateSandboxInstanceResponse,
   Deployment,
@@ -179,6 +181,7 @@ import {
   DeleteRegistryRecordRequest,
   EventPartInfo,
   Tag,
+  DescribeEventCenterEventsRequest,
   StopSandboxInstanceResponse,
   ScalingConfiguration,
   CreateSandboxSnapshotRequest,
@@ -785,6 +788,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSessionResponse) => void
   ): Promise<DescribeSessionResponse> {
     return this.request("DescribeSession", req, cb)
+  }
+
+  /**
+   * 本接口用于查询当前账号在指定地域的事件列表，支持按事件来源、资源对象、事件类型、事件级别及时间范围等条件筛选，并支持分页和时间排序。默认查询最近 1 小时的事件，支持查询最近 7 天内的事件。
+   */
+  async DescribeEventCenterEvents(
+    req: DescribeEventCenterEventsRequest,
+    cb?: (error: string, rep: DescribeEventCenterEventsResponse) => void
+  ): Promise<DescribeEventCenterEventsResponse> {
+    return this.request("DescribeEventCenterEvents", req, cb)
   }
 
   /**

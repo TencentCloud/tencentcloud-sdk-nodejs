@@ -2337,7 +2337,7 @@ export interface DescribeVulRiskRelateHostRequest {
    */
   MemberId?: Array<string>
   /**
-   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对主机名/IP/InstanceID 模糊匹配）<br>CloudTag: 云标签<br>Tag: 安全中心标签</p>
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对主机名/IP/InstanceID 模糊匹配）<br>CloudTag: 云标签<br>Tag: 安全中心标签<br>ClusterId：集群id（仅支持单集群id筛选）</p>
    */
   Filters?: Array<Filters>
   /**
@@ -3358,6 +3358,32 @@ export interface ModifyDspmAssetAccountPrivilegesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资产基线风险
+ */
+export interface AssetBaselineRisk {
+  /**
+   * <p>风险记录唯一标识。</p>
+   */
+  RiskID?: string
+  /**
+   * <p>检测项详细信息。</p>
+   */
+  Item?: BaselineItem
+  /**
+   * <p>最近一次检测时间（ISO 8601 格式）。</p>
+   */
+  LatestCheckTime?: string
+  /**
+   * <p>检测结果状态。取值：</p><ul><li>NOT_PASS：未通过</li><li>PASS：通过</li><li>CHECKING：检测中</li></ul><p></p>
+   */
+  ResultStatus?: string
+  /**
+   * <p>所属基线策略简要信息。</p>
+   */
+  PolicyInfo?: BaselinePolicyBrief
 }
 
 /**
@@ -4423,61 +4449,21 @@ export interface DescribeClusterInstallCommandResponse {
 }
 
 /**
- * 镜像层信息
+ * DescribeHostVulRiskEventList返回参数结构体
  */
-export interface ImageLayer {
+export interface DescribeHostVulRiskEventListResponse {
   /**
-   * <p>镜像层序号</p>
+   * <p>主机漏洞风险事件列表</p>
    */
-  LayerIndex?: number
+  List?: Array<HostVulRiskEventItem>
   /**
-   * <p>镜像层id</p>
+   * <p>符合筛选条件的总条数</p>
    */
-  LayerId?: string
+  TotalCount?: number
   /**
-   * <p>镜像层命令行</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LayerCmd?: string
-  /**
-   * <p>镜像层大小</p>
-   */
-  Size?: number
-  /**
-   * <p>严重漏洞数</p>
-   */
-  CriticalLevelVulCnt?: number
-  /**
-   * <p>高危漏洞数</p>
-   */
-  HighLevelVulCnt?: number
-  /**
-   * <p>中危漏洞数</p>
-   */
-  MediumLevelVulCnt?: number
-  /**
-   * <p>低危漏洞数</p>
-   */
-  LowLevelVulCnt?: number
-  /**
-   * <p>木马数</p>
-   */
-  VirusCnt?: number
-  /**
-   * <p>敏感信息数</p>
-   */
-  SensitiveCnt?: number
-  /**
-   * <p>镜像层创建时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
-   */
-  LayerCreateTime?: string
-  /**
-   * <p>敏感文件数</p>
-   */
-  SecretFileCnt?: number
-  /**
-   * <p>构建风险数</p>
-   */
-  BuildRiskCnt?: number
+  RequestId?: string
 }
 
 /**
@@ -6390,6 +6376,16 @@ export interface ModifyDspmApplyingIdentifyComplianceGroupRequest {
 }
 
 /**
+ * DescribeHostVulScanStatus请求参数结构体
+ */
+export interface DescribeHostVulScanStatusRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+}
+
+/**
  * DescribeComplianceStandardTermTree返回参数结构体
  */
 export interface DescribeComplianceStandardTermTreeResponse {
@@ -7249,6 +7245,24 @@ export interface DescribeEdrLogCollectPathsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeClusterBaselineRiskPolicyList请求参数结构体
+ */
+export interface DescribeClusterBaselineRiskPolicyListRequest {
+  /**
+   * <p>集群所属账号的 Appid，用于指定查询基线风险策略的账号。</p>
+   */
+  ClusterAppid: number
+  /**
+   * <p>集群CaMD5</p>
+   */
+  ClusterCaMD5: string
+  /**
+   * 集团账号的成员 ID 列表。
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -10003,21 +10017,13 @@ export interface DescribeClusterServiceListRequest {
 }
 
 /**
- * DescribePodContainerList请求参数结构体
+ * DescribeBaselineSyncConf请求参数结构体
  */
-export interface DescribePodContainerListRequest {
+export interface DescribeBaselineSyncConfRequest {
   /**
-   * <p>集团账号的成员id</p>
+   * 集团账号场景下的成员账号 Appid 列表。非集团账号或仅查询当前账号时传空。
    */
   MemberId?: Array<string>
-  /**
-   * <p>Pod唯一标识ID</p>
-   */
-  PodUniqueID?: string
-  /**
-   * <p>通用过滤条件列表。支持的过滤字段：<br>ContainerId：容器ID，精确匹配。<br>ContainerName：容器名称，模糊匹配。<br>RunStatus：容器运行状态，精确匹配。取值：RUNNING、PAUSED、STOPPED、CREATED、DESTROYED、RESTARTING、REMOVING、DEAD、UNKNOWN。<br>ImageId：镜像ID，精确匹配。<br>ImageName：镜像名称，模糊匹配。<br>IsolateStatus：隔离状态，精确匹配。取值：NORMAL（未隔离）、ISOLATED（已隔离）、ISOLATING（隔离中）、ISOLATE_FAILED（隔离失败）、RESTORING（解除隔离中）、RESTORE_FAILED（解除隔离失败）。<br>NodeUniqueId：所属节点唯一ID，精确匹配（NodeAssetId 为等价别名）。<br>UUID：主机UUID，精确匹配。<br>NodeId：所属节点实例ID，精确匹配。<br>NodeType：节点类型，精确匹配。取值：SUPER、MASTER、WORKER。</p>
-   */
-  Filter?: Filter
 }
 
 /**
@@ -12068,6 +12074,81 @@ export interface DescribeDspmIdentifyCategoryListRequest {
 }
 
 /**
+ * 主机漏洞扫描状态
+ */
+export interface HostVulScanStatus {
+  /**
+   * 是否发起过漏洞扫描
+枚举值：
+true：已发起过漏洞扫描
+false：从未发起过漏洞扫描
+   */
+  HasScanned?: boolean
+  /**
+   * 是否处于首次漏洞扫描判断场景
+枚举值：
+true：处于首次漏洞扫描判断场景
+false：不处于首次漏洞扫描判断场景
+   */
+  IsFirstScan?: boolean
+  /**
+   * 最近一次扫描任务状态
+枚举值：
+SCANNING：扫描中
+SUCCESS：扫描成功
+PARTIAL_FAILED：部分扫描失败
+ALL_FAILED：全部扫描失败
+STOPPED：停止扫描
+   */
+  ScanTaskStatus?: string
+  /**
+   * 页面业务状态
+枚举值：
+NEVER_SCANNED：从未扫描过漏洞
+SCANNING：扫描中
+FIRST_SCAN_FAILED：首次漏洞扫描失败
+FIRST_SCAN_HAS_FIXABLE_VUL：首次扫描完成，存在可修复漏洞
+FIRST_SCAN_NO_FIXABLE_VUL：首次扫描完成，有漏洞但无可修复漏洞
+FIRST_SCAN_NO_VUL：首次扫描完成，没有漏洞
+SCANNED_HAS_FIXABLE_VUL：非首次扫描，存在可修复漏洞
+SCANNED_NO_FIXABLE_VUL：非首次扫描，有漏洞但无可修复漏洞
+SCANNED_NO_VUL：非首次扫描，没有漏洞
+   */
+  ScanScene?: string
+  /**
+   * 最近扫描时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+从未扫描时返回空字符串。
+   */
+  LatestScanTime?: string
+  /**
+   * 当前待处理漏洞总数
+包含普通主机漏洞和最新 Windows KB 待处理风险。
+   */
+  TotalVulCount?: number
+  /**
+   * 当前可修复漏洞数
+包含支持一键修复的普通主机漏洞和最新 Windows KB 待处理风险。
+   */
+  FixableVulCount?: number
+  /**
+   * 当前可修复应急漏洞数
+应急漏洞优先归类：应急漏洞仅计入该字段，不再计入 Linux 软件漏洞数。
+   */
+  FixableEmergencyCount?: number
+  /**
+   * 当前可修复 Linux 软件漏洞数
+仅统计非应急 Linux 软件漏洞。
+   */
+  FixableLinuxVulCount?: number
+  /**
+   * 当前可修复 Windows 系统补丁数
+统计最新 Windows KB 待处理风险。
+   */
+  FixableWindowVulCount?: number
+}
+
+/**
  * 云边界规则信息
  */
 export interface ExposeRuleItem {
@@ -12486,6 +12567,103 @@ export interface ImageVul {
    * <p>镜像id</p>
    */
   ImageId?: string
+}
+
+/**
+ * 主机漏洞风险事件明细
+ */
+export interface HostVulRiskEventItem {
+  /**
+   * 漏洞风险记录唯一标识
+   */
+  UUID?: string
+  /**
+   * 风险记录 ID
+   */
+  RiskID?: number
+  /**
+   * 漏洞 ID
+   */
+  VulID?: number
+  /**
+   * 漏洞名称
+   */
+  VulName?: string
+  /**
+   * CVE 编号
+参数格式：形如 CVE-2024-12345
+   */
+  CVEID?: string
+  /**
+   * 漏洞分类
+枚举值：
+LINUX：Linux 软件漏洞
+WINDOWS：Windows 系统补丁
+WEB_CMS：Web-CMS 漏洞
+APPLICATION：应用漏洞
+EMERGENCY：应急漏洞
+   */
+  Category?: string
+  /**
+   * 漏洞危害等级
+枚举值：
+UNKNOWN：无效
+LOW：低危
+MEDIUM：中危
+HIGH：高危
+CRITICAL：严重
+   */
+  Level?: string
+  /**
+   * VPR 修复优先级
+枚举值：
+DEFERRABLE：可暂缓修复
+PLANNED：计划修复
+SOON：尽快修复
+URGENT：紧急修复
+   */
+  VPRLevel?: string
+  /**
+   * 检测方式
+枚举值：
+VersionCompare：版本比对
+POC：POC 检测
+VersionComparePOC：版本比对 + POC
+   */
+  CheckMethod?: string
+  /**
+   * 风险状态
+枚举值：
+PENDING：待处理
+HANDLED：已处置
+FIXED：已修复
+SCANNING：重新检测中
+IGNORED：已忽略
+NOT_REQUIRED：无需处理
+DELETED：已删除
+FIXING：修复中
+NEED_REBOOT：已修复待重启
+FIX_FAILED：修复失败
+   */
+  RiskStatus?: string
+  /**
+   * 是否支持一键修复
+   */
+  SupportFix?: boolean
+  /**
+   * 最近扫描时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  LatestScanTime?: string
+  /**
+   * 云主机实例 ID
+参数格式：形如 ins-xxxxxxxx
+   */
+  InstanceID?: string
+  /**
+   * 所属账号 AppID
+   */
+  AppID?: number
 }
 
 /**
@@ -15549,6 +15727,52 @@ Key为AbnormalBehavior异常行为。
 }
 
 /**
+ * DescribeDspmAccessTopologySummary返回参数结构体
+ */
+export interface DescribeDspmAccessTopologySummaryResponse {
+  /**
+   * 来源IP数
+   */
+  SourceIpCount?: number
+  /**
+   * 访问账号数
+   */
+  AccountCount?: number
+  /**
+   * 被访问的库数
+   */
+  DbCount?: number
+  /**
+   * 被访问的表数
+   */
+  TableCount?: number
+  /**
+   * 近7天访问次数
+   */
+  AccessCountLast7Days?: number
+  /**
+   * 近30天访问次数
+   */
+  AccessCountLast30Days?: number
+  /**
+   * 表级访问组合数（实例+账号+来源IP+库+schema+表 的去重组合数）
+   */
+  TableCombinationCount?: number
+  /**
+   * 表级访问组合数是否已达上限。为 true 时表级拓扑数据不完整：达上限后新出现的访问组合会被拒绝写入（已有组合仍继续累加），因此展示的拓扑可能缺失部分对象，且保留了哪些组合取决于到达顺序。建议据此显式提示数据不完整。查询不到该标志时不返回本字段
+   */
+  DataIncomplete?: boolean
+  /**
+   * 数据最后计算时间。拓扑数据由后台预聚合产生，存在链路延迟；多成员账号场景取各成员中最早的一个
+   */
+  LastCalcTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRiskDetailExportJob返回参数结构体
  */
 export interface CreateRiskDetailExportJobResponse {
@@ -18270,6 +18494,16 @@ export interface EDRScanRecordItem {
 }
 
 /**
+ * ModifyBaselineIgnorePolicy返回参数结构体
+ */
+export interface ModifyBaselineIgnorePolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 主机实例定位信息
  */
 export interface InstanceIDWithAppIdItem {
@@ -20902,6 +21136,28 @@ export interface ScanEDRTaskAgainRequest {
 }
 
 /**
+ * DescribeBaselineIgnorePolicyList请求参数结构体
+ */
+export interface DescribeBaselineIgnorePolicyListRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>通用过滤条件。支持字段：ItemName（检测项名称，模糊）。不同 Name 之间为且关系，同一 Name 下多个 Values 为或关系。</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>分页查询每页数量，最大值 100；超过时服务端将自动回退为默认值 10。</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页查询起始偏移量，从 0 开始。</p>
+   */
+  Offset?: number
+}
+
+/**
  * 受影响的存储桶信息
  */
 export interface CosRiskBucketInfo {
@@ -21520,6 +21776,24 @@ export interface DescribeAIAgentCredentialListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 位置信息
+ */
+export interface Location {
+  /**
+   * 国家
+   */
+  Country?: string
+  /**
+   * 地区
+   */
+  Region?: string
+  /**
+   * 城市
+   */
+  City?: string
 }
 
 /**
@@ -22606,6 +22880,16 @@ export interface UpdateAlertStatusListRequest {
 }
 
 /**
+ * DeleteBaselineIgnorePolicy返回参数结构体
+ */
+export interface DeleteBaselineIgnorePolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLoginWhiteCombinedList请求参数结构体
  */
 export interface DescribeLoginWhiteCombinedListRequest {
@@ -22640,7 +22924,7 @@ export interface DescribeVulRiskRelateComponentRequest {
    */
   MemberId?: Array<string>
   /**
-   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对组件名称模糊匹配）</p>
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对组件名称模糊匹配）<br>ClusterId：集群id（仅支持单集群id筛选）</p>
    */
   Filters?: Array<Filters>
 }
@@ -22784,6 +23068,20 @@ export interface ModifyMachinesLoginTypeRequest {
    * <p>请求版本 0   原始版本 1   策略式请求</p>
    */
   RequestVersion?: number
+}
+
+/**
+ * DescribeHostVulScanStatus返回参数结构体
+ */
+export interface DescribeHostVulScanStatusResponse {
+  /**
+   * <p>主机漏洞扫描状态</p>
+   */
+  Status?: HostVulScanStatus
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -23262,6 +23560,20 @@ export interface DescribeDspmAssetSecurityAnalyseStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteBaselineIgnorePolicy请求参数结构体
+ */
+export interface DeleteBaselineIgnorePolicyRequest {
+  /**
+   * <p>要删除的忽略策略记录 ID。</p>
+   */
+  ID: Array<number | bigint>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -23809,6 +24121,20 @@ export interface DescribeSourceIPDetailResponse {
 }
 
 /**
+ * CreateBaselineMainTaskExportJob返回参数结构体
+ */
+export interface CreateBaselineMainTaskExportJobResponse {
+  /**
+   * <p>导出任务ID，异步导出任务唯一标识，用于查询任务状态与获取下载链接。</p>
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBaselineAggregatedPolicyList请求参数结构体
  */
 export interface DescribeBaselineAggregatedPolicyListRequest {
@@ -23904,6 +24230,36 @@ export interface DescribeExposureAutoTagRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeHostVulRiskEventList请求参数结构体
+ */
+export interface DescribeHostVulRiskEventListRequest {
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件支持的Filter.Name：VulName - 模糊匹配，按漏洞名称搜索Category - 精确匹配，按漏洞分类筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞RiskStatus - 精确匹配，按风险状态筛选：PENDING-待处理 HANDLED-已处置 FIXED-已修复 SCANNING-重新检测中 IGNORED-已忽略 NOT_REQUIRED-无需处理 DELETED-已删除 FIXING-修复中 NEED_REBOOT-已修复待重启 FIX_FAILED-修复失败Level - 精确匹配，按漏洞危害等级筛选：UNKNOWN-无效 LOW-低危 MEDIUM-中危 HIGH-高危 CRITICAL-严重CVSSLevel - 精确匹配，兼容字段，等同于 LevelVPRLevel - 精确匹配，按VPR修复优先级筛选：DEFERRABLE-可暂缓修复 PLANNED-计划修复 SOON-尽快修复 URGENT-紧急修复- 精确匹配，按漏洞ID筛选InstanceID - 精确匹配，按云主机实例ID筛选InstanceId - 精确匹配，兼容字段，等同于 InstanceIDUUID - 精确匹配，按主机安全UUID筛选LatestScanTimeStart - 范围匹配，最近扫描时间起，格式：YYYY-MM-DD HH:mm:ssLatestScanTimeEnd - 范围匹配，最近扫描时间止，格式：YYYY-MM-DD HH:mm:ss</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>排序方式<br>枚举值：<br>asc：升序<br>desc：降序<br>默认值：desc</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段<br>枚举值：<br>LatestScanTime：按最近扫描时间排序<br>Level：按威胁等级排序<br>VPRLevel：按 VPR 评级排序<br>RiskStatus：按风险状态排序<br>VulID：按漏洞 ID 排序<br>InstanceID：按实例 ID 排序<br>默认值：LatestScanTime</p>
+   */
+  By?: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -25038,21 +25394,37 @@ export interface CreateImageSensitiveInfoListExportJobRequest {
 }
 
 /**
- * 位置信息
+ * DescribeAssetBaselineRiskList请求参数结构体
  */
-export interface Location {
+export interface DescribeAssetBaselineRiskListRequest {
   /**
-   * 国家
+   * <p>资产唯一标识（UUID），与 AssetType 组合定位具体资产。</p>
    */
-  Country?: string
+  AssetUniqueID: string
   /**
-   * 地区
+   * <p>资产类型。取值：HOST（主机）、CLUSTER（集群）。</p>
    */
-  Region?: string
+  AssetType: string
   /**
-   * 城市
+   * <p>资产所属appid</p>
    */
-  City?: string
+  AssetAppID: number
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>通用过滤条件。支持字段：ItemName（检测项名称，模糊）、PolicyName（所属基线名称，模糊）、ResultStatus（结果状态）、RiskLevel（风险等级）。不同 Name 之间为且关系，同一 Name 下多个 Values 为或关系。</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>分页查询每页数量，最大值 100；超过时服务端将自动回退为默认值 10。</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页查询起始偏移量，从 0 开始。</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -27030,6 +27402,16 @@ export interface WebhookCustomField {
 入参限制：长度 1-256
    */
   Value?: string
+}
+
+/**
+ * DescribeDspmAccessTopologySummary请求参数结构体
+ */
+export interface DescribeDspmAccessTopologySummaryRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -30863,7 +31245,7 @@ export interface CreateHostVulExportJobRequest {
    */
   MemberId?: Array<string>
   /**
-   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>KbID：KB风险关联主机情况下需要额外加入KB风险ID<br>VulID：漏洞风险关联主机情况下需要额外加入vul风险ID</p>
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>KbID：KB风险关联主机情况下需要额外加入KB风险ID<br>VulID：漏洞风险关联主机情况下需要额外加入vul风险ID<br> ClusterId：集群id（仅支持单集群id筛选）</p>
    */
   Filters?: Array<Filters>
 }
@@ -31052,6 +31434,16 @@ export interface DspmAssetAccountIdentify {
    * 资产所属账号uin
    */
   Uin?: string
+}
+
+/**
+ * ModifyClusterAuditLogStatus返回参数结构体
+ */
+export interface ModifyClusterAuditLogStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -31334,6 +31726,60 @@ export interface DescribeLoginTypeGlobalConfRequest {
    * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
+}
+
+/**
+ * 基线忽略策略
+ */
+export interface BaselineIgnorePolicy {
+  /**
+   * <p>忽略策略记录 ID。</p>
+   */
+  ID?: number
+  /**
+   * <p>检测项名称。</p>
+   */
+  ItemName?: string
+  /**
+   * <p>检测项所属分类名称。</p>
+   */
+  CategoryName?: string
+  /**
+   * <p>用户 AppID。</p>
+   */
+  AppID?: number
+  /**
+   * <p>忽略范围类型</p><p>枚举值：</p><ul><li>ALL： 全部资产</li><li>PICK： 指定资产</li></ul>
+   */
+  ScopeType?: string
+  /**
+   * <p>自选资产 ID 列表，PICK时生效，存储 instance-id 或集群 ID。</p>
+   */
+  ScopeIncludeList?: Array<string>
+  /**
+   * <p>剔除资产 ID 列表，ALL 时生效，存储 instance-id 或集群 ID。</p>
+   */
+  ScopeExcludeList?: Array<string>
+  /**
+   * <p>备注信息。</p>
+   */
+  Remark?: string
+  /**
+   * <p>创建时间。</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>最近修改时间。</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>对应资产类型</p><p>枚举值：</p><ul><li>HOST： 主机</li><li>CLUSTER： 集群相关资产</li></ul>
+   */
+  AssetType?: string
+  /**
+   * <p>检测项ID</p>
+   */
+  ItemID?: number
 }
 
 /**
@@ -33883,6 +34329,64 @@ high 高危/ middle 中危 / low 低危 /info 提示
 }
 
 /**
+ * 镜像层信息
+ */
+export interface ImageLayer {
+  /**
+   * <p>镜像层序号</p>
+   */
+  LayerIndex?: number
+  /**
+   * <p>镜像层id</p>
+   */
+  LayerId?: string
+  /**
+   * <p>镜像层命令行</p>
+   */
+  LayerCmd?: string
+  /**
+   * <p>镜像层大小</p>
+   */
+  Size?: number
+  /**
+   * <p>严重漏洞数</p>
+   */
+  CriticalLevelVulCnt?: number
+  /**
+   * <p>高危漏洞数</p>
+   */
+  HighLevelVulCnt?: number
+  /**
+   * <p>中危漏洞数</p>
+   */
+  MediumLevelVulCnt?: number
+  /**
+   * <p>低危漏洞数</p>
+   */
+  LowLevelVulCnt?: number
+  /**
+   * <p>木马数</p>
+   */
+  VirusCnt?: number
+  /**
+   * <p>敏感信息数</p>
+   */
+  SensitiveCnt?: number
+  /**
+   * <p>镜像层创建时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  LayerCreateTime?: string
+  /**
+   * <p>敏感文件数</p>
+   */
+  SecretFileCnt?: number
+  /**
+   * <p>构建风险数</p>
+   */
+  BuildRiskCnt?: number
+}
+
+/**
  * cos审计资产数据识别详情
  */
 export interface CosAssetDataScanDetail {
@@ -34943,6 +35447,32 @@ export interface CreateEdrLessAlertExportJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群基线策略
+ */
+export interface ClusterBaselinePolicy {
+  /**
+   * <p>基线策略 ID。</p>
+   */
+  PolicyID?: number
+  /**
+   * <p>基线策略名称。</p>
+   */
+  PolicyName?: string
+  /**
+   * <p>检测资产类型。<br>枚举值：<br>HOST：主机<br>CLUSTER：容器集群</p>
+   */
+  CheckAssetType?: string
+  /**
+   * <p>基线系统父分类 ID。</p>
+   */
+  ParentCategoryID?: number
+  /**
+   * <p>是否为系统基线策略。true 表示系统策略，false 表示自定义策略。</p>
+   */
+  IsSystem?: boolean
 }
 
 /**
@@ -39544,6 +40074,36 @@ export interface RiskDetailItem {
 }
 
 /**
+ * CreateAssetBaselineRiskExportJob请求参数结构体
+ */
+export interface CreateAssetBaselineRiskExportJobRequest {
+  /**
+   * <p>资产唯一标识（UUID），与 AssetType 组合定位具体资产。</p>
+   */
+  AssetUniqueID: string
+  /**
+   * <p>资产类型。取值：HOST（主机）、CLUSTER（集群）。</p>
+   */
+  AssetType: string
+  /**
+   * <p>资产所属appid</p>
+   */
+  AssetAppID: number
+  /**
+   * <p>导出任务名字</p>
+   */
+  Name: string
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>通用过滤条件。支持字段：ItemName（检测项名称，模糊）、PolicyName（所属基线名称，模糊）、InstanceName（主机名称，模糊）、InstanceID（实例ID，精准）、IP（IP 地址，模糊）。不同 Name 之间为且关系，同一 Name 下多个 Values 为或关系。</p>
+   */
+  Filters?: Array<Filters>
+}
+
+/**
  * DescribePublicIpAssets返回参数结构体
  */
 export interface DescribePublicIpAssetsResponse {
@@ -42003,6 +42563,40 @@ export interface DescribeExposePathRequest {
 }
 
 /**
+ * ModifyBaselineIgnorePolicy请求参数结构体
+ */
+export interface ModifyBaselineIgnorePolicyRequest {
+  /**
+   * <p>检测项 ID，标识对哪个检测项设置忽略策略。</p>
+   */
+  ItemID: number
+  /**
+   * <p>忽略范围类型。</p><p>枚举值：</p><ul><li>ALL： 全部资产</li><li>PICK： 指定资产</li></ul>
+   */
+  ScopeType: string
+  /**
+   * <p>备注信息。</p>
+   */
+  Remark: string
+  /**
+   * <p>忽略策略记录 ID。新建时传 0，更新时传对应记录 ID。</p>
+   */
+  ID: number
+  /**
+   * <p>自选资产 ID 列表，PICK 时生效，传入 instance-id 或集群 ID。</p>
+   */
+  ScopeIncludeList?: Array<string>
+  /**
+   * <p>剔除资产 ID 列表，ALL 时生效，传入 instance-id 或集群 ID。</p>
+   */
+  ScopeExcludeList?: Array<string>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+}
+
+/**
  * RetryDspmExportLog返回参数结构体
  */
 export interface RetryDspmExportLogResponse {
@@ -43880,17 +44474,17 @@ export interface ExportClientSettingHostListRequest {
 }
 
 /**
- * DescribeSourceIPDetail请求参数结构体
+ * CreateAssetBaselineRiskExportJob返回参数结构体
  */
-export interface DescribeSourceIPDetailRequest {
+export interface CreateAssetBaselineRiskExportJobResponse {
   /**
-   * 源IP的ID
+   * <p>导出任务ID</p>
    */
-  ID: number
+  JobId?: string
   /**
-   * 集团账号的成员id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MemberId?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -46889,13 +47483,21 @@ export interface DescribeTagRuleAssetsRequest {
 }
 
 /**
- * DescribeBaselineSyncConf请求参数结构体
+ * DescribePodContainerList请求参数结构体
  */
-export interface DescribeBaselineSyncConfRequest {
+export interface DescribePodContainerListRequest {
   /**
-   * 集团账号场景下的成员账号 Appid 列表。非集团账号或仅查询当前账号时传空。
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
+  /**
+   * <p>Pod唯一标识ID</p>
+   */
+  PodUniqueID?: string
+  /**
+   * <p>通用过滤条件列表。支持的过滤字段：<br>ContainerId：容器ID，精确匹配。<br>ContainerName：容器名称，模糊匹配。<br>RunStatus：容器运行状态，精确匹配。取值：RUNNING、PAUSED、STOPPED、CREATED、DESTROYED、RESTARTING、REMOVING、DEAD、UNKNOWN。<br>ImageId：镜像ID，精确匹配。<br>ImageName：镜像名称，模糊匹配。<br>IsolateStatus：隔离状态，精确匹配。取值：NORMAL（未隔离）、ISOLATED（已隔离）、ISOLATING（隔离中）、ISOLATE_FAILED（隔离失败）、RESTORING（解除隔离中）、RESTORE_FAILED（解除隔离失败）。<br>NodeUniqueId：所属节点唯一ID，精确匹配（NodeAssetId 为等价别名）。<br>UUID：主机UUID，精确匹配。<br>NodeId：所属节点实例ID，精确匹配。<br>NodeType：节点类型，精确匹配。取值：SUPER、MASTER、WORKER。</p>
+   */
+  Filter?: Filter
 }
 
 /**
@@ -46917,13 +47519,17 @@ export interface ModifyUebaRuleSwitchRequest {
 }
 
 /**
- * CreateBaselineMainTaskExportJob返回参数结构体
+ * DescribeAssetBaselineRiskList返回参数结构体
  */
-export interface CreateBaselineMainTaskExportJobResponse {
+export interface DescribeAssetBaselineRiskListResponse {
   /**
-   * <p>导出任务ID，异步导出任务唯一标识，用于查询任务状态与获取下载链接。</p>
+   * <p>基线风险修复记录列表。</p>
    */
-  JobId?: string
+  List?: Array<AssetBaselineRisk>
+  /**
+   * <p>凭据总数</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -48199,6 +48805,32 @@ export interface ModifyDspmAssetSecurityAnalysisSwitchRequest {
 }
 
 /**
+ * ModifyClusterAuditLogStatus请求参数结构体
+ */
+export interface ModifyClusterAuditLogStatusRequest {
+  /**
+   * <p>审计日志开关，审计日志目标状态：true-开启，false-关闭。开启要求集群已开启防护，关闭不要求。</p>
+   */
+  AuditLogSwitch: boolean
+  /**
+   * <p>集群资产 id（已废弃）</p>
+   */
+  ClusterAssetId?: string
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * 被调用的集团账号的成员id
+   */
+  OperatedMemberId?: Array<string>
+  /**
+   * <p>集群 CA 证书 MD5 列表，集群的唯一标识，支持单个或批量修改</p>
+   */
+  ClusterCaMD5List?: Array<string>
+}
+
+/**
  * DeleteCosAkAsset请求参数结构体
  */
 export interface DeleteCosAkAssetRequest {
@@ -49006,6 +49638,24 @@ export interface DescribeCVMAssetsResponse {
    * 主机防护状态
    */
   ProtectStatusList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBaselineIgnorePolicyList返回参数结构体
+ */
+export interface DescribeBaselineIgnorePolicyListResponse {
+  /**
+   * <p>基线风险修复记录列表。</p>
+   */
+  List?: Array<BaselineIgnorePolicy>
+  /**
+   * <p>凭据总数</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -50701,6 +51351,20 @@ export interface DescribeRiskCenterAssetViewVULRiskListRequest {
    * 资产标签
    */
   Tags?: Array<AssetTag>
+}
+
+/**
+ * DescribeSourceIPDetail请求参数结构体
+ */
+export interface DescribeSourceIPDetailRequest {
+  /**
+   * 源IP的ID
+   */
+  ID: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -54382,6 +55046,20 @@ export interface DisableAIScheduleRequest {
    * <p>AI 定时任务 ID。可通过 DescribeAIScheduleList 接口获取。</p>
    */
   ScheduleId?: string
+}
+
+/**
+ * DescribeClusterBaselineRiskPolicyList返回参数结构体
+ */
+export interface DescribeClusterBaselineRiskPolicyListResponse {
+  /**
+   * <p>扫描主任务列表。</p>
+   */
+  List?: Array<ClusterBaselinePolicy>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

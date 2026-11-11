@@ -1119,9 +1119,9 @@ export interface DescribeDBLogFilesRequest {
  */
 export interface UpgradeDedicatedDBInstanceResponse {
   /**
-   * 异步流程Id
+   * <p>异步流程Id</p>
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2194,31 +2194,37 @@ export interface ModifyInstanceProtectedPropertyRequest {
  */
 export interface UpgradeDedicatedDBInstanceRequest {
   /**
-   * 待升级的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例获得。
+   * <p>待升级的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例获得。</p>
    */
   InstanceId: string
   /**
-   * 内存大小，单位：GB，可以通过 DescribeFenceDBInstanceSpecs
- 查询实例规格获得。
+   * <p>内存大小，单位：GB，可以通过 DescribeFenceDBInstanceSpecs<br> 查询实例规格获得。</p>
    */
   Memory: number
   /**
-   * 存储空间大小，单位：GB，可以通过 DescribeFenceDBInstanceSpecs
- 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
+   * <p>存储空间大小，单位：GB，可以通过 DescribeFenceDBInstanceSpecs<br> 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。</p>
    */
   Storage: number
   /**
-   * 错过切换时间窗口时，是否自动重试一次，0-否，1-是
+   * <p>错过切换时间窗口时，是否自动重试一次，0-否，1-是</p>
    */
   SwitchAutoRetry?: number
   /**
-   * 切换时间窗口开始时间
+   * <p>切换时间窗口开始时间</p>
    */
   SwitchStartTime?: string
   /**
-   * 切换时间窗口结束时间
+   * <p>切换时间窗口结束时间</p>
    */
   SwitchEndTime?: string
+  /**
+   * <p>主节点的机器id，类似svr-xxx</p>
+   */
+  MasterHostId?: string
+  /**
+   * <p>备节点的机器id组，类似[svr-xxx1, svr-xxx2]</p>
+   */
+  SlaveHostIds?: Array<string>
 }
 
 /**

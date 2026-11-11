@@ -203,73 +203,17 @@ export interface ModifyInstanceAvailabilityZonesRequest {
 }
 
 /**
- * 实例的备份数组
+ * ModifyModule返回参数结构体
  */
-export interface RedisBackupSet {
+export interface ModifyModuleResponse {
   /**
-   * <p>备份开始时间。</p>
+   * 任务ID。
    */
-  StartTime?: string
+  TaskId?: number
   /**
-   * <p>备份任务ID。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BackupId?: string
-  /**
-   * <p>备份类型。</p><p>枚举值：</p><ul><li>0： 用户发起的手动备份</li><li>1： 凌晨系统发起的自动备份</li><li>2： 变配触发的备份</li></ul>
-   */
-  BackupType?: string
-  /**
-   * <p>备份状态。 </p><ul><li>1：备份被其它流程锁定。</li><li>2：备份正常，没有被任何流程锁定。</li><li>-1：备份已过期。</li><li>3：备份正在被导出。</li><li>4：备份导出成功。</li></ul>
-   */
-  Status?: number
-  /**
-   * <p>备份的备注信息。</p>
-   */
-  Remark?: string
-  /**
-   * <p>备份是否被锁定。</p><ul><li>0：未被锁定。</li><li>1：已被锁定。</li></ul>
-   */
-  Locked?: number
-  /**
-   * <p>内部字段，用户可忽略。</p>
-   */
-  BackupSize?: number
-  /**
-   * <p>内部字段，用户可忽略。</p>
-   */
-  FullBackup?: number
-  /**
-   * <p>内部字段，用户可忽略。</p>
-   */
-  InstanceType?: number
-  /**
-   * <p>实例 ID。</p>
-   */
-  InstanceId?: string
-  /**
-   * <p>实例名称。</p>
-   */
-  InstanceName?: string
-  /**
-   * <p>本地备份所在地域。</p>
-   */
-  Region?: string
-  /**
-   * <p>备份结束时间。</p>
-   */
-  EndTime?: string
-  /**
-   * <p>备份文件类型。</p>
-   */
-  FileType?: string
-  /**
-   * <p>备份文件过期时间。</p>
-   */
-  ExpireTime?: string
-  /**
-   * <p>备份文件是否加密</p>
-   */
-  Encrypted?: boolean
+  RequestId?: string
 }
 
 /**
@@ -638,6 +582,16 @@ export interface DescribeInstanceSpecBandwidthResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeModules请求参数结构体
+ */
+export interface DescribeModulesRequest {
+  /**
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
 }
 
 /**
@@ -1515,13 +1469,13 @@ export interface RedisInstanceEvent {
 }
 
 /**
- * UpgradeVersionToMultiAvailabilityZones返回参数结构体
+ * UpdateSSLCert返回参数结构体
  */
-export interface UpgradeVersionToMultiAvailabilityZonesResponse {
+export interface UpdateSSLCertResponse {
   /**
-   * <p>任务ID</p>
+   * <p>任务ID。</p>
    */
-  FlowId?: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1672,6 +1626,28 @@ export interface InstanceMultiParam {
    * <p>输入格式描述</p>
    */
   InputDescription?: string
+}
+
+/**
+ * ModifyModule请求参数结构体
+ */
+export interface ModifyModuleRequest {
+  /**
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 指定待修改的扩展模块。Redis 支持修改如下扩展模块的状态。
+- Bloom：指 RedisBloom 模块，可以高效地判断一个元素是否存在于集合中。
+- JSON：指 RedisJSON 模块，允许 Redis 原生支持 JSON 数据格式，方便存储和操作 JSON 对象。
+- Search：指 RediSearch 模块，提供全文搜索功能，可以对存储在 Redis 中的数据进行高效的搜索操作。
+- TimeSeries：指 RedisTimeSeries 模块，专门用于处理时间序列数据，适合存储和查询时间相关的数据。
+   */
+  Name: string
+  /**
+   * 设置扩展模块的启用状态。仅支持设置为 ON，启用扩展模块。
+   */
+  Status: string
 }
 
 /**
@@ -2431,6 +2407,20 @@ export interface DescribeTendisSlowLogResponse {
    * 慢查询详情，注意：TotalCount大于1W，即慢日志超过1万条，不支持返回日志详情，返回数据为空。 建议缩小BeginTime和EndTime的时间间隔，多次查询。
    */
   TendisSlowLogDetail?: Array<TendisSlowLogDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpgradeVersionToMultiAvailabilityZones返回参数结构体
+ */
+export interface UpgradeVersionToMultiAvailabilityZonesResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3567,6 +3557,76 @@ export interface ModifyBackupEncryptResponse {
 }
 
 /**
+ * 实例的备份数组
+ */
+export interface RedisBackupSet {
+  /**
+   * <p>备份开始时间。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>备份任务ID。</p>
+   */
+  BackupId?: string
+  /**
+   * <p>备份类型。</p><p>枚举值：</p><ul><li>0： 用户发起的手动备份</li><li>1： 凌晨系统发起的自动备份</li><li>2： 变配触发的备份</li></ul>
+   */
+  BackupType?: string
+  /**
+   * <p>备份状态。 </p><ul><li>1：备份被其它流程锁定。</li><li>2：备份正常，没有被任何流程锁定。</li><li>-1：备份已过期。</li><li>3：备份正在被导出。</li><li>4：备份导出成功。</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>备份的备注信息。</p>
+   */
+  Remark?: string
+  /**
+   * <p>备份是否被锁定。</p><ul><li>0：未被锁定。</li><li>1：已被锁定。</li></ul>
+   */
+  Locked?: number
+  /**
+   * <p>内部字段，用户可忽略。</p>
+   */
+  BackupSize?: number
+  /**
+   * <p>内部字段，用户可忽略。</p>
+   */
+  FullBackup?: number
+  /**
+   * <p>内部字段，用户可忽略。</p>
+   */
+  InstanceType?: number
+  /**
+   * <p>实例 ID。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称。</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>本地备份所在地域。</p>
+   */
+  Region?: string
+  /**
+   * <p>备份结束时间。</p>
+   */
+  EndTime?: string
+  /**
+   * <p>备份文件类型。</p>
+   */
+  FileType?: string
+  /**
+   * <p>备份文件过期时间。</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>备份文件是否加密</p>
+   */
+  Encrypted?: boolean
+}
+
+/**
  * DescribeBackupDetail返回参数结构体
  */
 export interface DescribeBackupDetailResponse {
@@ -3916,6 +3976,24 @@ export interface DescribeInstanceMonitorTopNCmdRequest {
 - 4：近24小时。
    */
   SpanType: number
+}
+
+/**
+ * ModifyValkeyModule请求参数结构体
+ */
+export interface ModifyValkeyModuleRequest {
+  /**
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>指定待修改的扩展模块。</p><p>枚举值：</p><ul><li>ValkeyBloom： 指 Bloom 模块，可以高效地判断一个元素是否存在于集合中</li><li>ValkeyJSON： 指 JSON 模块，允许 Redis 原生支持 JSON 数据格式，方便存储和操作 JSON 对象。</li><li>ValkeySearch： 指 Search 模块，提供全文搜索功能，可以对存储在 Redis 中的数据进行高效的搜索操作。</li></ul>
+   */
+  Name: string
+  /**
+   * <p>设置扩展模块的启用状态。仅支持设置为 ON，启用扩展模块。</p>
+   */
+  Status: string
 }
 
 /**
@@ -4918,6 +4996,20 @@ export interface ModifyReplicationGroupRequest {
 }
 
 /**
+ * DescribeModules返回参数结构体
+ */
+export interface DescribeModulesResponse {
+  /**
+   * <p>实例的扩展模块列表，包括模块的支持状态（是否支持）、启用状态（是否已启用）等信息。</p>
+   */
+  Modules?: Array<Module>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 复制组信息
  */
 export interface Groups {
@@ -5090,17 +5182,17 @@ export interface DescribeInstancesRequest {
 }
 
 /**
- * 访问命令
+ * ModifyValkeyModule返回参数结构体
  */
-export interface SourceCommand {
+export interface ModifyValkeyModuleResponse {
   /**
-   * 命令名称。
+   * <p>任务ID。</p>
    */
-  Cmd?: string
+  TaskId?: number
   /**
-   * 执行次数。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Count?: number
+  RequestId?: string
 }
 
 /**
@@ -5344,6 +5436,32 @@ export interface ChangeInstanceRoleRequest {
 - r：只读。
    */
   InstanceRole: string
+}
+
+/**
+ * Tendis慢查询详情
+ */
+export interface TendisSlowLogDetail {
+  /**
+   * 执行时间
+   */
+  ExecuteTime?: string
+  /**
+   * 慢查询耗时（毫秒）
+   */
+  Duration?: number
+  /**
+   * 命令
+   */
+  Command?: string
+  /**
+   * 详细命令行信息
+   */
+  CommandLine?: string
+  /**
+   * 节点ID
+   */
+  Node?: string
 }
 
 /**
@@ -6729,6 +6847,20 @@ export interface DescribeInstanceMonitorBigKeyRequest {
 }
 
 /**
+ * ModifySSLEncryptionMode返回参数结构体
+ */
+export interface ModifySSLEncryptionModeResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBackupDownloadRestriction请求参数结构体
  */
 export type DescribeBackupDownloadRestrictionRequest = null
@@ -6816,6 +6948,20 @@ export interface SwitchProxyRequest {
 }
 
 /**
+ * 访问命令
+ */
+export interface SourceCommand {
+  /**
+   * 命令名称。
+   */
+  Cmd?: string
+  /**
+   * 执行次数。
+   */
+  Count?: number
+}
+
+/**
  * DescribeInstanceSpecBandwidth请求参数结构体
  */
 export interface DescribeInstanceSpecBandwidthRequest {
@@ -6871,6 +7017,20 @@ export interface BackupLimitVpcItem {
    * 备份文件下载地址的 VPC 列表。
    */
   VpcList: Array<string>
+}
+
+/**
+ * ModifySSLEncryptionMode请求参数结构体
+ */
+export interface ModifySSLEncryptionModeRequest {
+  /**
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>目标加密模式</p><p>枚举值：</p><ul><li>required： 强制加密</li><li>flexible： 兼容模式</li></ul>
+   */
+  EncryptionMode: string
 }
 
 /**
@@ -7519,29 +7679,21 @@ export interface UpgradeInstanceVersionRequest {
 }
 
 /**
- * Tendis慢查询详情
+ * Redis 支持的扩展模块信息。
  */
-export interface TendisSlowLogDetail {
+export interface Module {
   /**
-   * 执行时间
+   * <p>Redis 支持的扩展模块，包括 Bloom、JSON、Search 和 TimeSeries，可以为 Redis 提供额外的功能支持。</p><ul><li>Bloom：指 RedisBloom 模块，可以高效地判断一个元素是否存在于集合中。</li><li>JSON：指 RedisJSON 模块，允许 Redis 原生支持 JSON 数据格式，方便存储和操作 JSON 对象。</li><li>Search：指 RediSearch 模块，提供全文搜索功能，可以对存储在 Redis 中的数据进行高效的搜索操作。</li><li>TimeSeries：指 RedisTimeSeries 模块，专门用于处理时间序列数据，适合存储和查询时间相关的数据。</li><li>ValkeyBloom：指Valkey引擎的RedisBloom 模块，可以高效地判断一个元素是否存在于集合中。</li><li>ValkeyJSON：指Valkey引擎的RedisJSON 模块，允许 Redis 原生支持 JSON 数据格式，方便存储和操作 JSON 对象。</li><li>ValkeySearch：指Valkey引擎的RediSearch 模块，提供全文搜索功能，可以对存储在 Redis 中的数据进行高效的搜索操作。</li></ul>
    */
-  ExecuteTime?: string
+  Name?: string
   /**
-   * 慢查询耗时（毫秒）
+   * <p>扩展模块的启用状态。</p><ul><li>ON：启用。</li><li>OFF：关闭。</li></ul>
    */
-  Duration?: number
+  Status?: string
   /**
-   * 命令
+   * <p>实例是否支持参数 Name 对应的扩展模块。</p><ul><li>true：支持。</li><li>false：不支持。</li></ul>
    */
-  Command?: string
-  /**
-   * 详细命令行信息
-   */
-  CommandLine?: string
-  /**
-   * 节点ID
-   */
-  Node?: string
+  IsSupport?: boolean
 }
 
 /**
@@ -7742,6 +7894,51 @@ export interface ClearInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateSSLCert请求参数结构体
+ */
+export interface UpdateSSLCertRequest {
+  /**
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>密钥类型。</p><p>枚举值：</p><ul><li>0： 腾讯云提供</li><li>1： 用户自定义KMS</li></ul>
+   */
+  CertSource?: number
+  /**
+   * <p>切换时间。（该参数废弃，不再生效）</p><p>枚举值：</p><ul><li>1： 维护时间窗操作：指开启SSL加密在设置的维护时间窗内执行。请通过接口DescribeMaintenanceWindow查询设置的维护时间窗时间段</li><li>2： 立即操作：操作将立即执行，无需等待维护时间窗。系统默认设置为立即操作。</li></ul>
+   * @deprecated
+   */
+  SwitchOption?: number
+  /**
+   * <p>SSL地址类型。</p><p>枚举值：</p><ul><li>0： 不限。</li><li>1： 内网IPv4。</li><li>2： 内网IPv6。</li><li>3： 外网。</li><li>-1： 未指定。</li></ul>
+   */
+  AddressType?: number
+  /**
+   * <p>KMS的密钥ID。（该参数废弃，不再生效）</p><p>参数格式：xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx</p>
+   * @deprecated
+   */
+  KmsKeyId?: string
+  /**
+   * <p>KMS地域信息。（该参数废弃，不再生效）</p><p>参数格式：ap-xxxx</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/573/34406#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">KMS支持的地域列表</a></p>
+   * @deprecated
+   */
+  KmsRegion?: string
+  /**
+   * <p>SSL 证书服务的证书 ID，CertSource=1 时必填</p>
+   */
+  CertId?: string
+  /**
+   * <p>最低 TLS 版本</p><p>枚举值：</p><ul><li>TLSv1.0： TLSv1.0</li><li>TLSv1.1： TLSv1.1</li><li>TLSv1.2： TLSv1.2</li></ul>
+   */
+  SSLMinVersion?: string
+  /**
+   * <p>目标加密模式</p><p>枚举值：</p><ul><li>required： 强制加密</li><li>flexible： 兼容模式</li></ul>
+   */
+  EncryptionMode?: string
 }
 
 /**

@@ -27,7 +27,7 @@ import {
   ModifyInstanceParamsResponse,
   EnableReplicaReadonlyRequest,
   ModifyInstanceAvailabilityZonesRequest,
-  RedisBackupSet,
+  ModifyModuleResponse,
   DescribeInstanceMonitorTopNCmdResponse,
   DeleteExportTaskResponse,
   ModifyInstanceAvailabilityZonesResponse,
@@ -42,6 +42,7 @@ import {
   RemoveReplicationInstanceResponse,
   ExportFile,
   DescribeInstanceSpecBandwidthResponse,
+  DescribeModulesRequest,
   DescribeInstanceZoneInfoRequest,
   ModifyConnectionConfigResponse,
   ModifyNetworkConfigResponse,
@@ -76,12 +77,13 @@ import {
   DescribeParamTemplatesRequest,
   RenewInstanceRequest,
   RedisInstanceEvent,
-  UpgradeVersionToMultiAvailabilityZonesResponse,
+  UpdateSSLCertResponse,
   SecurityGroup,
   DescribeBandwidthRangeRequest,
   DescribeInstanceParamRecordsResponse,
   ModifyAutoBackupConfigRequest,
   InstanceMultiParam,
+  ModifyModuleRequest,
   DescribeInstanceDealDetailRequest,
   KillMasterGroupResponse,
   OpenLogResponse,
@@ -117,6 +119,7 @@ import {
   DescribeLogInstanceListResponse,
   CreateParamTemplateRequest,
   DescribeTendisSlowLogResponse,
+  UpgradeVersionToMultiAvailabilityZonesResponse,
   DescribeProductInfoResponse,
   ModifyInstanceAccountRequest,
   ModifyMaintenanceWindowRequest,
@@ -167,6 +170,7 @@ import {
   ChangeMasterInstanceResponse,
   ModifyInstanceEventRequest,
   ModifyBackupEncryptResponse,
+  RedisBackupSet,
   DescribeBackupDetailResponse,
   ChangeReplicaToMasterResponse,
   CreateInstancesResponse,
@@ -179,6 +183,7 @@ import {
   DescribeInstanceSupportFeatureRequest,
   RedisNodes,
   DescribeInstanceMonitorTopNCmdRequest,
+  ModifyValkeyModuleRequest,
   CreateExportTaskRequest,
   DescribeInstanceSecurityGroupRequest,
   InstanceParamHistory,
@@ -221,9 +226,10 @@ import {
   CleanUpInstanceRequest,
   DescribeInstanceDealDetailResponse,
   ModifyReplicationGroupRequest,
+  DescribeModulesResponse,
   Groups,
   DescribeInstancesRequest,
-  SourceCommand,
+  ModifyValkeyModuleResponse,
   ModfiyInstancePasswordRequest,
   DescribeSlowLogRequest,
   Filter,
@@ -235,6 +241,7 @@ import {
   DescribeBackupUrlRequest,
   DestroyPostpaidInstanceRequest,
   ChangeInstanceRoleRequest,
+  TendisSlowLogDetail,
   CloseLogResponse,
   DeleteInstanceAccountRequest,
   DescribeInstanceMonitorHotKeyRequest,
@@ -289,13 +296,16 @@ import {
   ModifyInstanceReadOnlyRequest,
   DescribeInstanceAccountResponse,
   DescribeInstanceMonitorBigKeyRequest,
+  ModifySSLEncryptionModeResponse,
   DescribeBackupDownloadRestrictionRequest,
   TendisNodes,
   DescribeParamTemplateInfoResponse,
   SwitchProxyRequest,
+  SourceCommand,
   DescribeInstanceSpecBandwidthRequest,
   SwitchInstanceVipResponse,
   BackupLimitVpcItem,
+  ModifySSLEncryptionModeRequest,
   DisassociateSecurityGroupsRequest,
   ModifyNetworkConfigRequest,
   HotKeyInfo,
@@ -320,7 +330,7 @@ import {
   ZoneCapacityConf,
   ModifyInstanceEventResponse,
   UpgradeInstanceVersionRequest,
-  TendisSlowLogDetail,
+  Module,
   DescribeInstanceNodeInfoResponse,
   DescribeProjectSecurityGroupResponse,
   Instances,
@@ -328,6 +338,7 @@ import {
   InstanceParam,
   DisassociateSecurityGroupsResponse,
   ClearInstanceResponse,
+  UpdateSSLCertRequest,
   DescribeTendisSlowLogRequest,
   InstanceSlowlogDetail,
 } from "./redis_models"
@@ -421,6 +432,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChangeReplicaToMasterResponse) => void
   ): Promise<ChangeReplicaToMasterResponse> {
     return this.request("ChangeReplicaToMaster", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeModules）用于查询实例的扩展模块信息，包括模块的支持状态（是否支持）、启用状态（是否已启用）等信息。
+   */
+  async DescribeModules(
+    req: DescribeModulesRequest,
+    cb?: (error: string, rep: DescribeModulesResponse) => void
+  ): Promise<DescribeModulesResponse> {
+    return this.request("DescribeModules", req, cb)
   }
 
   /**
@@ -851,6 +872,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyReplicationGroupResponse) => void
   ): Promise<ModifyReplicationGroupResponse> {
     return this.request("ModifyReplicationGroup", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateSSLCert）用于更新SSL密钥信息。
+   */
+  async UpdateSSLCert(
+    req: UpdateSSLCertRequest,
+    cb?: (error: string, rep: UpdateSSLCertResponse) => void
+  ): Promise<UpdateSSLCertResponse> {
+    return this.request("UpdateSSLCert", req, cb)
   }
 
   /**
@@ -1344,6 +1375,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyValkeyModule）用于修改Valkey实例扩展模块的启用状态。
+   */
+  async ModifyValkeyModule(
+    req: ModifyValkeyModuleRequest,
+    cb?: (error: string, rep: ModifyValkeyModuleResponse) => void
+  ): Promise<ModifyValkeyModuleResponse> {
+    return this.request("ModifyValkeyModule", req, cb)
+  }
+
+  /**
    * 创建日志下载任务
    */
   async CreateExportTask(
@@ -1384,6 +1425,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyModule）用于修改实例扩展模块的启用状态。
+   */
+  async ModifyModule(
+    req: ModifyModuleRequest,
+    cb?: (error: string, rep: ModifyModuleResponse) => void
+  ): Promise<ModifyModuleResponse> {
+    return this.request("ModifyModule", req, cb)
+  }
+
+  /**
    * 本接口（DescribeInstances）用于查询Redis实例列表。
    */
   async DescribeInstances(
@@ -1394,13 +1445,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RemoveReplicationGroup）用于删除复制组。
+   * 本接口（ModifySSLEncryptionMode）用于更改SSL加密模式
    */
-  async RemoveReplicationGroup(
-    req: RemoveReplicationGroupRequest,
-    cb?: (error: string, rep: RemoveReplicationGroupResponse) => void
-  ): Promise<RemoveReplicationGroupResponse> {
-    return this.request("RemoveReplicationGroup", req, cb)
+  async ModifySSLEncryptionMode(
+    req: ModifySSLEncryptionModeRequest,
+    cb?: (error: string, rep: ModifySSLEncryptionModeResponse) => void
+  ): Promise<ModifySSLEncryptionModeResponse> {
+    return this.request("ModifySSLEncryptionMode", req, cb)
   }
 
   /**
@@ -1511,6 +1562,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChangeMasterInstanceResponse) => void
   ): Promise<ChangeMasterInstanceResponse> {
     return this.request("ChangeMasterInstance", req, cb)
+  }
+
+  /**
+   * 本接口（RemoveReplicationGroup）用于删除复制组。
+   */
+  async RemoveReplicationGroup(
+    req: RemoveReplicationGroupRequest,
+    cb?: (error: string, rep: RemoveReplicationGroupResponse) => void
+  ): Promise<RemoveReplicationGroupResponse> {
+    return this.request("RemoveReplicationGroup", req, cb)
   }
 
   /**

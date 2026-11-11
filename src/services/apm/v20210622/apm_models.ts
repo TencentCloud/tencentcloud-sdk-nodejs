@@ -328,11 +328,11 @@ export interface YAxis {
   /**
    * <p>接口列表</p>
    */
-  Keys: Array<string>
+  Keys?: Array<string>
   /**
    * <p>接口列表</p>
    */
-  Data: Array<string>
+  Data?: Array<string>
 }
 
 /**
@@ -862,106 +862,111 @@ export interface ApmMetricRecord {
  */
 export interface TopologyNode {
   /**
-   * 错误率
+   * <p>错误率</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrRate?: number
   /**
-   * 节点类型
+   * <p>节点类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Kind?: string
   /**
-   * 节点名
+   * <p>节点名</p>
    */
   Name?: string
   /**
-   * 节点权重
+   * <p>节点权重</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
   /**
-   * 节点颜色
+   * <p>节点颜色</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Color?: string
   /**
-   * 响应时间
+   * <p>响应时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: number
   /**
-   * 吞吐量
+   * <p>吞吐量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Qps?: number
   /**
-   * 节点类型
+   * <p>节点类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * 节点ID
+   * <p>节点ID</p>
    */
   Id?: string
   /**
-   * 节点大小
+   * <p>节点大小</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Size?: string
   /**
-   * 节点是否为组件类型
+   * <p>节点是否为组件类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsModule?: boolean
   /**
-   * 节点位置信息
+   * <p>节点位置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Position?: Position
   /**
-   * 节点标签
+   * <p>节点标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<ApmTag>
   /**
-   * 节点是否可以下钻
+   * <p>节点是否可以下钻</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CanDrillDown?: boolean
   /**
-   * 资源层信息
+   * <p>资源层信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource?: Resource
   /**
-   * 拓扑节点视图名字
+   * <p>拓扑节点视图名字</p>
    */
   NodeView?: string
   /**
-   * MQ 消费者视角的响应时间 ms
+   * <p>MQ 消费者视角的响应时间 ms</p>
    */
   ConsumerDuration?: number
   /**
-   * MQ 消费者视角的错误率 %
+   * <p>MQ 消费者视角的错误率 %</p>
    */
   ConsumerErrRate?: number
   /**
-   * MQ 消费者视角的吞吐量
+   * <p>MQ 消费者视角的吞吐量</p>
    */
   ConsumerQps?: number
   /**
-   * 应用 ID
+   * <p>应用 ID</p>
+   * @deprecated
    */
   ServiceId?: string
   /**
-   * 调用次数
+   * <p>调用次数</p>
    */
   ReqCnt?: number
   /**
-   * 消息队列消费者视角的调用次数
+   * <p>消息队列消费者视角的调用次数</p>
    */
   ConsumerReqCnt?: number
+  /**
+   * <p>应用 ID</p>
+   */
+  ServiceID?: string
 }
 
 /**
@@ -1377,11 +1382,12 @@ export interface ChartData {
   /**
    * <p>接口参数id列表</p>
    */
-  Series: Array<Series>
+  Series?: Array<Series>
   /**
    * <p>接口参数列表</p>
+   * @deprecated
    */
-  YAxis: Array<YAxis>
+  YAxis?: Array<YAxis>
 }
 
 /**
@@ -2019,11 +2025,13 @@ export interface ServiceDetail {
   /**
    * <p>用户appid</p>
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   AppID?: number
   /**
    * <p>主账号uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   CreateUIN?: string
   /**
@@ -2065,6 +2073,14 @@ export interface ServiceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResponseDurationWarningThreshold?: number
+  /**
+   * <p>用户appid</p>
+   */
+  AppId?: string
+  /**
+   * <p>主账号uin</p>
+   */
+  CreateUin?: string
 }
 
 /**
@@ -3419,10 +3435,12 @@ export interface ApmApplicationConfigView {
   IsExpressionInjectionAnalysis?: number
   /**
    * <p>是否开启JNDI注入检测</p>
+   * @deprecated
    */
   IsJndiInjectionAnalysis?: number
   /**
    * <p>是否开启JNI注入检测</p>
+   * @deprecated
    */
   IsJniInjectionAnalysis?: number
   /**
@@ -3489,6 +3507,14 @@ export interface ApmApplicationConfigView {
    * <p>是否使用探针默认熔断阈值</p>
    */
   UseDefaultFuseConfig?: boolean
+  /**
+   * <p>是否开启JNDI注入检测</p>
+   */
+  IsJNDIInjectionAnalysis?: string
+  /**
+   * <p>是否开启JNI注入检测</p>
+   */
+  IsJNIInjectionAnalysis?: string
 }
 
 /**
@@ -4011,15 +4037,21 @@ export interface DescribeTagValuesRequest {
  */
 export interface CVMMeta {
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 实例ID
+   * <p>业务系统ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   InstanceID?: string
+  /**
+   * <p>业务系统ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
 }
 
 /**

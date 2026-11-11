@@ -588,6 +588,16 @@ it("live.v20180801.DescribeDeliverBandwidthList", async function () {
     }
 })
 
+it("live.v20180801.ModifyPullStreamConfig", async function () {
+    try {
+       const data = await client.ModifyPullStreamConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteLiveCallbackRule", async function () {
     try {
        const data = await client.DeleteLiveCallbackRule({})
@@ -598,9 +608,9 @@ it("live.v20180801.DeleteLiveCallbackRule", async function () {
     }
 })
 
-it("live.v20180801.ModifyPullStreamConfig", async function () {
+it("live.v20180801.DescribeLiveCert", async function () {
     try {
-       const data = await client.ModifyPullStreamConfig({})
+       const data = await client.DescribeLiveCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -888,6 +898,16 @@ it("live.v20180801.DescribePlayErrorCodeSumInfoList", async function () {
     }
 })
 
+it("live.v20180801.CreateAvatarEditingLive", async function () {
+    try {
+       const data = await client.CreateAvatarEditingLive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.AddDelayLiveStream", async function () {
     try {
        const data = await client.AddDelayLiveStream({})
@@ -1028,9 +1048,9 @@ it("live.v20180801.ModifyLiveAvatarRoom", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveCert", async function () {
+it("live.v20180801.DescribeAvatarEditingLive", async function () {
     try {
-       const data = await client.DescribeLiveCert({})
+       const data = await client.DescribeAvatarEditingLive({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1948,6 +1968,16 @@ it("live.v20180801.DescribeLiveTranscodeTemplates", async function () {
     }
 })
 
+it("live.v20180801.StopAvatarEditingLive", async function () {
+    try {
+       const data = await client.StopAvatarEditingLive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.ModifyOriginStreamInfo", async function () {
     try {
        const data = await client.ModifyOriginStreamInfo({})
@@ -2021,6 +2051,16 @@ it("live.v20180801.CopyLiveAvatarRoom", async function () {
 it("live.v20180801.CreateLiveTranscodeRule", async function () {
     try {
        const data = await client.CreateLiveTranscodeRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.SwitchAvatarEditingScene", async function () {
+    try {
+       const data = await client.SwitchAvatarEditingScene({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

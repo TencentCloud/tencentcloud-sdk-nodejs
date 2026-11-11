@@ -328,6 +328,16 @@ it("trtc.v20190722.DeletePicture", async function () {
     }
 })
 
+it("trtc.v20190722.ModifyCloudTranscription", async function () {
+    try {
+       const data = await client.ModifyCloudTranscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.CreateRecognizeVocabV3", async function () {
     try {
        const data = await client.CreateRecognizeVocabV3({})

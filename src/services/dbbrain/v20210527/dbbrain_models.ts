@@ -230,6 +230,11 @@ export interface DescribeRedisProcessListResponse {
 }
 
 /**
+ * EXPLAIN TRADITIONAL 格式的执行计划行（共 12 列），字段语义与 MySQL 原生 EXPLAIN 输出一致。
+ */
+export type SqlExplainRowV2 = null
+
+/**
  * 安全审计日志导出任务信息
  */
 export interface SecLogExportTaskInfo {
@@ -1640,6 +1645,20 @@ export interface AuditProxyLogItem {
 }
 
 /**
+ * EXPLAIN 输出结果。Names 为 EXPLAIN 列名顺序，Data 为按行展开的执行计划数据。
+ */
+export interface SqlExplainResultV2 {
+  /**
+   * <p>EXPLAIN 列名顺序，与 Data 中每一行的字段一一对应。</p>
+   */
+  Names?: Array<string>
+  /**
+   * <p>执行计划行列表。</p>
+   */
+  Data?: Array<SqlExplainRowV2>
+}
+
+/**
  * DescribeAuditInstanceList返回参数结构体
  */
 export interface DescribeAuditInstanceListResponse {
@@ -2583,6 +2602,36 @@ export interface DescribeDBAutonomyEventsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSqlExplainV2请求参数结构体
+ */
+export interface DescribeSqlExplainV2Request {
+  /**
+   * <p>服务产品类型。取值：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、dcdb（TDSQL MySQL 版）、mariadb（TDSQL MariaDB 版）。</p>
+   */
+  Product: string
+  /**
+   * <p>待分析的 SQL 语句。仅支持单条 SELECT 语句；若以 EXPLAIN 开头会自动剥离 EXPLAIN 前缀后分析。最大 4096 字符。</p>
+   */
+  SqlText: string
+  /**
+   * <p>实例 ID。MySQL: cdb-xxxxxxx，TDSQL-C: cynosdbmysql-ins-xxxxxxx，MariaDB: tdsql-xxxxx，TDSQL-MySQL： '集群id&amp;分片id',如果TDSQL-MySQL数据库类型同时传入了集群id则instanceId字段只需要传入分片id。最大 64 字符。与 ClusterId 至少需传入其一。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>数据库名。可选；为空时按当前 SQL 上下文执行。最大 64 字符。</p>
+   */
+  Schema?: string
+  /**
+   * <p>集群 ID。仅 TDSQL-MySQL时使用，与 InstanceId 至少需传入其一。最大 64 字符。</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>是否输出可视化执行树</p><p>默认值：false</p>
+   */
+  Visual?: boolean
 }
 
 /**
@@ -4242,6 +4291,20 @@ export interface ModifyAuditServiceRequest {
 }
 
 /**
+ * 执行计划字段说明项。提供 EXPLAIN / VisualExplain 输出中各字段的中文释义，便于前端在展示可视化执行计划时进行翻译。
+ */
+export interface SqlExplainFieldDescV2 {
+  /**
+   * <p>字段英文名，与 Explain / VisualExplain 中出现的字段一致，例如 access_type、key、rows。</p>
+   */
+  Field?: string
+  /**
+   * <p>字段中文释义。</p>
+   */
+  Desc?: string
+}
+
+/**
  * DeleteSecurityAuditLogExportTasks返回参数结构体
  */
 export interface DeleteSecurityAuditLogExportTasksResponse {
@@ -4249,6 +4312,32 @@ export interface DeleteSecurityAuditLogExportTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例配置。
+ */
+export interface InstanceConfs {
+  /**
+   * 数据库巡检开关, Yes/No。
+   */
+  DailyInspection?: string
+  /**
+   * 实例概览开关，Yes/No。
+   */
+  OverviewDisplay?: string
+  /**
+   * redis大key分析的自定义分割符，仅redis使用
+   */
+  KeyDelimiters?: Array<string>
+  /**
+   * 分片节点数量。
+   */
+  ShardNum?: string
+  /**
+   * 是否开启大key周期性分析，仅redis产品有效。
+   */
+  AnalysisTopKey?: string
 }
 
 /**
@@ -4517,6 +4606,20 @@ export interface CloseAuditServiceResponse {
 }
 
 /**
+ * SQL 涉及的表信息。包含库名与表名，用于在前端展示 SQL 涉及的表清单。
+ */
+export interface SqlExplainTableRefV2 {
+  /**
+   * <p>表名。</p>
+   */
+  TableName?: string
+  /**
+   * <p>表所在的数据库名。</p>
+   */
+  TableSchema?: string
+}
+
+/**
  * redis key的内存占用等信息。
  */
 export interface RedisKeySpaceData {
@@ -4609,29 +4712,37 @@ export interface CloseAuditServiceRequest {
 }
 
 /**
- * 实例配置。
+ * DescribeSqlExplainV2返回参数结构体
  */
-export interface InstanceConfs {
+export interface DescribeSqlExplainV2Response {
   /**
-   * 数据库巡检开关, Yes/No。
+   * <p>数据库名，回显请求中的 Schema。</p>
    */
-  DailyInspection?: string
+  Schema?: string
   /**
-   * 实例概览开关，Yes/No。
+   * <p>SQL 文本，回显请求中的 SqlText。</p>
    */
-  OverviewDisplay?: string
+  SqlText?: string
   /**
-   * redis大key分析的自定义分割符，仅redis使用
+   * <p>SQL 涉及的表名列表。</p>
    */
-  KeyDelimiters?: Array<string>
+  Tables?: Array<SqlExplainTableRefV2>
   /**
-   * 分片节点数量。
+   * <p>执行计划详细信息。由数据库 EXPLAIN 输出透传，内容为 JSON 字符串，包含 Meta（列定义）与 Data（执行计划行）两部分；Format=JSON 时为 EXPLAIN FORMAT=JSON 的原始结果。</p>
    */
-  ShardNum?: string
+  Explain?: SqlExplainResultV2
   /**
-   * 是否开启大key周期性分析，仅redis产品有效。
+   * <p>执行计划字段说明列表。仅当请求 Visual=true 或走 SqlTemplateKey 路径时返回，用于前端展示字段中文释义。</p>
    */
-  AnalysisTopKey?: string
+  FieldDesc?: Array<SqlExplainFieldDescV2>
+  /**
+   * <p>可视化执行计划树，当Visual=true时返回</p>
+   */
+  VisualExplain?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

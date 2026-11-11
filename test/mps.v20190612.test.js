@@ -328,6 +328,16 @@ it("mps.v20190612.BatchDeleteStreamLinkFlow", async function () {
     }
 })
 
+it("mps.v20190612.ModifyWordSample", async function () {
+    try {
+       const data = await client.ModifyWordSample({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeLiveRecordTemplates", async function () {
     try {
        const data = await client.DescribeLiveRecordTemplates({})
@@ -541,6 +551,16 @@ it("mps.v20190612.DescribeImageTasks", async function () {
 it("mps.v20190612.UpdateProject", async function () {
     try {
        const data = await client.UpdateProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifyStreamPackageSSAIChannel", async function () {
+    try {
+       const data = await client.ModifyStreamPackageSSAIChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -788,9 +808,9 @@ it("mps.v20190612.DescribeVoices", async function () {
     }
 })
 
-it("mps.v20190612.ModifyWordSample", async function () {
+it("mps.v20190612.CreateModelChatTask", async function () {
     try {
-       const data = await client.ModifyWordSample({})
+       const data = await client.CreateModelChatTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1958,9 +1978,9 @@ it("mps.v20190612.DeleteSnapshotByTimeOffsetTemplate", async function () {
     }
 })
 
-it("mps.v20190612.ModifyStreamPackageSSAIChannel", async function () {
+it("mps.v20190612.DescribeModelChatTask", async function () {
     try {
-       const data = await client.ModifyStreamPackageSSAIChannel({})
+       const data = await client.DescribeModelChatTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -61,7 +61,7 @@ import {
   ScaleInfomation,
   AgentParams,
   ControlAIConversationResponse,
-  TransparentData,
+  ModifyCloudTranscriptionRequest,
   StopAIConversationRequest,
   VideoEncodeParams,
   UpdateAIConversationResponse,
@@ -102,6 +102,7 @@ import {
   McuFeedBackRoomParams,
   DescribeTrtcUsageResponse,
   StopAITranscriptionRequest,
+  ModifyCloudTranscriptionResponse,
   TimeValue,
   CreateCloudRecordingResponse,
   VoiceConversationMcpServer,
@@ -166,6 +167,7 @@ import {
   StartMCUMixTranscodeByStrRoomIdResponse,
   TrtcUsage,
   DeleteCloudSliceTaskResponse,
+  TransparentData,
   DescribeRelayUsageResponse,
   StartStreamIngestRequest,
   TextToSpeechSSEResponse,
@@ -214,6 +216,7 @@ import {
   RecordUsage,
   CreateCloudRecordingRequest,
   OutputParams,
+  TranscriptionSubscribeParam,
   VoiceConversationDialogConfig,
   DeleteCloudRecordingResponse,
   PresetLayoutConfig,
@@ -722,6 +725,16 @@ MCU 混流转码费用，请参考文档：[云端混流转码计费说明](http
     cb?: (error: string, rep: DeletePictureResponse) => void
   ): Promise<DeletePictureResponse> {
     return this.request("DeletePicture", req, cb)
+  }
+
+  /**
+   * 成功开启转录后，可以使用此接口来更新转录任务。仅在转录任务进行时有效，转录退出后更新将会返回错误。
+   */
+  async ModifyCloudTranscription(
+    req: ModifyCloudTranscriptionRequest,
+    cb?: (error: string, rep: ModifyCloudTranscriptionResponse) => void
+  ): Promise<ModifyCloudTranscriptionResponse> {
+    return this.request("ModifyCloudTranscription", req, cb)
   }
 
   /**

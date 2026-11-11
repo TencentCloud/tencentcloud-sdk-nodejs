@@ -2122,6 +2122,64 @@ export interface DescribeRegistryAuditLogListRequest {
 }
 
 /**
+ * 用于描述事件中心中的一条事件记录，包含事件标识、所属资源、事件类型、级别、发生时间、原因及业务扩展信息。
+ */
+export interface EventItem {
+  /**
+   * <p>事件唯一标识，用于区分事件及识别重复投递。聚合模式下为该聚合结果代表事件的标识。</p>
+   */
+  EventId?: string
+  /**
+   * <p>事件来源。</p>
+   */
+  Source?: string
+  /**
+   * <p>事件关联的对象类型。</p>
+   */
+  ObjectType?: string
+  /**
+   * <p>事件关联的对象 ID。</p>
+   */
+  ObjectId?: string
+  /**
+   * <p>事件级别。Normal 表示正常事件，Warning 表示告警事件。</p>
+   */
+  EventLevel?: string
+  /**
+   * <p>事件类型。</p>
+   */
+  EventType?: string
+  /**
+   * <p>事件原因标识，无原因信息时不返回。例如 Manual 表示通过停止接口主动停止，包括人工、脚本或 SDK 调用，不代表一定由人工操作。</p>
+   */
+  Reason?: string
+  /**
+   * <p>事件的说明文本。建议使用 EventType 和 Reason 判断事件类型及原因，不依赖说明文本进行业务判断。</p>
+   */
+  Message?: string
+  /**
+   * <p>事件扩展信息，以 JSON 字符串返回。当前 Sandbox 事件包含 ToolId、ToolType，以及可选的 ToolName。调用方需解析 JSON 字符串后读取扩展字段。</p>
+   */
+  Extensions?: string
+  /**
+   * <p>事件发生时间，RFC3339 格式。仅 Raw 模式返回。</p>
+   */
+  OccurredAt?: string
+  /**
+   * <p>当前查询范围内，该聚合结果包含的去重事件数。仅 Aggregate 模式返回。当前生命周期事件逐条展示，该值为 1。</p>
+   */
+  Count?: number
+  /**
+   * <p>当前查询范围内，该聚合结果中最早的事件发生时间，RFC3339 格式。仅 Aggregate 模式返回，不代表该对象历史上的首次事件时间。</p>
+   */
+  FirstOccurredAt?: string
+  /**
+   * <p>当前查询范围内，该聚合结果中最近的事件发生时间，RFC3339 格式。仅 Aggregate 模式返回，不代表该对象此后不会再发生事件。</p>
+   */
+  LastOccurredAt?: string
+}
+
+/**
  * PauseSandboxInstance请求参数结构体
  */
 export interface PauseSandboxInstanceRequest {
@@ -3024,7 +3082,7 @@ export interface StartSandboxInstanceRequest {
    */
   Metadata?: Array<MetadataVar>
   /**
-   * <p>实例启动模式。DEFAULT：使用原有同步创建流程，为默认值；WAIT_UNTIL_HEALTHY：使用持久化后台创建流程，受理后可能返回 STARTING，需查询实例状态确认最终结果。</p>
+   * <p>实例启动模式。DEFAULT：使用原有同步创建流程，为默认值；WAIT_UNTIL_HEALTHY：使用持久化后台创建流程，受理后可能返回 STARTING，需查询实例状态确认最终结果，当前仅支持WAA沙箱和GPU沙箱。</p>
    */
   StartMode?: string
 }
@@ -3509,6 +3567,36 @@ export interface CreateRegistryRecordRequest {
 }
 
 /**
+ * DescribeEventCenterEvents返回参数结构体
+ */
+export interface DescribeEventCenterEventsResponse {
+  /**
+   * <p>本次查询返回的事件明细或聚合结果列表。无匹配结果时返回空数组。</p>
+   */
+  Events?: Array<EventItem>
+  /**
+   * <p>符合查询条件的结果总数，不受 Offset 和 Limit 影响。Raw 模式为去重后的事件总数，Aggregate 模式为聚合结果总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>本次查询实际使用的开始时间，RFC3339 格式，包含该时间点。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>本次查询实际使用的结束时间，RFC3339 格式，不包含该时间点。</p>
+   */
+  EndTime?: string
+  /**
+   * <p>本次查询实际使用的模式。</p><p>枚举值：</p><ul><li>Raw： 明细模式。</li><li>Aggregate： 聚合模式。</li></ul>
+   */
+  Mode?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySession返回参数结构体
  */
 export interface ModifySessionResponse {
@@ -3714,6 +3802,40 @@ export interface Tag {
    * 标签值
    */
   Value?: string
+}
+
+/**
+ * DescribeEventCenterEvents请求参数结构体
+ */
+export interface DescribeEventCenterEventsRequest {
+  /**
+   * <p>事件筛选条件，用于按事件来源、对象、类型、级别及工具等信息查询事件。</p><p>入参限制：最多支持 12 个筛选条件，同名筛选条件不可重复；每个条件支持 1～20 个值，每个值非空且不超过 256 字节。</p><p>支持的筛选字段：Source、ObjectType、ObjectId、EventType、EventLevel、Reason、EventId、ToolId、ToolType、Message。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>查询开始时间，包含该时间点。</p><p>参数格式：RFC3339 格式，例如 2026-10-23T13:28:00Z。</p><p>入参限制：必须早于 EndTime，且不能早于当前时间前 7 天。</p><p>默认值：不传时默认为 EndTime 前 1 小时。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询结束时间，不包含该时间点。</p><p>参数格式：RFC3339 格式，例如 2026-10-23T14:28:00Z。</p><p>入参限制：必须晚于 StartTime，不应晚于当前时间。</p><p>默认值：不传时默认为当前时间。</p><p>查询范围为 [StartTime, EndTime)。</p>
+   */
+  EndTime?: string
+  /**
+   * <p>分页偏移量。</p><p>取值范围：[0, 10000]</p><p>默认值：0</p><p>Raw 模式按去重后的事件分页，Aggregate 模式按聚合结果分页。</p>
+   */
+  Offset?: number
+  /**
+   * <p>单次返回的最大结果条数。</p><p>取值范围：[1, 100]</p><p>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>事件结果的时间排序方向。</p><p>枚举值：</p><ul><li>Asc： 按时间升序排列，较早的事件在前。</li><li>Desc： 按时间降序排列，较新的事件在前。默认值。</li></ul><p>默认值：Desc</p><p>Raw 模式按事件发生时间排序；Aggregate 模式按聚合结果最近发生时间排序。</p>
+   */
+  Order?: string
+  /**
+   * <p>事件查询模式。</p><p>枚举值：</p><ul><li>Raw： 明细模式，返回去重后的事件明细。默认值。</li><li>Aggregate： 聚合模式，返回聚合结果及事件数量、首次和最近发生时间；生命周期事件仍逐条展示。</li></ul><p>默认值：Raw</p><p>Raw 返回去重后的事件明细；Aggregate 返回聚合结果。</p>
+   */
+  Mode?: string
 }
 
 /**

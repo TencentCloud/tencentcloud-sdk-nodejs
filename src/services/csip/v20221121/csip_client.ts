@@ -168,6 +168,7 @@ import {
   ModifyImageRegistryTimedScanTaskConfigRequest,
   DescribeModifyMachinesLoginTypeTasksRequest,
   ModifyDspmAssetAccountPrivilegesResponse,
+  AssetBaselineRisk,
   DeleteDspmIdentifyComplianceCategoryRelationRequest,
   DescribeUebaRuleResponse,
   DescribeAssetTreeResponse,
@@ -215,7 +216,7 @@ import {
   SourceIPVpcInfo,
   DspmRiskStrategy,
   DescribeClusterInstallCommandResponse,
-  ImageLayer,
+  DescribeHostVulRiskEventListResponse,
   CreateDspmAuditFilterStrategyRequest,
   UserCSPMInfo,
   DescribeAssetTagsResponse,
@@ -299,6 +300,7 @@ import {
   KeySandboxCredential,
   DeleteDomainAndIpRequest,
   ModifyDspmApplyingIdentifyComplianceGroupRequest,
+  DescribeHostVulScanStatusRequest,
   DescribeComplianceStandardTermTreeResponse,
   ImageScanAssetTarget,
   TaskIdListKey,
@@ -327,6 +329,7 @@ import {
   CreateDspmIdentifyCategoryResponse,
   AccessCredentialOutput,
   DescribeEdrLogCollectPathsResponse,
+  DescribeClusterBaselineRiskPolicyListRequest,
   DescribeMalwareTimingScanSettingRequest,
   ScanTaskInfo,
   TrafficPluginState,
@@ -438,7 +441,7 @@ import {
   DescribeClusterSuperNodeInfoResponse,
   DescribeComplianceOverviewResponse,
   DescribeClusterServiceListRequest,
-  DescribePodContainerListRequest,
+  DescribeBaselineSyncConfRequest,
   DescribeSkillScanPayInfoRequest,
   DescribeAgentRunPolicyResponse,
   ModifyAssetTagResponse,
@@ -527,6 +530,7 @@ import {
   DspmAssetAccessTopologyItem,
   Filters,
   DescribeDspmIdentifyCategoryListRequest,
+  HostVulScanStatus,
   ExposeRuleItem,
   ClusterWithAppIdItem,
   ModifyAgentRunPolicyResponse,
@@ -543,6 +547,7 @@ import {
   CycleScanConf,
   DescribeSkillScanTaskListResponse,
   ImageVul,
+  HostVulRiskEventItem,
   ModifyAIScheduleResponse,
   DescribePreventUninstallHostResponse,
   DescribeClusterContainerWebServiceListRequest,
@@ -657,6 +662,7 @@ import {
   CosAssetSyncTaskInfo,
   CreateDspmRiskExportJobResponse,
   DescribeUebaBehaviorSummaryResponse,
+  DescribeDspmAccessTopologySummaryResponse,
   CreateRiskDetailExportJobResponse,
   InstallClusterAgentResponse,
   ModifyCosMarkInfoResponse,
@@ -743,6 +749,7 @@ import {
   DescribeRiskScanCronConfigRequest,
   CreateExposureAutoTagRuleResponse,
   EDRScanRecordItem,
+  ModifyBaselineIgnorePolicyResponse,
   InstanceIDWithAppIdItem,
   AddNewBindRoleUserResponse,
   BatchModifyImageVulWhitelistRequest,
@@ -840,6 +847,7 @@ import {
   CopyBaselinePolicyRequest,
   SkillScanTaskItem,
   ScanEDRTaskAgainRequest,
+  DescribeBaselineIgnorePolicyListRequest,
   CosRiskBucketInfo,
   LogValueInfo,
   DescribeDspmAccessTopologyIpsRequest,
@@ -860,6 +868,7 @@ import {
   DescribeClusterContainerProcessListRequest,
   DescribeDspmAssetAccountRecycledPrivilegesResponse,
   DescribeAIAgentCredentialListResponse,
+  Location,
   ModifyBaselinePolicyResponse,
   DescribeDspmCkafkaTopicListResponse,
   CreateAssetFilterViewRequest,
@@ -897,6 +906,7 @@ import {
   ExportJobItem,
   DescribeAlertListResponse,
   UpdateAlertStatusListRequest,
+  DeleteBaselineIgnorePolicyResponse,
   DescribeLoginWhiteCombinedListRequest,
   DescribeVulRiskRelateComponentRequest,
   CreateCSIPManualMalwareScanRequest,
@@ -904,6 +914,7 @@ import {
   DescribeLighthouseFirewallRulesResponse,
   NotifyAssetConfigItem,
   ModifyMachinesLoginTypeRequest,
+  DescribeHostVulScanStatusResponse,
   CredentialEffectScope,
   AIAgentCredentialLocation,
   DescribeTaskLogListResponse,
@@ -919,6 +930,7 @@ import {
   DescribeDspmAuditFilterStrategy,
   DescribeCFGRiskStatisticsRequest,
   DescribeDspmAssetSecurityAnalyseStatusResponse,
+  DeleteBaselineIgnorePolicyRequest,
   ModifySandboxFileRuleRequest,
   ImageIDWithAppIdItem,
   MultiAttackStageItem,
@@ -940,11 +952,13 @@ import {
   ModifyWebhookPolicyStatusRequest,
   DownloadDspmExportLogResponse,
   DescribeSourceIPDetailResponse,
+  CreateBaselineMainTaskExportJobResponse,
   DescribeBaselineAggregatedPolicyListRequest,
   DescribeCheckViewRisksRequest,
   DescribeDspmAssetFieldListRequest,
   BaselineSubCategory,
   DescribeExposureAutoTagRulesResponse,
+  DescribeHostVulRiskEventListRequest,
   DescribeNotifyAgentOfflineDurationRequest,
   CreateVulRisksExportJobRequest,
   CreateAssetProcessExportJobResponse,
@@ -985,7 +999,7 @@ import {
   DescribeTaskPredictCostQuotaRequest,
   DescribeVulHostRelateComponentResponse,
   CreateImageSensitiveInfoListExportJobRequest,
-  Location,
+  DescribeAssetBaselineRiskListRequest,
   DeleteDspmIdentifyComplianceGroupRequest,
   ModifyAlarmRiskStatusResponse,
   OperateRiskResponse,
@@ -1062,6 +1076,7 @@ import {
   ScanBaselineItemListResponse,
   DescribeSCFFunctionListResponse,
   WebhookCustomField,
+  DescribeDspmAccessTopologySummaryRequest,
   CreateCosPolicyResponse,
   ExposeAssetTypeItem,
   DescribeNotifySettingAkResponse,
@@ -1205,6 +1220,7 @@ import {
   ModifyRaspLicenseBindsResponse,
   DescribeEDRScanRecordListResponse,
   DspmAssetAccountIdentify,
+  ModifyClusterAuditLogStatusResponse,
   CreateDspmIdentifyInfoListExportJobRequest,
   CreateVulFixTaskRequest,
   BaselineAggregatedPolicy,
@@ -1220,6 +1236,7 @@ import {
   DescribeBaselineAggregatedPolicyListResponse,
   DescribeAccessKeyWhiteListRequest,
   DescribeLoginTypeGlobalConfRequest,
+  BaselineIgnorePolicy,
   ComponentDetailItem,
   DescribeCLSLogIndexV3Request,
   DescribeUserInfoRequest,
@@ -1316,6 +1333,7 @@ import {
   CkafkaInstance,
   CreateComplianceRiskExportJobRequest,
   VulInfoListItem,
+  ImageLayer,
   CosAssetDataScanDetail,
   DescribeImageVirusListResponse,
   DescribeSCFAliasListRequest,
@@ -1348,6 +1366,7 @@ import {
   ComplianceTermItem,
   BackupLog,
   CreateEdrLessAlertExportJobResponse,
+  ClusterBaselinePolicy,
   BaselineSystemCategory,
   DeleteEdrLogCollectPathsResponse,
   DspmAuditSessionInfo,
@@ -1533,6 +1552,7 @@ import {
   DescribeExposeRiskStatisticsRequest,
   VULRiskInfo,
   RiskDetailItem,
+  CreateAssetBaselineRiskExportJobRequest,
   DescribePublicIpAssetsResponse,
   EnableAIScheduleRequest,
   DescribeEDRRuleListResponse,
@@ -1634,6 +1654,7 @@ import {
   StopRiskCenterTaskResponse,
   DescribeVpcAssetsRequest,
   DescribeExposePathRequest,
+  ModifyBaselineIgnorePolicyRequest,
   RetryDspmExportLogResponse,
   ImageSensitiveInfo,
   DescribeDspmAssetIdentifyInfoListResponse,
@@ -1719,7 +1740,7 @@ import {
   DescribeClusterContainerWebServiceListResponse,
   DescribeImageVirusWhitelistRequest,
   ExportClientSettingHostListRequest,
-  DescribeSourceIPDetailRequest,
+  CreateAssetBaselineRiskExportJobResponse,
   ModifyCSIPRaspLicenseBindsRequest,
   DescribeImageAssociatedHostListRequest,
   LogAppCollectPath,
@@ -1820,9 +1841,9 @@ import {
   DescribeAssetInfoResponse,
   CreateImageVulListExportJobResponse,
   DescribeTagRuleAssetsRequest,
-  DescribeBaselineSyncConfRequest,
+  DescribePodContainerListRequest,
   ModifyUebaRuleSwitchRequest,
-  CreateBaselineMainTaskExportJobResponse,
+  DescribeAssetBaselineRiskListResponse,
   DescribeScanStatisticRequest,
   DescribeCFGRiskReportStatisticsRequest,
   ModifyNotifySettingAlertResponse,
@@ -1860,6 +1881,7 @@ import {
   DescribeImageLayerListResponse,
   CreateIaCFileReScanTaskResponse,
   ModifyDspmAssetSecurityAnalysisSwitchRequest,
+  ModifyClusterAuditLogStatusRequest,
   DeleteCosAkAssetRequest,
   DescribeNotifyAssetConfigResponse,
   VerifyDspmAssetLoginCodeRequest,
@@ -1889,6 +1911,7 @@ import {
   RiskCenterOverviewTrendAnalysis,
   VULViewVULRisk,
   DescribeCVMAssetsResponse,
+  DescribeBaselineIgnorePolicyListResponse,
   ModifyShareUserAKResponse,
   CreateAllAssetsExportJobResponse,
   DescribeDspmBackupSettingRequest,
@@ -1935,6 +1958,7 @@ import {
   ModifyDspmAssetDataScanTaskStatusResponse,
   ScanBaselineRiskListRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
+  DescribeSourceIPDetailRequest,
   DescribeImageAssociatedHostListResponse,
   DspmScheduleConfig,
   DescribeCWPExposePathRequest,
@@ -2084,6 +2108,7 @@ import {
   DescribeDspmAuditFilterStrategyRequest,
   DownloadDspmExportLogRequest,
   DisableAIScheduleRequest,
+  DescribeClusterBaselineRiskPolicyListResponse,
   DescribeLastScanTaskInfoResponse,
   DeleteDspmIdentifyComplianceCategoryRelationResponse,
   DescribeCSIPRiskStatisticsRequest,
@@ -2859,6 +2884,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改集群审计日志状态
+   */
+  async ModifyClusterAuditLogStatus(
+    req: ModifyClusterAuditLogStatusRequest,
+    cb?: (error: string, rep: ModifyClusterAuditLogStatusResponse) => void
+  ): Promise<ModifyClusterAuditLogStatusResponse> {
+    return this.request("ModifyClusterAuditLogStatus", req, cb)
+  }
+
+  /**
    * 镜像仓库同步
    */
   async SyncImageRegistry(
@@ -3378,6 +3413,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAccessKeyAlarmStatusResponse) => void
   ): Promise<UpdateAccessKeyAlarmStatusResponse> {
     return this.request("UpdateAccessKeyAlarmStatus", req, cb)
+  }
+
+  /**
+   * 创建资产基线风险导出任务
+   */
+  async CreateAssetBaselineRiskExportJob(
+    req: CreateAssetBaselineRiskExportJobRequest,
+    cb?: (error: string, rep: CreateAssetBaselineRiskExportJobResponse) => void
+  ): Promise<CreateAssetBaselineRiskExportJobResponse> {
+    return this.request("CreateAssetBaselineRiskExportJob", req, cb)
   }
 
   /**
@@ -4602,6 +4647,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取资产风险列表
+   */
+  async DescribeAssetBaselineRiskList(
+    req: DescribeAssetBaselineRiskListRequest,
+    cb?: (error: string, rep: DescribeAssetBaselineRiskListResponse) => void
+  ): Promise<DescribeAssetBaselineRiskListResponse> {
+    return this.request("DescribeAssetBaselineRiskList", req, cb)
+  }
+
+  /**
    * 获取漏洞标签列表
    */
   async DescribeVulLabelList(
@@ -4809,6 +4864,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCSIPManualMalwareScanResponse) => void
   ): Promise<CreateCSIPManualMalwareScanResponse> {
     return this.request("CreateCSIPManualMalwareScan", req, cb)
+  }
+
+  /**
+   * 获取基线忽略策略列表
+   */
+  async DescribeBaselineIgnorePolicyList(
+    req: DescribeBaselineIgnorePolicyListRequest,
+    cb?: (error: string, rep: DescribeBaselineIgnorePolicyListResponse) => void
+  ): Promise<DescribeBaselineIgnorePolicyListResponse> {
+    return this.request("DescribeBaselineIgnorePolicyList", req, cb)
   }
 
   /**
@@ -5620,6 +5685,16 @@ capi 层处理流程：
   }
 
   /**
+   * 查询主机漏洞扫描状态，用于判断是否扫描过漏洞、首次漏洞扫描是否失败，以及首次扫描完成后的可修复漏洞状态。
+   */
+  async DescribeHostVulScanStatus(
+    req: DescribeHostVulScanStatusRequest,
+    cb?: (error: string, rep: DescribeHostVulScanStatusResponse) => void
+  ): Promise<DescribeHostVulScanStatusResponse> {
+    return this.request("DescribeHostVulScanStatus", req, cb)
+  }
+
+  /**
    * 获取内容风险列表
    */
   async DescribeRiskCenterWebsiteRiskList(
@@ -5817,6 +5892,16 @@ capi 层处理流程：
     cb?: (error: string, rep: ModifyAssetTagResponse) => void
   ): Promise<ModifyAssetTagResponse> {
     return this.request("ModifyAssetTag", req, cb)
+  }
+
+  /**
+   * 删除基线忽略策略
+   */
+  async DeleteBaselineIgnorePolicy(
+    req: DeleteBaselineIgnorePolicyRequest,
+    cb?: (error: string, rep: DeleteBaselineIgnorePolicyResponse) => void
+  ): Promise<DeleteBaselineIgnorePolicyResponse> {
+    return this.request("DeleteBaselineIgnorePolicy", req, cb)
   }
 
   /**
@@ -6392,6 +6477,16 @@ capi 层处理流程：
   }
 
   /**
+   * 查询主机漏洞风险事件列表，按风险记录维度返回漏洞基础信息、实例信息、风险状态和最近扫描时间。
+   */
+  async DescribeHostVulRiskEventList(
+    req: DescribeHostVulRiskEventListRequest,
+    cb?: (error: string, rep: DescribeHostVulRiskEventListResponse) => void
+  ): Promise<DescribeHostVulRiskEventListResponse> {
+    return this.request("DescribeHostVulRiskEventList", req, cb)
+  }
+
+  /**
    * 查询网络攻击检测开关及资产范围配置
    */
   async DescribeNetAttackSetting(
@@ -6509,6 +6604,17 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeUserCallRecordResponse) => void
   ): Promise<DescribeUserCallRecordResponse> {
     return this.request("DescribeUserCallRecord", req, cb)
+  }
+
+  /**
+     * 查询数据库访问拓扑（库级/表级）的概览卡片数据，包含来源IP数、访问账号数、被访问库数/表数、近7天与近30天访问次数。
+数据由后台预聚合产生，查询侧无聚合开销；出参 LastCalcTime 为数据最后计算时间，可据此判断数据新鲜度。
+     */
+  async DescribeDspmAccessTopologySummary(
+    req: DescribeDspmAccessTopologySummaryRequest,
+    cb?: (error: string, rep: DescribeDspmAccessTopologySummaryResponse) => void
+  ): Promise<DescribeDspmAccessTopologySummaryResponse> {
+    return this.request("DescribeDspmAccessTopologySummary", req, cb)
   }
 
   /**
@@ -6749,6 +6855,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeRepositoryImageAssetsResponse) => void
   ): Promise<DescribeRepositoryImageAssetsResponse> {
     return this.request("DescribeRepositoryImageAssets", req, cb)
+  }
+
+  /**
+   * 修改基线忽略策略
+   */
+  async ModifyBaselineIgnorePolicy(
+    req: ModifyBaselineIgnorePolicyRequest,
+    cb?: (error: string, rep: ModifyBaselineIgnorePolicyResponse) => void
+  ): Promise<ModifyBaselineIgnorePolicyResponse> {
+    return this.request("ModifyBaselineIgnorePolicy", req, cb)
   }
 
   /**
@@ -7862,6 +7978,16 @@ capi 层处理流程：
     cb?: (error: string, rep: DescribeCosBucketBillingInfoResponse) => void
   ): Promise<DescribeCosBucketBillingInfoResponse> {
     return this.request("DescribeCosBucketBillingInfo", req, cb)
+  }
+
+  /**
+   * 获取集群风险策略列表
+   */
+  async DescribeClusterBaselineRiskPolicyList(
+    req: DescribeClusterBaselineRiskPolicyListRequest,
+    cb?: (error: string, rep: DescribeClusterBaselineRiskPolicyListResponse) => void
+  ): Promise<DescribeClusterBaselineRiskPolicyListResponse> {
+    return this.request("DescribeClusterBaselineRiskPolicyList", req, cb)
   }
 
   /**

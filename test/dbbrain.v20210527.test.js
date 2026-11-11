@@ -438,6 +438,16 @@ it("dbbrain.v20210527.DescribeTopSpaceSchemaTimeSeries", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeSqlExplainV2", async function () {
+    try {
+       const data = await client.DescribeSqlExplainV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeRedisUnExpiredKeyStatistics", async function () {
     try {
        const data = await client.DescribeRedisUnExpiredKeyStatistics({})

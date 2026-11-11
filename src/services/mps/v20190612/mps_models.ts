@@ -324,23 +324,23 @@ export interface FrameRateConfig {
  */
 export interface ExtractBlindWatermarkRequest {
   /**
-   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-abseq：ab序列版权数字水印；</li>
+   * <p>数字水印类型，可选值：</p><li>blind-basic：基础版权数字水印；</li><li>blind-abseq：ab序列版权数字水印；</li><li>blind-vega：vega数字水印；</li>
    */
   Type: string
   /**
-   * 媒体处理的文件输入信息。
+   * <p>媒体处理的文件输入信息。</p>
    */
   InputInfo: MediaInputInfo
   /**
-   * 任务的事件通知信息，不填代表不获取事件通知。
+   * <p>任务的事件通知信息，不填代表不获取事件通知。</p>
    */
   TaskNotifyConfig?: TaskNotifyConfig
   /**
-   * 提取数字水印任务配置
+   * <p>提取数字水印任务配置</p>
    */
   ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig
   /**
-   * 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。
+   * <p>资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。</p>
    */
   ResourceId?: string
 }
@@ -545,17 +545,17 @@ export interface CreateTranscodeTemplateRequest {
 }
 
 /**
- * ProcessLiveStream返回参数结构体
+ * 模型回复消息体。
  */
-export interface ProcessLiveStreamResponse {
+export interface ModelChatResponseMessage {
   /**
-   * <p>任务 ID</p>
+   * <p>角色标识</p><p>枚举值：</p><ul><li>assistant： 模型消息</li><li>user： 用户消息</li><li>system： 系统消息</li></ul>
    */
-  TaskId?: string
+  Role?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>模型生成的识别文本</p>
    */
-  RequestId?: string
+  Content?: string
 }
 
 /**
@@ -2257,54 +2257,13 @@ export interface AiSampleWord {
 }
 
 /**
- * 自定义转码的规格参数。用于覆盖模板中对应参数值。
+ * 图片输入配置。
  */
-export interface OverrideTranscodeParameter {
+export interface ModelChatInputImage {
   /**
-   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   * <p>媒体文件输入</p>
    */
-  Container?: string
-  /**
-   * 是否去除视频数据，取值：
-<li>0：保留；</li>
-<li>1：去除。</li>
-   */
-  RemoveVideo?: number
-  /**
-   * 是否去除音频数据，取值：
-<li>0：保留；</li>
-<li>1：去除。</li>
-   */
-  RemoveAudio?: number
-  /**
-   * 视频流配置参数。
-   */
-  VideoTemplate?: VideoTemplateInfoForUpdate
-  /**
-   * 音频流配置参数。
-   */
-  AudioTemplate?: AudioTemplateInfoForUpdate
-  /**
-   * 极速高清转码参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TEHDConfig?: TEHDConfigForUpdate
-  /**
-   * 字幕流配置参数。
-   */
-  SubtitleTemplate?: SubtitleTemplate
-  /**
-   * 外挂音轨参数。
-   */
-  AddonAudioStream?: Array<MediaInputInfo>
-  /**
-   * 转码扩展字段。
-   */
-  StdExtInfo?: string
-  /**
-   * 要插入的字幕文件。
-   */
-  AddOnSubtitles?: Array<AddOnSubtitle>
+  InputInfo: ModelChatMediaInputInfo
 }
 
 /**
@@ -2767,6 +2726,38 @@ export interface DescribeStreamLinkFlowStatisticsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 文字水印模板
+ */
+export interface TextWatermarkTemplateInput {
+  /**
+   * 字体类型，目前可以支持两种：
+<li>simkai.ttf：可以支持中文和英文；</li>
+<li>arial.ttf：仅支持英文。</li>
+   */
+  FontType: string
+  /**
+   * 字体大小，格式：Npx，N 为数值。N的取值范围：[0,1] 和 [8, 4096]
+   */
+  FontSize: string
+  /**
+   * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。
+   */
+  FontColor: string
+  /**
+   * 文字透明度，取值范围：(0, 1]
+<li>0：完全透明</li>
+<li>1：完全不透明</li>
+默认值：1。
+   */
+  FontAlpha: number
+  /**
+   * 文字内容，长度不超过100个字符。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextContent?: string
 }
 
 /**
@@ -4092,17 +4083,53 @@ export interface FailOverOption {
 }
 
 /**
- * ModifyStreamLinkFlow请求参数结构体
+ * 音频超分配置
  */
-export interface ModifyStreamLinkFlowRequest {
+export interface AudioSRConfig {
   /**
-   * 流Id。
+   * <p>能力配置开关</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p>
    */
-  FlowId: string
+  Switch?: string
   /**
-   * 需要修改的流名称。
+   * <p>音频超分类型</p><p>枚举值：</p><ul><li>premium_hd： 臻品高清版</li><li>premium_master： 臻品母带版</li></ul><p>默认值：premium_hd</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowName: string
+  Type?: string
+  /**
+   * <p>目标采样率</p><p>枚举值：</p><ul><li>44100： 44.1kHz</li><li>48000： 48kHz</li><li>64000： 64kHz</li><li>88200： 88.2kHz</li><li>96000： 96kHz</li><li>192000： 192kHz</li></ul><p>默认值：48000</p><p>其中 192kHz 仅臻品母带版才可以使用</p>
+   */
+  Value?: number
+}
+
+/**
+ * 图片水印模板输入参数
+ */
+export interface RawImageWatermarkInput {
+  /**
+   * 水印图片的输入内容。支持 jpeg、png 图片格式。
+   */
+  ImageContent: MediaInputInfo
+  /**
+   * 水印的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：10%。
+   */
+  Width?: string
+  /**
+   * 水印的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。</li>
+默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
+   */
+  Height?: string
+  /**
+   * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束（默认值）。</li>
+   */
+  RepeatType?: string
 }
 
 /**
@@ -4110,19 +4137,19 @@ export interface ModifyStreamLinkFlowRequest {
  */
 export interface CloneViralAIGC {
   /**
-   * <p>视频时长</p><p>取值范围：[4, 15]</p>
+   * <p>视频时长</p><p>取值范围：[4, 30]</p><p>指定时取值范围随档位不同：flash 为 2-15, pro 为 4-30。</p>
    */
   Duration?: number
   /**
-   * <p>宽高比。旗舰版支持 16:9/4:3/1:1/3:4/9:16/21:9/adaptive，标准版支持16:9/1:1/9:16</p>
+   * <p>宽高比。可选 9:16、16:9、3:4、4:3、1:1、21:9、adaptive（自适应参考视频，flash 档不支持）。</p>
    */
   AspectRatio?: string
   /**
-   * <p>分辨率。支持720p（默认）/1080p/2k/4k</p>
+   * <p>分辨率。支持720p（默认）/1080p</p>
    */
   Resolution?: string
   /**
-   * <p>模式。flagship（高级版，默认）、standard（标准版）、depthcrafter(深度提取)</p>
+   * <p>模式。可选 pro（专业版）、 flash（高级版，默认）</p>
    */
   ModelTier?: string
   /**
@@ -4958,15 +4985,24 @@ export interface CreateScheduleResponse {
 }
 
 /**
- * 智能标签任务控制参数
+ * 模型调用的 token 用量统计。
  */
-export interface TagConfigureInfo {
+export interface ModelChatCompletionUsage {
   /**
-   * 智能标签任务开关，可选值：
-<li>ON：开启智能标签任务；</li>
-<li>OFF：关闭智能标签任务。</li>
+   * <p>输入 token 数</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Switch: string
+  PromptTokens?: number
+  /**
+   * <p>输出 token 数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompletionTokens?: number
+  /**
+   * <p>总 token 数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalTokens?: number
 }
 
 /**
@@ -5031,6 +5067,20 @@ export interface AiRecognitionTaskOcrWordsResultOutput {
    * 文本关键词识别结果集。
    */
   ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>
+}
+
+/**
+ * 移除盲水印配置
+ */
+export interface RemoveBlindWatermarkConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
 }
 
 /**
@@ -5537,6 +5587,20 @@ export interface AiAnalysisTaskHighlightResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskHighlightOutput
+}
+
+/**
+ * ProcessLiveStream返回参数结构体
+ */
+export interface ProcessLiveStreamResponse {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6129,35 +6193,63 @@ export interface OverrideEraseParameter {
 }
 
 /**
- * 文字水印模板
+ * ModifyAdaptiveDynamicStreamingTemplate请求参数结构体
  */
-export interface TextWatermarkTemplateInput {
+export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   /**
-   * 字体类型，目前可以支持两种：
-<li>simkai.ttf：可以支持中文和英文；</li>
-<li>arial.ttf：仅支持英文。</li>
+   * 转自适应码流模板唯一标识。
    */
-  FontType: string
+  Definition: number
   /**
-   * 字体大小，格式：Npx，N 为数值。N的取值范围：[0,1] 和 [8, 4096]
+   * 模板名称，长度限制：64 个字符。
    */
-  FontSize: string
+  Name?: string
   /**
-   * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。
+   * 转自适应码流格式，取值范围：
+<li>HLS，</li>
+<li>MPEG-DASH。</li>
    */
-  FontColor: string
+  Format?: string
   /**
-   * 文字透明度，取值范围：(0, 1]
-<li>0：完全透明</li>
-<li>1：完全不透明</li>
-默认值：1。
+   * 是否禁止视频低码率转高码率，取值范围：
+<li>0：否，</li>
+<li>1：是。</li>
    */
-  FontAlpha: number
+  DisableHigherVideoBitrate?: number
   /**
-   * 文字内容，长度不超过100个字符。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否禁止视频分辨率转高分辨率，取值范围：
+<li>0：否，</li>
+<li>1：是。</li>
    */
-  TextContent?: string
+  DisableHigherVideoResolution?: number
+  /**
+   * 转自适应码流输入流参数信息，最多输入10路流。
+注意：
+1、各个流的帧率必须保持一致；如果不一致，采用第一个流的帧率作为输出帧率。
+2、修改子流信息时需要全量修改添加所有字段值，否则没填字段会使用默认值。
+   */
+  StreamInfos?: Array<AdaptiveStreamTemplate>
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 是否为纯音频，0表示视频模板，1表示纯音频模板
+当值为1：
+1. StreamInfos.N.RemoveVideo=1
+2. StreamInfos.N.RemoveAudio=0
+3. StreamInfos.N.Video.Codec=copy
+当值为0：
+1. StreamInfos.N.Video.Codec不能为copy
+2. StreamInfos.N.Video.Fps不能为null
+注意：
+此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值
+   */
+  PureAudio?: number
+  /**
+   * 分片类型，可选值： <li>ts-segment：HLS+TS 切片</li> <li>ts-byterange：HLS+TS byte range</li> <li>mp4-segment：HLS+MP4 切片</li> <li>mp4-byterange：HLS/DASH+MP4 byte range</li> <li>ts-packed-audio：HLS+TS+Packed Audio 切片</li> <li>mp4-packed-audio：HLS+MP4+Packed Audio 切片</li> <li>ts-ts-segment：HLS+TS+TS 切片</li> <li>ts-ts-byterange：HLS+TS+TS byte range</li> <li>mp4-mp4-segment：HLS+MP4+MP4 切片</li> <li>mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte range</li> <li>ts-packed-audio-byterange：HLS+TS+Packed Audio byte range</li> <li>mp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range</li> 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-byterange或mp4-mp4-byterange。
+   */
+  SegmentType?: string
 }
 
 /**
@@ -6359,7 +6451,7 @@ export interface WordResult {
  */
 export interface ExtractBlindWatermarkResponse {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
@@ -7423,6 +7515,48 @@ export interface CreateWordSamplesRequest {
 }
 
 /**
+ * DescribeModelChatTask返回参数结构体
+ */
+export interface DescribeModelChatTaskResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>响应生成时间</p>
+   */
+  Created?: number
+  /**
+   * <p>错误描述</p>
+   */
+  Msg?: string
+  /**
+   * <p>响应 ID</p>
+   */
+  Id?: string
+  /**
+   * <p>响应对象类型标识</p>
+   */
+  Object?: string
+  /**
+   * <p>模型名称</p>
+   */
+  Model?: string
+  /**
+   * <p>候选回复数组</p>
+   */
+  Choices?: Array<ModelChatCompletionChoice>
+  /**
+   * <p>token 用量统计</p>
+   */
+  Usage?: ModelChatCompletionUsage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateQualityControlTemplate请求参数结构体
  */
 export interface CreateQualityControlTemplateRequest {
@@ -8036,6 +8170,16 @@ export interface LLMDetectionIssue {
    * <p>附加数据（JSON 格式），如严重程度等补充信息。</p>
    */
   ExtraData?: string
+}
+
+/**
+ * 多模态理解URL输入
+ */
+export interface ModelChatUrlInputInfo {
+  /**
+   * <p>Url输入</p>
+   */
+  Url: string
 }
 
 /**
@@ -10114,6 +10258,36 @@ export interface ScheduleQualityControlTaskResult {
 }
 
 /**
+ * 消息内容片段。
+ */
+export interface ModelChatContentPart {
+  /**
+   * <p>内容类型</p><p>枚举值：</p><ul><li>text： 文本内容</li><li>input_image： 图片输入</li><li>input_video： 视频输入</li><li>input_audio： 音频输入</li><li>input_file： 文件输入</li></ul>
+   */
+  Type: string
+  /**
+   * <p>文本消息</p><p>Type=text 时必填</p>
+   */
+  Text?: string
+  /**
+   * <p>图片输入</p><p>Type=input_image 时必填</p>
+   */
+  InputImage?: ModelChatInputImage
+  /**
+   * <p>视频输入</p><p>Type=input_video 时必填</p>
+   */
+  InputVideo?: ModelChatInputVideo
+  /**
+   * <p>音频输入</p><p>Type=input_audio 时必填</p>
+   */
+  InputAudio?: ModelChatInputAudio
+  /**
+   * <p>文件输入</p><p>Type=input_file 时必填</p>
+   */
+  InputFile?: ModelChatInputFile
+}
+
+/**
  * 字幕位置信息
  */
 export interface SubtitlePosition {
@@ -10278,6 +10452,24 @@ export interface ColorEnhanceConfig {
 }
 
 /**
+ * 多模态理解媒体文件输入
+ */
+export interface ModelChatMediaInputInfo {
+  /**
+   * <p>输入类型</p><p>枚举值：</p><ul><li>URL： Url输入</li><li>DATA： Base64输入</li></ul>
+   */
+  Type: string
+  /**
+   * <p>URL输入配置</p>
+   */
+  UrlInputInfo?: ModelChatUrlInputInfo
+  /**
+   * <p>Base64输入配置</p>
+   */
+  DataInputInfo?: ModelChatDataInputInfo
+}
+
+/**
  * 查询输出的RTP配置信息。
  */
 export interface DescribeOutputRTPSettings {
@@ -10404,63 +10596,21 @@ export interface AiAnalysisTaskDubbingOutput {
 }
 
 /**
- * ModifyAdaptiveDynamicStreamingTemplate请求参数结构体
+ * CreateModelChatTask请求参数结构体
  */
-export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
+export interface CreateModelChatTaskRequest {
   /**
-   * 转自适应码流模板唯一标识。
+   * <p>模型标识</p>
    */
-  Definition: number
+  Model: string
   /**
-   * 模板名称，长度限制：64 个字符。
+   * <p>对话消息数组</p>
    */
-  Name?: string
+  Messages?: Array<ModelChatMessageItem>
   /**
-   * 转自适应码流格式，取值范围：
-<li>HLS，</li>
-<li>MPEG-DASH。</li>
+   * <p>回调通知配置</p>
    */
-  Format?: string
-  /**
-   * 是否禁止视频低码率转高码率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
-   */
-  DisableHigherVideoBitrate?: number
-  /**
-   * 是否禁止视频分辨率转高分辨率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
-   */
-  DisableHigherVideoResolution?: number
-  /**
-   * 转自适应码流输入流参数信息，最多输入10路流。
-注意：
-1、各个流的帧率必须保持一致；如果不一致，采用第一个流的帧率作为输出帧率。
-2、修改子流信息时需要全量修改添加所有字段值，否则没填字段会使用默认值。
-   */
-  StreamInfos?: Array<AdaptiveStreamTemplate>
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 是否为纯音频，0表示视频模板，1表示纯音频模板
-当值为1：
-1. StreamInfos.N.RemoveVideo=1
-2. StreamInfos.N.RemoveAudio=0
-3. StreamInfos.N.Video.Codec=copy
-当值为0：
-1. StreamInfos.N.Video.Codec不能为copy
-2. StreamInfos.N.Video.Fps不能为null
-注意：
-此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值
-   */
-  PureAudio?: number
-  /**
-   * 分片类型，可选值： <li>ts-segment：HLS+TS 切片</li> <li>ts-byterange：HLS+TS byte range</li> <li>mp4-segment：HLS+MP4 切片</li> <li>mp4-byterange：HLS/DASH+MP4 byte range</li> <li>ts-packed-audio：HLS+TS+Packed Audio 切片</li> <li>mp4-packed-audio：HLS+MP4+Packed Audio 切片</li> <li>ts-ts-segment：HLS+TS+TS 切片</li> <li>ts-ts-byterange：HLS+TS+TS byte range</li> <li>mp4-mp4-segment：HLS+MP4+MP4 切片</li> <li>mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte range</li> <li>ts-packed-audio-byterange：HLS+TS+Packed Audio byte range</li> <li>mp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range</li> 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-byterange或mp4-mp4-byterange。
-   */
-  SegmentType?: string
+  TaskNotifyConfig?: ModelChatTaskNotifyConfig
 }
 
 /**
@@ -12433,35 +12583,27 @@ export interface SourceTag {
 }
 
 /**
- * RecognizeMediaForZhiXue返回参数结构体
+ * 音频输入配置。
  */
-export interface RecognizeMediaForZhiXueResponse {
+export interface ModelChatInputAudio {
   /**
-   * 任务 ID，可以通过该 ID 查询任务状态和结果。
+   * <p>媒体文件输入</p>
    */
-  TaskId?: string
+  InputInfo: ModelChatMediaInputInfo
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>音频格式</p>
    */
-  RequestId?: string
+  Format?: string
 }
 
 /**
- * EmbeddingData请求参数结构体
+ * DescribeModelChatTask请求参数结构体
  */
-export interface EmbeddingDataRequest {
+export interface DescribeModelChatTaskRequest {
   /**
-   * <p>embedding 的模型，现在只支持 text_embedding_v1</p><p>枚举值：</p><ul><li>text_embedding_v1： 文本embedding的模型，可以填写Prompt</li></ul>
+   * <p>任务ID</p>
    */
-  Model: string
-  /**
-   * <p>embedding的输入</p>
-   */
-  Files: Array<EmbeddingData>
-  /**
-   * <p>embedding 的输入prompt</p>
-   */
-  Prompt?: string
+  TaskId: string
 }
 
 /**
@@ -14676,34 +14818,13 @@ export interface PatternConfig {
 }
 
 /**
- * 图片水印模板输入参数
+ * 多模态理解任务的事件通知配置。
  */
-export interface RawImageWatermarkInput {
+export interface ModelChatTaskNotifyConfig {
   /**
-   * 水印图片的输入内容。支持 jpeg、png 图片格式。
+   * <p>回调 URL</p>
    */
-  ImageContent: MediaInputInfo
-  /**
-   * 水印的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
-默认值：10%。
-   */
-  Width?: string
-  /**
-   * 水印的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。</li>
-默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
-   */
-  Height?: string
-  /**
-   * 水印重复类型。使用场景：水印为动态图像。取值范围：
-<li>once：动态水印播放完后，不再出现；</li>
-<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
-<li>repeat：水印循环播放，直到视频结束（默认值）。</li>
-   */
-  RepeatType?: string
+  NotifyUrl?: string
 }
 
 /**
@@ -15070,6 +15191,20 @@ export interface DisassociateSecurityGroupRequest {
 }
 
 /**
+ * RecognizeMediaForZhiXue返回参数结构体
+ */
+export interface RecognizeMediaForZhiXueResponse {
+  /**
+   * 任务 ID，可以通过该 ID 查询任务状态和结果。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 违禁任务控制参数
  */
 export interface ProhibitedConfigureInfo {
@@ -15266,6 +15401,36 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GenericTask?: AiAnalysisTaskGenericResult
+}
+
+/**
+ * 字幕压制模块文字阴影配置
+ */
+export interface SubtitleShadowConfig {
+  /**
+   * 文字阴影配置开关，0关闭，1开启，默认0
+   */
+  SubtitleShadowConfigSwitch?: number
+  /**
+   * 阴影宽度，默认单位像素，底层默认值为0，无阴影
+
+   */
+  ShadowWidth?: number
+  /**
+   * 阴影宽度单位， 0 像素，1百分比，默认为0，像素
+
+   */
+  ShadowWidthUnit?: number
+  /**
+   * 阴影颜色。6位16进制RGB。不填默认黑色（有设置阴影的情况下）
+
+   */
+  ShadowColor?: string
+  /**
+   * 阴影透明度。(0，1] 正浮点数。不填默认1，完全不透明（有设置阴影的情况下）
+
+   */
+  ShadowAlpha?: number
 }
 
 /**
@@ -15560,21 +15725,13 @@ export interface AiRecognitionTaskOcrWordsResultItem {
 }
 
 /**
- * 智能擦除模板隐私保护配置
+ * 视频输入配置。
  */
-export interface UpdateSmartErasePrivacyConfig {
+export interface ModelChatInputVideo {
   /**
-   * 隐私保护擦除方式。
-- blur 模糊
-- mosaic 马赛克
+   * <p>媒体文件输入</p>
    */
-  PrivacyModel?: string
-  /**
-   * 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。
-- face 人脸
-- plate 车牌
-   */
-  PrivacyTargets?: Array<string>
+  InputInfo: ModelChatMediaInputInfo
 }
 
 /**
@@ -15890,6 +16047,20 @@ export interface PlaybackInfoReq {
 }
 
 /**
+ * 文件输入配置。
+ */
+export interface ModelChatInputFile {
+  /**
+   * <p>媒体文件输入</p>
+   */
+  InputInfo: ModelChatMediaInputInfo
+  /**
+   * <p>文件名</p>
+   */
+  Filename?: string
+}
+
+/**
  * 套图图片信息
  */
 export interface RecipeItem {
@@ -15901,6 +16072,24 @@ export interface RecipeItem {
    * <p>对应子图数量。</p><p>取值范围：[1, 4]</p><p>单位：张</p><p>单种子图最多4张，子图总数必须在4-12张范围内。</p>
    */
   Num?: number
+}
+
+/**
+ * 智能擦除模板隐私保护配置
+ */
+export interface UpdateSmartErasePrivacyConfig {
+  /**
+   * 隐私保护擦除方式。
+- blur 模糊
+- mosaic 马赛克
+   */
+  PrivacyModel?: string
+  /**
+   * 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。
+- face 人脸
+- plate 车牌
+   */
+  PrivacyTargets?: Array<string>
 }
 
 /**
@@ -18124,33 +18313,18 @@ export interface AiAnalysisTaskDelLogoOutput {
 }
 
 /**
- * 字幕压制模块文字阴影配置
+ * 空间音频配置
  */
-export interface SubtitleShadowConfig {
+export interface SpatialAudioConfig {
   /**
-   * 文字阴影配置开关，0关闭，1开启，默认0
+   * <p>能力配置开关</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p>
    */
-  SubtitleShadowConfigSwitch?: number
+  Switch?: string
   /**
-   * 阴影宽度，默认单位像素，底层默认值为0，无阴影
-
+   * <p>空间音频类型</p><p>枚举值：</p><ul><li>premium_immersive： 臻品全景声</li></ul><p>默认值：premium_immersive</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShadowWidth?: number
-  /**
-   * 阴影宽度单位， 0 像素，1百分比，默认为0，像素
-
-   */
-  ShadowWidthUnit?: number
-  /**
-   * 阴影颜色。6位16进制RGB。不填默认黑色（有设置阴影的情况下）
-
-   */
-  ShadowColor?: string
-  /**
-   * 阴影透明度。(0，1] 正浮点数。不填默认1，完全不透明（有设置阴影的情况下）
-
-   */
-  ShadowAlpha?: number
+  Type?: string
 }
 
 /**
@@ -18890,17 +19064,13 @@ export interface ParseNotificationResponse {
 }
 
 /**
- * 移除盲水印配置
+ * 多模态理解Base64输入
  */
-export interface RemoveBlindWatermarkConfig {
+export interface ModelChatDataInputInfo {
   /**
-   * 能力配置开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
-默认值：ON。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Base64输入</p>
    */
-  Switch?: string
+  Data: string
 }
 
 /**
@@ -19093,25 +19263,17 @@ export interface DescribeAsrHotwordsResponse {
 }
 
 /**
- * TextToSpeechAsync请求参数结构体
+ * 单条对话消息，定义对话中的角色与内容。
  */
-export interface TextToSpeechAsyncRequest {
+export interface ModelChatMessageItem {
   /**
-   * <p>语音合成文本</p>
+   * <p>角色</p><p>枚举值：</p><ul><li>system： 系统消息</li><li>user： 用户消息</li><li>assistant： 模型消息</li></ul>
    */
-  Text: string
+  Role: string
   /**
-   * <p>音色ID</p>
+   * <p>输入内容</p>
    */
-  VoiceId: string
-  /**
-   * <p>文本语言，不填时默认自动探测</p>
-   */
-  TextLang?: string
-  /**
-   * <p>扩展参数，json字符串</p><p>synExt Object 语音合成扩展参数<br>  duration Float 合成音频时长，单位秒，示例：5.2<br>  sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100]<br>  pitch Integer 音调，默认0原音色输出，取值[-12, 12]</p><p>transExt Object 翻译扩展参数<br>  transInfo Object<br>   transDst String 目标语言，如en<br>  transRequirement String 翻译要求</p>
-   */
-  ExtParam?: string
+  Content: Array<ModelChatContentPart>
 }
 
 /**
@@ -19635,6 +19797,24 @@ export interface DescribeStreamPackageSourceResponse {
 }
 
 /**
+ * EmbeddingData请求参数结构体
+ */
+export interface EmbeddingDataRequest {
+  /**
+   * <p>embedding 的模型，现在只支持 text_embedding_v1</p><p>枚举值：</p><ul><li>text_embedding_v1： 文本embedding的模型，可以填写Prompt</li></ul>
+   */
+  Model: string
+  /**
+   * <p>embedding的输入</p>
+   */
+  Files: Array<EmbeddingData>
+  /**
+   * <p>embedding 的输入prompt</p>
+   */
+  Prompt?: string
+}
+
+/**
  * WithdrawsWatermark请求参数结构体
  */
 export interface WithdrawsWatermarkRequest {
@@ -19664,6 +19844,57 @@ export interface DeleteStreamLinkOutputRequest {
    * 输出Id。
    */
   OutputId: string
+}
+
+/**
+ * 自定义转码的规格参数。用于覆盖模板中对应参数值。
+ */
+export interface OverrideTranscodeParameter {
+  /**
+   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   */
+  Container?: string
+  /**
+   * 是否去除视频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+   */
+  RemoveVideo?: number
+  /**
+   * 是否去除音频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+   */
+  RemoveAudio?: number
+  /**
+   * 视频流配置参数。
+   */
+  VideoTemplate?: VideoTemplateInfoForUpdate
+  /**
+   * 音频流配置参数。
+   */
+  AudioTemplate?: AudioTemplateInfoForUpdate
+  /**
+   * 极速高清转码参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TEHDConfig?: TEHDConfigForUpdate
+  /**
+   * 字幕流配置参数。
+   */
+  SubtitleTemplate?: SubtitleTemplate
+  /**
+   * 外挂音轨参数。
+   */
+  AddonAudioStream?: Array<MediaInputInfo>
+  /**
+   * 转码扩展字段。
+   */
+  StdExtInfo?: string
+  /**
+   * 要插入的字幕文件。
+   */
+  AddOnSubtitles?: Array<AddOnSubtitle>
 }
 
 /**
@@ -22305,6 +22536,20 @@ violation_photo：
 }
 
 /**
+ * ModifyStreamLinkFlow请求参数结构体
+ */
+export interface ModifyStreamLinkFlowRequest {
+  /**
+   * 流Id。
+   */
+  FlowId: string
+  /**
+   * 需要修改的流名称。
+   */
+  FlowName: string
+}
+
+/**
  * 内容审核涉敏任务结果类型
  */
 export interface AiReviewTaskPoliticalResult {
@@ -22897,57 +23142,62 @@ export interface DescribeSnapshotByTimeOffsetTemplatesResponse {
  */
 export interface MediaVideoStreamItem {
   /**
-   * 视频流的码率，单位：bps。
+   * <p>视频流的码率，单位：bps。</p>
    */
   Bitrate?: number
   /**
-   * 视频流的高度，单位：px。
+   * <p>视频流的高度，单位：px。</p>
    */
   Height?: number
   /**
-   * 视频流的宽度，单位：px。
+   * <p>视频流的宽度，单位：px。</p>
    */
   Width?: number
   /**
-   * 视频流的编码格式，例如 h264。
+   * <p>视频流的编码格式，例如 h264。</p>
    */
   Codec?: string
   /**
-   * 帧率，单位：hz。
+   * <p>帧率，单位：hz。</p>
    */
   Fps?: number
   /**
-   * 色彩空间。
+   * <p>色彩空间。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColorPrimaries?: string
   /**
-   * 色彩空间。
+   * <p>色彩空间。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColorSpace?: string
   /**
-   * 色彩空间。
+   * <p>色彩空间。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColorTransfer?: string
   /**
-   * HDR类型。
+   * <p>HDR类型。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HdrType?: string
   /**
-   * 视频Codecs。
+   * <p>视频Codecs。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Codecs?: string
   /**
-   * 帧率分子部分
+   * <p>视频时长。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * <p>帧率分子部分</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FpsNumerator?: number
   /**
-   * 帧率分母部分
+   * <p>帧率分母部分</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FpsDenominator?: number
@@ -23083,6 +23333,24 @@ export interface ProhibitedOcrReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 单条候选回复。
+ */
+export interface ModelChatCompletionChoice {
+  /**
+   * <p>候选回复在候选数组中的索引</p>
+   */
+  Index?: number
+  /**
+   * <p>结束原因</p>
+   */
+  FinishReason?: string
+  /**
+   * <p>模型回复消息体</p>
+   */
+  Message?: ModelChatResponseMessage
 }
 
 /**
@@ -23540,6 +23808,24 @@ export interface DescribeSmartEraseTemplatesResponse {
    * 智能擦除模板详情列表。
    */
   SmartEraseTemplateSet?: Array<SmartEraseTemplateItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateModelChatTask返回参数结构体
+ */
+export interface CreateModelChatTaskResponse {
+  /**
+   * <p>错误描述</p>
+   */
+  Msg?: string
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -24384,7 +24670,7 @@ export interface CreateAigcImageTaskRequest {
    */
   ExtraParameters?: AigcImageExtraParam
   /**
-   * <p>用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。 </p><ol><li>Hunyuan 3.0，支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。</li><li>Qwen 0925，支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。</li></ol><p>示例： {"size":"1024x1024"}。</p>
+   * <p>用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。 </p><ol><li>Hunyuan 3.0，支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。</li><li>Qwen 0925，支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。</li><li>Hunyuan 3.5-preivew, 支持多轮编辑，可通过携带previous_task_id的方式来继续编辑图片。</li></ol><p>示例： {"size":"1024x1024"}， {"previous_task_id":"4-AigcVideo-56349234"}。</p>
    */
   AdditionalParameters?: string
   /**
@@ -25773,6 +26059,18 @@ export interface AigcVideoExtraParam {
    * <p>是否为生成的视频添加背景音乐。默认：false，可选值 true 、false。<br>注意：部分模型的版本支持。</p>
    */
   EnableBgm?: boolean
+}
+
+/**
+ * 智能标签任务控制参数
+ */
+export interface TagConfigureInfo {
+  /**
+   * 智能标签任务开关，可选值：
+<li>ON：开启智能标签任务；</li>
+<li>OFF：关闭智能标签任务。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -27683,6 +27981,16 @@ export interface AudioEnhanceConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioEnhanceEdit?: AudioEnhanceEditConfig
+  /**
+   * <p>音频超分配置。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioSR?: AudioSRConfig
+  /**
+   * <p>空间音频配置。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpatialAudio?: SpatialAudioConfig
 }
 
 /**
@@ -27978,6 +28286,28 @@ export interface TimeShiftInfo {
    * 回看窗口，单位秒。
    */
   TimeWindows?: number
+}
+
+/**
+ * TextToSpeechAsync请求参数结构体
+ */
+export interface TextToSpeechAsyncRequest {
+  /**
+   * <p>语音合成文本</p>
+   */
+  Text: string
+  /**
+   * <p>音色ID</p>
+   */
+  VoiceId: string
+  /**
+   * <p>文本语言，不填时默认自动探测</p>
+   */
+  TextLang?: string
+  /**
+   * <p>扩展参数，json字符串</p><p>synExt Object 语音合成扩展参数<br>  duration Float 合成音频时长，单位秒，示例：5.2<br>  sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100]<br>  pitch Integer 音调，默认0原音色输出，取值[-12, 12]</p><p>transExt Object 翻译扩展参数<br>  transInfo Object<br>   transDst String 目标语言，如en<br>  transRequirement String 翻译要求</p>
+   */
+  ExtParam?: string
 }
 
 /**

@@ -348,6 +348,16 @@ it("databuddy.v20260715.ListSchemas", async function () {
     }
 })
 
+it("databuddy.v20260715.UpdateLocation", async function () {
+    try {
+       const data = await client.UpdateLocation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.CreateCatalog", async function () {
     try {
        const data = await client.CreateCatalog({})
@@ -398,9 +408,9 @@ it("databuddy.v20260715.ListTables", async function () {
     }
 })
 
-it("databuddy.v20260715.UpdateLocation", async function () {
+it("databuddy.v20260715.DeleteView", async function () {
     try {
-       const data = await client.UpdateLocation({})
+       const data = await client.DeleteView({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,6 +618,16 @@ it("databuddy.v20260715.GetVolume", async function () {
     }
 })
 
+it("databuddy.v20260715.UpdateView", async function () {
+    try {
+       const data = await client.UpdateView({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.DeleteFile", async function () {
     try {
        const data = await client.DeleteFile({})
@@ -618,9 +638,9 @@ it("databuddy.v20260715.DeleteFile", async function () {
     }
 })
 
-it("databuddy.v20260715.DeleteView", async function () {
+it("databuddy.v20260715.RerunWorkflowRun", async function () {
     try {
-       const data = await client.DeleteView({})
+       const data = await client.RerunWorkflowRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,9 +758,9 @@ it("databuddy.v20260715.CreateWorkflow", async function () {
     }
 })
 
-it("databuddy.v20260715.RerunWorkflowRun", async function () {
+it("databuddy.v20260715.ReadProductJson", async function () {
     try {
-       const data = await client.RerunWorkflowRun({})
+       const data = await client.ReadProductJson({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,9 +978,9 @@ it("databuddy.v20260715.GetCatalog", async function () {
     }
 })
 
-it("databuddy.v20260715.UpdateView", async function () {
+it("databuddy.v20260715.GetSessionStatus", async function () {
     try {
-       const data = await client.UpdateView({})
+       const data = await client.GetSessionStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

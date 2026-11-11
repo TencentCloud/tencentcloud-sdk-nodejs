@@ -1118,7 +1118,7 @@ export class Client extends AbstractClient {
    * 轮转集群的token
    */
   async RotateClusterToken(
-    req?: RotateClusterTokenRequest,
+    req: RotateClusterTokenRequest,
     cb?: (error: string, rep: RotateClusterTokenResponse) => void
   ): Promise<RotateClusterTokenResponse> {
     return this.request("RotateClusterToken", req, cb)

@@ -1685,6 +1685,20 @@ export interface UpdateTableRsp {
 }
 
 /**
+ * 查询会话任务状态的单条查询项
+ */
+export interface SessionStatusQueryItem {
+  /**
+   * 沙箱 Runtime ID
+   */
+  RuntimeId?: string
+  /**
+   * 对话 Session ID
+   */
+  SessionId?: string
+}
+
+/**
  * ListCatalogs返回参数结构体
  */
 export interface ListCatalogsResponse {
@@ -2067,6 +2081,16 @@ export interface InnerWorkflowTaskRun {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InnerTaskRunBizEnumInfos?: Array<ScheduleBizEnumBrief>
+}
+
+/**
+ * 查询会话任务状态响应
+ */
+export interface GetSessionStatusRsp {
+  /**
+   * 结果列表，与请求 Items 顺序一致
+   */
+  Items?: Array<SessionStatusItem>
 }
 
 /**
@@ -4172,6 +4196,20 @@ export interface AdvancedDependencyConfig {
 }
 
 /**
+ * ReadProductJson返回参数结构体
+ */
+export interface ReadProductJsonResponse {
+  /**
+   * <p>返回对象实体</p>
+   */
+  Data?: ReadProductJsonRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 文件详情
  */
 export interface FileInfo {
@@ -4461,13 +4499,13 @@ export interface CreateModelRequest {
 }
 
 /**
- * 更新文件夹回包
+ * RemoveConsoleUsers请求参数结构体
  */
-export interface UpdateFolderRsp {
+export interface RemoveConsoleUsersRequest {
   /**
-   * <p>更新文件夹结果，true为成功</p>
+   * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
    */
-  Status?: boolean
+  UserUins: Array<string>
 }
 
 /**
@@ -5744,13 +5782,13 @@ export interface AddConsoleUsersRsp {
 }
 
 /**
- * RemoveConsoleUsers请求参数结构体
+ * 更新文件夹回包
  */
-export interface RemoveConsoleUsersRequest {
+export interface UpdateFolderRsp {
   /**
-   * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
+   * <p>更新文件夹结果，true为成功</p>
    */
-  UserUins: Array<string>
+  Status?: boolean
 }
 
 /**
@@ -7428,6 +7466,37 @@ export interface ListViewsRsp {
 }
 
 /**
+ * databuddy 产物json 响应
+ */
+export interface ReadProductJsonRsp {
+  /**
+   * <p>文件路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * <p>文件大小</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: string
+  /**
+   * <p>文件内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * <p>请求状态码 0-成功，其他-异常</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultCode?: number
+  /**
+   * <p>返回结果提示信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+}
+
+/**
  * 告警配置
  */
 export interface AlarmBrief {
@@ -7461,6 +7530,20 @@ export interface AlarmBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DoNotDisturbUntilTheLastRetry?: boolean
+}
+
+/**
+ * GetSessionStatus返回参数结构体
+ */
+export interface GetSessionStatusResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Data?: GetSessionStatusRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8247,6 +8330,24 @@ export interface ListCatalogNamesRequest {
 }
 
 /**
+ * 会话任务状态单条结果
+ */
+export interface SessionStatusItem {
+  /**
+   * 对话 Session ID
+   */
+  SessionId?: string
+  /**
+   * 沙箱 Runtime ID
+   */
+  RuntimeId?: string
+  /**
+   * 任务运行状态: planning/working/pending/completed/failed
+   */
+  TaskStatus?: string
+}
+
+/**
  * 批量移除控制台用户响应
  */
 export interface RemoveConsoleUsersRsp {
@@ -8594,6 +8695,20 @@ export interface UpdateWorkspaceRoleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetSessionStatus请求参数结构体
+ */
+export interface GetSessionStatusRequest {
+  /**
+   * <p>工作空间 ID</p>
+   */
+  WorkspaceId?: string
+  /**
+   * <p>待查询的会话列表（支持传多个，传一条即单条查询）</p>
+   */
+  Items?: Array<SessionStatusQueryItem>
 }
 
 /**
@@ -9966,4 +10081,22 @@ export interface FeatureTable {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AssetGuid?: string
+}
+
+/**
+ * ReadProductJson请求参数结构体
+ */
+export interface ReadProductJsonRequest {
+  /**
+   * <p>工作空间ID</p>
+   */
+  WorkspaceId?: string
+  /**
+   * <p>沙盒runtimeId</p>
+   */
+  RuntimeId?: string
+  /**
+   * <p>沙盒sessionId</p>
+   */
+  SessionId?: string
 }

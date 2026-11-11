@@ -578,6 +578,16 @@ it("ags.v20250920.DescribeSession", async function () {
     }
 })
 
+it("ags.v20250920.DescribeEventCenterEvents", async function () {
+    try {
+       const data = await client.DescribeEventCenterEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.DescribeSessionSpace", async function () {
     try {
        const data = await client.DescribeSessionSpace({})

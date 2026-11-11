@@ -88,6 +88,7 @@ import {
   UpdateSchemaResponse,
   CreateFileRequest,
   UpdateTableRsp,
+  SessionStatusQueryItem,
   ListCatalogsResponse,
   RolePermission,
   GetModelVersionResponse,
@@ -105,6 +106,7 @@ import {
   CreateCatalogResponse,
   DeleteConsoleGroupsResponse,
   InnerWorkflowTaskRun,
+  GetSessionStatusRsp,
   UpdateWorkspaceGroupsRolesRequest,
   RemoveWorkspaceUsersRsp,
   DeleteVolumeResponse,
@@ -176,12 +178,13 @@ import {
   UserTagInfo,
   DeleteVolumeRequest,
   AdvancedDependencyConfig,
+  ReadProductJsonResponse,
   FileInfo,
   UpdateModelRequest,
   TableInfo,
   ListSchemaNamesRequest,
   CreateModelRequest,
-  UpdateFolderRsp,
+  RemoveConsoleUsersRequest,
   GetVolumeResponse,
   CreateWorkspaceRoleResult,
   RunWorkflowResponse,
@@ -252,7 +255,7 @@ import {
   DeleteFolderRequest,
   ListModelsRsp,
   AddConsoleUsersRsp,
-  RemoveConsoleUsersRequest,
+  UpdateFolderRsp,
   LocationUpdate,
   GetFileRequest,
   ListWorkspaceRolesRsp,
@@ -333,7 +336,9 @@ import {
   CreateCatalogRequest,
   StartComputeRsp,
   ListViewsRsp,
+  ReadProductJsonRsp,
   AlarmBrief,
+  GetSessionStatusResponse,
   DataMaskGroup,
   SearchAssetRequest,
   CreateWorkspaceRoleRequest,
@@ -360,6 +365,7 @@ import {
   GetSchemaResponse,
   TagValueInfo,
   ListCatalogNamesRequest,
+  SessionStatusItem,
   RemoveConsoleUsersRsp,
   DeleteWorkspaceRequest,
   StartComputeResponse,
@@ -377,6 +383,7 @@ import {
   ConsoleGroupInfo,
   UpdateCatalogRsp,
   UpdateWorkspaceRoleResponse,
+  GetSessionStatusRequest,
   ListFilesResponse,
   WorkflowTask,
   UpdateModelVersionResponse,
@@ -421,6 +428,7 @@ import {
   RemoveWorkspaceUsersRequest,
   GetTableRequest,
   FeatureTable,
+  ReadProductJsonRequest,
 } from "./databuddy_models"
 
 /**
@@ -789,6 +797,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 修改存储位置
+使用场景：修改存储位置的名称、描述或属性信息
+前置条件：存储位置名称必须存在
+错误码：MetaLakeNotFound - 存储位置不存在
+     */
+  async UpdateLocation(
+    req: UpdateLocationRequest,
+    cb?: (error: string, rep: UpdateLocationResponse) => void
+  ): Promise<UpdateLocationResponse> {
+    return this.request("UpdateLocation", req, cb)
+  }
+
+  /**
    * 创建数据目录接口
    */
   async CreateCatalog(
@@ -839,16 +860,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改存储位置
-使用场景：修改存储位置的名称、描述或属性信息
-前置条件：存储位置名称必须存在
-错误码：MetaLakeNotFound - 存储位置不存在
-     */
-  async UpdateLocation(
-    req: UpdateLocationRequest,
-    cb?: (error: string, rep: UpdateLocationResponse) => void
-  ): Promise<UpdateLocationResponse> {
-    return this.request("UpdateLocation", req, cb)
+   * 删除view
+   */
+  async DeleteView(
+    req: DeleteViewRequest,
+    cb?: (error: string, rep: DeleteViewResponse) => void
+  ): Promise<DeleteViewResponse> {
+    return this.request("DeleteView", req, cb)
   }
 
   /**
@@ -1073,6 +1091,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 修改视图信息
+使用场景：修改视图的名称或注释，按需传入NewName/NewComment字段
+前置条件：视图必须存在
+     */
+  async UpdateView(
+    req: UpdateViewRequest,
+    cb?: (error: string, rep: UpdateViewResponse) => void
+  ): Promise<UpdateViewResponse> {
+    return this.request("UpdateView", req, cb)
+  }
+
+  /**
      * 将文件移入回收站（软删除），同时清理该文件的版本记录与执行结果快照。
 
 **前置条件**
@@ -1100,13 +1130,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除view
+   * 重跑工作流
    */
-  async DeleteView(
-    req: DeleteViewRequest,
-    cb?: (error: string, rep: DeleteViewResponse) => void
-  ): Promise<DeleteViewResponse> {
-    return this.request("DeleteView", req, cb)
+  async RerunWorkflowRun(
+    req: RerunWorkflowRunRequest,
+    cb?: (error: string, rep: RerunWorkflowRunResponse) => void
+  ): Promise<RerunWorkflowRunResponse> {
+    return this.request("RerunWorkflowRun", req, cb)
   }
 
   /**
@@ -1220,13 +1250,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重跑工作流
+   * databuddy 产物获取接口
    */
-  async RerunWorkflowRun(
-    req: RerunWorkflowRunRequest,
-    cb?: (error: string, rep: RerunWorkflowRunResponse) => void
-  ): Promise<RerunWorkflowRunResponse> {
-    return this.request("RerunWorkflowRun", req, cb)
+  async ReadProductJson(
+    req: ReadProductJsonRequest,
+    cb?: (error: string, rep: ReadProductJsonResponse) => void
+  ): Promise<ReadProductJsonResponse> {
+    return this.request("ReadProductJson", req, cb)
   }
 
   /**
@@ -1457,15 +1487,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改视图信息
-使用场景：修改视图的名称或注释，按需传入NewName/NewComment字段
-前置条件：视图必须存在
-     */
-  async UpdateView(
-    req: UpdateViewRequest,
-    cb?: (error: string, rep: UpdateViewResponse) => void
-  ): Promise<UpdateViewResponse> {
-    return this.request("UpdateView", req, cb)
+   * 查询会话任务运行状态（支持批量）
+   */
+  async GetSessionStatus(
+    req: GetSessionStatusRequest,
+    cb?: (error: string, rep: GetSessionStatusResponse) => void
+  ): Promise<GetSessionStatusResponse> {
+    return this.request("GetSessionStatus", req, cb)
   }
 
   /**

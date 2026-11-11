@@ -2802,40 +2802,39 @@ export interface DescribeInstanceUpgradeCheckJobRequest {
  */
 export interface DescribeDBFeaturesResponse {
   /**
-   * 是否支持数据库审计功能。
+   * <p>是否支持数据库审计功能。</p>
    */
   IsSupportAudit?: boolean
   /**
-   * 开启审计是否需要升级内核版本。
+   * <p>开启审计是否需要升级内核版本。</p>
    */
   AuditNeedUpgrade?: boolean
   /**
-   * 是否支持数据库加密功能。
+   * <p>是否支持数据库加密功能。</p>
    */
   IsSupportEncryption?: boolean
   /**
-   * 开启加密是否需要升级内核版本。
+   * <p>开启加密是否需要升级内核版本。</p>
    */
   EncryptionNeedUpgrade?: boolean
   /**
-   * 是否为异地只读实例。
+   * <p>是否为异地只读实例。</p>
    */
   IsRemoteRo?: boolean
   /**
-   * 主实例所在地域。
-说明：此参数可能返回空值，您可忽略此出参返回值。如需获取实例所在地域详情，您可调用 [查询实例列表](https://cloud.tencent.com/document/product/236/15872) 接口查询。
+   * <p>主实例所在地域。<br>说明：此参数可能返回空值，您可忽略此出参返回值。如需获取实例所在地域详情，您可调用 <a href="https://cloud.tencent.com/document/product/236/15872">查询实例列表</a> 接口查询。</p>
    */
   MasterRegion?: string
   /**
-   * 是否支持小版本升级。
+   * <p>是否支持小版本升级。</p>
    */
   IsSupportUpdateSubVersion?: boolean
   /**
-   * 当前内核版本。
+   * <p>当前内核版本。</p>
    */
   CurrentSubVersion?: string
   /**
-   * 可供升级的内核版本。
+   * <p>可供升级的内核版本。</p>
    */
   TargetSubVersion?: string
   /**
@@ -9882,6 +9881,10 @@ export interface CreateCloneInstanceRequest {
    * <p>备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。</p>
    */
   FourthZone?: string
+  /**
+   * <p>是否使用最新小版本号进行克隆。</p><p>枚举值：</p><ul><li>1： 是</li><li>0： 否</li></ul><p>默认值：0</p><p>默认和源实例的小版本号对齐</p>
+   */
+  UseLatestMinorVersion?: number
 }
 
 /**
@@ -10085,7 +10088,7 @@ export interface DescribeDBInstanceCharsetResponse {
  */
 export interface DescribeDBFeaturesRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * <p>实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。</p>
    */
   InstanceId: string
 }
@@ -10761,29 +10764,27 @@ export interface SqlFileInfo {
  */
 export interface RoGroupAttr {
   /**
-   * RO 组名称。
+   * <p>RO 组名称。</p>
    */
   RoGroupName?: string
   /**
-   * RO 实例最大延迟阈值。单位为秒，最小值为 1。范围：[1,10000]，整数。
-注意：RO 组必须设置了开启实例延迟剔除策略，该值才有效。
+   * <p>RO 实例最大延迟阈值。单位为秒，最小值为 1。范围：[1,10000]，整数。<br>注意：RO 组必须设置了开启实例延迟剔除策略，该值才有效。</p>
    */
   RoMaxDelayTime?: number
   /**
-   * 是否开启实例延迟剔除。支持的值包括：1 - 开启；0 - 不开启。注意，若设置开启实例延迟剔除，则必须设置延迟阈值（RoMaxDelayTime）参数。
+   * <p>是否开启实例延迟剔除。支持的值包括：1 - 开启；0 - 不开启。注意，若设置开启实例延迟剔除，则必须设置延迟阈值（RoMaxDelayTime）参数。</p>
    */
   RoOfflineDelay?: number
   /**
-   * 最少保留实例数。可设置为小于或等于该 RO 组下 RO 实例个数的任意值。默认值为1。
-注意：若设置值大于 RO 实例数量将不做剔除；若设置为 0，所有实例延迟超限都会被剔除。
+   * <p>最少保留实例数。可设置为小于或等于该 RO 组下 RO 实例个数的任意值。默认值为1。<br>注意：若设置值大于 RO 实例数量将不做剔除；若设置为 0，所有实例延迟超限都会被剔除。</p>
    */
   MinRoInGroup?: number
   /**
-   * 权重模式。支持值包括："system" - 系统自动分配； "custom" - 用户自定义设置。注意，若设置 "custom" 模式，则必须设置 RO 实例权重配置（RoWeightValues）参数。
+   * <p>权重模式。支持值包括：&quot;system&quot; - 系统自动分配； &quot;custom&quot; - 用户自定义设置。注意，若设置 &quot;custom&quot; 模式，则必须设置 RO 实例权重配置（RoWeightValues）参数。</p>
    */
   WeightMode?: string
   /**
-   * 延迟复制时间。单位：秒，范围：1 - 259200秒，不传此参数表示不开启实例延迟复制。
+   * <p>延迟复制时间。单位：秒，范围：1 - 259200秒，不传此参数表示不开启实例延迟复制。</p>
    */
   ReplicationDelayTime?: number
 }

@@ -197,6 +197,7 @@ import {
   PushAuthKeyInfo,
   CreateCasterInputPushUrlResponse,
   DescribeLivePlayAuthKeyRequest,
+  SwitchAvatarEditingSceneRequest,
   HttpCodeValue,
   CreateLiveTimeShiftRuleResponse,
   DeleteLiveTranscodeRuleResponse,
@@ -216,6 +217,7 @@ import {
   OutputStatisticsDataInfo,
   DescribeLiveAvatarImageListResponse,
   DescribeAIGCTaskStatusRequest,
+  CreateAvatarEditingLiveResponse,
   DescribeSceneVideoTaskRequest,
   StopLiveRecordResponse,
   DeleteCasterResponse,
@@ -356,6 +358,7 @@ import {
   TimeShiftSubStream,
   DescribeLiveStreamMonitorRequest,
   DescribeLiveSnapshotRulesRequest,
+  StopAvatarEditingLiveRequest,
   SwitchCasterToEmergencyRequest,
   AvatarTemporaryScriptInfo,
   DeleteLiveRecordRuleResponse,
@@ -371,6 +374,7 @@ import {
   DescribeLiveCallbackTemplateResponse,
   CreateLivePullStreamTaskRequest,
   DeleteLiveSnapshotTemplateRequest,
+  StopAvatarEditingLiveResponse,
   DomainInfoList,
   AuditImageInfo,
   CreateScreenshotTaskRequest,
@@ -392,6 +396,7 @@ import {
   CreateLiveTimeShiftRuleRequest,
   StopCasterPvwResponse,
   DeleteLiveAvatarScriptResponse,
+  DescribeAvatarEditingLiveRequest,
   SwitchCasterToEmergencyResponse,
   DescribeLiveDomainRequest,
   DescribePushBandwidthAndFluxListRequest,
@@ -465,6 +470,7 @@ import {
   DescribeLiveDomainsRequest,
   SnapshotTemplateInfo,
   DescribeLiveTimeShiftBillInfoListResponse,
+  DescribeAvatarEditingLiveResponse,
   CertInfo,
   DescribeLiveCallbackRulesRequest,
   DescribeLiveSnapshotTemplateResponse,
@@ -658,9 +664,11 @@ import {
   BackupStreamDetailData,
   CreateLiveSnapshotTemplateRequest,
   ModifyLiveCallbackTemplateRequest,
+  SwitchAvatarEditingSceneResponse,
   DeleteCasterLayoutInfoResponse,
   DescribeAuditTemplatesRequest,
   RemuxStatisticsDataInfo,
+  CreateAvatarEditingLiveRequest,
   DescribeMonitorReportRequest,
   DescribeAllStreamPlayInfoListRequest,
   DescribeLiveDomainResponse,
@@ -1301,6 +1309,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新拉流配置。该接口为已下线接口，请使用新接口 ModifyLivePullStreamTask。
+   */
+  async ModifyPullStreamConfig(
+    req: ModifyPullStreamConfigRequest,
+    cb?: (error: string, rep: ModifyPullStreamConfigResponse) => void
+  ): Promise<ModifyPullStreamConfigResponse> {
+    return this.request("ModifyPullStreamConfig", req, cb)
+  }
+
+  /**
    * 删除回调规则。
    */
   async DeleteLiveCallbackRule(
@@ -1311,13 +1329,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新拉流配置。该接口为已下线接口，请使用新接口 ModifyLivePullStreamTask。
+   * 获取证书信息
    */
-  async ModifyPullStreamConfig(
-    req: ModifyPullStreamConfigRequest,
-    cb?: (error: string, rep: ModifyPullStreamConfigResponse) => void
-  ): Promise<ModifyPullStreamConfigResponse> {
-    return this.request("ModifyPullStreamConfig", req, cb)
+  async DescribeLiveCert(
+    req: DescribeLiveCertRequest,
+    cb?: (error: string, rep: DescribeLiveCertResponse) => void
+  ): Promise<DescribeLiveCertResponse> {
+    return this.request("DescribeLiveCert", req, cb)
   }
 
   /**
@@ -1610,6 +1628,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 调用该接口，用于创建数字人直播间。
+   */
+  async CreateAvatarEditingLive(
+    req: CreateAvatarEditingLiveRequest,
+    cb?: (error: string, rep: CreateAvatarEditingLiveResponse) => void
+  ): Promise<CreateAvatarEditingLiveResponse> {
+    return this.request("CreateAvatarEditingLive", req, cb)
+  }
+
+  /**
      * 针对大型活动直播，通过对直播流设置延时来控制现场与观众播放画面的时间间隔，避免突发状况造成影响。
 
 注意：如果在推流前设置延播，需要提前5分钟设置，目前该接口只支持流粒度。
@@ -1762,13 +1790,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 获取证书信息
+   * 调用该接口，查询数字人直播间信息列表。
    */
-  async DescribeLiveCert(
-    req: DescribeLiveCertRequest,
-    cb?: (error: string, rep: DescribeLiveCertResponse) => void
-  ): Promise<DescribeLiveCertResponse> {
-    return this.request("DescribeLiveCert", req, cb)
+  async DescribeAvatarEditingLive(
+    req: DescribeAvatarEditingLiveRequest,
+    cb?: (error: string, rep: DescribeAvatarEditingLiveResponse) => void
+  ): Promise<DescribeAvatarEditingLiveResponse> {
+    return this.request("DescribeAvatarEditingLive", req, cb)
   }
 
   /**
@@ -2713,6 +2741,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 调用该接口，用于停止数字人直播间。
+   */
+  async StopAvatarEditingLive(
+    req: StopAvatarEditingLiveRequest,
+    cb?: (error: string, rep: StopAvatarEditingLiveResponse) => void
+  ): Promise<StopAvatarEditingLiveResponse> {
+    return this.request("StopAvatarEditingLive", req, cb)
+  }
+
+  /**
    * 变更直播源站配置，支持直播源站格式。
    */
   async ModifyOriginStreamInfo(
@@ -2792,6 +2830,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CreateLiveTranscodeRuleResponse) => void
   ): Promise<CreateLiveTranscodeRuleResponse> {
     return this.request("CreateLiveTranscodeRule", req, cb)
+  }
+
+  /**
+   * 调用该接口，用于临时驱动数字人播报。
+   */
+  async SwitchAvatarEditingScene(
+    req: SwitchAvatarEditingSceneRequest,
+    cb?: (error: string, rep: SwitchAvatarEditingSceneResponse) => void
+  ): Promise<SwitchAvatarEditingSceneResponse> {
+    return this.request("SwitchAvatarEditingScene", req, cb)
   }
 
   /**

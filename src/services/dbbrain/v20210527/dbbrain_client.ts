@@ -27,6 +27,7 @@ import {
   DescribeBlockingTrendRequest,
   DescribeDBAutonomyActionsRequest,
   DescribeRedisProcessListResponse,
+  SqlExplainRowV2,
   SecLogExportTaskInfo,
   CancelDBAutonomyActionResponse,
   OpenAuditServiceResponse,
@@ -69,6 +70,7 @@ import {
   SlowLogTopSqlItem,
   CreateAuditLogFileResponse,
   AuditProxyLogItem,
+  SqlExplainResultV2,
   DescribeAuditInstanceListResponse,
   DescribeRedisSlowLogTopSqlsResponse,
   DescribeDBInstancesResponse,
@@ -101,6 +103,7 @@ import {
   CreateSchedulerMailProfileRequest,
   ContactItem,
   DescribeDBAutonomyEventsResponse,
+  DescribeSqlExplainV2Request,
   VerifyUserAccountResponse,
   DeleteAuditLogFileResponse,
   DescribeDBSpaceStatusRequest,
@@ -167,7 +170,9 @@ import {
   DescribeMailProfileRequest,
   ModifyAuditServiceResponse,
   ModifyAuditServiceRequest,
+  SqlExplainFieldDescV2,
   DeleteSecurityAuditLogExportTasksResponse,
+  InstanceConfs,
   TableStatistics,
   KillMySqlThreadsRequest,
   DescribeSqlFiltersResponse,
@@ -176,11 +181,12 @@ import {
   InstanceItem,
   AutonomyActionVo,
   CloseAuditServiceResponse,
+  SqlExplainTableRefV2,
   RedisKeySpaceData,
   UpdateDatabaseAutonomyStatusResponse,
   DeleteRedisBigKeyAnalysisTasksResponse,
   CloseAuditServiceRequest,
-  InstanceConfs,
+  DescribeSqlExplainV2Response,
   ReceiveInfo,
   DescribeSqlTemplateResponse,
   BlockingLogItem,
@@ -754,6 +760,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
   ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
     return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
+  }
+
+  /**
+   * 查询指定 SELECT SQL 在实例上的执行计划，常用于慢 SQL 分析、SQL 优化等场景。仅支持 SELECT 类语句
+   */
+  async DescribeSqlExplainV2(
+    req: DescribeSqlExplainV2Request,
+    cb?: (error: string, rep: DescribeSqlExplainV2Response) => void
+  ): Promise<DescribeSqlExplainV2Response> {
+    return this.request("DescribeSqlExplainV2", req, cb)
   }
 
   /**
