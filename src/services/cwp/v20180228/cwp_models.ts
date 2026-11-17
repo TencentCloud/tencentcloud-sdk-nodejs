@@ -14675,11 +14675,11 @@ export interface DescribeAgentInstallationTokenResponse {
  */
 export interface DescribeMachinesRequest {
   /**
-   * <p>机器所属专区类型<br>CVM 云服务器<br>BM 黑石<br>ECM 边缘计算<br>LH 轻量应用服务器<br>Other 混合云专区</p>
+   * <p>机器所属专区类型<br>CVM 云服务器<br>BM 黑石<br>ECM 边缘计算<br>LH 轻量应用服务器<br>Other 混合云专区<br>ALL 全部机器类型</p>
    */
   MachineType: string
   /**
-   * <p>机器所属地域。如：ap-guangzhou，ap-shanghai，非腾讯云主机使用：ap-others</p>
+   * <p>机器所属地域。如：ap-guangzhou，ap-shanghai，非腾讯云主机使用：ap-others ，全部地域使用：all-regions</p>
    */
   MachineRegion: string
   /**

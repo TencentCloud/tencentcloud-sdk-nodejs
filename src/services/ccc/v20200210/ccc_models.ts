@@ -3234,11 +3234,11 @@ export interface AICallLatencyMetrics {
  */
 export interface TimeRange {
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
 }

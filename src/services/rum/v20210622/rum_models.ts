@@ -585,6 +585,10 @@ export interface DialTrendPoint {
    * <p>平均时延，单位毫秒</p>
    */
   AvgDuration?: number
+  /**
+   * <p>聚合桶时间。与旧字段 Time 同源，保留 Time 及其格式；按查询服务运行时区输出。</p><p>参数格式：RFC3339，带数值时区偏移，例如 2026-10-01T00:00:00+08:00。</p>
+   */
+  Datetime?: string
 }
 
 /**
@@ -10796,6 +10800,10 @@ export interface UsageTimePoint {
    * <p>上报量</p>
    */
   ReportVolume?: number
+  /**
+   * <p>聚合桶时间。与旧字段 Time 同源，保留 Time 及其格式；按查询服务运行时区输出。</p><p>参数格式：RFC3339，带数值时区偏移，例如 2026-10-01T00:00:00+08:00。</p>
+   */
+  Datetime?: string
 }
 
 /**

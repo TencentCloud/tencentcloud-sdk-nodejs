@@ -3098,6 +3098,10 @@ export interface SnapshotInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotTime?: string
+  /**
+   * <p>快照完成时间</p>
+   */
+  FinishTime?: string
 }
 
 /**

@@ -460,17 +460,21 @@ export interface ModifyAutoBackupConfigRequest {
 }
 
 /**
- * Proxy节点信息
+ * DescribeInstances返回参数结构体
  */
-export interface ProxyNodeInfo {
+export interface DescribeInstancesResponse {
   /**
-   * 节点ID
+   * <p>实例数</p>
    */
-  NodeId?: string
+  TotalCount?: number
   /**
-   * 可用区ID
+   * <p>实例详细信息列表</p>
    */
-  ZoneId?: number
+  InstanceSet?: Array<InstanceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -481,6 +485,36 @@ export interface DestroyPostpaidInstanceRequest {
    * 实例 ID。
    */
   InstanceId: string
+}
+
+/**
+ * 子账号信息
+ */
+export interface Account {
+  /**
+   * <p>实例 ID。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>账号名称。</p>
+   */
+  AccountName?: string
+  /**
+   * <p>账号描述信息。</p>
+   */
+  Remark?: string
+  /**
+   * <p>读写权限策略。</p><p>枚举值：</p><ul><li>r： 只读。</li><li>rw： 读写。</li></ul>
+   */
+  Privilege?: string
+  /**
+   * <p>只读路由策略。</p><p>枚举值：</p><ul><li>master： 主节点。</li><li>replication： 从节点。</li></ul>
+   */
+  ReadonlyPolicy?: Array<string>
+  /**
+   * <p>子账号状态。</p><p>枚举值：</p><ul><li>1： 账号变更中。</li><li>2： 账号有效。</li><li>4： 账号已删除。</li></ul>
+   */
+  Status?: number
 }
 
 /**
@@ -889,6 +923,20 @@ export interface ChangeInstanceMasterRequest {
 }
 
 /**
+ * ModifyInstanceAccount返回参数结构体
+ */
+export interface ModifyInstanceAccountResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProjectSecurityGroups返回参数结构体
  */
 export interface DescribeProjectSecurityGroupsResponse {
@@ -1210,6 +1258,24 @@ export interface ModifyNetworkConfigRequest {
 单位：天。取值范围：0、1、2、3、7、15。
    */
   Recycle?: number
+}
+
+/**
+ * DescribeInstanceAccount请求参数结构体
+ */
+export interface DescribeInstanceAccountRequest {
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>分页大小。</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  Limit: number
+  /**
+   * <p>分页偏移量。</p><p>默认值：0</p>
+   */
+  Offset: number
 }
 
 /**
@@ -2040,6 +2106,20 @@ export interface InstanceEnumParam {
 }
 
 /**
+ * DeleteInstanceAccount请求参数结构体
+ */
+export interface DeleteInstanceAccountRequest {
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>指定需删除的账号名称。</p>
+   */
+  AccountName: string
+}
+
+/**
  * UpgradeInstance返回参数结构体
  */
 export interface UpgradeInstanceResponse {
@@ -2059,21 +2139,33 @@ export interface UpgradeInstanceResponse {
 }
 
 /**
- * DescribeInstances返回参数结构体
+ * ModifyInstanceAccount请求参数结构体
  */
-export interface DescribeInstancesResponse {
+export interface ModifyInstanceAccountRequest {
   /**
-   * <p>实例数</p>
+   * <p>实例ID。</p>
    */
-  TotalCount?: number
+  InstanceId: string
   /**
-   * <p>实例详细信息列表</p>
+   * <p>指定需修改的账号。</p><ul><li>root：指在创建 KeeWiDB 数据库实例时自动生成的账号。用户无法修改其读写权限，仅可修改其请求路由策略。</li><li>自定义的账号：用户在实例创建成功后手动创建的账号。用户可以随时修改其读写权限与请求路由策略。</li></ul>
    */
-  InstanceSet?: Array<InstanceInfo>
+  AccountName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>指定所修改账号访问的密码。</p>
    */
-  RequestId?: string
+  AccountPassword?: string
+  /**
+   * <p>账号描述信息</p>
+   */
+  Remark?: string
+  /**
+   * <p>指定所修改账号读写请求路由的策略。</p><p>枚举值：</p><ul><li>master： 表示读写请求路由至主节点。</li><li>replication： 表示读写请求路由至从节点。</li></ul>
+   */
+  ReadonlyPolicy?: Array<string>
+  /**
+   * <p>指定所修改账号的读写权限。</p><p>枚举值：</p><ul><li>rw： 读写。</li><li>r： 只读。</li></ul>
+   */
+  Privilege?: string
 }
 
 /**
@@ -2144,6 +2236,20 @@ export interface DestroyPrepaidInstanceResponse {
 }
 
 /**
+ * Proxy节点信息
+ */
+export interface ProxyNodeInfo {
+  /**
+   * 节点ID
+   */
+  NodeId?: string
+  /**
+   * 可用区ID
+   */
+  ZoneId?: number
+}
+
+/**
  * 实例节点信息
  */
 export interface InstanceNodeInfo {
@@ -2209,6 +2315,36 @@ export interface ModifyInstanceParamsRequest {
    * 实例修改的参数列表。
    */
   InstanceParams: Array<InstanceParam>
+}
+
+/**
+ * CreateInstanceAccount请求参数结构体
+ */
+export interface CreateInstanceAccountRequest {
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>自定义的访问数据库的账号名称。</p><ul><li>仅由字母、数字、下划线、中划线组成。</li><li>长度不能大于32位。</li></ul>
+   */
+  AccountName: string
+  /**
+   * <p>设置自定义账号的密码。密码复杂度要求如下：</p><ul><li>字符个数为[8,64]。</li><li>至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的两种。</li><li>不能以&quot;/&quot;开头。</li></ul>
+   */
+  AccountPassword: string
+  /**
+   * <p>指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。 </p><p>枚举值：</p><ul><li>master： 主节点</li><li>replication： 副本节点</li></ul>
+   */
+  ReadonlyPolicy: Array<string>
+  /**
+   * <p>账户读写权限，支持选择只读与读写权限。</p><p>枚举值：</p><ul><li>rw： 读写</li><li>r： 只读</li></ul>
+   */
+  Privilege: string
+  /**
+   * <p>账号备注描述信息，长度为[0,64] 字节，支持中文。</p>
+   */
+  Remark?: string
 }
 
 /**
@@ -2318,6 +2454,24 @@ export interface DescribeProxySlowLogResponse {
 }
 
 /**
+ * DescribeInstanceAccount返回参数结构体
+ */
+export interface DescribeInstanceAccountResponse {
+  /**
+   * <p>账号详细信息。</p>
+   */
+  Accounts?: Array<Account>
+  /**
+   * <p>账号个数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProductInfo请求参数结构体
  */
 export type DescribeProductInfoRequest = null
@@ -2389,6 +2543,20 @@ export interface ModifyMaintenanceWindowRequest {
 }
 
 /**
+ * CreateInstanceAccount返回参数结构体
+ */
+export interface CreateInstanceAccountResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstanceBackups请求参数结构体
  */
 export interface DescribeInstanceBackupsRequest {
@@ -2425,6 +2593,20 @@ export interface DescribeInstanceBackupsRequest {
 export interface ClearInstanceResponse {
   /**
    * 任务 ID。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteInstanceAccount返回参数结构体
+ */
+export interface DeleteInstanceAccountResponse {
+  /**
+   * <p>任务ID。</p>
    */
   TaskId?: number
   /**

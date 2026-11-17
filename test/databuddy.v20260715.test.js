@@ -408,6 +408,16 @@ it("databuddy.v20260715.ListTables", async function () {
     }
 })
 
+it("databuddy.v20260715.GetFileContent", async function () {
+    try {
+       const data = await client.GetFileContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.DeleteView", async function () {
     try {
        const data = await client.DeleteView({})
@@ -581,6 +591,16 @@ it("databuddy.v20260715.CreateVolume", async function () {
 it("databuddy.v20260715.GetFolder", async function () {
     try {
        const data = await client.GetFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("databuddy.v20260715.CreateExperiment", async function () {
+    try {
+       const data = await client.CreateExperiment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -378,6 +378,16 @@ it("vod.v20180717.ModifyDefaultDistributionConfig", async function () {
     }
 })
 
+it("vod.v20180717.SetAigcWhitelist", async function () {
+    try {
+       const data = await client.SetAigcWhitelist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeProcessImageAsyncTemplates", async function () {
     try {
        const data = await client.DescribeProcessImageAsyncTemplates({})
@@ -1058,6 +1068,16 @@ it("vod.v20180717.EnhanceMediaByTemplate", async function () {
     }
 })
 
+it("vod.v20180717.FastEditMedia", async function () {
+    try {
+       const data = await client.FastEditMedia({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateAigcApiToken", async function () {
     try {
        const data = await client.CreateAigcApiToken({})
@@ -1678,9 +1698,9 @@ it("vod.v20180717.DescribeAigcApiTokens", async function () {
     }
 })
 
-it("vod.v20180717.FastEditMedia", async function () {
+it("vod.v20180717.DescribeAigcWhitelist", async function () {
     try {
-       const data = await client.FastEditMedia({})
+       const data = await client.DescribeAigcWhitelist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

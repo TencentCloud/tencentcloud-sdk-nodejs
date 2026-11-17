@@ -1135,6 +1135,16 @@ export interface DescribeAigcFaceInfoRequest {
 }
 
 /**
+ * SetAigcWhitelist返回参数结构体
+ */
+export interface SetAigcWhitelistResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 视频画面噪点检测的控制参数。
  */
 export interface NoiseConfigureInfo {
@@ -8580,6 +8590,79 @@ export interface AiRecognitionTaskOcrFullTextSegmentItem {
 }
 
 /**
+ * 视频轨的视频片段信息。
+ */
+export interface VideoTrackItem {
+  /**
+   * 视频片段的媒体素材来源，可以是：
+<li>点播的媒体文件 ID；</li>
+<li>其他媒体文件的下载 URL。</li>
+注意：当使用其他媒体文件的下载 URL 作为素材来源，且开启了访问控制（如防盗链）时，需要在 URL 携带访问控制参数（如防盗链签名）。
+   */
+  SourceMedia: string
+  /**
+   * 视频片段取自素材文件的起始时间，单位为秒。默认为0。
+   */
+  SourceMediaStartTime?: number
+  /**
+   * 视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。
+   */
+  Duration?: number
+  /**
+   * 视频片段目标时长，单位为秒。
+<li>当 TargetDuration 不填或填0时，表示目标时长和 Duration 一致；</li>
+<li>当 TargetDuration 取大于0的值时，将对视频片段做快进或慢放等处理，使得输出片段的时长等于 TargetDuration。</li>
+   */
+  TargetDuration?: number
+  /**
+   * 视频原点位置，取值有：
+<li>Center：坐标原点为中心位置，如画布中心。</li>
+默认值 ：Center。
+   */
+  CoordinateOrigin?: string
+  /**
+   * 视频片段原点距离画布原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布口宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 XPos 单位为像素，如 100px 表示 XPos 为100像素。</li>
+默认值：0px。
+   */
+  XPos?: string
+  /**
+   * 视频片段原点距离画布原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 YPos 为画布高度指定百分比的位置，如 10% 表示 YPos 为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 YPos 单位为像素，如 100px 表示 YPos 为100像素。</li>
+默认值：0px。
+   */
+  YPos?: string
+  /**
+   * 视频片段的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
+   */
+  Width?: string
+  /**
+   * 视频片段的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
+</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
+   */
+  Height?: string
+  /**
+   * 对音频进行操作，如静音等。
+   */
+  AudioOperations?: Array<AudioTransform>
+  /**
+   * 对图像进行的操作，如图像旋转等。
+   */
+  ImageOperations?: Array<ImageTransform>
+}
+
+/**
  * 色彩增强控制参数
  */
 export interface ColorEnhanceInfo {
@@ -9493,17 +9576,29 @@ export interface ModifyAigcQuotaResponse {
 }
 
 /**
- * DescribeReviewTemplates返回参数结构体
+ * DescribeAigcWhitelist返回参数结构体
  */
-export interface DescribeReviewTemplatesResponse {
+export interface DescribeAigcWhitelistResponse {
   /**
-   * 符合过滤条件的记录总数。
+   * <p>AIGC任务类型</p><p>枚举值：</p><ul><li>Image： AIGC 生图任务</li><li>Video： AIGC 生视频任务</li></ul>
    */
-  TotalCount?: number
+  AigcType?: string
   /**
-   * 审核模板详情列表。
+   * <p>模型白名单开关</p><p>枚举值：</p><ul><li>ON： 打开，只有允许调用ModelWhitelist中列出的模型</li><li>OFF： 关闭，允许调用所有模型</li></ul>
    */
-  ReviewTemplateSet?: Array<ReviewTemplate>
+  ModelWhitelistSwitch?: string
+  /**
+   * <p>模型白名单列表</p>
+   */
+  ModelWhitelist?: Array<AigcWhitelistModel>
+  /**
+   * <p>IP白名单开关</p><p>枚举值：</p><ul><li>ON： 打开，只允许IpWhitelist中列出的IP段进行调用</li><li>OFF： 关闭，允许所有IP进行调用</li></ul>
+   */
+  IpWhitelistSwitch?: string
+  /**
+   * <p>IP白名单的CIDR列表</p>
+   */
+  IpWhitelist?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13497,6 +13592,20 @@ export interface AreaCLSTargetInfo {
 }
 
 /**
+ * AIGC模型白名单
+ */
+export interface AigcWhitelistModel {
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName: string
+  /**
+   * <p>模型版本</p>
+   */
+  ModelVersion: string
+}
+
+/**
  * DeleteRebuildMediaTemplate返回参数结构体
  */
 export interface DeleteRebuildMediaTemplateResponse {
@@ -16549,6 +16658,36 @@ export interface AiRecognitionTaskOcrWordsResultItem {
    * 文本关键出现的片段列表。
    */
   SegmentSet?: Array<AiRecognitionTaskOcrWordsSegmentItem>
+}
+
+/**
+ * SetAigcWhitelist请求参数结构体
+ */
+export interface SetAigcWhitelistRequest {
+  /**
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
+   */
+  SubAppId: number
+  /**
+   * <p>AIGC任务类型</p><p>枚举值：</p><ul><li>Image： AIGC 生图任务</li><li>Video： AIGC 生视频任务</li></ul>
+   */
+  AigcType: string
+  /**
+   * <p>模型白名单开关</p><p>枚举值：</p><ul><li>ON： 打开，只有允许调用ModelWhitelist中列出的模型</li><li>OFF： 关闭，允许调用所有模型</li></ul>
+   */
+  ModelWhitelistSwitch: string
+  /**
+   * <p>IP白名单开关</p><p>枚举值：</p><ul><li>ON： 打开，只允许IpWhitelist中列出的IP段进行调用</li><li>OFF： 关闭，允许所有IP进行调用</li></ul>
+   */
+  IpWhitelistSwitch: string
+  /**
+   * <p>模型白名单列表</p>
+   */
+  ModelWhitelist?: Array<AigcWhitelistModel>
+  /**
+   * <p>IP白名单的CIDR列表</p>
+   */
+  IpWhitelist?: Array<string>
 }
 
 /**
@@ -20196,21 +20335,11 @@ export interface DeleteRoundPlayResponse {
  */
 export interface StatDataItem {
   /**
-   * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
-<li>表示小时级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日0点到1点的统计数据。</li>
-<li>表示天级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日的统计数据。</li>
+   * <p>数据所在时间区间的开始时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。</p><li>表示小时级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日0点到1点的统计数据。</li><li>表示天级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日的统计数据。</li>
    */
   Time?: string
   /**
-   * 数据大小。
-<li>存储空间的数据，单位是字节。</li>
-<li>转码时长的数据，单位是秒。</li>
-<li>流量数据，单位是字节。</li>
-<li>带宽数据，单位是比特每秒。</li>
-<li>直播剪辑数据，单位是秒。</li>
-<li>轮播数据，单位是秒。</li>
-<li>子应用数量数据，单位是个。</li>
-<li>日志服务用量数据，单位是条。</li>
+   * <p>数据大小。</p><li>存储空间的数据，单位是字节。</li><li>转码时长的数据，单位是秒。</li><li>流量数据，单位是字节。</li><li>带宽数据，单位是比特每秒。</li><li>直播剪辑数据，单位是秒。</li><li>轮播数据，单位是秒。</li><li>子应用数量数据，单位是个。</li><li>日志服务用量数据，单位是条。</li>
    */
   Value?: number
 }
@@ -21865,6 +21994,20 @@ export interface MediaCastEvent {
 <li>Idle ：空闲。</li>
    */
   Status?: string
+}
+
+/**
+ * DescribeAigcWhitelist请求参数结构体
+ */
+export interface DescribeAigcWhitelistRequest {
+  /**
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
+   */
+  SubAppId: number
+  /**
+   * <p>AIGC任务类型</p><p>枚举值：</p><ul><li>Image： AIGC 生图任务</li><li>Video： AIGC 生视频任务</li></ul>
+   */
+  AigcType: string
 }
 
 /**
@@ -26575,76 +26718,21 @@ export interface CreateAigcApiTokenResponse {
 }
 
 /**
- * 视频轨的视频片段信息。
+ * DescribeReviewTemplates返回参数结构体
  */
-export interface VideoTrackItem {
+export interface DescribeReviewTemplatesResponse {
   /**
-   * 视频片段的媒体素材来源，可以是：
-<li>点播的媒体文件 ID；</li>
-<li>其他媒体文件的下载 URL。</li>
-注意：当使用其他媒体文件的下载 URL 作为素材来源，且开启了访问控制（如防盗链）时，需要在 URL 携带访问控制参数（如防盗链签名）。
+   * 符合过滤条件的记录总数。
    */
-  SourceMedia: string
+  TotalCount?: number
   /**
-   * 视频片段取自素材文件的起始时间，单位为秒。默认为0。
+   * 审核模板详情列表。
    */
-  SourceMediaStartTime?: number
+  ReviewTemplateSet?: Array<ReviewTemplate>
   /**
-   * 视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Duration?: number
-  /**
-   * 视频片段目标时长，单位为秒。
-<li>当 TargetDuration 不填或填0时，表示目标时长和 Duration 一致；</li>
-<li>当 TargetDuration 取大于0的值时，将对视频片段做快进或慢放等处理，使得输出片段的时长等于 TargetDuration。</li>
-   */
-  TargetDuration?: number
-  /**
-   * 视频原点位置，取值有：
-<li>Center：坐标原点为中心位置，如画布中心。</li>
-默认值 ：Center。
-   */
-  CoordinateOrigin?: string
-  /**
-   * 视频片段原点距离画布原点的水平位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布口宽度的 10%。</li>
-<li>当字符串以 px 结尾，表示视频片段 XPos 单位为像素，如 100px 表示 XPos 为100像素。</li>
-默认值：0px。
-   */
-  XPos?: string
-  /**
-   * 视频片段原点距离画布原点的垂直位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 YPos 为画布高度指定百分比的位置，如 10% 表示 YPos 为画布高度的 10%。</li>
-<li>当字符串以 px 结尾，表示视频片段 YPos 单位为像素，如 100px 表示 YPos 为100像素。</li>
-默认值：0px。
-   */
-  YPos?: string
-  /**
-   * 视频片段的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
-<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
-<li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
-   */
-  Width?: string
-  /**
-   * 视频片段的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
-</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
-<li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
-   */
-  Height?: string
-  /**
-   * 对音频进行操作，如静音等。
-   */
-  AudioOperations?: Array<AudioTransform>
-  /**
-   * 对图像进行的操作，如图像旋转等。
-   */
-  ImageOperations?: Array<ImageTransform>
+  RequestId?: string
 }
 
 /**

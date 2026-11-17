@@ -998,6 +998,16 @@ it("iotexplorer.v20190423.DeletePrivateCA", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeDeviceCloudStoragePackages", async function () {
+    try {
+       const data = await client.DescribeDeviceCloudStoragePackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeFirmwareTask", async function () {
     try {
        const data = await client.DescribeFirmwareTask({})

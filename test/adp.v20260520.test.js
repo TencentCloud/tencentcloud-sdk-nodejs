@@ -338,6 +338,16 @@ it("adp.v20260520.SaveWorkflowToolNodeOutput", async function () {
     }
 })
 
+it("adp.v20260520.ModifyMessageRecordFeedback", async function () {
+    try {
+       const data = await client.ModifyMessageRecordFeedback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeAgentSummaryList", async function () {
     try {
        const data = await client.DescribeAgentSummaryList({})

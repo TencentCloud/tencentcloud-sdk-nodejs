@@ -26,6 +26,48 @@ export interface DeleteSessionSpaceResponse {
 }
 
 /**
+ * 已购买GPU资源详细信息
+ */
+export interface GPUResource {
+  /**
+   * <p>GPU 资源 ID，与沙箱 InstanceId、底层 VM ID 不同。</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>所属 GPU 资源组 ID。</p>
+   */
+  ResourceGroupId?: string
+  /**
+   * <p>GPU资源状态，大小写敏感：Delivering（准备中）、Active（已生效）、Isolated（已隔离）、Destroying（释放中）。不返回 Destroyed 和补偿完成的 Failed。</p>
+   */
+  State?: string
+  /**
+   * <p>占用状态，大小写敏感：Idle（可领取）、Allocating（领取中）、InUse（使用中）、Returning（归还中）、Unavailable（暂不可用）。不能根据 InstanceId 是否存在判断是否空闲。</p>
+   */
+  AllocationState?: string
+  /**
+   * <p>已绑定的最终 AGS 沙箱实例 ID；尚未绑定或未占用时可能不返回。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>生效时间，未生效时可能不返回。</p>
+   */
+  ActiveAt?: string
+  /**
+   * <p>到期时间，未生效时可能不返回。</p>
+   */
+  ExpireAt?: string
+  /**
+   * <p>续费标记：0 不自动续费，1 自动续费，2 不再续费。</p>
+   */
+  RenewFlag?: number
+  /**
+   * <p>安全的状态原因标识；空串表示无额外原因，PhysicalUnavailable 表示物理状态不可用，BindingPending 表示绑定身份尚待确认。未知值应作状态确认中处理。</p>
+   */
+  StatusReason?: string
+}
+
+/**
  * Deployment 对 Sandbox Instance 的亲和配置。
  */
 export interface AffinityConfiguration {
@@ -102,6 +144,28 @@ export interface DescribeRegistryRecordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源状态计数；四项之和为组内 TotalCount，不含已销毁和补偿完成的失败资源。
+ */
+export interface GPUResourceStateCount {
+  /**
+   * <p>准备中的资源数量，单位台。</p>
+   */
+  Delivering?: number
+  /**
+   * <p>已生效的资源数量，单位台；不等于当前可领取数量。</p>
+   */
+  Active?: number
+  /**
+   * <p>已隔离的资源数量，单位台。</p>
+   */
+  Isolated?: number
+  /**
+   * <p>正在释放的资源数量，单位台。</p>
+   */
+  Destroying?: number
 }
 
 /**
@@ -188,6 +252,10 @@ export interface QuotaResourceInfo {
    * <p>内存配额或当前用量</p><p>单位：GiB</p>
    */
   MemoryGiB?: number
+  /**
+   * <p>最大镜像预热并发处理数量</p><p>单位：个</p>
+   */
+  PreCacheImageConcurrency?: number
 }
 
 /**
@@ -259,6 +327,36 @@ export interface HarnessVersionReference {
 }
 
 /**
+ * 已购买 GPU 资源组的固定规格及展示元数据。
+ */
+export interface GPUResourceGroupSpec {
+  /**
+   * <p>GPU 类型标识，例如 5090d。</p>
+   */
+  GPUType?: string
+  /**
+   * <p>GPU 类型展示名称；为空时使用 GPUType 展示。</p>
+   */
+  GPUTypeAlias?: string
+  /**
+   * <p>单台实例全部 GPU 的总显存，单位 GiB；不需要再乘 GPUNum。0 表示展示元数据未维护。</p>
+   */
+  GPUMemoryGiB?: number
+  /**
+   * <p>单台实例 CPU 核数。</p>
+   */
+  CPU?: number
+  /**
+   * <p>单台实例主机内存，单位 GiB；不是 GPU 显存。</p>
+   */
+  Memory?: number
+  /**
+   * <p>单台实例的 GPU 卡数。</p>
+   */
+  GPUNum?: number
+}
+
+/**
  * Registry Record 对象。Record 只保存元数据；协议描述符与内容状态请通过 Version 相关接口获取。
  */
 export interface CloudRecord {
@@ -293,21 +391,6 @@ export interface CloudRecord {
    */
   LifecycleStatus: string
   /**
-   * <p>所属租户 AppId。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppId: number
-  /**
-   * <p>创建者主账号 UIN。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreatorUin: string
-  /**
-   * <p>创建者子账号 UIN；主账号直接创建时为空。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreatorSubAccountUin: string
-  /**
    * <p>创建时间，ISO 8601 UTC。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -318,12 +401,27 @@ export interface CloudRecord {
    */
   UpdateTime: string
   /**
-   * <p>Record 下未删除 Version 数量。</p>
+   * <p>所属租户 AppId。</p><p>普通模式返回，MARKETPLACE 模式不返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * <p>创建者主账号 UIN。</p><p>普通模式返回，MARKETPLACE 模式不返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorUin?: string
+  /**
+   * <p>创建者子账号 UIN；主账号直接创建时为空。</p><p>普通模式返回，MARKETPLACE 模式不返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorSubAccountUin?: string
+  /**
+   * <p>Record 下未删除 Version 数量。</p><p>MARKETPLACE 模式仅统计市场可读版本。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionCount?: number
   /**
-   * <p>Record 下所有 Label Name（含未绑定 Label），包括系统 Label（stable / latest）和自定义 Label。仅名称，不含 VersionId、更新时间或操作者。</p>
+   * <p>Record 下所有 Label Name（含未绑定 Label），包括系统 Label（stable / latest）和自定义 Label。仅名称，不含 VersionId、更新时间或操作者。</p><p>MARKETPLACE 模式仅统计市场可读版本。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelSet?: Array<string>
@@ -410,7 +508,7 @@ export interface DNSConfig {
  */
 export interface DescribeRegistryRecordListRequest {
   /**
-   * <p>父 Registry ID。</p>
+   * <p>RegistryId 必填。大写常量 MARKETPLACE 表示服务端主 YAML marketplace.registry_ids 配置的工具市场；真实 reg-xxx 表示具体 Registry。省略、空字符串、null 或其他大小写均拒绝。市场读取要求已认证身份，只返回配置来源内未删除、已审批的可读版本，文件还须 READY 和有效制品；不回退私有目录。</p>
    */
   RegistryId: string
   /**
@@ -613,6 +711,16 @@ export interface AcquireSandboxInstanceTokenRequest {
    * <p>沙箱实例ID，生成的访问Token将仅可用于访问此沙箱实例</p>
    */
   InstanceId: string
+}
+
+/**
+ * ModifyGPUResourceGroup返回参数结构体
+ */
+export interface ModifyGPUResourceGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1250,6 +1358,24 @@ export interface CfsStorageSource {
 }
 
 /**
+ * DescribeGPUResourceSpecs返回参数结构体
+ */
+export interface DescribeGPUResourceSpecsResponse {
+  /**
+   * <p>可售规格与额度列表；无可售规格时为 []。</p>
+   */
+  GPUResourceSpecSet?: Array<GPUResourceSpec>
+  /**
+   * <p>筛选后、分页前的总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 对 VolumeTemplate 的引用
  */
 export interface VolumeTemplateRef {
@@ -1316,50 +1442,33 @@ export interface DescribeSandboxToolListResponse {
 }
 
 /**
- * 会话信息
+ * DescribeGPUResourceSpecs请求参数结构体
  */
-export interface SessionInfo {
+export interface DescribeGPUResourceSpecsRequest {
   /**
-   * <p>会话 ID。</p>
+   * <p>GPU 类型标识，例如 5090d；指定时必须同时提供 CPU、Memory、GPUNum。</p>
    */
-  SessionId?: string
+  GPUType?: string
   /**
-   * <p>会话所属空间 ID。</p>
+   * <p>CPU 核数，必须为正数；与 GPUType、Memory、GPUNum 同时提供。</p>
    */
-  SpaceId?: string
+  CPU?: number
   /**
-   * <p>Session 快照状态</p>
+   * <p>主机内存 GiB，必须为正数；与 GPUType、CPU、GPUNum 同时提供。</p>
    */
-  State?: SessionState
+  Memory?: number
   /**
-   * <p>会话元数据，以键值对数组形式表示。每个元素包含 Metadata 名称和对应值，最多支持 64 项。</p>
+   * <p>单台 GPU 卡数，必须为正整数；与 GPUType、CPU、Memory 同时提供。</p>
    */
-  Metadata?: Array<MetadataVar>
+  GPUNum?: number
   /**
-   * <p>Agent ID。</p>
-   * @deprecated
+   * <p>分页偏移量，默认为 0，必须大于等于 0。</p>
    */
-  AgentId?: string
+  Offset?: number
   /**
-   * <p>用户 ID。</p>
+   * <p>每页条数，省略或传 0 时取 100；非零取值范围 1–500。</p>
    */
-  UserId?: string
-  /**
-   * <p>会话标题。</p>
-   */
-  Title?: string
-  /**
-   * <p>事件数量。</p>
-   */
-  EventCount?: number
-  /**
-   * <p>创建时间。</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>更新时间。</p>
-   */
-  UpdateTime?: string
+  Limit?: number
 }
 
 /**
@@ -1370,6 +1479,24 @@ export interface CreateSandboxSnapshotResponse {
    * <p>沙箱快照</p>
    */
   Snapshot?: SandboxSnapshot
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGPUResourceGroups返回参数结构体
+ */
+export interface DescribeGPUResourceGroupsResponse {
+  /**
+   * 匹配的资源组列表；无匹配时为 []。
+   */
+  ResourceGroups?: Array<GPUResourceGroup>
+  /**
+   * 匹配的资源组总数，分页前计算。
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1433,7 +1560,7 @@ export interface InlineDataInfo {
  */
 export interface DescribeRegistryRecordRequest {
   /**
-   * <p>父 Registry ID。</p>
+   * <p>RegistryId 必填。大写常量 MARKETPLACE 表示服务端主 YAML marketplace.registry_ids 配置的工具市场；真实 reg-xxx 表示具体 Registry。省略、空字符串、null 或其他大小写均拒绝。市场读取要求已认证身份，只返回配置来源内未删除、已审批的可读版本，文件还须 READY 和有效制品；不回退私有目录。</p>
    */
   RegistryId: string
   /**
@@ -1674,17 +1801,17 @@ export interface CreateRegistryRecordResponse {
    */
   Version?: CloudRecordVersion
   /**
-   * <p>SkillSource.Type=TAR_PACKAGE 时返回：TAR 包上传预签名 URL。</p>
+   * <p>文件上传预签名 URL。使用文件上传方式创建 Skill 或 Plugin 版本时返回；Plugin 文件使用 application/octet-stream 上传。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UploadURL?: string
   /**
-   * <p>SkillSource.Type=TAR_PACKAGE 时返回：UploadURL 过期时间，ISO 8601 UTC。</p>
+   * <p>文件上传链接的过期时间，使用文件上传方式创建 Skill 或 Plugin 版本时返回。</p><p>参数格式：ISO 8601 UTC，例如 2026-10-21T15:30:08Z。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
-   * <p>SkillSource.Type=TAR_PACKAGE 时返回：Version 内容当前状态（UPLOADING 等）。</p>
+   * <p>文件版本的内容状态，使用文件上传方式创建 Skill 或 Plugin 版本时返回。创建上传会话后通常为 UPLOADING；文件处理完成后为 READY，失败为 FAILED。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentStatus?: string
@@ -1751,21 +1878,50 @@ export interface DescribePreCacheImageListResponse {
 }
 
 /**
- * UpdateSandboxInstance请求参数结构体
+ * 会话信息
  */
-export interface UpdateSandboxInstanceRequest {
+export interface SessionInfo {
   /**
-   * <p>沙箱实例ID</p>
+   * <p>会话 ID。</p>
    */
-  InstanceId: string
+  SessionId?: string
   /**
-   * 手动设置实例还需运行多久，如 5m、300s、1h。未传入时保持原设置；传入后从本次设置开始重新计时。仅正在运行、且未设置为永久运行的实例可修改。修改时不会缩短已获得的自动续期时间。
+   * <p>会话所属空间 ID。</p>
    */
-  Timeout?: string
+  SpaceId?: string
   /**
-   * 实例元数据。
+   * <p>Session 快照状态</p>
+   */
+  State?: SessionState
+  /**
+   * <p>会话元数据，以键值对数组形式表示。每个元素包含 Metadata 名称和对应值，最多支持 64 项。</p>
    */
   Metadata?: Array<MetadataVar>
+  /**
+   * <p>Agent ID。</p>
+   * @deprecated
+   */
+  AgentId?: string
+  /**
+   * <p>用户 ID。</p>
+   */
+  UserId?: string
+  /**
+   * <p>会话标题。</p>
+   */
+  Title?: string
+  /**
+   * <p>事件数量。</p>
+   */
+  EventCount?: number
+  /**
+   * <p>创建时间。</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间。</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -1841,29 +1997,25 @@ export interface CustomConfiguration {
 }
 
 /**
- * SyncRegistryRecord请求参数结构体
+ * GPU 资源组元数据及统计；资源组是管理集合，期限和续费标记逐台保存。
  */
-export interface SyncRegistryRecordRequest {
+export interface GPUResourceGroup {
   /**
-   * <p>父 Registry ID。</p>
+   * GPU 资源组 ID。
    */
-  RegistryId: string
+  ResourceGroupId?: string
   /**
-   * <p>Record ID。</p>
+   * 资源组名称。
    */
-  RecordId: string
+  Name?: string
   /**
-   * <p>可选。指定要同步的目标 Version；与 Label 互斥；均省略时使用 Stable。</p>
+   * 资源组固定规格；已下架规格的已购组仍可查询。
    */
-  VersionId?: string
+  Spec?: GPUResourceGroupSpec
   /**
-   * <p>可选。指定要同步的目标 Label；与 VersionId 互斥；均省略时使用 Stable。Label 在请求开始时只解析一次。</p>
+   * 当前资源统计。
    */
-  Label?: string
-  /**
-   * <p>可选，最大 4096 字符。若同步创建新 Version，将写入新 Version 的 ChangeLog；省略时保存为空。</p>
-   */
-  ChangeLog?: string
+  Statistics?: GPUResourceGroupStatistics
 }
 
 /**
@@ -1875,6 +2027,20 @@ export interface LogSources {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Files?: Array<string>
+}
+
+/**
+ * ModifyGPUResourceGroup请求参数结构体
+ */
+export interface ModifyGPUResourceGroupRequest {
+  /**
+   * GPU 资源组 ID，必填、非空，最多 64 字节。
+   */
+  ResourceGroupId: string
+  /**
+   * 新的资源组名称；去除首尾空白后不能为空，最多 128 字节，UTF-8 中文通常占 3 字节。
+   */
+  Name: string
 }
 
 /**
@@ -1901,6 +2067,24 @@ export interface DeleteRegistryResponse {
  * DescribeAPIKeyList请求参数结构体
  */
 export type DescribeAPIKeyListRequest = null
+
+/**
+ * UpdateSandboxInstance请求参数结构体
+ */
+export interface UpdateSandboxInstanceRequest {
+  /**
+   * <p>沙箱实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * 手动设置实例还需运行多久，如 5m、300s、1h。未传入时保持原设置；传入后从本次设置开始重新计时。仅正在运行、且未设置为永久运行的实例可修改。修改时不会缩短已获得的自动续期时间。
+   */
+  Timeout?: string
+  /**
+   * 实例元数据。
+   */
+  Metadata?: Array<MetadataVar>
+}
 
 /**
  * DescribeSandboxInstanceList返回参数结构体
@@ -2020,6 +2204,36 @@ export interface CreateSessionSpaceResponse {
 }
 
 /**
+ * DescribeGPUResources请求参数结构体
+ */
+export interface DescribeGPUResourcesRequest {
+  /**
+   * <p>按资源组 ID 过滤，可省略，最多 64 字节。</p>
+   */
+  ResourceGroupId?: string
+  /**
+   * <p>按GPU资源 ID 过滤，最多 500 个，每个为非空字符串且最多 64 字节；值之间为 OR，与其他条件为 AND。</p>
+   */
+  ResourceIds?: Array<string>
+  /**
+   * <p>按GPU状态过滤，可省略。大小写敏感：Delivering、Active、Isolated、Destroying。</p>
+   */
+  State?: string
+  /**
+   * <p>按占用状态过滤，可省略。大小写敏感：Idle、Allocating、InUse、Returning、Unavailable。</p>
+   */
+  AllocationState?: string
+  /**
+   * <p>分页偏移量，默认为 0，必须大于等于 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页条数，省略或传 0 时取 100；非零取值范围 1–500。</p>
+   */
+  Limit?: number
+}
+
+/**
  * 沙箱工具日志推送CLS相关配置
  */
 export interface CLSConfig {
@@ -2041,6 +2255,32 @@ export interface UpdateRegistryRequest {
    * <p>新的描述；必填；最长 4096。</p>
    */
   Description: string
+}
+
+/**
+ * SyncRegistryRecord请求参数结构体
+ */
+export interface SyncRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>可选。指定要同步的目标 Version；与 Label 互斥；均省略时使用 Stable。</p>
+   */
+  VersionId?: string
+  /**
+   * <p>可选。指定要同步的目标 Label；与 VersionId 互斥；均省略时使用 Stable。Label 在请求开始时只解析一次。</p>
+   */
+  Label?: string
+  /**
+   * <p>可选，最大 4096 字符。若同步创建新 Version，将写入新 Version 的 ChangeLog；省略时保存为空。</p>
+   */
+  ChangeLog?: string
 }
 
 /**
@@ -2301,6 +2541,18 @@ export interface UpdateRegistryRecordRequest {
    * <p>Record 更新模式：Label 变更列表，最多 32 条，同一次请求中 Label Name 不可重复。</p>
    */
   LabelMutations?: Array<CloudRecordLabelMutation>
+  /**
+   * <p>Skill 或 Plugin 后续版本的文件来源。PLUGIN 可使用 FILE 上传新文件，或使用 VERSION 复用同一 Record 的 READY 制品；Skill 仅通过 VERSION 复用现有文件。与其他内容来源互斥。</p><p>VERSION 只提交 Type、SourceVersionId；Metadata 和 SupportedHarnessVersions 由本次请求单独声明，不继承来源版本。</p>
+   */
+  FileSource?: CloudFileSourceInput
+  /**
+   * <p>资产版本支持的 Harness 引擎与具体版本列表。每个元素同时包含 HarnessEngine 和 HarnessEngineVersion，取值原样使用 DescribeHarnessEngineList 返回的选项。</p><p>入参限制：最多 128 个元素；两个字段均必填，长度 1～128，区分大小写，不允许空白、通配符或版本范围。按完整配对去重；不接受字符串数组或 null。</p><p>省略或空数组表示未声明兼容性，不表示兼容全部。仅随新 Version 写入，后续修改需创建新 Version。筛选时 supported_harness_engine 与 supported_harness_version 必须同时传入，并在同一元素中精确匹配。</p>
+   */
+  SupportedHarnessVersions?: Array<HarnessVersionReference>
+  /**
+   * <p>版本元数据的 Name/Value 对象数组。</p><p>参数格式：每项仅包含必填的 Name、Value 两个字符串字段。Name 非空、小写且数组内唯一，不自动转换；重复 Name 即使 Value 相同也返回 InvalidParameter。Value 允许空字符串，保留大小写；不接受嵌套对象、数组或非字符串值。</p><p>默认值：空数组 []。创建新版本时省略或 [] 均为空，不继承；null、JSON 字符串和原生对象非法。响应按 Name 升序返回，旧 SQL NULL 归一为 []。服务内部使用 map[string]string，数据库 JSON 列保存对象。publisher 表示发布者展示名称；metadata.&lt;key&gt; 按完整小写名称精确筛选，规则不变。</p>
+   */
+  Metadata?: Array<MetadataEntry>
 }
 
 /**
@@ -2426,6 +2678,28 @@ export interface DescribeDeploymentListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 组内当前资源统计。可用/占用是额外维度，不能与 StateCounts 相加。
+ */
+export interface GPUResourceGroupStatistics {
+  /**
+   * <p>组内当前资源总数，单位台；不含已销毁和补偿完成的失败资源。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>Active、无占用且物理状态当前可领取的资源数量，单位台。</p>
+   */
+  AvailableCount?: number
+  /**
+   * <p>仍被占用或绑定的资源数量，含领取中、使用中及归还未完成，单位台。</p>
+   */
+  AllocatedCount?: number
+  /**
+   * <p>资源状态计数，四项之和等于本组 TotalCount。</p>
+   */
+  StateCounts?: GPUResourceStateCount
 }
 
 /**
@@ -2653,6 +2927,24 @@ export interface PreCacheImage {
 }
 
 /**
+ * DescribeGPUResources返回参数结构体
+ */
+export interface DescribeGPUResourcesResponse {
+  /**
+   * <p>GPU 资源列表；每台一条，无匹配时为 []。</p>
+   */
+  Resources?: Array<GPUResource>
+  /**
+   * <p>筛选后、分页前的总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Session 快照状态
  */
 export interface SessionState {
@@ -2710,6 +3002,24 @@ export interface StartSandboxInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeGPUResourceGroups请求参数结构体
+ */
+export interface DescribeGPUResourceGroupsRequest {
+  /**
+   * 过滤条件，最多 10 项，Name 不可重复，每项 Values 为 1–10 个值。不同 Name 为 AND、同一 Values 为 OR。支持 resource-group-id（精确 ID）、resource-group-name（精确名称）、resource-group-name-like（普通文本子串，% 和 _ 不作为通配符）、gpu-type、gpu-num、cpu、memory。ID/GPUType 最多 64 字节，名称最多 128 字节；gpu-num 为正整数字符串，cpu/memory 为正数字符串，单位核/GiB。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页偏移量，默认为 0，必须大于等于 0。
+   */
+  Offset?: number
+  /**
+   * 每页条数，省略或传 0 时取 100；非零取值范围 1–500。
+   */
+  Limit?: number
 }
 
 /**
@@ -3537,7 +3847,7 @@ export interface CreateRegistryRecordRequest {
    */
   Name: string
   /**
-   * <p>协议描述符类型。MCP / A2A / AGUI / CUSTOM / AGENT_SKILLS。Record 创建后不可修改。</p>
+   * <p>资产类型。取值包括 MCP、A2A、AGUI、CUSTOM、AGENT_SKILLS 和 PLUGIN。Record 创建后不可修改。PLUGIN 按通用文件资产保存，由运行端解析和加载。</p>
    */
   DescriptorType: string
   /**
@@ -3564,6 +3874,18 @@ export interface CreateRegistryRecordRequest {
    * <p>DescriptorType=CUSTOM 时必填，其他类型禁止。内容必须是 JSON object 字符串；服务端解析后写入 CloudRecordVersion.Descriptors，Version 的 SourceType 固定为 MANUAL、SourceConfig 固定为空对象。</p>
    */
   CustomDescriptors?: string
+  /**
+   * <p>Plugin 通用文件来源。DescriptorType=PLUGIN 时必填，其他类型禁止。</p><p>入参限制：Create 仅支持 Type=FILE；声明 SizeBytes 为 1..54525952 字节，可选 SHA256 为 64 位小写十六进制摘要。</p><p>Registry 保存原始文件，不校验插件内容格式或语义；由运行端解析和加载。Skill 继续使用原 SkillSource。</p>
+   */
+  FileSource?: CloudFileSourceInput
+  /**
+   * <p>本版本支持的 HarnessVersionReference 对象列表；每项包含 HarnessEngine 和 HarnessEngineVersion，原样使用 DescribeHarnessEngineList 返回的选项。</p><p>入参限制：两个字段均必填，各为 1 至 128 字符的精确值，区分大小写，不含空白、通配符或版本范围；最多 128 项，按引擎与版本二元组去重。不接受旧字符串数组、null、缺少字段或额外字段。</p><p>省略或空数组表示未声明，不继承前一版本，不代表支持所有 Harness。兼容性按同一对象的引擎与版本共同判断。修改兼容声明需创建新 Version，文件资产可通过 FileSource.Type=VERSION 复用制品。</p>
+   */
+  SupportedHarnessVersions?: Array<HarnessVersionReference>
+  /**
+   * <p>版本元数据的 Name/Value 对象数组。</p><p>参数格式：每项仅包含必填的 Name、Value 两个字符串字段。Name 非空、小写且数组内唯一，不自动转换；重复 Name 即使 Value 相同也返回 InvalidParameter。Value 允许空字符串，保留大小写；不接受嵌套对象、数组或非字符串值。</p><p>默认值：空数组 []。创建新版本时省略或 [] 均为空，不继承；null、JSON 字符串和原生对象非法。响应按 Name 升序返回，旧 SQL NULL 归一为 []。服务内部使用 map[string]string，数据库 JSON 列保存对象。publisher 表示发布者展示名称；metadata.&lt;key&gt; 按完整小写名称精确筛选，规则不变。</p>
+   */
+  Metadata?: Array<MetadataEntry>
 }
 
 /**
@@ -3608,6 +3930,41 @@ export interface ModifySessionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 当前地域可售 GPU 规格与当前租户可购买额度。
+ */
+export interface GPUResourceSpec {
+  /**
+   * <p>GPU 类型标识，例如 5090d。</p>
+   */
+  GPUType?: string
+  /**
+   * <p>GPU 类型展示名称；为空时使用 GPUType 展示。</p>
+   */
+  GPUTypeAlias?: string
+  /**
+   * <p>单台实例全部 GPU 的总显存，单位 GiB；不需要再乘 GPUNum。0 表示展示元数据未维护。</p>
+   */
+  GPUMemoryGiB?: number
+  /**
+   * <p>单台实例 CPU 核数。</p>
+   */
+  CPU?: number
+  /**
+   * <p>单台实例主机内存，单位 GiB；不是 GPU 显存。</p>
+   */
+  Memory?: number
+  /**
+   * <p>单台实例的 GPU 卡数。</p>
+   */
+  GPUNum?: number
+  /**
+   * <p>当前可购买数量，单位台，不是卡数；0 表示确认无额度，null 表示额度未知。实际购买时仍会重新校验。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableCount?: number
 }
 
 /**
@@ -3974,6 +4331,16 @@ export interface LifecycleConfiguration {
 }
 
 /**
+ * DeleteGPUResourceGroup返回参数结构体
+ */
+export interface DeleteGPUResourceGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * PreviewRegistryRecord请求参数结构体
  */
 export interface PreviewRegistryRecordRequest {
@@ -4113,6 +4480,28 @@ export interface DescribeSandboxInstancesResponse {
 }
 
 /**
+ * 通用文件来源。FILE 用于 Plugin 原始文件上传，SizeBytes 必填，SHA256 可选；VERSION 仅用于 UpdateRegistryRecord 复用同一 Record 的 READY 文件版本，仅填写 SourceVersionId。与其他来源互斥，不校验插件格式或语义。
+ */
+export interface CloudFileSourceInput {
+  /**
+   * <p>通用文件来源类型，区分大小写。</p><p>枚举值：</p><ul><li>FILE： 创建 Plugin 文件版本，必须填写 SizeBytes，SHA256 可选；随后通过预签名 PUT 链接上传原始文件。</li><li>VERSION： 仅 UpdateRegistryRecord 支持，复用同一 Skill 或 Plugin Record 的 READY 文件版本，仅填写 SourceVersionId。</li></ul><p>Registry 不做 Plugin 文件内容格式或语义校验，由运行端解析加载。VERSION 不继承来源版本的 Metadata 和 SupportedHarnessVersions。</p>
+   */
+  Type: string
+  /**
+   * <p>待上传 Plugin 文件的原始字节数。FILE 时必填，VERSION 时禁止填写。</p><p>取值范围：[1, 54525952]</p><p>单位：字节</p><p>上限 52 MiB，服务端校验实际上传文件的字节数；不推断文件格式。</p>
+   */
+  SizeBytes?: number
+  /**
+   * <p>期望的文件 SHA-256 摘要。FILE 时可选，VERSION 时禁止填写。</p><p>参数格式：64 位小写十六进制字符串。</p><p>提供时服务端计算实际文件摘要并比对；省略时仍计算摘要并在 READY 版本的 ContentSHA256 中返回。</p>
+   */
+  SHA256?: string
+  /**
+   * <p>用于复用文件内容的来源 Version ID。</p><p>参数格式：rv- 前缀的 Version ID。</p><p>入参限制：VERSION 时必填，FILE 时禁止填写。只能在 UpdateRegistryRecord 中引用同一 Record 下未删除、内容 READY 且存在可用制品的 Skill 或 Plugin 文件版本。</p><p>只复用文件，不继承来源版本的 Metadata 和 SupportedHarnessVersions；不能跨 Record 或跨 Registry 复用。</p>
+   */
+  SourceVersionId?: string
+}
+
+/**
  * CreateRegistry请求参数结构体
  */
 export interface CreateRegistryRequest {
@@ -4132,6 +4521,16 @@ export interface CreateRegistryRequest {
    * <p>创建时绑定的腾讯云自定义标签；Key 不可重复；最多 10 个。</p>
    */
   Tags?: Array<CloudTag>
+}
+
+/**
+ * DeleteGPUResourceGroup请求参数结构体
+ */
+export interface DeleteGPUResourceGroupRequest {
+  /**
+   * 待删除的 GPU 资源组 ID，必填、非空，最多 64 字节。资源组必须属于当前租户，且已清空有效 GPU 实例、占用绑定和关联沙箱工具。
+   */
+  ResourceGroupId: string
 }
 
 /**
@@ -4160,6 +4559,10 @@ export interface CreatePreCacheImageTaskRequest {
    * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>、<code>custom</code></p><p>枚举值：</p><ul><li>enterprise： tcr 企业容器镜像服务</li><li>personal： ccr 个人容器镜像服务</li></ul>
    */
   ImageRegistryType: string
+  /**
+   * <p>镜像预热类型</p><p>枚举值：</p><ul><li>image： 镜像预热</li><li>image_volume： 镜像卷预热</li></ul><p>默认值：image</p>
+   */
+  PreCacheType?: string
 }
 
 /**

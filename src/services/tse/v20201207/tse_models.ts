@@ -591,7 +591,7 @@ export interface DescribeCloudNativeAPIGatewayNodesResponse {
  */
 export interface CreateCloudNativeAPIGatewayResponse {
   /**
-   * 创建云原生API网关实例响应结果。
+   * <p>创建云原生API网关实例响应结果。</p>
    */
   Result?: CreateCloudNativeAPIGatewayResult
   /**
@@ -1795,6 +1795,10 @@ export interface DescribeCloudNativeAPIGatewayResult {
    * <p>强制跳转HTTPS开关</p>
    */
   ForceHTTPSRedirect?: boolean
+  /**
+   * <p>内网IP地址列表</p>
+   */
+  PrivateIpAddresses?: Array<string>
 }
 
 /**
@@ -2076,39 +2080,43 @@ export interface DescribeCloudNativeAPIGatewayConfigRequest {
  */
 export interface KongTarget {
   /**
-   * Host
+   * <p>Host</p>
    */
   Host: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   Port: number
   /**
-   * 权重
+   * <p>权重</p>
    */
   Weight: number
   /**
-   * 健康状态
-   */
-  Health?: string
-  /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * Target的来源
-   */
-  Source?: string
-  /**
-   * CVM实例ID
+   * <p>CVM实例ID</p>
    */
   CvmInstanceId?: string
   /**
-   * CVM实例名称
+   * <p>CVM实例名称</p>
    */
   CvmInstanceName?: string
   /**
-   * target标签
+   * <p>健康状态</p>
+   */
+  Health?: string
+  /**
+   * <p>Target ID</p>
+   */
+  Id?: string
+  /**
+   * <p>Target的来源</p>
+   */
+  Source?: string
+  /**
+   * <p>target标签</p>
    */
   Tags?: Array<string>
 }
@@ -2750,6 +2758,10 @@ export interface CloudNativeAPIGatewayNode {
    * 是否默认权重
    */
   IsDefaultWeight?: boolean
+  /**
+   * 节点类型
+   */
+  NodeType?: string
 }
 
 /**
@@ -4052,6 +4064,24 @@ export interface DescribeSREInstanceAccessAddressRequest {
    * 部署地域
    */
   EngineRegion?: string
+}
+
+/**
+ * 用户业务标签的 KV 表示（路由/服务标签分组）
+ */
+export interface KongUserTagKV {
+  /**
+   * <p>标签 ID</p>
+   */
+  TagId?: number
+  /**
+   * <p>标签 Key</p>
+   */
+  TagKey?: string
+  /**
+   * <p>标签 Value</p>
+   */
+  TagValue?: string
 }
 
 /**
@@ -5419,27 +5449,33 @@ export interface ModifyGovernanceAliasRequest {
  */
 export interface ModifyNetworkAccessStrategyRequest {
   /**
-   * 云原生API网关实例ID。
+   * <p>云原生API网关实例ID。</p>
    */
   GatewayId: string
   /**
-   * 分组id
+   * <p>分组id</p>
    */
   GroupId: string
   /**
-   * 网络类型： 
-- Open 公网
-- Internal 内网	（暂不支持）
+   * <p>网络类型： </p><ul><li>Open 公网</li><li>Internal 内网    （暂不支持）</li></ul>
    */
   NetworkType: string
   /**
-   * ip地址
+   * <p>ip地址</p>
    */
   Vip: string
   /**
-   * 访问控制策略
+   * <p>访问控制策略</p>
    */
   AccessControl: NetworkAccessControl
+  /**
+   * <p>GlobalConfig / Custom；不传默认 Custom</p>
+   */
+  AccessControlSource?: string
+  /**
+   * <p>全局配置ID</p>
+   */
+  GlobalConfigId?: string
 }
 
 /**
@@ -5796,6 +5832,19 @@ export interface KongRoutePreview {
    * <p>路由来源</p>
    */
   RouteSource?: string
+  /**
+   * <p>用户绑定的业务标签（路由/服务标签分组能力，不含 Kong 内部 tag）。未绑定时字段为空数组或不返回。关联需求：路由/服务标签分组管理</p>
+   */
+  Tags?: Array<KongUserTagKV>
+  /**
+   * <p>超时时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timeout?: number
+  /**
+   * <p>路由超时配置的来源。</p>
+   */
+  TimeoutSource?: string
 }
 
 /**
@@ -7813,72 +7862,69 @@ export interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
  */
 export interface CreateCloudNativeAPIGatewayRequest {
   /**
-   * 云原生API网关名字, 最多支持60个字符。
+   * <p>云原生API网关名字, 最多支持60个字符。</p>
    */
   Name: string
   /**
-   * 云原生API网关类型, 目前只支持kong。
+   * <p>云原生API网关类型, 目前只支持kong。</p>
    */
   Type: string
   /**
-   * 云原生API网关版本。参考值：
-- 2.4.1
-- 2.5.1
+   * <p>云原生API网关版本。参考值：</p><ul><li>2.4.1</li><li>2.5.1</li></ul>
    */
   GatewayVersion: string
   /**
-   * 云原生API网关节点配置。
+   * <p>云原生API网关节点配置。</p>
    */
   NodeConfig: CloudNativeAPIGatewayNodeConfig
   /**
-   * 云原生API网关vpc配置。
+   * <p>云原生API网关vpc配置。</p>
    */
   VpcConfig: CloudNativeAPIGatewayVpcConfig
   /**
-   * 云原生API网关描述信息, 最多支持120个字符。
+   * <p>云原生API网关描述信息, 最多支持120个字符。</p>
    */
   Description?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<InstanceTagInfo>
   /**
-   * 是否开启 CLS 日志。默认值：fasle
+   * <p>是否开启 CLS 日志。默认值：fasle</p>
    */
   EnableCls?: boolean
   /**
-   * 产品版本。参考值：
-- TRIAL：开发版
-- STANDARD：标准版 （默认值）
-- PROFESSIONAL：专业版
+   * <p>产品版本</p><p>枚举值：</p><ul><li>STANDARD： 标准版</li><li>PROFESSIONAL： 专业版</li></ul>
    */
   FeatureVersion?: string
   /**
-   * 公网出流量带宽，[1,2048]Mbps
+   * <p>公网出流量带宽，[1,2048]Mbps</p>
    */
   InternetMaxBandwidthOut?: number
   /**
-   * 实例实际的地域信息，默认值：ap-guangzhou
+   * <p>实例实际的地域信息，默认值：ap-guangzhou</p>
    */
   EngineRegion?: string
   /**
-   * ingress Class名称
+   * <p>ingress Class名称</p>
    */
   IngressClassName?: string
   /**
-   * 付费类型。参考值：
-0：后付费（默认值）
-1：预付费（接口暂不支持创建预付费实例）
+   * <p>付费类型。参考值：<br>0：后付费（默认值）<br>1：预付费（接口暂不支持创建预付费实例）</p>
    */
   TradeType?: number
   /**
-   * 公网相关配置
+   * <p>公网相关配置</p>
    */
   InternetConfig?: InternetConfig
   /**
-   * 关联的prometheus ID
+   * <p>关联的prometheus ID</p>
    */
   PromId?: string
+  /**
+   * <p>是否开启HTTP 80 端口的访问</p>
+   */
+  EnableHttpPort?: boolean
 }
 
 /**
@@ -8942,6 +8988,20 @@ export interface TSEGatewaySelector {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Services?: Array<string>
+}
+
+/**
+ * 按标签 K:V 过滤条件（关联需求：路由/服务标签分组管理）
+ */
+export interface TagKVFilter {
+  /**
+   * <p>标签 Key，长度 1~64</p>
+   */
+  TagKey: string
+  /**
+   * <p>标签 Value，长度 1~128</p>
+   */
+  TagValue: string
 }
 
 /**
@@ -10054,6 +10114,14 @@ export interface DescribeCloudNativeAPIGatewayRoutesRequest {
    * <p>排序方式</p><p>枚举值：</p><ul><li>DESC： 降序</li><li>ASC： 升序</li></ul>
    */
   OrderType?: string
+  /**
+   * <p>按标签 ID 过滤路由（AND 语义，需同时命中所有传入的 tag），最多 10 个。关联需求：路由/服务标签分组管理</p>
+   */
+  TagIds?: Array<number | bigint>
+  /**
+   * <p>按标签 K:V 过滤路由（AND 语义，前端下拉直传场景），最多 10 个。与 TagIds 同时传时取交集</p>
+   */
+  TagFilters?: Array<TagKVFilter>
 }
 
 /**
@@ -11019,6 +11087,10 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
    * <p>querysring参数</p>
    */
   QueryStringParameters?: Array<KVMapping>
+  /**
+   * <p>路由级超时时间，单位ms</p>
+   */
+  Timeout?: number
 }
 
 /**
@@ -13737,92 +13809,78 @@ export interface DescribePublicAddressConfigResult {
  */
 export interface CreateCloudNativeAPIGatewayRouteRequest {
   /**
-   * 网关ID
+   * <p>网关ID</p>
    */
   GatewayId: string
   /**
-   * 所属服务的ID
+   * <p>所属服务的ID</p>
    */
   ServiceID: string
   /**
-   * 路由的名字，实例级别唯一，可以不提供
+   * <p>路由的名字，实例级别唯一，可以不提供</p>
    */
   RouteName?: string
   /**
-   * 路由的方法，其中方法可选值：
-- GET
-- POST
-- DELETE
-- PUT
-- OPTIONS
-- PATCH
-- HEAD
-- ANY
-- TRACE
-- COPY
-- MOVE
-- PROPFIND
-- PROPPATCH
-- MKCOL
-- LOCK
-- UNLOCK
+   * <p>路由的方法，其中方法可选值：</p><ul><li>GET</li><li>POST</li><li>DELETE</li><li>PUT</li><li>OPTIONS</li><li>PATCH</li><li>HEAD</li><li>ANY</li><li>TRACE</li><li>COPY</li><li>MOVE</li><li>PROPFIND</li><li>PROPPATCH</li><li>MKCOL</li><li>LOCK</li><li>UNLOCK</li></ul>
    */
   Methods?: Array<string>
   /**
-   * 路由的域名
+   * <p>路由的域名</p>
    */
   Hosts?: Array<string>
   /**
-   * 路由的路径
+   * <p>路由的路径</p>
    */
   Paths?: Array<string>
   /**
-   * 路由的协议，可选
-- https
-- http
+   * <p>路由的协议，可选</p><ul><li>https</li><li>http</li></ul>
    */
   Protocols?: Array<string>
   /**
-   * 转发到后端时是否保留Host
+   * <p>转发到后端时是否保留Host</p>
    */
   PreserveHost?: boolean
   /**
-   * https重定向状态码
+   * <p>https重定向状态码</p>
    */
   HttpsRedirectStatusCode?: number
   /**
-   * 转发到后端时是否StripPath
+   * <p>转发到后端时是否StripPath</p>
    */
   StripPath?: boolean
   /**
-   * 是否开启强制HTTPS
+   * <p>是否开启强制HTTPS</p>
    * @deprecated
    */
   ForceHttps?: boolean
   /**
-   * 四层匹配的目的端口
+   * <p>四层匹配的目的端口</p>
    */
   DestinationPorts?: Array<number | bigint>
   /**
-   * 路由的Headers
+   * <p>路由的Headers</p>
    */
   Headers?: Array<KVMapping>
   /**
-   * 是否缓存请求body，默认true
+   * <p>是否缓存请求body，默认true</p>
    */
   RequestBuffering?: boolean
   /**
-   * 是否缓存响应body，默认true
+   * <p>是否缓存响应body，默认true</p>
    */
   ResponseBuffering?: boolean
   /**
-   * 正则优先级
+   * <p>正则优先级</p>
    */
   RegexPriority?: number
   /**
-   * queryString参数
+   * <p>queryString参数</p>
    */
   QueryStringParameters?: Array<KVMapping>
+  /**
+   * <p>路由级超时时间，单位ms</p>
+   */
+  Timeout?: number
 }
 
 /**

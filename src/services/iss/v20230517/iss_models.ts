@@ -1049,6 +1049,52 @@ export interface DescribeOrganizationResponse {
 }
 
 /**
+ * 视频截图信息
+ */
+export interface VideoSnapshotInfo {
+  /**
+   * <p>图片Id</p>
+   */
+  ImageId?: string
+  /**
+   * <p>截图配置Id</p>
+   */
+  ConfigId?: string
+  /**
+   * <p>截图配置名称</p>
+   */
+  ConfigName?: string
+  /**
+   * <p>通道Id</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>通道名称</p>
+   */
+  ChannelName?: string
+  /**
+   * <p>截图类型</p><p>枚举值：</p><ul><li>1： 实时截帧</li><li>2： 低频截帧</li></ul>
+   */
+  Type?: number
+  /**
+   * <p>图片Url</p>
+   */
+  ImageUrl?: string
+  /**
+   * <p>图片Url有效期</p>
+   */
+  ImageUrlExpires?: number
+  /**
+   * <p>截图时间点</p>
+   */
+  Timestamp?: number
+  /**
+   * <p>图片大小</p><p>单位：字节</p>
+   */
+  FileSize?: number
+}
+
+/**
  * UpdateUserDevice请求参数结构体
  */
 export interface UpdateUserDeviceRequest {
@@ -2189,6 +2235,92 @@ export interface VideoSceneInfo {
 }
 
 /**
+ * 查询复杂任务详情返回结果
+ */
+export interface TaskData {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
+   */
+  Status?: number
+  /**
+   * 失败原因
+   */
+  FailReason?: string
+  /**
+   * 进度（0-1）
+   */
+  Progress?: number
+  /**
+   * 任务操作类型，批量任务类型以Batch开头
+   */
+  Action?: string
+  /**
+   * 操作类型中文描述
+   */
+  ActionZhDesc?: string
+  /**
+   * 任务类型 1.简单 2.复杂 3.子任务
+   */
+  TaskType?: number
+  /**
+   * 任务资源id（复杂任务该字段无效）
+   */
+  ResourceId?: string
+  /**
+   * 总任务数（仅复杂任务有效）
+   */
+  Total?: number
+  /**
+   * 成功任务数（仅复杂任务有效）
+   */
+  SuccessCount?: number
+  /**
+   * 失败任务数（仅复杂任务有效）
+   */
+  FailCount?: number
+  /**
+   * 运行任务数（仅复杂任务有效）
+   */
+  RunningCount?: number
+  /**
+   * 启动任务时间
+   */
+  StartedAt?: string
+  /**
+   * 创建任务时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新任务时间
+   */
+  UpdatedAt?: string
+  /**
+   * 任务运行时间，单位ms
+   */
+  Runtime?: number
+  /**
+   * 设备ID
+   */
+  DeviceId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: string
+  /**
+   *  通道名称
+   */
+  ChannelName?: string
+}
+
+/**
  * ControlDevicePreset返回参数结构体
  */
 export interface ControlDevicePresetResponse {
@@ -3208,6 +3340,20 @@ export interface DeleteTaskRequest {
 }
 
 /**
+ * ModifyVideoSnapshotConfig返回参数结构体
+ */
+export interface ModifyVideoSnapshotConfigResponse {
+  /**
+   * <p>截图配置信息</p>
+   */
+  Data?: VideoSnapshotConfigInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateUserDevice返回参数结构体
  */
 export interface UpdateUserDeviceResponse {
@@ -3740,89 +3886,41 @@ export interface VLPlanResultInfo {
 }
 
 /**
- * 查询复杂任务详情返回结果
+ * ListVideoSnapshotResult请求参数结构体
  */
-export interface TaskData {
+export interface ListVideoSnapshotResultRequest {
   /**
-   * 任务ID
+   * <p>开始时间</p><p>单位：秒</p>
    */
-  TaskId?: string
+  BeginTime: number
   /**
-   * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
+   * <p>结束时间</p><p>单位：秒</p>
    */
-  Status?: number
+  EndTime: number
   /**
-   * 失败原因
+   * <p>截图配置Id</p>
    */
-  FailReason?: string
+  ConfigId?: string
   /**
-   * 进度（0-1）
-   */
-  Progress?: number
-  /**
-   * 任务操作类型，批量任务类型以Batch开头
-   */
-  Action?: string
-  /**
-   * 操作类型中文描述
-   */
-  ActionZhDesc?: string
-  /**
-   * 任务类型 1.简单 2.复杂 3.子任务
-   */
-  TaskType?: number
-  /**
-   * 任务资源id（复杂任务该字段无效）
-   */
-  ResourceId?: string
-  /**
-   * 总任务数（仅复杂任务有效）
-   */
-  Total?: number
-  /**
-   * 成功任务数（仅复杂任务有效）
-   */
-  SuccessCount?: number
-  /**
-   * 失败任务数（仅复杂任务有效）
-   */
-  FailCount?: number
-  /**
-   * 运行任务数（仅复杂任务有效）
-   */
-  RunningCount?: number
-  /**
-   * 启动任务时间
-   */
-  StartedAt?: string
-  /**
-   * 创建任务时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新任务时间
-   */
-  UpdatedAt?: string
-  /**
-   * 任务运行时间，单位ms
-   */
-  Runtime?: number
-  /**
-   * 设备ID
-   */
-  DeviceId?: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 通道ID
+   * <p>通道Id</p>
    */
   ChannelId?: string
   /**
-   *  通道名称
+   * <p>截图类型</p><p>枚举值：</p><ul><li>1： 实时截帧</li><li>2： 低频截帧</li></ul>
    */
-  ChannelName?: string
+  Type?: number
+  /**
+   * <p>图片URL有效期，单位：秒</p><p>取值范围：[60, 86400]</p><p>默认值：600</p>
+   */
+  ImageUrlExpires?: number
+  /**
+   * <p>页码</p><p>默认值：1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数目</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -4316,17 +4414,25 @@ export interface ListRecordBackupPlanDevicesRequest {
 }
 
 /**
- * ModifyVideoSnapshotConfig返回参数结构体
+ * 截图结果列表信息
  */
-export interface ModifyVideoSnapshotConfigResponse {
+export interface ListVideoSnapshotResultData {
   /**
-   * <p>截图配置信息</p>
+   * <p>截图信息列表</p>
    */
-  Data?: VideoSnapshotConfigInfo
+  List?: Array<VideoSnapshotInfo>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>总数</p>
    */
-  RequestId?: string
+  TotalCount?: number
+  /**
+   * <p>页码</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数目</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -4597,6 +4703,20 @@ export interface BatchAssignVLPlanChannelsRequest {
 }
 
 /**
+ * UpdateRecordPlan返回参数结构体
+ */
+export interface UpdateRecordPlanResponse {
+  /**
+   * 返回结果
+   */
+  Data?: RecordPlanOptData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询录像上云计划返回数据
  */
 export interface DescribeRecordBackupPlanData {
@@ -4679,13 +4799,13 @@ export interface ChannelAttrInfo {
 }
 
 /**
- * UpdateRecordPlan返回参数结构体
+ * ListVideoSnapshotResult返回参数结构体
  */
-export interface UpdateRecordPlanResponse {
+export interface ListVideoSnapshotResultResponse {
   /**
-   * 返回结果
+   * <p>截图结果列表</p>
    */
-  Data?: RecordPlanOptData
+  Data?: ListVideoSnapshotResultData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

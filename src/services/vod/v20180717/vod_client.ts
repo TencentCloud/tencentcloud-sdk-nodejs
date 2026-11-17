@@ -56,6 +56,7 @@ import {
   AiRecognitionTaskAsrFullTextResultOutput,
   AiReviewProhibitedOcrTaskOutput,
   DescribeAigcFaceInfoRequest,
+  SetAigcWhitelistResponse,
   NoiseConfigureInfo,
   DescribeAigcFaceInfoAsyncResponse,
   ManageTaskResponse,
@@ -344,6 +345,7 @@ import {
   LiveRealTimeClipRequest,
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
+  VideoTrackItem,
   ColorEnhanceInfo,
   DeleteEnhanceMediaTemplateResponse,
   EditMediaOutputConfig,
@@ -379,7 +381,7 @@ import {
   DescribeMediaInfosResponse,
   DeleteProcedureTemplateResponse,
   ModifyAigcQuotaResponse,
-  DescribeReviewTemplatesResponse,
+  DescribeAigcWhitelistResponse,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
   VideoDepthEstimationResponse,
   MediaMiniProgramReviewInfo,
@@ -534,6 +536,7 @@ import {
   AsrWordsConfigureInfo,
   AigcAudioOutputConfig,
   AreaCLSTargetInfo,
+  AigcWhitelistModel,
   DeleteRebuildMediaTemplateResponse,
   DescribeSubAppIdsResponse,
   SimpleHlsClipRequest,
@@ -657,6 +660,7 @@ import {
   ResolutionNameInfo,
   OcrFullTextConfigureInfo,
   AiRecognitionTaskOcrWordsResultItem,
+  SetAigcWhitelistRequest,
   ParseStreamingManifestRequest,
   ReviewImageResult,
   DeleteSampleSnapshotTemplateResponse,
@@ -862,6 +866,7 @@ import {
   MediaProcessTaskResult,
   DeleteWordSamplesResponse,
   MediaCastEvent,
+  DescribeAigcWhitelistRequest,
   DescribeDefaultDistributionConfigResponse,
   DeleteProcedureTemplateRequest,
   WatermarkInput,
@@ -1040,7 +1045,7 @@ import {
   DescribeVoicesResponse,
   ConfirmEventsResponse,
   CreateAigcApiTokenResponse,
-  VideoTrackItem,
+  DescribeReviewTemplatesResponse,
   VideoDenoiseInfo,
   DescribeLicenseUsageDataRequest,
   DeleteTranscodeTemplateResponse,
@@ -1590,6 +1595,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDefaultDistributionConfigResponse) => void
   ): Promise<ModifyDefaultDistributionConfigResponse> {
     return this.request("ModifyDefaultDistributionConfig", req, cb)
+  }
+
+  /**
+   * 修改AIGC白名单设置
+   */
+  async SetAigcWhitelist(
+    req: SetAigcWhitelistRequest,
+    cb?: (error: string, rep: SetAigcWhitelistResponse) => void
+  ): Promise<SetAigcWhitelistResponse> {
+    return this.request("SetAigcWhitelist", req, cb)
   }
 
   /**
@@ -2390,6 +2405,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 对云点播的 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
+
+快速拼接或剪辑生成的视频，将产生新的 FileId 并进行固化，固化成功后新视频的文件独立于原始输入视频存在，不受原始视频删除等影响。
+
+<font color='red'>注意：</font>通过 ModifyEventConfig 接口启用接收剪辑固化事件通知，固化成功后将会收到一个 PersistenceComplete 类型的事件通知。在收到这个事件通知之前，不应该对原始输入的视频进行删除、降冷等操作，否则拼接剪辑生成的视频播放可能出现异常。
+     */
+  async FastEditMedia(
+    req: FastEditMediaRequest,
+    cb?: (error: string, rep: FastEditMediaResponse) => void
+  ): Promise<FastEditMediaResponse> {
+    return this.request("FastEditMedia", req, cb)
+  }
+
+  /**
    * 创建 AIGC 调用 API 的 Token。创建后数据同步有延时，约30秒后可查询或删除。
    */
   async CreateAigcApiToken(
@@ -3073,17 +3102,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 对云点播的 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
-
-快速拼接或剪辑生成的视频，将产生新的 FileId 并进行固化，固化成功后新视频的文件独立于原始输入视频存在，不受原始视频删除等影响。
-
-<font color='red'>注意：</font>通过 ModifyEventConfig 接口启用接收剪辑固化事件通知，固化成功后将会收到一个 PersistenceComplete 类型的事件通知。在收到这个事件通知之前，不应该对原始输入的视频进行删除、降冷等操作，否则拼接剪辑生成的视频播放可能出现异常。
-     */
-  async FastEditMedia(
-    req: FastEditMediaRequest,
-    cb?: (error: string, rep: FastEditMediaResponse) => void
-  ): Promise<FastEditMediaResponse> {
-    return this.request("FastEditMedia", req, cb)
+   * 查询AIGC白名单配置
+   */
+  async DescribeAigcWhitelist(
+    req: DescribeAigcWhitelistRequest,
+    cb?: (error: string, rep: DescribeAigcWhitelistResponse) => void
+  ): Promise<DescribeAigcWhitelistResponse> {
+    return this.request("DescribeAigcWhitelist", req, cb)
   }
 
   /**

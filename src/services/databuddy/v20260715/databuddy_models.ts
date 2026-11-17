@@ -1098,14 +1098,17 @@ export interface ListFilesRsp {
 }
 
 /**
- * 查询工作流运行详情响应。
+ * 范围分区策略
  */
-export interface GetWorkflowRunRsp {
+export interface RangePartitioning {
   /**
-   * 工作流运行信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分区字段
    */
-  WorkflowRun?: WorkflowRun
+  FieldName: string
+  /**
+   * 分区
+   */
+  Assignments: Array<RangePartition>
 }
 
 /**
@@ -2650,6 +2653,64 @@ export interface GetWorkflowTaskRunRsp {
 }
 
 /**
+ * 训练数据配置
+ */
+export interface TrainingData {
+  /**
+   * Catalog名称
+   */
+  Catalog: string
+  /**
+   * Schema名称
+   */
+  Schema: string
+  /**
+   * Table名称
+   */
+  Table: string
+  /**
+   * 目标标签列
+   */
+  TargetLabel?: Label
+  /**
+   * 忽略的列
+   */
+  DiscardedLabels?: Array<Label>
+  /**
+   * 预测列
+   */
+  PredictionLabel?: Label
+  /**
+   * 时间间隔单位
+   */
+  EvaluationInterval?: string
+  /**
+   * 时序步长
+   */
+  ForecastHorizon?: number
+  /**
+   * 结果集Catalog名称
+   */
+  StorageCatalog?: string
+  /**
+   * 结果集Schema名称
+   */
+  StorageSchema?: string
+  /**
+   * 结果集Table名称
+   */
+  StorageTable?: string
+  /**
+   * 选中的列
+   */
+  SelectedLabels?: Array<Label>
+  /**
+   * 特征查找配置
+   */
+  FeatureLookup?: Array<FeatureLookup>
+}
+
+/**
  * 任务依赖简要信息
  */
 export interface DependOnBrief {
@@ -2769,6 +2830,28 @@ export interface UpdateVolumeRsp {
    * 更新后的数据卷信息
    */
   Volume?: Volume
+}
+
+/**
+ * FeatureLookup
+ */
+export interface FeatureLookup {
+  /**
+   * 特征表全名
+   */
+  TableName?: string
+  /**
+   * 关联键
+   */
+  LookupKey?: Array<string>
+  /**
+   * 时间戳关联键
+   */
+  TimestampLookupKey?: string
+  /**
+   * 特征列名列表
+   */
+  FeatureNames?: Array<string>
 }
 
 /**
@@ -2946,13 +3029,55 @@ export interface ListPartitioning {
 }
 
 /**
- * 修改控制台用户响应
+ * CreateExperiment返回参数结构体
  */
-export interface UpdateConsoleUsersRsp {
+export interface CreateExperimentResponse {
   /**
-   * 操作是否成功
+   * <p>返回结果</p>
    */
-  Status?: boolean
+  Data?: CreateExperimentRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListWorkspaces请求参数结构体
+ */
+export interface ListWorkspacesRequest {
+  /**
+   * <p>工作空间ID精确匹配</p>
+   */
+  WorkspaceId?: string
+  /**
+   * <p>工作空间名称模糊匹配</p>
+   */
+  WorkspaceKeyword?: string
+  /**
+   * <p>工作空间状态过滤（多选）：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除</p>
+   */
+  StatusList?: Array<number | bigint>
+  /**
+   * <p>多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}]；传入单个即单字段排序，默认按创建时间降序</p>
+   */
+  OrderBys?: Array<OrderBy>
+  /**
+   * <p>页码，从1开始，默认1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小，默认10，最小10，最大100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>工作空间地域过滤（多选），如 ap-guangzhou</p>
+   */
+  WorkspaceRegion?: Array<string>
+  /**
+   * <p>创建者UIN过滤（多选）</p>
+   */
+  Creator?: Array<string>
 }
 
 /**
@@ -3127,6 +3252,16 @@ export interface NameIdentifier {
    * <p>TCLAKE Catalog取值：（注册中0，待测试1，连接成功2，连接失败3，删除中4，已删除5）<br>SETATS Catalog取值：（Creating=30, Available=31, Deleted=32, Scaling=33, Isolated=34, Failed=35，未知=0）</p>
    */
   Status?: string
+  /**
+   * 数据源连接ID（仅 CONNECTION 来源时返回）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectionId?: string
+  /**
+   * 数据源连接名称（仅CatalogSource=CONNECTION）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectionName?: string
 }
 
 /**
@@ -3339,17 +3474,14 @@ export interface UpdateWorkspaceGroupsTagsRsp {
 }
 
 /**
- * 范围分区策略
+ * 查询工作流运行详情响应。
  */
-export interface RangePartitioning {
+export interface GetWorkflowRunRsp {
   /**
-   * 分区字段
+   * 工作流运行信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FieldName: string
-  /**
-   * 分区
-   */
-  Assignments: Array<RangePartition>
+  WorkflowRun?: WorkflowRun
 }
 
 /**
@@ -4319,33 +4451,21 @@ export interface FileInfo {
 }
 
 /**
- * UpdateModel请求参数结构体
+ * 标签列信息
  */
-export interface UpdateModelRequest {
+export interface Label {
   /**
-   * 目录名称，必填
+   * 列名
    */
-  CatalogName: string
+  ColumnName?: string
   /**
-   * 模式名称，必填
+   * 缺失值填充
    */
-  SchemaName: string
+  MissingValueImputation?: string
   /**
-   * 模型名称，必填
+   * 数据格式
    */
-  ModelName: string
-  /**
-   * 调用时所在workspace唯一id，必填
-   */
-  WorkspaceId: string
-  /**
-   * 新名称，可选，为空表示不修改名称
-   */
-  NewName?: string
-  /**
-   * 新注释，可选，为空表示不修改注释
-   */
-  NewComment?: string
+  Format?: string
 }
 
 /**
@@ -4506,6 +4626,48 @@ export interface RemoveConsoleUsersRequest {
    * <p>必填，待移除的用户 UIN 列表，单次最多10个</p>
    */
   UserUins: Array<string>
+}
+
+/**
+ * CreateExperiment请求参数结构体
+ */
+export interface CreateExperimentRequest {
+  /**
+   * <p>工作空间ID（必填），可通过 ListWorkspaces 接口获取</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>实验名称（必填），同一工作空间内唯一</p>
+   */
+  Name: string
+  /**
+   * <p>实验类型（必填），取值：MACHINE_LEARNING（机器学习）/ CLASSIFICATION（分类）/ REGRESSION（回归）/ FORECASTING（时间序列预测）/ AGENT（智能体）。传入其他值将返回 InvalidParameter.ExperimentTypeInvalid</p>
+   */
+  Type: string
+  /**
+   * <p>实验描述（可选），建议长度不超过 1024 字符</p>
+   */
+  Description?: string
+  /**
+   * <p>Studio目录树文件夹节点ID，即实验所在的目录节点，可通过 ListFiles 接口获取</p>
+   */
+  StudioId?: string
+  /**
+   * <p>实验标签列表（可选），key/value 均为字符串</p>
+   */
+  Tags?: Array<ExperimentTag>
+  /**
+   * <p>AutoML配置（可选，仅 Type 为 CLASSIFICATION/REGRESSION/FORECASTING 时需要），包含评估指标、搜索空间、最大运行时间/次数/并发等</p>
+   */
+  AutoMlConf?: AutoMlConf
+  /**
+   * <p>训练数据配置（可选，仅 AutoML 类型实验需要），指定训练数据表（Catalog.Schema.Table 三段式）与目标标签列</p>
+   */
+  TrainingData?: TrainingData
+  /**
+   * <p>计算资源组ID（可选），指定实验运行所使用的计算资源，可通过 ListComputeResourceOptions 接口获取</p>
+   */
+  ResourceGroupId?: string
 }
 
 /**
@@ -5071,6 +5233,32 @@ export interface ColumnInfo {
 }
 
 /**
+ * GetVolume请求参数结构体
+ */
+export interface GetVolumeRequest {
+  /**
+   * <p>数据目录名称</p>
+   */
+  CatalogName: string
+  /**
+   * <p>schema名称</p>
+   */
+  SchemaName: string
+  /**
+   * <p>数据卷名称</p>
+   */
+  VolumeName: string
+  /**
+   * <p>调用时所在workspace唯一id</p>
+   */
+  WorkspaceId: string
+  /**
+   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   */
+  FetchOption?: FetchOption
+}
+
+/**
  * CreateWorkspaceRole返回参数结构体
  */
 export interface CreateWorkspaceRoleResponse {
@@ -5187,6 +5375,36 @@ export interface UpdateConsoleUsersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateModel请求参数结构体
+ */
+export interface UpdateModelRequest {
+  /**
+   * 目录名称，必填
+   */
+  CatalogName: string
+  /**
+   * 模式名称，必填
+   */
+  SchemaName: string
+  /**
+   * 模型名称，必填
+   */
+  ModelName: string
+  /**
+   * 调用时所在workspace唯一id，必填
+   */
+  WorkspaceId: string
+  /**
+   * 新名称，可选，为空表示不修改名称
+   */
+  NewName?: string
+  /**
+   * 新注释，可选，为空表示不修改注释
+   */
+  NewComment?: string
 }
 
 /**
@@ -5318,6 +5536,16 @@ export interface RemoveWorkspaceUsersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 修改控制台用户响应
+ */
+export interface UpdateConsoleUsersRsp {
+  /**
+   * 操作是否成功
+   */
+  Status?: boolean
 }
 
 /**
@@ -5951,6 +6179,16 @@ export interface DeleteWorkspaceRoleResponse {
 }
 
 /**
+ * 创建实验响应
+ */
+export interface CreateExperimentRsp {
+  /**
+   * 创建的实验ID
+   */
+  ExperimentId?: string
+}
+
+/**
  * ListCatalogNames返回参数结构体
  */
 export interface ListCatalogNamesResponse {
@@ -5984,6 +6222,20 @@ export interface ScheduleBizEnumBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
+}
+
+/**
+ * 实验标签
+ */
+export interface ExperimentTag {
+  /**
+   * 标签键
+   */
+  Key?: string
+  /**
+   * 标签值
+   */
+  Value?: string
 }
 
 /**
@@ -7214,29 +7466,51 @@ export interface StartComputeRequest {
 }
 
 /**
- * GetVolume请求参数结构体
+ * GetFileContent请求参数结构体
  */
-export interface GetVolumeRequest {
+export interface GetFileContentRequest {
   /**
-   * <p>数据目录名称</p>
-   */
-  CatalogName: string
-  /**
-   * <p>schema名称</p>
-   */
-  SchemaName: string
-  /**
-   * <p>数据卷名称</p>
-   */
-  VolumeName: string
-  /**
-   * <p>调用时所在workspace唯一id</p>
+   * <p>工作空间ID，必填，最大长度64</p>
    */
   WorkspaceId: string
   /**
-   * <p>数据获取选项，可选，控制是否返回权限信息及按权限过滤</p>
+   * <p>文件ID，FileId/FilePath 二选一，最大长度128；非空时优先生效</p>
    */
-  FetchOption?: FetchOption
+  FileId?: string
+}
+
+/**
+ * 获取文件内容响应
+ */
+export interface GetFileContentRsp {
+  /**
+   * 文件ID；按 FilePath 查询时回显解析结果，便于调用方缓存
+   */
+  FileId?: string
+  /**
+   * 文件名，不含路径
+   */
+  FileName?: string
+  /**
+   * 文件全路径
+   */
+  FilePath?: string
+  /**
+   * 文件类型，参考 ListEntityTypeMetas 返回值为准
+   */
+  FileType?: string
+  /**
+   * 文件大小，字节
+   */
+  FileSize?: string
+  /**
+   * 文件内容，base64 编码
+   */
+  Content?: string
+  /**
+   * 内容编码方式，当前固定 base64
+   */
+  ContentEncoding?: string
 }
 
 /**
@@ -7762,41 +8036,19 @@ export interface UpdateCatalogResponse {
 }
 
 /**
- * ListWorkspaces请求参数结构体
+ * 获取schema列表响应
  */
-export interface ListWorkspacesRequest {
+export interface ListSchemasRsp {
   /**
-   * <p>工作空间ID精确匹配</p>
+   * schema列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkspaceId?: string
+  Items?: Array<Schema>
   /**
-   * <p>工作空间名称模糊匹配</p>
+   * 下页分页token
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkspaceKeyword?: string
-  /**
-   * <p>工作空间状态过滤（多选）：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除</p>
-   */
-  StatusList?: Array<number | bigint>
-  /**
-   * <p>多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}]；传入单个即单字段排序，默认按创建时间降序</p>
-   */
-  OrderBys?: Array<OrderBy>
-  /**
-   * <p>页码，从1开始，默认1</p>
-   */
-  PageNumber?: number
-  /**
-   * <p>每页大小，默认10，最小10，最大100</p>
-   */
-  PageSize?: number
-  /**
-   * <p>工作空间地域过滤（多选），如 ap-guangzhou</p>
-   */
-  WorkspaceRegion?: Array<string>
-  /**
-   * <p>创建者UIN过滤（多选）</p>
-   */
-  Creator?: Array<string>
+  NextPageToken?: string
 }
 
 /**
@@ -8253,6 +8505,20 @@ export interface ListLocationsRsp {
 }
 
 /**
+ * GetFileContent返回参数结构体
+ */
+export interface GetFileContentResponse {
+  /**
+   * <p>文件内容查询结果</p>
+   */
+  Data?: GetFileContentRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListVolumes返回参数结构体
  */
 export interface ListVolumesResponse {
@@ -8327,6 +8593,10 @@ export interface ListCatalogNamesRequest {
    * <p>数据目录来源筛选，取值参考CatalogSourceEnum(METALAKE/CONNECTION/SETATS)</p>
    */
   CatalogSources?: Array<string>
+  /**
+   * 数据源连接ID，可选。传入后仅返回该数据源下的 catalog/database；不传则不做过滤，返回全部数据。
+   */
+  ConnectionId?: string
 }
 
 /**
@@ -8612,6 +8882,11 @@ export interface MetaOwner {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogSource?: string
+  /**
+   * 数据源连接ID，与入参 Catalogs[].ConnectionId 对应。CatalogSource=CONNECTION 时返回该连接ID，用于区分同名目录的归属；METALAKE / SETATS 来源为空。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectionId?: string
 }
 
 /**
@@ -9283,6 +9558,10 @@ export interface ListCatalogsRequest {
    * 数据目录来源筛选（融合版新增字段），取值参考 CatalogSourceEnum。空数组或不传→只查tclake；["METALAKE"]→只查tclake；["CONNECTION"]→只查分析版ana_catalog；["METALAKE","CONNECTION"]→合并返回
    */
   CatalogSources?: Array<string>
+  /**
+   * 数据源连接ID，可选。传入后仅返回该数据源下的 catalog/database；不传则不做过滤，返回全部数据。
+   */
+  ConnectionId?: string
 }
 
 /**
@@ -9719,22 +9998,6 @@ export interface DeleteCatalogResponse {
 }
 
 /**
- * 获取schema列表响应
- */
-export interface ListSchemasRsp {
-  /**
-   * schema列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<Schema>
-  /**
-   * 下页分页token
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NextPageToken?: string
-}
-
-/**
  * GetWorkflowTaskRun返回参数结构体
  */
 export interface GetWorkflowTaskRunResponse {
@@ -10027,6 +10290,32 @@ export interface GetTableRequest {
    * <p>数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource &gt; 非空ConnectionId（视为CONNECTION）&gt; 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。</p>
    */
   CatalogSource?: string
+}
+
+/**
+ * AutoML配置
+ */
+export interface AutoMlConf {
+  /**
+   * 评估指标：acc/auc/f1/mse/mae/rmse
+   */
+  EvaluationMetric: string
+  /**
+   * 搜索空间列表
+   */
+  SearchSpace: Array<string>
+  /**
+   * 最大运行时间（分钟），默认60
+   */
+  MaxRuntimeMinutes?: number
+  /**
+   * 最大运行次数，默认100
+   */
+  MaxRunCount?: number
+  /**
+   * 最大运行并发，默认1，最大100
+   */
+  MaxConcurrency?: number
 }
 
 /**

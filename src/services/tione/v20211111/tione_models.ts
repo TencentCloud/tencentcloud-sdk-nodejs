@@ -553,6 +553,10 @@ export interface NotebookSetItem {
    * <p>操作者信息</p>
    */
   LatestOperatorInfo?: OperatorInfo
+  /**
+   * <p>预付费专用资源组</p>
+   */
+  ResourceGroupInstanceId?: string
 }
 
 /**
@@ -1167,29 +1171,33 @@ export interface CreateDataSourceRequest {
    */
   TiProjectId?: string
   /**
-   * 数据源名称
+   * <p>数据源名称</p>
    */
   Name?: string
   /**
-   * 数据源类型英文名
+   * <p>数据源类型英文名</p>
    */
   Type?: string
   /**
-   * 数据源权限，取值有RW RO
+   * <p>数据源权限，取值有RW RO</p>
    */
   Permission?: string
   /**
-   * 存储实例ID
+   * <p>存储实例ID</p>
    */
   StorageId?: string
   /**
-   * 数据源挂载配置
+   * <p>数据源挂载配置</p>
    */
   MountConfigure?: MountConfigureInfo
   /**
-   * 标签配置
+   * <p>标签配置</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>挂载数据源时默认填充的容器内路径</p>
+   */
+  ContainerPath?: string
 }
 
 /**
@@ -1505,21 +1513,25 @@ export interface UpdateDataSourceRequest {
    */
   TiProjectId?: string
   /**
-   * 数据源ID
+   * <p>数据源ID</p>
    */
   Id?: string
   /**
-   * 数据源名称
+   * <p>数据源名称</p>
    */
   Name?: string
   /**
-   * 数据源权限，取值有RW RO
+   * <p>数据源权限，取值有RW RO</p>
    */
   Permission?: string
   /**
-   * 数据源挂载配置
+   * <p>数据源挂载配置</p>
    */
   MountConfigure?: MountConfigureInfo
+  /**
+   * <p>挂载数据源时默认填充的容器内路径</p>
+   */
+  ContainerPath?: string
 }
 
 /**
@@ -1809,6 +1821,10 @@ export interface CreateNotebookImageRequest {
    * <p>是否保存到镜像中心</p>
    */
   RegisterToImageCenter?: boolean
+  /**
+   * <p>是否忽略无法被冻结的进程</p>
+   */
+  IgnoreUnfreezableProcesses?: boolean
 }
 
 /**
@@ -2674,7 +2690,7 @@ export interface SmartRouterComponent {
    */
   Status?: string
   /**
-   * <p>资源规格（查询时回显用户创建/修改时的资源选择）。公有云场景展示：ChargeType / Zone / ResourceSupplyAttribute；内网版场景展示：QueueId</p>
+   * <p>资源规格（查询时回显用户创建/修改时的资源选择）。公有云场景展示：ChargeType / Zone / ResourceSupplyAttribute / ResourceGroupSWType；内网版场景展示：QueueId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceSpec?: SmartRouterResourceSpec
@@ -2940,7 +2956,7 @@ export interface InferGatewayCallInfo {
  */
 export interface CreateDataSourceResponse {
   /**
-   * 数据源ID
+   * <p>数据源ID</p>
    */
   Id?: string
   /**
@@ -4191,7 +4207,7 @@ export interface PresetImageInfo {
  */
 export interface DescribeTrainingTaskRequest {
   /**
-   * 训练任务ID
+   * <p>训练任务ID</p>
    */
   Id: string
   /**
@@ -4199,7 +4215,7 @@ export interface DescribeTrainingTaskRequest {
    */
   TiProjectId?: string
   /**
-   * 训练任务实例ID
+   * <p>训练任务实例ID</p>
    */
   InstanceId?: string
 }
@@ -5309,7 +5325,7 @@ export interface ModifyRoleUserGrantRequest {
  */
 export interface CreateTrainingTaskRequest {
   /**
-   * <p>训练任务名称，不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头</p>
+   * <p>训练任务名称，不超过256个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头</p>
    */
   Name: string
   /**
@@ -5361,7 +5377,7 @@ export interface CreateTrainingTaskRequest {
    */
   TrainingMode?: string
   /**
-   * <p>数据配置，依赖DataSource字段，数量不超过10个</p>
+   * <p>数据配置，数量不超过10个</p>
    */
   DataConfigs?: Array<DataConfig>
   /**
@@ -6477,37 +6493,37 @@ export interface ModifyRoleUserGrantResponse {
  */
 export interface PodInfo {
   /**
-   * pod名
+   * <p>pod名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * pod的IP
+   * <p>pod的IP</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IP?: string
   /**
-   * pod状态。eg：SUBMITTING提交中、PENDING排队中、RUNNING运行中、SUCCEEDED已完成、FAILED异常、TERMINATING停止中、TERMINATED已停止
+   * <p>pod状态</p><p>枚举值：</p><ul><li>PENDING： 排队中</li><li>RUNNING： 运行中</li><li>SUCCEEDED： 已完成</li><li>FAILED： 异常</li><li>TERMINATING： 停止中</li><li>TERMINATED： 已停止</li><li>UNKNOWN： 未知</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * pod启动时间
+   * <p>pod启动时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * pod结束时间
+   * <p>pod结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * pod资源配置
+   * <p>pod资源配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceConfigInfo?: ResourceConfigInfo
   /**
-   * Pod所属任务的SubUin信息
+   * <p>Pod所属任务的SubUin信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubUin?: string
@@ -6812,6 +6828,10 @@ export interface GooseFS {
    * <p>客户端的挂载参数，逗号分隔的参数名</p>
    */
   MountOptions?: string
+  /**
+   * <p>GooseFS FUSE，支持用户自定义配置，输入格式为“空格”分隔的参数名</p>
+   */
+  FuseOptions?: string
 }
 
 /**
@@ -8124,7 +8144,7 @@ export interface TrainingTaskDetail {
    */
   Region?: string
   /**
-   * <p>训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH</p>
+   * <p>训练框架名称，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameworkName?: string
@@ -8275,7 +8295,7 @@ export interface TrainingTaskDetail {
    */
   Message?: string
   /**
-   * <p>任务状态</p><p>枚举值：</p><ul><li>SUBMITTING： 排队中</li><li>STARTING： 启动中</li><li>RUNNING： 运行中</li><li>STOPPING： 停止中</li><li>STOPPED： 已停止</li><li>FAILED： 异常</li><li>SUCCEED： 已完成</li><li>SUBMIT_FAILED： 提交失败</li></ul>
+   * <p>任务状态</p><p>枚举值：</p><ul><li>SUBMITTING： 提交中</li><li>PENDING： 排队中</li><li>STARTING： 启动中</li><li>RUNNING： 运行中</li><li>STOPPING： 停止中</li><li>STOPPED： 已停止</li><li>SUCCEED： 已完成</li><li>FAILED： 异常</li><li>SUBMIT_FAILED： 提交失败</li></ul>
    */
   Status?: string
   /**
@@ -8864,6 +8884,10 @@ export interface DataSourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraConf?: StorageExtraConf
+  /**
+   * <p>挂载数据源时默认填充的容器内路径</p>
+   */
+  ContainerPath?: string
 }
 
 /**
@@ -9174,12 +9198,12 @@ export interface DataConfig {
    */
   MappingPath?: string
   /**
-   * <p>存储用途<br>可选值为 BUILTIN_CODE, BUILTIN_DATA, BUILTIN_MODEL, USER_DATA, USER_CODE, USER_MODEL, OUTPUT, OTHER</p>
+   * <p>存储用途，用于标识该数据配置中数据的使用场景。</p><p>枚举值：</p><ul><li>BUILTIN_CODE： 内置代码</li><li>BUILTIN_DATA： 内置数据</li><li>BUILTIN_MODEL： 内置模型</li><li>USER_DATA： 用户数据</li><li>USER_CODE： 用户代码</li><li>USER_MODEL： 用户模型</li><li>OUTPUT： 训练输出</li><li>DEFAULT： 其他</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSourceUsage?: string
   /**
-   * <p>DATASET、COS、CFS、CFSTurbo、GooseFSx、HDFS、WEDATA_HDFS</p>
+   * <p>存储类型，各取值对应的数据结构见下方枚举值说明。</p><p>枚举值：</p><ul><li>DATASET： 数据集，填 DataSetSource</li><li>COS： COS 对象存储，填 COSSource；仅 Train 支持</li><li>COSFS： COS 挂载（COSFS），填 COSSource</li><li>CFS： CFS 文件存储，填 CFSSource</li><li>CFSTurbo： CFSTurbo 文件存储，填 CFSSource；兼容历史字段 CFSTurboSource；仅 Train 支持</li><li>GooseFS： GooseFS 实例，填 GooseFSSource</li><li>GooseFSx： GooseFSx 实例，填 GooseFSSource</li><li>HDFS： HDFS 存储，填 HDFSSource；仅 Train 支持</li><li>LOCAL_DISK： 本地磁盘，填 LocalDiskSource</li><li>HOST_PATH： 宿主机路径，填 HostPathSource</li><li>PUBLIC_DATA_SOURCE： 公有云数据源，填 PublicDataSource</li><li>CLOUD_PREMIUM： 高性能云硬盘（CBS），填 CBSSource，需指定 VolumeSizeInGB；仅 Notebook 支持</li><li>CLOUD_SSD： SSD 云硬盘（CBS），填 CBSSource，需指定 VolumeSizeInGB；仅 Notebook 支持</li><li>FREE： 免费云硬盘（CBS），填 CBSSource；仅 Notebook 支持</li><li>CFS_TURBO： CFSTurbo 文件存储，填 CFSSource；仅 Notebook 支持</li><li>BUILTIN_DATASET： 平台内置数据集，填 DataSetSource</li><li>PRELOAD_FILE： 预加载文件，填 PreloadFileSource</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSourceType?: string
@@ -9679,7 +9703,7 @@ export interface DescribeBillingResourceInstanceRunningJobsRequest {
  */
 export interface DescribeTrainingTaskResponse {
   /**
-   * 训练任务详情
+   * <p>训练任务详情</p>
    */
   TrainingTaskDetail?: TrainingTaskDetail
   /**

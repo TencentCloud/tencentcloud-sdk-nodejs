@@ -91,6 +91,7 @@ import {
   DescribeCurveDataRequest,
   ModifyResourcePermissionResponse,
   HTTPServiceCacheAction,
+  DescribeEnvAccessControlRequest,
   VerificationConfig,
   StorageInfo,
   ModifyUserResp,
@@ -224,6 +225,7 @@ import {
   SMSProviderTemplateConfig,
   HTTPServicePathRewrite,
   CodeReq,
+  ModifyEnvAccessControlRequest,
   DeleteUsersResp,
   BuildContext,
   BuildCommands,
@@ -234,6 +236,7 @@ import {
   UpdateFunctionConfigurationResponse,
   DescribeBaasPackageListRequest,
   CloudAppLinkService,
+  DescribeEnvAccessControlResponse,
   DescribeLoginConfigRequest,
   DeleteCloudAppResponse,
   PlatFormResourceInfo,
@@ -323,6 +326,7 @@ import {
   FunctionPublicNetConfig,
   PrivateConfig,
   AIModelSecret,
+  ModifyEnvAccessControlResponse,
   DescribeEnvLimitResponse,
   DescribeTaskResultResponse,
   ReleaseEnvResponse,
@@ -564,6 +568,20 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: ModifyClientResponse) => void
   ): Promise<ModifyClientResponse> {
     return this.request("ModifyClient", req, cb)
+  }
+
+  /**
+     * 云开发域名访问限制配置
+（1）影响指定环境下域名来源访问策略，包含公网与 VPC 白名单
+（2）关闭公网访问后，云开发提供的默认域名在公网访问场景下返回403
+（3）可以通过配置 VPC 白名单指定放通特定 VPC 来源的请求
+（4）可以通过云开发控制台调用修改访问配置，修改后可通过查询接口核对生效配置
+     */
+  async ModifyEnvAccessControl(
+    req?: ModifyEnvAccessControlRequest,
+    cb?: (error: string, rep: ModifyEnvAccessControlResponse) => void
+  ): Promise<ModifyEnvAccessControlResponse> {
+    return this.request("ModifyEnvAccessControl", req, cb)
   }
 
   /**
@@ -1287,6 +1305,18 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DeleteHTTPServiceRouteResponse) => void
   ): Promise<DeleteHTTPServiceRouteResponse> {
     return this.request("DeleteHTTPServiceRoute", req, cb)
+  }
+
+  /**
+     * 查询云开发域名访问限制配置，返回指定环境下公网、VPC、办公网三种来源的当前访问策略
+（1）可以通过控制台调用查询域名访问控制。响应  Current 返回各来源（PUBLIC/VPC/WOA）当前生效的配置
+（2）不产生写副作用
+     */
+  async DescribeEnvAccessControl(
+    req?: DescribeEnvAccessControlRequest,
+    cb?: (error: string, rep: DescribeEnvAccessControlResponse) => void
+  ): Promise<DescribeEnvAccessControlResponse> {
+    return this.request("DescribeEnvAccessControl", req, cb)
   }
 
   /**

@@ -1127,6 +1127,52 @@ export interface DescribeAreaBanAreasResponse {
 }
 
 /**
+ * 大模型安全按小时账单明细行
+ */
+export interface LLMHourBillDetailItem {
+  /**
+   * 小时区间，如00:00-01:00
+   */
+  TimeRange?: string
+  /**
+   * 提示词攻击防护计量值（token）
+   */
+  PromptAttackUsage?: number
+  /**
+   * 内容合规检测（文本）计量值（token）
+   */
+  ContentTextUsage?: number
+  /**
+   * 内容合规检测（图片）计量值（张）
+   */
+  ContentImageUsage?: number
+  /**
+   * 敏感数据检测计量值（token）
+   */
+  SensitiveDataUsage?: number
+  /**
+   * 该小时提示词攻击防护费用（元）
+   */
+  PromptAttackFee?: string
+  /**
+   * 该小时内容合规检测（文本）费用（元）
+   */
+  ContentTextFee?: string
+  /**
+   * 该小时内容合规检测（图片）费用（元）
+   */
+  ContentImageFee?: string
+  /**
+   * 该小时敏感数据检测费用（元）
+   */
+  SensitiveDataFee?: string
+  /**
+   * 该小时账单总额（元，净费用）
+   */
+  TotalFee?: string
+}
+
+/**
  * 免鉴权条件信息
  */
 export interface ConditionInfo {
@@ -1245,35 +1291,39 @@ export interface ModifyLLMWafProtectRuleResponse {
  */
 export interface DescribeModuleStatusResponse {
   /**
-   * WEB安全规则是否开启
+   * <p>WEB安全规则是否开启</p>
    */
   WebSecurity?: number
   /**
-   * 访问控制规则是否开启
+   * <p>访问控制规则是否开启</p>
    */
   AccessControl?: number
   /**
-   * CC防护是否开启
+   * <p>CC防护是否开启</p>
    */
   CcProtection?: number
   /**
-   * 网页防篡改是否开启
+   * <p>网页防篡改是否开启</p>
    */
   AntiTamper?: number
   /**
-   * 信息防泄漏是否开启
+   * <p>信息防泄漏是否开启</p>
    */
   AntiLeakage?: number
   /**
-   * API安全是否开启
+   * <p>API安全是否开启</p>
    */
   ApiProtection?: number
   /**
-   * 限流模块开关
+   * <p>API安全检测开关是否开启</p>
+   */
+  ApiDetect?: number
+  /**
+   * <p>限流模块开关，0表示关闭，1表示开启</p>
    */
   RateLimit?: number
   /**
-   * gzip 开关
+   * <p>gzip 开关</p>
    */
   GzipAnalysis?: number
   /**
@@ -1555,6 +1605,14 @@ export interface UpdateRateLimitV2Request {
    * 限流执行顺序，0：默认情况，限流优先，1：安全防护优先
    */
   Order?: number
+  /**
+   * 统一匹配条件列表，复用ACL自定义策略结构，条件数量上限10条。MatchConditions非空时引擎只走新字段
+   */
+  MatchConditions?: Array<Strategy>
+  /**
+   * 条件间逻辑：and(默认)/or
+   */
+  ConditionLogic?: string
 }
 
 /**
@@ -1755,6 +1813,20 @@ export interface ModifyProtectGroupResponse {
 }
 
 /**
+ * 大模型安全按小时账单趋势数据点
+ */
+export interface LLMHourBillTrendItem {
+  /**
+   * 小时，取值00到23
+   */
+  Hour?: string
+  /**
+   * 该小时账单总额（元，净费用）
+   */
+  Fee?: string
+}
+
+/**
  * ModifyAttackWhiteRule请求参数结构体
  */
 export interface ModifyAttackWhiteRuleRequest {
@@ -1767,7 +1839,7 @@ export interface ModifyAttackWhiteRuleRequest {
    */
   Domain: string
   /**
-   * 规则状态
+   * 规则状态，0表示关闭，1表示开启
    */
   Status: number
   /**
@@ -2056,7 +2128,7 @@ export interface DescribePolicyStatusRequest {
    */
   Domain: string
   /**
-   * clb-waf或者saas-waf
+   * clb-waf或者sparta-waf
    */
   Edition: string
 }
@@ -2173,7 +2245,7 @@ export interface DeleteIpAccessControlRequest {
    */
   DeleteAll?: boolean
   /**
-   * 用于按数据来源删除黑白名单记录，非必填，默认为custom。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则
+   * 数据来源，'batch'表示批量黑白名单规则，空/不传表示单域名黑白名单规则
    */
   SourceType?: string
   /**
@@ -2293,7 +2365,7 @@ export interface ModifyAntiInfoLeakRuleStatusRequest {
    */
   RuleId: number
   /**
-   * 状态
+   * 防信息泄露规则状态，0表示关闭，1表示开启
    */
   Status: number
 }
@@ -2564,6 +2636,20 @@ export interface PostAttackDownloadTaskRequest {
 }
 
 /**
+ * DescribeDomainDetailsClb返回参数结构体
+ */
+export interface DescribeDomainDetailsClbResponse {
+  /**
+   * <p>clb域名详情</p>
+   */
+  DomainsClbPartInfo?: ClbDomainsInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 对话消息结构体
  */
 export interface SSEClientMessage {
@@ -2807,7 +2893,7 @@ export interface Strategy {
 		<tr>
 			<td>Referer（Referer）</td>
 			<td>不支持参数</td>
-			<td>empty（内容为空）<br />nempty（内容不为空）<br />null（不存在）<br />nnull（存在）<br />eq（等于）<br />neq（不等于）<br />contains（包含）<br />ncontains（不包含）<br />belong_to（属于）<br />not_belong_to（不属于）<br />len_eq（长度等于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）<br />rematch（正则匹配）</td>
+			<td>empty（内容为空）<br />null（不存在）<br />nnull（存在）<br />eq（等于）<br />neq（不等于）<br />contains（包含）<br />ncontains（不包含）<br />belong_to（属于）<br />not_belong_to（不属于）<br />len_eq（长度等于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）<br />rematch（正则匹配）</td>
 			<td>请输入内容,512个字符以内</td>
 		</tr>
 		<tr>
@@ -2819,7 +2905,7 @@ export interface Strategy {
 		<tr>
 			<td>UserAgent（UserAgent）</td>
 			<td>不支持参数</td>
-			<td>同匹配字段<font color="Red">Referer</font>逻辑符号</td>
+			<td>empty（内容为空）<br />null（不存在）<br />nnull（存在）<br />eq（等于）<br />neq（不等于）<br />contains（包含）<br />ncontains（不包含）<br />belong_to（属于）<br />not_belong_to（不属于）<br />len_eq（长度等于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）<br />rematch（正则匹配）</td>
 			<td>请输入内容,512个字符以内</td>
 		</tr>
 		<tr>
@@ -2897,8 +2983,8 @@ export interface Strategy {
 		<tr>
 			<td>CONTENT_LENGTH（Content-length）</td>
 			<td>不支持参数</td>
-			<td>numeq（数值等于）<br />numneq（数值不等于）<br />numgt（数值大于）<br />numlt（数值小于）<br />numge（数值大于等于）<br />numle（数值小于等于）</td>
-			<td>请输入0-9999999999999之间的整数</td>
+			<td>numeq（数值等于）<br />numgt（数值大于）<br />numlt（数值小于）</td>
+			<td>请输入0-999999999999之间的整数</td>
 		</tr>
 		<tr>
 			<td>IP_GEO（来源IP归属地）</td>
@@ -4132,6 +4218,10 @@ export interface FieldWriteConfig {
    */
   EnableBody?: number
   /**
+   * <p>仅当该条访问日志命中攻击规则时，是否额外存储 attack_body 字段（取值与 body 字段相同）。1:开启 0/不填:不开启。与 EnableBody 完全独立，互不影响。仅在存储查询链路（DescribeAccessMeta/ModifyAccessPeriod）中生效，不影响 CLS/CKafka 自定义投递（CreatePostCLSFlow/CreatePostCKafkaFlow）配置。</p>
+   */
+  EnableAttackBody?: number
+  /**
    * <p>1:开启 0:不开启</p>
    */
   EnableBot?: number
@@ -4151,6 +4241,14 @@ export interface FieldWriteConfig {
    * <p>是否投递 response_status_line（客户端可见 HTTP 状态行，如 HTTP/1.1 200 OK，超过1KB截断）。1:开启 0/不填:不开启。与 EnableResponse 完全独立，互不影响。拦截/未回源时也会有值，记录的是 WAF 返回给客户端的状态行。</p>
    */
   EnableResponseStatusLine?: number
+  /**
+   * <p>大模型安全防护详情字段，用;分割，仅对 SDK 访问日志生效。不传表示全部写入；传空字符串表示只写必填字段（uuid、appid、instance、timestamp、llm_service_id）。</p>
+   */
+  LlmItem?: string
+  /**
+   * <p>headers 字段中10个通用冗余子字段（accept/accept-encoding/accept-language/connection/content-type/cookie/host/referer/x-forwarded-for/user-agent）剔除开关。1:剔除 0/不填:不剔除。仅在CLS/CKafka自定义投递（CreatePostCLSFlow/CreatePostCKafkaFlow及对应Describe接口）中生效，不影响原有存储日志配置。</p>
+   */
+  FilterPlusEnableHeaderFilter?: number
 }
 
 /**
@@ -4327,39 +4425,39 @@ export interface LoadBalancer {
  */
 export interface PostCLSFlowInfo {
   /**
-   * 投递流唯一ID
+   * <p>投递流唯一ID</p>
    */
   FlowId?: number
   /**
-   * 1-访问日志 2-攻击日志
+   * <p>1-访问日志 2-攻击日志</p>
    */
   LogType?: number
   /**
-   * 状态 0-为关闭 1-为启用
+   * <p>状态 0-为关闭 1-为启用</p>
    */
   Status?: number
   /**
-   * CLS所在区域
+   * <p>CLS所在区域</p>
    */
   CLSRegion?: string
   /**
-   * CLS日志集合名称
+   * <p>CLS日志集合名称</p>
    */
   LogsetName?: string
   /**
-   * CLS日志集合ID
+   * <p>CLS日志集合ID</p>
    */
   LogsetID?: string
   /**
-   * CLS日志主题名称
+   * <p>CLS日志主题名称</p>
    */
   LogTopicName?: string
   /**
-   * CLS日志集合ID
+   * <p>CLS日志集合ID</p>
    */
   LogTopicID?: string
   /**
-   * 写配置
+   * <p>写配置</p>
    */
   WriteConfig?: FieldWriteConfig
 }
@@ -4524,6 +4622,13 @@ export interface DescribeCustomRulesRspRuleListItem {
    * 规则灰度的比例，默认是100，不灰度
    */
   ActionRatio?: number
+  /**
+   * 自定义规则预览开关
+枚举值：
+0：关闭预览
+1：开启预览
+   */
+  Preview?: number
 }
 
 /**
@@ -4646,7 +4751,7 @@ export interface ModifyIpAccessControlRequest {
    */
   IpList: Array<string>
   /**
-   * 42为黑名单，40为白名单
+   * IP黑白名单类型，40表示白名单，42表示黑名单
    */
   ActionType: number
   /**
@@ -4721,6 +4826,28 @@ export interface AddCustomWhiteRuleResponse {
 }
 
 /**
+ * DescribeLLMWafProtectRules请求参数结构体
+ */
+export interface DescribeLLMWafProtectRulesRequest {
+  /**
+   * <p>SDK 模式传 ServiceId（与 Domain 二选一）</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>规则类型</p>
+   */
+  RuleType?: string
+  /**
+   * <p>域名模式传 Domain（与 ServiceId 二选一）</p>
+   */
+  Domain?: string
+}
+
+/**
  * ModifyBatchCustomWhiteRuleStatus请求参数结构体
  */
 export interface ModifyBatchCustomWhiteRuleStatusRequest {
@@ -4780,7 +4907,7 @@ export interface HostDel {
  */
 export interface DescribeModuleStatusRequest {
   /**
-   * 要查询状态的域名
+   * <p>要查询状态的域名</p>
    */
   Domain: string
 }
@@ -4935,6 +5062,14 @@ export interface CreateRateLimitV2Request {
    * 限流执行顺序，0：默认情况，限流优先，1：安全防护优先
    */
   Order?: number
+  /**
+   * 统一匹配条件列表，复用ACL自定义策略结构，条件数量上限10条。MatchConditions非空时引擎只走新字段
+   */
+  MatchConditions?: Array<Strategy>
+  /**
+   * 条件间逻辑：and(默认)/or
+   */
+  ConditionLogic?: string
 }
 
 /**
@@ -6095,7 +6230,7 @@ export interface ModifyBotStatusRequest {
    */
   Category: string
   /**
-   * 状态
+   * BOT模块开关状态，传入'0'表示关闭，'1'表示开启
    */
   Status: string
   /**
@@ -6713,6 +6848,28 @@ export interface DealData {
 }
 
 /**
+ * 大模型安全按小时账单分项费用
+ */
+export interface LLMBillItemFee {
+  /**
+   * 提示词攻击防护费用（元）
+   */
+  PromptAttackFee?: string
+  /**
+   * 内容合规检测（文本）费用（元）
+   */
+  ContentTextFee?: string
+  /**
+   * 内容合规检测（图片）费用（元）
+   */
+  ContentImageFee?: string
+  /**
+   * 敏感数据检测费用（元）
+   */
+  SensitiveDataFee?: string
+}
+
+/**
  * ModifyBatchCustomRuleStatus返回参数结构体
  */
 export interface ModifyBatchCustomRuleStatusResponse {
@@ -7000,6 +7157,16 @@ export interface DescribeDomainWhiteRulesRequest {
 }
 
 /**
+ * ModifyLLMWafToolCallRule返回参数结构体
+ */
+export interface ModifyLLMWafToolCallRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryClientMsg返回参数结构体
  */
 export interface QueryClientMsgResponse {
@@ -7039,6 +7206,28 @@ export interface ModifyInstanceRenewFlagRequest {
    * 续费开关
    */
   RenewFlag: number
+}
+
+/**
+ * ModifyLLMSdkAccess请求参数结构体
+ */
+export interface ModifyLLMSdkAccessRequest {
+  /**
+   * 要接入的应用名称
+   */
+  Name: string
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * serviceid
+   */
+  Domain: string
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**
@@ -7523,7 +7712,7 @@ export interface AddAttackWhiteRuleRequest {
    */
   Domain: string
   /**
-   * 规则状态
+   * 规则状态，0表示关闭，1表示开启
    */
   Status: number
   /**
@@ -7641,17 +7830,29 @@ export interface UCBEntryValue {
 }
 
 /**
- * DescribeDomainDetailsClb返回参数结构体
+ * DescribeApiDetail请求参数结构体
  */
-export interface DescribeDomainDetailsClbResponse {
+export interface DescribeApiDetailRequest {
   /**
-   * <p>clb域名详情</p>
+   * 域名
    */
-  DomainsClbPartInfo?: ClbDomainsInfo
+  Domain: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * Api名称
    */
-  RequestId?: string
+  ApiName: string
+  /**
+   * 请求方法
+   */
+  Method: string
+  /**
+   * 是否仅查询敏感的，1表示查询，0表示不查询
+   */
+  IsSensitive?: number
+  /**
+   * 是否仅查询泛化的，1表示查询，0表示不查询
+   */
+  IsPan?: number
 }
 
 /**
@@ -7933,6 +8134,40 @@ export interface ReqUserRule {
 4：其它
    */
   Reason?: number
+}
+
+/**
+ * DescribeLLMHourBillDetail返回参数结构体
+ */
+export interface DescribeLLMHourBillDetailResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 查询日期，归一化为YYYY-MM-DD格式
+   */
+  Date?: string
+  /**
+   * 当日账单预估总额（元，扣减免费额度后的净费用）
+   */
+  EstimatedTotalFee?: string
+  /**
+   * 当日按计费项拆分的费用
+   */
+  ItemFees?: LLMBillItemFee
+  /**
+   * 24小时账单趋势，固定24条，无数据补0
+   */
+  HourlyTrend?: Array<LLMHourBillTrendItem>
+  /**
+   * 24小时账单明细，固定24条，无数据补0
+   */
+  HourlyDetail?: Array<LLMHourBillDetailItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8717,6 +8952,20 @@ export interface ModifyHostRequest {
 }
 
 /**
+ * DescribeLLMWafToolCallRules返回参数结构体
+ */
+export interface DescribeLLMWafToolCallRulesResponse {
+  /**
+   * <p>类别列表</p>
+   */
+  Categories?: Array<CategoryGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 排除无效api资产的规则
  */
 export interface ApiSecExcludeRule {
@@ -9175,13 +9424,13 @@ export interface ModifyHostResponse {
  */
 export interface ModifyLLMWafDLPRuleRequest {
   /**
-   * <p>服务ID</p>
-   */
-  ServiceId: string
-  /**
    * <p>要修改的规则id列表</p>
    */
   RuleIds: Array<string>
+  /**
+   * <p>SDK 模式传 ServiceId（与 Domain 二选一）</p>
+   */
+  ServiceId?: string
   /**
    * <p>动作</p>
    */
@@ -9198,6 +9447,10 @@ export interface ModifyLLMWafDLPRuleRequest {
    * <p>检测方向：1是入向，2是出向，3是入向和出向都检测</p>
    */
   Direction?: number
+  /**
+   * <p>域名模式传 Domain（与 ServiceId 二选一）</p>
+   */
+  Domain?: string
 }
 
 /**
@@ -9293,7 +9546,7 @@ export interface CreateIpAccessControlRequest {
    */
   IpList: Array<string>
   /**
-   * 42为黑名单，40为白名单
+   * IP黑白名单类型，40表示白名单，42表示黑名单
    */
   ActionType: number
   /**
@@ -9604,6 +9857,32 @@ export interface DescribeInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLLMWafToolCallRule请求参数结构体
+ */
+export interface ModifyLLMWafToolCallRuleRequest {
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceId: string
+  /**
+   * <p>要修改的规则id列表</p>
+   */
+  RuleIds: Array<string>
+  /**
+   * <p>规则动作</p>
+   */
+  RuleAction?: string
+  /**
+   * <p>开关</p>
+   */
+  Status?: number
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
 }
 
 /**
@@ -10072,6 +10351,13 @@ export interface BatchCustomRuleListItem {
    * <p>防护对象组ID</p>
    */
   GroupIds?: Array<number | bigint>
+  /**
+   * 自定义规则预览开关
+枚举值：
+0：关闭预览
+1：开启预览
+   */
+  Preview?: number
 }
 
 /**
@@ -11618,6 +11904,15 @@ export interface ModifyBatchCustomRuleRequest {
    * 动作灰度的比例，1-100，默认是100
    */
   ActionRatio?: number
+  /**
+   * 自定义规则预览开关
+枚举值：
+0：关闭预览
+1：开启预览
+未传入时保留规则当前的预览设置
+开启后仅记录规则命中并继续匹配后续规则，不执行本规则配置的防护动作。仅支持自定义规则，启用时动作灰度比例须为100；不支持精准白名单和小程序规则。仅支持CNAME接入或云原生清洗接入，启用预览前须开启规则。
+   */
+  Preview?: number
 }
 
 /**
@@ -12191,7 +12486,7 @@ export interface ModifyBatchIpAccessControlRequest {
    */
   JobDateTime: JobDateTime
   /**
-   * 42为黑名单，40为白名单
+   * IP黑白名单类型，40表示白名单，42表示黑名单
    */
   ActionType: number
   /**
@@ -12446,7 +12741,7 @@ export interface ModifyCustomRuleRequest {
    */
   Source?: string
   /**
-   * 开关状态，小程序风控规则的时候传该值
+   * 规则开关状态，0表示关闭，1表示开启，小程序风控规则传该值
    */
   Status?: number
   /**
@@ -12465,6 +12760,15 @@ export interface ModifyCustomRuleRequest {
 默认值：100（全量生效）
    */
   ActionRatio?: number
+  /**
+   * 自定义规则预览开关
+枚举值：
+0：关闭预览
+1：开启预览
+未传入时保留规则当前的预览设置
+开启后仅记录规则命中并继续匹配后续规则，不执行本规则配置的防护动作。仅支持自定义规则，启用时动作灰度比例须为100；不支持精准白名单和小程序规则。仅支持CNAME接入或云原生清洗接入，启用预览前须开启规则。
+   */
+  Preview?: number
 }
 
 /**
@@ -12584,7 +12888,7 @@ export interface InstanceInfo {
    */
   AppId: number
   /**
-   * <p>clb或saas</p>
+   * <p>实例接入类型</p><p>枚举值：<br>sparta-waf：SaaS型WAF实例<br>clb-waf：负载均衡型WAF实例<br>cdn-waf：CDN上的Web防护实例<br>cdc-clb-waf：CDC环境下负载均衡型WAF实例<br>llm-sdk-waf：大模型SDK WAF实例</p>
    */
   Edition: string
   /**
@@ -12906,7 +13210,7 @@ export interface ModifyAntiInfoLeakRulesRequest {
    */
   Domain: string
   /**
-   * Action 值
+   * 防信息泄露动作类型，取值0~4
    */
   ActionType: number
   /**
@@ -13290,6 +13594,14 @@ export interface LimitRuleV2 {
    * 574新增需求，限流执行顺序，0：默认情况，限流优先，1：安全防护优先
    */
   Order?: number
+  /**
+   * 统一匹配条件列表，复用ACL自定义策略结构，条件数量上限10条
+   */
+  MatchConditions?: Array<Strategy>
+  /**
+   * 条件间逻辑：and(默认)/or
+   */
+  ConditionLogic?: string
 }
 
 /**
@@ -13360,6 +13672,15 @@ export interface AddBatchCustomRuleRequest {
    * <p>绑定的防护组ID</p>
    */
   GroupIds?: Array<number | bigint>
+  /**
+   * 自定义规则预览开关
+枚举值：
+0：关闭预览
+1：开启预览
+默认值：0
+开启后仅记录规则命中并继续匹配后续规则，不执行本规则配置的防护动作。仅支持自定义规则，启用时动作灰度比例须为100；不支持精准白名单和小程序规则。仅支持CNAME接入或云原生清洗接入，启用预览前须开启规则。
+   */
+  Preview?: number
 }
 
 /**
@@ -13419,7 +13740,7 @@ export interface DeleteIpAccessControlV2Request {
    */
   DeleteAll?: boolean
   /**
-   * 用于按数据来源删除黑白名单记录，非必填，默认为custom。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则
+   * 数据来源，'batch'表示批量黑白名单规则，空/不传表示单域名黑白名单规则
    */
   SourceType?: string
   /**
@@ -14134,6 +14455,16 @@ export interface Goods {
 }
 
 /**
+ * ModifyLLMSdkAccess返回参数结构体
+ */
+export interface ModifyLLMSdkAccessResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpsertIpAccessControl返回参数结构体
  */
 export interface UpsertIpAccessControlResponse {
@@ -14437,7 +14768,7 @@ export interface UpsertCCRuleRequest {
    */
   Name: string
   /**
-   * 状态
+   * CC规则开关，0表示关闭，1表示开启
    */
   Status: number
   /**
@@ -14461,7 +14792,7 @@ export interface UpsertCCRuleRequest {
    */
   Priority: number
   /**
-   * 动作有效时间
+   * 动作有效时间，单位：秒，取值范围60~604800（即1分钟~7天）
    */
   ValidTime: number
   /**
@@ -14481,7 +14812,7 @@ export interface UpsertCCRuleRequest {
    */
   Edition?: string
   /**
-   * 操作类型
+   * CC规则类型，0表示基础规则，1表示高级规则
    */
   Type?: number
   /**
@@ -14997,39 +15328,43 @@ export interface DescribeRateLimitsV2Response {
  */
 export interface ModifyModuleStatusRequest {
   /**
-   * 需要设置的domain
+   * <p>需要设置的domain</p>
    */
   Domain: string
   /**
-   * Web 安全模块开关，0或1
+   * <p>Web 安全模块开关，0或1</p>
    */
   WebSecurity: number
   /**
-   * 访问控制模块开关，0或者1
+   * <p>访问控制模块开关，0或者1</p>
    */
   AccessControl: number
   /**
-   * CC模块开关，0或者1
+   * <p>CC模块开关，0或者1</p>
    */
   CcProtection: number
   /**
-   * API安全模块开关，0或者1
+   * <p>API安全模块开关，0或者1</p>
    */
   ApiProtection: number
   /**
-   * 防篡改模块开关，0或者1
+   * <p>API安全检测开关，0关闭1开启</p>
+   */
+  ApiDetect?: number
+  /**
+   * <p>防篡改模块开关，0或者1</p>
    */
   AntiTamper?: number
   /**
-   * 防泄漏模块开关，0或者1
+   * <p>防泄漏模块开关，0或者1</p>
    */
   AntiLeakage?: number
   /**
-   * 限流模块开关，0或1
+   * <p>限流模块开关，0或1</p>
    */
   RateLimit?: number
   /**
-   * gzip 开关
+   * <p>gzip 开关</p>
    */
   GzipAnalysis?: number
 }
@@ -17482,25 +17817,17 @@ export interface TokenRuleEntryValue {
 }
 
 /**
- * DescribeLLMWafProtectRules请求参数结构体
+ * DescribeLLMWafToolCallRules请求参数结构体
  */
-export interface DescribeLLMWafProtectRulesRequest {
+export interface DescribeLLMWafToolCallRulesRequest {
   /**
-   * <p>SDK 模式传 ServiceId（与 Domain 二选一）</p>
+   * <p>服务ID</p>
    */
   ServiceId?: string
   /**
    * <p>实例id</p>
    */
   InstanceId?: string
-  /**
-   * <p>规则类型</p>
-   */
-  RuleType?: string
-  /**
-   * <p>域名模式传 Domain（与 ServiceId 二选一）</p>
-   */
-  Domain?: string
 }
 
 /**
@@ -17539,13 +17866,13 @@ export interface ModifyOwaspWhiteRuleResponse {
  */
 export interface ModifyLLMWafProtectRuleRequest {
   /**
-   * <p>服务ID</p>
-   */
-  ServiceId: string
-  /**
    * <p>要修改的规则id列表</p>
    */
   RuleIds: Array<string>
+  /**
+   * <p>SDK 模式传 ServiceId（与 Domain 二选一）</p>
+   */
+  ServiceId?: string
   /**
    * <p>规则动作</p>
    */
@@ -17562,6 +17889,10 @@ export interface ModifyLLMWafProtectRuleRequest {
    * <p>检测方向：1是入向，2是出向，3是入向和出向都检测</p>
    */
   Direction?: number
+  /**
+   * <p>域名模式传 Domain（与 ServiceId 二选一）</p>
+   */
+  Domain?: string
 }
 
 /**
@@ -17653,7 +17984,7 @@ export interface ModifyAntiFakeUrlStatusRequest {
    */
   Domain: string
   /**
-   * 状态
+   * 防篡改规则状态，0表示关闭，1表示开启
    */
   Status: number
   /**
@@ -17752,29 +18083,19 @@ export interface DestroyPostCLSFlowRequest {
 }
 
 /**
- * DescribeApiDetail请求参数结构体
+ * DescribeLLMHourBillDetail请求参数结构体
  */
-export interface DescribeApiDetailRequest {
+export interface DescribeLLMHourBillDetailRequest {
   /**
-   * 域名
+   * 实例ID
+参数格式：形如 waf_xxxxxxxx
    */
-  Domain: string
+  InstanceId: string
   /**
-   * Api名称
+   * 查询日期，仅支持单日
+参数格式：YYYY-MM-DD 或 YYYYMMDD
    */
-  ApiName: string
-  /**
-   * 请求方法
-   */
-  Method: string
-  /**
-   * 是否仅查询敏感的，1表示查询，0表示不查询
-   */
-  IsSensitive?: number
-  /**
-   * 是否仅查询泛化的，1表示查询，0表示不查询
-   */
-  IsPan?: number
+  Date: string
 }
 
 /**
@@ -18085,7 +18406,7 @@ export interface AddCustomRuleRequest {
    */
   Label?: string
   /**
-   * 开关状态，小程序风控规则的时候传该值
+   * 规则开关状态，0表示关闭，1表示开启，小程序风控规则传该值
    */
   Status?: number
   /**
@@ -18104,6 +18425,15 @@ export interface AddCustomRuleRequest {
 默认值：100（全量生效）
    */
   ActionRatio?: number
+  /**
+   * 自定义规则预览开关
+枚举值：
+0：关闭预览
+1：开启预览
+默认值：0
+开启后仅记录规则命中并继续匹配后续规则，不执行本规则配置的防护动作。仅支持自定义规则，启用时动作灰度比例须为100；不支持精准白名单和小程序规则。仅支持CNAME接入或云原生清洗接入，启用预览前须开启规则。
+   */
+  Preview?: number
 }
 
 /**
@@ -18181,7 +18511,7 @@ export interface CreateBatchIpAccessControlRequest {
    */
   JobDateTime: JobDateTime
   /**
-   * 42为黑名单，40为白名单
+   * IP黑白名单类型，40表示白名单，42表示黑名单
    */
   ActionType: number
   /**
@@ -18677,7 +19007,7 @@ export interface ModifyDomainsCLSStatusRequest {
    */
   Domains: Array<DomainURI>
   /**
-   * 修改域名的访问日志开关为Status
+   * CLS访问日志开关，0表示关闭，1表示开启
    */
   Status: number
 }
@@ -19143,7 +19473,7 @@ export interface DescribeHostLimitRequest {
    */
   InstanceID?: string
   /**
-   * 流量来源
+   * 流量来源类型，'clb'表示CLB负载均衡，'apisix'表示自建网关（含Kong），'tsegw'表示TSE云原生网关
    */
   AlbType?: string
 }

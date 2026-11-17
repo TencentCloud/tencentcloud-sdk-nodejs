@@ -60,6 +60,7 @@ import {
   DeleteLLMSdkAccessRequest,
   ModifyBotSceneStatusResponse,
   DescribeAreaBanAreasResponse,
+  LLMHourBillDetailItem,
   ConditionInfo,
   MajorEventsPkg,
   DescribeLLMContentRuleListResponse,
@@ -89,6 +90,7 @@ import {
   ModifyApiAnalyzeStatusResponse,
   RemoveBypassAllRuleResponse,
   ModifyProtectGroupResponse,
+  LLMHourBillTrendItem,
   ModifyAttackWhiteRuleRequest,
   DeleteBatchCustomRuleRequest,
   DescribeBotUCBRuleRsp,
@@ -124,6 +126,7 @@ import {
   HybridPkg,
   IpAccessControlData,
   PostAttackDownloadTaskRequest,
+  DescribeDomainDetailsClbResponse,
   SSEClientMessage,
   DeleteBatchCustomWhiteRuleRequest,
   ApiSecSceneRule,
@@ -199,6 +202,7 @@ import {
   ModifyIpAccessControlRequest,
   ApiEventSample,
   AddCustomWhiteRuleResponse,
+  DescribeLLMWafProtectRulesRequest,
   ModifyBatchCustomWhiteRuleStatusRequest,
   DescribeLLMContentRuleListRequest,
   ModifyUserSignatureClassRequest,
@@ -280,6 +284,7 @@ import {
   DescribeTlsVersionRequest,
   RuleItem,
   DealData,
+  LLMBillItemFee,
   ModifyBatchCustomRuleStatusResponse,
   DeleteBatchCustomWhiteRuleResponse,
   DescribeApiSecEventListRequest,
@@ -291,9 +296,11 @@ import {
   ApiDetailSampleHistory,
   WafThreatenIntelligenceDetails,
   DescribeDomainWhiteRulesRequest,
+  ModifyLLMWafToolCallRuleResponse,
   QueryClientMsgResponse,
   DescribePeakPointsResponse,
   ModifyInstanceRenewFlagRequest,
+  ModifyLLMSdkAccessRequest,
   UserWhiteRuleItem,
   DescribeBotSceneUCBRuleResponse,
   TokenDisplaySetting,
@@ -311,7 +318,7 @@ import {
   ApiSecSensitiveRule,
   JWTConfig,
   UCBEntryValue,
-  DescribeDomainDetailsClbResponse,
+  DescribeApiDetailRequest,
   AddBypassAllRuleRequest,
   ExportAccessInfo,
   DescribeIpAccessControlRequest,
@@ -322,6 +329,7 @@ import {
   DescribeApiListVersionTwoRequest,
   ModifyInstanceQpsLimitResponse,
   ReqUserRule,
+  DescribeLLMHourBillDetailResponse,
   DescribeIpHitItemsRequest,
   GoodNews,
   ModifyBotSceneUCBRuleRequest,
@@ -356,6 +364,7 @@ import {
   LLMMonPkg,
   ModifyOwaspDomainUpdateStatusResponse,
   ModifyHostRequest,
+  DescribeLLMWafToolCallRulesResponse,
   ApiSecExcludeRule,
   ModifyProtectGroupRequest,
   DestroyPostCKafkaFlowRequest,
@@ -387,6 +396,7 @@ import {
   CCRuleData,
   DescribeBatchCustomWhiteRulesRequest,
   DescribeInstancesResponse,
+  ModifyLLMWafToolCallRuleRequest,
   AccessRuleTagInfo,
   ModifyInstanceQpsLimitRequest,
   InOutputUCBRuleEntry,
@@ -541,6 +551,7 @@ import {
   ModifyBatchCustomRuleResponse,
   DescribeBotSceneListRequest,
   Goods,
+  ModifyLLMSdkAccessResponse,
   UpsertIpAccessControlResponse,
   DescribeAccessHistogramRequest,
   NetworkConfig,
@@ -647,7 +658,7 @@ import {
   ApiEvent,
   CreateDealsGoods,
   TokenRuleEntryValue,
-  DescribeLLMWafProtectRulesRequest,
+  DescribeLLMWafToolCallRulesRequest,
   LimitHeader,
   ModifyOwaspWhiteRuleResponse,
   ModifyLLMWafProtectRuleRequest,
@@ -662,7 +673,7 @@ import {
   DescribePeakValueRequest,
   BotQPS,
   DestroyPostCLSFlowRequest,
-  DescribeApiDetailRequest,
+  DescribeLLMHourBillDetailRequest,
   DescribePolicyStatusResponse,
   Column,
   CdcRegion,
@@ -742,6 +753,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("waf.tencentcloudapi.com", "2018-01-25", clientConfig)
+  }
+
+  /**
+   * 切换防篡改开关
+   */
+  async ModifyAntiFakeUrlStatus(
+    req: ModifyAntiFakeUrlStatusRequest,
+    cb?: (error: string, rep: ModifyAntiFakeUrlStatusResponse) => void
+  ): Promise<ModifyAntiFakeUrlStatusResponse> {
+    return this.request("ModifyAntiFakeUrlStatus", req, cb)
   }
 
   /**
@@ -982,6 +1003,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceQpsLimitResponse) => void
   ): Promise<ModifyInstanceQpsLimitResponse> {
     return this.request("ModifyInstanceQpsLimit", req, cb)
+  }
+
+  /**
+   * 修改 Tool Call 规则
+   */
+  async ModifyLLMWafToolCallRule(
+    req: ModifyLLMWafToolCallRuleRequest,
+    cb?: (error: string, rep: ModifyLLMWafToolCallRuleResponse) => void
+  ): Promise<ModifyLLMWafToolCallRuleResponse> {
+    return this.request("ModifyLLMWafToolCallRule", req, cb)
   }
 
   /**
@@ -2128,13 +2159,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换防篡改开关
+   * 查询单实例、单日的按小时账单明细，包含账单预估总额、分项费用、分时趋势和分时明细
    */
-  async ModifyAntiFakeUrlStatus(
-    req: ModifyAntiFakeUrlStatusRequest,
-    cb?: (error: string, rep: ModifyAntiFakeUrlStatusResponse) => void
-  ): Promise<ModifyAntiFakeUrlStatusResponse> {
-    return this.request("ModifyAntiFakeUrlStatus", req, cb)
+  async DescribeLLMHourBillDetail(
+    req: DescribeLLMHourBillDetailRequest,
+    cb?: (error: string, rep: DescribeLLMHourBillDetailResponse) => void
+  ): Promise<DescribeLLMHourBillDetailResponse> {
+    return this.request("DescribeLLMHourBillDetail", req, cb)
   }
 
   /**
@@ -2491,13 +2522,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询限流规则列表接口
+   * 查询 Tool Call 规则
    */
-  async DescribeRateLimitsV2(
-    req: DescribeRateLimitsV2Request,
-    cb?: (error: string, rep: DescribeRateLimitsV2Response) => void
-  ): Promise<DescribeRateLimitsV2Response> {
-    return this.request("DescribeRateLimitsV2", req, cb)
+  async DescribeLLMWafToolCallRules(
+    req: DescribeLLMWafToolCallRulesRequest,
+    cb?: (error: string, rep: DescribeLLMWafToolCallRulesResponse) => void
+  ): Promise<DescribeLLMWafToolCallRulesResponse> {
+    return this.request("DescribeLLMWafToolCallRules", req, cb)
   }
 
   /**
@@ -2558,6 +2589,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void
   ): Promise<DescribeDomainWhiteRulesResponse> {
     return this.request("DescribeDomainWhiteRules", req, cb)
+  }
+
+  /**
+   * llmwaf-sdk边界接入配置接口
+   */
+  async ModifyLLMSdkAccess(
+    req: ModifyLLMSdkAccessRequest,
+    cb?: (error: string, rep: ModifyLLMSdkAccessResponse) => void
+  ): Promise<ModifyLLMSdkAccessResponse> {
+    return this.request("ModifyLLMSdkAccess", req, cb)
   }
 
   /**
@@ -3131,6 +3172,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RefreshAccessCheckResultResponse) => void
   ): Promise<RefreshAccessCheckResultResponse> {
     return this.request("RefreshAccessCheckResult", req, cb)
+  }
+
+  /**
+   * 查询限流规则列表接口
+   */
+  async DescribeRateLimitsV2(
+    req: DescribeRateLimitsV2Request,
+    cb?: (error: string, rep: DescribeRateLimitsV2Response) => void
+  ): Promise<DescribeRateLimitsV2Response> {
+    return this.request("DescribeRateLimitsV2", req, cb)
   }
 
   /**

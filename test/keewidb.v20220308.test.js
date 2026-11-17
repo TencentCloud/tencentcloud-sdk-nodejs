@@ -28,9 +28,29 @@ it("keewidb.v20220308.DescribeInstanceNodeInfo", async function () {
     }
 })
 
+it("keewidb.v20220308.CreateInstanceAccount", async function () {
+    try {
+       const data = await client.CreateInstanceAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("keewidb.v20220308.ModifyMaintenanceWindow", async function () {
     try {
        const data = await client.ModifyMaintenanceWindow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("keewidb.v20220308.ModifyInstanceAccount", async function () {
+    try {
+       const data = await client.ModifyInstanceAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,19 +78,9 @@ it("keewidb.v20220308.CleanUpInstance", async function () {
     }
 })
 
-it("keewidb.v20220308.DescribeMaintenanceWindow", async function () {
+it("keewidb.v20220308.DescribeInstanceAccount", async function () {
     try {
-       const data = await client.DescribeMaintenanceWindow({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("keewidb.v20220308.DescribeInstanceBackups", async function () {
-    try {
-       const data = await client.DescribeInstanceBackups({})
+       const data = await client.DescribeInstanceAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +141,16 @@ it("keewidb.v20220308.DescribeConnectionConfig", async function () {
 it("keewidb.v20220308.DescribeInstanceBinlogs", async function () {
     try {
        const data = await client.DescribeInstanceBinlogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("keewidb.v20220308.DescribeInstanceParamRecords", async function () {
+    try {
+       const data = await client.DescribeInstanceParamRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,6 +268,16 @@ it("keewidb.v20220308.ModifyDBInstanceSecurityGroups", async function () {
     }
 })
 
+it("keewidb.v20220308.DestroyPostpaidInstance", async function () {
+    try {
+       const data = await client.DestroyPostpaidInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("keewidb.v20220308.DescribeInstanceParams", async function () {
     try {
        const data = await client.DescribeInstanceParams({})
@@ -328,9 +358,9 @@ it("keewidb.v20220308.DestroyPrepaidInstance", async function () {
     }
 })
 
-it("keewidb.v20220308.DescribeInstanceParamRecords", async function () {
+it("keewidb.v20220308.DescribeMaintenanceWindow", async function () {
     try {
-       const data = await client.DescribeInstanceParamRecords({})
+       const data = await client.DescribeMaintenanceWindow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +388,19 @@ it("keewidb.v20220308.DescribeInstanceDealDetail", async function () {
     }
 })
 
-it("keewidb.v20220308.DestroyPostpaidInstance", async function () {
+it("keewidb.v20220308.DeleteInstanceAccount", async function () {
     try {
-       const data = await client.DestroyPostpaidInstance({})
+       const data = await client.DeleteInstanceAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("keewidb.v20220308.DescribeInstanceBackups", async function () {
+    try {
+       const data = await client.DescribeInstanceBackups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -364,23 +364,21 @@ export interface Plugin {
  */
 export interface ApiKeyAuthConfig {
   /**
-   * 密钥位置 HEADER/QUERY
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | Header鉴权 |
-| 1 | Query鉴权 |
+   * <p>密钥位置 HEADER/QUERY</p><p>枚举值:<br>| uint | 描述 |<br>| --- | --- |<br>| 0 | Header鉴权 |<br>| 1 | Query鉴权 |</p>
    */
   KeyLocation: number
   /**
-   * 密钥参数名
+   * <p>密钥参数名</p>
    */
   KeyParamName: string
   /**
-   * 密钥参数值
+   * <p>密钥参数值</p>
    */
   KeyParamValue: string
+  /**
+   * <p>密钥值用途，未指定按允许工具调用处理</p><p>枚举值：</p><ul><li>1： 允许用于工具调用</li><li>2： 仅用于连接测试和获取工具列表</li></ul>
+   */
+  KeyValueUsage?: number
 }
 
 /**
@@ -399,6 +397,24 @@ export interface AgentPluginCredentialParam {
    * <p>参数取值来源</p>
    */
   Input?: AgentInput
+}
+
+/**
+ * QuestionAnswer 问题答案信息
+ */
+export interface ConversationQuestionAnswer {
+  /**
+   * <p>问题内容</p>
+   */
+  Question: string
+  /**
+   * <p>已选择的选项标签列表</p>
+   */
+  SelectedLabelList?: Array<string>
+  /**
+   * <p>已选择的选项标签列表</p>
+   */
+  SelectedLabels?: Array<string>
 }
 
 /**
@@ -1158,6 +1174,18 @@ export interface AgentSpec {
    * <p>调用方执行的 Function Tool 列表</p><p>入参限制：仅在 C 端用户态 Agent 场景可用，B 端配置态 Agent  忽略该字段与</p>
    */
   ExternalToolList?: Array<AgentExternalToolConfig>
+  /**
+   * <p>子 Agent执行来源</p><p>枚举值：</p><ul><li>0： 应用内子 Agent</li><li>1： 引用已发布的应用</li></ul>
+   */
+  ProviderType?: number
+  /**
+   * <p>引用应用的Id</p>
+   */
+  ReferenceAppId?: string
+  /**
+   * <p>内置工具信息</p>
+   */
+  BuiltinToolList?: Array<AgentBuiltinToolConfig>
 }
 
 /**
@@ -1832,6 +1860,36 @@ export interface KnowledgeScope {
 }
 
 /**
+ * 引用的来源应用详情
+ */
+export interface ReferenceAppDetail {
+  /**
+   * <p>来源应用当前名称</p>
+   */
+  Name?: string
+  /**
+   * <p>来源应用模式</p><p>枚举值：</p><ul><li>1： 标准模式</li><li>2： Multi-Agent模式</li><li>3： 单工作流模式</li><li>4： Claw模式</li></ul>
+   */
+  AppMode?: number
+  /**
+   * <p>主 Agent 名称</p>
+   */
+  MainAgentName?: string
+  /**
+   * <p>子 Agent 名称列表</p>
+   */
+  SubAgentNameList?: Array<string>
+  /**
+   * <p>来源应用创建人</p>
+   */
+  Creator?: string
+  /**
+   * <p>来源应用修改时间</p>
+   */
+  UpdateTime?: string
+}
+
+/**
  * 微信公众号/小程序渠道配置
  */
 export interface WechatChannelConfig {
@@ -1973,6 +2031,24 @@ export interface CreateVariableResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QA 相似问修改项
+ */
+export interface SimilarQuestionModifySpec {
+  /**
+   * <p>相似问内容（CREATE 与 UPDATE 必填）</p>
+   */
+  Content?: string
+  /**
+   * <p>操作类型：1=新增，2=修改，3=删除<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODIFY_ACTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>MODIFY_ACTION_CREATE</td><td>1</td><td>新增</td></tr><tr><td>MODIFY_ACTION_UPDATE</td><td>2</td><td>修改</td></tr><tr><td>MODIFY_ACTION_DELETE</td><td>3</td><td>删除</td></tr></tbody></table></p>
+   */
+  ModifyAction?: number
+  /**
+   * <p>相似问 ID（UPDATE 与 DELETE 必填）</p>
+   */
+  SimilarQuestionId?: string
 }
 
 /**
@@ -2529,21 +2605,37 @@ export interface ModifyConflictQARequest {
 }
 
 /**
- * DescribeAppTriggerRunLogList返回参数结构体
+ * 文档元信息
  */
-export interface DescribeAppTriggerRunLogListResponse {
+export interface DocMetadata {
   /**
-   * <p>日志列表</p>
+   * <p>文档字符数</p>
    */
-  RunLogList?: Array<AppTriggerRunLog>
+  DocCharCount?: string
   /**
-   * <p>日志列表数量</p>
+   * <p>文件名</p>
    */
-  TotalCount?: string
+  FileName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>文件大小（字节）</p>
    */
-  RequestId?: string
+  FileSize?: string
+  /**
+   * <p>文件类型/扩展名</p>
+   */
+  FileType?: string
+  /**
+   * <p>元数据引用字段名列表（用于显示文档哪些分类和属性被设置为元数据）</p>
+   */
+  RefFieldNameList?: Array<string>
+  /**
+   * <p>来源描述</p>
+   */
+  SourceDesc?: string
+  /**
+   * <p>文档来源类型：1=本地上传，2=网页链接，3=COS 对接，4=外部导入<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DOC_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>DOC_SOURCE_TYPE_LOCAL</td><td>1</td><td>本地上传</td></tr><tr><td>DOC_SOURCE_TYPE_URL</td><td>2</td><td>网页链接</td></tr><tr><td>DOC_SOURCE_TYPE_COS</td><td>3</td><td>COS 对接</td></tr><tr><td>DOC_SOURCE_TYPE_IMPORT</td><td>4</td><td>外部导入</td></tr></tbody></table></p>
+   */
+  SourceType?: number
 }
 
 /**
@@ -2984,6 +3076,11 @@ export interface ConversationContent {
    */
   EnterpriseCharts?: string
   /**
+   * <p>文件信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  File?: ConversationFileInfo
+  /**
    * <p>选项卡列表</p>
    */
   OptionCardList?: Array<string>
@@ -2996,6 +3093,11 @@ export interface ConversationContent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OptionMode?: number
+  /**
+   * <p>问卷信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Questionnaire?: ConversationQuestionnaire
   /**
    * <p>引用角标信息列表</p>
    */
@@ -3025,6 +3127,16 @@ export interface ConversationContent {
    * <p>智能体任务列表</p>
    */
   Tasks?: Array<ConversationAgentTask>
+  /**
+   * <p>Widget 信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Widget?: ConversationWidget
+  /**
+   * <p>Widget 动作信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WidgetAction?: ConversationWidgetAction
   /**
    * <p>工作流输入参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3330,17 +3442,13 @@ export interface DescribeQARequest {
 }
 
 /**
- * 文档查询条件
+ * DeleteSkill返回参数结构体
  */
-export interface DocQuery {
+export interface DeleteSkillResponse {
   /**
-   * <p>查询关键词（名称模糊搜索）</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Query?: string
-  /**
-   * <p>查询范围（query 作用的字段）：1=文件名，2=标签或标签值；支持多选，缺省时无效</p>
-   */
-  QueryScopeList?: Array<number | bigint>
+  RequestId?: string
 }
 
 /**
@@ -3491,21 +3599,17 @@ export interface LabelTermModifyItem {
 }
 
 /**
- * CopyAgentFromApp请求参数结构体
+ * DescribePlugin返回参数结构体
  */
-export interface CopyAgentFromAppRequest {
+export interface DescribePluginResponse {
   /**
-   * <p>应用Id</p>
+   * <p>插件详情</p>
    */
-  AppId: string
+  Plugin?: Plugin
   /**
-   * <p>目标应用ID，kind=0时需传入</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TargetAppId?: string
-  /**
-   * <p>Agent 类型，区分 B 端配置态 Agent 与 C 端用户态 Agent</p><p>枚举值：</p><ul><li>0：  配置端Agent </li><li>1：  用户态 Agent</li></ul>
-   */
-  Kind?: number
+  RequestId?: string
 }
 
 /**
@@ -3612,6 +3716,16 @@ export interface ExpirationPolicy {
    * <p>超过有效时间后的行为：1=NOT_RETRIEVABLE 不可被检索，2=RETRIEVABLE 仍可被检索；永久有效时无意义<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>EXPIRE_BEHAVIOR_UNKNOWN</td><td>0</td><td>未指定（服务端按默认处理）</td></tr><tr><td>EXPIRE_BEHAVIOR_NOT_RETRIEVABLE</td><td>1</td><td>不可被检索（到期下架）</td></tr><tr><td>EXPIRE_BEHAVIOR_RETRIEVABLE</td><td>2</td><td>仍可被检索（到期不下架，仅标记时效范围）</td></tr></tbody></table></p>
    */
   ExpireBehavior?: number
+}
+
+/**
+ * ManualOnlySchedule
+ */
+export interface ManualOnlySchedule {
+  /**
+   * 启用
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -4038,21 +4152,21 @@ export interface ModifyConversationResponse {
 }
 
 /**
- * QA 相似问修改项
+ * 知识库容量信息
  */
-export interface SimilarQuestionModifySpec {
+export interface ByteCapacity {
   /**
-   * <p>相似问内容（CREATE 与 UPDATE 必填）</p>
+   * <p>最大容量</p>
    */
-  Content?: string
+  MaxCapacity?: string
   /**
-   * <p>操作类型：1=新增，2=修改，3=删除<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODIFY_ACTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>MODIFY_ACTION_CREATE</td><td>1</td><td>新增</td></tr><tr><td>MODIFY_ACTION_UPDATE</td><td>2</td><td>修改</td></tr><tr><td>MODIFY_ACTION_DELETE</td><td>3</td><td>删除</td></tr></tbody></table></p>
+   * <p>超量失效容量</p>
    */
-  ModifyAction?: number
+  ExceededInvalidCapacity?: string
   /**
-   * <p>相似问 ID（UPDATE 与 DELETE 必填）</p>
+   * <p>已使用容量</p>
    */
-  SimilarQuestionId?: string
+  UsedCapacity?: string
 }
 
 /**
@@ -4212,6 +4326,28 @@ export interface SaveWorkflowDebugContextResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * WidgetAction 组件交互动作信息
+ */
+export interface ConversationWidgetAction {
+  /**
+   * <p>动作类型，非枚举类型，用户自定义</p>
+   */
+  ActionType: string
+  /**
+   * <p>动作载荷</p>
+   */
+  Payload: string
+  /**
+   * <p>组件 ID</p>
+   */
+  WidgetId: string
+  /**
+   * <p>组件运行 ID</p>
+   */
+  WidgetRunId: string
 }
 
 /**
@@ -4419,37 +4555,21 @@ export interface AppTriggerParamBindingValue {
 }
 
 /**
- * 文档元信息
+ * DescribeAppTriggerRunLogList返回参数结构体
  */
-export interface DocMetadata {
+export interface DescribeAppTriggerRunLogListResponse {
   /**
-   * <p>文档字符数</p>
+   * <p>日志列表</p>
    */
-  DocCharCount?: string
+  RunLogList?: Array<AppTriggerRunLog>
   /**
-   * <p>文件名</p>
+   * <p>日志列表数量</p>
    */
-  FileName?: string
+  TotalCount?: string
   /**
-   * <p>文件大小（字节）</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FileSize?: string
-  /**
-   * <p>文件类型/扩展名</p>
-   */
-  FileType?: string
-  /**
-   * <p>元数据引用字段名列表（用于显示文档哪些分类和属性被设置为元数据）</p>
-   */
-  RefFieldNameList?: Array<string>
-  /**
-   * <p>来源描述</p>
-   */
-  SourceDesc?: string
-  /**
-   * <p>文档来源类型：1=本地上传，2=网页链接，3=COS 对接，4=外部导入<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DOC_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>DOC_SOURCE_TYPE_LOCAL</td><td>1</td><td>本地上传</td></tr><tr><td>DOC_SOURCE_TYPE_URL</td><td>2</td><td>网页链接</td></tr><tr><td>DOC_SOURCE_TYPE_COS</td><td>3</td><td>COS 对接</td></tr><tr><td>DOC_SOURCE_TYPE_IMPORT</td><td>4</td><td>外部导入</td></tr></tbody></table></p>
-   */
-  SourceType?: number
+  RequestId?: string
 }
 
 /**
@@ -4843,6 +4963,16 @@ export interface ModifyDocListResponse {
 }
 
 /**
+ * ModifyMessageRecordFeedback返回参数结构体
+ */
+export interface ModifyMessageRecordFeedbackResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeQASummaryList请求参数结构体
  */
 export interface DescribeQASummaryListRequest {
@@ -5186,6 +5316,36 @@ export interface ApiToolConfig {
    * <p>地址</p>
    */
   Url?: string
+}
+
+/**
+ * ModifyMessageRecordFeedback请求参数结构体
+ */
+export interface ModifyMessageRecordFeedbackRequest {
+  /**
+   * <p>需要反馈的消息记录ID</p>
+   */
+  RecordId: string
+  /**
+   * <p>消息记录所属应用的授权AppKey</p>
+   */
+  AppKey?: string
+  /**
+   * <p>反馈分值</p><p>枚举值：</p><ul><li>0： 取消点赞或点踩</li><li>1： 点赞</li><li>2： 点踩</li></ul>
+   */
+  Score?: number
+  /**
+   * <p>反馈的原因列表</p>
+   */
+  ReasonList?: Array<string>
+  /**
+   * <p>反馈的补充内容</p>
+   */
+  FeedbackContent?: string
+  /**
+   * <p>消息记录所属的应用ID</p>
+   */
+  AppId?: string
 }
 
 /**
@@ -6028,6 +6188,20 @@ export interface SkillCategory {
    * 分类名称
    */
   CategoryName: string
+}
+
+/**
+ * QuestionOption 问题选项信息
+ */
+export interface ConversationQuestionOption {
+  /**
+   * <p>选项描述</p>
+   */
+  Description: string
+  /**
+   * <p>选项标签</p>
+   */
+  Label: string
 }
 
 /**
@@ -7263,13 +7437,33 @@ export interface PromptRewriteModel {
 }
 
 /**
- * ManualOnlySchedule
+ * Question 问卷问题信息
  */
-export interface ManualOnlySchedule {
+export interface ConversationQuestion {
   /**
-   * 启用
+   * <p>问题序号</p>
    */
-  Enabled?: boolean
+  Index: number
+  /**
+   * <p>问题内容</p>
+   */
+  Question: string
+  /**
+   * <p>是否必答</p>
+   */
+  Required: boolean
+  /**
+   * <p>问题类型 枚举值: 0-QUESTION_TYPE_UNSPECIFIED(未指定), 1-QUESTION_TYPE_SINGLE(单选), 2-QUESTION_TYPE_MULTIPLE(多选)</p>
+   */
+  Type: number
+  /**
+   * <p>选项列表</p>
+   */
+  OptionList?: Array<ConversationQuestionOption>
+  /**
+   * <p>选项列表</p>
+   */
+  Options?: Array<ConversationQuestionOption>
 }
 
 /**
@@ -7737,6 +7931,28 @@ export interface DescribeKBRequest {
    * <p>工作空间 ID</p>
    */
   SpaceId?: string
+}
+
+/**
+ * Agent 内置工具详情
+ */
+export interface AgentBuiltinTool {
+  /**
+   * <p>内置工具基础配置</p>
+   */
+  Config?: AgentBuiltinToolConfig
+  /**
+   * <p>工具展示名称</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>工具描述</p>
+   */
+  Description?: string
+  /**
+   * <p>计费标识</p><p>枚举值：</p><ul><li>0： 免费</li><li>1： 限时免费</li><li>2： 官方收费</li></ul>
+   */
+  BillingType?: number
 }
 
 /**
@@ -8314,6 +8530,20 @@ export interface SimilarQuestion {
 }
 
 /**
+ * Agent 内置工具配置
+ */
+export interface AgentBuiltinToolConfig {
+  /**
+   * <p>工具名称</p>
+   */
+  Name?: string
+  /**
+   * <p>是否禁用该内置工具</p>
+   */
+  Disabled?: boolean
+}
+
+/**
  * Agent的工具基础配置
  */
 export interface AgentToolBasicConfig {
@@ -8680,13 +8910,17 @@ export interface AgentToolConfig {
 }
 
 /**
- * DeleteSkill返回参数结构体
+ * 文档查询条件
  */
-export interface DeleteSkillResponse {
+export interface DocQuery {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>查询关键词（名称模糊搜索）</p>
    */
-  RequestId?: string
+  Query?: string
+  /**
+   * <p>查询范围（query 作用的字段）：1=文件名，2=标签或标签值；支持多选，缺省时无效</p>
+   */
+  QueryScopeList?: Array<number | bigint>
 }
 
 /**
@@ -8705,6 +8939,21 @@ export interface KBCapacity {
    * <p>已用字符数</p>
    */
   UsedCharSize?: string
+  /**
+   * <p>字符数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CharacterSize?: CharacterSize
+  /**
+   * <p>容量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ByteCapacity?: ByteCapacity
+  /**
+   * <p>知识库容量状态</p><p>枚举值：</p><ul><li>1： 正常</li><li>2： 超量但可用（pu 抵扣）</li><li>3： 超量不可用</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CapacityStatus?: number
 }
 
 /**
@@ -8969,6 +9218,104 @@ export interface AccessKeyAuthConfig {
    * <p>Access Key 使用模式</p><p>枚举值：</p><ul><li>1： Access Key透传</li></ul>
    */
   UsageMode?: number
+}
+
+/**
+ * MessageExtraInfo 消息扩展信息
+ */
+export interface ConversationMessageExtraInfo {
+  /**
+   * <p>智能体图标</p>
+   */
+  AgentIcon: string
+  /**
+   * <p>智能体名称</p>
+   */
+  AgentName: string
+  /**
+   * <p>消息处理耗时</p>
+   */
+  Elapsed: string
+  /**
+   * <p>父消息 ID</p>
+   */
+  ParentMessageId: string
+  /**
+   * <p>关联记录 ID</p>
+   */
+  RelatedRecordId: string
+  /**
+   * <p>消息处理开始时间戳（毫秒）</p>
+   */
+  StartTime: string
+  /**
+   * <p>工具图标</p>
+   */
+  ToolIcon: string
+  /**
+   * <p>工具名称</p>
+   */
+  ToolName: string
+  /**
+   * <p>Trace ID</p>
+   */
+  TraceId: string
+  /**
+   * <p>是否可以反馈</p>
+   */
+  CanFeedback?: boolean
+  /**
+   * <p>是否可以点赞点踩</p>
+   */
+  CanRate?: boolean
+  /**
+   * <p>消息处理开始时间戳（毫秒）</p>
+   */
+  EndTime?: string
+  /**
+   * <p>是否已读</p>
+   */
+  HasRead?: boolean
+  /**
+   * <p>是否大模型生成</p>
+   */
+  IsModelGenerated?: boolean
+  /**
+   * <p>用户反馈标签列表</p>
+   */
+  ReasonList?: Array<string>
+  /**
+   * <p>回复方式</p>
+   */
+  ReplyMethod?: number
+  /**
+   * <p>用户打分</p>
+   */
+  Score?: number
+  /**
+   * <p>子 Agent 运行 Id</p>
+   */
+  SubAgentRunId?: string
+  /**
+   * <p>是否是子 Agent 的消息</p>
+   */
+  IsSubAgent?: boolean
+  /**
+   * <p>子 Agent 线程 ID</p>
+   */
+  SubAgentThreadId?: string
+  /**
+   * <p>是否是 Agent Team 模式下的 teammate 成员</p>
+   */
+  IsTeammate?: boolean
+  /**
+   * <p>Agent Team 模式下的 teammate 名称</p>
+   */
+  TeammateName?: string
+  /**
+   * <p>工作流节点名称</p>
+   */
+  WorkflowNodeName?: string
 }
 
 /**
@@ -9372,13 +9719,43 @@ export interface DescribeAppTriggerSummaryListRequest {
 }
 
 /**
- * AppTriggerScheduleConfig
+ * 文档操作权限信息
  */
-export interface AppTriggerScheduleConfig {
+export interface DocPermission {
   /**
-   * <p>触发器定时配置</p>
+   * <p>是否可删除</p>
    */
-  Schedule?: TimerScheduleConfig
+  CanDelete?: boolean
+  /**
+   * <p>是否可编辑</p>
+   */
+  CanEdit?: boolean
+  /**
+   * <p>是否可重新生成</p>
+   */
+  CanRestart?: boolean
+  /**
+   * <p>是否可重试</p>
+   */
+  CanRetry?: boolean
+}
+
+/**
+ * 知识库容量信息
+ */
+export interface CharacterSize {
+  /**
+   * <p>最大字符数</p>
+   */
+  MaxCharSize?: string
+  /**
+   * <p>超量字符数</p>
+   */
+  OverCharSize?: string
+  /**
+   * <p>已用字符数</p>
+   */
+  UsedCharSize?: string
 }
 
 /**
@@ -9806,17 +10183,21 @@ export interface DescribeLabelSummaryListRequest {
 }
 
 /**
- * DescribePlugin返回参数结构体
+ * CopyAgentFromApp请求参数结构体
  */
-export interface DescribePluginResponse {
+export interface CopyAgentFromAppRequest {
   /**
-   * <p>插件详情</p>
+   * <p>应用Id</p>
    */
-  Plugin?: Plugin
+  AppId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>目标应用ID，kind=0时需传入</p>
    */
-  RequestId?: string
+  TargetAppId?: string
+  /**
+   * <p>Agent 类型，区分 B 端配置态 Agent 与 C 端用户态 Agent</p><p>枚举值：</p><ul><li>0：  配置端Agent </li><li>1：  用户态 Agent</li></ul>
+   */
+  Kind?: number
 }
 
 /**
@@ -10574,6 +10955,11 @@ export interface ConversationMessage {
    */
   ConversationId: string
   /**
+   * <p>额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo: ConversationMessageExtraInfo
+  /**
    * <p>消息图标</p>
    */
   Icon: string
@@ -10761,6 +11147,14 @@ export interface ResourcePackageInfo {
    * <p>资源包状态</p><p>枚举值：</p><ul><li>1： 正常</li><li>3： 已到期</li><li>4： 即将到期</li></ul>
    */
   ResourceStatus?: number
+  /**
+   * <p>云盘容量</p><p>单位：GB</p>
+   */
+  CloudDiskCapacity?: number
+  /**
+   * <p>云盘用量</p><p>单位：GB</p>
+   */
+  CloudDiskUsage?: number
 }
 
 /**
@@ -11493,6 +11887,27 @@ export interface AgentDetail {
    * <p>调用方执行的 Function Tool 列表</p><p>入参限制：仅在 C 端用户态 Agent 场景可用，B 端配置态 Agent 忽略该字段与</p>
    */
   ExternalToolList?: Array<AgentExternalToolConfig>
+  /**
+   * <p>子 Agent 执行来源</p><p>枚举值：</p><ul><li>0： 应用内子 Agent</li><li>1： 引用已发布的应用</li></ul>
+   */
+  ProviderType?: number
+  /**
+   * <p>引用应用的ID</p>
+   */
+  ReferenceAppId?: string
+  /**
+   * <p>引用应用状态，ProviderType=1 时有效</p><p>枚举值：</p><ul><li>0： 来源应用可用</li><li>1： 来源应用不可用</li><li>2： 无权限</li><li>3： 嵌套引用: 来源应用线上生效配置中已含应用类子 Agent</li></ul>
+   */
+  ReferenceAppStatus?: number
+  /**
+   * <p>引用应用详情，ProviderType=1 时返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReferenceApp?: ReferenceAppDetail
+  /**
+   * <p>内置工具列表</p>
+   */
+  BuiltinToolList?: Array<AgentBuiltinTool>
 }
 
 /**
@@ -12152,6 +12567,14 @@ export interface AgentSummary {
    * <p>高级设置;scope=0 时返回</p>
    */
   AdvancedConfig?: AgentAdvancedConfig
+  /**
+   * <p>子 Agent 执行来源</p><p>枚举值：</p><ul><li>0： 应用内子 Agent</li><li>1： 引用已发布的应用</li></ul>
+   */
+  ProviderType?: number
+  /**
+   * <p>引用应用状态，ProviderType=1 时有效</p><p>枚举值：</p><ul><li>0： 来源应用可用</li><li>1： 来源应用不可用</li><li>2： 无权限</li><li>3： 嵌套引用: 来源应用线上生效配置中已含应用类子 Agent</li></ul>
+   */
+  ReferenceAppStatus?: number
 }
 
 /**
@@ -12481,25 +12904,13 @@ export interface AppPluginConfig {
 }
 
 /**
- * 文档操作权限信息
+ * AppTriggerScheduleConfig
  */
-export interface DocPermission {
+export interface AppTriggerScheduleConfig {
   /**
-   * <p>是否可删除</p>
+   * <p>触发器定时配置</p>
    */
-  CanDelete?: boolean
-  /**
-   * <p>是否可编辑</p>
-   */
-  CanEdit?: boolean
-  /**
-   * <p>是否可重新生成</p>
-   */
-  CanRestart?: boolean
-  /**
-   * <p>是否可重试</p>
-   */
-  CanRetry?: boolean
+  Schedule?: TimerScheduleConfig
 }
 
 /**
@@ -13060,6 +13471,32 @@ export interface ModelProviderBasic {
    * <p>模型提供商类型</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODEL_PROVIDER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>MODEL_PROVIDER_TYPE_SELF</td><td>1</td><td>自有提供商</td></tr><tr><td>MODEL_PROVIDER_TYPE_CUSTOM</td><td>2</td><td>自定义模型提供商</td></tr><tr><td>MODEL_PROVIDER_TYPE_THIRD</td><td>3</td><td>第三方模型提供商</td></tr></table>
    */
   ProviderType?: number
+}
+
+/**
+ * Questionnaire 问卷信息
+ */
+export interface ConversationQuestionnaire {
+  /**
+   * <p>问卷标题</p>
+   */
+  Title: string
+  /**
+   * <p>答案列表</p>
+   */
+  AnswerList?: Array<ConversationQuestionAnswer>
+  /**
+   * <p>答案列表</p>
+   */
+  Answers?: Array<ConversationQuestionAnswer>
+  /**
+   * <p>问题列表</p>
+   */
+  QuestionList?: Array<ConversationQuestion>
+  /**
+   * <p>问题列表</p>
+   */
+  Questions?: Array<ConversationQuestion>
 }
 
 /**

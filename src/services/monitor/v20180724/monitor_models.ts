@@ -9486,6 +9486,10 @@ export interface PrometheusClusterAgentBasic {
    */
   CollectAll?: boolean
   /**
+   * <p>私有连接的 IP</p>
+   */
+  PrivateLinkIP?: string
+  /**
    * <p>是否开启默认预聚合规则</p>
    */
   OpenDefaultRecord?: boolean

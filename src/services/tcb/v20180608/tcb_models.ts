@@ -1350,35 +1350,35 @@ export interface BuildStepStatus {
  */
 export interface ModifyLoginConfigRequest {
   /**
-   * 环境 ID，用于指定需要修改登录策略的云开发环境。
+   * <p>环境 ID，用于指定需要修改登录策略的云开发环境。</p>
    */
   EnvId: string
   /**
-   * 手机号短信登录开关。设置为 true 开启手机号短信登录，允许用户使用手机号和短信验证码进行登录和注册；设置为 false 关闭手机号短信登录。
+   * <p>手机号短信登录开关。设置为 true 开启手机号短信登录，允许用户使用手机号和短信验证码进行登录和注册；设置为 false 关闭手机号短信登录。</p>
    */
   PhoneNumberLogin: boolean
   /**
-   * 邮箱登录开关。设置为 true 开启邮箱登录，允许用户使用邮箱和密码进行登录和注册；设置为 false 关闭邮箱登录。
+   * <p>邮箱登录开关。设置为 true 开启邮箱登录，允许用户使用邮箱和密码进行登录和注册；设置为 false 关闭邮箱登录。</p>
    */
   EmailLogin: boolean
   /**
-   * 用户名密码登录开关。设置为 true 开启用户名密码登录，允许用户使用用户名和密码进行登录和注册；设置为 false 关闭用户名密码登录。
+   * <p>用户名密码登录开关。设置为 true 开启用户名密码登录，允许用户使用用户名和密码进行登录和注册；设置为 false 关闭用户名密码登录。</p>
    */
   UserNameLogin: boolean
   /**
-   * 匿名登录开关。设置为 true 开启匿名登录，允许用户无需注册即可以匿名身份访问应用；设置为 false 关闭匿名登录。
+   * <p>匿名登录开关。设置为 true 开启匿名登录，允许用户无需注册即可以匿名身份访问应用；设置为 false 关闭匿名登录。</p>
    */
   AnonymousLogin: boolean
   /**
-   * 短信验证码发送配置，用于设置短信验证码的发送通道类型和日发送限额。不传则不修改当前配置。
+   * <p>短信验证码发送配置，用于设置短信验证码的发送通道类型和日发送限额。不传则不修改当前配置。</p>
    */
   SmsVerificationConfig?: VerificationConfig
   /**
-   * MFA 多因子认证登录配置，用于设置多因子认证开关及验证方式（短信、邮箱、TOTP、强制绑定手机号）。不传则不修改当前配置。
+   * <p>MFA 多因子认证登录配置，用于设置多因子认证开关及验证方式（短信、邮箱、TOTP、强制绑定手机号）。不传则不修改当前配置。</p>
    */
   MfaConfig?: MFALoginConfig
   /**
-   * 密码更新策略配置，用于设置首次登录强制修改密码和定期强制修改密码策略。不传则不修改当前配置。
+   * <p>密码更新策略配置，用于设置首次登录强制修改密码和定期强制修改密码策略。不传则不修改当前配置。</p>
    */
   PwdUpdateStrategy?: PasswordUpdateLoginConfig
 }
@@ -1966,6 +1966,11 @@ export interface HTTPServiceCacheAction {
    */
   CacheKey?: HTTPServiceCacheKeyParams
 }
+
+/**
+ * DescribeEnvAccessControl请求参数结构体
+ */
+export type DescribeEnvAccessControlRequest = null
 
 /**
  * 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，自定义短信包可以通过自定义apis或者自定义短信模板的方式接入，推荐使用云开发默认短信包，方便快捷。
@@ -5126,6 +5131,11 @@ export interface CodeReq {
 }
 
 /**
+ * ModifyEnvAccessControl请求参数结构体
+ */
+export type ModifyEnvAccessControlRequest = null
+
+/**
  * 删除tcb用户返回值
  */
 export interface DeleteUsersResp {
@@ -5314,6 +5324,16 @@ export interface CloudAppLinkService {
    * <p>服务构建部署上下文</p>
    */
   BuildContext?: BuildContext
+}
+
+/**
+ * DescribeEnvAccessControl返回参数结构体
+ */
+export interface DescribeEnvAccessControlResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7430,6 +7450,16 @@ export interface AIModelSecret {
    * ApiKey,SecretKey和ApiKey二选一
    */
   ApiKey?: string
+}
+
+/**
+ * ModifyEnvAccessControl返回参数结构体
+ */
+export interface ModifyEnvAccessControlResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

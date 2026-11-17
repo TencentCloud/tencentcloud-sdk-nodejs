@@ -56,138 +56,17 @@ export interface SubmitServerConfigChangeDiffRequest {
 }
 
 /**
- * 服务基础配置信息
+ * ModifyStableIPStatus返回参数结构体
  */
-export interface ServerBaseConfig {
+export interface ModifyStableIPStatusResponse {
   /**
-   * <p>环境 Id</p>
+   * 任务 ID
    */
-  EnvId: string
+  TaskId?: number
   /**
-   * <p>服务名</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ServerName: string
-  /**
-   * <p>是否开启公网访问</p>
-   */
-  OpenAccessTypes: Array<string>
-  /**
-   * <p>Cpu 规格</p>
-   */
-  Cpu: number
-  /**
-   * <p>Mem 规格</p>
-   */
-  Mem: number
-  /**
-   * <p>最小副本数</p>
-   */
-  MinNum: number
-  /**
-   * <p>最大副本数</p>
-   */
-  MaxNum: number
-  /**
-   * <p>扩缩容配置</p>
-   */
-  PolicyDetails: Array<HpaPolicy>
-  /**
-   * <p>日志采集路径</p>
-   */
-  CustomLogs: string
-  /**
-   * <p>环境变量</p>
-   */
-  EnvParams: string
-  /**
-   * <p>延迟检测时间</p>
-   */
-  InitialDelaySeconds: number
-  /**
-   * <p>创建时间</p>
-   */
-  CreateTime: string
-  /**
-   * <p>服务端口</p>
-   */
-  Port: number
-  /**
-   * <p>是否有Dockerfile</p>
-   */
-  HasDockerfile: boolean
-  /**
-   * <p>Dockerfile 文件名</p>
-   */
-  Dockerfile: string
-  /**
-   * <p>构建目录</p>
-   */
-  BuildDir: string
-  /**
-   * <p>日志类型: none | default | custom</p>
-   */
-  LogType?: string
-  /**
-   * <p>cls setId</p>
-   */
-  LogSetId?: string
-  /**
-   * <p>cls 主题id</p>
-   */
-  LogTopicId?: string
-  /**
-   * <p>解析类型：json ｜ line</p>
-   */
-  LogParseType?: string
-  /**
-   * <p>服务标签, function: 函数托管</p>
-   */
-  Tag?: string
-  /**
-   * <p>内网访问开关 close | open</p>
-   */
-  InternalAccess?: string
-  /**
-   * <p>内网域名</p>
-   */
-  InternalDomain?: string
-  /**
-   * <p>运行模式</p>
-   */
-  OperationMode?: string
-  /**
-   * <p>定时扩缩容配置</p>
-   */
-  TimerScale?: Array<TimerScale>
-  /**
-   * <p>Dockerfile EntryPoint 参数</p>
-   */
-  EntryPoint?: Array<string>
-  /**
-   * <p>Dockerfile Cmd 参数</p>
-   */
-  Cmd?: Array<string>
-  /**
-   * <p>会话亲和性开关</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SessionAffinity?: string
-  /**
-   * <p>Vpc 配置参数</p>
-   */
-  VpcConf?: VpcConf
-  /**
-   * <p>存储配置信息</p>
-   */
-  VolumesConf?: Array<VolumeConf>
-  /**
-   * <p>关联镜像密钥</p>
-   */
-  LinkImageRegistry?: string
-  /**
-   * <p>公网访问配置</p>
-   */
-  PublicNetConf?: PublicNetConf
+  RequestId?: string
 }
 
 /**
@@ -521,6 +400,141 @@ export interface DescribeVersionDetailRequest {
    * <p>channel</p>
    */
   Channel?: string
+}
+
+/**
+ * 服务基础配置信息
+ */
+export interface ServerBaseConfig {
+  /**
+   * <p>环境 Id</p>
+   */
+  EnvId: string
+  /**
+   * <p>服务名</p>
+   */
+  ServerName: string
+  /**
+   * <p>是否开启公网访问</p>
+   */
+  OpenAccessTypes: Array<string>
+  /**
+   * <p>Cpu 规格</p>
+   */
+  Cpu: number
+  /**
+   * <p>Mem 规格</p>
+   */
+  Mem: number
+  /**
+   * <p>最小副本数</p>
+   */
+  MinNum: number
+  /**
+   * <p>最大副本数</p>
+   */
+  MaxNum: number
+  /**
+   * <p>扩缩容配置</p>
+   */
+  PolicyDetails: Array<HpaPolicy>
+  /**
+   * <p>日志采集路径</p>
+   */
+  CustomLogs: string
+  /**
+   * <p>环境变量</p>
+   */
+  EnvParams: string
+  /**
+   * <p>延迟检测时间</p>
+   */
+  InitialDelaySeconds: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime: string
+  /**
+   * <p>服务端口</p>
+   */
+  Port: number
+  /**
+   * <p>是否有Dockerfile</p>
+   */
+  HasDockerfile: boolean
+  /**
+   * <p>Dockerfile 文件名</p>
+   */
+  Dockerfile: string
+  /**
+   * <p>构建目录</p>
+   */
+  BuildDir: string
+  /**
+   * <p>日志类型: none | default | custom</p>
+   */
+  LogType?: string
+  /**
+   * <p>cls setId</p>
+   */
+  LogSetId?: string
+  /**
+   * <p>cls 主题id</p>
+   */
+  LogTopicId?: string
+  /**
+   * <p>解析类型：json ｜ line</p>
+   */
+  LogParseType?: string
+  /**
+   * <p>服务标签, function: 函数托管</p>
+   */
+  Tag?: string
+  /**
+   * <p>内网访问开关 close | open</p>
+   */
+  InternalAccess?: string
+  /**
+   * <p>内网域名</p>
+   */
+  InternalDomain?: string
+  /**
+   * <p>运行模式</p>
+   */
+  OperationMode?: string
+  /**
+   * <p>定时扩缩容配置</p>
+   */
+  TimerScale?: Array<TimerScale>
+  /**
+   * <p>Dockerfile EntryPoint 参数</p>
+   */
+  EntryPoint?: Array<string>
+  /**
+   * <p>Dockerfile Cmd 参数</p>
+   */
+  Cmd?: Array<string>
+  /**
+   * <p>会话亲和性开关</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionAffinity?: string
+  /**
+   * <p>Vpc 配置参数</p>
+   */
+  VpcConf?: VpcConf
+  /**
+   * <p>存储配置信息</p>
+   */
+  VolumesConf?: Array<VolumeConf>
+  /**
+   * <p>关联镜像密钥</p>
+   */
+  LinkImageRegistry?: string
+  /**
+   * <p>公网访问配置</p>
+   */
+  PublicNetConf?: PublicNetConf
 }
 
 /**
@@ -1314,25 +1328,17 @@ export interface DescribeServerManageTaskRequest {
 }
 
 /**
- * 云托管服务 Vpc 配置
+ * ModifyStableIPStatus请求参数结构体
  */
-export interface VpcConf {
+export interface ModifyStableIPStatusRequest {
   /**
-   * vpc id
+   * 环境ID
    */
-  VpcId?: string
+  EnvId: string
   /**
-   * vpc 网段
+   * ON: 开启固定 IP；OFF: 关闭固定 IP
    */
-  VpcCIDR?: string
-  /**
-   * subnet id
-   */
-  SubnetId?: string
-  /**
-   * subnet 网段
-   */
-  SubnetCIDR?: string
+  Status: string
 }
 
 /**
@@ -1570,6 +1576,28 @@ export interface DescribeCloudRunDeployRecordRequest {
    * 服务名
    */
   ServerName: string
+}
+
+/**
+ * 云托管服务 Vpc 配置
+ */
+export interface VpcConf {
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * vpc 网段
+   */
+  VpcCIDR?: string
+  /**
+   * subnet id
+   */
+  SubnetId?: string
+  /**
+   * subnet 网段
+   */
+  SubnetCIDR?: string
 }
 
 /**

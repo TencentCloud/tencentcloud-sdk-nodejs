@@ -18,6 +18,16 @@ const client = new tencentcloud.waf.v20180125.Client({
 })
 describe("waf.v20180125.test.js", function () {
 
+it("waf.v20180125.ModifyAntiFakeUrlStatus", async function () {
+    try {
+       const data = await client.ModifyAntiFakeUrlStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAttackType", async function () {
     try {
        const data = await client.DescribeAttackType({})
@@ -251,6 +261,16 @@ it("waf.v20180125.ModifyHostFlowMode", async function () {
 it("waf.v20180125.ModifyInstanceQpsLimit", async function () {
     try {
        const data = await client.ModifyInstanceQpsLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyLLMWafToolCallRule", async function () {
+    try {
+       const data = await client.ModifyLLMWafToolCallRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1398,9 +1418,9 @@ it("waf.v20180125.DescribePostCLSFlows", async function () {
     }
 })
 
-it("waf.v20180125.ModifyAntiFakeUrlStatus", async function () {
+it("waf.v20180125.DescribeLLMHourBillDetail", async function () {
     try {
-       const data = await client.ModifyAntiFakeUrlStatus({})
+       const data = await client.DescribeLLMHourBillDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1748,9 +1768,9 @@ it("waf.v20180125.DescribeBatchIpAccessControl", async function () {
     }
 })
 
-it("waf.v20180125.DescribeRateLimitsV2", async function () {
+it("waf.v20180125.DescribeLLMWafToolCallRules", async function () {
     try {
-       const data = await client.DescribeRateLimitsV2({})
+       const data = await client.DescribeLLMWafToolCallRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1811,6 +1831,16 @@ it("waf.v20180125.DeleteSession", async function () {
 it("waf.v20180125.DescribeDomainWhiteRules", async function () {
     try {
        const data = await client.DescribeDomainWhiteRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyLLMSdkAccess", async function () {
+    try {
+       const data = await client.ModifyLLMSdkAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2381,6 +2411,16 @@ it("waf.v20180125.ModifyApiSecEventChange", async function () {
 it("waf.v20180125.RefreshAccessCheckResult", async function () {
     try {
        const data = await client.RefreshAccessCheckResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeRateLimitsV2", async function () {
+    try {
+       const data = await client.DescribeRateLimitsV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

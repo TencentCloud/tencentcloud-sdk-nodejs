@@ -58,7 +58,7 @@ import {
   AsyncOperation,
   UpdateTableResponse,
   ListFilesRsp,
-  GetWorkflowRunRsp,
+  RangePartitioning,
   ListLocationsRequest,
   GetCatalogRsp,
   ListWorkflowsResponse,
@@ -123,6 +123,7 @@ import {
   DeleteSchemaRequest,
   UpdateConsoleUsersRequest,
   GetWorkflowTaskRunRsp,
+  TrainingData,
   DependOnBrief,
   FolderLocator,
   ListWorkspaceGroupsResponse,
@@ -130,6 +131,7 @@ import {
   ListTablesRsp,
   FileStorage,
   UpdateVolumeRsp,
+  FeatureLookup,
   UpdateWorkspaceUsersTagsRequest,
   MonitorMetricBrief,
   ParamInfo,
@@ -138,7 +140,8 @@ import {
   WorkspaceInfo,
   ListWorkflowTaskRunsRequest,
   ListPartitioning,
-  UpdateConsoleUsersRsp,
+  CreateExperimentResponse,
+  ListWorkspacesRequest,
   CreateModelVersionResponse,
   WorkflowRunBrief,
   FeatureTableDetail,
@@ -151,7 +154,7 @@ import {
   DeleteCatalogRsp,
   GetFileResponse,
   UpdateWorkspaceGroupsTagsRsp,
-  RangePartitioning,
+  GetWorkflowRunRsp,
   LocationInfo,
   ListConsoleGroupUsersResponse,
   AddWorkspaceGroupsResponse,
@@ -180,11 +183,12 @@ import {
   AdvancedDependencyConfig,
   ReadProductJsonResponse,
   FileInfo,
-  UpdateModelRequest,
+  Label,
   TableInfo,
   ListSchemaNamesRequest,
   CreateModelRequest,
   RemoveConsoleUsersRequest,
+  CreateExperimentRequest,
   GetVolumeResponse,
   CreateWorkspaceRoleResult,
   RunWorkflowResponse,
@@ -218,6 +222,7 @@ import {
   CreateConsoleGroupResponse,
   DeleteLocationResponse,
   ColumnInfo,
+  GetVolumeRequest,
   CreateWorkspaceRoleResponse,
   AddWorkspaceGroupsRequest,
   ListConsoleGroupUsersRequest,
@@ -225,6 +230,7 @@ import {
   GetViewResponse,
   RemoveWorkspaceGroupsResponse,
   UpdateConsoleUsersResponse,
+  UpdateModelRequest,
   ListViewNamesResponse,
   DeleteModelRsp,
   CreateVolumeRequest,
@@ -232,6 +238,7 @@ import {
   RemoveConsoleUsersResponse,
   GetTablesRequest,
   RemoveWorkspaceUsersResponse,
+  UpdateConsoleUsersRsp,
   ListModelsRequest,
   InnerWorkflowTaskRunIteration,
   SparseCheckoutConfig,
@@ -263,8 +270,10 @@ import {
   UpdateSchemaRequest,
   DeleteSchemaResponse,
   DeleteWorkspaceRoleResponse,
+  CreateExperimentRsp,
   ListCatalogNamesResponse,
   ScheduleBizEnumBrief,
+  ExperimentTag,
   CreateSchemaResponse,
   CreateFolderResponse,
   ListWorkflowsRsp,
@@ -323,7 +332,8 @@ import {
   UpdateFileResponse,
   CreateFolderRsp,
   StartComputeRequest,
-  GetVolumeRequest,
+  GetFileContentRequest,
+  GetFileContentRsp,
   DeleteFolderResponse,
   ListConsoleGroupsRequest,
   TaskRetryStrategy,
@@ -348,7 +358,7 @@ import {
   KVPair,
   CreateFolderRequest,
   UpdateCatalogResponse,
-  ListWorkspacesRequest,
+  ListSchemasRsp,
   CreateWorkspaceRequest,
   HighlightingInfo,
   WorkflowTriggerConfiguration,
@@ -361,6 +371,7 @@ import {
   RoleMetaData,
   ListWorkflowTaskRunsRsp,
   ListLocationsRsp,
+  GetFileContentResponse,
   ListVolumesResponse,
   GetSchemaResponse,
   TagValueInfo,
@@ -413,7 +424,6 @@ import {
   ListConsoleGroupUsersRsp,
   Audit,
   DeleteCatalogResponse,
-  ListSchemasRsp,
   GetWorkflowTaskRunResponse,
   ListWorkspacesResponse,
   PermissionDetail,
@@ -427,6 +437,7 @@ import {
   UpdateVolumeResponse,
   RemoveWorkspaceUsersRequest,
   GetTableRequest,
+  AutoMlConf,
   FeatureTable,
   ReadProductJsonRequest,
 } from "./databuddy_models"
@@ -860,6 +871,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取文件内容。第一期：支持 FileId 定位
+   */
+  async GetFileContent(
+    req: GetFileContentRequest,
+    cb?: (error: string, rep: GetFileContentResponse) => void
+  ): Promise<GetFileContentResponse> {
+    return this.request("GetFileContent", req, cb)
+  }
+
+  /**
    * 删除view
    */
   async DeleteView(
@@ -1054,6 +1075,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFolderResponse) => void
   ): Promise<GetFolderResponse> {
     return this.request("GetFolder", req, cb)
+  }
+
+  /**
+   * 创建实验。实验是 MLflow 训练跟踪的容器，用于承载训练运行记录与已记录模型。支持 MACHINE_LEARNING/CLASSIFICATION/REGRESSION/FORECASTING/AGENT 五种类型；AutoML 类型（分类/回归/时序预测）需同时传入 AutoMlConf 与 TrainingData。
+   */
+  async CreateExperiment(
+    req: CreateExperimentRequest,
+    cb?: (error: string, rep: CreateExperimentResponse) => void
+  ): Promise<CreateExperimentResponse> {
+    return this.request("CreateExperiment", req, cb)
   }
 
   /**

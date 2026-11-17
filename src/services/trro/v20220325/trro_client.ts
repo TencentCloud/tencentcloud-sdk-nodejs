@@ -90,6 +90,7 @@ import {
   OutputInfo,
   StopPublishLiveStreamRequest,
   DeleteCloudRecordingRequest,
+  ExtraSourceInfo,
   StopPublishLiveStreamResponse,
   DescribeSessionStatisticsResponse,
   PublishParams,

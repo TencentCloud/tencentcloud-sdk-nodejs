@@ -3104,6 +3104,10 @@ export interface DBInfo {
    * <p>tdsql的分片id。如节点类型为set必填。</p>
    */
   SetId?: string
+  /**
+   * <p>MongoDB专用。分片标识（如&quot;shard01&quot;），仅NodeType=cluster时生效，用于区分分片集群中不同的mongod节点</p>
+   */
+  Shard?: string
 }
 
 /**
@@ -4063,6 +4067,10 @@ export interface ModifyMigrateRateLimitRequest {
    */
   DumpRps?: number
   /**
+   * <p>全量导出Bps，单位MB/s，MongoDB专用，上限80</p>
+   */
+  DumpBps?: number
+  /**
    * <p>迁移任务全量导入线程数、有效值为 1-16</p>
    */
   LoadThread?: number
@@ -4074,6 +4082,22 @@ export interface ModifyMigrateRateLimitRequest {
    * <p>全量导入Rps限制</p>
    */
   LoadRps?: number
+  /**
+   * <p>导入BPS，单位MB/s。目前仅对redis生效，表示目标库单分片流量限制大小</p>
+   */
+  LoadBps?: number
+  /**
+   * <p>目标库分片数，目前仅对redis生效</p>
+   */
+  DstShardCount?: number
+  /**
+   * <p>增量导入Rps，MongoDB专用，上限30000</p>
+   */
+  SinkerRps?: number
+  /**
+   * <p>增量导入Bps，单位MB/s，MongoDB专用，上限120</p>
+   */
+  SinkerBps?: number
 }
 
 /**
@@ -4455,49 +4479,81 @@ export interface CreateCompareTaskResponse {
  */
 export interface RateLimitOption {
   /**
-   * 当前生效的全量导出线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16
+   * <p>当前生效的全量导出线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16</p>
    */
   CurrentDumpThread: number
   /**
-   * 默认的全量导出线程数，该字段仅在出参有意义
+   * <p>默认的全量导出线程数，该字段仅在出参有意义</p>
    */
   DefaultDumpThread: number
   /**
-   * 当前生效的全量导出Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000
+   * <p>当前生效的全量导出Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000</p>
    */
   CurrentDumpRps: number
   /**
-   * 默认的全量导出Rps，该字段仅在出参有意义
+   * <p>默认的全量导出Rps，该字段仅在出参有意义</p>
    */
   DefaultDumpRps: number
   /**
-   * 当前生效的全量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16
+   * <p>当前生效的全量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16</p>
    */
   CurrentLoadThread: number
   /**
-   * 默认的全量导入线程数，该字段仅在出参有意义
+   * <p>默认的全量导入线程数，该字段仅在出参有意义</p>
    */
   DefaultLoadThread: number
   /**
-   * 当前生效的全量导入Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000
+   * <p>当前生效的全量导入Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000</p>
    */
   CurrentLoadRps: number
   /**
-   * 默认的全量导入Rps，该字段仅在出参有意义
+   * <p>默认的全量导入Rps，该字段仅在出参有意义</p>
    */
   DefaultLoadRps: number
   /**
-   * 当前生效的增量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为128
+   * <p>当前生效的增量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为128</p>
    */
   CurrentSinkerThread: number
   /**
-   * 默认的增量导入线程数，该字段仅在出参有意义
+   * <p>默认的增量导入线程数，该字段仅在出参有意义</p>
    */
   DefaultSinkerThread: number
   /**
-   * enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速，该字段仅在出参有意义
+   * <p>enum:&quot;no&quot;/&quot;yes&quot;、no表示用户未设置过限速、yes表示设置过限速，该字段仅在出参有意义</p>
    */
   HasUserSetRateLimit: string
+  /**
+   * <p>默认的全量导出BPS，目前仅支持mongodb链路，单位MB/s</p>
+   */
+  DefaultDumpBps?: number
+  /**
+   * <p>增量导入RPS，目前仅支持mongodb链路</p>
+   */
+  CurrentSinkerRps?: number
+  /**
+   * <p>默认的增量导入RPS，目前仅支持mongodb链路</p>
+   */
+  DefaultSinkerRps?: number
+  /**
+   * <p>当前导入BPS，暂时只有redis在用，单位MB/s</p>
+   */
+  CurrentLoadBps?: number
+  /**
+   * <p>目标库分片数，暂时只有redis在用</p>
+   */
+  CurrentDstShardCount?: number
+  /**
+   * <p>全量导出BPS，目前仅支持mongodb链路，单位MB/s</p>
+   */
+  CurrentDumpBps?: number
+  /**
+   * <p>增量导入BPS，目前仅支持mongodb链路，单位MB/s</p>
+   */
+  CurrentSinkerBps?: number
+  /**
+   * <p>默认的增量导入BPS，目前仅支持mongodb链路，单位MB/s</p>
+   */
+  DefaultSinkerBps?: number
 }
 
 /**
@@ -4762,7 +4818,7 @@ export interface RateLimit {
    */
   DumpThread?: number
   /**
-   * <p>全量导出Rps，如果不设置或设置为0则表示保持当前值，最大值为50000000</p>
+   * <p>全量导出Rps，如果不设置或设置为0则表示保持当前值，最大值为50000000。支持mysql系相关链路、mongodb链路。</p>
    */
   DumpRps?: number
   /**
@@ -4777,6 +4833,26 @@ export interface RateLimit {
    * <p>增量导入线程数，如果不设置或设置为0则表示保持当前值，最大值为128</p>
    */
   SinkerThread?: number
+  /**
+   * <p>全量导入Bps（暂时只有redis产品生效），单位MB/s</p>
+   */
+  LoadBps?: number
+  /**
+   * <p>目标库分片数，目前暂时只有redis用</p>
+   */
+  DstShardCount?: number
+  /**
+   * <p>全量导出Bps（pg链路及MongoDB链路使用。MongoDB上限80），单位MB/s</p>
+   */
+  DumpBps?: number
+  /**
+   * <p>增量导入RPS限制，MongoDB专用。上限30000</p>
+   */
+  SinkerRps?: number
+  /**
+   * <p>增量导入BPS限制，单位MB/s，MongoDB专用。上限120</p>
+   */
+  SinkerBps?: number
 }
 
 /**

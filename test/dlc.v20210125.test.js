@@ -2668,6 +2668,16 @@ it("dlc.v20210125.QueryMonitorOverview", async function () {
     }
 })
 
+it("dlc.v20210125.DescribePartitionMonitorOverview", async function () {
+    try {
+       const data = await client.DescribePartitionMonitorOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteThirdPartyAccessUser", async function () {
     try {
        const data = await client.DeleteThirdPartyAccessUser({})

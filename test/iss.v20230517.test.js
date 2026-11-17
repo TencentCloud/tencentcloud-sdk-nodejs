@@ -118,6 +118,16 @@ it("iss.v20230517.RefreshDeviceChannel", async function () {
     }
 })
 
+it("iss.v20230517.ListVideoSnapshotResult", async function () {
+    try {
+       const data = await client.ListVideoSnapshotResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.ControlDeviceSnapshot", async function () {
     try {
        const data = await client.ControlDeviceSnapshot({})

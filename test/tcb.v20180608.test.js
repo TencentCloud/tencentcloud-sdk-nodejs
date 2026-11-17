@@ -108,6 +108,16 @@ it("tcb.v20180608.ModifyClient", async function () {
     }
 })
 
+it("tcb.v20180608.ModifyEnvAccessControl", async function () {
+    try {
+       const data = await client.ModifyEnvAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeClient", async function () {
     try {
        const data = await client.DescribeClient({})
@@ -741,6 +751,16 @@ it("tcb.v20180608.EnablePGDocumentExt", async function () {
 it("tcb.v20180608.DeleteHTTPServiceRoute", async function () {
     try {
        const data = await client.DeleteHTTPServiceRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeEnvAccessControl", async function () {
+    try {
+       const data = await client.DescribeEnvAccessControl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

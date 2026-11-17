@@ -2304,6 +2304,60 @@ export interface GetRayClusterRequest {
 }
 
 /**
+ * UpdateResourceConfig返回参数结构体
+ */
+export interface UpdateResourceConfigResponse {
+  /**
+   * 模板ID
+   */
+  Id?: string
+  /**
+   * 模板名称
+   */
+  Name?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * Head节点配置
+   */
+  Head?: HeadSpecDTO
+  /**
+   * Worker节点配置
+   */
+  Worker?: Array<WorkerSpecDTO>
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 模板类型
+   */
+  Type?: string
+  /**
+   * 应用ID
+   */
+  AppId?: number
+  /**
+   * 创建者UIN
+   */
+  Uin?: string
+  /**
+   * 子用户UIN
+   */
+  SubAccountUin?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CancelNotebookSessionStatementBatch返回参数结构体
  */
 export interface CancelNotebookSessionStatementBatchResponse {
@@ -5002,57 +5056,29 @@ export interface UserVpcConnectionInfo {
 }
 
 /**
- * UpdateResourceConfig返回参数结构体
+ * 维度标签集合。当前已知 key：QueueName（多队列时序）、QueueAlias（队列展示别名，前端图例展示用，alias 缺省时回落为队列 code）、GpuType（GPU 类指标按卡型拆分时携带）、ResourceType（预留，时序路径当前不输出）。未来扩展新维度（如 Region / Zone）时，以 optional 属性形式追加到本 schema
  */
-export interface UpdateResourceConfigResponse {
+export interface MetricLabels {
   /**
-   * 模板ID
+   * <p>GPU 卡型简称，取值如 T4 / A10 / V100 / L20 / H20。来自 TKE GPU Exporter 暴露的 gpu_info.name，由查询层归一（name=&quot;Tesla T4&quot; → GpuType=&quot;T4&quot;）；未识别的卡型保留原始 name 值</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id?: string
+  GpuType?: string
   /**
-   * 模板名称
+   * <p>队列编码 code（多队列时序查询时，每个 series 携带所属队列 code，与 GpuType 组合区分曲线；展示别名见 QueueAlias）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  QueueName?: string
   /**
-   * 描述
+   * <p>队列展示别名（多队列时序查询时每个 series 携带，前端图例展示用；队列不存在或 alias 为空时回落为队列 code）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description?: string
+  QueueAlias?: string
   /**
-   * Head节点配置
+   * <p>计费项资源类型（CPU / HM_CPU）。Overview 路径的 CPU / 内存类指标按计费项资源类型拆分 series 时携带；时序路径当前不输出该字段（预留对齐 MetricLabels 定义）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Head?: HeadSpecDTO
-  /**
-   * Worker节点配置
-   */
-  Worker?: Array<WorkerSpecDTO>
-  /**
-   * 创建时间
-   */
-  CreateTime?: number
-  /**
-   * 更新时间
-   */
-  UpdateTime?: number
-  /**
-   * 模板类型
-   */
-  Type?: string
-  /**
-   * 应用ID
-   */
-  AppId?: number
-  /**
-   * 创建者UIN
-   */
-  Uin?: string
-  /**
-   * 子用户UIN
-   */
-  SubAccountUin?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ResourceType?: string
 }
 
 /**
@@ -15218,6 +15244,24 @@ export interface StandardEngineResourceGroupConfigInfo {
 }
 
 /**
+ * DescribePartitionMonitorOverview请求参数结构体
+ */
+export interface DescribePartitionMonitorOverviewRequest {
+  /**
+   * <p>资源分区编码</p>
+   */
+  PartitionCode: string
+  /**
+   * <p>资源组（队列）名称，可选。不传时返回 partition 维度指标（含 pending_workloads / admission_wait_seconds / top_queue_by_cpu 排队卡片、<em>_limit_business 计费口径已使用量、</em><em>quota_total 配额、postpay_month_consumed_total 当月已消耗）；传入时切换为 queue 维度：仅返回 queue</em> 前缀指标（queue_<em><em>limit_business 计费口径已使用量 / queue</em></em>_admitted Kueue 对照口径 / queue_pending_workloads / queue_admission_wait_seconds）+ 该队列的配额指标（cpu_quota_total / memory_quota_total / gpu_quota_total / vram_quota_total，数值来自队列的 resource_usage 而非分区 resource_config）+ postpay_month_consumed_total</p>
+   */
+  QueueName?: string
+  /**
+   * <p>指标 key 过滤列表，为空则返回全部指标</p>
+   */
+  MetricKeys?: Array<string>
+}
+
+/**
  * 入站下载信息（结果集 / 日志通用）.
  */
 export interface DownloadInfo {
@@ -15464,6 +15508,20 @@ export interface LakeFileSystemToken {
    * 颁布时间
    */
   IssueTime?: number
+}
+
+/**
+ * DescribePartitionMonitorOverview返回参数结构体
+ */
+export interface DescribePartitionMonitorOverviewResponse {
+  /**
+   * <p>监控指标列表</p>
+   */
+  Metrics?: Array<MetricValue>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -29010,6 +29068,35 @@ export interface UpdateJobSpecRequest {
    * <p>用户网络配置 JSON 字符串（跨租户 ENI 注入）</p>
    */
   NetworkConfig?: string
+}
+
+/**
+ * 监控指标值（不含展示名，前端按 MetricKey 自行映射文案）
+ */
+export interface MetricValue {
+  /**
+   * <p>指标键名，如 cpu_allocation、cpu_quota_total 等</p>
+   */
+  MetricKey?: string
+  /**
+   * <p>指标当前值，可能为 null（PromQL 返回空数据集时），前端按 null 视作&quot;无数据&quot;处理</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: number
+  /**
+   * <p>指标单位，如 core、card、GB</p>
+   */
+  Unit?: string
+  /**
+   * <p>资源类型：cpu / gpu / memory / vram / kueue / consumption</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceType?: string
+  /**
+   * <p>维度标签。单 series 指标（CPU / 内存 / Kueue 等）不出现此字段；多 series 指标（GPU 类按卡型拆分）每条 MetricValue 携带不同的 Labels 区分维度。前端按 (MetricKey, Labels) 二元组识别每条记录</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Labels?: MetricLabels
 }
 
 /**

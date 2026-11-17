@@ -346,6 +346,80 @@ export interface DescribeModelListResponse {
 }
 
 /**
+ * DescribeTokenPlanPersonalPackage返回参数结构体
+ */
+export interface DescribeTokenPlanPersonalPackageResponse {
+  /**
+   * <p>产品类型。</p>
+   */
+  ProductType?: string
+  /**
+   * <p>套餐状态。取值：active（生效中）、processing（处理中）、failed（创建失败）、isolated（隔离/欠费）、destroyed（已销毁）、used_up（额度用尽）、stopped（已停止）、unpurchased（未购买）。</p>
+   */
+  PackageStatus?: string
+  /**
+   * <p>计费资源ID</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>总额度。</p>
+   */
+  TotalCredits?: string
+  /**
+   * <p>已使用额度。</p>
+   */
+  TotalUsed?: string
+  /**
+   * <p>单周期额度。</p>
+   */
+  CycleCredits?: string
+  /**
+   * <p>总周期数。</p>
+   */
+  TotalCycles?: number
+  /**
+   * <p>当前周期序号。</p>
+   */
+  CurrentCycle?: number
+  /**
+   * <p>剩余周期数。</p>
+   */
+  RemainCycles?: number
+  /**
+   * <p>套餐生效时间，ISO 8601 格式。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>套餐过期时间，ISO 8601 格式。</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>当前周期到期日，ISO 8601 格式。</p>
+   */
+  PeriodEndDate?: string
+  /**
+   * <p>自动续费标识。取值：0（未开启）、1（已开启）。</p>
+   */
+  AutoRenewFlag?: number
+  /**
+   * <p>输出token数</p><p>单位：tokens</p>
+   */
+  OutputToken?: number
+  /**
+   * <p>输入token数</p><p>单位：token</p>
+   */
+  InputToken?: number
+  /**
+   * <p>缓存命中token数</p><p>单位：token</p>
+   */
+  CacheToken?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteEndpoint返回参数结构体
  */
 export interface DeleteEndpointResponse {
@@ -1904,6 +1978,16 @@ export interface TokenPlanListItem {
 }
 
 /**
+ * DescribeTokenPlanPersonalPackage请求参数结构体
+ */
+export interface DescribeTokenPlanPersonalPackageRequest {
+  /**
+   * <p>产品类型。取值：personal（个人版）、personal-hunyuan（个人版混元）。</p>
+   */
+  ProductType: string
+}
+
+/**
  * DescribeApiKey请求参数结构体
  */
 export interface DescribeApiKeyRequest {
@@ -2256,25 +2340,13 @@ export interface DescribeTokenPlanApiKeyResponse {
 }
 
 /**
- * DescribeTokenPlanList请求参数结构体
+ * ModifyTokenPlanApiKeySecret请求参数结构体
  */
-export interface DescribeTokenPlanListRequest {
+export interface ModifyTokenPlanApiKeySecretRequest {
   /**
-   * 分页查询偏移量，默认为 0。
+   * API Key ID。可通过DescribeTokenPlanApiKeyList接口获取。
    */
-  Offset?: number
-  /**
-   * 分页查询返回数量，默认为 20，最大值为 100。
-   */
-  Limit?: number
-  /**
-   * 分页查询过滤条件列表。支持的过滤字段：TeamId（套餐 ID）、Name（套餐名称）、StopReason（关停原因）、ProductType（套餐类型）。
-   */
-  Filters?: Array<RequestFilter>
-  /**
-   * 排序条件列表。支持的排序字段：CreatedAt（创建时间）、UpdatedAt（更新时间）。默认按 CreatedAt 降序。
-   */
-  Sorts?: Array<RequestSort>
+  ApiKeyId: string
 }
 
 /**
@@ -2659,13 +2731,25 @@ export interface RequestFilter {
 }
 
 /**
- * ModifyTokenPlanApiKeySecret请求参数结构体
+ * DescribeTokenPlanList请求参数结构体
  */
-export interface ModifyTokenPlanApiKeySecretRequest {
+export interface DescribeTokenPlanListRequest {
   /**
-   * API Key ID。可通过DescribeTokenPlanApiKeyList接口获取。
+   * 分页查询偏移量，默认为 0。
    */
-  ApiKeyId: string
+  Offset?: number
+  /**
+   * 分页查询返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+  /**
+   * 分页查询过滤条件列表。支持的过滤字段：TeamId（套餐 ID）、Name（套餐名称）、StopReason（关停原因）、ProductType（套餐类型）。
+   */
+  Filters?: Array<RequestFilter>
+  /**
+   * 排序条件列表。支持的排序字段：CreatedAt（创建时间）、UpdatedAt（更新时间）。默认按 CreatedAt 降序。
+   */
+  Sorts?: Array<RequestSort>
 }
 
 /**

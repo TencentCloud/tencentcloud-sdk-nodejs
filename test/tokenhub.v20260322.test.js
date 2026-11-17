@@ -168,6 +168,16 @@ it("tokenhub.v20260322.DescribeUsageRankList", async function () {
     }
 })
 
+it("tokenhub.v20260322.DescribeTokenPlanPersonalPackage", async function () {
+    try {
+       const data = await client.DescribeTokenPlanPersonalPackage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.DeleteGlossaryEntries", async function () {
     try {
        const data = await client.DeleteGlossaryEntries({})

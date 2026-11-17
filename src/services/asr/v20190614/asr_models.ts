@@ -214,39 +214,43 @@ export interface DeleteCustomizationResponse {
  */
 export interface TaskStatus {
   /**
-   * 任务标识。注意：TaskId数据类型为uint64。
+   * <p>任务标识。注意：TaskId数据类型为uint64。</p>
    */
   TaskId?: number
   /**
-   * 任务状态码，0：任务等待，1：任务执行中，2：任务成功，3：任务失败。
+   * <p>任务状态码，0：任务等待，1：任务执行中，2：任务成功，3：任务失败。</p>
    */
   Status?: number
   /**
-   * 任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。
+   * <p>任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。</p>
    */
   StatusStr?: string
   /**
-   * 识别结果。
+   * <p>识别结果。</p>
    */
   Result?: string
   /**
-   * 失败原因说明。
+   * <p>失败原因说明。</p>
    */
   ErrorMsg?: string
   /**
-   * 识别结果详情，包含每个句子中的词时间偏移，一般用于生成字幕的场景。(录音识别请求中ResTextFormat=1时该字段不为空)
+   * <p>识别结果详情，包含每个句子中的词时间偏移，一般用于生成字幕的场景。(录音识别请求中ResTextFormat=1时该字段不为空)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultDetail?: Array<SentenceDetail>
   /**
-   * 音频时长(秒)。
+   * <p>音频时长(秒)。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioDuration?: number
   /**
-   * 大模型后处理结果
+   * <p>大模型后处理结果</p>
    */
   LlmResults?: Array<LlmResult>
+  /**
+   * <p>说话人上下文 ID</p>
+   */
+  SpeakerContextId?: string
 }
 
 /**
@@ -765,7 +769,7 @@ export interface SpeakerRoleInfo {
    */
   RoleAudioUrl?: string
   /**
-   * <p>不超过30字节（配合RoleAudioUrl字段一起使用，仅限16k_zh_en、16k_zh_en_2.0引擎）</p>
+   * <p>不超过32字节（配合RoleAudioUrl字段一起使用，仅限16k_zh_en、16k_zh_en_2.0引擎）</p>
    */
   RoleName?: string
   /**
@@ -773,7 +777,7 @@ export interface SpeakerRoleInfo {
    */
   VoicePrintId?: string
   /**
-   * <p>角色昵称（与VoicePrintId配合使用，仅限16k_zh_en_meeting引擎支持），注意：- 传空字符串或者不传入则使用声纹注册时指定的角色名- 否则将覆盖声纹注册时指定的角色名- 角色名不超过 30 字节，仅支持字母、数字、下划线和中文。- 这里指定的角色名只影响本次识别，不影响声纹库中注册的角色名</p>
+   * <p>角色昵称（与VoicePrintId配合使用，仅限16k_zh_en_meeting引擎支持），注意：- 传空字符串或者不传入则使用声纹注册时指定的角色名- 否则将覆盖声纹注册时指定的角色名- 角色名不超过 32 字节。- 这里指定的角色名只影响本次识别，不影响声纹库中注册的角色名</p>
    */
   SpeakerNick?: string
 }
@@ -1176,9 +1180,25 @@ export interface CreateRecTaskRequest {
    */
   ReplaceTextId?: string
   /**
-   * <p>开启角色分离能力配合SpeakerDiarization: 3 使用。</p><p>ASR增值服务，<br>使用方式一：<strong>仅可传入一个声纹信息</strong>进行角色认证，仅支持16k_zh_en_2.0和16k_zh_en引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及RoleAudioUrl和RoleName两个参数。 RoleAudioUrl：需要认证角色的声纹音频地址，建议30s内的纯净人声，最长不能超过45s。 RoleName：需要认证角色的名称，若匹配成功，会替换话者分离中的SpeakerID。<br>使用方式二：<strong>可传入一组声纹信息</strong>进行角色认证，仅支持16k_zh_en_meeting引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及VoicePrintId和SpeakerNick两个参数。 VoicePrintId：需要认证角色的声纹ID（需提前进行<a href="https://cloud.tencent.com/document/product/1093/94483">说话人注册</a>），建议30s的纯净人声，最长不能超过45s，有效人声不得低于1s。 SpeakerNick：需要认证角色的名称，会替换话者分离中的SpeakerID，如不传则复用说话人注册时的名称。<br><strong>注意：声纹注册后5分钟生效</strong></p><p> 示例： &quot;{"EngineModelType":"16k_zh_en","ChannelNum":1,"ResTextFormat":1,"SourceType":0,"Url":"需要进行ASR识别的音频链接","SpeakerDiarization":3,"SpeakerRoles":[{"RoleAudioUrl":"需要认证角色的声纹音频地址","RoleName":"需要认证角色的名称"}]}&quot;</p>
+   * <p>开启角色分离能力配合SpeakerDiarization: 3 使用。</p><p>此为ASR增值服务<br>使用方式一：<strong>仅可传入一个声纹信息</strong>进行角色认证，仅支持16k_zh_en_2.0和16k_zh_en引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及RoleAudioUrl和RoleName两个参数。 RoleAudioUrl：需要认证角色的声纹音频地址，建议30s内的纯净人声，最长不能超过45s。 RoleName：需要认证角色的名称，若匹配成功，会替换话者分离中的SpeakerID。<br>使用方式二：<strong>可传入一组声纹信息</strong>进行角色认证，仅支持16k_zh_en_meeting引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及VoicePrintId和SpeakerNick两个参数。 VoicePrintId：需要认证角色的声纹ID（需提前进行<a href="https://cloud.tencent.com/document/product/1093/94483">说话人注册</a>），建议30s的纯净人声，最长不能超过45s，有效人声不得低于1s。 SpeakerNick：需要认证角色的名称，会替换话者分离中的SpeakerID，如不传则复用说话人注册时的名称。<br><strong>注意：声纹注册后5分钟生效</strong></p><p> 示例： &quot;{"EngineModelType":"16k_zh_en","ChannelNum":1,"ResTextFormat":1,"SourceType":0,"Url":"需要进行ASR识别的音频链接","SpeakerDiarization":3,"SpeakerRoles":[{"RoleAudioUrl":"需要认证角色的声纹音频地址","RoleName":"需要认证角色的名称"}]}&quot;</p>
    */
   SpeakerRoles?: Array<SpeakerRoleInfo>
+  /**
+   * <p>上下文数据，支持文本输入，可输入历史对话上下文、关键词集合等。(支持引擎： 16k_zh_en_meeting)</p>
+   */
+  ContextData?: string
+  /**
+   * <p>分句策略：<br>0 - 默认分句，句子短。<br>1 - 段落分句，可将同一说话人连续转写结果中相邻几句聚合成一个小段落，句子更长，仅当ResTextFormat &gt; 0可配合使用。<br>默认值：0</p>
+   */
+  SentenceStrategy?: number
+  /**
+   * <p>是否开启断点续传能力，需配合说话人分离能力使用（SpeakerDiarization为1或3）：<br>0：关闭，<br>1：开启。(支持引擎： 16k_zh_en_meeting)<br>若开启断点续传能力，会返回说话人上下文SpeakerContextId（24h 有效），下一次识别时传入 SpeakerContextId，可以沿用本次识别保存的说话人信息，让两次识别中<strong>同一说话人的 SpeakerId 保持一致</strong>。</p>
+   */
+  EnableSpeakerContext?: number
+  /**
+   * <p>说话人上下文ID。传入后，本次话者分离说话人 ID 会与上次的话者分离任务保持一致。(支持引擎： 16k_zh_en_meeting)</p>
+   */
+  SpeakerContextId?: string
 }
 
 /**
@@ -1258,6 +1278,10 @@ export interface SentenceDetail {
    * <p>说话人角色名称</p>
    */
   SpeakerRoleName?: string
+  /**
+   * <p>说话人的声纹 ID</p>
+   */
+  SpeakerVoicePrintId?: string
 }
 
 /**

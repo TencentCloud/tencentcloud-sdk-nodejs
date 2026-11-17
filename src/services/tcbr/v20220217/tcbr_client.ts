@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeCloudRunServersResponse,
   SubmitServerConfigChangeDiffRequest,
-  ServerBaseConfig,
+  ModifyStableIPStatusResponse,
   DescribeCloudRunProcessLogRequest,
   RepositoryInfo,
   ReleaseGrayRequest,
@@ -35,6 +35,7 @@ import {
   TaskStepInfo,
   VersionPodInstance,
   DescribeVersionDetailRequest,
+  ServerBaseConfig,
   InitializeCloudRunResourceResponse,
   DescribeCloudRunEnvsResponse,
   ServerBaseInfo,
@@ -70,7 +71,7 @@ import {
   DeleteCloudRunServerRequest,
   ClsInfo,
   DescribeServerManageTaskRequest,
-  VpcConf,
+  ModifyStableIPStatusRequest,
   HpaPolicy,
   OperateServerManageRequest,
   LogObject,
@@ -82,6 +83,7 @@ import {
   DescribeCloudRunServerDetailResponse,
   CreateCloudRunEnvResponse,
   DescribeCloudRunDeployRecordRequest,
+  VpcConf,
   ReleaseOrderInfo,
   DeleteCloudRunVersionsRequest,
   DeleteCloudRunServerResponse,
@@ -133,13 +135,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除云托管服务：包括服务下的版本，镜像，流水线
+   * 启动版本实例
    */
-  async DeleteCloudRunServer(
-    req: DeleteCloudRunServerRequest,
-    cb?: (error: string, rep: DeleteCloudRunServerResponse) => void
-  ): Promise<DeleteCloudRunServerResponse> {
-    return this.request("DeleteCloudRunServer", req, cb)
+  async StartVersionInstance(
+    req: StartVersionInstanceRequest,
+    cb?: (error: string, rep: StartVersionInstanceResponse) => void
+  ): Promise<StartVersionInstanceResponse> {
+    return this.request("StartVersionInstance", req, cb)
+  }
+
+  /**
+   * 本接口 ModifyStableIPStatus 用于修改固定 IP 状态
+   */
+  async ModifyStableIPStatus(
+    req: ModifyStableIPStatusRequest,
+    cb?: (error: string, rep: ModifyStableIPStatusResponse) => void
+  ): Promise<ModifyStableIPStatusResponse> {
+    return this.request("ModifyStableIPStatus", req, cb)
   }
 
   /**
@@ -173,6 +185,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 回滚版本
+   */
+  async SubmitServerRollback(
+    req: SubmitServerRollbackRequest,
+    cb?: (error: string, rep: SubmitServerRollbackResponse) => void
+  ): Promise<SubmitServerRollbackResponse> {
+    return this.request("SubmitServerRollback", req, cb)
+  }
+
+  /**
    * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
    */
   async DescribeCloudRunEnvs(
@@ -180,16 +202,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudRunEnvsResponse) => void
   ): Promise<DescribeCloudRunEnvsResponse> {
     return this.request("DescribeCloudRunEnvs", req, cb)
-  }
-
-  /**
-   * 查询环境基础信息
-   */
-  async DescribeEnvBaseInfo(
-    req: DescribeEnvBaseInfoRequest,
-    cb?: (error: string, rep: DescribeEnvBaseInfoResponse) => void
-  ): Promise<DescribeEnvBaseInfoResponse> {
-    return this.request("DescribeEnvBaseInfo", req, cb)
   }
 
   /**
@@ -203,13 +215,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 回滚版本
+   * 查询环境基础信息
    */
-  async SubmitServerRollback(
-    req: SubmitServerRollbackRequest,
-    cb?: (error: string, rep: SubmitServerRollbackResponse) => void
-  ): Promise<SubmitServerRollbackResponse> {
-    return this.request("SubmitServerRollback", req, cb)
+  async DescribeEnvBaseInfo(
+    req: DescribeEnvBaseInfoRequest,
+    cb?: (error: string, rep: DescribeEnvBaseInfoResponse) => void
+  ): Promise<DescribeEnvBaseInfoResponse> {
+    return this.request("DescribeEnvBaseInfo", req, cb)
   }
 
   /**
@@ -303,13 +315,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启动版本实例
+   * 删除云托管服务：包括服务下的版本，镜像，流水线
    */
-  async StartVersionInstance(
-    req: StartVersionInstanceRequest,
-    cb?: (error: string, rep: StartVersionInstanceResponse) => void
-  ): Promise<StartVersionInstanceResponse> {
-    return this.request("StartVersionInstance", req, cb)
+  async DeleteCloudRunServer(
+    req: DeleteCloudRunServerRequest,
+    cb?: (error: string, rep: DeleteCloudRunServerResponse) => void
+  ): Promise<DeleteCloudRunServerResponse> {
+    return this.request("DeleteCloudRunServer", req, cb)
   }
 
   /**

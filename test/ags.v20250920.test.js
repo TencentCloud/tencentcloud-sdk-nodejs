@@ -138,6 +138,16 @@ it("ags.v20250920.CreateAPIKey", async function () {
     }
 })
 
+it("ags.v20250920.DescribeGPUResourceSpecs", async function () {
+    try {
+       const data = await client.DescribeGPUResourceSpecs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.UpdateRegistry", async function () {
     try {
        const data = await client.UpdateRegistry({})
@@ -181,6 +191,16 @@ it("ags.v20250920.UpdateSandboxTool", async function () {
 it("ags.v20250920.DescribeDeployment", async function () {
     try {
        const data = await client.DescribeDeployment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.ModifySessionSpace", async function () {
+    try {
+       const data = await client.ModifySessionSpace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +368,9 @@ it("ags.v20250920.DescribeRegistryRecord", async function () {
     }
 })
 
-it("ags.v20250920.ModifySessionSpace", async function () {
+it("ags.v20250920.DescribeGPUResources", async function () {
     try {
-       const data = await client.ModifySessionSpace({})
+       const data = await client.DescribeGPUResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +408,19 @@ it("ags.v20250920.DescribeSandboxInstanceList", async function () {
     }
 })
 
-it("ags.v20250920.DescribeSandboxToolList", async function () {
+it("ags.v20250920.RejectRegistryRecord", async function () {
     try {
-       const data = await client.DescribeSandboxToolList({})
+       const data = await client.RejectRegistryRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.DescribeGPUResourceGroups", async function () {
+    try {
+       const data = await client.DescribeGPUResourceGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +438,9 @@ it("ags.v20250920.GetSkillPackageDownloadURL", async function () {
     }
 })
 
-it("ags.v20250920.RejectRegistryRecord", async function () {
+it("ags.v20250920.DescribeSandboxToolList", async function () {
     try {
-       const data = await client.RejectRegistryRecord({})
+       const data = await client.DescribeSandboxToolList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +481,16 @@ it("ags.v20250920.DeleteSandboxTool", async function () {
 it("ags.v20250920.PauseSandboxInstance", async function () {
     try {
        const data = await client.PauseSandboxInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.DeleteGPUResourceGroup", async function () {
+    try {
+       const data = await client.DeleteGPUResourceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +611,16 @@ it("ags.v20250920.DescribeRegistry", async function () {
 it("ags.v20250920.DescribeSession", async function () {
     try {
        const data = await client.DescribeSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.ModifyGPUResourceGroup", async function () {
+    try {
+       const data = await client.ModifyGPUResourceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -374,41 +374,33 @@ export interface ResidencePermitInfo {
 }
 
 /**
- * BankCardOCR请求参数结构体
+ * AuditMaterialAgent请求参数结构体
  */
-export interface BankCardOCRRequest {
+export interface AuditMaterialAgentRequest {
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>资料审核Agent类型，不同类型包含不同的输入、输出参数，提供不同的审核能力。</p><p>枚举值：</p><ul><li>StorePicAudit： 商户照片审核</li></ul>
    */
-  ImageBase64?: string
+  AgentType: string
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * <p>图片的 Url 地址。要求图片经Base64编码后不超过 10M。</p>
    */
   ImageUrl?: string
   /**
-   * 是否返回预处理（精确剪裁对齐）后的银行卡图片数据，默认false。
+   * <p>图片的 Base64 值。要求图片经Base64编码后不超过 10M。</p>
    */
-  RetBorderCutImage?: boolean
+  ImageBase64?: string
   /**
-   * 是否返回卡号的切图图片数据，默认false。
+   * <p>商户照片分类是否输出具体场景标签。注：开启后耗时会增加。 支持该入参的资料审核Agent类型：StorePicAudit</p>
    */
-  RetCardNoImage?: boolean
+  NeedSceneType?: boolean
   /**
-   * 复印件检测开关，如果输入的图片是银行卡复印件图片则返回告警，默认false。
+   * <p>商户名称信息，辅助判断具体场景标签。注：仅SceneType配置为true时支持。  支持该出参的资料审核Agent类型：StorePicAudit</p>
    */
-  EnableCopyCheck?: boolean
+  StoreInfoHint?: string
   /**
-   * 翻拍检测开关，如果输入的图片是银行卡翻拍图片则返回告警，默认false。
+   * <p>水印提示排除类型，选择出参“水印提示”排除掉的水印类型，不传的话即代表任意水印都会提示。<br>PhoneCam：手机相机水印<br>WatermarkCam：水印相机水印</p>
    */
-  EnableReshootCheck?: boolean
-  /**
-   * 边框遮挡检测开关，如果输入的图片是银行卡边框被遮挡则返回告警，默认false。
-   */
-  EnableBorderCheck?: boolean
-  /**
-   * 是否返回图片质量分数（图片质量分数是评价一个图片的模糊程度的标准），默认false。
-   */
-  EnableQualityValue?: boolean
+  IgnoreWatermarkCategories?: Array<string>
 }
 
 /**
@@ -494,6 +486,7 @@ export interface DescribeQuestionMarkAgentJobResponse {
   Angle?: number
   /**
    * <p>试题批改信息  （该字段后续废弃，使用QuestionInfo兼容多页批改场景）</p>
+   * @deprecated
    */
   MarkInfos?: Array<MarkInfo>
   /**
@@ -643,6 +636,18 @@ export interface DescribeMarkEssayAgentJobResponse {
    * <p>任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功</p>
    */
   JobStatus?: string
+  /**
+   * <p>支持题目结构化、批改场景的结构。AgentType为1、2都按照这个结构返回</p>
+   */
+  QuestionInfo?: Array<QuestionInfo>
+  /**
+   * <p>定制的json结构字符串，主要用于快速定制输出的agent输出结构。推荐用于POC场景</p>
+   */
+  AgentResultJson?: string
+  /**
+   * <p>扩展字段</p>
+   */
+  ThoughtContent?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1257,6 +1262,20 @@ export interface ClassifyStoreNameRequest {
    * <p>输入商户名称，辅助判断具体场景标签。注：仅SceneType配置为true时支持。</p>
    */
   StoreInfo?: string
+}
+
+/**
+ * ClassifyDetectOCR返回参数结构体
+ */
+export interface ClassifyDetectOCRResponse {
+  /**
+   * <p>智能卡证分类结果。当图片类型不支持分类识别或者识别出的类型不在请求参数DiscernType指定的范围内时，返回结果中的Type字段将为空字符串，Name字段将返回&quot;其它&quot;</p>
+   */
+  ClassifyDetectInfos?: Array<ClassifyDetectInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3601,17 +3620,41 @@ export interface MixedInvoiceOCRResponse {
 }
 
 /**
- * ClassifyDetectOCR返回参数结构体
+ * BankCardOCR请求参数结构体
  */
-export interface ClassifyDetectOCRResponse {
+export interface BankCardOCRRequest {
   /**
-   * <p>智能卡证分类结果。当图片类型不支持分类识别或者识别出的类型不在请求参数DiscernType指定的范围内时，返回结果中的Type字段将为空字符串，Name字段将返回&quot;其它&quot;</p>
+   * 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  ClassifyDetectInfos?: Array<ClassifyDetectInfo>
+  ImageBase64?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
-  RequestId?: string
+  ImageUrl?: string
+  /**
+   * 是否返回预处理（精确剪裁对齐）后的银行卡图片数据，默认false。
+   */
+  RetBorderCutImage?: boolean
+  /**
+   * 是否返回卡号的切图图片数据，默认false。
+   */
+  RetCardNoImage?: boolean
+  /**
+   * 复印件检测开关，如果输入的图片是银行卡复印件图片则返回告警，默认false。
+   */
+  EnableCopyCheck?: boolean
+  /**
+   * 翻拍检测开关，如果输入的图片是银行卡翻拍图片则返回告警，默认false。
+   */
+  EnableReshootCheck?: boolean
+  /**
+   * 边框遮挡检测开关，如果输入的图片是银行卡边框被遮挡则返回告警，默认false。
+   */
+  EnableBorderCheck?: boolean
+  /**
+   * 是否返回图片质量分数（图片质量分数是评价一个图片的模糊程度的标准），默认false。
+   */
+  EnableQualityValue?: boolean
 }
 
 /**
@@ -6103,12 +6146,21 @@ export interface SubmitMarkEssayAgentJobRequest {
   ImageUrlList?: Array<string>
   /**
    * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。 示例值：1</p>
+   * @deprecated
    */
   PdfPageNumber?: number
   /**
    * <p>批改信息输出配置，当key对应为1表示开启配置开关。  当key为StructureAndContent  value为1 表示SentenceSuggest返回篇章结构和内容信息，默认只返回词汇、语句</p>
    */
   QuestionConfigMap?: string
+  /**
+   * <p>agent支持的类型枚举,不同类型输出结果不一样，默认为0</p><p>0:表示中英文作文批改Agent</p><p>1:表示教辅试卷题库拆录Agent(支持拆录含解析与答案的教辅（解析、答案可与正文分置首尾，或与试题混排）、多页成套标准答案试卷及带有手写批注痕迹的试题)</p>
+   */
+  AgentType?: number
+  /**
+   * <p>需要识别的页码范围（目前只有AgentType=1支持），单次调用最多支持100页。  参数格式：1-10   示例值：1-2</p>
+   */
+  PageRange?: string
 }
 
 /**
@@ -6460,15 +6512,18 @@ export interface SubmitQuestionMarkAgentJobResponse {
    */
   JobId?: string
   /**
-   * <p>切题题目边框坐标列表 （如果BoolSingleQuestion为true则返回空）</p>
+   * <p>【废弃字段】</p>
+   * @deprecated
    */
   QuestionInfo?: Array<QuestionInfo>
   /**
-   * <p>题目切题数量，作为计费题目数总量</p>
+   * <p>【废弃字段】</p>
+   * @deprecated
    */
   QuestionCount?: string
   /**
    * <p>【废弃字段】</p>
+   * @deprecated
    */
   OriginalImageUrl?: string
   /**
@@ -8477,19 +8532,19 @@ export interface OnlineTaxiItinerary {
  */
 export interface Polygon {
   /**
-   * 左上顶点坐标
+   * <p>左上顶点坐标</p>
    */
   LeftTop?: Coord
   /**
-   * 右上顶点坐标
+   * <p>右上顶点坐标</p>
    */
   RightTop?: Coord
   /**
-   * 右下顶点坐标
+   * <p>右下顶点坐标</p>
    */
   RightBottom?: Coord
   /**
-   * 左下顶点坐标
+   * <p>左下顶点坐标</p>
    */
   LeftBottom?: Coord
 }
@@ -9750,11 +9805,11 @@ export interface AnswerElement {
    */
   IsCorrect?: boolean
   /**
-   * <p>答案分析结果</p>
+   * <p>【批改 API 专属特性】<br>当ModelType= yuanbao_correction_model，该字段返回空。通过ResultList. AnswerAnalysis返回题目维度答案解析<br>当ModelType= youtu_correction_model，返回答案维度答案解析</p>
    */
   AnswerAnalysis?: string
   /**
-   * <p>返回正确答案内容</p>
+   * <p>返回正确答案内容。为提升速度算式批改场景默认不输出正确答案</p>
    */
   RightAnswer?: string
 }
@@ -10452,13 +10507,21 @@ export interface QuestionInfo {
    */
   OrgWidth?: number
   /**
-   * <p>预处理后的图片base64编码</p>
+   * <p>废弃字段</p>
    */
   ImageBase64?: string
   /**
    * <p>预处理后的图片URL,如果开启了图像切边矫正，后续的坐标都是基于当前图片返回的坐标</p>
    */
   ReturnImageUrl?: string
+  /**
+   * <p>【批改 API 专属特性】图片类型预判别（常规作业 / 非作业图片 / 无作答痕迹），仅 ModelType = yuanbao_correction_model 时生效。其他模型类型不支持该能力。</p>
+   */
+  ClassName?: string
+  /**
+   * <p>文档所在页</p>
+   */
+  PageIndex?: number
 }
 
 /**
@@ -11006,6 +11069,10 @@ export interface SubmitExtractDocAgentJobRequest {
    * <p>agent支持的类型枚举,不同类型输出结果不一样，默认为0</p><p>0:表示标准抽取Agent</p><p>1:表示合同协议分类+抽取+审核Agent</p>
    */
   AgentType?: number
+  /**
+   * <p>输出配置扩展，当key对应为1表示开启配置开关。</p>
+   */
+  QuestionConfigMap?: string
 }
 
 /**
@@ -11606,11 +11673,11 @@ export interface ResultList {
    */
   Coord?: Array<Polygon>
   /**
-   * <p>多坐标返回，显示坐标所在页</p><p>默认值：[]</p>
+   * <p>单题跨栏/跨页场景下：配合CoordPageIndex一起使用，支持多坐标显示在不同页，按顺序对齐</p><p>默认值：[]</p>
    */
   CoordPageIndex?: Array<number | bigint>
   /**
-   * <p>返回正确答案内容</p>
+   * <p>【批改 API 专属特性】返回步骤批改场景下的正确答案内容</p>
    */
   RightAnswer?: string
   /**
@@ -11621,6 +11688,14 @@ export interface ResultList {
    * <p>返回题目的知识点内容</p>
    */
   KnowledgePoints?: Array<string>
+  /**
+   * <p>【批改 API 专属特性】<br>当ModelType= yuanbao_correction_model，通过该字段返回题目维度的答案解析<br>当ModelType= youtu_correction_model，该字段返回空，通过AnswerElement. AnswerAnalysis返回答案维度答案解析</p>
+   */
+  AnswerAnalysis?: string
+  /**
+   * <p>年级：小学/初中/高中</p>
+   */
+  Grade?: string
 }
 
 /**
@@ -11742,11 +11817,12 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   EnableDeepThink?: boolean
   /**
-   * <p>题目信息输出配置，当key对应为true表示开启配置开关。<br>当key为TrueAnswer value为true 表示输出每道题的正确答案 ；<br>当key为StepCorrection value为true表示启用步骤级批改；<br>当key为DisableAnswerAnalysis value为true表示不输出答案解析；<br>当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标；</p>
+   * <p>题目信息输出配置（默认快速模式只输出题目外层题目边框坐标、批改答案、手写答案坐标、答案分析、正确答案）</p><p>当key为QuickGradingEnabled value为false表示关闭快速模式（速度会变慢），新增输出手写作答、题干、插图坐标<br>当key为StepCorrection value为true表示启用步骤级批改（速度会变慢）；</p>
    */
   QuestionConfigMap?: string
   /**
    * <p>【废弃字段】</p>
+   * @deprecated
    */
   ReferenceAnswer?: string
   /**
@@ -11769,6 +11845,10 @@ export interface SubmitQuestionMarkAgentJobRequest {
    * <p>是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-&gt; ReturnImageUrl中,默认为false不开启</p>
    */
   EnableImageCrop?: boolean
+  /**
+   * <p>批改模型选择</p><p>枚举值：</p><ul><li>yuanbao_correction_model： 快速批改模型平均耗时8s。针对单题跨栏、多栏（≥2栏）排版及子题数超过 30 道的复杂算式场景，耗时约为快速批改模式的 2 倍+。</li><li>youtu_correction_model： 深度批改模型平均耗时12-30s。全场景支持,精度更高。</li></ul><p>默认值：yuanbao_correction_model</p>
+   */
+  ModelType?: string
 }
 
 /**
@@ -11824,6 +11904,60 @@ export interface VatInvoiceOCRResponse {
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
   Angle?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AuditMaterialAgent返回参数结构体
+ */
+export interface AuditMaterialAgentResponse {
+  /**
+   * <p>商户照片类型  支持该出参的资料审核Agent类型：StorePicAudit</p>
+   */
+  StoreLabel?: Array<string>
+  /**
+   * <p>商户照片分类具体场景标签，输出3个最匹配的场景， 注：仅SceneType配置为true时支持。  支持该出参的资料审核Agent类型：StorePicAudit</p>
+   */
+  SceneType?: string
+  /**
+   * <p>商户门头名称  支持该出参的资料审核Agent类型：StorePicAudit</p>
+   */
+  StoreInfo?: Array<StoreInfo>
+  /**
+   * <p>图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负  支持该出参的资料审核Agent类型：StorePicAudit</p>
+   */
+  Angle?: number
+  /**
+   * <p>区域篡改提示</p>
+   */
+  Tamper?: SceneWarnInfo
+  /**
+   * <p>AIGC合成提示</p>
+   */
+  Synthesis?: SceneWarnInfo
+  /**
+   * <p>屏幕翻拍提示</p>
+   */
+  RemakeScreen?: SceneWarnInfo
+  /**
+   * <p>截图提示</p>
+   */
+  Screenshot?: SceneWarnInfo
+  /**
+   * <p>文字水印提示</p>
+   */
+  TextWatermark?: SceneWarnInfo
+  /**
+   * <p>水印内容，当未检测到文字水印时不返回，返回多组水印时以 | 分隔。</p>
+   */
+  WatermarkContent?: string
+  /**
+   * <p>模板图片提示</p>
+   */
+  Template?: SceneWarnInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

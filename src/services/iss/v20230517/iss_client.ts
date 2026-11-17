@@ -62,6 +62,7 @@ import {
   DeleteRecordRetrieveTaskResponse,
   DeleteRecordPlanResponse,
   DescribeOrganizationResponse,
+  VideoSnapshotInfo,
   UpdateUserDeviceRequest,
   DescribeVideoSnapshotTemplateRequest,
   CreateVLPlanResponse,
@@ -121,6 +122,7 @@ import {
   AddRecordRetrieveTaskRequest,
   DescribeRecordPlanRequest,
   VideoSceneInfo,
+  TaskData,
   ControlDevicePresetResponse,
   ListRecordBackupPlansResponse,
   OrganizationChannelInfo,
@@ -171,6 +173,7 @@ import {
   AddUserDeviceRequest,
   ListRecordBackupPlanDevicesResponse,
   DeleteTaskRequest,
+  ModifyVideoSnapshotConfigResponse,
   UpdateUserDeviceResponse,
   ControlDevicePTZRequest,
   DescribeRecordBackupPlanRequest,
@@ -197,7 +200,7 @@ import {
   AddRecordTemplateRequest,
   DescribeRecordFileRequest,
   VLPlanResultInfo,
-  TaskData,
+  ListVideoSnapshotResultRequest,
   RecordSliceInfo,
   QueryForbidPlayChannelListResponse,
   DescribeVideoDownloadUrlRequest,
@@ -223,7 +226,7 @@ import {
   ControlDeviceStreamRequest,
   DescribeVideoSnapshotConfigResponse,
   ListRecordBackupPlanDevicesRequest,
-  ModifyVideoSnapshotConfigResponse,
+  ListVideoSnapshotResultData,
   DeleteDomainResponse,
   AddRecordRetrieveTaskResponse,
   DeleteRecordTemplateResponse,
@@ -238,10 +241,11 @@ import {
   ControlRecordTimelineResponse,
   AddRecordRetrieveTaskData,
   BatchAssignVLPlanChannelsRequest,
+  UpdateRecordPlanResponse,
   DescribeRecordBackupPlanData,
   ImageUrlInfo,
   ChannelAttrInfo,
-  UpdateRecordPlanResponse,
+  ListVideoSnapshotResultResponse,
   DeleteVLTemplateResponse,
   ListVideoDownloadTaskData,
   DeleteRecordBackupPlanRequest,
@@ -411,6 +415,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RefreshDeviceChannelResponse) => void
   ): Promise<RefreshDeviceChannelResponse> {
     return this.request("RefreshDeviceChannel", req, cb)
+  }
+
+  /**
+   * 获取截图结果列表
+   */
+  async ListVideoSnapshotResult(
+    req: ListVideoSnapshotResultRequest,
+    cb?: (error: string, rep: ListVideoSnapshotResultResponse) => void
+  ): Promise<ListVideoSnapshotResultResponse> {
+    return this.request("ListVideoSnapshotResult", req, cb)
   }
 
   /**

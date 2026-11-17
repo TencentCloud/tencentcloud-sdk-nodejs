@@ -33,8 +33,9 @@ import {
   DescribeDBSecurityGroupsResponse,
   RedisNodeInfo,
   ModifyAutoBackupConfigRequest,
-  ProxyNodeInfo,
+  DescribeInstancesResponse,
   DestroyPostpaidInstanceRequest,
+  Account,
   InstanceProxySlowlogDetail,
   ResetPasswordResponse,
   ClearInstanceRequest,
@@ -56,6 +57,7 @@ import {
   BackupInfo,
   DescribeDBSecurityGroupsRequest,
   ChangeInstanceMasterRequest,
+  ModifyInstanceAccountResponse,
   DescribeProjectSecurityGroupsResponse,
   DescribeInstanceBackupsResponse,
   DescribeInstanceReplicasResponse,
@@ -69,6 +71,7 @@ import {
   DescribeConnectionConfigResponse,
   BinlogInfo,
   ModifyNetworkConfigRequest,
+  DescribeInstanceAccountRequest,
   DescribeInstanceParamsRequest,
   CleanUpInstanceResponse,
   ModifyDBInstanceSecurityGroupsRequest,
@@ -93,28 +96,34 @@ import {
   DescribeTaskInfoResponse,
   DescribeAutoBackupConfigRequest,
   InstanceEnumParam,
+  DeleteInstanceAccountRequest,
   UpgradeInstanceResponse,
-  DescribeInstancesResponse,
+  ModifyInstanceAccountRequest,
   DescribeTaskInfoRequest,
   ModifyConnectionConfigResponse,
   ModifyMaintenanceWindowResponse,
   DescribeInstanceReplicasRequest,
   DestroyPrepaidInstanceResponse,
+  ProxyNodeInfo,
   InstanceNodeInfo,
   TendisSlowLogDetail,
   DescribeConnectionConfigRequest,
   ModifyInstanceParamsRequest,
+  CreateInstanceAccountRequest,
   DescribeInstanceNodeInfoRequest,
   DescribeMaintenanceWindowRequest,
   DescribeTendisSlowLogRequest,
   DescribeProxySlowLogRequest,
   DescribeProxySlowLogResponse,
+  DescribeInstanceAccountResponse,
   DescribeProductInfoRequest,
   DescribeInstanceParamsResponse,
   DisassociateSecurityGroupsRequest,
   ModifyMaintenanceWindowRequest,
+  CreateInstanceAccountResponse,
   DescribeInstanceBackupsRequest,
   ClearInstanceResponse,
+  DeleteInstanceAccountResponse,
   ChangeInstanceMasterResponse,
   UpgradeInstanceRequest,
   DescribeInstanceNodeInfoResponse,
@@ -143,6 +152,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateInstanceAccount）用于自定义访问实例的账号。
+   */
+  async CreateInstanceAccount(
+    req: CreateInstanceAccountRequest,
+    cb?: (error: string, rep: CreateInstanceAccountResponse) => void
+  ): Promise<CreateInstanceAccountResponse> {
+    return this.request("CreateInstanceAccount", req, cb)
+  }
+
+  /**
    * 本接口（ModifyMaintenanceWindow）修改实例维护时间窗时间。
    */
   async ModifyMaintenanceWindow(
@@ -150,6 +169,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMaintenanceWindowResponse) => void
   ): Promise<ModifyMaintenanceWindowResponse> {
     return this.request("ModifyMaintenanceWindow", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceAccount）用于修改实例账号。
+   */
+  async ModifyInstanceAccount(
+    req: ModifyInstanceAccountRequest,
+    cb?: (error: string, rep: ModifyInstanceAccountResponse) => void
+  ): Promise<ModifyInstanceAccountResponse> {
+    return this.request("ModifyInstanceAccount", req, cb)
   }
 
   /**
@@ -173,23 +202,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeMaintenanceWindow）用于查询实例维护时间窗。
+   * 本接口（DescribeInstanceAccount）用于查看实例账号信息。
    */
-  async DescribeMaintenanceWindow(
-    req: DescribeMaintenanceWindowRequest,
-    cb?: (error: string, rep: DescribeMaintenanceWindowResponse) => void
-  ): Promise<DescribeMaintenanceWindowResponse> {
-    return this.request("DescribeMaintenanceWindow", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeInstanceBackups）用于查询实例全量备份列表。
-   */
-  async DescribeInstanceBackups(
-    req: DescribeInstanceBackupsRequest,
-    cb?: (error: string, rep: DescribeInstanceBackupsResponse) => void
-  ): Promise<DescribeInstanceBackupsResponse> {
-    return this.request("DescribeInstanceBackups", req, cb)
+  async DescribeInstanceAccount(
+    req: DescribeInstanceAccountRequest,
+    cb?: (error: string, rep: DescribeInstanceAccountResponse) => void
+  ): Promise<DescribeInstanceAccountResponse> {
+    return this.request("DescribeInstanceAccount", req, cb)
   }
 
   /**
@@ -250,6 +269,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceBinlogsResponse) => void
   ): Promise<DescribeInstanceBinlogsResponse> {
     return this.request("DescribeInstanceBinlogs", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeInstanceParamRecords）查询参数配置修改历史列表。
+   */
+  async DescribeInstanceParamRecords(
+    req: DescribeInstanceParamRecordsRequest,
+    cb?: (error: string, rep: DescribeInstanceParamRecordsResponse) => void
+  ): Promise<DescribeInstanceParamRecordsResponse> {
+    return this.request("DescribeInstanceParamRecords", req, cb)
   }
 
   /**
@@ -363,6 +392,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DestroyPostpaidInstance）用于退还按量计费实例。
+   */
+  async DestroyPostpaidInstance(
+    req: DestroyPostpaidInstanceRequest,
+    cb?: (error: string, rep: DestroyPostpaidInstanceResponse) => void
+  ): Promise<DestroyPostpaidInstanceResponse> {
+    return this.request("DestroyPostpaidInstance", req, cb)
+  }
+
+  /**
    * 本接口（DescribeInstanceParams）用于查询实例的参数列表。
    */
   async DescribeInstanceParams(
@@ -443,13 +482,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstanceParamRecords）查询参数配置修改历史列表。
+   * 本接口（DescribeMaintenanceWindow）用于查询实例维护时间窗。
    */
-  async DescribeInstanceParamRecords(
-    req: DescribeInstanceParamRecordsRequest,
-    cb?: (error: string, rep: DescribeInstanceParamRecordsResponse) => void
-  ): Promise<DescribeInstanceParamRecordsResponse> {
-    return this.request("DescribeInstanceParamRecords", req, cb)
+  async DescribeMaintenanceWindow(
+    req: DescribeMaintenanceWindowRequest,
+    cb?: (error: string, rep: DescribeMaintenanceWindowResponse) => void
+  ): Promise<DescribeMaintenanceWindowResponse> {
+    return this.request("DescribeMaintenanceWindow", req, cb)
   }
 
   /**
@@ -474,13 +513,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DestroyPostpaidInstance）用于退还按量计费实例。
+   * 本接口（DeleteInstanceAccount）用于删除实例自定义账号。
    */
-  async DestroyPostpaidInstance(
-    req: DestroyPostpaidInstanceRequest,
-    cb?: (error: string, rep: DestroyPostpaidInstanceResponse) => void
-  ): Promise<DestroyPostpaidInstanceResponse> {
-    return this.request("DestroyPostpaidInstance", req, cb)
+  async DeleteInstanceAccount(
+    req: DeleteInstanceAccountRequest,
+    cb?: (error: string, rep: DeleteInstanceAccountResponse) => void
+  ): Promise<DeleteInstanceAccountResponse> {
+    return this.request("DeleteInstanceAccount", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeInstanceBackups）用于查询实例全量备份列表。
+   */
+  async DescribeInstanceBackups(
+    req: DescribeInstanceBackupsRequest,
+    cb?: (error: string, rep: DescribeInstanceBackupsResponse) => void
+  ): Promise<DescribeInstanceBackupsResponse> {
+    return this.request("DescribeInstanceBackups", req, cb)
   }
 
   /**

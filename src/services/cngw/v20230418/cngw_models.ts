@@ -3431,6 +3431,19 @@ export interface KongRoutePreview {
    * <p>路由来源</p>
    */
   RouteSource?: string
+  /**
+   * <p>用户绑定的业务标签（路由/服务标签分组能力，不含 Kong 内部 tag）。未绑定时字段为空数组或不返回。关联需求：路由/服务标签分组管理</p>
+   */
+  Tags?: Array<KongUserTagKV>
+  /**
+   * <p>超时时间，单位ms</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timeout?: number
+  /**
+   * <p>路由超时配置的来源。</p>
+   */
+  TimeoutSource?: string
 }
 
 /**
@@ -4291,39 +4304,43 @@ export interface CreateAIGWCustomGuardrailPolicyRequest {
  */
 export interface KongTarget {
   /**
-   * 目标主机地址
+   * <p>目标主机地址</p>
    */
   Host: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   Port: number
   /**
-   * 权重
+   * <p>权重</p>
    */
   Weight: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * CVM实例ID
+   * <p>CVM实例ID</p>
    */
   CvmInstanceId?: string
   /**
-   * CVM实例名称
+   * <p>CVM实例名称</p>
    */
   CvmInstanceName?: string
   /**
-   * 健康状态
+   * <p>健康状态</p>
    */
   Health?: string
   /**
-   * Target的来源
+   * <p>Target ID</p>
+   */
+  Id?: string
+  /**
+   * <p>Target的来源</p>
    */
   Source?: string
   /**
-   * target标签
+   * <p>target标签</p>
    */
   Tags?: Array<string>
 }
@@ -4374,6 +4391,140 @@ export interface DeleteCloudNativeAPIGatewayMCPToolVersionRequest {
    * <p>mcp tool版本</p>
    */
   ToolVersion: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayLLMModelService请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
+  /**
+   * <p>网关 id。</p>
+   */
+  GatewayId: string
+  /**
+   * <p>模型服务 ID，全局唯一标识。</p>
+   */
+  ModelServiceId: string
+  /**
+   * <p>修改服务名称，长度2-50字符，支持中英文、数字、下划线。</p>
+   */
+  Name?: string
+  /**
+   * <p>修改默认模型，模型选择方式为 Specify 时必填。</p>
+   */
+  DefaultModel?: string
+  /**
+   * <p>修改模型选择方式，选项：Specify（指定模型）、PassThrough（透传请求模型）。</p>
+   */
+  ModelSelector?: string
+  /**
+   * <p>修改开启模型降级，模型选择方式为 Specify 时必填。</p>
+   */
+  EnableModelFallback?: boolean
+  /**
+   * <p>修改可以配置备用模型规则，EnableSpecifyModelFallback 为 true 时必填。</p>
+   */
+  ModelFallbackRule?: CloudNativeAPIGatewayLLMModelFallbackRule
+  /**
+   * <p>修改开启模型参数校验，是否校验客户端传递的 model 参数, 模型选择方式为 PassThrough 时必填</p>
+   */
+  EnableModelParamCheck?: boolean
+  /**
+   * <p>修改模型检验信息，EnableModelParamCheck 为 true 时必填。</p>
+   */
+  ModelParamCheckRule?: CloudNativeAPIGatewayLLMModelParamCheckInfo
+  /**
+   * <p>修改描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>修改模型服务地址</p>
+   */
+  UpstreamURL?: string
+  /**
+   * <p>连接超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：10000</p>
+   */
+  ConnectTimeout?: number
+  /**
+   * <p>写入超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
+   */
+  WriteTimeout?: number
+  /**
+   * <p>读取超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
+   */
+  ReadTimeout?: number
+  /**
+   * <p>重试次数</p><p>取值范围：[0, 5]</p><p>单位：次</p><p>默认值：0</p>
+   */
+  Retries?: number
+  /**
+   * <p>路径拼接模式</p><p>枚举值：</p><ul><li>FixedPath： 固定路径</li><li>AutoConcat： 自动拼接</li></ul>
+   */
+  UpstreamUrlMode?: string
+  /**
+   * <p>SNI</p>
+   */
+  SNI?: string
+  /**
+   * <p>模型服务级别的配额上限（RPM/TPM）。需要网关版本 ≥ 3.9.4。</p>
+   */
+  QuotaLimit?: AIGWLLMQuotaLimit
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>参数改写规则</p>
+   */
+  ModelRewriteRules?: Array<AIGWModelRewriteRule>
+  /**
+   * <p>外部服务来源ID</p>
+   */
+  ExternalInstanceId?: string
+  /**
+   * <p>其他参数</p>
+   */
+  ExtParams?: Array<KeyValue>
+  /**
+   * <p>密钥轮转开关</p>
+   */
+  KeyRotationEnabled?: boolean
+  /**
+   * <p>密钥轮转周期</p><p>单位：天数</p>
+   */
+  KeyRotationPeriodDays?: number
+  /**
+   * <p>来源服务 ID。</p>
+   */
+  SourceId?: string
+  /**
+   * <p>命名空间。</p>
+   */
+  Namespace?: string
+  /**
+   * <p>服务名称。</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>协议类型，如 OpenAI、Custom。</p>
+   */
+  Protocol?: string
+  /**
+   * <p>自定义供应商名称</p>
+   */
+  CustomProviderName?: string
+  /**
+   * <p>负载均衡配置</p>
+   */
+  LoadBalanceConfig?: AIGWLoadBalanceConfig
+  /**
+   * <p>智能负载均衡配置</p>
+   */
+  SmartBalance?: AIGWSmartBalanceConfig
+  /**
+   * <p>内容长度限制配置</p>
+   */
+  LengthLimitConfig?: AIGWLengthLimitConfig
 }
 
 /**
@@ -7668,137 +7819,21 @@ export interface CreateCloudNativeAPIGatewayMCPToolResponse {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayLLMModelService请求参数结构体
+ * 用户业务标签的 KV 表示（路由/服务标签分组）
  */
-export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
+export interface KongUserTagKV {
   /**
-   * <p>网关 id。</p>
+   * <p>标签 ID</p>
    */
-  GatewayId: string
+  TagId?: number
   /**
-   * <p>模型服务 ID，全局唯一标识。</p>
+   * <p>标签 Key</p>
    */
-  ModelServiceId: string
+  TagKey?: string
   /**
-   * <p>修改服务名称，长度2-50字符，支持中英文、数字、下划线。</p>
+   * <p>标签 Value</p>
    */
-  Name?: string
-  /**
-   * <p>修改默认模型，模型选择方式为 Specify 时必填。</p>
-   */
-  DefaultModel?: string
-  /**
-   * <p>修改模型选择方式，选项：Specify（指定模型）、PassThrough（透传请求模型）。</p>
-   */
-  ModelSelector?: string
-  /**
-   * <p>修改开启模型降级，模型选择方式为 Specify 时必填。</p>
-   */
-  EnableModelFallback?: boolean
-  /**
-   * <p>修改可以配置备用模型规则，EnableSpecifyModelFallback 为 true 时必填。</p>
-   */
-  ModelFallbackRule?: CloudNativeAPIGatewayLLMModelFallbackRule
-  /**
-   * <p>修改开启模型参数校验，是否校验客户端传递的 model 参数, 模型选择方式为 PassThrough 时必填</p>
-   */
-  EnableModelParamCheck?: boolean
-  /**
-   * <p>修改模型检验信息，EnableModelParamCheck 为 true 时必填。</p>
-   */
-  ModelParamCheckRule?: CloudNativeAPIGatewayLLMModelParamCheckInfo
-  /**
-   * <p>修改描述。</p>
-   */
-  Description?: string
-  /**
-   * <p>修改模型服务地址</p>
-   */
-  UpstreamURL?: string
-  /**
-   * <p>连接超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：10000</p>
-   */
-  ConnectTimeout?: number
-  /**
-   * <p>写入超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
-   */
-  WriteTimeout?: number
-  /**
-   * <p>读取超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
-   */
-  ReadTimeout?: number
-  /**
-   * <p>重试次数</p><p>取值范围：[0, 5]</p><p>单位：次</p><p>默认值：0</p>
-   */
-  Retries?: number
-  /**
-   * <p>路径拼接模式</p><p>枚举值：</p><ul><li>FixedPath： 固定路径</li><li>AutoConcat： 自动拼接</li></ul>
-   */
-  UpstreamUrlMode?: string
-  /**
-   * <p>SNI</p>
-   */
-  SNI?: string
-  /**
-   * <p>模型服务级别的配额上限（RPM/TPM）。需要网关版本 ≥ 3.9.4。</p>
-   */
-  QuotaLimit?: AIGWLLMQuotaLimit
-  /**
-   * <p>标签</p>
-   */
-  Tags?: Array<string>
-  /**
-   * <p>参数改写规则</p>
-   */
-  ModelRewriteRules?: Array<AIGWModelRewriteRule>
-  /**
-   * <p>外部服务来源ID</p>
-   */
-  ExternalInstanceId?: string
-  /**
-   * <p>其他参数</p>
-   */
-  ExtParams?: Array<KeyValue>
-  /**
-   * <p>密钥轮转开关</p>
-   */
-  KeyRotationEnabled?: boolean
-  /**
-   * <p>密钥轮转周期</p><p>单位：天数</p>
-   */
-  KeyRotationPeriodDays?: number
-  /**
-   * <p>来源服务 ID。</p>
-   */
-  SourceId?: string
-  /**
-   * <p>命名空间。</p>
-   */
-  Namespace?: string
-  /**
-   * <p>服务名称。</p>
-   */
-  ServiceName?: string
-  /**
-   * <p>协议类型，如 OpenAI、Custom。</p>
-   */
-  Protocol?: string
-  /**
-   * <p>自定义供应商名称</p>
-   */
-  CustomProviderName?: string
-  /**
-   * <p>负载均衡配置</p>
-   */
-  LoadBalanceConfig?: AIGWLoadBalanceConfig
-  /**
-   * <p>智能负载均衡配置</p>
-   */
-  SmartBalance?: AIGWSmartBalanceConfig
-  /**
-   * <p>内容长度限制配置</p>
-   */
-  LengthLimitConfig?: AIGWLengthLimitConfig
+  TagValue?: string
 }
 
 /**

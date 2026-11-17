@@ -9619,25 +9619,33 @@ export interface DescribeAbnormalCallRecordRequest {
  */
 export interface DescribeExposureTrendResponse {
   /**
-   * 暴露周期趋势数量统计信息
+   * <p>暴露周期趋势数量统计信息</p>
    */
   ExposeTrendList?: Array<ExposeTrendItem>
   /**
-   * 暴露周期新增数量统计
+   * <p>暴露周期新增数量统计</p>
    */
   ExposeIncrement?: number
   /**
-   * 近1天（24h）完全开放数量
+   * <p>近1天（24h）完全开放数量</p>
    */
   OpenCount?: number
   /**
-   * 近1天（24h）受限访问数量
+   * <p>近1天（24h）受限访问数量</p>
    */
   AclCount?: number
   /**
-   * 近1天（24h）无法访问数量
+   * <p>近1天（24h）无法访问数量</p>
    */
   CloseCount?: number
+  /**
+   * <p>互联网边界总数</p>
+   */
+  ExposeTotalCount?: number
+  /**
+   * <p>待处理边界数量</p>
+   */
+  ToGovernRiskCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -27178,6 +27186,10 @@ export interface UserItem {
    * <p>配额共享方账号</p>
    */
   ShareFromUser?: string
+  /**
+   * <p>是否试用订单</p>
+   */
+  IsTrialOrder?: number
 }
 
 /**
@@ -29774,7 +29786,7 @@ export interface DescribeWebhookPolicyListResponse {
  */
 export interface LoginWhitePlaceInput {
   /**
-   * <p>国家ID，当前仅支持国内：1</p>
+   * <p>国家ID，当前仅支持境内：1</p>
    */
   CountryId?: number
   /**

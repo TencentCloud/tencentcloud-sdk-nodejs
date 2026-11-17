@@ -476,17 +476,25 @@ export interface SpecItemInfo {
  */
 export interface ModifyDBInstanceSSLConfigRequest {
   /**
-   * 实例 ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例 ID。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
   /**
-   * 开启或关闭SSL。true - 开启 ；false - 关闭。
+   * <p>开启或关闭SSL。true - 开启 ；false - 关闭。</p>
    */
   SSLEnabled: boolean
   /**
-   * SSL证书保护的唯一连接地址，若为主实例，可设置为内外网IP地址；若为只读实例，可设置为实例IP或只读组IP。在开启SSL或修改SSL保护的连接地址时，该参数为必传项；在关闭SSL时，该参数将被忽略。
+   * <p>SSL证书保护的唯一连接地址，若为主实例，可设置为内外网IP地址；若为只读实例，可设置为实例IP或只读组IP。在开启SSL或修改SSL保护的连接地址时，该参数为必传项；在关闭SSL时，该参数将被忽略。</p>
    */
   ConnectAddress?: string
+  /**
+   * <p>SSL证书来源。</p><p>枚举值：</p><ul><li>cloud： 平台自签发的云端证书</li><li>custom： 腾讯云SSL证书产品托管的用户自有证书</li></ul>
+   */
+  CertSource?: string
+  /**
+   * <p>腾讯云 SSL 证书产品的证书 ID。证书类型为custom时必须填写。</p>
+   */
+  CertificateId?: string
 }
 
 /**
@@ -1201,7 +1209,7 @@ export interface DescribeAuditInstanceListResponse {
  */
 export interface UpgradeDBInstanceMajorVersionResponse {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: number
   /**
@@ -3822,7 +3830,7 @@ export interface CreateReadOnlyGroupRequest {
  */
 export interface ModifyDBInstanceSSLConfigResponse {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: number
   /**
@@ -5329,55 +5337,45 @@ export interface ModifyDBInstanceNameResponse {
  */
 export interface UpgradeDBInstanceMajorVersionRequest {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
   /**
-   * 目标内核版本号，可以通过API [DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取可以升级的目标内核版本号。
+   * <p>目标内核版本号，可以通过API <a href="https://cloud.tencent.com/document/product/409/89018">DescribeDBVersions</a>获取可以升级的目标内核版本号。</p>
    */
   TargetDBKernelVersion: string
   /**
-   * 是否为校验模式，若UpgradeCheck为True，表示仅进行内核版本兼容性检查，不会进行实质性的升级操作，对原实例无影响。检查结果可以通过升级日志查看。
+   * <p>是否为校验模式，若UpgradeCheck为True，表示仅进行内核版本兼容性检查，不会进行实质性的升级操作，对原实例无影响。检查结果可以通过升级日志查看。</p>
    */
   UpgradeCheck?: boolean
   /**
-   * 升级前备份选项。True，表示升级前需要创建全量备份，False，表示升级前不需要创建全量备份。当实例已有备份集可以恢复到升级前的状态时，可选择False，否则需要指定为True。UpgradeCheck为True时，此参数无效。
+   * <p>升级前备份选项。True，表示升级前需要创建全量备份，False，表示升级前不需要创建全量备份。当实例已有备份集可以恢复到升级前的状态时，可选择False，否则需要指定为True。UpgradeCheck为True时，此参数无效。</p>
    */
   BackupBeforeUpgrade?: boolean
   /**
-   * 统计信息收集选项，对主例运行 ANALYZE 以在升级后更新系统统计信息。可选值包括，
-0：不需要收集统计信息；
-1：实例恢复写之前收集统计信息；
-3：实例恢复写之后收集统计信息。
-UpgradeCheck为True时，此参数无效。
+   * <p>统计信息收集选项，对主例运行 ANALYZE 以在升级后更新系统统计信息。可选值包括，<br>0：不需要收集统计信息；<br>1：实例恢复写之前收集统计信息；<br>3：实例恢复写之后收集统计信息。<br>UpgradeCheck为True时，此参数无效。</p>
    */
   StatisticsRefreshOption?: number
   /**
-   * 插件升级选项，pg_upgrade不会升级任何插件，需要在升级完成后在创建过插件的库上执行"ALTER EXTENSION UPDATE"。发起升级实例大版本时可以指定在实例恢复写前/后是否需要升级任务自动升级插件版本。可选值包括：
-0：不需要自动升级插件；
-1：恢复写之前升级插件；
-2：恢复写之后升级插件。
-UpgradeCheck为True时，此参数无效。
+   * <p>插件升级选项，pg_upgrade不会升级任何插件，需要在升级完成后在创建过插件的库上执行&quot;ALTER EXTENSION UPDATE&quot;。发起升级实例大版本时可以指定在实例恢复写前/后是否需要升级任务自动升级插件版本。可选值包括：<br>0：不需要自动升级插件；<br>1：恢复写之前升级插件；<br>2：恢复写之后升级插件。<br>UpgradeCheck为True时，此参数无效。</p>
    */
   ExtensionUpgradeOption?: number
   /**
-   * 升级时间选项，升级过程中会有一段时间实例只读，并会有一次秒级闪断，发起升级时需要选择这段影响的时间窗。可选值包括：
-0：自动执行，不需要指定时间窗；
-1：指定本次升级任务的时间窗，通过参数UpgradeTimeBegin和UpgradeTimeEnd设置；
-2：在实例运维时间窗内执行。
-UpgradeCheck为True时，此参数无效。
+   * <p>升级时间选项，升级过程中会有一段时间实例只读，并会有一次秒级闪断，发起升级时需要选择这段影响的时间窗。可选值包括：<br>0：自动执行，不需要指定时间窗；<br>1：指定本次升级任务的时间窗，通过参数UpgradeTimeBegin和UpgradeTimeEnd设置；<br>2：在实例运维时间窗内执行。<br>UpgradeCheck为True时，此参数无效。</p>
    */
   UpgradeTimeOption?: number
   /**
-   * 升级时间窗开始时间，时间格式：HH:MM:SS，例如：01:00:00。当UpgradeTimeOption为1时，该参数有效。
-UpgradeCheck为True时，此参数无效。
+   * <p>升级时间窗开始时间，时间格式：HH:MM:SS，例如：01:00:00。当UpgradeTimeOption为1时，该参数有效。<br>UpgradeCheck为True时，此参数无效。</p>
    */
   UpgradeTimeBegin?: string
   /**
-   * 升级时间窗截止时间，时间格式：HH:MM:SS，例如：02:00:00。当UpgradeTimeOption为1时，该参数有效。
-UpgradeCheck为True时，此参数无效。
+   * <p>升级时间窗截止时间，时间格式：HH:MM:SS，例如：02:00:00。当UpgradeTimeOption为1时，该参数有效。<br>UpgradeCheck为True时，此参数无效。</p>
    */
   UpgradeTimeEnd?: string
+  /**
+   * <p>升级时是否携带RO。开启时在RO重建过程中会存在RO数据延迟现象。</p><p>默认值：false</p>
+   */
+  UpgradeReadOnlyInstance?: boolean
 }
 
 /**

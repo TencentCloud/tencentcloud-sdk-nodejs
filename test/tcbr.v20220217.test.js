@@ -38,9 +38,19 @@ it("tcbr.v20220217.DescribeCloudRunServers", async function () {
     }
 })
 
-it("tcbr.v20220217.DeleteCloudRunServer", async function () {
+it("tcbr.v20220217.StartVersionInstance", async function () {
     try {
-       const data = await client.DeleteCloudRunServer({})
+       const data = await client.StartVersionInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.ModifyStableIPStatus", async function () {
+    try {
+       const data = await client.ModifyStableIPStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +88,9 @@ it("tcbr.v20220217.SubmitServerConfigChangeDiff", async function () {
     }
 })
 
-it("tcbr.v20220217.DescribeCloudRunEnvs", async function () {
+it("tcbr.v20220217.SubmitServerRollback", async function () {
     try {
-       const data = await client.DescribeCloudRunEnvs({})
+       const data = await client.SubmitServerRollback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +98,9 @@ it("tcbr.v20220217.DescribeCloudRunEnvs", async function () {
     }
 })
 
-it("tcbr.v20220217.DescribeEnvBaseInfo", async function () {
+it("tcbr.v20220217.DescribeCloudRunEnvs", async function () {
     try {
-       const data = await client.DescribeEnvBaseInfo({})
+       const data = await client.DescribeCloudRunEnvs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +118,9 @@ it("tcbr.v20220217.StopVersionInstance", async function () {
     }
 })
 
-it("tcbr.v20220217.SubmitServerRollback", async function () {
+it("tcbr.v20220217.DescribeEnvBaseInfo", async function () {
     try {
-       const data = await client.SubmitServerRollback({})
+       const data = await client.DescribeEnvBaseInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +218,9 @@ it("tcbr.v20220217.DescribeCloudRunPodList", async function () {
     }
 })
 
-it("tcbr.v20220217.StartVersionInstance", async function () {
+it("tcbr.v20220217.DeleteCloudRunServer", async function () {
     try {
-       const data = await client.StartVersionInstance({})
+       const data = await client.DeleteCloudRunServer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

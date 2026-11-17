@@ -1108,7 +1108,7 @@ export interface CreateBackupGroupRequest {
    */
   BackupGroupName?: string
   /**
-   * 指定备份组到期时间，如果未传入该参数，默认为永久保留。
+   * 指定备份组到期时间，ISO 8601 格式字符串，如 2026-01-01T00:00:00+08:00。如果未传入该参数，默认为永久保留。
    */
   Deadline?: string
 }
@@ -1987,7 +1987,7 @@ export interface CopyPairDeniedAction {
  */
 export interface CreateFileBackupRequest {
   /**
-   * <p>资源ID列表</p>
+   * <p>资源ID（单个）：CVM 场景传实例ID（ins-xxx），CFS 场景传文件系统ID（cfs-xxx），COS 场景传源桶名称。</p>
    */
   ResourceId: string
   /**
@@ -1995,7 +1995,7 @@ export interface CreateFileBackupRequest {
    */
   PlanId?: string
   /**
-   * <p>备份路径列表，1~20 个</p>
+   * <p>备份路径列表，0~20 个。不传或传空数组时，CVM/CFS 默认 ["/"]（根目录），COS 默认整桶；COS 最多 1 个对象前缀。</p>
    */
   BackupPaths?: Array<string>
   /**
@@ -2019,7 +2019,7 @@ export interface CreateFileBackupRequest {
    */
   Deadline?: string
   /**
-   * <p>备份名称</p>
+   * <p>备份名称，最长128个字符；不传或为空时系统自动生成</p>
    */
   BackupName?: string
   /**
@@ -2798,6 +2798,16 @@ export interface ProtectedResourceOverview {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   COSAgent?: ResourceProtectStat
+  /**
+   * <p>非腾讯云虚拟机备份受保护统计</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalCVMAgent?: ResourceProtectStat
+  /**
+   * <p>非腾讯云文件存储备份受保护统计</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalCFSAgent?: ResourceProtectStat
 }
 
 /**
@@ -5133,6 +5143,16 @@ export interface DescribeBackupOverviewGeneralResponse {
    * <p>COS备份概览数据</p>
    */
   COSAgentBackupOverview?: FileBackupOverview
+  /**
+   * <p>非腾讯云虚拟机备份概览数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalCVMAgentBackupOverview?: FileBackupOverview
+  /**
+   * <p>非腾讯云文件存储备份概览数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalCFSAgentBackupOverview?: FileBackupOverview
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

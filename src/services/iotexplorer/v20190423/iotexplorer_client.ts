@@ -78,6 +78,7 @@ import {
   ChangeP2PRouteResponse,
   UpdateDeviceTWeCallAuthorizeStatusRequest,
   CreateTWeSeeDirectUploadCredentialResponse,
+  DescribeDeviceCloudStoragePackagesRequest,
   CreateProjectResponse,
   DeleteProjectResponse,
   DescribeFirmwareUpdateStatusResponse,
@@ -222,6 +223,7 @@ import {
   GetTWeTalkActiveRecordListResponse,
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
+  ProductEntry,
   SeeCreateSubscriptionEntry,
   DirectBindDeviceInFamilyResponse,
   VisionCustomDetectQuery,
@@ -559,7 +561,7 @@ import {
   DescribeProjectResponse,
   VisionDetectedObject,
   DeviceData,
-  ProductEntry,
+  DescribeDeviceCloudStoragePackagesResponse,
   BindDeviceInfo,
   CloudStorageAIServiceTask,
   SeeExtendedOutput,
@@ -651,6 +653,7 @@ import {
   ListOtaModulesResponse,
   SeeCompHighlightConfig,
   GetTopicRuleListRequest,
+  NewCloudStoragePackage,
   ListOtaModulesRequest,
   SeeDetectContinuousConfig,
   RevokeBindUserDeviceResponse,
@@ -1711,6 +1714,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrivateCAResponse) => void
   ): Promise<DeletePrivateCAResponse> {
     return this.request("DeletePrivateCA", req, cb)
+  }
+
+  /**
+   * 查询设备云存套餐
+   */
+  async DescribeDeviceCloudStoragePackages(
+    req: DescribeDeviceCloudStoragePackagesRequest,
+    cb?: (error: string, rep: DescribeDeviceCloudStoragePackagesResponse) => void
+  ): Promise<DescribeDeviceCloudStoragePackagesResponse> {
+    return this.request("DescribeDeviceCloudStoragePackages", req, cb)
   }
 
   /**

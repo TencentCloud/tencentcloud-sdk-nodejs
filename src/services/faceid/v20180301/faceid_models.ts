@@ -851,6 +851,10 @@ export interface DetectAIFakeFacesRequest {
    * <p>加密后的密文。</p><ul><li>加密前的数据格式如下:{&quot;FaceInput&quot;:&quot;AAAAA&quot;,&quot;FaceInputType&quot;:1}。</li></ul>
    */
   EncryptedBody?: string
+  /**
+   * <p>一次性携带本次请求的风控上下文，即“是谁、在哪、从哪个 IP 发起”</p>
+   */
+  ExtraRiskInfo?: ExtraRiskInfo
 }
 
 /**
@@ -1222,6 +1226,11 @@ export interface DetectAIFakeFacesResponse {
    */
   ExtraInfo?: ExtraInfo
   /**
+   * <p>附加风险结论的独立容器，回答“本次附加风险检查是否可信、有没有发现问题”。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraRiskResult?: ExtraRiskResult
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1414,6 +1423,28 @@ export interface RetrievalLivenessExtraInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HitTemplate?: string
+}
+
+/**
+ * ExtraRiskResult
+ */
+export interface ExtraRiskResult {
+  /**
+   * <p>本次附加检查的完成度，回答“这次结果可否采信”。</p><p>枚举值：</p><ul><li>Completed： 本次请求所需的检查均已给出结论（命中或通过）</li><li>Partial： 至少一项检查未能给出结论：依赖不可用、数据不足、入参不完整或非法。结果仅供参考，不代表安全</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>附加风险等级，可能为空字符串</p><p>枚举值：</p><ul><li>High： 存在已生效的风险命中项（此时 RiskDetailList 非空）</li><li>Low： 检查已完成，且确认无命中</li><li>&quot;&quot;（空字符串）    ： 未识别：本次没有任何一项检查能给出结论，或检查未全部完成。既不代表有风险，也不代表安全</li></ul>
+   */
+  RiskLevel?: string
+  /**
+   * <p>命中的风险项列表，未命中时为空数组 []</p>
+   */
+  BlackListResult?: Array<BlackListItem>
+  /**
+   * <p>人脸黑名单命中明细，未命中时为空数组 []</p>
+   */
+  RiskDetailList?: Array<RiskDetailItem>
 }
 
 /**
@@ -2294,6 +2325,28 @@ export interface DetectInfoText {
 }
 
 /**
+ * ExtraRiskInfo
+ */
+export interface ExtraRiskInfo {
+  /**
+   * <p>客户业务域内稳定且唯一的人员标识，用于把同一人员的多次位置上报关联起来，判断是否存在异常位移。</p><p>入参限制：长度 ≤ 128 字符；不可含控制字符（ASCII &lt; 0x20 或 0x7F）；建议传脱敏标识，勿传明文身份证号/手机号</p>
+   */
+  PersonId?: string
+  /**
+   * <p>设备采集时的纬度，WGS84 十进制度    </p><p>入参限制：与 Longitude 必须成对出现；取值 [-90, 90]；须为有效数字，不接受 NaN/Inf；JSON 中按字符串传（如 &quot;22.5431&quot;）</p>
+   */
+  Latitude?: string
+  /**
+   * <p>设备采集时的经度，WGS84 十进制度    </p><p>入参限制：与 Latitude 必须成对出现；取值 [-180, 180]；其余同上</p>
+   */
+  Longitude?: string
+  /**
+   * <p>设备采集时的公网出口 IP    </p><p>入参限制：长度 ≤ 64；须为可解析的 IPv4/IPv6；私网、回环、链路本地、组播地址视为不可定位</p>
+   */
+  Ip?: string
+}
+
+/**
  * GetDetectInfo返回参数结构体
  */
 export interface GetDetectInfoResponse {
@@ -2841,6 +2894,28 @@ export interface BankCard2EVerificationRequest {
 }
 
 /**
+ * BlackListItem
+ */
+export interface BlackListItem {
+  /**
+   * <p>黑名单条目 ID，客户创建条目时自定义，用于回溯是哪一条命中</p>
+   */
+  ModelId?: string
+  /**
+   * <p>条目类型。当前仅有 face（人脸）</p>
+   */
+  ModelType?: string
+  /**
+   * <p>人脸相似度，字符串形式表示，保留 4 位小数，取值 0.0000–1.0000</p>
+   */
+  FaceScore?: string
+  /**
+   * <p>背景相似度</p>
+   */
+  BackgroundScore?: string
+}
+
+/**
  * ImageRecognitionV2请求参数结构体
  */
 export interface ImageRecognitionV2Request {
@@ -3017,6 +3092,16 @@ export interface GetNFCTokenResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RiskDetailItem
+ */
+export interface RiskDetailItem {
+  /**
+   * <p>风险项类型</p><p>枚举值：</p><ul><li>IpLocationMismatch： 上报坐标所在国家/地区与 IP 归属国家/地区不一致</li><li>AbnormalLocationChange： 同一人员短时间内发生物理上不可能的位移    </li><li>BlacklistHit： 命中客户自建人脸黑名单</li></ul>
+   */
+  Type?: string
 }
 
 /**

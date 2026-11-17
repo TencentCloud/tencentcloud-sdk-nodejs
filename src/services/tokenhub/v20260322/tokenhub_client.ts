@@ -35,6 +35,7 @@ import {
   CreateTokenPlanApiKeysResponse,
   ModelAccessInfo,
   DescribeModelListResponse,
+  DescribeTokenPlanPersonalPackageResponse,
   DeleteEndpointResponse,
   CreateTokenPlanTeamOrderAndBuyRequest,
   CreateEndpointRequest,
@@ -90,6 +91,7 @@ import {
   DescribeTokenPlanApiKeyUsageDetailResponse,
   ModifyApiKeyInfoRequest,
   TokenPlanListItem,
+  DescribeTokenPlanPersonalPackageRequest,
   DescribeApiKeyRequest,
   DescribeUsageRankListRequest,
   CreateGlossaryEntriesRequest,
@@ -106,7 +108,7 @@ import {
   ModelChargingItem,
   DescribeModelEndpointListRequest,
   DescribeTokenPlanApiKeyResponse,
-  DescribeTokenPlanListRequest,
+  ModifyTokenPlanApiKeySecretRequest,
   ModelFreeTrialInfo,
   TokenPlanApiKeyInfo,
   ModifyTokenPlanApiKeyRequest,
@@ -121,7 +123,7 @@ import {
   ModifyApiKeyStatusResponse,
   CreateTokenPlanTeamOrderAndBuyResponse,
   RequestFilter,
-  ModifyTokenPlanApiKeySecretRequest,
+  DescribeTokenPlanListRequest,
   RequestSort,
   CreateApiKeyRequest,
 } from "./tokenhub_models"
@@ -324,6 +326,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUsageRankListResponse) => void
   ): Promise<DescribeUsageRankListResponse> {
     return this.request("DescribeUsageRankList", req, cb)
+  }
+
+  /**
+     * 查询个人版套餐详情。
+
+查询指定产品类型的个人版 Token Plan 套餐状态、额度及续费信息。
+     */
+  async DescribeTokenPlanPersonalPackage(
+    req: DescribeTokenPlanPersonalPackageRequest,
+    cb?: (error: string, rep: DescribeTokenPlanPersonalPackageResponse) => void
+  ): Promise<DescribeTokenPlanPersonalPackageResponse> {
+    return this.request("DescribeTokenPlanPersonalPackage", req, cb)
   }
 
   /**

@@ -899,7 +899,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注册CA证书（仅一机一证场景支持），可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817)
+   * 注册CA证书（仅一机一证场景支持）
    */
   async RegisterCaCertificate(
     req: RegisterCaCertificateRequest,
