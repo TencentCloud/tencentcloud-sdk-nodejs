@@ -10028,43 +10028,28 @@ export interface ModifyRoGroupVipVportRequest {
  */
 export interface OpenAuditServiceRequest {
   /**
-   * CDB 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   * <p>CDB 实例 ID。可通过 <a href="https://cloud.tencent.com/document/product/236/15872">DescribeDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 审计日志保存时长。支持值包括：
-7 - 一周；
-30 - 一个月；
-90 - 三个月；
-180 - 六个月；
-365 - 一年；
-1095 - 三年；
-1825 - 五年。
+   * <p>审计日志保存时长。</p><p>枚举值：</p><ul><li>7： 一周</li><li>30： 一个月</li><li>90： 三个月</li><li>180： 六个月</li><li>365： 一年</li><li>1095： 三年</li><li>1825： 五年</li></ul>
    */
   LogExpireDay: number
   /**
-   * 高频审计日志保存时长。默认值为7，此项取值需小于等于 LogExpireDay，支持值包括：
-3 - 3天；
-7 - 一周；
-30 - 一个月；
-90 - 三个月；
-180 - 六个月；
-365 - 一年；
-1095 - 三年；
-1825 - 五年。
+   * <p>高频审计日志保存时长。</p><p>枚举值：</p><ul><li>7： 一周</li><li>30： 一个月</li><li>90： 三个月</li><li>180： 六个月</li><li>365： 一年</li><li>1095： 三年</li><li>1825： 五年</li></ul><p>默认值：7</p><p>此项取值需小于等于 LogExpireDay。</p>
    */
   HighLogExpireDay?: number
   /**
-   * 审计规则（该参数已废弃，不再生效）。
+   * <p>审计规则（该参数已废弃，不再生效）。</p>
    * @deprecated
    */
   AuditRuleFilters?: Array<AuditRuleFilters>
   /**
-   * 规则模板 ID。
+   * <p>规则模板 ID。</p>
    */
   RuleTemplateIds?: Array<string>
   /**
-   * 审计类型。true - 全审计；默认 false - 规则审计。
+   * <p>审计类型。true - 全审计；默认 false - 规则审计。</p>
    */
   AuditAll?: boolean
 }

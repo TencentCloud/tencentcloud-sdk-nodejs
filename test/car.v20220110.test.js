@@ -18,6 +18,16 @@ const client = new tencentcloud.car.v20220110.Client({
 })
 describe("car.v20220110.test.js", function () {
 
+it("car.v20220110.CreateMCPToken", async function () {
+    try {
+       const data = await client.CreateMCPToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("car.v20220110.ApplyConcurrent", async function () {
     try {
        const data = await client.ApplyConcurrent({})
@@ -31,6 +41,26 @@ it("car.v20220110.ApplyConcurrent", async function () {
 it("car.v20220110.DescribeConcurrentCount", async function () {
     try {
        const data = await client.DescribeConcurrentCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("car.v20220110.RenewMCPToken", async function () {
+    try {
+       const data = await client.RenewMCPToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("car.v20220110.DescribeMCPTokens", async function () {
+    try {
+       const data = await client.DescribeMCPTokens({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

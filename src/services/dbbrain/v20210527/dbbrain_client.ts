@@ -311,10 +311,12 @@ import {
   DescribeRedisTopKeyPrefixListResponse,
   RedisMetricTopProxiesData,
   RedisCostCmd,
+  DescribeInterfaceEncryptKeyV2Request,
   IndexesToDrop,
   DescribeHealthScoreResponse,
   DescribeMongoDBProcessListResponse,
   CancelRedisBigKeyAnalysisTasksResponse,
+  DescribeInterfaceEncryptKeyV2Response,
   DescribeSecurityAuditLogExportTasksResponse,
   DescribeDBDiagReportContentResponse,
   ReceiveUin,
@@ -510,6 +512,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAlarmPolicyResponse) => void
   ): Promise<ModifyAlarmPolicyResponse> {
     return this.request("ModifyAlarmPolicy", req, cb)
+  }
+
+  /**
+   * 查询接口加密 RSA 公钥，前端用于加密敏感数据。
+   */
+  async DescribeInterfaceEncryptKeyV2(
+    req?: DescribeInterfaceEncryptKeyV2Request,
+    cb?: (error: string, rep: DescribeInterfaceEncryptKeyV2Response) => void
+  ): Promise<DescribeInterfaceEncryptKeyV2Response> {
+    return this.request("DescribeInterfaceEncryptKeyV2", req, cb)
   }
 
   /**

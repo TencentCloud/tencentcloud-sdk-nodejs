@@ -18,20 +18,26 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  RenewMCPTokenResponse,
   CreateSessionResponse,
+  DescribeMCPTokensResponse,
   StopPublishStreamRequest,
+  DescribeMCPTokensRequest,
   StartPublishStreamWithURLResponse,
   StopPublishStreamResponse,
-  DestroySessionResponse,
   StartPublishStreamWithURLRequest,
+  DestroySessionResponse,
+  CreateMCPTokenRequest,
   ApplyConcurrentResponse,
   StartPublishStreamResponse,
   CreateSessionRequest,
   ApplyConcurrentRequest,
   DescribeConcurrentCountResponse,
-  DestroySessionRequest,
+  CreateMCPTokenResponse,
   DescribeConcurrentCountRequest,
   StartPublishStreamRequest,
+  DestroySessionRequest,
+  RenewMCPTokenRequest,
 } from "./car_models"
 
 /**
@@ -41,6 +47,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("car.tencentcloudapi.com", "2022-01-10", clientConfig)
+  }
+
+  /**
+   * 创建 MCP Token（签发令牌）
+   */
+  async CreateMCPToken(
+    req?: CreateMCPTokenRequest,
+    cb?: (error: string, rep: CreateMCPTokenResponse) => void
+  ): Promise<CreateMCPTokenResponse> {
+    return this.request("CreateMCPToken", req, cb)
   }
 
   /**
@@ -61,6 +77,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConcurrentCountResponse) => void
   ): Promise<DescribeConcurrentCountResponse> {
     return this.request("DescribeConcurrentCount", req, cb)
+  }
+
+  /**
+   * 续期 MCP Token（续期令牌）
+   */
+  async RenewMCPToken(
+    req?: RenewMCPTokenRequest,
+    cb?: (error: string, rep: RenewMCPTokenResponse) => void
+  ): Promise<RenewMCPTokenResponse> {
+    return this.request("RenewMCPToken", req, cb)
+  }
+
+  /**
+   * 查询 MCP Token 列表
+   */
+  async DescribeMCPTokens(
+    req?: DescribeMCPTokensRequest,
+    cb?: (error: string, rep: DescribeMCPTokensResponse) => void
+  ): Promise<DescribeMCPTokensResponse> {
+    return this.request("DescribeMCPTokens", req, cb)
   }
 
   /**

@@ -30,10 +30,10 @@ import {
   MigrationTaskInfo,
   StopLifecycleDataTaskRequest,
   FileSystemClient,
-  DescribeCfsFileSystemsResponse,
+  AutoDeletePolicy,
   CreateLifecycleDataTaskResponse,
   ApplyPathLifecyclePolicyRequest,
-  BindAutoSnapshotPolicyRequest,
+  CreateAutoDeletePolicyRequest,
   ModifyFileSystemAutoScaleUpRuleRequest,
   ScaleUpFileSystemRequest,
   CreateCfsPGroupRequest,
@@ -72,20 +72,24 @@ import {
   CreateCfsSnapshotRequest,
   DescribeBucketListRequest,
   DeleteCfsRuleRequest,
+  ModifyAutoDeletePolicyResponse,
   ApplyPathLifecyclePolicyResponse,
   DataRetrievalTaskInfo,
   UpdateCfsRuleResponse,
   DeleteMigrationTaskResponse,
   DescribeLifecycleDataTaskRequest,
   DescribeSnapshotOperationLogsResponse,
+  ModifyAutoDeletePolicyRequest,
   DescribeDataRetrievalResponse,
   DeleteCfsFileSystemRequest,
   UpdateFileSystemBandwidthLimitRequest,
   DeleteLifecyclePolicyResponse,
+  UserQuota,
   CreateCfsPGroupResponse,
   DescribeCfsServiceStatusRequest,
   DescribeDataRetrievalRequest,
   CheckResult,
+  DescribeAutoDeletePoliciesRequest,
   DeleteUserQuotaResponse,
   DeleteMigrationTaskRequest,
   PGroup,
@@ -98,7 +102,7 @@ import {
   RunDataRetrievalTaskResponse,
   CreateCfsSnapshotResponse,
   LifecycleRule,
-  UserQuota,
+  DescribeCfsFileSystemsResponse,
   CreateCfsRuleRequest,
   DeleteCfsFileSystemResponse,
   CreateCfsFileSystemResponse,
@@ -111,6 +115,7 @@ import {
   OverrideCfsRulesResponse,
   FileSystemInfo,
   DescribeDataFlowRequest,
+  BindAutoSnapshotPolicyRequest,
   DescribeBucketListResponse,
   MountInfo,
   UpdateCfsFileSystemNameResponse,
@@ -133,10 +138,10 @@ import {
   DescribeDataRetrievalTaskResponse,
   DescribeCfsServiceStatusResponse,
   ExstraPerformanceInfo,
-  BindAutoSnapshotPolicyResponse,
+  CreateAutoDeletePolicyResponse,
   DescribeCfsSnapshotsRequest,
   UpdateCfsFileSystemSizeLimitResponse,
-  SnapshotOperateLog,
+  DescribeAutoDeletePoliciesResponse,
   UpdateAutoSnapshotPolicyRequest,
   UpdateCfsFileSystemSizeLimitRequest,
   DeleteDataRetrievalResponse,
@@ -144,8 +149,10 @@ import {
   UpdateCfsFileSystemPGroupResponse,
   UpdateAutoSnapshotPolicyResponse,
   FileSystemByPolicy,
+  SnapshotOperateLog,
   SnapshotInfo,
   AvailableProtoStatus,
+  BindAutoSnapshotPolicyResponse,
   UpdateCfsFileSystemPGroupRequest,
   CreateMigrationTaskResponse,
   DeleteAutoSnapshotPolicyResponse,
@@ -169,6 +176,7 @@ import {
   StopMigrationTaskResponse,
   CreateAccessCertResponse,
   StopMigrationTaskRequest,
+  DeleteAutoDeletePolicyRequest,
   DescribeAutoSnapshotPoliciesResponse,
   ModifyDataFlowRequest,
   DescribeCfsSnapshotOverviewRequest,
@@ -176,6 +184,7 @@ import {
   PathInfo,
   CreateAutoSnapshotPolicyRequest,
   CreateDataFlowRequest,
+  DeleteAutoDeletePolicyResponse,
   DescribeDataFlowResponse,
   DoDirectoryOperationRequest,
 } from "./cfs_models"
@@ -187,6 +196,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cfs.tencentcloudapi.com", "2019-07-19", clientConfig)
+  }
+
+  /**
+   * 设置文件系统配额，提供UID/GID的配额设置的接口（仅指定版本的Turbo实例能使用，若调用失败请提交工单与我们联系）
+   */
+  async SetUserQuota(
+    req: SetUserQuotaRequest,
+    cb?: (error: string, rep: SetUserQuotaResponse) => void
+  ): Promise<SetUserQuotaResponse> {
+    return this.request("SetUserQuota", req, cb)
   }
 
   /**
@@ -282,35 +301,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置文件系统配额，提供UID/GID的配额设置的接口（仅指定版本的Turbo实例能使用，若调用失败请提交工单与我们联系）
+   * 查询数据自动删除策略列表
    */
-  async SetUserQuota(
-    req: SetUserQuotaRequest,
-    cb?: (error: string, rep: SetUserQuotaResponse) => void
-  ): Promise<SetUserQuotaResponse> {
-    return this.request("SetUserQuota", req, cb)
+  async DescribeAutoDeletePolicies(
+    req: DescribeAutoDeletePoliciesRequest,
+    cb?: (error: string, rep: DescribeAutoDeletePoliciesResponse) => void
+  ): Promise<DescribeAutoDeletePoliciesResponse> {
+    return this.request("DescribeAutoDeletePolicies", req, cb)
   }
 
   /**
-     * 删除数据检索。
-
-删除指定的数据检索配置，不允许在存在关联任务时删除。调用接口后，若通过 DescribeDataRetrieval 接口查询不到对应的数据检索，则表示删除成功。
-     */
-  async DeleteDataRetrieval(
-    req: DeleteDataRetrievalRequest,
-    cb?: (error: string, rep: DeleteDataRetrievalResponse) => void
-  ): Promise<DeleteDataRetrievalResponse> {
-    return this.request("DeleteDataRetrieval", req, cb)
+   * 本接口（CreateCfsPGroup）用于创建权限组
+   */
+  async CreateCfsPGroup(
+    req: CreateCfsPGroupRequest,
+    cb?: (error: string, rep: CreateCfsPGroupResponse) => void
+  ): Promise<CreateCfsPGroupResponse> {
+    return this.request("CreateCfsPGroup", req, cb)
   }
 
   /**
-   * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
+   * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
    */
-  async DescribeMountTargets(
-    req: DescribeMountTargetsRequest,
-    cb?: (error: string, rep: DescribeMountTargetsResponse) => void
-  ): Promise<DescribeMountTargetsResponse> {
-    return this.request("DescribeMountTargets", req, cb)
+  async BindAutoSnapshotPolicy(
+    req: BindAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: BindAutoSnapshotPolicyResponse) => void
+  ): Promise<BindAutoSnapshotPolicyResponse> {
+    return this.request("BindAutoSnapshotPolicy", req, cb)
   }
 
   /**
@@ -646,13 +663,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
+   * 本接口（UpdateCfsPGroup）更新权限组信息。
    */
-  async BindAutoSnapshotPolicy(
-    req: BindAutoSnapshotPolicyRequest,
-    cb?: (error: string, rep: BindAutoSnapshotPolicyResponse) => void
-  ): Promise<BindAutoSnapshotPolicyResponse> {
-    return this.request("BindAutoSnapshotPolicy", req, cb)
+  async UpdateCfsPGroup(
+    req: UpdateCfsPGroupRequest,
+    cb?: (error: string, rep: UpdateCfsPGroupResponse) => void
+  ): Promise<UpdateCfsPGroupResponse> {
+    return this.request("UpdateCfsPGroup", req, cb)
+  }
+
+  /**
+   * 为指定 CFS 文件系统创建一条数据自动删除策略
+   */
+  async CreateAutoDeletePolicy(
+    req: CreateAutoDeletePolicyRequest,
+    cb?: (error: string, rep: CreateAutoDeletePolicyResponse) => void
+  ): Promise<CreateAutoDeletePolicyResponse> {
+    return this.request("CreateAutoDeletePolicy", req, cb)
   }
 
   /**
@@ -706,13 +733,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCfsPGroup）用于创建权限组
-   */
-  async CreateCfsPGroup(
-    req: CreateCfsPGroupRequest,
-    cb?: (error: string, rep: CreateCfsPGroupResponse) => void
-  ): Promise<CreateCfsPGroupResponse> {
-    return this.request("CreateCfsPGroup", req, cb)
+     * 删除数据检索。
+
+删除指定的数据检索配置，不允许在存在关联任务时删除。调用接口后，若通过 DescribeDataRetrieval 接口查询不到对应的数据检索，则表示删除成功。
+     */
+  async DeleteDataRetrieval(
+    req: DeleteDataRetrievalRequest,
+    cb?: (error: string, rep: DeleteDataRetrievalResponse) => void
+  ): Promise<DeleteDataRetrievalResponse> {
+    return this.request("DeleteDataRetrieval", req, cb)
   }
 
   /**
@@ -828,12 +857,32 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpdateCfsPGroup）更新权限组信息。
+   * 删除指定自动删除策略
    */
-  async UpdateCfsPGroup(
-    req: UpdateCfsPGroupRequest,
-    cb?: (error: string, rep: UpdateCfsPGroupResponse) => void
-  ): Promise<UpdateCfsPGroupResponse> {
-    return this.request("UpdateCfsPGroup", req, cb)
+  async DeleteAutoDeletePolicy(
+    req: DeleteAutoDeletePolicyRequest,
+    cb?: (error: string, rep: DeleteAutoDeletePolicyResponse) => void
+  ): Promise<DeleteAutoDeletePolicyResponse> {
+    return this.request("DeleteAutoDeletePolicy", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
+   */
+  async DescribeMountTargets(
+    req: DescribeMountTargetsRequest,
+    cb?: (error: string, rep: DescribeMountTargetsResponse) => void
+  ): Promise<DescribeMountTargetsResponse> {
+    return this.request("DescribeMountTargets", req, cb)
+  }
+
+  /**
+   * 修改自动删除策略名称或清理路径
+   */
+  async ModifyAutoDeletePolicy(
+    req: ModifyAutoDeletePolicyRequest,
+    cb?: (error: string, rep: ModifyAutoDeletePolicyResponse) => void
+  ): Promise<ModifyAutoDeletePolicyResponse> {
+    return this.request("ModifyAutoDeletePolicy", req, cb)
   }
 }

@@ -188,6 +188,16 @@ it("dbbrain.v20210527.ModifyAlarmPolicy", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeInterfaceEncryptKeyV2", async function () {
+    try {
+       const data = await client.DescribeInterfaceEncryptKeyV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.AddUserContact", async function () {
     try {
        const data = await client.AddUserContact({})

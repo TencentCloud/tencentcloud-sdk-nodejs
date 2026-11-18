@@ -1970,7 +1970,12 @@ export interface HTTPServiceCacheAction {
 /**
  * DescribeEnvAccessControl请求参数结构体
  */
-export type DescribeEnvAccessControlRequest = null
+export interface DescribeEnvAccessControlRequest {
+  /**
+   * <p>环境id</p>
+   */
+  EnvId: string
+}
 
 /**
  * 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，自定义短信包可以通过自定义apis或者自定义短信模板的方式接入，推荐使用云开发默认短信包，方便快捷。
@@ -2338,6 +2343,20 @@ export interface DescribeManagedAIModelListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * VPC信息
+ */
+export interface VPCInfo {
+  /**
+   * <p>VPC 唯一 ID</p><p>参数格式：vpc-xxxxx</p>
+   */
+  UniqVpcId?: string
+  /**
+   * <p>VPC 所在地域</p><p>参数格式：ap-xxxx</p>
+   */
+  Region?: string
 }
 
 /**
@@ -3518,6 +3537,20 @@ export interface ResetPGAccountPasswordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * VPC 白名单列表配置
+ */
+export interface VPCWhiteListConfig {
+  /**
+   * <p>VPC 白名单配置状态</p><p>枚举值：</p><ul><li>OPEN： 开启白名单，VPCs 必填，覆盖写入</li><li>CLOSE： 关闭白名单，VPCs 填入时，覆盖写入</li></ul>
+   */
+  Action?: string
+  /**
+   * <p>VPC 信息</p>
+   */
+  VPCs?: Array<VPCInfo>
 }
 
 /**
@@ -5133,7 +5166,16 @@ export interface CodeReq {
 /**
  * ModifyEnvAccessControl请求参数结构体
  */
-export type ModifyEnvAccessControlRequest = null
+export interface ModifyEnvAccessControlRequest {
+  /**
+   * <p>环境id</p>
+   */
+  EnvId: string
+  /**
+   * <p>本次要设置的来源集合</p><p>入参限制：SourceType = PUBLIC 时，标识操作公网开关<br>SourceType = VPC 时，通过配置 VPCWhiteList，开启/关闭 VPC 白名单<br>SourceType = WOA 时，通过配置 WOAAuth，开启/关闭鉴权校验，开启鉴权时，AuthToken 字段为填</p>
+   */
+  Sources: Array<AccessSourceSetting>
+}
 
 /**
  * 删除tcb用户返回值
@@ -5330,6 +5372,10 @@ export interface CloudAppLinkService {
  * DescribeEnvAccessControl返回参数结构体
  */
 export interface DescribeEnvAccessControlResponse {
+  /**
+   * <p>修改之后，当前的生效的配置</p>
+   */
+  Current?: Array<AccessSourceSetting>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5902,6 +5948,32 @@ export interface UpdateAIModelRequest {
    * <p>模型密钥</p>
    */
   Secret?: AIModelSecret
+}
+
+/**
+ * 域名访问来源配置
+ */
+export interface AccessSourceSetting {
+  /**
+   * <p>来源类型</p><p>枚举值：</p><ul><li>PUBLIC： 公网请求</li><li>VPC： VPC 请求</li><li>WOA： 办公网请求</li></ul>
+   */
+  SourceType: string
+  /**
+   * <p>来源请求状态</p><p>枚举值：</p><ul><li>OPEN： 放通</li><li>CLOSE： 拦截</li></ul>
+   */
+  Action?: string
+  /**
+   * <p>是否开启 WOA 鉴权</p><p>枚举值：</p><ul><li>FORCE_AUTH： 强制鉴权</li><li>NO_AUTH： 不鉴权</li></ul><p>默认值：NO_AUTH</p><p>仅 SourceType = WOA 且 Action= OPEN 时生效</p>
+   */
+  WOAAuth?: string
+  /**
+   * <p>WOA 鉴权需要的 Token</p><p>仅 Source Type=WOA 且 WOAAuth = FORCE_AUTH 时必填</p>
+   */
+  AuthToken?: string
+  /**
+   * <p>VPC 白名单信息</p><p>仅 SourceType = VPC 时有效; 不传表示不修改</p>
+   */
+  VPCWhiteList?: VPCWhiteListConfig
 }
 
 /**
@@ -7456,6 +7528,14 @@ export interface AIModelSecret {
  * ModifyEnvAccessControl返回参数结构体
  */
 export interface ModifyEnvAccessControlResponse {
+  /**
+   * <p>本次请求影响的权限数量</p>
+   */
+  AffectedRows?: number
+  /**
+   * <p>修改之后，当前的生效的配置</p><p>SourceType = PUBLIC 表示公网链路访问配置<br>SourceType = VPC 表示 VPC 链路访问配置<br>SourceType = WOA 表示办公网链路访问配置</p>
+   */
+  Current?: Array<AccessSourceSetting>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

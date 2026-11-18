@@ -174,33 +174,37 @@ export interface ModifyFolderRequest {
  */
 export interface DescribeJobSubmissionLogResponse {
   /**
-   * 日志搜索的游标，需要搜索更多时透传这个值
+   * <p>日志搜索的游标，需要搜索更多时透传这个值</p>
    */
   Cursor?: string
   /**
-   * 是否返回了所有的日志记录
+   * <p>是否返回了所有的日志记录</p>
    */
   ListOver?: boolean
   /**
-   * 作业启动的requestId
+   * <p>作业启动的requestId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobRequestId?: string
   /**
-   * 该时间段内符合关键字的所有的作业实例列表
+   * <p>该时间段内符合关键字的所有的作业实例列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobInstanceList?: Array<JobInstanceForSubmissionLog>
   /**
-   * 废弃，请使用LogContentList
+   * <p>废弃，请使用LogContentList</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogList?: Array<string>
   /**
-   * 日志列表
+   * <p>日志列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogContentList?: Array<LogContent>
+  /**
+   * <p>分页偏移</p>
+   */
+  Offset?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4159,37 +4163,45 @@ export interface DeleteOceanusClusterRequest {
  */
 export interface DescribeJobSubmissionLogRequest {
   /**
-   * 作业ID，例如：cql-6v1jkxrn
+   * <p>作业ID，例如：cql-6v1jkxrn</p>
    */
   JobId: string
   /**
-   * 起始时间，unix时间戳，毫秒级，例如：1611754219108
+   * <p>起始时间，unix时间戳，毫秒级，例如：1611754219108</p>
    */
   StartTime: number
   /**
-   * 结束时间，unix时间戳，毫秒级，例如：1611754219108
+   * <p>结束时间，unix时间戳，毫秒级，例如：1611754219108</p>
    */
   EndTime: number
   /**
-   * 作业运行的实例ID, 例如：1,2,3。默认为0，表示未选中任何实例，搜索该时间段内最近的一个实例的日志
+   * <p>作业运行的实例ID, 例如：1,2,3。默认为0，表示未选中任何实例，搜索该时间段内最近的一个实例的日志</p>
    */
   RunningOrderId?: number
   /**
-   * 日志搜索的关键词，默认为空
+   * <p>日志搜索的关键词，默认为空</p>
    */
   Keyword?: string
   /**
-   * 日志搜索的游标，可透传上次返回的值，默认为空
+   * <p>日志搜索的游标，可透传上次返回的值，默认为空</p>
    */
   Cursor?: string
   /**
-   * 时间戳排序规则，asc - 升序，desc - 降序。默认为升序
+   * <p>时间戳排序规则，asc - 升序，desc - 降序。默认为升序</p>
    */
   OrderType?: string
   /**
-   * 搜索的日志条数上限值，最大为100
+   * <p>搜索的日志条数上限值，最大为100</p>
    */
   Limit?: number
+  /**
+   * <p>分页偏移</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤</p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**

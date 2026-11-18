@@ -108,6 +108,7 @@ import {
   FunctionEipConfig,
   CheckTcbServiceRequest,
   DescribeManagedAIModelListResponse,
+  VPCInfo,
   DownloadFunctionRequest,
   PushPGUserMigrationsResponse,
   BindStorageSourceResponse,
@@ -158,6 +159,7 @@ import {
   MigrationInput,
   DescribeResourcePermissionResult,
   ResetPGAccountPasswordResponse,
+  VPCWhiteListConfig,
   CreateCustomLoginKeyRequest,
   EnablePGDocumentExtResponse,
   DescribeCreateMySQLResultRequest,
@@ -259,6 +261,7 @@ import {
   VerifyPlatformHTTPServiceRouteResponse,
   AIModelStatus,
   UpdateAIModelRequest,
+  AccessSourceSetting,
   DailyUsageList,
   RenewEnvRequest,
   DescribeClientResponse,
@@ -578,7 +581,7 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
 （4）可以通过云开发控制台调用修改访问配置，修改后可通过查询接口核对生效配置
      */
   async ModifyEnvAccessControl(
-    req?: ModifyEnvAccessControlRequest,
+    req: ModifyEnvAccessControlRequest,
     cb?: (error: string, rep: ModifyEnvAccessControlResponse) => void
   ): Promise<ModifyEnvAccessControlResponse> {
     return this.request("ModifyEnvAccessControl", req, cb)
@@ -1313,7 +1316,7 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
 （2）不产生写副作用
      */
   async DescribeEnvAccessControl(
-    req?: DescribeEnvAccessControlRequest,
+    req: DescribeEnvAccessControlRequest,
     cb?: (error: string, rep: DescribeEnvAccessControlResponse) => void
   ): Promise<DescribeEnvAccessControlResponse> {
     return this.request("DescribeEnvAccessControl", req, cb)

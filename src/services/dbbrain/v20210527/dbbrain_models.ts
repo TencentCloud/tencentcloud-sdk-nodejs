@@ -6770,7 +6770,7 @@ export interface DescribeHealthScoreRequest {
    */
   Time: string
   /**
-   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，默认为&quot;mysql&quot;。</p>
+   * <p>服务产品类型，支持值包括：&quot;mysql&quot; - 云数据库 MySQL，&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;dcdb&quot; - 云数据库 TDSQL MySQL，&quot;mariadb&quot; - 云数据库 MariaDB，&quot;tdstore&quot; - 云数据库 TDSQL TDStore 版，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;sqlserver&quot; - 云数据库 SQL Server，&quot;postgres&quot; - 云数据库 PostgreSQL，&quot;redis&quot; - 云数据库 Redis，默认为&quot;mysql&quot;。</p>
    */
   Product: string
 }
@@ -8485,6 +8485,11 @@ export interface RedisCostCmd {
 }
 
 /**
+ * DescribeInterfaceEncryptKeyV2请求参数结构体
+ */
+export type DescribeInterfaceEncryptKeyV2Request = null
+
+/**
  * 无效索引
  */
 export interface IndexesToDrop {
@@ -8547,6 +8552,21 @@ export interface CancelRedisBigKeyAnalysisTasksResponse {
    * 终止大Key任务结果；0-成功。
    */
   Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInterfaceEncryptKeyV2返回参数结构体
+ */
+export interface DescribeInterfaceEncryptKeyV2Response {
+  /**
+   * <p>RSA 公钥，Base64 编码格式，用于前端加密敏感数据。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicKey?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

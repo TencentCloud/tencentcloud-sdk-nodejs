@@ -388,21 +388,45 @@ export interface FileSystemClient {
 }
 
 /**
- * DescribeCfsFileSystems返回参数结构体
+ * 自动删除策略配置信息
  */
-export interface DescribeCfsFileSystemsResponse {
+export interface AutoDeletePolicy {
   /**
-   * <p>文件系统信息</p>
+   * <p>策略 ID</p>
    */
-  FileSystems?: Array<FileSystemInfo>
+  PolicyId?: string
   /**
-   * <p>文件系统总数</p>
+   * <p>文件系统Id</p>
    */
-  TotalCount?: number
+  FileSystemId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>自动清理策略名称</p>
    */
-  RequestId?: string
+  PolicyName?: string
+  /**
+   * <p>待清理的路径</p>
+   */
+  Paths?: Array<string>
+  /**
+   * <p>自动清理策略状态</p><p>枚举值：</p><ul><li>enabling： 启用中</li><li>enabled： 已启用</li><li>disabling： 禁用中</li><li>disabed： 已禁用</li><li>deleting： 删除中</li><li>failed： 失败</li><li>creating： 创建中</li><li>updating： 修改中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>清理策略创建时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>策略更新时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>策略所属地域</p>
+   */
+  Region?: string
+  /**
+   * <p>错误信息</p>
+   */
+  ErrMsg?: string
 }
 
 /**
@@ -434,17 +458,21 @@ export interface ApplyPathLifecyclePolicyRequest {
 }
 
 /**
- * BindAutoSnapshotPolicy请求参数结构体
+ * CreateAutoDeletePolicy请求参数结构体
  */
-export interface BindAutoSnapshotPolicyRequest {
+export interface CreateAutoDeletePolicyRequest {
   /**
-   * 需要解绑的文件系统ID列表，用"," 分割，文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
+   * <p>文件系统 ID</p>
    */
-  AutoSnapshotPolicyId: string
+  FileSystemId: string
   /**
-   * 解绑的快照策略ID，可以通过[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208) 查询获取
+   * <p>自动清理策略名称</p>
    */
-  FileSystemIds: string
+  PolicyName: string
+  /**
+   * <p>自动清理策略路径列表</p>
+   */
+  Paths: Array<string>
 }
 
 /**
@@ -1161,6 +1189,16 @@ export interface DeleteCfsRuleRequest {
 }
 
 /**
+ * ModifyAutoDeletePolicy返回参数结构体
+ */
+export interface ModifyAutoDeletePolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ApplyPathLifecyclePolicy返回参数结构体
  */
 export interface ApplyPathLifecyclePolicyResponse {
@@ -1326,6 +1364,32 @@ export interface DescribeSnapshotOperationLogsResponse {
 }
 
 /**
+ * ModifyAutoDeletePolicy请求参数结构体
+ */
+export interface ModifyAutoDeletePolicyRequest {
+  /**
+   * <p>文件系统 ID</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>自动清理策略 ID</p>
+   */
+  PolicyId: string
+  /**
+   * <p>自动清理路径列表</p>
+   */
+  Paths?: Array<string>
+  /**
+   * <p>自动清理策略名称</p>
+   */
+  PolicyName?: string
+  /**
+   * <p>策略状态</p><p>枚举值：</p><ul><li>enabled： 启用</li><li>disabled： 禁用</li></ul>
+   */
+  Status?: string
+}
+
+/**
  * DescribeDataRetrieval返回参数结构体
  */
 export interface DescribeDataRetrievalResponse {
@@ -1375,6 +1439,49 @@ export interface DeleteLifecyclePolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 文件系统配额信息
+ */
+export interface UserQuota {
+  /**
+   * <p>指定配额类型，包括Uid、Gid、Dir</p>
+   */
+  UserType: string
+  /**
+   * <p>UID/GID信息</p>
+   */
+  UserId: string
+  /**
+   * <p>容量硬限制，单位GiB</p>
+   */
+  CapacityHardLimit: number
+  /**
+   * <p>文件硬限制，单位个</p>
+   */
+  FileHardLimit: number
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>容量使用，单位GiB</p>
+   */
+  CapacityUsed?: number
+  /**
+   * <p>文件使用个数，单位个</p>
+   */
+  FileUsed?: number
+  /**
+   * <p>需设置配额的目录路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。不同目录之间不可存在包含关系。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/subdir/test1/test2</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DirectoryPath?: string
+  /**
+   * <p>配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败</p>
+   */
+  Status?: string
 }
 
 /**
@@ -1454,6 +1561,24 @@ export interface CheckResult {
    * 目标路径
    */
   TargetPath: string
+}
+
+/**
+ * DescribeAutoDeletePolicies请求参数结构体
+ */
+export interface DescribeAutoDeletePoliciesRequest {
+  /**
+   * <p>文件系统 ID</p>
+   */
+  FileSystemId?: string
+  /**
+   * <p>分页偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页大小</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -1767,46 +1892,21 @@ export interface LifecycleRule {
 }
 
 /**
- * 文件系统配额信息
+ * DescribeCfsFileSystems返回参数结构体
  */
-export interface UserQuota {
+export interface DescribeCfsFileSystemsResponse {
   /**
-   * <p>指定配额类型，包括Uid、Gid、Dir</p>
+   * <p>文件系统信息</p>
    */
-  UserType: string
+  FileSystems?: Array<FileSystemInfo>
   /**
-   * <p>UID/GID信息</p>
+   * <p>文件系统总数</p>
    */
-  UserId: string
+  TotalCount?: number
   /**
-   * <p>容量硬限制，单位GiB</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CapacityHardLimit: number
-  /**
-   * <p>文件硬限制，单位个</p>
-   */
-  FileHardLimit: number
-  /**
-   * <p>文件系统ID</p>
-   */
-  FileSystemId: string
-  /**
-   * <p>容量使用，单位GiB</p>
-   */
-  CapacityUsed?: number
-  /**
-   * <p>文件使用个数，单位个</p>
-   */
-  FileUsed?: number
-  /**
-   * <p>需设置配额的目录路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。不同目录之间不可存在包含关系。<br>示例：</p><ul><li>若挂载的是CFS根目录 /，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/test1/test2</li><li>若挂载的是CFS子目录 /subdir，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/subdir/test1/test2</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DirectoryPath?: string
-  /**
-   * <p>配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败</p>
-   */
-  Status?: string
+  RequestId?: string
 }
 
 /**
@@ -2240,6 +2340,20 @@ export interface DescribeDataFlowRequest {
    * 文件系统版本；版本号：v1.5，v3.0，v3.1，v4.0
    */
   CfsVersion?: string
+}
+
+/**
+ * BindAutoSnapshotPolicy请求参数结构体
+ */
+export interface BindAutoSnapshotPolicyRequest {
+  /**
+   * 需要解绑的文件系统ID列表，用"," 分割，文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
+   */
+  AutoSnapshotPolicyId: string
+  /**
+   * 解绑的快照策略ID，可以通过[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208) 查询获取
+   */
+  FileSystemIds: string
 }
 
 /**
@@ -2792,13 +2906,13 @@ export interface ExstraPerformanceInfo {
 }
 
 /**
- * BindAutoSnapshotPolicy返回参数结构体
+ * CreateAutoDeletePolicy返回参数结构体
  */
-export interface BindAutoSnapshotPolicyResponse {
+export interface CreateAutoDeletePolicyResponse {
   /**
-   * 快照策略ID
+   * <p>自动清理策略ID</p>
    */
-  AutoSnapshotPolicyId?: string
+  PolicyId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2857,37 +2971,21 @@ export interface UpdateCfsFileSystemSizeLimitResponse {
 }
 
 /**
- * 快照操作日志
+ * DescribeAutoDeletePolicies返回参数结构体
  */
-export interface SnapshotOperateLog {
+export interface DescribeAutoDeletePoliciesResponse {
   /**
-   * 操作类型
-CreateCfsSnapshot：创建快照
-DeleteCfsSnapshot：删除快照
-CreateCfsFileSystem：创建文件系统
-UpdateCfsSnapshotAttribute：更新快照
+   * <p>自动清理策略列表</p>
    */
-  Action?: string
+  Policies?: Array<AutoDeletePolicy>
   /**
-   * 操作时间
+   * <p>总数</p>
    */
-  ActionTime?: string
+  TotalCount?: number
   /**
-   * 操作名称
-CreateCfsSnapshot
-DeleteCfsSnapshot
-CreateCfsFileSystem
-UpdateCfsSnapshotAttribute
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ActionName?: string
-  /**
-   * 操作者uin
-   */
-  Operator?: string
-  /**
-   * 1-任务进行中；2-任务成功；3-任务失败
-   */
-  Result?: number
+  RequestId?: string
 }
 
 /**
@@ -3033,6 +3131,40 @@ export interface FileSystemByPolicy {
 }
 
 /**
+ * 快照操作日志
+ */
+export interface SnapshotOperateLog {
+  /**
+   * 操作类型
+CreateCfsSnapshot：创建快照
+DeleteCfsSnapshot：删除快照
+CreateCfsFileSystem：创建文件系统
+UpdateCfsSnapshotAttribute：更新快照
+   */
+  Action?: string
+  /**
+   * 操作时间
+   */
+  ActionTime?: string
+  /**
+   * 操作名称
+CreateCfsSnapshot
+DeleteCfsSnapshot
+CreateCfsFileSystem
+UpdateCfsSnapshotAttribute
+   */
+  ActionName?: string
+  /**
+   * 操作者uin
+   */
+  Operator?: string
+  /**
+   * 1-任务进行中；2-任务成功；3-任务失败
+   */
+  Result?: number
+}
+
+/**
  * 快照信息
  */
 export interface SnapshotInfo {
@@ -3116,6 +3248,20 @@ export interface AvailableProtoStatus {
    * 协议类型。可选值有 NFS、CIFS、TURBO
    */
   Protocol?: string
+}
+
+/**
+ * BindAutoSnapshotPolicy返回参数结构体
+ */
+export interface BindAutoSnapshotPolicyResponse {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3484,6 +3630,20 @@ export interface StopMigrationTaskRequest {
 }
 
 /**
+ * DeleteAutoDeletePolicy请求参数结构体
+ */
+export interface DeleteAutoDeletePolicyRequest {
+  /**
+   * <p>文件系统 ID</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>自动清理策略ID</p>
+   */
+  PolicyId: string
+}
+
+/**
  * DescribeAutoSnapshotPolicies返回参数结构体
  */
 export interface DescribeAutoSnapshotPoliciesResponse {
@@ -3674,6 +3834,16 @@ export interface CreateDataFlowRequest {
    * <p>Kafka消费用户密码。默认${SecretId}#${SecretKey}。</p>
    */
   Password?: string
+}
+
+/**
+ * DeleteAutoDeletePolicy返回参数结构体
+ */
+export interface DeleteAutoDeletePolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
