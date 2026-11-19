@@ -147,6 +147,7 @@ import {
   FeatureTableDetail,
   FunctionInfo,
   ConsoleRoleInfo,
+  ListScheduledTasksResponse,
   NameIdentifier,
   ListSchemaNamesResponse,
   SearchResult,
@@ -159,6 +160,7 @@ import {
   ListConsoleGroupUsersResponse,
   AddWorkspaceGroupsResponse,
   GetWorkspaceRsp,
+  ScheduledTaskDetail,
   CreateConsoleGroupRequest,
   GetSchemaRsp,
   ConsoleUserInfo,
@@ -325,6 +327,7 @@ import {
   GetModelRequest,
   AlarmGroup,
   DeleteWorkflowRsp,
+  ListScheduledTasksRequest,
   ListConsoleUsersRsp,
   GroupUserInfo,
   SingleFieldPartitioning,
@@ -416,6 +419,7 @@ import {
   UpdateConsoleGroupResponse,
   UpdateVolumeRequest,
   ListFeatureTablesRequest,
+  ListScheduledTasksRsp,
   Fragment,
   ListSchemasRequest,
   Volume,
@@ -681,6 +685,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWorkflowRunsResponse) => void
   ): Promise<ListWorkflowRunsResponse> {
     return this.request("ListWorkflowRuns", req, cb)
+  }
+
+  /**
+   * 分页查询工作空间下的定时任务列表；支持按 SessionType、AnalysisSpaceId、TaskName 过滤。返回内容包含任务的完整详情，含 SkillIds 与 MCPIds。
+   */
+  async ListScheduledTasks(
+    req: ListScheduledTasksRequest,
+    cb?: (error: string, rep: ListScheduledTasksResponse) => void
+  ): Promise<ListScheduledTasksResponse> {
+    return this.request("ListScheduledTasks", req, cb)
   }
 
   /**

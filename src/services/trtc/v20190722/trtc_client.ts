@@ -316,12 +316,14 @@ import {
   UpdateRecognizeVocabV3Response,
   TranscriptionParam,
   UpdateRecognizeVocabV3Request,
+  DescribeFinanceCloudRoomUsageResponse,
   MaxVideoUser,
   LayoutParams,
   TextToSpeechSSERequest,
   TextToSpeechRequest,
   DescribeStreamIngestRequest,
   VoiceConversationSTTConfig,
+  DescribeFinanceCloudRoomUsageRequest,
   ImageLocation,
   UpdateVoicePrintResponse,
   StopWebRecordRequest,
@@ -941,6 +943,16 @@ MCU 混流转码费用，请参考文档：[云端混流转码计费说明](http
     cb?: (error: string, rep: TextToSpeechSSEResponse) => void
   ): Promise<TextToSpeechSSEResponse> {
     return this.request("TextToSpeechSSE", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeFinanceCloudRoomUsage）用于查询金融云 TRTC 房间维度用量。
+   */
+  async DescribeFinanceCloudRoomUsage(
+    req: DescribeFinanceCloudRoomUsageRequest,
+    cb?: (error: string, rep: DescribeFinanceCloudRoomUsageResponse) => void
+  ): Promise<DescribeFinanceCloudRoomUsageResponse> {
+    return this.request("DescribeFinanceCloudRoomUsage", req, cb)
   }
 
   /**

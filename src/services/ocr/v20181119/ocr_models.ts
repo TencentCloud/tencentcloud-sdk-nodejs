@@ -3959,6 +3959,10 @@ export interface MultimodalDocParseRequest {
    * <p>任务类型</p><p>枚举值：</p><ul><li>0： 文档解析</li><li>1： 图片OCR识别</li><li>2： 切片文字识别</li><li>3： 切片表格识别</li><li>4： 切片代码识别</li></ul><p>默认值：0</p>
    */
   TaskType?: number
+  /**
+   * <p>是否输出单元格坐标。开启后，耗时会稍有增加。<br>默认值：false</p>
+   */
+  EnableTableCellCoord?: boolean
 }
 
 /**
@@ -10682,6 +10686,10 @@ export interface SubmitMultimodalDocParseJobRequest {
    * <p>任务类型，默认为 0。取值：</p><ul><li>0：默认</li><li>1：Free OCR</li><li>2：OCR</li><li>3：表格识别</li><li>4：代码识别</li></ul>
    */
   TaskType?: number
+  /**
+   * <p>是否输出单元格坐标。开启后，耗时会稍有增加。<br>默认值：false</p>
+   */
+  EnableTableCellCoord?: boolean
 }
 
 /**

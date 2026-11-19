@@ -254,6 +254,10 @@ export interface FetchOption {
    * <p>是否返回字段关联的字典维度信息，默认不传，不返回</p>
    */
   FetchDimensions?: boolean
+  /**
+   * <p>是否获取tclake表的snapshots文件信息（文件大小、文件数量、最后修改时间）<br>各接口默认行为不同：</p><ul><li>GetTable：不传或未设置时默认获取（true），显式传 false 时跳过</li><li>GetTables：不传或未设置时默认不获取（false），显式传 true 时获取；获取会显著增加接口耗时</li></ul>
+   */
+  FetchTableFilesInfo?: boolean
 }
 
 /**
@@ -3230,6 +3234,21 @@ export interface ConsoleRoleInfo {
 }
 
 /**
+ * ListScheduledTasks返回参数结构体
+ */
+export interface ListScheduledTasksResponse {
+  /**
+   * 定时任务列表分页结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListScheduledTasksRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 名称标识符，用于各层级（catalog/schema/table/view等）名称列表接口的返回条目
  */
 export interface NameIdentifier {
@@ -3546,6 +3565,84 @@ export interface GetWorkspaceRsp {
    * 工作空间详情
    */
   WorkspaceInfo?: WorkspaceInfo
+}
+
+/**
+ * 定时任务详情
+ */
+export interface ScheduledTaskDetail {
+  /**
+   * <p>定时任务唯一标识</p>
+   */
+  ScheduledTaskId?: string
+  /**
+   * <p>任务名称</p>
+   */
+  Name?: string
+  /**
+   * <p>任务提示词</p>
+   */
+  Prompt?: string
+  /**
+   * <p>六段 cron 表达式</p>
+   */
+  Schedule?: string
+  /**
+   * <p>任务状态：1=ACTIVE，2=PAUSED</p>
+   */
+  Status?: number
+  /**
+   * <p>会话类型：1=数据分析，2=数据工程</p>
+   */
+  SessionType?: number
+  /**
+   * <p>分析空间 ID</p>
+   */
+  AnalysisSpaceId?: string
+  /**
+   * <p>工作空间 ID</p>
+   */
+  WorkspaceId?: string
+  /**
+   * <p>创建人 UIN</p>
+   */
+  CreateUserUin?: string
+  /**
+   * <p>创建时间，毫秒级 Unix 时间戳字符串</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>最近修改时间，毫秒级 Unix 时间戳字符串</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>生效开始时间，上海时区本地零点的毫秒时间戳字符串；0 表示不传</p>
+   */
+  StartTime?: string
+  /**
+   * <p>生效结束时间，上海时区本地零点的毫秒时间戳字符串；0 表示不传</p>
+   */
+  EndTime?: string
+  /**
+   * <p>技能 ID 列表</p>
+   */
+  SkillIds?: string
+  /**
+   * <p>模型 ID</p>
+   */
+  ModelId?: string
+  /**
+   * <p>调度类型：1=每天，2=间隔，3=单次</p>
+   */
+  ScheduleType?: number
+  /**
+   * <p>最近修改人 UIN</p>
+   */
+  UpdateUserUin?: string
+  /**
+   * <p>mcpId列表（逗号分隔）</p>
+   */
+  MCPIds?: string
 }
 
 /**
@@ -7322,6 +7419,16 @@ export interface DeleteWorkflowRsp {
 }
 
 /**
+ * ListScheduledTasks请求参数结构体
+ */
+export interface ListScheduledTasksRequest {
+  /**
+   * <p>工作空间 ID</p>
+   */
+  WorkspaceId: string
+}
+
+/**
  * 查询控制台用户列表响应
  */
 export interface ListConsoleUsersRsp {
@@ -9758,6 +9865,32 @@ export interface ListFeatureTablesRequest {
    * <p>排序，Name(CreateTime/ModifiedTime), Direction(Desc/Asc)</p>
    */
   OrderBys?: Array<OrderBy>
+}
+
+/**
+ * 定时任务列表分页结果
+ */
+export interface ListScheduledTasksRsp {
+  /**
+   * <p>当前页任务列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tasks?: Array<ScheduledTaskDetail>
+  /**
+   * <p>符合筛选条件的任务总数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从 1 开始）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
+  /**
+   * <p>实际生效的每页数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
 }
 
 /**

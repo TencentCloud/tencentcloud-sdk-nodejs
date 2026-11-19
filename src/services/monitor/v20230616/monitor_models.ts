@@ -139,6 +139,16 @@ export interface TriggerAIWorkbenchTaskResponse {
    */
   ExecutionId?: string
   /**
+   * <p>会话 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: string
+  /**
+   * <p>运行 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1601,6 +1611,18 @@ export interface TriggerAIWorkbenchTaskRequest {
    * <p>任务 ID</p>
    */
   TaskId?: string
+  /**
+   * <p>session会话ID</p>
+   */
+  SessionId?: string
+  /**
+   * <p>输入内容</p>
+   */
+  Content?: string
+  /**
+   * <p>幂等键，调用方保证同一事件重试时携带同一 key</p>
+   */
+  IdempotencyKey?: string
 }
 
 /**

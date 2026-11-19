@@ -6983,6 +6983,16 @@ export interface UpdateRecognizeVocabV3Request {
 }
 
 /**
+ * DescribeFinanceCloudRoomUsage返回参数结构体
+ */
+export interface DescribeFinanceCloudRoomUsageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
  */
 export interface MaxVideoUser {
@@ -7162,6 +7172,24 @@ export interface VoiceConversationSTTConfig {
    * <p>ASR厂商专属参数，填写JSON 序列化后的字符串。</p>
    */
   Params: string
+}
+
+/**
+ * DescribeFinanceCloudRoomUsage请求参数结构体
+ */
+export interface DescribeFinanceCloudRoomUsageRequest {
+  /**
+   * <p>与房间对应的 TRTC SdkAppId，必须是金融云应用。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>查询开始时间，格式为 YYYY-MM-DD HH:MM，精确到分钟级。</p>
+   */
+  StartTime: string
+  /**
+   * <p>查询结束时间，格式为 YYYY-MM-DD HH:MM，单次查询不超过 24 小时。</p>
+   */
+  EndTime: string
 }
 
 /**

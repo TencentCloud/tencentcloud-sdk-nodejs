@@ -20,11 +20,11 @@
  */
 export interface DeleteSecretVersionResponse {
   /**
-   * 凭据名称。
+   * <p>凭据名称。</p>
    */
   SecretName?: string
   /**
-   * 凭据版本号。
+   * <p>凭据版本号。</p>
    */
   VersionId?: string
   /**
@@ -173,22 +173,25 @@ export type DescribeSupportedProductsRequest = null
  */
 export interface GetSecretValueRequest {
   /**
-   * 指定凭据的名称。
+   * <p>指定凭据的名称。</p>
    */
   SecretName: string
   /**
-   * 指定对应凭据的版本号。
-对于云产品凭据如Mysql凭据，通过指定凭据名称和历史版本号来获取历史轮转凭据的明文信息，如果要获取当前正在使用的凭据版本的明文，需要将版本号指定为：SSM_Current。
+   * <p>指定要读取的凭据版本号。仅传 VersionId 时按该版本号精确读取；云产品及 Redis/MongoDB 凭据可通过 SSM_Current 读取当前版本。</p><p>入参限制：同时指定 VersionStage 时，两者必须指向同一版本，否则返回 ResourceNotFound。</p><p>自定义、云产品及 Redis/MongoDB 凭据在 VersionId 和 VersionStage 均未指定时，默认读取 Stage_Current 标签指向的版本；未设置该标签返回 InvalidParameterValue，不回退到 SSM_Current。</p>
    */
-  VersionId: string
+  VersionId?: string
   /**
-   *
+   * <p>用于加密返回凭据值的 PEM 格式公钥，支持 RSA 2048 和 SM2。未指定时，凭据值按原有方式返回。</p>
    */
   EncryptionPublicKey?: string
   /**
-   *
+   * <p>非对称加密算法，仅在指定 EncryptionPublicKey 时生效。支持 SM2、SM2_C1C3C2_ASN1、RSAES_PKCS1_V1_5、RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256，默认值为 SM2。</p>
    */
   EncryptionAlgorithm?: string
+  /**
+   * <p>用于选择凭据版本的标签。支持自定义、云产品及 Redis/MongoDB 凭据。</p><p>枚举值：</p><ul><li>Stage_Current： 读取用户设置的当前版本标签所绑定的版本。标签不会自动设置，也不会跟随账号迁移。</li></ul><p>仅支持 Stage_Current，大小写敏感。仅传标签时按绑定关系取值；与 VersionId 同时传入时必须指向同一版本。两者均不传时默认解析 Stage_Current，未设置该标签返回 InvalidParameterValue。</p>
+   */
+  VersionStage?: string
 }
 
 /**
@@ -348,21 +351,19 @@ export interface CreateProductSecretRequest {
  */
 export interface GetSecretValueResponse {
   /**
-   * 凭据的名称。
+   * <p>凭据的名称。</p>
    */
   SecretName?: string
   /**
-   * 该凭据对应的版本号。
+   * <p>该凭据对应的版本号。</p>
    */
   VersionId?: string
   /**
-   * 在创建凭据(CreateSecret)时，如果指定的是二进制数据，则该字段为返回结果，并且使用base64进行编码，应用方需要进行base64解码后获取原始数据。
-SecretBinary和SecretString只有一个不为空。
+   * <p>在创建凭据(CreateSecret)时，如果指定的是二进制数据，则该字段为返回结果，并且使用base64进行编码，应用方需要进行base64解码后获取原始数据。<br>SecretBinary和SecretString只有一个不为空。</p>
    */
   SecretBinary?: string
   /**
-   * 在创建凭据(CreateSecret)时，如果指定的是普通文本数据，则该字段为返回结果。
-SecretBinary和SecretString只有一个不为空。
+   * <p>在创建凭据(CreateSecret)时，如果指定的是普通文本数据，则该字段为返回结果。<br>SecretBinary和SecretString只有一个不为空。</p>
    */
   SecretString?: string
   /**
@@ -413,11 +414,11 @@ export interface DescribeSupportedProductsResponse {
  */
 export interface DeleteSecretVersionRequest {
   /**
-   * 指定凭据名称。
+   * <p>指定凭据名称。</p>
    */
   SecretName: string
   /**
-   * 指定该名称下需要删除的凭据的版本号。
+   * <p>指定该名称下需要删除的凭据的版本号。</p><p>仅支持删除自定义凭据版本。目标版本持有 Stage_Current 标签时返回 FailedOperation，须先通过 UpdateSecret 将标签迁移到其他已有版本。存在并发写入或轮转等操作、未取得共享写锁时返回 OperationDenied。</p>
    */
   VersionId: string
 }
@@ -620,11 +621,11 @@ export type GetRegionsRequest = null
  */
 export interface UpdateSecretResponse {
   /**
-   * 凭据名称。
+   * <p>凭据名称。</p>
    */
   SecretName?: string
   /**
-   * 凭据版本号。
+   * <p>凭据版本号。</p>
    */
   VersionId?: string
   /**
@@ -799,22 +800,25 @@ false -- 禁止轮转。
  */
 export interface UpdateSecretRequest {
   /**
-   * 指定需要更新凭据内容的名称。
+   * <p>指定需要更新凭据内容的名称。</p>
    */
   SecretName: string
   /**
-   * 指定需要更新凭据内容的版本号。
+   * <p>指定需要更新内容或设置版本标签的已有版本号，必填。</p><p>指定 VersionStage 时，将该标签迁移到此版本。目标版本不存在返回 ResourceNotFound；凭据处于 PendingCreate 或 CreateFailed 状态时返回 FailedOperation。</p>
    */
   VersionId: string
   /**
-   * 新的凭据内容为二进制的场景使用该字段，并使用base64进行编码。
-SecretBinary 和 SecretString 只能一个不为空。
+   * <p>新的二进制凭据内容，须使用 Base64 编码，仅自定义凭据支持通过本接口更新内容。</p><p>入参限制：未指定 VersionStage 时，SecretString 和 SecretBinary 必须且只能一个非空；指定 VersionStage 时可均不传以仅迁移标签，但不能同时非空。云产品及 Redis/MongoDB 凭据须省略两项内容。</p>
    */
   SecretBinary?: string
   /**
-   * 新的凭据内容为文本的场景使用该字段，不需要base64编码SecretBinary 和 SecretString 只能一个不为空。
+   * <p>新的文本凭据内容，无需 Base64 编码，仅自定义凭据支持通过本接口更新内容。</p><p>入参限制：未指定 VersionStage 时，SecretString 和 SecretBinary 必须且只能一个非空；指定 VersionStage 时可均不传以仅迁移标签，但不能同时非空。云产品及 Redis/MongoDB 凭据须省略两项内容。</p>
    */
   SecretString?: string
+  /**
+   * <p>将 Stage_Current 标签设置或迁移到 VersionId 指定的已有版本，大小写敏感。</p><p>入参限制：支持自定义、云产品及 Redis/MongoDB 凭据；VersionId 必填。</p><p>自定义凭据可仅设置标签，也可同时更新内容；SecretString 和 SecretBinary 不能同时非空。云产品及 Redis/MongoDB 仅支持标签操作，两项内容均须省略。标签绑定版本号，原轮转流程保持不变；绑定历史版本不保证账密仍有效。</p>
+   */
+  VersionStage?: string
 }
 
 /**
@@ -882,13 +886,17 @@ export interface CreateServiceResponse {
  */
 export interface VersionInfo {
   /**
-   * 版本号
+   * <p>版本号</p>
    */
   VersionId?: string
   /**
-   * 创建时间，unix时间戳。
+   * <p>创建时间，unix时间戳。</p>
    */
   CreateTime?: number
+  /**
+   * <p>该版本持有的公开版本标签列表，用于查看标签指向。</p><p>自定义、云产品及 Redis/MongoDB 凭据在版本列表中返回此字段，仅包含 Stage_Current；无标签时返回空数组 []。</p>
+   */
+  VersionStages?: Array<string>
 }
 
 /**
@@ -924,22 +932,25 @@ export interface TagFilter {
  */
 export interface PutSecretValueRequest {
   /**
-   * 指定需要增加版本的凭据名称。
+   * <p>指定需要增加版本的凭据名称。</p>
    */
   SecretName: string
   /**
-   * 指定新增加的版本号，最长64 字节，使用字母、数字或者 - _ . 的组合并且以字母或数字开头。
+   * <p>指定新增凭据版本的版本号。可选，未指定时由系统生成 UUID v4，并通过响应 VersionId 返回。</p><p>参数格式：最长64字节，使用字母、数字或 - _ . 的组合，并以字母或数字开头。</p><p>省略 VersionId 的每次调用都会生成新版本。需要识别同一版本或处理重试时，由调用方生成并复用 VersionId；已有版本号返回 ResourceInUse.VersionIdExists。</p>
    */
-  VersionId: string
+  VersionId?: string
   /**
-   * 二进制凭据信息，使用base64编码。
-SecretBinary 和 SecretString 必须且只能设置一个。
+   * <p>二进制凭据信息，使用base64编码。<br>SecretBinary 和 SecretString 必须且只能设置一个。</p>
    */
   SecretBinary?: string
   /**
-   * 文本类型凭据信息明文（不需要进行base64编码），SecretBinary 和 SecretString 必须且只能设置一个。
+   * <p>文本类型凭据信息明文（不需要进行base64编码），SecretBinary 和 SecretString 必须且只能设置一个。</p>
    */
   SecretString?: string
+  /**
+   * <p>为新增版本设置版本标签，仅支持 Stage_Current，大小写敏感。本接口仅支持自定义凭据。</p><p>入参限制：SecretString 和 SecretBinary 必须且只能指定一个非空值。</p>
+   */
+  VersionStage?: string
 }
 
 /**
@@ -947,11 +958,11 @@ SecretBinary 和 SecretString 必须且只能设置一个。
  */
 export interface PutSecretValueResponse {
   /**
-   * 凭据名称。
+   * <p>凭据名称。</p>
    */
   SecretName?: string
   /**
-   * 新增加的版本号。
+   * <p>新增加的版本号。</p>
    */
   VersionId?: string
   /**

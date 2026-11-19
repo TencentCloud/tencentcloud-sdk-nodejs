@@ -212,6 +212,7 @@ import {
   DescribeProxySpecsResponse,
   BindClusterResourcePackagesRequest,
   IsolateInstanceResponse,
+  ProxyEndPointItem,
   CopyClusterPasswordComplexityResponse,
   DescribeClusterTransparentEncryptInfoRequest,
   DescribeClusterLevelsRequest,
@@ -385,6 +386,7 @@ import {
   DescribeClusterPasswordComplexityRequest,
   QueryFilter,
   CreateAccountsResponse,
+  CreateProxyEndPointsRequest,
   ModifyClusterGlobalEncryptionResponse,
   CheckTransferClusterZoneRequest,
   CloseWanResponse,
@@ -510,6 +512,7 @@ import {
   DeleteClusterDatabaseResponse,
   CynosdbClusterDetail,
   ActivateLibraDBInstanceResponse,
+  CreateProxyEndPointsResponse,
   RestartInstanceRequest,
   PackageDetail,
   BackupLimitVpcItem,
@@ -2836,6 +2839,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetLibraDBClusterAccountPasswordResponse) => void
   ): Promise<ResetLibraDBClusterAccountPasswordResponse> {
     return this.request("ResetLibraDBClusterAccountPassword", req, cb)
+  }
+
+  /**
+   * 本接口（CreateProxyEndPoints）用于批量创建数据库代理连接点。
+   */
+  async CreateProxyEndPoints(
+    req: CreateProxyEndPointsRequest,
+    cb?: (error: string, rep: CreateProxyEndPointsResponse) => void
+  ): Promise<CreateProxyEndPointsResponse> {
+    return this.request("CreateProxyEndPoints", req, cb)
   }
 
   /**

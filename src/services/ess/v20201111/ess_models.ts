@@ -801,6 +801,20 @@ export interface DetectInfoVideoData {
 }
 
 /**
+ * 签署控件的类型和范围限制条件，用于控制**嵌入式文件**发起页面上，拖拽签署区时可使用的控件类型和具体的印章或签名方式。
+ */
+export interface EmbedSignComponentLimit {
+  /**
+   * <p>控件类型，支持以下类型</p><ul><li>SIGN_SEAL : 印章控件</li><li>SIGN_PAGING_SEAL : 骑缝章控件</li><li>SIGN_SIGNATURE : 用户签名控件</li><li>SIGN_PAGING_SIGNATURE : 用户签名骑缝控件</li></ul>
+   */
+  ComponentType: string
+  /**
+   * <p>签署控件类型的值，用于限制签署时印章或者签名的选择范围</p><p>1.当 ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时，可指定印章类型。具体场景与规则说明如下：</p><p>指定印章类型:可传入以下枚举值来限制印章类型</p><ul><li> <b>OFFICIAL</b> :  企业公章</li><li> <b>CONTRACT</b> : 合同专用章</li><li> <b>FINANCE</b> : 财务专用章</li><li> <b>PERSONNEL</b> : 人事专用章</li><li> <b>OTHER</b> : 其他</li></ul><p>2.当ComponentType 是 SIGN_SIGNATURE 或者 SIGN_PAGING_SIGNATURE 时可传入以下类型（支持多个）</p><ul><li>HANDWRITE : 需要实时手写的手写签名</li><li>OCR_ESIGN : OCR印章（智慧手写签名）</li><li>IMG_ESIGN : 图片印章</li><li>ESIGN : 个人印章</li><li>SYSTEM_ESIGN : 系统印章</li></ul><br>
+   */
+  ComponentValue?: Array<string>
+}
+
+/**
  * 合同审查个性化参数，用于控制页面的展示内容
  */
 export interface ContractReviewWebUrlOption {
@@ -7410,6 +7424,10 @@ export interface CreateFlowOption {
    * <p>若指定了合同抄送人，此参数用来控制操作人能否在嵌入式页面看见或编辑（修改、增加、删除）抄送人信息。</p><p>枚举值：</p><ul><li>0： 不可见不可编辑</li><li>1： 可见不可编辑</li><li>2： 可见可编辑</li></ul><p>默认值：0</p>
    */
   CcInfoVisibility?: number
+  /**
+   * <p><br>在调用<a href="https://qian.tencent.com/developers/companyApis/embedPages/CreatePrepareFlow">创建发起流程web页面</a>创建合同时,可通过此参数限制在界面上拖拽签署控件后，可选那几种印章类型或签名类型。</p><p>注：仅在<strong>嵌入式文件</strong>发起场景下生效。</p>
+   */
+  SignComponentLimits?: Array<EmbedSignComponentLimit>
 }
 
 /**
@@ -8950,6 +8968,14 @@ export interface FlowGroupOptions {
    * <p>发起成功后是否预览合同 true-展示预览按钮 false-否(默认)</p>
    */
   PreviewAfterStart?: boolean
+  /**
+   * <p><br>在调用<a href="https://qian.tencent.com/developers/companyApis/embedPages/CreatePrepareFlowGroup">获取发起合同组嵌入链接</a>创建合同时,可通过此参数限制在界面上拖拽签署控件后，可选那几种印章类型或签名类型。</p><p>注：仅在<strong>嵌入式文件</strong>发起场景下生效。</p>
+   */
+  SignComponentLimits?: Array<EmbedSignComponentLimit>
+  /**
+   * <p>隐藏操作步骤: 具体的控件类型如下</p><ul><li>2 : 补充文件内容</li><li>4 : 发起前合同信息与设置确认</li></ul>注：仅对新版页面生效
+   */
+  HideOperationSteps?: Array<number | bigint>
 }
 
 /**
@@ -11269,33 +11295,17 @@ export interface DescribeOrganizationSealsResponse {
 }
 
 /**
- * DescribeBillUsageDetail请求参数结构体
+ * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
  */
-export interface DescribeBillUsageDetailRequest {
+export interface FlowGroupApproverInfo {
   /**
-   * <p>查询开始时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。<font color="red">注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。</font></p><ul><li><p>正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。</p></li><li><p>错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。</p></li></ul><p>参数格式：yyyyMMdd</p>
+   * 合同流程ID。
    */
-  StartTime: string
+  FlowId?: string
   /**
-   * <p>查询结束时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。<font color="red">注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。</font></p><ul><li><p>正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。</p></li><li><p>错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。</p></li></ul><p>注意：数据存在延迟，最晚只能查询到截止到昨天的数据！</p><p>参数格式：yyyyMMdd</p>
+   * 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。`
    */
-  EndTime: string
-  /**
-   * <p>指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0</p>
-   */
-  Offset?: number
-  /**
-   * <p>指定分页每页返回的数据条数，如果不传默认为 100，单页最大支持 100。</p>
-   */
-  Limit?: number
-  /**
-   * <p>查询的套餐类型 （选填 ）不传则查询所有套餐；<br>目前支持:</p><ul><li>**CloudEnterprise**: 企业版合同</li><li>**SingleSignature**: 单方签章</li><li>**CloudProve**: 签署报告</li><li>**VerificationReport**: 公证处核验报告</li><li>**CloudOnlineSign**: 腾讯会议在线签约</li><li>**ChannelWeCard**: 微工卡</li><li>**SignFlow**: 合同套餐</li><li>**SignFace**: 签署意愿（人脸识别）</li><li>**SignPassword**: 签署意愿（密码）</li><li>**SignSMS**: 签署意愿（短信）</li><li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li><li>**PersonalEssAuthOperator**: 签署人实名（运营商三要素）</li><li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li><li>**OrgEssAuth**: 签署企业实名</li><li>**FlowNotify**: 短信通知</li><li>**AuthService**: 企业工商信息查询</li><li>**NoAuthSign**: 形式签</li><li>**AutoSign**:单据处方自动签</li></ul>
-   */
-  QuotaType?: string
-  /**
-   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
-   */
-  Agent?: Agent
+  RecipientId?: string
 }
 
 /**
@@ -13447,17 +13457,33 @@ export interface DeleteStaffsResult {
 }
 
 /**
- * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
+ * DescribeBillUsageDetail请求参数结构体
  */
-export interface FlowGroupApproverInfo {
+export interface DescribeBillUsageDetailRequest {
   /**
-   * 合同流程ID。
+   * <p>查询开始时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。<font color="red">注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。</font></p><ul><li><p>正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。</p></li><li><p>错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。</p></li></ul><p>参数格式：yyyyMMdd</p>
    */
-  FlowId?: string
+  StartTime: string
   /**
-   * 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。`
+   * <p>查询结束时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。<font color="red">注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。</font></p><ul><li><p>正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。</p></li><li><p>错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。</p></li></ul><p>注意：数据存在延迟，最晚只能查询到截止到昨天的数据！</p><p>参数格式：yyyyMMdd</p>
    */
-  RecipientId?: string
+  EndTime: string
+  /**
+   * <p>指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0</p>
+   */
+  Offset?: number
+  /**
+   * <p>指定分页每页返回的数据条数，如果不传默认为 100，单页最大支持 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>查询的套餐类型 （选填 ）不传则查询所有套餐；<br>目前支持:</p><ul><li>**CloudEnterprise**: 企业版合同</li><li>**SingleSignature**: 单方签章</li><li>**CloudProve**: 签署报告</li><li>**VerificationReport**: 公证处核验报告</li><li>**CloudOnlineSign**: 腾讯会议在线签约</li><li>**ChannelWeCard**: 微工卡</li><li>**SignFlow**: 合同套餐</li><li>**SignFace**: 签署意愿（人脸识别）</li><li>**SignPassword**: 签署意愿（密码）</li><li>**SignSMS**: 签署意愿（短信）</li><li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li><li>**PersonalEssAuthOperator**: 签署人实名（运营商三要素）</li><li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li><li>**OrgEssAuth**: 签署企业实名</li><li>**FlowNotify**: 短信通知</li><li>**AuthService**: 企业工商信息查询</li><li>**NoAuthSign**: 形式签</li><li>**AutoSign**:单据处方自动签</li></ul>
+   */
+  QuotaType?: string
+  /**
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
+   */
+  Agent?: Agent
 }
 
 /**

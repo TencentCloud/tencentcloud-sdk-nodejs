@@ -228,6 +228,16 @@ it("databuddy.v20260715.ListWorkflowRuns", async function () {
     }
 })
 
+it("databuddy.v20260715.ListScheduledTasks", async function () {
+    try {
+       const data = await client.ListScheduledTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("databuddy.v20260715.GetWorkflowTaskRun", async function () {
     try {
        const data = await client.GetWorkflowTaskRun({})

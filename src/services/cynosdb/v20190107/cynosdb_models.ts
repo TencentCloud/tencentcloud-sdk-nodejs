@@ -5328,6 +5328,80 @@ export interface IsolateInstanceResponse {
 }
 
 /**
+ * 批量proxy接入点配置
+ */
+export interface ProxyEndPointItem {
+  /**
+   * <p>vpc id</p>
+   */
+  UniqueVpcId: string
+  /**
+   * <p>子网ID</p>
+   */
+  UniqueSubnetId: string
+  /**
+   * <p>安全组列表</p>
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * <p>权重模式</p><p>枚举值：</p><ul><li>system： 系统分配</li><li>custom： 自定义</li></ul>
+   */
+  WeightMode?: string
+  /**
+   * <p>是否自动添加只读实例</p><p>枚举值：</p><ul><li>yes： 是</li><li>no： 否</li></ul>
+   */
+  AutoAddRo?: string
+  /**
+   * <p>读写类型</p><p>枚举值：</p><ul><li>READWRITE： 读写</li><li>READONLY： 只读</li></ul>
+   */
+  RwType?: string
+  /**
+   * <p>是否开启故障转移</p><p>枚举值：</p><ul><li>yes： 是</li><li>no： 否</li></ul>
+   */
+  FailOver?: string
+  /**
+   * <p>一致性超时时间</p>
+   */
+  ConsistencyTimeOut?: number
+  /**
+   * <p>一致性类型。</p><p>枚举值：</p><ul><li>eventual： 最终一致性</li><li>global： 全局一致性</li><li>session： 会话一致性</li></ul><p>仅当 RwType 参数值为 READWRITE 时，才支持设置此项。</p>
+   */
+  ConsistencyType?: string
+  /**
+   * <p>是否开启事务拆分。</p><p>开启后，在一个事务中拆分读和写到不同的实例上去执行。</p>
+   */
+  TransSplit?: boolean
+  /**
+   * <p>接入模式</p><p>枚举值：</p><ul><li>nearby： 就近访问</li><li>balance： 均衡分配</li></ul>
+   */
+  AccessMode?: string
+  /**
+   * <p>实例及权重</p>
+   */
+  InstanceWeights?: Array<ProxyInstanceWeight>
+  /**
+   * <p>描述信息</p>
+   */
+  Description?: string
+  /**
+   * <p>自动负载模式</p><p>枚举值：</p><ul><li>static： 静态</li><li>dynamic： 自适应</li></ul>
+   */
+  LoadBalanceMode?: string
+  /**
+   * <p>是否开启连接池</p><p>枚举值：</p><ul><li>yes： 打开</li><li>no： 不打开</li></ul>
+   */
+  OpenConnectionPool?: string
+  /**
+   * <p>连接池类型</p><p>枚举值：</p><ul><li>SessionConnectionPool： 会话级连接池</li><li>TransactionConnectionPool： 事物级连接池</li></ul>
+   */
+  ConnectionPoolType?: string
+  /**
+   * <p>连接池阀值</p>
+   */
+  ConnectionPoolTimeOut?: number
+}
+
+/**
  * CopyClusterPasswordComplexity返回参数结构体
  */
 export interface CopyClusterPasswordComplexityResponse {
@@ -9558,6 +9632,20 @@ export interface CreateAccountsResponse {
 }
 
 /**
+ * CreateProxyEndPoints请求参数结构体
+ */
+export interface CreateProxyEndPointsRequest {
+  /**
+   * <p>集群 ID。</p>
+   */
+  ClusterId: string
+  /**
+   * <p>proxyEndPoint的参数配置</p>
+   */
+  ProxyEndPointItems: Array<ProxyEndPointItem>
+}
+
+/**
  * ModifyClusterGlobalEncryption返回参数结构体
  */
 export interface ModifyClusterGlobalEncryptionResponse {
@@ -13063,6 +13151,24 @@ export interface ActivateLibraDBInstanceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateProxyEndPoints返回参数结构体
+ */
+export interface CreateProxyEndPointsResponse {
+  /**
+   * <p>异步流程 ID。</p>
+   */
+  FlowId?: number
+  /**
+   * <p>异步任务 ID。</p>
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
