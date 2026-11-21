@@ -18,6 +18,16 @@ const client = new tencentcloud.ags.v20250920.Client({
 })
 describe("ags.v20250920.test.js", function () {
 
+it("ags.v20250920.PreviewRegistryRecord", async function () {
+    try {
+       const data = await client.PreviewRegistryRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.CreatePreCacheImageTask", async function () {
     try {
        const data = await client.CreatePreCacheImageTask({})
@@ -28,9 +38,9 @@ it("ags.v20250920.CreatePreCacheImageTask", async function () {
     }
 })
 
-it("ags.v20250920.PreviewRegistryRecord", async function () {
+it("ags.v20250920.DescribeRegistry", async function () {
     try {
-       const data = await client.PreviewRegistryRecord({})
+       const data = await client.DescribeRegistry({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +268,16 @@ it("ags.v20250920.ResumeSandboxInstance", async function () {
     }
 })
 
+it("ags.v20250920.UpdatePreCacheImageCleanupPolicy", async function () {
+    try {
+       const data = await client.UpdatePreCacheImageCleanupPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.DescribeSessions", async function () {
     try {
        const data = await client.DescribeSessions({})
@@ -458,6 +478,16 @@ it("ags.v20250920.DescribeAPIKeyList", async function () {
     }
 })
 
+it("ags.v20250920.StopSandboxInstance", async function () {
+    try {
+       const data = await client.StopSandboxInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.UpdateRegistryRecord", async function () {
     try {
        const data = await client.UpdateRegistryRecord({})
@@ -578,9 +608,9 @@ it("ags.v20250920.DescribePreCacheImageTask", async function () {
     }
 })
 
-it("ags.v20250920.StopSandboxInstance", async function () {
+it("ags.v20250920.DescribeQuotaOverview", async function () {
     try {
-       const data = await client.StopSandboxInstance({})
+       const data = await client.DescribeQuotaOverview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +628,19 @@ it("ags.v20250920.DescribeRegistryAuditLogList", async function () {
     }
 })
 
-it("ags.v20250920.DescribeRegistry", async function () {
+it("ags.v20250920.CreatePreCacheImageCleanupPolicy", async function () {
     try {
-       const data = await client.DescribeRegistry({})
+       const data = await client.CreatePreCacheImageCleanupPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.DeletePreCacheImageCleanupPolicy", async function () {
+    try {
+       const data = await client.DeletePreCacheImageCleanupPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +698,9 @@ it("ags.v20250920.DeleteAPIKey", async function () {
     }
 })
 
-it("ags.v20250920.DescribeQuotaOverview", async function () {
+it("ags.v20250920.DescribePreCacheImageCleanupPolicyList", async function () {
     try {
-       const data = await client.DescribeQuotaOverview({})
+       const data = await client.DescribePreCacheImageCleanupPolicyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

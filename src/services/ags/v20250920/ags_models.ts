@@ -259,6 +259,16 @@ export interface QuotaResourceInfo {
 }
 
 /**
+ * DeletePreCacheImageCleanupPolicy返回参数结构体
+ */
+export interface DeletePreCacheImageCleanupPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResumeSandboxInstance请求参数结构体
  */
 export interface ResumeSandboxInstanceRequest {
@@ -270,6 +280,36 @@ export interface ResumeSandboxInstanceRequest {
    * <p>超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h</p>
    */
   Timeout?: string
+}
+
+/**
+ * UpdatePreCacheImageCleanupPolicy请求参数结构体
+ */
+export interface UpdatePreCacheImageCleanupPolicyRequest {
+  /**
+   * <p>清理策略ID</p>
+   */
+  CleanupPolicyId: string
+  /**
+   * <p>清理策略名</p>
+   */
+  Name?: string
+  /**
+   * <p>镜像仓库地址</p><p>入参限制：精准匹配，不传或空串表示不限，最多 255 字符</p>
+   */
+  RegistryHost?: string
+  /**
+   * <p>镜像仓库名</p><p>入参限制：正则匹配，最多 256 字符，编译后指令数不超过 128，账号全部启用策略合计不超过 1280。不传或空串表示全部 Repo。</p>
+   */
+  RepoPattern?: string
+  /**
+   * <p>闲置过期时间</p><p>参数格式：正数 m/h/d</p>
+   */
+  IdleTTL?: string
+  /**
+   * <p>策略启用配置</p><p>枚举值：</p><ul><li>true： 启用策略</li><li>false： 禁用策略</li></ul><p>默认值：true</p>
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -501,6 +541,28 @@ export interface DNSConfig {
    * <p>配置项(对应  resolv.conf 选项)</p>
    */
   Options?: Array<string>
+}
+
+/**
+ * ModifyDeployment请求参数结构体
+ */
+export interface ModifyDeploymentRequest {
+  /**
+   * <p>待修改的 Deployment ID。</p>
+   */
+  DeploymentId: string
+  /**
+   * <p>完整替换伸缩配置；提供时必须包含全部三个成员。</p>
+   */
+  ScalingConfiguration?: ScalingConfiguration
+  /**
+   * <p>完整替换生命周期配置；提供时必须包含全部两个成员。</p>
+   */
+  LifecycleConfiguration?: LifecycleConfiguration
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1202,6 +1264,32 @@ export interface UpdateSandboxToolRequest {
 }
 
 /**
+ * SyncRegistryRecord请求参数结构体
+ */
+export interface SyncRegistryRecordRequest {
+  /**
+   * <p>父 Registry ID。</p>
+   */
+  RegistryId: string
+  /**
+   * <p>Record ID。</p>
+   */
+  RecordId: string
+  /**
+   * <p>可选。指定要同步的目标 Version；与 Label 互斥；均省略时使用 Stable。</p>
+   */
+  VersionId?: string
+  /**
+   * <p>可选。指定要同步的目标 Label；与 VersionId 互斥；均省略时使用 Stable。Label 在请求开始时只解析一次。</p>
+   */
+  Label?: string
+  /**
+   * <p>可选，最大 4096 字符。若同步创建新 Version，将写入新 Version 的 ChangeLog；省略时保存为空。</p>
+   */
+  ChangeLog?: string
+}
+
+/**
  * DescribeSessionSpaces返回参数结构体
  */
 export interface DescribeSessionSpacesResponse {
@@ -1241,6 +1329,20 @@ export interface DescribeRegistryRecordVersionListResponse {
  * DeleteSandboxSnapshot返回参数结构体
  */
 export interface DeleteSandboxSnapshotResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreatePreCacheImageCleanupPolicy返回参数结构体
+ */
+export interface CreatePreCacheImageCleanupPolicyResponse {
+  /**
+   * <p>清理策略详情</p>
+   */
+  CleanupPolicy?: PreCacheImageCleanupPolicy
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1362,21 +1464,29 @@ export interface CfsStorageSource {
 }
 
 /**
- * DescribeGPUResourceSpecs返回参数结构体
+ * CreatePreCacheImageCleanupPolicy请求参数结构体
  */
-export interface DescribeGPUResourceSpecsResponse {
+export interface CreatePreCacheImageCleanupPolicyRequest {
   /**
-   * <p>可售规格与额度列表；无可售规格时为 []。</p>
+   * <p>策略名</p>
    */
-  GPUResourceSpecSet?: Array<GPUResourceSpec>
+  Name: string
   /**
-   * <p>筛选后、分页前的总数。</p>
+   * <p>闲置过期时间</p><p>参数格式：正数 m/h/d</p>
    */
-  TotalCount?: number
+  IdleTTL: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>镜像仓库地址</p><p>入参限制：精准匹配，不传或空串表示不限，最多 255 字符</p>
    */
-  RequestId?: string
+  RegistryHost?: string
+  /**
+   * <p>镜像仓库名</p><p>入参限制：正则匹配，最多 256 字符，编译后指令数不超过 128，账号全部启用策略合计不超过 1280；不传或空串表示全部 Repo</p>
+   */
+  RepoPattern?: string
+  /**
+   * <p>策略启用配置</p><p>枚举值：</p><ul><li>true： 启用策略</li><li>false： 禁用策略</li></ul><p>默认值：true</p>
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -1425,6 +1535,16 @@ export interface GetSkillPackageDownloadURLRequest {
    * <p>可选。指定要下载的 Label 目标；与 VersionId 互斥；均省略时使用 Stable。</p>
    */
   Label?: string
+}
+
+/**
+ * DeletePreCacheImageCleanupPolicy请求参数结构体
+ */
+export interface DeletePreCacheImageCleanupPolicyRequest {
+  /**
+   * <p>清理策略ID</p>
+   */
+  CleanupPolicyId: string
 }
 
 /**
@@ -2262,29 +2382,41 @@ export interface UpdateRegistryRequest {
 }
 
 /**
- * SyncRegistryRecord请求参数结构体
+ * 预热镜像自动清理策略
  */
-export interface SyncRegistryRecordRequest {
+export interface PreCacheImageCleanupPolicy {
   /**
-   * <p>父 Registry ID。</p>
+   * <p>自动清理策略ID</p>
    */
-  RegistryId: string
+  CleanupPolicyId?: string
   /**
-   * <p>Record ID。</p>
+   * <p>自动清理策略名</p>
    */
-  RecordId: string
+  Name?: string
   /**
-   * <p>可选。指定要同步的目标 Version；与 Label 互斥；均省略时使用 Stable。</p>
+   * <p>策略启用配置</p>
    */
-  VersionId?: string
+  Enabled?: boolean
   /**
-   * <p>可选。指定要同步的目标 Label；与 VersionId 互斥；均省略时使用 Stable。Label 在请求开始时只解析一次。</p>
+   * <p>镜像仓库地址</p><p>精准匹配，空串表示不限域名</p>
    */
-  Label?: string
+  RegistryHost?: string
   /**
-   * <p>可选，最大 4096 字符。若同步创建新 Version，将写入新 Version 的 ChangeLog；省略时保存为空。</p>
+   * <p>镜像仓库名</p><p>正则匹配，匹配 命名空间/仓库 完整路径，非锚定子串匹配，语法与 TCR 预热触发器一致；空串表示全部 Repo</p>
    */
-  ChangeLog?: string
+  RepoPattern?: string
+  /**
+   * <p>闲置过期清理时间</p><p>规范化正数时长，例如 7d</p>
+   */
+  IdleTTL?: string
+  /**
+   * <p>策略创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>策略最近更新时间</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -2785,6 +2917,16 @@ export interface DescribeRegistryListRequest {
 }
 
 /**
+ * OSWorld 内置版本配置
+ */
+export interface OSWorldConfiguration {
+  /**
+   * <p>指定内置 OSWorld 版本</p><p>枚举值：</p><ul><li>osworld1： osworld v1</li><li>osworld2： osworld v2</li></ul><p>默认值：osworld1</p>
+   */
+  Version?: string
+}
+
+/**
  * 沙箱自定义配置详细信息
  */
 export interface CustomConfigurationDetail {
@@ -2832,6 +2974,28 @@ export interface CustomConfigurationDetail {
    * <p>沙箱安全上下文</p>
    */
   SecurityContext?: SecurityContext
+}
+
+/**
+ * DescribePreCacheImageCleanupPolicyList请求参数结构体
+ */
+export interface DescribePreCacheImageCleanupPolicyListRequest {
+  /**
+   * <p>策略 ID 列表</p><p>入参限制：最多 100 个，每个 1～64 字符；指定时 Offset、Limit、Filters 不生效，不存在或已删除的 ID 被忽略</p>
+   */
+  CleanupPolicyIds?: Array<string>
+  /**
+   * <p>过滤器</p><p>入参限制：Filter={Name:String,Values:String[]}；最多 10 个 Filter，每个 Filter 的 Name 和 Values 必填，Values 最多 10 个、每个最多 255 字符</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移值</p><p>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量限制</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -3037,6 +3201,20 @@ export interface DescribeSessionSpaceRequest {
 }
 
 /**
+ * UpdatePreCacheImageCleanupPolicy返回参数结构体
+ */
+export interface UpdatePreCacheImageCleanupPolicyResponse {
+  /**
+   * <p>清理策略详情</p>
+   */
+  CleanupPolicy?: PreCacheImageCleanupPolicy
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSandboxInstanceList请求参数结构体
  */
 export interface DescribeSandboxInstanceListRequest {
@@ -3089,25 +3267,21 @@ export interface NetworkConfiguration {
 }
 
 /**
- * ModifyDeployment请求参数结构体
+ * DescribeGPUResourceSpecs返回参数结构体
  */
-export interface ModifyDeploymentRequest {
+export interface DescribeGPUResourceSpecsResponse {
   /**
-   * <p>待修改的 Deployment ID。</p>
+   * <p>可售规格与额度列表；无可售规格时为 []。</p>
    */
-  DeploymentId: string
+  GPUResourceSpecSet?: Array<GPUResourceSpec>
   /**
-   * <p>完整替换伸缩配置；提供时必须包含全部三个成员。</p>
+   * <p>筛选后、分页前的总数。</p>
    */
-  ScalingConfiguration?: ScalingConfiguration
+  TotalCount?: number
   /**
-   * <p>完整替换生命周期配置；提供时必须包含全部两个成员。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LifecycleConfiguration?: LifecycleConfiguration
-  /**
-   * <p>标签</p>
-   */
-  Tags?: Array<Tag>
+  RequestId?: string
 }
 
 /**
@@ -3396,6 +3570,10 @@ export interface StartSandboxInstanceRequest {
    */
   Metadata?: Array<MetadataVar>
   /**
+   * <p>启动沙箱实例时追加挂载规则，仅支持 volume、cfs、cos、image</p>
+   */
+  StorageMounts?: Array<StorageMount>
+  /**
    * <p>实例启动模式。DEFAULT：使用原有同步创建流程，为默认值；WAIT_UNTIL_HEALTHY：使用持久化后台创建流程，受理后可能返回 STARTING，需查询实例状态确认最终结果，当前仅支持WAA沙箱和GPU沙箱。</p>
    */
   StartMode?: string
@@ -3636,13 +3814,17 @@ export interface DeleteSessionSpaceRequest {
 }
 
 /**
- * OSWorld 内置版本配置
+ * 沙箱工具日志采集相关配置
  */
-export interface OSWorldConfiguration {
+export interface LogConfiguration {
   /**
-   * <p>指定内置 OSWorld 版本</p><p>枚举值：</p><ul><li>osworld1： osworld v1</li><li>osworld2： osworld v2</li></ul><p>默认值：osworld1</p>
+   * <p>日志推送CLS的配置。</p>
    */
-  Version?: string
+  CLSConfig?: CLSConfig
+  /**
+   * <p>日志源配置</p>
+   */
+  LogSources?: LogSources
 }
 
 /**
@@ -4570,17 +4752,21 @@ export interface CreatePreCacheImageTaskRequest {
 }
 
 /**
- * 沙箱工具日志采集相关配置
+ * DescribePreCacheImageCleanupPolicyList返回参数结构体
  */
-export interface LogConfiguration {
+export interface DescribePreCacheImageCleanupPolicyListResponse {
   /**
-   * <p>日志推送CLS的配置。</p>
+   * <p>清理策略集合</p>
    */
-  CLSConfig?: CLSConfig
+  CleanupPolicySet?: Array<PreCacheImageCleanupPolicy>
   /**
-   * <p>日志源配置</p>
+   * <p>返回策略数</p><p>单位：个</p>
    */
-  LogSources?: LogSources
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -29,7 +29,9 @@ import {
   CloudSkillSourceInput,
   CreatePreCacheImageTaskResponse,
   QuotaResourceInfo,
+  DeletePreCacheImageCleanupPolicyResponse,
   ResumeSandboxInstanceRequest,
+  UpdatePreCacheImageCleanupPolicyRequest,
   ModifySessionSpaceResponse,
   DescribePreCacheImageTaskRequest,
   HarnessVersionReference,
@@ -40,6 +42,7 @@ import {
   SecurityContext,
   CloudTag,
   DNSConfig,
+  ModifyDeploymentRequest,
   DescribeRegistryRecordListRequest,
   CloudRegistry,
   SandboxSnapshot,
@@ -66,18 +69,21 @@ import {
   DeleteDeploymentRequest,
   GetSkillPackageUploadURLRequest,
   UpdateSandboxToolRequest,
+  SyncRegistryRecordRequest,
   DescribeSessionSpacesResponse,
   DescribeRegistryRecordVersionListResponse,
   DeleteSandboxSnapshotResponse,
+  CreatePreCacheImageCleanupPolicyResponse,
   DescribePreCacheImageListRequest,
   DescribeRegistryRecordVersionListRequest,
   RejectRegistryRecordRequest,
   CreateDeploymentRequest,
   CfsStorageSource,
-  DescribeGPUResourceSpecsResponse,
+  CreatePreCacheImageCleanupPolicyRequest,
   VolumeTemplateRef,
   StopSandboxInstanceRequest,
   GetSkillPackageDownloadURLRequest,
+  DeletePreCacheImageCleanupPolicyRequest,
   DescribeSandboxToolListResponse,
   DescribeGPUResourceSpecsRequest,
   CreateSandboxSnapshotResponse,
@@ -115,7 +121,7 @@ import {
   DescribeGPUResourcesRequest,
   CLSConfig,
   UpdateRegistryRequest,
-  SyncRegistryRecordRequest,
+  PreCacheImageCleanupPolicy,
   DescribeSessionsResponse,
   DescribeDeploymentListRequest,
   DescribeRegistryAuditLogListRequest,
@@ -137,7 +143,9 @@ import {
   CreateSessionSpaceRequest,
   DeleteAPIKeyResponse,
   DescribeRegistryListRequest,
+  OSWorldConfiguration,
   CustomConfigurationDetail,
+  DescribePreCacheImageCleanupPolicyListRequest,
   CreateDeploymentResponse,
   DeleteRegistryRequest,
   GetSkillPackageDownloadURLResponse,
@@ -149,9 +157,10 @@ import {
   StartSandboxInstanceResponse,
   DescribeGPUResourceGroupsRequest,
   DescribeSessionSpaceRequest,
+  UpdatePreCacheImageCleanupPolicyResponse,
   DescribeSandboxInstanceListRequest,
   NetworkConfiguration,
-  ModifyDeploymentRequest,
+  DescribeGPUResourceSpecsResponse,
   CloudAgentSourceInput,
   ImageStorageSource,
   DescribeRegistryAuditLogListResponse,
@@ -176,7 +185,7 @@ import {
   DescribeRegistryListResponse,
   UpdateRegistryRecordResponse,
   DeleteSessionSpaceRequest,
-  OSWorldConfiguration,
+  LogConfiguration,
   AcquireDeploymentTokenResponse,
   DescribeSessionsRequest,
   CreateSandboxToolRequest,
@@ -216,7 +225,7 @@ import {
   DeleteGPUResourceGroupRequest,
   ModifyDeploymentResponse,
   CreatePreCacheImageTaskRequest,
-  LogConfiguration,
+  DescribePreCacheImageCleanupPolicyListResponse,
   MetadataVar,
   CloudMCPSourceInput,
   EnvVar,
@@ -233,6 +242,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 对 Record 的指定 Version 或 Label 目标发起一次预览调用。VersionId 与 Label 互斥；均省略时使用 Stable。不创建 Version、不修改 Label。
+   */
+  async PreviewRegistryRecord(
+    req: PreviewRegistryRecordRequest,
+    cb?: (error: string, rep: PreviewRegistryRecordResponse) => void
+  ): Promise<PreviewRegistryRecordResponse> {
+    return this.request("PreviewRegistryRecord", req, cb)
+  }
+
+  /**
    * 创建镜像预热任务
    */
   async CreatePreCacheImageTask(
@@ -243,13 +262,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 对 Record 的指定 Version 或 Label 目标发起一次预览调用。VersionId 与 Label 互斥；均省略时使用 Stable。不创建 Version、不修改 Label。
+   * 按 RegistryId 查询 Registry 详情。
    */
-  async PreviewRegistryRecord(
-    req: PreviewRegistryRecordRequest,
-    cb?: (error: string, rep: PreviewRegistryRecordResponse) => void
-  ): Promise<PreviewRegistryRecordResponse> {
-    return this.request("PreviewRegistryRecord", req, cb)
+  async DescribeRegistry(
+    req: DescribeRegistryRequest,
+    cb?: (error: string, rep: DescribeRegistryResponse) => void
+  ): Promise<DescribeRegistryResponse> {
+    return this.request("DescribeRegistry", req, cb)
   }
 
   /**
@@ -481,6 +500,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新镜像预热自动卸载策略
+   */
+  async UpdatePreCacheImageCleanupPolicy(
+    req: UpdatePreCacheImageCleanupPolicyRequest,
+    cb?: (error: string, rep: UpdatePreCacheImageCleanupPolicyResponse) => void
+  ): Promise<UpdatePreCacheImageCleanupPolicyResponse> {
+    return this.request("UpdatePreCacheImageCleanupPolicy", req, cb)
+  }
+
+  /**
    * 查询会话列表
    */
   async DescribeSessions(
@@ -683,6 +712,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止沙箱实例
+   */
+  async StopSandboxInstance(
+    req: StopSandboxInstanceRequest,
+    cb?: (error: string, rep: StopSandboxInstanceResponse) => void
+  ): Promise<StopSandboxInstanceResponse> {
+    return this.request("StopSandboxInstance", req, cb)
+  }
+
+  /**
    * 更新 Registry Record。两种互斥模式：①Record 更新模式：不提交任何 Source / CustomDescriptors，可通过 Description、LabelMutations 修改元数据与 Label（至少提交一项）；②Version 创建模式：提交且仅提交一种与现有 DescriptorType 匹配的内容输入，可选 VersionName / ChangeLog / SupportedHarnessVersions / Metadata，禁止 Description / LabelMutations，服务端创建下一个 Revision。PLUGIN 使用 FileSource.Type=FILE 上传原始文件；FileSource.Type=VERSION 可为 Skill 或 Plugin 复用同一 Record 下未删除且 READY 的文件版本，填写 SourceVersionId，不复制来源版本的 Metadata 或 SupportedHarnessVersions。Metadata 以 Name/Value 字符串数组传输，所有层级 key 必须小写；两项版本属性省略时分别为空对象和空列表，不继承上一版本。取代原 ChangeRegistryRecordStableVersion / RollbackRegistryRecordVersion / Create*RegistryRecordVersion。
    */
   async UpdateRegistryRecord(
@@ -806,13 +845,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止沙箱实例
+   * 查询当前调用账号的资源配额和当前总用量，以及账号下各配额组的资源配额和当前用量
    */
-  async StopSandboxInstance(
-    req: StopSandboxInstanceRequest,
-    cb?: (error: string, rep: StopSandboxInstanceResponse) => void
-  ): Promise<StopSandboxInstanceResponse> {
-    return this.request("StopSandboxInstance", req, cb)
+  async DescribeQuotaOverview(
+    req: DescribeQuotaOverviewRequest,
+    cb?: (error: string, rep: DescribeQuotaOverviewResponse) => void
+  ): Promise<DescribeQuotaOverviewResponse> {
+    return this.request("DescribeQuotaOverview", req, cb)
   }
 
   /**
@@ -826,13 +865,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按 RegistryId 查询 Registry 详情。
+   * 创建镜像预热自动清理策略
    */
-  async DescribeRegistry(
-    req: DescribeRegistryRequest,
-    cb?: (error: string, rep: DescribeRegistryResponse) => void
-  ): Promise<DescribeRegistryResponse> {
-    return this.request("DescribeRegistry", req, cb)
+  async CreatePreCacheImageCleanupPolicy(
+    req: CreatePreCacheImageCleanupPolicyRequest,
+    cb?: (error: string, rep: CreatePreCacheImageCleanupPolicyResponse) => void
+  ): Promise<CreatePreCacheImageCleanupPolicyResponse> {
+    return this.request("CreatePreCacheImageCleanupPolicy", req, cb)
+  }
+
+  /**
+   * 删除镜像预热自动卸载策略
+   */
+  async DeletePreCacheImageCleanupPolicy(
+    req: DeletePreCacheImageCleanupPolicyRequest,
+    cb?: (error: string, rep: DeletePreCacheImageCleanupPolicyResponse) => void
+  ): Promise<DeletePreCacheImageCleanupPolicyResponse> {
+    return this.request("DeletePreCacheImageCleanupPolicy", req, cb)
   }
 
   /**
@@ -889,13 +938,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询当前调用账号的资源配额和当前总用量，以及账号下各配额组的资源配额和当前用量
+   * 查询镜像预热自动卸载策略
    */
-  async DescribeQuotaOverview(
-    req: DescribeQuotaOverviewRequest,
-    cb?: (error: string, rep: DescribeQuotaOverviewResponse) => void
-  ): Promise<DescribeQuotaOverviewResponse> {
-    return this.request("DescribeQuotaOverview", req, cb)
+  async DescribePreCacheImageCleanupPolicyList(
+    req: DescribePreCacheImageCleanupPolicyListRequest,
+    cb?: (error: string, rep: DescribePreCacheImageCleanupPolicyListResponse) => void
+  ): Promise<DescribePreCacheImageCleanupPolicyListResponse> {
+    return this.request("DescribePreCacheImageCleanupPolicyList", req, cb)
   }
 
   /**
