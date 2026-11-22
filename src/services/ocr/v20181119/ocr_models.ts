@@ -10519,7 +10519,7 @@ export interface QuestionInfo {
    */
   ReturnImageUrl?: string
   /**
-   * <p>【批改 API 专属特性】图片类型预判别（常规作业 / 非作业图片 / 无作答痕迹），仅 ModelType = yuanbao_correction_model 时生效。其他模型类型不支持该能力。</p>
+   * <p>【批改 API 专属特性】图片类型预判别（常规作业 / 非作业图片 / 无作答痕迹），仅 ModelType = yuanbao_correction_model 且快速模式下生效。其他模型类型不支持该能力。</p>
    */
   ClassName?: string
   /**
@@ -11697,13 +11697,17 @@ export interface ResultList {
    */
   KnowledgePoints?: Array<string>
   /**
-   * <p>【批改 API 专属特性】<br>当ModelType= yuanbao_correction_model，通过该字段返回题目维度的答案解析<br>当ModelType= youtu_correction_model，该字段返回空，通过AnswerElement. AnswerAnalysis返回答案维度答案解析</p>
+   * <p>【批改 API 专属特性】</p><ol><li>当ModelType= yuanbao_correction_model 且快速模式下，通过该字段返回题目维度的答案解析</li><li>其他批改配置参数情况，该字段返回空，通过AnswerElement. AnswerAnalysis返回答案维度答案解析</li></ol>
    */
   AnswerAnalysis?: string
   /**
    * <p>年级：小学/初中/高中</p>
    */
   Grade?: string
+  /**
+   * <p>【批改 API专属特性】返回题目维度的批改置信度（0-100）值越高表示答案准确度越高<br>备注：仅有ModelType=youtu_correction_model模型且非快速模式支持返回。</p>
+   */
+  Confidence?: number
 }
 
 /**

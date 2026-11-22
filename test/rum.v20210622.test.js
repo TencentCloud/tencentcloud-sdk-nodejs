@@ -178,16 +178,6 @@ it("rum.v20210622.DescribeExceptionReportList", async function () {
     }
 })
 
-it("rum.v20210622.DescribeTDEMEventSearchSummary", async function () {
-    try {
-       const data = await client.DescribeTDEMEventSearchSummary({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("rum.v20210622.DescribeTDEMBusinessSystems", async function () {
     try {
        const data = await client.DescribeTDEMBusinessSystems({})
@@ -308,9 +298,9 @@ it("rum.v20210622.DescribeFOOMMallocProblemList", async function () {
     }
 })
 
-it("rum.v20210622.DescribeRumLogExportV2", async function () {
+it("rum.v20210622.DescribeTDEMEventSearchSummary", async function () {
     try {
-       const data = await client.DescribeRumLogExportV2({})
+       const data = await client.DescribeTDEMEventSearchSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -771,16 +761,6 @@ it("rum.v20210622.DescribeTDEMEventRank", async function () {
 it("rum.v20210622.ModifyTDEMFieldTransformRule", async function () {
     try {
        const data = await client.ModifyTDEMFieldTransformRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeRumLogExportsV2", async function () {
-    try {
-       const data = await client.DescribeRumLogExportsV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

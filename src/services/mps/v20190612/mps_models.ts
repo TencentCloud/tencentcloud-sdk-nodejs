@@ -23117,6 +23117,14 @@ export interface VoiceInfo {
    * <p>音色所属引擎</p>
    */
   Engine?: string
+  /**
+   * <p>音色创建时间</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>音色信息更新时间</p>
+   */
+  UpdatedAt?: string
 }
 
 /**

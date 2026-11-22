@@ -827,17 +827,17 @@ export interface DefaultKongRoute {
 }
 
 /**
- * Key/Value结构
+ * DescribeAIGWLLMModelAPIIPRestriction请求参数结构体
  */
-export interface KeyValue {
+export interface DescribeAIGWLLMModelAPIIPRestrictionRequest {
   /**
-   * 条件的Key
+   * <p>网关实例id</p>
    */
-  Key?: string
+  GatewayId: string
   /**
-   * 条件的Value
+   * <p>模型API ID</p>
    */
-  Value?: string
+  ModelAPIId: string
 }
 
 /**
@@ -4546,29 +4546,21 @@ export interface DescribeCloudNativeAPIGatewayMCPToolRequest {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics请求参数结构体
+ * IP 黑白名单配置。
  */
-export interface DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest {
+export interface AIGWLLMIPRestrictionResult {
   /**
-   * <p>网关实例Id</p>
+   * <p>是否开启</p>
    */
-  GatewayId: string
+  Enable?: boolean
   /**
-   * <p>查询开始时间戳</p><p>单位：秒</p>
+   * <p>限制类型</p><p>枚举值：</p><ul><li>whiteList： 白名单</li><li>blackList： 黑名单</li></ul>
    */
-  StartTime: number
+  RestrictionType?: string
   /**
-   * <p>查询结束时间戳</p><p>单位：秒</p>
+   * <p>IP 或 CIDR 列表，每项须为合法 IP/CIDR（支持 IPv4/IPv6）</p>
    */
-  EndTime: number
-  /**
-   * <p>聚合维度。枚举值：</p><ul><li>SecretKey：密钥</li><li>Model：模型</li><li>ModelAPI：模型 API</li><li>ModelService：模型服务</li><li>Consumer：消费者</li><li>ConsumerGroup：消费者组（组织节点）</li></ul><p>网关版本不低于 3.9.8 时，ConsumerGroup 表示消费者组（组织节点），按请求发生时的组织归属查询，包含节点自身及全部下属，仅支持 CLS。更早版本的 ConsumerGroup 保留原消费者组查询。OrganizationNode 已移除，传入返回 InvalidParameterValue。</p><p>可选，未传时保留原汇总及 TopConsumers；传入时 TopConsumers 为 []。</p>
-   */
-  Dimension?: string
-  /**
-   * <p>传入 Dimension 时支持：SecretKeyId、SecretKeyName、ModelName、ModelAPIId、ModelAPIName、ModelServiceId、ModelServiceName、ConsumerId、ConsumerName、ConsumerGroupId、ConsumerGroupName。</p><p>网关版本不低于 3.9.8 时，所有支持的 Dimension（包括可选 Dimension 未传）均支持 ConsumerGroupId、ConsumerGroupName，按请求发生时的消费者组及全部下属归属筛选历史日志，仅支持 CLS；不按当前组成员重算历史。ConsumerGroupId 必须为 UUID，允许显式查询已删除节点历史；ConsumerGroupName 从 Kong CP 当前目录按名称子串解析，包含同步、自定义、禁用及保留中的软删节点。同名节点保留各自身份。OrganizationNodeId / OrganizationNodeName 已移除，旧名称返回 InvalidParameterValue。</p><p>最多 10 项，Name 不重复；新版组筛选的每项 Values 为 1～50 个非空字符串，同项多个值为 OR。名称无匹配返回空结果。</p><p>未传 Dimension 时支持 ConsumerId、ConsumerGroupId、ConsumerGroupName；更早版本该模式仍仅支持 ConsumerId、ConsumerGroupId。更早版本组筛选保留当前成员算法。</p><p>组 ID 与组名称分别生成历史日志条件并做 AND；日志同时属于不同组时仍可匹配，不能预先对节点 ID 求交。同一请求只计一次。每个名称筛选最多展开 50 个节点，超过返回 InvalidParameterValue。</p>
-   */
-  Filters?: Array<Filter>
+  AddressList?: Array<string>
 }
 
 /**
@@ -5378,6 +5370,20 @@ export interface AddCloudNativeAPIGatewayConsumerInGroupRequest {
 }
 
 /**
+ * Key/Value结构
+ */
+export interface KeyValue {
+  /**
+   * 条件的Key
+   */
+  Key?: string
+  /**
+   * 条件的Value
+   */
+  Value?: string
+}
+
+/**
  * CreateCloudNativeAPIGatewayConsumer返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayConsumerResponse {
@@ -5589,6 +5595,32 @@ export interface AIGWSimpleSecretKey {
    * <p>创建时间</p><p>参数格式：2026-09-03 14:11:05</p>
    */
   CreateTime?: string
+}
+
+/**
+ * ModifyAIGWLLMModelAPIIPRestriction请求参数结构体
+ */
+export interface ModifyAIGWLLMModelAPIIPRestrictionRequest {
+  /**
+   * <p>网关实例id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>模型 API ID</p>
+   */
+  ModelAPIId: string
+  /**
+   * <p>是否启用 IP 黑白名单</p>
+   */
+  Enable?: boolean
+  /**
+   * <p>限制类型</p><p>枚举值：</p><ul><li>whiteList： 白名单</li><li>blackList： 黑名单</li></ul>
+   */
+  RestrictionType?: string
+  /**
+   * <p>IP 或 CIDR 列表，每项须为合法 IP/CIDR（支持 IPv4/IPv6），长度 [1,400]</p>
+   */
+  AddressList?: Array<string>
 }
 
 /**
@@ -6122,6 +6154,32 @@ export interface ModifyCloudNativeAPIGatewayMCPServerRequest {
    * <p>服务级参数改写配置</p>
    */
   ParamRewriteConfig?: AIGWMCPServerParamRewriteConfig
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest {
+  /**
+   * <p>网关实例Id</p>
+   */
+  GatewayId: string
+  /**
+   * <p>查询开始时间戳</p><p>单位：秒</p>
+   */
+  StartTime: number
+  /**
+   * <p>查询结束时间戳</p><p>单位：秒</p>
+   */
+  EndTime: number
+  /**
+   * <p>聚合维度。枚举值：</p><ul><li>SecretKey：密钥</li><li>Model：模型</li><li>ModelAPI：模型 API</li><li>ModelService：模型服务</li><li>Consumer：消费者</li><li>ConsumerGroup：消费者组（组织节点）</li></ul><p>网关版本不低于 3.9.8 时，ConsumerGroup 表示消费者组（组织节点），按请求发生时的组织归属查询，包含节点自身及全部下属，仅支持 CLS。更早版本的 ConsumerGroup 保留原消费者组查询。OrganizationNode 已移除，传入返回 InvalidParameterValue。</p><p>可选，未传时保留原汇总及 TopConsumers；传入时 TopConsumers 为 []。</p>
+   */
+  Dimension?: string
+  /**
+   * <p>传入 Dimension 时支持：SecretKeyId、SecretKeyName、ModelName、ModelAPIId、ModelAPIName、ModelServiceId、ModelServiceName、ConsumerId、ConsumerName、ConsumerGroupId、ConsumerGroupName。</p><p>网关版本不低于 3.9.8 时，所有支持的 Dimension（包括可选 Dimension 未传）均支持 ConsumerGroupId、ConsumerGroupName，按请求发生时的消费者组及全部下属归属筛选历史日志，仅支持 CLS；不按当前组成员重算历史。ConsumerGroupId 必须为 UUID，允许显式查询已删除节点历史；ConsumerGroupName 从 Kong CP 当前目录按名称子串解析，包含同步、自定义、禁用及保留中的软删节点。同名节点保留各自身份。OrganizationNodeId / OrganizationNodeName 已移除，旧名称返回 InvalidParameterValue。</p><p>最多 10 项，Name 不重复；新版组筛选的每项 Values 为 1～50 个非空字符串，同项多个值为 OR。名称无匹配返回空结果。</p><p>未传 Dimension 时支持 ConsumerId、ConsumerGroupId、ConsumerGroupName；更早版本该模式仍仅支持 ConsumerId、ConsumerGroupId。更早版本组筛选保留当前成员算法。</p><p>组 ID 与组名称分别生成历史日志条件并做 AND；日志同时属于不同组时仍可匹配，不能预先对节点 ID 求交。同一请求只计一次。每个名称筛选最多展开 50 个节点，超过返回 InvalidParameterValue。</p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -7881,6 +7939,20 @@ export interface DeleteCloudNativeAPIGatewayAIServiceSourceRequest {
 }
 
 /**
+ * ModifyAIGWLLMModelAPIIPRestriction返回参数结构体
+ */
+export interface ModifyAIGWLLMModelAPIIPRestrictionResponse {
+  /**
+   * <p>结果</p>
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayLLMModelService返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
@@ -7978,6 +8050,20 @@ export interface CreateCloudNativeAPIGatewayAIServiceSourceResponse {
    * <p>创建结果</p>
    */
   Result?: CNAPIGwCreateCommonResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAIGWLLMModelAPIIPRestriction返回参数结构体
+ */
+export interface DescribeAIGWLLMModelAPIIPRestrictionResponse {
+  /**
+   * <p>IP 黑白名单配置</p>
+   */
+  Result?: AIGWLLMIPRestrictionResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -22069,58 +22069,64 @@ export interface BatchStopOpsTasksResponse {
  */
 export interface InstanceLogInfoOpsDto {
   /**
-   * 实例运行日志
+   * <p>实例运行日志</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogInfo?: string
   /**
-   * 实例运行提交的yarn日志地址
+   * <p>实例运行提交的yarn日志地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   YarnLogInfo?: Array<string>
   /**
-   * 实例运行产生的datax日志
+   * <p>实例运行产生的datax日志</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataLogInfo?: string
   /**
-   * 第三方任务运行日志
+   * <p>第三方任务运行日志</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThirdTaskRunLogInfo?: string
   /**
-   * 第三方任务日志链接描述
+   * <p>第三方任务日志链接描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThirdTaskLogUrlDesc?: string
   /**
-   * 日志行数
+   * <p>日志行数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LineCount?: number
   /**
-   * 统一执行平台日志分页查询参数
+   * <p>统一执行平台日志分页查询参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtInfo?: string
   /**
-   * 日志分页查询，是否最后一页
+   * <p>日志分页查询，是否最后一页</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsEnd?: boolean
   /**
-   * 文件大小
+   * <p>文件大小</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileSize?: string
   /**
-   * 日志匹配节点信息
+   * <p>日志匹配节点信息</p>
    */
   MatchedBrokerIp?: string
   /**
-   * 执行平台通用协议
+   * <p>执行平台通用协议</p>
    */
   ExecutionExtendedProps?: Array<PairDto>
+  /**
+   * <p>日志诊断规则</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  LogDiagnosisRules?: LogDiagnosisRules
 }
 
 /**
@@ -25721,6 +25727,92 @@ export interface RuleGroupSubscribe {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmMessageRule?: string
+}
+
+/**
+ * LogDiagnosisRules
+ */
+export interface LogDiagnosisRules {
+  /**
+   * <p>id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * <p>errorCode</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCode?: number
+  /**
+   * <p>createTime</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>lastUpdate</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdate?: string
+  /**
+   * <p>owner</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * <p>异常概要</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorTitle?: string
+  /**
+   * <p>异常关键字</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
+  /**
+   * <p>异常原因</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorReason?: string
+  /**
+   * <p>解决办法</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorSolution?: string
+  /**
+   * <p>展示顺序</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorOrder?: string
+  /**
+   * <p>例子</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorExample?: string
+  /**
+   * <p>扩展说明</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtToolsUrl?: string
+  /**
+   * <p>异常级别</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorLevel?: string
+  /**
+   * <p>异常类型：用户/系统</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorTypeAggregation?: string
+  /**
+   * <p>异常系统类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorSystem?: string
+  /**
+   * <p>异常日志来源</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorLogSystem?: string
 }
 
 /**

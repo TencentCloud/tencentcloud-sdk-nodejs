@@ -749,6 +749,7 @@ import {
   CompareRuleItem,
   DescribeInstanceLogFileRequest,
   RuleGroupSubscribe,
+  LogDiagnosisRules,
   EventListenerDTO,
   DescribeTableDdlRequest,
   DeleteTaskLineageRequest,

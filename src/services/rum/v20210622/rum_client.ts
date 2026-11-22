@@ -29,7 +29,6 @@ import {
   DescribeTokenRequest,
   DeleteFieldTransformRuleResponse,
   DescribeDataStaticUrlV2Request,
-  DescribeRumLogExportV2Response,
   DescribePvListResponse,
   DescribeRumLogDetailsV2Response,
   DescribeScoresV2Response,
@@ -71,11 +70,9 @@ import {
   StopInstanceResponse,
   ModifyTDEMSampleConfigRequest,
   DescribeTDEMMetricTrendRequest,
-  ModifyProjectRequest,
   MetricTrendPoint,
   CreateStarProjectRequest,
   DescribeDataSetUrlStatisticsV2Request,
-  DescribeRumLogExportsV2Request,
   RumProject,
   DescribeFOOMMallocProblemListRequest,
   DescribeTDEMFunnelStepSessionListResponse,
@@ -124,7 +121,6 @@ import {
   DescribeDataFetchProjectRequest,
   DescribeDataResponse,
   RumAreaInfo,
-  DescribeRumLogExportV2Request,
   ModifyInstanceRequest,
   DescribeAppMetricsDataResponse,
   DescribeAppSingleCaseDetailListResponse,
@@ -149,7 +145,7 @@ import {
   DescribeUvListRequest,
   CreateFieldTransformRuleRequest,
   DescribeReplayMetaRequest,
-  DescribeRumLogExportsV2Response,
+  ModifyProjectRequest,
   SymbolicatedView,
   DescribeFOOMReportListRequest,
   DescribeApplicationExitReportListRequest,
@@ -600,16 +596,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同一筛选下的分类计数、访问用户、业务用户、窗口合计与分桶趋势。Category 可含 session。空窗返回 0 与空 Series。
-   */
-  async DescribeTDEMEventSearchSummary(
-    req: DescribeTDEMEventSearchSummaryRequest,
-    cb?: (error: string, rep: DescribeTDEMEventSearchSummaryResponse) => void
-  ): Promise<DescribeTDEMEventSearchSummaryResponse> {
-    return this.request("DescribeTDEMEventSearchSummary", req, cb)
-  }
-
-  /**
    * 查询当前用户名下业务系统列表（超管返回全部）。分页 Offset/Limit，默认 Limit=20 上限 100。
    */
   async DescribeTDEMBusinessSystems(
@@ -730,13 +716,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建日志导出
+   * 同一筛选下的分类计数、访问用户、业务用户、窗口合计与分桶趋势。Category 可含 session。空窗返回 0 与空 Series。
    */
-  async DescribeRumLogExportV2(
-    req: DescribeRumLogExportV2Request,
-    cb?: (error: string, rep: DescribeRumLogExportV2Response) => void
-  ): Promise<DescribeRumLogExportV2Response> {
-    return this.request("DescribeRumLogExportV2", req, cb)
+  async DescribeTDEMEventSearchSummary(
+    req: DescribeTDEMEventSearchSummaryRequest,
+    cb?: (error: string, rep: DescribeTDEMEventSearchSummaryResponse) => void
+  ): Promise<DescribeTDEMEventSearchSummaryResponse> {
+    return this.request("DescribeTDEMEventSearchSummary", req, cb)
   }
 
   /**
@@ -1197,16 +1183,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTDEMFieldTransformRuleResponse) => void
   ): Promise<ModifyTDEMFieldTransformRuleResponse> {
     return this.request("ModifyTDEMFieldTransformRule", req, cb)
-  }
-
-  /**
-   * 获取日志导出列表
-   */
-  async DescribeRumLogExportsV2(
-    req: DescribeRumLogExportsV2Request,
-    cb?: (error: string, rep: DescribeRumLogExportsV2Response) => void
-  ): Promise<DescribeRumLogExportsV2Response> {
-    return this.request("DescribeRumLogExportsV2", req, cb)
   }
 
   /**

@@ -357,13 +357,17 @@ export interface DescribeSlowQueryRecordsDownloadResponse {
  */
 export interface DeleteWorkloadGroupRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   InstanceId: string
   /**
-   * 需要删除的资源组名称
+   * <p>需要删除的资源组名称</p>
    */
   WorkloadGroupName?: string
+  /**
+   * <p>资源组归属的计算组ID</p>
+   */
+  ComputeGroup?: string
 }
 
 /**
@@ -390,6 +394,10 @@ export interface WorkloadGroupConfig {
    * <p>cpu硬限制</p>
    */
   CpuHardLimit?: string
+  /**
+   * <p>资源组归属的计算组ID</p>
+   */
+  ComputeGroup?: string
   /**
    * <p>4.1+ 新增；默认值为 0（不预留），根据业务可设为 5/10</p>
    */
@@ -1610,6 +1618,10 @@ export interface CreateInstanceNewRequest {
    */
   CacheDataDiskSize?: number
   /**
+   * <p>缓存盘介质，仅存算分离（IsSSC=true）时有效：CLOUD_HSSD=增强型SSD，ELASTIC_REMOTE_SSD=单副本SSD</p>
+   */
+  CacheDiskType?: string
+  /**
    * <p>磁盘加密</p><p>默认为0不加密，1表示加密</p>
    */
   DiskEncrypt?: number
@@ -2243,13 +2255,17 @@ export interface ResizeDiskRequest {
  */
 export interface ModifyWorkloadGroupStatusRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   InstanceId: string
   /**
-   * 是否开启资源组：open-开启、close-关闭
+   * <p>是否开启资源组：open-开启、close-关闭</p>
    */
   OperationType?: string
+  /**
+   * <p>rolling_restart滚动\restart立即，存算分离开通时的Pod重建方式，默认滚动</p>
+   */
+  RestartType?: string
 }
 
 /**
@@ -3529,6 +3545,10 @@ export interface DescribeWorkloadGroupResponse {
    */
   Status?: string
   /**
+   * <p>是否需要重建</p>
+   */
+  NeedPodRebuild?: boolean
+  /**
    * <p>错误信息</p>
    */
   ErrorMsg?: string
@@ -3693,7 +3713,7 @@ export interface ReduceInstanceRequest {
  */
 export interface DeleteWorkloadGroupResponse {
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   ErrorMsg?: string
   /**
@@ -3771,7 +3791,7 @@ export interface RegionAreaInfo {
  */
 export interface ModifyWorkloadGroupStatusResponse {
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   ErrorMsg?: string
   /**

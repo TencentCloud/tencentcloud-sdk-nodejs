@@ -276,7 +276,7 @@ export interface ResumeProjectResponse {
  */
 export interface DescribeRumLogListResponse {
   /**
-   * 返回字符串
+   * <p>返回字符串</p>
    */
   Result?: string
   /**
@@ -506,25 +506,11 @@ export interface DescribeDataStaticUrlV2Request {
 }
 
 /**
- * DescribeRumLogExportV2返回参数结构体
- */
-export interface DescribeRumLogExportV2Response {
-  /**
-   * <p>日志导出任务TaskId</p>
-   */
-  Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribePvList返回参数结构体
  */
 export interface DescribePvListResponse {
   /**
-   * pv列表
+   * <p>pv列表</p>
    */
   ProjectPvSet?: Array<RumPvInfo>
   /**
@@ -538,9 +524,17 @@ export interface DescribePvListResponse {
  */
 export interface DescribeRumLogDetailsV2Response {
   /**
-   * <p>日志明细</p>
+   * <p>日志明细JSON字符串，内部Result数组结构不变。CLS路径row_id为0，ts为毫秒精度但单位仍为纳秒，字符串字段完整。</p>
    */
   Result?: string
+  /**
+   * <p>CLS续读令牌；ListOver为true时为空。仅CLS路径返回，可缺省。</p>
+   */
+  Context?: string
+  /**
+   * <p>当前条件的日志是否全部返回；预算短页不表示结束。仅CLS路径返回，可缺省。</p>
+   */
+  ListOver?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1090,7 +1084,7 @@ export interface DescribeRumLogTotalV2Request {
    */
   OrderBy: string
   /**
-   * <p>查询日志开始时间（必填）格式为时间戳 毫秒</p>
+   * <p>Unix纳秒开始时间，包含该时刻；不猜测时间单位。</p>
    */
   StartTime: number
   /**
@@ -1102,7 +1096,7 @@ export interface DescribeRumLogTotalV2Request {
    */
   Filter: string
   /**
-   * <p>查询日志结束时间（必填）格式为时间戳 毫秒</p>
+   * <p>Unix纳秒结束时间，不包含该时刻。</p>
    */
   EndTime: number
   /**
@@ -1838,7 +1832,7 @@ export interface ResumeProjectRequest {
  */
 export interface DescribeRumStatsLogListResponse {
   /**
-   * 返回字符串
+   * <p>返回字符串</p>
    */
   Result?: string
   /**
@@ -1963,80 +1957,6 @@ export interface DescribeTDEMMetricTrendRequest {
    * <p>对比窗结束 Unix 毫秒（仅 Trend 批量）</p>
    */
   CompareEndTime?: number
-}
-
-/**
- * ModifyProject请求参数结构体
- */
-export interface ModifyProjectRequest {
-  /**
-   * 项目 id
-   */
-  ID: number
-  /**
-   * 应用名称(可选，不为空且最长为 200字符)
-   */
-  Name?: string
-  /**
-   * 项目网页地址(可选，最长为 256)
-   */
-  URL?: string
-  /**
-   * 项目仓库地址(可选，最长为 256)
-   */
-  Repo?: string
-  /**
-   * 项目需要转移到的实例 id(可选)
-   */
-  InstanceID?: string
-  /**
-   * 项目采样率(可选)
-   */
-  Rate?: string
-  /**
-   * 是否开启聚类(可选)
-   */
-  EnableURLGroup?: number
-  /**
-   * 项目类型(可接受值为 "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
-   */
-  Type?: string
-  /**
-   * 应用描述(可选，最长为 1000字符)
-   */
-  Desc?: string
-  /**
-   * 启动kafka配置
-   */
-  EnableKafka?: number
-  /**
-   * kafka_host
-   */
-  KafkaHost?: string
-  /**
-   * topic
-   */
-  KafkaTopic?: string
-  /**
-   * kafka_version
-   */
-  KafkaVersion?: string
-  /**
-   * kafka_username
-   */
-  SaslUserName?: string
-  /**
-   * kafka_pwd
-   */
-  SaslPassword?: string
-  /**
-   * SaslMechanism
-   */
-  SaslMechanism?: string
-  /**
-   * sink_id，日知汇算子id
-   */
-  SinkId?: number
 }
 
 /**
@@ -2196,24 +2116,6 @@ export interface DescribeDataSetUrlStatisticsV2Request {
    * 时间段
    */
   Granularity?: string
-}
-
-/**
- * DescribeRumLogExportsV2请求参数结构体
- */
-export interface DescribeRumLogExportsV2Request {
-  /**
-   * <p>每页返回任务数</p>
-   */
-  PageSize: number
-  /**
-   * <p>当前页码</p>
-   */
-  PageNum: number
-  /**
-   * <p>项目ID</p>
-   */
-  ID: number
 }
 
 /**
@@ -3225,7 +3127,7 @@ export interface DescribeRumGroupLogRequest {
    */
   OrderBy: string
   /**
-   * <p>开始时间（必填）</p>
+   * <p>查询开始时间（必填）。</p><p>参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。</p><p>入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。</p><p>等价时间范围的查询结果和返回字段一致。</p>
    */
   StartTime: string
   /**
@@ -3241,7 +3143,7 @@ export interface DescribeRumGroupLogRequest {
    */
   Query: string
   /**
-   * <p>结束时间（必填）</p>
+   * <p>查询结束时间（必填）。</p><p>参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。</p><p>入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。</p><p>等价时间范围的查询结果和返回字段一致。</p>
    */
   EndTime: string
   /**
@@ -3524,19 +3426,19 @@ export interface DescribeFOOMProblemListRequest {
  */
 export interface DescribePvListRequest {
   /**
-   * ID
+   * <p>ID</p>
    */
   ProjectId: number
   /**
-   * 结束时间
+   * <p>查询结束时间（必填）。</p><p>参数格式：日维度继续支持 YYYYMMDD，也支持带时区的 RFC3339。</p><p>入参限制：仅 Dimension=d 支持 RFC3339，须等于北京时间 00:00:00。</p><p>等价日期的查询结果和返回字段一致。</p>
    */
   EndTime: string
   /**
-   * 开始时间
+   * <p>查询开始时间（必填）。</p><p>参数格式：日维度继续支持 YYYYMMDD，也支持带时区的 RFC3339。</p><p>入参限制：仅 Dimension=d 支持 RFC3339，须等于北京时间 00:00:00。</p><p>等价日期的查询结果和返回字段一致。</p>
    */
   StartTime: string
   /**
-   * 对PV指标的查询维度。获取day：d，   获取min则不填。
+   * <p>对PV指标的查询维度。获取day：d，   获取min则不填。</p>
    */
   Dimension?: string
 }
@@ -3957,36 +3859,6 @@ export interface RumAreaInfo {
    * 地域缩写
    */
   AreaAbbr: string
-}
-
-/**
- * DescribeRumLogExportV2请求参数结构体
- */
-export interface DescribeRumLogExportV2Request {
-  /**
-   * <p>Name（string，必填）：导出任务名称标识，需要在使用API创建导出任务时填写。此字段为后续能力扩展预留，不在查询结果中返回。</p>
-   */
-  Name: string
-  /**
-   * <p>查询日志开始时间(必填)</p>
-   */
-  StartTime: number
-  /**
-   * <p>过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：<a href="https://cloud.tencent.com/document/product/248/87223">日志查询相关</a></p>
-   */
-  Filter: string
-  /**
-   * <p>查询日志结束时间(必填)</p>
-   */
-  EndTime: number
-  /**
-   * <p>项目ID</p>
-   */
-  ID: number
-  /**
-   * <p>注意：这个字段必选，不能为空！选择要导出哪些字段的参数，对应日志的列，可查看文档：<a href="https://cloud.tencent.com/document/product/248/87223">日志查询相关</a></p><p>枚举值：</p><ul><li>level： 日志类型</li><li>url： URL</li><li>ip： 用户终端IP</li><li>version： 版本</li></ul>
-   */
-  Fields?: Array<string>
 }
 
 /**
@@ -4920,17 +4792,77 @@ export interface DescribeReplayMetaRequest {
 }
 
 /**
- * DescribeRumLogExportsV2返回参数结构体
+ * ModifyProject请求参数结构体
  */
-export interface DescribeRumLogExportsV2Response {
+export interface ModifyProjectRequest {
   /**
-   * <p>日志导出列表</p>
+   * 项目 id
    */
-  Result?: string
+  ID: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 应用名称(可选，不为空且最长为 200字符)
    */
-  RequestId?: string
+  Name?: string
+  /**
+   * 项目网页地址(可选，最长为 256)
+   */
+  URL?: string
+  /**
+   * 项目仓库地址(可选，最长为 256)
+   */
+  Repo?: string
+  /**
+   * 项目需要转移到的实例 id(可选)
+   */
+  InstanceID?: string
+  /**
+   * 项目采样率(可选)
+   */
+  Rate?: string
+  /**
+   * 是否开启聚类(可选)
+   */
+  EnableURLGroup?: number
+  /**
+   * 项目类型(可接受值为 "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
+   */
+  Type?: string
+  /**
+   * 应用描述(可选，最长为 1000字符)
+   */
+  Desc?: string
+  /**
+   * 启动kafka配置
+   */
+  EnableKafka?: number
+  /**
+   * kafka_host
+   */
+  KafkaHost?: string
+  /**
+   * topic
+   */
+  KafkaTopic?: string
+  /**
+   * kafka_version
+   */
+  KafkaVersion?: string
+  /**
+   * kafka_username
+   */
+  SaslUserName?: string
+  /**
+   * kafka_pwd
+   */
+  SaslPassword?: string
+  /**
+   * SaslMechanism
+   */
+  SaslMechanism?: string
+  /**
+   * sink_id，日知汇算子id
+   */
+  SinkId?: number
 }
 
 /**
@@ -6175,7 +6107,7 @@ export interface DescribeFOOMProblemDetailResponse {
  */
 export interface DescribeRumLogTotalV2Response {
   /**
-   * <p>日志总量</p>
+   * <p>日志总量JSON字符串，内部Total结构不变。总量与明细为独立查询，不保证同一快照；window迁移期间总量仍走旧后端，带新分页参数的明细可走CLS。旧游标继续忽略。</p>
    */
   Result?: string
   /**
@@ -6591,7 +6523,7 @@ export interface DescribeTDEMEventSearchSummaryResponse {
  */
 export interface DescribeRumLogExportResponse {
   /**
-   * 返回字符串
+   * <p>返回字符串</p>
    */
   Result?: string
   /**
@@ -6729,37 +6661,41 @@ export interface CreateTDEMFieldTransformRuleRequest {
  */
 export interface Whitelist {
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID?: string
   /**
-   * 截止时间
+   * <p>截止时间</p>
    */
   Ttl?: string
   /**
-   * 白名单自增ID
+   * <p>白名单自增ID</p>
    */
   ID?: string
   /**
-   * 业务唯一标识
+   * <p>业务唯一标识</p>
    */
   WhitelistUin?: string
   /**
-   * 创建者ID
+   * <p>创建者ID</p>
    */
   CreateUser?: string
   /**
-   * aid标识
+   * <p>aid标识</p>
    */
   Aid?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
+  /**
+   * <p>白名单创建时刻。由原始time.Time同源生成带偏移RFC3339，旧CreateTime原值及十二小时显示格式保持；缺失原始时刻时省略本成员。</p>
+   */
+  CreateDatetime?: string
 }
 
 /**
@@ -9381,31 +9317,31 @@ export interface DescribeTDEMDialExecutionListRequest {
  */
 export interface DescribeRumLogListRequest {
   /**
-   * 排序方式  desc  asc（必填）
+   * <p>排序方式  desc  asc（必填）</p>
    */
   OrderBy: string
   /**
-   * 开始时间（必填）格式为时间戳 毫秒
+   * <p>查询开始时间（必填）。</p><p>参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。</p><p>入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。</p><p>等价时间范围的查询结果和返回字段一致。</p>
    */
   StartTime: string
   /**
-   * 单次查询返回的原始日志条数，最大值为100（必填）
+   * <p>单次查询返回的原始日志条数，最大值为100（必填）</p>
    */
   Limit: number
   /**
-   * 页数，第几页
+   * <p>页数，第几页</p>
    */
   Page: number
   /**
-   * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+   * <p>查询语句，参考控制台请求参数，语句长度最大为4096（必填）</p>
    */
   Query: string
   /**
-   * 结束时间（必填）格式为时间戳 毫秒
+   * <p>查询结束时间（必填）。</p><p>参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。</p><p>入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。</p><p>等价时间范围的查询结果和返回字段一致。</p>
    */
   EndTime: string
   /**
-   * 项目ID（必填）
+   * <p>项目ID（必填）</p>
    */
   ID: number
 }
@@ -9893,11 +9829,11 @@ export interface DescribeRumLogDetailsV2Request {
    */
   OrderBy: string
   /**
-   * <p>查询日志开始时间（必填）格式为时间戳 毫秒</p>
+   * <p>Unix纳秒开始时间，包含该时刻；不猜测时间单位。</p>
    */
   StartTime: number
   /**
-   * <p>单次查询返回的原始日志条数，最大值为100（必填）</p>
+   * <p>CLS路径单次返回1～1000条；旧路径保留原行为。短页不表示结束，以ListOver为准。</p>
    */
   Limit: number
   /**
@@ -9905,7 +9841,7 @@ export interface DescribeRumLogDetailsV2Request {
    */
   Filter: string
   /**
-   * <p>查询日志结束时间（必填）格式为时间戳 毫秒</p>
+   * <p>Unix纳秒结束时间，不包含该时刻。</p>
    */
   EndTime: number
   /**
@@ -9913,13 +9849,21 @@ export interface DescribeRumLogDetailsV2Request {
    */
   ID: number
   /**
-   * <p>上次查询的最后一个日志的时间戳</p>
+   * <p>旧游标参数已废弃，请迁移至Offset或Context。LastTime和LastRowId均为0或缺省视为未传；非零旧游标在cls下拒绝，off/window且不带新分页参数时保留旧行为。</p>
    */
   LastTime?: number
   /**
-   * <p>上次查询的最后一个日志的rowId</p>
+   * <p>旧游标参数已废弃，请迁移至Offset或Context。LastTime和LastRowId均为0或缺省视为未传；非零旧游标在cls下拒绝，off/window且不带新分页参数时保留旧行为。</p>
    */
   LastRowId?: number
+  /**
+   * <p>从0开始的非负偏移量；保留缺省与显式0的差别。不能与非空Context同时使用，Context续页时删除Offset。</p>
+   */
+  Offset?: number
+  /**
+   * <p>原样回传上次非空Context，续页时删除Offset，其余有效查询条件保持不变；空串视为缺省。不保证快照或重放同一页。</p>
+   */
+  Context?: string
 }
 
 /**
@@ -11682,27 +11626,27 @@ export interface TDEMSSETrendPoint {
  */
 export interface DescribeRumLogExportRequest {
   /**
-   * 导出标识name
+   * <p>导出标识name</p>
    */
   Name: string
   /**
-   * 开始时间（必填）
+   * <p>查询开始时间（必填）。</p><p>参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。</p><p>入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。</p><p>等价时间格式对应同一导出范围，返回字段一致。</p>
    */
   StartTime: string
   /**
-   * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+   * <p>查询语句，参考控制台请求参数，语句长度最大为4096（必填）</p>
    */
   Query: string
   /**
-   * 结束时间（必填）
+   * <p>查询结束时间（必填）。</p><p>参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。</p><p>入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。</p><p>等价时间格式对应同一导出范围，返回字段一致。</p>
    */
   EndTime: string
   /**
-   * 项目ID（必填）
+   * <p>项目ID（必填）</p>
    */
   ID: number
   /**
-   * field条件
+   * <p>field条件</p>
    */
   Fields?: Array<string>
 }
@@ -11928,23 +11872,23 @@ export interface DescribeDataStaticProjectRequest {
  */
 export interface DescribeRumStatsLogListRequest {
   /**
-   * 开始时间（必填）
+   * <p>查询开始时间（必填）。</p><p>参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。</p><p>入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。</p><p>等价时间范围的查询结果和返回字段一致。</p>
    */
   StartTime: string
   /**
-   * 单次查询返回的原始日志条数，最大值为100（必填）
+   * <p>单次查询返回的原始日志条数，最大值为100（必填）</p>
    */
   Limit: number
   /**
-   * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+   * <p>查询语句，参考控制台请求参数，语句长度最大为4096（必填）</p>
    */
   Query: string
   /**
-   * 结束时间（必填）
+   * <p>查询结束时间（必填）。</p><p>参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。</p><p>入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。</p><p>等价时间范围的查询结果和返回字段一致。</p>
    */
   EndTime: string
   /**
-   * 项目ID（必填）
+   * <p>项目ID（必填）</p>
    */
   ID: number
 }

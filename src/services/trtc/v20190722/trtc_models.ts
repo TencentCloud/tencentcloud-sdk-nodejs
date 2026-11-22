@@ -657,6 +657,10 @@ export interface VoiceCloneRequest {
    * <p>拓展参数</p>
    */
   ExtraParams?: string
+  /**
+   * <p>试听文本</p>
+   */
+  PreviewText?: string
 }
 
 /**
@@ -6467,6 +6471,10 @@ export interface VoiceCloneResponse {
    * <p>克隆出的音色ID，可以用此id进行语音合成</p>
    */
   VoiceId?: string
+  /**
+   * <p>试听音频url,请于24小时内尽快下载</p>
+   */
+  PreviewUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

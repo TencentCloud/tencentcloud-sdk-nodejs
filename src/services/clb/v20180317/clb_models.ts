@@ -8299,7 +8299,7 @@ export interface TestModelInputModalitiesRequest {
 }
 
 /**
- * video配置。
+ * image配置。
  */
 export interface ImageConfig {
   /**
@@ -8318,7 +8318,7 @@ export interface ImageConfig {
    */
   NumRetries?: number
   /**
-   * <p>同步超时时间</p><p>取值范围：[0, 60]</p><p>单位：秒</p>
+   * <p>同步超时时间</p><p>取值范围：[0, 300]</p><p>单位：秒</p><p>默认值：15</p>
    */
   WaitSeconds?: number
 }

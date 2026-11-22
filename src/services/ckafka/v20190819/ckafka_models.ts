@@ -1779,7 +1779,7 @@ export interface ModifyAclRuleRequest {
    */
   InstanceId: string
   /**
-   * <p>ACL规则名</p>
+   * <p>ACL规则名</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/89217">DescribeAclRule</a></p>
    */
   RuleName: string
   /**
@@ -8565,7 +8565,7 @@ export interface BatchModifyGroupOffsetsResponse {
  */
 export interface CreateDatahubTopicRequest {
   /**
-   * <p>名称，是一个不超过 128 个字符的字符串，必须以“AppId-”为首字符，剩余部分可以包含字母、数字和横划线(-)，可通过接口DescribeAppInfo获取。</p>
+   * <p>名称，字符串长度不超过 128 个字符。必须以当前用户的实际 AppId 和连字符（-）开头，其余部分仅支持字母、数字和连字符（-）。AppId 可通过 GetUserAppId 接口获取。</p>
    */
   Name: string
   /**

@@ -120,11 +120,15 @@ export interface CreateNativeNodePoolParam {
    */
   Password?: string
   /**
+   * <p>原生节点池 containerd 镜像仓库定制（仅 containerd 生效）；非 containerd 节点池携带本字段会被消费侧忽略</p>
+   */
+  Registry?: RegistryConfig
+  /**
    * <p>自定义镜像 ID</p>
    */
   CustomImage?: string
   /**
-   * 原生节点池 containerd 运行时纯版本号，例如 1.7.28 或 1.7.28-tke.3。未指定或为空时使用原有 GPE 默认版本。仅对新建节点生效。
+   * <p>原生节点池 containerd 运行时纯版本号，例如 1.7.28 或 1.7.28-tke.3。未指定或为空时使用原有 GPE 默认版本。仅对新建节点生效。</p>
    */
   RuntimeVersion?: string
 }
@@ -868,13 +872,44 @@ export interface ModifyHealthCheckPolicyResponse {
 }
 
 /**
- * StopMachines返回参数结构体
+ * 节点系统盘和数据盘配置
  */
-export interface StopMachinesResponse {
+export interface Disk {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 云盘类型
    */
-  RequestId?: string
+  DiskType: string
+  /**
+   * 云盘大小 (G）
+   */
+  DiskSize: number
+  /**
+   * 是否自动化格式盘并挂载
+   */
+  AutoFormatAndMount?: boolean
+  /**
+   * 文件系统
+   */
+  FileSystem?: string
+  /**
+   * 挂载目录
+   */
+  MountTarget?: string
+  /**
+   * 云盘ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskId?: string
+  /**
+   * 加密系统盘
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Encrypt?: string
+  /**
+   * 自定义 KMS ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKeyId?: string
 }
 
 /**
@@ -1102,6 +1137,20 @@ export interface SetMachineLoginRequest {
 }
 
 /**
+ * containerd 镜像仓库定制（仅 containerd 1.6+ 生效）
+ */
+export interface RegistryConfig {
+  /**
+   * <p>镜像加速站点列表，按 registry 维度渲染独立的 hosts.toml</p>
+   */
+  Mirrors?: Array<RegistryMirror>
+  /**
+   * <p>不安全镜像仓库（跳过证书校验）</p>
+   */
+  InsecureRegistries?: Array<string>
+}
+
+/**
  * ModifyNodePool返回参数结构体
  */
 export interface ModifyNodePoolResponse {
@@ -1275,44 +1324,13 @@ export interface NativeNodePoolInfo {
 }
 
 /**
- * 节点系统盘和数据盘配置
+ * StopMachines返回参数结构体
  */
-export interface Disk {
+export interface StopMachinesResponse {
   /**
-   * 云盘类型
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DiskType: string
-  /**
-   * 云盘大小 (G）
-   */
-  DiskSize: number
-  /**
-   * 是否自动化格式盘并挂载
-   */
-  AutoFormatAndMount?: boolean
-  /**
-   * 文件系统
-   */
-  FileSystem?: string
-  /**
-   * 挂载目录
-   */
-  MountTarget?: string
-  /**
-   * 云盘ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskId?: string
-  /**
-   * 加密系统盘
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Encrypt?: string
-  /**
-   * 自定义 KMS ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KmsKeyId?: string
+  RequestId?: string
 }
 
 /**
@@ -1706,6 +1724,24 @@ export interface Filter {
    * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
    */
   Values: Array<string>
+}
+
+/**
+ * containerd 镜像加速站点
+ */
+export interface RegistryMirror {
+  /**
+   * <p>源仓库，例如 docker.io / registry.k8s.io</p>
+   */
+  Registry: string
+  /**
+   * <p>镜像加速地址列表，按顺序写入 hosts.toml</p>
+   */
+  Endpoints: Array<string>
+  /**
+   * <p>是否在 hosts.toml 中写入 override_path，为 true 时镜像 endpoints 路径不再追加 namespace 后缀</p>
+   */
+  OverridePath?: boolean
 }
 
 /**
@@ -2470,6 +2506,10 @@ export interface UpdateNativeNodePoolParam {
    * <p>原生节点池密码</p>
    */
   Password?: string
+  /**
+   * <p>节点的 containerd 镜像仓库定制（仅 containerd 运行时生效）</p>
+   */
+  Registry?: RegistryConfig
   /**
    * <p>自定义镜像 ID</p>
    */

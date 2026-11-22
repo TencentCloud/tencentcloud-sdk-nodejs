@@ -52,7 +52,7 @@ import {
   RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse,
   AIGWRerankMaxDocumentsConfig,
   DefaultKongRoute,
-  KeyValue,
+  DescribeAIGWLLMModelAPIIPRestrictionRequest,
   AIGWKVMatch,
   AIGWLengthLimitConfig,
   CNAPIGwAIServiceSourceList,
@@ -192,7 +192,7 @@ import {
   DeleteCloudNativeAPIGatewayMCPToolVersionRequest,
   ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
   DescribeCloudNativeAPIGatewayMCPToolRequest,
-  DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest,
+  AIGWLLMIPRestrictionResult,
   RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
   CreateCloudNativeAPIGatewaySecretKeyRequest,
   AIGWQuotaDetail,
@@ -222,6 +222,7 @@ import {
   CompareCloudNativeAPIGatewayMCPToolVersionRequest,
   UpdateCloudNativeAPIGatewayMCPToolsResponse,
   AddCloudNativeAPIGatewayConsumerInGroupRequest,
+  KeyValue,
   CreateCloudNativeAPIGatewayConsumerResponse,
   AIGWMCPRoute,
   CustomGuardrailResourceRefInput,
@@ -229,6 +230,7 @@ import {
   DeleteCloudNativeAPIGatewayLLMModelAPIResponse,
   CustomGuardrailPolicy,
   AIGWSimpleSecretKey,
+  ModifyAIGWLLMModelAPIIPRestrictionRequest,
   DescribeCloudNativeAPIGatewayMCPServerAuthRequest,
   DescribeCloudNativeAPIGatewayMCPServerListResponse,
   AIGWLLMTokenUsageListResult,
@@ -250,6 +252,7 @@ import {
   DescribeCloudNativeAPIGatewayMCPServerACLResponse,
   DescribeCloudNativeAPIGatewayAIServiceSourceListResponse,
   ModifyCloudNativeAPIGatewayMCPServerRequest,
+  DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest,
   DescribeAIGWCustomGuardrailPolicyListResult,
   DescribeCloudNativeAPIGatewayMCPRouteListRequest,
   ModifyCloudNativeAPIGatewayMCPServerResponse,
@@ -326,6 +329,7 @@ import {
   KongUserTagKV,
   CustomGuardrailDecisionConfig,
   DeleteCloudNativeAPIGatewayAIServiceSourceRequest,
+  ModifyAIGWLLMModelAPIIPRestrictionResponse,
   ModifyCloudNativeAPIGatewayLLMModelServiceResponse,
   CustomGuardrailPolicyFilter,
   CreateCloudNativeAPIGatewayLLMModelAPIResponse,
@@ -333,6 +337,7 @@ import {
   AIGWGatewayVerifyConfig,
   DeleteCloudNativeAPIGatewaySecretKeyRequest,
   CreateCloudNativeAPIGatewayAIServiceSourceResponse,
+  DescribeAIGWLLMModelAPIIPRestrictionResponse,
   DeleteCloudNativeAPIGatewayLLMModelServiceRequest,
   DeleteCloudNativeAPIGatewayIPRestrictionResponse,
   DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest,
@@ -379,57 +384,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传插件前置操作，获取COS相关信息
-   */
-  async ModifyCloudNativeAPIGatewayMCPRoute(
-    req: ModifyCloudNativeAPIGatewayMCPRouteRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPRouteResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPRouteResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPRoute", req, cb)
-  }
-
-  /**
-   * 为资源（模型 API / MCP Server）添加消费者组授权。
-   */
-  async AddCloudNativeAPIGatewayConsumerGroupAuth(
-    req: AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
-    cb?: (error: string, rep: AddCloudNativeAPIGatewayConsumerGroupAuthResponse) => void
-  ): Promise<AddCloudNativeAPIGatewayConsumerGroupAuthResponse> {
-    return this.request("AddCloudNativeAPIGatewayConsumerGroupAuth", req, cb)
-  }
-
-  /**
-   * 删除AI网关MCP服务
-   */
-  async DeleteCloudNativeAPIGatewayMCPServer(
-    req: DeleteCloudNativeAPIGatewayMCPServerRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPServerResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewayMCPServerResponse> {
-    return this.request("DeleteCloudNativeAPIGatewayMCPServer", req, cb)
-  }
-
-  /**
-     * 创建消费者密钥。
-【消费者批量自动分配 API Key｜修改：内部并发/配额逻辑，字段不变】消费者密钥单条创建在事务中使用与批量预留相同的实例写锁，配额检查使用当前锁定读，避免单条与批量并发绕过配额。仍是单条创建；原 GenerateType、请求字段、既有配额错误语义及 Result.Success/ID 不变，不增加 ConsumerIds/ClientToken。
-     */
-  async CreateCloudNativeAPIGatewaySecretKey(
-    req: CreateCloudNativeAPIGatewaySecretKeyRequest,
-    cb?: (error: string, rep: CreateCloudNativeAPIGatewaySecretKeyResponse) => void
-  ): Promise<CreateCloudNativeAPIGatewaySecretKeyResponse> {
-    return this.request("CreateCloudNativeAPIGatewaySecretKey", req, cb)
-  }
-
-  /**
-   * 修改 MCP Server ACL
-   */
-  async ModifyCloudNativeAPIGatewayMCPServerACL(
-    req: ModifyCloudNativeAPIGatewayMCPServerACLRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerACLResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPServerACLResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPServerACL", req, cb)
-  }
-
-  /**
      * 按一种业务资源类型分页查询绑定候选及 Route 占用情况。编辑策略时传 PolicyId 排除自身占用，选择时同时检查 Supported 和 Occupied。当前屏蔽的 Dify/Custom Agent、Legacy SSE MCP 不进入可绑定列表。创建策略时使用 ResourceId，不使用 RouteIds。
 
 本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
@@ -442,15 +396,74 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 从网关 RuntimeEventLog 对应 CLS 主题分页查询审核记录，调用前需开启日志投递。按时间倒序返回，查询时间入参为 Unix 秒，记录 Timestamp 为 Unix 毫秒；同一流式业务请求可有多次审核记录。当前查询无导出接口的 1000 条截断限制，使用 Offset/Limit 翻页。
+   * 修改云原生智能网关MCP Tool
+   */
+  async RollbackCloudNativeAPIGatewayMCPToolVersion(
+    req: RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
+    cb?: (error: string, rep: RollbackCloudNativeAPIGatewayMCPToolVersionResponse) => void
+  ): Promise<RollbackCloudNativeAPIGatewayMCPToolVersionResponse> {
+    return this.request("RollbackCloudNativeAPIGatewayMCPToolVersion", req, cb)
+  }
 
-本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+  /**
+   * 修改 LLM 模型 API。
+   */
+  async ModifyCloudNativeAPIGatewayLLMModelAPI(
+    req: ModifyCloudNativeAPIGatewayLLMModelAPIRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayLLMModelAPIResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayLLMModelAPIResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayLLMModelAPI", req, cb)
+  }
+
+  /**
+   * 查看 MCP Server ACL
+   */
+  async DescribeCloudNativeAPIGatewayMCPServerACL(
+    req: DescribeCloudNativeAPIGatewayMCPServerACLRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPServerACLResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPServerACLResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPServerACL", req, cb)
+  }
+
+  /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async CheckCloudNativeAPIGatewayMCPToolVersionExist(
+    req: CheckCloudNativeAPIGatewayMCPToolVersionExistRequest,
+    cb?: (error: string, rep: CheckCloudNativeAPIGatewayMCPToolVersionExistResponse) => void
+  ): Promise<CheckCloudNativeAPIGatewayMCPToolVersionExistResponse> {
+    return this.request("CheckCloudNativeAPIGatewayMCPToolVersionExist", req, cb)
+  }
+
+  /**
+     * 删除消费者密钥（被绑定时需先解绑）。
+【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，删除返回 OperationDenied.BatchKeyPending。完成后仍执行原绑定/依赖删除检查；原 GatewayId/SecretKeyId 不变，成功不新增业务 Result。删除已生成密钥不改写批次历史成功，后续批次明文读取返回逐项 ResourceNotFound.SecretKey。
      */
-  async DescribeAIGWCustomGuardrailHits(
-    req: DescribeAIGWCustomGuardrailHitsRequest,
-    cb?: (error: string, rep: DescribeAIGWCustomGuardrailHitsResponse) => void
-  ): Promise<DescribeAIGWCustomGuardrailHitsResponse> {
-    return this.request("DescribeAIGWCustomGuardrailHits", req, cb)
+  async DeleteCloudNativeAPIGatewaySecretKey(
+    req: DeleteCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("DeleteCloudNativeAPIGatewaySecretKey", req, cb)
+  }
+
+  /**
+   * 查询单个 LLM 模型服务详情。
+   */
+  async DescribeCloudNativeAPIGatewayLLMModelService(
+    req: DescribeCloudNativeAPIGatewayLLMModelServiceRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelServiceResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayLLMModelServiceResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayLLMModelService", req, cb)
+  }
+
+  /**
+   * 查询 AI 网关 Token 用量汇总。网关版本不低于 3.9.8 且 Dimension=ConsumerGroup 时，按历史归属对日志并集去重统计；无节点筛选则查询全部成功归属且祖先集合非空的日志，不依赖当前组织目录候选。返回一份汇总，TopConsumers 为空数组。 网关版本不低于 3.9.8 时，所有支持维度的消费者组筛选统一为 ConsumerGroupId / ConsumerGroupName，均按历史归属查询；旧 OrganizationNodeId / OrganizationNodeName 筛选不再接受。
+   */
+  async DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics(
+    req: DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics", req, cb)
   }
 
   /**
@@ -466,33 +479,82 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云原生网关AI服务来源
-   */
-  async CreateCloudNativeAPIGatewayAIServiceSource(
-    req: CreateCloudNativeAPIGatewayAIServiceSourceRequest,
-    cb?: (error: string, rep: CreateCloudNativeAPIGatewayAIServiceSourceResponse) => void
-  ): Promise<CreateCloudNativeAPIGatewayAIServiceSourceResponse> {
-    return this.request("CreateCloudNativeAPIGatewayAIServiceSource", req, cb)
+     * 创建自定义外部审核策略，并把资源绑定配置同步到 Kong Route。建议先调用 DescribeAIGWCustomGuardrailCapabilities、DescribeAIGWCustomGuardrailBindableResources 和 TestAIGWCustomGuardrailPolicy。支持模型 API、MCP Streamable HTTP、A2A Agent API；当前不开放 Dify、Custom Agent、Legacy SSE MCP。请检查 Result.Success、SyncStatus、FailedResources；部分同步失败不等于策略未创建，应按返回 PolicyId 查询并处理，避免重复创建。网关需满足最低版本 3.9.6，且已安装、启用并加载 cngw-ai-custom-guardrail。创建、修改、删除要求网关处于稳定 Running 状态，升级/回滚/撤销升级期间不能修改策略。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+
+输入约束：新配置只接受 field_mapping，不再默认为 standard_v2。创建时鉴权和检测行为必须完整填写；修改为 PATCH，省略保留，显式空值不补默认值。存量 standard_v2 策略仍可查询、删除或直接停用；修改其判定配置或重新启用前需迁移到 field_mapping。条件必填由后端按完整配置校验，非法配置不写库、不下发。
+     */
+  async CreateAIGWCustomGuardrailPolicy(
+    req: CreateAIGWCustomGuardrailPolicyRequest,
+    cb?: (error: string, rep: CreateAIGWCustomGuardrailPolicyResponse) => void
+  ): Promise<CreateAIGWCustomGuardrailPolicyResponse> {
+    return this.request("CreateAIGWCustomGuardrailPolicy", req, cb)
   }
 
   /**
-   * 从资源（模型 API / MCP Server）移除消费者组授权。
-   */
-  async RemoveCloudNativeAPIGatewayConsumerGroupAuth(
-    req: RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
-    cb?: (error: string, rep: RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse) => void
-  ): Promise<RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse> {
-    return this.request("RemoveCloudNativeAPIGatewayConsumerGroupAuth", req, cb)
+     * 查询当前控制面支持的协议分类、业务资源类型、审核方向及限制。会校验网关版本和插件可用性。Limits 是能力说明，不等于创建/修改策略可配置的字段，也不是逐个数据面实例的实时状态。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailCapabilities(
+    req: DescribeAIGWCustomGuardrailCapabilitiesRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailCapabilitiesResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailCapabilitiesResponse> {
+    return this.request("DescribeAIGWCustomGuardrailCapabilities", req, cb)
   }
 
   /**
-   * 删除AI网关MCP Tool
+   * 批量导入从OpenAPI文件中解析的MCP Tools
    */
-  async DeleteCloudNativeAPIGatewayMCPTool(
-    req: DeleteCloudNativeAPIGatewayMCPToolRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPToolResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewayMCPToolResponse> {
-    return this.request("DeleteCloudNativeAPIGatewayMCPTool", req, cb)
+  async UpdateCloudNativeAPIGatewayMCPTools(
+    req: UpdateCloudNativeAPIGatewayMCPToolsRequest,
+    cb?: (error: string, rep: UpdateCloudNativeAPIGatewayMCPToolsResponse) => void
+  ): Promise<UpdateCloudNativeAPIGatewayMCPToolsResponse> {
+    return this.request("UpdateCloudNativeAPIGatewayMCPTools", req, cb)
+  }
+
+  /**
+   * 创建AI 网关MCP Server
+   */
+  async ModifyCloudNativeAPIGatewayMCPServerStatus(
+    req: ModifyCloudNativeAPIGatewayMCPServerStatusRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerStatusResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPServerStatusResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPServerStatus", req, cb)
+  }
+
+  /**
+     * 查询已有策略、脱敏鉴权配置、资源绑定与配置同步状态。Result 本身就是策略对象，不是 Result.Policy。密钥不返回明文，编辑时省略 ApiKey 即可保留。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailPolicy(
+    req: DescribeAIGWCustomGuardrailPolicyRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailPolicyResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailPolicyResponse> {
+    return this.request("DescribeAIGWCustomGuardrailPolicy", req, cb)
+  }
+
+  /**
+     * 添加密钥与资源的引用关系接口
+【消费者批量自动分配 API Key｜修改：内部并发/配额逻辑，字段不变】ResourceType=Consumer 时与批量预留共用实例写锁，单消费者绑定配额使用当前锁定读。仍按原 SecretKeyId、ResourceIds 绑定；消费者目标最多一个，单密钥不能同时绑定多个消费者，成功仍返回 Result=true。此入口不新增 OperationDenied.BatchKeyPending；该错误属于下述四个变更入口的保护逻辑。
+     */
+  async BindCloudNativeAPIGatewaySecretKey(
+    req: BindCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: BindCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<BindCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("BindCloudNativeAPIGatewaySecretKey", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async DeleteCloudNativeAPIGatewayMCPRoute(
+    req: DeleteCloudNativeAPIGatewayMCPRouteRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPRouteResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayMCPRouteResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayMCPRoute", req, cb)
   }
 
   /**
@@ -508,36 +570,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生智能网关MCP Tool
-   */
-  async DescribeCloudNativeAPIGatewayMCPToolVersion(
-    req: DescribeCloudNativeAPIGatewayMCPToolVersionRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolVersionResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPToolVersionResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPToolVersion", req, cb)
-  }
-
-  /**
-   * 修改消费者组。
-   */
-  async ModifyCloudNativeAPIGatewayConsumerGroup(
-    req: ModifyCloudNativeAPIGatewayConsumerGroupRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerGroupResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayConsumerGroupResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayConsumerGroup", req, cb)
-  }
-
-  /**
-   * 创建 LLM 模型 API。
-   */
-  async CreateCloudNativeAPIGatewayLLMModelAPI(
-    req: CreateCloudNativeAPIGatewayLLMModelAPIRequest,
-    cb?: (error: string, rep: CreateCloudNativeAPIGatewayLLMModelAPIResponse) => void
-  ): Promise<CreateCloudNativeAPIGatewayLLMModelAPIResponse> {
-    return this.request("CreateCloudNativeAPIGatewayLLMModelAPI", req, cb)
-  }
-
-  /**
    * 查询单个 LLM 模型 API 详情。
    */
   async DescribeCloudNativeAPIGatewayLLMModelAPI(
@@ -545,56 +577,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelAPIResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayLLMModelAPIResponse> {
     return this.request("DescribeCloudNativeAPIGatewayLLMModelAPI", req, cb)
-  }
-
-  /**
-   * 修改 MCP Server Tool ACL
-   */
-  async ModifyCloudNativeAPIGatewayMCPToolACL(
-    req: ModifyCloudNativeAPIGatewayMCPToolACLRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPToolACLResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPToolACLResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPToolACL", req, cb)
-  }
-
-  /**
-   * AI网关修改MCP Tool上下线状态
-   */
-  async ModifyCloudNativeAPIGatewayMCPToolStatus(
-    req: ModifyCloudNativeAPIGatewayMCPToolStatusRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPToolStatusResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPToolStatusResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPToolStatus", req, cb)
-  }
-
-  /**
-   * 查询批量导入MCP Tools的任务进度
-   */
-  async DescribeCloudNativeAPIGatewayMCPToolImportTask(
-    req: DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPToolImportTask", req, cb)
-  }
-
-  /**
-   * 修改MCP服务配置
-   */
-  async ModifyCloudNativeAPIGatewayMCPServer(
-    req: ModifyCloudNativeAPIGatewayMCPServerRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPServerResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPServer", req, cb)
-  }
-
-  /**
-   * 删除云原生网关AI服务来源
-   */
-  async DeleteCloudNativeAPIGatewayAIServiceSource(
-    req: DeleteCloudNativeAPIGatewayAIServiceSourceRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayAIServiceSourceResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewayAIServiceSourceResponse> {
-    return this.request("DeleteCloudNativeAPIGatewayAIServiceSource", req, cb)
   }
 
   /**
@@ -607,48 +589,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConsumerGroupResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayConsumerGroupResponse> {
     return this.request("DescribeCloudNativeAPIGatewayConsumerGroup", req, cb)
-  }
-
-  /**
-     * 从 RuntimeEventLog 对应 CLS 主题同步导出审核记录，需先开启投递。单次最多 1000 条，可选择 csv（默认）或 json；Result.Content 是 Base64 编码文件内容，不是下载链接。Truncated=true 时可能还有更多记录，请缩小时间范围分别导出。
-
-本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
-     */
-  async ExportAIGWCustomGuardrailHits(
-    req: ExportAIGWCustomGuardrailHitsRequest,
-    cb?: (error: string, rep: ExportAIGWCustomGuardrailHitsResponse) => void
-  ): Promise<ExportAIGWCustomGuardrailHitsResponse> {
-    return this.request("ExportAIGWCustomGuardrailHits", req, cb)
-  }
-
-  /**
-   * 查看 MCP Server ACL
-   */
-  async DescribeCloudNativeAPIGatewayMCPServerACL(
-    req: DescribeCloudNativeAPIGatewayMCPServerACLRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPServerACLResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPServerACLResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPServerACL", req, cb)
-  }
-
-  /**
-   * 查询云原生网关 MCP Server 下所有 Tool 的 ACL 状态一览（含 Server ACLType 回显）。
-   */
-  async DescribeCloudNativeAPIGatewayMCPToolACLList(
-    req: DescribeCloudNativeAPIGatewayMCPToolACLListRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolACLListResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPToolACLListResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPToolACLList", req, cb)
-  }
-
-  /**
-   * 修改云原生智能网关MCP Tool
-   */
-  async CheckCloudNativeAPIGatewayMCPToolVersionExist(
-    req: CheckCloudNativeAPIGatewayMCPToolVersionExistRequest,
-    cb?: (error: string, rep: CheckCloudNativeAPIGatewayMCPToolVersionExistResponse) => void
-  ): Promise<CheckCloudNativeAPIGatewayMCPToolVersionExistResponse> {
-    return this.request("CheckCloudNativeAPIGatewayMCPToolVersionExist", req, cb)
   }
 
   /**
@@ -682,18 +622,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 按网关分页查询策略；Limit 必填，范围 1～100，Offset 默认 0。支持名称/描述搜索及配置过滤；同项多值 OR，不同过滤项 AND。Result.DataList 为策略数组。
-
-本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
-     */
-  async DescribeAIGWCustomGuardrailPolicyList(
-    req: DescribeAIGWCustomGuardrailPolicyListRequest,
-    cb?: (error: string, rep: DescribeAIGWCustomGuardrailPolicyListResponse) => void
-  ): Promise<DescribeAIGWCustomGuardrailPolicyListResponse> {
-    return this.request("DescribeAIGWCustomGuardrailPolicyList", req, cb)
-  }
-
-  /**
    * 上传插件前置操作，获取COS相关信息
    */
   async DescribeCloudNativeAPIGatewayMCPRouteList(
@@ -704,57 +632,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将消费者添加到消费者组。
+   * 修改MCP服务配置
    */
-  async AddCloudNativeAPIGatewayConsumerInGroup(
-    req: AddCloudNativeAPIGatewayConsumerInGroupRequest,
-    cb?: (error: string, rep: AddCloudNativeAPIGatewayConsumerInGroupResponse) => void
-  ): Promise<AddCloudNativeAPIGatewayConsumerInGroupResponse> {
-    return this.request("AddCloudNativeAPIGatewayConsumerInGroup", req, cb)
-  }
-
-  /**
-   * 修改AI网关消费者
-   */
-  async ModifyCloudNativeAPIGatewayConsumer(
-    req: ModifyCloudNativeAPIGatewayConsumerRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayConsumerResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayConsumer", req, cb)
-  }
-
-  /**
-   * 查询云原生网关服务和路由列表
-   */
-  async DescribeCNGWServicesWithRoutes(
-    req: DescribeCNGWServicesWithRoutesRequest,
-    cb?: (error: string, rep: DescribeCNGWServicesWithRoutesResponse) => void
-  ): Promise<DescribeCNGWServicesWithRoutesResponse> {
-    return this.request("DescribeCNGWServicesWithRoutes", req, cb)
-  }
-
-  /**
-   * 查询云原生网关AI服务来源
-   */
-  async DescribeCloudNativeAPIGatewayAIServiceSourceList(
-    req: DescribeCloudNativeAPIGatewayAIServiceSourceListRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayAIServiceSourceListResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayAIServiceSourceListResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayAIServiceSourceList", req, cb)
-  }
-
-  /**
-     * 局部修改已有策略并重新同步。省略字段保留原值，显式 false/0/[] 与省略不同；数组按整体替换，Scope 传入时替换完整范围。切换 AddressMode 时会自动清除未显式传入的另一模式地址字段；AuthType=none 会清除已有密钥并默认清空 HeaderName。请检查 Result.Success 和 FailedResources。网关需满足最低版本 3.9.6，且已安装、启用并加载 cngw-ai-custom-guardrail。创建、修改、删除要求网关处于稳定 Running 状态，升级/回滚/撤销升级期间不能修改策略。
-
-本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
-
-输入约束：新配置只接受 field_mapping，不再默认为 standard_v2。创建时鉴权和检测行为必须完整填写；修改为 PATCH，省略保留，显式空值不补默认值。存量 standard_v2 策略仍可查询、删除或直接停用；修改其判定配置或重新启用前需迁移到 field_mapping。条件必填由后端按完整配置校验，非法配置不写库、不下发。
-     */
-  async ModifyAIGWCustomGuardrailPolicy(
-    req: ModifyAIGWCustomGuardrailPolicyRequest,
-    cb?: (error: string, rep: ModifyAIGWCustomGuardrailPolicyResponse) => void
-  ): Promise<ModifyAIGWCustomGuardrailPolicyResponse> {
-    return this.request("ModifyAIGWCustomGuardrailPolicy", req, cb)
+  async ModifyCloudNativeAPIGatewayMCPServer(
+    req: ModifyCloudNativeAPIGatewayMCPServerRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPServerResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPServer", req, cb)
   }
 
   /**
@@ -768,16 +652,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 MCP Server 的认证配置
-   */
-  async DescribeCloudNativeAPIGatewayMCPServerAuth(
-    req: DescribeCloudNativeAPIGatewayMCPServerAuthRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPServerAuthResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPServerAuthResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPServerAuth", req, cb)
-  }
-
-  /**
    * 删除 LLM 模型 API。
    */
   async DeleteCloudNativeAPIGatewayLLMModelAPI(
@@ -788,151 +662,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 删除消费者密钥（被绑定时需先解绑）。
-【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，删除返回 OperationDenied.BatchKeyPending。完成后仍执行原绑定/依赖删除检查；原 GatewayId/SecretKeyId 不变，成功不新增业务 Result。删除已生成密钥不改写批次历史成功，后续批次明文读取返回逐项 ResourceNotFound.SecretKey。
-     */
-  async DeleteCloudNativeAPIGatewaySecretKey(
-    req: DeleteCloudNativeAPIGatewaySecretKeyRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewaySecretKeyResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewaySecretKeyResponse> {
-    return this.request("DeleteCloudNativeAPIGatewaySecretKey", req, cb)
-  }
-
-  /**
-     * 解绑密钥
-【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，解绑返回 OperationDenied.BatchKeyPending。完成后继续原解绑；原 GatewayId/SecretKeyId/ResourceType/ResourceIds 不变，成功不新增业务 Result。解绑不改写批次历史成功，后续批次明文读取返回逐项 OperationDenied.BindingChanged。
-     */
-  async UnbindCloudNativeAPIGatewaySecretKey(
-    req: UnbindCloudNativeAPIGatewaySecretKeyRequest,
-    cb?: (error: string, rep: UnbindCloudNativeAPIGatewaySecretKeyResponse) => void
-  ): Promise<UnbindCloudNativeAPIGatewaySecretKeyResponse> {
-    return this.request("UnbindCloudNativeAPIGatewaySecretKey", req, cb)
-  }
-
-  /**
-   * 查询单个 LLM 模型服务详情。
+   * 修改云原生网关AI服务来源
    */
-  async DescribeCloudNativeAPIGatewayLLMModelService(
-    req: DescribeCloudNativeAPIGatewayLLMModelServiceRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelServiceResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayLLMModelServiceResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayLLMModelService", req, cb)
-  }
-
-  /**
-   * 从OpenAPI文件中解析出可导入的MCP tools
-   */
-  async DescribeCloudNativeAPIGatewayMCPToolsFromFile(
-    req: DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPToolsFromFile", req, cb)
-  }
-
-  /**
-   * 修改 LLM 模型 API。
-   */
-  async ModifyCloudNativeAPIGatewayLLMModelAPI(
-    req: ModifyCloudNativeAPIGatewayLLMModelAPIRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayLLMModelAPIResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayLLMModelAPIResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayLLMModelAPI", req, cb)
-  }
-
-  /**
-   * 查询 AI 网关 Token 用量汇总。网关版本不低于 3.9.8 且 Dimension=ConsumerGroup 时，按历史归属对日志并集去重统计；无节点筛选则查询全部成功归属且祖先集合非空的日志，不依赖当前组织目录候选。返回一份汇总，TopConsumers 为空数组。 网关版本不低于 3.9.8 时，所有支持维度的消费者组筛选统一为 ConsumerGroupId / ConsumerGroupName，均按历史归属查询；旧 OrganizationNodeId / OrganizationNodeName 筛选不再接受。
-   */
-  async DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics(
-    req: DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics", req, cb)
-  }
-
-  /**
-   * 将消费者从消费者组移除。
-   */
-  async RemoveCloudNativeAPIGatewayConsumerInGroup(
-    req: RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
-    cb?: (error: string, rep: RemoveCloudNativeAPIGatewayConsumerInGroupResponse) => void
-  ): Promise<RemoveCloudNativeAPIGatewayConsumerInGroupResponse> {
-    return this.request("RemoveCloudNativeAPIGatewayConsumerInGroup", req, cb)
-  }
-
-  /**
-   * 创建AI 网关消费者组
-   */
-  async CreateCloudNativeAPIGatewayConsumerGroup(
-    req: CreateCloudNativeAPIGatewayConsumerGroupRequest,
-    cb?: (error: string, rep: CreateCloudNativeAPIGatewayConsumerGroupResponse) => void
-  ): Promise<CreateCloudNativeAPIGatewayConsumerGroupResponse> {
-    return this.request("CreateCloudNativeAPIGatewayConsumerGroup", req, cb)
-  }
-
-  /**
-   * 删除云原生网关访问控制
-   */
-  async DeleteCloudNativeAPIGatewayIPRestriction(
-    req: DeleteCloudNativeAPIGatewayIPRestrictionRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayIPRestrictionResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewayIPRestrictionResponse> {
-    return this.request("DeleteCloudNativeAPIGatewayIPRestriction", req, cb)
-  }
-
-  /**
-   * 查看AI网关MCP Tool
-   */
-  async DescribeCloudNativeAPIGatewayMCPTool(
-    req: DescribeCloudNativeAPIGatewayMCPToolRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPToolResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPTool", req, cb)
-  }
-
-  /**
-   * 上传插件前置操作，获取COS相关信息
-   */
-  async CreateCloudNativeAPIGatewayMCPRoute(
-    req: CreateCloudNativeAPIGatewayMCPRouteRequest,
-    cb?: (error: string, rep: CreateCloudNativeAPIGatewayMCPRouteResponse) => void
-  ): Promise<CreateCloudNativeAPIGatewayMCPRouteResponse> {
-    return this.request("CreateCloudNativeAPIGatewayMCPRoute", req, cb)
-  }
-
-  /**
-     * 创建自定义外部审核策略，并把资源绑定配置同步到 Kong Route。建议先调用 DescribeAIGWCustomGuardrailCapabilities、DescribeAIGWCustomGuardrailBindableResources 和 TestAIGWCustomGuardrailPolicy。支持模型 API、MCP Streamable HTTP、A2A Agent API；当前不开放 Dify、Custom Agent、Legacy SSE MCP。请检查 Result.Success、SyncStatus、FailedResources；部分同步失败不等于策略未创建，应按返回 PolicyId 查询并处理，避免重复创建。网关需满足最低版本 3.9.6，且已安装、启用并加载 cngw-ai-custom-guardrail。创建、修改、删除要求网关处于稳定 Running 状态，升级/回滚/撤销升级期间不能修改策略。
-
-本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
-
-输入约束：新配置只接受 field_mapping，不再默认为 standard_v2。创建时鉴权和检测行为必须完整填写；修改为 PATCH，省略保留，显式空值不补默认值。存量 standard_v2 策略仍可查询、删除或直接停用；修改其判定配置或重新启用前需迁移到 field_mapping。条件必填由后端按完整配置校验，非法配置不写库、不下发。
-     */
-  async CreateAIGWCustomGuardrailPolicy(
-    req: CreateAIGWCustomGuardrailPolicyRequest,
-    cb?: (error: string, rep: CreateAIGWCustomGuardrailPolicyResponse) => void
-  ): Promise<CreateAIGWCustomGuardrailPolicyResponse> {
-    return this.request("CreateAIGWCustomGuardrailPolicy", req, cb)
-  }
-
-  /**
-   * 创建或编辑云原生网关访问控制
-   */
-  async CreateOrModifyCloudNativeAPIGatewayIPRestriction(
-    req: CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest,
-    cb?: (error: string, rep: CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse) => void
-  ): Promise<CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse> {
-    return this.request("CreateOrModifyCloudNativeAPIGatewayIPRestriction", req, cb)
-  }
-
-  /**
-     * 查询当前控制面支持的协议分类、业务资源类型、审核方向及限制。会校验网关版本和插件可用性。Limits 是能力说明，不等于创建/修改策略可配置的字段，也不是逐个数据面实例的实时状态。
-
-本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
-     */
-  async DescribeAIGWCustomGuardrailCapabilities(
-    req: DescribeAIGWCustomGuardrailCapabilitiesRequest,
-    cb?: (error: string, rep: DescribeAIGWCustomGuardrailCapabilitiesResponse) => void
-  ): Promise<DescribeAIGWCustomGuardrailCapabilitiesResponse> {
-    return this.request("DescribeAIGWCustomGuardrailCapabilities", req, cb)
+  async ModifyCloudNativeAPIGatewayAIServiceSource(
+    req: ModifyCloudNativeAPIGatewayAIServiceSourceRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayAIServiceSourceResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayAIServiceSourceResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayAIServiceSource", req, cb)
   }
 
   /**
@@ -956,65 +692,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改AI网关MCP Tool
+   * 修改云原生智能网关MCP Tool
    */
-  async ModifyCloudNativeAPIGatewayMCPTool(
-    req: ModifyCloudNativeAPIGatewayMCPToolRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPToolResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPToolResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPTool", req, cb)
+  async DescribeCloudNativeAPIGatewayMCPToolVersionList(
+    req: DescribeCloudNativeAPIGatewayMCPToolVersionListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolVersionListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolVersionListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolVersionList", req, cb)
   }
 
   /**
-   * 批量导入从OpenAPI文件中解析的MCP Tools
+   * 查看AI网关MCP Tool
    */
-  async UpdateCloudNativeAPIGatewayMCPTools(
-    req: UpdateCloudNativeAPIGatewayMCPToolsRequest,
-    cb?: (error: string, rep: UpdateCloudNativeAPIGatewayMCPToolsResponse) => void
-  ): Promise<UpdateCloudNativeAPIGatewayMCPToolsResponse> {
-    return this.request("UpdateCloudNativeAPIGatewayMCPTools", req, cb)
-  }
-
-  /**
-     * 查询密钥列表。
-普通版批量新建密钥的生成来源扩展：新页面按需 IncludeCreationInfo=true，省略/false 保持原响应字段。原 GenerateType 不新增 Batch；批量记录仍为 System。
-【消费者批量自动分配 API Key｜修改：可选参数、可选出参及筛选】增加可选 IncludeCreationInfo（默认 false）。仅 true 且 ResourceType=Consumer 时在原 Result.SecretKeys[] 增加 CredentialGenerateType、CreationSource、BatchId 三个非必返字段；Result.TotalCount/SecretKeys 结构不变。Filters 新增 CredentialGenerateType、CreationSource，先过滤后计数分页，与是否返回来源字段独立；保留原 GenerateType 枚举和原分页上限。
-     */
-  async DescribeCloudNativeAPIGatewaySecretKeyList(
-    req: DescribeCloudNativeAPIGatewaySecretKeyListRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyListResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyListResponse> {
-    return this.request("DescribeCloudNativeAPIGatewaySecretKeyList", req, cb)
-  }
-
-  /**
-   * 创建AI 网关MCP Server
-   */
-  async ModifyCloudNativeAPIGatewayMCPServerStatus(
-    req: ModifyCloudNativeAPIGatewayMCPServerStatusRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerStatusResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPServerStatusResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPServerStatus", req, cb)
-  }
-
-  /**
-   * 修改 MCP Server 的认证配置
-   */
-  async ModifyCloudNativeAPIGatewayMCPServerAuth(
-    req: ModifyCloudNativeAPIGatewayMCPServerAuthRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerAuthResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayMCPServerAuthResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayMCPServerAuth", req, cb)
-  }
-
-  /**
-   * 查询密钥明文值（KMS 类型密钥不可获取）。
-   */
-  async DescribeCloudNativeAPIGatewaySecretKeyValue(
-    req: DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyValueResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyValueResponse> {
-    return this.request("DescribeCloudNativeAPIGatewaySecretKeyValue", req, cb)
+  async DescribeCloudNativeAPIGatewayMCPTool(
+    req: DescribeCloudNativeAPIGatewayMCPToolRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPTool", req, cb)
   }
 
   /**
@@ -1028,134 +722,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生智能网关MCP Tool
-   */
-  async DescribeCloudNativeAPIGatewayMCPToolVersionList(
-    req: DescribeCloudNativeAPIGatewayMCPToolVersionListRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolVersionListResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayMCPToolVersionListResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayMCPToolVersionList", req, cb)
-  }
-
-  /**
-   * 创建AI网关MCP Server
-   */
-  async CreateCloudNativeAPIGatewayMCPServer(
-    req: CreateCloudNativeAPIGatewayMCPServerRequest,
-    cb?: (error: string, rep: CreateCloudNativeAPIGatewayMCPServerResponse) => void
-  ): Promise<CreateCloudNativeAPIGatewayMCPServerResponse> {
-    return this.request("CreateCloudNativeAPIGatewayMCPServer", req, cb)
-  }
-
-  /**
-     * 修改AI网关密钥
-【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，编辑返回 OperationDenied.BatchKeyPending，提示等待批次完成。其他情况继续原编辑校验和行为；原 GatewayId/SecretKeyId/Name/Description 不变，成功不新增业务 Result。
-     */
-  async ModifyCloudNativeAPIGatewaySecretKey(
-    req: ModifyCloudNativeAPIGatewaySecretKeyRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewaySecretKeyResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewaySecretKeyResponse> {
-    return this.request("ModifyCloudNativeAPIGatewaySecretKey", req, cb)
-  }
-
-  /**
-   * 查询 AI 网关 Token 用量列表。网关版本不低于 3.9.8 且 Dimension=ConsumerGroup 时，未指定节点筛选则列出 Kong CP 当前目录的全部真实节点，包含同步、自定义、禁用及保留中的软删节点，排除合成展示节点。按当前名称、节点 UUID 升序，先分页节点再查询历史指标；无调用节点仍返回，Token 与请求数补零。节点指标包含历史下属，同一请求可计入多个组行，不能逐行相加作为网关总量。 网关版本不低于 3.9.8 时，所有支持维度的消费者组筛选统一为 ConsumerGroupId / ConsumerGroupName，均按历史归属查询；旧 OrganizationNodeId / OrganizationNodeName 筛选不再接受。
-   */
-  async DescribeCloudNativeAPIGatewayLLMTokenUsageList(
-    req: DescribeCloudNativeAPIGatewayLLMTokenUsageListRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMTokenUsageListResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayLLMTokenUsageListResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayLLMTokenUsageList", req, cb)
-  }
-
-  /**
-     * 查询已有策略、脱敏鉴权配置、资源绑定与配置同步状态。Result 本身就是策略对象，不是 Result.Policy。密钥不返回明文，编辑时省略 ApiKey 即可保留。
-
-本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
-     */
-  async DescribeAIGWCustomGuardrailPolicy(
-    req: DescribeAIGWCustomGuardrailPolicyRequest,
-    cb?: (error: string, rep: DescribeAIGWCustomGuardrailPolicyResponse) => void
-  ): Promise<DescribeAIGWCustomGuardrailPolicyResponse> {
-    return this.request("DescribeAIGWCustomGuardrailPolicy", req, cb)
-  }
-
-  /**
-   * 删除 LLM 模型服务（被模型 API 绑定时需先解绑）。
-   */
-  async DeleteCloudNativeAPIGatewayLLMModelService(
-    req: DeleteCloudNativeAPIGatewayLLMModelServiceRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayLLMModelServiceResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewayLLMModelServiceResponse> {
-    return this.request("DeleteCloudNativeAPIGatewayLLMModelService", req, cb)
-  }
-
-  /**
-     * 查询云原生消费者详情
-
-组织架构扩展：保留原消费者详情与完整字段，ConsumerGroups 补齐对应组织成员关系；同步成员保持目录归属隔离。
-     */
-  async DescribeCloudNativeAPIGatewayConsumer(
-    req: DescribeCloudNativeAPIGatewayConsumerRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConsumerResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayConsumerResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayConsumer", req, cb)
-  }
-
-  /**
-     * 查询密钥详情（SecretValue 字段会被掩码）。
-普通版批量新建密钥的生成来源扩展：新页面按需 IncludeCreationInfo=true，省略/false 保持原响应字段。原 GenerateType 不新增 Batch；批量记录仍为 System。
-【消费者批量自动分配 API Key｜修改：可选参数及可选出参】增加可选 IncludeCreationInfo（默认 false）。仅 true 且 ResourceType=Consumer 时在原 Result 增加 CredentialGenerateType、CreationSource、BatchId 三个非必返字段；省略/false 保持旧响应。原字段、SecretValue 脱敏和单条详情结构不变。
-     */
-  async DescribeCloudNativeAPIGatewaySecretKey(
-    req: DescribeCloudNativeAPIGatewaySecretKeyRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyResponse> {
-    return this.request("DescribeCloudNativeAPIGatewaySecretKey", req, cb)
-  }
-
-  /**
-   * 更新指定网关实例内的 LLM 模型服务，可调整该服务向上游请求压缩响应的协商方式。
-   */
-  async ModifyCloudNativeAPIGatewayLLMModelService(
-    req: ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayLLMModelServiceResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayLLMModelServiceResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayLLMModelService", req, cb)
-  }
-
-  /**
-   * 修改云原生智能网关MCP Tool
-   */
-  async CompareCloudNativeAPIGatewayMCPToolVersion(
-    req: CompareCloudNativeAPIGatewayMCPToolVersionRequest,
-    cb?: (error: string, rep: CompareCloudNativeAPIGatewayMCPToolVersionResponse) => void
-  ): Promise<CompareCloudNativeAPIGatewayMCPToolVersionResponse> {
-    return this.request("CompareCloudNativeAPIGatewayMCPToolVersion", req, cb)
-  }
-
-  /**
-     * 添加密钥与资源的引用关系接口
-【消费者批量自动分配 API Key｜修改：内部并发/配额逻辑，字段不变】ResourceType=Consumer 时与批量预留共用实例写锁，单消费者绑定配额使用当前锁定读。仍按原 SecretKeyId、ResourceIds 绑定；消费者目标最多一个，单密钥不能同时绑定多个消费者，成功仍返回 Result=true。此入口不新增 OperationDenied.BatchKeyPending；该错误属于下述四个变更入口的保护逻辑。
-     */
-  async BindCloudNativeAPIGatewaySecretKey(
-    req: BindCloudNativeAPIGatewaySecretKeyRequest,
-    cb?: (error: string, rep: BindCloudNativeAPIGatewaySecretKeyResponse) => void
-  ): Promise<BindCloudNativeAPIGatewaySecretKeyResponse> {
-    return this.request("BindCloudNativeAPIGatewaySecretKey", req, cb)
-  }
-
-  /**
-   * 修改云原生智能网关MCP Tool
-   */
-  async RollbackCloudNativeAPIGatewayMCPToolVersion(
-    req: RollbackCloudNativeAPIGatewayMCPToolVersionRequest,
-    cb?: (error: string, rep: RollbackCloudNativeAPIGatewayMCPToolVersionResponse) => void
-  ): Promise<RollbackCloudNativeAPIGatewayMCPToolVersionResponse> {
-    return this.request("RollbackCloudNativeAPIGatewayMCPToolVersion", req, cb)
-  }
-
-  /**
    * 查询 LLM 模型服务列表。
    */
   async DescribeCloudNativeAPIGatewayLLMModelServices(
@@ -1166,45 +732,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生网关AI服务来源
+   * 修改消费者组。
    */
-  async ModifyCloudNativeAPIGatewayAIServiceSource(
-    req: ModifyCloudNativeAPIGatewayAIServiceSourceRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayAIServiceSourceResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayAIServiceSourceResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayAIServiceSource", req, cb)
+  async ModifyCloudNativeAPIGatewayConsumerGroup(
+    req: ModifyCloudNativeAPIGatewayConsumerGroupRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerGroupResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayConsumerGroupResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayConsumerGroup", req, cb)
   }
 
   /**
-   * 上传插件前置操作，获取COS相关信息
+   * 查询云原生网关AI服务来源
    */
-  async DeleteCloudNativeAPIGatewayMCPRoute(
-    req: DeleteCloudNativeAPIGatewayMCPRouteRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPRouteResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewayMCPRouteResponse> {
-    return this.request("DeleteCloudNativeAPIGatewayMCPRoute", req, cb)
-  }
-
-  /**
-   * 上传插件前置操作，获取COS相关信息
-   */
-  async CheckCloudNativeAPIGatewayMCPRouteMatch(
-    req: CheckCloudNativeAPIGatewayMCPRouteMatchRequest,
-    cb?: (error: string, rep: CheckCloudNativeAPIGatewayMCPRouteMatchResponse) => void
-  ): Promise<CheckCloudNativeAPIGatewayMCPRouteMatchResponse> {
-    return this.request("CheckCloudNativeAPIGatewayMCPRouteMatch", req, cb)
-  }
-
-  /**
-     * 删除AI网关消费者组
-
-同步组仅在 soft_deleted 状态且全部依赖已清理后允许手动硬删除；ConsumerGroupId 使用组织 UUID。存在配额规则时须先删除规则，单纯停用不能解除依赖。硬删除时重新校验，依赖变化可能导致删除失败。
-     */
-  async DeleteCloudNativeAPIGatewayConsumerGroup(
-    req: DeleteCloudNativeAPIGatewayConsumerGroupRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayConsumerGroupResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewayConsumerGroupResponse> {
-    return this.request("DeleteCloudNativeAPIGatewayConsumerGroup", req, cb)
+  async DescribeCloudNativeAPIGatewayAIServiceSourceList(
+    req: DescribeCloudNativeAPIGatewayAIServiceSourceListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayAIServiceSourceListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayAIServiceSourceListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayAIServiceSourceList", req, cb)
   }
 
   /**
@@ -1228,6 +772,232 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除AI网关MCP服务
+   */
+  async DeleteCloudNativeAPIGatewayMCPServer(
+    req: DeleteCloudNativeAPIGatewayMCPServerRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPServerResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayMCPServerResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayMCPServer", req, cb)
+  }
+
+  /**
+     * 创建消费者密钥。
+【消费者批量自动分配 API Key｜修改：内部并发/配额逻辑，字段不变】消费者密钥单条创建在事务中使用与批量预留相同的实例写锁，配额检查使用当前锁定读，避免单条与批量并发绕过配额。仍是单条创建；原 GenerateType、请求字段、既有配额错误语义及 Result.Success/ID 不变，不增加 ConsumerIds/ClientToken。
+     */
+  async CreateCloudNativeAPIGatewaySecretKey(
+    req: CreateCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("CreateCloudNativeAPIGatewaySecretKey", req, cb)
+  }
+
+  /**
+   * 创建云原生网关AI服务来源
+   */
+  async CreateCloudNativeAPIGatewayAIServiceSource(
+    req: CreateCloudNativeAPIGatewayAIServiceSourceRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayAIServiceSourceResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayAIServiceSourceResponse> {
+    return this.request("CreateCloudNativeAPIGatewayAIServiceSource", req, cb)
+  }
+
+  /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async DescribeCloudNativeAPIGatewayMCPToolVersion(
+    req: DescribeCloudNativeAPIGatewayMCPToolVersionRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolVersionResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolVersionResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolVersion", req, cb)
+  }
+
+  /**
+   * 创建 LLM 模型 API。
+   */
+  async CreateCloudNativeAPIGatewayLLMModelAPI(
+    req: CreateCloudNativeAPIGatewayLLMModelAPIRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayLLMModelAPIResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayLLMModelAPIResponse> {
+    return this.request("CreateCloudNativeAPIGatewayLLMModelAPI", req, cb)
+  }
+
+  /**
+   * 修改 MCP Server Tool ACL
+   */
+  async ModifyCloudNativeAPIGatewayMCPToolACL(
+    req: ModifyCloudNativeAPIGatewayMCPToolACLRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPToolACLResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPToolACLResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPToolACL", req, cb)
+  }
+
+  /**
+   * 删除云原生网关AI服务来源
+   */
+  async DeleteCloudNativeAPIGatewayAIServiceSource(
+    req: DeleteCloudNativeAPIGatewayAIServiceSourceRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayAIServiceSourceResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayAIServiceSourceResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayAIServiceSource", req, cb)
+  }
+
+  /**
+     * 按网关分页查询策略；Limit 必填，范围 1～100，Offset 默认 0。支持名称/描述搜索及配置过滤；同项多值 OR，不同过滤项 AND。Result.DataList 为策略数组。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailPolicyList(
+    req: DescribeAIGWCustomGuardrailPolicyListRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailPolicyListResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailPolicyListResponse> {
+    return this.request("DescribeAIGWCustomGuardrailPolicyList", req, cb)
+  }
+
+  /**
+   * 将消费者从消费者组移除。
+   */
+  async RemoveCloudNativeAPIGatewayConsumerInGroup(
+    req: RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
+    cb?: (error: string, rep: RemoveCloudNativeAPIGatewayConsumerInGroupResponse) => void
+  ): Promise<RemoveCloudNativeAPIGatewayConsumerInGroupResponse> {
+    return this.request("RemoveCloudNativeAPIGatewayConsumerInGroup", req, cb)
+  }
+
+  /**
+   * 查询 MCP Server 的认证配置
+   */
+  async DescribeCloudNativeAPIGatewayMCPServerAuth(
+    req: DescribeCloudNativeAPIGatewayMCPServerAuthRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPServerAuthResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPServerAuthResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPServerAuth", req, cb)
+  }
+
+  /**
+   * 创建AI 网关消费者组
+   */
+  async CreateCloudNativeAPIGatewayConsumerGroup(
+    req: CreateCloudNativeAPIGatewayConsumerGroupRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayConsumerGroupResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayConsumerGroupResponse> {
+    return this.request("CreateCloudNativeAPIGatewayConsumerGroup", req, cb)
+  }
+
+  /**
+   * 删除云原生网关访问控制
+   */
+  async DeleteCloudNativeAPIGatewayIPRestriction(
+    req: DeleteCloudNativeAPIGatewayIPRestrictionRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayIPRestrictionResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayIPRestrictionResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayIPRestriction", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async CreateCloudNativeAPIGatewayMCPRoute(
+    req: CreateCloudNativeAPIGatewayMCPRouteRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayMCPRouteResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayMCPRouteResponse> {
+    return this.request("CreateCloudNativeAPIGatewayMCPRoute", req, cb)
+  }
+
+  /**
+   * 创建或编辑云原生网关访问控制
+   */
+  async CreateOrModifyCloudNativeAPIGatewayIPRestriction(
+    req: CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest,
+    cb?: (error: string, rep: CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse) => void
+  ): Promise<CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse> {
+    return this.request("CreateOrModifyCloudNativeAPIGatewayIPRestriction", req, cb)
+  }
+
+  /**
+   * 将消费者添加到消费者组。
+   */
+  async AddCloudNativeAPIGatewayConsumerInGroup(
+    req: AddCloudNativeAPIGatewayConsumerInGroupRequest,
+    cb?: (error: string, rep: AddCloudNativeAPIGatewayConsumerInGroupResponse) => void
+  ): Promise<AddCloudNativeAPIGatewayConsumerInGroupResponse> {
+    return this.request("AddCloudNativeAPIGatewayConsumerInGroup", req, cb)
+  }
+
+  /**
+   * 修改AI网关MCP Tool
+   */
+  async ModifyCloudNativeAPIGatewayMCPTool(
+    req: ModifyCloudNativeAPIGatewayMCPToolRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPToolResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPToolResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPTool", req, cb)
+  }
+
+  /**
+   * 查询密钥明文值（KMS 类型密钥不可获取）。
+   */
+  async DescribeCloudNativeAPIGatewaySecretKeyValue(
+    req: DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyValueResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyValueResponse> {
+    return this.request("DescribeCloudNativeAPIGatewaySecretKeyValue", req, cb)
+  }
+
+  /**
+     * 修改AI网关密钥
+【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，编辑返回 OperationDenied.BatchKeyPending，提示等待批次完成。其他情况继续原编辑校验和行为；原 GatewayId/SecretKeyId/Name/Description 不变，成功不新增业务 Result。
+     */
+  async ModifyCloudNativeAPIGatewaySecretKey(
+    req: ModifyCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("ModifyCloudNativeAPIGatewaySecretKey", req, cb)
+  }
+
+  /**
+   * 删除 LLM 模型服务（被模型 API 绑定时需先解绑）。
+   */
+  async DeleteCloudNativeAPIGatewayLLMModelService(
+    req: DeleteCloudNativeAPIGatewayLLMModelServiceRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayLLMModelServiceResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayLLMModelServiceResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayLLMModelService", req, cb)
+  }
+
+  /**
+     * 查询密钥详情（SecretValue 字段会被掩码）。
+普通版批量新建密钥的生成来源扩展：新页面按需 IncludeCreationInfo=true，省略/false 保持原响应字段。原 GenerateType 不新增 Batch；批量记录仍为 System。
+【消费者批量自动分配 API Key｜修改：可选参数及可选出参】增加可选 IncludeCreationInfo（默认 false）。仅 true 且 ResourceType=Consumer 时在原 Result 增加 CredentialGenerateType、CreationSource、BatchId 三个非必返字段；省略/false 保持旧响应。原字段、SecretValue 脱敏和单条详情结构不变。
+     */
+  async DescribeCloudNativeAPIGatewaySecretKey(
+    req: DescribeCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("DescribeCloudNativeAPIGatewaySecretKey", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async CheckCloudNativeAPIGatewayMCPRouteMatch(
+    req: CheckCloudNativeAPIGatewayMCPRouteMatchRequest,
+    cb?: (error: string, rep: CheckCloudNativeAPIGatewayMCPRouteMatchResponse) => void
+  ): Promise<CheckCloudNativeAPIGatewayMCPRouteMatchResponse> {
+    return this.request("CheckCloudNativeAPIGatewayMCPRouteMatch", req, cb)
+  }
+
+  /**
+   * 创建或整体覆盖指定模型 API 的 IP 黑白名单配置。PUT 覆盖语义（每次以请求值为最终态）。
+   */
+  async ModifyAIGWLLMModelAPIIPRestriction(
+    req: ModifyAIGWLLMModelAPIIPRestrictionRequest,
+    cb?: (error: string, rep: ModifyAIGWLLMModelAPIIPRestrictionResponse) => void
+  ): Promise<ModifyAIGWLLMModelAPIIPRestrictionResponse> {
+    return this.request("ModifyAIGWLLMModelAPIIPRestriction", req, cb)
+  }
+
+  /**
    * 创建AI网关消费者。
    */
   async CreateCloudNativeAPIGatewayConsumer(
@@ -1235,5 +1005,260 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayConsumerResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayConsumerResponse> {
     return this.request("CreateCloudNativeAPIGatewayConsumer", req, cb)
+  }
+
+  /**
+   * 上传插件前置操作，获取COS相关信息
+   */
+  async ModifyCloudNativeAPIGatewayMCPRoute(
+    req: ModifyCloudNativeAPIGatewayMCPRouteRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPRouteResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPRouteResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPRoute", req, cb)
+  }
+
+  /**
+   * 修改云原生智能网关MCP Tool
+   */
+  async CompareCloudNativeAPIGatewayMCPToolVersion(
+    req: CompareCloudNativeAPIGatewayMCPToolVersionRequest,
+    cb?: (error: string, rep: CompareCloudNativeAPIGatewayMCPToolVersionResponse) => void
+  ): Promise<CompareCloudNativeAPIGatewayMCPToolVersionResponse> {
+    return this.request("CompareCloudNativeAPIGatewayMCPToolVersion", req, cb)
+  }
+
+  /**
+   * 修改 MCP Server ACL
+   */
+  async ModifyCloudNativeAPIGatewayMCPServerACL(
+    req: ModifyCloudNativeAPIGatewayMCPServerACLRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerACLResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPServerACLResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPServerACL", req, cb)
+  }
+
+  /**
+     * 从网关 RuntimeEventLog 对应 CLS 主题分页查询审核记录，调用前需开启日志投递。按时间倒序返回，查询时间入参为 Unix 秒，记录 Timestamp 为 Unix 毫秒；同一流式业务请求可有多次审核记录。当前查询无导出接口的 1000 条截断限制，使用 Offset/Limit 翻页。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async DescribeAIGWCustomGuardrailHits(
+    req: DescribeAIGWCustomGuardrailHitsRequest,
+    cb?: (error: string, rep: DescribeAIGWCustomGuardrailHitsResponse) => void
+  ): Promise<DescribeAIGWCustomGuardrailHitsResponse> {
+    return this.request("DescribeAIGWCustomGuardrailHits", req, cb)
+  }
+
+  /**
+   * 从资源（模型 API / MCP Server）移除消费者组授权。
+   */
+  async RemoveCloudNativeAPIGatewayConsumerGroupAuth(
+    req: RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
+    cb?: (error: string, rep: RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse) => void
+  ): Promise<RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse> {
+    return this.request("RemoveCloudNativeAPIGatewayConsumerGroupAuth", req, cb)
+  }
+
+  /**
+   * 删除AI网关MCP Tool
+   */
+  async DeleteCloudNativeAPIGatewayMCPTool(
+    req: DeleteCloudNativeAPIGatewayMCPToolRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayMCPToolResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayMCPToolResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayMCPTool", req, cb)
+  }
+
+  /**
+   * AI网关修改MCP Tool上下线状态
+   */
+  async ModifyCloudNativeAPIGatewayMCPToolStatus(
+    req: ModifyCloudNativeAPIGatewayMCPToolStatusRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPToolStatusResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPToolStatusResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPToolStatus", req, cb)
+  }
+
+  /**
+     * 解绑密钥
+【消费者批量自动分配 API Key｜修改：新增未完成批次保护，字段不变】目标密钥属于批次且对应项处于 Pending/Running/Reconciling 时，解绑返回 OperationDenied.BatchKeyPending。完成后继续原解绑；原 GatewayId/SecretKeyId/ResourceType/ResourceIds 不变，成功不新增业务 Result。解绑不改写批次历史成功，后续批次明文读取返回逐项 OperationDenied.BindingChanged。
+     */
+  async UnbindCloudNativeAPIGatewaySecretKey(
+    req: UnbindCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: UnbindCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<UnbindCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("UnbindCloudNativeAPIGatewaySecretKey", req, cb)
+  }
+
+  /**
+     * 从 RuntimeEventLog 对应 CLS 主题同步导出审核记录，需先开启投递。单次最多 1000 条，可选择 csv（默认）或 json；Result.Content 是 Base64 编码文件内容，不是下载链接。Truncated=true 时可能还有更多记录，请缩小时间范围分别导出。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+     */
+  async ExportAIGWCustomGuardrailHits(
+    req: ExportAIGWCustomGuardrailHitsRequest,
+    cb?: (error: string, rep: ExportAIGWCustomGuardrailHitsResponse) => void
+  ): Promise<ExportAIGWCustomGuardrailHitsResponse> {
+    return this.request("ExportAIGWCustomGuardrailHits", req, cb)
+  }
+
+  /**
+     * 查询密钥列表。
+普通版批量新建密钥的生成来源扩展：新页面按需 IncludeCreationInfo=true，省略/false 保持原响应字段。原 GenerateType 不新增 Batch；批量记录仍为 System。
+【消费者批量自动分配 API Key｜修改：可选参数、可选出参及筛选】增加可选 IncludeCreationInfo（默认 false）。仅 true 且 ResourceType=Consumer 时在原 Result.SecretKeys[] 增加 CredentialGenerateType、CreationSource、BatchId 三个非必返字段；Result.TotalCount/SecretKeys 结构不变。Filters 新增 CredentialGenerateType、CreationSource，先过滤后计数分页，与是否返回来源字段独立；保留原 GenerateType 枚举和原分页上限。
+     */
+  async DescribeCloudNativeAPIGatewaySecretKeyList(
+    req: DescribeCloudNativeAPIGatewaySecretKeyListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewaySecretKeyList", req, cb)
+  }
+
+  /**
+   * 查询指定模型 API 的 IP 黑白名单配置。
+   */
+  async DescribeAIGWLLMModelAPIIPRestriction(
+    req: DescribeAIGWLLMModelAPIIPRestrictionRequest,
+    cb?: (error: string, rep: DescribeAIGWLLMModelAPIIPRestrictionResponse) => void
+  ): Promise<DescribeAIGWLLMModelAPIIPRestrictionResponse> {
+    return this.request("DescribeAIGWLLMModelAPIIPRestriction", req, cb)
+  }
+
+  /**
+   * 查询批量导入MCP Tools的任务进度
+   */
+  async DescribeCloudNativeAPIGatewayMCPToolImportTask(
+    req: DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolImportTask", req, cb)
+  }
+
+  /**
+   * 修改AI网关消费者
+   */
+  async ModifyCloudNativeAPIGatewayConsumer(
+    req: ModifyCloudNativeAPIGatewayConsumerRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayConsumerResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayConsumer", req, cb)
+  }
+
+  /**
+   * 查询云原生网关服务和路由列表
+   */
+  async DescribeCNGWServicesWithRoutes(
+    req: DescribeCNGWServicesWithRoutesRequest,
+    cb?: (error: string, rep: DescribeCNGWServicesWithRoutesResponse) => void
+  ): Promise<DescribeCNGWServicesWithRoutesResponse> {
+    return this.request("DescribeCNGWServicesWithRoutes", req, cb)
+  }
+
+  /**
+   * 更新指定网关实例内的 LLM 模型服务，可调整该服务向上游请求压缩响应的协商方式。
+   */
+  async ModifyCloudNativeAPIGatewayLLMModelService(
+    req: ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayLLMModelServiceResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayLLMModelServiceResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayLLMModelService", req, cb)
+  }
+
+  /**
+     * 局部修改已有策略并重新同步。省略字段保留原值，显式 false/0/[] 与省略不同；数组按整体替换，Scope 传入时替换完整范围。切换 AddressMode 时会自动清除未显式传入的另一模式地址字段；AuthType=none 会清除已有密钥并默认清空 HeaderName。请检查 Result.Success 和 FailedResources。网关需满足最低版本 3.9.6，且已安装、启用并加载 cngw-ai-custom-guardrail。创建、修改、删除要求网关处于稳定 Running 状态，升级/回滚/撤销升级期间不能修改策略。
+
+本产品为 cngw，版本为 2023-04-18。公共参数及签名按云 API 规范配置；在 API Explorer 选择目标环境，示例正文仅为业务参数，中文诊断示例以公共参数 Language=zh-CN 为前提。响应业务字段统一位于 Response.Result，Response.RequestId 为云 API 请求 ID；HTTP 成功不代表 Result.Success=true。示例 ID、域名和鉴权值均为占位内容，须替换为实际值。
+
+输入约束：新配置只接受 field_mapping，不再默认为 standard_v2。创建时鉴权和检测行为必须完整填写；修改为 PATCH，省略保留，显式空值不补默认值。存量 standard_v2 策略仍可查询、删除或直接停用；修改其判定配置或重新启用前需迁移到 field_mapping。条件必填由后端按完整配置校验，非法配置不写库、不下发。
+     */
+  async ModifyAIGWCustomGuardrailPolicy(
+    req: ModifyAIGWCustomGuardrailPolicyRequest,
+    cb?: (error: string, rep: ModifyAIGWCustomGuardrailPolicyResponse) => void
+  ): Promise<ModifyAIGWCustomGuardrailPolicyResponse> {
+    return this.request("ModifyAIGWCustomGuardrailPolicy", req, cb)
+  }
+
+  /**
+   * 查询云原生网关 MCP Server 下所有 Tool 的 ACL 状态一览（含 Server ACLType 回显）。
+   */
+  async DescribeCloudNativeAPIGatewayMCPToolACLList(
+    req: DescribeCloudNativeAPIGatewayMCPToolACLListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolACLListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolACLListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolACLList", req, cb)
+  }
+
+  /**
+   * 修改 MCP Server 的认证配置
+   */
+  async ModifyCloudNativeAPIGatewayMCPServerAuth(
+    req: ModifyCloudNativeAPIGatewayMCPServerAuthRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayMCPServerAuthResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayMCPServerAuthResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayMCPServerAuth", req, cb)
+  }
+
+  /**
+   * 创建AI网关MCP Server
+   */
+  async CreateCloudNativeAPIGatewayMCPServer(
+    req: CreateCloudNativeAPIGatewayMCPServerRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayMCPServerResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayMCPServerResponse> {
+    return this.request("CreateCloudNativeAPIGatewayMCPServer", req, cb)
+  }
+
+  /**
+   * 查询 AI 网关 Token 用量列表。网关版本不低于 3.9.8 且 Dimension=ConsumerGroup 时，未指定节点筛选则列出 Kong CP 当前目录的全部真实节点，包含同步、自定义、禁用及保留中的软删节点，排除合成展示节点。按当前名称、节点 UUID 升序，先分页节点再查询历史指标；无调用节点仍返回，Token 与请求数补零。节点指标包含历史下属，同一请求可计入多个组行，不能逐行相加作为网关总量。 网关版本不低于 3.9.8 时，所有支持维度的消费者组筛选统一为 ConsumerGroupId / ConsumerGroupName，均按历史归属查询；旧 OrganizationNodeId / OrganizationNodeName 筛选不再接受。
+   */
+  async DescribeCloudNativeAPIGatewayLLMTokenUsageList(
+    req: DescribeCloudNativeAPIGatewayLLMTokenUsageListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMTokenUsageListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayLLMTokenUsageListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayLLMTokenUsageList", req, cb)
+  }
+
+  /**
+     * 查询云原生消费者详情
+
+组织架构扩展：保留原消费者详情与完整字段，ConsumerGroups 补齐对应组织成员关系；同步成员保持目录归属隔离。
+     */
+  async DescribeCloudNativeAPIGatewayConsumer(
+    req: DescribeCloudNativeAPIGatewayConsumerRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConsumerResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayConsumerResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayConsumer", req, cb)
+  }
+
+  /**
+   * 为资源（模型 API / MCP Server）添加消费者组授权。
+   */
+  async AddCloudNativeAPIGatewayConsumerGroupAuth(
+    req: AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
+    cb?: (error: string, rep: AddCloudNativeAPIGatewayConsumerGroupAuthResponse) => void
+  ): Promise<AddCloudNativeAPIGatewayConsumerGroupAuthResponse> {
+    return this.request("AddCloudNativeAPIGatewayConsumerGroupAuth", req, cb)
+  }
+
+  /**
+   * 从OpenAPI文件中解析出可导入的MCP tools
+   */
+  async DescribeCloudNativeAPIGatewayMCPToolsFromFile(
+    req: DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolsFromFile", req, cb)
+  }
+
+  /**
+     * 删除AI网关消费者组
+
+同步组仅在 soft_deleted 状态且全部依赖已清理后允许手动硬删除；ConsumerGroupId 使用组织 UUID。存在配额规则时须先删除规则，单纯停用不能解除依赖。硬删除时重新校验，依赖变化可能导致删除失败。
+     */
+  async DeleteCloudNativeAPIGatewayConsumerGroup(
+    req: DeleteCloudNativeAPIGatewayConsumerGroupRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayConsumerGroupResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayConsumerGroupResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayConsumerGroup", req, cb)
   }
 }
