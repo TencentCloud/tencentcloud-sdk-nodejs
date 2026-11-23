@@ -237,7 +237,7 @@ export interface TextToVoiceRequest {
    */
   ModelType?: number
   /**
-   * <p>音色 ID，包括精品音色、大模型音色与基础版复刻音色。不同音色价格有差异，详情请参见<a href="https://cloud.tencent.com/document/product/1073/34112">购买指南</a>。完整的音色 ID 列表请参见<a href="https://cloud.tencent.com/document/product/1073/92668">音色列表</a>。<br>若使用一句话版声音复刻，请填入固定值“200000000”。</p>
+   * <p>音色 ID，包括精品音色、大模型音色与基础版复刻音色。不同音色价格有差异，详情请参见<a href="https://cloud.tencent.com/document/product/1073/34112">购买指南</a>。完整的音色 ID 列表请参见<a href="https://cloud.tencent.com/document/product/1073/92668">音色列表</a>。<br>若使用一句话版声音复刻1.0(EngineType=WXZL)，请填入固定值“200000000”；<br>若使用一句话版声音复刻2.0(EngineType=YTLX_V2)，请填入固定值“200000400”。</p>
    */
   VoiceType?: number
   /**

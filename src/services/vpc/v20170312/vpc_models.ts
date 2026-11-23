@@ -4690,7 +4690,7 @@ export interface DeleteHighPriorityRouteTablesRequest {
  */
 export interface CreateSecurityGroupWithPoliciesResponse {
   /**
-   * 安全组对象。
+   * <p>安全组对象。</p>
    */
   SecurityGroup?: SecurityGroup
   /**
@@ -9401,7 +9401,7 @@ export interface InquiryPriceRenewAddressesRequest {
  */
 export interface CreateSecurityGroupResponse {
   /**
-   * 安全组对象。
+   * <p>安全组对象。</p>
    */
   SecurityGroup?: SecurityGroup
   /**
@@ -19249,37 +19249,41 @@ export interface CcnInstanceInfo {
  */
 export interface SecurityGroup {
   /**
-   * 安全组实例ID，例如：sg-ohuuioma。
+   * <p>安全组实例ID，例如：sg-ohuuioma。</p>
    */
   SecurityGroupId: string
   /**
-   * 安全组名称，可任意命名，但不得超过60个字符。
+   * <p>安全组名称，可任意命名，但不得超过60个字符。</p>
    */
   SecurityGroupName: string
   /**
-   * 安全组备注，最多100个字符。
+   * <p>安全组备注，最多100个字符。</p>
    */
   SecurityGroupDesc: string
   /**
-   * 项目id，默认0。可在qcloud控制台项目管理页面查询到。
+   * <p>项目id，默认0。可在qcloud控制台项目管理页面查询到。</p>
    */
   ProjectId?: string
   /**
-   * 是否是默认安全组，默认安全组不支持删除。
+   * <p>是否是默认安全组，默认安全组不支持删除。</p>
    */
   IsDefault?: boolean
   /**
-   * 安全组创建时间。
+   * <p>安全组创建时间。</p>
    */
   CreatedTime?: string
   /**
-   * 标签键值对。
+   * <p>标签键值对。</p>
    */
   TagSet?: Array<Tag>
   /**
-   * 安全组更新时间。
+   * <p>安全组更新时间。</p>
    */
   UpdateTime?: string
+  /**
+   * <p>是否为托管安全组</p>
+   */
+  ServiceManaged?: boolean
 }
 
 /**
@@ -20442,19 +20446,19 @@ export interface DeleteHighPriorityRouteTablesResponse {
  */
 export interface CreateSecurityGroupRequest {
   /**
-   * 安全组名称，可任意命名，但不得超过60个字符。
+   * <p>安全组名称，可任意命名，但不得超过60个字符。</p>
    */
   GroupName: string
   /**
-   * 安全组备注，最多100个字符。
+   * <p>安全组备注，最多100个字符。</p>
    */
   GroupDescription: string
   /**
-   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">控制台项目管理页面</a>查询到。
+   * <p>项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">控制台项目管理页面</a>查询到。</p>
    */
   ProjectId?: string
   /**
-   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+   * <p>指定绑定的标签列表，例如：[{&quot;Key&quot;: &quot;city&quot;, &quot;Value&quot;: &quot;shanghai&quot;}]。</p>
    */
   Tags?: Array<Tag>
 }
@@ -21027,23 +21031,23 @@ export interface DescribeServiceTemplateGroupsRequest {
  */
 export interface CreateSecurityGroupWithPoliciesRequest {
   /**
-   * 安全组名称，可任意命名，但不得超过60个字符。
+   * <p>安全组名称，可任意命名，但不得超过60个字符。</p>
    */
   GroupName: string
   /**
-   * 安全组备注，最多100个字符。
+   * <p>安全组备注，最多100个字符。</p>
    */
   GroupDescription: string
   /**
-   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">控制台项目管理页面</a>查询到。
+   * <p>项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">控制台项目管理页面</a>查询到。</p>
    */
   ProjectId?: string
   /**
-   * 安全组规则集合。
+   * <p>安全组规则集合。</p>
    */
   SecurityGroupPolicySet?: SecurityGroupPolicySet
   /**
-   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+   * <p>指定绑定的标签列表，例如：[{&quot;Key&quot;: &quot;city&quot;, &quot;Value&quot;: &quot;shanghai&quot;}]。</p>
    */
   Tags?: Array<Tag>
 }

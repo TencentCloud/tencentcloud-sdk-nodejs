@@ -740,6 +740,10 @@ export interface DescribeApmPrometheusRuleRequest {
    * 业务系统ID
    */
   InstanceId: string
+  /**
+   * 按有效关联过滤，0 或不传表示不过滤
+   */
+  AssociationId?: number
 }
 
 /**
@@ -841,6 +845,11 @@ export interface ApmPrometheusRules {
    * <p>是否追加资源属性</p>
    */
   AppendResourceAttributes?: boolean
+  /**
+   * 实际生效的关联记录 ID（存量 0 解析为默认关联）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssociationId?: number
 }
 
 /**
@@ -1696,6 +1705,10 @@ export interface ModifyApmPrometheusRuleRequest {
    * <p>是否追加资源属性</p>
    */
   AppendResourceAttributes?: boolean
+  /**
+   * 修改归属目标 ID，0 或不传表示不改变原归属
+   */
+  AssociationId?: number
 }
 
 /**
@@ -3179,6 +3192,10 @@ export interface CreateApmPrometheusRuleRequest {
    * <p>是否追加资源属性</p>
    */
   AppendResourceAttributes?: boolean
+  /**
+   * 归属的关联记录 ID，0 或不传表示跟随默认关联
+   */
+  AssociationId?: number
 }
 
 /**

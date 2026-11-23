@@ -1392,49 +1392,53 @@ export interface SearchCommandResult {
  */
 export interface DescribeLDAPUnitSetRequest {
   /**
-   * 是否开启LDAP认证，true-开启
+   * <p>是否开启LDAP认证，true-开启</p>
    */
   Enable: boolean
   /**
-   * 服务器地址
+   * <p>服务器地址</p>
    */
   Ip: string
   /**
-   * 服务端口
+   * <p>服务端口</p>
    */
   Port: number
   /**
-   * 是否开启SSL，false-不开启，true-开启
+   * <p>是否开启SSL，false-不开启，true-开启</p>
    */
   EnableSSL: boolean
   /**
-   * Base DN
+   * <p>Base DN</p>
    */
   BaseDN: string
   /**
-   * 管理员账号
+   * <p>管理员账号</p>
    */
   AdminAccount: string
   /**
-   * 管理员密码
+   * <p>管理员密码</p>
    */
   AdminPassword: string
   /**
-   * 用户名映射属性
+   * <p>用户名映射属性</p>
    */
   AttributeUserName: string
   /**
-   * 部门过滤
+   * <p>部门过滤</p>
    */
   AttributeUnit: string
   /**
-   * 备用服务器地址
+   * <p>备用服务器地址</p>
    */
   IpBackup?: string
   /**
-   * 网络域Id
+   * <p>网络域Id</p>
    */
   DomainId?: string
+  /**
+   * <p>堡垒机实例ID</p>
+   */
+  ResourceId?: string
 }
 
 /**
@@ -1769,19 +1773,19 @@ export interface OperationEvent {
  */
 export interface Department {
   /**
-   * 部门ID
+   * <p>部门ID</p>
    */
   Id?: string
   /**
-   * 部门名称，1 - 256个字符
+   * <p>部门名称，1 - 256个字符</p>
    */
   Name?: string
   /**
-   * 部门管理员账号ID
+   * <p>部门管理员账号ID</p>
    */
   Managers?: Array<string>
   /**
-   * 管理员用户
+   * <p>管理员用户</p>
    */
   ManagerUsers?: Array<DepartmentManagerUser>
 }
@@ -3348,85 +3352,89 @@ export type DescribeDeviceCountSummaryRequest = null
  */
 export interface ModifyLDAPSettingRequest {
   /**
-   * 是否开启LDAP认证，false-不开启，true-开启
+   * <p>是否开启LDAP认证，false-不开启，true-开启</p>
    */
   Enable: boolean
   /**
-   * 服务器地址
+   * <p>服务器地址</p>
    */
   Ip?: string
   /**
-   * 备用服务器地址
+   * <p>备用服务器地址</p>
    */
   IpBackup?: string
   /**
-   * 服务端口
+   * <p>服务端口</p>
    */
   Port?: number
   /**
-   * 是否开启SSL，false-不开启，true-开启
+   * <p>是否开启SSL，false-不开启，true-开启</p>
    */
   EnableSSL?: boolean
   /**
-   * Base DN
+   * <p>Base DN</p>
    */
   BaseDN?: string
   /**
-   * 管理员账号
+   * <p>管理员账号</p>
    */
   AdminAccount?: string
   /**
-   * 管理员密码
+   * <p>管理员密码</p>
    */
   AdminPassword?: string
   /**
-   * 用户属性
+   * <p>用户属性</p>
    */
   AttributeUser?: string
   /**
-   * 用户名属性
+   * <p>用户名属性</p>
    */
   AttributeUserName?: string
   /**
-   * 自动同步，false-不开启，true-开启
+   * <p>自动同步，false-不开启，true-开启</p>
    */
   AutoSync?: boolean
   /**
-   * 覆盖用户信息，false-不开启，true-开启
+   * <p>覆盖用户信息，false-不开启，true-开启</p>
    */
   Overwrite?: boolean
   /**
-   * 同步周期，30～60000之间的整数
+   * <p>同步周期，30～60000之间的整数</p>
    */
   SyncPeriod?: number
   /**
-   * 是否同步全部，false-不开启，true-开启
+   * <p>是否同步全部，false-不开启，true-开启</p>
    */
   SyncAll?: boolean
   /**
-   * 同步OU列表，SyncAll为false时必传
+   * <p>同步OU列表，SyncAll为false时必传</p>
    */
   SyncUnitSet?: Array<string>
   /**
-   * 组织单元属性
+   * <p>组织单元属性</p>
    */
   AttributeUnit?: string
   /**
-   * 用户姓名属性
+   * <p>用户姓名属性</p>
    */
   AttributeRealName?: string
   /**
-   * 手机号属性
+   * <p>手机号属性</p>
    */
   AttributePhone?: string
   /**
-   * 邮箱属性
+   * <p>邮箱属性</p>
    */
   AttributeEmail?: string
   /**
-   * 网络域Id
+   * <p>网络域Id</p>
    */
   DomainId?: string
+  /**
+   * <p>堡垒机实例ID</p>
+   */
+  ResourceId?: string
 }
 
 /**
@@ -3546,19 +3554,19 @@ export interface CreateAssetSyncJobRequest {
  */
 export interface Group {
   /**
-   * 组ID
+   * <p>组ID</p>
    */
   Id?: number
   /**
-   * 组名称
+   * <p>组名称</p>
    */
   Name?: string
   /**
-   * 所属部门信息
+   * <p>所属部门信息</p>
    */
   Department?: Department
   /**
-   * 个数
+   * <p>个数</p>
    */
   Count?: number
 }
@@ -3773,6 +3781,10 @@ export interface LoginSetting {
    * <p>运维账号单点登录开关：0-关闭，1-开启</p>
    */
   EnableSingleLogin?: number
+  /**
+   * <p>主机指纹校验开关</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul>
+   */
+  EnableDeviceFingerprintVerify?: number
 }
 
 /**
@@ -3780,7 +3792,7 @@ export interface LoginSetting {
  */
 export interface DescribeLDAPUnitSetResponse {
   /**
-   * ou 列表
+   * <p>ou 列表</p>
    */
   UnitSet?: Array<string>
   /**
@@ -4011,45 +4023,49 @@ export interface DeleteAccessWhiteListRulesRequest {
  */
 export interface CheckLDAPConnectionRequest {
   /**
-   * 是否开启LDAP认证，必须为true
+   * <p>是否开启LDAP认证，必须为true</p>
    */
   Enable: boolean
   /**
-   * 服务器地址
+   * <p>服务器地址</p>
    */
   Ip: string
   /**
-   * 服务端口
+   * <p>服务端口</p>
    */
   Port: number
   /**
-   * 是否开启SSL，false-不开启，true-开启
+   * <p>是否开启SSL，false-不开启，true-开启</p>
    */
   EnableSSL: boolean
   /**
-   * Base DN
+   * <p>Base DN</p>
    */
   BaseDN: string
   /**
-   * 管理员账号
+   * <p>管理员账号</p>
    */
   AdminAccount: string
   /**
-   * 管理员密码
+   * <p>管理员密码</p>
    */
   AdminPassword: string
   /**
-   * 备用服务器地址
+   * <p>备用服务器地址</p>
    */
   IpBackup?: string
   /**
-   * 网络域id
+   * <p>网络域id</p>
    */
   DomainId?: string
   /**
-   * 用户名称映射属性
+   * <p>用户名称映射属性</p>
    */
   AttributeUserName?: string
+  /**
+   * <p>堡垒机实例ID</p>
+   */
+  ResourceId?: string
 }
 
 /**

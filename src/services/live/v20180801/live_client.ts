@@ -37,6 +37,7 @@ import {
   PublishTime,
   CommonMixOutputParams,
   DescribeAuditKeywordsResponse,
+  StopLiveSubtitleRequest,
   DeleteAuditKeywordLibRequest,
   CreateLiveAvatarCloneFigureResponse,
   DescribeGroupProIspPlayInfoListResponse,
@@ -169,12 +170,14 @@ import {
   DeleteRecordTaskRequest,
   AvatarTimbreInfo,
   DescribeStreamDayPlayInfoListResponse,
+  StopLiveSubtitleResponse,
   CreateSceneVideoTaskRequest,
   DeleteLivePadRuleRequest,
   CreateLiveSnapshotRuleResponse,
   DescribeLiveStreamEventListResponse,
   DescribeStreamPackageRemuxStatisticsResponse,
   DescribeLiveTranscodeTotalInfoRequest,
+  StartLiveSubtitleRequest,
   CommonMixCropParams,
   DescribeLivePushAuthKeyRequest,
   DescribeCasterEmergencyStatusResponse,
@@ -480,6 +483,7 @@ import {
   AvatarTimbreList,
   DescribePullTransformPushInfoResponse,
   DescribeLiveCloudEffectListRequest,
+  StartLiveSubtitleResponse,
   DescribeLiveStreamStateRequest,
   CreateLiveTimeShiftTemplateRequest,
   CreateLiveRecordTemplateResponse,
@@ -1456,6 +1460,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 使用该接口启动直播字幕。
+   */
+  async StartLiveSubtitle(
+    req: StartLiveSubtitleRequest,
+    cb?: (error: string, rep: StartLiveSubtitleResponse) => void
+  ): Promise<StartLiveSubtitleResponse> {
+    return this.request("StartLiveSubtitle", req, cb)
+  }
+
+  /**
    * 前提调用 DescribeTimeShiftStreamList 获得请求必要参数。查询指定范围内的时移流录制详情，最大支持24小时范围查询。
    */
   async DescribeTimeShiftRecordDetail(
@@ -2224,6 +2238,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeScreenShotSheetNumListResponse) => void
   ): Promise<DescribeScreenShotSheetNumListResponse> {
     return this.request("DescribeScreenShotSheetNumList", req, cb)
+  }
+
+  /**
+   * 使用该接口将停止直播字幕。
+   */
+  async StopLiveSubtitle(
+    req: StopLiveSubtitleRequest,
+    cb?: (error: string, rep: StopLiveSubtitleResponse) => void
+  ): Promise<StopLiveSubtitleResponse> {
+    return this.request("StopLiveSubtitle", req, cb)
   }
 
   /**

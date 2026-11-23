@@ -2203,11 +2203,11 @@ export interface ScanTaskComplianceInfo {
   /**
    * 合规组ID
    */
-  ComplianceGroupId: number
+  ComplianceGroupId?: number
   /**
    * 合规组名称
    */
-  ComplianceGroupName: string
+  ComplianceGroupName?: string
 }
 
 /**
@@ -4504,19 +4504,19 @@ export interface SensitiveLevel {
   /**
    * 分级标识ID
    */
-  LevelId: number
+  LevelId?: number
   /**
    * 分级标识统计
    */
-  LevelCnt: number
+  LevelCnt?: number
   /**
    * 分级标识名称
    */
-  LevelRiskName: string
+  LevelRiskName?: string
   /**
    * 分级标识分数
    */
-  LevelRiskScore: number
+  LevelRiskScore?: number
 }
 
 /**
@@ -6915,10 +6915,12 @@ export interface DescribeDSPACategoriesRequest {
   DspaId: string
   /**
    * 数据分类ID
+   * @deprecated
    */
   CategoryId?: number
   /**
    * 敏感数据分类名称
+   * @deprecated
    */
   Name?: string
   /**
@@ -6929,6 +6931,14 @@ export interface DescribeDSPACategoriesRequest {
    * 返回结果集数量，默认值是10000，最大值为10000，根据该资源的个数限制条件，该资源的个数不会超过10000，所以如果不输入该字段，默认获取全量数据
    */
   Limit?: number
+  /**
+   * 过滤条件（Id:分类id,Name:分类名称）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 关键字
+   */
+  Keyword?: string
 }
 
 /**

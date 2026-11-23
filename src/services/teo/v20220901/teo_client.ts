@@ -100,6 +100,7 @@ import {
   InferenceScheduledScalingAction,
   CLSTopic,
   CreatePrefetchTaskRequest,
+  ModifyL4ProxyStatusRequest,
   DescribeApplicationProxiesResponse,
   VanityNameServers,
   DescribeTopL7AnalysisDataRequest,
@@ -137,7 +138,7 @@ import {
   S3,
   DescribeDDoSAttackEventResponse,
   DescribeTimingL7OriginPullDataResponse,
-  DescribeInferenceServicesRequest,
+  DescribeCustomGroupsResponse,
   ForceRedirect,
   InferenceServiceMonitorRecord,
   CodeAction,
@@ -168,6 +169,7 @@ import {
   ConfigGroupVersionInfo,
   VerifyOwnershipResponse,
   DescribeSecurityIPGroupContentResponse,
+  DescribeCustomGroupResponse,
   Sv,
   Rule,
   DownloadL4LogsRequest,
@@ -189,13 +191,13 @@ import {
   DeleteMultiPathGatewayRequest,
   DeleteCustomErrorPageRequest,
   CustomField,
-  WebSecurityTemplates,
+  RangeOriginPullParameters,
   ApplyFreeCertificateResponse,
   FloatTimingTypeValue,
   BrowserImpersonationDetectionAction,
   CacheKeyHeader,
   DeleteZoneRequest,
-  RangeOriginPullParameters,
+  DeleteFunctionResponse,
   BotManagedRule,
   CurrentOriginACL,
   DescribeIPGroupReferencesResponse,
@@ -215,7 +217,7 @@ import {
   DisableOriginACLResponse,
   CreateFunctionRuleResponse,
   CreateMultiPathGatewaySecretKeyRequest,
-  HTTPUpstreamTimeoutParameters,
+  DeleteCustomGroupResponse,
   DescribeMultiPathGatewayRequest,
   PrivateParameter,
   CacheKeyConfigParameters,
@@ -246,7 +248,7 @@ import {
   DescribeDDoSAttackTopDataResponse,
   SubRule,
   ModifyPrefetchOriginLimitResponse,
-  ModifyMultiPathGatewayRequest,
+  DescribeCustomGroupRequest,
   LoadBalancer,
   OperateInferenceDomainRequest,
   CustomExpressionField,
@@ -261,7 +263,7 @@ import {
   DescribeCustomErrorPagesResponse,
   DeleteApplicationProxyResponse,
   AlgDetectRule,
-  SecEntryValue,
+  ModifyOriginACLRequest,
   DescribeSecurityAPIResourceRequest,
   OriginACLFamilyInfo,
   DiffIPWhitelist,
@@ -292,6 +294,7 @@ import {
   DescribeSecurityIPGroupRequest,
   ZoneConfig,
   DescribeTimingL7OriginPullDataRequest,
+  ModifyContentIdentifierRequest,
   CustomizedHeader,
   ModifyDDoSProtectionResponse,
   DescribeFunctionsRequest,
@@ -320,8 +323,8 @@ import {
   ApplicationProxyRule,
   UpstreamCertInfo,
   Zone,
-  ModifyContentIdentifierRequest,
-  ErrorPageParameters,
+  HTTPUpstreamTimeoutParameters,
+  DescribeCustomGroupReferencesRequest,
   DescribeRulesSettingResponse,
   BindSecurityTemplateToEntityResponse,
   BasicBotSettings,
@@ -418,6 +421,7 @@ import {
   DownloadL4LogsResponse,
   DescribeMultiPathGatewayOriginACLResponse,
   BindSharedCNAMERequest,
+  CreateCustomGroupResponse,
   IpTableConfig,
   ModifyApplicationProxyStatusRequest,
   DeleteOriginGroupResponse,
@@ -463,9 +467,11 @@ import {
   CacheConfigParameters,
   InferenceServiceDeploymentRecord,
   FunctionComponentBinding,
-  CreateL4ProxyResponse,
+  DeleteCustomGroupRequest,
   CacheKeyParameters,
   ModifyFunctionResponse,
+  ModifyMultiPathGatewayRequest,
+  CustomGroupItem,
   CreateL4ProxyRulesResponse,
   DescribeOriginGroupRequest,
   KnownBotCategories,
@@ -483,6 +489,7 @@ import {
   DescribeWebSecurityTemplateRequest,
   ClientAttestationRule,
   CustomEndpoint,
+  WebSecurityTemplates,
   AccountProtectionSettings,
   ModifyOriginACLResponse,
   VerifyOwnershipRequest,
@@ -499,7 +506,7 @@ import {
   FailReason,
   ConfigGroupFunctionTrigger,
   ModifyHostsCertificateRequest,
-  ModifyOriginACLRequest,
+  ModifyCustomGroupResponse,
   ModifyOriginGroupResponse,
   DeleteAccelerationDomainsRequest,
   ManagedRuleAction,
@@ -529,7 +536,7 @@ import {
   ModifyAliasDomainRequest,
   OriginInfo,
   CreateDnsRecordRequest,
-  WafRule,
+  ModifyCustomGroupRequest,
   BrowserImpersonationDetection,
   ModifyApplicationProxyRequest,
   DomainDDoSProtection,
@@ -554,6 +561,7 @@ import {
   CustomVariableOperationRuleBranch,
   Grpc,
   CreateAliasDomainResponse,
+  CreateCustomGroupRequest,
   ClientIpCountry,
   DeleteSecurityClientAttesterRequest,
   DeleteApplicationProxyRuleRequest,
@@ -571,6 +579,7 @@ import {
   BotManagementCustomRules,
   MultiPathGatewayNextOriginACL,
   RuleChoicePropertiesItem,
+  WafRule,
   DescribeSecurityTemplateBindingsResponse,
   SetContentIdentifierParameters,
   ModifyAliasDomainStatusResponse,
@@ -599,7 +608,7 @@ import {
   InferenceEnvironmentVariable,
   CreatePlanResponse,
   DescribeApplicationProxiesRequest,
-  DescribeIPGroupReferencesRequest,
+  DescribeContentQuotaRequest,
   MultiPathGatewayLine,
   AllowActionParameters,
   LogItem,
@@ -607,7 +616,7 @@ import {
   Hsts,
   OwnershipVerification,
   CreateRuleRequest,
-  ModifyL4ProxyStatusRequest,
+  DescribeCustomGroupReferencesResponse,
   DescribeSecurityPolicyResponse,
   Plan,
   DescribeInferenceServiceMonitorDataRequest,
@@ -651,6 +660,7 @@ import {
   EdgeKVDeleteRequest,
   DescribeMultiPathGatewayResponse,
   IPRegionInfo,
+  CustomGroupReference,
   DestroyPlanResponse,
   CreateSecurityAPIResourceRequest,
   TLSConfigParameters,
@@ -727,6 +737,7 @@ import {
   DisableOriginACLRequest,
   TCCaptchaOption,
   ClientIPCountryParameters,
+  DescribeInferenceServicesRequest,
   HostPolicy,
   IncreasePlanQuotaResponse,
   DescribeIPRegionResponse,
@@ -780,6 +791,7 @@ import {
   AICrawlerDetection,
   ErrorPage,
   APIResource,
+  SecEntryValue,
   HTTP2Parameters,
   InferenceAffinityConfig,
   DescribeOverviewL7DataRequest,
@@ -792,7 +804,7 @@ import {
   IPSSLSetting,
   ModifyFunctionComponentBindingsRequest,
   ModifyZoneCustomVariablesRequest,
-  DescribeContentQuotaRequest,
+  DescribeIPGroupReferencesRequest,
   DescribeAvailableOriginACLFamilyRequest,
   ModifyFunctionReplicaRequest,
   DescribeMultiPathGatewaysRequest,
@@ -809,7 +821,7 @@ import {
   Tag,
   DeleteSecurityAPIResourceResponse,
   BindZoneToPlanRequest,
-  DeleteFunctionResponse,
+  DescribeCustomGroupsRequest,
   BotManagementLite,
   IPWhitelist,
   DescribeSharedCNAMERequest,
@@ -824,12 +836,14 @@ import {
   DescribeInferenceHardwareSpecificationsRequest,
   DescribeMultiPathGatewayLineResponse,
   OriginGroupInLoadBalancer,
+  FunctionRuleCondition,
   HTTPResponseParameters,
   DescribeEdgeKVNamespacesRequest,
   UpstreamRequestParameters,
   ModifyMultiPathGatewayStatusRequest,
   DeleteSecurityClientAttesterResponse,
   TCRCEOption,
+  ErrorPageParameters,
   NsVerification,
   AccelerateMainland,
   InferenceDomain,
@@ -848,7 +862,8 @@ import {
   CreateAccelerationDomainResponse,
   ModifyAccelerationDomainStatusesRequest,
   CreateZoneResponse,
-  FunctionRuleCondition,
+  CreateL4ProxyResponse,
+  CustomGroup,
   EdgeKVPutRequest,
   EdgeKVPutResponse,
   DeleteLoadBalancerResponse,
@@ -1346,6 +1361,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除指定 IP 组，如果有规则引用了 IP 组情况，则不允许删除。
+   */
+  async DeleteSecurityIPGroup(
+    req: DeleteSecurityIPGroupRequest,
+    cb?: (error: string, rep: DeleteSecurityIPGroupResponse) => void
+  ): Promise<DeleteSecurityIPGroupResponse> {
+    return this.request("DeleteSecurityIPGroup", req, cb)
+  }
+
+  /**
    * 获取使用 IP 分组的策略配置。
    */
   async DescribeIPGroupReferences(
@@ -1353,6 +1378,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIPGroupReferencesResponse) => void
   ): Promise<DescribeIPGroupReferencesResponse> {
     return this.request("DescribeIPGroupReferences", req, cb)
+  }
+
+  /**
+   * 修改客户端认证选项。
+   */
+  async ModifySecurityClientAttester(
+    req: ModifySecurityClientAttesterRequest,
+    cb?: (error: string, rep: ModifySecurityClientAttesterResponse) => void
+  ): Promise<ModifySecurityClientAttesterResponse> {
+    return this.request("ModifySecurityClientAttester", req, cb)
   }
 
   /**
@@ -1429,6 +1464,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 修改自定义组内容。GroupType 创建后不可修改，修改组内条目时，可通过 GroupItemOperation 指定替换、追加或移除操作。
+   */
+  async ModifyCustomGroup(
+    req: ModifyCustomGroupRequest,
+    cb?: (error: string, rep: ModifyCustomGroupResponse) => void
+  ): Promise<ModifyCustomGroupResponse> {
+    return this.request("ModifyCustomGroup", req, cb)
+  }
+
+  /**
    * 通过本接口创建接入多通道安全加速网关的线路。包括 EdgeOne 四层代理线路、自定义线路。
    */
   async CreateMultiPathGatewayLine(
@@ -1477,6 +1522,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: CreateEdgeKVNamespaceResponse) => void
   ): Promise<CreateEdgeKVNamespaceResponse> {
     return this.request("CreateEdgeKVNamespace", req, cb)
+  }
+
+  /**
+   * 查询指定站点下的自定义组列表。本接口只返回每个自定义组前 500 个条目，如需查询组内完整条目请使用 DescribeSecurityCustomGroup 接口查询。
+   */
+  async DescribeCustomGroups(
+    req: DescribeCustomGroupsRequest,
+    cb?: (error: string, rep: DescribeCustomGroupsResponse) => void
+  ): Promise<DescribeCustomGroupsResponse> {
+    return this.request("DescribeCustomGroups", req, cb)
   }
 
   /**
@@ -1548,6 +1603,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: OperateInferenceDomainResponse) => void
   ): Promise<OperateInferenceDomainResponse> {
     return this.request("OperateInferenceDomain", req, cb)
+  }
+
+  /**
+   * 获取使用自定义组的安全策略配置。
+   */
+  async DescribeCustomGroupReferences(
+    req: DescribeCustomGroupReferencesRequest,
+    cb?: (error: string, rep: DescribeCustomGroupReferencesResponse) => void
+  ): Promise<DescribeCustomGroupReferencesResponse> {
+    return this.request("DescribeCustomGroupReferences", req, cb)
   }
 
   /**
@@ -1966,16 +2031,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-     * 本接口用于查询七层域名业务按照指定维度的 topN 数据。
-注意：
-1. 本接口查询数据有 10 分钟左右延迟，建议拉取当前时间 10 分钟以前的数据。
-2. 本接口默认返回防护后的流量请求数据，用户可在 `Filters.mitigatedByWebSecurity` 中自定义查询已防护缓释的数据。
-     */
-  async DescribeTopL7AnalysisData(
-    req: DescribeTopL7AnalysisDataRequest,
-    cb?: (error: string, rep: DescribeTopL7AnalysisDataResponse) => void
-  ): Promise<DescribeTopL7AnalysisDataResponse> {
-    return this.request("DescribeTopL7AnalysisData", req, cb)
+   * 查询单个自定义组的详细信息，包含组内全量条目（通过 Limit/Offset 分页返回）。DescribeCustomGroups 列表接口每组最多返回前 500 个条目，如需获取全量条目，请使用本接口。GroupId 可通过 CreateCustomGroup 创建时返回或 DescribeCustomGroups 查询获取。
+   */
+  async DescribeCustomGroup(
+    req: DescribeCustomGroupRequest,
+    cb?: (error: string, rep: DescribeCustomGroupResponse) => void
+  ): Promise<DescribeCustomGroupResponse> {
+    return this.request("DescribeCustomGroup", req, cb)
   }
 
   /**
@@ -2151,6 +2213,19 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: CreateInferenceDomainResponse) => void
   ): Promise<CreateInferenceDomainResponse> {
     return this.request("CreateInferenceDomain", req, cb)
+  }
+
+  /**
+     * 本接口用于查询七层域名业务按照指定维度的 topN 数据。
+注意：
+1. 本接口查询数据有 10 分钟左右延迟，建议拉取当前时间 10 分钟以前的数据。
+2. 本接口默认返回防护后的流量请求数据，用户可在 `Filters.mitigatedByWebSecurity` 中自定义查询已防护缓释的数据。
+     */
+  async DescribeTopL7AnalysisData(
+    req: DescribeTopL7AnalysisDataRequest,
+    cb?: (error: string, rep: DescribeTopL7AnalysisDataResponse) => void
+  ): Promise<DescribeTopL7AnalysisDataResponse> {
+    return this.request("DescribeTopL7AnalysisData", req, cb)
   }
 
   /**
@@ -2592,13 +2667,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 修改客户端认证选项。
+   * 创建自定义组。自定义组用于集中管理一组可复用的匹配条目，例如可以将多个 JA3/JA4 TLS 指纹保存为一个 TLS 指纹组，并在安全规则中直接引用该组，从而避免在多条规则中重复维护相同的指纹列表。
    */
-  async ModifySecurityClientAttester(
-    req: ModifySecurityClientAttesterRequest,
-    cb?: (error: string, rep: ModifySecurityClientAttesterResponse) => void
-  ): Promise<ModifySecurityClientAttesterResponse> {
-    return this.request("ModifySecurityClientAttester", req, cb)
+  async CreateCustomGroup(
+    req: CreateCustomGroupRequest,
+    cb?: (error: string, rep: CreateCustomGroupResponse) => void
+  ): Promise<CreateCustomGroupResponse> {
+    return this.request("CreateCustomGroup", req, cb)
   }
 
   /**
@@ -3053,13 +3128,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 删除指定 IP 组，如果有规则引用了 IP 组情况，则不允许删除。
+   * 删除指定自定义组。若该组已被规则引用，则不允许删除，请先解除引用关系。
    */
-  async DeleteSecurityIPGroup(
-    req: DeleteSecurityIPGroupRequest,
-    cb?: (error: string, rep: DeleteSecurityIPGroupResponse) => void
-  ): Promise<DeleteSecurityIPGroupResponse> {
-    return this.request("DeleteSecurityIPGroup", req, cb)
+  async DeleteCustomGroup(
+    req: DeleteCustomGroupRequest,
+    cb?: (error: string, rep: DeleteCustomGroupResponse) => void
+  ): Promise<DeleteCustomGroupResponse> {
+    return this.request("DeleteCustomGroup", req, cb)
   }
 
   /**

@@ -4619,6 +4619,10 @@ export interface CreateInstanceRequest {
    * <p>已有的云监控告警策略 ID</p>
    */
   AlarmPolicyIds?: Array<string>
+  /**
+   * <p>LVM 控制台开关，0/不开，1/显式开启</p>
+   */
+  EnableLvm?: number
 }
 
 /**
@@ -5232,6 +5236,14 @@ export interface InstanceInfo {
    * <p>是否需要从VIP下线旧节点</p>
    */
   NeedOfflineOldNodesNotify?: boolean
+  /**
+   * <p>0 未开启 / 1 已开启 / 2 切换中</p>
+   */
+  LvmStatus?: number
+  /**
+   * <p>仅 LvmStatus=2 时返回，值为流程id</p>
+   */
+  LvmSwitchFlowId?: number
 }
 
 /**

@@ -728,6 +728,16 @@ it("live.v20180801.ModifyCasterLayoutInfo", async function () {
     }
 })
 
+it("live.v20180801.StartLiveSubtitle", async function () {
+    try {
+       const data = await client.StartLiveSubtitle({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeTimeShiftRecordDetail", async function () {
     try {
        const data = await client.DescribeTimeShiftRecordDetail({})
@@ -1471,6 +1481,16 @@ it("live.v20180801.DescribeLivePadTemplate", async function () {
 it("live.v20180801.DescribeScreenShotSheetNumList", async function () {
     try {
        const data = await client.DescribeScreenShotSheetNumList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.StopLiveSubtitle", async function () {
+    try {
+       const data = await client.StopLiveSubtitle({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

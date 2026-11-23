@@ -326,7 +326,16 @@ export interface DescribeAgentSessionResponse {
 /**
  * DeleteSessionArtifactList请求参数结构体
  */
-export type DeleteSessionArtifactListRequest = null
+export interface DeleteSessionArtifactListRequest {
+  /**
+   * <p>会话ID</p>
+   */
+  SessionId?: string
+  /**
+   * <p>需要删除的物料ID集合</p>
+   */
+  ArtifactIds?: Array<string>
+}
 
 /**
  * Token用量
@@ -485,6 +494,56 @@ export interface CreateAgentVersionFromSourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 会话物料结构
+ */
+export interface SessionArtifactDetail {
+  /**
+   * <p>物料ID</p>
+   */
+  ArtifactId?: string
+  /**
+   * <p>会话ID</p>
+   */
+  SessionId?: string
+  /**
+   * <p>AgentID</p>
+   */
+  AgentId?: string
+  /**
+   * <p>文件名</p>
+   */
+  FileName?: string
+  /**
+   * <p>文件沙箱内路径</p>
+   */
+  FilePath?: string
+  /**
+   * <p>文件字节数</p>
+   */
+  FileSizeBytes?: number
+  /**
+   * <p>文件摘要值(Sha256)</p>
+   */
+  FileSha256?: string
+  /**
+   * <p>物料状态</p><p>枚举值：</p><ul><li>PENDING： 处理中</li><li>READY： 准备完毕</li><li>FAILED： 失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p><p>参数格式：RFC3339 UTC</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：RFC3339 UTC</p>
+   */
+  UploadedTime?: string
+  /**
+   * <p>过期时间</p><p>参数格式：RFC3339 UTC</p>
+   */
+  ExpiredTime?: string
 }
 
 /**
@@ -687,6 +746,14 @@ export interface SessionItem {
  * DescribeSessionArtifactList返回参数结构体
  */
 export interface DescribeSessionArtifactListResponse {
+  /**
+   * <p>符合条件的物料总数（按 ID 批量时为实际命中数）</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>返回的物料集合</p>
+   */
+  ArtifactSet?: Array<SessionArtifactDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1008,6 +1075,26 @@ export interface CreateAgentRequest {
  */
 export interface DescribeSessionArtifactDownloadUrlResponse {
   /**
+   * <p>产物下载地址</p>
+   */
+  DownloadUrl?: string
+  /**
+   * <p>产物过期时间</p>
+   */
+  ExpiredTime?: string
+  /**
+   * <p>产物对应文件名</p>
+   */
+  FileName?: string
+  /**
+   * <p>产物文件大小</p>
+   */
+  FileSizeBytes?: number
+  /**
+   * <p>文件摘要</p>
+   */
+  FileSha256?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1065,6 +1152,10 @@ export interface ChatEndpoint {
  * DeleteSessionArtifactList返回参数结构体
  */
 export interface DeleteSessionArtifactListResponse {
+  /**
+   * <p>删除的物料数量</p>
+   */
+  DeletedCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2172,7 +2263,16 @@ export interface Header {
 /**
  * DescribeSessionArtifactDownloadUrl请求参数结构体
  */
-export type DescribeSessionArtifactDownloadUrlRequest = null
+export interface DescribeSessionArtifactDownloadUrlRequest {
+  /**
+   * <p>物料ID</p>
+   */
+  ArtifactId: string
+  /**
+   * <p>产物过期时间</p><p>单位：s</p>
+   */
+  ExpiredSeconds?: number
+}
 
 /**
  * MigrateAgentSession请求参数结构体
@@ -2357,7 +2457,24 @@ export interface TargetOptions {
 /**
  * DescribeSessionArtifactList请求参数结构体
  */
-export type DescribeSessionArtifactListRequest = null
+export interface DescribeSessionArtifactListRequest {
+  /**
+   * <p>会话ID</p>
+   */
+  SessionId?: string
+  /**
+   * <p>偏移量，从 0 开始，默认 0（按 ID 批量查询时忽略）</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页数量，默认 20，最大 200（按 ID 批量查询时忽略）</p>
+   */
+  Limit?: number
+  /**
+   * <p>标准过滤条件：ArtifactId（精确，多值 OR，携带即按 ID 批量查询，忽略分页）/ Keyword（模糊）</p>
+   */
+  Filters?: Array<Filter>
+}
 
 /**
  * CreateAgent返回参数结构体
@@ -2521,6 +2638,10 @@ export interface CreateAgentSessionRequest {
    * <p>指定版本 ID（可选）。非空且合法时固定使用该版本，跳过 routing_config 权重挑选；指定版本需归属同一 Agent 且未被废弃</p>
    */
   VersionId?: string
+  /**
+   * <p>会话创建来源，仅用于监控统计，不参与鉴权。</p><p>page 表示页面端，adk 表示 ADK/API；不传或无法识别时统计为 unknown。</p>
+   */
+  MetricEntry?: string
 }
 
 /**

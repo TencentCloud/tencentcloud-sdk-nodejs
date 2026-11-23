@@ -2400,39 +2400,39 @@ export interface CreateAIGWCustomGuardrailPolicyRequest {
  */
 export interface ConfigFileTemplate {
   /**
-   * 配置文件模板id
+   * <p>配置文件模板id</p>
    */
   Id?: number
   /**
-   * 配置文件模板名称
+   * <p>配置文件模板名称</p>
    */
   Name?: string
   /**
-   * 配置文件模板内容
+   * <p>配置文件模板内容</p>
    */
   Content?: string
   /**
-   * 配置文件模板格式
+   * <p>配置文件模板格式</p>
    */
   Format?: string
   /**
-   * 配置文件模板注释
+   * <p>配置文件模板注释</p>
    */
   Comment?: string
   /**
-   * 配置文件模板创建时间
+   * <p>配置文件模板创建时间</p>
    */
   CreateTime?: string
   /**
-   * 配置文件模板创建者
+   * <p>配置文件模板创建者</p>
    */
   CreateBy?: string
   /**
-   * 配置文件模板修改时间
+   * <p>配置文件模板修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 配置文件模板修改者
+   * <p>配置文件模板修改者</p>
    */
   ModifyBy?: string
 }
@@ -4117,7 +4117,7 @@ export interface DescribeUpstreamHealthCheckConfigResponse {
  */
 export interface ModifyGovernanceInstancesResponse {
   /**
-   * 修改是否成功。
+   * <p>修改是否成功。</p>
    */
   Result?: boolean
   /**
@@ -4749,79 +4749,79 @@ export interface CloudNativeAPIGatewayLLMModelParamCheckInfo {
  */
 export interface ConfigFile {
   /**
-   * 配置文件id
+   * <p>配置文件id</p>
    */
   Id?: number
   /**
-   * 配置文件名称
+   * <p>配置文件名称</p>
    */
   Name?: string
   /**
-   * 配置文件命名空间
+   * <p>配置文件命名空间</p>
    */
   Namespace?: string
   /**
-   * 配置文件组
+   * <p>配置文件组</p>
    */
   Group?: string
   /**
-   * 配置文件内容
+   * <p>配置文件内容</p>
    */
   Content?: string
   /**
-   * 配置文件格式
+   * <p>配置文件格式</p>
    */
   Format?: string
   /**
-   * 配置文件注释
+   * <p>配置文件注释</p>
    */
   Comment?: string
   /**
-   * 配置文件状态
+   * <p>配置文件状态</p>
    */
   Status?: string
   /**
-   * 配置文件标签数组
+   * <p>配置文件标签数组</p>
    */
   Tags?: Array<ConfigFileTag>
   /**
-   * 配置文件创建时间
+   * <p>配置文件创建时间</p>
    */
   CreateTime?: string
   /**
-   * 配置文件创建者
+   * <p>配置文件创建者</p>
    */
   CreateBy?: string
   /**
-   * 配置文件修改时间
+   * <p>配置文件修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 配置文件修改者
+   * <p>配置文件修改者</p>
    */
   ModifyBy?: string
   /**
-   * 配置文件发布时间
+   * <p>配置文件发布时间</p>
    */
   ReleaseTime?: string
   /**
-   * 配置文件发布者
+   * <p>配置文件发布者</p>
    */
   ReleaseBy?: string
   /**
-   * 配置文件类型
+   * <p>配置文件类型</p>
    */
   ConfigFileSupportedClient?: number
   /**
-   * 配置文件持久化
+   * <p>配置文件持久化</p>
    */
   ConfigFilePersistent?: ConfigFilePersistent
   /**
-   * 是否开启加密算法
+   * <p>是否开启加密算法</p>
    */
   Encrypted?: boolean
   /**
-   * 加密算法
+   * <p>加密算法</p>
    */
   EncryptAlgo?: string
 }
@@ -5980,11 +5980,11 @@ export interface GovernanceServiceContract {
  */
 export interface CreateGovernanceInstancesRequest {
   /**
-   * tse实例id。
+   * <p>tse实例id。</p>
    */
   InstanceId: string
   /**
-   * 服务实例信息。
+   * <p>服务实例信息。</p>
    */
   GovernanceInstances: Array<GovernanceInstanceInput>
 }
@@ -7636,11 +7636,11 @@ export interface DeleteConfigFileReleasesResponse {
  */
 export interface ModifyGovernanceInstancesRequest {
   /**
-   * tse实例id。
+   * <p>tse实例id。</p>
    */
   InstanceId: string
   /**
-   * 服务实例信息。
+   * <p>服务实例信息。</p>
    */
   GovernanceInstances: Array<GovernanceInstanceUpdate>
 }
@@ -7650,67 +7650,67 @@ export interface ModifyGovernanceInstancesRequest {
  */
 export interface GovernanceNamespace {
   /**
-   * 命名空间名称。
+   * <p>命名空间名称。</p>
    */
   Name?: string
   /**
-   * 命名空间描述信息。
+   * <p>命名空间描述信息。</p>
    */
   Comment?: string
   /**
-   * 创建时间。
+   * <p>创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 修改时间。
+   * <p>修改时间。</p>
    */
   ModifyTime?: string
   /**
-   * 命名空间下总服务数据量
+   * <p>命名空间下总服务数据量</p>
    */
   TotalServiceCount?: number
   /**
-   * 命名空间下总健康实例数量
+   * <p>命名空间下总健康实例数量</p>
    */
   TotalHealthInstanceCount?: number
   /**
-   * 命名空间下总实例数量
+   * <p>命名空间下总实例数量</p>
    */
   TotalInstanceCount?: number
   /**
-   * 命名空间ID
+   * <p>命名空间ID</p>
    */
   Id?: string
   /**
-   * 是否可以编辑
+   * <p>是否可以编辑</p>
    */
   Editable?: boolean
   /**
-   * 可以操作此命名空间的用户ID列表
+   * <p>可以操作此命名空间的用户ID列表</p>
    */
   UserIds?: Array<string>
   /**
-   * 可以操作此命名空间的用户组ID列表
+   * <p>可以操作此命名空间的用户组ID列表</p>
    */
   GroupIds?: Array<string>
   /**
-   * 移除可以操作此命名空间的用户ID列表
+   * <p>移除可以操作此命名空间的用户ID列表</p>
    */
   RemoveUserIds?: Array<string>
   /**
-   * 移除可以操作此命名空间的用户组ID列表
+   * <p>移除可以操作此命名空间的用户组ID列表</p>
    */
   RemoveGroupIds?: Array<string>
   /**
-   * 该命名空间下的服务对哪些命名空间可见
+   * <p>该命名空间下的服务对哪些命名空间可见</p>
    */
   ServiceExportTo?: Array<string>
   /**
-   * 是否开启同步到全局注册中心
+   * <p>是否开启同步到全局注册中心</p>
    */
   SyncToGlobalRegistry?: boolean
   /**
-   * 元数据
+   * <p>元数据</p>
    */
   Metadatas?: Array<Metadata>
 }
@@ -8586,7 +8586,7 @@ export interface DescribeCloudNativeAPIGatewayConsumerGroupRequest {
  */
 export interface CreateGovernanceInstancesResponse {
   /**
-   * 创建是否成功。
+   * <p>创建是否成功。</p>
    */
   Result?: boolean
   /**
@@ -10687,35 +10687,35 @@ export interface AIGWAKSKCredentialConfig {
  */
 export interface DescribeConfigFileReleaseHistoriesRequest {
   /**
-   * TSE实例id
+   * <p>TSE实例id</p>
    */
   InstanceId: string
   /**
-   * 命名空间
+   * <p>命名空间</p>
    */
   Namespace?: string
   /**
-   * 组
+   * <p>组</p>
    */
   Group?: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name?: string
   /**
-   * 发布历史记录id，用于分页优化，一般指定 EndId，就不用指定 Offset，否则分页可能不连续
+   * <p>发布历史记录id，用于分页优化，一般指定 EndId，就不用指定 Offset，否则分页可能不连续</p>
    */
   EndId?: number
   /**
-   * 配置文件ID
+   * <p>配置文件ID</p>
    */
   ConfigFileId?: string
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
 }
@@ -11429,38 +11429,35 @@ export interface DescribeInstanceTagInfosRequest {
  */
 export interface GovernanceNamespaceInput {
   /**
-   * 命名空间名。
+   * <p>命名空间名。</p>
    */
   Name: string
   /**
-   * 描述信息。
+   * <p>描述信息。</p>
    */
   Comment?: string
   /**
-   * 新增的可以操作此命名空间的用户ID列表
+   * <p>新增的可以操作此命名空间的用户ID列表</p>
    */
   UserIds?: Array<string>
   /**
-   * 新增的可以操作此命名空间的用户组ID列表
+   * <p>新增的可以操作此命名空间的用户组ID列表</p>
    */
   GroupIds?: Array<string>
   /**
-   * 移除可以操作此命名空间的用户ID列表
+   * <p>移除可以操作此命名空间的用户ID列表</p>
    */
   RemoveUserIds?: Array<string>
   /**
-   * 移除可以操作此命名空间的用户组ID列表
+   * <p>移除可以操作此命名空间的用户组ID列表</p>
    */
   RemoveGroupIds?: Array<string>
   /**
-   * 该命名空间下的服务对哪些命名空间下可见，
-1、为空或者不填写，表示仅当前命名空间可见
-2、列表内容仅一个元素，且为字符 *，表示所有命名空间可见（包括新增）
-3、列表内容为部份命名空间名称，则只对这些命名空间下可见
+   * <p>该命名空间下的服务对哪些命名空间下可见，<br>1、为空或者不填写，表示仅当前命名空间可见<br>2、列表内容仅一个元素，且为字符 *，表示所有命名空间可见（包括新增）<br>3、列表内容为部份命名空间名称，则只对这些命名空间下可见</p>
    */
   ServiceExportTo?: Array<string>
   /**
-   * 是否开启同步到全局注册中心
+   * <p>是否开启同步到全局注册中心</p>
    */
   SyncToGlobalRegistry?: boolean
 }
@@ -12051,84 +12048,83 @@ export interface RollbackConfigFileReleasesResponse {
  */
 export interface ConfigFileReleaseHistory {
   /**
-   * 配置文件发布历史记录id
+   * <p>配置文件发布历史记录id</p>
    */
   Id?: number
   /**
-   * 配置文件发布历史名称
+   * <p>配置文件发布历史名称</p>
    */
   Name?: string
   /**
-   * 配置文件发布历史命名空间
+   * <p>配置文件发布历史命名空间</p>
    */
   Namespace?: string
   /**
-   * 配置文件发布历史组
+   * <p>配置文件发布历史组</p>
    */
   Group?: string
   /**
-   * 配置文件发布历史名称
+   * <p>配置文件发布历史名称</p>
    */
   FileName?: string
   /**
-   * 配置文件发布历史内容
+   * <p>配置文件发布历史内容</p>
    */
   Content?: string
   /**
-   * 配置文件发布历史格式
+   * <p>配置文件发布历史格式</p>
    */
   Format?: string
   /**
-   * 配置文件发布历史注释
+   * <p>配置文件发布历史注释</p>
    */
   Comment?: string
   /**
-   * 配置文件发布历史Md5
+   * <p>配置文件发布历史Md5</p>
    */
   Md5?: string
   /**
-   * 配置文件发布历史类型
+   * <p>配置文件发布历史类型</p>
    */
   Type?: string
   /**
-   * 配置文件发布历史状态
+   * <p>配置文件发布历史状态</p>
    */
   Status?: string
   /**
-   * 配置文件发布历史标签组
+   * <p>配置文件发布历史标签组</p>
    */
   Tags?: Array<ConfigFileTag>
   /**
-   * 配置文件发布创建时间
+   * <p>配置文件发布创建时间</p>
    */
   CreateTime?: string
   /**
-   * 配置文件发布创建者
+   * <p>配置文件发布创建者</p>
    */
   CreateBy?: string
   /**
-   * 配置文件发布修改时间
+   * <p>配置文件发布修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 配置文件发布修改者
+   * <p>配置文件发布修改者</p>
    */
   ModifyBy?: string
   /**
-   * 发布描述
+   * <p>发布描述</p>
    */
   ReleaseDescription?: string
   /**
-   * 原因，用于失败时原因展示
+   * <p>原因，用于失败时原因展示</p>
    */
   ReleaseReason?: string
   /**
-   * 配置文件类型
-
+   * <p>配置文件类型</p>
    */
   ConfigFileSupportedClient?: number
   /**
-   * 配置文件持久化
+   * <p>配置文件持久化</p>
    */
   ConfigFilePersistent?: ConfigFilePersistent
 }
@@ -12307,15 +12303,15 @@ export interface CloudNativeAPIGatewayVpcConfig {
  */
 export interface DescribeGovernanceInstancesResponse {
   /**
-   * 服务实例总数量。
+   * <p>服务实例总数量。</p>
    */
   TotalCount?: number
   /**
-   * 服务里实例列表。
+   * <p>服务里实例列表。</p>
    */
   Content?: Array<GovernanceInstance>
   /**
-   * 地域
+   * <p>地域</p>
    */
   Location?: Location
   /**
@@ -13329,51 +13325,51 @@ export interface DescribeZookeeperServerInterfacesRequest {
  */
 export interface DescribeGovernanceInstancesRequest {
   /**
-   * 实例所在的服务名。
+   * <p>实例所在的服务名。</p>
    */
   Service: string
   /**
-   * 实例所在命名空间名。
+   * <p>实例所在命名空间名。</p>
    */
   Namespace: string
   /**
-   * tse实例id。
+   * <p>tse实例id。</p>
    */
   InstanceId: string
   /**
-   * 根据实例ip过滤，多个ip使用英文逗号分隔。
+   * <p>根据实例ip过滤，多个ip使用英文逗号分隔。</p>
    */
   Host?: string
   /**
-   * 根据实例版本过滤。
+   * <p>根据实例版本过滤。</p>
    */
   InstanceVersion?: string
   /**
-   * 根据实例协议过滤。
+   * <p>根据实例协议过滤。</p>
    */
   Protocol?: string
   /**
-   * 根据实例健康状态过滤。false：表示不健康，true：表示健康。
+   * <p>根据实例健康状态过滤。false：表示不健康，true：表示健康。</p>
    */
   HealthStatus?: boolean
   /**
-   * 根据实例隔离状态过滤。false：表示非隔离，true：表示隔离中。
+   * <p>根据实例隔离状态过滤。false：表示非隔离，true：表示隔离中。</p>
    */
   Isolate?: boolean
   /**
-   * 根据元数据信息过滤。目前只支持一组元数据键值，若传了多个键值对，只会以第一个过滤。
+   * <p>根据元数据信息过滤。目前只支持一组元数据键值，若传了多个键值对，只会以第一个过滤。</p>
    */
   Metadatas?: Array<Metadata>
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 地域
+   * <p>地域</p>
    */
   Location?: Location
 }
@@ -14208,11 +14204,11 @@ export interface ModifyCloudNativeAPIGatewayRouteRateLimitResponse {
  */
 export interface DescribeConfigFileReleaseHistoriesResponse {
   /**
-   * 数据总数量
+   * <p>数据总数量</p>
    */
   TotalCount?: number
   /**
-   * 配置文件发布历史列表
+   * <p>配置文件发布历史列表</p>
    */
   ConfigFileReleaseHistories?: Array<ConfigFileReleaseHistory>
   /**

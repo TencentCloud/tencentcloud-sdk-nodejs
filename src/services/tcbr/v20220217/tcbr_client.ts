@@ -18,91 +18,93 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeCloudRunServersResponse,
-  SubmitServerConfigChangeDiffRequest,
-  ModifyStableIPStatusResponse,
-  DescribeCloudRunProcessLogRequest,
-  RepositoryInfo,
-  ReleaseGrayRequest,
-  StorageInfo,
   DescribeEnvBaseInfoResponse,
-  DeployRecord,
-  StartVersionInstanceRequest,
-  CreateCloudRunServerRequest,
-  CreateVpcInfo,
-  DescribeServerManageTaskResponse,
-  SearchClsLogResponse,
-  TaskStepInfo,
-  VersionPodInstance,
-  DescribeVersionDetailRequest,
-  ServerBaseConfig,
   InitializeCloudRunResourceResponse,
-  DescribeCloudRunEnvsResponse,
-  ServerBaseInfo,
-  InitializeCloudRunResourceRequest,
-  DescribeCloudRunEnvsRequest,
-  ReleaseGrayResponse,
   DescribeCloudRunProcessLogResponse,
-  VersionFlowInfo,
-  ServerBaseConfigDiff,
   StopVersionInstanceRequest,
   DeployParam,
-  DiffConfigItem,
-  VolumeConf,
-  StopVersionInstanceResponse,
-  SubmitServerRollbackResponse,
-  SubmitServerConfigChangeDiffResponse,
-  Tag,
   StartVersionInstanceResponse,
-  OnlineVersionInfo,
-  SearchClsLogRequest,
-  DescribeCloudRunPodListRequest,
-  ObjectKVPriority,
-  DescribeReleaseOrderResponse,
-  StaticStorageInfo,
+  DescribeReleaseOrderRequest,
   LogResObject,
-  UpdateCloudRunServerRequest,
-  SimpleVersion,
   LogServiceInfo,
-  OperateServerManageResponse,
-  DescribeCloudRunServerDetailRequest,
-  DatabasesInfo,
-  DescribeCloudRunServersRequest,
-  DeleteCloudRunServerRequest,
   ClsInfo,
-  DescribeServerManageTaskRequest,
+  StartVersionInstanceRequest,
+  DescribeCloudRunDeployRecordRequest,
+  DescribeCloudRunPodListResponse,
+  FailDeleteVersions,
+  Tag,
+  DescribeEnvBaseInfoRequest,
+  CreateCloudRunServerResponse,
+  UpdateCloudRunServerResponse,
+  ServerManageTaskInfo,
+  DeleteCloudRunServerResponse,
+  DescribeCloudRunProcessLogRequest,
+  TaskStepInfo,
+  ReleaseGrayRequest,
+  DeployRecord,
+  CreateVpcInfo,
+  StopVersionInstanceResponse,
+  InitializeCloudRunResourceRequest,
+  OperateServerManageResponse,
+  VolumeConf,
+  DescribeStableIPTaskResponse,
+  DeleteCloudRunServerRequest,
+  ServerBaseConfig,
   ModifyStableIPStatusRequest,
   HpaPolicy,
-  OperateServerManageRequest,
   LogObject,
+  CreateCloudRunEnvResponse,
+  ReleaseOrderInfo,
+  ServerBaseInfo,
+  EnvInfo,
+  BuildPacksInfo,
+  SubmitServerConfigChangeDiffRequest,
+  CreateCloudRunServerRequest,
+  SearchClsLogResponse,
+  DescribeVersionDetailRequest,
+  DescribeCloudRunEnvsResponse,
+  ReleaseGrayResponse,
+  ServerBaseConfigDiff,
+  DescribeReleaseOrderResponse,
+  StaticStorageInfo,
+  DatabasesInfo,
+  RepositoryInfo,
   PublicNetConf,
-  ObjectKV,
-  DescribeReleaseOrderRequest,
-  EnvBaseInfo,
+  OnlineVersionInfo,
+  SubmitServerConfigChangeDiffResponse,
   FunctionInfo,
   DescribeCloudRunServerDetailResponse,
-  CreateCloudRunEnvResponse,
-  DescribeCloudRunDeployRecordRequest,
-  VpcConf,
-  ReleaseOrderInfo,
-  DeleteCloudRunVersionsRequest,
-  DeleteCloudRunServerResponse,
-  DescribeCloudRunPodListResponse,
-  TimerScale,
-  EnvInfo,
-  FailDeleteVersions,
-  SubmitServerRollbackRequest,
-  DescribeEnvBaseInfoRequest,
-  CreateCloudRunEnvRequest,
-  CreateCloudRunServerResponse,
-  DeleteCloudRunVersionsResponse,
-  UpdateCloudRunServerResponse,
-  DescribeVersionDetailResponse,
-  VersionInfo,
-  BuildPacksInfo,
+  EnvBaseInfo,
   SuccessDeleteVersions,
+  ModifyStableIPStatusResponse,
+  VersionInfo,
+  DescribeCloudRunServersResponse,
+  StorageInfo,
+  DescribeServerManageTaskResponse,
   DescribeCloudRunDeployRecordResponse,
-  ServerManageTaskInfo,
+  UpdateCloudRunServerRequest,
+  DescribeCloudRunEnvsRequest,
+  DiffConfigItem,
+  SubmitServerRollbackResponse,
+  SearchClsLogRequest,
+  DescribeCloudRunPodListRequest,
+  OperateServerManageRequest,
+  VersionPodInstance,
+  DescribeCloudRunServerDetailRequest,
+  DeleteCloudRunVersionsResponse,
+  DescribeCloudRunServersRequest,
+  SimpleVersion,
+  DescribeServerManageTaskRequest,
+  DescribeVersionDetailResponse,
+  DescribeStableIPTaskRequest,
+  VpcConf,
+  DeleteCloudRunVersionsRequest,
+  TimerScale,
+  SubmitServerRollbackRequest,
+  CreateCloudRunEnvRequest,
+  VersionFlowInfo,
+  ObjectKV,
+  ObjectKVPriority,
 } from "./tcbr_models"
 
 /**
@@ -155,13 +157,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询发布单
+   * 本接口 DescribeStableIPTask 用于修改固定 IP 任务状态
    */
-  async DescribeReleaseOrder(
-    req: DescribeReleaseOrderRequest,
-    cb?: (error: string, rep: DescribeReleaseOrderResponse) => void
-  ): Promise<DescribeReleaseOrderResponse> {
-    return this.request("DescribeReleaseOrder", req, cb)
+  async DescribeStableIPTask(
+    req: DescribeStableIPTaskRequest,
+    cb?: (error: string, rep: DescribeStableIPTaskResponse) => void
+  ): Promise<DescribeStableIPTaskResponse> {
+    return this.request("DescribeStableIPTask", req, cb)
   }
 
   /**
@@ -232,6 +234,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudRunProcessLogResponse) => void
   ): Promise<DescribeCloudRunProcessLogResponse> {
     return this.request("DescribeCloudRunProcessLog", req, cb)
+  }
+
+  /**
+   * 查询发布单
+   */
+  async DescribeReleaseOrder(
+    req: DescribeReleaseOrderRequest,
+    cb?: (error: string, rep: DescribeReleaseOrderResponse) => void
+  ): Promise<DescribeReleaseOrderResponse> {
+    return this.request("DescribeReleaseOrder", req, cb)
   }
 
   /**

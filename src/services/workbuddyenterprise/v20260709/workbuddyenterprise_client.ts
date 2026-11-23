@@ -30,6 +30,7 @@ import {
   TokenUsage,
   ConnectorInfo,
   CreateAgentVersionFromSourceResponse,
+  SessionArtifactDetail,
   MessageEventToolCall,
   DescribeScheduledTaskRequest,
   MessageEvent,
@@ -215,7 +216,7 @@ export class Client extends AbstractClient {
    * 删除指定的物料，删除后不可恢复。
    */
   async DeleteSessionArtifactList(
-    req?: DeleteSessionArtifactListRequest,
+    req: DeleteSessionArtifactListRequest,
     cb?: (error: string, rep: DeleteSessionArtifactListResponse) => void
   ): Promise<DeleteSessionArtifactListResponse> {
     return this.request("DeleteSessionArtifactList", req, cb)
@@ -355,7 +356,7 @@ export class Client extends AbstractClient {
    * 分页查询会话物料列表。
    */
   async DescribeSessionArtifactList(
-    req?: DescribeSessionArtifactListRequest,
+    req: DescribeSessionArtifactListRequest,
     cb?: (error: string, rep: DescribeSessionArtifactListResponse) => void
   ): Promise<DescribeSessionArtifactListResponse> {
     return this.request("DescribeSessionArtifactList", req, cb)
@@ -405,7 +406,7 @@ export class Client extends AbstractClient {
    * 获取会话物料下载链接。
    */
   async DescribeSessionArtifactDownloadUrl(
-    req?: DescribeSessionArtifactDownloadUrlRequest,
+    req: DescribeSessionArtifactDownloadUrlRequest,
     cb?: (error: string, rep: DescribeSessionArtifactDownloadUrlResponse) => void
   ): Promise<DescribeSessionArtifactDownloadUrlResponse> {
     return this.request("DescribeSessionArtifactDownloadUrl", req, cb)

@@ -18,25 +18,27 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  RenewMCPTokenResponse,
-  CreateSessionResponse,
   DescribeMCPTokensResponse,
-  StopPublishStreamRequest,
-  DescribeMCPTokensRequest,
-  StartPublishStreamWithURLResponse,
-  StopPublishStreamResponse,
-  StartPublishStreamWithURLRequest,
-  DestroySessionResponse,
-  CreateMCPTokenRequest,
-  ApplyConcurrentResponse,
-  StartPublishStreamResponse,
   CreateSessionRequest,
+  StartPublishStreamWithURLResponse,
+  DestroySessionResponse,
+  DescribeConcurrentCountRequest,
+  RenewMCPTokenResponse,
+  StopPublishStreamResponse,
+  CreateMCPTokenRequest,
+  StartPublishStreamResponse,
+  MCPTokenInfo,
+  Filter,
+  StartPublishStreamRequest,
+  CreateSessionResponse,
+  StopPublishStreamRequest,
+  StartPublishStreamWithURLRequest,
+  ApplyConcurrentResponse,
   ApplyConcurrentRequest,
   DescribeConcurrentCountResponse,
-  CreateMCPTokenResponse,
-  DescribeConcurrentCountRequest,
-  StartPublishStreamRequest,
   DestroySessionRequest,
+  DescribeMCPTokensRequest,
+  CreateMCPTokenResponse,
   RenewMCPTokenRequest,
 } from "./car_models"
 
@@ -53,7 +55,7 @@ export class Client extends AbstractClient {
    * 创建 MCP Token（签发令牌）
    */
   async CreateMCPToken(
-    req?: CreateMCPTokenRequest,
+    req: CreateMCPTokenRequest,
     cb?: (error: string, rep: CreateMCPTokenResponse) => void
   ): Promise<CreateMCPTokenResponse> {
     return this.request("CreateMCPToken", req, cb)
@@ -83,7 +85,7 @@ export class Client extends AbstractClient {
    * 续期 MCP Token（续期令牌）
    */
   async RenewMCPToken(
-    req?: RenewMCPTokenRequest,
+    req: RenewMCPTokenRequest,
     cb?: (error: string, rep: RenewMCPTokenResponse) => void
   ): Promise<RenewMCPTokenResponse> {
     return this.request("RenewMCPToken", req, cb)
@@ -93,7 +95,7 @@ export class Client extends AbstractClient {
    * 查询 MCP Token 列表
    */
   async DescribeMCPTokens(
-    req?: DescribeMCPTokensRequest,
+    req: DescribeMCPTokensRequest,
     cb?: (error: string, rep: DescribeMCPTokensResponse) => void
   ): Promise<DescribeMCPTokensResponse> {
     return this.request("DescribeMCPTokens", req, cb)

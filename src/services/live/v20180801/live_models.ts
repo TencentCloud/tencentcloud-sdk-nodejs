@@ -590,6 +590,28 @@ export interface DescribeAuditKeywordsResponse {
 }
 
 /**
+ * StopLiveSubtitle请求参数结构体
+ */
+export interface StopLiveSubtitleRequest {
+  /**
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   */
+  AppName: string
+  /**
+   * 您的推流域名。
+   */
+  PushDomainName: string
+  /**
+   * 流名称。
+   */
+  StreamName: string
+  /**
+   * 操作人备注信息。
+   */
+  Operator?: string
+}
+
+/**
  * DeleteAuditKeywordLib请求参数结构体
  */
 export interface DeleteAuditKeywordLibRequest {
@@ -3551,6 +3573,16 @@ export interface DescribeStreamDayPlayInfoListResponse {
 }
 
 /**
+ * StopLiveSubtitle返回参数结构体
+ */
+export interface StopLiveSubtitleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSceneVideoTask请求参数结构体
  */
 export interface CreateSceneVideoTaskRequest {
@@ -3711,6 +3743,28 @@ export interface DescribeLiveTranscodeTotalInfoRequest {
    * <p>可选值：Mainland：查询中国大陆（境内）数据，Oversea：则查询国际/港澳台（境外）数据，默认：查询全球地区（境内+境外）的数据。</p>
    */
   MainlandOrOversea?: string
+}
+
+/**
+ * StartLiveSubtitle请求参数结构体
+ */
+export interface StartLiveSubtitleRequest {
+  /**
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   */
+  AppName: string
+  /**
+   * 您的推流域名。
+   */
+  PushDomainName: string
+  /**
+   * 流名称。
+   */
+  StreamName: string
+  /**
+   * 操作人备注信息。
+   */
+  Operator?: string
 }
 
 /**
@@ -10691,6 +10745,16 @@ export interface DescribeLiveCloudEffectListRequest {
    * 云端特效类型, 默认不填，返回全部。PGC: 特效库中的特效；AICG : AI生成的特效；UGC：用户自定义上传的特效；
    */
   Type?: string
+}
+
+/**
+ * StartLiveSubtitle返回参数结构体
+ */
+export interface StartLiveSubtitleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

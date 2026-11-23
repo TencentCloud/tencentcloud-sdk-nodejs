@@ -16,17 +16,17 @@
  */
 
 /**
- * DescribeCloudRunServers返回参数结构体
+ * DescribeEnvBaseInfo返回参数结构体
  */
-export interface DescribeCloudRunServersResponse {
+export interface DescribeEnvBaseInfoResponse {
   /**
-   * 服务列表
+   * <p>环境基础信息</p>
    */
-  ServerList?: Array<ServerBaseInfo>
+  EnvBaseInfo?: EnvBaseInfo
   /**
-   * 服务总数
+   * <p>是否存在</p>
    */
-  Total?: number
+  IsExist?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -34,9 +34,41 @@ export interface DescribeCloudRunServersResponse {
 }
 
 /**
- * SubmitServerConfigChangeDiff请求参数结构体
+ * InitializeCloudRunResource返回参数结构体
  */
-export interface SubmitServerConfigChangeDiffRequest {
+export interface InitializeCloudRunResourceResponse {
+  /**
+   * <p>环境Id</p>
+   */
+  EnvId?: string
+  /**
+   * <p>后付费订单号</p>
+   */
+  TranId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudRunProcessLog返回参数结构体
+ */
+export interface DescribeCloudRunProcessLogResponse {
+  /**
+   * 运行日志列表
+   */
+  Logs?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopVersionInstance请求参数结构体
+ */
+export interface StopVersionInstanceRequest {
   /**
    * 环境Id
    */
@@ -46,23 +78,356 @@ export interface SubmitServerConfigChangeDiffRequest {
    */
   ServerName: string
   /**
-   * 配置信息 deprecated
+   * 实例名
    */
-  Conf?: ServerBaseConfigDiff
-  /**
-   * 配置信息
-   */
-  Items?: Array<DiffConfigItem>
+  InstanceName: string
 }
 
 /**
- * ModifyStableIPStatus返回参数结构体
+ * 部署参数
  */
-export interface ModifyStableIPStatusResponse {
+export interface DeployParam {
   /**
-   * 任务 ID
+   * 部署类型：package/image/repository/pipeline/jar/war
+   */
+  DeployType: string
+  /**
+   * 部署类型为image时传入
+   */
+  ImageUrl?: string
+  /**
+   * 部署类型为package时传入
+   */
+  PackageName?: string
+  /**
+   * 部署类型为package时传入
+   */
+  PackageVersion?: string
+  /**
+   * 部署备注
+   */
+  DeployRemark?: string
+  /**
+   * 代码仓库信息
+   */
+  RepoInfo?: RepositoryInfo
+  /**
+   * 无Dockerfile时填写
+   */
+  BuildPacks?: BuildPacksInfo
+  /**
+   * 发布类型 GRAY | FULL
+   */
+  ReleaseType?: string
+}
+
+/**
+ * StartVersionInstance返回参数结构体
+ */
+export interface StartVersionInstanceResponse {
+  /**
+   * pod名
+   */
+  InstanceName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeReleaseOrder请求参数结构体
+ */
+export interface DescribeReleaseOrderRequest {
+  /**
+   * 环境 Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 发布单状态
+   */
+  Status?: string
+}
+
+/**
+ * CLS日志结果
+ */
+export interface LogResObject {
+  /**
+   * 获取更多检索结果的游标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Context: string
+  /**
+   * 搜索结果是否已经全部返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ListOver: boolean
+  /**
+   * 日志内容信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Results: Array<LogObject>
+}
+
+/**
+ * 云日志服务相关信息
+ */
+export interface LogServiceInfo {
+  /**
+   * log名
+   */
+  LogsetName: string
+  /**
+   * log-id
+   */
+  LogsetId: string
+  /**
+   * topic名
+   */
+  TopicName: string
+  /**
+   * topic-id
+   */
+  TopicId: string
+  /**
+   * cls日志所属地域
+   */
+  Region: string
+}
+
+/**
+ * cls日志信息
+ */
+export interface ClsInfo {
+  /**
+   * cls所属地域
+   */
+  ClsRegion: string
+  /**
+   * cls日志集ID
+   */
+  ClsLogsetId: string
+  /**
+   * cls日志主题ID
+   */
+  ClsTopicId: string
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+}
+
+/**
+ * StartVersionInstance请求参数结构体
+ */
+export interface StartVersionInstanceRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 版本名
+   */
+  VersionName: string
+}
+
+/**
+ * DescribeCloudRunDeployRecord请求参数结构体
+ */
+export interface DescribeCloudRunDeployRecordRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+}
+
+/**
+ * DescribeCloudRunPodList返回参数结构体
+ */
+export interface DescribeCloudRunPodListResponse {
+  /**
+   * pod实例列表
+   */
+  PodList?: Array<VersionPodInstance>
+  /**
+   * pod总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 删除失败版本信息
+ */
+export interface FailDeleteVersions {
+  /**
+   * 删除失败版本信息
+   */
+  Version: SimpleVersion
+  /**
+   * 删除失败错误码
+   */
+  ErrorCode: number
+  /**
+   * 删除失败错误信息
+   */
+  ErrorMsg: string
+  /**
+   * 删除操作 RequestId
+   */
+  RequestId: string
+}
+
+/**
+ * 标签键值对
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  Key: string
+  /**
+   * 标签值
+   */
+  Value: string
+}
+
+/**
+ * DescribeEnvBaseInfo请求参数结构体
+ */
+export interface DescribeEnvBaseInfoRequest {
+  /**
+   * <p>环境 Id</p>
+   */
+  EnvId: string
+}
+
+/**
+ * CreateCloudRunServer返回参数结构体
+ */
+export interface CreateCloudRunServerResponse {
+  /**
+   * <p>一键部署任务Id，微信云托管，暂时用不到</p>
    */
   TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCloudRunServer返回参数结构体
+ */
+export interface UpdateCloudRunServerResponse {
+  /**
+   * <p>环境Id</p>
+   */
+  EnvId?: string
+  /**
+   * <p>一键部署任务Id，暂时用不到</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 服务管理任务信息
+ */
+export interface ServerManageTaskInfo {
+  /**
+   * 任务Id
+   */
+  Id?: number
+  /**
+   * 环境Id
+   */
+  EnvId?: string
+  /**
+   * 服务名
+   */
+  ServerName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 变更类型
+   */
+  ChangeType?: string
+  /**
+   * 发布类型
+   */
+  ReleaseType?: string
+  /**
+   * 部署类型
+   */
+  DeployType?: string
+  /**
+   * 上一个版本名
+   */
+  PreVersionName?: string
+  /**
+   * 版本名
+   */
+  VersionName?: string
+  /**
+   * 流水线Id
+   */
+  PipelineId?: number
+  /**
+   * 流水线任务Id
+   */
+  PipelineTaskId?: number
+  /**
+   * 发布单Id
+   */
+  ReleaseId?: number
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 步骤信息
+   */
+  Steps?: Array<TaskStepInfo>
+  /**
+   * 失败原因
+   */
+  FailReason?: string
+  /**
+   * 操作标识
+   */
+  OperatorRemark?: string
+}
+
+/**
+ * DeleteCloudRunServer返回参数结构体
+ */
+export interface DeleteCloudRunServerResponse {
+  /**
+   * 删除结果：success / failed
+   */
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -84,21 +449,36 @@ export interface DescribeCloudRunProcessLogRequest {
 }
 
 /**
- * 代码仓库信息
+ * 任务步骤信息
  */
-export interface RepositoryInfo {
+export interface TaskStepInfo {
   /**
-   * git source
+   * 步骤名
    */
-  Source: string
+  Name?: string
   /**
-   * 仓库名
+   * 未启动："todo"
+运行中："running"
+失败："failed"
+成功结束："finished"
    */
-  Repo: string
+  Status?: string
   /**
-   * 分支名
+   * 开始时间
    */
-  Branch: string
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 消耗时间：秒
+   */
+  CostTime?: number
+  /**
+   * 失败原因
+   */
+  FailReason?: string
 }
 
 /**
@@ -133,47 +513,6 @@ export interface ReleaseGrayRequest {
    * 流量比例
    */
   GrayFlowRatio?: number
-}
-
-/**
- * StorageInfo 资源信息
- */
-export interface StorageInfo {
-  /**
-   * 资源所属地域。
-当前支持ap-shanghai
-   */
-  Region: string
-  /**
-   * 桶名，存储资源的唯一标识
-   */
-  Bucket: string
-  /**
-   * cdn 域名
-   */
-  CdnDomain: string
-  /**
-   * 资源所属用户的腾讯云appId
-   */
-  AppId: string
-}
-
-/**
- * DescribeEnvBaseInfo返回参数结构体
- */
-export interface DescribeEnvBaseInfoResponse {
-  /**
-   * <p>环境基础信息</p>
-   */
-  EnvBaseInfo?: EnvBaseInfo
-  /**
-   * <p>是否存在</p>
-   */
-  IsExist?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -228,54 +567,6 @@ export interface DeployRecord {
 }
 
 /**
- * StartVersionInstance请求参数结构体
- */
-export interface StartVersionInstanceRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 版本名
-   */
-  VersionName: string
-}
-
-/**
- * CreateCloudRunServer请求参数结构体
- */
-export interface CreateCloudRunServerRequest {
-  /**
-   * <p>环境Id</p>
-   */
-  EnvId: string
-  /**
-   * <p>服务名</p>
-   */
-  ServerName: string
-  /**
-   * <p>部署信息</p>
-   */
-  DeployInfo: DeployParam
-  /**
-   * <p>服务配置信息(已废弃)</p>
-   */
-  ServerConfig?: ServerBaseConfig
-  /**
-   * <p>服务配置信息</p>
-   */
-  Items?: Array<DiffConfigItem>
-  /**
-   * <p>vpc 信息</p>
-   */
-  VpcInfo?: CreateVpcInfo
-}
-
-/**
  * 创建 vpc 信息
  */
 export interface CreateVpcInfo {
@@ -294,17 +585,9 @@ export interface CreateVpcInfo {
 }
 
 /**
- * DescribeServerManageTask返回参数结构体
+ * StopVersionInstance返回参数结构体
  */
-export interface DescribeServerManageTaskResponse {
-  /**
-   * 是否存在
-   */
-  IsExist?: boolean
-  /**
-   * 任务信息
-   */
-  Task?: ServerManageTaskInfo
+export interface StopVersionInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -312,94 +595,121 @@ export interface DescribeServerManageTaskResponse {
 }
 
 /**
- * SearchClsLog返回参数结构体
+ * InitializeCloudRunResource请求参数结构体
  */
-export interface SearchClsLogResponse {
+export interface InitializeCloudRunResourceRequest {
   /**
-   * 日志内容结果
+   * <p>tcbr,run,weda,baas</p>
    */
-  LogResults?: LogResObject
+  EnvType: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 任务步骤信息
- */
-export interface TaskStepInfo {
-  /**
-   * 步骤名
-   */
-  Name?: string
-  /**
-   * 未启动："todo"
-运行中："running"
-失败："failed"
-成功结束："finished"
-   */
-  Status?: string
-  /**
-   * 开始时间
-   */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * 消耗时间：秒
-   */
-  CostTime?: number
-  /**
-   * 失败原因
-   */
-  FailReason?: string
-}
-
-/**
- * 版本Pod实例信息
- */
-export interface VersionPodInstance {
-  /**
-   * 实例webshell链接
-   */
-  Webshell?: string
-  /**
-   * 实例Id
-   */
-  PodId?: string
-  /**
-   * 实例状态
-   */
-  Status?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-}
-
-/**
- * DescribeVersionDetail请求参数结构体
- */
-export interface DescribeVersionDetailRequest {
-  /**
-   * <p>环境Id</p>
+   * <p>环境ID 云开发平台必填</p>
    */
   EnvId: string
   /**
-   * <p>服务名</p>
+   * <p>私有网络Id</p>
+   */
+  VpcId?: string
+  /**
+   * <p>子网列表</p>
+   */
+  SubNetIds?: Array<string>
+  /**
+   * <p>来源：wechat | cloud | weda</p>
+   */
+  Source?: string
+  /**
+   * <p>渠道：wechat | cloud | weda</p>
+   */
+  Channel?: string
+}
+
+/**
+ * OperateServerManage返回参数结构体
+ */
+export interface OperateServerManageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 存储配置
+ */
+export interface VolumeConf {
+  /**
+   * <p>存储类型</p>
+   */
+  Type?: string
+  /**
+   * <p>对象存储桶名称</p>
+   */
+  BucketName?: string
+  /**
+   * <p>存储连接地址</p>
+   */
+  Endpoint?: string
+  /**
+   * <p>存储连接用户密码</p>
+   */
+  KeyID?: string
+  /**
+   * <p>存储挂载目的目录</p>
+   */
+  DstPath?: string
+  /**
+   * <p>存储挂载源目录</p>
+   */
+  SrcPath?: string
+  /**
+   * <p>cfs 实例ip</p>
+   */
+  MountIP?: string
+  /**
+   * <p>默认读写</p>
+   */
+  ReadOnly?: boolean
+  /**
+   * <p>CFS 实例 ID</p>
+   */
+  InstanceId?: string
+}
+
+/**
+ * DescribeStableIPTask返回参数结构体
+ */
+export interface DescribeStableIPTaskResponse {
+  /**
+   * success | failed | running
+   */
+  Result?: string
+  /**
+   * 任务 ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCloudRunServer请求参数结构体
+ */
+export interface DeleteCloudRunServerRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
    */
   ServerName: string
   /**
-   * <p>版本名</p>
+   * 操作人信息
    */
-  VersionName: string
-  /**
-   * <p>channel</p>
-   */
-  Channel?: string
+  OperatorRemark?: string
 }
 
 /**
@@ -538,796 +848,6 @@ export interface ServerBaseConfig {
 }
 
 /**
- * InitializeCloudRunResource返回参数结构体
- */
-export interface InitializeCloudRunResourceResponse {
-  /**
-   * <p>环境Id</p>
-   */
-  EnvId?: string
-  /**
-   * <p>后付费订单号</p>
-   */
-  TranId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCloudRunEnvs返回参数结构体
- */
-export interface DescribeCloudRunEnvsResponse {
-  /**
-   * <p>环境信息列表</p>
-   */
-  EnvList?: Array<EnvInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 服务基本信息
- */
-export interface ServerBaseInfo {
-  /**
-   * <p>服务名</p>
-   */
-  ServerName?: string
-  /**
-   * <p>默认服务域名</p>
-   */
-  DefaultDomainName?: string
-  /**
-   * <p>自定义域名</p>
-   */
-  CustomDomainName?: string
-  /**
-   * <p>服务状态：creating/create_failed/freezing/freeze_fail/froze/unfreezing/unfreeze_fail/normal/deleting/delete_failed/abnormal</p><p>枚举值：</p><ul><li>creating： 创建中</li><li>create_failed： 创建失败</li><li>freezing： 冻结中</li><li>freeze_fail： 冻结失败</li><li>froze： 已冻结</li><li>unfreezing： 解冻中</li><li>unfreeze_fail： 解冻失败</li><li>normal： 正常</li><li>deleting： 删除中</li><li>delete_failed： 删除失败</li><li>abnormal： 服务异常</li></ul>
-   */
-  Status?: string
-  /**
-   * <p>更新时间</p>
-   */
-  UpdateTime?: string
-  /**
-   * <p>公网访问类型</p>
-   */
-  AccessTypes?: Array<string>
-  /**
-   * <p>展示自定义域名</p>
-   */
-  CustomDomainNames?: Array<string>
-  /**
-   * <p>服务类型: function 云函数2.0；container 容器服务</p>
-   */
-  ServerType?: string
-  /**
-   * <p>流量类型，目前只有 FLOW</p>
-   */
-  TrafficType?: string
-  /**
-   * <p>创建时间</p>
-   */
-  CreateTime?: string
-}
-
-/**
- * InitializeCloudRunResource请求参数结构体
- */
-export interface InitializeCloudRunResourceRequest {
-  /**
-   * <p>tcbr,run,weda,baas</p>
-   */
-  EnvType: string
-  /**
-   * <p>环境ID 云开发平台必填</p>
-   */
-  EnvId: string
-  /**
-   * <p>私有网络Id</p>
-   */
-  VpcId?: string
-  /**
-   * <p>子网列表</p>
-   */
-  SubNetIds?: Array<string>
-  /**
-   * <p>来源：wechat | cloud | weda</p>
-   */
-  Source?: string
-  /**
-   * <p>渠道：wechat | cloud | weda</p>
-   */
-  Channel?: string
-}
-
-/**
- * DescribeCloudRunEnvs请求参数结构体
- */
-export interface DescribeCloudRunEnvsRequest {
-  /**
-   * <p>环境ID，如果传了这个参数则只返回该环境的相关信息</p>
-   */
-  EnvId?: string
-  /**
-   * <p>指定Channels字段为可见渠道列表或不可见渠道列表<br>如只想获取渠道A的环境 就填写IsVisible= true,Channels = [&quot;A&quot;], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = [&quot;A&quot;]</p>
-   */
-  IsVisible?: boolean
-  /**
-   * <p>渠道列表，代表可见或不可见渠道由IsVisible参数指定</p>
-   */
-  Channels?: Array<string>
-}
-
-/**
- * ReleaseGray返回参数结构体
- */
-export interface ReleaseGrayResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCloudRunProcessLog返回参数结构体
- */
-export interface DescribeCloudRunProcessLogResponse {
-  /**
-   * 运行日志列表
-   */
-  Logs?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 版本流量信息
- */
-export interface VersionFlowInfo {
-  /**
-   * 版本名
-   */
-  VersionName: string
-  /**
-   * 是否默认版本
-   */
-  IsDefaultPriority: boolean
-  /**
-   * 流量比例
-   */
-  FlowRatio?: number
-  /**
-   * 测试KV值
-   */
-  UrlParam?: ObjectKV
-  /**
-   * 权重
-   */
-  Priority?: number
-}
-
-/**
- * 差异化更新配置信息
- */
-export interface ServerBaseConfigDiff {
-  /**
-   * 字符串参数 Key：EnvParam
-   */
-  StrParams?: Array<ObjectKV>
-}
-
-/**
- * StopVersionInstance请求参数结构体
- */
-export interface StopVersionInstanceRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 实例名
-   */
-  InstanceName: string
-}
-
-/**
- * 部署参数
- */
-export interface DeployParam {
-  /**
-   * 部署类型：package/image/repository/pipeline/jar/war
-   */
-  DeployType: string
-  /**
-   * 部署类型为image时传入
-   */
-  ImageUrl?: string
-  /**
-   * 部署类型为package时传入
-   */
-  PackageName?: string
-  /**
-   * 部署类型为package时传入
-   */
-  PackageVersion?: string
-  /**
-   * 部署备注
-   */
-  DeployRemark?: string
-  /**
-   * 代码仓库信息
-   */
-  RepoInfo?: RepositoryInfo
-  /**
-   * 无Dockerfile时填写
-   */
-  BuildPacks?: BuildPacksInfo
-  /**
-   * 发布类型 GRAY | FULL
-   */
-  ReleaseType?: string
-}
-
-/**
- * 服务配置入参
- */
-export interface DiffConfigItem {
-  /**
-   * <p>配置项 Key<br>MinNum 最小副本数<br>MaxNum 最大副本数<br>PolicyDetails 扩缩容策略<br>AccessTypes 访问类型<br>TimerScale 定时扩缩容<br>InternalAccess 内网访问<br>OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScale<br>SessionAffinity 会话亲和性 open | close<br>CpuSpecs cpu 规格<br>MemSpecs mem规格<br>EnvParam 环境变量<br>LogPath 日志采集路径<br>Port 端口<br>Dockerfile dockerfile 文件名<br>BuildDir 目标目录<br>Tag 服务标签<br>LogType 日志类型 none | default | custom<br>LogSetId 日志集Id<br>LogTopicId 日志主题ID<br>LogParseType 日志解析类型 json ｜ line<br>EntryPoint entrypoint 命令<br>Cmd cmd命令<br>VpcConf 网络信息</p>
-   */
-  Key: string
-  /**
-   * <p>字符串类型配置项值<br>InternalAccess、OperationMode、SessionAffinity、EnvParam、LogPath、Dockerfile、BuildDir、Tag、LogType、LogSetId、LogTopicId、LogParseType</p>
-   */
-  Value?: string
-  /**
-   * <p>int 类型配置项值<br>MinNum、MaxNum、Port</p>
-   */
-  IntValue?: number
-  /**
-   * <p>bool 类型配置项值</p>
-   */
-  BoolValue?: boolean
-  /**
-   * <p>浮点型配置项值<br>CpuSpecs、MemSpecs</p>
-   */
-  FloatValue?: number
-  /**
-   * <p>字符串数组配置项值<br>AccessTypes，EntryPoint，Cmd</p>
-   */
-  ArrayValue?: Array<string>
-  /**
-   * <p>扩缩容策略配置项值</p>
-   */
-  PolicyDetails?: Array<HpaPolicy>
-  /**
-   * <p>定时扩缩容配置项值</p>
-   */
-  TimerScale?: Array<TimerScale>
-  /**
-   * <p>配置内网访问时网络信息</p>
-   */
-  VpcConf?: VpcConf
-  /**
-   * <p>存储配置信息</p>
-   */
-  VolumesConf?: Array<VolumeConf>
-  /**
-   * <p>公网访问配置</p>
-   */
-  PublicNetConf?: PublicNetConf
-}
-
-/**
- * 存储配置
- */
-export interface VolumeConf {
-  /**
-   * <p>存储类型</p>
-   */
-  Type?: string
-  /**
-   * <p>对象存储桶名称</p>
-   */
-  BucketName?: string
-  /**
-   * <p>存储连接地址</p>
-   */
-  Endpoint?: string
-  /**
-   * <p>存储连接用户密码</p>
-   */
-  KeyID?: string
-  /**
-   * <p>存储挂载目的目录</p>
-   */
-  DstPath?: string
-  /**
-   * <p>存储挂载源目录</p>
-   */
-  SrcPath?: string
-  /**
-   * <p>cfs 实例ip</p>
-   */
-  MountIP?: string
-  /**
-   * <p>默认读写</p>
-   */
-  ReadOnly?: boolean
-  /**
-   * <p>CFS 实例 ID</p>
-   */
-  InstanceId?: string
-}
-
-/**
- * StopVersionInstance返回参数结构体
- */
-export interface StopVersionInstanceResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SubmitServerRollback返回参数结构体
- */
-export interface SubmitServerRollbackResponse {
-  /**
-   * 任务Id
-   */
-  TaskId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SubmitServerConfigChangeDiff返回参数结构体
- */
-export interface SubmitServerConfigChangeDiffResponse {
-  /**
-   * 任务Id 大于 0 需要请求 DescribeServerManageTask 接口获取任务进度，等于 0 则表示同步
-   */
-  TaskId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 标签键值对
- */
-export interface Tag {
-  /**
-   * 标签键
-   */
-  Key: string
-  /**
-   * 标签值
-   */
-  Value: string
-}
-
-/**
- * StartVersionInstance返回参数结构体
- */
-export interface StartVersionInstanceResponse {
-  /**
-   * pod名
-   */
-  InstanceName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 在线版本信息
- */
-export interface OnlineVersionInfo {
-  /**
-   * 版本名
-   */
-  VersionName?: string
-  /**
-   * 镜像url
-   */
-  ImageUrl?: string
-  /**
-   * 流量
-   */
-  FlowRatio?: string
-}
-
-/**
- * SearchClsLog请求参数结构体
- */
-export interface SearchClsLogRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 开始时间
-   */
-  StartTime: string
-  /**
-   * 结束时间
-   */
-  EndTime: string
-  /**
-   * 查询语句，详情参考 https://cloud.tencent.com/document/product/614/47044
-   */
-  QueryString: string
-  /**
-   * 单次要返回的日志条数，单次返回的最大条数为100
-   */
-  Limit: number
-  /**
-   * 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围
-   */
-  Context?: string
-  /**
-   * 按时间排序 asc（升序）或者 desc（降序），默认为 desc
-   */
-  Sort?: string
-  /**
-   * 是否使用Lucene语法，默认为false
-   */
-  UseLucene?: boolean
-  /**
-   * 日志类型
-   */
-  LogType?: number
-}
-
-/**
- * DescribeCloudRunPodList请求参数结构体
- */
-export interface DescribeCloudRunPodListRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 版本名
-   */
-  VersionName?: string
-  /**
-   * 默认为10， 最大为50
-不传或传0时 取默认10
-大于50时取50
-   */
-  PageSize?: number
-  /**
-   * 不传或传0时 会默认为1
-   */
-  PageNum?: number
-}
-
-/**
- * 通用键值权重对
- */
-export interface ObjectKVPriority {
-  /**
-   * 键值对Key
-   */
-  Key: string
-  /**
-   * 键值对Value
-   */
-  Value: string
-  /**
-   * 键值对权重
-   */
-  Priority: number
-}
-
-/**
- * DescribeReleaseOrder返回参数结构体
- */
-export interface DescribeReleaseOrderResponse {
-  /**
-   * 是否存在
-   */
-  IsExist?: boolean
-  /**
-   * 发布单信息
-   */
-  ReleaseOrderInfo?: ReleaseOrderInfo
-  /**
-   * 上一次成功发布时间
-   */
-  LastReleasedSuccessTime?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 静态CDN资源信息
- */
-export interface StaticStorageInfo {
-  /**
-   * 静态CDN域名
-   */
-  StaticDomain: string
-  /**
-   * 静态CDN默认文件夹，当前为根目录
-   */
-  DefaultDirName: string
-  /**
-   * 资源状态(process/online/offline/init)
-   */
-  Status: string
-  /**
-   * cos所属区域
-   */
-  Region: string
-  /**
-   * bucket信息
-   */
-  Bucket: string
-}
-
-/**
- * CLS日志结果
- */
-export interface LogResObject {
-  /**
-   * 获取更多检索结果的游标
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Context: string
-  /**
-   * 搜索结果是否已经全部返回
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ListOver: boolean
-  /**
-   * 日志内容信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Results: Array<LogObject>
-}
-
-/**
- * UpdateCloudRunServer请求参数结构体
- */
-export interface UpdateCloudRunServerRequest {
-  /**
-   * <p>环境Id</p>
-   */
-  EnvId: string
-  /**
-   * <p>服务名</p>
-   */
-  ServerName: string
-  /**
-   * <p>部署信息</p>
-   */
-  DeployInfo: DeployParam
-  /**
-   * <p>服务配置信息(已废弃)</p>
-   */
-  ServerConfig?: ServerBaseConfig
-  /**
-   * <p>业务类型，默认tcr</p>
-   */
-  Business?: string
-  /**
-   * <p>服务配置信息</p>
-   */
-  Items?: Array<DiffConfigItem>
-}
-
-/**
- * 删除版本时需要的简化信息
- */
-export interface SimpleVersion {
-  /**
-   * 要删除版本的环境 Id
-   */
-  EnvId: string
-  /**
-   * 要删除版本的服务名
-   */
-  ServerName: string
-  /**
-   * 要删除版本的版本名
-   */
-  VersionName: string
-}
-
-/**
- * 云日志服务相关信息
- */
-export interface LogServiceInfo {
-  /**
-   * log名
-   */
-  LogsetName: string
-  /**
-   * log-id
-   */
-  LogsetId: string
-  /**
-   * topic名
-   */
-  TopicName: string
-  /**
-   * topic-id
-   */
-  TopicId: string
-  /**
-   * cls日志所属地域
-   */
-  Region: string
-}
-
-/**
- * OperateServerManage返回参数结构体
- */
-export interface OperateServerManageResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCloudRunServerDetail请求参数结构体
- */
-export interface DescribeCloudRunServerDetailRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-}
-
-/**
- * 数据库资源信息
- */
-export interface DatabasesInfo {
-  /**
-   * 数据库唯一标识
-   */
-  InstanceId: string
-  /**
-   * 状态。包含以下取值：
-<li>INITIALIZING：资源初始化中</li>
-<li>RUNNING：运行中，可正常使用的状态</li>
-<li>UNUSABLE：禁用，不可用</li>
-<li>OVERDUE：资源过期</li>
-   */
-  Status: string
-  /**
-   * 所属地域。
-当前支持ap-shanghai
-   */
-  Region: string
-}
-
-/**
- * DescribeCloudRunServers请求参数结构体
- */
-export interface DescribeCloudRunServersRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 默认为9， 最大为30
-不传或传0时 取默认9
-大于30时取30
-   */
-  PageSize?: number
-  /**
-   * 不传或传0时 会默认为1
-   */
-  PageNum?: number
-  /**
-   * 服务名
-   */
-  ServerName?: string
-  /**
-   * 服务类型：function | container
-   */
-  ServerType?: string
-  /**
-   * vpcId
-   */
-  VpcId?: string
-}
-
-/**
- * DeleteCloudRunServer请求参数结构体
- */
-export interface DeleteCloudRunServerRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 操作人信息
-   */
-  OperatorRemark?: string
-}
-
-/**
- * cls日志信息
- */
-export interface ClsInfo {
-  /**
-   * cls所属地域
-   */
-  ClsRegion: string
-  /**
-   * cls日志集ID
-   */
-  ClsLogsetId: string
-  /**
-   * cls日志主题ID
-   */
-  ClsTopicId: string
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-}
-
-/**
- * DescribeServerManageTask请求参数结构体
- */
-export interface DescribeServerManageTaskRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 任务Id
-   */
-  TaskId: number
-  /**
-   * 操作标识
-   */
-  OperatorRemark?: string
-}
-
-/**
  * ModifyStableIPStatus请求参数结构体
  */
 export interface ModifyStableIPStatusRequest {
@@ -1353,32 +873,6 @@ export interface HpaPolicy {
    * 扩缩容阈值
    */
   PolicyThreshold: number
-}
-
-/**
- * OperateServerManage请求参数结构体
- */
-export interface OperateServerManageRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 任报Id
-   */
-  TaskId: number
-  /**
-   * 操作类型:cancel | go_back | done
-   */
-  OperateType: string
-  /**
-   * 操作标识
-   */
-  OperatorRemark?: string
 }
 
 /**
@@ -1422,131 +916,6 @@ export interface LogObject {
 }
 
 /**
- * 公网访问配置
- */
-export interface PublicNetConf {
-  /**
-   * <p>是否开启公网访问</p><p>枚举值：</p><ul><li>ENABLE： 开启公网访问</li><li>DISABLE： 关闭公网访问</li></ul>
-   */
-  PublicNetStatus?: string
-}
-
-/**
- * 通用Key Value
- */
-export interface ObjectKV {
-  /**
-   * 键值对Key
-   */
-  Key: string
-  /**
-   * 键值对Value
-   */
-  Value: string
-}
-
-/**
- * DescribeReleaseOrder请求参数结构体
- */
-export interface DescribeReleaseOrderRequest {
-  /**
-   * 环境 Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 发布单状态
-   */
-  Status?: string
-}
-
-/**
- * 环境基础信息
- */
-export interface EnvBaseInfo {
-  /**
-   * 环境Id
-   */
-  EnvId?: string
-  /**
-   * 套餐类型：Trial ｜ Standard ｜ Professional ｜ Enterprise
-   */
-  PackageType?: string
-  /**
-   * VPC Id
-   */
-  VpcId?: string
-  /**
-   * 环境创建时间
-   */
-  CreateTime?: string
-  /**
-   * 环境别名
-   */
-  Alias?: string
-  /**
-   * 环境状态
-   */
-  Status?: string
-  /**
-   * 环境地域
-   */
-  Region?: string
-  /**
-   * 环境类型 tcbr ｜ run
-   */
-  EnvType?: string
-  /**
-   * 子网id
-   */
-  SubnetIds?: string
-  /**
-   * 回收标志，为空则表示正常，recycle表示已回收
-   */
-  Recycle?: string
-}
-
-/**
- * 函数的信息
- */
-export interface FunctionInfo {
-  /**
-   * 命名空间
-   */
-  Namespace: string
-  /**
-   * 所属地域。
-当前支持ap-shanghai
-   */
-  Region: string
-}
-
-/**
- * DescribeCloudRunServerDetail返回参数结构体
- */
-export interface DescribeCloudRunServerDetailResponse {
-  /**
-   * 服务基本信息
-   */
-  BaseInfo?: ServerBaseInfo
-  /**
-   * 服务配置信息
-   */
-  ServerConfig?: ServerBaseConfig
-  /**
-   * 在线版本信息
-   */
-  OnlineVersionInfos?: Array<OnlineVersionInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateCloudRunEnv返回参数结构体
  */
 export interface CreateCloudRunEnvResponse {
@@ -1562,42 +931,6 @@ export interface CreateCloudRunEnvResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeCloudRunDeployRecord请求参数结构体
- */
-export interface DescribeCloudRunDeployRecordRequest {
-  /**
-   * 环境Id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-}
-
-/**
- * 云托管服务 Vpc 配置
- */
-export interface VpcConf {
-  /**
-   * vpc id
-   */
-  VpcId?: string
-  /**
-   * vpc 网段
-   */
-  VpcCIDR?: string
-  /**
-   * subnet id
-   */
-  SubnetId?: string
-  /**
-   * subnet 网段
-   */
-  SubnetCIDR?: string
 }
 
 /**
@@ -1651,91 +984,49 @@ export interface ReleaseOrderInfo {
 }
 
 /**
- * DeleteCloudRunVersions请求参数结构体
+ * 服务基本信息
  */
-export interface DeleteCloudRunVersionsRequest {
+export interface ServerBaseInfo {
   /**
-   * 环境 Id
+   * <p>服务名</p>
    */
-  EnvId: string
+  ServerName?: string
   /**
-   * 是否删除服务，只有最后一个版本的时候才生效
+   * <p>默认服务域名</p>
    */
-  IsDeleteServer: boolean
+  DefaultDomainName?: string
   /**
-   * 只有删除服务的时候，才生效
+   * <p>自定义域名</p>
    */
-  IsDeleteImage: boolean
+  CustomDomainName?: string
   /**
-   * 删除版本的信息
+   * <p>服务状态：creating/create_failed/freezing/freeze_fail/froze/unfreezing/unfreeze_fail/normal/deleting/delete_failed/abnormal</p><p>枚举值：</p><ul><li>creating： 创建中</li><li>create_failed： 创建失败</li><li>freezing： 冻结中</li><li>freeze_fail： 冻结失败</li><li>froze： 已冻结</li><li>unfreezing： 解冻中</li><li>unfreeze_fail： 解冻失败</li><li>normal： 正常</li><li>deleting： 删除中</li><li>delete_failed： 删除失败</li><li>abnormal： 服务异常</li></ul>
    */
-  SimpleVersions: Array<SimpleVersion>
+  Status?: string
   /**
-   * 操作备注
+   * <p>更新时间</p>
    */
-  OperatorRemark?: string
-}
-
-/**
- * DeleteCloudRunServer返回参数结构体
- */
-export interface DeleteCloudRunServerResponse {
+  UpdateTime?: string
   /**
-   * 删除结果：success / failed
+   * <p>公网访问类型</p>
    */
-  Result?: string
+  AccessTypes?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>展示自定义域名</p>
    */
-  RequestId?: string
-}
-
-/**
- * DescribeCloudRunPodList返回参数结构体
- */
-export interface DescribeCloudRunPodListResponse {
+  CustomDomainNames?: Array<string>
   /**
-   * pod实例列表
+   * <p>服务类型: function 云函数2.0；container 容器服务</p>
    */
-  PodList?: Array<VersionPodInstance>
+  ServerType?: string
   /**
-   * pod总数
+   * <p>流量类型，目前只有 FLOW</p>
    */
-  TotalCount?: number
+  TrafficType?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>创建时间</p>
    */
-  RequestId?: string
-}
-
-/**
- * 定时扩缩容配置
- */
-export interface TimerScale {
-  /**
-   * 循环类型
-   */
-  CycleType?: string
-  /**
-   * 循环起始
-   */
-  StartDate?: string
-  /**
-   * 循环结束
-   */
-  EndDate?: string
-  /**
-   * 起始时间
-   */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * 副本个数
-   */
-  ReplicaNum?: number
+  CreateTime?: string
 }
 
 /**
@@ -1835,31 +1126,35 @@ export interface EnvInfo {
 }
 
 /**
- * 删除失败版本信息
+ * BuildPacks信息
  */
-export interface FailDeleteVersions {
+export interface BuildPacksInfo {
   /**
-   * 删除失败版本信息
+   * 基础镜像
    */
-  Version: SimpleVersion
+  BaseImage: string
   /**
-   * 删除失败错误码
+   * 启动命令
    */
-  ErrorCode: number
+  EntryPoint: string
   /**
-   * 删除失败错误信息
+   * 语言
    */
-  ErrorMsg: string
+  RepoLanguage: string
   /**
-   * 删除操作 RequestId
+   * 上传文件名
    */
-  RequestId: string
+  UploadFilename: string
+  /**
+   * 语言版本
+   */
+  LanguageVersion?: string
 }
 
 /**
- * SubmitServerRollback请求参数结构体
+ * SubmitServerConfigChangeDiff请求参数结构体
  */
-export interface SubmitServerRollbackRequest {
+export interface SubmitServerConfigChangeDiffRequest {
   /**
    * 环境Id
    */
@@ -1869,13 +1164,714 @@ export interface SubmitServerRollbackRequest {
    */
   ServerName: string
   /**
-   * 当前版本
+   * 配置信息 deprecated
    */
-  CurrentVersionName: string
+  Conf?: ServerBaseConfigDiff
   /**
-   * 回滚版本
+   * 配置信息
    */
-  RollbackVersionName: string
+  Items?: Array<DiffConfigItem>
+}
+
+/**
+ * CreateCloudRunServer请求参数结构体
+ */
+export interface CreateCloudRunServerRequest {
+  /**
+   * <p>环境Id</p>
+   */
+  EnvId: string
+  /**
+   * <p>服务名</p>
+   */
+  ServerName: string
+  /**
+   * <p>部署信息</p>
+   */
+  DeployInfo: DeployParam
+  /**
+   * <p>服务配置信息(已废弃)</p>
+   */
+  ServerConfig?: ServerBaseConfig
+  /**
+   * <p>服务配置信息</p>
+   */
+  Items?: Array<DiffConfigItem>
+  /**
+   * <p>vpc 信息</p>
+   */
+  VpcInfo?: CreateVpcInfo
+}
+
+/**
+ * SearchClsLog返回参数结构体
+ */
+export interface SearchClsLogResponse {
+  /**
+   * 日志内容结果
+   */
+  LogResults?: LogResObject
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVersionDetail请求参数结构体
+ */
+export interface DescribeVersionDetailRequest {
+  /**
+   * <p>环境Id</p>
+   */
+  EnvId: string
+  /**
+   * <p>服务名</p>
+   */
+  ServerName: string
+  /**
+   * <p>版本名</p>
+   */
+  VersionName: string
+  /**
+   * <p>channel</p>
+   */
+  Channel?: string
+}
+
+/**
+ * DescribeCloudRunEnvs返回参数结构体
+ */
+export interface DescribeCloudRunEnvsResponse {
+  /**
+   * <p>环境信息列表</p>
+   */
+  EnvList?: Array<EnvInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReleaseGray返回参数结构体
+ */
+export interface ReleaseGrayResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 差异化更新配置信息
+ */
+export interface ServerBaseConfigDiff {
+  /**
+   * 字符串参数 Key：EnvParam
+   */
+  StrParams?: Array<ObjectKV>
+}
+
+/**
+ * DescribeReleaseOrder返回参数结构体
+ */
+export interface DescribeReleaseOrderResponse {
+  /**
+   * 是否存在
+   */
+  IsExist?: boolean
+  /**
+   * 发布单信息
+   */
+  ReleaseOrderInfo?: ReleaseOrderInfo
+  /**
+   * 上一次成功发布时间
+   */
+  LastReleasedSuccessTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 静态CDN资源信息
+ */
+export interface StaticStorageInfo {
+  /**
+   * 静态CDN域名
+   */
+  StaticDomain: string
+  /**
+   * 静态CDN默认文件夹，当前为根目录
+   */
+  DefaultDirName: string
+  /**
+   * 资源状态(process/online/offline/init)
+   */
+  Status: string
+  /**
+   * cos所属区域
+   */
+  Region: string
+  /**
+   * bucket信息
+   */
+  Bucket: string
+}
+
+/**
+ * 数据库资源信息
+ */
+export interface DatabasesInfo {
+  /**
+   * 数据库唯一标识
+   */
+  InstanceId: string
+  /**
+   * 状态。包含以下取值：
+<li>INITIALIZING：资源初始化中</li>
+<li>RUNNING：运行中，可正常使用的状态</li>
+<li>UNUSABLE：禁用，不可用</li>
+<li>OVERDUE：资源过期</li>
+   */
+  Status: string
+  /**
+   * 所属地域。
+当前支持ap-shanghai
+   */
+  Region: string
+}
+
+/**
+ * 代码仓库信息
+ */
+export interface RepositoryInfo {
+  /**
+   * git source
+   */
+  Source: string
+  /**
+   * 仓库名
+   */
+  Repo: string
+  /**
+   * 分支名
+   */
+  Branch: string
+}
+
+/**
+ * 公网访问配置
+ */
+export interface PublicNetConf {
+  /**
+   * <p>是否开启公网访问</p><p>枚举值：</p><ul><li>ENABLE： 开启公网访问</li><li>DISABLE： 关闭公网访问</li></ul>
+   */
+  PublicNetStatus?: string
+}
+
+/**
+ * 在线版本信息
+ */
+export interface OnlineVersionInfo {
+  /**
+   * 版本名
+   */
+  VersionName?: string
+  /**
+   * 镜像url
+   */
+  ImageUrl?: string
+  /**
+   * 流量
+   */
+  FlowRatio?: string
+}
+
+/**
+ * SubmitServerConfigChangeDiff返回参数结构体
+ */
+export interface SubmitServerConfigChangeDiffResponse {
+  /**
+   * 任务Id 大于 0 需要请求 DescribeServerManageTask 接口获取任务进度，等于 0 则表示同步
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 函数的信息
+ */
+export interface FunctionInfo {
+  /**
+   * 命名空间
+   */
+  Namespace: string
+  /**
+   * 所属地域。
+当前支持ap-shanghai
+   */
+  Region: string
+}
+
+/**
+ * DescribeCloudRunServerDetail返回参数结构体
+ */
+export interface DescribeCloudRunServerDetailResponse {
+  /**
+   * 服务基本信息
+   */
+  BaseInfo?: ServerBaseInfo
+  /**
+   * 服务配置信息
+   */
+  ServerConfig?: ServerBaseConfig
+  /**
+   * 在线版本信息
+   */
+  OnlineVersionInfos?: Array<OnlineVersionInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 环境基础信息
+ */
+export interface EnvBaseInfo {
+  /**
+   * 环境Id
+   */
+  EnvId?: string
+  /**
+   * 套餐类型：Trial ｜ Standard ｜ Professional ｜ Enterprise
+   */
+  PackageType?: string
+  /**
+   * VPC Id
+   */
+  VpcId?: string
+  /**
+   * 环境创建时间
+   */
+  CreateTime?: string
+  /**
+   * 环境别名
+   */
+  Alias?: string
+  /**
+   * 环境状态
+   */
+  Status?: string
+  /**
+   * 环境地域
+   */
+  Region?: string
+  /**
+   * 环境类型 tcbr ｜ run
+   */
+  EnvType?: string
+  /**
+   * 子网id
+   */
+  SubnetIds?: string
+  /**
+   * 回收标志，为空则表示正常，recycle表示已回收
+   */
+  Recycle?: string
+}
+
+/**
+ * 删除成功的版本信息
+ */
+export interface SuccessDeleteVersions {
+  /**
+   * 版本简化信息
+   */
+  Version: SimpleVersion
+  /**
+   * 删除版本的 RequestId
+   */
+  RequestId: string
+  /**
+   * 删除版本结果
+   */
+  Result: string
+}
+
+/**
+ * ModifyStableIPStatus返回参数结构体
+ */
+export interface ModifyStableIPStatusResponse {
+  /**
+   * 任务 ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 版本信息
+ */
+export interface VersionInfo {
+  /**
+   * 版本名
+   */
+  VersionName?: string
+  /**
+   * 流量比例
+   */
+  FlowRatio?: number
+  /**
+   * 版本状态
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 构建Id
+   */
+  BuildId?: number
+  /**
+   * 上传方式
+   */
+  UploadType?: string
+  /**
+   * 操作标识
+   */
+  Remark?: string
+  /**
+   * 测试参数
+   */
+  UrlParam?: ObjectKV
+  /**
+   * 权重
+   */
+  Priority?: number
+  /**
+   * 是否默认
+   */
+  IsDefaultPriority?: boolean
+  /**
+   * 流量参数
+   */
+  FlowParams?: Array<ObjectKVPriority>
+  /**
+   * 最小副本数
+   */
+  MinReplicas?: number
+  /**
+   * 最大副本数
+   */
+  MaxReplicas?: number
+  /**
+   * 操作Id
+   */
+  RunId?: string
+  /**
+   * 百分比
+   */
+  Percent?: number
+  /**
+   * 当前副本数
+   */
+  CurrentReplicas?: number
+  /**
+   * 架构类型
+   */
+  Architecture?: string
+}
+
+/**
+ * DescribeCloudRunServers返回参数结构体
+ */
+export interface DescribeCloudRunServersResponse {
+  /**
+   * 服务列表
+   */
+  ServerList?: Array<ServerBaseInfo>
+  /**
+   * 服务总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StorageInfo 资源信息
+ */
+export interface StorageInfo {
+  /**
+   * 资源所属地域。
+当前支持ap-shanghai
+   */
+  Region: string
+  /**
+   * 桶名，存储资源的唯一标识
+   */
+  Bucket: string
+  /**
+   * cdn 域名
+   */
+  CdnDomain: string
+  /**
+   * 资源所属用户的腾讯云appId
+   */
+  AppId: string
+}
+
+/**
+ * DescribeServerManageTask返回参数结构体
+ */
+export interface DescribeServerManageTaskResponse {
+  /**
+   * 是否存在
+   */
+  IsExist?: boolean
+  /**
+   * 任务信息
+   */
+  Task?: ServerManageTaskInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudRunDeployRecord返回参数结构体
+ */
+export interface DescribeCloudRunDeployRecordResponse {
+  /**
+   * 部署列表
+   */
+  DeployRecords?: Array<DeployRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCloudRunServer请求参数结构体
+ */
+export interface UpdateCloudRunServerRequest {
+  /**
+   * <p>环境Id</p>
+   */
+  EnvId: string
+  /**
+   * <p>服务名</p>
+   */
+  ServerName: string
+  /**
+   * <p>部署信息</p>
+   */
+  DeployInfo: DeployParam
+  /**
+   * <p>服务配置信息(已废弃)</p>
+   */
+  ServerConfig?: ServerBaseConfig
+  /**
+   * <p>业务类型，默认tcr</p>
+   */
+  Business?: string
+  /**
+   * <p>服务配置信息</p>
+   */
+  Items?: Array<DiffConfigItem>
+}
+
+/**
+ * DescribeCloudRunEnvs请求参数结构体
+ */
+export interface DescribeCloudRunEnvsRequest {
+  /**
+   * <p>环境ID，如果传了这个参数则只返回该环境的相关信息</p>
+   */
+  EnvId?: string
+  /**
+   * <p>指定Channels字段为可见渠道列表或不可见渠道列表<br>如只想获取渠道A的环境 就填写IsVisible= true,Channels = [&quot;A&quot;], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = [&quot;A&quot;]</p>
+   */
+  IsVisible?: boolean
+  /**
+   * <p>渠道列表，代表可见或不可见渠道由IsVisible参数指定</p>
+   */
+  Channels?: Array<string>
+}
+
+/**
+ * 服务配置入参
+ */
+export interface DiffConfigItem {
+  /**
+   * <p>配置项 Key<br>MinNum 最小副本数<br>MaxNum 最大副本数<br>PolicyDetails 扩缩容策略<br>AccessTypes 访问类型<br>TimerScale 定时扩缩容<br>InternalAccess 内网访问<br>OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScale<br>SessionAffinity 会话亲和性 open | close<br>CpuSpecs cpu 规格<br>MemSpecs mem规格<br>EnvParam 环境变量<br>LogPath 日志采集路径<br>Port 端口<br>Dockerfile dockerfile 文件名<br>BuildDir 目标目录<br>Tag 服务标签<br>LogType 日志类型 none | default | custom<br>LogSetId 日志集Id<br>LogTopicId 日志主题ID<br>LogParseType 日志解析类型 json ｜ line<br>EntryPoint entrypoint 命令<br>Cmd cmd命令<br>VpcConf 网络信息</p>
+   */
+  Key: string
+  /**
+   * <p>字符串类型配置项值<br>InternalAccess、OperationMode、SessionAffinity、EnvParam、LogPath、Dockerfile、BuildDir、Tag、LogType、LogSetId、LogTopicId、LogParseType</p>
+   */
+  Value?: string
+  /**
+   * <p>int 类型配置项值<br>MinNum、MaxNum、Port</p>
+   */
+  IntValue?: number
+  /**
+   * <p>bool 类型配置项值</p>
+   */
+  BoolValue?: boolean
+  /**
+   * <p>浮点型配置项值<br>CpuSpecs、MemSpecs</p>
+   */
+  FloatValue?: number
+  /**
+   * <p>字符串数组配置项值<br>AccessTypes，EntryPoint，Cmd</p>
+   */
+  ArrayValue?: Array<string>
+  /**
+   * <p>扩缩容策略配置项值</p>
+   */
+  PolicyDetails?: Array<HpaPolicy>
+  /**
+   * <p>定时扩缩容配置项值</p>
+   */
+  TimerScale?: Array<TimerScale>
+  /**
+   * <p>配置内网访问时网络信息</p>
+   */
+  VpcConf?: VpcConf
+  /**
+   * <p>存储配置信息</p>
+   */
+  VolumesConf?: Array<VolumeConf>
+  /**
+   * <p>公网访问配置</p>
+   */
+  PublicNetConf?: PublicNetConf
+}
+
+/**
+ * SubmitServerRollback返回参数结构体
+ */
+export interface SubmitServerRollbackResponse {
+  /**
+   * 任务Id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SearchClsLog请求参数结构体
+ */
+export interface SearchClsLogRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 查询语句，详情参考 https://cloud.tencent.com/document/product/614/47044
+   */
+  QueryString: string
+  /**
+   * 单次要返回的日志条数，单次返回的最大条数为100
+   */
+  Limit: number
+  /**
+   * 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围
+   */
+  Context?: string
+  /**
+   * 按时间排序 asc（升序）或者 desc（降序），默认为 desc
+   */
+  Sort?: string
+  /**
+   * 是否使用Lucene语法，默认为false
+   */
+  UseLucene?: boolean
+  /**
+   * 日志类型
+   */
+  LogType?: number
+}
+
+/**
+ * DescribeCloudRunPodList请求参数结构体
+ */
+export interface DescribeCloudRunPodListRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 版本名
+   */
+  VersionName?: string
+  /**
+   * 默认为10， 最大为50
+不传或传0时 取默认10
+大于50时取50
+   */
+  PageSize?: number
+  /**
+   * 不传或传0时 会默认为1
+   */
+  PageNum?: number
+}
+
+/**
+ * OperateServerManage请求参数结构体
+ */
+export interface OperateServerManageRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 任报Id
+   */
+  TaskId: number
+  /**
+   * 操作类型:cancel | go_back | done
+   */
+  OperateType: string
   /**
    * 操作标识
    */
@@ -1883,73 +1879,39 @@ export interface SubmitServerRollbackRequest {
 }
 
 /**
- * DescribeEnvBaseInfo请求参数结构体
+ * 版本Pod实例信息
  */
-export interface DescribeEnvBaseInfoRequest {
+export interface VersionPodInstance {
   /**
-   * <p>环境 Id</p>
+   * 实例webshell链接
+   */
+  Webshell?: string
+  /**
+   * 实例Id
+   */
+  PodId?: string
+  /**
+   * 实例状态
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+}
+
+/**
+ * DescribeCloudRunServerDetail请求参数结构体
+ */
+export interface DescribeCloudRunServerDetailRequest {
+  /**
+   * 环境Id
    */
   EnvId: string
-}
-
-/**
- * CreateCloudRunEnv请求参数结构体
- */
-export interface CreateCloudRunEnvRequest {
   /**
-   * <p>Trial,Standard,Professional,Enterprise</p>
+   * 服务名
    */
-  PackageType: string
-  /**
-   * <p>环境别名，要以a-z开头，不能包含 a-z,0-9,- 以外的字符</p>
-   */
-  Alias?: string
-  /**
-   * <p>用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。</p>
-   */
-  FreeQuota?: string
-  /**
-   * <p>订单标记。建议使用方统一转大小写之后再判断。QuickStart：快速启动来源Activity：活动来源</p>
-   */
-  Flag?: string
-  /**
-   * <p>私有网络Id</p>
-   */
-  VpcId?: string
-  /**
-   * <p>子网列表</p>
-   */
-  SubNetIds?: Array<string>
-  /**
-   * <p>请求key 用于防重</p>
-   */
-  ReqKey?: string
-  /**
-   * <p>来源：wechat | cloud | weda</p>
-   */
-  Source?: string
-  /**
-   * <p>渠道：wechat | cloud | weda</p>
-   */
-  Channel?: string
-  /**
-   * <p>环境ID 云开发平台必填</p>
-   */
-  EnvId?: string
-}
-
-/**
- * CreateCloudRunServer返回参数结构体
- */
-export interface CreateCloudRunServerResponse {
-  /**
-   * <p>一键部署任务Id，微信云托管，暂时用不到</p>
-   */
-  TaskId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ServerName: string
 }
 
 /**
@@ -1975,21 +1937,75 @@ export interface DeleteCloudRunVersionsResponse {
 }
 
 /**
- * UpdateCloudRunServer返回参数结构体
+ * DescribeCloudRunServers请求参数结构体
  */
-export interface UpdateCloudRunServerResponse {
+export interface DescribeCloudRunServersRequest {
   /**
-   * <p>环境Id</p>
+   * 环境Id
    */
-  EnvId?: string
+  EnvId: string
   /**
-   * <p>一键部署任务Id，暂时用不到</p>
+   * 默认为9， 最大为30
+不传或传0时 取默认9
+大于30时取30
    */
-  TaskId?: number
+  PageSize?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 不传或传0时 会默认为1
    */
-  RequestId?: string
+  PageNum?: number
+  /**
+   * 服务名
+   */
+  ServerName?: string
+  /**
+   * 服务类型：function | container
+   */
+  ServerType?: string
+  /**
+   * vpcId
+   */
+  VpcId?: string
+}
+
+/**
+ * 删除版本时需要的简化信息
+ */
+export interface SimpleVersion {
+  /**
+   * 要删除版本的环境 Id
+   */
+  EnvId: string
+  /**
+   * 要删除版本的服务名
+   */
+  ServerName: string
+  /**
+   * 要删除版本的版本名
+   */
+  VersionName: string
+}
+
+/**
+ * DescribeServerManageTask请求参数结构体
+ */
+export interface DescribeServerManageTaskRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 任务Id
+   */
+  TaskId: number
+  /**
+   * 操作标识
+   */
+  OperatorRemark?: string
 }
 
 /**
@@ -2084,207 +2100,223 @@ export interface DescribeVersionDetailResponse {
 }
 
 /**
- * 版本信息
+ * DescribeStableIPTask请求参数结构体
  */
-export interface VersionInfo {
+export interface DescribeStableIPTaskRequest {
+  /**
+   * 环境 ID
+   */
+  EnvId: string
+  /**
+   * 任务 ID
+   */
+  TaskId: number
+}
+
+/**
+ * 云托管服务 Vpc 配置
+ */
+export interface VpcConf {
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * vpc 网段
+   */
+  VpcCIDR?: string
+  /**
+   * subnet id
+   */
+  SubnetId?: string
+  /**
+   * subnet 网段
+   */
+  SubnetCIDR?: string
+}
+
+/**
+ * DeleteCloudRunVersions请求参数结构体
+ */
+export interface DeleteCloudRunVersionsRequest {
+  /**
+   * 环境 Id
+   */
+  EnvId: string
+  /**
+   * 是否删除服务，只有最后一个版本的时候才生效
+   */
+  IsDeleteServer: boolean
+  /**
+   * 只有删除服务的时候，才生效
+   */
+  IsDeleteImage: boolean
+  /**
+   * 删除版本的信息
+   */
+  SimpleVersions: Array<SimpleVersion>
+  /**
+   * 操作备注
+   */
+  OperatorRemark?: string
+}
+
+/**
+ * 定时扩缩容配置
+ */
+export interface TimerScale {
+  /**
+   * 循环类型
+   */
+  CycleType?: string
+  /**
+   * 循环起始
+   */
+  StartDate?: string
+  /**
+   * 循环结束
+   */
+  EndDate?: string
+  /**
+   * 起始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 副本个数
+   */
+  ReplicaNum?: number
+}
+
+/**
+ * SubmitServerRollback请求参数结构体
+ */
+export interface SubmitServerRollbackRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 当前版本
+   */
+  CurrentVersionName: string
+  /**
+   * 回滚版本
+   */
+  RollbackVersionName: string
+  /**
+   * 操作标识
+   */
+  OperatorRemark?: string
+}
+
+/**
+ * CreateCloudRunEnv请求参数结构体
+ */
+export interface CreateCloudRunEnvRequest {
+  /**
+   * <p>Trial,Standard,Professional,Enterprise</p>
+   */
+  PackageType: string
+  /**
+   * <p>环境别名，要以a-z开头，不能包含 a-z,0-9,- 以外的字符</p>
+   */
+  Alias?: string
+  /**
+   * <p>用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。</p>
+   */
+  FreeQuota?: string
+  /**
+   * <p>订单标记。建议使用方统一转大小写之后再判断。QuickStart：快速启动来源Activity：活动来源</p>
+   */
+  Flag?: string
+  /**
+   * <p>私有网络Id</p>
+   */
+  VpcId?: string
+  /**
+   * <p>子网列表</p>
+   */
+  SubNetIds?: Array<string>
+  /**
+   * <p>请求key 用于防重</p>
+   */
+  ReqKey?: string
+  /**
+   * <p>来源：wechat | cloud | weda</p>
+   */
+  Source?: string
+  /**
+   * <p>渠道：wechat | cloud | weda</p>
+   */
+  Channel?: string
+  /**
+   * <p>环境ID 云开发平台必填</p>
+   */
+  EnvId?: string
+}
+
+/**
+ * 版本流量信息
+ */
+export interface VersionFlowInfo {
   /**
    * 版本名
    */
-  VersionName?: string
+  VersionName: string
+  /**
+   * 是否默认版本
+   */
+  IsDefaultPriority: boolean
   /**
    * 流量比例
    */
   FlowRatio?: number
   /**
-   * 版本状态
-   */
-  Status?: string
-  /**
-   * 创建时间
-   */
-  CreatedTime?: string
-  /**
-   * 更新时间
-   */
-  UpdatedTime?: string
-  /**
-   * 构建Id
-   */
-  BuildId?: number
-  /**
-   * 上传方式
-   */
-  UploadType?: string
-  /**
-   * 操作标识
-   */
-  Remark?: string
-  /**
-   * 测试参数
+   * 测试KV值
    */
   UrlParam?: ObjectKV
   /**
    * 权重
    */
   Priority?: number
-  /**
-   * 是否默认
-   */
-  IsDefaultPriority?: boolean
-  /**
-   * 流量参数
-   */
-  FlowParams?: Array<ObjectKVPriority>
-  /**
-   * 最小副本数
-   */
-  MinReplicas?: number
-  /**
-   * 最大副本数
-   */
-  MaxReplicas?: number
-  /**
-   * 操作Id
-   */
-  RunId?: string
-  /**
-   * 百分比
-   */
-  Percent?: number
-  /**
-   * 当前副本数
-   */
-  CurrentReplicas?: number
-  /**
-   * 架构类型
-   */
-  Architecture?: string
 }
 
 /**
- * BuildPacks信息
+ * 通用Key Value
  */
-export interface BuildPacksInfo {
+export interface ObjectKV {
   /**
-   * 基础镜像
+   * 键值对Key
    */
-  BaseImage: string
+  Key: string
   /**
-   * 启动命令
+   * 键值对Value
    */
-  EntryPoint: string
-  /**
-   * 语言
-   */
-  RepoLanguage: string
-  /**
-   * 上传文件名
-   */
-  UploadFilename: string
-  /**
-   * 语言版本
-   */
-  LanguageVersion?: string
+  Value: string
 }
 
 /**
- * 删除成功的版本信息
+ * 通用键值权重对
  */
-export interface SuccessDeleteVersions {
+export interface ObjectKVPriority {
   /**
-   * 版本简化信息
+   * 键值对Key
    */
-  Version: SimpleVersion
+  Key: string
   /**
-   * 删除版本的 RequestId
+   * 键值对Value
    */
-  RequestId: string
+  Value: string
   /**
-   * 删除版本结果
+   * 键值对权重
    */
-  Result: string
-}
-
-/**
- * DescribeCloudRunDeployRecord返回参数结构体
- */
-export interface DescribeCloudRunDeployRecordResponse {
-  /**
-   * 部署列表
-   */
-  DeployRecords?: Array<DeployRecord>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 服务管理任务信息
- */
-export interface ServerManageTaskInfo {
-  /**
-   * 任务Id
-   */
-  Id?: number
-  /**
-   * 环境Id
-   */
-  EnvId?: string
-  /**
-   * 服务名
-   */
-  ServerName?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 变更类型
-   */
-  ChangeType?: string
-  /**
-   * 发布类型
-   */
-  ReleaseType?: string
-  /**
-   * 部署类型
-   */
-  DeployType?: string
-  /**
-   * 上一个版本名
-   */
-  PreVersionName?: string
-  /**
-   * 版本名
-   */
-  VersionName?: string
-  /**
-   * 流水线Id
-   */
-  PipelineId?: number
-  /**
-   * 流水线任务Id
-   */
-  PipelineTaskId?: number
-  /**
-   * 发布单Id
-   */
-  ReleaseId?: number
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 步骤信息
-   */
-  Steps?: Array<TaskStepInfo>
-  /**
-   * 失败原因
-   */
-  FailReason?: string
-  /**
-   * 操作标识
-   */
-  OperatorRemark?: string
+  Priority: number
 }

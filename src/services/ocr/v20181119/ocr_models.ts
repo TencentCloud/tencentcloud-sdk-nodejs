@@ -11829,7 +11829,7 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   EnableDeepThink?: boolean
   /**
-   * <p>题目信息输出配置（默认快速模式只输出题目外层题目边框坐标、批改答案、手写答案坐标、答案分析、正确答案）</p><p>当key为QuickGradingEnabled value为false表示关闭快速模式（速度会变慢），新增输出手写作答、题干、插图坐标<br>当key为StepCorrection value为true表示启用步骤级批改（速度会变慢）；</p>
+   * <p>题目信息输出配置（默认快速模式只输出题目外层题目边框坐标、批改答案、手写答案坐标、答案分析、正确答案）</p><p>当key为QuickGradingEnabled value为false表示关闭快速模式（速度会变慢），新增输出手写作答、题干、插图坐标、知识点<br>当key为StepCorrection value为true表示启用步骤级批改（速度会变慢）；</p><p><em>备注：可通过ModelType切换模型体验不同模型的<strong>快速模式</strong>，速度都是8s左右，效果各有优劣</em></p>
    */
   QuestionConfigMap?: string
   /**
@@ -11846,7 +11846,7 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   ImageUrlList?: Array<string>
   /**
-   * <p>辅助批改类型</p><p>枚举值：</p><ul><li>0： 无辅助批改，直接模型批改</li><li>1： 单题文本辅助批改，配合AnswerAssistMap使用</li><li>2： 整页辅助批改，待批改试卷使用ImageUrl/ImageBase64，答案部分使用ImageBase64List.N/ImageUrlList.N</li></ul><p>默认值：0</p>
+   * <p>辅助批改类型，默认0</p><p>枚举值：</p><ul><li>0： 无辅助批改，直接模型批改</li><li>1： 单题文本辅助批改，配合AnswerAssistMap使用</li><li>2： 整页辅助批改，待批改试卷使用ImageUrl/ImageBase64，答案部分使用ImageBase64List.N/ImageUrlList.N</li></ul>
    */
   AssistMarkType?: number
   /**
@@ -11858,7 +11858,7 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   EnableImageCrop?: boolean
   /**
-   * <p>批改模型选择</p><p>枚举值：</p><ul><li>yuanbao_correction_model： 快速批改模型平均耗时8s。针对单题跨栏、多栏（≥2栏）排版及子题数超过 30 道的复杂算式场景，耗时约为快速批改模式的 2 倍+。</li><li>youtu_correction_model： 深度批改模型平均耗时12-30s。全场景支持,精度更高。</li></ul><p>默认值：yuanbao_correction_model</p>
+   * <p>批改模型选择，默认：yuanbao_correction_model</p><p>枚举值：</p><ul><li>yuanbao_correction_model： 快速批改模型平均耗时8s。针对单题跨栏、多栏（≥2栏）排版及子题数超过 30 道的复杂算式场景，耗时约为快速批改模式的 2 倍+。</li><li>youtu_correction_model： 深度批改模型平均耗时12-30s。全场景支持，<strong>精度更高，并且支持题目级置信度返回</strong>。</li></ul>
    */
   ModelType?: string
 }

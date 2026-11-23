@@ -1710,6 +1710,11 @@ export interface GetFunctionResponse {
    */
   UseGpu?: string
   /**
+   * <p>环境变量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Environment?: EnvironmentOut
+  /**
    * <p>代码校验结果 (&quot;success&quot;/&quot;failed&quot;)</p>
    */
   CodeResult?: string
@@ -1734,6 +1739,14 @@ export interface GetFunctionResponse {
    */
   Status?: string
   /**
+   * <p>CLS 日志集 ID</p>
+   */
+  ClsLogsetId?: string
+  /**
+   * <p>CLS Topic ID</p>
+   */
+  ClsTopicId?: string
+  /**
    * <p>函数 ID</p>
    */
   FunctionId?: string
@@ -1742,6 +1755,11 @@ export interface GetFunctionResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * <p>EIP 配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EipConfig?: EipOutConfig
   /**
    * <p>函数类型 (&quot;HTTP&quot; 或 &quot;Event&quot;)</p>
    */
@@ -3780,6 +3798,17 @@ export interface HTTPServiceHeadersHandler {
 }
 
 /**
+ * 同[Environment](https://document.capi.woa.com/document/product/583/17244#Environment)
+ */
+export interface EnvironmentOut {
+  /**
+   * <p>环境变量数组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Variables?: Array<Variable>
+}
+
+/**
  * 创建或修改HTTP访问服务输入的路由信息，修改HTTP访问服务路由信息时对应字段不传参数表示不用修改。
  */
 export interface HTTPServiceRouteParam {
@@ -4690,6 +4719,22 @@ export interface DescribePlatformAccountCircleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 同[EipOutConfig](https://document.capi.woa.com/document/product/583/17244#EipOutConfig)
+ */
+export interface EipOutConfig {
+  /**
+   * <p>是否固定 EIP</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EipFixed?: string
+  /**
+   * <p>EIP 列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Eips?: Array<string>
 }
 
 /**
@@ -7025,6 +7070,10 @@ export interface ModifyPGInstanceSpecRequest {
    * <p>预检</p>
    */
   DryRun?: boolean
+  /**
+   * <p>实例Cpu 核数</p><p>取值范围：[0.1, 1024]</p><p>单位：核数</p><p>当 CpuCores 和 Cpu 共存时，优先 CpuCores 生效</p>
+   */
+  CpuCores?: number
 }
 
 /**

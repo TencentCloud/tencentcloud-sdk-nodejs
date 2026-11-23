@@ -58,9 +58,9 @@ it("tcbr.v20220217.ModifyStableIPStatus", async function () {
     }
 })
 
-it("tcbr.v20220217.DescribeReleaseOrder", async function () {
+it("tcbr.v20220217.DescribeStableIPTask", async function () {
     try {
-       const data = await client.DescribeReleaseOrder({})
+       const data = await client.DescribeStableIPTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +131,16 @@ it("tcbr.v20220217.DescribeEnvBaseInfo", async function () {
 it("tcbr.v20220217.DescribeCloudRunProcessLog", async function () {
     try {
        const data = await client.DescribeCloudRunProcessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.DescribeReleaseOrder", async function () {
+    try {
+       const data = await client.DescribeReleaseOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -418,9 +418,29 @@ it("teo.v20220901.DescribeLogAnalysisDetail", async function () {
     }
 })
 
+it("teo.v20220901.DeleteSecurityIPGroup", async function () {
+    try {
+       const data = await client.DeleteSecurityIPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeIPGroupReferences", async function () {
     try {
        const data = await client.DescribeIPGroupReferences({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifySecurityClientAttester", async function () {
+    try {
+       const data = await client.ModifySecurityClientAttester({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,6 +518,16 @@ it("teo.v20220901.CreateAccelerationDomain", async function () {
     }
 })
 
+it("teo.v20220901.ModifyCustomGroup", async function () {
+    try {
+       const data = await client.ModifyCustomGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreateMultiPathGatewayLine", async function () {
     try {
        const data = await client.CreateMultiPathGatewayLine({})
@@ -541,6 +571,16 @@ it("teo.v20220901.DescribeZones", async function () {
 it("teo.v20220901.CreateEdgeKVNamespace", async function () {
     try {
        const data = await client.CreateEdgeKVNamespace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeCustomGroups", async function () {
+    try {
+       const data = await client.DescribeCustomGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +651,16 @@ it("teo.v20220901.DescribePrefetchTasks", async function () {
 it("teo.v20220901.OperateInferenceDomain", async function () {
     try {
        const data = await client.OperateInferenceDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeCustomGroupReferences", async function () {
+    try {
+       const data = await client.DescribeCustomGroupReferences({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1008,9 +1058,9 @@ it("teo.v20220901.DescribeMultiPathGateways", async function () {
     }
 })
 
-it("teo.v20220901.DescribeTopL7AnalysisData", async function () {
+it("teo.v20220901.DescribeCustomGroup", async function () {
     try {
-       const data = await client.DescribeTopL7AnalysisData({})
+       const data = await client.DescribeCustomGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1181,6 +1231,16 @@ it("teo.v20220901.DeleteLoadBalancer", async function () {
 it("teo.v20220901.CreateInferenceDomain", async function () {
     try {
        const data = await client.CreateInferenceDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeTopL7AnalysisData", async function () {
+    try {
+       const data = await client.DescribeTopL7AnalysisData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1618,9 +1678,9 @@ it("teo.v20220901.DeleteWebSecurityTemplate", async function () {
     }
 })
 
-it("teo.v20220901.ModifySecurityClientAttester", async function () {
+it("teo.v20220901.CreateCustomGroup", async function () {
     try {
-       const data = await client.ModifySecurityClientAttester({})
+       const data = await client.CreateCustomGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2048,9 +2108,9 @@ it("teo.v20220901.CreateSecurityAPIService", async function () {
     }
 })
 
-it("teo.v20220901.DeleteSecurityIPGroup", async function () {
+it("teo.v20220901.DeleteCustomGroup", async function () {
     try {
-       const data = await client.DeleteSecurityIPGroup({})
+       const data = await client.DeleteCustomGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
