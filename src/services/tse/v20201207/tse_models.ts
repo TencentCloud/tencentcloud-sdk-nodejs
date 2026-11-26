@@ -1367,11 +1367,11 @@ export interface DescribeAIGWCustomGuardrailCapabilitiesResponse {
  */
 export interface KongServiceWithRoutes {
   /**
-   *
+   * <p>服务及路由列表</p>
    */
   ServiceList?: Array<KongServiceRoute>
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
 }
@@ -3422,17 +3422,17 @@ export interface RuleFilter {
    */
   Key?: string
   /**
-   * 限流条件的Values
+   * header或query对应的name
    */
-  Values?: Array<string>
+  Name?: string
   /**
    * 操作符
    */
   Operator?: string
   /**
-   * header或query对应的name
+   * 限流条件的Values
    */
-  Name?: string
+  Values?: Array<string>
 }
 
 /**
@@ -5852,7 +5852,7 @@ export interface KongRoutePreview {
  */
 export interface AIGWLoadBalanceConfig {
   /**
-   * <p>负载均衡算法</p>
+   * <p>负载均衡类型</p><p>枚举值：</p><ul><li>RoundRobin： 轮询</li><li>WeightedRoundRobin： 加权轮询</li><li>LeastConnections： 最少连接</li><li>Random： 随机</li></ul><p>默认值：RoundRobin</p>
    */
   Algorithm?: string
 }
@@ -6090,6 +6090,10 @@ export interface DeleteCloudNativeAPIGatewayCertificateRequest {
  */
 export interface LimitRule {
   /**
+   * 精确限流阈值
+   */
+  AccurateQpsThresholds?: Array<AccurateQpsThreshold>
+  /**
    * 请求匹配条件
    */
   Filters?: Array<RuleFilter>
@@ -6102,9 +6106,9 @@ export interface LimitRule {
    */
   QpsThresholds?: Array<QpsThreshold>
   /**
-   * 精确限流阈值
+   * 是否启用该条参数限流规则。不传或 true 表示启用；false 表示禁用，配置保留但不对流量生效。与 LimitDetail.Enabled（整个限流插件开关）相互独立。
    */
-  AccurateQpsThresholds?: Array<AccurateQpsThreshold>
+  Enabled?: boolean
 }
 
 /**
@@ -6299,13 +6303,13 @@ export interface NacosReplica {
  */
 export interface AccurateQpsThreshold {
   /**
-   * qps阈值控制维度,包含:second、minute、hour、day、month、year
-   */
-  Unit: string
-  /**
    * 全局配置ID
    */
   GlobalConfigId: string
+  /**
+   * qps阈值控制维度,包含:second、minute、hour、day、month、year
+   */
+  Unit: string
 }
 
 /**
@@ -9661,7 +9665,7 @@ export interface AIGWLLMQuotaLimit {
    */
   TPMLimit?: number
   /**
-   * <p>并发限流数</p>
+   * <p>并发数限流</p>
    */
   ConcurrentCountLimit?: number
 }
@@ -9929,13 +9933,13 @@ export interface KongCertificatesList {
  */
 export interface QpsThreshold {
   /**
-   * qps阈值控制维度,包含:second、minute、hour、day、month、year
-   */
-  Unit: string
-  /**
    * 阈值
    */
   Max: number
+  /**
+   * qps阈值控制维度,包含:second、minute、hour、day、month、year
+   */
+  Unit: string
 }
 
 /**
@@ -10086,6 +10090,10 @@ export interface DescribeCloudNativeAPIGatewayRoutesRequest {
    * <p>翻页单页偏移量，默认值0</p>
    */
   Offset?: number
+  /**
+   * <p>按服务 ID 查询路由。</p>
+   */
+  ServiceId?: string
   /**
    * <p>服务的名字，精确匹配</p>
    */
@@ -11255,11 +11263,11 @@ export interface DeleteConfigFileGroupResponse {
  */
 export interface AIGWLengthLimitConfig {
   /**
-   * <p>是否开启输入限制</p>
+   * <p>是否开启输入长度限制</p>
    */
   EnableInputLimit?: boolean
   /**
-   * <p>最大输入字符数</p>
+   * <p>最大输入长度字符数</p>
    */
   MaxInputChars?: number
 }
@@ -12398,6 +12406,10 @@ export interface DescribeCloudNativeAPIGatewaysRequest {
    * <p>请求过滤参数，支持按照实例名称、ID和标签键值（Name、GatewayId、Tag）筛选</p>
    */
   Filters?: Array<Filter>
+  /**
+   * <p>是否按照地域进行过滤</p>
+   */
+  EnableRegionFilter?: boolean
 }
 
 /**

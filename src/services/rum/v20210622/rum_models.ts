@@ -1860,19 +1860,19 @@ export interface DeleteTDEMApplicationResponse {
  */
 export interface CreateWhitelistRequest {
   /**
-   * 实例ID：taw-123
+   * <p>实例ID：taw-123</p>
    */
   InstanceID: string
   /**
-   * 备注（暂未作字节数限制）
+   * <p>备注（暂未作字节数限制）</p>
    */
   Remark: string
   /**
-   * uin：业务方标识
+   * <p>uin：业务方标识</p>
    */
   WhitelistUin: string
   /**
-   * 业务方标识
+   * <p>业务方标识</p>
    */
   Aid?: string
 }
@@ -3998,15 +3998,15 @@ export interface DescribeTDEMDialDimensionsRequest {
  */
 export interface RumUvInfo {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: number
   /**
-   * uv访问量
+   * <p>uv访问量</p>
    */
   Uv: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime: string
 }
@@ -5535,11 +5535,11 @@ export interface ResumeInstanceResponse {
  */
 export interface DescribeTawAreasResponse {
   /**
-   * 片区总数
+   * <p>片区总数</p>
    */
   TotalCount?: number
   /**
-   * 片区列表
+   * <p>片区列表</p>
    */
   AreaSet?: Array<RumAreaInfo>
   /**
@@ -6189,11 +6189,11 @@ export interface DescribeIssuesDistributionResponse {
  */
 export interface CreateWhitelistResponse {
   /**
-   * 消息
+   * <p>消息</p>
    */
   Msg?: string
   /**
-   * 白名单ID
+   * <p>白名单ID</p>
    */
   ID?: number
   /**
@@ -6345,23 +6345,23 @@ export interface DescribeSampleRateResponse {
  */
 export interface DescribeTawAreasRequest {
   /**
-   * 片区Id
+   * <p>片区Id</p>
    */
   AreaIds?: Array<number | bigint>
   /**
-   * 片区Key
+   * <p>片区Key</p>
    */
   AreaKeys?: Array<string>
   /**
-   * 分页Limit，默认根据AreaKeys和AreaStatuses参数查询所有。
+   * <p>分页Limit，默认根据AreaKeys和AreaStatuses参数查询所有。</p>
    */
   Limit?: number
   /**
-   * 片区状态(1=有效，2=无效)
+   * <p>片区状态(1=有效，2=无效)</p>
    */
   AreaStatuses?: Array<number | bigint>
   /**
-   * 分页Offset，默认根据AreaKeys和AreaStatuses参数查询所有。
+   * <p>分页Offset，默认根据AreaKeys和AreaStatuses参数查询所有。</p>
    */
   Offset?: number
 }
@@ -11774,95 +11774,95 @@ export interface DeleteTDEMFieldTransformRuleRequest {
  */
 export interface DescribeDataStaticProjectRequest {
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime: number
   /**
-   * allcount：性能视图，day：14天数据，condition：条件列表，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
+   * <p>allcount：性能视图，day：14天数据，condition：条件列表，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等</p>
    */
   Type: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: number
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ID: number
   /**
-   * 自定义2
+   * <p>自定义2</p>
    */
   ExtSecond?: string
   /**
-   * 浏览器引擎
+   * <p>浏览器引擎</p>
    */
   Engine?: string
   /**
-   * 运营商
+   * <p>运营商</p>
    */
   Isp?: string
   /**
-   * 来源页面
+   * <p>来源页面</p>
    */
   From?: string
   /**
-   * 日志等级（1表示白名单日志，2表示一般日志，4表示错误日志，8表示Promise 错误，16表示Ajax 请求异常，32表示JS 加载异常，64表示图片加载异常，128表示css 加载异常，256表示console.error，512表示音视频资源异常，1024表示retcode 异常，2048表示aegis report，4096表示PV日志，8192表示自定义事件，16384表示小程序 页面不存在，32768表示websocket错误，65536表示js bridge错误）
+   * <p>日志等级（1表示白名单日志，2表示一般日志，4表示错误日志，8表示Promise 错误，16表示Ajax 请求异常，32表示JS 加载异常，64表示图片加载异常，128表示css 加载异常，256表示console.error，512表示音视频资源异常，1024表示retcode 异常，2048表示aegis report，4096表示PV日志，8192表示自定义事件，16384表示小程序 页面不存在，32768表示websocket错误，65536表示js bridge错误）</p>
    */
   Level?: string
   /**
-   * 品牌
+   * <p>品牌</p>
    */
   Brand?: string
   /**
-   * 地区
+   * <p>地区</p>
    */
   Area?: string
   /**
-   * 版本
+   * <p>版本</p>
    */
   VersionNum?: string
   /**
-   * 平台
+   * <p>平台</p>
    */
   Platform?: string
   /**
-   * 自定义3
+   * <p>自定义3</p>
    */
   ExtThird?: string
   /**
-   * 自定义1
+   * <p>自定义1</p>
    */
   ExtFirst?: string
   /**
-   * 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。
+   * <p>网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。</p>
    */
   NetType?: string
   /**
-   * 机型
+   * <p>机型</p>
    */
   Device?: string
   /**
-   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   * <p>显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。</p>
    */
   IsAbroad?: string
   /**
-   * 操作系统
+   * <p>操作系统</p>
    */
   Os?: string
   /**
-   * 浏览器
+   * <p>浏览器</p>
    */
   Browser?: string
   /**
-   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
+   * <p>耗时口径：&quot;50&quot;/&quot;75&quot;/&quot;90&quot;/&quot;95&quot;/&quot;99&quot;/&quot;99.5&quot; 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；&quot;avg&quot; 表示均值（avg）。</p>
    */
   CostType?: string
   /**
-   * 来源
+   * <p>来源</p>
    */
   Url?: Array<string>
   /**
-   * 环境
+   * <p>环境</p>
    */
   Env?: string
 }
@@ -12122,7 +12122,7 @@ export interface DescribeDataWebVitalsPageV2Response {
  */
 export interface DescribeDataStaticProjectResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Result?: string
   /**
@@ -12344,11 +12344,11 @@ export interface DescribeTDEMOverviewScoresResponse {
  */
 export interface Filter {
   /**
-   * 一个或者多个过滤值。
+   * <p>一个或者多个过滤值。</p>
    */
   Values?: Array<string>
   /**
-   * 过滤键的名称。
+   * <p>过滤键的名称。</p>
    */
   Name?: string
 }

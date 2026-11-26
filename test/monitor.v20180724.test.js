@@ -788,6 +788,16 @@ it("monitor.v20180724.DeleteRecordingRules", async function () {
     }
 })
 
+it("monitor.v20180724.AddSubnetToManagedCluster", async function () {
+    try {
+       const data = await client.AddSubnetToManagedCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeProductEventList", async function () {
     try {
        const data = await client.DescribeProductEventList({})

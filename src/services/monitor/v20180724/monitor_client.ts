@@ -38,7 +38,7 @@ import {
   PolicyTag,
   DeletePrometheusClusterAgentRequest,
   DescribePrometheusScrapeJobsRequest,
-  CreateAlarmHistoryShieldResponse,
+  CreatePolicyGroupResponse,
   DescribeBaseMetricsResponse,
   CreatePrometheusMultiTenantInstancePostPayModeRequest,
   DescribePolicyConditionListResponseDeprecatingInfo,
@@ -258,7 +258,6 @@ import {
   DescribeAccidentEventListResponse,
   DescribePrometheusTempSyncResponse,
   CreatePrometheusConfigResponse,
-  CreatePolicyGroupResponse,
   StaffInfo,
   UpdateDNSConfigRequest,
   DeletePrometheusClusterAgentResponse,
@@ -370,6 +369,7 @@ import {
   DescribeAccidentEventListAlarms,
   CreatePrometheusGlobalNotificationResponse,
   DescribeAlarmHistoriesRequest,
+  AddSubnetToManagedClusterResponse,
   DeletePolicyGroupRequest,
   EnableSSOCamCheckRequest,
   DeleteGrafanaIntegrationResponse,
@@ -487,6 +487,7 @@ import {
   DescribePluginOverviewsRequest,
   DescribeOnCallFormsRequest,
   IntegrationMetric,
+  AddSubnetToManagedClusterRequest,
   DescribePrometheusZonesRequest,
   DescribePrometheusAlertGroupsRequest,
   ModifyPolicyGroupCondition,
@@ -525,6 +526,7 @@ import {
   UpdateSSOAccountRequest,
   DescribePolicyConditionListConfigManualStatType,
   AlarmNotice,
+  CreateAlarmHistoryShieldResponse,
   DescribePrometheusAgentsResponse,
   ModifyPrometheusGlobalNotificationResponse,
   CheckAddressByPrometheusResponse,
@@ -1374,6 +1376,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRecordingRulesResponse) => void
   ): Promise<DeleteRecordingRulesResponse> {
     return this.request("DeleteRecordingRules", req, cb)
+  }
+
+  /**
+   * 添加子网到 Prometheus 的托管集群
+   */
+  async AddSubnetToManagedCluster(
+    req: AddSubnetToManagedClusterRequest,
+    cb?: (error: string, rep: AddSubnetToManagedClusterResponse) => void
+  ): Promise<AddSubnetToManagedClusterResponse> {
+    return this.request("AddSubnetToManagedCluster", req, cb)
   }
 
   /**

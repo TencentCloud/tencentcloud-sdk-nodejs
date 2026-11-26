@@ -20,7 +20,7 @@
  */
 export interface DescribeAsyncTextToSpeechRequest {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId: string
 }
@@ -311,21 +311,13 @@ export interface DeleteRecognizeVocabV3Request {
 }
 
 /**
- * GetRecognizeVocabListV3返回参数结构体
+ * 文本分段元素
  */
-export interface GetRecognizeVocabListV3Response {
+export interface AsyncTTSTextSegment {
   /**
-   * <p>词表列表</p>
+   * <p>分段文本</p>
    */
-  VocabList?: Array<Vocab>
-  /**
-   * <p>词表个数</p><p>单位：个</p>
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Text?: string
 }
 
 /**
@@ -831,6 +823,48 @@ export interface DescribeVoiceConversationRequest {
 }
 
 /**
+ * CreateCloudSliceTask请求参数结构体
+ */
+export interface CreateCloudSliceTaskRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和TRTC的房间所对应的SdkAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，为TRTC房间所对应的RoomId。
+   */
+  RoomId: string
+  /**
+   * 机器人的UserId，用于进房发起切片任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。
+   */
+  UserId: string
+  /**
+   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。
+   */
+  UserSig: string
+  /**
+   * 云端切片控制参数。
+   */
+  SliceParams: SliceParams
+  /**
+   * 云端切片文件上传到云存储的参数
+   */
+  SliceStorageParams: SliceStorageParams
+  /**
+   * TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1
+   */
+  RoomIdType?: number
+  /**
+   * 接口可以调用的时效性，从成功开启录制并获得任务ID后开始计算，超时后无法调用查询、更新和停止等接口，但是录制任务不会停止。 参数的单位是小时，默认72小时（3天），最大可设置720小时（30天），最小设置6小时。举例说明：如果不设置该参数，那么开始录制成功后，查询、更新和停止录制的调用时效为72个小时。 示例值：24
+   */
+  ResourceExpiredHour?: number
+  /**
+   * TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。 示例值：eJw1jcEKgkAURX9FZlvY****fL9rfNX4_
+   */
+  PrivateMapKey?: string
+}
+
+/**
  * VerifyTRTCVoicePrint返回参数结构体
  */
 export interface VerifyTRTCVoicePrintResponse {
@@ -908,6 +942,10 @@ export interface AsyncTextToSpeechRequest {
    * <p>TRTC的SdkAppId</p>
    */
   SdkAppId: number
+  /**
+   * <p>分段文本，优先级高于text，适用于定制长文本分句场景</p><p>入参限制：文本总长度不能超过50000字符，段数不能超过500</p>
+   */
+  TextSegments?: Array<AsyncTTSTextSegment>
   /**
    * <p>文本转语音的输出音频的格式</p>
    */
@@ -1880,6 +1918,40 @@ export interface DescribeLiveStreamModerationResponse {
 }
 
 /**
+ * UpdateStreamIngest请求参数结构体
+ */
+export interface UpdateStreamIngestRequest {
+  /**
+   * TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同
+   */
+  SdkAppId: number
+  /**
+   * 任务的唯一Id，在启动任务成功后会返回。
+   */
+  TaskId: string
+  /**
+   * 源流URL。
+   */
+  StreamUrl?: string
+  /**
+   * 音量，取值范围[0, 200]，默认100，表示原音量。
+   */
+  Volume?: number
+  /**
+   * 是否暂停，默认false表示不暂停。暂停期间任务仍在进行中仍会计费，暂停超过12小时会自动销毁任务, 建议主动调用停止任务接口。
+   */
+  IsPause?: boolean
+  /**
+   * 是否开启播放进度回调, 默认false，当开启后，播放进度会通过trtc custom data 回调给播放端
+   */
+  EnableProgress?: boolean
+  /**
+   * 播放倍速，默认1.0，可取[0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
+   */
+  Tempo?: number
+}
+
+/**
  * DeleteVoicePrint请求参数结构体
  */
 export interface DeleteVoicePrintRequest {
@@ -1894,25 +1966,25 @@ export interface DeleteVoicePrintRequest {
  */
 export interface DescribeAsyncTextToSpeechResponse {
   /**
-   * 任务状态
-- Processing，处理中
-- Success，任务成功
-- Failed，任务失败
-- Expired，任务过期
+   * <p>任务状态</p><ul><li>Processing，处理中</li><li>Success，任务成功</li><li>Failed，任务失败</li><li>Expired，任务过期</li></ul>
    */
   Status?: string
   /**
-   * 音频下载url
+   * <p>音频下载url</p>
    */
   AudioDownloadUrl?: string
   /**
-   * 字幕下载url
+   * <p>字幕下载url</p>
    */
   SubtitleDownloadUrl?: string
   /**
-   * 音频时长
+   * <p>音频时长</p>
    */
   TotalDurationMs?: number
+  /**
+   * <p>分段文本对应的结果</p>
+   */
+  SegmentResults?: Array<AsyncTTSSegmentResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1964,25 +2036,21 @@ export interface CloudStorage {
 }
 
 /**
- * 回推房间参数。
+ * GetRecognizeVocabListV3返回参数结构体
  */
-export interface McuFeedBackRoomParams {
+export interface GetRecognizeVocabListV3Response {
   /**
-   * <p>回推房间的RoomId。</p>
+   * <p>词表列表</p>
    */
-  RoomId: string
+  VocabList?: Array<Vocab>
   /**
-   * <p>房间类型，必须和回推房间所对应的RoomId类型相同，0为整形房间号，1为字符串房间号。</p>
+   * <p>词表个数</p><p>单位：个</p>
    */
-  RoomIdType: number
+  TotalCount?: number
   /**
-   * <p>回推房间使用的UserId(https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserId: string
-  /**
-   * <p>回推房间UserId对应的用户签名，相当于登录密码，具体计算方法请参考TRTC计算<a href="https://cloud.tencent.com/document/product/647/45910#UserSig">UserSig</a>的方案。</p>
-   */
-  UserSig: string
+  RequestId?: string
 }
 
 /**
@@ -4573,45 +4641,25 @@ export interface TRTCDataResult {
 }
 
 /**
- * CreateCloudSliceTask请求参数结构体
+ * AsyncTextToSpeech返回参数结构体
  */
-export interface CreateCloudSliceTaskRequest {
+export interface AsyncTextToSpeechResponse {
   /**
-   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和TRTC的房间所对应的SdkAppId相同。
+   * <p>任务ID</p>
    */
-  SdkAppId: number
+  TaskId?: string
   /**
-   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，为TRTC房间所对应的RoomId。
+   * <p>当前正在处理的任务数</p>
    */
-  RoomId: string
+  CurrentTaskCount?: number
   /**
-   * 机器人的UserId，用于进房发起切片任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。
+   * <p>最大允许提交的任务数，默认1000，有提额需求请提交工单</p>
    */
-  UserId: string
+  MaxTaskCount?: number
   /**
-   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserSig: string
-  /**
-   * 云端切片控制参数。
-   */
-  SliceParams: SliceParams
-  /**
-   * 云端切片文件上传到云存储的参数
-   */
-  SliceStorageParams: SliceStorageParams
-  /**
-   * TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1
-   */
-  RoomIdType?: number
-  /**
-   * 接口可以调用的时效性，从成功开启录制并获得任务ID后开始计算，超时后无法调用查询、更新和停止等接口，但是录制任务不会停止。 参数的单位是小时，默认72小时（3天），最大可设置720小时（30天），最小设置6小时。举例说明：如果不设置该参数，那么开始录制成功后，查询、更新和停止录制的调用时效为72个小时。 示例值：24
-   */
-  ResourceExpiredHour?: number
-  /**
-   * TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。 示例值：eJw1jcEKgkAURX9FZlvY****fL9rfNX4_
-   */
-  PrivateMapKey?: string
+  RequestId?: string
 }
 
 /**
@@ -6095,17 +6143,21 @@ export interface CreateCloudTranscriptionRequest {
 }
 
 /**
- * AsyncTextToSpeech返回参数结构体
+ * AsyncTTSTextSegment对应的结果
  */
-export interface AsyncTextToSpeechResponse {
+export interface AsyncTTSSegmentResult {
   /**
-   * <p>任务ID</p>
+   * <p>分段文本</p>
    */
-  TaskId?: string
+  Text?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>音频下载url</p>
    */
-  RequestId?: string
+  AudioDownloadUrl?: string
+  /**
+   * <p>音频时长</p><p>单位：ms</p>
+   */
+  DurationMs?: number
 }
 
 /**
@@ -6159,7 +6211,7 @@ export interface ModerationParams {
    */
   SaveModerationFile?: number
   /**
-   * <p>是否回调所有内容理解结果:0 默认回调所有结果 1 仅回调命中结果</p>
+   * <p>是否回调所有内容理解结果: 0 默认回调所有结果 1 仅回调命中结果</p>
    */
   CallbackAllResults?: number
   /**
@@ -6509,37 +6561,25 @@ high 将尽快对音频进行分块。
 }
 
 /**
- * UpdateStreamIngest请求参数结构体
+ * 回推房间参数。
  */
-export interface UpdateStreamIngestRequest {
+export interface McuFeedBackRoomParams {
   /**
-   * TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同
+   * <p>回推房间的RoomId。</p>
    */
-  SdkAppId: number
+  RoomId: string
   /**
-   * 任务的唯一Id，在启动任务成功后会返回。
+   * <p>房间类型，必须和回推房间所对应的RoomId类型相同，0为整形房间号，1为字符串房间号。</p>
    */
-  TaskId: string
+  RoomIdType: number
   /**
-   * 源流URL。
+   * <p>回推房间使用的UserId(https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。</p>
    */
-  StreamUrl?: string
+  UserId: string
   /**
-   * 音量，取值范围[0, 200]，默认100，表示原音量。
+   * <p>回推房间UserId对应的用户签名，相当于登录密码，具体计算方法请参考TRTC计算<a href="https://cloud.tencent.com/document/product/647/45910#UserSig">UserSig</a>的方案。</p>
    */
-  Volume?: number
-  /**
-   * 是否暂停，默认false表示不暂停。暂停期间任务仍在进行中仍会计费，暂停超过12小时会自动销毁任务, 建议主动调用停止任务接口。
-   */
-  IsPause?: boolean
-  /**
-   * 是否开启播放进度回调, 默认false，当开启后，播放进度会通过trtc custom data 回调给播放端
-   */
-  EnableProgress?: boolean
-  /**
-   * 播放倍速，默认1.0，可取[0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
-   */
-  Tempo?: number
+  UserSig: string
 }
 
 /**
@@ -6994,6 +7034,10 @@ export interface UpdateRecognizeVocabV3Request {
  * DescribeFinanceCloudRoomUsage返回参数结构体
  */
 export interface DescribeFinanceCloudRoomUsageResponse {
+  /**
+   * <p>房间维度用量数据，csv 格式，单位秒。表头固定为 RoomId,Duration。</p>
+   */
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

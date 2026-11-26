@@ -367,6 +367,42 @@ export interface CustomDomainItem {
 }
 
 /**
+ * DescribeCosTempToken请求参数结构体
+ */
+export interface DescribeCosTempTokenRequest {
+  /**
+   * <p>Makers 站点 ID</p>
+   */
+  ZoneId: string
+  /**
+   * <p>项目名称。临时路径按它拼接</p>
+   */
+  ProjectName: string
+  /**
+   * <p>项目 ID。不传 ProjectName 时用来反查项目名</p>
+   */
+  ProjectId?: string
+}
+
+/**
+ * BlockProject请求参数结构体
+ */
+export interface BlockProjectRequest {
+  /**
+   * <p>Makers 站点 ID</p>
+   */
+  ZoneId: string
+  /**
+   * <p>项目 ID</p>
+   */
+  ProjectId: string
+  /**
+   * <p>操作类型，目前支持 Ban表示封禁项目， Normal表示解封项目。</p><p>枚举值：</p><ul><li>Ban： 表示封禁项目</li><li>Normal： 表示解封项目</li></ul>
+   */
+  Status: string
+}
+
+/**
  * DescribeEnvironments返回参数结构体
  */
 export interface DescribeEnvironmentsResponse {
@@ -842,6 +878,16 @@ export interface EnvironmentEnvVar {
 }
 
 /**
+ * BlockProject返回参数结构体
+ */
+export interface BlockProjectResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCosTempToken返回参数结构体
  */
 export interface DescribeCosTempTokenResponse {
@@ -1030,6 +1076,10 @@ export interface Project {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifiedOn?: string
+  /**
+   * <p>构建规格客户契约</p><p>枚举值：</p><ul><li>standard： 4C6G，默认档，所有套餐可用</li><li>enhanced： 8C14G，专业版及以上可用；低配套餐声明时按 standard 处理并提示升级</li></ul><p>默认值：standard</p>
+   */
+  BuildMachine?: string
 }
 
 /**
@@ -1183,20 +1233,6 @@ export interface Regions {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Overseas?: Array<string>
-}
-
-/**
- * 部署列表过滤条件
- */
-export interface DeploymentFilter {
-  /**
-   * <p>过滤字段。ProjectId、DeploymentId、Name、Status、StartTime、EndTime、RepoBranch</p>
-   */
-  Name: string
-  /**
-   * <p>过滤值</p>
-   */
-  Values: Array<string>
 }
 
 /**
@@ -1411,21 +1447,17 @@ export interface EnvVar {
 }
 
 /**
- * DescribeCosTempToken请求参数结构体
+ * 部署列表过滤条件
  */
-export interface DescribeCosTempTokenRequest {
+export interface DeploymentFilter {
   /**
-   * <p>Makers 站点 ID</p>
+   * <p>过滤字段。ProjectId、DeploymentId、Name、Status、StartTime、EndTime、RepoBranch</p>
    */
-  ZoneId: string
+  Name: string
   /**
-   * <p>项目名称。临时路径按它拼接</p>
+   * <p>过滤值</p>
    */
-  ProjectName: string
-  /**
-   * <p>项目 ID。不传 ProjectName 时用来反查项目名</p>
-   */
-  ProjectId?: string
+  Values: Array<string>
 }
 
 /**

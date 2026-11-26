@@ -45,11 +45,12 @@ import {
   CreateVpcInfo,
   StopVersionInstanceResponse,
   InitializeCloudRunResourceRequest,
-  OperateServerManageResponse,
+  VersionPodInstance,
   VolumeConf,
   DescribeStableIPTaskResponse,
   DeleteCloudRunServerRequest,
   ServerBaseConfig,
+  DescribeStableIPRequest,
   ModifyStableIPStatusRequest,
   HpaPolicy,
   LogObject,
@@ -89,7 +90,7 @@ import {
   SearchClsLogRequest,
   DescribeCloudRunPodListRequest,
   OperateServerManageRequest,
-  VersionPodInstance,
+  OperateServerManageResponse,
   DescribeCloudRunServerDetailRequest,
   DeleteCloudRunVersionsResponse,
   DescribeCloudRunServersRequest,
@@ -97,6 +98,7 @@ import {
   DescribeServerManageTaskRequest,
   DescribeVersionDetailResponse,
   DescribeStableIPTaskRequest,
+  DescribeStableIPResponse,
   VpcConf,
   DeleteCloudRunVersionsRequest,
   TimerScale,
@@ -144,6 +146,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartVersionInstanceResponse) => void
   ): Promise<StartVersionInstanceResponse> {
     return this.request("StartVersionInstance", req, cb)
+  }
+
+  /**
+   * 获取固定IP地址
+   */
+  async DescribeStableIP(
+    req: DescribeStableIPRequest,
+    cb?: (error: string, rep: DescribeStableIPResponse) => void
+  ): Promise<DescribeStableIPResponse> {
+    return this.request("DescribeStableIP", req, cb)
   }
 
   /**

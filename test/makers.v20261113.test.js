@@ -38,9 +38,9 @@ it("makers.v20261113.CreateZoneCustomDomain", async function () {
     }
 })
 
-it("makers.v20261113.DescribeDeployments", async function () {
+it("makers.v20261113.BlockProject", async function () {
     try {
-       const data = await client.DescribeDeployments({})
+       const data = await client.BlockProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,6 +71,16 @@ it("makers.v20261113.DescribeProjects", async function () {
 it("makers.v20261113.DescribeEnvironments", async function () {
     try {
        const data = await client.DescribeEnvironments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("makers.v20261113.DescribeDeployments", async function () {
+    try {
+       const data = await client.DescribeDeployments({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

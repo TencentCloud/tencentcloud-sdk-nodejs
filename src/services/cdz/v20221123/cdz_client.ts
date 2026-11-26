@@ -20,11 +20,14 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeCloudDedicatedZoneResourceSummaryRequest,
   CloudDedicatedZoneResourceStatisticsInfo,
-  DescribeCloudDedicatedZoneHostsResponse,
+  DescribeUserAvailableCloudDedicatedZonesRequest,
+  CloudDedicatedZone,
   ExtraInfo,
   CloudDedicatedZoneHostsInfo,
-  DescribeCloudDedicatedZoneHostsRequest,
   CloudDedicatedZoneResourceSummaryInfo,
+  DescribeCloudDedicatedZoneHostsRequest,
+  DescribeUserAvailableCloudDedicatedZonesResponse,
+  DescribeCloudDedicatedZoneHostsResponse,
   DescribeCloudDedicatedZoneResourceSummaryResponse,
 } from "./cdz_models"
 
@@ -45,6 +48,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudDedicatedZoneResourceSummaryResponse) => void
   ): Promise<DescribeCloudDedicatedZoneResourceSummaryResponse> {
     return this.request("DescribeCloudDedicatedZoneResourceSummary", req, cb)
+  }
+
+  /**
+   * 查询用户可使用的专属可用区列表
+   */
+  async DescribeUserAvailableCloudDedicatedZones(
+    req?: DescribeUserAvailableCloudDedicatedZonesRequest,
+    cb?: (error: string, rep: DescribeUserAvailableCloudDedicatedZonesResponse) => void
+  ): Promise<DescribeUserAvailableCloudDedicatedZonesResponse> {
+    return this.request("DescribeUserAvailableCloudDedicatedZones", req, cb)
   }
 
   /**

@@ -26,9 +26,10 @@ import {
   ImageRecognitionV2Response,
   GetDetectInfoEnhancedResponse,
   IntentionQuestionResult,
+  AttackRegion,
   RuleIdConfig,
   MobileStatusRequest,
-  ParseNfcDataResponse,
+  GetActionSequenceResponse,
   LivenessRecognitionRequest,
   CheckEidTokenStatusResponse,
   EidInfo,
@@ -37,18 +38,21 @@ import {
   GetFaceIdRiskInfoResponse,
   LivenessCompareResponse,
   BankCard2EVerificationResponse,
+  GetAttackDetailResponse,
   MobileStatusResponse,
   EncryptedPhoneVerificationRequest,
   EncryptedPhoneVerificationResponse,
   DetectInfoVideoData,
   DetectAIFakeFacesRequest,
   CheckBankCardInformationResponse,
+  GetAttackDetailRequest,
   GetEidTokenRequest,
   CheckIdNameDateRequest,
   GetFaceIdTokenResponse,
   IntentionActionResultDetail,
   GetWxNFCResultResponse,
   MinorsVerificationRequest,
+  Point,
   GetFaceIdResultResponse,
   DetectAIFakeFacesResponse,
   IntentionVerifyData,
@@ -73,6 +77,7 @@ import {
   MobileNetworkTimeVerificationRequest,
   PhoneVerificationCMCCResponse,
   MobileNetworkTimeVerificationResponse,
+  ParseNfcDataResponse,
   PhoneVerificationCUCCResponse,
   CheckIdCardInformationRequest,
   GetEidTokenConfig,
@@ -108,7 +113,6 @@ import {
   BankCard4EVerificationRequest,
   GetNFCTokenResponse,
   RiskDetailItem,
-  GetActionSequenceResponse,
   GetNFCTokenRequest,
   GetFaceIdRiskInfoRequest,
   GetLiveCodeResponse,
@@ -396,6 +400,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFaceidRiskInfoTokenResponse) => void
   ): Promise<GetFaceidRiskInfoTokenResponse> {
     return this.request("GetFaceidRiskInfoToken", req, cb)
+  }
+
+  /**
+     * 根据 AI 人脸防护盾接口返回的 SeqId，查询本次检测命中的攻击区域坐标与攻击描述信息。常用于在 AttackRiskLevel 为 High 或 Mid 时，对原始图片/视频帧进行可视化标注与人工复核。
+
+检测结果默认保留 3 天，超过保留期后无法再查询。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async GetAttackDetail(
+    req: GetAttackDetailRequest,
+    cb?: (error: string, rep: GetAttackDetailResponse) => void
+  ): Promise<GetAttackDetailResponse> {
+    return this.request("GetAttackDetail", req, cb)
   }
 
   /**

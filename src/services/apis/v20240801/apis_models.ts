@@ -414,6 +414,10 @@ export type DescribeAgentAppModelServicesRequest = null
  */
 export interface DeleteAgentCredentialResponse {
   /**
+   * <p>credential id</p>
+   */
+  Data?: ResultIDVO
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1201,7 +1205,44 @@ export interface ModifyServiceResponse {
 /**
  * DescribeAgentCredentials请求参数结构体
  */
-export type DescribeAgentCredentialsRequest = null
+export interface DescribeAgentCredentialsRequest {
+  /**
+   * <p>分页大小</p>
+   */
+  Limit: number
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID?: string
+  /**
+   * <p>notID列表</p>
+   */
+  NotIDs?: Array<string>
+  /**
+   * <p>状态：normal正常状态，disabled下线状态</p>
+   */
+  Status?: string
+  /**
+   * <p>分页偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>关键词</p>
+   */
+  Keyword?: string
+  /**
+   * <p>服务ID数组</p>
+   */
+  IDs?: Array<string>
+  /**
+   * <p>认证类型：sts，reqKey</p>
+   */
+  Type?: string
+  /**
+   * <p>排序</p>
+   */
+  Sort?: DescribeAgentCredentialsSortDTO
+}
 
 /**
  * 创建Agent应用的返回值，根据创建的AuthType，返回ApiKey或者SecretKey
@@ -1365,6 +1406,20 @@ export interface ResultIDVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: string
+}
+
+/**
+ * 获取凭证列表的返回值
+ */
+export interface DescribeAgentCredentialsResp {
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * <p>条目</p>
+   */
+  Items?: Array<DescribeAgentCredentialResp>
 }
 
 /**
@@ -1801,6 +1856,10 @@ export interface TargetServerGroupDTO {
  */
 export interface DescribeAgentCredentialResponse {
   /**
+   * <p>Credential详情</p>
+   */
+  Data?: DescribeAgentCredentialResp
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1853,21 +1912,17 @@ export interface DescribeModelServiceRequest {
 }
 
 /**
- * DeleteAgentAppMcpServers请求参数结构体
+ * DeleteModel请求参数结构体
  */
-export interface DeleteAgentAppMcpServersRequest {
+export interface DeleteModelRequest {
   /**
-   * 实例ID
+   * 实例
    */
   InstanceID: string
   /**
-   * 应用ID
+   * 模型ID数组
    */
-  ID: string
-  /**
-   * mcp server id数组
-   */
-  McpServerIDs: Array<string>
+  IDs: Array<string>
 }
 
 /**
@@ -2540,6 +2595,10 @@ export interface TmsConfigDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContextScope?: string
+  /**
+   * <p>检测内容类型</p>
+   */
+  CheckTargets?: Array<string>
 }
 
 /**
@@ -3036,12 +3095,24 @@ export interface ServiceVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestProtocolType?: string
+  /**
+   * <p>安全规则</p>
+   */
+  ServiceSecurityRules?: Array<BindMcpSecurityRuleDTO>
+  /**
+   * <p>安全规则</p>
+   */
+  ServiceSecurityRulesVO?: Array<McpSecurityRulesVO>
 }
 
 /**
  * ModifyAgentCredential返回参数结构体
  */
 export interface ModifyAgentCredentialResponse {
+  /**
+   * <p>credential id</p>
+   */
+  Data?: ResultIDVO
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3129,7 +3200,16 @@ export interface DescribeModelResponseVO {
 /**
  * DeleteAgentCredential请求参数结构体
  */
-export type DeleteAgentCredentialRequest = null
+export interface DeleteAgentCredentialRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>credential id</p>
+   */
+  ID: string
+}
 
 /**
  * ModifyModelService返回参数结构体
@@ -3180,7 +3260,28 @@ export interface DescribeMcpServersResponse {
 /**
  * ModifyAgentCredential请求参数结构体
  */
-export type ModifyAgentCredentialRequest = null
+export interface ModifyAgentCredentialRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>certify id</p>
+   */
+  ID: string
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>类型</p>
+   */
+  Type?: string
+  /**
+   * <p>具体内容</p>
+   */
+  Content?: AgentCredentialContentDTO
+}
 
 /**
  * CreateAgentApp请求参数结构体
@@ -3256,6 +3357,10 @@ export interface CreateModelServiceResponse {
  */
 export interface DescribeAgentCredentialsResponse {
   /**
+   * <p>Credential列表</p>
+   */
+  Data?: DescribeAgentCredentialsResp
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3294,6 +3399,10 @@ export interface PromptModerateConfigDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContextScope?: string
+  /**
+   * <p>检测内容类型</p>
+   */
+  CheckTargets?: Array<string>
 }
 
 /**
@@ -3367,7 +3476,16 @@ export interface DescribeModelsRequest {
 /**
  * DescribeAgentCredential请求参数结构体
  */
-export type DescribeAgentCredentialRequest = null
+export interface DescribeAgentCredentialRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>app id</p>
+   */
+  ID: string
+}
 
 /**
  * CreateModel请求参数结构体
@@ -3504,7 +3622,24 @@ export interface AgentAppServiceDTO {
 /**
  * CreateAgentCredential请求参数结构体
  */
-export type CreateAgentCredentialRequest = null
+export interface CreateAgentCredentialRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>名称</p>
+   */
+  Name: string
+  /**
+   * <p>类型</p>
+   */
+  Type: string
+  /**
+   * <p>具体内容</p>
+   */
+  Content: AgentCredentialContentDTO
+}
 
 /**
  * DeleteAgentAppModelServices请求参数结构体
@@ -3688,6 +3823,24 @@ export interface ModifyMcpServerRequest {
    * <p>访问协议</p><p>枚举值：</p><ul><li>http： http</li><li>https： https</li></ul>
    */
   RequestProtocolType?: string
+}
+
+/**
+ * DeleteAgentAppMcpServers请求参数结构体
+ */
+export interface DeleteAgentAppMcpServersRequest {
+  /**
+   * 实例ID
+   */
+  InstanceID: string
+  /**
+   * 应用ID
+   */
+  ID: string
+  /**
+   * mcp server id数组
+   */
+  McpServerIDs: Array<string>
 }
 
 /**
@@ -4235,6 +4388,10 @@ export interface DeleteAgentAppResponse {
  */
 export interface CreateAgentCredentialResponse {
   /**
+   * <p>credential id</p>
+   */
+  Data?: ResultIDVO
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4265,17 +4422,29 @@ export interface ModifyMcpServerResponse {
 }
 
 /**
- * DeleteModel请求参数结构体
+ * 查询凭据列表的排序
  */
-export interface DeleteModelRequest {
+export interface DescribeAgentCredentialsSortDTO {
   /**
-   * 实例
+   * <p>创建时间</p>
    */
-  InstanceID: string
+  CreateTime?: number
   /**
-   * 模型ID数组
+   * <p>修改时间</p>
    */
-  IDs: Array<string>
+  UpdateTime?: number
+  /**
+   * <p>名称</p>
+   */
+  Name?: number
+  /**
+   * <p>状态</p>
+   */
+  Status?: number
+  /**
+   * <p>类型</p>
+   */
+  Type?: number
 }
 
 /**

@@ -625,13 +625,25 @@ export interface InitializeCloudRunResourceRequest {
 }
 
 /**
- * OperateServerManage返回参数结构体
+ * 版本Pod实例信息
  */
-export interface OperateServerManageResponse {
+export interface VersionPodInstance {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例webshell链接
    */
-  RequestId?: string
+  Webshell?: string
+  /**
+   * 实例Id
+   */
+  PodId?: string
+  /**
+   * 实例状态
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
 }
 
 /**
@@ -845,6 +857,16 @@ export interface ServerBaseConfig {
    * <p>公网访问配置</p>
    */
   PublicNetConf?: PublicNetConf
+}
+
+/**
+ * DescribeStableIP请求参数结构体
+ */
+export interface DescribeStableIPRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
 }
 
 /**
@@ -1879,25 +1901,13 @@ export interface OperateServerManageRequest {
 }
 
 /**
- * 版本Pod实例信息
+ * OperateServerManage返回参数结构体
  */
-export interface VersionPodInstance {
+export interface OperateServerManageResponse {
   /**
-   * 实例webshell链接
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Webshell?: string
-  /**
-   * 实例Id
-   */
-  PodId?: string
-  /**
-   * 实例状态
-   */
-  Status?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
+  RequestId?: string
 }
 
 /**
@@ -2111,6 +2121,28 @@ export interface DescribeStableIPTaskRequest {
    * 任务 ID
    */
   TaskId: number
+}
+
+/**
+ * DescribeStableIP返回参数结构体
+ */
+export interface DescribeStableIPResponse {
+  /**
+   * <p>固定 IP 地址</p>
+   */
+  Address?: string
+  /**
+   * <p>状态：normal 正常 isolate 隔离</p>
+   */
+  Status?: string
+  /**
+   * <p>过期时间</p>
+   */
+  ExpireTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

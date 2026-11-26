@@ -38,8 +38,10 @@ import {
   Conversation,
   AuthConfig,
   AppShareAccessControl,
+  DeletePromptTemplateRequest,
   KBCategory,
   DialogCustomConfig,
+  DescribePromptTemplateResponse,
   DescribeMetricOverviewListResponse,
   DescribeAppSummaryListRequest,
   ExecuteConfig,
@@ -59,6 +61,7 @@ import {
   CodeToolConfig,
   ModelStatus,
   SkillCorpShareConfig,
+  ModifyPromptTemplateResponse,
   DescribeMsgRecordListRequest,
   WeeklyTime,
   UsageSummary,
@@ -105,8 +108,10 @@ import {
   RunAppTriggerNowRequest,
   AppTriggerWebhookConfig,
   MsgRecordSource,
+  HeaderExtractModel,
   MsgRecordResult,
   CreateVariableResponse,
+  StopWorkflowRunListRequest,
   SimilarQuestionModifySpec,
   AppShareURLInfo,
   ModelProperty,
@@ -139,12 +144,14 @@ import {
   AgentPluginCredentialConfig,
   SaveWorkflowToolNodeOutputRequest,
   CallMCPToolResponse,
+  ConnectorResource,
   ComplexBillingItem,
   BackgroundImage,
   ModifyConflictQAResponse,
   Model,
   LabelTermCheckResult,
   SearchResourceStatusInfo,
+  ToolSummary,
   CreateQAGenerationTaskRequest,
   DingTalkChannelConfig,
   AppVariableValue,
@@ -153,6 +160,7 @@ import {
   ConversationContent,
   CamAuthConfig,
   DescribeSkillReferenceListResponse,
+  ConnectorResourceRef,
   UnfavoritePluginResponse,
   CreateKBRequest,
   CreateWorkflowRunResponse,
@@ -171,12 +179,13 @@ import {
   DescribeAgentReleasePreviewListRequest,
   DocSwitch,
   PauseAppTriggerRequest,
+  UnfavoritePromptTemplateResponse,
   MetaValue,
   LabelTermModifyItem,
   DescribePluginResponse,
   QACreateSpec,
   ModelParameter,
-  ModifyAppResponse,
+  AppTriggerWebhookConfigExt,
   ExpirationPolicy,
   ManualOnlySchedule,
   DescribeAccountListRequest,
@@ -194,14 +203,15 @@ import {
   ConflictQASummary,
   ModifyChannelResponse,
   DeleteCategoryRequest,
-  AppOperation,
+  DocExternalLink,
   ClawAgentAgentTeamConfig,
-  DescribeSystemVariableListResponse,
+  DescribePromptTemplateCategoryListRequest,
   UserAccessConfig,
   WorkflowRunMetadata,
-  KBModelConfig,
+  FileSplitModel,
   AgentPlugin,
   ModifyConversationResponse,
+  PromptTemplateProfile,
   ByteCapacity,
   SearchBilling,
   DeleteQAListResponse,
@@ -263,6 +273,7 @@ import {
   DocImportSpec,
   CreateVariableRequest,
   ConsumptionClassification,
+  PromptTemplateSummary,
   ExportQARequest,
   DescribeSystemVariableListRequest,
   DescribeReleaseSummaryResponse,
@@ -274,13 +285,14 @@ import {
   WecomRobotWebsocketAccess,
   AgentCollaborationConfig,
   MsgRecordCategory,
+  CreatePromptTemplateRequest,
   SummaryListSwitch,
   CheckLabelRequest,
   ModifySkillResponse,
   RoleConfig,
   DescribeAuditLogListResponse,
   DescribeUsageDetailListRequest,
-  DescribeUsageSummaryListResponse,
+  DeleteDocListResponse,
   DescribeAppResponse,
   DescribeAuditLogMetaRequest,
   DeleteAppRequest,
@@ -290,6 +302,7 @@ import {
   KnowledgeSnippetProfile,
   ContentFilter,
   ImportDocListResponse,
+  DeletePromptTemplateResponse,
   SupportedFileType,
   SkillCategory,
   ConversationQuestionOption,
@@ -333,6 +346,7 @@ import {
   ModelUsageDetail,
   ModifyQAListRequest,
   CreateConversationResponse,
+  ReplyMessage,
   NodeRunLog,
   DescribeSkillDetailRequest,
   Variable,
@@ -357,10 +371,13 @@ import {
   ModelDeveloperBasic,
   ModifySkillRequest,
   AppExperienceConfig,
+  DescribePromptTemplateSummaryListResponse,
   ResumeAppTriggerRequest,
   ReplyContent,
   QAOperator,
+  AppTriggerGongfengWebhookConfig,
   LabelRefIdentityList,
+  DescribePromptTemplateLabelListRequest,
   CreateReleaseRequest,
   CreateWorkspaceCredentialRequest,
   ModifyAppTriggerRequest,
@@ -390,6 +407,7 @@ import {
   AppTriggerPromptExecuteConfig,
   DeleteSkillShareResponse,
   A2AConfig,
+  ModifyPromptTemplateRequest,
   ModifyCategoryResponse,
   WorkflowRunSummary,
   ReleaseSummary,
@@ -411,6 +429,7 @@ import {
   ChannelSpec,
   AgentToolConfig,
   DocQuery,
+  PromptTemplateCategory,
   KBCapacity,
   SimilarQuestionExtra,
   DeleteDocListRequest,
@@ -450,6 +469,7 @@ import {
   AccountInfo,
   CreateSkillRequest,
   ResumeWorkflowRunRequest,
+  PromptTemplateCategoryGroup,
   Sort,
   CreateAgentResponse,
   FavoritePluginResponse,
@@ -458,14 +478,17 @@ import {
   SearchKnowledgeRequest,
   DBRetrievalConfig,
   ModelBadge,
+  KBModelConfig,
   TokenUsage,
   PlatformUsageSummary,
   DeleteLabelListResponse,
   AgentSystemVariable,
-  DocExternalLink,
+  AppOperation,
   PluginProfile,
+  AppTriggerWebhookCredential,
   DescribeLabelSummaryListRequest,
   CopyAgentFromAppRequest,
+  PromptTemplateSpec,
   ClawAgentChannelContextTimeoutConfig,
   DescribeAgentReleasePreviewListResponse,
   DocumentParseUsageDetail,
@@ -473,7 +496,7 @@ import {
   DescribeConversationMessageListRequest,
   DescribeKBResponse,
   DescribeDocSummaryListResponse,
-  DeleteDocListResponse,
+  DescribeUsageSummaryListResponse,
   DescribeReleaseListResponse,
   DeleteAgentRequest,
   RequestParam,
@@ -489,6 +512,7 @@ import {
   DeleteAppTriggerRequest,
   QAPermission,
   CreateQAGenerationTaskResponse,
+  ModifyAppResponse,
   CategoryModifyFields,
   OperationResult,
   OnceSchedule,
@@ -505,6 +529,7 @@ import {
   KBShareStatus,
   AppTriggerWebhookParamSchemaConfig,
   ConversationMessage,
+  FavoritePromptTemplateResponse,
   StopWorkflowRunListResponse,
   CreateCategoryResponse,
   DescribeNodeBatchRunRequest,
@@ -515,10 +540,10 @@ import {
   DescribeVariableListRequest,
   Operator,
   ExportQAResponse,
-  QAMetadata,
+  DescribePromptTemplateRequest,
   DescribeConversationMessageListResponse,
   AppToolConfig,
-  RollbackReleaseResponse,
+  PluginUsageDetail,
   DescribeReleaseSummaryRequest,
   AppWorkflowConfig,
   ConversationAgentTask,
@@ -541,24 +566,30 @@ import {
   AppTriggerSummary,
   ConversationWorkspace,
   SkillReferenceGroup,
+  PromptTemplateLabel,
   DeleteSpaceResponse,
   DescribeAppTriggerInstanceRequest,
   AppSecretInfo,
   AgentDetail,
   AppIdentity,
-  StopWorkflowRunListRequest,
+  QAMetadata,
   GraphRAG,
   ModifyQAResponse,
   CreateAppRequest,
   DeleteAppResponse,
   CreateAppTriggerRequest,
   AppTriggerWebhookStatus,
+  ConnectorKnowledgeScope,
   ResumeAppTriggerResponse,
   AccessKeyParamConfig,
+  CreatePromptTemplateLabelRequest,
   CategoryPermission,
+  DeletePromptTemplateLabelRequest,
   DocTaskStatus,
+  AppTriggerTAPDWebhookConfig,
   ResetConversationRequest,
   TimerScheduleConfig,
+  RollbackReleaseResponse,
   OAuthConfig,
   ToolBilling,
   BasicBilling,
@@ -582,10 +613,13 @@ import {
   DeleteAppTriggerResponse,
   Filter,
   DescribeResourceSummaryResponse,
-  ToolSummary,
+  CreatePromptTemplateLabelResponse,
+  ModelProviderBasic,
   ModifyLabelRequest,
   ModifyCategoryRequest,
+  CreatePromptTemplateResponse,
   AccessKeyPassThroughConfig,
+  FavoritePromptTemplateRequest,
   DescribeSkillReferenceListRequest,
   AppTriggerParamBindingConfig,
   CreateSkillResponse,
@@ -596,9 +630,11 @@ import {
   Space,
   PluginUsageSummary,
   AppMetadata,
+  UnfavoritePromptTemplateRequest,
   CreateKBResponse,
   AppPluginConfig,
   AppTriggerScheduleConfig,
+  DescribePromptTemplateCategoryListResponse,
   AppMemoryConfig,
   TriggerStatus,
   DescribeAgentSummaryListRequest,
@@ -609,9 +645,10 @@ import {
   ConcurrencyLimitDetail,
   CreateMsgRecordCategoryRequest,
   DescribeAppStatisticsOverviewResponse,
+  DescribePromptTemplateLabelListResponse,
   DescribeAgentDetailRequest,
   AgentPluginParameter,
-  PluginUsageDetail,
+  Audit,
   CopyAppRequest,
   CreateCategoryRequest,
   DescribeAgentDetailResponse,
@@ -621,13 +658,15 @@ import {
   ReleaseRecord,
   ConversationRecordTokenUsage,
   SkillAnalysisInfo,
+  PromptTemplate,
   AppTriggerWorkflowExecuteConfig,
   LabelRefIdentity,
   ModifyAgentResponse,
-  ModelProviderBasic,
+  DescribePromptTemplateSummaryListRequest,
   ConversationQuestionnaire,
   SimilarQuestionStat,
-  ReplyMessage,
+  DescribeSystemVariableListResponse,
+  DeletePromptTemplateLabelResponse,
   AppAdvancedConf,
   KBSummary,
   PauseAppTriggerResponse,
@@ -693,6 +732,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateChannelResponse) => void
   ): Promise<CreateChannelResponse> {
     return this.request("CreateChannel", req, cb)
+  }
+
+  /**
+   * 删除提示词模板标签
+   */
+  async DeletePromptTemplateLabel(
+    req: DeletePromptTemplateLabelRequest,
+    cb?: (error: string, rep: DeletePromptTemplateLabelResponse) => void
+  ): Promise<DeletePromptTemplateLabelResponse> {
+    return this.request("DeletePromptTemplateLabel", req, cb)
   }
 
   /**
@@ -866,6 +915,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询提示词模板详情
+   */
+  async DescribePromptTemplate(
+    req: DescribePromptTemplateRequest,
+    cb?: (error: string, rep: DescribePromptTemplateResponse) => void
+  ): Promise<DescribePromptTemplateResponse> {
+    return this.request("DescribePromptTemplate", req, cb)
+  }
+
+  /**
    * 获取会话列表
    */
   async DescribeConversationList(
@@ -923,6 +982,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySkillResponse) => void
   ): Promise<ModifySkillResponse> {
     return this.request("ModifySkill", req, cb)
+  }
+
+  /**
+   * 创建提示词模板
+   */
+  async CreatePromptTemplate(
+    req: CreatePromptTemplateRequest,
+    cb?: (error: string, rep: CreatePromptTemplateResponse) => void
+  ): Promise<CreatePromptTemplateResponse> {
+    return this.request("CreatePromptTemplate", req, cb)
   }
 
   /**
@@ -1286,13 +1355,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 QA 详情
+   * 删除自定义 Skill  鉴权：创建者 ∨ (编辑权限 ∧ 删除权限） 拒绝场景：非 Custom 类型 / 已共享 / 安全检测中 / 上架审批中 / 下架审批中
    */
-  async DescribeQA(
-    req: DescribeQARequest,
-    cb?: (error: string, rep: DescribeQAResponse) => void
-  ): Promise<DescribeQAResponse> {
-    return this.request("DescribeQA", req, cb)
+  async DeleteSkill(
+    req: DeleteSkillRequest,
+    cb?: (error: string, rep: DeleteSkillResponse) => void
+  ): Promise<DeleteSkillResponse> {
+    return this.request("DeleteSkill", req, cb)
   }
 
   /**
@@ -1457,6 +1526,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询提示词模板分类列表
+   */
+  async DescribePromptTemplateCategoryList(
+    req?: DescribePromptTemplateCategoryListRequest,
+    cb?: (error: string, rep: DescribePromptTemplateCategoryListResponse) => void
+  ): Promise<DescribePromptTemplateCategoryListResponse> {
+    return this.request("DescribePromptTemplateCategoryList", req, cb)
+  }
+
+  /**
+   * 创建提示词模板标签
+   */
+  async CreatePromptTemplateLabel(
+    req: CreatePromptTemplateLabelRequest,
+    cb?: (error: string, rep: CreatePromptTemplateLabelResponse) => void
+  ): Promise<CreatePromptTemplateLabelResponse> {
+    return this.request("CreatePromptTemplateLabel", req, cb)
+  }
+
+  /**
    * 批量删除文档
    */
   async DeleteDocList(
@@ -1474,6 +1563,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuditLogMetaResponse) => void
   ): Promise<DescribeAuditLogMetaResponse> {
     return this.request("DescribeAuditLogMeta", req, cb)
+  }
+
+  /**
+   * 发布记录列表
+   */
+  async DescribeReleaseList(
+    req: DescribeReleaseListRequest,
+    cb?: (error: string, rep: DescribeReleaseListResponse) => void
+  ): Promise<DescribeReleaseListResponse> {
+    return this.request("DescribeReleaseList", req, cb)
   }
 
   /**
@@ -1497,13 +1596,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发布记录列表
+   * 删除提示词模板
    */
-  async DescribeReleaseList(
-    req: DescribeReleaseListRequest,
-    cb?: (error: string, rep: DescribeReleaseListResponse) => void
-  ): Promise<DescribeReleaseListResponse> {
-    return this.request("DescribeReleaseList", req, cb)
+  async DeletePromptTemplate(
+    req: DeletePromptTemplateRequest,
+    cb?: (error: string, rep: DeletePromptTemplateResponse) => void
+  ): Promise<DeletePromptTemplateResponse> {
+    return this.request("DeletePromptTemplate", req, cb)
   }
 
   /**
@@ -1537,6 +1636,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询提示词模板标签列表
+   */
+  async DescribePromptTemplateLabelList(
+    req: DescribePromptTemplateLabelListRequest,
+    cb?: (error: string, rep: DescribePromptTemplateLabelListResponse) => void
+  ): Promise<DescribePromptTemplateLabelListResponse> {
+    return this.request("DescribePromptTemplateLabelList", req, cb)
+  }
+
+  /**
    * 创建工作空间凭证
    */
   async CreateWorkspaceCredential(
@@ -1567,13 +1676,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除自定义 Skill  鉴权：创建者 ∨ (编辑权限 ∧ 删除权限） 拒绝场景：非 Custom 类型 / 已共享 / 安全检测中 / 上架审批中 / 下架审批中
+   * 查询 QA 详情
    */
-  async DeleteSkill(
-    req: DeleteSkillRequest,
-    cb?: (error: string, rep: DeleteSkillResponse) => void
-  ): Promise<DeleteSkillResponse> {
-    return this.request("DeleteSkill", req, cb)
+  async DescribeQA(
+    req: DescribeQARequest,
+    cb?: (error: string, rep: DescribeQAResponse) => void
+  ): Promise<DescribeQAResponse> {
+    return this.request("DescribeQA", req, cb)
   }
 
   /**
@@ -1654,6 +1763,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCategoryResponse) => void
   ): Promise<DeleteCategoryResponse> {
     return this.request("DeleteCategory", req, cb)
+  }
+
+  /**
+   * 修改提示词模板
+   */
+  async ModifyPromptTemplate(
+    req: ModifyPromptTemplateRequest,
+    cb?: (error: string, rep: ModifyPromptTemplateResponse) => void
+  ): Promise<ModifyPromptTemplateResponse> {
+    return this.request("ModifyPromptTemplate", req, cb)
   }
 
   /**
@@ -1797,6 +1916,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 收藏提示词模板
+   */
+  async FavoritePromptTemplate(
+    req: FavoritePromptTemplateRequest,
+    cb?: (error: string, rep: FavoritePromptTemplateResponse) => void
+  ): Promise<FavoritePromptTemplateResponse> {
+    return this.request("FavoritePromptTemplate", req, cb)
+  }
+
+  /**
    * 查询冲突问详情
    */
   async DescribeConflictQA(
@@ -1937,6 +2066,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询提示词模板摘要列表
+   */
+  async DescribePromptTemplateSummaryList(
+    req: DescribePromptTemplateSummaryListRequest,
+    cb?: (error: string, rep: DescribePromptTemplateSummaryListResponse) => void
+  ): Promise<DescribePromptTemplateSummaryListResponse> {
+    return this.request("DescribePromptTemplateSummaryList", req, cb)
+  }
+
+  /**
    * 批量修改文档
    */
   async ModifyDocList(
@@ -1954,6 +2093,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUsageSummaryListResponse) => void
   ): Promise<DescribeUsageSummaryListResponse> {
     return this.request("DescribeUsageSummaryList", req, cb)
+  }
+
+  /**
+   * 取消收藏提示词模板
+   */
+  async UnfavoritePromptTemplate(
+    req: UnfavoritePromptTemplateRequest,
+    cb?: (error: string, rep: UnfavoritePromptTemplateResponse) => void
+  ): Promise<UnfavoritePromptTemplateResponse> {
+    return this.request("UnfavoritePromptTemplate", req, cb)
   }
 
   /**

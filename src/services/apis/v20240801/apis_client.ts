@@ -64,6 +64,7 @@ import {
   ToolConfigVO,
   DescribeAgentAppResponse,
   ResultIDVO,
+  DescribeAgentCredentialsResp,
   LimitWindowsDTO,
   DescribeModelRequest,
   AgentCredentialContentHeaderDTO,
@@ -87,7 +88,7 @@ import {
   McpUrlObj,
   ModifyAgentAppModelServicesRequest,
   DescribeModelServiceRequest,
-  DeleteAgentAppMcpServersRequest,
+  DeleteModelRequest,
   DescribeAgentAppResp,
   CreateMcpServerRequest,
   DeleteModelServiceRequest,
@@ -140,6 +141,7 @@ import {
   CreateAgentAppMcpServersResponse,
   DescribeServicesResponse,
   ModifyMcpServerRequest,
+  DeleteAgentAppMcpServersRequest,
   DescribeModelResponse,
   DescribeAgentAppMcpServersRequest,
   DescribeAgentAppServicesVO,
@@ -159,7 +161,7 @@ import {
   CreateAgentCredentialResponse,
   DescribeAgentAppModelServicesResponse,
   ModifyMcpServerResponse,
-  DeleteModelRequest,
+  DescribeAgentCredentialsSortDTO,
   DescribeModelsResponse,
   DescribeAgentAppServicesRequest,
   DescribeModelServicesResponse,
@@ -200,7 +202,7 @@ export class Client extends AbstractClient {
    * 查询Credential详情
    */
   async DescribeAgentCredential(
-    req?: DescribeAgentCredentialRequest,
+    req: DescribeAgentCredentialRequest,
     cb?: (error: string, rep: DescribeAgentCredentialResponse) => void
   ): Promise<DescribeAgentCredentialResponse> {
     return this.request("DescribeAgentCredential", req, cb)
@@ -260,7 +262,7 @@ export class Client extends AbstractClient {
    * 查询Credential列表
    */
   async DescribeAgentCredentials(
-    req?: DescribeAgentCredentialsRequest,
+    req: DescribeAgentCredentialsRequest,
     cb?: (error: string, rep: DescribeAgentCredentialsResponse) => void
   ): Promise<DescribeAgentCredentialsResponse> {
     return this.request("DescribeAgentCredentials", req, cb)
@@ -420,7 +422,7 @@ export class Client extends AbstractClient {
    * 创建Credential
    */
   async CreateAgentCredential(
-    req?: CreateAgentCredentialRequest,
+    req: CreateAgentCredentialRequest,
     cb?: (error: string, rep: CreateAgentCredentialResponse) => void
   ): Promise<CreateAgentCredentialResponse> {
     return this.request("CreateAgentCredential", req, cb)
@@ -430,7 +432,7 @@ export class Client extends AbstractClient {
    * 删除Credential
    */
   async DeleteAgentCredential(
-    req?: DeleteAgentCredentialRequest,
+    req: DeleteAgentCredentialRequest,
     cb?: (error: string, rep: DeleteAgentCredentialResponse) => void
   ): Promise<DeleteAgentCredentialResponse> {
     return this.request("DeleteAgentCredential", req, cb)
@@ -530,7 +532,7 @@ export class Client extends AbstractClient {
    * 修改Credential
    */
   async ModifyAgentCredential(
-    req?: ModifyAgentCredentialRequest,
+    req: ModifyAgentCredentialRequest,
     cb?: (error: string, rep: ModifyAgentCredentialResponse) => void
   ): Promise<ModifyAgentCredentialResponse> {
     return this.request("ModifyAgentCredential", req, cb)

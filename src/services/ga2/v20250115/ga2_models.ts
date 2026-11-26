@@ -1273,6 +1273,10 @@ export interface AcceleratorAreas {
    */
   AccelerateRegion: string
   /**
+   * <p>加速地域名称。</p>
+   */
+  AccelerateRegionName?: string
+  /**
    * <p>带宽。</p>
    */
   Bandwidth?: number

@@ -81,6 +81,32 @@ export interface ListWorkflowPermissionsResponse {
 }
 
 /**
+ * 触发本次运行的一条表更新记录（某张表在某个时刻、某个版本的一次更新）
+ */
+export interface TriggerTableUpdateRecord {
+  /**
+   * <p>表全名</p><p>参数格式：格式 catalog.schema.table</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableQualifier?: string
+  /**
+   * <p>表更新时间</p><p>参数格式：时间戳格式，如：1792951200000</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * <p>表更新版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateVersion?: string
+  /**
+   * <p>数据资产ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetGuid?: string
+}
+
+/**
  * ListProcessLineage返回参数结构体
  */
 export interface ListProcessLineageResponse {
@@ -900,6 +926,11 @@ export interface TriggerTaskRunBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Privilege?: string
+  /**
+   * <p>所属工作流运行中本次触发涉及的表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerTableUpdateRecords?: Array<TriggerTableUpdateRecord>
 }
 
 /**
@@ -1430,6 +1461,32 @@ export interface UpdateTriggerTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 工作流标签（K-V），标签字典与数据资产标签一致
+ */
+export interface WorkflowLabel {
+  /**
+   * <p>标签ID，入参时必填</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelId?: number
+  /**
+   * <p>标签名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelName?: string
+  /**
+   * <p>标签值ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValueId?: number
+  /**
+   * <p>标签值名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValue?: string
 }
 
 /**
@@ -4449,6 +4506,11 @@ export interface TriggerWorkflowDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteUserUin?: string
+  /**
+   * <p>工作流标签列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowLabels?: Array<WorkflowLabel>
 }
 
 /**
@@ -7208,6 +7270,15 @@ export interface TriggerWorkflowRunBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Privilege?: string
+  /**
+   * <p>表更新触发的运行中，本次触发涉及的表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerTableUpdateRecords?: Array<TriggerTableUpdateRecord>
+  /**
+   * <p>工作流标签列表，仅工作流调度模式返回</p>
+   */
+  WorkflowLabels?: Array<WorkflowLabel>
 }
 
 /**
@@ -8402,25 +8473,29 @@ export interface GetAlarmMessageRequest {
  */
 export interface ListCodeFolderContentsRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 父文件夹path，例如/aaa/bbb/ccc，路径头需带斜杠，根目录传/
+   * <p>父文件夹path，例如/aaa/bbb/ccc，路径头需带斜杠，根目录传/</p>
    */
   ParentFolderPath?: string
   /**
-   * 文件夹名称/代码文件名称搜索
+   * <p>文件夹名称/代码文件名称搜索</p>
    */
   Keyword?: string
   /**
-   * 只查询文件夹
+   * <p>只查询文件夹</p>
    */
   OnlyFolderNode?: boolean
   /**
-   * 是否只查询用户自己创建的代码文件
+   * <p>是否只查询用户自己创建的代码文件</p>
    */
   OnlyUserSelfScript?: boolean
+  /**
+   * <p>是否只查询提交状态为提交成功的文件</p><p>默认值：false</p>
+   */
+  SubmitStatusFilter?: boolean
 }
 
 /**
@@ -12125,13 +12200,17 @@ export interface UpdateTriggerWorkflowRequest {
    */
   SchedulerStatus?: string
   /**
-   * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li><li>FILE_ARRIVAL： 文件到达</li></ul>
+   * <p>触发方式：定时触发：TIME_TRIGGER、文件到达触发：FILE_ARRIVAL、表更新触发：TABLE_UPDATE。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li><li>FILE_ARRIVAL： 文件到达</li><li>TABLE_UPDATE： 表更新</li></ul>
    */
   TriggerMode?: string
   /**
    * <p>运行账号ID</p>
    */
   ExecuteUserUin?: string
+  /**
+   * <p>工作流标签列表。不传则不修改；传空数组则清空；传值则整体覆盖。同一标签Key只能选一个Value，标签需在数据资产中已存在</p>
+   */
+  WorkflowLabels?: Array<WorkflowLabel>
 }
 
 /**
@@ -14179,13 +14258,17 @@ export interface CreateTriggerWorkflowRequest {
    */
   SchedulerStatus?: string
   /**
-   * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
+   * <p>触发方式：定时触发：TIME_TRIGGER 、文件到达触发：FILE_ARRIVAL、表更新触发：TABLE_UPDATE。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li><li>FILE_ARRIVAL： 文件触发</li><li>TABLE_UPDATE： 表更新</li></ul>
    */
   TriggerMode?: string
   /**
-   * <p>运行账号ID,未传时默认使用当前登录用户ID</p>
+   * <p>运行账号ID</p>
    */
   ExecuteUserUin?: string
+  /**
+   * <p>工作流标签列表。可按ID或名称传，标签需在数据资产中已存在；同一标签Key只能选一个Value。标签写入失败时工作流创建会回滚</p>
+   */
+  WorkflowLabels?: Array<WorkflowLabel>
 }
 
 /**
@@ -17843,7 +17926,7 @@ export interface DatabaseInfo {
  */
 export interface WorkflowTriggerConfig {
   /**
-   * <p>触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高</p><ul><li>定时触发：TIME_TRIGGER</li><li>文件到达：FILE_ARRIVAL</li><li>持续运行：CONTINUE_RUN（暂不支持）</li></ul><p>注意：</p><ul><li>TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；</li><li>FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；</li></ul><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li><li>FILE_ARRIVAL： 文件到达</li></ul>
+   * <p>触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高</p><ul><li>定时触发：TIME_TRIGGER</li><li>文件到达：FILE_ARRIVAL</li><li>表更新：TABLE_UPDATE</li><li>持续运行：CONTINUE_RUN（暂不支持）</li></ul><p>注意：</p><ul><li>TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；</li><li>FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；</li><li>TABLE_UPDATE 模式下，TriggerMinimumIntervalSecond、TriggerWaitTimeSecond、tableQualifiers、triggerPolicy 必填；</li></ul><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li><li>FILE_ARRIVAL： 文件到达</li><li>TABLE_UPDATE： 表更新</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerMode?: string
@@ -17908,25 +17991,35 @@ export interface WorkflowTriggerConfig {
    */
   Recursive?: number
   /**
-   * <p>文件到达模式下 最小触发间隔</p><p>取值范围：[1, 1440]</p><p>单位：分钟</p>
+   * <p>文件到达、表更新 模式下 最小触发间隔</p><p>取值范围：[1, 1440]</p><p>单位：分钟</p><p>默认值：5</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerMinimumInterval?: number
   /**
-   * <p>文件到达模式下 文件批次等待时间</p><p>取值范围：[1, 60]</p><p>单位：分钟</p>
+   * <p>文件到达、表更新 模式下 批次等待时间</p><p>取值范围：[1, 60]</p><p>单位：分钟</p><p>默认值：2</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerWaitTime?: number
   /**
-   * <p>文件到达模式下    触发最短间隔时间</p><p>单位：秒</p><p>后续废弃 勿用</p>
+   * <p>文件到达、表更新 模式下，触发最短间隔时间</p><p>取值范围：[60, 86400]</p><p>单位：秒</p><p>默认值：300</p><p>只需填TriggerMinimumIntervalSecond，不用填TriggerMinimumInterval；两者都填取TriggerMinimumIntervalSecond；</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerMinimumIntervalSecond?: number
   /**
-   * <p>文件到达模式下    触发等待时间</p><p>单位：秒</p><p>后续废弃 勿用</p>
+   * <p>文件到达、表更新 模式下，触发等待时间</p><p>取值范围：[60, 3600]</p><p>单位：秒</p><p>默认值：120</p><p>只需填TriggerWaitTimeSecond，不用填TriggerWaitTime；两者都填取TriggerWaitTimeSecond；</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerWaitTimeSecond?: number
+  /**
+   * <p>表更新 模式下，触发表列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableQualifiers?: Array<string>
+  /**
+   * <p>表更新模式下，触发条件</p><p>枚举值：</p><ul><li>ALL： 所有表更新</li><li>ANY： 任一表更新</li></ul><p>默认值：ANY</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerPolicy?: string
 }
 
 /**
@@ -18554,6 +18647,10 @@ export interface UpdateTriggerWorkflowPartially {
    * <p>运行账号ID</p>
    */
   ExecuteUserUin?: string
+  /**
+   * <p>工作流标签列表。不传则不修改；传空数组则清空；传值则整体覆盖。同一标签Key只能选一个Value，标签需在数据资产中已存在</p>
+   */
+  WorkflowLabels?: Array<WorkflowLabel>
 }
 
 /**
@@ -18652,7 +18749,7 @@ export interface QualityCompareRule {
  */
 export interface ListCodeFolderContentsResponse {
   /**
-   * 结果
+   * <p>结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<CodeFolderNode>

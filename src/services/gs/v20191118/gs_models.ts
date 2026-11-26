@@ -2838,79 +2838,83 @@ export interface CreateAndroidInstanceLabelRequest {
  */
 export interface AndroidInstance {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   AndroidInstanceId?: string
   /**
-   * 实例所在区域
+   * <p>实例所在区域</p>
    */
   AndroidInstanceRegion?: string
   /**
-   * 实例可用区
+   * <p>实例可用区</p>
    */
   AndroidInstanceZone?: string
   /**
-   * 实例状态：INITIALIZING，NORMAL，PROCESSING
+   * <p>实例状态：INITIALIZING，NORMAL，PROCESSING</p>
    */
   State?: string
   /**
-   * 实例规格
+   * <p>实例规格</p>
    */
   AndroidInstanceType?: string
   /**
-   * 实例镜像 ID
+   * <p>实例镜像 ID</p>
    */
   AndroidInstanceImageId?: string
   /**
-   * 分辨率宽度
+   * <p>分辨率宽度</p>
    */
   Width?: number
   /**
-   * 分辨率高度
+   * <p>分辨率高度</p>
    */
   Height?: number
   /**
-   * 宿主机 ID
+   * <p>每英寸像素点。</p>
+   */
+  DPI?: number
+  /**
+   * <p>帧率</p>
+   */
+  FPS?: number
+  /**
+   * <p>宿主机 ID</p>
    */
   HostSerialNumber?: string
   /**
-   * 分组 ID
+   * <p>分组 ID</p>
    */
   AndroidInstanceGroupId?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   AndroidInstanceLabels?: Array<AndroidInstanceLabel>
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name?: string
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   UserId?: string
   /**
-   * 内网 IP
+   * <p>内网 IP</p>
    */
   PrivateIP?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 机箱 ID
+   * <p>机箱 ID</p>
    */
   HostServerSerialNumber?: string
   /**
-   * 服务状态。
-IDLE：未连接
-ESTABLISHED：连接中
+   * <p>服务状态。<br>IDLE：未连接<br>ESTABLISHED：连接中</p>
    */
   ServiceStatus?: string
   /**
-   * 安卓实例型号。
-YS1：默认值，基础型云手机
-GC0、GC1、GC2：三种性能型云手机
+   * <p>安卓实例型号。<br>YS1：默认值，基础型云手机<br>GC0、GC1、GC2：三种性能型云手机</p>
    */
   AndroidInstanceModel?: string
 }

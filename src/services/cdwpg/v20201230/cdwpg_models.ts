@@ -38,6 +38,30 @@ export interface ConfigParams {
  */
 export interface InstanceStateItem {
   /**
+   * <p>集群备份任务开启状态2</p>
+   */
+  BackupOpenStatus?: number
+  /**
+   * <p>集群备份任务开启状态</p>
+   */
+  BackupStatus?: number
+  /**
+   * <p>集群操作创建时间</p>
+   */
+  FlowCreateTime?: string
+  /**
+   * <p>集群流程错误信息</p>
+   */
+  FlowMsg?: string
+  /**
+   * <p>集群操作名称</p>
+   */
+  FlowName?: string
+  /**
+   * <p>集群操作进度</p>
+   */
+  FlowProgress?: number
+  /**
    * <p>集群实例名称</p>
    */
   InstanceId?: string
@@ -50,33 +74,13 @@ export interface InstanceStateItem {
    */
   InstanceStateDesc?: string
   /**
-   * <p>集群备份任务开启状态</p>
-   */
-  BackupStatus?: number
-  /**
-   * <p>集群备份任务开启状态2</p>
-   */
-  BackupOpenStatus?: number
-  /**
-   * <p>集群操作创建时间</p>
-   */
-  FlowCreateTime?: string
-  /**
-   * <p>集群操作名称</p>
-   */
-  FlowName?: string
-  /**
-   * <p>集群操作进度</p>
-   */
-  FlowProgress?: number
-  /**
-   * <p>集群流程错误信息</p>
-   */
-  FlowMsg?: string
-  /**
    * <p>当前步骤的名称</p>
    */
   ProcessName?: string
+  /**
+   * <p>恢复状态，仅用于前端交互判断（不用于展示）。TableRecovering=表级恢复进行中；ClusterRecovering=集群恢复进行中（CBS 快照恢复/旧回档，不区分）；空字符串=无恢复进行中</p>
+   */
+  RecoveryState?: string
 }
 
 /**
@@ -1810,13 +1814,17 @@ export interface DescribeInstanceStateResponse {
    */
   InstanceStateDesc?: string
   /**
+   * <p>批量实例状态列表（InstanceIds 入参时返回，每项含 InstanceId 与状态字段）</p>
+   */
+  InstanceStates?: Array<InstanceStateItem>
+  /**
    * <p>当前步骤的名称，例如：”购买资源中“</p>
    */
   ProcessName?: string
   /**
-   * <p>批量实例状态列表（InstanceIds 入参时返回，每项含 InstanceId 与状态字段）</p>
+   * <p>恢复状态，仅用于前端交互判断（不用于展示）。TableRecovering=表级恢复进行中；ClusterRecovering=集群恢复进行中（CBS 快照恢复/旧回档，不区分）；空字符串=无恢复进行中。批量请求时以 InstanceStates 内各项为准</p>
    */
-  InstanceStates?: Array<InstanceStateItem>
+  RecoveryState?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

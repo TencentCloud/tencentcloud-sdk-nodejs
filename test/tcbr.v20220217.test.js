@@ -48,6 +48,16 @@ it("tcbr.v20220217.StartVersionInstance", async function () {
     }
 })
 
+it("tcbr.v20220217.DescribeStableIP", async function () {
+    try {
+       const data = await client.DescribeStableIP({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcbr.v20220217.ModifyStableIPStatus", async function () {
     try {
        const data = await client.ModifyStableIPStatus({})

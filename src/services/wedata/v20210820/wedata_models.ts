@@ -16724,6 +16724,32 @@ export interface CreateTaskResponse {
 }
 
 /**
+ * 工作流标签（K-V），标签字典与数据资产标签一致
+ */
+export interface WorkflowLabel {
+  /**
+   * <p>标签ID，入参时必填</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelId?: number
+  /**
+   * <p>标签名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelName?: string
+  /**
+   * <p>标签值ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValueId?: number
+  /**
+   * <p>标签值名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValue?: string
+}
+
+/**
  * ModifyIntegrationTask返回参数结构体
  */
 export interface ModifyIntegrationTaskResponse {
@@ -35645,6 +35671,11 @@ export interface WorkflowDsDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Privilege?: string
+  /**
+   * <p>工作流标签列表，仅工作流调度模式返回</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowLabels?: Array<WorkflowLabel>
 }
 
 /**

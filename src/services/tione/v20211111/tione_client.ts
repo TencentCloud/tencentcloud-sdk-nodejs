@@ -25,7 +25,7 @@ import {
   DescribeModelAccelerateVersionsRequest,
   StopModelAccelerateTaskRequest,
   DeleteTrainingModelVersionResponse,
-  ServiceEIP,
+  ModifyTrainingTaskSchedulingPolicyRequest,
   DescribeExportResponse,
   NotebookSetItem,
   DescribeBillingResourceGroupAttachedWorkspacesResponse,
@@ -228,6 +228,7 @@ import {
   TCPSocketAction,
   ResourceInfo,
   ModifyRoleUserGrantResponse,
+  SchedulePolicy,
   PodInfo,
   GroupResource,
   DescribeModelServiceCallInfoResponse,
@@ -239,6 +240,7 @@ import {
   DeleteNotebookResponse,
   DeleteRoleResponse,
   DescribeModelServiceHotUpdatedRequest,
+  ModifyTrainingTaskSchedulingPolicyResponse,
   MetricData,
   CreateModelServiceAuthTokenResponse,
   GooseFS,
@@ -254,6 +256,7 @@ import {
   CreateDatasetRequest,
   RepairTaskInfo,
   CreateModelServiceResponse,
+  ServiceEIP,
   DeleteExportRequest,
   ServiceGroup,
   ServiceLimit,
@@ -1472,6 +1475,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: DescribeRoleResponse) => void
   ): Promise<DescribeRoleResponse> {
     return this.request("DescribeRole", req, cb)
+  }
+
+  /**
+   * 更新训练任务的调度策略
+   */
+  async ModifyTrainingTaskSchedulingPolicy(
+    req: ModifyTrainingTaskSchedulingPolicyRequest,
+    cb?: (error: string, rep: ModifyTrainingTaskSchedulingPolicyResponse) => void
+  ): Promise<ModifyTrainingTaskSchedulingPolicyResponse> {
+    return this.request("ModifyTrainingTaskSchedulingPolicy", req, cb)
   }
 
   /**

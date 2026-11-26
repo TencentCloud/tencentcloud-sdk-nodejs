@@ -420,13 +420,13 @@ export interface DescribePrometheusScrapeJobsRequest {
 }
 
 /**
- * CreateAlarmHistoryShield返回参数结构体
+ * CreatePolicyGroup返回参数结构体
  */
-export interface CreateAlarmHistoryShieldResponse {
+export interface CreatePolicyGroupResponse {
   /**
-   * 屏蔽规则的Id
+   * 创建成功的策略组Id
    */
-  ShieldId?: string
+  GroupId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5980,20 +5980,6 @@ export interface CreatePrometheusConfigResponse {
 }
 
 /**
- * CreatePolicyGroup返回参数结构体
- */
-export interface CreatePolicyGroupResponse {
-  /**
-   * 创建成功的策略组Id
-   */
-  GroupId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 值班人员id组
  */
 export interface StaffInfo {
@@ -8549,6 +8535,16 @@ export interface DescribeAlarmHistoriesRequest {
    * 是否已屏蔽
    */
   ShieldStatus?: Array<string>
+}
+
+/**
+ * AddSubnetToManagedCluster返回参数结构体
+ */
+export interface AddSubnetToManagedClusterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11251,6 +11247,20 @@ export interface IntegrationMetric {
 }
 
 /**
+ * AddSubnetToManagedCluster请求参数结构体
+ */
+export interface AddSubnetToManagedClusterRequest {
+  /**
+   * <p>Prometheus实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>子网ID</p>
+   */
+  SubnetId: string
+}
+
+/**
  * DescribePrometheusZones请求参数结构体
  */
 export interface DescribePrometheusZonesRequest {
@@ -12420,6 +12430,20 @@ export interface AlarmNotice {
    * <p>IANA 时区名</p>
    */
   TimeZoneName?: string
+}
+
+/**
+ * CreateAlarmHistoryShield返回参数结构体
+ */
+export interface CreateAlarmHistoryShieldResponse {
+  /**
+   * 屏蔽规则的Id
+   */
+  ShieldId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

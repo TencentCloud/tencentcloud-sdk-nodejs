@@ -57,6 +57,7 @@ import {
   ModifyAssetSyncFlagResponse,
   DescribeSourceTypesResponse,
   DescribeChangePwdTaskDetailResponse,
+  ApproveTicketResponse,
   DeleteUserGroupsResponse,
   ModifyAccessWhiteListAutoStatusResponse,
   ModifyDeviceRequest,
@@ -79,7 +80,7 @@ import {
   DescribeLDAPUnitSetRequest,
   CreateSyncUserTaskResponse,
   RunChangePwdTaskDetail,
-  ModifyOAuthSettingRequest,
+  DescribeTicketsRequest,
   CreateUserGroupRequest,
   SearchFileTypeFilter,
   DisableIntranetAccessRequest,
@@ -146,6 +147,7 @@ import {
   EnableClientTcpAccessResponse,
   AssetSyncFlags,
   CreateCmdTemplateRequest,
+  ModifyOAuthSettingRequest,
   ModifyCmdTemplateResponse,
   ModifyUserDirectoryResponse,
   DescribeDeviceCountResponse,
@@ -157,6 +159,7 @@ import {
   ModifyLDAPSettingRequest,
   ModifyChangePwdTaskRequest,
   CreateAssetSyncJobRequest,
+  Ticket,
   Group,
   UnlockUserResponse,
   EnableWebAccessRequest,
@@ -230,6 +233,7 @@ import {
   DescribeUserGroupsResponse,
   DescribeUserDirectoryRequest,
   SyncUserToIOARequest,
+  AccountGroup,
   AddUserGroupMembersResponse,
   DescribeDeviceAccountsRequest,
   DescribeAssetSyncFlagResponse,
@@ -249,6 +253,7 @@ import {
   DescribeDeviceAccountsResponse,
   DeviceCount,
   DescribeDomainsRequest,
+  DescribeTicketsResponse,
   DescribeCmdTemplatesRequest,
   EnableIntranetAccessRequest,
   DescribeAclsRequest,
@@ -280,7 +285,7 @@ import {
   ModifyUserDirectoryRequest,
   DisableWebAccessResponse,
   ReplaySessionResponse,
-  AccountGroup,
+  ApproveTicketRequest,
   DeleteAclsResponse,
   DescribeDeviceGroupMembersRequest,
   DeleteDeviceGroupsResponse,
@@ -790,6 +795,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询运维工单列表
+   */
+  async DescribeTickets(
+    req: DescribeTicketsRequest,
+    cb?: (error: string, rep: DescribeTicketsResponse) => void
+  ): Promise<DescribeTicketsResponse> {
+    return this.request("DescribeTickets", req, cb)
+  }
+
+  /**
    * 会话回放
    */
   async ReplaySession(
@@ -957,6 +972,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSourceTypesResponse) => void
   ): Promise<DescribeSourceTypesResponse> {
     return this.request("DescribeSourceTypes", req, cb)
+  }
+
+  /**
+   * 审批工单
+   */
+  async ApproveTicket(
+    req: ApproveTicketRequest,
+    cb?: (error: string, rep: ApproveTicketResponse) => void
+  ): Promise<ApproveTicketResponse> {
+    return this.request("ApproveTicket", req, cb)
   }
 
   /**

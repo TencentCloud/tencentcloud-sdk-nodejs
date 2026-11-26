@@ -5695,11 +5695,11 @@ export interface GenerateVLEmbeddingResponse {
 }
 
 /**
- * 解析失败的页数
+ * 解析失败的页码
  */
 export interface ReconstructDocumentFailedPage {
   /**
-   * <p>解析失败页数。</p>
+   * <p>解析失败页码。</p>
    */
   PageNumber?: number
 }

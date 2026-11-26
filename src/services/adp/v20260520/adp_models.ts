@@ -267,40 +267,50 @@ export interface DescribeModelListResponse {
  */
 export interface AppModelConfig {
   /**
-   * AI一键优化模型
+   * <p>AI一键优化模型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiOptimizeModel: AIOptimizeModel
   /**
-   * 实时文件解析模型
+   * <p>实时文件解析模型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileParseModel: FileParseModel
   /**
-   * 生成模型配置
+   * <p>生成模型配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GenerateModel: GenerateModel
   /**
-   * 多模态问答模型
+   * <p>多模态问答模型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MultiModalQaModel: MultiModalQAModel
   /**
-   * 多模态理解模型
+   * <p>多模态理解模型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MultiModalUnderstandingModel: MultiModalUnderstandingModel
   /**
-   * Prompt改写模型
+   * <p>Prompt改写模型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PromptRewriteModel: PromptRewriteModel
   /**
-   * 思考模型配置
+   * <p>思考模型配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThinkModel: ThinkModel
+  /**
+   * <p>实时文档切分模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSplitModel?: FileSplitModel
+  /**
+   * <p>表头拆分模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeaderExtractModel?: HeaderExtractModel
 }
 
 /**
@@ -533,6 +543,20 @@ export interface AppShareAccessControl {
 }
 
 /**
+ * DeletePromptTemplate请求参数结构体
+ */
+export interface DeletePromptTemplateRequest {
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>提示词模板ID</p>
+   */
+  PromptTemplateId: string
+}
+
+/**
  * 知识库分类信息（含元数据配置）
  */
 export interface KBCategory {
@@ -583,6 +607,21 @@ export interface DialogCustomConfig {
    * <p>是否开启对话端动态修改配置</p>
    */
   Enabled?: boolean
+}
+
+/**
+ * DescribePromptTemplate返回参数结构体
+ */
+export interface DescribePromptTemplateResponse {
+  /**
+   * <p>提示词模板完整信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PromptTemplate?: PromptTemplate
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -952,6 +991,16 @@ export interface SkillCorpShareConfig {
    * <p>共享范围信息，仅支持空间；StrId 为空间ID，Name 为空间名称</p>
    */
   ShareScopeList?: Array<Identity>
+}
+
+/**
+ * ModifyPromptTemplate返回参数结构体
+ */
+export interface ModifyPromptTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1938,9 +1987,18 @@ export interface AppTriggerWebhookConfig {
    */
   ParamSchemaConfig?: AppTriggerWebhookParamSchemaConfig
   /**
+   * Webhook 来源扩展配置。通用 Webhook 不传；工蜂/TAPD 传对应配置及 OAuth 凭证，GongfengConfig 与 TAPDConfig 互斥且须与 WebhookProvider 一致。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebhookConfigExt?: AppTriggerWebhookConfigExt
+  /**
    * <p>webhook的key</p>
    */
   WebhookKey?: string
+  /**
+   * Webhook 来源。0：未指定，兼容通用 Webhook；1：工蜂；2：TAPD。
+   */
+  WebhookProvider?: number
   /**
    * <p>webhook的密钥</p>
    */
@@ -1979,6 +2037,17 @@ export interface MsgRecordSource {
    * 访客名称
    */
   UserNickname?: string
+}
+
+/**
+ * 表头拆分模型
+ */
+export interface HeaderExtractModel {
+  /**
+   * <p>实时文档解析模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Model: ModelDetailInfo
 }
 
 /**
@@ -2031,6 +2100,20 @@ export interface CreateVariableResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopWorkflowRunList请求参数结构体
+ */
+export interface StopWorkflowRunListRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId: string
+  /**
+   * <p>工作流运行实例ID列表</p>
+   */
+  WorkflowRunIdList: Array<string>
 }
 
 /**
@@ -2089,6 +2172,10 @@ export interface DocParseConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentFilter?: ContentFilter
+  /**
+   * <p>文档解析策略：1=OCR解析 2=智能解析 3=MLLM解析；不传默认智能解析<table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>DOC_PARSE_STRATEGY_UNKNOWN</td><td>0</td><td>未指定，走服务端默认（智能解析）</td></tr><tr><td>DOC_PARSE_STRATEGY_OCR</td><td>1</td><td>OCR 解析</td></tr><tr><td>DOC_PARSE_STRATEGY_SMART</td><td>2</td><td>智能解析（按图片类型自动选择：数据图/思维导图/架构图/流程图用 MLLM，其他图片用 OCR）</td></tr><tr><td>DOC_PARSE_STRATEGY_MLLM</td><td>3</td><td>MLLM 解析</td></tr></tbody></table></p>
+   */
+  ParseStrategy?: number
   /**
    * <p>分割规则</p>
    */
@@ -2783,6 +2870,28 @@ export interface CallMCPToolResponse {
 }
 
 /**
+ * 连接器资源及上级链
+ */
+export interface ConnectorResource {
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>1： 空间（乐享知识库）</li><li>2： 文件夹</li><li>3： 文档或文件</li><li>4： 团队</li></ul>
+   */
+  Type?: number
+  /**
+   * <p>连接器侧资源 ID</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>资源名称快照</p>
+   */
+  Name?: string
+  /**
+   * <p>祖先链快照，自顶向下且不含自身，最多 100 项；顶层资源为空。</p>
+   */
+  AncestorList?: Array<ConnectorResourceRef>
+}
+
+/**
  * ComplexBillingItem
  */
 export interface ComplexBillingItem {
@@ -2917,6 +3026,16 @@ export interface SearchResourceStatusInfo {
    * 搜索资源状态: AVAILABLE(1)=资源可用, EXHAUSTED(2)=资源已用尽。枚举值: 1:资源可用, 2:资源已用尽
    */
   ResourceStatus: number
+}
+
+/**
+ * 工具信息
+ */
+export interface ToolSummary {
+  /**
+   * <p>工具Id</p>
+   */
+  ToolId?: string
 }
 
 /**
@@ -3195,6 +3314,24 @@ export interface DescribeSkillReferenceListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * <p>连接器资源引用</p>
+ */
+export interface ConnectorResourceRef {
+  /**
+   * <p>连接器侧资源 ID</p>
+   */
+  ResourceId: string
+  /**
+   * <p>资源类型：1-空间（乐享知识库），2-文件夹，3-文档或文件，4-团队；0 无效。</p><table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>CONNECTOR_RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定，不允许用于资源引用</td></tr><tr><td>CONNECTOR_RESOURCE_TYPE_WORKSPACE</td><td>1</td><td>空间；乐享个人知识库和团队知识库均为此类型</td></tr><tr><td>CONNECTOR_RESOURCE_TYPE_FOLDER</td><td>2</td><td>文件夹</td></tr><tr><td>CONNECTOR_RESOURCE_TYPE_DOC</td><td>3</td><td>文档或文件</td></tr><tr><td>CONNECTOR_RESOURCE_TYPE_GROUP</td><td>4</td><td>团队或群组</td></tr></tbody></table>
+   */
+  Type: number
+  /**
+   * <p>资源名称；请求中选填，不参与资源定位。</p>
+   */
+  Name?: string
 }
 
 /**
@@ -3551,6 +3688,16 @@ export interface PauseAppTriggerRequest {
 }
 
 /**
+ * UnfavoritePromptTemplate返回参数结构体
+ */
+export interface UnfavoritePromptTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 元数据值
  */
 export interface MetaValue {
@@ -3686,21 +3833,25 @@ export interface ModelParameter {
 }
 
 /**
- * ModifyApp返回参数结构体
+ * Webhook 来源扩展配置。
  */
-export interface ModifyAppResponse {
+export interface AppTriggerWebhookConfigExt {
   /**
-   * <p>app_id</p>
+   * 访问外部平台的 OAuth 凭证 ID，不能为空。
    */
-  AppId?: string
+  CredentialId: string
   /**
-   * <p>更新时间 (Unix时间戳,秒级)</p>
+   * <p>绑定凭证的只读摘要；创建和修改时忽略</p>
    */
-  UpdateTime?: string
+  Credential?: AppTriggerWebhookCredential
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 工蜂配置，仅 WebhookProvider=1 时使用，与 TAPDConfig 互斥。
    */
-  RequestId?: string
+  GongfengConfig?: AppTriggerGongfengWebhookConfig
+  /**
+   * TAPD 配置，仅 WebhookProvider=2 时使用，与 GongfengConfig 互斥。
+   */
+  TAPDConfig?: AppTriggerTAPDWebhookConfig
 }
 
 /**
@@ -3996,33 +4147,17 @@ export interface DeleteCategoryRequest {
 }
 
 /**
- * 应用操作信息
+ * 文档外部链接信息
  */
-export interface AppOperation {
+export interface DocExternalLink {
   /**
-   * 创建人
+   * <p>外部链接地址</p>
    */
-  Creator: string
+  ExternalUrl?: string
   /**
-   * 创建人UIN
+   * <p>是否替换原文展示</p>
    */
-  CreatorUin: string
-  /**
-   * 创建人账号(私有化场景使用)
-   */
-  CreatorUserAccount: string
-  /**
-   * 修改时间 (Unix时间戳,秒级)
-   */
-  UpdateTime: string
-  /**
-   * 最后修改人
-   */
-  Updater: string
-  /**
-   * 修改人UIN
-   */
-  UpdaterUin: string
+  ReplaceOriginEnabled?: boolean
 }
 
 /**
@@ -4040,18 +4175,9 @@ export interface ClawAgentAgentTeamConfig {
 }
 
 /**
- * DescribeSystemVariableList返回参数结构体
+ * DescribePromptTemplateCategoryList请求参数结构体
  */
-export interface DescribeSystemVariableListResponse {
-  /**
-   * system_variable_list
-   */
-  SystemVariableList?: Array<SystemVariable>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribePromptTemplateCategoryListRequest = null
 
 /**
  * 用户访问配置
@@ -4090,21 +4216,14 @@ export interface WorkflowRunMetadata {
 }
 
 /**
- * 知识库模型配置
+ * 实时文档切分模型
  */
-export interface KBModelConfig {
+export interface FileSplitModel {
   /**
-   * <p>Embedding 模型</p>
+   * <p>实时文档解析模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EmbeddingModel?: string
-  /**
-   * <p>QA 抽取模型</p>
-   */
-  QaExtractModel?: string
-  /**
-   * <p>Schema 生成模型</p>
-   */
-  SchemaModel?: string
+  Model: ModelDetailInfo
 }
 
 /**
@@ -4149,6 +4268,41 @@ export interface ModifyConversationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 提示词模板基本信息
+ */
+export interface PromptTemplateProfile {
+  /**
+   * <p>分类</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Category?: PromptTemplateCategory
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>模板名称</p>
+   */
+  Name?: string
+  /**
+   * <p>提示词模板ID</p>
+   */
+  PromptTemplateId?: string
+  /**
+   * <p>模板类型。1-预置模板, 2-自定义模板</p>
+   */
+  PromptTemplateType?: number
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId?: string
+  /**
+   * <p>审计信息</p>
+   */
+  Audit?: Audit
 }
 
 /**
@@ -4896,6 +5050,10 @@ export interface AgentPluginConfig {
    * <p>凭证配置</p>
    */
   CredentialConfig?: AgentPluginCredentialConfig
+  /**
+   * <p>连接器知识范围，目前仅支持腾讯乐享配置</p>
+   */
+  KnowledgeScope?: ConnectorKnowledgeScope
 }
 
 /**
@@ -5495,7 +5653,7 @@ export interface ModifyAppRequest {
    */
   FileVolumeMountList?: Array<AppFileVolumeMount>
   /**
-   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig,Config.Mode.ClawAgentConfig<br> 【Mode.ClawAgentConfig】 Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig, Config.Mode.ClawAgentConfig.ChannelContextTimeoutConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch,Config.Experience.Conversation.NewMessageInterrupt<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility</p>
+   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel,Config.Model.FileSplitModel,Config.Model.HeaderExtractModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig,Config.Mode.ClawAgentConfig<br> 【Mode.ClawAgentConfig】 Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig, Config.Mode.ClawAgentConfig.ChannelContextTimeoutConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch,Config.Experience.Conversation.NewMessageInterrupt<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility</p>
    */
   UpdateMask?: FieldMask
 }
@@ -5628,6 +5786,29 @@ export interface ConsumptionClassification {
    * <p>套餐包名称</p>
    */
   PackageName?: string
+}
+
+/**
+ * 提示词模板摘要信息
+ */
+export interface PromptTemplateSummary {
+  /**
+   * <p>提示词模板Profile</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Profile?: PromptTemplateProfile
+  /**
+   * <p>标签列表</p>
+   */
+  LabelList?: Array<PromptTemplateLabel>
+  /**
+   * <p>是否已收藏</p>
+   */
+  IsFavorite?: boolean
+  /**
+   * <p>权限列表</p>
+   */
+  PermissionIdList?: Array<string>
 }
 
 /**
@@ -5900,6 +6081,20 @@ export interface MsgRecordCategory {
 }
 
 /**
+ * CreatePromptTemplate请求参数结构体
+ */
+export interface CreatePromptTemplateRequest {
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>提示词内容</p>
+   */
+  Spec: PromptTemplateSpec
+}
+
+/**
  * 摘要列表查询通用开关配置
  */
 export interface SummaryListSwitch {
@@ -6000,17 +6195,13 @@ export interface DescribeUsageDetailListRequest {
 }
 
 /**
- * DescribeUsageSummaryList返回参数结构体
+ * DeleteDocList返回参数结构体
  */
-export interface DescribeUsageSummaryListResponse {
+export interface DeleteDocListResponse {
   /**
-   * <p>总记录数，用于前端分页</p>
+   * <p>批量删除结果</p>
    */
-  TotalCount?: string
-  /**
-   * <p>资源用量聚合明细列表</p>
-   */
-  UsageSummaryList?: Array<UsageSummary>
+  ResultList?: Array<OperationResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6131,15 +6322,15 @@ export interface KnowledgeSnippetProfile {
  */
 export interface ContentFilter {
   /**
-   * <p>图片最小高度（像素），小于则过滤；&lt;=0 表示不启用</p>
+   * 图片最小高度（像素），小于则过滤；<=0 表示不启用
    */
   ImageMinHeight?: number
   /**
-   * <p>图片最小宽度（像素），小于则过滤；&lt;=0 表示不启用</p>
+   * 图片最小宽度（像素），小于则过滤；<=0 表示不启用
    */
   ImageMinWidth?: number
   /**
-   * <p>图片名称过滤规则（用分号 &#39;;&#39; 分隔的多条正则，如 &#39;icon;notice;warning;info.*&#39;）</p>
+   * 图片名称过滤规则（用分号 ';' 分隔的多条正则，如 'icon;notice;warning;info.*'）
    */
   ImageNamePatterns?: string
 }
@@ -6152,6 +6343,16 @@ export interface ImportDocListResponse {
    * <p>批量导入结果</p>
    */
   ResultList?: Array<OperationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeletePromptTemplate返回参数结构体
+ */
+export interface DeletePromptTemplateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6466,6 +6667,10 @@ export interface DescribeConversationResponse {
  * AppTrigger
  */
 export interface AppTrigger {
+  /**
+   * <p>Agent ID，scope=USER 时可选。</p>
+   */
+  AgentId?: string
   /**
    * <p>应用ID</p>
    */
@@ -7238,6 +7443,16 @@ export interface CreateConversationResponse {
 }
 
 /**
+ * 回复消息
+ */
+export interface ReplyMessage {
+  /**
+   * 消息数组，包含多个消息对象
+   */
+  ContentList?: Array<ReplyContent>
+}
+
+/**
  * NodeRunLog
  */
 export interface NodeRunLog {
@@ -7317,6 +7532,10 @@ export interface Variable {
    * <p>是否可注入到沙箱环境</p>
    */
   EnableSandbox?: boolean
+  /**
+   * <p>值作用域</p><p>枚举值：</p><ul><li>0： 同一用户跨会话(默认): 同一用户的所有会话共用一份变量值</li><li>1： 仅当前会话: 变量值按会话隔离, 各会话互不影响</li></ul>
+   */
+  ValueScope?: number
 }
 
 /**
@@ -7714,6 +7933,24 @@ export interface AppExperienceConfig {
 }
 
 /**
+ * DescribePromptTemplateSummaryList返回参数结构体
+ */
+export interface DescribePromptTemplateSummaryListResponse {
+  /**
+   * <p>提示词模板摘要列表</p>
+   */
+  PromptTemplateSummaryList?: Array<PromptTemplateSummary>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResumeAppTrigger请求参数结构体
  */
 export interface ResumeAppTriggerRequest {
@@ -7782,6 +8019,28 @@ export interface QAOperator {
 }
 
 /**
+ * 工蜂 Webhook 来源配置。
+ */
+export interface AppTriggerGongfengWebhookConfig {
+  /**
+   * 监听的工蜂事件标识，原值传递，1 至 20 个，如 push、merge_request。
+   */
+  EventList: Array<string>
+  /**
+   * 工蜂项目 ID 或项目路径，不能为空。
+   */
+  ProjectId: string
+  /**
+   * 分支规则列表，最多 20 个；空表示全部分支。
+   */
+  BranchRuleList?: Array<string>
+  /**
+   * 合并请求动作标识，最多 20 个；监听 merge_request 时必填，如 open、merge。
+   */
+  MRActionList?: Array<string>
+}
+
+/**
  * 标签引用列表
  */
 export interface LabelRefIdentityList {
@@ -7789,6 +8048,24 @@ export interface LabelRefIdentityList {
    * <p>标签引用列表</p>
    */
   ItemList?: Array<LabelRefIdentity>
+}
+
+/**
+ * DescribePromptTemplateLabelList请求参数结构体
+ */
+export interface DescribePromptTemplateLabelListRequest {
+  /**
+   * <p>页码，从0开始</p>
+   */
+  PageNumber: number
+  /**
+   * <p>每页数目，最大100</p>
+   */
+  PageSize: number
+  /**
+   * <p>关键词模糊搜索</p>
+   */
+  Query?: string
 }
 
 /**
@@ -8430,6 +8707,28 @@ export interface A2AConfig {
 }
 
 /**
+ * ModifyPromptTemplate请求参数结构体
+ */
+export interface ModifyPromptTemplateRequest {
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>提示词模板ID</p>
+   */
+  PromptTemplateId: string
+  /**
+   * <p>要更新的字段掩码</p>
+   */
+  UpdateMask: FieldMask
+  /**
+   * <p>提示词规格</p>
+   */
+  Spec: PromptTemplateSpec
+}
+
+/**
  * ModifyCategory返回参数结构体
  */
 export interface ModifyCategoryResponse {
@@ -8921,6 +9220,20 @@ export interface DocQuery {
    * <p>查询范围（query 作用的字段）：1=文件名，2=标签或标签值；支持多选，缺省时无效</p>
    */
   QueryScopeList?: Array<number | bigint>
+}
+
+/**
+ * 提示词模板分类
+ */
+export interface PromptTemplateCategory {
+  /**
+   * 分类标识
+   */
+  Key?: string
+  /**
+   * 分类名称
+   */
+  Name?: string
 }
 
 /**
@@ -9805,6 +10118,10 @@ export interface KnowledgeResult {
  */
 export interface ModifyAppTriggerResponse {
   /**
+   * <p>工蜂/TAPD 触发器绑定的凭证；其他触发器不返回</p>
+   */
+  Credential?: AppTriggerWebhookCredential
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9890,6 +10207,20 @@ export interface ResumeWorkflowRunRequest {
    * <p>文件信息</p>
    */
   FileList?: Array<ConversationFileInfo>
+}
+
+/**
+ * 提示词模板分类分组
+ */
+export interface PromptTemplateCategoryGroup {
+  /**
+   * 分类列表
+   */
+  CategoryList?: Array<PromptTemplateCategory>
+  /**
+   * 模块标识
+   */
+  Module?: string
 }
 
 /**
@@ -10045,6 +10376,24 @@ export interface ModelBadge {
 }
 
 /**
+ * 知识库模型配置
+ */
+export interface KBModelConfig {
+  /**
+   * <p>Embedding 模型</p>
+   */
+  EmbeddingModel?: string
+  /**
+   * <p>QA 抽取模型</p>
+   */
+  QaExtractModel?: string
+  /**
+   * <p>Schema 生成模型</p>
+   */
+  SchemaModel?: string
+}
+
+/**
  * Token 使用统计
  */
 export interface TokenUsage {
@@ -10105,17 +10454,33 @@ export interface AgentSystemVariable {
 }
 
 /**
- * 文档外部链接信息
+ * 应用操作信息
  */
-export interface DocExternalLink {
+export interface AppOperation {
   /**
-   * <p>外部链接地址</p>
+   * 创建人
    */
-  ExternalUrl?: string
+  Creator: string
   /**
-   * <p>是否替换原文展示</p>
+   * 创建人UIN
    */
-  ReplaceOriginEnabled?: boolean
+  CreatorUin: string
+  /**
+   * 创建人账号(私有化场景使用)
+   */
+  CreatorUserAccount: string
+  /**
+   * 修改时间 (Unix时间戳,秒级)
+   */
+  UpdateTime: string
+  /**
+   * 最后修改人
+   */
+  Updater: string
+  /**
+   * 修改人UIN
+   */
+  UpdaterUin: string
 }
 
 /**
@@ -10150,6 +10515,24 @@ export interface PluginProfile {
    * <p>插件来源</p><p>枚举值：</p><ul><li>0：自定义插件</li><li>1：官方插件</li><li>2：第三方插件</li></ul>
    */
   PluginSource?: number
+}
+
+/**
+ * <p>触发器绑定凭证的摘要，不包含授权密钥</p>
+ */
+export interface AppTriggerWebhookCredential {
+  /**
+   * <p>凭证ID</p>
+   */
+  CredentialId?: string
+  /**
+   * <p>凭证名称；凭证不存在时为空</p>
+   */
+  Name?: string
+  /**
+   * <p>授权状态；0：未指定，凭证不存在或状态未知；1：未授权；2：已授权；3：已失效</p>
+   */
+  Status?: number
 }
 
 /**
@@ -10198,6 +10581,36 @@ export interface CopyAgentFromAppRequest {
    * <p>Agent 类型，区分 B 端配置态 Agent 与 C 端用户态 Agent</p><p>枚举值：</p><ul><li>0：  配置端Agent </li><li>1：  用户态 Agent</li></ul>
    */
   Kind?: number
+}
+
+/**
+ * 提示词模板规格参数（创建/修改）
+ */
+export interface PromptTemplateSpec {
+  /**
+   * 分类标识
+   */
+  CategoryKey?: string
+  /**
+   * 自定义变量列表
+   */
+  CustomVariableList?: Array<string>
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 标签ID列表
+   */
+  LabelIdList?: Array<string>
+  /**
+   * 模板名称
+   */
+  Name?: string
+  /**
+   * 提示词内容
+   */
+  PromptContent?: string
 }
 
 /**
@@ -10384,13 +10797,17 @@ export interface DescribeDocSummaryListResponse {
 }
 
 /**
- * DeleteDocList返回参数结构体
+ * DescribeUsageSummaryList返回参数结构体
  */
-export interface DeleteDocListResponse {
+export interface DescribeUsageSummaryListResponse {
   /**
-   * <p>批量删除结果</p>
+   * <p>总记录数，用于前端分页</p>
    */
-  ResultList?: Array<OperationResult>
+  TotalCount?: string
+  /**
+   * <p>资源用量聚合明细列表</p>
+   */
+  UsageSummaryList?: Array<UsageSummary>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10728,6 +11145,24 @@ export interface CreateQAGenerationTaskResponse {
 }
 
 /**
+ * ModifyApp返回参数结构体
+ */
+export interface ModifyAppResponse {
+  /**
+   * <p>app_id</p>
+   */
+  AppId?: string
+  /**
+   * <p>更新时间 (Unix时间戳,秒级)</p>
+   */
+  UpdateTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 分类可修改字段集合（配合 update_mask 使用）
  */
 export interface CategoryModifyFields {
@@ -11006,6 +11441,16 @@ export interface ConversationMessage {
 }
 
 /**
+ * FavoritePromptTemplate返回参数结构体
+ */
+export interface FavoritePromptTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopWorkflowRunList返回参数结构体
  */
 export interface StopWorkflowRunListResponse {
@@ -11220,29 +11665,17 @@ export interface ExportQAResponse {
 }
 
 /**
- * QA 元信息
+ * DescribePromptTemplate请求参数结构体
  */
-export interface QAMetadata {
+export interface DescribePromptTemplateRequest {
   /**
-   * <p>答案</p>
+   * <p>提示词模板ID</p>
    */
-  Answer?: string
+  PromptTemplateId: string
   /**
-   * <p>问答字符数</p>
+   * <p>空间ID</p>
    */
-  QaCharCount?: string
-  /**
-   * <p>问答大小（字节，含相似问）</p>
-   */
-  QaSize?: string
-  /**
-   * <p>问题</p>
-   */
-  Question?: string
-  /**
-   * <p>元数据引用字段名列表（用于显示问答哪些分类和属性被设置为元数据）</p>
-   */
-  RefFieldNameList?: Array<string>
+  SpaceId?: string
 }
 
 /**
@@ -11305,13 +11738,21 @@ export interface AppToolConfig {
 }
 
 /**
- * RollbackRelease返回参数结构体
+ * 插件调用明细
  */
-export interface RollbackReleaseResponse {
+export interface PluginUsageDetail {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>连接器与工具名称</p>
    */
-  RequestId?: string
+  PluginName?: string
+  /**
+   * <p>插件单次调用计量：TOKEN 总量用 total_tokens（兼容空 Label），输入/输出用 input/output；其余消耗量按 Unit 区分，PU 的 Label 为 total_pu</p>
+   */
+  ResourceConsumptionList?: Array<ResourceConsumption>
+  /**
+   * <p>工具名称</p>
+   */
+  ToolName?: string
 }
 
 /**
@@ -11766,6 +12207,10 @@ export interface AppTriggerSummary {
    * <p>访客ID</p>
    */
   UserId?: string
+  /**
+   * Webhook 来源。0：未指定，兼容通用 Webhook；1：工蜂；2：TAPD。
+   */
+  WebhookProvider?: number
 }
 
 /**
@@ -11799,6 +12244,24 @@ export interface SkillReferenceGroup {
    * <p>该类型下的引用总数</p>
    */
   TotalCount?: number
+}
+
+/**
+ * 提示词模板标签
+ */
+export interface PromptTemplateLabel {
+  /**
+   * 标签内容
+   */
+  Content?: string
+  /**
+   * 标签ID
+   */
+  PromptTemplateLabelId?: string
+  /**
+   * 标签类型。1-系统标签, 2-自定义标签
+   */
+  PromptTemplateLabelType?: number
 }
 
 /**
@@ -11929,17 +12392,29 @@ export interface AppIdentity {
 }
 
 /**
- * StopWorkflowRunList请求参数结构体
+ * QA 元信息
  */
-export interface StopWorkflowRunListRequest {
+export interface QAMetadata {
   /**
-   * <p>应用ID</p>
+   * <p>答案</p>
    */
-  AppId: string
+  Answer?: string
   /**
-   * <p>工作流运行实例ID列表</p>
+   * <p>问答字符数</p>
    */
-  WorkflowRunIdList: Array<string>
+  QaCharCount?: string
+  /**
+   * <p>问答大小（字节，含相似问）</p>
+   */
+  QaSize?: string
+  /**
+   * <p>问题</p>
+   */
+  Question?: string
+  /**
+   * <p>元数据引用字段名列表（用于显示问答哪些分类和属性被设置为元数据）</p>
+   */
+  RefFieldNameList?: Array<string>
 }
 
 /**
@@ -12003,6 +12478,10 @@ export interface DeleteAppResponse {
  */
 export interface CreateAppTriggerRequest {
   /**
+   * <p>Agent ID，scope=USER 时可选。</p>
+   */
+  AgentId?: string
+  /**
    * <p>应用ID</p>
    */
   AppId?: string
@@ -12051,6 +12530,20 @@ export interface AppTriggerWebhookStatus {
 }
 
 /**
+ * 连接器知识范围
+ */
+export interface ConnectorKnowledgeScope {
+  /**
+   * <p>是否启用知识范围</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>已选资源列表，Enabled 为 true 时至少 1 项</p>
+   */
+  ResourceList?: Array<ConnectorResource>
+}
+
+/**
  * ResumeAppTrigger返回参数结构体
  */
 export interface ResumeAppTriggerResponse {
@@ -12083,6 +12576,16 @@ export interface AccessKeyParamConfig {
 }
 
 /**
+ * CreatePromptTemplateLabel请求参数结构体
+ */
+export interface CreatePromptTemplateLabelRequest {
+  /**
+   * <p>标签内容</p>
+   */
+  Content: string
+}
+
+/**
  * CategoryPermission
  */
 export interface CategoryPermission {
@@ -12101,6 +12604,16 @@ export interface CategoryPermission {
 }
 
 /**
+ * DeletePromptTemplateLabel请求参数结构体
+ */
+export interface DeletePromptTemplateLabelRequest {
+  /**
+   * 标签ID
+   */
+  PromptTemplateLabelId: string
+}
+
+/**
  * 文档任务状态信息
  */
 export interface DocTaskStatus {
@@ -12112,6 +12625,20 @@ export interface DocTaskStatus {
    * <p>正在进行中的任务类型列表</p>
    */
   OngoingTaskTypeList?: Array<number | bigint>
+}
+
+/**
+ * TAPD Webhook 来源配置。
+ */
+export interface AppTriggerTAPDWebhookConfig {
+  /**
+   * 监听的 TAPD 事件标识，原值传递，1 至 20 个，如 story::create、bug::update。
+   */
+  EventList: Array<string>
+  /**
+   * TAPD 项目 ID，不能为空。
+   */
+  ProjectId: string
 }
 
 /**
@@ -12194,6 +12721,16 @@ export interface TimerScheduleConfig {
    * 每周固定时间触发
    */
   Weekly?: WeeklySchedule
+}
+
+/**
+ * RollbackRelease返回参数结构体
+ */
+export interface RollbackReleaseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12624,13 +13161,36 @@ export interface DescribeResourceSummaryResponse {
 }
 
 /**
- * 工具信息
+ * CreatePromptTemplateLabel返回参数结构体
  */
-export interface ToolSummary {
+export interface CreatePromptTemplateLabelResponse {
   /**
-   * <p>工具Id</p>
+   * <p>提示词模板标签ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ToolId?: string
+  PromptTemplateLabelId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * <p>模型提供商基本信息（已弃用，请使用 ModelProviderProfile）</p>
+ */
+export interface ModelProviderBasic {
+  /**
+   * <p>模型提供商别名</p>
+   */
+  Alias?: string
+  /**
+   * <p>模型提供商名称</p>
+   */
+  Name?: string
+  /**
+   * <p>模型提供商类型</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODEL_PROVIDER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>MODEL_PROVIDER_TYPE_SELF</td><td>1</td><td>自有提供商</td></tr><tr><td>MODEL_PROVIDER_TYPE_CUSTOM</td><td>2</td><td>自定义模型提供商</td></tr><tr><td>MODEL_PROVIDER_TYPE_THIRD</td><td>3</td><td>第三方模型提供商</td></tr></table>
+   */
+  ProviderType?: number
 }
 
 /**
@@ -12682,6 +13242,21 @@ export interface ModifyCategoryRequest {
 }
 
 /**
+ * CreatePromptTemplate返回参数结构体
+ */
+export interface CreatePromptTemplateResponse {
+  /**
+   * <p>提示词模板ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PromptTemplateId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Access Key 透传配置
  */
 export interface AccessKeyPassThroughConfig {
@@ -12689,6 +13264,20 @@ export interface AccessKeyPassThroughConfig {
    * <p>Access Key 字段统一注入位置，0:Header，1:Query</p>
    */
   KeyLocation?: number
+}
+
+/**
+ * FavoritePromptTemplate请求参数结构体
+ */
+export interface FavoritePromptTemplateRequest {
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>提示词模板ID</p>
+   */
+  PromptTemplateId: string
 }
 
 /**
@@ -12880,6 +13469,20 @@ export interface AppMetadata {
 }
 
 /**
+ * UnfavoritePromptTemplate请求参数结构体
+ */
+export interface UnfavoritePromptTemplateRequest {
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>提示词模板ID</p>
+   */
+  PromptTemplateId: string
+}
+
+/**
  * CreateKB返回参数结构体
  */
 export interface CreateKBResponse {
@@ -12911,6 +13514,20 @@ export interface AppTriggerScheduleConfig {
    * <p>触发器定时配置</p>
    */
   Schedule?: TimerScheduleConfig
+}
+
+/**
+ * DescribePromptTemplateCategoryList返回参数结构体
+ */
+export interface DescribePromptTemplateCategoryListResponse {
+  /**
+   * <p>分类分组列表</p>
+   */
+  CategoryGroupList?: Array<PromptTemplateCategoryGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13130,6 +13747,24 @@ export interface DescribeAppStatisticsOverviewResponse {
 }
 
 /**
+ * DescribePromptTemplateLabelList返回参数结构体
+ */
+export interface DescribePromptTemplateLabelListResponse {
+  /**
+   * <p>标签列表</p>
+   */
+  PromptTemplateLabelList?: Array<PromptTemplateLabel>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAgentDetail请求参数结构体
  */
 export interface DescribeAgentDetailRequest {
@@ -13162,21 +13797,33 @@ export interface AgentPluginParameter {
 }
 
 /**
- * 插件调用明细
+ * 通用审计信息（创建/修改人 + 时间）
  */
-export interface PluginUsageDetail {
+export interface Audit {
   /**
-   * <p>连接器与工具名称</p>
+   * <p>创建时间</p>
    */
-  PluginName?: string
+  CreateTime?: string
   /**
-   * <p>插件单次调用计量：TOKEN 总量用 total_tokens（兼容空 Label），输入/输出用 input/output；其余消耗量按 Unit 区分，PU 的 Label 为 total_pu</p>
+   * <p>创建人</p>
    */
-  ResourceConsumptionList?: Array<ResourceConsumption>
+  Creator?: string
   /**
-   * <p>工具名称</p>
+   * <p>创建人姓名</p>
    */
-  ToolName?: string
+  CreatorName?: string
+  /**
+   * <p>最近修改人</p>
+   */
+  Operator?: string
+  /**
+   * <p>最近修改人姓名</p>
+   */
+  OperatorName?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -13410,6 +14057,29 @@ export interface SkillAnalysisInfo {
 }
 
 /**
+ * 提示词模板完整信息
+ */
+export interface PromptTemplate {
+  /**
+   * <p>提示词模板Profile</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Profile?: PromptTemplateProfile
+  /**
+   * <p>自定义变量列表</p>
+   */
+  CustomVariableList?: Array<string>
+  /**
+   * <p>标签列表</p>
+   */
+  LabelList?: Array<PromptTemplateLabel>
+  /**
+   * <p>提示词内容</p>
+   */
+  PromptContent?: string
+}
+
+/**
  * AppTriggerWorkflowExecuteConfig
  */
 export interface AppTriggerWorkflowExecuteConfig {
@@ -13456,21 +14126,33 @@ export interface ModifyAgentResponse {
 }
 
 /**
- * <p>模型提供商基本信息（已弃用，请使用 ModelProviderProfile）</p>
+ * DescribePromptTemplateSummaryList请求参数结构体
  */
-export interface ModelProviderBasic {
+export interface DescribePromptTemplateSummaryListRequest {
   /**
-   * <p>模型提供商别名</p>
+   * <p>页码，从0开始</p>
    */
-  Alias?: string
+  PageNumber: number
   /**
-   * <p>模型提供商名称</p>
+   * <p>每页数目，最大100</p>
    */
-  Name?: string
+  PageSize: number
   /**
-   * <p>模型提供商类型</p><table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>MODEL_PROVIDER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>MODEL_PROVIDER_TYPE_SELF</td><td>1</td><td>自有提供商</td></tr><tr><td>MODEL_PROVIDER_TYPE_CUSTOM</td><td>2</td><td>自定义模型提供商</td></tr><tr><td>MODEL_PROVIDER_TYPE_THIRD</td><td>3</td><td>第三方模型提供商</td></tr></table>
+   * <p>过滤条件列表</p>
    */
-  ProviderType?: number
+  FilterList?: Array<Filter>
+  /**
+   * <p>是否只查询收藏的模板</p>
+   */
+  IsFavorite?: boolean
+  /**
+   * <p>关键词模糊搜索</p>
+   */
+  Query?: string
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId?: string
 }
 
 /**
@@ -13514,13 +14196,27 @@ export interface SimilarQuestionStat {
 }
 
 /**
- * 回复消息
+ * DescribeSystemVariableList返回参数结构体
  */
-export interface ReplyMessage {
+export interface DescribeSystemVariableListResponse {
   /**
-   * 消息数组，包含多个消息对象
+   * system_variable_list
    */
-  ContentList?: Array<ReplyContent>
+  SystemVariableList?: Array<SystemVariable>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeletePromptTemplateLabel返回参数结构体
+ */
+export interface DeletePromptTemplateLabelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

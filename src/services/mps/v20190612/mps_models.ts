@@ -2364,6 +2364,10 @@ export interface AigcAudioReferenceAudioInfo {
    * <p>参考音频URL信息。需外网可访问。</p>
    */
   AudioUrl?: string
+  /**
+   * <p>参考类型。</p>
+   */
+  ReferenceType?: string
 }
 
 /**

@@ -28,6 +28,8 @@ import {
   DescribeProjectsRequest,
   CosCredentials,
   CustomDomainItem,
+  DescribeCosTempTokenRequest,
+  BlockProjectRequest,
   DescribeEnvironmentsResponse,
   ModifyZoneCustomDomainEnvRequest,
   DescribeProjectsResponse,
@@ -49,6 +51,7 @@ import {
   ModifyProjectRequest,
   ModifyZoneCustomDomainEnvResponse,
   EnvironmentEnvVar,
+  BlockProjectResponse,
   DescribeCosTempTokenResponse,
   Project,
   CreateProjectResponse,
@@ -60,7 +63,6 @@ import {
   DescribeProjectEnvsRequest,
   CreateDeploymentResponse,
   Regions,
-  DeploymentFilter,
   ZoneDomain,
   HstsConfig,
   ProjectEnvVar,
@@ -69,7 +71,7 @@ import {
   ForceRedirectConfig,
   ModifyProjectEnvsResponse,
   EnvVar,
-  DescribeCosTempTokenRequest,
+  DeploymentFilter,
   CreateProjectRequest,
 } from "./makers_models"
 
@@ -103,13 +105,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询项目的部署记录。
+   * 封禁或解封当前账号指定站点下的项目及域名。Status 支持 Ban或Normal。
    */
-  async DescribeDeployments(
-    req: DescribeDeploymentsRequest,
-    cb?: (error: string, rep: DescribeDeploymentsResponse) => void
-  ): Promise<DescribeDeploymentsResponse> {
-    return this.request("DescribeDeployments", req, cb)
+  async BlockProject(
+    req: BlockProjectRequest,
+    cb?: (error: string, rep: BlockProjectResponse) => void
+  ): Promise<BlockProjectResponse> {
+    return this.request("BlockProject", req, cb)
   }
 
   /**
@@ -140,6 +142,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvironmentsResponse) => void
   ): Promise<DescribeEnvironmentsResponse> {
     return this.request("DescribeEnvironments", req, cb)
+  }
+
+  /**
+   * 查询项目的部署记录。
+   */
+  async DescribeDeployments(
+    req: DescribeDeploymentsRequest,
+    cb?: (error: string, rep: DescribeDeploymentsResponse) => void
+  ): Promise<DescribeDeploymentsResponse> {
+    return this.request("DescribeDeployments", req, cb)
   }
 
   /**

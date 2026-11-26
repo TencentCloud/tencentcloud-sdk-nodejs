@@ -326,6 +326,7 @@ import {
   DeleteGroupResponse,
   UpdateOrganizationMembersPolicyResponse,
   RoleConfiguration,
+  MemberPermissionOption,
   JoinedGroups,
   CreateRoleConfigurationResponse,
   GroupMembers,

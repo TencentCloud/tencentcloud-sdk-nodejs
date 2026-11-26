@@ -878,6 +878,16 @@ it("tione.v20211111.DescribeRole", async function () {
     }
 })
 
+it("tione.v20211111.ModifyTrainingTaskSchedulingPolicy", async function () {
+    try {
+       const data = await client.ModifyTrainingTaskSchedulingPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteTrainingTask", async function () {
     try {
        const data = await client.DeleteTrainingTask({})

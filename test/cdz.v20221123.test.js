@@ -28,6 +28,16 @@ it("cdz.v20221123.DescribeCloudDedicatedZoneResourceSummary", async function () 
     }
 })
 
+it("cdz.v20221123.DescribeUserAvailableCloudDedicatedZones", async function () {
+    try {
+       const data = await client.DescribeUserAvailableCloudDedicatedZones({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdz.v20221123.DescribeCloudDedicatedZoneHosts", async function () {
     try {
        const data = await client.DescribeCloudDedicatedZoneHosts({})

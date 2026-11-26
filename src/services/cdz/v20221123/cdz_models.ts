@@ -72,21 +72,34 @@ export interface CloudDedicatedZoneResourceStatisticsInfo {
 }
 
 /**
- * DescribeCloudDedicatedZoneHosts返回参数结构体
+ * DescribeUserAvailableCloudDedicatedZones请求参数结构体
  */
-export interface DescribeCloudDedicatedZoneHostsResponse {
+export type DescribeUserAvailableCloudDedicatedZonesRequest = null
+
+/**
+ * 专属可用区信息
+ */
+export interface CloudDedicatedZone {
   /**
-   * <p>返回Host和Host上部署的实例信息之间的关系</p>
+   * 专属可用区所属的可用区
    */
-  CloudDedicatedZoneHostsInfoSet?: Array<CloudDedicatedZoneHostsInfo>
+  Zone?: string
   /**
-   * <p>母机总数</p>
+   * 地域系统中的可用区ID
    */
-  TotalCount?: number
+  ZoneId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 专属可用区名称
    */
-  RequestId?: string
+  ZoneName?: string
+  /**
+   * 是否为轻量专属可用区
+   */
+  IsLiteMode?: boolean
+  /**
+   * 可用区所在地域
+   */
+  Region?: string
 }
 
 /**
@@ -118,6 +131,24 @@ export interface CloudDedicatedZoneHostsInfo {
 }
 
 /**
+ * 专属可用区资源水位数据详情，对应一个具体的垂直产品。
+ */
+export interface CloudDedicatedZoneResourceSummaryInfo {
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+  /**
+   * 子产品名称
+   */
+  SubProductName?: string
+  /**
+   * 资源统计详情
+   */
+  Statistics?: Array<CloudDedicatedZoneResourceStatisticsInfo>
+}
+
+/**
  * DescribeCloudDedicatedZoneHosts请求参数结构体
  */
 export interface DescribeCloudDedicatedZoneHostsRequest {
@@ -144,21 +175,39 @@ export interface DescribeCloudDedicatedZoneHostsRequest {
 }
 
 /**
- * 专属可用区资源水位数据详情，对应一个具体的垂直产品。
+ * DescribeUserAvailableCloudDedicatedZones返回参数结构体
  */
-export interface CloudDedicatedZoneResourceSummaryInfo {
+export interface DescribeUserAvailableCloudDedicatedZonesResponse {
   /**
-   * 产品名称
+   * 返回当前用户可使用的专属可用区 ID
    */
-  ProductName?: string
+  ZoneIdSet?: Array<string>
   /**
-   * 子产品名称
+   * 专属可用区列表信息。
    */
-  SubProductName?: string
+  ZoneSet?: Array<CloudDedicatedZone>
   /**
-   * 资源统计详情
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Statistics?: Array<CloudDedicatedZoneResourceStatisticsInfo>
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudDedicatedZoneHosts返回参数结构体
+ */
+export interface DescribeCloudDedicatedZoneHostsResponse {
+  /**
+   * <p>返回Host和Host上部署的实例信息之间的关系</p>
+   */
+  CloudDedicatedZoneHostsInfoSet?: Array<CloudDedicatedZoneHostsInfo>
+  /**
+   * <p>母机总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

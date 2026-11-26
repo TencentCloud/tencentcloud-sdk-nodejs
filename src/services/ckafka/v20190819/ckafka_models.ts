@@ -520,11 +520,11 @@ export interface MongoDBParam {
  */
 export interface DeleteTopicRequest {
   /**
-   * ckafka 实例Id
+   * <p>ckafka 实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * ckafka 主题名称
+   * <p>ckafka 主题名称</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40847">DescribeTopic</a></p>
    */
   TopicName: string
 }
@@ -1059,7 +1059,7 @@ export interface CreatePostPaidInstanceRequest {
    */
   ClusterId?: number
   /**
-   * <p>实例版本。目前支持当前支持&quot;2.4.1&quot;, &quot;2.4.2&quot;,&quot;2.8.1&quot;, &quot;3.2.3&quot;，默认取值&quot;2.4.1&quot;。&quot;2.4.1&quot; 与 &quot;2.4.2&quot; 属于同一个版本，传任意一个均可。</p>
+   * <p>实例版本。目前支持当前支持&quot;2.4.1&quot;, &quot;2.4.2&quot;,&quot;2.8.1&quot;, &quot;3.2.3&quot;, &quot;3.9.2&quot;，默认取值&quot;2.4.1&quot;。&quot;2.4.1&quot; 与 &quot;2.4.2&quot; 属于同一个版本，传任意一个均可。</p>
    */
   KafkaVersion?: string
   /**
@@ -1129,15 +1129,15 @@ export interface CreatePostPaidInstanceRequest {
  */
 export interface ModifyInstanceAttributesConfig {
   /**
-   * 自动创建 true 表示开启，false 表示不开启
+   * <p>自动创建 true 表示开启，false 表示不开启</p>
    */
   AutoCreateTopicEnable?: boolean
   /**
-   * 新创建主题的默认分区数,如果AutoCreateTopicEnable设置为true没有设置该值时，默认设置为3
+   * <p>新创建主题的默认分区数,如果AutoCreateTopicEnable设置为true没有设置该值时，默认设置为3</p>
    */
   DefaultNumPartitions?: number
   /**
-   * 新创建主题的默认副本数,如果AutoCreateTopicEnable设置为true没有指定该值时默认设置为2
+   * <p>新创建主题的默认副本数</p><p>如果AutoCreateTopicEnable设置为true时，该值必须大于0</p>
    */
   DefaultReplicationFactor?: number
 }
@@ -2765,11 +2765,11 @@ export interface TaskStatusResponse {
  */
 export interface DescribeGroup {
   /**
-   * 消费分组名称
+   * <p>消费分组名称</p>
    */
   Group?: string
   /**
-   * 该 group 使用的协议。
+   * <p>该 group 使用的协议。</p>
    */
   Protocol?: string
 }
@@ -3664,7 +3664,7 @@ export interface SaleInfo {
    */
   Flag?: boolean
   /**
-   * <p>ckafka版本号(1.1.1/2.4.2/0.10.2)</p>
+   * <p>ckafka版本号(1.1.1/2.4.2/0.10.2/3.9.2)</p>
    */
   Version?: string
   /**
@@ -4903,7 +4903,7 @@ Stable：消费分组中各个消费者已经加入，处于稳定状态
  */
 export interface BatchModifyGroupOffsetsRequest {
   /**
-   * <p>消费分组名称</p>
+   * <p>消费分组名称</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40840">DescribeGroup</a></p>
    */
   GroupName: string
   /**
@@ -4915,7 +4915,7 @@ export interface BatchModifyGroupOffsetsRequest {
    */
   Partitions: Array<Partitions>
   /**
-   * <p>指定topic，默认所有topic</p>
+   * <p>指定topic，默认所有topic</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40847">DescribeTopic</a></p>
    */
   TopicName?: Array<string>
 }
@@ -7529,7 +7529,7 @@ export interface ModifyTopicAttributesRequest {
    */
   UncleanLeaderElectionEnable?: number
   /**
-   * <p>Segment分片滚动的时长</p><p>单位：毫秒</p><p>默认值：86400000</p><p>最小值为86400000ms（1天）</p>
+   * <p>Segment分片滚动的时长</p><p>取值范围：[86400000, 31536000000]</p><p>单位：毫秒</p><p>默认值：86400000</p><p>最小值为86400000ms（1天）</p>
    */
   RetentionMs?: number
   /**
@@ -7541,7 +7541,7 @@ export interface ModifyTopicAttributesRequest {
    */
   SegmentMs?: number
   /**
-   * <p>消息删除策略，可以选择delete 或者compact</p>
+   * <p>消息删除策略，可以选择delete 或者compact</p><p>枚举值：</p><ul><li>delete： 按保留时间/大小删除旧消息</li><li>compact： 日志压缩，按 Key 保留最新值</li></ul>
    */
   CleanUpPolicy?: string
   /**
@@ -7623,7 +7623,7 @@ export interface CreateInstancePreRequest {
    */
   RenewFlag?: number
   /**
-   * <p>CKafka版本号[2.4.1, 2.4.2, 2.8.1, 3.2.3], 默认取值是2.4.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。</p>
+   * <p>CKafka版本号[2.4.1, 2.4.2, 2.8.1, 3.2.3, 3.9.2], 默认取值是2.4.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。</p>
    */
   KafkaVersion?: string
   /**
@@ -7689,7 +7689,7 @@ export interface CreateInstancePreRequest {
  */
 export interface DeleteTopicResponse {
   /**
-   * 返回的结果集
+   * <p>返回的结果集</p>
    */
   Result?: JgwOperateResponse
   /**

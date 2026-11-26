@@ -858,6 +858,16 @@ export interface DescribeChangePwdTaskDetailResponse {
 }
 
 /**
+ * ApproveTicket返回参数结构体
+ */
+export interface ApproveTicketResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUserGroups返回参数结构体
  */
 export interface DeleteUserGroupsResponse {
@@ -908,55 +918,55 @@ export interface ModifyDeviceRequest {
  */
 export interface SearchFileRequest {
   /**
-   * 查询开始时间
+   * <p>查询开始时间</p>
    */
   StartTime: string
   /**
-   * 查询结束时间
+   * <p>查询结束时间</p>
    */
   EndTime?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 姓名
+   * <p>姓名</p>
    */
   RealName?: string
   /**
-   * 资产ID
+   * <p>资产ID</p>
    */
   InstanceId?: string
   /**
-   * 资产名称
+   * <p>资产名称</p>
    */
   DeviceName?: string
   /**
-   * 资产公网IP
+   * <p>资产公网IP</p>
    */
   PublicIp?: string
   /**
-   * 资产内网IP
+   * <p>资产内网IP</p>
    */
   PrivateIp?: string
   /**
-   * 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹
+   * <p>操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹</p>
    */
   Method?: Array<number | bigint>
   /**
-   * 可填写路径名或文件（夹）名
+   * <p>可填写路径名或文件（夹）名</p>
    */
   FileName?: string
   /**
-   * 1-已执行，  2-被阻断
+   * <p>1-已放行，  2-已阻断</p>
    */
   AuditAction?: Array<number | bigint>
   /**
-   * 分页的页内记录数，默认为20，最大200
+   * <p>分页的页内记录数，默认为20，最大200</p>
    */
   Limit?: number
   /**
-   * 分页偏移位置，默认值为0
+   * <p>分页偏移位置，默认值为0</p>
    */
   Offset?: number
 }
@@ -1012,75 +1022,75 @@ export interface AccessWhiteListRule {
  */
 export interface SearchFileBySidResult {
   /**
-   * 会话Id
+   * <p>会话Id</p>
    */
   Sid?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   InstanceId?: string
   /**
-   * 资产账号
+   * <p>资产账号</p>
    */
   Account?: string
   /**
-   * 来源Ip
+   * <p>来源Ip</p>
    */
   FromIp?: string
   /**
-   * 文件操作时间
+   * <p>文件操作时间</p>
    */
   Time?: string
   /**
-   * 1-上传文件 2-下载文件 3-删除文件 4-移动文件 5-重命名文件 6-新建文件夹 7-移动文件夹 8-重命名文件夹 9-删除文件夹
+   * <p>1-上传文件 2-下载文件 3-删除文件 4-移动文件 5-重命名文件 6-新建文件夹 7-移动文件夹 8-重命名文件夹 9-删除文件夹</p>
    */
   Method?: number
   /**
-   * 文件传输协议
+   * <p>文件传输协议</p>
    */
   Protocol?: string
   /**
-   * method为上传、下载、删除时文件在服务器上的位置, 或重命名、移动文件前文件的位置
+   * <p>method为上传、下载、删除时文件在服务器上的位置, 或重命名、移动文件前文件的位置</p>
    */
   FileCurr?: string
   /**
-   * method为重命名、移动文件时代表移动后的新位置.其他情况为null
+   * <p>method为重命名、移动文件时代表移动后的新位置.其他情况为null</p>
    */
   FileNew?: string
   /**
-   * method为上传文件、下载文件、删除文件时显示文件大小。其他情况为null
+   * <p>method为上传文件、下载文件、删除文件时显示文件大小。其他情况为null</p>
    */
   Size?: number
   /**
-   * 堡垒机拦截情况, 1-已执行，  2-被阻断
+   * <p>堡垒机拦截情况, 1-已放行，  2-已阻断</p>
    */
   Action?: number
   /**
-   * 复核时间，当Action是3时，需有复核时间
+   * <p>复核时间，当Action是3时，需有复核时间</p>
    */
   ConfirmTime?: string
   /**
-   * 用户部门Id
+   * <p>用户部门Id</p>
    */
   UserDepartmentId?: string
   /**
-   * 用户部门name
+   * <p>用户部门name</p>
    */
   UserDepartmentName?: string
   /**
-   * 设备部门id
+   * <p>设备部门id</p>
    */
   DeviceDepartmentId?: string
   /**
-   * 设备部门name
+   * <p>设备部门name</p>
    */
   DeviceDepartmentName?: string
   /**
-   * 签名值
+   * <p>签名值</p>
    */
   SignValue?: string
 }
@@ -1090,56 +1100,55 @@ export interface SearchFileBySidResult {
  */
 export interface SearchCommandRequest {
   /**
-   * 搜索区间的开始时间
+   * <p>搜索区间的开始时间</p>
    */
   StartTime: string
   /**
-   * 搜索区间的结束时间，不填默认为开始时间到现在为止
+   * <p>搜索区间的结束时间，不填默认为开始时间到现在为止</p>
    */
   EndTime?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 姓名
+   * <p>姓名</p>
    */
   RealName?: string
   /**
-   * 资产实例ID
+   * <p>资产实例ID</p>
    */
   InstanceId?: string
   /**
-   * 资产名称
+   * <p>资产名称</p>
    */
   DeviceName?: string
   /**
-   * 资产的公网IP
+   * <p>资产的公网IP</p>
    */
   PublicIp?: string
   /**
-   * 资产的内网IP
+   * <p>资产的内网IP</p>
    */
   PrivateIp?: string
   /**
-   * 执行的命令
+   * <p>执行的命令</p>
    */
   Cmd?: string
   /**
-   * Cmd字段是前端传值是否进行base64.
-0:否，1：是
+   * <p>Cmd字段是前端传值是否进行base64.<br>0:否，1：是</p>
    */
   Encoding?: number
   /**
-   * 根据拦截状态进行过滤：1 - 已执行，2 - 被阻断
+   * <p>根据拦截状态进行过滤：1 - 已放行，2 - 已阻断</p>
    */
   AuditAction?: Array<number | bigint>
   /**
-   * 每页容量，默认20，最大200
+   * <p>每页容量，默认20，最大200</p>
    */
   Limit?: number
   /**
-   * 分页偏移位置，默认值为0
+   * <p>分页偏移位置，默认值为0</p>
    */
   Offset?: number
 }
@@ -1294,95 +1303,95 @@ export interface CmdTemplate {
  */
 export interface SearchCommandResult {
   /**
-   * 命令输入的时间
+   * <p>命令输入的时间</p>
    */
   Time?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 姓名
+   * <p>姓名</p>
    */
   RealName?: string
   /**
-   * 资产ID
+   * <p>资产ID</p>
    */
   InstanceId?: string
   /**
-   * 资产名称
+   * <p>资产名称</p>
    */
   DeviceName?: string
   /**
-   * 资产公网IP
+   * <p>资产公网IP</p>
    */
   PublicIp?: string
   /**
-   * 资产内网IP
+   * <p>资产内网IP</p>
    */
   PrivateIp?: string
   /**
-   * 命令
+   * <p>命令</p>
    */
   Cmd?: string
   /**
-   * 命令执行情况，1--允许，2--拒绝
+   * <p>命令执行情况，1--已放行，2--已阻断</p>
    */
   Action?: number
   /**
-   * 命令所属的会话ID
+   * <p>命令所属的会话ID</p>
    */
   Sid?: string
   /**
-   * 命令执行时间相对于所属会话开始时间的偏移量，单位ms
+   * <p>命令执行时间相对于所属会话开始时间的偏移量，单位ms</p>
    */
   TimeOffset?: number
   /**
-   * 账号
+   * <p>账号</p>
    */
   Account?: string
   /**
-   * source ip
+   * <p>source ip</p>
    */
   FromIp?: string
   /**
-   * 该命令所属会话的会话开始时间
+   * <p>该命令所属会话的会话开始时间</p>
    */
   SessionTime?: string
   /**
-   * 该命令所属会话的会话开始时间（使用SessionTime）
+   * <p>该命令所属会话的会话开始时间（使用SessionTime）</p>
    */
   SessTime?: string
   /**
-   * 复核时间
+   * <p>复核时间</p>
    */
   ConfirmTime?: string
   /**
-   * 部门id
+   * <p>部门id</p>
    */
   UserDepartmentId?: string
   /**
-   * 用户部门名称
+   * <p>用户部门名称</p>
    */
   UserDepartmentName?: string
   /**
-   * 设备部门id
+   * <p>设备部门id</p>
    */
   DeviceDepartmentId?: string
   /**
-   * 设备部门名称
+   * <p>设备部门名称</p>
    */
   DeviceDepartmentName?: string
   /**
-   * 会话大小
+   * <p>会话大小</p>
    */
   Size?: number
   /**
-   * 签名值
+   * <p>签名值</p>
    */
   SignValue?: string
   /**
-   * 资产类型
+   * <p>资产类型</p>
    */
   DeviceKind?: string
 }
@@ -1466,41 +1475,37 @@ export interface RunChangePwdTaskDetail {
 }
 
 /**
- * ModifyOAuthSetting请求参数结构体
+ * DescribeTickets请求参数结构体
  */
-export interface ModifyOAuthSettingRequest {
+export interface DescribeTicketsRequest {
   /**
-   * 是否开启OAuth认证，false-不开启，true-开启。
+   * 状态：0待提交(草稿)，1待审批，2批准，3已执行，4驳回
    */
-  Enable: boolean
+  StatusSet?: Array<number | bigint>
   /**
-   * OAuth认证方式。
+   * 工单类型：0-运维工单，1-权限工单
    */
-  AuthMethod?: string
+  TicketType?: string
   /**
-   * OAuth认证客户端Id
+   * 过滤数组
    */
-  ClientId?: string
+  Filters?: Array<Filter>
   /**
-   * OAuth认证客户端密钥
+   * 资产过滤数组
    */
-  ClientSecret?: string
+  DeviceFilters?: Array<Filter>
   /**
-   * 获取OAuth认证授权码URL
+   * 部门id
    */
-  CodeUrl?: string
+  DepartmentId?: string
   /**
-   * 获取OAuth令牌URL
+   * 分页偏移位置，默认值为0
    */
-  TokenUrl?: string
+  Offset?: number
   /**
-   * 获取OAuth用户信息URL
+   * 每页条目数量，默认20，最大500
    */
-  UserInfoUrl?: string
-  /**
-   * 使用Okta认证时指定范围。为空时默认使用 openid、profile、email。
-   */
-  Scopes?: Array<string>
+  Limit?: number
 }
 
 /**
@@ -1606,28 +1611,27 @@ export interface IOAUserGroup {
  */
 export interface SearchCommandBySidRequest {
   /**
-   * 会话Id
+   * <p>会话Id</p>
    */
   Sid: string
   /**
-   * 命令，可模糊搜索
+   * <p>命令，可模糊搜索</p>
    */
   Cmd?: string
   /**
-   * Cmd字段是前端传值是否进行base64.
-0:否，1：是
+   * <p>Cmd字段是前端传值是否进行base64.<br>0:否，1：是</p>
    */
   Encoding?: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 每页容量，默认20，最大200
+   * <p>每页容量，默认20，最大200</p>
    */
   Limit?: number
   /**
-   * 根据拦截状态进行过滤
+   * <p>根据拦截状态进行过滤，1-已放行，2-已阻断，3-复核</p>
    */
   AuditAction?: Array<number | bigint>
 }
@@ -2456,11 +2460,11 @@ export interface OperationTask {
  */
 export interface SearchCommandResponse {
   /**
-   * 总记录数
+   * <p>总记录数</p>
    */
   TotalCount?: number
   /**
-   * 命令列表
+   * <p>命令列表</p>
    */
   Commands?: Array<SearchCommandResult>
   /**
@@ -2674,79 +2678,79 @@ export interface DeleteOperationTasksResponse {
  */
 export interface Command {
   /**
-   * 命令
+   * <p>命令</p>
    */
   Cmd?: string
   /**
-   * 命令输入的时间
+   * <p>命令输入的时间</p>
    */
   Time?: string
   /**
-   * 命令执行时间相对于所属会话开始时间的偏移量，单位ms
+   * <p>命令执行时间相对于所属会话开始时间的偏移量，单位ms</p>
    */
   TimeOffset?: number
   /**
-   * 命令执行情况，1--允许，2--拒绝，3--确认
+   * <p>命令执行情况，1--已放行，2--已阻断，3--确认</p>
    */
   Action?: number
   /**
-   * 会话id
+   * <p>会话id</p>
    */
   Sid?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 设备account
+   * <p>设备account</p>
    */
   Account?: string
   /**
-   * 设备ip
+   * <p>设备ip</p>
    */
   InstanceId?: string
   /**
-   * source ip
+   * <p>source ip</p>
    */
   FromIp?: string
   /**
-   * 该命令所属会话的会话开始时间
+   * <p>该命令所属会话的会话开始时间</p>
    */
   SessTime?: string
   /**
-   * 该命令所属会话的会话开始时间
+   * <p>该命令所属会话的会话开始时间</p>
    */
   SessionTime?: string
   /**
-   * 复核时间
+   * <p>复核时间</p>
    */
   ConfirmTime?: string
   /**
-   * 用户部门id
+   * <p>用户部门id</p>
    */
   UserDepartmentId?: string
   /**
-   * 用户部门name
+   * <p>用户部门name</p>
    */
   UserDepartmentName?: string
   /**
-   * 设备部门id
+   * <p>设备部门id</p>
    */
   DeviceDepartmentId?: string
   /**
-   * 设备部门name
+   * <p>设备部门name</p>
    */
   DeviceDepartmentName?: string
   /**
-   * 会话大小
+   * <p>会话大小</p>
    */
   Size?: number
   /**
-   * 签名值
+   * <p>签名值</p>
    */
   SignValue?: string
   /**
-   * 资产类型
+   * <p>资产类型</p>
    */
   DeviceKind?: string
 }
@@ -3015,11 +3019,11 @@ export interface DeleteUsersResponse {
  */
 export interface SearchCommandBySidResponse {
   /**
-   * 总记录数
+   * <p>总记录数</p>
    */
   TotalCount?: number
   /**
-   * 命令列表
+   * <p>命令列表</p>
    */
   CommandSet?: Array<Command>
   /**
@@ -3258,6 +3262,44 @@ export interface CreateCmdTemplateRequest {
    * 标识CmdList字段前端是否为base64加密传值.0:表示非base64加密1:表示是base64加密
    */
   Encoding?: number
+}
+
+/**
+ * ModifyOAuthSetting请求参数结构体
+ */
+export interface ModifyOAuthSettingRequest {
+  /**
+   * 是否开启OAuth认证，false-不开启，true-开启。
+   */
+  Enable: boolean
+  /**
+   * OAuth认证方式。
+   */
+  AuthMethod?: string
+  /**
+   * OAuth认证客户端Id
+   */
+  ClientId?: string
+  /**
+   * OAuth认证客户端密钥
+   */
+  ClientSecret?: string
+  /**
+   * 获取OAuth认证授权码URL
+   */
+  CodeUrl?: string
+  /**
+   * 获取OAuth令牌URL
+   */
+  TokenUrl?: string
+  /**
+   * 获取OAuth用户信息URL
+   */
+  UserInfoUrl?: string
+  /**
+   * 使用Okta认证时指定范围。为空时默认使用 openid、profile、email。
+   */
+  Scopes?: Array<string>
 }
 
 /**
@@ -3547,6 +3589,104 @@ export interface CreateAssetSyncJobRequest {
    * 同步资产类别，1 - 主机资产, 2 - 数据库资产，3-容器资产
    */
   Category: number
+}
+
+/**
+ * 运维工单
+ */
+export interface Ticket {
+  /**
+   * <p>数据库主键</p>
+   */
+  Id?: number
+  /**
+   * <p>工单ID,id-s3ed4r5e</p>
+   */
+  TicketId?: string
+  /**
+   * <p>工单类型，0-运维访问工单，1-权限工单, 2-数据库变更工单,3-自动执行命令/脚本工单</p>
+   */
+  TicketType?: number
+  /**
+   * <p>acl权限</p>
+   */
+  Acl?: Acl
+  /**
+   * <p>运维开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>运维结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>工单状态，0待提交(草稿)，1待审批，2批准，3已执行，4驳回,5删除，6过期</p>
+   */
+  Status?: number
+  /**
+   * <p>申请时间</p>
+   */
+  ApplyTime?: string
+  /**
+   * <p>申请人用户Id</p>
+   */
+  ApplyUser?: number
+  /**
+   * <p>审批人uin</p>
+   */
+  ApproveUser?: string
+  /**
+   * <p>工单审批备注</p>
+   */
+  ApproveDesc?: string
+  /**
+   * <p>acl权限Id</p>
+   */
+  AclId?: number
+  /**
+   * <p>待审批状态下，可以审批的人</p>
+   */
+  ApproveUserSet?: Array<string>
+  /**
+   * <p>审批人信息</p>
+   */
+  ApproveUserInfoSet?: Array<DepartmentManagerUser>
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>申请权限</p>
+   */
+  Name?: string
+  /**
+   * <p>审批时间</p>
+   */
+  ApproveTime?: string
+  /**
+   * <p>部门ID</p>
+   */
+  DepartmentId?: string
+  /**
+   * <p>部门名称</p>
+   */
+  DepartmentName?: string
+  /**
+   * <p>部门Sequence</p>
+   */
+  DepartmentSequence?: number
+  /**
+   * <p>申请人用户名</p>
+   */
+  ApplyUserName?: string
+  /**
+   * <p>申请人真实姓名</p>
+   */
+  ApplyRealName?: string
+  /**
+   * <p>申请时间戳，微妙</p>
+   */
+  ApplyTimeVersion?: number
 }
 
 /**
@@ -5104,91 +5244,91 @@ export interface UnlockUserRequest {
  */
 export interface SearchFileResult {
   /**
-   * 文件传输的时间
+   * <p>文件传输的时间</p>
    */
   Time?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 姓名
+   * <p>姓名</p>
    */
   RealName?: string
   /**
-   * 资产ID
+   * <p>资产ID</p>
    */
   InstanceId?: string
   /**
-   * 资产名称
+   * <p>资产名称</p>
    */
   DeviceName?: string
   /**
-   * 资产公网IP
+   * <p>资产公网IP</p>
    */
   PublicIp?: string
   /**
-   * 资产内网IP
+   * <p>资产内网IP</p>
    */
   PrivateIp?: string
   /**
-   * 操作结果：1 - 已执行，2 - 已阻断
+   * <p>操作结果：1 - 已放行，2 - 已阻断</p>
    */
   Action?: number
   /**
-   * 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹
+   * <p>操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹</p>
    */
   Method?: number
   /**
-   * 下载的文件（夹）路径及名称
+   * <p>下载的文件（夹）路径及名称</p>
    */
   FileCurr?: string
   /**
-   * 上传或新建文件（夹）路径及名称
+   * <p>上传或新建文件（夹）路径及名称</p>
    */
   FileNew?: string
   /**
-   * 会话id
+   * <p>会话id</p>
    */
   Sid?: string
   /**
-   * 账号
+   * <p>账号</p>
    */
   Account?: string
   /**
-   * 来源id
+   * <p>来源id</p>
    */
   FromIp?: string
   /**
-   * 协议
+   * <p>协议</p>
    */
   Protocol?: string
   /**
-   * 文件大小
+   * <p>文件大小</p>
    */
   Size?: number
   /**
-   * 复核时间
+   * <p>复核时间</p>
    */
   ConfirmTime?: string
   /**
-   * 用户部门id
+   * <p>用户部门id</p>
    */
   UserDepartmentId?: string
   /**
-   * 用户部门name
+   * <p>用户部门name</p>
    */
   UserDepartmentName?: string
   /**
-   * 设备部门id
+   * <p>设备部门id</p>
    */
   DeviceDepartmentId?: string
   /**
-   * 设备部门name
+   * <p>设备部门name</p>
    */
   DeviceDepartmentName?: string
   /**
-   * 签名值
+   * <p>签名值</p>
    */
   SignValue?: string
 }
@@ -5345,6 +5485,64 @@ export interface SyncUserToIOARequest {
    * 需要同步到ioa的本地用户的id集合
    */
   UserIdSet: Array<number | bigint>
+}
+
+/**
+ * ioa账号组
+ */
+export interface AccountGroup {
+  /**
+   * 账号组id
+   */
+  Id?: number
+  /**
+   * 账号组名称
+   */
+  Name?: string
+  /**
+   * 账号组id路径
+   */
+  IdPath?: string
+  /**
+   * 账号组名称路径
+   */
+  NamePath?: string
+  /**
+   * 父账号组id
+   */
+  ParentId?: number
+  /**
+   * 账号组来源
+   */
+  Source?: number
+  /**
+   * 账号组下用户总数
+   */
+  UserTotal?: number
+  /**
+   * 是否叶子节点
+   */
+  IsLeaf?: boolean
+  /**
+   * 账号组导入类型
+   */
+  ImportType?: string
+  /**
+   * 账号组描述
+   */
+  Description?: string
+  /**
+   * 父源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
+   */
+  ParentOrgId?: string
+  /**
+   * 源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
+   */
+  OrgId?: string
+  /**
+   * 账号组是否已经接入，0表示未接入，1表示接入
+   */
+  Status?: number
 }
 
 /**
@@ -5767,6 +5965,24 @@ export interface DescribeDomainsRequest {
    * 分页偏移位置，默认值为0
    */
   Offset?: number
+}
+
+/**
+ * DescribeTickets返回参数结构体
+ */
+export interface DescribeTicketsResponse {
+  /**
+   * 运维工单总数
+   */
+  TotalCount?: number
+  /**
+   * 运维工单列表
+   */
+  TicketSet?: Array<Ticket>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6443,11 +6659,11 @@ export interface RunOperationTaskRequest {
  */
 export interface SearchFileBySidResponse {
   /**
-   * 记录数
+   * <p>记录数</p>
    */
   TotalCount?: number
   /**
-   * 某会话的文件操作列表
+   * <p>某会话的文件操作列表</p>
    */
   SearchFileBySidResult?: Array<SearchFileBySidResult>
   /**
@@ -6778,35 +6994,35 @@ export interface SearchSessionCommandRequest {
  */
 export interface SearchFileBySidRequest {
   /**
-   * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
+   * <p>若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话</p>
    */
   Sid: string
   /**
-   * 是否创建审计日志,通过查看按钮调用时为true,其他为false
+   * <p>是否创建审计日志,通过查看按钮调用时为true,其他为false</p>
    */
   AuditLog: boolean
   /**
-   * 分页的页内记录数，默认为20，最大200
+   * <p>分页的页内记录数，默认为20，最大200</p>
    */
   Limit?: number
   /**
-   * 可填写路径名或文件名
+   * <p>可填写路径名或文件名</p>
    */
   FileName?: string
   /**
-   * 分页用偏移量
+   * <p>分页用偏移量</p>
    */
   Offset?: number
   /**
-   * 1-已执行，  2-被阻断
+   * <p>1-已放行，  2-已阻断</p>
    */
   AuditAction?: number
   /**
-   * 1-已执行，  2-被阻断
+   * <p>1-已放行，  2-已阻断</p>
    */
   AuditActionSet?: Array<number | bigint>
   /**
-   * 以Protocol和Method为条件查询
+   * <p>以Protocol和Method为条件查询</p>
    */
   TypeFilters?: Array<SearchFileTypeFilter>
 }
@@ -6904,61 +7120,109 @@ export interface ReplaySessionResponse {
 }
 
 /**
- * ioa账号组
+ * ApproveTicket请求参数结构体
  */
-export interface AccountGroup {
+export interface ApproveTicketRequest {
   /**
-   * 账号组id
+   * 工单唯一id，数据库索引id
    */
-  Id?: number
+  Id: number
   /**
-   * 账号组名称
+   * 2-审批通过，4-审批驳回
    */
-  Name?: string
+  Status: number
   /**
-   * 账号组id路径
+   * 审批意见
    */
-  IdPath?: string
+  ApproveDesc: string
   /**
-   * 账号组名称路径
+   * 申请时间戳，单位微妙
    */
-  NamePath?: string
+  ApplyTimeVersion: number
   /**
-   * 父账号组id
+   * 审批权限工单时，设置的有效期开始时间，默认为当前时间
    */
-  ParentId?: number
+  StartTime?: string
   /**
-   * 账号组来源
+   * 审批权限工单时，设置的有效期的结束时间，默认有限期为1天
    */
-  Source?: number
+  EndTime?: string
   /**
-   * 账号组下用户总数
+   * 是否开启磁盘映射
    */
-  UserTotal?: number
+  AllowDiskRedirect?: boolean
   /**
-   * 是否叶子节点
+   * 是否开启剪贴板文件上行
    */
-  IsLeaf?: boolean
+  AllowClipFileUp?: boolean
   /**
-   * 账号组导入类型
+   * 是否开启剪贴板文件下行
    */
-  ImportType?: string
+  AllowClipFileDown?: boolean
   /**
-   * 账号组描述
+   * 是否开启剪贴板文本（含图片）上行
    */
-  Description?: string
+  AllowClipTextUp?: boolean
   /**
-   * 父源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
+   * 是否开启剪贴板文本（含图片）下行
    */
-  ParentOrgId?: string
+  AllowClipTextDown?: boolean
   /**
-   * 源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
+   * 是否开启 SFTP 文件上传
    */
-  OrgId?: string
+  AllowFileUp?: boolean
   /**
-   * 账号组是否已经接入，0表示未接入，1表示接入
+   * 文件传输上传大小限制（预留参数，目前暂未使用）
    */
-  Status?: number
+  MaxFileUpSize?: number
+  /**
+   * 是否开启 SFTP 文件下载
+   */
+  AllowFileDown?: boolean
+  /**
+   * 文件传输下载大小限制（预留参数，目前暂未使用）
+   */
+  MaxFileDownSize?: number
+  /**
+   * 是否开启rdp磁盘映射文件上传
+   */
+  AllowDiskFileUp?: boolean
+  /**
+   * 是否开启rdp磁盘映射文件下载
+   */
+  AllowDiskFileDown?: boolean
+  /**
+   * 是否开启rz sz文件上传
+   */
+  AllowShellFileUp?: boolean
+  /**
+   * 是否开启rz sz文件下载
+   */
+  AllowShellFileDown?: boolean
+  /**
+   * 是否开启 SFTP 文件删除
+   */
+  AllowFileDel?: boolean
+  /**
+   * 是否允许使用访问串，默认允许
+   */
+  AllowAccessCredential?: boolean
+  /**
+   * 关联的高危命令模板ID
+   */
+  CmdTemplateIdSet?: Array<number | bigint>
+  /**
+   * 关联高危DB模板ID
+   */
+  ACTemplateIdSet?: Array<string>
+  /**
+   * 部门id
+   */
+  DepartmentId?: string
+  /**
+   * 是否允许键盘记录
+   */
+  AllowKeyboardLogger?: boolean
 }
 
 /**
@@ -7074,11 +7338,11 @@ export interface DeleteAccessWhiteListRulesResponse {
  */
 export interface SearchFileResponse {
   /**
-   * 记录数
+   * <p>记录数</p>
    */
   TotalCount?: number
   /**
-   * 文件操作列表
+   * <p>文件操作列表</p>
    */
   Files?: Array<SearchFileResult>
   /**

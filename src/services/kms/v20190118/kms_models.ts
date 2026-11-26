@@ -1340,13 +1340,21 @@ export interface UpdateDataKeyDescriptionResponse {
  */
 export interface ExclusiveHSM {
   /**
-   * 独享集群Id
+   * <p>独享集群Id</p>
    */
   HsmClusterId?: string
   /**
-   * 独享集群名称
+   * <p>独享集群名称</p>
    */
   HsmClusterName?: string
+  /**
+   * <p>根密钥的使用量</p><p>单位：个</p>
+   */
+  CmkUserCount?: number
+  /**
+   * <p>根密钥的额度</p><p>单位：个</p>
+   */
+  CmkLimit?: number
 }
 
 /**

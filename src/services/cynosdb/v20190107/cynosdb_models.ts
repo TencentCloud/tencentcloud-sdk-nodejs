@@ -1026,17 +1026,21 @@ export interface DatabaseTables {
  */
 export interface UserHostPrivilege {
   /**
-   * 授权用户
+   * <p>授权用户</p>
    */
   DbUserName: string
   /**
-   * 客户端ip
+   * <p>客户端ip</p>
    */
   DbHost: string
   /**
-   * 用户权限
+   * <p>用户权限</p>
    */
   DbPrivilege: string
+  /**
+   * <p>权限明细列表</p>
+   */
+  PrivilegeList?: Array<string>
 }
 
 /**
@@ -5313,11 +5317,11 @@ export interface BindClusterResourcePackagesRequest {
  */
 export interface IsolateInstanceResponse {
   /**
-   * 任务流id
+   * <p>任务流id</p>
    */
   FlowId?: number
   /**
-   * 隔离实例的订单id（预付费实例）
+   * <p>隔离实例的订单id（预付费实例）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>
@@ -5790,13 +5794,29 @@ export interface DescribeLibraDBClusterTableMappingRequest {
  */
 export interface DescribeSupportProxyVersionRequest {
   /**
-   * 集群ID
+   * <p>集群ID。与Zone/DbVersion/CynosVersion二选一：查询存量集群支持的代理版本时必填；不传时表示创建集群前查询场景，需同时传入Zone、DbVersion、CynosVersion</p>
    */
-  ClusterId: string
+  ClusterId?: string
   /**
-   * 数据库代理组ID
+   * <p>数据库代理组ID。仅在传入ClusterId时有效，传入时返回当前代理版本号</p>
    */
   ProxyGroupId?: string
+  /**
+   * <p>可用区，如ap-guangzhou-3。创建集群前查询场景（不传ClusterId时）必填</p>
+   */
+  Zone?: string
+  /**
+   * <p>数据库引擎版本，如5.7、8.0。创建集群前查询场景（不传ClusterId时）必填</p>
+   */
+  DbVersion?: string
+  /**
+   * <p>目标内核版本，如3.1.20.001。创建集群前查询场景（不传ClusterId时）必填</p>
+   */
+  CynosVersion?: string
+  /**
+   * <p>存储版本，枚举值：1.0、2.0。可选，仅创建集群前查询场景有效</p>
+   */
+  StorageVersion?: string
 }
 
 /**
@@ -6120,29 +6140,33 @@ export interface DescribeInstanceParamsResponse {
  */
 export interface IsolateInstanceRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 实例ID数组，例如["cynosdbbmysql-ins-asd","cynosdbmysql-ins-zxc"]
+   * <p>实例ID数组，例如[&quot;cynosdbbmysql-ins-asd&quot;,&quot;cynosdbmysql-ins-zxc&quot;]</p>
    */
   InstanceIdList: Array<string>
   /**
-   * 该参数已废弃
+   * <p>该参数已废弃</p>
    */
   DbType?: string
   /**
-   * 实例退还原因类型
+   * <p>实例退还原因类型</p>
    */
   IsolateReasonTypes?: Array<number | bigint>
   /**
-   * 实例退还原因补充
+   * <p>实例退还原因补充</p>
    */
   IsolateReason?: string
   /**
-   * 保留备份
+   * <p>保留备份</p>
    */
   SaveBackup?: boolean
+  /**
+   * <p>立即彻底删除RO实例</p>
+   */
+  ImmediateRecycleRo?: boolean
 }
 
 /**
@@ -6684,6 +6708,10 @@ export interface ProxyConfig {
    * <p>数据库节点信息（该参数与ProxyCount需要任选一个输入）</p>
    */
   ProxyZones?: Array<ProxyZone>
+  /**
+   * <p>proxy版本号</p>
+   */
+  ProxyVersion?: string
 }
 
 /**
@@ -8068,25 +8096,29 @@ export interface ActivateInstanceResponse {
  */
 export interface IsolateClusterRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 该参数已废用
+   * <p>该参数已废用</p>
    */
   DbType?: string
   /**
-   * 实例退还原因类型
+   * <p>实例退还原因类型</p>
    */
   IsolateReasonTypes?: Array<number | bigint>
   /**
-   * 实例退还原因补充
+   * <p>实例退还原因补充</p>
    */
   IsolateReason?: string
   /**
-   * 保留备份,true-保留（会产生费用）
+   * <p>保留备份,true-保留（会产生费用）</p>
    */
   SaveBackup?: boolean
+  /**
+   * <p>立即彻底删除RO实例</p>
+   */
+  ImmediateRecycleRo?: boolean
 }
 
 /**
@@ -8904,15 +8936,15 @@ export interface AuditLog {
  */
 export interface CreateProxyResponse {
   /**
-   * 异步流程ID
+   * <p>异步流程ID</p>
    */
   FlowId?: number
   /**
-   * 异步任务ID
+   * <p>异步任务ID</p>
    */
   TaskId?: number
   /**
-   * 数据库代理组ID
+   * <p>数据库代理组ID</p>
    */
   ProxyGroupId?: string
   /**
@@ -10658,7 +10690,7 @@ export interface BizTaskInfo {
    */
   Output?: string
   /**
-   * <p>任务状态</p>
+   * <p>任务状态</p><p>枚举值：</p><ul><li>waiting： 等待执行</li><li>processing： 执行中</li><li>success： 执行成功</li><li>fail： 任务失败</li><li>paused： 任务暂停（存量任务状态）</li><li>undoing： 回滚中</li><li>undoed： 任务已回滚</li></ul>
    */
   Status?: string
   /**
@@ -11540,51 +11572,55 @@ export interface LibraClusterSet {
  */
 export interface CreateProxyRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * cpu核数
+   * <p>cpu核数</p>
    */
   Cpu: number
   /**
-   * 内存
+   * <p>内存</p>
    */
   Mem: number
   /**
-   * 私有网络ID，默认与集群私有网络ID保持一致
+   * <p>代理内核版本。不传时默认使用最新稳定版本（白名单用户以appoint策略为准）；显式指定时将实时校验该版本是否在当前集群支持的代理版本集合内，不在则返回错误。集群存在已开启列存索引的只读实例时，所选版本需不低于列存转发要求的最低版本（如1.4.7）</p>
+   */
+  ProxyVersion?: string
+  /**
+   * <p>私有网络ID，默认与集群私有网络ID保持一致</p>
    */
   UniqueVpcId?: string
   /**
-   * 私有网络子网ID，默认与集群子网ID保持一致
+   * <p>私有网络子网ID，默认与集群子网ID保持一致</p>
    */
   UniqueSubnetId?: string
   /**
-   * 数据库代理组节点个数（该参数不再建议使用，建议使用ProxyZones)
+   * <p>数据库代理组节点个数（该参数不再建议使用，建议使用ProxyZones)</p>
    */
   ProxyCount?: number
   /**
-   * 连接池类型：SessionConnectionPool(会话级别连接池 )
+   * <p>连接池类型：SessionConnectionPool(会话级别连接池 )</p>
    */
   ConnectionPoolType?: string
   /**
-   * 是否开启连接池,yes-开启，no-不开启
+   * <p>是否开启连接池,yes-开启，no-不开启</p>
    */
   OpenConnectionPool?: string
   /**
-   * 连接池阈值：单位（秒）
+   * <p>连接池阈值：单位（秒）</p>
    */
   ConnectionPoolTimeOut?: number
   /**
-   * 安全组ID数组
+   * <p>安全组ID数组</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 描述说明
+   * <p>描述说明</p>
    */
   Description?: string
   /**
-   * 数据库节点信息（该参数与ProxyCount需要任选一个输入）
+   * <p>数据库节点信息（该参数与ProxyCount需要任选一个输入）</p>
    */
   ProxyZones?: Array<ProxyZone>
 }
@@ -12826,15 +12862,15 @@ export interface Objects {
  */
 export interface DescribeSupportProxyVersionResponse {
   /**
-   * 支持的数据库代理版本集合
+   * <p>支持的数据库代理版本集合</p>
    */
   SupportProxyVersions?: Array<string>
   /**
-   * 当前proxy版本号
+   * <p>当前proxy版本号</p>
    */
   CurrentProxyVersion?: string
   /**
-   * 代理版本详情
+   * <p>代理版本详情</p>
    */
   SupportProxyVersionDetail?: Array<ProxyVersionInfo>
   /**
@@ -15627,11 +15663,11 @@ export interface BinlogConfigInfo {
  */
 export interface IsolateClusterResponse {
   /**
-   * 任务流ID(后付费或者serverless资源返回，如果需要同步任务状态，请使用DescribeFlow接口)
+   * <p>任务流ID(后付费或者serverless资源返回，如果需要同步任务状态，请使用DescribeFlow接口)</p>
    */
   FlowId?: number
   /**
-   * 退款订单号(预付费资源返回，如果需要同步订单状态，请使用计费产品的DescribeDealsByCond同步订单状态)
+   * <p>退款订单号(预付费资源返回，如果需要同步订单状态，请使用计费产品的DescribeDealsByCond同步订单状态)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>

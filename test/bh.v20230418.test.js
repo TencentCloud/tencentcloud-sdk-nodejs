@@ -508,6 +508,16 @@ it("bh.v20230418.CreateCmdTemplate", async function () {
     }
 })
 
+it("bh.v20230418.DescribeTickets", async function () {
+    try {
+       const data = await client.DescribeTickets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.ReplaySession", async function () {
     try {
        const data = await client.ReplaySession({})
@@ -671,6 +681,16 @@ it("bh.v20230418.ModifyUserGroup", async function () {
 it("bh.v20230418.DescribeSourceTypes", async function () {
     try {
        const data = await client.DescribeSourceTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ApproveTicket", async function () {
+    try {
+       const data = await client.ApproveTicket({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

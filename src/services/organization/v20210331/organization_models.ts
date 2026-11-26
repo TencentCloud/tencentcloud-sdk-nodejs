@@ -1099,69 +1099,77 @@ export interface DeletePolicyResponse {
  */
 export interface DescribeOrganizationResponse {
   /**
-   * 企业组织ID。
+   * <p>企业组织ID。</p>
    */
   OrgId?: number
   /**
-   * 创建者UIN。
+   * <p>创建者UIN。</p>
    */
   HostUin?: number
   /**
-   * 创建者昵称。
+   * <p>创建者昵称。</p>
    */
   NickName?: string
   /**
-   * 企业组织类型。
+   * <p>企业组织类型。</p>
    */
   OrgType?: number
   /**
-   * 是否组织管理员。是：true ，否：false
+   * <p>是否组织管理员。是：true ，否：false</p>
    */
   IsManager?: boolean
   /**
-   * 策略类型。财务管理：Financial
+   * <p>策略类型。财务管理：Financial</p>
    */
   OrgPolicyType?: string
   /**
-   * 策略名。
+   * <p>策略名。</p>
    */
   OrgPolicyName?: string
   /**
-   * 成员财务权限列表。
+   * <p>成员财务权限列表。</p>
    */
   OrgPermission?: Array<OrgPermission>
   /**
-   * 组织根节点ID。
+   * <p>组织根节点ID。</p>
    */
   RootNodeId?: number
   /**
-   * 组织创建时间。
+   * <p>组织创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 成员加入时间。
+   * <p>成员加入时间。</p>
    */
   JoinTime?: string
   /**
-   * 成员是否允许退出。允许：Allow，不允许：Denied
+   * <p>成员是否允许退出。允许：Allow，不允许：Denied</p>
    */
   IsAllowQuit?: string
   /**
-   * 代付者Uin。
+   * <p>代付者Uin。</p>
    */
   PayUin?: string
   /**
-   * 代付者名称。
+   * <p>代付者名称。</p>
    */
   PayName?: string
   /**
-   * 是否可信服务管理员。是：true，否：false
+   * <p>是否可信服务管理员。是：true，否：false</p>
    */
   IsAssignManager?: boolean
   /**
-   * 是否实名主体管理员。是：true，否：false
+   * <p>是否实名主体管理员。是：true，否：false</p>
    */
   IsAuthManager?: boolean
+  /**
+   * <p>创建/邀请成员时可设置的财务权限列表</p>
+   */
+  MemberPermissionOptions?: Array<MemberPermissionOption>
+  /**
+   * <p>创建/邀请成员时的默认付费方式。</p><p>枚举值：</p><ul><li>SelfPay： 自付</li><li>BehalfPay： 代付</li></ul>
+   */
+  DefaultPayType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2260,11 +2268,11 @@ export interface DeleteOrgServiceAssignRequest {
  */
 export interface DescribeOrganizationRequest {
   /**
-   * 国际站：en，国内站：zh
+   * <p>国际站：en，国内站：zh</p>
    */
   Lang?: string
   /**
-   * 可信服务产品简称。查询是否该可信服务管理员时必须指定
+   * <p>可信服务产品简称。查询是否该可信服务管理员时必须指定</p>
    */
   Product?: string
 }
@@ -6328,6 +6336,32 @@ export interface RoleConfiguration {
    * <p>未成功应用的账号明细</p><p>仅 Failed 态返回</p>
    */
   FailedAccounts?: Array<FailedAccount>
+}
+
+/**
+ * 创建/邀请成员时可设置的财务权限
+ */
+export interface MemberPermissionOption {
+  /**
+   * <p>权限 ID</p>
+   */
+  Id?: number
+  /**
+   * <p>权限名</p>
+   */
+  Name?: string
+  /**
+   * <p>展示状态</p><p>枚举值：</p><ul><li>FIXED： 已勾选且置灰，不可修改</li><li>OPTIONAL： 正常可选</li><li>DISABLE： 置灰不可选，悬浮展示原因</li></ul><p>默认值：OPTIONAL</p>
+   */
+  Status?: string
+  /**
+   * <p>是否默认勾选</p>
+   */
+  DefaultChecked?: boolean
+  /**
+   * <p>置灰原因码</p><p>枚举值：</p><ul><li>TransferNotAllowAdd： 资金划拨权限未命中白名单</li><li>CreditAmountsNotAllowAdd： 信用额度设置权限未命中白名单</li><li>AddDiscountInheritNotAllow： 校验不通过或异常</li></ul>
+   */
+  DisabledCode?: string
 }
 
 /**

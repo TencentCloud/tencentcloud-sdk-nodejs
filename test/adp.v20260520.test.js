@@ -68,6 +68,16 @@ it("adp.v20260520.CreateChannel", async function () {
     }
 })
 
+it("adp.v20260520.DeletePromptTemplateLabel", async function () {
+    try {
+       const data = await client.DeletePromptTemplateLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.ModifyChannel", async function () {
     try {
        const data = await client.ModifyChannel({})
@@ -238,6 +248,16 @@ it("adp.v20260520.DescribeMetricOverviewList", async function () {
     }
 })
 
+it("adp.v20260520.DescribePromptTemplate", async function () {
+    try {
+       const data = await client.DescribePromptTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeConversationList", async function () {
     try {
        const data = await client.DescribeConversationList({})
@@ -291,6 +311,16 @@ it("adp.v20260520.DescribeApp", async function () {
 it("adp.v20260520.ModifySkill", async function () {
     try {
        const data = await client.ModifySkill({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.CreatePromptTemplate", async function () {
+    try {
+       const data = await client.CreatePromptTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +688,9 @@ it("adp.v20260520.ResumeWorkflowRun", async function () {
     }
 })
 
-it("adp.v20260520.DescribeQA", async function () {
+it("adp.v20260520.DeleteSkill", async function () {
     try {
-       const data = await client.DescribeQA({})
+       const data = await client.DeleteSkill({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,6 +858,26 @@ it("adp.v20260520.CreateWorkflowRun", async function () {
     }
 })
 
+it("adp.v20260520.DescribePromptTemplateCategoryList", async function () {
+    try {
+       const data = await client.DescribePromptTemplateCategoryList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.CreatePromptTemplateLabel", async function () {
+    try {
+       const data = await client.CreatePromptTemplateLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DeleteDocList", async function () {
     try {
        const data = await client.DeleteDocList({})
@@ -841,6 +891,16 @@ it("adp.v20260520.DeleteDocList", async function () {
 it("adp.v20260520.DescribeAuditLogMeta", async function () {
     try {
        const data = await client.DescribeAuditLogMeta({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeReleaseList", async function () {
+    try {
+       const data = await client.DescribeReleaseList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -868,9 +928,9 @@ it("adp.v20260520.DescribeQASummaryList", async function () {
     }
 })
 
-it("adp.v20260520.DescribeReleaseList", async function () {
+it("adp.v20260520.DeletePromptTemplate", async function () {
     try {
-       const data = await client.DescribeReleaseList({})
+       const data = await client.DeletePromptTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,6 +968,16 @@ it("adp.v20260520.ModifyQAList", async function () {
     }
 })
 
+it("adp.v20260520.DescribePromptTemplateLabelList", async function () {
+    try {
+       const data = await client.DescribePromptTemplateLabelList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.CreateWorkspaceCredential", async function () {
     try {
        const data = await client.CreateWorkspaceCredential({})
@@ -938,9 +1008,9 @@ it("adp.v20260520.DescribeAppTrigger", async function () {
     }
 })
 
-it("adp.v20260520.DeleteSkill", async function () {
+it("adp.v20260520.DescribeQA", async function () {
     try {
-       const data = await client.DeleteSkill({})
+       const data = await client.DescribeQA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1021,6 +1091,16 @@ it("adp.v20260520.DescribeNodeBatchRun", async function () {
 it("adp.v20260520.DeleteCategory", async function () {
     try {
        const data = await client.DeleteCategory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ModifyPromptTemplate", async function () {
+    try {
+       const data = await client.ModifyPromptTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1168,6 +1248,16 @@ it("adp.v20260520.DescribeAppTriggerSummaryList", async function () {
     }
 })
 
+it("adp.v20260520.FavoritePromptTemplate", async function () {
+    try {
+       const data = await client.FavoritePromptTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeConflictQA", async function () {
     try {
        const data = await client.DescribeConflictQA({})
@@ -1308,6 +1398,16 @@ it("adp.v20260520.ModifyVariable", async function () {
     }
 })
 
+it("adp.v20260520.DescribePromptTemplateSummaryList", async function () {
+    try {
+       const data = await client.DescribePromptTemplateSummaryList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.ModifyDocList", async function () {
     try {
        const data = await client.ModifyDocList({})
@@ -1321,6 +1421,16 @@ it("adp.v20260520.ModifyDocList", async function () {
 it("adp.v20260520.DescribeUsageSummaryList", async function () {
     try {
        const data = await client.DescribeUsageSummaryList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.UnfavoritePromptTemplate", async function () {
+    try {
+       const data = await client.UnfavoritePromptTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

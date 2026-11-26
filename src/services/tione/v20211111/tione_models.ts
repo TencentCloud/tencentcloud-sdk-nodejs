@@ -341,24 +341,25 @@ export interface DeleteTrainingModelVersionResponse {
 }
 
 /**
- * 服务共享弹性网卡设置
+ * ModifyTrainingTaskSchedulingPolicy请求参数结构体
  */
-export interface ServiceEIP {
+export interface ModifyTrainingTaskSchedulingPolicyRequest {
   /**
-   * 是否开启TIONE内网到外部的访问
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>训练任务 id</p>
    */
-  EnableEIP?: boolean
+  TrainingTaskId: string
   /**
-   * 用户VpcId
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>TI工作空间ID</p><p>使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。</p>
    */
-  VpcId?: string
+  TiProjectId?: string
   /**
-   * 用户subnetId
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>是否开启跨资源组调度。缺省为 false，仅改优先级时若任务已开启需显式传 true，否则会被关闭。</p>
    */
-  SubnetId?: string
+  CrossResourceGroupScheduling?: boolean
+  /**
+   * <p>调度策略</p>
+   */
+  SchedulePolicy?: SchedulePolicy
 }
 
 /**
@@ -6455,6 +6456,17 @@ export interface ModifyRoleUserGrantResponse {
 }
 
 /**
+ * 任务调度策略
+ */
+export interface SchedulePolicy {
+  /**
+   * <p>任务优先级，取值 p0~p9，p0 最高、p9 最低</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PriorityClass?: string
+}
+
+/**
  * 任务建模Pod信息
  */
 export interface PodInfo {
@@ -6714,6 +6726,16 @@ export interface DescribeModelServiceHotUpdatedRequest {
    * 挂载信息
    */
   VolumeMount?: VolumeMount
+}
+
+/**
+ * ModifyTrainingTaskSchedulingPolicy返回参数结构体
+ */
+export interface ModifyTrainingTaskSchedulingPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7312,6 +7334,27 @@ export interface CreateModelServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务共享弹性网卡设置
+ */
+export interface ServiceEIP {
+  /**
+   * 是否开启TIONE内网到外部的访问
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableEIP?: boolean
+  /**
+   * 用户VpcId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 用户subnetId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
 }
 
 /**

@@ -4005,6 +4005,14 @@ export interface DescribePreCacheImageTaskResponse {
    */
   LastUsedTime?: string
   /**
+   * <p>镜像预热闲置清理时间</p><p>枚举值：</p><ul><li>inherit： 继承账号配置的自动清理策略</li><li>0： 永不自动清理</li><li>正整数加 m/h/d： 空闲相应时间后自动清理</li></ul>
+   */
+  IdleTTL?: string
+  /**
+   * <p>预计过期清理时间</p>
+   */
+  ExpireTime?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4749,6 +4757,10 @@ export interface CreatePreCacheImageTaskRequest {
    * <p>镜像预热类型</p><p>枚举值：</p><ul><li>image： 镜像预热</li><li>image_volume： 镜像卷预热</li></ul><p>默认值：image</p>
    */
   PreCacheType?: string
+  /**
+   * <p>闲置清理时间</p><p>枚举值：</p><ul><li>inherit： 继承账号配置的自动清理策略</li><li>0： 永不自动清理</li><li>正整数加 m/h/d： 空闲相应时间后自动清理</li></ul><p>默认值：inherit</p>
+   */
+  IdleTTL?: string
 }
 
 /**

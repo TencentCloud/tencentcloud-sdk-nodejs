@@ -466,6 +466,7 @@ import {
   DescribeTaskDetailDsResponse,
   LineageProperty,
   CreateTaskResponse,
+  WorkflowLabel,
   ModifyIntegrationTaskResponse,
   BatchStopIntegrationTasksResponse,
   EventListenerTaskInfo,
