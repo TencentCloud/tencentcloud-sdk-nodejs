@@ -4157,33 +4157,25 @@ export interface OperationDuration {
 }
 
 /**
- * UpgradeLicense请求参数结构体
+ * SearchServerlessSpaceData请求参数结构体
  */
-export interface UpgradeLicenseRequest {
+export interface SearchServerlessSpaceDataRequest {
   /**
-   * 实例ID
+   * <p>space空间id</p>
    */
-  InstanceId: string
+  SpaceId: string
   /**
-   * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+   * <p>请求url</p>
    */
-  LicenseType: string
+  Uri?: string
   /**
-   * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
+   * <p>method</p><p>枚举值：</p><ul><li>GET： get请求</li><li>POST： post请求</li><li>PUT： put请求</li></ul>
    */
-  AutoVoucher?: number
+  Method?: string
   /**
-   * 代金券ID列表（目前仅支持指定一张代金券）
+   * <p>请求体</p>
    */
-  VoucherIds?: Array<string>
-  /**
-   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li><li>不传参时会默认维持原状，传参时需注意只能由不开启变为开启，无法由开启变为不开启</li>
-   */
-  BasicSecurityType?: number
-  /**
-   * 是否强制重启<li>true强制重启</li><li>false不强制重启</li> 默认值false
-   */
-  ForceRestart?: boolean
+  Body?: string
 }
 
 /**
@@ -6512,6 +6504,36 @@ export interface RestartNodesResponse {
 }
 
 /**
+ * UpgradeLicense请求参数结构体
+ */
+export interface UpgradeLicenseRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+   */
+  LicenseType: string
+  /**
+   * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
+   */
+  AutoVoucher?: number
+  /**
+   * 代金券ID列表（目前仅支持指定一张代金券）
+   */
+  VoucherIds?: Array<string>
+  /**
+   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li><li>不传参时会默认维持原状，传参时需注意只能由不开启变为开启，无法由开启变为不开启</li>
+   */
+  BasicSecurityType?: number
+  /**
+   * 是否强制重启<li>true强制重启</li><li>false不强制重启</li> 默认值false
+   */
+  ForceRestart?: boolean
+}
+
+/**
  * ExportIpTraceLog返回参数结构体
  */
 export interface ExportIpTraceLogResponse {
@@ -8199,6 +8221,24 @@ export interface ExportIpTraceLogRequest {
    * <p>集群节点IP</p>
    */
   NodeIp?: Array<string>
+}
+
+/**
+ * SearchServerlessSpaceData返回参数结构体
+ */
+export interface SearchServerlessSpaceDataResponse {
+  /**
+   * <p>请求状态</p>
+   */
+  HttpStatus?: number
+  /**
+   * <p>返回结果</p>
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

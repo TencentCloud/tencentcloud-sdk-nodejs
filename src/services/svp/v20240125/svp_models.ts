@@ -333,71 +333,71 @@ export interface SavingPlanDeductDetail {
  */
 export interface SavingPlanCoverageDetail {
   /**
-   * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+   * <p>资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID</p>
    */
   ResourceId?: string
   /**
-   * 地域ID
+   * <p>地域ID</p>
    */
   RegionId?: number
   /**
-   * 产品编码
+   * <p>产品编码</p>
    */
   ProductCode?: string
   /**
-   * 子产品编码
+   * <p>子产品编码</p>
    */
   SubProductCode?: string
   /**
-   * 费用起始日期，格式yyyy-MM-dd
+   * <p>费用起始日期，格式yyyy-MM-dd</p>
    */
   StartDate?: string
   /**
-   * 费用结束日期，格式yyyy-MM-dd，目前与StartDate相等
+   * <p>费用结束日期，格式yyyy-MM-dd，目前与StartDate相等</p>
    */
   EndDate?: string
   /**
-   * 节省计划覆盖金额（即节省计划支付金额）
+   * <p>节省计划覆盖金额（即节省计划支付金额）</p>
    */
   SpCoveredAmount?: number
   /**
-   * 节省计划未覆盖金额（即优惠后总价）
+   * <p>节省计划未覆盖金额（即优惠后总价）</p>
    */
   SpUncoveredAmount?: number
   /**
-   * 总支出（即节省计划未覆盖金额 + 节省计划覆盖金额）
+   * <p>总支出（即节省计划未覆盖金额 + 节省计划覆盖金额）</p>
    */
   TotalRealAmount?: number
   /**
-   * 按量计费预期金额（即折前价 * 折扣）
+   * <p>按量计费预期金额（即折前价 * 折扣）</p>
    */
   ExpectedAmount?: number
   /**
-   * 覆盖率结果，取值[0, 100]
+   * <p>覆盖率结果，取值为百分比值，取值范围[0,100]</p>
    */
   SpCoverage?: number
   /**
-   * 支付者昵称
+   * <p>支付者昵称</p>
    */
   PayerUinName?: string
   /**
-   * 使用者昵称
+   * <p>使用者昵称</p>
    */
   OwnerUinName?: string
   /**
-   * 支付者uin
+   * <p>支付者uin</p>
    */
   PayerUin?: string
   /**
-   * 计费项名称
+   * <p>计费项名称</p>
    */
   SubBillingItemName?: string
   /**
-   * 计费细项名称
+   * <p>计费细项名称</p>
    */
   BillingItemName?: string
   /**
-   * 子产品名称
+   * <p>子产品名称</p>
    */
   SubProductName?: string
 }

@@ -168,9 +168,9 @@ it("es.v20180416.DescribeLogstashInstanceOperations", async function () {
     }
 })
 
-it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
+it("es.v20180416.DescribeServerlessMetrics", async function () {
     try {
-       const data = await client.UpdateRequestTargetNodeTypes({})
+       const data = await client.DescribeServerlessMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +231,16 @@ it("es.v20180416.DescribeInstancePluginList", async function () {
 it("es.v20180416.StopLogstashPipelines", async function () {
     try {
        const data = await client.StopLogstashPipelines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
+    try {
+       const data = await client.UpdateRequestTargetNodeTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,6 +381,16 @@ it("es.v20180416.DescribeForceMergeTask", async function () {
 it("es.v20180416.DeleteIndex", async function () {
     try {
        const data = await client.DeleteIndex({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.SearchServerlessSpaceData", async function () {
+    try {
+       const data = await client.SearchServerlessSpaceData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,16 +711,6 @@ it("es.v20180416.ModifyAutoBackUpCommonInfo", async function () {
 it("es.v20180416.DeleteLogstashInstance", async function () {
     try {
        const data = await client.DeleteLogstashInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeServerlessMetrics", async function () {
-    try {
-       const data = await client.DescribeServerlessMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

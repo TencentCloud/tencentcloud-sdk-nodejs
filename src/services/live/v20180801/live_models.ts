@@ -136,7 +136,7 @@ export interface DescribeOriginStreamInfoResponse {
    */
   PassThroughHttpHeader?: string
   /**
-   * <p>是否透传相应，可取值：on、off。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+   * <p>是否透传响应，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PassThroughResponse?: string
@@ -352,7 +352,7 @@ export interface CreateLiveAvatarCloneFigureRequest {
    */
   MaterialUrl: string
   /**
-   * <p>克隆的形象的性别</p><p>枚举值：</p><ul><li>MALE： 男</li><li>FEMALE： 女</li><li>UNHNOWN： 不知道</li></ul>
+   * <p>克隆的形象的性别</p><p>枚举值：</p><ul><li>MALE： 男</li><li>FEMALE： 女</li><li>UNKNOWN： 不知道</li></ul>
    */
   Gender?: string
   /**
@@ -1043,27 +1043,23 @@ export interface RuleInfo {
  */
 export interface ModifyLiveDomainCertBindingsRequest {
   /**
-   * 要绑定证书的播放域名/状态 信息列表。
-如果CloudCertId和证书公钥私钥对均不传，且域名列表已有绑定规则，只批量更新域名https规则的启用状态，并把未上传至腾讯云ssl的已有自有证书上传。
+   * <p>要绑定证书的播放域名/状态 信息列表。<br>如果CloudCertId和证书公钥私钥对均不传，且域名列表已有绑定规则，只批量更新域名https规则的启用状态，并把未上传至腾讯云ssl的已有自有证书上传。</p>
    */
   DomainInfos: Array<LiveCertDomainInfo>
   /**
-   * 腾讯云ssl的证书Id。
-见 https://cloud.tencent.com/document/api/400/41665
+   * <p>腾讯云ssl的证书Id。<br>见 https://cloud.tencent.com/document/api/400/41665</p>
    */
   CloudCertId?: string
   /**
-   * 证书公钥。
-CloudCertId和公钥私钥对二选一，若CloudCertId将会舍弃公钥和私钥参数，否则将自动先把公钥私钥对上传至ssl新建证书，并使用上传成功后返回的CloudCertId。
+   * <p>证书公钥。<br>CloudCertId和公钥私钥对二选一，若CloudCertId将会舍弃公钥和私钥参数，否则将自动先把公钥私钥对上传至ssl新建证书，并使用上传成功后返回的CloudCertId。</p>
    */
   CertificatePublicKey?: string
   /**
-   * 证书私钥。
-CloudCertId和公钥私钥对二选一，若传CloudCertId将会舍弃公钥和私钥参数，否则将自动先把公钥私钥对上传至ssl新建证书，并使用上传成功后返回的CloudCertId。
+   * <p>证书私钥。<br>CloudCertId和公钥私钥对二选一，若传CloudCertId将会舍弃公钥和私钥参数，否则将自动先把公钥私钥对上传至ssl新建证书，并使用上传成功后返回的CloudCertId。</p>
    */
   CertificatePrivateKey?: string
   /**
-   * 上传至ssl证书中心的备注信息，只有新建证书时有效。传CloudCertId时会忽略。
+   * <p>上传至ssl证书中心的备注信息，只有新建证书时有效。传CloudCertId时会忽略。</p>
    */
   CertificateAlias?: string
 }
@@ -2385,52 +2381,47 @@ export interface DeleteLivePadTemplateResponse {
  */
 export interface DomainCertInfo {
   /**
-   * 证书Id。
+   * <p>证书Id。</p>
    */
   CertId?: number
   /**
-   * 证书名称。
+   * <p>证书名称。</p>
    */
   CertName?: string
   /**
-   * 描述信息。
+   * <p>描述信息。</p>
    */
   Description?: string
   /**
-   * 创建时间，UTC格式。
-注：此字段为北京时间（UTC+8时区）。
+   * <p>创建时间，UTC格式。<br>注：此字段为北京时间（UTC+8时区）。</p>
    */
   CreateTime?: string
   /**
-   * 证书内容。
+   * <p>证书内容。</p>
    */
   HttpsCrt?: string
   /**
-   * 证书类型。
-0：用户添加证书，
-1：腾讯云托管证书。
+   * <p>证书类型。<br>0：用户添加证书，<br>1：腾讯云托管证书。</p>
    */
   CertType?: number
   /**
-   * 证书过期时间，UTC格式。
-注：此字段为北京时间（UTC+8时区）。
+   * <p>证书过期时间，UTC格式。<br>注：此字段为北京时间（UTC+8时区）。</p>
    */
   CertExpireTime?: string
   /**
-   * 使用此证书的域名名称。
+   * <p>使用此证书的域名名称。</p>
    */
   DomainName?: string
   /**
-   * 证书状态。
+   * <p>证书状态。</p>
    */
   Status?: number
   /**
-   * 证书本身标识的域名列表。
-比如: ["*.x.com"]
+   * <p>证书本身标识的域名列表。<br>比如: [&quot;*.x.com&quot;]</p>
    */
   CertDomains?: Array<string>
   /**
-   * 腾讯云ssl的证书Id
+   * <p>腾讯云ssl的证书Id</p>
    */
   CloudCertId?: string
 }
@@ -4429,11 +4420,11 @@ export interface CreateCasterPgmFromPvwResponse {
  */
 export interface DescribeLiveTranscodeRulesRequest {
   /**
-   * 要筛选的模板ID数组。
+   * <p>要筛选的模板ID数组。</p>
    */
   TemplateIds?: Array<number | bigint>
   /**
-   * 要筛选的域名数组。
+   * <p>要筛选的域名数组。</p>
    */
   DomainNames?: Array<string>
 }
@@ -4908,20 +4899,19 @@ export interface BillCountryInfo {
  */
 export interface LogInfo {
   /**
-   * 日志名称。
+   * <p>日志名称。</p>
    */
   LogName?: string
   /**
-   * 日志 URL。
+   * <p>日志 URL。</p>
    */
   LogUrl?: string
   /**
-   * 日志生成时间。
-注：此字段为北京时间（UTC+8时区）。
+   * <p>日志生成时间。<br>注：此字段为北京时间（UTC+8时区）。</p>
    */
   LogTime?: string
   /**
-   * 文件大小。
+   * <p>文件大小，单位字节。</p>
    */
   FileSize?: number
 }
@@ -5905,7 +5895,7 @@ export interface ReleaseCasterResponse {
  */
 export interface DescribeLiveTranscodeRulesResponse {
   /**
-   * 转码规则列表。
+   * <p>转码规则列表。</p>
    */
   Rules?: Array<RuleInfo>
   /**
@@ -6374,7 +6364,7 @@ export interface TemplateInfo {
    */
   Width?: number
   /**
-   * <p>高，默认0。<br>范围[0-3000]<br>数值必须是2的倍数，0是原始宽度</p>
+   * <p>高，默认0。<br>范围[0-3000]<br>数值必须是2的倍数，0是原始高度</p>
    */
   Height?: number
   /**
@@ -9070,11 +9060,11 @@ Overseas：海外及港澳台地区。
  */
 export interface ModifyLiveDomainCertBindingsResponse {
   /**
-   * DomainNames 入参中，与证书不匹配的域名列表，将会跳过处理。
+   * <p>DomainNames 入参中，与证书不匹配的域名列表，将会跳过处理。</p>
    */
   MismatchedDomainNames?: Array<string>
   /**
-   * 操作失败的域名及错误码，错误信息，包括MismatchedDomainNames中的域名。
+   * <p>操作失败的域名及错误码，错误信息，包括MismatchedDomainNames中的域名。</p>
    */
   Errors?: Array<BatchDomainOperateErrors>
   /**
@@ -10133,48 +10123,35 @@ export interface DescribeProvinceIspPlayInfoListResponse {
  */
 export interface DescribeLivePackageInfoResponse {
   /**
-   * 套餐包信息。
+   * <p>套餐包信息。</p>
    */
   LivePackageInfoList?: Array<LivePackageInfo>
   /**
-   * 套餐包当前计费方式:
--1: 无计费方式或获取失败
-0: 无计费方式
-201: 月结带宽
-202: 月结流量
-203: 日结带宽
-204: 日结流量
-205: 日结时长
-206: 月结时长
-304: 日结流量。
+   * <p>套餐包当前计费方式:<br>-1: 无计费方式或获取失败<br>0: 无计费方式<br>201: 月结带宽<br>202: 月结流量<br>203: 日结带宽<br>204: 日结流量<br>205: 日结时长<br>206: 月结时长<br>304: 日结流量。</p>
    */
   PackageBillMode?: number
   /**
-   * 总页数。
+   * <p>总页数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
-   * 数据总条数。
+   * <p>数据总条数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalNum?: number
   /**
-   * 当前页数。
+   * <p>当前页数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNum?: number
   /**
-   * 当前每页数量。
+   * <p>当前每页数量。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
-   * 当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：
-标准直播，中国大陆（境内全地区）计费方式。
-标准直播，国际/港澳台（境外多地区）计费方式。
-快直播，中国大陆（境内全地区）计费方式。
-快直播，国际/港澳台（境外多地区）计费方式。
+   * <p>当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：<br>标准直播，中国大陆（境内全地区）计费方式。<br>标准直播，国际/港澳台（境外多地区）计费方式。<br>快直播，中国大陆（境内全地区）计费方式。<br>快直播，国际/港澳台（境外多地区）计费方式。</p>
    */
   FluxPackageBillMode?: string
   /**
@@ -10302,74 +10279,77 @@ export interface DescribeAuditGroupTagRequest {
  */
 export interface AvatarRoomInfo {
   /**
-   * 数字人直播间 ID。
+   * <p>数字人直播间 ID。</p>
    */
   RoomId?: string
   /**
-   * 数字人直播间名称。
+   * <p>数字人直播间名称。</p>
    */
   Name?: string
   /**
-   * 数字人直播间状态，
-CLOSE - 未开播。
-OPEN - 直播中。
-
+   * <p>数字人直播间状态，<br>CLOSE - 未开播。<br>OPEN - 直播中。</p><p>枚举值：</p><ul><li>CLOSE： 未开播</li><li>OPEN： 直播中</li></ul>
    */
   Status?: string
   /**
-   * 数字人形象 KEY。
+   * <p>数字人形象 KEY。</p>
    */
   AvatarKey?: string
   /**
-   * 音色 KEy。
+   * <p>音色 KEY。</p>
    */
   TimbreKey?: string
   /**
-   * 数字人形象图片 URL。
+   * <p>数字人形象图片 URL。</p>
    */
   AvatarImageUrl?: string
   /**
-   * 背景图片 URL。
+   * <p>背景图片 URL。</p>
    */
   BackgroundUrl?: string
   /**
-   * 推流目标描述。
+   * <p>推流目标描述。</p>
    */
   Comment?: string
   /**
-   * 目标推流地址。
+   * <p>目标推流地址。</p>
    */
   ToUrl?: string
   /**
-   * 主播大小，默认1.00。 取值范围(0, 15.00]。
+   * <p>主播大小，默认1.00。 取值范围(0, 15.00]。</p>
    */
   AnchorScale?: number
   /**
-   * 主播纵向位置。默认-1贴底部。
+   * <p>主播纵向位置。默认-1贴底部。</p>
    */
   AnchorVerticalPos?: number
   /**
-   * 主播横向位置。默认-1居中。
+   * <p>主播横向位置。默认-1居中。</p>
    */
   AnchorHorizontalPos?: number
   /**
-   * 语速（1.0为正常语速，范围[0.5-1.5]，值为0.5时播报语速最慢，值为1.5时播报语速最快。
+   * <p>语速（1.0为正常语速，范围[0.5-1.5]，值为0.5时播报语速最慢，值为1.5时播报语速最快。</p>
    */
   SpeechSpeed?: number
   /**
-   * 音量大小，范围[0，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。
+   * <p>音量大小，范围[0，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。</p>
    */
   SpeechVolume?: number
   /**
-   * 直播间创建时间，UTC时间。
-注意：UTC时间和北京时间相差八小时。
+   * <p>直播间创建时间，UTC时间。<br>注意：UTC时间和北京时间相差八小时。</p>
    */
   CreateTime?: string
   /**
-   * 直播间最后更新时间，UTC时间。
-注意：UTC时间和北京时间相差八小时。
+   * <p>直播间最后更新时间，UTC时间。<br>注意：UTC时间和北京时间相差八小时。</p>
    */
   UpdateTime?: string
+  /**
+   * <p>直播间类型。</p><p>枚举值：</p><ul><li>AIGC： AIGC直播</li></ul>
+   */
+  RoomType?: string
+  /**
+   * <p>通过AIGC生成的数字人形象图片 URL。</p>
+   */
+  AvatarAigcImageUrl?: string
 }
 
 /**
@@ -10574,39 +10554,35 @@ export interface DescribeAvatarEditingLiveResponse {
  */
 export interface CertInfo {
   /**
-   * 证书 ID。
+   * <p>证书 ID。</p>
    */
   CertId?: number
   /**
-   * 证书名称。
+   * <p>证书名称。</p>
    */
   CertName?: string
   /**
-   * 描述信息。
+   * <p>描述信息。</p>
    */
   Description?: string
   /**
-   * 创建时间，UTC 格式。
-注：此字段为北京时间（UTC+8时区）。
+   * <p>创建时间，UTC 格式。<br>注：此字段为北京时间（UTC+8时区）。</p>
    */
   CreateTime?: string
   /**
-   * 证书内容。
+   * <p>证书内容。</p>
    */
   HttpsCrt?: string
   /**
-   * 证书类型。
-0：用户添加证书，
-1：腾讯云托管证书。
+   * <p>证书类型。<br>0：用户添加证书，<br>1：腾讯云托管证书。</p>
    */
   CertType?: number
   /**
-   * 证书过期时间，UTC 格式。
-注：此字段为北京时间（UTC+8时区）。
+   * <p>证书过期时间，UTC 格式。<br>注：此字段为北京时间（UTC+8时区）。</p>
    */
   CertExpireTime?: string
   /**
-   * 使用此证书的域名列表。
+   * <p>使用此证书的域名列表。</p>
    */
   DomainList?: Array<string>
 }
@@ -10780,43 +10756,31 @@ export interface DescribeLiveStreamStateRequest {
  */
 export interface CreateLiveTimeShiftTemplateRequest {
   /**
-   * 模板名称。
-长度上限：255字节。
-仅支持中文、英文、数字、_、-。
+   * <p>模板名称。<br>长度上限：255字节。<br>仅支持中文、英文、数字、_、-。</p>
    */
   TemplateName: string
   /**
-   * 时移时长。单位：s。取值范围：86400 259200 604800 1296000 2592000。
+   * <p>时移时长。单位：s。取值范围：86400 259200 604800 1296000 2592000。</p>
    */
   Duration: number
   /**
-   * 描述信息。
-仅支持中文、英文、数字、_、-。
+   * <p>描述信息。<br>仅支持中文、英文、数字、_、-。</p>
    */
   Description?: string
   /**
-   * 地域。
-Mainland：中国大陆。
-Overseas：海外及港澳台地区。
-默认值：Mainland。
+   * <p>地域。<br>Mainland：中国大陆。<br>Overseas：海外及港澳台地区。<br>EuropeFrankfurt：欧洲-法兰克福。<br>NorthAmericaSiliconValley：北美-硅谷。<br>MiddleEastRiyadh：中东-利雅得。<br>AsiaTokyo：亚太-东京。<br>AsiaSeoul：亚太-首尔。<br>默认值：Mainland。</p>
    */
   Area?: string
   /**
-   * 分片时长。
-可取3-10。
-单位：s。
-默认值：5。
+   * <p>分片时长。<br>可取3-10。<br>单位：s。<br>默认值：5。</p>
    */
   ItemDuration?: number
   /**
-   * 是否去除水印。
-传true则将录制原始流。
-默认值：false。
+   * <p>是否去除水印。<br>传true则将录制原始流。<br>默认值：false。</p>
    */
   RemoveWatermark?: boolean
   /**
-   * 转码流id列表。
-此参数仅在 RemoveWatermark为false时生效。
+   * <p>转码流id列表。<br>此参数仅在 RemoveWatermark为false时生效。</p>
    */
   TranscodeTemplateIds?: Array<number | bigint>
 }
@@ -10826,7 +10790,7 @@ Overseas：海外及港澳台地区。
  */
 export interface CreateLiveRecordTemplateResponse {
   /**
-   * 模板Id。
+   * <p>模板Id。</p>
    */
   TemplateId?: number
   /**
@@ -11549,7 +11513,7 @@ export interface LiveAvatarCloneFigureInfo {
    */
   FigureName?: string
   /**
-   * <p>性别：男或者女</p>
+   * <p>性别：男或者女或者UNKNOWN</p>
    */
   Gender?: string
   /**
@@ -11934,7 +11898,7 @@ PullVodPushLive -点播。
  */
 export interface CreateLiveTimeShiftTemplateResponse {
   /**
-   * 模板Id。
+   * <p>模板Id。</p>
    */
   TemplateId?: number
   /**
@@ -12098,54 +12062,51 @@ ExpireTimeDesc：证书过期时间降序。
  */
 export interface CreateLiveRecordTemplateRequest {
   /**
-   * 模板名。仅支持中文、英文、数字、_、-。
+   * <p>模板名。仅支持中文、英文、数字、_、-。</p>
    */
   TemplateName: string
   /**
-   * 描述信息。
+   * <p>描述信息。</p>
    */
   Description?: string
   /**
-   * Flv录制参数，开启Flv录制时设置。
+   * <p>Flv录制参数，开启Flv录制时设置。</p>
    */
   FlvParam?: RecordParam
   /**
-   * Hls录制参数，开启hls录制时设置。
+   * <p>Hls录制参数，开启hls录制时设置。</p>
    */
   HlsParam?: RecordParam
   /**
-   * Mp4录制参数，开启Mp4录制时设置。
+   * <p>Mp4录制参数，开启Mp4录制时设置。</p>
    */
   Mp4Param?: RecordParam
   /**
-   * Aac录制参数，开启Aac录制时设置。
+   * <p>Aac录制参数，开启Aac录制时设置。</p>
    */
   AacParam?: RecordParam
   /**
-   * 直播类型，默认 0。
-0：普通直播，
-1：慢直播。
+   * <p>直播类型，默认 0。<br>0：普通直播，<br>1：慢直播。</p>
    */
   IsDelayLive?: number
   /**
-   * HLS专属录制参数。
+   * <p>HLS专属录制参数。</p>
    */
   HlsSpecialParam?: HlsSpecialParam
   /**
-   * Mp3录制参数，开启Mp3录制时设置。
+   * <p>Mp3录制参数，开启Mp3录制时设置。</p>
    */
   Mp3Param?: RecordParam
   /**
-   * 是否存储至 cos，值为 1 时表示存储至 cos。
+   * <p>是否存储至 cos，值为 1 时表示存储至 cos。</p>
    */
   CosStore?: number
   /**
-   * 是否去除水印，类型为慢直播时此参数无效。
-如果为false，则录制水印流或转码流；如果为true，则录制原始流。
+   * <p>是否去除水印，类型为慢直播时此参数无效。<br>如果为false，则录制水印流或转码流；如果为true，则录制原始流。</p>
    */
   RemoveWatermark?: boolean
   /**
-   * FLV 录制特殊参数。
+   * <p>FLV 录制特殊参数。</p>
    */
   FlvSpecialParam?: FlvSpecialParam
 }
@@ -13691,30 +13652,19 @@ UTC格式时间，例如：2019-01-07T15:00:00Z。
  */
 export interface DescribeLivePackageInfoRequest {
   /**
-   * 包类型，可选值：
-0：流量包
-1：转码包
-2: 连麦包。
+   * <p>包类型，可选值：<br>0：流量包<br>1：转码包<br>2: 连麦包。</p>
    */
   PackageType: number
   /**
-   * 排序规则:
-1. BuyTimeDesc： 最新购买的排在最前面
-2. BuyTimeAsc： 最老购买的排在最前面
-3. ExpireTimeDesc： 最后过期的排在最前面
-4. ExpireTimeAsc：最先过期的排在最前面。
-
-注意：
-1. PackageType 为 2（连麦包） 的时候，不支持 3、4 排序。
+   * <p>排序规则:</p><ol><li>BuyTimeDesc： 最新购买的排在最前面</li><li>BuyTimeAsc： 最老购买的排在最前面</li><li>ExpireTimeDesc： 最后过期的排在最前面</li><li>ExpireTimeAsc：最先过期的排在最前面。</li></ol><p>注意：</p><ol><li>PackageType 为 2（连麦包） 的时候，不支持 3、4 排序。</li></ol>
    */
   OrderBy?: string
   /**
-   * 取得第几页的数据，和 PageSize 同时传递才会生效。
+   * <p>取得第几页的数据，和 PageSize 同时传递才会生效。</p>
    */
   PageNum?: number
   /**
-   * 分页大小，和 PageNum 同时传递才会生效。
-取值：10 ～ 100 之间的任意整数。
+   * <p>分页大小，和 PageNum 同时传递才会生效。<br>取值：10 ～ 100 之间的任意整数。</p>
    */
   PageSize?: number
 }

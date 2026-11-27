@@ -2615,19 +2615,19 @@ export interface ModifyDomainUnlockResponse {
  */
 export interface DescribeDomainLogListRequest {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * <p>域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId</p>
    */
   DomainId?: number
   /**
-   * 记录开始的偏移，第一条记录为 0，依次类推，默认为0
+   * <p>记录开始的偏移，第一条记录为 0，依次类推，默认为0</p>
    */
   Offset?: number
   /**
-   * 共要获取的日志条数，比如获取20条，则为20，默认为500条，单次最多获取500条。
+   * <p>共要获取的日志条数，比如获取20条，则为20，默认为500条，单次最多获取500条。</p>
    */
   Limit?: number
 }
@@ -5992,15 +5992,15 @@ export interface BatchSearchRecordInfo {
  */
 export interface DescribeDomainLogListResponse {
   /**
-   * 域名日志信息
+   * <p>域名日志信息</p>
    */
   LogList?: Array<string>
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   PageSize?: number
   /**
-   * 日志总条数
+   * <p>日志总条数</p>
    */
   TotalCount?: number
   /**

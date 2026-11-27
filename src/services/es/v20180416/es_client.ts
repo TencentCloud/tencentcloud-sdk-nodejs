@@ -176,7 +176,7 @@ import {
   UpdateDictionariesRequest,
   DescribeUserCosSnapshotListRequest,
   OperationDuration,
-  UpgradeLicenseRequest,
+  SearchServerlessSpaceDataRequest,
   DescribeIndexListRequest,
   NodeInfo,
   CosBackup,
@@ -227,6 +227,7 @@ import {
   UpdateLogstashInstanceResponse,
   UpdateIndexRequest,
   RestartNodesResponse,
+  UpgradeLicenseRequest,
   ExportIpTraceLogResponse,
   DescribeRegionsRequest,
   EventDataInfoOverview,
@@ -277,6 +278,7 @@ import {
   ServerlessDi,
   DescribeServerlessMetricsResponse,
   ExportIpTraceLogRequest,
+  SearchServerlessSpaceDataResponse,
   DescribeServerlessInstancesRequest,
   InstallInstanceModelResponse,
   KibanaNodeInfo,
@@ -461,13 +463,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新接收客户端请求的节点类型
-   */
-  async UpdateRequestTargetNodeTypes(
-    req: UpdateRequestTargetNodeTypesRequest,
-    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
-  ): Promise<UpdateRequestTargetNodeTypesResponse> {
-    return this.request("UpdateRequestTargetNodeTypes", req, cb)
+     * 获取serverless实例对应指标，获取space维度时不需要传入indexid，获取index时不需要传入spaceid
+获取一段时间时间范围内的指标数据
+     */
+  async DescribeServerlessMetrics(
+    req: DescribeServerlessMetricsRequest,
+    cb?: (error: string, rep: DescribeServerlessMetricsResponse) => void
+  ): Promise<DescribeServerlessMetricsResponse> {
+    return this.request("DescribeServerlessMetrics", req, cb)
   }
 
   /**
@@ -528,6 +531,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopLogstashPipelinesResponse) => void
   ): Promise<StopLogstashPipelinesResponse> {
     return this.request("StopLogstashPipelines", req, cb)
+  }
+
+  /**
+   * 更新接收客户端请求的节点类型
+   */
+  async UpdateRequestTargetNodeTypes(
+    req: UpdateRequestTargetNodeTypesRequest,
+    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
+  ): Promise<UpdateRequestTargetNodeTypesResponse> {
+    return this.request("UpdateRequestTargetNodeTypes", req, cb)
   }
 
   /**
@@ -675,6 +688,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteIndexResponse) => void
   ): Promise<DeleteIndexResponse> {
     return this.request("DeleteIndex", req, cb)
+  }
+
+  /**
+   * 用于查询serverless space中的数据
+   */
+  async SearchServerlessSpaceData(
+    req: SearchServerlessSpaceDataRequest,
+    cb?: (error: string, rep: SearchServerlessSpaceDataResponse) => void
+  ): Promise<SearchServerlessSpaceDataResponse> {
+    return this.request("SearchServerlessSpaceData", req, cb)
   }
 
   /**
@@ -995,17 +1018,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLogstashInstanceResponse) => void
   ): Promise<DeleteLogstashInstanceResponse> {
     return this.request("DeleteLogstashInstance", req, cb)
-  }
-
-  /**
-     * 获取serverless实例对应指标，获取space维度时不需要传入indexid，获取index时不需要传入spaceid
-获取一段时间时间范围内的指标数据
-     */
-  async DescribeServerlessMetrics(
-    req: DescribeServerlessMetricsRequest,
-    cb?: (error: string, rep: DescribeServerlessMetricsResponse) => void
-  ): Promise<DescribeServerlessMetricsResponse> {
-    return this.request("DescribeServerlessMetrics", req, cb)
   }
 
   /**

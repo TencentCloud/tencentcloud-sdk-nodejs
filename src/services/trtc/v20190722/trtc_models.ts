@@ -5483,7 +5483,7 @@ export interface ControlVoiceConversationRequest {
  */
 export interface TTSParam {
   /**
-   * <p>tts模型参数，仅支持填写&quot;flow_02_turbo&quot;。</p>
+   * <p>tts模型参数，当前支持填写&quot;flow_02_turbo&quot;。</p>
    */
   Model: string
   /**
@@ -5502,6 +5502,10 @@ export interface TTSParam {
    * <p>TTS的声音配置参数。</p>
    */
   Voice: TTSVoice
+  /**
+   * <p>TTS高级扩展参数，使用需要联系我们支持</p><p>参数格式：{"Type":"xxx", "Data":{}}</p>
+   */
+  ExtraParams?: string
 }
 
 /**

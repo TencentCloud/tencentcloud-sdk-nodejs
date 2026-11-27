@@ -764,7 +764,7 @@ export interface SyncFwOperateRequest {
  */
 export interface AddEnterpriseSecurityGroupRulesRequest {
   /**
-   * 待创建的规则数组，不能为空。每条规则必须提供访问源、访问目的、动作、非空描述和字符串 OrderIndex。未使用 ServiceTemplateId 时必须提供 Protocol 和 Port；使用 ServiceTemplateId 时二者可同时省略或留空，如填写非空值则必须为 Protocol=ANY、Port=-1/-1。Scope 可省略，默认使用 SG。
+   * <p>创建规则数据</p>
    */
   Data: Array<SecurityGroupRule>
   /**
@@ -772,23 +772,23 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
    */
   CfwAiAgentOperationSource?: string
   /**
-   * 保留字段，不提供幂等保证；重复请求仍可能重复创建规则，建议省略。
+   * <p>保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。</p>
    */
   ClientToken?: string
   /**
-   * 添加方式。batch_import 表示非覆盖批量导入；batch_import_cover 表示覆盖导入，会删除当前账号的全部可操作企业安全组规则后再添加 Data，添加失败时已删除的规则不会恢复，风险极高。两种批量导入都会使用 Data.Enable。其它值按普通新增处理。
+   * <p>来源 默认空 覆盖导入是 batch_import_cover</p>
    */
   From?: string
   /**
-   * 延迟生效标记。1 表示将规则保留为待生效状态，0 表示按账号当前发布设置处理；省略等同于 0。账号停止自动发布时，规则仍保持待生效。
+   * <p>（IsDelay为老版参数，新版无需输入）是否延迟下发，1则延迟下发，否则立即下发</p>
    */
   IsDelay?: number
   /**
-   * 规则 ID 复用标记。1 表示使用每条规则的 Data.Id，此时 Data.Id 传十进制数字字符串；其它值由系统分配 ID。重复 ID 会导致创建失败。
+   * <p>是否复用rule id，1为是，默认不需要</p>
    */
   IsUseId?: number
   /**
-   * 添加位置类型，可省略，默认为 0：0 添加到末尾，1 添加到最前，2 从指定顺序插入。Type=0 或 1 按 Data 数组顺序确定最终顺序；Type=2 使用首条 Data.OrderIndex 作为插入位置，超过当前最大顺序时添加到末尾。
+   * <p>添加类型，0：添加到最后，1：添加到最前；2：中间插入；默认0添加到最后</p>
    */
   Type?: number
 }
@@ -2180,11 +2180,11 @@ export interface NetInstancesInfo {
  */
 export interface ModifyEnterpriseSecurityGroupRuleRequest {
   /**
-   * 修改类型，仅接受 0、1、2。0：用 Data 完整替换 RuleUuid 指定规则的可写内容；1：修改 RuleUuid 指定规则的启停状态；2：修改当前账号全部可操作规则的启停状态。
+   * <p>修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态</p>
    */
   ModifyType: number
   /**
-   * 规则数值 ID。ModifyType=0 或 1 时，调用 DescribeCfwRules，传 RuleType=enterprise_sg、RuleId=<数值 RuleUuid>、ExpandNames=false，并使用返回的 rules[].uuid；ModifyType=2 时传 0。
+   * <p>规则的uuid，可通过查询规则列表获取</p>
    */
   RuleUuid: number
   /**
@@ -2192,11 +2192,11 @@ export interface ModifyEnterpriseSecurityGroupRuleRequest {
    */
   CfwAiAgentOperationSource?: string
   /**
-   * ModifyType=0 时必填的完整规则内容对象，不是局部更新。调用 DescribeCfwRules，传 RuleType=enterprise_sg、RuleId=<数值 RuleUuid>、ExpandNames=false 获取原规则：src_content、dst_content 分别写入 SourceContent、DestContent；src_type 和 dst_type 的 0、1/2/3/4/5/6/16/24/25、7、8、9/10、100 分别对应 net、instance、template、tag、region、resourcegroup，DestType 的 20 对应 dnsparse；未列出的数值类型不能转换。再调用 DescribeEnterpriseSecurityGroupRule，使用同一 RuleUuid 获取 OrderIndex、Protocol、Port、RuleAction、Description、Scope 和 ServiceTemplateId。缺失字段按空值处理，仅 Scope 省略时保留原值。ModifyType=1 或 2 时不传 Data。
+   * <p>编辑后的企业安全组规则数据；修改规则状态不用填该字段</p>
    */
   Data?: SecurityGroupRule
   /**
-   * 规则状态，JSON 整数：0 表示关闭，1 表示开启。ModifyType=1 时修改 RuleUuid 指定规则，ModifyType=2 时修改当前账号的全部可操作规则；这两种模式下应显式填写。ModifyType=0 时忽略该字段。
+   * <p>0是关闭,1是开启</p>
    */
   Enable?: number
 }
@@ -3459,13 +3459,13 @@ export interface FwGroupSwitch {
  */
 export interface ModifyEnterpriseSecurityDispatchStatusRequest {
   /**
-   * 0：打开立即下发开关；
-
-1：关闭立即下发开关；
-
-2：关闭立即下发开关情况下，触发开始下发
+   * <p>0：打开立即下发开关；</p><p>1：关闭立即下发开关；</p><p>2：关闭立即下发开关情况下，触发开始下发</p>
    */
   Status: number
+  /**
+   * <p>开启自动下发时，注明本次修改是否为空绑资产绑定兜底安全组</p>
+   */
+  BindFallbackOnce?: number
 }
 
 /**
@@ -5221,11 +5221,11 @@ export interface IpStatic {
  */
 export interface AddEnterpriseSecurityGroupRulesResponse {
   /**
-   * 新增规则的摘要列表。
+   * <p>添加成功的规则详情</p>
    */
   Rules?: Array<SecurityGroupSimplifyRule>
   /**
-   * 处理状态：0 表示成功。
+   * <p>状态值，0：添加成功，非0：添加失败</p>
    */
   Status?: number
   /**
@@ -8000,7 +8000,7 @@ export interface ModifyVpcFwGroupRequest {
  */
 export interface ModifyEnterpriseSecurityDispatchStatusResponse {
   /**
-   * 0: 修改成功, 其他: 修改失败
+   * <p>0: 修改成功, 其他: 修改失败</p>
    */
   Status?: number
   /**
@@ -10861,11 +10861,11 @@ export interface SerialRegionInfo {
  */
 export interface ModifyEnterpriseSecurityGroupRuleResponse {
   /**
-   * ModifyType=0/1 返回规则 ID；ModifyType=2 回显请求中的 RuleUuid。
+   * <p>编辑后新生成规则的Id</p>
    */
   NewRuleUuid?: number
   /**
-   * 处理状态：0 表示成功。
+   * <p>状态值，0：编辑成功，非0：编辑失败</p>
    */
   Status?: number
   /**

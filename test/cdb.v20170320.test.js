@@ -788,6 +788,16 @@ it("cdb.v20170320.ModifyParamTemplate", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeCageList", async function () {
+    try {
+       const data = await client.DescribeCageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeInstanceParams", async function () {
     try {
        const data = await client.DescribeInstanceParams({})

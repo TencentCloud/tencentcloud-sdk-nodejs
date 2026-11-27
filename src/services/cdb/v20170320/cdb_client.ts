@@ -75,6 +75,7 @@ import {
   DescribeRoMinScaleResponse,
   StopDBImportJobResponse,
   ProxyAllocation,
+  DescribeCageListResponse,
   StopCpuExpandRequest,
   DescribeInstancePasswordComplexityRequest,
   ModifyDBInstanceNameRequest,
@@ -119,7 +120,7 @@ import {
   DescribeRollbackRangeTimeResponse,
   ModifyRoGroupInfoRequest,
   ReleaseResult,
-  CreateAuditLogFileRequest,
+  ModifyDBInstanceVipVportRequest,
   AuditRule,
   DescribeInstanceAlarmEventsRequest,
   DescribeBinlogsRequest,
@@ -340,7 +341,7 @@ import {
   DescribeDatabasesResponse,
   TaskAttachInfo,
   DescribeRoGroupsResponse,
-  CloseCdbProxyAddressResponse,
+  DescribeCageListRequest,
   DescribeAuditRulesResponse,
   RoInstanceInfo,
   ModifyAccountHostRequest,
@@ -352,7 +353,7 @@ import {
   DescribeTimeWindowRequest,
   UpgradeAnalysisInstanceVersionInfo,
   AdjustCdbProxyAddressResponse,
-  ModifyDBInstanceVipVportRequest,
+  CreateAuditLogFileRequest,
   DescribeSSLStatusResponse,
   DescribeDBImportRecordsRequest,
   CreateDBImportJobResponse,
@@ -468,6 +469,7 @@ import {
   InstanceRebootTime,
   RenewDBInstanceResponse,
   TablePrivilege,
+  CageInfoItem,
   AddTimeWindowResponse,
   CloseSSLResponse,
   DescribeAuditInstanceListRequest,
@@ -480,6 +482,7 @@ import {
   DescribeAuditRuleTemplatesRequest,
   RollbackTables,
   BackupConfig,
+  CloseCdbProxyAddressResponse,
   LocalBinlogConfigDefault,
   DescribeSSLStatusRequest,
   ModifyInstanceChargeTypeResponse,
@@ -1319,6 +1322,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyParamTemplateResponse) => void
   ): Promise<ModifyParamTemplateResponse> {
     return this.request("ModifyParamTemplate", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeCageList）用于查询金融围拢、独享集群列表。
+   */
+  async DescribeCageList(
+    req: DescribeCageListRequest,
+    cb?: (error: string, rep: DescribeCageListResponse) => void
+  ): Promise<DescribeCageListResponse> {
+    return this.request("DescribeCageList", req, cb)
   }
 
   /**

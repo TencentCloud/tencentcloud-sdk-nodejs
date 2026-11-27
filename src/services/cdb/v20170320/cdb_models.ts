@@ -1469,6 +1469,26 @@ export interface ProxyAllocation {
 }
 
 /**
+ * DescribeCageList返回参数结构体
+ */
+export interface DescribeCageListResponse {
+  /**
+   * <p>金融围拢、独享集群返回数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * <p>详情</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<CageInfoItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopCpuExpand请求参数结构体
  */
 export interface StopCpuExpandRequest {
@@ -2425,42 +2445,37 @@ export interface ReleaseResult {
 }
 
 /**
- * CreateAuditLogFile请求参数结构体
+ * ModifyDBInstanceVipVport请求参数结构体
  */
-export interface CreateAuditLogFileRequest {
+export interface ModifyDBInstanceVipVportRequest {
   /**
-   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c2nl9rpv 或者 cdbrg-c3nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
   InstanceId: string
   /**
-   * 开始时间(建议开始到结束时间区间最大7天)。
+   * 目标 IP。
    */
-  StartTime: string
+  DstIp?: string
   /**
-   * 结束时间(建议开始到结束时间区间最大7天）。
+   * 目标端口，支持范围为：[1024-65535]。
    */
-  EndTime: string
+  DstPort?: number
   /**
-   * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序，默认降序排序。
+   * 私有网络统一 ID。
    */
-  Order?: string
+  UniqVpcId?: string
   /**
-   * 排序字段。支持值包括(默认按照时间戳排序)： "timestamp" - 时间戳； "affectRows" - 影响行数； "execTime" - 执行时间。
+   * 子网统一 ID。
    */
-  OrderBy?: string
+  UniqSubnetId?: string
   /**
-   * 已废弃。
-   * @deprecated
+   * 进行基础网络转 VPC 网络和 VPC 网络下的子网变更时，原网络中旧IP的回收时间，单位为小时，取值范围为0-168，默认值为24小时。
    */
-  Filter?: AuditLogFilter
+  ReleaseDuration?: number
   /**
-   * 过滤条件。可按设置的过滤条件过滤日志。
+   * 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
    */
-  LogFilter?: Array<InstanceAuditLogFilters>
-  /**
-   * 下载筛选列
-   */
-  ColumnFilter?: Array<string>
+  OpResourceId?: string
 }
 
 /**
@@ -3926,81 +3941,81 @@ export interface StopCpuExpandResponse {
  */
 export interface DescribeBackupConfigResponse {
   /**
-   * 自动备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
+   * <p>自动备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）</p>
    * @deprecated
    */
   StartTimeMin?: number
   /**
-   * 自动备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
+   * <p>自动备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）</p>
    * @deprecated
    */
   StartTimeMax?: number
   /**
-   * 备份文件保留时间，单位为天。
+   * <p>备份文件保留时间，单位为天。</p>
    */
   BackupExpireDays?: number
   /**
-   * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份。
+   * <p>备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份。</p>
    */
   BackupMethod?: string
   /**
-   * Binlog 文件保留时间，单位为天。
+   * <p>Binlog 文件保留时间，单位为天。</p>
    */
   BinlogExpireDays?: number
   /**
-   * 实例自动备份的时间窗。
+   * <p>实例自动备份的时间窗。</p>
    */
   BackupTimeWindow?: CommonTimeWindow
   /**
-   * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off
+   * <p>定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off</p>
    */
   EnableBackupPeriodSave?: string
   /**
-   * 定期保留最长天数，最小值：90，最大值：3650，默认值：1080
+   * <p>定期保留最长天数，最小值：90，最大值：3650，默认值：1080</p>
    */
   BackupPeriodSaveDays?: number
   /**
-   * 定期保留策略周期，可取值：weekly - 周，monthly - 月， quarterly - 季度，yearly - 年，默认为monthly
+   * <p>定期保留策略周期，可取值：weekly - 周，monthly - 月， quarterly - 季度，yearly - 年，默认为monthly</p>
    */
   BackupPeriodSaveInterval?: string
   /**
-   * 定期保留的备份数量，最小值为1，最大值不超过定期保留策略周期内常规备份个数，默认值为1
+   * <p>定期保留的备份数量，最小值为1，最大值不超过定期保留策略周期内常规备份个数，默认值为1</p>
    */
   BackupPeriodSaveCount?: number
   /**
-   * 定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss
+   * <p>定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss</p>
    */
   StartBackupPeriodSaveDate?: string
   /**
-   * 是否开启数据备份归档策略，off-关闭，on-打开，默认为off
+   * <p>是否开启数据备份归档策略，off-关闭，on-打开，默认为off</p>
    */
   EnableBackupArchive?: string
   /**
-   * 数据备份归档起始天数，数据备份达到归档起始天数时进行归档，最小为180天，不得大于数据备份保留天数
+   * <p>数据备份归档起始天数，数据备份达到归档起始天数时进行归档，最小为180天，不得大于数据备份保留天数</p>
    */
   BackupArchiveDays?: number
   /**
-   * 是否开启日志备份归档策略，off-关闭，on-打开，默认为off
+   * <p>是否开启日志备份归档策略，off-关闭，on-打开，默认为off</p>
    */
   EnableBinlogArchive?: string
   /**
-   * 日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数
+   * <p>日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数</p>
    */
   BinlogArchiveDays?: number
   /**
-   * 是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off
+   * <p>是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off</p>
    */
   EnableBackupStandby?: string
   /**
-   * 数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数
+   * <p>数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数</p>
    */
   BackupStandbyDays?: number
   /**
-   * 是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off
+   * <p>是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off</p>
    */
   EnableBinlogStandby?: string
   /**
-   * 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数
+   * <p>日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数</p>
    */
   BinlogStandbyDays?: number
   /**
@@ -5136,87 +5151,83 @@ export interface DescribeAuditLogFilesRequest {
  */
 export interface ModifyBackupConfigRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+   * <p>实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。</p>
    */
   InstanceId: string
   /**
-   * 数据备份文件的保留时间，单位为天。
-1. MySQL 双节点、三节点、云盘版数据备份文件可以保留7天 - 1830天。
-2. MySQL 单节点（云盘）数据备份文件可以保留7天 - 30天。
+   * <p>数据备份文件的保留时间，单位为天。</p><ol><li>MySQL 双节点、三节点、云盘版数据备份文件可以保留7天 - 1830天。</li><li>MySQL 单节点（云盘）数据备份文件可以保留7天 - 30天。</li></ol>
    */
   ExpireDays?: number
   /**
-   * (将废弃，建议使用 BackupTimeWindow 参数) 备份时间范围，格式为：02:00-06:00，起点和终点时间目前限制为整点，目前可以选择的范围为： 00:00-12:00，02:00-06:00，06：00-10：00，10:00-14:00，14:00-18:00，18:00-22:00，22:00-02:00。
+   * <p>(将废弃，建议使用 BackupTimeWindow 参数) 备份时间范围，格式为：02:00-06:00，起点和终点时间目前限制为整点，目前可以选择的范围为： 00:00-12:00，02:00-06:00，06：00-10：00，10:00-14:00，14:00-18:00，18:00-22:00，22:00-02:00。</p>
    */
   StartTime?: string
   /**
-   * 自动备份方式，仅支持：physical - 物理冷备
+   * <p>自动备份方式，仅支持：physical - 物理冷备</p>
    */
   BackupMethod?: string
   /**
-   * binlog 的保留时间，单位为天。
-1. MySQL 双节点、三节点、云盘版日志备份文件可以保留7天 - 3650天。
-2. MySQL 单节点（云盘）日志备份文件可以保留7天 - 30天。
+   * <p>binlog 的保留时间，单位为天。</p><ol><li>MySQL 双节点、三节点、云盘版日志备份文件可以保留7天 - 3650天。</li><li>MySQL 单节点（云盘）日志备份文件可以保留7天 - 30天。</li></ol>
    */
   BinlogExpireDays?: number
   /**
-   * 备份时间窗，比如要设置每周二和周日 10:00-14:00之间备份，该参数如下：{"Monday": "", "Tuesday": "10:00-14:00", "Wednesday": "", "Thursday": "", "Friday": "", "Saturday": "", "Sunday": "10:00-14:00"}    （注：可以设置一周的某几天备份，但是每天的备份时间需要设置为相同的时间段。 如果设置了该字段，将忽略StartTime字段的设置）
+   * <p>备份时间窗，比如要设置每周二和周日 10:00-14:00之间备份，该参数如下：{&quot;Monday&quot;: &quot;&quot;, &quot;Tuesday&quot;: &quot;10:00-14:00&quot;, &quot;Wednesday&quot;: &quot;&quot;, &quot;Thursday&quot;: &quot;&quot;, &quot;Friday&quot;: &quot;&quot;, &quot;Saturday&quot;: &quot;&quot;, &quot;Sunday&quot;: &quot;10:00-14:00&quot;}    （注：可以设置一周的某几天备份，但是每天的备份时间需要设置为相同的时间段。 如果设置了该字段，将忽略StartTime字段的设置）</p>
    */
   BackupTimeWindow?: CommonTimeWindow
   /**
-   * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off。
+   * <p>定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off。</p>
    */
   EnableBackupPeriodSave?: string
   /**
-   * 长期保留开关,该字段功能暂未上线，可忽略。off - 不开启长期保留策略，on - 开启长期保留策略，默认为off，如果开启，则BackupPeriodSaveDays，BackupPeriodSaveInterval，BackupPeriodSaveCount参数无效
+   * <p>长期保留开关,该字段功能暂未上线，可忽略。off - 不开启长期保留策略，on - 开启长期保留策略，默认为off，如果开启，则BackupPeriodSaveDays，BackupPeriodSaveInterval，BackupPeriodSaveCount参数无效</p>
    */
   EnableBackupPeriodLongTermSave?: string
   /**
-   * 定期保留最长天数，最小值：90，最大值：3650，默认值：1080
+   * <p>定期保留最长天数，最小值：90，最大值：3650，默认值：1080</p>
    */
   BackupPeriodSaveDays?: number
   /**
-   * 定期保留策略周期，可取值：weekly - 周，monthly - 月， quarterly - 季度，yearly - 年，默认为monthly
+   * <p>定期保留策略周期，可取值：weekly - 周，monthly - 月， quarterly - 季度，yearly - 年，默认为monthly</p>
    */
   BackupPeriodSaveInterval?: string
   /**
-   * 定期保留的备份数量，最小值为1，最大值不超过定期保留策略周期内常规备份个数，默认值为1
+   * <p>定期保留的备份数量，最小值为1，最大值不超过定期保留策略周期内常规备份个数，默认值为1</p>
    */
   BackupPeriodSaveCount?: number
   /**
-   * 定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss
+   * <p>定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss</p>
    */
   StartBackupPeriodSaveDate?: string
   /**
-   * 是否开启数据备份归档策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。
+   * <p>是否开启数据备份归档策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。</p>
    */
   EnableBackupArchive?: string
   /**
-   * 数据备份归档起始天数，数据备份达到归档起始天数时进行归档，最小为180天，不得大于数据备份保留天数
+   * <p>数据备份归档起始天数，数据备份达到归档起始天数时进行归档，最小为180天，不得大于数据备份保留天数</p>
    */
   BackupArchiveDays?: number
   /**
-   * 日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数
+   * <p>日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数</p>
    */
   BinlogArchiveDays?: number
   /**
-   * 是否开启日志备份归档策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。
+   * <p>是否开启日志备份归档策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。</p>
    */
   EnableBinlogArchive?: string
   /**
-   * 是否开启数据备份标准存储策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。
+   * <p>是否开启数据备份标准存储策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。</p>
    */
   EnableBackupStandby?: string
   /**
-   * 数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数
+   * <p>数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数</p>
    */
   BackupStandbyDays?: number
   /**
-   * 是否开启日志备份标准存储策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。
+   * <p>是否开启日志备份标准存储策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。</p>
    */
   EnableBinlogStandby?: string
   /**
-   * 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数
+   * <p>日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数</p>
    */
   BinlogStandbyDays?: number
 }
@@ -5573,7 +5584,7 @@ export interface DescribeAuditLogsRequest {
  */
 export interface DescribeBackupConfigRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+   * <p>实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。</p>
    */
   InstanceId: string
 }
@@ -5643,43 +5654,28 @@ export interface DescribeAccountsRequest {
  */
 export interface ModifyAuditServiceRequest {
   /**
-   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/product/236/15872">DescribeDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 日志保留时长。支持值包括：
-7 - 一周；
-30 - 一个月；
-90 - 三个月；
-180 - 六个月；
-365 - 一年；
-1095 - 三年；
-1825 - 五年。
+   * <p>审计日志保存时长。</p><p>枚举值：</p><ul><li>7： 一周</li><li>30： 一个月</li><li>90：  三个月</li><li>180： 六个月</li><li>365： 一年</li><li>1095： 三年</li><li>1825： 五年</li></ul>
    */
   LogExpireDay?: number
   /**
-   * 高频日志保留时长。默认值为7，此项取值需小于等于 LogExpireDay，支持值包括：
-3 - 3天；
-7 - 一周；
-30 - 一个月；
-90 - 三个月；
-180 - 六个月；
-365 - 一年；
-1095 - 三年；
-1825 - 五年。
+   * <p>高频审计日志保存时长。</p><p>枚举值：</p><ul><li>7： 一周</li><li>30： 一个月</li><li>90：  三个月</li><li>180： 六个月</li><li>365： 一年</li><li>1095： 三年</li><li>1825： 五年</li></ul><p>此项取值需小于等于 LogExpireDay。</p>
    */
   HighLogExpireDay?: number
   /**
-   * 修改实例审计规则为全审计。
+   * <p>修改实例审计规则为全审计。</p>
    */
   AuditAll?: boolean
   /**
-   * 废弃。
+   * <p>废弃。</p>
    * @deprecated
    */
   AuditRuleFilters?: Array<AuditRuleFilters>
   /**
-   * 规则模板 ID。可通过 [DescribeAuditRuleTemplates](https://cloud.tencent.com/document/api/236/101811) 接口获取。
+   * <p>规则模板 ID。可通过 <a href="https://cloud.tencent.com/document/api/236/101811">DescribeAuditRuleTemplates</a> 接口获取。</p>
    */
   RuleTemplateIds?: Array<string>
 }
@@ -7449,6 +7445,10 @@ export interface InstanceInfo {
    */
   TagList?: Array<TagInfoItem>
   /**
+   * <p>金融围拢 ID 。</p>
+   */
+  CageId?: string
+  /**
    * <p>引擎类型</p>
    */
   EngineType?: string
@@ -7807,13 +7807,29 @@ export interface DescribeRoGroupsResponse {
 }
 
 /**
- * CloseCdbProxyAddress返回参数结构体
+ * DescribeCageList请求参数结构体
  */
-export interface CloseCdbProxyAddressResponse {
+export interface DescribeCageListRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>金融围拢ID、或者独享集群ID</p>
    */
-  RequestId?: string
+  CageIds?: Array<string>
+  /**
+   * <p>金融围拢名称/独享集群名称</p>
+   */
+  CageName?: string
+  /**
+   * <p>本地专属集群所在可用用ID</p>
+   */
+  ZoneId?: number
+  /**
+   * <p>查询本地专属集群列表LIMIT</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -8142,37 +8158,42 @@ export interface AdjustCdbProxyAddressResponse {
 }
 
 /**
- * ModifyDBInstanceVipVport请求参数结构体
+ * CreateAuditLogFile请求参数结构体
  */
-export interface ModifyDBInstanceVipVportRequest {
+export interface CreateAuditLogFileRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c2nl9rpv 或者 cdbrg-c3nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
    */
   InstanceId: string
   /**
-   * 目标 IP。
+   * 开始时间(建议开始到结束时间区间最大7天)。
    */
-  DstIp?: string
+  StartTime: string
   /**
-   * 目标端口，支持范围为：[1024-65535]。
+   * 结束时间(建议开始到结束时间区间最大7天）。
    */
-  DstPort?: number
+  EndTime: string
   /**
-   * 私有网络统一 ID。
+   * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序，默认降序排序。
    */
-  UniqVpcId?: string
+  Order?: string
   /**
-   * 子网统一 ID。
+   * 排序字段。支持值包括(默认按照时间戳排序)： "timestamp" - 时间戳； "affectRows" - 影响行数； "execTime" - 执行时间。
    */
-  UniqSubnetId?: string
+  OrderBy?: string
   /**
-   * 进行基础网络转 VPC 网络和 VPC 网络下的子网变更时，原网络中旧IP的回收时间，单位为小时，取值范围为0-168，默认值为24小时。
+   * 已废弃。
+   * @deprecated
    */
-  ReleaseDuration?: number
+  Filter?: AuditLogFilter
   /**
-   * 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
+   * 过滤条件。可按设置的过滤条件过滤日志。
    */
-  OpResourceId?: string
+  LogFilter?: Array<InstanceAuditLogFilters>
+  /**
+   * 下载筛选列
+   */
+  ColumnFilter?: Array<string>
 }
 
 /**
@@ -10876,6 +10897,36 @@ export interface TablePrivilege {
 }
 
 /**
+ * 金融围拢、独享集群详情
+ */
+export interface CageInfoItem {
+  /**
+   * <p>金融围拢ID、独享集群ID</p>
+   */
+  CageId?: string
+  /**
+   * <p>可用区ID</p>
+   */
+  ZoneId?: number
+  /**
+   * <p>金融围拢名称/独享集群名称</p>
+   */
+  CageName?: string
+  /**
+   * <p>是否对外售卖</p>
+   */
+  Status?: string
+  /**
+   * <p>后端支持围拢发货的设备类型，normal/common</p>
+   */
+  DeviceType?: string
+  /**
+   * <p>支持独享集群的可用区</p>
+   */
+  ZoneIds?: Array<number | bigint>
+}
+
+/**
  * AddTimeWindow返回参数结构体
  */
 export interface AddTimeWindowResponse {
@@ -11130,6 +11181,16 @@ export interface BackupConfig {
    * 第二个从库访问端口
    */
   Vport?: number
+}
+
+/**
+ * CloseCdbProxyAddress返回参数结构体
+ */
+export interface CloseCdbProxyAddressResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

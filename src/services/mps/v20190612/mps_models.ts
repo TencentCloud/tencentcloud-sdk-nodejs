@@ -8614,7 +8614,7 @@ export interface CreateAgentRecordTaskRequest {
    */
   StoreCosParam: AgentStoreCosParam
   /**
-   * <p>定时录制开始时刻</p><p>参数格式：2026-07-01T15:31:32+08:00</p><p>空表示提交后立即开始录制；非空表示从该时刻开始录制</p>
+   * <p>定时录制开始时刻</p><p>参数格式：2026-07-03T12:10:28.065902+08:00</p><p>空表示提交后立即开始录制；非空表示从该时刻开始录制</p>
    */
   StartTime?: string
   /**

@@ -923,15 +923,15 @@ export interface DescribeCostSummaryByResourceResponse {
  */
 export interface DescribeBillSummaryByRegionRequest {
   /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01</p>
    */
   BeginTime: string
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01</p>
    */
   EndTime: string
   /**
-   * 查询账单数据的用户UIN
+   * <p>查询账单数据的用户UIN</p>
    */
   PayerUin?: string
 }
@@ -1180,7 +1180,7 @@ export interface DeleteBudgetResponse {
  */
 export interface DescribeBillSummaryRequest {
   /**
-   * <p>账单月份，格式为2023-04</p>
+   * <p>月份，格式为yyyy-mm，不能早于2021-01  示例值：2026-11</p>
    */
   Month: string
   /**
@@ -1754,24 +1754,19 @@ export interface DescribeCostSummaryByTagRequest {
  */
 export interface DescribeBillSummaryByProductRequest {
   /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01</p>
    */
   BeginTime: string
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01</p>
    */
   EndTime: string
   /**
-   * 查询账单数据的用户UIN
+   * <p>查询账单数据的用户UIN</p>
    */
   PayerUin?: string
   /**
-   * 款项类别，与L0账单上的汇总类别对应。
-此参数自账单3.0（即2021-05）之后开始生效。
-枚举值：
-consume-消费
-refund-退款
-adjustment-调账
+   * <p>款项类别，与L0账单上的汇总类别对应。 此参数自账单3.0（即2021-01）之后开始生效。</p><p>枚举值：</p><ul><li>consume： 消费</li><li>refund： 退款</li><li>adjustment： 调账</li></ul>
    */
   PayType?: string
 }
@@ -2870,16 +2865,16 @@ export interface DescribeOrgMemberAccountBalanceData {
  */
 export interface DescribeBillSummaryByTagResponse {
   /**
-   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   * <p>数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）</p>
    */
   Ready?: number
   /**
-   * 各标签值花费分布详情
+   * <p>各标签值花费分布详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SummaryOverview?: Array<TagSummaryOverviewItem>
   /**
-   * 总数
+   * <p>总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SummaryTotal?: SummaryTotal
@@ -3112,23 +3107,23 @@ export interface DescribeAllocationSummaryByItemRequest {
  */
 export interface DescribeBillSummaryByTagRequest {
   /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01</p>
    */
   BeginTime: string
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01</p>
    */
   EndTime: string
   /**
-   * 分账标签键，用户自定义
+   * <p>分账标签键，用户自定义</p>
    */
   TagKey: string
   /**
-   * 查询账单数据的用户UIN
+   * <p>查询账单数据的用户UIN</p>
    */
   PayerUin?: string
   /**
-   * 分账标签值
+   * <p>分账标签值</p>
    */
   TagValue?: string
 }
@@ -3479,22 +3474,15 @@ export interface ConsumptionSummaryTrend {
  */
 export interface DescribeBillDownloadUrlRequest {
   /**
-   * 账单类型，枚举值
-billOverview=L0-PDF账单
-billSummary=L1-汇总账单	
-billResource=L2-资源账单	
-billDetail=L3-明细账单	
-billPack=账单包
+   * <p>账单类型，枚举值<br>billOverview=L0-PDF账单<br>billSummary=L1-汇总账单<br>billResource=L2-资源账单<br>billDetail=L3-明细账单<br>billPack=账单包</p>
    */
   FileType: string
   /**
-   * 账单月份
-支持的最早开始月份为2021-01
-L0-PDF&账单包不支持当月下载，当月账单请在次月1号19:00出账后下载
+   * <p>月份，格式为yyyy-mm，不能早于2021-01  示例值：2026-11</p>
    */
   Month: string
   /**
-   * 下载的账号 ID列表，默认查询本账号账单，如集团管理账号需下载成员账号自付的账单，该字段需入参成员账号UIN
+   * <p>下载的账号 ID列表，默认查询本账号账单，如集团管理账号需下载成员账号自付的账单，该字段需入参成员账号UIN</p>
    */
   ChildUin?: Array<string>
 }
@@ -3611,15 +3599,15 @@ export interface CreateBudgetResponse {
  */
 export interface DescribeBillSummaryByPayModeRequest {
   /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01</p>
    */
   BeginTime: string
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * <p>目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01</p>
    */
   EndTime: string
   /**
-   * 查询账单数据的用户UIN
+   * <p>查询账单数据的用户UIN</p>
    */
   PayerUin?: string
 }
@@ -6253,7 +6241,7 @@ export interface DescribeBillResourceSummaryRequest {
    */
   Limit: number
   /**
-   * <p>月份，格式为yyyy-mm。不能早于开通账单2.0的月份</p>
+   * <p>月份，格式为yyyy-mm，不能早于2021-01  示例值：2026-11</p>
    */
   Month: string
   /**
@@ -7061,11 +7049,11 @@ export interface UsageDetails {
  */
 export interface DescribeBillSummaryByPayModeResponse {
   /**
-   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   * <p>数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）</p>
    */
   Ready?: number
   /**
-   * 各付费模式花费分布详情
+   * <p>各付费模式花费分布详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SummaryOverview?: Array<PayModeSummaryOverviewItem>
@@ -7298,16 +7286,16 @@ export interface DescribeBudgetOperationLogRequest {
  */
 export interface DescribeBillSummaryByProductResponse {
   /**
-   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   * <p>数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）</p>
    */
   Ready?: number
   /**
-   * 总花费详情
+   * <p>总花费详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SummaryTotal?: BusinessSummaryTotal
   /**
-   * 各产品花费分布
+   * <p>各产品花费分布</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SummaryOverview?: Array<BusinessSummaryOverviewItem>
@@ -7398,11 +7386,11 @@ export interface DetailSet {
  */
 export interface DescribeBillDownloadUrlResponse {
   /**
-   * 账单文件是否准备就绪，0文件生成中，1文件已生成
+   * <p>账单文件是否准备就绪，0文件生成中，1文件已生成</p>
    */
   Ready?: number
   /**
-   * 账单文件下载链接，有效时长为一天
+   * <p>账单文件下载链接，有效时长为一天</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DownloadUrl?: string
@@ -8237,11 +8225,11 @@ export interface BillComponent {
  */
 export interface DescribeBillSummaryByRegionResponse {
   /**
-   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   * <p>数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）</p>
    */
   Ready?: number
   /**
-   * 各地域花费分布详情
+   * <p>各地域花费分布详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SummaryOverview?: Array<RegionSummaryOverviewItem>

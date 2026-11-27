@@ -154,8 +154,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (SmsPackagesStatistics) 用于统计用户套餐包数据。
-   */
+     * 本接口 (SmsPackagesStatistics) 用于查询国内短信套餐包统计信息。
+<blockquote class="d-mod-explain"><div class="d-mod-title d-explain-title" style="line-height: normal;"><i class="d-icon-explain"></i>说明：</div><p></p><ul><li>本接口仅支持查询国内短信套餐包统计信息。</li></ul></blockquote>
+     */
   async SmsPackagesStatistics(
     req: SmsPackagesStatisticsRequest,
     cb?: (error: string, rep: SmsPackagesStatisticsResponse) => void
@@ -164,7 +165,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (SendStatusStatistics) 用于统计用户发送短信的数据。
+   * 本接口 (SendStatusStatistics) 用于查询用户发送短信的统计数据。
    */
   async SendStatusStatistics(
     req: SendStatusStatisticsRequest,
@@ -174,8 +175,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (CallbackStatusStatistics) 用于统计用户回执的数据。
-   */
+     * 本接口 (CallbackStatusStatistics) 用于查询回执统计数据。
+<blockquote class="d-mod-explain"><div class="d-mod-title d-explain-title" style="line-height: normal;"><i class="d-icon-explain"></i>说明：</div><p></p><ul><li>本接口仅支持查询国内短信回执统计数据。</li></ul></blockquote>
+     */
   async CallbackStatusStatistics(
     req: CallbackStatusStatisticsRequest,
     cb?: (error: string, rep: CallbackStatusStatisticsResponse) => void
